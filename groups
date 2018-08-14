@@ -1,0 +1,10 @@
+global:Anonymous-Users 	Anonymous Users
+global:Project-Owners  	Project Owners
+global:Registered-Users	Registered Users
+global:Change-Owner    	Change Owner
+
+cria:project-dawn-committers           	cria/project-dawn-committers
+cria:project-dawn-admins               	cria/project-dawn-admins
+cria:project-dawn-tryjob-access        	cria/project-dawn-tryjob-access
+
+cria:service-account-cq                	cria/service-account-cq
