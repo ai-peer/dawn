@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b91b784_f0c5a550",
+        "filename": "groups",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "have you created this yourself?\nI think it\u0027s better to create a cria/ group for this and move all current members of this group from chromium-review to this cria/ group. Then, we\u0027d not need duplication.",
+      "range": {
+        "startLine": 10,
+        "startChar": 41,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fa2b688_eeb84b7f",
+        "filename": "groups",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "you\u0027ve already registered CQ commit-bot@chromium.org to your host, right?",
+      "range": {
+        "startLine": 11,
+        "startChar": 41,
+        "endLine": 11,
+        "endChar": 58
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0420df4_841e8135",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "yay, i\u0027m glad you like my submit strategy :)",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 23
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19b79097_b0586033",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "note: if you have non-committer collaborators in other timezones, you may want to allow them to CQ+2 if they are CL owners.",
+      "range": {
+        "startLine": 18,
+        "startChar": 7,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a51bb233_48a34e45",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "👍 the +1..-1 range on CR is my biggest regret of chromium migration to Gerrit. This config is so much better.",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 66
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0a5e441_b507194e",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "i\u0027d recommend to remove label-CQ from refs/*, since CQ will presubmably only work on refs/heads/*, and maybe eventually on refs/branch-heads/* (if you intend to use them).",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff9e2ef9_d3f8258b",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "i think too wide. This is basically removing CQ votes; i\u0027d grant it only to people with tryjob access AND CL owner, not anybody with an email account.",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a151f4b_de20839d",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-14T23:05:46Z",
+      "side": 1,
+      "message": "this means \"lgtm with nits\" workflow will be possible. Intended?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
