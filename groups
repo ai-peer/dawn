@@ -1,0 +1,11 @@
+global:Anonymous-Users 	Anonymous Users
+global:Project-Owners  	Project Owners
+global:Registered-Users	Registered Users
+global:Change-Owner    	Change Owner
+
+cria:project-dawn-committers           	cria/project-dawn-committers
+cria:project-dawn-admins               	cria/project-dawn-admins
+cria:project-dawn-tryjob-access        	cria/project-dawn-tryjob-access
+
+3d0a66ed8f9706f4df433a293bac0330232af1d6	chromium-branch-creators
+4d4288efd7d780ff5a35b8cc13fa6ff0f62c06cc	chrome-commit-bot
