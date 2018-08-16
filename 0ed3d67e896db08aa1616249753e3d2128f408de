@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "760e6025_c72db0ef",
+        "filename": "groups",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2018-08-16T17:22:23Z",
+      "side": 1,
+      "message": "No this was the ID that was already listed in the groups file for ANGLE. Is there a different ID per host?",
+      "parentUuid": "3b91b784_f0c5a550",
+      "range": {
+        "startLine": 10,
+        "startChar": 41,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1fa2b688_eeb84b7f",
         "filename": "groups",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-08-14T23:05:46Z",
       "side": 1,
       "message": "you\u0027ve already registered CQ commit-bot@chromium.org to your host, right?",
+      "range": {
+        "startLine": 11,
+        "startChar": 41,
+        "endLine": 11,
+        "endChar": 58
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f815673b_19e618b8",
+        "filename": "groups",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2018-08-16T17:22:23Z",
+      "side": 1,
+      "message": "Nope, like above I took it from ANGLE\u0027s groups file, assuming the ID would be the same when I need it. How do I register commit-bot to this host?",
+      "parentUuid": "1fa2b688_eeb84b7f",
       "range": {
         "startLine": 11,
         "startChar": 41,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "0d7d6008_f54f352a",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2018-08-16T17:22:23Z",
+      "side": 1,
+      "message": "Isn\u0027t that a bit scary with the sticky code-review label? Done: the CQ label is removed from refs/* so it uses the permission in refs/heads/* which give +2 rights to change owners.",
+      "parentUuid": "19b79097_b0586033",
+      "range": {
+        "startLine": 18,
+        "startChar": 7,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a51bb233_48a34e45",
         "filename": "project.config",
         "patchSetId": 3
@@ -140,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "9d91e006_8dfd6ae5",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2018-08-16T17:22:23Z",
+      "side": 1,
+      "message": "Done, also do the permissions set in refs/* apply to refs/heads/*? https://gerrit-review.googlesource.com/Documentation/access-control.html#reference isn\u0027t clear.",
+      "parentUuid": "c0a5e441_b507194e",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff9e2ef9_d3f8258b",
         "filename": "project.config",
         "patchSetId": 3
@@ -163,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "c8c9654c_22702aa1",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2018-08-16T17:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff9e2ef9_d3f8258b",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a151f4b_de20839d",
         "filename": "project.config",
         "patchSetId": 3
@@ -174,6 +294,30 @@
       "writtenOn": "2018-08-14T23:05:46Z",
       "side": 1,
       "message": "this means \"lgtm with nits\" workflow will be possible. Intended?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "0ed3d67e896db08aa1616249753e3d2128f408de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb181ae0_46bbc174",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2018-08-16T17:22:23Z",
+      "side": 1,
+      "message": "Yes, though this is a bit scary as a CR+2 would mean the person can land whatever they want. WDYT?",
+      "parentUuid": "4a151f4b_de20839d",
       "range": {
         "startLine": 44,
         "startChar": 1,
