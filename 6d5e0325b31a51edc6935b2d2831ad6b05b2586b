@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "1e5a4665_063ef137",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-08-20T17:42:25Z",
+      "side": 1,
+      "message": "Is this for testing Dawn standalone, or within a Chromium checkout? If the latter, then just reuse the Chromium recipe. At this point, it\u0027s much easier to configure which tests to run and to be able to run tryjobs adding new test targets if using the Chromium recipe, compared to writing a new one from scratch.",
+      "parentUuid": "eae53da5_2183041c",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f4da991_6d6861ab",
         "filename": "cr-buildbucket.cfg",
         "patchSetId": 1
