@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4084be62_87398760",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-20T13:05:08Z",
+      "side": 1,
+      "message": "I was not able to run the PRESUBMIT because this was a new change, hopefully the protos are well-formed.",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "416d2c58_abf0a23f",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-20T13:05:08Z",
+      "side": 1,
+      "message": "ANGLE has an extra scheduler there: angle-ci-builder@chops-service-accounts.iam.gserviceaccount.com\n\nIs it needed?",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eae53da5_2183041c",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-20T13:05:08Z",
+      "side": 1,
+      "message": "I will need to add a recipe.",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f4da991_6d6861ab",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-20T13:05:08Z",
+      "side": 1,
+      "message": "This service account doesn\u0027t exist yet (or does it?)",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0688e89_ae57adc5",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-20T13:05:08Z",
+      "side": 1,
+      "message": "My understanding is that this line is required for changes to DEPS to take effect in tryjobs.",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83311208_571ab9c4",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-20T13:05:08Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94826425_9886d729",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-20T13:05:08Z",
+      "side": 1,
+      "message": "We don\u0027t have a logo yet :(",
+      "revId": "6d5e0325b31a51edc6935b2d2831ad6b05b2586b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
