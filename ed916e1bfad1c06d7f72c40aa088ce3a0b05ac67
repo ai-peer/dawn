@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5a4559b_28338055",
+        "filename": "cq.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "note: this file should go into infra/config/branch directory.\nAdditionally, you need refs.cfg in this (infra/config/global) dir with this content\nhttps://chromium.googlesource.com/chromium/src/+/master/infra/config/global/refs.cfg",
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdb974cf_38a5a0b9",
+        "filename": "cq.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "delete this line. And also fron angle/angle repo, please :)",
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "870391a3_79357184",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "personally, i\u0027d just carry around `dimension:xyz` instead of mixins if the mixins contain just 1 item -- less indirection.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 1
+      },
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec0f3154_4b9f4ac0",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "do you have this and -try accounts already? If not, please file Infra\u003ePlatform\u003eAdmin ticket.",
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc6645b0_11bdd46b",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "i might be wrong, but i think you don\u0027t need short name if your category is unique.\nAlternatively, remove last |x86 from the category.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44c0a314_eacafa1d",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "this is not useful for .try. Use\nbuilder_view_only: true\n(e.g. https://chromium.googlesource.com/chromium/src/+/master/infra/config/global/luci-milo.cfg#4904\nbecomes this view: https://ci.chromium.org/p/chromium/g/luci.chromium.try/builders)",
+      "range": {
+        "startLine": 75,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28acae98_9be53b8b",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "here and below : .try.",
+      "range": {
+        "startLine": 80,
+        "startChar": 33,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98707008_820c25c4",
+        "filename": "luci-milo.cfg",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-21T17:03:15Z",
+      "side": 1,
+      "message": "not necessary for .try builders view. ditto below",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 21
+      },
+      "revId": "ed916e1bfad1c06d7f72c40aa088ce3a0b05ac67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
