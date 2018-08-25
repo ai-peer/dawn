@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8b689da3_9b844373",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-25T01:52:13Z",
+      "side": 1,
+      "message": "sadly, i\u0027ve just learned about LED bug https://bugs.chromium.org/p/chromium/issues/detail?id\u003d875089  -- there is workaround there. We should resolve this next week.",
+      "parentUuid": "c7d3d7d5_3664d26b",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "d04c4da3cba87db2137001c24549a825024958bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eb63e717_ba59020d",
         "filename": "infra/config/global/cr-buildbucket.cfg",
         "patchSetId": 1
