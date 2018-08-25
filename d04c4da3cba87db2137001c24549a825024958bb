@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7d3d7d5_3664d26b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-25T00:58:13Z",
+      "side": 1,
+      "message": "You can debug with led. You\u0027ll need to be a member of flex-ci-led-users (i\u0027ve just made you) (configured here http://shortn/_fUtmefKTd5). Then you can do stuff like:\n\nled get-build \u003ccopy-paste-buildbucket-build-id-of-failed-CI-build\u003e  \\\n  | led edit-recipe-bundle  \\  # if you want to capture any changes you made to your recipe locally\n  | led launch # and voila -\u003e get yourself a URL of newly launched build.\n\nbest part is that this won\u0027t pollute console view, since your debug build won\u0027t be registered in buildbucket at all. See go/led-talk and $ led help for more.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "d04c4da3cba87db2137001c24549a825024958bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb63e717_ba59020d",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-25T00:58:13Z",
+      "side": 1,
+      "message": "while with this, you\u0027d be able to trigger jobs with git cl try in your .ci bucket, you really shouldn\u0027t grant this ability to all flolks with tryjob access. If you really need to, only allow this for project-dawn-admins, but much better - use led -- see above.",
+      "revId": "d04c4da3cba87db2137001c24549a825024958bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
