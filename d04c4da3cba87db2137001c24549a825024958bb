@@ -63,6 +63,24 @@
       "revId": "d04c4da3cba87db2137001c24549a825024958bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a5452b9_b77a9ce3",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-27T10:27:26Z",
+      "side": 1,
+      "message": "Is the issue that this might introduce redness when CLs are tried against CI? It seems ok because this would only happen when we\u0027re trying to fix said redness. It could require project-dawn-committers, that would be fine too.\n\nThe issue with LED is that it requires being part of an ACL and is another tool to understand, while scheduling tryjobs is super simple in the WebUI.\n\nAnother option is to mirror the CI builder with Try builders but not run them by default.",
+      "parentUuid": "eb63e717_ba59020d",
+      "revId": "d04c4da3cba87db2137001c24549a825024958bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
