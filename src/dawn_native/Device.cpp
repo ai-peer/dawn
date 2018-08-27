@@ -43,7 +43,7 @@ namespace dawn_native {
     using BindGroupLayoutCache = std::
         unordered_set<BindGroupLayoutBase*, BindGroupLayoutCacheFuncs, BindGroupLayoutCacheFuncs>;
 
-    struct DeviceBase::Caches {
+struct DeviceBase::Caches {
         BindGroupLayoutCache bindGroupLayouts;
     };
 
