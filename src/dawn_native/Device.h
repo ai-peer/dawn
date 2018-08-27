@@ -29,7 +29,7 @@ namespace dawn_native {
 
     class DeviceBase {
       public:
-        DeviceBase();
+    DeviceBase();
         virtual ~DeviceBase();
 
         void HandleError(const char* message);
