@@ -1,5 +1,6 @@
 vars = {
   'chromium_git': 'https://chromium.googlesource.com',
+  'dawn_git': 'https://dawn.googlesource.com',
   'github_git': 'https://github.com',
 
   'dawn_root': '.',
@@ -83,6 +84,12 @@ deps = {
   '{dawn_root}/third_party/glm': {
     'url': '{github_git}/g-truc/glm.git@06f084063fd6d9aa2ef6904517650700ae47b63d',
     'condition': 'dawn_standalone',
+  },
+
+  # Our own pre-compiled Linux clang-format 7.0 for presubmit
+  '{dawn_root}/third_party/clang-format': {
+    'url': '{dawn_git}/clang-format@2451c56cd368676cdb230fd5ad11731ab859f1a3',
+    'condition': 'dawn_standalone and checkout_linux',
   },
 }
 
@@ -218,5 +225,10 @@ hooks = [
 
 recursedeps = [
   # buildtools provides clang_format, libc++, and libc++abi
+  '{dawn_root}/buildtools',
+]
+
+recursedeps = [
+  # buildtools provides clang_format.
   '{dawn_root}/buildtools',
 ]
