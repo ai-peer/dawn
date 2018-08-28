@@ -117,6 +117,24 @@
       "revId": "d04c4da3cba87db2137001c24549a825024958bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b2e87bb_5bfb0eca",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-28T17:48:43Z",
+      "side": 1,
+      "message": "lgtm if you change this ACL to project-dawn-committers or admins.",
+      "parentUuid": "9c691201_fe102925",
+      "revId": "d04c4da3cba87db2137001c24549a825024958bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
