@@ -81,6 +81,24 @@
       "revId": "d04c4da3cba87db2137001c24549a825024958bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d8f3778_cd0cf7c6",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-28T06:15:53Z",
+      "side": 1,
+      "message": "\u003e Is the issue that this might introduce redness when CLs are tried against CI?\n\nIf you trigger tryjobs on CI, these won\u0027t show in console, but they will show in individual builder\u0027s view.\n\n\n\u003e while scheduling tryjobs is super simple in the WebUI.\n\nI\u0027m not sure I follow. Do you intend to config your gerrit project config to allow triggering all builders from both ci and try?\n\n\u003e Another option is to mirror the CI builder with Try builders but not run them by default.\n\nthis is SGTM.",
+      "parentUuid": "5a5452b9_b77a9ce3",
+      "revId": "d04c4da3cba87db2137001c24549a825024958bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
