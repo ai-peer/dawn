@@ -99,6 +99,24 @@
       "revId": "d04c4da3cba87db2137001c24549a825024958bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c691201_fe102925",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-28T12:08:46Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure I follow. Do you intend to config your gerrit project config to allow triggering all builders from both ci and try?\n\nI already did but it doesn\u0027t work because of the missing ACLs. I\u0027ll do the mirroring instead.",
+      "parentUuid": "3d8f3778_cd0cf7c6",
+      "revId": "d04c4da3cba87db2137001c24549a825024958bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
