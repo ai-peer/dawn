@@ -9,21 +9,21 @@ vars = {
 deps = {
   # Dependencies required to use GN/Clang in standalone
   '{dawn_root}/build': {
-    'url': '{chromium_git}/chromium/src/build.git@ddcfe1a1c6428569cb8c900735be3567358bc6ee',
+    'url': '{chromium_git}/chromium/src/build.git@1a26c155ed90d2f0ce22f513f44755537c2be6cc',
     'condition': 'dawn_standalone',
   },
   '{dawn_root}/buildtools': {
-    'url': '{chromium_git}/chromium/buildtools.git@9a90d9aaadeb5e04327ed05775f45132e4b3523f',
+    'url': '{chromium_git}/chromium/buildtools.git@2dff9c9c74e9d732e6fe57c84ef7fd044cc45d96',
     'condition': 'dawn_standalone',
   },
   '{dawn_root}/tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang.git@d299f069f8d1dca337354ced634df7a78e4512f7',
+    'url': '{chromium_git}/chromium/src/tools/clang.git@58f71695cc0b35ac11872afba074ff46f560cc22',
     'condition': 'dawn_standalone',
   },
 
   # Testing, GTest and GMock
   '{dawn_root}/testing': {
-    'url': '{chromium_git}/chromium/src/testing@b07830f6905ce9e33034ad14820bc0a58b6e9e41',
+    'url': '{chromium_git}/chromium/src/testing@c2d47aa0b81776b468270fe0586be16fa1ed98a4',
     'condition': 'dawn_standalone',
   },
   '{dawn_root}/third_party/googletest': {

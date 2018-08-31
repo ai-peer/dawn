@@ -18,6 +18,7 @@ default_args = {
   use_custom_libcxx = false
   clang_use_chrome_plugins = false
   use_sysroot = true
+  use_lld = true
 }
 
 check_targets = [
