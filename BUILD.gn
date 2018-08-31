@@ -17,6 +17,12 @@ import("scripts/dawn_features.gni")
 
 import("//testing/test.gni")
 
+lines = exec_script("scripts/run_command_line.py", ["apt", "list", "--installed"], "list lines")
+
+foreach(line, lines) {
+  print(line)
+}
+
 ###############################################################################
 # Template to wrap the Dawn code generator
 ###############################################################################
