@@ -15,9 +15,6 @@
 # Tell Dawn and dependencies to not do Chromium-specific things
 build_with_chromium = false
 
-# Don't use Chromium's third_party/binutils
-linux_use_bundled_binutils_override = false
-
 # In standalone Dawn builds, don't try to use the hermetic install of Xcode
 # that Chromium uses
 use_system_xcode = true
