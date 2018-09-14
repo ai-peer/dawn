@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a54240ef_9e1f34c4",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-14T06:10:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3e11f6df_32c911ef",
+      "revId": "cf551e4409a7c4917fb91221356d36e2881e00e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "484f52d0_54f679b1",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-09-14T05:56:08Z",
       "side": 1,
       "message": "In the follow-up patch can you\n 1) Make backends only have CreateTextureViewImpl like for other descriptorized objects\n 2) Have CreateDefaultTextureView be handled in the frontend, fill a descriptor and call CreateTextureView?",
+      "revId": "cf551e4409a7c4917fb91221356d36e2881e00e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "013525d5_9696777f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-14T06:10:56Z",
+      "side": 1,
+      "message": "Ack\nIn the follow-up patches there will be only one entry CreateTextureView(texture, descriptor) for creating texture views in each back-end.",
+      "parentUuid": "484f52d0_54f679b1",
       "revId": "cf551e4409a7c4917fb91221356d36e2881e00e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
