@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e11f6df_32c911ef",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-14T05:56:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we want create default texture view on the texture object or the device object. I\u0027d lean towards device but we should ask the group (or I can bring it up in Monday\u0027s meeting). LGTM for now and we can change later if need be.",
+      "revId": "cf551e4409a7c4917fb91221356d36e2881e00e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "484f52d0_54f679b1",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-14T05:56:08Z",
+      "side": 1,
+      "message": "In the follow-up patch can you\n 1) Make backends only have CreateTextureViewImpl like for other descriptorized objects\n 2) Have CreateDefaultTextureView be handled in the frontend, fill a descriptor and call CreateTextureView?",
+      "revId": "cf551e4409a7c4917fb91221356d36e2881e00e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
