@@ -32,6 +32,7 @@ namespace dawn_native { namespace opengl {
 
     class Device : public DeviceBase {
       public:
+        Device();
         BindGroupBase* CreateBindGroup(BindGroupBuilder* builder) override;
         BlendStateBase* CreateBlendState(BlendStateBuilder* builder) override;
         BufferViewBase* CreateBufferView(BufferViewBuilder* builder) override;
@@ -59,6 +60,8 @@ namespace dawn_native { namespace opengl {
         ResultOrError<ShaderModuleBase*> CreateShaderModuleImpl(
             const ShaderModuleDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
+
+        void CollectPCIInfo() override;
     };
 
 }}  // namespace dawn_native::opengl

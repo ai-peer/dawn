@@ -13,6 +13,8 @@
 // limitations under the License.
 
 #include "dawn_native/DawnNative.h"
+#include "dawn_native/Device.h"
+#include "dawn_native/d3d12/DeviceD3D12.h"
 
 // Contains the entry-points into dawn_native
 
@@ -22,6 +24,11 @@ namespace dawn_native {
 
     dawnProcTable GetProcs() {
         return GetProcsAutogen();
+    }
+
+    const PCIInfo* GetPCIInfo(const dawnDevice device) {
+        DeviceBase* deviceBase = reinterpret_cast<DeviceBase*>(device);
+        return deviceBase->GetPCIInfo();
     }
 
 }  // namespace dawn_native

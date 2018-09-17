@@ -133,6 +133,9 @@ namespace dawn_native { namespace d3d12 {
         ASSERT_SUCCESS(mFunctions->d3d12CreateDevice(mHardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0,
                                                      IID_PPV_ARGS(&mD3d12Device)));
 
+        // Collect GPU information
+        CollectPCIInfo();
+
         // Create device-global objects
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
@@ -327,6 +330,17 @@ namespace dawn_native { namespace d3d12 {
     }
     TextureViewBase* Device::CreateTextureView(TextureViewBuilder* builder) {
         return new TextureView(builder);
+    }
+
+    void Device::CollectPCIInfo() {
+        memset(&mPCIInfo, 0, sizeof(mPCIInfo));
+
+        DXGI_ADAPTER_DESC1 adapterDesc;
+        mHardwareAdapter->GetDesc1(&adapterDesc);
+
+        mPCIInfo.deviceId = adapterDesc.DeviceId;
+        mPCIInfo.vendorId = adapterDesc.VendorId;
+        wcstombs(mPCIInfo.name, adapterDesc.Description, sizeof(mPCIInfo.name) - 1);
     }
 
 }}  // namespace dawn_native::d3d12

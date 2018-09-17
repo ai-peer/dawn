@@ -126,6 +126,8 @@ namespace dawn_native { namespace null {
             const ShaderModuleDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
 
+        void CollectPCIInfo() override;
+
         std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
     };
 

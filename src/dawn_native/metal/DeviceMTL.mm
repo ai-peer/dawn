@@ -49,6 +49,7 @@ namespace dawn_native { namespace metal {
           mResourceUploader(new ResourceUploader(this)) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
+        CollectPCIInfo();
     }
 
     Device::~Device() {
@@ -133,6 +134,11 @@ namespace dawn_native { namespace metal {
     }
     TextureViewBase* Device::CreateTextureView(TextureViewBuilder* builder) {
         return new TextureView(builder);
+    }
+
+    // TODO(jiawei.shao@intel.com): collect device information on Metal
+    void Device::CollectPCIInfo() override {
+        memset(&mPCIInfo, 0, sizeof(mPCIInfo));
     }
 
     void Device::TickImpl() {
