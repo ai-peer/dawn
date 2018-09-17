@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "541a9c65_d75354e3",
+        "filename": "generator/main.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-17T23:13:11Z",
+      "side": 1,
+      "message": "nit: \"ce\"?\n\nalso: \"dependens\"",
+      "range": {
+        "startLine": 179,
+        "startChar": 66,
+        "endLine": 179,
+        "endChar": 68
+      },
+      "revId": "eb898249ff6d695469c6074ac7613f6dc30e4199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
