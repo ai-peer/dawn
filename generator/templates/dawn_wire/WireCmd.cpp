@@ -135,6 +135,7 @@
 
         return result;
     }
+    DAWN_UNUSED_FUNC({{name}}GetExtraRequiredSize);
 
     //* Serializes `record` into `transfer`, using `buffer` to get more space for pointed-to data
     //* and `provider` to serialize objects.
