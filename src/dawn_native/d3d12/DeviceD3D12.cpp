@@ -40,6 +40,9 @@
 #include "dawn_native/d3d12/SwapChainD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 
+#include <chrono>
+#include <iostream>
+
 namespace dawn_native { namespace d3d12 {
 
     dawnDevice CreateDevice() {
@@ -116,6 +119,7 @@ namespace dawn_native { namespace d3d12 {
     }  // anonymous namespace
 
     Device::Device() {
+        auto start1 = std::chrono::steady_clock::now();
         mFunctions = std::make_unique<PlatformFunctions>();
 
         {
@@ -129,7 +133,10 @@ namespace dawn_native { namespace d3d12 {
 
         mHardwareAdapter = GetHardwareAdapter(mFactory, mFunctions.get());
         ASSERT(mHardwareAdapter.Get() != nullptr);
+        auto end1 = std::chrono::steady_clock::now();
+        std::cout << "D3D12 getAdapters " << std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - start1).count() << std::endl;
 
+        auto start2 = std::chrono::steady_clock::now();
         ASSERT_SUCCESS(mFunctions->d3d12CreateDevice(mHardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0,
                                                      IID_PPV_ARGS(&mD3d12Device)));
 
@@ -152,6 +159,9 @@ namespace dawn_native { namespace d3d12 {
         mResourceUploader = std::make_unique<ResourceUploader>(this);
 
         NextSerial();
+        auto end2 = std::chrono::steady_clock::now();
+        std::cout << "D3D12 createDevice " << std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - start2).count() << std::endl;
+
     }
 
     Device::~Device() {
