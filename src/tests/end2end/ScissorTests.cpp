@@ -89,7 +89,7 @@ TEST_P(ScissorTest, LargerThanAttachment) {
 
 // Test setting an empty scissor rect
 TEST_P(ScissorTest, EmptyRect) {
-    DAWN_SKIP_TEST_IF(IsMetal());
+    DAWN_SKIP_TEST_IF(IsMetal() || (IsWindows() && IsVulkan() && IsIntel()));
 
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 2, 2);
     dawn::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
