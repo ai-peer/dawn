@@ -22,6 +22,9 @@
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
 
+#include <chrono>
+#include <iostream>
+
 namespace utils {
     class SwapChainImplMTL {
       public:
@@ -106,7 +109,16 @@ namespace utils {
             glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         }
         dawnDevice CreateDevice() override {
+
+            auto start2 = std::chrono::steady_clock::now();
+            auto allDevices = MTLCreateSystemDefaultDevice();
+            [allDevices release];
+            auto end2 = std::chrono::steady_clock::now();
+            std::cout << "MTL getAdapters " << std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - start2).count() << std::endl;
+            auto start1 = std::chrono::steady_clock::now();
             mMetalDevice = MTLCreateSystemDefaultDevice();
+            auto end1 = std::chrono::steady_clock::now();
+            std::cout << "MTL createDevice " << std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - start1).count() << std::endl;
             return dawn_native::metal::CreateDevice(mMetalDevice);
         }
 
