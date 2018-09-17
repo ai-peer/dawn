@@ -28,6 +28,7 @@ namespace dawn_native { namespace null {
     // Device
 
     Device::Device() {
+        CollectPCIInfo();
     }
 
     Device::~Device() {
@@ -96,6 +97,10 @@ namespace dawn_native { namespace null {
     }
     TextureViewBase* Device::CreateTextureView(TextureViewBuilder* builder) {
         return new TextureView(builder);
+    }
+
+    void Device::CollectPCIInfo() {
+        memset(&mPCIInfo, 0, sizeof(mPCIInfo));
     }
 
     void Device::TickImpl() {

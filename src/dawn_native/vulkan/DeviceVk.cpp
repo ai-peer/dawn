@@ -144,6 +144,8 @@ namespace dawn_native { namespace vulkan {
             return;
         }
 
+        CollectPCIInfo();
+
         GatherQueueFromDevice();
 
         mBufferUploader = std::make_unique<BufferUploader>(this);
@@ -268,6 +270,17 @@ namespace dawn_native { namespace vulkan {
     }
     TextureViewBase* Device::CreateTextureView(TextureViewBuilder* builder) {
         return new TextureView(builder);
+    }
+
+    void Device::CollectPCIInfo() {
+        memset(&mPCIInfo, 0, sizeof(mPCIInfo));
+
+        VkPhysicalDeviceProperties properties;
+        fn.GetPhysicalDeviceProperties(mPhysicalDevice, &properties);
+
+        mPCIInfo.deviceId = properties.deviceID;
+        mPCIInfo.vendorId = properties.vendorID;
+        strncpy(mPCIInfo.name, properties.deviceName, sizeof(mPCIInfo.name) - 1);
     }
 
     void Device::TickImpl() {
