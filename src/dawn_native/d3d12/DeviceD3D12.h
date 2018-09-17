@@ -90,6 +90,8 @@ namespace dawn_native { namespace d3d12 {
             const ShaderModuleDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
 
+        void CollectPCIInfo() override;
+
         // Keep mFunctions as the first member so that in the destructor it is freed. Otherwise the
         // D3D12 DLLs are unloaded before we are done using it.
         std::unique_ptr<PlatformFunctions> mFunctions;

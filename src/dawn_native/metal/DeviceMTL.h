@@ -74,6 +74,8 @@ namespace dawn_native { namespace metal {
             const ShaderModuleDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
 
+        void CollectPCIInfo() override;
+
         void OnCompletedHandler();
 
         id<MTLDevice> mMtlDevice = nil;

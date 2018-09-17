@@ -19,9 +19,18 @@
 #include <dawn_native/dawn_native_export.h>
 
 namespace dawn_native {
+    constexpr uint32_t DEVICE_NAME_LENGTH = 100;
+
+    struct PCIInfo {
+        char name[DEVICE_NAME_LENGTH];
+        uint32_t deviceId;
+        uint32_t vendorId;
+    };
 
     // Backend-agnostic API for dawn_native
     DAWN_NATIVE_EXPORT dawnProcTable GetProcs();
+
+    DAWN_NATIVE_EXPORT const PCIInfo* GetPCIInfo(const dawnDevice device);
 
 }  // namespace dawn_native
 

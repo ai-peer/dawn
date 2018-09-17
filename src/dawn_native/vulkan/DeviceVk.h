@@ -92,6 +92,8 @@ namespace dawn_native { namespace vulkan {
             const ShaderModuleDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
 
+        void CollectPCIInfo() override;
+
         bool CreateInstance(VulkanGlobalKnobs* usedKnobs,
                             const std::vector<const char*>& requiredExtensions);
         bool CreateDevice(VulkanDeviceKnobs* usedKnobs);

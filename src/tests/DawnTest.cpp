@@ -125,6 +125,62 @@ bool DawnTest::IsVulkan() const {
     return GetParam() == VulkanBackend;
 }
 
+bool DawnTest::IsAMD() const {
+    return mPCIInfo->vendorId == kVendorID_AMD;
+}
+
+bool DawnTest::IsARM() const {
+    return mPCIInfo->vendorId == kVendorID_ARM;
+}
+
+bool DawnTest::IsImgTec() const {
+    return mPCIInfo->vendorId == kVendorID_ImgTec;
+}
+
+bool DawnTest::IsIntel() const {
+    return mPCIInfo->vendorId == kVendorID_Intel;
+}
+
+bool DawnTest::IsNvidia() const {
+    return mPCIInfo->vendorId == kVendorID_Nvidia;
+}
+
+bool DawnTest::IsQualcomm() const {
+    return mPCIInfo->vendorId == kVendorID_Qualcomm;
+}
+
+bool DawnTest::IsWindows() const {
+#if defined(_WIN32) || defined(_WIN64)
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool DawnTest::IsLinux() const {
+#if defined(__linux__)
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool DawnTest::IsOSX() const {
+#if defined(__APPLE__)
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool DawnTest::IsAndroid() const {
+#if defined(ANDROID)
+    return true;
+#else
+    return false;
+#endif
+}
+
 bool gTestUsesWire = false;
 
 void DawnTest::SetUp() {
@@ -180,6 +236,8 @@ void DawnTest::SetUp() {
 
     // The end2end tests should never cause validation errors. These should be tested in unittests.
     device.SetErrorCallback(DeviceErrorCauseTestFailure, 0);
+
+    mPCIInfo = dawn_native::GetPCIInfo(backendDevice);
 }
 
 void DawnTest::TearDown() {
