@@ -41,6 +41,7 @@
 
 #include <spirv-cross/spirv_cross.hpp>
 
+#include <chrono>
 #include <iostream>
 
 #if DAWN_PLATFORM_LINUX
@@ -83,6 +84,7 @@ namespace dawn_native { namespace vulkan {
     // Device
 
     Device::Device(const std::vector<const char*>& requiredInstanceExtensions) {
+        auto start1 = std::chrono::steady_clock::now();
         if (!mVulkanLib.Open(kVulkanLibName)) {
             ASSERT(false);
             return;
@@ -127,6 +129,11 @@ namespace dawn_native { namespace vulkan {
         // TODO(cwallez@chromium.org): Choose the physical device based on ???
         mPhysicalDevice = physicalDevices[0];
 
+        auto end1 = std::chrono::steady_clock::now();
+
+        std::cout << "Vk getAdapters " << std::chrono::duration_cast<std::chrono::nanoseconds>(end1 - start1).count() << std::endl;
+
+        auto start2 = std::chrono::steady_clock::now();
         if (!GatherDeviceInfo(*this, mPhysicalDevice, &mDeviceInfo)) {
             ASSERT(false);
             return;
@@ -151,6 +158,9 @@ namespace dawn_native { namespace vulkan {
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mMemoryAllocator = std::make_unique<MemoryAllocator>(this);
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
+
+        auto end2 = std::chrono::steady_clock::now();
+        std::cout << "Vk createDevice " << std::chrono::duration_cast<std::chrono::nanoseconds>(end2 - start2).count() << std::endl;
     }
 
     Device::~Device() {
