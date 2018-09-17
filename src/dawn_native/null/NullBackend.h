@@ -127,6 +127,9 @@ namespace dawn_native { namespace null {
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
 
         std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
+
+      protected:
+        void CollectPCIInfo() override;
     };
 
     class Buffer : public BufferBase {

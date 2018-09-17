@@ -84,6 +84,9 @@ namespace dawn_native { namespace metal {
         Serial mFinishedCommandSerial = 0;
         Serial mPendingCommandSerial = 1;
         id<MTLCommandBuffer> mPendingCommands = nil;
+
+      protected:
+        void CollectPCIInfo() override;
     };
 
 }}  // namespace dawn_native::metal

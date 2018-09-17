@@ -155,6 +155,9 @@ namespace dawn_native { namespace vulkan {
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
         std::vector<VkSemaphore> mWaitSemaphores;
+
+      protected:
+        void CollectPCIInfo() override;
     };
 
 }}  // namespace dawn_native::vulkan

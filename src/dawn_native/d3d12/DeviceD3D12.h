@@ -115,6 +115,9 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<ResourceAllocator> mResourceAllocator;
         std::unique_ptr<ResourceUploader> mResourceUploader;
+
+      protected:
+        void CollectPCIInfo() override;
     };
 
 }}  // namespace dawn_native::d3d12

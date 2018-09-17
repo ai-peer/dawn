@@ -19,6 +19,7 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/RefCounted.h"
 
+#include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
 
 #include <memory>
@@ -105,6 +106,10 @@ namespace dawn_native {
             return nullptr;
         }
 
+        const PCIInfo* GetPCIInfo() const {
+            return &mPCIInfo;
+        }
+
       private:
         virtual ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) = 0;
@@ -144,6 +149,10 @@ namespace dawn_native {
         dawn::DeviceErrorCallback mErrorCallback = nullptr;
         dawn::CallbackUserdata mErrorUserdata = 0;
         uint32_t mRefCount = 1;
+
+      protected:
+        virtual void CollectPCIInfo() = 0;
+        PCIInfo mPCIInfo;
     };
 
 }  // namespace dawn_native
