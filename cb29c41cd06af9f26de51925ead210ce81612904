@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1282b73e_11ea3077",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "This isn\u0027t called in Device so it doesn\u0027t need to be a virtual function. Instead we could make GetPCIInfo virtual and have each backend device return its own mPCIInfo member in their override.",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df44ecdb_3604d437",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "With std::string this would look like this\n\n    std::wstring_convert\u003cstd::codecvt_utf8\u003cwchar_t\u003e\u003e converter(\"Error converting\");\n    mPCIInfo.name \u003d converter.to_bytes(adapterDesc.Description);",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0673cb7d_7f046395",
+        "filename": "src/dawn_native/null/NullBackend.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "Can we have fake data here?",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "798339e8_012eacc4",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "We prefer using strncpyz, but this would change with name being an std::string anyway.",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a76cf6d_7c7f2cb5",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "Constexpr constants are cased as kDeviceNameLength but this one should disappear I think.",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6279587f_c3182bcc",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "This could be an std::string instead.",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7585aad_c4172bc8",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "Can these use DAWN_PLATFORM_* macros defined in src/common/Platform.h?",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbb822e0_7e43e20c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "We don\u0027t support Android yet so this should be removed.",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "753bc3ae_0619dd57",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "IsMacOS?",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1909261d_5211d52c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-17T09:36:32Z",
+      "side": 1,
+      "message": "Can this be a copy instead in preparation for tests that will recreate devices?",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
