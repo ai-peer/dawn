@@ -104,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "267b4632_ab5f1f5f",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-18T01:08:21Z",
+      "side": 1,
+      "message": "+1, I strongly prefer a std::string.",
+      "parentUuid": "6279587f_c3182bcc",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7585aad_c4172bc8",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 5
@@ -166,6 +184,23 @@
       "writtenOn": "2018-09-17T09:36:32Z",
       "side": 1,
       "message": "Can this be a copy instead in preparation for tests that will recreate devices?",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0af2162e_5398a9e1",
+        "filename": "src/tests/end2end/ScissorTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-18T01:08:21Z",
+      "side": 1,
+      "message": "This could be written as two separate DAWN_SKIP_TEST_IF lines, right? I think I prefer that. It\u0027s much easier to read.\n\n    DAWN_SKIP_TEST_IF(IsMetal());\n    DAWN_SKIP_TEST_IF(IsWindows() \u0026\u0026 IsVulkan() \u0026\u0026 IsIntel());",
       "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
