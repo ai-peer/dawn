@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "04e0d69c_bf9d4fa2",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-18T07:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3521fda3_25bd8a4c",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a76cf6d_7c7f2cb5",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 5
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "Marking done",
       "parentUuid": "5a76cf6d_7c7f2cb5",
+      "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c35d8b03_ec23bbb3",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-18T07:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291a6c9b_a8f86652",
       "revId": "cb29c41cd06af9f26de51925ead210ce81612904",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
