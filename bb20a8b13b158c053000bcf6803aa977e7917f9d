@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e66930f_78f72fae",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-18T06:48:19Z",
+      "side": 1,
+      "message": "nit (sorry for not noticing before): Come to think of it, I think this should return const PCIInfo\u0026. Would that work?",
+      "revId": "bb20a8b13b158c053000bcf6803aa977e7917f9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
