@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3397b2c5_4ba7e115",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-19T23:37:04Z",
+      "side": 1,
+      "message": "The commands from CommandBufferBuilder were copied unchanged except for this check that was added to all of them.",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e67a3db_70f53380",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-19T23:37:04Z",
+      "side": 1,
+      "message": "And using mAllocator-\u003e instead of mAllocator.",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
