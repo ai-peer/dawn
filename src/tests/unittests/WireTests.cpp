@@ -470,6 +470,46 @@ TEST_F(WireTests, StructureOfStructureArrayArgument) {
     FlushClient();
 }
 
+// Test passing nullptr instead of objects - object as value version
+TEST_F(WireTests, NullptrAsValue) {
+    dawnCommandBufferBuilder builder = dawnDeviceCreateCommandBufferBuilder(device);
+    dawnComputePassEncoder pass = dawnCommandBufferBuilderBeginComputePass(builder);
+    dawnComputePassEncoderSetComputePipeline(pass, nullptr);
+
+    dawnCommandBufferBuilder apiBuilder = api.GetNewCommandBufferBuilder();
+    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
+        .WillOnce(Return(apiBuilder));
+
+    dawnComputePassEncoder apiPass = api.GetNewComputePassEncoder();
+    EXPECT_CALL(api, CommandBufferBuilderBeginComputePass(apiBuilder))
+        .WillOnce(Return(apiPass));
+
+    EXPECT_CALL(api, ComputePassEncoderSetComputePipeline(apiPass, nullptr))
+        .Times(1);
+
+    FlushClient();
+}
+
+// Test passing nullptr instead of objects - array of objects version
+TEST_F(WireTests, NullptrInArray) {
+    dawnBindGroupLayout nullBGL = nullptr;
+
+    dawnPipelineLayoutDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.numBindGroupLayouts = 1;
+    descriptor.bindGroupLayouts = &nullBGL;
+
+    dawnDeviceCreatePipelineLayout(device, &descriptor);
+    EXPECT_CALL(api, DeviceCreatePipelineLayout(apiDevice, MatchesLambda([](const dawnPipelineLayoutDescriptor* desc) -> bool {
+        return desc->nextInChain == nullptr &&
+            desc->numBindGroupLayouts == 1 &&
+            desc->bindGroupLayouts[0] == nullptr;
+    })))
+        .WillOnce(Return(nullptr));
+
+    FlushClient();
+}
+
 // Test that the server doesn't forward calls to error objects or with error objects
 // Also test that when GetResult is called on an error builder, the error callback is fired
 TEST_F(WireTests, CallsSkippedAfterBuilderError) {
