@@ -16,6 +16,24 @@
       "revId": "b7d580eda0afdd2b53893913f417900b412376e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71f034ad_623bfcc9",
+        "filename": "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-20T23:43:45Z",
+      "side": 0,
+      "message": "Yay for type safety :D",
+      "parentUuid": "58916cfe_3629e32b",
+      "revId": "b7d580eda0afdd2b53893913f417900b412376e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

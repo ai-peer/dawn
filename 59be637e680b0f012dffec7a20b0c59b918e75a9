@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6b6ff57e_5fba9fac",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-20T23:43:45Z",
+      "side": 1,
+      "message": "What Kai said, keeping the current name to match the group.",
+      "parentUuid": "3360f270_21cbd601",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7c5bbe_73382661",
         "filename": "dawn.json",
         "patchSetId": 4
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "a767be24_d7383af4",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-20T23:43:45Z",
+      "side": 1,
+      "message": "That\u0027s interesting, it might matter when we standardize WASM headers. Hopefully everyone uses the enums and don.t hardcode constants.",
+      "parentUuid": "0e7c5bbe_73382661",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11f5ef3f_2f33c834",
         "filename": "dawn.json",
         "patchSetId": 4
@@ -65,6 +101,24 @@
       "writtenOn": "2018-09-20T16:05:20Z",
       "side": 1,
       "message": "I\u0027m sure you\u0027ve thought this through, but it\u0027s a bit unfortunate to have this duplication between the encoders (set bind group, set push constants). I know it\u0027s possible to inherit from a common interface in WebIDL; perhaps we should have such a mechanism at the Dawn code gen level as well?\n\nAnyway it\u0027s only two functions from what I can tell, and inherited at the implementation level, so no big deal for now.",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a4c4f19_7e25afb7",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-20T23:43:45Z",
+      "side": 1,
+      "message": "Yeah that\u0027s not pretty but adding inheritance to the codegen would be a huge amount of work and we don\u0027t expect many (if any) other uses of inheritance in the IDL. Also the C API can\u0027t have inheritance.",
+      "parentUuid": "11f5ef3f_2f33c834",
       "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -122,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "64461ee1_bf1d438c",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-20T23:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64eb572e_d62bb0cf",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cb645850_de7fb3e3",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 4
@@ -139,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "b1c5231c_53a5fbec",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-20T23:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb645850_de7fb3e3",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d3fc0f05_7a939147",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 4
@@ -150,6 +240,24 @@
       "writtenOn": "2018-09-20T16:05:20Z",
       "side": 1,
       "message": "Not new to this patch, but would it be possible to have Allocate\u003c\u003e (or a variant of it) also do the placement new?",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6622153_08b7c6d4",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-09-20T23:43:45Z",
+      "side": 1,
+      "message": "Done, opened https://bugs.chromium.org/p/dawn/issues/detail?id\u003d21 for it.",
+      "parentUuid": "d3fc0f05_7a939147",
       "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
