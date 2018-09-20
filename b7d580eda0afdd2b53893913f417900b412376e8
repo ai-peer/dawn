@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58916cfe_3629e32b",
+        "filename": "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-09-20T16:05:20Z",
+      "side": 0,
+      "message": "Kinda cool that we no longer need these tests.",
+      "revId": "b7d580eda0afdd2b53893913f417900b412376e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
