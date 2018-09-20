@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "3360f270_21cbd601",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-20T23:33:57Z",
+      "side": 1,
+      "message": "In the group we decided to call it Programmable for now in case we end up with other passes. It\u0027s a name which isn\u0027t actually exposed to the web platform because it\u0027s just an \"abstract class\" like WebGLRenderingContextBase.",
+      "parentUuid": "4b9ae3e0_81b96c61",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e7c5bbe_73382661",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-20T23:33:57Z",
+      "side": 1,
+      "message": "Not that it probably matters because the webidl enums are unordered, but: the sketch.webidl writes these in a different order (because when Myles added a duplicate copy of the enum it was in a different order, and I ended up deleting the old one and leaving Myles\u0027s copy). That one is binary order:\n\n        never\n      \u003c less\n     \u003d  equal\n     \u003d\u003c lessEqual\n    \u003e   greater\n    \u003e \u003c notEqual\n    \u003e\u003d  greaterEqual\n    \u003e\u003d\u003c always",
+      "revId": "59be637e680b0f012dffec7a20b0c59b918e75a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11f5ef3f_2f33c834",
         "filename": "dawn.json",
         "patchSetId": 4
