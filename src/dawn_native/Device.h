@@ -57,7 +57,6 @@ namespace dawn_native {
             RenderPassDescriptorBuilder* builder) = 0;
         virtual RenderPipelineBase* CreateRenderPipeline(RenderPipelineBuilder* builder) = 0;
         virtual SwapChainBase* CreateSwapChain(SwapChainBuilder* builder) = 0;
-        virtual TextureViewBase* CreateDefaultTextureView(TextureBase* texture) = 0;
 
         virtual void TickImpl() = 0;
 
@@ -96,6 +95,7 @@ namespace dawn_native {
         ShaderModuleBase* CreateShaderModule(const ShaderModuleDescriptor* descriptor);
         SwapChainBuilder* CreateSwapChainBuilder();
         TextureBase* CreateTexture(const TextureDescriptor* descriptor);
+        virtual TextureViewBase* CreateDefaultTextureView(TextureBase* texture) = 0;
 
         void Tick();
         void SetErrorCallback(dawn::DeviceErrorCallback callback, dawn::CallbackUserdata userdata);

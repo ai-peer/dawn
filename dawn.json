@@ -552,6 +552,13 @@
                 ]
             },
             {
+                "name": "create default texture view",
+                "returns": "texture view",
+                "args": [
+                    {"name": "srcTexture", "type": "texture"}
+                ]
+            },
+            {
                 "name": "tick"
             },
             {
@@ -1026,13 +1033,7 @@
         ]
     },
     "texture": {
-        "category": "object",
-        "methods": [
-            {
-                "name": "create default texture view",
-                "returns": "texture view"
-            }
-        ]
+        "category": "object"
     },
     "texture descriptor": {
         "category": "structure",

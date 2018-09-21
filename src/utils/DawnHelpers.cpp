@@ -145,7 +145,7 @@ namespace utils {
             dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::TransferSrc;
         result.color = device.CreateTexture(&descriptor);
 
-        dawn::TextureView colorView = result.color.CreateDefaultTextureView();
+        dawn::TextureView colorView = device.CreateDefaultTextureView(result.color);
         result.renderPassInfo = device.CreateRenderPassDescriptorBuilder()
                                     .SetColorAttachment(0, colorView, dawn::LoadOp::Clear)
                                     .GetResult();

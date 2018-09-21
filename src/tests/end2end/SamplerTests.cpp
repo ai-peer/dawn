@@ -105,7 +105,7 @@ protected:
             .GetResult();
 
         queue.Submit(1, &copy);
-        mTextureView = texture.CreateDefaultTextureView();
+        mTextureView = device.CreateDefaultTextureView(texture);
     }
 
     void TestAddressModes(AddressModeTestCase u, AddressModeTestCase v, AddressModeTestCase w) {

@@ -438,7 +438,7 @@ namespace {
                 .GetResult();
             queue.Submit(1, &cmdbuf);
 
-            textures[iTextureID] = oTexture.CreateDefaultTextureView();
+            textures[iTextureID] = device.CreateDefaultTextureView(oTexture);
         }
     }
 
