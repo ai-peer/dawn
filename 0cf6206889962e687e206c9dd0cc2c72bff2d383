@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68affc46_c2c4fcde",
+        "filename": "infra/config/global/luci-milo.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-09-22T00:09:09Z",
+      "side": 1,
+      "message": ":P",
+      "range": {
+        "startLine": 1,
+        "startChar": 11,
+        "endLine": 1,
+        "endChar": 80
+      },
+      "revId": "0cf6206889962e687e206c9dd0cc2c72bff2d383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
