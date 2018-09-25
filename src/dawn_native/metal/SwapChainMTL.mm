@@ -21,10 +21,10 @@
 
 namespace dawn_native { namespace metal {
 
-    SwapChain::SwapChain(SwapChainBuilder* builder) : SwapChainBase(builder) {
+    SwapChain::SwapChain(SwapChainBuilder* builder) : BackendWrapper<SwapChainBase>(builder) {
         const auto& im = GetImplementation();
         dawnWSIContextMetal wsiContext = {};
-        wsiContext.device = ToBackend(GetDevice())->GetMTLDevice();
+        wsiContext.device = GetDevice()->GetMTLDevice();
         im.Init(im.userData, &wsiContext);
     }
 
@@ -41,7 +41,7 @@ namespace dawn_native { namespace metal {
         }
 
         id<MTLTexture> nativeTexture = reinterpret_cast<id<MTLTexture>>(next.texture.ptr);
-        return new Texture(ToBackend(GetDevice()), descriptor, nativeTexture);
+        return new Texture(GetDevice(), descriptor, nativeTexture);
     }
 
     void SwapChain::OnBeforePresent(TextureBase*) {

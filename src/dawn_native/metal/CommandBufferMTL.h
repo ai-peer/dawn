@@ -17,17 +17,13 @@
 
 #include "dawn_native/CommandBuffer.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/Forward.h"
 
-namespace dawn_native {
-    class RenderPassDescriptorBase;
-}
+#import <Metal/Metal.h>
 
 namespace dawn_native { namespace metal {
 
-    class Device;
-
-    class CommandBuffer : public CommandBufferBase {
+    class CommandBuffer : public BackendWrapper<CommandBufferBase> {
       public:
         CommandBuffer(CommandBufferBuilder* builder);
         ~CommandBuffer();
@@ -39,7 +35,6 @@ namespace dawn_native { namespace metal {
         void EncodeRenderPass(id<MTLCommandBuffer> commandBuffer,
                               RenderPassDescriptorBase* renderPass);
 
-        Device* mDevice;
         CommandIterator mCommands;
     };
 

@@ -17,11 +17,13 @@
 
 #include "dawn_native/RenderPipeline.h"
 
+#include "dawn_native/metal/Forward.h"
+
 #import <Metal/Metal.h>
 
 namespace dawn_native { namespace metal {
 
-    class RenderPipeline : public RenderPipelineBase {
+    class RenderPipeline : public BackendWrapper<RenderPipelineBase> {
       public:
         RenderPipeline(RenderPipelineBuilder* builder);
         ~RenderPipeline();

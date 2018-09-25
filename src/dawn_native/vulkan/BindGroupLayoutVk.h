@@ -18,14 +18,13 @@
 #include "dawn_native/BindGroupLayout.h"
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class Device;
-
     VkDescriptorType VulkanDescriptorType(dawn::BindingType type);
 
-    class BindGroupLayout : public BindGroupLayoutBase {
+    class BindGroupLayout : public BackendWrapper<BindGroupLayoutBase> {
       public:
         BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor);
         ~BindGroupLayout();

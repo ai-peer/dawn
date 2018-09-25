@@ -21,7 +21,7 @@
 namespace dawn_native { namespace metal {
 
     PipelineLayout::PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor)
-        : PipelineLayoutBase(device, descriptor) {
+        : BackendWrapper<PipelineLayoutBase>(device, descriptor) {
         // Each stage has its own numbering namespace in CompilerMSL.
         for (auto stage : IterateStages(kAllStages)) {
             // Buffer number 0 is reserved for push constants
