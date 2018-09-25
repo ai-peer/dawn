@@ -17,6 +17,7 @@
 
 #include "common/SerialQueue.h"
 #include "dawn_native/Buffer.h"
+#include "dawn_native/metal/Forward.h"
 
 #import <Metal/Metal.h>
 
@@ -24,7 +25,7 @@ namespace dawn_native { namespace metal {
 
     class Device;
 
-    class Buffer : public BufferBase {
+    class Buffer : public BackendWrapper<BufferBase> {
       public:
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
