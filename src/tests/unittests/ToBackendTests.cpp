@@ -22,12 +22,18 @@
 // Make our own Base - Backend object pair, reusing the CommandBuffer name
 namespace dawn_native {
     class CommandBufferBase : public RefCounted {
+      public:
+        CommandBufferBase() : RefCounted(nullptr) {
+        }
     };
 }
 
 using namespace dawn_native;
 
 class MyCommandBuffer : public CommandBufferBase {
+  public:
+    MyCommandBuffer() {
+    }
 };
 
 struct MyBackendTraits {

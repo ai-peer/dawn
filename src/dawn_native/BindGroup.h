@@ -37,8 +37,6 @@ namespace dawn_native {
         SamplerBase* GetBindingAsSampler(size_t binding);
         TextureViewBase* GetBindingAsTextureView(size_t binding);
 
-        DeviceBase* GetDevice() const;
-
       private:
         Ref<BindGroupLayoutBase> mLayout;
         std::array<Ref<RefCounted>, kMaxBindingsPerGroup> mBindings;

@@ -42,11 +42,6 @@ namespace dawn_native {
     class CommandBufferBase : public RefCounted {
       public:
         CommandBufferBase(CommandBufferBuilder* builder);
-
-        DeviceBase* GetDevice();
-
-      private:
-        DeviceBase* mDevice;
     };
 
     class CommandBufferBuilder : public Builder<CommandBufferBase> {

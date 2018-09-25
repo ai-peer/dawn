@@ -40,8 +40,6 @@ namespace dawn_native {
       public:
         ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor);
 
-        DeviceBase* GetDevice() const;
-
         void ExtractSpirvInfo(const spirv_cross::Compiler& compiler);
 
         struct PushConstantInfo {
@@ -72,7 +70,6 @@ namespace dawn_native {
       private:
         bool IsCompatibleWithBindGroupLayout(size_t group, const BindGroupLayoutBase* layout);
 
-        DeviceBase* mDevice;
         PushConstantInfo mPushConstants = {};
         ModuleBindingInfo mBindingInfo;
         std::bitset<kMaxVertexAttributes> mUsedVertexAttributes;

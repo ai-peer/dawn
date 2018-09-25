@@ -42,8 +42,6 @@ namespace dawn_native {
         uint32_t GetSize() const;
         dawn::BufferUsageBit GetUsage() const;
 
-        DeviceBase* GetDevice() const;
-
         // Dawn API
         BufferViewBuilder* CreateBufferViewBuilder();
         void SetSubData(uint32_t start, uint32_t count, const uint8_t* data);
@@ -75,7 +73,6 @@ namespace dawn_native {
                                dawn::BufferUsageBit requiredUsage) const;
         MaybeError ValidateUnmap() const;
 
-        DeviceBase* mDevice;
         uint32_t mSize;
         dawn::BufferUsageBit mUsage = dawn::BufferUsageBit::None;
 

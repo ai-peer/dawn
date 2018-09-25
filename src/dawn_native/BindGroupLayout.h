@@ -44,10 +44,7 @@ namespace dawn_native {
         };
         const LayoutBindingInfo& GetBindingInfo() const;
 
-        DeviceBase* GetDevice() const;
-
       private:
-        DeviceBase* mDevice;
         LayoutBindingInfo mBindingInfo;
         bool mIsBlueprint = false;
     };
