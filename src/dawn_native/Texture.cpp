@@ -87,17 +87,13 @@ namespace dawn_native {
     // TextureBase
 
     TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor)
-        : mDevice(device),
+        : RefCounted(device),
           mDimension(descriptor->dimension),
           mFormat(descriptor->format),
           mSize(descriptor->size),
           mArrayLayers(descriptor->arrayLayer),
           mNumMipLevels(descriptor->mipLevel),
           mUsage(descriptor->usage) {
-    }
-
-    DeviceBase* TextureBase::GetDevice() const {
-        return mDevice;
     }
 
     dawn::TextureDimension TextureBase::GetDimension() const {
@@ -120,12 +116,13 @@ namespace dawn_native {
     }
 
     TextureViewBase* TextureBase::CreateDefaultTextureView() {
-        return mDevice->CreateDefaultTextureView(this);
+        return GetDevice()->CreateDefaultTextureView(this);
     }
 
     // TextureViewBase
 
-    TextureViewBase::TextureViewBase(TextureBase* texture) : mTexture(texture) {
+    TextureViewBase::TextureViewBase(TextureBase* texture)
+        : RefCounted(texture->GetDevice()), mTexture(texture) {
     }
 
     const TextureBase* TextureViewBase::GetTexture() const {

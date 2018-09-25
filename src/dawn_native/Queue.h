@@ -28,8 +28,6 @@ namespace dawn_native {
       public:
         QueueBase(DeviceBase* device);
 
-        DeviceBase* GetDevice();
-
         // Dawn API
         void Submit(uint32_t numCommands, CommandBufferBase* const* commands);
 
@@ -37,8 +35,6 @@ namespace dawn_native {
         virtual void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) = 0;
 
         MaybeError ValidateSubmit(uint32_t numCommands, CommandBufferBase* const* commands);
-
-        DeviceBase* mDevice;
     };
 
 }  // namespace dawn_native

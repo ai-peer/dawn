@@ -40,12 +40,8 @@ namespace dawn_native {
                               uint32_t count,
                               const void* data);
 
-        DeviceBase* GetDevice() const;
-
       protected:
         MaybeError ValidateCanRecordCommands() const;
-
-        DeviceBase* mDevice;
 
         // The allocator is borrowed from the top level builder. Keep a reference to the builder
         // to make sure the allocator isn't freed.

@@ -37,7 +37,7 @@ namespace dawn_native {
 
     class PipelineBuilder;
 
-    class PipelineBase {
+    class PipelineBase : public RefCounted {
       public:
         PipelineBase(DeviceBase* device, PipelineLayoutBase* layout, dawn::ShaderStageBit stages);
         PipelineBase(DeviceBase* device, PipelineBuilder* builder);

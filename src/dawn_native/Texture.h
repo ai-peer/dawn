@@ -48,14 +48,11 @@ namespace dawn_native {
         uint32_t GetArrayLayers() const;
         uint32_t GetNumMipLevels() const;
         dawn::TextureUsageBit GetUsage() const;
-        DeviceBase* GetDevice() const;
 
         // Dawn API
         TextureViewBase* CreateDefaultTextureView();
 
       private:
-        DeviceBase* mDevice;
-
         dawn::TextureDimension mDimension;
         dawn::TextureFormat mFormat;
         Extent3D mSize;

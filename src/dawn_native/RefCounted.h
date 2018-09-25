@@ -19,9 +19,11 @@
 
 namespace dawn_native {
 
+    class DeviceBase;
+
     class RefCounted {
       public:
-        RefCounted();
+        RefCounted(DeviceBase* device);
         virtual ~RefCounted();
 
         void ReferenceInternal();
@@ -30,13 +32,16 @@ namespace dawn_native {
         uint32_t GetExternalRefs() const;
         uint32_t GetInternalRefs() const;
 
+        DeviceBase* GetDevice() const;
+
         // Dawn API
         void Reference();
         void Release();
 
-      protected:
+      private:
         uint32_t mExternalRefs = 1;
         uint32_t mInternalRefs = 1;
+        DeviceBase* mDevice;
     };
 
     template <typename T>
