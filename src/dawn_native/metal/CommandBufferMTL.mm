@@ -207,7 +207,6 @@ namespace dawn_native { namespace metal {
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
         : CommandBufferBase(builder),
-          mDevice(ToBackend(builder->GetDevice())),
           mCommands(builder->AcquireCommands()) {
     }
 

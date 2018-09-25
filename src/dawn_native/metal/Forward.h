@@ -17,11 +17,11 @@
 
 #include "dawn_native/ToBackend.h"
 
-namespace {
+namespace dawn_native {
     class BindGroupBase;
     class BindGroup;
     class RenderPassDescriptor;
-}  // namespace
+}  // namespace dawn_native
 
 namespace dawn_native { namespace metal {
 
@@ -72,6 +72,9 @@ namespace dawn_native { namespace metal {
     auto ToBackend(T&& common) -> decltype(ToBackendBase<MetalBackendTraits>(common)) {
         return ToBackendBase<MetalBackendTraits>(common);
     }
+
+    template<typename T>
+    using BackendWrapper = BackendWrapperBase<T, Device>;
 
 }}  // namespace dawn_native::metal
 
