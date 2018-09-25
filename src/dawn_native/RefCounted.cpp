@@ -18,7 +18,7 @@
 
 namespace dawn_native {
 
-    RefCounted::RefCounted() {
+    RefCounted::RefCounted(DeviceBase* device) : mDevice(device) {
     }
 
     RefCounted::~RefCounted() {
@@ -49,6 +49,10 @@ namespace dawn_native {
 
     uint32_t RefCounted::GetInternalRefs() const {
         return mInternalRefs;
+    }
+
+    DeviceBase* RefCounted::GetDevice() const {
+        return mDevice;
     }
 
     void RefCounted::Reference() {

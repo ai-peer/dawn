@@ -61,8 +61,6 @@ namespace dawn_native {
         uint32_t GetWidth() const;
         uint32_t GetHeight() const;
 
-        DeviceBase* GetDevice() const;
-
       private:
         std::bitset<kMaxColorAttachments> mColorAttachmentsSet;
         std::array<RenderPassColorAttachmentInfo, kMaxColorAttachments> mColorAttachments;
@@ -72,8 +70,6 @@ namespace dawn_native {
 
         uint32_t mWidth;
         uint32_t mHeight;
-
-        DeviceBase* mDevice;
     };
 
     class RenderPassDescriptorBuilder : public Builder<RenderPassDescriptorBase> {

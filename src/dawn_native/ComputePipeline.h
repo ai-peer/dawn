@@ -24,7 +24,7 @@ namespace dawn_native {
     MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
                                                  const ComputePipelineDescriptor* descriptor);
 
-    class ComputePipelineBase : public RefCounted, public PipelineBase {
+    class ComputePipelineBase : public PipelineBase {
       public:
         ComputePipelineBase(DeviceBase* device, const ComputePipelineDescriptor* descriptor);
     };

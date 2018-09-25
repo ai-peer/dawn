@@ -26,7 +26,8 @@ namespace dawn_native {
     // BindGroup
 
     BindGroupBase::BindGroupBase(BindGroupBuilder* builder)
-        : mLayout(std::move(builder->mLayout)),
+        : RefCounted(builder->GetDevice()),
+          mLayout(std::move(builder->mLayout)),
           mBindings(std::move(builder->mBindings)) {
     }
 
@@ -56,10 +57,6 @@ namespace dawn_native {
         return reinterpret_cast<TextureViewBase*>(mBindings[binding].Get());
     }
 
-    DeviceBase* BindGroupBase::GetDevice() const {
-        return mLayout->GetDevice();
-    }
-
     // BindGroupBuilder
 
     enum BindGroupSetProperties {
@@ -81,7 +78,7 @@ namespace dawn_native {
             return nullptr;
         }
 
-        return mDevice->CreateBindGroup(this);
+        return GetDevice()->CreateBindGroup(this);
     }
 
     void BindGroupBuilder::SetLayout(BindGroupLayoutBase* layout) {
