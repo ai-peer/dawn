@@ -17,6 +17,8 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include "dawn_native/metal/Forward.h"
+
 #import <Metal/Metal.h>
 
 namespace spirv_cross {
@@ -28,7 +30,7 @@ namespace dawn_native { namespace metal {
     class Device;
     class PipelineLayout;
 
-    class ShaderModule : public ShaderModuleBase {
+    class ShaderModule : public BackendWrapper<ShaderModuleBase> {
       public:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
 
