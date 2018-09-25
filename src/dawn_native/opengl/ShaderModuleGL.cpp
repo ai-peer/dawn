@@ -48,7 +48,7 @@ namespace dawn_native { namespace opengl {
     }
 
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
-        : ShaderModuleBase(device, descriptor) {
+        : BackendWrapper<ShaderModuleBase>(device, descriptor) {
         spirv_cross::CompilerGLSL compiler(descriptor->code, descriptor->codeSize);
         spirv_cross::CompilerGLSL::Options options;
 

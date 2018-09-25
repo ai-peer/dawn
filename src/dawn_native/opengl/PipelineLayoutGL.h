@@ -17,13 +17,13 @@
 
 #include "dawn_native/PipelineLayout.h"
 
+#include "dawn_native/opengl/Forward.h"
+
 #include "glad/glad.h"
 
 namespace dawn_native { namespace opengl {
 
-    class Device;
-
-    class PipelineLayout : public PipelineLayoutBase {
+    class PipelineLayout : public BackendWrapper<PipelineLayoutBase> {
       public:
         PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor);
 

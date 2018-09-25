@@ -17,16 +17,11 @@
 
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
-
-namespace dawn_native {
-    class RenderPassDescriptorBase;
-}  // namespace dawn_native
+#include "dawn_native/opengl/Forward.h"
 
 namespace dawn_native { namespace opengl {
 
-    class Device;
-
-    class CommandBuffer : public CommandBufferBase {
+    class CommandBuffer : public BackendWrapper<CommandBufferBase> {
       public:
         CommandBuffer(CommandBufferBuilder* builder);
         ~CommandBuffer();

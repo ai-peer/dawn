@@ -21,7 +21,7 @@ namespace dawn_native { namespace opengl {
     // Buffer
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
-        : BufferBase(device, descriptor) {
+        : BackendWrapper<BufferBase>(device, descriptor) {
         glGenBuffers(1, &mBuffer);
         glBindBuffer(GL_ARRAY_BUFFER, mBuffer);
         glBufferData(GL_ARRAY_BUFFER, GetSize(), nullptr, GL_STATIC_DRAW);

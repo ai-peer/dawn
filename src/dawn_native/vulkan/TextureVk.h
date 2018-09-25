@@ -18,6 +18,7 @@
 #include "dawn_native/Texture.h"
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/MemoryAllocator.h"
 
 namespace dawn_native { namespace vulkan {
@@ -25,7 +26,7 @@ namespace dawn_native { namespace vulkan {
     VkFormat VulkanImageFormat(dawn::TextureFormat format);
     VkImageUsageFlags VulkanImageUsage(dawn::TextureUsageBit usage, dawn::TextureFormat format);
 
-    class Texture : public TextureBase {
+    class Texture : public BackendWrapper<TextureBase> {
       public:
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage);
@@ -48,7 +49,7 @@ namespace dawn_native { namespace vulkan {
         dawn::TextureUsageBit mLastUsage = dawn::TextureUsageBit::None;
     };
 
-    class TextureView : public TextureViewBase {
+    class TextureView : public BackendWrapper<TextureViewBase> {
       public:
         TextureView(TextureBase* texture);
         ~TextureView();

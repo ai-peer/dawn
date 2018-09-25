@@ -17,15 +17,14 @@
 
 #include "dawn_native/ComputePipeline.h"
 
+#include "dawn_native/opengl/Forward.h"
 #include "dawn_native/opengl/PipelineGL.h"
 
 #include "glad/glad.h"
 
 namespace dawn_native { namespace opengl {
 
-    class Device;
-
-    class ComputePipeline : public ComputePipelineBase, public PipelineGL {
+    class ComputePipeline : public BackendWrapper<ComputePipelineBase>, public PipelineGL {
       public:
         ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor);
 

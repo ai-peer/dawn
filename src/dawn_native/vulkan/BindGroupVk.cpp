@@ -25,7 +25,7 @@
 
 namespace dawn_native { namespace vulkan {
 
-    BindGroup::BindGroup(BindGroupBuilder* builder) : BindGroupBase(builder) {
+    BindGroup::BindGroup(BindGroupBuilder* builder) : BackendWrapper<BindGroupBase>(builder) {
         // Create a pool to hold our descriptor set.
         // TODO(cwallez@chromium.org): This horribly inefficient, find a way to be better, for
         // example by having one pool per bind group layout instead.
@@ -40,7 +40,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.poolSizeCount = numPoolSizes;
         createInfo.pPoolSizes = poolSizes.data();
 
-        Device* device = ToBackend(GetDevice());
+        Device* device = GetDevice();
         if (device->fn.CreateDescriptorPool(device->GetVkDevice(), &createInfo, nullptr, &mPool) !=
             VK_SUCCESS) {
             ASSERT(false);
@@ -126,7 +126,7 @@ namespace dawn_native { namespace vulkan {
         mHandle = VK_NULL_HANDLE;
 
         if (mPool != VK_NULL_HANDLE) {
-            ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mPool);
+            GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mPool);
             mPool = VK_NULL_HANDLE;
         }
     }
