@@ -17,13 +17,13 @@
 
 #include "dawn_native/Buffer.h"
 
+#include "dawn_native/opengl/Forward.h"
+
 #include "glad/glad.h"
 
 namespace dawn_native { namespace opengl {
 
-    class Device;
-
-    class Buffer : public BufferBase {
+    class Buffer : public BackendWrapper<BufferBase> {
       public:
         Buffer(Device* device, const BufferDescriptor* descriptor);
 

@@ -17,13 +17,13 @@
 
 #include "dawn_native/Sampler.h"
 
+#include "dawn_native/opengl/Forward.h"
+
 #include "glad/glad.h"
 
 namespace dawn_native { namespace opengl {
 
-    class Device;
-
-    class Sampler : public SamplerBase {
+    class Sampler : public BackendWrapper<SamplerBase> {
       public:
         Sampler(Device* device, const SamplerDescriptor* descriptor);
 

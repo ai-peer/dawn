@@ -17,13 +17,13 @@
 
 #include "dawn_native/SwapChain.h"
 
+#include "dawn_native/opengl/Forward.h"
+
 #include "glad/glad.h"
 
 namespace dawn_native { namespace opengl {
 
-    class Device;
-
-    class SwapChain : public SwapChainBase {
+    class SwapChain : public BackendWrapper<SwapChainBase> {
       public:
         SwapChain(SwapChainBuilder* builder);
         ~SwapChain();

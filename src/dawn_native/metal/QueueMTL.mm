@@ -19,11 +19,11 @@
 
 namespace dawn_native { namespace metal {
 
-    Queue::Queue(Device* device) : QueueBase(device) {
+    Queue::Queue(Device* device) : BackendWrapper<QueueBase>(device) {
     }
 
     void Queue::SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) {
-        Device* device = ToBackend(GetDevice());
+        Device* device = GetDevice();
         device->Tick();
         id<MTLCommandBuffer> commandBuffer = device->GetPendingCommandBuffer();
 

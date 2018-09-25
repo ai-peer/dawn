@@ -15,13 +15,8 @@
 #ifndef DAWNNATIVE_METAL_FORWARD_H_
 #define DAWNNATIVE_METAL_FORWARD_H_
 
+#include "dawn_native/Forward.h"
 #include "dawn_native/ToBackend.h"
-
-namespace {
-    class BindGroupBase;
-    class BindGroup;
-    class RenderPassDescriptor;
-}  // namespace
 
 namespace dawn_native { namespace metal {
 
@@ -72,6 +67,9 @@ namespace dawn_native { namespace metal {
     auto ToBackend(T&& common) -> decltype(ToBackendBase<MetalBackendTraits>(common)) {
         return ToBackendBase<MetalBackendTraits>(common);
     }
+
+    template <typename T>
+    using BackendWrapper = BackendWrapperBase<T, Device>;
 
 }}  // namespace dawn_native::metal
 

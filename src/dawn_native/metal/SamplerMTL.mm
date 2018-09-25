@@ -50,7 +50,7 @@ namespace dawn_native { namespace metal {
     }
 
     Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
-        : SamplerBase(device, descriptor) {
+        : BackendWrapper<SamplerBase>(device, descriptor) {
         MTLSamplerDescriptor* mtlDesc = [MTLSamplerDescriptor new];
         [mtlDesc autorelease];
         mtlDesc.minFilter = FilterModeToMinMagFilter(descriptor->minFilter);

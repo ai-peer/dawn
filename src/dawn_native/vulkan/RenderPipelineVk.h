@@ -18,12 +18,11 @@
 #include "dawn_native/RenderPipeline.h"
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class Device;
-
-    class RenderPipeline : public RenderPipelineBase {
+    class RenderPipeline : public BackendWrapper<RenderPipelineBase> {
       public:
         RenderPipeline(RenderPipelineBuilder* builder);
         ~RenderPipeline();
@@ -32,7 +31,6 @@ namespace dawn_native { namespace vulkan {
 
       private:
         VkPipeline mHandle = VK_NULL_HANDLE;
-        Device* mDevice = nullptr;
     };
 
 }}  // namespace dawn_native::vulkan
