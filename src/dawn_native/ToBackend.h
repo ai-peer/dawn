@@ -149,6 +149,17 @@ namespace dawn_native {
             common);
     }
 
+    // BackendWrapper helps avoid the ToBackend(GetDevice()) pattern by hiding the frontend
+    // GetDevice with a version that returns the backend device.
+    template <typename Parent, typename BackendDevice>
+    class BackendWrapperBase : public Parent {
+      public:
+        using Parent::Parent;
+        BackendDevice* GetDevice() const {
+            return reinterpret_cast<BackendDevice*>(Parent::GetDevice());
+        }
+    };
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_TOBACKEND_H_

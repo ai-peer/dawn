@@ -22,7 +22,7 @@
 namespace dawn_native { namespace vulkan {
 
     ComputePipeline::ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor)
-        : ComputePipelineBase(device, descriptor) {
+        : BackendWrapper<ComputePipelineBase>(device, descriptor) {
         VkComputePipelineCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
         createInfo.pNext = nullptr;
@@ -47,7 +47,7 @@ namespace dawn_native { namespace vulkan {
 
     ComputePipeline::~ComputePipeline() {
         if (mHandle != VK_NULL_HANDLE) {
-            ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             mHandle = VK_NULL_HANDLE;
         }
     }

@@ -19,7 +19,7 @@
 
 namespace dawn_native { namespace opengl {
 
-    Queue::Queue(Device* device) : QueueBase(device) {
+    Queue::Queue(Device* device) : BackendWrapper<QueueBase>(device) {
     }
 
     void Queue::SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) {

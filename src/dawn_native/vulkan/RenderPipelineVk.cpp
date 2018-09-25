@@ -48,7 +48,7 @@ namespace dawn_native { namespace vulkan {
     }  // anonymous namespace
 
     RenderPipeline::RenderPipeline(RenderPipelineBuilder* builder)
-        : RenderPipelineBase(builder), mDevice(ToBackend(builder->GetDevice())) {
+        : BackendWrapper<RenderPipelineBase>(builder) {
         // Eventually a bunch of the structures that need to be chained in the create info will be
         // held by objects such as the BlendState. They aren't implemented yet so we initialize
         // everything here.
@@ -183,7 +183,7 @@ namespace dawn_native { namespace vulkan {
                                       dawn::LoadOp::Load);
             }
 
-            renderPass = mDevice->GetRenderPassCache()->GetRenderPass(query);
+            renderPass = GetDevice()->GetRenderPassCache()->GetRenderPass(query);
         }
 
         // The create info chains in a bunch of things created on the stack here or inside state
@@ -209,7 +209,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.basePipelineHandle = VK_NULL_HANDLE;
         createInfo.basePipelineIndex = -1;
 
-        if (mDevice->fn.CreateGraphicsPipelines(mDevice->GetVkDevice(), VK_NULL_HANDLE, 1,
+        if (GetDevice()->fn.CreateGraphicsPipelines(GetDevice()->GetVkDevice(), VK_NULL_HANDLE, 1,
                                                 &createInfo, nullptr, &mHandle) != VK_SUCCESS) {
             ASSERT(false);
         }
@@ -217,7 +217,7 @@ namespace dawn_native { namespace vulkan {
 
     RenderPipeline::~RenderPipeline() {
         if (mHandle != VK_NULL_HANDLE) {
-            mDevice->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             mHandle = VK_NULL_HANDLE;
         }
     }

@@ -18,10 +18,11 @@
 #include "dawn_native/SwapChain.h"
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class SwapChain : public SwapChainBase {
+    class SwapChain : public BackendWrapper<SwapChainBase> {
       public:
         SwapChain(SwapChainBuilder* builder);
         ~SwapChain();
