@@ -234,7 +234,7 @@ namespace dawn_native { namespace d3d12 {
     }  // anonymous namespace
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
-        : CommandBufferBase(builder),
+        : BackendWrapper<CommandBufferBase>(builder),
           mCommands(builder->AcquireCommands()),
           mPassResourceUsages(builder->AcquirePassResourceUsage()) {
     }
@@ -245,7 +245,7 @@ namespace dawn_native { namespace d3d12 {
 
     void CommandBuffer::RecordCommands(ComPtr<ID3D12GraphicsCommandList> commandList,
                                        uint32_t indexInSubmit) {
-        Device* device = ToBackend(GetDevice());
+        Device* device = GetDevice();
         BindGroupStateTracker bindingTracker(device);
 
         // Precompute the allocation of bindgroups in descriptor heaps

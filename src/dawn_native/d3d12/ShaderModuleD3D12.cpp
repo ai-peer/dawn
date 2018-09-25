@@ -46,7 +46,7 @@ namespace dawn_native { namespace d3d12 {
     };
 
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
-        : ShaderModuleBase(device, descriptor) {
+        : BackendWrapper<ShaderModuleBase>(device, descriptor) {
         spirv_cross::CompilerHLSL compiler(descriptor->code, descriptor->codeSize);
 
         spirv_cross::CompilerGLSL::Options options_glsl;

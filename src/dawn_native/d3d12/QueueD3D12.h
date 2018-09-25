@@ -18,13 +18,11 @@
 #include "dawn_native/Queue.h"
 
 #include "dawn_native/d3d12/d3d12_platform.h"
+#include "dawn_native/d3d12/Forward.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-    class CommandBuffer;
-
-    class Queue : public QueueBase {
+    class Queue : public BackendWrapper<QueueBase> {
       public:
         Queue(Device* device);
 

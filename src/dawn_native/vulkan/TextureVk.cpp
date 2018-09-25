@@ -240,7 +240,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
-        : TextureBase(device, descriptor) {
+        : BackendWrapper<TextureBase>(device, descriptor) {
         // Create the Vulkan image "container". We don't need to check that the format supports the
         // combination of sample, usage etc. because validation should have been done in the Dawn
         // frontend already based on the minimum supported formats in the Vulkan spec
@@ -282,20 +282,18 @@ namespace dawn_native { namespace vulkan {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage)
-        : TextureBase(device, descriptor), mHandle(nativeImage) {
+        : BackendWrapper<TextureBase>(device, descriptor), mHandle(nativeImage) {
     }
 
     Texture::~Texture() {
-        Device* device = ToBackend(GetDevice());
-
         // If we own the resource, release it.
         if (mMemoryAllocation.GetMemory() != VK_NULL_HANDLE) {
             // We need to free both the memory allocation and the container. Memory should be freed
             // after the VkImage is destroyed and this is taken care of by the FencedDeleter.
-            device->GetMemoryAllocator()->Free(&mMemoryAllocation);
+            GetDevice()->GetMemoryAllocator()->Free(&mMemoryAllocation);
 
             if (mHandle != VK_NULL_HANDLE) {
-                device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+                GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             }
         }
         mHandle = VK_NULL_HANDLE;
@@ -339,16 +337,13 @@ namespace dawn_native { namespace vulkan {
         barrier.subresourceRange.baseArrayLayer = 0;
         barrier.subresourceRange.layerCount = GetArrayLayers();
 
-        ToBackend(GetDevice())
-            ->fn.CmdPipelineBarrier(commands, srcStages, dstStages, 0, 0, nullptr, 0, nullptr, 1,
-                                    &barrier);
+        GetDevice()->fn.CmdPipelineBarrier(commands, srcStages, dstStages, 0, 0, nullptr, 0,
+                                           nullptr, 1, &barrier);
 
         mLastUsage = usage;
     }
 
-    TextureView::TextureView(TextureBase* texture) : TextureViewBase(texture) {
-        Device* device = ToBackend(texture->GetDevice());
-
+    TextureView::TextureView(TextureBase* texture) : BackendWrapper<TextureViewBase>(texture) {
         VkImageViewCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
         createInfo.pNext = nullptr;
@@ -364,17 +359,15 @@ namespace dawn_native { namespace vulkan {
         createInfo.subresourceRange.baseArrayLayer = 0;
         createInfo.subresourceRange.layerCount = GetTexture()->GetArrayLayers();
 
-        if (device->fn.CreateImageView(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
-            VK_SUCCESS) {
+        if (GetDevice()->fn.CreateImageView(GetDevice()->GetVkDevice(), &createInfo, nullptr,
+                                            &mHandle) != VK_SUCCESS) {
             ASSERT(false);
         }
     }
 
     TextureView::~TextureView() {
-        Device* device = ToBackend(GetTexture()->GetDevice());
-
         if (mHandle != VK_NULL_HANDLE) {
-            device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             mHandle = VK_NULL_HANDLE;
         }
     }

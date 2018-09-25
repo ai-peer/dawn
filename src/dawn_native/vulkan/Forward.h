@@ -17,10 +17,6 @@
 
 #include "dawn_native/ToBackend.h"
 
-namespace dawn_native {
-    class BufferViewBase;
-}
-
 namespace dawn_native { namespace vulkan {
 
     class BindGroup;
@@ -69,6 +65,9 @@ namespace dawn_native { namespace vulkan {
     auto ToBackend(T&& common) -> decltype(ToBackendBase<VulkanBackendTraits>(common)) {
         return ToBackendBase<VulkanBackendTraits>(common);
     }
+
+    template <typename T>
+    using BackendWrapper = BackendWrapperBase<T, Device>;
 
 }}  // namespace dawn_native::vulkan
 

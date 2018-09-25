@@ -17,9 +17,11 @@
 
 #include "dawn_native/SwapChain.h"
 
+#include "dawn_native/d3d12/Forward.h"
+
 namespace dawn_native { namespace d3d12 {
 
-    class SwapChain : public SwapChainBase {
+    class SwapChain : public BackendWrapper<SwapChainBase> {
       public:
         SwapChain(SwapChainBuilder* builder);
         ~SwapChain();

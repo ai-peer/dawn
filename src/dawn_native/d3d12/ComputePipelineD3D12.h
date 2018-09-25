@@ -18,12 +18,11 @@
 #include "dawn_native/ComputePipeline.h"
 
 #include "dawn_native/d3d12/d3d12_platform.h"
+#include "dawn_native/d3d12/Forward.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class ComputePipeline : public ComputePipelineBase {
+    class ComputePipeline : public BackendWrapper<ComputePipelineBase> {
       public:
         ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor);
         ~ComputePipeline();

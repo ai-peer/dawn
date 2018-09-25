@@ -23,7 +23,7 @@
 namespace dawn_native { namespace d3d12 {
 
     ComputePipeline::ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor)
-        : ComputePipelineBase(device, descriptor) {
+        : BackendWrapper<ComputePipelineBase>(device, descriptor) {
         uint32_t compileFlags = 0;
 #if defined(_DEBUG)
         // Enable better shader debugging with the graphics debugging tools.
@@ -56,7 +56,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ComputePipeline::~ComputePipeline() {
-        ToBackend(GetDevice())->ReferenceUntilUnused(mPipelineState);
+        GetDevice()->ReferenceUntilUnused(mPipelineState);
     }
 
     ComPtr<ID3D12PipelineState> ComputePipeline::GetPipelineState() {

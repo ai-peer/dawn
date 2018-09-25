@@ -18,12 +18,11 @@
 #include "dawn_native/ShaderModule.h"
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class Device;
-
-    class ShaderModule : public ShaderModuleBase {
+    class ShaderModule : public BackendWrapper<ShaderModuleBase> {
       public:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule();

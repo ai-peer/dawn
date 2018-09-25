@@ -16,6 +16,7 @@
 #include "common/BitSetIterator.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/BufferD3D12.h"
+#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 
@@ -23,7 +24,7 @@
 
 namespace dawn_native { namespace d3d12 {
 
-    BindGroup::BindGroup(BindGroupBuilder* builder) : BindGroupBase(builder) {
+    BindGroup::BindGroup(BindGroupBuilder* builder) : BackendWrapper<BindGroupBase>(builder) {
     }
 
     void BindGroup::RecordDescriptors(const DescriptorHeapHandle& cbvUavSrvHeapStart,
@@ -44,7 +45,7 @@ namespace dawn_native { namespace d3d12 {
 
         const auto& bindingOffsets = bgl->GetBindingOffsets();
 
-        auto d3d12Device = ToBackend(GetDevice())->GetD3D12Device();
+        auto d3d12Device = GetDevice()->GetD3D12Device();
         for (uint32_t binding : IterateBitSet(layout.mask)) {
             switch (layout.types[binding]) {
                 case dawn::BindingType::UniformBuffer: {

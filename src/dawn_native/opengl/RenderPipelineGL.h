@@ -17,17 +17,16 @@
 
 #include "dawn_native/RenderPipeline.h"
 
+#include "dawn_native/opengl/Forward.h"
 #include "dawn_native/opengl/PipelineGL.h"
 
 #include "glad/glad.h"
-
-#include <vector>
 
 namespace dawn_native { namespace opengl {
 
     class PersistentPipelineState;
 
-    class RenderPipeline : public RenderPipelineBase, public PipelineGL {
+    class RenderPipeline : public BackendWrapper<RenderPipelineBase>, public PipelineGL {
       public:
         RenderPipeline(RenderPipelineBuilder* builder);
 

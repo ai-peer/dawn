@@ -17,12 +17,11 @@
 
 #include "dawn_native/Queue.h"
 
+#include "dawn_native/opengl/Forward.h"
+
 namespace dawn_native { namespace opengl {
 
-    class CommandBuffer;
-    class Device;
-
-    class Queue : public QueueBase {
+    class Queue : public BackendWrapper<QueueBase> {
       public:
         Queue(Device* device);
 

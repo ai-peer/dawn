@@ -18,14 +18,13 @@
 #include "dawn_native/BindGroup.h"
 
 #include "dawn_native/d3d12/d3d12_platform.h"
-
-#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
+#include "dawn_native/d3d12/Forward.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
+    class DescriptorHeapHandle;
 
-    class BindGroup : public BindGroupBase {
+    class BindGroup : public BackendWrapper<BindGroupBase> {
       public:
         BindGroup(BindGroupBuilder* builder);
 

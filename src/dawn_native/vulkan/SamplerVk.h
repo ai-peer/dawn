@@ -18,11 +18,11 @@
 #include "dawn_native/Sampler.h"
 
 #include "common/vulkan_platform.h"
-#include "dawn_native/vulkan/MemoryAllocator.h"
+#include "dawn_native/vulkan/Forward.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class Sampler : public SamplerBase {
+    class Sampler : public BackendWrapper<SamplerBase> {
       public:
         Sampler(Device* device, const SamplerDescriptor* descriptor);
         ~Sampler();
@@ -31,7 +31,6 @@ namespace dawn_native { namespace vulkan {
 
       private:
         VkSampler mHandle = VK_NULL_HANDLE;
-        Device* mDevice = nullptr;
     };
 
 }}  // namespace dawn_native::vulkan

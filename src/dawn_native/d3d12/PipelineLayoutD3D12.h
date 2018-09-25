@@ -18,12 +18,11 @@
 #include "dawn_native/PipelineLayout.h"
 
 #include "dawn_native/d3d12/d3d12_platform.h"
+#include "dawn_native/d3d12/Forward.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class PipelineLayout : public PipelineLayoutBase {
+    class PipelineLayout : public BackendWrapper<PipelineLayoutBase> {
       public:
         PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor);
 

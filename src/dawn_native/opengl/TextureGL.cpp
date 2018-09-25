@@ -74,7 +74,7 @@ namespace dawn_native { namespace opengl {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle)
-        : TextureBase(device, descriptor), mHandle(handle) {
+        : BackendWrapper<TextureBase>(device, descriptor), mHandle(handle) {
         mTarget = TargetForDimensionAndArrayLayers(GetDimension(), GetArrayLayers());
 
         uint32_t width = GetSize().width;
@@ -125,11 +125,6 @@ namespace dawn_native { namespace opengl {
 
     TextureFormatInfo Texture::GetGLFormat() const {
         return GetGLFormatInfo(GetFormat());
-    }
-
-    // TextureView
-
-    TextureView::TextureView(TextureBase* texture) : TextureViewBase(texture) {
     }
 
 }}  // namespace dawn_native::opengl
