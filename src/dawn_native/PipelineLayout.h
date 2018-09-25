@@ -47,10 +47,7 @@ namespace dawn_native {
         // [1, kMaxBindGroups + 1]
         uint32_t GroupsInheritUpTo(const PipelineLayoutBase* other) const;
 
-        DeviceBase* GetDevice() const;
-
       protected:
-        DeviceBase* mDevice;
         BindGroupLayoutArray mBindGroupLayouts;
         std::bitset<kMaxBindGroups> mMask;
     };

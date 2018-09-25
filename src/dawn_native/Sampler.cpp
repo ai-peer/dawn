@@ -34,7 +34,7 @@ namespace dawn_native {
 
     // SamplerBase
 
-    SamplerBase::SamplerBase(DeviceBase*, const SamplerDescriptor*) {
+    SamplerBase::SamplerBase(DeviceBase* device, const SamplerDescriptor*) : RefCounted(device) {
     }
 
 }  // namespace dawn_native

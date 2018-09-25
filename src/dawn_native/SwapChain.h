@@ -29,8 +29,6 @@ namespace dawn_native {
         SwapChainBase(SwapChainBuilder* builder);
         ~SwapChainBase();
 
-        DeviceBase* GetDevice();
-
         // Dawn API
         void Configure(dawn::TextureFormat format,
                        dawn::TextureUsageBit allowedUsage,
@@ -45,7 +43,6 @@ namespace dawn_native {
         virtual void OnBeforePresent(TextureBase* texture) = 0;
 
       private:
-        DeviceBase* mDevice = nullptr;
         dawnSwapChainImplementation mImplementation = {};
         dawn::TextureFormat mFormat = {};
         dawn::TextureUsageBit mAllowedUsage;

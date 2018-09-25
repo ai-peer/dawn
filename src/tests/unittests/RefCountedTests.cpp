@@ -19,10 +19,10 @@
 using namespace dawn_native;
 
 struct RCTest : public RefCounted {
-    RCTest() {
+    RCTest() : RefCounted(nullptr) {
     }
 
-    RCTest(bool* deleted): deleted(deleted) {
+    RCTest(bool* deleted) : RefCounted(nullptr), deleted(deleted) {
     }
 
     ~RCTest() override {
