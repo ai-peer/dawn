@@ -17,6 +17,8 @@
 
 #include "dawn_native/Texture.h"
 
+#include "dawn_native/metal/Forward.h"
+
 #import <Metal/Metal.h>
 
 namespace dawn_native { namespace metal {
@@ -25,7 +27,7 @@ namespace dawn_native { namespace metal {
 
     MTLPixelFormat MetalPixelFormat(dawn::TextureFormat format);
 
-    class Texture : public TextureBase {
+    class Texture : public BackendWrapper<TextureBase> {
       public:
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, id<MTLTexture> mtlTexture);

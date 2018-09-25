@@ -18,6 +18,7 @@
 #include "dawn_native/PipelineLayout.h"
 
 #include "dawn_native/PerStage.h"
+#include "dawn_native/metal/Forward.h"
 
 #import <Metal/Metal.h>
 
@@ -29,7 +30,7 @@ namespace dawn_native { namespace metal {
 
     class Device;
 
-    class PipelineLayout : public PipelineLayoutBase {
+    class PipelineLayout : public BackendWrapper<PipelineLayoutBase> {
       public:
         PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor);
 

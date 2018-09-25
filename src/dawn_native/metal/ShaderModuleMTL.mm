@@ -41,7 +41,7 @@ namespace dawn_native { namespace metal {
     }
 
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
-        : ShaderModuleBase(device, descriptor) {
+        : BackendWrapper<ShaderModuleBase>(device, descriptor) {
         mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
         spirv_cross::CompilerMSL compiler(mSpirv);
         ExtractSpirvInfo(compiler);
@@ -104,7 +104,7 @@ namespace dawn_native { namespace metal {
             std::string msl = compiler.compile(nullptr, &mslBindings);
             NSString* mslSource = [NSString stringWithFormat:@"%s", msl.c_str()];
 
-            auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
+            auto mtlDevice = GetDevice()->GetMTLDevice();
             NSError* error = nil;
             id<MTLLibrary> library = [mtlDevice newLibraryWithSource:mslSource
                                                              options:nil
