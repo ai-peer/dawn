@@ -66,6 +66,9 @@ namespace dawn_native { namespace d3d12 {
         return ToBackendBase<D3D12BackendTraits>(common);
     }
 
+    template <typename T>
+    using BackendWrapper = BackendWrapperBase<T, Device>;
+
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_FORWARD_H_

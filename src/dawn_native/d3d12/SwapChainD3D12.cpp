@@ -21,7 +21,7 @@
 
 namespace dawn_native { namespace d3d12 {
 
-    SwapChain::SwapChain(SwapChainBuilder* builder) : SwapChainBase(builder) {
+    SwapChain::SwapChain(SwapChainBuilder* builder) : BackendWrapper<SwapChainBase>(builder) {
         const auto& im = GetImplementation();
         dawnWSIContextD3D12 wsiContext = {};
         wsiContext.device = reinterpret_cast<dawnDevice>(GetDevice());
@@ -44,16 +44,14 @@ namespace dawn_native { namespace d3d12 {
         }
 
         ID3D12Resource* nativeTexture = reinterpret_cast<ID3D12Resource*>(next.texture.ptr);
-        return new Texture(ToBackend(GetDevice()), descriptor, nativeTexture);
+        return new Texture(GetDevice(), descriptor, nativeTexture);
     }
 
     void SwapChain::OnBeforePresent(TextureBase* texture) {
-        Device* device = ToBackend(GetDevice());
-
         // Perform the necessary transition for the texture to be presented.
-        ToBackend(texture)->TransitionUsageNow(device->GetPendingCommandList(), mTextureUsage);
+        ToBackend(texture)->TransitionUsageNow(GetDevice()->GetPendingCommandList(), mTextureUsage);
 
-        device->ExecuteCommandLists({});
+        GetDevice()->ExecuteCommandLists({});
     }
 
 }}  // namespace dawn_native::d3d12

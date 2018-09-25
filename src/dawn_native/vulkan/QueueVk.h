@@ -17,12 +17,11 @@
 
 #include "dawn_native/Queue.h"
 
+#include "dawn_native/vulkan/Forward.h"
+
 namespace dawn_native { namespace vulkan {
 
-    class CommandBuffer;
-    class Device;
-
-    class Queue : public QueueBase {
+    class Queue : public BackendWrapper<QueueBase> {
       public:
         Queue(Device* device);
         ~Queue();

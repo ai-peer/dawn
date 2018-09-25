@@ -20,8 +20,8 @@
 namespace dawn_native { namespace metal {
 
     ComputePipeline::ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor)
-        : ComputePipelineBase(device, descriptor) {
-        auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
+        : BackendWrapper<ComputePipelineBase>(device, descriptor) {
+        auto mtlDevice = GetDevice()->GetMTLDevice();
 
         const auto& module = ToBackend(descriptor->module);
         const char* entryPoint = descriptor->entryPoint;

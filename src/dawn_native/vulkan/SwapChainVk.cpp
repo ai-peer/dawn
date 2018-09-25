@@ -19,7 +19,7 @@
 
 namespace dawn_native { namespace vulkan {
 
-    SwapChain::SwapChain(SwapChainBuilder* builder) : SwapChainBase(builder) {
+    SwapChain::SwapChain(SwapChainBuilder* builder) : BackendWrapper<SwapChainBase>(builder) {
         const auto& im = GetImplementation();
         dawnWSIContextVulkan wsiContext = {};
         im.Init(im.userData, &wsiContext);
@@ -42,18 +42,16 @@ namespace dawn_native { namespace vulkan {
         }
 
         VkImage nativeTexture = VkImage::CreateFromU64(next.texture.u64);
-        return new Texture(ToBackend(GetDevice()), descriptor, nativeTexture);
+        return new Texture(GetDevice(), descriptor, nativeTexture);
     }
 
     void SwapChain::OnBeforePresent(TextureBase* texture) {
-        Device* device = ToBackend(GetDevice());
-
         // Perform the necessary pipeline barriers for the texture to be used with the usage
         // requested by the implementation.
-        VkCommandBuffer commands = device->GetPendingCommandBuffer();
+        VkCommandBuffer commands = GetDevice()->GetPendingCommandBuffer();
         ToBackend(texture)->TransitionUsageNow(commands, mTextureUsage);
 
-        device->SubmitPendingCommands();
+        GetDevice()->SubmitPendingCommands();
     }
 
 }}  // namespace dawn_native::vulkan

@@ -17,6 +17,7 @@
 
 #include "dawn_native/Texture.h"
 
+#include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -25,7 +26,7 @@ namespace dawn_native { namespace d3d12 {
 
     DXGI_FORMAT D3D12TextureFormat(dawn::TextureFormat format);
 
-    class Texture : public TextureBase {
+    class Texture : public BackendWrapper<TextureBase> {
       public:
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, ID3D12Resource* nativeTexture);
@@ -45,7 +46,7 @@ namespace dawn_native { namespace d3d12 {
         dawn::TextureUsageBit mLastUsage = dawn::TextureUsageBit::None;
     };
 
-    class TextureView : public TextureViewBase {
+    class TextureView : public BackendWrapper<TextureViewBase> {
       public:
         TextureView(TextureBase* builder);
 

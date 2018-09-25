@@ -68,7 +68,7 @@ namespace dawn_native { namespace d3d12 {
     }  // namespace
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
-        : BufferBase(device, descriptor) {
+        : BackendWrapper<BufferBase>(device, descriptor) {
         D3D12_RESOURCE_DESC resourceDescriptor;
         resourceDescriptor.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
         resourceDescriptor.Alignment = 0;
@@ -106,7 +106,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Buffer::~Buffer() {
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
+        GetDevice()->GetResourceAllocator()->Release(mResource);
     }
 
     uint32_t Buffer::GetD3D12Size() const {
@@ -162,10 +162,8 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void Buffer::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
-        Device* device = ToBackend(GetDevice());
-
-        TransitionUsageNow(device->GetPendingCommandList(), dawn::BufferUsageBit::TransferDst);
-        device->GetResourceUploader()->BufferSubData(mResource, start, count, data);
+        TransitionUsageNow(GetDevice()->GetPendingCommandList(), dawn::BufferUsageBit::TransferDst);
+        GetDevice()->GetResourceUploader()->BufferSubData(mResource, start, count, data);
     }
 
     void Buffer::MapReadAsyncImpl(uint32_t serial, uint32_t start, uint32_t count) {
@@ -175,7 +173,7 @@ namespace dawn_native { namespace d3d12 {
 
         // There is no need to transition the resource to a new state: D3D12 seems to make the GPU
         // writes available when the fence is passed.
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
+        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
         tracker->Track(this, serial, data + start, false);
     }
 
@@ -186,7 +184,7 @@ namespace dawn_native { namespace d3d12 {
 
         // There is no need to transition the resource to a new state: D3D12 seems to make the CPU
         // writes available on queue submission.
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
+        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
         tracker->Track(this, serial, data + start, true);
     }
 
@@ -195,10 +193,10 @@ namespace dawn_native { namespace d3d12 {
         // modified
         D3D12_RANGE writeRange = {};
         mResource->Unmap(0, &writeRange);
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
+        GetDevice()->GetResourceAllocator()->Release(mResource);
     }
 
-    BufferView::BufferView(BufferViewBuilder* builder) : BufferViewBase(builder) {
+    BufferView::BufferView(BufferViewBuilder* builder) : BackendWrapper<BufferViewBase>(builder) {
         mCbvDesc.BufferLocation = ToBackend(GetBuffer())->GetVA() + GetOffset();
         mCbvDesc.SizeInBytes = GetD3D12Size();
 

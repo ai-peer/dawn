@@ -22,7 +22,7 @@
 namespace dawn_native { namespace vulkan {
 
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
-        : ShaderModuleBase(device, descriptor) {
+        : BackendWrapper<ShaderModuleBase>(device, descriptor) {
         // Use SPIRV-Cross to extract info from the SPIRV even if Vulkan consumes SPIRV. We want to
         // have a translation step eventually anyway.
         spirv_cross::Compiler compiler(descriptor->code, descriptor->codeSize);
@@ -42,10 +42,8 @@ namespace dawn_native { namespace vulkan {
     }
 
     ShaderModule::~ShaderModule() {
-        Device* device = ToBackend(GetDevice());
-
         if (mHandle != VK_NULL_HANDLE) {
-            device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             mHandle = VK_NULL_HANDLE;
         }
     }

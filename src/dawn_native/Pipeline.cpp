@@ -27,14 +27,13 @@ namespace dawn_native {
     PipelineBase::PipelineBase(DeviceBase* device,
                                PipelineLayoutBase* layout,
                                dawn::ShaderStageBit stages)
-        : ObjectBase(device), mStageMask(stages), mLayout(layout), mDevice(device) {
+        : ObjectBase(device), mStageMask(stages), mLayout(layout) {
     }
 
     PipelineBase::PipelineBase(DeviceBase* device, PipelineBuilder* builder)
         : ObjectBase(device),
           mStageMask(builder->mStageMask),
-          mLayout(std::move(builder->mLayout)),
-          mDevice(device) {
+          mLayout(std::move(builder->mLayout)) {
         if (!mLayout) {
             PipelineLayoutDescriptor descriptor;
             descriptor.numBindGroupLayouts = 0;
@@ -84,10 +83,6 @@ namespace dawn_native {
 
     PipelineLayoutBase* PipelineBase::GetLayout() {
         return mLayout.Get();
-    }
-
-    DeviceBase* PipelineBase::GetDevice() const {
-        return mDevice;
     }
 
     // PipelineBuilder

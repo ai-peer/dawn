@@ -15,16 +15,15 @@
 #ifndef DAWNNATIVE_D3D12_BUFFERD3D12_H_
 #define DAWNNATIVE_D3D12_BUFFERD3D12_H_
 
-#include "common/SerialQueue.h"
 #include "dawn_native/Buffer.h"
 
+#include "common/SerialQueue.h"
+#include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class Buffer : public BufferBase {
+    class Buffer : public BackendWrapper<BufferBase> {
       public:
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
@@ -49,7 +48,7 @@ namespace dawn_native { namespace d3d12 {
         dawn::BufferUsageBit mLastUsage = dawn::BufferUsageBit::None;
     };
 
-    class BufferView : public BufferViewBase {
+    class BufferView : public BackendWrapper<BufferViewBase> {
       public:
         BufferView(BufferViewBuilder* builder);
 

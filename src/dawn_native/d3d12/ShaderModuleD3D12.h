@@ -17,11 +17,11 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include "dawn_native/d3d12/Forward.h"
+
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class ShaderModule : public ShaderModuleBase {
+    class ShaderModule : public BackendWrapper<ShaderModuleBase> {
       public:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
 

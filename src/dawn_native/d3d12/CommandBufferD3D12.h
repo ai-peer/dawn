@@ -15,19 +15,17 @@
 #ifndef DAWNNATIVE_D3D12_COMMANDBUFFERD3D12_H_
 #define DAWNNATIVE_D3D12_COMMANDBUFFERD3D12_H_
 
-#include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 
+#include "dawn_native/CommandAllocator.h"
+#include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-    class RenderPassDescriptor;
-
     struct BindGroupStateTracker;
 
-    class CommandBuffer : public CommandBufferBase {
+    class CommandBuffer : public BackendWrapper<CommandBufferBase> {
       public:
         CommandBuffer(CommandBufferBuilder* builder);
         ~CommandBuffer();

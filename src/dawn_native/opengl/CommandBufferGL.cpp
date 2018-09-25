@@ -283,7 +283,7 @@ namespace dawn_native { namespace opengl {
     }  // namespace
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
-        : CommandBufferBase(builder), mCommands(builder->AcquireCommands()) {
+        : BackendWrapper<CommandBufferBase>(builder), mCommands(builder->AcquireCommands()) {
     }
 
     CommandBuffer::~CommandBuffer() {

@@ -17,12 +17,6 @@
 
 #include "dawn_native/ToBackend.h"
 
-namespace {
-    class BindGroupBase;
-    class BindGroup;
-    class RenderPassDescriptor;
-}  // namespace
-
 namespace dawn_native { namespace opengl {
 
     using BindGroup = BindGroupBase;
@@ -44,7 +38,7 @@ namespace dawn_native { namespace opengl {
     class ShaderModule;
     class SwapChain;
     class Texture;
-    class TextureView;
+    using TextureView = TextureViewBase;
 
     struct OpenGLBackendTraits {
         using BindGroupType = BindGroup;
@@ -72,6 +66,9 @@ namespace dawn_native { namespace opengl {
     auto ToBackend(T&& common) -> decltype(ToBackendBase<OpenGLBackendTraits>(common)) {
         return ToBackendBase<OpenGLBackendTraits>(common);
     }
+
+    template <typename T>
+    using BackendWrapper = BackendWrapperBase<T, Device>;
 
 }}  // namespace dawn_native::opengl
 

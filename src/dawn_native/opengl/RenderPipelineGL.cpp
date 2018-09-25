@@ -42,7 +42,7 @@ namespace dawn_native { namespace opengl {
     }  // namespace
 
     RenderPipeline::RenderPipeline(RenderPipelineBuilder* builder)
-        : RenderPipelineBase(builder),
+        : BackendWrapper<RenderPipelineBase>(builder),
           mGlPrimitiveTopology(GLPrimitiveTopology(GetPrimitiveTopology())) {
         PerStage<const ShaderModule*> modules(nullptr);
         for (dawn::ShaderStage stage : IterateStages(GetStageMask())) {

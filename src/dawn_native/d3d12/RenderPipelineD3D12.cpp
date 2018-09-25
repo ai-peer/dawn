@@ -64,9 +64,8 @@ namespace dawn_native { namespace d3d12 {
     }  // namespace
 
     RenderPipeline::RenderPipeline(RenderPipelineBuilder* builder)
-        : RenderPipelineBase(builder),
-          mD3d12PrimitiveTopology(D3D12PrimitiveTopology(GetPrimitiveTopology())),
-          mDevice(ToBackend(builder->GetDevice())) {
+        : BackendWrapper<RenderPipelineBase>(builder),
+          mD3d12PrimitiveTopology(D3D12PrimitiveTopology(GetPrimitiveTopology())) {
         uint32_t compileFlags = 0;
 #if defined(_DEBUG)
         // Enable better shader debugging with the graphics debugging tools.
@@ -165,7 +164,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     RenderPipeline::~RenderPipeline() {
-        mDevice->ReferenceUntilUnused(mPipelineState);
+        GetDevice()->ReferenceUntilUnused(mPipelineState);
     }
 
     D3D12_PRIMITIVE_TOPOLOGY RenderPipeline::GetD3D12PrimitiveTopology() const {

@@ -19,11 +19,11 @@
 
 namespace dawn_native { namespace d3d12 {
 
-    Queue::Queue(Device* device) : QueueBase(device) {
+    Queue::Queue(Device* device) : BackendWrapper<QueueBase>(device) {
     }
 
     void Queue::SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) {
-        Device* device = ToBackend(GetDevice());
+        Device* device = GetDevice();
 
         device->Tick();
 

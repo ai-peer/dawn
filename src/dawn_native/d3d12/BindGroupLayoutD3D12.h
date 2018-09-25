@@ -17,13 +17,12 @@
 
 #include "dawn_native/BindGroupLayout.h"
 
+#include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class BindGroupLayout : public BindGroupLayoutBase {
+    class BindGroupLayout : public BackendWrapper<BindGroupLayoutBase> {
       public:
         BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor);
 

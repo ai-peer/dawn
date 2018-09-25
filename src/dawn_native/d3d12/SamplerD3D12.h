@@ -17,13 +17,12 @@
 
 #include "dawn_native/Sampler.h"
 
+#include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class Sampler : public SamplerBase {
+    class Sampler : public BackendWrapper<SamplerBase> {
       public:
         Sampler(Device* device, const SamplerDescriptor* descriptor);
 

@@ -108,7 +108,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
-        : TextureBase(device, descriptor) {
+        : BackendWrapper<TextureBase>(device, descriptor) {
         D3D12_RESOURCE_DESC resourceDescriptor;
         resourceDescriptor.Dimension = D3D12TextureDimension(GetDimension());
         resourceDescriptor.Alignment = 0;
@@ -125,10 +125,8 @@ namespace dawn_native { namespace d3d12 {
         resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
         resourceDescriptor.Flags = D3D12ResourceFlags(GetUsage(), GetFormat());
 
-        mResource = ToBackend(GetDevice())
-                        ->GetResourceAllocator()
-                        ->Allocate(D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor,
-                                   D3D12_RESOURCE_STATE_COMMON);
+        mResource = device->GetResourceAllocator()->Allocate(
+            D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor, D3D12_RESOURCE_STATE_COMMON);
         mResourcePtr = mResource.Get();
     }
 
@@ -136,13 +134,13 @@ namespace dawn_native { namespace d3d12 {
     Texture::Texture(Device* device,
                      const TextureDescriptor* descriptor,
                      ID3D12Resource* nativeTexture)
-        : TextureBase(device, descriptor), mResourcePtr(nativeTexture) {
+        : BackendWrapper<TextureBase>(device, descriptor), mResourcePtr(nativeTexture) {
     }
 
     Texture::~Texture() {
         if (mResource) {
             // If we own the resource, release it.
-            ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
+            GetDevice()->GetResourceAllocator()->Release(mResource);
         }
     }
 
@@ -187,7 +185,7 @@ namespace dawn_native { namespace d3d12 {
         mLastUsage = usage;
     }
 
-    TextureView::TextureView(TextureBase* texture) : TextureViewBase(texture) {
+    TextureView::TextureView(TextureBase* texture) : BackendWrapper<TextureViewBase>(texture) {
         mSrvDesc.Format = D3D12TextureFormat(GetTexture()->GetFormat());
         mSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
         switch (GetTexture()->GetDimension()) {

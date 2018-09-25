@@ -50,7 +50,6 @@ namespace dawn_native {
         dawn::ShaderStageBit GetStageMask() const;
 
         PipelineLayoutBase* GetLayout();
-        DeviceBase* GetDevice() const;
 
       protected:
         void ExtractModuleData(dawn::ShaderStage stage, ShaderModuleBase* module);
@@ -59,7 +58,6 @@ namespace dawn_native {
         dawn::ShaderStageBit mStageMask;
         Ref<PipelineLayoutBase> mLayout;
         PerStage<PushConstantInfo> mPushConstants;
-        DeviceBase* mDevice;
     };
 
     class PipelineBuilder {

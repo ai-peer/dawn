@@ -17,13 +17,12 @@
 
 #include "dawn_native/RenderPipeline.h"
 
+#include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class RenderPipeline : public RenderPipelineBase {
+    class RenderPipeline : public BackendWrapper<RenderPipelineBase> {
       public:
         RenderPipeline(RenderPipelineBuilder* builder);
         ~RenderPipeline();
@@ -34,8 +33,6 @@ namespace dawn_native { namespace d3d12 {
       private:
         D3D12_PRIMITIVE_TOPOLOGY mD3d12PrimitiveTopology;
         ComPtr<ID3D12PipelineState> mPipelineState;
-
-        Device* mDevice = nullptr;
     };
 
 }}  // namespace dawn_native::d3d12

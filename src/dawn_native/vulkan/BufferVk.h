@@ -19,13 +19,12 @@
 
 #include "common/SerialQueue.h"
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/MemoryAllocator.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class Device;
-
-    class Buffer : public BufferBase {
+    class Buffer : public BackendWrapper<BufferBase> {
       public:
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();

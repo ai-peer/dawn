@@ -18,12 +18,11 @@
 #include "dawn_native/CommandBuffer.h"
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class RenderPassDescriptor;
-
-    class CommandBuffer : public CommandBufferBase {
+    class CommandBuffer : public BackendWrapper<CommandBufferBase> {
       public:
         CommandBuffer(CommandBufferBuilder* builder);
         ~CommandBuffer();

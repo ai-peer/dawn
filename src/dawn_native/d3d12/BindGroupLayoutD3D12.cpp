@@ -20,7 +20,7 @@
 namespace dawn_native { namespace d3d12 {
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
-        : BindGroupLayoutBase(device, descriptor), mDescriptorCounts{} {
+        : BackendWrapper<BindGroupLayoutBase>(device, descriptor), mDescriptorCounts{} {
         const auto& groupInfo = GetBindingInfo();
 
         for (uint32_t binding : IterateBitSet(groupInfo.mask)) {

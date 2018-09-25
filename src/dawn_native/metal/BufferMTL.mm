@@ -20,7 +20,7 @@
 namespace dawn_native { namespace metal {
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
-        : BufferBase(device, descriptor) {
+        : BackendWrapper<BufferBase>(device, descriptor) {
         MTLResourceOptions storageMode;
         if (GetUsage() & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) {
             storageMode = MTLResourceStorageModeShared;
@@ -50,17 +50,17 @@ namespace dawn_native { namespace metal {
     }
 
     void Buffer::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
-        auto* uploader = ToBackend(GetDevice())->GetResourceUploader();
+        auto* uploader = GetDevice()->GetResourceUploader();
         uploader->BufferSubData(mMtlBuffer, start, count, data);
     }
 
     void Buffer::MapReadAsyncImpl(uint32_t serial, uint32_t start, uint32_t) {
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapTracker();
+        MapRequestTracker* tracker = GetDevice()->GetMapTracker();
         tracker->Track(this, serial, start, false);
     }
 
     void Buffer::MapWriteAsyncImpl(uint32_t serial, uint32_t start, uint32_t) {
-        MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapTracker();
+        MapRequestTracker* tracker = GetDevice()->GetMapTracker();
         tracker->Track(this, serial, start, true);
     }
 
