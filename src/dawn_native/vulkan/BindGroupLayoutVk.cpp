@@ -55,7 +55,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
-        : BindGroupLayoutBase(device, descriptor) {
+        : BackendWrapper<BindGroupLayoutBase>(device, descriptor) {
         const auto& info = GetBindingInfo();
 
         // Compute the bindings that will be chained in the DescriptorSetLayout create info. We add
@@ -81,7 +81,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.bindingCount = numBindings;
         createInfo.pBindings = bindings.data();
 
-        if (device->fn.CreateDescriptorSetLayout(device->GetVkDevice(), &createInfo, nullptr,
+        if (GetDevice()->fn.CreateDescriptorSetLayout(GetDevice()->GetVkDevice(), &createInfo, nullptr,
                                                  &mHandle) != VK_SUCCESS) {
             ASSERT(false);
         }
@@ -91,8 +91,7 @@ namespace dawn_native { namespace vulkan {
         // DescriptorSetLayout aren't used by execution on the GPU and can be deleted at any time,
         // so we destroy mHandle immediately instead of using the FencedDeleter
         if (mHandle != VK_NULL_HANDLE) {
-            Device* device = ToBackend(GetDevice());
-            device->fn.DestroyDescriptorSetLayout(device->GetVkDevice(), mHandle, nullptr);
+            GetDevice()->fn.DestroyDescriptorSetLayout(GetDevice()->GetVkDevice(), mHandle, nullptr);
             mHandle = VK_NULL_HANDLE;
         }
     }

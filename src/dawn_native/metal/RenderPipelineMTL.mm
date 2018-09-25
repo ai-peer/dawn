@@ -65,10 +65,10 @@ namespace dawn_native { namespace metal {
     }
 
     RenderPipeline::RenderPipeline(RenderPipelineBuilder* builder)
-        : RenderPipelineBase(builder),
+        : BackendWrapper<RenderPipelineBase>(builder),
           mMtlIndexType(MTLIndexFormat(GetIndexFormat())),
           mMtlPrimitiveTopology(MTLPrimitiveTopology(GetPrimitiveTopology())) {
-        auto mtlDevice = ToBackend(builder->GetDevice())->GetMTLDevice();
+        auto mtlDevice = GetDevice()->GetMTLDevice();
 
         MTLRenderPipelineDescriptor* descriptor = [MTLRenderPipelineDescriptor new];
 

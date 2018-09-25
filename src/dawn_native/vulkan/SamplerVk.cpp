@@ -57,7 +57,7 @@ namespace dawn_native { namespace vulkan {
     }  // anonymous namespace
 
     Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
-        : SamplerBase(device, descriptor), mDevice(device) {
+        : BackendWrapper<SamplerBase>(device, descriptor) {
         VkSamplerCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
         createInfo.pNext = nullptr;
@@ -78,7 +78,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.borderColor = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK;
         createInfo.unnormalizedCoordinates = VK_FALSE;
 
-        if (device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
+        if (GetDevice()->fn.CreateSampler(GetDevice()->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
             VK_SUCCESS) {
             ASSERT(false);
         }
@@ -86,7 +86,7 @@ namespace dawn_native { namespace vulkan {
 
     Sampler::~Sampler() {
         if (mHandle != VK_NULL_HANDLE) {
-            mDevice->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             mHandle = VK_NULL_HANDLE;
         }
     }

@@ -70,6 +70,9 @@ namespace dawn_native { namespace vulkan {
         return ToBackendBase<VulkanBackendTraits>(common);
     }
 
+    template <typename T>
+    using BackendWrapper = BackendWrapperBase<T, Device>;
+
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKAN_FORWARD_H_
