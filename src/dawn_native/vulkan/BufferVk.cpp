@@ -104,7 +104,7 @@ namespace dawn_native { namespace vulkan {
     }  // namespace
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
-        : BufferBase(device, descriptor) {
+        : BackendWrapper<BufferBase>(device, descriptor) {
         VkBufferCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
         createInfo.pNext = nullptr;
@@ -138,12 +138,10 @@ namespace dawn_native { namespace vulkan {
     }
 
     Buffer::~Buffer() {
-        Device* device = ToBackend(GetDevice());
-
-        device->GetMemoryAllocator()->Free(&mMemoryAllocation);
+        GetDevice()->GetMemoryAllocator()->Free(&mMemoryAllocation);
 
         if (mHandle != VK_NULL_HANDLE) {
-            device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            GetDevice()->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             mHandle = VK_NULL_HANDLE;
         }
     }
@@ -189,46 +187,39 @@ namespace dawn_native { namespace vulkan {
         barrier.offset = 0;
         barrier.size = GetSize();
 
-        ToBackend(GetDevice())
-            ->fn.CmdPipelineBarrier(commands, srcStages, dstStages, 0, 0, nullptr, 1, &barrier, 0,
-                                    nullptr);
+        GetDevice()->fn.CmdPipelineBarrier(commands, srcStages, dstStages, 0, 0, nullptr, 1,
+                                           &barrier, 0, nullptr);
 
         mLastUsage = usage;
     }
 
     void Buffer::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
-        Device* device = ToBackend(GetDevice());
-
-        VkCommandBuffer commands = device->GetPendingCommandBuffer();
+        VkCommandBuffer commands = GetDevice()->GetPendingCommandBuffer();
         TransitionUsageNow(commands, dawn::BufferUsageBit::TransferDst);
 
-        BufferUploader* uploader = device->GetBufferUploader();
+        BufferUploader* uploader = GetDevice()->GetBufferUploader();
         uploader->BufferSubData(mHandle, start, count, data);
     }
 
     void Buffer::MapReadAsyncImpl(uint32_t serial, uint32_t start, uint32_t /*count*/) {
-        Device* device = ToBackend(GetDevice());
-
-        VkCommandBuffer commands = device->GetPendingCommandBuffer();
+        VkCommandBuffer commands = GetDevice()->GetPendingCommandBuffer();
         TransitionUsageNow(commands, dawn::BufferUsageBit::MapRead);
 
         uint8_t* memory = mMemoryAllocation.GetMappedPointer();
         ASSERT(memory != nullptr);
 
-        MapRequestTracker* tracker = device->GetMapRequestTracker();
+        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
         tracker->Track(this, serial, memory + start, false);
     }
 
     void Buffer::MapWriteAsyncImpl(uint32_t serial, uint32_t start, uint32_t /*count*/) {
-        Device* device = ToBackend(GetDevice());
-
-        VkCommandBuffer commands = device->GetPendingCommandBuffer();
+        VkCommandBuffer commands = GetDevice()->GetPendingCommandBuffer();
         TransitionUsageNow(commands, dawn::BufferUsageBit::MapWrite);
 
         uint8_t* memory = mMemoryAllocation.GetMappedPointer();
         ASSERT(memory != nullptr);
 
-        MapRequestTracker* tracker = device->GetMapRequestTracker();
+        MapRequestTracker* tracker = GetDevice()->GetMapRequestTracker();
         tracker->Track(this, serial, memory + start, true);
     }
 

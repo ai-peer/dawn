@@ -17,11 +17,11 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include "dawn_native/opengl/Forward.h"
+
 #include "glad/glad.h"
 
 namespace dawn_native { namespace opengl {
-
-    class Device;
 
     std::string GetBindingName(uint32_t group, uint32_t binding);
 
@@ -38,7 +38,7 @@ namespace dawn_native { namespace opengl {
     };
     bool operator<(const CombinedSampler& a, const CombinedSampler& b);
 
-    class ShaderModule : public ShaderModuleBase {
+    class ShaderModule : public BackendWrapper<ShaderModuleBase> {
       public:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
 

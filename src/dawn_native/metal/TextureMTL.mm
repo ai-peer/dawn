@@ -68,7 +68,7 @@ namespace dawn_native { namespace metal {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
-        : TextureBase(device, descriptor) {
+        : BackendWrapper<TextureBase>(device, descriptor) {
         auto desc = [MTLTextureDescriptor new];
         [desc autorelease];
         desc.textureType = MetalTextureType(GetDimension(), GetArrayLayers());
@@ -89,7 +89,7 @@ namespace dawn_native { namespace metal {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor, id<MTLTexture> mtlTexture)
-        : TextureBase(device, descriptor), mMtlTexture(mtlTexture) {
+        : BackendWrapper<TextureBase>(device, descriptor), mMtlTexture(mtlTexture) {
         [mMtlTexture retain];
     }
 

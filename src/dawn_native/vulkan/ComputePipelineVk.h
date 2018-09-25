@@ -18,12 +18,11 @@
 #include "dawn_native/ComputePipeline.h"
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/Forward.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class Device;
-
-    class ComputePipeline : public ComputePipelineBase {
+    class ComputePipeline : public BackendWrapper<ComputePipelineBase> {
       public:
         ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor);
         ~ComputePipeline();

@@ -17,11 +17,11 @@
 
 #include "dawn_native/Texture.h"
 
+#include "dawn_native/opengl/Forward.h"
+
 #include "glad/glad.h"
 
 namespace dawn_native { namespace opengl {
-
-    class Device;
 
     struct TextureFormatInfo {
         GLenum internalFormat;
@@ -29,7 +29,7 @@ namespace dawn_native { namespace opengl {
         GLenum type;
     };
 
-    class Texture : public TextureBase {
+    class Texture : public BackendWrapper<TextureBase> {
       public:
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle);
@@ -42,11 +42,6 @@ namespace dawn_native { namespace opengl {
       private:
         GLuint mHandle;
         GLenum mTarget;
-    };
-
-    class TextureView : public TextureViewBase {
-      public:
-        TextureView(TextureBase* texture);
     };
 
 }}  // namespace dawn_native::opengl

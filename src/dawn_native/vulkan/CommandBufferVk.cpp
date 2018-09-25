@@ -111,7 +111,7 @@ namespace dawn_native { namespace vulkan {
     }  // anonymous namespace
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
-        : CommandBufferBase(builder),
+        : BackendWrapper<CommandBufferBase>(builder),
           mCommands(builder->AcquireCommands()),
           mPassResourceUsages(builder->AcquirePassResourceUsage()) {
     }
@@ -121,7 +121,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     void CommandBuffer::RecordCommands(VkCommandBuffer commands) {
-        Device* device = ToBackend(GetDevice());
+        Device* device = GetDevice();
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
         auto TransitionForPass = [](VkCommandBuffer commands, const PassResourceUsage& usages) {
@@ -228,7 +228,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     void CommandBuffer::RecordComputePass(VkCommandBuffer commands) {
-        Device* device = ToBackend(GetDevice());
+        Device* device = GetDevice();
 
         DescriptorSetTracker descriptorSets;
 
@@ -271,7 +271,7 @@ namespace dawn_native { namespace vulkan {
     }
     void CommandBuffer::RecordRenderPass(VkCommandBuffer commands,
                                          RenderPassDescriptor* renderPass) {
-        Device* device = ToBackend(GetDevice());
+        Device* device = GetDevice();
 
         renderPass->RecordBeginRenderPass(commands);
 
