@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9ce25fb3_77bb220a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-27T01:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "050b13fe_8a27d150",
+      "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7ae6246_b85c4a22",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cda2a0c5_6747a60e",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-27T01:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7ae6246_b85c4a22",
+      "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "256c16c0_1cf861fe",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-27T01:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4f83d0a_6dfc8641",
+      "range": {
+        "startLine": 93,
+        "startChar": 27,
+        "endLine": 93,
+        "endChar": 36
+      },
+      "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5962def_7e4fe9ed",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 2
@@ -73,6 +133,24 @@
       "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca6ece74_d0466439",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-27T01:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5962def_7e4fe9ed",
+      "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "321be0f0_00b1f68b",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-27T01:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e80710be_d0ae5604",
+      "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f597c35c_fa97085d",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 2
@@ -107,6 +203,24 @@
       "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be901553_3dc71049",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-09-27T01:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f597c35c_fa97085d",
+      "revId": "97c7d1cbc77d12b069895d8945d848ad8f23b64b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
