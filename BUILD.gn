@@ -729,6 +729,13 @@ static_library("dawn_utils") {
 # Dawn test targets
 ###############################################################################
 
+dawn_generator("jstrace_gen") {
+  target = "jstrace"
+  outputs = [
+    "jstrace/jstrace.cpp",
+  ]
+}
+
 dawn_generator("mock_dawn_gen") {
   target = "mock_dawn"
   outputs = [
@@ -748,11 +755,13 @@ test("dawn_unittests") {
     ":libdawn_native_sources",
     ":libdawn_wire",
     ":mock_dawn_gen",
+    ":jstrace_gen",
     "third_party:gmock",
     "third_party:gtest",
   ]
 
   sources = get_target_outputs(":mock_dawn_gen")
+  sources += get_target_outputs(":jstrace_gen")
   sources += [
     "src/tests/UnittestsMain.cpp",
     "src/tests/unittests/BitSetIteratorTests.cpp",
@@ -796,6 +805,7 @@ test("dawn_end2end_tests") {
   deps = [
     ":dawn_common",
     ":dawn_utils",
+    ":jstrace_gen",
     ":libdawn",
     ":libdawn_native",
     ":libdawn_wire",
@@ -823,6 +833,7 @@ test("dawn_end2end_tests") {
     "src/tests/end2end/ScissorTests.cpp",
     "src/tests/end2end/ViewportOrientationTests.cpp",
   ]
+  sources += get_target_outputs(":jstrace_gen")
 }
 
 ###############################################################################

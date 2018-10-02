@@ -470,6 +470,9 @@ def get_renders_for_targets(api_params, targets):
         renders.append(FileRender('mock_api.h', 'mock/mock_dawn.h', [base_params, api_params, c_params]))
         renders.append(FileRender('mock_api.cpp', 'mock/mock_dawn.cpp', [base_params, api_params, c_params]))
 
+    if 'jstrace' in targets:
+        renders.append(FileRender('jstrace.cpp', 'jstrace/jstrace.cpp', [base_params, api_params, c_params]))
+
     if 'dawn_native_utils' in targets:
         frontend_params = [
             base_params,

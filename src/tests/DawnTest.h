@@ -85,6 +85,10 @@ namespace dawn_wire {
     class CommandHandler;
 }  // namespace dawn_wire
 
+namespace jstrace {
+    class Output;
+}
+
 class DawnTest : public ::testing::TestWithParam<BackendType> {
   public:
     DawnTest();
@@ -218,6 +222,8 @@ namespace detail {
 
         // Will be called with the buffer or texture data the expectation should check.
         virtual testing::AssertionResult Check(const void* data, size_t size) = 0;
+
+        virtual void OutputJSCheck(jstrace::Output* out) = 0;
     };
 
     // Expectation that checks the data is equal to some expected values.
@@ -228,6 +234,7 @@ namespace detail {
         ExpectEq(const T* values, const unsigned int count);
 
         testing::AssertionResult Check(const void* data, size_t size) override;
+        void OutputJSCheck(jstrace::Output* output) override;
 
       private:
         std::vector<T> mExpected;

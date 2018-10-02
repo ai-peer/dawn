@@ -18,6 +18,8 @@
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/NullBackend.h"
 
+#include "jstrace/jstrace.h"
+
 namespace dawn_native {
     namespace null {
         void Init(dawnProcTable* procs, dawnDevice* device);
@@ -27,6 +29,10 @@ namespace dawn_native {
 ValidationTest::ValidationTest() {
     dawnProcTable procs = dawn_native::GetProcs();
     dawnDevice cDevice = dawn_native::null::CreateDevice();
+
+    jstrace::Init(cDevice);
+    dawnProcTable traceProcs = jstrace::GetProcs(&procs);
+    procs = traceProcs;
 
     dawnSetProcs(&procs);
     device = dawn::Device::Acquire(cDevice);
@@ -38,6 +44,7 @@ ValidationTest::~ValidationTest() {
     // We need to destroy Dawn objects before setting the procs to null otherwise the dawn*Release
     // will call a nullptr
     device = dawn::Device();
+    jstrace::Teardown();
     dawnSetProcs(nullptr);
 }
 

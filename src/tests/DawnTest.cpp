@@ -28,6 +28,8 @@
 #include <iostream>
 #include "GLFW/glfw3.h"
 
+#include "jstrace/jstrace.h"
+
 namespace {
 
     utils::BackendType ParamToBackendType(BackendType type) {
@@ -212,6 +214,10 @@ void DawnTest::SetUp() {
         cDevice = backendDevice;
     }
 
+    jstrace::Init(cDevice);
+    dawnProcTable traceProcs = jstrace::GetProcs(&procs);
+    procs = traceProcs;
+
     // Set up the device and queue because all tests need them, and DawnTest needs them too for the
     // deferred expectations.
     dawnSetProcs(&procs);
@@ -220,12 +226,16 @@ void DawnTest::SetUp() {
 
     // The swapchain isn't used by tests but is useful when debugging with graphics debuggers that
     // capture at frame boundaries.
+    jstrace::Output* out = jstrace::GetOutput();
+    out->Pause();
     swapchain = device.CreateSwapChainBuilder()
                     .SetImplementation(mBinding->GetSwapChainImplementation())
                     .GetResult();
     swapchain.Configure(
         static_cast<dawn::TextureFormat>(mBinding->GetPreferredSwapChainTextureFormat()),
         dawn::TextureUsageBit::OutputAttachment, 400, 400);
+
+    out->Resume();
 
     // The end2end tests should never cause validation errors. These should be tested in unittests.
     device.SetErrorCallback(DeviceErrorCauseTestFailure, 0);
@@ -236,12 +246,16 @@ void DawnTest::SetUp() {
 void DawnTest::TearDown() {
     FlushWire();
 
+    jstrace::Output* out = jstrace::GetOutput();
+    out->Pause();
     MapSlotsSynchronously();
     ResolveExpectations();
 
     for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
         mReadbackSlots[i].buffer.Unmap();
     }
+    std::cout << out->GetOutputAndClear() << std::endl;
+    jstrace::Teardown();
 }
 
 std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
@@ -250,6 +264,9 @@ std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
                                                    uint32_t offset,
                                                    uint32_t size,
                                                    detail::Expectation* expectation) {
+    jstrace::Output* out = jstrace::GetOutput();
+    out->Pause();
+
     dawn::Buffer source = buffer.Clone();
 
     auto readback = ReserveReadback(size);
@@ -273,8 +290,16 @@ std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
     deferred.rowPitch = size;
     deferred.expectation.reset(expectation);
 
+    out->Resume();
+    *out << "test.addBufferExpectation(" << jstrace::GetBufferName(buffer.Get())
+        << ", " << offset << ", " << size << ", ";
+    expectation->OutputJSCheck(out);
+    *out << ");";
+
+
     mDeferredExpectations.push_back(std::move(deferred));
     mDeferredExpectations.back().message = std::make_unique<std::ostringstream>();
+
     return *(mDeferredExpectations.back().message.get());
 }
 
@@ -288,6 +313,9 @@ std::ostringstream& DawnTest::AddTextureExpectation(const char* file,
                                                     uint32_t level,
                                                     uint32_t pixelSize,
                                                     detail::Expectation* expectation) {
+    jstrace::Output* out = jstrace::GetOutput();
+    out->Pause();
+
     dawn::Texture source = texture.Clone();
     uint32_t rowPitch = Align(width * pixelSize, kTextureRowPitchAlignment);
     uint32_t size = rowPitch * (height - 1) + width * pixelSize;
@@ -313,6 +341,13 @@ std::ostringstream& DawnTest::AddTextureExpectation(const char* file,
     deferred.rowBytes = width * pixelSize;
     deferred.rowPitch = rowPitch;
     deferred.expectation.reset(expectation);
+
+    out->Resume();
+    *out << "test.addTextureExpectation(" << jstrace::GetTextureName(texture.Get()) << ", ";
+    *out << "{ \"x\": " << x << ", \"y\": "<<  y << ", \"width\":" << width << ", \"height\":" << height
+        << ", \"level\":" << level << "}, ";
+    expectation->OutputJSCheck(out);
+    *out << ");";
 
     mDeferredExpectations.push_back(std::move(deferred));
     mDeferredExpectations.back().message = std::make_unique<std::ostringstream>();
@@ -536,6 +571,32 @@ namespace detail {
         }
 
         return testing::AssertionSuccess();
+    }
+
+    void OutputOne(uint8_t value, jstrace::Output* out) {
+        *out << std::to_string(value);
+    }
+
+    void OutputOne(uint32_t value, jstrace::Output* out) {
+        *out << std::to_string(value);
+    }
+
+    void OutputOne(RGBA8 value, jstrace::Output* out) {
+        *out << "new RGBA8(" << std::to_string(value.r) << ", " << std::to_string(value.g) << ", " << std::to_string(value.b) << ", " << std::to_string(value.a) << ")";
+    }
+
+    template<typename T>
+    void ExpectEq<T>::OutputJSCheck(jstrace::Output* out) {
+        *out << "test.ExpectEq([";
+        bool first = true;
+        for (T value : mExpected) {
+            if (!first) {
+                *out << ", ";
+            }
+            OutputOne(value, out);
+            first = false;
+        }
+        *out << "])";
     }
 
     template class ExpectEq<uint8_t>;

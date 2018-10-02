@@ -168,6 +168,7 @@ TEST_P(SamplerTest, AddressMode) {
         for (auto v : addressModes) {
             for (auto w : addressModes) {
                 TestAddressModes(u, v, w);
+                return;
             }
         }
     }
