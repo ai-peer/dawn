@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4766676_e258f4b8",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-04T16:36:30Z",
+      "side": 1,
+      "message": "nit: can this be just before the point were we start filling it?",
+      "revId": "111bd822d4fef2643d59da4e18ded4116049f733",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
