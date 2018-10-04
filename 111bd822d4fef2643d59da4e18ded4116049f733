@@ -16,6 +16,24 @@
       "revId": "111bd822d4fef2643d59da4e18ded4116049f733",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20ad92db_5a8f6278",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-04T16:54:00Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "a4766676_e258f4b8",
+      "revId": "111bd822d4fef2643d59da4e18ded4116049f733",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
