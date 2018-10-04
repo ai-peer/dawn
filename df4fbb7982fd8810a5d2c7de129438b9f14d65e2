@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "24e6c4ec_7f40ef2b",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-04T14:56:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c27a860c_8c468fd1",
+      "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ecd1136a_ed74568a",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c36b32d6_eff8961c",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-04T14:56:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ecd1136a_ed74568a",
+      "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68c5c33a_3caddf7e",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dbb6d18_67e282ff",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-04T14:56:48Z",
+      "side": 1,
+      "message": "I couldn\u0027t find anything in the Chromium style guide about auto, or the Google style guide about \"simple types\". However, none of these fall into the \"encouraged\" or \"allowed\" section of the Google style guide, so to be on the safe side I\u0027ve removed all use of auto.",
+      "parentUuid": "68c5c33a_3caddf7e",
+      "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "a80e8239_1ad48983",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-04T14:56:48Z",
+      "side": 1,
+      "message": "Hardcoded float.",
+      "parentUuid": "7f41655b_a6a80424",
+      "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2251b4a_88110bff",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 3
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "93df82c0_f90c9421",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-04T14:56:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2251b4a_88110bff",
+      "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b48efb44_5e7309a2",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 3
@@ -119,6 +209,24 @@
       "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f60685fe_f80c844e",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-04T14:56:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b48efb44_5e7309a2",
+      "revId": "df4fbb7982fd8810a5d2c7de129438b9f14d65e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
