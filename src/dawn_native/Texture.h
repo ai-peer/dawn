@@ -24,6 +24,11 @@
 
 namespace dawn_native {
     MaybeError ValidateTextureDescriptor(DeviceBase* device, const TextureDescriptor* descriptor);
+    MaybeError ValidateTextureViewDescriptor(DeviceBase* device, const TextureBase* texture,
+                                             const TextureViewDescriptor* descriptor);
+
+    MaybeError ValidateTextureViewFormatCompatibility(const TextureBase* texture, const TextureViewDescriptor* descriptor);
+    MaybeError ValidateTextureViewDimensionCompatibility(const TextureBase* texture, const TextureViewDescriptor* descriptor);
 
     uint32_t TextureFormatPixelSize(dawn::TextureFormat format);
     bool TextureFormatHasDepth(dawn::TextureFormat format);
@@ -52,6 +57,7 @@ namespace dawn_native {
 
         // Dawn API
         TextureViewBase* CreateDefaultTextureView();
+        TextureViewBase* CreateTextureView(const TextureViewDescriptor* descriptor);
 
       private:
         DeviceBase* mDevice;

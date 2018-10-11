@@ -1031,6 +1031,13 @@
             {
                 "name": "create default texture view",
                 "returns": "texture view"
+            },
+            {
+                "name": "create texture view",
+                "returns": "texture view",
+                "args": [
+                    {"name": "descriptor", "type": "texture view descriptor", "annotation": "const*"}
+                ]
             }
         ]
     },
@@ -1077,8 +1084,33 @@
             {"value": 32, "name": "present"}
         ]
     },
+    "texture view descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "format", "type": "texture format"},
+            {"name": "dimension", "type": "texture view dimension"},
+            {"name": "baseMipLevel", "type": "uint32_t"},
+            {"name": "levelCount", "type": "uint32_t"},
+            {"name": "baseArrayLayer", "type": "uint32_t"},
+            {"name": "layerCount", "type": "uint32_t"}
+        ],
+        "TODO": [
+            "jiawei.shao@intel.com: Allow choosing the aspect (depth vs. stencil)"
+        ]
+    },
     "texture view": {
         "category": "object"
+    },
+    "texture view dimension": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "2D"},
+            {"value": 1, "name": "2DArray"}
+        ],
+        "TODO": [
+            "jiawei.shao@intel.com: support 1D, 3D, cube and cube array texture views"
+        ]
     },
     "vertex format": {
         "category": "enum",

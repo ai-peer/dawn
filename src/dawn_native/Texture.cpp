@@ -38,6 +38,88 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError ValidateTextureViewDescriptor(
+        DeviceBase* device, const TextureBase* texture, const TextureViewDescriptor* descriptor) {
+        if (descriptor->nextInChain != nullptr) {
+            return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
+        }
+
+        DAWN_TRY(ValidateTextureViewDimension(descriptor->dimension));
+        DAWN_TRY(ValidateTextureFormat(descriptor->format));
+
+        DAWN_TRY(ValidateTextureViewFormatCompatibility(texture, descriptor));
+        DAWN_TRY(ValidateTextureViewDimensionCompatibility(texture, descriptor));
+
+        // TODO(jiawei.shao@intel.com): check stuff based on the dimension
+        if (descriptor->layerCount == 0 || descriptor->levelCount == 0) {
+            return DAWN_VALIDATION_ERROR("Cannot create an empty texture view");
+        }
+
+        if (uint64_t(descriptor->baseArrayLayer) + uint64_t(descriptor->layerCount) >
+            uint64_t(texture->GetArrayLayers())) {
+            return DAWN_VALIDATION_ERROR("Texture view array-layer out of range");
+        }
+
+        if (uint64_t(descriptor->baseMipLevel) + uint64_t(descriptor->levelCount) >
+            uint64_t(texture->GetNumMipLevels())) {
+            return DAWN_VALIDATION_ERROR("Texture view mip-level out of range");
+        }
+
+        return {};
+    }
+
+    // TODO(jiawei.shao@intel.com): implement texture view format compatibility rule
+    MaybeError ValidateTextureViewFormatCompatibility(
+        const TextureBase* texture, const TextureViewDescriptor* descriptor) {
+        if (texture->GetFormat() != descriptor->format) {
+            return DAWN_VALIDATION_ERROR("The format of texture view is not compatible to the original texture");
+        }
+
+        return {};
+    }
+
+    // TODO(jiawei.shao@intel.com): support validation on all texture view dimensions
+    bool IsTextureViewDimensionCompatibleToTextureDimension(
+        dawn::TextureViewDimension textureViewDimension, dawn::TextureDimension textureDimension) {
+        switch (textureViewDimension) {
+            case dawn::TextureViewDimension::e2D:
+                return textureDimension == dawn::TextureDimension::e2D;
+            case dawn::TextureViewDimension::e2DArray:
+                return textureDimension == dawn::TextureDimension::e2D;
+                break;
+            default:
+                UNREACHABLE();
+                return false;
+        }
+    }
+
+    // TODO(jiawei.shao@intel.com): support validation on all texture view dimensions
+    bool IsValidArrayLayerToTextureViewDimension(
+        dawn::TextureViewDimension textureViewDimension, uint32_t textureViewArrayLayer) {
+        switch (textureViewDimension) {
+            case dawn::TextureViewDimension::e2D:
+                return textureViewArrayLayer == 1u;
+            case dawn::TextureViewDimension::e2DArray:
+                return true;
+            default:
+                UNREACHABLE();
+                return false;
+        }
+    }
+
+    MaybeError ValidateTextureViewDimensionCompatibility(
+        const TextureBase* texture, const TextureViewDescriptor* descriptor) {
+        if (!IsValidArrayLayerToTextureViewDimension(descriptor->dimension, descriptor->layerCount)) {
+            return DAWN_VALIDATION_ERROR("The dimension of the texture view is not compatible to the layer count");
+        }
+
+        if (!IsTextureViewDimensionCompatibleToTextureDimension(descriptor->dimension, texture->GetDimension())) {
+            return DAWN_VALIDATION_ERROR("The dimension of texture view is not compatible to the original texture");
+        }
+
+        return {};
+    }
+
     uint32_t TextureFormatPixelSize(dawn::TextureFormat format) {
         switch (format) {
             case dawn::TextureFormat::R8Unorm:
@@ -121,6 +203,10 @@ namespace dawn_native {
 
     TextureViewBase* TextureBase::CreateDefaultTextureView() {
         return mDevice->CreateDefaultTextureView(this);
+    }
+
+    TextureViewBase* TextureBase::CreateTextureView(const TextureViewDescriptor* descriptor) {
+        return mDevice->CreateTextureView(this, descriptor);
     }
 
     // TextureViewBase
