@@ -1,0 +1,301 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "989783a7_e63fb3e7",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "sketch.idl calls it \"type\" can you either change it here, or make a pull request to change it?",
+      "range": {
+        "startLine": 1092,
+        "startChar": 22,
+        "endLine": 1092,
+        "endChar": 31
+      },
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7711c410_c68dd560",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "These should use \"space separated case\". So \"base mip level\" \"level count\" \"base array layer\" and \"layer count\"",
+      "range": {
+        "startLine": 1093,
+        "startChar": 22,
+        "endLine": 1093,
+        "endChar": 34
+      },
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d0dfe42_90281f0a",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "\"2D array\"",
+      "range": {
+        "startLine": 1109,
+        "startChar": 34,
+        "endLine": 1109,
+        "endChar": 41
+      },
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86cef006_7e35e423",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "Device could be const too since you made the texture const.",
+      "range": {
+        "startLine": 41,
+        "startChar": 45,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a368ed15_0626bf46",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be2bafa0_d30d9fad",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "You already do. Can the checks for mip levels and array layers being in bounds be before more complex checks? (that is, inserted at [1])",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72950177_638441f6",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "CompatibleWith",
+      "range": {
+        "startLine": 84,
+        "startChar": 41,
+        "endLine": 84,
+        "endChar": 43
+      },
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f17d0985_ec9e79f6",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "The two IsXXX functions can be put in an anonymous namespace at the top of the file.",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c24fe5_eafd6934",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "valid for",
+      "range": {
+        "startLine": 100,
+        "startChar": 26,
+        "endLine": 100,
+        "endChar": 28
+      },
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58b8bb7d_72f79aaf",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "Can this create a TextureViewDescriptor on the stack and call CreateTextureView()? It would require backends to be a bit more implemented so alternatively you can do it in a follow-up patch.\n\nSo in the final state CreateDefaultTextureView is purely a helper, and dawn_native::TextureViewBase has only the constructor that takes (Device* device, Texture* texture, const TextureViewDescriptor* descriptor).",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5096523_bae8914e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "Can you add DAWN_UNIMPLEMENTED_ERROR and an Unimplemented ErrorType? This will make it easy to search for them.",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dad9bfdc_cc14431e",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "for [2] we can rename this to \"baseDescriptor\"",
+      "range": {
+        "startLine": 48,
+        "startChar": 32,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "746e7da4_abfdfb8a",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "[2] to make sure we don\u0027t forget to reset state between the sub-tests, can this do\n\n  dawn::TextureViewDescriptor descriptor \u003d baseDescriptor;\n  descriptor.foo \u003d bar;\n  texture.CreateTextureView(\u0026descriptor)\n\nand likewise for all other subtests?",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff50dfcb_12c34163",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea6bc513_9d589bdd",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T11:13:30Z",
+      "side": 1,
+      "message": "Can we have a test with format compatibility, for example between RGBA and depth-stencil?",
+      "revId": "98298edd2d245891bbbfd3cf72e2e264c56e4d70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
