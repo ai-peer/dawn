@@ -337,6 +337,12 @@ namespace dawn_native { namespace d3d12 {
     TextureViewBase* Device::CreateDefaultTextureView(TextureBase* texture) {
         return new TextureView(texture);
     }
+    // TODO(jiawei.shao@intel.com): implement creating texture view by TextureViewDescriptor
+    ResultOrError<TextureViewBase*> Device::CreateTextureViewImpl(
+        TextureBase* texture,
+        const TextureViewDescriptor* descriptor) {
+        return DAWN_VALIDATION_ERROR("Unimplemented");
+    }
 
     void Device::CollectPCIInfo() {
         memset(&mPCIInfo, 0, sizeof(mPCIInfo));
