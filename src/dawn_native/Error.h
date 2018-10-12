@@ -26,6 +26,7 @@ namespace dawn_native {
     enum class ErrorType : uint32_t {
         Validation,
         ContextLost,
+        Unimplemented
     };
 
     // MaybeError and ResultOrError are meant to be used as return value for function that are not
@@ -47,6 +48,7 @@ namespace dawn_native {
 #define DAWN_MAKE_ERROR(TYPE, MESSAGE) MakeError(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
 #define DAWN_VALIDATION_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::Validation, MESSAGE)
 #define DAWN_CONTEXT_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::ContextLost, MESSAGE)
+#define DAWN_UNIMPLEMENTED_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::Unimplemented, MESSAGE)
 
 #define DAWN_CONCAT1(x, y) x##y
 #define DAWN_CONCAT2(x, y) DAWN_CONCAT1(x, y)
