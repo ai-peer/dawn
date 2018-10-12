@@ -47,6 +47,7 @@ namespace dawn_native {
 #define DAWN_MAKE_ERROR(TYPE, MESSAGE) MakeError(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
 #define DAWN_VALIDATION_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::Validation, MESSAGE)
 #define DAWN_CONTEXT_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::ContextLost, MESSAGE)
+#define DAWN_UNIMPLEMENTED_ERROR DAWN_VALIDATION_ERROR("Unimplemented")
 
 #define DAWN_CONCAT1(x, y) x##y
 #define DAWN_CONCAT2(x, y) DAWN_CONCAT1(x, y)
