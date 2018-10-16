@@ -67,13 +67,14 @@ namespace dawn_native {
 
     class TextureViewBase : public ObjectBase {
       public:
-        TextureViewBase(TextureBase* texture);
+        TextureViewBase(TextureBase* texture, const TextureViewDescriptor* descriptor);
 
         const TextureBase* GetTexture() const;
         TextureBase* GetTexture();
 
       private:
         Ref<TextureBase> mTexture;
+        TextureViewDescriptor mDescriptor;
     };
 
 }  // namespace dawn_native
