@@ -92,6 +92,30 @@
       "revId": "614394a55406869e073f87c089341ccccf25205f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "556e6aba_b573eb48",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-16T09:14:31Z",
+      "side": 1,
+      "message": "Interesting, I don\u0027t see an obvious place were we do something wrong in the Vulkan backend. I\u0027ll try running the test with the validation layers, see if they catch anything.",
+      "parentUuid": "fd8f9933_bbc24970",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 96
+      },
+      "revId": "614394a55406869e073f87c089341ccccf25205f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
