@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "948de46d_1790c0e2",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-16T05:44:13Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 84,
+        "startChar": 46,
+        "endLine": 84,
+        "endChar": 51
+      },
+      "revId": "614394a55406869e073f87c089341ccccf25205f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d55892e7_b99cfcf0",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-16T05:44:13Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 127,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 71
+      },
+      "revId": "614394a55406869e073f87c089341ccccf25205f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d0ea927_c9c6c96c",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-16T05:44:13Z",
+      "side": 1,
+      "message": "I can reproduce this issue on the Windows NVidia Vulkan driver. In my side it seems all these three texture sample expressions return the pixel value in the layer 0 of the texture.\nFor example, when I change [1] to (layer + 10), the result in [2] is 30 instead of 33 on Windows Intel Vulkan drivers.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 96
+      },
+      "revId": "614394a55406869e073f87c089341ccccf25205f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
