@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c483c076_0b085a8c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-16T09:09:33Z",
+      "side": 1,
+      "message": "Can this be in Texture.cpp so that Texture::CreateDefaultTextureView creates a descriptor on the stack like this:\n\n  TextureDescriptor defaultDescriptor \u003d MakeDefaultTextureDescriptor(this);\n  return CreateTextureView(device, \u0026defaultDescriptor)\n\nThis would help keep the logic of this in Texture.cpp\n\nnit: Make or Create instead of Generate and have the word \"Default\" in the method name.",
+      "revId": "9c4b405b3620d647d9c6a650b859d424b965592d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd661186_c688e2d8",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-16T09:09:33Z",
+      "side": 1,
+      "message": "We should not store descriptors directly because they can point to other data with extensions, using nextInChain. Instead frontend objects should copy out the part of the descriptor they need.",
+      "revId": "9c4b405b3620d647d9c6a650b859d424b965592d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
