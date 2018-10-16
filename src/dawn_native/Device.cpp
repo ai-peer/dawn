@@ -35,6 +35,31 @@
 #include <unordered_set>
 
 namespace dawn_native {
+    namespace {
+        TextureViewDescriptor GenerateTextureViewDescriptor(const TextureBase* texture) {
+            TextureViewDescriptor descriptor;
+            descriptor.format = texture->GetFormat();
+            descriptor.baseArrayLayer = 0;
+            descriptor.layerCount = texture->GetArrayLayers();
+            descriptor.baseMipLevel = 0;
+            descriptor.levelCount = texture->GetNumMipLevels();
+
+            // TODO(jiawei.shao@intel.com): support all texture dimensions.
+            switch (texture->GetDimension()) {
+                case dawn::TextureDimension::e2D:
+                    if (texture->GetArrayLayers() == 1u) {
+                        descriptor.dimension = dawn::TextureViewDimension::e2D;
+                    } else {
+                        descriptor.dimension = dawn::TextureViewDimension::e2DArray;
+                    }
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+
+            return descriptor;
+        }
+    } // anonymous namespace
 
     // DeviceBase::Caches
 
@@ -283,8 +308,14 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateTextureViewInternal(TextureViewBase** result,
                                                      TextureBase* texture,
                                                      const TextureViewDescriptor* descriptor) {
-        DAWN_TRY(ValidateTextureViewDescriptor(this, texture, descriptor));
-        DAWN_TRY_ASSIGN(*result, CreateTextureViewImpl(texture, descriptor));
+        if (descriptor) {
+            DAWN_TRY(ValidateTextureViewDescriptor(this, texture, descriptor));
+            DAWN_TRY_ASSIGN(*result, CreateTextureViewImpl(texture, descriptor));
+        } else {
+            TextureViewDescriptor defaultDescriptor = GenerateTextureViewDescriptor(texture);
+            DAWN_TRY_ASSIGN(*result, CreateTextureViewImpl(texture, &defaultDescriptor));
+        }
+
         return {};
     }
 
