@@ -68,6 +68,30 @@
       "revId": "614394a55406869e073f87c089341ccccf25205f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd8f9933_bbc24970",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-16T05:50:50Z",
+      "side": 1,
+      "message": "Sorry I mean when I change [1] to (layer + 10), the result in [2] is 30 on Windows Nvidia drivers instead of 33 on Windows Intel Vulkan drivers.",
+      "parentUuid": "0d0ea927_c9c6c96c",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 96
+      },
+      "revId": "614394a55406869e073f87c089341ccccf25205f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
