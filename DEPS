@@ -64,11 +64,11 @@ deps = {
     'condition': 'dawn_standalone',
   },
   'third_party/glslang': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/glslang@ca042a0ffbb6fe09a47c1c867d911b3a69d2102e',
+    'url': 'https://github.com/Kangz/glslang.git@5403f380a46d7864c189943c7b32ca38844333e3',
     'condition': 'dawn_standalone',
   },
   'third_party/shaderc': {
-    'url': '{chromium_git}/external/github.com/google/shaderc@196d38f64e4d919ddb26557f176ca134e2d88ddc',
+    'url': 'https://github.com/Kangz/shaderc.git@90e9fe20d75d21576998c59f8653a2db5d02c821',
     'condition': 'dawn_standalone',
   },
 
