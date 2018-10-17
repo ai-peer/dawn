@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a6bb039_b3f48bdb",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-17T18:05:41Z",
+      "side": 1,
+      "message": "It seems kind of funny that every class gets its own template instantiation that does the same GetDevice() cast. Minor (code won\u0027t likely bloat \u0027cos it\u0027ll be eliminated by LTCG).",
+      "revId": "2a7ce8bec0c2c33f5305d93513ace51ff4a59233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
