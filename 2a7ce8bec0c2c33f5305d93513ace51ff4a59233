@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5b0eb3aa_69b6ad16",
+        "filename": "src/dawn_native/ToBackend.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-17T18:07:44Z",
+      "side": 1,
+      "message": "BTW, are you sure this needs to be a reinterpret_cast\u003c\u003e? Wouldn\u0027t a static_cast\u003c\u003e do?",
+      "revId": "2a7ce8bec0c2c33f5305d93513ace51ff4a59233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3a6bb039_b3f48bdb",
         "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
         "patchSetId": 12
