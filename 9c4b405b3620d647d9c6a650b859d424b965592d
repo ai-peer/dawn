@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "140342b6_0e7ff199",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-17T01:52:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c483c076_0b085a8c",
+      "revId": "9c4b405b3620d647d9c6a650b859d424b965592d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd661186_c688e2d8",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "9c4b405b3620d647d9c6a650b859d424b965592d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97baec28_4e7f0b28",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-17T01:52:35Z",
+      "side": 1,
+      "message": "Ack\nI will add other members in the next patch.",
+      "parentUuid": "dd661186_c688e2d8",
+      "revId": "9c4b405b3620d647d9c6a650b859d424b965592d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
