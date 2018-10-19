@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa7f55f8_201042cc",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-19T19:56:37Z",
+      "side": 1,
+      "message": "This is just for generating test data, right? Can you make the name more descriptive and add a short comment, e.g.\n\n    // Generates an arbitrary pixel value per-layer-per-level, used for the \"actual\"\n    // uploaded textures and the \"expected\" results.\n    GenerateTestPixelValue",
+      "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc73b17c_2fe1b7cb",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-19T19:56:37Z",
+      "side": 1,
+      "message": "I know this hasn\u0027t changed, but I\u0027m looking at this field, dawn::TextureDescriptor::mipLevel. Why is it called mipLevel, if it is actually the mip level count? I think that field needs to be renamed to \"levels\", \"mipLevels\", \"levelCount\", or something like that. Probably \"levelCount\" to match TextureViewDescriptor. (Doesn\u0027t have to be in this CL, though.)",
+      "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fab4d52d_e42edf0a",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-19T19:56:37Z",
+      "side": 1,
+      "message": "This isn\u0027t really \"row pixels\", more like \"pixels per row pitch\". Can you rename and also add a static_assert just for sanity, something like:\n\n  static_assert((kTextureRowPitchAlignment % sizeof(RGBA8)) \u003d\u003d 0);\n  constexpr uint32_t kPixelsPerRowPitch \u003d kTextureRowPitchAlignment / sizeof(RGBA8);",
+      "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17153a22_f8b24d38",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-19T19:56:37Z",
+      "side": 1,
+      "message": "kPixelsPerRowPitch * texHeight doesn\u0027t seem quite right. Can you assert that it\u0027s right, and add an intermediary variable name to keep things clear?\n\n  ASSERT(texWidth \u003c\u003d kPixelsPerRowPitch);\n  const uint32_t texWidthPadded \u003d kPixelsPerRowPitch;\n  std::vector\u003cRGBA8\u003e data(texWidthPadded * texHeight, ...\n\nI might have gotten something wrong in these suggestions, but you probably get my idea.",
+      "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
