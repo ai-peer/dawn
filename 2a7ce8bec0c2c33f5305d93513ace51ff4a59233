@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f80715c4_63004b9b",
+        "filename": "src/dawn_native/ToBackend.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-21T10:01:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b0eb3aa_69b6ad16",
+      "revId": "2a7ce8bec0c2c33f5305d93513ace51ff4a59233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a6bb039_b3f48bdb",
         "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2018-10-17T18:05:41Z",
       "side": 1,
       "message": "It seems kind of funny that every class gets its own template instantiation that does the same GetDevice() cast. Minor (code won\u0027t likely bloat \u0027cos it\u0027ll be eliminated by LTCG).",
+      "revId": "2a7ce8bec0c2c33f5305d93513ace51ff4a59233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39601993_8c2d059a",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-21T10:01:06Z",
+      "side": 1,
+      "message": "Or by some inlining heuristic, because the definition is present in the compilation unit.",
+      "parentUuid": "3a6bb039_b3f48bdb",
       "revId": "2a7ce8bec0c2c33f5305d93513ace51ff4a59233",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
