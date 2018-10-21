@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6fdfcd58_054ede07",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-21T09:41:14Z",
+      "side": 1,
+      "message": "Also can you make a PR to add it to sketch.idl, it\u0027s currently missing there too",
+      "parentUuid": "dc73b17c_2fe1b7cb",
+      "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fab4d52d_e42edf0a",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 3
@@ -64,6 +82,52 @@
       "writtenOn": "2018-10-19T19:56:37Z",
       "side": 1,
       "message": "kPixelsPerRowPitch * texHeight doesn\u0027t seem quite right. Can you assert that it\u0027s right, and add an intermediary variable name to keep things clear?\n\n  ASSERT(texWidth \u003c\u003d kPixelsPerRowPitch);\n  const uint32_t texWidthPadded \u003d kPixelsPerRowPitch;\n  std::vector\u003cRGBA8\u003e data(texWidthPadded * texHeight, ...\n\nI might have gotten something wrong in these suggestions, but you probably get my idea.",
+      "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8ae09a1_dcf9ad7c",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-21T09:41:14Z",
+      "side": 1,
+      "message": "nit: with*",
+      "range": {
+        "startLine": 159,
+        "startChar": 70,
+        "endLine": 159,
+        "endChar": 72
+      },
+      "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ca89d1d_c849aa4b",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-21T09:41:14Z",
+      "side": 1,
+      "message": "nit: with",
+      "range": {
+        "startLine": 196,
+        "startChar": 70,
+        "endLine": 196,
+        "endChar": 72
+      },
       "revId": "91c0b874db3ba5538cfe43be62b87340fe29d902",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
