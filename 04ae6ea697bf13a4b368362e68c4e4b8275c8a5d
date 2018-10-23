@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11f76d94_bfa77c5e",
+        "filename": "src/tests/unittests/ObjectBaseTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-23T19:11:47Z",
+      "side": 1,
+      "message": "Seems like this change wouldn\u0027t be necessary if you just changed the order of reference/release in operator\u003d(ObjectBase const\u0026). However either way seems fine.",
+      "revId": "04ae6ea697bf13a4b368362e68c4e4b8275c8a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
