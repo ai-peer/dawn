@@ -51,31 +51,37 @@ namespace dawn_native { namespace d3d12 {
                     auto* view = ToBackend(GetBindingAsBufferView(binding));
                     auto& cbv = view->GetCBVDescriptor();
                     d3d12Device->CreateConstantBufferView(
-                        &cbv, cbvUavSrvHeapStart.GetCPUHandle(*cbvUavSrvHeapOffset +
-                                                              bindingOffsets[binding]));
+                        &cbv,
+                        cbvUavSrvHeapStart.GetCPUHandle(
+                            *cbvUavSrvHeapOffset + bgl->GetDescriptorOffset(BindGroupLayout::CBV) +
+                            bindingOffsets[binding]));
                 } break;
                 case dawn::BindingType::StorageBuffer: {
                     auto* view = ToBackend(GetBindingAsBufferView(binding));
                     auto& uav = view->GetUAVDescriptor();
                     d3d12Device->CreateUnorderedAccessView(
                         ToBackend(view->GetBuffer())->GetD3D12Resource().Get(), nullptr, &uav,
-                        cbvUavSrvHeapStart.GetCPUHandle(*cbvUavSrvHeapOffset +
-                                                        bindingOffsets[binding]));
+                        cbvUavSrvHeapStart.GetCPUHandle(
+                            *cbvUavSrvHeapOffset + bgl->GetDescriptorOffset(BindGroupLayout::UAV) +
+                            bindingOffsets[binding]));
                 } break;
                 case dawn::BindingType::SampledTexture: {
                     auto* view = ToBackend(GetBindingAsTextureView(binding));
                     auto& srv = view->GetSRVDescriptor();
                     d3d12Device->CreateShaderResourceView(
                         ToBackend(view->GetTexture())->GetD3D12Resource(), &srv,
-                        cbvUavSrvHeapStart.GetCPUHandle(*cbvUavSrvHeapOffset +
-                                                        bindingOffsets[binding]));
+                        cbvUavSrvHeapStart.GetCPUHandle(
+                            *cbvUavSrvHeapOffset + bgl->GetDescriptorOffset(BindGroupLayout::SRV) +
+                            bindingOffsets[binding]));
                 } break;
                 case dawn::BindingType::Sampler: {
                     auto* sampler = ToBackend(GetBindingAsSampler(binding));
                     auto& samplerDesc = sampler->GetSamplerDescriptor();
                     d3d12Device->CreateSampler(
-                        &samplerDesc, samplerHeapStart.GetCPUHandle(*samplerHeapOffset +
-                                                                    bindingOffsets[binding]));
+                        &samplerDesc, samplerHeapStart.GetCPUHandle(
+                                          *samplerHeapOffset +
+                                          bgl->GetDescriptorOffset(BindGroupLayout::Sampler) +
+                                          bindingOffsets[binding]));
                 } break;
             }
         }
