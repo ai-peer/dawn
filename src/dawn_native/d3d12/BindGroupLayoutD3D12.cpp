@@ -76,32 +76,18 @@ namespace dawn_native { namespace d3d12 {
                            D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER);
 
         // descriptors ranges are offset by the offset + size of the previous range
-        std::array<uint32_t, DescriptorType::Count> descriptorOffsets;
-        descriptorOffsets[CBV] = 0;
-        descriptorOffsets[UAV] = descriptorOffsets[CBV] + mDescriptorCounts[CBV];
-        descriptorOffsets[SRV] = descriptorOffsets[UAV] + mDescriptorCounts[UAV];
-        descriptorOffsets[Sampler] = 0;  // samplers are in a different heap
-
-        for (uint32_t binding : IterateBitSet(groupInfo.mask)) {
-            switch (groupInfo.types[binding]) {
-                case dawn::BindingType::UniformBuffer:
-                    mBindingOffsets[binding] += descriptorOffsets[CBV];
-                    break;
-                case dawn::BindingType::StorageBuffer:
-                    mBindingOffsets[binding] += descriptorOffsets[UAV];
-                    break;
-                case dawn::BindingType::SampledTexture:
-                    mBindingOffsets[binding] += descriptorOffsets[SRV];
-                    break;
-                case dawn::BindingType::Sampler:
-                    mBindingOffsets[binding] += descriptorOffsets[Sampler];
-                    break;
-            }
-        }
+        mDescriptorOffsets[CBV] = 0;
+        mDescriptorOffsets[UAV] = mDescriptorOffsets[CBV] + mDescriptorCounts[CBV];
+        mDescriptorOffsets[SRV] = mDescriptorOffsets[UAV] + mDescriptorCounts[UAV];
+        mDescriptorOffsets[Sampler] = 0;  // samplers are in a different heap
     }
 
     const std::array<uint32_t, kMaxBindingsPerGroup>& BindGroupLayout::GetBindingOffsets() const {
         return mBindingOffsets;
+    }
+
+    uint32_t BindGroupLayout::GetDescriptorOffset(BindGroupLayout::DescriptorType type) const {
+        return mDescriptorOffsets[type];
     }
 
     uint32_t BindGroupLayout::GetCbvUavSrvDescriptorTableSize() const {
