@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c4e32e5_baf0e554",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-23T22:19:35Z",
+      "side": 1,
+      "message": "Can you tag BUG\u003ddawn:25? The dawn: is important to refer to Dawn\u0027s bug tracker.",
+      "revId": "b58a9083642de367f5c8f2f1a1cf4b5eff24eb4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebd5a26b_bccc5dcc",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-23T22:19:35Z",
+      "side": 1,
+      "message": "Just for clarity, can we also have this zero-init in MapReadAsyncImpl?",
+      "revId": "b58a9083642de367f5c8f2f1a1cf4b5eff24eb4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c53c50f8_5cc80c90",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-23T22:19:35Z",
+      "side": 1,
+      "message": "nit: mWrittenMappedRange, because this variable is used in unmaps both for map-read and map-write.",
+      "revId": "b58a9083642de367f5c8f2f1a1cf4b5eff24eb4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
