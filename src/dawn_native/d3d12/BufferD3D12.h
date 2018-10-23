@@ -47,6 +47,7 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12Resource> mResource;
         bool mFixedResourceState = false;
         dawn::BufferUsageBit mLastUsage = dawn::BufferUsageBit::None;
+        D3D12_RANGE mWriteRange;
     };
 
     class BufferView : public BufferViewBase {
