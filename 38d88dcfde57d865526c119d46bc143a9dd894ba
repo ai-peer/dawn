@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d93c174a_8419a664",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-23T22:38:58Z",
+      "side": 1,
+      "message": "Can we have a BUG\u003ddawn:XX?",
+      "revId": "38d88dcfde57d865526c119d46bc143a9dd894ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20abb8b5_8bf1eae0",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-23T22:38:58Z",
+      "side": 1,
+      "message": "Oooooh I completely forgot about D3D12 having different register space per descriptor type. Damn.",
+      "range": {
+        "startLine": 56,
+        "startChar": 51,
+        "endLine": 56,
+        "endChar": 97
+      },
+      "revId": "38d88dcfde57d865526c119d46bc143a9dd894ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbb8c63f_af14f14d",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-23T22:38:58Z",
+      "side": 1,
+      "message": "Instead of doing registerTypeOffset + bindingOffsetInRegisterSpace in BindGroupD3D12, maybe we can do the reverse adjustment in PipelineLayoutD3D12 by offseting the BaseShaderRegister by registerTypeOffset instead?",
+      "revId": "38d88dcfde57d865526c119d46bc143a9dd894ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
