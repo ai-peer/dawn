@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c16f9777_9a946fa0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-24T09:25:49Z",
+      "side": 1,
+      "message": "I think it should depend on the dimension of the texture view instead because if we have a cube texture view, then we need to use D3D12_TEXCUBE_SRV instead.",
+      "range": {
+        "startLine": 195,
+        "startChar": 11,
+        "endLine": 195,
+        "endChar": 82
+      },
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5e4fdbd_f5ceb9f0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-24T09:25:49Z",
+      "side": 1,
+      "message": "This check would be covered by a switch on the the texture view dimension instead.",
+      "range": {
+        "startLine": 204,
+        "startChar": 16,
+        "endLine": 204,
+        "endChar": 58
+      },
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33591005_78757d7c",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-24T09:25:49Z",
+      "side": 1,
+      "message": "note: I think we can add this only for dawn::TextureUsageBit::Sampled and Storage but it is not needed for render targets. You don\u0027t need to make changes for that right now but it could be an optimization later.",
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22528672_465b3876",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-24T09:25:49Z",
+      "side": 1,
+      "message": "nit: Can we have a TODO to not create a texture view when it is the exact same as the full texture?",
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
