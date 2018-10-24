@@ -16,6 +16,24 @@
       "revId": "04ae6ea697bf13a4b368362e68c4e4b8275c8a5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89fb0c51_b02921dd",
+        "filename": "src/tests/unittests/ObjectBaseTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-24T09:52:21Z",
+      "side": 1,
+      "message": "I had the inverted reference release in my first version of the patch and a test for it so that\u0027s why I changed the this line. In the end I don\u0027t think the order matters for the copy constructor: the only problem is when you copy do A \u003d B when they both have the same mHandle and in that case we don\u0027t have an issue because B\u0027s reference keeps the object alive.\n\nDoes that sound good?",
+      "parentUuid": "11f76d94_bfa77c5e",
+      "revId": "04ae6ea697bf13a4b368362e68c4e4b8275c8a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
