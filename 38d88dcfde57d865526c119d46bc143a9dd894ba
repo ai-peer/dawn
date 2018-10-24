@@ -74,6 +74,24 @@
       "revId": "38d88dcfde57d865526c119d46bc143a9dd894ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "160f02ff_8783dd47",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-24T13:43:34Z",
+      "side": 1,
+      "message": "Yes that\u0027s what I\u0027m suggesting. WDYT?",
+      "parentUuid": "214129c0_f404f638",
+      "revId": "38d88dcfde57d865526c119d46bc143a9dd894ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
