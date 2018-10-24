@@ -56,6 +56,24 @@
       "revId": "38d88dcfde57d865526c119d46bc143a9dd894ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "214129c0_f404f638",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-24T12:58:55Z",
+      "side": 1,
+      "message": "Hmm. BaseShaderRegister always seems to be group * kMaxBindingsPerGroup. You\u0027re suggesting we should change that to add GetDescriptorOffset() to BaseShaderRegister, and skip the pointer math in the call to GetCPUHandle()?",
+      "parentUuid": "dbb8c63f_af14f14d",
+      "revId": "38d88dcfde57d865526c119d46bc143a9dd894ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
