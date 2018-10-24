@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6939c299_faf91adc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-24T12:50:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "8c4e32e5_baf0e554",
+      "revId": "b58a9083642de367f5c8f2f1a1cf4b5eff24eb4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ebd5a26b_bccc5dcc",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0fd2c18f_ee46b343",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-24T12:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebd5a26b_bccc5dcc",
+      "revId": "b58a9083642de367f5c8f2f1a1cf4b5eff24eb4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c53c50f8_5cc80c90",
         "filename": "src/dawn_native/d3d12/BufferD3D12.h",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "b58a9083642de367f5c8f2f1a1cf4b5eff24eb4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a905d48_f9f2ccff",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-24T12:50:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c53c50f8_5cc80c90",
+      "revId": "b58a9083642de367f5c8f2f1a1cf4b5eff24eb4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
