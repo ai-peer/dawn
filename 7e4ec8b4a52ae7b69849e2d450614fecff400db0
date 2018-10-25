@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1799a01_53ab6232",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-25T09:22:12Z",
+      "side": 1,
+      "message": "Note for myself: it might be interesting to have ShaderModule give a mask for its used bindings to avoid looping over all bindings like this.",
+      "revId": "7e4ec8b4a52ae7b69849e2d450614fecff400db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
