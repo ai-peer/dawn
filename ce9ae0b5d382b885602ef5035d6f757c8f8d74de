@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ed049518_8b0afc6d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-25T01:37:33Z",
+      "side": 1,
+      "message": "I think this SGTM.",
+      "parentUuid": "65fa402a_2ae1646e",
+      "range": {
+        "startLine": 195,
+        "startChar": 11,
+        "endLine": 195,
+        "endChar": 82
+      },
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5e4fdbd_f5ceb9f0",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -107,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "edbaed22_3598d79b",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-25T01:37:33Z",
+      "side": 1,
+      "message": "I think that depends on whether WebGPU allows rendering into TextureViews (I\u0027m not sure off the top of my head). Metal probably allows it, but it also has a slice parameter in MTLRenderPassAttachmentDescriptor: https://developer.apple.com/documentation/metal/mtlrenderpassattachmentdescriptor?language\u003dobjc\n\nIn any case, it\u0027s probably better to be \"optimistic\" now and restrict usage of this flag as much as possible, and turn it on later if it turns out to be needed.",
+      "parentUuid": "1f4f5800_6173dfcc",
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22528672_465b3876",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 5
@@ -136,6 +178,24 @@
       "side": 1,
       "message": "I suggest when the texture view is created by CreateDefaultTextureView(), we can pass a null descriptor or some other flags into here, then we can know we can directly use the original texture without creating a texture view.",
       "parentUuid": "22528672_465b3876",
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "111bbd95_6b759dfe",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-25T01:37:33Z",
+      "side": 1,
+      "message": "Could you add a TODO that suggests both possible implementations? I still don\u0027t think we need to add it right now.",
+      "parentUuid": "78df5338_2bfe9db6",
       "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
