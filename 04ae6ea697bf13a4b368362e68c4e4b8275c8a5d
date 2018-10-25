@@ -52,6 +52,24 @@
       "revId": "04ae6ea697bf13a4b368362e68c4e4b8275c8a5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "258a3221_cb8b91d7",
+        "filename": "src/tests/unittests/ObjectBaseTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-25T10:37:17Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "72bb192f_ef024d45",
+      "revId": "04ae6ea697bf13a4b368362e68c4e4b8275c8a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
