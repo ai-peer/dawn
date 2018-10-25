@@ -149,6 +149,24 @@
     },
     {
       "key": {
+        "uuid": "1dcc6bb3_cf339731",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-25T05:59:54Z",
+      "side": 1,
+      "message": "Ack\nIn this patch we have to always set this flag because we always call newTextureViewWithPixelFormat when creating a texture view, and without this flag we cannot call this function:\nhttps://developer.apple.com/documentation/metal/mtltextureusage/mtltextureusagepixelformatview?language\u003dobjc\nI just add a TODO here to see if we can skip creating the texture view when it is only used as a render target.",
+      "parentUuid": "edbaed22_3598d79b",
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22528672_465b3876",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 5
@@ -199,6 +217,24 @@
       "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cdef137_95f154be",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-25T05:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "111bbd95_6b759dfe",
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
