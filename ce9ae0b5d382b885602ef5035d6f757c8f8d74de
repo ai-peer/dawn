@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "84234e3e_b3753a6d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-25T10:34:28Z",
+      "side": 1,
+      "message": "Thanks for the explanation, always treating as 2D/Cube array potentially of size 1 SGTM too. I remember Rafael saying it shouldn\u0027t be worse in term of performance and we can always revisit later.\n\nCan you update the comment to explain the problem and the solution for future us?",
+      "parentUuid": "ed049518_8b0afc6d",
+      "range": {
+        "startLine": 195,
+        "startChar": 11,
+        "endLine": 195,
+        "endChar": 82
+      },
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5e4fdbd_f5ceb9f0",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -161,6 +185,24 @@
       "side": 1,
       "message": "Ack\nIn this patch we have to always set this flag because we always call newTextureViewWithPixelFormat when creating a texture view, and without this flag we cannot call this function:\nhttps://developer.apple.com/documentation/metal/mtltextureusage/mtltextureusagepixelformatview?language\u003dobjc\nI just add a TODO here to see if we can skip creating the texture view when it is only used as a render target.",
       "parentUuid": "edbaed22_3598d79b",
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f28a597e_871492a4",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-25T10:34:28Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "1dcc6bb3_cf339731",
       "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
