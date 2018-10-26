@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fac84a5_13e29199",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T06:36:03Z",
+      "side": 1,
+      "message": "Can you return a dummy value here? I think it is important for msvc. Maybe I should put some MSVC compilation bot on the CQ because right now they are broken on CI.",
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c4cfcb3_f4e7f9d9",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T06:36:03Z",
+      "side": 1,
+      "message": "requires the value ..... to be GL_TRUE",
+      "range": {
+        "startLine": 100,
+        "startChar": 27,
+        "endLine": 101,
+        "endChar": 18
+      },
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6341a34f_b86de718",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T06:36:03Z",
+      "side": 1,
+      "message": "\"with\", or \"using\"",
+      "range": {
+        "startLine": 101,
+        "startChar": 66,
+        "endLine": 101,
+        "endChar": 71
+      },
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "302ca930_d087f0d4",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T06:36:03Z",
+      "side": 1,
+      "message": "SGTM, note that when we want to extend support to lower OpenGL versions we\u0027ll need to dynamically check if we need to use TexStorage or TexImage.",
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c2da0b6_3f7a806e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T06:36:03Z",
+      "side": 1,
+      "message": "Please write down the whole type for simple types like these. We want with a bit too much usage of auto at the beginning of Dawn and it makes some parts of the code hard to understand.",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 12
+      },
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a04307e_a8863c30",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T06:36:03Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 148,
+        "endChar": 12
+      },
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4413fdf5_20d12ebf",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T06:36:03Z",
+      "side": 1,
+      "message": "I\u0027ll let you resolve the merge conflict there.",
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
