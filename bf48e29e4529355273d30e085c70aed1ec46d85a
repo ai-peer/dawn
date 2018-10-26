@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "387f3fe3_c22d25e5",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-26T22:50:04Z",
+      "side": 1,
+      "message": "Hm, Corentin, does it work if you nest a descriptor *without* making it \"const*\"? Seems like in cases like this an inline struct *should* work.",
+      "parentUuid": "823f700c_067af90b",
+      "revId": "bf48e29e4529355273d30e085c70aed1ec46d85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7b00b3f_c3b3a764",
         "filename": "src/dawn_native/BlendState.cpp",
         "patchSetId": 4
