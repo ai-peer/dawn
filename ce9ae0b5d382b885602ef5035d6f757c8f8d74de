@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "c88361ea_7cb3b86c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-26T03:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84234e3e_b3753a6d",
+      "range": {
+        "startLine": 195,
+        "startChar": 11,
+        "endLine": 195,
+        "endChar": 82
+      },
+      "revId": "ce9ae0b5d382b885602ef5035d6f757c8f8d74de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a5e4fdbd_f5ceb9f0",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
