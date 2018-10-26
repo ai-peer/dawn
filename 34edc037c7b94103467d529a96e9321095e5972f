@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "244aba86_dcf10b7f",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-26T20:30:27Z",
+      "side": 1,
+      "message": "I think it\u0027s ok to require TexStorage. AFAICT, Chrome\u0027s validating command decoder requires TexStorage to be natively supported for WebGL 2. It\u0027s in 4.2 but also ARB_texture_storage.",
+      "parentUuid": "aa00a9f8_b248159c",
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c2da0b6_3f7a806e",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2

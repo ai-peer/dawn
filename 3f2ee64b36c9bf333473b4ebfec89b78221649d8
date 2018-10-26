@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b6fe78da_952e786c",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-26T20:30:27Z",
+      "side": 1,
+      "message": "Does that mean GetTextureUnitsForTexture is really GetTextureUnitsForTextureView?",
+      "revId": "3f2ee64b36c9bf333473b4ebfec89b78221649d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18b56fba_329af219",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 5
