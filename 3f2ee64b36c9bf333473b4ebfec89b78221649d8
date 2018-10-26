@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18b56fba_329af219",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-26T14:31:27Z",
+      "side": 1,
+      "message": "nit: The -\u003e the",
+      "range": {
+        "startLine": 103,
+        "startChar": 36,
+        "endLine": 103,
+        "endChar": 39
+      },
+      "revId": "3f2ee64b36c9bf333473b4ebfec89b78221649d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
