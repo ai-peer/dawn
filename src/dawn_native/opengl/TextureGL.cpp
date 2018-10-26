@@ -34,6 +34,17 @@ namespace dawn_native { namespace opengl {
             }
         }
 
+        GLenum TargetForTextureViewDimension(dawn::TextureViewDimension dimension) {
+            switch (dimension) {
+                case dawn::TextureViewDimension::e2D:
+                    return GL_TEXTURE_2D;
+                case dawn::TextureViewDimension::e2DArray:
+                    return GL_TEXTURE_2D_ARRAY;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
         TextureFormatInfo GetGLFormatInfo(dawn::TextureFormat format) {
             switch (format) {
                 case dawn::TextureFormat::R8G8B8A8Unorm:
@@ -86,23 +97,20 @@ namespace dawn_native { namespace opengl {
 
         glBindTexture(mTarget, handle);
 
-        for (uint32_t i = 0; i < levels; ++i) {
-            switch (GetDimension()) {
-                case dawn::TextureDimension::e2D:
-                    if (arrayLayers > 1) {
-                        glTexImage3D(mTarget, i, formatInfo.internalFormat, width, height,
-                                     arrayLayers, 0, formatInfo.format, formatInfo.type, nullptr);
-                    } else {
-                        glTexImage2D(mTarget, i, formatInfo.internalFormat, width, height, 0,
-                                     formatInfo.format, formatInfo.type, nullptr);
-                    }
-                    break;
-                default:
-                    UNREACHABLE();
-            }
-
-            width = std::max(uint32_t(1), width / 2);
-            height = std::max(uint32_t(1), height / 2);
+        // glTextureView() requires The value of GL_TEXTURE_IMMUTABLE_FORMAT for origtexture must be
+        // GL_TRUE, so the storage of the texture must be allocated by glTexStorage*D.
+        // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTextureView.xhtml
+        switch (GetDimension()) {
+            case dawn::TextureDimension::e2D:
+                if (arrayLayers > 1) {
+                    glTexStorage3D(mTarget, levels, formatInfo.internalFormat, width, height,
+                                   arrayLayers);
+                } else {
+                    glTexStorage2D(mTarget, levels, formatInfo.internalFormat, width, height);
+                }
+                break;
+            default:
+                UNREACHABLE();
         }
 
         // The texture is not complete if it uses mipmapping and not all levels up to
@@ -129,9 +137,30 @@ namespace dawn_native { namespace opengl {
 
     // TextureView
 
-    // TODO(jiawei.shao@intel.com): create texture view by TextureViewDescriptor
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
         : TextureViewBase(texture, descriptor) {
+        mTarget = TargetForTextureViewDimension(descriptor->dimension);
+
+        // glTextureView() is supported on OpenGL version >= 4.3
+        // TODO(jiawei.shao@intel.com): support texture view on OpenGL version <= 4.2
+        mHandle = GenTexture();
+        auto textureGL = ToBackend(texture);
+        auto textureViewFormat = GetGLFormatInfo(descriptor->format);
+        glTextureView(mHandle, mTarget, textureGL->GetHandle(), textureViewFormat.internalFormat,
+                      descriptor->baseMipLevel, descriptor->levelCount, descriptor->baseArrayLayer,
+                      descriptor->layerCount);
+    }
+
+    TextureView::~TextureView() {
+        glDeleteTextures(1, &mHandle);
+    }
+
+    GLuint TextureView::GetHandle() const {
+        return mHandle;
+    }
+
+    GLenum TextureView::GetGLTarget() const {
+        return mTarget;
     }
 
 }}  // namespace dawn_native::opengl
