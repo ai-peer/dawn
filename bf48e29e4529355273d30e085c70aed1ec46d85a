@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "c02e3b78_0cfd0997",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-29T09:04:38Z",
+      "side": 1,
+      "message": "The reason is that Dawn\u0027s code generators don\u0027t know how to pass structures to functions as values. However when BlendState is completely descriptorized, we\u0027ll be able to nest the structure by value in the main descriptor.",
+      "parentUuid": "4429a3a7_82ce983e",
+      "revId": "bf48e29e4529355273d30e085c70aed1ec46d85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7b00b3f_c3b3a764",
         "filename": "src/dawn_native/BlendState.cpp",
         "patchSetId": 4
