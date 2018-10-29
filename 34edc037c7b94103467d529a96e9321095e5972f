@@ -184,6 +184,24 @@
     },
     {
       "key": {
+        "uuid": "e0dabe30_7905eb3d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-29T00:42:13Z",
+      "side": 1,
+      "message": "Do we need to detect OpenGL version (and extensions) in the OpenGL back-end now? Then we can choose the right APIs based on the information.",
+      "parentUuid": "244aba86_dcf10b7f",
+      "revId": "34edc037c7b94103467d529a96e9321095e5972f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c2da0b6_3f7a806e",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2

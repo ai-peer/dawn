@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b8a3e907_704580a5",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-29T00:42:13Z",
+      "side": 1,
+      "message": "Yes. Sorry I missed renaming it before.",
+      "parentUuid": "b6fe78da_952e786c",
+      "revId": "3f2ee64b36c9bf333473b4ebfec89b78221649d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18b56fba_329af219",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 5
@@ -39,6 +57,30 @@
       "revId": "3f2ee64b36c9bf333473b4ebfec89b78221649d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af1ef570_399eb4bd",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-10-29T00:42:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18b56fba_329af219",
+      "range": {
+        "startLine": 103,
+        "startChar": 36,
+        "endLine": 103,
+        "endChar": 39
+      },
+      "revId": "3f2ee64b36c9bf333473b4ebfec89b78221649d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
