@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4429a3a7_82ce983e",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-10-29T02:17:31Z",
+      "side": 1,
+      "message": "Done. @Corentin.\n\nHi Kai, just let you know that I tried to nest blend descriptor in blend state builder without annotation \"const*\" on my local machine before I submitted this chage to gerrit to be reviewed. But it failed to build in one auto-generated file. The error was in gen/dawn/dawncpp.cpp. it had an extra parameter named UNHANDLED in function dawnBlendStateBuilderSetAlphaBlend(Get(), UNHANDLED). I simply took a look, but I couldn\u0027t figure out the reason. After I added the \"const*\" annotation, it succeed to build. So I used \"const*\" annotation as other nested objects.\n\nMaybe we can take a look later if you do want to remove \"const*\" annotation for this kind descriptor (simple, and nested in another descriptor).",
+      "parentUuid": "387f3fe3_c22d25e5",
+      "revId": "bf48e29e4529355273d30e085c70aed1ec46d85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7b00b3f_c3b3a764",
         "filename": "src/dawn_native/BlendState.cpp",
         "patchSetId": 4
@@ -51,6 +69,24 @@
       "revId": "bf48e29e4529355273d30e085c70aed1ec46d85a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c504779b_0ca82487",
+        "filename": "src/dawn_native/BlendState.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-10-29T02:17:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7b00b3f_c3b3a764",
+      "revId": "bf48e29e4529355273d30e085c70aed1ec46d85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
