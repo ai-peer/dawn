@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c1df7aa0_75d29bf1",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-30T22:26:06Z",
+      "side": 1,
+      "message": "Good point. Removed.",
+      "parentUuid": "63385f2c_5a2460ca",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "038bf6c7_6c9e7c47",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "cba5cfeb_752b5d13",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-30T22:26:06Z",
+      "side": 1,
+      "message": "I wondered that too, but the Metal backend does the same thing. Hopefully they\u0027re equally cheap.",
+      "parentUuid": "038bf6c7_6c9e7c47",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "775bd5e5_81c511ee",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 11
@@ -47,6 +83,24 @@
       "writtenOn": "2018-10-30T20:58:11Z",
       "side": 1,
       "message": "nit: {uneven spacing },",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20ea46ca_c8e610e9",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-30T22:26:06Z",
+      "side": 1,
+      "message": "Fixed (here and elsewhere).",
+      "parentUuid": "775bd5e5_81c511ee",
       "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "8eaada19_4831b506",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-30T22:26:06Z",
+      "side": 1,
+      "message": "Fixed. (Sorry, new machine is incompletely configured...)",
+      "parentUuid": "0d5c3e0a_b1b98d41",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 1
+      },
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ae25bc9_ac44a849",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 11
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "f97a2f1c_faf540a7",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-30T22:26:06Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "7ae25bc9_ac44a849",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "420ce5b1_fb1dcb78",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 11
@@ -104,6 +200,30 @@
       "writtenOn": "2018-10-30T20:58:11Z",
       "side": 1,
       "message": "tab",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 1
+      },
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33bb62ed_7a2d225d",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-30T22:26:06Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "420ce5b1_fb1dcb78",
       "range": {
         "startLine": 202,
         "startChar": 0,
