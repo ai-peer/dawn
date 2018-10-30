@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63385f2c_5a2460ca",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-30T20:58:11Z",
+      "side": 1,
+      "message": "Is this class dead now?",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "038bf6c7_6c9e7c47",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-30T20:58:11Z",
+      "side": 1,
+      "message": "Is constructing CompilerHLSL cheap? It seems to be done twice now.",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "775bd5e5_81c511ee",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-30T20:58:11Z",
+      "side": 1,
+      "message": "nit: {uneven spacing },",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d5c3e0a_b1b98d41",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-30T20:58:11Z",
+      "side": 1,
+      "message": "There\u0027s a tab here, apparently.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 1
+      },
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ae25bc9_ac44a849",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-30T20:58:11Z",
+      "side": 1,
+      "message": "nit: the end of this line is pink on gerrit for some reason. I guess there\u0027s a trailing space?",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "420ce5b1_fb1dcb78",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-30T20:58:11Z",
+      "side": 1,
+      "message": "tab",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 1
+      },
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
