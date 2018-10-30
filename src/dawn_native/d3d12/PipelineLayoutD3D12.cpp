@@ -63,9 +63,12 @@ namespace dawn_native { namespace d3d12 {
                 rootParameter.DescriptorTable.NumDescriptorRanges = rangeCount;
                 rootParameter.DescriptorTable.pDescriptorRanges = &ranges[rangeIndex];
 
+                uint32_t registerOffset = 0;
                 for (uint32_t i = 0; i < rangeCount; ++i) {
                     ranges[rangeIndex] = descriptorRanges[i];
-                    ranges[rangeIndex].BaseShaderRegister = group * kMaxBindingsPerGroup;
+                    ranges[rangeIndex].BaseShaderRegister =
+                        group * kMaxBindingsPerGroup + registerOffset;
+                    registerOffset += descriptorRanges[i].NumDescriptors;
                     rangeIndex++;
                 }
 
