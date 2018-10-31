@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "de710537_d56f293d",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-31T13:10:46Z",
+      "side": 1,
+      "message": "I think we\u0027ll still need descriptorOffsets to satisfy the call to GetCPUHandle(), so we won\u0027t be able to get rid of them entirely. I can at least use the ranges to initialize them, though. I\u0027ll give that a shot.\n\nAlternatively, if you look back at my first try at this bug (https://dawn-review.googlesource.com/c/dawn/+/1921) I think you\u0027ll see that it does have that property: computation is centralized in BindGroupLayout. If you want the offsets to be computed as they are here (with \"holes\" in each register namespace), I could go back to that and subtract off the descriptor offsets where not needed, rather than adding them on where they are.",
+      "parentUuid": "7839c344_db2c739d",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 73
+      },
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "29c8fb78_72b991e8",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 13
