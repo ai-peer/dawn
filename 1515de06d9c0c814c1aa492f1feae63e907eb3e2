@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "eb8a5df2_8a3393b5",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-31T21:43:43Z",
+      "side": 1,
+      "message": "Done. Note that I had to pad the buffer so that the offsets are 256-byte aligned.",
+      "parentUuid": "29c8fb78_72b991e8",
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6166f997_d5c550c7",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 13
@@ -80,6 +98,24 @@
       "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49086339_4b71e771",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-31T21:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6166f997_d5c550c7",
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -103,6 +139,30 @@
       "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd824d60_2b63787a",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-10-31T21:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44d3f618_3c307b73",
+      "range": {
+        "startLine": 241,
+        "startChar": 16,
+        "endLine": 241,
+        "endChar": 24
+      },
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
