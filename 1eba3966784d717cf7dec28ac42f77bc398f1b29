@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4ac76803_c03ff4de",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-31T12:08:40Z",
+      "side": 1,
+      "message": "It isn\u0027t really cheap but could be optimized later, pipeline compilation is one of the expensive operations so we can afford to do that for now.",
+      "parentUuid": "cba5cfeb_752b5d13",
+      "revId": "1eba3966784d717cf7dec28ac42f77bc398f1b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "775bd5e5_81c511ee",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 11

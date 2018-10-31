@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7839c344_db2c739d",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-31T12:08:40Z",
+      "side": 1,
+      "message": "Right now the offset computation is duplicated in both the bind group layout and the pipeline layout. How about doing the following:\n\n - Precompute the BaseShaderRegister offset in bind group layout. (it would replace descriptorOffsets in the constructor with mRanges[X].BaseShaderRegister)\n - Here do ranges[rangeIndex].BaseShaderRegister +\u003d group * kMaxBindingsPerGroup",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 73
+      },
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c8fb78_72b991e8",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-31T12:08:40Z",
+      "side": 1,
+      "message": "nit: you can use utils::CreateBufferFromData",
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6166f997_d5c550c7",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-31T12:08:40Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44d3f618_3c307b73",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-31T12:08:40Z",
+      "side": 1,
+      "message": "nit: this can be a vector of RGBA8",
+      "range": {
+        "startLine": 241,
+        "startChar": 16,
+        "endLine": 241,
+        "endChar": 24
+      },
+      "revId": "1515de06d9c0c814c1aa492f1feae63e907eb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
