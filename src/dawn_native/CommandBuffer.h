@@ -42,6 +42,11 @@ namespace dawn_native {
     class CommandBufferBase : public ObjectBase {
       public:
         CommandBufferBase(CommandBufferBuilder* builder);
+
+        const std::vector<PassResourceUsage>& GetPassResourceUsages() const;
+
+      private:
+        std::vector<PassResourceUsage> mPassResourceUsages;
     };
 
     class CommandBufferBuilder : public Builder<CommandBufferBase> {
