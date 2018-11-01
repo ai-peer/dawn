@@ -286,7 +286,12 @@ namespace dawn_native {
     // CommandBuffer
 
     CommandBufferBase::CommandBufferBase(CommandBufferBuilder* builder)
-        : ObjectBase(builder->GetDevice()) {
+        : ObjectBase(builder->GetDevice()),
+        mPassResourceUsages(builder->AcquirePassResourceUsage()) {
+    }
+
+    const std::vector<PassResourceUsage>& CommandBufferBase::GetPassResourceUsages() const {
+        return mPassResourceUsages;
     }
 
     // CommandBufferBuilder
