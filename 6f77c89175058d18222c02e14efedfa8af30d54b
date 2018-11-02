@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "43442179_ddb2bbe6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-02T17:37:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "19fb3d27_3339a185",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "6f77c89175058d18222c02e14efedfa8af30d54b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29856c57_179bb0d7",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -81,6 +105,24 @@
       "revId": "6f77c89175058d18222c02e14efedfa8af30d54b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "105a44ee_fdb20495",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-02T17:37:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5582d7c2_b69c1ed3",
+      "revId": "6f77c89175058d18222c02e14efedfa8af30d54b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
