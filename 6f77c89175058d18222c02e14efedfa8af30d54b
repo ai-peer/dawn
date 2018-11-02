@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "19fb3d27_3339a185",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-02T14:28:27Z",
+      "side": 1,
+      "message": "MSC is the compiler, MSVC is the IDE (or used to be, before it was renamed Visual Studio).\n\nSee the _MSC_VER macros, e.g.",
+      "parentUuid": "c6a4d327_ba09a31a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "6f77c89175058d18222c02e14efedfa8af30d54b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "29856c57_179bb0d7",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-11-01T21:32:40Z",
       "side": 1,
       "message": "offsetof should still work on MSVC no?",
+      "revId": "6f77c89175058d18222c02e14efedfa8af30d54b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5582d7c2_b69c1ed3",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-02T14:28:27Z",
+      "side": 1,
+      "message": "Yeah, I just put it into the ASSERT above, instead. Seemed cleaner this way.",
+      "parentUuid": "29856c57_179bb0d7",
       "revId": "6f77c89175058d18222c02e14efedfa8af30d54b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
