@@ -16,6 +16,7 @@
 
 #include "tests/unittests/validation/ValidationTest.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 class VertexBufferValidationTest : public ValidationTest {
@@ -78,12 +79,28 @@ class VertexBufferValidationTest : public ValidationTest {
         }
 
         dawn::RenderPipeline MakeRenderPipeline(const dawn::ShaderModule& vsModule, const dawn::InputState& inputState) {
-            return device.CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .SetInputState(inputState)
-                .GetResult();
+            uint32_t colorAttachments[] = {0};
+            dawn::TextureFormat colorAttachmentFormats[] =
+                {dawn::TextureFormat::R8G8B8A8Unorm};
+
+            dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+            dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+            utils::ComboRenderPipelineDescriptor descriptor;
+            descriptor.numOfRenderStages = 2;
+            descriptor.stages = renderStages;
+            descriptor.modules = renderModules;
+            descriptor.entryPoint = "main";
+            descriptor.inputState = inputState;
+            descriptor.numOfColorAttachments = 1;
+            descriptor.colorAttachments = colorAttachments;
+            descriptor.colorAttachmentFormats = colorAttachmentFormats;
+            dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+            descriptor.blendStates = blendStates;
+
+            descriptor.SetDefaults(device);
+
+            return device.CreateRenderPipeline(&descriptor);
         }
 
         dawn::RenderPassDescriptor renderpass;

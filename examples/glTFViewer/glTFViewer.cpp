@@ -23,6 +23,7 @@
 #include "common/Assert.h"
 #include "common/Math.h"
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 #include "utils/SystemUtils.h"
 
@@ -287,16 +288,35 @@ namespace {
             .GetResult();
 
         auto pipelineLayout = utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
-        auto pipeline = device.CreateRenderPipelineBuilder()
-            .SetColorAttachmentFormat(0, GetPreferredSwapChainTextureFormat())
-            .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, oVSModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, oFSModule, "main")
-            .SetIndexFormat(dawn::IndexFormat::Uint16)
-            .SetInputState(inputState)
-            .SetDepthStencilState(depthStencilState)
-            .GetResult();
+
+        uint32_t colorAttachments[] = {0};
+        dawn::TextureFormat colorAttachmentFormats[] =
+            {GetPreferredSwapChainTextureFormat()};
+
+        dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+        dawn::ShaderModule renderModules[] = {oVSModule, oFSModule};
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.inputState = inputState;
+        descriptor.indexFormat = dawn::IndexFormat::Uint16;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        descriptor.depthStencilState = depthStencilState;
+        descriptor.hasDepthStencilAttachment = true;
+        descriptor.depthStencilFormat =
+            dawn::TextureFormat::D32FloatS8Uint;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        descriptor.SetDefaults(device);
+
+        auto pipeline = device.CreateRenderPipeline(&descriptor);
 
         auto bindGroupBuilder = device.CreateBindGroupBuilder();
         bindGroupBuilder.SetLayout(bindGroupLayout);

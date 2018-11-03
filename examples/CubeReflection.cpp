@@ -14,6 +14,7 @@
 
 #include "SampleUtils.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 #include "utils/SystemUtils.h"
 
@@ -212,16 +213,32 @@ void init() {
         .SetDepthWriteEnabled(true)
         .GetResult();
 
-    pipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, GetPreferredSwapChainTextureFormat())
-        .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-        .SetLayout(pl)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .SetIndexFormat(dawn::IndexFormat::Uint32)
-        .SetInputState(inputState)
-        .SetDepthStencilState(depthStencilState)
-        .GetResult();
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {GetPreferredSwapChainTextureFormat()};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.layout = pl;
+    descriptor.numOfRenderStages = 2;
+    descriptor.stages = renderStages;
+    descriptor.modules = renderModules;
+    descriptor.entryPoint = "main";
+    descriptor.inputState = inputState;
+    descriptor.numOfColorAttachments = 1;
+    descriptor.colorAttachments = colorAttachments;
+    descriptor.colorAttachmentFormats = colorAttachmentFormats;
+    descriptor.hasDepthStencilAttachment = true;
+    descriptor.depthStencilFormat = dawn::TextureFormat::D32FloatS8Uint;
+    descriptor.depthStencilState = depthStencilState;
+    dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+    descriptor.blendStates = blendStates;
+
+    descriptor.SetDefaults(device);
+
+    pipeline = device.CreateRenderPipeline(&descriptor);
 
     auto planeStencilState = device.CreateDepthStencilStateBuilder()
         .SetDepthCompareFunction(dawn::CompareFunction::Less)
@@ -229,15 +246,32 @@ void init() {
         .SetStencilFunction(dawn::Face::Both, dawn::CompareFunction::Always, dawn::StencilOperation::Keep, dawn::StencilOperation::Keep, dawn::StencilOperation::Replace)
         .GetResult();
 
-    planePipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, GetPreferredSwapChainTextureFormat())
-        .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-        .SetLayout(pl)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .SetInputState(inputState)
-        .SetDepthStencilState(planeStencilState)
-        .GetResult();
+    uint32_t planeColorAttachments[] = {0};
+    dawn::TextureFormat planeColorAttachmentFormats[] =
+        {GetPreferredSwapChainTextureFormat()};
+
+    dawn::ShaderStage pRenderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule pRenderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor pDescriptor;
+    pDescriptor.layout = pl;
+    pDescriptor.numOfRenderStages = 2;
+    pDescriptor.stages = pRenderStages;
+    pDescriptor.modules = pRenderModules;
+    pDescriptor.entryPoint = "main";
+    pDescriptor.inputState = inputState;
+    pDescriptor.numOfColorAttachments = 1;
+    pDescriptor.colorAttachments = planeColorAttachments;
+    pDescriptor.colorAttachmentFormats = planeColorAttachmentFormats;
+    pDescriptor.depthStencilState = planeStencilState;
+    pDescriptor.hasDepthStencilAttachment = true;
+    pDescriptor.depthStencilFormat = dawn::TextureFormat::D32FloatS8Uint;
+    dawn::BlendState pBlendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+    pDescriptor.blendStates = pBlendStates;
+
+    pDescriptor.SetDefaults(device);
+
+    planePipeline = device.CreateRenderPipeline(&pDescriptor);
 
     auto reflectionStencilState = device.CreateDepthStencilStateBuilder()
         .SetDepthCompareFunction(dawn::CompareFunction::Less)
@@ -245,15 +279,32 @@ void init() {
         .SetStencilFunction(dawn::Face::Both, dawn::CompareFunction::Equal, dawn::StencilOperation::Keep, dawn::StencilOperation::Keep, dawn::StencilOperation::Replace)
         .GetResult();
 
-    reflectionPipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, GetPreferredSwapChainTextureFormat())
-        .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-        .SetLayout(pl)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsReflectionModule, "main")
-        .SetInputState(inputState)
-        .SetDepthStencilState(reflectionStencilState)
-        .GetResult();
+    uint32_t rfColorAttachments[] = {0};
+    dawn::TextureFormat rfColorAttachmentFormats[] =
+        {GetPreferredSwapChainTextureFormat()};
+
+    dawn::ShaderStage rfRenderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule rfRenderModules[] = {vsModule, fsReflectionModule};
+
+    utils::ComboRenderPipelineDescriptor rfDescriptor;
+    rfDescriptor.layout = pl;
+    rfDescriptor.numOfRenderStages = 2;
+    rfDescriptor.stages = rfRenderStages;
+    rfDescriptor.modules = rfRenderModules;
+    rfDescriptor.entryPoint = "main";
+    rfDescriptor.inputState = inputState;
+    rfDescriptor.numOfColorAttachments = 1;
+    rfDescriptor.colorAttachments = rfColorAttachments;
+    rfDescriptor.colorAttachmentFormats = rfColorAttachmentFormats;
+    rfDescriptor.depthStencilState = reflectionStencilState;
+    rfDescriptor.hasDepthStencilAttachment = true;
+    rfDescriptor.depthStencilFormat = dawn::TextureFormat::D32FloatS8Uint;
+    dawn::BlendState rfBlendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+    rfDescriptor.blendStates = rfBlendStates;
+
+    rfDescriptor.SetDefaults(device);
+
+    reflectionPipeline = device.CreateRenderPipeline(&rfDescriptor);
 
     cameraData.proj = glm::perspective(glm::radians(45.0f), 1.f, 1.0f, 100.0f);
 }

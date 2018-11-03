@@ -15,6 +15,7 @@
 #include "tests/DawnTest.h"
 
 #include "common/Assert.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 constexpr static unsigned int kRTSize = 64;
@@ -220,14 +221,31 @@ class DepthStencilStateTest : public DawnTest {
                     .GetResult();
 
                 // Create a pipeline for the triangles with the test spec's depth stencil state
-                dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-                    .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-                    .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-                    .SetLayout(pipelineLayout)
-                    .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                    .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                    .SetDepthStencilState(test.depthStencilState)
-                    .GetResult();
+                uint32_t colorAttachments[] = {0};
+                dawn::TextureFormat colorAttachmentFormats[] =
+                    {dawn::TextureFormat::R8G8B8A8Unorm};
+
+                dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+                dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+                utils::ComboRenderPipelineDescriptor descriptor;
+                descriptor.layout = pipelineLayout;
+                descriptor.numOfRenderStages = 2;
+                descriptor.stages = renderStages;
+                descriptor.modules = renderModules;
+                descriptor.entryPoint = "main";
+                descriptor.numOfColorAttachments = 1;
+                descriptor.colorAttachments = colorAttachments;
+                descriptor.colorAttachmentFormats = colorAttachmentFormats;
+                descriptor.hasDepthStencilAttachment = true;
+                descriptor.depthStencilFormat = dawn::TextureFormat::D32FloatS8Uint;
+                descriptor.depthStencilState = test.depthStencilState;
+                dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+                descriptor.blendStates = blendStates;
+
+                descriptor.SetDefaults(device);
+
+                dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
 
                 pass.SetRenderPipeline(pipeline);
                 pass.SetStencilReference(test.stencil);  // Set the stencil reference

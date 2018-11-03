@@ -56,12 +56,42 @@ void init() {
     dawnShaderModule fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, fs).Release();
 
     {
-        dawnRenderPipelineBuilder builder = dawnDeviceCreateRenderPipelineBuilder(device);
-        dawnRenderPipelineBuilderSetColorAttachmentFormat(builder, 0, swapChainFormat);
-        dawnRenderPipelineBuilderSetStage(builder, DAWN_SHADER_STAGE_VERTEX, vsModule, "main");
-        dawnRenderPipelineBuilderSetStage(builder, DAWN_SHADER_STAGE_FRAGMENT, fsModule, "main");
-        pipeline = dawnRenderPipelineBuilderGetResult(builder);
-        dawnRenderPipelineBuilderRelease(builder);
+        uint32_t colorAttachments[] = {0};
+        dawnTextureFormat colorAttachmentFormats[] = {swapChainFormat};
+        dawnShaderStage stages[] = {DAWN_SHADER_STAGE_VERTEX, DAWN_SHADER_STAGE_FRAGMENT};
+        dawnShaderModule modules[] = {vsModule, fsModule};
+
+        dawnRenderPipelineDescriptor descriptor;
+        descriptor.nextInChain = nullptr;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = stages;
+        descriptor.modules = modules;
+        descriptor.entryPoint = "main";
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        descriptor.hasDepthStencilAttachment = false;
+        dawnBlendStateBuilder bl = dawnDeviceCreateBlendStateBuilder(device);
+        dawnBlendState blendStates[] = {dawnBlendStateBuilderGetResult(bl)};
+        descriptor.blendStates =  blendStates;
+
+        dawnPipelineLayoutDescriptor pl;
+        pl.nextInChain = nullptr;
+        pl.numBindGroupLayouts = 0;
+        pl.bindGroupLayouts = nullptr;
+        descriptor.layout = dawnDeviceCreatePipelineLayout(device, &pl);
+
+        dawnInputStateBuilder builder = dawnDeviceCreateInputStateBuilder(device);
+        descriptor.inputState = dawnInputStateBuilderGetResult(builder);
+
+        descriptor.indexFormat = DAWN_INDEX_FORMAT_UINT32;
+        descriptor.primitiveTopology = DAWN_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+
+        dawnDepthStencilStateBuilder ds = dawnDeviceCreateDepthStencilStateBuilder(device);
+        descriptor.depthStencilState = dawnDepthStencilStateBuilderGetResult(ds);
+
+
+        pipeline = dawnDeviceCreateRenderPipeline(device, &descriptor);
     }
 
     dawnShaderModuleRelease(vsModule);

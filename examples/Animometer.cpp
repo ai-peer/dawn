@@ -14,6 +14,7 @@
 
 #include "SampleUtils.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 #include "utils/SystemUtils.h"
 
@@ -109,12 +110,30 @@ void init() {
 
     depthStencilView = CreateDefaultDepthStencilView(device);
 
-    pipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, GetPreferredSwapChainTextureFormat())
-        .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {GetPreferredSwapChainTextureFormat()};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.numOfRenderStages = 2;
+    descriptor.stages = renderStages;
+    descriptor.modules = renderModules;
+    descriptor.entryPoint = "main";
+    descriptor.numOfColorAttachments = 1;
+    descriptor.colorAttachments = colorAttachments;
+    descriptor.colorAttachmentFormats = colorAttachmentFormats;
+    descriptor.hasDepthStencilAttachment = true;
+    descriptor.depthStencilFormat =
+        dawn::TextureFormat::D32FloatS8Uint;
+    dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+    descriptor.blendStates = blendStates;
+
+    descriptor.SetDefaults(device);
+
+    pipeline = device.CreateRenderPipeline(&descriptor);
 
     shaderData.resize(10000);
     for (auto& data : shaderData) {

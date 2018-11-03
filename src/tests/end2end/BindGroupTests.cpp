@@ -14,6 +14,7 @@
 
 #include "common/Constants.h"
 #include "tests/DawnTest.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 constexpr static unsigned int kRTSize = 8;
@@ -115,13 +116,29 @@ TEST_P(BindGroupTests, ReusedUBO) {
     );
     dawn::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
-    dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {renderPass.colorFormat};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.layout = pipelineLayout;
+    descriptor.numOfRenderStages = 2;
+    descriptor.stages = renderStages;
+    descriptor.modules = renderModules;
+    descriptor.entryPoint = "main";
+    descriptor.numOfColorAttachments = 1;
+    descriptor.colorAttachments = colorAttachments;
+    descriptor.colorAttachmentFormats = colorAttachmentFormats;
+    dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+    descriptor.blendStates = blendStates;
+
+    descriptor.SetDefaults(device);
+
+    dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
+
     struct Data {
         float transform[8];
         char padding[256 - sizeof(Data::transform)];
@@ -200,13 +217,29 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     );
     dawn::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
-    dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {renderPass.colorFormat};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor rDescriptor;
+    rDescriptor.layout = pipelineLayout;
+    rDescriptor.numOfRenderStages = 2;
+    rDescriptor.stages = renderStages;
+    rDescriptor.modules = renderModules;
+    rDescriptor.entryPoint = "main";
+    rDescriptor.numOfColorAttachments = 1;
+    rDescriptor.colorAttachments = colorAttachments;
+    rDescriptor.colorAttachmentFormats = colorAttachmentFormats;
+    dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+    rDescriptor.blendStates = blendStates;
+
+    rDescriptor.SetDefaults(device);
+
+    dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&rDescriptor);
+
     constexpr float dummy = 0.0f;
     constexpr float transform[] = { 1.f, 0.f, dummy, dummy, 0.f, 1.f, dummy, dummy };
     dawn::Buffer buffer = utils::CreateBufferFromData(device, &transform, sizeof(transform), dawn::BufferUsageBit::Uniform);

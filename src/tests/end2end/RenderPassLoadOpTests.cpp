@@ -14,6 +14,7 @@
 
 #include "tests/DawnTest.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 #include <array>
@@ -32,12 +33,29 @@ class DrawQuad {
             }
 
         void Draw(dawn::RenderPassEncoder* pass) {
-            auto renderPipeline = device->CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-                .SetLayout(pipelineLayout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .GetResult();
+
+            uint32_t colorAttachments[] = {0};
+            dawn::TextureFormat colorAttachmentFormats[] =
+                {dawn::TextureFormat::R8G8B8A8Unorm};
+
+            dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+            dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+            utils::ComboRenderPipelineDescriptor descriptor;
+            descriptor.layout = pipelineLayout;
+            descriptor.numOfRenderStages = 2;
+            descriptor.stages = renderStages;
+            descriptor.modules = renderModules;
+            descriptor.entryPoint = "main";
+            descriptor.numOfColorAttachments = 1;
+            descriptor.colorAttachments = colorAttachments;
+            descriptor.colorAttachmentFormats = colorAttachmentFormats;
+            dawn::BlendState blendStates[] = {device->CreateBlendStateBuilder().GetResult()};
+            descriptor.blendStates = blendStates;
+
+            descriptor.SetDefaults(*device);
+
+            auto renderPipeline = device->CreateRenderPipeline(&descriptor);
 
             pass->SetRenderPipeline(renderPipeline);
             pass->DrawArrays(6, 1, 0, 0);

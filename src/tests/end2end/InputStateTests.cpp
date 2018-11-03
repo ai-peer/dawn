@@ -15,6 +15,7 @@
 #include "tests/DawnTest.h"
 
 #include "common/Assert.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 using dawn::InputStepMode;
@@ -120,12 +121,28 @@ class InputStateTest : public DawnTest {
                 })"
             );
 
-            return device.CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, renderPass.colorFormat)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .SetInputState(inputState)
-                .GetResult();
+            uint32_t colorAttachments[] = {0};
+            dawn::TextureFormat colorAttachmentFormats[] =
+                {renderPass.colorFormat};
+
+            dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+            dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+            utils::ComboRenderPipelineDescriptor descriptor;
+            descriptor.numOfRenderStages = 2;
+            descriptor.stages = renderStages;
+            descriptor.modules = renderModules;
+            descriptor.entryPoint = "main";
+            descriptor.inputState = inputState;
+            descriptor.numOfColorAttachments = 1;
+            descriptor.colorAttachments = colorAttachments;
+            descriptor.colorAttachmentFormats = colorAttachmentFormats;
+            dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+            descriptor.blendStates = blendStates;
+
+            descriptor.SetDefaults(device);
+
+            return device.CreateRenderPipeline(&descriptor);
         }
 
         struct InputSpec {

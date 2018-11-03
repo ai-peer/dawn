@@ -14,6 +14,7 @@
 
 #include "tests/DawnTest.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 class ScissorTest: public DawnTest {
@@ -36,13 +37,27 @@ class ScissorTest: public DawnTest {
                 fragColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);
             })");
 
-        dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-            .SetColorAttachmentFormat(0, format)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .GetResult();
+        uint32_t colorAttachments[] = {0};
+        dawn::TextureFormat colorAttachmentFormats[] =
+            {format};
 
-        return pipeline;
+        dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+        dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        descriptor.SetDefaults(device);
+
+        return device.CreateRenderPipeline(&descriptor);
     }
 };
 

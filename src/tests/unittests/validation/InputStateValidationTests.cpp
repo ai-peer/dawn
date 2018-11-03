@@ -14,6 +14,7 @@
 
 #include "tests/unittests/validation/ValidationTest.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 // Maximums for Dawn, tests will start failing when this changes
@@ -22,7 +23,7 @@ static constexpr uint32_t kMaxVertexInputs = 16u;
 
 class InputStateTest : public ValidationTest {
     protected:
-        dawn::RenderPipeline CreatePipeline(bool success, const dawn::InputState& inputState, std::string vertexSource) {
+        void CreatePipeline(bool success, const dawn::InputState& inputState, std::string vertexSource) {
             DummyRenderPass renderpassData = CreateDummyRenderPass();
 
             dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, vertexSource.c_str());
@@ -34,18 +35,30 @@ class InputStateTest : public ValidationTest {
                 }
             )");
 
-            dawn::RenderPipelineBuilder builder;
-            if (success) {
-                builder = AssertWillBeSuccess(device.CreateRenderPipelineBuilder());
-            } else {
-                builder = AssertWillBeError(device.CreateRenderPipelineBuilder());
-            }
+            uint32_t colorAttachments[] = {0};
+            dawn::TextureFormat colorAttachmentFormats[] =
+                {renderpassData.attachmentFormat};
 
-            return builder.SetColorAttachmentFormat(0, renderpassData.attachmentFormat)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .SetInputState(inputState)
-                .GetResult();
+            dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+            dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+            utils::ComboRenderPipelineDescriptor descriptor;
+            descriptor.numOfRenderStages = 2;
+            descriptor.stages = renderStages;
+            descriptor.modules = renderModules;
+            descriptor.entryPoint = "main";
+            descriptor.inputState = inputState;
+            descriptor.numOfColorAttachments = 1;
+            descriptor.colorAttachments = colorAttachments;
+            descriptor.colorAttachmentFormats = colorAttachmentFormats;
+            dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+            descriptor.blendStates = blendStates;
+
+            descriptor.SetDefaults(device);
+
+            if (!success) {
+                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+            }
         }
 };
 

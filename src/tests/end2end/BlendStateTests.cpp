@@ -19,6 +19,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 constexpr static unsigned int kRTSize = 64;
@@ -66,20 +67,49 @@ class BlendStateTest : public DawnTest {
                 }
             )");
 
-            basePipeline = device.CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, renderPass.colorFormat)
-                .SetLayout(pipelineLayout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .GetResult();
+            uint32_t colorAttachments[] = {0};
+            dawn::TextureFormat colorAttachmentFormats[] =
+                {renderPass.colorFormat};
 
-            testPipeline = device.CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, renderPass.colorFormat)
-                .SetLayout(pipelineLayout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .SetColorAttachmentBlendState(0, blendState)
-                .GetResult();
+            dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+            dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+            utils::ComboRenderPipelineDescriptor descriptor;
+            descriptor.layout = pipelineLayout;
+            descriptor.numOfRenderStages = 2;
+            descriptor.stages = renderStages;
+            descriptor.modules = renderModules;
+            descriptor.entryPoint = "main";
+            descriptor.numOfColorAttachments = 1;
+            descriptor.colorAttachments = colorAttachments;
+            descriptor.colorAttachmentFormats = colorAttachmentFormats;
+            dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+            descriptor.blendStates = blendStates;
+
+            descriptor.SetDefaults(device);
+
+            basePipeline = device.CreateRenderPipeline(&descriptor);
+
+            uint32_t testColorAttachments[] = {0};
+            dawn::TextureFormat testColorAttachmentFormats[] =
+                {renderPass.colorFormat};
+
+            utils::ComboRenderPipelineDescriptor testDescriptor;
+
+            testDescriptor.layout = pipelineLayout;
+            testDescriptor.numOfRenderStages = 2;
+            testDescriptor.stages = renderStages;
+            testDescriptor.modules = renderModules;
+            testDescriptor.entryPoint = "main";
+            testDescriptor.numOfColorAttachments = 1;
+            testDescriptor.colorAttachments = testColorAttachments;
+            testDescriptor.colorAttachmentFormats = testColorAttachmentFormats;
+            dawn::BlendState testBlendStates[] = {blendState};
+            testDescriptor.blendStates = testBlendStates;
+
+            testDescriptor.SetDefaults(device);
+
+            testPipeline = device.CreateRenderPipeline(&testDescriptor);
         }
 
         // Create a bind group to set the colors as a uniform buffer
@@ -774,7 +804,8 @@ TEST_P(BlendStateTest, IndependentBlendState) {
     blend3.srcFactor = dawn::BlendFactor::One;
     blend3.dstFactor = dawn::BlendFactor::One;
 
-    std::array<dawn::BlendState, 3> blendStates = { {
+    std::array<dawn::BlendState, 4> blendStates = { {
+
         device.CreateBlendStateBuilder()
             .SetBlendEnabled(true)
             .SetColorBlend(&blend1)
@@ -785,6 +816,7 @@ TEST_P(BlendStateTest, IndependentBlendState) {
             .SetColorBlend(&blend2)
             .SetAlphaBlend(&blend2)
             .GetResult(),
+        device.CreateBlendStateBuilder().GetResult(),
         device.CreateBlendStateBuilder()
             .SetBlendEnabled(true)
             .SetColorBlend(&blend3)
@@ -792,30 +824,45 @@ TEST_P(BlendStateTest, IndependentBlendState) {
             .GetResult(),
     } };
 
-    basePipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(1, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(2, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(3, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    uint32_t colorAttachments[] = {0, 1, 2, 3};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {dawn::TextureFormat::R8G8B8A8Unorm, dawn::TextureFormat::R8G8B8A8Unorm,
+         dawn::TextureFormat::R8G8B8A8Unorm, dawn::TextureFormat::R8G8B8A8Unorm};
 
-    testPipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(1, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(2, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(3, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .SetColorAttachmentBlendState(0, blendStates[0])
-        .SetColorAttachmentBlendState(1, blendStates[1])
-        // Blend state not set on third color attachment. It should be default
-        .SetColorAttachmentBlendState(3, blendStates[2])
-        .GetResult();
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
 
+    utils::ComboRenderPipelineDescriptor rDescriptor;
+    rDescriptor.layout = pipelineLayout;
+    rDescriptor.numOfRenderStages = 2;
+    rDescriptor.stages = renderStages;
+    rDescriptor.modules = renderModules;
+    rDescriptor.entryPoint = "main";
+    rDescriptor.numOfColorAttachments = 4;
+    rDescriptor.colorAttachments = colorAttachments;
+    rDescriptor.colorAttachmentFormats = colorAttachmentFormats;
+    dawn::BlendState defaultBlendStates[] =
+        {device.CreateBlendStateBuilder().GetResult(), device.CreateBlendStateBuilder().GetResult(),
+         device.CreateBlendStateBuilder().GetResult(), device.CreateBlendStateBuilder().GetResult()};
+    rDescriptor.blendStates = defaultBlendStates;
+
+    rDescriptor.SetDefaults(device);
+
+    basePipeline = device.CreateRenderPipeline(&rDescriptor);
+
+    utils::ComboRenderPipelineDescriptor testDescriptor;
+    testDescriptor.layout = pipelineLayout;
+    testDescriptor.numOfRenderStages = 2;
+    testDescriptor.stages = renderStages;
+    testDescriptor.modules = renderModules;
+    testDescriptor.entryPoint = "main";
+    testDescriptor.numOfColorAttachments = 4;
+    testDescriptor.colorAttachments = colorAttachments;
+    testDescriptor.colorAttachmentFormats = colorAttachmentFormats;
+    testDescriptor.blendStates = blendStates.data();
+    testDescriptor.SetDefaults(device);
+
+    testPipeline = device.CreateRenderPipeline(&testDescriptor);
 
     for (unsigned int c = 0; c < kColors.size(); ++c) {
         RGBA8 base = kColors[((c + 31) * 29) % kColors.size()];
@@ -878,20 +925,45 @@ TEST_P(BlendStateTest, DefaultBlendColor) {
         }
     )");
 
-    basePipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
 
-    testPipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .SetColorAttachmentBlendState(0, blendState)
-        .GetResult();
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {renderPass.colorFormat};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.layout = pipelineLayout;
+    descriptor.numOfRenderStages = 2;
+    descriptor.stages = renderStages;
+    descriptor.modules = renderModules;
+    descriptor.entryPoint = "main";
+    descriptor.numOfColorAttachments = 1;
+    descriptor.colorAttachments = colorAttachments;
+    descriptor.colorAttachmentFormats = colorAttachmentFormats;
+    dawn::BlendState defaultBlendStates[] =
+        {device.CreateBlendStateBuilder().GetResult()};
+    descriptor.blendStates = defaultBlendStates;
+
+    descriptor.SetDefaults(device);
+
+    basePipeline = device.CreateRenderPipeline(&descriptor);
+
+    utils::ComboRenderPipelineDescriptor testDescriptor;
+    testDescriptor.layout = pipelineLayout;
+    testDescriptor.numOfRenderStages = 2;
+    testDescriptor.stages = renderStages;
+    testDescriptor.modules = renderModules;
+    testDescriptor.entryPoint = "main";
+    testDescriptor.numOfColorAttachments = 1;
+    testDescriptor.colorAttachments = colorAttachments;
+    testDescriptor.colorAttachmentFormats = colorAttachmentFormats;
+    testDescriptor.blendStates = &blendState;
+
+    testDescriptor.SetDefaults(device);
+
+    testPipeline = device.CreateRenderPipeline(&testDescriptor);
 
     // Check that the initial blend color is (0,0,0,0)
     {

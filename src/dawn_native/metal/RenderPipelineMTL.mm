@@ -64,23 +64,23 @@ namespace dawn_native { namespace metal {
         }
     }
 
-    RenderPipeline::RenderPipeline(RenderPipelineBuilder* builder)
-        : RenderPipelineBase(builder),
+    RenderPipeline::RenderPipeline(DeviceBase* device, const RenderPipelineDescriptor* descriptor)
+        : RenderPipelineBase(device, descriptor),
           mMtlIndexType(MTLIndexFormat(GetIndexFormat())),
           mMtlPrimitiveTopology(MTLPrimitiveTopology(GetPrimitiveTopology())) {
-        auto mtlDevice = ToBackend(builder->GetDevice())->GetMTLDevice();
+        auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
 
         MTLRenderPipelineDescriptor* descriptor = [MTLRenderPipelineDescriptor new];
 
-        for (auto stage : IterateStages(GetStageMask())) {
-            const auto& module = ToBackend(builder->GetStageInfo(stage).module);
+        for (uint32_t i = 0; i < descriptor->numOfRenderStages; ++i) {
+            const auto& module = ToBackend(descriptor->modules[i]);
 
-            const auto& entryPoint = builder->GetStageInfo(stage).entryPoint;
+            const auto& entryPoint = descriptor->entryPoint;
             ShaderModule::MetalFunctionData data =
                 module->GetFunction(entryPoint.c_str(), stage, ToBackend(GetLayout()));
             id<MTLFunction> function = data.function;
 
-            switch (stage) {
+            switch (descriptor->stages[i]) {
                 case dawn::ShaderStage::Vertex:
                     descriptor.vertexFunction = function;
                     break;
@@ -117,7 +117,6 @@ namespace dawn_native { namespace metal {
                                                                             error:&error];
         if (error != nil) {
             NSLog(@" error => %@", error);
-            builder->HandleError("Error creating pipeline state");
             [descriptor release];
             return;
         }

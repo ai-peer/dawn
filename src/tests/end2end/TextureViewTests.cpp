@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 constexpr static unsigned int kRTSize = 64;
@@ -133,12 +134,28 @@ protected:
         dawn::ShaderModule fsModule =
             utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, fragmentShader);
 
-        dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-            .SetColorAttachmentFormat(0, mRenderPass.colorFormat)
-            .SetLayout(mPipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, mVSModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .GetResult();
+        uint32_t colorAttachments[] = {0};
+        dawn::TextureFormat colorAttachmentFormats[] =
+            {mRenderPass.colorFormat};
+
+        dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+        dawn::ShaderModule renderModules[] = {mVSModule, fsModule};
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.layout = mPipelineLayout;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        descriptor.SetDefaults(device);
+
+        dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
 
         dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
         {

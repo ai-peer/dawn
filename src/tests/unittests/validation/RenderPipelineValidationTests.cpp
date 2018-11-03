@@ -15,6 +15,7 @@
 #include "tests/unittests/validation/ValidationTest.h"
 
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 class RenderPipelineValidationTest : public ValidationTest {
@@ -45,15 +46,6 @@ class RenderPipelineValidationTest : public ValidationTest {
                 })");
         }
 
-        dawn::RenderPipelineBuilder& AddDefaultStates(dawn::RenderPipelineBuilder&& builder) {
-            builder.SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-                .SetLayout(pipelineLayout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList);
-            return builder;
-        }
-
         dawn::RenderPassDescriptor renderpass;
         dawn::ShaderModule vsModule;
         dawn::ShaderModule fsModule;
@@ -64,148 +56,265 @@ class RenderPipelineValidationTest : public ValidationTest {
 
 // Test cases where creation should succeed
 TEST_F(RenderPipelineValidationTest, CreationSuccess) {
-    AddDefaultStates(AssertWillBeSuccess(device.CreateRenderPipelineBuilder()))
-        .GetResult();
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {dawn::TextureFormat::R8G8B8A8Unorm};
 
-    AddDefaultStates(AssertWillBeSuccess(device.CreateRenderPipelineBuilder()))
-        .SetInputState(inputState)
-        .GetResult();
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
 
-    AddDefaultStates(AssertWillBeSuccess(device.CreateRenderPipelineBuilder()))
-        .SetColorAttachmentBlendState(0, blendState)
-        .GetResult();
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.layout = pipelineLayout;
+    descriptor.numOfRenderStages = 2;
+    descriptor.stages = renderStages;
+    descriptor.modules = renderModules;
+    descriptor.entryPoint = "main";
+    descriptor.numOfColorAttachments = 1;
+    descriptor.colorAttachments = colorAttachments;
+    descriptor.colorAttachmentFormats = colorAttachmentFormats;
+    dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+    descriptor.blendStates = blendStates;
+
+    descriptor.SetDefaults(device);
+
+    device.CreateRenderPipeline(&descriptor);
+
+    descriptor.layout = pipelineLayout;
+    descriptor.numOfRenderStages = 2;
+    descriptor.stages = renderStages;
+    descriptor.modules = renderModules;
+    descriptor.entryPoint = "main";
+    descriptor.numOfColorAttachments = 1;
+    descriptor.inputState = inputState;
+    descriptor.colorAttachments = colorAttachments;
+    descriptor.colorAttachmentFormats = colorAttachmentFormats;
+    descriptor.blendStates = blendStates;
+
+    descriptor.SetDefaults(device);
+
+    device.CreateRenderPipeline(&descriptor);
+
+    descriptor.layout = pipelineLayout;
+    descriptor.numOfRenderStages = 2;
+    descriptor.stages = renderStages;
+    descriptor.modules = renderModules;
+    descriptor.entryPoint = "main";
+    descriptor.numOfColorAttachments = 1;
+    descriptor.inputState = inputState;
+    descriptor.colorAttachments = colorAttachments;
+    descriptor.colorAttachmentFormats = colorAttachmentFormats;
+    descriptor.blendStates = blendStates;
+
+    descriptor.SetDefaults(device);
+
+    device.CreateRenderPipeline(&descriptor);
 }
 
 // Test creation failure when properties are missing
 TEST_F(RenderPipelineValidationTest, CreationMissingProperty) {
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {dawn::TextureFormat::R8G8B8A8Unorm};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor descriptor;
     // Vertex stage not set
     {
-        AssertWillBeError(device.CreateRenderPipelineBuilder())
-            .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-            .GetResult();
+        dawn::ShaderStage wrongRenderStages[] = {dawn::ShaderStage::Fragment};
+        dawn::ShaderModule wrongRenderModules[] = {fsModule};
+
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = wrongRenderStages;
+        descriptor.modules = wrongRenderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        descriptor.SetDefaults(device);
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
     // Fragment stage not set
     {
-        AssertWillBeError(device.CreateRenderPipelineBuilder())
-            .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-            .GetResult();
+        dawn::ShaderStage wrongRenderStages[] = {dawn::ShaderStage::Vertex};
+        dawn::ShaderModule wrongRenderModules[] = {vsModule};
+
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = wrongRenderStages;
+        descriptor.modules = wrongRenderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        descriptor.SetDefaults(device);
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
     // No attachment set
     {
-        AssertWillBeError(device.CreateRenderPipelineBuilder())
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-            .GetResult();
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.numOfColorAttachments = 1; // the fake number.
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        descriptor.SetDefaults(device);
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 }
 
 TEST_F(RenderPipelineValidationTest, BlendState) {
     // Fails because blend state is set on a nonexistent color attachment
+
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {dawn::TextureFormat::R8G8B8A8Unorm};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
+    utils::ComboRenderPipelineDescriptor descriptor;
     {
         // This one succeeds because attachment 0 is the color attachment
-        AssertWillBeSuccess(device.CreateRenderPipelineBuilder())
-            .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-            .SetColorAttachmentBlendState(0, blendState)
-            .GetResult();
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
 
-        // This fails because attachment 1 is not one of the color attachments
-        AssertWillBeError(device.CreateRenderPipelineBuilder())
-            .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-            .SetColorAttachmentBlendState(1, blendState)
-            .GetResult();
-    }
+        descriptor.SetDefaults(device);
 
-    // Fails because color attachment is out of bounds
-    {
-        AddDefaultStates(AssertWillBeError(device.CreateRenderPipelineBuilder()))
-            .SetColorAttachmentBlendState(kMaxColorAttachments, blendState)
-            .GetResult();
-    }
+        device.CreateRenderPipeline(&descriptor);
 
-    // Fails because color attachment blend state is set twice
-    {
-        AddDefaultStates(AssertWillBeError(device.CreateRenderPipelineBuilder()))
-            .SetColorAttachmentBlendState(0, blendState)
-            .SetColorAttachmentBlendState(0, blendState)
-            .GetResult();
+        // Fail because lack of blend states for color attachments
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+
+        descriptor.SetDefaults(device);
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 }
 
 // TODO(enga@google.com): These should be added to the test above when validation is implemented
 TEST_F(RenderPipelineValidationTest, DISABLED_TodoCreationMissingProperty) {
+    uint32_t colorAttachments[] = {0};
+    dawn::TextureFormat colorAttachmentFormats[] =
+        {dawn::TextureFormat::R8G8B8A8Unorm};
+
+    dawn::ShaderStage renderStages[] = {dawn::ShaderStage::Vertex, dawn::ShaderStage::Fragment};
+    dawn::ShaderModule renderModules[] = {vsModule, fsModule};
+
     // Fails because pipeline layout is not set
     {
-        AssertWillBeError(device.CreateRenderPipelineBuilder())
-            .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-            .GetResult();
+        dawn::RenderPipelineDescriptor descriptor;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.inputState = device.CreateInputStateBuilder().GetResult();
+        descriptor.depthStencilState = device.CreateDepthStencilStateBuilder().GetResult();
+        descriptor.indexFormat = dawn::IndexFormat::Uint32;
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+
     }
 
     // Fails because primitive topology is not set
     {
-        AssertWillBeError(device.CreateRenderPipelineBuilder())
-            .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .GetResult();
-    }
-}
+        dawn::RenderPipelineDescriptor descriptor;
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.inputState = device.CreateInputStateBuilder().GetResult();
+        descriptor.depthStencilState = device.CreateDepthStencilStateBuilder().GetResult();
+        descriptor.indexFormat = dawn::IndexFormat::Uint32;
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
 
-// Test creation failure when specifying properties multiple times
-TEST_F(RenderPipelineValidationTest, DISABLED_CreationDuplicates) {
-    // Fails because input state is set twice
-    {
-        AddDefaultStates(AssertWillBeError(device.CreateRenderPipelineBuilder()))
-            .SetInputState(inputState)
-            .GetResult();
-    }
-
-    // Fails because primitive topology is set twice
-    {
-        AddDefaultStates(AssertWillBeError(device.CreateRenderPipelineBuilder()))
-            .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-            .GetResult();
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
-    // Fails because vertex stage is set twice
+    // Fails because index format is not set
     {
-        AddDefaultStates(AssertWillBeError(device.CreateRenderPipelineBuilder()))
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .GetResult();
+        dawn::RenderPipelineDescriptor descriptor;
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.numOfColorAttachments = 1;
+        descriptor.colorAttachments = colorAttachments;
+        descriptor.inputState = device.CreateInputStateBuilder().GetResult();
+        descriptor.depthStencilState = device.CreateDepthStencilStateBuilder().GetResult();
+        descriptor.colorAttachmentFormats = colorAttachmentFormats;
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
-    // Fails because fragment stage is set twice
+    // Fails because num of color attachment is zero
     {
-        AddDefaultStates(AssertWillBeError(device.CreateRenderPipelineBuilder()))
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .GetResult();
-    }
+        dawn::RenderPipelineDescriptor descriptor;
+        descriptor.layout = pipelineLayout;
+        descriptor.numOfRenderStages = 2;
+        descriptor.stages = renderStages;
+        descriptor.modules = renderModules;
+        descriptor.entryPoint = "main";
+        descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleList;
+        descriptor.indexFormat = dawn::IndexFormat::Uint32;
+        descriptor.numOfColorAttachments = 0;
+        descriptor.inputState = device.CreateInputStateBuilder().GetResult();
+        descriptor.depthStencilState = device.CreateDepthStencilStateBuilder().GetResult();
+        dawn::BlendState blendStates[] = {device.CreateBlendStateBuilder().GetResult()};
+        descriptor.blendStates = blendStates;
 
-    // Fails because the layout is set twice
-    {
-        AddDefaultStates(AssertWillBeError(device.CreateRenderPipelineBuilder()))
-            .SetLayout(pipelineLayout)
-            .GetResult();
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 }
