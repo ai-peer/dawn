@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2a97c49_b9214226",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-03T05:10:50Z",
+      "side": 1,
+      "message": "TODO: add test to cover CStringArgument",
+      "range": {
+        "startLine": 328,
+        "startChar": 3,
+        "endLine": 329,
+        "endChar": 0
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fc80df0_e7b0f7aa",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-03T05:10:50Z",
+      "side": 1,
+      "message": "I\u0027d like to discuss a interesting issue. As you can see, I create a fragment only render stage but cheat dawn that I have 2 stages. Since dawn\u0027s shader module class has default constructor. The array of descriptor.modules will have a default object for descripotr.modules[1]. What\u0027s more, the dawn shader stage enum use 0 to represent vertex. So this cheating success!(Indeed I did a lot of validations but in this case it can passed without any problem). So do you have any ideas ?\n\nOne of the proposal is to use dawn::ShaderStageBit when ShaderModule get their execution Model.So the default 0 means shader stage none and validation will find this.\n\nAnd I\u0027m curious about why dawn has both dawn::ShaderStage and dawn::ShaderStageBit? it is a little duplicated.",
+      "range": {
+        "startLine": 126,
+        "startChar": 50,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
