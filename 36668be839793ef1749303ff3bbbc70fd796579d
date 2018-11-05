@@ -2,6 +2,177 @@
   "comments": [
     {
       "key": {
+        "uuid": "90989495_3b697815",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "Here and in other places: the convention is \"num things\" instead of \"num of things\"",
+      "range": {
+        "startLine": 877,
+        "startChar": 22,
+        "endLine": 877,
+        "endChar": 28
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5823b15b_f74578b0",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "Right now we support only the fragment and vertex stages so we can just list them individually.\n\n - ShaderModule vertexModule;\n - const char* vertexEntryPoint;\n\nand the same for fragment.",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "683232b9_b0875a9f",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "This is ok for now, but FYI these will be in a dawn::AttachmentsState like the WebGPU idl.",
+      "range": {
+        "startLine": 884,
+        "startChar": 0,
+        "endLine": 888,
+        "endChar": 71
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcd0b749_45fd2ac4",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "ComboDescriptor could have a private member that\u0027s\n\n  uint32_t cColorAttachments[kMaxColorAttachments]\n\nthat shadows the colorAttachments of the RenderPipeline and in the constructor we do colorAttachments \u003d \u0026cColorAttachments. (the c prefix is for combo).\n\nThis way user code doesn\u0027t have do declare an extra variable and instead can just do:\n\n descriptor.cColorAttachments[0] \u003d foo",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 63
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91c959d6_cc3e3146",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "SetDefaults could happen at the constructor. It is ok to create extra objects just to destroy them: they will disappear and the cost of creation / destruction will be small compared to the pipeline compilation.",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74439093_47c6dca4",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "Overall this initialization would look like this:\n\n    utils::ComboRenderPipelineDescriptor descriptor; // Defaults are set already\n    descriptor.vertexModule \u003d vsModule; // entrypoint defaults to \"main\"\n    descriptor.fragmentModule \u003d fsModule; // entrypoint defaults to \"main\"\n    descriptor.numColorAttachments \u003d 1;\n    descriptor.cColorAttachmentFormats \u003d GetPreferredSwapChainTextureFormat();\n    // No cColorAttachments because the WebGPU IDL doesn\u0027t allow setting attachments with holes (i.e. attachments 0 and 2 but not 1). Might change in the future though.\n    descriptor.hasDepthStencilAttachment \u003d true;\n    descriptor.depthStencilFormat \u003d dawn::TextureFormat::D32FloatS8Uint;\n    // blendState is filled with defaults. Could even be the same blendstate object.\n\n    pipeline \u003d device.CreateRenderPipeline(\u0026descriptor);\n\nI think similar simplifications could done everywhere. The point of the combo render pipeline is to require less typing ;)",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdd6a911_11098488",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "I\u0027m surprised this works given the descriptor is const*. This changes the data the application sees so we just use the copy constructor instead. (just remove the std::moves)",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4d12055_64cdb851",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s needed because we know we\u0027ll always have FS and VS",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70746299_3f82d462",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "This would probably become a lambda called on fs and vs.",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2a97c49_b9214226",
         "filename": "src/tests/unittests/WireTests.cpp",
         "patchSetId": 1
@@ -13,6 +184,30 @@
       "writtenOn": "2018-11-03T05:10:50Z",
       "side": 1,
       "message": "TODO: add test to cover CStringArgument",
+      "range": {
+        "startLine": 328,
+        "startChar": 3,
+        "endLine": 329,
+        "endChar": 0
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aeff095_700fa049",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "We don\u0027t have CString as an argument anymore. This should probably be replaced with a StructureWithCStringMember test. These wire tests are a bit arcane, so I could help with writing the new test.",
+      "parentUuid": "a2a97c49_b9214226",
       "range": {
         "startLine": 328,
         "startChar": 3,
@@ -41,6 +236,53 @@
         "startChar": 50,
         "endLine": 126,
         "endChar": 51
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ef2ab46_5365f16e",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "\u003e I\u0027d like to discuss a interesting issue. As you can see, I create a fragment only render stage but cheat dawn that I have 2 stages. Since dawn\u0027s shader module class has default constructor. The array of descriptor.modules will have a default object for descripotr.modules[1]. What\u0027s more, the dawn shader stage enum use 0 to represent vertex. So this cheating success!(Indeed I did a lot of validations but in this case it can passed without any problem). So do you have any ideas ?\n\nI think the test here would be to check what happens when vertexModule is nullptr. Hopefully having vertexModule and fragmentModule be explicit would help too.\n\nShaderStage and ShaderStageBit are a bit redundant, but ShaderStageBit is for cases where we need to list multiple stages (like bind group binding visibility). While ShaderStage is just an enum to help with type-safety.",
+      "parentUuid": "0fc80df0_e7b0f7aa",
+      "range": {
+        "startLine": 126,
+        "startChar": 50,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "380b8292_a1b61ea6",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-05T13:50:20Z",
+      "side": 1,
+      "message": "Formatting is wrong here, the presubmit should catch it for you.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
       },
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
