@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7cb90523_b47d6105",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90989495_3b697815",
+      "range": {
+        "startLine": 877,
+        "startChar": 22,
+        "endLine": 877,
+        "endChar": 28
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5823b15b_f74578b0",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "4e5a3320_89b6b55e",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "I indeed listed them out in the first version but considered there maybe more stages added into render pipeline, I changed into this form to avoid possible changes in the future. Do you think this extensible ability is need right now? if not, I\u0027ll change it into the listed form.",
+      "parentUuid": "5823b15b_f74578b0",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "683232b9_b0875a9f",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2018-11-05T13:50:20Z",
       "side": 1,
       "message": "This is ok for now, but FYI these will be in a dawn::AttachmentsState like the WebGPU idl.",
+      "range": {
+        "startLine": 884,
+        "startChar": 0,
+        "endLine": 888,
+        "endChar": 71
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9bcddc7_87678db2",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Thx for the information. I\u0027ll change it.",
+      "parentUuid": "683232b9_b0875a9f",
       "range": {
         "startLine": 884,
         "startChar": 0,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "58cc525c_41cc487c",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "That\u0027s a good point. Thx for the comments, I\u0027ll follow your suggestion!",
+      "parentUuid": "bcd0b749_45fd2ac4",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 63
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "91c959d6_cc3e3146",
         "filename": "examples/Animometer.cpp",
         "patchSetId": 1
@@ -99,6 +189,24 @@
       "writtenOn": "2018-11-05T13:50:20Z",
       "side": 1,
       "message": "SetDefaults could happen at the constructor. It is ok to create extra objects just to destroy them: they will disappear and the cost of creation / destruction will be small compared to the pipeline compilation.",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf4c4e70_eed4e5e0",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Yes, indeed \"SetDefaults\" is a function that will be removed finally. I use this function to remind me the remain subojects which will be removed in the following patches.",
+      "parentUuid": "91c959d6_cc3e3146",
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -122,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "ff81590a_5489a06a",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Yes,absolutely and thx for the comment. Actually, this is a curious experiment :p. As you know, maybe only dawn has the ComboRenderPipeline, so I want to try the feeling that developer creating a fat descriptor. I must admit that the old builder path feels more easy and really give me the feeling about the importance of the default value.\n\nHowever, I\u0027ll move all of this into ComboRenderPipeline.",
+      "parentUuid": "74439093_47c6dca4",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fdd6a911_11098488",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -136,6 +262,24 @@
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ded3dd2_1725c4e7",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fdd6a911_11098488",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "abd92075_43e389e5",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Sure, but I keep this for extensive ability for more stages added into render pipeline or it is not need right now.",
+      "parentUuid": "b4d12055_64cdb851",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "70746299_3f82d462",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 1
@@ -170,6 +332,24 @@
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f107fe1b_404f763a",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "70746299_3f82d462",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -208,6 +388,30 @@
       "side": 1,
       "message": "We don\u0027t have CString as an argument anymore. This should probably be replaced with a StructureWithCStringMember test. These wire tests are a bit arcane, so I could help with writing the new test.",
       "parentUuid": "a2a97c49_b9214226",
+      "range": {
+        "startLine": 328,
+        "startChar": 3,
+        "endLine": 329,
+        "endChar": 0
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65fba6c_e45b8f71",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "Your helps on this will be appreciated !",
+      "parentUuid": "1aeff095_700fa049",
       "range": {
         "startLine": 328,
         "startChar": 3,
@@ -267,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "d16aa85e_3ef2af86",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "I think expicit vertexModule and fragmentModule could resolve this problem. But I think current implementation has flexibility. So are we need this extensive ability?",
+      "parentUuid": "3ef2ab46_5365f16e",
+      "range": {
+        "startLine": 126,
+        "startChar": 50,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "380b8292_a1b61ea6",
         "filename": "src/utils/ComboRenderPipelineDescriptor.h",
         "patchSetId": 1
@@ -278,6 +506,30 @@
       "writtenOn": "2018-11-05T13:50:20Z",
       "side": 1,
       "message": "Formatting is wrong here, the presubmit should catch it for you.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0a77470_b933ed4e",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 1,
+      "message": "oops. Sorry about this...",
+      "parentUuid": "380b8292_a1b61ea6",
       "range": {
         "startLine": 22,
         "startChar": 0,

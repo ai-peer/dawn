@@ -22,6 +22,30 @@
       "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "724c148c_785e07d2",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-06T01:13:14Z",
+      "side": 0,
+      "message": "Yes.",
+      "parentUuid": "1c937568_f5649a6c",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
