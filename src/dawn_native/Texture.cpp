@@ -37,8 +37,9 @@ namespace dawn_native {
             dawn::TextureDimension textureDimension) {
             switch (textureViewDimension) {
                 case dawn::TextureViewDimension::e2D:
-                    return textureDimension == dawn::TextureDimension::e2D;
                 case dawn::TextureViewDimension::e2DArray:
+                case dawn::TextureViewDimension::CubeMap:
+                case dawn::TextureViewDimension::CubeMapArray:
                     return textureDimension == dawn::TextureDimension::e2D;
                 default:
                     UNREACHABLE();
@@ -55,6 +56,10 @@ namespace dawn_native {
                     return textureViewArrayLayer == 1u;
                 case dawn::TextureViewDimension::e2DArray:
                     return true;
+                case dawn::TextureViewDimension::CubeMap:
+                    return textureViewArrayLayer == 6u;
+                case dawn::TextureViewDimension::CubeMapArray:
+                    return textureViewArrayLayer % 6 == 0;
                 default:
                     UNREACHABLE();
                     return false;
