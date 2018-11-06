@@ -235,8 +235,7 @@ namespace dawn_native { namespace d3d12 {
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
         : CommandBufferBase(builder),
-          mCommands(builder->AcquireCommands()),
-          mPassResourceUsages(builder->AcquirePassResourceUsage()) {
+          mCommands(builder->AcquireCommands()) {
     }
 
     CommandBuffer::~CommandBuffer() {
@@ -281,6 +280,7 @@ namespace dawn_native { namespace d3d12 {
             }
         };
 
+        const std::vector<PassResourceUsage> passResourceUsages = GetResourceUsages().perPass;
         uint32_t nextPassNumber = 0;
 
         Command type;
@@ -289,7 +289,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(commandList, mPassResourceUsages[nextPassNumber]);
+                    TransitionForPass(commandList, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(true);
                     RecordComputePass(commandList, &bindingTracker);
 
@@ -300,7 +300,7 @@ namespace dawn_native { namespace d3d12 {
                     BeginRenderPassCmd* beginRenderPassCmd =
                         mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    TransitionForPass(commandList, mPassResourceUsages[nextPassNumber]);
+                    TransitionForPass(commandList, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(false);
                     RecordRenderPass(commandList, &bindingTracker,
                                      ToBackend(beginRenderPassCmd->info.Get()));
