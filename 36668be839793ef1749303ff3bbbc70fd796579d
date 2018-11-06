@@ -248,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "d4a40e72_2da12642",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-06T10:28:33Z",
+      "side": 1,
+      "message": "Agreed, I had the same experience when writing the Vulkan backend and defaults will be super important in WebGPU to make it nicer to use. Also the Javascript dictionnary syntax will make it prettier too.",
+      "parentUuid": "ff81590a_5489a06a",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fdd6a911_11098488",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -312,6 +330,24 @@
       "side": 1,
       "message": "Sure, but I keep this for extensive ability for more stages added into render pipeline or it is not need right now.",
       "parentUuid": "b4d12055_64cdb851",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c489ab_4f781ad7",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-06T10:28:33Z",
+      "side": 1,
+      "message": "I don\u0027t think it is needed because we won\u0027t have additional stages until after WebGPU 1.0",
+      "parentUuid": "abd92075_43e389e5",
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -530,6 +566,30 @@
       "side": 1,
       "message": "oops. Sorry about this...",
       "parentUuid": "380b8292_a1b61ea6",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b754bb3d_4648c05a",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-06T10:28:33Z",
+      "side": 1,
+      "message": "No worries, that\u0027s why we have the presubmit :)",
+      "parentUuid": "e0a77470_b933ed4e",
       "range": {
         "startLine": 22,
         "startChar": 0,
