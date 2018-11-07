@@ -17,6 +17,7 @@ import("scripts/dawn_features.gni")
 import("//build_overrides/build.gni")
 
 import("//testing/test.gni")
+import("//testing/libfuzzer/fuzzer_test.gni")
 
 ###############################################################################
 # Template to wrap the Dawn code generator
@@ -939,4 +940,64 @@ if (dawn_standalone) {
       ":glTFViewer",
     ]
   }
+}
+
+###############################################################################
+# Fuzzers
+###############################################################################
+group("dawn_fuzzers") {
+  testonly = true
+  deps = [
+    ":dawn_spirv_cross_glsl_fuzzer",
+    ":dawn_spirv_cross_hlsl_fuzzer",
+    ":dawn_spirv_cross_msl_fuzzer",
+  ]
+}
+
+config("dawn_spirv_cross_fuzzers_config") {
+  defines = [ "SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS" ]
+  include_dirs = [ "src/fuzzers" ]
+}
+
+static_library("dawn_spirv_cross_fuzzer_common") {
+  public_configs = [ ":dawn_spirv_cross_fuzzers_config" ]
+
+  sources = [
+    "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+    "src/fuzzers/DawnSPIRVCrossFuzzer.h",
+  ]
+
+  deps = [
+    "third_party:spirv_cross_fuzzer",
+  ]
+}
+
+fuzzer_test("dawn_spirv_cross_glsl_fuzzer") {
+  sources = [
+    "src/fuzzers/DawnSPIRVCrossGLSLFuzzer.cpp",
+  ]
+
+  deps = [
+    ":dawn_spirv_cross_fuzzer_common",
+  ]
+}
+
+fuzzer_test("dawn_spirv_cross_hlsl_fuzzer") {
+  sources = [
+    "src/fuzzers/DawnSPIRVCrossHLSLFuzzer.cpp",
+  ]
+
+  deps = [
+    ":dawn_spirv_cross_fuzzer_common",
+  ]
+}
+
+fuzzer_test("dawn_spirv_cross_msl_fuzzer") {
+  sources = [
+    "src/fuzzers/DawnSPIRVCrossMSLFuzzer.cpp",
+  ]
+
+  deps = [
+    ":dawn_spirv_cross_fuzzer_common",
+  ]
 }
