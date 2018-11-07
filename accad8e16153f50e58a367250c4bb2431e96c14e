@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8b248d0b_87173055",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-07T06:26:42Z",
+      "side": 1,
+      "message": "This can be const BufferBase*. Same as below.",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "78a71fd5_748fddb4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
@@ -30,6 +53,29 @@
       "writtenOn": "2018-11-07T01:44:47Z",
       "side": 1,
       "message": "same",
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21f5da1e_0fb659ca",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-07T06:26:42Z",
+      "side": 1,
+      "message": "Now try bots won\u0027t check code formatting issues in tests, shall we do it?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 110
+      },
       "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
