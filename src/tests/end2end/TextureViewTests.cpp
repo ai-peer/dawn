@@ -18,6 +18,8 @@
 #include "common/Constants.h"
 #include "utils/DawnHelpers.h"
 
+#include <array>
+
 constexpr static unsigned int kRTSize = 64;
 
 class TextureViewTest : public DawnTest {
@@ -235,6 +237,67 @@ protected:
         Verify(textureView, fragmentShader, expected);
     }
 
+    std::string CreateFragmentShaderForCubeMapFace(uint32_t layer, bool isCubeMapArray) {
+        const std::array<std::string, 6> kCoordsToCubeMapFace = {{
+             "1, 0, 0",  // +x
+             "-1, 0, 0", // -x
+             "0, 1, 0",  // +y
+             "0, -1, 0", // -y
+             "0, 0, 1"   // +z
+             "0, 0, -1", // -z
+            }};
+
+        const std::string textureType = isCubeMapArray ? "textureCubeArray" : "textureCube";
+        const std::string samplerType = isCubeMapArray ? "samplerCubeArray" : "samplerCube";
+        const uint32_t cubeMapArrayIndex = layer / 6;
+        const std::string coordToCubeMapFace = kCoordsToCubeMapFace[layer % 6];
+
+        std::ostringstream stream;
+        stream << "#version 450\n"
+                  "layout(set = 0, binding = 0) uniform sampler sampler0;\n"
+                  "layout(set = 0, binding = 1) uniform " << textureType << " texture0;\n"
+                  "layout(location = 0) out vec4 fragColor;\n"
+                  "void main() {\n"
+                  "    fragColor = texture(" << samplerType << "(texture0, sampler0), ";
+
+        if (isCubeMapArray) {
+            stream << "vec4(" << coordToCubeMapFace << ", " << cubeMapArrayIndex;
+        } else {
+            stream << "vec3(" << coordToCubeMapFace;
+        }
+
+        stream << "));\n"
+               << "}";
+
+        return stream.str();
+    }
+
+    void TextureCubeMapTest(uint32_t textureArrayLayers,
+                            uint32_t textureViewBaseLayer,
+                            uint32_t textureViewLayerCount) {
+        constexpr uint32_t kMipLevels = 1u;
+        initTexture(textureArrayLayers, kMipLevels);
+
+        bool isCubeMapArray = (textureViewLayerCount != 6);
+
+        dawn::TextureViewDescriptor descriptor = mDefaultTextureViewDescriptor;
+        descriptor.dimension = (isCubeMapArray) ?
+            dawn::TextureViewDimension::CubeArray : dawn::TextureViewDimension::Cube;
+        descriptor.baseArrayLayer = textureViewBaseLayer;
+        descriptor.layerCount = textureViewLayerCount;
+
+        dawn::TextureView cubeMapTextureView = mTexture.CreateTextureView(&descriptor);
+
+        // Check the data in the every face of the cube map (array) texture view.
+        for (uint32_t layer = 0; layer < textureViewBaseLayer; ++layer) {
+            const std::string &fragmentShader =
+                CreateFragmentShaderForCubeMapFace(layer, isCubeMapArray);
+
+            int expected = GenerateTestPixelValue(textureViewBaseLayer + layer, 0);
+            Verify(cubeMapTextureView, fragmentShader.c_str(), expected);
+        }
+    }
+
     dawn::BindGroupLayout mBindGroupLayout;
     dawn::PipelineLayout mPipelineLayout;
     dawn::Sampler mSampler;
@@ -297,6 +360,16 @@ TEST_P(TextureViewTest, Texture2DViewOnOneLevelOf2DArrayTexture) {
 // Test sampling from a 2D array texture view created on a mipmap level of a 2D array texture.
 TEST_P(TextureViewTest, Texture2DArrayViewOnOneLevelOf2DArrayTexture) {
     Texture2DArrayViewTest(6, 6, 2, 4);
+}
+
+// Test sampling from a cube map texture view.
+TEST_P(TextureViewTest, TextureCubeMapView) {
+    TextureCubeMapTest(8, 1, 6);
+}
+
+// Test sampling from a cube map array texture view.
+TEST_P(TextureViewTest, TextureCubeMapArrayView) {
+    TextureCubeMapTest(18, 2, 12);
 }
 
 DAWN_INSTANTIATE_TEST(TextureViewTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)
