@@ -15,6 +15,7 @@
 import("../scripts/dawn_overrides_with_defaults.gni")
 import("../scripts/dawn_features.gni")
 import("//build_overrides/build.gni")
+import("//testing/libfuzzer/fuzzer_test.gni")
 
 is_msvc = is_win && !is_clang
 
@@ -40,6 +41,16 @@ static_library("glad") {
 # SPIRV-Cross
 spirv_cross_dir = dawn_spirv_cross_dir
 
+spirv_cross_src = [
+  "${spirv_cross_dir}/GLSL.std.450.h",
+  "${spirv_cross_dir}/spirv.hpp",
+  "${spirv_cross_dir}/spirv_cfg.cpp",
+  "${spirv_cross_dir}/spirv_cfg.hpp",
+  "${spirv_cross_dir}/spirv_common.hpp",
+  "${spirv_cross_dir}/spirv_cross.cpp",
+  "${spirv_cross_dir}/spirv_cross.hpp",
+]
+
 config("spirv_cross_public") {
   include_dirs = [ "${spirv_cross_dir}/.." ]
   defines = [ "SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS" ]
@@ -56,15 +67,7 @@ static_library("spirv_cross") {
     ]
   }
 
-  sources = [
-    "${spirv_cross_dir}/GLSL.std.450.h",
-    "${spirv_cross_dir}/spirv.hpp",
-    "${spirv_cross_dir}/spirv_cfg.cpp",
-    "${spirv_cross_dir}/spirv_cfg.hpp",
-    "${spirv_cross_dir}/spirv_common.hpp",
-    "${spirv_cross_dir}/spirv_cross.cpp",
-    "${spirv_cross_dir}/spirv_cross.hpp",
-  ]
+  sources = spirv_cross_src
 
   need_glsl_cross = dawn_enable_opengl
 
@@ -349,4 +352,29 @@ if (dawn_standalone) {
       "tinygltfloader/tiny_gltf_loader.h",
     ]
   }
+}
+
+###############################################################################
+# SPIRV-Cross library for fuzzing
+###############################################################################
+static_library("spirv_cross_fuzzer") {
+  public_configs = [ ":spirv_cross_public" ]
+
+  if (!is_msvc) {
+    cflags_cc = [
+      "-Wno-implicit-fallthrough",
+      "-Wno-return-type",
+      "-Wno-sign-compare",
+    ]
+  }
+
+  sources = spirv_cross_src
+  sources += [
+    "${spirv_cross_dir}/spirv_glsl.cpp",
+    "${spirv_cross_dir}/spirv_glsl.hpp",
+    "${spirv_cross_dir}/spirv_hlsl.cpp",
+    "${spirv_cross_dir}/spirv_hlsl.hpp",
+    "${spirv_cross_dir}/spirv_msl.cpp",
+    "${spirv_cross_dir}/spirv_msl.hpp",
+  ]
 }
