@@ -16,6 +16,24 @@
       "revId": "87d01afd9d57a9d0f51c6c25dfb1f979802f4b66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24e06a18_8af49f55",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-07T01:49:24Z",
+      "side": 1,
+      "message": "layerCount \u003d\u003d 0 is not allowed for all texture views:\nhttps://dawn.googlesource.com/dawn/+/master/src/dawn_native/Texture.cpp#138\n\nSo I don\u0027t test layerCount \u003d\u003d 0 on cube map texture views.",
+      "parentUuid": "6a564a3f_7665c280",
+      "revId": "87d01afd9d57a9d0f51c6c25dfb1f979802f4b66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
