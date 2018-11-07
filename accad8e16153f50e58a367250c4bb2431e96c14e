@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e82c46c5_0c9ec6ce",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-07T09:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b248d0b_87173055",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78a71fd5_748fddb4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
@@ -39,6 +63,24 @@
       "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d141670_0670c3f2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-07T09:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78a71fd5_748fddb4",
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "58f58419_e4fc3c61",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-07T09:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05131df8_6c0cdf1e",
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21f5da1e_0fb659ca",
         "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
         "patchSetId": 7
@@ -70,6 +130,30 @@
       "writtenOn": "2018-11-07T06:26:42Z",
       "side": 1,
       "message": "Now try bots won\u0027t check code formatting issues in tests, shall we do it?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 110
+      },
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23bc3535_0e2b4b1c",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-07T09:57:10Z",
+      "side": 1,
+      "message": "Unfortunately clang-format produces horrible formatting with the \"builder pattern\". Once we have descriptorized all objects (except CommandBuffer) we\u0027ll be able to enable formatting for tests and samples too.",
+      "parentUuid": "21f5da1e_0fb659ca",
       "range": {
         "startLine": 24,
         "startChar": 0,
