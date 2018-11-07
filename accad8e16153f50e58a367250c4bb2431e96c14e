@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78a71fd5_748fddb4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-07T01:44:47Z",
+      "side": 1,
+      "message": "This looks like a copy, but it should probably be a reference.",
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05131df8_6c0cdf1e",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-07T01:44:47Z",
+      "side": 1,
+      "message": "same",
+      "revId": "accad8e16153f50e58a367250c4bb2431e96c14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
