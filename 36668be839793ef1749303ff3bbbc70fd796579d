@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "48bd344f_59f3e2d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-08T10:20:26Z",
+      "side": 1,
+      "message": "Bug: dawn:4",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "90989495_3b697815",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -266,6 +283,40 @@
     },
     {
       "key": {
+        "uuid": "2c97347d_5b1b69d5",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-08T10:20:26Z",
+      "side": 1,
+      "message": "Don\u0027t we need both?",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82b6c0d5_4ee52597",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-08T10:20:26Z",
+      "side": 1,
+      "message": "rewrite as something like \"Color attachment used twice\"?",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fdd6a911_11098488",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -295,6 +346,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "fdd6a911_11098488",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ff45ddc_fe804842",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-08T10:20:26Z",
+      "side": 1,
+      "message": "It may have been making a copy and moving the copy?",
+      "parentUuid": "3ded3dd2_1725c4e7",
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false

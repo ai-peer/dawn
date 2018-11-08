@@ -46,6 +46,23 @@
       "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc56f634_1ebf81e3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-08T10:20:26Z",
+      "side": 0,
+      "message": "sorry, I may have missed this, but why is this removed?",
+      "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
