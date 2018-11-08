@@ -76,6 +76,29 @@
     },
     {
       "key": {
+        "uuid": "323b26ae_5d3d9ae3",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2018-11-08T14:38:21Z",
+      "side": 1,
+      "message": "Can we skip this? SPIRV-Cross errors with empty input would be good to check. (or really short input)",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13758814_23a2bfd3",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
         "patchSetId": 1
