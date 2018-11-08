@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5898421_3c8ed34b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000258
+      },
+      "writtenOn": "2018-11-08T19:13:17Z",
+      "side": 1,
+      "message": "I believe we\u0027re always running the fuzzers with `ASAN_OPTIONS\u003ddetect_odr_violation\u003d0`. Would that help?",
+      "range": {
+        "startLine": 32,
+        "startChar": 17,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27b3a6a1_9e742ef1",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000258
+      },
+      "writtenOn": "2018-11-08T19:13:17Z",
+      "side": 1,
+      "message": "I think that this needs to be done only once, not for every input coming from a fuzzing engine. Am I wrong?",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37458d13_c9032b22",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000258
+      },
+      "writtenOn": "2018-11-08T19:13:17Z",
+      "side": 1,
+      "message": "would std::function be a better fit here?",
+      "range": {
+        "startLine": 20,
+        "startChar": 46,
+        "endLine": 20,
+        "endChar": 80
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfbcaf11_ace19a2a",
+        "filename": "src/fuzzers/DawnSPIRVCrossHLSLFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000258
+      },
+      "writtenOn": "2018-11-08T19:13:17Z",
+      "side": 1,
+      "message": "Would it make sense to fuzz these values as well?",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 47
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4a26936_4c6bbefc",
+        "filename": "src/fuzzers/DawnSPIRVCrossHLSLFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000258
+      },
+      "writtenOn": "2018-11-08T19:13:17Z",
+      "side": 1,
+      "message": "And this? If not, would be nice to have a comment explaining why it must be \"51\".",
+      "range": {
+        "startLine": 37,
+        "startChar": 21,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0043a36_0899322a",
+        "filename": "src/fuzzers/DawnSPIRVCrossMSLFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000258
+      },
+      "writtenOn": "2018-11-08T19:13:17Z",
+      "side": 1,
+      "message": "Same question",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 42
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
