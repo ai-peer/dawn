@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b612d6fd_cb35a24e",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:48:42Z",
+      "side": 1,
+      "message": "I agree it doesn\u0027t look like there is much validation. Running the fuzzers, this doesn\u0027t appear to be causing a bunch of crashes.\n\nI am not sure on the utility, being new to SPIRV world. But I think there is some value, since I assume there are other users of the library that may have different static options, so this will get us coverage down all those code paths. It would be significantly more valuable if there are other users are passing arbitrary/unfiltered data.",
+      "parentUuid": "363ee507_827ecf20",
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d45a5908_9caa9362",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.h",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63b808df_763e3692",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:48:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d45a5908_9caa9362",
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "78e50237_c234c8e3",
+        "filename": "src/fuzzers/DawnSPIRVCrossGLSLFastFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:48:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32f8194a_3c9971a2",
+      "range": {
+        "startLine": 26,
+        "startChar": 33,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64042df7_876e1f31",
         "filename": "third_party/BUILD.gn",
         "patchSetId": 4
@@ -79,6 +139,30 @@
       "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d01322cf_4c04ff66",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:48:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64042df7_876e1f31",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 0
+      },
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
