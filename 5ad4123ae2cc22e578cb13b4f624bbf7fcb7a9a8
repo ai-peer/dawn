@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "55fd8bcd_3991b57b",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T16:32:28Z",
+      "side": 1,
+      "message": "Oooooh, thanks for the explanation, I hadn\u0027t realized we considered this \"safe\" behavior but it makes sense.",
+      "parentUuid": "c0c9fe87_66c85aa3",
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "323b26ae_5d3d9ae3",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
         "patchSetId": 1

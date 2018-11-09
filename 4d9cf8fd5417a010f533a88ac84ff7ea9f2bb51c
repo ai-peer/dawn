@@ -237,6 +237,30 @@
     },
     {
       "key": {
+        "uuid": "483e2979_58c4041f",
+        "filename": "src/fuzzers/DawnSPIRVCrossHLSLFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T16:32:28Z",
+      "side": 1,
+      "message": "It\u0027s HLSL shader model 5.1 which is the version of HLSL that D3D12 uses. Not that it matters for fuzzing: we just need to fuzz whatever WebGPU will be using.",
+      "parentUuid": "cd734946_c69b33ef",
+      "range": {
+        "startLine": 37,
+        "startChar": 21,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0043a36_0899322a",
         "filename": "src/fuzzers/DawnSPIRVCrossMSLFuzzer.cpp",
         "patchSetId": 2
@@ -272,6 +296,30 @@
       "side": 1,
       "message": "Same answer :-D",
       "parentUuid": "b0043a36_0899322a",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 42
+      },
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9bd0fc6_d8f16930",
+        "filename": "src/fuzzers/DawnSPIRVCrossMSLFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T16:32:28Z",
+      "side": 1,
+      "message": "That one is needed to make the Metal backend render with the right orientation. Dawn will always have this to true.",
+      "parentUuid": "c6102990_8ea9f605",
       "range": {
         "startLine": 32,
         "startChar": 23,
