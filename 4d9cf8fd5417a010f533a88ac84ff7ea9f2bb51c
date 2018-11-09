@@ -137,6 +137,23 @@
       "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e15621e_aeab3b26",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T14:51:29Z",
+      "side": 1,
+      "message": "Instead of adding a target we could maybe add conditional with `|| use_fuzzing_engine` like the ANGLE translator: https://cs.chromium.org/chromium/src/third_party/angle/BUILD.gn?type\u003dcs\u0026q\u003dtranslator_fuzzer\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d316",
+      "revId": "4d9cf8fd5417a010f533a88ac84ff7ea9f2bb51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
