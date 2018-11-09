@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4c9bab28_87366ac2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "964b2403_0a87613e",
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0bec4625_03468c26",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b72bae57_41691bf6",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bec4625_03468c26",
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "5285e49a_e1d22cfb",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ca3d1f5_5193d9c0",
+      "range": {
+        "startLine": 32,
+        "startChar": 65,
+        "endLine": 32,
+        "endChar": 70
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "172d860b_b02920b2",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
         "patchSetId": 1
@@ -73,6 +133,24 @@
       "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0c9fe87_66c85aa3",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Libfuzzer will handle sending a SEGV by ending fuzzing at this point and generating a report.\n\nWe don\u0027t want to crash in the case that SPIRV-Cross sends a signal, since it currently indicates normal/safe operations like failing to parse an input by calling abort() (or an exception if exceptions are turned on). This behaviour is going to change in the future to return to report errors. This is a workaround until that change occurs.\n\nWhen fuzzing, the fuzzer application is going to have some input data that is going to be sent to the code under test, then the fuzzer will look at how that affected coverage, mutate the input and repeat. If there is an actual issue, like an OOB access or something, it will stop and generate a report. If we don\u0027t trap the signal, the fuzzer will crash on any \u0027bad\u0027 but handled inputs, so won\u0027t make any progress at best, or worse not make any progress and file a bunch of spurious bugs.\n\nWe need to reset the handler between test cases to keep this slightly more hermetic and all code not under test to fire signals.",
+      "parentUuid": "172d860b_b02920b2",
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "22859cdb_8c2e87c1",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Thanks for the catch, I just had that there so I could get to \u0027interesting\u0027 iterations faster.\n\nThis was actually hiding the fact that my signal handling code wasn\u0027t working correctly, since it would run for a bit before getting past this limitation.",
+      "parentUuid": "323b26ae_5d3d9ae3",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13758814_23a2bfd3",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
         "patchSetId": 1
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "bebf25b9_47d939b5",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13758814_23a2bfd3",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 9
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c393b67a_afa15793",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
         "patchSetId": 1
@@ -136,6 +262,24 @@
       "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d5ecc8c_e866ac41",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c393b67a_afa15793",
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -162,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "5dd5f608_53f35e9d",
+        "filename": "src/fuzzers/DawnSPIRVCrossGLSLFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a802779c_bc2833ac",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a22c309_2d491606",
         "filename": "src/fuzzers/DawnSPIRVCrossGLSLFuzzer.cpp",
         "patchSetId": 1
@@ -182,6 +350,30 @@
       "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4ff8ac9_27a07404",
+        "filename": "src/fuzzers/DawnSPIRVCrossGLSLFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a22c309_2d491606",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -208,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "c80d225c_3fa29ff1",
+        "filename": "src/fuzzers/DawnSPIRVCrossHLSLFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d3f91f8_0f3516d3",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 67
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44b3cec2_f7654132",
         "filename": "src/fuzzers/DawnSPIRVCrossMSLFuzzer.cpp",
         "patchSetId": 1
@@ -228,6 +444,30 @@
       "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "169dc51f_46254a48",
+        "filename": "src/fuzzers/DawnSPIRVCrossMSLFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-09T16:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44b3cec2_f7654132",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "5ad4123ae2cc22e578cb13b4f624bbf7fcb7a9a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
