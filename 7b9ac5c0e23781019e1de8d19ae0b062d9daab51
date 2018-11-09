@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13a97625_a7fd70d2",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-11-09T20:28:59Z",
+      "side": 1,
+      "message": "no longer needed. Mind deleting it where you copied it from, too?",
+      "range": {
+        "startLine": 186,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 77
+      },
+      "revId": "7b9ac5c0e23781019e1de8d19ae0b062d9daab51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fcfc322_57f58fe8",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-11-09T20:28:59Z",
+      "side": 1,
+      "message": "also not needed.",
+      "range": {
+        "startLine": 200,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 69
+      },
+      "revId": "7b9ac5c0e23781019e1de8d19ae0b062d9daab51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92026d9f_b6ae6273",
+        "filename": "infra/config/global/cr-buildbucket.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-11-09T20:28:59Z",
+      "side": 1,
+      "message": "this won\u0027t work. Accounts are bound to projects. If you must use this account, then builder must indeed be in luci.chromium.try.",
+      "revId": "7b9ac5c0e23781019e1de8d19ae0b062d9daab51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
