@@ -81,6 +81,24 @@
       "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae1f64a3_05ad6c30",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-09T00:55:06Z",
+      "side": 0,
+      "message": "Has this error moved somewhere else? It needs to be detected somehow, doesn\u0027t it?",
+      "parentUuid": "e6346216_721ef85c",
+      "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
