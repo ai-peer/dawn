@@ -300,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "4c1aaf7e_73ea1e5f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-09T00:37:19Z",
+      "side": 1,
+      "message": "Yes, we need both. I\u0027ll correct it.",
+      "parentUuid": "2c97347d_5b1b69d5",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82b6c0d5_4ee52597",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -314,6 +332,24 @@
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d07b487_66ca832a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-09T00:37:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "82b6c0d5_4ee52597",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
