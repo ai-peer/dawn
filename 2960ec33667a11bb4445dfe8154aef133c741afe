@@ -99,6 +99,24 @@
       "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2abef3f6_da72fb23",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-11-09T00:59:38Z",
+      "side": 0,
+      "message": "You\u0027re right, I think I\u0027m not handling the error. Thx for pointing out this! I\u0027ll think about how to deal with it.",
+      "parentUuid": "ae1f64a3_05ad6c30",
+      "revId": "2960ec33667a11bb4445dfe8154aef133c741afe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
