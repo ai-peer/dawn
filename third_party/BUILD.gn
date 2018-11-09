@@ -16,6 +16,10 @@ import("../scripts/dawn_overrides_with_defaults.gni")
 import("../scripts/dawn_features.gni")
 import("//build_overrides/build.gni")
 
+if (build_with_chromium) {
+  import("//testing/libfuzzer/fuzzer_test.gni")
+}
+
 is_msvc = is_win && !is_clang
 
 ###############################################################################
@@ -40,6 +44,16 @@ static_library("glad") {
 # SPIRV-Cross
 spirv_cross_dir = dawn_spirv_cross_dir
 
+spirv_cross_src = [
+  "${spirv_cross_dir}/GLSL.std.450.h",
+  "${spirv_cross_dir}/spirv.hpp",
+  "${spirv_cross_dir}/spirv_cfg.cpp",
+  "${spirv_cross_dir}/spirv_cfg.hpp",
+  "${spirv_cross_dir}/spirv_common.hpp",
+  "${spirv_cross_dir}/spirv_cross.cpp",
+  "${spirv_cross_dir}/spirv_cross.hpp",
+]
+
 config("spirv_cross_public") {
   include_dirs = [ "${spirv_cross_dir}/.." ]
   defines = [ "SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS" ]
@@ -56,19 +70,11 @@ static_library("spirv_cross") {
     ]
   }
 
-  sources = [
-    "${spirv_cross_dir}/GLSL.std.450.h",
-    "${spirv_cross_dir}/spirv.hpp",
-    "${spirv_cross_dir}/spirv_cfg.cpp",
-    "${spirv_cross_dir}/spirv_cfg.hpp",
-    "${spirv_cross_dir}/spirv_common.hpp",
-    "${spirv_cross_dir}/spirv_cross.cpp",
-    "${spirv_cross_dir}/spirv_cross.hpp",
-  ]
+  sources = spirv_cross_src
 
   need_glsl_cross = dawn_enable_opengl
 
-  if (dawn_enable_d3d12) {
+  if (dawn_enable_d3d12 || use_fuzzing_engine) {
     sources += [
       "${spirv_cross_dir}/spirv_hlsl.cpp",
       "${spirv_cross_dir}/spirv_hlsl.hpp",
@@ -76,7 +82,7 @@ static_library("spirv_cross") {
     need_glsl_cross = true
   }
 
-  if (dawn_enable_metal) {
+  if (dawn_enable_metal || use_fuzzing_engine) {
     sources += [
       "${spirv_cross_dir}/spirv_msl.cpp",
       "${spirv_cross_dir}/spirv_msl.hpp",
@@ -84,7 +90,7 @@ static_library("spirv_cross") {
     need_glsl_cross = true
   }
 
-  if (need_glsl_cross) {
+  if (need_glsl_cross || use_fuzzing_engine) {
     sources += [
       "${spirv_cross_dir}/spirv_glsl.cpp",
       "${spirv_cross_dir}/spirv_glsl.hpp",
