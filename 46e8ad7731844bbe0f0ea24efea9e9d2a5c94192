@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "363ee507_827ecf20",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T16:26:41Z",
+      "side": 1,
+      "message": "I\u0027m worried that SPIRV-Cross doesn\u0027t validate the options so this will just crash all the time. Also things like booleans might get represented by values outside of [0, 1] which I think is UB.\n\nHow useful are these fuzzers in your opinion?",
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d45a5908_9caa9362",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T16:26:41Z",
+      "side": 1,
+      "message": "uber-nit: using Task \u003d ...;",
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32f8194a_3c9971a2",
+        "filename": "src/fuzzers/DawnSPIRVCrossGLSLFastFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T16:26:41Z",
+      "side": 1,
+      "message": "nit: are",
+      "range": {
+        "startLine": 26,
+        "startChar": 33,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64042df7_876e1f31",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-09T16:26:41Z",
+      "side": 1,
+      "message": "nit: hoisting this isn\u0027t needed anymore",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 0
+      },
+      "revId": "46e8ad7731844bbe0f0ea24efea9e9d2a5c94192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
