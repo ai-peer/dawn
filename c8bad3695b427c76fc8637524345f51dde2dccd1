@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51fb43b9_13e9e23a",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-12T09:11:33Z",
+      "side": 1,
+      "message": "Can we have separate tests for:\n - CubeMapView with 0-5 in a texture with 6 layers (simple case)\n - CubeMapView with a base array layer not multiple of 6\n - CubeMapView that uses the last layer of the textures (and not starting from 0)",
+      "revId": "c8bad3695b427c76fc8637524345f51dde2dccd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbe287e1_c6e1f04d",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-12T09:11:33Z",
+      "side": 1,
+      "message": "ditto, can we have the same separate tests, as well as a test that an array with a single cubemap works?",
+      "revId": "c8bad3695b427c76fc8637524345f51dde2dccd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
