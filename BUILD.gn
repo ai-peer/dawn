@@ -244,7 +244,7 @@ dawn_generator("libdawn_gen") {
   ]
 }
 
-shared_library("libdawn") {
+source_set("libdawn_sources") {
   public_deps = [
     ":dawn_headers",
   ]
@@ -254,6 +254,16 @@ shared_library("libdawn") {
     ":libdawn_gen",
   ]
   sources = get_target_outputs(":libdawn_gen")
+}
+
+shared_library("libdawn") {
+  public_deps = [
+    ":dawn_headers",
+  ]
+
+  deps = [
+    ":libdawn_sources",
+  ]
 
   # Tell dependents where to find this shared library
   if (is_mac) {
@@ -643,7 +653,7 @@ dawn_generator("libdawn_wire_gen") {
   ]
 }
 
-shared_library("libdawn_wire") {
+source_set("libdawn_wire_sources") {
   deps = [
     ":dawn_common",
     ":libdawn_wire_gen",
@@ -655,7 +665,17 @@ shared_library("libdawn_wire") {
   sources = get_target_outputs(":libdawn_wire_gen")
   sources += [ "src/dawn_wire/WireCmd.h" ]
 
-  #Make headers publically visible
+  # Make headers publically visible
+  public_deps = [
+    ":libdawn_wire_headers",
+  ]
+  public_configs = [ ":libdawn_public" ]
+}
+
+shared_library("libdawn_wire") {
+  deps = [ ":libdawn_wire_sources" ]
+
+  # Make headers publically visible
   public_deps = [
     ":libdawn_wire_headers",
   ]
