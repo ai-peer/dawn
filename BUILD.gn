@@ -955,6 +955,7 @@ group("dawn_fuzzers") {
     "src/fuzzers:dawn_spirv_cross_hlsl_full_fuzzer",
     "src/fuzzers:dawn_spirv_cross_msl_fast_fuzzer",
     "src/fuzzers:dawn_spirv_cross_msl_full_fuzzer",
+    "src/fuzzers:dawn_spirv_tools_binary_parser_fuzzer",
     "src/fuzzers:dawn_wire_server_and_frontend_fuzzer",
   ]
 }

@@ -15,6 +15,7 @@
 import("//build_overrides/build.gni")
 
 dawn_top_level = "../.."
+import("${dawn_top_level}/scripts/dawn_overrides_with_defaults.gni")
 
 # We only have libfuzzer in Chromium builds but if we build fuzzer targets only
 # there, we would risk breaking fuzzer targets all the time when making changes
@@ -132,6 +133,16 @@ dawn_fuzzer_test("dawn_spirv_cross_msl_full_fuzzer") {
   ]
   deps = [
     ":dawn_spirv_cross_fuzzer_common",
+  ]
+}
+
+dawn_fuzzer_test("dawn_spirv_tools_binary_parser_fuzzer") {
+  sources = [
+    "DawnSPIRVToolsBinaryParserFuzzer.cpp",
+  ]
+
+  deps = [
+    "${dawn_spirv_tools_dir}:spvtools",
   ]
 }
 
