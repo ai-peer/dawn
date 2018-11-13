@@ -949,12 +949,14 @@ if (dawn_standalone) {
 group("dawn_fuzzers") {
   testonly = true
   deps = [
-    "src/fuzzers:dawn_spirv_cross_glsl_fast_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_glsl_full_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_hlsl_fast_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_hlsl_full_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_msl_fast_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_msl_full_fuzzer",
+    # TODO(rharrison): Re-enable SPIRV-cross fuzzers once parser
+    # re-written to not indicate error via SIGABRT.
+    #    "src/fuzzers:dawn_spirv_cross_glsl_fast_fuzzer",
+    #    "src/fuzzers:dawn_spirv_cross_glsl_full_fuzzer",
+    #    "src/fuzzers:dawn_spirv_cross_hlsl_fast_fuzzer",
+    #    "src/fuzzers:dawn_spirv_cross_hlsl_full_fuzzer",
+    #    "src/fuzzers:dawn_spirv_cross_msl_fast_fuzzer",
+    #    "src/fuzzers:dawn_spirv_cross_msl_full_fuzzer",
     "src/fuzzers:dawn_wire_server_and_frontend_fuzzer",
   ]
 }
