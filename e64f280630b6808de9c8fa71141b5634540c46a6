@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "74454589_adc794ef",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-14T16:08:52Z",
+      "side": 1,
+      "message": "Please let\u0027s do it the other way: the point of dawn_fuzzer_test is to act like fuzzer_test so that we are confident that fuzzers compiling in Dawn standalone mean they\u0027ll compile inside Chromium. This is important because the Dawn CQ only tests the standalone builds.",
+      "parentUuid": "6d834523_5e8cce5b",
+      "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6acc25f_440c21a2",
         "filename": "src/fuzzers/BUILD.gn",
         "patchSetId": 1
