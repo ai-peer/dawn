@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "c073c2a5_6757c2e9",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-14T17:35:16Z",
+      "side": 1,
+      "message": "ok, I think I have this figured out. There are two different variables, one in the invoker scope and one in the local scope that might exist. What I need to do is forward from invoker to create the local one, which marks the invoker one used, and if the local one is created then mark it as not_needed.\n\nThe factor I was missing, is that not all of the targets that use this template define asan_options. So sometimes a local variable is created and sometimes it isn\u0027t.",
+      "parentUuid": "97e1012c_3ff97ae1",
+      "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6acc25f_440c21a2",
         "filename": "src/fuzzers/BUILD.gn",
         "patchSetId": 1
