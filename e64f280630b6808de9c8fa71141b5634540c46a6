@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6d834523_5e8cce5b",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-14T16:06:13Z",
+      "side": 1,
+      "message": "I moved the fix, asan_options\u003d, to be behind build_chromium guards in the test targets and removed the forwarding in the non-chromium version, since this fix is only needed on chromium builds.",
+      "parentUuid": "f35c58d3_6b72451a",
+      "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6acc25f_440c21a2",
         "filename": "src/fuzzers/BUILD.gn",
         "patchSetId": 1
@@ -63,6 +81,30 @@
       "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "833b384c_909fa683",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-14T16:06:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bb0cf57_d1e8f5c9",
+      "range": {
+        "startLine": 158,
+        "startChar": 18,
+        "endLine": 158,
+        "endChar": 54
+      },
+      "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
