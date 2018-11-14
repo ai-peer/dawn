@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "97e1012c_3ff97ae1",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-14T17:12:32Z",
+      "side": 1,
+      "message": "Ah maybe invoker.asan_options is used because it is copied in the current scope, so instead it should be:\n\n```\nvariable_list \u003d [...]\nforward_variables_from(invoker, variable_list)\nnot_needed(variable_list)\n```",
+      "parentUuid": "d9bb1e7f_216eb2b4",
+      "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a6acc25f_440c21a2",
         "filename": "src/fuzzers/BUILD.gn",
         "patchSetId": 1
