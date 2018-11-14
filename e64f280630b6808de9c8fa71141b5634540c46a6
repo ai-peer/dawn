@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f35c58d3_6b72451a",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-14T12:31:02Z",
+      "side": 1,
+      "message": "To fix the gn gen errors you could put this list in a variable and use it both for forward_variables_from and in a not_needed(invoker, list)",
+      "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a6acc25f_440c21a2",
         "filename": "src/fuzzers/BUILD.gn",
         "patchSetId": 1
