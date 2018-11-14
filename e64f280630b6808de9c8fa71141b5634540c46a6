@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d9bb1e7f_216eb2b4",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-14T17:07:09Z",
+      "side": 1,
+      "message": "I agree I should be able to do this using not_needed, but apparently I am holding it wrong or something.\n\nWhen I include \"asan_options\" in the forwarded variables, and use not_needed(invoker, [ \"asan_options\"] ) I continue to get \u0027You set the variable \"asan_options\" here and it was unused before it went out of scope.\u0027, pointing to the assignment in the specific test rule.\n\nWhen I don\u0027t set \"asan_options\" in the forwarded variables I get a different error, Undefined identifier on \"asan_options\" at the callsite of not_needed.\n\nThe only way I have been able to get this to work is to use * to mark everything in the invoker scope as not needed, i.e. not_needed(invoker, \"*\"), but that doesn\u0027t seem correct/reasonable.\n\nAny ideas on what I am doing wrong here?",
+      "parentUuid": "74454589_adc794ef",
+      "revId": "e64f280630b6808de9c8fa71141b5634540c46a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a6acc25f_440c21a2",
         "filename": "src/fuzzers/BUILD.gn",
         "patchSetId": 1
