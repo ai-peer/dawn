@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b656fad_9120f2ad",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-15T22:29:06Z",
+      "side": 1,
+      "message": "Would it be valid to assert layerCount % 6 \u003d\u003d 0 here?",
+      "revId": "24457fe4fa74774a052e0c6f1d680054b3ff6a53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eff299a1_d4410add",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-15T22:29:06Z",
+      "side": 1,
+      "message": "Maybe use raw string literals here, if it would make things a little nicer looking. It would avoid a lot of the quotation marks and \\ns.",
+      "revId": "24457fe4fa74774a052e0c6f1d680054b3ff6a53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
