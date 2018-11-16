@@ -34,6 +34,7 @@ namespace dawn_native { namespace opengl {
     class ComputePipeline;
     class DepthStencilState;
     class Device;
+    class Fence;
     class InputState;
     class PersistentPipelineState;
     class PipelineLayout;
@@ -56,6 +57,7 @@ namespace dawn_native { namespace opengl {
         using ComputePipelineType = ComputePipeline;
         using DepthStencilStateType = DepthStencilState;
         using DeviceType = Device;
+        using FenceType = Fence;
         using InputStateType = InputState;
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
