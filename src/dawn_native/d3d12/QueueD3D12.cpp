@@ -38,4 +38,9 @@ namespace dawn_native { namespace d3d12 {
         device->NextSerial();
     }
 
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
+        Device* device = ToBackend(GetDevice());
+        device->GetFenceTracker()->UpdateFenceOnComplete(ToBackend(fence), signalValue);
+    }
+
 }}  // namespace dawn_native::d3d12

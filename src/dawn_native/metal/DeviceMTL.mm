@@ -23,6 +23,8 @@
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
 #include "dawn_native/metal/DepthStencilStateMTL.h"
+#include "dawn_native/metal/FenceMTL.h"
+#include "dawn_native/metal/FenceTrackerMTL.h"
 #include "dawn_native/metal/InputStateMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 #include "dawn_native/metal/QueueMTL.h"
@@ -45,6 +47,7 @@ namespace dawn_native { namespace metal {
 
     Device::Device(id<MTLDevice> mtlDevice)
         : mMtlDevice(mtlDevice),
+          mFenceTracker(new FenceTracker(this)),
           mMapTracker(new MapRequestTracker(this)),
           mResourceUploader(new ResourceUploader(this)) {
         [mMtlDevice retain];
@@ -99,6 +102,9 @@ namespace dawn_native { namespace metal {
         const ComputePipelineDescriptor* descriptor) {
         return new ComputePipeline(this, descriptor);
     }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
+    }
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
     }
@@ -139,6 +145,7 @@ namespace dawn_native { namespace metal {
     }
 
     void Device::TickImpl() {
+        mFenceTracker->Tick(mFinishedCommandSerial);
         mResourceUploader->Tick(mFinishedCommandSerial);
         mMapTracker->Tick(mFinishedCommandSerial);
 
@@ -190,6 +197,10 @@ namespace dawn_native { namespace metal {
         // GPU work happens we could be waiting for this serial forever.
         GetPendingCommandBuffer();
         return mPendingCommandSerial;
+    }
+
+    FenceTracker* Device::GetFenceTracker() const {
+        return mFenceTracker.get();
     }
 
     MapRequestTracker* Device::GetMapTracker() const {

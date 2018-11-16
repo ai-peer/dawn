@@ -32,6 +32,7 @@ namespace dawn_native { namespace vulkan {
     class ComputePipeline;
     class DepthStencilState;
     class Device;
+    class Fence;
     class InputState;
     class PipelineLayout;
     class Queue;
@@ -53,6 +54,7 @@ namespace dawn_native { namespace vulkan {
         using ComputePipelineType = ComputePipeline;
         using DepthStencilStateType = DepthStencilState;
         using DeviceType = Device;
+        using FenceType = Fence;
         using InputStateType = InputState;
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
