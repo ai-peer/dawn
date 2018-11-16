@@ -68,10 +68,12 @@ void initTextures() {
         data[i] = static_cast<uint8_t>(i % 253);
     }
 
-
     dawn::Buffer stagingBuffer = utils::CreateBufferFromData(device, data.data(), static_cast<uint32_t>(data.size()), dawn::BufferUsageBit::TransferSrc);
+    dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(stagingBuffer, 0, 0, 0);
+    dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, 0, 0, 0, 0, dawn::TextureAspect::Color);
+    dawn::Extent3D copySize = utils::CreateExtent3D(1024, 1024, 1);
     dawn::CommandBuffer copy = device.CreateCommandBufferBuilder()
-        .CopyBufferToTexture(stagingBuffer, 0, 0, texture, 0, 0, 0, 1024, 1024, 1, 0, 0)
+        .CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize)
         .GetResult();
 
     queue.Submit(1, &copy);
