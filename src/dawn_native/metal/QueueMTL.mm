@@ -16,6 +16,7 @@
 
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/DeviceMTL.h"
+#include "dawn_native/metal/FenceTrackerMTL.h"
 
 namespace dawn_native { namespace metal {
 
@@ -32,6 +33,13 @@ namespace dawn_native { namespace metal {
         }
 
         device->SubmitPendingCommandBuffer();
+    }
+
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
+        Device* device = ToBackend(GetDevice());
+        // Because we currently only have a single queue, we can simply
+        // update the fence completed value once the current serial has passed.
+        device->GetFenceTracker()->UpdateFenceOnComplete(ToBackend(fence), signalValue);
     }
 
 }}  // namespace dawn_native::metal

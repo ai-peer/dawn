@@ -12,26 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_VULKAN_QUEUEVK_H_
-#define DAWNNATIVE_VULKAN_QUEUEVK_H_
+#ifndef DAWNNATIVE_VULKAN_FENCETRACKERVK_H_
+#define DAWNNATIVE_VULKAN_FENCETRACKERVK_H_
 
-#include "dawn_native/Queue.h"
+#include "common/SerialQueue.h"
+#include "dawn_native/RefCounted.h"
 
 namespace dawn_native { namespace vulkan {
 
-    class CommandBuffer;
     class Device;
+    class Fence;
 
-    class Queue : public QueueBase {
+    class FenceTracker {
+        struct FenceInFlight {
+            Ref<Fence> fence;
+            uint64_t value;
+        };
+
       public:
-        Queue(Device* device);
-        ~Queue();
+        FenceTracker(Device* device);
+        ~FenceTracker();
+
+        void UpdateFenceOnComplete(Fence* fence, uint64_t value);
+
+        void Tick(Serial finishedSerial);
 
       private:
-        void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
-        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
+        Device* mDevice;
+        SerialQueue<FenceInFlight> mFencesInFlight;
     };
 
 }}  // namespace dawn_native::vulkan
 
-#endif  // DAWNNATIVE_VULKAN_QUEUEVK_H_
+#endif  // DAWNNATIVE_VULKAN_FENCETRACKERVK_H_

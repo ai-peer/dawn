@@ -30,9 +30,14 @@
 
 namespace dawn_native { namespace opengl {
 
+    class FenceTracker;
     class Device : public DeviceBase {
       public:
         Device();
+
+        FenceTracker* GetFenceTracker() const;
+
+        // Dawn API
         BindGroupBase* CreateBindGroup(BindGroupBuilder* builder) override;
         BlendStateBase* CreateBlendState(BlendStateBuilder* builder) override;
         BufferViewBase* CreateBufferView(BufferViewBuilder* builder) override;
@@ -54,6 +59,7 @@ namespace dawn_native { namespace opengl {
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
+        ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<QueueBase*> CreateQueueImpl() override;
@@ -67,6 +73,8 @@ namespace dawn_native { namespace opengl {
         void CollectPCIInfo();
 
         dawn_native::PCIInfo mPCIInfo;
+
+        std::unique_ptr<FenceTracker> mFenceTracker;
     };
 
 }}  // namespace dawn_native::opengl
