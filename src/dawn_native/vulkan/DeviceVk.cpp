@@ -26,6 +26,8 @@
 #include "dawn_native/vulkan/CommandBufferVk.h"
 #include "dawn_native/vulkan/ComputePipelineVk.h"
 #include "dawn_native/vulkan/DepthStencilStateVk.h"
+#include "dawn_native/vulkan/FenceTrackerVk.h"
+#include "dawn_native/vulkan/FenceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/InputStateVk.h"
 #include "dawn_native/vulkan/NativeSwapChainImplVk.h"
@@ -148,6 +150,7 @@ namespace dawn_native { namespace vulkan {
 
         mBufferUploader = std::make_unique<BufferUploader>(this);
         mDeleter = std::make_unique<FencedDeleter>(this);
+        mFenceTracker = std::make_unique<FenceTracker>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mMemoryAllocator = std::make_unique<MemoryAllocator>(this);
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
@@ -240,6 +243,9 @@ namespace dawn_native { namespace vulkan {
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
     }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
+    }
     InputStateBase* Device::CreateInputState(InputStateBuilder* builder) {
         return new InputState(builder);
     }
@@ -284,6 +290,7 @@ namespace dawn_native { namespace vulkan {
         mMapRequestTracker->Tick(mCompletedSerial);
         mBufferUploader->Tick(mCompletedSerial);
         mMemoryAllocator->Tick(mCompletedSerial);
+        mFenceTracker->Tick(mCompletedSerial);
 
         mDeleter->Tick(mCompletedSerial);
 
@@ -339,6 +346,10 @@ namespace dawn_native { namespace vulkan {
 
     FencedDeleter* Device::GetFencedDeleter() const {
         return mDeleter.get();
+    }
+
+    FenceTracker* Device::GetFenceTracker() const {
+        return mFenceTracker.get();
     }
 
     RenderPassCache* Device::GetRenderPassCache() const {

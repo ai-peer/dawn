@@ -17,6 +17,7 @@
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/Fence.h"
 #include "dawn_native/Texture.h"
 
 namespace dawn_native {
@@ -32,6 +33,23 @@ namespace dawn_native {
         }
 
         SubmitImpl(numCommands, commands);
+    }
+
+    void QueueBase::Signal(FenceBase* fence, uint64_t signalValue) {
+        if (GetDevice()->ConsumedError(ValidateSignal(fence, signalValue))) {
+            return;
+        }
+
+        fence->SetSignaledValue(signalValue);
+        SignalImpl(fence, signalValue);
+    }
+
+    void QueueBase::Wait(FenceBase* fence, uint64_t value) {
+        if (GetDevice()->ConsumedError(ValidateWait(fence, value))) {
+            return;
+        }
+
+        // TODO(enga): Implement when we have multiple queues
     }
 
     MaybeError QueueBase::ValidateSubmit(uint32_t numCommands, CommandBufferBase* const* commands) {
@@ -55,6 +73,20 @@ namespace dawn_native {
             }
         }
 
+        return {};
+    }
+
+    MaybeError QueueBase::ValidateSignal(const FenceBase* fence, uint64_t signalValue) {
+        if (signalValue <= fence->GetSignaledValue()) {
+            return DAWN_VALIDATION_ERROR("Signal value less than or equal to fence signaled value");
+        }
+        return {};
+    }
+
+    MaybeError QueueBase::ValidateWait(const FenceBase* fence, uint64_t value) {
+        if (value > fence->GetSignaledValue()) {
+            return DAWN_VALIDATION_ERROR("Value greater than fence signaled value");
+        }
         return {};
     }
 
