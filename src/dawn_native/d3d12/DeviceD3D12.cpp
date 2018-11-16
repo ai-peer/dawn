@@ -26,6 +26,8 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/DepthStencilStateD3D12.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
+#include "dawn_native/d3d12/FenceD3D12.h"
+#include "dawn_native/d3d12/FenceTrackerD3D12.h"
 #include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
@@ -152,6 +154,7 @@ namespace dawn_native { namespace d3d12 {
         // Initialize backend services
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
+        mFenceTracker = std::make_unique<FenceTracker>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocator = std::make_unique<ResourceAllocator>(this);
         mResourceUploader = std::make_unique<ResourceUploader>(this);
@@ -230,6 +233,7 @@ namespace dawn_native { namespace d3d12 {
         mResourceAllocator->Tick(lastCompletedSerial);
         mCommandAllocatorManager->Tick(lastCompletedSerial);
         mDescriptorHeapAllocator->Tick(lastCompletedSerial);
+        mFenceTracker->Tick(lastCompletedSerial);
         mMapRequestTracker->Tick(lastCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(lastCompletedSerial);
         ExecuteCommandLists({});
@@ -303,6 +307,9 @@ namespace dawn_native { namespace d3d12 {
     }
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
+    }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
     }
     InputStateBase* Device::CreateInputState(InputStateBuilder* builder) {
         return new InputState(builder);
