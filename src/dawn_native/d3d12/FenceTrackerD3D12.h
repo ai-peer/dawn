@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2018 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,29 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_D3D12_QUEUED3D12_H_
-#define DAWNNATIVE_D3D12_QUEUED3D12_H_
+#ifndef DAWNNATIVE_D3D12_FENCETRACKERD3D12_H_
+#define DAWNNATIVE_D3D12_FENCETRACKERD3D12_H_
 
-#include "dawn_native/Queue.h"
-
-#include "dawn_native/d3d12/d3d12_platform.h"
+#include "common/SerialQueue.h"
+#include "dawn_native/RefCounted.h"
 
 namespace dawn_native { namespace d3d12 {
 
     class Device;
-    class CommandBuffer;
+    class Fence;
 
-    class Queue : public QueueBase {
+    class FenceTracker {
+        struct FenceInFlight {
+            Ref<Fence> fence;
+            uint64_t value;
+        };
+
       public:
-        Queue(Device* device);
+        FenceTracker(Device* device);
+        ~FenceTracker();
+
+        void UpdateFenceOnComplete(Fence* fence, uint64_t value);
+
+        void Tick(Serial finishedSerial);
 
       private:
-        void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
-        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
-
-        ComPtr<ID3D12GraphicsCommandList> mCommandList;
+        Device* mDevice;
+        SerialQueue<FenceInFlight> mFencesInFlight;
     };
 
 }}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_D3D12_QUEUED3D12_H_
+#endif  // DAWNNATIVE_D3D12_FENCETRACKERD3D12_H_
