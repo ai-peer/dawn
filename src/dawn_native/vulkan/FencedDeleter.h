@@ -30,6 +30,7 @@ namespace dawn_native { namespace vulkan {
         void DeleteWhenUnused(VkBuffer buffer);
         void DeleteWhenUnused(VkDescriptorPool pool);
         void DeleteWhenUnused(VkDeviceMemory memory);
+        void DeleteWhenUnused(VkFence fence);
         void DeleteWhenUnused(VkFramebuffer framebuffer);
         void DeleteWhenUnused(VkImage image);
         void DeleteWhenUnused(VkImageView view);
@@ -49,6 +50,7 @@ namespace dawn_native { namespace vulkan {
         SerialQueue<VkBuffer> mBuffersToDelete;
         SerialQueue<VkDescriptorPool> mDescriptorPoolsToDelete;
         SerialQueue<VkDeviceMemory> mMemoriesToDelete;
+        SerialQueue<VkFence> mFencesToDelete;
         SerialQueue<VkFramebuffer> mFramebuffersToDelete;
         SerialQueue<VkImage> mImagesToDelete;
         SerialQueue<VkImageView> mImageViewsToDelete;

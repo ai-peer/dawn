@@ -15,6 +15,7 @@
 #include "dawn_native/vulkan/FencedDeleter.h"
 
 #include "dawn_native/vulkan/DeviceVk.h"
+#include "dawn_native/vulkan/FenceVk.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -24,6 +25,7 @@ namespace dawn_native { namespace vulkan {
     FencedDeleter::~FencedDeleter() {
         ASSERT(mBuffersToDelete.Empty());
         ASSERT(mDescriptorPoolsToDelete.Empty());
+        ASSERT(mFencesToDelete.Empty());
         ASSERT(mFramebuffersToDelete.Empty());
         ASSERT(mImagesToDelete.Empty());
         ASSERT(mImageViewsToDelete.Empty());
@@ -48,6 +50,10 @@ namespace dawn_native { namespace vulkan {
 
     void FencedDeleter::DeleteWhenUnused(VkDeviceMemory memory) {
         mMemoriesToDelete.Enqueue(memory, mDevice->GetSerial());
+    }
+
+    void FencedDeleter::DeleteWhenUnused(VkFence fence) {
+        mFencesToDelete.Enqueue(fence, mDevice->GetSerial());
     }
 
     void FencedDeleter::DeleteWhenUnused(VkFramebuffer framebuffer) {
@@ -123,6 +129,11 @@ namespace dawn_native { namespace vulkan {
             mDevice->fn.DestroyRenderPass(vkDevice, renderPass, nullptr);
         }
         mRenderPassesToDelete.ClearUpTo(completedSerial);
+
+        for (VkFence fence : mFencesToDelete.IterateUpTo(completedSerial)) {
+            mDevice->fn.DestroyFence(vkDevice, fence, nullptr);
+        }
+        mFencesToDelete.ClearUpTo(completedSerial);
 
         for (VkFramebuffer framebuffer : mFramebuffersToDelete.IterateUpTo(completedSerial)) {
             mDevice->fn.DestroyFramebuffer(vkDevice, framebuffer, nullptr);
