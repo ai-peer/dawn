@@ -76,6 +76,7 @@ namespace dawn_native {
         const BindGroupLayoutDescriptor* descriptor) {
         BindGroupLayoutBase blueprint(this, descriptor, true);
 
+        //Some useless change
         auto iter = mCaches->bindGroupLayouts.find(&blueprint);
         if (iter != mCaches->bindGroupLayouts.end()) {
             (*iter)->Reference();
