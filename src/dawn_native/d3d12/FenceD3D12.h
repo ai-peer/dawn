@@ -12,25 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_METAL_QUEUEMTL_H_
-#define DAWNNATIVE_METAL_QUEUEMTL_H_
+#ifndef DAWNNATIVE_D3D12_FENCED3D12_H_
+#define DAWNNATIVE_D3D12_FENCED3D12_H_
 
-#include "dawn_native/Queue.h"
+#include "dawn_native/Fence.h"
 
-namespace dawn_native { namespace metal {
+namespace dawn_native { namespace d3d12 {
 
-    class CommandBuffer;
     class Device;
 
-    class Queue : public QueueBase {
-      public:
-        Queue(Device* device);
+    class Fence : public FenceBase {
+        friend class FenceTracker;
 
-      private:
-        void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
-        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
+      public:
+        Fence(Device* device, const FenceDescriptor* descriptor);
     };
 
-}}  // namespace dawn_native::metal
+}}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_METAL_QUEUEMTL_H_
+#endif  // DAWNNATIVE_D3D12_FENCED3D12_H_

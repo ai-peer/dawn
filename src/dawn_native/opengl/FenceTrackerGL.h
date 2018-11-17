@@ -12,25 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_OPENGL_QUEUEGL_H_
-#define DAWNNATIVE_OPENGL_QUEUEGL_H_
+#ifndef DAWNNATIVE_OPENGL_FENCETRACKERGL_H_
+#define DAWNNATIVE_OPENGL_FENCETRACKERGL_H_
 
-#include "dawn_native/Queue.h"
+#include "dawn_native/RefCounted.h"
+#include "glad/glad.h"
+
+#include <vector>
 
 namespace dawn_native { namespace opengl {
 
-    class CommandBuffer;
     class Device;
+    class Fence;
 
-    class Queue : public QueueBase {
+    class FenceTracker {
+        struct FenceInFlight {
+            GLsync sync;
+            Ref<Fence> fence;
+            uint64_t value;
+        };
+
       public:
-        Queue(Device* device);
+        FenceTracker();
+        ~FenceTracker();
+
+        void UpdateFenceOnComplete(GLsync sync, Fence* fence, uint64_t value);
+
+        void Tick();
 
       private:
-        void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
-        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
+        std::vector<FenceInFlight> mFencesInFlight;
     };
 
 }}  // namespace dawn_native::opengl
 
-#endif  // DAWNNATIVE_OPENGL_QUEUEGL_H_
+#endif  // DAWNNATIVE_OPENGL_FENCETRACKERGL_H_
