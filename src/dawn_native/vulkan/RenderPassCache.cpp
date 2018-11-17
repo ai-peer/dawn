@@ -28,6 +28,8 @@ namespace dawn_native { namespace vulkan {
                     return VK_ATTACHMENT_LOAD_OP_LOAD;
                 case dawn::LoadOp::Clear:
                     return VK_ATTACHMENT_LOAD_OP_CLEAR;
+                case dawn::LoadOp::DontCare:
+                    return VK_ATTACHMENT_LOAD_OP_DONT_CARE;
                 default:
                     UNREACHABLE();
             }
