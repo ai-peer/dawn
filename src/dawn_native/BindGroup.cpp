@@ -87,6 +87,11 @@ namespace dawn_native {
             return;
         }
 
+        if (layout == nullptr) {
+            HandleError("Layout cannot be null");
+            return;
+        }
+
         mLayout = layout;
         mPropertiesSet |= BINDGROUP_PROPERTY_LAYOUT;
     }
@@ -100,6 +105,11 @@ namespace dawn_native {
 
         const auto& layoutInfo = mLayout->GetBindingInfo();
         for (size_t i = start, j = 0; i < start + count; ++i, ++j) {
+            if (bufferViews[j] == nullptr) {
+                HandleError("Buffer views cannot be null");
+                return;
+            }
+
             dawn::BufferUsageBit requiredBit = dawn::BufferUsageBit::None;
             switch (layoutInfo.types[i]) {
                 case dawn::BindingType::UniformBuffer:
@@ -139,6 +149,11 @@ namespace dawn_native {
 
         const auto& layoutInfo = mLayout->GetBindingInfo();
         for (size_t i = start, j = 0; i < start + count; ++i, ++j) {
+            if (samplers[j] == nullptr) {
+                HandleError("Samplers cannot be null");
+                return;
+            }
+
             if (layoutInfo.types[i] != dawn::BindingType::Sampler) {
                 HandleError("Setting binding for a wrong layout binding type");
                 return;
@@ -157,6 +172,11 @@ namespace dawn_native {
 
         const auto& layoutInfo = mLayout->GetBindingInfo();
         for (size_t i = start, j = 0; i < start + count; ++i, ++j) {
+            if (textureViews[j] == nullptr) {
+                HandleError("Texture views cannot be null");
+                return;
+            }
+
             if (layoutInfo.types[i] != dawn::BindingType::SampledTexture) {
                 HandleError("Setting binding for a wrong layout binding type");
                 return;

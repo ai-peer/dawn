@@ -36,6 +36,10 @@ namespace dawn_native {
 
     MaybeError QueueBase::ValidateSubmit(uint32_t numCommands, CommandBufferBase* const* commands) {
         for (uint32_t i = 0; i < numCommands; ++i) {
+            if (commands[i] == nullptr) {
+                return DAWN_VALIDATION_ERROR("Command buffers cannot be null");
+            }
+
             const CommandBufferResourceUsage& usages = commands[i]->GetResourceUsages();
 
             for (const PassResourceUsage& passUsages : usages.perPass) {

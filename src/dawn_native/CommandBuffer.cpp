@@ -618,6 +618,11 @@ namespace dawn_native {
             return nullptr;
         }
 
+        if (info == nullptr) {
+            HandleError("RenderPassDescriptor cannot be null");
+            return nullptr;
+        }
+
         BeginRenderPassCmd* cmd = mAllocator.Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
         new (cmd) BeginRenderPassCmd;
         cmd->info = info;
@@ -634,6 +639,17 @@ namespace dawn_native {
         if(ConsumedError(ValidateCanRecordTopLevelCommands())) {
             return;
         }
+
+        if (source == nullptr) {
+            HandleError("Source cannot be null");
+            return;
+        }
+
+        if (destination == nullptr) {
+            HandleError("Destination cannot be null");
+            return;
+        }
+
 
         CopyBufferToBufferCmd* copy =
             mAllocator.Allocate<CopyBufferToBufferCmd>(Command::CopyBufferToBuffer);
@@ -658,6 +674,16 @@ namespace dawn_native {
                                                    uint32_t level,
                                                    uint32_t slice) {
         if(ConsumedError(ValidateCanRecordTopLevelCommands())) {
+            return;
+        }
+
+        if (buffer == nullptr) {
+            HandleError("Buffer cannot be null");
+            return;
+        }
+
+        if (texture == nullptr) {
+            HandleError("Texture cannot be null");
             return;
         }
 
@@ -694,6 +720,16 @@ namespace dawn_native {
                                                    uint32_t bufferOffset,
                                                    uint32_t rowPitch) {
         if(ConsumedError(ValidateCanRecordTopLevelCommands())) {
+            return;
+        }
+
+        if (buffer == nullptr) {
+            HandleError("Buffer cannot be null");
+            return;
+        }
+
+        if (texture == nullptr) {
+            HandleError("Texture cannot be null");
             return;
         }
 
