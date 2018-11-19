@@ -16,6 +16,24 @@
       "revId": "ccfd89d1e376a9bccce49ec8cb82f728aba61532",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b071576b_c4455d04",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-19T12:36:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b547bc35_adfb63e3",
+      "revId": "ccfd89d1e376a9bccce49ec8cb82f728aba61532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
