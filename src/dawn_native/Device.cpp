@@ -22,6 +22,7 @@
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/DepthStencilState.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/Fence.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
@@ -135,6 +136,15 @@ namespace dawn_native {
     DepthStencilStateBuilder* DeviceBase::CreateDepthStencilStateBuilder() {
         return new DepthStencilStateBuilder(this);
     }
+    FenceBase* DeviceBase::CreateFence(const FenceDescriptor* descriptor) {
+        FenceBase* result = nullptr;
+
+        if (ConsumedError(CreateFenceInternal(&result, descriptor))) {
+            return nullptr;
+        }
+
+        return result;
+    }
     InputStateBuilder* DeviceBase::CreateInputStateBuilder() {
         return new InputStateBuilder(this);
     }
@@ -235,6 +245,13 @@ namespace dawn_native {
                                                 const BufferDescriptor* descriptor) {
         DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, CreateBufferImpl(descriptor));
+        return {};
+    }
+
+    MaybeError DeviceBase::CreateFenceInternal(FenceBase** result,
+                                               const FenceDescriptor* descriptor) {
+        DAWN_TRY(ValidateFenceDescriptor(this, descriptor));
+        DAWN_TRY_ASSIGN(*result, CreateFenceImpl(descriptor));
         return {};
     }
 

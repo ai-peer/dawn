@@ -34,6 +34,7 @@ namespace dawn_native { namespace metal {
     class ComputePipeline;
     class DepthStencilState;
     class Device;
+    class Fence;
     class Framebuffer;
     class InputState;
     class PipelineLayout;
@@ -56,6 +57,7 @@ namespace dawn_native { namespace metal {
         using ComputePipelineType = ComputePipeline;
         using DepthStencilStateType = DepthStencilState;
         using DeviceType = Device;
+        using FenceType = Fence;
         using InputStateType = InputState;
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
