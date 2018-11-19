@@ -27,11 +27,13 @@ constexpr dawn::TextureFormat kDefaultTextureFormat = dawn::TextureFormat::R8G8B
 
 dawn::Texture Create2DArrayTexture(dawn::Device& device,
                                    uint32_t arrayLayers,
+                                   uint32_t width = kWidth,
+                                   uint32_t height = kHeight,
                                    dawn::TextureFormat format = kDefaultTextureFormat) {
     dawn::TextureDescriptor descriptor;
     descriptor.dimension = dawn::TextureDimension::e2D;
-    descriptor.size.width = kWidth;
-    descriptor.size.height = kHeight;
+    descriptor.size.width = width;
+    descriptor.size.height = height;
     descriptor.size.depth = 1;
     descriptor.arrayLayer = arrayLayers;
     descriptor.format = format;
@@ -169,12 +171,32 @@ TEST_F(TextureViewValidationTest, CreateCubeMapTextureView) {
         texture.CreateTextureView(&descriptor);
     }
 
-    // It is an error create a cube map array texture view with layerCount % 6 != 0.
+    // It is an error to create a cube map array texture view with layerCount % 6 != 0.
     {
         dawn::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
         descriptor.dimension = dawn::TextureViewDimension::CubeArray;
         descriptor.layerCount = 11;
         ASSERT_DEVICE_ERROR(texture.CreateTextureView(&descriptor));
+    }
+
+    // It is an error to create a cube map texture view with width != height.
+    {
+        dawn::Texture nonSquareTexture = Create2DArrayTexture(device, 18, 32, 16);
+
+        dawn::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
+        descriptor.dimension = dawn::TextureViewDimension::Cube;
+        descriptor.layerCount = 6;
+        ASSERT_DEVICE_ERROR(nonSquareTexture.CreateTextureView(&descriptor));
+    }
+
+    // It is an error to create a cube map texture view with width != height.
+    {
+        dawn::Texture nonSquareTexture = Create2DArrayTexture(device, 18, 32, 16);
+
+        dawn::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
+        descriptor.dimension = dawn::TextureViewDimension::CubeArray;
+        descriptor.layerCount = 12;
+        ASSERT_DEVICE_ERROR(nonSquareTexture.CreateTextureView(&descriptor));
     }
 }
 
