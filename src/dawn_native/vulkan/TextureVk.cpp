@@ -253,7 +253,7 @@ namespace dawn_native { namespace vulkan {
         VkImageCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
         createInfo.pNext = nullptr;
-        createInfo.flags = 0;
+        createInfo.flags = (GetArrayLayers() >= 6) ? VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT : 0;
         createInfo.imageType = VulkanImageType(GetDimension());
         createInfo.format = VulkanImageFormat(GetFormat());
         createInfo.extent = VulkanExtent3D(GetSize());
