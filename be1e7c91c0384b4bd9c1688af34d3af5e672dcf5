@@ -16,6 +16,24 @@
       "revId": "be1e7c91c0384b4bd9c1688af34d3af5e672dcf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5d73718_c8b98442",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2018-11-19T15:32:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa628283_30e641f9",
+      "revId": "be1e7c91c0384b4bd9c1688af34d3af5e672dcf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
