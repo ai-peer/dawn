@@ -153,6 +153,47 @@ namespace utils {
         return result;
     }
 
+    dawn::BufferCopyView CreateBufferCopyView(dawn::Buffer buffer,
+                                              uint32_t offset,
+                                              uint32_t rowPitch,
+                                              uint32_t imageHeight) {
+        dawn::BufferCopyView bufferCopyView;
+        bufferCopyView.buffer = buffer;
+        bufferCopyView.offset = offset;
+        bufferCopyView.rowPitch = rowPitch;
+        bufferCopyView.imageHeight = imageHeight;
+
+        return bufferCopyView;
+    }
+
+    dawn::TextureCopyView CreateTextureCopyView(dawn::Texture texture,
+                                                uint32_t level,
+                                                uint32_t slice,
+                                                uint32_t x,
+                                                uint32_t y,
+                                                uint32_t z,
+                                                dawn::TextureAspect aspect) {
+        dawn::TextureCopyView textureCopyView;
+        textureCopyView.texture = texture;
+        textureCopyView.level = level;
+        textureCopyView.slice = slice;
+        textureCopyView.origin.x = x;
+        textureCopyView.origin.y = y;
+        textureCopyView.origin.z = z;
+        textureCopyView.aspect = aspect;
+
+        return textureCopyView;
+    }
+
+    dawn::Extent3D CreateExtent3D(uint32_t width, uint32_t height, uint32_t depth) {
+        dawn::Extent3D extent3D;
+        extent3D.width = width;
+        extent3D.height = height;
+        extent3D.depth = depth;
+
+        return extent3D;
+    }
+
     dawn::SamplerDescriptor GetDefaultSamplerDescriptor() {
         dawn::SamplerDescriptor desc;
 

@@ -35,6 +35,19 @@ namespace utils {
         return CreateBufferFromData(device, data.begin(), uint32_t(sizeof(T) * data.size()), usage);
     }
 
+    dawn::BufferCopyView CreateBufferCopyView(dawn::Buffer buffer,
+                                              uint32_t offset,
+                                              uint32_t rowPitch,
+                                              uint32_t imageHeight);
+    dawn::TextureCopyView CreateTextureCopyView(dawn::Texture texture,
+                                                uint32_t level,
+                                                uint32_t slice,
+                                                uint32_t x,
+                                                uint32_t y,
+                                                uint32_t z,
+                                                dawn::TextureAspect aspect);
+    dawn::Extent3D CreateExtent3D(uint32_t width, uint32_t height, uint32_t depth);
+
     struct BasicRenderPass {
         uint32_t width;
         uint32_t height;
