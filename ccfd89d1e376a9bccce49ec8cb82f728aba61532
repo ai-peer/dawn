@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b547bc35_adfb63e3",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-19T08:46:45Z",
+      "side": 0,
+      "message": "nit: we can keep the flags initialized to 0 and the do createInfo.flags |\u003d VK_...",
+      "revId": "ccfd89d1e376a9bccce49ec8cb82f728aba61532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
