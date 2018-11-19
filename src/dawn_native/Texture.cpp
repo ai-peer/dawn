@@ -66,6 +66,23 @@ namespace dawn_native {
             }
         }
 
+        bool IsTextureSizeValidForTextureViewDimension(
+            dawn::TextureViewDimension textureViewDimension,
+            const Extent3D& textureSize
+        ) {
+            switch (textureViewDimension) {
+                case dawn::TextureViewDimension::Cube:
+                case dawn::TextureViewDimension::CubeArray:
+                    return textureSize.width == textureSize.height;
+                case dawn::TextureViewDimension::e2D:
+                case dawn::TextureViewDimension::e2DArray:
+                    return true;
+                default:
+                    UNREACHABLE();
+                    return false;
+            }
+        }
+
         MaybeError ValidateTextureViewDimensionCompatibility(
             const TextureBase* texture,
             const TextureViewDescriptor* descriptor) {
@@ -78,7 +95,15 @@ namespace dawn_native {
             if (!IsTextureViewDimensionCompatibleWithTextureDimension(descriptor->dimension,
                                                                       texture->GetDimension())) {
                 return DAWN_VALIDATION_ERROR(
-                    "The dimension of texture view is not compatible to the original texture");
+                    "The dimension of texture view is not compatible to the dimension of the"
+                    "original texture");
+            }
+
+            if (!IsTextureSizeValidForTextureViewDimension(descriptor->dimension,
+                                                           texture->GetSize())) {
+                return DAWN_VALIDATION_ERROR(
+                    "The dimension of texture view is not compatible to the size of the original"
+                    "texture");
             }
 
             return {};

@@ -253,7 +253,6 @@ namespace dawn_native { namespace vulkan {
         VkImageCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
         createInfo.pNext = nullptr;
-        createInfo.flags = 0;
         createInfo.imageType = VulkanImageType(GetDimension());
         createInfo.format = VulkanImageFormat(GetFormat());
         createInfo.extent = VulkanExtent3D(GetSize());
@@ -266,6 +265,12 @@ namespace dawn_native { namespace vulkan {
         createInfo.queueFamilyIndexCount = 0;
         createInfo.pQueueFamilyIndices = nullptr;
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+
+        if (GetArrayLayers() >= 6 && GetSize().width == GetSize().height) {
+            createInfo.flags = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
+        } else {
+            createInfo.flags = 0;
+        }
 
         if (device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
             VK_SUCCESS) {
