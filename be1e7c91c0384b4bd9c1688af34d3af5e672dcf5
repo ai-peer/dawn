@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa628283_30e641f9",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-19T15:18:42Z",
+      "side": 1,
+      "message": "Sorry for the continuous nitpicking but I think it would be more understandable written something like this:\n\n size_t sizeInU32 \u003d size / sizeof(uint32_t); // camelCase and renamed maybe?\n const uint32_t* u32Data \u003d reinterpret_cast\u003cconst uint32_t*\u003e(data);\n std::vector... input(u32Data, u32Data + sizeInU32);",
+      "revId": "be1e7c91c0384b4bd9c1688af34d3af5e672dcf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
