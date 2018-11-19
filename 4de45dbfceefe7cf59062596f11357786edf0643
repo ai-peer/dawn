@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "006521fe_f4e89b0c",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-19T10:07:42Z",
+      "side": 1,
+      "message": "Also can we put it in an \"alignedSize\" variable to explain what it is? I\u0027m also surprised that the std::vector constructor allows taking uint8_t*. Just to be safe we should pre-cast data to uint32_t*.",
+      "parentUuid": "8b275e75_2479f7a5",
+      "range": {
+        "startLine": 71,
+        "startChar": 50,
+        "endLine": 71,
+        "endChar": 51
+      },
+      "revId": "4de45dbfceefe7cf59062596f11357786edf0643",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4423b066_539dcff2",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.h",
         "patchSetId": 1
