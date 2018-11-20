@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ace3a51c_d24121e6",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-20T08:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f3699df_5e6ac488",
+      "range": {
+        "startLine": 43,
+        "startChar": 50,
+        "endLine": 43,
+        "endChar": 77
+      },
+      "revId": "842d84a37bc36cfa2e0a7d354b625b82c65f510b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68d529b2_9760a3ab",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "842d84a37bc36cfa2e0a7d354b625b82c65f510b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07138e25_98eee790",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-20T08:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68d529b2_9760a3ab",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 17
+      },
+      "revId": "842d84a37bc36cfa2e0a7d354b625b82c65f510b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "12828834_852260c0",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-20T08:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b2da70c_b4735635",
+      "range": {
+        "startLine": 81,
+        "startChar": 20,
+        "endLine": 81,
+        "endChar": 52
+      },
+      "revId": "842d84a37bc36cfa2e0a7d354b625b82c65f510b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8409e9b3_f486bbe9",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "842d84a37bc36cfa2e0a7d354b625b82c65f510b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "540741a6_2f316f5f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-20T08:57:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8409e9b3_f486bbe9",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "842d84a37bc36cfa2e0a7d354b625b82c65f510b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
