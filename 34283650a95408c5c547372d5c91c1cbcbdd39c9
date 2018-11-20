@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94a6ac81_ace4da66",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-20T22:55:21Z",
+      "side": 1,
+      "message": "\"compatible to\" -\u003e \"compatible with\", here and in the two messages above",
+      "range": {
+        "startLine": 104,
+        "startChar": 58,
+        "endLine": 104,
+        "endChar": 71
+      },
+      "revId": "34283650a95408c5c547372d5c91c1cbcbdd39c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95573b7b_1ae1e66b",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-20T22:55:21Z",
+      "side": 1,
+      "message": "\"of texture view\" -\u003e \"of the texture view\", here and in one message above",
+      "range": {
+        "startLine": 104,
+        "startChar": 35,
+        "endLine": 104,
+        "endChar": 50
+      },
+      "revId": "34283650a95408c5c547372d5c91c1cbcbdd39c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
