@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98bd5b8e_1d38a119",
+        "filename": "dawn.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-20T17:54:23Z",
+      "side": 1,
+      "message": "drive-by review: we aren\u0027t implementing multi-queue so we don\u0027t need to implement this for now.",
+      "revId": "1c905a16c68e470d6b11897bdffcdcbf3ae9d107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
