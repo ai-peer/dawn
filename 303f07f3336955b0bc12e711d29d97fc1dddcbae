@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2a5f17fb_f1cad7f2",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-20T22:30:43Z",
+      "side": 1,
+      "message": "\"at top level\" isn\u0027t really clear, maybe \"Command cannot be recorded inside a pass\"?",
+      "range": {
+        "startLine": 598,
+        "startChar": 56,
+        "endLine": 598,
+        "endChar": 68
+      },
+      "revId": "303f07f3336955b0bc12e711d29d97fc1dddcbae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85752bd2_a96d8485",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 2
