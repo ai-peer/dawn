@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85752bd2_a96d8485",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-20T16:14:00Z",
+      "side": 1,
+      "message": "Is this comment still required? (ie., is there further validation to do here?)",
+      "revId": "303f07f3336955b0bc12e711d29d97fc1dddcbae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59f3f77d_82cb14dd",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-20T16:14:00Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "303f07f3336955b0bc12e711d29d97fc1dddcbae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
