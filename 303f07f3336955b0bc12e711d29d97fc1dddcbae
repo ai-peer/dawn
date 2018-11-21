@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "75614a19_a70245a6",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T11:00:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a5f17fb_f1cad7f2",
+      "range": {
+        "startLine": 598,
+        "startChar": 56,
+        "endLine": 598,
+        "endChar": 68
+      },
+      "revId": "303f07f3336955b0bc12e711d29d97fc1dddcbae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85752bd2_a96d8485",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "7963de2a_3e701bb1",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T11:00:09Z",
+      "side": 1,
+      "message": "We would eventually do some of the simple validation here (can the buffer be used as index, is the offset in the buffer), but this would be part of a larger effort so we don\u0027t need the TODO anymore.",
+      "parentUuid": "85752bd2_a96d8485",
+      "revId": "303f07f3336955b0bc12e711d29d97fc1dddcbae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59f3f77d_82cb14dd",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 2
@@ -56,6 +98,24 @@
       "revId": "303f07f3336955b0bc12e711d29d97fc1dddcbae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80a9a283_1097478f",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T11:00:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59f3f77d_82cb14dd",
+      "revId": "303f07f3336955b0bc12e711d29d97fc1dddcbae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
