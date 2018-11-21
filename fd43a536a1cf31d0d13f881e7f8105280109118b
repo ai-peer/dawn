@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7f9bf32f_fbf3f8b9",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "This should be marked as extensible because extensions could want to add members to it (such as planes?)",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e1571df_e4b8c8f8",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -13,6 +30,41 @@
       "writtenOn": "2018-11-21T00:55:03Z",
       "side": 1,
       "message": "It\u0027s very unfortunate that these have to take const*, because of the issue below.\ncwallez, should we make pass-by-value work?",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c93224b_b0462fa6",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "We could make it work but it wouldn\u0027t solve the problem below because these structures should be extensible.\n\nAlso AFAIK D3D12 and Vulkan only do passing by pointers because passing by value would just silently translate to passing by pointer in most calling conventions.",
+      "parentUuid": "8e1571df_e4b8c8f8",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdaecdf5_95095825",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "ditto, this should be marked as extensible.",
       "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -36,6 +88,58 @@
     },
     {
       "key": {
+        "uuid": "623da9d9_eeedc370",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "Omitting the helper would work for Origin3D but helpers could still help for BufferCopyView and TextureCopyView because it would avoid the need to start with nullptr now that they are extensible structures.\n\nAlso I\u0027m thinking extensible structures might start with an equivalent of Vulkan\u0027s sType so filling this would be annoying too. (in the C++ bindings it would have a default value set so people don\u0027t need to worry about it.)\n\nAlso if we find the helpers too verbose, we could make our own utils::BufferCopyViewHelper that inherits from dawn::BufferCopyView and provides a constructor with the same signature as above.\n\n utils::BufferCopyViewHelper bufferCopyView{stagingBuffer, 0, 0, 0};\n utils::TextureCopyViewHelper textureCopyView{texture, 0, 0, {0, 0, 0}, dawn::TextureAspect::Color}\n dawn::Extent3D copySize{1024, 1024, 1};\n commands.CopyBufferToTexture(\u0026bufferCopyView, \u0026textureCopyView, \u0026copySize)",
+      "parentUuid": "7e40c02d_7e9c9046",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "436b17d7_c79564f3",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "This LGTM for now but can we have a follow-up patch that changes the structure of CopyBufferToTextureCmd to have three members corresponding to the three arguments? (It would have its own BufferCopyView and TextureCopyView texture duplicates with Ref\u003c\u003e and have sub\u003dstructures as value instead of pointers).",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "941173a7_cf12debd",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "656f0caa_44714a4f",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 3
@@ -53,6 +157,63 @@
         "endLine": 53,
         "endChar": 54
       },
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7edf23e_b49ab021",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "I know this is a lot of refactoring already but maybe we could refactor tests with a helper function taking arguments by rvalue reference (and using the utils::*CopyViewHelper classes):\n\n    TestB2TCopy(Expectation::Success,\n        {source, 0, 256, 0),\n        {destination, 0, 0, {0, 0, 0}, dawn::TextureAspect::Color},\n        {4, 4, 1}\n\n    );",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44651ad4_48021014",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "these can be replaced by a single Origin3D so that the call looks like this:\n  CreateTextureCopyView(texture, 0, 0, {0, 0, 0}, dawn::TextureAspect::Color)",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 59
+      },
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74a4fa9d_d9ad4c10",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T14:08:06Z",
+      "side": 1,
+      "message": "nit: this helper isn\u0027t needed.",
       "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
