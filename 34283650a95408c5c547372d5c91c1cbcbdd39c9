@@ -45,6 +45,54 @@
       "revId": "34283650a95408c5c547372d5c91c1cbcbdd39c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ada3a8d1_7ce26c3c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-21T00:58:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94a6ac81_ace4da66",
+      "range": {
+        "startLine": 104,
+        "startChar": 58,
+        "endLine": 104,
+        "endChar": 71
+      },
+      "revId": "34283650a95408c5c547372d5c91c1cbcbdd39c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a30de39_05612797",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-21T00:58:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95573b7b_1ae1e66b",
+      "range": {
+        "startLine": 104,
+        "startChar": 35,
+        "endLine": 104,
+        "endChar": 50
+      },
+      "revId": "34283650a95408c5c547372d5c91c1cbcbdd39c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
