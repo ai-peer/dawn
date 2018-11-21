@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e1571df_e4b8c8f8",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-21T00:55:03Z",
+      "side": 1,
+      "message": "It\u0027s very unfortunate that these have to take const*, because of the issue below.\ncwallez, should we make pass-by-value work?",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e40c02d_7e9c9046",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-21T00:55:03Z",
+      "side": 1,
+      "message": "It looks like CreateTextureCopyView is just a direct mapping into the struct. I think it would be nicer to just omit that helper, and here do:\n\n  dawn::TextureCopyView textureCopyView{texture, 0, 0, {0, 0, 0}, dawn::TextureAspect::Color};\n\n(or {{...}} or \u003d {...} whatever would work).\n\nSame comment everywhere else that uses CreateTextureCopyView, CreateBufferCopyView, and CreateExtent3D.\n\nThis is a bit of work so let\u0027s wait for cwallez\u0027s opinion on this.",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "656f0caa_44714a4f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-21T00:55:03Z",
+      "side": 1,
+      "message": "I think these allocations are leaked, but I also see that this is necessary because of the signature of CopyBufferToTexture et al taking pointers.",
+      "range": {
+        "startLine": 53,
+        "startChar": 51,
+        "endLine": 53,
+        "endChar": 54
+      },
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
