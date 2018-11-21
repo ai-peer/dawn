@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "75d9df29_5add4462",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-21T19:44:48Z",
+      "side": 1,
+      "message": "Oh right, good point. In the C++, I think it would make sense to have const\u0026, but in the C it\u0027ll have to be const*. It would take some code-generator changes to use const\u0026 in C++.",
+      "parentUuid": "5c93224b_b0462fa6",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cdaecdf5_95095825",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "Omitting the helper would work for Origin3D but helpers could still help for BufferCopyView and TextureCopyView because it would avoid the need to start with nullptr now that they are extensible structures.\n\nAlso I\u0027m thinking extensible structures might start with an equivalent of Vulkan\u0027s sType so filling this would be annoying too. (in the C++ bindings it would have a default value set so people don\u0027t need to worry about it.)\n\nAlso if we find the helpers too verbose, we could make our own utils::BufferCopyViewHelper that inherits from dawn::BufferCopyView and provides a constructor with the same signature as above.\n\n utils::BufferCopyViewHelper bufferCopyView{stagingBuffer, 0, 0, 0};\n utils::TextureCopyViewHelper textureCopyView{texture, 0, 0, {0, 0, 0}, dawn::TextureAspect::Color}\n dawn::Extent3D copySize{1024, 1024, 1};\n commands.CopyBufferToTexture(\u0026bufferCopyView, \u0026textureCopyView, \u0026copySize)",
       "parentUuid": "7e40c02d_7e9c9046",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29b3e0b8_adc67e1e",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-21T19:44:48Z",
+      "side": 1,
+      "message": "sgtm, we should probably just keep the helper functions for now and worry about helper types later.",
+      "parentUuid": "623da9d9_eeedc370",
       "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -174,6 +210,24 @@
       "writtenOn": "2018-11-21T14:08:06Z",
       "side": 1,
       "message": "I know this is a lot of refactoring already but maybe we could refactor tests with a helper function taking arguments by rvalue reference (and using the utils::*CopyViewHelper classes):\n\n    TestB2TCopy(Expectation::Success,\n        {source, 0, 256, 0),\n        {destination, 0, 0, {0, 0, 0}, dawn::TextureAspect::Color},\n        {4, 4, 1}\n\n    );",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d49c956_497c9486",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-21T19:44:48Z",
+      "side": 1,
+      "message": "I think we should do the CopyViewHelper classes and this refactor in a later CL.",
+      "parentUuid": "d7edf23e_b49ab021",
       "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
