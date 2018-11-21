@@ -1,0 +1,299 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d90568f_ec098b3d",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: this could be called GetDisplayIOServicePort similarly to CGDisplayIOServicePort",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "434bc4ba_feded588",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: compare to nullptr",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c04975f_1a3c5a7d",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "No need to free in this case because matchingDict is 0.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896f060d_f98d0836",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: always put braces for control flow.\nnit: iter can be declared just above this line.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98491b95_52c1e29b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "On failure we should CFRelease matchingDict.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13f97284_4961cefb",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: compare to nullptr.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81827453_2518bc50",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: all these variables can be initialized at their first use or just before it.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "415f6d9a_a02a5512",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: comment that the \"Get Rule\" means that we don\u0027t need to release these values.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f651c1a_35048bbb",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "I worry this might also release vendorIDRef and productIDRef, can we free only when !success or after we got the numbers?",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee67b14b_3e2399d2",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: always put braces for control flow.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e75266e0_028023ae",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "serv should be released here.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "057ae90e_ee6e912b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: compare to nullptr.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75f28121_a5d56b86",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: we only need to do this if data !\u003d nullptr",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fbe6296_2baea40c",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "I was hoping we could use the registryID of MTLDevice but apparently it only exists in Metal 2 and I wasn\u0027t able to find how to get the device/vendorID from it in the \"IO Registry Explorer\" tool.",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c2246e7_1cfd19a8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "Can we add a TODO to do proper error handling?",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c96628aa_14b06438",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit:compare to nullptr",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3796cd5_af09ef65",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-21T13:30:57Z",
+      "side": 1,
+      "message": "nit: only release if entry !\u003d nullptr",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
