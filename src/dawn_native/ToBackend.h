@@ -69,6 +69,11 @@ namespace dawn_native {
     };
 
     template <typename BackendTraits>
+    struct ToBackendTraits<FenceBase, BackendTraits> {
+        using BackendType = typename BackendTraits::FenceType;
+    };
+
+    template <typename BackendTraits>
     struct ToBackendTraits<InputStateBase, BackendTraits> {
         using BackendType = typename BackendTraits::InputStateType;
     };

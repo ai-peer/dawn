@@ -25,6 +25,7 @@
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/DepthStencilState.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/Fence.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
@@ -47,6 +48,7 @@ namespace dawn_native { namespace null {
     using ComputePipeline = ComputePipelineBase;
     using DepthStencilState = DepthStencilStateBase;
     class Device;
+    class Fence;
     using InputState = InputStateBase;
     using PipelineLayout = PipelineLayoutBase;
     class Queue;
@@ -68,6 +70,7 @@ namespace dawn_native { namespace null {
         using ComputePipelineType = ComputePipeline;
         using DepthStencilStateType = DepthStencilState;
         using DeviceType = Device;
+        using FenceType = Fence;
         using InputStateType = InputState;
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
@@ -119,6 +122,7 @@ namespace dawn_native { namespace null {
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
+        ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<QueueBase*> CreateQueueImpl() override;
@@ -162,6 +166,14 @@ namespace dawn_native { namespace null {
         CommandIterator mCommands;
     };
 
+    class Fence : public FenceBase {
+      public:
+        Fence(Device* device, const FenceDescriptor* descriptor);
+        ~Fence();
+
+        void FenceCompleted(uint64_t value);
+    };
+
     class Queue : public QueueBase {
       public:
         Queue(Device* device);
@@ -169,6 +181,7 @@ namespace dawn_native { namespace null {
 
       private:
         void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
+        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
     };
 
     class SwapChain : public SwapChainBase {
