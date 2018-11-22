@@ -234,6 +234,24 @@
     },
     {
       "key": {
+        "uuid": "f3dedc9b_bd3425a5",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-22T01:53:57Z",
+      "side": 1,
+      "message": "Actually, to fix the leaky `new` above, I think we could have these Test*2*Copy helpers, and use them with the utils::Create*View without having to do the *CopyViewHelper classes yet.\n\nOTOH, that would require _yet another_ painful change to this entire file (though the second one might be regex-able). It would probably be okay to leave the leaky `new` in for now, I\u0027m not sure.",
+      "parentUuid": "0d49c956_497c9486",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44651ad4_48021014",
         "filename": "src/utils/DawnHelpers.cpp",
         "patchSetId": 3
