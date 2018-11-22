@@ -252,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "d2eb2126_10865dd3",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:50:17Z",
+      "side": 1,
+      "message": "Leaving the refactor and helper classes for another CL is fine. In that case we could prevent the leak by having the test fixture take ownership of the objects as soon as they are created.",
+      "parentUuid": "f3dedc9b_bd3425a5",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44651ad4_48021014",
         "filename": "src/utils/DawnHelpers.cpp",
         "patchSetId": 3
