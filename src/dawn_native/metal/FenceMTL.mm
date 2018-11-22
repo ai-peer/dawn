@@ -12,25 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_METAL_QUEUEMTL_H_
-#define DAWNNATIVE_METAL_QUEUEMTL_H_
+#include "dawn_native/metal/FenceMTL.h"
 
-#include "dawn_native/Queue.h"
+#include "dawn_native/metal/DeviceMTL.h"
 
 namespace dawn_native { namespace metal {
 
-    class CommandBuffer;
-    class Device;
-
-    class Queue : public QueueBase {
-      public:
-        Queue(Device* device);
-
-      private:
-        void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
-        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
-    };
+    Fence::Fence(Device* device, const FenceDescriptor* descriptor)
+        : FenceBase(device, descriptor) {
+    }
 
 }}  // namespace dawn_native::metal
-
-#endif  // DAWNNATIVE_METAL_QUEUEMTL_H_

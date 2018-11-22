@@ -12,25 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_METAL_QUEUEMTL_H_
-#define DAWNNATIVE_METAL_QUEUEMTL_H_
+#ifndef DAWNNATIVE_METAL_FENCETRACKERMTL_H_
+#define DAWNNATIVE_METAL_FENCETRACKERMTL_H_
 
-#include "dawn_native/Queue.h"
+#include "common/SerialQueue.h"
+#include "dawn_native/RefCounted.h"
 
 namespace dawn_native { namespace metal {
 
-    class CommandBuffer;
     class Device;
+    class Fence;
 
-    class Queue : public QueueBase {
+    class FenceTracker {
+        struct FenceInFlight {
+            Ref<Fence> fence;
+            uint64_t value;
+        };
+
       public:
-        Queue(Device* device);
+        FenceTracker(Device* device);
+        ~FenceTracker();
+
+        void UpdateFenceOnComplete(Fence* fence, uint64_t value);
+
+        void Tick(Serial finishedSerial);
 
       private:
-        void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
-        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
+        Device* mDevice;
+        SerialQueue<FenceInFlight> mFencesInFlight;
     };
 
 }}  // namespace dawn_native::metal
 
-#endif  // DAWNNATIVE_METAL_QUEUEMTL_H_
+#endif  // DAWNNATIVE_METAL_FENCETRACKERMTL_H_
