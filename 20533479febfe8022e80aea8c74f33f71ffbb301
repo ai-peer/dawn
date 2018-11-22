@@ -1,0 +1,562 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3a2495e_2663480c",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: this is only used in the destructor so it could be inlined.",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79b4b058_217131c2",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: client_side_commands",
+      "range": {
+        "startLine": 273,
+        "startChar": 15,
+        "endLine": 273,
+        "endChar": 31
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "840a9b60_ba063c0d",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "It\u0027s unfortunate that we need something like this. That said could we have something a bit less hacky, for example a reverse-lookup table for fences from dawnFence to IDs?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5aa311e4_20904c6d",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: can the setting up of data be all grouped up together?\n\nAlso can we have some more whitespace in this function?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5b85599_a6031d45",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: client-side commands",
+      "range": {
+        "startLine": 489,
+        "startChar": 23,
+        "endLine": 489,
+        "endChar": 39
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06ac2d72_bc505746",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "this shouldn\u0027t be needed if we also skip the client-side commands in the server handler switch and in the command ids enum",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3e0608e_441644e3",
+        "filename": "src/common/SerialMap.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Can we have at least some tests for SerialMap? Especially tests that enqueuing non-monotically works?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6a2d0c5_b5fd922f",
+        "filename": "src/common/SerialMap.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Same as comment as for SerialQueue",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d2adfea_089f4098",
+        "filename": "src/common/SerialMap.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Same comment as for SerialQueue",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4e76361_c8db4922",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: the traits could be stored in SerialQueue directly and SerialStorage would do \"using SerialPair \u003d Derived::SerialPair;\"",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f98d0d08_e76e23bf",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Can we have a comment explaining what SerialQueue is, what constraints it has and why the constraint helps?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a09f873_3714a5f5",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: why is \"this-\u003e\" needed?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfe82850_1efb5147",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: order alphabetically",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdf12b6d_1b69a30e",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: order alphabetically",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b9cc6fa_0da1f7af",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cd713a7_4e275a82",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: this could be inlined in the destructor this it\u0027s only used there.",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e3fb27d_b26cae1b",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: GetSignaledValue can probably be public.",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "241a89db_d0679c0e",
+        "filename": "src/dawn_native/d3d12/FenceTrackerD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "All backends use the exact same code for FenceTracker (except the GL backend but we could add a serial to it at the device level too). There is a big opportunity to factor code. The simplest way to do this would be to have dawn_native/FenceSignalTracker.cpp/h that\u0027s a template on BackendTraits so that it knows what the Device and Fence types are. However maybe we could have the frontend assume there is a (global) serial and have the fence tracker there and then on Tick, the frontend would call TickImpl then get the backend serial and checks for any completed signals. This would require very few duplicated code between backends.\n\nWDYT? (Kai too WDYT?) I\u0027ll ask the ANGLE team if they have any advice to share on architecturing things like this.",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07fc3382_d50d6fcb",
+        "filename": "src/dawn_native/d3d12/FenceTrackerD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: FenceSignalTracker?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df818cbb_02988584",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Can we have a comment explaining what CallbackInfo does?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7b61f82_7252acdb",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: spell out the type when it is simple instead of using auto. Here and in other places.",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 12
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78ef80a4_e9ebf5de",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "maybe put these in unique_ptr and same below?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 58
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0a9c530_b02f3240",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Can we have a test that the callback is called with unknown if the fence is deleted before it is called?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "152bfab9_c8d82ecf",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "I don\u0027t think you need RetiresOnSaturation with WillOnce",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b81b2795_7ae1e6e0",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Let\u0027s not match on strings directly. Also can we make the test more precise by checking that success is actually a success? You might need to retire all expectations in between signals.",
+      "range": {
+        "startLine": 1272,
+        "startChar": 21,
+        "endLine": 1272,
+        "endChar": 78
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c700862_a91cfd8f",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "I\u0027m surprised there\u0027s no compile error because of the missing argument. Can we add a 0 there for callIndex?",
+      "range": {
+        "startLine": 1308,
+        "startChar": 1,
+        "endLine": 1311,
+        "endChar": 51
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c86e16c0_a398e913",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Can you use the GMock functionality that ensures calls are in order instead of relying on callIndex?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "496a08d8_6ab0cb86",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we need this to check GetCompletedValue is correctly updated, instead we can rely on the Null Backend Queue.Submit flushing pending operations (with a comment explaining why).",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 16
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97d38a8d_0574359a",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "Can we 1) test that both cases call the callback directly? (you can do that by retiring gmock expectations).\n 2) test that inside the callback, GetCompletedValue gives the updated value.\n 3) test that after the callback GetCompletedValue gives the correct value\n 4) Signaling \u003e signaled value with both the success and failure cases like you did?\nEach of them could be a different test",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29f53c29_f8e2e90e",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-22T13:39:47Z",
+      "side": 1,
+      "message": "These could be in a different test and should explain why we do Queue.Submit.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 45
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
