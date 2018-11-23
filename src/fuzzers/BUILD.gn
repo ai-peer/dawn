@@ -49,11 +49,16 @@ if (build_with_chromium) {
                                "defines",
                                "deps",
                                "include_dirs",
+                               "seed_corpus",
                                "sources",
                              ])
 
       if (defined(asan_options)) {
         not_needed([ "asan_options" ])
+      }
+
+      if (defined(seed_corpus)) {
+        not_needed([ "seed_corpus" ])
       }
 
       if (!defined(configs)) {
@@ -91,6 +96,7 @@ dawn_fuzzer_test("dawn_spirv_cross_glsl_fast_fuzzer") {
     ":dawn_spirv_cross_fuzzer_common",
   ]
   asan_options = [ "allow_user_segv_handler=1" ]
+  seed_corpus = "cross_fast_corpus"
 }
 
 # TODO(rharrison): Remove asan_options once signal trap is no longer
@@ -117,6 +123,7 @@ dawn_fuzzer_test("dawn_spirv_cross_hlsl_fast_fuzzer") {
     ":dawn_spirv_cross_fuzzer_common",
   ]
   asan_options = [ "allow_user_segv_handler=1" ]
+  seed_corpus = "cross_fast_corpus"
 }
 
 # TODO(rharrison): Remove asan_options once signal trap is no longer
@@ -143,6 +150,7 @@ dawn_fuzzer_test("dawn_spirv_cross_msl_fast_fuzzer") {
     ":dawn_spirv_cross_fuzzer_common",
   ]
   asan_options = [ "allow_user_segv_handler=1" ]
+  seed_corpus = "cross_fast_corpus"
 }
 
 # TODO(rharrison): Remove asan_options once signal trap is no longer
@@ -164,8 +172,8 @@ dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
   ]
 
   deps = [
-    "${dawn_top_level}:libdawn_sources",
     "${dawn_top_level}:libdawn_native_sources",
+    "${dawn_top_level}:libdawn_sources",
     "${dawn_top_level}:libdawn_wire_sources",
   ]
 
