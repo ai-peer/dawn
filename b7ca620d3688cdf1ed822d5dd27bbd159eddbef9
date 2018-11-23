@@ -246,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "ad8b5041_3379f79f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-23T13:51:10Z",
+      "side": 1,
+      "message": "@Corentin, I tried to get vendor id and device id through registryID, but only found some information like this:\nIOPCIMatch \u003d \"0x68201002 0x68211002 0x68231002 0x68251002 0x68271002 0x682B1002 0x682D1002 \u003e 0x682F1002 0x68351002 0x68391002 0x683B1002 0x683D1002 0x683F1002\";\nor \nIOPCIPrimaryMatch \u003d \"0x0d268086 0x0a268086 0x0a2e8086 0x0d228086 0x04128086\";\n\nThe first four hex is device id, the remaining four is vendor id, I don\u0027t know how to get the correct device id in them (actually the device id is 0x6821 and 0x0a2e in current implementation).\n\nI\u0027m not sure if it is the way you expect it, do you have any suggestion?",
+      "parentUuid": "4fbe6296_2baea40c",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c2246e7_1cfd19a8",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
