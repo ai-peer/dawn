@@ -264,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "4135d19e_886bb427",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-23T15:28:14Z",
+      "side": 1,
+      "message": "Ah, it seems registryID corresponds to the driver and its instantiation, not the device itself. We should keep in mind that this does give use some useful information. In the meantime we should go with your solution with the display and I\u0027ll ask Apple if there\u0027s a better way.",
+      "parentUuid": "ad8b5041_3379f79f",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c2246e7_1cfd19a8",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
