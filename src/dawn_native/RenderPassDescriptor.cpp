@@ -85,19 +85,20 @@ namespace dawn_native {
 
     RenderPassDescriptorBase* RenderPassDescriptorBuilder::GetResultImpl() {
         auto CheckOrSetSize = [this](const TextureViewBase* attachment) -> bool {
+            uint32_t mipLevel = attachment->GetBaseMipLevel();
             if (this->mWidth == 0) {
                 ASSERT(this->mHeight == 0);
 
-                this->mWidth = attachment->GetTexture()->GetSize().width;
-                this->mHeight = attachment->GetTexture()->GetSize().height;
+                this->mWidth = attachment->GetTexture()->GetSize().width >> mipLevel;
+                this->mHeight = attachment->GetTexture()->GetSize().height >> mipLevel;;
                 ASSERT(this->mWidth != 0 && this->mHeight != 0);
 
                 return true;
             }
 
             ASSERT(this->mWidth != 0 && this->mHeight != 0);
-            return this->mWidth == attachment->GetTexture()->GetSize().width &&
-                   this->mHeight == attachment->GetTexture()->GetSize().height;
+            return this->mWidth == attachment->GetTexture()->GetSize().width >> mipLevel &&
+                   this->mHeight == attachment->GetTexture()->GetSize().height >> mipLevel;
         };
 
         uint32_t attachmentCount = 0;
@@ -133,8 +134,19 @@ namespace dawn_native {
             return;
         }
 
-        if (TextureFormatHasDepthOrStencil(textureView->GetTexture()->GetFormat())) {
-            HandleError("Using depth stencil texture as color attachment");
+        if (!IsRenderableTextureFormat(textureView->GetFormat())) {
+            HandleError("Texture view format is not color renderable");
+            return;
+        }
+
+        // Currently we do not support layered rendering.
+        if (textureView->GetLayerCount() > 1) {
+            HandleError("Texture view layer count cannot be greater than 1");
+            return;
+        }
+
+        if (textureView->GetLevelCount() > 1) {
+            HandleError("Texture view mipmap level count cannot be greater than 1");
             return;
         }
 

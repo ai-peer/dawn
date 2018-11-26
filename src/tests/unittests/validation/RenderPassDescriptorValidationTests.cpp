@@ -21,19 +21,48 @@ namespace {
 class RenderPassDescriptorValidationTest : public ValidationTest {
 };
 
-dawn::TextureView Create2DAttachment(dawn::Device& device, uint32_t width, uint32_t height, dawn::TextureFormat format) {
+dawn::Texture CreateTexture(dawn::Device& device,
+                            dawn::TextureDimension dimension,
+                            dawn::TextureFormat format,
+                            uint32_t width,
+                            uint32_t height,
+                            uint32_t arrayLayer,
+                            uint32_t levelCount) {
     dawn::TextureDescriptor descriptor;
-    descriptor.dimension = dawn::TextureDimension::e2D;
+    descriptor.dimension = dimension;
     descriptor.size.width = width;
     descriptor.size.height = height;
     descriptor.size.depth = 1;
-    descriptor.arrayLayer = 1;
+    descriptor.arrayLayer = arrayLayer;
     descriptor.format = format;
-    descriptor.levelCount = 1;
+    descriptor.levelCount = levelCount;
     descriptor.usage = dawn::TextureUsageBit::OutputAttachment;
-    dawn::Texture attachment = device.CreateTexture(&descriptor);
 
-    return attachment.CreateDefaultTextureView();
+    return device.CreateTexture(&descriptor);
+}
+
+dawn::TextureViewDescriptor CreateDefaultTextureViewDescriptor(dawn::TextureViewDimension dimension,
+                                                               dawn::TextureFormat format,
+                                                               uint32_t layerCount,
+                                                               uint32_t levelCount) {
+    dawn::TextureViewDescriptor descriptor;
+    descriptor.dimension = dimension;
+    descriptor.format = format;
+    descriptor.baseArrayLayer = 0;
+    descriptor.layerCount = layerCount;
+    descriptor.baseMipLevel = 0;
+    descriptor.levelCount = levelCount;
+
+    return descriptor;
+}
+
+dawn::TextureView Create2DAttachment(dawn::Device& device,
+                                     uint32_t width,
+                                     uint32_t height,
+                                     dawn::TextureFormat format) {
+    dawn::Texture texture = CreateTexture(
+        device, dawn::TextureDimension::e2D, format, width, height, 1, 1);
+    return texture.CreateDefaultTextureView();
 }
 
 // A render pass with no attachments isn't valid
@@ -173,6 +202,84 @@ TEST_F(RenderPassDescriptorValidationTest, FormatMismatch) {
     {
         AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
             .SetDepthStencilAttachment(color, dawn::LoadOp::Clear, dawn::LoadOp::Clear)
+            .GetResult();
+    }
+}
+
+// Currently only texture views with layerCount == 1 are allowed to be color attachments
+TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColor) {
+    constexpr uint32_t kLevelCount = 1;
+    constexpr dawn::TextureFormat kTextureFormat = dawn::TextureFormat::R8G8B8A8Unorm;
+
+    constexpr uint32_t kArrayLayers = 10;
+    dawn::Texture texture = CreateTexture(
+        device, dawn::TextureDimension::e2D, kTextureFormat, 32, 32, kArrayLayers, kLevelCount);
+
+    // Using 2D array texture view with layerCount > 1 for color is not allowed
+    {
+        dawn::TextureView textureView = texture.CreateDefaultTextureView();
+        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
+            .SetColorAttachment(0, textureView, dawn::LoadOp::Clear)
+            .GetResult();
+    }
+
+    dawn::TextureViewDescriptor descriptor = CreateDefaultTextureViewDescriptor(
+        dawn::TextureViewDimension::e2DArray, kTextureFormat, kArrayLayers, kLevelCount);
+
+    // Using 2D array texture view with layerCount > 1 for color is not allowed
+    {
+        descriptor.layerCount = 5;
+
+        dawn::TextureView textureView = texture.CreateTextureView(&descriptor);
+        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
+            .SetColorAttachment(0, textureView, dawn::LoadOp::Clear)
+            .GetResult();
+    }
+
+    // Using 2D array texture view with layerCount == 1 for color is OK
+    {
+        descriptor.baseArrayLayer = 3;
+        descriptor.layerCount = 1;
+
+        dawn::TextureView textureView = texture.CreateTextureView(&descriptor);
+        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
+            .SetColorAttachment(0, textureView, dawn::LoadOp::Clear)
+            .GetResult();
+    }
+}
+
+// Only 2D texture views with levelCount == 1 are allowed to be color attachments
+TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColor) {
+    constexpr uint32_t kArrayLayers = 15;
+    constexpr uint32_t kLevelCount = 4;
+    constexpr dawn::TextureFormat kTextureFormat = dawn::TextureFormat::R8G8B8A8Unorm;
+    dawn::Texture texture = CreateTexture(
+        device, dawn::TextureDimension::e2D, kTextureFormat, 32, 32, kArrayLayers, kLevelCount);
+    dawn::TextureViewDescriptor descriptor = CreateDefaultTextureViewDescriptor(
+        dawn::TextureViewDimension::e2DArray, kTextureFormat, kArrayLayers, kLevelCount);
+
+    // Using 2D texture view with levelCount > 1 for color is not allowed
+    {
+        descriptor.dimension = dawn::TextureViewDimension::e2D;
+        descriptor.levelCount = kLevelCount;
+        descriptor.layerCount = 1;
+
+        dawn::TextureView textureView = texture.CreateTextureView(&descriptor);
+        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
+            .SetColorAttachment(0, textureView, dawn::LoadOp::Clear)
+            .GetResult();
+    }
+
+    // Using 2D texture view with levelCount == 1 and baseMipLevel > 0 for color is OK
+    {
+        descriptor.dimension = dawn::TextureViewDimension::e2D;
+        descriptor.levelCount = 1;
+        descriptor.layerCount = 1;
+        descriptor.baseMipLevel = 2;
+
+        dawn::TextureView textureView = texture.CreateTextureView(&descriptor);
+        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
+            .SetColorAttachment(0, textureView, dawn::LoadOp::Clear)
             .GetResult();
     }
 }

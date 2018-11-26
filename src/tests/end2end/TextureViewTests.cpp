@@ -93,7 +93,7 @@ protected:
         descriptor.arrayLayer = layerCount;
         descriptor.format = kFormat;
         descriptor.levelCount = levelCount;
-        descriptor.usage = dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Sampled;
+        descriptor.usage = dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Sampled | dawn::TextureUsageBit::OutputAttachment;
         mTexture = device.CreateTexture(&descriptor);
 
         mDefaultTextureViewDescriptor.nextInChain = nullptr;
@@ -315,6 +315,98 @@ protected:
         }
     }
 
+    void RenderIntoTextureArrayLayerTest(uint32_t textureLayerCount,
+                                         dawn::TextureViewDimension dimension,
+                                         uint32_t textureViewBaseLayer,
+                                         uint32_t textureViewBaseLevel) {
+        constexpr uint32_t kMipLevels = 6;
+
+        ASSERT(dimension == dawn::TextureViewDimension::e2D ||
+               dimension == dawn::TextureViewDimension::e2DArray);
+        ASSERT_LT(textureViewBaseLayer,  textureLayerCount);
+        ASSERT_LT(textureViewBaseLevel, kMipLevels);
+        initTexture(textureLayerCount, kMipLevels);
+
+        dawn::TextureViewDescriptor descriptor = mDefaultTextureViewDescriptor;
+        descriptor.dimension = dimension;
+        descriptor.baseArrayLayer = textureViewBaseLayer;
+        descriptor.layerCount = 1;
+        descriptor.baseMipLevel = textureViewBaseLevel;
+        descriptor.levelCount = 1;
+        dawn::TextureView textureView = mTexture.CreateTextureView(&descriptor);
+
+        // First we render (0, 0, 0, 255) into textureView.
+        dawn::RenderPassDescriptor oneColorRenderPassInfo = device.CreateRenderPassDescriptorBuilder()
+            .SetColorAttachment(0, textureView, dawn::LoadOp::Clear)
+            .GetResult();
+
+        const char* oneColorFragmentShader = R"(
+            #version 450
+            layout(location = 0) out vec4 fragColor;
+
+            void main() {
+                fragColor = vec4(0, 0, 0, 255);
+            }
+        )";
+        dawn::ShaderModule oneColorFsModule =
+            utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, oneColorFragmentShader);
+
+        dawn::RenderPipeline oneColorPipeline = device.CreateRenderPipelineBuilder()
+            .SetColorAttachmentFormat(0, mRenderPass.colorFormat)
+            .SetStage(dawn::ShaderStage::Vertex, mVSModule, "main")
+            .SetStage(dawn::ShaderStage::Fragment, oneColorFsModule, "main")
+            .GetResult();
+        dawn::CommandBufferBuilder commandBufferBuilder = device.CreateCommandBufferBuilder();
+        {
+            dawn::RenderPassEncoder pass =
+                commandBufferBuilder.BeginRenderPass(oneColorRenderPassInfo);
+            pass.SetRenderPipeline(oneColorPipeline);
+            pass.DrawArrays(6, 1, 0, 0);
+            pass.EndPass();
+        }
+
+        dawn::CommandBuffer commands = commandBufferBuilder.GetResult();
+        queue.Submit(1, &commands);
+
+        // Then we sample from textureView to check if we can get the right pixel (0, 0, 0, 255).
+        const char* fragmentShaderWithSampler = "";
+
+        switch (dimension) {
+            case dawn::TextureViewDimension::e2D:
+                fragmentShaderWithSampler = R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform sampler sampler0;
+                    layout(set = 0, binding = 1) uniform texture2D texture0;
+                    layout(location = 0) in vec2 texCoord;
+                    layout(location = 0) out vec4 fragColor;
+
+                    void main() {
+                    fragColor =
+                        texture(sampler2D(texture0, sampler0), texCoord);
+                    }
+                )";
+                break;
+            case dawn::TextureViewDimension::e2DArray:
+                fragmentShaderWithSampler = R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform sampler sampler0;
+                    layout(set = 0, binding = 1) uniform texture2DArray texture0;
+                    layout(location = 0) in vec2 texCoord;
+                    layout(location = 0) out vec4 fragColor;
+
+                    void main() {
+                        fragColor =
+                            texture(sampler2DArray(texture0, sampler0), vec3(texCoord, 0));
+                    }
+                )";
+                break;
+            default:
+                UNREACHABLE();
+        }
+
+        Verify(textureView, fragmentShaderWithSampler, 255);
+    }
+
     dawn::BindGroupLayout mBindGroupLayout;
     dawn::PipelineLayout mPipelineLayout;
     dawn::Sampler mSampler;
@@ -421,6 +513,24 @@ TEST_P(TextureViewTest, TextureCubeMapArrayViewCoveringLastLayer) {
 // Test sampling from a cube map array texture view that only has a single cube map.
 TEST_P(TextureViewTest, TextureCubeMapArrayViewSingleCubeMap) {
     TextureCubeMapTest(20, 7, 6, true);
+}
+
+// Test rendering into a 2D texture view created on a 2D non-array texture.
+TEST_P(TextureViewTest, Texture2DViewOn2DTextureAsColorAttachment) {
+    constexpr uint32_t kTextureArrayLayers = 1;
+    RenderIntoTextureArrayLayerTest(kTextureArrayLayers, dawn::TextureViewDimension::e2D, 0, 4);
+}
+
+// Test rendering into a 2D texture view created on a 2D array texture.
+TEST_P(TextureViewTest, Texture2DViewOn2DArrayTextureAsColorAttachment) {
+    constexpr uint32_t kTextureArrayLayers = 6;
+    RenderIntoTextureArrayLayerTest(kTextureArrayLayers, dawn::TextureViewDimension::e2D, 2, 3);
+}
+
+// Test rendering into a 1-layer 2D array texture view created on a 2D array texture.
+TEST_P(TextureViewTest, Texture2DArrayViewOn2DArrayTextureAsColorAttachment) {
+    constexpr uint32_t kTextureArrayLayers = 6;
+    RenderIntoTextureArrayLayerTest(kTextureArrayLayers, dawn::TextureViewDimension::e2DArray, 1, 2);
 }
 
 DAWN_INSTANTIATE_TEST(TextureViewTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)
