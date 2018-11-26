@@ -16,6 +16,7 @@
 #define DAWNNATIVE_VULKAN_VULKANINFO_H_
 
 #include "common/vulkan_platform.h"
+#include "dawn_native/Error.h"
 
 #include <vector>
 
@@ -76,12 +77,10 @@ namespace dawn_native { namespace vulkan {
         std::vector<bool> supportedQueueFamilies;
     };
 
-    bool GatherGlobalInfo(const Device& device, VulkanGlobalInfo* info);
-    bool GetPhysicalDevices(const Device& device, std::vector<VkPhysicalDevice>* physicalDevices);
-    bool GatherDeviceInfo(const Device& device,
-                          VkPhysicalDevice physicalDevice,
-                          VulkanDeviceInfo* info);
-    bool GatherSurfaceInfo(const Device& device, VkSurfaceKHR surface, VulkanSurfaceInfo* info);
+    MaybeError GatherGlobalInfo(const Device& device, VulkanGlobalInfo* info);
+    MaybeError GetPhysicalDevices(const Device& device, std::vector<VkPhysicalDevice>* physicalDevices);
+    MaybeError GatherDeviceInfo(const Device& device, VkPhysicalDevice physicalDevice, VulkanDeviceInfo* info);
+    MaybeError GatherSurfaceInfo(const Device& device, VkSurfaceKHR surface, VulkanSurfaceInfo* info);
 
 }}  // namespace dawn_native::vulkan
 
