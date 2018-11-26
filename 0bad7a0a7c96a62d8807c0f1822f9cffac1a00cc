@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b804f80b_86534201",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-26T12:14:04Z",
+      "side": 1,
+      "message": "We should also check !HasDepthOrStencil()",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7da98b2_d87f7f62",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-26T12:14:04Z",
+      "side": 1,
+      "message": "Can we add the same validation for depth stencil attachments and factor the common validation?",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f84a8781_e419d1ca",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-26T12:14:04Z",
+      "side": 1,
+      "message": "DepthStencil is renderable, just not color renderable.",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e74e204e_84143432",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-26T12:14:04Z",
+      "side": 1,
+      "message": "Isn\u0027t this testing the same thing as the second sub-tests?",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50f9013f_83d5e5f8",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-26T12:14:04Z",
+      "side": 1,
+      "message": "Can this test both first and last layers?",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 5
+      },
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36352c78_edb2aa27",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-26T12:14:04Z",
+      "side": 1,
+      "message": "Can we check both the first and the last mip levels?",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 1
+      },
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
