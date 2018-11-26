@@ -133,8 +133,19 @@ namespace dawn_native {
             return;
         }
 
-        if (TextureFormatHasDepthOrStencil(textureView->GetTexture()->GetFormat())) {
-            HandleError("Using depth stencil texture as color attachment");
+        if (!IsRenderableTextureFormat(textureView->GetFormat())) {
+            HandleError("Texture view format is not color renderable");
+            return;
+        }
+
+        // Currently we do not support layered rendering.
+        if (textureView->GetLayerCount() > 1) {
+            HandleError("Texture view layer count cannot be greater than 1");
+            return;
+        }
+
+        if (textureView->GetLevelCount() > 1) {
+            HandleError("Texture view mipmap level count cannot be greater than 1");
             return;
         }
 
