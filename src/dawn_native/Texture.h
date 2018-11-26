@@ -32,6 +32,7 @@ namespace dawn_native {
     bool TextureFormatHasDepth(dawn::TextureFormat format);
     bool TextureFormatHasStencil(dawn::TextureFormat format);
     bool TextureFormatHasDepthOrStencil(dawn::TextureFormat format);
+    bool IsRenderableTextureFormat(dawn::TextureFormat format);
 
     static constexpr dawn::TextureUsageBit kReadOnlyTextureUsages =
         dawn::TextureUsageBit::TransferSrc | dawn::TextureUsageBit::Sampled |
@@ -74,8 +75,20 @@ namespace dawn_native {
         const TextureBase* GetTexture() const;
         TextureBase* GetTexture();
 
+        dawn::TextureFormat GetFormat() const;
+        uint32_t GetBaseMipLevel() const;
+        uint32_t GetLevelCount() const;
+        uint32_t GetBaseArrayLayer() const;
+        uint32_t GetLayerCount() const;
+
       private:
         Ref<TextureBase> mTexture;
+
+        dawn::TextureFormat mFormat;
+        uint32_t mBaseMipLevel;
+        uint32_t mLevelCount;
+        uint32_t mBaseArrayLayer;
+        uint32_t mLayerCount;
     };
 
 }  // namespace dawn_native

@@ -482,14 +482,20 @@ namespace dawn_native { namespace opengl {
                 GLuint texture = ToBackend(textureView->GetTexture())->GetHandle();
 
                 // Attach color buffers.
-                glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
-                                       texture, 0);
+                if (textureView->GetTexture()->GetArrayLayers() == 1) {
+                    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
+                        GL_TEXTURE_2D, texture, textureView->GetBaseMipLevel());
+                } else {
+                    glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
+                        texture, textureView->GetBaseMipLevel(), textureView->GetBaseArrayLayer());
+                }
+
                 drawBuffers[i] = GL_COLOR_ATTACHMENT0 + i;
                 attachmentCount = i + 1;
 
                 // TODO(kainino@chromium.org): the color clears (later in
                 // this function) may be undefined for non-normalized integer formats.
-                dawn::TextureFormat format = textureView->GetTexture()->GetFormat();
+                dawn::TextureFormat format = textureView->GetFormat();
                 ASSERT(format == dawn::TextureFormat::R8G8B8A8Unorm ||
                        format == dawn::TextureFormat::R8G8Unorm ||
                        format == dawn::TextureFormat::R8Unorm ||
