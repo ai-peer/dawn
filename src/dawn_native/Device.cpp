@@ -33,6 +33,7 @@
 #include "dawn_native/Texture.h"
 
 #include <unordered_set>
+#include <iostream>
 
 namespace dawn_native {
 
@@ -57,6 +58,7 @@ namespace dawn_native {
     }
 
     void DeviceBase::HandleError(const char* message) {
+        std::cout << message << std::endl;
         if (mErrorCallback) {
             mErrorCallback(message, mErrorUserdata);
         }
