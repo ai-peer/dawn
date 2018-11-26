@@ -39,6 +39,9 @@ class Result;
 
 // The interface of Result<T, E> shoud look like the following.
 //  public:
+//    using SuccessType = T;
+//    using ErrorType = T;
+//
 //    Result(T&& success);
 //    Result(E&& error);
 //
@@ -58,6 +61,8 @@ class Result;
 template <typename E>
 class DAWN_NO_DISCARD Result<void, E*> {
   public:
+    using ErrorType = E*;
+
     Result();
     Result(E* error);
 
@@ -88,6 +93,9 @@ constexpr size_t alignof_if_defined_else_default<T, Default, decltype(alignof(T)
 template <typename T, typename E>
 class DAWN_NO_DISCARD Result<T*, E*> {
   public:
+    using SuccessType = T*;
+    using ErrorType = E*;
+
     static_assert(alignof_if_defined_else_default<T, 4> >= 4,
                   "Result<T*, E*> reserves two bits for tagging pointers");
     static_assert(alignof_if_defined_else_default<E, 4> >= 4,
@@ -131,6 +139,9 @@ class DAWN_NO_DISCARD Result<T*, E*> {
 template <typename T, typename E>
 class DAWN_NO_DISCARD Result {
   public:
+    using SuccessType = T;
+    using ErrorType = E;
+
     Result(T&& success);
     Result(E&& error);
 
