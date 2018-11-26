@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c4c8f8a1_83c149d4",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f9bf32f_fbf3f8b9",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e1571df_e4b8c8f8",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -89,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "3d602eeb_dddc9bfe",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdaecdf5_95095825",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e40c02d_7e9c9046",
         "filename": "examples/CppHelloTriangle.cpp",
         "patchSetId": 3
@@ -142,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "0e3ed1fd_ee276d6b",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b3e0b8_adc67e1e",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "436b17d7_c79564f3",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 3
@@ -159,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "6cd8854a_fe7e0b30",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "436b17d7_c79564f3",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "941173a7_cf12debd",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 3
@@ -173,6 +245,24 @@
       "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b7b6ad2_09c96b0c",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "941173a7_cf12debd",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -196,6 +286,30 @@
       "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b7198c2_382a4710",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "656f0caa_44714a4f",
+      "range": {
+        "startLine": 53,
+        "startChar": 51,
+        "endLine": 53,
+        "endChar": 54
+      },
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -270,6 +384,24 @@
     },
     {
       "key": {
+        "uuid": "64ab7df8_d9c7111d",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Went ahead and refactored.",
+      "parentUuid": "d2eb2126_10865dd3",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44651ad4_48021014",
         "filename": "src/utils/DawnHelpers.cpp",
         "patchSetId": 3
@@ -293,6 +425,30 @@
     },
     {
       "key": {
+        "uuid": "519d8e5c_49dbf88c",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44651ad4_48021014",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 59
+      },
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74a4fa9d_d9ad4c10",
         "filename": "src/utils/DawnHelpers.cpp",
         "patchSetId": 3
@@ -307,6 +463,24 @@
       "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fd13669_f8be11fb",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-26T21:12:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74a4fa9d_d9ad4c10",
+      "revId": "fd43a536a1cf31d0d13f881e7f8105280109118b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
