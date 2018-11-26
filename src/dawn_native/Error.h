@@ -17,6 +17,8 @@
 
 #include "common/Result.h"
 
+#include <string>
+
 namespace dawn_native {
 
     // This is the content of an error value for MaybeError or ResultOrError, split off to its own
@@ -80,12 +82,19 @@ namespace dawn_native {
     for (;;)                                                      \
     break
 
+    // DAWN_TRY_DECLARE is the same as DAWN_ASSIGN except it also declares VAR
+#define DAWN_TRY_DECLARE(VAR, EXPR)                                \
+    decltype(EXPR)::SuccessType VAR;                              \
+    DAWN_TRY_ASSIGN(VAR, EXPR);                                   \
+    for (;;)                                                      \
+    break
+
     // Implementation detail of DAWN_TRY and DAWN_TRY_ASSIGN's adding to the Error's backtrace.
     void AppendBacktrace(ErrorData* error, const char* file, const char* function, int line);
 
     // Implementation detail of DAWN_MAKE_ERROR
     ErrorData* MakeError(ErrorType type,
-                         const char* message,
+                         std::string message,
                          const char* file,
                          const char* function,
                          int line);
