@@ -83,6 +83,21 @@ namespace dawn_native {
     RenderPassDescriptorBuilder::RenderPassDescriptorBuilder(DeviceBase* device) : Builder(device) {
     }
 
+    bool RenderPassDescriptorBuilder::CheckArrayLayersAndLevelCountForAttachment(
+        const TextureViewBase* textureView) {
+        // Currently we do not support layered rendering.
+        if (textureView->GetLayerCount() > 1) {
+            HandleError("Texture view layer count cannot be greater than 1");
+            return false;
+        }
+
+        if (textureView->GetLevelCount() > 1) {
+            HandleError("Texture view mipmap level count cannot be greater than 1");
+            return false;
+        }
+        return true;
+    }
+
     RenderPassDescriptorBase* RenderPassDescriptorBuilder::GetResultImpl() {
         auto CheckOrSetSize = [this](const TextureViewBase* attachment) -> bool {
             if (this->mWidth == 0) {
@@ -133,8 +148,12 @@ namespace dawn_native {
             return;
         }
 
-        if (TextureFormatHasDepthOrStencil(textureView->GetTexture()->GetFormat())) {
-            HandleError("Using depth stencil texture as color attachment");
+        if (!IsColorRenderableTextureFormat(textureView->GetFormat())) {
+            HandleError("Texture view format is not color renderable");
+            return;
+        }
+
+        if (!CheckArrayLayersAndLevelCountForAttachment(textureView)) {
             return;
         }
 
@@ -164,6 +183,10 @@ namespace dawn_native {
                                                                 dawn::LoadOp stencilLoadOp) {
         if (!TextureFormatHasDepthOrStencil(textureView->GetTexture()->GetFormat())) {
             HandleError("Using color texture as depth stencil attachment");
+            return;
+        }
+
+        if (!CheckArrayLayersAndLevelCountForAttachment(textureView)) {
             return;
         }
 
