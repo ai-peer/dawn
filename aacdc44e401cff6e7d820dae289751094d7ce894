@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8aea1fc_f77212f3",
+        "filename": ".clang-format",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-27T12:27:37Z",
+      "side": 1,
+      "message": "Heh, Visual Studio\u0027s clang format is a bit old. Can you still rollback these changes? If any changes need to be done, they\u0027ll be in the test results of the \"presubmit builder\".",
+      "revId": "aacdc44e401cff6e7d820dae289751094d7ce894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
