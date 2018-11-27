@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3bd3f8a8_4b5deead",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-27T08:46:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b804f80b_86534201",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7da98b2_d87f7f62",
         "filename": "src/dawn_native/RenderPassDescriptor.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c429367_9409a273",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-27T08:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7da98b2_d87f7f62",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4435f9b3_19751ffb",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-27T08:46:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f84a8781_e419d1ca",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e74e204e_84143432",
         "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "298479e1_3ee6abd0",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-27T08:46:54Z",
+      "side": 1,
+      "message": "Done\nIt tested the default texture view. I have removed it.",
+      "parentUuid": "e74e204e_84143432",
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "6870a0ba_17e88593",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-27T08:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50f9013f_83d5e5f8",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 5
+      },
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36352c78_edb2aa27",
         "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
         "patchSetId": 2
@@ -113,6 +209,30 @@
       "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea6d8132_f6babee3",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-27T08:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36352c78_edb2aa27",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 1
+      },
+      "revId": "0bad7a0a7c96a62d8807c0f1822f9cffac1a00cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
