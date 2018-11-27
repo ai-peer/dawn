@@ -16,6 +16,24 @@
       "revId": "aacdc44e401cff6e7d820dae289751094d7ce894",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3acd9ee_ff95d55c",
+        "filename": ".clang-format",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-27T22:23:08Z",
+      "side": 1,
+      "message": "Didn\u0027t mean to add this :)\n\nI did remove these options to get the cl format to work locally - is this wrong? It\u0027s a dirty workaround - but I didn\u0027t see any formatting changes related to removing these options. Should I rely solely on the bots for my auto-formatting needs?",
+      "parentUuid": "d8aea1fc_f77212f3",
+      "revId": "aacdc44e401cff6e7d820dae289751094d7ce894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
