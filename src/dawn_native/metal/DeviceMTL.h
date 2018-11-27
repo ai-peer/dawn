@@ -27,6 +27,9 @@
 #include <memory>
 #include <type_traits>
 
+namespace dawn_native {
+    class FenceSignalTracker;
+}  // namespace dawn_native
 namespace dawn_native { namespace metal {
 
     class MapRequestTracker;
@@ -58,6 +61,7 @@ namespace dawn_native { namespace metal {
         void SubmitPendingCommandBuffer();
         Serial GetPendingCommandSerial();
 
+        FenceSignalTracker* GetFenceSignalTracker() const;
         MapRequestTracker* GetMapTracker() const;
         ResourceUploader* GetResourceUploader() const;
 
@@ -67,6 +71,7 @@ namespace dawn_native { namespace metal {
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
+        ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<QueueBase*> CreateQueueImpl() override;
@@ -83,6 +88,7 @@ namespace dawn_native { namespace metal {
 
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;
+        std::unique_ptr<FenceSignalTracker> mFenceSignalTracker;
         std::unique_ptr<MapRequestTracker> mMapTracker;
         std::unique_ptr<ResourceUploader> mResourceUploader;
 

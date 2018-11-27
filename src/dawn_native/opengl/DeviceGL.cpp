@@ -16,6 +16,7 @@
 
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
+#include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/OpenGLBackend.h"
 #include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/opengl/BlendStateGL.h"
@@ -23,6 +24,7 @@
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
 #include "dawn_native/opengl/DepthStencilStateGL.h"
+#include "dawn_native/opengl/FenceGL.h"
 #include "dawn_native/opengl/InputStateGL.h"
 #include "dawn_native/opengl/PipelineLayoutGL.h"
 #include "dawn_native/opengl/QueueGL.h"
@@ -48,6 +50,23 @@ namespace dawn_native { namespace opengl {
 
     Device::Device() {
         CollectPCIInfo();
+
+        mFenceSignalTracker = std::make_unique<FenceSignalTracker>();
+    }
+
+    Device::~Device() {
+        CheckPassedFences();
+        ASSERT(mFencesInFlight.empty());
+
+        // Some operations might have been started since the last submit and waiting
+        // on a serial that doesn't have a corresponding fence enqueued. Force all
+        // operations to look as if they were completed (because they were).
+        mCompletedSerial = mNextSerial;
+        Tick();
+    }
+
+    FenceSignalTracker* Device::GetFenceSignalTracker() const {
+        return mFenceSignalTracker.get();
     }
 
     BindGroupBase* Device::CreateBindGroup(BindGroupBuilder* builder) {
@@ -75,6 +94,9 @@ namespace dawn_native { namespace opengl {
     }
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
+    }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
     }
     InputStateBase* Device::CreateInputState(InputStateBuilder* builder) {
         return new InputState(builder);
@@ -112,7 +134,43 @@ namespace dawn_native { namespace opengl {
         return new TextureView(texture, descriptor);
     }
 
+    Serial Device::GetSerial() const {
+        return mNextSerial;
+    }
+
+    void Device::AddFenceSync() {
+        GLsync sync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
+        mFencesInFlight.emplace(sync, mNextSerial++);
+    }
+
     void Device::TickImpl() {
+        CheckPassedFences();
+        mFenceSignalTracker->Tick(mCompletedSerial);
+    }
+
+    void Device::CheckPassedFences() {
+        while (!mFencesInFlight.empty()) {
+            GLsync sync = mFencesInFlight.front().first;
+            Serial fenceSerial = mFencesInFlight.front().second;
+
+            GLint status = 0;
+            GLsizei length;
+            glGetSynciv(sync, GL_SYNC_CONDITION, sizeof(GLint), &length, &status);
+            ASSERT(length == 1);
+
+            // Fence are added in order, so we can stop searching as soon
+            // as we see one that's not ready.
+            if (!status) {
+                return;
+            }
+
+            glDeleteSync(sync);
+
+            mFencesInFlight.pop();
+
+            ASSERT(fenceSerial > mCompletedSerial);
+            mCompletedSerial = fenceSerial;
+        }
     }
 
     const dawn_native::PCIInfo& Device::GetPCIInfo() const {
