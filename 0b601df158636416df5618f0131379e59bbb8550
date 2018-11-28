@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab09ee52_8ff6700b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:20:56Z",
+      "side": 1,
+      "message": "matchingDict needs to be released on the success case too, right now it is leaked.",
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d10dab94_d8b815dd",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:20:56Z",
+      "side": 1,
+      "message": "nit: compare to nullptr",
+      "range": {
+        "startLine": 67,
+        "startChar": 52,
+        "endLine": 67,
+        "endChar": 53
+      },
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69e9d5b4_75e9b366",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:20:56Z",
+      "side": 1,
+      "message": "nit: compare to nullptr, io_registry_entry_t is io_object_t which is OSObject*",
+      "range": {
+        "startLine": 289,
+        "startChar": 21,
+        "endLine": 289,
+        "endChar": 22
+      },
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
