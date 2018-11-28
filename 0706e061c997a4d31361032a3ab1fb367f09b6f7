@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cce8c7a8_2f4a94cf",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-28T00:12:09Z",
+      "side": 1,
+      "message": "nit: dawn::Origin3D dest?\n\nfeel free to ignore this nit if you don\u0027t want to fix all the tests below, though.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 40
+      },
+      "revId": "0706e061c997a4d31361032a3ab1fb367f09b6f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27c049ba_67650bab",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-28T00:12:09Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 39
+      },
+      "revId": "0706e061c997a4d31361032a3ab1fb367f09b6f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
