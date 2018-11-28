@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f4fd645_54560a82",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-28T00:41:16Z",
+      "side": 1,
+      "message": "These messages should specify that they\u0027re for attachments, e.g.:\n\n\"Attachment texture view layer count cannot be greater than 1\"\n\"Attachment texture view mipmap level count cannot be greater than 1\"",
+      "revId": "745413c070f76064068b160e2f5f352c9e466f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eba9e4e_a406f23b",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-28T00:41:16Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "745413c070f76064068b160e2f5f352c9e466f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39aa8692_2dcb7ebe",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-28T00:41:16Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "745413c070f76064068b160e2f5f352c9e466f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
