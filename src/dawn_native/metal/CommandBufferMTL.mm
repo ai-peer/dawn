@@ -253,18 +253,19 @@ namespace dawn_native { namespace metal {
                     CopyBufferToTextureCmd* copy = mCommands.NextCommand<CopyBufferToTextureCmd>();
                     auto& src = copy->source;
                     auto& dst = copy->destination;
+                    auto& copySize = copy->copySize;
                     Buffer* buffer = ToBackend(src.buffer.Get());
                     Texture* texture = ToBackend(dst.texture.Get());
 
                     MTLOrigin origin;
-                    origin.x = dst.x;
-                    origin.y = dst.y;
-                    origin.z = dst.z;
+                    origin.x = dst.origin.x;
+                    origin.y = dst.origin.y;
+                    origin.z = dst.origin.z;
 
                     MTLSize size;
-                    size.width = dst.width;
-                    size.height = dst.height;
-                    size.depth = dst.depth;
+                    size.width = copySize.width;
+                    size.height = copySize.height;
+                    size.depth = copySize.depth;
 
                     encoders.EnsureBlit(commandBuffer);
                     [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
@@ -282,18 +283,19 @@ namespace dawn_native { namespace metal {
                     CopyTextureToBufferCmd* copy = mCommands.NextCommand<CopyTextureToBufferCmd>();
                     auto& src = copy->source;
                     auto& dst = copy->destination;
+                    auto& copySize = copy->copySize;
                     Texture* texture = ToBackend(src.texture.Get());
                     Buffer* buffer = ToBackend(dst.buffer.Get());
 
                     MTLOrigin origin;
-                    origin.x = src.x;
-                    origin.y = src.y;
-                    origin.z = src.z;
+                    origin.x = src.origin.x;
+                    origin.y = src.origin.y;
+                    origin.z = src.origin.z;
 
                     MTLSize size;
-                    size.width = src.width;
-                    size.height = src.height;
-                    size.depth = src.depth;
+                    size.width = copySize.width;
+                    size.height = copySize.height;
+                    size.depth = copySize.depth;
 
                     encoders.EnsureBlit(commandBuffer);
                     [encoders.blit copyFromTexture:texture->GetMTLTexture()
