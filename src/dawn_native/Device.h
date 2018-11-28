@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_DEVICEBASE_H_
 #define DAWNNATIVE_DEVICEBASE_H_
 
+#include "common/Serial.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
@@ -99,6 +100,8 @@ namespace dawn_native {
                                            const TextureViewDescriptor* descriptor);
 
         void Tick();
+        Serial GetLastSubmittedCommandsSerial() const;
+        Serial GetPendingCommandsSerial() const;
         void SetErrorCallback(dawn::DeviceErrorCallback callback, dawn::CallbackUserdata userdata);
         void Reference();
         void Release();
@@ -108,6 +111,10 @@ namespace dawn_native {
         }
 
         virtual const PCIInfo& GetPCIInfo() const = 0;
+
+      protected:
+        Serial mLastSubmittedSerial = 0;
+        Serial mCompletedSerial = 0;
 
       private:
         virtual ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(

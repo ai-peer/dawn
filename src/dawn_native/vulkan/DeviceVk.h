@@ -57,8 +57,6 @@ namespace dawn_native { namespace vulkan {
         MemoryAllocator* GetMemoryAllocator() const;
         RenderPassCache* GetRenderPassCache() const;
 
-        Serial GetSerial() const;
-
         VkCommandBuffer GetPendingCommandBuffer();
         void SubmitPendingCommands();
         void AddWaitSemaphore(VkSemaphore semaphore);
@@ -143,8 +141,6 @@ namespace dawn_native { namespace vulkan {
         // have finished.
         std::queue<std::pair<VkFence, Serial>> mFencesInFlight;
         std::vector<VkFence> mUnusedFences;
-        Serial mNextSerial = 1;
-        Serial mCompletedSerial = 0;
 
         struct CommandPoolAndBuffer {
             VkCommandPool pool = VK_NULL_HANDLE;

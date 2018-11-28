@@ -44,7 +44,7 @@ namespace dawn_native { namespace metal {
                            size:size];
         [encoder endEncoding];
 
-        mInflightUploadBuffers.Enqueue(uploadBuffer, mDevice->GetPendingCommandSerial());
+        mInflightUploadBuffers.Enqueue(uploadBuffer, mDevice->GetPendingCommandsSerial());
     }
 
     void ResourceUploader::Tick(Serial finishedSerial) {

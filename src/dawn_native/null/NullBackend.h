@@ -111,7 +111,7 @@ namespace dawn_native { namespace null {
         const dawn_native::PCIInfo& GetPCIInfo() const override;
 
         void AddPendingOperation(std::unique_ptr<PendingOperation> operation);
-        std::vector<std::unique_ptr<PendingOperation>> AcquirePendingOperations();
+        void SubmitPendingOperations();
 
       private:
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(

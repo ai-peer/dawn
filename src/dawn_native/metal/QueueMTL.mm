@@ -30,7 +30,6 @@ namespace dawn_native { namespace metal {
         for (uint32_t i = 0; i < numCommands; ++i) {
             ToBackend(commands[i])->FillCommands(commandBuffer);
         }
-
         device->SubmitPendingCommandBuffer();
     }
 

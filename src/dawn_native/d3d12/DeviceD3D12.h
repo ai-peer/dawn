@@ -69,9 +69,8 @@ namespace dawn_native { namespace d3d12 {
         void OpenCommandList(ComPtr<ID3D12GraphicsCommandList>* commandList);
         ComPtr<ID3D12GraphicsCommandList> GetPendingCommandList();
 
-        uint64_t GetSerial() const;
         void NextSerial();
-        void WaitForSerial(uint64_t serial);
+        void WaitForSerial(Serial serial);
 
         void ReferenceUntilUnused(ComPtr<IUnknown> object);
 
@@ -99,7 +98,6 @@ namespace dawn_native { namespace d3d12 {
         // D3D12 DLLs are unloaded before we are done using it.
         std::unique_ptr<PlatformFunctions> mFunctions;
 
-        uint64_t mSerial = 0;
         ComPtr<ID3D12Fence> mFence;
         HANDLE mFenceEvent;
 
