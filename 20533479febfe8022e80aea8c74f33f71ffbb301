@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a1d0d080_9d37aedc",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3a2495e_2663480c",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79b4b058_217131c2",
         "filename": "generator/templates/dawn_wire/WireClient.cpp",
         "patchSetId": 14
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "cfcf32de_1a5a8f92",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79b4b058_217131c2",
+      "range": {
+        "startLine": 273,
+        "startChar": 15,
+        "endLine": 273,
+        "endChar": 31
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "840a9b60_ba063c0d",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 14
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "ab768a3d_46c0cd99",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "840a9b60_ba063c0d",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aa311e4_20904c6d",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 14
@@ -73,6 +133,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f4673d7_2a3a0c8d",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aa311e4_20904c6d",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "99ec7003_db5185d6",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5b85599_a6031d45",
+      "range": {
+        "startLine": 489,
+        "startChar": 23,
+        "endLine": 489,
+        "endChar": 39
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06ac2d72_bc505746",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 14
@@ -113,6 +215,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "286529ac_d10ad440",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ac2d72_bc505746",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "5432151f_f0ca966a",
+        "filename": "src/common/SerialMap.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3e0608e_441644e3",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6a2d0c5_b5fd922f",
         "filename": "src/common/SerialMap.h",
         "patchSetId": 14
@@ -147,6 +285,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2239def_bdaa300b",
+        "filename": "src/common/SerialMap.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Same response",
+      "parentUuid": "b6a2d0c5_b5fd922f",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "d140087a_5438dec8",
+        "filename": "src/common/SerialMap.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d2adfea_089f4098",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4e76361_c8db4922",
         "filename": "src/common/SerialQueue.h",
         "patchSetId": 14
@@ -178,6 +352,24 @@
       "writtenOn": "2018-11-22T13:39:47Z",
       "side": 1,
       "message": "nit: the traits could be stored in SerialQueue directly and SerialStorage would do \"using SerialPair \u003d Derived::SerialPair;\"",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30c5b764_c51beb70",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "I couldn\u0027t get this to actually work.\n\ntemplate \u003ctypename Derived\u003e\nstruct Base {\n    using Type \u003d typename Derived::Type;\n};\n\nstruct A : public Base\u003cA\u003e {\n    using Type \u003d float;\n};\n\nThis fails to compile because Base\u003cA\u003e gets instantiated before A in which case Derived is an incomplete type and Derived::Type can\u0027t be resolved.",
+      "parentUuid": "c4e76361_c8db4922",
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -201,6 +393,24 @@
     },
     {
       "key": {
+        "uuid": "3e984c06_5334d0ab",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f98d0d08_e76e23bf",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a09f873_3714a5f5",
         "filename": "src/common/SerialQueue.h",
         "patchSetId": 14
@@ -212,6 +422,24 @@
       "writtenOn": "2018-11-22T13:39:47Z",
       "side": 1,
       "message": "nit: why is \"this-\u003e\" needed?",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e016810_8ba1d3da",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "\"Two-phase name lookup\". When the template is defined, the compiler doesn\u0027t know that these members are dependent names (on the base type). Using \"this\" makes them dependent names which are looked up when the template is instantiated.",
+      "parentUuid": "6a09f873_3714a5f5",
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -235,6 +463,24 @@
     },
     {
       "key": {
+        "uuid": "9d46a340_126fd082",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfe82850_1efb5147",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fdf12b6d_1b69a30e",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 14
@@ -249,6 +495,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1469d1b7_f61e3ac7",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdf12b6d_1b69a30e",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -269,6 +533,24 @@
     },
     {
       "key": {
+        "uuid": "5b6dbc13_565dab86",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b9cc6fa_0da1f7af",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cd713a7_4e275a82",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 14
@@ -283,6 +565,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "235a2828_92f9842e",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd713a7_4e275a82",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -303,6 +603,24 @@
     },
     {
       "key": {
+        "uuid": "5d7b7852_89e945f9",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e3fb27d_b26cae1b",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "241a89db_d0679c0e",
         "filename": "src/dawn_native/d3d12/FenceTrackerD3D12.h",
         "patchSetId": 14
@@ -314,6 +632,24 @@
       "writtenOn": "2018-11-22T13:39:47Z",
       "side": 1,
       "message": "All backends use the exact same code for FenceTracker (except the GL backend but we could add a serial to it at the device level too). There is a big opportunity to factor code. The simplest way to do this would be to have dawn_native/FenceSignalTracker.cpp/h that\u0027s a template on BackendTraits so that it knows what the Device and Fence types are. However maybe we could have the frontend assume there is a (global) serial and have the fence tracker there and then on Tick, the frontend would call TickImpl then get the backend serial and checks for any completed signals. This would require very few duplicated code between backends.\n\nWDYT? (Kai too WDYT?) I\u0027ll ask the ANGLE team if they have any advice to share on architecturing things like this.",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07122a36_34b41530",
+        "filename": "src/dawn_native/d3d12/FenceTrackerD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "I realized the only reason I had the separate implementations for each backend was because each backend has it\u0027s own function for GetNextSerial(), so the BackendTraits aren\u0027t even needed.\n\nI\u0027ve factored it so that there\u0027s only a single fence signal tracker class (and also added serials to the GL backend). However, this tracker is a member of each separate backend. (Mostly because it was fewer changes from what I already had).\n\nI think we certainly could move the signal tracker to be a member of the frontend Device and do everything there. We would have to add a serial to the Null device as well. This might be a nice opportunity to introduce a FencedTaskRunner which would be like a cross between the Vulkan backend\u0027s FencedDeleter and the Null backend\u0027s PendingOperation. That would let us avoid making a new member on every backend for every type of Tracker we need. We also wouldn\u0027t need to give everything (memory allocators, buffer uploaders, etc.) a Tick() method.",
+      "parentUuid": "241a89db_d0679c0e",
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -337,6 +673,24 @@
     },
     {
       "key": {
+        "uuid": "fe08713b_a8bff0a0",
+        "filename": "src/dawn_native/d3d12/FenceTrackerD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07fc3382_d50d6fcb",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df818cbb_02988584",
         "filename": "src/tests/end2end/FenceTests.cpp",
         "patchSetId": 14
@@ -351,6 +705,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "543909f5_849703e7",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "These were replaced with GMock callbacks",
+      "parentUuid": "df818cbb_02988584",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -377,6 +749,30 @@
     },
     {
       "key": {
+        "uuid": "aa9ed366_25ca0f51",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "These were replaced with GMock callbacks",
+      "parentUuid": "c7b61f82_7252acdb",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 12
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78ef80a4_e9ebf5de",
         "filename": "src/tests/end2end/FenceTests.cpp",
         "patchSetId": 14
@@ -400,6 +796,30 @@
     },
     {
       "key": {
+        "uuid": "06a1c44d_ba930117",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "These were replaced with GMock callbacks",
+      "parentUuid": "78ef80a4_e9ebf5de",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 58
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0a9c530_b02f3240",
         "filename": "src/tests/end2end/FenceTests.cpp",
         "patchSetId": 14
@@ -417,6 +837,24 @@
     },
     {
       "key": {
+        "uuid": "7f15fcc1_51014ad7",
+        "filename": "src/tests/end2end/FenceTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0a9c530_b02f3240",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "152bfab9_c8d82ecf",
         "filename": "src/tests/unittests/WireTests.cpp",
         "patchSetId": 14
@@ -431,6 +869,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd7438d2_ab0f8168",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "152bfab9_c8d82ecf",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -457,6 +913,30 @@
     },
     {
       "key": {
+        "uuid": "663b5c3d_7028fc29",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b81b2795_7ae1e6e0",
+      "range": {
+        "startLine": 1272,
+        "startChar": 21,
+        "endLine": 1272,
+        "endChar": 78
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c700862_a91cfd8f",
         "filename": "src/tests/unittests/WireTests.cpp",
         "patchSetId": 14
@@ -480,6 +960,30 @@
     },
     {
       "key": {
+        "uuid": "4b05b8a4_c9f20577",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "No longer used. callIndex replaced with GMock sequences",
+      "parentUuid": "0c700862_a91cfd8f",
+      "range": {
+        "startLine": 1308,
+        "startChar": 1,
+        "endLine": 1311,
+        "endChar": 51
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c86e16c0_a398e913",
         "filename": "src/tests/unittests/WireTests.cpp",
         "patchSetId": 14
@@ -494,6 +998,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ba474d_6969f350",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c86e16c0_a398e913",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -520,6 +1042,30 @@
     },
     {
       "key": {
+        "uuid": "c056b679_46912c33",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "496a08d8_6ab0cb86",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 16
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97d38a8d_0574359a",
         "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
         "patchSetId": 14
@@ -534,6 +1080,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "480e3cba_38bfd64c",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97d38a8d_0574359a",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -557,6 +1121,30 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "423af9b4_d0085176",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T01:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29f53c29_f8e2e90e",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 45
+      },
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
