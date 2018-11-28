@@ -16,6 +16,24 @@
       "revId": "0da9494a4fe9aa89e1a3b2d911719d150a2d963e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cd6fc26_4bd4d260",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T16:26:15Z",
+      "side": 0,
+      "message": "They will be re-enabled when BindGroup is descriptorized for this one, and if pipelinelayout is changed to allow for null bind group layouts for the other.",
+      "parentUuid": "d466e7ac_648b6ea4",
+      "revId": "0da9494a4fe9aa89e1a3b2d911719d150a2d963e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
