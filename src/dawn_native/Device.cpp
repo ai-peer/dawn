@@ -208,6 +208,14 @@ namespace dawn_native {
         TickImpl();
     }
 
+    Serial DeviceBase::GetLastSubmittedCommandsSerial() const {
+        return mLastSubmittedSerial;
+    }
+
+    Serial DeviceBase::GetPendingCommandsSerial() const {
+        return mLastSubmittedSerial + 1;
+    }
+
     void DeviceBase::Reference() {
         ASSERT(mRefCount != 0);
         mRefCount++;
