@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7f50f086_d96c4e60",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-28T02:23:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f4fd645_54560a82",
+      "revId": "745413c070f76064068b160e2f5f352c9e466f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5eba9e4e_a406f23b",
         "filename": "src/dawn_native/RenderPassDescriptor.cpp",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "43a8da72_ea8b87c7",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-28T02:23:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eba9e4e_a406f23b",
+      "revId": "745413c070f76064068b160e2f5f352c9e466f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39aa8692_2dcb7ebe",
         "filename": "src/dawn_native/RenderPassDescriptor.cpp",
         "patchSetId": 5
@@ -50,6 +86,24 @@
       "revId": "745413c070f76064068b160e2f5f352c9e466f1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "118906d2_13d01866",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-28T02:23:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39aa8692_2dcb7ebe",
+      "revId": "745413c070f76064068b160e2f5f352c9e466f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
