@@ -18,9 +18,11 @@
 #include "dawn_native/dawn_platform.h"
 
 #include "common/Platform.h"
+#include "common/Serial.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/opengl/Forward.h"
 
+#include <queue>
 #include "glad/glad.h"
 
 // Remove windows.h macros after glad's include of windows.h
@@ -28,11 +30,19 @@
 #    include "common/windows_with_undefs.h"
 #endif
 
+namespace dawn_native {
+    class FenceSignalTracker;
+}  // namespace dawn_native
 namespace dawn_native { namespace opengl {
 
     class Device : public DeviceBase {
       public:
         Device();
+        ~Device();
+
+        FenceSignalTracker* GetFenceSignalTracker() const;
+
+        // Dawn API
         BindGroupBase* CreateBindGroup(BindGroupBuilder* builder) override;
         BlendStateBase* CreateBlendState(BlendStateBuilder* builder) override;
         BufferViewBase* CreateBufferView(BufferViewBuilder* builder) override;
@@ -44,6 +54,9 @@ namespace dawn_native { namespace opengl {
         RenderPipelineBase* CreateRenderPipeline(RenderPipelineBuilder* builder) override;
         SwapChainBase* CreateSwapChain(SwapChainBuilder* builder) override;
 
+        Serial GetSerial() const;
+        void AddFenceSync();
+
         void TickImpl() override;
 
         const dawn_native::PCIInfo& GetPCIInfo() const override;
@@ -54,6 +67,7 @@ namespace dawn_native { namespace opengl {
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
+        ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<QueueBase*> CreateQueueImpl() override;
@@ -65,6 +79,14 @@ namespace dawn_native { namespace opengl {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
         void CollectPCIInfo();
+
+        std::unique_ptr<FenceSignalTracker> mFenceSignalTracker;
+
+        void CheckPassedFences();
+
+        std::queue<std::pair<GLsync, Serial>> mFencesInFlight;
+        Serial mNextSerial = 1;
+        Serial mCompletedSerial = 0;
 
         dawn_native::PCIInfo mPCIInfo;
     };

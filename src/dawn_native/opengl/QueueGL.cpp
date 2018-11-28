@@ -14,8 +14,10 @@
 
 #include "dawn_native/opengl/QueueGL.h"
 
+#include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/DeviceGL.h"
+#include "dawn_native/opengl/FenceGL.h"
 
 namespace dawn_native { namespace opengl {
 
@@ -26,6 +28,14 @@ namespace dawn_native { namespace opengl {
         for (uint32_t i = 0; i < numCommands; ++i) {
             ToBackend(commands[i])->Execute();
         }
+    }
+
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
+        Device* device = ToBackend(GetDevice());
+
+        device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue,
+                                                               device->GetSerial());
+        device->AddFenceSync();
     }
 
 }}  // namespace dawn_native::opengl

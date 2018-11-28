@@ -24,6 +24,10 @@
 
 #include <memory>
 
+namespace dawn_native {
+    class FenceSignalTracker;
+}  // namespace dawn_native
+
 namespace dawn_native { namespace d3d12 {
 
     class CommandAllocatorManager;
@@ -61,6 +65,7 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12CommandQueue> GetCommandQueue();
 
         DescriptorHeapAllocator* GetDescriptorHeapAllocator();
+        FenceSignalTracker* GetFenceSignalTracker();
         MapRequestTracker* GetMapRequestTracker() const;
         const PlatformFunctions* GetFunctions();
         ResourceAllocator* GetResourceAllocator();
@@ -83,6 +88,7 @@ namespace dawn_native { namespace d3d12 {
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
+        ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<QueueBase*> CreateQueueImpl() override;
@@ -117,6 +123,7 @@ namespace dawn_native { namespace d3d12 {
 
         std::unique_ptr<CommandAllocatorManager> mCommandAllocatorManager;
         std::unique_ptr<DescriptorHeapAllocator> mDescriptorHeapAllocator;
+        std::unique_ptr<FenceSignalTracker> mFenceSignalTracker;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<ResourceAllocator> mResourceAllocator;
         std::unique_ptr<ResourceUploader> mResourceUploader;
