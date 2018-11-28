@@ -28,6 +28,9 @@
 #include <memory>
 #include <queue>
 
+namespace dawn_native {
+    class FenceSignalTracker;
+}  // namespace dawn_native
 namespace dawn_native { namespace vulkan {
 
     class BufferUploader;
@@ -53,6 +56,7 @@ namespace dawn_native { namespace vulkan {
 
         BufferUploader* GetBufferUploader() const;
         FencedDeleter* GetFencedDeleter() const;
+        FenceSignalTracker* GetFenceSignalTracker() const;
         MapRequestTracker* GetMapRequestTracker() const;
         MemoryAllocator* GetMemoryAllocator() const;
         RenderPassCache* GetRenderPassCache() const;
@@ -85,6 +89,7 @@ namespace dawn_native { namespace vulkan {
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
+        ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<QueueBase*> CreateQueueImpl() override;
@@ -130,6 +135,7 @@ namespace dawn_native { namespace vulkan {
 
         std::unique_ptr<BufferUploader> mBufferUploader;
         std::unique_ptr<FencedDeleter> mDeleter;
+        std::unique_ptr<FenceSignalTracker> mFenceSignalTracker;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<MemoryAllocator> mMemoryAllocator;
         std::unique_ptr<RenderPassCache> mRenderPassCache;

@@ -86,6 +86,7 @@ namespace dawn_native {
         CommandBufferBuilder* CreateCommandBufferBuilder();
         ComputePipelineBase* CreateComputePipeline(const ComputePipelineDescriptor* descriptor);
         DepthStencilStateBuilder* CreateDepthStencilStateBuilder();
+        FenceBase* CreateFence(const FenceDescriptor* descriptor);
         InputStateBuilder* CreateInputStateBuilder();
         PipelineLayoutBase* CreatePipelineLayout(const PipelineLayoutDescriptor* descriptor);
         QueueBase* CreateQueue();
@@ -115,6 +116,7 @@ namespace dawn_native {
         virtual ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) = 0;
         virtual ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) = 0;
+        virtual ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) = 0;
         virtual ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) = 0;
         virtual ResultOrError<QueueBase*> CreateQueueImpl() = 0;
@@ -133,6 +135,7 @@ namespace dawn_native {
         MaybeError CreateBufferInternal(BufferBase** result, const BufferDescriptor* descriptor);
         MaybeError CreateComputePipelineInternal(ComputePipelineBase** result,
                                                  const ComputePipelineDescriptor* descriptor);
+        MaybeError CreateFenceInternal(FenceBase** result, const FenceDescriptor* descriptor);
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
                                                 const PipelineLayoutDescriptor* descriptor);
         MaybeError CreateQueueInternal(QueueBase** result);

@@ -14,6 +14,7 @@
 
 #include "dawn_native/d3d12/QueueD3D12.h"
 
+#include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/d3d12/CommandBufferD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
@@ -36,6 +37,14 @@ namespace dawn_native { namespace d3d12 {
         device->ExecuteCommandLists({mCommandList.Get()});
 
         device->NextSerial();
+    }
+
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
+        Device* device = ToBackend(GetDevice());
+        // Because we currently only have a single queue, we can simply
+        // update the fence completed value once the current serial has passed.
+        device->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue,
+                                                               device->GetSerial());
     }
 
 }}  // namespace dawn_native::d3d12

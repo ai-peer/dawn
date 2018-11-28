@@ -28,6 +28,7 @@ namespace dawn_native { namespace opengl {
 
       private:
         void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
+        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
     };
 
 }}  // namespace dawn_native::opengl

@@ -60,6 +60,9 @@ namespace dawn_native { namespace null {
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
     }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
+    }
     InputStateBase* Device::CreateInputState(InputStateBuilder* builder) {
         return new InputState(builder);
     }
@@ -181,6 +184,32 @@ namespace dawn_native { namespace null {
     void Buffer::UnmapImpl() {
     }
 
+    struct FenceCompletedOperation : PendingOperation {
+        virtual void Execute() {
+            if (fence->GetExternalRefs() == 0 && fence->GetInternalRefs() == 1) {
+                // The last reference to the fence is the internal reference in
+                // this tracker. The fence should be destroyed. Do not update
+                // the completed value which may trigger callbacks with SUCCESS.
+                return;
+            }
+            fence->FenceCompleted(value);
+        }
+
+        Ref<Fence> fence;
+        uint64_t value;
+    };
+
+    Fence::Fence(Device* device, const FenceDescriptor* descriptor)
+        : FenceBase(device, descriptor) {
+    }
+
+    Fence::~Fence() {
+    }
+
+    void Fence::FenceCompleted(uint64_t value) {
+        SetCompletedValue(value);
+    }
+
     // CommandBuffer
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
@@ -207,6 +236,14 @@ namespace dawn_native { namespace null {
         }
 
         operations.clear();
+    }
+
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
+        auto operation = new FenceCompletedOperation;
+        operation->fence = ToBackend(fence);
+        operation->value = signalValue;
+
+        ToBackend(GetDevice())->AddPendingOperation(std::unique_ptr<PendingOperation>(operation));
     }
 
     // SwapChain
