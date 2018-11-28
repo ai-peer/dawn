@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d599586_a3f286e9",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "This should be done on DeviceCreateFence instead, the code could be inserted at [1]",
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f1a0c9d_7af67285",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "nit: no need for mutable with the idTable store done at the right place. See other comments.",
+      "range": {
+        "startLine": 446,
+        "startChar": 20,
+        "endLine": 446,
+        "endChar": 27
+      },
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8349e496_1722b6da",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c96150e_705a10ea",
+        "filename": "src/dawn_native/FenceSignalTracker.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "Why is this needed? I\u0027d assume that application should be ok to receive the callback even after it loses all references to the Fence. That\u0027s what would happen in JS too.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 13
+      },
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c8596ce_a3b9c724",
+        "filename": "src/dawn_native/null/NullBackend.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "751cb69d_1aa9be36",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "Sorry I meant using Mock::VerifyAndClear because right now we\u0027re still not sure which error goes with what. That said adding VerifyAndClear might break other things so we can just add a TODO instead.",
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d27dfc3f_0c41257c",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "nit: no need for retiring, Times(1) already does that.",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 28
+      },
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22816a54_f6cad762",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "nit: OnCompletionLargerThanSignaled?",
+      "range": {
+        "startLine": 109,
+        "startChar": 28,
+        "endLine": 109,
+        "endChar": 40
+      },
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1ebc0a9_f093cb67",
+        "filename": "src/tests/unittests/validation/FenceValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "nit: signal",
+      "range": {
+        "startLine": 114,
+        "startChar": 14,
+        "endLine": 114,
+        "endChar": 17
+      },
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

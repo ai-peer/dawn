@@ -376,6 +376,24 @@
     },
     {
       "key": {
+        "uuid": "2378707f_aec99b41",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "Heh weird I thought I had seen something like that work before, ok.",
+      "parentUuid": "30c5b764_c51beb70",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f98d0d08_e76e23bf",
         "filename": "src/common/SerialQueue.h",
         "patchSetId": 14
@@ -443,6 +461,24 @@
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04286331_2437580f",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "TIL",
+      "parentUuid": "4e016810_8ba1d3da",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -650,6 +686,24 @@
       "side": 1,
       "message": "I realized the only reason I had the separate implementations for each backend was because each backend has it\u0027s own function for GetNextSerial(), so the BackendTraits aren\u0027t even needed.\n\nI\u0027ve factored it so that there\u0027s only a single fence signal tracker class (and also added serials to the GL backend). However, this tracker is a member of each separate backend. (Mostly because it was fewer changes from what I already had).\n\nI think we certainly could move the signal tracker to be a member of the frontend Device and do everything there. We would have to add a serial to the Null device as well. This might be a nice opportunity to introduce a FencedTaskRunner which would be like a cross between the Vulkan backend\u0027s FencedDeleter and the Null backend\u0027s PendingOperation. That would let us avoid making a new member on every backend for every type of Tracker we need. We also wouldn\u0027t need to give everything (memory allocators, buffer uploaders, etc.) a Tick() method.",
       "parentUuid": "241a89db_d0679c0e",
+      "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bcf2647_7fc46e87",
+        "filename": "src/dawn_native/d3d12/FenceTrackerD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T13:26:55Z",
+      "side": 1,
+      "message": "After talking to Geoff last week he agreed that moving Fence tracking in the frontend is a good idea from his experience with ANGLE. \"In the worst case you have very little technical debt and just re-split in each backend\". Can we move the whole implementation of fences in the frontend? (you can just undo the changes to d3d12, metal and vulkan except for the new virtual method)\n\nWe need to be careful with terminology if all the backends have to share the same name for GetNextSerial. Maybe it could be GetLastSubmittedCommandsSerial()? Note that this is different from GetNextSerial because the application only wants to wait for commands that were already submitted and not pending commands.\n\n(on a side-note we should have a test that checks this is the case somehow)\n\nI\u0027m not sure about FencedTaskRunner because 1) depending on the implementation it might have extra overhead. 2) the order in which services are ticked is probably important to gain a frame of latency sometimes.",
+      "parentUuid": "07122a36_34b41530",
       "revId": "20533479febfe8022e80aea8c74f33f71ffbb301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
