@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "929c6468_3f99a3d1",
+        "filename": "src/common/Result.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-28T00:24:21Z",
+      "side": 1,
+      "message": "While you\u0027re at it,\n\n\"pointer. Some\"",
+      "range": {
+        "startLine": 116,
+        "startChar": 50,
+        "endLine": 116,
+        "endChar": 62
+      },
+      "revId": "3e187f83d2aa7f1f3c5ef39d6313a7ac4d519689",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
