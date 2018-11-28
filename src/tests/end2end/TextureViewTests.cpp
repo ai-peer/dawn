@@ -93,7 +93,9 @@ protected:
         descriptor.arrayLayer = layerCount;
         descriptor.format = kFormat;
         descriptor.levelCount = levelCount;
-        descriptor.usage = dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Sampled;
+        descriptor.usage =
+            dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Sampled |
+            dawn::TextureUsageBit::OutputAttachment;
         mTexture = device.CreateTexture(&descriptor);
 
         mDefaultTextureViewDescriptor.nextInChain = nullptr;
@@ -315,6 +317,100 @@ protected:
         }
     }
 
+    void TextureArrayLayerAsColorAttachmentTest(uint32_t textureLayerCount,
+                                         uint32_t textureLevelCount,
+                                         dawn::TextureViewDimension dimension,
+                                         uint32_t textureViewBaseLayer,
+                                         uint32_t textureViewBaseLevel) {
+        // TODO(jiawei.shao@intel.com): support using a layer of a texture as color attachment on
+        // OpenGL
+        DAWN_SKIP_TEST_IF(IsOpenGL());
+        ASSERT(dimension == dawn::TextureViewDimension::e2D ||
+               dimension == dawn::TextureViewDimension::e2DArray);
+        ASSERT_LT(textureViewBaseLayer,  textureLayerCount);
+        ASSERT_LT(textureViewBaseLevel, textureLevelCount);
+        initTexture(textureLayerCount, textureLevelCount);
+
+        dawn::TextureViewDescriptor descriptor = mDefaultTextureViewDescriptor;
+        descriptor.dimension = dimension;
+        descriptor.baseArrayLayer = textureViewBaseLayer;
+        descriptor.layerCount = 1;
+        descriptor.baseMipLevel = textureViewBaseLevel;
+        descriptor.levelCount = 1;
+        dawn::TextureView textureView = mTexture.CreateTextureView(&descriptor);
+
+        // First we render (0, 0, 0, 255) into textureView.
+        dawn::RenderPassDescriptor renderPassInfo = device.CreateRenderPassDescriptorBuilder()
+            .SetColorAttachment(0, textureView, dawn::LoadOp::Clear)
+            .GetResult();
+
+        const char* simpleFragmentShader = R"(
+            #version 450
+            layout(location = 0) out vec4 fragColor;
+
+            void main() {
+                fragColor = vec4(0, 0, 0, 255);
+            }
+        )";
+        dawn::ShaderModule oneColorFsModule =
+            utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, simpleFragmentShader);
+
+        dawn::RenderPipeline oneColorPipeline = device.CreateRenderPipelineBuilder()
+            .SetColorAttachmentFormat(0, mRenderPass.colorFormat)
+            .SetStage(dawn::ShaderStage::Vertex, mVSModule, "main")
+            .SetStage(dawn::ShaderStage::Fragment, oneColorFsModule, "main")
+            .GetResult();
+        dawn::CommandBufferBuilder commandBufferBuilder = device.CreateCommandBufferBuilder();
+        {
+            dawn::RenderPassEncoder pass =
+                commandBufferBuilder.BeginRenderPass(renderPassInfo);
+            pass.SetRenderPipeline(oneColorPipeline);
+            pass.DrawArrays(6, 1, 0, 0);
+            pass.EndPass();
+        }
+
+        dawn::CommandBuffer commands = commandBufferBuilder.GetResult();
+        queue.Submit(1, &commands);
+
+        // Then we sample from textureView to check if we can get the right pixel (0, 0, 0, 255).
+        const char* fragmentShaderWithSampler = "";
+
+        switch (dimension) {
+            case dawn::TextureViewDimension::e2D:
+                fragmentShaderWithSampler = R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform sampler sampler0;
+                    layout(set = 0, binding = 1) uniform texture2D texture0;
+                    layout(location = 0) in vec2 texCoord;
+                    layout(location = 0) out vec4 fragColor;
+
+                    void main() {
+                    fragColor =
+                        texture(sampler2D(texture0, sampler0), texCoord);
+                    }
+                )";
+                break;
+            case dawn::TextureViewDimension::e2DArray:
+                fragmentShaderWithSampler = R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform sampler sampler0;
+                    layout(set = 0, binding = 1) uniform texture2DArray texture0;
+                    layout(location = 0) in vec2 texCoord;
+                    layout(location = 0) out vec4 fragColor;
+
+                    void main() {
+                        fragColor =
+                            texture(sampler2DArray(texture0, sampler0), vec3(texCoord, 0));
+                    }
+                )";
+                break;
+            default:
+                UNREACHABLE();
+        }
+
+        Verify(textureView, fragmentShaderWithSampler, 255);
+    }
+
     dawn::BindGroupLayout mBindGroupLayout;
     dawn::PipelineLayout mPipelineLayout;
     dawn::Sampler mSampler;
@@ -421,6 +517,91 @@ TEST_P(TextureViewTest, TextureCubeMapArrayViewCoveringLastLayer) {
 // Test sampling from a cube map array texture view that only has a single cube map.
 TEST_P(TextureViewTest, TextureCubeMapArrayViewSingleCubeMap) {
     TextureCubeMapTest(20, 7, 6, true);
+}
+
+// Test rendering into a 2D texture view created on a mipmap level of a 2D texture.
+TEST_P(TextureViewTest, Texture2DViewOnALevelOf2DTextureAsColorAttachment) {
+    constexpr uint32_t kLayers = 1;
+    constexpr uint32_t kMipLevels = 4;
+    constexpr uint32_t kBaseLayer = 0;
+
+    // Rendering into the first level
+    {
+        constexpr uint32_t kBaseLevel = 0;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2D, kBaseLayer, kBaseLevel);
+    }
+
+    // Rendering into the last level
+    {
+        constexpr uint32_t kBaseLevel = kMipLevels - 1;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2D, kBaseLayer, kBaseLevel);
+    }
+}
+
+// Test rendering into a 2D texture view created on a layer of a 2D array texture.
+TEST_P(TextureViewTest, Texture2DViewOnALayerOf2DArrayTextureAsColorAttachment) {
+    constexpr uint32_t kMipLevels = 1;
+    constexpr uint32_t kBaseLevel = 0;
+    constexpr uint32_t kLayers = 10;
+
+    // Rendering into the first layer
+    {
+        constexpr uint32_t kBaseLayer = 0;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2D, kBaseLayer, kBaseLevel);
+    }
+
+    // Rendering into the last layer
+    {
+        constexpr uint32_t kBaseLayer = kLayers - 1;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2D, kBaseLayer, kBaseLevel);
+    }
+
+}
+
+// Test rendering into a 1-layer 2D array texture view created on a mipmap level of a 2D texture.
+TEST_P(TextureViewTest, Texture2DArrayViewOnALevelOf2DTextureAsColorAttachment) {
+    constexpr uint32_t kLayers = 1;
+    constexpr uint32_t kMipLevels = 4;
+    constexpr uint32_t kBaseLayer = 0;
+
+    // Rendering into the first level
+    {
+        constexpr uint32_t kBaseLevel = 0;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2DArray, kBaseLayer, kBaseLevel);
+    }
+
+    // Rendering into the last level
+    {
+        constexpr uint32_t kBaseLevel = kMipLevels - 1;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2DArray, kBaseLayer, kBaseLevel);
+    }
+}
+
+// Test rendering into a 1-layer 2D array texture view created on a layer of a 2D array texture.
+TEST_P(TextureViewTest, Texture2DArrayViewOnALayerOf2DArrayTextureAsColorAttachment) {
+    constexpr uint32_t kMipLevels = 1;
+    constexpr uint32_t kBaseLevel = 0;
+    constexpr uint32_t kLayers = 10;
+
+    // Rendering into the first layer
+    {
+        constexpr uint32_t kBaseLayer = 0;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2DArray, kBaseLayer, kBaseLevel);
+    }
+
+    // Rendering into the last layer
+    {
+        constexpr uint32_t kBaseLayer = kLayers - 1;
+        TextureArrayLayerAsColorAttachmentTest(
+            kLayers, kMipLevels, dawn::TextureViewDimension::e2DArray, kBaseLayer, kBaseLevel);
+    }
 }
 
 DAWN_INSTANTIATE_TEST(TextureViewTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)
