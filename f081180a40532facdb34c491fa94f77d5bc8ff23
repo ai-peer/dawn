@@ -82,6 +82,30 @@
     },
     {
       "key": {
+        "uuid": "5503929e_cb83a176",
+        "filename": "src/dawn_native/FenceSignalTracker.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-28T18:37:48Z",
+      "side": 1,
+      "message": "If the application loses all references to the fence, we want the client to receive all remaining callbacks with DAWN_FENCE_COMPLETION_STATUS_UNKNOWN. On the wire, this works fine because the WireClient handles doing that.\n\nWithout the wire, callbacks aren\u0027t called with DAWN_FENCE_COMPLETION_STATUS_UNKNOWN until the fence is destructed. The tracker holds a Ref to the fence so it won\u0027t be destructed until it has left the tracker. It would be nice if we could hold a weak reference to the fence and check if it\u0027s still valid before calling fence-\u003eSetCompletedValue.\n\nWithout this check, the client will receive callbacks with DAWN_FENCE_COMPLETION_STATUS_SUCCESS even though there are no external refs and the fence should be destroyed (and therefore not receive new completed values).",
+      "parentUuid": "7c96150e_705a10ea",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 13
+      },
+      "revId": "f081180a40532facdb34c491fa94f77d5bc8ff23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0c8596ce_a3b9c724",
         "filename": "src/dawn_native/null/NullBackend.cpp",
         "patchSetId": 16
