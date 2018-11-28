@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e6c0033_6441f0fe",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d90568f_ec098b3d",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "434bc4ba_feded588",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -39,6 +63,24 @@
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7653151d_d02fd05a",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "434bc4ba_feded588",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "453ea54a_8f2b61ab",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c04975f_1a3c5a7d",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "896f060d_f98d0836",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -73,6 +133,24 @@
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ff0f785_bd2ae9b9",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896f060d_f98d0836",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "07cd24df_01be9003",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98491b95_52c1e29b",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13f97284_4961cefb",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -107,6 +203,24 @@
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "003fdd3e_660c7e0f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f97284_4961cefb",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "34c576f3_2e281305",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81827453_2518bc50",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "415f6d9a_a02a5512",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -141,6 +273,24 @@
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29d10e7e_c990526c",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "415f6d9a_a02a5512",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "0bd502ae_61255605",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f651c1a_35048bbb",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee67b14b_3e2399d2",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -175,6 +343,24 @@
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7e4c5b1_7a142a82",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee67b14b_3e2399d2",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -195,6 +381,24 @@
     },
     {
       "key": {
+        "uuid": "3dcadf11_3c5a5030",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e75266e0_028023ae",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "057ae90e_ee6e912b",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -212,6 +416,24 @@
     },
     {
       "key": {
+        "uuid": "1d8c1996_1046ff31",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "057ae90e_ee6e912b",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75f28121_a5d56b86",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -226,6 +448,24 @@
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "121819c7_b8385d8d",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75f28121_a5d56b86",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -282,6 +522,24 @@
     },
     {
       "key": {
+        "uuid": "889e2ca4_98169b7d",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4135d19e_886bb427",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c2246e7_1cfd19a8",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -293,6 +551,24 @@
       "writtenOn": "2018-11-21T13:30:57Z",
       "side": 1,
       "message": "Can we add a TODO to do proper error handling?",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a99b2aa_1c0d4fad",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "All functions in IOServicePortFromCGDisplayID have a clear return value, and any failure will result in a return value of 0. Do we still need error handling here? or you mean we need handle the exceptions such as no device information is found?",
+      "parentUuid": "1c2246e7_1cfd19a8",
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -316,6 +592,24 @@
     },
     {
       "key": {
+        "uuid": "6001e458_601adea8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c96628aa_14b06438",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3796cd5_af09ef65",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 3
@@ -330,6 +624,24 @@
       "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f9bf20d_94b06889",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-28T09:01:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3796cd5_af09ef65",
+      "revId": "b7ca620d3688cdf1ed822d5dd27bbd159eddbef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
