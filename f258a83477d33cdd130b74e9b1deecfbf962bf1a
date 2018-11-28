@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfa79190_dc4ddd5d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:11:56Z",
+      "side": 1,
+      "message": "nit: can this method be made const?",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a7c8ac0_bf3d2ab7",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:11:56Z",
+      "side": 1,
+      "message": "Can we have at least an assert over the texture view dimension?\n\nAlso we might want to support the 2D and 2D Array cases separately.",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bea45688_33e3f5ee",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:11:56Z",
+      "side": 1,
+      "message": "Can we split the TextureViewTest fixture into two fixtures: TextureViewSamplingTest and TextureViewRenderingTest?",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "468fb37b_2f963319",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:11:56Z",
+      "side": 1,
+      "message": "Can we render a color that\u0027s not that simple? Opaque black could be the default value for example.",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65c9c2a9_0e847d2b",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:11:56Z",
+      "side": 1,
+      "message": "nit: Can we explicitly set the clear color?",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0be0d05_629148b2",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T12:11:56Z",
+      "side": 1,
+      "message": "Let\u0027s use EXPECT_PIXEL_RGBA_EQ directly instead and add a 3D variant for use with 3D/2Darray textures.",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
