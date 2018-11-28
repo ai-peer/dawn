@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "83ef5fb2_8a6c9393",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T11:54:48Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "540b386ad99f762f3f5e828b1893fe5fd7d285b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12412f16_b1657247",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 1
@@ -13,6 +30,24 @@
       "writtenOn": "2018-11-27T19:49:02Z",
       "side": 1,
       "message": "Will this be nullptr if id is 0? If so, lgtm",
+      "revId": "540b386ad99f762f3f5e828b1893fe5fd7d285b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab730984_150680a4",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-28T11:54:48Z",
+      "side": 1,
+      "message": "Yes it is created at [1]",
+      "parentUuid": "12412f16_b1657247",
       "revId": "540b386ad99f762f3f5e828b1893fe5fd7d285b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
