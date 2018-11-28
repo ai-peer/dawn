@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d466e7ac_648b6ea4",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-28T16:25:22Z",
+      "side": 0,
+      "message": "Are these intended to be fixed, or are they now meaningless and should be removed?",
+      "revId": "0da9494a4fe9aa89e1a3b2d911719d150a2d963e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
