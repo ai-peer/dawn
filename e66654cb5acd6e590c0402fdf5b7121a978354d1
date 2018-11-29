@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8e7f1f8_3d1d269e",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-29T00:54:14Z",
+      "side": 1,
+      "message": "Are these the same type? Can these just be\n\n  copy-\u003edestination.origin \u003d destination-\u003eorigin;\n  copy-\u003ecopySize \u003d *copySize;\n\n? If not, disregard.",
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "957bd9dc_df94f9c2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-29T00:54:14Z",
+      "side": 1,
+      "message": "ComputeTextureCopySplit could probably be updated to take origin/extent as well.",
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
