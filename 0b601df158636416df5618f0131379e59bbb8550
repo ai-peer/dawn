@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "75e463b6_b5f5ea36",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-29T09:33:41Z",
+      "side": 1,
+      "message": "IOServiceGetMatchingServices will consume the reference on matchingDict so we don\u0027t need to release it, otherwise we will get EXC_BAD_ACCESS, thanks for reminding. I will add comment for this.",
+      "parentUuid": "ab09ee52_8ff6700b",
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d10dab94_d8b815dd",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 5
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "5b057a0b_075a84e4",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-29T09:33:41Z",
+      "side": 1,
+      "message": "There are two different definitions for io_object_t: \u0027OSObject*\u0027 in Frameworks/Kernel/IOKit/IOTypes.h and \u0027unsigned int\u0027 in Frameworks/IOKit/IOTypes.h, I test that the code refer to the \u0027unsigned int\u0027 one in default. I will compare to a more secure macro \u0027IO_OBJECT_NULL\u0027.",
+      "parentUuid": "d10dab94_d8b815dd",
+      "range": {
+        "startLine": 67,
+        "startChar": 52,
+        "endLine": 67,
+        "endChar": 53
+      },
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69e9d5b4_75e9b366",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 5
@@ -62,6 +104,30 @@
       "revId": "0b601df158636416df5618f0131379e59bbb8550",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28515c41_7065cc6f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2018-11-29T09:33:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69e9d5b4_75e9b366",
+      "range": {
+        "startLine": 289,
+        "startChar": 21,
+        "endLine": 289,
+        "endChar": 22
+      },
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
