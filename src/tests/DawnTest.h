@@ -35,13 +35,14 @@
                          new detail::ExpectEq<uint8_t>(expected))
 
 // Test a pixel of the mip level 0 of a 2D texture.
-#define EXPECT_PIXEL_RGBA8_EQ(expected, texture, x, y)                               \
-    AddTextureExpectation(__FILE__, __LINE__, texture, x, y, 1, 1, 0, sizeof(RGBA8), \
+#define EXPECT_PIXEL_RGBA8_EQ(expected, texture, x, y)                                  \
+    AddTextureExpectation(__FILE__, __LINE__, texture, x, y, 1, 1, 0, 0, sizeof(RGBA8), \
                           new detail::ExpectEq<RGBA8>(expected))
 
-#define EXPECT_TEXTURE_RGBA8_EQ(expected, texture, x, y, width, height, level)                    \
-    AddTextureExpectation(__FILE__, __LINE__, texture, x, y, width, height, level, sizeof(RGBA8), \
-                          new detail::ExpectEq<RGBA8>(expected, (width) * (height)))
+#define EXPECT_TEXTURE_RGBA8_EQ(expected, texture, x, y, width, height, level, slice)     \
+    AddTextureExpectation(__FILE__, __LINE__, texture, x, y, width, height, level, slice, \
+                          sizeof(RGBA8),                                                  \
+                          new detail::ExpectEq<RGBA8>(expected, (width) * (height)))      \
 
 struct RGBA8 {
     constexpr RGBA8() : RGBA8(0, 0, 0, 0) {
@@ -122,6 +123,7 @@ class DawnTest : public ::testing::TestWithParam<BackendType> {
                                               uint32_t width,
                                               uint32_t height,
                                               uint32_t level,
+                                              uint32_t slice,
                                               uint32_t pixelSize,
                                               detail::Expectation* expectation);
 
