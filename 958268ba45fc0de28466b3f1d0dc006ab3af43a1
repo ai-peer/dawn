@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8dc9eab0_955a8b38",
+        "filename": "src/dawn_native/vulkan/VulkanFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-29T20:05:20Z",
+      "side": 1,
+      "message": "Yeah, I get that. I was suggesting adding \"proc\", so it\u0027s clear that this is in a GetProc() type call.",
+      "parentUuid": "98d58edf_85e446d8",
+      "revId": "958268ba45fc0de28466b3f1d0dc006ab3af43a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ae953a22_26ce96c0",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 6
