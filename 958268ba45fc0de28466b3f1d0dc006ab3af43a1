@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70081f61_cc393eca",
+        "filename": "src/dawn_native/vulkan/VulkanFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-29T16:13:09Z",
+      "side": 1,
+      "message": "Nit: should this be a more verbose, such as \"couldn\u0027t get proc vkFoo\"?",
+      "revId": "958268ba45fc0de28466b3f1d0dc006ab3af43a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae953a22_26ce96c0",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-29T16:13:09Z",
+      "side": 1,
+      "message": "Nit: would it be worthwhile to add more to this string to distinguish the failure modes here?",
+      "revId": "958268ba45fc0de28466b3f1d0dc006ab3af43a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
