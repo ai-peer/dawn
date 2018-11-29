@@ -97,10 +97,10 @@ namespace dawn_native { namespace vulkan {
         VulkanFunctions* functions = GetMutableFunctions();
         DAWN_TRY(functions->LoadGlobalProcs(mVulkanLib));
 
-        DAWN_TRY(GatherGlobalInfo(*this, &mGlobalInfo));
+        DAWN_TRY_ASSIGN(mGlobalInfo, GatherGlobalInfo(*this));
 
         VulkanGlobalKnobs* usedGlobalKnobs = static_cast<VulkanGlobalKnobs*>(&mGlobalInfo);
-        DAWN_TRY(CreateInstance(requiredInstanceExtensions, usedGlobalKnobs));
+        DAWN_TRY_ASSIGN(*usedGlobalKnobs, CreateInstance(requiredInstanceExtensions));
 
         DAWN_TRY(functions->LoadInstanceProcs(mInstance, mGlobalInfo));
 
@@ -109,17 +109,17 @@ namespace dawn_native { namespace vulkan {
         }
 
         std::vector<VkPhysicalDevice> physicalDevices;
-        DAWN_TRY(GetPhysicalDevices(*this, &physicalDevices));
+        DAWN_TRY_ASSIGN(physicalDevices, GetPhysicalDevices(*this));
         if (physicalDevices.empty()) {
             return DAWN_CONTEXT_LOST_ERROR("No physical devices");
         }
         // TODO(cwallez@chromium.org): Choose the physical device based on ???
         mPhysicalDevice = physicalDevices[0];
 
-        DAWN_TRY(GatherDeviceInfo(*this, mPhysicalDevice, &mDeviceInfo));
+        DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this, mPhysicalDevice));
 
         VulkanDeviceKnobs* usedDeviceKnobs = static_cast<VulkanDeviceKnobs*>(&mDeviceInfo);
-        DAWN_TRY(CreateDevice(usedDeviceKnobs));
+        DAWN_TRY_ASSIGN(*usedDeviceKnobs, CreateDevice());
 
         DAWN_TRY(functions->LoadDeviceProcs(mVkDevice, mDeviceInfo));
 
@@ -392,8 +392,9 @@ namespace dawn_native { namespace vulkan {
         mWaitSemaphores.push_back(semaphore);
     }
 
-    MaybeError Device::CreateInstance(const std::vector<const char*>& requiredExtensions,
-                                      VulkanGlobalKnobs* usedKnobs) {
+    ResultOrError<VulkanGlobalKnobs> Device::CreateInstance(const std::vector<const char*>& requiredExtensions) {
+        VulkanGlobalKnobs usedKnobs = {};
+
         std::vector<const char*> layersToRequest;
         std::vector<const char*> extensionsToRequest = requiredExtensions;
 
@@ -415,7 +416,7 @@ namespace dawn_native { namespace vulkan {
 #if defined(DAWN_USE_VKTRACE)
         if (mGlobalInfo.vktrace) {
             layersToRequest.push_back(kLayerNameLunargVKTrace);
-            usedKnobs->vktrace = true;
+            usedKnobs.vktrace = true;
         }
 #endif
         // RenderDoc installs a layer at the system level for its capture but we don't want to use
@@ -423,22 +424,22 @@ namespace dawn_native { namespace vulkan {
 #if defined(DAWN_USE_RENDERDOC)
         if (mGlobalInfo.renderDocCapture) {
             layersToRequest.push_back(kLayerNameRenderDocCapture);
-            usedKnobs->renderDocCapture = true;
+            usedKnobs.renderDocCapture = true;
         }
 #endif
 #if defined(DAWN_ENABLE_ASSERTS)
         if (mGlobalInfo.standardValidation) {
             layersToRequest.push_back(kLayerNameLunargStandardValidation);
-            usedKnobs->standardValidation = true;
+            usedKnobs.standardValidation = true;
         }
         if (mGlobalInfo.debugReport) {
             AddExtensionIfNotPresent(&extensionsToRequest, kExtensionNameExtDebugReport);
-            usedKnobs->debugReport = true;
+            usedKnobs.debugReport = true;
         }
 #endif
         if (mGlobalInfo.surface) {
             AddExtensionIfNotPresent(&extensionsToRequest, kExtensionNameKhrSurface);
-            usedKnobs->surface = true;
+            usedKnobs.surface = true;
         }
 
         VkApplicationInfo appInfo;
@@ -464,10 +465,12 @@ namespace dawn_native { namespace vulkan {
             return DAWN_CONTEXT_LOST_ERROR("vkCreateInstance failed");
         }
 
-        return {};
+        return usedKnobs;
     }
 
-    MaybeError Device::CreateDevice(VulkanDeviceKnobs* usedKnobs) {
+    ResultOrError<VulkanDeviceKnobs> Device::CreateDevice() {
+        VulkanDeviceKnobs usedKnobs = {};
+
         float zero = 0.0f;
         std::vector<const char*> layersToRequest;
         std::vector<const char*> extensionsToRequest;
@@ -475,13 +478,13 @@ namespace dawn_native { namespace vulkan {
 
         if (mDeviceInfo.swapchain) {
             extensionsToRequest.push_back(kExtensionNameKhrSwapchain);
-            usedKnobs->swapchain = true;
+            usedKnobs.swapchain = true;
         }
 
         // Always require independentBlend because it is a core Dawn feature
-        usedKnobs->features.independentBlend = VK_TRUE;
+        usedKnobs.features.independentBlend = VK_TRUE;
         // Always require imageCubeArray because it is a core Dawn feature
-        usedKnobs->features.imageCubeArray = VK_TRUE;
+        usedKnobs.features.imageCubeArray = VK_TRUE;
 
         // Find a universal queue family
         {
@@ -525,13 +528,13 @@ namespace dawn_native { namespace vulkan {
         createInfo.ppEnabledLayerNames = layersToRequest.data();
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionsToRequest.size());
         createInfo.ppEnabledExtensionNames = extensionsToRequest.data();
-        createInfo.pEnabledFeatures = &usedKnobs->features;
+        createInfo.pEnabledFeatures = &usedKnobs.features;
 
         if (fn.CreateDevice(mPhysicalDevice, &createInfo, nullptr, &mVkDevice) != VK_SUCCESS) {
             return DAWN_CONTEXT_LOST_ERROR("vkCreateDevice failed");
         }
 
-        return {};
+        return usedKnobs;
     }
 
     void Device::GatherQueueFromDevice() {

@@ -77,16 +77,10 @@ namespace dawn_native { namespace vulkan {
         std::vector<bool> supportedQueueFamilies;
     };
 
-    MaybeError GatherGlobalInfo(const Device& device, VulkanGlobalInfo* info);
-    MaybeError GetPhysicalDevices(const Device& device,
-                                  std::vector<VkPhysicalDevice>* physicalDevices);
-    MaybeError GatherDeviceInfo(const Device& device,
-                                VkPhysicalDevice physicalDevice,
-                                VulkanDeviceInfo* info);
-    MaybeError GatherSurfaceInfo(const Device& device,
-                                 VkSurfaceKHR surface,
-                                 VulkanSurfaceInfo* info);
-
+    ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Device& device);
+    ResultOrError<std::vector<VkPhysicalDevice>> GetPhysicalDevices(const Device& device);
+    ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Device& device, VkPhysicalDevice physicalDevice);
+    MaybeError GatherSurfaceInfo(const Device& device, VkSurfaceKHR surface, VulkanSurfaceInfo* info);
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKAN_VULKANINFO_H_
