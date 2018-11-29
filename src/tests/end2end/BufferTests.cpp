@@ -138,6 +138,10 @@ class BufferMapWriteTests : public DawnTest {
 
 // Test that the simplest map write (one u32 at offset 0) works.
 TEST_P(BufferMapWriteTests, SmallWriteAtZero) {
+    std:cout<<"IsIntel: "<<IsIntel()<<std:endl;
+    std:cout<<"IsAMD: "<<IsAMD()<<std:endl;
+    std:cout<<"IsNvidia: "<<IsNvidia()<<std:endl;
+    std:cout<<"IsARM: "<<IsARM()<<std:endl;
     dawn::BufferDescriptor descriptor;
     descriptor.size = 4;
     descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
