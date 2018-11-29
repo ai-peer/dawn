@@ -97,8 +97,8 @@ namespace dawn_native { namespace vulkan {
             const TextureViewDescriptor* descriptor) override;
 
         MaybeError Initialize(const std::vector<const char*>& requiredInstanceExtensions);
-        MaybeError CreateInstance(const std::vector<const char*>& requiredExtensions, VulkanGlobalKnobs* usedKnobs);
-        MaybeError CreateDevice(VulkanDeviceKnobs* usedKnobs);
+        ResultOrError<VulkanGlobalKnobs> CreateInstance(const std::vector<const char*>& requiredExtensions);
+        ResultOrError<VulkanDeviceKnobs> CreateDevice();
         void GatherQueueFromDevice();
 
         MaybeError RegisterDebugReport();
