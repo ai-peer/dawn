@@ -125,6 +125,8 @@ namespace dawn_native { namespace d3d12 {
             ASSERT(status.IsSuccess());
         }
 
+        ASSERT(false);
+
         // Create the connection to DXGI and the D3D12 device
         mFactory = CreateFactory(mFunctions.get());
         ASSERT(mFactory.Get() != nullptr);
