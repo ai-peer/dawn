@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a0a9384d_6108cb29",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-29T10:52:48Z",
+      "side": 1,
+      "message": "Thanks for the comment",
+      "parentUuid": "75e463b6_b5f5ea36",
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d10dab94_d8b815dd",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 5
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "There are two different definitions for io_object_t: \u0027OSObject*\u0027 in Frameworks/Kernel/IOKit/IOTypes.h and \u0027unsigned int\u0027 in Frameworks/IOKit/IOTypes.h, I test that the code refer to the \u0027unsigned int\u0027 one in default. I will compare to a more secure macro \u0027IO_OBJECT_NULL\u0027.",
       "parentUuid": "d10dab94_d8b815dd",
+      "range": {
+        "startLine": 67,
+        "startChar": 52,
+        "endLine": 67,
+        "endChar": 53
+      },
+      "revId": "0b601df158636416df5618f0131379e59bbb8550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6cc048d0_6fd71555",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-29T10:52:48Z",
+      "side": 1,
+      "message": "Thanks for the explanation, IO_OBJECT_NULL sounds good.",
+      "parentUuid": "5b057a0b_075a84e4",
       "range": {
         "startLine": 67,
         "startChar": 52,
