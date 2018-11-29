@@ -82,6 +82,13 @@ namespace dawn_native {
     for (;;)                                                      \
     break
 
+    // DAWN_TRY_DECLARE is the same as DAWN_ASSIGN except it also declares VAR
+#define DAWN_TRY_DECLARE(VAR, EXPR)                                \
+    decltype(EXPR)::SuccessType VAR;                              \
+    DAWN_TRY_ASSIGN(VAR, EXPR);                                   \
+    for (;;)                                                      \
+    break
+
     // Implementation detail of DAWN_TRY and DAWN_TRY_ASSIGN's adding to the Error's backtrace.
     void AppendBacktrace(ErrorData* error, const char* file, const char* function, int line);
 
