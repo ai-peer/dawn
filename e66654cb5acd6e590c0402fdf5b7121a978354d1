@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "c2fc0cca_82d09faa",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-29T17:36:43Z",
+      "side": 1,
+      "message": "Note that this isn\u0027t the public API of Dawn, but the format of CommandBuffer\u0027s serialization for record-on-submit.\n\nThis is a valid concern and we should decide how we want to convey units in the WebGPU IDL itself.",
+      "parentUuid": "1c2791c5_5f83a6da",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 6
+      },
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "957bd9dc_df94f9c2",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
