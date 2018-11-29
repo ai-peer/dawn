@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "90dab793_07b03c0c",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2018-11-29T18:00:23Z",
+      "side": 1,
+      "message": "No matter whether the API or data structure is public or private, the code should convey the units in a clear manner. At a minimum, it should be in the comment of the data structure if not part of the variable name itself.\n\nIn one of the Vulkan files, I saw the following comment:\n   // In Vulkan the row length is in texels while it is in bytes for Dawn\n\nSince devs will be implementing features in multiple APIs with different conventions, I think it is all the more important for the units to be clear.\n\n(I am OK with tackling this as a subsequent change, by the way)",
+      "parentUuid": "c2fc0cca_82d09faa",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 6
+      },
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "957bd9dc_df94f9c2",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
