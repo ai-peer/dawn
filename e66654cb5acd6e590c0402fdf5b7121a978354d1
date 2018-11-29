@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "1c2791c5_5f83a6da",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2018-11-29T15:56:25Z",
+      "side": 1,
+      "message": "We should consider conveying to the reader the units of these fields (bytes vs. pixels) either in comment form or variable names. Especially now that we\u0027re mixing \"image things\" with \"buffer things\" having clear names would avoid accidentally adding a number in bytes to another number in pixels and cause buffer overflows.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 6
+      },
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "957bd9dc_df94f9c2",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
@@ -30,6 +53,29 @@
       "writtenOn": "2018-11-29T00:54:14Z",
       "side": 1,
       "message": "ComputeTextureCopySplit could probably be updated to take origin/extent as well.",
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdeb5ba5_ea857c69",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2018-11-29T15:56:25Z",
+      "side": 1,
+      "message": "This cast seems unnecessary since both the source and destination are already unit32_t\u0027s.",
+      "range": {
+        "startLine": 383,
+        "startChar": 24,
+        "endLine": 383,
+        "endChar": 45
+      },
       "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
