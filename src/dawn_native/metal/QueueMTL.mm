@@ -34,4 +34,7 @@ namespace dawn_native { namespace metal {
         device->SubmitPendingCommandBuffer();
     }
 
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
+    }
+
 }}  // namespace dawn_native::metal

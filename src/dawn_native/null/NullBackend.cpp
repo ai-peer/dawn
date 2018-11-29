@@ -60,6 +60,9 @@ namespace dawn_native { namespace null {
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
     }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
+    }
     InputStateBase* Device::CreateInputState(InputStateBuilder* builder) {
         return new InputState(builder);
     }
@@ -197,6 +200,15 @@ namespace dawn_native { namespace null {
     void Buffer::UnmapImpl() {
     }
 
+    // Fence
+
+    Fence::Fence(Device* device, const FenceDescriptor* descriptor)
+        : FenceBase(device, descriptor) {
+    }
+
+    Fence::~Fence() {
+    }
+
     // CommandBuffer
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
@@ -217,6 +229,9 @@ namespace dawn_native { namespace null {
 
     void Queue::SubmitImpl(uint32_t, CommandBufferBase* const*) {
         ToBackend(GetDevice())->SubmitPendingOperations();
+    }
+
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
     }
 
     // SwapChain
