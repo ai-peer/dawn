@@ -226,22 +226,28 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
+    DXGI_FORMAT TextureView::GetD3D12Format() const {
+        return D3D12TextureFormat(GetFormat());
+    }
+
     const D3D12_SHADER_RESOURCE_VIEW_DESC& TextureView::GetSRVDescriptor() const {
         return mSrvDesc;
     }
 
-    // TODO(jiawei.shao@intel.com): support rendering into a layer of a texture.
-    D3D12_RENDER_TARGET_VIEW_DESC TextureView::GetRTVDescriptor() {
+    D3D12_RENDER_TARGET_VIEW_DESC TextureView::GetRTVDescriptor() const {
+        ASSERT(GetTexture()->GetDimension() == dawn::TextureDimension::e2D);
         D3D12_RENDER_TARGET_VIEW_DESC rtvDesc;
-        rtvDesc.Format = ToBackend(GetTexture())->GetD3D12Format();
-        rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-        rtvDesc.Texture2D.MipSlice = 0;
-        rtvDesc.Texture2D.PlaneSlice = 0;
+        rtvDesc.Format = GetD3D12Format();
+        rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DARRAY;
+        rtvDesc.Texture2DArray.FirstArraySlice = GetBaseArrayLayer();
+        rtvDesc.Texture2DArray.ArraySize = GetLayerCount();
+        rtvDesc.Texture2DArray.MipSlice = GetBaseMipLevel();
+        rtvDesc.Texture2DArray.PlaneSlice = 0;
         return rtvDesc;
     }
 
     // TODO(jiawei.shao@intel.com): support rendering into a layer of a texture.
-    D3D12_DEPTH_STENCIL_VIEW_DESC TextureView::GetDSVDescriptor() {
+    D3D12_DEPTH_STENCIL_VIEW_DESC TextureView::GetDSVDescriptor() const {
         D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc;
         dsvDesc.Format = ToBackend(GetTexture())->GetD3D12Format();
         dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
