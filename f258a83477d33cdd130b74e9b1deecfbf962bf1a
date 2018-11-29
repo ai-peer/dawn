@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "70e983ae_f8893e94",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-29T12:25:21Z",
+      "side": 1,
+      "message": "I see, using D3D12_RTV_DIMENSION_TEXTURE2DARRAY for both 2D and 2D array texture views sound good, can you add a comment that says it\u0027s the same issue as for SRV?",
+      "parentUuid": "2c8c8296_8f4f9d2c",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bea45688_33e3f5ee",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 8

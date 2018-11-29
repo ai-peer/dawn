@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "937b4f31_79834d4d",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-29T12:25:21Z",
+      "side": 1,
+      "message": "with",
+      "range": {
+        "startLine": 477,
+        "startChar": 29,
+        "endLine": 477,
+        "endChar": 31
+      },
+      "revId": "9dd0457d189d541e8edb1a6d64187b9101267bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
