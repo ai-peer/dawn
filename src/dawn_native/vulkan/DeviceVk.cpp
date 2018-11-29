@@ -26,6 +26,7 @@
 #include "dawn_native/vulkan/CommandBufferVk.h"
 #include "dawn_native/vulkan/ComputePipelineVk.h"
 #include "dawn_native/vulkan/DepthStencilStateVk.h"
+#include "dawn_native/vulkan/FenceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/InputStateVk.h"
 #include "dawn_native/vulkan/NativeSwapChainImplVk.h"
@@ -239,6 +240,9 @@ namespace dawn_native { namespace vulkan {
     }
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
+    }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
     }
     InputStateBase* Device::CreateInputState(InputStateBuilder* builder) {
         return new InputState(builder);
