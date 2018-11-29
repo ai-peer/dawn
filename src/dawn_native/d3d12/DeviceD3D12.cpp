@@ -125,6 +125,8 @@ namespace dawn_native { namespace d3d12 {
             ASSERT(status.IsSuccess());
         }
 
+        ASSERT(false);
+
         // Create the connection to DXGI and the D3D12 device
         mFactory = CreateFactory(mFunctions.get());
         ASSERT(mFactory.Get() != nullptr);
@@ -135,14 +137,14 @@ namespace dawn_native { namespace d3d12 {
         ASSERT_SUCCESS(mFunctions->d3d12CreateDevice(mHardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0,
                                                      IID_PPV_ARGS(&mD3d12Device)));
 
-        // Collect GPU information
-        CollectPCIInfo();
-
         // Create device-global objects
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
         queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
         ASSERT_SUCCESS(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)));
+        // Collect GPU information
+        CollectPCIInfo();
+
 
         ASSERT_SUCCESS(
             mD3d12Device->CreateFence(mSerial, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&mFence)));
