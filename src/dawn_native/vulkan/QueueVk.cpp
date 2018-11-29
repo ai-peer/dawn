@@ -16,6 +16,7 @@
 
 #include "dawn_native/vulkan/CommandBufferVk.h"
 #include "dawn_native/vulkan/DeviceVk.h"
+#include "dawn_native/vulkan/FenceVk.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -34,6 +35,9 @@ namespace dawn_native { namespace vulkan {
         }
 
         device->SubmitPendingCommands();
+    }
+
+    void Queue::SignalImpl(FenceBase* fence, uint64_t signalValue) {
     }
 
 }}  // namespace dawn_native::vulkan

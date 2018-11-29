@@ -30,6 +30,7 @@ namespace dawn_native { namespace d3d12 {
 
       private:
         void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
+        void SignalImpl(FenceBase* fence, uint64_t signalValue) override;
 
         ComPtr<ID3D12GraphicsCommandList> mCommandList;
     };
