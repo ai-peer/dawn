@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "588e5038_ff03883f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-11-29T20:18:30Z",
+      "side": 1,
+      "message": "I prefer the original (parent). I have a strong preference for explicit variable declarations, rather than hidden in a macro. I have a weaker preference for explicit assignments over macro\u0027ed ones.",
+      "revId": "9f81efa34b50e27154775d45c0b59c7ae2c997f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
