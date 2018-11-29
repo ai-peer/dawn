@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2d9bdf82_e02ad8c3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-29T08:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfa79190_dc4ddd5d",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a7c8ac0_bf3d2ab7",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2018-11-28T12:11:56Z",
       "side": 1,
       "message": "Can we have at least an assert over the texture view dimension?\n\nAlso we might want to support the 2D and 2D Array cases separately.",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c8c8296_8f4f9d2c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-29T08:16:16Z",
+      "side": 1,
+      "message": "Done\n\nActually it is the same story as SRV. I cannot configure the first array slice in D3D12_TEX2D_RTV, so I have to always use D3D12_TEX2D_ARRAY_RTV:\nhttps://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_rtv\n\nAnother choice is choosing D3D12_TEX2D_RTV when the underlying texture is non-array. If we need to do so, I think we should also use this style for SRVs.",
+      "parentUuid": "3a7c8ac0_bf3d2ab7",
       "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "60f9a6aa_a0bb038e",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-29T08:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bea45688_33e3f5ee",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "468fb37b_2f963319",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 8
@@ -67,6 +121,24 @@
       "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27e3699d_e879f7c1",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-29T08:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "468fb37b_2f963319",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "db2ea376_242a2d6f",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-29T08:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65c9c2a9_0e847d2b",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0be0d05_629148b2",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 8
@@ -101,6 +191,24 @@
       "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74b192fc_706e56af",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-29T08:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0be0d05_629148b2",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
