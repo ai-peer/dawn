@@ -16,6 +16,24 @@
       "revId": "d4c12267e1226a266f405e44ca1a675f94c2449b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3182967d_d776fb12",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-30T23:48:57Z",
+      "side": 1,
+      "message": "As of now, nothing ever increments by more than 1.",
+      "parentUuid": "a6ee6c21_145f04fd",
+      "revId": "d4c12267e1226a266f405e44ca1a675f94c2449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
