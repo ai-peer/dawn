@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c024ca3b_2160b780",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-30T18:33:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0841b71e_3f30b8ed",
+      "revId": "b286bc217f93c2121c79fae1602247a9dfb4094e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "273735be_f073f360",
         "filename": "src/dawn_native/opengl/QueueGL.cpp",
         "patchSetId": 20
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "0b18cab4_cd84faa1",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-30T18:33:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "273735be_f073f360",
+      "revId": "b286bc217f93c2121c79fae1602247a9dfb4094e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfa7f06b_91480244",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 20
@@ -50,6 +86,24 @@
       "revId": "b286bc217f93c2121c79fae1602247a9dfb4094e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c1e759e_9200308a",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-11-30T18:33:41Z",
+      "side": 1,
+      "message": "Whoops. I think that was a rebase artifact",
+      "parentUuid": "cfa7f06b_91480244",
+      "revId": "b286bc217f93c2121c79fae1602247a9dfb4094e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
