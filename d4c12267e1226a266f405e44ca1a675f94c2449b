@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6ee6c21_145f04fd",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T21:52:32Z",
+      "side": 1,
+      "message": "There are a bunch of places where serials are incremented. Is there any chance of any of them overflowing?\n\nIf they always start at 0 and only ever increment by 1, that should be ok. But if there\u0027s a way for it to get initialized to a large number, or to get incremented by large numbers, it could overflow.",
+      "revId": "d4c12267e1226a266f405e44ca1a675f94c2449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
