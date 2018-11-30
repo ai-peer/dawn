@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64caf7fd_b4a3814c",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T20:14:00Z",
+      "side": 1,
+      "message": "Do we expect this to never happen? We could put an assert here.\n\nOtherwise maybe it would be good to give this status a name and use that instead of UNKNOWN.",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5828fbbe_a9b50bdc",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T20:14:00Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem like it should be indented farther than the {% set ... %} line.",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
