@@ -26,6 +26,7 @@ namespace dawn_native { namespace opengl {
         for (uint32_t i = 0; i < numCommands; ++i) {
             ToBackend(commands[i])->Execute();
         }
+        ToBackend(device)->SubmitFenceSync();
     }
 
 }}  // namespace dawn_native::opengl
