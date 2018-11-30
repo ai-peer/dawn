@@ -33,6 +33,103 @@
       "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "307db8e6_b6a97a09",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T23:01:43Z",
+      "side": 1,
+      "message": "Could these values possibly overflow? Do they get incremented at any point? (I think not, but just checking.)\n\nIn the future, I wonder if we could replace some of our integer usages throughout Dawn with opaque structs to ensure (1) type safety and (2) that we never do arithmetic on things we shouldn\u0027t.",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7ed47eb_94da8215",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T23:01:43Z",
+      "side": 1,
+      "message": "Is this ok to call if the fence is null?",
+      "range": {
+        "startLine": 766,
+        "startChar": 58,
+        "endLine": 766,
+        "endChar": 67
+      },
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e5d4001_90741e54",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T23:01:43Z",
+      "side": 1,
+      "message": "Hm, I thought our serials were uint64_t. I guess not; this seems to match elsewhere. Should they be?",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdbf6f3d_a2acde79",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T23:01:43Z",
+      "side": 1,
+      "message": "same comment from earlier. Also, why is a lot of this logic in both places?",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77fe0d07_5661f562",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-11-30T23:01:43Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 1241,
+        "startChar": 3,
+        "endLine": 1241,
+        "endChar": 9
+      },
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
