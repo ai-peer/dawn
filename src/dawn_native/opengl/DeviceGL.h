@@ -18,6 +18,7 @@
 #include "dawn_native/dawn_platform.h"
 
 #include "common/Platform.h"
+#include "common/Serial.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/opengl/Forward.h"
 
