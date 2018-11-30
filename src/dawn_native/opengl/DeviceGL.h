@@ -18,6 +18,7 @@
 #include "dawn_native/dawn_platform.h"
 
 #include "common/Platform.h"
+#include "common/Serial.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/opengl/Forward.h"
 
@@ -61,6 +62,7 @@ namespace dawn_native { namespace opengl {
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
+        ResultOrError<FenceBase*> CreateFenceImpl(const FenceDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<QueueBase*> CreateQueueImpl() override;

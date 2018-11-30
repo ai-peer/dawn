@@ -23,6 +23,7 @@
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
 #include "dawn_native/opengl/DepthStencilStateGL.h"
+#include "dawn_native/opengl/FenceGL.h"
 #include "dawn_native/opengl/InputStateGL.h"
 #include "dawn_native/opengl/PipelineLayoutGL.h"
 #include "dawn_native/opengl/QueueGL.h"
@@ -57,7 +58,7 @@ namespace dawn_native { namespace opengl {
         // Some operations might have been started since the last submit and waiting
         // on a serial that doesn't have a corresponding fence enqueued. Force all
         // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
+        mCompletedSerial = mLastSubmittedSerial;
         Tick();
     }
 
@@ -86,6 +87,9 @@ namespace dawn_native { namespace opengl {
     }
     DepthStencilStateBase* Device::CreateDepthStencilState(DepthStencilStateBuilder* builder) {
         return new DepthStencilState(builder);
+    }
+    ResultOrError<FenceBase*> Device::CreateFenceImpl(const FenceDescriptor* descriptor) {
+        return new Fence(this, descriptor);
     }
     InputStateBase* Device::CreateInputState(InputStateBuilder* builder) {
         return new InputState(builder);
