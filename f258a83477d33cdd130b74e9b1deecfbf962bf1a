@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "003cecb0_1ab7de46",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-30T01:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70e983ae_f8893e94",
+      "revId": "f258a83477d33cdd130b74e9b1deecfbf962bf1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bea45688_33e3f5ee",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 8
