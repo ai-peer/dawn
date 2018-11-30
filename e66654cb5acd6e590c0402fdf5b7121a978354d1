@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "01391148_b97da482",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-30T00:24:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8e7f1f8_3d1d269e",
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c2791c5_5f83a6da",
         "filename": "src/dawn_native/Commands.h",
         "patchSetId": 7
@@ -90,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "c2b133a2_a007bbc2",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-30T00:24:32Z",
+      "side": 1,
+      "message": "I think adding a comment next to the struct definitions is a concise solution to the issue for now - I\u0027d like to add that if there\u0027s no opposition.\n\nLike this:\n    struct BufferCopy {\n        Ref\u003cBufferBase\u003e buffer;\n        uint32_t offset;        // bytes\n        uint32_t rowPitch;      // bytes\n        uint32_t imageHeight;   // bytes (?)\n    };\n\nLonger term it\u0027d be nice if this was an optional field within dawn.json.",
+      "parentUuid": "90dab793_07b03c0c",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 6
+      },
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "957bd9dc_df94f9c2",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
@@ -104,6 +146,24 @@
       "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fc4e886_e5117121",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-11-30T00:24:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "957bd9dc_df94f9c2",
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
