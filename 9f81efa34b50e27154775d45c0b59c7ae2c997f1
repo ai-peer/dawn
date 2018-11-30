@@ -16,6 +16,24 @@
       "revId": "9f81efa34b50e27154775d45c0b59c7ae2c997f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4985471_658dd045",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:29:13Z",
+      "side": 1,
+      "message": "Done (removed DAWN_TRY_DECLARE)",
+      "parentUuid": "588e5038_ff03883f",
+      "revId": "9f81efa34b50e27154775d45c0b59c7ae2c997f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
