@@ -48,6 +48,9 @@ namespace dawn_native { namespace metal {
         RenderPipelineBase* CreateRenderPipeline(RenderPipelineBuilder* builder) override;
         SwapChainBase* CreateSwapChain(SwapChainBuilder* builder) override;
 
+        Serial GetCompletedCommandSerial() const final override;
+        Serial GetLastSubmittedCommandSerial() const final override;
+        Serial GetPendingCommandSerial() const final override;
         void TickImpl() override;
 
         const dawn_native::PCIInfo& GetPCIInfo() const override;
@@ -56,7 +59,6 @@ namespace dawn_native { namespace metal {
 
         id<MTLCommandBuffer> GetPendingCommandBuffer();
         void SubmitPendingCommandBuffer();
-        Serial GetPendingCommandSerial();
 
         MapRequestTracker* GetMapTracker() const;
         ResourceUploader* GetResourceUploader() const;
@@ -86,8 +88,8 @@ namespace dawn_native { namespace metal {
         std::unique_ptr<MapRequestTracker> mMapTracker;
         std::unique_ptr<ResourceUploader> mResourceUploader;
 
-        Serial mFinishedCommandSerial = 0;
-        Serial mPendingCommandSerial = 1;
+        Serial mCompletedSerial = 0;
+        Serial mLastSubmittedSerial = 0;
         id<MTLCommandBuffer> mPendingCommands = nil;
 
         dawn_native::PCIInfo mPCIInfo;
