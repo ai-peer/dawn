@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0841b71e_3f30b8ed",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:03:07Z",
+      "side": 1,
+      "message": "All backends implementations of Fences are trivial, so we could just use FenceBase instead and not have backend objects for them.",
+      "revId": "b286bc217f93c2121c79fae1602247a9dfb4094e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "273735be_f073f360",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:03:07Z",
+      "side": 1,
+      "message": "This could be called inside SubmitImpl like in other backends. This would get rid of the need for SignalImpl.",
+      "revId": "b286bc217f93c2121c79fae1602247a9dfb4094e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfa7f06b_91480244",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:03:07Z",
+      "side": 1,
+      "message": "Why is this change needed? Right now this will break some things if some commands were pending but not submitted on device destruction.",
+      "revId": "b286bc217f93c2121c79fae1602247a9dfb4094e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
