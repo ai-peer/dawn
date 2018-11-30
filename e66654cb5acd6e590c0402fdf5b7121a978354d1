@@ -132,6 +132,30 @@
     },
     {
       "key": {
+        "uuid": "9ce092d4_ec5fce27",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T10:48:53Z",
+      "side": 1,
+      "message": "Solution SGTM, though I believe imageHeight would be specified in texels.",
+      "parentUuid": "c2b133a2_a007bbc2",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 6
+      },
+      "revId": "e66654cb5acd6e590c0402fdf5b7121a978354d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "957bd9dc_df94f9c2",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
