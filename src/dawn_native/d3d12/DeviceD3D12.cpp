@@ -26,6 +26,7 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/DepthStencilStateD3D12.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
+#include "dawn_native/d3d12/FenceD3D12.h"
 #include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"

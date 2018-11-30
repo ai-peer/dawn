@@ -196,6 +196,15 @@ namespace dawn_native { namespace null {
     void Buffer::UnmapImpl() {
     }
 
+    // Fence
+
+    Fence::Fence(Device* device, const FenceDescriptor* descriptor)
+        : FenceBase(device, descriptor) {
+    }
+
+    Fence::~Fence() {
+    }
+
     // CommandBuffer
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)

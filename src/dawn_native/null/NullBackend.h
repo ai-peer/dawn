@@ -25,6 +25,7 @@
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/DepthStencilState.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/Fence.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
@@ -47,6 +48,7 @@ namespace dawn_native { namespace null {
     using ComputePipeline = ComputePipelineBase;
     using DepthStencilState = DepthStencilStateBase;
     class Device;
+    class Fence;
     using InputState = InputStateBase;
     using PipelineLayout = PipelineLayoutBase;
     class Queue;
@@ -164,6 +166,12 @@ namespace dawn_native { namespace null {
 
       private:
         CommandIterator mCommands;
+    };
+
+    class Fence : public FenceBase {
+      public:
+        Fence(Device* device, const FenceDescriptor* descriptor);
+        ~Fence();
     };
 
     class Queue : public QueueBase {
