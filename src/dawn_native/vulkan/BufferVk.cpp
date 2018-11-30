@@ -252,7 +252,7 @@ namespace dawn_native { namespace vulkan {
         request.data = data;
         request.isWrite = isWrite;
 
-        mInflightRequests.Enqueue(std::move(request), mDevice->GetSerial());
+        mInflightRequests.Enqueue(std::move(request), mDevice->GetLastSubmittedCommandSerial() + 1);
     }
 
     void MapRequestTracker::Tick(Serial finishedSerial) {
