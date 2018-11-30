@@ -88,7 +88,7 @@ namespace dawn_native { namespace metal {
         request.offset = offset;
         request.isWrite = isWrite;
 
-        mInflightRequests.Enqueue(std::move(request), mDevice->GetPendingCommandSerial());
+        mInflightRequests.Enqueue(std::move(request), mDevice->GetLastSubmittedCommandSerial() + 1);
     }
 
     void MapRequestTracker::Tick(Serial finishedSerial) {
