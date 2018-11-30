@@ -1,0 +1,312 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4f9061e_ff163a38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "nit: Let DeviceBase know about Complete and LastSubmitted command Serials\n\nThis is needed ...",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06acba04_a5bfcffb",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Instead of doing the +1 every time, can we have another GetPendingCommandSerial method? Here and in the rest of the backend.",
+      "range": {
+        "startLine": 240,
+        "startChar": 63,
+        "endLine": 240,
+        "endChar": 98
+      },
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5cb61f4_1987a336",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "nit: Can we increment mLastSubmittedSerial on its own line? It would help not have to think about prefix/postfix increment.",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca9b5039_c2742646",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "GetPendingCommandSerial here too.",
+      "range": {
+        "startLine": 263,
+        "startChar": 43,
+        "endLine": 263,
+        "endChar": 67
+      },
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3feb38af_6867f0a8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "nit: can these be marked as final so we avoid the virtual call when using them inside the backends?",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc1dd21f_c90bcb10",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Same as for the D3D12 backend.",
+      "range": {
+        "startLine": 91,
+        "startChar": 54,
+        "endLine": 91,
+        "endChar": 99
+      },
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fec0744_746a631b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Please split this in two lines as well for readability.",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "833b1060_72a0430c",
+        "filename": "src/dawn_native/null/NullBackend.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Let\u0027s work on mPendingOperations directly.",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35ec3093_27249e08",
+        "filename": "src/dawn_native/null/NullBackend.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "This should be mCompletedSerial \u003d mLastSubmittedSerial and mLastSubmittedSerial++. Otherwise a smart enough FenceBase could fire the callback immediately.",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e947de1_ff4ee1b0",
+        "filename": "src/dawn_native/null/NullBackend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "these need to be initialized",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6342596_b3297240",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Can this be called in Queue::SubmitImpl in this patch?",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a9fd56f_a8131a2b",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Likewise let\u0027s do the increment on its own line.",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20abf315_9081ec7e",
+        "filename": "src/dawn_native/opengl/DeviceGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "nit: standard library includes go in their own block and their block is always the last one.",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a496926_6339bb76",
+        "filename": "src/dawn_native/opengl/DeviceGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "nit: Can this be in its own block, separate from all the overrides from DeviceBase?",
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbd082d3_29070ab9",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Same as for D3D12",
+      "range": {
+        "startLine": 255,
+        "startChar": 54,
+        "endLine": 255,
+        "endChar": 98
+      },
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4b7ca3c_7730f25b",
+        "filename": "src/dawn_native/vulkan/FencedDeleter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T13:02:07Z",
+      "side": 1,
+      "message": "Same as for D3D12: GetPendingCommandSerial.",
+      "range": {
+        "startLine": 42,
+        "startChar": 49,
+        "endLine": 42,
+        "endChar": 85
+      },
+      "revId": "f804a7e02f31e9f1952b8ba70402eafd5a6679fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
