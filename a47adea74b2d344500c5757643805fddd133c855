@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "840943cc_64b77bc9",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-30T15:52:32Z",
+      "side": 1,
+      "message": "nit: Only the backends care about this for now so maybe we could keep it private to each backend. This would remove it from the OpenGL and Null backends. Also the function would need to be out of the block with overrides.",
+      "revId": "a47adea74b2d344500c5757643805fddd133c855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
