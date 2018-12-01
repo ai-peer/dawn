@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c6da2ae3_8186b1cb",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-01T00:17:19Z",
+      "side": 1,
+      "message": "This will happen if the client fence goes out of scope. We have the same sort of thing for buffer mapping.\n\nCorentin and I discussed that for buffers, this status is for the destroy-this-now semantic in WebGPU, so you don\u0027t know whether the map has completed. Fences and other things that have callbacks will likely work the same way.",
+      "parentUuid": "64caf7fd_b4a3814c",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5828fbbe_a9b50bdc",
         "filename": "generator/templates/dawn_wire/WireClient.cpp",
         "patchSetId": 23
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c6dbb310_7ebf1fdd",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-01T00:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5828fbbe_a9b50bdc",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "307db8e6_b6a97a09",
         "filename": "generator/templates/dawn_wire/WireClient.cpp",
         "patchSetId": 23
@@ -50,6 +86,24 @@
       "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c293dba6_fd5bb19d",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-01T00:17:19Z",
+      "side": 1,
+      "message": "They don\u0027t get incremented; only assigned to other uint64_t values.\nI agree we shouldn\u0027t have checked integer types in the future.",
+      "parentUuid": "307db8e6_b6a97a09",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "0c83b760_3fee462e",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-01T00:17:19Z",
+      "side": 1,
+      "message": "I don\u0027t think |fence| will ever be null. It\u0027s not actually a |Fence*| but a |ObjectAllocator\u003cFence\u003e| initialized on device creation.",
+      "parentUuid": "a7ed47eb_94da8215",
+      "range": {
+        "startLine": 766,
+        "startChar": 58,
+        "endLine": 766,
+        "endChar": 67
+      },
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e5d4001_90741e54",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 23
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "4f58d721_e6192a6c",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-01T00:17:19Z",
+      "side": 1,
+      "message": "Good question. @Corentin?\nWe\u0027re going to be fixing the autogen wire stuff in the future though, so we can address this later.",
+      "parentUuid": "3e5d4001_90741e54",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdbf6f3d_a2acde79",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 23
@@ -104,6 +200,24 @@
       "writtenOn": "2018-11-30T23:01:43Z",
       "side": 1,
       "message": "same comment from earlier. Also, why is a lot of this logic in both places?",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2987bd_a1c6d840",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-01T00:17:19Z",
+      "side": 1,
+      "message": "Using the wire, client callbacks get stored on the client and the server registers some of it\u0027s own callbacks stored in this class.\n\nWithout the wire, callbacks get registered in this class.",
+      "parentUuid": "bdbf6f3d_a2acde79",
       "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -130,6 +244,30 @@
       "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8751893_15d6fcfc",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-01T00:17:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77fe0d07_5661f562",
+      "range": {
+        "startLine": 1241,
+        "startChar": 3,
+        "endLine": 1241,
+        "endChar": 9
+      },
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
