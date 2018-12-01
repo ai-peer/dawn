@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ac86d73b_c2c3d523",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-01T01:23:44Z",
+      "side": 1,
+      "message": "I see. I feel like fence objects should be refcounted and the fence on the wire should count as a ref. Then UNKNOWN could go away entirely. I don\u0027t feel strongly about it though. (For buffers it makes sense to really delete them immediately, because they\u0027re heavy.)",
+      "parentUuid": "c6da2ae3_8186b1cb",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5828fbbe_a9b50bdc",
         "filename": "generator/templates/dawn_wire/WireClient.cpp",
         "patchSetId": 23
