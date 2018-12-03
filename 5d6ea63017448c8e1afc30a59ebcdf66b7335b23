@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3de71623_7b6937d5",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "Instead we could split-off test targets and move them to src/tests/BUILD.gn and only conditionally reference them in a group (or even \"all\") if dawn_build_tests \u003d\u003d true.",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea538350_a67c9846",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "Why is this gated on build_tests? It\u0027s mildly annoying that we have to special case a ton of things because Skia\u0027s build/config is different from Chromium\u0027s. Do you think this could be added to Skia instead? (even if it is a noop).",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44516861_9db3fa76",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "Which targets need this? I\u0027d assume it is only for codegen so can we make it more precise?",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9155efeb_c756f7c6",
+        "filename": "build_overrides/build.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "Uuuh that\u0027s Chromium\u0027s main build_overrides file. Could this go in dawn.gni and be dawn_build_tests instead?",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bc7dd3c_86521af0",
+        "filename": "build_overrides/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "Why does this need to be moved? Is it only because Skia needs to enable a single backend at a time for now?",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fef684ae_450abced",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "nit: add a comment to explain what this warning is.",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "366568e3_55dfc178",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "I\u0027d rather keep this in third-party if possible and use Skia\u0027s copy of gtest.",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8dbc678_d219d924",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T16:06:13Z",
+      "side": 1,
+      "message": "Woops I forgot to run gn format and the CQ didn\u0027t complain. This is obviously ok to land so it could be a separate patch.",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
