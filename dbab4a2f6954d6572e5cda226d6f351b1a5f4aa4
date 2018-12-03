@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7c26867b_5e45a476",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T10:47:26Z",
+      "side": 1,
+      "message": "If we do that, the application doesn\u0027t know when the callbacks are going to be fired because a Ref to the fence can be kept internally to Dawn. Instead we discussed having the same destroy-this-now, or neuter operation on Fence to allow the application to control callbacks on teardown,.",
+      "parentUuid": "ac86d73b_c2c3d523",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5828fbbe_a9b50bdc",
         "filename": "generator/templates/dawn_wire/WireClient.cpp",
         "patchSetId": 23
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "They don\u0027t get incremented; only assigned to other uint64_t values.\nI agree we shouldn\u0027t have checked integer types in the future.",
       "parentUuid": "307db8e6_b6a97a09",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "476fc9fe_d073e873",
+        "filename": "generator/templates/dawn_wire/WireClient.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T10:47:26Z",
+      "side": 1,
+      "message": "+1 on having opaque structures for things like this eventually.",
+      "parentUuid": "c293dba6_fd5bb19d",
       "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -201,6 +237,24 @@
       "side": 1,
       "message": "Good question. @Corentin?\nWe\u0027re going to be fixing the autogen wire stuff in the future though, so we can address this later.",
       "parentUuid": "3e5d4001_90741e54",
+      "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "616c92b3_f74fbd1b",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T10:47:26Z",
+      "side": 1,
+      "message": "That serial is more like a \"generation counter\" used by the wire to double check that we aren\u0027t talking about a difference fence with the same ID. Sorry for the bad initial naming.\n\nIt is used to deal with situations like these:\n\n - Client creates fence 1\n - Flush Client-\u003eServer\n - Client destroys fence 1\n - Client creates new fence reusing ID 1\n - Server sends FenceCompletion for ID 1\n - Flush Server-\u003eClient\n\nThe completion event was for the first fence, but is triggered on the second one. The fence \"serial\" or \"generation counter\" lets the client know for which of the fences with ID 1 the message is. Not that we could have used 64-bit fence IDs that are unique over the lifetime of the program, but it would require an unordered_map lookup while the double 32 bit (ID, generation) pair allows us to keep data packed in a vector.\n\nWhen we detect there would be an overflow, we could put a tombstone so that the ID is still reserved but not used by any real object. A bit like the last section of this blog post: https://floooh.github.io/2018/06/17/handles-vs-pointers.html",
+      "parentUuid": "4f58d721_e6192a6c",
       "revId": "dbab4a2f6954d6572e5cda226d6f351b1a5f4aa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
