@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14660c80_da4ce33d",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-03T20:15:53Z",
+      "side": 1,
+      "message": "Is it okay to rely on this overflowing to detect the overflow? Should we be using checked arithmetic around here instead?",
+      "revId": "d0e346072232ee4dede7227327bbfe7af438fc8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
