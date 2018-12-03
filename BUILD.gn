@@ -13,10 +13,12 @@
 # limitations under the License.
 
 import("scripts/dawn_overrides_with_defaults.gni")
-import("scripts/dawn_features.gni")
+import("//build_overrides/dawn_features.gni")
 import("//build_overrides/build.gni")
 
-import("//testing/test.gni")
+if (build_tests) {
+  import("//testing/test.gni")
+}
 
 # Use Chromium's dcheck_always_on when available so that we respect it when
 # running tests on the GPU builders
@@ -152,7 +154,7 @@ config("dawn_shared_library_public") {
     ]
   }
 
-  if (is_linux) {
+  if (is_linux && build_tests) {
     configs = [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
   }
 }
@@ -189,6 +191,9 @@ config("dawn_internal") {
   # Only internal Dawn targets can use this config, this means only targets in
   # this BUILD.gn file.
   visibility = [ ":*" ]
+  if (!is_win || is_clang) {
+    cflags = [ "-Wno-unneeded-internal-declaration" ]
+  }
 }
 
 static_library("dawn_common") {
@@ -787,113 +792,115 @@ dawn_generator("mock_dawn_gen") {
   ]
 }
 
-test("dawn_unittests") {
-  configs += [ ":dawn_internal" ]
+if (build_tests) {
+  test("dawn_unittests") {
+    configs += [ ":dawn_internal" ]
 
-  deps = [
-    ":dawn_common",
-    ":dawn_headers",
-    ":dawn_utils",
-    ":libdawn",
-    ":libdawn_native_sources",
-    ":libdawn_wire",
-    ":mock_dawn_gen",
-    "third_party:gmock_and_gtest",
-  ]
+    deps = [
+      ":dawn_common",
+      ":dawn_headers",
+      ":dawn_utils",
+      ":libdawn",
+      ":libdawn_native_sources",
+      ":libdawn_wire",
+      ":mock_dawn_gen",
+      "third_party:gmock_and_gtest",
+    ]
 
-  # Add internal Dawn Native headers and config for internal unittests.
-  deps += [ ":libdawn_native_headers" ]
-  configs += [ ":libdawn_native_internal" ]
+    # Add internal Dawn Native headers and config for internal unittests.
+    deps += [ ":libdawn_native_headers" ]
+    configs += [ ":libdawn_native_internal" ]
 
-  sources = get_target_outputs(":mock_dawn_gen")
-  sources += [
-    "src/tests/unittests/BitSetIteratorTests.cpp",
-    "src/tests/unittests/CommandAllocatorTests.cpp",
-    "src/tests/unittests/EnumClassBitmasksTests.cpp",
-    "src/tests/unittests/ErrorTests.cpp",
-    "src/tests/unittests/MathTests.cpp",
-    "src/tests/unittests/ObjectBaseTests.cpp",
-    "src/tests/unittests/PerStageTests.cpp",
-    "src/tests/unittests/RefCountedTests.cpp",
-    "src/tests/unittests/ResultTests.cpp",
-    "src/tests/unittests/SerialMapTests.cpp",
-    "src/tests/unittests/SerialQueueTests.cpp",
-    "src/tests/unittests/ToBackendTests.cpp",
-    "src/tests/unittests/WireTests.cpp",
-    "src/tests/unittests/validation/BindGroupValidationTests.cpp",
-    "src/tests/unittests/validation/BlendStateValidationTests.cpp",
-    "src/tests/unittests/validation/BufferValidationTests.cpp",
-    "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
-    "src/tests/unittests/validation/ComputeValidationTests.cpp",
-    "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
-    "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
-    "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
-    "src/tests/unittests/validation/InputStateValidationTests.cpp",
-    "src/tests/unittests/validation/PushConstantsValidationTests.cpp",
-    "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
-    "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
-    "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
-    "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
-    "src/tests/unittests/validation/TextureViewValidationTests.cpp",
-    "src/tests/unittests/validation/ValidationTest.cpp",
-    "src/tests/unittests/validation/ValidationTest.h",
-    "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
-  ]
+    sources = get_target_outputs(":mock_dawn_gen")
+    sources += [
+      "src/tests/unittests/BitSetIteratorTests.cpp",
+      "src/tests/unittests/CommandAllocatorTests.cpp",
+      "src/tests/unittests/EnumClassBitmasksTests.cpp",
+      "src/tests/unittests/ErrorTests.cpp",
+      "src/tests/unittests/MathTests.cpp",
+      "src/tests/unittests/ObjectBaseTests.cpp",
+      "src/tests/unittests/PerStageTests.cpp",
+      "src/tests/unittests/RefCountedTests.cpp",
+      "src/tests/unittests/ResultTests.cpp",
+      "src/tests/unittests/SerialMapTests.cpp",
+      "src/tests/unittests/SerialQueueTests.cpp",
+      "src/tests/unittests/ToBackendTests.cpp",
+      "src/tests/unittests/WireTests.cpp",
+      "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+      "src/tests/unittests/validation/BlendStateValidationTests.cpp",
+      "src/tests/unittests/validation/BufferValidationTests.cpp",
+      "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+      "src/tests/unittests/validation/ComputeValidationTests.cpp",
+      "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+      "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
+      "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+      "src/tests/unittests/validation/InputStateValidationTests.cpp",
+      "src/tests/unittests/validation/PushConstantsValidationTests.cpp",
+      "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+      "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+      "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+      "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+      "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+      "src/tests/unittests/validation/ValidationTest.cpp",
+      "src/tests/unittests/validation/ValidationTest.h",
+      "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+    ]
 
-  if (dawn_enable_d3d12) {
-    sources += [ "src/tests/unittests/d3d12/CopySplitTests.cpp" ]
+    if (dawn_enable_d3d12) {
+      sources += [ "src/tests/unittests/d3d12/CopySplitTests.cpp" ]
+    }
+
+    # When building inside Chromium, use their gtest main function because it is
+    # needed to run in swarming correctly.
+    if (build_with_chromium) {
+      sources += [ "//gpu/dawn_unittests_main.cc" ]
+    } else {
+      sources += [ "src/tests/UnittestsMain.cpp" ]
+    }
   }
 
-  # When building inside Chromium, use their gtest main function because it is
-  # needed to run in swarming correctly.
-  if (build_with_chromium) {
-    sources += [ "//gpu/dawn_unittests_main.cc" ]
-  } else {
-    sources += [ "src/tests/UnittestsMain.cpp" ]
-  }
-}
+  test("dawn_end2end_tests") {
+    configs += [ ":dawn_internal" ]
 
-test("dawn_end2end_tests") {
-  configs += [ ":dawn_internal" ]
+    deps = [
+      ":dawn_common",
+      ":dawn_utils",
+      ":libdawn",
+      ":libdawn_native",
+      ":libdawn_wire",
+      "third_party:glfw",
+      "third_party:gmock_and_gtest",
+    ]
 
-  deps = [
-    ":dawn_common",
-    ":dawn_utils",
-    ":libdawn",
-    ":libdawn_native",
-    ":libdawn_wire",
-    "third_party:glfw",
-    "third_party:gmock_and_gtest",
-  ]
+    sources = [
+      "src/tests/DawnTest.cpp",
+      "src/tests/DawnTest.h",
+      "src/tests/end2end/BasicTests.cpp",
+      "src/tests/end2end/BindGroupTests.cpp",
+      "src/tests/end2end/BlendStateTests.cpp",
+      "src/tests/end2end/BufferTests.cpp",
+      "src/tests/end2end/ComputeCopyStorageBufferTests.cpp",
+      "src/tests/end2end/CopyTests.cpp",
+      "src/tests/end2end/DepthStencilStateTests.cpp",
+      "src/tests/end2end/DrawElementsTests.cpp",
+      "src/tests/end2end/IndexFormatTests.cpp",
+      "src/tests/end2end/InputStateTests.cpp",
+      "src/tests/end2end/PrimitiveTopologyTests.cpp",
+      "src/tests/end2end/PushConstantTests.cpp",
+      "src/tests/end2end/RenderPassLoadOpTests.cpp",
+      "src/tests/end2end/SamplerTests.cpp",
+      "src/tests/end2end/ScissorTests.cpp",
+      "src/tests/end2end/TextureViewTests.cpp",
+      "src/tests/end2end/ViewportOrientationTests.cpp",
+    ]
 
-  sources = [
-    "src/tests/DawnTest.cpp",
-    "src/tests/DawnTest.h",
-    "src/tests/end2end/BasicTests.cpp",
-    "src/tests/end2end/BindGroupTests.cpp",
-    "src/tests/end2end/BlendStateTests.cpp",
-    "src/tests/end2end/BufferTests.cpp",
-    "src/tests/end2end/ComputeCopyStorageBufferTests.cpp",
-    "src/tests/end2end/CopyTests.cpp",
-    "src/tests/end2end/DepthStencilStateTests.cpp",
-    "src/tests/end2end/DrawElementsTests.cpp",
-    "src/tests/end2end/IndexFormatTests.cpp",
-    "src/tests/end2end/InputStateTests.cpp",
-    "src/tests/end2end/PrimitiveTopologyTests.cpp",
-    "src/tests/end2end/PushConstantTests.cpp",
-    "src/tests/end2end/RenderPassLoadOpTests.cpp",
-    "src/tests/end2end/SamplerTests.cpp",
-    "src/tests/end2end/ScissorTests.cpp",
-    "src/tests/end2end/TextureViewTests.cpp",
-    "src/tests/end2end/ViewportOrientationTests.cpp",
-  ]
-
-  # When building inside Chromium, use their gtest main function because it is
-  # needed to run in swarming correctly.
-  if (build_with_chromium) {
-    sources += [ "//gpu/dawn_end2end_tests_main.cc" ]
-  } else {
-    sources += [ "src/tests/End2EndTestsMain.cpp" ]
+    # When building inside Chromium, use their gtest main function because it is
+    # needed to run in swarming correctly.
+    if (build_with_chromium) {
+      sources += [ "//gpu/dawn_end2end_tests_main.cc" ]
+    } else {
+      sources += [ "src/tests/End2EndTestsMain.cpp" ]
+    }
   }
 }
 
@@ -998,15 +1005,17 @@ if (dawn_standalone) {
 # Fuzzers
 ###############################################################################
 
-group("dawn_fuzzers") {
-  testonly = true
-  deps = [
-    "src/fuzzers:dawn_spirv_cross_glsl_fast_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_glsl_full_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_hlsl_fast_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_hlsl_full_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_msl_fast_fuzzer",
-    "src/fuzzers:dawn_spirv_cross_msl_full_fuzzer",
-    "src/fuzzers:dawn_wire_server_and_frontend_fuzzer",
-  ]
+if (build_tests) {
+  group("dawn_fuzzers") {
+    testonly = true
+    deps = [
+      "src/fuzzers:dawn_spirv_cross_glsl_fast_fuzzer",
+      "src/fuzzers:dawn_spirv_cross_glsl_full_fuzzer",
+      "src/fuzzers:dawn_spirv_cross_hlsl_fast_fuzzer",
+      "src/fuzzers:dawn_spirv_cross_hlsl_full_fuzzer",
+      "src/fuzzers:dawn_spirv_cross_msl_fast_fuzzer",
+      "src/fuzzers:dawn_spirv_cross_msl_full_fuzzer",
+      "src/fuzzers:dawn_wire_server_and_frontend_fuzzer",
+    ]
+  }
 }
