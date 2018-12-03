@@ -177,15 +177,21 @@ namespace dawn_native {
 
         // It should always be possible to allocate one id, for EndOfBlock tagging,
         ASSERT(IsPtrAligned(mCurrentPtr, alignof(uint32_t)));
-        ASSERT(mCurrentPtr + sizeof(uint32_t) <= mEndPtr);
+        ASSERT(mEndPtr >= mCurrentPtr);
+        ASSERT(mEndPtr - mCurrentPtr >= sizeof(uint32_t));
         uint32_t* idAlloc = reinterpret_cast<uint32_t*>(mCurrentPtr);
 
         uint8_t* commandAlloc = AlignPtr(mCurrentPtr + sizeof(uint32_t), commandAlignment);
         uint8_t* nextPtr = AlignPtr(commandAlloc + commandSize, alignof(uint32_t));
 
-        // When there is not enough space, we signal the EndOfBlock, so that the iterator nows to
+        // nextPtr can overflow, especially given it is computed from user-input. commmandAlloc
+        // could technically overflow too, if mEndPtr is just before the end of the address space
+        // and commandAlignment is at least 8.
+        bool overflowed = commandAlloc <= mCurrentPtr || nextPtr <= commandAlloc;
+
+        // When there is not enough space, we signal the EndOfBlock, so that the iterator knows to
         // move to the next one. EndOfBlock on the last block means the end of the commands.
-        if (nextPtr + sizeof(uint32_t) > mEndPtr) {
+        if (overflowed || nextPtr > mEndPtr - sizeof(uint32_t)) {
             // Even if we are not able to get another block, the list of commands will be
             // well-formed and iterable as this block will be that last one.
             *idAlloc = EndOfBlock;
