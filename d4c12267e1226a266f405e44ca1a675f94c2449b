@@ -34,6 +34,24 @@
       "revId": "d4c12267e1226a266f405e44ca1a675f94c2449b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50586164_e7633619",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-03T10:35:23Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to worry for these serials because they are never exposed to the application and instead a \"virtual serial\" is exposed through dawn::Fence.",
+      "parentUuid": "3182967d_d776fb12",
+      "revId": "d4c12267e1226a266f405e44ca1a675f94c2449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
