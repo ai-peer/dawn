@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a0423f6_7bd50604",
+        "filename": "src/tests/unittests/ObjectBaseTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-03T15:51:52Z",
+      "side": 1,
+      "message": "Maybe also test\n\nObject obj \u003d nullptr;\n\n(if that\u0027s intended to work).",
+      "revId": "23b4c8d283348bc16e013353b15b591abd7debdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
