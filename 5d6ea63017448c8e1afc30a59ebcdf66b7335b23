@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7c8e6e78_180276d2",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-03T18:54:37Z",
+      "side": 1,
+      "message": "Sure, giving that a try.\n\nThis seems to require moving mock_dawn_gen as well (because get_target_outputs() can only be used on targets in the current file).\n\nMoving that requires moving the dawn_generator template to a common place; I picked build_overrides/dawn (feel free to suggest something better).\n\nThis failed because it can\u0027t find the generator/main.py script. This is probably just me being dumb: is there a way in GN to make a path relative to the main BUILD file or something, so that it can be satisfied for the invocations of the template in both BUILD.gn and src/tests/BUILD.gn? Failing that, I suppose I could pass in an template argument for the root build dir path.\n\nAnyway let me know if this sounds like the right general direction, or if there\u0027s another approach you\u0027d prefer.",
+      "parentUuid": "3de71623_7b6937d5",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea538350_a67c9846",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-12-03T16:06:13Z",
       "side": 1,
       "message": "Why is this gated on build_tests? It\u0027s mildly annoying that we have to special case a ton of things because Skia\u0027s build/config is different from Chromium\u0027s. Do you think this could be added to Skia instead? (even if it is a noop).",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44d974ec_af048f31",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-03T18:54:37Z",
+      "side": 1,
+      "message": "Could be my GN ignorance, but this seems to require a build/config directory existing in Skia, which I doubt they\u0027d let land.",
+      "parentUuid": "ea538350_a67c9846",
       "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
