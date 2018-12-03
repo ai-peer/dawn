@@ -16,6 +16,8 @@
 
 #include "dawn_native/CommandAllocator.h"
 
+#include <limits>
+
 using namespace dawn_native;
 
 // Definition of the command types used in the tests
@@ -360,5 +362,34 @@ TEST(CommandAllocator, EmptyIterator) {
 
         iterator1.DataWasDestroyed();
         iterator2.DataWasDestroyed();
+    }
+}
+
+template<size_t A>
+struct alignas(A) AlignedStruct {
+    char dummy;
+};
+
+// Test for overflows in Allocate's computations.
+TEST(CommandAllocator, AllocationOverflow) {
+    {
+        CommandAllocator allocator;
+        AlignedStruct<1>* data = allocator.AllocateData<AlignedStruct<1>>(std::numeric_limits<size_t>::max() / 1);
+        ASSERT_EQ(data, nullptr);
+    }
+    {
+        CommandAllocator allocator;
+        AlignedStruct<2>* data = allocator.AllocateData<AlignedStruct<2>>(std::numeric_limits<size_t>::max() / 2);
+        ASSERT_EQ(data, nullptr);
+    }
+    {
+        CommandAllocator allocator;
+        AlignedStruct<4>* data = allocator.AllocateData<AlignedStruct<4>>(std::numeric_limits<size_t>::max() / 4);
+        ASSERT_EQ(data, nullptr);
+    }
+    {
+        CommandAllocator allocator;
+        AlignedStruct<8>* data = allocator.AllocateData<AlignedStruct<8>>(std::numeric_limits<size_t>::max() / 8);
+        ASSERT_EQ(data, nullptr);
     }
 }
