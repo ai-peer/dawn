@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ed66493_10fe6fcd",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-03T23:48:46Z",
+      "side": 1,
+      "message": "const\u0026?",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 46
+      },
+      "revId": "011733b9237e82412a379440475110c0cd60062d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f75a12e_4377337a",
+        "filename": "src/utils/DawnHelpers.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-03T23:48:46Z",
+      "side": 1,
+      "message": "\"accepts creates\"?\n\nGreat helper, btw.",
+      "range": {
+        "startLine": 76,
+        "startChar": 89,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "011733b9237e82412a379440475110c0cd60062d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
