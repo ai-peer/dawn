@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 #include <array>
@@ -187,20 +188,20 @@ class PushConstantTest: public DawnTest {
             blend.srcFactor = dawn::BlendFactor::One;
             blend.dstFactor = dawn::BlendFactor::One;
 
-            dawn::BlendState blendState = device.CreateBlendStateBuilder()
-                .SetBlendEnabled(true)
-                .SetColorBlend(&blend)
-                .SetAlphaBlend(&blend)
-                .GetResult();
+            utils::ComboRenderPipelineDescriptor descriptor(&device);
+            descriptor.layout = layout;
+            descriptor.vertexStage.module = vsModule;
+            descriptor.fragmentStage.module = fsModule;
+            descriptor.primitiveTopology = dawn::PrimitiveTopology::PointList;
+            dawn::BlendState blendStates[] = 
+                {device.CreateBlendStateBuilder()
+                 .SetBlendEnabled(true)
+                 .SetColorBlend(&blend)
+                 .SetAlphaBlend(&blend)
+                 .GetResult()};
+            descriptor.blendStates = blendStates;
 
-            return device.CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-                .SetLayout(layout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .SetPrimitiveTopology(dawn::PrimitiveTopology::PointList)
-                .SetColorAttachmentBlendState(0, blendState)
-                .GetResult();
+            return device.CreateRenderPipeline(&descriptor);
         }
 };
 

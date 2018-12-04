@@ -19,6 +19,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 constexpr static unsigned int kRTSize = 64;
@@ -73,12 +74,14 @@ protected:
             }
         )");
 
-        mPipeline = device.CreateRenderPipelineBuilder()
-            .SetColorAttachmentFormat(0, mRenderPass.colorFormat)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .GetResult();
+        utils::ComboRenderPipelineDescriptor rDescriptor(&device);
+        rDescriptor.layout = pipelineLayout;
+        rDescriptor.vertexStage.module = vsModule;
+        rDescriptor.fragmentStage.module = fsModule;
+        rDescriptor.renderAttachmentsState.colorAttachments[0].format =
+            mRenderPass.colorFormat;
+
+        mPipeline = device.CreateRenderPipeline(&rDescriptor);
 
         dawn::TextureDescriptor descriptor;
         descriptor.dimension = dawn::TextureDimension::e2D;
