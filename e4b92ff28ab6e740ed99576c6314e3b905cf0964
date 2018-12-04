@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24b47462_5c2830d0",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-04T18:40:25Z",
+      "side": 1,
+      "message": "These checks are part of the constructor, right? Could they be in their own test?",
+      "range": {
+        "startLine": 514,
+        "startChar": 98,
+        "endLine": 521,
+        "endChar": 56
+      },
+      "revId": "e4b92ff28ab6e740ed99576c6314e3b905cf0964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
