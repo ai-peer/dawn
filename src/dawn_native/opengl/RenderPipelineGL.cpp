@@ -41,13 +41,12 @@ namespace dawn_native { namespace opengl {
         }
     }  // namespace
 
-    RenderPipeline::RenderPipeline(RenderPipelineBuilder* builder)
-        : RenderPipelineBase(builder),
+    RenderPipeline::RenderPipeline(DeviceBase* device, const RenderPipelineDescriptor* descriptor)
+        : RenderPipelineBase(device, descriptor),
           mGlPrimitiveTopology(GLPrimitiveTopology(GetPrimitiveTopology())) {
         PerStage<const ShaderModule*> modules(nullptr);
-        for (dawn::ShaderStage stage : IterateStages(GetStageMask())) {
-            modules[stage] = ToBackend(builder->GetStageInfo(stage).module.Get());
-        }
+        modules[dawn::ShaderStage::Vertex] = ToBackend(descriptor->vertexStage.module.Get());
+        modules[dawn::ShaderStage::Fragment] = ToBackend(descriptor->fragmentStage.module.Get());
 
         PipelineGL::Initialize(ToBackend(GetLayout()), modules);
     }

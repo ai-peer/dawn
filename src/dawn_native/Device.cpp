@@ -132,6 +132,16 @@ namespace dawn_native {
 
         return result;
     }
+    RenderPipelineBase* DeviceBase::CreateRenderPipeline(
+        const RenderPipelineDescriptor* descriptor) {
+        RenderPipelineBase* result = nullptr;
+
+        if (ConsumedError(CreateRenderPipelineInternal(&result, descriptor))) {
+            return nullptr;
+        }
+
+        return result;
+    }
     DepthStencilStateBuilder* DeviceBase::CreateDepthStencilStateBuilder() {
         return new DepthStencilStateBuilder(this);
     }
@@ -159,9 +169,6 @@ namespace dawn_native {
     }
     RenderPassDescriptorBuilder* DeviceBase::CreateRenderPassDescriptorBuilder() {
         return new RenderPassDescriptorBuilder(this);
-    }
-    RenderPipelineBuilder* DeviceBase::CreateRenderPipelineBuilder() {
-        return new RenderPipelineBuilder(this);
     }
     SamplerBase* DeviceBase::CreateSampler(const SamplerDescriptor* descriptor) {
         SamplerBase* result = nullptr;
@@ -243,6 +250,14 @@ namespace dawn_native {
         const ComputePipelineDescriptor* descriptor) {
         DAWN_TRY(ValidateComputePipelineDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, CreateComputePipelineImpl(descriptor));
+        return {};
+    }
+
+    MaybeError DeviceBase::CreateRenderPipelineInternal(
+        RenderPipelineBase** result,
+        const RenderPipelineDescriptor* descriptor) {
+        DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
+        DAWN_TRY_ASSIGN(*result, CreateRenderPipelineImpl(descriptor));
         return {};
     }
 
