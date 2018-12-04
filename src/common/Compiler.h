@@ -57,6 +57,8 @@
 #        define DAWN_NO_DISCARD [[nodiscard]]
 #    endif
 
+#    define DAWN_DECLARE_UNUSED __attribute__((unused))
+
 // MSVC
 #elif defined(_MSC_VER)
 #    define DAWN_COMPILER_MSVC
@@ -70,6 +72,8 @@ extern void __cdecl __debugbreak(void);
 #    if _MSC_VER >= 1911 && DAWN_CPP_VERSION >= 17
 #        define DAWN_NO_DISCARD [[nodiscard]]
 #    endif
+
+#    define DAWN_DECLARE_UNUSED
 
 #else
 #    error "Unsupported compiler"
