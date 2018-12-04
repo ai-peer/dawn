@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4bd89478_0dfa780a",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-04T22:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3290f12e_3aa282b7",
+      "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f4008db_9bc72e7f",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b21cca80_4558957e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-04T22:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f4008db_9bc72e7f",
+      "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d62b61b5_21d364c3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-04T22:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eceb422a_18c6465b",
+      "range": {
+        "startLine": 659,
+        "startChar": 9,
+        "endLine": 662,
+        "endChar": 0
+      },
+      "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
