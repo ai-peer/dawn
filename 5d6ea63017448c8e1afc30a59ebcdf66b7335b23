@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "66f40720_906da956",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-04T16:56:35Z",
+      "side": 1,
+      "message": "Since this is the last dependency on build/, I\u0027d really prefer not to add it.\n\nCould we put it behind a different flag? Or put it into build_overrides somehow?",
+      "parentUuid": "4e962d72_f102f206",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44516861_9db3fa76",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "Mmmh it shouldn\u0027t be needed because we use DAWN_UNUSED_FUNC on it. Maybe the macro needs to be updated?",
       "parentUuid": "dd39da8e_4c8d91f6",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf440b17_a5410ea3",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-04T16:56:35Z",
+      "side": 1,
+      "message": "The macro seems to work for -Wunused-function, but not for -Wunneeded-internal-declaration. I tried tweaking it to no avail.\n\n__attribute__((unused)) on the function fixes it. I guess having both that and the macro will work, if you\u0027re amenable to that. #beltandsuspenders\n\nBTW, it\u0027s pretty easy to repro. Just add -Wall to extra_warnings in build/config/clang/BUILD.gn. (Although the warning only seems to fire for this one instance of the function, which is odd.)",
+      "parentUuid": "6f534127_cbe97108",
       "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
