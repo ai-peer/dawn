@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3290f12e_3aa282b7",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T22:19:33Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f4008db_9bc72e7f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T22:19:33Z",
+      "side": 1,
+      "message": "The code seems like it could be simpler if it did something like\n\n foreach(fence, serial in mFencesInFlight) {\n   ASSERT(something about serial);\n   vkWaitFences(the single fence);\n   vkDestroyFence(fence);\n }\n\nThis function could even be called WaitAndDestroyFences and would subsume the block at [1]",
+      "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eceb422a_18c6465b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T22:19:33Z",
+      "side": 1,
+      "message": "The fences don\u0027t need to be reset before being destroyed.",
+      "range": {
+        "startLine": 659,
+        "startChar": 9,
+        "endLine": 662,
+        "endChar": 0
+      },
+      "revId": "690fe1686a09a4eaa4e6fa620f3e3f28b5595224",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
