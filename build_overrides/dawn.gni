@@ -20,6 +20,12 @@
 # MUST be unset in other projects (will default to false).
 dawn_standalone = true
 
+# Build all tests and fuzzers. Disabling this also removes the
+# dependencies on gmock, gtest, build/ and testing/.
+dawn_build_tests = true
+
+dawn_root = "//"
+
 # Defaults for these are set again in dawn_overrides_with_defaults.gni so that
 # users of Dawn don't have to set dirs if they happen to use the same as Dawn.
 
