@@ -148,6 +148,9 @@ namespace dawn_native { namespace vulkan {
             ASSERT(false);
         }
         CheckPassedFences();
+
+        // Make sure all fences are complete by explicitly waiting on them all
+        WaitForAllFences();
         ASSERT(mFencesInFlight.empty());
 
         // Some operations might have been started since the last submit and waiting
@@ -630,6 +633,38 @@ namespace dawn_native { namespace vulkan {
             ASSERT(fenceSerial > mCompletedSerial);
             mCompletedSerial = fenceSerial;
         }
+    }
+
+    void Device::WaitForAllFences() {
+        Serial completedSerial = mCompletedSerial;
+        std::vector<VkFence> incompleteFences;
+        while (!mFencesInFlight.empty()) {
+            VkFence fence = mFencesInFlight.front().first;
+            Serial fenceSerial = mFencesInFlight.front().second;
+            ASSERT(fenceSerial > completedSerial);
+            completedSerial = fenceSerial;
+
+            incompleteFences.push_back(fence);
+            mFencesInFlight.pop();
+        }
+        if (incompleteFences.size() > 0) {
+            uint32_t fenceCount = static_cast<uint32_t>(incompleteFences.size());
+            const VkFence* fences = incompleteFences.data();
+
+            VkResult result = VK_TIMEOUT;
+            do {
+                result = fn.WaitForFences(mVkDevice, fenceCount, fences, true, UINT64_MAX);
+            } while (result == VK_TIMEOUT);
+
+            if (fn.ResetFences(mVkDevice, fenceCount, fences) != VK_SUCCESS) {
+                ASSERT(false);
+            }
+        }
+
+        // Add fences back to mUnusedFences so they are destroyed later
+        mUnusedFences.insert(mUnusedFences.begin(), incompleteFences.begin(),
+                             incompleteFences.end());
+        mCompletedSerial = completedSerial;
     }
 
     Device::CommandPoolAndBuffer Device::GetUnusedCommands() {
