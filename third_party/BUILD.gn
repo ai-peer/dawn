@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import("../scripts/dawn_overrides_with_defaults.gni")
-import("../scripts/dawn_features.gni")
+import("//build_overrides/dawn_features.gni")
 import("//build_overrides/build.gni")
 
 if (build_with_chromium) {
@@ -58,6 +58,8 @@ static_library("spirv_cross") {
       "-Wno-return-type",
       "-Wno-sign-compare",
     ]
+  } else {
+    cflags_cc = [ "/wd4715" ]
   }
 
   sources = [
@@ -125,60 +127,62 @@ source_set("vulkan_headers") {
 # existing targets, both because Chromium has a special harness for swarming
 # and because otherwise the "gn check" fails.
 
-if (!build_with_chromium) {
-  # When we aren't in Chromium we define out own targets based on the location
-  # of the googletest repo.
-  googletest_dir = dawn_googletest_dir
+if (dawn_build_tests) {
+  if (!build_with_chromium) {
+    # When we aren't in Chromium we define out own targets based on the location
+    # of the googletest repo.
+    googletest_dir = dawn_googletest_dir
 
-  config("gtest_config") {
-    include_dirs = [
-      "${googletest_dir}/googletest",
-      "${googletest_dir}/googletest/include",
-    ]
-  }
+    config("gtest_config") {
+      include_dirs = [
+        "${googletest_dir}/googletest",
+        "${googletest_dir}/googletest/include",
+      ]
+    }
 
-  static_library("gtest") {
-    testonly = true
-    sources = [
-      "${googletest_dir}/googletest/src/gtest-all.cc",
-    ]
-    public_configs = [ ":gtest_config" ]
-  }
+    static_library("gtest") {
+      testonly = true
+      sources = [
+        "${googletest_dir}/googletest/src/gtest-all.cc",
+      ]
+      public_configs = [ ":gtest_config" ]
+    }
 
-  config("gmock_config") {
-    include_dirs = [
-      "${googletest_dir}/googlemock",
-      "${googletest_dir}/googlemock/include",
-      "${googletest_dir}/googletest/include",
-    ]
-  }
+    config("gmock_config") {
+      include_dirs = [
+        "${googletest_dir}/googlemock",
+        "${googletest_dir}/googlemock/include",
+        "${googletest_dir}/googletest/include",
+      ]
+    }
 
-  static_library("gmock") {
-    testonly = true
-    sources = [
-      "${googletest_dir}/googlemock/src/gmock-all.cc",
-    ]
-    public_configs = [ ":gmock_config" ]
-  }
+    static_library("gmock") {
+      testonly = true
+      sources = [
+        "${googletest_dir}/googlemock/src/gmock-all.cc",
+      ]
+      public_configs = [ ":gmock_config" ]
+    }
 
-  group("gmock_and_gtest") {
-    testonly = true
-    public_deps = [
-      ":gmock",
-      ":gtest",
-    ]
-  }
-} else {
-  # When we are in Chromium we reuse its targets, and also add some deps that
-  # are needed to launch the test in swarming mode.
-  group("gmock_and_gtest") {
-    testonly = true
-    public_deps = [
-      "//base",
-      "//base/test:test_support",
-      "//testing/gmock",
-      "//testing/gtest",
-    ]
+    group("gmock_and_gtest") {
+      testonly = true
+      public_deps = [
+        ":gmock",
+        ":gtest",
+      ]
+    }
+  } else {
+    # When we are in Chromium we reuse its targets, and also add some deps that
+    # are needed to launch the test in swarming mode.
+    group("gmock_and_gtest") {
+      testonly = true
+      public_deps = [
+        "//base",
+        "//base/test:test_support",
+        "//testing/gmock",
+        "//testing/gtest",
+      ]
+    }
   }
 }
 
@@ -211,7 +215,10 @@ static_library("glfw") {
     # nonstandard extension, function/data pointer conversion in expression
     cflags_c = [ "/wd4152" ]
   } else {
-    cflags_c = [ "-Wno-sign-compare" ]
+    cflags_c = [
+      "-Wno-sign-compare",
+      "-Wno-missing-field-initializers",
+    ]
   }
 
   sources = [
@@ -240,8 +247,8 @@ static_library("glfw") {
       "${glfw_dir}/src/win32_joystick.h",
       "${glfw_dir}/src/win32_monitor.c",
       "${glfw_dir}/src/win32_platform.h",
-      "${glfw_dir}/src/win32_time.c",
       "${glfw_dir}/src/win32_thread.c",
+      "${glfw_dir}/src/win32_time.c",
       "${glfw_dir}/src/win32_window.c",
     ]
   }
