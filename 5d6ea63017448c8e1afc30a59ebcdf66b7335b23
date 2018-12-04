@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "61ddf095_2ed241fc",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:20:11Z",
+      "side": 1,
+      "message": "Oh, that\u0027s interesting. It would make sense to have the mock only in the test directory yeah.\n\nFor the generator, how about having it in generator/dawn_generator.gni? The generator path could be fixed with private variables, see `gn help import`",
+      "parentUuid": "7c8e6e78_180276d2",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea538350_a67c9846",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "4e962d72_f102f206",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:20:11Z",
+      "side": 1,
+      "message": "Do you think they would be amenable to have something like \u003cdirectory of their choice\u003e/build/config/BUILD.gn? This is possible using .gn secondary_sources. See `gn help dotfile`.",
+      "parentUuid": "44d974ec_af048f31",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44516861_9db3fa76",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "Yes, it\u0027s only one function:\n\ngen/third_party/externals/dawn/dawn_wire/WireCmd_autogen.cpp:666:12: error: function \u0027dawnOrigin3DGetExtraRequiredSize\u0027 is not needed and will not be emitted [-Werror,-Wunneeded-internal-declaration]\n    size_t dawnOrigin3DGetExtraRequiredSize(const dawnOrigin3D\u0026 record) {\n\nI moved the warning to libdawn_wire_sources.",
       "parentUuid": "44516861_9db3fa76",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f534127_cbe97108",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:20:11Z",
+      "side": 1,
+      "message": "Mmmh it shouldn\u0027t be needed because we use DAWN_UNUSED_FUNC on it. Maybe the macro needs to be updated?",
+      "parentUuid": "dd39da8e_4c8d91f6",
       "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
