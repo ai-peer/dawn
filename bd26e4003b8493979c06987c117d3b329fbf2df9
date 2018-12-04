@@ -1,0 +1,659 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fee7c48c_ea385ac8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: sort",
+      "range": {
+        "startLine": 135,
+        "startChar": 1,
+        "endLine": 144,
+        "endChar": 5
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc164ea4_acefaeeb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: sort.",
+      "range": {
+        "startLine": 256,
+        "startChar": 1,
+        "endLine": 263,
+        "endChar": 0
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0615e48b_ba3b5881",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: compare pointers to nullptr. But also we don\u0027t need to check for nullptr yet, this will come when we implement WebGPU error handling in Dawn.",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39d0fb5d_f9351771",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "We can assume this isn\u0027t null",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 47
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7064f6df_121cacb5",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Can we have a helper function \"MaybeError ValidateStageDescriptor(...)\" and use DAWN_TRY here?\n\nIt would contain validation that\u0027s applicable to both the vertex and fragment stages.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a4ac310_0ab32928",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "inputState isn\u0027t optional (yet?) so this is always true and the else branch can be removed.",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 34
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77e7bd51_74d0de50",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Can this be in a \"ValidateAttachmentsState\" helper method?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 9
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "828a6607_a5c403ad",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Just compare using if (numBlendStates !\u003d numColorAttachments)",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aac9f69_9669ffba",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: sort.",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 5
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff79cef5_a59dfd77",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: std::string",
+      "range": {
+        "startLine": 107,
+        "startChar": 18,
+        "endLine": 107,
+        "endChar": 22
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fda8ae6_070ddff3",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "This isn\u0027t needed once the constructor takes a Device*",
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f18a44e8_ea636246",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Device*",
+      "range": {
+        "startLine": 28,
+        "startChar": 23,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14ea5423_b85ab38b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: sort.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 5
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41b0659d_b1c56b5e",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Device* here and in other places you can forward declare it.",
+      "range": {
+        "startLine": 26,
+        "startChar": 23,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "786a2ccd_fc07636b",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "This becomes just device-\u003e once the constructor takes a Device*",
+      "range": {
+        "startLine": 71,
+        "startChar": 25,
+        "endLine": 71,
+        "endChar": 48
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "479ec11c_c2dcd828",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "ShaderModule*",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 19
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cba1a32d_366c2653",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "const char*",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 19
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6885035c_11407d69",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "ShaderModule*",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 19
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad3be5b4_7edfef87",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "const char*",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 19
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e8cce57_8693e634",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "device-\u003e",
+      "range": {
+        "startLine": 114,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 23
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "572dc425_ac06072f",
+        "filename": "src/dawn_native/null/NullBackend.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: sort",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 63,
+        "endChar": 5
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32c4553f_303bc290",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: sort.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2e72178_9285d760",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Device*",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ecee382_4d45390c",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "nit: sort.",
+      "range": {
+        "startLine": 240,
+        "startChar": 1,
+        "endLine": 243,
+        "endChar": 5
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e66cc8cc_d823102a",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Can this stay in the block above so that shaderStages isn\u0027t modified after the block?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 69
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3774334_5a0e4b64",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "the need for ToBackend disappears once the constructor takes a Device*",
+      "range": {
+        "startLine": 184,
+        "startChar": 23,
+        "endLine": 184,
+        "endChar": 48
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91198417_809be9b2",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "This one stays.",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 34
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24cac00d_2762d7b7",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Device*",
+      "range": {
+        "startLine": 28,
+        "startChar": 23,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83bf47b6_9bdfbdd5",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Erhm, let\u0027s not disable that in the final patch. Once we\u0027re closer to landing I can fixup the test to use the render pipeline descriptor.",
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

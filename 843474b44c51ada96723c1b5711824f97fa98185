@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02e0b565_bdfacc9a",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "https://github.com/gpuweb/gpuweb/pull/133 will move samples to the \"render pipeline descriptor\" directly.",
+      "revId": "843474b44c51ada96723c1b5711824f97fa98185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb9fc45c_522562c7",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "This doesn\u0027t exist in WebGPU but we don\u0027t support \"optional\":true for structure members yet so it is fine to keep it for now.",
+      "revId": "843474b44c51ada96723c1b5711824f97fa98185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bdb1a58_b51b95eb",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "This is called an \"attachment descriptor\" in WebGPU",
+      "range": {
+        "startLine": 710,
+        "startChar": 58,
+        "endLine": 710,
+        "endChar": 68
+      },
+      "revId": "843474b44c51ada96723c1b5711824f97fa98185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c100a46_665a33dd",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "I would have imagined sub-descriptors would be \"const*\" and not \"value\" but it might be better to do \"value\". We\u0027ll discuss it internally and I\u0027ll come back to you on this.",
+      "revId": "843474b44c51ada96723c1b5711824f97fa98185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f8620d3_5601376e",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "This is called an \"attachments state descriptor\" in WebGPU.",
+      "range": {
+        "startLine": 908,
+        "startChar": 58,
+        "endLine": 908,
+        "endChar": 84
+      },
+      "revId": "843474b44c51ada96723c1b5711824f97fa98185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98ab4952_518d5c66",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "Let\u0027s not use \"*\" because that\u0027s never been supported. Use \"const*\" instead. See the my ComboDescriptor patch.",
+      "range": {
+        "startLine": 911,
+        "startChar": 74,
+        "endLine": 911,
+        "endChar": 77
+      },
+      "revId": "843474b44c51ada96723c1b5711824f97fa98185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6f449bc_6525d4c1",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-04T15:09:21Z",
+      "side": 1,
+      "message": "The combo pipeline descriptor should be like in this CL: https://dawn-review.googlesource.com/c/dawn/+/2882\n\nThe idea is that it provide non-const access to sub-descriptors through \"cDescriptorName\". WDYT?",
+      "revId": "843474b44c51ada96723c1b5711824f97fa98185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
