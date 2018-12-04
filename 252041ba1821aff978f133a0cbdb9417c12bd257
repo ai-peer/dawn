@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e14275f_fcf1a890",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-04T21:24:41Z",
+      "side": 1,
+      "message": "I forget, do we have a NOTREACHED or UNREACHABLE?",
+      "revId": "252041ba1821aff978f133a0cbdb9417c12bd257",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bcf62f0_153f9411",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-04T21:24:41Z",
+      "side": 1,
+      "message": "could be inside the if, I think",
+      "revId": "252041ba1821aff978f133a0cbdb9417c12bd257",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
