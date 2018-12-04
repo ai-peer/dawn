@@ -15,6 +15,10 @@
 # Tell Dawn and dependencies to not do Chromium-specific things
 build_with_chromium = false
 
+# Build all tests and fuzzers. Disabling this also removes the
+# dependencies on gmock, gtest, build/ and testing/.
+build_tests = true
+
 # Use Chromium's binutils to have "hermetic" builds on bots
 linux_use_bundled_binutils_override = true
 
