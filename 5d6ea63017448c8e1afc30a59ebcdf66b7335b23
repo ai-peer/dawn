@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6cf64b1c_b36e1109",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-04T18:07:30Z",
+      "side": 1,
+      "message": "\u003e For the generator, how about having it in generator/dawn_generator.gni?\n\nDone.\n\n\u003e The generator path could be fixed with private variables, see `gn help import`\n\nI\u0027m not sure how a private variable would help. I\u0027ve added a dawn_root variable to build_overrides/dawn.gni and set it to // for dawn standalone. This is similar to what ANGLE does with angle_root: https://cs.chromium.org/chromium/src/third_party/angle/gni/angle.gni?q\u003dangle_root\u0026g\u003d0\u0026l\u003d12. LMK what you think.",
+      "parentUuid": "61ddf095_2ed241fc",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea538350_a67c9846",
         "filename": "BUILD.gn",
         "patchSetId": 1
@@ -214,6 +232,24 @@
     },
     {
       "key": {
+        "uuid": "67fc0b53_f078e91e",
+        "filename": "build_overrides/build.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-04T18:07:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9155efeb_c756f7c6",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bc7dd3c_86521af0",
         "filename": "build_overrides/dawn_features.gni",
         "patchSetId": 1
@@ -225,6 +261,24 @@
       "writtenOn": "2018-12-03T16:06:13Z",
       "side": 1,
       "message": "Why does this need to be moved? Is it only because Skia needs to enable a single backend at a time for now?",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c3a22a9_2cc50603",
+        "filename": "build_overrides/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-04T18:07:30Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "8bc7dd3c_86521af0",
       "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -248,6 +302,24 @@
     },
     {
       "key": {
+        "uuid": "e7b8ea95_a39a29c0",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-04T18:07:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef684ae_450abced",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "366568e3_55dfc178",
         "filename": "third_party/BUILD.gn",
         "patchSetId": 1
@@ -262,6 +334,24 @@
       "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ed2cb47_f4e40b9c",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-04T18:07:30Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "366568e3_55dfc178",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
