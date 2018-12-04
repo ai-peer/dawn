@@ -138,6 +138,7 @@ namespace dawn_native { namespace vulkan {
 
         VkFence GetUnusedFence();
         void CheckPassedFences();
+        void WaitForAllFences();
 
         // We track which operations are in flight on the GPU with an increasing serial.
         // This works only because we have a single queue. Each submit to a queue is associated
