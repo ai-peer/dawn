@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "95d3641a_81bc6f94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48bd344f_59f3e2d7",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90989495_3b697815",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -101,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "5725ef4d_c12385d8",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Modify this to latest shader stage form. Done.",
+      "parentUuid": "4e5a3320_89b6b55e",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "683232b9_b0875a9f",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -136,6 +172,30 @@
       "side": 1,
       "message": "Thx for the information. I\u0027ll change it.",
       "parentUuid": "683232b9_b0875a9f",
+      "range": {
+        "startLine": 884,
+        "startChar": 0,
+        "endLine": 888,
+        "endChar": 71
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e8b95a5_76ce98d1",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Using latest Attachment and its aggregation structures. Done.",
+      "parentUuid": "b9bcddc7_87678db2",
       "range": {
         "startLine": 884,
         "startChar": 0,
@@ -195,6 +255,30 @@
     },
     {
       "key": {
+        "uuid": "3ad5571b_463e53e0",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58cc525c_41cc487c",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 63
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91c959d6_cc3e3146",
         "filename": "examples/Animometer.cpp",
         "patchSetId": 1
@@ -224,6 +308,24 @@
       "side": 1,
       "message": "Yes, indeed \"SetDefaults\" is a function that will be removed finally. I use this function to remind me the remain subojects which will be removed in the following patches.",
       "parentUuid": "91c959d6_cc3e3146",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6654b5f5_aee527a0",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "No SetDefaults() anymore.Done.",
+      "parentUuid": "bf4c4e70_eed4e5e0",
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -283,6 +385,24 @@
     },
     {
       "key": {
+        "uuid": "76b06ee3_b3f63f89",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Now the ComboRenderPipelineDescriptor handles most of the set default value works.Done.",
+      "parentUuid": "d4a40e72_2da12642",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2c97347d_5b1b69d5",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -318,6 +438,24 @@
     },
     {
       "key": {
+        "uuid": "7070f90c_09a4d01f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "This logic is not available anymore. Done.",
+      "parentUuid": "4c1aaf7e_73ea1e5f",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82b6c0d5_4ee52597",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -347,6 +485,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "82b6c0d5_4ee52597",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed040f33_5a5fb38f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "This logic is not available anymore. Done.",
+      "parentUuid": "2d07b487_66ca832a",
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -406,6 +562,24 @@
     },
     {
       "key": {
+        "uuid": "7081fe65_f4210ae3",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ff45ddc_fe804842",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4d12055_64cdb851",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 1
@@ -459,6 +633,24 @@
     },
     {
       "key": {
+        "uuid": "41ccea2e_cb0b666c",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Removed.Done.",
+      "parentUuid": "f4c489ab_4f781ad7",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "70746299_3f82d462",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 1
@@ -488,6 +680,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "70746299_3f82d462",
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40fe6c7a_cd7618d0",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "This logic is not available anymore.Done.",
+      "parentUuid": "f107fe1b_404f763a",
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -633,6 +843,30 @@
       "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f7dd696_cf53f303",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-04T08:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d16aa85e_3ef2af86",
+      "range": {
+        "startLine": 126,
+        "startChar": 50,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "36668be839793ef1749303ff3bbbc70fd796579d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
