@@ -68,10 +68,10 @@ namespace dawn_native { namespace vulkan {
             shaderStages[1].pSpecializationInfo = nullptr;
         }
 
-        shaderStages[0].module = ToBackend(descriptor->vertexStage.module)->GetHandle();
-        shaderStages[0].pName = descriptor->vertexStage.entryPoint;
-        shaderStages[1].module = ToBackend(descriptor->fragmentStage.module)->GetHandle();
-        shaderStages[1].pName = descriptor->fragmentStage.entryPoint;
+        shaderStages[0].module = ToBackend(descriptor->vertexStage->module)->GetHandle();
+        shaderStages[0].pName = descriptor->vertexStage->entryPoint;
+        shaderStages[1].module = ToBackend(descriptor->fragmentStage->module)->GetHandle();
+        shaderStages[1].pName = descriptor->fragmentStage->entryPoint;
 
         VkPipelineInputAssemblyStateCreateInfo inputAssembly;
         inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;

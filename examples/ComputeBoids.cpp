@@ -124,12 +124,12 @@ void initRender() {
 
     depthStencilView = CreateDefaultDepthStencilView(device);
 
-    utils::ComboRenderPipelineDescriptor descriptor(&device);
-    descriptor.vertexStage.module = vsModule;
-    descriptor.fragmentStage.module = fsModule;
+    utils::ComboRenderPipelineDescriptor descriptor(device);
+    descriptor.cVertexStage.module = vsModule;
+    descriptor.cFragmentStage.module = fsModule;
     descriptor.inputState = inputState;
-    descriptor.renderAttachmentsState.hasDepthStencilAttachment = true;
-    descriptor.renderAttachmentsState.colorAttachments[0].format =
+    descriptor.cRenderAttachmentsState.hasDepthStencilAttachment = true;
+    descriptor.cColorAttachments[0].format =
         GetPreferredSwapChainTextureFormat();
 
     renderPipeline = device.CreateRenderPipeline(&descriptor);

@@ -38,59 +38,59 @@ namespace dawn_native {
         DAWN_TRY(ValidateIndexFormat(descriptor->indexFormat));
         DAWN_TRY(ValidatePrimitiveTopology(descriptor->primitiveTopology));
 
-        if (!descriptor->vertexStage.module ||
-            !descriptor->vertexStage.entryPoint ||
-            !descriptor->fragmentStage.module ||
-            !descriptor->fragmentStage.entryPoint) {
+        if (!descriptor->vertexStage->module ||
+            !descriptor->vertexStage->entryPoint ||
+            !descriptor->fragmentStage->module ||
+            !descriptor->fragmentStage->entryPoint) {
             return DAWN_VALIDATION_ERROR("Shader modules in pipeline are not complete");
         }
 
-        if (descriptor->vertexStage.entryPoint != std::string("main") ||
-            descriptor->fragmentStage.entryPoint != std::string("main")) {
+        if (descriptor->vertexStage->entryPoint != std::string("main") ||
+            descriptor->fragmentStage->entryPoint != std::string("main")) {
             return DAWN_VALIDATION_ERROR("Currently the entry point has to be main()");
         }
 
-        if (descriptor->vertexStage.module->GetExecutionModel() != dawn::ShaderStage::Vertex ||
-            descriptor->fragmentStage.module->GetExecutionModel() != dawn::ShaderStage::Fragment) {
+        if (descriptor->vertexStage->module->GetExecutionModel() != dawn::ShaderStage::Vertex ||
+            descriptor->fragmentStage->module->GetExecutionModel() != dawn::ShaderStage::Fragment) {
             return DAWN_VALIDATION_ERROR("Setting module with wrong stages");
         }
 
-        if (!descriptor->vertexStage.module->IsCompatibleWithPipelineLayout(descriptor->layout) ||
-            !descriptor->fragmentStage.module->IsCompatibleWithPipelineLayout(descriptor->layout)) {
+        if (!descriptor->vertexStage->module->IsCompatibleWithPipelineLayout(descriptor->layout) ||
+            !descriptor->fragmentStage->module->IsCompatibleWithPipelineLayout(descriptor->layout)) {
             return DAWN_VALIDATION_ERROR("Stage not compatible with layout");
         }
 
         if (descriptor->inputState) {
-            if ((descriptor->vertexStage.module->GetUsedVertexAttributes() &
+            if ((descriptor->vertexStage->module->GetUsedVertexAttributes() &
                 ~descriptor->inputState->GetAttributesSetMask()).any()) {
                 return DAWN_VALIDATION_ERROR("Pipeline vertex stage uses inputs not in the input state");
             }
         } else {
-            if (descriptor->vertexStage.module->GetUsedVertexAttributes().any()) {
+            if (descriptor->vertexStage->module->GetUsedVertexAttributes().any()) {
                 return DAWN_VALIDATION_ERROR("Pipeline vertex stage uses inputs not in the input state");
             }
         }
 
-        if (descriptor->renderAttachmentsState.numColorAttachments > kMaxColorAttachments) {
+        if (descriptor->renderAttachmentsState->numColorAttachments > kMaxColorAttachments) {
             return DAWN_VALIDATION_ERROR("Color attachments number exceeds maximum");
         }
 
-        if (descriptor->renderAttachmentsState.numColorAttachments == 0 &&
-            !descriptor->renderAttachmentsState.hasDepthStencilAttachment) {
+        if (descriptor->renderAttachmentsState->numColorAttachments == 0 &&
+            !descriptor->renderAttachmentsState->hasDepthStencilAttachment) {
             return DAWN_VALIDATION_ERROR("Should have at least one attachment");
         }
 
-        if (descriptor->renderAttachmentsState.hasDepthStencilAttachment) {
+        if (descriptor->renderAttachmentsState->hasDepthStencilAttachment) {
             DAWN_TRY(ValidateTextureFormat(
-                descriptor->renderAttachmentsState.depthStencilAttachment.format));
+                descriptor->renderAttachmentsState->depthStencilAttachment->format));
         }
 
-        for (uint32_t i = 0; i < descriptor->renderAttachmentsState.numColorAttachments;
+        for (uint32_t i = 0; i < descriptor->renderAttachmentsState->numColorAttachments;
              ++i) {
             DAWN_TRY(ValidateTextureFormat(
-                descriptor->renderAttachmentsState.colorAttachments[i].format));
+                descriptor->renderAttachmentsState->colorAttachments[i].format));
             // TODO(shaobo.yan@intel.com): Remove this when color attachment supported MSAA
-            if (descriptor->renderAttachmentsState.colorAttachments[i].samples != 1) {
+            if (descriptor->renderAttachmentsState->colorAttachments[i].samples != 1) {
                 return DAWN_VALIDATION_ERROR("No MSAA supported for current color attachment");
             }                  
         }
@@ -99,12 +99,12 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Blend states number exceeds maximum");
         }
 
-        if (descriptor->renderAttachmentsState.numColorAttachments >
+        if (descriptor->renderAttachmentsState->numColorAttachments >
             descriptor->numBlendStates) {
             return DAWN_VALIDATION_ERROR("Each color attachment should have blend state");
         }
 
-        if (descriptor->renderAttachmentsState.numColorAttachments <
+        if (descriptor->renderAttachmentsState->numColorAttachments <
             descriptor->numBlendStates) {
             return DAWN_VALIDATION_ERROR("Set blend state on invalid color attachments");
         }
@@ -122,18 +122,18 @@ namespace dawn_native {
           mIndexFormat(descriptor->indexFormat),
           mInputState(descriptor->inputState),
           mPrimitiveTopology(descriptor->primitiveTopology),
-          mHasDepthStencilAttachment(descriptor->renderAttachmentsState.hasDepthStencilAttachment),
-          mDepthStencilFormat(descriptor->renderAttachmentsState.depthStencilAttachment.format) {
+          mHasDepthStencilAttachment(descriptor->renderAttachmentsState->hasDepthStencilAttachment),
+          mDepthStencilFormat(descriptor->renderAttachmentsState->depthStencilAttachment->format) {
 
-        ExtractModuleData(dawn::ShaderStage::Vertex, descriptor->vertexStage.module);
-        ExtractModuleData(dawn::ShaderStage::Fragment, descriptor->fragmentStage.module);
+        ExtractModuleData(dawn::ShaderStage::Vertex, descriptor->vertexStage->module);
+        ExtractModuleData(dawn::ShaderStage::Fragment, descriptor->fragmentStage->module);
 
-        for (uint32_t i = 0; i < descriptor->renderAttachmentsState.numColorAttachments; ++i) {
+        for (uint32_t i = 0; i < descriptor->renderAttachmentsState->numColorAttachments; ++i) {
             mColorAttachmentsSet.set(i);
             mBlendStates[i] =
                 std::move(descriptor->blendStates[i]);
             mColorAttachmentFormats[i] =
-                descriptor->renderAttachmentsState.colorAttachments[i].format;
+                descriptor->renderAttachmentsState->colorAttachments[i].format;
         }
 
         // TODO(cwallez@chromium.org): Check against the shader module that the correct color

@@ -14,42 +14,54 @@
 
 #include "utils/ComboRenderPipelineDescriptor.h"
 
+#include "utils/DawnHelpers.h"
+
 namespace utils {
 
-  ComboRenderPipelineDescriptor::ComboRenderPipelineDescriptor(const dawn::Device* device) {
-      indexFormat = dawn::IndexFormat::Uint32;
-      vertexStage.entryPoint = "main";
-      fragmentStage.entryPoint = "main";
-      primitiveTopology = dawn::PrimitiveTopology::TriangleList;
-      renderAttachmentsState.hasDepthStencilAttachment = false;
-      renderAttachmentsState.depthStencilAttachment.format = 
-        dawn::TextureFormat::D32FloatS8Uint;
-      renderAttachmentsState.depthStencilAttachment.samples = 1;
-      
-      auto inputStateBuilder = device->CreateInputStateBuilder();
-      inputState = inputStateBuilder.GetResult();
-      inputStateBuilder.Release();
+    ComboRenderPipelineDescriptor::ComboRenderPipelineDescriptor(const dawn::Device& device) {
+        dawn::RenderPipelineDescriptor* descriptor = this;
 
-      auto depthStencilStateBuilder = device->CreateDepthStencilStateBuilder();
-      depthStencilState = depthStencilStateBuilder.GetResult();
-      depthStencilStateBuilder.Release();
+        indexFormat = dawn::IndexFormat::Uint32;
+        primitiveTopology = dawn::PrimitiveTopology::TriangleList;
 
-      dawn::PipelineLayoutDescriptor descriptor;
-      descriptor.numBindGroupLayouts = 0;
-      descriptor.bindGroupLayouts = nullptr;
-      layout = device->CreatePipelineLayout(&descriptor);
+        // Link in and set defaults for the vertex stage descriptor
+        {
+            descriptor->vertexStage = &cVertexStage;
+            cVertexStage.entryPoint = "main";
+        }
 
-      renderAttachmentsState.numColorAttachments = 1;
-      renderAttachmentsState.colorAttachments = &comboColorAttachments[0];
-      numBlendStates = 1;
-      blendStates = &comboBlendStates[0];
-      for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-        renderAttachmentsState.colorAttachments[i].format = dawn::TextureFormat::R8G8B8A8Unorm;
-        renderAttachmentsState.colorAttachments[i].samples = 1;
-        auto blendStateBuilder = device->CreateBlendStateBuilder();
-        blendStates[i] = blendStateBuilder.GetResult();
-        blendStateBuilder.Release();
-      }
-  }
+        // Link in and set defaults for the fragment shader descriptor
+        {
+            descriptor->fragmentStage = &cFragmentStage;
+            cFragmentStage.entryPoint = "main";
+        }
+
+        // Link in and set defaults for the attachment states
+        {
+            descriptor->renderAttachmentsState = &cRenderAttachmentsState;
+            cRenderAttachmentsState.numColorAttachments = 1;
+            cRenderAttachmentsState.colorAttachments = cColorAttachments;
+            cRenderAttachmentsState.depthStencilAttachment = &cDepthStencilAttachment;
+            cRenderAttachmentsState.hasDepthStencilAttachment = false;
+
+            cDepthStencilAttachment.format = dawn::TextureFormat::D32FloatS8Uint;
+            cDepthStencilAttachment.samples = 1;
+
+            for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+                cColorAttachments[i].format = dawn::TextureFormat::R8G8B8A8Unorm;
+                cColorAttachments[i].samples = 1;
+            }
+        }
+
+        descriptor->inputState = device.CreateInputStateBuilder().GetResult();
+        descriptor->depthStencilState = device.CreateDepthStencilStateBuilder().GetResult();
+        descriptor->layout = utils::MakeBasicPipelineLayout(device, nullptr);
+
+        descriptor->numBlendStates = 1;
+        descriptor->blendStates = cBlendStates;
+        for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+            cBlendStates[i] = device.CreateBlendStateBuilder().GetResult();
+        }
+    }
 
 } // namespace utils

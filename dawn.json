@@ -705,9 +705,9 @@
         "extensible": true,
         "members": [
             {"name": "num color attachments", "type": "uint32_t"},
-            {"name": "color attachments", "type": "attachment", "annotation": "*", "length": "num color attachments"},
+            {"name": "color attachments", "type": "attachment", "annotation": "const*", "length": "num color attachments"},
             {"name": "has depth stencil attachment", "type": "bool"},
-            {"name": "depth stencil attachment", "type": "attachment"}
+            {"name": "depth stencil attachment", "type": "attachment", "annotation": "const*"}
         ]
     },
     "pipeline layout": {
@@ -900,15 +900,15 @@
         "extensible": true,
         "members": [
             {"name": "layout", "type": "pipeline layout"},
-            {"name": "vertex stage", "type": "pipeline stage descriptor"},
-            {"name": "fragment stage", "type": "pipeline stage descriptor"},
+            {"name": "vertex stage", "type": "pipeline stage descriptor", "annotation": "const*"},
+            {"name": "fragment stage", "type": "pipeline stage descriptor", "annotation": "const*"},
             {"name": "input state", "type": "input state"},
             {"name": "index format", "type": "index format"},
             {"name": "primitive topology", "type": "primitive topology"},
-            {"name": "render attachments state", "type": "pipeline attachments state"},
+            {"name": "render attachments state", "type": "pipeline attachments state", "annotation": "const*"},
             {"name": "depth stencil state", "type": "depth stencil state"},
             {"name": "num blend states", "type": "uint32_t"},
-            {"name": "blend states", "type": "blend state", "annotation": "*", "length": "num blend states"}
+            {"name": "blend states", "type": "blend state", "annotation": "const*", "length": "num blend states"}
         ]
     },
     "sampler": {

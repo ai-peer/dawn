@@ -23,10 +23,16 @@ namespace utils {
 
 	class ComboRenderPipelineDescriptor : public dawn::RenderPipelineDescriptor {
       public:
-        ComboRenderPipelineDescriptor(const dawn::Device* device);
-      private:
-        dawn::Attachment comboColorAttachments[kMaxColorAttachments];
-        dawn::BlendState comboBlendStates[kMaxColorAttachments];
+        ComboRenderPipelineDescriptor(const dawn::Device& device);
+
+        dawn::PipelineStageDescriptor cVertexStage;
+        dawn::PipelineStageDescriptor cFragmentStage;
+
+        dawn::PipelineAttachmentsState cRenderAttachmentsState;
+        dawn::Attachment cColorAttachments[kMaxColorAttachments];
+        dawn::Attachment cDepthStencilAttachment;
+
+        dawn::BlendState cBlendStates[kMaxColorAttachments];
 	};
 
 } // namespace utils
