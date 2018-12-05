@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40bfa7f1_48766d03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "Can this be on its own line?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e28f570e_78f8eeee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "BUG\u003ddawn:?",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17888455_94027c25",
+        "filename": "BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "Can you add comments saying this is temporary while we change the Chromium \"all\" target to point somewhere else?",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b063605d_55cb826f",
+        "filename": "BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "We need a group dawn_tests as well so that the standalone build keeps finding the tests when compiling all targets.",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d000a5c2_a60d0f67",
+        "filename": "dawn_generator.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "Can this be in the generator/ subdirectory?",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f23e4387_91c81bf5",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "This should have a single relative include which is \"../../scripts/dawn_overrides_with_defaults.gni\". We shouldn\u0027t include build_overrides/dawn.gni directly.\n\nThen the code generator can be found with \"${dawn_root}/generator/dawn_generator.gni\"",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e79a0eb_73c4d4e6",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "This is redundant now that tests are in their own file.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 79
+      },
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3002d9b_4d6227b6",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T17:23:22Z",
+      "side": 1,
+      "message": "Mmmh I wonder where this config will end up being.",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 42
+      },
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
