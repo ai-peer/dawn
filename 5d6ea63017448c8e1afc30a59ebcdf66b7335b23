@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "adced726_406ee693",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T16:20:46Z",
+      "side": 1,
+      "message": "Ok but then let\u0027s add dawn_root\u0027s definition using get_path_info in dawn_overrides_with_defaults.gni or something like that. We shouldn\u0027t require the embedders to set dawn_root since we can discover it ourselves.",
+      "parentUuid": "554a9948_a5c52e83",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea538350_a67c9846",
         "filename": "BUILD.gn",
         "patchSetId": 1
