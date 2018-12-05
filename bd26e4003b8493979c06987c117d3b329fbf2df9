@@ -640,6 +640,23 @@
     },
     {
       "key": {
+        "uuid": "5432fea8_c4a2f49e",
+        "filename": "src/tests/end2end/PushConstantTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-05T00:38:25Z",
+      "side": 1,
+      "message": "This looks weird to me, I\u0027d prefer to have the { on the line above and the }; on the line below. Would the formatter be okay with that?\n\n  dawn::BlendState blendStates[] \u003d {\n    ...\n  };",
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "83bf47b6_9bdfbdd5",
         "filename": "src/tests/unittests/WireTests.cpp",
         "patchSetId": 5
@@ -651,6 +668,52 @@
       "writtenOn": "2018-12-04T15:09:21Z",
       "side": 1,
       "message": "Erhm, let\u0027s not disable that in the final patch. Once we\u0027re closer to landing I can fixup the test to use the render pipeline descriptor.",
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b245ef7f_577c6d06",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-05T00:38:25Z",
+      "side": 1,
+      "message": "trailing spaces (in pink); autoformatter may fix these",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "709d8ea5_a34d5aae",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-05T00:38:25Z",
+      "side": 1,
+      "message": "tab here and above; autoformatter may fix these",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 1
+      },
       "revId": "bd26e4003b8493979c06987c117d3b329fbf2df9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
