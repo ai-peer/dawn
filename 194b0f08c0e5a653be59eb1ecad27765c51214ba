@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "31e0f246_9183c1a8",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:33:30Z",
+      "side": 1,
+      "message": "Looking at https://cs.chromium.org/chromium/src/build/config/gcc/BUILD.gn?type\u003dcs\u0026q\u003d%5C%22rpath_for_built_shared_libraries\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d65 it seems maybe we only need to do ldflags +\u003d [\"-Wl,-rpath-link\u003d${rpath_link}\"]\n\nIt should be ok to not depend on Chromium\u0027s more complicated rpath logic because we don\u0027t intend to use Dawn as a separate DLL when shipped in Chrome.",
+      "parentUuid": "1284536f_52740ac9",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "194b0f08c0e5a653be59eb1ecad27765c51214ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6e6011fe_5ffcc457",
         "filename": "BUILD.gn",
         "patchSetId": 10
