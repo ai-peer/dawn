@@ -20,6 +20,10 @@
 # MUST be unset in other projects (will default to false).
 dawn_standalone = true
 
+# Dawn's root directory. Client projects may need to specify a full path
+# relative to their own root directory, such as //third_party/dawn.
+dawn_root = "//"
+
 # Defaults for these are set again in dawn_overrides_with_defaults.gni so that
 # users of Dawn don't have to set dirs if they happen to use the same as Dawn.
 
