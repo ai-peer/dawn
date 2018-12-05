@@ -238,12 +238,12 @@ namespace dawn_native { namespace opengl {
             for (uint32_t binding : IterateBitSet(layout.mask)) {
                 switch (layout.types[binding]) {
                     case dawn::BindingType::UniformBuffer: {
-                        BufferView* view = ToBackend(group->GetBindingAsBufferView(binding));
-                        GLuint buffer = ToBackend(view->GetBuffer())->GetHandle();
+                        BufferBinding bindingData = group->GetBindingAsBufferBinding(binding);
+                        GLuint buffer = ToBackend(bindingData.buffer)->GetHandle();
                         GLuint uboIndex = indices[binding];
 
-                        glBindBufferRange(GL_UNIFORM_BUFFER, uboIndex, buffer, view->GetOffset(),
-                                          view->GetSize());
+                        glBindBufferRange(GL_UNIFORM_BUFFER, uboIndex, buffer, bindingData.offset,
+                                          bindingData.size);
                     } break;
 
                     case dawn::BindingType::Sampler: {
@@ -269,12 +269,12 @@ namespace dawn_native { namespace opengl {
                     } break;
 
                     case dawn::BindingType::StorageBuffer: {
-                        BufferView* view = ToBackend(group->GetBindingAsBufferView(binding));
-                        GLuint buffer = ToBackend(view->GetBuffer())->GetHandle();
+                        BufferBinding bindingData = group->GetBindingAsBufferBinding(binding);
+                        GLuint buffer = ToBackend(bindingData.buffer)->GetHandle();
                         GLuint ssboIndex = indices[binding];
 
                         glBindBufferRange(GL_SHADER_STORAGE_BUFFER, ssboIndex, buffer,
-                                          view->GetOffset(), view->GetSize());
+                                          bindingData.offset, bindingData.size);
                     } break;
                 }
             }
