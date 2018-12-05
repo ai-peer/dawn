@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c0f82db_32b18491",
+        "filename": "src/common/Compiler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-05T20:17:33Z",
+      "side": 1,
+      "message": "don\u0027t quite understand this sentence. \"warnings on a\"?",
+      "range": {
+        "startLine": 27,
+        "startChar": 55,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "316fc430cebe142ff0f7e054e5de6855b14f183f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
