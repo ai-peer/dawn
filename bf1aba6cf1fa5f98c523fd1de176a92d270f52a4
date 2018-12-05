@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "48de647a_77909ef1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T17:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40bfa7f1_48766d03",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e28f570e_78f8eeee",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "a3437e05_ec57b7b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T17:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e28f570e_78f8eeee",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17888455_94027c25",
         "filename": "BUILD.gn",
         "patchSetId": 3
@@ -56,6 +98,24 @@
       "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd0dc40e_2ac4b9bd",
+        "filename": "BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T17:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17888455_94027c25",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "b79606ff_98a3924a",
+        "filename": "BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T17:42:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bce1fb26_49f99940",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d000a5c2_a60d0f67",
         "filename": "dawn_generator.gni",
         "patchSetId": 3
@@ -111,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "546b3fa7_5de5d762",
+        "filename": "dawn_generator.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T17:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d000a5c2_a60d0f67",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f23e4387_91c81bf5",
         "filename": "src/tests/BUILD.gn",
         "patchSetId": 3
@@ -125,6 +221,24 @@
       "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaa855ba_9d30d717",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T17:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f23e4387_91c81bf5",
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -148,6 +262,30 @@
       "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "722a50e3_1aa07be3",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T17:42:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e79a0eb_73c4d4e6",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 79
+      },
+      "revId": "bf1aba6cf1fa5f98c523fd1de176a92d270f52a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
