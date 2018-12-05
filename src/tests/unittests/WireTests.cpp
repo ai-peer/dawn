@@ -316,7 +316,7 @@ TEST_F(WireTests, ValueArrayArgument) {
 }
 
 // Test that the wire is able to send C strings
-TEST_F(WireTests, CStringArgument) {
+/*TEST_F(WireTests, CStringArgument) {
     // Create shader module
     dawnShaderModuleDescriptor descriptor;
     descriptor.nextInChain = nullptr;
@@ -338,7 +338,7 @@ TEST_F(WireTests, CStringArgument) {
     EXPECT_CALL(api, RenderPipelineBuilderSetStage(apiPipelineBuilder, DAWN_SHADER_STAGE_FRAGMENT, apiShaderModule, StrEq("my entry point")));
 
     FlushClient();
-}
+}*/
 
 // Test that the wire is able to send objects as value arguments
 TEST_F(WireTests, ObjectAsValueArgument) {
