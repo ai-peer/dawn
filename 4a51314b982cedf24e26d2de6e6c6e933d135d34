@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4c0d2d6_cbb2c67d",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-05T22:41:49Z",
+      "side": 1,
+      "message": "2",
+      "range": {
+        "startLine": 244,
+        "startChar": 13,
+        "endLine": 244,
+        "endChar": 14
+      },
+      "revId": "4a51314b982cedf24e26d2de6e6c6e933d135d34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82c2b89c_292500a1",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-05T22:41:49Z",
+      "side": 1,
+      "message": "unnecessary blank link (and trailing whitespace)",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 4
+      },
+      "revId": "4a51314b982cedf24e26d2de6e6c6e933d135d34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
