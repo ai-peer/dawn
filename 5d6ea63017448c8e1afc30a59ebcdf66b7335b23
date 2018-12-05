@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "9f2116e9_e06eb6b5",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:30:21Z",
+      "side": 1,
+      "message": "Something like the following should work:\n\n dawn_json \u003d get_path_info(\"abspath\", \"../dawn.json\")\n\nIt would avoid the need to add a dawn_root in every project using Dawn.\n\nTechnically dawn_root could be defined in a helper gni the same way, if we start to have too many things using get_path_info.\n\nIn general is is fine to use \"../..:dawn_something\" as long as the walk up the directory tree stays in this repo. We already do this in src/fuzzers/BUILD.gn",
+      "parentUuid": "6cf64b1c_b36e1109",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea538350_a67c9846",
         "filename": "BUILD.gn",
         "patchSetId": 1

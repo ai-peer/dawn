@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1284536f_52740ac9",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:30:21Z",
+      "side": 1,
+      "message": "Semantically this looks very wrong, why does building tests influence the rpath of shared library, it shouldn\u0027t matter. I know it is because it is a signal we\u0027re building in Skia but the code itself doesn\u0027t make sense.\n\nDo we need other changes like this one in spirv-tools and friends?",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "194b0f08c0e5a653be59eb1ecad27765c51214ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e6011fe_5ffcc457",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:30:21Z",
+      "side": 1,
+      "message": "You\u0027ll also need to redeclare dawn_end2end_tests and dawn_unittests here to avoid breaking Chromium\u0027s \"all\" compile. This could be a three-way patch to fix it. (good thing we have an autoroller!)\n\nhttps://cs.chromium.org/chromium/src/BUILD.gn?type\u003dcs\u0026q\u003ddawn_end2end_tests\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d146",
+      "revId": "194b0f08c0e5a653be59eb1ecad27765c51214ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ab10634_95a05521",
+        "filename": "build_overrides/dawn_features.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:30:21Z",
+      "side": 1,
+      "message": "I\u0027d really like to avoid adding things to build_overrides, can you do the changes using `gn args` locally until Skia-Dawn is able to use multiple backends?",
+      "revId": "194b0f08c0e5a653be59eb1ecad27765c51214ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a760d038_96941ae3",
+        "filename": "src/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:30:21Z",
+      "side": 1,
+      "message": "nit: can you add DAWN_DECLARE_UNUSED here as well and explain that sometimes we might need both.",
+      "revId": "194b0f08c0e5a653be59eb1ecad27765c51214ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b71aa98a_ee314e14",
+        "filename": "src/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:30:21Z",
+      "side": 1,
+      "message": "DAWN_UNUSED_ATTRIBUTE?",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 31
+      },
+      "revId": "194b0f08c0e5a653be59eb1ecad27765c51214ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7979ab7e_37694b06",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-05T13:30:21Z",
+      "side": 1,
+      "message": "nit: header isn\u0027t necessary anymore.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 79
+      },
+      "revId": "194b0f08c0e5a653be59eb1ecad27765c51214ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
