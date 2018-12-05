@@ -46,6 +46,30 @@
       "revId": "e4b92ff28ab6e740ed99576c6314e3b905cf0964",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6966f089_ebbb28dc",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-05T01:06:55Z",
+      "side": 1,
+      "message": "Never mind, I got completely confused. I thought this was the test constructor, but it\u0027s the test helper that you use below. This is good.",
+      "parentUuid": "781b65a4_8312673d",
+      "range": {
+        "startLine": 514,
+        "startChar": 98,
+        "endLine": 521,
+        "endChar": 56
+      },
+      "revId": "e4b92ff28ab6e740ed99576c6314e3b905cf0964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
