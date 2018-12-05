@@ -35,6 +35,7 @@
 #include "dawn_native/Texture.h"
 
 #include <unordered_set>
+#include <iostream>
 
 namespace dawn_native {
 
