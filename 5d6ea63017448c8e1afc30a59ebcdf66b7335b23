@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "554a9948_a5c52e83",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-05T16:12:41Z",
+      "side": 1,
+      "message": "I noticed that. I was going to replace them with dawn_root. :)\n\nUsing relative paths means you have to adjust them all if you move files around. IMHO, dawn_root is cleaner and makes intent clear.",
+      "parentUuid": "9f2116e9_e06eb6b5",
+      "revId": "5d6ea63017448c8e1afc30a59ebcdf66b7335b23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea538350_a67c9846",
         "filename": "BUILD.gn",
         "patchSetId": 1
