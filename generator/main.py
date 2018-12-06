@@ -449,7 +449,7 @@ def get_renders_for_targets(api_params, targets):
         renders.append(FileRender('api.c', 'dawn/dawn.c', [base_params, api_params, c_params]))
         renders.append(FileRender('apicpp.cpp', 'dawn/dawncpp.cpp', [base_params, api_params, cpp_params]))
 
-    if 'mock_dawn' in targets:
+    if 'mock_dawn_' in targets:
         renders.append(FileRender('mock_api.h', 'mock/mock_dawn.h', [base_params, api_params, c_params]))
         renders.append(FileRender('mock_api.cpp', 'mock/mock_dawn.cpp', [base_params, api_params, c_params]))
 
@@ -499,7 +499,7 @@ def output_depfile(depfile, output, dependencies):
         f.write(output + ": " + " ".join(dependencies))
 
 def main():
-    allowed_targets = ['dawn_headers', 'libdawn', 'mock_dawn', 'dawn_wire', "dawn_native_utils"]
+    allowed_targets = ['dawn_headers', 'libdawn', 'mock_dawn_', 'dawn_wire', "dawn_native_utils"]
 
     parser = argparse.ArgumentParser(
         description = 'Generates code for various target for Dawn.',
