@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a412c52_9c466fb4",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T14:39:35Z",
+      "side": 1,
+      "message": "Is this the only change from the original patch?",
+      "revId": "ac6fd19e68d7cf394ab6ffa69ab403e17ca77193",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
