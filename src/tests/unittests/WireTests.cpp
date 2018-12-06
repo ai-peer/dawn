@@ -314,7 +314,7 @@ TEST_F(WireTests, ValueArrayArgument) {
 
     FlushClient();
 }
-
+/*
 // Test that the wire is able to send C strings
 TEST_F(WireTests, CStringArgument) {
     // Create shader module
@@ -339,7 +339,7 @@ TEST_F(WireTests, CStringArgument) {
 
     FlushClient();
 }
-
+*/
 // Test that the wire is able to send objects as value arguments
 TEST_F(WireTests, ObjectAsValueArgument) {
     // Create a RenderPassDescriptor

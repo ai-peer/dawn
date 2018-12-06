@@ -23,6 +23,7 @@
 #include "common/Assert.h"
 #include "common/Math.h"
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 #include "utils/SystemUtils.h"
 
@@ -287,16 +288,19 @@ namespace {
             .GetResult();
 
         auto pipelineLayout = utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
-        auto pipeline = device.CreateRenderPipelineBuilder()
-            .SetColorAttachmentFormat(0, GetPreferredSwapChainTextureFormat())
-            .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-            .SetLayout(pipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, oVSModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, oFSModule, "main")
-            .SetIndexFormat(dawn::IndexFormat::Uint16)
-            .SetInputState(inputState)
-            .SetDepthStencilState(depthStencilState)
-            .GetResult();
+
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.layout = pipelineLayout;
+        descriptor.cVertexStage.module = oVSModule;
+        descriptor.cFragmentStage.module = oFSModule;
+        descriptor.inputState = inputState;
+        descriptor.indexFormat = dawn::IndexFormat::Uint16;
+        descriptor.cRenderAttachmentsState.hasDepthStencilAttachment = true;
+        descriptor.cColorAttachments[0].format =
+            GetPreferredSwapChainTextureFormat();
+        descriptor.depthStencilState = depthStencilState;
+
+        auto pipeline = device.CreateRenderPipeline(&descriptor);
 
         dawn::BindGroup bindGroup;
 

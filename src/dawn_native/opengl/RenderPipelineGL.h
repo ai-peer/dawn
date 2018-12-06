@@ -29,7 +29,7 @@ namespace dawn_native { namespace opengl {
 
     class RenderPipeline : public RenderPipelineBase, public PipelineGL {
       public:
-        RenderPipeline(RenderPipelineBuilder* builder);
+        RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor);
 
         GLenum GetGLPrimitiveTopology() const;
 

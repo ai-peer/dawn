@@ -59,7 +59,6 @@ namespace dawn_native {
         virtual InputStateBase* CreateInputState(InputStateBuilder* builder) = 0;
         virtual RenderPassDescriptorBase* CreateRenderPassDescriptor(
             RenderPassDescriptorBuilder* builder) = 0;
-        virtual RenderPipelineBase* CreateRenderPipeline(RenderPipelineBuilder* builder) = 0;
         virtual SwapChainBase* CreateSwapChain(SwapChainBuilder* builder) = 0;
 
         virtual Serial GetCompletedCommandSerial() const = 0;
@@ -97,7 +96,7 @@ namespace dawn_native {
         PipelineLayoutBase* CreatePipelineLayout(const PipelineLayoutDescriptor* descriptor);
         QueueBase* CreateQueue();
         RenderPassDescriptorBuilder* CreateRenderPassDescriptorBuilder();
-        RenderPipelineBuilder* CreateRenderPipelineBuilder();
+        RenderPipelineBase* CreateRenderPipeline(const RenderPipelineDescriptor* descriptor);
         SamplerBase* CreateSampler(const SamplerDescriptor* descriptor);
         ShaderModuleBase* CreateShaderModule(const ShaderModuleDescriptor* descriptor);
         SwapChainBuilder* CreateSwapChainBuilder();
@@ -128,6 +127,8 @@ namespace dawn_native {
         virtual ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) = 0;
         virtual ResultOrError<QueueBase*> CreateQueueImpl() = 0;
+        virtual ResultOrError<RenderPipelineBase*> CreateRenderPipelineImpl(
+            const RenderPipelineDescriptor* descriptor) = 0;
         virtual ResultOrError<SamplerBase*> CreateSamplerImpl(
             const SamplerDescriptor* descriptor) = 0;
         virtual ResultOrError<ShaderModuleBase*> CreateShaderModuleImpl(
@@ -149,6 +150,8 @@ namespace dawn_native {
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
                                                 const PipelineLayoutDescriptor* descriptor);
         MaybeError CreateQueueInternal(QueueBase** result);
+        MaybeError CreateRenderPipelineInternal(RenderPipelineBase** result,
+                                                const RenderPipelineDescriptor* descriptor);
         MaybeError CreateSamplerInternal(SamplerBase** result, const SamplerDescriptor* descriptor);
         MaybeError CreateShaderModuleInternal(ShaderModuleBase** result,
                                               const ShaderModuleDescriptor* descriptor);
