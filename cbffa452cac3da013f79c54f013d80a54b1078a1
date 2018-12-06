@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "860090eb_fd4d3fbc",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-06T06:45:55Z",
+      "side": 1,
+      "message": "Extra spaces.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 8
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b086acaa_c68dc446",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-06T06:45:55Z",
+      "side": 1,
+      "message": "extra blank spaces",
+      "range": {
+        "startLine": 61,
+        "startChar": 61,
+        "endLine": 61,
+        "endChar": 74
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1adf3a86_680dc205",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-06T06:45:55Z",
+      "side": 1,
+      "message": "And here too.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4622d96e_62dc6847",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-06T06:45:55Z",
+      "side": 1,
+      "message": "And here.",
+      "range": {
+        "startLine": 149,
+        "startChar": 40,
+        "endLine": 149,
+        "endChar": 48
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25debdbd_5c4948b2",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-06T06:45:55Z",
+      "side": 1,
+      "message": "And here.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78a241ea_66b45709",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-06T06:45:55Z",
+      "side": 1,
+      "message": "And here.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
