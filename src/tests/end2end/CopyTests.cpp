@@ -38,6 +38,7 @@ class CopyTests : public DawnTest {
             uint32_t size;
             uint32_t offset;
             uint32_t rowPitch;
+            uint32_t imageHeight;
         };
 
         BufferSpec MinimumBufferSpec(uint32_t width, uint32_t height) {
@@ -124,8 +125,8 @@ class CopyTests_T2B : public CopyTests {
                 dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(
                     texture, textureSpec.level, slice, {textureSpec.x, textureSpec.y, 0},
                     dawn::TextureAspect::Color);
-                dawn::BufferCopyView bufferCopyView =
-                    utils::CreateBufferCopyView(buffer, bufferOffset, bufferSpec.rowPitch, 0);
+                dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(
+                    buffer, bufferOffset, bufferSpec.rowPitch, bufferSpec.imageHeight);
                 dawn::Extent3D copySize = {textureSpec.copyWidth, textureSpec.copyHeight, 1};
                 cmdBuilder.CopyTextureToBuffer(&textureCopyView, &bufferCopyView, &copySize);
                 bufferOffset += bufferSpec.size;
