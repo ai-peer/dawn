@@ -124,8 +124,8 @@ class CopyTests_T2B : public CopyTests {
                 dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(
                     texture, textureSpec.level, slice, {textureSpec.x, textureSpec.y, 0},
                     dawn::TextureAspect::Color);
-                dawn::BufferCopyView bufferCopyView =
-                    utils::CreateBufferCopyView(buffer, bufferOffset, bufferSpec.rowPitch, 0);
+                dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(
+                    buffer, bufferOffset, bufferSpec.rowPitch, 0);
                 dawn::Extent3D copySize = {textureSpec.copyWidth, textureSpec.copyHeight, 1};
                 cmdBuilder.CopyTextureToBuffer(&textureCopyView, &bufferCopyView, &copySize);
                 bufferOffset += bufferSpec.size;
