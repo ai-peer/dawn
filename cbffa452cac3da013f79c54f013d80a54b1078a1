@@ -2,6 +2,97 @@
   "comments": [
     {
       "key": {
+        "uuid": "9d025ac1_f379acc6",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "This is called \"attachments state\" in WebGPU.",
+      "range": {
+        "startLine": 925,
+        "startChar": 22,
+        "endLine": 925,
+        "endChar": 46
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01c76762_15d32561",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed. see comment at [1].",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b41f9dc_53051d4b",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: can we set the depth stencil format here?",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51f37fbf_d3bd08f0",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "For all structures we need to set nextInChain \u003d nullptr.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2018879e_49a491e5",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: no newline to be symmetric with the vertexStage.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "860090eb_fd4d3fbc",
         "filename": "examples/CHelloTriangle.cpp",
         "patchSetId": 8
@@ -19,6 +110,309 @@
         "endLine": 73,
         "endChar": 8
       },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1910c64_66a107ba",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "You don\u0027t need an array of 1, instead it could just be a dawnAttachmentDescriptor initialized to swapChainFormat.",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 53
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "442d78dc_c41e542d",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Please group everything renderAttachmentsState together, and put a newline between it and the rest.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "441355a0_7f8d3361",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Can we have an empty line between blendstate and the rest? Same thing for renderAttachmentsState",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3250d371_3a1de8b0",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "blendStateBuilder",
+      "range": {
+        "startLine": 83,
+        "startChar": 30,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a943b485_0d6a3f89",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "blendStateBuilder needs to be freed after this.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "717c1850_3a4084b2",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "inputStateBuilder",
+      "range": {
+        "startLine": 93,
+        "startChar": 30,
+        "endLine": 93,
+        "endChar": 37
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d1cb948_c4e00ee9",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "inputStateBuilder needs to be freed after this.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e7040ef_9eeea197",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "depthStencilBuilder",
+      "range": {
+        "startLine": 99,
+        "startChar": 37,
+        "endLine": 99,
+        "endChar": 39
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff9fa93d_4614561c",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "depthStencilBuilder needs to be freed after this.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f627992a_e63899db",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "extra space.",
+      "range": {
+        "startLine": 135,
+        "startChar": 44,
+        "endLine": 135,
+        "endChar": 45
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb849d82_dbe1d73a",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 238,
+        "startChar": 45,
+        "endLine": 238,
+        "endChar": 46
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3ff4319_84f826ee",
+        "filename": "examples/glTFViewer/glTFViewer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: dawn::RenderPipeline.",
+      "range": {
+        "startLine": 303,
+        "startChar": 8,
+        "endLine": 303,
+        "endChar": 12
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c19f3ea_74c07b92",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Extra newline needs to be removed.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c41b4f60_31cacd1f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: \"Entry point must be \\\"main\\\"\"",
+      "range": {
+        "startLine": 33,
+        "startChar": 46,
+        "endLine": 33,
+        "endChar": 87
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ded9dc2_124adc21",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Can we also check it is a depth-stencil format (that is renderable)",
       "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -48,6 +442,69 @@
     },
     {
       "key": {
+        "uuid": "ed749a6b_cd97bbea",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Can we also check it is a renderable color format?",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24fbb2c1_db5429e4",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "This can be removed. We\u0027ll check for this once we have \"WebGPU error handling\" implemented",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 0
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43b89296_df12ce19",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Sample count must be one",
+      "range": {
+        "startLine": 94,
+        "startChar": 46,
+        "endLine": 94,
+        "endChar": 92
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1adf3a86_680dc205",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 8
@@ -59,6 +516,377 @@
       "writtenOn": "2018-12-06T06:45:55Z",
       "side": 1,
       "message": "And here too.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1df8591_7a7bd79a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit tabs please :)",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 2
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c308f227_c8bb6e2f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "no need for std::move: this is just a pointer.",
+      "range": {
+        "startLine": 130,
+        "startChar": 15,
+        "endLine": 130,
+        "endChar": 26
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f23f4ba9_39d7457f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Callers should first query HasDespthStencilAttachment so instead we could ASSERT(mHasDepthStencilAttachment) here.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b2f927f_3e83bf4a",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "device is already the backend device",
+      "range": {
+        "startLine": 209,
+        "startChar": 47,
+        "endLine": 209,
+        "endChar": 69
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c1ac3e5_ad2c3ce9",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "To avoid a naming conflict call this one pipelineDescriptor and the other one textureDescriptor.",
+      "range": {
+        "startLine": 210,
+        "startChar": 41,
+        "endLine": 210,
+        "endChar": 52
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad396afe_09c7b8a8",
+        "filename": "src/tests/end2end/BlendStateTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: baseDescriptor",
+      "range": {
+        "startLine": 70,
+        "startChar": 49,
+        "endLine": 70,
+        "endChar": 59
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b88c1040_c9aaa04a",
+        "filename": "src/tests/end2end/BlendStateTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: no empty line to be consistent.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3596ac83_4afc46a8",
+        "filename": "src/tests/end2end/BlendStateTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: no empty line.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75dfd7c4_487837a1",
+        "filename": "src/tests/end2end/BlendStateTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: baseDescriptor",
+      "range": {
+        "startLine": 880,
+        "startChar": 41,
+        "endLine": 880,
+        "endChar": 51
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0dac27b_d5661c94",
+        "filename": "src/tests/end2end/PrimitiveTopologyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: extra newline after pipeline: it isn\u0027t grouped with the code after it.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4299c50c_ca217a3a",
+        "filename": "src/tests/end2end/SamplerTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "nit: can this block of headers be moved at the end (even if it is unrelated to this CL?)",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92300c06_9da19264",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "ditto: rename to pipelineDescriptor and the other one to textureDescriptor.",
+      "range": {
+        "startLine": 508,
+        "startChar": 45,
+        "endLine": 508,
+        "endChar": 56
+      },
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5652e6a3_db0f8008",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "More of this file needs fixing. You can give it a try or otherwise I can provide a patch to include with this CL.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ab121b9_e2d4678c",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "This needs to test the success case in an else block by creating the pipeline but not storing it anywhere.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f14d8bb_65c08a6e",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "This test file needs to be almost 100% updated to cover all the checks in ValidateRenderPipelineDescriptor (except enum validation). Can it be done in a follow-up CL so that it doesn\u0027t block landing this?",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35cb6fb4_0b0f8769",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Let\u0027s remove this test as well as \"missing property\" is a builder concept.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2b29a5a_00a28f64",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Can we set blendState \u003d 1 just so that it is easy to understand what we are testing when reading this file?",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4e7f1cd_a8b9c3af",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "Let\u0027s remove this whole test.",
+      "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "535143ab_09bf690a",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:36:37Z",
+      "side": 1,
+      "message": "extra space.",
+      "range": {
+        "startLine": 113,
+        "startChar": 40,
+        "endLine": 113,
+        "endChar": 48
+      },
       "revId": "cbffa452cac3da013f79c54f013d80a54b1078a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
