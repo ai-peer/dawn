@@ -14,6 +14,7 @@
 
 #include "SampleUtils.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 #include "utils/SystemUtils.h"
 
@@ -109,12 +110,14 @@ void init() {
 
     depthStencilView = CreateDefaultDepthStencilView(device);
 
-    pipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, GetPreferredSwapChainTextureFormat())
-        .SetDepthStencilAttachmentFormat(dawn::TextureFormat::D32FloatS8Uint)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    utils::ComboRenderPipelineDescriptor descriptor(&device);
+    descriptor.vertexStage.module = vsModule;
+    descriptor.fragmentStage.module = fsModule;
+    descriptor.renderAttachmentsState.hasDepthStencilAttachment = true;
+    descriptor.renderAttachmentsState.colorAttachments[0].format =
+        GetPreferredSwapChainTextureFormat();
+
+    pipeline = device.CreateRenderPipeline(&descriptor);
 
     shaderData.resize(10000);
     for (auto& data : shaderData) {

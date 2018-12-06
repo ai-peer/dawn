@@ -19,6 +19,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 constexpr static unsigned int kRTSize = 64;
@@ -66,20 +67,25 @@ class BlendStateTest : public DawnTest {
                 }
             )");
 
-            basePipeline = device.CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, renderPass.colorFormat)
-                .SetLayout(pipelineLayout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .GetResult();
+            utils::ComboRenderPipelineDescriptor descriptor(&device);
+            descriptor.layout = pipelineLayout;
+            descriptor.vertexStage.module = vsModule;
+            descriptor.fragmentStage.module = fsModule;
+            descriptor.renderAttachmentsState.colorAttachments[0].format =
+                renderPass.colorFormat;
 
-            testPipeline = device.CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, renderPass.colorFormat)
-                .SetLayout(pipelineLayout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .SetColorAttachmentBlendState(0, blendState)
-                .GetResult();
+            basePipeline = device.CreateRenderPipeline(&descriptor);
+
+            utils::ComboRenderPipelineDescriptor testDescriptor(&device);
+
+            testDescriptor.layout = pipelineLayout;
+            testDescriptor.vertexStage.module = vsModule;
+            testDescriptor.fragmentStage.module = fsModule;
+            testDescriptor.renderAttachmentsState.colorAttachments[0].format =
+                renderPass.colorFormat;
+            testDescriptor.blendStates[0] = blendState;
+
+            testPipeline = device.CreateRenderPipeline(&testDescriptor);
         }
 
         // Create a bind group to set the colors as a uniform buffer
@@ -771,7 +777,8 @@ TEST_P(BlendStateTest, IndependentBlendState) {
     blend3.srcFactor = dawn::BlendFactor::One;
     blend3.dstFactor = dawn::BlendFactor::One;
 
-    std::array<dawn::BlendState, 3> blendStates = { {
+    std::array<dawn::BlendState, 4> blendStates = { {
+
         device.CreateBlendStateBuilder()
             .SetBlendEnabled(true)
             .SetColorBlend(&blend1)
@@ -782,6 +789,7 @@ TEST_P(BlendStateTest, IndependentBlendState) {
             .SetColorBlend(&blend2)
             .SetAlphaBlend(&blend2)
             .GetResult(),
+        device.CreateBlendStateBuilder().GetResult(),
         device.CreateBlendStateBuilder()
             .SetBlendEnabled(true)
             .SetColorBlend(&blend3)
@@ -789,30 +797,24 @@ TEST_P(BlendStateTest, IndependentBlendState) {
             .GetResult(),
     } };
 
-    basePipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(1, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(2, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(3, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    utils::ComboRenderPipelineDescriptor rDescriptor(&device);
+    rDescriptor.layout = pipelineLayout;
+    rDescriptor.vertexStage.module = vsModule;
+    rDescriptor.fragmentStage.module = fsModule;
+    rDescriptor.renderAttachmentsState.numColorAttachments = 4;
+    rDescriptor.numBlendStates = 4;
 
-    testPipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(1, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(2, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetColorAttachmentFormat(3, dawn::TextureFormat::R8G8B8A8Unorm)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .SetColorAttachmentBlendState(0, blendStates[0])
-        .SetColorAttachmentBlendState(1, blendStates[1])
-        // Blend state not set on third color attachment. It should be default
-        .SetColorAttachmentBlendState(3, blendStates[2])
-        .GetResult();
+    basePipeline = device.CreateRenderPipeline(&rDescriptor);
 
+    utils::ComboRenderPipelineDescriptor testDescriptor(&device);
+    testDescriptor.layout = pipelineLayout;
+    testDescriptor.vertexStage.module = vsModule;
+    testDescriptor.fragmentStage.module = fsModule;
+    testDescriptor.renderAttachmentsState.numColorAttachments = 4;
+    testDescriptor.numBlendStates = 4;
+    testDescriptor.blendStates = blendStates.data();
+
+    testPipeline = device.CreateRenderPipeline(&testDescriptor);
 
     for (unsigned int c = 0; c < kColors.size(); ++c) {
         RGBA8 base = kColors[((c + 31) * 29) % kColors.size()];
@@ -875,20 +877,24 @@ TEST_P(BlendStateTest, DefaultBlendColor) {
         }
     )");
 
-    basePipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    utils::ComboRenderPipelineDescriptor descriptor(&device);
+    descriptor.layout = pipelineLayout;
+    descriptor.vertexStage.module = vsModule;
+    descriptor.fragmentStage.module = fsModule;
+    descriptor.renderAttachmentsState.colorAttachments[0].format =
+        renderPass.colorFormat;
 
-    testPipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .SetColorAttachmentBlendState(0, blendState)
-        .GetResult();
+    basePipeline = device.CreateRenderPipeline(&descriptor);
+
+    utils::ComboRenderPipelineDescriptor testDescriptor(&device);
+    testDescriptor.layout = pipelineLayout;
+    testDescriptor.vertexStage.module = vsModule;
+    testDescriptor.fragmentStage.module = fsModule;
+    testDescriptor.renderAttachmentsState.colorAttachments[0].format =
+        renderPass.colorFormat;
+    testDescriptor.blendStates = &blendState;
+
+    testPipeline = device.CreateRenderPipeline(&testDescriptor);
 
     // Check that the initial blend color is (0,0,0,0)
     {

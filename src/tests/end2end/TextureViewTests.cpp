@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/Constants.h"
 #include "common/Math.h"
+#include "utils/ComboRenderPipelineDescriptor.h"I
 #include "utils/DawnHelpers.h"
 
 #include <array>
@@ -163,12 +164,14 @@ protected:
         dawn::ShaderModule fsModule =
             utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, fragmentShader);
 
-        dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-            .SetColorAttachmentFormat(0, mRenderPass.colorFormat)
-            .SetLayout(mPipelineLayout)
-            .SetStage(dawn::ShaderStage::Vertex, mVSModule, "main")
-            .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-            .GetResult();
+        utils::ComboRenderPipelineDescriptor descriptor(&device);
+        descriptor.vertexStage.module = mVSModule;
+        descriptor.fragmentStage.module = fsModule;
+        descriptor.layout = mPipelineLayout;
+        descriptor.renderAttachmentsState.colorAttachments[0].format =
+            mRenderPass.colorFormat;
+
+        dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
 
         dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
         {

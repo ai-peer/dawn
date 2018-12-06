@@ -15,6 +15,7 @@
 #include "common/Assert.h"
 #include "common/Constants.h"
 #include "tests/DawnTest.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 constexpr static unsigned int kRTSize = 8;
@@ -116,13 +117,15 @@ TEST_P(BindGroupTests, ReusedUBO) {
     );
     dawn::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
-    dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    utils::ComboRenderPipelineDescriptor descriptor(&device);
+    descriptor.layout = pipelineLayout;
+    descriptor.vertexStage.module = vsModule;
+    descriptor.fragmentStage.module = fsModule;
+    descriptor.renderAttachmentsState.colorAttachments[0].format =
+        renderPass.colorFormat;
+
+    dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
+
     struct Data {
         float transform[8];
         char padding[256 - 8 * sizeof(float)];
@@ -204,13 +207,15 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     );
     dawn::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
-    dawn::RenderPipeline pipeline = device.CreateRenderPipelineBuilder()
-        .SetColorAttachmentFormat(0, renderPass.colorFormat)
-        .SetLayout(pipelineLayout)
-        .SetPrimitiveTopology(dawn::PrimitiveTopology::TriangleList)
-        .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-        .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-        .GetResult();
+    utils::ComboRenderPipelineDescriptor rDescriptor(&device);
+    rDescriptor.layout = pipelineLayout;
+    rDescriptor.vertexStage.module = vsModule;
+    rDescriptor.fragmentStage.module = fsModule;
+    rDescriptor.renderAttachmentsState.colorAttachments[0].format =
+        renderPass.colorFormat;
+
+    dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&rDescriptor);
+
     constexpr float dummy = 0.0f;
     constexpr float transform[] = { 1.f, 0.f, dummy, dummy, 0.f, 1.f, dummy, dummy };
     dawn::Buffer buffer = utils::CreateBufferFromData(device, &transform, sizeof(transform), dawn::BufferUsageBit::Uniform);

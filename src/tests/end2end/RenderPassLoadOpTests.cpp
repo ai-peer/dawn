@@ -14,6 +14,7 @@
 
 #include "tests/DawnTest.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 #include <array>
@@ -32,12 +33,13 @@ class DrawQuad {
             }
 
         void Draw(dawn::RenderPassEncoder* pass) {
-            auto renderPipeline = device->CreateRenderPipelineBuilder()
-                .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
-                .SetLayout(pipelineLayout)
-                .SetStage(dawn::ShaderStage::Vertex, vsModule, "main")
-                .SetStage(dawn::ShaderStage::Fragment, fsModule, "main")
-                .GetResult();
+
+            utils::ComboRenderPipelineDescriptor descriptor(device);
+            descriptor.layout = pipelineLayout;
+            descriptor.vertexStage.module = vsModule;
+            descriptor.fragmentStage.module = fsModule;
+
+            auto renderPipeline = device->CreateRenderPipeline(&descriptor);
 
             pass->SetRenderPipeline(renderPipeline);
             pass->DrawArrays(6, 1, 0, 0);
