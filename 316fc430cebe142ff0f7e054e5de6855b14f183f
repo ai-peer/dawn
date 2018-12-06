@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "e1bf93aa_8b1875c8",
+        "filename": "src/common/Compiler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:51:31Z",
+      "side": 1,
+      "message": "unused warnings on the function declaration that comes right after.",
+      "parentUuid": "8c0f82db_32b18491",
+      "range": {
+        "startLine": 27,
+        "startChar": 55,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "316fc430cebe142ff0f7e054e5de6855b14f183f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "774cdc15_a0631f51",
+        "filename": "src/common/Compiler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-06T10:51:31Z",
+      "side": 1,
+      "message": "Can we have a small example of what that would look like inside this comment?",
+      "revId": "316fc430cebe142ff0f7e054e5de6855b14f183f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6bea4ba_12fe2b35",
         "filename": "third_party/BUILD.gn",
         "patchSetId": 2
