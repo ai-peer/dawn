@@ -16,6 +16,24 @@
       "revId": "ac6fd19e68d7cf394ab6ffa69ab403e17ca77193",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e8a42ee_f9be82c1",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-06T16:03:19Z",
+      "side": 1,
+      "message": "This, and now the mock_dawn_ change to generator_main.py.\n\nDiffs in this file:\ndiff --git a/src/tests/BUILD.gn b/src/tests/BUILD.gn\nindex da80dd0..0cdceee 100644\n--- a/src/tests/BUILD.gn\n+++ b/src/tests/BUILD.gn\n@@ -19,8 +19,14 @@ import(\"${dawn_root}/generator/dawn_generator.gni\")\n \n import(\"//testing/test.gni\")\n \n+config(\"mock_dawn_public\") {\n+  include_dirs \u003d [ target_gen_dir ]\n+}\n+\n dawn_generator(\"mock_dawn_gen\") {\n-  target \u003d \"mock_dawn\"\n+  # TODO once stale versions of \"mock_dawn\" target are gone from bots,\n+  # this can be renamed \"mock_dawn\".\n+  target \u003d \"mock_dawn_\"\n   outputs \u003d [\n     \"mock/mock_dawn.h\",\n     \"mock/mock_dawn.cpp\",\n@@ -28,7 +34,10 @@ dawn_generator(\"mock_dawn_gen\") {\n }\n \n test(\"dawn_unittests\") {\n-  configs +\u003d [ \"${dawn_root}:dawn_internal\" ]\n+  configs +\u003d [\n+    \"${dawn_root}:dawn_internal\",\n+    \":mock_dawn_public\",\n+  ]\n \n   deps \u003d [\n     \":mock_dawn_gen\",",
+      "parentUuid": "4a412c52_9c466fb4",
+      "revId": "ac6fd19e68d7cf394ab6ffa69ab403e17ca77193",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
