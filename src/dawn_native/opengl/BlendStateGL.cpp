@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/opengl/BlendStateGL.h"
+#include "dawn_native/opengl/DeviceGL.h"
 
 #include "common/Assert.h"
 
@@ -70,27 +71,28 @@ namespace dawn_native { namespace opengl {
         }
     }  // namespace
 
-    BlendState::BlendState(BlendStateBuilder* builder) : BlendStateBase(builder) {
+    BlendState::BlendState(Device* device, const BlendStateDescriptor* descriptor)
+        : BlendStateBase(device, descriptor) {
     }
 
     void BlendState::ApplyNow(uint32_t attachment) {
-        const auto& info = GetBlendInfo();
+        const BlendStateDescriptor* descriptor = GetBlendStateDescriptor();
 
-        if (info.blendEnabled) {
+        if (descriptor->blendEnabled) {
             glEnablei(GL_BLEND, attachment);
-            glBlendEquationSeparatei(attachment, GLBlendMode(info.colorBlend.operation),
-                                     GLBlendMode(info.alphaBlend.operation));
-            glBlendFuncSeparatei(attachment, GLBlendFactor(info.colorBlend.srcFactor, false),
-                                 GLBlendFactor(info.colorBlend.dstFactor, false),
-                                 GLBlendFactor(info.alphaBlend.srcFactor, true),
-                                 GLBlendFactor(info.alphaBlend.dstFactor, true));
+            glBlendEquationSeparatei(attachment, GLBlendMode(descriptor->colorBlend.operation),
+                                     GLBlendMode(descriptor->alphaBlend.operation));
+            glBlendFuncSeparatei(attachment, GLBlendFactor(descriptor->colorBlend.srcFactor, false),
+                                 GLBlendFactor(descriptor->colorBlend.dstFactor, false),
+                                 GLBlendFactor(descriptor->alphaBlend.srcFactor, true),
+                                 GLBlendFactor(descriptor->alphaBlend.dstFactor, true));
         } else {
             glDisablei(GL_BLEND, attachment);
         }
-        glColorMaski(attachment, info.colorWriteMask & dawn::ColorWriteMask::Red,
-                     info.colorWriteMask & dawn::ColorWriteMask::Green,
-                     info.colorWriteMask & dawn::ColorWriteMask::Blue,
-                     info.colorWriteMask & dawn::ColorWriteMask::Alpha);
+        glColorMaski(attachment, descriptor->colorWriteMask & dawn::ColorWriteMask::Red,
+                     descriptor->colorWriteMask & dawn::ColorWriteMask::Green,
+                     descriptor->colorWriteMask & dawn::ColorWriteMask::Blue,
+                     descriptor->colorWriteMask & dawn::ColorWriteMask::Alpha);
     }
 
 }}  // namespace dawn_native::opengl

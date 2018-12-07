@@ -20,9 +20,11 @@
 #import <Metal/Metal.h>
 namespace dawn_native { namespace metal {
 
+    class Device;
+
     class BlendState : public BlendStateBase {
       public:
-        BlendState(BlendStateBuilder* builder);
+        BlendState(Device* device, const BlendStateDescriptor* descriptor);
 
         void ApplyBlendState(MTLRenderPipelineColorAttachmentDescriptor* descriptor) const;
     };

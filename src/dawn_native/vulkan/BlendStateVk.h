@@ -26,7 +26,7 @@ namespace dawn_native { namespace vulkan {
     // Pre-computes the blend state configuration to give to a graphics pipeline create info.
     class BlendState : public BlendStateBase {
       public:
-        BlendState(BlendStateBuilder* builder);
+        BlendState(Device* device, const BlendStateDescriptor* descriptor);
 
         const VkPipelineColorBlendAttachmentState& GetState() const;
 

@@ -15,84 +15,31 @@
 #include "dawn_native/BlendState.h"
 
 #include "dawn_native/Device.h"
+#include "dawn_native/ValidationUtils_autogen.h"
 
 namespace dawn_native {
 
-    // BlendStateBase
-
-    BlendStateBase::BlendStateBase(BlendStateBuilder* builder)
-        : ObjectBase(builder->GetDevice()), mBlendInfo(builder->mBlendInfo) {
-    }
-
-    const BlendStateBase::BlendInfo& BlendStateBase::GetBlendInfo() const {
-        return mBlendInfo;
-    }
-
-    // BlendStateBuilder
-
-    enum BlendStateSetProperties {
-        BLEND_STATE_PROPERTY_BLEND_ENABLED = 0x1,
-        BLEND_STATE_PROPERTY_ALPHA_BLEND = 0x2,
-        BLEND_STATE_PROPERTY_COLOR_BLEND = 0x4,
-        BLEND_STATE_PROPERTY_COLOR_WRITE_MASK = 0x08,
-    };
-
-    BlendStateBuilder::BlendStateBuilder(DeviceBase* device) : Builder(device) {
-    }
-
-    BlendStateBase* BlendStateBuilder::GetResultImpl() {
-        return GetDevice()->CreateBlendState(this);
-    }
-
-    void BlendStateBuilder::SetBlendEnabled(bool blendEnabled) {
-        if ((mPropertiesSet & BLEND_STATE_PROPERTY_BLEND_ENABLED) != 0) {
-            HandleError("Blend enabled property set multiple times");
-            return;
+    MaybeError ValidateBlendStateDescriptor(DeviceBase* device,
+                                            const BlendStateDescriptor* descriptor) {
+        if (descriptor->nextInChain != nullptr) {
+            return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
-
-        mPropertiesSet |= BLEND_STATE_PROPERTY_BLEND_ENABLED;
-
-        mBlendInfo.blendEnabled = blendEnabled;
+        DAWN_TRY(ValidateBlendOperation(descriptor->alphaBlend.operation));
+        DAWN_TRY(ValidateBlendFactor(descriptor->alphaBlend.srcFactor));
+        DAWN_TRY(ValidateBlendFactor(descriptor->alphaBlend.dstFactor));
+        DAWN_TRY(ValidateBlendOperation(descriptor->colorBlend.operation));
+        DAWN_TRY(ValidateBlendFactor(descriptor->colorBlend.srcFactor));
+        DAWN_TRY(ValidateBlendFactor(descriptor->colorBlend.dstFactor));
+        DAWN_TRY(ValidateColorWriteMask(descriptor->colorWriteMask));
+        return {};
     }
 
-    void BlendStateBuilder::SetAlphaBlend(const BlendDescriptor* alphaBlend) {
-        if ((mPropertiesSet & BLEND_STATE_PROPERTY_ALPHA_BLEND) != 0) {
-            HandleError("Alpha blend property set multiple times");
-            return;
-        }
-
-        mPropertiesSet |= BLEND_STATE_PROPERTY_ALPHA_BLEND;
-
-        // TODO(yunchao.he@intel.com): validate the enum values in
-        // ValidateBlendStateDescriptor when it is added.
-        mBlendInfo.alphaBlend.operation = alphaBlend->operation;
-        mBlendInfo.alphaBlend.srcFactor = alphaBlend->srcFactor;
-        mBlendInfo.alphaBlend.dstFactor = alphaBlend->dstFactor;
+    BlendStateBase::BlendStateBase(DeviceBase* device, const BlendStateDescriptor* descriptor)
+        : ObjectBase(device), mDescriptor(descriptor) {
     }
 
-    void BlendStateBuilder::SetColorBlend(const BlendDescriptor* colorBlend) {
-        if ((mPropertiesSet & BLEND_STATE_PROPERTY_COLOR_BLEND) != 0) {
-            HandleError("Color blend property set multiple times");
-            return;
-        }
-
-        mPropertiesSet |= BLEND_STATE_PROPERTY_COLOR_BLEND;
-
-        // TODO(yunchao.he@intel.com): validate the enum values in
-        // ValidateBlendStateDescriptor when it is added.
-        mBlendInfo.colorBlend.operation = colorBlend->operation;
-        mBlendInfo.colorBlend.srcFactor = colorBlend->srcFactor;
-        mBlendInfo.colorBlend.dstFactor = colorBlend->dstFactor;
+    const BlendStateDescriptor* BlendStateBase::GetBlendStateDescriptor() const {
+        return mDescriptor;
     }
 
-    void BlendStateBuilder::SetColorWriteMask(dawn::ColorWriteMask colorWriteMask) {
-        if ((mPropertiesSet & BLEND_STATE_PROPERTY_COLOR_WRITE_MASK) != 0) {
-            HandleError("Color write mask property set multiple times");
-            return;
-        }
-
-        mPropertiesSet |= BLEND_STATE_PROPERTY_COLOR_WRITE_MASK;
-
-        mBlendInfo.colorWriteMask = colorWriteMask;
-    }
 }  // namespace dawn_native

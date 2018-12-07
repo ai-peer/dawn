@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "utils/ComboBlendStateDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 #include <array>
@@ -194,11 +195,11 @@ class PushConstantTest: public DawnTest {
             blend.srcFactor = dawn::BlendFactor::One;
             blend.dstFactor = dawn::BlendFactor::One;
 
-            dawn::BlendState blendState = device.CreateBlendStateBuilder()
-                .SetBlendEnabled(true)
-                .SetColorBlend(&blend)
-                .SetAlphaBlend(&blend)
-                .GetResult();
+            utils::ComboBlendStateDescriptor descriptor(device);
+            descriptor.blendEnabled = true;
+            descriptor.alphaBlend = blend;
+            descriptor.colorBlend = blend;
+            dawn::BlendState blendState = device.CreateBlendState(&descriptor);
 
             return device.CreateRenderPipelineBuilder()
                 .SetColorAttachmentFormat(0, dawn::TextureFormat::R8G8B8A8Unorm)
