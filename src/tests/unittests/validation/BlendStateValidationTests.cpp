@@ -14,6 +14,8 @@
 
 #include "tests/unittests/validation/ValidationTest.h"
 
+#include "utils/ComboBlendStateDescriptor.h"
+
 class BlendStateValidationTest : public ValidationTest {
 };
 
@@ -26,63 +28,18 @@ TEST_F(BlendStateValidationTest, CreationSuccess) {
         blend.srcFactor = dawn::BlendFactor::One;
         blend.dstFactor = dawn::BlendFactor::One;
 
-        dawn::BlendState state = AssertWillBeSuccess(device.CreateBlendStateBuilder())
-            .SetBlendEnabled(true)
-            .SetAlphaBlend(&blend)
-            .SetColorBlend(&blend)
-            .SetColorWriteMask(dawn::ColorWriteMask::Red)
-            .GetResult();
+        utils::ComboBlendStateDescriptor descriptor(device);
+        descriptor.blendEnabled = true;
+        descriptor.alphaBlend = blend;
+        descriptor.colorBlend = blend;
+        descriptor.colorWriteMask = dawn::ColorWriteMask::Red;
+
+        dawn::BlendState state = device.CreateBlendState(&descriptor);
     }
 
     // Success for empty builder
     {
-        dawn::BlendState state = AssertWillBeSuccess(device.CreateBlendStateBuilder())
-            .GetResult();
+        utils::ComboBlendStateDescriptor descriptor(device);
+        dawn::BlendState state = device.CreateBlendState(&descriptor);
     }
-}
-
-// Test creation failure when specifying properties multiple times
-TEST_F(BlendStateValidationTest, CreationDuplicates) {
-    // Test failure when specifying blend enabled multiple times
-    {
-        dawn::BlendState state = AssertWillBeError(device.CreateBlendStateBuilder())
-            .SetBlendEnabled(true)
-            .SetBlendEnabled(false)
-            .GetResult();
-    }
-
-    dawn::BlendDescriptor blend1;
-    blend1.operation = dawn::BlendOperation::Add;
-    blend1.srcFactor = dawn::BlendFactor::One;
-    blend1.dstFactor = dawn::BlendFactor::One;
-
-    dawn::BlendDescriptor blend2;
-    blend2.operation = dawn::BlendOperation::Add;
-    blend2.srcFactor = dawn::BlendFactor::Zero;
-    blend2.dstFactor = dawn::BlendFactor::Zero;
-
-    // Test failure when specifying alpha blend multiple times
-    {
-        dawn::BlendState state = AssertWillBeError(device.CreateBlendStateBuilder())
-            .SetAlphaBlend(&blend1)
-            .SetAlphaBlend(&blend2)
-            .GetResult();
-    }
-
-    // Test failure when specifying color blend multiple times
-    {
-        dawn::BlendState state = AssertWillBeError(device.CreateBlendStateBuilder())
-            .SetColorBlend(&blend1)
-            .SetColorBlend(&blend2)
-            .GetResult();
-    }
-
-    // Test failure when specifying color write mask multiple times
-    {
-        dawn::BlendState state = AssertWillBeError(device.CreateBlendStateBuilder())
-            .SetColorWriteMask(dawn::ColorWriteMask::Red)
-            .SetColorWriteMask(dawn::ColorWriteMask::Green)
-            .GetResult();
-    }
-
 }

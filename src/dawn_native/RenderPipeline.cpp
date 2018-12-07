@@ -163,8 +163,16 @@ namespace dawn_native {
 
         // Assign all color attachments without a blend state the default state
         // TODO(enga@google.com): Put the default objects in the device
+        BlendStateDescriptor descriptor;
+        BlendDescriptor blend = {dawn::BlendOperation::Add, dawn::BlendFactor::One,
+                                 dawn::BlendFactor::Zero};
+        descriptor.blendEnabled = false;
+        descriptor.alphaBlend = blend;
+        descriptor.colorBlend = blend;
+        descriptor.colorWriteMask = dawn::ColorWriteMask::All;
+
         for (uint32_t attachmentSlot : IterateBitSet(mColorAttachmentsSet & ~mBlendStatesSet)) {
-            mBlendStates[attachmentSlot] = device->CreateBlendStateBuilder()->GetResult();
+            mBlendStates[attachmentSlot] = device->CreateBlendState(&descriptor);
             // Remove the external ref objects are created with
             mBlendStates[attachmentSlot]->Release();
         }

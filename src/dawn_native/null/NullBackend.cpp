@@ -42,8 +42,9 @@ namespace dawn_native { namespace null {
         const BindGroupLayoutDescriptor* descriptor) {
         return new BindGroupLayout(this, descriptor);
     }
-    BlendStateBase* Device::CreateBlendState(BlendStateBuilder* builder) {
-        return new BlendState(builder);
+    ResultOrError<BlendStateBase*> Device::CreateBlendStateImpl(
+        const BlendStateDescriptor* descriptor) {
+        return new BlendState(this, descriptor);
     }
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return new Buffer(this, descriptor);

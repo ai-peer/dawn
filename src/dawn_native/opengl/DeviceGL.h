@@ -40,7 +40,6 @@ namespace dawn_native { namespace opengl {
         void SubmitFenceSync();
 
         // Dawn API
-        BlendStateBase* CreateBlendState(BlendStateBuilder* builder) override;
         BufferViewBase* CreateBufferView(BufferViewBuilder* builder) override;
         CommandBufferBase* CreateCommandBuffer(CommandBufferBuilder* builder) override;
         DepthStencilStateBase* CreateDepthStencilState(DepthStencilStateBuilder* builder) override;
@@ -61,6 +60,8 @@ namespace dawn_native { namespace opengl {
             const BindGroupDescriptor* descriptor) override;
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
+        ResultOrError<BlendStateBase*> CreateBlendStateImpl(
+            const BlendStateDescriptor* descriptor) override;
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
