@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/metal/BlendStateMTL.h"
+#include "dawn_native/metal/DeviceMTL.h"
 
 namespace dawn_native { namespace metal {
 
@@ -81,19 +82,24 @@ namespace dawn_native { namespace metal {
         }
     }
 
-    BlendState::BlendState(BlendStateBuilder* builder) : BlendStateBase(builder) {
+    BlendState::BlendState(Device* device, const BlendStateDescriptor* descriptor)
+        : BlendStateBase(device, descriptor) {
     }
 
     void BlendState::ApplyBlendState(MTLRenderPipelineColorAttachmentDescriptor* descriptor) const {
-        auto& info = GetBlendInfo();
-        descriptor.blendingEnabled = info.blendEnabled;
-        descriptor.sourceRGBBlendFactor = MetalBlendFactor(info.colorBlend.srcFactor, false);
-        descriptor.destinationRGBBlendFactor = MetalBlendFactor(info.colorBlend.dstFactor, false);
-        descriptor.rgbBlendOperation = MetalBlendOperation(info.colorBlend.operation);
-        descriptor.sourceAlphaBlendFactor = MetalBlendFactor(info.alphaBlend.srcFactor, true);
-        descriptor.destinationAlphaBlendFactor = MetalBlendFactor(info.alphaBlend.dstFactor, true);
-        descriptor.alphaBlendOperation = MetalBlendOperation(info.alphaBlend.operation);
-        descriptor.writeMask = MetalColorWriteMask(info.colorWriteMask);
+        const BlendStateDescriptor* blendDescriptor = GetBlendStateDescriptor();
+        descriptor.blendingEnabled = blendDescriptor->blendEnabled;
+        descriptor.sourceRGBBlendFactor =
+            MetalBlendFactor(blendDescriptor->colorBlend.srcFactor, false);
+        descriptor.destinationRGBBlendFactor =
+            MetalBlendFactor(blendDescriptor->colorBlend.dstFactor, false);
+        descriptor.rgbBlendOperation = MetalBlendOperation(blendDescriptor->colorBlend.operation);
+        descriptor.sourceAlphaBlendFactor =
+            MetalBlendFactor(blendDescriptor->alphaBlend.srcFactor, true);
+        descriptor.destinationAlphaBlendFactor =
+            MetalBlendFactor(blendDescriptor->alphaBlend.dstFactor, true);
+        descriptor.alphaBlendOperation = MetalBlendOperation(blendDescriptor->alphaBlend.operation);
+        descriptor.writeMask = MetalColorWriteMask(blendDescriptor->colorWriteMask);
     }
 
 }}  // namespace dawn_native::metal

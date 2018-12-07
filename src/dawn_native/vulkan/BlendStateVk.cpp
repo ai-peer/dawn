@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/vulkan/BlendStateVk.h"
+#include "dawn_native/vulkan/DeviceVk.h"
 
 #include "common/Assert.h"
 
@@ -88,19 +89,19 @@ namespace dawn_native { namespace vulkan {
         }
     }  // anonymous namespace
 
-    BlendState::BlendState(BlendStateBuilder* builder) : BlendStateBase(builder) {
+    BlendState::BlendState(Device* device, const BlendStateDescriptor* descriptor)
+        : BlendStateBase(device, descriptor) {
         // Fill the "color blend attachment info" that will be copied in an array and chained in
         // the pipeline create info.
-        const auto& info = GetBlendInfo();
 
-        mState.blendEnable = info.blendEnabled ? VK_TRUE : VK_FALSE;
-        mState.srcColorBlendFactor = VulkanBlendFactor(info.colorBlend.srcFactor);
-        mState.dstColorBlendFactor = VulkanBlendFactor(info.colorBlend.dstFactor);
-        mState.colorBlendOp = VulkanBlendOperation(info.colorBlend.operation);
-        mState.srcAlphaBlendFactor = VulkanBlendFactor(info.alphaBlend.srcFactor);
-        mState.dstAlphaBlendFactor = VulkanBlendFactor(info.alphaBlend.dstFactor);
-        mState.alphaBlendOp = VulkanBlendOperation(info.alphaBlend.operation);
-        mState.colorWriteMask = VulkanColorWriteMask(info.colorWriteMask);
+        mState.blendEnable = descriptor->blendEnabled ? VK_TRUE : VK_FALSE;
+        mState.srcColorBlendFactor = VulkanBlendFactor(descriptor->colorBlend.srcFactor);
+        mState.dstColorBlendFactor = VulkanBlendFactor(descriptor->colorBlend.dstFactor);
+        mState.colorBlendOp = VulkanBlendOperation(descriptor->colorBlend.operation);
+        mState.srcAlphaBlendFactor = VulkanBlendFactor(descriptor->alphaBlend.srcFactor);
+        mState.dstAlphaBlendFactor = VulkanBlendFactor(descriptor->alphaBlend.dstFactor);
+        mState.alphaBlendOp = VulkanBlendOperation(descriptor->alphaBlend.operation);
+        mState.colorWriteMask = VulkanColorWriteMask(descriptor->colorWriteMask);
     }
 
     const VkPipelineColorBlendAttachmentState& BlendState::GetState() const {
