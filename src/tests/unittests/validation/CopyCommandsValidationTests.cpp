@@ -362,6 +362,51 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffset) {
     }
 }
 
+// Test B2T copies with buffer or texture is nullptr in the bufferCopyView or textureCopyView is not
+// allowed.
+TEST_F(CopyCommandTest_B2T, NullBufferOrTexture) {
+    uint32_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
+    dawn::Buffer source = CreateBuffer(bufferSize, dawn::BufferUsageBit::TransferSrc);
+    dawn::Texture destination = Create2DTexture(16, 16, 5, 1, dawn::TextureFormat::R8G8B8A8Unorm,
+        dawn::TextureUsageBit::TransferDst);
+
+    dawn::Extent3D extent3D = { 1, 1, 1 };
+
+    // It is not allowed to use a bufferCopyView if buffer is nullptr.
+    {
+        dawn::BufferCopyView nullBufferCopyView;
+        nullBufferCopyView.buffer = nullptr;
+        nullBufferCopyView.offset = 0;
+        nullBufferCopyView.rowPitch = 256;
+        nullBufferCopyView.imageHeight = 0;
+
+        dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(
+            destination, 0, 0, { 0, 0, 0 }, dawn::TextureAspect::Color);
+
+        dawn::CommandBuffer commands =
+            AssertWillBeError(device.CreateCommandBufferBuilder())
+            .CopyBufferToTexture(&nullBufferCopyView, &textureCopyView, &extent3D)
+            .GetResult();
+    }
+
+    // It is not allowed to use a textureCopyView if texture is nullptr.
+    {
+        dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(source, 0, 256, 0);
+
+        dawn::TextureCopyView nullTextureCopyView;
+        nullTextureCopyView.texture = nullptr;
+        nullTextureCopyView.level = 0;
+        nullTextureCopyView.slice = 0;
+        nullTextureCopyView.origin = { 0, 0, 0 };
+        nullTextureCopyView.aspect = dawn::TextureAspect::Color;
+
+        dawn::CommandBuffer commands =
+            AssertWillBeError(device.CreateCommandBufferBuilder())
+            .CopyBufferToTexture(&bufferCopyView, &nullTextureCopyView, &extent3D)
+            .GetResult();
+    }
+}
+
 class CopyCommandTest_T2B : public CopyCommandTest {
 };
 
@@ -543,3 +588,47 @@ TEST_F(CopyCommandTest_T2B, IncorrectBufferOffset) {
                 destination, bufferSize - 7, 256, 0, {1, 1, 1});
 }
 
+// Test T2B copies with buffer or texture is nullptr in the bufferCopyView or textureCopyView is not
+// allowed.
+TEST_F(CopyCommandTest_T2B, NullBufferOrTexture) {
+    uint32_t bufferSize = BufferSizeForTextureCopy(4, 4, 1);
+    dawn::Texture source = Create2DTexture(16, 16, 5, 1, dawn::TextureFormat::R8G8B8A8Unorm,
+                                                dawn::TextureUsageBit::TransferDst);
+    dawn::Buffer destination = CreateBuffer(bufferSize, dawn::BufferUsageBit::TransferSrc);
+
+    dawn::Extent3D extent3D = { 1, 1, 1 };
+
+    // It is not allowed to use a bufferCopyView if buffer is nullptr.
+    {
+        dawn::BufferCopyView nullBufferCopyView;
+        nullBufferCopyView.buffer = nullptr;
+        nullBufferCopyView.offset = 0;
+        nullBufferCopyView.rowPitch = 256;
+        nullBufferCopyView.imageHeight = 0;
+
+        dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(
+            source, 0, 0, { 0, 0, 0 }, dawn::TextureAspect::Color);
+
+        dawn::CommandBuffer commands =
+            AssertWillBeError(device.CreateCommandBufferBuilder())
+            .CopyTextureToBuffer(&textureCopyView, &nullBufferCopyView, &extent3D)
+            .GetResult();
+    }
+
+    // It is not allowed to use a textureCopyView if texture is nullptr.
+    {
+        dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(destination, 0, 256, 0);
+
+        dawn::TextureCopyView nullTextureCopyView;
+        nullTextureCopyView.texture = nullptr;
+        nullTextureCopyView.level = 0;
+        nullTextureCopyView.slice = 0;
+        nullTextureCopyView.origin = { 0, 0, 0 };
+        nullTextureCopyView.aspect = dawn::TextureAspect::Color;
+
+        dawn::CommandBuffer commands =
+            AssertWillBeError(device.CreateCommandBufferBuilder())
+            .CopyTextureToBuffer(&nullTextureCopyView, &bufferCopyView, &extent3D)
+            .GetResult();
+    }
+}
