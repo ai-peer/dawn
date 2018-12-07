@@ -385,6 +385,13 @@ namespace dawn_native {
                 case Command::CopyBufferToTexture: {
                     CopyBufferToTextureCmd* copy = mIterator.NextCommand<CopyBufferToTextureCmd>();
 
+                    if (copy->source.buffer.Get() == nullptr) {
+                        return DAWN_VALIDATION_ERROR("Source buffer cannot be null");
+                    }
+                    if (copy->destination.texture.Get() == nullptr) {
+                        return DAWN_VALIDATION_ERROR("Destination texture cannot be null");
+                    }
+
                     uint32_t bufferCopySize = 0;
                     DAWN_TRY(ValidateRowPitch(copy->destination.texture->GetFormat(),
                                               copy->copySize, copy->source.rowPitch));
@@ -407,6 +414,13 @@ namespace dawn_native {
 
                 case Command::CopyTextureToBuffer: {
                     CopyTextureToBufferCmd* copy = mIterator.NextCommand<CopyTextureToBufferCmd>();
+
+                    if (copy->source.texture.Get() == nullptr) {
+                        return DAWN_VALIDATION_ERROR("Source texture cannot be null");
+                    }
+                    if (copy->destination.buffer.Get() == nullptr) {
+                        return DAWN_VALIDATION_ERROR("Destination buffer cannot be null");
+                    }
 
                     uint32_t bufferCopySize = 0;
                     DAWN_TRY(ValidateRowPitch(copy->source.texture->GetFormat(), copy->copySize,
