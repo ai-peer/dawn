@@ -21,9 +21,11 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    class Device;
+
     class BlendState : public BlendStateBase {
       public:
-        BlendState(BlendStateBuilder* builder);
+        BlendState(Device* device, const BlendStateDescriptor* descriptor);
 
         const D3D12_RENDER_TARGET_BLEND_DESC& GetD3D12BlendDesc() const;
 

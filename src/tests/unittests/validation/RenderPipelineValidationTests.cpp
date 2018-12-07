@@ -15,6 +15,7 @@
 #include "tests/unittests/validation/ValidationTest.h"
 
 #include "common/Constants.h"
+#include "utils/ComboBlendStateDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 class RenderPipelineValidationTest : public ValidationTest {
@@ -28,7 +29,8 @@ class RenderPipelineValidationTest : public ValidationTest {
 
             inputState = device.CreateInputStateBuilder().GetResult();
 
-            blendState = device.CreateBlendStateBuilder().GetResult();
+            utils::ComboBlendStateDescriptor descriptor(device);
+            blendState = device.CreateBlendState(&descriptor);
 
             vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
                 #version 450
