@@ -1,0 +1,374 @@
+# Copyright 2018 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../scripts/dawn_overrides_with_defaults.gni")
+import("${dawn_root}/scripts/dawn_features.gni")
+import("//build_overrides/build.gni")
+import("${dawn_root}/generator/dawn_generator.gni")
+
+config("libdawn_native_internal") {
+  configs = [ "${dawn_root}:dawn_internal" ]
+
+  # Suppress warnings that Metal isn't in the deployment target of Chrome
+  if (is_mac) {
+    cflags_objcc = [ "-Wno-unguarded-availability" ]
+  }
+}
+
+config("libdawn_native_export") {
+  defines = [ "DAWN_NATIVE_IMPLEMENTATION" ]
+}
+
+dawn_generator("libdawn_native_utils_gen") {
+  target = "dawn_native_utils"
+  outputs = [
+    "dawn_native/ProcTable.cpp",
+    "dawn_native/dawn_structs_autogen.h",
+    "dawn_native/dawn_structs_autogen.cpp",
+    "dawn_native/ValidationUtils_autogen.h",
+    "dawn_native/ValidationUtils_autogen.cpp",
+  ]
+}
+
+# Public libdawn_native headers so they can be publically visible for
+# dependencies of libdawn_native
+source_set("libdawn_native_headers") {
+  public_deps = [
+    "${dawn_root}:dawn_headers",
+  ]
+  sources = [
+    "src/include/dawn_native/DawnNative.h",
+    "src/include/dawn_native/dawn_native_export.h",
+
+    # Include all backend's public headers so that dependencies can include
+    # them even when the backends are disabled.
+    "src/include/dawn_native/D3D12Backend.h",
+    "src/include/dawn_native/MetalBackend.h",
+    "src/include/dawn_native/NullBackend.h",
+    "src/include/dawn_native/OpenGLBackend.h",
+    "src/include/dawn_native/VulkanBackend.h",
+  ]
+}
+
+# The meat of the compilation for libdawn_native so that we can cheaply have
+# shared_library / static_library / component versions of it.
+source_set("libdawn_native_sources") {
+  deps = [
+    ":libdawn_native_utils_gen",
+    "${dawn_root}:dawn_common",
+    "${dawn_root}/third_party:spirv_cross",
+    "${dawn_spirv_tools_dir}:spvtools_val",
+  ]
+  public_deps = [
+    ":libdawn_native_headers",
+  ]
+
+  # Put the export config public so that dependents use the same declspec.
+  public_configs = [ ":libdawn_native_export" ]
+
+  configs += [ ":libdawn_native_internal" ]
+  libs = []
+
+  sources = get_target_outputs(":libdawn_native_utils_gen")
+  sources += [
+    "BindGroup.cpp",
+    "BindGroup.h",
+    "BindGroupLayout.cpp",
+    "BindGroupLayout.h",
+    "BlendState.cpp",
+    "BlendState.h",
+    "Buffer.cpp",
+    "Buffer.h",
+    "Builder.cpp",
+    "Builder.h",
+    "CommandAllocator.cpp",
+    "CommandAllocator.h",
+    "CommandBuffer.cpp",
+    "CommandBuffer.h",
+    "CommandBufferStateTracker.cpp",
+    "CommandBufferStateTracker.h",
+    "Commands.cpp",
+    "Commands.h",
+    "ComputePassEncoder.cpp",
+    "ComputePassEncoder.h",
+    "ComputePipeline.cpp",
+    "ComputePipeline.h",
+    "DawnNative.cpp",
+    "DepthStencilState.cpp",
+    "DepthStencilState.h",
+    "Device.cpp",
+    "Device.h",
+    "Error.cpp",
+    "Error.h",
+    "ErrorData.cpp",
+    "ErrorData.h",
+    "Fence.cpp",
+    "Fence.h",
+    "FenceSignalTracker.cpp",
+    "FenceSignalTracker.h",
+    "Forward.h",
+    "InputState.cpp",
+    "InputState.h",
+    "ObjectBase.cpp",
+    "ObjectBase.h",
+    "PassResourceUsage.h",
+    "PerStage.cpp",
+    "PerStage.h",
+    "Pipeline.cpp",
+    "Pipeline.h",
+    "PipelineLayout.cpp",
+    "PipelineLayout.h",
+    "ProgrammablePassEncoder.cpp",
+    "ProgrammablePassEncoder.h",
+    "Queue.cpp",
+    "Queue.h",
+    "RefCounted.cpp",
+    "RefCounted.h",
+    "RenderPassDescriptor.cpp",
+    "RenderPassDescriptor.h",
+    "RenderPassEncoder.cpp",
+    "RenderPassEncoder.h",
+    "RenderPipeline.cpp",
+    "RenderPipeline.h",
+    "Sampler.cpp",
+    "Sampler.h",
+    "ShaderModule.cpp",
+    "ShaderModule.h",
+    "SwapChain.cpp",
+    "SwapChain.h",
+    "Texture.cpp",
+    "Texture.h",
+    "ToBackend.h",
+    "dawn_platform.h",
+  ]
+
+  if (dawn_enable_d3d12) {
+    libs += [ "dxguid.lib" ]
+    sources += [
+      "d3d12/BindGroupD3D12.cpp",
+      "d3d12/BindGroupD3D12.h",
+      "d3d12/BindGroupLayoutD3D12.cpp",
+      "d3d12/BindGroupLayoutD3D12.h",
+      "d3d12/BlendStateD3D12.cpp",
+      "d3d12/BlendStateD3D12.h",
+      "d3d12/BufferD3D12.cpp",
+      "d3d12/BufferD3D12.h",
+      "d3d12/CommandAllocatorManager.cpp",
+      "d3d12/CommandAllocatorManager.h",
+      "d3d12/CommandBufferD3D12.cpp",
+      "d3d12/CommandBufferD3D12.h",
+      "d3d12/ComputePipelineD3D12.cpp",
+      "d3d12/ComputePipelineD3D12.h",
+      "d3d12/DepthStencilStateD3D12.cpp",
+      "d3d12/DepthStencilStateD3D12.h",
+      "d3d12/DescriptorHeapAllocator.cpp",
+      "d3d12/DescriptorHeapAllocator.h",
+      "d3d12/DeviceD3D12.cpp",
+      "d3d12/DeviceD3D12.h",
+      "d3d12/Forward.h",
+      "d3d12/InputStateD3D12.cpp",
+      "d3d12/InputStateD3D12.h",
+      "d3d12/NativeSwapChainImplD3D12.cpp",
+      "d3d12/NativeSwapChainImplD3D12.h",
+      "d3d12/PipelineLayoutD3D12.cpp",
+      "d3d12/PipelineLayoutD3D12.h",
+      "d3d12/PlatformFunctions.cpp",
+      "d3d12/PlatformFunctions.h",
+      "d3d12/QueueD3D12.cpp",
+      "d3d12/QueueD3D12.h",
+      "d3d12/RenderPassDescriptorD3D12.cpp",
+      "d3d12/RenderPassDescriptorD3D12.h",
+      "d3d12/RenderPipelineD3D12.cpp",
+      "d3d12/RenderPipelineD3D12.h",
+      "d3d12/ResourceAllocator.cpp",
+      "d3d12/ResourceAllocator.h",
+      "d3d12/ResourceUploader.cpp",
+      "d3d12/ResourceUploader.h",
+      "d3d12/SamplerD3D12.cpp",
+      "d3d12/SamplerD3D12.h",
+      "d3d12/ShaderModuleD3D12.cpp",
+      "d3d12/ShaderModuleD3D12.h",
+      "d3d12/SwapChainD3D12.cpp",
+      "d3d12/SwapChainD3D12.h",
+      "d3d12/TextureCopySplitter.cpp",
+      "d3d12/TextureCopySplitter.h",
+      "d3d12/TextureD3D12.cpp",
+      "d3d12/TextureD3D12.h",
+      "d3d12/d3d12_platform.h",
+    ]
+  }
+
+  if (dawn_enable_metal) {
+    libs += [
+      "Metal.framework",
+      "Cocoa.framework",
+      "IOKit.framework",
+    ]
+    sources += [
+      "metal/BlendStateMTL.h",
+      "metal/BlendStateMTL.mm",
+      "metal/BufferMTL.h",
+      "metal/BufferMTL.mm",
+      "metal/CommandBufferMTL.h",
+      "metal/CommandBufferMTL.mm",
+      "metal/ComputePipelineMTL.h",
+      "metal/ComputePipelineMTL.mm",
+      "metal/DepthStencilStateMTL.h",
+      "metal/DepthStencilStateMTL.mm",
+      "metal/DeviceMTL.h",
+      "metal/DeviceMTL.mm",
+      "metal/Forward.h",
+      "metal/InputStateMTL.h",
+      "metal/InputStateMTL.mm",
+      "metal/PipelineLayoutMTL.h",
+      "metal/PipelineLayoutMTL.mm",
+      "metal/QueueMTL.h",
+      "metal/QueueMTL.mm",
+      "metal/RenderPipelineMTL.h",
+      "metal/RenderPipelineMTL.mm",
+      "metal/ResourceUploader.h",
+      "metal/ResourceUploader.mm",
+      "metal/SamplerMTL.h",
+      "metal/SamplerMTL.mm",
+      "metal/ShaderModuleMTL.h",
+      "metal/ShaderModuleMTL.mm",
+      "metal/SwapChainMTL.h",
+      "metal/SwapChainMTL.mm",
+      "metal/TextureMTL.h",
+      "metal/TextureMTL.mm",
+    ]
+  }
+
+  if (dawn_enable_null) {
+    sources += [
+      "null/NullBackend.cpp",
+      "null/NullBackend.h",
+    ]
+  }
+
+  if (dawn_enable_opengl) {
+    deps += [ "${dawn_root}/third_party:glad" ]
+    sources += [
+      "opengl/BlendStateGL.cpp",
+      "opengl/BlendStateGL.h",
+      "opengl/BufferGL.cpp",
+      "opengl/BufferGL.h",
+      "opengl/CommandBufferGL.cpp",
+      "opengl/CommandBufferGL.h",
+      "opengl/ComputePipelineGL.cpp",
+      "opengl/ComputePipelineGL.h",
+      "opengl/DepthStencilStateGL.cpp",
+      "opengl/DepthStencilStateGL.h",
+      "opengl/DeviceGL.cpp",
+      "opengl/DeviceGL.h",
+      "opengl/Forward.h",
+      "opengl/InputStateGL.cpp",
+      "opengl/InputStateGL.h",
+      "opengl/PersistentPipelineStateGL.cpp",
+      "opengl/PersistentPipelineStateGL.h",
+      "opengl/PipelineGL.cpp",
+      "opengl/PipelineGL.h",
+      "opengl/PipelineLayoutGL.cpp",
+      "opengl/PipelineLayoutGL.h",
+      "opengl/QueueGL.cpp",
+      "opengl/QueueGL.h",
+      "opengl/RenderPipelineGL.cpp",
+      "opengl/RenderPipelineGL.h",
+      "opengl/SamplerGL.cpp",
+      "opengl/SamplerGL.h",
+      "opengl/ShaderModuleGL.cpp",
+      "opengl/ShaderModuleGL.h",
+      "opengl/SwapChainGL.cpp",
+      "opengl/SwapChainGL.h",
+      "opengl/TextureGL.cpp",
+      "opengl/TextureGL.h",
+    ]
+  }
+
+  if (dawn_enable_vulkan) {
+    deps += [ "${dawn_root}/third_party:vulkan_headers" ]
+    sources += [
+      "vulkan/BindGroupLayoutVk.cpp",
+      "vulkan/BindGroupLayoutVk.h",
+      "vulkan/BindGroupVk.cpp",
+      "vulkan/BindGroupVk.h",
+      "vulkan/BlendStateVk.cpp",
+      "vulkan/BlendStateVk.h",
+      "vulkan/BufferUploader.cpp",
+      "vulkan/BufferUploader.h",
+      "vulkan/BufferVk.cpp",
+      "vulkan/BufferVk.h",
+      "vulkan/CommandBufferVk.cpp",
+      "vulkan/CommandBufferVk.h",
+      "vulkan/ComputePipelineVk.cpp",
+      "vulkan/ComputePipelineVk.h",
+      "vulkan/DepthStencilStateVk.cpp",
+      "vulkan/DepthStencilStateVk.h",
+      "vulkan/DeviceVk.cpp",
+      "vulkan/DeviceVk.h",
+      "vulkan/FencedDeleter.cpp",
+      "vulkan/FencedDeleter.h",
+      "vulkan/Forward.h",
+      "vulkan/InputStateVk.cpp",
+      "vulkan/InputStateVk.h",
+      "vulkan/MemoryAllocator.cpp",
+      "vulkan/MemoryAllocator.h",
+      "vulkan/NativeSwapChainImplVk.cpp",
+      "vulkan/NativeSwapChainImplVk.h",
+      "vulkan/PipelineLayoutVk.cpp",
+      "vulkan/PipelineLayoutVk.h",
+      "vulkan/QueueVk.cpp",
+      "vulkan/QueueVk.h",
+      "vulkan/RenderPassCache.cpp",
+      "vulkan/RenderPassCache.h",
+      "vulkan/RenderPassDescriptorVk.cpp",
+      "vulkan/RenderPassDescriptorVk.h",
+      "vulkan/RenderPipelineVk.cpp",
+      "vulkan/RenderPipelineVk.h",
+      "vulkan/SamplerVk.cpp",
+      "vulkan/SamplerVk.h",
+      "vulkan/ShaderModuleVk.cpp",
+      "vulkan/ShaderModuleVk.h",
+      "vulkan/SwapChainVk.cpp",
+      "vulkan/SwapChainVk.h",
+      "vulkan/TextureVk.cpp",
+      "vulkan/TextureVk.h",
+      "vulkan/VulkanFunctions.cpp",
+      "vulkan/VulkanFunctions.h",
+      "vulkan/VulkanInfo.cpp",
+      "vulkan/VulkanInfo.h",
+    ]
+  }
+}
+
+# The shared library for libdawn_native for use by samples, tests, etc.
+shared_library("libdawn_native") {
+  deps = [
+    ":libdawn_native_sources",
+  ]
+
+  #Make headers publically visible
+  public_deps = [
+    ":libdawn_native_headers",
+  ]
+  public_configs = [ "${dawn_root}:libdawn_public" ]
+
+  # Tell dependents where to find this shared library
+  if (is_mac) {
+    ldflags = [
+      "-install_name",
+      "@rpath/${target_name}.dylib",
+    ]
+  }
+}
