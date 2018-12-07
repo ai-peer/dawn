@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a8f7f3e_809d8777",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-07T13:49:11Z",
+      "side": 1,
+      "message": "Micronit: is there a reason for \"must not\" instead of \"cannot\" here?",
+      "revId": "f2520164b9d72c0a4847c3acf3aa40eb243455f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79dfa592_1b5ca24e",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2018-12-07T13:49:11Z",
+      "side": 1,
+      "message": "I\u0027m guessing this is a nullptr fix?",
+      "revId": "f2520164b9d72c0a4847c3acf3aa40eb243455f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
