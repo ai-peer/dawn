@@ -45,14 +45,14 @@ test("dawn_unittests") {
     "${dawn_root}:dawn_headers",
     "${dawn_root}:dawn_utils",
     "${dawn_root}:libdawn",
-    "${dawn_root}:libdawn_native_sources",
     "${dawn_root}:libdawn_wire",
+    "${dawn_root}/src/dawn_native:libdawn_native_sources",
     "${dawn_root}/third_party:gmock_and_gtest",
   ]
 
   # Add internal Dawn Native headers and config for internal unittests.
-  deps += [ "${dawn_root}:libdawn_native_headers" ]
-  configs += [ "${dawn_root}:libdawn_native_internal" ]
+  deps += [ "${dawn_root}/src/dawn_native:libdawn_native_headers" ]
+  configs += [ "${dawn_root}/src/dawn_native:libdawn_native_internal" ]
 
   sources = get_target_outputs(":mock_dawn_gen")
   sources += [
@@ -110,8 +110,8 @@ test("dawn_end2end_tests") {
     "${dawn_root}:dawn_common",
     "${dawn_root}:dawn_utils",
     "${dawn_root}:libdawn",
-    "${dawn_root}:libdawn_native",
     "${dawn_root}:libdawn_wire",
+    "${dawn_root}/src/dawn_native:libdawn_native",
     "${dawn_root}/third_party:glfw",
     "${dawn_root}/third_party:gmock_and_gtest",
   ]
