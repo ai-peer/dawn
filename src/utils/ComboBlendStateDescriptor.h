@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2018 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,23 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_METAL_BLENDSTATEMTL_H_
-#define DAWNNATIVE_METAL_BLENDSTATEMTL_H_
+#ifndef UTILS_COMBOBLENDSTATEDESCRIPTOR_H_
+#define UTILS_COMBOBLENDSTATEDESCRIPTOR_H_
 
-#include "dawn_native/BlendState.h"
+#include <dawn/dawncpp.h>
 
-#import <Metal/Metal.h>
-namespace dawn_native { namespace metal {
+#include "common/Constants.h"
 
-    class Device;
+namespace utils {
 
-    class BlendState : public BlendStateBase {
+    class ComboBlendStateDescriptor : public dawn::BlendStateDescriptor {
       public:
-        BlendState(Device* device, const BlendStateDescriptor* descriptor);
-
-        void ApplyBlendState(MTLRenderPipelineColorAttachmentDescriptor* descriptor) const;
+        ComboBlendStateDescriptor(const dawn::Device& device);
     };
 
-}}  // namespace dawn_native::metal
+}  // namespace utils
 
-#endif  // DAWNNATIVE_METAL_BLENDSTATEMTL_H_
+#endif  // UTILS_COMBOBLENDSTATEDESCRIPTOR_H_

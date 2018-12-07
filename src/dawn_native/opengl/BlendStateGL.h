@@ -21,9 +21,11 @@
 
 namespace dawn_native { namespace opengl {
 
+    class Device;
+
     class BlendState : public BlendStateBase {
       public:
-        BlendState(BlendStateBuilder* builder);
+        BlendState(Device* device, const BlendStateDescriptor* descriptor);
 
         void ApplyNow(uint32_t attachment);
     };

@@ -41,7 +41,6 @@ namespace dawn_native { namespace d3d12 {
         Device();
         ~Device();
 
-        BlendStateBase* CreateBlendState(BlendStateBuilder* builder) override;
         CommandBufferBase* CreateCommandBuffer(CommandBufferBuilder* builder) override;
         DepthStencilStateBase* CreateDepthStencilState(DepthStencilStateBuilder* builder) override;
         InputStateBase* CreateInputState(InputStateBuilder* builder) override;
@@ -82,6 +81,8 @@ namespace dawn_native { namespace d3d12 {
             const BindGroupDescriptor* descriptor) override;
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
+        ResultOrError<BlendStateBase*> CreateBlendStateImpl(
+            const BlendStateDescriptor* descriptor) override;
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
