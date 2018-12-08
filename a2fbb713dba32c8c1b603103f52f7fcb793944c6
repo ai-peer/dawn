@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d130a22f_b4505b76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-08T02:14:05Z",
+      "side": 1,
+      "message": "Looking at it in this CL, I don\u0027t love the name imageHeight - it\u0027s kind of confusing what it means. We can update that later in sketch.webidl though, it doesn\u0027t block this CL.\n\nmaybe imagePitchInRows? slicePitchInRows? slicePitchHeight? \"slice\" may sort of collide with the 2darray meaning of \"slice\", but that\u0027s technically correct (I think) and \"image\" seems worse.",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fed11a2_ff28f07e",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-08T02:14:05Z",
+      "side": 1,
+      "message": "This expression has gotten a bit complicated. I would like to split it out:\n\n  uint32_t slicePitch \u003d rowPitch * imageHeight;\n  uint32_t sliceSize \u003d rowPitch * (copySize.height - 1) + copySize.width;\n  *bufferSize \u003d slicePitch * (copySize.depth - 1) + sliceSize;\n\nAlso, what I\u0027ve just written doesn\u0027t actually match what you wrote. I\u0027m not 100% sure whether slicePitch should be (rowPitch * imageHeight) or (rowPitch * (imageHeight - 1) + copySize.width). (rowPitch * imageHeight) seems more likely to me.",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e08b4574_da478bcf",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-08T02:14:05Z",
+      "side": 1,
+      "message": "I think this could be called inside ComputeTextureCopyBufferSize instead of here.",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2310f1e2_6940efb3",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-08T02:14:05Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
