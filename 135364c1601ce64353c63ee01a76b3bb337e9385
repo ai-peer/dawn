@@ -34,6 +34,24 @@
       "revId": "135364c1601ce64353c63ee01a76b3bb337e9385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b62a3807_98a05c4f",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f963c33_34140817",
+      "revId": "135364c1601ce64353c63ee01a76b3bb337e9385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
