@@ -17,15 +17,16 @@
 
 #include "common/SerialQueue.h"
 #include "common/vulkan_platform.h"
+#include "dawn_native/DynamicUploader.h"
 
 namespace dawn_native { namespace vulkan {
 
     class Device;
 
-    class BufferUploader {
+    class BufferUploader : public DynamicUploader {
       public:
-        BufferUploader(Device* device);
-        ~BufferUploader();
+        BufferUploader(Device* device, size_t initSize = kBaseRingBufferSize);
+        ~BufferUploader() = default;
 
         void BufferSubData(VkBuffer buffer,
                            VkDeviceSize offset,
@@ -34,8 +35,14 @@ namespace dawn_native { namespace vulkan {
 
         void Tick(Serial completedSerial);
 
+        void CreateBuffer(size_t size) override;
+
       private:
-        Device* mDevice = nullptr;
+        static constexpr size_t kBaseRingBufferSize =
+            64000;  // TODO(b-brber): Figure out these values.
+        static constexpr size_t kDefaultAlignment = 4;
+
+        Device* mDevice;
     };
 
 }}  // namespace dawn_native::vulkan

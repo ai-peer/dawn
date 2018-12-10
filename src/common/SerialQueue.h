@@ -105,6 +105,7 @@ class SerialQueue {
     void ClearUpTo(Serial serial);
 
     Serial FirstSerial() const;
+    Serial LastSerial() const;
 
   private:
     // Returns the first StorageIterator that a serial bigger than serial.
@@ -188,6 +189,12 @@ template <typename T>
 Serial SerialQueue<T>::FirstSerial() const {
     DAWN_ASSERT(!Empty());
     return mStorage.front().first;
+}
+
+template <typename T>
+Serial SerialQueue<T>::LastSerial() const {
+    DAWN_ASSERT(!Empty());
+    return mStorage.back().first;
 }
 
 template <typename T>

@@ -232,6 +232,7 @@ namespace dawn_native { namespace d3d12 {
         mDescriptorHeapAllocator->Tick(lastCompletedSerial);
         mMapRequestTracker->Tick(lastCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(lastCompletedSerial);
+        mResourceUploader->Tick(lastCompletedSerial);
         ExecuteCommandLists({});
         NextSerial();
     }
