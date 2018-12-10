@@ -56,12 +56,56 @@ void init() {
     dawnShaderModule fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, fs).Release();
 
     {
-        dawnRenderPipelineBuilder builder = dawnDeviceCreateRenderPipelineBuilder(device);
-        dawnRenderPipelineBuilderSetColorAttachmentFormat(builder, 0, swapChainFormat);
-        dawnRenderPipelineBuilderSetStage(builder, DAWN_SHADER_STAGE_VERTEX, vsModule, "main");
-        dawnRenderPipelineBuilderSetStage(builder, DAWN_SHADER_STAGE_FRAGMENT, fsModule, "main");
-        pipeline = dawnRenderPipelineBuilderGetResult(builder);
-        dawnRenderPipelineBuilderRelease(builder);
+
+        dawnRenderPipelineDescriptor descriptor;
+        descriptor.nextInChain = nullptr;
+
+        dawnPipelineStageDescriptor vertexStage;
+        vertexStage.nextInChain = nullptr;
+        vertexStage.module = vsModule;
+        vertexStage.entryPoint = "main";
+        descriptor.vertexStage = &vertexStage;
+
+        dawnPipelineStageDescriptor fragmentStage;
+        fragmentStage.nextInChain = nullptr;
+        fragmentStage.module = fsModule;
+        fragmentStage.entryPoint = "main";
+        descriptor.fragmentStage = &fragmentStage;
+
+        dawnAttachmentsStateDescriptor attachmentsState;
+        attachmentsState.nextInChain = nullptr;
+        attachmentsState.numColorAttachments = 1;
+        dawnAttachmentDescriptor colorAttachments {nullptr, swapChainFormat};
+        attachmentsState.colorAttachments = &colorAttachments;
+        attachmentsState.hasDepthStencilAttachment = false;
+        descriptor.attachmentsState = &attachmentsState;
+
+        descriptor.sampleCount = 1;
+
+        descriptor.numBlendStates = 1;
+        dawnBlendStateBuilder blendStateBuilder = dawnDeviceCreateBlendStateBuilder(device);
+        dawnBlendState blendState {dawnBlendStateBuilderGetResult(blendStateBuilder)};
+        descriptor.blendStates =  &blendState;
+        dawnBlendStateBuilderRelease(blendStateBuilder);
+
+        dawnPipelineLayoutDescriptor pl;
+        pl.nextInChain = nullptr;
+        pl.numBindGroupLayouts = 0;
+        pl.bindGroupLayouts = nullptr;
+        descriptor.layout = dawnDeviceCreatePipelineLayout(device, &pl);
+
+        dawnInputStateBuilder inputStateBuilder = dawnDeviceCreateInputStateBuilder(device);
+        descriptor.inputState = dawnInputStateBuilderGetResult(inputStateBuilder);
+        dawnInputStateBuilderRelease(inputStateBuilder);
+
+        descriptor.indexFormat = DAWN_INDEX_FORMAT_UINT32;
+        descriptor.primitiveTopology = DAWN_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+
+        dawnDepthStencilStateBuilder depthStencilBuilder = dawnDeviceCreateDepthStencilStateBuilder(device);
+        descriptor.depthStencilState = dawnDepthStencilStateBuilderGetResult(depthStencilBuilder);
+        dawnDepthStencilStateBuilderRelease(depthStencilBuilder);
+
+        pipeline = dawnDeviceCreateRenderPipeline(device, &descriptor);
     }
 
     dawnShaderModuleRelease(vsModule);
