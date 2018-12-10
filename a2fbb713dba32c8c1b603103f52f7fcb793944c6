@@ -195,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "11dfec5e_bbc81fcc",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-10T19:44:20Z",
+      "side": 1,
+      "message": "I think the changes Brandon has already made here are correct. Using the imageHeight as the buffer \"height\" should be fine. The docs don\u0027t have any additional alignment requirements for slicePitch / imageHeight so I don\u0027t think extra splits are necessary.\n\nWe can verify this once we have 3D textures.",
+      "parentUuid": "6d48f63e_7a33b883",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2df146c6_d1be000b",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 6
