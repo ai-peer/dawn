@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aad4954f_70183ace",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "I agree. Above all I\u0027d like consistency with rowPitch, so columnPitch?\n\nAdditionally, units should match (both in bytes, or both in texels).",
+      "parentUuid": "d130a22f_b4505b76",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8fed11a2_ff28f07e",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 6
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "a2620e32_46a148b8",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Yeah. You guys are right.",
+      "parentUuid": "65f37173_5f8dedc3",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e08b4574_da478bcf",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 6
@@ -68,6 +104,24 @@
       "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b39a21fa_6b19d001",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e08b4574_da478bcf",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "deaac43f_16868c29",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2310f1e2_6940efb3",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "002684d6_aebdfe22",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
         "patchSetId": 6
@@ -99,6 +171,24 @@
       "writtenOn": "2018-12-10T14:52:15Z",
       "side": 1,
       "message": "This file will need to be updated once we support 3D texture, or using 3D copies to update 2D array textures.",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d48f63e_7a33b883",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Right. I saw this - but I couldn\u0027t figure out what still needs implementing for 3D. I added  imageHeight (with depth) tests in copySplitTests and everything seemed to work the way I would expect. If I add this back in, I\u0027ll have to back those tests out. I\u0027d like to see if Austin has a comment before I revert.",
+      "parentUuid": "002684d6_aebdfe22",
       "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -122,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "955e78a9_8a986f06",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df146c6_d1be000b",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dc2572e_a1c9dff9",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 6
@@ -136,6 +244,24 @@
       "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80234695_0426b1aa",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dc2572e_a1c9dff9",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "98affbaf_2507a33d",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30f614e8_06a8b75f",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd6762ae_9d72c91c",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 6
@@ -170,6 +314,24 @@
       "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0abe8c58_cf658b34",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2018-12-10T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd6762ae_9d72c91c",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
