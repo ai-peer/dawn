@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a5840ea_5a60ac15",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "nit: after this the blendState and depthStencilState and inputState should be released",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfd47a1c_921bab39",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "These will disappear.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5b2cc22_b3ad782e",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "Please add a IsDepthStencilRenderableTextureFormat next to IsColorRenderableTextureFormat. We\u0027ll still need to call ValidateTextureFormat prior to that.",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60c22051_42647745",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "Use [IsColorRenderableTextureFormat](https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/Texture.cpp?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d233) We\u0027ll still need to use ValidateTextureFormat prior to that.",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43c59e63_80e1bdb6",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "nit: Device, and forward declare Device above.",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4529126_5230e87e",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "This is unused.",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe6ec29_7f2efe58",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "nit: vertexDescriptor",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2201819c_de270b5d",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "nit: fragmentDescriptor\n\nAlthough validation code isn\u0027t called so we can pass the vertex module to both stages.",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12f43c7b_9e1caa5c",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "fragmentStage",
+      "revId": "78d243822906ffbeef928fb8db7fd04f58579015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

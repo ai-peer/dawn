@@ -16,6 +16,24 @@
       "revId": "135364c1601ce64353c63ee01a76b3bb337e9385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f963c33_34140817",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T13:17:24Z",
+      "side": 1,
+      "message": "I\u0027ll step back and explain what happens in the wire tests. Basically what happens in that the regular dawn calls are like \"client\" calls in a client-server world, and get serialized in some buffer. Then when \"FlushClient\" is called, the \"server\" deserializes the commands and calls them. In this test instead of calling dawn_native we make it call mock_dawn so we can perform checks and fake the behavior of dawn_native.\n\nThis means that for almost all calls to dawnFoo we must have an EXPECT_CALL(api, Foo()) and if dawnFoo returns a value we need to create a fake object to return using myObject \u003d api.GetNewMyObject and add WillOnce(Return(myObject)) to the EXPECT_CALL. If we don\u0027t do this, GMock will helpfully return nullptr for functions returning pointers.\n\nThe return of nullptr here is not what the wire server expects and makes it skip calls to dawnDeviceCreateRenderPipeline, causing the error you saw.\n\nTo fix this we need to add expectations and return \"api\" objects for all sub-objects.",
+      "parentUuid": "13422545_eafd5f8f",
+      "revId": "135364c1601ce64353c63ee01a76b3bb337e9385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
