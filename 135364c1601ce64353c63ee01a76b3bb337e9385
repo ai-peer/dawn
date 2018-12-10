@@ -52,6 +52,24 @@
       "revId": "135364c1601ce64353c63ee01a76b3bb337e9385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fb07d29_716109e8",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-10T14:08:43Z",
+      "side": 1,
+      "message": "Thx for your explaination and this makes things more clear for me.",
+      "parentUuid": "b62a3807_98a05c4f",
+      "revId": "135364c1601ce64353c63ee01a76b3bb337e9385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
