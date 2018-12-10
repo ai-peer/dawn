@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13422545_eafd5f8f",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2018-12-10T07:06:11Z",
+      "side": 1,
+      "message": "This case failed with reason Expected: to be called once Actual: never called - unsatisfied and active in this line.\nI debug into it and find it should go to related MOCK_METHOD. So am I in the right direction for this test?",
+      "revId": "135364c1601ce64353c63ee01a76b3bb337e9385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
