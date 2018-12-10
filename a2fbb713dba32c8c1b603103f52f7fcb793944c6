@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "65f37173_5f8dedc3",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T14:52:15Z",
+      "side": 1,
+      "message": "I\u0027m 99% sure slicePitch \u003d rowPitch * imageHeight",
+      "parentUuid": "8fed11a2_ff28f07e",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e08b4574_da478bcf",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 6
@@ -64,6 +82,91 @@
       "writtenOn": "2018-12-08T02:14:05Z",
       "side": 1,
       "message": "same here",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "002684d6_aebdfe22",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T14:52:15Z",
+      "side": 1,
+      "message": "This file will need to be updated once we support 3D texture, or using 3D copies to update 2D array textures.",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df146c6_d1be000b",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T14:52:15Z",
+      "side": 1,
+      "message": "nit: ImageHeightConstraint",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dc2572e_a1c9dff9",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T14:52:15Z",
+      "side": 1,
+      "message": "nit: Can we have a test for exactly 4?",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30f614e8_06a8b75f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T14:52:15Z",
+      "side": 1,
+      "message": "nit: ImageHeightConstraint",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd6762ae_9d72c91c",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-10T14:52:15Z",
+      "side": 1,
+      "message": "ditto.",
       "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
