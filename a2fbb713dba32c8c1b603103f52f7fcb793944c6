@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6176226e_98bfcf40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-11T20:09:39Z",
+      "side": 1,
+      "message": "Opened https://github.com/gpuweb/gpuweb/issues/148 (don\u0027t have Brandon\u0027s github username so didn\u0027t @)",
+      "parentUuid": "63bda7dc_254eab48",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8fed11a2_ff28f07e",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 6
