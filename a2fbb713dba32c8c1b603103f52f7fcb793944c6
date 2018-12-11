@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "63bda7dc_254eab48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-11T09:47:27Z",
+      "side": 1,
+      "message": "rowPitchInTexels is weird because we still need to keep the 256 byte alignment and that wouldn\u0027t be possible to express for 3-byte formats if we ever support them (256 is 85.3333.. texels).\n\ncolumnPitchInBytes is weird too because it has to be a multiple of rowPitchInBytes so why not just express it as columnPitchInRowPitches which is the same as columnPitchInTexels?\n\nAnyway that\u0027s a good question, can you raise an issue / PR and we can discuss it in the next meeting.",
+      "parentUuid": "aad4954f_70183ace",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8fed11a2_ff28f07e",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 6
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "I think the changes Brandon has already made here are correct. Using the imageHeight as the buffer \"height\" should be fine. The docs don\u0027t have any additional alignment requirements for slicePitch / imageHeight so I don\u0027t think extra splits are necessary.\n\nWe can verify this once we have 3D textures.",
       "parentUuid": "6d48f63e_7a33b883",
+      "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "621e5e42_454f9e45",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-11T09:47:27Z",
+      "side": 1,
+      "message": "Ok sounds good.",
+      "parentUuid": "11dfec5e_bbc81fcc",
       "revId": "a2fbb713dba32c8c1b603103f52f7fcb793944c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
