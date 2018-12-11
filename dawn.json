@@ -1042,12 +1042,13 @@
         "category": "structure",
         "extensible": true,
         "members": [
-            {"name": "usage", "type": "texture usage bit"},
-            {"name": "dimension", "type": "texture dimension"},
             {"name": "size", "type": "extent 3D"},
-            {"name": "array layer", "type": "uint32_t"},
+            {"name": "array size", "type": "uint32_t"},
+            {"name": "level count", "type": "uint32_t"},
+            {"name": "sample count", "type": "uint32_t"},
+            {"name": "dimension", "type": "texture dimension"},
             {"name": "format", "type": "texture format"},
-            {"name": "level count", "type": "uint32_t"}
+            {"name": "usage", "type": "texture usage bit"}
         ]
     },
     "texture dimension": {
