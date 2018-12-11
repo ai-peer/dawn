@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42ec9d2a_e1701eff",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-11T09:32:31Z",
+      "side": 0,
+      "message": "Ordering doesn\u0027t matter in WebIDL so we don\u0027t need to change it here. We might do a pass to try and order all members in dawn.json but I don\u0027t think we need it now.",
+      "revId": "a49242766a107c411d744d828a733317ef92dc83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
