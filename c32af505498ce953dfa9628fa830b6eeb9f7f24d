@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f728bead_d6809ac2",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-11T13:22:35Z",
+      "side": 1,
+      "message": "With the \"fat renderpipeline descriptor\" gpuweb PR merged, this should disappear. Instead [1] should be updated to take const* \"blend state descriptor\".",
+      "revId": "c32af505498ce953dfa9628fa830b6eeb9f7f24d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb8f209_b7647eb8",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-11T13:22:35Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "c32af505498ce953dfa9628fa830b6eeb9f7f24d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
