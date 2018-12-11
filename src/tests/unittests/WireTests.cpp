@@ -327,15 +327,20 @@ TEST_F(WireTests, CStringArgument) {
         .WillOnce(Return(apiVsModule));
 
     // Create the blend state
-    dawnBlendStateBuilder blendStateBuilder = dawnDeviceCreateBlendStateBuilder(device);
-    dawnBlendStateBuilder apiBlendStateBuilder = api.GetNewBlendStateBuilder();
-    EXPECT_CALL(api, DeviceCreateBlendStateBuilder(apiDevice))
-        .WillOnce(Return(apiBlendStateBuilder));
+    dawnBlendDescriptor blendDescriptor;
+    blendDescriptor.operation = DAWN_BLEND_OPERATION_ADD;
+    blendDescriptor.srcFactor = DAWN_BLEND_FACTOR_ONE;
+    blendDescriptor.dstFactor = DAWN_BLEND_FACTOR_ONE;
+    dawnBlendStateDescriptor blendStateDescriptor;
+    blendStateDescriptor.nextInChain = nullptr;
+    blendStateDescriptor.blendEnabled = false;
+    blendStateDescriptor.alphaBlend = blendDescriptor;
+    blendStateDescriptor.colorBlend = blendDescriptor;
+    blendStateDescriptor.colorWriteMask = DAWN_COLOR_WRITE_MASK_ALL;
 
-    dawnBlendState blendState = dawnBlendStateBuilderGetResult(blendStateBuilder);
+    dawnBlendState blendState = dawnDeviceCreateBlendState(device, &blendStateDescriptor);
     dawnBlendState apiBlendState = api.GetNewBlendState();
-    EXPECT_CALL(api, BlendStateBuilderGetResult(apiBlendStateBuilder))
-        .WillOnce(Return(apiBlendState));
+    EXPECT_CALL(api, DeviceCreateBlendState(apiDevice, _)).WillOnce(Return(apiBlendState));
 
     // Create the input state
     dawnInputStateBuilder inputStateBuilder = dawnDeviceCreateInputStateBuilder(device);

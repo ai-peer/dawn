@@ -87,16 +87,16 @@ namespace dawn_native { namespace d3d12 {
         }
     }  // namespace
 
-    BlendState::BlendState(BlendStateBuilder* builder) : BlendStateBase(builder) {
-        auto& info = GetBlendInfo();
-        mBlendDesc.BlendEnable = info.blendEnabled;
-        mBlendDesc.SrcBlend = D3D12Blend(info.colorBlend.srcFactor);
-        mBlendDesc.DestBlend = D3D12Blend(info.colorBlend.dstFactor);
-        mBlendDesc.BlendOp = D3D12BlendOperation(info.colorBlend.operation);
-        mBlendDesc.SrcBlendAlpha = D3D12Blend(info.alphaBlend.srcFactor);
-        mBlendDesc.DestBlendAlpha = D3D12Blend(info.alphaBlend.dstFactor);
-        mBlendDesc.BlendOpAlpha = D3D12BlendOperation(info.alphaBlend.operation);
-        mBlendDesc.RenderTargetWriteMask = D3D12RenderTargetWriteMask(info.colorWriteMask);
+    BlendState::BlendState(Device* device, const BlendStateDescriptor* descriptor)
+        : BlendStateBase(device, descriptor) {
+        mBlendDesc.BlendEnable = descriptor->blendEnabled;
+        mBlendDesc.SrcBlend = D3D12Blend(descriptor->colorBlend.srcFactor);
+        mBlendDesc.DestBlend = D3D12Blend(descriptor->colorBlend.dstFactor);
+        mBlendDesc.BlendOp = D3D12BlendOperation(descriptor->colorBlend.operation);
+        mBlendDesc.SrcBlendAlpha = D3D12Blend(descriptor->alphaBlend.srcFactor);
+        mBlendDesc.DestBlendAlpha = D3D12Blend(descriptor->alphaBlend.dstFactor);
+        mBlendDesc.BlendOpAlpha = D3D12BlendOperation(descriptor->alphaBlend.operation);
+        mBlendDesc.RenderTargetWriteMask = D3D12RenderTargetWriteMask(descriptor->colorWriteMask);
         mBlendDesc.LogicOpEnable = false;
         mBlendDesc.LogicOp = D3D12_LOGIC_OP_NOOP;
     }

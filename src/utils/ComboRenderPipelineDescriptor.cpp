@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "utils/ComboRenderPipelineDescriptor.h"
+#include "utils/ComboBlendStateDescriptor.h"
 
 #include "utils/DawnHelpers.h"
 
@@ -57,8 +58,9 @@ namespace utils {
         descriptor->numBlendStates = 1;
         descriptor->blendStates = cBlendStates;
 
+        ComboBlendStateDescriptor blendStateDescriptor(device);
         for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-            cBlendStates[i] = device.CreateBlendStateBuilder().GetResult();
+            cBlendStates[i] = device.CreateBlendState(&blendStateDescriptor);
         }
     }
 

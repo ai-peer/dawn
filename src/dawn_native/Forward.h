@@ -24,7 +24,6 @@ namespace dawn_native {
     class BindGroupLayoutBase;
     class BindGroupLayoutBuilder;
     class BlendStateBase;
-    class BlendStateBuilder;
     class BufferBase;
     class BufferBuilder;
     class ComputePipelineBase;

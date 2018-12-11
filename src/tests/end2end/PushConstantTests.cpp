@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "utils/ComboBlendStateDescriptor.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
@@ -189,17 +190,17 @@ class PushConstantTest: public DawnTest {
             blend.operation = dawn::BlendOperation::Add;
             blend.srcFactor = dawn::BlendFactor::One;
             blend.dstFactor = dawn::BlendFactor::One;
+            utils::ComboBlendStateDescriptor blendStateDescriptor(device);
+            blendStateDescriptor.blendEnabled = true;
+            blendStateDescriptor.alphaBlend = blend;
+            blendStateDescriptor.colorBlend = blend;
 
             utils::ComboRenderPipelineDescriptor descriptor(device);
             descriptor.layout = layout;
             descriptor.cVertexStage.module = vsModule;
             descriptor.cFragmentStage.module = fsModule;
             descriptor.primitiveTopology = dawn::PrimitiveTopology::PointList;
-            descriptor.cBlendStates[0] = device.CreateBlendStateBuilder()
-                                         .SetBlendEnabled(true)
-                                         .SetColorBlend(&blend)
-                                         .SetAlphaBlend(&blend)
-                                         .GetResult();
+            descriptor.cBlendStates[0] = device.CreateBlendState(&blendStateDescriptor);
 
             return device.CreateRenderPipeline(&descriptor);
         }

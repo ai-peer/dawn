@@ -16,6 +16,7 @@
 #define DAWNNATIVE_BLENDSTATE_H_
 
 #include "dawn_native/Builder.h"
+#include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
 
@@ -23,45 +24,18 @@
 
 namespace dawn_native {
 
+    MaybeError ValidateBlendStateDescriptor(DeviceBase* device,
+                                            const BlendStateDescriptor* descriptor);
+
     class BlendStateBase : public ObjectBase {
       public:
-        BlendStateBase(BlendStateBuilder* builder);
+        BlendStateBase(DeviceBase* device, const BlendStateDescriptor* descriptor);
 
-        struct BlendInfo {
-            bool blendEnabled = false;
-            BlendDescriptor alphaBlend = {dawn::BlendOperation::Add, dawn::BlendFactor::One,
-                                          dawn::BlendFactor::Zero};
-            BlendDescriptor colorBlend = {dawn::BlendOperation::Add, dawn::BlendFactor::One,
-                                          dawn::BlendFactor::Zero};
-            dawn::ColorWriteMask colorWriteMask = dawn::ColorWriteMask::All;
-        };
-
-        const BlendInfo& GetBlendInfo() const;
+        const BlendStateDescriptor* GetBlendStateDescriptor() const;
 
       private:
-        BlendInfo mBlendInfo;
+        const BlendStateDescriptor mDescriptor;
     };
-
-    class BlendStateBuilder : public Builder<BlendStateBase> {
-      public:
-        BlendStateBuilder(DeviceBase* device);
-
-        // Dawn API
-        void SetBlendEnabled(bool blendEnabled);
-        void SetAlphaBlend(const BlendDescriptor* alphaBlend);
-        void SetColorBlend(const BlendDescriptor* colorBlend);
-        void SetColorWriteMask(dawn::ColorWriteMask colorWriteMask);
-
-      private:
-        friend class BlendStateBase;
-
-        BlendStateBase* GetResultImpl() override;
-
-        int mPropertiesSet = 0;
-
-        BlendStateBase::BlendInfo mBlendInfo;
-    };
-
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_BLENDSTATE_H_
