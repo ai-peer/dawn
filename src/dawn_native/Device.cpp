@@ -52,8 +52,8 @@ namespace dawn_native {
     // DeviceBase
 
     DeviceBase::DeviceBase() {
-        mCaches = std::make_unique<DeviceBase::Caches>();
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
+        mCaches = std::make_unique<DeviceBase::Caches>();
     }
 
     DeviceBase::~DeviceBase() {
