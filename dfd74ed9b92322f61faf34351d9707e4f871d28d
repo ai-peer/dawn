@@ -52,6 +52,24 @@
       "revId": "dfd74ed9b92322f61faf34351d9707e4f871d28d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e098a180_0f4b4046",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-12T09:26:05Z",
+      "side": 1,
+      "message": "For the MVP I think WebGPU will only allow 1 and 4 but like you said. For the v1 we\u0027ll have a lot of hardware dimensions to expose in the device limits, maybe this will be one of them?",
+      "parentUuid": "47956a23_a3b78d74",
+      "revId": "dfd74ed9b92322f61faf34351d9707e4f871d28d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
