@@ -15,34 +15,33 @@
 #ifndef DAWNNATIVE_D3D12_RESOURCEUPLOADER_H_
 #define DAWNNATIVE_D3D12_RESOURCEUPLOADER_H_
 
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
-
-#include "dawn_native/Forward.h"
 
 namespace dawn_native { namespace d3d12 {
 
     class Device;
 
-    class ResourceUploader {
+    class ResourceUploader : public DynamicUploader {
       public:
-        ResourceUploader(Device* device);
+        ResourceUploader(Device* device, size_t initSize = kBaseRingBufferSize);
+        ~ResourceUploader() = default;
 
         void BufferSubData(ComPtr<ID3D12Resource> resource,
                            uint32_t start,
                            uint32_t count,
                            const void* data);
 
-      private:
-        struct UploadHandle {
-            ComPtr<ID3D12Resource> resource;
-            uint8_t* mappedBuffer;
-        };
+        void CreateBuffer(size_t size) override;
 
-        UploadHandle GetUploadBuffer(uint32_t requiredSize);
-        void Release(UploadHandle uploadHandle);
+      private:
+        static constexpr size_t kBaseRingBufferSize = 64000;  // DXGI min heap size is 64K.
+        static constexpr size_t kDefaultAlignment =
+            4;  // D3D does not specify so we assume 4-byte alignment to be safe.
 
         Device* mDevice;
     };
+
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_RESOURCEUPLOADER_H_

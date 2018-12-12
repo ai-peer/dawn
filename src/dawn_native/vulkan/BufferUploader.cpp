@@ -15,61 +15,27 @@
 #include "dawn_native/vulkan/BufferUploader.h"
 
 #include "dawn_native/vulkan/DeviceVk.h"
-#include "dawn_native/vulkan/FencedDeleter.h"
-#include "dawn_native/vulkan/MemoryAllocator.h"
-
-#include <cstring>
+#include "dawn_native/vulkan/RingBufferVk.h"
 
 namespace dawn_native { namespace vulkan {
 
-    BufferUploader::BufferUploader(Device* device) : mDevice(device) {
+    BufferUploader::BufferUploader(Device* device, size_t initSize) : mDevice(device) {
+        CreateBuffer(initSize);
     }
 
-    BufferUploader::~BufferUploader() {
+    void BufferUploader::CreateBuffer(size_t size) {
+        mRingBuffers.emplace_back(std::make_unique<RingBuffer>(size, mDevice));
     }
 
     void BufferUploader::BufferSubData(VkBuffer buffer,
                                        VkDeviceSize offset,
                                        VkDeviceSize size,
                                        const void* data) {
-        // TODO(cwallez@chromium.org): this is soooooo bad. We should use some sort of ring buffer
-        // for this.
-
-        // Create a staging buffer
-        VkBufferCreateInfo createInfo;
-        createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-        createInfo.pNext = nullptr;
-        createInfo.flags = 0;
-        createInfo.size = size;
-        createInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-        createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-        createInfo.queueFamilyIndexCount = 0;
-        createInfo.pQueueFamilyIndices = 0;
-
-        VkBuffer stagingBuffer = VK_NULL_HANDLE;
-        if (mDevice->fn.CreateBuffer(mDevice->GetVkDevice(), &createInfo, nullptr,
-                                     &stagingBuffer) != VK_SUCCESS) {
-            ASSERT(false);
-        }
-
-        VkMemoryRequirements requirements;
-        mDevice->fn.GetBufferMemoryRequirements(mDevice->GetVkDevice(), stagingBuffer,
-                                                &requirements);
-
-        DeviceMemoryAllocation allocation;
-        if (!mDevice->GetMemoryAllocator()->Allocate(requirements, true, &allocation)) {
-            ASSERT(false);
-        }
-
-        if (mDevice->fn.BindBufferMemory(mDevice->GetVkDevice(), stagingBuffer,
-                                         allocation.GetMemory(),
-                                         allocation.GetMemoryOffset()) != VK_SUCCESS) {
-            ASSERT(false);
-        }
-
         // Write to the staging buffer
-        ASSERT(allocation.GetMappedPointer() != nullptr);
-        memcpy(allocation.GetMappedPointer(), data, static_cast<size_t>(size));
+        UploadHandle uploadHandle = Allocate(static_cast<size_t>(size), kDefaultAlignment);
+
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+        memcpy(uploadHandle.mappedBuffer, data, static_cast<size_t>(size));
 
         // Enqueue host write -> transfer src barrier and copy command
         VkCommandBuffer commands = mDevice->GetPendingCommandBuffer();
@@ -84,19 +50,17 @@ namespace dawn_native { namespace vulkan {
                                        VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 1, &barrier, 0, nullptr,
                                        0, nullptr);
 
+        const RingBuffer* ringBuffer = static_cast<RingBuffer*>(GetBuffer().get());
+
         VkBufferCopy copy;
-        copy.srcOffset = 0;
+        copy.srcOffset = uploadHandle.startOffset;
         copy.dstOffset = offset;
         copy.size = size;
-        mDevice->fn.CmdCopyBuffer(commands, stagingBuffer, buffer, 1, &copy);
-
-        // TODO(cwallez@chromium.org): Buffers must be deleted before the memory.
-        // This happens to work for now, but is fragile.
-        mDevice->GetMemoryAllocator()->Free(&allocation);
-        mDevice->GetFencedDeleter()->DeleteWhenUnused(stagingBuffer);
+        mDevice->fn.CmdCopyBuffer(commands, ringBuffer->GetBuffer(), buffer, 1, &copy);
     }
 
-    void BufferUploader::Tick(Serial) {
+    void BufferUploader::Tick(Serial completedSerial) {
+        DynamicUploader::Tick(completedSerial);
     }
 
 }}  // namespace dawn_native::vulkan

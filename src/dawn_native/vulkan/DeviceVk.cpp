@@ -127,10 +127,13 @@ namespace dawn_native { namespace vulkan {
 
         GatherQueueFromDevice();
 
-        mBufferUploader = std::make_unique<BufferUploader>(this);
         mDeleter = std::make_unique<FencedDeleter>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mMemoryAllocator = std::make_unique<MemoryAllocator>(this);
+
+        // Uploader creates a buffer upon creation, so the deleter must be created prior.
+        mBufferUploader = std::make_unique<BufferUploader>(this);
+
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
 
         mPCIInfo.deviceId = mDeviceInfo.properties.deviceID;
@@ -186,6 +189,11 @@ namespace dawn_native { namespace vulkan {
 
         // Free services explicitly so that they can free Vulkan objects before vkDestroyDevice
         mBufferUploader = nullptr;
+
+        // Releasing the uploader enqueues buffers to be deleted.
+        // Call Tick() again to allow the deleter to clear them prior to being released.
+        mDeleter->Tick(mCompletedSerial);
+
         mDeleter = nullptr;
         mMapRequestTracker = nullptr;
         mMemoryAllocator = nullptr;

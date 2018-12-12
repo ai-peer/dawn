@@ -110,6 +110,7 @@ class SerialStorage {
     void ClearUpTo(Serial serial);
 
     Serial FirstSerial() const;
+    Serial LastSerial() const;
 
   protected:
     // Returns the first StorageIterator that a serial bigger than serial.
@@ -158,6 +159,12 @@ void SerialStorage<Derived>::ClearUpTo(Serial serial) {
 
 template <typename Derived>
 Serial SerialStorage<Derived>::FirstSerial() const {
+    DAWN_ASSERT(!Empty());
+    return mStorage.begin()->first;
+}
+
+template <typename Derived>
+Serial SerialStorage<Derived>::LastSerial() const {
     DAWN_ASSERT(!Empty());
     return mStorage.begin()->first;
 }
