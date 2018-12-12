@@ -34,6 +34,24 @@
       "revId": "dfd74ed9b92322f61faf34351d9707e4f871d28d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47956a23_a3b78d74",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-12T03:39:18Z",
+      "side": 1,
+      "message": "At least in Vulkan\u0027s case, this might be because there are fixed sample counts queriable from the API, and you must use one of them. In WebGPU we might want to be looser (like OpenGL) so an application doesn\u0027t accidentally make itself hardware dependent?",
+      "parentUuid": "ce063518_150f0c9a",
+      "revId": "dfd74ed9b92322f61faf34351d9707e4f871d28d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
