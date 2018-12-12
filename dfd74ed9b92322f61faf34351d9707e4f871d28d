@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b193a6e3_94be4b2c",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-12T03:03:18Z",
+      "side": 1,
+      "message": "This has me wondering. Should we distinguish sampleCount 0 vs 1? E.g. on OpenGL, 0 means \"non-multisampled\", while 1 means \"possibly multisampled with at least 1 sample\". Things seem more complicated in Vulkan.\n\nThis kind of depends on (1) whether there\u0027s a difference between non-multisampled and 1-sample, and (2) if there is, whether there\u0027s a way to distinguish them other than by sample count (e.g. texture dimension).",
+      "revId": "dfd74ed9b92322f61faf34351d9707e4f871d28d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
