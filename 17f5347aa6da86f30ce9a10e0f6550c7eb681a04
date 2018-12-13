@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa9ef07e_12cfb59d",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-13T01:03:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf4ace6_c3efbae2",
+      "range": {
+        "startLine": 62,
+        "startChar": 25,
+        "endLine": 62,
+        "endChar": 30
+      },
+      "revId": "17f5347aa6da86f30ce9a10e0f6550c7eb681a04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea102d9d_0fda42bf",
         "filename": "src/tests/end2end/DrawIndexedTests.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "17f5347aa6da86f30ce9a10e0f6550c7eb681a04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6c3f340_a170306d",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-13T01:03:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea102d9d_0fda42bf",
+      "range": {
+        "startLine": 68,
+        "startChar": 27,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "17f5347aa6da86f30ce9a10e0f6550c7eb681a04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
