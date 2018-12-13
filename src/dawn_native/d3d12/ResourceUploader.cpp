@@ -15,59 +15,30 @@
 #include "dawn_native/d3d12/ResourceUploader.h"
 
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/ResourceAllocator.h"
+#include "dawn_native/d3d12/RingBufferD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    ResourceUploader::ResourceUploader(Device* device) : mDevice(device) {
+    ResourceUploader::ResourceUploader(Device* device, size_t initSize) : mDevice(device) {
+        CreateBuffer(initSize);
+    }
+
+    void ResourceUploader::CreateBuffer(size_t size) {
+        mRingBuffers.emplace_back(std::make_unique<RingBuffer>(size, mDevice));
     }
 
     void ResourceUploader::BufferSubData(ComPtr<ID3D12Resource> resource,
                                          uint32_t start,
                                          uint32_t count,
                                          const void* data) {
-        // TODO(enga@google.com): Use a handle to a subset of a large ring buffer. On Release,
-        // decrease reference count on the ring buffer and free when 0. Alternatively, the
-        // SerialQueue could be used to track which last point of the ringbuffer is in use, and
-        // start reusing chunks of it that aren't in flight.
-        UploadHandle uploadHandle = GetUploadBuffer(count);
+        UploadHandle uploadHandle = Allocate(count, kDefaultAlignment);
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
         memcpy(uploadHandle.mappedBuffer, data, count);
-        mDevice->GetPendingCommandList()->CopyBufferRegion(resource.Get(), start,
-                                                           uploadHandle.resource.Get(), 0, count);
-        Release(uploadHandle);
-    }
+        const RingBuffer* ringBuffer = static_cast<RingBuffer*>(GetBuffer().get());
 
-    ResourceUploader::UploadHandle ResourceUploader::GetUploadBuffer(uint32_t requiredSize) {
-        // TODO(enga@google.com): This will find or create a mapped buffer of sufficient size and
-        // return a handle to a mapped range
-        D3D12_RESOURCE_DESC resourceDescriptor;
-        resourceDescriptor.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-        resourceDescriptor.Alignment = 0;
-        resourceDescriptor.Width = requiredSize;
-        resourceDescriptor.Height = 1;
-        resourceDescriptor.DepthOrArraySize = 1;
-        resourceDescriptor.MipLevels = 1;
-        resourceDescriptor.Format = DXGI_FORMAT_UNKNOWN;
-        resourceDescriptor.SampleDesc.Count = 1;
-        resourceDescriptor.SampleDesc.Quality = 0;
-        resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-        resourceDescriptor.Flags = D3D12_RESOURCE_FLAG_NONE;
-
-        UploadHandle uploadHandle;
-        uploadHandle.resource = mDevice->GetResourceAllocator()->Allocate(
-            D3D12_HEAP_TYPE_UPLOAD, resourceDescriptor, D3D12_RESOURCE_STATE_GENERIC_READ);
-        D3D12_RANGE readRange;
-        readRange.Begin = 0;
-        readRange.End = 0;
-
-        uploadHandle.resource->Map(0, &readRange,
-                                   reinterpret_cast<void**>(&uploadHandle.mappedBuffer));
-        return uploadHandle;
-    }
-
-    void ResourceUploader::Release(UploadHandle uploadHandle) {
-        uploadHandle.resource->Unmap(0, nullptr);
-        mDevice->GetResourceAllocator()->Release(uploadHandle.resource);
+        mDevice->GetPendingCommandList()->CopyBufferRegion(
+            resource.Get(), start, ringBuffer->GetResource(), uploadHandle.startOffset, count);
     }
 
 }}  // namespace dawn_native::d3d12

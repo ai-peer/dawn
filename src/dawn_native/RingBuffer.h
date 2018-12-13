@@ -1,0 +1,60 @@
+// Copyright 2017 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef DAWNNATIVE_RINGBUFFER_H_
+#define DAWNNATIVE_RINGBUFFER_H_
+
+#include "common/SerialQueue.h"
+
+// RingBufferBase is the front-end implementation used to manage a ring buffer in GPU memory.
+namespace dawn_native {
+
+    struct UploadHandle {
+        uint8_t* mappedBuffer;
+        size_t startOffset;
+    };
+
+    class RingBufferBase {
+      public:
+        RingBufferBase(size_t maxSize);
+        virtual ~RingBufferBase() = default;
+
+        UploadHandle SubAllocate(size_t requestedSize);
+
+        void Tick(Serial lastCompletedSerial);
+        size_t GetMaxSize() const;
+        bool Empty() const;
+
+      protected:
+        virtual Serial GetPendingCommandSerial() const = 0;
+        virtual uint8_t* GetCPUVirtualAddressPointer() const = 0;
+
+        struct Request {
+            size_t endOffset;
+            size_t size;
+        };
+
+        SerialQueue<Request> mInflightRequests;  // Queue of the recorded sub-alloc requests (e.g.
+                                                 // frame of resources).
+
+        size_t mUsedEndOffset = 0;    // Tail of used sub-alloc requests (in bytes).
+        size_t mUsedStartOffset = 0;  // Head of used sub-alloc requests (in bytes).
+        size_t mMaxSize;              // Max size of the ring buffer (in bytes).
+        size_t mUsedSize = 0;  // Size of the sub-alloc requests (in bytes) of the ring buffer.
+        size_t mCurrentRequestSize =
+            0;  // Size of the sub-alloc requests (in bytes) of the current serial.
+    };
+}  // namespace dawn_native
+
+#endif  // DAWNNATIVE_RINGBUFFER_H_
