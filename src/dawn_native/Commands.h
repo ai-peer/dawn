@@ -104,6 +104,7 @@ namespace dawn_native {
         uint32_t indexCount;
         uint32_t instanceCount;
         uint32_t firstIndex;
+        uint32_t baseVertex;
         uint32_t firstInstance;
     };
 
