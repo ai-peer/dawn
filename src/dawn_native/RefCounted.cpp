@@ -16,9 +16,12 @@
 
 #include "common/Assert.h"
 
+#include <iostream>
+
 namespace dawn_native {
 
     RefCounted::RefCounted() {
+        std::cout << "Created " << this << std::endl;
     }
 
     RefCounted::~RefCounted() {
@@ -26,6 +29,7 @@ namespace dawn_native {
 
     void RefCounted::ReferenceInternal() {
         ASSERT(mInternalRefs != 0);
+        std::cout << "Ref internal " << this << std::endl;
 
         // TODO(cwallez@chromium.org): what to do on overflow?
         mInternalRefs++;
@@ -33,6 +37,7 @@ namespace dawn_native {
 
     void RefCounted::ReleaseInternal() {
         ASSERT(mInternalRefs != 0);
+        std::cout << "Release internal " << this << std::endl;
 
         mInternalRefs--;
 
@@ -53,6 +58,7 @@ namespace dawn_native {
 
     void RefCounted::Reference() {
         ASSERT(mInternalRefs != 0);
+        std::cout << "Ref " << this << std::endl;
 
         // mExternalRefs != 0 counts as one internal ref.
         if (mExternalRefs == 0) {
@@ -66,6 +72,7 @@ namespace dawn_native {
     void RefCounted::Release() {
         ASSERT(mInternalRefs != 0);
         ASSERT(mExternalRefs != 0);
+        std::cout << "Release " << this << std::endl;
 
         mExternalRefs--;
         // mExternalRefs != 0 counts as one internal ref.

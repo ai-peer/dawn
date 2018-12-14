@@ -19,6 +19,8 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/Texture.h"
 
+#include <iostream>
+
 namespace dawn_native {
 
     // RenderPassDescriptor
@@ -81,6 +83,11 @@ namespace dawn_native {
     // RenderPassDescriptorBuilder
 
     RenderPassDescriptorBuilder::RenderPassDescriptorBuilder(DeviceBase* device) : Builder(device) {
+        std::cout << "Allocated " << this << std::endl;
+    }
+
+    RenderPassDescriptorBuilder::~RenderPassDescriptorBuilder() {
+        std::cout << "Freed " << this << std::endl;
     }
 
     bool RenderPassDescriptorBuilder::CheckArrayLayersAndLevelCountForAttachment(

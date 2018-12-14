@@ -75,6 +75,7 @@ namespace dawn_native {
     class RenderPassDescriptorBuilder : public Builder<RenderPassDescriptorBase> {
       public:
         RenderPassDescriptorBuilder(DeviceBase* device);
+        ~RenderPassDescriptorBuilder();
 
         // Dawn API
         RenderPassDescriptorBase* GetResultImpl() override;
