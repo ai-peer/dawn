@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f9b1ff9_38dffcd3",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-14T20:58:35Z",
+      "side": 0,
+      "message": "It\u0027s been a long time, but I know we didn\u0027t like having the clear values here. I believe it\u0027s because the clear values are not actually part of the render pass; at least in Vulkan, they can be set when the render pass is begun: VkRenderPassBeginInfo.pClearValues.\n\nLooks like we didn\u0027t even add clear values to the sketch until https://github.com/gpuweb/gpuweb/pull/80 .\nI\u0027m not sure whether we had an investigation or discussion where we decided to do it this way.",
+      "revId": "ff9562f7927b614f16449f3c757c57c70543eb37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
