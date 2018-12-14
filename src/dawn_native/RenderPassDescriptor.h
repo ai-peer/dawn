@@ -72,24 +72,19 @@ namespace dawn_native {
         uint32_t mHeight;
     };
 
+    // TODO(jiawei.shao@intel.com): remove RenderPassDescriptorBuilder and set data into
+    // RenderPassDescriptor directly.
     class RenderPassDescriptorBuilder : public Builder<RenderPassDescriptorBase> {
       public:
         RenderPassDescriptorBuilder(DeviceBase* device);
 
         // Dawn API
         RenderPassDescriptorBase* GetResultImpl() override;
-        void SetColorAttachment(uint32_t attachment,
-                                TextureViewBase* textureView,
-                                dawn::LoadOp loadOp);
-        void SetColorAttachmentClearColor(uint32_t attachment,
-                                          float clearR,
-                                          float clearG,
-                                          float clearB,
-                                          float clearA);
-        void SetDepthStencilAttachment(TextureViewBase* textureView,
-                                       dawn::LoadOp depthLoadOp,
-                                       dawn::LoadOp stencilLoadOp);
-        void SetDepthStencilAttachmentClearValue(float clearDepth, uint32_t clearStencil);
+        void SetColorAttachments(
+            uint32_t count,
+            const dawn_native::RenderPassColorAttachmentDescriptor* attachments);
+        void SetDepthStencilAttachment(
+            const dawn_native::RenderPassDepthStencilAttachmentDescriptor* attachment);
 
       private:
         friend class RenderPassDescriptorBase;
