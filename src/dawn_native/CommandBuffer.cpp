@@ -364,6 +364,10 @@ namespace dawn_native {
     // Implementation of the command buffer validation that can be precomputed before submit
 
     MaybeError CommandBufferBuilder::ValidateGetResult() {
+        if (mEncodingState != EncodingState::TopLevel) {
+            return DAWN_VALIDATION_ERROR("Command buffer recording ended mid-pass");
+        }
+
         MoveToIterator();
         mIterator.Reset();
 
