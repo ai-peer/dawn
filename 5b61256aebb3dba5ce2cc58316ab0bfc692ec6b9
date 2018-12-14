@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0d8a5aad_f5eecbbd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "nit: match",
+      "range": {
+        "startLine": 7,
+        "startChar": 44,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6bdeda56_e93528b0",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -19,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "cf4b0a74_42e7bb62",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "If we remove the object it means the tests should be updated to use the descriptor instead no?",
+      "parentUuid": "6bdeda56_e93528b0",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "40b9176b_4ac0cd48",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -30,6 +71,166 @@
       "writtenOn": "2018-12-14T07:30:28Z",
       "side": 1,
       "message": "I will remove this builder in next patch.",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "205ae7eb_f51e2ae0",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "I think this should be true in case we add extensions to the structure.",
+      "range": {
+        "startLine": 966,
+        "startChar": 22,
+        "endLine": 966,
+        "endChar": 27
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f4bd11e_6d402a7c",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "Can we call this planeStencilDescriptor? I also have a slight preference for setting the members individually because on one line like this it isn\u0027t clear which is which.",
+      "range": {
+        "startLine": 214,
+        "startChar": 37,
+        "endLine": 214,
+        "endChar": 48
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52253670_f64c878d",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "ditto with reflectionStencilDescriptor.",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2d2210e_a4b125e2",
+        "filename": "src/dawn_native/d3d12/DepthStencilStateD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "Can we replace put these functions in an anonymous namespace instead of tagging them static?",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f992c172_e72f0865",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "Same as in CubeReflection here and in the rest of the file.",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "277475b2_e130c245",
+        "filename": "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "nit: stencilFaceDescriptor?",
+      "range": {
+        "startLine": 24,
+        "startChar": 41,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16dd0dd2_d2a92cd3",
+        "filename": "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "nit: stencilFrontDescriptor and stencilBackDescriptor below?",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3de96351_f7461efb",
+        "filename": "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T08:43:51Z",
+      "side": 1,
+      "message": "ditto descriptor naming",
+      "range": {
+        "startLine": 84,
+        "startChar": 41,
+        "endLine": 84,
+        "endChar": 46
+      },
       "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
