@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9ae0412_eb343a0c",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-14T17:40:24Z",
+      "side": 1,
+      "message": "size \u003e GetSize()",
+      "revId": "752a33703dfac34b8ae071770f9b79574c0cfea5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c301df2_eaf7f190",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2018-12-14T17:40:24Z",
+      "side": 1,
+      "message": "start \u003e GetSize() - size",
+      "revId": "752a33703dfac34b8ae071770f9b79574c0cfea5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
