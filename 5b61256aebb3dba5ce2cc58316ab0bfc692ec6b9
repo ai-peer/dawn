@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bdeda56_e93528b0",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T07:30:28Z",
+      "side": 1,
+      "message": "When we remove the object, the tests may need to be removed. But tests are useful. We can retain the object (but remove builder) for testing if needed. Let\u0027s discuss this in next patch.",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40b9176b_4ac0cd48",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T07:30:28Z",
+      "side": 1,
+      "message": "I will remove this builder in next patch.",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
