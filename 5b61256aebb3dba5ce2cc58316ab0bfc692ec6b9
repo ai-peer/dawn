@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "968e97c7_9c204d61",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Let\u0027s figure it out in my next patch.",
+      "parentUuid": "cf4b0a74_42e7bb62",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "40b9176b_4ac0cd48",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -100,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "d5393ff4_29215acb",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Stencil state face descriptor is an embedded descriptor of DepthStencilStateDescriptor. Extensions can only be added into DepthStencilStateDescriptor, not StencilStateFaceDescriptor.  Because we don\u0027t have stencil face object at native side (we define parameters for front and back face twice in DepthStencilState at native side). So I think we should set false here. \n\nYou also have the similar idea for blendDescriptor at https://dawn-review.googlesource.com/c/dawn/+/2020. Blend descriptor is an embedded descriptor of BlendStateDescriptor.",
+      "parentUuid": "205ae7eb_f51e2ae0",
+      "range": {
+        "startLine": 966,
+        "startChar": 22,
+        "endLine": 966,
+        "endChar": 27
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6f4bd11e_6d402a7c",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 3
@@ -123,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "217548ed_27f929f3",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f4bd11e_6d402a7c",
+      "range": {
+        "startLine": 214,
+        "startChar": 37,
+        "endLine": 214,
+        "endChar": 48
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52253670_f64c878d",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 3
@@ -137,6 +203,24 @@
       "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77139543_d4f0cba5",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52253670_f64c878d",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -157,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "bf2d8e9b_f968dbe3",
+        "filename": "src/dawn_native/d3d12/DepthStencilStateD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2d2210e_a4b125e2",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f992c172_e72f0865",
         "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
         "patchSetId": 3
@@ -171,6 +273,24 @@
       "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2600a39_23137402",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f992c172_e72f0865",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -197,6 +317,30 @@
     },
     {
       "key": {
+        "uuid": "5cc6fa5b_62d58a91",
+        "filename": "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "277475b2_e130c245",
+      "range": {
+        "startLine": 24,
+        "startChar": 41,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16dd0dd2_d2a92cd3",
         "filename": "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
         "patchSetId": 3
@@ -211,6 +355,24 @@
       "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2388e05e_92fa5dbb",
+        "filename": "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16dd0dd2_d2a92cd3",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -234,6 +396,30 @@
       "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60c56307_b2f81980",
+        "filename": "src/tests/unittests/validation/DepthStencilStateValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T10:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3de96351_f7461efb",
+      "range": {
+        "startLine": 84,
+        "startChar": 41,
+        "endLine": 84,
+        "endChar": 46
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
