@@ -142,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "bb454278_d2092798",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-14T11:01:40Z",
+      "side": 1,
+      "message": "Correct the statement above. We do have front and back face object at native side in Vulkan, but we don\u0027t have a pointer to add extensions for that object. We only have a pointer in DepthStencilState object to add extensions at native side in Vulkan.",
+      "parentUuid": "d5393ff4_29215acb",
+      "range": {
+        "startLine": 966,
+        "startChar": 22,
+        "endLine": 966,
+        "endChar": 27
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6f4bd11e_6d402a7c",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 3
