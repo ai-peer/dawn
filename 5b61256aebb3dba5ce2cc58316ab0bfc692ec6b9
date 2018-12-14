@@ -78,6 +78,24 @@
     },
     {
       "key": {
+        "uuid": "c3823517_5f8eea3c",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T14:00:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "968e97c7_9c204d61",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40b9176b_4ac0cd48",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -92,6 +110,24 @@
       "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6cd8a6f_0738f58d",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T14:00:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "40b9176b_4ac0cd48",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -154,6 +190,30 @@
       "side": 1,
       "message": "Correct the statement above. We do have front and back face object at native side in Vulkan, but we don\u0027t have a pointer to add extensions for that object. We only have a pointer in DepthStencilState object to add extensions at native side in Vulkan.",
       "parentUuid": "d5393ff4_29215acb",
+      "range": {
+        "startLine": 966,
+        "startChar": 22,
+        "endLine": 966,
+        "endChar": 27
+      },
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2072ec12_8f34a26b",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T14:00:04Z",
+      "side": 1,
+      "message": "Ah yes good point, thanks for the explanation!",
+      "parentUuid": "bb454278_d2092798",
       "range": {
         "startLine": 966,
         "startChar": 22,
@@ -277,6 +337,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "a2d2210e_a4b125e2",
+      "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7bcbc92b_c36de8b6",
+        "filename": "src/dawn_native/d3d12/DepthStencilStateD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-14T14:00:04Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "bf2d8e9b_f968dbe3",
       "revId": "5b61256aebb3dba5ce2cc58316ab0bfc692ec6b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
