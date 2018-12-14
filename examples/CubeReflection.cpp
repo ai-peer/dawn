@@ -211,11 +211,14 @@ void init() {
 
     pipeline = device.CreateRenderPipeline(&descriptor);
 
+    dawn::StencilStateFaceDescriptor descriptor1 = {
+        dawn::CompareFunction::Always, dawn::StencilOperation::Keep, dawn::StencilOperation::Keep,
+        dawn::StencilOperation::Replace};
     auto planeStencilState = device.CreateDepthStencilStateBuilder()
-        .SetDepthCompareFunction(dawn::CompareFunction::Less)
-        .SetDepthWriteEnabled(false)
-        .SetStencilFunction(dawn::Face::Both, dawn::CompareFunction::Always, dawn::StencilOperation::Keep, dawn::StencilOperation::Keep, dawn::StencilOperation::Replace)
-        .GetResult();
+                                 .SetDepthCompareFunction(dawn::CompareFunction::Less)
+                                 .SetDepthWriteEnabled(false)
+                                 .SetStencilFunction(dawn::Face::Both, &descriptor1)
+                                 .GetResult();
 
     utils::ComboRenderPipelineDescriptor pDescriptor(device);
     pDescriptor.layout = pl;
@@ -230,11 +233,14 @@ void init() {
 
     planePipeline = device.CreateRenderPipeline(&pDescriptor);
 
+    dawn::StencilStateFaceDescriptor descriptor2 = {
+        dawn::CompareFunction::Equal, dawn::StencilOperation::Keep, dawn::StencilOperation::Keep,
+        dawn::StencilOperation::Replace};
     auto reflectionStencilState = device.CreateDepthStencilStateBuilder()
-        .SetDepthCompareFunction(dawn::CompareFunction::Less)
-        .SetDepthWriteEnabled(true)
-        .SetStencilFunction(dawn::Face::Both, dawn::CompareFunction::Equal, dawn::StencilOperation::Keep, dawn::StencilOperation::Keep, dawn::StencilOperation::Replace)
-        .GetResult();
+                                      .SetDepthCompareFunction(dawn::CompareFunction::Less)
+                                      .SetDepthWriteEnabled(true)
+                                      .SetStencilFunction(dawn::Face::Both, &descriptor2)
+                                      .GetResult();
 
     utils::ComboRenderPipelineDescriptor rfDescriptor(device);
     rfDescriptor.layout = pl;
