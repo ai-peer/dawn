@@ -52,6 +52,24 @@
       "revId": "ff9562f7927b614f16449f3c757c57c70543eb37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "394d2588_532a3d6a",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-17T19:16:24Z",
+      "side": 0,
+      "message": "Oh, this is actually irrelevant after the builder is removed in the later CL. I forgot (and missed while looking at the sketch.webidl) that beginRenderPass just takes a dictionary. So it\u0027s fine for the clear values to be in there.",
+      "parentUuid": "e5e1a050_b9b4582b",
+      "revId": "ff9562f7927b614f16449f3c757c57c70543eb37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
