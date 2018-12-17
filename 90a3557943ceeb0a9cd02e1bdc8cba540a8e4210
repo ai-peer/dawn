@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd65d011_25105f99",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-17T11:54:18Z",
+      "side": 1,
+      "message": "Can we have validation that this is null while MSAA isn\u0027t implemented? I\u0027m pretty sure it will require setting it to nullptr in all places where we create a descriptor.",
+      "revId": "90a3557943ceeb0a9cd02e1bdc8cba540a8e4210",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
