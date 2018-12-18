@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83cd52c9_ec29e991",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-18T09:39:20Z",
+      "side": 1,
+      "message": "this offsetting shouldn\u0027t be needed anymore. Likewise bindingOffset isn\u0027t needed in https://dawn.googlesource.com/dawn/+/master/src/dawn_native/d3d12/ShaderModuleD3D12.cpp#55",
+      "range": {
+        "startLine": 68,
+        "startChar": 21,
+        "endLine": 68,
+        "endChar": 90
+      },
+      "revId": "f18253b3c73cddae79e3ef94884545dbd041a77f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "129f81ee_4a8500f4",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-18T09:39:20Z",
+      "side": 1,
+      "message": "Can you tag this with https://bugs.chromium.org/p/dawn/issues/detail?id\u003d33 and add a comment in the bug? This is a SPIRV-Cross bug were mat2 rows aren\u0027t aligned to 4 32bit values in MSL like they are supposed to.",
+      "revId": "f18253b3c73cddae79e3ef94884545dbd041a77f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5d8b6a4_f8abb46d",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-18T09:39:20Z",
+      "side": 1,
+      "message": "These are the same layouts, so you could just reference one bind group layout twice in the pipeline layout.",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 20
+      },
+      "revId": "f18253b3c73cddae79e3ef94884545dbd041a77f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33200019_cc36d537",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-18T09:39:20Z",
+      "side": 1,
+      "message": "Can these be 0.0f?",
+      "range": {
+        "startLine": 359,
+        "startChar": 33,
+        "endLine": 359,
+        "endChar": 47
+      },
+      "revId": "f18253b3c73cddae79e3ef94884545dbd041a77f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e48d326c_338e2bc4",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-18T09:39:20Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 362,
+        "startChar": 10,
+        "endLine": 362,
+        "endChar": 22
+      },
+      "revId": "f18253b3c73cddae79e3ef94884545dbd041a77f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
