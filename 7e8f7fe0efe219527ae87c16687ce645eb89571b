@@ -16,6 +16,29 @@
       "revId": "7e8f7fe0efe219527ae87c16687ce645eb89571b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f18aea9f_0839b4d5",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-18T09:25:43Z",
+      "side": 1,
+      "message": "nit: this is just creating the default texture view so we don\u0027t need a descriptor nor the base descriptor.",
+      "range": {
+        "startLine": 557,
+        "startChar": 10,
+        "endLine": 557,
+        "endChar": 89
+      },
+      "revId": "7e8f7fe0efe219527ae87c16687ce645eb89571b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
