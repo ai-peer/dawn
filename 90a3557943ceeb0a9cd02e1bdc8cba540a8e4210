@@ -16,6 +16,24 @@
       "revId": "90a3557943ceeb0a9cd02e1bdc8cba540a8e4210",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31188b6a_8313ab9d",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-18T01:55:59Z",
+      "side": 1,
+      "message": "Done in [1]",
+      "parentUuid": "dd65d011_25105f99",
+      "revId": "90a3557943ceeb0a9cd02e1bdc8cba540a8e4210",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
