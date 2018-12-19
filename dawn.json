@@ -675,7 +675,8 @@
         "category": "enum",
         "values": [
             {"value": 0, "name": "clear"},
-            {"value": 1, "name": "load"}
+            {"value": 1, "name": "load"},
+            {"value": 2, "name": "dont care"}
         ]
     },
     "origin 3D": {
