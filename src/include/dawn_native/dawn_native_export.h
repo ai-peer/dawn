@@ -17,9 +17,9 @@
 
 #if defined(_WIN32)
 #    if defined(DAWN_NATIVE_IMPLEMENTATION)
-#        define DAWN_NATIVE_EXPORT __declspec(dllexport)
+#        define DAWN_NATIVE_EXPORT
 #    else
-#        define DAWN_NATIVE_EXPORT __declspec(dllimport)
+#        define DAWN_NATIVE_EXPORT
 #    endif
 #else
 #    if defined(DAWN_NATIVE_IMPLEMENTATION)
