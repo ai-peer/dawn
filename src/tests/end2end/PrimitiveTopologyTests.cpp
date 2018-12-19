@@ -229,6 +229,9 @@ class PrimitiveTopologyTest : public DawnTest {
 
 // Test Point primitive topology
 TEST_P(PrimitiveTopologyTest, PointList) {
+    // This test is failing only on AMD OpenGL (chromium:915430)
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
     DoTest(dawn::PrimitiveTopology::PointList, {
         // Check that the points are drawn
         TestPoints(kPointTestLocations, true),
