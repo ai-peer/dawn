@@ -17,6 +17,8 @@
 #include "dawn_native/metal/DeviceMTL.h"
 
 namespace dawn_native { namespace metal {
+    constexpr dawn::TextureUsageBit kFramebufferOnlyTextureUsages =
+        dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::Present;
 
     MTLPixelFormat MetalPixelFormat(dawn::TextureFormat format) {
         switch (format) {
@@ -55,9 +57,9 @@ namespace dawn_native { namespace metal {
                 result |= MTLTextureUsageRenderTarget;
             }
 
-            // TODO(jiawei.shao@intel.com): investigate if we should skip setting this flag when the
-            // texture is only used as a render target.
-            result |= MTLTextureUsagePixelFormatView;
+            if (usage != kFramebufferOnlyTextureUsages) {
+                result |= MTLTextureUsagePixelFormatView;
+            }
 
             return result;
         }
@@ -84,6 +86,12 @@ namespace dawn_native { namespace metal {
                     UNREACHABLE();
                     return MTLTextureType2D;
             }
+        }
+
+        // TODO(jiawei.shao@intel.com): add more conditions, for example when the descriptor covers
+		// the whole texture in the same format.
+        bool UseTextureDirectlyAsTextureView(const TextureBase* texture) {
+            return texture->GetUsage() == kFramebufferOnlyTextureUsages;
         }
     }
 
@@ -121,24 +129,28 @@ namespace dawn_native { namespace metal {
         return mMtlTexture;
     }
 
-    // TODO(jiawei.shao@intel.com): use the original texture directly when the descriptor covers the
-    // whole texture in the same format (for example, when CreateDefaultTextureView() is called).
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
         : TextureViewBase(texture, descriptor) {
-        MTLPixelFormat format = MetalPixelFormat(descriptor->format);
-        MTLTextureType textureViewType = MetalTextureViewType(descriptor->dimension);
-        auto mipLevelRange = NSMakeRange(descriptor->baseMipLevel, descriptor->levelCount);
-        auto arrayLayerRange = NSMakeRange(descriptor->baseArrayLayer, descriptor->layerCount);
-
         id<MTLTexture> mtlTexture = ToBackend(texture)->GetMTLTexture();
-        mMtlTextureView = [mtlTexture newTextureViewWithPixelFormat:format
-                                                        textureType:textureViewType
-                                                             levels:mipLevelRange
-                                                             slices:arrayLayerRange];
+        if (!UseTextureDirectlyAsTextureView(texture)) {
+            MTLPixelFormat format = MetalPixelFormat(descriptor->format);
+            MTLTextureType textureViewType = MetalTextureViewType(descriptor->dimension);
+            auto mipLevelRange = NSMakeRange(descriptor->baseMipLevel, descriptor->levelCount);
+            auto arrayLayerRange = NSMakeRange(descriptor->baseArrayLayer, descriptor->layerCount);
+
+            mMtlTextureView = [mtlTexture newTextureViewWithPixelFormat:format
+                                                            textureType:textureViewType
+                                                                 levels:mipLevelRange
+                                                                 slices:arrayLayerRange];
+        } else {
+            mMtlTextureView = mtlTexture;
+        }
     }
 
     TextureView::~TextureView() {
-        [mMtlTextureView release];
+        if (!UseTextureDirectlyAsTextureView(GetTexture())) {
+            [mMtlTextureView release];
+        }
     }
 
     id<MTLTexture> TextureView::GetMTLTexture() {
