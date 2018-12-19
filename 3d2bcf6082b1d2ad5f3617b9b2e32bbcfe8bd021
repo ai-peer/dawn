@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0886ef9d_aed4c9e7",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-19T13:58:56Z",
+      "side": 1,
+      "message": "I suggest doing the following instead: kTextureUsageRequiringViews \u003d Sampled | Storage",
+      "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f199e418_79f907bd",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-19T13:58:56Z",
+      "side": 1,
+      "message": "Likewise this should be UsageRequiresView and could be as a helper in MetalTextureUsage.",
+      "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a47d5d81_2042d528",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-19T13:58:56Z",
+      "side": 1,
+      "message": "Instead of conditionally releasing, it would be better to add a reference when we reuse mtlTextureDirectly so that it adds less control flow paths.",
+      "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
