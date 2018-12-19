@@ -227,6 +227,10 @@ namespace dawn_native { namespace vulkan {
 
         uint8_t* memory = mMemoryAllocation.GetMappedPointer();
         ASSERT(memory != nullptr);
+        if (serial == 1) {
+            OnMapWriteCommandSerialFinished(serial, memory);
+            return;
+        }
 
         MapRequestTracker* tracker = device->GetMapRequestTracker();
         tracker->Track(this, serial, memory + start, true);
