@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "73d8d28f_c21327ee",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:31:02Z",
+      "side": 1,
+      "message": "I don\u0027t expect WebGPU to allow texture views for attachments to have a different format from their parent texture. Reading the Vulkan spec, it seems to be a constraint there too: the VkImage format must match the format of the attachment in the VkRenderPass given to the VkFramebuffer creation, and render pass compatilibity requires formats to match.",
+      "parentUuid": "0cdf6e25_44583503",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 57
+      },
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42d99045_eccc5580",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:31:02Z",
+      "side": 1,
+      "message": "As commented above, BeginRenderPass should validate that the texture view doesn\u0027t change the format, so this could be an actual check instead of an ASSERT.",
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eefc9810_3421ac6c",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 11
@@ -42,6 +83,40 @@
         "endLine": 126,
         "endChar": 9
       },
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97ded9f0_b94b7402",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:31:02Z",
+      "side": 1,
+      "message": "Again I suggest having the following:\n\nif (!UsageNeedsTextureView) {\n    mMtltextureView \u003d nil;\n} else if (IsSameAsParentTexture) {\n    mMtlTextureView \u003d [mtlTexture retain];\n} else {\n    // create the texture view\n}\n\nIn CreateMTLRenderPassDescriptor instead of doing view-\u003eGetMtlTexture(); we would do view-\u003eGetTexture()-\u003eGetMtlTexture() and set the slice and level based on view-\u003eGetBaseLevel() and view-\u003eGetBaseArrayLayer().\n\nThe reason why I\u0027m asking for this is that I\u0027d like to avoid tying logic in this file to the \"framebufferOnly\" concept because it is a niche thing only used by CAMetalDrawable.",
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "717af83f_8c3b221c",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:31:02Z",
+      "side": 1,
+      "message": "This would ASSERT(mMtlTextureView !\u003d nil);",
       "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

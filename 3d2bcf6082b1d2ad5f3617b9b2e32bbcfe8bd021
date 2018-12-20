@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4a47992c_3a90a43b",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:31:02Z",
+      "side": 1,
+      "message": "That\u0027s ok, we don\u0027t need to create an actual texture view because we can specify the subresource with the MTLRenderPassAttachmentDescriptor slice and levels members.",
+      "parentUuid": "0798bbac_190dabcf",
+      "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f199e418_79f907bd",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 4
