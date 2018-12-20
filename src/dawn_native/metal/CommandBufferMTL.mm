@@ -264,8 +264,9 @@ namespace dawn_native { namespace metal {
                     encoders.EnsureBlit(commandBuffer);
                     [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
                                      sourceOffset:src.offset
-                                sourceBytesPerRow:src.rowPitch
-                              sourceBytesPerImage:(src.rowPitch * src.imageHeight)
+                                sourceBytesPerRow:MIN(src.rowPitch, buffer->GetSize())
+                              sourceBytesPerImage:MIN(src.rowPitch * src.imageHeight,
+                                                      buffer->GetSize())
                                        sourceSize:size
                                         toTexture:texture->GetMTLTexture()
                                  destinationSlice:dst.slice
@@ -299,8 +300,9 @@ namespace dawn_native { namespace metal {
                                         sourceSize:size
                                           toBuffer:buffer->GetMTLBuffer()
                                  destinationOffset:dst.offset
-                            destinationBytesPerRow:dst.rowPitch
-                          destinationBytesPerImage:(dst.rowPitch * dst.imageHeight)];
+                            destinationBytesPerRow:MIN(dst.rowPitch, buffer->GetSize())
+                          destinationBytesPerImage:MIN(dst.rowPitch * dst.imageHeight,
+                                                       buffer->GetSize())];
                 } break;
 
                 default: { UNREACHABLE(); } break;
