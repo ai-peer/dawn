@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0cdf6e25_44583503",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T07:24:37Z",
+      "side": 1,
+      "message": "We will not support the texture view having a different format when it is used as color or depth stencil attachments, in these cases we should use the texture handle directly instead of calling newTextureViewWithPixelFormat, so it is safe to not set this flag.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 57
+      },
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eefc9810_3421ac6c",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T07:24:37Z",
+      "side": 1,
+      "message": "Actually if the texture view covers the whole array layers and mipmap levels, and uses the same format as the original texture, we can use the texture handle directly without calling newTextureViewWithPixelFormat.\n\nThis is also the case of framebufferOnly textures so we can fix the crash issue in this way.",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 126,
+        "endChar": 9
+      },
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

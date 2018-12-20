@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0798bbac_190dabcf",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T07:24:37Z",
+      "side": 1,
+      "message": "I find it not enough because now we support rendering into a layer of a texture. In Dawn end2end tests TextureRenderingTests, the usage of the texture is set to (OutputAttachments | TransferSrc) so that we can test if rendering into a layer of a texture works.",
+      "parentUuid": "0886ef9d_aed4c9e7",
+      "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f199e418_79f907bd",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2018-12-19T13:58:56Z",
       "side": 1,
       "message": "Likewise this should be UsageRequiresView and could be as a helper in MetalTextureUsage.",
+      "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdbebe88_445c2f65",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T07:24:37Z",
+      "side": 1,
+      "message": "2D array textures with usage including OutputAttachment also need texture views, so it\u0027s not enough to just check Sampled | Storage.",
+      "parentUuid": "f199e418_79f907bd",
       "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ef0fea9_7bc6e1f4",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T07:24:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47d5d81_2042d528",
+      "revId": "3d2bcf6082b1d2ad5f3617b9b2e32bbcfe8bd021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

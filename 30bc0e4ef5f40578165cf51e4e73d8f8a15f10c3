@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bf5f27ea_50f36d27",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T07:24:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be71f11c_cf52a5cf",
+      "revId": "30bc0e4ef5f40578165cf51e4e73d8f8a15f10c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "994f1370_47fa8e46",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 9
@@ -51,6 +69,24 @@
       "revId": "30bc0e4ef5f40578165cf51e4e73d8f8a15f10c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79d5e84d_1fb7634e",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T07:24:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a80db41_6ee4c9ea",
+      "revId": "30bc0e4ef5f40578165cf51e4e73d8f8a15f10c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
