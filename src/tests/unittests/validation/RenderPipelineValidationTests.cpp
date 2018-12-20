@@ -61,7 +61,7 @@ TEST_F(RenderPipelineValidationTest, BlendState) {
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.cVertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
-        descriptor.numBlendStates = 1;
+        descriptor.numBlendStateDescriptors = 1;
 
         device.CreateRenderPipeline(&descriptor);
     }
@@ -70,7 +70,7 @@ TEST_F(RenderPipelineValidationTest, BlendState) {
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.cVertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
-        descriptor.numBlendStates = 0;
+        descriptor.numBlendStateDescriptors = 0;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
@@ -80,7 +80,7 @@ TEST_F(RenderPipelineValidationTest, BlendState) {
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.cVertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
-        descriptor.numBlendStates = 2;
+        descriptor.numBlendStateDescriptors = 2;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
