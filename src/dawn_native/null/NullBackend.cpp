@@ -116,6 +116,10 @@ namespace dawn_native { namespace null {
         return mLastSubmittedSerial;
     }
 
+    Serial Device::GetPendingCommandSerial() const {
+        return mLastSubmittedSerial + 1;
+    }
+
     void Device::TickImpl() {
         SubmitPendingOperations();
     }
@@ -232,6 +236,25 @@ namespace dawn_native { namespace null {
     }
 
     void SwapChain::OnBeforePresent(TextureBase*) {
+    }
+
+    // RingBuffer
+
+    RingBuffer::RingBuffer(size_t maxSize, Device* device)
+        : RingBufferBase(maxSize), mDevice(device) {
+    }
+
+    bool RingBuffer::Initialize() {
+        mCpuVirtualAddress = std::make_unique<uint8_t[]>(mMaxSize);
+        return true;
+    }
+
+    Serial RingBuffer::GetPendingCommandSerial() const {
+        return mDevice->GetPendingCommandSerial();
+    }
+
+    uint8_t* RingBuffer::GetCPUVirtualAddressPointer() const {
+        return mCpuVirtualAddress.get();
     }
 
 }}  // namespace dawn_native::null
