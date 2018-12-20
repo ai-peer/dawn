@@ -18,6 +18,18 @@
 
 namespace utils {
 
+    ComboBlendStateDescriptor::ComboBlendStateDescriptor(const dawn::Device& device) {
+        dawn::BlendStateDescriptor* descriptor = this;
+
+        dawn::BlendDescriptor blend = {dawn::BlendOperation::Add, dawn::BlendFactor::One,
+                                       dawn::BlendFactor::Zero};
+
+        descriptor->blendEnabled = false;
+        descriptor->alphaBlend = blend;
+        descriptor->colorBlend = blend;
+        descriptor->colorWriteMask = dawn::ColorWriteMask::All;
+    }
+
     ComboRenderPipelineDescriptor::ComboRenderPipelineDescriptor(const dawn::Device& device) {
         dawn::RenderPipelineDescriptor* descriptor = this;
 
@@ -54,11 +66,12 @@ namespace utils {
         descriptor->depthStencilState = device.CreateDepthStencilStateBuilder().GetResult();
         descriptor->layout = utils::MakeBasicPipelineLayout(device, nullptr);
 
-        descriptor->numBlendStates = 1;
-        descriptor->blendStates = cBlendStates;
+        descriptor->numBlendStateDescriptors = 1;
+        descriptor->blendStateDescriptors = cBlendStateDescriptors;
 
+        ComboBlendStateDescriptor blendStateDescriptor(device);
         for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-            cBlendStates[i] = device.CreateBlendStateBuilder().GetResult();
+            cBlendStateDescriptors[i] = blendStateDescriptor;
         }
     }
 
