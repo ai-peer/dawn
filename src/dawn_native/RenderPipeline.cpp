@@ -15,7 +15,6 @@
 #include "dawn_native/RenderPipeline.h"
 
 #include "common/BitSetIterator.h"
-#include "dawn_native/BlendState.h"
 #include "dawn_native/DepthStencilState.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/InputState.h"
@@ -73,6 +72,20 @@ namespace dawn_native {
             return {};
         }
 
+        MaybeError ValidateBlendStateDescriptor(const BlendStateDescriptor* descriptor) {
+            if (descriptor->nextInChain != nullptr) {
+                return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
+            }
+            DAWN_TRY(ValidateBlendOperation(descriptor->alphaBlend.operation));
+            DAWN_TRY(ValidateBlendFactor(descriptor->alphaBlend.srcFactor));
+            DAWN_TRY(ValidateBlendFactor(descriptor->alphaBlend.dstFactor));
+            DAWN_TRY(ValidateBlendOperation(descriptor->colorBlend.operation));
+            DAWN_TRY(ValidateBlendFactor(descriptor->colorBlend.srcFactor));
+            DAWN_TRY(ValidateBlendFactor(descriptor->colorBlend.dstFactor));
+            DAWN_TRY(ValidateColorWriteMask(descriptor->colorWriteMask));
+            return {};
+        }
+
     }  // namespace
 
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
@@ -93,10 +106,8 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Depth stencil state must not be null");
         }
 
-        for (uint32_t i = 0; i < descriptor->numBlendStates; ++i) {
-            if (descriptor->blendStates[i] == nullptr) {
-                return DAWN_VALIDATION_ERROR("Blend state must not be null");
-            }
+        for (uint32_t i = 0; i < descriptor->numBlendStateDescriptors; ++i) {
+            DAWN_TRY(ValidateBlendStateDescriptor(&descriptor->blendStateDescriptors[i]));
         }
 
         DAWN_TRY(ValidateIndexFormat(descriptor->indexFormat));
@@ -118,11 +129,12 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Sample count must be one");
         }
 
-        if (descriptor->numBlendStates > kMaxColorAttachments) {
+        if (descriptor->numBlendStateDescriptors > kMaxColorAttachments) {
             return DAWN_VALIDATION_ERROR("Blend states number exceeds maximum");
         }
 
-        if (descriptor->attachmentsState->numColorAttachments != descriptor->numBlendStates) {
+        if (descriptor->attachmentsState->numColorAttachments !=
+            descriptor->numBlendStateDescriptors) {
             return DAWN_VALIDATION_ERROR("Each color attachment should have blend state");
         }
 
@@ -150,7 +162,7 @@ namespace dawn_native {
 
         for (uint32_t i = 0; i < descriptor->attachmentsState->numColorAttachments; ++i) {
             mColorAttachmentsSet.set(i);
-            mBlendStates[i] = descriptor->blendStates[i];
+            mBlendStateDescriptors[i] = descriptor->blendStateDescriptors[i];
             mColorAttachmentFormats[i] = descriptor->attachmentsState->colorAttachments[i].format;
         }
 
@@ -158,9 +170,10 @@ namespace dawn_native {
         // attachment are set?
     }
 
-    BlendStateBase* RenderPipelineBase::GetBlendState(uint32_t attachmentSlot) {
-        ASSERT(attachmentSlot < mBlendStates.size());
-        return mBlendStates[attachmentSlot].Get();
+    const BlendStateDescriptor* RenderPipelineBase::GetBlendStateDescriptor(
+        uint32_t attachmentSlot) {
+        ASSERT(attachmentSlot < mBlendStateDescriptors.size());
+        return &mBlendStateDescriptors[attachmentSlot];
     }
 
     DepthStencilStateBase* RenderPipelineBase::GetDepthStencilState() {

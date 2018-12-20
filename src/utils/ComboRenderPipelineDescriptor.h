@@ -20,6 +20,10 @@
 #include "common/Constants.h"
 
 namespace utils {
+    class ComboBlendStateDescriptor : public dawn::BlendStateDescriptor {
+      public:
+        ComboBlendStateDescriptor(const dawn::Device& device);
+    };
 
     class ComboRenderPipelineDescriptor : public dawn::RenderPipelineDescriptor {
       public:
@@ -31,7 +35,7 @@ namespace utils {
         dawn::AttachmentsStateDescriptor cAttachmentsState;
         dawn::AttachmentDescriptor cColorAttachments[kMaxColorAttachments];
         dawn::AttachmentDescriptor cDepthStencilAttachment;
-        dawn::BlendState cBlendStates[kMaxColorAttachments];
+        dawn::BlendStateDescriptor cBlendStateDescriptors[kMaxColorAttachments];
     };
 
 }  // namespace utils
