@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "124f1e4e_9a6c6be7",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:47:24Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be renamed: it is called \"blendStates\" in the WebGPU IDL.",
+      "range": {
+        "startLine": 877,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 9
+      },
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "639b620c_0480f8ef",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:47:24Z",
+      "side": 1,
+      "message": "nit: mBlendStates",
+      "range": {
+        "startLine": 58,
+        "startChar": 63,
+        "endLine": 58,
+        "endChar": 85
+      },
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7a9a014_40136126",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:47:24Z",
+      "side": 1,
+      "message": "Could this return a D3D12_RENDER_TARGET_BLEND_DESC and be called ComputeBlendDesc or something like this?",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e213fe82_0a749a8b",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:47:24Z",
+      "side": 1,
+      "message": "Same as for D3D12",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e76a4df8_b2890d44",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:47:24Z",
+      "side": 1,
+      "message": "This logic would be done in the ComboRenderPipelineDescriptor.",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 63
+      },
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "388584f4_4dfc661a",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:47:24Z",
+      "side": 1,
+      "message": "The only place where this is useful outside ComboRenderPipelineDescriptor is the BlendStateTest so I think it should be removed and a custom solution done in BlendStateTest (for example by passing \"blendEnabled\" \"blend\" and \"colorWriteMask\" directly as arguments to SetUpSingleSourcePipeline).\n\nOther places would directly modify pipelineDesc.cBlendState[0] directly.",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68df6493_5d8612e0",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T13:47:24Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be renamed, it is called bLendStates in the IDL. If anything the array of pointers should be called \"blendStatesPtr\" or something: users of the ComboRenderPipeline will much more often modify the descriptors compared to modifying the pointers (if ever)",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
