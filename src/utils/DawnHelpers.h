@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef UTILS_DAWN_HELPERS_H_
+#define UTILS_DAWN_HELPERS_H_
+
 #include <dawn/dawncpp.h>
 
 #include <initializer_list>
@@ -98,3 +101,5 @@ namespace utils {
         std::initializer_list<BindingInitializationHelper> bindingsInitializer);
 
 }  // namespace utils
+
+#endif  // UTILS_DAWN_HELPERS_H_
