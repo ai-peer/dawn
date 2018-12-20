@@ -33,6 +33,24 @@
       "revId": "30bc0e4ef5f40578165cf51e4e73d8f8a15f10c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a80db41_6ee4c9ea",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-20T04:20:09Z",
+      "side": 1,
+      "message": "Yes you are right. In TextureViewRenderingTests, we render into a layer of a texture and check the pixel by copying the data in that layer into a buffer, in this situation we need to create a texture view.",
+      "parentUuid": "994f1370_47fa8e46",
+      "revId": "30bc0e4ef5f40578165cf51e4e73d8f8a15f10c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
