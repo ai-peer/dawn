@@ -41,7 +41,7 @@ namespace utils {
         }
 
         dawnSwapChainError Configure(dawnTextureFormat format,
-                                     dawnTextureUsageBit,
+                                     dawnTextureUsageBit usage,
                                      uint32_t width,
                                      uint32_t height) {
             if (format != DAWN_TEXTURE_FORMAT_B8_G8_R8_A8_UNORM) {
@@ -60,8 +60,13 @@ namespace utils {
             mLayer = [CAMetalLayer layer];
             [mLayer setDevice:mMtlDevice];
             [mLayer setPixelFormat:MTLPixelFormatBGRA8Unorm];
-            [mLayer setFramebufferOnly:YES];
             [mLayer setDrawableSize:size];
+
+            constexpr dawn::TextureUsageBit kFramebufferOnlyTextureUsages =
+                dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::Present;
+            if (usage & (~kFramebufferOnlyTextureUsages) == 0) {
+                [mLayer setFramebufferOnly:YES];
+            }
 
             [contentView setLayer:mLayer];
 
