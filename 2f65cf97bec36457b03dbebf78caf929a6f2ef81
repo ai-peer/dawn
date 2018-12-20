@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed19ef26_6b8a797f",
+        "filename": "src/utils/DawnHelpers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T03:20:09Z",
+      "side": 1,
+      "message": "UTILS_DAWNHELPERS_H_",
+      "revId": "2f65cf97bec36457b03dbebf78caf929a6f2ef81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecb4f74a_5b0c4c09",
+        "filename": "src/utils/SystemUtils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T03:20:09Z",
+      "side": 1,
+      "message": "UTILS_SYSTEMUTILS_H_ (not HELPERS)",
+      "revId": "2f65cf97bec36457b03dbebf78caf929a6f2ef81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
