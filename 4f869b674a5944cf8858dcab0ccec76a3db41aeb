@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59f538b8_72e129e2",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-20T10:43:41Z",
+      "side": 1,
+      "message": "Keeping the command name as SetComputePipeline internally sounds good since it will allow for better type safety.",
+      "revId": "4f869b674a5944cf8858dcab0ccec76a3db41aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
