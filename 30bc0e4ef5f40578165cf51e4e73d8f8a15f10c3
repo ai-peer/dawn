@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be71f11c_cf52a5cf",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T03:36:51Z",
+      "side": 1,
+      "message": "This is going to be equivalent to\n\n  return true \u0026\u0026 ...",
+      "revId": "30bc0e4ef5f40578165cf51e4e73d8f8a15f10c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "994f1370_47fa8e46",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T03:36:51Z",
+      "side": 1,
+      "message": "I was going to comment that I think this check is too greedy - that is, it won\u0027t create a texture view sometimes when one is necessary. But it looks like you\u0027re modifying it still.\n\n(For example usage\u003dOutputAttachment, arrayLayerRange\u003danything. I\u0027m not sure if that\u0027s possible.)",
+      "revId": "30bc0e4ef5f40578165cf51e4e73d8f8a15f10c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
