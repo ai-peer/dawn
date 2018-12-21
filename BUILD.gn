@@ -386,6 +386,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/DepthStencilState.h",
     "src/dawn_native/Device.cpp",
     "src/dawn_native/Device.h",
+    "src/dawn_native/DynamicUploader.cpp",
+    "src/dawn_native/DynamicUploader.h",
     "src/dawn_native/Error.cpp",
     "src/dawn_native/Error.h",
     "src/dawn_native/ErrorData.cpp",
@@ -418,6 +420,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/RenderPassEncoder.h",
     "src/dawn_native/RenderPipeline.cpp",
     "src/dawn_native/RenderPipeline.h",
+    "src/dawn_native/RingBuffer.cpp",
+    "src/dawn_native/RingBuffer.h",
     "src/dawn_native/Sampler.cpp",
     "src/dawn_native/Sampler.h",
     "src/dawn_native/ShaderModule.cpp",
@@ -472,6 +476,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/d3d12/ResourceAllocator.h",
       "src/dawn_native/d3d12/ResourceUploader.cpp",
       "src/dawn_native/d3d12/ResourceUploader.h",
+      "src/dawn_native/d3d12/RingBufferD3D12.cpp",
+      "src/dawn_native/d3d12/RingBufferD3D12.h",
       "src/dawn_native/d3d12/SamplerD3D12.cpp",
       "src/dawn_native/d3d12/SamplerD3D12.h",
       "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
@@ -613,6 +619,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/RenderPassDescriptorVk.h",
       "src/dawn_native/vulkan/RenderPipelineVk.cpp",
       "src/dawn_native/vulkan/RenderPipelineVk.h",
+      "src/dawn_native/vulkan/RingBufferVk.cpp",
+      "src/dawn_native/vulkan/RingBufferVk.h",
       "src/dawn_native/vulkan/SamplerVk.cpp",
       "src/dawn_native/vulkan/SamplerVk.h",
       "src/dawn_native/vulkan/ShaderModuleVk.cpp",
@@ -818,6 +826,7 @@ test("dawn_unittests") {
     "src/tests/unittests/EnumClassBitmasksTests.cpp",
     "src/tests/unittests/ErrorTests.cpp",
     "src/tests/unittests/MathTests.cpp",
+    "src/tests/unittests/MemoryTests.cpp",
     "src/tests/unittests/ObjectBaseTests.cpp",
     "src/tests/unittests/PerStageTests.cpp",
     "src/tests/unittests/RefCountedTests.cpp",
@@ -908,12 +917,16 @@ test("dawn_end2end_tests") {
 # Temporary groups to make a 5-way patch to fix crbug.com/913171
 group("dawn_unittests_temp_group") {
   testonly = true
-  deps = [ ":dawn_unittests" ]
+  deps = [
+    ":dawn_unittests",
+  ]
 }
 
 group("dawn_end2end_tests_temp_group") {
   testonly = true
-  deps = [ ":dawn_end2end_tests" ]
+  deps = [
+    ":dawn_end2end_tests",
+  ]
 }
 
 ###############################################################################

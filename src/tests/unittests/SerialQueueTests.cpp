@@ -141,3 +141,13 @@ TEST(SerialQueue, FirstSerial) {
     queue.Enqueue(vector1, 6);
     EXPECT_EQ(queue.FirstSerial(), 6u);
 }
+
+// Test LastSerial
+TEST(SerialQueue, LastSerial) {
+    TestSerialQueue queue;
+
+    queue.Enqueue({1}, 0);
+    queue.Enqueue({2}, 1);
+
+    EXPECT_EQ(queue.LastSerial(), 1u);
+}
