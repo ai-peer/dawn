@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "005480df_9e0507c0",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "124f1e4e_9a6c6be7",
+      "range": {
+        "startLine": 877,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 9
+      },
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "348b3ed6_39bde8b7",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 9
@@ -36,6 +60,30 @@
       "writtenOn": "2018-12-21T01:47:02Z",
       "side": 1,
       "message": "Maybe this could just be const BlendStateDescriptor\u0026\n\n(And a bunch of other places that use const BlendStateDescriptor* could become const BlendStateDescriptor\u0026.)",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 31
+      },
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca16e74_85c653a2",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Yes. This is another solution to handle \"DescriptorType* const* instance\", I will revisit this at my next patch for dawn issue 77: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d77\u0026desc\u003d3",
+      "parentUuid": "348b3ed6_39bde8b7",
       "range": {
         "startLine": 173,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "62d210b7_5fe53111",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "639b620c_0480f8ef",
+      "range": {
+        "startLine": 58,
+        "startChar": 63,
+        "endLine": 58,
+        "endChar": 85
+      },
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7a9a014_40136126",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 9
@@ -85,6 +157,24 @@
       "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53ce3064_10d31733",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7a9a014_40136126",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "dbbc4be2_5e8bf28b",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "72138680_2925011e",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fc92c64_b668592c",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 9
@@ -122,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "4d2c50bf_483c1635",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "See the comment at the caller.",
+      "parentUuid": "0fc92c64_b668592c",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e213fe82_0a749a8b",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 9
@@ -136,6 +262,24 @@
       "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b42d2dd_e044a1a9",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e213fe82_0a749a8b",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -162,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "d0f77257_f5908dcd",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e76a4df8_b2890d44",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 63
+      },
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "388584f4_4dfc661a",
         "filename": "src/utils/ComboRenderPipelineDescriptor.h",
         "patchSetId": 9
@@ -176,6 +344,24 @@
       "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd348ed2_15d0c59b",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done.\n\nGood suggestion. I changed it by passing a BlendStateDescriptor, instead of multiple parameters. Because \"blendEnabled\", \"blend\" and \"colorWriteMask\" basically contain all parameters of a BlendStateDescriptor.",
+      "parentUuid": "388584f4_4dfc661a",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -211,6 +397,24 @@
       "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d332af6_44bf2c8b",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02f5c00e_9d090019",
+      "revId": "9a63141802fcc17a00a784702f8f18adc4c85f35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "361aaee7_0acd25d9",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2018-12-21T08:39:08Z",
+      "side": 1,
+      "message": "Metal is a little bit different here, we can\u0027t return an MTLRenderPipelineColorAttachmentDescriptor. Because its pixelFormat need to be set by other code snippet (see the code on line 176 - 177). Well, we can exchange the sequence between line 178-179 and line 176-177, but the implicit sequence relationship is not good. So I think we should use a pointer and change its values directly in the callee for Metal.",
+      "revId": "7056ca224728238509851de3cc10e94cd12c9906",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
