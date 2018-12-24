@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4aee23c9_4e6f86a0",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-24T04:15:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "73d8d28f_c21327ee",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 57
+      },
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42d99045_eccc5580",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 11
@@ -63,6 +87,24 @@
       "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ce2c61e_b1efe1fa",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-24T04:15:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42d99045_eccc5580",
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "86f36d6a_27fa6354",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-24T04:15:10Z",
+      "side": 1,
+      "message": "Done\n\nSince we won\u0027t support attachment using different format against the original texture, shall we implement rendering into a texture array layer with glFramebufferTextureLayer(target, attachment, texture, level, layer) on OpenGL backends? The reason I didn\u0027t implement rendering into a texture array layer on OpenGL was that I failed to render into a texture created by glTextureView.",
+      "parentUuid": "97ded9f0_b94b7402",
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "717af83f_8c3b221c",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 11
@@ -120,6 +180,24 @@
       "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9839f7f0_b0ccc58f",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-24T04:15:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "717af83f_8c3b221c",
+      "revId": "3567b85e25b34ec61347eacdf42237cf41366416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
