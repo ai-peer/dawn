@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "889d8329_7267cce8",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-26T11:01:07Z",
+      "side": 1,
+      "message": "AFAIK Objective C skips method calls on `nil` so that we don\u0027t need this condition and can call release unconditionally.",
+      "revId": "d6d8f3ff0ba2c4dc2f7686c3fd0e65945292a346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
