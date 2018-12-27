@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52ab1529_fa0e001c",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T06:16:25Z",
+      "side": 1,
+      "message": "these 4 lines should have spaces after the colon \"name\": \"...\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 33
+      },
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7d7d793_2fe7870d",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T06:16:25Z",
+      "side": 1,
+      "message": "These are S,T,R instead of R,S,T, which is the usual convention, but I don\u0027t like that it goes out of order. We should clarify with the group if we want S,T,R or U,V,W.\n\nRelevant PR: https://github.com/gpuweb/gpuweb/pull/73\nOpened an issue: https://github.com/gpuweb/gpuweb/issues/157",
+      "range": {
+        "startLine": 107,
+        "startChar": 56,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88adae41_eed76c19",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T06:16:25Z",
+      "side": 1,
+      "message": "Can these simply be written as\n\n  mSamplerDesc.BorderColor \u003d {1, 1, 1, 1};\n\n? (Not sure if it works.)",
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e4165b5_dfab4420",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T06:16:25Z",
+      "side": 1,
+      "message": "Can you put this inline above so it\u0027s still next to compareOp?\n\n  createInfo.compareEnable \u003d createInfo.compareOp !\u003d VK_COMPARE_OP_NEVER ? VK_TRUE : VK_FALSE;",
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3116050f_2c363204",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T06:16:25Z",
+      "side": 1,
+      "message": "I think it\u0027s okay to use \u003d\u003d here instead of a threshold comparison.\n\nMaybe put 0.0 and 1000.0 in some kConstantValues.",
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a294c32_66ec73aa",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T06:16:25Z",
+      "side": 1,
+      "message": "Should the default be Always? I\u0027m not sure, but I think it makes slightly more sense.",
+      "range": {
+        "startLine": 201,
+        "startChar": 54,
+        "endLine": 201,
+        "endChar": 59
+      },
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
