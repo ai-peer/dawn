@@ -79,6 +79,23 @@
       "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "603e823b_8518c7c6",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T05:46:05Z",
+      "side": 1,
+      "message": "I didn\u0027t even see this before I wrote https://dawn-review.googlesource.com/c/dawn/+/3520 .\nMaybe they should call into the same code?",
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
