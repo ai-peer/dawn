@@ -19,6 +19,7 @@
 #include "dawn_wire/Wire.h"
 #include "utils/TerribleCommandBuffer.h"
 
+#include <math.h>
 #include <memory>
 
 using namespace testing;
@@ -487,9 +488,13 @@ TEST_F(WireTests, StructureOfValuesArgument) {
     descriptor.magFilter = DAWN_FILTER_MODE_LINEAR;
     descriptor.minFilter = DAWN_FILTER_MODE_NEAREST;
     descriptor.mipmapFilter = DAWN_FILTER_MODE_LINEAR;
-    descriptor.addressModeU = DAWN_ADDRESS_MODE_CLAMP_TO_EDGE;
-    descriptor.addressModeV = DAWN_ADDRESS_MODE_REPEAT;
-    descriptor.addressModeW = DAWN_ADDRESS_MODE_MIRRORED_REPEAT;
+    descriptor.sAddressMode = DAWN_ADDRESS_MODE_CLAMP_TO_EDGE;
+    descriptor.tAddressMode = DAWN_ADDRESS_MODE_REPEAT;
+    descriptor.rAddressMode = DAWN_ADDRESS_MODE_MIRRORED_REPEAT;
+    descriptor.lodMinClamp = 0.0f;
+    descriptor.lodMaxClamp = 1000.0f; // a large number;
+    descriptor.compareFunction = DAWN_COMPARE_FUNCTION_NEVER;
+    descriptor.borderColor = DAWN_BORDER_COLOR_TRANSPARENT_BLACK;
 
     dawnDeviceCreateSampler(device, &descriptor);
     EXPECT_CALL(api, DeviceCreateSampler(apiDevice, MatchesLambda([](const dawnSamplerDescriptor* desc) -> bool {
@@ -497,9 +502,13 @@ TEST_F(WireTests, StructureOfValuesArgument) {
             desc->magFilter == DAWN_FILTER_MODE_LINEAR &&
             desc->minFilter == DAWN_FILTER_MODE_NEAREST &&
             desc->mipmapFilter == DAWN_FILTER_MODE_LINEAR &&
-            desc->addressModeU == DAWN_ADDRESS_MODE_CLAMP_TO_EDGE &&
-            desc->addressModeV == DAWN_ADDRESS_MODE_REPEAT &&
-            desc->addressModeW == DAWN_ADDRESS_MODE_MIRRORED_REPEAT;
+            desc->sAddressMode == DAWN_ADDRESS_MODE_CLAMP_TO_EDGE &&
+            desc->tAddressMode == DAWN_ADDRESS_MODE_REPEAT &&
+            desc->rAddressMode == DAWN_ADDRESS_MODE_MIRRORED_REPEAT &&
+            desc->compareFunction == DAWN_COMPARE_FUNCTION_NEVER &&
+            desc->borderColor == DAWN_BORDER_COLOR_TRANSPARENT_BLACK &&
+            fabs(desc->lodMinClamp - 0.0) < 0.001 &&
+            fabs(desc->lodMaxClamp - 1000.0) < 0.001;
     })))
         .WillOnce(Return(nullptr));
 

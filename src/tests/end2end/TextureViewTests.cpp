@@ -21,6 +21,7 @@
 #include "utils/DawnHelpers.h"
 
 #include <array>
+#include <limits>
 
 constexpr static unsigned int kRTSize = 64;
 constexpr dawn::TextureFormat kDefaultFormat = dawn::TextureFormat::R8G8B8A8Unorm;
@@ -96,9 +97,13 @@ protected:
         samplerDescriptor.minFilter = kFilterMode;
         samplerDescriptor.magFilter = kFilterMode;
         samplerDescriptor.mipmapFilter = kFilterMode;
-        samplerDescriptor.addressModeU = kAddressMode;
-        samplerDescriptor.addressModeV = kAddressMode;
-        samplerDescriptor.addressModeW = kAddressMode;
+        samplerDescriptor.sAddressMode = kAddressMode;
+        samplerDescriptor.tAddressMode = kAddressMode;
+        samplerDescriptor.rAddressMode = kAddressMode;
+        samplerDescriptor.lodMinClamp = 0.0f;
+        samplerDescriptor.lodMaxClamp = std::numeric_limits<float>::max();
+        samplerDescriptor.compareFunction = dawn::CompareFunction::Never;
+        samplerDescriptor.borderColor = dawn::BorderColor::TransparentBlack;
         mSampler = device.CreateSampler(&samplerDescriptor);
 
         mPipelineLayout = utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);

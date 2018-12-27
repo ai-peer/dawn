@@ -64,6 +64,31 @@ namespace dawn_native { namespace opengl {
                     return GL_MIRRORED_REPEAT;
                 case dawn::AddressMode::ClampToEdge:
                     return GL_CLAMP_TO_EDGE;
+                case dawn::AddressMode::ClampToBorderColor:
+                    return GL_CLAMP_TO_BORDER;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
+        GLenum CompareFunction(dawn::CompareFunction compareOp) {
+            switch (compareOp) {
+                case dawn::CompareFunction::Never:
+                    return GL_NEVER;
+                case dawn::CompareFunction::Less:
+                    return GL_LESS;
+                case dawn::CompareFunction::LessEqual:
+                    return GL_LEQUAL;
+                case dawn::CompareFunction::Greater:
+                    return GL_GREATER;
+                case dawn::CompareFunction::GreaterEqual:
+                    return GL_GEQUAL;
+                case dawn::CompareFunction::Equal:
+                    return GL_EQUAL;
+                case dawn::CompareFunction::NotEqual:
+                    return GL_NOTEQUAL;
+                case dawn::CompareFunction::Always:
+                    return GL_ALWAYS;
                 default:
                     UNREACHABLE();
             }
@@ -77,9 +102,31 @@ namespace dawn_native { namespace opengl {
         glSamplerParameteri(mHandle, GL_TEXTURE_MAG_FILTER, MagFilterMode(descriptor->magFilter));
         glSamplerParameteri(mHandle, GL_TEXTURE_MIN_FILTER,
                             MinFilterMode(descriptor->minFilter, descriptor->mipmapFilter));
-        glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_R, WrapMode(descriptor->addressModeW));
-        glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_S, WrapMode(descriptor->addressModeU));
-        glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_T, WrapMode(descriptor->addressModeV));
+        glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_R, WrapMode(descriptor->rAddressMode));
+        glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_S, WrapMode(descriptor->sAdressMode));
+        glSamplerParameteri(mHandle, GL_TEXTURE_WRAP_T, WrapMode(descriptor->tAddressMode));
+
+        glSamplerParameterf(mHandle, GL_TEXTURE_MIN_LOD, descriptor->lodMinClamp);
+        glSamplerParameterf(mHandle, GL_TEXTURE_MAX_LOD, descriptor->lodMaxClamp);
+
+        if (CompareFunction(descriptor->compareFunction) != GL_NEVER) {
+            glSamplerParameteri(mHandle, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+            glSamplerParameteri(mHandle, GL_TEXTURE_COMPARE_FUNC, CompareFunction(descriptor->compareFunction));
+        }
+
+        switch(descriptor->borderColor) {
+            case dawn::BorderColor::TransparentBlack:
+                glSamplerParameterfv(mHandle, GL_TEXTURE_BORDER_COLOR, new float[]{0.0, 0.0, 0.0, 0.0});
+                break;
+            case dawn::BorderColor::OpaqueBlack:
+                glSamplerParameterfv(mHandle, GL_TEXTURE_BORDER_COLOR, new float[]{0.0, 0.0, 0.0, 1.0});
+                break;
+            case dawn::BorderColor::OpaqueWhite:
+                glSamplerParameterfv(mHandle, GL_TEXTURE_BORDER_COLOR, new float[]{1.0, 1.0, 1.0, 1.0});
+                break;
+            default:
+                UNREACHABLE();
+        }
     }
 
     GLuint Sampler::GetHandle() const {

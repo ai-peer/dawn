@@ -27,6 +27,31 @@ namespace dawn_native { namespace d3d12 {
                     return D3D12_TEXTURE_ADDRESS_MODE_MIRROR;
                 case dawn::AddressMode::ClampToEdge:
                     return D3D12_TEXTURE_ADDRESS_MODE_CLAMP;
+                case dawn::AddressMode::ClampToBorderColor:
+                    return D3D12_TEXTURE_ADDRESS_MODE_BORDER;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
+        D3D12_COMPARISON_FUNC CompareFunction(dawn::CompareFunction compareOp) {
+            switch (compareOp) {
+                case dawn::CompareFunction::Never:
+                    return D3D12_COMPARISON_FUNC_NEVER;
+                case dawn::CompareFunction::Less:
+                    return D3D12_COMPARISON_FUNC_LESS;
+                case dawn::CompareFunction::LessEqual:
+                    return D3D12_COMPARISON_FUNC_LESS_EQUAL;
+                case dawn::CompareFunction::Greater:
+                    return D3D12_COMPARISON_FUNC_GREATER;
+                case dawn::CompareFunction::GreaterEqual:
+                    return D3D12_COMPARISON_FUNC_GREATER_EQUAL;
+                case dawn::CompareFunction::Equal:
+                    return D3D12_COMPARISON_FUNC_EQUAL;
+                case dawn::CompareFunction::NotEqual:
+                    return D3D12_COMPARISON_FUNC_NOT_EQUAL;
+                case dawn::CompareFunction::Always:
+                    return D3D12_COMPARISON_FUNC_ALWAYS;
                 default:
                     UNREACHABLE();
             }
@@ -77,16 +102,31 @@ namespace dawn_native { namespace d3d12 {
         }
 
         mSamplerDesc.Filter = static_cast<D3D12_FILTER>(mode);
-        mSamplerDesc.AddressU = AddressMode(descriptor->addressModeU);
-        mSamplerDesc.AddressV = AddressMode(descriptor->addressModeV);
-        mSamplerDesc.AddressW = AddressMode(descriptor->addressModeW);
+        mSamplerDesc.AddressU = AddressMode(descriptor->sAddressMode);
+        mSamplerDesc.AddressV = AddressMode(descriptor->tAddressMode);
+        mSamplerDesc.AddressW = AddressMode(descriptor->rAddressMode);
         mSamplerDesc.MipLODBias = 0.f;
         mSamplerDesc.MaxAnisotropy = 1;
-        mSamplerDesc.ComparisonFunc = D3D12_COMPARISON_FUNC_ALWAYS;
-        mSamplerDesc.BorderColor[0] = mSamplerDesc.BorderColor[1] = mSamplerDesc.BorderColor[2] =
-            mSamplerDesc.BorderColor[3] = 0;
-        mSamplerDesc.MinLOD = 0;
-        mSamplerDesc.MaxLOD = D3D12_FLOAT32_MAX;
+        mSamplerDesc.ComparisonFunc = CompareFunction(descriptor->compareFunction);
+        mSamplerDesc.MinLOD = descriptor->lodMinClamp;
+        mSamplerDesc.MaxLOD = descriptor->lodMaxClamp;
+
+        switch(descriptor->borderColor) {
+            case dawn::BorderColor::TransparentBlack:
+                mSamplerDesc.BorderColor[0] = mSamplerDesc.BorderColor[1] = mSamplerDesc.BorderColor[2] =
+                    mSamplerDesc.BorderColor[3] = 0;
+                break;
+            case dawn::BorderColor::OpaqueBlack:
+                mSamplerDesc.BorderColor[0] = mSamplerDesc.BorderColor[1] = mSamplerDesc.BorderColor[2] = 0;
+                mSamplerDesc.BorderColor[3] = 1;
+                break;
+            case dawn::BorderColor::OpaqueWhite:
+                mSamplerDesc.BorderColor[0] = mSamplerDesc.BorderColor[1] = mSamplerDesc.BorderColor[2] =
+                    mSamplerDesc.BorderColor[3] = 1;
+                break;
+            default:
+                UNREACHABLE();
+        }
     }
 
     const D3D12_SAMPLER_DESC& Sampler::GetSamplerDescriptor() const {

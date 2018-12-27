@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <limits>
+
 #include "common/Assert.h"
 #include "common/Constants.h"
 #include "tests/DawnTest.h"
@@ -229,9 +231,14 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     samplerDescriptor.minFilter = dawn::FilterMode::Nearest;
     samplerDescriptor.magFilter = dawn::FilterMode::Nearest;
     samplerDescriptor.mipmapFilter = dawn::FilterMode::Nearest;
-    samplerDescriptor.addressModeU = dawn::AddressMode::ClampToEdge;
-    samplerDescriptor.addressModeV = dawn::AddressMode::ClampToEdge;
-    samplerDescriptor.addressModeW = dawn::AddressMode::ClampToEdge;
+    samplerDescriptor.sAddressMode = dawn::AddressMode::ClampToEdge;
+    samplerDescriptor.tAddressMode = dawn::AddressMode::ClampToEdge;
+    samplerDescriptor.rAddressMode = dawn::AddressMode::ClampToEdge;
+    samplerDescriptor.lodMinClamp = 0;
+    samplerDescriptor.lodMaxClamp = std::numeric_limits<float>::max();
+    samplerDescriptor.compareFunction = dawn::CompareFunction::Never;
+    samplerDescriptor.borderColor = dawn::BorderColor::TransparentBlack;
+
     dawn::Sampler sampler = device.CreateSampler(&samplerDescriptor);
 
     dawn::TextureDescriptor descriptor;
