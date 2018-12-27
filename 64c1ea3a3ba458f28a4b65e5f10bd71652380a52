@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fc89686_fb6c936c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T05:43:44Z",
+      "side": 1,
+      "message": "Nit:\n\n - Instance: a connection ...\n - Adapter: represents ...\n - BackendConnection: an internal ...",
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1a17cd4_144342ea",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T05:43:44Z",
+      "side": 1,
+      "message": "\"TODO\"",
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6d1f614_eb0f8715",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T05:43:44Z",
+      "side": 1,
+      "message": "Conditionally",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 21
+      },
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8565a08a_d27a3f89",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T05:43:44Z",
+      "side": 1,
+      "message": "I\u0027d probably expand these two \"auto\"s",
+      "range": {
+        "startLine": 61,
+        "startChar": 17,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
