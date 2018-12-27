@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include <cmath>
+#include <limits>
 
 #include "tests/DawnTest.h"
 
@@ -116,16 +117,20 @@ protected:
         mTextureView = texture.CreateDefaultTextureView();
     }
 
-    void TestAddressModes(AddressModeTestCase u, AddressModeTestCase v, AddressModeTestCase w) {
+    void TestAddressModes(AddressModeTestCase s, AddressModeTestCase t, AddressModeTestCase r) {
         dawn::Sampler sampler;
         {
             dawn::SamplerDescriptor descriptor;
             descriptor.minFilter = dawn::FilterMode::Nearest;
             descriptor.magFilter = dawn::FilterMode::Nearest;
             descriptor.mipmapFilter = dawn::FilterMode::Nearest;
-            descriptor.addressModeU = u.mMode;
-            descriptor.addressModeV = v.mMode;
-            descriptor.addressModeW = w.mMode;
+            descriptor.sAddressMode = s.mMode;
+            descriptor.tAddressMode = t.mMode;
+            descriptor.rAddressMode = r.mMode;
+            descriptor.lodMinClamp = 0.0f;
+            descriptor.lodMaxClamp = std::numeric_limits<float>::max();
+            descriptor.compareFunction = dawn::CompareFunction::Never;
+            descriptor.borderColor = dawn::BorderColor::TransparentBlack;
             sampler = device.CreateSampler(&descriptor);
         }
 
@@ -146,10 +151,10 @@ protected:
         dawn::CommandBuffer commands = builder.GetResult();
         queue.Submit(1, &commands);
 
-        RGBA8 expectedU2(u.mExpected2, u.mExpected2, u.mExpected2, 255);
-        RGBA8 expectedU3(u.mExpected3, u.mExpected3, u.mExpected3, 255);
-        RGBA8 expectedV2(v.mExpected2, v.mExpected2, v.mExpected2, 255);
-        RGBA8 expectedV3(v.mExpected3, v.mExpected3, v.mExpected3, 255);
+        RGBA8 expectedU2(s.mExpected2, s.mExpected2, s.mExpected2, 255);
+        RGBA8 expectedU3(s.mExpected3, s.mExpected3, s.mExpected3, 255);
+        RGBA8 expectedV2(t.mExpected2, t.mExpected2, t.mExpected2, 255);
+        RGBA8 expectedV3(t.mExpected3, t.mExpected3, t.mExpected3, 255);
         RGBA8 black(0, 0, 0, 255);
         RGBA8 white(255, 255, 255, 255);
         EXPECT_PIXEL_RGBA8_EQ(black, mRenderPass.color, 0, 0);
@@ -171,10 +176,10 @@ protected:
 
 // Test drawing a rect with a checkerboard texture with different address modes.
 TEST_P(SamplerTest, AddressMode) {
-    for (auto u : addressModes) {
-        for (auto v : addressModes) {
-            for (auto w : addressModes) {
-                TestAddressModes(u, v, w);
+    for (auto s : addressModes) {
+        for (auto t : addressModes) {
+            for (auto r : addressModes) {
+                TestAddressModes(s, t, r);
             }
         }
     }
