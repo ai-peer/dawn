@@ -16,6 +16,24 @@
       "revId": "7056ca224728238509851de3cc10e94cd12c9906",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b90c9122_dbeec8c3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-27T05:18:39Z",
+      "side": 1,
+      "message": "Ah, I misunderstood. lgtm.",
+      "parentUuid": "361aaee7_0acd25d9",
+      "revId": "7056ca224728238509851de3cc10e94cd12c9906",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
