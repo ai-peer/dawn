@@ -21,6 +21,7 @@
 #include <cstring>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <sstream>
 
 namespace utils {
@@ -192,9 +193,13 @@ namespace utils {
         desc.minFilter = dawn::FilterMode::Linear;
         desc.magFilter = dawn::FilterMode::Linear;
         desc.mipmapFilter = dawn::FilterMode::Linear;
-        desc.addressModeU = dawn::AddressMode::Repeat;
-        desc.addressModeV = dawn::AddressMode::Repeat;
-        desc.addressModeW = dawn::AddressMode::Repeat;
+        desc.sAddressMode = dawn::AddressMode::Repeat;
+        desc.tAddressMode = dawn::AddressMode::Repeat;
+        desc.rAddressMode = dawn::AddressMode::Repeat;
+        desc.lodMinClamp = 0.0f;
+        desc.lodMaxClamp = std::numeric_limits<float>::max();
+        desc.compareFunction = dawn::CompareFunction::Never;
+        desc.borderColor = dawn::BorderColor::TransparentBlack;
 
         return desc;
     }
