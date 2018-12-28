@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d36dc69e_9fbbcfd6",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-28T08:51:35Z",
+      "side": 1,
+      "message": "flaot",
+      "range": {
+        "startLine": 487,
+        "startChar": 17,
+        "endLine": 487,
+        "endChar": 22
+      },
+      "revId": "affbde5a9d89820c26ceebe6be8d4b90d9fcc0f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
