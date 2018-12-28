@@ -45,6 +45,40 @@ namespace dawn_native { namespace metal {
                     return MTLSamplerAddressModeMirrorRepeat;
                 case dawn::AddressMode::ClampToEdge:
                     return MTLSamplerAddressModeClampToEdge;
+                case dawn::AddressMode::ClampToBorderColor:
+                    return MTLSamplerAddressModeClampToBorderColor;
+            }
+        }
+
+        MTLSamplerBorderColor BorderColor(dawn::BorderColor color) {
+            switch (color) {
+                case dawn::BorderColor::TransparentBlack:
+                    return MTLSamplerBorderColorTransparentBlack;
+                case dawn::BorderColor::OpaqueBlack:
+                    return MTLSamplerBorderColorOpaqueBlack;
+                case dawn::BorderColor::OpaqueWhite:
+                    return MTLSamplerBorderColorOpaqueWhite;
+            }
+        }
+
+        MTLCompareFunction CompareFunction(dawn::CompareFunction compareOp) {
+            switch (compareOp) {
+                case dawn::CompareFunction::Never:
+                    return MTLCompareFunctionNever;
+                case dawn::CompareFunction::Less:
+                    return MTLCompareFunctionLess;
+                case dawn::CompareFunction::LessEqual:
+                    return MTLCompareFunctionLessEqual;
+                case dawn::CompareFunction::Greater:
+                    return MTLCompareFunctionGreater;
+                case dawn::CompareFunction::GreaterEqual:
+                    return MTLCompareFunctionGreaterEqual;
+                case dawn::CompareFunction::Equal:
+                    return MTLCompareFunctionEqual;
+                case dawn::CompareFunction::NotEqual:
+                    return MTLCompareFunctionNotEqual;
+                case dawn::CompareFunction::Always:
+                    return MTLCompareFunctionAlways;
             }
         }
     }
@@ -57,9 +91,14 @@ namespace dawn_native { namespace metal {
         mtlDesc.magFilter = FilterModeToMinMagFilter(descriptor->magFilter);
         mtlDesc.mipFilter = FilterModeToMipFilter(descriptor->mipmapFilter);
 
-        mtlDesc.sAddressMode = AddressMode(descriptor->addressModeU);
-        mtlDesc.tAddressMode = AddressMode(descriptor->addressModeV);
-        mtlDesc.rAddressMode = AddressMode(descriptor->addressModeW);
+        mtlDesc.sAddressMode = AddressMode(descriptor->sAddressMode);
+        mtlDesc.tAddressMode = AddressMode(descriptor->tAddressMode);
+        mtlDesc.rAddressMode = AddressMode(descriptor->rAddressMode);
+
+        mtlDesc.lodMinClamp = descriptor->lodMinClamp;
+        mtlDesc.lodMaxClamp = descriptor->lodMaxClamp;
+        mtlDesc.compareFunction = CompareFunction(descriptor->compareFunction);
+        mtlDesc.borderColor = BorderColor(descriptor->borderColor);
 
         mMtlSamplerState = [device->GetMTLDevice() newSamplerStateWithDescriptor:mtlDesc];
     }
