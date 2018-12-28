@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4c88d991_9f374b25",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-28T01:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55b98fab_b0ce3c63",
+      "range": {
+        "startLine": 160,
+        "startChar": 20,
+        "endLine": 160,
+        "endChar": 49
+      },
+      "revId": "d6d8f3ff0ba2c4dc2f7686c3fd0e65945292a346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "889d8329_7267cce8",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 14
@@ -39,6 +63,24 @@
       "revId": "d6d8f3ff0ba2c4dc2f7686c3fd0e65945292a346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60cc4a81_7676e992",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-28T01:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "889d8329_7267cce8",
+      "revId": "d6d8f3ff0ba2c4dc2f7686c3fd0e65945292a346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -62,6 +104,30 @@
       "revId": "d6d8f3ff0ba2c4dc2f7686c3fd0e65945292a346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5640c78c_62144dde",
+        "filename": "src/utils/MetalBinding.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-12-28T01:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b9f1fb6_6fb98677",
+      "range": {
+        "startLine": 67,
+        "startChar": 16,
+        "endLine": 67,
+        "endChar": 59
+      },
+      "revId": "d6d8f3ff0ba2c4dc2f7686c3fd0e65945292a346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
