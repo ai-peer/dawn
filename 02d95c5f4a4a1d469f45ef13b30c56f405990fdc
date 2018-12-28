@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "0faa693c_2d33259b",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-28T08:48:26Z",
+      "side": 1,
+      "message": "No problem. Let\u0027s land this first and make a follow-on CL if the group changes its mind about this.",
+      "parentUuid": "ae6b9578_1b12c777",
+      "range": {
+        "startLine": 107,
+        "startChar": 56,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88adae41_eed76c19",
         "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
         "patchSetId": 4
@@ -128,6 +152,24 @@
       "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cafe1da3_41d77a28",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-28T08:48:26Z",
+      "side": 1,
+      "message": "Okay, thanks for checking!",
+      "parentUuid": "e0839200_fe646906",
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -245,6 +287,30 @@
       "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3df38c00_e4d8670e",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-28T08:48:26Z",
+      "side": 1,
+      "message": "You\u0027re right, didn\u0027t realize it was specified. Let\u0027s keep it like this here.",
+      "parentUuid": "a434efd7_31925570",
+      "range": {
+        "startLine": 201,
+        "startChar": 54,
+        "endLine": 201,
+        "endChar": 59
+      },
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
