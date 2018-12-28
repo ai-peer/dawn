@@ -19,6 +19,7 @@
 #include "dawn_wire/Wire.h"
 #include "utils/TerribleCommandBuffer.h"
 
+#include <math.h>
 #include <memory>
 
 using namespace testing;
@@ -482,14 +483,21 @@ TEST_F(WireTests, ObjectsAsPointerArgument) {
 
 // Test that the wire is able to send structures that contain pure values (non-objects)
 TEST_F(WireTests, StructureOfValuesArgument) {
+    static const float kLodMin = 0.0f;
+    static const flaot kLodMax = 1000.0f;
+
     dawnSamplerDescriptor descriptor;
     descriptor.nextInChain = nullptr;
     descriptor.magFilter = DAWN_FILTER_MODE_LINEAR;
     descriptor.minFilter = DAWN_FILTER_MODE_NEAREST;
     descriptor.mipmapFilter = DAWN_FILTER_MODE_LINEAR;
-    descriptor.addressModeU = DAWN_ADDRESS_MODE_CLAMP_TO_EDGE;
-    descriptor.addressModeV = DAWN_ADDRESS_MODE_REPEAT;
-    descriptor.addressModeW = DAWN_ADDRESS_MODE_MIRRORED_REPEAT;
+    descriptor.sAddressMode = DAWN_ADDRESS_MODE_CLAMP_TO_EDGE;
+    descriptor.tAddressMode = DAWN_ADDRESS_MODE_REPEAT;
+    descriptor.rAddressMode = DAWN_ADDRESS_MODE_MIRRORED_REPEAT;
+    descriptor.lodMinClamp = kLodMin;
+    descriptor.lodMaxClamp = kLodMax;
+    descriptor.compareFunction = DAWN_COMPARE_FUNCTION_NEVER;
+    descriptor.borderColor = DAWN_BORDER_COLOR_TRANSPARENT_BLACK;
 
     dawnDeviceCreateSampler(device, &descriptor);
     EXPECT_CALL(api, DeviceCreateSampler(apiDevice, MatchesLambda([](const dawnSamplerDescriptor* desc) -> bool {
@@ -497,9 +505,13 @@ TEST_F(WireTests, StructureOfValuesArgument) {
             desc->magFilter == DAWN_FILTER_MODE_LINEAR &&
             desc->minFilter == DAWN_FILTER_MODE_NEAREST &&
             desc->mipmapFilter == DAWN_FILTER_MODE_LINEAR &&
-            desc->addressModeU == DAWN_ADDRESS_MODE_CLAMP_TO_EDGE &&
-            desc->addressModeV == DAWN_ADDRESS_MODE_REPEAT &&
-            desc->addressModeW == DAWN_ADDRESS_MODE_MIRRORED_REPEAT;
+            desc->sAddressMode == DAWN_ADDRESS_MODE_CLAMP_TO_EDGE &&
+            desc->tAddressMode == DAWN_ADDRESS_MODE_REPEAT &&
+            desc->rAddressMode == DAWN_ADDRESS_MODE_MIRRORED_REPEAT &&
+            desc->compareFunction == DAWN_COMPARE_FUNCTION_NEVER &&
+            desc->borderColor == DAWN_BORDER_COLOR_TRANSPARENT_BLACK &&
+            desc->lodMinClamp == kLodMin &&
+            desc->lodMaxClamp == kLodMax;
     })))
         .WillOnce(Return(nullptr));
 

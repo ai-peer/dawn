@@ -28,6 +28,8 @@ namespace dawn_native { namespace vulkan {
                     return VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT;
                 case dawn::AddressMode::ClampToEdge:
                     return VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+                case dawn::AddressMode::ClampToBorderColor:
+                    return VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
                 default:
                     UNREACHABLE();
             }
@@ -54,6 +56,42 @@ namespace dawn_native { namespace vulkan {
                     UNREACHABLE();
             }
         }
+
+        VkBorderColor VulkanBorderColor(dawn::BorderColor color) {
+            switch (color) {
+                case dawn::BorderColor::TransparentBlack:
+                    return VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK;
+                case dawn::BorderColor::OpaqueBlack:
+                    return VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK;
+                case dawn::BorderColor::OpaqueWhite:
+                    return VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
+        VkCompareOp VulkanCompareOp(dawn::CompareFunction compareOp) {
+            switch (compareOp) {
+                case dawn::CompareFunction::Never:
+                    return VK_COMPARE_OP_NEVER;
+                case dawn::CompareFunction::Less:
+                    return VK_COMPARE_OP_LESS;
+                case dawn::CompareFunction::LessEqual:
+                    return VK_COMPARE_OP_LESS_OR_EQUAL;
+                case dawn::CompareFunction::Greater:
+                    return VK_COMPARE_OP_GREATER;
+                case dawn::CompareFunction::GreaterEqual:
+                    return VK_COMPARE_OP_GREATER_OR_EQUAL;
+                case dawn::CompareFunction::Equal:
+                    return VK_COMPARE_OP_EQUAL;
+                case dawn::CompareFunction::NotEqual:
+                    return VK_COMPARE_OP_NOT_EQUAL;
+                case dawn::CompareFunction::Always:
+                    return VK_COMPARE_OP_ALWAYS;
+                default:
+                    UNREACHABLE();
+            }
+        }
     }  // anonymous namespace
 
     Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
@@ -65,18 +103,20 @@ namespace dawn_native { namespace vulkan {
         createInfo.magFilter = VulkanSamplerFilter(descriptor->magFilter);
         createInfo.minFilter = VulkanSamplerFilter(descriptor->minFilter);
         createInfo.mipmapMode = VulkanMipMapMode(descriptor->mipmapFilter);
-        createInfo.addressModeU = VulkanSamplerAddressMode(descriptor->addressModeU);
-        createInfo.addressModeV = VulkanSamplerAddressMode(descriptor->addressModeV);
-        createInfo.addressModeW = VulkanSamplerAddressMode(descriptor->addressModeW);
+        createInfo.addressModeU = VulkanSamplerAddressMode(descriptor->sAddressMode);
+        createInfo.addressModeV = VulkanSamplerAddressMode(descriptor->tAddressMode);
+        createInfo.addressModeW = VulkanSamplerAddressMode(descriptor->rAddressMode);
         createInfo.mipLodBias = 0.0f;
         createInfo.anisotropyEnable = VK_FALSE;
         createInfo.maxAnisotropy = 1.0f;
-        createInfo.compareEnable = VK_FALSE;
-        createInfo.compareOp = VK_COMPARE_OP_NEVER;
-        createInfo.minLod = 0.0f;
-        createInfo.maxLod = 1000.0f;
-        createInfo.borderColor = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK;
+        createInfo.compareOp = VulkanCompareOp(descriptor->compareFunction);
+        createInfo.compareEnable = createInfo.compareOp == VK_COMPARE_OP_NEVER ?
+                                   VK_FLASE : VK_TRUE;
+        createInfo.minLod = descriptor->lodMinClamp;
+        createInfo.maxLod = descriptor->lodMaxClamp;
+        createInfo.borderColor = VulkanBorderColor(descriptor->borderColor);
         createInfo.unnormalizedCoordinates = VK_FALSE;
+
 
         if (device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
             VK_SUCCESS) {
