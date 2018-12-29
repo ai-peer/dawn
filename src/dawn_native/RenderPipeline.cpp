@@ -15,7 +15,6 @@
 #include "dawn_native/RenderPipeline.h"
 
 #include "common/BitSetIterator.h"
-#include "dawn_native/DepthStencilState.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/RenderPassDescriptor.h"
@@ -86,7 +85,7 @@ namespace dawn_native {
             return {};
         }
 
-    }  // namespace
+    }  // anonymous namespace
 
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                 const RenderPipelineDescriptor* descriptor) {
@@ -148,7 +147,7 @@ namespace dawn_native {
         : PipelineBase(device,
                        descriptor->layout,
                        dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment),
-          mDepthStencilState(descriptor->depthStencilState),
+          mDepthStencilState(*descriptor->depthStencilState),
           mIndexFormat(descriptor->indexFormat),
           mInputState(descriptor->inputState),
           mPrimitiveTopology(descriptor->primitiveTopology),
@@ -175,8 +174,8 @@ namespace dawn_native {
         return &mBlendStates[attachmentSlot];
     }
 
-    DepthStencilStateBase* RenderPipelineBase::GetDepthStencilState() {
-        return mDepthStencilState.Get();
+    DepthStencilStateDescriptor* RenderPipelineBase::GetDepthStencilStateDescriptor() {
+        return &mDepthStencilState;
     }
 
     dawn::IndexFormat RenderPipelineBase::GetIndexFormat() const {
@@ -235,6 +234,17 @@ namespace dawn_native {
         }
 
         return true;
+    }
+
+    bool RenderPipelineBase::StencilTestEnabled() const {
+        return mDepthStencilState.back.compare != dawn::CompareFunction::Always ||
+               mDepthStencilState.back.stencilFailOp != dawn::StencilOperation::Keep ||
+               mDepthStencilState.back.depthFailOp != dawn::StencilOperation::Keep ||
+               mDepthStencilState.back.passOp != dawn::StencilOperation::Keep ||
+               mDepthStencilState.front.compare != dawn::CompareFunction::Always ||
+               mDepthStencilState.front.stencilFailOp != dawn::StencilOperation::Keep ||
+               mDepthStencilState.front.depthFailOp != dawn::StencilOperation::Keep ||
+               mDepthStencilState.front.passOp != dawn::StencilOperation::Keep;
     }
 
 }  // namespace dawn_native

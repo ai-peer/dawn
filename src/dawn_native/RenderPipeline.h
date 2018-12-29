@@ -15,7 +15,6 @@
 #ifndef DAWNNATIVE_RENDERPIPELINE_H_
 #define DAWNNATIVE_RENDERPIPELINE_H_
 
-#include "dawn_native/DepthStencilState.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/Pipeline.h"
 
@@ -36,7 +35,7 @@ namespace dawn_native {
         RenderPipelineBase(DeviceBase* device, const RenderPipelineDescriptor* descriptor);
 
         const BlendStateDescriptor* GetBlendStateDescriptor(uint32_t attachmentSlot);
-        DepthStencilStateBase* GetDepthStencilState();
+        DepthStencilStateDescriptor* GetDepthStencilStateDescriptor();
         dawn::IndexFormat GetIndexFormat() const;
         InputStateBase* GetInputState();
         dawn::PrimitiveTopology GetPrimitiveTopology() const;
@@ -49,9 +48,11 @@ namespace dawn_native {
         // A pipeline can be used in a render pass if its attachment info matches the actual
         // attachments in the render pass. This returns whether it is the case.
         bool IsCompatibleWith(const RenderPassDescriptorBase* renderPass) const;
+        bool StencilTestEnabled() const;
 
       private:
-        Ref<DepthStencilStateBase> mDepthStencilState;
+        // dawn::DepthStencilStateDescriptor mDepthStencilState;
+        DepthStencilStateDescriptor mDepthStencilState;
         dawn::IndexFormat mIndexFormat;
         Ref<InputStateBase> mInputState;
         dawn::PrimitiveTopology mPrimitiveTopology;
