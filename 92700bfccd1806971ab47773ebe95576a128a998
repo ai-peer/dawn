@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66ac94ed_a822da1e",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 0,
+      "message": "nit: change descriptor.cDepthStencilState instead since it has most of these values as defaults.",
+      "revId": "92700bfccd1806971ab47773ebe95576a128a998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21abd08d_af75d80f",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "nit: here and in other places, no need to set nextInChain because it default to nullptr in the C++ Dawn headers (it would still be needed for CHelloTriangle).",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7525f14b_15f5926e",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01eb3602_051e97bc",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "281340ed_633ebf7d",
+        "filename": "examples/glTFViewer/glTFViewer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4c2415a_a556fb1b",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "Can we add validation for the depth stencil state too? It least checking that the enums are valid? It would be in a helper function.",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3820903_3c3df4bc",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "[1] Can this be an utility function taking a const DepthStencilDescriptor\u0026?",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a3baed0_54028f62",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "nit: return a const ref",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 35
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba2ef790_2d4c5fee",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "with [1] this argument isn\u0027t needed and stencilTestEnabled can be computed locally.",
+      "range": {
+        "startLine": 202,
+        "startChar": 57,
+        "endLine": 202,
+        "endChar": 80
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "696c6d1e_61e95245",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "ditto: with [1] this isn\u0027t needed.",
+      "range": {
+        "startLine": 245,
+        "startChar": 37,
+        "endLine": 245,
+        "endChar": 60
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69124962_df46dca7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "Can we instead compute the depth stencil descriptor on render pipeline creation and cache it there? SetRenderPipeline can be called 1000s of time per frame so we don\u0027t want to do expensive work there.",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f206bc31_b3c8fcd7",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "ditto: with [1] this isn\u0027t needed",
+      "range": {
+        "startLine": 157,
+        "startChar": 36,
+        "endLine": 157,
+        "endChar": 59
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1e68242_3c0312ec",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "nit: this function can return the VkPipelineDepthStencilStateCreateInfo by value.",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa01d69f_5b94b654",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "ditto: with [1] this isn\u0027t needed.",
+      "range": {
+        "startLine": 175,
+        "startChar": 37,
+        "endLine": 175,
+        "endChar": 60
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8cfee7e_0ee39d64",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f4e72c3_8b15e27f",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "Can these lines be moved above, somewhere around [2] so that it doesn\u0027t break the filling of createInfo?",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 66
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bee6d2e_9a3d9bc5",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T11:29:31Z",
+      "side": 1,
+      "message": "nit: no need to set nextInChain in C++ because it defaults to nullptr.",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
