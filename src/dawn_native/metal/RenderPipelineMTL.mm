@@ -14,7 +14,6 @@
 
 #include "dawn_native/metal/RenderPipelineMTL.h"
 
-#include "dawn_native/metal/DepthStencilStateMTL.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/InputStateMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
