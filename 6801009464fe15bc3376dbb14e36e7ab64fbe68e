@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab2ea2ac_181baba4",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "This already exists here https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/DepthStencilStateD3D12.cpp?type\u003dcs\u0026q\u003ddawn::CompareFunction::Less\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d55\n\nMaybe we could share implementations (for now feel free to just export this in the RenderPipelineD3D12.h header, we can make a \"UtilsD3D12\" files later)? It would conflict with this patch though https://dawn-review.googlesource.com/c/dawn/+/3541",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "032f80a6_03ba9b7e",
+        "filename": "src/dawn_native/metal/SamplerMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "ditto, same as D3D12",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d56eb448_6458ad23",
+        "filename": "src/dawn_native/opengl/SamplerGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "ditto, same as D3D12",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b581dc7_09b43db0",
+        "filename": "src/dawn_native/vulkan/SamplerVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "ditto, same as D3D12",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c72344b0_6d580025",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "ditto: same as TextureViewTest",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "264df79d_c44f039e",
+        "filename": "src/tests/end2end/SamplerTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "ditto: same as TextureViewTest",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2234005e_51db0ce5",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "nit: just put 1000, there are no 2^1000 sized textures. This would allow removing the limits include",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8dce229_aba4d6a9",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-12-29T10:51:18Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this include is needed.",
+      "revId": "6801009464fe15bc3376dbb14e36e7ab64fbe68e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
