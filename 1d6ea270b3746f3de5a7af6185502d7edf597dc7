@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a199d0b_fecbef0d",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-02T09:50:21Z",
+      "side": 1,
+      "message": "This file had only constants that would be spec defined while LodMax wouldn\u0027t be spec-defined. Having them here sounds ok for now and we\u0027ll make a proper \"spec constants\" header file at some point in the future.",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f452ea7_abf6538b",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-02T09:50:21Z",
+      "side": 1,
+      "message": "Since you\u0027re making the change now, can the implementation be in UtilsD3D12.cpp? Also this function is now defined in a header so it needs a slightly better name. \"ToD3D12ComparisonFunc?\"",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52919afc_8fcdc63b",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-02T09:50:21Z",
+      "side": 1,
+      "message": "Also the copy of this function in RenderPipelineD3D12.cpp (or DepthStencilStateD3D12.cpp) needs to be removed in favor of this. Same for other backends.",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
