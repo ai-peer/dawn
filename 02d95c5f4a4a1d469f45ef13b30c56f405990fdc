@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "f5c0c2a1_4b3c0500",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-01-02T08:51:17Z",
+      "side": 1,
+      "message": "Change back to UVW :)",
+      "parentUuid": "2cf3cb51_9308d347",
+      "range": {
+        "startLine": 107,
+        "startChar": 56,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "02d95c5f4a4a1d469f45ef13b30c56f405990fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88adae41_eed76c19",
         "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
         "patchSetId": 4
