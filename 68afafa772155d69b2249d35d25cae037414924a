@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9ad71ce9_61326bf7",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21abd08d_af75d80f",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7525f14b_15f5926e",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "68afafa772155d69b2249d35d25cae037414924a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f07a84a1_3571a058",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7525f14b_15f5926e",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5852c1e5_7ced2b58",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01eb3602_051e97bc",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "281340ed_633ebf7d",
         "filename": "examples/glTFViewer/glTFViewer.cpp",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "7d8e56e7_bd566b06",
+        "filename": "examples/glTFViewer/glTFViewer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "281340ed_633ebf7d",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4c2415a_a556fb1b",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -84,6 +156,24 @@
       "revId": "68afafa772155d69b2249d35d25cae037414924a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77e72251_e720ad5a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4c2415a_a556fb1b",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +217,30 @@
     },
     {
       "key": {
+        "uuid": "8cdc046a_bf396c3a",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a3baed0_54028f62",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 35
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba2ef790_2d4c5fee",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 4
@@ -138,6 +252,30 @@
       "writtenOn": "2018-12-29T11:29:31Z",
       "side": 1,
       "message": "with [1] this argument isn\u0027t needed and stencilTestEnabled can be computed locally.",
+      "range": {
+        "startLine": 202,
+        "startChar": 57,
+        "endLine": 202,
+        "endChar": 80
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a08524e0_4f301d3a",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "If I define it in util, and include the header file and call util::StencilTestEnabled() at different backends respectively (Vulkan and GL in Linux), it will report redefinition of StencilTestEnabled and fail to build the binary. Do you know why? Maybe the current implementation is acceptable?",
+      "parentUuid": "ba2ef790_2d4c5fee",
       "range": {
         "startLine": 202,
         "startChar": 57,
@@ -190,6 +328,24 @@
     },
     {
       "key": {
+        "uuid": "0e525e70_2ace699b",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69124962_df46dca7",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f206bc31_b3c8fcd7",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 4
@@ -227,6 +383,24 @@
       "revId": "68afafa772155d69b2249d35d25cae037414924a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be4e85ed_0c1e0947",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1e68242_3c0312ec",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -270,6 +444,24 @@
     },
     {
       "key": {
+        "uuid": "f421c4a4_2f07a16c",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8cfee7e_0ee39d64",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f4e72c3_8b15e27f",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 4
@@ -293,6 +485,30 @@
     },
     {
       "key": {
+        "uuid": "db20c7ef_359a3e48",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f4e72c3_8b15e27f",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 66
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1bee6d2e_9a3d9bc5",
         "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
         "patchSetId": 4
@@ -307,6 +523,24 @@
       "revId": "68afafa772155d69b2249d35d25cae037414924a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b948479b_e69b4843",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-02T14:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bee6d2e_9a3d9bc5",
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
