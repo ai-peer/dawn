@@ -18,7 +18,6 @@
 #include "dawn_native/Commands.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
-#include "dawn_native/metal/DepthStencilStateMTL.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/InputStateMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
@@ -197,6 +196,88 @@ namespace dawn_native { namespace metal {
                         }
                     } break;
                 }
+            }
+        }
+
+        MTLCompareFunction MetalDepthStencilCompareFunction(dawn::CompareFunction compareFunction) {
+            switch (compareFunction) {
+                case dawn::CompareFunction::Never:
+                    return MTLCompareFunctionNever;
+                case dawn::CompareFunction::Less:
+                    return MTLCompareFunctionLess;
+                case dawn::CompareFunction::LessEqual:
+                    return MTLCompareFunctionLessEqual;
+                case dawn::CompareFunction::Greater:
+                    return MTLCompareFunctionGreater;
+                case dawn::CompareFunction::GreaterEqual:
+                    return MTLCompareFunctionGreaterEqual;
+                case dawn::CompareFunction::NotEqual:
+                    return MTLCompareFunctionNotEqual;
+                case dawn::CompareFunction::Equal:
+                    return MTLCompareFunctionEqual;
+                case dawn::CompareFunction::Always:
+                    return MTLCompareFunctionAlways;
+            }
+        }
+
+        MTLStencilOperation MetalStencilOperation(dawn::StencilOperation stencilOperation) {
+            switch (stencilOperation) {
+                case dawn::StencilOperation::Keep:
+                    return MTLStencilOperationKeep;
+                case dawn::StencilOperation::Zero:
+                    return MTLStencilOperationZero;
+                case dawn::StencilOperation::Replace:
+                    return MTLStencilOperationReplace;
+                case dawn::StencilOperation::Invert:
+                    return MTLStencilOperationInvert;
+                case dawn::StencilOperation::IncrementClamp:
+                    return MTLStencilOperationIncrementClamp;
+                case dawn::StencilOperation::DecrementClamp:
+                    return MTLStencilOperationDecrementClamp;
+                case dawn::StencilOperation::IncrementWrap:
+                    return MTLStencilOperationIncrementWrap;
+                case dawn::StencilOperation::DecrementWrap:
+                    return MTLStencilOperationDecrementWrap;
+            }
+        }
+
+        void ComputeDepthStencilDesc(MTLDepthStencilDescriptor* mtlDepthStencilDescriptor,
+                                     bool stencilTestEnabled,
+                                     const DepthStencilStateDescriptor* descriptor) {
+            mtlDepthStencilDescriptor.depthCompareFunction =
+                MetalDepthStencilCompareFunction(descriptor->depthCompare);
+            mtlDepthStencilDescriptor.depthWriteEnabled = descriptor->depthWriteEnabled;
+
+            if (stencilTestEnabled) {
+                MTLStencilDescriptor* backFaceStencil = [MTLStencilDescriptor new];
+                MTLStencilDescriptor* frontFaceStencil = [MTLStencilDescriptor new];
+
+                backFaceStencil.stencilCompareFunction =
+                    MetalDepthStencilCompareFunction(descriptor->back.compare);
+                backFaceStencil.stencilFailureOperation =
+                    MetalStencilOperation(descriptor->back.stencilFailOp);
+                backFaceStencil.depthFailureOperation =
+                    MetalStencilOperation(descriptor->back.depthFailOp);
+                backFaceStencil.depthStencilPassOperation =
+                    MetalStencilOperation(descriptor->back.passOp);
+                backFaceStencil.readMask = descriptor->stencilReadMask;
+                backFaceStencil.writeMask = descriptor->stencilWriteMask;
+
+                frontFaceStencil.stencilCompareFunction =
+                    MetalDepthStencilCompareFunction(descriptor->front.compare);
+                frontFaceStencil.stencilFailureOperation =
+                    MetalStencilOperation(descriptor->front.stencilFailOp);
+                frontFaceStencil.depthFailureOperation =
+                    MetalStencilOperation(descriptor->front.depthFailOp);
+                frontFaceStencil.depthStencilPassOperation =
+                    MetalStencilOperation(descriptor->front.passOp);
+                frontFaceStencil.readMask = descriptor->stencilReadMask;
+                frontFaceStencil.writeMask = descriptor->stencilWriteMask;
+
+                mtlDepthStencilDescriptor.backFaceStencil = backFaceStencil;
+                mtlDepthStencilDescriptor.frontFaceStencil = frontFaceStencil;
+                [backFaceStencil release];
+                [frontFaceStencil release];
             }
         }
 
@@ -432,10 +513,16 @@ namespace dawn_native { namespace metal {
                     SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
                     lastPipeline = ToBackend(cmd->pipeline).Get();
 
-                    DepthStencilState* depthStencilState =
-                        ToBackend(lastPipeline->GetDepthStencilState());
-                    [encoder setDepthStencilState:depthStencilState->GetMTLDepthStencilState()];
+                    MTLDepthStencilDescriptor* mtlDepthStencilDescriptor =
+                        [MTLDepthStencilDescriptor new];
+                    ComputeDepthStencilDesc(mtlDepthStencilDescriptor,
+                                            lastPipeline->StencilTestEnabled(),
+                                            lastPipeline->GetDepthStencilStateDescriptor());
+                    auto mtlDevice = mDevice->GetMTLDevice();
+                    [encoder setDepthStencilState:[mtlDevice newDepthStencilStateWithDescriptor:
+                                                                 mtlDepthStencilDescriptor]];
                     lastPipeline->Encode(encoder);
+                    [mtlDepthStencilDescriptor release];
                 } break;
 
                 case Command::SetPushConstants: {
