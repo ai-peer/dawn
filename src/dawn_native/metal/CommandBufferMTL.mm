@@ -18,7 +18,6 @@
 #include "dawn_native/Commands.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
-#include "dawn_native/metal/DepthStencilStateMTL.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/InputStateMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
@@ -199,7 +198,6 @@ namespace dawn_native { namespace metal {
                 }
             }
         }
-
     }  // anonymous namespace
 
     CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
@@ -432,9 +430,7 @@ namespace dawn_native { namespace metal {
                     SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
                     lastPipeline = ToBackend(cmd->pipeline).Get();
 
-                    DepthStencilState* depthStencilState =
-                        ToBackend(lastPipeline->GetDepthStencilState());
-                    [encoder setDepthStencilState:depthStencilState->GetMTLDepthStencilState()];
+                    [encoder setDepthStencilState:lastPipeline->GetMTLDepthStencilState()];
                     lastPipeline->Encode(encoder);
                 } break;
 
