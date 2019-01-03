@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "60155d1b_42586723",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Ack.\n\nLet\u0027s revisit this after we get consensus for this.",
+      "parentUuid": "e979edb2_21916520",
+      "range": {
+        "startLine": 508,
+        "startChar": 22,
+        "endLine": 508,
+        "endChar": 26
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c50d69d_de0470c7",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a95500de_f2163f45",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Done\n\nGood to know this. I will be aware of this next time.",
+      "parentUuid": "7c50d69d_de0470c7",
+      "range": {
+        "startLine": 188,
+        "startChar": 37,
+        "endLine": 188,
+        "endChar": 89
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "64ea02c0_7cd4a823",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Done\n\nWe do have init for MTLStencilDescriptor. But we don\u0027t use it for any descriptor in Metal code in dawn project. We always use new and then release instead.",
+      "parentUuid": "6791109b_c3c24264",
+      "range": {
+        "startLine": 224,
+        "startChar": 34,
+        "endLine": 224,
+        "endChar": 41
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e93b8d8_638f0330",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 7
@@ -91,6 +163,30 @@
       "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc528420_d7b79107",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e93b8d8_638f0330",
+      "range": {
+        "startLine": 271,
+        "startChar": 8,
+        "endLine": 279,
+        "endChar": 9
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9004babd_ca1f274e",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "063d0e22_eb8a29a4",
+      "range": {
+        "startLine": 281,
+        "startChar": 23,
+        "endLine": 281,
+        "endChar": 30
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65505bec_4ccde8f5",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 7
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "df7a83da_cd035345",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65505bec_4ccde8f5",
+      "range": {
+        "startLine": 291,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 24
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f499f202_00d0804b",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 7
@@ -151,6 +295,30 @@
       "writtenOn": "2019-01-03T00:44:58Z",
       "side": 1,
       "message": "should be * or const\u0026.\n\n\u003e we never allow non-const reference parameters except when required by convention\n\nhttps://google.github.io/styleguide/cppguide.html#Reference_Arguments",
+      "range": {
+        "startLine": 159,
+        "startChar": 61,
+        "endLine": 159,
+        "endChar": 84
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fe808e3_e898c705",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Ah, thank you for your suggestion, Kai. But this is not a const ref, see the code at line 184 - 185. I just copied the code snippet from DepthStencilGL.cpp...",
+      "parentUuid": "f499f202_00d0804b",
       "range": {
         "startLine": 159,
         "startChar": 61,
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "5ba850fe_e94d7520",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2ba68c2c_8e4686bd",
+      "range": {
+        "startLine": 182,
+        "startChar": 48,
+        "endLine": 182,
+        "endChar": 55
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b12e3bfe_8786b9d3",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 7
@@ -206,6 +398,30 @@
       "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8c0a9cf_9eb892e3",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T05:52:42Z",
+      "side": 1,
+      "message": "Ack.\n\nAnd I submitted a separate patch to fix it. Because this patch is more like a code refactoring.",
+      "parentUuid": "b12e3bfe_8786b9d3",
+      "range": {
+        "startLine": 187,
+        "startChar": 30,
+        "endLine": 187,
+        "endChar": 44
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
