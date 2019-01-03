@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "624480d7_8d869c32",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-03T16:50:10Z",
+      "side": 1,
+      "message": "Nit: off-by-one error. :)",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d37606f7_85f09880",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-03T16:50:10Z",
+      "side": 1,
+      "message": "Not new to this patch, but out of curiosity, do PCI device IDs make sense on all platforms (in particular, Android)?",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ede19ad_2b6a39c6",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-03T16:50:10Z",
+      "side": 1,
+      "message": "Nit: could put just the \"namespace foo {\" in the #ifdef, since the Connect decl and closing brace are common.",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7112cd28_f5a1fe55",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-03T16:50:10Z",
+      "side": 1,
+      "message": "Did you consider doing this lazily inside GetAdapters(), as a mutable cache?",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3273d0bf_67cb25ff",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-03T16:50:10Z",
+      "side": 1,
+      "message": "E.g., what happens if you call GetAdapters() here without calling DiscoverDefaultAdapters() first? Could be error-prone, no?",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
