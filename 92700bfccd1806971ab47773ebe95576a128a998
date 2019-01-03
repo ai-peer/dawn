@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7dff1b93_a88501dd",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-01-03T06:32:29Z",
+      "side": 0,
+      "message": "I don\u0027t think this can be removed. Because this is a C structure and nullptr default value is not generated from the template.And C structure cannot have default value when declaration.",
+      "range": {
+        "startLine": 60,
+        "startChar": 41,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "92700bfccd1806971ab47773ebe95576a128a998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
