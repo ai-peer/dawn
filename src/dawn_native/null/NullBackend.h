@@ -30,6 +30,7 @@
 #include "dawn_native/Queue.h"
 #include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/RenderPipeline.h"
+#include "dawn_native/RingBuffer.h"
 #include "dawn_native/Sampler.h"
 #include "dawn_native/ShaderModule.h"
 #include "dawn_native/SwapChain.h"
@@ -103,6 +104,7 @@ namespace dawn_native { namespace null {
 
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
+        Serial GetPendingCommandSerial() const;
         void TickImpl() override;
 
         const dawn_native::PCIInfo& GetPCIInfo() const override;
@@ -182,6 +184,19 @@ namespace dawn_native { namespace null {
       protected:
         TextureBase* GetNextTextureImpl(const TextureDescriptor* descriptor) override;
         void OnBeforePresent(TextureBase*) override;
+    };
+
+    class RingBuffer : public RingBufferBase {
+      public:
+        RingBuffer(size_t size, Device* device);
+        bool Initialize() override;
+
+      protected:
+        Serial GetPendingCommandSerial() const override;
+        uint8_t* GetCPUVirtualAddressPointer() const override;
+
+        Device* mDevice;
+        std::unique_ptr<uint8_t[]> mCpuVirtualAddress;
     };
 
 }}  // namespace dawn_native::null

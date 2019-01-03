@@ -222,7 +222,7 @@ TEST_P(BufferSetSubDataTests, SmallDataAtOffset) {
 TEST_P(BufferSetSubDataTests, ManySetSubData) {
     // TODO(cwallez@chromium.org): Use ringbuffers for SetSubData on explicit APIs.
     // otherwise this creates too many resources and can take freeze the driver(?)
-    DAWN_SKIP_TEST_IF(IsD3D12() || IsMetal() || IsVulkan());
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     constexpr uint32_t kSize = 4000 * 1000;
     constexpr uint32_t kElements = 1000 * 1000;
