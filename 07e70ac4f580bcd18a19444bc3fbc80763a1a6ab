@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23f7649f_3ed28930",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T08:42:55Z",
+      "side": 1,
+      "message": "WireTests is using the C API so we should keep the assignments.",
+      "revId": "07e70ac4f580bcd18a19444bc3fbc80763a1a6ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

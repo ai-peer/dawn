@@ -46,6 +46,30 @@
       "revId": "92700bfccd1806971ab47773ebe95576a128a998",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9daef58_44768e3f",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T08:42:55Z",
+      "side": 0,
+      "message": "The C API doesn\u0027t initialize the pointer so we should keep these assignments in this file and WireTests only. I think it works because this is a simple executable and these variables are the first time a particular stack location is used, which means their values come from a fresh OS page which is zeroed out. Not something we should rely on.",
+      "parentUuid": "5caadad0_271b00a8",
+      "range": {
+        "startLine": 60,
+        "startChar": 41,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "92700bfccd1806971ab47773ebe95576a128a998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
