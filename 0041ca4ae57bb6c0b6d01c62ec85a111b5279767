@@ -355,6 +355,30 @@
     },
     {
       "key": {
+        "uuid": "ea8ead12_34cd1588",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T14:32:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b1e7d10_949102bc",
+      "range": {
+        "startLine": 159,
+        "startChar": 61,
+        "endLine": 159,
+        "endChar": 84
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ba68c2c_8e4686bd",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 7
