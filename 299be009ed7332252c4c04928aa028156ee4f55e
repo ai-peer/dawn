@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c38ff453_07d7d5a8",
+        "filename": "src/dawn_native/vulkan/DepthStencilStateVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-03T02:09:12Z",
+      "side": 1,
+      "message": "Not 100% sure this was what we decided we should do. But this seems like a better start.",
+      "revId": "299be009ed7332252c4c04928aa028156ee4f55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c2183b1_3c5e6562",
+        "filename": "src/dawn_native/vulkan/DepthStencilStateVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-03T02:09:12Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t realize this only takes effect with depthBoundsTestEnable\u003dtrue. Still seems better to have a good default here in case we change it later.",
+      "revId": "299be009ed7332252c4c04928aa028156ee4f55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
