@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7fbfeb76_ea3d67e5",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-01-03T02:48:20Z",
+      "side": 1,
+      "message": "Thx for telling me about this.I\u0027ll add comments for these \"non spec constant\".",
+      "parentUuid": "4a199d0b_fecbef0d",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f452ea7_abf6538b",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
         "patchSetId": 9
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ad7fd00c_8cc6f539",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-01-03T02:48:20Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "0f452ea7_abf6538b",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52919afc_8fcdc63b",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
         "patchSetId": 9
@@ -47,6 +83,24 @@
       "writtenOn": "2019-01-02T09:50:21Z",
       "side": 1,
       "message": "Also the copy of this function in RenderPipelineD3D12.cpp (or DepthStencilStateD3D12.cpp) needs to be removed in favor of this. Same for other backends.",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a38c87a6_0fd709df",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-01-03T02:48:20Z",
+      "side": 1,
+      "message": "Sure, but can I use another CL to clean this up?",
+      "parentUuid": "52919afc_8fcdc63b",
       "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
