@@ -57,22 +57,18 @@ void init() {
 
     {
         dawnRenderPipelineDescriptor descriptor;
-        descriptor.nextInChain = nullptr;
 
         dawnPipelineStageDescriptor vertexStage;
-        vertexStage.nextInChain = nullptr;
         vertexStage.module = vsModule;
         vertexStage.entryPoint = "main";
         descriptor.vertexStage = &vertexStage;
 
         dawnPipelineStageDescriptor fragmentStage;
-        fragmentStage.nextInChain = nullptr;
         fragmentStage.module = fsModule;
         fragmentStage.entryPoint = "main";
         descriptor.fragmentStage = &fragmentStage;
 
         dawnAttachmentsStateDescriptor attachmentsState;
-        attachmentsState.nextInChain = nullptr;
         attachmentsState.numColorAttachments = 1;
         dawnAttachmentDescriptor colorAttachment = {nullptr, swapChainFormat};
         attachmentsState.colorAttachments = &colorAttachment;
@@ -91,7 +87,6 @@ void init() {
         blendDescriptor.srcFactor = DAWN_BLEND_FACTOR_ONE;
         blendDescriptor.dstFactor = DAWN_BLEND_FACTOR_ONE;
         dawnBlendStateDescriptor blendStateDescriptor;
-        blendStateDescriptor.nextInChain = nullptr;
         blendStateDescriptor.blendEnabled = false;
         blendStateDescriptor.alphaBlend = blendDescriptor;
         blendStateDescriptor.colorBlend = blendDescriptor;
@@ -99,7 +94,6 @@ void init() {
         descriptor.blendStates = &blendStateDescriptor;
 
         dawnPipelineLayoutDescriptor pl;
-        pl.nextInChain = nullptr;
         pl.numBindGroupLayouts = 0;
         pl.bindGroupLayouts = nullptr;
         descriptor.layout = dawnDeviceCreatePipelineLayout(device, &pl);
