@@ -70,6 +70,30 @@
       "revId": "92700bfccd1806971ab47773ebe95576a128a998",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31c7ccb6_1cf6e4dc",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T09:37:20Z",
+      "side": 0,
+      "message": "Ack\n\nThanks for your explanation/guess that why it works.",
+      "parentUuid": "a9daef58_44768e3f",
+      "range": {
+        "startLine": 60,
+        "startChar": 41,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "92700bfccd1806971ab47773ebe95576a128a998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

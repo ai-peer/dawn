@@ -16,6 +16,24 @@
       "revId": "07e70ac4f580bcd18a19444bc3fbc80763a1a6ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da633a92_5047ed32",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T09:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f7649f_3ed28930",
+      "revId": "07e70ac4f580bcd18a19444bc3fbc80763a1a6ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
