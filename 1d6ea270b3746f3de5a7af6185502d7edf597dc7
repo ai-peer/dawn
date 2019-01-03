@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "44508871_a05b1797",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T08:52:20Z",
+      "side": 1,
+      "message": "It\u0027s better to factor all uses of a function when you extract it, but sounds good because this patch has been blocked long enough already.",
+      "parentUuid": "a38c87a6_0fd709df",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba96925d_1e17f6e9",
         "filename": "src/dawn_native/metal/UtilsMetal.h",
         "patchSetId": 9
