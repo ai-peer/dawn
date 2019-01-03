@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c5cf317_60733644",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T15:02:30Z",
+      "side": 1,
+      "message": "I was thinking of a standalone function, just that it would be declared in this file.",
+      "revId": "b9c3c5aa269d4d7219d1497b8ce41c84787467ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
