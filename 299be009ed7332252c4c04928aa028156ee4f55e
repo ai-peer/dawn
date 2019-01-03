@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cab98a61_ef4de231",
+        "filename": "src/dawn_native/vulkan/DepthStencilStateVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T02:18:13Z",
+      "side": 1,
+      "message": "Technically, I think this is correct. And this is also what we do for GL backend. \n\nWe discussed this at https://github.com/gpuweb/gpuweb/pull/122. The only question is that whether we need to have an explicit flag like depthTestEnabled at WebGPU idl for web devs. Currently, we don\u0027t have such a flag. But both Vulkan and D3D do have this flag.",
+      "parentUuid": "c38ff453_07d7d5a8",
+      "revId": "299be009ed7332252c4c04928aa028156ee4f55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c2183b1_3c5e6562",
         "filename": "src/dawn_native/vulkan/DepthStencilStateVk.cpp",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "299be009ed7332252c4c04928aa028156ee4f55e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cc21a54_b39ce923",
+        "filename": "src/dawn_native/vulkan/DepthStencilStateVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T02:18:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3c2183b1_3c5e6562",
+      "revId": "299be009ed7332252c4c04928aa028156ee4f55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
