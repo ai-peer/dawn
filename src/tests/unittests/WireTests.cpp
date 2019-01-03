@@ -319,7 +319,6 @@ TEST_F(WireTests, ValueArrayArgument) {
 TEST_F(WireTests, CStringArgument) {
     // Create shader module
     dawnShaderModuleDescriptor vertexDescriptor;
-    vertexDescriptor.nextInChain = nullptr;
     vertexDescriptor.codeSize = 0;
     dawnShaderModule vsModule = dawnDeviceCreateShaderModule(device, &vertexDescriptor);
     dawnShaderModule apiVsModule = api.GetNewShaderModule();
@@ -332,7 +331,6 @@ TEST_F(WireTests, CStringArgument) {
     blendDescriptor.srcFactor = DAWN_BLEND_FACTOR_ONE;
     blendDescriptor.dstFactor = DAWN_BLEND_FACTOR_ONE;
     dawnBlendStateDescriptor blendStateDescriptor;
-    blendStateDescriptor.nextInChain = nullptr;
     blendStateDescriptor.blendEnabled = false;
     blendStateDescriptor.alphaBlend = blendDescriptor;
     blendStateDescriptor.colorBlend = blendDescriptor;
@@ -362,7 +360,6 @@ TEST_F(WireTests, CStringArgument) {
 
     // Create the pipeline layout
     dawnPipelineLayoutDescriptor layoutDescriptor;
-    layoutDescriptor.nextInChain = nullptr;
     layoutDescriptor.numBindGroupLayouts = 0;
     layoutDescriptor.bindGroupLayouts = nullptr;
     dawnPipelineLayout layout = dawnDeviceCreatePipelineLayout(device, &layoutDescriptor);
@@ -372,22 +369,18 @@ TEST_F(WireTests, CStringArgument) {
 
     // Create pipeline
     dawnRenderPipelineDescriptor pipelineDescriptor;
-    pipelineDescriptor.nextInChain = nullptr;
 
     dawnPipelineStageDescriptor vertexStage;
-    vertexStage.nextInChain = nullptr;
     vertexStage.module = vsModule;
     vertexStage.entryPoint = "main";
     pipelineDescriptor.vertexStage = &vertexStage;
 
     dawnPipelineStageDescriptor fragmentStage;
-    fragmentStage.nextInChain = nullptr;
     fragmentStage.module = vsModule;
     fragmentStage.entryPoint = "main";
     pipelineDescriptor.fragmentStage = &fragmentStage;
 
     dawnAttachmentsStateDescriptor attachmentsState;
-    attachmentsState.nextInChain = nullptr;
     attachmentsState.numColorAttachments = 1;
     dawnAttachmentDescriptor colorAttachment = {nullptr, DAWN_TEXTURE_FORMAT_R8_G8_B8_A8_UNORM};
     attachmentsState.colorAttachments = &colorAttachment;
@@ -484,7 +477,6 @@ TEST_F(WireTests, ObjectsAsPointerArgument) {
 // Test that the wire is able to send structures that contain pure values (non-objects)
 TEST_F(WireTests, StructureOfValuesArgument) {
     dawnSamplerDescriptor descriptor;
-    descriptor.nextInChain = nullptr;
     descriptor.magFilter = DAWN_FILTER_MODE_LINEAR;
     descriptor.minFilter = DAWN_FILTER_MODE_NEAREST;
     descriptor.mipmapFilter = DAWN_FILTER_MODE_LINEAR;
@@ -518,7 +510,6 @@ TEST_F(WireTests, StructureOfObjectArrayArgument) {
     EXPECT_CALL(api, DeviceCreateBindGroupLayout(apiDevice, _)).WillOnce(Return(apiBgl));
 
     dawnPipelineLayoutDescriptor descriptor;
-    descriptor.nextInChain = nullptr;
     descriptor.numBindGroupLayouts = 1;
     descriptor.bindGroupLayouts = &bgl;
 
@@ -572,7 +563,6 @@ TEST_F(WireTests, StructureOfStructureArrayArgument) {
 // Test passing nullptr instead of objects - object as value version
 TEST_F(WireTests, OptionalObjectValue) {
     dawnBindGroupLayoutDescriptor bglDesc;
-    bglDesc.nextInChain = nullptr;
     bglDesc.numBindings = 0;
     dawnBindGroupLayout bgl = dawnDeviceCreateBindGroupLayout(device, &bglDesc);
 
@@ -588,7 +578,6 @@ TEST_F(WireTests, OptionalObjectValue) {
     binding.buffer = nullptr;
 
     dawnBindGroupDescriptor bgDesc;
-    bgDesc.nextInChain = nullptr;
     bgDesc.layout = bgl;
     bgDesc.numBindings = 1;
     bgDesc.bindings = &binding;
@@ -612,7 +601,6 @@ TEST_F(WireTests, DISABLED_NullptrInArray) {
     dawnBindGroupLayout nullBGL = nullptr;
 
     dawnPipelineLayoutDescriptor descriptor;
-    descriptor.nextInChain = nullptr;
     descriptor.numBindGroupLayouts = 1;
     descriptor.bindGroupLayouts = &nullBGL;
 
@@ -860,7 +848,6 @@ class WireBufferMappingTests : public WireTestsBase {
 
             {
                 dawnBufferDescriptor descriptor;
-                descriptor.nextInChain = nullptr;
 
                 apiBuffer = api.GetNewBuffer();
                 buffer = dawnDeviceCreateBuffer(device, &descriptor);
@@ -872,7 +859,6 @@ class WireBufferMappingTests : public WireTestsBase {
             }
             {
                 dawnBufferDescriptor descriptor;
-                descriptor.nextInChain = nullptr;
 
                 errorBuffer = dawnDeviceCreateBuffer(device, &descriptor);
 
@@ -1282,7 +1268,6 @@ class WireFenceTests : public WireTestsBase {
         {
             dawnFenceDescriptor descriptor;
             descriptor.initialValue = 1;
-            descriptor.nextInChain = nullptr;
 
             apiFence = api.GetNewFence();
             fence = dawnDeviceCreateFence(device, &descriptor);

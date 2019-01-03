@@ -32,7 +32,6 @@ constexpr dawn::TextureFormat kDefaultTextureFormat = dawn::TextureFormat::R8G8B
 
 dawn::TextureDescriptor CreateDefaultTextureDescriptor() {
     dawn::TextureDescriptor descriptor;
-    descriptor.nextInChain = nullptr;
     descriptor.size.width = kWidth;
     descriptor.size.height = kHeight;
     descriptor.size.depth = 1;
