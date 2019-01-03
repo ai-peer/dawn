@@ -331,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "8b1e7d10_949102bc",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-03T09:18:05Z",
+      "side": 1,
+      "message": "Then non-const pointer should be preferred over non-const reference, according to the guide.",
+      "parentUuid": "7fe808e3_e898c705",
+      "range": {
+        "startLine": 159,
+        "startChar": 61,
+        "endLine": 159,
+        "endChar": 84
+      },
+      "revId": "0041ca4ae57bb6c0b6d01c62ec85a111b5279767",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2ba68c2c_8e4686bd",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 7
