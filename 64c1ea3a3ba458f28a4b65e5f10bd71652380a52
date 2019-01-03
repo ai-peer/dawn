@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7103d2ac_81436f10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T13:45:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fc89686_fb6c936c",
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1a17cd4_144342ea",
         "filename": "src/dawn_native/Adapter.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68b7efa9_bbf2000e",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T13:45:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1a17cd4_144342ea",
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "82923ac9_5f1a74dc",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T13:45:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6d1f614_eb0f8715",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 21
+      },
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8565a08a_d27a3f89",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 2
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "cf83ca15_0ed77ed9",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T13:45:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8565a08a_d27a3f89",
+      "range": {
+        "startLine": 61,
+        "startChar": 17,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "603e823b_8518c7c6",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 2
@@ -93,6 +177,24 @@
       "writtenOn": "2018-12-27T05:46:05Z",
       "side": 1,
       "message": "I didn\u0027t even see this before I wrote https://dawn-review.googlesource.com/c/dawn/+/3520 .\nMaybe they should call into the same code?",
+      "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "828fd5dd_6972848e",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T13:45:58Z",
+      "side": 1,
+      "message": "Yes, although we can change it when we implement the adapter for the Vulkan backend.",
+      "parentUuid": "603e823b_8518c7c6",
       "revId": "64c1ea3a3ba458f28a4b65e5f10bd71652380a52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
