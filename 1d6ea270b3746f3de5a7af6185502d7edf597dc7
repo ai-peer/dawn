@@ -50,6 +50,29 @@
       "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba96925d_1e17f6e9",
+        "filename": "src/dawn_native/metal/UtilsMetal.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-03T00:50:26Z",
+      "side": 1,
+      "message": "should be UTILSMETAL, I think.",
+      "range": {
+        "startLine": 16,
+        "startChar": 25,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
