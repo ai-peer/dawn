@@ -22,6 +22,30 @@
       "revId": "92700bfccd1806971ab47773ebe95576a128a998",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5caadad0_271b00a8",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-03T06:36:50Z",
+      "side": 0,
+      "message": "@Corentin, you said that we need to assign nullptr to code in CHelloTriangle (https://dawn-review.googlesource.com/c/dawn/+/3541/4/examples/CubeReflection.cpp). However, when I remove the code, it can pass on bots. And I also tested on my local machines (Windows and Linux), it can draw a triangle without error. I think the code can check nextInChain and it was initialized to nullptr during code autogen for CHelloTriangle. WDYT?\n\nI found your comments before I sent the comment above, Shaobo.\nYes, you might be correct. But it is weird that no error was reported. Do you know why?",
+      "parentUuid": "7dff1b93_a88501dd",
+      "range": {
+        "startLine": 60,
+        "startChar": 41,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "92700bfccd1806971ab47773ebe95576a128a998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
