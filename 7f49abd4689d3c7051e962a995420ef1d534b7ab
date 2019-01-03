@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c6d165f_d7ab1587",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-03T18:03:09Z",
+      "side": 1,
+      "message": "nit: \"vkCreateDebugReportCallback\"?",
+      "range": {
+        "startLine": 581,
+        "startChar": 32,
+        "endLine": 581,
+        "endChar": 40
+      },
+      "revId": "7f49abd4689d3c7051e962a995420ef1d534b7ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
