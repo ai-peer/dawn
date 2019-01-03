@@ -288,6 +288,30 @@
     },
     {
       "key": {
+        "uuid": "7537bcd6_67124338",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T09:02:29Z",
+      "side": 1,
+      "message": "Which \"util\" do you refer to? For now this could be a static function declared in RenderPipeline.h",
+      "parentUuid": "a08524e0_4f301d3a",
+      "range": {
+        "startLine": 202,
+        "startChar": 57,
+        "endLine": 202,
+        "endChar": 80
+      },
+      "revId": "68afafa772155d69b2249d35d25cae037414924a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "696c6d1e_61e95245",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 4

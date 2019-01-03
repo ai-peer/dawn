@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce87868a_76686c02",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T09:02:29Z",
+      "side": 1,
+      "message": "nit: return the MTLDepthStencilDescriptor instead of having it as an out argument, and call this CreateMetalDepthStencilDescriptor or something like that?",
+      "range": {
+        "startLine": 188,
+        "startChar": 13,
+        "endLine": 188,
+        "endChar": 36
+      },
+      "revId": "07b75d2fca0b9e3b099e65e7b3af87564adcaa5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17cf68fa_5fca47c4",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-03T09:02:29Z",
+      "side": 1,
+      "message": "nextInChain is actually needed here because the wire tests are using the C API",
+      "revId": "07b75d2fca0b9e3b099e65e7b3af87564adcaa5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
