@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1937814_20d3c2e8",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-03T21:15:45Z",
+      "side": 1,
+      "message": "[1] mtlDepthStencilDescriptor would be autoreleased here. [[MTLDepthStencilDescriptor new] autorelease]",
+      "revId": "e6d791c513fbd24836bf6a8871e24d5443eae0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c8e514e_220893c3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-03T21:15:45Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure that [[alloc] init] is the same as [new], which would mean this still needs a release. I was wondering if it can be done with only the init (in-place instead of allocing first). e.g.\n\n  [mtlDepthStencilDescriptor.backFaceStencil init];\n\nAlthough now that I look more closely, that\u0027s probably not possible, since backFaceStencil seems to require a pointer.\n\nIf it can\u0027t be done in place, [new]+[release] is fine. I think [autorelease] would let you put the release next to the new:\n\n  MTLStencilDescriptor* backFaceStencil \u003d [[MTLStencilDescriptor new] autorelease];\n\n(tangent: it seems that the \"more modern\" way to do Objective-C is ARC. Maybe we should switch everything to ARC sometime to clean up some of the lifetime management in the Metal backend.)",
+      "range": {
+        "startLine": 197,
+        "startChar": 56,
+        "endLine": 197,
+        "endChar": 91
+      },
+      "revId": "e6d791c513fbd24836bf6a8871e24d5443eae0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bb4064d_9d8480b0",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-03T21:15:45Z",
+      "side": 1,
+      "message": "Doesn\u0027t this leak now since there\u0027s no [new]?\n\nI _think_ this is possible to avoid this by putting an [autorelease] *inside* GetDepthStencilStateDescriptor. [1]",
+      "range": {
+        "startLine": 288,
+        "startChar": 62,
+        "endLine": 288,
+        "endChar": 94
+      },
+      "revId": "e6d791c513fbd24836bf6a8871e24d5443eae0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
