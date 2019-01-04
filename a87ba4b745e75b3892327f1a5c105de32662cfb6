@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fced28c_cff0c42b",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-04T17:11:59Z",
+      "side": 1,
+      "message": "Nit: device -\u003e devices",
+      "revId": "a87ba4b745e75b3892327f1a5c105de32662cfb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3fe38c3_990c28b0",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-04T17:11:59Z",
+      "side": 1,
+      "message": "Nit: suggest commas around \"if we could create multiple adapters\".",
+      "revId": "a87ba4b745e75b3892327f1a5c105de32662cfb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac4ef87d_a5970ea8",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-04T17:11:59Z",
+      "side": 1,
+      "message": "Nit: Might be clearer as \"AdapterDiscoveryOptions.getProc must be set\" (or :: or whatever).",
+      "revId": "a87ba4b745e75b3892327f1a5c105de32662cfb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5482a12_a5e79a69",
+        "filename": "src/utils/OpenGLBinding.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-04T17:11:59Z",
+      "side": 1,
+      "message": "and -\u003e an",
+      "revId": "a87ba4b745e75b3892327f1a5c105de32662cfb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
