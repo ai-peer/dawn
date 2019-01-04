@@ -20,6 +20,7 @@
 
 namespace dawn_native { namespace null {
     DAWN_NATIVE_EXPORT dawnDevice CreateDevice();
+    DAWN_NATIVE_EXPORT dawnSwapChainImplementation CreateNativeSwapChainImpl();
 }}  // namespace dawn_native::null
 
 #endif  // DAWNNATIVE_NULLBACKEND_H_
