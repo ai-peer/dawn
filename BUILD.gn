@@ -1010,6 +1010,12 @@ if (dawn_standalone) {
       ":glTFViewer",
     ]
   }
+
+  shared_library("dawn_sample") {
+    deps = [
+      ":dawn_sample_utils",
+    ]
+  }
 }
 
 ###############################################################################
