@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0af6a5a2_027e0b7c",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-04T10:15:27Z",
+      "side": 1,
+      "message": "Technically I wrote these files in 2018 :P",
+      "parentUuid": "624480d7_8d869c32",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d37606f7_85f09880",
         "filename": "src/dawn_native/Adapter.h",
         "patchSetId": 3
@@ -51,6 +69,24 @@
       "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "578b1064_44ad12d2",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-04T10:15:27Z",
+      "side": 1,
+      "message": "They don\u0027t make sense on all platforms, but are important to expose when they are available.",
+      "parentUuid": "8b8ff7de_1010b5be",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "9fb43b24_76a8b5c0",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-04T10:15:27Z",
+      "side": 1,
+      "message": "What Kai said.",
+      "parentUuid": "9fab36a5_4e807dee",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7112cd28_f5a1fe55",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 3
@@ -117,6 +171,24 @@
       "writtenOn": "2019-01-03T16:50:10Z",
       "side": 1,
       "message": "E.g., what happens if you call GetAdapters() here without calling DiscoverDefaultAdapters() first? Could be error-prone, no?",
+      "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d19a91b2_7eed8dd3",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-04T10:15:27Z",
+      "side": 1,
+      "message": "You would get 0 adapters so I think people will quickly realize they didn\u0027t discover the default adapters. I\u0027ll land as is but let me know if you feel strongly about it and I can change it to lazy-discover + an option to not do the lazy discover.",
+      "parentUuid": "3273d0bf_67cb25ff",
       "revId": "bf037d064d5db3eebf4a562e599f69c9e52339d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
