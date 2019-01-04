@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6a08b0cb_6539c77d",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-04T03:00:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1937814_20d3c2e8",
+      "revId": "e6d791c513fbd24836bf6a8871e24d5443eae0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c8e514e_220893c3",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 12
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "118e9dfe_02061d28",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-04T03:00:42Z",
+      "side": 1,
+      "message": "Ack\n\nYes. We need to revisit the object allocation and release in all Object-C code in future, in order to make it consistent and efficient and conformed to the \"modern\" style.",
+      "parentUuid": "6c8e514e_220893c3",
+      "range": {
+        "startLine": 197,
+        "startChar": 56,
+        "endLine": 197,
+        "endChar": 91
+      },
+      "revId": "e6d791c513fbd24836bf6a8871e24d5443eae0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bb4064d_9d8480b0",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 12
@@ -62,6 +104,30 @@
       "revId": "e6d791c513fbd24836bf6a8871e24d5443eae0a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "202ba530_720c74fd",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-04T03:00:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bb4064d_9d8480b0",
+      "range": {
+        "startLine": 288,
+        "startChar": 62,
+        "endLine": 288,
+        "endChar": 94
+      },
+      "revId": "e6d791c513fbd24836bf6a8871e24d5443eae0a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
