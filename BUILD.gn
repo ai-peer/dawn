@@ -693,8 +693,8 @@ dawn_static_and_shared_library("libdawn_native") {
   ]
 
   deps = [
-    ":libdawn_native_sources",
     ":dawn_common",
+    ":libdawn_native_sources",
   ]
   sources = [
     "src/dawn_native/DawnNative.cpp",
@@ -847,8 +847,8 @@ test("dawn_unittests") {
     ":dawn_headers",
     ":dawn_utils",
     ":libdawn",
-    ":libdawn_native_sources",
     ":libdawn_native",
+    ":libdawn_native_sources",
     ":libdawn_wire",
     ":mock_dawn_gen",
     "third_party:gmock_and_gtest",
@@ -1059,6 +1059,57 @@ if (dawn_standalone) {
       ":CppHelloTriangle",
       ":CubeReflection",
       ":glTFViewer",
+    ]
+  }
+}
+
+###############################################################################
+# dawn.node: Node bindings
+###############################################################################
+
+# TODO: this target requires -Wl,-z,defs to NOT be specified,
+# but build/config/compiler/BUILD.gn sets it. Need to figure out how to unset
+# it for this target, or unset it for dawn_standalone builds.
+#
+# -Wl,-z,defs disallows linking of object files with undefined symbols (or
+# something like that). This is a problem when building dawn.node, because it
+# will always have undefined symbols that it expects to be present once Node
+# dynamically links it.
+
+if (dawn_standalone) {
+  shared_library("dawn.node") {
+    output_name = "dawn"
+    output_extension = "node"
+
+    sources = [
+      "node/dawn.cpp",
+    ]
+
+    configs += [ ":dawn_internal" ]
+
+    defines = [
+      "DEBUG",
+      "_DEBUG",
+      "BUILDING_NODE_EXTENSION",
+      "NAPI_DISABLE_CPP_EXCEPTIONS",
+      "USING_UV_SHARED=1",
+      "USING_V8_SHARED=1",
+      "V8_DEPRECATION_WARNINGS=1",
+      "V8_ENABLE_CHECKS",
+      "_FILE_OFFSET_BITS=64",
+      "_LARGEFILE_SOURCE",
+    ]
+
+    include_dirs = [
+      "third_party/dot.node-gyp/11.4.0/include/node",
+      "third_party/node-addon-api",
+    ]
+
+    deps = [
+      ":dawn_utils",
+      ":libdawn",
+      ":libdawn_native",
+      ":libdawn_wire",
     ]
   }
 }
