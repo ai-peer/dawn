@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "028c2784_e65234bb",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-01-04T03:06:45Z",
+      "side": 1,
+      "message": "Thx and after discuss with Yunchao (he\u0027s working on depth stencil descriptorization), We\u0027ll make follow up CL to fix thsi.",
+      "parentUuid": "44508871_a05b1797",
+      "revId": "1d6ea270b3746f3de5a7af6185502d7edf597dc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba96925d_1e17f6e9",
         "filename": "src/dawn_native/metal/UtilsMetal.h",
         "patchSetId": 9
