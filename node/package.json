@@ -1,0 +1,16 @@
+{
+  "name": "dawn",
+  "version": "0.1.0",
+  "description": "",
+  "gypfile": true,
+  "scripts": {
+    "test": "./test.sh"
+  },
+  "author": "Kai Ninomiya <kainino@chromium.org>",
+  "private": true,
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "node-addon-api": "^1.6.2",
+    "node-gyp": "^3.8.0"
+  }
+}
