@@ -282,7 +282,7 @@ E* Result<T*, E*>::GetErrorFromPayload(intptr_t payload) {
 
 // Implementation of Result<T, E>
 template <typename T, typename E>
-Result<T, E>::Result(T&& success) : mType(Success), mSuccess(success) {
+Result<T, E>::Result(T&& success) : mType(Success), mSuccess(std::move(success)) {
 }
 
 template <typename T, typename E>
@@ -296,7 +296,7 @@ Result<T, E>::~Result() {
 
 template <typename T, typename E>
 Result<T, E>::Result(Result<T, E>&& other)
-    : mType(other.mType), mError(std::move(other.mError)), mSuccess(other.mSuccess) {
+    : mType(other.mType), mError(std::move(other.mError)), mSuccess(std::move(other.mSuccess)) {
     other.mType = Acquired;
 }
 template <typename T, typename E>
