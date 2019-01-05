@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db4d1511_2f32d9e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-05T04:39:52Z",
+      "side": 1,
+      "message": "Can you explain a bit more about why this is necessary (here or in the bug)? I don\u0027t totally get it.",
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cce4276d_15f2a4ed",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-05T04:39:52Z",
+      "side": 1,
+      "message": "nit: space after switch, normally",
+      "range": {
+        "startLine": 730,
+        "startChar": 20,
+        "endLine": 730,
+        "endChar": 26
+      },
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "501c3680_0680df76",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-05T04:39:52Z",
+      "side": 1,
+      "message": "maybe add a default: UNREACHABLE()?",
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
