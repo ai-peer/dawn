@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f696bacc_1724d4cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-05T04:51:32Z",
+      "side": 1,
+      "message": "adapter?",
+      "range": {
+        "startLine": 13,
+        "startChar": 61,
+        "endLine": 13,
+        "endChar": 70
+      },
+      "revId": "a87ba4b745e75b3892327f1a5c105de32662cfb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7fced28c_cff0c42b",
         "filename": "src/dawn_native/opengl/BackendGL.cpp",
         "patchSetId": 3
