@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "369610c7_9edcc713",
+        "filename": "src/dawn_native/BackendConnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-06T09:49:03Z",
+      "side": 1,
+      "message": "nit: stdlib includes go in a block after includes for headers in the same project. So it would be in [1]",
+      "revId": "9a9978f39ec30c6cecef8f050160a420cb517116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bf00d4c_3125d734",
+        "filename": "src/dawn_native/BackendConnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-06T09:49:03Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "9a9978f39ec30c6cecef8f050160a420cb517116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
