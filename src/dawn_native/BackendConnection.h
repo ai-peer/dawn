@@ -15,6 +15,8 @@
 #ifndef DAWNNATIVE_BACKENDCONNECTION_H_
 #define DAWNNATIVE_BACKENDCONNECTION_H_
 
+#include <memory>
+
 #include "dawn_native/Adapter.h"
 #include "dawn_native/DawnNative.h"
 
