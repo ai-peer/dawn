@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "53429fe4_ca41cd8c",
+        "filename": "src/dawn_native/BackendConnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000276
+      },
+      "writtenOn": "2019-01-06T12:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "369610c7_9edcc713",
+      "revId": "9a9978f39ec30c6cecef8f050160a420cb517116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7bf00d4c_3125d734",
         "filename": "src/dawn_native/BackendConnection.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "9a9978f39ec30c6cecef8f050160a420cb517116",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d16d3cb_0c2c8df6",
+        "filename": "src/dawn_native/BackendConnection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000276
+      },
+      "writtenOn": "2019-01-06T12:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bf00d4c_3125d734",
+      "revId": "9a9978f39ec30c6cecef8f050160a420cb517116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
