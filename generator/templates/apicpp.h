@@ -134,7 +134,7 @@ namespace dawn {
         {%- else -%}
             {{as_cppType(method.return_type.name)}}
         {%- endif -%}
-        {{" "}}{{method.name.CamelCase()}}(
+        {{" "}}DAWN_EXPORT {{method.name.CamelCase()}}(
             {%- for arg in method.arguments -%}
                 {%- if not loop.first %}, {% endif -%}
                 {%- if arg.type.category == "object" and arg.annotation == "value" -%}
@@ -149,7 +149,7 @@ namespace dawn {
     {% for type in by_category["object"] %}
         {% set CppType = as_cppType(type.name) %}
         {% set CType = as_cType(type.name) %}
-        class DAWN_EXPORT {{CppType}} : public ObjectBase<{{CppType}}, {{CType}}> {
+        class {{CppType}} : public ObjectBase<{{CppType}}, {{CType}}> {
             public:
                 using ObjectBase::ObjectBase;
                 using ObjectBase::operator=;
@@ -160,8 +160,8 @@ namespace dawn {
 
             private:
                 friend ObjectBase<{{CppType}}, {{CType}}>;
-                static void DawnReference({{CType}} handle);
-                static void DawnRelease({{CType}} handle);
+                static void DAWN_EXPORT DawnReference({{CType}} handle);
+                static void DAWN_EXPORT DawnRelease({{CType}} handle);
         };
 
     {% endfor %}
