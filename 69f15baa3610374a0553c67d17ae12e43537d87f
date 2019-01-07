@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c031780d_02240bb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-07T17:01:59Z",
+      "side": 1,
+      "message": "Updated the bug.",
+      "parentUuid": "db4d1511_2f32d9e9",
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cce4276d_15f2a4ed",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 1
@@ -59,6 +77,48 @@
     },
     {
       "key": {
+        "uuid": "281d9198_3dfc1633",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-07T17:01:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "394c2000_bf97aa49",
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48a8cf8c_1e299db9",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-07T17:01:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cce4276d_15f2a4ed",
+      "range": {
+        "startLine": 730,
+        "startChar": 20,
+        "endLine": 730,
+        "endChar": 26
+      },
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "501c3680_0680df76",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 1
@@ -73,6 +133,24 @@
       "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1141a2a1_fc902205",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-07T17:01:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "501c3680_0680df76",
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
