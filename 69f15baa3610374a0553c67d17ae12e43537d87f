@@ -42,6 +42,23 @@
     },
     {
       "key": {
+        "uuid": "394c2000_bf97aa49",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T09:46:56Z",
+      "side": 1,
+      "message": "I\u0027m wondering if long-term it would be possible/make sense to have something like mKnown[ObjectType] so that we have less code duplication. No need to think about it for this CL though.",
+      "revId": "69f15baa3610374a0553c67d17ae12e43537d87f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "501c3680_0680df76",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 1
