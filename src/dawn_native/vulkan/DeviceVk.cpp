@@ -19,7 +19,6 @@
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/ErrorData.h"
-#include "dawn_native/VulkanBackend.h"
 #include "dawn_native/vulkan/BindGroupLayoutVk.h"
 #include "dawn_native/vulkan/BindGroupVk.h"
 #include "dawn_native/vulkan/BufferUploader.h"
@@ -53,33 +52,6 @@ const char kVulkanLibName[] = "vulkan-1.dll";
 #endif
 
 namespace dawn_native { namespace vulkan {
-
-    dawnDevice CreateDevice() {
-        return reinterpret_cast<dawnDevice>(new Device());
-    }
-
-    VkInstance GetInstance(dawnDevice device) {
-        Device* backendDevice = reinterpret_cast<Device*>(device);
-        return backendDevice->GetInstance();
-    }
-
-    DAWN_NATIVE_EXPORT dawnSwapChainImplementation
-    CreateNativeSwapChainImpl(dawnDevice device, VkSurfaceKHRNative surfaceNative) {
-        Device* backendDevice = reinterpret_cast<Device*>(device);
-        VkSurfaceKHR surface = VkSurfaceKHR::CreateFromHandle(surfaceNative);
-
-        dawnSwapChainImplementation impl;
-        impl = CreateSwapChainImplementation(new NativeSwapChainImpl(backendDevice, surface));
-        impl.textureUsage = DAWN_TEXTURE_USAGE_BIT_PRESENT;
-
-        return impl;
-    }
-
-    dawnTextureFormat GetNativeSwapChainPreferredFormat(
-        const dawnSwapChainImplementation* swapChain) {
-        NativeSwapChainImpl* impl = reinterpret_cast<NativeSwapChainImpl*>(swapChain->userData);
-        return static_cast<dawnTextureFormat>(impl->GetPreferredFormat());
-    }
 
     BackendConnection* Connect(InstanceBase* instance) {
         return nullptr;

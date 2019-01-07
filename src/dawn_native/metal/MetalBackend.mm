@@ -12,16 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// NullBackend.cpp: contains the definition of symbols exported by NullBackend.h so that they
+// MetalBackend.cpp: contains the definition of symbols exported by MetalBackend.h so that they
 // can be compiled twice: once export (shared library), once not exported (static library)
 
-#include "dawn_native/null/DeviceNull.h"
-#include "dawn_native/NullBackend.h"
+#include "dawn_native/metal/DeviceMTL.h"
+#include "dawn_native/MetalBackend.h"
 
-namespace dawn_native { namespace null {
+namespace dawn_native { namespace metal {
 
     dawnDevice CreateDevice() {
-        return reinterpret_cast<dawnDevice>(new Device);
+        return reinterpret_cast<dawnDevice>(new Device());
     }
 
-}}  // namespace dawn_native::null
+    id<MTLDevice> GetMetalDevice(dawnDevice cDevice) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        return device->GetMTLDevice();
+    }
+
+}}  // namespace dawn_native::metal
