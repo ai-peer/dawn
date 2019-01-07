@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_NULL_NULLBACKEND_H_
-#define DAWNNATIVE_NULL_NULLBACKEND_H_
+#ifndef DAWNNATIVE_NULL_DEVICENULL_H_
+#define DAWNNATIVE_NULL_DEVICENULL_H_
 
 #include "dawn_native/dawn_platform.h"
-
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
@@ -176,6 +175,19 @@ namespace dawn_native { namespace null {
         void OnBeforePresent(TextureBase*) override;
     };
 
+    class NativeSwapChainImpl {
+      public:
+        using WSIContext = struct {};
+        void Init(WSIContext* context);
+        dawnSwapChainError Configure(dawnTextureFormat format,
+                                     dawnTextureUsageBit,
+                                     uint32_t width,
+                                     uint32_t height);
+        dawnSwapChainError GetNextTexture(dawnSwapChainNextTexture* nextTexture);
+        dawnSwapChainError Present();
+        dawn::TextureFormat GetPreferredFormat() const;
+    };
+
 }}  // namespace dawn_native::null
 
-#endif  // DAWNNATIVE_NULL_NULLBACKEND_H_
+#endif  // DAWNNATIVE_NULL_DEVICENULL_H_
