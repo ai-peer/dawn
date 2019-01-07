@@ -220,7 +220,7 @@ static_library("dawn_common") {
 }
 
 ###############################################################################
-# Dawn headers and libdawn.so
+# Dawn headers
 ###############################################################################
 
 dawn_generator("dawn_headers_gen") {
@@ -246,6 +246,10 @@ source_set("dawn_headers") {
   ]
 }
 
+###############################################################################
+# libdawn.so
+###############################################################################
+
 dawn_generator("libdawn_gen") {
   target = "libdawn"
   outputs = [
@@ -254,11 +258,15 @@ dawn_generator("libdawn_gen") {
   ]
 }
 
-config("libdawn_export") {
-  defines = [ "DAWN_IMPLEMENTATION" ]
-}
+# libdawn has both a static and a shared library version. Because all the code
+# for libdawn is auto-generated, we don't need a libdawn_sources target and
+# instead get the generated files directly.
 
-source_set("libdawn_sources") {
+# The shared library version of libdawn
+config("libdawn_export") {
+  defines = [ "DAWN_SHARED_LIBRARY" ]
+}
+shared_library("libdawn") {
   public_deps = [
     ":dawn_headers",
   ]
@@ -268,19 +276,6 @@ source_set("libdawn_sources") {
   ]
   sources = get_target_outputs(":libdawn_gen")
 
-  # Put the export config public so that dependents use the same declspec.
-  public_configs = [ ":libdawn_export" ]
-}
-
-shared_library("libdawn") {
-  public_deps = [
-    ":dawn_headers",
-  ]
-
-  deps = [
-    ":libdawn_sources",
-  ]
-
   # Tell dependents where to find this shared library
   if (is_mac) {
     ldflags = [
@@ -288,6 +283,23 @@ shared_library("libdawn") {
       "@rpath/${target_name}.dylib",
     ]
   }
+
+  # Export the DAWN_SHARED_LIBRARY so dependent uses the import declspec for
+  # symbols exported from this library.
+  public_configs = [ ":libdawn_export" ]
+  defines = [ "DAWN_IMPLEMENTATION" ]
+}
+
+# The static library version of libdawn
+static_library("libdawn_static") {
+  public_deps = [
+    ":dawn_headers",
+  ]
+
+  deps = [
+    ":libdawn_gen",
+  ]
+  sources = get_target_outputs(":libdawn_gen")
 }
 
 ###############################################################################
@@ -301,10 +313,6 @@ config("libdawn_native_internal") {
   if (is_mac) {
     cflags_objcc = [ "-Wno-unguarded-availability" ]
   }
-}
-
-config("libdawn_native_export") {
-  defines = [ "DAWN_NATIVE_IMPLEMENTATION" ]
 }
 
 dawn_generator("libdawn_native_utils_gen") {
@@ -340,19 +348,40 @@ source_set("libdawn_native_headers") {
 
 # The meat of the compilation for libdawn_native so that we can cheaply have
 # shared_library / static_library / component versions of it.
+
+# Files that define exported functions are treated separately because they need
+# to be compiled in the target that decides whether the library is shared or
+# static so that the right DAWN_NATIVE_EXPORT is used.
+libdawn_native_sources_with_exports = [ "src/dawn_native/DawnNative.cpp" ]
+if (dawn_enable_d3d12) {
+  libdawn_native_sources_with_exports +=
+      [ "src/dawn_native/d3d12/D3D12Backend.cpp" ]
+}
+if (dawn_enable_metal) {
+  libdawn_native_sources_with_exports +=
+      [ "src/dawn_native/metal/MetalBackend.mm" ]
+}
+if (dawn_enable_null) {
+  libdawn_native_sources_with_exports +=
+      [ "src/dawn_native/null/NullBackend.cpp" ]
+}
+if (dawn_enable_opengl) {
+  libdawn_native_sources_with_exports +=
+      [ "src/dawn_native/opengl/OpenGLBackend.cpp" ]
+}
+if (dawn_enable_vulkan) {
+  libdawn_native_sources_with_exports +=
+      [ "src/dawn_native/vulkan/VulkanBackend.cpp" ]
+}
+
 source_set("libdawn_native_sources") {
   deps = [
     ":dawn_common",
+    ":libdawn_native_headers",
     ":libdawn_native_utils_gen",
     "${dawn_spirv_tools_dir}:spvtools_val",
     "third_party:spirv_cross",
   ]
-  public_deps = [
-    ":libdawn_native_headers",
-  ]
-
-  # Put the export config public so that dependents use the same declspec.
-  public_configs = [ ":libdawn_native_export" ]
 
   configs += [ ":libdawn_native_internal" ]
   libs = []
@@ -383,7 +412,6 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/ComputePassEncoder.h",
     "src/dawn_native/ComputePipeline.cpp",
     "src/dawn_native/ComputePipeline.h",
-    "src/dawn_native/DawnNative.cpp",
     "src/dawn_native/Device.cpp",
     "src/dawn_native/Device.h",
     "src/dawn_native/Error.cpp",
@@ -505,7 +533,6 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/metal/Forward.h",
       "src/dawn_native/metal/InputStateMTL.h",
       "src/dawn_native/metal/InputStateMTL.mm",
-      "src/dawn_native/metal/MetalBackend.mm",
       "src/dawn_native/metal/PipelineLayoutMTL.h",
       "src/dawn_native/metal/PipelineLayoutMTL.mm",
       "src/dawn_native/metal/QueueMTL.h",
@@ -531,7 +558,6 @@ source_set("libdawn_native_sources") {
     sources += [
       "src/dawn_native/null/DeviceNull.cpp",
       "src/dawn_native/null/DeviceNull.h",
-      "src/dawn_native/null/NullBackend.cpp",
     ]
   }
 
@@ -633,10 +659,16 @@ source_set("libdawn_native_sources") {
 }
 
 # The shared library for libdawn_native for use by samples, tests, etc.
+config("libdawn_native_export") {
+  defines = [ "DAWN_NATIVE_SHARED_LIBRARY" ]
+}
 shared_library("libdawn_native") {
   deps = [
     ":libdawn_native_sources",
+    "third_party:vulkan_headers",
   ]
+  sources = libdawn_native_sources_with_exports
+  configs += [ ":libdawn_native_internal" ]
 
   #Make headers publically visible
   public_deps = [
@@ -651,6 +683,27 @@ shared_library("libdawn_native") {
       "@rpath/${target_name}.dylib",
     ]
   }
+
+  # Export the DAWN_NATIVE_SHARED_LIBRARY so dependent uses the import declspec
+  # for symbols exported from this library.
+  public_configs += [ ":libdawn_native_export" ]
+  defines = [ "DAWN_NATIVE_IMPLEMENTATION" ]
+}
+
+# The static library for lidawn_native for by Chromium in non-component builds
+static_library("libdawn_native_static") {
+  deps = [
+    ":libdawn_native_sources",
+    "third_party:vulkan_headers",
+  ]
+  sources = libdawn_native_sources_with_exports
+  configs += [ ":libdawn_native_internal" ]
+
+  #Make headers publically visible
+  public_deps = [
+    ":libdawn_native_headers",
+  ]
+  public_configs = [ ":libdawn_public" ]
 }
 
 ###############################################################################
@@ -669,10 +722,6 @@ source_set("libdawn_wire_headers") {
   ]
 }
 
-config("libdawn_wire_export") {
-  defines = [ "DAWN_WIRE_IMPLEMENTATION" ]
-}
-
 dawn_generator("libdawn_wire_gen") {
   target = "dawn_wire"
   outputs = [
@@ -683,7 +732,17 @@ dawn_generator("libdawn_wire_gen") {
   ]
 }
 
-source_set("libdawn_wire_sources") {
+# libdawnwire- has both a static and a shared library version. Because all the
+# code for libdawn_wire is auto-generated, we don't need a libdawn_wire_sources
+# target and instead get the generated files directly.
+# TODO(cwallez@chromium.org): This will change when we give more love to
+# libdawn_wire at which point it we should re-introduce libdawn_wire_sources
+
+# The shared library for libdawn_native for use by samples, tests, etc.
+config("libdawn_wire_export") {
+  defines = [ "DAWN_WIRE_SHARED_LIBRARY" ]
+}
+shared_library("libdawn_wire") {
   deps = [
     ":dawn_common",
     ":libdawn_wire_gen",
@@ -700,21 +759,6 @@ source_set("libdawn_wire_sources") {
   ]
   public_configs = [ ":libdawn_public" ]
 
-  # Put the export config public so that dependents use the same declspec.
-  public_configs += [ ":libdawn_wire_export" ]
-}
-
-shared_library("libdawn_wire") {
-  deps = [
-    ":libdawn_wire_sources",
-  ]
-
-  # Make headers publically visible
-  public_deps = [
-    ":libdawn_wire_headers",
-  ]
-  public_configs = [ ":libdawn_public" ]
-
   # Tell dependents where to find this shared library
   if (is_mac) {
     ldflags = [
@@ -722,6 +766,29 @@ shared_library("libdawn_wire") {
       "@rpath/${target_name}.dylib",
     ]
   }
+
+  # Put the export config public so that dependents use the same declspec.
+  public_configs += [ ":libdawn_wire_export" ]
+  defines = [ "DAWN_WIRE_IMPLEMENTATION" ]
+}
+
+# The static library version of libdawn_wire
+static_library("libdawn_wire_static") {
+  deps = [
+    ":dawn_common",
+    ":libdawn_wire_gen",
+    ":libdawn_wire_headers",
+  ]
+
+  configs += [ ":dawn_internal" ]
+  sources = get_target_outputs(":libdawn_wire_gen")
+  sources += [ "src/dawn_wire/WireCmd.h" ]
+
+  # Make headers publically visible
+  public_deps = [
+    ":libdawn_wire_headers",
+  ]
+  public_configs = [ ":libdawn_public" ]
 }
 
 ###############################################################################
@@ -805,6 +872,7 @@ test("dawn_unittests") {
     ":dawn_utils",
     ":libdawn",
     ":libdawn_native_sources",
+    ":libdawn_native_static",
     ":libdawn_wire",
     ":mock_dawn_gen",
     "third_party:gmock_and_gtest",
