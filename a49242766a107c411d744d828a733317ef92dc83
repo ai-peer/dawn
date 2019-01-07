@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "787707c4_c036c73a",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 0,
+      "message": "I\u0027m surprised 1000.000 copies take more than 2 seconds. Do copies really take 2us each on the GPU?",
+      "revId": "a49242766a107c411d744d828a733317ef92dc83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

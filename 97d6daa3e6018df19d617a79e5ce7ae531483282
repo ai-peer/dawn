@@ -1,0 +1,209 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40047eb2_99d09d2b",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "nit: this could use IsPowerOfTwo https://cs.chromium.org/chromium/src/third_party/dawn/src/common/Math.h?q\u003dMath.h\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d24",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 49
+      },
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "269982c3_4501664e",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "nit: use Align from the same file.",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7134332_fff29cfc",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "nit: * 2 instead, the compiler will optimize to a shift for us.",
+      "range": {
+        "startLine": 35,
+        "startChar": 61,
+        "endLine": 35,
+        "endChar": 65
+      },
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f4eaa37_8f9b37f1",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "I didn\u0027t look at this in detail yet.",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc526f72_743618cf",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "nit: StagingBufferBase? Also it could live in the same file as DynamicUploader (or not, as you wish).\n\nAlso I think the concept of StagingBuffer and RingBuffer should be split: StagingBuffer is just a backend-specific map-writable buffer. A RingBuffer is a DynamicUploader implementation detail that contains a StagingBuffer.",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "109b0662_f459019c",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "nit: the mappedPointer could be provided in the constructor and stored as a member. This would avoid the need for [1]",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d518e09b_bd66ae17",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e642a069_bf2a82ed",
+        "filename": "src/dawn_native/d3d12/ResourceUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "This reaches into the base class, would it be possible to avoid this? You can use ResultOrError\u003c\u003e from Error.h",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c361ed4_d054c4d7",
+        "filename": "src/dawn_native/d3d12/RingBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "nit: even for accessors like this we add an implementation in the cpp file and assume LTO will optimize the function call.",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "644367a9_f9947752",
+        "filename": "src/dawn_native/vulkan/BufferUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "We should record this barrier only once even if multiple setSubData are called one after the other.",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08289342_9e95e073",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-07T13:04:10Z",
+      "side": 1,
+      "message": "We should also implement the buffer uploader on Metal to fix this.",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
