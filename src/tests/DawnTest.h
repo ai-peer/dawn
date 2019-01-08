@@ -77,6 +77,8 @@ namespace detail {
 
 namespace dawn_wire {
     class CommandHandler;
+    class Client;
+    class Server;
 }  // namespace dawn_wire
 
 class DawnTest : public ::testing::TestWithParam<BackendType> {
