@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c9010a9_4028227f",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-08T14:42:17Z",
+      "side": 1,
+      "message": "Can we try landing these with tests? It would be helpful for an internal client too.",
+      "revId": "8f009a8fc42b6b47dfb59223260ef86304d6ed76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "796e82dc_e63252ed",
+        "filename": "src/include/dawn/dawn_export.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-08T14:42:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8f009a8fc42b6b47dfb59223260ef86304d6ed76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8701c5af_7732ca24",
+        "filename": "src/include/dawn_native/dawn_native_export.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-08T14:42:17Z",
+      "side": 1,
+      "message": "This won\u0027t be needed anymore with https://dawn-review.googlesource.com/c/dawn/+/3761",
+      "revId": "8f009a8fc42b6b47dfb59223260ef86304d6ed76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
