@@ -17,6 +17,7 @@
 # COMMON
 ############################################################
 from collections import namedtuple
+import wire_cmd
 
 class Name:
     def __init__(self, name, native=False):
@@ -121,7 +122,7 @@ def linked_record_members(json_data, types):
         members_by_name[member.name.canonical_case()] = member
 
     for (member, m) in zip(members, json_data):
-        if member.annotation != 'value':
+        if member.annotation != 'value' and member.annotation != 'handle':
             if not 'length' in m:
                 if member.type.category == 'structure':
                     member.length = "constant"
@@ -155,6 +156,12 @@ def link_object(obj, types):
 
 def link_structure(struct, types):
     struct.members = linked_record_members(struct.json_data['members'], types)
+
+def link_command(command, types):
+    if 'inputs' in command.json_data:
+        command.inputs = linked_record_members(command.json_data['inputs'], types)
+    if 'outputs' in command.json_data:
+        command.outputs = linked_record_members(command.json_data['outputs'], types)
 
 # Sort structures so that if struct A has struct B as a member, then B is listed before A
 # This is a form of topological sort where we try to keep the order reasonably similar to the
@@ -200,6 +207,8 @@ def parse_json(json):
         'natively defined': NativelyDefined,
         'object': ObjectType,
         'structure': StructureType,
+        'command': wire_cmd.CommandType,
+        'return command': wire_cmd.CommandType,
     }
 
     types = {}
@@ -221,6 +230,12 @@ def parse_json(json):
 
     for struct in by_category['structure']:
         link_structure(struct, types)
+
+    for command in by_category['command']:
+        link_command(command, types)
+
+    for command in by_category['return command']:
+        link_command(command, types)
 
     for category in by_category.keys():
         by_category[category] = sorted(by_category[category], key=lambda typ: typ.name.canonical_case())
@@ -346,6 +361,8 @@ def decorate(name, typ, arg):
         return typ + ' ' + name
     elif arg.annotation == 'const*':
         return typ + ' const * ' + name
+    elif arg.annotation == 'handle':
+        return 'ObjectHandle ' + name
     else:
         assert(False)
 
@@ -412,7 +429,7 @@ def js_native_methods(types, typ):
 def debug(text):
     print(text)
 
-def get_renders_for_targets(api_params, targets):
+def get_renders_for_targets(api_params, wire_params, targets):
     base_params = {
         'enumerate': enumerate,
         'format': format,
@@ -471,19 +488,33 @@ def get_renders_for_targets(api_params, targets):
         renders.append(FileRender('dawn_native/ProcTable.cpp', 'dawn_native/ProcTable.cpp', frontend_params))
 
     if 'dawn_wire' in targets:
+        additional_params = wire_cmd.add_wire_commands(wire_params)
+
         wire_params = [
             base_params,
             api_params,
             c_params,
             {
                 'as_wireType': lambda typ: typ.name.CamelCase() + '*' if typ.category == 'object' else as_cppType(typ.name)
-            }
+            },
+            additional_params
         ]
-        renders.append(FileRender('dawn_wire/TypeTraits.h', 'dawn_wire/TypeTraits_autogen.h', wire_params))
         renders.append(FileRender('dawn_wire/WireCmd.h', 'dawn_wire/WireCmd_autogen.h', wire_params))
         renders.append(FileRender('dawn_wire/WireCmd.cpp', 'dawn_wire/WireCmd_autogen.cpp', wire_params))
-        renders.append(FileRender('dawn_wire/WireClient.cpp', 'dawn_wire/WireClient.cpp', wire_params))
-        renders.append(FileRender('dawn_wire/WireServer.cpp', 'dawn_wire/WireServer.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/TypeTraits.h', 'dawn_wire/TypeTraits_autogen.h', wire_params))
+
+        renders.append(FileRender('dawn_wire/WireClientPrototypes.inl', 'dawn_wire/WireClientPrototypes_autogen.inl', wire_params))
+        renders.append(FileRender('dawn_wire/WireClientProcs.cpp', 'dawn_wire/WireClientProcs_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/WireClientObjects.h', 'dawn_wire/WireClientObjects_autogen.h', wire_params))
+        renders.append(FileRender('dawn_wire/WireClientBase.h', 'dawn_wire/WireClientBase_autogen.h', wire_params))
+        renders.append(FileRender('dawn_wire/WireClientHandlers.cpp', 'dawn_wire/WireClientHandlers_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/WireClientDoers.cpp', 'dawn_wire/WireClientDoers_autogen.cpp', wire_params))
+
+        renders.append(FileRender('dawn_wire/WireServerBase.h', 'dawn_wire/WireServerBase_autogen.h', wire_params))
+        renders.append(FileRender('dawn_wire/WireServerPrototypes.inl', 'dawn_wire/WireServerPrototypes_autogen.inl', wire_params))
+        renders.append(FileRender('dawn_wire/WireServerHandlers.cpp', 'dawn_wire/WireServerHandlers_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/WireServerDoers.cpp', 'dawn_wire/WireServerDoers_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/WireServerCallbacks.cpp', 'dawn_wire/WireServerCallbacks_autogen.cpp', wire_params))
 
     return renders
 
@@ -507,6 +538,7 @@ def main():
         formatter_class = argparse.ArgumentDefaultsHelpFormatter
     )
     parser.add_argument('json', metavar='DAWN_JSON', nargs=1, type=str, help ='The DAWN JSON definition to use.')
+    parser.add_argument('--wire-json', default=None, type=str, help='The DAWN WIRE JSON definition to use.')
     parser.add_argument('-t', '--template-dir', default='templates', type=str, help='Directory with template files.')
     parser.add_argument('-T', '--targets', required=True, type=str, help='Comma-separated subset of targets to output. Available targets: ' + ', '.join(allowed_targets))
     parser.add_argument(kExtraPythonPath, default=None, type=str, help='Additional python path to set before loading Jinja2')
@@ -522,7 +554,20 @@ def main():
     api_params = parse_json(loaded_json)
 
     targets = args.targets.split(',')
-    renders = get_renders_for_targets(api_params, targets)
+    renders = []
+    dependencies = []
+
+    wire_params = None
+    if args.wire_json:
+      with open(args.wire_json) as f:
+          loaded_wire_json = json.loads(f.read())
+          wire_json = loaded_json.copy()
+          wire_json.update(loaded_wire_json)
+      wire_params = parse_json(wire_json)
+      wire_params.update(wire_json['_params'])
+      dependencies.append(args.wire_json)
+
+    renders += get_renders_for_targets(api_params, wire_params, targets)
 
     # The caller wants to assert that the outputs are what it expects.
     # Load the file and compare with our renders.
@@ -544,8 +589,9 @@ def main():
     if args.output_json_tarball != None:
         output_to_json(outputs, args.output_json_tarball)
 
-        dependencies = [args.template_dir + os.path.sep + render.template for render in renders]
+        dependencies += [args.template_dir + os.path.sep + render.template for render in renders]
         dependencies.append(args.json[0])
+        dependencies.append(os.path.join(os.path.abspath(os.path.dirname(__file__)), "wire_cmd.py"))
         output_depfile(args.depfile, args.output_json_tarball, dependencies)
 
 if __name__ == '__main__':

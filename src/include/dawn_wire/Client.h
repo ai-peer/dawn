@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2019 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,29 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNWIRE_WIRE_H_
-#define DAWNWIRE_WIRE_H_
+#ifndef DAWNWIRE_CLIENT_H_
+#define DAWNWIRE_CLIENT_H_
 
-#include <cstdint>
+#include <memory>
 
-#include "dawn/dawn.h"
-#include "dawn_wire/dawn_wire_export.h"
+#include "dawn_wire/Wire.h"
 
 namespace dawn_wire {
 
-    class DAWN_WIRE_EXPORT CommandSerializer {
+    class DAWN_WIRE_EXPORT Client : public CommandHandler {
       public:
-        virtual ~CommandSerializer() = default;
-        virtual void* GetCmdSpace(size_t size) = 0;
-        virtual bool Flush() = 0;
-    };
+        Client(dawnProcTable* procs, dawnDevice* device, CommandSerializer* serializer);
+        ~Client();
+        const char* HandleCommands(const char* commands, size_t size) override final;
 
-    class DAWN_WIRE_EXPORT CommandHandler {
-      public:
-        virtual ~CommandHandler() = default;
-        virtual const char* HandleCommands(const char* commands, size_t size) = 0;
+      private:
+        class Impl;
+        std::unique_ptr<Impl> mImpl;
     };
 
 }  // namespace dawn_wire
 
-#endif  // DAWNWIRE_WIRE_H_
+#endif  // DAWNWIRE_CLIENT_H_

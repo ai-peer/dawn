@@ -54,6 +54,8 @@ template("dawn_generator") {
   # target using templates in this directory.
   generator_args = [
     rebase_path("dawn.json", root_build_dir),
+    "--wire-json",
+    rebase_path("dawn_wire.json", root_build_dir),
     "--template-dir",
     rebase_path("generator/templates", root_build_dir),
     "--targets",
@@ -659,6 +661,8 @@ source_set("libdawn_wire_headers") {
     ":dawn_headers",
   ]
   sources = [
+    "src/include/dawn_wire/Client.h",
+    "src/include/dawn_wire/Server.h",
     "src/include/dawn_wire/Wire.h",
     "src/include/dawn_wire/dawn_wire_export.h",
   ]
@@ -671,11 +675,20 @@ config("libdawn_wire_export") {
 dawn_generator("libdawn_wire_gen") {
   target = "dawn_wire"
   outputs = [
-    "dawn_wire/TypeTraits_autogen.h",
-    "dawn_wire/WireServer.cpp",
     "dawn_wire/WireCmd_autogen.h",
-    "dawn_wire/WireClient.cpp",
     "dawn_wire/WireCmd_autogen.cpp",
+    "dawn_wire/TypeTraits_autogen.h",
+    "dawn_wire/WireClientBase_autogen.h",
+    "dawn_wire/WireClientHandlers_autogen.cpp",
+    "dawn_wire/WireClientDoers_autogen.cpp",
+    "dawn_wire/WireClientPrototypes_autogen.inl",
+    "dawn_wire/WireClientProcs_autogen.cpp",
+    "dawn_wire/WireClientObjects_autogen.h",
+    "dawn_wire/WireServerBase_autogen.h",
+    "dawn_wire/WireServerPrototypes_autogen.inl",
+    "dawn_wire/WireServerHandlers_autogen.cpp",
+    "dawn_wire/WireServerDoers_autogen.cpp",
+    "dawn_wire/WireServerCallbacks_autogen.cpp",
   ]
 }
 
@@ -688,7 +701,19 @@ source_set("libdawn_wire_sources") {
 
   configs += [ ":dawn_internal" ]
   sources = get_target_outputs(":libdawn_wire_gen")
-  sources += [ "src/dawn_wire/WireCmd.h" ]
+  sources += [
+    "src/dawn_wire/WireClient.cpp",
+    "src/dawn_wire/WireClient.h",
+    "src/dawn_wire/WireClientDoers.cpp",
+    "src/dawn_wire/WireClientObjects.cpp",
+    "src/dawn_wire/WireClientObjects.h",
+    "src/dawn_wire/WireDeserializeAllocator.h",
+    "src/dawn_wire/WireServer.cpp",
+    "src/dawn_wire/WireServer.h",
+    "src/dawn_wire/WireServerCallbacks.cpp",
+    "src/dawn_wire/WireServerDoers.cpp",
+    "src/dawn_wire/WireServerObjectStorage.h",
+  ]
 
   # Make headers publically visible
   public_deps = [
