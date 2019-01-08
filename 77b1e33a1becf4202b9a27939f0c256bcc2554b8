@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "81dd75a2_cae6f8de",
+        "filename": "generator/templates/dawn_wire/TypeTraits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-08T17:18:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "487d0e3c_d78aad21",
+      "revId": "77b1e33a1becf4202b9a27939f0c256bcc2554b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6ca2acd_63c787b2",
         "filename": "generator/templates/dawn_wire/WireServer.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "77b1e33a1becf4202b9a27939f0c256bcc2554b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46acb162_3da4943b",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-08T17:18:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f6ca2acd_63c787b2",
+      "revId": "77b1e33a1becf4202b9a27939f0c256bcc2554b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
