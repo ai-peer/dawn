@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18ba1ed6_eb7238f3",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-08T15:25:43Z",
+      "side": 1,
+      "message": "By \"doesn\u0027t mess with symbols\", you mean doesn\u0027t decorate them with the export attributes? Or something else?",
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f88f3e03_a1f9940a",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-01-08T15:25:43Z",
+      "side": 1,
+      "message": "Bikeshed: \"combo\" doesn\u0027t tell me much at the invoker site. Could this be something more descriptive, such as \"dawn_static_and_shared_library\"?",
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
