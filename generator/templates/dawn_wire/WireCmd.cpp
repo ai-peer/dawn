@@ -12,7 +12,7 @@
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
 
-#include "dawn_wire/WireCmd.h"
+#include "dawn_wire/WireCmd_autogen.h"
 
 #include "common/Assert.h"
 
@@ -33,7 +33,11 @@
 //* Outputs the type that will be used on the wire for the member
 {% macro member_transfer_type(member) -%}
     {%- if member.type.category == "object" -%}
-        ObjectId
+        {%- if member.annotation == "handle" -%}
+            ObjectHandle
+        {%- else -%}
+            ObjectId
+        {%- endif -%}
     {%- elif member.type.category == "structure" -%}
         {{as_cType(member.type.name)}}Transfer
     {%- else -%}
@@ -49,9 +53,14 @@
 //* Outputs the serialization code to put `in` in `out`
 {% macro serialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
-        {% set Optional = "Optional" if member.optional else "" %}
-        {{out}} = provider.Get{{Optional}}Id({{in}});
-    {% elif member.type.category == "structure"%}
+        {%- if member.annotation == "handle" -%}
+            {{out}} = {{in}};
+        {%- else -%}
+            {%- set Optional = "Optional" if member.optional else "" -%}
+            DAWN_ASSERT(provider);
+            {{out}} = provider->Get{{Optional}}Id({{in}});
+        {%- endif -%}
+    {%- elif member.type.category == "structure" -%}
         {{as_cType(member.type.name)}}Serialize({{in}}, &{{out}}, buffer, provider);
     {%- else -%}
         {{out}} = {{in}};
@@ -61,9 +70,14 @@
 //* Outputs the deserialization code to put `in` in `out`
 {% macro deserialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
-        {% set Optional = "Optional" if member.optional else "" %}
-        DESERIALIZE_TRY(resolver.Get{{Optional}}FromId({{in}}, &{{out}}));
-    {% elif member.type.category == "structure"%}
+        {%- if member.annotation == "handle" -%}
+            {{out}} = {{in}};
+        {%- else -%}
+            {%- set Optional = "Optional" if member.optional else "" -%}
+            DAWN_ASSERT(resolver);
+            DESERIALIZE_TRY(resolver->Get{{Optional}}FromId({{in}}, &{{out}}));
+        {%- endif -%}
+    {%- elif member.type.category == "structure" -%}
         DESERIALIZE_TRY({{as_cType(member.type.name)}}Deserialize(&{{out}}, &{{in}}, buffer, size, allocator, resolver));
     {%- else -%}
         {{out}} = {{in}};
@@ -71,12 +85,13 @@
 {% endmacro %}
 
 //* The main [de]serialization macro
-
 //* Methods are very similar to structures that have one member corresponding to each arguments.
 //* This macro takes advantage of the similarity to output [de]serialization code for a record
 //* that is either a structure or a method, with some special cases for each.
+//* TODO(enga): Avoid doing a copy where the Transfer version of the command is trivially different
 {% macro write_serialization_methods(name, members, as_method=None, as_struct=None, is_return_command=False) %}
     {% set Return = "Return" if is_return_command else "" %}
+    {% set Cmd = "Cmd" if as_struct == None else "" %}
     {% set is_method = as_method != None %}
     {% set is_struct = as_struct != None %}
 
@@ -84,24 +99,18 @@
     //* are embedded directly in the structure. Other members are assumed to be in the
     //* memory directly following the structure in the buffer.
     struct {{name}}Transfer {
-        {% if is_method %}
+        {% if not is_struct %}
             //* Start the transfer structure with the command ID, so that casting to WireCmd gives the ID.
             {{Return}}WireCmd commandId;
-
-            //* Methods always have an implicit "self" argument.
-            ObjectId self;
-
-            //* Methods that return objects need to declare to the server which ID will be used for the
-            //* return value.
-            {% if as_method.return_type.category == "object" %}
-                ObjectId resultId;
-                ObjectSerial resultSerial;
-            {% endif %}
         {% endif %}
 
         //* Value types are directly in the command, objects being replaced with their IDs.
-        {% for member in members if member.annotation == "value" %}
-            {{member_transfer_type(member)}} {{as_varName(member.name)}};
+        {% for member in members %}
+            {% if member.annotation == "value" or member.annotation == "handle"  %}
+                {{member_transfer_type(member)}} {{as_varName(member.name)}};
+            {% else %}
+                // {{as_annotated_cType(member)}};
+            {% endif %}
         {% endfor %}
 
         //* const char* have their length embedded directly in the command.
@@ -111,7 +120,7 @@
     };
 
     //* Returns the required transfer size for `record` in addition to the transfer structure.
-    DAWN_DECLARE_UNUSED size_t {{name}}GetExtraRequiredSize(const {{name}}& record) {
+    DAWN_DECLARE_UNUSED size_t {{name}}GetExtraRequiredSize(const {{name}}{{Cmd}}& record) {
         DAWN_UNUSED(record);
 
         size_t result = 0;
@@ -122,7 +131,7 @@
         {% endfor %}
 
         //* Gather how much space will be needed for pointer members.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" %}
+        {% for member in members if (member.annotation != "value" and member.annotation != "handle") and member.length != "strlen" %}
             {
                 size_t memberLength = {{member_length(member, "record.")}};
                 result += memberLength * {{member_transfer_sizeof(member)}};
@@ -144,24 +153,18 @@
 
     //* Serializes `record` into `transfer`, using `buffer` to get more space for pointed-to data
     //* and `provider` to serialize objects.
-    void {{name}}Serialize(const {{name}}& record, {{name}}Transfer* transfer,
-                           char** buffer, const ObjectIdProvider& provider) {
+    void {{name}}Serialize(const {{name}}{{Cmd}}& record, {{name}}Transfer* transfer,
+                           char** buffer, const ObjectIdProvider* const provider) {
         DAWN_UNUSED(provider);
         DAWN_UNUSED(buffer);
 
         //* Handle special transfer members of methods.
-        {% if is_method %}
-            {% if as_method.return_type.category == "object" %}
-                transfer->resultId = record.resultId;
-                transfer->resultSerial = record.resultSerial;
-            {% endif %}
-
+        {% if not is_struct %}
             transfer->commandId = {{Return}}WireCmd::{{name}};
-            transfer->self = provider.GetId(record.self);
         {% endif %}
 
         //* Value types are directly in the transfer record, objects being replaced with their IDs.
-        {% for member in members if member.annotation == "value" %}
+        {% for member in members if (member.annotation == "value" or member.annotation == "handle") %}
             {% set memberName = as_varName(member.name) %}
             {{serialize_member(member, "record." + memberName, "transfer->" + memberName)}}
         {% endfor %}
@@ -176,7 +179,7 @@
         {% endfor %}
 
         //* Allocate space and write the non-value arguments in it.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" %}
+        {% for member in members if (member.annotation != "value" and member.annotation != "handle") and member.length != "strlen" %}
             {% set memberName = as_varName(member.name) %}
             {
                 size_t memberLength = {{member_length(member, "record.")}};
@@ -193,28 +196,39 @@
     //* Deserializes `transfer` into `record` getting more serialized data from `buffer` and `size`
     //* if needed, using `allocator` to store pointed-to values and `resolver` to translate object
     //* Ids to actual objects.
-    DeserializeResult {{name}}Deserialize({{name}}* record, const {{name}}Transfer* transfer,
-                                          const char** buffer, size_t* size, DeserializeAllocator* allocator, const ObjectIdResolver& resolver) {
+    DeserializeResult {{name}}Deserialize({{name}}{{Cmd}}* record, const {{name}}Transfer* transfer,
+                                          const char** buffer, size_t* size, DeserializeAllocator* allocator, const ObjectIdResolver* const resolver) {
         DAWN_UNUSED(allocator);
         DAWN_UNUSED(resolver);
         DAWN_UNUSED(buffer);
         DAWN_UNUSED(size);
 
+        {% if not is_struct %}
+            ASSERT(transfer->commandId == {{Return}}WireCmd::{{name}});
+        {% endif %}
+
         //* Handle special transfer members for methods
         {% if is_method %}
-            {% if as_method.return_type.category == "object" %}
-                record->resultId = transfer->resultId;
-                record->resultSerial = transfer->resultSerial;
-            {% endif %}
-
-            ASSERT(transfer->commandId == {{Return}}WireCmd::{{name}});
-
+            //* First assign result* and selfId:
+            //* Deserialize guarantees they are filled even if there is an ID for an error object
+            //* for the Maybe monad mechanism.
             record->selfId = transfer->self;
-            //* This conversion is done after the copying of result* and selfId: Deserialize
-            //* guarantees they are filled even if there is an ID for an error object for the
-            //* Maybe monad mechanism.
-            DESERIALIZE_TRY(resolver.GetFromId(record->selfId, &record->self));
+            {% if as_method.return_type.category == "object" %}
+                record->result = transfer->result;
+            {% endif %}
+        {% endif %}
 
+        {% if is_struct and as_struct.extensible %}
+            record->nextInChain = nullptr;
+        {% endif %}
+
+        //* Value types are directly in the transfer record, objects being replaced with their IDs.
+        {% for member in members if (member.annotation == "value" or member.annotation == "handle") %}
+            {% set memberName = as_varName(member.name) %}
+            {{deserialize_member(member, "transfer->" + memberName, "record->" + memberName)}}
+        {% endfor %}
+
+        {% if is_method %}
             //* The object resolver returns a success even if the object is null because the
             //* frontend is reponsible to validate that (null objects sometimes have special
             //* meanings). However it is never valid to call a method on a null object so we
@@ -223,16 +237,6 @@
                 return DeserializeResult::FatalError;
             }
         {% endif %}
-
-        {% if is_struct and as_struct.extensible %}
-            record->nextInChain = nullptr;
-        {% endif %}
-
-        //* Value types are directly in the transfer record, objects being replaced with their IDs.
-        {% for member in members if member.annotation == "value" %}
-            {% set memberName = as_varName(member.name) %}
-            {{deserialize_member(member, "transfer->" + memberName, "record->" + memberName)}}
-        {% endfor %}
 
         //* Special handling of const char* that have their length embedded directly in the command
         {% for member in members if member.length == "strlen" %}
@@ -251,7 +255,7 @@
         {% endfor %}
 
         //* Get extra buffer data, and copy pointed to values in extra allocated space.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" %}
+        {% for member in members if (member.annotation != "value" and member.annotation != "handle") and member.length != "strlen" %}
             {% set memberName = as_varName(member.name) %}
             {
                 size_t memberLength = {{member_length(member, "record->")}};
@@ -324,46 +328,101 @@ namespace dawn_wire {
             return DeserializeResult::Success;
         }
 
-        //* Output structure [de]serialization first because it is used by methods.
+        //* Output structure [de]serialization first because it is used by commands.
         {% for type in by_category["structure"] %}
             {% set name = as_cType(type.name) %}
             {{write_serialization_methods(name, type.members, as_struct=type)}}
         {% endfor %}
 
-        // * Output [de]serialization helpers for methods
-        {% for type in by_category["object"] %}
-            {% for method in type.methods %}
-                {% set name = as_MethodSuffix(type.name, method.name) %}
+        //* Output [de]serialization helpers for commands
+        {% for command in by_category["command"] %}
+            {% set name = command.name.CamelCase() %}
+            {{write_serialization_methods(name, command.members, as_method=command.derived_method)}}
+        {% endfor %}
 
-                using {{name}} = {{name}}Cmd;
-                {{write_serialization_methods(name, method.arguments, as_method=method)}}
-            {% endfor %}
+        //* Output [de]serialization helpers for return commands
+        {% for command in by_category["return command"] %}
+            {% set name = "Return" + command.name.CamelCase() %}
+            {{write_serialization_methods(name, command.members, as_method=command.derived_method, is_return_command=True)}}
         {% endfor %}
     }  // anonymous namespace
 
-    {% for type in by_category["object"] %}
-        {% for method in type.methods %}
-            {% set name = as_MethodSuffix(type.name, method.name) %}
-            {% set Cmd = name + "Cmd" %}
+    {% for command in by_category["command"] %}
+        {% set name = command.name.CamelCase() %}
+        {% set Cmd = name + "Cmd" %}
 
-            size_t {{Cmd}}::GetRequiredSize() const {
-                return sizeof({{name}}Transfer) + {{name}}GetExtraRequiredSize(*this);
-            }
+        size_t {{Cmd}}::GetRequiredSize() const {
+            return sizeof({{name}}Transfer) + {{name}}GetExtraRequiredSize(*this);
+        }
 
+        {% if serialization_info[command.dict_name].has_dawn_object %}
             void {{Cmd}}::Serialize(char* buffer, const ObjectIdProvider& objectIdProvider) const {
                 auto transfer = reinterpret_cast<{{name}}Transfer*>(buffer);
                 buffer += sizeof({{name}}Transfer);
 
-                {{name}}Serialize(*this, transfer, &buffer, objectIdProvider);
+                {{name}}Serialize(*this, transfer, &buffer, &objectIdProvider);
             }
 
             DeserializeResult {{Cmd}}::Deserialize(const char** buffer, size_t* size, DeserializeAllocator* allocator, const ObjectIdResolver& resolver) {
                 const {{name}}Transfer* transfer = nullptr;
                 DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, 1, &transfer));
 
-                return {{name}}Deserialize(this, transfer, buffer, size, allocator, resolver);
+                return {{name}}Deserialize(this, transfer, buffer, size, allocator, &resolver);
             }
-        {% endfor %}
+        {% else %}
+            void {{Cmd}}::Serialize(char* buffer) const {
+                auto transfer = reinterpret_cast<{{name}}Transfer*>(buffer);
+                buffer += sizeof({{name}}Transfer);
+
+                {{name}}Serialize(*this, transfer, &buffer, nullptr);
+            }
+
+            DeserializeResult {{Cmd}}::Deserialize(const char** buffer, size_t* size, DeserializeAllocator* allocator) {
+                const {{name}}Transfer* transfer = nullptr;
+                DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, 1, &transfer));
+
+                return {{name}}Deserialize(this, transfer, buffer, size, allocator, nullptr);
+            }
+        {% endif %}
+    {% endfor %}
+
+    {% for command in by_category["return command"] %}
+        {% set name = "Return" + command.name.CamelCase() %}
+        {% set Cmd = name + "Cmd" %}
+
+        size_t {{Cmd}}::GetRequiredSize() const {
+            return sizeof({{name}}Transfer) + {{name}}GetExtraRequiredSize(*this);
+        }
+
+        {% if serialization_info[command.dict_name].has_dawn_object %}
+            void {{Cmd}}::Serialize(char* buffer, const ObjectIdProvider& objectIdProvider) const {
+                auto transfer = reinterpret_cast<{{name}}Transfer*>(buffer);
+                buffer += sizeof({{name}}Transfer);
+
+                {{name}}Serialize(*this, transfer, &buffer, &objectIdProvider);
+            }
+
+            DeserializeResult {{Cmd}}::Deserialize(const char** buffer, size_t* size, DeserializeAllocator* allocator, const ObjectIdResolver& resolver) {
+                const {{name}}Transfer* transfer = nullptr;
+                DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, 1, &transfer));
+
+                return {{name}}Deserialize(this, transfer, buffer, size, allocator, &resolver);
+            }
+        {% else %}
+            void {{Cmd}}::Serialize(char* buffer) const {
+                auto transfer = reinterpret_cast<{{name}}Transfer*>(buffer);
+                buffer += sizeof({{name}}Transfer);
+
+                {{name}}Serialize(*this, transfer, &buffer, nullptr);
+            }
+
+            DeserializeResult {{Cmd}}::Deserialize(const char** buffer, size_t* size, DeserializeAllocator* allocator) {
+                const {{name}}Transfer* transfer = nullptr;
+                DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, 1, &transfer));
+
+                return {{name}}Deserialize(this, transfer, buffer, size, allocator, nullptr);
+            }
+        {% endif %}
     {% endfor %}
 
 }  // namespace dawn_wire

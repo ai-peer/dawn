@@ -1,0 +1,83 @@
+//* Copyright 2019 The Dawn Authors
+//*
+//* Licensed under the Apache License, Version 2.0 (the "License");
+//* you may not use this file except in compliance with the License.
+//* You may obtain a copy of the License at
+//*
+//*     http://www.apache.org/licenses/LICENSE-2.0
+//*
+//* Unless required by applicable law or agreed to in writing, software
+//* distributed under the License is distributed on an "AS IS" BASIS,
+//* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//* See the License for the specific language governing permissions and
+//* limitations under the License.
+
+#include "dawn_wire/WireClient.h"
+
+namespace dawn_wire {
+    namespace client {
+        {% for command in by_category["return command"] %}
+            bool WireClient::Handle{{command.name.CamelCase()}}(const char** commands, size_t* size) {
+                Return{{command.name.CamelCase()}}Cmd cmd;
+                DeserializeResult deserializeResult = cmd.Deserialize(commands, size, &mAllocator);
+
+                if (deserializeResult == DeserializeResult::FatalError) {
+                    return false;
+                }
+
+                {% for input in command.inputs %}
+                    {% set Type = input.type.name.CamelCase() %}
+                    {% set name = as_varName(input.name) %}
+
+                    {% if input.type.category == "object" and input.annotation == "handle" %}
+                        {{Type}}* {{name}} = {{Type}}Allocator().GetObject(cmd.{{name}}.id);
+                        uint32_t {{name}}Serial = {{Type}}Allocator().GetSerial(cmd.{{name}}.id);
+                        if ({{name}}Serial != cmd.{{name}}.serial) {
+                            {{name}} = nullptr;
+                        }
+                    {% endif %}
+                {% endfor %}
+
+                return Do{{command.name.CamelCase()}}(
+                    {%- for input in command.inputs -%}
+                        {%- if input.type.category == "object" and input.annotation == "handle" -%}
+                            {{as_varName(input.name)}}
+                        {%- else -%}
+                            cmd.{{as_varName(input.name)}}
+                        {%- endif -%}
+                        {%- if not loop.last -%}, {% endif %}
+                    {%- endfor -%}
+                );
+            }
+        {% endfor %}
+
+        const char* WireClient::HandleCommands(const char* commands, size_t size) {
+            while (size >= sizeof(ReturnWireCmd)) {
+                ReturnWireCmd cmdId = *reinterpret_cast<const ReturnWireCmd*>(commands);
+
+                bool success = false;
+                switch (cmdId) {
+                    {% for command in by_category["return command"] %}
+                        {% set Suffix = command.name.CamelCase() %}
+                        case ReturnWireCmd::Return{{Suffix}}:
+                            success = Handle{{Suffix}}(&commands, &size);
+                            break;
+                    {% endfor %}
+                    default:
+                        success = false;
+                }
+
+                if (!success) {
+                    return nullptr;
+                }
+                mAllocator.Reset();
+            }
+
+            if (size != 0) {
+                return nullptr;
+            }
+
+            return commands;
+        }
+    }
+}
