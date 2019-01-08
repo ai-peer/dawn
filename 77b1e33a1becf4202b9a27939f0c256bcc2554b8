@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "487d0e3c_d78aad21",
+        "filename": "generator/templates/dawn_wire/TypeTraits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-08T12:28:57Z",
+      "side": 1,
+      "message": "nit: Can we have a comment explaining that this file can be removed once \"WebGPU error handling\" is implemented?",
+      "revId": "77b1e33a1becf4202b9a27939f0c256bcc2554b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6ca2acd_63c787b2",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-08T12:28:57Z",
+      "side": 1,
+      "message": "note: in the future when we want to interact with the data for buffers directly we could introduce a type alias. (ServerBuffer? not sure what the right name is)",
+      "revId": "77b1e33a1becf4202b9a27939f0c256bcc2554b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
