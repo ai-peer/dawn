@@ -33,6 +33,23 @@
       "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "114bccae_84d73e22",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000278
+      },
+      "writtenOn": "2019-01-08T18:04:34Z",
+      "side": 1,
+      "message": "fyi I think install_name here has no effect as it\u0027s overridden by tool(\"solink\") in toolchain/mac/BUILD.gn",
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
