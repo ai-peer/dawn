@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03047ecd_cfa811c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-09T23:16:10Z",
+      "side": 1,
+      "message": "What do you mean by \"through the device\"? It seems like you\u0027re moving things away from the device.",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "4a52589da0e78956caee1db587ca78e423468aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee96a65d_a6b0f2f8",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-09T23:16:10Z",
+      "side": 1,
+      "message": "Couldn\u0027t you just default-initialize mPCIInfo? e.g. PCIInfo mPCIInfo \u003d {} in the header",
+      "revId": "4a52589da0e78956caee1db587ca78e423468aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
