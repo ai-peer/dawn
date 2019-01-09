@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7490319_f492ceb0",
+        "filename": "generator/main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T13:23:42Z",
+      "side": 1,
+      "message": "Sorry I just realized that this should be \"const*const*\" because the API guarantees it won\u0027t modify the descriptors nor the pointers.\n\nThis will cause a compile error in the combo descriptor but cColorAttachments should still be an array of pointers to non-const values and we can do a cast when filling the Dawn descriptor.",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "759fe827_847b7605",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T13:23:42Z",
+      "side": 1,
+      "message": "This is a pointer to a stack variable which isn\u0027t valid after the end of the function.\n\nFor const*const* we need to allocate an array of `memberLength` pointers, fill it with pointers to all copiedMembers and then record-\u003e{{memberName}} \u003d pointerArray.",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7361e17_1a64bc60",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T13:23:42Z",
+      "side": 1,
+      "message": "This wouldn\u0027t work if you use two combo descriptors at the same time and in general we avoid the use of static in our code. It could be a private mColorAttachmentValues of the combo descriptor.",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

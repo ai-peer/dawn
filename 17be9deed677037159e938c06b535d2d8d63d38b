@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e769d60f_e5fcd64b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T13:23:42Z",
+      "side": 0,
+      "message": "nit: introduce a local variable const auto* member \u003d [*]record.{{as_varName}} depending on const*const* or not.",
+      "revId": "17be9deed677037159e938c06b535d2d8d63d38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
