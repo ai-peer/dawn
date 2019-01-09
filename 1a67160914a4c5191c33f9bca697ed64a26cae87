@@ -151,6 +151,24 @@
       "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aebb97bf_9d8a7acc",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T08:55:55Z",
+      "side": 1,
+      "message": "Mac builders fail without this because the library can\u0027t be found, so it seems to be required.",
+      "parentUuid": "5a2b1830_15455090",
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
