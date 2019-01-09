@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "f1fa6b5f_4a81a5b4",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "I had this because specifying a command record member with type ObjectHandle or ObjectId+ObjectSerial lost the type information that that member is supposed to refer to.\n\nHaving the type information of the ObjectHandle is nice because it lets us completely autogenerate the handlers to get the object with that id, check the validity of the serial, and then call the doer.\n\nThen, we can have nicer doers like:\nbool DoBufferMapReadAsyncCallback(Buffer* buffer, uint32_t requestSerial, uint32_t status, uint32_t count, const uint8_t* data);\n\ninstead of\n\nbool DoBufferMapReadAsyncCallback(ObjectId bufferId, ObjectSerial bufferSerial...);\n\nIt does have more special cases though, and looking at it again, it\u0027ll be better get rid of the \"handle\" annotation, and attach metadata elsewhere (like arg.target_type).\n\nWhat do you think?",
+      "parentUuid": "0c431cb2_2434af23",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a925db27_2715b1c8",
         "filename": "generator/main.py",
         "patchSetId": 3
@@ -47,6 +65,30 @@
       "writtenOn": "2019-01-09T12:51:50Z",
       "side": 1,
       "message": "This is parsing the JSON a whole new time and forces record to go through the usual parsing path. Instead I suggest having a transform from types to records, and parsing of extra records defined in dawn_wire.json.\n\nObjectHandle and ObjectSerial could be replaced by uint32_t or added to dawn.json with a comment explaining they are only needed for the wire.",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 566,
+        "endChar": 41
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3495867b_829d4627",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t think to just put them in dawn.json. I only had it this way because of the addition of those types.",
+      "parentUuid": "a925db27_2715b1c8",
       "range": {
         "startLine": 564,
         "startChar": 0,
@@ -147,6 +189,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca0ade1c_6836be80",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "Whoops, yea",
+      "parentUuid": "0ee691c3_0bdb1ea4",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -287,6 +347,24 @@
     },
     {
       "key": {
+        "uuid": "3a7354d5_f4287ab7",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "This is because previously for a S-\u003eC command, we wrote code to manually allocate and serialize extra data into the \"Extra space\". I thought it would be better for every command to use cmd.Serialize/Deserialize to avoid manual memcpy mistakes, but the original function signatures required an ObjectIdProvider/Resolver. An ObjectIdProvider on the Server would require a reverse lookup table for every Object, so I think it\u0027s better to just differentiate between commands that need/don\u0027t need the Provider/Resolver.",
+      "parentUuid": "0b7fbab2_75f2b25c",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4946ad44_88fe293b",
         "filename": "generator/templates/dawn_wire/WireCmd.h",
         "patchSetId": 3
@@ -355,6 +433,24 @@
     },
     {
       "key": {
+        "uuid": "26decf1f_dc0d3d94",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "Outputs is basically a more generalized way of defining the return value. When methods are transformed to records, they get put here.\n\nHandlers will first allocate output objects, if any.\nThen Doers will be called with the inputs and pointers to allocated output objects.\n\nIt doesn\u0027t have to be this way, but I found it reduced the logical differences between commands the are methods and commands that aren\u0027t.",
+      "parentUuid": "35ea3789_d0bc5789",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60a5c061_47745178",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 3
@@ -366,6 +462,24 @@
       "writtenOn": "2019-01-09T12:51:50Z",
       "side": 1,
       "message": "[1] Shouldn\u0027t this be selfId?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76e96024_447cb686",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "These records define the Raw version of the commands. It\u0027ll get converted to the ObjectId later on serialization.",
+      "parentUuid": "60a5c061_47745178",
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -406,6 +520,24 @@
     },
     {
       "key": {
+        "uuid": "a11ff0cd_a10ce98e",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d48de9f_431a0279",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84923c36_67954283",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 3
@@ -417,6 +549,24 @@
       "writtenOn": "2019-01-09T12:51:50Z",
       "side": 1,
       "message": "This seems like it would pollute the scope a lot, what is it used for?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06ca627d_66b4de49",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "Probably something I forgot I\u0027m not using anymore. Seems fine to remove",
+      "parentUuid": "84923c36_67954283",
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -468,6 +618,24 @@
       "writtenOn": "2019-01-09T12:51:50Z",
       "side": 1,
       "message": "Can this metadata for structures be added in StructType when they are linked? Hopefully the toposort removes the need for recursion. Also would it be possible to have something like \"contains pointers\"? This would allow removing the need for the allocators.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc8f5ec0_e7b215ef",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-09T22:38:08Z",
+      "side": 1,
+      "message": "Good point. Didn\u0027t realize we sorted them.\n\nTo clarify, contains_pointers \u003d\u003d false removes the need for the DeserializeAllocator, correct?\nWe can definitely add that.\n\nAnd if I understand correctly, then we could also save a pointer and have some structs directly in the command instead of copying them into the extra space.",
+      "parentUuid": "86511a56_d4aacb55",
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
