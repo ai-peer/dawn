@@ -1,0 +1,476 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b00117a9_45caa204",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "This is mixing types and commands a bit too much, see other comments.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c431cb2_2434af23",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "Why do we have a new \"handle\" type? I\u0027m concerned it requires special cases in multiple places and doesn\u0027t provide much benefit compared to listing both uint32_t serial and id manually.\n\nAlternatively the Handle type could be defined as a struct of ObjectSerial and ObjectId in dawn.json (or two uint32_ts).",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a925db27_2715b1c8",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "This is parsing the JSON a whole new time and forces record to go through the usual parsing path. Instead I suggest having a transform from types to records, and parsing of extra records defined in dawn_wire.json.\n\nObjectHandle and ObjectSerial could be replaced by uint32_t or added to dawn.json with a comment explaining they are only needed for the wire.",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 566,
+        "endChar": 41
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8672762c_530a7573",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: renders containts exactly these renders so it could be initialized here.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f434721f_9dc1b288",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: !\u003d nullptr",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a83d7ed_d031b608",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: !\u003d nullptr",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6560adb8_415fabc7",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "Both of these aren\u0027t used except to know if we are processing a structure or a command. Could we have something like a boolean is_cmd instead?",
+      "range": {
+        "startLine": 92,
+        "startChar": 52,
+        "endLine": 92,
+        "endChar": 82
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ee691c3_0bdb1ea4",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "Is this leftover debug code?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c55317fe_fe799ebc",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: no need to declare the pointer itself as const.",
+      "range": {
+        "startLine": 157,
+        "startChar": 66,
+        "endLine": 157,
+        "endChar": 71
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab04c870_a459e942",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 200,
+        "startChar": 134,
+        "endLine": 200,
+        "endChar": 139
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81862fbc_0030168b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "note that this won\u0027t need to be done first once we have \"WebGPU error handling\".",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c19491d4_46c40362",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "Why was this moved out of the first is_method block?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "497ed0e8_4be995d5",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: this could be factored with the C-\u003eS commands with a macro.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "493c8246_1397e9e0",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: no need for the Return here because it is an enum class which already has \"Return\" in its name.",
+      "range": {
+        "startLine": 78,
+        "startChar": 12,
+        "endLine": 78,
+        "endChar": 18
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b7fbab2_75f2b25c",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: you could do something like\n {% set has_dawn_object \u003d ... %}\n void Serialize(char* serializeBuffer\n     {%- if has_dawn_object -%}\n         , const Foo bar\n     {%- endif -%}\n );\n\nSame for others below. This would allow making both the allocator and the resolver conditional.\n\nNote that I\u0027m not sure removing the argument is that important, especially since it is just to make a default nullptr value in WireCmd_autogen.cpp",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4946ad44_88fe293b",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "note that ErrorObject too would disappear with WebGPU error handling",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2808254a_55db39a5",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "This should be handled as a member, see [1]",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fa7dafb_367d9746",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "note: in the future we should explore how we could separate these scripts in multiple targets. For example \"name\" could be separated as well as \"render\" and maybe the parsing and linking of dawn.json.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35ea3789_d0bc5789",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "Why is there a difference between inputs and ouputs? Could it just be a \"member\" and outputs are implemented manually with ObjectIds and ObjectSerials? (or uint32_t?)",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60a5c061_47745178",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "[1] Shouldn\u0027t this be selfId?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bf10306_64974844",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: maybe this could be a freestanding \"concat_names\" function?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d48de9f_431a0279",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "This would be a cmd_records parameter instead of adding a new category.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84923c36_67954283",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "This seems like it would pollute the scope a lot, what is it used for?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e77ed338_900c4c22",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "Can you add a comment about this being removed once \"WebGPU error handling\" is implemented?",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "130706c0_d9b7ca59",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "nit: define this above the function.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86511a56_d4aacb55",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T12:51:50Z",
+      "side": 1,
+      "message": "Can this metadata for structures be added in StructType when they are linked? Hopefully the toposort removes the need for recursion. Also would it be possible to have something like \"contains pointers\"? This would allow removing the need for the allocators.",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
