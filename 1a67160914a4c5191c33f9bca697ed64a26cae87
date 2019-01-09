@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5e4bf984_731628d1",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T08:43:26Z",
+      "side": 1,
+      "message": "Yep that\u0027s it. Clarified the comment.",
+      "parentUuid": "18ba1ed6_eb7238f3",
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f88f3e03_a1f9940a",
         "filename": "BUILD.gn",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3dedd07_1bffd2e1",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f88f3e03_a1f9940a",
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "7ad8f305_a6a70fff",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T08:43:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05d49fdf_5a478f26",
+      "range": {
+        "startLine": 190,
+        "startChar": 32,
+        "endLine": 190,
+        "endChar": 43
+      },
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "114bccae_84d73e22",
         "filename": "BUILD.gn",
         "patchSetId": 8
@@ -70,6 +130,24 @@
       "writtenOn": "2019-01-08T18:04:34Z",
       "side": 1,
       "message": "fyi I think install_name here has no effect as it\u0027s overridden by tool(\"solink\") in toolchain/mac/BUILD.gn",
+      "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a2b1830_15455090",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-09T08:43:26Z",
+      "side": 1,
+      "message": "Tried removing it, we\u0027ll see if it passes CQ.",
+      "parentUuid": "114bccae_84d73e22",
       "revId": "1a67160914a4c5191c33f9bca697ed64a26cae87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
