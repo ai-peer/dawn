@@ -20,6 +20,7 @@ namespace dawn_native {
 
     AdapterBase::AdapterBase(InstanceBase* instance, BackendType backend)
         : mInstance(instance), mBackend(backend) {
+        memset(&mPCIInfo, 0, sizeof(mPCIInfo));
     }
 
     BackendType AdapterBase::GetBackendType() const {
