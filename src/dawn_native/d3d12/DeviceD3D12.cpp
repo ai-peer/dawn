@@ -139,7 +139,7 @@ namespace dawn_native { namespace d3d12 {
         NextSerial();
     }
 
-    Device::~Device() {
+    Device::~Device() : DeviceBase(nullptr) {
         NextSerial();
         WaitForSerial(mLastSubmittedSerial);  // Wait for all in-flight commands to finish executing
         TickImpl();                    // Call tick one last time so resources are cleaned up
