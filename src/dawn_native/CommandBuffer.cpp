@@ -537,12 +537,23 @@ namespace dawn_native {
                 } break;
 
                 case Command::Draw: {
-                    mIterator.NextCommand<DrawCmd>();
+                    DrawCmd* cmd = mIterator.NextCommand<DrawCmd>();
+                    // Validation of instanceCount must be non-zero
+                    if (cmd->instanceCount == 0) {
+                        return DAWN_VALIDATION_ERROR("Draw instanceCount must be non-zero");
+                    }
                     DAWN_TRY(persistentState.ValidateCanDraw());
                 } break;
 
                 case Command::DrawIndexed: {
-                    mIterator.NextCommand<DrawIndexedCmd>();
+                    DrawIndexedCmd* cmd = mIterator.NextCommand<DrawIndexedCmd>();
+                    // Validation of indexCount and instanceCount must be non-zero
+                    if (cmd->indexCount == 0) {
+                        return DAWN_VALIDATION_ERROR("DrawIndexed indexCount must be non-zero");
+                    }
+                    if (cmd->instanceCount == 0) {
+                        return DAWN_VALIDATION_ERROR("DrawIndexed instanceCount must be non-zero");
+                    }
                     DAWN_TRY(persistentState.ValidateCanDrawIndexed());
                 } break;
 

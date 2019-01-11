@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "tests/unittests/validation/ValidationTest.h"
-
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 class CommandBufferValidationTest : public ValidationTest {
@@ -210,5 +210,57 @@ TEST_F(CommandBufferValidationTest, TextureWithReadAndWriteUsage) {
     dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
     pass.SetBindGroup(0, bg);
     pass.EndPass();
+    builder.GetResult();
+}
+
+// Test that the indexCount and instanceCount must be non-zero
+TEST_F(CommandBufferValidationTest, IndexCountAndInstanceCountWithZero) {
+    dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
+                #version 450
+                void main() {
+                    gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+                })");
+
+    dawn::ShaderModule fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
+                #version 450
+                layout(location = 0) out vec4 fragColor;
+                void main() {
+                    fragColor = vec4(0.0, 1.0, 0.0, 1.0);
+                })");
+
+    utils::ComboRenderPipelineDescriptor descriptor(device);
+    descriptor.cVertexStage.module = vsModule;
+    descriptor.cFragmentStage.module = fsModule;
+
+    dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
+
+    dawn::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.usage = dawn::BufferUsageBit::Vertex | dawn::BufferUsageBit::Index;
+    bufferDescriptor.size = 4;
+    dawn::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    uint32_t zeroOffset = 0;
+    dawn::RenderPassDescriptor renderPass = CreateSimpleRenderPass();
+
+    dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+    {
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
+        pass.Draw(0, 0, 0, 0);
+        pass.EndPass();
+    }
+    builder.GetResult();
+
+    builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+    {
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
+        pass.SetPipeline(pipeline);
+        // Use the buffer as both index and vertex
+        pass.SetIndexBuffer(buffer, 0);
+        pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
+        pass.DrawIndexed(0, 0, 0, 0, 0);
+        pass.EndPass();
+    }
     builder.GetResult();
 }

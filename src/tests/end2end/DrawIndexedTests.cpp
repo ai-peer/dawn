@@ -109,8 +109,6 @@ TEST_P(DrawIndexedTest, Uint32) {
     RGBA8 filled(0, 255, 0, 255);
     RGBA8 notFilled(0, 0, 0, 0);
 
-    // Test a draw with no indices.
-    Test(0, 0, 0, 0, 0, notFilled, notFilled);
     // Test a draw with only the first 3 indices of the first quad (bottom left triangle)
     Test(3, 1, 0, 0, 0, filled, notFilled);
     // Test a draw with only the last 3 indices of the first quad (top right triangle)
