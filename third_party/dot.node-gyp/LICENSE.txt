@@ -1,0 +1,6 @@
+node-gyp is licensed under the MIT License (LICENSE.node-gyp.txt).
+
+However, these files were automatically fetched by node-gyp, and come from
+several other projects:
+- Node.js + N-API (LICENSE.nodejs.txt)
+- V8 (LICENSE.v8.txt)
