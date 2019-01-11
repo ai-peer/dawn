@@ -17,6 +17,7 @@
 
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/d3d12/InputStateD3D12.h"
 
 #include "dawn_native/d3d12/d3d12_platform.h"
 
@@ -27,6 +28,16 @@ namespace dawn_native { namespace d3d12 {
 
     struct BindGroupStateTracker;
 
+    struct VertexBuffersInfo {
+        struct SlotInfo {
+            uint32_t startSlot;
+            uint32_t count;
+        };
+        std::vector<SlotInfo> slotInfos;
+        std::vector<Ref<BufferBase>> buffers;
+        std::vector<uint32_t> offsets;
+    };
+
     class CommandBuffer : public CommandBufferBase {
       public:
         CommandBuffer(CommandBufferBuilder* builder);
@@ -35,6 +46,9 @@ namespace dawn_native { namespace d3d12 {
         void RecordCommands(ComPtr<ID3D12GraphicsCommandList> commandList, uint32_t indexInSubmit);
 
       private:
+        void ApplyInputState(ComPtr<ID3D12GraphicsCommandList> commandList,
+                             VertexBuffersInfo* vertexBuffersInfo,
+                             const InputState* inputState);
         void RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
                                BindGroupStateTracker* bindingTracker);
         void RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
