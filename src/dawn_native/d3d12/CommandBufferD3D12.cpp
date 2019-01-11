@@ -420,6 +420,38 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
+    void CommandBuffer::ApplyInputState(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                        VertexBuffersInfo* vertexBuffersInfo,
+                                        const InputState* inputState) {
+        DAWN_ASSERT(inputState != nullptr);
+        DAWN_ASSERT(vertexBuffersInfo != nullptr);
+        auto inputsSetMask = inputState->GetInputsSetMask();
+
+        uint32_t offset = 0;
+
+        for (const auto& slotInfo : vertexBuffersInfo->slotInfos) {
+            Ref<BufferBase>* buffers = &vertexBuffersInfo->buffers[offset];
+            uint32_t* offsets = &vertexBuffersInfo->offsets[offset];
+
+            std::array<D3D12_VERTEX_BUFFER_VIEW, kMaxVertexInputs> d3d12BufferViews = {};
+            for (uint32_t i = 0; i < slotInfo.count; ++i) {
+                uint32_t input = slotInfo.startSlot + i;
+                if (!inputsSetMask[input]) {
+                    continue;
+                }
+                auto inputInfo = inputState->GetInput(input);
+                Buffer* buffer = ToBackend(buffers[i].Get());
+                d3d12BufferViews[i].BufferLocation = buffer->GetVA() + offsets[i];
+                d3d12BufferViews[i].StrideInBytes = inputInfo.stride;
+                d3d12BufferViews[i].SizeInBytes = buffer->GetSize() - offsets[i];
+            }
+
+            commandList->IASetVertexBuffers(slotInfo.startSlot, slotInfo.count,
+                                            d3d12BufferViews.data());
+            offset += slotInfo.count;
+        }
+    }
+
     void CommandBuffer::RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
                                           BindGroupStateTracker* bindingTracker) {
         PipelineLayout* lastLayout = nullptr;
@@ -532,6 +564,8 @@ namespace dawn_native { namespace d3d12 {
 
         RenderPipeline* lastPipeline = nullptr;
         PipelineLayout* lastLayout = nullptr;
+        InputState* lastInputState = nullptr;
+        VertexBuffersInfo vertexBuffersInfo;
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
@@ -543,12 +577,26 @@ namespace dawn_native { namespace d3d12 {
 
                 case Command::Draw: {
                     DrawCmd* draw = mCommands.NextCommand<DrawCmd>();
+
+                    InputState* inputState = ToBackend(lastPipeline->GetInputState());
+                    if (inputState != lastInputState) {
+                        lastInputState = inputState;
+                        ApplyInputState(commandList, &vertexBuffersInfo, inputState);
+                    }
+
                     commandList->DrawInstanced(draw->vertexCount, draw->instanceCount,
                                                draw->firstVertex, draw->firstInstance);
                 } break;
 
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = mCommands.NextCommand<DrawIndexedCmd>();
+
+                    InputState* inputState = ToBackend(lastPipeline->GetInputState());
+                    if (inputState != lastInputState) {
+                        lastInputState = inputState;
+                        ApplyInputState(commandList, &vertexBuffersInfo, inputState);
+                    }
+
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
                                                       draw->firstInstance);
@@ -617,19 +665,11 @@ namespace dawn_native { namespace d3d12 {
                     auto buffers = mCommands.NextData<Ref<BufferBase>>(cmd->count);
                     auto offsets = mCommands.NextData<uint32_t>(cmd->count);
 
-                    auto inputState = ToBackend(lastPipeline->GetInputState());
-
-                    std::array<D3D12_VERTEX_BUFFER_VIEW, kMaxVertexInputs> d3d12BufferViews;
-                    for (uint32_t i = 0; i < cmd->count; ++i) {
-                        auto input = inputState->GetInput(cmd->startSlot + i);
-                        Buffer* buffer = ToBackend(buffers[i].Get());
-                        d3d12BufferViews[i].BufferLocation = buffer->GetVA() + offsets[i];
-                        d3d12BufferViews[i].StrideInBytes = input.stride;
-                        d3d12BufferViews[i].SizeInBytes = buffer->GetSize() - offsets[i];
-                    }
-
-                    commandList->IASetVertexBuffers(cmd->startSlot, cmd->count,
-                                                    d3d12BufferViews.data());
+                    vertexBuffersInfo.slotInfos.push_back({cmd->startSlot, cmd->count});
+                    vertexBuffersInfo.buffers.insert(vertexBuffersInfo.buffers.end(), buffers,
+                                                     buffers + cmd->count);
+                    vertexBuffersInfo.offsets.insert(vertexBuffersInfo.offsets.end(), offsets,
+                                                     offsets + cmd->count);
                 } break;
 
                 default: { UNREACHABLE(); } break;

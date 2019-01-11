@@ -23,9 +23,20 @@
 namespace dawn_native { namespace d3d12 {
 
     class Device;
+    class InputState;
     class RenderPassDescriptor;
 
     struct BindGroupStateTracker;
+
+    struct VertexBuffersInfo {
+        struct SlotInfo {
+            uint32_t startSlot;
+            uint32_t count;
+        };
+        std::vector<SlotInfo> slotInfos;
+        std::vector<Ref<BufferBase>> buffers;
+        std::vector<uint32_t> offsets;
+    };
 
     class CommandBuffer : public CommandBufferBase {
       public:
@@ -35,6 +46,9 @@ namespace dawn_native { namespace d3d12 {
         void RecordCommands(ComPtr<ID3D12GraphicsCommandList> commandList, uint32_t indexInSubmit);
 
       private:
+        void ApplyInputState(ComPtr<ID3D12GraphicsCommandList> commandList,
+                             VertexBuffersInfo* vertexBuffersInfo,
+                             const InputState* inputState);
         void RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
                                BindGroupStateTracker* bindingTracker);
         void RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
