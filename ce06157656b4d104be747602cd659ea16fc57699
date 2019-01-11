@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "91c35896_99a5bd55",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b00117a9_45caa204",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c431cb2_2434af23",
         "filename": "generator/main.py",
         "patchSetId": 3
@@ -51,6 +69,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7652f8e6_c42fa10b",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "This has been removed for now.",
+      "parentUuid": "f1fa6b5f_4a81a5b4",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -101,6 +137,30 @@
     },
     {
       "key": {
+        "uuid": "cb5eac84_52b461e0",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3495867b_829d4627",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 566,
+        "endChar": 41
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8672762c_530a7573",
         "filename": "generator/main.py",
         "patchSetId": 3
@@ -115,6 +175,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8a1f107_c77947ac",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8672762c_530a7573",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -135,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "e4f0757e_3449455b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Not relevant anymore.",
+      "parentUuid": "f434721f_9dc1b288",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a83d7ed_d031b608",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 3
@@ -149,6 +245,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7724bb9_069700c1",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Not relevant anymore.",
+      "parentUuid": "6a83d7ed_d031b608",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -172,6 +286,30 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b53de34_d885fb5a",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "|is_method| is still used for special-casing commands where \"self\" can never be null.",
+      "parentUuid": "6560adb8_415fabc7",
+      "range": {
+        "startLine": 92,
+        "startChar": 52,
+        "endLine": 92,
+        "endChar": 82
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -233,6 +371,30 @@
     },
     {
       "key": {
+        "uuid": "a5452d66_d5b7e5ae",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Not relevant anymore.",
+      "parentUuid": "c55317fe_fe799ebc",
+      "range": {
+        "startLine": 157,
+        "startChar": 66,
+        "endLine": 157,
+        "endChar": 71
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab04c870_a459e942",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 3
@@ -256,6 +418,30 @@
     },
     {
       "key": {
+        "uuid": "b38ebefb_5165be4d",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Not relevant anymore.",
+      "parentUuid": "ab04c870_a459e942",
+      "range": {
+        "startLine": 200,
+        "startChar": 134,
+        "endLine": 200,
+        "endChar": 139
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81862fbc_0030168b",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 3
@@ -270,6 +456,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc29f519_be783784",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "81862fbc_0030168b",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -290,6 +494,24 @@
     },
     {
       "key": {
+        "uuid": "7cd9215b_0dbf171d",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c19491d4_46c40362",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "497ed0e8_4be995d5",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 3
@@ -304,6 +526,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b77f7250_02fad6a7",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "497ed0e8_4be995d5",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -327,6 +567,30 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01a94548_b31bd8a7",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "493c8246_1397e9e0",
+      "range": {
+        "startLine": 78,
+        "startChar": 12,
+        "endLine": 78,
+        "endChar": 18
+      },
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -365,6 +629,24 @@
     },
     {
       "key": {
+        "uuid": "8d8a694c_0137b47b",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a7354d5_f4287ab7",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4946ad44_88fe293b",
         "filename": "generator/templates/dawn_wire/WireCmd.h",
         "patchSetId": 3
@@ -379,6 +661,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a8c1142_95f0375b",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4946ad44_88fe293b",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -399,6 +699,24 @@
     },
     {
       "key": {
+        "uuid": "e1d1f66c_51e81aaa",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "What do you mean by this? Or rather, what does [1] link to?",
+      "parentUuid": "2808254a_55db39a5",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0fa7dafb_367d9746",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 3
@@ -413,6 +731,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0452aa9e_32d50b0a",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "I ended up making \"common.py\" because the imports don\u0027t work correctly if you import from the top level script.",
+      "parentUuid": "0fa7dafb_367d9746",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -448,6 +784,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbd6b3cb_c30b1ab6",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Members can now have an \"is_return_value\" attribute.",
+      "parentUuid": "26decf1f_dc0d3d94",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -500,6 +854,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e3e2516_73d16433",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bf10306_64974844",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -573,6 +945,24 @@
     },
     {
       "key": {
+        "uuid": "9874a6bb_8b4f2914",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ca627d_66b4de49",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e77ed338_900c4c22",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 3
@@ -604,6 +994,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47b1820d_6b0708c9",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "130706c0_d9b7ca59",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -639,6 +1047,24 @@
       "revId": "ce06157656b4d104be747602cd659ea16fc57699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0851fa8c_c29869b7",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-11T02:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc8f5ec0_e7b215ef",
+      "revId": "ce06157656b4d104be747602cd659ea16fc57699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
