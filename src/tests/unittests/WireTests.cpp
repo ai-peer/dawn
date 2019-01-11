@@ -17,6 +17,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "dawn_wire/Client.h"
 #include "dawn_wire/Wire.h"
 #include "utils/TerribleCommandBuffer.h"
 
@@ -160,7 +161,7 @@ class WireTestsBase : public Test {
             mC2sBuf->SetHandler(mWireServer.get());
 
             dawnProcTable clientProcs;
-            mWireClient.reset(NewClientDevice(&clientProcs, &device, mC2sBuf.get()));
+            mWireClient.reset(new Client(&clientProcs, &device, mC2sBuf.get()));
             dawnSetProcs(&clientProcs);
             mS2cBuf->SetHandler(mWireClient.get());
 
@@ -169,6 +170,10 @@ class WireTestsBase : public Test {
 
         void TearDown() override {
             dawnSetProcs(nullptr);
+
+            // Reset client before mocks are deleted.
+            // Incomplete callbacks will be called on deletion, so the mocks cannot be null.
+            mWireClient = nullptr;
 
             // Delete mocks so that expectations are checked
             mockDeviceErrorCallback = nullptr;
