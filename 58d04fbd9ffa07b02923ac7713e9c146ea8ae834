@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eccc7179_5797a92e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-11T04:42:01Z",
+      "side": 1,
+      "message": "I\u0027m not clear why you need to essentially keep the whole history of SetVertexBuffers calls. Couldn\u0027t you just have a std::array\u003c(buffer,offset)?, kMaxVertexInputs\u003e that gets partially-overwritten each time there\u0027s a SetVertexBuffers?\n\nAnd, btw, this stuff still might change to look totally different\nhttps://github.com/gpuweb/gpuweb/issues/145\nhttps://github.com/gpuweb/gpuweb/pull/151\n\nAlso, I find it confusing to serialize the buffers/offsets like this. If the above thing doesn\u0027t change, I\u0027d prefer to have a vector\u003c(buffer,offset)\u003e or (vector\u003cbuffer\u003e,vector\u003coffset\u003e) in the SlotInfo.",
+      "revId": "58d04fbd9ffa07b02923ac7713e9c146ea8ae834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87e604db_91e2b2ab",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-11T04:42:01Z",
+      "side": 1,
+      "message": "nice diff 😎",
+      "revId": "58d04fbd9ffa07b02923ac7713e9c146ea8ae834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
