@@ -15,6 +15,7 @@
 #include "common/Assert.h"
 #include "dawn/dawncpp.h"
 #include "dawn_native/DawnNative.h"
+#include "dawn_wire/Server.h"
 #include "dawn_wire/Wire.h"
 
 #include <vector>
@@ -62,7 +63,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
 
     DevNull devNull;
     std::unique_ptr<dawn_wire::CommandHandler> wireServer(
-        dawn_wire::NewServerCommandHandler(nullDevice.Get(), procs, &devNull));
+        new dawn_wire::Server(nullDevice.Get(), procs, &devNull));
 
     wireServer->HandleCommands(reinterpret_cast<const char*>(data), size);
 

@@ -391,13 +391,17 @@ def get_renders_for_targets(api_params, wire_json, targets):
         renders.append(FileRender('dawn_wire/TypeTraits.h', 'dawn_wire/TypeTraits_autogen.h', wire_params))
         renders.append(FileRender('dawn_wire/WireCmd.h', 'dawn_wire/WireCmd_autogen.h', wire_params))
         renders.append(FileRender('dawn_wire/WireCmd.cpp', 'dawn_wire/WireCmd_autogen.cpp', wire_params))
-        renders.append(FileRender('dawn_wire/WireServer.cpp', 'dawn_wire/WireServer.cpp', wire_params))
         renders.append(FileRender('dawn_wire/client/WireClientBase.h', 'dawn_wire/client/WireClientBase_autogen.h', wire_params))
         renders.append(FileRender('dawn_wire/client/WireClientDoers.cpp', 'dawn_wire/client/WireClientDoers_autogen.cpp', wire_params))
         renders.append(FileRender('dawn_wire/client/WireClientHandlers.cpp', 'dawn_wire/client/WireClientHandlers_autogen.cpp', wire_params))
         renders.append(FileRender('dawn_wire/client/WireClientObjects.h', 'dawn_wire/client/WireClientObjects_autogen.h', wire_params))
         renders.append(FileRender('dawn_wire/client/WireClientProcs.cpp', 'dawn_wire/client/WireClientProcs_autogen.cpp', wire_params))
         renders.append(FileRender('dawn_wire/client/WireClientPrototypes.inl', 'dawn_wire/client/WireClientPrototypes_autogen.inl', wire_params))
+        renders.append(FileRender('dawn_wire/server/WireServerBase.h', 'dawn_wire/server/WireServerBase_autogen.h', wire_params))
+        renders.append(FileRender('dawn_wire/server/WireServerCallbacks.cpp', 'dawn_wire/server/WireServerCallbacks_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/server/WireServerDoers.cpp', 'dawn_wire/server/WireServerDoers_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/server/WireServerHandlers.cpp', 'dawn_wire/server/WireServerHandlers_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/server/WireServerPrototypes.inl', 'dawn_wire/server/WireServerPrototypes_autogen.inl', wire_params))
 
     return renders
 

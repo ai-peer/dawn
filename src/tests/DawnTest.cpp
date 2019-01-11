@@ -20,6 +20,7 @@
 #include "common/Platform.h"
 #include "dawn_native/DawnNative.h"
 #include "dawn_wire/Client.h"
+#include "dawn_wire/Server.h"
 #include "dawn_wire/Wire.h"
 #include "utils/BackendBinding.h"
 #include "utils/DawnHelpers.h"
@@ -205,8 +206,7 @@ void DawnTest::SetUp() {
         mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
         mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
 
-        mWireServer.reset(
-            dawn_wire::NewServerCommandHandler(backendDevice, backendProcs, mS2cBuf.get()));
+        mWireServer.reset(new dawn_wire::Server(backendDevice, backendProcs, mS2cBuf.get()));
         mC2sBuf->SetHandler(mWireServer.get());
 
         dawnDevice clientDevice;
