@@ -84,6 +84,11 @@ class RecordMember:
         self.length = None
         self.optional = optional
         self.is_return_value = is_return_value
+        self.target_type = None
+
+    def set_target_type(self, target_type):
+        assert self.type.dict_name == "ObjectHandle"
+        self.target_type = target_type
 
 Method = namedtuple('Method', ['name', 'return_type', 'arguments'])
 class ObjectType(Type):
@@ -125,6 +130,9 @@ def linked_record_members(json_data, types):
         member = RecordMember(Name(m['name']), types[m['type']],
                               m.get('annotation', 'value'), m.get('optional', False),
                               m.get('is_return_value', False))
+        target_type = m.get('target_type')
+        if target_type:
+            member.set_target_type(types[target_type])
         members.append(member)
         members_by_name[member.name.canonical_case()] = member
 

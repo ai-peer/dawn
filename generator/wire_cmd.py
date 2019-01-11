@@ -61,6 +61,7 @@ def add_wire_commands(api_params, wire_json):
             # Client->Server commands that return an object return the result object handle
             if method.return_type.category == 'object':
                 result = RecordMember(Name('result'), types['ObjectHandle'], 'value', False, True)
+                result.set_target_type(method.return_type)
                 members.append(result)
 
             command_name = concat_names(api_object.name, method.name)
@@ -77,6 +78,7 @@ def add_wire_commands(api_params, wire_json):
         if api_object.is_builder:
             command_name = concat_names(api_object.name, 'error callback')
             built_object = RecordMember(Name('built object'), types['ObjectHandle'], 'value', False, False)
+            built_object.set_target_type(api_object.built_type)
             command = CommandType(command_name, {
                 'category': 'return command',
                 'members': [

@@ -23,6 +23,7 @@
 #include <dawn/dawncpp.h>
 #include <dawn/dawn_wsi.h>
 #include <dawn_native/DawnNative.h>
+#include <dawn_wire/Client.h>
 #include "GLFW/glfw3.h"
 
 #include <cstring>
@@ -106,7 +107,7 @@ dawn::Device CreateCppDawnDevice() {
 
                 dawnDevice clientDevice;
                 dawnProcTable clientProcs;
-                wireClient = dawn_wire::NewClientDevice(&clientProcs, &clientDevice, c2sBuf);
+                wireClient = new dawn_wire::Client(&clientProcs, &clientDevice, c2sBuf);
                 s2cBuf->SetHandler(wireClient);
 
                 procs = clientProcs;

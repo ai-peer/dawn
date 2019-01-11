@@ -27,7 +27,7 @@
     "buffer map read async callback": {
         "category": "return command",
         "members": [
-            { "name": "buffer", "type": "ObjectHandle" },
+            { "name": "buffer", "type": "ObjectHandle", "target_type": "buffer" },
             { "name": "request serial", "type": "uint32_t" },
             { "name": "status", "type": "uint32_t" },
             { "name": "data length", "type": "uint32_t" },
@@ -37,7 +37,7 @@
     "buffer map write async callback": {
         "category": "return command",
         "members": [
-            { "name": "buffer", "type": "ObjectHandle" },
+            { "name": "buffer", "type": "ObjectHandle", "target_type": "buffer" },
             { "name": "request serial", "type": "uint32_t" },
             { "name": "status", "type": "uint32_t" }
         ]
@@ -66,7 +66,7 @@
     "fence update completed value": {
         "category": "return command",
         "members": [
-            { "name": "fence", "type": "ObjectHandle" },
+            { "name": "fence", "type": "ObjectHandle", "target_type": "fence" },
             { "name": "value", "type": "uint64_t" }
         ]
     },
@@ -74,9 +74,10 @@
         "client_side_commands": [
             "FenceGetCompletedValue"
         ],
-        "client_proxied_commands": [
+        "client_custom_commands": [
             "BufferUnmap",
             "DeviceCreateFence",
+            "FenceGetCompletedValue",
             "QueueSignal"
         ],
         "client_special_objects": [
