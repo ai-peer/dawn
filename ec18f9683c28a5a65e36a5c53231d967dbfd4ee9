@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "561a4d0b_e61e2945",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-11T09:25:25Z",
+      "side": 0,
+      "message": "What happens on Metal if we try to draw triangles with a single vertex? We might have to make the validation depend on the pipeline\u0027s primitive topology.",
+      "revId": "ec18f9683c28a5a65e36a5c53231d967dbfd4ee9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
