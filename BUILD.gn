@@ -735,6 +735,7 @@ source_set("libdawn_wire_headers") {
   public_configs = [ ":dawn_public" ]
   sources = [
     "src/include/dawn_wire/Client.h",
+    "src/include/dawn_wire/Server.h",
     "src/include/dawn_wire/Wire.h",
     "src/include/dawn_wire/dawn_wire_export.h",
   ]
@@ -746,13 +747,17 @@ dawn_generator("libdawn_wire_gen") {
     "dawn_wire/TypeTraits_autogen.h",
     "dawn_wire/WireCmd_autogen.h",
     "dawn_wire/WireCmd_autogen.cpp",
-    "dawn_wire/WireServer.cpp",
     "dawn_wire/client/WireClientBase_autogen.h",
     "dawn_wire/client/WireClientDoers_autogen.cpp",
     "dawn_wire/client/WireClientHandlers_autogen.cpp",
     "dawn_wire/client/WireClientObjects_autogen.h",
     "dawn_wire/client/WireClientProcs_autogen.cpp",
     "dawn_wire/client/WireClientPrototypes_autogen.inl",
+    "dawn_wire/server/WireServerBase_autogen.h",
+    "dawn_wire/server/WireServerCallbacks_autogen.cpp",
+    "dawn_wire/server/WireServerDoers_autogen.cpp",
+    "dawn_wire/server/WireServerHandlers_autogen.cpp",
+    "dawn_wire/server/WireServerPrototypes_autogen.inl",
   ]
 }
 
@@ -775,6 +780,11 @@ dawn_static_and_shared_library("libdawn_wire") {
     "src/dawn_wire/client/WireClientObjectAllocator.h",
     "src/dawn_wire/client/WireClientObjects.cpp",
     "src/dawn_wire/client/WireClientObjects.h",
+    "src/dawn_wire/server/WireServer.cpp",
+    "src/dawn_wire/server/WireServer.h",
+    "src/dawn_wire/server/WireServerCallbacks.cpp",
+    "src/dawn_wire/server/WireServerDoers.cpp",
+    "src/dawn_wire/server/WireServerObjectStorage.h",
   ]
 
   # Make headers publically visible
