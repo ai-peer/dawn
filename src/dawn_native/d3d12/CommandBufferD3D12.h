@@ -18,7 +18,10 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 
+#include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
+
+#include <bitset>
 
 namespace dawn_native { namespace d3d12 {
 
@@ -26,6 +29,12 @@ namespace dawn_native { namespace d3d12 {
     class RenderPassDescriptor;
 
     struct BindGroupStateTracker;
+
+    struct VertexBuffersInfo {
+        const InputState* lastInputState = nullptr;
+        std::bitset<kMaxVertexInputs> dirtySlots = 0;
+        std::array<D3D12_VERTEX_BUFFER_VIEW, kMaxVertexInputs> bufferViews = {};
+    };
 
     class CommandBuffer : public CommandBufferBase {
       public:
@@ -35,6 +44,9 @@ namespace dawn_native { namespace d3d12 {
         void RecordCommands(ComPtr<ID3D12GraphicsCommandList> commandList, uint32_t indexInSubmit);
 
       private:
+        void SetVertexBuffers(ComPtr<ID3D12GraphicsCommandList> commandList,
+                              VertexBuffersInfo* vertexBuffersInfo,
+                              const InputState* inputState);
         void RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
                                BindGroupStateTracker* bindingTracker);
         void RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
