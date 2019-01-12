@@ -420,6 +420,74 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
+    void CommandBuffer::SetVertexBuffers(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                         VertexBuffersInfo* vertexBuffersInfo,
+                                         const InputState* inputState) {
+        DAWN_ASSERT(vertexBuffersInfo != nullptr);
+        DAWN_ASSERT(inputState != nullptr);
+
+        auto inputsMask = inputState->GetInputsSetMask();
+        auto dirtySlots = vertexBuffersInfo->dirtySlots & inputsMask;
+
+        if (vertexBuffersInfo->lastInputState != inputState) {
+            vertexBuffersInfo->lastInputState = inputState;
+            // The stride for the buffer views may have changed.
+            // Mark the bits as dirty.
+            // We check if the stride has actually changed later to avoid two loops.
+            dirtySlots |= inputsMask;
+        }
+
+        if (!dirtySlots.any()) {
+            return;
+        }
+
+        uint32_t startSlot = 0;
+        uint32_t lastSlot = 0;
+        bool inRange = false;
+        bool firstRun = true;
+
+        std::bitset<kMaxVertexInputs> cleanSlots = 0;
+
+        // Iterate over all slots where the buffer address or size changed,
+        // or the stride MAY have changed.
+        for (uint32_t slot : IterateBitSet(dirtySlots)) {
+            uint32_t stride = inputState->GetInput(slot).stride;
+            if (vertexBuffersInfo->bufferViews[slot].StrideInBytes == stride &&
+                !vertexBuffersInfo->dirtySlots[slot]) {
+                // The vertex buffers for this slot are not dirty.
+                // This slot was marked as dirty because the input state changed,
+                // but the stride has not changed.
+                continue;
+            }
+
+            vertexBuffersInfo->bufferViews[slot].StrideInBytes = stride;
+            cleanSlots.set(slot);
+
+            if (firstRun) {
+                startSlot = slot;
+                firstRun = false;
+                inRange = true;
+            } else {
+                inRange = slot == lastSlot + 1;
+            }
+
+            if (!inRange) {
+                commandList->IASetVertexBuffers(startSlot, lastSlot + 1,
+                                                &vertexBuffersInfo->bufferViews[startSlot]);
+                startSlot = slot;
+            }
+
+            lastSlot = slot;
+        }
+
+        if (inRange) {
+            commandList->IASetVertexBuffers(startSlot, lastSlot + 1,
+                                            &vertexBuffersInfo->bufferViews[startSlot]);
+        }
+
+        vertexBuffersInfo->dirtySlots &= cleanSlots.flip();
+    }
+
     void CommandBuffer::RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
                                           BindGroupStateTracker* bindingTracker) {
         PipelineLayout* lastLayout = nullptr;
@@ -532,6 +600,8 @@ namespace dawn_native { namespace d3d12 {
 
         RenderPipeline* lastPipeline = nullptr;
         PipelineLayout* lastLayout = nullptr;
+        InputState* lastInputState = nullptr;
+        VertexBuffersInfo vertexBuffersInfo = {};
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
@@ -543,12 +613,16 @@ namespace dawn_native { namespace d3d12 {
 
                 case Command::Draw: {
                     DrawCmd* draw = mCommands.NextCommand<DrawCmd>();
+
+                    SetVertexBuffers(commandList, &vertexBuffersInfo, lastInputState);
                     commandList->DrawInstanced(draw->vertexCount, draw->instanceCount,
                                                draw->firstVertex, draw->firstInstance);
                 } break;
 
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = mCommands.NextCommand<DrawIndexedCmd>();
+
+                    SetVertexBuffers(commandList, &vertexBuffersInfo, lastInputState);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
                                                       draw->firstInstance);
@@ -558,6 +632,7 @@ namespace dawn_native { namespace d3d12 {
                     SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
                     RenderPipeline* pipeline = ToBackend(cmd->pipeline).Get();
                     PipelineLayout* layout = ToBackend(pipeline->GetLayout());
+                    InputState* inputState = ToBackend(pipeline->GetInputState());
 
                     commandList->SetGraphicsRootSignature(layout->GetRootSignature().Get());
                     commandList->SetPipelineState(pipeline->GetPipelineState().Get());
@@ -567,6 +642,7 @@ namespace dawn_native { namespace d3d12 {
 
                     lastPipeline = pipeline;
                     lastLayout = layout;
+                    lastInputState = inputState;
                 } break;
 
                 case Command::SetStencilReference: {
@@ -617,19 +693,21 @@ namespace dawn_native { namespace d3d12 {
                     auto buffers = mCommands.NextData<Ref<BufferBase>>(cmd->count);
                     auto offsets = mCommands.NextData<uint32_t>(cmd->count);
 
-                    auto inputState = ToBackend(lastPipeline->GetInputState());
-
-                    std::array<D3D12_VERTEX_BUFFER_VIEW, kMaxVertexInputs> d3d12BufferViews;
                     for (uint32_t i = 0; i < cmd->count; ++i) {
-                        auto input = inputState->GetInput(cmd->startSlot + i);
                         Buffer* buffer = ToBackend(buffers[i].Get());
-                        d3d12BufferViews[i].BufferLocation = buffer->GetVA() + offsets[i];
-                        d3d12BufferViews[i].StrideInBytes = input.stride;
-                        d3d12BufferViews[i].SizeInBytes = buffer->GetSize() - offsets[i];
-                    }
+                        D3D12_GPU_VIRTUAL_ADDRESS address = buffer->GetVA() + offsets[i];
+                        uint32_t size = buffer->GetSize() - offsets[i];
 
-                    commandList->IASetVertexBuffers(cmd->startSlot, cmd->count,
-                                                    d3d12BufferViews.data());
+                        uint32_t slot = cmd->startSlot + i;
+                        auto* bufferView = &vertexBuffersInfo.bufferViews[slot];
+                        if (bufferView->BufferLocation != address ||
+                            bufferView->SizeInBytes != size) {
+                            vertexBuffersInfo.dirtySlots.set(slot);
+                        }
+                        bufferView->BufferLocation = address;
+                        bufferView->SizeInBytes = size;
+                        // The bufferView stride is set based on the input state before a draw.
+                    }
                 } break;
 
                 default: { UNREACHABLE(); } break;
