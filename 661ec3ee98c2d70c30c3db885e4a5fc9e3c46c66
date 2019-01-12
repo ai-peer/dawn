@@ -1,0 +1,277 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbb10ca5_a483e171",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "Since there are only two types of things, could we have a toplevel \u0027commands\u0027 dictionary that lists all the commands and likewise a \u0027return commands\u0027 dictionnary?\n\nAlso for now this all they contain is \u0027members\u0027 it might make sense to just have commands be a list of members (instead of a dictionary with a single key that is associated to a list of members). If we expect to add more to the commands dictionaries then forget about this comment :)",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25833e97_5759eb20",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "nit: Maybe we could find a better name for this.",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "090004f6_5ccc6e21",
+        "filename": "generator/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "any(has_dawn_object(member) for member in members)",
+      "range": {
+        "startLine": 112,
+        "startChar": 31,
+        "endLine": 112,
+        "endChar": 106
+      },
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d924b69_52764461",
+        "filename": "generator/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "This isn\u0027t a type. If we want to use inheritance we should probably have a class Record base types that both StructureType and CommandRecord inherit from.",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5491925_3814ad25",
+        "filename": "generator/main.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "I\u0027m not very convinced by the split as it is now but we can figure out a better way later.",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ac61190_3b4b49cb",
+        "filename": "generator/main.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "nit: import common and use common.stuff every time? (maybe importing Name in the local scope makes sense)",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9772dcc_a271dec4",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "We\u0027ll always need to do a copy because the Transfer version will be in shared memory and it\u0027s content could still be changed by a compromised client.",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab4a1830_2293dedf",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "nit: write_record_serialization_helpers?",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b27609c3_a439bc8c",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "I\u0027m not a fan of this (and of is_return_value) but let\u0027s land it for now and remove it when we implement WebGPU error handling, hopefully in the near future.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 18
+      },
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c031d41_f5ca9ddc",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "write_command_serialization_methods",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a61a65d_445f2176",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "nit: this could take only names, and \u0027error callback\u0027 become Name(\u0027error callback\u0027)",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a4ef417_399ec238",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "nit: compute_wire_params",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 21
+      },
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c14a9619_9884b292",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "nit: members could be initialized with this\n members \u003d [RecordMember...]",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a57040d_9022bdf6",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "members +\u003d method.arguments.",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34da7898_9cacf470",
+        "filename": "src/dawn_wire/WireDeserializeAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-12T19:59:34Z",
+      "side": 1,
+      "message": "Could we have the implementation in a C++ file?",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
