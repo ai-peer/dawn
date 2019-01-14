@@ -26,8 +26,10 @@
 #include "dawn_native/Queue.h"
 #include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/RenderPipeline.h"
+#include "dawn_native/RingBuffer.h"
 #include "dawn_native/Sampler.h"
 #include "dawn_native/ShaderModule.h"
+#include "dawn_native/StagingBuffer.h"
 #include "dawn_native/SwapChain.h"
 #include "dawn_native/Texture.h"
 #include "dawn_native/ToBackend.h"
@@ -96,10 +98,20 @@ namespace dawn_native { namespace null {
 
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
+        Serial GetPendingCommandSerial() const override;
         void TickImpl() override;
 
         void AddPendingOperation(std::unique_ptr<PendingOperation> operation);
         void SubmitPendingOperations();
+
+        ResultOrError<StagingBufferBase*> CreateStagingBuffer(size_t size) override;
+        MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
+                                           uint32_t sourceOffset,
+                                           BufferBase* destination,
+                                           uint32_t destinationOffset,
+                                           uint32_t size) override;
+
+        DynamicUploader* GetDynamicUploader(size_t size) const;
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -122,9 +134,12 @@ namespace dawn_native { namespace null {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
+        static constexpr size_t kDefaultUploadBufferSize = 64000;
+
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
         std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
+        std::unique_ptr<DynamicUploader> mDynamicUploader;
     };
 
     class Buffer : public BufferBase {
@@ -184,6 +199,15 @@ namespace dawn_native { namespace null {
         dawnSwapChainError GetNextTexture(dawnSwapChainNextTexture* nextTexture);
         dawnSwapChainError Present();
         dawn::TextureFormat GetPreferredFormat() const;
+    };
+
+    class StagingBuffer : public StagingBufferBase {
+      public:
+        StagingBuffer(size_t size);
+        MaybeError Initialize() override;
+
+      private:
+        std::unique_ptr<uint8_t[]> mBuffer;
     };
 
 }}  // namespace dawn_native::null

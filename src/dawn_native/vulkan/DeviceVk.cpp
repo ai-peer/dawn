@@ -682,4 +682,16 @@ namespace dawn_native { namespace vulkan {
         commands->commandBuffer = VK_NULL_HANDLE;
     }
 
+    ResultOrError<StagingBufferBase*> Device::CreateStagingBuffer(size_t size) {
+        return DAWN_UNIMPLEMENTED_ERROR("Device unable to create staging buffer.");
+    }
+
+    MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               uint32_t sourceOffset,
+                                               BufferBase* destination,
+                                               uint32_t destinationOffset,
+                                               uint32_t size) {
+        return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+    }
+
 }}  // namespace dawn_native::vulkan
