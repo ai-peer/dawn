@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fd2bc664_b65e278f",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbb10ca5_a483e171",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25833e97_5759eb20",
         "filename": "dawn_wire.json",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2019-01-12T19:59:34Z",
       "side": 1,
       "message": "nit: Maybe we could find a better name for this.",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe2ec648_02195f96",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "\"custom_impl\"?",
+      "parentUuid": "25833e97_5759eb20",
       "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "4f1638c1_61de394e",
+        "filename": "generator/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "090004f6_5ccc6e21",
+      "range": {
+        "startLine": 112,
+        "startChar": 31,
+        "endLine": 112,
+        "endChar": 106
+      },
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d924b69_52764461",
         "filename": "generator/common.py",
         "patchSetId": 6
@@ -73,6 +133,24 @@
       "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a91f37f4_182e24ad",
+        "filename": "generator/common.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d924b69_52764461",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "a53da1d9_5505faaa",
+        "filename": "generator/main.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5491925_3814ad25",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ac61190_3b4b49cb",
         "filename": "generator/main.py",
         "patchSetId": 6
@@ -107,6 +203,24 @@
       "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7071a8d4_d5f0a2c7",
+        "filename": "generator/main.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ac61190_3b4b49cb",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "99deca4d_c6c4df89",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b9772dcc_a271dec4",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab4a1830_2293dedf",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 6
@@ -141,6 +273,24 @@
       "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd0b39dd_cfb3d585",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab4a1830_2293dedf",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +317,30 @@
     },
     {
       "key": {
+        "uuid": "e08a35ae_86587ff6",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b27609c3_a439bc8c",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 18
+      },
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c031d41_f5ca9ddc",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 6
@@ -184,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "dd5f9eb9_4da73246",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c031d41_f5ca9ddc",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a61a65d_445f2176",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 6
@@ -198,6 +390,24 @@
       "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36cdaed2_eb3a0a70",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a61a65d_445f2176",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -224,6 +434,30 @@
     },
     {
       "key": {
+        "uuid": "f77ec25c_4a21e725",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4ef417_399ec238",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 21
+      },
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c14a9619_9884b292",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 6
@@ -238,6 +472,24 @@
       "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd47f85c_617bb482",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c14a9619_9884b292",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -258,6 +510,24 @@
     },
     {
       "key": {
+        "uuid": "b046df67_25f2c7ca",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a57040d_9022bdf6",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34da7898_9cacf470",
         "filename": "src/dawn_wire/WireDeserializeAllocator.h",
         "patchSetId": 6
@@ -272,6 +542,24 @@
       "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1e58014_808cf043",
+        "filename": "src/dawn_wire/WireDeserializeAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34da7898_9cacf470",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

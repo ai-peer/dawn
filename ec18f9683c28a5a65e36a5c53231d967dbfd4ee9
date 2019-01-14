@@ -16,6 +16,24 @@
       "revId": "ec18f9683c28a5a65e36a5c53231d967dbfd4ee9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9fa19d2_7e13e9ec",
+        "filename": "generator/templates/dawn_wire/WireServer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T21:55:56Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "3e83bcc1_1bc38dba",
+      "revId": "ec18f9683c28a5a65e36a5c53231d967dbfd4ee9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
