@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "52864634_79efd108",
+        "filename": "generator/main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-14T17:14:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7490319_f492ceb0",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "759fe827_847b7605",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "61991375_761b21b1",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-14T17:14:26Z",
+      "side": 1,
+      "message": "Ah. I forgot to send this out.\n\nCorentin/Kai/Austin, do you know how to allocate such a pointerArray? It is a pointer to an array of pointers, its type is \u0027{{as_cType(member.type.name)}}**. It is an array with \u0027memberLength\u0027 of \u0027{{as_cType(member.type.name)}}*\u0027. \n\nI am not familiar with Jinja. It seems to me that the jinja template is quite different from C++ (even though this file is a .cpp file), because I tried to use alloc(), it doesn\u0027t work. \n\nBTW, if anyone of you from Google side like Austin can take this patch. I am OK.",
+      "parentUuid": "759fe827_847b7605",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7361e17_1a64bc60",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 1
@@ -68,6 +104,24 @@
       "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ce348ed_c053ee4a",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-14T17:14:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7361e17_1a64bc60",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
