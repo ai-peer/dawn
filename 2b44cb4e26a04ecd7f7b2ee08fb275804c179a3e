@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "c36d73ed_a40803a6",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-14T18:32:33Z",
+      "side": 1,
+      "message": "You\u0027ll need to allocate another array for the pointers using |GetSpace|.\n\nSomething like:\n\n{{as_cType(member.type.name)}}** pointerArray \u003d nullptr;\nDESERIALIZE_TRY(GetSpace(allocator, memberLength, \u0026pointerArray));\nrecord-\u003e{{memberName}} \u003d pointerArray;\n\nThe size of that array will also need to be added to the result in {{name}}GetExtraRequiredSize",
+      "parentUuid": "61991375_761b21b1",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7361e17_1a64bc60",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 1
