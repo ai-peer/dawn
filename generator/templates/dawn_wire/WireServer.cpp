@@ -338,6 +338,7 @@ namespace dawn_wire {
                     // Skip sending the callback if the buffer has already been destroyed.
                     auto* bufferData = mKnownBuffer.Get(data->bufferId);
                     if (bufferData == nullptr || bufferData->serial != data->bufferSerial) {
+                        delete data;
                         return;
                     }
 
