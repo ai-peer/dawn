@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3492294a_c341e253",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "client_handwritten_commands?",
+      "range": {
+        "startLine": 77,
+        "startChar": 9,
+        "endLine": 77,
+        "endChar": 31
+      },
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fda411e_4231dd09",
+        "filename": "generator/templates/dawn_wire/client/WireClientBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "We could drop \"Wire\" from the name of classes and files because we are in dawn_wire. Also things that aren\u0027t the client but are in the client namespace don\u0027t need to have Client in their names.",
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e25d4e3_fca71e20",
+        "filename": "generator/templates/dawn_wire/client/WireClientBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "This could be using a forward declaration instead.",
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f72a812_b3abbc2a",
+        "filename": "generator/templates/dawn_wire/client/WireClientBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be stored. It could be passed as a constructor argument.",
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bd1eb82_806ffa0a",
+        "filename": "generator/templates/dawn_wire/client/WireClientBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "When this isn\u0027t a template anymore, the code would go in ClientBase.cpp",
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc2e123d_ddc95b7e",
+        "filename": "src/dawn_wire/client/WireClient.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "This file and its .cpp would be named ClientImpl,",
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "000eb07c_91d0ba0e",
+        "filename": "src/dawn_wire/client/WireClient.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "this would disappear.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 6
+      },
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "021871cc_c24497dd",
+        "filename": "src/include/dawn_wire/Client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "nit: the procs and the device could now be exposed as getters.",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 55
+      },
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a58e62a_e6a61a39",
+        "filename": "src/include/dawn_wire/Client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "nit: ClientImpl and the WireClient can be renamed to ClientImpl.",
+      "range": {
+        "startLine": 32,
+        "startChar": 24,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a7ed4a8_f7c91824",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T17:24:47Z",
+      "side": 1,
+      "message": "nit: we could remove this using namespace.",
+      "revId": "0c47c45e3a35591490643d575b33dabfc4ccfebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
