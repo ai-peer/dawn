@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2792646d_985effdc",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40047eb2_99d09d2b",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 49
+      },
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "269982c3_4501664e",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "dd69c93d_fd8d8109",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "269982c3_4501664e",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7134332_fff29cfc",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82f3c586_27d7da34",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7134332_fff29cfc",
+      "range": {
+        "startLine": 35,
+        "startChar": 61,
+        "endLine": 35,
+        "endChar": 65
+      },
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "59884eeb_63b5acb0",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "RingBufferBase is now split into RingBuffer and StagingBuffer[Base|Backend].",
+      "parentUuid": "cc526f72_743618cf",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "109b0662_f459019c",
         "filename": "src/dawn_native/RingBuffer.h",
         "patchSetId": 8
@@ -116,6 +206,24 @@
       "writtenOn": "2019-01-07T13:04:10Z",
       "side": 1,
       "message": "nit: the mappedPointer could be provided in the constructor and stored as a member. This would avoid the need for [1]",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb5bf3bd_2d7f9c60",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "The mappedBuffer pointer was moved to be initialized explicitly such that if should fail (e.g. device reset), we could detect it and return an error (rather than fail in the ctor).",
+      "parentUuid": "109b0662_f459019c",
       "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -139,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "16005468_9cbbf939",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d518e09b_bd66ae17",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e642a069_bf2a82ed",
         "filename": "src/dawn_native/d3d12/ResourceUploader.cpp",
         "patchSetId": 8
@@ -153,6 +279,24 @@
       "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb29a5dc_5848d358",
+        "filename": "src/dawn_native/d3d12/ResourceUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Removed backend-specific \"uploaders\".",
+      "parentUuid": "e642a069_bf2a82ed",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "07cf0c72_67dc36ca",
+        "filename": "src/dawn_native/d3d12/RingBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c361ed4_d054c4d7",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "644367a9_f9947752",
         "filename": "src/dawn_native/vulkan/BufferUploader.cpp",
         "patchSetId": 8
@@ -190,6 +352,24 @@
     },
     {
       "key": {
+        "uuid": "5513e0a3_2018e167",
+        "filename": "src/dawn_native/vulkan/BufferUploader.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Will revisit (layering this CL per request).",
+      "parentUuid": "644367a9_f9947752",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08289342_9e95e073",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 8
@@ -204,6 +384,24 @@
       "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "029911b6_e04cc218",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-14T23:55:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "08289342_9e95e073",
+      "revId": "97d6daa3e6018df19d617a79e5ce7ae531483282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
