@@ -52,7 +52,11 @@
         {% set Optional = "Optional" if member.optional else "" %}
         {{out}} = provider.Get{{Optional}}Id({{in}});
     {% elif member.type.category == "structure"%}
-        {{as_cType(member.type.name)}}Serialize({{in}}, &{{out}}, buffer, provider);
+        {% if member.annotation == "const*const*" %}
+            {{as_cType(member.type.name)}}Serialize(*{{in}}, &{{out}}, buffer, provider);
+        {% else %}
+            {{as_cType(member.type.name)}}Serialize({{in}}, &{{out}}, buffer, provider);
+        {% endif %}
     {%- else -%}
         {{out}} = {{in}};
     {%- endif -%}
@@ -130,7 +134,11 @@
                 //* Structures might contain more pointers so we need to add their extra size as well.
                 {% if member.type.category == "structure" %}
                     for (size_t i = 0; i < memberLength; ++i) {
-                        result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}}[i]);
+                        {% if member.annotation == "const*const*" %}
+                            result += {{as_cType(member.type.name)}}GetExtraRequiredSize(*record.{{as_varName(member.name)}}[i]);
+                        {% else %}
+                            result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}}[i]);
+                        {% endif %}
                     }
                 {% endif %}
             }
@@ -260,7 +268,11 @@
 
                 {{as_cType(member.type.name)}}* copiedMembers = nullptr;
                 DESERIALIZE_TRY(GetSpace(allocator, memberLength, &copiedMembers));
-                record->{{memberName}} = copiedMembers;
+                {% if member.annotation == "const*const*" %}
+                    record->{{memberName}} = &copiedMembers;
+                {% else %}
+                    record->{{memberName}} = copiedMembers;
+                {% endif %}
 
                 for (size_t i = 0; i < memberLength; ++i) {
                     {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]")}}
