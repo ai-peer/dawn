@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "ba0c9d76_591e14c2",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-14T18:33:29Z",
+      "side": 1,
+      "message": "(and pointerArray filled with pointers to each element of copiedMembers)",
+      "parentUuid": "c36d73ed_a40803a6",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7361e17_1a64bc60",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 1
