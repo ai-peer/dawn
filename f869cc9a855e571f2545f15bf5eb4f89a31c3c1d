@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8e795c_94c290f7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T02:05:15Z",
+      "side": 1,
+      "message": "This name could probably be more descriptive, specifically it\u0027s not obvious that it \"flushes\" the VertexBuffersInfo object. FlushVertexBuffersInfo? FlushSetVertexBuffers? I don\u0027t know.",
+      "range": {
+        "startLine": 423,
+        "startChar": 24,
+        "endLine": 423,
+        "endChar": 40
+      },
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bcf5051_8452464b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T02:05:15Z",
+      "side": 1,
+      "message": "d3d12BufferView here too?",
+      "range": {
+        "startLine": 669,
+        "startChar": 30,
+        "endLine": 669,
+        "endChar": 40
+      },
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b7c62cf_51c18862",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T02:05:15Z",
+      "side": 1,
+      "message": "Maybe it could be set to an invalid value here to make sure we don\u0027t forget to set it later?",
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "910ff9df_2f710a48",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T02:05:15Z",
+      "side": 1,
+      "message": "I\u0027d probably keep the d3d12 prefix here to keep it distinct from dawn bufferviews",
+      "range": {
+        "startLine": 35,
+        "startChar": 63,
+        "endLine": 35,
+        "endChar": 74
+      },
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
