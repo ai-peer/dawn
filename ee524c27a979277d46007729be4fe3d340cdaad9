@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8531b386_749f3f10",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-15T17:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c67aa09b_3ffcecc5",
+      "revId": "ee524c27a979277d46007729be4fe3d340cdaad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa6034e7_914da6ea",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 8
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "8184190b_3801e943",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-15T17:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa6034e7_914da6ea",
+      "range": {
+        "startLine": 37,
+        "startChar": 54,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "ee524c27a979277d46007729be4fe3d340cdaad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7ea18f1_663ea092",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 8
@@ -56,6 +98,24 @@
       "revId": "ee524c27a979277d46007729be4fe3d340cdaad9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4fbcee2_a5f98993",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-15T17:33:30Z",
+      "side": 1,
+      "message": "It\u0027s not really an error. There\u0027s FenceGetCompletedValue which returns a uint64_t. We just don\u0027t generate wire stuff for that command. It\u0027s manually implemented client-side.",
+      "parentUuid": "d7ea18f1_663ea092",
+      "revId": "ee524c27a979277d46007729be4fe3d340cdaad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
