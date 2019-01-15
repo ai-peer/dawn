@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20caa741_528693c7",
+        "filename": "generator/common.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T19:21:21Z",
+      "side": 1,
+      "message": "nit: this change should be in a follow-up patch",
+      "revId": "dde1be38af61638caf028ceb094e3133e7d682eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4576c68f_ea7362c2",
+        "filename": "src/dawn_wire/client/ApiObjects.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T19:21:21Z",
+      "side": 1,
+      "message": "comment is out of date, was it a functional change?",
+      "revId": "dde1be38af61638caf028ceb094e3133e7d682eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2edf1adf_1402216f",
+        "filename": "src/dawn_wire/client/ClientImpl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T19:21:21Z",
+      "side": 1,
+      "message": "nit: namespaces on the same line so there is no double indentation. (you can reopen the namespace for the function that\u0027s in dawn_wire:: directly.)",
+      "revId": "dde1be38af61638caf028ceb094e3133e7d682eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3686237_9f525987",
+        "filename": "src/dawn_wire/client/ClientImpl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T19:21:21Z",
+      "side": 1,
+      "message": "These should probably go in a different files \"ClientManualAPI.cpp\" or a better name.",
+      "revId": "dde1be38af61638caf028ceb094e3133e7d682eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
