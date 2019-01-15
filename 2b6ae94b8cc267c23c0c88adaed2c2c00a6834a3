@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "117db146_eeb65799",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T02:43:24Z",
+      "side": 1,
+      "message": "Would it be possible to put these new EXPECTs inside the Get* functions? (I don\u0027t think they EXPECTs have to be in order, so this could possibly cover every case automatically.)",
+      "range": {
+        "startLine": 212,
+        "startChar": 52,
+        "endLine": 212,
+        "endChar": 78
+      },
+      "revId": "2b6ae94b8cc267c23c0c88adaed2c2c00a6834a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
