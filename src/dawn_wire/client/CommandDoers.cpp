@@ -12,44 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "common/Assert.h"
 #include "dawn_wire/client/ClientImpl.h"
-#include "dawn_wire/client/Device_autogen.h"
 
 namespace dawn_wire { namespace client {
-
-    bool ClientImpl::HandleDeviceErrorCallback(const char** commands, size_t* size) {
-        ReturnDeviceErrorCallbackCmd cmd;
-        DeserializeResult deserializeResult = cmd.Deserialize(commands, size, &mAllocator);
-
-        if (deserializeResult == DeserializeResult::FatalError) {
-            return false;
-        }
-
-        DAWN_ASSERT(cmd.message != nullptr);
-        mDevice->HandleError(cmd.message);
-
+    bool ClientImpl::DoDeviceErrorCallback(const char* message) {
+        mDevice->HandleError(message);
         return true;
     }
 
-    bool ClientImpl::HandleBufferMapReadAsyncCallback(const char** commands, size_t* size) {
-        ReturnBufferMapReadAsyncCallbackCmd cmd;
-        DeserializeResult deserializeResult = cmd.Deserialize(commands, size, &mAllocator);
-
-        if (deserializeResult == DeserializeResult::FatalError) {
-            return false;
-        }
-
-        auto* buffer = mDevice->buffer.GetObject(cmd.buffer.id);
-        uint32_t bufferSerial = mDevice->buffer.GetSerial(cmd.buffer.id);
-
+    bool ClientImpl::DoBufferMapReadAsyncCallback(Buffer* buffer,
+                                                  uint32_t requestSerial,
+                                                  uint32_t status,
+                                                  uint32_t count,
+                                                  const uint8_t* data) {
         // The buffer might have been deleted or recreated so this isn't an error.
-        if (buffer == nullptr || bufferSerial != cmd.buffer.serial) {
+        if (!buffer) {
             return true;
         }
 
         // The requests can have been deleted via an Unmap so this isn't an error.
-        auto requestIt = buffer->requests.find(cmd.requestSerial);
+        auto requestIt = buffer->requests.find(requestSerial);
         if (requestIt == buffer->requests.end()) {
             return true;
         }
@@ -66,14 +48,14 @@ namespace dawn_wire { namespace client {
 
         // On success, we copy the data locally because the IPC buffer isn't valid outside of this
         // function
-        if (cmd.status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
+        if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
             // The server didn't send the right amount of data, this is an error and could cause
             // the application to crash if we did call the callback.
-            if (request.size != cmd.dataLength) {
+            if (request.size != count) {
                 return false;
             }
 
-            ASSERT(cmd.data != nullptr);
+            ASSERT(data != nullptr);
 
             if (buffer->mappedData != nullptr) {
                 return false;
@@ -82,36 +64,28 @@ namespace dawn_wire { namespace client {
             buffer->isWriteMapped = false;
             buffer->mappedDataSize = request.size;
             buffer->mappedData = malloc(request.size);
-            memcpy(buffer->mappedData, cmd.data, request.size);
+            memcpy(buffer->mappedData, data, request.size);
 
-            request.readCallback(static_cast<dawnBufferMapAsyncStatus>(cmd.status),
-                                 buffer->mappedData, request.userdata);
+            request.readCallback(static_cast<dawnBufferMapAsyncStatus>(status), buffer->mappedData,
+                                 request.userdata);
         } else {
-            request.readCallback(static_cast<dawnBufferMapAsyncStatus>(cmd.status), nullptr,
+            request.readCallback(static_cast<dawnBufferMapAsyncStatus>(status), nullptr,
                                  request.userdata);
         }
 
         return true;
     }
 
-    bool ClientImpl::HandleBufferMapWriteAsyncCallback(const char** commands, size_t* size) {
-        ReturnBufferMapWriteAsyncCallbackCmd cmd;
-        DeserializeResult deserializeResult = cmd.Deserialize(commands, size, &mAllocator);
-
-        if (deserializeResult == DeserializeResult::FatalError) {
-            return false;
-        }
-
-        auto* buffer = mDevice->buffer.GetObject(cmd.buffer.id);
-        uint32_t bufferSerial = mDevice->buffer.GetSerial(cmd.buffer.id);
-
+    bool ClientImpl::DoBufferMapWriteAsyncCallback(Buffer* buffer,
+                                                   uint32_t requestSerial,
+                                                   uint32_t status) {
         // The buffer might have been deleted or recreated so this isn't an error.
-        if (buffer == nullptr || bufferSerial != cmd.buffer.serial) {
+        if (!buffer) {
             return true;
         }
 
         // The requests can have been deleted via an Unmap so this isn't an error.
-        auto requestIt = buffer->requests.find(cmd.requestSerial);
+        auto requestIt = buffer->requests.find(requestSerial);
         if (requestIt == buffer->requests.end()) {
             return true;
         }
@@ -128,7 +102,7 @@ namespace dawn_wire { namespace client {
 
         // On success, we copy the data locally because the IPC buffer isn't valid outside of this
         // function
-        if (cmd.status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
+        if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
             if (buffer->mappedData != nullptr) {
                 return false;
             }
@@ -138,35 +112,24 @@ namespace dawn_wire { namespace client {
             buffer->mappedData = malloc(request.size);
             memset(buffer->mappedData, 0, request.size);
 
-            request.writeCallback(static_cast<dawnBufferMapAsyncStatus>(cmd.status),
-                                  buffer->mappedData, request.userdata);
+            request.writeCallback(static_cast<dawnBufferMapAsyncStatus>(status), buffer->mappedData,
+                                  request.userdata);
         } else {
-            request.writeCallback(static_cast<dawnBufferMapAsyncStatus>(cmd.status), nullptr,
+            request.writeCallback(static_cast<dawnBufferMapAsyncStatus>(status), nullptr,
                                   request.userdata);
         }
 
         return true;
     }
 
-    bool ClientImpl::HandleFenceUpdateCompletedValue(const char** commands, size_t* size) {
-        ReturnFenceUpdateCompletedValueCmd cmd;
-        DeserializeResult deserializeResult = cmd.Deserialize(commands, size, &mAllocator);
-
-        if (deserializeResult == DeserializeResult::FatalError) {
-            return false;
-        }
-
-        auto* fence = mDevice->fence.GetObject(cmd.fence.id);
-        uint32_t fenceSerial = mDevice->fence.GetSerial(cmd.fence.id);
-
+    bool ClientImpl::DoFenceUpdateCompletedValue(Fence* fence, uint64_t value) {
         // The fence might have been deleted or recreated so this isn't an error.
-        if (fence == nullptr || fenceSerial != cmd.fence.serial) {
+        if (!fence) {
             return true;
         }
 
-        fence->completedValue = cmd.value;
+        fence->completedValue = value;
         fence->CheckPassedFences();
         return true;
     }
-
 }}  // namespace dawn_wire::client

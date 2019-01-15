@@ -209,9 +209,9 @@ void DawnTest::SetUp() {
             dawn_wire::NewServerCommandHandler(backendDevice, backendProcs, mS2cBuf.get()));
         mC2sBuf->SetHandler(mWireServer.get());
 
-        dawnDevice clientDevice;
-        dawnProcTable clientProcs;
-        mWireClient.reset(new dawn_wire::Client(&clientProcs, &clientDevice, mC2sBuf.get()));
+        mWireClient.reset(new dawn_wire::Client(mC2sBuf.get()));
+        dawnDevice clientDevice = mWireClient->GetDevice();
+        dawnProcTable clientProcs = mWireClient->GetProcs();
         mS2cBuf->SetHandler(mWireClient.get());
 
         procs = clientProcs;

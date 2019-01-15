@@ -24,6 +24,7 @@
 namespace dawn_wire { namespace client {
 
     class Device;
+    class ClientImpl;
 
     struct BuilderCallbackData {
         bool Call(dawnBuilderErrorStatus status, const char* message) {
@@ -43,20 +44,33 @@ namespace dawn_wire { namespace client {
         bool canCall = true;
     };
 
-    // All non-Device objects of the client side have:
-    //  - A pointer to the device to get where to serialize commands
-    //  - The external reference count
-    //  - An ID that is used to refer to this object when talking with the server side
     struct ObjectBase {
         ObjectBase(Device* device, uint32_t refcount, uint32_t id)
             : device(device), refcount(refcount), id(id) {
         }
+
+        ClientImpl* GetClient();
 
         Device* device;
         uint32_t refcount;
         uint32_t id;
 
         BuilderCallbackData builderCallback;
+    };
+
+    class Device : public ObjectBase {
+      public:
+        Device(ClientImpl* client, uint32_t refcount, uint32_t id);
+
+        ClientImpl* GetClient();
+        void HandleError(const char* message);
+        void SetErrorCallback(dawnDeviceErrorCallback errorCallback,
+                              dawnCallbackUserdata errorUserdata);
+
+      private:
+        ClientImpl* mClient = nullptr;
+        dawnDeviceErrorCallback mErrorCallback = nullptr;
+        dawnCallbackUserdata mErrorUserdata;
     };
 
     struct Buffer : ObjectBase {

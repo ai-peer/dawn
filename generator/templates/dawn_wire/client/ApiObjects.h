@@ -15,12 +15,16 @@
 #ifndef DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
 #define DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
 
-namespace dawn_wire { namespace client {
-    {% for type in by_category["object"] if not type.name.CamelCase() in client_special_objects %}
-        struct {{type.name.CamelCase()}} : ObjectBase {
-            using ObjectBase::ObjectBase;
-        };
-    {% endfor %}
-}}  // namespace dawn_wire::client
+#include <dawn/dawn.h>
+
+namespace dawn_wire {
+    namespace client {
+        {% for type in by_category["object"] if not type.name.CamelCase() in client_special_objects %}
+            struct {{type.name.CamelCase()}} : ObjectBase {
+                using ObjectBase::ObjectBase;
+            };
+        {% endfor %}
+    }
+}
 
 #endif  // DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_

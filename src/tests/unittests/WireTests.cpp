@@ -17,13 +17,13 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "dawn_wire/Client.h"
 #include "dawn_wire/Wire.h"
 #include "utils/TerribleCommandBuffer.h"
 
 #include <memory>
 
 using namespace testing;
-using namespace dawn_wire;
 
 // Definition of a "Lambda predicate matcher" for GMock to allow checking deep structures
 // are passed correctly by the wire.
@@ -159,8 +159,9 @@ class WireTestsBase : public Test {
             mWireServer.reset(NewServerCommandHandler(mockDevice, mockProcs, mS2cBuf.get()));
             mC2sBuf->SetHandler(mWireServer.get());
 
-            dawnProcTable clientProcs;
-            mWireClient.reset(NewClientDevice(&clientProcs, &device, mC2sBuf.get()));
+            mWireClient.reset(new dawn_wire::Client(mC2sBuf.get()));
+            dawnProcTable clientProcs = mWireClient->GetProcs();
+            device = mWireClient->GetDevice();
             dawnSetProcs(&clientProcs);
             mS2cBuf->SetHandler(mWireClient.get());
 
@@ -169,6 +170,10 @@ class WireTestsBase : public Test {
 
         void TearDown() override {
             dawnSetProcs(nullptr);
+
+            // Reset client before mocks are deleted.
+            // Incomplete callbacks will be called on deletion, so the mocks cannot be null.
+            mWireClient = nullptr;
 
             // Delete mocks so that expectations are checked
             mockDeviceErrorCallback = nullptr;
@@ -193,8 +198,8 @@ class WireTestsBase : public Test {
     private:
         bool mIgnoreSetCallbackCalls = false;
 
-        std::unique_ptr<CommandHandler> mWireServer;
-        std::unique_ptr<CommandHandler> mWireClient;
+        std::unique_ptr<dawn_wire::CommandHandler> mWireServer;
+        std::unique_ptr<dawn_wire::Client> mWireClient;
         std::unique_ptr<utils::TerribleCommandBuffer> mS2cBuf;
         std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
 };
