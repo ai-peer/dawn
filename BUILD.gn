@@ -736,6 +736,7 @@ source_set("libdawn_wire_headers") {
   ]
   public_configs = [ ":dawn_public" ]
   sources = [
+    "src/include/dawn_wire/Client.h",
     "src/include/dawn_wire/Wire.h",
     "src/include/dawn_wire/dawn_wire_export.h",
   ]
@@ -751,9 +752,10 @@ dawn_generator("libdawn_wire_gen") {
     "dawn_wire/client/ApiObjects_autogen.h",
     "dawn_wire/client/ApiProcs_autogen.cpp",
     "dawn_wire/client/ApiProcs_autogen.h",
+    "dawn_wire/client/ClientBase_autogen.h",
     "dawn_wire/client/ClientPrototypes_autogen.inl",
+    "dawn_wire/client/CommandDoers_autogen.cpp",
     "dawn_wire/client/CommandHandlers_autogen.cpp",
-    "dawn_wire/client/Device_autogen.h",
   ]
 }
 
@@ -773,9 +775,10 @@ dawn_static_and_shared_library("libdawn_wire") {
     "src/dawn_wire/WireDeserializeAllocator.h",
     "src/dawn_wire/client/ApiObjects.cpp",
     "src/dawn_wire/client/ApiObjects.h",
+    "src/dawn_wire/client/ApiProcs.cpp",
     "src/dawn_wire/client/ClientImpl.cpp",
     "src/dawn_wire/client/ClientImpl.h",
-    "src/dawn_wire/client/CommandHandlers.cpp",
+    "src/dawn_wire/client/CommandDoers.cpp",
     "src/dawn_wire/client/ObjectAllocator.h",
   ]
 

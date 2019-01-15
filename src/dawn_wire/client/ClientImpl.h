@@ -15,29 +15,45 @@
 #ifndef DAWNWIRE_CLIENT_CLIENTIMPL_H_
 #define DAWNWIRE_CLIENT_CLIENTIMPL_H_
 
-#include <dawn_wire/Wire.h>
+#include <dawn_wire/Client.h>
 
 #include "dawn_wire/WireCmd_autogen.h"
 #include "dawn_wire/WireDeserializeAllocator.h"
+#include "dawn_wire/client/ClientBase_autogen.h"
 
-namespace dawn_wire { namespace client {
+namespace dawn_wire {
+    namespace client {
 
-    class Device;
+        class ClientImpl : public ClientBase {
+          public:
+            ClientImpl(CommandSerializer* serializer);
+            virtual ~ClientImpl();
 
-    class ClientImpl : public CommandHandler {
-      public:
-        ClientImpl(Device* device);
-        const char* HandleCommands(const char* commands, size_t size);
+            void* GetCmdSpace(size_t size) {
+                return mSerializer->GetCmdSpace(size);
+            }
 
-      private:
+            dawnDevice GetDevice() const;
+            dawnProcTable GetProcs() const;
+            const char* HandleCommands(const char* commands, size_t size);
+
+          private:
 #include "dawn_wire/client/ClientPrototypes_autogen.inl"
 
-        Device* mDevice;
-        WireDeserializeAllocator mAllocator;
+            Device* mDevice;
+            CommandSerializer* mSerializer;
+            WireDeserializeAllocator mAllocator;
+        };
+
+        dawnProcTable GetProcs();
+    }  // namespace client
+
+    class Client::ClientImpl : public client::ClientImpl {
+      public:
+        ClientImpl(CommandSerializer* serializer) : client::ClientImpl(serializer) {
+        }
     };
 
-    dawnProcTable GetProcs();
-
-}}  // namespace dawn_wire::client
+}  // namespace dawn_wire
 
 #endif  // DAWNWIRE_CLIENT_CLIENTIMPL_H_

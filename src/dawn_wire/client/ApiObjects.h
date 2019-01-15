@@ -24,6 +24,7 @@
 namespace dawn_wire { namespace client {
 
     class Device;
+    class ClientImpl;
 
     struct BuilderCallbackData {
         bool Call(dawnBuilderErrorStatus status, const char* message) {
@@ -52,11 +53,28 @@ namespace dawn_wire { namespace client {
             : device(device), refcount(refcount), id(id) {
         }
 
+        ClientImpl* GetClient();
+
         Device* device;
         uint32_t refcount;
         uint32_t id;
 
         BuilderCallbackData builderCallback;
+    };
+
+    class Device : public ObjectBase {
+      public:
+        Device(ClientImpl* client, uint32_t refcount, uint32_t id);
+
+        ClientImpl* GetClient();
+        void HandleError(const char* message);
+        void SetErrorCallback(dawnDeviceErrorCallback errorCallback,
+                              dawnCallbackUserdata errorUserdata);
+
+      private:
+        ClientImpl* mClient = nullptr;
+        dawnDeviceErrorCallback mErrorCallback = nullptr;
+        dawnCallbackUserdata mErrorUserdata;
     };
 
     struct Buffer : ObjectBase {

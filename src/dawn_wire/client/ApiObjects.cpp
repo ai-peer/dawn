@@ -16,6 +16,30 @@
 
 namespace dawn_wire { namespace client {
 
+    ClientImpl* ObjectBase::GetClient() {
+        return device->GetClient();
+    }
+
+    Device::Device(ClientImpl* client, uint32_t refcount, uint32_t id)
+        : ObjectBase(this, refcount, id), mClient(client) {
+    }
+
+    ClientImpl* Device::GetClient() {
+        return mClient;
+    }
+
+    void Device::HandleError(const char* message) {
+        if (mErrorCallback) {
+            mErrorCallback(message, mErrorUserdata);
+        }
+    }
+
+    void Device::SetErrorCallback(dawnDeviceErrorCallback errorCallback,
+                                  dawnCallbackUserdata errorUserdata) {
+        mErrorCallback = errorCallback;
+        mErrorUserdata = errorUserdata;
+    }
+
     Buffer::~Buffer() {
         // Callbacks need to be fired in all cases, as they can handle freeing resources
         // so we call them with "Unknown" status.

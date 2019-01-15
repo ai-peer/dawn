@@ -23,6 +23,7 @@
 #include <dawn/dawncpp.h>
 #include <dawn/dawn_wsi.h>
 #include <dawn_native/DawnNative.h>
+#include <dawn_wire/Client.h>
 #include "GLFW/glfw3.h"
 
 #include <cstring>
@@ -62,7 +63,7 @@ static utils::BackendBinding* binding = nullptr;
 static GLFWwindow* window = nullptr;
 
 static dawn_wire::CommandHandler* wireServer = nullptr;
-static dawn_wire::CommandHandler* wireClient = nullptr;
+static dawn_wire::Client* wireClient = nullptr;
 static utils::TerribleCommandBuffer* c2sBuf = nullptr;
 static utils::TerribleCommandBuffer* s2cBuf = nullptr;
 
@@ -104,9 +105,9 @@ dawn::Device CreateCppDawnDevice() {
                 wireServer = dawn_wire::NewServerCommandHandler(backendDevice, backendProcs, s2cBuf);
                 c2sBuf->SetHandler(wireServer);
 
-                dawnDevice clientDevice;
-                dawnProcTable clientProcs;
-                wireClient = dawn_wire::NewClientDevice(&clientProcs, &clientDevice, c2sBuf);
+                wireClient = new dawn_wire::Client(c2sBuf);
+                dawnDevice clientDevice = wireClient->GetDevice();
+                dawnProcTable clientProcs = wireClient->GetProcs();
                 s2cBuf->SetHandler(wireClient);
 
                 procs = clientProcs;

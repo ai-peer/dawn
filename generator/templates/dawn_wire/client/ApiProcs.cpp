@@ -12,10 +12,8 @@
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
 
-#include "dawn_wire/client/ApiObjects.h"
 #include "dawn_wire/client/ApiProcs_autogen.h"
 #include "dawn_wire/client/ClientImpl.h"
-#include "dawn_wire/client/Device_autogen.h"
 
 namespace dawn_wire {
     namespace client {
@@ -26,15 +24,15 @@ namespace dawn_wire {
 
             {% for method in type.methods %}
                 {% set Suffix = as_MethodSuffix(type.name, method.name) %}
-                {% if Suffix not in client_side_commands %}
+                {% if Suffix not in client_handwritten_commands %}
                     {{as_cType(method.return_type.name)}} Client{{Suffix}}(
                         {{-cType}} cSelf
                         {%- for arg in method.arguments -%}
                             , {{as_annotated_cType(arg)}}
                         {%- endfor -%}
                     ) {
-                        auto self = reinterpret_cast<{{as_wireType(type)}}>(cSelf);
-                        Device* device = self->device;
+                        {{Type}}* self = reinterpret_cast<{{Type}}*>(cSelf);
+
                         {{Suffix}}Cmd cmd;
 
                         //* Create the structure going on the wire on the stack and fill it with the value
@@ -43,7 +41,7 @@ namespace dawn_wire {
 
                         //* For object creation, store the object ID the client will use for the result.
                         {% if method.return_type.category == "object" %}
-                            auto* allocation = self->device->{{method.return_type.name.camelCase()}}.New();
+                            auto* allocation = self->GetClient()->{{method.return_type.name.CamelCase()}}Allocator().New(self->device);
 
                             {% if type.is_builder %}
                                 //* We are in GetResult, so the callback that should be called is the
@@ -53,7 +51,7 @@ namespace dawn_wire {
                                 self->builderCallback.canCall = false;
                             {% endif %}
 
-                            cmd.result = ObjectHandle{allocation->object->id, allocation->serial};
+                            cmd.result = allocation->GetHandle();
                         {% endif %}
 
                         {% for arg in method.arguments %}
@@ -62,8 +60,8 @@ namespace dawn_wire {
 
                         //* Allocate space to send the command and copy the value args over.
                         size_t requiredSize = cmd.GetRequiredSize();
-                        char* allocatedBuffer = static_cast<char*>(device->GetCmdSpace(requiredSize));
-                        cmd.Serialize(allocatedBuffer, *device);
+                        char* allocatedBuffer = static_cast<char*>(self->GetClient()->GetCmdSpace(requiredSize));
+                        cmd.Serialize(allocatedBuffer, *self->GetClient());
 
                         {% if method.return_type.category == "object" %}
                             return reinterpret_cast<{{as_cType(method.return_type.name)}}>(allocation->object.get());
@@ -73,10 +71,12 @@ namespace dawn_wire {
             {% endfor %}
 
             {% if type.is_builder %}
-                void Client{{as_MethodSuffix(type.name, Name("set error callback"))}}({{cType}} cSelf,
-                                                                                      dawnBuilderErrorCallback callback,
-                                                                                      dawnCallbackUserdata userdata1,
-                                                                                      dawnCallbackUserdata userdata2) {
+                void Client{{as_MethodSuffix(type.name, Name("set error callback"))}}(
+                    {{cType}} cSelf,
+                    dawnBuilderErrorCallback callback,
+                    dawnCallbackUserdata userdata1,
+                    dawnCallbackUserdata userdata2) {
+
                     {{Type}}* self = reinterpret_cast<{{Type}}*>(cSelf);
                     self->builderCallback.callback = callback;
                     self->builderCallback.userdata1 = userdata1;
@@ -88,7 +88,7 @@ namespace dawn_wire {
                 //* When an object's refcount reaches 0, notify the server side of it and delete it.
                 void Client{{as_MethodSuffix(type.name, Name("release"))}}({{cType}} cObj) {
                     {{Type}}* obj = reinterpret_cast<{{Type}}*>(cObj);
-                    obj->refcount --;
+                    obj->refcount--;
 
                     if (obj->refcount > 0) {
                         return;
@@ -101,34 +101,26 @@ namespace dawn_wire {
                     cmd.objectId = obj->id;
 
                     size_t requiredSize = cmd.GetRequiredSize();
-                    char* allocatedBuffer = static_cast<char*>(obj->device->GetCmdSpace(requiredSize));
+                    char* allocatedBuffer = static_cast<char*>(obj->GetClient()->GetCmdSpace(requiredSize));
                     cmd.Serialize(allocatedBuffer);
 
-                    obj->device->{{type.name.camelCase()}}.Free(obj);
+                    obj->GetClient()->{{type.name.CamelCase()}}Allocator().Free(obj);
                 }
 
                 void Client{{as_MethodSuffix(type.name, Name("reference"))}}({{cType}} cObj) {
                     {{Type}}* obj = reinterpret_cast<{{Type}}*>(cObj);
-                    obj->refcount ++;
+                    obj->refcount++;
                 }
             {% endif %}
+
         {% endfor %}
 
-        // Some commands don't have a custom wire format, but need to be handled manually to update
-        // some client-side state tracking. For these we have two functions:
-        //  - An autogenerated Client{{suffix}} method that sends the command on the wire
-        //  - A manual ProxyClient{{suffix}} method that will be inserted in the proctable instead of
-        //    the autogenerated one, and that will have to call Client{{suffix}}
         dawnProcTable GetProcs() {
             dawnProcTable table;
             {% for type in by_category["object"] %}
                 {% for method in native_methods(type) %}
                     {% set suffix = as_MethodSuffix(type.name, method.name) %}
-                    {% if suffix in client_proxied_commands %}
-                        table.{{as_varName(type.name, method.name)}} = ProxyClient{{suffix}};
-                    {% else %}
-                        table.{{as_varName(type.name, method.name)}} = Client{{suffix}};
-                    {% endif %}
+                    table.{{as_varName(type.name, method.name)}} = Client{{suffix}};
                 {% endfor %}
             {% endfor %}
             return table;
