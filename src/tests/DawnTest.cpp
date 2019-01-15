@@ -19,6 +19,7 @@
 #include "common/Math.h"
 #include "common/Platform.h"
 #include "dawn_native/DawnNative.h"
+#include "dawn_wire/Client.h"
 #include "dawn_wire/Wire.h"
 #include "utils/BackendBinding.h"
 #include "utils/DawnHelpers.h"
@@ -210,7 +211,7 @@ void DawnTest::SetUp() {
 
         dawnDevice clientDevice;
         dawnProcTable clientProcs;
-        mWireClient.reset(dawn_wire::NewClientDevice(&clientProcs, &clientDevice, mC2sBuf.get()));
+        mWireClient.reset(new dawn_wire::Client(&clientProcs, &clientDevice, mC2sBuf.get()));
         mS2cBuf->SetHandler(mWireClient.get());
 
         procs = clientProcs;
