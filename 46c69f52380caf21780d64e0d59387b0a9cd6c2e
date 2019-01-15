@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2f3433d6_b0dedc05",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-15T08:34:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5591e219_1b390c46",
+      "revId": "46c69f52380caf21780d64e0d59387b0a9cd6c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a301aa8_91008751",
         "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "46c69f52380caf21780d64e0d59387b0a9cd6c2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db89ed8e_d75fde75",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-15T08:34:27Z",
+      "side": 1,
+      "message": "Yes, it isn\u0027t needed. Thanks for comment!",
+      "parentUuid": "9a301aa8_91008751",
+      "revId": "46c69f52380caf21780d64e0d59387b0a9cd6c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "7b61337c_5c645399",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-15T08:34:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3241514_7034205e",
+      "revId": "46c69f52380caf21780d64e0d59387b0a9cd6c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32e5d8ae_af7ee4e2",
         "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "46c69f52380caf21780d64e0d59387b0a9cd6c2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9ade784_f625c30f",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-15T08:34:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32e5d8ae_af7ee4e2",
+      "revId": "46c69f52380caf21780d64e0d59387b0a9cd6c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -16,6 +16,24 @@
       "revId": "ec18f9683c28a5a65e36a5c53231d967dbfd4ee9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "672e361c_e95041a9",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-15T08:34:27Z",
+      "side": 0,
+      "message": "I validated both drawPrimitives and drawIndexedPrimitives in Metal, there will be nothing if we draw triangles with a single vertex or two vertexes, it must be a multiple of three for triangle type. If we want to draw two triangles with 5 vertexes, only first one will be drawn. Same behavior in D3D12 and Vulkan.",
+      "parentUuid": "561a4d0b_e61e2945",
+      "revId": "ec18f9683c28a5a65e36a5c53231d967dbfd4ee9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
