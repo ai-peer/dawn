@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c67aa09b_3ffcecc5",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T04:14:16Z",
+      "side": 1,
+      "message": "I\u0027d leave these merged together ({% for ... if ... %}) just to match the one below on L105",
+      "revId": "ee524c27a979277d46007729be4fe3d340cdaad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa6034e7_914da6ea",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T04:14:16Z",
+      "side": 1,
+      "message": "uNit: \"\" -\u003e \u0027\u0027 to match",
+      "range": {
+        "startLine": 37,
+        "startChar": 54,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "ee524c27a979277d46007729be4fe3d340cdaad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7ea18f1_663ea092",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-15T04:14:16Z",
+      "side": 1,
+      "message": "is this an error? can this throw instead?",
+      "revId": "ee524c27a979277d46007729be4fe3d340cdaad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
