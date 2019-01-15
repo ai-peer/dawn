@@ -13,10 +13,41 @@
 // limitations under the License.
 
 #include "tests/unittests/validation/ValidationTest.h"
-
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
 class CommandBufferValidationTest : public ValidationTest {
+    protected:
+        void SetUp() override {
+            ValidationTest::SetUp();
+
+            renderPass = CreateSimpleRenderPass();
+        }
+
+        dawn::RenderPipeline MakeRenderPipeline() {
+            dawn::ShaderModule vsModule =
+                utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
+                    #version 450
+                    void main() {
+                        gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+                    })");
+
+            dawn::ShaderModule fsModule =
+                utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
+                    #version 450
+                    layout(location = 0) out vec4 fragColor;
+                    void main() {
+                        fragColor = vec4(0.0, 1.0, 0.0, 1.0);
+                    })");
+
+            utils::ComboRenderPipelineDescriptor descriptor(device);
+            descriptor.cVertexStage.module = vsModule;
+            descriptor.cFragmentStage.module = fsModule;
+
+            return device.CreateRenderPipeline(&descriptor);
+        }
+
+        dawn::RenderPassDescriptor renderPass;
 };
 
 // Test for an empty command buffer
@@ -27,12 +58,10 @@ TEST_F(CommandBufferValidationTest, Empty) {
 
 // Test that a command buffer cannot be ended mid render pass
 TEST_F(CommandBufferValidationTest, EndedMidRenderPass) {
-    dawn::RenderPassDescriptor renderpass = CreateSimpleRenderPass();
-
     // Control case, command buffer ended after the pass is ended.
     {
         dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
-        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
         pass.EndPass();
         builder.GetResult();
     }
@@ -40,7 +69,7 @@ TEST_F(CommandBufferValidationTest, EndedMidRenderPass) {
     // Error case, command buffer ended mid-pass.
     {
         dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
-        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
         builder.GetResult();
     }
 
@@ -48,7 +77,7 @@ TEST_F(CommandBufferValidationTest, EndedMidRenderPass) {
     // should fail too.
     {
         dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
-        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
         builder.GetResult();
         // TODO(cwallez@chromium.org) this should probably be a device error, but currently it
         // produces a builder error.
@@ -87,12 +116,10 @@ TEST_F(CommandBufferValidationTest, EndedMidComputePass) {
 
 // Test that a render pass cannot be ended twice
 TEST_F(CommandBufferValidationTest, RenderPassEndedTwice) {
-    dawn::RenderPassDescriptor renderpass = CreateSimpleRenderPass();
-
     // Control case, pass is ended once
     {
         dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
-        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
         pass.EndPass();
         builder.GetResult();
     }
@@ -100,7 +127,7 @@ TEST_F(CommandBufferValidationTest, RenderPassEndedTwice) {
     // Error case, pass ended twice
     {
         dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
-        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
         pass.EndPass();
         // TODO(cwallez@chromium.org) this should probably be a device error, but currently it
         // produces a builder error.
@@ -142,8 +169,7 @@ TEST_F(CommandBufferValidationTest, BufferWithMultipleReadUsage) {
     // Use the buffer as both index and vertex in the same pass
     uint32_t zero = 0;
     dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
-    auto renderpass = CreateSimpleRenderPass();
-    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
+    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
     pass.SetIndexBuffer(buffer, 0);
     pass.SetVertexBuffers(0, 1, &buffer, &zero);
     pass.EndPass();
@@ -166,8 +192,7 @@ TEST_F(CommandBufferValidationTest, BufferWithReadAndWriteUsage) {
 
     // Use the buffer as both index and storage in the same pass
     dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
-    auto renderpass = CreateSimpleRenderPass();
-    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
+    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
     pass.SetIndexBuffer(buffer, 0);
     pass.SetBindGroup(0, bg);
     pass.EndPass();
@@ -210,5 +235,72 @@ TEST_F(CommandBufferValidationTest, TextureWithReadAndWriteUsage) {
     dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
     pass.SetBindGroup(0, bg);
     pass.EndPass();
+    builder.GetResult();
+}
+
+// Test that the instance count of draw must be non-zero
+TEST_F(CommandBufferValidationTest, DrawWithInstanceCountNonZero) {
+    dawn::RenderPipeline pipeline = MakeRenderPipeline();
+    // Control case, set instance count of draw to 1.
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
+    {
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
+        pass.SetPipeline(pipeline);
+        pass.Draw(1, 1, 0, 0);
+        pass.EndPass();
+    }
+    builder.GetResult();
+
+    // Error case, set instance count of draw to 0.
+    builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+    {
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
+        pass.SetPipeline(pipeline);
+        pass.Draw(1, 0, 0, 0);
+        pass.EndPass();
+    }
+    builder.GetResult();
+}
+
+// Test that the index count and instance count of drawindexed must be non-zero
+TEST_F(CommandBufferValidationTest, DrawIndexedWithIndexCountAndInstanceCountNonZero) {
+    dawn::RenderPipeline pipeline = MakeRenderPipeline();
+
+    dawn::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.usage = dawn::BufferUsageBit::Index;
+    bufferDescriptor.size = 4;
+    dawn::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    // Control case, set index count and instance count of drawindexed to 1.
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
+    {
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
+        pass.SetPipeline(pipeline);
+        pass.SetIndexBuffer(buffer, 0);
+        pass.DrawIndexed(1, 1, 0, 0, 0);
+        pass.EndPass();
+    }
+    builder.GetResult();
+
+    // Error case, set index count of drawindexed to 0.
+    builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+    {
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
+        pass.SetPipeline(pipeline);
+        pass.SetIndexBuffer(buffer, 0);
+        pass.DrawIndexed(0, 1, 0, 0, 0);
+        pass.EndPass();
+    }
+    builder.GetResult();
+
+    // Error case, set instance count of drawindexed to 0.
+    builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+    {
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
+        pass.SetPipeline(pipeline);
+        pass.SetIndexBuffer(buffer, 0);
+        pass.DrawIndexed(1, 0, 0, 0, 0);
+        pass.EndPass();
+    }
     builder.GetResult();
 }
