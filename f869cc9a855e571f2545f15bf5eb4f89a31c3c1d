@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5f2969aa_1dc4fd6d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-15T03:07:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce8e795c_94c290f7",
+      "range": {
+        "startLine": 423,
+        "startChar": 24,
+        "endLine": 423,
+        "endChar": 40
+      },
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bcf5051_8452464b",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9d9e82a5_0a2193c2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-15T03:07:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bcf5051_8452464b",
+      "range": {
+        "startLine": 669,
+        "startChar": 30,
+        "endLine": 669,
+        "endChar": 40
+      },
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b7c62cf_51c18862",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 9
@@ -62,6 +110,24 @@
       "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0c11f76_b848c4ee",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-15T03:07:03Z",
+      "side": 1,
+      "message": "Not really sure what would be invalid. The size of the buffer view? Don\u0027t really think it\u0027s that necessary though.",
+      "parentUuid": "8b7c62cf_51c18862",
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -85,6 +151,30 @@
       "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97dfd49_49964416",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-15T03:07:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "910ff9df_2f710a48",
+      "range": {
+        "startLine": 35,
+        "startChar": 63,
+        "endLine": 35,
+        "endChar": 74
+      },
+      "revId": "f869cc9a855e571f2545f15bf5eb4f89a31c3c1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
