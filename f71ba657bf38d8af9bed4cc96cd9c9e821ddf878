@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "424a8328_3c132182",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T02:51:23Z",
+      "side": 1,
+      "message": "It would be nice to have some comments here as well.\n\nI\u0027m worried about the cost of all this compared to other approaches but we\u0027ll wait to see what profiling real apps says.",
+      "revId": "f71ba657bf38d8af9bed4cc96cd9c9e821ddf878",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "407735f4_539e45c2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T02:51:23Z",
+      "side": 1,
+      "message": "It would be nice to have some comments that explain that start and end are the \"dirty range\" if we can have a single dirty range.",
+      "revId": "f71ba657bf38d8af9bed4cc96cd9c9e821ddf878",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
