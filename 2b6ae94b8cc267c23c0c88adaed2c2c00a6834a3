@@ -22,6 +22,30 @@
       "revId": "2b6ae94b8cc267c23c0c88adaed2c2c00a6834a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9df06332_37e25ba7",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-15T05:55:23Z",
+      "side": 1,
+      "message": "This is a good idea, Kai. But the release function in EXPECTs need the new created object name, which is manually named by the caller (like \u0027apiCmdBufBuilder\u0027 here). We don\u0027t know the name inside GetNew****().",
+      "parentUuid": "117db146_eeb65799",
+      "range": {
+        "startLine": 212,
+        "startChar": 52,
+        "endLine": 212,
+        "endChar": 78
+      },
+      "revId": "2b6ae94b8cc267c23c0c88adaed2c2c00a6834a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
