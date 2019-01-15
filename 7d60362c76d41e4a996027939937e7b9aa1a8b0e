@@ -1,0 +1,464 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b50d18f_05782b50",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "did you mean to add this to Buffer.cpp instead?",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd2072b2_c99bb425",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t used in this CL.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfe0f355_82dd6134",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "TODO: need to think about this.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f49b6362_63c6fad2",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "This should use DAWN_TRY and CreateAndAppendBuffer should return MaybeError. Basically Error.h error handling should allow use to bubble all errors that can\u0027t be recovered all the way to BufferBase::SetSubData",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9401a245_96f09b86",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "Imagine mRingBuffers contains 4 elements and of which only one is empty: this code will move 2 at index one, and the next iteration will have i \u003d 2, looking the ringbuffer that was originally at index 3 and skipping the ringbuffer originally at index two.\n\nSince the DynamicUploader uses ever-growing buffers and never re-uses a smaller buffer, we could  probably have a single ringbuffer member, as well as a SerialQueue of ringbuffers pending deletion.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c36f60a_de6acbe0",
+        "filename": "src/dawn_native/DynamicUploader.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: put the implementation in the cpp.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdb9fcfe_30497b44",
+        "filename": "src/dawn_native/DynamicUploader.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: ditto + the name should be IsEmpty()",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cc1da55_b3280699",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "This should produce an error because size_t is unsigned, please use numeric_limits::max",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98e90365_22578bed",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: if this fails, stagingBuffer is leaked. Maybe CreateStagingBuffer should return a unique_ptr? Not sure.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "724b9a94_f87dae80",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: we spell out auto when it is for simple types.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "641642af_84e92352",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: Can\u0027t the offset be added to mappedBuffer so that UploadHandle is just a uint8_t*?",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcfa26ad_ce0c4276",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: the size should probably be given in the constructor.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4f1537b_a522d0bb",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "Can methods used only for testing be in a separate block and called out as such?",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65901c1d_5293fe78",
+        "filename": "src/dawn_native/StagingBuffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: const and it could be a private member too since the child classes can use GetSize()",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 14
+      },
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07d159f2_050e3408",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "SetSubDataImpl should probably return MaybeError.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6967018a_b0d623d9",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "This transition should be in CopyFromStagingToBuffer instead.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cb39108_b19ddab1",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "Just to be sure: you\u0027ll copy paste this code in each backend until they are all ported to the DynamicUploader and then remove SetSubDataImpl and put it in Buffer.cpp? The only difference between the backends would be kDefaultUploadBufferSize and kDefaultAlignment that could be capabilities exposed by the backend or even frontend constants that the backend static_asserts against.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6000e127_add1e6c4",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "Allocate should probably return a ResultOrError too.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "223e9bf6_1b511c2e",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "Since SetSubDataImpl will return a MaybeError, the consumedError would happen in BufferBase::SetSubData",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9256a6a7_02098bdc",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "I think this will be a constraint on the API side eventually, see https://bugs.chromium.org/p/dawn/issues/detail?id\u003d73",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d5b3d87_b102871f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "ToBackend",
+      "range": {
+        "startLine": 345,
+        "startChar": 12,
+        "endLine": 345,
+        "endChar": 45
+      },
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d10b193_3bd0f9af",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: We could add a ToBackend implementation for StagingBuffer as well.",
+      "range": {
+        "startLine": 346,
+        "startChar": 12,
+        "endLine": 346,
+        "endChar": 47
+      },
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45534a23_9a3bbd6e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: I assume this will be on DeviceBase once all the backends are ported? Also as mentioned in another comment, it would probably not have the \"size argument\"",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "557d6174_ae7b7017",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "Actually this should be easy to implement in the NullBackend with a memcpy.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d2f263b_29cc78dc",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: I think you are missing the same change for metal::Device.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e086d0c_5c71aa77",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T20:13:49Z",
+      "side": 1,
+      "message": "nit: This will fail on Vulkan currently.",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
