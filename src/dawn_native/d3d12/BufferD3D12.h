@@ -44,6 +44,11 @@ namespace dawn_native { namespace d3d12 {
         void MapWriteAsyncImpl(uint32_t serial, uint32_t start, uint32_t count) override;
         void UnmapImpl() override;
 
+        static constexpr size_t kDefaultAlignment =
+            4;  // D3D does not specify so we assume 4-byte alignment to be safe.
+
+        static constexpr size_t kDefaultUploadBufferSize = 64000;  // DXGI min heap size is 64K.
+
         ComPtr<ID3D12Resource> mResource;
         bool mFixedResourceState = false;
         dawn::BufferUsageBit mLastUsage = dawn::BufferUsageBit::None;

@@ -19,7 +19,6 @@
 #include "common/Math.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
-#include "dawn_native/d3d12/ResourceUploader.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -165,7 +164,18 @@ namespace dawn_native { namespace d3d12 {
         Device* device = ToBackend(GetDevice());
 
         TransitionUsageNow(device->GetPendingCommandList(), dawn::BufferUsageBit::TransferDst);
-        device->GetResourceUploader()->BufferSubData(mResource, start, count, data);
+
+        DynamicUploader* uploader = device->GetDynamicUploader(kDefaultUploadBufferSize);
+        UploadHandle uploadHandle = uploader->Allocate(count, kDefaultAlignment);
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, count);
+
+        if (device->ConsumedError(
+                device->CopyFromStagingToBuffer(uploader->GetLargestBuffer()->GetStagingBuffer(),
+                                                uploadHandle.startOffset, this, start, count))) {
+            return;
+        }
     }
 
     void Buffer::MapReadAsyncImpl(uint32_t serial, uint32_t start, uint32_t count) {

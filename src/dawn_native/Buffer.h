@@ -16,6 +16,7 @@
 #define DAWNNATIVE_BUFFER_H_
 
 #include "dawn_native/Builder.h"
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
