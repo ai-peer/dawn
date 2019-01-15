@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "51d94f7c_53b0ef09",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T18:49:09Z",
+      "side": 1,
+      "message": "special_items sounds ok.",
+      "parentUuid": "fe2ec648_02195f96",
+      "revId": "661ec3ee98c2d70c30c3db885e4a5fc9e3c46c66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "090004f6_5ccc6e21",
         "filename": "generator/common.py",
         "patchSetId": 6

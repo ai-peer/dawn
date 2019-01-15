@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf30d632_75c6244d",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T18:49:09Z",
+      "side": 1,
+      "message": "\u0027 \u0027.join(sum(name.chunks for name in names))?\n\nor \u0027 \u0027.join([name.canonical_case() for name in names])",
+      "revId": "3f616ec1835e5a897c7bf206310efeda67e428b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d12445a_60a52cb5",
+        "filename": "src/dawn_wire/WireDeserializeAllocator.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-15T18:49:09Z",
+      "side": 1,
+      "message": "uNit: there\u0027s usually no newline between the constructors and the destructors.",
+      "revId": "3f616ec1835e5a897c7bf206310efeda67e428b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
