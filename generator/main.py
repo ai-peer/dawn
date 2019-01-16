@@ -391,6 +391,7 @@ def get_renders_for_targets(api_params, wire_json, targets):
         renders.append(FileRender('dawn_wire/client/ClientPrototypes.inl', 'dawn_wire/client/ClientPrototypes_autogen.inl', wire_params))
         renders.append(FileRender('dawn_wire/server/ServerBase.h', 'dawn_wire/server/ServerBase_autogen.h', wire_params))
         renders.append(FileRender('dawn_wire/server/ServerCallbacks.cpp', 'dawn_wire/server/ServerCallbacks_autogen.cpp', wire_params))
+        renders.append(FileRender('dawn_wire/server/ServerDoers.cpp', 'dawn_wire/server/ServerDoers_autogen.cpp', wire_params))
         renders.append(FileRender('dawn_wire/server/ServerHandlers.cpp', 'dawn_wire/server/ServerHandlers_autogen.cpp', wire_params))
         renders.append(FileRender('dawn_wire/server/ServerPrototypes.inl', 'dawn_wire/server/ServerPrototypes_autogen.inl', wire_params))
 

@@ -13,36 +13,40 @@
 //* limitations under the License.
 
 // Forwarding callbacks
-static void ForwardDeviceErrorToServer(const char* message, dawnCallbackUserdata userdata);
-static void ForwardBufferMapReadAsync(dawnBufferMapAsyncStatus status, const void* ptr, dawnCallbackUserdata userdata);
-static void ForwardBufferMapWriteAsync(dawnBufferMapAsyncStatus status, void* ptr, dawnCallbackUserdata userdata);
-static void ForwardFenceCompletedValue(dawnFenceCompletionStatus status, dawnCallbackUserdata userdata);
 {% for type in by_category["object"] if type.is_builder%}
-    static void Forward{{type.name.CamelCase()}}ToClient(dawnBuilderErrorStatus status, const char* message, dawnCallbackUserdata userdata1, dawnCallbackUserdata userdata2);
+    static void Forward{{type.name.CamelCase()}}(dawnBuilderErrorStatus status, const char* message, dawnCallbackUserdata userdata1, dawnCallbackUserdata userdata2);
 {% endfor %}
 
 // Error callbacks
-void OnDeviceError(const char* message);
 {% for type in by_category["object"] if type.is_builder%}
     {% set Type = type.name.CamelCase() %}
     void On{{Type}}Error(dawnBuilderErrorStatus status, const char* message, uint32_t id, uint32_t serial);
 {% endfor %}
 
-void OnMapReadAsyncCallback(dawnBufferMapAsyncStatus status, const void* ptr, MapUserdata* userdata);
-void OnMapWriteAsyncCallback(dawnBufferMapAsyncStatus status, void* ptr, MapUserdata* userdata);
-void OnFenceCompletedValueUpdated(FenceCompletionUserdata* userdata);
-
 // Command handlers
-bool PreHandleBufferUnmap(const BufferUnmapCmd& cmd);
-bool PostHandleQueueSignal(const QueueSignalCmd& cmd);
-bool HandleBufferMapAsync(const char** commands, size_t* size);
-bool HandleBufferUpdateMappedData(const char** commands, size_t* size);
-bool HandleDestroyObject(const char** commands, size_t* size);
-{% for type in by_category["object"] %}
-    {% for method in type.methods %}
-        {% set Suffix = as_MethodSuffix(type.name, method.name) %}
-        {% if Suffix not in client_side_commands %}
-            bool Handle{{Suffix}}(const char** commands, size_t* size);
-        {% endif %}
-    {% endfor %}
+{% for command in cmd_records["command"] if command.name.CamelCase() not in client_side_commands %}
+    bool Handle{{command.name.CamelCase()}}(const char** commands, size_t* size);
+{% endfor %}
+
+{% for CommandName in server_custom_pre_handler_commands %}
+    bool PreHandle{{CommandName}}(const {{CommandName}}Cmd& cmd);
+{% endfor %}
+
+// Command doers
+{% for command in cmd_records["command"] %}
+    {% set Suffix = command.name.CamelCase() %}
+    bool Do{{Suffix}}(
+        {%- for member in command.members -%}
+            {%- if member.is_return_value -%}
+                {%- if member.target_type -%}
+                    {{as_cType(member.target_type.name)}}* {{as_varName(member.name)}}
+                {%- else -%}
+                    {{as_cType(member.type.name)}}* {{as_varName(member.name)}}
+                {%- endif -%}
+            {%- else -%}
+                {{as_annotated_cType(member)}}
+            {%- endif -%}
+            {%- if not loop.last -%}, {% endif %}
+        {%- endfor -%}
+    );
 {% endfor %}

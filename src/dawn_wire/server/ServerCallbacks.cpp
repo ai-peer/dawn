@@ -18,7 +18,7 @@
 
 namespace dawn_wire { namespace server {
 
-    void Server::ForwardDeviceErrorToServer(const char* message, dawnCallbackUserdata userdata) {
+    void Server::ForwardDeviceError(const char* message, dawnCallbackUserdata userdata) {
         auto server = reinterpret_cast<Server*>(static_cast<intptr_t>(userdata));
         server->OnDeviceError(message);
     }
@@ -60,7 +60,7 @@ namespace dawn_wire { namespace server {
         std::unique_ptr<MapUserdata> data(userdata);
 
         // Skip sending the callback if the buffer has already been destroyed.
-        auto* bufferData = mKnownBuffer.Get(data->buffer.id);
+        auto* bufferData = BufferObjects().Get(data->buffer.id);
         if (bufferData == nullptr || bufferData->serial != data->buffer.serial) {
             return;
         }
@@ -87,7 +87,7 @@ namespace dawn_wire { namespace server {
         std::unique_ptr<MapUserdata> data(userdata);
 
         // Skip sending the callback if the buffer has already been destroyed.
-        auto* bufferData = mKnownBuffer.Get(data->buffer.id);
+        auto* bufferData = BufferObjects().Get(data->buffer.id);
         if (bufferData == nullptr || bufferData->serial != data->buffer.serial) {
             return;
         }

@@ -27,7 +27,32 @@ namespace dawn_wire { namespace server {
         const char* HandleCommands(const char* commands, size_t size);
 
       private:
+        void* GetCmdSpace(size_t size) {
+            return mSerializer->GetCmdSpace(size);
+        }
+
+        static void ForwardDeviceError(const char* message, dawnCallbackUserdata userdata);
+        static void ForwardBufferMapReadAsync(dawnBufferMapAsyncStatus status,
+                                              const void* ptr,
+                                              dawnCallbackUserdata userdata);
+        static void ForwardBufferMapWriteAsync(dawnBufferMapAsyncStatus status,
+                                               void* ptr,
+                                               dawnCallbackUserdata userdata);
+        static void ForwardFenceCompletedValue(dawnFenceCompletionStatus status,
+                                               dawnCallbackUserdata userdata);
+
+        void OnDeviceError(const char* message);
+        void OnMapReadAsyncCallback(dawnBufferMapAsyncStatus status,
+                                    const void* ptr,
+                                    MapUserdata* data);
+        void OnMapWriteAsyncCallback(dawnBufferMapAsyncStatus status, void* ptr, MapUserdata* data);
+        void OnFenceCompletedValueUpdated(FenceCompletionUserdata* data);
+
 #include "dawn_wire/server/ServerPrototypes_autogen.inl"
+
+        CommandSerializer* mSerializer = nullptr;
+        WireDeserializeAllocator mAllocator;
+        dawnProcTable mProcs;
     };
 
 }}  // namespace dawn_wire::server

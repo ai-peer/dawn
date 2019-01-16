@@ -17,14 +17,14 @@
 namespace dawn_wire { namespace server {
 
     Server::Server(dawnDevice device, const dawnProcTable& procs, CommandSerializer* serializer)
-        : ServerBase(device, procs, serializer) {
+        : ServerBase(procs), mSerializer(serializer), mProcs(procs) {
         // The client-server knowledge is bootstrapped with device 1.
-        auto* deviceData = mKnownDevice.Allocate(1);
+        auto* deviceData = DeviceObjects().Allocate(1);
         deviceData->handle = device;
         deviceData->valid = true;
 
         auto userdata = static_cast<dawnCallbackUserdata>(reinterpret_cast<intptr_t>(this));
-        procs.deviceSetErrorCallback(device, ForwardDeviceErrorToServer, userdata);
+        procs.deviceSetErrorCallback(device, ForwardDeviceError, userdata);
     }
 
     Server::~Server() {
