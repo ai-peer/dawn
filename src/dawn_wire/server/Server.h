@@ -19,7 +19,7 @@
 
 namespace dawn_wire { namespace server {
 
-    class Server : public ServerBase, public CommandHandler {
+    class Server : public ServerBase {
       public:
         Server(dawnDevice device, const dawnProcTable& procs, CommandSerializer* serializer);
         ~Server();
