@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d17184a_7fe1c3be",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "I\u0027ve been thinking that we could maybe make RingBuffers always power of two and use something like this: https://www.snellman.net/blog/archive/2016-12-13-ring-buffers/\n\nThen the ringbuffer only needs to remember usedRangeStart and usedRangeEnd (non-inclusive) because the used size is always usedRangeEnd - usedRangeStart + 1. This also means the SerialQueue only needs to track updates to usedRangeStart.\n\nWe would still have some complexity to check for the case where the data doesn\u0027t fit at the end of the buffer (in which case we\u0027d artificially increase usedRangeEnd) and the \"start\" and \"middle\" cases would fold into one.",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f596e0b2_3e792768",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "To ease testing, maybe this should take in the \"PendingCommandSerial\" so we don\u0027t have to rely on Device advancing the serial a certain way?",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edd94063_0d0bfcf5",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "nit: these aren\u0027t used requests but more like used ranges.",
+      "range": {
+        "startLine": 55,
+        "startChar": 38,
+        "endLine": 55,
+        "endChar": 46
+      },
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dce9d46d_94a7d1fb",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "nit: RingBufferTests.cpp",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5328207_74cc9181",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "nit: We should create the device through the instance + adapter, but then reinterpret_cast it to null:Device.",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72d5c931_32e1de91",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "The dynamic uploader is only used to create the ringbuffers, could we just call the RingBuffer constructor?",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06fb8149_4378882d",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "nit: constexpr kSizeInBytes\nSame comment for other constants.",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26ce7c4c_4d140352",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a694f91_88b6b44b",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "This is tested in [1], should [1] disappear?",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9b8fbea_0ce52186",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "Could we Tick 1 then 2 to check the used size is correct at serial 1?",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

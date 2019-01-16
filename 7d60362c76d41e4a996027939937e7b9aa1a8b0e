@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "19000bb7_26accb82",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-16T00:25:33Z",
+      "side": 1,
+      "message": "Whoops, that was a TODO for myself while reviewing :)\n\nThis seems fine.",
+      "parentUuid": "dfe0f355_82dd6134",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f49b6362_63c6fad2",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 9
