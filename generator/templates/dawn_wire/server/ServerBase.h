@@ -40,8 +40,7 @@ namespace dawn_wire { namespace server {
 
     class ServerBase : public ObjectIdResolver {
       public:
-        ServerBase(dawnDevice device, const dawnProcTable& procs, CommandSerializer* serializer)
-            : mProcs(procs), mSerializer(serializer) {
+        ServerBase(const dawnProcTable& procs) : mProcs(procs) {
         }
 
         virtual ~ServerBase() {
@@ -57,15 +56,25 @@ namespace dawn_wire { namespace server {
         }
 
       protected:
-        dawnProcTable mProcs;
-        CommandSerializer* mSerializer = nullptr;
+        {% for type in by_category["object"] %}
+            const KnownObjects<{{as_cType(type.name)}}>& {{type.name.CamelCase()}}Objects() const {
+                return mKnown{{type.name.CamelCase()}};
+            }
+            KnownObjects<{{as_cType(type.name)}}>& {{type.name.CamelCase()}}Objects() {
+                return mKnown{{type.name.CamelCase()}};
+            }
+        {% endfor %}
 
-        WireDeserializeAllocator mAllocator;
+        {% for type in by_category["object"] if type.name.CamelCase() in server_reverse_lookup_objects %}
+            const ObjectIdLookupTable<{{as_cType(type.name)}}>& {{type.name.CamelCase()}}ObjectIdTable() const {
+                return m{{type.name.CamelCase()}}IdTable;
+            }
+            ObjectIdLookupTable<{{as_cType(type.name)}}>& {{type.name.CamelCase()}}ObjectIdTable() {
+                return m{{type.name.CamelCase()}}IdTable;
+            }
+        {% endfor %}
 
-        void* GetCmdSpace(size_t size) {
-            return mSerializer->GetCmdSpace(size);
-        }
-
+      private:
         // Implementation of the ObjectIdResolver interface
         {% for type in by_category["object"] %}
             DeserializeResult GetFromId(ObjectId id, {{as_cType(type.name)}}* out) const final {
@@ -91,6 +100,8 @@ namespace dawn_wire { namespace server {
                 return GetFromId(id, out);
             }
         {% endfor %}
+
+        dawnProcTable mProcs;
 
         //* The list of known IDs for each object type.
         {% for type in by_category["object"] %}

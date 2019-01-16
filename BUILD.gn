@@ -756,6 +756,7 @@ dawn_generator("libdawn_wire_gen") {
     "dawn_wire/client/ClientPrototypes_autogen.inl",
     "dawn_wire/server/ServerBase_autogen.h",
     "dawn_wire/server/ServerCallbacks_autogen.cpp",
+    "dawn_wire/server/ServerDoers_autogen.cpp",
     "dawn_wire/server/ServerHandlers_autogen.cpp",
     "dawn_wire/server/ServerPrototypes_autogen.inl",
   ]
@@ -792,6 +793,7 @@ dawn_static_and_shared_library("libdawn_wire") {
     "src/dawn_wire/server/Server.cpp",
     "src/dawn_wire/server/Server.h",
     "src/dawn_wire/server/ServerCallbacks.cpp",
+    "src/dawn_wire/server/ServerDoers.cpp",
     "src/dawn_wire/server/ServerHandlers.cpp",
   ]
 
