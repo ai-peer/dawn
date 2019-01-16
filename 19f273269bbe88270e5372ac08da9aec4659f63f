@@ -16,6 +16,24 @@
       "revId": "19f273269bbe88270e5372ac08da9aec4659f63f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84a8dff6_f936e34f",
+        "filename": "src/dawn_wire/DawnWire.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-16T02:13:17Z",
+      "side": 0,
+      "message": "That\u0027s because I changed device creation to use DeviceAllocator which is owned by ClientBase.\n\nClient::GetProcs and CreateDevice are coming up in the next CL.",
+      "parentUuid": "24ccb331_4ab9e311",
+      "revId": "19f273269bbe88270e5372ac08da9aec4659f63f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

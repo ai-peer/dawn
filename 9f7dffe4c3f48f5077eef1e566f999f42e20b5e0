@@ -16,6 +16,24 @@
       "revId": "9f7dffe4c3f48f5077eef1e566f999f42e20b5e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce1410e6_6e107b19",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-16T02:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "143796ed_881b70f2",
+      "revId": "9f7dffe4c3f48f5077eef1e566f999f42e20b5e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
