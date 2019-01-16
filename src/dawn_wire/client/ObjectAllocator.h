@@ -22,6 +22,7 @@
 
 namespace dawn_wire { namespace client {
 
+    class Client;
     class Device;
 
     // TODO(cwallez@chromium.org): Do something with objects before they are destroyed ?
@@ -37,14 +38,17 @@ namespace dawn_wire { namespace client {
             uint32_t serial;
         };
 
-        ObjectAllocator(Device* device) : mDevice(device) {
+        ObjectAllocator() {
             // ID 0 is nullptr
             mObjects.emplace_back(nullptr, 0);
         }
 
-        ObjectAndSerial* New() {
+        template <
+            typename Owner =
+                typename std::conditional<std::is_same<T, Device>::value, Client, Device>::type>
+        ObjectAndSerial* New(Owner* owner) {
             uint32_t id = GetNewId();
-            T* result = new T(mDevice, 1, id);
+            T* result = new T(owner, 1, id);
             auto object = std::unique_ptr<T>(result);
 
             if (id >= mObjects.size()) {
