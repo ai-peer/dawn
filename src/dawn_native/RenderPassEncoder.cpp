@@ -37,6 +37,11 @@ namespace dawn_native {
             return;
         }
 
+        // The instace count must be non-zero, otherwise no-op
+        if (instanceCount == 0) {
+            return;
+        }
+
         DrawCmd* draw = mAllocator->Allocate<DrawCmd>(Command::Draw);
         new (draw) DrawCmd;
         draw->vertexCount = vertexCount;
@@ -51,6 +56,11 @@ namespace dawn_native {
                                             uint32_t baseVertex,
                                             uint32_t firstInstance) {
         if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
+            return;
+        }
+
+        // The index and instace count must be non-zero, otherwise no-op
+        if (indexCount == 0 || instanceCount == 0) {
             return;
         }
 
