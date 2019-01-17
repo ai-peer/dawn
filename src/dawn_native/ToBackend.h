@@ -108,6 +108,11 @@ namespace dawn_native {
         using BackendType = typename BackendTraits::TextureViewType;
     };
 
+    template <typename BackendTraits>
+    struct ToBackendTraits<StagingBufferBase, BackendTraits> {
+        using BackendType = typename BackendTraits::StagingBufferType;
+    };
+
     // ToBackendBase implements conversion to the given BackendTraits
     // To use it in a backend, use the following:
     //   template<typename T>

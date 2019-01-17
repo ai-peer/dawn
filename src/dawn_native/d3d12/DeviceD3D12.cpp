@@ -30,9 +30,9 @@
 #include "dawn_native/d3d12/RenderPassDescriptorD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
-#include "dawn_native/d3d12/ResourceUploader.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
+#include "dawn_native/d3d12/StagingBufferD3D12.h"
 #include "dawn_native/d3d12/SwapChainD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 
@@ -134,7 +134,7 @@ namespace dawn_native { namespace d3d12 {
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocator = std::make_unique<ResourceAllocator>(this);
-        mResourceUploader = std::make_unique<ResourceUploader>(this);
+        mDynamicUploader = std::make_unique<DynamicUploader>(this);
 
         NextSerial();
     }
@@ -174,10 +174,6 @@ namespace dawn_native { namespace d3d12 {
 
     ResourceAllocator* Device::GetResourceAllocator() {
         return mResourceAllocator.get();
-    }
-
-    ResourceUploader* Device::GetResourceUploader() {
-        return mResourceUploader.get();
     }
 
     void Device::OpenCommandList(ComPtr<ID3D12GraphicsCommandList>* commandList) {
@@ -223,6 +219,7 @@ namespace dawn_native { namespace d3d12 {
         mDescriptorHeapAllocator->Tick(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
+        mDynamicUploader->Tick(mCompletedSerial);
         ExecuteCommandLists({});
         NextSerial();
     }
@@ -333,6 +330,34 @@ namespace dawn_native { namespace d3d12 {
         std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>> converter(
             "Error converting");
         mPCIInfo.name = converter.to_bytes(adapterDesc.Description);
+    }
+
+    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
+        std::unique_ptr<StagingBufferBase> stagingBuffer =
+            std::make_unique<StagingBuffer>(size, this);
+        return std::move(stagingBuffer);
+    }
+
+    MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               uint32_t sourceOffset,
+                                               BufferBase* destination,
+                                               uint32_t destinationOffset,
+                                               uint32_t size) {
+        ToBackend(destination)
+            ->TransitionUsageNow(GetPendingCommandList(), dawn::BufferUsageBit::TransferDst);
+
+        GetPendingCommandList()->CopyBufferRegion(
+            ToBackend(destination)->GetD3D12Resource().Get(), destinationOffset,
+            ToBackend(source)->GetResource(), sourceOffset, size);
+
+        return {};
+    }
+
+    ResultOrError<DynamicUploader*> Device::GetDynamicUploader() const {
+        if (mDynamicUploader->IsEmpty()) {
+            DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer(kDefaultUploadBufferSize));
+        }
+        return mDynamicUploader.get();
     }
 
 }}  // namespace dawn_native::d3d12
