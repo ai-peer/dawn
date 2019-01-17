@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "89c2219e_7d72fd8a",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Thanks for sharing this - not 100% sure on POT constraint. Like the approach of unmasked indices. Does save a byte per buffer and each buffer can address an extra byte (the last byte) when full. Maybe a follow-up?",
+      "parentUuid": "2d17184a_7fe1c3be",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f596e0b2_3e792768",
         "filename": "src/dawn_native/RingBuffer.h",
         "patchSetId": 11
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "3f63426d_0a9ae4b5",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Used \"Request\" since multiple sub-allocations can be made before they are tracked. \"Allocation\" was also considered.",
+      "parentUuid": "edd94063_0d0bfcf5",
+      "range": {
+        "startLine": 55,
+        "startChar": 38,
+        "endLine": 55,
+        "endChar": 46
+      },
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dce9d46d_94a7d1fb",
         "filename": "src/tests/unittests/MemoryTests.cpp",
         "patchSetId": 11
@@ -73,6 +115,24 @@
       "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e758850b_1bc21a36",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dce9d46d_94a7d1fb",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "83441c2b_b5786bf9",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "I see the null device being searched when created in ValidationTest. Alternatively, if we adapter\u003dnullptr, the cast is no longer required. LMK.",
+      "parentUuid": "f5328207_74cc9181",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "72d5c931_32e1de91",
         "filename": "src/tests/unittests/MemoryTests.cpp",
         "patchSetId": 11
@@ -107,6 +185,24 @@
       "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fe56063_a4eeb524",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72d5c931_32e1de91",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +229,30 @@
     },
     {
       "key": {
+        "uuid": "96d06744_52bf3689",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06fb8149_4378882d",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26ce7c4c_4d140352",
         "filename": "src/tests/unittests/MemoryTests.cpp",
         "patchSetId": 11
@@ -147,6 +267,24 @@
       "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ed380ed_0ed6e745",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26ce7c4c_4d140352",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +305,24 @@
     },
     {
       "key": {
+        "uuid": "fc01b27c_19ff1e92",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a694f91_88b6b44b",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9b8fbea_0ce52186",
         "filename": "src/tests/unittests/MemoryTests.cpp",
         "patchSetId": 11
@@ -181,6 +337,24 @@
       "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd94a545_ec558371",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-17T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9b8fbea_0ce52186",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
