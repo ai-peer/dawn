@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4993ca79_8c52317d",
+        "filename": "generator/templates/dawn_wire/server/ServerBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-17T00:32:24Z",
+      "side": 1,
+      "message": "not for this patch but maybe it will make sense to have a deeper class hierarchy at some point so this manual code isn\u0027t in an autogen file.",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 67,
+        "endChar": 9
+      },
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69c09b1e_6edf3284",
+        "filename": "generator/templates/dawn_wire/server/ServerCallbacks.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-17T00:32:24Z",
+      "side": 1,
+      "message": "note: this would probably all be manual code once webgpu error handling is implemented.",
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59d21be8_36ea06d2",
+        "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-17T00:32:24Z",
+      "side": 1,
+      "message": "nit: this is manual code and would be in the manually written header.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 104
+      },
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fd31622_7c8bea18",
+        "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-17T00:32:24Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "032422fa_d75b3d5b",
+        "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-17T00:32:24Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 62
+      },
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63f0fff7_9f4cec09",
+        "filename": "src/dawn_wire/server/ServerCallbacks.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-17T00:32:24Z",
+      "side": 1,
+      "message": "I\u0027m thinking it probably makes sense to group the callbacks and handlers per object instead so that all the code related to buffers is in the same file, same for fences. WDYT?",
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
