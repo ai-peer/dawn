@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "abbc5664_f4eaa0c0",
+        "filename": "generator/templates/dawn_wire/server/ServerBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-17T22:32:43Z",
+      "side": 1,
+      "message": "coming soon :)",
+      "parentUuid": "4993ca79_8c52317d",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 67,
+        "endChar": 9
+      },
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c09b1e_6edf3284",
         "filename": "generator/templates/dawn_wire/server/ServerCallbacks.cpp",
         "patchSetId": 4
@@ -39,6 +63,24 @@
       "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "283cd85a_f380c91d",
+        "filename": "generator/templates/dawn_wire/server/ServerCallbacks.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-17T22:32:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69c09b1e_6edf3284",
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +161,24 @@
       "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af37d685_64028761",
+        "filename": "src/dawn_wire/server/ServerCallbacks.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-17T22:32:43Z",
+      "side": 1,
+      "message": "Sounds like a good idea. We can put the future doers there too",
+      "parentUuid": "63f0fff7_9f4cec09",
+      "revId": "cf0cf888029cf7212ae5ee4404f65ef416fb4b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
