@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bf0e1c8_2a9fa843",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-01-17T09:21:06Z",
+      "side": 1,
+      "message": "pipelineDescriptor?",
+      "range": {
+        "startLine": 432,
+        "startChar": 41,
+        "endLine": 432,
+        "endChar": 58
+      },
+      "revId": "bc8267860b0a50af9c08c8a6f6deddd7939cf5f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d0ec043_f84214f7",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-01-17T09:21:06Z",
+      "side": 1,
+      "message": "These are duplicate with the code above.",
+      "range": {
+        "startLine": 460,
+        "startChar": 4,
+        "endLine": 480,
+        "endChar": 30
+      },
+      "revId": "bc8267860b0a50af9c08c8a6f6deddd7939cf5f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
