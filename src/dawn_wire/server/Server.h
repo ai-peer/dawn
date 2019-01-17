@@ -55,7 +55,15 @@ namespace dawn_wire { namespace server {
         bool HandleBufferUpdateMappedData(const char** commands, size_t* size);
         bool HandleDestroyObject(const char** commands, size_t* size);
 
+        void* GetCmdSpace(size_t size) {
+            return mSerializer->GetCmdSpace(size);
+        }
+
 #include "dawn_wire/server/ServerPrototypes_autogen.inl"
+
+        CommandSerializer* mSerializer = nullptr;
+        WireDeserializeAllocator mAllocator;
+        dawnProcTable mProcs;
     };
 
 }}  // namespace dawn_wire::server
