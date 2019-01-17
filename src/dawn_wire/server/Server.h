@@ -48,13 +48,6 @@ namespace dawn_wire { namespace server {
                                            MapUserdata* userdata);
         void OnFenceCompletedValueUpdated(FenceCompletionUserdata* userdata);
 
-        // Command handlers
-        bool PreHandleBufferUnmap(const BufferUnmapCmd& cmd);
-        bool PostHandleQueueSignal(const QueueSignalCmd& cmd);
-        bool HandleBufferMapAsync(const char** commands, size_t* size);
-        bool HandleBufferUpdateMappedData(const char** commands, size_t* size);
-        bool HandleDestroyObject(const char** commands, size_t* size);
-
         void* GetCmdSpace(size_t size) {
             return mSerializer->GetCmdSpace(size);
         }
