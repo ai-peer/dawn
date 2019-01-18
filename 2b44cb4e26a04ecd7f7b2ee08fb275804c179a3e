@@ -144,6 +144,24 @@
     },
     {
       "key": {
+        "uuid": "38297be2_cc4ab24f",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-18T18:21:24Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t see those change. I think you already have it covered.",
+      "parentUuid": "8a5cba3e_7fde772c",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7361e17_1a64bc60",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 1

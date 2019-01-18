@@ -16,6 +16,29 @@
       "revId": "16fe3fa8ee8350d0841d01ce0b243175db3eb375",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f99f0d_6b937d87",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-18T18:21:24Z",
+      "side": 1,
+      "message": "This can be inside the {% if member.annotation \u003d\u003d \"const*const*\" %} block",
+      "range": {
+        "startLine": 294,
+        "startChar": 16,
+        "endLine": 295,
+        "endChar": 82
+      },
+      "revId": "16fe3fa8ee8350d0841d01ce0b243175db3eb375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
