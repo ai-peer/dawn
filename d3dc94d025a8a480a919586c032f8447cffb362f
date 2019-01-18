@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "721d6c3c_819d6784",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "Follow-up sounds good (or adding a TODO about it).",
+      "parentUuid": "89c2219e_7d72fd8a",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f596e0b2_3e792768",
         "filename": "src/dawn_native/RingBuffer.h",
         "patchSetId": 11
@@ -165,6 +183,24 @@
       "side": 1,
       "message": "I see the null device being searched when created in ValidationTest. Alternatively, if we adapter\u003dnullptr, the cast is no longer required. LMK.",
       "parentUuid": "f5328207_74cc9181",
+      "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72aae849_66f09ee9",
+        "filename": "src/tests/unittests/MemoryTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "In the future I think DeviceBase will start assuming it\u0027s adapter isn\u0027t nullptr (no currently since I\u0027m in the process of adding adapters)",
+      "parentUuid": "83441c2b_b5786bf9",
       "revId": "d3dc94d025a8a480a919586c032f8447cffb362f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

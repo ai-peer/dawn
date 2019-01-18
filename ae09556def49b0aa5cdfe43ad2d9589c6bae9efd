@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75470df8_e33907e2",
+        "filename": "src/dawn_native/ToBackend.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "uNit: these are sorted alphabetically.",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c795c6dc_f3af1cee",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "note: When we put this on DeviceBase, the DynamicUploader would probably be created on device initialization so GetDynamicUploader could just return a bare pointer.",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72828340_e08d7708",
+        "filename": "src/tests/unittests/RingBufferTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "nit: Used",
+      "range": {
+        "startLine": 117,
+        "startChar": 7,
+        "endLine": 117,
+        "endChar": 12
+      },
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

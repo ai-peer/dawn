@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "44816407_b90ff60e",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "I think that would be better because this way things like CommandBuffer[backend] don\u0027t have to know about the DynamicUploader.",
+      "parentUuid": "3b28b136_fe23b951",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd2072b2_c99bb425",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 9
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "Not sure I completely understand. The largest buffer always remains or is \"pinned\" by design. If we remove one in the middle, say only R2 went empty, where S\u003d[R1,R2,R3,R4] then R\u003d[R1,R3,R4], the remaining buffers will shuffle down by one where R4 is still selected (being the largest buffer). The remaining are always checked in sequence in a subsequent Tick where N\u003d3.\n\nLack of reuse where existing smaller buffer never fills is one issue, another is dealing with arbitrary lifetimes and/or one or two usually large allocations never allows relaim. This approach was naiive so we could revisit with profiling data.",
       "parentUuid": "9401a245_96f09b86",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e1813b1_716c0550",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "Sorry for the confusion, the first paragraph was about deleting an element from a vector while iterating over needing some extra fixup (like i--)\n\nI was suggesting keeping the pinned buffer as a separate member and having a SerialQueue\u003cunique_ptr\u003e (?) for unpinned buffers pending deletion.",
+      "parentUuid": "9d047d4d_f7be1728",
       "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -317,6 +353,24 @@
     },
     {
       "key": {
+        "uuid": "e6407228_f507ead6",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c8cdc473_3ebc5e13",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "724b9a94_f87dae80",
         "filename": "src/dawn_native/RingBuffer.cpp",
         "patchSetId": 9
@@ -384,6 +438,24 @@
       "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ef61db4_b5f2b87e",
+        "filename": "src/dawn_native/RingBuffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "Ah nvm I forgot we needed the offset on the side to pass to CopyStagingToBuffer.",
+      "parentUuid": "a9e32e0e_86cedc97",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -875,6 +947,24 @@
       "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28ffccd1_da4c3063",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:20:01Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "92305282_0b7d4aa1",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
