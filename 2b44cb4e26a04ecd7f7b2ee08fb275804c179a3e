@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "8a5cba3e_7fde772c",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-18T06:42:11Z",
+      "side": 1,
+      "message": "Done. \n\nAustin, do you mean that I should also add the size of pointerArray to \u0027result\u0027 at code snippet between line 137 and line 138? But GetRequiredSize can only recognize a structure, it can\u0027t recognize a pointer to a structure (which is the pointerArray[i] stores). Otherwise, it will fail to compile.",
+      "parentUuid": "ba0c9d76_591e14c2",
+      "revId": "2b44cb4e26a04ecd7f7b2ee08fb275804c179a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7361e17_1a64bc60",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 1
