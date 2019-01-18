@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d053c8a1_f7c3f3f5",
+        "filename": "src/include/dawn_wire/Client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:43:18Z",
+      "side": 1,
+      "message": "note: this needn\u0027t be static for now but it seems more logical to keep it like this.",
+      "revId": "2c0a7f1859a6531b8578a6039b79f1659191ae11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
