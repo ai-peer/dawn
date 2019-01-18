@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "983619f6_9509cf45",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T06:47:51Z",
+      "side": 1,
+      "message": "nit: the if (has_dawn_object) ,provider endif could be factored between the two branches of the test for const*const*",
+      "revId": "16fe3fa8ee8350d0841d01ce0b243175db3eb375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
