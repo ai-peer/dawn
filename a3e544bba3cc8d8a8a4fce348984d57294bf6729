@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86c8cf4d_ec46ce18",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:28:35Z",
+      "side": 1,
+      "message": "This is skipping the other validation for draws. We should put these checks in the backends that require them instead.",
+      "revId": "a3e544bba3cc8d8a8a4fce348984d57294bf6729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
