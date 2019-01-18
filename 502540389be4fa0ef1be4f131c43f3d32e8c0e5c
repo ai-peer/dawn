@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b214743_7a927cce",
+        "filename": "generator/templates/dawn_wire/server/ServerBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:39:05Z",
+      "side": 1,
+      "message": "Mmmh maybe this should be a \"destroy all objects\" called from ServerBase with a reference to the procs so we avoid storing them twice.",
+      "revId": "502540389be4fa0ef1be4f131c43f3d32e8c0e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8651f3a9_903ad0d0",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-18T01:39:05Z",
+      "side": 1,
+      "message": "nit: Implementation goes in the .cpp",
+      "revId": "502540389be4fa0ef1be4f131c43f3d32e8c0e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
