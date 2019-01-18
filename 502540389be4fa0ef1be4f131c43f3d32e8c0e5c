@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "02a305fd_1b119d44",
+        "filename": "generator/templates/dawn_wire/server/ServerBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-18T17:48:16Z",
+      "side": 1,
+      "message": "Good idea!",
+      "parentUuid": "6b214743_7a927cce",
+      "revId": "502540389be4fa0ef1be4f131c43f3d32e8c0e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8651f3a9_903ad0d0",
         "filename": "src/dawn_wire/server/Server.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "502540389be4fa0ef1be4f131c43f3d32e8c0e5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78aa0cef_dd96a67f",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-18T17:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8651f3a9_903ad0d0",
+      "revId": "502540389be4fa0ef1be4f131c43f3d32e8c0e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
