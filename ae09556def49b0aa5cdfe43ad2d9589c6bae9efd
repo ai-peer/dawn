@@ -2,6 +2,154 @@
   "comments": [
     {
       "key": {
+        "uuid": "994183a5_f4bb862d",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "I\u0027d word this either as (something like):\n\n  size_t newMaxSize \u003d nextPowerOfTwo(max(largestRingBuffer-\u003eGetSize(), size));\n\nor\n\n  size_t newMaxSize \u003d largestRingBuffer-\u003eGetSize() * 2;\n  while (newMaxSize \u003c size) { newMaxSize *\u003d 2; }",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d375d6ff_5b404469",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "uNit: -\u003e \"last (or largest) buffer\"",
+      "range": {
+        "startLine": 61,
+        "startChar": 31,
+        "endLine": 61,
+        "endChar": 55
+      },
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f776570_21c9ec04",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "is the last buffer always the largest one? if so, can you update this comment to explicitly point that out?",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3088295_29bb6efd",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "uNit: splitted -\u003e split",
+      "range": {
+        "startLine": 32,
+        "startChar": 28,
+        "endLine": 32,
+        "endChar": 36
+      },
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "018b5009_61d2e129",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "setting nullptr here seems redundant, but .startOffset is undef. startOffset could have a default value in the struct declaration.",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7063c32b_cd8d8230",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "nit: I think it would be clearer to \u0027return UploadHandle{}\u0027 here instead of using the predefined uploadHandle. Then the definition of uploadHandle could move down.",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a08adda8_226a361b",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "nit: I\u0027d prefer to move this comment such that the \"} else if (\" can be all on one line. Otherwise it kind of makes it look like the \"if\" block above ends here. I guess it could move inside the \"else if\" block.",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e45335a4_e0c02d8d",
+        "filename": "src/dawn_native/RingBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "nit: same",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "75470df8_e33907e2",
         "filename": "src/dawn_native/ToBackend.h",
         "patchSetId": 12
@@ -13,6 +161,23 @@
       "writtenOn": "2019-01-18T01:20:01Z",
       "side": 1,
       "message": "uNit: these are sorted alphabetically.",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61952aaa_992aba30",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "It\u0027s not clear at a glance why we use -\u003eGetLargestBuffer()-\u003eGetStagingBuffer(). I.e. why do we choose the \u0027largest buffer\u0027 here? It sounds like this is supposed to point at the same data returned by uploader-\u003eAllocate, but I can\u0027t tell if that\u0027s what\u0027s actually happening here.\n\nMaybe uploader-\u003eAllocate should return the StagingBuffer object too?",
       "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -36,6 +201,23 @@
     },
     {
       "key": {
+        "uuid": "b6175bca_4e0d3405",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "\"64K\" implies maybe this should be 65536?",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "72828340_e08d7708",
         "filename": "src/tests/unittests/RingBufferTests.cpp",
         "patchSetId": 12
@@ -53,6 +235,23 @@
         "endLine": 117,
         "endChar": 12
       },
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acb04d3c_711c7cc0",
+        "filename": "src/tests/unittests/RingBufferTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-22T19:47:09Z",
+      "side": 1,
+      "message": "Would the wasted space get reclaimed after F8 has been freed? e.g. could you Tick(8) then suballocate 28? (I assume yes - maybe this can be tested?)",
       "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
