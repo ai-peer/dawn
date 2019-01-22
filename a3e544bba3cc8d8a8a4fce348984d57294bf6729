@@ -16,6 +16,24 @@
       "revId": "a3e544bba3cc8d8a8a4fce348984d57294bf6729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa3aef9d_4ed5b89e",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-22T08:29:08Z",
+      "side": 1,
+      "message": "Thanks. Moved the checks to Metal backend. For other backends, they have no such issue with their validation layer, so skip adding the checks now.",
+      "parentUuid": "86c8cf4d_ec46ce18",
+      "revId": "a3e544bba3cc8d8a8a4fce348984d57294bf6729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
