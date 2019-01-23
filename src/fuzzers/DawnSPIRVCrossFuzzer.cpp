@@ -76,6 +76,7 @@ namespace DawnSPIRVCrossFuzzer {
         return 0;
     }
 
+    // XXX we can get rid of this function once all fuzzers are converted
     template <class Options>
     int RunWithOptions(const uint8_t* data, size_t size, TaskWithOptions<Options> task) {
         if (!data || size < sizeof(Options) + 1)
@@ -88,6 +89,27 @@ namespace DawnSPIRVCrossFuzzer {
         std::vector<uint32_t> input(data, data + (4 * (size / 4)));
 
         task(input, options);
+
+        return 0;
+    }
+
+    // XXX should only need this function once all fuzzers are converted
+    template <>
+    int RunWithOptions(const uint8_t* data,
+                       size_t size,
+                       TaskWithOptions<shaderc_spvc::CompileOptions> task) {
+        shaderc_spvc::CompileOptions options;
+        size_t used = options.Fuzz(data, size);
+        if (used == 0)
+            // not enough data to set options
+            return 0;
+
+        data += used;
+        size -= used;
+
+        std::vector<uint32_t> input(data, data + (4 * (size / 4)));
+        if (input.size())
+            task(input, options);
 
         return 0;
     }

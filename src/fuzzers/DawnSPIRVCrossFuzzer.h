@@ -16,14 +16,16 @@
 #include <functional>
 #include <vector>
 
+#include "shaderc/spvc.hpp"
 #include "spirv-cross/spirv_glsl.hpp"
 #include "spirv-cross/spirv_hlsl.hpp"
 
 namespace DawnSPIRVCrossFuzzer {
 
-    struct CombinedOptions {
+    struct CombinedOptions {  // XXX won't need this struct after all fuzzers converted
         spirv_cross::CompilerGLSL::Options glsl;
         spirv_cross::CompilerHLSL::Options hlsl;
+        shaderc_spvc::CompileOptions spvc;  // XXX can use this instead, it has all the options
     };
 
     using Task = std::function<int(const std::vector<uint32_t>&)>;
