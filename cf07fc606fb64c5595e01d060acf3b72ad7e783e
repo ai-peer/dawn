@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "140439c6_5b2e178d",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-24T14:57:42Z",
+      "side": 1,
+      "message": "nit: We still put brackets on single statement control flow. ditto below.",
+      "revId": "cf07fc606fb64c5595e01d060acf3b72ad7e783e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38be977d_92b49c8f",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-24T14:57:42Z",
+      "side": 1,
+      "message": "I think this might make the vector only contain numbers from 0 to 255. We should cast to uint32_t* before. Also we should use sizeof().",
+      "revId": "cf07fc606fb64c5595e01d060acf3b72ad7e783e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a1f0b5a_6f1f4779",
         "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.h",
         "patchSetId": 1
