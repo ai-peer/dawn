@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "270ee947_c2cb8aec",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-25T22:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44816407_b90ff60e",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd2072b2_c99bb425",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 9
@@ -122,6 +140,24 @@
       "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4aa83de_b77ffc41",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-25T22:15:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "19000bb7_26accb82",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -207,6 +243,24 @@
       "side": 1,
       "message": "Sorry for the confusion, the first paragraph was about deleting an element from a vector while iterating over needing some extra fixup (like i--)\n\nI was suggesting keeping the pinned buffer as a separate member and having a SerialQueue\u003cunique_ptr\u003e (?) for unpinned buffers pending deletion.",
       "parentUuid": "9d047d4d_f7be1728",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b021d9a_f59b1b81",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-25T22:15:53Z",
+      "side": 1,
+      "message": "Buffers themselves are not tracked by serial but only the sub-allocations (multiple resource allocations could be spread out to multiple buffers) - we could maintain a separate member but this seems equivalent to accessing the last buffer in the list.",
+      "parentUuid": "4e1813b1_716c0550",
       "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -912,6 +966,24 @@
       "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8cf2951_e2f41d4c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-25T22:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eebd211_40046dd5",
+      "revId": "7d60362c76d41e4a996027939937e7b9aa1a8b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
