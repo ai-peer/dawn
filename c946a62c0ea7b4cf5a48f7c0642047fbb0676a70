@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d441570_85cd0d98",
+        "filename": "src/dawn_native/opengl/BackendGL.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-25T18:17:56Z",
+      "side": 1,
+      "message": "DAWNNATIVE_OPENGL_BACKENDGL_H_ ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 37
+      },
+      "revId": "c946a62c0ea7b4cf5a48f7c0642047fbb0676a70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
