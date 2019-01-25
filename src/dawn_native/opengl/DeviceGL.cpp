@@ -115,6 +115,10 @@ namespace dawn_native { namespace opengl {
         return mLastSubmittedSerial;
     }
 
+    Serial Device::GetPendingCommandSerial() const {
+        return mLastSubmittedSerial + 1;
+    }
+
     void Device::TickImpl() {
         CheckPassedFences();
     }
@@ -142,6 +146,18 @@ namespace dawn_native { namespace opengl {
             ASSERT(fenceSerial > mCompletedSerial);
             mCompletedSerial = fenceSerial;
         }
+    }
+
+    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
+        return DAWN_UNIMPLEMENTED_ERROR("Device unable to create staging buffer.");
+    }
+
+    MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               uint32_t sourceOffset,
+                                               BufferBase* destination,
+                                               uint32_t destinationOffset,
+                                               uint32_t size) {
+        return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
     }
 
 }}  // namespace dawn_native::opengl
