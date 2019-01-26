@@ -376,6 +376,24 @@
     },
     {
       "key": {
+        "uuid": "6fd0d0ee_ad538dba",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-26T03:33:14Z",
+      "side": 1,
+      "message": "Ok. I still would prefer if the implementation didn\u0027t leak as much here - I think it\u0027s confusing that we \"GetLargestBuffer\" when what\u0027s important is that we \"GetTheBufferThatTheAllocationWasIn\". Would it make sense to add a StagingBuffer* to UploadHandle?",
+      "parentUuid": "5fe781ed_434ce60b",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c795c6dc_f3af1cee",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 12
@@ -440,6 +458,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "b6175bca_4e0d3405",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a8a6614_718bb731",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-26T03:33:14Z",
+      "side": 1,
+      "message": "it\u0027s really 64kB and not 64KiB? I don\u0027t know how to look it up. anyway, seems fine.",
+      "parentUuid": "1dc4621d_290dd168",
       "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -522,6 +558,24 @@
       "side": 1,
       "message": "The waste belongs to F9 not F8. If we Tick(9), the entire buffer gets reclaimed as performed at the end of the test.",
       "parentUuid": "acb04d3c_711c7cc0",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a1ebb3_cae8726c",
+        "filename": "src/tests/unittests/RingBufferTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-26T03:33:14Z",
+      "side": 1,
+      "message": "Gotcha. In theory, it could become available when F8 is freed, right? Maybe it would be good to have a TODO to consider whether we can make that work?",
+      "parentUuid": "772e70ef_a3bf544b",
       "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
