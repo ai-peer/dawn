@@ -52,6 +52,24 @@
       "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a2789f5_80616492",
+        "filename": "DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000270
+      },
+      "writtenOn": "2019-01-28T19:58:05Z",
+      "side": 0,
+      "message": "What roll-dep script?",
+      "parentUuid": "d5a0a696_476cd50b",
+      "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
