@@ -16,6 +16,24 @@
       "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd446539_20ab9fe6",
+        "filename": "DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000270
+      },
+      "writtenOn": "2019-01-28T17:06:37Z",
+      "side": 0,
+      "message": "We need to roll SPIRV-Tools and SPIRV-Headers in order to roll shaderc.\nI put those two in a separate change, or did you want a change for each one?",
+      "parentUuid": "5339b96a_30a83182",
+      "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
