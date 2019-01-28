@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5339b96a_30a83182",
+        "filename": "DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-28T06:57:59Z",
+      "side": 0,
+      "message": "Can we get these rolls separately, or only roll shaderc and call it out explicitly in the commit message?",
+      "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

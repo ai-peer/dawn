@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56f7feab_4890805a",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-28T06:57:59Z",
+      "side": 1,
+      "message": "Which variable do we need from this?",
+      "revId": "b9ad416f04ceaa9d2b53bfc60aa4c5665ee3d8b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70fae297_d5f15cba",
+        "filename": "src/fuzzers/DawnSPIRVCrossFuzzer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-28T06:57:59Z",
+      "side": 1,
+      "message": "nit: !\u003d 0",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 24
+      },
+      "revId": "b9ad416f04ceaa9d2b53bfc60aa4c5665ee3d8b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
