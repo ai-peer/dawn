@@ -34,6 +34,24 @@
       "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5a0a696_476cd50b",
+        "filename": "DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-28T17:46:07Z",
+      "side": 0,
+      "message": "One change is ok. Though it would be nice to use the roll-dep script.",
+      "parentUuid": "cd446539_20ab9fe6",
+      "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
