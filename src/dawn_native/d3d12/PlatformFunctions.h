@@ -20,6 +20,7 @@
 #include "common/DynamicLib.h"
 #include "dawn_native/Error.h"
 
+#include <WinPixEventRuntime/pix3.h>
 #include <d3dcompiler.h>
 
 class DynamicLib;
@@ -35,6 +36,7 @@ namespace dawn_native { namespace d3d12 {
         ~PlatformFunctions();
 
         MaybeError LoadFunctions();
+        bool isPixEventRuntimeLoaded() const;
 
         // Functions from d3d12.dll
         PFN_D3D12_CREATE_DEVICE d3d12CreateDevice = nullptr;
@@ -64,10 +66,14 @@ namespace dawn_native { namespace d3d12 {
         MaybeError LoadD3D12();
         MaybeError LoadDXGI();
         MaybeError LoadD3DCompiler();
+        bool LoadPIXRuntime();
 
         DynamicLib mD3D12Lib;
         DynamicLib mDXGILib;
         DynamicLib mD3DCompilerLib;
+        DynamicLib mPIXEventRuntimeLib;
+
+        bool mPIXEventRuntimeLoaded = false;
     };
 
 }}  // namespace dawn_native::d3d12
