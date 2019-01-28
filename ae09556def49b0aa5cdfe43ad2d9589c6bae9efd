@@ -394,6 +394,24 @@
     },
     {
       "key": {
+        "uuid": "3afcd878_82042b1d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-28T21:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fd0d0ee_ad538dba",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c795c6dc_f3af1cee",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 12
@@ -476,6 +494,24 @@
       "side": 1,
       "message": "it\u0027s really 64kB and not 64KiB? I don\u0027t know how to look it up. anyway, seems fine.",
       "parentUuid": "1dc4621d_290dd168",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76ea37cf_18ae46fd",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-28T21:50:37Z",
+      "side": 1,
+      "message": "I\u0027ll leave it for now (MS reviewed) \u0026 will check/fix-up.",
+      "parentUuid": "0a8a6614_718bb731",
       "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -579,6 +615,24 @@
       "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10658ec5_1a682d79",
+        "filename": "src/tests/unittests/RingBufferTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-01-28T21:50:37Z",
+      "side": 1,
+      "message": "Correct. Left a TODO.",
+      "parentUuid": "57a1ebb3_cae8726c",
+      "revId": "ae09556def49b0aa5cdfe43ad2d9589c6bae9efd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
