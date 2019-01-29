@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76530611_97f3a017",
+        "filename": "src/dawn_wire/client/ObjectAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-01-29T00:44:46Z",
+      "side": 1,
+      "message": "Maybe this could get factored out into a local typedef for OwnerDefault? To improve the formatting/readability here.",
+      "range": {
+        "startLine": 48,
+        "startChar": 16,
+        "endLine": 48,
+        "endChar": 95
+      },
+      "revId": "5fced1b80ff8da0ebe9a4ba31ddc7c34976719a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
