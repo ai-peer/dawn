@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "26a8adf7_b5e1960e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-29T15:42:44Z",
+      "side": 1,
+      "message": "Sorry for the typos, I will be more careful.",
+      "parentUuid": "fe2e62ee_1fb8a8f7",
+      "range": {
+        "startLine": 411,
+        "startChar": 27,
+        "endLine": 411,
+        "endChar": 34
+      },
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c99281b0_a84ad8a9",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 7
@@ -36,6 +60,24 @@
       "writtenOn": "2019-01-29T12:38:36Z",
       "side": 1,
       "message": "This isn\u0027t a validation error in the spec but a warning done but the Assistant Layer in https://github.com/LunarG/VulkanTools/blob/master/layer_factory/assistant_layer/zero_counts.h\n\nThis is only a warning so it would be nice to just ignore it so we can avoid two branches in the fast-path for draw commands.\n\nSame thing for DrawIndexed.",
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82f1c5b0_bcd8df08",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-29T15:42:44Z",
+      "side": 1,
+      "message": "Yes, it\u0027s not a error which occurs crash or fail, the tests also can be PASS.\nBut I meet a different message in Draw says that\n\u003e[ UNASSIGNED-GeneralParameterError-RequiredParameter ] Object: VK_NULL_HANDLE (Type \u003d 0) | vkCmdDraw parameter, uint32_t vertexCount, is 0\n\u003e[ UNASSIGNED-GeneralParameterError-RequiredParameter ] Object: VK_NULL_HANDLE (Type \u003d 0) | vkCmdDraw parameter, uint32_t instanceCount, is 0\n\nFor DrawIndexed, there is no such message. Is it also OK to ignore it?\n\nVulkan version: 1.1.82",
+      "parentUuid": "c99281b0_a84ad8a9",
       "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
