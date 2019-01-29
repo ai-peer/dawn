@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe2e62ee_1fb8a8f7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T12:38:36Z",
+      "side": 1,
+      "message": "nit: instace-\u003einstance here and in other places in this CL.",
+      "range": {
+        "startLine": 411,
+        "startChar": 27,
+        "endLine": 411,
+        "endChar": 34
+      },
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c99281b0_a84ad8a9",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T12:38:36Z",
+      "side": 1,
+      "message": "This isn\u0027t a validation error in the spec but a warning done but the Assistant Layer in https://github.com/LunarG/VulkanTools/blob/master/layer_factory/assistant_layer/zero_counts.h\n\nThis is only a warning so it would be nice to just ignore it so we can avoid two branches in the fast-path for draw commands.\n\nSame thing for DrawIndexed.",
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
