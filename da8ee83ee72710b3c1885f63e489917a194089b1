@@ -70,6 +70,24 @@
       "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8e09acf_35242744",
+        "filename": "DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T12:43:25Z",
+      "side": 0,
+      "message": "This one https://cs.chromium.org/chromium/tools/depot_tools/roll-dep?q\u003droll-dep\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d1\n\nIf you have depot_tools in your path (which is super likely) you can just invoke \"roll-dep src/chromium/shaderc\" in chromium/src and then amend the commit to add a BUG\u003ddawn:XX and TBR\u003dcwallez@chromium.org lines.",
+      "parentUuid": "7a2789f5_80616492",
+      "revId": "da8ee83ee72710b3c1885f63e489917a194089b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
