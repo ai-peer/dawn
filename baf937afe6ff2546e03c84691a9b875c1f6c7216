@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "98f2be2a_45ca72d8",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T15:49:47Z",
+      "side": 1,
+      "message": "No worries :)",
+      "parentUuid": "26a8adf7_b5e1960e",
+      "range": {
+        "startLine": 411,
+        "startChar": 27,
+        "endLine": 411,
+        "endChar": 34
+      },
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c99281b0_a84ad8a9",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 7
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "Yes, it\u0027s not a error which occurs crash or fail, the tests also can be PASS.\nBut I meet a different message in Draw says that\n\u003e[ UNASSIGNED-GeneralParameterError-RequiredParameter ] Object: VK_NULL_HANDLE (Type \u003d 0) | vkCmdDraw parameter, uint32_t vertexCount, is 0\n\u003e[ UNASSIGNED-GeneralParameterError-RequiredParameter ] Object: VK_NULL_HANDLE (Type \u003d 0) | vkCmdDraw parameter, uint32_t instanceCount, is 0\n\nFor DrawIndexed, there is no such message. Is it also OK to ignore it?\n\nVulkan version: 1.1.82",
       "parentUuid": "c99281b0_a84ad8a9",
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecb7c753_9bc9d2dc",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T15:49:47Z",
+      "side": 1,
+      "message": "Ah it\u0027s raised here: https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/cd05c1e4b2e69d8050bf9bc0af34b36187b1c291/layers/parameter_validation_utils.cpp#L2310\n\nRight now in Dawn we print all debug report messages, but maybe we should skip warnings. Feel free to ignore this.\n\nYes, we should remove the checks for DrawIndexed as well.",
+      "parentUuid": "82f1c5b0_bcd8df08",
       "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
