@@ -323,18 +323,24 @@ namespace dawn_native { namespace vulkan {
                 case Command::Draw: {
                     DrawCmd* draw = mCommands.NextCommand<DrawCmd>();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
-                    device->fn.CmdDraw(commands, draw->vertexCount, draw->instanceCount,
-                                       draw->firstVertex, draw->firstInstance);
+                    // The vertex and instace count must be non-zero, otherwise no-op
+                    if (draw->vertexCount != 0 && draw->instanceCount != 0) {
+                        descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                        device->fn.CmdDraw(commands, draw->vertexCount, draw->instanceCount,
+                                           draw->firstVertex, draw->firstInstance);
+                    }
                 } break;
 
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = mCommands.NextCommand<DrawIndexedCmd>();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
-                    device->fn.CmdDrawIndexed(commands, draw->indexCount, draw->instanceCount,
-                                              draw->firstIndex, draw->baseVertex,
-                                              draw->firstInstance);
+                    // The index and instace count must be non-zero, otherwise no-op
+                    if (draw->indexCount != 0 && draw->instanceCount != 0) {
+                        descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                        device->fn.CmdDrawIndexed(commands, draw->indexCount, draw->instanceCount,
+                                                  draw->firstIndex, draw->baseVertex,
+                                                  draw->firstInstance);
+                    }
                 } break;
 
                 case Command::SetBindGroup: {
