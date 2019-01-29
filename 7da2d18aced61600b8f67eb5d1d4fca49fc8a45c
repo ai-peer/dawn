@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d28df338_a62a6d8a",
+        "filename": "dawn_wire.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T13:02:01Z",
+      "side": 1,
+      "message": "nit: handle_type?",
+      "range": {
+        "startLine": 37,
+        "startChar": 57,
+        "endLine": 37,
+        "endChar": 68
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "816ede1f_9ea00683",
+        "filename": "generator/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T13:02:01Z",
+      "side": 1,
+      "message": "It\u0027s unfortunate that this wire-specific member appears here but I don\u0027t really see a better way to do it without much effort.",
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e641af2_e78a0083",
+        "filename": "generator/common.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T13:02:01Z",
+      "side": 1,
+      "message": "Woa I always thought assert was a function in python. TIL",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 14
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc7fcdd2_43723a1e",
+        "filename": "generator/templates/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T13:02:01Z",
+      "side": 1,
+      "message": "nit: !\u003d nullptr",
+      "range": {
+        "startLine": 25,
+        "startChar": 21,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "425d04ca_1c1e9e55",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T13:02:01Z",
+      "side": 1,
+      "message": "Maybe this should be \"object handle\" so that it works correctly with Name and friends. No need to address in this CL though.",
+      "range": {
+        "startLine": 49,
+        "startChar": 68,
+        "endLine": 49,
+        "endChar": 80
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66f1dcbc_91eca944",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-29T13:02:01Z",
+      "side": 1,
+      "message": "nit: !\u003d nullptr and likewise for the other checks in this file.",
+      "range": {
+        "startLine": 33,
+        "startChar": 13,
+        "endLine": 33,
+        "endChar": 19
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
