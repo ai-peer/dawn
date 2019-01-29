@@ -21,7 +21,6 @@
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/vulkan/BindGroupLayoutVk.h"
 #include "dawn_native/vulkan/BindGroupVk.h"
-#include "dawn_native/vulkan/BufferUploader.h"
 #include "dawn_native/vulkan/BufferVk.h"
 #include "dawn_native/vulkan/CommandBufferVk.h"
 #include "dawn_native/vulkan/ComputePipelineVk.h"
@@ -34,6 +33,7 @@
 #include "dawn_native/vulkan/RenderPipelineVk.h"
 #include "dawn_native/vulkan/SamplerVk.h"
 #include "dawn_native/vulkan/ShaderModuleVk.h"
+#include "dawn_native/vulkan/StagingBufferVk.h"
 #include "dawn_native/vulkan/SwapChainVk.h"
 #include "dawn_native/vulkan/TextureVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
@@ -109,11 +109,13 @@ namespace dawn_native { namespace vulkan {
         DAWN_TRY(functions->LoadDeviceProcs(mVkDevice, mDeviceInfo));
 
         GatherQueueFromDevice();
-
-        mBufferUploader = std::make_unique<BufferUploader>(this);
         mDeleter = std::make_unique<FencedDeleter>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mMemoryAllocator = std::make_unique<MemoryAllocator>(this);
+
+        // Uploader creates a buffer upon creation, so the deleter must be created prior.
+        mDynamicUploader = std::make_unique<DynamicUploader>(this);
+
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
 
         mPCIInfo.deviceId = mDeviceInfo.properties.deviceID;
@@ -168,7 +170,12 @@ namespace dawn_native { namespace vulkan {
         mUnusedFences.clear();
 
         // Free services explicitly so that they can free Vulkan objects before vkDestroyDevice
-        mBufferUploader = nullptr;
+        mDynamicUploader = nullptr;
+
+        // Releasing the uploader enqueues buffers to be deleted.
+        // Call Tick() again to allow the deleter to clear them prior to being released.
+        mDeleter->Tick(mCompletedSerial);
+
         mDeleter = nullptr;
         mMapRequestTracker = nullptr;
         mMemoryAllocator = nullptr;
@@ -268,7 +275,7 @@ namespace dawn_native { namespace vulkan {
         RecycleCompletedCommands();
 
         mMapRequestTracker->Tick(mCompletedSerial);
-        mBufferUploader->Tick(mCompletedSerial);
+        mDynamicUploader->Tick(mCompletedSerial);
         mMemoryAllocator->Tick(mCompletedSerial);
 
         mDeleter->Tick(mCompletedSerial);
@@ -317,10 +324,6 @@ namespace dawn_native { namespace vulkan {
 
     MemoryAllocator* Device::GetMemoryAllocator() const {
         return mMemoryAllocator.get();
-    }
-
-    BufferUploader* Device::GetBufferUploader() const {
-        return mBufferUploader.get();
     }
 
     FencedDeleter* Device::GetFencedDeleter() const {
@@ -684,7 +687,9 @@ namespace dawn_native { namespace vulkan {
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
-        return DAWN_UNIMPLEMENTED_ERROR("Device unable to create staging buffer.");
+        std::unique_ptr<StagingBufferBase> stagingBuffer =
+            std::make_unique<StagingBuffer>(size, this);
+        return std::move(stagingBuffer);
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
@@ -692,7 +697,26 @@ namespace dawn_native { namespace vulkan {
                                                BufferBase* destination,
                                                uint32_t destinationOffset,
                                                uint32_t size) {
-        return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+        ToBackend(destination)
+            ->TransitionUsageNow(GetPendingCommandBuffer(), dawn::BufferUsageBit::TransferDst);
+
+        VkBufferCopy copy;
+        copy.srcOffset = sourceOffset;
+        copy.dstOffset = destinationOffset;
+        copy.size = size;
+
+        this->fn.CmdCopyBuffer(GetPendingCommandBuffer(), ToBackend(source)->GetBufferHandle(),
+                               ToBackend(destination)->GetHandle(), 1, &copy);
+
+        return {};
+    }
+
+    ResultOrError<DynamicUploader*> Device::GetDynamicUploader() const {
+        // TODO(b-brber): Refactor this into device init once moved into DeviceBase.
+        if (mDynamicUploader->IsEmpty()) {
+            DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer(kDefaultUploadBufferSize));
+        }
+        return mDynamicUploader.get();
     }
 
 }}  // namespace dawn_native::vulkan
