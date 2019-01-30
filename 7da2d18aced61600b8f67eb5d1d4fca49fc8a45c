@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "48ff0c31_1213e0db",
+        "filename": "dawn_wire.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-30T02:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d28df338_a62a6d8a",
+      "range": {
+        "startLine": 37,
+        "startChar": 57,
+        "endLine": 37,
+        "endChar": 68
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "816ede1f_9ea00683",
         "filename": "generator/common.py",
         "patchSetId": 4
@@ -88,6 +112,30 @@
     },
     {
       "key": {
+        "uuid": "c07c6cbc_1d2bf820",
+        "filename": "generator/templates/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-30T02:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc7fcdd2_43723a1e",
+      "range": {
+        "startLine": 25,
+        "startChar": 21,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "425d04ca_1c1e9e55",
         "filename": "generator/wire_cmd.py",
         "patchSetId": 4
@@ -111,6 +159,30 @@
     },
     {
       "key": {
+        "uuid": "dea2cea9_92a9fbd4",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-30T02:32:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "425d04ca_1c1e9e55",
+      "range": {
+        "startLine": 49,
+        "startChar": 68,
+        "endLine": 49,
+        "endChar": 80
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66f1dcbc_91eca944",
         "filename": "src/dawn_wire/client/ClientDoers.cpp",
         "patchSetId": 4
@@ -131,6 +203,30 @@
       "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e128c6a6_60ea066c",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-01-30T02:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f1dcbc_91eca944",
+      "range": {
+        "startLine": 33,
+        "startChar": 13,
+        "endLine": 33,
+        "endChar": 19
+      },
+      "revId": "7da2d18aced61600b8f67eb5d1d4fca49fc8a45c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
