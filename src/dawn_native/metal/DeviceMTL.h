@@ -85,7 +85,7 @@ namespace dawn_native { namespace metal {
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
-        void CollectPCIInfo();
+        MaybeError CollectPCIInfo();
 
         void OnCompletedHandler();
 
