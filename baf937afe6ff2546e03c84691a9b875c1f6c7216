@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "7be3d1e3_23f614dd",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-30T01:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98f2be2a_45ca72d8",
+      "range": {
+        "startLine": 411,
+        "startChar": 27,
+        "endLine": 411,
+        "endChar": 34
+      },
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c99281b0_a84ad8a9",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 7
@@ -123,6 +147,24 @@
       "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "959e11ff_fe50c627",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-01-30T01:18:17Z",
+      "side": 1,
+      "message": "Thanks for explanation.",
+      "parentUuid": "ecb7c753_9bc9d2dc",
+      "revId": "baf937afe6ff2546e03c84691a9b875c1f6c7216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
