@@ -753,6 +753,8 @@ source_set("libdawn_wire_headers") {
   ]
   public_configs = [ ":dawn_public" ]
   sources = [
+    "src/include/dawn_wire/Client.h",
+    "src/include/dawn_wire/Server.h",
     "src/include/dawn_wire/Wire.h",
     "src/include/dawn_wire/dawn_wire_export.h",
   ]

@@ -19,23 +19,7 @@
 
 namespace dawn_wire { namespace server {
 
-    class Server;
-
-    struct MapUserdata {
-        Server* server;
-        ObjectHandle buffer;
-        uint32_t requestSerial;
-        uint32_t size;
-        bool isWrite;
-    };
-
-    struct FenceCompletionUserdata {
-        Server* server;
-        ObjectHandle fence;
-        uint64_t value;
-    };
-
-    class Server : public ServerBase, public CommandHandler {
+    class Server : public ServerBase {
       public:
         Server(dawnDevice device, const dawnProcTable& procs, CommandSerializer* serializer);
         ~Server();
