@@ -12,19 +12,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "dawn_wire/Client.h"
+#include "dawn_wire/Server.h"
 #include "dawn_wire/client/Client.h"
 #include "dawn_wire/server/Server.h"
 
 namespace dawn_wire {
-    CommandHandler* NewClientDevice(dawnProcTable* procs,
-                                    dawnDevice* device,
-                                    CommandSerializer* serializer) {
-        return new client::Client(procs, device, serializer);
+
+    Client::Client(CommandSerializer* serializer) : mImpl(new client::Client(serializer)) {
     }
 
-    CommandHandler* NewServerCommandHandler(dawnDevice device,
-                                            const dawnProcTable& procs,
-                                            CommandSerializer* serializer) {
-        return new server::Server(device, procs, serializer);
+    Client::~Client() {
+        mImpl.reset();
     }
+
+    dawnDevice Client::GetDevice() const {
+        return mImpl->GetDevice();
+    }
+
+    dawnProcTable Client::GetProcs() const {
+        return client::GetProcs();
+    }
+
+    const char* Client::HandleCommands(const char* commands, size_t size) {
+        return mImpl->HandleCommands(commands, size);
+    }
+
+    Server::Server(dawnDevice device, const dawnProcTable& procs, CommandSerializer* serializer)
+        : mImpl(new server::Server(device, procs, serializer)) {
+    }
+
+    Server::~Server() {
+        mImpl.reset();
+    }
+
+    const char* Server::HandleCommands(const char* commands, size_t size) {
+        return mImpl->HandleCommands(commands, size);
+    }
+
 }  // namespace dawn_wire
