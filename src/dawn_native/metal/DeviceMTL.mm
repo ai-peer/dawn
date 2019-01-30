@@ -32,93 +32,94 @@
 #include "dawn_native/metal/SwapChainMTL.h"
 #include "dawn_native/metal/TextureMTL.h"
 
-#include <IOKit/graphics/IOGraphicsLib.h>
+#include <IOKit/IOKitLib.h>
 #include <unistd.h>
 
 namespace dawn_native { namespace metal {
 
     namespace {
-        // Since CGDisplayIOServicePort was deprecated in macOS 10.9, we need create
-        // an alternative function for getting I/O service port from current display.
-        io_service_t GetDisplayIOServicePort() {
-            // The matching service port (or 0 if none can be found)
-            io_service_t servicePort = 0;
+        struct PCIIDs {
+            uint32_t vendorId;
+            uint32_t deviceId;
+        };
 
-            // Create matching dictionary for display service
-            CFMutableDictionaryRef matchingDict = IOServiceMatching("IODisplayConnect");
+        // Queries the IO Registry to find the PCI device and vendor IDs of the MTLDevice.
+        // The registry entry correponding to [device registryID] doesn't contain the exact PCI ids
+        // because it corresponds to a driver. However its parent entry corresponds to the device
+        // itself and has uint32_t "device-id" and "registry-id" keys. For example on a dual-GPU
+        // MacBook Pro 2017 the IORegistry explorer shows the following tree (simplified here):
+        //
+        //  - PCI0@0
+        //  | - AppleACPIPCI
+        //  | | - IGPU@2 (type IOPCIDevice)
+        //  | | | - IntelAccelerator (type IOGraphicsAccelerator2)
+        //  | | - PEG0@1
+        //  | | | - IOPP
+        //  | | | | - GFX0@0 (type IOPCIDevice)
+        //  | | | | | - AMDRadeonX4000_AMDBaffinGraphicsAccelerator (type IOGraphicsAccelerator2)
+        //
+        // [device registryID] is the ID for one of the IOGraphicsAccelerator2 and we can see that
+        // their parent always is an IOPCIDevice that has properties for the device and vendor IDs.
+        ResultOrError<PCIIDs> GetDeviceIORegistryPCIInfo(id<MTLDevice> device) {
+            // Get a matching dictionary for the IOGraphicsAccelerator2
+            CFMutableDictionaryRef matchingDict = IORegistryEntryIDMatching([device registryID]);
             if (matchingDict == nullptr) {
-                return 0;
+                return DAWN_CONTEXT_LOST_ERROR("Failed to create the matching dict for the device");
             }
 
-            io_iterator_t iter;
-            // IOServiceGetMatchingServices look up the default master ports that match a
-            // matching dictionary, and will consume the reference on the matching dictionary,
-            // so we don't need to release the dictionary, but the iterator handle should
-            // be released when its iteration is finished.
-            if (IOServiceGetMatchingServices(kIOMasterPortDefault, matchingDict, &iter) !=
+            // IOServiceGetMatchingService will consume the reference on the matching dictionary,
+            // so we don't need to release the dictionary.
+            io_registry_entry_t acceleratorEntry =
+                IOServiceGetMatchingService(kIOMasterPortDefault, matchingDict);
+            if (acceleratorEntry == IO_OBJECT_NULL) {
+                return DAWN_CONTEXT_LOST_ERROR(
+                    "Failed to get the IO registry entry for the accelerator");
+            }
+
+            // Get the parent entry that will be the IOPCIDevice
+            io_registry_entry_t deviceEntry = IO_OBJECT_NULL;
+            if (IORegistryEntryGetParentEntry(acceleratorEntry, kIOServicePlane, &deviceEntry) !=
                 kIOReturnSuccess) {
-                return 0;
+                IOObjectRelease(acceleratorEntry);
+                return DAWN_CONTEXT_LOST_ERROR(
+                    "Failed to get the IO registry entry for the device");
             }
 
-            // Vendor number and product number of current main display
-            const uint32_t displayVendorNumber = CGDisplayVendorNumber(kCGDirectMainDisplay);
-            const uint32_t displayProductNumber = CGDisplayModelNumber(kCGDirectMainDisplay);
+            ASSERT(deviceEntry != IO_OBJECT_NULL);
+            IOObjectRelease(acceleratorEntry);
 
-            io_service_t serv;
-            while ((serv = IOIteratorNext(iter)) != IO_OBJECT_NULL) {
-                CFDictionaryRef displayInfo =
-                    IODisplayCreateInfoDictionary(serv, kIODisplayOnlyPreferredName);
-
-                CFNumberRef vendorIDRef, productIDRef;
-                Boolean success;
-                // The ownership of CF object follows the 'Get Rule', we don't need to
-                // release these values
-                success = CFDictionaryGetValueIfPresent(displayInfo, CFSTR(kDisplayVendorID),
-                                                        (const void**)&vendorIDRef);
-                success &= CFDictionaryGetValueIfPresent(displayInfo, CFSTR(kDisplayProductID),
-                                                         (const void**)&productIDRef);
-                if (success) {
-                    CFIndex vendorID = 0, productID = 0;
-                    CFNumberGetValue(vendorIDRef, kCFNumberSInt32Type, &vendorID);
-                    CFNumberGetValue(productIDRef, kCFNumberSInt32Type, &productID);
-
-                    if (vendorID == displayVendorNumber && productID == displayProductNumber) {
-                        // Check if vendor id and product id match with current display's
-                        // If it does, we find the desired service port
-                        servicePort = serv;
-                        CFRelease(displayInfo);
-                        break;
-                    }
-                }
-
-                CFRelease(displayInfo);
-                IOObjectRelease(serv);
-            }
-            IOObjectRelease(iter);
-            return servicePort;
-        }
-
-        // Get integer property from registry entry.
-        uint32_t GetEntryProperty(io_registry_entry_t entry, CFStringRef name) {
-            uint32_t value = 0;
-
-            // Recursively search registry entry and its parents for property name
-            // The data should release with CFRelease
-            CFDataRef data = static_cast<CFDataRef>(IORegistryEntrySearchCFProperty(
-                entry, kIOServicePlane, name, kCFAllocatorDefault,
-                kIORegistryIterateRecursively | kIORegistryIterateParents));
-
-            if (data != nullptr) {
-                const uint32_t* valuePtr =
-                    reinterpret_cast<const uint32_t*>(CFDataGetBytePtr(data));
-                if (valuePtr) {
-                    value = *valuePtr;
-                }
-
-                CFRelease(data);
+            // Get the dictionary of properties for the IOPCIDevice
+            CFMutableDictionaryRef deviceProperties;
+            if (IORegistryEntryCreateCFProperties(deviceEntry, &deviceProperties,
+                                                  kCFAllocatorDefault,
+                                                  kNilOptions) != kIOReturnSuccess) {
+                IOObjectRelease(deviceEntry);
+                return DAWN_CONTEXT_LOST_ERROR(
+                    "Failed to get the IO registry properties for the device");
             }
 
-            return value;
+            ASSERT(deviceProperties != nullptr);
+            IOObjectRelease(deviceEntry);
+
+            // Extract the device and vendor ID from the properties. The refs don't need to be
+            // released because they follow the "Get" rule.
+            CFDataRef vendorIdRef, deviceIdRef;
+            Boolean success;
+            success = CFDictionaryGetValueIfPresent(deviceProperties, CFSTR("vendor-id"),
+                                                    (const void**)&vendorIdRef);
+            success &= CFDictionaryGetValueIfPresent(deviceProperties, CFSTR("device-id"),
+                                                     (const void**)&deviceIdRef);
+
+            if (!success) {
+                CFRelease(deviceProperties);
+                return DAWN_CONTEXT_LOST_ERROR("Failed to extract vendor and device ID.");
+            }
+
+            uint32_t vendorId = *reinterpret_cast<const uint32_t*>(CFDataGetBytePtr(vendorIdRef));
+            uint32_t deviceId = *reinterpret_cast<const uint32_t*>(CFDataGetBytePtr(deviceIdRef));
+
+            CFRelease(deviceProperties);
+            return PCIIDs{vendorId, deviceId};
         }
     }  // anonymous namespace
 
@@ -135,7 +136,10 @@ namespace dawn_native { namespace metal {
           mResourceUploader(new ResourceUploader(this)) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
-        CollectPCIInfo();
+
+        if (ConsumedError(CollectPCIInfo())) {
+            ASSERT(false);
+        }
     }
 
     Device::~Device() {
@@ -287,15 +291,15 @@ namespace dawn_native { namespace metal {
         return mResourceUploader.get();
     }
 
-    void Device::CollectPCIInfo() {
-        io_registry_entry_t entry = GetDisplayIOServicePort();
-        if (entry != IO_OBJECT_NULL) {
-            mPCIInfo.vendorId = GetEntryProperty(entry, CFSTR("vendor-id"));
-            mPCIInfo.deviceId = GetEntryProperty(entry, CFSTR("device-id"));
-            IOObjectRelease(entry);
-        }
-
+    MaybeError Device::CollectPCIInfo() {
         mPCIInfo.name = std::string([mMtlDevice.name UTF8String]);
+
+        PCIIDs ids;
+        DAWN_TRY_ASSIGN(ids, GetDeviceIORegistryPCIInfo(mMtlDevice));
+        mPCIInfo.vendorId = ids.vendorId;
+        mPCIInfo.deviceId = ids.deviceId;
+
+        return {};
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
