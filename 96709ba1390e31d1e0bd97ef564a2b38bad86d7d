@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57e862f5_4de379e2",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:04:12Z",
+      "side": 1,
+      "message": "you mean the allocator?",
+      "range": {
+        "startLine": 116,
+        "startChar": 59,
+        "endLine": 116,
+        "endChar": 66
+      },
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81879c69_727c50f5",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:04:12Z",
+      "side": 1,
+      "message": "I think this could be return std::make_unique ...",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f29353b5_faef064c",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:04:12Z",
+      "side": 1,
+      "message": "We should use HOST_COHERENT, I think it is always the better choice for map-writable memory (let\u0027s not worry about uncached accesses for now, we can use non-temporal stores if that becomes a problem). We are always guaranteed that a non-sparse buffer will be able to be located in a host visible coherent memory type.\n\nThis would avoid the need for flushes for a tiny modification to MemoryAllocator.cpp.",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12a0ca32_1539af5b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:04:12Z",
+      "side": 1,
+      "message": "nit: ensure correct ordering with previous memory operations on the buffer.",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbaaad22_bc49be31",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:04:12Z",
+      "side": 1,
+      "message": "We also need a pipeline barrier to make visible writes in the HOST_VISIBLE stage to the TRANSFER stage like in [1]. Ideally we only produce that pipeline barrier the first time CopyFromStagingToBuffer is used and records to a VkCommandBuffer.",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1286a7f_8e13eeb2",
+        "filename": "src/dawn_native/vulkan/StagingBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:04:12Z",
+      "side": 1,
+      "message": "GPU pointers aren\u0027t a thing in Vulkan unfortunately, what does this comment mean?",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
