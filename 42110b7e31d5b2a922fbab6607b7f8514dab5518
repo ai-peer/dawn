@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622823_3a1907d9",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:50:42Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be unreachable because we can receive garbage data from the client and need to handle the error case properly.",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52797706_059cd67d",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:50:42Z",
+      "side": 1,
+      "message": "Is there a case where this is not true?",
+      "range": {
+        "startLine": 53,
+        "startChar": 76,
+        "endLine": 53,
+        "endChar": 99
+      },
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e05206e_756520bd",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:50:42Z",
+      "side": 1,
+      "message": "This has been removed.",
+      "range": {
+        "startLine": 106,
+        "startChar": 32,
+        "endLine": 106,
+        "endChar": 67
+      },
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19d944f8_c3c7588f",
+        "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:50:42Z",
+      "side": 1,
+      "message": "Could server_custom_pre_handler_commands be folded in server_handwritten_commands?",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eaea2b1_37215572",
+        "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-31T13:50:42Z",
+      "side": 1,
+      "message": "This should also skip client_side_commands, it could be in the same loop as handlers for both doers and handlers are defined together.",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
