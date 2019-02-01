@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf09e40e_1db2aee0",
+        "filename": "src/dawn_wire/DawnWire.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-01T02:37:23Z",
+      "side": 1,
+      "message": "The distiction between dawn_wire::client::Client and dawn_wire::Client is confusing. Could the class names be more specific, maybe?",
+      "revId": "ac5ee39bf76eef300b0cf70a90dba7d5640e04e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0429728e_ab9f64e9",
+        "filename": "src/dawn_wire/DawnWire.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-01T02:37:23Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have the definitions for these two classes\u0027 members in separate files, appropriately named. Then I think this one can be deleted.",
+      "revId": "ac5ee39bf76eef300b0cf70a90dba7d5640e04e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
