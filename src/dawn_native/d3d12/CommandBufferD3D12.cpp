@@ -24,12 +24,15 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
+#include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/RenderPassDescriptorD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
+
+#include <WinPixEventRuntime/pix3.h>
 
 namespace dawn_native { namespace d3d12 {
 
@@ -599,6 +602,27 @@ namespace dawn_native { namespace d3d12 {
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
                                                       draw->firstInstance);
+                } break;
+
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
+                    if (ToBackend(GetDevice())->GetFunctions()->isPixEventRuntimeLoaded()) {
+                        PIXSetMarker(commandList.Get(), PIX_COLOR_DEFAULT, cmd->label.c_str());
+                    }
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mCommands.NextCommand<PopDebugGroupCmd>();
+                    if (ToBackend(GetDevice())->GetFunctions()->isPixEventRuntimeLoaded()) {
+                        PIXEndEvent(commandList.Get());
+                    }
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
+                    if (ToBackend(GetDevice())->GetFunctions()->isPixEventRuntimeLoaded()) {
+                        PIXBeginEvent(commandList.Get(), PIX_COLOR_DEFAULT, cmd->label.c_str());
+                    }
                 } break;
 
                 case Command::SetRenderPipeline: {

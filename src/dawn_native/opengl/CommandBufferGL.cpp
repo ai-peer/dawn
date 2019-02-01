@@ -635,6 +635,30 @@ namespace dawn_native { namespace opengl {
                     }
                 } break;
 
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
+                    if(!GLAD_GL_EXT_debug_marker) {
+                        break;
+                    }
+                    glInsertEventMarkerEXT(cmd->label.length(), cmd->label.c_str());
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mCommands.NextCommand<PopDebugGroupCmd>();
+                    if(!GLAD_GL_EXT_debug_marker) {
+                        break;
+                    }
+                    glPopGroupMarkerEXT();
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
+                    if(!GLAD_GL_EXT_debug_marker) {
+                        break;
+                    }
+                    glPushGroupMarkerEXT(cmd->label.length(), cmd->label.c_str());
+                } break;
+
                 case Command::SetRenderPipeline: {
                     SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
                     lastPipeline = ToBackend(cmd->pipeline).Get();

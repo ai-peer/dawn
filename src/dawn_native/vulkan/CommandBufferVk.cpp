@@ -337,6 +337,35 @@ namespace dawn_native { namespace vulkan {
                                               draw->firstInstance);
                 } break;
 
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
+                    if (device->GetDeviceInfo().debugMarker) {
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = NULL;
+                        markerInfo.pMarkerName = cmd->label.c_str();
+                        device->fn.CmdDebugMarkerInsertEXT(commands, &markerInfo);
+                    }
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mCommands.NextCommand<PopDebugGroupCmd>();
+                    if (device->GetDeviceInfo().debugMarker) {
+                        device->fn.CmdDebugMarkerEndEXT(commands);
+                    }
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
+                    if (device->GetDeviceInfo().debugMarker) {
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = NULL;
+                        markerInfo.pMarkerName = cmd->label.c_str();
+                        device->fn.CmdDebugMarkerBeginEXT(commands, &markerInfo);
+                    }
+                } break;
+
                 case Command::SetBindGroup: {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     VkDescriptorSet set = ToBackend(cmd->group.Get())->GetHandle();
