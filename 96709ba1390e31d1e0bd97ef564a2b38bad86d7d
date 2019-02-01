@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "553d9cbd_1a623452",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-01T17:37:57Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "57e862f5_4de379e2",
+      "range": {
+        "startLine": 116,
+        "startChar": 59,
+        "endLine": 116,
+        "endChar": 66
+      },
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81879c69_727c50f5",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2019-01-31T13:04:12Z",
       "side": 1,
       "message": "I think this could be return std::make_unique ...",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51cd23a9_746c53dc",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-01T17:37:57Z",
+      "side": 1,
+      "message": "Doing `return std::make_unique` is a forbidden conversion. Maybe `return Result\u003c...\u003e(std::make_unique ... `.",
+      "parentUuid": "81879c69_727c50f5",
       "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "1a872223_3cdb5a2c",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-01T17:37:57Z",
+      "side": 1,
+      "message": "SGTM. IIRC, not all drivers are well-optimized for HOST_COHERENT.",
+      "parentUuid": "f29353b5_faef064c",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12a0ca32_1539af5b",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "aa3ca024_abad1700",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-01T17:37:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12a0ca32_1539af5b",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbaaad22_bc49be31",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -87,6 +165,24 @@
       "writtenOn": "2019-01-31T13:04:12Z",
       "side": 1,
       "message": "We also need a pipeline barrier to make visible writes in the HOST_VISIBLE stage to the TRANSFER stage like in [1]. Ideally we only produce that pipeline barrier the first time CopyFromStagingToBuffer is used and records to a VkCommandBuffer.",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a7586d7_4e26cd8e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-01T17:37:57Z",
+      "side": 1,
+      "message": "If I understand the spec correctly, this is not required (see comment). We could however; insert the barrier, should there exist some other issue. Could you please further clarify the need?",
+      "parentUuid": "cbaaad22_bc49be31",
       "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
