@@ -134,6 +134,21 @@ source_set("vulkan_headers") {
   public_configs = [ ":vulkan_headers_public" ]
 }
 
+config("win_pix_event_runtime_config") {
+  include_dirs = [ "." ]
+}
+
+source_set("WinPixEventRuntime") {
+  sources = [
+    "WinPixEventRuntime/PIXEventsCommon.h",
+    "WinPixEventRuntime/PIXEventsGenerated.h",
+    "WinPixEventRuntime/pix3.h",
+    "WinPixEventRuntime/pix3_win.h",
+  ]
+
+  public_configs = [ ":win_pix_event_runtime_config" ]
+}
+
 ###############################################################################
 # Gtest Gmock - Handle building inside and outside of Chromium.
 ###############################################################################
