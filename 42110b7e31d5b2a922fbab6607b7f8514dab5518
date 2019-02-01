@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "89ed562d_3899f84c",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-01T00:23:14Z",
+      "side": 1,
+      "message": "this is kind of an odd heuristic. Is there a better signal that can be used here? (command.has_return_value seems like it would be nice, but that\u0027s not trivial)\n\n(is ret|length supposed to ever be \u003e 1? if not, flipping it to \"!\u003d 0\" would be slightly clearer, maybe with some kind of assert that it\u0027s not \u003e 1)\n\nProbably the best thing to do here is just comment. \"Call the proc [or whatever it\u0027s called]. If there is a return slot for this command, assign it.\"",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1a622823_3a1907d9",
         "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
         "patchSetId": 8
