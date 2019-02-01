@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d6b3da6_ba36f387",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-01T12:25:26Z",
+      "side": 1,
+      "message": "Interesting.. for MoltenVK?",
+      "revId": "e2947fd316a87aa9b4fc8db1b4dd49ea2e26a7a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9501250_bfdae511",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-01T12:25:26Z",
+      "side": 1,
+      "message": "Nit: comma splice. Use a semicolon or split into two sentences.",
+      "revId": "e2947fd316a87aa9b4fc8db1b4dd49ea2e26a7a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5183aff_41331a7a",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-01T12:25:26Z",
+      "side": 1,
+      "message": "Nit: weird indentation.",
+      "revId": "e2947fd316a87aa9b4fc8db1b4dd49ea2e26a7a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bda338d_5ea94a17",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-01T12:25:26Z",
+      "side": 1,
+      "message": "Nit: \"in the device\" -\u003e \"to the device\"?",
+      "revId": "e2947fd316a87aa9b4fc8db1b4dd49ea2e26a7a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
