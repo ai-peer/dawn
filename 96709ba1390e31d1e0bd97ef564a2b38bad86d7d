@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "14f00e41_7188d61d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-02T00:05:55Z",
+      "side": 1,
+      "message": "In that case, I say leave as is. Or return std::move(std::make_unique(...))?",
+      "parentUuid": "51cd23a9_746c53dc",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f29353b5_faef064c",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
