@@ -498,6 +498,7 @@ source_set("libdawn_native_sources") {
   ]
 
   if (dawn_enable_d3d12) {
+    deps += [ "third_party:WinPixEventRuntime" ]
     libs += [ "dxguid.lib" ]
     sources += [
       "src/dawn_native/d3d12/BindGroupD3D12.cpp",
@@ -521,6 +522,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/d3d12/InputStateD3D12.h",
       "src/dawn_native/d3d12/NativeSwapChainImplD3D12.cpp",
       "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
+      "src/dawn_native/d3d12/PIXEventRuntimeHelper.cpp",
+      "src/dawn_native/d3d12/PIXEventRuntimeHelper.h",
       "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
       "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
       "src/dawn_native/d3d12/PlatformFunctions.cpp",
@@ -958,6 +961,7 @@ test("dawn_end2end_tests") {
     "src/tests/end2end/BufferTests.cpp",
     "src/tests/end2end/ComputeCopyStorageBufferTests.cpp",
     "src/tests/end2end/CopyTests.cpp",
+    "src/tests/end2end/DebugMarkerTests.cpp",
     "src/tests/end2end/DepthStencilStateTests.cpp",
     "src/tests/end2end/DrawIndexedTests.cpp",
     "src/tests/end2end/FenceTests.cpp",
