@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fabd8be_d72e8e53",
+        "filename": "src/utils/MetalBinding.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-04T16:20:05Z",
+      "side": 1,
+      "message": "Nit: D3D12 -\u003e Metal",
+      "range": {
+        "startLine": 118,
+        "startChar": 42,
+        "endLine": 118,
+        "endChar": 43
+      },
+      "revId": "f62e34ccd5a0f0b46eb1b602729cfee2b794b948",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
