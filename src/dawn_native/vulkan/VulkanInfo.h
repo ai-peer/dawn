@@ -28,6 +28,7 @@ namespace dawn_native { namespace vulkan {
     extern const char kLayerNameLunargVKTrace[];
     extern const char kLayerNameRenderDocCapture[];
 
+    extern const char kExtensionNameExtDebugMarker[];
     extern const char kExtensionNameExtDebugReport[];
     extern const char kExtensionNameMvkMacosSurface[];
     extern const char kExtensionNameKhrSurface[];
@@ -65,6 +66,7 @@ namespace dawn_native { namespace vulkan {
         VkPhysicalDeviceFeatures features;
 
         // Extensions
+        bool debugMarker = false;
         bool swapchain = false;
     };
 

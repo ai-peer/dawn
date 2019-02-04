@@ -27,6 +27,7 @@
 #include "dawn_native/opengl/TextureGL.h"
 
 #include <cstring>
+#include <iostream>
 
 namespace dawn_native { namespace opengl {
 
@@ -633,6 +634,15 @@ namespace dawn_native { namespace opengl {
                                                     indexBufferBaseOffset),
                             draw->instanceCount);
                     }
+                } break;
+
+                case Command::InsertDebugMarker:
+                case Command::PopDebugGroup:
+                case Command::PushDebugGroup: {
+                    // Due to lack of linux driver support for GL_ext_debug_marker
+                    // extension these functions are skipped.
+                    std::cout << "fellthrough\n";
+                    SkipCommand(&mCommands, type);
                 } break;
 
                 case Command::SetRenderPipeline: {
