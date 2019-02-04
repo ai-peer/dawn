@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9f110448_8c2a3f1f",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-04T19:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89ed562d_3899f84c",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622823_3a1907d9",
         "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5516ace3_cb520443",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-04T19:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622823_3a1907d9",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "1b8c9b57_8f9c58c4",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-04T19:46:15Z",
+      "side": 1,
+      "message": "Changed to an assertion.",
+      "parentUuid": "52797706_059cd67d",
+      "range": {
+        "startLine": 53,
+        "startChar": 76,
+        "endLine": 53,
+        "endChar": 99
+      },
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e05206e_756520bd",
         "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
         "patchSetId": 8
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "c8a4685c_35133901",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-04T19:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e05206e_756520bd",
+      "range": {
+        "startLine": 106,
+        "startChar": 32,
+        "endLine": 106,
+        "endChar": 67
+      },
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19d944f8_c3c7588f",
         "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
         "patchSetId": 8
@@ -93,6 +177,24 @@
       "writtenOn": "2019-01-31T13:50:42Z",
       "side": 1,
       "message": "Could server_custom_pre_handler_commands be folded in server_handwritten_commands?",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66b8e6a2_5141198f",
+        "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-04T19:46:15Z",
+      "side": 1,
+      "message": "It could, but then PreHandleQueueSubmit would be empty?",
+      "parentUuid": "19d944f8_c3c7588f",
       "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -113,6 +215,24 @@
       "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1dbabb3_b77611d9",
+        "filename": "generator/templates/dawn_wire/server/ServerPrototypes.inl",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-04T19:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eaea2b1_37215572",
+      "revId": "42110b7e31d5b2a922fbab6607b7f8514dab5518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
