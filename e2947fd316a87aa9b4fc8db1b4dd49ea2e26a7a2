@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "c9dbe0e5_4991c87c",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-04T15:47:13Z",
+      "side": 1,
+      "message": "Ah, you\u0027re correct. I missed the parentheses.",
+      "parentUuid": "c4080c99_603ee182",
+      "revId": "e2947fd316a87aa9b4fc8db1b4dd49ea2e26a7a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bda338d_5ea94a17",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 6
