@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "a0b790ef_1922293d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-04T08:39:24Z",
+      "side": 1,
+      "message": "Ok that was a bad suggestion feel free to ignore it :)",
+      "parentUuid": "14f00e41_7188d61d",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f29353b5_faef064c",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -131,6 +149,24 @@
       "side": 1,
       "message": "SGTM. IIRC, not all drivers are well-optimized for HOST_COHERENT.",
       "parentUuid": "f29353b5_faef064c",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "126bbe50_ef7831a7",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-04T08:39:24Z",
+      "side": 1,
+      "message": "I see, if that turns out to be a perf issue we\u0027ll implement a second path.",
+      "parentUuid": "1a872223_3cdb5a2c",
       "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -201,6 +237,24 @@
       "side": 1,
       "message": "If I understand the spec correctly, this is not required (see comment). We could however; insert the barrier, should there exist some other issue. Could you please further clarify the need?",
       "parentUuid": "cbaaad22_bc49be31",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6177c4df_05be7ba3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-04T08:39:24Z",
+      "side": 1,
+      "message": "The spec isn\u0027t super clear about it, but basically CPU memory write correspond to the VK_ACCESS_HOST_WRITE_BIT in VK_PIPELINE_STAGE_HOST_BIT. You can see this memory barrier as buffering a cache flush on the GPU so that it sees the latest version of the data that was written by the CPU.\n\nThis is exactly what happens in Intel\u0027s Vulkan driver:\n - in vkCmdPipelineBarrier the OR of all the dst accesses is computed and used to set \"pending bits\" https://github.com/mesa3d/mesa/blob/master/src/intel/vulkan/genX_cmd_buffer.c#L1932\n - the TRANSFER_READ access causes a cache flush to be added to the pending bits: https://github.com/mesa3d/mesa/blob/48ed2a7bb009618edfde28ee87ae391c1879c35b/src/intel/vulkan/anv_private.h#L1948",
+      "parentUuid": "1a7586d7_4e26cd8e",
       "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
