@@ -558,6 +558,18 @@ namespace dawn_native {
                     persistentState.SetRenderPipeline(pipeline);
                 } break;
 
+                case Command::InsertDebugMarker: {
+                    mIterator.NextCommand<InsertDebugMarkerCmd>();
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mIterator.NextCommand<PopDebugGroupCmd>();
+                } break;
+
+                case Command::PushDebugGroup: {
+                    mIterator.NextCommand<PushDebugGroupCmd>();
+                } break;
+
                 case Command::SetPushConstants: {
                     SetPushConstantsCmd* cmd = mIterator.NextCommand<SetPushConstantsCmd>();
                     mIterator.NextData<uint32_t>(cmd->count);
