@@ -37,6 +37,9 @@ namespace dawn_native {
         DrawIndexed,
         EndComputePass,
         EndRenderPass,
+        InsertDebugMarker,
+        PopDebugGroup,
+        PushDebugGroup,
         SetComputePipeline,
         SetRenderPipeline,
         SetPushConstants,
@@ -110,6 +113,16 @@ namespace dawn_native {
     struct EndComputePassCmd {};
 
     struct EndRenderPassCmd {};
+
+    struct InsertDebugMarkerCmd {
+        std::string label;
+    };
+
+    struct PopDebugGroupCmd {};
+
+    struct PushDebugGroupCmd {
+        std::string label;
+    };
 
     struct SetComputePipelineCmd {
         Ref<ComputePipelineBase> pipeline;

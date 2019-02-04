@@ -21,6 +21,8 @@
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/Texture.h"
 
+#include <iostream>
+
 namespace dawn_native {
 
     void FreeCommands(CommandIterator* commands) {
@@ -68,6 +70,18 @@ namespace dawn_native {
                 case Command::EndRenderPass: {
                     EndRenderPassCmd* cmd = commands->NextCommand<EndRenderPassCmd>();
                     cmd->~EndRenderPassCmd();
+                } break;
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = commands->NextCommand<InsertDebugMarkerCmd>();
+                    cmd->~InsertDebugMarkerCmd();
+                } break;
+                case Command::PopDebugGroup: {
+                    PopDebugGroupCmd* cmd = commands->NextCommand<PopDebugGroupCmd>();
+                    cmd->~PopDebugGroupCmd();
+                } break;
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = commands->NextCommand<PushDebugGroupCmd>();
+                    cmd->~PushDebugGroupCmd();
                 } break;
                 case Command::SetComputePipeline: {
                     SetComputePipelineCmd* cmd = commands->NextCommand<SetComputePipelineCmd>();
@@ -156,6 +170,21 @@ namespace dawn_native {
 
             case Command::EndRenderPass:
                 commands->NextCommand<EndRenderPassCmd>();
+                break;
+
+            case Command::InsertDebugMarker:
+                std::cout << "IDM\n";
+                commands->NextCommand<InsertDebugMarkerCmd>();
+                break;
+
+            case Command::PopDebugGroup:
+                std::cout << "Pop\n";
+                commands->NextCommand<PopDebugGroupCmd>();
+                break;
+
+            case Command::PushDebugGroup:
+                std::cout << "Push\n";
+                commands->NextCommand<PushDebugGroupCmd>();
                 break;
 
             case Command::SetComputePipeline:
