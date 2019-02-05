@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e6b2a343_c7679312",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-05T12:23:19Z",
+      "side": 1,
+      "message": "id\u003cFoo\u003e is basically a Foo*. Here I believe MTLCopyAllDevices returns a new NSArray so it needs to be released before it goes out of scope.",
+      "parentUuid": "4c518d8a_bd832ac1",
+      "revId": "f62e34ccd5a0f0b46eb1b602729cfee2b794b948",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fabd8be_d72e8e53",
         "filename": "src/utils/MetalBinding.mm",
         "patchSetId": 6
@@ -39,6 +57,30 @@
       "revId": "f62e34ccd5a0f0b46eb1b602729cfee2b794b948",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94ec391b_52d5f025",
+        "filename": "src/utils/MetalBinding.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-05T12:23:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fabd8be_d72e8e53",
+      "range": {
+        "startLine": 118,
+        "startChar": 42,
+        "endLine": 118,
+        "endChar": 43
+      },
+      "revId": "f62e34ccd5a0f0b46eb1b602729cfee2b794b948",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
