@@ -261,6 +261,24 @@
     },
     {
       "key": {
+        "uuid": "5d0922fa_abe52572",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-05T21:58:46Z",
+      "side": 1,
+      "message": "Yea, spec is hard to read - driver folks confirmed it\u0027s not required with HOST_COHERENT but adding one anyway is OK. Also, left a note this may vary by driver.",
+      "parentUuid": "6177c4df_05be7ba3",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1286a7f_8e13eeb2",
         "filename": "src/dawn_native/vulkan/StagingBufferVk.cpp",
         "patchSetId": 2
@@ -275,6 +293,24 @@
       "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ee0360_9acc1bb7",
+        "filename": "src/dawn_native/vulkan/StagingBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-05T21:58:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e1286a7f_8e13eeb2",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
