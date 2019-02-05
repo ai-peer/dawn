@@ -43,7 +43,7 @@ namespace dawn_native {
     //
     // but shorthand version for specific error types are preferred:
     //   return DAWN_VALIDATION_ERROR("My error message");
-#define DAWN_MAKE_ERROR(TYPE, MESSAGE) MakeError(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
+#define DAWN_MAKE_ERROR(TYPE, MESSAGE) ::dawn_native::MakeError(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
 #define DAWN_VALIDATION_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::Validation, MESSAGE)
 #define DAWN_CONTEXT_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::ContextLost, MESSAGE)
 #define DAWN_UNIMPLEMENTED_ERROR(MESSAGE) DAWN_MAKE_ERROR(ErrorType::Unimplemented, MESSAGE)
@@ -60,7 +60,7 @@ namespace dawn_native {
         auto DAWN_LOCAL_VAR = EXPR;                               \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {            \
             ErrorData* error = DAWN_LOCAL_VAR.AcquireError();     \
-            AppendBacktrace(error, __FILE__, __func__, __LINE__); \
+            ::dawn_native::AppendBacktrace(error, __FILE__, __func__, __LINE__); \
             return {std::move(error)};                            \
         }                                                         \
     }                                                             \
@@ -74,7 +74,7 @@ namespace dawn_native {
         auto DAWN_LOCAL_VAR = EXPR;                               \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {            \
             ErrorData* error = DAWN_LOCAL_VAR.AcquireError();     \
-            AppendBacktrace(error, __FILE__, __func__, __LINE__); \
+            ::dawn_native::AppendBacktrace(error, __FILE__, __func__, __LINE__); \
             return {std::move(error)};                            \
         }                                                         \
         VAR = DAWN_LOCAL_VAR.AcquireSuccess();                    \
