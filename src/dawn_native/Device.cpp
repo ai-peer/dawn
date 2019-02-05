@@ -70,6 +70,16 @@ namespace dawn_native {
         mErrorUserdata = userdata;
     }
 
+    MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
+        if (DAWN_UNLIKELY(object->GetDevice() != this)) {
+            return DAWN_VALIDATION_ERROR("Object from a different device.");
+        }
+        if (DAWN_UNLIKELY(object->IsError())) {
+            return DAWN_VALIDATION_ERROR("Object is an error.");
+        }
+        return {};
+    }
+
     AdapterBase* DeviceBase::GetAdapter() const {
         return mAdapter;
     }
@@ -113,7 +123,7 @@ namespace dawn_native {
         BindGroupBase* result = nullptr;
 
         if (ConsumedError(CreateBindGroupInternal(&result, descriptor))) {
-            return nullptr;
+            return BindGroupBase::MakeError(this);
         }
 
         return result;
@@ -123,7 +133,7 @@ namespace dawn_native {
         BindGroupLayoutBase* result = nullptr;
 
         if (ConsumedError(CreateBindGroupLayoutInternal(&result, descriptor))) {
-            return nullptr;
+            return BindGroupLayoutBase::MakeError(this);
         }
 
         return result;
@@ -132,7 +142,7 @@ namespace dawn_native {
         BufferBase* result = nullptr;
 
         if (ConsumedError(CreateBufferInternal(&result, descriptor))) {
-            return nullptr;
+            return BufferBase::MakeError(this);
         }
 
         return result;
@@ -145,7 +155,7 @@ namespace dawn_native {
         ComputePipelineBase* result = nullptr;
 
         if (ConsumedError(CreateComputePipelineInternal(&result, descriptor))) {
-            return nullptr;
+            return ComputePipelineBase::MakeError(this);
         }
 
         return result;
@@ -154,7 +164,7 @@ namespace dawn_native {
         FenceBase* result = nullptr;
 
         if (ConsumedError(CreateFenceInternal(&result, descriptor))) {
-            return nullptr;
+            return FenceBase::MakeError(this);
         }
 
         return result;
@@ -167,7 +177,7 @@ namespace dawn_native {
         PipelineLayoutBase* result = nullptr;
 
         if (ConsumedError(CreatePipelineLayoutInternal(&result, descriptor))) {
-            return nullptr;
+            return PipelineLayoutBase::MakeError(this);
         }
 
         return result;
@@ -176,6 +186,9 @@ namespace dawn_native {
         QueueBase* result = nullptr;
 
         if (ConsumedError(CreateQueueInternal(&result))) {
+            // If queue creation failure ever becomes possible, we should implement MakeError and
+            // friends for them.
+            UNREACHABLE();
             return nullptr;
         }
 
@@ -188,7 +201,7 @@ namespace dawn_native {
         SamplerBase* result = nullptr;
 
         if (ConsumedError(CreateSamplerInternal(&result, descriptor))) {
-            return nullptr;
+            return SamplerBase::MakeError(this);
         }
 
         return result;
@@ -198,7 +211,7 @@ namespace dawn_native {
         RenderPipelineBase* result = nullptr;
 
         if (ConsumedError(CreateRenderPipelineInternal(&result, descriptor))) {
-            return nullptr;
+            return RenderPipelineBase::MakeError(this);
         }
 
         return result;
@@ -207,7 +220,7 @@ namespace dawn_native {
         ShaderModuleBase* result = nullptr;
 
         if (ConsumedError(CreateShaderModuleInternal(&result, descriptor))) {
-            return nullptr;
+            return ShaderModuleBase::MakeError(this);
         }
 
         return result;
@@ -219,8 +232,9 @@ namespace dawn_native {
         TextureBase* result = nullptr;
 
         if (ConsumedError(CreateTextureInternal(&result, descriptor))) {
-            return nullptr;
+            return TextureBase::MakeError(this);
         }
+
         return result;
     }
     TextureViewBase* DeviceBase::CreateTextureView(TextureBase* texture,
@@ -228,8 +242,9 @@ namespace dawn_native {
         TextureViewBase* result = nullptr;
 
         if (ConsumedError(CreateTextureViewInternal(&result, texture, descriptor))) {
-            return nullptr;
+            return TextureViewBase::MakeError(this);
         }
+
         return result;
     }
 
