@@ -24,6 +24,8 @@
 #include "dawn_native/vulkan/RenderPipelineVk.h"
 #include "dawn_native/vulkan/TextureVk.h"
 
+#include <iostream>
+
 namespace dawn_native { namespace vulkan {
 
     namespace {
@@ -335,6 +337,42 @@ namespace dawn_native { namespace vulkan {
                     device->fn.CmdDrawIndexed(commands, draw->indexCount, draw->instanceCount,
                                               draw->firstIndex, draw->baseVertex,
                                               draw->firstInstance);
+                } break;
+
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
+                    if (device->GetDeviceInfo().debugMarker) {
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = NULL;
+                        markerInfo.pMarkerName = cmd->label.c_str();
+                        device->fn.CmdDebugMarkerInsertEXT(commands, &markerInfo);
+                    } else {
+                        std::cout
+                            << "warning: InsertDebugMarker called without debugger attached\n";
+                    }
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mCommands.NextCommand<PopDebugGroupCmd>();
+                    if (device->GetDeviceInfo().debugMarker) {
+                        device->fn.CmdDebugMarkerEndEXT(commands);
+                    } else {
+                        std::cout << "warning: PopDebugGroup called without debugger attached\n";
+                    }
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
+                    if (device->GetDeviceInfo().debugMarker) {
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = NULL;
+                        markerInfo.pMarkerName = cmd->label.c_str();
+                        device->fn.CmdDebugMarkerBeginEXT(commands, &markerInfo);
+                    } else {
+                        std::cout << "warning: PushDebugGroup called without debugger attached\n";
+                    }
                 } break;
 
                 case Command::SetBindGroup: {

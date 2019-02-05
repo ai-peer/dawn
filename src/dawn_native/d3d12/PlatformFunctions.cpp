@@ -27,8 +27,13 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(LoadD3D12());
         DAWN_TRY(LoadDXGI());
         DAWN_TRY(LoadD3DCompiler());
+        mPIXEventRuntimeLoaded = LoadPIXRuntime();
 
         return {};
+    }
+
+    bool PlatformFunctions::isPixEventRuntimeLoaded() const {
+        return mPIXEventRuntimeLoaded;
     }
 
     MaybeError PlatformFunctions::LoadD3D12() {
@@ -71,4 +76,13 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    bool PlatformFunctions::LoadPIXRuntime() {
+        if (!mPIXEventRuntimeLib.Open("WinPixEventRuntime.dll") ||
+            !mPIXEventRuntimeLib.GetProc(&pixGetThreadInfo, "PIXGetThreadInfo") ||
+            !mPIXEventRuntimeLib.GetProc(&pixEventsReplaceBlock, "PIXEventsReplaceBlock")) {
+            return false;
+        }
+
+        return true;
+    }
 }}  // namespace dawn_native::d3d12

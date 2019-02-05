@@ -15,16 +15,20 @@
 #ifndef DAWNNATIVE_D3D12_PLATFORMFUNCTIONS_H_
 #define DAWNNATIVE_D3D12_PLATFORMFUNCTIONS_H_
 
-#include "dawn_native/d3d12/d3d12_platform.h"
-
 #include "common/DynamicLib.h"
 #include "dawn_native/Error.h"
+
+#include "dawn_native/d3d12/PIXEventRuntimeHelper.h"
+#include "dawn_native/d3d12/d3d12_platform.h"
 
 #include <d3dcompiler.h>
 
 class DynamicLib;
 
 namespace dawn_native { namespace d3d12 {
+
+    extern PFN_PIX_GET_THREAD_INFO pixGetThreadInfo;
+    extern PFN_PIX_EVENTS_REPLACE_BLOCK pixEventsReplaceBlock;
 
     // Loads the functions required from the platform dynamically so that we don't need to rely on
     // them being present in the system. For example linking against d3d12.lib would prevent
@@ -35,6 +39,7 @@ namespace dawn_native { namespace d3d12 {
         ~PlatformFunctions();
 
         MaybeError LoadFunctions();
+        bool isPixEventRuntimeLoaded() const;
 
         // Functions from d3d12.dll
         PFN_D3D12_CREATE_DEVICE d3d12CreateDevice = nullptr;
@@ -64,10 +69,14 @@ namespace dawn_native { namespace d3d12 {
         MaybeError LoadD3D12();
         MaybeError LoadDXGI();
         MaybeError LoadD3DCompiler();
+        bool LoadPIXRuntime();
 
         DynamicLib mD3D12Lib;
         DynamicLib mDXGILib;
         DynamicLib mD3DCompilerLib;
+        DynamicLib mPIXEventRuntimeLib;
+
+        bool mPIXEventRuntimeLoaded = false;
     };
 
 }}  // namespace dawn_native::d3d12
