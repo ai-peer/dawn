@@ -28,13 +28,15 @@ namespace dawn_native {
 
         // Helper functions to perform binding-type specific validation
 
-        MaybeError ValidateBufferBinding(const BindGroupBinding& binding,
+        MaybeError ValidateBufferBinding(const DeviceBase* device,
+                                         const BindGroupBinding& binding,
                                          dawn::BufferUsageBit requiredUsage) {
             if (binding.buffer == nullptr || binding.sampler != nullptr ||
                 binding.textureView != nullptr) {
                 return DAWN_VALIDATION_ERROR("expected buffer binding");
             }
 
+            DAWN_TRY(device->ValidateObject(binding.buffer));
             uint32_t bufferSize = binding.buffer->GetSize();
             if (binding.size > bufferSize) {
                 return DAWN_VALIDATION_ERROR("Buffer binding size larger than the buffer");
@@ -82,7 +84,7 @@ namespace dawn_native {
 
     }  // anonymous namespace
 
-    MaybeError ValidateBindGroupDescriptor(DeviceBase*, const BindGroupDescriptor* descriptor) {
+    MaybeError ValidateBindGroupDescriptor(DeviceBase* device, const BindGroupDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
@@ -120,10 +122,10 @@ namespace dawn_native {
             // Perform binding-type specific validation.
             switch (layoutInfo.types[bindingIndex]) {
                 case dawn::BindingType::UniformBuffer:
-                    DAWN_TRY(ValidateBufferBinding(binding, dawn::BufferUsageBit::Uniform));
+                    DAWN_TRY(ValidateBufferBinding(device, binding, dawn::BufferUsageBit::Uniform));
                     break;
                 case dawn::BindingType::StorageBuffer:
-                    DAWN_TRY(ValidateBufferBinding(binding, dawn::BufferUsageBit::Storage));
+                    DAWN_TRY(ValidateBufferBinding(device, binding, dawn::BufferUsageBit::Storage));
                     break;
                 case dawn::BindingType::SampledTexture:
                     DAWN_TRY(ValidateTextureBinding(binding, dawn::TextureUsageBit::Sampled));

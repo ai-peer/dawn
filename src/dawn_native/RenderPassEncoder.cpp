@@ -121,11 +121,6 @@ namespace dawn_native {
             return;
         }
 
-        if (buffer == nullptr) {
-            mTopLevelBuilder->HandleError("Buffer cannot be null");
-            return;
-        }
-
         SetIndexBufferCmd* cmd = mAllocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);
         new (cmd) SetIndexBufferCmd;
         cmd->buffer = buffer;
@@ -138,13 +133,6 @@ namespace dawn_native {
                                                  uint32_t const* offsets) {
         if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
             return;
-        }
-
-        for (size_t i = 0; i < count; ++i) {
-            if (buffers[i] == nullptr) {
-                mTopLevelBuilder->HandleError("Buffers cannot be null");
-                return;
-            }
         }
 
         SetVertexBuffersCmd* cmd =

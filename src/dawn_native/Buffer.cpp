@@ -49,8 +49,8 @@ namespace dawn_native {
 
     // Buffer
 
-    BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
-        : ObjectBase(device), mSize(descriptor->size), mUsage(descriptor->usage) {
+    BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor, bool isError)
+        : ObjectBase(device, isError), mSize(descriptor->size), mUsage(descriptor->usage) {
     }
 
     BufferBase::~BufferBase() {
@@ -168,6 +168,8 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::ValidateSetSubData(uint32_t start, uint32_t count) const {
+        DAWN_TRY(GetDevice()->ValidateObject(this));
+
         if (count > GetSize()) {
             return DAWN_VALIDATION_ERROR("Buffer subdata with too much data");
         }
@@ -187,6 +189,8 @@ namespace dawn_native {
     MaybeError BufferBase::ValidateMap(uint32_t start,
                                        uint32_t size,
                                        dawn::BufferUsageBit requiredUsage) const {
+        DAWN_TRY(GetDevice()->ValidateObject(this));
+
         if (size > GetSize()) {
             return DAWN_VALIDATION_ERROR("Buffer mapping with too big a region");
         }
@@ -208,11 +212,33 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::ValidateUnmap() const {
+        DAWN_TRY(GetDevice()->ValidateObject(this));
+
         if (!mIsMapped) {
             return DAWN_VALIDATION_ERROR("Buffer wasn't mapped");
         }
 
         return {};
+    }
+
+    ErrorBuffer::ErrorBuffer(DeviceBase* device, const BufferDescriptor* descriptor)
+        : BufferBase(device, descriptor, true) {
+    }
+
+    MaybeError ErrorBuffer::SetSubDataImpl(uint32_t, uint32_t, const uint8_t*) {
+        UNREACHABLE();
+    }
+
+    void ErrorBuffer::MapReadAsyncImpl(uint32_t, uint32_t, uint32_t) {
+        UNREACHABLE();
+    }
+
+    void ErrorBuffer::MapWriteAsyncImpl(uint32_t, uint32_t, uint32_t) {
+        UNREACHABLE();
+    }
+
+    void ErrorBuffer::UnmapImpl() {
+        UNREACHABLE();
     }
 
 }  // namespace dawn_native

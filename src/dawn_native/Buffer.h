@@ -36,7 +36,7 @@ namespace dawn_native {
 
     class BufferBase : public ObjectBase {
       public:
-        BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
+        BufferBase(DeviceBase* device, const BufferDescriptor* descriptor, bool isError = false);
         ~BufferBase();
 
         uint32_t GetSize() const;
@@ -83,6 +83,17 @@ namespace dawn_native {
         uint32_t mMapSerial = 0;
 
         bool mIsMapped = false;
+    };
+
+    class ErrorBuffer : public BufferBase {
+      public:
+        ErrorBuffer(DeviceBase* device, const BufferDescriptor* descriptor);
+
+      private:
+        virtual MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data);
+        virtual void MapReadAsyncImpl(uint32_t serial, uint32_t start, uint32_t size);
+        virtual void MapWriteAsyncImpl(uint32_t serial, uint32_t start, uint32_t size);
+        virtual void UnmapImpl();
     };
 
     // This builder class is kept around purely for testing but should not be used.
