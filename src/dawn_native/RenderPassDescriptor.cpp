@@ -164,6 +164,9 @@ namespace dawn_native {
                 continue;
             }
 
+            // TODO(cwallez@chromium.org): Once RenderPassDescriptor doesn't use a builder, check
+            // that the textureView is a valid object.
+
             if (!IsColorRenderableTextureFormat(textureView->GetFormat())) {
                 HandleError(
                     "The format of the texture view used as color attachment is not color "
@@ -190,6 +193,9 @@ namespace dawn_native {
     void RenderPassDescriptorBuilder::SetDepthStencilAttachment(
         const RenderPassDepthStencilAttachmentDescriptor* attachment) {
         TextureViewBase* textureView = attachment->attachment;
+
+        // TODO(cwallez@chromium.org): Once RenderPassDescriptor doesn't use a builder, check that
+        // the textureView is a valid object.
         if (textureView == nullptr) {
             HandleError("Texture view cannot be nullptr");
             return;
