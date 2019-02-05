@@ -70,6 +70,16 @@ namespace dawn_native {
         mErrorUserdata = userdata;
     }
 
+    MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
+        if (DAWN_UNLIKELY(object->GetDevice() != this)) {
+            return DAWN_VALIDATION_ERROR("Object from a different device.");
+        }
+        if (DAWN_UNLIKELY(object->IsError())) {
+            return DAWN_VALIDATION_ERROR("Object is an error.");
+        }
+        return {};
+    }
+
     AdapterBase* DeviceBase::GetAdapter() const {
         return mAdapter;
     }
