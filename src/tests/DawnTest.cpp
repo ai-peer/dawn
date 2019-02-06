@@ -54,7 +54,7 @@ namespace {
     std::unordered_map<dawn_native::BackendType, GLFWwindow*> windows;
 
     // Creates a GLFW window set up for use with a given backend.
-    GLFWwindow* GetWindowForBackend(utils::BackendBinding* binding, dawn_native::BackendType type) {
+    GLFWwindow* GetWindowForBackend(dawn_native::BackendType type) {
         GLFWwindow** window = &windows[type];
 
         if (*window != nullptr) {
@@ -66,7 +66,7 @@ namespace {
         }
 
         glfwDefaultWindowHints();
-        binding->SetupGLFWWindowHints();
+        utils::SetupGLFWWindowHintsForBackend(type);
 
         std::string windowName = "Dawn " + ParamName(type) + " test window";
         *window = glfwCreateWindow(400, 400, windowName.c_str(), nullptr, nullptr);
@@ -173,15 +173,32 @@ bool DawnTest::IsMacOS() const {
 bool gTestUsesWire = false;
 
 void DawnTest::SetUp() {
-    mBinding.reset(utils::CreateBinding(GetParam()));
-    DAWN_ASSERT(mBinding != nullptr);
-
-    GLFWwindow* testWindow = GetWindowForBackend(mBinding.get(), GetParam());
+    GLFWwindow* testWindow = GetWindowForBackend(GetParam());
     DAWN_ASSERT(testWindow != nullptr);
 
-    mBinding->SetWindow(testWindow);
+    // create device, get instance, etc.
+    mInstance = std::make_unique<dawn_native::Instance>();
+    utils::DiscoverAdapter(mInstance.get(), GetParam());
 
-    dawnDevice backendDevice = mBinding->CreateDevice();
+    dawn_native::Adapter backendAdapter;
+    {
+        bool foundAdapter = false;
+        for (dawn_native::Adapter adapter : mInstance->GetAdapters()) {
+            if (adapter.GetBackendType() == GetParam()) {
+                backendAdapter = adapter;
+                foundAdapter = true;
+                break;
+            }
+        }
+        ASSERT(foundAdapter);
+    }
+
+    mPCIInfo = backendAdapter.GetPCIInfo();
+    dawnDevice backendDevice = backendAdapter.CreateDevice();
+
+    mBinding.reset(utils::CreateBinding(GetParam(), testWindow, backendDevice));
+    DAWN_ASSERT(mBinding != nullptr);
+
     dawnProcTable backendProcs = dawn_native::GetProcs();
 
     // Choose whether to use the backend procs and devices directly, or set up the wire.
@@ -225,8 +242,6 @@ void DawnTest::SetUp() {
 
     // The end2end tests should never cause validation errors. These should be tested in unittests.
     device.SetErrorCallback(DeviceErrorCauseTestFailure, 0);
-
-    mPCIInfo = dawn_native::GetPCIInfo(backendDevice);
 }
 
 void DawnTest::TearDown() {

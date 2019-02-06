@@ -27,25 +27,6 @@ namespace utils {
 
     class D3D12Binding : public BackendBinding {
       public:
-        void SetupGLFWWindowHints() override {
-            glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-        }
-
-        dawnDevice CreateDevice() override {
-            // Make an instance and find a D3D12 adapter
-            mInstance = std::make_unique<dawn_native::Instance>();
-            mInstance->DiscoverDefaultAdapters();
-
-            std::vector<dawn_native::Adapter> adapters = mInstance->GetAdapters();
-            for (dawn_native::Adapter adapter : adapters) {
-                if (adapter.GetBackendType() == dawn_native::BackendType::D3D12) {
-                    mBackendDevice = adapter.CreateDevice();
-                    return mBackendDevice;
-                }
-            }
-            UNREACHABLE();
-        }
-
         uint64_t GetSwapChainImplementation() override {
             if (mSwapchainImpl.userData == nullptr) {
                 HWND win32Window = glfwGetWin32Window(mWindow);
@@ -61,8 +42,6 @@ namespace utils {
         }
 
       private:
-        std::unique_ptr<dawn_native::Instance> mInstance;
-        dawnDevice mBackendDevice = nullptr;
         dawnSwapChainImplementation mSwapchainImpl = {};
     };
 
