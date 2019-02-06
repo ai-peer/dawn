@@ -93,6 +93,24 @@
     },
     {
       "key": {
+        "uuid": "6f717578_8697e285",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-06T19:59:20Z",
+      "side": 1,
+      "message": "I believe the intent of this warning was to indicate to the web developer that some extra steps may be required to activate debugging (PIX DLLs are missing or installed incorrectly). Perhaps a single debug message could be sent in the future rather than fail silently.",
+      "parentUuid": "1a65de5c_d812311a",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f9c80a3c_4afd1fec",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 11
