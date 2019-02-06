@@ -104,8 +104,6 @@ namespace dawn_native {
     // Backend-agnostic API for dawn_native
     DAWN_NATIVE_EXPORT dawnProcTable GetProcs();
 
-    DAWN_NATIVE_EXPORT const PCIInfo& GetPCIInfo(dawnDevice device);
-
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_DAWNNATIVE_H_
