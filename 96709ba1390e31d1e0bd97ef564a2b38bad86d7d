@@ -279,6 +279,24 @@
     },
     {
       "key": {
+        "uuid": "b9610204_1ee9c7e6",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T10:33:17Z",
+      "side": 1,
+      "message": "Oh, thanks for the pointers, I didn\u0027t know that vkQueueSubmit contained an implicit domain operation. Let\u0027s not have this barrier then.",
+      "parentUuid": "5d0922fa_abe52572",
+      "revId": "96709ba1390e31d1e0bd97ef564a2b38bad86d7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1286a7f_8e13eeb2",
         "filename": "src/dawn_native/vulkan/StagingBufferVk.cpp",
         "patchSetId": 2
