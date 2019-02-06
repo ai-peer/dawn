@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd3c24a8_bab4d046",
+        "filename": "doc/DebugMarkers.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "nit: convention is to name the folder docs/ instead of doc/",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ca6c347_a64cf4ff",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "Can the string be stored as a bunch of char following the command? We should avoid destructors of commands doing things if possible (we might eventually remove Refs too). See for example how SetVertexBuffers is implemented.",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f07a60e7_1178c3f3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "Same as for the Vulkan backend.",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a834e830_3c10d724",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "nit: EXT",
+      "range": {
+        "startLine": 641,
+        "startChar": 66,
+        "endLine": 641,
+        "endChar": 69
+      },
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a65de5c_d812311a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "We shouldn\u0027t warn in this case, because it would make sense for applications to leave debug markers always on since it would have close to no impact on performance.",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9c80a3c_4afd1fec",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "It is an error (and a potential crash) to have imbalanced push / pop debug groups in Vulkan. Either we need to ensure balancing in this backend, or we need to add validation for the balancing in the frontend (my preferred option) along with some validation tests.",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59919338_cbd6302e",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "note: these two extensions have been obsoleted in favor of VK_EXT_debug_utils so in the future we\u0027d need to support it (no need to address in this CL or until the need arises)",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 53
+      },
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "017c331f_a19ac48d",
+        "filename": "src/tests/end2end/DebugMarkerTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "Do you imagine other failures than just a crash? Both a crash and a validation error would be caught even without ASSERT_NO_FATAL_FAILURE.",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "975ddd72_06046c8e",
+        "filename": "third_party/WinPixEventRuntime/pix3.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-06T13:14:05Z",
+      "side": 1,
+      "message": "This code has a copyright but doesn\u0027t have a license so we can\u0027t include it in Dawn because it isn\u0027t open-source. It seems that the pix implementation is mostly in PIXEventGenerated.h so we can\u0027t work around this by loading function pointers from some DLL.\n\nFor now I suggest working on the patch with a noop implementation in the D3D12 backend while we figure out the licensing issue.",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
