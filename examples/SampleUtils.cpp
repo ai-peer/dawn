@@ -57,6 +57,7 @@ enum class CmdBufType {
 #endif
 
 static CmdBufType cmdBufType = CmdBufType::Terrible;
+static std::unique_ptr<dawn_native::Instance> instance;
 static utils::BackendBinding* binding = nullptr;
 
 static GLFWwindow* window = nullptr;
@@ -67,26 +68,40 @@ static utils::TerribleCommandBuffer* c2sBuf = nullptr;
 static utils::TerribleCommandBuffer* s2cBuf = nullptr;
 
 dawn::Device CreateCppDawnDevice() {
-    binding = utils::CreateBinding(backendType);
-    if (binding == nullptr) {
-        return dawn::Device();
-    }
-
     glfwSetErrorCallback(PrintGLFWError);
     if (!glfwInit()) {
         return dawn::Device();
     }
 
-    binding->SetupGLFWWindowHints();
+    utils::SetupGLFWWindowHintsForBackend(backendType);
     window = glfwCreateWindow(640, 480, "Dawn window", nullptr, nullptr);
     if (!window) {
         return dawn::Device();
     }
 
-    binding->SetWindow(window);
+    instance = std::make_unique<dawn_native::Instance>();
+    utils::DiscoverAdapter(instance.get(), backendType);
 
-    dawnDevice backendDevice = binding->CreateDevice();
+    dawn_native::Adapter backendAdapter;
+    {
+        bool foundAdapter = false;
+        for (dawn_native::Adapter adapter : instance->GetAdapters()) {
+            if (adapter.GetBackendType() == backendType) {
+                backendAdapter = adapter;
+                foundAdapter = true;
+                break;
+            }
+        }
+        ASSERT(foundAdapter);
+    }
+
+    dawnDevice backendDevice = backendAdapter.CreateDevice();
     dawnProcTable backendProcs = dawn_native::GetProcs();
+
+    binding = utils::CreateBinding(backendType, window, backendDevice);
+    if (binding == nullptr) {
+        return dawn::Device();
+    }
 
     dawnDevice cDevice = nullptr;
     dawnProcTable procs;
