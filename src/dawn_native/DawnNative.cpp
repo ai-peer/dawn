@@ -26,11 +26,6 @@ namespace dawn_native {
         return GetProcsAutogen();
     }
 
-    const PCIInfo& GetPCIInfo(dawnDevice device) {
-        DeviceBase* deviceBase = reinterpret_cast<DeviceBase*>(device);
-        return deviceBase->GetPCIInfo();
-    }
-
     // Adapter
 
     Adapter::Adapter() = default;
