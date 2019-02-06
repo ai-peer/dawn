@@ -176,6 +176,7 @@ class DawnTest : public ::testing::TestWithParam<dawn_native::BackendType> {
     // Assuming the data is mapped, checks all expectations
     void ResolveExpectations();
 
+    std::unique_ptr<dawn_native::Instance> mInstance;
     std::unique_ptr<utils::BackendBinding> mBinding;
 
     dawn_native::PCIInfo mPCIInfo;
