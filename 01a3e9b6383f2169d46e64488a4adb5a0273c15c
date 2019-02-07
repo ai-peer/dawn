@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "803254f3_3dad6b2f",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-07T13:09:26Z",
+      "side": 1,
+      "message": "Next time can you also add IsLinux and the url to the bug?",
+      "revId": "01a3e9b6383f2169d46e64488a4adb5a0273c15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
