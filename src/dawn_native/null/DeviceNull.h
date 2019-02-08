@@ -135,7 +135,6 @@ namespace dawn_native { namespace null {
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
         std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
-        std::unique_ptr<DynamicUploader> mDynamicUploader;
     };
 
     class Buffer : public BufferBase {
