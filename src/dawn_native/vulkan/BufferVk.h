@@ -49,6 +49,9 @@ namespace dawn_native { namespace vulkan {
         // TODO(b-brber): Remove once alignment constraint is added to validation (dawn:73).
         static constexpr size_t kDefaultAlignment = 4;  // TODO(b-brber): Figure out this value.
 
+        static constexpr size_t kDefaultUploadBufferSize =
+            64000;  // TODO(b-brber): Figure out this value.
+
         VkBuffer mHandle = VK_NULL_HANDLE;
         DeviceMemoryAllocation mMemoryAllocation;
 

@@ -64,8 +64,6 @@ namespace dawn_native { namespace vulkan {
         mDeleter = std::make_unique<FencedDeleter>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mMemoryAllocator = std::make_unique<MemoryAllocator>(this);
-        mDynamicUploader = std::make_unique<DynamicUploader>(this);
-
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
 
         return {};
@@ -530,13 +528,4 @@ namespace dawn_native { namespace vulkan {
 
         return {};
     }
-
-    ResultOrError<DynamicUploader*> Device::GetDynamicUploader() const {
-        // TODO(b-brber): Refactor this into device init once moved into DeviceBase.
-        if (mDynamicUploader->IsEmpty()) {
-            DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer(kDefaultUploadBufferSize));
-        }
-        return mDynamicUploader.get();
-    }
-
 }}  // namespace dawn_native::vulkan
