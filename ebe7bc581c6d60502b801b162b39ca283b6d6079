@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "74442f61_d4eaa2fa",
+        "filename": "doc/DebugMarkers.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-08T23:27:06Z",
+      "side": 1,
+      "message": "nit: EXT here too",
+      "range": {
+        "startLine": 48,
+        "startChar": 117,
+        "endLine": 48,
+        "endChar": 120
+      },
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ca6c347_a64cf4ff",
         "filename": "src/dawn_native/Commands.h",
         "patchSetId": 11
@@ -122,6 +145,24 @@
       "writtenOn": "2019-02-06T13:14:05Z",
       "side": 1,
       "message": "It is an error (and a potential crash) to have imbalanced push / pop debug groups in Vulkan. Either we need to ensure balancing in this backend, or we need to add validation for the balancing in the frontend (my preferred option) along with some validation tests.",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f0851e0_4cf5312d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-08T23:27:06Z",
+      "side": 1,
+      "message": "+1 to putting it in the frontend.\n\nIs it okay in all the backends to end a command buffer without popping all of the debug groups? Even if not, we should probably just make it a validation error.",
+      "parentUuid": "f9c80a3c_4afd1fec",
       "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
