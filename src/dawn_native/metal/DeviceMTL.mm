@@ -189,7 +189,9 @@ namespace dawn_native { namespace metal {
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
-        return DAWN_UNIMPLEMENTED_ERROR("Device unable to create staging buffer.");
+        std::unique_ptr<StagingBufferBase> stagingBuffer =
+            std::make_unique<StagingBuffer>(size, this);
+        return std::move(stagingBuffer);
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
@@ -197,7 +199,18 @@ namespace dawn_native { namespace metal {
                                                BufferBase* destination,
                                                uint32_t destinationOffset,
                                                uint32_t size) {
-        return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+        id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
+        id<MTLBuffer> buffer = ToBackend(destination)->GetMTLBuffer();
+        id<MTLCommandBuffer> commandBuffer = mDevice->GetPendingCommandBuffer();
+        id<MTLBlitCommandEncoder> encoder = [commandBuffer blitCommandEncoder];
+        [encoder copyFromBuffer:uploadBuffer
+                   sourceOffset:sourceOffset
+                       toBuffer:buffer
+              destinationOffset:destinationOffset
+                           size:size];
+        [encoder endEncoding];
+
+        return {};
     }
 
 }}  // namespace dawn_native::metal

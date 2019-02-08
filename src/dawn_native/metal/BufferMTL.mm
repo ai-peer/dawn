@@ -15,7 +15,6 @@
 #include "dawn_native/metal/BufferMTL.h"
 
 #include "dawn_native/metal/DeviceMTL.h"
-#include "dawn_native/metal/ResourceUploader.h"
 
 namespace dawn_native { namespace metal {
 
@@ -50,8 +49,20 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Buffer::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
-        auto* uploader = ToBackend(GetDevice())->GetResourceUploader();
-        uploader->BufferSubData(mMtlBuffer, start, count, data);
+        Device* device = ToBackend(GetDevice());
+
+        DynamicUploader* uploader = nullptr;
+        DAWN_TRY_ASSIGN(uploader, device->GetDynamicUploader(kDefaultUploadBufferSize));
+
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(count, kDefaultAlignment));
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, count);
+
+        DAWN_TRY(device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer,
+                                                 uploadHandle.startOffset, this, start, count));
+
         return {};
     }
 

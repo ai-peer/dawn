@@ -63,7 +63,6 @@ namespace dawn_native { namespace d3d12 {
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocator = std::make_unique<ResourceAllocator>(this);
-        mDynamicUploader = std::make_unique<DynamicUploader>(this);
 
         NextSerial();
     }
@@ -262,14 +261,6 @@ namespace dawn_native { namespace d3d12 {
             ToBackend(source)->GetResource(), sourceOffset, size);
 
         return {};
-    }
-
-    ResultOrError<DynamicUploader*> Device::GetDynamicUploader() const {
-        // TODO(b-brber): Refactor this into device init once moved into DeviceBase.
-        if (mDynamicUploader->IsEmpty()) {
-            DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer(kDefaultUploadBufferSize));
-        }
-        return mDynamicUploader.get();
     }
 
 }}  // namespace dawn_native::d3d12
