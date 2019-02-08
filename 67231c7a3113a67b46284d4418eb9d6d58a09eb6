@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d79666c6_7ed5068b",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-08T02:47:28Z",
+      "side": 1,
+      "message": "could it just be ASSERT(backendAdapter)? Does Adapter::operator bool() work that way?",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "519f07d2_bf913243",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-08T02:47:28Z",
+      "side": 1,
+      "message": "same",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a99633b1_7339e77a",
+        "filename": "src/utils/BackendBinding.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-08T02:47:28Z",
+      "side": 1,
+      "message": "Does this work on macOS\u0027s GL 4.1?",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
