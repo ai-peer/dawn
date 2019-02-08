@@ -54,6 +54,8 @@ template("dawn_generator") {
   # target using templates in this directory.
   generator_args = [
     rebase_path("dawn.json", root_build_dir),
+    "--wire-json",
+    rebase_path("dawn_wire.json", root_build_dir),
     "--template-dir",
     rebase_path("generator/templates", root_build_dir),
     "--targets",
@@ -215,6 +217,8 @@ template("dawn_static_and_shared_library") {
 
   static_library("${libname}_static") {
     output_name = libname
+
+    complete_static_lib = dawn_complete_static_libs
 
     # Copy all variables except "configs", which has a default value
     forward_variables_from(invoker, "*", [ "configs" ])
@@ -693,8 +697,8 @@ dawn_static_and_shared_library("libdawn_native") {
   ]
 
   deps = [
-    ":libdawn_native_sources",
     ":dawn_common",
+    ":libdawn_native_sources",
   ]
   sources = [
     "src/dawn_native/DawnNative.cpp",
@@ -733,6 +737,8 @@ source_set("libdawn_wire_headers") {
   public_configs = [ ":dawn_public" ]
   sources = [
     "src/include/dawn_wire/Wire.h",
+    "src/include/dawn_wire/WireClient.h",
+    "src/include/dawn_wire/WireServer.h",
     "src/include/dawn_wire/dawn_wire_export.h",
   ]
 }
@@ -741,10 +747,20 @@ dawn_generator("libdawn_wire_gen") {
   target = "dawn_wire"
   outputs = [
     "dawn_wire/TypeTraits_autogen.h",
-    "dawn_wire/WireServer.cpp",
     "dawn_wire/WireCmd_autogen.h",
-    "dawn_wire/WireClient.cpp",
     "dawn_wire/WireCmd_autogen.cpp",
+    "dawn_wire/client/ApiObjects_autogen.h",
+    "dawn_wire/client/ApiProcs_autogen.cpp",
+    "dawn_wire/client/ApiProcs_autogen.h",
+    "dawn_wire/client/ClientBase_autogen.h",
+    "dawn_wire/client/ClientDoers_autogen.cpp",
+    "dawn_wire/client/ClientHandlers_autogen.cpp",
+    "dawn_wire/client/ClientPrototypes_autogen.inl",
+    "dawn_wire/server/ServerBase_autogen.h",
+    "dawn_wire/server/ServerCallbacks_autogen.cpp",
+    "dawn_wire/server/ServerDoers_autogen.cpp",
+    "dawn_wire/server/ServerHandlers_autogen.cpp",
+    "dawn_wire/server/ServerPrototypes_autogen.inl",
   ]
 }
 
@@ -759,7 +775,31 @@ dawn_static_and_shared_library("libdawn_wire") {
 
   configs = [ ":dawn_internal" ]
   sources = get_target_outputs(":libdawn_wire_gen")
-  sources += [ "src/dawn_wire/WireCmd.h" ]
+  sources += [
+    "src/dawn_wire/WireClient.cpp",
+    "src/dawn_wire/WireDeserializeAllocator.cpp",
+    "src/dawn_wire/WireDeserializeAllocator.h",
+    "src/dawn_wire/WireServer.cpp",
+    "src/dawn_wire/client/ApiObjects.h",
+    "src/dawn_wire/client/ApiProcs.cpp",
+    "src/dawn_wire/client/Buffer.cpp",
+    "src/dawn_wire/client/Buffer.h",
+    "src/dawn_wire/client/Client.cpp",
+    "src/dawn_wire/client/Client.h",
+    "src/dawn_wire/client/ClientDoers.cpp",
+    "src/dawn_wire/client/Device.cpp",
+    "src/dawn_wire/client/Device.h",
+    "src/dawn_wire/client/Fence.cpp",
+    "src/dawn_wire/client/Fence.h",
+    "src/dawn_wire/client/ObjectAllocator.h",
+    "src/dawn_wire/server/ObjectStorage.h",
+    "src/dawn_wire/server/Server.cpp",
+    "src/dawn_wire/server/Server.h",
+    "src/dawn_wire/server/ServerBuffer.cpp",
+    "src/dawn_wire/server/ServerDevice.cpp",
+    "src/dawn_wire/server/ServerFence.cpp",
+    "src/dawn_wire/server/ServerQueue.cpp",
+  ]
 
   # Make headers publically visible
   public_deps = [
@@ -847,8 +887,8 @@ test("dawn_unittests") {
     ":dawn_headers",
     ":dawn_utils",
     ":libdawn",
-    ":libdawn_native_sources",
     ":libdawn_native",
+    ":libdawn_native_sources",
     ":libdawn_wire",
     ":mock_dawn_gen",
     "third_party:gmock_and_gtest",
