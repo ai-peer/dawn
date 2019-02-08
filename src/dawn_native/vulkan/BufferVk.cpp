@@ -200,7 +200,7 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         DynamicUploader* uploader = nullptr;
-        DAWN_TRY_ASSIGN(uploader, device->GetDynamicUploader());
+        DAWN_TRY_ASSIGN(uploader, device->GetDynamicUploader(kDefaultUploadBufferSize));
 
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(count, kDefaultAlignment));
