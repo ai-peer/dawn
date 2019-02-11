@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "81d5f4e0_8604c346",
+        "filename": "src/dawn_wire/DawnWire.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-11T19:13:00Z",
+      "side": 1,
+      "message": "Made these dawn_wire::WireClient and dawn_wire::client::Client.",
+      "parentUuid": "cf09e40e_1db2aee0",
+      "revId": "ac5ee39bf76eef300b0cf70a90dba7d5640e04e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0429728e_ab9f64e9",
         "filename": "src/dawn_wire/DawnWire.cpp",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "ac5ee39bf76eef300b0cf70a90dba7d5640e04e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "871db90a_c902aae2",
+        "filename": "src/dawn_wire/DawnWire.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-11T19:13:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0429728e_ab9f64e9",
+      "revId": "ac5ee39bf76eef300b0cf70a90dba7d5640e04e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
