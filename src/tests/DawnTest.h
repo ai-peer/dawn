@@ -76,7 +76,8 @@ namespace detail {
 }
 
 namespace dawn_wire {
-    class CommandHandler;
+    class Client;
+    class Server;
 }  // namespace dawn_wire
 
 class DawnTest : public ::testing::TestWithParam<BackendType> {
@@ -133,8 +134,8 @@ class DawnTest : public ::testing::TestWithParam<BackendType> {
 
   private:
     // Things used to set up testing through the Wire.
-    std::unique_ptr<dawn_wire::CommandHandler> mWireServer;
-    std::unique_ptr<dawn_wire::CommandHandler> mWireClient;
+    std::unique_ptr<dawn_wire::WireServer> mWireServer;
+    std::unique_ptr<dawn_wire::WireClient> mWireClient;
     std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
     std::unique_ptr<utils::TerribleCommandBuffer> mS2cBuf;
     void FlushWire();
