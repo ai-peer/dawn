@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73eec306_f688148f",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-11T19:40:40Z",
+      "side": 1,
+      "message": "Tangent:\n\nNot new to this patch, but I wonder if the name DAWN_TRY is misleading. People might think it refers to C++ exceptions.\n\nI can\u0027t think of great alternatives, though. DAWN_ASSERT_OR_RETURN_ERROR? DAWN_ASSERT_OR_ABORT? DAWN_SUCCEED_OR_RETURN?",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2890a263_6066216d",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-11T19:40:40Z",
+      "side": 1,
+      "message": "Log a bug for this work/idea?",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70d26ad3_6de7e4f5",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-11T19:40:40Z",
+      "side": 1,
+      "message": "Log a bug?",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9a94b5d_f428b526",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-11T19:40:40Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0f828f1_f3f42be6",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-11T19:40:40Z",
+      "side": 1,
+      "message": "It feels like there could be more tests to exercise all the new code paths (not just in samplers, but elsewhere). Or are they already covered by existing tests?",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
