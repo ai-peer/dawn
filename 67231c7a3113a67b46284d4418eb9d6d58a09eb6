@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f148afe5_104e42ad",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-11T19:48:02Z",
+      "side": 1,
+      "message": "Nit: this might be cleaner with std::find_if().",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d79666c6_7ed5068b",
         "filename": "examples/SampleUtils.cpp",
         "patchSetId": 6
@@ -13,6 +30,23 @@
       "writtenOn": "2019-02-08T02:47:28Z",
       "side": 1,
       "message": "could it just be ASSERT(backendAdapter)? Does Adapter::operator bool() work that way?",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52716624_98b42c84",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-11T19:48:02Z",
+      "side": 1,
+      "message": "Nit: ibid (find_if())",
       "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
