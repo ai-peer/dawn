@@ -37,24 +37,10 @@ namespace utils {
             cFragmentStage.entryPoint = "main";
         }
 
-        // Set defaults for the attachment states.
-        {
-            descriptor->attachmentsState = &cAttachmentsState;
-            cAttachmentsState.numColorAttachments = 1;
-            cAttachmentsState.colorAttachments = &cColorAttachments[0];
-            cAttachmentsState.depthStencilAttachment = &cDepthStencilAttachment;
-            cAttachmentsState.hasDepthStencilAttachment = false;
-
-            for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-                colorAttachments[i].format = dawn::TextureFormat::R8G8B8A8Unorm;
-                cColorAttachments[i] = &colorAttachments[i];
-            }
-        }
-
         // Set defaults for the blend state descriptors.
         {
-            descriptor->numBlendStates = 1;
-            descriptor->blendStates = &cBlendStates[0];
+            descriptor->numColorStates = 1;
+            descriptor->colorStates = &cColorStates[0];
 
             dawn::BlendDescriptor blend;
             blend.operation = dawn::BlendOperation::Add;
@@ -66,7 +52,7 @@ namespace utils {
             blendStateDescriptor.colorBlend = blend;
             blendStateDescriptor.colorWriteMask = dawn::ColorWriteMask::All;
             for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-                cBlendStates[i] = blendStateDescriptor;
+                cColorStates[i] = blendStateDescriptor;
             }
         }
 

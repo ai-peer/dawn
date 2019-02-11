@@ -71,7 +71,7 @@ class BlendStateTest : public DawnTest {
             baseDescriptor.layout = pipelineLayout;
             baseDescriptor.cVertexStage.module = vsModule;
             baseDescriptor.cFragmentStage.module = fsModule;
-            baseDescriptor.cColorAttachments[0]->format = renderPass.colorFormat;
+            baseDescriptor.cColorStates[0].format = renderPass.colorFormat;
 
             basePipeline = device.CreateRenderPipeline(&baseDescriptor);
 
@@ -79,8 +79,8 @@ class BlendStateTest : public DawnTest {
             testDescriptor.layout = pipelineLayout;
             testDescriptor.cVertexStage.module = vsModule;
             testDescriptor.cFragmentStage.module = fsModule;
-            testDescriptor.cColorAttachments[0]->format = renderPass.colorFormat;
-            testDescriptor.cBlendStates[0] = blendStateDescriptor;
+            testDescriptor.cColorStates[0].format = renderPass.colorFormat;
+            testDescriptor.cColorStates[0] = blendStateDescriptor;
 
             testPipeline = device.CreateRenderPipeline(&testDescriptor);
         }
@@ -771,8 +771,7 @@ TEST_P(BlendStateTest, IndependentBlendState) {
     baseDescriptor.layout = pipelineLayout;
     baseDescriptor.cVertexStage.module = vsModule;
     baseDescriptor.cFragmentStage.module = fsModule;
-    baseDescriptor.cAttachmentsState.numColorAttachments = 4;
-    baseDescriptor.numBlendStates = 4;
+    baseDescriptor.numColorStates = 4;
 
     basePipeline = device.CreateRenderPipeline(&baseDescriptor);
 
@@ -780,8 +779,7 @@ TEST_P(BlendStateTest, IndependentBlendState) {
     testDescriptor.layout = pipelineLayout;
     testDescriptor.cVertexStage.module = vsModule;
     testDescriptor.cFragmentStage.module = fsModule;
-    testDescriptor.cAttachmentsState.numColorAttachments = 4;
-    testDescriptor.numBlendStates = 4;
+    testDescriptor.numColorStates = 4;
 
     // set blend states
     dawn::BlendDescriptor blend1;
@@ -799,17 +797,17 @@ TEST_P(BlendStateTest, IndependentBlendState) {
     blend3.srcFactor = dawn::BlendFactor::One;
     blend3.dstFactor = dawn::BlendFactor::One;
 
-    testDescriptor.cBlendStates[0].blendEnabled = true;
-    testDescriptor.cBlendStates[0].colorBlend = blend1;
-    testDescriptor.cBlendStates[0].alphaBlend = blend1;
+    testDescriptor.cColorStates[0].blendEnabled = true;
+    testDescriptor.cColorStates[0].colorBlend = blend1;
+    testDescriptor.cColorStates[0].alphaBlend = blend1;
 
-    testDescriptor.cBlendStates[1].blendEnabled = true;
-    testDescriptor.cBlendStates[1].colorBlend = blend2;
-    testDescriptor.cBlendStates[1].alphaBlend = blend2;
+    testDescriptor.cColorStates[1].blendEnabled = true;
+    testDescriptor.cColorStates[1].colorBlend = blend2;
+    testDescriptor.cColorStates[1].alphaBlend = blend2;
 
-    testDescriptor.cBlendStates[3].blendEnabled = true;
-    testDescriptor.cBlendStates[3].colorBlend = blend3;
-    testDescriptor.cBlendStates[3].alphaBlend = blend3;
+    testDescriptor.cColorStates[3].blendEnabled = true;
+    testDescriptor.cColorStates[3].colorBlend = blend3;
+    testDescriptor.cColorStates[3].alphaBlend = blend3;
 
     testPipeline = device.CreateRenderPipeline(&testDescriptor);
 
@@ -867,7 +865,7 @@ TEST_P(BlendStateTest, DefaultBlendColor) {
     baseDescriptor.layout = pipelineLayout;
     baseDescriptor.cVertexStage.module = vsModule;
     baseDescriptor.cFragmentStage.module = fsModule;
-    baseDescriptor.cColorAttachments[0]->format = renderPass.colorFormat;
+    baseDescriptor.cColorStates[0].format = renderPass.colorFormat;
 
     basePipeline = device.CreateRenderPipeline(&baseDescriptor);
 
@@ -875,15 +873,15 @@ TEST_P(BlendStateTest, DefaultBlendColor) {
     testDescriptor.layout = pipelineLayout;
     testDescriptor.cVertexStage.module = vsModule;
     testDescriptor.cFragmentStage.module = fsModule;
-    testDescriptor.cColorAttachments[0]->format = renderPass.colorFormat;
+    testDescriptor.cColorStates[0].format = renderPass.colorFormat;
 
     dawn::BlendDescriptor blend;
     blend.operation = dawn::BlendOperation::Add;
     blend.srcFactor = dawn::BlendFactor::BlendColor;
     blend.dstFactor = dawn::BlendFactor::One;
-    testDescriptor.cBlendStates[0].blendEnabled = true;
-    testDescriptor.cBlendStates[0].colorBlend = blend;
-    testDescriptor.cBlendStates[0].alphaBlend = blend;
+    testDescriptor.cColorStates[0].blendEnabled = true;
+    testDescriptor.cColorStates[0].colorBlend = blend;
+    testDescriptor.cColorStates[0].alphaBlend = blend;
 
     testPipeline = device.CreateRenderPipeline(&testDescriptor);
     constexpr dawn::Color kWhite{1.0f, 1.0f, 1.0f, 1.0f};

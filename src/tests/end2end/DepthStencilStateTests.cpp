@@ -294,8 +294,8 @@ class DepthStencilStateTest : public DawnTest {
                 descriptor.layout = pipelineLayout;
                 descriptor.cVertexStage.module = vsModule;
                 descriptor.cFragmentStage.module = fsModule;
-                descriptor.cAttachmentsState.hasDepthStencilAttachment = true;
-                descriptor.cDepthStencilAttachment.format = dawn::TextureFormat::D32FloatS8Uint;
+                descriptor.hasDepthStencilState = true;
+                descriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
                 descriptor.depthStencilState = &test.depthStencilState;
 
                 dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);

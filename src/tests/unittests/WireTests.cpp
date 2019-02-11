@@ -404,20 +404,8 @@ TEST_F(WireTests, CStringArgument) {
     fragmentStage.entryPoint = "main";
     pipelineDescriptor.fragmentStage = &fragmentStage;
 
-    dawnAttachmentsStateDescriptor attachmentsState;
-    attachmentsState.nextInChain = nullptr;
-    attachmentsState.numColorAttachments = 1;
-    dawnAttachmentDescriptor colorAttachment = {nullptr, DAWN_TEXTURE_FORMAT_R8_G8_B8_A8_UNORM};
-    dawnAttachmentDescriptor* colorAttachmentPtr[] = {&colorAttachment};
-    attachmentsState.colorAttachments = colorAttachmentPtr;
-    attachmentsState.hasDepthStencilAttachment = false;
-    // Even with hasDepthStencilAttachment = false, depthStencilAttachment must point to valid
-    // data because we don't have optional substructures yet.
-    attachmentsState.depthStencilAttachment = &colorAttachment;
-    pipelineDescriptor.attachmentsState = &attachmentsState;
-
-    pipelineDescriptor.numBlendStates = 1;
-    pipelineDescriptor.blendStates = &blendStateDescriptor;
+    pipelineDescriptor.numColorStates = 1;
+    pipelineDescriptor.colorStates = &blendStateDescriptor;
 
     pipelineDescriptor.sampleCount = 1;
     pipelineDescriptor.layout = layout;
