@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec3a938e_cd1eb2ac",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-11T18:09:21Z",
+      "side": 1,
+      "message": "Wow, you didn\u0027t even need curly braces after this if statement :P",
+      "range": {
+        "startLine": 190,
+        "startChar": 16,
+        "endLine": 190,
+        "endChar": 39
+      },
+      "revId": "7b07319fea48566c4e7a6078726cfcc34b4e33bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
