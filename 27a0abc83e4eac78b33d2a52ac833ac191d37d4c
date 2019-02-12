@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3e01a7a_09775de9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:36:03Z",
+      "side": 1,
+      "message": "nit: this included shouldn\u0027t be needed since RenderPassDescriptorBase is defined in dawn_native/Forward.h which is included by dawn_native/d3d12/Forward.h",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33d286b0_7de098ca",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:36:03Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t need to be changed to the \"base\" version thanks to the type alias in Forward.h",
+      "range": {
+        "startLine": 57,
+        "startChar": 30,
+        "endLine": 57,
+        "endChar": 54
+      },
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84ddf54b_0cbf4259",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:36:03Z",
+      "side": 1,
+      "message": "ditto: this doesn\u0027t need to use the \"base\" version.",
+      "range": {
+        "startLine": 221,
+        "startChar": 19,
+        "endLine": 221,
+        "endChar": 43
+      },
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdc7418b_50dc46b0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:36:03Z",
+      "side": 1,
+      "message": "Note: this might be broken currently, but the intent of the descriptor heap allocation is that it is only for the current serial. This means that storing a heap in the textures could lead to a use-after-free bug. Instead I suggest keeping d3d12::Texture as is, and move all the logic in CommandBufferD3D12.",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efe17664_aa5ff586",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:36:03Z",
+      "side": 1,
+      "message": "nit: in our discussions with Microsoft we haven\u0027t been able to confirm whether this is an important optimization or not. Same for RTVs. The important optimization might just be for SRV and UAV heaps.",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e077ceba_9a9dd36d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:36:03Z",
+      "side": 1,
+      "message": "No need for this, use GetDevice() instead (or ToBackend(GetDevice()) if you need d3d12::Device)",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
