@@ -83,17 +83,19 @@ class MockBuilderErrorCallback {
 
 class MockBufferMapReadCallback {
   public:
-    MOCK_METHOD3(Call,
+    MOCK_METHOD4(Call,
                  void(dawnBufferMapAsyncStatus status,
                       const uint32_t* ptr,
+                      uint32_t dataLength,
                       dawnCallbackUserdata userdata));
 };
 
 class MockBufferMapWriteCallback {
   public:
-    MOCK_METHOD3(Call,
+    MOCK_METHOD4(Call,
                  void(dawnBufferMapAsyncStatus status,
                       uint32_t* ptr,
+                      uint32_t dataLength,
                       dawnCallbackUserdata userdata));
 };
 
@@ -128,9 +130,11 @@ class WireTest : public testing::Test {
                                            dawnCallbackUserdata userdata2);
     static void ToMockBufferMapReadCallback(dawnBufferMapAsyncStatus status,
                                             const void* ptr,
+                                            uint32_t dataLength,
                                             dawnCallbackUserdata userdata);
     static void ToMockBufferMapWriteCallback(dawnBufferMapAsyncStatus status,
                                              void* ptr,
+                                             uint32_t dataLength,
                                              dawnCallbackUserdata userdata);
     static void ToMockFenceOnCompletionCallback(dawnFenceCompletionStatus status,
                                                 dawnCallbackUserdata userdata);

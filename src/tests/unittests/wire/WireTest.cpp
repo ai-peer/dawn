@@ -41,17 +41,20 @@ void WireTest::ToMockBuilderErrorCallback(dawnBuilderErrorStatus status,
 
 void WireTest::ToMockBufferMapReadCallback(dawnBufferMapAsyncStatus status,
                                            const void* ptr,
+                                           uint32_t dataLength,
                                            dawnCallbackUserdata userdata) {
     // Assume the data is uint32_t to make writing matchers easier
-    mockBufferMapReadCallback->Call(status, static_cast<const uint32_t*>(ptr), userdata);
+    mockBufferMapReadCallback->Call(status, static_cast<const uint32_t*>(ptr), dataLength,
+                                    userdata);
 }
 
 void WireTest::ToMockBufferMapWriteCallback(dawnBufferMapAsyncStatus status,
                                             void* ptr,
+                                            uint32_t dataLength,
                                             dawnCallbackUserdata userdata) {
     // Assume the data is uint32_t to make writing matchers easier
     lastMapWritePointer = static_cast<uint32_t*>(ptr);
-    mockBufferMapWriteCallback->Call(status, lastMapWritePointer, userdata);
+    mockBufferMapWriteCallback->Call(status, lastMapWritePointer, dataLength, userdata);
 }
 
 void WireTest::ToMockFenceOnCompletionCallback(dawnFenceCompletionStatus status,
