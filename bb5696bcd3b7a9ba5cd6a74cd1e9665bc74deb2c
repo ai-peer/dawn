@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7323b17_2fe110cf",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-02-12T18:44:16Z",
+      "side": 1,
+      "message": "Could this also be satisfied by explicitly calling this-\u003eGetParam()?",
+      "revId": "bb5696bcd3b7a9ba5cd6a74cd1e9665bc74deb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
