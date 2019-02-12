@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19939c66_0d704ad6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-12T12:10:36Z",
+      "side": 1,
+      "message": "We use mDepthStencilState to set depth/stencil state for backends. if web developers don\u0027t set depth/stencil test and mHasDepthStencilAttachment is false, then we need to disable depth/stencil for backends. We can:\n1) set values in mDepthStencilState which indicate that depth test and stencil test are disabled. For example, set depthCompare as Always. But we need to set all parameters in backends\u0027 depth/stencil state descriptor. \n2) don\u0027t set vaules for mDepthStencilState and return nullptr when querying depth/stencil descriptor in RenderPipelineBase::GetDepthStencilStateDescriptor [1] for backends. Then disable depth/stencil test and leave other parameters untouched. This can set less values for this situation and might slightly improve performance. Unfortunately, if will fail on some drivers. See the patch at https://dawn-review.googlesource.com/c/dawn/+/4461.\n \nSo I use 1) here.",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 187,
+        "endChar": 55
+      },
+      "revId": "d6cca81eb6342f1dbe39d1f7eff73ed82aedb7ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02776297_03a4d617",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-12T12:10:36Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d6cca81eb6342f1dbe39d1f7eff73ed82aedb7ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
