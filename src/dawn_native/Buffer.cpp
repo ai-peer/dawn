@@ -55,8 +55,8 @@ namespace dawn_native {
 
     BufferBase::~BufferBase() {
         if (mIsMapped) {
-            CallMapReadCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr);
-            CallMapWriteCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr);
+            CallMapReadCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
+            CallMapWriteCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
         }
     }
 
@@ -77,27 +77,29 @@ namespace dawn_native {
 
     void BufferBase::CallMapReadCallback(uint32_t serial,
                                          dawnBufferMapAsyncStatus status,
-                                         const void* pointer) {
+                                         const void* pointer,
+                                         uint32_t dataLength) {
         if (mMapReadCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapWriteCallback == nullptr);
             // Tag the callback as fired before firing it, otherwise it could fire a second time if
             // for example buffer.Unmap() is called inside the application-provided callback.
             dawnBufferMapReadCallback callback = mMapReadCallback;
             mMapReadCallback = nullptr;
-            callback(status, pointer, mMapUserdata);
+            callback(status, pointer, dataLength, mMapUserdata);
         }
     }
 
     void BufferBase::CallMapWriteCallback(uint32_t serial,
                                           dawnBufferMapAsyncStatus status,
-                                          void* pointer) {
+                                          void* pointer,
+                                          uint32_t dataLength) {
         if (mMapWriteCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapReadCallback == nullptr);
             // Tag the callback as fired before firing it, otherwise it could fire a second time if
             // for example buffer.Unmap() is called inside the application-provided callback.
             dawnBufferMapWriteCallback callback = mMapWriteCallback;
             mMapWriteCallback = nullptr;
-            callback(status, pointer, mMapUserdata);
+            callback(status, pointer, dataLength, mMapUserdata);
         }
     }
 
@@ -111,12 +113,10 @@ namespace dawn_native {
         }
     }
 
-    void BufferBase::MapReadAsync(uint32_t start,
-                                  uint32_t size,
-                                  dawnBufferMapReadCallback callback,
+    void BufferBase::MapReadAsync(dawnBufferMapReadCallback callback,
                                   dawnCallbackUserdata userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(start, size, dawn::BufferUsageBit::MapRead))) {
-            callback(DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR, nullptr, userdata);
+        if (GetDevice()->ConsumedError(ValidateMap(dawn::BufferUsageBit::MapRead))) {
+            callback(DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR, nullptr, 0, userdata);
             return;
         }
 
@@ -128,15 +128,13 @@ namespace dawn_native {
         mMapUserdata = userdata;
         mIsMapped = true;
 
-        MapReadAsyncImpl(mMapSerial, start, size);
+        MapReadAsyncImpl(mMapSerial);
     }
 
-    void BufferBase::MapWriteAsync(uint32_t start,
-                                   uint32_t size,
-                                   dawnBufferMapWriteCallback callback,
+    void BufferBase::MapWriteAsync(dawnBufferMapWriteCallback callback,
                                    dawnCallbackUserdata userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(start, size, dawn::BufferUsageBit::MapWrite))) {
-            callback(DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR, nullptr, userdata);
+        if (GetDevice()->ConsumedError(ValidateMap(dawn::BufferUsageBit::MapWrite))) {
+            callback(DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR, nullptr, 0, userdata);
             return;
         }
 
@@ -148,7 +146,7 @@ namespace dawn_native {
         mMapUserdata = userdata;
         mIsMapped = true;
 
-        MapWriteAsyncImpl(mMapSerial, start, size);
+        MapWriteAsyncImpl(mMapSerial);
     }
 
     void BufferBase::Unmap() {
@@ -158,8 +156,8 @@ namespace dawn_native {
 
         // A map request can only be called once, so this will fire only if the request wasn't
         // completed before the Unmap
-        CallMapReadCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr);
-        CallMapWriteCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr);
+        CallMapReadCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
+        CallMapWriteCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
         UnmapImpl();
         mIsMapped = false;
         mMapReadCallback = nullptr;
@@ -184,18 +182,7 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError BufferBase::ValidateMap(uint32_t start,
-                                       uint32_t size,
-                                       dawn::BufferUsageBit requiredUsage) const {
-        if (size > GetSize()) {
-            return DAWN_VALIDATION_ERROR("Buffer mapping with too big a region");
-        }
-
-        // Note that no overflow can happen because we already checked for GetSize() >= size
-        if (start > GetSize() - size) {
-            return DAWN_VALIDATION_ERROR("Buffer mapping out of range");
-        }
-
+    MaybeError BufferBase::ValidateMap(dawn::BufferUsageBit requiredUsage) const {
         if (mIsMapped) {
             return DAWN_VALIDATION_ERROR("Buffer already mapped");
         }
