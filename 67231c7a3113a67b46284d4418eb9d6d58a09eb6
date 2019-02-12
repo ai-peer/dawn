@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "27a06697_0484b968",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f148afe5_104e42ad",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d79666c6_7ed5068b",
         "filename": "examples/SampleUtils.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bff40a4d_fa5ef195",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:55:34Z",
+      "side": 1,
+      "message": "Addressed through Stephen\u0027s std::find_if comment. Still added an operator bool on dawn_native::Adapter though.",
+      "parentUuid": "d79666c6_7ed5068b",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c0bdc596_c57de168",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52716624_98b42c84",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "519f07d2_bf913243",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 6
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "6350ecc9_0c67b0b5",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "519f07d2_bf913243",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a99633b1_7339e77a",
         "filename": "src/utils/BackendBinding.cpp",
         "patchSetId": 6
@@ -81,6 +153,24 @@
       "writtenOn": "2019-02-08T02:47:28Z",
       "side": 1,
       "message": "Does this work on macOS\u0027s GL 4.1?",
+      "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8993a24c_d9020c09",
+        "filename": "src/utils/BackendBinding.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:55:34Z",
+      "side": 1,
+      "message": "It doesn\u0027t, the OpenGL backend has been disabled by default on Mac and now that the Metal backend is in a good shape, I don\u0027t think we want to support GL on Mac ever again.",
+      "parentUuid": "a99633b1_7339e77a",
       "revId": "67231c7a3113a67b46284d4418eb9d6d58a09eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
