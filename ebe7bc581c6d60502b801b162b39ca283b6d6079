@@ -77,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "c6e77fc6_ca68c5d6",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T00:37:41Z",
+      "side": 1,
+      "message": "What I meant is something like SetPushConstants / SetVertexBuffers where data is put inline in the command buffer storage. See for example https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/ProgrammablePassEncoder.cpp?sq\u003dpackage:chromium\u0026dr\u003dCSs\u0026g\u003d0\u0026l\u003d82",
+      "parentUuid": "b393e137_88116fa6",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f07a60e7_1178c3f3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
