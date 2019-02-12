@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5254aaee_ca980fe3",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T15:35:57Z",
+      "side": 1,
+      "message": "TBH I think it is ok, because Dawn doesn\u0027t use exceptions anywhere, and there is precedent with ANGLE_TRY and the Rust try! macro.",
+      "parentUuid": "73eec306_f688148f",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2890a263_6066216d",
         "filename": "src/dawn_native/ObjectBase.h",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b956bd69_7316c14c",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T15:35:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2890a263_6066216d",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "e4cf19d6_9666cdad",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T15:35:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70d26ad3_6de7e4f5",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9a94b5d_f428b526",
         "filename": "src/dawn_native/RenderPassDescriptor.cpp",
         "patchSetId": 9
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "045687dc_0e6ec5a8",
+        "filename": "src/dawn_native/RenderPassDescriptor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T15:35:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a94b5d_f428b526",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0f828f1_f3f42be6",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 9
@@ -81,6 +153,24 @@
       "writtenOn": "2019-02-11T19:40:40Z",
       "side": 1,
       "message": "It feels like there could be more tests to exercise all the new code paths (not just in samplers, but elsewhere). Or are they already covered by existing tests?",
+      "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7bd5d83_368e1b1b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T15:35:57Z",
+      "side": 1,
+      "message": "Most of the other ValidateObject paths aren\u0027t covered by existing tests unfortunately. Adding all these tests would be part of a larger effort to go through our testing backlog once Dawn and WebGPU are more stabilized.\n\nI\u0027m trying to keep the validation testing of bind groups complete to show what level other parts of Dawn testing should strive for.",
+      "parentUuid": "f0f828f1_f3f42be6",
       "revId": "02b04db60611d5b3d70a765ac4cca5037e8eeaf9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
