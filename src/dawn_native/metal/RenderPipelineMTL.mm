@@ -129,7 +129,7 @@ namespace dawn_native { namespace metal {
         }
 
         void ComputeBlendDesc(MTLRenderPipelineColorAttachmentDescriptor* attachment,
-                              const BlendStateDescriptor* descriptor) {
+                              const ColorStateDescriptor* descriptor) {
             attachment.blendingEnabled = BlendEnabled(descriptor);
             attachment.sourceRGBBlendFactor =
                 MetalBlendFactor(descriptor->colorBlend.srcFactor, false);
@@ -169,38 +169,47 @@ namespace dawn_native { namespace metal {
             const DepthStencilStateDescriptor* descriptor) {
             MTLDepthStencilDescriptor* mtlDepthStencilDescriptor =
                 [[MTLDepthStencilDescriptor new] autorelease];
-            mtlDepthStencilDescriptor.depthCompareFunction =
-                ToMetalCompareFunction(descriptor->depthCompare);
-            mtlDepthStencilDescriptor.depthWriteEnabled = descriptor->depthWriteEnabled;
+            if (!descriptor) {
+                mtlDepthStencilDescriptor.depthCompareFunction = MTLCompareFunctionAlways;
+                mtlDepthStencilDescriptor.depthWriteEnabled = false;
+                mtlDepthStencilDescriptor.backFaceStencil = nil;
+                mtlDepthStencilDescriptor.frontFaceStencil = nil;
+            } else {
+                mtlDepthStencilDescriptor.depthCompareFunction =
+                    ToMetalCompareFunction(descriptor->depthCompare);
+                mtlDepthStencilDescriptor.depthWriteEnabled = descriptor->depthWriteEnabled;
 
-            if (StencilTestEnabled(descriptor)) {
-                MTLStencilDescriptor* backFaceStencil = [[MTLStencilDescriptor new] autorelease];
-                MTLStencilDescriptor* frontFaceStencil = [[MTLStencilDescriptor new] autorelease];
+                if (StencilTestEnabled(descriptor)) {
+                    MTLStencilDescriptor* backFaceStencil =
+                        [[MTLStencilDescriptor new] autorelease];
+                    MTLStencilDescriptor* frontFaceStencil =
+                        [[MTLStencilDescriptor new] autorelease];
 
-                backFaceStencil.stencilCompareFunction =
-                    ToMetalCompareFunction(descriptor->stencilBack.compare);
-                backFaceStencil.stencilFailureOperation =
-                    MetalStencilOperation(descriptor->stencilBack.failOp);
-                backFaceStencil.depthFailureOperation =
-                    MetalStencilOperation(descriptor->stencilBack.depthFailOp);
-                backFaceStencil.depthStencilPassOperation =
-                    MetalStencilOperation(descriptor->stencilBack.passOp);
-                backFaceStencil.readMask = descriptor->stencilReadMask;
-                backFaceStencil.writeMask = descriptor->stencilWriteMask;
+                    backFaceStencil.stencilCompareFunction =
+                        ToMetalCompareFunction(descriptor->stencilBack.compare);
+                    backFaceStencil.stencilFailureOperation =
+                        MetalStencilOperation(descriptor->stencilBack.failOp);
+                    backFaceStencil.depthFailureOperation =
+                        MetalStencilOperation(descriptor->stencilBack.depthFailOp);
+                    backFaceStencil.depthStencilPassOperation =
+                        MetalStencilOperation(descriptor->stencilBack.passOp);
+                    backFaceStencil.readMask = descriptor->stencilReadMask;
+                    backFaceStencil.writeMask = descriptor->stencilWriteMask;
 
-                frontFaceStencil.stencilCompareFunction =
-                    ToMetalCompareFunction(descriptor->stencilFront.compare);
-                frontFaceStencil.stencilFailureOperation =
-                    MetalStencilOperation(descriptor->stencilFront.failOp);
-                frontFaceStencil.depthFailureOperation =
-                    MetalStencilOperation(descriptor->stencilFront.depthFailOp);
-                frontFaceStencil.depthStencilPassOperation =
-                    MetalStencilOperation(descriptor->stencilFront.passOp);
-                frontFaceStencil.readMask = descriptor->stencilReadMask;
-                frontFaceStencil.writeMask = descriptor->stencilWriteMask;
+                    frontFaceStencil.stencilCompareFunction =
+                        ToMetalCompareFunction(descriptor->stencilFront.compare);
+                    frontFaceStencil.stencilFailureOperation =
+                        MetalStencilOperation(descriptor->stencilFront.failOp);
+                    frontFaceStencil.depthFailureOperation =
+                        MetalStencilOperation(descriptor->stencilFront.depthFailOp);
+                    frontFaceStencil.depthStencilPassOperation =
+                        MetalStencilOperation(descriptor->stencilFront.passOp);
+                    frontFaceStencil.readMask = descriptor->stencilReadMask;
+                    frontFaceStencil.writeMask = descriptor->stencilWriteMask;
 
-                mtlDepthStencilDescriptor.backFaceStencil = backFaceStencil;
-                mtlDepthStencilDescriptor.frontFaceStencil = frontFaceStencil;
+                    mtlDepthStencilDescriptor.backFaceStencil = backFaceStencil;
+                    mtlDepthStencilDescriptor.frontFaceStencil = frontFaceStencil;
+                }
             }
             return mtlDepthStencilDescriptor;
         }
@@ -237,7 +246,7 @@ namespace dawn_native { namespace metal {
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
             descriptorMTL.colorAttachments[i].pixelFormat =
                 MetalPixelFormat(GetColorAttachmentFormat(i));
-            const BlendStateDescriptor* descriptor = GetBlendStateDescriptor(i);
+            const ColorStateDescriptor* descriptor = GetColorStateDescriptor(i);
             ComputeBlendDesc(descriptorMTL.colorAttachments[i], descriptor);
         }
 

@@ -113,7 +113,7 @@ namespace dawn_native { namespace vulkan {
         }
 
         VkPipelineColorBlendAttachmentState ComputeBlendDesc(
-            const BlendStateDescriptor* descriptor) {
+            const ColorStateDescriptor* descriptor) {
             VkPipelineColorBlendAttachmentState attachment;
             attachment.blendEnable = BlendEnabled(descriptor) ? VK_TRUE : VK_FALSE;
             attachment.srcColorBlendFactor = VulkanBlendFactor(descriptor->colorBlend.srcFactor);
@@ -155,43 +155,51 @@ namespace dawn_native { namespace vulkan {
             depthStencilState.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
             depthStencilState.pNext = nullptr;
             depthStencilState.flags = 0;
-
-            // Depth writes only occur if depth is enabled
-            depthStencilState.depthTestEnable =
-                (descriptor->depthCompare == dawn::CompareFunction::Always &&
-                 !descriptor->depthWriteEnabled)
-                    ? VK_FALSE
-                    : VK_TRUE;
-            depthStencilState.depthWriteEnable = descriptor->depthWriteEnabled ? VK_TRUE : VK_FALSE;
-            depthStencilState.depthCompareOp = ToVulkanCompareOp(descriptor->depthCompare);
             depthStencilState.depthBoundsTestEnable = false;
             depthStencilState.minDepthBounds = 0.0f;
             depthStencilState.maxDepthBounds = 1.0f;
 
-            depthStencilState.stencilTestEnable =
-                StencilTestEnabled(descriptor) ? VK_TRUE : VK_FALSE;
+            if (!descriptor) {
+                depthStencilState.depthTestEnable = VK_FALSE;
+                depthStencilState.stencilTestEnable = VK_FALSE;
+            } else {
+                // Depth writes only occur if depth is enabled
+                depthStencilState.depthTestEnable =
+                    (descriptor->depthCompare == dawn::CompareFunction::Always &&
+                     !descriptor->depthWriteEnabled)
+                        ? VK_FALSE
+                        : VK_TRUE;
+                depthStencilState.depthWriteEnable =
+                    descriptor->depthWriteEnabled ? VK_TRUE : VK_FALSE;
+                depthStencilState.depthCompareOp = ToVulkanCompareOp(descriptor->depthCompare);
 
-            depthStencilState.front.failOp = VulkanStencilOp(descriptor->stencilFront.failOp);
-            depthStencilState.front.passOp = VulkanStencilOp(descriptor->stencilFront.passOp);
-            depthStencilState.front.depthFailOp =
-                VulkanStencilOp(descriptor->stencilFront.depthFailOp);
-            depthStencilState.front.compareOp = ToVulkanCompareOp(descriptor->stencilFront.compare);
+                depthStencilState.stencilTestEnable =
+                    StencilTestEnabled(descriptor) ? VK_TRUE : VK_FALSE;
 
-            depthStencilState.back.failOp = VulkanStencilOp(descriptor->stencilBack.failOp);
-            depthStencilState.back.passOp = VulkanStencilOp(descriptor->stencilBack.passOp);
-            depthStencilState.back.depthFailOp =
-                VulkanStencilOp(descriptor->stencilBack.depthFailOp);
-            depthStencilState.back.compareOp = ToVulkanCompareOp(descriptor->stencilBack.compare);
+                depthStencilState.front.failOp = VulkanStencilOp(descriptor->stencilFront.failOp);
+                depthStencilState.front.passOp = VulkanStencilOp(descriptor->stencilFront.passOp);
+                depthStencilState.front.depthFailOp =
+                    VulkanStencilOp(descriptor->stencilFront.depthFailOp);
+                depthStencilState.front.compareOp =
+                    ToVulkanCompareOp(descriptor->stencilFront.compare);
 
-            // Dawn doesn't have separate front and back stencil masks.
-            depthStencilState.front.compareMask = descriptor->stencilReadMask;
-            depthStencilState.back.compareMask = descriptor->stencilReadMask;
-            depthStencilState.front.writeMask = descriptor->stencilWriteMask;
-            depthStencilState.back.writeMask = descriptor->stencilWriteMask;
+                depthStencilState.back.failOp = VulkanStencilOp(descriptor->stencilBack.failOp);
+                depthStencilState.back.passOp = VulkanStencilOp(descriptor->stencilBack.passOp);
+                depthStencilState.back.depthFailOp =
+                    VulkanStencilOp(descriptor->stencilBack.depthFailOp);
+                depthStencilState.back.compareOp =
+                    ToVulkanCompareOp(descriptor->stencilBack.compare);
 
-            // The stencil reference is always dynamic
-            depthStencilState.front.reference = 0;
-            depthStencilState.back.reference = 0;
+                // Dawn doesn't have separate front and back stencil masks.
+                depthStencilState.front.compareMask = descriptor->stencilReadMask;
+                depthStencilState.back.compareMask = descriptor->stencilReadMask;
+                depthStencilState.front.writeMask = descriptor->stencilWriteMask;
+                depthStencilState.back.writeMask = descriptor->stencilWriteMask;
+
+                // The stencil reference is always dynamic
+                depthStencilState.front.reference = 0;
+                depthStencilState.back.reference = 0;
+            }
 
             return depthStencilState;
         }
@@ -287,7 +295,7 @@ namespace dawn_native { namespace vulkan {
         // pre-computed in the BlendState
         std::array<VkPipelineColorBlendAttachmentState, kMaxColorAttachments> colorBlendAttachments;
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
-            const BlendStateDescriptor* descriptor = GetBlendStateDescriptor(i);
+            const ColorStateDescriptor* descriptor = GetColorStateDescriptor(i);
             colorBlendAttachments[i] = ComputeBlendDesc(descriptor);
         }
         VkPipelineColorBlendStateCreateInfo colorBlend;
