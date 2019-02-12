@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "b393e137_88116fa6",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-12T00:14:27Z",
+      "side": 1,
+      "message": "Like this?\n \nchar label[100];\n\nIf so, that sounds okay to me. We\u0027d have to put a character limit on it if we allocate statically - 100 characters seems like plenty. What do you think?",
+      "parentUuid": "7ca6c347_a64cf4ff",
+      "revId": "ebe7bc581c6d60502b801b162b39ca283b6d6079",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f07a60e7_1178c3f3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
