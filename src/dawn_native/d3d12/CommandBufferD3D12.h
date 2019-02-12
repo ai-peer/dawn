@@ -17,14 +17,18 @@
 
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/RenderPassDescriptor.h"
 
 #include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
+namespace dawn_native {
+    struct BeginRenderPassCmd;
+}  // namespace dawn_native
+
 namespace dawn_native { namespace d3d12 {
 
     class Device;
-    class RenderPassDescriptor;
 
     struct BindGroupStateTracker;
 
@@ -54,7 +58,7 @@ namespace dawn_native { namespace d3d12 {
                                BindGroupStateTracker* bindingTracker);
         void RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
                               BindGroupStateTracker* bindingTracker,
-                              RenderPassDescriptor* renderPass);
+                              BeginRenderPassCmd* renderPassCmd);
 
         CommandIterator mCommands;
     };

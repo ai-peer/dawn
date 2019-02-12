@@ -15,6 +15,7 @@
 #include "dawn_native/RenderPipeline.h"
 
 #include "common/BitSetIterator.h"
+#include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/RenderPassDescriptor.h"
@@ -236,28 +237,30 @@ namespace dawn_native {
         return mDepthStencilFormat;
     }
 
-    bool RenderPipelineBase::IsCompatibleWith(const RenderPassDescriptorBase* renderPass) const {
+    bool RenderPipelineBase::IsCompatibleWith(const BeginRenderPassCmd* renderPassCmd) const {
         // TODO(cwallez@chromium.org): This is called on every SetPipeline command. Optimize it for
         // example by caching some "attachment compatibility" object that would make the
         // compatibility check a single pointer comparison.
 
-        if (renderPass->GetColorAttachmentMask() != mColorAttachmentsSet) {
+        if (renderPassCmd->colorAttachmentsSet != mColorAttachmentsSet) {
             return false;
         }
 
         for (uint32_t i : IterateBitSet(mColorAttachmentsSet)) {
-            if (renderPass->GetColorAttachment(i).view->GetTexture()->GetFormat() !=
+            if (renderPassCmd->colorAttachments[i].view->GetFormat() !=
                 mColorAttachmentFormats[i]) {
                 return false;
             }
         }
 
-        if (renderPass->HasDepthStencilAttachment() != mHasDepthStencilAttachment) {
+        bool renderPassHasDepthStencilAttachment =
+            renderPassCmd->depthStencilAttachment.view.Get() != nullptr;
+        if (renderPassHasDepthStencilAttachment != mHasDepthStencilAttachment) {
             return false;
         }
 
         if (mHasDepthStencilAttachment &&
-            (renderPass->GetDepthStencilAttachment().view->GetTexture()->GetFormat() !=
+            (renderPassCmd->depthStencilAttachment.view->GetFormat() !=
              mDepthStencilFormat)) {
             return false;
         }
