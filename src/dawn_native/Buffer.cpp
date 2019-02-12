@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <cstdio>
@@ -129,6 +130,22 @@ namespace dawn_native {
         mIsMapped = true;
 
         MapReadAsyncImpl(mMapSerial, start, size);
+    }
+
+    MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
+        DynamicUploader* uploader = nullptr;
+        DAWN_TRY_ASSIGN(uploader, GetDevice()->GetDynamicUploader(64000));
+
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(count, 4));
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, count);
+
+        DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(
+            uploadHandle.stagingBuffer, uploadHandle.startOffset, this, start, count));
+
+        return {};
     }
 
     void BufferBase::MapWriteAsync(uint32_t start,
