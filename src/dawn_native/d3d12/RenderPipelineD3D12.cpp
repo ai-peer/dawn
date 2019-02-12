@@ -127,7 +127,7 @@ namespace dawn_native { namespace d3d12 {
             return static_cast<uint8_t>(colorWriteMask);
         }
 
-        D3D12_RENDER_TARGET_BLEND_DESC ComputeBlendDesc(const BlendStateDescriptor* descriptor) {
+        D3D12_RENDER_TARGET_BLEND_DESC ComputeBlendDesc(const ColorStateDescriptor* descriptor) {
             D3D12_RENDER_TARGET_BLEND_DESC blendDesc;
             blendDesc.BlendEnable = BlendEnabled(descriptor);
             blendDesc.SrcBlend = D3D12Blend(descriptor->colorBlend.srcFactor);
@@ -180,20 +180,26 @@ namespace dawn_native { namespace d3d12 {
         D3D12_DEPTH_STENCIL_DESC ComputeDepthStencilDesc(
             const DepthStencilStateDescriptor* descriptor) {
             D3D12_DEPTH_STENCIL_DESC mDepthStencilDescriptor;
-            mDepthStencilDescriptor.DepthEnable = TRUE;
-            mDepthStencilDescriptor.DepthWriteMask = descriptor->depthWriteEnabled
-                                                         ? D3D12_DEPTH_WRITE_MASK_ALL
-                                                         : D3D12_DEPTH_WRITE_MASK_ZERO;
-            mDepthStencilDescriptor.DepthFunc = ToD3D12ComparisonFunc(descriptor->depthCompare);
+            if (!descriptor) {
+                mDepthStencilDescriptor.DepthEnable = FALSE;
+                mDepthStencilDescriptor.StencilEnable = FALSE;
+            } else {
+                mDepthStencilDescriptor.DepthEnable = TRUE;
+                mDepthStencilDescriptor.DepthWriteMask = descriptor->depthWriteEnabled
+                                                             ? D3D12_DEPTH_WRITE_MASK_ALL
+                                                             : D3D12_DEPTH_WRITE_MASK_ZERO;
+                mDepthStencilDescriptor.DepthFunc = ToD3D12ComparisonFunc(descriptor->depthCompare);
 
-            mDepthStencilDescriptor.StencilEnable = StencilTestEnabled(descriptor) ? TRUE : FALSE;
-            mDepthStencilDescriptor.StencilReadMask =
-                static_cast<UINT8>(descriptor->stencilReadMask);
-            mDepthStencilDescriptor.StencilWriteMask =
-                static_cast<UINT8>(descriptor->stencilWriteMask);
+                mDepthStencilDescriptor.StencilEnable =
+                    StencilTestEnabled(descriptor) ? TRUE : FALSE;
+                mDepthStencilDescriptor.StencilReadMask =
+                    static_cast<UINT8>(descriptor->stencilReadMask);
+                mDepthStencilDescriptor.StencilWriteMask =
+                    static_cast<UINT8>(descriptor->stencilWriteMask);
 
-            mDepthStencilDescriptor.FrontFace = StencilOpDesc(descriptor->stencilFront);
-            mDepthStencilDescriptor.BackFace = StencilOpDesc(descriptor->stencilBack);
+                mDepthStencilDescriptor.FrontFace = StencilOpDesc(descriptor->stencilFront);
+                mDepthStencilDescriptor.BackFace = StencilOpDesc(descriptor->stencilBack);
+            }
             return mDepthStencilDescriptor;
         }
 
@@ -287,7 +293,7 @@ namespace dawn_native { namespace d3d12 {
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
             descriptorD3D12.RTVFormats[i] = D3D12TextureFormat(GetColorAttachmentFormat(i));
             descriptorD3D12.BlendState.RenderTarget[i] =
-                ComputeBlendDesc(GetBlendStateDescriptor(i));
+                ComputeBlendDesc(GetColorStateDescriptor(i));
         }
         descriptorD3D12.NumRenderTargets = static_cast<uint32_t>(GetColorAttachmentsMask().count());
 

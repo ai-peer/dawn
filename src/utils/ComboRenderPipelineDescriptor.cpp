@@ -37,35 +37,22 @@ namespace utils {
             cFragmentStage.entryPoint = "main";
         }
 
-        // Set defaults for the attachment states.
-        {
-            descriptor->attachmentsState = &cAttachmentsState;
-            cAttachmentsState.numColorAttachments = 1;
-            cAttachmentsState.colorAttachments = &cColorAttachments[0];
-            cAttachmentsState.depthStencilAttachment = &cDepthStencilAttachment;
-            cAttachmentsState.hasDepthStencilAttachment = false;
-
-            for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-                colorAttachments[i].format = dawn::TextureFormat::R8G8B8A8Unorm;
-                cColorAttachments[i] = &colorAttachments[i];
-            }
-        }
-
         // Set defaults for the blend state descriptors.
         {
-            descriptor->numBlendStates = 1;
-            descriptor->blendStates = &cBlendStates[0];
+            descriptor->numColorStates = 1;
+            descriptor->colorStates = &cColorStates[0];
 
             dawn::BlendDescriptor blend;
             blend.operation = dawn::BlendOperation::Add;
             blend.srcFactor = dawn::BlendFactor::One;
             blend.dstFactor = dawn::BlendFactor::Zero;
-            dawn::BlendStateDescriptor blendStateDescriptor;
-            blendStateDescriptor.alphaBlend = blend;
-            blendStateDescriptor.colorBlend = blend;
-            blendStateDescriptor.colorWriteMask = dawn::ColorWriteMask::All;
+            dawn::ColorStateDescriptor colorStateDescriptor;
+            colorStateDescriptor.format = dawn::TextureFormat::R8G8B8A8Unorm;
+            colorStateDescriptor.alphaBlend = blend;
+            colorStateDescriptor.colorBlend = blend;
+            colorStateDescriptor.colorWriteMask = dawn::ColorWriteMask::All;
             for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-                cBlendStates[i] = blendStateDescriptor;
+                cColorStates[i] = colorStateDescriptor;
             }
         }
 
@@ -84,6 +71,7 @@ namespace utils {
             cDepthStencilState.stencilFront = stencilFace;
             cDepthStencilState.stencilReadMask = 0xff;
             cDepthStencilState.stencilWriteMask = 0xff;
+            descriptor->hasDepthStencilState = false;
             descriptor->depthStencilState = &cDepthStencilState;
         }
 
