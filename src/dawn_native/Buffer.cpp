@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <cstdio>
@@ -129,6 +130,29 @@ namespace dawn_native {
         mIsMapped = true;
 
         MapReadAsyncImpl(mMapSerial, start, size);
+    }
+
+    MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
+        // TODO(b-brber): Figure out this value.
+        static constexpr size_t kDefaultUploadBufferSize = 64000;
+
+        DynamicUploader* uploader = nullptr;
+        DAWN_TRY_ASSIGN(uploader, GetDevice()->GetDynamicUploader(kDefaultUploadBufferSize));
+
+        // TODO(b-brber): Remove once alignment constraint is added to validation (dawn:73).
+        static constexpr size_t kDefaultAlignment =
+            4;  // D3D does not specify so we assume 4-byte alignment to be safe.
+
+        UploadHandle uploadHandle;
+        DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(count, kDefaultAlignment));
+        ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+        memcpy(uploadHandle.mappedBuffer, data, count);
+
+        DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(
+            uploadHandle.stagingBuffer, uploadHandle.startOffset, this, start, count));
+
+        return {};
     }
 
     void BufferBase::MapWriteAsync(uint32_t start,

@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2018 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,31 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_METAL_RESOURCEUPLOADER_H_
-#define DAWNNATIVE_METAL_RESOURCEUPLOADER_H_
-
-#include "common/Serial.h"
-#include "common/SerialQueue.h"
+#ifndef DAWNNATIVE_STAGINGBUFFERMETAL_H_
+#define DAWNNATIVE_STAGINGBUFFERMETAL_H_
 
 #import <Metal/Metal.h>
+#include "dawn_native/StagingBuffer.h"
 
 namespace dawn_native { namespace metal {
 
     class Device;
 
-    class ResourceUploader {
+    class StagingBuffer : public StagingBufferBase {
       public:
-        ResourceUploader(Device* device);
-        ~ResourceUploader();
+        StagingBuffer(size_t size, Device* device);
+        ~StagingBuffer();
 
-        void BufferSubData(id<MTLBuffer> buffer, uint32_t start, uint32_t size, const void* data);
-        void Tick(Serial finishedSerial);
+        id<MTLBuffer> GetBufferHandle() const;
+
+        MaybeError Initialize() override;
 
       private:
         Device* mDevice;
-        SerialQueue<id<MTLBuffer>> mInflightUploadBuffers;
+        id<MTLBuffer> mBuffer = nil;
     };
-
 }}  // namespace dawn_native::metal
 
-#endif  // DAWNNATIVE_METAL_RESOURCEUPLOADER_H_
+#endif  // DAWNNATIVE_STAGINGBUFFERMETAL_H_
