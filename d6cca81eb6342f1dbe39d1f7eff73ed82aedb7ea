@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "aeb95548_e43f8e92",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-12T12:22:43Z",
+      "side": 1,
+      "message": "This CL should be rebased on top of https://dawn-review.googlesource.com/c/dawn/+/4500 which removes the need for \"has depth stencil state\". You can provide a second review for it after which I\u0027ll land it (or fix the comments and land).",
+      "revId": "d6cca81eb6342f1dbe39d1f7eff73ed82aedb7ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "19939c66_0d704ad6",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
