@@ -64,8 +64,6 @@ namespace dawn_native { namespace vulkan {
         mDeleter = std::make_unique<FencedDeleter>(this);
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mMemoryAllocator = std::make_unique<MemoryAllocator>(this);
-        mDynamicUploader = std::make_unique<DynamicUploader>(this);
-
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
 
         return {};
@@ -118,8 +116,8 @@ namespace dawn_native { namespace vulkan {
         // Free services explicitly so that they can free Vulkan objects before vkDestroyDevice
         mDynamicUploader = nullptr;
 
-        // Releasing the uploader enqueues buffers to be deleted.
-        // Call Tick() again to allow the deleter to clear them prior to being released.
+        // Releasing the uploader enqueues buffers to be released.
+        // Call Tick() again to clear them before releasing the deleter.
         mDeleter->Tick(mCompletedSerial);
 
         mDeleter = nullptr;
@@ -530,13 +528,4 @@ namespace dawn_native { namespace vulkan {
 
         return {};
     }
-
-    ResultOrError<DynamicUploader*> Device::GetDynamicUploader() const {
-        // TODO(b-brber): Refactor this into device init once moved into DeviceBase.
-        if (mDynamicUploader->IsEmpty()) {
-            DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer(kDefaultUploadBufferSize));
-        }
-        return mDynamicUploader.get();
-    }
-
 }}  // namespace dawn_native::vulkan
