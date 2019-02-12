@@ -337,6 +337,42 @@ namespace dawn_native { namespace vulkan {
                                               draw->firstInstance);
                 } break;
 
+                case Command::InsertDebugMarker: {
+                    if (device->GetDeviceInfo().debugMarker) {
+                        InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
+                        const char* label = mCommands.NextData<char>(cmd->length);
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = NULL;
+                        markerInfo.pMarkerName = label;
+                        device->fn.CmdDebugMarkerInsertEXT(commands, &markerInfo);
+                    } else {
+                        SkipCommand(&mCommands, Command::InsertDebugMarker);
+                    }
+                } break;
+
+                case Command::PopDebugGroup: {
+                    if (device->GetDeviceInfo().debugMarker) {
+                        mCommands.NextCommand<PopDebugGroupCmd>();
+                        device->fn.CmdDebugMarkerEndEXT(commands);
+                    } else {
+                        SkipCommand(&mCommands, Command::PopDebugGroup);
+                    }
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
+                    const char* label = mCommands.NextData<char>(cmd->length);
+                    if (device->GetDeviceInfo().debugMarker) {
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = NULL;
+                        markerInfo.pMarkerName = label;
+                        device->fn.CmdDebugMarkerBeginEXT(commands, &markerInfo);
+                    } else {
+                    }
+                } break;
+
                 case Command::SetBindGroup: {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     VkDescriptorSet set = ToBackend(cmd->group.Get())->GetHandle();

@@ -108,6 +108,8 @@ namespace dawn_native {
 
         bool mWereResourceUsagesAcquired = false;
         CommandBufferResourceUsage mResourceUsages;
+
+        unsigned int mDebugMarkerPushPopCounter = 0;
     };
 
 }  // namespace dawn_native
