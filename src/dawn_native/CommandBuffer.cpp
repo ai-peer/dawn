@@ -96,6 +96,30 @@ namespace dawn_native {
             return {};
         }
 
+        MaybeError CountDebugMarkerGroups(unsigned int& counter, Command command) {
+            if (command == Command::PushDebugGroup) {
+                counter++;
+            } else if (command == Command::PopDebugGroup) {
+                if (counter == 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "PopDebugGroup called without matching PushDebugGroup.");
+                } else {
+                    counter--;
+                }
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateDebugGroups(const unsigned int counter) {
+            if (counter != 0) {
+                return DAWN_VALIDATION_ERROR(
+                    "PushDebugGroup called without matching PopDebugGroup.");
+            }
+
+            return {};
+        }
+
         MaybeError ComputeTextureCopyBufferSize(const Extent3D& copySize,
                                                 uint32_t rowPitch,
                                                 uint32_t imageHeight,
@@ -531,6 +555,8 @@ namespace dawn_native {
                 case Command::EndRenderPass: {
                     mIterator.NextCommand<EndRenderPassCmd>();
 
+                    DAWN_TRY(ValidateDebugGroups(mDebugMarkerPushPopCounter));
+
                     DAWN_TRY(usageTracker.ValidateUsages(PassType::Render));
                     mResourceUsages.perPass.push_back(usageTracker.AcquireResourceUsage());
                     return {};
@@ -556,6 +582,24 @@ namespace dawn_native {
                     }
 
                     persistentState.SetRenderPipeline(pipeline);
+                } break;
+
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = mIterator.NextCommand<InsertDebugMarkerCmd>();
+                    mIterator.NextData<char>(cmd->length);
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mIterator.NextCommand<PopDebugGroupCmd>();
+                    DAWN_TRY(
+                        CountDebugMarkerGroups(mDebugMarkerPushPopCounter, Command::PopDebugGroup));
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = mIterator.NextCommand<PushDebugGroupCmd>();
+                    mIterator.NextData<char>(cmd->length);
+                    DAWN_TRY(CountDebugMarkerGroups(mDebugMarkerPushPopCounter,
+                                                    Command::PushDebugGroup));
                 } break;
 
                 case Command::SetPushConstants: {
