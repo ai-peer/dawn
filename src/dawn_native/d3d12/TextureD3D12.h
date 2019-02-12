@@ -18,9 +18,11 @@
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/d3d12/d3d12_platform.h"
+#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 
 namespace dawn_native { namespace d3d12 {
 
+    class DescriptorHeapHandle;
     class Device;
 
     DXGI_FORMAT D3D12TextureFormat(dawn::TextureFormat format);
@@ -52,11 +54,15 @@ namespace dawn_native { namespace d3d12 {
         DXGI_FORMAT GetD3D12Format() const;
 
         const D3D12_SHADER_RESOURCE_VIEW_DESC& GetSRVDescriptor() const;
-        D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor() const;
-        D3D12_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor() const;
+
+        D3D12_CPU_DESCRIPTOR_HANDLE GetRTVDescriptorHandle();
+        D3D12_CPU_DESCRIPTOR_HANDLE GetDSVDescriptorHandle();
 
       private:
         D3D12_SHADER_RESOURCE_VIEW_DESC mSrvDesc;
+        Device* mDevice;
+        DescriptorHeapHandle mRtvHeap = {};
+        DescriptorHeapHandle mDsvHeap = {};
     };
 }}  // namespace dawn_native::d3d12
 

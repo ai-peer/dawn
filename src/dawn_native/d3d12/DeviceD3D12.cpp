@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "dawn_native/BackendConnection.h"
+#include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
@@ -30,7 +31,6 @@
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/QueueD3D12.h"
-#include "dawn_native/d3d12/RenderPassDescriptorD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
@@ -218,7 +218,7 @@ namespace dawn_native { namespace d3d12 {
     }
     RenderPassDescriptorBase* Device::CreateRenderPassDescriptor(
         RenderPassDescriptorBuilder* builder) {
-        return new RenderPassDescriptor(builder);
+        return new RenderPassDescriptorBase(builder);
     }
     ResultOrError<RenderPipelineBase*> Device::CreateRenderPipelineImpl(
         const RenderPipelineDescriptor* descriptor) {
