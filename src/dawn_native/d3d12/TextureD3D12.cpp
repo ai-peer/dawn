@@ -188,7 +188,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
-        : TextureViewBase(texture, descriptor) {
+        : TextureViewBase(texture, descriptor), mDevice(ToBackend(texture->GetDevice())){
         mSrvDesc.Format = D3D12TextureFormat(descriptor->format);
         mSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 
@@ -234,31 +234,52 @@ namespace dawn_native { namespace d3d12 {
         return mSrvDesc;
     }
 
-    D3D12_RENDER_TARGET_VIEW_DESC TextureView::GetRTVDescriptor() const {
+    // TODO(jiawei.shao@intel.com): allocate RTVs in a global descriptor heap.
+    D3D12_CPU_DESCRIPTOR_HANDLE TextureView::GetRTVDescriptorHandle() {
         ASSERT(GetTexture()->GetDimension() == dawn::TextureDimension::e2D);
-        D3D12_RENDER_TARGET_VIEW_DESC rtvDesc;
-        rtvDesc.Format = GetD3D12Format();
+
         // Currently we always use D3D12_TEX2D_ARRAY_RTV because we cannot specify base array layer
         // and layer count in D3D12_TEX2D_RTV. For 2D texture views, we treat them as 1-layer 2D
         // array textures. (Just like how we treat SRVs)
         // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_rtv
         // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_array_rtv
-        rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DARRAY;
-        rtvDesc.Texture2DArray.FirstArraySlice = GetBaseArrayLayer();
-        rtvDesc.Texture2DArray.ArraySize = GetLayerCount();
-        rtvDesc.Texture2DArray.MipSlice = GetBaseMipLevel();
-        rtvDesc.Texture2DArray.PlaneSlice = 0;
-        return rtvDesc;
+        if (mRtvHeap.Get() == nullptr) {
+            D3D12_RENDER_TARGET_VIEW_DESC rtvDesc;
+            rtvDesc.Format = GetD3D12Format();
+            rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DARRAY;
+            rtvDesc.Texture2DArray.FirstArraySlice = GetBaseArrayLayer();
+            rtvDesc.Texture2DArray.ArraySize = GetLayerCount();
+            rtvDesc.Texture2DArray.MipSlice = GetBaseMipLevel();
+            rtvDesc.Texture2DArray.PlaneSlice = 0;
+
+            DescriptorHeapAllocator* allocator = mDevice->GetDescriptorHeapAllocator();
+            mRtvHeap = allocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 1);
+            mDevice->GetD3D12Device()->CreateRenderTargetView(
+                ToBackend(GetTexture())->GetD3D12Resource(), &rtvDesc, mRtvHeap.GetCPUHandle(0));
+        }
+
+        return mRtvHeap.GetCPUHandle(0);
     }
 
+    // TODO(jiawei.shao@intel.com): allocate DSVs in a global descriptor heap.
     // TODO(jiawei.shao@intel.com): support rendering into a layer of a texture.
-    D3D12_DEPTH_STENCIL_VIEW_DESC TextureView::GetDSVDescriptor() const {
-        D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc;
-        dsvDesc.Format = ToBackend(GetTexture())->GetD3D12Format();
-        dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-        dsvDesc.Texture2D.MipSlice = 0;
-        dsvDesc.Flags = D3D12_DSV_FLAG_NONE;
-        return dsvDesc;
+    D3D12_CPU_DESCRIPTOR_HANDLE TextureView::GetDSVDescriptorHandle() {
+        ASSERT(GetTexture()->GetDimension() == dawn::TextureDimension::e2D);
+
+        if (mDsvHeap.Get() == nullptr) {
+            D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc;
+            dsvDesc.Format = ToBackend(GetTexture())->GetD3D12Format();
+            dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+            dsvDesc.Texture2D.MipSlice = 0;
+            dsvDesc.Flags = D3D12_DSV_FLAG_NONE;
+
+            DescriptorHeapAllocator* allocator = mDevice->GetDescriptorHeapAllocator();
+            mDsvHeap = allocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1);
+            mDevice->GetD3D12Device()->CreateDepthStencilView(
+                ToBackend(GetTexture())->GetD3D12Resource(), &dsvDesc, mDsvHeap.GetCPUHandle(0));
+        }
+
+        return mDsvHeap.GetCPUHandle(0);
     }
 
 }}  // namespace dawn_native::d3d12
