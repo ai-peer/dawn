@@ -134,6 +134,11 @@ namespace dawn_native { namespace opengl {
 
         void ApplyDepthStencilState(const DepthStencilStateDescriptor* descriptor,
                                     PersistentPipelineState* persistentPipelineState) {
+            if (!descriptor) {
+                glDisable(GL_DEPTH_TEST);
+                glDisable(GL_STENCIL_TEST);
+                return;
+            }
             // Depth writes only occur if depth is enabled
             if (descriptor->depthCompare == dawn::CompareFunction::Always &&
                 !descriptor->depthWriteEnabled) {

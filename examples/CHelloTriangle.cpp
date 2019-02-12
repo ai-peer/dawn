@@ -71,21 +71,9 @@ void init() {
         fragmentStage.entryPoint = "main";
         descriptor.fragmentStage = &fragmentStage;
 
-        dawnAttachmentsStateDescriptor attachmentsState;
-        attachmentsState.nextInChain = nullptr;
-        attachmentsState.numColorAttachments = 1;
-        dawnAttachmentDescriptor colorAttachment = {nullptr, swapChainFormat};
-        dawnAttachmentDescriptor* colorAttachmentPtr[] = {&colorAttachment};
-        attachmentsState.colorAttachments = colorAttachmentPtr;
-        attachmentsState.hasDepthStencilAttachment = false;
-        // Even with hasDepthStencilAttachment = false, depthStencilAttachment must point to valid
-        // data because we don't have optional substructures yet.
-        attachmentsState.depthStencilAttachment = &colorAttachment;
-        descriptor.attachmentsState = &attachmentsState;
-
         descriptor.sampleCount = 1;
 
-        descriptor.numBlendStates = 1;
+        descriptor.numColorStates = 1;
 
         dawnBlendDescriptor blendDescriptor;
         blendDescriptor.operation = DAWN_BLEND_OPERATION_ADD;
@@ -96,7 +84,7 @@ void init() {
         blendStateDescriptor.alphaBlend = blendDescriptor;
         blendStateDescriptor.colorBlend = blendDescriptor;
         blendStateDescriptor.colorWriteMask = DAWN_COLOR_WRITE_MASK_ALL;
-        descriptor.blendStates = &blendStateDescriptor;
+        descriptor.colorStates = &blendStateDescriptor;
 
         dawnPipelineLayoutDescriptor pl;
         pl.nextInChain = nullptr;

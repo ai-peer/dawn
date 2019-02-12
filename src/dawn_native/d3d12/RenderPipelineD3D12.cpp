@@ -180,20 +180,26 @@ namespace dawn_native { namespace d3d12 {
         D3D12_DEPTH_STENCIL_DESC ComputeDepthStencilDesc(
             const DepthStencilStateDescriptor* descriptor) {
             D3D12_DEPTH_STENCIL_DESC mDepthStencilDescriptor;
-            mDepthStencilDescriptor.DepthEnable = TRUE;
-            mDepthStencilDescriptor.DepthWriteMask = descriptor->depthWriteEnabled
-                                                         ? D3D12_DEPTH_WRITE_MASK_ALL
-                                                         : D3D12_DEPTH_WRITE_MASK_ZERO;
-            mDepthStencilDescriptor.DepthFunc = ToD3D12ComparisonFunc(descriptor->depthCompare);
+            if (!descriptor) {
+                mDepthStencilDescriptor.DepthEnable = FALSE;
+                mDepthStencilDescriptor.StencilEnable = FALSE;
+            } else {
+                mDepthStencilDescriptor.DepthEnable = TRUE;
+                mDepthStencilDescriptor.DepthWriteMask = descriptor->depthWriteEnabled
+                                                             ? D3D12_DEPTH_WRITE_MASK_ALL
+                                                             : D3D12_DEPTH_WRITE_MASK_ZERO;
+                mDepthStencilDescriptor.DepthFunc = ToD3D12ComparisonFunc(descriptor->depthCompare);
 
-            mDepthStencilDescriptor.StencilEnable = StencilTestEnabled(descriptor) ? TRUE : FALSE;
-            mDepthStencilDescriptor.StencilReadMask =
-                static_cast<UINT8>(descriptor->stencilReadMask);
-            mDepthStencilDescriptor.StencilWriteMask =
-                static_cast<UINT8>(descriptor->stencilWriteMask);
+                mDepthStencilDescriptor.StencilEnable =
+                    StencilTestEnabled(descriptor) ? TRUE : FALSE;
+                mDepthStencilDescriptor.StencilReadMask =
+                    static_cast<UINT8>(descriptor->stencilReadMask);
+                mDepthStencilDescriptor.StencilWriteMask =
+                    static_cast<UINT8>(descriptor->stencilWriteMask);
 
-            mDepthStencilDescriptor.FrontFace = StencilOpDesc(descriptor->stencilFront);
-            mDepthStencilDescriptor.BackFace = StencilOpDesc(descriptor->stencilBack);
+                mDepthStencilDescriptor.FrontFace = StencilOpDesc(descriptor->stencilFront);
+                mDepthStencilDescriptor.BackFace = StencilOpDesc(descriptor->stencilBack);
+            }
             return mDepthStencilDescriptor;
         }
 

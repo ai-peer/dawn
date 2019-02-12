@@ -42,10 +42,10 @@ namespace dawn_native {
         InputStateBase* GetInputState();
         dawn::PrimitiveTopology GetPrimitiveTopology() const;
 
-        std::bitset<kMaxColorAttachments> GetColorAttachmentsMask() const;
-        bool HasDepthStencilAttachment() const;
-        dawn::TextureFormat GetColorAttachmentFormat(uint32_t attachment) const;
-        dawn::TextureFormat GetDepthStencilFormat() const;
+        std::bitset<kMaxColorAttachments> GetColorAttachmentsMask() const;        // ?
+        bool HasDepthStencilAttachment() const;                                   // ?
+        dawn::TextureFormat GetColorAttachmentFormat(uint32_t attachment) const;  // ?
+        dawn::TextureFormat GetDepthStencilFormat() const;                        // ?
 
         // A pipeline can be used in a render pass if its attachment info matches the actual
         // attachments in the render pass. This returns whether it is the case.
@@ -56,12 +56,12 @@ namespace dawn_native {
         dawn::IndexFormat mIndexFormat;
         Ref<InputStateBase> mInputState;
         dawn::PrimitiveTopology mPrimitiveTopology;
-        std::array<BlendStateDescriptor, kMaxColorAttachments> mBlendStates;
+        std::array<BlendStateDescriptor, kMaxColorAttachments> mColorStates;
 
         std::bitset<kMaxColorAttachments> mColorAttachmentsSet;
-        std::array<dawn::TextureFormat, kMaxColorAttachments> mColorAttachmentFormats;
+        // std::array<dawn::TextureFormat, kMaxColorAttachments> mColorAttachmentFormats;
         bool mHasDepthStencilAttachment = false;
-        dawn::TextureFormat mDepthStencilFormat;
+        // dawn::TextureFormat mDepthStencilFormat;
     };
 
 }  // namespace dawn_native
