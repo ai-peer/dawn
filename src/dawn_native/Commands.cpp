@@ -199,4 +199,8 @@ namespace dawn_native {
         }
     }
 
+    bool HasDepthStencilAttachmentInRenderPass(const BeginRenderPassCmd* renderPassCmd) {
+        return renderPassCmd->depthStencilAttachment.view.Get() != nullptr;
+    }
+
 }  // namespace dawn_native

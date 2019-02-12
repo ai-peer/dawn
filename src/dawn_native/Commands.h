@@ -15,10 +15,14 @@
 #ifndef DAWNNATIVE_COMMANDS_H_
 #define DAWNNATIVE_COMMANDS_H_
 
-#include "dawn_native/RenderPassDescriptor.h"
+#include "common/Constants.h"
+
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
+
+#include <array>
+#include <bitset>
 
 namespace dawn_native {
 
@@ -50,9 +54,37 @@ namespace dawn_native {
 
     struct BeginComputePassCmd {};
 
-    struct BeginRenderPassCmd {
-        Ref<RenderPassDescriptorBase> info;
+    struct RenderPassColorAttachmentInfo {
+        Ref<TextureViewBase> view;
+        Ref<TextureViewBase> resolveTarget;
+        dawn::LoadOp loadOp;
+        dawn::StoreOp storeOp;
+        std::array<float, 4> clearColor = {{0.0f, 0.0f, 0.0f, 0.0f}};
     };
+
+    struct RenderPassDepthStencilAttachmentInfo {
+        Ref<TextureViewBase> view;
+        dawn::LoadOp depthLoadOp;
+        dawn::StoreOp depthStoreOp;
+        dawn::LoadOp stencilLoadOp;
+        dawn::StoreOp stencilStoreOp;
+        float clearDepth;
+        uint32_t clearStencil;
+    };
+
+    struct BeginRenderPassCmd {
+        std::bitset<kMaxColorAttachments> colorAttachmentsSet;
+        RenderPassColorAttachmentInfo colorAttachments[kMaxColorAttachments];
+
+        RenderPassDepthStencilAttachmentInfo depthStencilAttachment;
+
+        // Cache the width and height of all attachments for convenience
+        uint32_t width;
+        uint32_t height;
+    };
+
+    // Helper function to get if there is a depth stencil attachment in renderPassCmd.
+    bool HasDepthStencilAttachmentInRenderPass(const BeginRenderPassCmd* renderPassCmd);
 
     struct BufferCopy {
         Ref<BufferBase> buffer;
