@@ -436,6 +436,30 @@ namespace dawn_native { namespace metal {
                     }
                 } break;
 
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
+                    auto label = commands->NextData<char>(cmd->length);
+                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:cmd->label.c_str()];
+
+                    [encoder insertDebugSignpost:mtlLabel];
+                    [mtlLabel release];
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mCommands.NextCommand<PopDebugGroupCmd>();
+
+                    [encoder popDebugGroup];
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
+                    auto label = commands->NextData<char>(cmd->length);
+                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:cmd->label];
+
+                    [encoder pushDebugGroup:mtlLabel];
+                    [mtlLabel release];
+                } break;
+
                 case Command::SetRenderPipeline: {
                     SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
                     lastPipeline = ToBackend(cmd->pipeline).Get();
