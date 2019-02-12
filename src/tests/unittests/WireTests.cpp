@@ -345,11 +345,11 @@ TEST_F(WireTests, CStringArgument) {
     blendDescriptor.operation = DAWN_BLEND_OPERATION_ADD;
     blendDescriptor.srcFactor = DAWN_BLEND_FACTOR_ONE;
     blendDescriptor.dstFactor = DAWN_BLEND_FACTOR_ONE;
-    dawnBlendStateDescriptor blendStateDescriptor;
-    blendStateDescriptor.nextInChain = nullptr;
-    blendStateDescriptor.alphaBlend = blendDescriptor;
-    blendStateDescriptor.colorBlend = blendDescriptor;
-    blendStateDescriptor.colorWriteMask = DAWN_COLOR_WRITE_MASK_ALL;
+    dawnColorStateDescriptor colorStateDescriptor;
+    colorStateDescriptor.nextInChain = nullptr;
+    colorStateDescriptor.alphaBlend = blendDescriptor;
+    colorStateDescriptor.colorBlend = blendDescriptor;
+    colorStateDescriptor.colorWriteMask = DAWN_COLOR_WRITE_MASK_ALL;
 
     // Create the input state
     dawnInputStateBuilder inputStateBuilder = dawnDeviceCreateInputStateBuilder(device);
@@ -404,20 +404,8 @@ TEST_F(WireTests, CStringArgument) {
     fragmentStage.entryPoint = "main";
     pipelineDescriptor.fragmentStage = &fragmentStage;
 
-    dawnAttachmentsStateDescriptor attachmentsState;
-    attachmentsState.nextInChain = nullptr;
-    attachmentsState.numColorAttachments = 1;
-    dawnAttachmentDescriptor colorAttachment = {nullptr, DAWN_TEXTURE_FORMAT_R8_G8_B8_A8_UNORM};
-    dawnAttachmentDescriptor* colorAttachmentPtr[] = {&colorAttachment};
-    attachmentsState.colorAttachments = colorAttachmentPtr;
-    attachmentsState.hasDepthStencilAttachment = false;
-    // Even with hasDepthStencilAttachment = false, depthStencilAttachment must point to valid
-    // data because we don't have optional substructures yet.
-    attachmentsState.depthStencilAttachment = &colorAttachment;
-    pipelineDescriptor.attachmentsState = &attachmentsState;
-
-    pipelineDescriptor.numBlendStates = 1;
-    pipelineDescriptor.blendStates = &blendStateDescriptor;
+    pipelineDescriptor.numColorStates = 1;
+    pipelineDescriptor.colorStates = &colorStateDescriptor;
 
     pipelineDescriptor.sampleCount = 1;
     pipelineDescriptor.layout = layout;
