@@ -75,6 +75,11 @@ namespace dawn_native { namespace null {
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return new Buffer(this, descriptor);
     }
+    MaybeError Device::CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
+                                                   dawnCreateBufferMappedCallback callback,
+                                                   dawnCallbackUserdata userdata) {
+        return Buffer::CreateBufferMappedAsync(this, descriptor, callback, userdata);
+    }
     CommandBufferBase* Device::CreateCommandBuffer(CommandBufferBuilder* builder) {
         return new CommandBuffer(builder);
     }
@@ -189,6 +194,20 @@ namespace dawn_native { namespace null {
     }
 
     Buffer::~Buffer() {
+    }
+
+    MaybeError Buffer::CreateBufferMappedAsync(Device* device,
+                                               const BufferDescriptor* descriptor,
+                                               dawnCreateBufferMappedCallback callback,
+                                               dawnCallbackUserdata userdata) {
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        if (buffer != nullptr) {
+            dawnCallbackUserdata mapWriteUserdata;
+            dawnBufferMapWriteCallback mapWriteCallback =
+                AsMapWriteCallback(buffer, callback, userdata, &mapWriteUserdata);
+            buffer->MapWriteAsync(mapWriteCallback, mapWriteUserdata);
+        }
+        return {};
     }
 
     void Buffer::MapReadOperationCompleted(uint32_t serial, void* ptr, bool isWrite) {

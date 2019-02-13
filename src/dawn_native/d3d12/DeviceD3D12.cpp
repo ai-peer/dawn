@@ -199,6 +199,11 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return new Buffer(this, descriptor);
     }
+    MaybeError Device::CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
+                                                   dawnCreateBufferMappedCallback callback,
+                                                   dawnCallbackUserdata userdata) {
+        return Buffer::CreateBufferMappedAsync(descriptor, callback, userdata);
+    }
     CommandBufferBase* Device::CreateCommandBuffer(CommandBufferBuilder* builder) {
         return new CommandBuffer(builder);
     }

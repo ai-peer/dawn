@@ -132,6 +132,11 @@ namespace dawn_native {
 
         return result;
     }
+    void DeviceBase::CreateBufferMappedAsync(const BufferDescriptor* descriptor,
+                                             dawnCreateBufferMappedCallback callback,
+                                             dawnCallbackUserdata userdata) {
+        ConsumedError(CreateBufferMappedAsyncImpl(descriptor, callback, userdata));
+    }
     CommandBufferBuilder* DeviceBase::CreateCommandBufferBuilder() {
         return new CommandBufferBuilder(this);
     }

@@ -117,6 +117,9 @@ namespace dawn_native { namespace null {
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
+        MaybeError CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
+                                               dawnCreateBufferMappedCallback callback,
+                                               dawnCallbackUserdata userdata) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
@@ -142,6 +145,11 @@ namespace dawn_native { namespace null {
       public:
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
+
+        static MaybeError CreateBufferMappedAsync(Device* device,
+                                                  const BufferDescriptor* descriptor,
+                                                  dawnCreateBufferMappedCallback callback,
+                                                  dawnCallbackUserdata userdata);
 
         void MapReadOperationCompleted(uint32_t serial, void* ptr, bool isWrite);
 

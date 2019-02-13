@@ -109,6 +109,22 @@ namespace dawn_native { namespace d3d12 {
         ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
     }
 
+    // static
+    MaybeError Buffer::CreateBufferMappedAsync(Device* device,
+                                               const BufferDescriptor* descriptor,
+                                               dawnCreateBufferMappedCallback callback,
+                                               dawnCallbackUserdata userdata) {
+        // TODO: Optimize to initialize the buffer when it is unmapped
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        if (buffer != nullptr) {
+            dawnCallbackUserdata mapWriteUserdata;
+            dawnBufferMapWriteCallback mapWriteCallback =
+                AsMapWriteCallback(buffer, callback, userdata, &mapWriteUserdata);
+            buffer->MapWriteAsync(mapWriteCallback, mapWriteUserdata);
+        }
+        return {};
+    }
+
     uint32_t Buffer::GetD3D12Size() const {
         // TODO(enga@google.com): TODO investigate if this needs to be a constraint at the API level
         return Align(GetSize(), 256);

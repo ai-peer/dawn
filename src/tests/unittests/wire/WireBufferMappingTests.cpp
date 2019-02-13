@@ -461,3 +461,44 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapWriteCallback) {
 
     FlushClient();
 }
+
+// Check CreateBufferMapped for successfully creating and writing a buffer
+TEST_F(WireBufferMappingTests, CreateBufferMappedAsync) {
+    dawnBufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = DAWN_BUFFER_USAGE_BIT_MAP_WRITE;
+
+    dawnCallbackUserdata userdata = 1409;
+    dawnDeviceCreateBufferMappedAsync(device, &descriptor, ToMockCreateBufferMappedCallback,
+                                      userdata);
+
+    dawnBuffer createdApiBuffer = api.GetNewBuffer();
+    EXPECT_CALL(api, BufferRelease(createdApiBuffer));
+
+    uint32_t serverBufferContent = 31337;
+    uint32_t updatedContent = 4242;
+    uint32_t zero = 0;
+    EXPECT_CALL(api, OnDeviceCreateBufferMappedAsyncCallback(apiDevice, _, _, _))
+        .WillOnce(InvokeWithoutArgs([&]() {
+            api.CallDeviceCreateBufferMappedAsyncCallback(apiDevice, createdApiBuffer,
+                                                          DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS,
+                                                          &serverBufferContent, sizeof(uint32_t));
+        }));
+
+    FlushClient();
+
+    EXPECT_CALL(*mockCreateBufferMappedCallback,
+                Call(_, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, Pointee(Eq(zero)), sizeof(uint32_t),
+                     userdata))
+        .Times(1);
+
+    FlushServer();
+    *lastMapWritePointer = updatedContent;
+
+    dawnBufferUnmap(lastCreateMappedBuffer);
+    EXPECT_CALL(api, BufferUnmap(createdApiBuffer)).Times(1);
+    FlushClient();
+    // After the buffer is unmapped, the content of the buffer is updated on the server
+    ASSERT_EQ(serverBufferContent, updatedContent);
+}

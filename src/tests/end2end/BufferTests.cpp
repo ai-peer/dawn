@@ -224,6 +224,56 @@ TEST_P(BufferSetSubDataTests, LargeSetSubData) {
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), buffer, 0, kElements);
 }
 
+class CreateBufferMappedTests : public DawnTest {
+  protected:
+    static void CreateBufferMappedCallback(dawnBuffer buffer,
+                                           dawnBufferMapAsyncStatus status,
+                                           void* data,
+                                           uint32_t,
+                                           dawnCallbackUserdata userdata) {
+        ASSERT_NE(nullptr, buffer);
+        ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
+        ASSERT_NE(nullptr, data);
+
+        auto test = reinterpret_cast<CreateBufferMappedTests*>(static_cast<uintptr_t>(userdata));
+        test->mappedBuffer = buffer;
+        test->mappedData = data;
+    }
+
+    dawn::Buffer CreateBufferMappedAsyncAndWait(const dawn::Device& device,
+                                                const dawn::BufferDescriptor* descriptor) {
+        device.CreateBufferMappedAsync(
+            descriptor, CreateBufferMappedCallback,
+            static_cast<dawn::CallbackUserdata>(reinterpret_cast<uintptr_t>(this)));
+        while (mappedBuffer == nullptr) {
+            WaitABit();
+        }
+        return *reinterpret_cast<dawn::Buffer*>(mappedBuffer);
+    }
+
+    void* GetMappedData() {
+        return mappedData;
+    }
+
+  private:
+    dawnBuffer mappedBuffer = nullptr;
+    void* mappedData = nullptr;
+};
+
+// Test that the simplest CreateBufferMappedAsync works.
+TEST_P(CreateBufferMappedTests, SmallAsyncWrite) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+
+    dawn::Buffer buffer = CreateBufferMappedAsyncAndWait(device, &descriptor);
+    uint32_t myData = 2934875;
+    memcpy(GetMappedData(), &myData, sizeof(myData));
+    buffer.Unmap();
+
+    EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
+}
+
 DAWN_INSTANTIATE_TEST(BufferSetSubDataTests,
                      D3D12Backend,
                      MetalBackend,
