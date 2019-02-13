@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ef4439cd_36cbbff5",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T13:14:34Z",
+      "side": 1,
+      "message": "ASSERT(!IsError()) after this.",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb1a6dee_4945d9af",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 6
@@ -30,6 +47,23 @@
       "writtenOn": "2019-02-13T10:55:49Z",
       "side": 1,
       "message": "Maybe this should be like Unmap and allowed to be called multiple times?",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40703d95_1c399112",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T13:14:34Z",
+      "side": 1,
+      "message": "This will also need to DAWN_TRY(GetDevice()-\u003eValidateObject(this));",
       "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
