@@ -16,6 +16,24 @@
       "revId": "607f4bf367f5858f59ffef005188b9dba92e9e04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c90a4ebb_ffc8d23a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T20:59:09Z",
+      "side": 1,
+      "message": "Hm I used the autoformat here. I think this is the way it\u0027s supposed to be. Since the reinterpret_cast is inside the static_cast, it shouldn\u0027t be aligned.",
+      "parentUuid": "a5f2742a_bd508ebd",
+      "revId": "607f4bf367f5858f59ffef005188b9dba92e9e04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
