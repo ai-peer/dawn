@@ -208,6 +208,24 @@
     },
     {
       "key": {
+        "uuid": "ff95ccf3_c43659f9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-13T11:20:10Z",
+      "side": 1,
+      "message": "Thanks for your explanation. I will move the creation of RTVs and DSVs in CommandBufferD3D12 in the next iteration.",
+      "parentUuid": "4c53413a_dee40a0e",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "efe17664_aa5ff586",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 7
