@@ -29,6 +29,11 @@ namespace dawn_native { namespace d3d12 {
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
 
+        static MaybeError CreateBufferMappedAsync(Device* device,
+                                                  const BufferDescriptor* descriptor,
+                                                  dawnCreateBufferMappedCallback callback,
+                                                  dawnCallbackUserdata userdata);
+
         uint32_t GetD3D12Size() const;
         ComPtr<ID3D12Resource> GetD3D12Resource();
         D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;

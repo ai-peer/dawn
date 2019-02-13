@@ -148,6 +148,11 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return new Buffer(this, descriptor);
     }
+    MaybeError Device::CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
+                                                   dawnCreateBufferMappedCallback callback,
+                                                   dawnCallbackUserdata userdata) {
+        return Buffer::CreateBufferMappedAsync(this, descriptor, callback, userdata);
+    }
     CommandBufferBase* Device::CreateCommandBuffer(CommandBufferBuilder* builder) {
         return new CommandBuffer(builder);
     }

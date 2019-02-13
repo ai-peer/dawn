@@ -93,6 +93,37 @@ namespace dawn_wire { namespace server {
         return true;
     }
 
+    bool Server::DoCreateBufferMappedAsync(ObjectId deviceId,
+                                           const dawnBufferDescriptor* descriptor,
+                                           ObjectHandle buffer) {
+        // The null object isn't valid as `self`
+        if (deviceId == 0) {
+            return false;
+        }
+
+        auto* device = DeviceObjects().Get(deviceId);
+        if (device == nullptr || !device->valid) {
+            return false;
+        }
+
+        auto* bufferData = BufferObjects().Allocate(buffer.id);
+        if (bufferData == nullptr) {
+            return false;
+        }
+        bufferData->serial = buffer.serial;
+
+        auto* data = new CreateBufferMappedAsyncUserdata;
+        data->server = this;
+        data->device = ObjectHandle{deviceId, device->serial};
+        data->buffer = buffer;
+
+        auto userdata = static_cast<uint64_t>(reinterpret_cast<uintptr_t>(data));
+
+        mProcs.deviceCreateBufferMappedAsync(device->handle, descriptor,
+                                             ForwardCreateBufferMappedAsync, userdata);
+        return true;
+    }
+
     void Server::ForwardBufferMapReadAsync(dawnBufferMapAsyncStatus status,
                                            const void* ptr,
                                            uint32_t dataLength,
@@ -107,6 +138,17 @@ namespace dawn_wire { namespace server {
                                             dawnCallbackUserdata userdata) {
         auto data = reinterpret_cast<MapUserdata*>(static_cast<uintptr_t>(userdata));
         data->server->OnBufferMapWriteAsyncCallback(status, ptr, dataLength, data);
+    }
+
+    void Server::ForwardCreateBufferMappedAsync(dawnBuffer buffer,
+                                                dawnBufferMapAsyncStatus status,
+                                                void* ptr,
+                                                uint32_t dataLength,
+                                                dawnCallbackUserdata userdata) {
+        auto data =
+            reinterpret_cast<CreateBufferMappedAsyncUserdata*>(static_cast<uintptr_t>(userdata));
+        data->server->OnDeviceCreateBufferMappedAsyncCallback(buffer, status, ptr, dataLength,
+                                                              data);
     }
 
     void Server::OnBufferMapReadAsyncCallback(dawnBufferMapAsyncStatus status,
@@ -163,6 +205,52 @@ namespace dawn_wire { namespace server {
             bufferData->mappedData = ptr;
             bufferData->mappedDataSize = dataLength;
         }
+    }
+
+    void Server::OnDeviceCreateBufferMappedAsyncCallback(
+        dawnBuffer buffer,
+        dawnBufferMapAsyncStatus status,
+        void* ptr,
+        uint32_t dataLength,
+        CreateBufferMappedAsyncUserdata* userdata) {
+        std::unique_ptr<CreateBufferMappedAsyncUserdata> data(userdata);
+
+        auto* deviceData = DeviceObjects().Get(data->device.id);
+        if (deviceData == nullptr || deviceData->serial != data->device.serial) {
+            return;
+        }
+
+        auto* bufferData = BufferObjects().Get(data->buffer.id);
+        if (bufferData == nullptr || bufferData->serial != data->buffer.serial) {
+            // This would happen if the buffer is destroyed which should never happen
+            // because this is the callback in which the client receives the buffer.
+            return;
+        }
+
+        bufferData->handle = buffer;
+        bufferData->valid = buffer != nullptr;
+
+        if (!bufferData->valid) {
+            // The buffer could be invalid if there is a validation error
+            status = DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR;
+            bufferData->mappedData = nullptr;
+            bufferData->mappedDataSize = 0;
+        }
+
+        if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
+            bufferData->mappedData = ptr;
+            bufferData->mappedDataSize = dataLength;
+        }
+
+        ReturnDeviceCreateBufferMappedAsyncCallbackCmd cmd;
+        cmd.device = data->device;
+        cmd.buffer = data->buffer;
+        cmd.status = status;
+        cmd.dataLength = dataLength;
+
+        size_t requiredSize = cmd.GetRequiredSize();
+        char* allocatedBuffer = static_cast<char*>(GetCmdSpace(requiredSize));
+        cmd.Serialize(allocatedBuffer);
     }
 
 }}  // namespace dawn_wire::server

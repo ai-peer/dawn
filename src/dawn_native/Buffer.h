@@ -47,6 +47,12 @@ namespace dawn_native {
 
         static BufferBase* MakeError(DeviceBase* device);
 
+        static dawnBufferMapWriteCallback AsMapWriteCallback(
+            BufferBase* buffer,
+            dawnCreateBufferMappedCallback createCallback,
+            dawnCallbackUserdata createUserdata,
+            dawnCallbackUserdata* mapUserdata);
+
         uint32_t GetSize() const;
         dawn::BufferUsageBit GetUsage() const;
 

@@ -27,6 +27,11 @@ namespace dawn_native { namespace opengl {
       public:
         Buffer(Device* device, const BufferDescriptor* descriptor);
 
+        static MaybeError CreateBufferMappedAsync(Device* device,
+                                                  const BufferDescriptor* descriptor,
+                                                  dawnCreateBufferMappedCallback callback,
+                                                  dawnCallbackUserdata userdata);
+
         GLuint GetHandle() const;
 
       private:

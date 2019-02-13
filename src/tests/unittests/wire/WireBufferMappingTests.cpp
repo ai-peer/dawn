@@ -58,6 +58,31 @@ namespace {
         mockBufferMapWriteCallback->Call(status, lastMapWritePointer, dataLength, userdata);
     }
 
+    class MockCreateBufferMappedCallback {
+      public:
+        MOCK_METHOD5(Call,
+                     void(dawnBuffer buffer,
+                          dawnBufferMapAsyncStatus status,
+                          uint32_t* ptr,
+                          uint32_t dataLength,
+                          dawnCallbackUserdata userdata));
+    };
+
+    dawnBuffer lastCreateMappedBuffer;
+    uint32_t* lastCreateMappedPointer;
+    std::unique_ptr<MockCreateBufferMappedCallback> mockCreateBufferMappedCallback;
+    void ToMockCreateBufferMappedCallback(dawnBuffer buffer,
+                                          dawnBufferMapAsyncStatus status,
+                                          void* ptr,
+                                          uint32_t dataLength,
+                                          dawnCallbackUserdata userdata) {
+        lastCreateMappedBuffer = buffer;
+        // Assume the data is uint32_t to make writing matchers easier
+        lastCreateMappedPointer = static_cast<uint32_t*>(ptr);
+        mockCreateBufferMappedCallback->Call(buffer, status, lastCreateMappedPointer, dataLength,
+                                             userdata);
+    }
+
 }  // anonymous namespace
 
 class WireBufferMappingTests : public WireTest {
@@ -71,6 +96,7 @@ class WireBufferMappingTests : public WireTest {
 
         mockBufferMapReadCallback = std::make_unique<MockBufferMapReadCallback>();
         mockBufferMapWriteCallback = std::make_unique<MockBufferMapWriteCallback>();
+        mockCreateBufferMappedCallback = std::make_unique<MockCreateBufferMappedCallback>();
 
         {
             dawnBufferDescriptor descriptor;
@@ -104,6 +130,7 @@ class WireBufferMappingTests : public WireTest {
         // Delete mocks so that expectations are checked
         mockBufferMapReadCallback = nullptr;
         mockBufferMapWriteCallback = nullptr;
+        mockCreateBufferMappedCallback = nullptr;
     }
 
   protected:
@@ -514,4 +541,45 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapWriteCallback) {
     FlushServer();
 
     FlushClient();
+}
+
+// Check CreateBufferMapped for successfully creating and writing a buffer
+TEST_F(WireBufferMappingTests, CreateBufferMappedAsync) {
+    dawnBufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = DAWN_BUFFER_USAGE_BIT_MAP_WRITE;
+
+    dawnCallbackUserdata userdata = 1409;
+    dawnDeviceCreateBufferMappedAsync(device, &descriptor, ToMockCreateBufferMappedCallback,
+                                      userdata);
+
+    dawnBuffer createdApiBuffer = api.GetNewBuffer();
+    EXPECT_CALL(api, BufferRelease(createdApiBuffer));
+
+    uint32_t serverBufferContent = 31337;
+    uint32_t updatedContent = 4242;
+    uint32_t zero = 0;
+    EXPECT_CALL(api, OnDeviceCreateBufferMappedAsyncCallback(apiDevice, _, _, _))
+        .WillOnce(InvokeWithoutArgs([&]() {
+            api.CallDeviceCreateBufferMappedAsyncCallback(apiDevice, createdApiBuffer,
+                                                          DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS,
+                                                          &serverBufferContent, sizeof(uint32_t));
+        }));
+
+    FlushClient();
+
+    EXPECT_CALL(*mockCreateBufferMappedCallback,
+                Call(_, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, Pointee(Eq(zero)), sizeof(uint32_t),
+                     userdata))
+        .Times(1);
+
+    FlushServer();
+    *lastCreateMappedPointer = updatedContent;
+
+    dawnBufferUnmap(lastCreateMappedBuffer);
+    EXPECT_CALL(api, BufferUnmap(createdApiBuffer)).Times(1);
+    FlushClient();
+    // After the buffer is unmapped, the content of the buffer is updated on the server
+    ASSERT_EQ(serverBufferContent, updatedContent);
 }
