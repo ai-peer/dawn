@@ -47,6 +47,14 @@ namespace dawn_native {
 
         static BufferBase* MakeError(DeviceBase* device);
 
+        // Return a map write callback which will forward the buffer passed to this function
+        // and its arguments to a create buffer mapped callback
+        static dawnBufferMapWriteCallback CreateMappedAsMapWriteCallback(
+            BufferBase* buffer,
+            dawnCreateBufferMappedCallback createCallback,
+            dawnCallbackUserdata createUserdata,
+            dawnCallbackUserdata* mapUserdata);
+
         uint32_t GetSize() const;
         dawn::BufferUsageBit GetUsage() const;
 

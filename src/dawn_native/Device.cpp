@@ -142,6 +142,23 @@ namespace dawn_native {
 
         return result;
     }
+    void DeviceBase::CreateBufferMappedAsync(const BufferDescriptor* descriptor,
+                                             dawnCreateBufferMappedCallback callback,
+                                             dawnCallbackUserdata userdata) {
+        // TODO: Optimize per-backend to lazily zero-copy init the buffer when it is unmapped
+        // For now, we create a buffer and then call MapWriteAsync. We forward the map write
+        // callback to the create buffer mapped callback and pass the buffer to it.
+        BufferBase* buffer = CreateBuffer(descriptor);
+        if (buffer->IsError()) {
+            callback(reinterpret_cast<dawnBuffer>(buffer), DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR,
+                     nullptr, 0, userdata);
+            return;
+        }
+        dawnCallbackUserdata mapWriteUserdata;
+        dawnBufferMapWriteCallback mapWriteCallback = BufferBase::CreateMappedAsMapWriteCallback(
+            buffer, callback, userdata, &mapWriteUserdata);
+        buffer->MapWriteAsync(mapWriteCallback, mapWriteUserdata);
+    }
     CommandBufferBuilder* DeviceBase::CreateCommandBufferBuilder() {
         return new CommandBufferBuilder(this);
     }

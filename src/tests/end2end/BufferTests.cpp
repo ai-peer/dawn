@@ -229,3 +229,80 @@ DAWN_INSTANTIATE_TEST(BufferSetSubDataTests,
                      MetalBackend,
                      OpenGLBackend,
                      VulkanBackend)
+
+class CreateBufferMappedTests : public DawnTest {
+  protected:
+    static void CreateBufferMappedCallback(dawnBuffer buffer,
+                                           dawnBufferMapAsyncStatus status,
+                                           void* data,
+                                           uint32_t,
+                                           dawnCallbackUserdata userdata) {
+        ASSERT_NE(nullptr, buffer);
+        ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
+        ASSERT_NE(nullptr, data);
+
+        auto test = reinterpret_cast<CreateBufferMappedTests*>(static_cast<uintptr_t>(userdata));
+        test->mappedBuffer = buffer;
+        test->mappedData = data;
+    }
+
+    dawn::Buffer CreateBufferMappedAsyncAndWait(const dawn::Device& device,
+                                                const dawn::BufferDescriptor* descriptor) {
+        device.CreateBufferMappedAsync(
+            descriptor, CreateBufferMappedCallback,
+            static_cast<dawn::CallbackUserdata>(reinterpret_cast<uintptr_t>(this)));
+        while (mappedBuffer == nullptr) {
+            WaitABit();
+        }
+        return dawn::Buffer::Acquire(mappedBuffer);
+    }
+
+    void* GetMappedData() {
+        return mappedData;
+    }
+
+  private:
+    dawnBuffer mappedBuffer = nullptr;
+    void* mappedData = nullptr;
+};
+
+// Test that the simplest CreateBufferMappedAsync works.
+TEST_P(CreateBufferMappedTests, SmallAsyncWrite) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+
+    dawn::Buffer buffer = CreateBufferMappedAsyncAndWait(device, &descriptor);
+    uint32_t myData = 2934875;
+    memcpy(GetMappedData(), &myData, sizeof(myData));
+    buffer.Unmap();
+
+    EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
+}
+
+// Test CreateBufferMappedAsync for a large buffer
+TEST_P(CreateBufferMappedTests, LargeWrite) {
+    constexpr uint32_t kDataSize = 1000 * 1000;
+    std::vector<uint32_t> myData;
+    for (uint32_t i = 0; i < kDataSize; ++i) {
+        myData.push_back(i);
+    }
+
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = static_cast<uint32_t>(kDataSize * sizeof(uint32_t));
+    descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+
+    dawn::Buffer buffer = CreateBufferMappedAsyncAndWait(device, &descriptor);
+    memcpy(GetMappedData(), myData.data(), kDataSize * sizeof(uint32_t));
+    buffer.Unmap();
+
+    EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), buffer, 0, kDataSize);
+}
+
+DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
+                      D3D12Backend,
+                      MetalBackend,
+                      OpenGLBackend,
+                      VulkanBackend)

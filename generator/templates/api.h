@@ -55,6 +55,11 @@ typedef void (*dawnBufferMapReadCallback)(dawnBufferMapAsyncStatus status, const
 typedef void (*dawnBufferMapWriteCallback)(dawnBufferMapAsyncStatus status, void* data, uint32_t dataLength, dawnCallbackUserdata userdata);
 typedef void (*dawnFenceOnCompletionCallback)(dawnFenceCompletionStatus status,
                                               dawnCallbackUserdata userdata);
+typedef void (*dawnCreateBufferMappedCallback)(dawnBuffer buffer,
+                                               dawnBufferMapAsyncStatus status,
+                                               void* data,
+                                               uint32_t dataLength,
+                                               dawnCallbackUserdata userdata);
 
 #ifdef __cplusplus
 extern "C" {

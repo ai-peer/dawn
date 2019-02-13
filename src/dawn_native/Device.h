@@ -91,6 +91,9 @@ namespace dawn_native {
         BindGroupBase* CreateBindGroup(const BindGroupDescriptor* descriptor);
         BindGroupLayoutBase* CreateBindGroupLayout(const BindGroupLayoutDescriptor* descriptor);
         BufferBase* CreateBuffer(const BufferDescriptor* descriptor);
+        void CreateBufferMappedAsync(const BufferDescriptor* descriptor,
+                                     dawnCreateBufferMappedCallback callback,
+                                     dawnCallbackUserdata userdata);
         CommandBufferBuilder* CreateCommandBufferBuilder();
         ComputePipelineBase* CreateComputePipeline(const ComputePipelineDescriptor* descriptor);
         FenceBase* CreateFence(const FenceDescriptor* descriptor);
