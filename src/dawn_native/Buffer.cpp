@@ -100,6 +100,45 @@ namespace dawn_native {
         return new ErrorBuffer(device);
     }
 
+    // static
+    void BufferBase::CreateMappedAsync(DeviceBase* device,
+                                       const BufferDescriptor* descriptor,
+                                       dawnCreateBufferMappedCallback callback,
+                                       dawnCallbackUserdata userdata) {
+        // TODO: Optimize per-backend to lazily zero-copy init the buffer when it is unmapped
+        // For now, we create a buffer and then call MapWriteAsync. We forward the map write
+        // callback to the create buffer mapped callback and pass the buffer to it.
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        // Buffer is validated in the frontend
+        ASSERT(!buffer->IsError());
+
+        struct CreateMappedAsyncUserdata {
+            BufferBase* buffer;
+            dawnCreateBufferMappedCallback callback;
+            dawnCallbackUserdata userdata;
+        };
+
+        auto* data = new CreateMappedAsyncUserdata{buffer, callback, userdata};
+
+        // Pass a lambda to MapWriteAsync that will forward the buffer passed to this function and
+        // the lambda's arguments to the create buffer mapped callback
+        auto mapWriteAsyncCallback = [](dawnBufferMapAsyncStatus status, void* ptr,
+                                        uint32_t dataLength, dawnCallbackUserdata userdata) {
+            const auto* data = reinterpret_cast<const CreateMappedAsyncUserdata*>(
+                static_cast<uintptr_t>(userdata));
+            ASSERT(data != nullptr);
+
+            dawnBuffer buffer = reinterpret_cast<dawnBuffer>(data->buffer);
+            dawnCreateBufferMappedCallback createBufferMappedCallback = data->callback;
+            dawnCallbackUserdata createBufferMappedUserdata = data->userdata;
+            delete data;
+            createBufferMappedCallback(buffer, status, ptr, dataLength, createBufferMappedUserdata);
+        };
+
+        buffer->MapWriteAsync(mapWriteAsyncCallback,
+                              static_cast<dawnCallbackUserdata>(reinterpret_cast<uintptr_t>(data)));
+    }
+
     uint32_t BufferBase::GetSize() const {
         ASSERT(!IsError());
         return mSize;

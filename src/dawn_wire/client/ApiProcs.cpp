@@ -68,6 +68,14 @@ namespace dawn_wire { namespace client {
         cmd.Serialize(allocatedBuffer);
     }
 
+    void ClientDeviceCreateBufferMappedAsync(dawnDevice cDevice,
+                                             const dawnBufferDescriptor* descriptor,
+                                             dawnCreateBufferMappedCallback callback,
+                                             dawnCallbackUserdata userdata) {
+        // Not implemented
+        UNREACHABLE();
+    }
+
     uint64_t ClientFenceGetCompletedValue(dawnFence cSelf) {
         auto fence = reinterpret_cast<Fence*>(cSelf);
         return fence->completedValue;

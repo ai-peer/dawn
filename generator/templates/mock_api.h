@@ -63,6 +63,10 @@ class ProcTableAsClass {
                                uint64_t value,
                                dawnFenceOnCompletionCallback callback,
                                dawnCallbackUserdata userdata);
+        void DeviceCreateBufferMappedAsync(dawnDevice self,
+                                           const dawnBufferDescriptor* descriptor,
+                                           dawnCreateBufferMappedCallback callback,
+                                           dawnCallbackUserdata userdata);
 
         // Special cased mockable methods
         virtual void OnDeviceSetErrorCallback(dawnDevice device, dawnDeviceErrorCallback callback, dawnCallbackUserdata userdata) = 0;
@@ -73,6 +77,11 @@ class ProcTableAsClass {
                                                  uint64_t value,
                                                  dawnFenceOnCompletionCallback callback,
                                                  dawnCallbackUserdata userdata) = 0;
+        virtual void OnDeviceCreateBufferMappedAsyncCallback(
+            dawnDevice device,
+            const dawnBufferDescriptor* descriptor,
+            dawnCreateBufferMappedCallback callback,
+            dawnCallbackUserdata userdata) = 0;
 
         // Calls the stored callbacks
         void CallDeviceErrorCallback(dawnDevice device, const char* message);
@@ -80,6 +89,11 @@ class ProcTableAsClass {
         void CallMapReadCallback(dawnBuffer buffer, dawnBufferMapAsyncStatus status, const void* data, uint32_t dataLength);
         void CallMapWriteCallback(dawnBuffer buffer, dawnBufferMapAsyncStatus status, void* data, uint32_t dataLength);
         void CallFenceOnCompletionCallback(dawnFence fence, dawnFenceCompletionStatus status);
+        void CallDeviceCreateBufferMappedAsyncCallback(dawnDevice device,
+                                                       dawnBuffer buffer,
+                                                       dawnBufferMapAsyncStatus status,
+                                                       void* data,
+                                                       uint32_t dataLength);
 
         struct Object {
             ProcTableAsClass* procs = nullptr;
@@ -88,6 +102,7 @@ class ProcTableAsClass {
             dawnBufferMapReadCallback mapReadCallback = nullptr;
             dawnBufferMapWriteCallback mapWriteCallback = nullptr;
             dawnFenceOnCompletionCallback fenceOnCompletionCallback = nullptr;
+            dawnCreateBufferMappedCallback deviceCreateBufferMappedAsyncCallback = nullptr;
             dawnCallbackUserdata userdata1 = 0;
             dawnCallbackUserdata userdata2 = 0;
         };
@@ -125,6 +140,11 @@ class MockProcTable : public ProcTableAsClass {
                      void(dawnFence fence,
                           uint64_t value,
                           dawnFenceOnCompletionCallback callback,
+                          dawnCallbackUserdata userdata));
+        MOCK_METHOD4(OnDeviceCreateBufferMappedAsyncCallback,
+                     void(dawnDevice device,
+                          const dawnBufferDescriptor* descriptor,
+                          dawnCreateBufferMappedCallback callback,
                           dawnCallbackUserdata userdata));
 };
 

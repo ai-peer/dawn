@@ -45,6 +45,11 @@ namespace dawn_native {
         BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
         ~BufferBase();
 
+        static void CreateMappedAsync(DeviceBase* device,
+                                      const BufferDescriptor* descriptor,
+                                      dawnCreateBufferMappedCallback callback,
+                                      dawnCallbackUserdata userdata);
+
         static BufferBase* MakeError(DeviceBase* device);
 
         uint32_t GetSize() const;
