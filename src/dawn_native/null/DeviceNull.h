@@ -117,6 +117,9 @@ namespace dawn_native { namespace null {
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
+        void CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
+                                         dawnCreateBufferMappedCallback callback,
+                                         dawnCallbackUserdata userdata) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(

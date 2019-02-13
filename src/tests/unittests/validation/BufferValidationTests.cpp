@@ -58,6 +58,27 @@ static void ToMockBufferMapWriteCallback(dawnBufferMapAsyncStatus status,
                                      userdata);
 }
 
+class MockCreateBufferMappedCallback {
+  public:
+    MOCK_METHOD5(Call,
+                 void(dawnBuffer buffer,
+                      dawnBufferMapAsyncStatus status,
+                      uint32_t* ptr,
+                      uint32_t dataLength,
+                      dawnCallbackUserdata userdata));
+};
+
+static std::unique_ptr<MockCreateBufferMappedCallback> mockCreateBufferMappedCallback;
+static void ToMockCreateBufferMappedCallback(dawnBuffer buffer,
+                                             dawnBufferMapAsyncStatus status,
+                                             void* ptr,
+                                             uint32_t dataLength,
+                                             dawnCallbackUserdata userdata) {
+    // Assume the data is uint32_t to make writing matchers easier
+    mockCreateBufferMappedCallback->Call(buffer, status, reinterpret_cast<uint32_t*>(ptr),
+                                         dataLength, userdata);
+}
+
 class BufferValidationTest : public ValidationTest {
     protected:
         dawn::Buffer CreateMapReadBuffer(uint32_t size) {
@@ -82,6 +103,28 @@ class BufferValidationTest : public ValidationTest {
             return device.CreateBuffer(&descriptor);
         }
 
+        template <typename F>
+        void CreateBufferMappedAsync(uint32_t size, dawn::BufferUsageBit usage, const F& f) {
+            dawn::BufferDescriptor descriptor;
+            descriptor.size = size;
+            descriptor.usage = usage;
+
+            dawn::CallbackUserdata userdata = createBufferMappedUserdata++;
+
+            EXPECT_CALL(*mockCreateBufferMappedCallback, Call(Ne(nullptr), _, _, _, userdata))
+                .WillOnce(WithArgs<0, 1, 2, 3>(Invoke(
+                    [&f](dawnBuffer buffer, dawnBufferMapAsyncStatus status, void* ptr,
+                         uint32_t size) { f(dawn::Buffer(buffer), status, ptr, size); })));
+
+            device.CreateBufferMappedAsync(&descriptor, ToMockCreateBufferMappedCallback, userdata);
+            queue.Submit(0, nullptr);
+        }
+
+        template <typename F>
+        void CreateBufferMappedAsync(uint32_t size, const F& f) {
+            CreateBufferMappedAsync(size, dawn::BufferUsageBit::MapWrite, f);
+        }
+
         dawn::Queue queue;
 
     private:
@@ -90,6 +133,7 @@ class BufferValidationTest : public ValidationTest {
 
             mockBufferMapReadCallback = std::make_unique<MockBufferMapReadCallback>();
             mockBufferMapWriteCallback = std::make_unique<MockBufferMapWriteCallback>();
+            mockCreateBufferMappedCallback = std::make_unique<MockCreateBufferMappedCallback>();
             queue = device.CreateQueue();
         }
 
@@ -97,9 +141,12 @@ class BufferValidationTest : public ValidationTest {
             // Delete mocks so that expectations are checked
             mockBufferMapReadCallback = nullptr;
             mockBufferMapWriteCallback = nullptr;
+            mockCreateBufferMappedCallback = nullptr;
 
             ValidationTest::TearDown();
         }
+
+        dawn::CallbackUserdata createBufferMappedUserdata = 123;
 };
 
 // Test case where creation should succeed
@@ -183,6 +230,16 @@ TEST_F(BufferValidationTest, MapWriteSuccess) {
     buf.Unmap();
 }
 
+// Test the success case for CreateBufferMappedAsync
+TEST_F(BufferValidationTest, CreateBufferMappedAsyncSuccess) {
+    CreateBufferMappedAsync(
+        4, [](dawn::Buffer buf, dawnBufferMapAsyncStatus status, void* ptr, uint32_t size) {
+            ASSERT_EQ(status, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS);
+            ASSERT_NE(ptr, nullptr);
+            ASSERT_EQ(size, 4u);
+        });
+}
+
 // Test map reading a buffer with wrong current usage
 TEST_F(BufferValidationTest, MapReadWrongUsage) {
     dawn::BufferDescriptor descriptor;
@@ -213,6 +270,17 @@ TEST_F(BufferValidationTest, MapWriteWrongUsage) {
         .Times(1);
 
     ASSERT_DEVICE_ERROR(buf.MapWriteAsync(ToMockBufferMapWriteCallback, userdata));
+}
+
+// Test CreateBufferMappedAsync with wrong usage
+TEST_F(BufferValidationTest, CreateBufferMappedAsyncWrongUsage) {
+    ASSERT_DEVICE_ERROR(CreateBufferMappedAsync(
+        4, dawn::BufferUsageBit::TransferSrc,
+        [](dawn::Buffer buf, dawnBufferMapAsyncStatus status, void* ptr, uint32_t size) {
+            ASSERT_EQ(status, DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR);
+            ASSERT_EQ(ptr, nullptr);
+            ASSERT_EQ(size, 0u);
+        }));
 }
 
 // Test map reading a buffer that is already mapped
@@ -403,6 +471,18 @@ TEST_F(BufferValidationTest, UnmapInsideMapWriteCallback) {
     queue.Submit(0, nullptr);
 }
 
+// Test that the CreateBufferMappedAsync callback isn't fired twice when unmap() is called inside
+// the callback
+TEST_F(BufferValidationTest, UnmapInsideCreateBufferMappedAsyncCallback) {
+    CreateBufferMappedAsync(
+        4, [](dawn::Buffer buf, dawnBufferMapAsyncStatus status, void* ptr, uint32_t size) {
+            ASSERT_EQ(status, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS);
+            ASSERT_NE(ptr, nullptr);
+            ASSERT_EQ(size, 4u);
+            buf.Unmap();
+        });
+}
+
 // Test that the MapReadCallback isn't fired twice the buffer external refcount reaches 0 in the callback
 TEST_F(BufferValidationTest, DestroyInsideMapReadCallback) {
     dawn::Buffer buf = CreateMapReadBuffer(4);
@@ -429,6 +509,18 @@ TEST_F(BufferValidationTest, DestroyInsideMapWriteCallback) {
         .WillOnce(InvokeWithoutArgs([&]() { buf = dawn::Buffer(); }));
 
     queue.Submit(0, nullptr);
+}
+
+// Test that the CreateBufferMappedAsync callback isn't fired twice because the buffer
+// external refcount reaches 0 in the callback
+TEST_F(BufferValidationTest, DestroyInsideCreateBufferMappedAsyncCallback) {
+    CreateBufferMappedAsync(
+        4, [](dawn::Buffer buf, dawnBufferMapAsyncStatus status, void* ptr, uint32_t size) {
+            ASSERT_EQ(status, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS);
+            ASSERT_NE(ptr, nullptr);
+            ASSERT_EQ(size, 4u);
+            buf = dawn::Buffer();
+        });
 }
 
 // Test the success case for Buffer::SetSubData
