@@ -22,6 +22,29 @@
       "revId": "7b07319fea48566c4e7a6078726cfcc34b4e33bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee1bf34d_9c6fe56e",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-13T02:31:35Z",
+      "side": 1,
+      "message": "blendEnabled was removed.",
+      "range": {
+        "startLine": 460,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 46
+      },
+      "revId": "7b07319fea48566c4e7a6078726cfcc34b4e33bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
