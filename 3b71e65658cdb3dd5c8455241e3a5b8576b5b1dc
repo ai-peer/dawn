@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a70596ff_4a3169b9",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:44:36Z",
+      "side": 0,
+      "message": "Nice!",
+      "revId": "3b71e65658cdb3dd5c8455241e3a5b8576b5b1dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c53ce5ea_a0238f9e",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:44:36Z",
+      "side": 1,
+      "message": "Maybe this could be a constant in DynamicUploader itself. Eventually we won\u0027t need to deal with this value because the allocations for staging buffers will use the backend\u0027s memory allocator to suballocate in a heap.\n\nWe could also create the DynamicUploader on device creation (even if it ends up never being used) which would allow removing the ResultOrError for GetDynamicUploader. (and the dynamic uploader just creates the first staging buffer lazily maybe?)",
+      "range": {
+        "startLine": 140,
+        "startChar": 66,
+        "endLine": 140,
+        "endChar": 90
+      },
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c583dd9a_eba5d46d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:44:36Z",
+      "side": 1,
+      "message": "super-nit: put the comment above the declaration so clang-format doesn\u0027t split the 4; on its own line.",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74832d94_b98c11b1",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:44:36Z",
+      "side": 1,
+      "message": "Oh that\u0027s interesting, over time it seems like the order of destruction will become more and more complex because of such dependencies, we\u0027ll need to be careful.",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab56849b_023f4a49",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:44:36Z",
+      "side": 1,
+      "message": "Maybe we could assert in DeviceBase\u0027s destructor that mDynamicUploader has already been freed?",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74eac503_c21aa122",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:44:36Z",
+      "side": 1,
+      "message": "Maybe this could become part of DeviceBase\u0027s Tick?",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14990957_8715b4da",
+        "filename": "src/dawn_native/metal/StagingBufferMTL.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:44:36Z",
+      "side": 1,
+      "message": "nit: imports for standard libraries are in a separate block below imports for local code. Also StagingBuffer.h would usually come first because it is like the \"parent header\"",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
