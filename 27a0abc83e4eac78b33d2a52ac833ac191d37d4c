@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1ca4d57d_d44b867a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-13T02:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3e01a7a_09775de9",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33d286b0_7de098ca",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
         "patchSetId": 7
@@ -39,6 +57,30 @@
       "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53c14c5f_202eee20",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-13T02:13:41Z",
+      "side": 1,
+      "message": "Done\n\nHere I refer the code in Metal back-end where RenderPassDescriptorBase is used.\nFor example:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/metal/CommandBufferMTL.mm?l\u003d50\n\nShall we also make this change there?",
+      "parentUuid": "33d286b0_7de098ca",
+      "range": {
+        "startLine": 57,
+        "startChar": 30,
+        "endLine": 57,
+        "endChar": 54
+      },
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "b232779b_dad1062e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-13T02:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84ddf54b_0cbf4259",
+      "range": {
+        "startLine": 221,
+        "startChar": 19,
+        "endLine": 221,
+        "endChar": 43
+      },
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdc7418b_50dc46b0",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 7
@@ -76,6 +142,24 @@
       "writtenOn": "2019-02-12T12:36:03Z",
       "side": 1,
       "message": "Note: this might be broken currently, but the intent of the descriptor heap allocation is that it is only for the current serial. This means that storing a heap in the textures could lead to a use-after-free bug. Instead I suggest keeping d3d12::Texture as is, and move all the logic in CommandBufferD3D12.",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2331024b_84801c4d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-13T02:13:41Z",
+      "side": 1,
+      "message": "I don\u0027t think there could lead to a use-after-free bug because both mRtvHeap and mDsvHeap are members of TextureViewD3D12 and will only be destroyed together with TextureViewD3D12 object instead of anything else. \n\nIn my understanding, the SRV and UAV heaps are allocated and destroyed in CommandBufferD3D12::RecordCommands(), so serial is needed for SRV and UAV heaps to specify that the heaps are only available in the given command buffer.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/CommandBufferD3D12.cpp?l\u003d254\n\nWhile in current Dawn implementation RTV and DSV heaps are allocated in the constructor of RenderPassDescriptorD3D12 instead of CommandBufferD3D12, so the life cycle of RTV and DSV heaps do nothing with the serial of CommandBufferD3D12.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/RenderPassDescriptorD3D12.cpp?l\u003d30\n\n(Please correct me if I am wrong)\n\nIn this patch I just move this logic from RenderPassDescriptorD3D12 to TextureViewD3D12.\n\n\nIn fact I don\u0027t think it a good method to create and destroy SRVs and UAVs again and again in every commandbuffer submit because usually they only need to be created once and can be used in every frame of the application.",
+      "parentUuid": "bdc7418b_50dc46b0",
       "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "42f9cd4e_f98e8824",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-13T02:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efe17664_aa5ff586",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e077ceba_9a9dd36d",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 7
@@ -113,6 +215,24 @@
       "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c457b25_6fe5f303",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-13T02:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e077ceba_9a9dd36d",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
