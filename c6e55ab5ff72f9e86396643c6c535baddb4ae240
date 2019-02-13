@@ -1,0 +1,265 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0cf39cc7_38093d06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "nit: this needs updating.",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13e4e569_8fd3e666",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "nit: non-const references should use pointers instead.",
+      "range": {
+        "startLine": 99,
+        "startChar": 42,
+        "endLine": 99,
+        "endChar": 64
+      },
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0b44484_9624fb1b",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "nit: talk about \"balancing\" of push and pop?",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24a28eb3_758b9525",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "This is only the validation for render passes but we should have the same for compute passes. And actually, it might make sense to also have these commands on the GPUCommandEncoder itself. WDYT?",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53e98683_4a96fa49",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "note: this would do cmd-\u003elength + 1",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47d5e3e6_4368c532",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "note: cmd-\u003elength + 1",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79d97e7b_750ea1fd",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "nit: uint32_t mDebugGroupStackSize?",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "628f081b_0034de64",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "note: cmd-\u003elength + 1",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdde2433_f102ebbd",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "note: cmd-\u003elength + 1",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bab686b_eb6527db",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "We should also allocate space for the null terminator for strings.",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b19ddc14_d3de0cab",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "Using strcpy is usually very frowned upon. Could this be memcpy(label, groupLabel, cmd-\u003elength + 1)?",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17615b1c_1a6a017b",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f6e1117_2a8a0c56",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "note: cmd-\u003elength + 1 here and in other backends / commands.",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9368f65_da2770af",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "nit: we should also set the color to some default value (opaque black?)",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c2e07fe_b65e3f2a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:12:54Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
