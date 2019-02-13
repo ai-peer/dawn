@@ -110,7 +110,7 @@ class DepthStencilStateTest : public DawnTest {
         }
 
         struct TestSpec {
-            const dawn::DepthStencilStateDescriptor& depthStencilState;
+            dawn::DepthStencilStateDescriptor& depthStencilState;
             RGBA8 color;
             float depth;
             uint32_t stencil;
@@ -276,7 +276,8 @@ class DepthStencilStateTest : public DawnTest {
             dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
 
             for (size_t i = 0; i < testParams.size(); ++i) {
-                const TestSpec& test = testParams[i];
+                TestSpec test = {testParams[i].depthStencilState, testParams[i].color,
+                                 testParams[i].depth, testParams[i].stencil};
 
                 TriangleData data = {
                     {  static_cast<float>(test.color.r) / 255.f, static_cast<float>(test.color.g) / 255.f, static_cast<float>(test.color.b) / 255.f },
@@ -294,8 +295,7 @@ class DepthStencilStateTest : public DawnTest {
                 descriptor.layout = pipelineLayout;
                 descriptor.cVertexStage.module = vsModule;
                 descriptor.cFragmentStage.module = fsModule;
-                descriptor.cAttachmentsState.hasDepthStencilAttachment = true;
-                descriptor.cDepthStencilAttachment.format = dawn::TextureFormat::D32FloatS8Uint;
+                test.depthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
                 descriptor.depthStencilState = &test.depthStencilState;
 
                 dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
