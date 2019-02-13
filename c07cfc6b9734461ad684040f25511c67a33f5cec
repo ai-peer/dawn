@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0921fab9_6aa93852",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:46:44Z",
+      "side": 1,
+      "message": "nit: replace with glMapBuffer now that we map the whole buffer?",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "c07cfc6b9734461ad684040f25511c67a33f5cec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a399e4dd_a98ed111",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:46:44Z",
+      "side": 1,
+      "message": "I just realized that the client should validate the status enum from the server. Not for this CL though.",
+      "revId": "c07cfc6b9734461ad684040f25511c67a33f5cec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
