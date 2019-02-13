@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb1a6dee_4945d9af",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:55:49Z",
+      "side": 1,
+      "message": "TBH I don\u0027t think we\u0027ll ever need this warning.",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ff9aeec_452524c3",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:55:49Z",
+      "side": 1,
+      "message": "Maybe this should be like Unmap and allowed to be called multiple times?",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "803cb441_3a80deec",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:55:49Z",
+      "side": 1,
+      "message": "nit: group per buffer and add a blank line between each buffer instantiation?",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58ea8c76_56c44d57",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:55:49Z",
+      "side": 1,
+      "message": "ditto or separate in two test blocks?",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "671bfaee_c9fb4184",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:55:49Z",
+      "side": 1,
+      "message": "ditto: let this code breath :)",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
