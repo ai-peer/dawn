@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63808833_26dd25c5",
+        "filename": "src/dawn_native/SwapChain.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-13T00:06:00Z",
+      "side": 1,
+      "message": "Not sure how this CL is meant to work with device loss, but in WebGPU the texture would still be invalid if the device was lost.",
+      "revId": "f7112b9ff06cd9d58052bfe9da232262ae1059f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
