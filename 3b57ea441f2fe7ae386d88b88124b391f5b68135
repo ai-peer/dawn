@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2458d9a0_341d23ce",
+        "filename": "src/tests/unittests/wire/WireOptionalTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:28:12Z",
+      "side": 1,
+      "message": "Don\u0027t forget to the new test added in https://dawn-review.googlesource.com/c/dawn/+/4500",
+      "revId": "3b57ea441f2fe7ae386d88b88124b391f5b68135",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a905dd1_082d25bf",
+        "filename": "src/tests/unittests/wire/WireTest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:28:12Z",
+      "side": 1,
+      "message": "Each of these is useful in a single test file, can they move there? Ditto for the class declarations.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 0
+      },
+      "revId": "3b57ea441f2fe7ae386d88b88124b391f5b68135",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
