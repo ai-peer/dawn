@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5276abf4_6400854f",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:18:32Z",
+      "side": 1,
+      "message": "No that shouldn\u0027t be needed because the buffer is already validated when it is added to the command buffer.",
+      "parentUuid": "f437898d_12ade546",
+      "revId": "0f355cd84a85f1d2e2c2d840e6955f29453d6399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a1cf09e_7774957f",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2019-02-13T17:13:17Z",
       "side": 1,
       "message": "And this?",
+      "revId": "0f355cd84a85f1d2e2c2d840e6955f29453d6399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb19997_dfe5aafd",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:18:32Z",
+      "side": 1,
+      "message": "Whoops did I miss it?",
+      "parentUuid": "9a1cf09e_7774957f",
       "revId": "0f355cd84a85f1d2e2c2d840e6955f29453d6399",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

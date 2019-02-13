@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "a43f8bdc_0acfa7d2",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:18:32Z",
+      "side": 1,
+      "message": "Yeah the BufferOperations doc doesn\u0027t properly define destroy()",
+      "parentUuid": "1960dff0_55421805",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "803cb441_3a80deec",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 6
