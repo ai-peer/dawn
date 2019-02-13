@@ -16,6 +16,24 @@
       "revId": "bb5696bcd3b7a9ba5cd6a74cd1e9665bc74deb2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c39b93b5_d22b0b6d",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:22:48Z",
+      "side": 1,
+      "message": "it wouldn\u0027t work because in Chromium\u0027s version of GTest GetParam is not a member function on `this`.",
+      "parentUuid": "e7323b17_2fe110cf",
+      "revId": "bb5696bcd3b7a9ba5cd6a74cd1e9665bc74deb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
