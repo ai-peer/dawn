@@ -48,6 +48,28 @@ namespace dawn_native {
             }
         };
 
+        struct CreateBufferMappedToMapWriteUserdata {
+            BufferBase* buffer;
+            dawnCreateBufferMappedCallback callback;
+            dawnCallbackUserdata userdata;
+        };
+
+        void AsMapWriteCallbackImpl(dawnBufferMapAsyncStatus status,
+                                    void* ptr,
+                                    uint32_t dataLength,
+                                    dawnCallbackUserdata userdata) {
+            const auto* data = reinterpret_cast<const CreateBufferMappedToMapWriteUserdata*>(
+                static_cast<uintptr_t>(userdata));
+            ASSERT(data != nullptr);
+
+            dawnBuffer buffer = reinterpret_cast<dawnBuffer>(data->buffer);
+            dawnCreateBufferMappedCallback createBufferMappedCallback = data->callback;
+            dawnCallbackUserdata createBufferMappedUserdata = data->userdata;
+            delete data;
+
+            createBufferMappedCallback(buffer, status, ptr, dataLength, createBufferMappedUserdata);
+        }
+
     }  // anonymous namespace
 
     MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descriptor) {
@@ -98,6 +120,20 @@ namespace dawn_native {
     // static
     BufferBase* BufferBase::MakeError(DeviceBase* device) {
         return new ErrorBuffer(device);
+    }
+
+    // static
+    dawnBufferMapWriteCallback BufferBase::AsMapWriteCallback(
+        BufferBase* buffer,
+        dawnCreateBufferMappedCallback createBufferMappedCallback,
+        dawnCallbackUserdata createBufferMappedUserdata,
+        dawnCallbackUserdata* mapUserdata) {
+
+        ASSERT(mapUserdata != nullptr);
+        auto* data = new CreateBufferMappedToMapWriteUserdata{buffer, createBufferMappedCallback,
+                                                              createBufferMappedUserdata};
+        *mapUserdata = static_cast<dawnCallbackUserdata>(reinterpret_cast<uintptr_t>(data));
+        return AsMapWriteCallbackImpl;
     }
 
     uint32_t BufferBase::GetSize() const {
@@ -198,7 +234,6 @@ namespace dawn_native {
         mMapWriteCallback = callback;
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
-
         MapWriteAsyncImpl(mMapSerial);
     }
 
