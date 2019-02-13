@@ -19,7 +19,7 @@
 
 namespace dawn_native { namespace vulkan {
 
-    SwapChain::SwapChain(SwapChainBuilder* builder) : SwapChainBase(builder) {
+    SwapChain::SwapChain(Device* device, const SwapChainDescriptor* descriptor) : SwapChainBase(device, descriptor) {
         const auto& im = GetImplementation();
         dawnWSIContextVulkan wsiContext = {};
         im.Init(im.userData, &wsiContext);
