@@ -91,6 +91,9 @@ namespace dawn_native {
         BindGroupBase* CreateBindGroup(const BindGroupDescriptor* descriptor);
         BindGroupLayoutBase* CreateBindGroupLayout(const BindGroupLayoutDescriptor* descriptor);
         BufferBase* CreateBuffer(const BufferDescriptor* descriptor);
+        void CreateBufferMappedAsync(const BufferDescriptor* descriptor,
+                                     dawnCreateBufferMappedCallback callback,
+                                     dawnCallbackUserdata userdata);
         CommandBufferBuilder* CreateCommandBufferBuilder();
         ComputePipelineBase* CreateComputePipeline(const ComputePipelineDescriptor* descriptor);
         FenceBase* CreateFence(const FenceDescriptor* descriptor);
@@ -130,6 +133,9 @@ namespace dawn_native {
         virtual ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) = 0;
         virtual ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) = 0;
+        virtual MaybeError CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
+                                                       dawnCreateBufferMappedCallback callback,
+                                                       dawnCallbackUserdata userdata) = 0;
         virtual ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) = 0;
         virtual ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
@@ -152,6 +158,9 @@ namespace dawn_native {
         MaybeError CreateBindGroupLayoutInternal(BindGroupLayoutBase** result,
                                                  const BindGroupLayoutDescriptor* descriptor);
         MaybeError CreateBufferInternal(BufferBase** result, const BufferDescriptor* descriptor);
+        MaybeError CreateBufferMappedAsyncInternal(const BufferDescriptor* descriptor,
+                                                   dawnCreateBufferMappedCallback callback,
+                                                   dawnCallbackUserdata userdata);
         MaybeError CreateComputePipelineInternal(ComputePipelineBase** result,
                                                  const ComputePipelineDescriptor* descriptor);
         MaybeError CreateFenceInternal(FenceBase** result, const FenceDescriptor* descriptor);

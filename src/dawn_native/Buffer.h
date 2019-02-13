@@ -45,6 +45,16 @@ namespace dawn_native {
         BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
         ~BufferBase();
 
+        static BufferBase* CreateMapped(DeviceBase* device,
+                                        const BufferDescriptor* descriptor,
+                                        uint8_t** data,
+                                        uint32_t* dataLength);
+
+        static MaybeError CreateMappedAsync(DeviceBase* device,
+                                            const BufferDescriptor* descriptor,
+                                            dawnCreateBufferMappedCallback callback,
+                                            dawnCallbackUserdata userdata);
+
         static BufferBase* MakeError(DeviceBase* device);
 
         uint32_t GetSize() const;
@@ -81,6 +91,14 @@ namespace dawn_native {
         MaybeError ValidateMap(dawn::BufferUsageBit requiredUsage) const;
         MaybeError ValidateUnmap() const;
         MaybeError ValidateDestroy() const;
+
+        // Return a map write callback which will forward the buffer passed to this function
+        // and its arguments to a create buffer mapped callback
+        static dawnBufferMapWriteCallback CreateMappedAsMapWriteCallback(
+            BufferBase* buffer,
+            dawnCreateBufferMappedCallback createCallback,
+            dawnCallbackUserdata createUserdata,
+            dawnCallbackUserdata* mapUserdata);
 
         uint32_t mSize = 0;
         dawn::BufferUsageBit mUsage = dawn::BufferUsageBit::None;
