@@ -16,6 +16,24 @@
       "revId": "f7112b9ff06cd9d58052bfe9da232262ae1059f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31c0cd8d_5da9a2fa",
+        "filename": "src/dawn_native/SwapChain.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T12:31:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure how/if we\u0027ll implement device loss properly outside of the wire.",
+      "parentUuid": "63808833_26dd25c5",
+      "revId": "f7112b9ff06cd9d58052bfe9da232262ae1059f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
