@@ -99,6 +99,16 @@ class MockBufferMapWriteCallback {
                       dawnCallbackUserdata userdata));
 };
 
+class MockCreateBufferMappedCallback {
+  public:
+    MOCK_METHOD5(Call,
+                 void(dawnBuffer buffer,
+                      dawnBufferMapAsyncStatus status,
+                      uint32_t* ptr,
+                      uint32_t dataLength,
+                      dawnCallbackUserdata userdata));
+};
+
 class MockFenceOnCompletionCallback {
   public:
     MOCK_METHOD2(Call, void(dawnFenceCompletionStatus status, dawnCallbackUserdata userdata));
@@ -136,6 +146,11 @@ class WireTest : public testing::Test {
                                              void* ptr,
                                              uint32_t dataLength,
                                              dawnCallbackUserdata userdata);
+    static void ToMockCreateBufferMappedCallback(dawnBuffer buffer,
+                                                 dawnBufferMapAsyncStatus status,
+                                                 void* ptr,
+                                                 uint32_t dataLength,
+                                                 dawnCallbackUserdata userdata);
     static void ToMockFenceOnCompletionCallback(dawnFenceCompletionStatus status,
                                                 dawnCallbackUserdata userdata);
 
@@ -144,6 +159,8 @@ class WireTest : public testing::Test {
     static std::unique_ptr<MockBufferMapReadCallback> mockBufferMapReadCallback;
     static std::unique_ptr<MockBufferMapWriteCallback> mockBufferMapWriteCallback;
     static uint32_t* lastMapWritePointer;
+    static std::unique_ptr<MockCreateBufferMappedCallback> mockCreateBufferMappedCallback;
+    static dawnBuffer lastCreateMappedBuffer;
     static std::unique_ptr<MockFenceOnCompletionCallback> mockFenceOnCompletionCallback;
 
     MockProcTable api;

@@ -148,6 +148,22 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
+    // static
+    MaybeError Buffer::CreateBufferMappedAsync(Device* device,
+                                               const BufferDescriptor* descriptor,
+                                               dawnCreateBufferMappedCallback callback,
+                                               dawnCallbackUserdata userdata) {
+        // TODO: Optimize to initialize the buffer when it is unmapped
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        if (buffer != nullptr) {
+            dawnCallbackUserdata mapWriteUserdata;
+            dawnBufferMapWriteCallback mapWriteCallback =
+                AsMapWriteCallback(buffer, callback, userdata, &mapWriteUserdata);
+            buffer->MapWriteAsync(mapWriteCallback, mapWriteUserdata);
+        }
+        return {};
+    }
+
     void Buffer::OnMapReadCommandSerialFinished(uint32_t mapSerial, const void* data) {
         CallMapReadCallback(mapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, data, GetSize());
     }

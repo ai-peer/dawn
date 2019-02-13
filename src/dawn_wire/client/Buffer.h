@@ -33,8 +33,12 @@ namespace dawn_wire { namespace client {
         // map request in flight at a single time and need to track them separately.
         // On well-behaved applications, only one request should exist at a single time.
         struct MapRequestData {
-            dawnBufferMapReadCallback readCallback = nullptr;
-            dawnBufferMapWriteCallback writeCallback = nullptr;
+            union {
+                // Only one callback is used per request
+                dawnBufferMapReadCallback readCallback = nullptr;
+                dawnBufferMapWriteCallback writeCallback;
+                dawnCreateBufferMappedCallback createMappedCallback;
+            };
             dawnCallbackUserdata userdata = 0;
             bool isWrite = false;
         };

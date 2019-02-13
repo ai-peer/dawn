@@ -26,6 +26,8 @@ std::unique_ptr<MockBuilderErrorCallback> WireTest::mockBuilderErrorCallback = n
 std::unique_ptr<MockBufferMapReadCallback> WireTest::mockBufferMapReadCallback = nullptr;
 std::unique_ptr<MockBufferMapWriteCallback> WireTest::mockBufferMapWriteCallback = nullptr;
 uint32_t* WireTest::lastMapWritePointer = nullptr;
+std::unique_ptr<MockCreateBufferMappedCallback> WireTest::mockCreateBufferMappedCallback = nullptr;
+dawnBuffer WireTest::lastCreateMappedBuffer = nullptr;
 std::unique_ptr<MockFenceOnCompletionCallback> WireTest::mockFenceOnCompletionCallback = nullptr;
 
 void WireTest::ToMockDeviceErrorCallback(const char* message, dawnCallbackUserdata userdata) {
@@ -57,6 +59,17 @@ void WireTest::ToMockBufferMapWriteCallback(dawnBufferMapAsyncStatus status,
     mockBufferMapWriteCallback->Call(status, lastMapWritePointer, dataLength, userdata);
 }
 
+void WireTest::ToMockCreateBufferMappedCallback(dawnBuffer buffer,
+                                                dawnBufferMapAsyncStatus status,
+                                                void* ptr,
+                                                uint32_t dataLength,
+                                                dawnCallbackUserdata userdata) {
+    lastCreateMappedBuffer = buffer;
+    lastMapWritePointer = static_cast<uint32_t*>(ptr);
+    mockCreateBufferMappedCallback->Call(buffer, status, static_cast<uint32_t*>(ptr), dataLength,
+                                         userdata);
+}
+
 void WireTest::ToMockFenceOnCompletionCallback(dawnFenceCompletionStatus status,
                                                dawnCallbackUserdata userdata) {
     mockFenceOnCompletionCallback->Call(status, userdata);
@@ -73,6 +86,7 @@ void WireTest::SetUp() {
     mockBuilderErrorCallback = std::make_unique<MockBuilderErrorCallback>();
     mockBufferMapReadCallback = std::make_unique<MockBufferMapReadCallback>();
     mockBufferMapWriteCallback = std::make_unique<MockBufferMapWriteCallback>();
+    mockCreateBufferMappedCallback = std::make_unique<MockCreateBufferMappedCallback>();
     mockFenceOnCompletionCallback = std::make_unique<MockFenceOnCompletionCallback>();
 
     dawnProcTable mockProcs;
@@ -114,6 +128,7 @@ void WireTest::TearDown() {
     mockBuilderErrorCallback = nullptr;
     mockBufferMapReadCallback = nullptr;
     mockBufferMapWriteCallback = nullptr;
+    mockCreateBufferMappedCallback = nullptr;
     mockFenceOnCompletionCallback = nullptr;
 }
 

@@ -23,6 +23,42 @@
 
 namespace dawn_native {
 
+    namespace {
+        struct CreateBufferMappedToMapWriteUserdata {
+            dawnBuffer buffer;
+            dawnCreateBufferMappedCallback callback;
+            dawnCallbackUserdata userdata;
+        };
+
+        void AsMapWriteCallbackImpl(dawnBufferMapAsyncStatus status,
+                                    void* ptr,
+                                    uint32_t dataLength,
+                                    dawnCallbackUserdata userdata) {
+            const auto* data = reinterpret_cast<const CreateBufferMappedToMapWriteUserdata*>(
+                static_cast<uintptr_t>(userdata));
+            DAWN_ASSERT(data != nullptr);
+            dawnBuffer buffer = data->buffer;
+            dawnCreateBufferMappedCallback callback = data->callback;
+            dawnCallbackUserdata createBufferMappedUserdata = data->userdata;
+            delete data;
+            callback(buffer, status, ptr, dataLength, createBufferMappedUserdata);
+        }
+    }  // namespace
+
+    // static
+    dawnBufferMapWriteCallback BufferBase::AsMapWriteCallback(
+        BufferBase* buffer,
+        dawnCreateBufferMappedCallback createBufferMappedCallback,
+        dawnCallbackUserdata createBufferMappedUserdata,
+        dawnCallbackUserdata* mapUserdata) {
+        DAWN_ASSERT(mapUserdata != nullptr);
+        auto* data = new CreateBufferMappedToMapWriteUserdata{reinterpret_cast<dawnBuffer>(buffer),
+                                                              createBufferMappedCallback,
+                                                              createBufferMappedUserdata};
+        *mapUserdata = static_cast<dawnCallbackUserdata>(reinterpret_cast<uintptr_t>(data));
+        return AsMapWriteCallbackImpl;
+    }
+
     MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");

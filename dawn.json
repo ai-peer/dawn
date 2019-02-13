@@ -251,6 +251,9 @@
     "char": {
         "category": "native"
     },
+    "create buffer mapped callback": {
+        "category": "natively defined"
+    },
     "color": {
         "category": "structure",
         "members": [
@@ -413,6 +416,14 @@
                 "returns": "buffer",
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "create buffer mapped async",
+                "args": [
+                    {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "create buffer mapped callback"},
+                    {"name": "userdata", "type": "callback userdata"}
                 ]
             },
             {

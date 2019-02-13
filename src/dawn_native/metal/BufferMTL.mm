@@ -36,6 +36,22 @@ namespace dawn_native { namespace metal {
         mMtlBuffer = nil;
     }
 
+    // static
+    MaybeError Buffer::CreateBufferMappedAsync(Device* device,
+                                               const BufferDescriptor* descriptor,
+                                               dawnCreateBufferMappedCallback callback,
+                                               dawnCallbackUserdata userdata) {
+        // TODO: Optimize to initialize the buffer when it is unmapped
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        if (buffer != nullptr) {
+            dawnCallbackUserdata mapWriteUserdata;
+            dawnBufferMapWriteCallback mapWriteCallback =
+                AsMapWriteCallback(buffer, callback, userdata, &mapWriteUserdata);
+            buffer->MapWriteAsync(mapWriteCallback, mapWriteUserdata);
+        }
+        return {};
+    }
+
     id<MTLBuffer> Buffer::GetMTLBuffer() {
         return mMtlBuffer;
     }

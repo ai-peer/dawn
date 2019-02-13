@@ -27,6 +27,21 @@ namespace dawn_native { namespace opengl {
         glBufferData(GL_ARRAY_BUFFER, GetSize(), nullptr, GL_STATIC_DRAW);
     }
 
+    // static
+    MaybeError Buffer::CreateBufferMappedAsync(Device* device,
+                                               const BufferDescriptor* descriptor,
+                                               dawnCreateBufferMappedCallback callback,
+                                               dawnCallbackUserdata userdata) {
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        if (buffer != nullptr) {
+            dawnCallbackUserdata mapWriteUserdata;
+            dawnBufferMapWriteCallback mapWriteCallback =
+                AsMapWriteCallback(buffer, callback, userdata, &mapWriteUserdata);
+            buffer->MapWriteAsync(mapWriteCallback, mapWriteUserdata);
+        }
+        return {};
+    }
+
     GLuint Buffer::GetHandle() const {
         return mBuffer;
     }
