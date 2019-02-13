@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "80d4cd8d_2a1dbaae",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:11:59Z",
+      "side": 1,
+      "message": "As you wish, it could be skipped because this CL doesn\u0027t touch Metal and because you\u0027ll remove the object very soon.",
+      "parentUuid": "53c14c5f_202eee20",
+      "range": {
+        "startLine": 57,
+        "startChar": 30,
+        "endLine": 57,
+        "endChar": 54
+      },
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84ddf54b_0cbf4259",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 7
@@ -160,6 +184,24 @@
       "side": 1,
       "message": "I don\u0027t think there could lead to a use-after-free bug because both mRtvHeap and mDsvHeap are members of TextureViewD3D12 and will only be destroyed together with TextureViewD3D12 object instead of anything else. \n\nIn my understanding, the SRV and UAV heaps are allocated and destroyed in CommandBufferD3D12::RecordCommands(), so serial is needed for SRV and UAV heaps to specify that the heaps are only available in the given command buffer.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/CommandBufferD3D12.cpp?l\u003d254\n\nWhile in current Dawn implementation RTV and DSV heaps are allocated in the constructor of RenderPassDescriptorD3D12 instead of CommandBufferD3D12, so the life cycle of RTV and DSV heaps do nothing with the serial of CommandBufferD3D12.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/RenderPassDescriptorD3D12.cpp?l\u003d30\n\n(Please correct me if I am wrong)\n\nIn this patch I just move this logic from RenderPassDescriptorD3D12 to TextureViewD3D12.\n\n\nIn fact I don\u0027t think it a good method to create and destroy SRVs and UAVs again and again in every commandbuffer submit because usually they only need to be created once and can be used in every frame of the application.",
       "parentUuid": "bdc7418b_50dc46b0",
+      "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c53413a_dee40a0e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T10:11:59Z",
+      "side": 1,
+      "message": "If the current code was correct, then your analysis would be right, but the D3D12 handling of RTVs and DSVs is very broken right now. Like you described the RTV and DSV heaps are created in d3d12::RenderPassDescriptor\u0027s constructor but if you look here https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/DescriptorHeapAllocator.cpp?g\u003d0\u0026l\u003d104 the heaps are immediately scheduled for recycling.\n\nTests and samples only happen to work because we always create the RenderPassDescriptor just before using it. If we created the RenderPassDescriptor on load for example, it would use an RTV heap that could have been recycled for a different RenderPassDescriptor which would cause incorrect results.\n\nThis is technical debt that we decided to keep as it would be removed once we descriptorize RenderPassDescriptor like you are doing now, because the allocation would move to d3d12::CommandBuffer\u0027s recording of render passes.\n\nRTV and DSV creation is very likely to be cheap. We could cache things, but the CPU perf improvements would probably be very very tiny.",
+      "parentUuid": "2331024b_84801c4d",
       "revId": "27a0abc83e4eac78b33d2a52ac833ac191d37d4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
