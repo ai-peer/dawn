@@ -48,6 +48,28 @@ namespace dawn_native {
             }
         };
 
+        struct CreateBufferMappedToMapWriteUserdata {
+            BufferBase* buffer;
+            dawnCreateBufferMappedCallback callback;
+            dawnCallbackUserdata userdata;
+        };
+
+        void CreateMappedAsMapWriteCallbackImpl(dawnBufferMapAsyncStatus status,
+                                                void* ptr,
+                                                uint32_t dataLength,
+                                                dawnCallbackUserdata userdata) {
+            const auto* data = reinterpret_cast<const CreateBufferMappedToMapWriteUserdata*>(
+                static_cast<uintptr_t>(userdata));
+            ASSERT(data != nullptr);
+
+            dawnBuffer buffer = reinterpret_cast<dawnBuffer>(data->buffer);
+            dawnCreateBufferMappedCallback createBufferMappedCallback = data->callback;
+            dawnCallbackUserdata createBufferMappedUserdata = data->userdata;
+            delete data;
+
+            createBufferMappedCallback(buffer, status, ptr, dataLength, createBufferMappedUserdata);
+        }
+
     }  // anonymous namespace
 
     MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descriptor) {
@@ -98,6 +120,40 @@ namespace dawn_native {
     // static
     BufferBase* BufferBase::MakeError(DeviceBase* device) {
         return new ErrorBuffer(device);
+    }
+
+    // static
+    dawnBufferMapWriteCallback BufferBase::CreateMappedAsMapWriteCallback(
+        BufferBase* buffer,
+        dawnCreateBufferMappedCallback createBufferMappedCallback,
+        dawnCallbackUserdata createBufferMappedUserdata,
+        dawnCallbackUserdata* mapUserdata) {
+        ASSERT(mapUserdata != nullptr);
+        auto* data = new CreateBufferMappedToMapWriteUserdata{buffer, createBufferMappedCallback,
+                                                              createBufferMappedUserdata};
+        *mapUserdata = static_cast<dawnCallbackUserdata>(reinterpret_cast<uintptr_t>(data));
+        return CreateMappedAsMapWriteCallbackImpl;
+    }
+
+    MaybeError BufferBase::CreateMappedAsync(DeviceBase* device,
+                                             const BufferDescriptor* descriptor,
+                                             dawnCreateBufferMappedCallback callback,
+                                             dawnCallbackUserdata userdata) {
+        // TODO: Optimize per-backend to lazily zero-copy init the buffer when it is unmapped
+        // For now, we create a buffer and then call MapWriteAsync. We forward the map write
+        // callback to the create buffer mapped callback and pass the buffer to it.
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        if (buffer->IsError()) {
+            callback(reinterpret_cast<dawnBuffer>(buffer), DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR,
+                     nullptr, 0, userdata);
+        }
+        DAWN_TRY(device->ValidateObject(buffer));
+
+        dawnCallbackUserdata mapWriteUserdata;
+        dawnBufferMapWriteCallback mapWriteCallback =
+            CreateMappedAsMapWriteCallback(buffer, callback, userdata, &mapWriteUserdata);
+        buffer->MapWriteAsync(mapWriteCallback, mapWriteUserdata);
+        return {};
     }
 
     uint32_t BufferBase::GetSize() const {
@@ -198,7 +254,6 @@ namespace dawn_native {
         mMapWriteCallback = callback;
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
-
         MapWriteAsyncImpl(mMapSerial);
     }
 

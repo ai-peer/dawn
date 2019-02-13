@@ -78,6 +78,11 @@ namespace dawn_native { namespace metal {
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return new Buffer(this, descriptor);
     }
+    MaybeError Device::CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
+                                                   dawnCreateBufferMappedCallback callback,
+                                                   dawnCallbackUserdata userdata) {
+        return BufferBase::CreateMappedAsync(this, descriptor, callback, userdata);
+    }
     CommandBufferBase* Device::CreateCommandBuffer(CommandBufferBuilder* builder) {
         return new CommandBuffer(builder);
     }
