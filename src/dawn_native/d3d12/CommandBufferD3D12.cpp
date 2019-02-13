@@ -24,7 +24,6 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
-#include "dawn_native/d3d12/RenderPassDescriptorD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
@@ -229,6 +228,32 @@ namespace dawn_native { namespace d3d12 {
                     bindingTracker->samplerCPUDescriptorHeap.GetCPUHandle(0),
                     D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
             }
+        }
+
+        struct OMSetRenderTargetArgs {
+            unsigned int numRTVs = 0;
+            std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> RTVs = {};
+            D3D12_CPU_DESCRIPTOR_HANDLE dsv = {};
+        };
+
+        OMSetRenderTargetArgs GetSubpassOMSetRenderTargetArgs(
+            RenderPassDescriptorBase* renderPass) {
+            OMSetRenderTargetArgs args = {};
+
+            unsigned int rtvIndex = 0;
+            for (uint32_t i : IterateBitSet(renderPass->GetColorAttachmentMask())) {
+                args.RTVs[rtvIndex] =
+                    ToBackend(renderPass->GetColorAttachment(i).view)->GetRTVDescriptorHandle();
+                rtvIndex++;
+            }
+            args.numRTVs = rtvIndex;
+
+            if (renderPass->HasDepthStencilAttachment()) {
+                args.dsv = ToBackend(renderPass->GetDepthStencilAttachment().view)
+                               ->GetDSVDescriptorHandle();
+            }
+
+            return args;
         }
 
     }  // anonymous namespace
@@ -511,7 +536,8 @@ namespace dawn_native { namespace d3d12 {
 
                 // Load op - color
                 if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
-                    D3D12_CPU_DESCRIPTOR_HANDLE handle = renderPass->GetRTVDescriptor(i);
+                    D3D12_CPU_DESCRIPTOR_HANDLE handle =
+                        ToBackend(attachmentInfo.view)->GetRTVDescriptorHandle();
                     commandList->ClearRenderTargetView(handle, attachmentInfo.clearColor.data(), 0,
                                                        nullptr);
                 }
@@ -536,7 +562,8 @@ namespace dawn_native { namespace d3d12 {
                 }
 
                 if (clearFlags) {
-                    auto handle = renderPass->GetDSVDescriptor();
+                    auto handle = ToBackend(renderPass->GetDepthStencilAttachment().view)
+                                      ->GetDSVDescriptorHandle();
                     // TODO(kainino@chromium.org): investigate: should the Dawn clear
                     // stencil type be uint8_t?
                     uint8_t clearStencil = static_cast<uint8_t>(attachmentInfo.clearStencil);
@@ -548,8 +575,7 @@ namespace dawn_native { namespace d3d12 {
 
         // Set up render targets
         {
-            RenderPassDescriptor::OMSetRenderTargetArgs args =
-                renderPass->GetSubpassOMSetRenderTargetArgs();
+            OMSetRenderTargetArgs args = GetSubpassOMSetRenderTargetArgs(renderPass);
             if (args.dsv.ptr) {
                 commandList->OMSetRenderTargets(args.numRTVs, args.RTVs.data(), FALSE, &args.dsv);
             } else {
