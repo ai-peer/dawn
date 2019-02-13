@@ -30,6 +30,11 @@ namespace dawn_native { namespace vulkan {
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
 
+        static MaybeError CreateBufferMappedAsync(Device* device,
+                                                  const BufferDescriptor* descriptor,
+                                                  dawnCreateBufferMappedCallback callback,
+                                                  dawnCallbackUserdata userdata);
+
         void OnMapReadCommandSerialFinished(uint32_t mapSerial, const void* data);
         void OnMapWriteCommandSerialFinished(uint32_t mapSerial, void* data);
 
