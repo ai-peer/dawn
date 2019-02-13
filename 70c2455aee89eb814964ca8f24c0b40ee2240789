@@ -1,0 +1,254 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db3de6a7_2c4b91c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "Doing a review assuming this isn\u0027t WIP anymore.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "175270a2_6a4b4e69",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this comment means, see other comments about setting descriptor-\u003edepthStencilState.\n\nMaybe we could have a helper method on ComboRenderPipeline called UseDepthStencil() that does that for us.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae04debc_8b789637",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This needs to set descriptor-\u003edepthStencilState to \u0026descriptor.cDepthStencilState.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97179e8d_b17c8b4c",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This needs to set descriptor-\u003edepthStencilState to \u0026descriptor.cDepthStencilState.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72819534_86ab91b1",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This needs to set descriptor-\u003edepthStencilState to \u0026descriptor.cDepthStencilState.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79945d7d_23ba9cf4",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This needs to set descriptor-\u003edepthStencilState to \u0026descriptor.cDepthStencilState.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e797059_7c9f4740",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This needs to set descriptor-\u003edepthStencilState to \u0026descriptor.cDepthStencilState.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "324d99df_dfd98e5e",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This needs to set descriptor-\u003edepthStencilState to \u0026descriptor.cDepthStencilState.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bf52193_5c1c2832",
+        "filename": "examples/glTFViewer/glTFViewer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This needs to set descriptor-\u003edepthStencilState to \u0026descriptor.cDepthStencilState.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33be1614_a940b28d",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "The depth stencil state should never be accessed if mHasDepthStencilState is null, maybe we can skip this?",
+      "range": {
+        "startLine": 176,
+        "startChar": 9,
+        "endLine": 189,
+        "endChar": 9
+      },
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "923de5f2_2e35e381",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "We avoid using non-const refs. Could this be a value instead?",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18a09e32_08a92f39",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "nit: put this just after the definition of `test`.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3f52539_bcff12d8",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This is missing initialization for `format`.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50c7d092_a2ab2c4e",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-13T17:33:17Z",
+      "side": 1,
+      "message": "This looks like it should be correct, why is it commented out?",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 72
+      },
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
