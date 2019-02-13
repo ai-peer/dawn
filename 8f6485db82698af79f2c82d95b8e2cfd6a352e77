@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c233ac7b_857c2a0b",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef4439cd_36cbbff5",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb1a6dee_4945d9af",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29462247_80b90831",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb1a6dee_4945d9af",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -70,6 +106,42 @@
     },
     {
       "key": {
+        "uuid": "1960dff0_55421805",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "I agree that destroy after destroy should be valid. If I remember correctly, I added this validation because it was unclear in the BufferOperations doc.",
+      "parentUuid": "7ff9aeec_452524c3",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d70f770_c6e2725e",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40703d95_1c399112",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "803cb441_3a80deec",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 6
@@ -84,6 +156,24 @@
       "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a00f825_f7e3323c",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "803cb441_3a80deec",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "fd0faab7_13f99989",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58ea8c76_56c44d57",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "671bfaee_c9fb4184",
         "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 6
@@ -118,6 +226,24 @@
       "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15475cd8_40b529d8",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "671bfaee_c9fb4184",
+      "revId": "8f6485db82698af79f2c82d95b8e2cfd6a352e77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

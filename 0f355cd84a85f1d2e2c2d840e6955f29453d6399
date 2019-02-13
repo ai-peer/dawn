@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f437898d_12ade546",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "@cwallez I think we need this too?",
+      "revId": "0f355cd84a85f1d2e2c2d840e6955f29453d6399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a1cf09e_7774957f",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-13T17:13:17Z",
+      "side": 1,
+      "message": "And this?",
+      "revId": "0f355cd84a85f1d2e2c2d840e6955f29453d6399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
