@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cb08c9c_ba7665b5",
+        "filename": "docs/DebugMarkers.md",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-14T17:48:11Z",
+      "side": 1,
+      "message": "Could we update this to describe the manual steps to enable PIX? Or better yet, add a script.",
+      "revId": "666f595badbdd3e4580d951b60451d3ae3798711",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
