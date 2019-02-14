@@ -116,4 +116,38 @@ TEST_P(DrawTest, Uint32) {
     Test(6, 1, 0, 0, filled, filled);
 }
 
+// Test using two different render passes in one commandBuffer works.
+TEST_P(DrawTest, TwoRenderPassesInOneCommandbuffer) {
+    RGBA8 filled(0, 255, 0, 255);
+    RGBA8 notFilled(0, 0, 0, 0);
+
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
+
+    uint32_t zeroOffset = 0;
+    utils::BasicRenderPass renderPass1 = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    {
+        dawn::RenderPassEncoder pass1 = builder.BeginRenderPass(renderPass1.renderPassInfo);
+        pass1.SetPipeline(pipeline);
+        pass1.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
+        pass1.Draw(3, 1, 0, 0);
+        pass1.EndPass();
+    }
+
+    utils::BasicRenderPass renderPass2 = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    {
+        dawn::RenderPassEncoder pass2 = builder.BeginRenderPass(renderPass2.renderPassInfo);
+        pass2.SetPipeline(pipeline);
+        pass2.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
+        pass2.Draw(3, 1, 3, 0);
+        pass2.EndPass();
+    }
+    dawn::CommandBuffer commands = builder.GetResult();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass1.color, 1, 3);
+    EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass1.color, 3, 1);
+    EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass2.color, 1, 3);
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass2.color, 3, 1);
+}
+
 DAWN_INSTANTIATE_TEST(DrawTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)
