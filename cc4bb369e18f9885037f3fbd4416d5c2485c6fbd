@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cb5d3f7_9c3ff8b2",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T14:41:22Z",
+      "side": 1,
+      "message": "I don\u0027t know why the swap chain descriptor here is different from the latest change in web idl (https://github.com/gpuweb/gpuweb/pull/207/files). Are you going to make it conform to web idl in your next change, Corentin?",
+      "revId": "cc4bb369e18f9885037f3fbd4416d5c2485c6fbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
