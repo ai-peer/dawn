@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "797f2ba1_fe9b49fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cf39cc7_38093d06",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13e4e569_8fd3e666",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 14
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "f63b1ef4_fec1cd07",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13e4e569_8fd3e666",
+      "range": {
+        "startLine": 99,
+        "startChar": 42,
+        "endLine": 99,
+        "endChar": 64
+      },
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0b44484_9624fb1b",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 14
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "ad5846e0_255bebdf",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0b44484_9624fb1b",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24a28eb3_758b9525",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 14
@@ -70,6 +130,24 @@
       "writtenOn": "2019-02-13T12:12:54Z",
       "side": 1,
       "message": "This is only the validation for render passes but we should have the same for compute passes. And actually, it might make sense to also have these commands on the GPUCommandEncoder itself. WDYT?",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b68c621_d5ce4bfa",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "I like keeping the validation isolated in the validate* functions. Code duplication wasn\u0027t excessive, so I just put the same code in ValidateCompute as well. Feel free to overrule me.",
+      "parentUuid": "24a28eb3_758b9525",
       "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "54f74f82_882024c4",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53e98683_4a96fa49",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d5e3e6_4368c532",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 14
@@ -107,6 +203,24 @@
       "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a7df377_f106d944",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d5e3e6_4368c532",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "a13ac8d1_dcadb13e",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79d97e7b_750ea1fd",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "628f081b_0034de64",
         "filename": "src/dawn_native/Commands.cpp",
         "patchSetId": 14
@@ -141,6 +273,24 @@
       "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c70fde8_5813c6dd",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "628f081b_0034de64",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "4d16c3d5_956eaf2b",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdde2433_f102ebbd",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bab686b_eb6527db",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 14
@@ -175,6 +343,24 @@
       "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3521719_cff0e885",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bab686b_eb6527db",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -195,6 +381,24 @@
     },
     {
       "key": {
+        "uuid": "d6242f71_a0886818",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b19ddc14_d3de0cab",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17615b1c_1a6a017b",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 14
@@ -209,6 +413,24 @@
       "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "756a66b8_e4690375",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17615b1c_1a6a017b",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -229,6 +451,24 @@
     },
     {
       "key": {
+        "uuid": "23e775f9_02d417d4",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f6e1117_2a8a0c56",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9368f65_da2770af",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 14
@@ -246,6 +486,24 @@
     },
     {
       "key": {
+        "uuid": "e46fb5a4_70588f6d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9368f65_da2770af",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2e07fe_b65e3f2a",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 14
@@ -260,6 +518,24 @@
       "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15e96259_12e70530",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-02-14T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2e07fe_b65e3f2a",
+      "revId": "c6e55ab5ff72f9e86396643c6c535baddb4ae240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
