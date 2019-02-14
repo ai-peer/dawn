@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8dae04c5_847f6c73",
+        "filename": "src/tests/unittests/wire/WireOptionalTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-14T18:12:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2458d9a0_341d23ce",
+      "revId": "3b57ea441f2fe7ae386d88b88124b391f5b68135",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a905dd1_082d25bf",
         "filename": "src/tests/unittests/wire/WireTest.h",
         "patchSetId": 7
@@ -39,6 +57,30 @@
       "revId": "3b57ea441f2fe7ae386d88b88124b391f5b68135",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b3e4ddf_e676602e",
+        "filename": "src/tests/unittests/wire/WireTest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-14T18:12:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a905dd1_082d25bf",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 0
+      },
+      "revId": "3b57ea441f2fe7ae386d88b88124b391f5b68135",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
