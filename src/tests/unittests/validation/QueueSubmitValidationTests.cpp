@@ -42,9 +42,9 @@ TEST_F(QueueSubmitValidationTest, SubmitWithMappedBuffer) {
     dawn::CommandBuffer commands;
     {
         dawn::RenderPassDescriptor renderpass = CreateSimpleRenderPass();
-        dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
-        builder.CopyBufferToBuffer(buffer, 0, targetBuffer, 0, 4);
-        commands = builder.GetResult();
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(buffer, 0, targetBuffer, 0, 4);
+        commands = encoder.Finish();
     }
 
     dawn::Queue queue = device.CreateQueue();
