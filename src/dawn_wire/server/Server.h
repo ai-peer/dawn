@@ -35,6 +35,12 @@ namespace dawn_wire { namespace server {
         uint64_t value;
     };
 
+    struct CreateBufferMappedAsyncUserdata {
+        Server* server;
+        ObjectHandle device;
+        ObjectHandle buffer;
+    };
+
     class Server : public ServerBase {
       public:
         Server(dawnDevice device, const dawnProcTable& procs, CommandSerializer* serializer);
@@ -55,6 +61,11 @@ namespace dawn_wire { namespace server {
                                                void* ptr,
                                                uint32_t dataLength,
                                                dawnCallbackUserdata userdata);
+        static void ForwardCreateBufferMappedAsync(dawnBuffer buffer,
+                                                   dawnBufferMapAsyncStatus status,
+                                                   void* ptr,
+                                                   uint32_t dataLength,
+                                                   dawnCallbackUserdata userdata);
         static void ForwardFenceCompletedValue(dawnFenceCompletionStatus status,
                                                dawnCallbackUserdata userdata);
 
@@ -68,6 +79,11 @@ namespace dawn_wire { namespace server {
                                            void* ptr,
                                            uint32_t dataLength,
                                            MapUserdata* userdata);
+        void OnDeviceCreateBufferMappedAsyncCallback(dawnBuffer buffer,
+                                                     dawnBufferMapAsyncStatus status,
+                                                     void* ptr,
+                                                     uint32_t dataLength,
+                                                     CreateBufferMappedAsyncUserdata* userdata);
         void OnFenceCompletedValueUpdated(FenceCompletionUserdata* userdata);
 
 #include "dawn_wire/server/ServerPrototypes_autogen.inl"
