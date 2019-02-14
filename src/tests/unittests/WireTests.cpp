@@ -212,82 +212,82 @@ class WireTests : public WireTestsBase {
 
 // One call gets forwarded correctly.
 TEST_F(WireTests, CallForwarded) {
-    dawnDeviceCreateCommandBufferBuilder(device);
+    dawnDeviceCreateCommandEncoder(device);
 
-    dawnCommandBufferBuilder apiCmdBufBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiCmdBufBuilder));
+    dawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
+    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
+        .WillOnce(Return(apiCmdBufEncoder));
 
-    EXPECT_CALL(api, CommandBufferBuilderRelease(apiCmdBufBuilder));
+    EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
     FlushClient();
 }
 
 // Test that calling methods on a new object works as expected.
 TEST_F(WireTests, CreateThenCall) {
-    dawnCommandBufferBuilder builder = dawnDeviceCreateCommandBufferBuilder(device);
-    dawnCommandBufferBuilderGetResult(builder);
+    dawnCommandEncoder builder = dawnDeviceCreateCommandEncoder(device);
+    dawnCommandEncoderFinish(builder);
 
-    dawnCommandBufferBuilder apiCmdBufBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiCmdBufBuilder));
+    dawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
+    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
+        .WillOnce(Return(apiCmdBufEncoder));
 
     dawnCommandBuffer apiCmdBuf = api.GetNewCommandBuffer();
-    EXPECT_CALL(api, CommandBufferBuilderGetResult(apiCmdBufBuilder))
+    EXPECT_CALL(api, CommandEncoderFinish(apiCmdBufEncoder))
         .WillOnce(Return(apiCmdBuf));
 
-    EXPECT_CALL(api, CommandBufferBuilderRelease(apiCmdBufBuilder));
+    EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
     EXPECT_CALL(api, CommandBufferRelease(apiCmdBuf));
     FlushClient();
 }
 
 // Test that client reference/release do not call the backend API.
 TEST_F(WireTests, RefCountKeptInClient) {
-    dawnCommandBufferBuilder builder = dawnDeviceCreateCommandBufferBuilder(device);
+    dawnCommandEncoder builder = dawnDeviceCreateCommandEncoder(device);
 
-    dawnCommandBufferBuilderReference(builder);
-    dawnCommandBufferBuilderRelease(builder);
+    dawnCommandEncoderReference(builder);
+    dawnCommandEncoderRelease(builder);
 
-    dawnCommandBufferBuilder apiCmdBufBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiCmdBufBuilder));
-    EXPECT_CALL(api, CommandBufferBuilderRelease(apiCmdBufBuilder));
+    dawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
+    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
+        .WillOnce(Return(apiCmdBufEncoder));
+    EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
 
     FlushClient();
 }
 
 // Test that client reference/release do not call the backend API.
 TEST_F(WireTests, ReleaseCalledOnRefCount0) {
-    dawnCommandBufferBuilder builder = dawnDeviceCreateCommandBufferBuilder(device);
+    dawnCommandEncoder builder = dawnDeviceCreateCommandEncoder(device);
 
-    dawnCommandBufferBuilderRelease(builder);
+    dawnCommandEncoderRelease(builder);
 
-    dawnCommandBufferBuilder apiCmdBufBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiCmdBufBuilder));
+    dawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
+    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
+        .WillOnce(Return(apiCmdBufEncoder));
 
-    EXPECT_CALL(api, CommandBufferBuilderRelease(apiCmdBufBuilder));
+    EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
 
     FlushClient();
 }
 
 // Test that the wire is able to send numerical values
 TEST_F(WireTests, ValueArgument) {
-    dawnCommandBufferBuilder builder = dawnDeviceCreateCommandBufferBuilder(device);
-    dawnComputePassEncoder pass = dawnCommandBufferBuilderBeginComputePass(builder);
+    dawnCommandEncoder encoder = dawnDeviceCreateCommandEncoder(device);
+    dawnComputePassEncoder pass = dawnCommandEncoderBeginComputePass(encoder);
     dawnComputePassEncoderDispatch(pass, 1, 2, 3);
 
-    dawnCommandBufferBuilder apiBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiBuilder));
+    dawnCommandEncoder apiEncoder = api.GetNewCommandEncoder();
+    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
+        .WillOnce(Return(apiEncoder));
 
     dawnComputePassEncoder apiPass = api.GetNewComputePassEncoder();
-    EXPECT_CALL(api, CommandBufferBuilderBeginComputePass(apiBuilder))
+    EXPECT_CALL(api, CommandEncoderBeginComputePass(apiEncoder))
         .WillOnce(Return(apiPass));
 
     EXPECT_CALL(api, ComputePassEncoderDispatch(apiPass, 1, 2, 3))
         .Times(1);
 
-    EXPECT_CALL(api, CommandBufferBuilderRelease(apiBuilder));
+    EXPECT_CALL(api, CommandEncoderRelease(apiEncoder));
     EXPECT_CALL(api, ComputePassEncoderRelease(apiPass));
     FlushClient();
 }
@@ -310,20 +310,20 @@ bool CheckPushConstantValues(const uint32_t* values) {
 }
 
 TEST_F(WireTests, ValueArrayArgument) {
-    dawnCommandBufferBuilder builder = dawnDeviceCreateCommandBufferBuilder(device);
-    dawnComputePassEncoder pass = dawnCommandBufferBuilderBeginComputePass(builder);
+    dawnCommandEncoder encoder = dawnDeviceCreateCommandEncoder(device);
+    dawnComputePassEncoder pass = dawnCommandEncoderBeginComputePass(encoder);
     dawnComputePassEncoderSetPushConstants(pass, DAWN_SHADER_STAGE_BIT_VERTEX, 0, 4, testPushConstantValues);
 
-    dawnCommandBufferBuilder apiBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiBuilder));
+    dawnCommandEncoder apiEncoder = api.GetNewCommandEncoder();
+    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
+        .WillOnce(Return(apiEncoder));
 
     dawnComputePassEncoder apiPass = api.GetNewComputePassEncoder();
-    EXPECT_CALL(api, CommandBufferBuilderBeginComputePass(apiBuilder))
+    EXPECT_CALL(api, CommandEncoderBeginComputePass(apiEncoder))
         .WillOnce(Return(apiPass));
 
     EXPECT_CALL(api, ComputePassEncoderSetPushConstants(apiPass, DAWN_SHADER_STAGE_BIT_VERTEX, 0, 4, ResultOf(CheckPushConstantValues, Eq(true))));
-    EXPECT_CALL(api, CommandBufferBuilderRelease(apiBuilder));
+    EXPECT_CALL(api, CommandEncoderRelease(apiEncoder));
     EXPECT_CALL(api, ComputePassEncoderRelease(apiPass));
 
     FlushClient();
@@ -588,17 +588,17 @@ TEST_F(WireTests, ObjectAsValueArgument) {
         .WillOnce(Return(apiRenderPass));
 
     // Create command buffer builder, setting render pass descriptor
-    dawnCommandBufferBuilder cmdBufBuilder = dawnDeviceCreateCommandBufferBuilder(device);
-    dawnCommandBufferBuilderBeginRenderPass(cmdBufBuilder, renderPass);
+    dawnCommandEncoder cmdBufEncoder = dawnDeviceCreateCommandEncoder(device);
+    dawnCommandEncoderBeginRenderPass(cmdBufEncoder, renderPass);
 
-    dawnCommandBufferBuilder apiCmdBufBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiCmdBufBuilder));
+    dawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
+    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
+        .WillOnce(Return(apiCmdBufEncoder));
 
-    EXPECT_CALL(api, CommandBufferBuilderBeginRenderPass(apiCmdBufBuilder, apiRenderPass))
+    EXPECT_CALL(api, CommandEncoderBeginRenderPass(apiCmdBufEncoder, apiRenderPass))
         .Times(1);
 
-    EXPECT_CALL(api, CommandBufferBuilderRelease(apiCmdBufBuilder));
+    EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
     EXPECT_CALL(api, RenderPassDescriptorBuilderRelease(apiRenderPassBuilder));
     EXPECT_CALL(api, RenderPassDescriptorRelease(apiRenderPass));
     FlushClient();
@@ -610,21 +610,21 @@ TEST_F(WireTests, ObjectsAsPointerArgument) {
     dawnCommandBuffer apiCmdBufs[2];
 
     // Create two command buffers we need to use a GMock sequence otherwise the order of the
-    // CreateCommandBufferBuilder might be swapped since they are equivalent in term of matchers
+    // CreateCommandEncoder might be swapped since they are equivalent in term of matchers
     Sequence s;
     for (int i = 0; i < 2; ++i) {
-        dawnCommandBufferBuilder cmdBufBuilder = dawnDeviceCreateCommandBufferBuilder(device);
-        cmdBufs[i] = dawnCommandBufferBuilderGetResult(cmdBufBuilder);
+        dawnCommandEncoder cmdBufEncoder = dawnDeviceCreateCommandEncoder(device);
+        cmdBufs[i] = dawnCommandEncoderFinish(cmdBufEncoder);
 
-        dawnCommandBufferBuilder apiCmdBufBuilder = api.GetNewCommandBufferBuilder();
-        EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
+        dawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
+        EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
             .InSequence(s)
-            .WillOnce(Return(apiCmdBufBuilder));
+            .WillOnce(Return(apiCmdBufEncoder));
 
         apiCmdBufs[i] = api.GetNewCommandBuffer();
-        EXPECT_CALL(api, CommandBufferBuilderGetResult(apiCmdBufBuilder))
+        EXPECT_CALL(api, CommandEncoderFinish(apiCmdBufEncoder))
             .WillOnce(Return(apiCmdBufs[i]));
-        EXPECT_CALL(api, CommandBufferBuilderRelease(apiCmdBufBuilder));
+        EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
         EXPECT_CALL(api, CommandBufferRelease(apiCmdBufs[i]));
     }
 
@@ -800,58 +800,6 @@ TEST_F(WireTests, DISABLED_NullptrInArray) {
         .WillOnce(Return(nullptr));
 
     FlushClient();
-}
-
-// Test that the server doesn't forward calls to error objects or with error objects
-// Also test that when GetResult is called on an error builder, the error callback is fired
-// TODO(cwallez@chromium.org): This test is disabled because the introduction of encoders breaks
-// the assumptions of the "builder error" handling that a builder is self-contained. We need to
-// revisit this once the new error handling is in place.
-TEST_F(WireTests, DISABLED_CallsSkippedAfterBuilderError) {
-    dawnCommandBufferBuilder cmdBufBuilder = dawnDeviceCreateCommandBufferBuilder(device);
-    dawnCommandBufferBuilderSetErrorCallback(cmdBufBuilder, ToMockBuilderErrorCallback, 1, 2);
-
-    dawnRenderPassEncoder pass = dawnCommandBufferBuilderBeginRenderPass(cmdBufBuilder, nullptr);
-
-    dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
-    dawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 3, 4);
-    dawnBuffer buffer = dawnBufferBuilderGetResult(bufferBuilder); // Hey look an error!
-
-    // These calls will be skipped because of the error
-    dawnBufferSetSubData(buffer, 0, 0, nullptr);
-    dawnRenderPassEncoderSetIndexBuffer(pass, buffer, 0);
-    dawnRenderPassEncoderEndPass(pass);
-    dawnCommandBufferBuilderGetResult(cmdBufBuilder);
-
-    dawnCommandBufferBuilder apiCmdBufBuilder = api.GetNewCommandBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateCommandBufferBuilder(apiDevice))
-        .WillOnce(Return(apiCmdBufBuilder));
-
-    dawnRenderPassEncoder apiPass = api.GetNewRenderPassEncoder();
-    EXPECT_CALL(api, CommandBufferBuilderBeginRenderPass(apiCmdBufBuilder, _))
-        .WillOnce(Return(apiPass));
-
-    dawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
-    EXPECT_CALL(api, DeviceCreateBufferBuilderForTesting(apiDevice))
-        .WillOnce(Return(apiBufferBuilder));
-
-    // Hey look an error!
-    EXPECT_CALL(api, BufferBuilderGetResult(apiBufferBuilder))
-        .WillOnce(InvokeWithoutArgs([&]() -> dawnBuffer {
-            api.CallBuilderErrorCallback(apiBufferBuilder, DAWN_BUILDER_ERROR_STATUS_ERROR, "Error");
-            return nullptr;
-        }));
-
-    EXPECT_CALL(api, BufferSetSubData(_, _, _, _)).Times(0);
-    EXPECT_CALL(api, RenderPassEncoderSetIndexBuffer(_, _, _)).Times(0);
-    EXPECT_CALL(api, CommandBufferBuilderGetResult(_)).Times(0);
-
-    FlushClient();
-
-    EXPECT_CALL(*mockBuilderErrorCallback, Call(DAWN_BUILDER_ERROR_STATUS_ERROR, _, 1, 2)).Times(1);
-    EXPECT_CALL(*mockBuilderErrorCallback, Call(DAWN_BUILDER_ERROR_STATUS_ERROR, _, 3, 4)).Times(1);
-
-    FlushServer();
 }
 
 // Test that we get a success builder error status when no error happens
