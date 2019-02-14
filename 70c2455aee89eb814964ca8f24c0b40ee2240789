@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1e8fcea0_9db12dd7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db3de6a7_2c4b91c1",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "175270a2_6a4b4e69",
         "filename": "examples/Animometer.cpp",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2019-02-13T17:33:17Z",
       "side": 1,
       "message": "I\u0027m not sure what this comment means, see other comments about setting descriptor-\u003edepthStencilState.\n\nMaybe we could have a helper method on ComboRenderPipeline called UseDepthStencil() that does that for us.",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fa328ba_52d7fa2d",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "It was too late for me last night when I rebased the code, I realized that I need to enable depth/stencil tests here but I didn\u0027t notice that descriptor.cDepthStencilState is public, so I simply wrote a note for myself and mark the change as WIP. \n\nSince we can access descriptor.cDepthStencilState directly, I think a function like ComboRenderPipeline::UseDepthStencil() is not a must. Because we can assign \u0026descriptor.cDepthStencilState to descriptor.depthStencilState directly, just as you said below. And we also have a lot of similar code in tests/example where we directly revise the parameters of cBlendState (and so on) in ComboRenderPipeline\u0027s instance, not via a function of the instance.",
+      "parentUuid": "175270a2_6a4b4e69",
       "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "952c90df_968b3bbb",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ae04debc_8b789637",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97179e8d_b17c8b4c",
         "filename": "examples/ComputeBoids.cpp",
         "patchSetId": 3
@@ -67,6 +121,24 @@
       "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c15a9d7f_1dfc6565",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97179e8d_b17c8b4c",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "e0708b24_55bda98c",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72819534_86ab91b1",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79945d7d_23ba9cf4",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 3
@@ -101,6 +191,24 @@
       "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ac71e99_f5ec7c27",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79945d7d_23ba9cf4",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "4472c903_bf3d38ee",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e797059_7c9f4740",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "324d99df_dfd98e5e",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 3
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "98a9cdac_c8f7b824",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "324d99df_dfd98e5e",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bf52193_5c1c2832",
         "filename": "examples/glTFViewer/glTFViewer.cpp",
         "patchSetId": 3
@@ -152,6 +296,24 @@
       "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c7e43f6_d0c0a909",
+        "filename": "examples/glTFViewer/glTFViewer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bf52193_5c1c2832",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -178,6 +340,47 @@
     },
     {
       "key": {
+        "uuid": "b2f281ef_38e6054e",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "We need mDepthStencilState at line 220 in this file [1], and we set the depth stencil state/descriptor at native side for backends (say ComputeDepthStencilDesc() in RenderPipelineVk). The values above indicate that depth stencil test is enabled. And the function like ComputeDepthStencilDesc() for all backends stay the same. \n\nWell, we can return nullptr at [1], and set depthEnabled and stencilEnabled as false for all backends and leave other parameters untouched. Unfortunately, it fails on some backends. So I fill the parameters here, but these values indicate that depth stencil test are both disabled. \n\nWe can also return nullprt at [1], and fill all parameters for every backend for this particular situation. But the code looks like a bit duplicated. For example, for Vulkan, the code should be:\nComputeDepthStencilDesc(const DepthStencilStateDescriptor* descriptor) {\n    VkPipelineDepthStencilStateCreateInfo depthStencilState;\n    if (!descriptor) {\n        codeBlock1; // set every single parameters\n    } else {\n        codeBlock2; // set every single parameters\n    }\n}\ncodeBlock1 and coleBlock2 are quite similar. The current implementation can reuse codeBlock2, and codeBlock1 is not needed.",
+      "parentUuid": "33be1614_a940b28d",
+      "range": {
+        "startLine": 176,
+        "startChar": 9,
+        "endLine": 189,
+        "endChar": 9
+      },
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "498a16d1_3a713e76",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "923de5f2_2e35e381",
         "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
         "patchSetId": 3
@@ -192,6 +395,24 @@
       "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "572859a1_0d041453",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Since we can access ComboRenderPipeline\u0027s cDepthStencilState directly, I don\u0027t need to change the code here.",
+      "parentUuid": "923de5f2_2e35e381",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -212,6 +433,24 @@
     },
     {
       "key": {
+        "uuid": "c91e699d_e819ef57",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Revision to \u0027test\u0027 is unnecessary.",
+      "parentUuid": "18a09e32_08a92f39",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3f52539_bcff12d8",
         "filename": "src/tests/unittests/WireTests.cpp",
         "patchSetId": 3
@@ -226,6 +465,24 @@
       "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d91b2cb2_ca6ea9b0",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3f52539_bcff12d8",
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -249,6 +506,30 @@
       "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "464ec04d_ba85e937",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T05:45:45Z",
+      "side": 1,
+      "message": "Yes. I realized that the format for depth stencil state is incorrect. But the test with incorrect format can pass bots. It seems that WireTest will not do validation. Anyway, I\u0027d like to use the correct format.",
+      "parentUuid": "50c7d092_a2ab2c4e",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 72
+      },
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
