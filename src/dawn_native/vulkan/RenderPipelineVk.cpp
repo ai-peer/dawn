@@ -113,7 +113,7 @@ namespace dawn_native { namespace vulkan {
         }
 
         VkPipelineColorBlendAttachmentState ComputeBlendDesc(
-            const BlendStateDescriptor* descriptor) {
+            const ColorStateDescriptor* descriptor) {
             VkPipelineColorBlendAttachmentState attachment;
             attachment.blendEnable = BlendEnabled(descriptor) ? VK_TRUE : VK_FALSE;
             attachment.srcColorBlendFactor = VulkanBlendFactor(descriptor->colorBlend.srcFactor);
@@ -287,7 +287,7 @@ namespace dawn_native { namespace vulkan {
         // pre-computed in the BlendState
         std::array<VkPipelineColorBlendAttachmentState, kMaxColorAttachments> colorBlendAttachments;
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
-            const BlendStateDescriptor* descriptor = GetBlendStateDescriptor(i);
+            const ColorStateDescriptor* descriptor = GetColorStateDescriptor(i);
             colorBlendAttachments[i] = ComputeBlendDesc(descriptor);
         }
         VkPipelineColorBlendStateCreateInfo colorBlend;
