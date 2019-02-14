@@ -638,9 +638,9 @@ TEST_F(BufferValidationTest, SubmitBufferWithMapUsage) {
     dawn::Buffer bufA = device.CreateBuffer(&descriptorA);
     dawn::Buffer bufB = device.CreateBuffer(&descriptorB);
 
-    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
-    builder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
-    dawn::CommandBuffer commands = builder.GetResult();
+    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
+    dawn::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 }
 
@@ -659,9 +659,9 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
 
         bufA.MapWriteAsync(0, 4, ToMockBufferMapWriteCallback, 40329);
 
-        dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
-        builder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
-        dawn::CommandBuffer commands = builder.GetResult();
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
+        dawn::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
         queue.Submit(0, nullptr);
     }
@@ -671,9 +671,9 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
 
         bufB.MapReadAsync(0, 4, ToMockBufferMapReadCallback, 11329);
 
-        dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
-        builder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
-        dawn::CommandBuffer commands = builder.GetResult();
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
+        dawn::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
         queue.Submit(0, nullptr);
     }
@@ -693,9 +693,9 @@ TEST_F(BufferValidationTest, SubmitDestroyedBuffer) {
     dawn::Buffer bufB = device.CreateBuffer(&descriptorB);
 
     bufA.Destroy();
-    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
-    builder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
-    dawn::CommandBuffer commands = builder.GetResult();
+    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
+    dawn::CommandBuffer commands = encoder.Finish();
     ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
 }
 
