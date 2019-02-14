@@ -121,6 +121,51 @@ namespace dawn_wire { namespace client {
         return true;
     }
 
+    bool Client::DoDeviceCreateBufferMappedAsyncCallback(Device* device,
+                                                         Buffer* buffer,
+                                                         uint32_t status,
+                                                         uint32_t dataLength) {
+        // The device might have been deleted or recreated so this isn't an error.
+        if (device == nullptr) {
+            return true;
+        }
+
+        // CreateBufferMappedAsync reserves the 0th request slot
+        auto requestIt = buffer->requests.find(0);
+        if (requestIt == buffer->requests.end()) {
+            return false;
+        }
+
+        if (!requestIt->second.isWrite) {
+            return false;
+        }
+
+        auto request = requestIt->second;
+        // Delete the request before calling the callback otherwise the callback could be fired a
+        // second time. If, for example, buffer.Unmap() is called inside the callback.
+        buffer->requests.erase(requestIt);
+
+        if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
+            if (buffer->mappedData != nullptr) {
+                return false;
+            }
+
+            buffer->isWriteMapped = true;
+            buffer->mappedDataSize = dataLength;
+            buffer->mappedData = malloc(dataLength);
+            memset(buffer->mappedData, 0, dataLength);
+
+            request.createMappedCallback(reinterpret_cast<dawnBuffer>(buffer),
+                                         static_cast<dawnBufferMapAsyncStatus>(status),
+                                         buffer->mappedData, dataLength, request.userdata);
+        } else {
+            request.createMappedCallback(reinterpret_cast<dawnBuffer>(buffer),
+                                         static_cast<dawnBufferMapAsyncStatus>(status), nullptr, 0,
+                                         request.userdata);
+        }
+        return true;
+    }
+
     bool Client::DoFenceUpdateCompletedValue(Fence* fence, uint64_t value) {
         // The fence might have been deleted or recreated so this isn't an error.
         if (fence == nullptr) {
