@@ -25,6 +25,11 @@
             { "name": "data length", "type": "uint32_t" },
             { "name": "data", "type": "uint8_t", "annotation": "const*", "length": "data length" }
         ],
+        "create buffer mapped async": [
+            { "name": "device id", "type": "ObjectId" },
+            { "name": "descriptor", "type": "buffer descriptor", "annotation": "const*" },
+            { "name": "buffer", "type": "ObjectHandle", "handle_type": "buffer" }
+        ],
         "destroy object": [
             { "name": "object type", "type": "ObjectType" },
             { "name": "object id", "type": "ObjectId" }
@@ -41,6 +46,12 @@
         "buffer map write async callback": [
             { "name": "buffer", "type": "ObjectHandle", "handle_type": "buffer" },
             { "name": "request serial", "type": "uint32_t" },
+            { "name": "status", "type": "uint32_t" },
+            { "name": "data length", "type": "uint32_t" }
+        ],
+        "device create buffer mapped async callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
+            { "name": "buffer", "type": "ObjectHandle", "handle_type": "buffer" },
             { "name": "status", "type": "uint32_t" },
             { "name": "data length", "type": "uint32_t" }
         ],

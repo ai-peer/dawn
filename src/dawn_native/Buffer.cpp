@@ -128,7 +128,6 @@ namespace dawn_native {
         dawnCreateBufferMappedCallback createBufferMappedCallback,
         dawnCallbackUserdata createBufferMappedUserdata,
         dawnCallbackUserdata* mapUserdata) {
-
         ASSERT(mapUserdata != nullptr);
         auto* data = new CreateBufferMappedToMapWriteUserdata{buffer, createBufferMappedCallback,
                                                               createBufferMappedUserdata};
