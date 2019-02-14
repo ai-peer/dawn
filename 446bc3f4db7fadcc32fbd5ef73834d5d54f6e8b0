@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b3bc12c_2ff5d0aa",
+        "filename": "src/tests/unittests/WireTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-14T23:18:27Z",
+      "side": 0,
+      "message": "Was this test obsolete? (maybe comment in the commit message about why it\u0027s removed)",
+      "revId": "446bc3f4db7fadcc32fbd5ef73834d5d54f6e8b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
