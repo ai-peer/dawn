@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "756cf8b6_0eee318d",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-14T18:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d620346_6a540adb",
+      "revId": "795b4088926354428fd20526db5d9c528f38ad56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61a663e7_67f608ed",
         "filename": "src/tests/unittests/wire/WireCallbackTests.cpp",
         "patchSetId": 11
@@ -33,6 +51,24 @@
       "revId": "795b4088926354428fd20526db5d9c528f38ad56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56f955e6_14df2166",
+        "filename": "src/tests/unittests/wire/WireCallbackTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-14T18:26:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61a663e7_67f608ed",
+      "revId": "795b4088926354428fd20526db5d9c528f38ad56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
