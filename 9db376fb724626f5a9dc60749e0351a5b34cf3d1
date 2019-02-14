@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "46b5b015_4cb72cd0",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-14T14:56:23Z",
+      "side": 1,
+      "message": "Thanks for the comparison with Vulkan. Leaving to false sounds good.",
+      "parentUuid": "a3cf2901_b8e3f42f",
+      "range": {
+        "startLine": 609,
+        "startChar": 22,
+        "endLine": 609,
+        "endChar": 27
+      },
+      "revId": "9db376fb724626f5a9dc60749e0351a5b34cf3d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51cc3ca9_f68306e3",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 2
