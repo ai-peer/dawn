@@ -72,8 +72,32 @@ namespace dawn_wire { namespace client {
                                              const dawnBufferDescriptor* descriptor,
                                              dawnCreateBufferMappedCallback callback,
                                              dawnCallbackUserdata userdata) {
-        // Not implemented
-        UNREACHABLE();
+        Device* device = reinterpret_cast<Device*>(cDevice);
+
+        // Reserve a handle for the buffer
+        auto* allocation = device->GetClient()->BufferAllocator().New(device);
+        Buffer* buffer = allocation->object.get();
+        ObjectHandle bufferHandle{allocation->object->id, allocation->serial};
+
+        // CreateBufferMappedAsync reserves the 0th request slot
+        uint32_t serial = buffer->requestSerial++;
+        ASSERT(serial == 0);
+        ASSERT(buffer->requests.find(serial) == buffer->requests.end());
+
+        Buffer::MapRequestData request;
+        request.createMappedCallback = callback;
+        request.userdata = userdata;
+        request.isWrite = true;
+        buffer->requests[serial] = request;
+
+        CreateBufferMappedAsyncCmd cmd;
+        cmd.deviceId = device->id;
+        cmd.descriptor = descriptor;
+        cmd.buffer = bufferHandle;
+
+        size_t requiredSize = cmd.GetRequiredSize();
+        char* allocatedBuffer = static_cast<char*>(device->GetClient()->GetCmdSpace(requiredSize));
+        cmd.Serialize(allocatedBuffer);
     }
 
     uint64_t ClientFenceGetCompletedValue(dawnFence cSelf) {
