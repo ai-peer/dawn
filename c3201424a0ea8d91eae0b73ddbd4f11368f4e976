@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "550104f1_d735d574",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-14T08:11:46Z",
+      "side": 1,
+      "message": "TBH RTV and DSV creation is probably super cheap compared to the rest of the operations we do and could be about as fast as looking up in a hash map so I wouldn\u0027t worry about this.",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13520e8c_894935c9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-14T08:11:46Z",
+      "side": 1,
+      "message": "nit: If you add .Get() at the end, this could be TextureViewBase*",
+      "range": {
+        "startLine": 193,
+        "startChar": 16,
+        "endLine": 193,
+        "endChar": 26
+      },
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f00cc66a_549791ea",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-14T08:11:46Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 207,
+        "startChar": 16,
+        "endLine": 207,
+        "endChar": 21
+      },
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f673b101_acfb34d0",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -13,6 +76,46 @@
       "writtenOn": "2019-02-14T04:08:07Z",
       "side": 1,
       "message": "[1]",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "797cd5f5_077c97b2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-14T08:11:46Z",
+      "side": 1,
+      "message": "nit: D3D12_CPU_DESCRIPTOR_HANDLE",
+      "range": {
+        "startLine": 628,
+        "startChar": 20,
+        "endLine": 628,
+        "endChar": 24
+      },
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8d99552_bbe16a74",
+        "filename": "src/tests/end2end/DrawTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-14T08:11:46Z",
+      "side": 1,
+      "message": "These doesn\u0027t test the draw command but BeginRenderPass, maybe we should have RenderPassTests?",
       "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
