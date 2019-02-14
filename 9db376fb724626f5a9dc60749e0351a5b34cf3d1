@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a3cf2901_b8e3f42f",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T14:48:41Z",
+      "side": 1,
+      "message": "I remember that if \"extensible\" is set to true, it means that this descriptor can support additional information via an extension. But at least in Vulkan, neither VertexInputDescriptor nor VertexAttributeDescriptor can support extension (via a parameter \"const void*                                pNext;\"). So I suppose that it might be false here. \n\nCorrect me if I am wrong.",
+      "parentUuid": "ce727f34_31788b74",
+      "range": {
+        "startLine": 609,
+        "startChar": 22,
+        "endLine": 609,
+        "endChar": 27
+      },
+      "revId": "9db376fb724626f5a9dc60749e0351a5b34cf3d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51cc3ca9_f68306e3",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "9db376fb724626f5a9dc60749e0351a5b34cf3d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73e35e4b_796a8627",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-14T14:48:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51cc3ca9_f68306e3",
+      "range": {
+        "startLine": 20,
+        "startChar": 45,
+        "endLine": 20,
+        "endChar": 54
+      },
+      "revId": "9db376fb724626f5a9dc60749e0351a5b34cf3d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
