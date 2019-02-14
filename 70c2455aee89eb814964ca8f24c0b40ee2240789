@@ -364,6 +364,30 @@
     },
     {
       "key": {
+        "uuid": "81e10927_f5839fc7",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-14T07:57:29Z",
+      "side": 1,
+      "message": "Thanks for the explanation, that makes sense. LGTM. Can we just have a comment explaining that these default values are useful for backends to fill information that\u0027s required even if depth stencil is disabled?",
+      "parentUuid": "b2f281ef_38e6054e",
+      "range": {
+        "startLine": 176,
+        "startChar": 9,
+        "endLine": 189,
+        "endChar": 9
+      },
+      "revId": "70c2455aee89eb814964ca8f24c0b40ee2240789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "498a16d1_3a713e76",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 3
