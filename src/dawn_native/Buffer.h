@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_BUFFER_H_
 #define DAWNNATIVE_BUFFER_H_
 
+#include "common/Serial.h"
 #include "dawn_native/Builder.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
@@ -45,6 +46,10 @@ namespace dawn_native {
         BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
         ~BufferBase();
 
+        static BufferBase* CreateMapped(DeviceBase* device,
+                                        const BufferDescriptor* descriptor,
+                                        uint8_t** data,
+                                        uint32_t* dataLength);
         static BufferBase* MakeError(DeviceBase* device);
 
         uint32_t GetSize() const;
@@ -82,6 +87,11 @@ namespace dawn_native {
         MaybeError ValidateUnmap() const;
         MaybeError ValidateDestroy() const;
 
+        static void CreateMappedCallback(dawnBufferMapAsyncStatus status,
+                                         void* pointer,
+                                         uint32_t dataLength,
+                                         dawnCallbackUserdata userdata);
+
         uint32_t mSize = 0;
         dawn::BufferUsageBit mUsage = dawn::BufferUsageBit::None;
 
@@ -91,6 +101,10 @@ namespace dawn_native {
         uint32_t mMapSerial = 0;
 
         BufferState mState;
+
+        Serial mCreateMappedSerial = 0;
+        std::unique_ptr<uint8_t[]> mStagingData;
+        uint8_t* mCreateMappedPointer = nullptr;
     };
 
     // This builder class is kept around purely for testing but should not be used.
