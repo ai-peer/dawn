@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b51c1915_fdb220dc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-15T03:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ab7b978_986f0f2d",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf37c441_90b175de",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "afd61419_677077c2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-15T03:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf37c441_90b175de",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "550104f1_d735d574",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -47,6 +83,24 @@
       "writtenOn": "2019-02-14T08:11:46Z",
       "side": 1,
       "message": "TBH RTV and DSV creation is probably super cheap compared to the rest of the operations we do and could be about as fast as looking up in a hash map so I wouldn\u0027t worry about this.",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e3e582e_f9a22d4b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-15T03:19:26Z",
+      "side": 1,
+      "message": "OK it seems now we don\u0027t need to use the hash map here, but I still think it may be needed in the future, so I suggest we leave the comment here as a hint.",
+      "parentUuid": "550104f1_d735d574",
       "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "5c493f70_1b50e6b1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-15T03:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13520e8c_894935c9",
+      "range": {
+        "startLine": 193,
+        "startChar": 16,
+        "endLine": 193,
+        "endChar": 26
+      },
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f00cc66a_549791ea",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -96,6 +174,30 @@
       "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27cd5203_b0f9c88b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-15T03:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f00cc66a_549791ea",
+      "range": {
+        "startLine": 207,
+        "startChar": 16,
+        "endLine": 207,
+        "endChar": 21
+      },
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +241,30 @@
     },
     {
       "key": {
+        "uuid": "979996eb_95d8235b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-15T03:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "797cd5f5_077c97b2",
+      "range": {
+        "startLine": 628,
+        "startChar": 20,
+        "endLine": 628,
+        "endChar": 24
+      },
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b8d99552_bbe16a74",
         "filename": "src/tests/end2end/DrawTests.cpp",
         "patchSetId": 11
@@ -153,6 +279,24 @@
       "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b619df6_298270b7",
+        "filename": "src/tests/end2end/DrawTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-15T03:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8d99552_bbe16a74",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
