@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7de53a02_cdfc3aa1",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-15T13:16:49Z",
+      "side": 1,
+      "message": "This can already set the resolve target.",
+      "revId": "8c61c5757fd4d86fffec30384adc2685f68e506b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "821a12d3_bf53dd44",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-15T13:16:49Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "8c61c5757fd4d86fffec30384adc2685f68e506b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
