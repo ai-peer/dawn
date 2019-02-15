@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9049d5f_64077591",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T00:19:46Z",
+      "side": 1,
+      "message": "uNit: we generally use nullptr.",
+      "range": {
+        "startLine": 346,
+        "startChar": 43,
+        "endLine": 346,
+        "endChar": 47
+      },
+      "revId": "e37812874022ba71c0264ab22d95220a12b98be5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad61cfde_54a8fb2d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T00:19:46Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 374,
+        "startChar": 43,
+        "endLine": 374,
+        "endChar": 47
+      },
+      "revId": "e37812874022ba71c0264ab22d95220a12b98be5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
