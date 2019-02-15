@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "738a0f5f_6dd02dae",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T23:25:56Z",
+      "side": 1,
+      "message": "\"MappedToMapWrite\" and \"MappedAsMapWrite\" are really throwing me off. Can\u0027t quite figure out what was meant with the naming here.",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 51
+      },
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d1a8740_8acc992d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T23:25:56Z",
+      "side": 1,
+      "message": "Any reason this needs to be static instead of next to CreateMappedAsWapWriteCallbackImpl?",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a707b98b_dfff972d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T23:25:56Z",
+      "side": 1,
+      "message": "If this fails (but buffer is not error), the callback will never be called? is that ok?",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d891501_a9b36348",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T23:25:56Z",
+      "side": 1,
+      "message": "same in this function, I think - if the TRYs fail, callback will never be called",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
