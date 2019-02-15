@@ -15,6 +15,7 @@
 #include "dawn_native/vulkan/CommandBufferVk.h"
 
 #include "dawn_native/Commands.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/vulkan/BindGroupVk.h"
 #include "dawn_native/vulkan/BufferVk.h"
 #include "dawn_native/vulkan/ComputePipelineVk.h"
@@ -206,8 +207,8 @@ namespace dawn_native { namespace vulkan {
         }
     }  // anonymous namespace
 
-    CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
-        : CommandBufferBase(builder), mCommands(builder->AcquireCommands()) {
+    CommandBuffer::CommandBuffer(Device* device, CommandEncoderBase* encoder)
+        : CommandBufferBase(device, encoder), mCommands(encoder->AcquireCommands()) {
     }
 
     CommandBuffer::~CommandBuffer() {

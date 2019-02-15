@@ -17,8 +17,10 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include "dawn_native/CommandAllocator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/PassResourceUsage.h"
 
 #include <string>
 
@@ -33,6 +35,9 @@ namespace dawn_native {
       public:
         CommandEncoderBase(DeviceBase* device);
         ~CommandEncoderBase();
+
+        CommandIterator AcquireCommands();
+        CommandBufferResourceUsage AcquireResourceUsages();
 
         // Dawn API
         ComputePassEncoderBase* BeginComputePass();
@@ -50,14 +55,37 @@ namespace dawn_native {
                                  const Extent3D* copySize);
         CommandBufferBase* Finish();
 
+        // Functions to interact with the encoders
+        void HandleError(const char* message);
+        void ConsumeError(ErrorData* error);
+        bool ConsumedError(MaybeError maybeError) {
+            if (DAWN_UNLIKELY(maybeError.IsError())) {
+                ConsumeError(maybeError.AcquireError());
+                return true;
+            }
+            return false;
+        }
+
+        void PassEnded();
+
       private:
         MaybeError ValidateFinish();
-        static void HandleBuilderError(dawnBuilderErrorStatus status,
-                                       const char* message,
-                                       dawnCallbackUserdata userdata1,
-                                       dawnCallbackUserdata userdata2);
+        MaybeError ValidateComputePass();
+        MaybeError ValidateRenderPass(RenderPassDescriptorBase* renderPass);
+        MaybeError ValidateCanRecordTopLevelCommands() const;
 
-        CommandBufferBuilder* mBuilder = nullptr;
+        enum class EncodingState : uint8_t;
+        EncodingState mEncodingState;
+
+        void MoveToIterator();
+        CommandAllocator mAllocator;
+        CommandIterator mIterator;
+        bool mWasMovedToIterator = false;
+        bool mWereCommandsAcquired = false;
+
+        bool mWereResourceUsagesAcquired = false;
+        CommandBufferResourceUsage mResourceUsages;
+
         bool mGotError = false;
         std::string mErrorMessage;
     };
