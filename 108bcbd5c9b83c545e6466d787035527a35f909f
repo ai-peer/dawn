@@ -22,6 +22,30 @@
       "revId": "108bcbd5c9b83c545e6466d787035527a35f909f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c6c357c_82988ff6",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-15T12:30:26Z",
+      "side": 0,
+      "message": "That\u0027s correct, this comment was super out of date.",
+      "parentUuid": "5293f797_99561c6e",
+      "range": {
+        "startLine": 202,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 27
+      },
+      "revId": "108bcbd5c9b83c545e6466d787035527a35f909f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
