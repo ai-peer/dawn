@@ -101,6 +101,43 @@ namespace dawn_native {
     }
 
     // static
+    void BufferBase::CreateMappedCallback(dawnBufferMapAsyncStatus status,
+                                          void* pointer,
+                                          uint32_t dataLength,
+                                          dawnCallbackUserdata userdata) {
+        BufferBase* buffer = reinterpret_cast<BufferBase*>(static_cast<intptr_t>(userdata));
+        ASSERT(buffer != nullptr);
+        if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
+            ASSERT(dataLength == buffer->GetSize());
+            buffer->mCreateMappedPointer = reinterpret_cast<uint8_t*>(pointer);
+        } else {
+            buffer->mStagingData.reset();
+        }
+    }
+
+    // static
+    BufferBase* BufferBase::CreateMapped(DeviceBase* device,
+                                         const BufferDescriptor* descriptor,
+                                         uint8_t** data,
+                                         uint32_t* dataLength) {
+        ASSERT(data != nullptr);
+        ASSERT(dataLength != nullptr);
+
+        BufferBase* buffer = device->CreateBuffer(descriptor);
+        if (buffer->IsError()) {
+            return buffer;
+        }
+
+        buffer->mStagingData.reset(new uint8_t[buffer->GetSize()]);
+        *data = buffer->mStagingData.get();
+        *dataLength = buffer->GetSize();
+
+        buffer->MapWriteAsync(CreateMappedCallback, static_cast<dawnCallbackUserdata>(
+                                                        reinterpret_cast<intptr_t>(buffer)));
+        return buffer;
+    }
+
+    // static
     void BufferBase::CreateMappedAsync(DeviceBase* device,
                                        const BufferDescriptor* descriptor,
                                        dawnCreateBufferMappedCallback callback,
@@ -247,6 +284,9 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
+        // The buffer is destroyed so we will never need to upload staging data.
+        mStagingData.reset();
+
         if (mState == BufferState::Mapped) {
             Unmap();
         }
@@ -258,6 +298,19 @@ namespace dawn_native {
             return;
         }
         ASSERT(!IsError());
+
+        while (mStagingData && mCreateMappedPointer == nullptr) {
+            // Buffer is initialized with staging data. If the mapping hasn't finished,
+            // we need to wait. If the mapping fails, mStagingData will be reset.
+            GetDevice()->Tick();
+        }
+
+        if (mCreateMappedPointer != nullptr) {
+            ASSERT(mStagingData);
+            memcpy(mCreateMappedPointer, mStagingData.get(), GetSize());
+            mCreateMappedPointer = nullptr;
+            mStagingData.reset();
+        }
 
         // A map request can only be called once, so this will fire only if the request wasn't
         // completed before the Unmap

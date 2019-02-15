@@ -104,13 +104,15 @@ namespace dawn {
                     {% endif %}
                 {% else %}
                     auto result = {{render_cpp_to_c_method_call(type, method)}};
-                    {% if method.return_type.category == "native" %} 
+                    {% if method.return_type.category == "native" %}
                         return result;
                     {% elif method.return_type.category == "object" %}
                         return {{as_cppType(method.return_type.name)}}::Acquire(result);
+                    {% elif method.return_type.category == "structure" %}
+                        return {{convert_to_cppType(method.return_type, 'value', 'result') | indent(8)}};
                     {% else %}
                         return static_cast<{{as_cppType(method.return_type.name)}}>(result);
-                    {% endif%}
+                    {% endif %}
                 {% endif %}
             }
         {% endfor %}

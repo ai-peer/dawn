@@ -86,6 +86,9 @@ namespace dawn_native { namespace d3d12 {
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
+        ResultOrError<BufferBase*> CreateBufferMappedImpl(const BufferDescriptor* descriptor,
+                                                          uint8_t** data,
+                                                          uint32_t* dataLength) override;
         void CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
                                          dawnCreateBufferMappedCallback callback,
                                          dawnCallbackUserdata userdata) override;
