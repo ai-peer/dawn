@@ -24,6 +24,7 @@
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/PipelineLayout.h"
+#include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/Texture.h"
@@ -381,7 +382,7 @@ namespace dawn_native {
 
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mIterator.NextCommand<BeginRenderPassCmd>();
-                    DAWN_TRY(ValidateRenderPass(cmd->info.Get()));
+                    DAWN_TRY(ValidateRenderPass(cmd));
                 } break;
 
                 case Command::CopyBufferToBuffer: {
@@ -518,18 +519,19 @@ namespace dawn_native {
         return DAWN_VALIDATION_ERROR("Unfinished compute pass");
     }
 
-    MaybeError CommandBufferBuilder::ValidateRenderPass(RenderPassDescriptorBase* renderPass) {
+    MaybeError CommandBufferBuilder::ValidateRenderPass(BeginRenderPassCmd* renderPass) {
         PassResourceUsageTracker usageTracker;
         CommandBufferStateTracker persistentState;
 
         // Track usage of the render pass attachments
-        for (uint32_t i : IterateBitSet(renderPass->GetColorAttachmentMask())) {
-            TextureBase* texture = renderPass->GetColorAttachment(i).view->GetTexture();
+        for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
+            RenderPassColorAttachmentInfo* colorAttachment = &renderPass->colorAttachments[i];
+            TextureBase* texture = colorAttachment->view->GetTexture();
             usageTracker.TextureUsedAs(texture, dawn::TextureUsageBit::OutputAttachment);
         }
 
-        if (renderPass->HasDepthStencilAttachment()) {
-            TextureBase* texture = renderPass->GetDepthStencilAttachment().view->GetTexture();
+        if (renderPass->hasDepthStencilAttachment) {
+            TextureBase* texture = renderPass->depthStencilAttachment.view->GetTexture();
             usageTracker.TextureUsedAs(texture, dawn::TextureUsageBit::OutputAttachment);
         }
 
@@ -658,7 +660,34 @@ namespace dawn_native {
 
         BeginRenderPassCmd* cmd = mAllocator.Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
         new (cmd) BeginRenderPassCmd;
-        cmd->info = info;
+
+        for (uint32_t i : IterateBitSet(info->GetColorAttachmentMask())) {
+            const RenderPassColorAttachmentInfo& colorAttachment = info->GetColorAttachment(i);
+            if (colorAttachment.view.Get() != nullptr) {
+                cmd->colorAttachmentsSet.set(i);
+
+                cmd->colorAttachments[i].view = colorAttachment.view;
+                cmd->colorAttachments[i].loadOp = colorAttachment.loadOp;
+                cmd->colorAttachments[i].storeOp = colorAttachment.storeOp;
+                cmd->colorAttachments[i].clearColor = colorAttachment.clearColor;
+            }
+        }
+
+        cmd->hasDepthStencilAttachment = info->HasDepthStencilAttachment();
+        if (cmd->hasDepthStencilAttachment) {
+            const RenderPassDepthStencilAttachmentInfo& depthStencilAttachment =
+                info->GetDepthStencilAttachment();
+            cmd->depthStencilAttachment.view = depthStencilAttachment.view;
+            cmd->depthStencilAttachment.depthLoadOp = depthStencilAttachment.depthLoadOp;
+            cmd->depthStencilAttachment.depthStoreOp = depthStencilAttachment.depthStoreOp;
+            cmd->depthStencilAttachment.clearDepth = depthStencilAttachment.clearDepth;
+            cmd->depthStencilAttachment.stencilLoadOp = depthStencilAttachment.stencilLoadOp;
+            cmd->depthStencilAttachment.stencilStoreOp = depthStencilAttachment.stencilStoreOp;
+            cmd->depthStencilAttachment.clearStencil = depthStencilAttachment.clearStencil;
+        }
+
+        cmd->width = info->GetWidth();
+        cmd->height = info->GetHeight();
 
         mEncodingState = EncodingState::RenderPass;
         return new RenderPassEncoderBase(GetDevice(), this, &mAllocator);
