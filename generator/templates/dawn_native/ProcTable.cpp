@@ -161,6 +161,8 @@ namespace dawn_native {
                     {% if method.return_type.name.canonical_case() != "void" %}
                         {% if method.return_type.category == "object" %}
                             return reinterpret_cast<{{as_cType(method.return_type.name)}}>(result);
+                        {% elif method.return_type.category == "structure" %}
+                            return {{convert_to_cType(method.return_type, 'value', 'result') | indent(12)}};
                         {% else %}
                             return result;
                         {% endif %}
