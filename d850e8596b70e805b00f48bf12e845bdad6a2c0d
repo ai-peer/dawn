@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6208685c_c21e29d2",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-15T18:27:45Z",
+      "side": 1,
+      "message": "Preallocating could work, but it could also eventually slow down startup time so I\u0027m not 100% sure. The way it works now looks ok.",
+      "parentUuid": "f2e6197b_5ee83bd9",
+      "range": {
+        "startLine": 140,
+        "startChar": 66,
+        "endLine": 140,
+        "endChar": 90
+      },
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c583dd9a_eba5d46d",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 8
@@ -165,6 +189,24 @@
       "side": 1,
       "message": "It would probably work but skews releases. If TickImpl advances the serial, calling mDynamicUploader-\u003eTick before TickImpl is really Tick(N-1) while after is Tick(N+1) as the allocator cannot clear resources not yet en-queued. I\u0027m looking into fixing that for part deux.",
       "parentUuid": "74eac503_c21aa122",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9e04965_59a4f386",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-15T18:27:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "20cc26d1_16440e4f",
       "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
