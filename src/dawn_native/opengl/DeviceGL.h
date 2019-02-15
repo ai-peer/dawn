@@ -64,6 +64,9 @@ namespace dawn_native { namespace opengl {
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
+        ResultOrError<BufferBase*> CreateBufferMappedImpl(const BufferDescriptor* descriptor,
+                                                          uint8_t** data,
+                                                          uint32_t* dataLength) override;
         MaybeError CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
                                                dawnCreateBufferMappedCallback callback,
                                                dawnCallbackUserdata userdata) override;

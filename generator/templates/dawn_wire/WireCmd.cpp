@@ -200,6 +200,7 @@
             }
         {% endfor %}
     }
+    DAWN_UNUSED_FUNC({{Return}}{{name}}Serialize);
 
     //* Deserializes `transfer` into `record` getting more serialized data from `buffer` and `size`
     //* if needed, using `allocator` to store pointed-to values and `resolver` to translate object
@@ -322,6 +323,7 @@
 
         return DeserializeResult::Success;
     }
+    DAWN_UNUSED_FUNC({{Return}}{{name}}Deserialize);
 {% endmacro %}
 
 {% macro write_command_serialization_methods(command, is_return) %}

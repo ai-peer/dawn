@@ -719,6 +719,7 @@ dawn_component("libdawn_native") {
 
   deps = [
     ":dawn_common",
+    ":libdawn",
     ":libdawn_native_sources",
   ]
   sources = [

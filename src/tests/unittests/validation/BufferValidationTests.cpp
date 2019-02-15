@@ -103,6 +103,14 @@ class BufferValidationTest : public ValidationTest {
             return device.CreateBuffer(&descriptor);
         }
 
+        dawn::CreateBufferMappedData CreateBufferMapped(uint32_t size) {
+            dawn::BufferDescriptor descriptor;
+            descriptor.size = size;
+            descriptor.usage = dawn::BufferUsageBit::MapWrite;
+
+            return device.CreateBufferMapped(&descriptor);
+        }
+
         template <typename F>
         void CreateBufferMappedAsync(uint32_t size, dawn::BufferUsageBit usage, const F& f) {
             dawn::BufferDescriptor descriptor;
@@ -230,6 +238,14 @@ TEST_F(BufferValidationTest, MapWriteSuccess) {
     buf.Unmap();
 }
 
+// Test the success case for CreateBufferMapped
+TEST_F(BufferValidationTest, CreateBufferMappedSuccess) {
+    dawn::CreateBufferMappedData info = CreateBufferMapped(4);
+    ASSERT_NE(info.data, nullptr);
+    ASSERT_EQ(info.dataLength, 4u);
+    info.buffer.Unmap();
+}
+
 // Test the success case for CreateBufferMappedAsync
 TEST_F(BufferValidationTest, CreateBufferMappedAsyncSuccess) {
     CreateBufferMappedAsync(
@@ -270,6 +286,18 @@ TEST_F(BufferValidationTest, MapWriteWrongUsage) {
         .Times(1);
 
     ASSERT_DEVICE_ERROR(buf.MapWriteAsync(ToMockBufferMapWriteCallback, userdata));
+}
+
+// Test CreateBufferMapped with wrong usage
+TEST_F(BufferValidationTest, CreateBufferMappedWrongUsage) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::TransferSrc;
+
+    dawn::CreateBufferMappedData info;
+    ASSERT_DEVICE_ERROR(info = device.CreateBufferMapped(&descriptor));
+    ASSERT_EQ(info.data, nullptr);
+    ASSERT_EQ(info.dataLength, 0u);
 }
 
 // Test CreateBufferMappedAsync with wrong usage

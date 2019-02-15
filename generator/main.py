@@ -238,9 +238,49 @@ def as_cppType(name):
     else:
         return name.CamelCase()
 
+def make_convert_to_type(to_type, to_object_type):
+    def convert_to_type(typ, annotation, arg, indent=0):
+        if annotation == 'value':
+            if typ.category == 'object':
+                return to_object_type(typ, arg)
+            elif typ.category == 'structure':
+                converted_members = [
+                    convert_to_type(
+                        member.type, member.annotation,
+                        '{}.{}'.format(arg, as_varName(member.name)),
+                        indent + 1)
+                    for member in typ.members]
+
+                converted_members = [(' ' * 4) + m for m in converted_members ]
+                converted_members = ',\n'.join(converted_members)
+
+                return to_type(typ.name) + ' {\n' + converted_members + '\n}'
+            else:
+                return 'static_cast<{}>({})'.format(to_type(typ.name), arg)
+        elif annotation == '*':
+            return 'reinterpret_cast<{} *>({})'.format(to_type(typ.name), arg)
+        elif annotation == 'const*':
+            return 'reinterpret_cast<{} const*>({})'.format(to_type(typ.name), arg)
+        elif annotation == 'const*const*':
+            return 'reinterpret_cast<{} const*const*>({})'.format(to_type(typ.name), arg)
+        else:
+            assert(False)
+    return convert_to_type
+
+def convert_to_dawn_cObj(typ, arg):
+    return '{}.Get()'.format(arg)
+
+def convert_to_dawn_cppObj(typ, arg):
+    return '{}::Acquire({})'.format(as_cppType(typ.name), arg)
+
+convert_to_cType = make_convert_to_type(as_cType, convert_to_dawn_cObj)
+convert_to_cppType = make_convert_to_type(as_cppType, convert_to_dawn_cppObj)
+
 def decorate(name, typ, arg):
     if arg.annotation == 'value':
         return typ + ' ' + name
+    elif arg.annotation == '*':
+        return typ + ' * ' + name
     elif arg.annotation == 'const*':
         return typ + ' const * ' + name
     elif arg.annotation == 'const*const*':
@@ -334,6 +374,8 @@ def get_renders_for_targets(api_params, wire_json, targets):
         'as_cProc': as_cProc,
         'as_cType': as_cType,
         'as_cppType': as_cppType,
+        'convert_to_cType': convert_to_cType,
+        'convert_to_cppType': convert_to_cppType,
         'as_varName': as_varName,
         'decorate': decorate,
     }
