@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5293f797_99561c6e",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-15T05:26:12Z",
+      "side": 0,
+      "message": "I think this is not true right now. Actually we are removing objects for RenderPipeline. We use descriptors to replace them.",
+      "range": {
+        "startLine": 202,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 27
+      },
+      "revId": "108bcbd5c9b83c545e6466d787035527a35f909f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
