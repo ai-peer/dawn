@@ -15,11 +15,13 @@
 #ifndef DAWNNATIVE_METAL_COMMANDBUFFERMTL_H_
 #define DAWNNATIVE_METAL_COMMANDBUFFERMTL_H_
 
+#include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 
 #import <Metal/Metal.h>
 
 namespace dawn_native {
+    class CommandEncoderBase;
     class RenderPassDescriptorBase;
 }
 
@@ -29,7 +31,7 @@ namespace dawn_native { namespace metal {
 
     class CommandBuffer : public CommandBufferBase {
       public:
-        CommandBuffer(CommandBufferBuilder* builder);
+        CommandBuffer(Device* device, CommandEncoderBase* encoder);
         ~CommandBuffer();
 
         void FillCommands(id<MTLCommandBuffer> commandBuffer);
@@ -39,7 +41,6 @@ namespace dawn_native { namespace metal {
         void EncodeRenderPass(id<MTLCommandBuffer> commandBuffer,
                               RenderPassDescriptorBase* renderPass);
 
-        Device* mDevice;
         CommandIterator mCommands;
     };
 

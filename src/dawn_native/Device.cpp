@@ -143,9 +143,6 @@ namespace dawn_native {
 
         return result;
     }
-    CommandBufferBuilder* DeviceBase::CreateCommandBufferBuilder() {
-        return new CommandBufferBuilder(this);
-    }
     CommandEncoderBase* DeviceBase::CreateCommandEncoder() {
         return new CommandEncoderBase(this);
     }
