@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f2e6197b_5ee83bd9",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-15T17:42:01Z",
+      "side": 1,
+      "message": "wrt creation - this CL creates the first buffer lazily on the device via GetDynamicUploader. Instead, one could create the first buffer in \"MaybeError Device::Init\" (i.e. pre-allocate). I think both approaches would still need error handling for device lost. I do like the latter, as pre-allocating non-upload heaps is desirable for avoid hitching. Perhaps we could address this in our next CL?",
+      "parentUuid": "c53ce5ea_a0238f9e",
+      "range": {
+        "startLine": 140,
+        "startChar": 66,
+        "endLine": 140,
+        "endChar": 90
+      },
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c583dd9a_eba5d46d",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 8
@@ -39,6 +63,24 @@
       "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85e1b89e_c49fdf69",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-15T17:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c583dd9a_eba5d46d",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "81d47d7c_74f2ccc6",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-15T17:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab56849b_023f4a49",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74eac503_c21aa122",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 8
@@ -87,6 +147,24 @@
       "writtenOn": "2019-02-13T17:44:36Z",
       "side": 1,
       "message": "Maybe this could become part of DeviceBase\u0027s Tick?",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20cc26d1_16440e4f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-15T17:42:01Z",
+      "side": 1,
+      "message": "It would probably work but skews releases. If TickImpl advances the serial, calling mDynamicUploader-\u003eTick before TickImpl is really Tick(N-1) while after is Tick(N+1) as the allocator cannot clear resources not yet en-queued. I\u0027m looking into fixing that for part deux.",
+      "parentUuid": "74eac503_c21aa122",
       "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -107,6 +185,24 @@
       "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33dd6767_7cc5594a",
+        "filename": "src/dawn_native/metal/StagingBufferMTL.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-02-15T17:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14990957_8715b4da",
+      "revId": "d850e8596b70e805b00f48bf12e845bdad6a2c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
