@@ -16,6 +16,7 @@
 
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/Commands.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
 #include "dawn_native/metal/DeviceMTL.h"
@@ -204,10 +205,9 @@ namespace dawn_native { namespace metal {
 
     }  // anonymous namespace
 
-    CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
-        : CommandBufferBase(builder),
-          mDevice(ToBackend(builder->GetDevice())),
-          mCommands(builder->AcquireCommands()) {
+    CommandBuffer::CommandBuffer(Device* device, CommandEncoderBase* encoder)
+        : CommandBufferBase(device, encoder),
+          mCommands(encoder->AcquireCommands()) {
     }
 
     CommandBuffer::~CommandBuffer() {
