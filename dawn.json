@@ -257,6 +257,14 @@
     "create buffer mapped callback": {
         "category": "natively defined"
     },
+    "create buffer mapped data": {
+        "category": "structure",
+        "members": [
+            {"name": "buffer", "type": "buffer"},
+            {"name": "data length", "type": "uint32_t"},
+            {"name": "data", "type": "uint8_t", "annotation": "*", "length": "data length"}
+        ]
+    },
     "color": {
         "category": "structure",
         "members": [
@@ -417,6 +425,13 @@
             {
                 "name": "create buffer",
                 "returns": "buffer",
+                "args": [
+                    {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "create buffer mapped",
+                "returns": "create buffer mapped data",
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
                 ]
