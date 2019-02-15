@@ -162,7 +162,7 @@ namespace dawn_native {
                         {% if method.return_type.category == "object" %}
                             return reinterpret_cast<{{as_cType(method.return_type.name)}}>(result);
                         {% else %}
-                            return result;
+                            return {{convert_to_cType(method.return_type, 'value', 'result') | indent(12)}};
                         {% endif %}
                     {% endif %}
                 }

@@ -67,6 +67,9 @@ namespace dawn_native { namespace metal {
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
         ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
+        ResultOrError<BufferBase*> CreateBufferMappedImpl(const BufferDescriptor* descriptor,
+                                                          uint8_t** data,
+                                                          uint32_t* dataLength) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
