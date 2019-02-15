@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "adc96fb6_7a164041",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T21:51:49Z",
+      "side": 1,
+      "message": "Maybe this could just be\n\n  cmd-\u003ecolorAttachments[i] \u003d colorAttachment;\n\n?",
+      "range": {
+        "startLine": 678,
+        "startChar": 0,
+        "endLine": 682,
+        "endChar": 81
+      },
+      "revId": "56062930d89c6ccc7e8b8a37f2c7bc40202bbf2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab1ee614_69d714e9",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T21:51:49Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 696,
+        "endChar": 91
+      },
+      "revId": "56062930d89c6ccc7e8b8a37f2c7bc40202bbf2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
