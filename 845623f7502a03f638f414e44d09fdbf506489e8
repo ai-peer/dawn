@@ -22,6 +22,30 @@
       "revId": "845623f7502a03f638f414e44d09fdbf506489e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1a60925_c091ad36",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-15T12:26:07Z",
+      "side": 1,
+      "message": "I thought RefCounted::~RefCounted would ASSERT the refcount is 0, but it\u0027s not the case so you\u0027re right that it\u0027s equivalent.\n\nLeft as-is since it will be removed in WebGPU error handling CL 5 or 6.",
+      "parentUuid": "219f67d4_4b97b26d",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "845623f7502a03f638f414e44d09fdbf506489e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
