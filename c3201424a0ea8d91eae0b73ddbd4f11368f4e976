@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ab7b978_986f0f2d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T00:10:49Z",
+      "side": 1,
+      "message": "It seems this must happen before AllocateRTVAndDSVHeaps. Assert this?",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf37c441_90b175de",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-15T00:10:49Z",
+      "side": 1,
+      "message": "It looks like this is meant to happen only once. If so, assert this somehow. DAWN_ASSERT(mRTVHeap.Get() \u003d\u003d nullptr \u0026\u0026 mDSVHeap.Get() \u003d\u003d nullptr)?",
+      "revId": "c3201424a0ea8d91eae0b73ddbd4f11368f4e976",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "550104f1_d735d574",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
