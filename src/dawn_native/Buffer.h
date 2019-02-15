@@ -45,6 +45,11 @@ namespace dawn_native {
         BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
         ~BufferBase();
 
+        static BufferBase* CreateMapped(DeviceBase* device,
+                                        const BufferDescriptor* descriptor,
+                                        uint8_t** data,
+                                        uint32_t* dataLength);
+
         static void CreateMappedAsync(DeviceBase* device,
                                       const BufferDescriptor* descriptor,
                                       dawnCreateBufferMappedCallback callback,
@@ -87,6 +92,11 @@ namespace dawn_native {
         MaybeError ValidateUnmap() const;
         MaybeError ValidateDestroy() const;
 
+        static void CreateMappedCallback(dawnBufferMapAsyncStatus status,
+                                         void* pointer,
+                                         uint32_t dataLength,
+                                         dawnCallbackUserdata userdata);
+
         uint32_t mSize = 0;
         dawn::BufferUsageBit mUsage = dawn::BufferUsageBit::None;
 
@@ -96,6 +106,9 @@ namespace dawn_native {
         uint32_t mMapSerial = 0;
 
         BufferState mState;
+
+        std::unique_ptr<uint8_t[]> mStagingData;
+        uint8_t* mCreateMappedPointer = nullptr;
     };
 
     // This builder class is kept around purely for testing but should not be used.

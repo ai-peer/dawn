@@ -142,6 +142,21 @@ namespace dawn_native {
 
         return result;
     }
+    dawn::CreateBufferMappedData DeviceBase::CreateBufferMapped(
+        const BufferDescriptor* descriptor) {
+        BufferBase* buffer = nullptr;
+        dawn::CreateBufferMappedData result = {};
+
+        if (ConsumedError(CreateBufferMappedInternal(&buffer, descriptor, &result.data,
+                                                     &result.dataLength))) {
+            buffer = BufferBase::MakeError(this);
+            result.data = nullptr;
+            result.dataLength = 0;
+        }
+
+        result.buffer = dawn::Buffer(reinterpret_cast<dawnBuffer>(buffer));
+        return result;
+    }
     void DeviceBase::CreateBufferMappedAsync(const BufferDescriptor* descriptor,
                                              dawnCreateBufferMappedCallback callback,
                                              dawnCallbackUserdata userdata) {
@@ -292,6 +307,18 @@ namespace dawn_native {
                                                 const BufferDescriptor* descriptor) {
         DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, CreateBufferImpl(descriptor));
+        return {};
+    }
+
+    MaybeError DeviceBase::CreateBufferMappedInternal(BufferBase** result,
+                                                      const BufferDescriptor* descriptor,
+                                                      uint8_t** data,
+                                                      uint32_t* dataLength) {
+        DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
+        if ((descriptor->usage & dawn::BufferUsageBit::MapWrite) == 0) {
+            return DAWN_VALIDATION_ERROR("MapWrite usage required");
+        }
+        DAWN_TRY_ASSIGN(*result, CreateBufferMappedImpl(descriptor, data, dataLength));
         return {};
     }
 

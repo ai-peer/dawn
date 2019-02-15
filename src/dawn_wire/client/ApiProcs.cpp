@@ -68,6 +68,14 @@ namespace dawn_wire { namespace client {
         cmd.Serialize(allocatedBuffer);
     }
 
+    dawnCreateBufferMappedData ClientDeviceCreateBufferMapped(
+        dawnDevice cDevice,
+        const dawnBufferDescriptor* descriptor) {
+        // Not implemented
+        UNREACHABLE();
+        return {};
+    }
+
     void ClientDeviceCreateBufferMappedAsync(dawnDevice cDevice,
                                              const dawnBufferDescriptor* descriptor,
                                              dawnCreateBufferMappedCallback callback,

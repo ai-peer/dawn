@@ -75,6 +75,11 @@ namespace dawn_native { namespace null {
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return new Buffer(this, descriptor);
     }
+    ResultOrError<BufferBase*> Device::CreateBufferMappedImpl(const BufferDescriptor* descriptor,
+                                                              uint8_t** data,
+                                                              uint32_t* dataLength) {
+        return BufferBase::CreateMapped(this, descriptor, data, dataLength);
+    }
     void Device::CreateBufferMappedAsyncImpl(const BufferDescriptor* descriptor,
                                              dawnCreateBufferMappedCallback callback,
                                              dawnCallbackUserdata userdata) {
