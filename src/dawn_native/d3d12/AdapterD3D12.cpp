@@ -22,6 +22,16 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    // utility wrapper to adapt locale-bound facets for wstring/wbuffer convert
+    template <class Facet>
+    struct deletable_facet : Facet {
+        template <class... Args>
+        deletable_facet(Args&&... args) : Facet(std::forward<Args>(args)...) {
+        }
+        ~deletable_facet() {
+        }
+    };
+
     Adapter::Adapter(Backend* backend, ComPtr<IDXGIAdapter1> hardwareAdapter)
         : AdapterBase(backend->GetInstance(), BackendType::D3D12),
           mHardwareAdapter(hardwareAdapter),
@@ -32,8 +42,8 @@ namespace dawn_native { namespace d3d12 {
         mPCIInfo.deviceId = adapterDesc.DeviceId;
         mPCIInfo.vendorId = adapterDesc.VendorId;
 
-        std::wstring_convert<std::codecvt<wchar_t, char, std::mbstate_t>> converter(
-            "Error converting");
+        std::wstring_convert<deletable_facet<std::codecvt<wchar_t, char, std::mbstate_t>>>
+            converter("Error converting");
         mPCIInfo.name = converter.to_bytes(adapterDesc.Description);
     }
 
