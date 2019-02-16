@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "d328e0b2_201660cb",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-16T00:08:32Z",
+      "side": 1,
+      "message": "Used to be called from outside this class. I\u0027ll move it.",
+      "parentUuid": "2d1a8740_8acc992d",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a707b98b_dfff972d",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 9
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "c55cd4ad_4251b768",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-16T00:08:32Z",
+      "side": 1,
+      "message": "This case isn\u0027t a problem because it\u0027ll get caught in the buffer-\u003eIsError() above. This will never fail if the buffer is not an error. I should just directly return the validation error in that block after callback.",
+      "parentUuid": "a707b98b_dfff972d",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d891501_a9b36348",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 9
@@ -70,6 +106,24 @@
       "writtenOn": "2019-02-15T23:25:56Z",
       "side": 1,
       "message": "same in this function, I think - if the TRYs fail, callback will never be called",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb1069d7_0f78104b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-16T00:08:32Z",
+      "side": 1,
+      "message": "Whoops, you\u0027re right about this one.",
+      "parentUuid": "1d891501_a9b36348",
       "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
