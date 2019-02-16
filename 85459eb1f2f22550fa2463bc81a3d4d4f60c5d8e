@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a304f1fe_24794314",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-16T01:15:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "738a0f5f_6dd02dae",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 51
+      },
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d1a8740_8acc992d",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 9
@@ -57,6 +81,24 @@
       "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7db5327_8c2d445e",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-16T01:15:58Z",
+      "side": 1,
+      "message": "I moved all this stuff to be inline.",
+      "parentUuid": "d328e0b2_201660cb",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "c1b9af97_cf4cc036",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-16T01:15:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c55cd4ad_4251b768",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d891501_a9b36348",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 9
@@ -127,6 +187,24 @@
       "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d721660f_6077fddc",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-16T01:15:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb1069d7_0f78104b",
+      "revId": "85459eb1f2f22550fa2463bc81a3d4d4f60c5d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
