@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fac9ba87_fc87f108",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-18T14:01:11Z",
+      "side": 1,
+      "message": "This logic is similar but slightly different from CommandBufferBuilder::GetResultImpl().",
+      "range": {
+        "startLine": 466,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 54
+      },
+      "revId": "1acb2cfab1fafd1cc57fa4bf511de9646de410e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d72d4d3_c3d205bb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-18T14:01:11Z",
+      "side": 1,
+      "message": "HandleError is new as on CommandBufferBuilder it was implemented by BuilderBase.",
+      "revId": "1acb2cfab1fafd1cc57fa4bf511de9646de410e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cf9806b_9fa90ec6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-18T14:01:11Z",
+      "side": 1,
+      "message": "This is new logic to replace what happened in BuilderBase before it called GetResultImpl.",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 509,
+        "endChar": 0
+      },
+      "revId": "1acb2cfab1fafd1cc57fa4bf511de9646de410e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
