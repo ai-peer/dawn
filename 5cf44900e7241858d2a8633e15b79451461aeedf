@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cc4c802_1d880eb2",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-19T08:57:37Z",
+      "side": 1,
+      "message": "This could be landed separately and doesn\u0027t need to wait for resolving the split copy issue.",
+      "revId": "5cf44900e7241858d2a8633e15b79451461aeedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16441200_172c3bba",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-19T08:57:37Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "5cf44900e7241858d2a8633e15b79451461aeedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64591889_874a8e60",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-19T08:57:37Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "5cf44900e7241858d2a8633e15b79451461aeedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eeba5b3_fef6cafd",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-19T08:57:37Z",
+      "side": 1,
+      "message": "This only needs to be called once at the beginning of the function.",
+      "revId": "5cf44900e7241858d2a8633e15b79451461aeedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1693c0b_3fa7303b",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-19T08:57:37Z",
+      "side": 1,
+      "message": "Can the updates to offset, size and origin be done in this block then in the following block we\u0027d just ASSERT(size.depth \u003d\u003d 1). Likewise for the second block.",
+      "revId": "5cf44900e7241858d2a8633e15b79451461aeedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b15c6a1_465e4053",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-19T08:57:37Z",
+      "side": 1,
+      "message": "Can this be done first, with a break statement at the end as it is the \"good case\"",
+      "revId": "5cf44900e7241858d2a8633e15b79451461aeedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d2b8aaa_cff6ea26",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-19T08:57:37Z",
+      "side": 1,
+      "message": "This needs to be offset, not dst.offset",
+      "range": {
+        "startLine": 411,
+        "startChar": 55,
+        "endLine": 411,
+        "endChar": 59
+      },
+      "revId": "5cf44900e7241858d2a8633e15b79451461aeedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
