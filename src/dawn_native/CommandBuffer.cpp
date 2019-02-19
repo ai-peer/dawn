@@ -77,6 +77,14 @@ namespace dawn_native {
 
             return {};
         }
+        
+        MaybeError ValidateCopySizeFitsPaddingRules(uint32_t dataSize) {
+            if (dataSize % 4 != 0) {
+                return DAWN_VALIDATION_ERROR("Copy size must be a multiple of 4 bytes");
+            }
+            
+            return {};
+        }
 
         MaybeError ValidateTexelBufferOffset(TextureBase* texture, const BufferCopy& bufferCopy) {
             uint32_t texelSize =
@@ -400,6 +408,7 @@ namespace dawn_native {
                     DAWN_TRY(GetDevice()->ValidateObject(copy->destination.buffer.Get()));
                     DAWN_TRY(ValidateCopySizeFitsInBuffer(copy->source, copy->size));
                     DAWN_TRY(ValidateCopySizeFitsInBuffer(copy->destination, copy->size));
+                    DAWN_TRY(ValidateCopySizeFitsPaddingRules(copy->size));
 
                     DAWN_TRY(ValidateCanUseAs(copy->source.buffer.Get(),
                                               dawn::BufferUsageBit::TransferSrc));

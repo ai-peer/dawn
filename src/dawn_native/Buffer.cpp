@@ -258,6 +258,10 @@ namespace dawn_native {
         if (mState == BufferState::Destroyed) {
             return DAWN_VALIDATION_ERROR("Buffer is destroyed");
         }
+        
+        if (count % 4 != 0) {
+            return DAWN_VALIDATION_ERROR("Uploaded data size must be a multiple of 4 bytes");
+        }
 
         if (mState == BufferState::Mapped) {
             return DAWN_VALIDATION_ERROR("Buffer is mapped");
