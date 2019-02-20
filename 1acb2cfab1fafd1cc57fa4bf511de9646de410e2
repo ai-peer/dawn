@@ -79,6 +79,24 @@
       "revId": "1acb2cfab1fafd1cc57fa4bf511de9646de410e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4bb3642_b1cc78ff",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-20T11:32:05Z",
+      "side": 1,
+      "message": "OMG I keep forgetting to remove this before committing when I test compilation of the Vulkan backend on Mac. Removed in patchset 4.",
+      "parentUuid": "c46a637a_67cf2446",
+      "revId": "1acb2cfab1fafd1cc57fa4bf511de9646de410e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
