@@ -99,6 +99,7 @@ namespace dawn_native { namespace null {
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
         Serial GetPendingCommandSerial() const override;
+        void WaitForSerial(Serial serial) final override;
         void TickImpl() override;
 
         void AddPendingOperation(std::unique_ptr<PendingOperation> operation);

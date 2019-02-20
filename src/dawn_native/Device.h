@@ -67,6 +67,7 @@ namespace dawn_native {
         virtual Serial GetCompletedCommandSerial() const = 0;
         virtual Serial GetLastSubmittedCommandSerial() const = 0;
         virtual Serial GetPendingCommandSerial() const = 0;
+        virtual void WaitForSerial(Serial serial) = 0;
         virtual void TickImpl() = 0;
 
         // Many Dawn objects are completely immutable once created which means that if two

@@ -170,6 +170,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void Device::WaitForSerial(uint64_t serial) {
+        ASSERT(serial <= GetLastSubmittedCommandSerial());
         mCompletedSerial = mFence->GetCompletedValue();
         if (mCompletedSerial < serial) {
             ASSERT_SUCCESS(mFence->SetEventOnCompletion(serial, mFenceEvent));

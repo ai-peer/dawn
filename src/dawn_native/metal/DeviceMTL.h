@@ -43,6 +43,7 @@ namespace dawn_native { namespace metal {
 
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
+        void WaitForSerial(Serial serial) final override;
         void TickImpl() override;
 
         id<MTLDevice> GetMTLDevice();
