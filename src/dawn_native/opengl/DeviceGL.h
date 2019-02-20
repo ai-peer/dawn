@@ -48,6 +48,7 @@ namespace dawn_native { namespace opengl {
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
         Serial GetPendingCommandSerial() const override;
+        void WaitForSerial(Serial serial) final override;
         void TickImpl() override;
 
         ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(size_t size) override;

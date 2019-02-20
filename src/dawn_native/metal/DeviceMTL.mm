@@ -134,6 +134,13 @@ namespace dawn_native { namespace metal {
         return mLastSubmittedSerial + 1;
     }
 
+    void Device::WaitForSerial(Serial serial) {
+        ASSERT(serial <= GetLastSubmittedCommandSerial());
+        while (mCompletedSerial < serial) {
+            usleep(100);
+        }
+    }
+
     void Device::TickImpl() {
         mDynamicUploader->Tick(mCompletedSerial);
         mMapTracker->Tick(mCompletedSerial);

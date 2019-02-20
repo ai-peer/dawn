@@ -151,6 +151,13 @@ namespace dawn_native { namespace null {
         return mLastSubmittedSerial + 1;
     }
 
+    void Device::WaitForSerial(Serial serial) {
+        ASSERT(serial <= GetLastSubmittedCommandSerial());
+        while (mCompletedSerial < serial) {
+            SubmitPendingOperations();
+        }
+    }
+
     void Device::TickImpl() {
         SubmitPendingOperations();
     }

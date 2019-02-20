@@ -124,6 +124,39 @@ namespace dawn_native { namespace opengl {
         return mLastSubmittedSerial + 1;
     }
 
+    void Device::WaitForSerial(Serial serial) {
+        ASSERT(serial <= GetLastSubmittedCommandSerial());
+        while (!mFencesInFlight.empty()) {
+            GLsync sync = mFencesInFlight.front().first;
+            Serial fenceSerial = mFencesInFlight.front().second;
+
+            if (fenceSerial > serial) {
+                break;
+            }
+
+            bool signaled = false;
+            do {
+                GLenum status = glClientWaitSync(sync, GL_SYNC_FLUSH_COMMANDS_BIT, UINT64_MAX);
+                switch(status) {
+                    case GL_CONDITION_SATISFIED:
+                    case GL_ALREADY_SIGNALED:
+                        signaled = true;
+                        break;
+                    case GL_TIMEOUT_EXPIRED:
+                        break;
+                    default:
+                        ASSERT(false);
+                }
+            } while (!signaled);
+
+            glDeleteSync(sync);
+            mFencesInFlight.pop();
+
+            ASSERT(fenceSerial > mCompletedSerial);
+            mCompletedSerial = fenceSerial;
+        }
+    }
+
     void Device::TickImpl() {
         CheckPassedFences();
     }
