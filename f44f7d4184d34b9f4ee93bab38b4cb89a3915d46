@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d55e2770_17c68528",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-20T21:34:36Z",
+      "side": 1,
+      "message": "nit: UNREACHABLE()?",
+      "revId": "f44f7d4184d34b9f4ee93bab38b4cb89a3915d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf61162_5068228e",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-20T21:34:36Z",
+      "side": 1,
+      "message": "This code seems similar, is there any way to deduplicate?",
+      "revId": "f44f7d4184d34b9f4ee93bab38b4cb89a3915d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "242a9199_7badca62",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-20T21:34:36Z",
+      "side": 1,
+      "message": "Here too maybe?",
+      "revId": "f44f7d4184d34b9f4ee93bab38b4cb89a3915d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc0e063d_17fd7a4d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-20T21:34:36Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "f44f7d4184d34b9f4ee93bab38b4cb89a3915d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
