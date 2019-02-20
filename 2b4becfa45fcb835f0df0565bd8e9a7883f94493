@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93afe5b6_0cdc2885",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-20T21:15:19Z",
+      "side": 1,
+      "message": "nit: \"\\n\" used in several places where endl should probably be used? I doubt it matters though.",
+      "range": {
+        "startLine": 122,
+        "startChar": 65,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "2b4becfa45fcb835f0df0565bd8e9a7883f94493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
