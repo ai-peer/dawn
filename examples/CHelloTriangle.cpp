@@ -72,7 +72,7 @@ void init() {
 
         descriptor.sampleCount = 1;
 
-        descriptor.numColorStates = 1;
+        descriptor.colorStateCount = 1;
 
         dawnBlendDescriptor blendDescriptor;
         blendDescriptor.operation = DAWN_BLEND_OPERATION_ADD;
@@ -88,7 +88,7 @@ void init() {
 
         dawnPipelineLayoutDescriptor pl;
         pl.nextInChain = nullptr;
-        pl.numBindGroupLayouts = 0;
+        pl.bindGroupLayoutCount = 0;
         pl.bindGroupLayouts = nullptr;
         descriptor.layout = dawnDeviceCreatePipelineLayout(device, &pl);
 
