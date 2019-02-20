@@ -203,6 +203,42 @@ namespace dawn_native { namespace vulkan {
         return mLastSubmittedSerial + 1;
     }
 
+    void Device::WaitForSerial(Serial serial) {
+        ASSERT(serial <= GetLastSubmittedCommandSerial());
+
+        std::vector<VkFence> fences;
+        Serial completedSerial = mCompletedSerial;
+        while (!mFencesInFlight.empty()) {
+            VkFence fence = mFencesInFlight.front().first;
+            Serial fenceSerial = mFencesInFlight.front().second;
+
+            if (fenceSerial > serial) {
+                break;
+            }
+
+            fences.push_back(fence);
+            mFencesInFlight.pop();
+
+            ASSERT(fenceSerial > completedSerial);
+            completedSerial = fenceSerial;
+        }
+
+        if (fences.size() == 0) {
+            return;
+        }
+
+        bool signaled = false;
+        do {
+            VkResult result =
+                fn.WaitForFences(mVkDevice, fences.size(), fences.data(), true, UINT64_MAX);
+            ASSERT(result == VK_SUCCESS || result == VK_TIMEOUT);
+            signaled = result == VK_SUCCESS;
+        } while (!signaled);
+
+        mUnusedFences.insert(mUnusedFences.end(), fences.begin(), fences.end());
+        mCompletedSerial = completedSerial;
+    }
+
     void Device::TickImpl() {
         CheckPassedFences();
         RecycleCompletedCommands();

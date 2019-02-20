@@ -64,7 +64,7 @@ namespace dawn_native { namespace d3d12 {
         Serial GetPendingCommandSerial() const override;
 
         void NextSerial();
-        void WaitForSerial(Serial serial);
+        void WaitForSerial(Serial serial) final override;
 
         void ReferenceUntilUnused(ComPtr<IUnknown> object);
 
