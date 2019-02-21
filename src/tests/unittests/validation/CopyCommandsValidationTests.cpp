@@ -170,6 +170,36 @@ TEST_F(CopyCommandTest_B2B, BadUsage) {
     }
 }
 
+// Test B2B copies with unpacked data size
+TEST_F(CopyCommandTest_B2B, UnpackedSize) {
+    dawn::Buffer source = CreateBuffer(16, dawn::BufferUsageBit::TransferSrc);
+    dawn::Buffer destination = CreateBuffer(16, dawn::BufferUsageBit::TransferDst);
+
+    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.CopyBufferToBuffer(source, 8, destination, 0, sizeof(uint8_t));
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+
+// Test B2B copies with unpacked offset
+TEST_F(CopyCommandTest_B2B, UnpackedOffset) {
+    dawn::Buffer source = CreateBuffer(16, dawn::BufferUsageBit::TransferSrc);
+    dawn::Buffer destination = CreateBuffer(16, dawn::BufferUsageBit::TransferDst);
+
+    // Unpacked source offset
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(source, 9, destination, 0, 4);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Unpacked destination offset
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(source, 8, destination, 1, 4);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
 class CopyCommandTest_B2T : public CopyCommandTest {
 };
 
