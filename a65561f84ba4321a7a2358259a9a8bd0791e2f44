@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a87a1e9c_22362e6f",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T03:18:20Z",
+      "side": 1,
+      "message": "nit: mulitple -\u003e multiple",
+      "range": {
+        "startLine": 270,
+        "startChar": 62,
+        "endLine": 270,
+        "endChar": 70
+      },
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c1e81e7_93b2e979",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T03:18:20Z",
+      "side": 1,
+      "message": "After comments below, this would be removed.",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd346d71_c5449c5b",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T03:18:20Z",
+      "side": 1,
+      "message": "Instead of this, could AddBufferExpectation just round-up whatever it gets to a multiple of 4?",
+      "range": {
+        "startLine": 38,
+        "startChar": 61,
+        "endLine": 38,
+        "endChar": 102
+      },
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05f1848c_d7200ce7",
+        "filename": "src/tests/end2end/BasicTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T03:18:20Z",
+      "side": 1,
+      "message": "1. It doesn\u0027t make sense to multiply here. E.g. if sizeof(value) were 20, it would not make sense to use size 80 here.\n\n2. (more important). If SetSubData takes size\u003d4, but a pointer to a uint8_t, where do the other 3 bytes come from? (This is a buffer overrun.)\n\nI think the change should instead be:\n\n  uint32_t value \u003d 187;\n  buffer.SetSubData(0, sizeof(value), \u0026value);",
+      "range": {
+        "startLine": 31,
+        "startChar": 41,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e76ea3b_9494d9a1",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T03:18:20Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d66401c_4b0b6ee2",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T03:18:20Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "122bfc69_186a4cf5",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T03:18:20Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
