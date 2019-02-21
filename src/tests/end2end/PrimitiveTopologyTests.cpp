@@ -148,7 +148,7 @@ class PrimitiveTopologyTest : public DawnTest {
         void SetUp() override {
             DawnTest::SetUp();
 
-            renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+            renderPass.init(device, kRTSize, kRTSize);
 
             vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
                 #version 450
@@ -210,7 +210,7 @@ class PrimitiveTopologyTest : public DawnTest {
             static const uint32_t zeroOffset = 0;
             dawn::CommandEncoder encoder = device.CreateCommandEncoder();
             {
-                dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+                dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
                 pass.SetPipeline(pipeline);
                 pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
                 pass.Draw(6, 1, 0, 0);
