@@ -600,14 +600,12 @@ namespace {
     }
 
     void frame() {
-        dawn::Texture backbuffer;
-        dawn::RenderPassDescriptor renderPass;
-        GetNextRenderPassDescriptor(device, swapchain, depthStencilView, &backbuffer, &renderPass);
+        dawn::Texture backbuffer = swapchain.GetNextTexture();
 
         const auto& defaultSceneNodes = scene.scenes.at(scene.defaultScene);
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass);
+            dawn::RenderPassEncoder pass = BeginRenderPass(encoder, backbuffer, depthStencilView);
             for (const auto& n : defaultSceneNodes) {
                 const auto& node = scene.nodes.at(n);
                 drawNode(pass, node);
