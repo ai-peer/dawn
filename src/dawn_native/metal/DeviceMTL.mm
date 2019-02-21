@@ -91,10 +91,6 @@ namespace dawn_native { namespace metal {
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
     }
-    RenderPassDescriptorBase* Device::CreateRenderPassDescriptor(
-        RenderPassDescriptorBuilder* builder) {
-        return new RenderPassDescriptor(builder);
-    }
     ResultOrError<QueueBase*> Device::CreateQueueImpl() {
         return new Queue(this);
     }

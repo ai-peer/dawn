@@ -48,12 +48,12 @@ class ScissorTest: public DawnTest {
 
 // Test that by default the scissor test is disabled and the whole attachment can be drawn to.
 TEST_P(ScissorTest, DefaultsToWholeRenderTarget) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+    utils::BasicRenderPass renderPass(device, 100, 100);
     dawn::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.Draw(6, 1, 0, 0);
         pass.EndPass();
@@ -70,12 +70,12 @@ TEST_P(ScissorTest, DefaultsToWholeRenderTarget) {
 
 // Test setting the scissor to something larger than the attachments.
 TEST_P(ScissorTest, LargerThanAttachment) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+    utils::BasicRenderPass renderPass(device, 100, 100);
     dawn::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetScissorRect(0, 0, 200, 200);
         pass.Draw(6, 1, 0, 0);
@@ -96,12 +96,12 @@ TEST_P(ScissorTest, EmptyRect) {
     DAWN_SKIP_TEST_IF(IsMetal());
     DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 2, 2);
+    utils::BasicRenderPass renderPass(device, 2, 2);
     dawn::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetScissorRect(0, 0, 0, 0);
         pass.Draw(6, 1, 0, 0);
@@ -119,7 +119,7 @@ TEST_P(ScissorTest, EmptyRect) {
 
 // Test setting a partial scissor (not empty, not full attachment)
 TEST_P(ScissorTest, PartialRect) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+    utils::BasicRenderPass renderPass(device, 100, 100);
     dawn::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     constexpr uint32_t kX = 3;
@@ -129,7 +129,7 @@ TEST_P(ScissorTest, PartialRect) {
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetScissorRect(kX, kY, kW, kH);
         pass.Draw(6, 1, 0, 0);
@@ -149,19 +149,19 @@ TEST_P(ScissorTest, PartialRect) {
 
 // Test that the scissor setting doesn't get inherited between renderpasses
 TEST_P(ScissorTest, NoInheritanceBetweenRenderPass) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+    utils::BasicRenderPass renderPass(device, 100, 100);
     dawn::RenderPipeline pipeline = CreateQuadPipeline(renderPass.colorFormat);
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     // RenderPass 1 set the scissor
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetScissorRect(0, 0, 0, 0);
         pass.EndPass();
     }
     // RenderPass 2 draw a full quad, it shouldn't be scissored
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.Draw(6, 1, 0, 0);
         pass.EndPass();

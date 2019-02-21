@@ -44,7 +44,7 @@ class ColorStateTest : public DawnTest {
 
         pipelineLayout = utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
 
-        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass.init(device, kRTSize, kRTSize);
     }
 
     struct TriangleSpec {
@@ -113,7 +113,7 @@ class ColorStateTest : public DawnTest {
 
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             // First use the base pipeline to draw a triangle with no blending
             pass.SetPipeline(basePipeline);
             pass.SetBindGroup(0, MakeBindGroupForColors(std::array<RGBA8, 1>({{base}})));
@@ -733,7 +733,7 @@ TEST_P(ColorStateTest, ColorWriteMaskBlendingDisabled) {
 
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(testPipeline);
             pass.SetBindGroup(0, MakeBindGroupForColors(std::array<RGBA8, 1>({{base}})));
             pass.Draw(3, 1, 0, 0);
@@ -777,10 +777,12 @@ TEST_P(ColorStateTest, IndependentColorState) {
         colorAttachments[i].loadOp = dawn::LoadOp::Clear;
         colorAttachments[i].storeOp = dawn::StoreOp::Store;
     }
-
-    dawn::RenderPassDescriptor renderpass = device.CreateRenderPassDescriptorBuilder()
-                                                .SetColorAttachments(4, colorAttachments)
-                                                .GetResult();
+    dawn::RenderPassColorAttachmentDescriptor* colorAttachmentsPtr[] = {
+        &colorAttachments[0], &colorAttachments[1], &colorAttachments[2], &colorAttachments[3]};
+    dawn::RenderPassDescriptor renderPass;
+    renderPass.colorAttachmentCount = 4;
+    renderPass.colorAttachments = colorAttachmentsPtr;
+    renderPass.depthStencilAttachment = nullptr;
 
     dawn::ShaderModule fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
         #version 450
@@ -859,7 +861,7 @@ TEST_P(ColorStateTest, IndependentColorState) {
 
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderpass);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
             pass.SetPipeline(basePipeline);
             pass.SetBindGroup(
                 0, MakeBindGroupForColors(std::array<RGBA8, 4>({{base, base, base, base}})));
@@ -933,7 +935,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
     {
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
             pass.SetBindGroup(0,
                               MakeBindGroupForColors(std::array<RGBA8, 1>({{RGBA8(0, 0, 0, 0)}})));
@@ -955,7 +957,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
     {
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
             pass.SetBindGroup(0,
                               MakeBindGroupForColors(std::array<RGBA8, 1>({{RGBA8(0, 0, 0, 0)}})));
@@ -979,7 +981,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
     {
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
             pass.SetBindGroup(0,
                               MakeBindGroupForColors(std::array<RGBA8, 1>({{RGBA8(0, 0, 0, 0)}})));
@@ -992,7 +994,7 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
             pass.EndPass();
         }
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(basePipeline);
             pass.SetBindGroup(0,
                               MakeBindGroupForColors(std::array<RGBA8, 1>({{RGBA8(0, 0, 0, 0)}})));
