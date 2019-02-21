@@ -1,0 +1,328 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4832c3db_f9e85cf5",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed, only the dawn_headers should be required for dawn_native.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71afd887_e2573f10",
+        "filename": "dawn.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "nit: result? Or \"buffer and mapping\".",
+      "range": {
+        "startLine": 251,
+        "startChar": 26,
+        "endLine": 251,
+        "endChar": 30
+      },
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "399b5a08_2c1bd90f",
+        "filename": "generator/main.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This can be special cased for C to C++",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b405466_46b05c56",
+        "filename": "generator/main.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This wouldn\u0027t be needed anymore.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f2f95b7_0411b81d",
+        "filename": "generator/main.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "nit: convert_cppType_to_cType",
+      "range": {
+        "startLine": 373,
+        "startChar": 9,
+        "endLine": 373,
+        "endChar": 25
+      },
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d22f440c_594b2801",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This wouldn\u0027t be needed anymore.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13b4a019_e38582c4",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This also needs DAWN_DECLARE_UNUSED",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1c13617_a42d8bc5",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc4d55cd_359bfcf6",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "See suggestion below on how to simplify error handling.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7197035_ce5eccd9",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "In all backends we can get a mapped pointer directly and should use that if the buffer was created with MAP_WRITE. Otherwise we could allocate a StagingBuffer and use it. This mechanism would minimize the number of copies in all cases.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5807d19_eda90227",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This would have two code paths: either mStagingBuffer is not null and we free it, or it is null and we call UnmapImpl. We should not call UnmapImpl when mStagingBuffer is not null.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98ce51be_3e1dd2a3",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "We don\u0027t need to synchronize because the buffer hasn\u0027t been used yet.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e449e641_ed9cdde7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This should still return a valid pointer. We could have MakeErrorMapped and ErrorBuffer would own the storage for result.data.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dbd5e86_0f336f9d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "nit: Just pass the whole dawn::CreateBufferMappedData here so we don\u0027t need to have 3 arguments, one for each member.",
+      "range": {
+        "startLine": 319,
+        "startChar": 54,
+        "endLine": 319,
+        "endChar": 65
+      },
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f212620_f866418a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "I believe this isn\u0027t a constraint in BufferOperations.md, kind of on purpose.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bdb1d05_f8ae5a74",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "To simplify error handling we could first create the buffer, then DAWN_TRY_ASSIGN(data, buffer-\u003eMapAtCreation());",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "106c5fa0_0cc495fe",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "This should probably return dawnCreateBufferMappedData so we don\u0027t need to link in libdawn.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "033659fc_2978c1dc",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:53:32Z",
+      "side": 1,
+      "message": "We need to decide if CreateBufferMapped is implemented purely in the frontend or if the backends can play a part as well. Right now all the backends do is call the frontend so we should probably remove this pure virtual function.",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
