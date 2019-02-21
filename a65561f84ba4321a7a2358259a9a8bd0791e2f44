@@ -88,6 +88,30 @@
     },
     {
       "key": {
+        "uuid": "7bbbb30e_e253ed40",
+        "filename": "src/tests/end2end/BasicTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-02-21T06:03:05Z",
+      "side": 1,
+      "message": "And yes, I agree with you about the mulitply is not make sense. But it make sense for the case that only have 1 uint8 data.\n\nIt cannot be changed to this. Because the third param of SetSubData is a uint8_t* but value be a uint32_t typed data. I tried this method first and got errors. So I asked whether we should change the third param of SetSubData to be a uint32_t* :)",
+      "parentUuid": "05f1848c_d7200ce7",
+      "range": {
+        "startLine": 31,
+        "startChar": 41,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9e76ea3b_9494d9a1",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 1
