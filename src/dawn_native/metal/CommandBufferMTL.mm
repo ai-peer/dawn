@@ -27,6 +27,22 @@
 #include "dawn_native/metal/TextureMTL.h"
 
 namespace dawn_native { namespace metal {
+    uint32_t MetalPixelFormatByteSize(dawn::TextureFormat format) {
+        switch (format) {
+            case dawn::TextureFormat::R8Unorm:
+            case dawn::TextureFormat::R8Uint:
+                return 1;
+            case dawn::TextureFormat::R8G8Unorm:
+            case dawn::TextureFormat::R8G8Uint:
+                return 2;
+            case dawn::TextureFormat::R8G8B8A8Unorm:
+            case dawn::TextureFormat::R8G8B8A8Uint:
+            case dawn::TextureFormat::B8G8R8A8Unorm:
+                return 4;
+            case dawn::TextureFormat::D32FloatS8Uint:
+                return 5;
+        }
+    }
 
     namespace {
 
@@ -262,16 +278,81 @@ namespace dawn_native { namespace metal {
                     size.height = copySize.height;
                     size.depth = copySize.depth;
 
+                    // Total bytes per image
+                    uint32_t bytesPerImage = src.rowPitch * src.imageHeight;
+                    uint32_t offset = src.offset;
+
                     encoders.EnsureBlit(commandBuffer);
-                    [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
-                                     sourceOffset:src.offset
-                                sourceBytesPerRow:src.rowPitch
-                              sourceBytesPerImage:(src.rowPitch * src.imageHeight)
-                                       sourceSize:size
-                                        toTexture:texture->GetMTLTexture()
-                                 destinationSlice:dst.slice
-                                 destinationLevel:dst.level
-                                destinationOrigin:origin];
+
+                    //Judge whether buffer size is unaligned and not big enough
+                    if (buffer->GetSize() >= (bytesPerImage * size.depth + offset)) {
+                        [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
+                                         sourceOffset:src.offset
+                                    sourceBytesPerRow:src.rowPitch
+                                  sourceBytesPerImage:(src.rowPitch * src.imageHeight)
+                                           sourceSize:size
+                                            toTexture:texture->GetMTLTexture()
+                                     destinationSlice:dst.slice
+                                     destinationLevel:dst.level
+                                    destinationOrigin:origin];
+                        break;
+                    } else {
+                        if (size.depth > 1) {
+                            size.depth = copySize.depth - 1;
+
+                            [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
+                                             sourceOffset:offset
+                                        sourceBytesPerRow:src.rowPitch
+                                      sourceBytesPerImage:(src.rowPitch * src.imageHeight)
+                                               sourceSize:size
+                                                toTexture:texture->GetMTLTexture()
+                                         destinationSlice:dst.slice
+                                         destinationLevel:dst.level
+                                        destinationOrigin:origin];
+
+                            // Update origin, offset and size on z.
+                            origin.z = dst.origin.z + copySize.depth - 1;
+                            offset += (copySize.depth - 1) * bytesPerImage;
+                            size.depth = 1;
+                        }
+
+                        if (size.height > 1) {
+                            ASSERT(size.depth == 1);
+
+                            size.height = copySize.height -1;
+
+                            [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
+                                             sourceOffset:offset
+                                        sourceBytesPerRow:src.rowPitch
+                                      sourceBytesPerImage:(src.rowPitch * (src.imageHeight - 1) )
+                                               sourceSize:size
+                                                toTexture:texture->GetMTLTexture()
+                                         destinationSlice:dst.slice
+                                         destinationLevel:dst.level
+                                        destinationOrigin:origin];
+
+                            // Update origin, offset and size on y.
+                            origin.y = dst.origin.y + copySize.height - 1;
+                            offset += (copySize.height - 1) * src.rowPitch;
+                            size.height = 1;
+                        }
+
+                        ASSERT(size.depth == 1);
+                        ASSERT(size.height == 1);
+
+                        uint32_t lastRowPitch =
+                            copySize.width * MetalPixelFormatByteSize(texture->GetFormat());
+
+                        [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
+                                         sourceOffset:offset
+                                    sourceBytesPerRow:lastRowPitch
+                                  sourceBytesPerImage:lastRowPitch
+                                           sourceSize:size
+                                            toTexture:texture->GetMTLTexture()
+                                     destinationSlice:dst.slice
+                                     destinationLevel:dst.level
+                                    destinationOrigin:origin];
+                    }
                 } break;
 
                 case Command::CopyTextureToBuffer: {
@@ -292,16 +373,81 @@ namespace dawn_native { namespace metal {
                     size.height = copySize.height;
                     size.depth = copySize.depth;
 
+                    // Total bytes per image
+                    uint32_t bytesPerImage = dst.rowPitch * dst.imageHeight;
+                    uint32_t offset = dst.offset;
+
                     encoders.EnsureBlit(commandBuffer);
-                    [encoders.blit copyFromTexture:texture->GetMTLTexture()
-                                       sourceSlice:src.slice
-                                       sourceLevel:src.level
-                                      sourceOrigin:origin
-                                        sourceSize:size
-                                          toBuffer:buffer->GetMTLBuffer()
-                                 destinationOffset:dst.offset
-                            destinationBytesPerRow:dst.rowPitch
-                          destinationBytesPerImage:(dst.rowPitch * dst.imageHeight)];
+
+                    // Check whether buffer size is unaligned and not big enough
+                    if (buffer->GetSize() >= (bytesPerImage * size.depth + offset)) {
+                        [encoders.blit copyFromTexture:texture->GetMTLTexture()
+                                           sourceSlice:src.slice
+                                           sourceLevel:src.level
+                                          sourceOrigin:origin
+                                            sourceSize:size
+                                              toBuffer:buffer->GetMTLBuffer()
+                                     destinationOffset:dst.offset
+                                destinationBytesPerRow:dst.rowPitch
+                              destinationBytesPerImage:(dst.rowPitch * dst.imageHeight)];
+                        break;
+                    } else {
+                        if (size.depth > 1) {
+                            size.depth = copySize.depth - 1;
+
+                            [encoders.blit copyFromTexture:texture->GetMTLTexture()
+                                               sourceSlice:src.slice
+                                               sourceLevel:src.level
+                                              sourceOrigin:origin
+                                                sourceSize:size
+                                                  toBuffer:buffer->GetMTLBuffer()
+                                         destinationOffset:offset
+                                    destinationBytesPerRow:dst.rowPitch
+                                  destinationBytesPerImage:dst.rowPitch * dst.imageHeight];
+
+                            // Update origin, offset and size on z.
+                            origin.z = src.origin.z + copySize.depth - 1;
+                            offset += (copySize.depth - 1) * bytesPerImage;
+                            size.depth = 1;
+                        }
+
+                        if (size.height > 1) {
+                            ASSERT(size.depth == 1);
+
+                            size.height = copySize.height -1;
+
+                            [encoders.blit copyFromTexture:texture->GetMTLTexture()
+                                               sourceSlice:src.slice
+                                              sourceLevel:src.level
+                                             sourceOrigin:origin
+                                               sourceSize:size
+                                                 toBuffer:buffer->GetMTLBuffer()
+                                        destinationOffset:offset
+                                   destinationBytesPerRow:dst.rowPitch
+                                 destinationBytesPerImage:dst.rowPitch * (dst.imageHeight - 1)];
+
+                            // Update origin, offset and size on y.
+                            origin.y = src.origin.y + copySize.height - 1;
+                            offset += (copySize.height - 1) * dst.rowPitch;
+                            size.height = 1;
+                        }
+
+                        ASSERT(size.depth == 1);
+                        ASSERT(size.height == 1);
+
+                        uint32_t lastRowPitch =
+                            copySize.width * MetalPixelFormatByteSize(texture->GetFormat());
+
+                        [encoders.blit copyFromTexture:texture->GetMTLTexture()
+                                           sourceSlice:src.slice
+                                           sourceLevel:src.level
+                                          sourceOrigin:origin
+                                            sourceSize:size
+                                              toBuffer:buffer->GetMTLBuffer()
+                                     destinationOffset:offset
+                                destinationBytesPerRow:lastRowPitch
+                              destinationBytesPerImage:lastRowPitch];
+                    }
                 } break;
 
                 default: { UNREACHABLE(); } break;
