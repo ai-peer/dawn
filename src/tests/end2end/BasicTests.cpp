@@ -28,7 +28,7 @@ TEST_P(BasicTests, BufferSetSubData) {
     dawn::Buffer buffer = device.CreateBuffer(&descriptor);
 
     uint8_t value = 187;
-    buffer.SetSubData(0, sizeof(value), &value);
+    buffer.SetSubData(0, sizeof(value) * BufferCopyPaddingFactor, &value);
 
     EXPECT_BUFFER_U8_EQ(value, buffer, 0);
 }

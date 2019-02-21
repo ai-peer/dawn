@@ -47,12 +47,12 @@ class BufferMapReadTests : public DawnTest {
 // Test that the simplest map read works.
 TEST_P(BufferMapReadTests, SmallReadAtZero) {
     dawn::BufferDescriptor descriptor;
-    descriptor.size = 1;
+    descriptor.size = 4;
     descriptor.usage = dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::TransferDst;
     dawn::Buffer buffer = device.CreateBuffer(&descriptor);
 
     uint8_t myData = 187;
-    buffer.SetSubData(0, sizeof(myData), &myData);
+    buffer.SetSubData(0, sizeof(myData) * BufferCopyPaddingFactor, &myData);
 
     const void* mappedData = MapReadAsyncAndWait(buffer);
     ASSERT_EQ(myData, *reinterpret_cast<const uint8_t*>(mappedData));
@@ -154,12 +154,12 @@ class BufferSetSubDataTests : public DawnTest {
 // Test the simplest set sub data: setting one u8 at offset 0.
 TEST_P(BufferSetSubDataTests, SmallDataAtZero) {
     dawn::BufferDescriptor descriptor;
-    descriptor.size = 1;
+    descriptor.size = 4;
     descriptor.usage = dawn::BufferUsageBit::TransferSrc | dawn::BufferUsageBit::TransferDst;
     dawn::Buffer buffer = device.CreateBuffer(&descriptor);
 
     uint8_t value = 171;
-    buffer.SetSubData(0, sizeof(value), &value);
+    buffer.SetSubData(0, sizeof(value) * BufferCopyPaddingFactor, &value);
 
     EXPECT_BUFFER_U8_EQ(value, buffer, 0);
 }
@@ -173,7 +173,7 @@ TEST_P(BufferSetSubDataTests, SmallDataAtOffset) {
 
     constexpr uint32_t kOffset = 2000;
     uint8_t value = 231;
-    buffer.SetSubData(kOffset, sizeof(value), &value);
+    buffer.SetSubData(kOffset, sizeof(value) * BufferCopyPaddingFactor, &value);
 
     EXPECT_BUFFER_U8_EQ(value, buffer, kOffset);
 }

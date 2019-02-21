@@ -18,6 +18,10 @@
 #include <gtest/gtest.h>
 #include <memory>
 
+// Buffer to buffer copy needs copy size be a multiple of 4. Padding copy size to 4 bytes when
+// tests try to copy 1 byte data.
+static constexpr uint32_t BufferCopyPaddingFactor = 4;
+
 // Getting data back from Dawn is done in an async manners so all expectations are "deferred"
 // until the end of the test. Also expectations use a copy to a MapRead buffer to get the data
 // so resources should have the TransferSrc allowed usage bit if you want to add expectations on
@@ -31,7 +35,7 @@
                          new detail::ExpectEq<uint32_t>(expected, count))
 
 #define EXPECT_BUFFER_U8_EQ(expected, buffer, offset)                         \
-    AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint8_t), \
+    AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint8_t) * BufferCopyPaddingFactor, \
                          new detail::ExpectEq<uint8_t>(expected))
 
 // Test a pixel of the mip level 0 of a 2D texture.

@@ -267,6 +267,11 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Buffer subdata with too much data");
         }
 
+        // Metal request buffer to buffer copy size must be a mulitple of 4 bytes on macOS
+        if (count % 4 != 0) {
+            return DAWN_VALIDATION_ERROR("Buffer subdata size must be a multiple of 4 bytes");
+        }
+
         // Note that no overflow can happen because we already checked for GetSize() >= count
         if (start > GetSize() - count) {
             return DAWN_VALIDATION_ERROR("Buffer subdata out of range");
