@@ -156,8 +156,17 @@ TEST_F(InputStateTest, SetInputOutOfBounds) {
 
     AssertWillBeSuccess(device.CreateInputStateBuilder()).SetInput(&input).GetResult();
 
-    // Test OOB
+    // Test input slot OOB
     input.inputSlot = kMaxVertexInputs;
+    AssertWillBeError(device.CreateInputStateBuilder()).SetInput(&input).GetResult();
+
+    // Control case, setting max input stride
+    input.inputSlot = 0;
+    input.stride = kMaxVertexInputStride;
+    AssertWillBeSuccess(device.CreateInputStateBuilder()).SetInput(&input).GetResult();
+
+    // Test input stride OOB
+    input.stride = kMaxVertexInputStride + 1;
     AssertWillBeError(device.CreateInputStateBuilder()).SetInput(&input).GetResult();
 }
 
@@ -197,8 +206,23 @@ TEST_F(InputStateTest, SetAttributeOutOfBounds) {
         .SetAttribute(&attribute)
         .GetResult();
 
-    // Test OOB
+    // Test attribute location OOB
     attribute.shaderLocation = kMaxVertexAttributes;
+    AssertWillBeError(device.CreateInputStateBuilder())
+        .SetInput(&kBaseInput)
+        .SetAttribute(&attribute)
+        .GetResult();
+
+    // Control case, setting max attribute offset
+    attribute.shaderLocation = 0;
+    attribute.offset = kMaxVertexAttributeOffset;
+    AssertWillBeSuccess(device.CreateInputStateBuilder())
+        .SetInput(&kBaseInput)
+        .SetAttribute(&attribute)
+        .GetResult();
+
+    // Test attribute offset OOB
+    attribute.offset = kMaxVertexAttributeOffset + 1;
     AssertWillBeError(device.CreateInputStateBuilder())
         .SetInput(&kBaseInput)
         .SetAttribute(&attribute)
