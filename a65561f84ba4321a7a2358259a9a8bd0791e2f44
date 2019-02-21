@@ -25,6 +25,40 @@
     },
     {
       "key": {
+        "uuid": "c4b05c19_4aedf9c4",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T09:25:16Z",
+      "side": 1,
+      "message": "nit: ValidateBufferCopySizeAlignment?",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "833952b8_6de62588",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T09:25:16Z",
+      "side": 1,
+      "message": "We also need to validate the offset alignment here and in B2T and T2B copies.",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c1e81e7_93b2e979",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 1
@@ -100,6 +134,30 @@
       "side": 1,
       "message": "And yes, I agree with you about the mulitply is not make sense. But it make sense for the case that only have 1 uint8 data.\n\nIt cannot be changed to this. Because the third param of SetSubData is a uint8_t* but value be a uint32_t typed data. I tried this method first and got errors. So I asked whether we should change the third param of SetSubData to be a uint32_t* :)",
       "parentUuid": "05f1848c_d7200ce7",
+      "range": {
+        "startLine": 31,
+        "startChar": 41,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c551d63_6bc0ee37",
+        "filename": "src/tests/end2end/BasicTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T09:25:16Z",
+      "side": 1,
+      "message": "We could make it a void* to remove the need for casts, but this would require dawn_wire changes because it would try to use sizeof(void) which is undefined.",
+      "parentUuid": "7bbbb30e_e253ed40",
       "range": {
         "startLine": 31,
         "startChar": 41,
