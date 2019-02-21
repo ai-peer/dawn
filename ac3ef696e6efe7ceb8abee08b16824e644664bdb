@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1d4cdcb_1f58d6e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:16:29Z",
+      "side": 1,
+      "message": "nit: Fix soon to be added -Wsomething-semicolon-warning",
+      "revId": "ac3ef696e6efe7ceb8abee08b16824e644664bdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86f0d52a_96def77b",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T14:16:29Z",
+      "side": 1,
+      "message": "This should probably have a semicolon everywhere instead. The definition of DAWN_INSTANTIATE_TEST here https://cs.chromium.org/chromium/src/third_party/dawn/src/tests/DawnTest.h?q\u003dDAWN_INSTA\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d194 shouldn\u0027t have the trailing semicolon.\nIf this is too many changes, I can do it in a follow-up.",
+      "revId": "ac3ef696e6efe7ceb8abee08b16824e644664bdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
