@@ -21,7 +21,7 @@ class ViewportOrientationTests : public DawnTest {};
 
 // Test that the pixel in viewport coordinate (-1, -1) matches texel (0, 0)
 TEST_P(ViewportOrientationTests, OriginAt0x0) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 2, 2);
+    utils::BasicRenderPass renderPass(device, 2, 2);
 
     dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
         #version 450
@@ -46,7 +46,7 @@ TEST_P(ViewportOrientationTests, OriginAt0x0) {
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.Draw(1, 1, 0, 0);
         pass.EndPass();

@@ -179,37 +179,6 @@ TEST_F(WireArgumentTests, CStringArgument) {
     FlushClient();
 }
 
-// Test that the wire is able to send objects as value arguments
-TEST_F(WireArgumentTests, ObjectAsValueArgument) {
-    // Create a RenderPassDescriptor
-    dawnRenderPassDescriptorBuilder renderPassBuilder =
-        dawnDeviceCreateRenderPassDescriptorBuilder(device);
-    dawnRenderPassDescriptor renderPass =
-        dawnRenderPassDescriptorBuilderGetResult(renderPassBuilder);
-
-    dawnRenderPassDescriptorBuilder apiRenderPassBuilder = api.GetNewRenderPassDescriptorBuilder();
-    EXPECT_CALL(api, DeviceCreateRenderPassDescriptorBuilder(apiDevice))
-        .WillOnce(Return(apiRenderPassBuilder));
-    dawnRenderPassDescriptor apiRenderPass = api.GetNewRenderPassDescriptor();
-    EXPECT_CALL(api, RenderPassDescriptorBuilderGetResult(apiRenderPassBuilder))
-        .WillOnce(Return(apiRenderPass));
-
-    // Create command buffer encoder, setting render pass descriptor
-    dawnCommandEncoder cmdBufEncoder = dawnDeviceCreateCommandEncoder(device);
-    dawnCommandEncoderBeginRenderPass(cmdBufEncoder, renderPass);
-
-    dawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
-    EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
-        .WillOnce(Return(apiCmdBufEncoder));
-
-    EXPECT_CALL(api, CommandEncoderBeginRenderPass(apiCmdBufEncoder, apiRenderPass)).Times(1);
-
-    EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
-    EXPECT_CALL(api, RenderPassDescriptorBuilderRelease(apiRenderPassBuilder));
-    EXPECT_CALL(api, RenderPassDescriptorRelease(apiRenderPass));
-    FlushClient();
-}
-
 // Test that the wire is able to send array of objects
 TEST_F(WireArgumentTests, ObjectsAsPointerArgument) {
     dawnCommandBuffer cmdBufs[2];
