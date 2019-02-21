@@ -1089,7 +1089,8 @@
             {"value": 8,  "name": "ushort r16 g16 b16 a16"},
             {"value": 9,  "name": "ushort r16 g16"},
             {"value": 10, "name": "unorm r8 g8 b8 a8"},
-            {"value": 11, "name": "unorm r8 g8"}
+            {"value": 11, "name": "unorm r8 g8"},
+            {"value": 12, "name": "unorm r8"}
         ]
     },
     "ObjectType": {
