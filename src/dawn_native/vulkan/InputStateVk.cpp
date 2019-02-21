@@ -57,6 +57,8 @@ namespace dawn_native { namespace vulkan {
                     return VK_FORMAT_R8G8B8A8_UNORM;
                 case dawn::VertexFormat::UnormR8G8:
                     return VK_FORMAT_R8G8_UNORM;
+                case dawn::VertexFormat::UnormR8:
+                    return VK_FORMAT_R8_UNORM;
                 default:
                     UNREACHABLE();
             }
