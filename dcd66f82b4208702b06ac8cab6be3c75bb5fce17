@@ -1,0 +1,464 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d8925ee_e4330c45",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This wouldn\u0027t be needed anymore and would disappear.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f9ea76b_ba7e1a95",
+        "filename": "examples/SampleUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "Could we remove this and instead have something like ComboRenderPipelineDescriptor but is a ComboRenderPassDescriptor? It would by default clear attachments to 0 and store their result.\n\nIt could have a constructor taking (std::initializer_list\u003cdawn::TextureView\u003e colorAttachments, dawn::TextureView depthStencil \u003d dawn::TextureView()) for ergonomics.\n\nThis way code in samples would become the following:\n\n  utils::ComboRenderPassDescriptor renderPassDesc({swapchain.GetNextTexture().createDefaultView()}, depthStencilView);\n  dawn::RenderPassEncoder pass \u003d encoder.BeginRenderPass(\u0026renderPassDesc);",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a039e64f_d09e17bb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "nit: Validate",
+      "range": {
+        "startLine": 172,
+        "startChar": 19,
+        "endLine": 172,
+        "endChar": 24
+      },
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba6cf63a_41e4d7f5",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "nit: Validate",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "738290b0_205e59fd",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "ditto: same as for depthStencil",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ae1d915_7d758060",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This should be DAWN_TRY(device-\u003eValidateObject(attachments))\n\nWith \"WebGPU error handling\" we check for ValidateObject and skip checks for nullptr (and only check for nullptr if the object is marked as optional in dawn.json)",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "350003df_25fd9956",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This isn\u0027t marked as optional in dawn.json so it should never be the case and we don\u0027t need to check for it.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "208ddd7c_9bdad63f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "993d5d12_2ee9f720",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This should return a valid encoder because WebGPU should never return nullptr object, even in the case of errors. An error was consumed by the CommandEncoder so the error will be propagated on the device when Finish is called.",
+      "range": {
+        "startLine": 484,
+        "startChar": 19,
+        "endLine": 484,
+        "endChar": 26
+      },
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35acb315_d3c1a023",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This should never be the case because colorAttachments isn\u0027t marked as optional in dawn.json. In the group we are still discussing exactly how color attachment indices will be provided.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0166039_52462601",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "cmd-\u003ecolorAttachments[i].clearColor \u003d info-\u003ecolorAttachments[i]-\u003eclearColor?",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef0600f6_6535d36c",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "Assignment should still work here I think.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "714368ad_7dd7abce",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This would use the ComboRenderPassDescriptor since it already wires all the pointers correctly.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9f17e74_f399ef11",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "ditto: use ComboRenderPassDescriptor.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f9a7ae9_12bc728e",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "ditto: assignment should work and is more clear imho. Here and in other files.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbe2df29_55c2497b",
+        "filename": "src/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "ditto here and below: use ComboRenderPassDescriptor",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b07483f_ada31b79",
+        "filename": "src/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d70f6f89_c56089b7",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "ditto: use a ComboRenderPassDescriptor.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5606694a_99d15b63",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "nit: just put this in encoder.BeginRenderPass? ditto in other tests in this file.",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 78
+      },
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30a8a13a_4e6f7aef",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "nit: Use ComboRenderPassDescriptor.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6619cd3_22cd2b41",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "The way to check for errors is to\n  Create a command encoder\n  Create a render pass with the descriptor\n  End the pass\n  ASSERT_DEVICE_ERROR(encoder.Finish()) // Or skip ASSERT_DEVICE_ERROR\n\nI suggest having two functions:\n  AssertBeginRenderPassSuccess\n  AssertBeginRenderPassError",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cf469c2_0e5b463b",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This should check for an empty descriptor (no attachments) which isn\u0027t the same as a nullptr descriptor.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb76366_4fb410a4",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "All these tests should probably use ComboRenderPassDescriptor.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93e5eb1c_9f3da36e",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "nit: add public at the top and indent correctly.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "893137d5_8324b9a4",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "nit: maybe this could be called desc so that usage of renderPass in tests become \u0026dummyRenderPass.desc ?",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85cc862_7d8aef40",
+        "filename": "src/utils/DawnHelpers.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:24:16Z",
+      "side": 1,
+      "message": "This would be a helper function returning a struct{width, height, color, colorFormat, renderPassDesc} with renderPassDesc a utils::ComboRenderPassDescriptor.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
