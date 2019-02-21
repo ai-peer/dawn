@@ -119,24 +119,28 @@ TEST_P(RenderPassLoadOpTests, ColorClearThenLoadAndDraw) {
     colorAttachment.loadOp = dawn::LoadOp::Clear;
     colorAttachment.storeOp = dawn::StoreOp::Store;
 
+    dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
     // Part 1: clear once, check to make sure it's cleared
-    auto renderPassClearZero = device.CreateRenderPassDescriptorBuilder()
-        .SetColorAttachments(1, &colorAttachment)
-        .GetResult();
+    dawn::RenderPassDescriptor renderPassClearZero;
+    renderPassClearZero.colorAttachmentCount = 1;
+    renderPassClearZero.colorAttachments = colorAttachments;
+    renderPassClearZero.depthStencilAttachment = nullptr;
 
     auto commandsClearZeroEncoder = device.CreateCommandEncoder();
-    auto clearZeroPass = commandsClearZeroEncoder.BeginRenderPass(renderPassClearZero);
+    auto clearZeroPass = commandsClearZeroEncoder.BeginRenderPass(&renderPassClearZero);
     clearZeroPass.EndPass();
     auto commandsClearZero = commandsClearZeroEncoder.Finish();
 
     dawn::RenderPassColorAttachmentDescriptor colorAttachmentGreen = colorAttachment;
     colorAttachmentGreen.clearColor = { 0.0f, 1.0f, 0.0f, 1.0f };
-    auto renderPassClearGreen = device.CreateRenderPassDescriptorBuilder()
-        .SetColorAttachments(1, &colorAttachmentGreen)
-        .GetResult();
+    dawn::RenderPassColorAttachmentDescriptor* colorAttachmentsGreen[] = {&colorAttachmentGreen};
+    dawn::RenderPassDescriptor renderPassClearGreen;
+    renderPassClearGreen.colorAttachmentCount = 1;
+    renderPassClearGreen.colorAttachments = colorAttachmentsGreen;
+    renderPassClearGreen.depthStencilAttachment = nullptr;
 
     auto commandsClearGreenEncoder = device.CreateCommandEncoder();
-    auto clearGreenPass = commandsClearGreenEncoder.BeginRenderPass(renderPassClearGreen);
+    auto clearGreenPass = commandsClearGreenEncoder.BeginRenderPass(&renderPassClearGreen);
     clearGreenPass.EndPass();
     auto commandsClearGreen = commandsClearGreenEncoder.Finish();
 
@@ -149,14 +153,16 @@ TEST_P(RenderPassLoadOpTests, ColorClearThenLoadAndDraw) {
     // Part 2: draw a blue quad into the right half of the render target, and check result
     dawn::RenderPassColorAttachmentDescriptor colorAttachmentLoad = colorAttachment;
     colorAttachmentLoad.loadOp = dawn::LoadOp::Load;
-    auto renderPassLoad = device.CreateRenderPassDescriptorBuilder()
-        .SetColorAttachments(1, &colorAttachmentLoad)
-        .GetResult();
+    dawn::RenderPassColorAttachmentDescriptor* colorAttachmentsLoad[] = {&colorAttachmentLoad};
+    dawn::RenderPassDescriptor renderPassLoad;
+    renderPassLoad.colorAttachmentCount = 1;
+    renderPassLoad.colorAttachments = colorAttachmentsLoad;
+    renderPassLoad.depthStencilAttachment = nullptr;
 
     dawn::CommandBuffer commandsLoad;
     {
         auto encoder = device.CreateCommandEncoder();
-        auto pass = encoder.BeginRenderPass(renderPassLoad);
+        auto pass = encoder.BeginRenderPass(&renderPassLoad);
         blueQuad.Draw(&pass);
         pass.EndPass();
         commandsLoad = encoder.Finish();

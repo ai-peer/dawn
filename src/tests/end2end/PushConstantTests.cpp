@@ -242,7 +242,7 @@ TEST_P(PushConstantTest, ComputePassDefaultsToZero) {
 
 // Test that push constants default to zero at the beginning of render passes.
 TEST_P(PushConstantTest, RenderPassDefaultsToZero) {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    utils::BasicRenderPass renderPass(device, 1, 1);
 
     // Expect push constants to be zero in all draws of this test.
     PushConstantSpec allZeros = MakeAllZeroSpec();
@@ -251,7 +251,7 @@ TEST_P(PushConstantTest, RenderPassDefaultsToZero) {
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         // Test render push constants are set to zero by default.
         pass.SetPipeline(pipeline);
         pass.Draw(1, 1, 0, 0);
@@ -369,7 +369,7 @@ TEST_P(PushConstantTest, SeparateVertexAndFragmentConstants) {
     PushConstantSpec vsSpec = {{Int, 1}};
     PushConstantSpec fsSpec = {{Int, 2}};
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    utils::BasicRenderPass renderPass(device, 1, 1);
 
     dawn::PipelineLayout layout = MakeEmptyLayout();
     dawn::RenderPipeline pipeline = MakeTestRenderPipeline(layout, vsSpec, fsSpec);
@@ -378,7 +378,7 @@ TEST_P(PushConstantTest, SeparateVertexAndFragmentConstants) {
     uint32_t two = 2;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPushConstants(dawn::ShaderStageBit::Vertex, 0, 1, &one);
         pass.SetPushConstants(dawn::ShaderStageBit::Fragment, 0, 1, &two);
         pass.SetPipeline(pipeline);
@@ -396,7 +396,7 @@ TEST_P(PushConstantTest, SeparateVertexAndFragmentConstants) {
 TEST_P(PushConstantTest, SimultaneousVertexAndFragmentConstants) {
     PushConstantSpec spec = {{Int, 2}};
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+    utils::BasicRenderPass renderPass(device, 1, 1);
 
     dawn::PipelineLayout layout = MakeEmptyLayout();
     dawn::RenderPipeline pipeline = MakeTestRenderPipeline(layout, spec, spec);
@@ -404,7 +404,7 @@ TEST_P(PushConstantTest, SimultaneousVertexAndFragmentConstants) {
     uint32_t two = 2;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
         pass.SetPushConstants(dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment, 0, 1, &two);
         pass.SetPipeline(pipeline);
         pass.Draw(1, 1, 0, 0);

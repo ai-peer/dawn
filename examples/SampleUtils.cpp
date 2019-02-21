@@ -170,19 +170,17 @@ dawn::TextureView CreateDefaultDepthStencilView(const dawn::Device& device) {
     return depthStencilTexture.CreateDefaultTextureView();
 }
 
-void GetNextRenderPassDescriptor(const dawn::Device& device,
-    const dawn::SwapChain& swapchain,
-    const dawn::TextureView& depthStencilView,
-    dawn::Texture* backbuffer,
-    dawn::RenderPassDescriptor* info) {
-    *backbuffer = swapchain.GetNextTexture();
-    auto backbufferView = backbuffer->CreateDefaultTextureView();
+dawn::RenderPassEncoder BeginRenderPass(const dawn::CommandEncoder& encoder,
+                                        const dawn::Texture& backbuffer,
+                                        const dawn::TextureView& depthStencilView) {
     dawn::RenderPassColorAttachmentDescriptor colorAttachment;
-    colorAttachment.attachment = backbufferView;
+    colorAttachment.attachment = backbuffer.CreateDefaultTextureView();
     colorAttachment.resolveTarget = nullptr;
     colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
     colorAttachment.loadOp = dawn::LoadOp::Clear;
     colorAttachment.storeOp = dawn::StoreOp::Store;
+
+    dawn::RenderPassColorAttachmentDescriptor* colorAttachments = {&colorAttachment};
 
     dawn::RenderPassDepthStencilAttachmentDescriptor depthStencilAttachment;
     depthStencilAttachment.attachment = depthStencilView;
@@ -193,10 +191,12 @@ void GetNextRenderPassDescriptor(const dawn::Device& device,
     depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
     depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
 
-    *info = device.CreateRenderPassDescriptorBuilder()
-        .SetColorAttachments(1, &colorAttachment)
-        .SetDepthStencilAttachment(&depthStencilAttachment)
-        .GetResult();
+    dawn::RenderPassDescriptor renderPass;
+    renderPass.colorAttachmentCount = 1;
+    renderPass.colorAttachments = &colorAttachments;
+    renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+    return encoder.BeginRenderPass(&renderPass);
 }
 
 bool InitSample(int argc, const char** argv) {

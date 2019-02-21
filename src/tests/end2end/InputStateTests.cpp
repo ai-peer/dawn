@@ -38,7 +38,7 @@ class InputStateTest : public DawnTest {
         void SetUp() override {
             DawnTest::SetUp();
 
-            renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+            renderPass.init(device, kRTSize, kRTSize);
         }
 
         bool ShouldComponentBeDefault(VertexFormat format, int component) {
@@ -180,7 +180,7 @@ class InputStateTest : public DawnTest {
 
             dawn::CommandEncoder encoder = device.CreateCommandEncoder();
 
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
             pass.SetPipeline(pipeline);
 
             uint32_t zeroOffset = 0;
@@ -454,7 +454,7 @@ TEST_P(InputStateTest, UnusedVertexSlot) {
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
 
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
 
     uint32_t zeroOffset = 0;
     pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
@@ -499,7 +499,7 @@ TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
 
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
 
     uint32_t zeroOffset = 0;
     pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
