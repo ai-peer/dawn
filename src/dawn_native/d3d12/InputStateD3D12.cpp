@@ -44,6 +44,8 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_R8G8B8A8_UNORM;
             case dawn::VertexFormat::UnormR8G8:
                 return DXGI_FORMAT_R8G8_UNORM;
+            case dawn::VertexFormat::UnormR8:
+                return DXGI_FORMAT_R8_UNORM;
             default:
                 UNREACHABLE();
         }
@@ -71,7 +73,7 @@ namespace dawn_native { namespace d3d12 {
 
             D3D12_INPUT_ELEMENT_DESC& inputElementDescriptor = mInputElementDescriptors[count++];
 
-            const AttributeInfo& attribute = GetAttribute(i);
+            const VertexAttributeDescriptor& attribute = GetAttribute(i);
 
             // If the HLSL semantic is TEXCOORDN the SemanticName should be "TEXCOORD" and the
             // SemanticIndex N
@@ -80,7 +82,7 @@ namespace dawn_native { namespace d3d12 {
             inputElementDescriptor.Format = VertexFormatType(attribute.format);
             inputElementDescriptor.InputSlot = attribute.inputSlot;
 
-            const InputInfo& input = GetInput(attribute.inputSlot);
+            const VertexInputDescriptor& input = GetInput(attribute.inputSlot);
 
             inputElementDescriptor.AlignedByteOffset = attribute.offset;
             inputElementDescriptor.InputSlotClass = InputStepModeFunction(input.stepMode);
