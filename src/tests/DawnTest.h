@@ -31,7 +31,7 @@
                          new detail::ExpectEq<uint32_t>(expected, count))
 
 #define EXPECT_BUFFER_U8_EQ(expected, buffer, offset)                         \
-    AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint8_t), \
+    AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint32_t), \
                          new detail::ExpectEq<uint8_t>(expected))
 
 // Test a pixel of the mip level 0 of a 2D texture.
