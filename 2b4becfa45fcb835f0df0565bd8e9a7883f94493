@@ -22,6 +22,30 @@
       "revId": "2b4becfa45fcb835f0df0565bd8e9a7883f94493",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d10ed2f3_cc2591d4",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:41:19Z",
+      "side": 1,
+      "message": "My understanding is that endl is appending \"\\n\" and also flushes the stream and best practice is to use std::endl; only on the last line.",
+      "parentUuid": "93afe5b6_0cdc2885",
+      "range": {
+        "startLine": 122,
+        "startChar": 65,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "2b4becfa45fcb835f0df0565bd8e9a7883f94493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
