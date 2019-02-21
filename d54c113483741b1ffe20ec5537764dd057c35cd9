@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "912171af_bd02fdac",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-21T15:48:45Z",
+      "side": 1,
+      "message": "Add one more vertex format for testing. But Shaobo or I will work on the vertex format later, in order to match web idl.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 45
+      },
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

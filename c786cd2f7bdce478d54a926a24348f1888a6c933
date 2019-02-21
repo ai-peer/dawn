@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c6126897_21bfe4d6",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-21T15:48:45Z",
+      "side": 1,
+      "message": "\u003e We also need to check kMaxVertexAttributeOffset - attribute-\u003eoffset \u003e\u003d size of the vertex format. We should have a comment explaining overflows aren\u0027t possible because we just checked attribute-\u003eoffset \u003e kMaxVertexAttributeOffset.\nDone\n\u003e \n\u003e Do you know if the attributes have to be 100% contained in the stride for their input?\nIf a binding slot in one input has multiple attributes (they are within a stride), some of these attributes can be not listed in attribute descriptors. Holes and/or untouched attributes are allowed. I think. I don\u0027t know whether this answered your question.",
+      "parentUuid": "91c3b658_7f99b72b",
+      "revId": "c786cd2f7bdce478d54a926a24348f1888a6c933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9317c8ca_62c305fc",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5391e753_8d2505ee",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-21T15:48:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9317c8ca_62c305fc",
+      "revId": "c786cd2f7bdce478d54a926a24348f1888a6c933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e754148f_7eab5980",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "c786cd2f7bdce478d54a926a24348f1888a6c933",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fd29fa2_a08acb6d",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-21T15:48:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e754148f_7eab5980",
+      "revId": "c786cd2f7bdce478d54a926a24348f1888a6c933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
