@@ -93,7 +93,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
     // TODO(jiawei.shao@intel.com): find out why this test fails on Metal
     DAWN_SKIP_TEST_IF(IsMetal());
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    utils::BasicRenderPass renderPass(device, kRTSize, kRTSize);
 
     dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
         #version 450
@@ -153,7 +153,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
     });
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
     pass.SetPipeline(pipeline);
     pass.SetBindGroup(0, bindGroup);
     pass.Draw(3, 1, 0, 0);
@@ -178,7 +178,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     // TODO(jiawei.shao@intel.com): find out why this test fails on Metal
     DAWN_SKIP_TEST_IF(IsMetal());
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    utils::BasicRenderPass renderPass(device, kRTSize, kRTSize);
 
     dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
         #version 450
@@ -273,7 +273,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, 0, {0, 0, 0});
     dawn::Extent3D copySize = {width, height, 1};
     encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
     pass.SetPipeline(pipeline);
     pass.SetBindGroup(0, bindGroup);
     pass.Draw(3, 1, 0, 0);
@@ -296,7 +296,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     // https://bugs.chromium.org/p/dawn/issues/detail?id=33
     DAWN_SKIP_TEST_IF(IsMetal());
 
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    utils::BasicRenderPass renderPass(device, kRTSize, kRTSize);
 
     dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
         #version 450
@@ -368,7 +368,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     }
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
     pass.SetPipeline(pipeline);
     pass.SetBindGroup(0, bindGroups[0]);
     pass.SetBindGroup(1, bindGroups[1]);
@@ -391,7 +391,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
 // one pipeline that has 4 bind group sets in one render pass.
 TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets)
 {
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    utils::BasicRenderPass renderPass(device, kRTSize, kRTSize);
 
     dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
         #version 450
@@ -435,7 +435,7 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets)
 
     dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
 
     pass.SetPipeline(pipeline);
 

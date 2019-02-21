@@ -17,7 +17,10 @@
 
 #include <dawn/dawncpp.h>
 
+#include <array>
 #include <initializer_list>
+
+#include "common/Constants.h"
 
 namespace utils {
 
@@ -49,16 +52,23 @@ namespace utils {
                                                 uint32_t slice,
                                                 dawn::Origin3D origin);
 
-    struct BasicRenderPass {
-        uint32_t width;
-        uint32_t height;
-        dawn::Texture color;
-        dawn::TextureFormat colorFormat;
-        dawn::RenderPassDescriptor renderPassInfo;
+    class BasicRenderPass {
+        public:
+            BasicRenderPass();
+            BasicRenderPass(const dawn::Device& device, uint32_t width, uint32_t height);
+            void init(const dawn::Device& device, uint32_t width, uint32_t height);
+
+            uint32_t width;
+            uint32_t height;
+            dawn::Texture color;
+            dawn::TextureFormat colorFormat;
+            dawn::RenderPassDescriptor renderPassInfo;
+            std::array<dawn::RenderPassColorAttachmentDescriptor*, kMaxColorAttachments> colorAttachments;
+
+        private:
+            void initImpl(const dawn::Device& device);
+            dawn::RenderPassColorAttachmentDescriptor mColorAttachments[kMaxColorAttachments];
     };
-    BasicRenderPass CreateBasicRenderPass(const dawn::Device& device,
-                                          uint32_t width,
-                                          uint32_t height);
 
     dawn::SamplerDescriptor GetDefaultSamplerDescriptor();
     dawn::PipelineLayout MakeBasicPipelineLayout(const dawn::Device& device,

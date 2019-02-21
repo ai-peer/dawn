@@ -126,14 +126,30 @@ namespace utils {
         return buffer;
     }
 
-    BasicRenderPass CreateBasicRenderPass(const dawn::Device& device,
-                                          uint32_t width,
-                                          uint32_t height) {
-        BasicRenderPass result;
-        result.width = width;
-        result.height = height;
+    BasicRenderPass::BasicRenderPass()
+        : width(0), height(0), colorFormat(dawn::TextureFormat::R8G8B8A8Unorm),
+          colorAttachments({}) {
+    }
 
-        result.colorFormat = dawn::TextureFormat::R8G8B8A8Unorm;
+    BasicRenderPass::BasicRenderPass(const dawn::Device& device,
+                                     uint32_t attachmentWidth,
+                                     uint32_t attachmentHeight)
+     : width(attachmentWidth), height(attachmentHeight),
+       colorFormat(dawn::TextureFormat::R8G8B8A8Unorm), colorAttachments({}) { 
+       initImpl(device);
+    }
+
+    void BasicRenderPass::init(const dawn::Device& device,
+                               uint32_t attachmentWidth,
+                               uint32_t attachmentHeight) {
+        width = attachmentWidth;
+        height = attachmentHeight;
+        initImpl(device);
+    }
+
+    void BasicRenderPass::initImpl(const dawn::Device& device) {
+        DAWN_ASSERT(width > 0 && height > 0);
+
         dawn::TextureDescriptor descriptor;
         descriptor.dimension = dawn::TextureDimension::e2D;
         descriptor.size.width = width;
@@ -141,24 +157,27 @@ namespace utils {
         descriptor.size.depth = 1;
         descriptor.arrayLayerCount = 1;
         descriptor.sampleCount = 1;
-        descriptor.format = result.colorFormat;
+        descriptor.format = colorFormat;
         descriptor.mipLevelCount = 1;
         descriptor.usage =
             dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::TransferSrc;
-        result.color = device.CreateTexture(&descriptor);
+        color = device.CreateTexture(&descriptor);
 
-        dawn::TextureView colorView = result.color.CreateDefaultTextureView();
-        dawn::RenderPassColorAttachmentDescriptor colorAttachment;
-        colorAttachment.attachment = colorView;
-        colorAttachment.resolveTarget = nullptr;
-        colorAttachment.clearColor = {0.0f, 0.0f, 0.0f, 0.0f};
-        colorAttachment.loadOp = dawn::LoadOp::Clear;
-        colorAttachment.storeOp = dawn::StoreOp::Store;
-        result.renderPassInfo = device.CreateRenderPassDescriptorBuilder()
-                                    .SetColorAttachments(1, &colorAttachment)
-                                    .GetResult();
+        // Only enable color attachment 0.
+        dawn::TextureView colorView = color.CreateDefaultTextureView();
+        mColorAttachments[0].attachment = colorView;
+        mColorAttachments[0].resolveTarget = nullptr;
+        mColorAttachments[0].clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+        mColorAttachments[0].loadOp = dawn::LoadOp::Clear;
+        mColorAttachments[0].storeOp = dawn::StoreOp::Store;
 
-        return result;
+        // Set backend storages for all the pointers in colorAttachments.
+        for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+            colorAttachments[i] = &mColorAttachments[i];
+        }
+        renderPassInfo.colorAttachmentCount = 1;
+        renderPassInfo.colorAttachments = &colorAttachments[0];
+        renderPassInfo.depthStencilAttachment = nullptr;
     }
 
     dawn::BufferCopyView CreateBufferCopyView(dawn::Buffer buffer,

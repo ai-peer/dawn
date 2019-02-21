@@ -24,7 +24,7 @@ class DrawIndexedTest : public DawnTest {
         void SetUp() override {
             DawnTest::SetUp();
 
-            renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+            renderPass.init(device, kRTSize, kRTSize);
 
             dawn::VertexInputDescriptor input;
             input.inputSlot = 0;
@@ -97,7 +97,7 @@ class DrawIndexedTest : public DawnTest {
             uint32_t zeroOffset = 0;
             dawn::CommandEncoder encoder = device.CreateCommandEncoder();
             {
-                dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+                dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
                 pass.SetPipeline(pipeline);
                 pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
                 pass.SetIndexBuffer(indexBuffer, 0);

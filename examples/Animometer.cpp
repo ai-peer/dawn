@@ -131,9 +131,7 @@ void init() {
 }
 
 void frame() {
-    dawn::Texture backbuffer;
-    dawn::RenderPassDescriptor renderPass;
-    GetNextRenderPassDescriptor(device, swapchain, depthStencilView, &backbuffer, &renderPass);
+    dawn::Texture backbuffer = swapchain.GetNextTexture();
 
     static int f = 0;
     f++;
@@ -142,7 +140,7 @@ void frame() {
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass);
+        dawn::RenderPassEncoder pass = BeginRenderPass(encoder, backbuffer, depthStencilView);
         pass.SetPipeline(pipeline);
 
         for (int k = 0; k < 10000; k++) {
