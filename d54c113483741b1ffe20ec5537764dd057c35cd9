@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d5d608e4_9d31bd42",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T23:25:57Z",
+      "side": 1,
+      "message": "Is this really meaningfully different from kMaxVertexInputStride? Will it always match? If you remove it (or rephrase it as kMaxVertexAttributeEnd \u003d 2048u), it allows some cleanup below [1].",
+      "range": {
+        "startLine": 25,
+        "startChar": 26,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "912171af_bd02fdac",
         "filename": "src/dawn_native/InputState.cpp",
         "patchSetId": 5
@@ -25,6 +48,29 @@
     },
     {
       "key": {
+        "uuid": "16a0f034_a1f091c5",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T23:25:57Z",
+      "side": 1,
+      "message": "[1] This would become:\n\n  if (attribute-\u003eoffset \u003e\u003d kMaxVertexAttributeEnd) {",
+      "range": {
+        "startLine": 140,
+        "startChar": 32,
+        "endLine": 140,
+        "endChar": 57
+      },
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "93589aaa_b7b13b28",
         "filename": "src/dawn_native/InputState.cpp",
         "patchSetId": 5
@@ -41,6 +87,116 @@
         "startChar": 37,
         "endLine": 144,
         "endChar": 41
+      },
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6519371a_5f32e369",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T23:25:57Z",
+      "side": 1,
+      "message": "I don\u0027t think that would be right; wouldn\u0027t that be off-by-two?\n\n[1] If you replace kMaxVertexAttributeOffset \u003d 2047 with kMaxVertexAttributeEnd \u003d 2048, this cleans up:\n\n  // Addition is okay: offset \u003c ~2048; VertexFormatSize \u003c\u003d ~16\n  if (attribute-\u003eoffset + VertexFormatSize(attribute-\u003eformat) \u003e kMaxVertexAttributeEnd) {",
+      "parentUuid": "93589aaa_b7b13b28",
+      "range": {
+        "startLine": 144,
+        "startChar": 37,
+        "endLine": 144,
+        "endChar": 41
+      },
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "838ac765_cfb36023",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T23:25:57Z",
+      "side": 1,
+      "message": "Should now just be:\n\n  mAttributeInfos[attribute-\u003eshaderLocation] \u003d *attribute;",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 156,
+        "endChar": 26
+      },
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bffac34_6ac3bb38",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T23:25:57Z",
+      "side": 1,
+      "message": "Same:\n\n  mInputInfos[input-\u003einputSlot] \u003d *input;",
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3203114_83a5ea68",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T23:25:57Z",
+      "side": 1,
+      "message": "This is set twice, first one is redundant.\n\nYou should test with offset \u003d kMaxVertexAttributeOffset (or whatever it\u0027s renamed to), though.",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 25
+      },
+      "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2cb919e_f5a288d5",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-21T23:25:57Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 92
       },
       "revId": "d54c113483741b1ffe20ec5537764dd057c35cd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
