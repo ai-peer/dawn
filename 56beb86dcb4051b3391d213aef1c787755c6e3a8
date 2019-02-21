@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3467544_c743bc52",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "This should always be the same as TextureFormatTexelSize so we don\u0027t need to duplicate it.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "162fdca6_a553c666",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "This is complicated code and really needs to be well commented so that other people working in this code know what\u0027s happening. Can we have a comment like the following:\n\n// The Metal validation device doesn\u0027t compute the correct range when checking if the buffer is big enough to contain the data for the whole copy. Instead of looking at the position of the last texet in the buffer, it computes the volumw of the 3D box with rowPitch * imageHeight * copySize.depth.\n// We work around this limitation by detecting when Metal would complain and copy the last image and row separately using tight sourceBytesPerRow or sourceBytesPerImage.\nuint32_t bytesPerImage \u003d ...\nbool needWorkaround \u003d buffer-\u003eGetSize() - offset \u003e\u003d bytesPerImage * size.depth\n\n// Do a single copy when the workaround isn\u0027t needed.\nif (!needWorkaround)",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3f40a0b_a050cccb",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "offset is only needed if we are doing the workaround.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69bd1c67_4bcff2ec",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "Please live a TODO to check for overflows.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e06cd534_a1d25477",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "no need for an else {} block since the good case has a break;",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b5451ca_31cf5ef4",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "Comment that this is doing all the copy except the last image.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ca31ce2_9b96f341",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "This comment would help more if it explained that it updated parameters to make them look like a copy of only the last image.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2ff3311_16a00176",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "nit: origin.z +\u003d ...",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7166ab3_92ad3b5c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "ditto comment.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e405a24c_13350cf3",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c73cb14_cc701c92",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "nit: origin.y +\u003d",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fea547dd_b4c8dd04",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "Explain that we can\u0027t use rowPitch and use the exact number of bytes copied instead.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90f0d35d_61a8b84f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-21T13:37:55Z",
+      "side": 1,
+      "message": "Same comments as above.",
+      "revId": "56beb86dcb4051b3391d213aef1c787755c6e3a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
