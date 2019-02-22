@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "94e23768_79152b66",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-02-22T00:45:18Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "c4b05c19_4aedf9c4",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "833952b8_6de62588",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 1
@@ -53,6 +71,24 @@
       "writtenOn": "2019-02-21T09:25:16Z",
       "side": 1,
       "message": "We also need to validate the offset alignment here and in B2T and T2B copies.",
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25acbca5_db472e06",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-02-22T00:45:18Z",
+      "side": 1,
+      "message": "You\u0027re right. But for B2T and T2B I\u0027d like to send other CL for it. Because their limitation are different. And I think several test case need to add to track the wrong offset case.",
+      "parentUuid": "833952b8_6de62588",
       "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -206,6 +242,30 @@
       "side": 1,
       "message": "@cwallez, I\u0027d probably be in favor of making it take void* eventually. But I don\u0027t think it\u0027s necessary in this patch.",
       "parentUuid": "4014da08_e499d522",
+      "range": {
+        "startLine": 31,
+        "startChar": 41,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "a65561f84ba4321a7a2358259a9a8bd0791e2f44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684bff97_9622fad5",
+        "filename": "src/tests/end2end/BasicTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-02-22T00:45:18Z",
+      "side": 1,
+      "message": "I support void* as a final solution. And I\u0027m Ok with the manual padding form as Kai\u0027s suggestion. Let me update the patch.",
+      "parentUuid": "3360b829_a9129a2e",
       "range": {
         "startLine": 31,
         "startChar": 41,
