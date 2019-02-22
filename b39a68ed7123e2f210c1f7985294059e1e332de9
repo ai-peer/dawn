@@ -1,0 +1,244 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa4552f4_739c5eab",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "ultra-nit: the Device is usually the first argument",
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "234b2ff9_cc5fa8bc",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "SGTM but we need to fix it to not use nullptr because the wire doesn\u0027t support it.",
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5821dd95_52d97f81",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "temporary code?",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 53
+      },
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b24eba34_d61ab51b",
+        "filename": "src/tests/unittests/wire/WireArgumentTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "Thanks, that\u0027s a correct test!",
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "592b646b_57d71875",
+        "filename": "src/tests/unittests/wire/WireArgumentTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "You can have a single buffer and do a copy from the buffer to itself.\n\nAlso the descriptor needs to be filled with valid data and in particular have nextInChain be nullptr.",
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef93fdea_31d770cf",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "No need to initialize with the default constructor since it already is the default ;)",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 96
+      },
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c4ec51b_a637f2e9",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "Can these defaults be set for all color attachments even the ones not used in the constructor so that users of ComboRenderPassDescriptor don\u0027t hit surprise uninitialized values when adding a new attachment after the constructor?",
+      "range": {
+        "startLine": 136,
+        "startChar": 51,
+        "endLine": 141,
+        "endChar": 98
+      },
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a460bcf2_96bd293a",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "Likewise can see be set irrespective for all values in colorAttachmentsInfoPtr?",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 65
+      },
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83fc319f_e888c862",
+        "filename": "src/utils/DawnHelpers.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "ditto, set the default unconditionally",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 77
+      },
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1c65f80_fa7d0be9",
+        "filename": "src/utils/DawnHelpers.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "For consistency with ComboRenderPipelineDescriptor can this directly inherit from dawn::RenderPassDescriptor instead of having it as a member?",
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57d6903e_cc470189",
+        "filename": "src/utils/DawnHelpers.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "This would become cColorAttachments",
+      "range": {
+        "startLine": 63,
+        "startChar": 51,
+        "endLine": 63,
+        "endChar": 74
+      },
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c218200_55edfd48",
+        "filename": "src/utils/DawnHelpers.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:58:41Z",
+      "side": 1,
+      "message": "This would become cDepthStencilAttachment",
+      "revId": "b39a68ed7123e2f210c1f7985294059e1e332de9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
