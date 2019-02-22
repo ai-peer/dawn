@@ -16,6 +16,24 @@
       "revId": "a9ccaa8c67178de16b53c8021d4baae4bb346c34",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d5d0277_fff10009",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-22T14:55:43Z",
+      "side": 1,
+      "message": "Done.\nI should have not deleted this code snippet at a patchset before. Thanks for your careful review, Corentin and Kai.",
+      "parentUuid": "2d104d99_615aa43d",
+      "revId": "a9ccaa8c67178de16b53c8021d4baae4bb346c34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
