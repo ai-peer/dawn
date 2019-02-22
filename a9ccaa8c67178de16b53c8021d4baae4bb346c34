@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d104d99_615aa43d",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T14:44:35Z",
+      "side": 1,
+      "message": "ultra-nit: put this check before we check \"attribute-\u003eoffset + VertexFormatSize(attribute-\u003eformat) \u003e kMaxVertexAttributeEnd\"",
+      "revId": "a9ccaa8c67178de16b53c8021d4baae4bb346c34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
