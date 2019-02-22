@@ -210,7 +210,7 @@ class PrimitiveTopologyTest : public DawnTest {
             static const uint32_t zeroOffset = 0;
             dawn::CommandEncoder encoder = device.CreateCommandEncoder();
             {
-                dawn::RenderPassEncoder pass = encoder.BeginRenderPass(renderPass.renderPassInfo);
+                dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo.desc);
                 pass.SetPipeline(pipeline);
                 pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
                 pass.Draw(6, 1, 0, 0);

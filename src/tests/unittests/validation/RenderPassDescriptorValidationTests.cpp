@@ -16,9 +16,28 @@
 
 #include "common/Constants.h"
 
+#include "utils/DawnHelpers.h"
+
 namespace {
 
 class RenderPassDescriptorValidationTest : public ValidationTest {
+  public:
+    void AssertBeginRenderPassSuccess(const dawn::RenderPassDescriptor* descriptor) {
+        dawn::CommandEncoder commandEncoder = TestBeginRenderPass(descriptor);
+        commandEncoder.Finish();
+    }
+    void AssertBeginRenderPassError(const dawn::RenderPassDescriptor* descriptor) {
+        dawn::CommandEncoder commandEncoder = TestBeginRenderPass(descriptor);
+        ASSERT_DEVICE_ERROR(commandEncoder.Finish());
+    }
+
+  private:
+    dawn::CommandEncoder TestBeginRenderPass(const dawn::RenderPassDescriptor* descriptor) {
+        dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+        dawn::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(descriptor);
+        renderPassEncoder.EndPass();
+        return commandEncoder;
+    }
 };
 
 dawn::Texture CreateTexture(dawn::Device& device,
@@ -51,10 +70,10 @@ dawn::TextureView Create2DAttachment(dawn::Device& device,
     return texture.CreateDefaultTextureView();
 }
 
-// A render pass with no attachments isn't valid
+// Using BeginRenderPass with no attachments isn't valid
 TEST_F(RenderPassDescriptorValidationTest, Empty) {
-    AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-        .GetResult();
+    utils::ComboRenderPassDescriptor renderPass({}, nullptr);
+    AssertBeginRenderPassError(&renderPass.desc);
 }
 
 // A render pass with only one color or one depth attachment is ok
@@ -62,30 +81,16 @@ TEST_F(RenderPassDescriptorValidationTest, OneAttachment) {
     // One color attachment
     {
         dawn::TextureView color = Create2DAttachment(device, 1, 1, dawn::TextureFormat::R8G8B8A8Unorm);
-        dawn::RenderPassColorAttachmentDescriptor colorAttachment;
-        colorAttachment.attachment = color;
-        colorAttachment.resolveTarget = nullptr;
-        colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
-        colorAttachment.loadOp = dawn::LoadOp::Clear;
-        colorAttachment.storeOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+        utils::ComboRenderPassDescriptor renderPass({color});
+
+        AssertBeginRenderPassSuccess(&renderPass.desc);
     }
     // One depth-stencil attachment
     {
         dawn::TextureView depthStencil = Create2DAttachment(device, 1, 1, dawn::TextureFormat::D32FloatS8Uint);
-        dawn::RenderPassDepthStencilAttachmentDescriptor depthStencilAttachment;
-        depthStencilAttachment.attachment = depthStencil;
-        depthStencilAttachment.depthLoadOp = dawn::LoadOp::Clear;
-        depthStencilAttachment.stencilLoadOp = dawn::LoadOp::Clear;
-        depthStencilAttachment.clearDepth = 1.0f;
-        depthStencilAttachment.clearStencil = 0;
-        depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
-        depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+        utils::ComboRenderPassDescriptor renderPass({}, depthStencil);
+
+        AssertBeginRenderPassSuccess(&renderPass.desc);
     }
 }
 
@@ -94,15 +99,8 @@ TEST_F(RenderPassDescriptorValidationTest, ColorAttachmentOutOfBounds) {
     // For setting the color attachment, control case
     {
         dawn::TextureView color = Create2DAttachment(device, 1, 1, dawn::TextureFormat::R8G8B8A8Unorm);
-        dawn::RenderPassColorAttachmentDescriptor colorAttachments[kMaxColorAttachments];
-        colorAttachments[kMaxColorAttachments - 1].attachment = color;
-        colorAttachments[kMaxColorAttachments - 1].resolveTarget = nullptr;
-        colorAttachments[kMaxColorAttachments - 1].clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
-        colorAttachments[kMaxColorAttachments - 1].loadOp = dawn::LoadOp::Clear;
-        colorAttachments[kMaxColorAttachments - 1].storeOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(kMaxColorAttachments, colorAttachments)
-            .GetResult();
+        utils::ComboRenderPassDescriptor renderPass({nullptr, nullptr, nullptr, color});
+        AssertBeginRenderPassSuccess(&renderPass.desc);
     }
     // For setting the color attachment, OOB
     {
@@ -113,9 +111,16 @@ TEST_F(RenderPassDescriptorValidationTest, ColorAttachmentOutOfBounds) {
         colorAttachments[kMaxColorAttachments].clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
         colorAttachments[kMaxColorAttachments].loadOp = dawn::LoadOp::Clear;
         colorAttachments[kMaxColorAttachments].storeOp = dawn::StoreOp::Store;
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(kMaxColorAttachments + 1, colorAttachments)
-            .GetResult();
+
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachmentInfo[] =
+            {nullptr, nullptr, nullptr, nullptr, &colorAttachments[kMaxColorAttachments]};
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = kMaxColorAttachments + 1;
+        renderPass.colorAttachments = colorAttachmentInfo;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 }
 
@@ -169,38 +174,39 @@ TEST_F(RenderPassDescriptorValidationTest, SizeMustMatch) {
 
     // Control case: all the same size (1x1)
     {
-        dawn::RenderPassColorAttachmentDescriptor colorAttachments[2];
-        colorAttachments[0] = colorAttachment1x1A;
-        colorAttachments[1] = colorAttachment1x1B;
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment1x1A,
+                                                                         &colorAttachment1x1B};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 2;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
 
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(2, colorAttachments)
-            .SetDepthStencilAttachment(&depthStencilAttachment1x1)
-            .GetResult();
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // One of the color attachments has a different size
     {
-        dawn::RenderPassColorAttachmentDescriptor colorAttachments[2];
-        colorAttachments[0] = colorAttachment1x1A;
-        colorAttachments[1] = colorAttachment2x2;
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment1x1A,
+                                                                         &colorAttachment2x2};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 2;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
 
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(2, colorAttachments)
-            .SetDepthStencilAttachment(&depthStencilAttachment1x1)
-            .GetResult();
+        AssertBeginRenderPassError(&renderPass);
     }
 
     // The depth stencil attachment has a different size
     {
-        dawn::RenderPassColorAttachmentDescriptor colorAttachments[2];
-        colorAttachments[0] = colorAttachment1x1A;
-        colorAttachments[1] = colorAttachment1x1B;
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment1x1A,
+                                                                         &colorAttachment1x1B};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 2;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = &depthStencilAttachment2x2;
 
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(2, colorAttachments)
-            .SetDepthStencilAttachment(&depthStencilAttachment2x2)
-            .GetResult();
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        AssertBeginRenderPassError(&renderPass);
     }
 }
 
@@ -218,9 +224,13 @@ TEST_F(RenderPassDescriptorValidationTest, FormatMismatch) {
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
 
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 
     // Using color for depth-stencil
@@ -233,9 +243,13 @@ TEST_F(RenderPassDescriptorValidationTest, FormatMismatch) {
         depthStencilAttachment.clearStencil = 0;
         depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
         depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 0;
+        renderPass.colorAttachments = nullptr;
+        renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 }
 
@@ -276,9 +290,13 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
 
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 
     // Using 2D array texture view with arrayLayerCount > 1 is not allowed for depth stencil
@@ -296,9 +314,13 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         depthStencilAttachment.clearStencil = 0;
         depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
         depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 0;
+        renderPass.colorAttachments = nullptr;
+        renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 
     // Using 2D array texture view that covers the first layer of the texture is OK for color
@@ -315,9 +337,14 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // Using 2D array texture view that covers the first layer is OK for depth stencil
@@ -337,9 +364,13 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         depthStencilAttachment.clearStencil = 0;
         depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
         depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 0;
+        renderPass.colorAttachments = nullptr;
+        renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // Using 2D array texture view that covers the last layer is OK for color
@@ -356,9 +387,14 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // Using 2D array texture view that covers the last layer is OK for depth stencil
@@ -378,9 +414,13 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLayerCountForColorAndDepth
         depthStencilAttachment.clearStencil = 0;
         depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
         depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 0;
+        renderPass.colorAttachments = nullptr;
+        renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 }
 
@@ -419,9 +459,14 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 
     // Using 2D texture view with mipLevelCount > 1 is not allowed for depth stencil
@@ -439,9 +484,13 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         depthStencilAttachment.clearStencil = 0;
         depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
         depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 0;
+        renderPass.colorAttachments = nullptr;
+        renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 
     // Using 2D texture view that covers the first level of the texture is OK for color
@@ -458,9 +507,14 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // Using 2D texture view that covers the first level is OK for depth stencil
@@ -480,9 +534,13 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         depthStencilAttachment.clearStencil = 0;
         depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
         depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 0;
+        renderPass.colorAttachments = nullptr;
+        renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // Using 2D texture view that covers the last level is OK for color
@@ -499,9 +557,14 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 
     // Using 2D texture view that covers the last level is OK for depth stencil
@@ -521,9 +584,13 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
         depthStencilAttachment.clearStencil = 0;
         depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
         depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
-        AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
-            .SetDepthStencilAttachment(&depthStencilAttachment)
-            .GetResult();
+
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 0;
+        renderPass.colorAttachments = nullptr;
+        renderPass.depthStencilAttachment = &depthStencilAttachment;
+
+        AssertBeginRenderPassSuccess(&renderPass);
     }
 }
 
@@ -553,9 +620,14 @@ TEST_F(RenderPassDescriptorValidationTest, ResolveTarget) {
         colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
         colorAttachment.loadOp = dawn::LoadOp::Clear;
         colorAttachment.storeOp = dawn::StoreOp::Store;
-        AssertWillBeError(device.CreateRenderPassDescriptorBuilder())
-            .SetColorAttachments(1, &colorAttachment)
-            .GetResult();
+
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachments[] = {&colorAttachment};
+        dawn::RenderPassDescriptor renderPass;
+        renderPass.colorAttachmentCount = 1;
+        renderPass.colorAttachments = colorAttachments;
+        renderPass.depthStencilAttachment = nullptr;
+
+        AssertBeginRenderPassError(&renderPass);
     }
 }
 

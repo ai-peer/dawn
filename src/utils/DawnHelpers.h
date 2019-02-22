@@ -17,7 +17,10 @@
 
 #include <dawn/dawncpp.h>
 
+#include <array>
 #include <initializer_list>
+
+#include "common/Constants.h"
 
 namespace utils {
 
@@ -49,13 +52,34 @@ namespace utils {
                                                 uint32_t slice,
                                                 dawn::Origin3D origin);
 
+    class ComboRenderPassDescriptor {
+      public:
+        ComboRenderPassDescriptor(std::initializer_list<dawn::TextureView> colorAttachments,
+                                  dawn::TextureView depthStencil = dawn::TextureView());
+        const ComboRenderPassDescriptor& operator=(const ComboRenderPassDescriptor& otherRenderPass);
+
+        dawn::RenderPassDescriptor desc;
+        dawn::RenderPassColorAttachmentDescriptor* colorAttachmentsInfoPtr[kMaxColorAttachments];
+        dawn::RenderPassDepthStencilAttachmentDescriptor depthStencilAttachmentInfo;
+
+      private:
+        std::array<dawn::RenderPassColorAttachmentDescriptor, kMaxColorAttachments>
+            mColorAttachmentsInfo;
+    };
+
     struct BasicRenderPass {
+      public:
+        BasicRenderPass();
+        BasicRenderPass(uint32_t width, uint32_t height, dawn::Texture color,
+                        dawn::TextureFormat texture);
+
         uint32_t width;
         uint32_t height;
         dawn::Texture color;
         dawn::TextureFormat colorFormat;
-        dawn::RenderPassDescriptor renderPassInfo;
+        utils::ComboRenderPassDescriptor renderPassInfo;
     };
+
     BasicRenderPass CreateBasicRenderPass(const dawn::Device& device,
                                           uint32_t width,
                                           uint32_t height);
