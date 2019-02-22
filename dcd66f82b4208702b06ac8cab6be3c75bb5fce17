@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cf7e5719_ef7d1c25",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d8925ee_e4330c45",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f9ea76b_ba7e1a95",
         "filename": "examples/SampleUtils.h",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89fe8547_1824c671",
+        "filename": "examples/SampleUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f9ea76b_ba7e1a95",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "adb747db_a0aa338d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a039e64f_d09e17bb",
+      "range": {
+        "startLine": 172,
+        "startChar": 19,
+        "endLine": 172,
+        "endChar": 24
+      },
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba6cf63a_41e4d7f5",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 6
@@ -73,6 +133,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f6733bc_42d1ca2d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba6cf63a_41e4d7f5",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "cd7a885a_2f46d506",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "738290b0_205e59fd",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ae1d915_7d758060",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 6
@@ -107,6 +203,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff56de20_692f34d6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ae1d915_7d758060",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "44fa2a17_b834bf6e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "350003df_25fd9956",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "208ddd7c_9bdad63f",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 6
@@ -138,6 +270,24 @@
       "writtenOn": "2019-02-21T13:24:16Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00d46d4b_fcbe9d70",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "renderPass-\u003ecolorAttachments is an array of pointers to RenderPassColorAttachmentDescriptor, so there could be nullptr in renderPass-\u003ecolorAttachments.\n\nFor example:\nRenderPassDescriptorValidationTest/ColorAttachmentOutOfBounds",
+      "parentUuid": "208ddd7c_9bdad63f",
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -167,6 +317,30 @@
     },
     {
       "key": {
+        "uuid": "ddc3893a_cf8f75dd",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "993d5d12_2ee9f720",
+      "range": {
+        "startLine": 484,
+        "startChar": 19,
+        "endLine": 484,
+        "endChar": 26
+      },
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35acb315_d3c1a023",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 6
@@ -178,6 +352,24 @@
       "writtenOn": "2019-02-21T13:24:16Z",
       "side": 1,
       "message": "This should never be the case because colorAttachments isn\u0027t marked as optional in dawn.json. In the group we are still discussing exactly how color attachment indices will be provided.",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "736fa600_51b12735",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "renderPass-\u003ecolorAttachments is an array of pointers to RenderPassColorAttachmentDescriptor, so there could be nullptr in renderPass-\u003ecolorAttachments.\n\nFor example:\nRenderPassDescriptorValidationTest/ColorAttachmentOutOfBounds",
+      "parentUuid": "35acb315_d3c1a023",
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -201,6 +393,24 @@
     },
     {
       "key": {
+        "uuid": "08e22546_424eb3a7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0166039_52462601",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef0600f6_6535d36c",
         "filename": "src/tests/end2end/ColorStateTests.cpp",
         "patchSetId": 6
@@ -215,6 +425,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3de6f9d7_15128e4c",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef0600f6_6535d36c",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -235,6 +463,24 @@
     },
     {
       "key": {
+        "uuid": "85a5367d_3ae4e774",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "714368ad_7dd7abce",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9f17e74_f399ef11",
         "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
         "patchSetId": 6
@@ -249,6 +495,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c50fdb4e_f4557de5",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9f17e74_f399ef11",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -269,6 +533,24 @@
     },
     {
       "key": {
+        "uuid": "50ff09c9_32bcc683",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f9a7ae9_12bc728e",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbe2df29_55c2497b",
         "filename": "src/tests/end2end/RenderPassLoadOpTests.cpp",
         "patchSetId": 6
@@ -283,6 +565,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38f01a9b_b47a7190",
+        "filename": "src/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbe2df29_55c2497b",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -303,6 +603,24 @@
     },
     {
       "key": {
+        "uuid": "961d504f_9dd12d6d",
+        "filename": "src/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b07483f_ada31b79",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d70f6f89_c56089b7",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 6
@@ -317,6 +635,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddb7daa6_b7874ca3",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d70f6f89_c56089b7",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -343,6 +679,30 @@
     },
     {
       "key": {
+        "uuid": "5801d3d0_3efc208f",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5606694a_99d15b63",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 78
+      },
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a8a13a_4e6f7aef",
         "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
         "patchSetId": 6
@@ -357,6 +717,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94d34e32_c057e5ea",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a8a13a_4e6f7aef",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -377,6 +755,24 @@
     },
     {
       "key": {
+        "uuid": "8f7af681_4488fcf8",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6619cd3_22cd2b41",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8cf469c2_0e5b463b",
         "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
         "patchSetId": 6
@@ -391,6 +787,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bda2d317_a0599e3d",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cf469c2_0e5b463b",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -411,6 +825,24 @@
     },
     {
       "key": {
+        "uuid": "3705f49e_c855f7cd",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bb76366_4fb410a4",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93e5eb1c_9f3da36e",
         "filename": "src/tests/unittests/validation/ValidationTest.h",
         "patchSetId": 6
@@ -425,6 +857,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68be694d_f0a473e3",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93e5eb1c_9f3da36e",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -445,6 +895,24 @@
     },
     {
       "key": {
+        "uuid": "33217c19_bf526fad",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "893137d5_8324b9a4",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c85cc862_7d8aef40",
         "filename": "src/utils/DawnHelpers.h",
         "patchSetId": 6
@@ -459,6 +927,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7628cf67_2f9125d6",
+        "filename": "src/utils/DawnHelpers.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-22T14:18:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c85cc862_7d8aef40",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
