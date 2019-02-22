@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a8008b65_ed121be8",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-02-22T08:41:43Z",
+      "side": 1,
+      "message": "Will add it!",
+      "parentUuid": "b2425cd7_769f0e40",
+      "revId": "8a71d9688437dcdf3ed63fcbaa7bc4ea47f3f809",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "210ef5c7_d0e0c56f",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "c6e73ff3_2cc39995",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-02-22T08:41:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8b63733f_f64bbe40",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 65
+      },
+      "revId": "8a71d9688437dcdf3ed63fcbaa7bc4ea47f3f809",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "678bcaaa_4302a3d7",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 4
@@ -79,6 +121,30 @@
       "revId": "8a71d9688437dcdf3ed63fcbaa7bc4ea47f3f809",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92079439_5d87e576",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-02-22T08:41:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "678bcaaa_4302a3d7",
+      "range": {
+        "startLine": 154,
+        "startChar": 47,
+        "endLine": 154,
+        "endChar": 49
+      },
+      "revId": "8a71d9688437dcdf3ed63fcbaa7bc4ea47f3f809",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
