@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b609391_ca5ea206",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T10:18:25Z",
+      "side": 1,
+      "message": "nit: might be",
+      "range": {
+        "startLine": 26,
+        "startChar": 31,
+        "endLine": 26,
+        "endChar": 37
+      },
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e576051e_cf43ecd8",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T10:18:25Z",
+      "side": 1,
+      "message": "To avoid integer overflows if someone passes an offset with UINT_MAX value, we should check that attribute-\u003eoffset \u003c kMaxVertexAttributeEnd too.",
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dc9b2f6_38cbc3b2",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T10:18:25Z",
+      "side": 1,
+      "message": "nit: out of bounds",
+      "range": {
+        "startLine": 139,
+        "startChar": 50,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07b3301e_1014f851",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T10:18:25Z",
+      "side": 1,
+      "message": "nit: OutOfBounds. We need to make the distinction between OOB where the value is too big, and overflow where arithmetic operations in the validation could have integer overflow, leading validation to wrongly pass.",
+      "range": {
+        "startLine": 223,
+        "startChar": 41,
+        "endLine": 223,
+        "endChar": 48
+      },
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81376828_c123c975",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T10:18:25Z",
+      "side": 1,
+      "message": "Optionally we could have a test case for offset overflow where it has value std::numeric_limits\u003cuint32_t\u003e::max();",
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
