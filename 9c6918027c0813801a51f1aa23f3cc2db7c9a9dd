@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "118bc080_d1b9ae0d",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T13:24:06Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t explain this clearly enough. If offset is 0xFFFFFFFF and VertexFormatSize is say 4, then the some of the two is actually the number 3, which would pass validation even if the offset is way too large. We need to check for integer overflow here.\n\nThe new test passes right now because you VertexFormatSize returns size_t and you are compiling in 64bit. It would fail when compiled with 32bits.",
+      "parentUuid": "3463ee63_fa9a089d",
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0dc9b2f6_38cbc3b2",
         "filename": "src/dawn_native/InputState.cpp",
         "patchSetId": 6
