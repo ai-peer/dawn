@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "b2425cd7_769f0e40",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-22T07:23:24Z",
+      "side": 1,
+      "message": "Oh, is there a test for this?",
+      "revId": "8a71d9688437dcdf3ed63fcbaa7bc4ea47f3f809",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "210ef5c7_d0e0c56f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-22T07:23:24Z",
+      "side": 1,
+      "message": "Are there test cases for these?",
+      "revId": "8a71d9688437dcdf3ed63fcbaa7bc4ea47f3f809",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8b63733f_f64bbe40",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
