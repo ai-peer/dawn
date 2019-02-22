@@ -37,6 +37,29 @@
     },
     {
       "key": {
+        "uuid": "219b722b_4e1dff04",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-22T10:10:14Z",
+      "side": 1,
+      "message": "nit: add B2B in the name otherwise it looks like it could be for copies involving textures too.",
+      "range": {
+        "startLine": 79,
+        "startChar": 27,
+        "endLine": 79,
+        "endChar": 31
+      },
+      "revId": "8a71d9688437dcdf3ed63fcbaa7bc4ea47f3f809",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "210ef5c7_d0e0c56f",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
