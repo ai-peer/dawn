@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5da52a92_ba068f51",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-22T12:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b609391_ca5ea206",
+      "range": {
+        "startLine": 26,
+        "startChar": 31,
+        "endLine": 26,
+        "endChar": 37
+      },
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e576051e_cf43ecd8",
         "filename": "src/dawn_native/InputState.cpp",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3463ee63_fa9a089d",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-22T12:50:51Z",
+      "side": 1,
+      "message": "If attribute-\u003eoffset \u003e\u003d kMaxVertexAttributeEnd, then attribute-\u003eoffset + VertexFormatSize (vertex-\u003eformat) is definitely greater than kMaxVertexAttributeEnd. So that situation should be 100% caught by the validation code here.",
+      "parentUuid": "e576051e_cf43ecd8",
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "80f237dd_afc0d728",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-22T12:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dc9b2f6_38cbc3b2",
+      "range": {
+        "startLine": 139,
+        "startChar": 50,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07b3301e_1014f851",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 6
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "a0f780e9_edf38b72",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-22T12:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07b3301e_1014f851",
+      "range": {
+        "startLine": 223,
+        "startChar": 41,
+        "endLine": 223,
+        "endChar": 48
+      },
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81376828_c123c975",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 6
@@ -102,6 +192,24 @@
       "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a79570da_26ca34e0",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-22T12:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81376828_c123c975",
+      "revId": "9c6918027c0813801a51f1aa23f3cc2db7c9a9dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
