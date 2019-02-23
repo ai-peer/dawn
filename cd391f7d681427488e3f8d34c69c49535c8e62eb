@@ -22,6 +22,29 @@
       "revId": "cd391f7d681427488e3f8d34c69c49535c8e62eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69c35248_04c65d7f",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-23T15:59:58Z",
+      "side": 1,
+      "message": "VertexFormatSize will access to the vertex format. So a invalid format might lead to bad things (see the \"default\" switch) because we didn\u0027t validate the format. Previously (before https://dawn-review.googlesource.com/c/dawn/+/4901 was applied), an invalid format may fall to driver, and driver can catch that.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 95
+      },
+      "revId": "cd391f7d681427488e3f8d34c69c49535c8e62eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
