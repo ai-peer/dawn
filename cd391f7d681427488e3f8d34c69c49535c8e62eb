@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efd385ce_dcee2252",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-23T15:52:23Z",
+      "side": 1,
+      "message": "This is a quick fix. We have a template function named ValidateVertexFormat(attribute-\u003eformat) to do validation, but its return type doesn\u0027t fit InputStateBuilder::SetAttribute. So I defined this one.\n\nI have a patch to replace input state builder with a descriptor. It might be ready next week. Then all these validation code will be moved to RenderPipeline, including this quick fix.\n\nFeel free to submit another fix if this is not good or revert the original patch at https://dawn-review.googlesource.com/c/dawn/+/4901 if needed.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 54
+      },
+      "revId": "cd391f7d681427488e3f8d34c69c49535c8e62eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
