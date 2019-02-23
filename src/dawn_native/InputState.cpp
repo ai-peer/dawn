@@ -32,6 +32,26 @@ namespace dawn_native {
         }
     }
 
+    bool VertexFormatIsValid(dawn::VertexFormat format) {
+        switch (format) {
+            case dawn::VertexFormat::FloatR32G32B32A32:
+            case dawn::VertexFormat::IntR32G32B32A32:
+            case dawn::VertexFormat::UshortR16G16B16A16:
+            case dawn::VertexFormat::UnormR8G8B8A8:
+            case dawn::VertexFormat::FloatR32G32B32:
+            case dawn::VertexFormat::IntR32G32B32:
+            case dawn::VertexFormat::FloatR32G32:
+            case dawn::VertexFormat::IntR32G32:
+            case dawn::VertexFormat::UshortR16G16:
+            case dawn::VertexFormat::UnormR8G8:
+            case dawn::VertexFormat::FloatR32:
+            case dawn::VertexFormat::IntR32:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     uint32_t VertexFormatNumComponents(dawn::VertexFormat format) {
         switch (format) {
             case dawn::VertexFormat::FloatR32G32B32A32:
@@ -133,6 +153,10 @@ namespace dawn_native {
         }
         if (attribute->inputSlot >= kMaxVertexInputs) {
             HandleError("Binding slot out of bounds");
+            return;
+        }
+        if (!VertexFormatIsValid(attribute->format)) {
+            HandleError("Setting attribute vertex format invalid");
             return;
         }
         // If attribute->offset is close to 0xFFFFFFFF, the validation below to add

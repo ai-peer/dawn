@@ -28,6 +28,7 @@
 namespace dawn_native {
 
     size_t IndexFormatSize(dawn::IndexFormat format);
+    bool VertexFormatIsValid(dawn::VertexFormat format);
     uint32_t VertexFormatNumComponents(dawn::VertexFormat format);
     size_t VertexFormatComponentSize(dawn::VertexFormat format);
     size_t VertexFormatSize(dawn::VertexFormat format);
