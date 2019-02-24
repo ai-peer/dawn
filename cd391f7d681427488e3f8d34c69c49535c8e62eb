@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d9f68cd7_78d151c2",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-24T15:22:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "584ebe09_cc41dea1",
+      "revId": "cd391f7d681427488e3f8d34c69c49535c8e62eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "efd385ce_dcee2252",
         "filename": "src/dawn_native/InputState.cpp",
         "patchSetId": 2
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "0d9a9df7_75ee945b",
+        "filename": "src/dawn_native/InputState.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-24T15:22:25Z",
+      "side": 1,
+      "message": "Done. I should have noticed this validation in the previous patch...",
+      "parentUuid": "fbbf58e4_0f60b769",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 54
+      },
+      "revId": "cd391f7d681427488e3f8d34c69c49535c8e62eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c35248_04c65d7f",
         "filename": "src/dawn_native/InputState.cpp",
         "patchSetId": 2
@@ -103,6 +145,24 @@
       "revId": "cd391f7d681427488e3f8d34c69c49535c8e62eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c12b0a2a_5b2b515a",
+        "filename": "src/dawn_native/InputState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-24T15:22:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9886a9f2_c63c11b9",
+      "revId": "cd391f7d681427488e3f8d34c69c49535c8e62eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
