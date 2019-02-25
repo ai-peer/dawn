@@ -23,7 +23,6 @@
 #include "dawn_native/ComputePassEncoder.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
-#include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 
@@ -165,6 +164,118 @@ namespace dawn_native {
             ASSERT(HasZeroOrOneBits(usage));
             if (!(texture->GetUsage() & usage)) {
                 return DAWN_VALIDATION_ERROR("texture doesn't have the required usage.");
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateAttachmentArrayLayersAndLevelCount(const TextureViewBase* attachment) {
+            // Currently we do not support layered rendering.
+            if (attachment->GetLayerCount() > 1) {
+                return DAWN_VALIDATION_ERROR(
+                    "The layer count of the texture view used as attachment cannot be greater than"
+                    "1");
+            }
+
+            if (attachment->GetLevelCount() > 1) {
+                return DAWN_VALIDATION_ERROR(
+                    "The mipmap level count of the texture view used as attachment cannot be"
+                    "greater than 1");
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateOrSetAttachmentSize(const TextureViewBase* attachment,
+                                               uint32_t* width,
+                                               uint32_t* height) {
+            const Extent3D& textureSize = attachment->GetTexture()->GetSize();
+            const uint32_t attachmentWidth = textureSize.width >> attachment->GetBaseMipLevel();
+            const uint32_t attachmentHeight = textureSize.height >> attachment->GetBaseMipLevel();
+
+            if (*width == 0) {
+                DAWN_ASSERT(*height == 0);
+                *width = attachmentWidth;
+                *height = attachmentHeight;
+                DAWN_ASSERT(*width != 0 && *height != 0);
+            } else if (*width != attachmentWidth || *height != attachmentHeight) {
+                return DAWN_VALIDATION_ERROR("Attachment size mismatch");
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateRenderPassColorAttachment(
+            const DeviceBase* device,
+            const RenderPassColorAttachmentDescriptor* colorAttachment,
+            uint32_t* width,
+            uint32_t* height) {
+            DAWN_ASSERT(colorAttachment != nullptr);
+
+            DAWN_TRY(device->ValidateObject(colorAttachment->attachment));
+
+            // TODO(jiawei.shao@intel.com): support resolve target for multisample color attachment.
+            if (colorAttachment->resolveTarget != nullptr) {
+                return DAWN_VALIDATION_ERROR("Resolve target is not supported now");
+            }
+
+            const TextureViewBase* attachment = colorAttachment->attachment;
+            if (!IsColorRenderableTextureFormat(attachment->GetFormat())) {
+                return DAWN_VALIDATION_ERROR(
+                    "The format of the texture view used as color attachment is not color"
+                    "renderable");
+            }
+
+            DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
+            DAWN_TRY(ValidateOrSetAttachmentSize(attachment, width, height));
+
+            return {};
+        }
+
+        MaybeError ValidateRenderPassDepthStencilAttachment(
+            const DeviceBase* device,
+            const RenderPassDepthStencilAttachmentDescriptor* depthStencilAttachment,
+            uint32_t* width,
+            uint32_t* height) {
+            DAWN_ASSERT(depthStencilAttachment != nullptr);
+
+            DAWN_TRY(device->ValidateObject(depthStencilAttachment->attachment));
+
+            const TextureViewBase* attachment = depthStencilAttachment->attachment;
+            if (!TextureFormatHasDepthOrStencil(attachment->GetFormat())) {
+                return DAWN_VALIDATION_ERROR(
+                    "The format of the texture view used as depth stencil attachment is not a"
+                    "depth stencil format");
+            }
+
+            DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
+            DAWN_TRY(ValidateOrSetAttachmentSize(attachment, width, height));
+
+            return {};
+        }
+
+        MaybeError ValidateRenderPassDescriptorAndSetSize(const DeviceBase* device,
+                                                          const RenderPassDescriptor* renderPass,                                                         
+                                                          uint32_t* width,
+                                                          uint32_t* height) {
+            if (renderPass->colorAttachmentCount > kMaxColorAttachments) {
+                return DAWN_VALIDATION_ERROR("Setting color attachments out of bounds");
+            }
+
+            for (uint32_t i = 0; i < renderPass->colorAttachmentCount; ++i) {
+                DAWN_TRY(ValidateRenderPassColorAttachment(device, renderPass->colorAttachments[i],
+                                                           width, height));
+            }
+
+            if (renderPass->depthStencilAttachment) {
+                DAWN_TRY(
+                    ValidateRenderPassDepthStencilAttachment(device,
+                                                             renderPass->depthStencilAttachment,
+                                                             width, height));
+            }
+
+            if (renderPass->colorAttachmentCount == 0 && renderPass->depthStencilAttachment == nullptr) {
+                return DAWN_VALIDATION_ERROR("Cannot use render pass with no attachments.");
             }
 
             return {};
@@ -361,38 +472,51 @@ namespace dawn_native {
         return new ComputePassEncoderBase(GetDevice(), this, &mAllocator);
     }
 
-    RenderPassEncoderBase* CommandEncoderBase::BeginRenderPass(RenderPassDescriptorBase* info) {
+    RenderPassEncoderBase* CommandEncoderBase::BeginRenderPass(const RenderPassDescriptor* info) {
         if (ConsumedError(ValidateCanRecordTopLevelCommands())) {
-            return nullptr;
+            mEncodingState = EncodingState::RenderPass;
+            return new RenderPassEncoderBase(GetDevice(), this, &mAllocator);
         }
 
-        if (info == nullptr) {
-            HandleError("RenderPassDescriptor cannot be null");
-            return nullptr;
+        mEncodingState = EncodingState::RenderPass;
+
+        uint32_t width = 0;
+        uint32_t height = 0;
+        const DeviceBase* device = GetDevice();
+        if (ConsumedError(ValidateRenderPassDescriptorAndSetSize(device, info, &width, &height))) {
+            return new RenderPassEncoderBase(GetDevice(), this, &mAllocator);
         }
 
         BeginRenderPassCmd* cmd = mAllocator.Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
         new (cmd) BeginRenderPassCmd;
 
-        for (uint32_t i : IterateBitSet(info->GetColorAttachmentMask())) {
-            const RenderPassColorAttachmentInfo& colorAttachment = info->GetColorAttachment(i);
-            if (colorAttachment.view.Get() != nullptr) {
+        for (uint32_t i = 0; i < info->colorAttachmentCount; ++i) {
+            if (info->colorAttachments[i] != nullptr) {
                 cmd->colorAttachmentsSet.set(i);
-                cmd->colorAttachments[i] = colorAttachment;
+                cmd->colorAttachments[i].view = info->colorAttachments[i]->attachment;
+                cmd->colorAttachments[i].resolveTarget = info->colorAttachments[i]->resolveTarget;
+                cmd->colorAttachments[i].loadOp = info->colorAttachments[i]->loadOp;
+                cmd->colorAttachments[i].storeOp = info->colorAttachments[i]->storeOp;
+                cmd->colorAttachments[i].clearColor = info->colorAttachments[i]->clearColor;
             }
         }
 
-        cmd->hasDepthStencilAttachment = info->HasDepthStencilAttachment();
+        cmd->hasDepthStencilAttachment = info->depthStencilAttachment != nullptr;
         if (cmd->hasDepthStencilAttachment) {
-            const RenderPassDepthStencilAttachmentInfo& depthStencilAttachment =
-                info->GetDepthStencilAttachment();
-            cmd->depthStencilAttachment = depthStencilAttachment;
+            cmd->hasDepthStencilAttachment = true;
+            cmd->depthStencilAttachment.view = info->depthStencilAttachment->attachment;
+            cmd->depthStencilAttachment.clearDepth = info->depthStencilAttachment->clearDepth;
+            cmd->depthStencilAttachment.clearStencil = info->depthStencilAttachment->clearStencil;
+            cmd->depthStencilAttachment.depthLoadOp = info->depthStencilAttachment->depthLoadOp;
+            cmd->depthStencilAttachment.depthStoreOp = info->depthStencilAttachment->depthStoreOp;
+            cmd->depthStencilAttachment.stencilLoadOp = info->depthStencilAttachment->stencilLoadOp;
+            cmd->depthStencilAttachment.stencilStoreOp =
+                info->depthStencilAttachment->stencilStoreOp;
         }
 
-        cmd->width = info->GetWidth();
-        cmd->height = info->GetHeight();
+        cmd->width = width;
+        cmd->height = height;
 
-        mEncodingState = EncodingState::RenderPass;
         return new RenderPassEncoderBase(GetDevice(), this, &mAllocator);
     }
 
