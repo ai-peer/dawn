@@ -312,6 +312,24 @@
     },
     {
       "key": {
+        "uuid": "39ec8911_082947ce",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-25T02:25:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d501b80_6d71a714",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "993d5d12_2ee9f720",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 6
@@ -391,6 +409,24 @@
       "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79fc9900_796e5b32",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-25T02:25:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "736fa600_51b12735",
+      "revId": "dcd66f82b4208702b06ac8cab6be3c75bb5fce17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
