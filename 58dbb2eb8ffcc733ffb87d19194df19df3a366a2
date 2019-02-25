@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "736650c0_45d135eb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-25T08:56:50Z",
+      "side": 1,
+      "message": "nit: !\u003d nullptr",
+      "revId": "58dbb2eb8ffcc733ffb87d19194df19df3a366a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
