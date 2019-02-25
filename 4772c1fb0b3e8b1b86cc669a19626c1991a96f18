@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53f440c1_f3353b8a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-25T09:04:31Z",
+      "side": 1,
+      "message": "This comment will need some formatting to stay under 100 characters per line.",
+      "revId": "4772c1fb0b3e8b1b86cc669a19626c1991a96f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81d9c3d1_324251a9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-25T09:04:31Z",
+      "side": 1,
+      "message": "I think A will be here. Otherwise the last row is incomplete.",
+      "range": {
+        "startLine": 275,
+        "startChar": 34,
+        "endLine": 275,
+        "endChar": 35
+      },
+      "revId": "4772c1fb0b3e8b1b86cc669a19626c1991a96f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10c48913_795369c0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-25T09:04:31Z",
+      "side": 1,
+      "message": "That shouldn\u0027t be relevant since we have validation for the buffer alignment. We\u0027re just checking the buffer is big enough.",
+      "range": {
+        "startLine": 283,
+        "startChar": 52,
+        "endLine": 283,
+        "endChar": 61
+      },
+      "revId": "4772c1fb0b3e8b1b86cc669a19626c1991a96f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
