@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a42f11e0_509a9eff",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-25T08:48:02Z",
+      "side": 1,
+      "message": "Unaligned, same thing in the newly introduced test names and other comments.",
+      "range": {
+        "startLine": 475,
+        "startChar": 24,
+        "endLine": 475,
+        "endChar": 32
+      },
+      "revId": "8d8979c0f97bfa3647149f6815b5d685f3f849bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
