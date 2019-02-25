@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2816464f_60710485",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-02-25T17:45:35Z",
+      "side": 1,
+      "message": "nit: I think this loop is fine, but you could use a reverse iterator if you want to keep using std::find_if",
+      "revId": "18e579492eadb6df731ac9deeef5f1a8b8eb99ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
