@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b941fc2_7cdc15d4",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-26T22:38:24Z",
+      "side": 1,
+      "message": "uNit: elsewhere we have 0x instead of 0X",
+      "range": {
+        "startLine": 438,
+        "startChar": 19,
+        "endLine": 438,
+        "endChar": 21
+      },
+      "revId": "8b57a6bfb5f80084bf6e625a32b71da256982a06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eea7a47b_1080edfa",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-26T22:38:24Z",
+      "side": 1,
+      "message": "uNit: extra blank line?",
+      "revId": "8b57a6bfb5f80084bf6e625a32b71da256982a06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
