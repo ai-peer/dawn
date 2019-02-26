@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8cf1295a_836ecddd",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-26T21:48:01Z",
+      "side": 1,
+      "message": "Needs a space at the end of the first string (otherwise ends up as \"... than1\").\n\nSame for strings below.",
+      "revId": "dbb443a3308ba54a909dc6695b5b573c2275e5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7e107fa_041bb0b8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-26T21:48:01Z",
+      "side": 1,
+      "message": "This render pass encoder object should be in \"invalid\" state, right? Does it get set that way somehow?\n\nIf this line is correct, it\u0027s duplicate with the one at the end. How about something like this:\n\n  mEncodingState \u003d EncodingState::RenderPass;\n  if (!ConsumedError(...)) {\n    // ...\n  }\n  return new ...;",
+      "revId": "dbb443a3308ba54a909dc6695b5b573c2275e5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
