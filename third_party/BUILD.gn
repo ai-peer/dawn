@@ -232,6 +232,7 @@ static_library("glfw") {
     cflags_c = [
       "-Wno-sign-compare",
       "-Wno-missing-field-initializers",
+      "-Wextra-semi"
     ]
   }
 
