@@ -156,12 +156,6 @@ namespace dawn_native { namespace d3d12 {
         }
     };
 
-    struct OMSetRenderTargetArgs {
-        unsigned int numRTVs = 0;
-        std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> RTVs = {};
-        D3D12_CPU_DESCRIPTOR_HANDLE dsv = {};
-    };
-
     class RenderPassDescriptorHeapTracker {
       public:
         RenderPassDescriptorHeapTracker(Device* device) : mDevice(device) {
@@ -595,12 +589,91 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    void CommandBuffer::RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
-                                         BindGroupStateTracker* bindingTracker,
-                                         RenderPassDescriptorHeapTracker* renderPassTracker,
-                                         BeginRenderPassCmd* renderPass) {
-        OMSetRenderTargetArgs args = renderPassTracker->GetSubpassOMSetRenderTargetArgs(renderPass);
+    void CommandBuffer::SetupNativeRenderPass(ComPtr<ID3D12GraphicsCommandList4> commandList,
+                                              BeginRenderPassCmd* renderPass,
+                                              OMSetRenderTargetArgs* args) {
+        std::vector<D3D12_RENDER_PASS_RENDER_TARGET_DESC> renderPassRenderTargetDescriptors;
+        // Clear framebuffer attachments as needed
+        for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
+            RenderPassColorAttachmentInfo& attachmentInfo = renderPass->colorAttachments[i];
+            Texture* texture = ToBackend(attachmentInfo.view->GetTexture());
 
+            D3D12_RENDER_PASS_RENDER_TARGET_DESC renderPassRenderTargetDesc;
+            renderPassRenderTargetDesc.cpuDescriptor = args->RTVs[i];
+
+            // Load op - color
+            if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
+                renderPassRenderTargetDesc.BeginningAccess.Type =
+                    D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR;
+                renderPassRenderTargetDesc.BeginningAccess.Clear.ClearValue.Format =
+                    D3D12TextureFormat(texture->GetFormat());
+                renderPassRenderTargetDesc.BeginningAccess.Clear.ClearValue.Color[0] =
+                    attachmentInfo.clearColor.r;
+                renderPassRenderTargetDesc.BeginningAccess.Clear.ClearValue.Color[1] =
+                    attachmentInfo.clearColor.g;
+                renderPassRenderTargetDesc.BeginningAccess.Clear.ClearValue.Color[2] =
+                    attachmentInfo.clearColor.b;
+                renderPassRenderTargetDesc.BeginningAccess.Clear.ClearValue.Color[3] =
+                    attachmentInfo.clearColor.a;
+
+                renderPassRenderTargetDesc.EndingAccess.Type =
+                    D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE;
+            }
+
+            renderPassRenderTargetDescriptors.push_back(renderPassRenderTargetDesc);
+        }
+
+        D3D12_RENDER_PASS_DEPTH_STENCIL_DESC renderPassDepthStencilDesc;
+
+        if (renderPass->hasDepthStencilAttachment) {
+            RenderPassDepthStencilAttachmentInfo& attachmentInfo =
+                renderPass->depthStencilAttachment;
+            Texture* texture = ToBackend(attachmentInfo.view->GetTexture());
+
+            renderPassDepthStencilDesc.cpuDescriptor = args->dsv;
+
+            // Load op - depth
+            if (TextureFormatHasDepth(texture->GetFormat()) &&
+                (attachmentInfo.depthLoadOp == dawn::LoadOp::Clear)) {
+                D3D12_RENDER_PASS_BEGINNING_ACCESS DepthBeginningAccess;
+
+                DepthBeginningAccess.Type = D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR;
+                DepthBeginningAccess.Clear.ClearValue.Format =
+                    D3D12TextureFormat(texture->GetFormat());
+                DepthBeginningAccess.Clear.ClearValue.DepthStencil.Depth =
+                    attachmentInfo.clearDepth;
+
+                renderPassDepthStencilDesc.DepthBeginningAccess = DepthBeginningAccess;
+                renderPassDepthStencilDesc.DepthEndingAccess.Type =
+                    D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE;
+            }
+
+            // Load op - stencil
+            if (TextureFormatHasStencil(texture->GetFormat()) &&
+                (attachmentInfo.stencilLoadOp == dawn::LoadOp::Clear)) {
+                D3D12_RENDER_PASS_BEGINNING_ACCESS StencilBeginningAccess;
+
+                StencilBeginningAccess.Type = D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR;
+                StencilBeginningAccess.Clear.ClearValue.Format =
+                    D3D12TextureFormat(texture->GetFormat());
+                StencilBeginningAccess.Clear.ClearValue.DepthStencil.Stencil =
+                    attachmentInfo.clearStencil;
+
+                renderPassDepthStencilDesc.StencilBeginningAccess = StencilBeginningAccess;
+                renderPassDepthStencilDesc.StencilEndingAccess.Type =
+                    D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE;
+            }
+        }
+
+        commandList->BeginRenderPass(
+            renderPassRenderTargetDescriptors.size(), renderPassRenderTargetDescriptors.data(),
+            renderPass->hasDepthStencilAttachment ? &renderPassDepthStencilDesc : nullptr,
+            D3D12_RENDER_PASS_FLAG_NONE);
+    }
+
+    void CommandBuffer::SetupEmulatedRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                                BeginRenderPassCmd* renderPass,
+                                                OMSetRenderTargetArgs* args) {
         // Clear framebuffer attachments as needed and transition to render target
         {
             for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
@@ -608,7 +681,7 @@ namespace dawn_native { namespace d3d12 {
 
                 // Load op - color
                 if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
-                    D3D12_CPU_DESCRIPTOR_HANDLE handle = args.RTVs[i];
+                    D3D12_CPU_DESCRIPTOR_HANDLE handle = args->RTVs[i];
                     commandList->ClearRenderTargetView(handle, &attachmentInfo.clearColor.r, 0,
                                                        nullptr);
                 }
@@ -633,7 +706,7 @@ namespace dawn_native { namespace d3d12 {
                 }
 
                 if (clearFlags) {
-                    D3D12_CPU_DESCRIPTOR_HANDLE handle = args.dsv;
+                    D3D12_CPU_DESCRIPTOR_HANDLE handle = args->dsv;
                     // TODO(kainino@chromium.org): investigate: should the Dawn clear
                     // stencil type be uint8_t?
                     uint8_t clearStencil = static_cast<uint8_t>(attachmentInfo.clearStencil);
@@ -642,14 +715,34 @@ namespace dawn_native { namespace d3d12 {
                 }
             }
         }
-
         // Set up render targets
         {
-            if (args.dsv.ptr) {
-                commandList->OMSetRenderTargets(args.numRTVs, args.RTVs.data(), FALSE, &args.dsv);
+            if (args->dsv.ptr) {
+                commandList->OMSetRenderTargets(args->numRTVs, args->RTVs.data(), FALSE,
+                                                &args->dsv);
             } else {
-                commandList->OMSetRenderTargets(args.numRTVs, args.RTVs.data(), FALSE, nullptr);
+                commandList->OMSetRenderTargets(args->numRTVs, args->RTVs.data(), FALSE, nullptr);
             }
+        }
+    }
+
+    void CommandBuffer::RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                         BindGroupStateTracker* bindingTracker,
+                                         RenderPassDescriptorHeapTracker* renderPassTracker,
+                                         BeginRenderPassCmd* renderPass) {
+        // Try to cast to ID3D12GraphicsCommandList4. This allows us to use the D3D12 Render Pass
+        // APIs introduced in Windows build 1809. Versions of Windows prior to 1809 will fail the
+        // cast.
+        ID3D12GraphicsCommandList4* commandList4 = nullptr;
+        commandList->QueryInterface(__uuidof(ID3D12GraphicsCommandList4), (void**)&commandList4);
+
+        OMSetRenderTargetArgs args = renderPassTracker->GetSubpassOMSetRenderTargetArgs(renderPass);
+
+        if (commandList4 != nullptr) {
+            SetupNativeRenderPass(commandList4, renderPass, &args);
+        } else {
+            // If ID3D12GraphicsCommandList4 isn't available, we must emulate a render pass
+            SetupEmulatedRenderPass(commandList, renderPass, &args);
         }
 
         // Set up default dynamic state
@@ -676,6 +769,10 @@ namespace dawn_native { namespace d3d12 {
             switch (type) {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
+                    if (commandList4 != nullptr) {
+                        commandList4->EndRenderPass();
+                        commandList4->Release();
+                    }
                     return;
                 } break;
 
