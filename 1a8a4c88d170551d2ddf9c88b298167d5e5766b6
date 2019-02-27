@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c5c24dc_07a52ef5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-27T00:34:29Z",
+      "side": 1,
+      "message": "nit: volume",
+      "range": {
+        "startLine": 268,
+        "startChar": 72,
+        "endLine": 268,
+        "endChar": 78
+      },
+      "revId": "1a8a4c88d170551d2ddf9c88b298167d5e5766b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f72ea4ba_0950e5fd",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-27T00:34:29Z",
+      "side": 1,
+      "message": "nit: texel",
+      "range": {
+        "startLine": 268,
+        "startChar": 35,
+        "endLine": 268,
+        "endChar": 40
+      },
+      "revId": "1a8a4c88d170551d2ddf9c88b298167d5e5766b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9c09097_0ba64bab",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-27T00:34:29Z",
+      "side": 1,
+      "message": "nit: I would personally prefer to refactor such that origin and size do not change value. I think it could be confusing in the future. Maybe make origin and size `const`.\n\nYou can use `sourceSize:MTLSizeMake(...)` inline to avoid being overly verbose.",
+      "revId": "1a8a4c88d170551d2ddf9c88b298167d5e5766b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89ea402f_43cd7ce0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-27T00:34:29Z",
+      "side": 1,
+      "message": "All of this code in CopyTextureToBuffer is extremely similar to the code in CopyBufferToTexture. Is some of it similar enough that it could be \"DRY\"ed (deduplicated)?",
+      "revId": "1a8a4c88d170551d2ddf9c88b298167d5e5766b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
