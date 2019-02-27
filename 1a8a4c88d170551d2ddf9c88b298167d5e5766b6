@@ -163,6 +163,24 @@
       "revId": "1a8a4c88d170551d2ddf9c88b298167d5e5766b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d28391ba_48a8e136",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-27T09:23:22Z",
+      "side": 1,
+      "message": "It\u0027s a bit hard to do and the logic is simpler than for the D3D12 TextureCopySplitter so I don\u0027t think the same refactor is needed.",
+      "parentUuid": "f3217279_5c032c3b",
+      "revId": "1a8a4c88d170551d2ddf9c88b298167d5e5766b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
