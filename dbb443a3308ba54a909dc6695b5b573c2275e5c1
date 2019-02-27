@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a208ace5_5f9f828e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-27T02:06:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cf1295a_836ecddd",
+      "revId": "dbb443a3308ba54a909dc6695b5b573c2275e5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7e107fa_041bb0b8",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 15
@@ -30,6 +48,24 @@
       "writtenOn": "2019-02-26T21:48:01Z",
       "side": 1,
       "message": "This render pass encoder object should be in \"invalid\" state, right? Does it get set that way somehow?\n\nIf this line is correct, it\u0027s duplicate with the one at the end. How about something like this:\n\n  mEncodingState \u003d EncodingState::RenderPass;\n  if (!ConsumedError(...)) {\n    // ...\n  }\n  return new ...;",
+      "revId": "dbb443a3308ba54a909dc6695b5b573c2275e5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cfbfb31_4802dcb5",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-02-27T02:06:31Z",
+      "side": 1,
+      "message": "\"This render pass encoder object should be in \"invalid\" state, right? Does it get set that way somehow?\"\n\nYes you are right. The previous patch does not create a render pass encoder in invalid state.\nIn this patch, I pass a nullptr as the parameter \"allocator\" of the constructor RenderPassEncoderBase as a label of error because I find ValidateCanRecordCommands() will report an error if mAllocator is nullptr.\n\nPTAL, thanks!",
+      "parentUuid": "e7e107fa_041bb0b8",
       "revId": "dbb443a3308ba54a909dc6695b5b573c2275e5c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
