@@ -109,6 +109,7 @@ dawn::RenderPassDescriptor ValidationTest::CreateSimpleRenderPass() {
             .GetResult();
 }
 
+// static
 void ValidationTest::OnDeviceError(const char* message, dawnCallbackUserdata userdata) {
     auto self = reinterpret_cast<ValidationTest*>(static_cast<uintptr_t>(userdata));
     self->mDeviceErrorMessage = message;
@@ -125,6 +126,7 @@ void ValidationTest::OnDeviceError(const char* message, dawnCallbackUserdata use
     self->mError = true;
 }
 
+// static
 void ValidationTest::OnBuilderErrorStatus(dawnBuilderErrorStatus status, const char* message, dawn::CallbackUserdata userdata1, dawn::CallbackUserdata userdata2) {
     auto* self = reinterpret_cast<ValidationTest*>(static_cast<uintptr_t>(userdata1));
     size_t index = static_cast<size_t>(userdata2);
