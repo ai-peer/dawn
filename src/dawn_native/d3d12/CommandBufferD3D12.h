@@ -44,6 +44,12 @@ namespace dawn_native { namespace d3d12 {
         std::array<D3D12_VERTEX_BUFFER_VIEW, kMaxVertexInputs> d3d12BufferViews = {};
     };
 
+    struct OMSetRenderTargetArgs {
+        unsigned int numRTVs = 0;
+        std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> RTVs = {};
+        D3D12_CPU_DESCRIPTOR_HANDLE dsv = {};
+    };
+
     class CommandBuffer : public CommandBufferBase {
       public:
         CommandBuffer(CommandBufferBuilder* builder);
@@ -57,6 +63,16 @@ namespace dawn_native { namespace d3d12 {
                                    const InputState* inputState);
         void RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
                                BindGroupStateTracker* bindingTracker);
+        void SetupNativeRenderPass(ComPtr<ID3D12GraphicsCommandList4> commandList,
+                                   BindGroupStateTracker* bindingTracker,
+                                   RenderPassDescriptorHeapTracker* renderPassTracker,
+                                   BeginRenderPassCmd* renderPass,
+                                   OMSetRenderTargetArgs* args);
+        void SetupEmulatedRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                     BindGroupStateTracker* bindingTracker,
+                                     RenderPassDescriptorHeapTracker* renderPassTracker,
+                                     BeginRenderPassCmd* renderPass,
+                                     OMSetRenderTargetArgs* args);
         void RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
                               BindGroupStateTracker* bindingTracker,
                               RenderPassDescriptorHeapTracker* renderPassTracker,
