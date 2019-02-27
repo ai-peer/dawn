@@ -16,6 +16,24 @@
       "revId": "18e579492eadb6df731ac9deeef5f1a8b8eb99ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29d71ef9_cb254c25",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-27T09:25:27Z",
+      "side": 1,
+      "message": "Since this would need to duplicate the std::find_if I think the loop is more clear.",
+      "parentUuid": "2816464f_60710485",
+      "revId": "18e579492eadb6df731ac9deeef5f1a8b8eb99ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
