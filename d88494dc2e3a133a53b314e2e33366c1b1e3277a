@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "222ee638_08aa71e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "Placeholder issue to make sure you add tests that force native and emulated render passes to execute.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f0078d4_f3f56465",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "Nit: availabe -\u003e available.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 8
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dfc6fc8_1b248eab",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "Instead of using std::vector, which allocates memory, consider instead using std::array with an incrementing count like how the Vulkan backend does in RenderPassCache::CreateRenderPassForQuery and other places.",
+      "range": {
+        "startLine": 595,
+        "startChar": 8,
+        "endLine": 595,
+        "endChar": 92
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9acfbf31_ec2eef6e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "Since attachmentInfo and texture are only accessed if the loadOp is clear, you should move their initialization inside of the if statement.",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 600,
+        "endChar": 0
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fb75720_a224dcaf",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "Even if the LoadOp is not Clear, you still need to set the EndingAccess and BeginningAccess fields of the struct.  Otherwise, they\u0027ll be garbage values. \n\nTo be on the safe side, I recommend setting to \u0027preserve\u0027",
+      "range": {
+        "startLine": 623,
+        "startChar": 12,
+        "endLine": 623,
+        "endChar": 84
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca940127_5b8394f3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "If you will be not using depth, you need to specify the type as D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_NO_ACCESS for both the beginning and ending access.",
+      "range": {
+        "startLine": 647,
+        "startChar": 0,
+        "endLine": 648,
+        "endChar": 66
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64a07d1a_3ae0408e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "If you will be not using stencil, you need to specify the type as D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_NO_ACCESS for both the beginning and ending access.",
+      "range": {
+        "startLine": 662,
+        "startChar": 0,
+        "endLine": 664,
+        "endChar": 66
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58e319b2_6a3bc0a0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "UAV writes are permitted within a render pass, but the user must specifically indicate they they will be issuing UAV writes by passing ALLOW_UAV_WRITES to let UMDs opt out of tiling if necessary.\n\nDoes Dawn know whether UAV writes will happen during a render pass?",
+      "range": {
+        "startLine": 671,
+        "startChar": 12,
+        "endLine": 671,
+        "endChar": 39
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db17499_e13a7e8d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-02-28T22:18:16Z",
+      "side": 1,
+      "message": "Please use a smart pointer for all COM pointers to avoid memory leaks.",
+      "range": {
+        "startLine": 736,
+        "startChar": 8,
+        "endLine": 736,
+        "endChar": 59
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
