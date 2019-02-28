@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0701ef84_a7957e4c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-28T10:07:10Z",
+      "side": 1,
+      "message": "nit: ObjectBase::kError",
+      "range": {
+        "startLine": 496,
+        "startChar": 59,
+        "endLine": 496,
+        "endChar": 69
+      },
+      "revId": "7cd84ac4b2a726103c391466a49d0920da673b61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
