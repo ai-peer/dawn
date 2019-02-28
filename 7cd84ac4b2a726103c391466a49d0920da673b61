@@ -22,6 +22,30 @@
       "revId": "7cd84ac4b2a726103c391466a49d0920da673b61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a00c72c_8268b480",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-02-28T10:08:12Z",
+      "side": 1,
+      "message": "Actually can we have ComputePassEncoder::MakeError(device, encoder) for consistency with Buffer::MakeError(device) and friends?",
+      "parentUuid": "0701ef84_a7957e4c",
+      "range": {
+        "startLine": 496,
+        "startChar": 59,
+        "endLine": 496,
+        "endChar": 69
+      },
+      "revId": "7cd84ac4b2a726103c391466a49d0920da673b61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
