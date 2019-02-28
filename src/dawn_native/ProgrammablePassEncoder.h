@@ -33,6 +33,11 @@ namespace dawn_native {
                                 CommandEncoderBase* topLevelEncoder,
                                 CommandAllocator* allocator);
 
+        // Construct an "error" programmable pass encoder.
+        ProgrammablePassEncoder(DeviceBase* device,
+                                CommandEncoderBase* topLevelEncoder,
+                                ErrorTag errorTag);
+
         void EndPass();
 
         void InsertDebugMarker(const char* groupLabel);

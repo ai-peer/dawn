@@ -30,6 +30,10 @@ namespace dawn_native {
                                CommandEncoderBase* topLevelEncoder,
                                CommandAllocator* allocator);
 
+        ComputePassEncoderBase(DeviceBase* device,
+                               CommandEncoderBase* topLevelEncoder,
+                               ErrorTag errorTag);
+
         void Dispatch(uint32_t x, uint32_t y, uint32_t z);
         void SetPipeline(ComputePipelineBase* pipeline);
     };

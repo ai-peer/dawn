@@ -30,6 +30,10 @@ namespace dawn_native {
                               CommandEncoderBase* topLevelEncoder,
                               CommandAllocator* allocator);
 
+        RenderPassEncoderBase(DeviceBase* device,
+                              CommandEncoderBase* topLevelEncoder,
+                              ErrorTag errorTag);
+
         void Draw(uint32_t vertexCount,
                   uint32_t instanceCount,
                   uint32_t firstVertex,
