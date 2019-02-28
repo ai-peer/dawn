@@ -22,7 +22,7 @@
 
 namespace dawn_native {
 
-    MaybeError ValidateFenceDescriptor(DeviceBase*, const FenceDescriptor* descriptor) {
+    MaybeError ValidateFenceDescriptor(const FenceDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }

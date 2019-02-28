@@ -133,10 +133,11 @@ namespace dawn_wire { namespace client {
         cmd.Serialize(allocatedBuffer, *buffer->device->GetClient());
     }
 
-    dawnFence ClientDeviceCreateFence(dawnDevice cSelf, dawnFenceDescriptor const* descriptor) {
-        Device* device = reinterpret_cast<Device*>(cSelf);
+    dawnFence ClientQueueCreateFence(dawnQueue cSelf, dawnFenceDescriptor const* descriptor) {
+        Queue* queue = reinterpret_cast<Queue*>(cSelf);
+        Device* device = queue->device;
 
-        DeviceCreateFenceCmd cmd;
+        QueueCreateFenceCmd cmd;
         cmd.self = cSelf;
         auto* allocation = device->GetClient()->FenceAllocator().New(device);
         cmd.result = ObjectHandle{allocation->object->id, allocation->serial};

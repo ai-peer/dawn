@@ -77,7 +77,7 @@ TEST_F(FenceValidationTest, CreationSuccess) {
     {
         dawn::FenceDescriptor descriptor;
         descriptor.initialValue = 0;
-        device.CreateFence(&descriptor);
+        queue.CreateFence(&descriptor);
     }
 }
 
@@ -86,7 +86,7 @@ TEST_F(FenceValidationTest, GetCompletedValue) {
     {
         dawn::FenceDescriptor descriptor;
         descriptor.initialValue = 1;
-        dawn::Fence fence = device.CreateFence(&descriptor);
+        dawn::Fence fence = queue.CreateFence(&descriptor);
         EXPECT_EQ(fence.GetCompletedValue(), 1u);
     }
 }
@@ -96,7 +96,7 @@ TEST_F(FenceValidationTest, GetCompletedValue) {
 TEST_F(FenceValidationTest, OnCompletionImmediate) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = device.CreateFence(&descriptor);
+    dawn::Fence fence = queue.CreateFence(&descriptor);
 
     EXPECT_CALL(*mockFenceOnCompletionCallback, Call(DAWN_FENCE_COMPLETION_STATUS_SUCCESS, 0))
         .Times(1);
@@ -111,7 +111,7 @@ TEST_F(FenceValidationTest, OnCompletionImmediate) {
 TEST_F(FenceValidationTest, OnCompletionLargerThanSignaled) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = device.CreateFence(&descriptor);
+    dawn::Fence fence = queue.CreateFence(&descriptor);
 
     // Cannot signal for values > signaled value
     EXPECT_CALL(*mockFenceOnCompletionCallback, Call(DAWN_FENCE_COMPLETION_STATUS_ERROR, 0))
@@ -130,7 +130,7 @@ TEST_F(FenceValidationTest, OnCompletionLargerThanSignaled) {
 TEST_F(FenceValidationTest, GetCompletedValueInsideCallback) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = device.CreateFence(&descriptor);
+    dawn::Fence fence = queue.CreateFence(&descriptor);
 
     queue.Signal(fence, 3);
     fence.OnCompletion(2u, ToMockFenceOnCompletionCallback, 0);
@@ -145,7 +145,7 @@ TEST_F(FenceValidationTest, GetCompletedValueInsideCallback) {
 TEST_F(FenceValidationTest, GetCompletedValueAfterCallback) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = device.CreateFence(&descriptor);
+    dawn::Fence fence = queue.CreateFence(&descriptor);
 
     queue.Signal(fence, 2);
     fence.OnCompletion(2u, ToMockFenceOnCompletionCallback, 0);
@@ -159,7 +159,7 @@ TEST_F(FenceValidationTest, GetCompletedValueAfterCallback) {
 TEST_F(FenceValidationTest, SignalError) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = device.CreateFence(&descriptor);
+    dawn::Fence fence = queue.CreateFence(&descriptor);
 
     // value < fence signaled value
     ASSERT_DEVICE_ERROR(queue.Signal(fence, 0));
@@ -171,7 +171,7 @@ TEST_F(FenceValidationTest, SignalError) {
 TEST_F(FenceValidationTest, SignalSuccess) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = device.CreateFence(&descriptor);
+    dawn::Fence fence = queue.CreateFence(&descriptor);
 
     // Success
     queue.Signal(fence, 2);

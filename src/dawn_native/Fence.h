@@ -26,7 +26,7 @@
 
 namespace dawn_native {
 
-    MaybeError ValidateFenceDescriptor(DeviceBase*, const FenceDescriptor* descriptor);
+    MaybeError ValidateFenceDescriptor(const FenceDescriptor* descriptor);
 
     class FenceBase : public ObjectBase {
       public:

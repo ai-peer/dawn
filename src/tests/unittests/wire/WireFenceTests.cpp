@@ -56,22 +56,22 @@ class WireFenceTests : public WireTest {
         mockFenceOnCompletionCallback = std::make_unique<MockFenceOnCompletionCallback>();
 
         {
+            queue = dawnDeviceCreateQueue(device);
+            apiQueue = api.GetNewQueue();
+            EXPECT_CALL(api, DeviceCreateQueue(apiDevice)).WillOnce(Return(apiQueue));
+            EXPECT_CALL(api, QueueRelease(apiQueue));
+            FlushClient();
+        }
+        {
             dawnFenceDescriptor descriptor;
             descriptor.initialValue = 1;
             descriptor.nextInChain = nullptr;
 
             apiFence = api.GetNewFence();
-            fence = dawnDeviceCreateFence(device, &descriptor);
+            fence = dawnQueueCreateFence(queue, &descriptor);
 
-            EXPECT_CALL(api, DeviceCreateFence(apiDevice, _)).WillOnce(Return(apiFence));
+            EXPECT_CALL(api, QueueCreateFence(apiQueue, _)).WillOnce(Return(apiFence));
             EXPECT_CALL(api, FenceRelease(apiFence));
-            FlushClient();
-        }
-        {
-            queue = dawnDeviceCreateQueue(device);
-            apiQueue = api.GetNewQueue();
-            EXPECT_CALL(api, DeviceCreateQueue(apiDevice)).WillOnce(Return(apiQueue));
-            EXPECT_CALL(api, QueueRelease(apiQueue));
             FlushClient();
         }
     }

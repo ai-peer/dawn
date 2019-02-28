@@ -47,6 +47,14 @@ namespace dawn_native {
         GetDevice()->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
     }
 
+    FenceBase* QueueBase::CreateFence(const FenceDescriptor* descriptor) {
+        if (GetDevice()->ConsumedError(ValidateCreateFence(descriptor))) {
+            return FenceBase::MakeError(GetDevice());
+        }
+
+        return new FenceBase(GetDevice(), descriptor);
+    }
+
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
                                          CommandBufferBase* const* commands) {
         DAWN_TRY(GetDevice()->ValidateObject(this));
@@ -89,6 +97,13 @@ namespace dawn_native {
         if (signalValue <= fence->GetSignaledValue()) {
             return DAWN_VALIDATION_ERROR("Signal value less than or equal to fence signaled value");
         }
+        return {};
+    }
+
+    MaybeError QueueBase::ValidateCreateFence(const FenceDescriptor* descriptor) {
+        DAWN_TRY(GetDevice()->ValidateObject(this));
+        DAWN_TRY(ValidateFenceDescriptor(descriptor));
+
         return {};
     }
 
