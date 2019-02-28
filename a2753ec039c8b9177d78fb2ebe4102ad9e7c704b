@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bac3dbde_cd6bab5e",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-28T01:04:07Z",
+      "side": 1,
+      "message": "Why is this one asserted instead of validated?",
+      "revId": "a2753ec039c8b9177d78fb2ebe4102ad9e7c704b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
