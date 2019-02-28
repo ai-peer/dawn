@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ce2ddea_7d7ae85a",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-28T00:05:40Z",
+      "side": 1,
+      "message": "There are some cases here that I think this doesn\u0027t handle.\nIn particular, if there is any error when encoding the command buffer OR the render pass, the whole command buffer should be invalid. e.g.\n\n  encoder.someCommand(/*valid*/);\n  p1 \u003d encoder.beginRenderPass(/*valid*/);\n  p2 \u003d encoder.beginRenderPass(/*invalid*/);\n  p1.somePassCommand(/*valid*/);\n  p1.endPass();\n  c \u003d encoder.finish();\n\nI think `c` should be invalid, but it seems like currently it may be valid.",
+      "revId": "b2c5023c9c1fa3a15cc1f0f1c43e29b7115cee0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59f7bf0f_9e24c081",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-28T00:05:40Z",
+      "side": 1,
+      "message": "We don\u0027t yet have a constructor\n\n  RenderPassEncoderBase(DeviceBase* device, ObjectBase::ErrorTag tag);\n\nbut shouldn\u0027t we? Then it would be used here instead of this \"magic\" construction.",
+      "revId": "b2c5023c9c1fa3a15cc1f0f1c43e29b7115cee0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
