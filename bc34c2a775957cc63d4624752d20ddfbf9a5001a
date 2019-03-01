@@ -16,6 +16,24 @@
       "revId": "bc34c2a775957cc63d4624752d20ddfbf9a5001a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23c437b3_ceb7617f",
+        "filename": "src/tests/unittests/CommandAllocatorTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-01T11:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "441b7f47_6b264849",
+      "revId": "bc34c2a775957cc63d4624752d20ddfbf9a5001a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
