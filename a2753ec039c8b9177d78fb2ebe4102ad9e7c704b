@@ -16,6 +16,24 @@
       "revId": "a2753ec039c8b9177d78fb2ebe4102ad9e7c704b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faad206b_108034cb",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-01T11:17:04Z",
+      "side": 1,
+      "message": "It is already covered when validating the descriptor (because the texture dimension is 2D). Changed it to be an explicit check even if it is redundant.",
+      "parentUuid": "bac3dbde_cd6bab5e",
+      "revId": "a2753ec039c8b9177d78fb2ebe4102ad9e7c704b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
