@@ -24,10 +24,32 @@
 
 namespace dawn_native {
 
+    namespace {
+
+        class ErrorRenderPassEncoderBase : public RenderPassEncoderBase {
+          public:
+              ErrorRenderPassEncoderBase(DeviceBase* device, CommandEncoderBase* topLevelEncoder)
+                  : RenderPassEncoderBase(device, topLevelEncoder, ObjectBase::kError) {
+              }
+        };
+
+    }  // anonymous namespace
+
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
                                                  CommandEncoderBase* topLevelEncoder,
                                                  CommandAllocator* allocator)
         : ProgrammablePassEncoder(device, topLevelEncoder, allocator) {
+    }
+
+    RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
+                                                 CommandEncoderBase* topLevelEncoder,
+                                                 ErrorTag errorTag)
+        : ProgrammablePassEncoder(device, topLevelEncoder, errorTag) {
+    }
+
+    RenderPassEncoderBase* RenderPassEncoderBase::MakeError(DeviceBase* device,
+                                                            CommandEncoderBase* topLevelEncoder) {
+        return new ErrorRenderPassEncoderBase(device, topLevelEncoder);
     }
 
     void RenderPassEncoderBase::Draw(uint32_t vertexCount,

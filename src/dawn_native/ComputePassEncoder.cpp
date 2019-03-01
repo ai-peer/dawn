@@ -21,10 +21,32 @@
 
 namespace dawn_native {
 
+    namespace {
+
+        class ErrorComputePassEncoderBase : public ComputePassEncoderBase {
+          public:
+              ErrorComputePassEncoderBase(DeviceBase* device, CommandEncoderBase* topLevelEncoder)
+                  : ComputePassEncoderBase(device, topLevelEncoder, ObjectBase::kError) {
+              }
+        };
+
+    }  // anonymous namespace
+
     ComputePassEncoderBase::ComputePassEncoderBase(DeviceBase* device,
                                                    CommandEncoderBase* topLevelEncoder,
                                                    CommandAllocator* allocator)
         : ProgrammablePassEncoder(device, topLevelEncoder, allocator) {
+    }
+
+    ComputePassEncoderBase::ComputePassEncoderBase(DeviceBase* device,
+                                                   CommandEncoderBase* topLevelEncoder,
+                                                   ErrorTag errorTag)
+        : ProgrammablePassEncoder(device, topLevelEncoder, errorTag) {
+    }
+
+    ComputePassEncoderBase* ComputePassEncoderBase::MakeError(DeviceBase* device,
+                                                              CommandEncoderBase* topLevelEncoder) {
+        return new ErrorComputePassEncoderBase(device, topLevelEncoder);
     }
 
     void ComputePassEncoderBase::Dispatch(uint32_t x, uint32_t y, uint32_t z) {
