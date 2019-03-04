@@ -552,8 +552,16 @@ namespace dawn_native {
             return;
         }
 
+        if (ConsumedError(GetDevice()->ValidateObject(source))) {
+            return;
+        }
+
         if (destination == nullptr) {
             HandleError("Destination cannot be null");
+            return;
+        }
+
+        if (ConsumedError(GetDevice()->ValidateObject(destination))) {
             return;
         }
 
@@ -579,8 +587,16 @@ namespace dawn_native {
             return;
         }
 
+        if (ConsumedError(GetDevice()->ValidateObject(source->buffer))) {
+            return;
+        }
+
         if (destination->texture == nullptr) {
             HandleError("Texture cannot be null");
+            return;
+        }
+
+        if (ConsumedError(GetDevice()->ValidateObject(destination->texture))) {
             return;
         }
 
@@ -618,8 +634,16 @@ namespace dawn_native {
             return;
         }
 
+        if (ConsumedError(GetDevice()->ValidateObject(source->texture))) {
+            return;
+        }
+
         if (destination->buffer == nullptr) {
             HandleError("Buffer cannot be null");
+            return;
+        }
+
+        if (ConsumedError(GetDevice()->ValidateObject(destination->buffer))) {
             return;
         }
 
@@ -713,8 +737,9 @@ namespace dawn_native {
                 case Command::CopyBufferToBuffer: {
                     CopyBufferToBufferCmd* copy = mIterator.NextCommand<CopyBufferToBufferCmd>();
 
-                    DAWN_TRY(GetDevice()->ValidateObject(copy->source.buffer.Get()));
-                    DAWN_TRY(GetDevice()->ValidateObject(copy->destination.buffer.Get()));
+                    ASSERT(GetDevice()->ValidateObject(copy->source.buffer.Get()).IsSuccess());
+                    ASSERT(GetDevice()->ValidateObject(copy->destination.buffer.Get()).IsSuccess());
+
                     DAWN_TRY(ValidateCopySizeFitsInBuffer(copy->source, copy->size));
                     DAWN_TRY(ValidateCopySizeFitsInBuffer(copy->destination, copy->size));
                     DAWN_TRY(ValidateB2BCopySizeAlignment(copy->size, copy->source.offset,
@@ -732,8 +757,9 @@ namespace dawn_native {
                 case Command::CopyBufferToTexture: {
                     CopyBufferToTextureCmd* copy = mIterator.NextCommand<CopyBufferToTextureCmd>();
 
-                    DAWN_TRY(GetDevice()->ValidateObject(copy->source.buffer.Get()));
-                    DAWN_TRY(GetDevice()->ValidateObject(copy->destination.texture.Get()));
+                    ASSERT(GetDevice()->ValidateObject(copy->source.buffer.Get()).IsSuccess());
+                    ASSERT(
+                        GetDevice()->ValidateObject(copy->destination.texture.Get()).IsSuccess());
 
                     uint32_t bufferCopySize = 0;
                     DAWN_TRY(ValidateRowPitch(copy->destination.texture->GetFormat(),
@@ -760,8 +786,8 @@ namespace dawn_native {
                 case Command::CopyTextureToBuffer: {
                     CopyTextureToBufferCmd* copy = mIterator.NextCommand<CopyTextureToBufferCmd>();
 
-                    DAWN_TRY(GetDevice()->ValidateObject(copy->source.texture.Get()));
-                    DAWN_TRY(GetDevice()->ValidateObject(copy->destination.buffer.Get()));
+                    ASSERT(GetDevice()->ValidateObject(copy->source.texture.Get()).IsSuccess());
+                    ASSERT(GetDevice()->ValidateObject(copy->destination.buffer.Get()).IsSuccess());
 
                     uint32_t bufferCopySize = 0;
                     DAWN_TRY(ValidateRowPitch(copy->source.texture->GetFormat(), copy->copySize,
