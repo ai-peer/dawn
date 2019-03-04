@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0905dab_dcf9c0d6",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-04T21:05:23Z",
+      "side": 1,
+      "message": "It should be an error to signal a fence on a queue that\u0027s not the queue it was created from.",
+      "revId": "60bc242b1f7e470c6fac82b4d4c61f8d37eb160e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
