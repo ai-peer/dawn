@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb5943f0_34243331",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-04T08:47:37Z",
+      "side": 1,
+      "message": "The nullptr checks aren\u0027t needed anymore, here and in the rest of this file.",
+      "revId": "eafb3526b122a12494d97e77a8f124f27fa9b493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22fd39cc_a97e9f9b",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-04T08:47:37Z",
+      "side": 1,
+      "message": "nit: this can be removed, it is ok to assume previous validation run.",
+      "revId": "eafb3526b122a12494d97e77a8f124f27fa9b493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc49978a_2dc9e91c",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-04T08:47:37Z",
+      "side": 1,
+      "message": "nit: it is possible to declare the variable inside ASSERT_DEVICE_ERROR. ditto for buffers and textures in other tests",
+      "revId": "eafb3526b122a12494d97e77a8f124f27fa9b493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49a01017_641fbe02",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-04T08:47:37Z",
+      "side": 1,
+      "message": "nit: or just 4 since this is a B2B test.",
+      "revId": "eafb3526b122a12494d97e77a8f124f27fa9b493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
