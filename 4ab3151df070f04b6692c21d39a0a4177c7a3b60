@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52de5863_01b3847e",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-06T22:11:40Z",
+      "side": 1,
+      "message": "nit: this just needs the device, so this and MakeError could take it directly.",
+      "revId": "4ab3151df070f04b6692c21d39a0a4177c7a3b60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2fad898_1caa4612",
+        "filename": "src/dawn_native/Fence.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-06T22:11:40Z",
+      "side": 1,
+      "message": "This CL doesn\u0027t introduce bugs but can we have this be a Ref so we don\u0027t risk having use after frees in the future?",
+      "revId": "4ab3151df070f04b6692c21d39a0a4177c7a3b60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
