@@ -58,4 +58,9 @@ namespace dawn_native { namespace opengl {
         glUnmapBuffer(GL_ARRAY_BUFFER);
     }
 
+    void Buffer::DestroyImpl() {
+        glDeleteBuffers(GetSize(), &mBuffer);
+        mBuffer = 0;
+    }
+
 }}  // namespace dawn_native::opengl
