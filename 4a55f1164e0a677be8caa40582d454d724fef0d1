@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea82ae3a_bc7eb776",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-03-06T02:50:51Z",
+      "side": 1,
+      "message": "Due to metal compatible issue(some formats are supported on 10.13+ or 10.12+), some formats in WebGPU is not supported here. Those formats are listed in the doc https://docs.google.com/spreadsheets/d/1rIKHMdtJ1XmPHRHqPLaI-sHoOCZl4MLrWMlcvUJOuF4/edit?usp\u003dsharing",
+      "revId": "4a55f1164e0a677be8caa40582d454d724fef0d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c157a2c0_b97c9b36",
+        "filename": "src/dawn_native/d3d12/InputStateD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-03-06T02:50:51Z",
+      "side": 1,
+      "message": "D3D12 lacks of some 3-component formats. So those formats in webgpu cannot be directly mapping to a D3D12 format.(The all missing formats are uchar3, char3, uchar3norm, char3norm, ushort3, short3, ushort3norm, short3norm, half3) \nDo you have any suggestions about how to support those formats?",
+      "revId": "4a55f1164e0a677be8caa40582d454d724fef0d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
