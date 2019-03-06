@@ -16,13 +16,14 @@
 
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <utility>
 
 namespace dawn_native {
 
-    MaybeError ValidateFenceDescriptor(DeviceBase*, const FenceDescriptor* descriptor) {
+    MaybeError ValidateFenceDescriptor(const FenceDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
@@ -32,13 +33,15 @@ namespace dawn_native {
 
     // Fence
 
-    FenceBase::FenceBase(DeviceBase* device, const FenceDescriptor* descriptor)
-        : ObjectBase(device),
+    FenceBase::FenceBase(QueueBase* queue, const FenceDescriptor* descriptor)
+        : ObjectBase(queue->GetDevice()),
           mSignalValue(descriptor->initialValue),
-          mCompletedValue(descriptor->initialValue) {
+          mCompletedValue(descriptor->initialValue),
+          mQueue(queue) {
     }
 
-    FenceBase::FenceBase(DeviceBase* device, ObjectBase::ErrorTag tag) : ObjectBase(device, tag) {
+    FenceBase::FenceBase(QueueBase* queue, ObjectBase::ErrorTag tag)
+        : ObjectBase(queue->GetDevice(), tag) {
     }
 
     FenceBase::~FenceBase() {
@@ -50,8 +53,8 @@ namespace dawn_native {
     }
 
     // static
-    FenceBase* FenceBase::MakeError(DeviceBase* device) {
-        return new FenceBase(device, ObjectBase::kError);
+    FenceBase* FenceBase::MakeError(QueueBase* queue) {
+        return new FenceBase(queue, ObjectBase::kError);
     }
 
     uint64_t FenceBase::GetCompletedValue() const {
@@ -84,6 +87,11 @@ namespace dawn_native {
     uint64_t FenceBase::GetSignaledValue() const {
         ASSERT(!IsError());
         return mSignalValue;
+    }
+
+    QueueBase* FenceBase::GetQueue() const {
+        ASSERT(!IsError());
+        return mQueue;
     }
 
     void FenceBase::SetSignaledValue(uint64_t signalValue) {
