@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c1a3ece1_a0518721",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-06T08:34:23Z",
+      "side": 1,
+      "message": "Formats that we can\u0027t support on Metal or D3D12 should not be in WebGPU. The list of formats currently in the IDL is just a first draft and was waiting for a vertex format support investigation.\n\nThis means that we should remove formats that can\u0027t be supported on all platforms from dawn.json.",
+      "parentUuid": "ea82ae3a_bc7eb776",
+      "revId": "4a55f1164e0a677be8caa40582d454d724fef0d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c157a2c0_b97c9b36",
         "filename": "src/dawn_native/d3d12/InputStateD3D12.cpp",
         "patchSetId": 1
