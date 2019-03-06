@@ -33,10 +33,7 @@ if (build_with_chromium) {
 ###############################################################################
 
 config("dawn_public") {
-  include_dirs = [
-    target_gen_dir,
-    "src/include",
-  ]
+  include_dirs = [ "src/include" ]
 }
 
 config("dawn_internal") {
@@ -102,8 +99,14 @@ static_library("dawn_common") {
 # Dawn headers
 ###############################################################################
 
+config("dawn_headers_public") {
+  configs = [ ":dawn_public" ]
+  include_dirs = [ "${target_gen_dir}/src/dawn" ]
+}
+
 dawn_generator("dawn_headers_gen") {
   target = "dawn_headers"
+  custom_gen_dir = "${target_gen_dir}/src/dawn"
   outputs = [
     "dawn/dawncpp.h",
     "dawn/dawn.h",
@@ -112,7 +115,7 @@ dawn_generator("dawn_headers_gen") {
 }
 
 source_set("dawn_headers") {
-  public_configs = [ ":dawn_public" ]
+  public_configs = [ ":dawn_headers_public" ]
   deps = [
     ":dawn_headers_gen",
   ]
@@ -154,6 +157,11 @@ dawn_component("libdawn") {
 # libdawn_native
 ###############################################################################
 
+config("libdawn_native_headers_public") {
+  configs = [ ":dawn_public" ]
+  include_dirs = [ "${target_gen_dir}/src/dawn_native" ]
+}
+
 config("libdawn_native_internal") {
   configs = [ ":dawn_internal" ]
 
@@ -165,6 +173,7 @@ config("libdawn_native_internal") {
 
 dawn_generator("libdawn_native_utils_gen") {
   target = "dawn_native_utils"
+  custom_gen_dir = "${target_gen_dir}/src/dawn_native"
   outputs = [
     "dawn_native/ProcTable.cpp",
     "dawn_native/dawn_structs_autogen.h",
@@ -180,7 +189,7 @@ source_set("libdawn_native_headers") {
   public_deps = [
     ":dawn_headers",
   ]
-  public_configs = [ ":dawn_public" ]
+  public_configs = [ ":libdawn_native_headers_public" ]
   sources = [
     "src/include/dawn_native/DawnNative.h",
     "src/include/dawn_native/dawn_native_export.h",
@@ -535,13 +544,18 @@ dawn_component("libdawn_native") {
 # libdawn_wire
 ###############################################################################
 
+config("libdawn_wire_headers_public") {
+  configs = [ ":dawn_public" ]
+  include_dirs = [ "${target_gen_dir}/src/dawn_wire" ]
+}
+
 # Public libdawn_wire headers so they can be publically visible for
 # dependencies of libdawn_wire
 source_set("libdawn_wire_headers") {
   public_deps = [
     ":dawn_headers",
   ]
-  public_configs = [ ":dawn_public" ]
+  public_configs = [ ":libdawn_wire_headers_public" ]
   sources = [
     "src/include/dawn_wire/Wire.h",
     "src/include/dawn_wire/WireClient.h",
@@ -552,6 +566,7 @@ source_set("libdawn_wire_headers") {
 
 dawn_generator("libdawn_wire_gen") {
   target = "dawn_wire"
+  custom_gen_dir = "${target_gen_dir}/src/dawn_wire"
   outputs = [
     "dawn_wire/TypeTraits_autogen.h",
     "dawn_wire/WireCmd_autogen.h",
@@ -685,6 +700,7 @@ static_library("dawn_utils") {
 
 dawn_generator("mock_dawn_gen") {
   target = "mock_dawn"
+  custom_gen_dir = "${target_gen_dir}/src/tests"
   outputs = [
     "mock/mock_dawn.h",
     "mock/mock_dawn.cpp",
@@ -705,6 +721,9 @@ test("dawn_unittests") {
     ":mock_dawn_gen",
     "third_party:gmock_and_gtest",
   ]
+
+  # For mock_dawn
+  include_dirs = [ "${target_gen_dir}/src/tests" ]
 
   # Add internal Dawn Native headers and config for internal unittests.
   deps += [ ":libdawn_native_headers" ]
