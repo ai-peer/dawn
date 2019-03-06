@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6938854f_cb04e087",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-06T08:48:36Z",
+      "side": 1,
+      "message": "Not sure what we should do about the vertex formats that can be supported on 10.13+ only. Maybe we can add a TODO at somewhere in Dawn that we need to support those formats in Dawn once we upgrade the bots. For some formats (like 3 channel formats) that can\u0027t be supported in D3D12, I think we should send a pull request to remove them from web idl, and don\u0027t support them in Dawn either.",
+      "parentUuid": "c1a3ece1_a0518721",
+      "revId": "4a55f1164e0a677be8caa40582d454d724fef0d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c157a2c0_b97c9b36",
         "filename": "src/dawn_native/d3d12/InputStateD3D12.cpp",
         "patchSetId": 1
