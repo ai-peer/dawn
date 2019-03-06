@@ -75,19 +75,32 @@ namespace dawn_native { namespace metal {
             mMtlVertexDescriptor.attributes[i] = attribDesc;
             [attribDesc release];
         }
-
+        // NSMutableArray* strideArr = nullptr;
+        uint32_t max_stride = 0;
         for (uint32_t i : IterateBitSet(GetInputsSetMask())) {
             const VertexInputDescriptor& info = GetInput(i);
 
             auto layoutDesc = [MTLVertexBufferLayoutDescriptor new];
             if (info.stride == 0) {
                 // For MTLVertexStepFunctionConstant, the stepRate must be 0,
-                // but the stride must NOT be 0, so I made up a value (256).
-                // TODO(cwallez@chromium.org): the made up value will need to be at least
-                //    max(attrib.offset + sizeof(attrib) for each attrib)
+                // but the stride must NOT be 0, so we made up it to be
+                // max(attrib.offset + sizeof(attrib) for each attrib)
+                // strideArr = [NSMutableArray array];
+                for (uint32_t n = 0; n < attributesSetMask.size(); ++n) {
+                    if (!attributesSetMask[n]) {
+                        continue;
+                    }
+                    const VertexAttributeDescriptor& attribute = GetAttribute(n);
+                    // NSNumber* number = [NSNumber
+                    //     numberWithInt:VertexFormatSize(attribute.format) + attribute.offset];
+                    // [strideArr addObject:number];
+                    uint32_t size = VertexFormatSize(attribute.format) + attribute.offset;
+                    max_stride = max_stride > size ? max_stride : size;
+                }
                 layoutDesc.stepFunction = MTLVertexStepFunctionConstant;
                 layoutDesc.stepRate = 0;
-                layoutDesc.stride = 256;
+                layoutDesc.stride = max_stride;
+                // layoutDesc.stride = [[strideArr valueForKeyPath:@"@max.intValue"] intValue];
             } else {
                 layoutDesc.stepFunction = InputStepModeFunction(info.stepMode);
                 layoutDesc.stepRate = 1;
@@ -97,6 +110,9 @@ namespace dawn_native { namespace metal {
             mMtlVertexDescriptor.layouts[kMaxBindingsPerGroup + i] = layoutDesc;
             [layoutDesc release];
         }
+        // if (strideArr != nullptr) {
+        //     [strideArr release];
+        // }
     }
 
     InputState::~InputState() {
