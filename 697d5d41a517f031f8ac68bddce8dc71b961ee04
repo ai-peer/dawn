@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcbb4f21_974f33e8",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-03-06T19:07:16Z",
+      "side": 1,
+      "message": "I\u0027m probably being dense, but could you explain this change? Here (and below) used to depend only on the static lib, now it depends on all the targets in src/common/BUILD.gn? Or is this just shorthand for ${dawn_root}/src/common:dawn_common?",
+      "revId": "697d5d41a517f031f8ac68bddce8dc71b961ee04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
