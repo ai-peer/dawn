@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd9ecc15_71139cc4",
+        "filename": "scripts/dawn_component.gni",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-06T23:10:49Z",
+      "side": 1,
+      "message": "This is necessary because all the dry runs for this patch stack kind of put the bots in a bad state. Sorry about that.",
+      "revId": "4a112e6ef93b407f544083b4ee1aaf07d62d9a63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
