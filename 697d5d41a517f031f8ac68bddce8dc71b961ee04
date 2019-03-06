@@ -16,6 +16,24 @@
       "revId": "697d5d41a517f031f8ac68bddce8dc71b961ee04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28cf41da_efb8ca53",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-03-06T19:09:43Z",
+      "side": 1,
+      "message": "I think that if you don\u0027t specify the target it defaults to the same name as the last segment in the path. i.e. ${dawn_root}/src/common:common",
+      "parentUuid": "fcbb4f21_974f33e8",
+      "revId": "697d5d41a517f031f8ac68bddce8dc71b961ee04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
