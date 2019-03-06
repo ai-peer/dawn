@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7288d074_5ddcc175",
+        "filename": "src/dawn_native/metal/InputStateMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-06T08:46:06Z",
+      "side": 1,
+      "message": "This can be replaced by using for(uint32_t attributeIndex : IterateBitSet(attributesSetMask)) \n\nAlso it would be good to only use the attributes that use the current input. Otherwise if we want to use a 4byte buffer for input 0 with stride 0 and then an attribute on input 1 has offset 8, we\u0027ll set input[0].stride \u003d 8 which could cause Metal validation errors because it looks like it might overflow the buffer.",
+      "revId": "82a316099ff37d487b250619a14df7dcdb0ec81a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd321b9f_6a556e42",
+        "filename": "src/dawn_native/metal/InputStateMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-06T08:46:06Z",
+      "side": 1,
+      "message": "nit: std::max.",
+      "range": {
+        "startLine": 94,
+        "startChar": 33,
+        "endLine": 94,
+        "endChar": 75
+      },
+      "revId": "82a316099ff37d487b250619a14df7dcdb0ec81a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
