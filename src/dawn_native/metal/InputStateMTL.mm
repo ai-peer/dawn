@@ -82,12 +82,20 @@ namespace dawn_native { namespace metal {
             auto layoutDesc = [MTLVertexBufferLayoutDescriptor new];
             if (info.stride == 0) {
                 // For MTLVertexStepFunctionConstant, the stepRate must be 0,
-                // but the stride must NOT be 0, so I made up a value (256).
-                // TODO(cwallez@chromium.org): the made up value will need to be at least
-                //    max(attrib.offset + sizeof(attrib) for each attrib)
+                // but the stride must NOT be 0, so we made up it with
+                // max(attrib.offset + sizeof(attrib) for each attrib)
+                uint32_t max_stride = 0;
+                for (uint32_t n = 0; n < attributesSetMask.size(); ++n) {
+                    if (!attributesSetMask[n]) {
+                        continue;
+                    }
+                    const VertexAttributeDescriptor& attribute = GetAttribute(n);
+                    uint32_t stride = VertexFormatSize(attribute.format) + attribute.offset;
+                    max_stride = max_stride > stride ? max_stride : stride;
+                }
                 layoutDesc.stepFunction = MTLVertexStepFunctionConstant;
                 layoutDesc.stepRate = 0;
-                layoutDesc.stride = 256;
+                layoutDesc.stride = max_stride;
             } else {
                 layoutDesc.stepFunction = InputStepModeFunction(info.stepMode);
                 layoutDesc.stepRate = 1;
