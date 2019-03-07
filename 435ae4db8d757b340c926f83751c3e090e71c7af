@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42c0f07f_c210de28",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T02:47:57Z",
+      "side": 1,
+      "message": "[1] This function would have to just be empty.",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fc2d37c_aa148a7d",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T02:47:57Z",
+      "side": 1,
+      "message": "Rather than having backend specific logic to call DestroyImpl() (or do something else) in the destructor, could we add a BufferBase::~BufferBase that calls DestroyImpl? I *think* it would work. See comments at [1]s.",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4366ced2_c452756e",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T02:47:57Z",
+      "side": 1,
+      "message": "[1] This would no longer be necessary.",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84ca6fc4_19848ab1",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T02:47:57Z",
+      "side": 1,
+      "message": "[1] This would no longer be necessary.",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5e58726_fc8ad1c5",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T02:47:57Z",
+      "side": 1,
+      "message": "The first argument is just \"number of buffers in the array in the second argument\": this should be glDeleteBuffers(1, \u0026mBuffer);",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1be74d6a_e6edf3d7",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T02:47:57Z",
+      "side": 1,
+      "message": "[1] This would no longer be necessary.",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
