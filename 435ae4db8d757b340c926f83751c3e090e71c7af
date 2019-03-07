@@ -226,6 +226,63 @@
       "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbbc1fd8_d705decc",
+        "filename": "src/tests/end2end/DestroyBufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-07T09:48:06Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80f3570c_95b43995",
+        "filename": "src/tests/end2end/DestroyBufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-07T09:48:06Z",
+      "side": 1,
+      "message": "Both encoder and commands could be removed if Encode returned a dawn::CommandBuffer, (it would probably get renamed to CreateTriangleCommandBuffer or something?)",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b22b725_6ef5d90d",
+        "filename": "src/tests/end2end/DestroyBufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-07T09:48:06Z",
+      "side": 1,
+      "message": "There is no second submit, only the encoding of commands.",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
