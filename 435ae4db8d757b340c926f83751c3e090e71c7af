@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c69e5cb2_382f609d",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-07T03:09:36Z",
+      "side": 1,
+      "message": "@Kai, per the C++ standard, base class destructors can only access base class member variables and methods. By the time to get to ~BufferBase, the subclass member state is undefined.",
+      "parentUuid": "9fc2d37c_aa148a7d",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4366ced2_c452756e",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 1
