@@ -230,19 +230,60 @@ namespace dawn_native {
             return {};
         }
 
+        MaybeError ValidateOrSetColorAttachmentSampleCount(const TextureViewBase* colorAttachment,
+                                                           uint32_t* sampleCount) {
+            if (*sampleCount == 0) {
+                *sampleCount = colorAttachment->GetTexture()->GetSampleCount();
+            } else if (*sampleCount != colorAttachment->GetTexture()->GetSampleCount()) {
+                return DAWN_VALIDATION_ERROR("Color attachment sample counts mismatch");
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateResolveTarget(
+            const RenderPassColorAttachmentDescriptor* colorAttachment) {
+
+            if (colorAttachment->resolveTarget == nullptr) {
+                return {};
+            }
+
+            if (!colorAttachment->attachment->GetTexture()->IsMultisampledTexture()) {
+                return DAWN_VALIDATION_ERROR("Cannot set resolve target when the sample count of "
+                                             "the color attachment is 1");
+            }
+
+            if (colorAttachment->resolveTarget->GetTexture()->IsMultisampledTexture()) {
+                return DAWN_VALIDATION_ERROR("Cannot use multisampled texture as resolve target");
+            }
+
+            if (colorAttachment->resolveTarget->GetLayerCount() > 1) {
+                return DAWN_VALIDATION_ERROR("The array layer count of the resolve target must be "
+                                             "1");
+            }
+
+            if (colorAttachment->resolveTarget->GetLevelCount() > 1) {
+                return DAWN_VALIDATION_ERROR("The mip level count of the resolve target must be 1");
+            }
+
+            dawn::TextureFormat resolveTargetFormat = colorAttachment->resolveTarget->GetFormat();
+            if (resolveTargetFormat != colorAttachment->attachment->GetFormat()) {
+                return DAWN_VALIDATION_ERROR("The format of the resolve target must be the same as "
+                                             "the color attachment");
+            }
+
+            return {};
+        }
+
         MaybeError ValidateRenderPassColorAttachment(
             const DeviceBase* device,
             const RenderPassColorAttachmentDescriptor* colorAttachment,
             uint32_t* width,
-            uint32_t* height) {
+            uint32_t* height,
+            uint32_t* sampleCount) {
             DAWN_ASSERT(colorAttachment != nullptr);
 
             DAWN_TRY(device->ValidateObject(colorAttachment->attachment));
-
-            // TODO(jiawei.shao@intel.com): support resolve target for multisample color attachment.
-            if (colorAttachment->resolveTarget != nullptr) {
-                return DAWN_VALIDATION_ERROR("Resolve target is not supported now");
-            }
 
             const TextureViewBase* attachment = colorAttachment->attachment;
             if (!IsColorRenderableTextureFormat(attachment->GetFormat())) {
@@ -250,6 +291,10 @@ namespace dawn_native {
                     "The format of the texture view used as color attachment is not color "
                     "renderable");
             }
+
+            DAWN_TRY(ValidateOrSetColorAttachmentSampleCount(attachment, sampleCount));
+
+            DAWN_TRY(ValidateResolveTarget(colorAttachment));
 
             DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
             DAWN_TRY(ValidateOrSetAttachmentSize(attachment, width, height));
@@ -287,9 +332,10 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Setting color attachments out of bounds");
             }
 
+            uint32_t sampleCount = 0;
             for (uint32_t i = 0; i < renderPass->colorAttachmentCount; ++i) {
                 DAWN_TRY(ValidateRenderPassColorAttachment(device, renderPass->colorAttachments[i],
-                                                           width, height));
+                                                           width, height, &sampleCount));
             }
 
             if (renderPass->depthStencilAttachment != nullptr) {
@@ -871,6 +917,12 @@ namespace dawn_native {
             RenderPassColorAttachmentInfo* colorAttachment = &renderPass->colorAttachments[i];
             TextureBase* texture = colorAttachment->view->GetTexture();
             usageTracker.TextureUsedAs(texture, dawn::TextureUsageBit::OutputAttachment);
+
+            TextureViewBase* resolveTarget = colorAttachment->resolveTarget.Get();
+            if (resolveTarget != nullptr) {
+                usageTracker.TextureUsedAs(resolveTarget->GetTexture(),
+                                           dawn::TextureUsageBit::OutputAttachment);
+            }
         }
 
         if (renderPass->hasDepthStencilAttachment) {

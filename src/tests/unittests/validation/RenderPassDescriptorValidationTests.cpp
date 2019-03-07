@@ -46,17 +46,19 @@ dawn::Texture CreateTexture(dawn::Device& device,
                             uint32_t width,
                             uint32_t height,
                             uint32_t arrayLayerCount,
-                            uint32_t mipLevelCount) {
+                            uint32_t mipLevelCount,
+                            uint32_t sampleCount = 1,
+                            dawn::TextureUsageBit usage = dawn::TextureUsageBit::OutputAttachment) {
     dawn::TextureDescriptor descriptor;
     descriptor.dimension = dimension;
     descriptor.size.width = width;
     descriptor.size.height = height;
     descriptor.size.depth = 1;
     descriptor.arrayLayerCount = arrayLayerCount;
-    descriptor.sampleCount = 1;
+    descriptor.sampleCount = sampleCount;
     descriptor.format = format;
     descriptor.mipLevelCount = mipLevelCount;
-    descriptor.usage = dawn::TextureUsageBit::OutputAttachment;
+    descriptor.usage = usage;
 
     return device.CreateTexture(&descriptor);
 }
@@ -378,28 +380,122 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewLevelCountForColorAndDepth
     }
 }
 
-// Tests on the resolve target of RenderPassColorAttachmentDescriptor.
-// TODO(jiawei.shao@intel.com): add more tests when we support multisample color attachments.
-TEST_F(RenderPassDescriptorValidationTest, ResolveTarget) {
+// Tests on the multisampled color attachment and resolve target.
+TEST_F(RenderPassDescriptorValidationTest, MultisampledColorAttachmentAndResolveTarget) {
     constexpr uint32_t kArrayLayers = 1;
+    constexpr uint32_t kLevelCount = 1;
     constexpr uint32_t kSize = 32;
     constexpr dawn::TextureFormat kColorFormat = dawn::TextureFormat::R8G8B8A8Unorm;
 
-    constexpr uint32_t kLevelCount = 1;
+    constexpr uint32_t kSampleCount = 4;
 
     dawn::Texture colorTexture = CreateTexture(
-        device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount);
-
+        device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
+        kLevelCount);
+    dawn::Texture multisampledcolorTexture = CreateTexture(
+        device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
+        kLevelCount, kSampleCount);
     dawn::Texture resolveTexture = CreateTexture(
-        device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers, kLevelCount);
+        device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
+        kLevelCount);
 
-    // It is not allowed to set resolve target when the sample count of the color attachment is 1.
+    dawn::TextureView colorTextureView = colorTexture.CreateDefaultTextureView();
+    dawn::TextureView resolveTargetTextureView = resolveTexture.CreateDefaultTextureView();
+    dawn::TextureView multisampledColorTextureView =
+        multisampledcolorTexture.CreateDefaultTextureView();
+
+    // It is not allowed to set resolve target when the color attachment is non-multisampled.
     {
-        dawn::TextureView colorTextureView = colorTexture.CreateDefaultTextureView();
-        dawn::TextureView resolveTargetTextureView = resolveTexture.CreateDefaultTextureView();
-
         utils::ComboRenderPassDescriptor renderPass({colorTextureView});
         renderPass.cColorAttachmentsInfoPtr[0]->resolveTarget = resolveTargetTextureView;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // It is allowed to use a multisampled color attachment without setting resolve target.
+    {
+        utils::ComboRenderPassDescriptor renderPass({multisampledColorTextureView});
+        AssertBeginRenderPassSuccess(&renderPass);
+    }
+
+    // It is not allowed to use a multisampled color attachment and a multisampled resolve target.
+    {
+        dawn::Texture multisampledResolveTexture = CreateTexture(
+            device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
+            kLevelCount, kSampleCount);
+        dawn::TextureView multisampledResolveTargetView =
+            multisampledResolveTexture.CreateDefaultTextureView();
+
+        utils::ComboRenderPassDescriptor renderPass({multisampledColorTextureView});
+        renderPass.cColorAttachmentsInfoPtr[0]->resolveTarget = multisampledResolveTargetView;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // It is allowed to use a multisampled color attachment and a non-multisampled resolve target.
+    {
+        utils::ComboRenderPassDescriptor renderPass({ multisampledColorTextureView });
+        renderPass.cColorAttachmentsInfoPtr[0]->resolveTarget = resolveTargetTextureView;
+        AssertBeginRenderPassSuccess(&renderPass);
+    }
+
+    // It is not allowed to use a resolve target in a format different from the color attachment.
+    {
+        constexpr dawn::TextureFormat kColorFormat2 = dawn::TextureFormat::B8G8R8A8Unorm;
+        dawn::Texture resolveTexture2 = CreateTexture(
+            device, dawn::TextureDimension::e2D, kColorFormat2, kSize, kSize, kArrayLayers,
+            kLevelCount);
+        dawn::TextureView resolveTextureView2 = resolveTexture2.CreateDefaultTextureView();
+
+        utils::ComboRenderPassDescriptor renderPass({multisampledColorTextureView});
+        renderPass.cColorAttachmentsInfoPtr[0]->resolveTarget = resolveTextureView2;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // It is not allowed to use a resolve target with array layer count > 1.
+    {
+        constexpr uint32_t kArrayLayers2 = 2;
+        dawn::Texture resolveTexture2 = CreateTexture(
+            device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers2,
+            kLevelCount);
+        dawn::TextureView resolveTextureView2 = resolveTexture2.CreateDefaultTextureView();
+
+        utils::ComboRenderPassDescriptor renderPass({multisampledColorTextureView});
+        renderPass.cColorAttachmentsInfoPtr[0]->resolveTarget = resolveTextureView2;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // It is not allowed to use a resolve target with mip level count > 1.
+    {
+        constexpr uint32_t kLevelCount2 = 2;
+        dawn::Texture resolveTexture2 = CreateTexture(
+            device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
+            kLevelCount2);
+        dawn::TextureView resolveTextureView2 = resolveTexture2.CreateDefaultTextureView();
+
+        utils::ComboRenderPassDescriptor renderPass({multisampledColorTextureView});
+        renderPass.cColorAttachmentsInfoPtr[0]->resolveTarget = resolveTextureView2;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // It is not allowed to use multiple color attachments with different sample counts.
+    {
+        utils::ComboRenderPassDescriptor renderPass(
+            {multisampledColorTextureView, colorTextureView});
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    // It is not allowed to use a resolve target which is created from a texture whose usage does
+    // not include dawn::TextureUsageBit::OutputAttachment.
+    {
+        constexpr dawn::TextureUsageBit kUsage =
+            dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::TransferSrc;
+        dawn::Texture nonColorUsageResolveTexture = CreateTexture(
+            device, dawn::TextureDimension::e2D, kColorFormat, kSize, kSize, kArrayLayers,
+            kLevelCount, 1, kUsage);
+        dawn::TextureView nonColorUsageResolveTextureView =
+            nonColorUsageResolveTexture.CreateDefaultTextureView();
+
+        utils::ComboRenderPassDescriptor renderPass({multisampledColorTextureView});
+        renderPass.cColorAttachmentsInfoPtr[0]->resolveTarget = nonColorUsageResolveTextureView;
         AssertBeginRenderPassError(&renderPass);
     }
 }
