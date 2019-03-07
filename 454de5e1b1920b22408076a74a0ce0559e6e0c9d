@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0298bb1e_99608fd6",
+        "filename": "src/dawn_native/metal/InputStateMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T23:05:03Z",
+      "side": 1,
+      "message": "Is this guaranteed to always be a multiple of 4? That\u0027s required for MTLVertexBufferLayoutDescriptor.stride.",
+      "revId": "454de5e1b1920b22408076a74a0ce0559e6e0c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
