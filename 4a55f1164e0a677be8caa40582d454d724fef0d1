@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "fdb83f76_9378d3aa",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-07T20:11:04Z",
+      "side": 1,
+      "message": "Thank you, I think it is safe to proceed as if the group decided to remove them from WebGPU.",
+      "parentUuid": "a0fda06c_5c6c823f",
+      "revId": "4a55f1164e0a677be8caa40582d454d724fef0d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c157a2c0_b97c9b36",
         "filename": "src/dawn_native/d3d12/InputStateD3D12.cpp",
         "patchSetId": 1
