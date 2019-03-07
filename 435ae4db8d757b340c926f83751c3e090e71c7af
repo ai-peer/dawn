@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "d131c393_423e0da9",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-07T19:52:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbfa8d7a_7052d806",
+      "revId": "435ae4db8d757b340c926f83751c3e090e71c7af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84ca6fc4_19848ab1",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 1
