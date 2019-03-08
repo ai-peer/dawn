@@ -16,6 +16,24 @@
       "revId": "454de5e1b1920b22408076a74a0ce0559e6e0c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd8bf0ac_4f179572",
+        "filename": "src/dawn_native/metal/InputStateMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-03-08T08:59:44Z",
+      "side": 1,
+      "message": "I don\u0027t think it cannot guarantee it if the vertex format is UnormR8G8. I will align it with a multiple of 4 bytes.",
+      "parentUuid": "0298bb1e_99608fd6",
+      "revId": "454de5e1b1920b22408076a74a0ce0559e6e0c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
