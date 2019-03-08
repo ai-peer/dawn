@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0649313_f44b9dd4",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-08T18:29:06Z",
+      "side": 1,
+      "message": "The 5 blocks in this test could be separate tests.",
+      "revId": "219688af5d07d7bf722b42e9838d5a8b3e77968c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6253c247_2476cc22",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-08T18:29:06Z",
+      "side": 1,
+      "message": "The 4 blocks in this test could be separate tests.",
+      "revId": "219688af5d07d7bf722b42e9838d5a8b3e77968c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
