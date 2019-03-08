@@ -59,6 +59,8 @@ namespace dawn_native { namespace metal {
                     descriptor.colorAttachments[i].clearColor =
                         MTLClearColorMake(attachmentInfo.clearColor.r, attachmentInfo.clearColor.g,
                                           attachmentInfo.clearColor.b, attachmentInfo.clearColor.a);
+                } else if (attachmentInfo.loadOp == dawn::LoadOp::DontCare) {
+                    descriptor.colorAttachments[i].loadAction = MTLLoadActionDontCare;
                 } else {
                     descriptor.colorAttachments[i].loadAction = MTLLoadActionLoad;
                 }

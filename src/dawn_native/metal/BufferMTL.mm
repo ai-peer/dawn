@@ -54,6 +54,10 @@ namespace dawn_native { namespace metal {
     }
 
     void Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        if (serial == 1) {
+            OnMapCommandSerialFinished(serial, true);
+            return;
+        }
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapTracker();
         tracker->Track(this, serial, true);
     }
