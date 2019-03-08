@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <utility>
+#include <string.h>
 
 namespace dawn_native {
 
@@ -61,9 +62,12 @@ namespace dawn_native {
         dawn::BufferUsageBit usage = descriptor->usage;
 
         const dawn::BufferUsageBit kMapWriteAllowedUsages =
-            dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+            dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc |
+            dawn::BufferUsageBit::Uniform | dawn::BufferUsageBit::Vertex |
+            dawn::BufferUsageBit::Index;
         if (usage & dawn::BufferUsageBit::MapWrite && (usage & kMapWriteAllowedUsages) != usage) {
-            return DAWN_VALIDATION_ERROR("Only TransferSrc is allowed with MapWrite");
+            return DAWN_VALIDATION_ERROR(
+                "Only TransferSrc, Uniform, Vertex, Index are allowed with MapWrite");
         }
 
         const dawn::BufferUsageBit kMapReadAllowedUsages =
@@ -120,6 +124,7 @@ namespace dawn_native {
             case BufferState::Mapped:
                 return DAWN_VALIDATION_ERROR("Buffer used in a submit while mapped");
             case BufferState::Unmapped:
+            default:
                 return {};
         }
     }
@@ -316,6 +321,7 @@ namespace dawn_native {
         switch (mState) {
             case BufferState::Unmapped:
             case BufferState::Mapped:
+            default:
                 return {};
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Buffer is destroyed");
