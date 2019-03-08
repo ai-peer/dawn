@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "af81b268_b100ca84",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-03-08T07:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e1cc02b_b4cc86c5",
+      "revId": "86b82bd2642945639c0ba97b04a14aa04e99b575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c286c640_c065682e",
         "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "86b82bd2642945639c0ba97b04a14aa04e99b575",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "561adfd8_f72d3ba2",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-03-08T07:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c286c640_c065682e",
+      "revId": "86b82bd2642945639c0ba97b04a14aa04e99b575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
