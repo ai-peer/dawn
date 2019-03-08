@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "899211ae_562de8b0",
+        "filename": "src/dawn_wire/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-08T08:39:17Z",
+      "side": 1,
+      "message": "unit: These two imports aren\u0027t useful until the rest of dawn_wire is moved to this file.",
+      "revId": "8c1a90199a43f04f86539141b394f05014cea77a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
