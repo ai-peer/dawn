@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e1cc02b_b4cc86c5",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-08T04:18:43Z",
+      "side": 1,
+      "message": "assert that this never returns 0 (i.e. that sampleCount is not 0 after this)",
+      "revId": "86b82bd2642945639c0ba97b04a14aa04e99b575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c286c640_c065682e",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-08T04:18:43Z",
+      "side": 1,
+      "message": "This is a lot of tests for one TEST_F. Would you mind refactoring into many TEST_Fs, probably using a new test fixture (e.g. RenderPassDescriptorResolveValidationTest).",
+      "revId": "86b82bd2642945639c0ba97b04a14aa04e99b575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
