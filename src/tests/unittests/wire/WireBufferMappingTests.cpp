@@ -23,17 +23,17 @@ namespace {
     class MockBufferMapReadCallback {
       public:
         MOCK_METHOD4(Call,
-                     void(dawnBufferMapAsyncStatus status,
+                     void(DawnBufferMapAsyncStatus status,
                           const uint32_t* ptr,
                           uint32_t dataLength,
-                          dawnCallbackUserdata userdata));
+                          DawnCallbackUserdata userdata));
     };
 
     std::unique_ptr<MockBufferMapReadCallback> mockBufferMapReadCallback;
-    void ToMockBufferMapReadCallback(dawnBufferMapAsyncStatus status,
+    void ToMockBufferMapReadCallback(DawnBufferMapAsyncStatus status,
                                      const void* ptr,
                                      uint32_t dataLength,
-                                     dawnCallbackUserdata userdata) {
+                                     DawnCallbackUserdata userdata) {
         // Assume the data is uint32_t to make writing matchers easier
         mockBufferMapReadCallback->Call(status, static_cast<const uint32_t*>(ptr), dataLength,
                                         userdata);
@@ -42,18 +42,18 @@ namespace {
     class MockBufferMapWriteCallback {
       public:
         MOCK_METHOD4(Call,
-                     void(dawnBufferMapAsyncStatus status,
+                     void(DawnBufferMapAsyncStatus status,
                           uint32_t* ptr,
                           uint32_t dataLength,
-                          dawnCallbackUserdata userdata));
+                          DawnCallbackUserdata userdata));
     };
 
     std::unique_ptr<MockBufferMapWriteCallback> mockBufferMapWriteCallback;
     uint32_t* lastMapWritePointer = nullptr;
-    void ToMockBufferMapWriteCallback(dawnBufferMapAsyncStatus status,
+    void ToMockBufferMapWriteCallback(DawnBufferMapAsyncStatus status,
                                       void* ptr,
                                       uint32_t dataLength,
-                                      dawnCallbackUserdata userdata) {
+                                      DawnCallbackUserdata userdata) {
         // Assume the data is uint32_t to make writing matchers easier
         lastMapWritePointer = static_cast<uint32_t*>(ptr);
         mockBufferMapWriteCallback->Call(status, lastMapWritePointer, dataLength, userdata);
@@ -74,11 +74,11 @@ class WireBufferMappingTests : public WireTest {
         mockBufferMapWriteCallback = std::make_unique<MockBufferMapWriteCallback>();
 
         {
-            dawnBufferDescriptor descriptor;
+            DawnBufferDescriptor descriptor;
             descriptor.nextInChain = nullptr;
 
             apiBuffer = api.GetNewBuffer();
-            buffer = dawnDeviceCreateBuffer(device, &descriptor);
+            buffer = DawnDeviceCreateBuffer(device, &descriptor);
 
             EXPECT_CALL(api, DeviceCreateBuffer(apiDevice, _))
                 .WillOnce(Return(apiBuffer))
@@ -87,10 +87,10 @@ class WireBufferMappingTests : public WireTest {
             FlushClient();
         }
         {
-            dawnBufferDescriptor descriptor;
+            DawnBufferDescriptor descriptor;
             descriptor.nextInChain = nullptr;
 
-            errorBuffer = dawnDeviceCreateBuffer(device, &descriptor);
+            errorBuffer = DawnDeviceCreateBuffer(device, &descriptor);
 
             EXPECT_CALL(api, DeviceCreateBuffer(apiDevice, _))
                 .WillOnce(Return(nullptr))
@@ -109,19 +109,19 @@ class WireBufferMappingTests : public WireTest {
 
   protected:
     // A successfully created buffer
-    dawnBuffer buffer;
-    dawnBuffer apiBuffer;
+    DawnBuffer buffer;
+    DawnBuffer apiBuffer;
 
     // An buffer that wasn't created on the server side
-    dawnBuffer errorBuffer;
+    DawnBuffer errorBuffer;
 };
 
 // MapRead-specific tests
 
 // Check mapping for reading a succesfully created buffer
 TEST_F(WireBufferMappingTests, MappingForReadSuccessBuffer) {
-    dawnCallbackUserdata userdata = 8653;
-    dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 8653;
+    DawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
 
     uint32_t bufferContent = 31337;
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
@@ -139,7 +139,7 @@ TEST_F(WireBufferMappingTests, MappingForReadSuccessBuffer) {
 
     FlushServer();
 
-    dawnBufferUnmap(buffer);
+    DawnBufferUnmap(buffer);
     EXPECT_CALL(api, BufferUnmap(apiBuffer)).Times(1);
 
     FlushClient();
@@ -148,8 +148,8 @@ TEST_F(WireBufferMappingTests, MappingForReadSuccessBuffer) {
 // Check that things work correctly when a validation error happens when mapping the buffer for
 // reading
 TEST_F(WireBufferMappingTests, ErrorWhileMappingForRead) {
-    dawnCallbackUserdata userdata = 8654;
-    dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 8654;
+    DawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
 
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
         .WillOnce(InvokeWithoutArgs([&]() {
@@ -167,8 +167,8 @@ TEST_F(WireBufferMappingTests, ErrorWhileMappingForRead) {
 
 // Check mapping for reading a buffer that didn't get created on the server side
 TEST_F(WireBufferMappingTests, MappingForReadErrorBuffer) {
-    dawnCallbackUserdata userdata = 8655;
-    dawnBufferMapReadAsync(errorBuffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 8655;
+    DawnBufferMapReadAsync(errorBuffer, ToMockBufferMapReadCallback, userdata);
 
     FlushClient();
 
@@ -178,7 +178,7 @@ TEST_F(WireBufferMappingTests, MappingForReadErrorBuffer) {
 
     FlushServer();
 
-    dawnBufferUnmap(errorBuffer);
+    DawnBufferUnmap(errorBuffer);
 
     FlushClient();
 }
@@ -186,21 +186,21 @@ TEST_F(WireBufferMappingTests, MappingForReadErrorBuffer) {
 // Check that the map read callback is called with UNKNOWN when the buffer is destroyed before the
 // request is finished
 TEST_F(WireBufferMappingTests, DestroyBeforeReadRequestEnd) {
-    dawnCallbackUserdata userdata = 8656;
-    dawnBufferMapReadAsync(errorBuffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 8656;
+    DawnBufferMapReadAsync(errorBuffer, ToMockBufferMapReadCallback, userdata);
 
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0, userdata))
         .Times(1);
 
-    dawnBufferRelease(errorBuffer);
+    DawnBufferRelease(errorBuffer);
 }
 
 // Check the map read callback is called with UNKNOWN when the map request would have worked, but
 // Unmap was called
 TEST_F(WireBufferMappingTests, UnmapCalledTooEarlyForRead) {
-    dawnCallbackUserdata userdata = 8657;
-    dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 8657;
+    DawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
 
     uint32_t bufferContent = 31337;
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
@@ -215,7 +215,7 @@ TEST_F(WireBufferMappingTests, UnmapCalledTooEarlyForRead) {
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0, userdata))
         .Times(1);
-    dawnBufferUnmap(buffer);
+    DawnBufferUnmap(buffer);
 
     // The callback shouldn't get called, even when the request succeeded on the server side
     FlushServer();
@@ -224,8 +224,8 @@ TEST_F(WireBufferMappingTests, UnmapCalledTooEarlyForRead) {
 // Check that an error map read callback gets nullptr while a buffer is already mapped
 TEST_F(WireBufferMappingTests, MappingForReadingErrorWhileAlreadyMappedGetsNullptr) {
     // Successful map
-    dawnCallbackUserdata userdata = 34098;
-    dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 34098;
+    DawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
 
     uint32_t bufferContent = 31337;
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
@@ -246,7 +246,7 @@ TEST_F(WireBufferMappingTests, MappingForReadingErrorWhileAlreadyMappedGetsNullp
 
     // Map failure while the buffer is already mapped
     userdata++;
-    dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
+    DawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
         .WillOnce(InvokeWithoutArgs([&]() {
             api.CallMapReadCallback(apiBuffer, DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR, nullptr, 0);
@@ -263,8 +263,8 @@ TEST_F(WireBufferMappingTests, MappingForReadingErrorWhileAlreadyMappedGetsNullp
 
 // Test that the MapReadCallback isn't fired twice when unmap() is called inside the callback
 TEST_F(WireBufferMappingTests, UnmapInsideMapReadCallback) {
-    dawnCallbackUserdata userdata = 2039;
-    dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 2039;
+    DawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
 
     uint32_t bufferContent = 31337;
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
@@ -278,7 +278,7 @@ TEST_F(WireBufferMappingTests, UnmapInsideMapReadCallback) {
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, Pointee(Eq(bufferContent)),
                      sizeof(uint32_t), userdata))
-        .WillOnce(InvokeWithoutArgs([&]() { dawnBufferUnmap(buffer); }));
+        .WillOnce(InvokeWithoutArgs([&]() { DawnBufferUnmap(buffer); }));
 
     FlushServer();
 
@@ -290,8 +290,8 @@ TEST_F(WireBufferMappingTests, UnmapInsideMapReadCallback) {
 // Test that the MapReadCallback isn't fired twice the buffer external refcount reaches 0 in the
 // callback
 TEST_F(WireBufferMappingTests, DestroyInsideMapReadCallback) {
-    dawnCallbackUserdata userdata = 2039;
-    dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
+    DawnCallbackUserdata userdata = 2039;
+    DawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, userdata);
 
     uint32_t bufferContent = 31337;
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
@@ -305,7 +305,7 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapReadCallback) {
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, Pointee(Eq(bufferContent)),
                      sizeof(uint32_t), userdata))
-        .WillOnce(InvokeWithoutArgs([&]() { dawnBufferRelease(buffer); }));
+        .WillOnce(InvokeWithoutArgs([&]() { DawnBufferRelease(buffer); }));
 
     FlushServer();
 
@@ -316,8 +316,8 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapReadCallback) {
 
 // Check mapping for writing a succesfully created buffer
 TEST_F(WireBufferMappingTests, MappingForWriteSuccessBuffer) {
-    dawnCallbackUserdata userdata = 8653;
-    dawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 8653;
+    DawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
 
     uint32_t serverBufferContent = 31337;
     uint32_t updatedContent = 4242;
@@ -341,7 +341,7 @@ TEST_F(WireBufferMappingTests, MappingForWriteSuccessBuffer) {
     // Write something to the mapped pointer
     *lastMapWritePointer = updatedContent;
 
-    dawnBufferUnmap(buffer);
+    DawnBufferUnmap(buffer);
     EXPECT_CALL(api, BufferUnmap(apiBuffer)).Times(1);
 
     FlushClient();
@@ -353,8 +353,8 @@ TEST_F(WireBufferMappingTests, MappingForWriteSuccessBuffer) {
 // Check that things work correctly when a validation error happens when mapping the buffer for
 // writing
 TEST_F(WireBufferMappingTests, ErrorWhileMappingForWrite) {
-    dawnCallbackUserdata userdata = 8654;
-    dawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 8654;
+    DawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
 
     EXPECT_CALL(api, OnBufferMapWriteAsyncCallback(apiBuffer, _, _))
         .WillOnce(InvokeWithoutArgs([&]() {
@@ -372,8 +372,8 @@ TEST_F(WireBufferMappingTests, ErrorWhileMappingForWrite) {
 
 // Check mapping for writing a buffer that didn't get created on the server side
 TEST_F(WireBufferMappingTests, MappingForWriteErrorBuffer) {
-    dawnCallbackUserdata userdata = 8655;
-    dawnBufferMapWriteAsync(errorBuffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 8655;
+    DawnBufferMapWriteAsync(errorBuffer, ToMockBufferMapWriteCallback, userdata);
 
     FlushClient();
 
@@ -383,7 +383,7 @@ TEST_F(WireBufferMappingTests, MappingForWriteErrorBuffer) {
 
     FlushServer();
 
-    dawnBufferUnmap(errorBuffer);
+    DawnBufferUnmap(errorBuffer);
 
     FlushClient();
 }
@@ -391,21 +391,21 @@ TEST_F(WireBufferMappingTests, MappingForWriteErrorBuffer) {
 // Check that the map write callback is called with UNKNOWN when the buffer is destroyed before the
 // request is finished
 TEST_F(WireBufferMappingTests, DestroyBeforeWriteRequestEnd) {
-    dawnCallbackUserdata userdata = 8656;
-    dawnBufferMapWriteAsync(errorBuffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 8656;
+    DawnBufferMapWriteAsync(errorBuffer, ToMockBufferMapWriteCallback, userdata);
 
     EXPECT_CALL(*mockBufferMapWriteCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0, userdata))
         .Times(1);
 
-    dawnBufferRelease(errorBuffer);
+    DawnBufferRelease(errorBuffer);
 }
 
 // Check the map read callback is called with UNKNOWN when the map request would have worked, but
 // Unmap was called
 TEST_F(WireBufferMappingTests, UnmapCalledTooEarlyForWrite) {
-    dawnCallbackUserdata userdata = 8657;
-    dawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 8657;
+    DawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
 
     uint32_t bufferContent = 31337;
     EXPECT_CALL(api, OnBufferMapWriteAsyncCallback(apiBuffer, _, _))
@@ -420,7 +420,7 @@ TEST_F(WireBufferMappingTests, UnmapCalledTooEarlyForWrite) {
     EXPECT_CALL(*mockBufferMapWriteCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0, userdata))
         .Times(1);
-    dawnBufferUnmap(buffer);
+    DawnBufferUnmap(buffer);
 
     // The callback shouldn't get called, even when the request succeeded on the server side
     FlushServer();
@@ -429,8 +429,8 @@ TEST_F(WireBufferMappingTests, UnmapCalledTooEarlyForWrite) {
 // Check that an error map read callback gets nullptr while a buffer is already mapped
 TEST_F(WireBufferMappingTests, MappingForWritingErrorWhileAlreadyMappedGetsNullptr) {
     // Successful map
-    dawnCallbackUserdata userdata = 34098;
-    dawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 34098;
+    DawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
 
     uint32_t bufferContent = 31337;
     uint32_t zero = 0;
@@ -451,7 +451,7 @@ TEST_F(WireBufferMappingTests, MappingForWritingErrorWhileAlreadyMappedGetsNullp
 
     // Map failure while the buffer is already mapped
     userdata++;
-    dawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
+    DawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
     EXPECT_CALL(api, OnBufferMapWriteAsyncCallback(apiBuffer, _, _))
         .WillOnce(InvokeWithoutArgs([&]() {
             api.CallMapWriteCallback(apiBuffer, DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR, nullptr, 0);
@@ -468,8 +468,8 @@ TEST_F(WireBufferMappingTests, MappingForWritingErrorWhileAlreadyMappedGetsNullp
 
 // Test that the MapWriteCallback isn't fired twice when unmap() is called inside the callback
 TEST_F(WireBufferMappingTests, UnmapInsideMapWriteCallback) {
-    dawnCallbackUserdata userdata = 2039;
-    dawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 2039;
+    DawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
 
     uint32_t bufferContent = 31337;
     uint32_t zero = 0;
@@ -483,7 +483,7 @@ TEST_F(WireBufferMappingTests, UnmapInsideMapWriteCallback) {
 
     EXPECT_CALL(*mockBufferMapWriteCallback, Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS,
                                                   Pointee(Eq(zero)), sizeof(uint32_t), userdata))
-        .WillOnce(InvokeWithoutArgs([&]() { dawnBufferUnmap(buffer); }));
+        .WillOnce(InvokeWithoutArgs([&]() { DawnBufferUnmap(buffer); }));
 
     FlushServer();
 
@@ -495,8 +495,8 @@ TEST_F(WireBufferMappingTests, UnmapInsideMapWriteCallback) {
 // Test that the MapWriteCallback isn't fired twice the buffer external refcount reaches 0 in the
 // callback
 TEST_F(WireBufferMappingTests, DestroyInsideMapWriteCallback) {
-    dawnCallbackUserdata userdata = 2039;
-    dawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
+    DawnCallbackUserdata userdata = 2039;
+    DawnBufferMapWriteAsync(buffer, ToMockBufferMapWriteCallback, userdata);
 
     uint32_t bufferContent = 31337;
     uint32_t zero = 0;
@@ -510,7 +510,7 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapWriteCallback) {
 
     EXPECT_CALL(*mockBufferMapWriteCallback, Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS,
                                                   Pointee(Eq(zero)), sizeof(uint32_t), userdata))
-        .WillOnce(InvokeWithoutArgs([&]() { dawnBufferRelease(buffer); }));
+        .WillOnce(InvokeWithoutArgs([&]() { DawnBufferRelease(buffer); }));
 
     FlushServer();
 

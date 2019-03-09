@@ -39,17 +39,17 @@ ValidationTest::ValidationTest() {
     ASSERT(foundNullAdapter);
     device = dawn::Device::Acquire(nullAdapter.CreateDevice());
 
-    dawnProcTable procs = dawn_native::GetProcs();
-    dawnSetProcs(&procs);
+    DawnProcTable procs = dawn_native::GetProcs();
+    DawnSetProcs(&procs);
 
-    device.SetErrorCallback(ValidationTest::OnDeviceError, static_cast<dawnCallbackUserdata>(reinterpret_cast<uintptr_t>(this)));
+    device.SetErrorCallback(ValidationTest::OnDeviceError, static_cast<DawnCallbackUserdata>(reinterpret_cast<uintptr_t>(this)));
 }
 
 ValidationTest::~ValidationTest() {
     // We need to destroy Dawn objects before setting the procs to null otherwise the dawn*Release
     // will call a nullptr
     device = dawn::Device();
-    dawnSetProcs(nullptr);
+    DawnSetProcs(nullptr);
 }
 
 void ValidationTest::TearDown() {
@@ -85,7 +85,7 @@ std::string ValidationTest::GetLastDeviceErrorMessage() const {
 }
 
 // static
-void ValidationTest::OnDeviceError(const char* message, dawnCallbackUserdata userdata) {
+void ValidationTest::OnDeviceError(const char* message, DawnCallbackUserdata userdata) {
     auto self = reinterpret_cast<ValidationTest*>(static_cast<uintptr_t>(userdata));
     self->mDeviceErrorMessage = message;
 
@@ -102,7 +102,7 @@ void ValidationTest::OnDeviceError(const char* message, dawnCallbackUserdata use
 }
 
 // static
-void ValidationTest::OnBuilderErrorStatus(dawnBuilderErrorStatus status, const char* message, dawn::CallbackUserdata userdata1, dawn::CallbackUserdata userdata2) {
+void ValidationTest::OnBuilderErrorStatus(DawnBuilderErrorStatus status, const char* message, dawn::CallbackUserdata userdata1, dawn::CallbackUserdata userdata2) {
     auto* self = reinterpret_cast<ValidationTest*>(static_cast<uintptr_t>(userdata1));
     size_t index = static_cast<size_t>(userdata2);
 

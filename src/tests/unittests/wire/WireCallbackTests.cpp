@@ -22,28 +22,28 @@ namespace {
     // Mock classes to add expectations on the wire calling callbacks
     class MockDeviceErrorCallback {
       public:
-        MOCK_METHOD2(Call, void(const char* message, dawnCallbackUserdata userdata));
+        MOCK_METHOD2(Call, void(const char* message, DawnCallbackUserdata userdata));
     };
 
     std::unique_ptr<MockDeviceErrorCallback> mockDeviceErrorCallback;
-    void ToMockDeviceErrorCallback(const char* message, dawnCallbackUserdata userdata) {
+    void ToMockDeviceErrorCallback(const char* message, DawnCallbackUserdata userdata) {
         mockDeviceErrorCallback->Call(message, userdata);
     }
 
     class MockBuilderErrorCallback {
       public:
         MOCK_METHOD4(Call,
-                     void(dawnBuilderErrorStatus status,
+                     void(DawnBuilderErrorStatus status,
                           const char* message,
-                          dawnCallbackUserdata userdata1,
-                          dawnCallbackUserdata userdata2));
+                          DawnCallbackUserdata userdata1,
+                          DawnCallbackUserdata userdata2));
     };
 
     std::unique_ptr<MockBuilderErrorCallback> mockBuilderErrorCallback;
-    void ToMockBuilderErrorCallback(dawnBuilderErrorStatus status,
+    void ToMockBuilderErrorCallback(DawnBuilderErrorStatus status,
                                     const char* message,
-                                    dawnCallbackUserdata userdata1,
-                                    dawnCallbackUserdata userdata2) {
+                                    DawnCallbackUserdata userdata1,
+                                    DawnCallbackUserdata userdata2) {
         mockBuilderErrorCallback->Call(status, message, userdata1, userdata2);
     }
 
@@ -73,17 +73,17 @@ class WireCallbackTests : public WireTest {
 
 // Test that we get a success builder error status when no error happens
 TEST_F(WireCallbackTests, SuccessCallbackOnBuilderSuccess) {
-    dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
-    dawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 1, 2);
-    dawnBufferBuilderGetResult(bufferBuilder);
+    DawnBufferBuilder bufferBuilder = DawnDeviceCreateBufferBuilderForTesting(device);
+    DawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 1, 2);
+    DawnBufferBuilderGetResult(bufferBuilder);
 
-    dawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
+    DawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
     EXPECT_CALL(api, DeviceCreateBufferBuilderForTesting(apiDevice))
         .WillOnce(Return(apiBufferBuilder));
 
-    dawnBuffer apiBuffer = api.GetNewBuffer();
+    DawnBuffer apiBuffer = api.GetNewBuffer();
     EXPECT_CALL(api, BufferBuilderGetResult(apiBufferBuilder))
-        .WillOnce(InvokeWithoutArgs([&]() -> dawnBuffer {
+        .WillOnce(InvokeWithoutArgs([&]() -> DawnBuffer {
             api.CallBuilderErrorCallback(apiBufferBuilder, DAWN_BUILDER_ERROR_STATUS_SUCCESS,
                                          "I like cheese");
             return apiBuffer;
@@ -103,55 +103,55 @@ TEST_F(WireCallbackTests, SuccessCallbackOnBuilderSuccess) {
 TEST_F(WireCallbackTests, UnknownBuilderErrorStatusCallback) {
     // The builder is destroyed before the object is built
     {
-        dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
-        dawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 1, 2);
+        DawnBufferBuilder bufferBuilder = DawnDeviceCreateBufferBuilderForTesting(device);
+        DawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 1, 2);
 
         EXPECT_CALL(*mockBuilderErrorCallback, Call(DAWN_BUILDER_ERROR_STATUS_UNKNOWN, _, 1, 2))
             .Times(1);
 
-        dawnBufferBuilderRelease(bufferBuilder);
+        DawnBufferBuilderRelease(bufferBuilder);
     }
 
     // If the builder has been consumed, it doesn't fire the callback with unknown
     {
-        dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
-        dawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 3, 4);
-        dawnBufferBuilderGetResult(bufferBuilder);
+        DawnBufferBuilder bufferBuilder = DawnDeviceCreateBufferBuilderForTesting(device);
+        DawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 3, 4);
+        DawnBufferBuilderGetResult(bufferBuilder);
 
         EXPECT_CALL(*mockBuilderErrorCallback, Call(DAWN_BUILDER_ERROR_STATUS_UNKNOWN, _, 3, 4))
             .Times(0);
 
-        dawnBufferBuilderRelease(bufferBuilder);
+        DawnBufferBuilderRelease(bufferBuilder);
     }
 
     // If the builder has been consumed, and the object is destroyed before the result comes from
     // the server, then the callback is fired with unknown
     {
-        dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
-        dawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 5, 6);
-        dawnBuffer buffer = dawnBufferBuilderGetResult(bufferBuilder);
+        DawnBufferBuilder bufferBuilder = DawnDeviceCreateBufferBuilderForTesting(device);
+        DawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, 5, 6);
+        DawnBuffer buffer = DawnBufferBuilderGetResult(bufferBuilder);
 
         EXPECT_CALL(*mockBuilderErrorCallback, Call(DAWN_BUILDER_ERROR_STATUS_UNKNOWN, _, 5, 6))
             .Times(1);
 
-        dawnBufferRelease(buffer);
+        DawnBufferRelease(buffer);
     }
 }
 
 // Test that a builder success status doesn't get forwarded to the device
 TEST_F(WireCallbackTests, SuccessCallbackNotForwardedToDevice) {
-    dawnDeviceSetErrorCallback(device, ToMockDeviceErrorCallback, 0);
+    DawnDeviceSetErrorCallback(device, ToMockDeviceErrorCallback, 0);
 
-    dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
-    dawnBufferBuilderGetResult(bufferBuilder);
+    DawnBufferBuilder bufferBuilder = DawnDeviceCreateBufferBuilderForTesting(device);
+    DawnBufferBuilderGetResult(bufferBuilder);
 
-    dawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
+    DawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
     EXPECT_CALL(api, DeviceCreateBufferBuilderForTesting(apiDevice))
         .WillOnce(Return(apiBufferBuilder));
 
-    dawnBuffer apiBuffer = api.GetNewBuffer();
+    DawnBuffer apiBuffer = api.GetNewBuffer();
     EXPECT_CALL(api, BufferBuilderGetResult(apiBufferBuilder))
-        .WillOnce(InvokeWithoutArgs([&]() -> dawnBuffer {
+        .WillOnce(InvokeWithoutArgs([&]() -> DawnBuffer {
             api.CallBuilderErrorCallback(apiBufferBuilder, DAWN_BUILDER_ERROR_STATUS_SUCCESS,
                                          "I like cheese");
             return apiBuffer;
@@ -166,17 +166,17 @@ TEST_F(WireCallbackTests, SuccessCallbackNotForwardedToDevice) {
 // Test that a builder error status gets forwarded to the device
 TEST_F(WireCallbackTests, ErrorCallbackForwardedToDevice) {
     uint64_t userdata = 30495;
-    dawnDeviceSetErrorCallback(device, ToMockDeviceErrorCallback, userdata);
+    DawnDeviceSetErrorCallback(device, ToMockDeviceErrorCallback, userdata);
 
-    dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
-    dawnBufferBuilderGetResult(bufferBuilder);
+    DawnBufferBuilder bufferBuilder = DawnDeviceCreateBufferBuilderForTesting(device);
+    DawnBufferBuilderGetResult(bufferBuilder);
 
-    dawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
+    DawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
     EXPECT_CALL(api, DeviceCreateBufferBuilderForTesting(apiDevice))
         .WillOnce(Return(apiBufferBuilder));
 
     EXPECT_CALL(api, BufferBuilderGetResult(apiBufferBuilder))
-        .WillOnce(InvokeWithoutArgs([&]() -> dawnBuffer {
+        .WillOnce(InvokeWithoutArgs([&]() -> DawnBuffer {
             api.CallBuilderErrorCallback(apiBufferBuilder, DAWN_BUILDER_ERROR_STATUS_ERROR,
                                          "Error :(");
             return nullptr;
@@ -193,7 +193,7 @@ TEST_F(WireCallbackTests, ErrorCallbackForwardedToDevice) {
 // Test the return wire for device error callbacks
 TEST_F(WireCallbackTests, DeviceErrorCallback) {
     uint64_t userdata = 3049785;
-    dawnDeviceSetErrorCallback(device, ToMockDeviceErrorCallback, userdata);
+    DawnDeviceSetErrorCallback(device, ToMockDeviceErrorCallback, userdata);
 
     // Setting the error callback should stay on the client side and do nothing
     FlushClient();
@@ -213,9 +213,9 @@ TEST_F(WireCallbackTests, BuilderErrorCallback) {
     uint64_t userdata2 = 982734239028;
 
     // Create the buffer builder, the callback is set immediately on the server side
-    dawnBufferBuilder bufferBuilder = dawnDeviceCreateBufferBuilderForTesting(device);
+    DawnBufferBuilder bufferBuilder = DawnDeviceCreateBufferBuilderForTesting(device);
 
-    dawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
+    DawnBufferBuilder apiBufferBuilder = api.GetNewBufferBuilder();
     EXPECT_CALL(api, DeviceCreateBufferBuilderForTesting(apiDevice))
         .WillOnce(Return(apiBufferBuilder));
 
@@ -224,16 +224,16 @@ TEST_F(WireCallbackTests, BuilderErrorCallback) {
     FlushClient();
 
     // Setting the callback on the client side doesn't do anything on the server side
-    dawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, userdata1,
+    DawnBufferBuilderSetErrorCallback(bufferBuilder, ToMockBuilderErrorCallback, userdata1,
                                       userdata2);
     FlushClient();
 
     // Create an object so that it is a valid case to call the error callback
-    dawnBufferBuilderGetResult(bufferBuilder);
+    DawnBufferBuilderGetResult(bufferBuilder);
 
-    dawnBuffer apiBuffer = api.GetNewBuffer();
+    DawnBuffer apiBuffer = api.GetNewBuffer();
     EXPECT_CALL(api, BufferBuilderGetResult(apiBufferBuilder))
-        .WillOnce(InvokeWithoutArgs([&]() -> dawnBuffer {
+        .WillOnce(InvokeWithoutArgs([&]() -> DawnBuffer {
             api.CallBuilderErrorCallback(apiBufferBuilder, DAWN_BUILDER_ERROR_STATUS_SUCCESS,
                                          "Success!");
             return apiBuffer;
