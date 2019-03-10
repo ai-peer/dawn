@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3686cb66_0237a246",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-10T10:31:13Z",
+      "side": 1,
+      "message": "This is a bit sad imho because the C++ namespace and \"C namespace\" are now different (dawn vs. Dawn). An alternative would be to add aliases for the C types and use them only in Chromium.",
+      "revId": "f3e3589001d914951d7c4942b1d13c131d4772ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
