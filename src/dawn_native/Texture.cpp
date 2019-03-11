@@ -367,6 +367,9 @@ namespace dawn_native {
 
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
         ASSERT(!IsError());
+        if (mIsDestroyed) {
+            return DAWN_VALIDATION_ERROR("Destroyed texture used in a submit");
+        }
         return {};
     }
 
@@ -387,6 +390,13 @@ namespace dawn_native {
 
     TextureViewBase* TextureBase::CreateTextureView(const TextureViewDescriptor* descriptor) {
         return GetDevice()->CreateTextureView(this, descriptor);
+    }
+
+    void TextureBase::Destroy() {
+        if (!mIsDestroyed) {
+            DestroyImpl();
+        }
+        mIsDestroyed = true;
     }
 
     // TextureViewBase

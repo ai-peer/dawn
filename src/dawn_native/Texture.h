@@ -64,9 +64,11 @@ namespace dawn_native {
         // Dawn API
         TextureViewBase* CreateDefaultTextureView();
         TextureViewBase* CreateTextureView(const TextureViewDescriptor* descriptor);
+        void Destroy();
 
       private:
         TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+        virtual void DestroyImpl(){};
 
         dawn::TextureDimension mDimension;
         dawn::TextureFormat mFormat;
@@ -75,6 +77,8 @@ namespace dawn_native {
         uint32_t mMipLevelCount;
         uint32_t mSampleCount;
         dawn::TextureUsageBit mUsage = dawn::TextureUsageBit::None;
+
+        bool mIsDestroyed = false;
     };
 
     class TextureViewBase : public ObjectBase {
