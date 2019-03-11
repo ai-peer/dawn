@@ -117,6 +117,23 @@
     },
     {
       "key": {
+        "uuid": "1e71e2cc_6d07ef89",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-03-11T17:17:38Z",
+      "side": 1,
+      "message": "nit: please lower this to where it is used.",
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca940127_5b8394f3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -163,6 +180,23 @@
     },
     {
       "key": {
+        "uuid": "c84d8971_ca7e816c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-03-11T17:17:38Z",
+      "side": 1,
+      "message": "Should we throw an error if output bindings are incomplete?",
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58e319b2_6a3bc0a0",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -174,6 +208,30 @@
       "writtenOn": "2019-02-28T22:18:16Z",
       "side": 1,
       "message": "UAV writes are permitted within a render pass, but the user must specifically indicate they they will be issuing UAV writes by passing ALLOW_UAV_WRITES to let UMDs opt out of tiling if necessary.\n\nDoes Dawn know whether UAV writes will happen during a render pass?",
+      "range": {
+        "startLine": 671,
+        "startChar": 12,
+        "endLine": 671,
+        "endChar": 39
+      },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bcd3333_c7ee46da",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-03-11T17:17:38Z",
+      "side": 1,
+      "message": "If so, we\u0027ll probably need to feature detect. Depending on tier, UAV writes may be slow.",
+      "parentUuid": "58e319b2_6a3bc0a0",
       "range": {
         "startLine": 671,
         "startChar": 12,
@@ -203,6 +261,40 @@
         "endLine": 736,
         "endChar": 59
       },
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67705d0c_02a6f84e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-03-11T17:17:38Z",
+      "side": 1,
+      "message": "I see behavioral differences between native vs not. For example, write-read constraint only exists with native. Have we gone through Dawn\u0027s render-pass spec to make sure this is normative?",
+      "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94c06076_cb1b93f7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-03-11T17:17:38Z",
+      "side": 1,
+      "message": "nit: can be removed w/ COM ptr.",
       "revId": "d88494dc2e3a133a53b314e2e33366c1b1e3277a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
