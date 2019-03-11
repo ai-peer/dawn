@@ -296,6 +296,10 @@ namespace dawn_native { namespace vulkan {
     }
 
     Texture::~Texture() {
+        DestroyImpl();
+    }
+
+    void Texture::DestroyImpl() {
         Device* device = ToBackend(GetDevice());
 
         // If we own the resource, release it.
