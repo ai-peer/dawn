@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18ae4dc6_ee0cdc9a",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-12T17:32:46Z",
+      "side": 1,
+      "message": "Removing redundent test here",
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6ae6d02_10c5cecc",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-12T17:32:46Z",
+      "side": 1,
+      "message": "adding another destroy call here.",
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
