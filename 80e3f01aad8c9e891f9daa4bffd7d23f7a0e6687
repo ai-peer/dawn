@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc48a804_d0fee626",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-12T18:54:29Z",
+      "side": 1,
+      "message": "This is kind of tricky. FYI, comment was added here:\nhttps://dawn.googlesource.com/dawn.git/+/35bf424035eaab30f6529c445186256d0df1e073%5E%21/\n\nThe \u0027native texture\u0027 constructors are used in the swapchains:\n\nGL: it\u0027s used in GetNextTextureImpl:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/opengl/SwapChainGL.cpp?l\u003d43\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\nwhich calls GetNextTexture:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/utils/OpenGLBinding.cpp?l\u003d73\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\n\nVulkan: it\u0027s used in GetNextTextureImpl:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/SwapChainVk.cpp?l\u003d46\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\nwhich calls GetNextTexture:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/NativeSwapChainImplVk.cpp?l\u003d154\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\n\nD3D12: it\u0027s used in GetNextTextureImpl:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/SwapChainD3D12.cpp?l\u003d48\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\nwhich calls GetNextTexture:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/NativeSwapChainImplD3D12.cpp?l\u003d92\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\n\nMetal: it\u0027s used in GetNextTextureImpl:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/metal/SwapChainMTL.mm?l\u003d45\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\nwhich calls GetNextTexture:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/utils/MetalBinding.mm?l\u003d79\u0026rcl\u003d8d79f78c789d2607fcf03bd6865f7412f1c732a2\n\nOn cursory inspection, these constructors *shouldn\u0027t* take ownership of these handles. I\u0027m not sure though. Can you (/Natasha) investigate more closely?",
+      "parentUuid": "bf55c79d_a3d9fee7",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18ae4dc6_ee0cdc9a",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 3
@@ -53,6 +77,30 @@
       "writtenOn": "2019-03-12T17:54:01Z",
       "side": 1,
       "message": "@Corentin or @Kai, should object validation tests like these end verifying the object is not in an error state? Would calling IsError verify that?",
+      "range": {
+        "startLine": 104,
+        "startChar": 30,
+        "endLine": 104,
+        "endChar": 53
+      },
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9219b9a8_402889b0",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-12T18:54:29Z",
+      "side": 1,
+      "message": "It can\u0027t hurt anything. Yeah, I think IsError would validate it.\n\nIf there are any errors internally in the second destroy, they should be caught by the harness (those errors get forwarded to the device). You could double check this by making second-destroy an error and making sure this test fails: manually pass an error out to GetDevice()-\u003eConsumedError().",
+      "parentUuid": "448a3f6c_e0433148",
       "range": {
         "startLine": 104,
         "startChar": 30,
