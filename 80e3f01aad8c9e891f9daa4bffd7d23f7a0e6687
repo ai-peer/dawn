@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "bf55c79d_a3d9fee7",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-12T17:54:01Z",
+      "side": 1,
+      "message": "I think you\u0027ve covered the \u0027delete texture\u0027 portion of Kai\u0027s TODO comment.  \n\n@Kai, what do you mean by \"using the native texture constructor\"? Seems like both constructors take ownership of the texture handle, thereby giving the object the right to destroy it in all cases.",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18ae4dc6_ee0cdc9a",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 3
@@ -19,6 +42,29 @@
     },
     {
       "key": {
+        "uuid": "448a3f6c_e0433148",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-12T17:54:01Z",
+      "side": 1,
+      "message": "@Corentin or @Kai, should object validation tests like these end verifying the object is not in an error state? Would calling IsError verify that?",
+      "range": {
+        "startLine": 104,
+        "startChar": 30,
+        "endLine": 104,
+        "endChar": 53
+      },
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b6ae6d02_10c5cecc",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 3
@@ -30,6 +76,29 @@
       "writtenOn": "2019-03-12T17:32:46Z",
       "side": 1,
       "message": "adding another destroy call here.",
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df780123_8cc6c4e4",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-12T17:54:01Z",
+      "side": 1,
+      "message": "Nit: Buffer -\u003e Texture.",
+      "range": {
+        "startLine": 110,
+        "startChar": 48,
+        "endLine": 110,
+        "endChar": 54
+      },
       "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
