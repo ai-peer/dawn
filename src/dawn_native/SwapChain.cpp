@@ -117,6 +117,7 @@ namespace dawn_native {
         descriptor.usage = mAllowedUsage;
 
         auto* texture = GetNextTextureImpl(&descriptor);
+        texture->SetImmune();
         mLastNextTexture = texture;
         return texture;
     }

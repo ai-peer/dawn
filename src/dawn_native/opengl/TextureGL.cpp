@@ -128,6 +128,12 @@ namespace dawn_native { namespace opengl {
     Texture::~Texture() {
         // TODO(kainino@chromium.org): delete texture (but only when not using the native texture
         // constructor?)
+        DestroyImpl();
+    }
+
+    void Texture::DestroyImpl() {
+        glDeleteTextures(1, &mHandle);
+        mHandle = 0;
     }
 
     GLuint Texture::GetHandle() const {

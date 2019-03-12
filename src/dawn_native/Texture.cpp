@@ -324,7 +324,8 @@ namespace dawn_native {
           mArrayLayerCount(descriptor->arrayLayerCount),
           mMipLevelCount(descriptor->mipLevelCount),
           mSampleCount(descriptor->sampleCount),
-          mUsage(descriptor->usage) {
+          mUsage(descriptor->usage),
+          mState(TextureState::Active) {
     }
 
     TextureBase::TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -367,6 +368,9 @@ namespace dawn_native {
 
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
         ASSERT(!IsError());
+        if (mState == TextureState::Destroyed) {
+            return DAWN_VALIDATION_ERROR("Destroyed texture used in a submit");
+        }
         return {};
     }
 
@@ -387,6 +391,18 @@ namespace dawn_native {
 
     TextureViewBase* TextureBase::CreateTextureView(const TextureViewDescriptor* descriptor) {
         return GetDevice()->CreateTextureView(this, descriptor);
+    }
+
+    void TextureBase::Destroy() {
+        if (mState == TextureState::Active) {
+            DestroyImpl();
+            mState = TextureState::Destroyed;
+        }
+    }
+
+    void TextureBase::SetImmune() {
+        // Swapchain textures are immune to being destroyed
+        mState = TextureState::Immune;
     }
 
     // TextureViewBase

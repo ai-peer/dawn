@@ -44,6 +44,13 @@ namespace dawn_native {
         dawn::TextureUsageBit::OutputAttachment;
 
     class TextureBase : public ObjectBase {
+        enum class TextureState {
+            Active,
+            // Immune state for textures used in swapchains
+            Immune,
+            Destroyed
+        };
+
       public:
         TextureBase(DeviceBase* device, const TextureDescriptor* descriptor);
 
@@ -64,9 +71,14 @@ namespace dawn_native {
         // Dawn API
         TextureViewBase* CreateDefaultTextureView();
         TextureViewBase* CreateTextureView(const TextureViewDescriptor* descriptor);
+        void Destroy();
+
+        void SetImmune();
 
       private:
         TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+        virtual void DestroyImpl() {
+        }
 
         dawn::TextureDimension mDimension;
         dawn::TextureFormat mFormat;
@@ -75,6 +87,8 @@ namespace dawn_native {
         uint32_t mMipLevelCount;
         uint32_t mSampleCount;
         dawn::TextureUsageBit mUsage = dawn::TextureUsageBit::None;
+
+        TextureState mState;
     };
 
     class TextureViewBase : public ObjectBase {

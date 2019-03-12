@@ -218,7 +218,14 @@ namespace dawn_native { namespace metal {
     }
 
     Texture::~Texture() {
-        [mMtlTexture release];
+        DestroyImpl();
+    }
+
+    void Texture::DestroyImpl() {
+        if (mMtlTexture != nil) {
+            [mMtlTexture release];
+            mMtlTexture = nil;
+        }
     }
 
     id<MTLTexture> Texture::GetMTLTexture() {
