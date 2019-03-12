@@ -140,9 +140,14 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Texture::~Texture() {
+        DestroyImpl();
+    }
+
+    void Texture::DestroyImpl() {
         if (mResource) {
             // If we own the resource, release it.
             ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
+            mResource = nullptr;
         }
     }
 

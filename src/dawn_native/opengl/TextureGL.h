@@ -40,6 +40,8 @@ namespace dawn_native { namespace opengl {
         TextureFormatInfo GetGLFormat() const;
 
       private:
+        void DestroyImpl() override;
+
         GLuint mHandle;
         GLenum mTarget;
     };
