@@ -16,6 +16,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45998aaf_0320ce2f",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-13T22:05:01Z",
+      "side": 1,
+      "message": "How should backend decide if they should be immune (other than being a swapchain texture)? Is metal the only one that has this special case?",
+      "parentUuid": "e543764a_9d646de4",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
