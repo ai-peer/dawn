@@ -34,6 +34,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91d5f370_b2798f18",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-13T22:26:40Z",
+      "side": 1,
+      "message": "The backend would just need to know whether it\u0027s a swapchain texture. Or, worded differently whether its native texture object is \"owned\" or \"non-owned\" (i.e. owned by something other than the Dawn Texture object).\n\nIn Vulkan, D3D12, and GL, it is \"non-owned\" (I think), but in Metal it is \"owned\" (the MTLTexture object is owned - the object represents a ref to the refcounted shared-ownership texture object).",
+      "parentUuid": "45998aaf_0320ce2f",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
