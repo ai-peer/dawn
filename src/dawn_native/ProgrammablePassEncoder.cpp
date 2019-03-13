@@ -81,7 +81,8 @@ namespace dawn_native {
         memcpy(label, groupLabel, cmd->length + 1);
     }
 
-    void ProgrammablePassEncoder::SetBindGroup(uint32_t groupIndex, BindGroupBase* group) {
+    void ProgrammablePassEncoder::SetBindGroup(uint32_t groupIndex, BindGroupBase* group,
+                                               uint32_t count, const uint32_t* dynamicBufferOffset) {
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
             mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(group))) {
             return;
@@ -89,6 +90,12 @@ namespace dawn_native {
 
         if (groupIndex >= kMaxBindGroups) {
             mTopLevelEncoder->HandleError("Setting bind group over the max");
+            return;
+        }
+
+        // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
+        if (count != 0 || dynamicBufferOffset != nullptr) {
+            mTopLevelEncoder->HandleError("Dynamic Buffer Offset not supported yet");
             return;
         }
 
