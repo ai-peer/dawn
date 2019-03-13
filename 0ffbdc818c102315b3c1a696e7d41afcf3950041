@@ -70,6 +70,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "465740db_c7ff6202",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-13T23:32:20Z",
+      "side": 1,
+      "message": "It would probably be fine if calling Destroy on a SwapChain texture caused it to enter the \"destroyed\" state. As long as it doesn\u0027t actually try to destroy the handle.\n\nI guess we also need to make sure that the Texture can\u0027t outlive the SwapChain that its handle comes from.",
+      "parentUuid": "08a30af2_6b975dcb",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
