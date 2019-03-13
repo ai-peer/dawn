@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e543764a_9d646de4",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-13T06:43:37Z",
+      "side": 1,
+      "message": "This will be called when the texture refcount reaches zero, even if the texture is immune.\n\nI\u0027m worried that immunity might be dependent on the backend, for example in Metal we can wrap an IOSurface but the resulting texture isn\u0027t immune thanks to proper refcounting. Maybe immunity could be passed as a TextureBase argument so that the backends can choose?",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
