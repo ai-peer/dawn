@@ -646,6 +646,35 @@ namespace dawn_native {
         }
     }
 
+    void CommandEncoderBase::CopyTextureToTexture(const TextureCopyView* source,
+                                                  const TextureCopyView* destination,
+                                                  const Extent3D* copySize) {
+        if (ConsumedError(ValidateCanRecordTopLevelCommands())) {
+            return;
+        }
+
+        if (ConsumedError(GetDevice()->ValidateObject(source->texture))) {
+            return;
+        }
+
+        if (ConsumedError(GetDevice()->ValidateObject(destination->texture))) {
+            return;
+        }
+
+        CopyTextureToTextureCmd* copy =
+            mAllocator.Allocate<CopyTextureToTextureCmd>(Command::CopyTextureToTexture);
+        new (copy) CopyTextureToTextureCmd;
+        copy->source.texture = source->texture;
+        copy->source.origin = source->origin;
+        copy->source.level = source->level;
+        copy->source.slice = source->slice;
+        copy->destination.texture = destination->texture;
+        copy->destination.origin = destination->origin;
+        copy->destination.level = destination->level;
+        copy->destination.slice = destination->slice;
+        copy->copySize = *copySize;
+    }
+
     CommandBufferBase* CommandEncoderBase::Finish() {
         if (GetDevice()->ConsumedError(ValidateFinish())) {
             return CommandBufferBase::MakeError(GetDevice());
@@ -780,6 +809,26 @@ namespace dawn_native {
 
                     mResourceUsages.topLevelTextures.insert(copy->source.texture.Get());
                     mResourceUsages.topLevelBuffers.insert(copy->destination.buffer.Get());
+                } break;
+
+                case Command::CopyTextureToTexture: {
+                    CopyTextureToTextureCmd* copy =
+                        mIterator.NextCommand<CopyTextureToTextureCmd>();
+
+                    DAWN_TRY(ValidateTextureSampleCountInCopyCommands(copy->source.texture.Get()));
+                    DAWN_TRY(
+                        ValidateTextureSampleCountInCopyCommands(copy->destination.texture.Get()));
+
+                    DAWN_TRY(ValidateCopySizeFitsInTexture(copy->source, copy->copySize));
+                    DAWN_TRY(ValidateCopySizeFitsInTexture(copy->destination, copy->copySize));
+
+                    DAWN_TRY(ValidateCanUseAs(copy->source.texture.Get(),
+                                              dawn::TextureUsageBit::TransferSrc));
+                    DAWN_TRY(ValidateCanUseAs(copy->destination.texture.Get(),
+                                              dawn::TextureUsageBit::TransferDst));
+
+                    mResourceUsages.topLevelTextures.insert(copy->source.texture.Get());
+                    mResourceUsages.topLevelTextures.insert(copy->destination.texture.Get());
                 } break;
 
                 default:
