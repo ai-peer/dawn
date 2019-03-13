@@ -52,6 +52,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08a30af2_6b975dcb",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-13T23:30:01Z",
+      "side": 1,
+      "message": "+1 to Corentin and Kai.\n\nMy proposal:\n1) Have an enum with three members: owned, unowned and destroyed. \"Owned\" means the resource is owned by the Texture object itself. \"unowned\" means the resource is owned by another object such as a swapchain. \u0027Destroyed\u0027 means the Texture object has destroyed the resource. \n2) Texture::DestroyImpl would be overridden by the subclasses and destroy the texture with the device no matter what. \n3) TextureBase::Destroy would look at the member variable enum and decide whether to call DestroyImpl on the subclass. Owned textures would call DestroyImpl and set the enum to the \u0027destroyed\u0027 state. Unowned textures would skip the call to DestroyImpl.\n4) TextureBase constructor would expose parameter for the starting value of the enum that subclasses can fill with what they think is best.\n\nFrom code inspection, I think SwapChain Texture objects should be created as \u0027unowned\u0027 for GL, D3D12 and Vulkan backends and \u0027owned\u0027 for Metal. In Metal\u0027s implementation of SwapChainImplMTL::GetNextTexture, it calls \u0027retain\u0027 on the texture before giving it to the Texture object. Hence, the texture object should be responsible for releasing it.\n\nI do not feel strongly about the names so feel free to suggest better ones. Perhaps \u0027Owned\u0027, \u0027ImmuneFromDestruction\u0027 and \u0027Destroyed\u0027 would work better?\n\nShould calling Destroy on a SwapChain texture be an error or should we just ignore it?  Should calling Destroy twice on a Texture or Buffer be an error? My preference would be for it to be an error. Probably something we should discuss with the community group",
+      "parentUuid": "91d5f370_b2798f18",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
