@@ -88,6 +88,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b83f20e_6aec6d84",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-13T23:47:53Z",
+      "side": 1,
+      "message": "@Kai, a texture can outlive its swapchain if the Javascript developer keeps a reference to the texture after the swapchain has been garbage collected. In this instance, I do not see a problem with the developer rendering to a texture that is never shown to the user. We should avoid exposing garbage collection details to web developers.\n\nIs it the case that Texture objects are guarenteed to have a valid resource at creation?  If so, we can add a boolean for owned vs. not-owned and use the pointer to the resource to denote destroy vs. not-destroyed. In this approach, the impl object takes care of reading the owned boolean and decide what to do with the resource in addition to clearing the handle/pointer. We end up with fewer overall states to track with this solution.",
+      "parentUuid": "465740db_c7ff6202",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
