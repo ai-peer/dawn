@@ -503,6 +503,10 @@ namespace dawn_native {
                         tracker->TextureUsedAs(texture, dawn::TextureUsageBit::Sampled);
                     } break;
 
+                    // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset
+                    case dawn::BindingType::DynamicUniformBuffer:
+                    case dawn::BindingType::DynamicStorageBuffer:
+                        break;
                     case dawn::BindingType::Sampler:
                         break;
                 }

@@ -199,6 +199,11 @@ namespace dawn_native { namespace metal {
                             [compute setTexture:textureView->GetMTLTexture() atIndex:computeIndex];
                         }
                     } break;
+
+                    // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
+                    case dawn::BindingType::DynamicUniformBuffer:
+                    case dawn::BindingType::DynamicStorageBuffer:
+                        break;
                 }
             }
         }
