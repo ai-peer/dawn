@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfac7e5c_24d19d02",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-13T22:50:04Z",
+      "side": 1,
+      "message": "If this were\n\n  : Texture(device, descriptor GenTexture())\n\nthen I think you could reuse the other constructor instead of duplicating the \u0027mTarget \u003d\u0027 line.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 85
+      },
+      "revId": "41359f4c29eb8fda851a0d36e2adc23eba751e22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
