@@ -507,6 +507,44 @@ namespace dawn_native { namespace d3d12 {
                     }
                 } break;
 
+                case Command::CopyTextureToTexture: {
+                    CopyTextureToTextureCmd* copy =
+                        mCommands.NextCommand<CopyTextureToTextureCmd>();
+
+                    Texture* source = ToBackend(copy->source.texture.Get());
+                    Texture* destination = ToBackend(copy->destination.texture.Get());
+
+                    source->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferSrc);
+                    destination->TransitionUsageNow(commandList,
+                                                    dawn::TextureUsageBit::TransferDst);
+
+                    D3D12_TEXTURE_COPY_LOCATION srcLocation;
+                    srcLocation.pResource = source->GetD3D12Resource();
+                    srcLocation.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
+                    srcLocation.SubresourceIndex =
+                        source->GetNumMipLevels() * copy->source.slice + copy->source.level;
+
+                    D3D12_TEXTURE_COPY_LOCATION dstLocation;
+                    dstLocation.pResource = destination->GetD3D12Resource();
+                    dstLocation.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
+                    dstLocation.SubresourceIndex =
+                        destination->GetNumMipLevels() * copy->destination.slice +
+                        copy->destination.level;
+
+                    D3D12_BOX sourceRegion;
+                    sourceRegion.left = copy->source.origin.x;
+                    sourceRegion.top = copy->source.origin.y;
+                    sourceRegion.front = copy->source.origin.z;
+                    sourceRegion.right = copy->source.origin.x + copy->copySize.width;
+                    sourceRegion.bottom = copy->source.origin.y + copy->copySize.height;
+                    sourceRegion.back = copy->source.origin.z + copy->copySize.depth;
+
+                    commandList->CopyTextureRegion(
+                        &dstLocation, copy->destination.origin.x, copy->destination.origin.y,
+                        copy->destination.origin.z, &srcLocation, &sourceRegion);
+
+                } break;
+
                 default: { UNREACHABLE(); } break;
             }
         }
