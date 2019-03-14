@@ -178,6 +178,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6954eb6e_d6866a5e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-14T02:28:00Z",
+      "side": 1,
+      "message": "Oh yeah, sorry. I got confused about that.",
+      "parentUuid": "5d0946f1_6286353f",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
