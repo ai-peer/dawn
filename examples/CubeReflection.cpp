@@ -173,11 +173,13 @@ void init() {
     input.stride = 6 * sizeof(float);
     input.stepMode = dawn::InputStepMode::Vertex;
 
-    auto inputState = device.CreateInputStateBuilder()
-                          .SetAttribute(&attribute1)
-                          .SetAttribute(&attribute2)
-                          .SetInput(&input)
-                          .GetResult();
+    dawn::InputStateDescriptor inputState;
+    inputState.numAttributes = 2;
+    dawn::VertexAttributeDescriptor* vertexAttribute[] = {&attribute1, &attribute2};
+    inputState.attributes = vertexAttribute;
+    inputState.numInputs = 1;
+    dawn::VertexInputDescriptor* vertexInput[] = {&input};
+    inputState.inputs = vertexInput;
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
@@ -214,7 +216,7 @@ void init() {
     descriptor.layout = pl;
     descriptor.cVertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
-    descriptor.inputState = inputState;
+    descriptor.inputState = &inputState;
     descriptor.depthStencilState = &descriptor.cDepthStencilState;
     descriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
     descriptor.cColorStates[0]->format = GetPreferredSwapChainTextureFormat();
@@ -227,7 +229,7 @@ void init() {
     pDescriptor.layout = pl;
     pDescriptor.cVertexStage.module = vsModule;
     pDescriptor.cFragmentStage.module = fsModule;
-    pDescriptor.inputState = inputState;
+    pDescriptor.inputState = &inputState;
     pDescriptor.depthStencilState = &pDescriptor.cDepthStencilState;
     pDescriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
     pDescriptor.cColorStates[0]->format = GetPreferredSwapChainTextureFormat();
@@ -241,7 +243,7 @@ void init() {
     rfDescriptor.layout = pl;
     rfDescriptor.cVertexStage.module = vsModule;
     rfDescriptor.cFragmentStage.module = fsReflectionModule;
-    rfDescriptor.inputState = inputState;
+    rfDescriptor.inputState = &inputState;
     rfDescriptor.depthStencilState = &rfDescriptor.cDepthStencilState;
     rfDescriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
     rfDescriptor.cColorStates[0]->format = GetPreferredSwapChainTextureFormat();

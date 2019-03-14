@@ -36,7 +36,10 @@ namespace dawn_native { namespace opengl {
 
         void ApplyNow(PersistentPipelineState& persistentPipelineState);
 
+        void ApplyInputState(const InputStateDescriptor* inputState);
+
       private:
+        GLuint mVertexArrayObject;
         GLenum mGlPrimitiveTopology;
     };
 

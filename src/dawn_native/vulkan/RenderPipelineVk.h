@@ -26,6 +26,10 @@ namespace dawn_native { namespace vulkan {
     class RenderPipeline : public RenderPipelineBase {
       public:
         RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor);
+        VkPipelineVertexInputStateCreateInfo ComputeInputStateDesc(
+            const InputStateDescriptor* inputState,
+            std::array<VkVertexInputBindingDescription, kMaxVertexInputs>& mBindings,
+            std::array<VkVertexInputAttributeDescription, kMaxVertexAttributes>& mAttributes);
         ~RenderPipeline();
 
         VkPipeline GetHandle() const;

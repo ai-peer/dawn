@@ -23,7 +23,6 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
@@ -516,11 +515,11 @@ namespace dawn_native { namespace d3d12 {
 
     void CommandBuffer::FlushSetVertexBuffers(ComPtr<ID3D12GraphicsCommandList> commandList,
                                               VertexBuffersInfo* vertexBuffersInfo,
-                                              const InputState* inputState) {
+                                              const RenderPipeline* renderPipeline) {
         DAWN_ASSERT(vertexBuffersInfo != nullptr);
-        DAWN_ASSERT(inputState != nullptr);
+        DAWN_ASSERT(renderPipeline != nullptr);
 
-        auto inputsMask = inputState->GetInputsSetMask();
+        auto inputsMask = renderPipeline->GetInputsSetMask();
 
         uint32_t startSlot = vertexBuffersInfo->startSlot;
         uint32_t endSlot = vertexBuffersInfo->endSlot;
@@ -528,14 +527,14 @@ namespace dawn_native { namespace d3d12 {
         // If the input state has changed, we need to update the StrideInBytes
         // for the D3D12 buffer views. We also need to extend the dirty range to
         // touch all these slots because the stride may have changed.
-        if (vertexBuffersInfo->lastInputState != inputState) {
-            vertexBuffersInfo->lastInputState = inputState;
+        if (vertexBuffersInfo->lastRenderPipeline != renderPipeline) {
+            vertexBuffersInfo->lastRenderPipeline = renderPipeline;
 
             for (uint32_t slot : IterateBitSet(inputsMask)) {
                 startSlot = std::min(startSlot, slot);
                 endSlot = std::max(endSlot, slot + 1);
                 vertexBuffersInfo->d3d12BufferViews[slot].StrideInBytes =
-                    inputState->GetInput(slot).stride;
+                    renderPipeline->GetInput(slot).stride;
             }
         }
 
@@ -668,7 +667,7 @@ namespace dawn_native { namespace d3d12 {
 
         RenderPipeline* lastPipeline = nullptr;
         PipelineLayout* lastLayout = nullptr;
-        InputState* lastInputState = nullptr;
+        RenderPipeline* lastRenderPipeline = nullptr;
         VertexBuffersInfo vertexBuffersInfo = {};
 
         Command type;
@@ -682,7 +681,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::Draw: {
                     DrawCmd* draw = mCommands.NextCommand<DrawCmd>();
 
-                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastInputState);
+                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastRenderPipeline);
                     commandList->DrawInstanced(draw->vertexCount, draw->instanceCount,
                                                draw->firstVertex, draw->firstInstance);
                 } break;
@@ -690,7 +689,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = mCommands.NextCommand<DrawIndexedCmd>();
 
-                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastInputState);
+                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastRenderPipeline);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
                                                       draw->firstInstance);
@@ -708,7 +707,6 @@ namespace dawn_native { namespace d3d12 {
                     SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
                     RenderPipeline* pipeline = ToBackend(cmd->pipeline).Get();
                     PipelineLayout* layout = ToBackend(pipeline->GetLayout());
-                    InputState* inputState = ToBackend(pipeline->GetInputState());
 
                     commandList->SetGraphicsRootSignature(layout->GetRootSignature().Get());
                     commandList->SetPipelineState(pipeline->GetPipelineState().Get());
@@ -718,7 +716,6 @@ namespace dawn_native { namespace d3d12 {
 
                     lastPipeline = pipeline;
                     lastLayout = layout;
-                    lastInputState = inputState;
                 } break;
 
                 case Command::SetStencilReference: {
