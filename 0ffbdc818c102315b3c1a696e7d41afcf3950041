@@ -160,6 +160,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d0946f1_6286353f",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-14T01:47:09Z",
+      "side": 1,
+      "message": "Sorry I think there is some confusion, dawn::SwapChain won\u0027t actually be used to implement GPUSwapChain, it is just there to help render to windows in native. In Blink the swapchain will be implemented manually by created dawn::Textures backed by SharedImage and special IPC messages to associate a client-side ID with a SharedImage.",
+      "parentUuid": "0dd71147_515e16ed",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
