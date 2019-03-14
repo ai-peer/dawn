@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61e73667_6ed2841f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-14T18:39:54Z",
+      "side": 1,
+      "message": "sampleCount \u003d\u003d 0 is a special case in the calling convention of this method. Can you add a comment explaining the logic on this line?",
+      "revId": "aea9cff773f3cf2454d3babf4aee471828094a34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
