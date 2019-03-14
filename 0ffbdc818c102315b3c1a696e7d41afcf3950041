@@ -124,6 +124,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b7ac4c6_38c107c1",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-14T00:28:45Z",
+      "side": 1,
+      "message": "\u003e +1 to being able to destroy unowned textures\n\nMy point was that if the swapchain got garbage collected before one of its textures did, we should prevent the developer from being able to detect this. So having Destroy eagerly release resources is OK but swapchain garbage collection should not eargerly destroy the underlying textures.\n\nBy the way, the way code is currently setup, the web developer can detect how many textures are in a swapchain by keeping pointers to the handed out textures and doing test renders to see if content shows up in more than one place. I know there was reticence in the F2F meeting on exposing the length of the swap chain. Perhaps we should plug this hole by having the swap chain destroy its underlying textures on present.  \n\n\u003e I think we decided it is _not_ an error so that applications can defensively call destroy() to make sure they free the memory.\n\nThanks for the reminder. That makes sense.",
+      "parentUuid": "7d711b70_6d63ab2c",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
