@@ -22,6 +22,30 @@
       "revId": "41359f4c29eb8fda851a0d36e2adc23eba751e22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9fe10b1_143a2bd0",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2019-03-14T14:34:01Z",
+      "side": 1,
+      "message": "Good idea! Done.",
+      "parentUuid": "dfac7e5c_24d19d02",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 85
+      },
+      "revId": "41359f4c29eb8fda851a0d36e2adc23eba751e22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
