@@ -117,8 +117,8 @@ namespace dawn_native {
                 "Pipeline vertex stage uses inputs not in the input state");
         }
 
-        if (descriptor->sampleCount != 1) {
-            return DAWN_VALIDATION_ERROR("Sample count must be one");
+        if (!IsValidSampleCount(descriptor->sampleCount)) {
+            return DAWN_VALIDATION_ERROR("Sample count is not supported");
         }
 
         if (descriptor->colorStateCount > kMaxColorAttachments) {
@@ -170,7 +170,8 @@ namespace dawn_native {
           mIndexFormat(descriptor->indexFormat),
           mInputState(descriptor->inputState),
           mPrimitiveTopology(descriptor->primitiveTopology),
-          mHasDepthStencilAttachment(descriptor->depthStencilState != nullptr) {
+          mHasDepthStencilAttachment(descriptor->depthStencilState != nullptr),
+          mSampleCount(descriptor->sampleCount) {
         if (mHasDepthStencilAttachment) {
             mDepthStencilState = *descriptor->depthStencilState;
         } else {
@@ -270,9 +271,18 @@ namespace dawn_native {
             return false;
         }
 
+        bool sampleCountValidated = false;
         for (uint32_t i : IterateBitSet(mColorAttachmentsSet)) {
             if (renderPass->colorAttachments[i].view->GetFormat() != mColorStates[i].format) {
                 return false;
+            }
+
+            if (!sampleCountValidated) {
+                if (renderPass->colorAttachments[i].view->GetTexture()->GetSampleCount() !=
+                    mSampleCount) {
+                    return false;
+                }
+                sampleCountValidated = true;
             }
         }
 
@@ -280,9 +290,16 @@ namespace dawn_native {
             return false;
         }
 
-        if (mHasDepthStencilAttachment &&
-            (renderPass->depthStencilAttachment.view->GetFormat() != mDepthStencilState.format)) {
-            return false;
+        if (mHasDepthStencilAttachment) {
+            if (renderPass->depthStencilAttachment.view->GetFormat() != mDepthStencilState.format) {
+                return false;
+            }
+
+            if (!sampleCountValidated &&
+                renderPass->depthStencilAttachment.view->GetTexture()->GetSampleCount() !=
+                mSampleCount) {
+                return false;
+            }
         }
 
         return true;
