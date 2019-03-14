@@ -106,6 +106,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d711b70_6d63ab2c",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-14T00:03:58Z",
+      "side": 1,
+      "message": "+1 to being able to destroy unowned textures, that\u0027s useful for swapchain and also for Chromium SharedImages imported in Dawn. We discussed what should happen when destroy is called twice in the group. I think we decided it is _not_ an error so that applications can defensively call destroy() to make sure they free the memory.\n\nTextures are guaranteed a valid resource at creation, so either of Rafael\u0027s implementation proposals sound good.",
+      "parentUuid": "2b83f20e_6aec6d84",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
