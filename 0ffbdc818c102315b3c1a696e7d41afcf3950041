@@ -142,6 +142,24 @@
       "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dd71147_515e16ed",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-14T01:00:52Z",
+      "side": 1,
+      "message": "We can prevent the texture being destroyed by swapchain gc, by just having a JS GC backreference from swapchain GPUTextures to GPUSwapChain.\n\nHowever Dawn also needs to be resilient to arbitrary input, because we can get arbitrary input over the wire. So if the wire client destroys the SwapChain before destroying the Textures, we need to make sure the Textures aren\u0027t still pointing at invalid handles.",
+      "parentUuid": "2b7ac4c6_38c107c1",
+      "revId": "0ffbdc818c102315b3c1a696e7d41afcf3950041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
