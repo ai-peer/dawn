@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "226600ef_18412eae",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-03-15T00:54:29Z",
+      "side": 1,
+      "message": "I have revisited this issue and I find at least your example cannot be reproduced.\n\nIt is because  on \"p2 \u003d encoder.beginRenderPass(/*invalid*/)\", this line will enter the function ConsumedError(), where CommandEncoderBase::mGotError is set to true, so on \"c \u003d encoder.finish()\" we will get an invalid commandbuffer.",
+      "parentUuid": "ba901212_18cebd73",
+      "revId": "b2c5023c9c1fa3a15cc1f0f1c43e29b7115cee0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "59f7bf0f_9e24c081",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 17
