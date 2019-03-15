@@ -52,6 +52,24 @@
       "revId": "760f13274c3b89ef1ed67be2c164b917177b25c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c1f9738_56c4649e",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-15T18:08:56Z",
+      "side": 1,
+      "message": "Or \u0027dynamic offset count\u0027 to match \u0027dynamic offsets\u0027.",
+      "parentUuid": "f25cba9f_33a774d5",
+      "revId": "760f13274c3b89ef1ed67be2c164b917177b25c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ba882a5_cc18c107",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-15T18:08:56Z",
+      "side": 1,
+      "message": "Come to think of it, this should be \u0027dynamic offsets\u0027 (plural).",
+      "revId": "a9299f54ba1e44a9018ffc0fe45d006267d85b0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
