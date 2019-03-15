@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a46235da_e795b22e",
+        "filename": "src/dawn_native/metal/InputStateMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-15T02:25:16Z",
+      "side": 1,
+      "message": "You could use Align(max_stride, 4) from Math.h",
+      "revId": "8c6171eb63d10c4e7c427879cfed4f4dacc2c601",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
