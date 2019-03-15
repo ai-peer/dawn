@@ -34,6 +34,24 @@
       "revId": "760f13274c3b89ef1ed67be2c164b917177b25c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f25cba9f_33a774d5",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-15T08:38:57Z",
+      "side": 1,
+      "message": "nit: \"offset count\" ?",
+      "parentUuid": "cae73e88_c0aefd16",
+      "revId": "760f13274c3b89ef1ed67be2c164b917177b25c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
