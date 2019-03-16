@@ -165,13 +165,22 @@ namespace dawn_native { namespace metal {
         // captured using this-> or by value?) so we make a copy of the pendingCommandSerial on the
         // stack.
         mLastSubmittedSerial++;
+        [mLastSubmittedCommands release];
+        mLastSubmittedCommands = mPendingCommands;
+
         Serial pendingSerial = mLastSubmittedSerial;
         [mPendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
             this->mCompletedSerial = pendingSerial;
+
+            // Try to free the last submitted command buffer so that it doesn't hold references
+            // to its resources.
+            if (this->mCompletedSerial == this->mLastSubmittedSerial) {
+                [mLastSubmittedCommands release];
+                mLastSubmittedCommands = nil;
+            }
         }];
 
         [mPendingCommands commit];
-        [mPendingCommands release];
         mPendingCommands = nil;
     }
 
@@ -216,4 +225,10 @@ namespace dawn_native { namespace metal {
 
         return new Texture(this, descriptor, ioSurface, plane);
     }
+
+    void Device::WaitForCommandsToBeScheduled() {
+        SubmitPendingCommandBuffer();
+        [mLastSubmittedCommands waitUntilScheduled];
+    }
+
 }}  // namespace dawn_native::metal
