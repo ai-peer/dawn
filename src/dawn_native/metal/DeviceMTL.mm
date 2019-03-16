@@ -164,14 +164,28 @@ namespace dawn_native { namespace metal {
         // so this-> works as expected. However it is unclear how members are captured, (are they
         // captured using this-> or by value?) so we make a copy of the pendingCommandSerial on the
         // stack.
+        // TODO(cwallez@chromium.org): the blocks could be called on a different thread, make things
+        // thread-safe.
         mLastSubmittedSerial++;
+        [mLastSubmittedCommands release];
+        mLastSubmittedCommands = mPendingCommands;
+
+        // Free mLastSubmittedCommands as soon as it is scheduled so that it doesn't hold
+        // references to its resources.
+        id<MTLCommandBuffer> pendingCommands = mPendingCommands;
+        [mPendingCommands addScheduledHandler:^(id<MTLCommandBuffer>) {
+            if (this->mLastSubmittedCommands == pendingCommands) {
+                [mLastSubmittedCommands release];
+                mLastSubmittedCommands = nil;
+            }
+        }];
+
         Serial pendingSerial = mLastSubmittedSerial;
         [mPendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
             this->mCompletedSerial = pendingSerial;
         }];
 
         [mPendingCommands commit];
-        [mPendingCommands release];
         mPendingCommands = nil;
     }
 
@@ -216,4 +230,10 @@ namespace dawn_native { namespace metal {
 
         return new Texture(this, descriptor, ioSurface, plane);
     }
+
+    void Device::WaitForCommandsToBeScheduled() {
+        SubmitPendingCommandBuffer();
+        [mLastSubmittedCommands waitUntilScheduled];
+    }
+
 }}  // namespace dawn_native::metal
