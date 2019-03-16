@@ -54,6 +54,7 @@ namespace dawn_native { namespace metal {
         TextureBase* CreateTextureWrappingIOSurface(const TextureDescriptor* descriptor,
                                                     IOSurfaceRef ioSurface,
                                                     uint32_t plane);
+        void WaitForCommandsToBeScheduled();
 
         ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(size_t size) override;
         MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
@@ -85,8 +86,6 @@ namespace dawn_native { namespace metal {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
-        void OnCompletedHandler();
-
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;
         std::unique_ptr<MapRequestTracker> mMapTracker;
@@ -94,6 +93,7 @@ namespace dawn_native { namespace metal {
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
         id<MTLCommandBuffer> mPendingCommands = nil;
+        id<MTLCommandBuffer> mLastSubmittedCommands = nil;
     };
 
 }}  // namespace dawn_native::metal
