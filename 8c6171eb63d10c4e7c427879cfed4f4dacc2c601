@@ -16,6 +16,24 @@
       "revId": "8c6171eb63d10c4e7c427879cfed4f4dacc2c601",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75287f3f_e2786602",
+        "filename": "src/dawn_native/metal/InputStateMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-03-18T08:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a46235da_e795b22e",
+      "revId": "8c6171eb63d10c4e7c427879cfed4f4dacc2c601",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
