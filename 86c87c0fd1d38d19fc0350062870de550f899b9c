@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "354d77ce_f55cc04c",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-03-18T16:55:05Z",
+      "side": 1,
+      "message": "nit: Would it work to use |addScheduledHandler| and free the command buffer inside there? It would be a little more clear that the command buffers are released promptly instead of having it on either line 168 or 178.",
+      "revId": "86c87c0fd1d38d19fc0350062870de550f899b9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
