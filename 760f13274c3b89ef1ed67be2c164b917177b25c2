@@ -70,6 +70,24 @@
       "revId": "760f13274c3b89ef1ed67be2c164b917177b25c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8732945b_10ad3263",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-03-18T01:50:07Z",
+      "side": 1,
+      "message": "I pick \u0027dynamic offset count\u0027",
+      "parentUuid": "7c1f9738_56c4649e",
+      "revId": "760f13274c3b89ef1ed67be2c164b917177b25c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
