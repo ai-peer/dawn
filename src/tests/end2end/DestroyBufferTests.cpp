@@ -36,9 +36,6 @@ class DestroyBufferTest : public DawnTest {
         attribute.offset = 0;
         attribute.format = dawn::VertexFormat::FloatR32G32B32A32;
 
-        dawn::InputState inputState =
-            device.CreateInputStateBuilder().SetInput(&input).SetAttribute(&attribute).GetResult();
-
         dawn::ShaderModule vsModule =
             utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
               #version 450
@@ -60,7 +57,10 @@ class DestroyBufferTest : public DawnTest {
         descriptor.cFragmentStage.module = fsModule;
         descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleStrip;
         descriptor.indexFormat = dawn::IndexFormat::Uint32;
-        descriptor.inputState = inputState;
+        descriptor.cInputState.numInputs = 1;
+        descriptor.cVertexInputsPtr[0] = &input;
+        descriptor.cInputState.numAttributes = 1;
+        descriptor.cVertexAttributesPtr[0] = &attribute;
         descriptor.cColorStates[0]->format = renderPass.colorFormat;
 
         pipeline = device.CreateRenderPipeline(&descriptor);

@@ -30,6 +30,8 @@ namespace dawn_native { namespace d3d12 {
 
         D3D12_PRIMITIVE_TOPOLOGY GetD3D12PrimitiveTopology() const;
         ComPtr<ID3D12PipelineState> GetPipelineState();
+        D3D12_INPUT_LAYOUT_DESC ComputeInputLayout(
+            D3D12_INPUT_ELEMENT_DESC* inputElementDescriptors);
 
       private:
         D3D12_PRIMITIVE_TOPOLOGY mD3d12PrimitiveTopology;

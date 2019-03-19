@@ -30,11 +30,18 @@ namespace utils {
         dawn::PipelineStageDescriptor cVertexStage;
         dawn::PipelineStageDescriptor cFragmentStage;
 
+        dawn::InputStateDescriptor cInputState;
+        dawn::VertexInputDescriptor* cVertexInputsPtr[kMaxVertexInputs];
+        dawn::VertexAttributeDescriptor* cVertexAttributesPtr[kMaxVertexAttributes];
         std::array<dawn::ColorStateDescriptor*, kMaxColorAttachments> cColorStates;
         dawn::DepthStencilStateDescriptor cDepthStencilState;
 
       private:
         dawn::ColorStateDescriptor mColorStates[kMaxColorAttachments];
+        dawn::VertexInputDescriptor mVertexInputs[kMaxVertexInputs];
+        dawn::VertexAttributeDescriptor mVertexAttributes[kMaxVertexAttributes];
+        // dawn::VertexInputDescriptor* mVertexInputsPtr[kMaxVertexInputs];
+        // dawn::VertexAttributeDescriptor* mVertexAttributesPtr[kMaxVertexAttributes];
     };
 
 }  // namespace utils
