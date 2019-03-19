@@ -25,7 +25,7 @@ namespace dawn_wire { namespace server {
         Server* server;
         ObjectHandle buffer;
         uint32_t requestSerial;
-        uint32_t size;
+        uint64_t size;
         bool isWrite;
     };
 

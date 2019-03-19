@@ -162,7 +162,7 @@ namespace dawn_native { namespace opengl {
             void OnSetVertexBuffers(uint32_t startSlot,
                                     uint32_t count,
                                     Ref<BufferBase>* buffers,
-                                    uint32_t* offsets) {
+                                    uint64_t* offsets) {
                 for (uint32_t i = 0; i < count; ++i) {
                     uint32_t slot = startSlot + i;
                     mVertexBuffers[slot] = ToBackend(buffers[i].Get());
@@ -199,7 +199,7 @@ namespace dawn_native { namespace opengl {
                         auto attribute = mLastInputState->GetAttribute(location);
 
                         GLuint buffer = mVertexBuffers[slot]->GetHandle();
-                        uint32_t offset = mVertexBufferOffsets[slot];
+                        uint64_t offset = mVertexBufferOffsets[slot];
 
                         auto input = mLastInputState->GetInput(slot);
                         auto components = VertexFormatNumComponents(attribute.format);
@@ -223,7 +223,7 @@ namespace dawn_native { namespace opengl {
 
             std::bitset<kMaxVertexInputs> mDirtyVertexBuffers;
             std::array<Buffer*, kMaxVertexInputs> mVertexBuffers;
-            std::array<uint32_t, kMaxVertexInputs> mVertexBufferOffsets;
+            std::array<uint64_t, kMaxVertexInputs> mVertexBufferOffsets;
 
             InputState* mLastInputState = nullptr;
         };
