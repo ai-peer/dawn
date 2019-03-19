@@ -34,6 +34,24 @@
       "revId": "86c87c0fd1d38d19fc0350062870de550f899b9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b452aa72_af26f4e8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-19T14:07:38Z",
+      "side": 1,
+      "message": "Doing what you suggested makes things fail in weird ways because of some NSAutoReleasePool freeing things already freed or something like this. I was not able to debug it so I went back to the version in patchset 1. This is non-satisfactory but I don\u0027t know how to debug this further at this time.",
+      "parentUuid": "d5d79981_bf83c90c",
+      "revId": "86c87c0fd1d38d19fc0350062870de550f899b9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
