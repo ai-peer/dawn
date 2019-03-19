@@ -124,7 +124,7 @@ namespace dawn_native {
         cmd->height = height;
     }
 
-    void RenderPassEncoderBase::SetIndexBuffer(BufferBase* buffer, uint32_t offset) {
+    void RenderPassEncoderBase::SetIndexBuffer(BufferBase* buffer, uint64_t offset) {
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
             mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(buffer))) {
             return;
@@ -139,7 +139,7 @@ namespace dawn_native {
     void RenderPassEncoderBase::SetVertexBuffers(uint32_t startSlot,
                                                  uint32_t count,
                                                  BufferBase* const* buffers,
-                                                 uint32_t const* offsets) {
+                                                 uint64_t const* offsets) {
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }

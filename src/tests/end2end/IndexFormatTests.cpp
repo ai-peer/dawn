@@ -90,7 +90,7 @@ TEST_P(IndexFormatTest, Uint32) {
         1, 2, 3
     });
 
-    uint32_t zeroOffset = 0;
+    uint64_t zeroOffset = 0;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -121,7 +121,7 @@ TEST_P(IndexFormatTest, Uint16) {
         1, 2, 0, 0, 0, 0
     });
 
-    uint32_t zeroOffset = 0;
+    uint64_t zeroOffset = 0;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -165,7 +165,7 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
         0, 1, 2, 0xFFFFFFFFu, 3, 4, 2,
     });
 
-    uint32_t zeroOffset = 0;
+    uint64_t zeroOffset = 0;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -201,7 +201,7 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
         0xFFFFu,
     });
 
-    uint32_t zeroOffset = 0;
+    uint64_t zeroOffset = 0;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -240,7 +240,7 @@ TEST_P(IndexFormatTest, ChangePipelineAfterSetIndexBuffer) {
         1, 2, 3
     });
 
-    uint32_t zeroOffset = 0;
+    uint64_t zeroOffset = 0;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -275,7 +275,7 @@ TEST_P(IndexFormatTest, DISABLED_SetIndexBufferBeforeSetPipeline) {
         0, 1, 2
     });
 
-    uint32_t zeroOffset = 0;
+    uint64_t zeroOffset = 0;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);

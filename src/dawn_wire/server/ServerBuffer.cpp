@@ -95,7 +95,7 @@ namespace dawn_wire { namespace server {
 
     void Server::ForwardBufferMapReadAsync(DawnBufferMapAsyncStatus status,
                                            const void* ptr,
-                                           uint32_t dataLength,
+                                           uint64_t dataLength,
                                            DawnCallbackUserdata userdata) {
         auto data = reinterpret_cast<MapUserdata*>(static_cast<uintptr_t>(userdata));
         data->server->OnBufferMapReadAsyncCallback(status, ptr, dataLength, data);
@@ -103,7 +103,7 @@ namespace dawn_wire { namespace server {
 
     void Server::ForwardBufferMapWriteAsync(DawnBufferMapAsyncStatus status,
                                             void* ptr,
-                                            uint32_t dataLength,
+                                            uint64_t dataLength,
                                             DawnCallbackUserdata userdata) {
         auto data = reinterpret_cast<MapUserdata*>(static_cast<uintptr_t>(userdata));
         data->server->OnBufferMapWriteAsyncCallback(status, ptr, dataLength, data);
@@ -111,7 +111,7 @@ namespace dawn_wire { namespace server {
 
     void Server::OnBufferMapReadAsyncCallback(DawnBufferMapAsyncStatus status,
                                               const void* ptr,
-                                              uint32_t dataLength,
+                                              uint64_t dataLength,
                                               MapUserdata* userdata) {
         std::unique_ptr<MapUserdata> data(userdata);
 
@@ -139,7 +139,7 @@ namespace dawn_wire { namespace server {
 
     void Server::OnBufferMapWriteAsyncCallback(DawnBufferMapAsyncStatus status,
                                                void* ptr,
-                                               uint32_t dataLength,
+                                               uint64_t dataLength,
                                                MapUserdata* userdata) {
         std::unique_ptr<MapUserdata> data(userdata);
 
