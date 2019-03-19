@@ -84,7 +84,7 @@ namespace dawn_native { namespace metal {
                 // For MTLVertexStepFunctionConstant, the stepRate must be 0,
                 // but the stride must NOT be 0, so we made up it with
                 // max(attrib.offset + sizeof(attrib) for each attrib)
-                uint32_t max_stride = 0;
+                uint64_t max_stride = 0;
                 for (uint32_t attribIndex : IterateBitSet(attributesSetMask)) {
                     const VertexAttributeDescriptor& attrib = GetAttribute(attribIndex);
                     // Only use the attributes that use the current input

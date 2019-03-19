@@ -345,8 +345,8 @@ void DawnTest::OnDeviceError(const char* message, DawnCallbackUserdata userdata)
 std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
                                                    int line,
                                                    const dawn::Buffer& buffer,
-                                                   uint32_t offset,
-                                                   uint32_t size,
+                                                   uint64_t offset,
+                                                   uint64_t size,
                                                    detail::Expectation* expectation) {
     auto readback = ReserveReadback(size);
 
@@ -440,7 +440,7 @@ void DawnTest::FlushWire() {
     }
 }
 
-DawnTest::ReadbackReservation DawnTest::ReserveReadback(uint32_t readbackSize) {
+DawnTest::ReadbackReservation DawnTest::ReserveReadback(uint64_t readbackSize) {
     // For now create a new MapRead buffer for each readback
     // TODO(cwallez@chromium.org): eventually make bigger buffers and allocate linearly?
     dawn::BufferDescriptor descriptor;

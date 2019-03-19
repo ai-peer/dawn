@@ -81,7 +81,7 @@ class DestroyBufferTest : public DawnTest {
     dawn::Buffer vertexBuffer;
 
     dawn::CommandBuffer CreateTriangleCommandBuffer() {
-        uint32_t zeroOffset = 0;
+        uint64_t zeroOffset = 0;
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
