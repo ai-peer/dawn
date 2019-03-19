@@ -52,6 +52,24 @@
       "revId": "86c87c0fd1d38d19fc0350062870de550f899b9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3863d8af_a754d18f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-03-19T15:53:14Z",
+      "side": 1,
+      "message": "Sounds fine. Though looks like the latest patchset still has the same problem. I think we should check if mLastSubmittedCommands is null before calling waitUntilCompleted?",
+      "parentUuid": "b452aa72_af26f4e8",
+      "revId": "86c87c0fd1d38d19fc0350062870de550f899b9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
