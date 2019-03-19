@@ -308,7 +308,7 @@ namespace dawn_native { namespace metal {
                         break;
                     }
 
-                    uint32_t offset = src.offset;
+                    uint64_t offset = src.offset;
 
                     // Doing all the copy except the last image.
                     if (size.depth > 1) {
@@ -420,7 +420,7 @@ namespace dawn_native { namespace metal {
                         break;
                     }
 
-                    uint32_t offset = dst.offset;
+                    uint64_t offset = dst.offset;
 
                     // Doing all the copy except the last image.
                     if (size.depth > 1) {
