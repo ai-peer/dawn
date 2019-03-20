@@ -142,20 +142,19 @@ void initRender() {
     input2.stride = sizeof(glm::vec2);
     input2.stepMode = dawn::InputStepMode::Vertex;
 
-    dawn::InputState inputState = device.CreateInputStateBuilder()
-                                      .SetAttribute(&attribute1)
-                                      .SetAttribute(&attribute2)
-                                      .SetInput(&input1)
-                                      .SetAttribute(&attribute3)
-                                      .SetInput(&input2)
-                                      .GetResult();
-
     depthStencilView = CreateDefaultDepthStencilView(device);
 
     utils::ComboRenderPipelineDescriptor descriptor(device);
     descriptor.cVertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
-    descriptor.inputState = inputState;
+
+    descriptor.cInputState.numAttributes = 3;
+    descriptor.cVertexAttributesPtr[0] = &attribute1;
+    descriptor.cVertexAttributesPtr[1] = &attribute2;
+    descriptor.cVertexAttributesPtr[2] = &attribute3;
+    descriptor.cInputState.numInputs = 2;
+    descriptor.cVertexInputsPtr[0] = &input1;
+    descriptor.cVertexInputsPtr[1] = &input2;
     descriptor.depthStencilState = &descriptor.cDepthStencilState;
     descriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
     descriptor.cColorStates[0]->format = GetPreferredSwapChainTextureFormat();
