@@ -398,7 +398,7 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegion) {
 TEST_P(CopyTests_T2B, Texture2DArrayMip) {
     // TODO(bryan.bernhart@intel.com): Figure out why this test fails on Intel Linux.
     // See https://bugs.chromium.org/p/dawn/issues/detail?id=101
-    DAWN_SKIP_TEST_IF(IsLinux() && IsVulkan() && IsIntel());
+    // DAWN_SKIP_TEST_IF(IsLinux() && IsVulkan() && IsIntel());
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kLayers = 6u;
