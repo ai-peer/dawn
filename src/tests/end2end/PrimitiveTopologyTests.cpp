@@ -165,21 +165,14 @@ class PrimitiveTopologyTest : public DawnTest {
                     fragColor = vec4(0.0, 1.0, 0.0, 1.0);
                 })");
 
-            dawn::VertexAttributeDescriptor attribute;
             attribute.shaderLocation = 0;
             attribute.inputSlot = 0;
             attribute.offset = 0;
             attribute.format = dawn::VertexFormat::FloatR32G32B32A32;
 
-            dawn::VertexInputDescriptor input;
             input.inputSlot = 0;
             input.stride = 4 * sizeof(float);
             input.stepMode = dawn::InputStepMode::Vertex;
-
-            inputState = device.CreateInputStateBuilder()
-                             .SetAttribute(&attribute)
-                             .SetInput(&input)
-                             .GetResult();
 
             vertexBuffer = utils::CreateBufferFromData(device, kVertices, sizeof(kVertices), dawn::BufferUsageBit::Vertex);
         }
@@ -202,7 +195,10 @@ class PrimitiveTopologyTest : public DawnTest {
             descriptor.cVertexStage.module = vsModule;
             descriptor.cFragmentStage.module = fsModule;
             descriptor.primitiveTopology = primitiveTopology;
-            descriptor.inputState = inputState;
+            descriptor.cInputState.numInputs = 1;
+            descriptor.cVertexInputsPtr[0] = &input;
+            descriptor.cInputState.numAttributes = 1;
+            descriptor.cVertexAttributesPtr[0] = &attribute;
             descriptor.cColorStates[0]->format = renderPass.colorFormat;
 
             dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
@@ -234,7 +230,8 @@ class PrimitiveTopologyTest : public DawnTest {
         utils::BasicRenderPass renderPass;
         dawn::ShaderModule vsModule;
         dawn::ShaderModule fsModule;
-        dawn::InputState inputState;
+        dawn::VertexAttributeDescriptor attribute;
+        dawn::VertexInputDescriptor input;
         dawn::Buffer vertexBuffer;
 };
 

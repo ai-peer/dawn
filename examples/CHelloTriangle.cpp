@@ -93,18 +93,12 @@ void init() {
         pl.bindGroupLayouts = nullptr;
         descriptor.layout = dawnDeviceCreatePipelineLayout(device, &pl);
 
-        DawnInputStateBuilder inputStateBuilder = dawnDeviceCreateInputStateBuilder(device);
-        descriptor.inputState = dawnInputStateBuilderGetResult(inputStateBuilder);
-        dawnInputStateBuilderRelease(inputStateBuilder);
-
         descriptor.indexFormat = DAWN_INDEX_FORMAT_UINT32;
         descriptor.primitiveTopology = DAWN_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
 
         descriptor.depthStencilState = nullptr;
 
         pipeline = dawnDeviceCreateRenderPipeline(device, &descriptor);
-
-        dawnInputStateRelease(descriptor.inputState);
     }
 
     dawnShaderModuleRelease(vsModule);

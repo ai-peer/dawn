@@ -17,13 +17,88 @@
 #include "common/BitSetIterator.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
-#include "dawn_native/InputState.h"
 #include "dawn_native/Texture.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 namespace dawn_native {
     // Helper functions
     namespace {
+
+        MaybeError ValidateVertexInputDescriptor(const VertexInputDescriptor* input,
+                                                 std::bitset<kMaxVertexInputs>& inputsSetMask) {
+            DAWN_TRY(ValidateInputStepMode(input->stepMode));
+            if (input->inputSlot >= kMaxVertexInputs) {
+                return DAWN_VALIDATION_ERROR("Setting input out of bounds");
+            }
+            if (input->stride > kMaxVertexInputStride) {
+                return DAWN_VALIDATION_ERROR("Setting input stride out of bounds");
+            }
+            if (inputsSetMask[input->inputSlot]) {
+                return DAWN_VALIDATION_ERROR("Setting already set input");
+            }
+
+            inputsSetMask.set(input->inputSlot);
+            return {};
+        }
+
+        MaybeError ValidateVertexAttributeDescriptor(
+            const VertexAttributeDescriptor* attribute,
+            const std::bitset<kMaxVertexInputs>& inputsSetMask,
+            std::bitset<kMaxVertexAttributes>& attributesSetMask) {
+            DAWN_TRY(ValidateVertexFormat(attribute->format));
+
+            if (attribute->shaderLocation >= kMaxVertexAttributes) {
+                return DAWN_VALIDATION_ERROR("Setting attribute out of bounds");
+            }
+            if (attribute->inputSlot >= kMaxVertexInputs) {
+                return DAWN_VALIDATION_ERROR("Binding slot out of bounds");
+            }
+            // If attribute->offset is close to 0xFFFFFFFF, the validation below to add
+            // attribute->offset and VertexFormatSize(attribute->format) might overflow on a
+            // 32bit machine, then it can pass the validation incorrectly. We need to catch it.
+            if (attribute->offset >= kMaxVertexAttributeEnd) {
+                return DAWN_VALIDATION_ERROR("Setting attribute offset out of bounds");
+            }
+            if (attribute->offset + VertexFormatSize(attribute->format) > kMaxVertexAttributeEnd) {
+                return DAWN_VALIDATION_ERROR("Setting attribute offset out of bounds");
+            }
+            if (attributesSetMask[attribute->shaderLocation]) {
+                return DAWN_VALIDATION_ERROR("Setting already set attribute");
+            }
+            if (!inputsSetMask[attribute->inputSlot]) {
+                return DAWN_VALIDATION_ERROR(
+                    "Vertex attribute slot doesn't match any vertex input slot");
+            }
+
+            attributesSetMask.set(attribute->shaderLocation);
+            return {};
+        }
+
+        MaybeError ValidateInputStateDescriptor(
+            const InputStateDescriptor* descriptor,
+            std::bitset<kMaxVertexInputs>& inputsSetMask,
+            std::bitset<kMaxVertexAttributes>& attributesSetMask) {
+            if (descriptor->nextInChain != nullptr) {
+                return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
+            }
+            if (descriptor->numInputs > kMaxVertexInputs) {
+                return DAWN_VALIDATION_ERROR("Vertex Inputs number exceeds maximum");
+            }
+            if (descriptor->numAttributes > kMaxVertexAttributes) {
+                return DAWN_VALIDATION_ERROR("Vertex Attributes number exceeds maximum");
+            }
+
+            for (uint32_t i = 0; i < descriptor->numInputs; ++i) {
+                DAWN_TRY(ValidateVertexInputDescriptor(descriptor->inputs[i], inputsSetMask));
+            }
+
+            for (uint32_t i = 0; i < descriptor->numAttributes; ++i) {
+                DAWN_TRY(ValidateVertexAttributeDescriptor(descriptor->attributes[i], inputsSetMask,
+                                                           attributesSetMask));
+            }
+
+            return {};
+        }
 
         MaybeError ValidatePipelineStageDescriptor(DeviceBase* device,
                                                    const PipelineStageDescriptor* descriptor,
@@ -91,6 +166,68 @@ namespace dawn_native {
 
     }  // anonymous namespace
 
+    // Helper functions
+    size_t IndexFormatSize(dawn::IndexFormat format) {
+        switch (format) {
+            case dawn::IndexFormat::Uint16:
+                return sizeof(uint16_t);
+            case dawn::IndexFormat::Uint32:
+                return sizeof(uint32_t);
+            default:
+                UNREACHABLE();
+        }
+    }
+
+    uint32_t VertexFormatNumComponents(dawn::VertexFormat format) {
+        switch (format) {
+            case dawn::VertexFormat::FloatR32G32B32A32:
+            case dawn::VertexFormat::IntR32G32B32A32:
+            case dawn::VertexFormat::UshortR16G16B16A16:
+            case dawn::VertexFormat::UnormR8G8B8A8:
+                return 4;
+            case dawn::VertexFormat::FloatR32G32B32:
+            case dawn::VertexFormat::IntR32G32B32:
+                return 3;
+            case dawn::VertexFormat::FloatR32G32:
+            case dawn::VertexFormat::IntR32G32:
+            case dawn::VertexFormat::UshortR16G16:
+            case dawn::VertexFormat::UnormR8G8:
+                return 2;
+            case dawn::VertexFormat::FloatR32:
+            case dawn::VertexFormat::IntR32:
+                return 1;
+            default:
+                UNREACHABLE();
+        }
+    }
+
+    size_t VertexFormatComponentSize(dawn::VertexFormat format) {
+        switch (format) {
+            case dawn::VertexFormat::FloatR32G32B32A32:
+            case dawn::VertexFormat::FloatR32G32B32:
+            case dawn::VertexFormat::FloatR32G32:
+            case dawn::VertexFormat::FloatR32:
+                return sizeof(float);
+            case dawn::VertexFormat::IntR32G32B32A32:
+            case dawn::VertexFormat::IntR32G32B32:
+            case dawn::VertexFormat::IntR32G32:
+            case dawn::VertexFormat::IntR32:
+                return sizeof(int32_t);
+            case dawn::VertexFormat::UshortR16G16B16A16:
+            case dawn::VertexFormat::UshortR16G16:
+                return sizeof(uint16_t);
+            case dawn::VertexFormat::UnormR8G8B8A8:
+            case dawn::VertexFormat::UnormR8G8:
+                return sizeof(uint8_t);
+            default:
+                UNREACHABLE();
+        }
+    }
+
+    size_t VertexFormatSize(dawn::VertexFormat format) {
+        return VertexFormatNumComponents(format) * VertexFormatComponentSize(format);
+    }
+
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                 const RenderPipelineDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
@@ -104,14 +241,17 @@ namespace dawn_native {
         }
 
         DAWN_TRY(ValidateIndexFormat(descriptor->indexFormat));
+        std::bitset<kMaxVertexInputs> inputsSetMask;
+        std::bitset<kMaxVertexAttributes> attributesSetMask;
+        DAWN_TRY(
+            ValidateInputStateDescriptor(descriptor->inputState, inputsSetMask, attributesSetMask));
         DAWN_TRY(ValidatePrimitiveTopology(descriptor->primitiveTopology));
         DAWN_TRY(ValidatePipelineStageDescriptor(device, descriptor->vertexStage,
                                                  descriptor->layout, dawn::ShaderStage::Vertex));
         DAWN_TRY(ValidatePipelineStageDescriptor(device, descriptor->fragmentStage,
                                                  descriptor->layout, dawn::ShaderStage::Fragment));
 
-        if ((descriptor->vertexStage->module->GetUsedVertexAttributes() &
-             ~descriptor->inputState->GetAttributesSetMask())
+        if ((descriptor->vertexStage->module->GetUsedVertexAttributes() & ~attributesSetMask)
                 .any()) {
             return DAWN_VALIDATION_ERROR(
                 "Pipeline vertex stage uses inputs not in the input state");
@@ -168,10 +308,23 @@ namespace dawn_native {
                        descriptor->layout,
                        dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment),
           mIndexFormat(descriptor->indexFormat),
-          mInputState(descriptor->inputState),
+          mInputState(*descriptor->inputState),
           mPrimitiveTopology(descriptor->primitiveTopology),
           mHasDepthStencilAttachment(descriptor->depthStencilState != nullptr),
           mSampleCount(descriptor->sampleCount) {
+        uint32_t location = 0;
+        for (uint32_t i = 0; i < mInputState.numAttributes; ++i) {
+            location = mInputState.attributes[i]->shaderLocation;
+            mAttributesSetMask.set(location);
+            mAttributeInfos[location] = *mInputState.attributes[i];
+        }
+        uint32_t slot = 0;
+        for (uint32_t i = 0; i < mInputState.numInputs; ++i) {
+            slot = mInputState.inputs[i]->inputSlot;
+            mInputsSetMask.set(slot);
+            mInputInfos[slot] = *mInputState.inputs[i];
+        }
+
         if (mHasDepthStencilAttachment) {
             mDepthStencilState = *descriptor->depthStencilState;
         } else {
@@ -213,6 +366,31 @@ namespace dawn_native {
         return new RenderPipelineBase(device, ObjectBase::kError);
     }
 
+    InputStateDescriptor* RenderPipelineBase::GetInputStateDescriptor() {
+        ASSERT(!IsError());
+        return &mInputState;
+    }
+
+    const std::bitset<kMaxVertexAttributes>& RenderPipelineBase::GetAttributesSetMask() const {
+        ASSERT(!IsError());
+        return mAttributesSetMask;
+    }
+
+    const VertexAttributeDescriptor& RenderPipelineBase::GetAttribute(uint32_t location) const {
+        ASSERT(mAttributesSetMask[location]);
+        return mAttributeInfos[location];
+    }
+
+    const std::bitset<kMaxVertexInputs>& RenderPipelineBase::GetInputsSetMask() const {
+        ASSERT(!IsError());
+        return mInputsSetMask;
+    }
+
+    const VertexInputDescriptor& RenderPipelineBase::GetInput(uint32_t slot) const {
+        ASSERT(mInputsSetMask[slot]);
+        return mInputInfos[slot];
+    }
+
     const ColorStateDescriptor* RenderPipelineBase::GetColorStateDescriptor(
         uint32_t attachmentSlot) {
         ASSERT(!IsError());
@@ -228,11 +406,6 @@ namespace dawn_native {
     dawn::IndexFormat RenderPipelineBase::GetIndexFormat() const {
         ASSERT(!IsError());
         return mIndexFormat;
-    }
-
-    InputStateBase* RenderPipelineBase::GetInputState() {
-        ASSERT(!IsError());
-        return mInputState.Get();
     }
 
     dawn::PrimitiveTopology RenderPipelineBase::GetPrimitiveTopology() const {
@@ -291,6 +464,11 @@ namespace dawn_native {
         }
 
         return true;
+    }
+
+    std::bitset<kMaxVertexAttributes> RenderPipelineBase::GetAttributesUsingInput(
+        uint32_t slot) const {
+        return attributesUsingInput[slot];
     }
 
 }  // namespace dawn_native

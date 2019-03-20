@@ -35,6 +35,8 @@ namespace dawn_native { namespace metal {
 
         id<MTLDepthStencilState> GetMTLDepthStencilState();
 
+        MTLVertexDescriptor* ComputeVertexDesc();
+
       private:
         MTLIndexType mMtlIndexType;
         MTLPrimitiveType mMtlPrimitiveTopology;

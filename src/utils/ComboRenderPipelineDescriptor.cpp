@@ -37,6 +37,35 @@ namespace utils {
             cFragmentStage.entryPoint = "main";
         }
 
+        // Set defaults for the input state descriptors.
+        {
+            descriptor->inputState = &cInputState;
+            cInputState.numInputs = 0;
+            dawn::VertexInputDescriptor vertexInput;
+            // Fill the default values for vertexInput
+            vertexInput.inputSlot = 0;
+            vertexInput.stride = 0;
+            vertexInput.stepMode = dawn::InputStepMode::Vertex;
+            for (uint32_t i = 0; i < kMaxVertexInputs; ++i) {
+                mVertexInputs[i] = vertexInput;
+                cVertexInputsPtr[i] = &mVertexInputs[i];
+            }
+            cInputState.inputs = cVertexInputsPtr;
+
+            cInputState.numAttributes = 0;
+            dawn::VertexAttributeDescriptor vertexAttribute;
+            // Fill the default values for vertexAttribute
+            vertexAttribute.shaderLocation = 0;
+            vertexAttribute.inputSlot = 0;
+            vertexAttribute.offset = 0;
+            vertexAttribute.format = dawn::VertexFormat::FloatR32;
+            for (uint32_t i = 0; i < kMaxVertexAttributes; ++i) {
+                mVertexAttributes[i] = vertexAttribute;
+                cVertexAttributesPtr[i] = &mVertexAttributes[i];
+            }
+            cInputState.attributes = cVertexAttributesPtr;
+        }
+
         // Set defaults for the color state descriptors.
         {
             descriptor->colorStateCount = 1;
@@ -75,7 +104,6 @@ namespace utils {
             descriptor->depthStencilState = nullptr;
         }
 
-        descriptor->inputState = device.CreateInputStateBuilder().GetResult();
         descriptor->layout = utils::MakeBasicPipelineLayout(device, nullptr);
     }
 
