@@ -55,6 +55,7 @@ namespace dawn_native { namespace opengl {
       private:
         GLuint mHandle;
         GLenum mTarget;
+        bool mHandleIsTextureView;
     };
 
 }}  // namespace dawn_native::opengl
