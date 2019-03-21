@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e19e6c0_11d55b09",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-21T08:47:14Z",
+      "side": 1,
+      "message": "nit: kUsageNeedingTextureView / kUsageRequiringTextureView.",
+      "range": {
+        "startLine": 87,
+        "startChar": 44,
+        "endLine": 87,
+        "endChar": 66
+      },
+      "revId": "e211c115872731709d8c1d2695c4e4a52e5ac05c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e393211d_0380985f",
+        "filename": "src/dawn_native/opengl/TextureGL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-21T08:47:14Z",
+      "side": 1,
+      "message": "nit: the semantic of this seems more to be mOwnsHandle",
+      "range": {
+        "startLine": 58,
+        "startChar": 13,
+        "endLine": 58,
+        "endChar": 33
+      },
+      "revId": "e211c115872731709d8c1d2695c4e4a52e5ac05c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
