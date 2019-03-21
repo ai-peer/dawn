@@ -24,6 +24,8 @@ DawnRenderPipeline pipeline;
 
 DawnTextureFormat swapChainFormat;
 
+DawnTextureView depthStencilView;
+
 void init() {
     device = CreateCppDawnDevice().Release();
     queue = dawnDeviceCreateQueue(device);
@@ -39,11 +41,16 @@ void init() {
                           480);
 
     const char* vs =
-        "#version 450\n"
-        "const vec2 pos[3] = vec2[3](vec2(0.0f, 0.5f), vec2(-0.5f, -0.5f), vec2(0.5f, -0.5f));\n"
-        "void main() {\n"
-        "   gl_Position = vec4(pos[gl_VertexIndex], 0.0, 1.0);\n"
-        "}\n";
+        R"(#version 450
+        const vec3 pos[6] = vec3[6](vec3(-1.f, -1.f, 1.0f),
+                                     vec3(-1.f, 1.f, 0.5f),
+                                     vec3(1.f, -1.f, 0.5f),
+                                     vec3(1.f, -1.f, 0.5f),
+                                     vec3(-1.f, 1.f, 0.5f),
+                                     vec3(1.f, 1.f, 0.f));
+        void main() {
+           gl_Position = vec4(pos[gl_VertexIndex], 1.0);
+       })";
     DawnShaderModule vsModule = utils::CreateShaderModule(dawn::Device(device), dawn::ShaderStage::Vertex, vs).Release();
 
     const char* fs =
@@ -87,6 +94,22 @@ void init() {
         DawnColorStateDescriptor* colorStatesPtr[] = {&colorStateDescriptor};
         descriptor.colorStates = colorStatesPtr;
 
+        DawnDepthStencilStateDescriptor depthStencilStateDescriptor;
+        depthStencilStateDescriptor.format = DAWN_TEXTURE_FORMAT_D32_FLOAT_S8_UINT;
+        DawnStencilStateFaceDescriptor stencilFace;
+        stencilFace.compare = DAWN_COMPARE_FUNCTION_ALWAYS;
+        stencilFace.failOp = DAWN_STENCIL_OPERATION_KEEP;
+        stencilFace.depthFailOp = DAWN_STENCIL_OPERATION_KEEP;
+        stencilFace.passOp = DAWN_STENCIL_OPERATION_KEEP;
+        depthStencilStateDescriptor.depthWriteEnabled = true;
+        depthStencilStateDescriptor.depthCompare = DAWN_COMPARE_FUNCTION_LESS_EQUAL;
+        depthStencilStateDescriptor.stencilBack = stencilFace;
+        depthStencilStateDescriptor.stencilFront = stencilFace;
+        depthStencilStateDescriptor.stencilReadMask = 0xff;
+        depthStencilStateDescriptor.stencilWriteMask = 0xff;
+        depthStencilStateDescriptor.nextInChain = nullptr;
+        descriptor.depthStencilState = &depthStencilStateDescriptor;
+
         DawnPipelineLayoutDescriptor pl;
         pl.nextInChain = nullptr;
         pl.bindGroupLayoutCount = 0;
@@ -100,7 +123,7 @@ void init() {
         descriptor.indexFormat = DAWN_INDEX_FORMAT_UINT32;
         descriptor.primitiveTopology = DAWN_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
 
-        descriptor.depthStencilState = nullptr;
+        //descriptor.depthStencilState = nullptr;
 
         pipeline = dawnDeviceCreateRenderPipeline(device, &descriptor);
 
@@ -109,6 +132,21 @@ void init() {
 
     dawnShaderModuleRelease(vsModule);
     dawnShaderModuleRelease(fsModule);
+
+    {
+        DawnTextureDescriptor descriptor;
+        descriptor.nextInChain = nullptr;
+        descriptor.arrayLayerCount = 1;
+        descriptor.mipLevelCount = 1;
+        descriptor.dimension = DAWN_TEXTURE_DIMENSION_2D;
+        descriptor.format = DAWN_TEXTURE_FORMAT_D32_FLOAT_S8_UINT;
+        descriptor.sampleCount = 1;
+        descriptor.size = { 640, 480, 1 };
+        descriptor.usage = DAWN_TEXTURE_USAGE_BIT_OUTPUT_ATTACHMENT;
+        auto depthStencilTexture = dawnDeviceCreateTexture(device, &descriptor);
+        depthStencilView = dawnTextureCreateDefaultTextureView(depthStencilTexture);
+    }
+
 }
 
 void frame() {
@@ -120,6 +158,15 @@ void frame() {
     DawnRenderPassDescriptor renderpassInfo;
     DawnRenderPassColorAttachmentDescriptor colorAttachment;
     DawnRenderPassColorAttachmentDescriptor* colorAttachments = {&colorAttachment};
+    DawnRenderPassDepthStencilAttachmentDescriptor depthStencilAttachment;
+    depthStencilAttachment.attachment = depthStencilView;
+    depthStencilAttachment.clearDepth = 0.75f;
+    depthStencilAttachment.clearStencil = 0;
+    depthStencilAttachment.depthLoadOp = DAWN_LOAD_OP_CLEAR;
+    depthStencilAttachment.depthStoreOp = DAWN_STORE_OP_STORE;
+    depthStencilAttachment.stencilLoadOp = DAWN_LOAD_OP_LOAD;
+    depthStencilAttachment.stencilStoreOp = DAWN_STORE_OP_STORE;
+
     {
         colorAttachment.attachment = backbufferView;
         colorAttachment.resolveTarget = nullptr;
@@ -128,7 +175,7 @@ void frame() {
         colorAttachment.storeOp = DAWN_STORE_OP_STORE;
         renderpassInfo.colorAttachmentCount = 1;
         renderpassInfo.colorAttachments = &colorAttachments;
-        renderpassInfo.depthStencilAttachment = nullptr;
+        renderpassInfo.depthStencilAttachment = &depthStencilAttachment;
     }
     DawnCommandBuffer commands;
     {
@@ -136,7 +183,7 @@ void frame() {
 
         DawnRenderPassEncoder pass = dawnCommandEncoderBeginRenderPass(encoder, &renderpassInfo);
         dawnRenderPassEncoderSetPipeline(pass, pipeline);
-        dawnRenderPassEncoderDraw(pass, 3, 1, 0, 0);
+        dawnRenderPassEncoderDraw(pass, 6, 1, 0, 0);
         dawnRenderPassEncoderEndPass(pass);
         dawnRenderPassEncoderRelease(pass);
 
