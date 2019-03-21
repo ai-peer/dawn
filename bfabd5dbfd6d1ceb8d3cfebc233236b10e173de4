@@ -52,6 +52,24 @@
       "revId": "bfabd5dbfd6d1ceb8d3cfebc233236b10e173de4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d40e9b84_cd8b6e44",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-03-21T08:13:39Z",
+      "side": 1,
+      "message": "Pick the uChar2 norm one. Done.",
+      "parentUuid": "4081400f_0f4ab271",
+      "revId": "bfabd5dbfd6d1ceb8d3cfebc233236b10e173de4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
