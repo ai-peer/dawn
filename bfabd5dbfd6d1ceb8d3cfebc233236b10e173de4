@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "391e55c9_ae797e50",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-21T06:02:40Z",
+      "side": 1,
+      "message": "Hm, I think these result in slightly ugly C enums (VERTEX_FORMAT_U_CHAR2_NORM) etc. It\u0027s fine to leave as is, but maybe there\u0027s a way to avoid it.\n\n(would \"name\": \"uChar2 norm\" be too hacky? I think it would give VertexFormat::UChar2Norm and VERTEX_FORMAT_UCHAR2_NORM but I\u0027m not sure. Or \"uChar2Norm\" if you want VERTEX_FORMAT_UCHAR2NORM which matches sketch.webidl more closely.)",
+      "revId": "bfabd5dbfd6d1ceb8d3cfebc233236b10e173de4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
