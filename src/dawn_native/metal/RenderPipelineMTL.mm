@@ -15,7 +15,6 @@
 #include "dawn_native/metal/RenderPipelineMTL.h"
 
 #include "dawn_native/metal/DeviceMTL.h"
-#include "dawn_native/metal/InputStateMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 #include "dawn_native/metal/ShaderModuleMTL.h"
 #include "dawn_native/metal/TextureMTL.h"
@@ -24,6 +23,44 @@
 namespace dawn_native { namespace metal {
 
     namespace {
+        MTLVertexFormat VertexFormatType(dawn::VertexFormat format) {
+            switch (format) {
+                case dawn::VertexFormat::FloatR32G32B32A32:
+                    return MTLVertexFormatFloat4;
+                case dawn::VertexFormat::FloatR32G32B32:
+                    return MTLVertexFormatFloat3;
+                case dawn::VertexFormat::FloatR32G32:
+                    return MTLVertexFormatFloat2;
+                case dawn::VertexFormat::FloatR32:
+                    return MTLVertexFormatFloat;
+                case dawn::VertexFormat::IntR32G32B32A32:
+                    return MTLVertexFormatInt4;
+                case dawn::VertexFormat::IntR32G32B32:
+                    return MTLVertexFormatInt3;
+                case dawn::VertexFormat::IntR32G32:
+                    return MTLVertexFormatInt2;
+                case dawn::VertexFormat::IntR32:
+                    return MTLVertexFormatInt;
+                case dawn::VertexFormat::UshortR16G16B16A16:
+                    return MTLVertexFormatUShort4;
+                case dawn::VertexFormat::UshortR16G16:
+                    return MTLVertexFormatUShort2;
+                case dawn::VertexFormat::UnormR8G8B8A8:
+                    return MTLVertexFormatUChar4Normalized;
+                case dawn::VertexFormat::UnormR8G8:
+                    return MTLVertexFormatUChar2Normalized;
+            }
+        }
+
+        MTLVertexStepFunction InputStepModeFunction(dawn::InputStepMode mode) {
+            switch (mode) {
+                case dawn::InputStepMode::Vertex:
+                    return MTLVertexStepFunctionPerVertex;
+                case dawn::InputStepMode::Instance:
+                    return MTLVertexStepFunctionPerInstance;
+            }
+        }
+
         MTLPrimitiveType MTLPrimitiveTopology(dawn::PrimitiveTopology primitiveTopology) {
             switch (primitiveTopology) {
                 case dawn::PrimitiveTopology::PointList:
@@ -243,8 +280,7 @@ namespace dawn_native { namespace metal {
 
         descriptorMTL.inputPrimitiveTopology = MTLInputPrimitiveTopology(GetPrimitiveTopology());
 
-        InputState* inputState = ToBackend(GetInputState());
-        descriptorMTL.vertexDescriptor = inputState->GetMTLVertexDescriptor();
+        descriptorMTL.vertexDescriptor = ComputeVertexDesc();
 
         // TODO(kainino@chromium.org): push constants, textures, samplers
 
@@ -253,6 +289,7 @@ namespace dawn_native { namespace metal {
             mMtlRenderPipelineState = [mtlDevice newRenderPipelineStateWithDescriptor:descriptorMTL
                                                                                 error:&error];
             [descriptorMTL release];
+            [descriptorMTL.vertexDescriptor release];
             if (error != nil) {
                 NSLog(@" error => %@", error);
                 device->HandleError("Error creating rendering pipeline state");
@@ -287,6 +324,48 @@ namespace dawn_native { namespace metal {
 
     id<MTLDepthStencilState> RenderPipeline::GetMTLDepthStencilState() {
         return mMtlDepthStencilState;
+    }
+
+    MTLVertexDescriptor* RenderPipeline::ComputeVertexDesc() {
+        MTLVertexDescriptor* mtlVertexDescriptor = [[MTLVertexDescriptor new] autorelease];
+
+        const auto& attributesSetMask = GetAttributesSetMask();
+        for (uint32_t i = 0; i < attributesSetMask.size(); ++i) {
+            if (!attributesSetMask[i]) {
+                continue;
+            }
+            const VertexAttributeDescriptor& info = GetAttribute(i);
+
+            auto attribDesc = [MTLVertexAttributeDescriptor new];
+            attribDesc.format = VertexFormatType(info.format);
+            attribDesc.offset = info.offset;
+            attribDesc.bufferIndex = kMaxBindingsPerGroup + info.inputSlot;
+            mtlVertexDescriptor.attributes[i] = attribDesc;
+            [attribDesc release];
+        }
+
+        for (uint32_t i : IterateBitSet(GetInputsSetMask())) {
+            const VertexInputDescriptor& info = GetInput(i);
+
+            auto layoutDesc = [MTLVertexBufferLayoutDescriptor new];
+            if (info.stride == 0) {
+                // For MTLVertexStepFunctionConstant, the stepRate must be 0,
+                // but the stride must NOT be 0, so I made up a value (256).
+                // TODO(cwallez@chromium.org): the made up value will need to be at least
+                //    max(attrib.offset + sizeof(attrib) for each attrib)
+                layoutDesc.stepFunction = MTLVertexStepFunctionConstant;
+                layoutDesc.stepRate = 0;
+                layoutDesc.stride = 256;
+            } else {
+                layoutDesc.stepFunction = InputStepModeFunction(info.stepMode);
+                layoutDesc.stepRate = 1;
+                layoutDesc.stride = info.stride;
+            }
+            // TODO(cwallez@chromium.org): make the offset depend on the pipeline layout
+            mtlVertexDescriptor.layouts[kMaxBindingsPerGroup + i] = layoutDesc;
+            [layoutDesc release];
+        }
+        return mtlVertexDescriptor;
     }
 
 }}  // namespace dawn_native::metal

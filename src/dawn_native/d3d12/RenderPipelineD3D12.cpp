@@ -16,7 +16,6 @@
 
 #include "common/Assert.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/InputStateD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
@@ -28,6 +27,48 @@
 namespace dawn_native { namespace d3d12 {
 
     namespace {
+        DXGI_FORMAT VertexFormatType(dawn::VertexFormat format) {
+            switch (format) {
+                case dawn::VertexFormat::FloatR32G32B32A32:
+                    return DXGI_FORMAT_R32G32B32A32_FLOAT;
+                case dawn::VertexFormat::FloatR32G32B32:
+                    return DXGI_FORMAT_R32G32B32_FLOAT;
+                case dawn::VertexFormat::FloatR32G32:
+                    return DXGI_FORMAT_R32G32_FLOAT;
+                case dawn::VertexFormat::FloatR32:
+                    return DXGI_FORMAT_R32_FLOAT;
+                case dawn::VertexFormat::IntR32G32B32A32:
+                    return DXGI_FORMAT_R32G32B32A32_SINT;
+                case dawn::VertexFormat::IntR32G32B32:
+                    return DXGI_FORMAT_R32G32B32_SINT;
+                case dawn::VertexFormat::IntR32G32:
+                    return DXGI_FORMAT_R32G32_SINT;
+                case dawn::VertexFormat::IntR32:
+                    return DXGI_FORMAT_R32_SINT;
+                case dawn::VertexFormat::UshortR16G16B16A16:
+                    return DXGI_FORMAT_R16G16B16A16_UINT;
+                case dawn::VertexFormat::UshortR16G16:
+                    return DXGI_FORMAT_R16G16_UINT;
+                case dawn::VertexFormat::UnormR8G8B8A8:
+                    return DXGI_FORMAT_R8G8B8A8_UNORM;
+                case dawn::VertexFormat::UnormR8G8:
+                    return DXGI_FORMAT_R8G8_UNORM;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
+        D3D12_INPUT_CLASSIFICATION InputStepModeFunction(dawn::InputStepMode mode) {
+            switch (mode) {
+                case dawn::InputStepMode::Vertex:
+                    return D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA;
+                case dawn::InputStepMode::Instance:
+                    return D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
         D3D12_PRIMITIVE_TOPOLOGY D3D12PrimitiveTopology(dawn::PrimitiveTopology primitiveTopology) {
             switch (primitiveTopology) {
                 case dawn::PrimitiveTopology::PointList:
@@ -261,9 +302,9 @@ namespace dawn_native { namespace d3d12 {
         descriptorD3D12.pRootSignature = layout->GetRootSignature().Get();
 
         // D3D12 logs warnings if any empty input state is used
-        InputState* inputState = ToBackend(GetInputState());
-        if (inputState->GetAttributesSetMask().any()) {
-            descriptorD3D12.InputLayout = inputState->GetD3D12InputLayoutDescriptor();
+        std::array<D3D12_INPUT_ELEMENT_DESC, kMaxVertexAttributes> inputElementDescriptors;
+        if (GetAttributesSetMask().any()) {
+            descriptorD3D12.InputLayout = ComputeInputLayout(inputElementDescriptors);
         }
 
         descriptorD3D12.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
@@ -315,6 +356,45 @@ namespace dawn_native { namespace d3d12 {
 
     ComPtr<ID3D12PipelineState> RenderPipeline::GetPipelineState() {
         return mPipelineState;
+    }
+
+    D3D12_INPUT_LAYOUT_DESC RenderPipeline::ComputeInputLayout(
+        std::array<D3D12_INPUT_ELEMENT_DESC, kMaxVertexAttributes>& inputElementDescriptors) {
+        D3D12_INPUT_LAYOUT_DESC inputLayoutDescriptor;
+        const auto& attributesSetMask = GetAttributesSetMask();
+
+        unsigned int count = 0;
+        for (auto i : IterateBitSet(attributesSetMask)) {
+            if (!attributesSetMask[i]) {
+                continue;
+            }
+
+            D3D12_INPUT_ELEMENT_DESC& inputElementDescriptor = inputElementDescriptors[count++];
+
+            const VertexAttributeDescriptor& attribute = GetAttribute(i);
+
+            // If the HLSL semantic is TEXCOORDN the SemanticName should be "TEXCOORD" and the
+            // SemanticIndex N
+            inputElementDescriptor.SemanticName = "TEXCOORD";
+            inputElementDescriptor.SemanticIndex = static_cast<uint32_t>(i);
+            inputElementDescriptor.Format = VertexFormatType(attribute.format);
+            inputElementDescriptor.InputSlot = attribute.inputSlot;
+
+            const VertexInputDescriptor& input = GetInput(attribute.inputSlot);
+
+            inputElementDescriptor.AlignedByteOffset = attribute.offset;
+            inputElementDescriptor.InputSlotClass = InputStepModeFunction(input.stepMode);
+            if (inputElementDescriptor.InputSlotClass ==
+                D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA) {
+                inputElementDescriptor.InstanceDataStepRate = 0;
+            } else {
+                inputElementDescriptor.InstanceDataStepRate = 1;
+            }
+        }
+
+        inputLayoutDescriptor.pInputElementDescs = &inputElementDescriptors[0];
+        inputLayoutDescriptor.NumElements = count;
+        return inputLayoutDescriptor;
     }
 
 }}  // namespace dawn_native::d3d12
