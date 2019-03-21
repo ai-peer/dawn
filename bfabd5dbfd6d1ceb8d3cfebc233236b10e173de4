@@ -16,6 +16,24 @@
       "revId": "bfabd5dbfd6d1ceb8d3cfebc233236b10e173de4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b10eec1_85e64ba4",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-03-21T06:37:23Z",
+      "side": 1,
+      "message": "You\u0027re right. The C type of these enums are not in good forms.\nmaybe I\u0027ll directly name the format as what we used in Cpp. e.g.\nUChar2Norm and in C it will be VERTEX_FORMAT_UCHAR2NORM, in C++ it will be VertexFormat::UChar2Norm\nWDYT?",
+      "parentUuid": "391e55c9_ae797e50",
+      "revId": "bfabd5dbfd6d1ceb8d3cfebc233236b10e173de4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
