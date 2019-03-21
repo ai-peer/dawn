@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ef45db7a_3757782d",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-21T05:59:18Z",
+      "side": 1,
+      "message": "Do you mean we should use \"const*\"? That said, we only need to use a pointer, not a pointer to an array of pointers?\n\nFor example, the developers can declare an array like dawn::VertexAttributeDesciptor attributes[N]; then assign the pointer \u0027attribtes\u0027 to inputState.attrubtes:\ninputState.attrubtes \u003d attributes;\n\nJust a fast double-check, in order to understand you correctly.",
+      "parentUuid": "52265c0f_c4dab85c",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb6a9c53_2c602bd7",
         "filename": "dawn.json",
         "patchSetId": 4
@@ -64,6 +82,24 @@
       "writtenOn": "2019-03-20T10:40:35Z",
       "side": 1,
       "message": "Here and in other places we should probably move the initialization inline. Like so:\n\n descriptor.cInputState.numInputs \u003d 1;\n descriptor.cInputState.cInputs[0]-\u003einputSlot \u003d 0;\n descriptor.cInputState.cInputs[0]-\u003estride \u003d 4 * sizeof(float);\n descriptor.cInputState.cInputs[0]-\u003estepMode \u003d dawn::InputStepMode::Vertex.",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0f4e538_76f86d9c",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-21T05:59:18Z",
+      "side": 1,
+      "message": "If we use \"const *\" to annotate vertex input descriptor. Then it should be \".\", that said, the code snippet is:\ndescriptor.cInputState.numInputs \u003d 1;\ndescriptor.cInputState.cInputs[0].inputSlot \u003d 0;\ndescriptor.cInputState.cInputs[0].stride \u003d 4 * sizeof(float);\ndescriptor.cInputState.cInputs[0].stepMode \u003d dawn::InputStepMode::Vertex;\n\nJust want to make sure that I understand you correctly.",
+      "parentUuid": "64db39c9_d5c251de",
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
