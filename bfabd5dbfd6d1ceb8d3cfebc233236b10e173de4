@@ -34,6 +34,24 @@
       "revId": "bfabd5dbfd6d1ceb8d3cfebc233236b10e173de4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4081400f_0f4ab271",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-21T07:04:53Z",
+      "side": 1,
+      "message": "TBH I kinda like having _NORM, which would correspond to \"uChar2 norm\". Either way is fine.",
+      "parentUuid": "6b10eec1_85e64ba4",
+      "revId": "bfabd5dbfd6d1ceb8d3cfebc233236b10e173de4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
