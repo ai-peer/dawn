@@ -16,7 +16,6 @@
 
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
-#include "dawn_native/vulkan/InputStateVk.h"
 #include "dawn_native/vulkan/PipelineLayoutVk.h"
 #include "dawn_native/vulkan/RenderPassCache.h"
 #include "dawn_native/vulkan/ShaderModuleVk.h"
@@ -25,6 +24,48 @@
 namespace dawn_native { namespace vulkan {
 
     namespace {
+
+        VkVertexInputRate VulkanInputRate(dawn::InputStepMode stepMode) {
+            switch (stepMode) {
+                case dawn::InputStepMode::Vertex:
+                    return VK_VERTEX_INPUT_RATE_VERTEX;
+                case dawn::InputStepMode::Instance:
+                    return VK_VERTEX_INPUT_RATE_INSTANCE;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
+        VkFormat VulkanVertexFormat(dawn::VertexFormat format) {
+            switch (format) {
+                case dawn::VertexFormat::FloatR32G32B32A32:
+                    return VK_FORMAT_R32G32B32A32_SFLOAT;
+                case dawn::VertexFormat::FloatR32G32B32:
+                    return VK_FORMAT_R32G32B32_SFLOAT;
+                case dawn::VertexFormat::FloatR32G32:
+                    return VK_FORMAT_R32G32_SFLOAT;
+                case dawn::VertexFormat::FloatR32:
+                    return VK_FORMAT_R32_SFLOAT;
+                case dawn::VertexFormat::IntR32G32B32A32:
+                    return VK_FORMAT_R32G32B32A32_SINT;
+                case dawn::VertexFormat::IntR32G32B32:
+                    return VK_FORMAT_R32G32B32_SINT;
+                case dawn::VertexFormat::IntR32G32:
+                    return VK_FORMAT_R32G32_SINT;
+                case dawn::VertexFormat::IntR32:
+                    return VK_FORMAT_R32_SINT;
+                case dawn::VertexFormat::UshortR16G16B16A16:
+                    return VK_FORMAT_R16G16B16A16_UINT;
+                case dawn::VertexFormat::UshortR16G16:
+                    return VK_FORMAT_R16G16_UINT;
+                case dawn::VertexFormat::UnormR8G8B8A8:
+                    return VK_FORMAT_R8G8B8A8_UNORM;
+                case dawn::VertexFormat::UnormR8G8:
+                    return VK_FORMAT_R8G8_UNORM;
+                default:
+                    UNREACHABLE();
+            }
+        }
 
         VkPrimitiveTopology VulkanPrimitiveTopology(dawn::PrimitiveTopology topology) {
             switch (topology) {
@@ -218,6 +259,12 @@ namespace dawn_native { namespace vulkan {
             shaderStages[1].pName = descriptor->fragmentStage->entryPoint;
         }
 
+        std::array<VkVertexInputBindingDescription, kMaxVertexInputs> mBindings;
+        std::array<VkVertexInputAttributeDescription, kMaxVertexAttributes> mAttributes;
+        const InputStateDescriptor* inputState = GetInputStateDescriptor();
+        VkPipelineVertexInputStateCreateInfo inputStateCreateInfo =
+            ComputeInputStateDesc(inputState, mBindings, mAttributes);
+
         VkPipelineInputAssemblyStateCreateInfo inputAssembly;
         inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
         inputAssembly.pNext = nullptr;
@@ -341,7 +388,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.flags = 0;
         createInfo.stageCount = 2;
         createInfo.pStages = shaderStages;
-        createInfo.pVertexInputState = ToBackend(GetInputState())->GetCreateInfo();
+        createInfo.pVertexInputState = &inputStateCreateInfo;
         createInfo.pInputAssemblyState = &inputAssembly;
         createInfo.pTessellationState = nullptr;
         createInfo.pViewportState = &viewport;
@@ -360,6 +407,49 @@ namespace dawn_native { namespace vulkan {
                                                &createInfo, nullptr, &mHandle) != VK_SUCCESS) {
             ASSERT(false);
         }
+    }
+
+    VkPipelineVertexInputStateCreateInfo RenderPipeline::ComputeInputStateDesc(
+        const InputStateDescriptor* inputState,
+        std::array<VkVertexInputBindingDescription, kMaxVertexInputs>& mBindings,
+        std::array<VkVertexInputAttributeDescription, kMaxVertexAttributes>& mAttributes) {
+        // Fill in the "binding info" that will be chained in the create info
+        uint32_t bindingCount = 0;
+        for (uint32_t i : IterateBitSet(GetInputsSetMask())) {
+            const auto& bindingInfo = GetInput(i);
+
+            auto& bindingDesc = mBindings[bindingCount];
+            bindingDesc.binding = i;
+            bindingDesc.stride = bindingInfo.stride;
+            bindingDesc.inputRate = VulkanInputRate(bindingInfo.stepMode);
+
+            bindingCount++;
+        }
+
+        // Fill in the "attribute info" that will be chained in the create info
+        uint32_t attributeCount = 0;
+        for (uint32_t i : IterateBitSet(GetAttributesSetMask())) {
+            const auto& attributeInfo = GetAttribute(i);
+
+            auto& attributeDesc = mAttributes[attributeCount];
+            attributeDesc.location = i;
+            attributeDesc.binding = attributeInfo.inputSlot;
+            attributeDesc.format = VulkanVertexFormat(attributeInfo.format);
+            attributeDesc.offset = attributeInfo.offset;
+
+            attributeCount++;
+        }
+
+        // Build the create info
+        VkPipelineVertexInputStateCreateInfo mCreateInfo;
+        mCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+        mCreateInfo.pNext = nullptr;
+        mCreateInfo.flags = 0;
+        mCreateInfo.vertexBindingDescriptionCount = bindingCount;
+        mCreateInfo.pVertexBindingDescriptions = mBindings.data();
+        mCreateInfo.vertexAttributeDescriptionCount = attributeCount;
+        mCreateInfo.pVertexAttributeDescriptions = mAttributes.data();
+        return mCreateInfo;
     }
 
     RenderPipeline::~RenderPipeline() {
