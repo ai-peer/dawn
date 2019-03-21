@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "737b89e9_c40cbc50",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-21T07:00:53Z",
+      "side": 1,
+      "message": "Yep that\u0027s it, though we should probably have the ComboInputStateDescriptor contain that array in most cases.",
+      "parentUuid": "ef45db7a_3757782d",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb6a9c53_2c602bd7",
         "filename": "dawn.json",
         "patchSetId": 4
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "If we use \"const *\" to annotate vertex input descriptor. Then it should be \".\", that said, the code snippet is:\ndescriptor.cInputState.numInputs \u003d 1;\ndescriptor.cInputState.cInputs[0].inputSlot \u003d 0;\ndescriptor.cInputState.cInputs[0].stride \u003d 4 * sizeof(float);\ndescriptor.cInputState.cInputs[0].stepMode \u003d dawn::InputStepMode::Vertex;\n\nJust want to make sure that I understand you correctly.",
       "parentUuid": "64db39c9_d5c251de",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0068d76_e797a695",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-21T07:00:53Z",
+      "side": 1,
+      "message": "Yep that\u0027s correct!",
+      "parentUuid": "b0f4e538_76f86d9c",
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
