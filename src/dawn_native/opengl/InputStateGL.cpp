@@ -29,8 +29,8 @@ namespace dawn_native { namespace opengl {
             auto attribute = GetAttribute(location);
             glEnableVertexAttribArray(location);
 
-            attributesUsingInput[attribute.inputSlot][location] = true;
-            auto input = GetInput(attribute.inputSlot);
+            attributesUsingInput[attribute.bindingSlot][location] = true;
+            auto input = GetInput(attribute.bindingSlot);
 
             if (input.stride == 0) {
                 // Emulate a stride of zero (constant vertex attribute) by

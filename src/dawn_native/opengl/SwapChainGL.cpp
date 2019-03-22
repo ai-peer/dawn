@@ -14,7 +14,7 @@
 
 #include "dawn_native/opengl/SwapChainGL.h"
 
-#include "dawn_native/opengl/DeviceGL.h"
+#include "dawn_native/Device.h"
 #include "dawn_native/opengl/Forward.h"
 #include "dawn_native/opengl/TextureGL.h"
 
@@ -22,8 +22,7 @@
 
 namespace dawn_native { namespace opengl {
 
-    SwapChain::SwapChain(Device* device, const SwapChainDescriptor* descriptor)
-        : SwapChainBase(device, descriptor) {
+    SwapChain::SwapChain(SwapChainBuilder* builder) : SwapChainBase(builder) {
         const auto& im = GetImplementation();
         im.Init(im.userData, nullptr);
     }
@@ -33,8 +32,8 @@ namespace dawn_native { namespace opengl {
 
     TextureBase* SwapChain::GetNextTextureImpl(const TextureDescriptor* descriptor) {
         const auto& im = GetImplementation();
-        DawnSwapChainNextTexture next = {};
-        DawnSwapChainError error = im.GetNextTexture(im.userData, &next);
+        dawnSwapChainNextTexture next = {};
+        dawnSwapChainError error = im.GetNextTexture(im.userData, &next);
         if (error) {
             GetDevice()->HandleError(error);
             return nullptr;

@@ -28,45 +28,28 @@ namespace dawn_native {
     QueueBase::QueueBase(DeviceBase* device) : ObjectBase(device) {
     }
 
-    void QueueBase::Submit(uint32_t commandCount, CommandBufferBase* const* commands) {
-        if (GetDevice()->ConsumedError(ValidateSubmit(commandCount, commands))) {
+    void QueueBase::Submit(uint32_t numCommands, CommandBufferBase* const* commands) {
+        if (GetDevice()->ConsumedError(ValidateSubmit(numCommands, commands))) {
             return;
         }
-        ASSERT(!IsError());
 
-        SubmitImpl(commandCount, commands);
+        SubmitImpl(numCommands, commands);
     }
 
     void QueueBase::Signal(FenceBase* fence, uint64_t signalValue) {
         if (GetDevice()->ConsumedError(ValidateSignal(fence, signalValue))) {
             return;
         }
-        ASSERT(!IsError());
 
         fence->SetSignaledValue(signalValue);
         GetDevice()->GetFenceSignalTracker()->UpdateFenceOnComplete(fence, signalValue);
     }
 
-    FenceBase* QueueBase::CreateFence(const FenceDescriptor* descriptor) {
-        if (GetDevice()->ConsumedError(ValidateCreateFence(descriptor))) {
-            return FenceBase::MakeError(GetDevice());
-        }
-
-        return new FenceBase(this, descriptor);
-    }
-
-    MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
-                                         CommandBufferBase* const* commands) {
-        DAWN_TRY(GetDevice()->ValidateObject(this));
-
-        for (uint32_t i = 0; i < commandCount; ++i) {
-            // TODO(cwallez@chromium.org): Remove this once CommandBufferBuilder doesn't use the
-            // builder mechanism anymore.
+    MaybeError QueueBase::ValidateSubmit(uint32_t numCommands, CommandBufferBase* const* commands) {
+        for (uint32_t i = 0; i < numCommands; ++i) {
             if (commands[i] == nullptr) {
                 return DAWN_VALIDATION_ERROR("Command buffers cannot be null");
             }
-
-            DAWN_TRY(GetDevice()->ValidateObject(commands[i]));
 
             const CommandBufferResourceUsage& usages = commands[i]->GetResourceUsages();
 
@@ -91,23 +74,13 @@ namespace dawn_native {
     }
 
     MaybeError QueueBase::ValidateSignal(const FenceBase* fence, uint64_t signalValue) {
-        DAWN_TRY(GetDevice()->ValidateObject(this));
-        DAWN_TRY(GetDevice()->ValidateObject(fence));
-
-        if (fence->GetQueue() != this) {
-            return DAWN_VALIDATION_ERROR(
-                "Fence must be signaled on the queue on which it was created.");
+        if (fence == nullptr) {
+            return DAWN_VALIDATION_ERROR("Fence cannot be null");
         }
+
         if (signalValue <= fence->GetSignaledValue()) {
             return DAWN_VALIDATION_ERROR("Signal value less than or equal to fence signaled value");
         }
-        return {};
-    }
-
-    MaybeError QueueBase::ValidateCreateFence(const FenceDescriptor* descriptor) {
-        DAWN_TRY(GetDevice()->ValidateObject(this));
-        DAWN_TRY(ValidateFenceDescriptor(descriptor));
-
         return {};
     }
 

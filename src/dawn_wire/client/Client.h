@@ -25,19 +25,15 @@ namespace dawn_wire { namespace client {
 
     class Device;
 
-    class Client : public ClientBase {
+    class Client : public ClientBase, public CommandHandler {
       public:
-        Client(CommandSerializer* serializer);
+        Client(dawnProcTable* procs, dawnDevice* device, CommandSerializer* serializer);
         ~Client();
 
         const char* HandleCommands(const char* commands, size_t size);
 
         void* GetCmdSpace(size_t size) {
             return mSerializer->GetCmdSpace(size);
-        }
-
-        DawnDevice GetDevice() const {
-            return reinterpret_cast<DawnDeviceImpl*>(mDevice);
         }
 
       private:
@@ -48,7 +44,7 @@ namespace dawn_wire { namespace client {
         WireDeserializeAllocator mAllocator;
     };
 
-    DawnProcTable GetProcs();
+    dawnProcTable GetProcs();
 
 }}  // namespace dawn_wire::client
 

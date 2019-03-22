@@ -44,69 +44,69 @@ class PushConstantTest : public ValidationTest {
 
 // Test valid usage of the parameters to SetPushConstants
 TEST_F(PushConstantTest, Success) {
-    DummyRenderPass renderpassData(device);
+    DummyRenderPass renderpassData = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     // PushConstants in a compute pass
     {
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, 0, 1, constants);
         pass.EndPass();
     }
 
     // PushConstants in a render pass
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderpassData);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpassData.renderPass);
         pass.SetPushConstants(dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment, 0, 1, constants);
         pass.EndPass();
     }
 
     // Setting all constants
     {
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, 0, kMaxPushConstants, constants);
         pass.EndPass();
     }
 
     // Setting constants at an offset
     {
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, kMaxPushConstants - 1, 1, constants);
         pass.EndPass();
     }
 
-    encoder.Finish();
+    builder.GetResult();
 }
 
 // Test check for constants being set out of bounds
 TEST_F(PushConstantTest, SetPushConstantsOOB) {
     uint32_t constants[kMaxPushConstants] = {0};
-
+    
     // Control case: setting all constants
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, 0, kMaxPushConstants, constants);
         pass.EndPass();
-        encoder.Finish();
+        builder.GetResult();
     }
 
     // OOB because count is too big.
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, 0, kMaxPushConstants + 1, constants);
         pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        builder.GetResult();
     }
 
     // OOB because of the offset.
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, 1, kMaxPushConstants, constants);
         pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        builder.GetResult();
     }
 }
 
@@ -114,61 +114,61 @@ TEST_F(PushConstantTest, SetPushConstantsOOB) {
 TEST_F(PushConstantTest, StageForComputePass) {
     // Control case: setting to the compute stage in compute passes
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, 0, 1, constants);
         pass.EndPass();
-        encoder.Finish();
+        builder.GetResult();
     }
 
     // Graphics stages are disallowed
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::Vertex, 0, 1, constants);
         pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        builder.GetResult();
     }
 
     // A None shader stage mask is valid.
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPushConstants(dawn::ShaderStageBit::None, 0, 1, constants);
         pass.EndPass();
-        encoder.Finish();
+        builder.GetResult();
     }
 }
 
 // Test valid stages for render passes
 TEST_F(PushConstantTest, StageForRenderPass) {
-    DummyRenderPass renderpassData(device);
+    DummyRenderPass renderpassData = CreateDummyRenderPass();
 
     // Control case: setting to vertex and fragment in render pass
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderpassData);
+        dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpassData.renderPass);
         pass.SetPushConstants(dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment, 0, 1, constants);
         pass.EndPass();
-        encoder.Finish();
+        builder.GetResult();
     }
 
     // Compute stage is disallowed
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderpassData);
+        dawn::CommandBufferBuilder builder = AssertWillBeError(device.CreateCommandBufferBuilder());
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpassData.renderPass);
         pass.SetPushConstants(dawn::ShaderStageBit::Compute, 0, 1, constants);
         pass.EndPass();
-        ASSERT_DEVICE_ERROR(encoder.Finish());
+        builder.GetResult();
     }
 
     // A None shader stage mask is valid.
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderpassData);
+        dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpassData.renderPass);
         pass.SetPushConstants(dawn::ShaderStageBit::None, 0, 1, constants);
         pass.EndPass();
-        encoder.Finish();
+        builder.GetResult();
     }
 }
 

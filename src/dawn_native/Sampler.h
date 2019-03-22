@@ -29,11 +29,6 @@ namespace dawn_native {
     class SamplerBase : public ObjectBase {
       public:
         SamplerBase(DeviceBase* device, const SamplerDescriptor* descriptor);
-
-        static SamplerBase* MakeError(DeviceBase* device);
-
-      private:
-        SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag);
     };
 
 }  // namespace dawn_native

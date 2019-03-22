@@ -29,7 +29,7 @@
 namespace utils {
     class SwapChainImplGL {
       public:
-        using WSIContext = DawnWSIContextGL;
+        using WSIContext = dawnWSIContextGL;
 
         SwapChainImplGL(GLFWwindow* window) : mWindow(window) {
         }
@@ -39,7 +39,7 @@ namespace utils {
             glDeleteFramebuffers(1, &mBackFBO);
         }
 
-        void Init(DawnWSIContextGL*) {
+        void Init(dawnWSIContextGL*) {
             glGenTextures(1, &mBackTexture);
             glBindTexture(GL_TEXTURE_2D, mBackTexture);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 0, 0, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
@@ -50,8 +50,8 @@ namespace utils {
                                    mBackTexture, 0);
         }
 
-        DawnSwapChainError Configure(DawnTextureFormat format,
-                                     DawnTextureUsageBit,
+        dawnSwapChainError Configure(dawnTextureFormat format,
+                                     dawnTextureUsageBit,
                                      uint32_t width,
                                      uint32_t height) {
             if (format != DAWN_TEXTURE_FORMAT_R8_G8_B8_A8_UNORM) {
@@ -70,12 +70,12 @@ namespace utils {
             return DAWN_SWAP_CHAIN_NO_ERROR;
         }
 
-        DawnSwapChainError GetNextTexture(DawnSwapChainNextTexture* nextTexture) {
+        dawnSwapChainError GetNextTexture(dawnSwapChainNextTexture* nextTexture) {
             nextTexture->texture.u32 = mBackTexture;
             return DAWN_SWAP_CHAIN_NO_ERROR;
         }
 
-        DawnSwapChainError Present() {
+        dawnSwapChainError Present() {
             glBindFramebuffer(GL_READ_FRAMEBUFFER, mBackFBO);
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
             glBlitFramebuffer(0, 0, mWidth, mHeight, 0, mHeight, mWidth, 0, GL_COLOR_BUFFER_BIT,
@@ -95,9 +95,36 @@ namespace utils {
 
     class OpenGLBinding : public BackendBinding {
       public:
-        OpenGLBinding(GLFWwindow* window, DawnDevice device) : BackendBinding(window, device) {
+        void SetupGLFWWindowHints() override {
+#if defined(DAWN_PLATFORM_APPLE)
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#else
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#endif
+        }
+
+        dawnDevice CreateDevice() override {
+            glfwMakeContextCurrent(mWindow);
             // Load the GL entry points in our copy of the glad static library
             gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
+
+            // Make an instance and "discover" an OpenGL adapter with glfw's getProc
+            mInstance = std::make_unique<dawn_native::Instance>();
+
+            dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
+            adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
+            mInstance->DiscoverAdapters(&adapterOptions);
+
+            std::vector<dawn_native::Adapter> adapters = mInstance->GetAdapters();
+            ASSERT(adapters.size() == 1);
+
+            return adapters[0].CreateDevice();
         }
 
         uint64_t GetSwapChainImplementation() override {
@@ -107,16 +134,17 @@ namespace utils {
             return reinterpret_cast<uint64_t>(&mSwapchainImpl);
         }
 
-        DawnTextureFormat GetPreferredSwapChainTextureFormat() override {
+        dawnTextureFormat GetPreferredSwapChainTextureFormat() override {
             return DAWN_TEXTURE_FORMAT_R8_G8_B8_A8_UNORM;
         }
 
       private:
-        DawnSwapChainImplementation mSwapchainImpl = {};
+        std::unique_ptr<dawn_native::Instance> mInstance;
+        dawnSwapChainImplementation mSwapchainImpl = {};
     };
 
-    BackendBinding* CreateOpenGLBinding(GLFWwindow* window, DawnDevice device) {
-        return new OpenGLBinding(window, device);
+    BackendBinding* CreateOpenGLBinding() {
+        return new OpenGLBinding;
     }
 
 }  // namespace utils

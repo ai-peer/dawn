@@ -18,6 +18,8 @@
         "buffer map async": [
             { "name": "buffer id", "type": "ObjectId" },
             { "name": "request serial", "type": "uint32_t" },
+            { "name": "start", "type": "uint32_t" },
+            { "name": "size", "type": "uint32_t" },
             { "name": "is write", "type": "bool" }
         ],
         "buffer update mapped data": [
@@ -41,8 +43,7 @@
         "buffer map write async callback": [
             { "name": "buffer", "type": "ObjectHandle", "handle_type": "buffer" },
             { "name": "request serial", "type": "uint32_t" },
-            { "name": "status", "type": "uint32_t" },
-            { "name": "data length", "type": "uint32_t" }
+            { "name": "status", "type": "uint32_t" }
         ],
         "device error callback": [
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
@@ -58,7 +59,7 @@
         ],
         "client_handwritten_commands": [
             "BufferUnmap",
-            "QueueCreateFence",
+            "DeviceCreateFence",
             "FenceGetCompletedValue",
             "QueueSignal"
         ],
@@ -70,7 +71,7 @@
         "server_custom_pre_handler_commands": [
             "BufferUnmap"
         ],
-        "server_handwritten_commands": [
+        "server_custom_post_handler_commands": [
             "QueueSignal"
         ],
         "server_reverse_lookup_objects": [
