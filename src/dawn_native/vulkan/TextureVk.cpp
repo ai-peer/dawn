@@ -291,11 +291,19 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
+    // With this constructor, the lifetime of the resource is externally managed.
     Texture::Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage)
         : TextureBase(device, descriptor), mHandle(nativeImage) {
+            mState = TextureState::OwnedExternal;
     }
 
     Texture::~Texture() {
+        if(mState != TextureState::OwnedExternal){
+            DestroyImpl();
+        }
+    }
+
+    void Texture::DestroyImpl() {
         Device* device = ToBackend(GetDevice());
 
         // If we own the resource, release it.

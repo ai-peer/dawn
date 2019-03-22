@@ -318,6 +318,7 @@ namespace dawn_native {
 
     TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor)
         : ObjectBase(device),
+          mState(TextureState::OwnedInternal),
           mDimension(descriptor->dimension),
           mFormat(descriptor->format),
           mSize(descriptor->size),
@@ -367,6 +368,17 @@ namespace dawn_native {
 
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
         ASSERT(!IsError());
+        if (mState == TextureState::Destroyed) {
+            return DAWN_VALIDATION_ERROR("Destroyed texture used in a submit");
+        }
+        return {};
+    }
+
+     MaybeError TextureBase::ValidateCanCreateTextureViewNow() const {
+        ASSERT(!IsError());
+        if (mState == TextureState::Destroyed) {
+            return DAWN_VALIDATION_ERROR("Destroyed texture used to create texture view");
+        }
         return {};
     }
 
@@ -387,6 +399,13 @@ namespace dawn_native {
 
     TextureViewBase* TextureBase::CreateTextureView(const TextureViewDescriptor* descriptor) {
         return GetDevice()->CreateTextureView(this, descriptor);
+    }
+
+    void TextureBase::Destroy() {
+        if(mState != TextureState::OwnedExternal){
+            DestroyImpl();
+            mState = TextureState::Destroyed;
+        }
     }
 
     // TextureViewBase
