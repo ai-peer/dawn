@@ -15,7 +15,6 @@
 #include "dawn_native/metal/CommandBufferMTL.h"
 
 #include "dawn_native/BindGroup.h"
-#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
@@ -48,17 +47,17 @@ namespace dawn_native { namespace metal {
         };
 
         // Creates an autoreleased MTLRenderPassDescriptor matching desc
-        MTLRenderPassDescriptor* CreateMTLRenderPassDescriptor(BeginRenderPassCmd* renderPass) {
+        MTLRenderPassDescriptor* CreateMTLRenderPassDescriptor(RenderPassDescriptorBase* desc) {
             MTLRenderPassDescriptor* descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
 
-            for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
-                auto& attachmentInfo = renderPass->colorAttachments[i];
+            for (uint32_t i : IterateBitSet(desc->GetColorAttachmentMask())) {
+                auto& attachmentInfo = desc->GetColorAttachment(i);
 
                 if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
                     descriptor.colorAttachments[i].loadAction = MTLLoadActionClear;
-                    descriptor.colorAttachments[i].clearColor =
-                        MTLClearColorMake(attachmentInfo.clearColor.r, attachmentInfo.clearColor.g,
-                                          attachmentInfo.clearColor.b, attachmentInfo.clearColor.a);
+                    descriptor.colorAttachments[i].clearColor = MTLClearColorMake(
+                        attachmentInfo.clearColor[0], attachmentInfo.clearColor[1],
+                        attachmentInfo.clearColor[2], attachmentInfo.clearColor[3]);
                 } else {
                     descriptor.colorAttachments[i].loadAction = MTLLoadActionLoad;
                 }
@@ -71,8 +70,8 @@ namespace dawn_native { namespace metal {
                 descriptor.colorAttachments[i].storeAction = MTLStoreActionStore;
             }
 
-            if (renderPass->hasDepthStencilAttachment) {
-                auto& attachmentInfo = renderPass->depthStencilAttachment;
+            if (desc->HasDepthStencilAttachment()) {
+                auto& attachmentInfo = desc->GetDepthStencilAttachment();
 
                 // TODO(jiawei.shao@intel.com): support rendering into a layer of a texture.
                 id<MTLTexture> texture =
@@ -199,20 +198,16 @@ namespace dawn_native { namespace metal {
                             [compute setTexture:textureView->GetMTLTexture() atIndex:computeIndex];
                         }
                     } break;
-
-                    // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-                    case dawn::BindingType::DynamicUniformBuffer:
-                    case dawn::BindingType::DynamicStorageBuffer:
-                        UNREACHABLE();
-                        break;
                 }
             }
         }
 
     }  // anonymous namespace
 
-    CommandBuffer::CommandBuffer(Device* device, CommandEncoderBase* encoder)
-        : CommandBufferBase(device, encoder), mCommands(encoder->AcquireCommands()) {
+    CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
+        : CommandBufferBase(builder),
+          mDevice(ToBackend(builder->GetDevice())),
+          mCommands(builder->AcquireCommands()) {
     }
 
     CommandBuffer::~CommandBuffer() {
@@ -234,7 +229,7 @@ namespace dawn_native { namespace metal {
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
                     encoders.Finish();
-                    EncodeRenderPass(commandBuffer, cmd);
+                    EncodeRenderPass(commandBuffer, ToBackend(cmd->info.Get()));
                 } break;
 
                 case Command::CopyBufferToBuffer: {
@@ -268,98 +263,16 @@ namespace dawn_native { namespace metal {
                     size.height = copySize.height;
                     size.depth = copySize.depth;
 
-                    // When uploading textures from an unpacked buffer, Metal validation layer
-                    // doesn't compute the correct range when checking if the buffer is big enough
-                    // to contain the data for the whole copy. Instead of looking at the position
-                    // of the last texel in the buffer, it computes the volume of the 3D box with
-                    // rowPitch * imageHeight * copySize.depth. For example considering the pixel
-                    // buffer below where in memory, each row data (D) of the texture is followed
-                    // by some padding data (P):
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDA|PP|
-                    // The last pixel read will be A, but the driver will think it is the whole
-                    // last padding row, causing it to generate an error when the pixel buffer is
-                    // just big enough.
-
-                    // We work around this limitation by detecting when Metal would complain and
-                    // copy the last image and row separately using tight sourceBytesPerRow or
-                    // sourceBytesPerImage.
-                    uint32_t bytesPerImage = src.rowPitch * src.imageHeight;
-
-                    // Check whether buffer size is big enough.
-                    bool needWorkaround =
-                        (buffer->GetSize() - src.offset < bytesPerImage * size.depth);
-
                     encoders.EnsureBlit(commandBuffer);
-
-                    if (!needWorkaround) {
-                        [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
-                                         sourceOffset:src.offset
-                                    sourceBytesPerRow:src.rowPitch
-                                  sourceBytesPerImage:(src.rowPitch * src.imageHeight)
-                                           sourceSize:size
-                                            toTexture:texture->GetMTLTexture()
-                                     destinationSlice:dst.slice
-                                     destinationLevel:dst.level
-                                    destinationOrigin:origin];
-                        break;
-                    }
-
-                    uint32_t offset = src.offset;
-
-                    // Doing all the copy except the last image.
-                    if (size.depth > 1) {
-                        [encoders.blit
-                                 copyFromBuffer:buffer->GetMTLBuffer()
-                                   sourceOffset:offset
-                              sourceBytesPerRow:src.rowPitch
-                            sourceBytesPerImage:(src.rowPitch * src.imageHeight)
-                                     sourceSize:MTLSizeMake(size.width, size.height, size.depth - 1)
-                                      toTexture:texture->GetMTLTexture()
-                               destinationSlice:dst.slice
-                               destinationLevel:dst.level
-                              destinationOrigin:origin];
-
-                        // Update offset to copy to the last image.
-                        offset += (copySize.depth - 1) * bytesPerImage;
-                    }
-
-                    // Doing all the copy in last image except the last row.
-                    if (size.height > 1) {
-                        [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
-                                         sourceOffset:offset
-                                    sourceBytesPerRow:src.rowPitch
-                                  sourceBytesPerImage:(src.rowPitch * (src.imageHeight - 1))
-                                           sourceSize:MTLSizeMake(size.width, size.height - 1, 1)
-                                            toTexture:texture->GetMTLTexture()
-                                     destinationSlice:dst.slice
-                                     destinationLevel:dst.level
-                                    destinationOrigin:MTLOriginMake(origin.x, origin.y,
-                                                                    origin.z + size.depth - 1)];
-
-                        // Update offset to copy to the last row.
-                        offset += (copySize.height - 1) * src.rowPitch;
-                    }
-
-                    // Doing the last row copy with the exact number of bytes in last row.
-                    // Like copy to a 1D texture to workaround the issue.
-                    uint32_t lastRowDataSize =
-                        copySize.width * TextureFormatPixelSize(texture->GetFormat());
-
-                    [encoders.blit
-                             copyFromBuffer:buffer->GetMTLBuffer()
-                               sourceOffset:offset
-                          sourceBytesPerRow:lastRowDataSize
-                        sourceBytesPerImage:lastRowDataSize
-                                 sourceSize:MTLSizeMake(size.width, 1, 1)
-                                  toTexture:texture->GetMTLTexture()
-                           destinationSlice:dst.slice
-                           destinationLevel:dst.level
-                          destinationOrigin:MTLOriginMake(origin.x, origin.y + size.height - 1,
-                                                          origin.z + size.depth - 1)];
+                    [encoders.blit copyFromBuffer:buffer->GetMTLBuffer()
+                                     sourceOffset:src.offset
+                                sourceBytesPerRow:src.rowPitch
+                              sourceBytesPerImage:(src.rowPitch * src.imageHeight)
+                                       sourceSize:size
+                                        toTexture:texture->GetMTLTexture()
+                                 destinationSlice:dst.slice
+                                 destinationLevel:dst.level
+                                destinationOrigin:origin];
                 } break;
 
                 case Command::CopyTextureToBuffer: {
@@ -380,100 +293,16 @@ namespace dawn_native { namespace metal {
                     size.height = copySize.height;
                     size.depth = copySize.depth;
 
-                    // When Copy textures to an unpacked buffer, Metal validation layer doesn't
-                    // compute the correct range when checking if the buffer is big enough to
-                    // contain the data for the whole copy. Instead of looking at the position
-                    // of the last texel in the buffer, it computes the volume of the 3D box with
-                    // rowPitch * imageHeight * copySize.depth.
-                    // For example considering the texture below where in memory, each row
-                    // data (D) of the texture is followed by some padding data (P):
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDD|PP|
-                    //     |DDDDDDA|PP|
-                    // The last valid pixel read will be A, but the driver will think it needs the
-                    // whole last padding row, causing it to generate an error when the buffer is
-                    // just big enough.
-
-                    // We work around this limitation by detecting when Metal would complain and
-                    // copy the last image and row separately using tight destinationBytesPerRow or
-                    // destinationBytesPerImage.
-                    uint32_t bytesPerImage = dst.rowPitch * dst.imageHeight;
-
-                    // Check whether buffer size is big enough.
-                    bool needWorkaround =
-                        (buffer->GetSize() - dst.offset < bytesPerImage * size.depth);
-
                     encoders.EnsureBlit(commandBuffer);
-
-                    if (!needWorkaround) {
-                        [encoders.blit copyFromTexture:texture->GetMTLTexture()
-                                           sourceSlice:src.slice
-                                           sourceLevel:src.level
-                                          sourceOrigin:origin
-                                            sourceSize:size
-                                              toBuffer:buffer->GetMTLBuffer()
-                                     destinationOffset:dst.offset
-                                destinationBytesPerRow:dst.rowPitch
-                              destinationBytesPerImage:(dst.rowPitch * dst.imageHeight)];
-                        break;
-                    }
-
-                    uint32_t offset = dst.offset;
-
-                    // Doing all the copy except the last image.
-                    if (size.depth > 1) {
-                        size.depth = copySize.depth - 1;
-
-                        [encoders.blit copyFromTexture:texture->GetMTLTexture()
-                                           sourceSlice:src.slice
-                                           sourceLevel:src.level
-                                          sourceOrigin:origin
-                                            sourceSize:MTLSizeMake(size.width, size.height,
-                                                                   size.depth - 1)
-                                              toBuffer:buffer->GetMTLBuffer()
-                                     destinationOffset:offset
-                                destinationBytesPerRow:dst.rowPitch
-                              destinationBytesPerImage:dst.rowPitch * dst.imageHeight];
-
-                        // Update offset to copy from the last image.
-                        offset += (copySize.depth - 1) * bytesPerImage;
-                    }
-
-                    // Doing all the copy in last image except the last row.
-                    if (size.height > 1) {
-                        [encoders.blit copyFromTexture:texture->GetMTLTexture()
-                                           sourceSlice:src.slice
-                                           sourceLevel:src.level
-                                          sourceOrigin:MTLOriginMake(origin.x, origin.y,
-                                                                     origin.z + size.depth - 1)
-                                            sourceSize:MTLSizeMake(size.width, size.height - 1, 1)
-                                              toBuffer:buffer->GetMTLBuffer()
-                                     destinationOffset:offset
-                                destinationBytesPerRow:dst.rowPitch
-                              destinationBytesPerImage:dst.rowPitch * (dst.imageHeight - 1)];
-
-                        // Update offset to copy from the last row.
-                        offset += (copySize.height - 1) * dst.rowPitch;
-                    }
-
-                    // Doing the last row copy with the exact number of bytes in last row.
-                    // Like copy from a 1D texture to workaround the issue.
-                    uint32_t lastRowDataSize =
-                        copySize.width * TextureFormatPixelSize(texture->GetFormat());
-
-                    [encoders.blit
-                                 copyFromTexture:texture->GetMTLTexture()
-                                     sourceSlice:src.slice
-                                     sourceLevel:src.level
-                                    sourceOrigin:MTLOriginMake(origin.x, origin.y + size.height - 1,
-                                                               origin.z + size.depth - 1)
-                                      sourceSize:MTLSizeMake(size.width, 1, 1)
-                                        toBuffer:buffer->GetMTLBuffer()
-                               destinationOffset:offset
-                          destinationBytesPerRow:lastRowDataSize
-                        destinationBytesPerImage:lastRowDataSize];
+                    [encoders.blit copyFromTexture:texture->GetMTLTexture()
+                                       sourceSlice:src.slice
+                                       sourceLevel:src.level
+                                      sourceOrigin:origin
+                                        sourceSize:size
+                                          toBuffer:buffer->GetMTLBuffer()
+                                 destinationOffset:dst.offset
+                            destinationBytesPerRow:dst.rowPitch
+                          destinationBytesPerImage:(dst.rowPitch * dst.imageHeight)];
                 } break;
 
                 default: { UNREACHABLE(); } break;
@@ -544,7 +373,7 @@ namespace dawn_native { namespace metal {
     }
 
     void CommandBuffer::EncodeRenderPass(id<MTLCommandBuffer> commandBuffer,
-                                         BeginRenderPassCmd* renderPassCmd) {
+                                         RenderPassDescriptorBase* renderPass) {
         RenderPipeline* lastPipeline = nullptr;
         id<MTLBuffer> indexBuffer = nil;
         uint32_t indexBufferBaseOffset = 0;
@@ -554,7 +383,7 @@ namespace dawn_native { namespace metal {
 
         // This will be autoreleased
         id<MTLRenderCommandEncoder> encoder = [commandBuffer
-            renderCommandEncoderWithDescriptor:CreateMTLRenderPassDescriptor(renderPassCmd)];
+            renderCommandEncoderWithDescriptor:CreateMTLRenderPassDescriptor(renderPass)];
 
         // Set default values for push constants
         vertexPushConstants.fill(0);
@@ -607,30 +436,6 @@ namespace dawn_native { namespace metal {
                     }
                 } break;
 
-                case Command::InsertDebugMarker: {
-                    InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
-                    auto label = mCommands.NextData<char>(cmd->length + 1);
-                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:label];
-
-                    [encoder insertDebugSignpost:mtlLabel];
-                    [mtlLabel release];
-                } break;
-
-                case Command::PopDebugGroup: {
-                    mCommands.NextCommand<PopDebugGroupCmd>();
-
-                    [encoder popDebugGroup];
-                } break;
-
-                case Command::PushDebugGroup: {
-                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
-                    auto label = mCommands.NextData<char>(cmd->length + 1);
-                    NSString* mtlLabel = [[NSString alloc] initWithUTF8String:label];
-
-                    [encoder pushDebugGroup:mtlLabel];
-                    [mtlLabel release];
-                } break;
-
                 case Command::SetRenderPipeline: {
                     SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
                     lastPipeline = ToBackend(cmd->pipeline).Get();
@@ -672,15 +477,6 @@ namespace dawn_native { namespace metal {
                     rect.y = cmd->y;
                     rect.width = cmd->width;
                     rect.height = cmd->height;
-
-                    // The scissor rect x + width must be <= render pass width
-                    if ((rect.x + rect.width) > renderPassCmd->width) {
-                        rect.width = renderPassCmd->width - rect.x;
-                    }
-                    // The scissor rect y + height must be <= render pass height
-                    if ((rect.y + rect.height > renderPassCmd->height)) {
-                        rect.height = renderPassCmd->height - rect.y;
-                    }
 
                     [encoder setScissorRect:rect];
                 } break;

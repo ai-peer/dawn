@@ -12,23 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn_wire/WireServer.h"
+#include "dawn_wire/client/Client.h"
 #include "dawn_wire/server/Server.h"
 
 namespace dawn_wire {
-
-    WireServer::WireServer(DawnDevice device,
-                           const DawnProcTable& procs,
-                           CommandSerializer* serializer)
-        : mImpl(new server::Server(device, procs, serializer)) {
+    CommandHandler* NewClientDevice(dawnProcTable* procs,
+                                    dawnDevice* device,
+                                    CommandSerializer* serializer) {
+        return new client::Client(procs, device, serializer);
     }
 
-    WireServer::~WireServer() {
-        mImpl.reset();
+    CommandHandler* NewServerCommandHandler(dawnDevice device,
+                                            const dawnProcTable& procs,
+                                            CommandSerializer* serializer) {
+        return new server::Server(device, procs, serializer);
     }
-
-    const char* WireServer::HandleCommands(const char* commands, size_t size) {
-        return mImpl->HandleCommands(commands, size);
-    }
-
 }  // namespace dawn_wire

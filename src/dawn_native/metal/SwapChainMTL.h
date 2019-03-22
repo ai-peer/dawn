@@ -23,7 +23,7 @@ namespace dawn_native { namespace metal {
 
     class SwapChain : public SwapChainBase {
       public:
-        SwapChain(Device* device, const SwapChainDescriptor* descriptor);
+        SwapChain(SwapChainBuilder* builder);
         ~SwapChain();
 
       protected:

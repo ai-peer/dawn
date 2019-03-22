@@ -40,8 +40,6 @@ namespace dawn_native {
       public:
         ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor);
 
-        static ShaderModuleBase* MakeError(DeviceBase* device);
-
         void ExtractSpirvInfo(const spirv_cross::Compiler& compiler);
 
         struct PushConstantInfo {
@@ -70,8 +68,6 @@ namespace dawn_native {
         bool IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout);
 
       private:
-        ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
-
         bool IsCompatibleWithBindGroupLayout(size_t group, const BindGroupLayoutBase* layout);
 
         PushConstantInfo mPushConstants = {};

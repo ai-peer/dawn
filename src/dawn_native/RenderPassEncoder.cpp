@@ -15,9 +15,8 @@
 #include "dawn_native/RenderPassEncoder.h"
 
 #include "dawn_native/Buffer.h"
-#include "dawn_native/CommandEncoder.h"
+#include "dawn_native/CommandBuffer.h"
 #include "dawn_native/Commands.h"
-#include "dawn_native/Device.h"
 #include "dawn_native/RenderPipeline.h"
 
 #include <string.h>
@@ -25,27 +24,16 @@
 namespace dawn_native {
 
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
-                                                 CommandEncoderBase* topLevelEncoder,
+                                                 CommandBufferBuilder* topLevelBuilder,
                                                  CommandAllocator* allocator)
-        : ProgrammablePassEncoder(device, topLevelEncoder, allocator) {
-    }
-
-    RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
-                                                 CommandEncoderBase* topLevelEncoder,
-                                                 ErrorTag errorTag)
-        : ProgrammablePassEncoder(device, topLevelEncoder, errorTag) {
-    }
-
-    RenderPassEncoderBase* RenderPassEncoderBase::MakeError(DeviceBase* device,
-                                                            CommandEncoderBase* topLevelEncoder) {
-        return new RenderPassEncoderBase(device, topLevelEncoder, ObjectBase::kError);
+        : ProgrammablePassEncoder(device, topLevelBuilder, allocator) {
     }
 
     void RenderPassEncoderBase::Draw(uint32_t vertexCount,
                                      uint32_t instanceCount,
                                      uint32_t firstVertex,
                                      uint32_t firstInstance) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -62,7 +50,7 @@ namespace dawn_native {
                                             uint32_t firstIndex,
                                             uint32_t baseVertex,
                                             uint32_t firstInstance) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -76,8 +64,12 @@ namespace dawn_native {
     }
 
     void RenderPassEncoderBase::SetPipeline(RenderPipelineBase* pipeline) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(pipeline))) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
+            return;
+        }
+
+        if (pipeline == nullptr) {
+            mTopLevelBuilder->HandleError("Pipeline cannot be null");
             return;
         }
 
@@ -88,7 +80,7 @@ namespace dawn_native {
     }
 
     void RenderPassEncoderBase::SetStencilReference(uint32_t reference) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -99,7 +91,7 @@ namespace dawn_native {
     }
 
     void RenderPassEncoderBase::SetBlendColor(const Color* color) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -112,7 +104,7 @@ namespace dawn_native {
                                                uint32_t y,
                                                uint32_t width,
                                                uint32_t height) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -125,8 +117,12 @@ namespace dawn_native {
     }
 
     void RenderPassEncoderBase::SetIndexBuffer(BufferBase* buffer, uint32_t offset) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(buffer))) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
+            return;
+        }
+
+        if (buffer == nullptr) {
+            mTopLevelBuilder->HandleError("Buffer cannot be null");
             return;
         }
 
@@ -140,12 +136,13 @@ namespace dawn_native {
                                                  uint32_t count,
                                                  BufferBase* const* buffers,
                                                  uint32_t const* offsets) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mTopLevelBuilder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
         for (size_t i = 0; i < count; ++i) {
-            if (mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(buffers[i]))) {
+            if (buffers[i] == nullptr) {
+                mTopLevelBuilder->HandleError("Buffers cannot be null");
                 return;
             }
         }
