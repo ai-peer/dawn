@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ef20df15_612c7ddb",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "737b89e9_c40cbc50",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb6a9c53_2c602bd7",
         "filename": "dawn.json",
         "patchSetId": 4
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "58574f0e_b3be1bdc",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb6a9c53_2c602bd7",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc733d99_e0b4c4dd",
         "filename": "examples/CHelloTriangle.cpp",
         "patchSetId": 4
@@ -86,6 +122,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f8d858c_7aba3a3a",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc733d99_e0b4c4dd",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -142,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "22f2466c_0812970f",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "inputs in inputState is annotated by \"const *\", so we can\u0027t change its values if we allocate an array of VertexInputDescriptor (and VertexAttributeDescriptor) instances, say mInputs, and assign it to inputState.inputs. Therefore, I allocate the array at different tests/examples. \n\nWell, we can make mInputs (and mAttributes) public in ComboRenderPipeline, just as cInputStates. Then assign it to cInputState.inputs (and cInputState.attributes). But we need to access them via descriptor.cInputs (and descriptor.cAttributes) directly, which indicates that cInputs (and cAttributes) is one of the peer of cInputStates. This is a little wired, because cInputs (cAttributes) is a sub-descriptor of cInputStates. They are not peers. In addition, the values inside vertexInput and vertexAttributes change a lot among different usage. So the default values setting in ComboRenderPipeline constructor are not very useful. \n\nOne more reason is that currently, we have already had a full list of inputs and attributes we need in tests/examples. We also assigned all values in inputs and attributes. If we add \"inputs\"\n and \"attributes\" array in ComboRenderPipeline and set default values, we need to compare with the default values and change them accordingly. This will need more efforts. And the values do vary in different tests/examples.\n\nAs a result, I don\u0027t allocate such array in ComboRenderPipeline for cInputStates, but assign an array (or one single instance) of VertexInputDescriptor (and VertexAttributeDescriptor) inside where it is used in tests/examples. And assign the array (or the address of that single instance) to inputState.inputs (and inputState.attributes) \n[1].",
+      "parentUuid": "b0068d76_e797a695",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1011a0b_4877b20a",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 4
@@ -159,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "c5e60c2d_a1b00d7f",
+        "filename": "examples/CubeReflection.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "See my comments at [1]",
+      "parentUuid": "d1011a0b_4877b20a",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5151d66_c36d4e6c",
         "filename": "examples/glTFViewer/glTFViewer.cpp",
         "patchSetId": 4
@@ -170,6 +260,30 @@
       "writtenOn": "2019-03-20T10:40:35Z",
       "side": 1,
       "message": "this wouldn\u0027t be needed with cInputDescriptor.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 0
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7c94613_dc925faf",
+        "filename": "examples/glTFViewer/glTFViewer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "see [1]",
+      "parentUuid": "e5151d66_c36d4e6c",
       "range": {
         "startLine": 241,
         "startChar": 0,
@@ -199,6 +313,24 @@
     },
     {
       "key": {
+        "uuid": "92dd705f_ed9189ed",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "I don\u0027t know whether I misunderstood you, but inputsSetMask only set (write) one time on line 40, the others just read its value. \n\nAnd inputsSetMask here is different from mInputsSetMask. The former is used to validate, the latter is used for different backends. Unfortunately, the former is needed during validation, it happens before RenderPipeline object is constructed. So we can\u0027t set or read the value to/from mInputsSetMask at that time.",
+      "parentUuid": "1c84c3e8_cc467364",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec71c324_dfff869e",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -213,6 +345,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d04eddd_cc220cba",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Same reason as above.",
+      "parentUuid": "ec71c324_dfff869e",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -239,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "4a2a24fd_b3202ee0",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "We need to set their values, they are not constant.",
+      "parentUuid": "14ea919e_a22e82b8",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e80279b_dd0705d3",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -256,6 +430,24 @@
     },
     {
       "key": {
+        "uuid": "f045e750_d2dea147",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e80279b_dd0705d3",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8baab113_fbf1c3ba",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -270,6 +462,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7bda28_91da08b1",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8baab113_fbf1c3ba",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -296,6 +506,30 @@
     },
     {
       "key": {
+        "uuid": "5fce1a5c_004c8afb",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb42328a_d9567924",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 28
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b54a31c_062ef72f",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 4
@@ -307,6 +541,30 @@
       "writtenOn": "2019-03-20T10:40:35Z",
       "side": 1,
       "message": "Where is this used? (it wasn\u0027t used previously)",
+      "range": {
+        "startLine": 66,
+        "startChar": 42,
+        "endLine": 66,
+        "endChar": 65
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec11e05c_c275d252",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "It is used in CommandBufferGL for GL backend. Previously, it was in InputStateGL. If I put it into RenderPipelineGL, the function cann\u0027t be used by CommandBufferGL via a RenderPipeline instance.",
+      "parentUuid": "4b54a31c_062ef72f",
       "range": {
         "startLine": 66,
         "startChar": 42,
@@ -336,6 +594,24 @@
     },
     {
       "key": {
+        "uuid": "cef8dbaf_54823ff8",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "The same reason as above. It is used by CommandBufferGL.",
+      "parentUuid": "60aff73f_ff0d2292",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "53dc994f_4f4e27b4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
         "patchSetId": 4
@@ -350,6 +626,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff4c9e60_aa9f3280",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "CommandBuffer also used some const variables included in PerStage.h and other files, which is included in RenderPipeline.h (and InputState.h in previous code). \n\nSo, adding RenderPipeline below is not enough. We need to add a few other header files. However, if you have solid reason to add both RenderPipeline object below and those header files in order to replace the single line of adding RenderPipeline.h, I will do that.",
+      "parentUuid": "53dc994f_4f4e27b4",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -387,6 +681,24 @@
     },
     {
       "key": {
+        "uuid": "b7e0c24c_f21947ab",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4a385d8_78258010",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "200226c2_d3141b14",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
         "patchSetId": 4
@@ -401,6 +713,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f80a390_6ab65fe1",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "200226c2_d3141b14",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -421,6 +751,24 @@
     },
     {
       "key": {
+        "uuid": "6a502203_fac8d948",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "80652865_67272c5a",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8875b4f_7002deed",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 4
@@ -435,6 +783,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aab61d8_94916b70",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Do you mean add one line like [descriptorMTL.vertexDescriptor release] on line 290 (before we release descriptorMTL on line 291)? If I do this and run end2end tests, it reported that vertexDescriptor was over-released, the end2end tests can pass though.\n\nSo I don\u0027t change the code here.",
+      "parentUuid": "a8875b4f_7002deed",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -455,6 +821,24 @@
     },
     {
       "key": {
+        "uuid": "4f271952_7c3386d6",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06e7d0dd_e8862715",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28534ba6_f8265149",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.h",
         "patchSetId": 4
@@ -472,6 +856,24 @@
     },
     {
       "key": {
+        "uuid": "e658d982_f75b0d2b",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28534ba6_f8265149",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "20970003_bab19d84",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
         "patchSetId": 4
@@ -486,6 +888,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65d6967f_13c1bd7d",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20970003_bab19d84",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -529,6 +949,30 @@
     },
     {
       "key": {
+        "uuid": "befcf94d_f8c5e87a",
+        "filename": "src/tests/end2end/PrimitiveTopologyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a62e94f9_2af17e9c",
+      "range": {
+        "startLine": 168,
+        "startChar": 1,
+        "endLine": 176,
+        "endChar": 0
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e6d37bd_dbd81c8e",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 4
@@ -569,6 +1013,30 @@
     },
     {
       "key": {
+        "uuid": "5af6ea82_86f73f0f",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "See the explanation at [1]",
+      "parentUuid": "718ad5da_449db109",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 0
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63b4bf20_bfcf5663",
         "filename": "src/tests/unittests/wire/WireOptionalTests.cpp",
         "patchSetId": 4
@@ -586,6 +1054,24 @@
     },
     {
       "key": {
+        "uuid": "3a111e01_9bd399ef",
+        "filename": "src/tests/unittests/wire/WireOptionalTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63b4bf20_bfcf5663",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c4e06ee_21f1703e",
         "filename": "src/utils/ComboRenderPipelineDescriptor.h",
         "patchSetId": 4
@@ -600,6 +1086,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "328118d6_0847e6dc",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-22T05:28:58Z",
+      "side": 1,
+      "message": "True. I removed them. But they are needed if we use \"const*const*\" (Otherwise, we can\u0027t change the values because of two consts annotation). Right now, we use \"const*\", then we don\u0027t need to expose \"cVertexInputs[] and cVertexAttributes[]\", which are a little wired. See the explanation at [1].",
+      "parentUuid": "8c4e06ee_21f1703e",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
