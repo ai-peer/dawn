@@ -90,8 +90,8 @@ namespace dawn_native { namespace opengl {
             }
         }
 
-        void ApplyColorState(uint32_t attachment, const ColorStateDescriptor* descriptor) {
-            if (BlendEnabled(descriptor)) {
+        void ApplyBlendState(uint32_t attachment, const BlendStateDescriptor* descriptor) {
+            if (descriptor->blendEnabled) {
                 glEnablei(GL_BLEND, attachment);
                 glBlendEquationSeparatei(attachment, GLBlendMode(descriptor->colorBlend.operation),
                                          GLBlendMode(descriptor->alphaBlend.operation));
@@ -196,7 +196,7 @@ namespace dawn_native { namespace opengl {
         ApplyDepthStencilState(GetDepthStencilStateDescriptor(), &persistentPipelineState);
 
         for (uint32_t attachmentSlot : IterateBitSet(GetColorAttachmentsMask())) {
-            ApplyColorState(attachmentSlot, GetColorStateDescriptor(attachmentSlot));
+            ApplyBlendState(attachmentSlot, GetBlendStateDescriptor(attachmentSlot));
         }
     }
 

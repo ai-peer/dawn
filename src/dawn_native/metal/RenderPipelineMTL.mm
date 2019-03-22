@@ -129,8 +129,8 @@ namespace dawn_native { namespace metal {
         }
 
         void ComputeBlendDesc(MTLRenderPipelineColorAttachmentDescriptor* attachment,
-                              const ColorStateDescriptor* descriptor) {
-            attachment.blendingEnabled = BlendEnabled(descriptor);
+                              const BlendStateDescriptor* descriptor) {
+            attachment.blendingEnabled = descriptor->blendEnabled;
             attachment.sourceRGBBlendFactor =
                 MetalBlendFactor(descriptor->colorBlend.srcFactor, false);
             attachment.destinationRGBBlendFactor =
@@ -237,7 +237,7 @@ namespace dawn_native { namespace metal {
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
             descriptorMTL.colorAttachments[i].pixelFormat =
                 MetalPixelFormat(GetColorAttachmentFormat(i));
-            const ColorStateDescriptor* descriptor = GetColorStateDescriptor(i);
+            const BlendStateDescriptor* descriptor = GetBlendStateDescriptor(i);
             ComputeBlendDesc(descriptorMTL.colorAttachments[i], descriptor);
         }
 

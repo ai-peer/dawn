@@ -19,12 +19,12 @@
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
-#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/InputState.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
+#include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/RingBuffer.h"
 #include "dawn_native/Sampler.h"
@@ -47,6 +47,7 @@ namespace dawn_native { namespace null {
     using InputState = InputStateBase;
     using PipelineLayout = PipelineLayoutBase;
     class Queue;
+    using RenderPassDescriptor = RenderPassDescriptorBase;
     using RenderPipeline = RenderPipelineBase;
     using Sampler = SamplerBase;
     using ShaderModule = ShaderModuleBase;
@@ -65,6 +66,7 @@ namespace dawn_native { namespace null {
         using InputStateType = InputState;
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
+        using RenderPassDescriptorType = RenderPassDescriptor;
         using RenderPipelineType = RenderPipeline;
         using SamplerType = Sampler;
         using ShaderModuleType = ShaderModule;
@@ -88,8 +90,11 @@ namespace dawn_native { namespace null {
         Device(Adapter* adapter);
         ~Device();
 
-        CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
+        CommandBufferBase* CreateCommandBuffer(CommandBufferBuilder* builder) override;
         InputStateBase* CreateInputState(InputStateBuilder* builder) override;
+        RenderPassDescriptorBase* CreateRenderPassDescriptor(
+            RenderPassDescriptorBuilder* builder) override;
+        SwapChainBase* CreateSwapChain(SwapChainBuilder* builder) override;
 
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
@@ -122,8 +127,6 @@ namespace dawn_native { namespace null {
         ResultOrError<SamplerBase*> CreateSamplerImpl(const SamplerDescriptor* descriptor) override;
         ResultOrError<ShaderModuleBase*> CreateShaderModuleImpl(
             const ShaderModuleDescriptor* descriptor) override;
-        ResultOrError<SwapChainBase*> CreateSwapChainImpl(
-            const SwapChainDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
@@ -132,6 +135,7 @@ namespace dawn_native { namespace null {
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
         std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
+        std::unique_ptr<DynamicUploader> mDynamicUploader;
     };
 
     class Buffer : public BufferBase {
@@ -143,19 +147,18 @@ namespace dawn_native { namespace null {
 
       private:
         MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) override;
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
+        void MapReadAsyncImpl(uint32_t serial, uint32_t start, uint32_t count) override;
+        void MapWriteAsyncImpl(uint32_t serial, uint32_t start, uint32_t count) override;
         void UnmapImpl() override;
-        void DestroyImpl() override;
 
-        void MapAsyncImplCommon(uint32_t serial, bool isWrite);
+        void MapAsyncImplCommon(uint32_t serial, uint32_t start, uint32_t count, bool isWrite);
 
         std::unique_ptr<char[]> mBackingData;
     };
 
     class CommandBuffer : public CommandBufferBase {
       public:
-        CommandBuffer(Device* device, CommandEncoderBase* encoder);
+        CommandBuffer(CommandBufferBuilder* builder);
         ~CommandBuffer();
 
       private:
@@ -168,12 +171,12 @@ namespace dawn_native { namespace null {
         ~Queue();
 
       private:
-        void SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
+        void SubmitImpl(uint32_t numCommands, CommandBufferBase* const* commands) override;
     };
 
     class SwapChain : public SwapChainBase {
       public:
-        SwapChain(Device* device, const SwapChainDescriptor* descriptor);
+        SwapChain(SwapChainBuilder* builder);
         ~SwapChain();
 
       protected:
@@ -185,12 +188,12 @@ namespace dawn_native { namespace null {
       public:
         using WSIContext = struct {};
         void Init(WSIContext* context);
-        DawnSwapChainError Configure(DawnTextureFormat format,
-                                     DawnTextureUsageBit,
+        dawnSwapChainError Configure(dawnTextureFormat format,
+                                     dawnTextureUsageBit,
                                      uint32_t width,
                                      uint32_t height);
-        DawnSwapChainError GetNextTexture(DawnSwapChainNextTexture* nextTexture);
-        DawnSwapChainError Present();
+        dawnSwapChainError GetNextTexture(dawnSwapChainNextTexture* nextTexture);
+        dawnSwapChainError Present();
         dawn::TextureFormat GetPreferredFormat() const;
     };
 

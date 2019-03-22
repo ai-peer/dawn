@@ -35,7 +35,6 @@ namespace dawn_native { namespace vulkan {
     const char kLayerNameLunargVKTrace[] = "VK_LAYER_LUNARG_vktrace";
     const char kLayerNameRenderDocCapture[] = "VK_LAYER_RENDERDOC_Capture";
 
-    const char kExtensionNameExtDebugMarker[] = "VK_EXT_debug_marker";
     const char kExtensionNameExtDebugReport[] = "VK_EXT_debug_report";
     const char kExtensionNameMvkMacosSurface[] = "VK_MVK_macos_surface";
     const char kExtensionNameKhrSurface[] = "VK_KHR_surface";
@@ -208,10 +207,6 @@ namespace dawn_native { namespace vulkan {
             }
 
             for (const auto& extension : info.extensions) {
-                if (IsExtensionName(extension, kExtensionNameExtDebugMarker)) {
-                    info.debugMarker = true;
-                }
-
                 if (IsExtensionName(extension, kExtensionNameKhrSwapchain)) {
                     info.swapchain = true;
                 }

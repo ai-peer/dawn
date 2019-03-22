@@ -19,43 +19,43 @@ class SetScissorRectTest : public ValidationTest {
 
 // Test to check basic use of SetScissor
 TEST_F(SetScissorRectTest, Success) {
-    DummyRenderPass renderPass(device);
+    DummyRenderPass renderPass = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPass);
         pass.SetScissorRect(0, 0, 1, 1);
         pass.EndPass();
     }
-    encoder.Finish();
+    builder.GetResult();
 }
 
 // Test to check that an empty scissor is allowed
 TEST_F(SetScissorRectTest, EmptyScissor) {
-    DummyRenderPass renderPass(device);
+    DummyRenderPass renderPass = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPass);
         pass.SetScissorRect(0, 0, 0, 0);
         pass.EndPass();
     }
-    encoder.Finish();
+    builder.GetResult();
 }
 
 // Test to check that a scissor larger than the framebuffer is allowed
 // TODO(cwallez@chromium.org): scissor values seem to be integers in all APIs do the same
 // and test negative values?
 TEST_F(SetScissorRectTest, ScissorLargerThanFramebuffer) {
-    DummyRenderPass renderPass(device);
+    DummyRenderPass renderPass = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPass);
         pass.SetScissorRect(0, 0, renderPass.width + 1, renderPass.height + 1);
         pass.EndPass();
     }
-    encoder.Finish();
+    builder.GetResult();
 }
 
 class SetBlendColorTest : public ValidationTest {
@@ -63,30 +63,30 @@ class SetBlendColorTest : public ValidationTest {
 
 // Test to check basic use of SetBlendColor
 TEST_F(SetBlendColorTest, Success) {
-    DummyRenderPass renderPass(device);
+    DummyRenderPass renderPass = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPass);
         constexpr dawn::Color kTransparentBlack{0.0f, 0.0f, 0.0f, 0.0f};
         pass.SetBlendColor(&kTransparentBlack);
         pass.EndPass();
     }
-    encoder.Finish();
+    builder.GetResult();
 }
 
 // Test that SetBlendColor allows any value, large, small or negative
 TEST_F(SetBlendColorTest, AnyValueAllowed) {
-    DummyRenderPass renderPass(device);
+    DummyRenderPass renderPass = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPass);
         constexpr dawn::Color kAnyColorValue{-1.0f, 42.0f, -0.0f, 0.0f};
         pass.SetBlendColor(&kAnyColorValue);
         pass.EndPass();
     }
-    encoder.Finish();
+    builder.GetResult();
 }
 
 class SetStencilReferenceTest : public ValidationTest {
@@ -94,26 +94,26 @@ class SetStencilReferenceTest : public ValidationTest {
 
 // Test to check basic use of SetStencilReferenceTest
 TEST_F(SetStencilReferenceTest, Success) {
-    DummyRenderPass renderPass(device);
+    DummyRenderPass renderPass = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPass);
         pass.SetStencilReference(0);
         pass.EndPass();
     }
-    encoder.Finish();
+    builder.GetResult();
 }
 
 // Test that SetStencilReference allows any bit to be set
 TEST_F(SetStencilReferenceTest, AllBitsAllowed) {
-    DummyRenderPass renderPass(device);
+    DummyRenderPass renderPass = CreateDummyRenderPass();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = AssertWillBeSuccess(device.CreateCommandBufferBuilder());
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPass);
         pass.SetStencilReference(0xFFFFFFFF);
         pass.EndPass();
     }
-    encoder.Finish();
+    builder.GetResult();
 }

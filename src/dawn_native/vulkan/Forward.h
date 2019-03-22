@@ -29,6 +29,7 @@ namespace dawn_native { namespace vulkan {
     class InputState;
     class PipelineLayout;
     class Queue;
+    class RenderPassDescriptor;
     class RenderPipeline;
     class Sampler;
     class ShaderModule;
@@ -48,6 +49,7 @@ namespace dawn_native { namespace vulkan {
         using InputStateType = InputState;
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
+        using RenderPassDescriptorType = RenderPassDescriptor;
         using RenderPipelineType = RenderPipeline;
         using SamplerType = Sampler;
         using ShaderModuleType = ShaderModule;

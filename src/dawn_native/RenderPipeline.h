@@ -25,22 +25,17 @@
 
 namespace dawn_native {
 
-    struct BeginRenderPassCmd;
-
     class DeviceBase;
 
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                 const RenderPipelineDescriptor* descriptor);
     bool StencilTestEnabled(const DepthStencilStateDescriptor* mDepthStencilState);
-    bool BlendEnabled(const ColorStateDescriptor* mColorState);
 
     class RenderPipelineBase : public PipelineBase {
       public:
         RenderPipelineBase(DeviceBase* device, const RenderPipelineDescriptor* descriptor);
 
-        static RenderPipelineBase* MakeError(DeviceBase* device);
-
-        const ColorStateDescriptor* GetColorStateDescriptor(uint32_t attachmentSlot);
+        const BlendStateDescriptor* GetBlendStateDescriptor(uint32_t attachmentSlot);
         const DepthStencilStateDescriptor* GetDepthStencilStateDescriptor();
         dawn::IndexFormat GetIndexFormat() const;
         InputStateBase* GetInputState();
@@ -53,21 +48,19 @@ namespace dawn_native {
 
         // A pipeline can be used in a render pass if its attachment info matches the actual
         // attachments in the render pass. This returns whether it is the case.
-        bool IsCompatibleWith(const BeginRenderPassCmd* renderPassCmd) const;
+        bool IsCompatibleWith(const RenderPassDescriptorBase* renderPass) const;
 
       private:
-        RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
-
         DepthStencilStateDescriptor mDepthStencilState;
         dawn::IndexFormat mIndexFormat;
         Ref<InputStateBase> mInputState;
         dawn::PrimitiveTopology mPrimitiveTopology;
-        std::array<ColorStateDescriptor, kMaxColorAttachments> mColorStates;
+        std::array<BlendStateDescriptor, kMaxColorAttachments> mBlendStates;
 
         std::bitset<kMaxColorAttachments> mColorAttachmentsSet;
+        std::array<dawn::TextureFormat, kMaxColorAttachments> mColorAttachmentFormats;
         bool mHasDepthStencilAttachment = false;
-
-        uint32_t mSampleCount;
+        dawn::TextureFormat mDepthStencilFormat;
     };
 
 }  // namespace dawn_native
