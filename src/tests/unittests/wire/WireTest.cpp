@@ -72,3 +72,11 @@ void WireTest::FlushClient() {
 void WireTest::FlushServer() {
     ASSERT_TRUE(mS2cBuf->Flush());
 }
+
+dawn_wire::WireServer* WireTest::GetWireServer() {
+    return mWireServer.get();
+}
+
+dawn_wire::WireClient* WireTest::GetWireClient() {
+    return mWireClient.get();
+}
