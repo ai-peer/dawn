@@ -137,12 +137,20 @@ namespace dawn_native { namespace d3d12 {
                      const TextureDescriptor* descriptor,
                      ID3D12Resource* nativeTexture)
         : TextureBase(device, descriptor), mResourcePtr(nativeTexture) {
+            mState = TextureState::OwnedExternal;
     }
 
     Texture::~Texture() {
+        if(mState != TextureState::OwnedExternal){
+            DestroyImpl();
+        }
+    }
+
+    void Texture::DestroyImpl() {
         if (mResource) {
             // If we own the resource, release it.
             ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
+            mResource = nullptr;
         }
     }
 

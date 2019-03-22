@@ -43,7 +43,8 @@ namespace dawn_native { namespace vulkan {
         }
 
         VkImage nativeTexture = VkImage::CreateFromU64(next.texture.u64);
-        return new Texture(ToBackend(GetDevice()), descriptor, nativeTexture);
+        TextureBase* texture = new Texture(ToBackend(GetDevice()), descriptor, nativeTexture);
+        return texture;
     }
 
     void SwapChain::OnBeforePresent(TextureBase* texture) {

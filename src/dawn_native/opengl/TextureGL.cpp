@@ -89,6 +89,13 @@ namespace dawn_native { namespace opengl {
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
         : Texture(device, descriptor, GenTexture()) {
+    }
+
+    // With this constructor, the lifetime of the gl handle is externally managed.
+    Texture::Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle)
+        : TextureBase(device, descriptor), mHandle(handle) {
+        mTarget = TargetForDimensionAndArrayLayers(GetDimension(), GetArrayLayers());
+
         uint32_t width = GetSize().width;
         uint32_t height = GetSize().height;
         uint32_t levels = GetNumMipLevels();
@@ -117,6 +124,7 @@ namespace dawn_native { namespace opengl {
         // The texture is not complete if it uses mipmapping and not all levels up to
         // MAX_LEVEL have been defined.
         glTexParameteri(mTarget, GL_TEXTURE_MAX_LEVEL, levels - 1);
+        mState = TextureState::OwnedExternal;
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle)
@@ -127,6 +135,16 @@ namespace dawn_native { namespace opengl {
     Texture::~Texture() {
         // TODO(kainino@chromium.org): delete texture (but only when not using the native texture
         // constructor?)
+        if(mState != TextureState::OwnedExternal){
+            DestroyImpl();
+        }
+    }
+
+    void Texture::DestroyImpl() {
+        if(mHandle != 0) {
+            glDeleteTextures(1, &mHandle);
+            mHandle = 0;
+        }
     }
 
     GLuint Texture::GetHandle() const {
