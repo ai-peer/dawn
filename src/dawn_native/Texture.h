@@ -46,6 +46,8 @@ namespace dawn_native {
 
     class TextureBase : public ObjectBase {
       public:
+        enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
+
         TextureBase(DeviceBase* device, const TextureDescriptor* descriptor);
 
         static TextureBase* MakeError(DeviceBase* device);
@@ -59,15 +61,22 @@ namespace dawn_native {
         dawn::TextureUsageBit GetUsage() const;
 
         MaybeError ValidateCanUseInSubmitNow() const;
+        MaybeError ValidateCanCreateTextureViewNow() const;
 
         bool IsMultisampledTexture() const;
 
         // Dawn API
         TextureViewBase* CreateDefaultTextureView();
         TextureViewBase* CreateTextureView(const TextureViewDescriptor* descriptor);
+        void Destroy();
+
+      protected:
+        TextureState mState;
 
       private:
         TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+        virtual void DestroyImpl() {
+        }
 
         dawn::TextureDimension mDimension;
         dawn::TextureFormat mFormat;
