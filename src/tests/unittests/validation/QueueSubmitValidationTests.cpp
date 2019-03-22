@@ -21,10 +21,7 @@ namespace {
 class QueueSubmitValidationTest : public ValidationTest {
 };
 
-static void StoreTrueMapWriteCallback(DawnBufferMapAsyncStatus status,
-                                      void*,
-                                      uint32_t,
-                                      DawnCallbackUserdata userdata) {
+static void StoreTrueMapWriteCallback(dawnBufferMapAsyncStatus status, void*, dawnCallbackUserdata userdata) {
     bool* userdataPtr = reinterpret_cast<bool*>(static_cast<intptr_t>(userdata));
     *userdataPtr = true;
 }
@@ -44,9 +41,10 @@ TEST_F(QueueSubmitValidationTest, SubmitWithMappedBuffer) {
     // Create a command buffer that reads from the mappable buffer.
     dawn::CommandBuffer commands;
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.CopyBufferToBuffer(buffer, 0, targetBuffer, 0, 4);
-        commands = encoder.Finish();
+        dawn::RenderPassDescriptor renderpass = CreateSimpleRenderPass();
+        dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
+        builder.CopyBufferToBuffer(buffer, 0, targetBuffer, 0, 4);
+        commands = builder.GetResult();
     }
 
     dawn::Queue queue = device.CreateQueue();
@@ -56,8 +54,8 @@ TEST_F(QueueSubmitValidationTest, SubmitWithMappedBuffer) {
 
     // Map the buffer, submitting when the buffer is mapped should fail
     bool mapWriteFinished = false;
-    DawnCallbackUserdata userdata = static_cast<DawnCallbackUserdata>(reinterpret_cast<intptr_t>(&mapWriteFinished));
-    buffer.MapWriteAsync(StoreTrueMapWriteCallback, userdata);
+    dawnCallbackUserdata userdata = static_cast<dawnCallbackUserdata>(reinterpret_cast<intptr_t>(&mapWriteFinished));
+    buffer.MapWriteAsync(0, 4, StoreTrueMapWriteCallback, userdata);
     queue.Submit(0, nullptr);
     ASSERT_TRUE(mapWriteFinished);
 

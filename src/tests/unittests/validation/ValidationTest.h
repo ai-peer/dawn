@@ -21,7 +21,7 @@
 
 namespace dawn_native {
     class Instance;
-}
+};
 
 #define ASSERT_DEVICE_ERROR(statement) \
     StartExpectDeviceError(); \
@@ -53,20 +53,18 @@ class ValidationTest : public testing::Test {
         bool EndExpectDeviceError();
         std::string GetLastDeviceErrorMessage() const;
 
+        dawn::RenderPassDescriptor CreateSimpleRenderPass();
+
         // Helper functions to create objects to test validation.
 
-        struct DummyRenderPass : public dawn::RenderPassDescriptor{
-          public:
-            DummyRenderPass(const dawn::Device& device);
+        struct DummyRenderPass {
+            dawn::RenderPassDescriptor renderPass;
             dawn::Texture attachment;
             dawn::TextureFormat attachmentFormat;
             uint32_t width;
             uint32_t height;
-
-          private:
-            dawn::RenderPassColorAttachmentDescriptor mColorAttachment;
-            dawn::RenderPassColorAttachmentDescriptor* mColorAttachments[1];
         };
+        DummyRenderPass CreateDummyRenderPass();
 
     protected:
         dawn::Device device;
@@ -74,7 +72,7 @@ class ValidationTest : public testing::Test {
     private:
         std::unique_ptr<dawn_native::Instance> mInstance;
 
-        static void OnDeviceError(const char* message, DawnCallbackUserdata userdata);
+        static void OnDeviceError(const char* message, dawnCallbackUserdata userdata);
         std::string mDeviceErrorMessage;
         bool mExpectError = false;
         bool mError = false;
@@ -85,14 +83,14 @@ class ValidationTest : public testing::Test {
 
             bool gotStatus = false;
             std::string statusMessage;
-            DawnBuilderErrorStatus status;
+            dawnBuilderErrorStatus status;
         };
         std::vector<BuilderStatusExpectations> mExpectations;
 
         template<typename Builder>
         Builder AddExpectation(Builder& builder, std::string debugName, bool expectSuccess);
 
-        static void OnBuilderErrorStatus(DawnBuilderErrorStatus status, const char* message, dawn::CallbackUserdata userdata1, dawn::CallbackUserdata userdata2);
+        static void OnBuilderErrorStatus(dawnBuilderErrorStatus status, const char* message, dawn::CallbackUserdata userdata1, dawn::CallbackUserdata userdata2);
 };
 
 // Template implementation details

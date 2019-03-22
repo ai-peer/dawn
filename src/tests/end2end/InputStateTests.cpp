@@ -44,15 +44,15 @@ class InputStateTest : public DawnTest {
         bool ShouldComponentBeDefault(VertexFormat format, int component) {
             EXPECT_TRUE(component >= 0 && component < 4);
             switch (format) {
-                case VertexFormat::Float4:
-                case VertexFormat::UChar4Norm:
+                case VertexFormat::FloatR32G32B32A32:
+                case VertexFormat::UnormR8G8B8A8:
                     return component >= 4;
-                case VertexFormat::Float3:
+                case VertexFormat::FloatR32G32B32:
                     return component >= 3;
-                case VertexFormat::Float2:
-                case VertexFormat::UChar2Norm:
+                case VertexFormat::FloatR32G32:
+                case VertexFormat::UnormR8G8:
                     return component >= 2;
-                case VertexFormat::Float:
+                case VertexFormat::FloatR32:
                     return component >= 1;
                 default:
                     DAWN_UNREACHABLE();
@@ -125,7 +125,7 @@ class InputStateTest : public DawnTest {
             descriptor.cVertexStage.module = vsModule;
             descriptor.cFragmentStage.module = fsModule;
             descriptor.inputState = inputState;
-            descriptor.cColorStates[0]->format = renderPass.colorFormat;
+            descriptor.cColorAttachments[0]->format = renderPass.colorFormat;
 
             return device.CreateRenderPipeline(&descriptor);
         }
@@ -145,21 +145,11 @@ class InputStateTest : public DawnTest {
             dawn::InputStateBuilder builder = device.CreateInputStateBuilder();
 
             for (const auto& input : inputs) {
-                dawn::VertexInputDescriptor descriptor;
-                descriptor.inputSlot = input.slot;
-                descriptor.stride = input.stride;
-                descriptor.stepMode = input.step;
-                builder.SetInput(&descriptor);
+                builder.SetInput(input.slot, input.stride, input.step);
             }
 
             for (const auto& attribute : attributes) {
-                dawn::VertexAttributeDescriptor descriptor;
-                descriptor.shaderLocation = attribute.location;
-                descriptor.inputSlot = attribute.slot;
-                descriptor.offset = attribute.offset;
-                descriptor.format = attribute.format;
-
-                builder.SetAttribute(&descriptor);
+                builder.SetAttribute(attribute.location, attribute.slot, attribute.format, attribute.offset);
             }
 
             return builder.GetResult();
@@ -178,9 +168,9 @@ class InputStateTest : public DawnTest {
             EXPECT_LE(triangles, 4u);
             EXPECT_LE(instances, 4u);
 
-            dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+            dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
 
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
             pass.SetPipeline(pipeline);
 
             uint32_t zeroOffset = 0;
@@ -191,7 +181,7 @@ class InputStateTest : public DawnTest {
             pass.Draw(triangles * 3, instances, 0, 0);
             pass.EndPass();
 
-            dawn::CommandBuffer commands = encoder.Finish();
+            dawn::CommandBuffer commands = builder.GetResult();
             queue.Submit(1, &commands);
 
             CheckResult(triangles, instances);
@@ -221,11 +211,11 @@ TEST_P(InputStateTest, Basic) {
     dawn::InputState inputState = MakeInputState({
             {0, 4 * sizeof(float), InputStepMode::Vertex}
         }, {
-            {0, 0, 0, VertexFormat::Float4}
+            {0, 0, 0, VertexFormat::FloatR32G32B32A32}
         }
     );
     dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
+        {0, VertexFormat::FloatR32G32B32A32, InputStepMode::Vertex}
     });
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -244,11 +234,11 @@ TEST_P(InputStateTest, ZeroStride) {
     dawn::InputState inputState = MakeInputState({
             {0, 0, InputStepMode::Vertex}
         }, {
-            {0, 0, 0, VertexFormat::Float4}
+            {0, 0, 0, VertexFormat::FloatR32G32B32A32}
         }
     );
     dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
+        {0, VertexFormat::FloatR32G32B32A32, InputStepMode::Vertex}
     });
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -267,11 +257,11 @@ TEST_P(InputStateTest, AttributeExpanding) {
         dawn::InputState inputState = MakeInputState({
                 {0, 0, InputStepMode::Vertex}
             }, {
-                {0, 0, 0, VertexFormat::Float}
+                {0, 0, 0, VertexFormat::FloatR32}
             }
         );
         dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-            {0, VertexFormat::Float, InputStepMode::Vertex}
+            {0, VertexFormat::FloatR32, InputStepMode::Vertex}
         });
 
         dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -284,11 +274,11 @@ TEST_P(InputStateTest, AttributeExpanding) {
         dawn::InputState inputState = MakeInputState({
                 {0, 0, InputStepMode::Vertex}
             }, {
-                {0, 0, 0, VertexFormat::Float2}
+                {0, 0, 0, VertexFormat::FloatR32G32}
             }
         );
         dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-            {0, VertexFormat::Float2, InputStepMode::Vertex}
+            {0, VertexFormat::FloatR32G32, InputStepMode::Vertex}
         });
 
         dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -301,11 +291,11 @@ TEST_P(InputStateTest, AttributeExpanding) {
         dawn::InputState inputState = MakeInputState({
                 {0, 0, InputStepMode::Vertex}
             }, {
-                {0, 0, 0, VertexFormat::Float3}
+                {0, 0, 0, VertexFormat::FloatR32G32B32}
             }
         );
         dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-            {0, VertexFormat::Float3, InputStepMode::Vertex}
+            {0, VertexFormat::FloatR32G32B32, InputStepMode::Vertex}
         });
 
         dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -323,11 +313,11 @@ TEST_P(InputStateTest, StrideLargerThanAttributes) {
     dawn::InputState inputState = MakeInputState({
             {0, 8 * sizeof(float), InputStepMode::Vertex}
         }, {
-            {0, 0, 0, VertexFormat::Float4}
+            {0, 0, 0, VertexFormat::FloatR32G32B32A32}
         }
     );
     dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
+        {0, VertexFormat::FloatR32G32B32A32, InputStepMode::Vertex}
     });
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -343,12 +333,12 @@ TEST_P(InputStateTest, TwoAttributesAtAnOffsetVertex) {
     dawn::InputState inputState = MakeInputState({
             {0, 8 * sizeof(float), InputStepMode::Vertex}
         }, {
-            {0, 0, 0, VertexFormat::Float4},
-            {1, 0, 4  * sizeof(float), VertexFormat::Float4}
+            {0, 0, 0, VertexFormat::FloatR32G32B32A32},
+            {1, 0, 4  * sizeof(float), VertexFormat::FloatR32G32B32A32}
         }
     );
     dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
+        {0, VertexFormat::FloatR32G32B32A32, InputStepMode::Vertex}
     });
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -364,12 +354,12 @@ TEST_P(InputStateTest, TwoAttributesAtAnOffsetInstance) {
     dawn::InputState inputState = MakeInputState({
             {0, 8 * sizeof(float), InputStepMode::Instance}
         }, {
-            {0, 0, 0, VertexFormat::Float4},
-            {1, 0, 4  * sizeof(float), VertexFormat::Float4}
+            {0, 0, 0, VertexFormat::FloatR32G32B32A32},
+            {1, 0, 4  * sizeof(float), VertexFormat::FloatR32G32B32A32}
         }
     );
     dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Instance}
+        {0, VertexFormat::FloatR32G32B32A32, InputStepMode::Instance}
     });
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -385,11 +375,11 @@ TEST_P(InputStateTest, PureInstance) {
     dawn::InputState inputState = MakeInputState({
             {0, 4 * sizeof(float), InputStepMode::Instance}
         }, {
-            {0, 0, 0, VertexFormat::Float4}
+            {0, 0, 0, VertexFormat::FloatR32G32B32A32}
         }
     );
     dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Instance}
+        {0, VertexFormat::FloatR32G32B32A32, InputStepMode::Instance}
     });
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -408,17 +398,17 @@ TEST_P(InputStateTest, MixedEverything) {
             {0, 12 * sizeof(float), InputStepMode::Vertex},
             {1, 10 * sizeof(float), InputStepMode::Instance},
         }, {
-            {0, 0, 0, VertexFormat::Float},
-            {1, 0, 6  * sizeof(float), VertexFormat::Float2},
-            {2, 1, 0, VertexFormat::Float3},
-            {3, 1, 5  * sizeof(float), VertexFormat::Float4}
+            {0, 0, 0, VertexFormat::FloatR32},
+            {1, 0, 6  * sizeof(float), VertexFormat::FloatR32G32},
+            {2, 1, 0, VertexFormat::FloatR32G32B32},
+            {3, 1, 5  * sizeof(float), VertexFormat::FloatR32G32B32A32}
         }
     );
     dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float, InputStepMode::Vertex},
-        {1, VertexFormat::Float2, InputStepMode::Vertex},
-        {2, VertexFormat::Float3, InputStepMode::Instance},
-        {3, VertexFormat::Float4, InputStepMode::Instance}
+        {0, VertexFormat::FloatR32, InputStepMode::Vertex},
+        {1, VertexFormat::FloatR32G32, InputStepMode::Vertex},
+        {2, VertexFormat::FloatR32G32B32, InputStepMode::Instance},
+        {3, VertexFormat::FloatR32G32B32A32, InputStepMode::Instance}
     });
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
@@ -441,9 +431,9 @@ TEST_P(InputStateTest, UnusedVertexSlot) {
     // Instance input state, using slot 1
     dawn::InputState instanceInputState =
         MakeInputState({{1, 4 * sizeof(float), InputStepMode::Instance}},
-                       {{0, 1, 0, VertexFormat::Float4}});
+                       {{0, 1, 0, VertexFormat::FloatR32G32B32A32}});
     dawn::RenderPipeline instancePipeline = MakeTestPipeline(
-        instanceInputState, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
+        instanceInputState, 1, {{0, VertexFormat::FloatR32G32B32A32, InputStepMode::Instance}});
 
     dawn::Buffer buffer = MakeVertexBuffer<float>({
         0, 1, 2, 3,
@@ -452,9 +442,9 @@ TEST_P(InputStateTest, UnusedVertexSlot) {
         3, 4, 5, 6,
     });
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
 
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
 
     uint32_t zeroOffset = 0;
     pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
@@ -465,7 +455,7 @@ TEST_P(InputStateTest, UnusedVertexSlot) {
 
     pass.EndPass();
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     CheckResult(1, 4);
@@ -479,16 +469,16 @@ TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
     // Basic input state, using slot 0
     dawn::InputState vertexInputState =
         MakeInputState({{0, 4 * sizeof(float), InputStepMode::Vertex}},
-                       {{0, 0, 0, VertexFormat::Float4}});
+                       {{0, 0, 0, VertexFormat::FloatR32G32B32A32}});
     dawn::RenderPipeline vertexPipeline = MakeTestPipeline(
-        vertexInputState, 1, {{0, VertexFormat::Float4, InputStepMode::Vertex}});
+        vertexInputState, 1, {{0, VertexFormat::FloatR32G32B32A32, InputStepMode::Vertex}});
 
     // Instance input state, using slot 1
     dawn::InputState instanceInputState =
         MakeInputState({{1, 4 * sizeof(float), InputStepMode::Instance}},
-                       {{0, 1, 0, VertexFormat::Float4}});
+                       {{0, 1, 0, VertexFormat::FloatR32G32B32A32}});
     dawn::RenderPipeline instancePipeline = MakeTestPipeline(
-        instanceInputState, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
+        instanceInputState, 1, {{0, VertexFormat::FloatR32G32B32A32, InputStepMode::Instance}});
 
     dawn::Buffer buffer = MakeVertexBuffer<float>({
         0, 1, 2, 3,
@@ -497,9 +487,9 @@ TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
         3, 4, 5, 6,
     });
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
 
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
 
     uint32_t zeroOffset = 0;
     pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
@@ -513,13 +503,13 @@ TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
 
     pass.EndPass();
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     CheckResult(1, 4);
 }
 
-DAWN_INSTANTIATE_TEST(InputStateTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(InputStateTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)
 
 // TODO for the input state:
 //  - Add more vertex formats

@@ -37,23 +37,36 @@ namespace utils {
             cFragmentStage.entryPoint = "main";
         }
 
-        // Set defaults for the color state descriptors.
+        // Set defaults for the attachment states.
         {
-            descriptor->colorStateCount = 1;
-            descriptor->colorStates = &cColorStates[0];
+            descriptor->attachmentsState = &cAttachmentsState;
+            cAttachmentsState.numColorAttachments = 1;
+            cAttachmentsState.colorAttachments = &cColorAttachments[0];
+            cAttachmentsState.depthStencilAttachment = &cDepthStencilAttachment;
+            cAttachmentsState.hasDepthStencilAttachment = false;
+
+            for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+                colorAttachments[i].format = dawn::TextureFormat::R8G8B8A8Unorm;
+                cColorAttachments[i] = &colorAttachments[i];
+            }
+        }
+
+        // Set defaults for the blend state descriptors.
+        {
+            descriptor->numBlendStates = 1;
+            descriptor->blendStates = &cBlendStates[0];
 
             dawn::BlendDescriptor blend;
             blend.operation = dawn::BlendOperation::Add;
             blend.srcFactor = dawn::BlendFactor::One;
             blend.dstFactor = dawn::BlendFactor::Zero;
-            dawn::ColorStateDescriptor colorStateDescriptor;
-            colorStateDescriptor.format = dawn::TextureFormat::R8G8B8A8Unorm;
-            colorStateDescriptor.alphaBlend = blend;
-            colorStateDescriptor.colorBlend = blend;
-            colorStateDescriptor.colorWriteMask = dawn::ColorWriteMask::All;
+            dawn::BlendStateDescriptor blendStateDescriptor;
+            blendStateDescriptor.blendEnabled = false;
+            blendStateDescriptor.alphaBlend = blend;
+            blendStateDescriptor.colorBlend = blend;
+            blendStateDescriptor.colorWriteMask = dawn::ColorWriteMask::All;
             for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
-                mColorStates[i] = colorStateDescriptor;
-                cColorStates[i] = &mColorStates[i];
+                cBlendStates[i] = blendStateDescriptor;
             }
         }
 
@@ -65,14 +78,14 @@ namespace utils {
             stencilFace.depthFailOp = dawn::StencilOperation::Keep;
             stencilFace.passOp = dawn::StencilOperation::Keep;
 
-            cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
+            // dawn::DepthStencilStateDescriptor depthStencilState;
             cDepthStencilState.depthWriteEnabled = false;
             cDepthStencilState.depthCompare = dawn::CompareFunction::Always;
             cDepthStencilState.stencilBack = stencilFace;
             cDepthStencilState.stencilFront = stencilFace;
             cDepthStencilState.stencilReadMask = 0xff;
             cDepthStencilState.stencilWriteMask = 0xff;
-            descriptor->depthStencilState = nullptr;
+            descriptor->depthStencilState = &cDepthStencilState;
         }
 
         descriptor->inputState = device.CreateInputStateBuilder().GetResult();

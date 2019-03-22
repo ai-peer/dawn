@@ -100,8 +100,6 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/CommandBuffer.h",
     "src/dawn_native/CommandBufferStateTracker.cpp",
     "src/dawn_native/CommandBufferStateTracker.h",
-    "src/dawn_native/CommandEncoder.cpp",
-    "src/dawn_native/CommandEncoder.h",
     "src/dawn_native/Commands.cpp",
     "src/dawn_native/Commands.h",
     "src/dawn_native/ComputePassEncoder.cpp",
@@ -140,6 +138,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/Queue.h",
     "src/dawn_native/RefCounted.cpp",
     "src/dawn_native/RefCounted.h",
+    "src/dawn_native/RenderPassDescriptor.cpp",
+    "src/dawn_native/RenderPassDescriptor.h",
     "src/dawn_native/RenderPassEncoder.cpp",
     "src/dawn_native/RenderPassEncoder.h",
     "src/dawn_native/RenderPipeline.cpp",
@@ -194,6 +194,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/d3d12/PlatformFunctions.h",
       "src/dawn_native/d3d12/QueueD3D12.cpp",
       "src/dawn_native/d3d12/QueueD3D12.h",
+      "src/dawn_native/d3d12/RenderPassDescriptorD3D12.cpp",
+      "src/dawn_native/d3d12/RenderPassDescriptorD3D12.h",
       "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
       "src/dawn_native/d3d12/RenderPipelineD3D12.h",
       "src/dawn_native/d3d12/ResourceAllocator.cpp",
@@ -221,7 +223,6 @@ source_set("libdawn_native_sources") {
       "Metal.framework",
       "Cocoa.framework",
       "IOKit.framework",
-      "IOSurface.framework",
     ]
     sources += [
       "src/dawn_native/metal/BackendMTL.h",
@@ -243,12 +244,12 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/metal/QueueMTL.mm",
       "src/dawn_native/metal/RenderPipelineMTL.h",
       "src/dawn_native/metal/RenderPipelineMTL.mm",
+      "src/dawn_native/metal/ResourceUploader.h",
+      "src/dawn_native/metal/ResourceUploader.mm",
       "src/dawn_native/metal/SamplerMTL.h",
       "src/dawn_native/metal/SamplerMTL.mm",
       "src/dawn_native/metal/ShaderModuleMTL.h",
       "src/dawn_native/metal/ShaderModuleMTL.mm",
-      "src/dawn_native/metal/StagingBufferMTL.h",
-      "src/dawn_native/metal/StagingBufferMTL.mm",
       "src/dawn_native/metal/SwapChainMTL.h",
       "src/dawn_native/metal/SwapChainMTL.mm",
       "src/dawn_native/metal/TextureMTL.h",
@@ -338,6 +339,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/QueueVk.h",
       "src/dawn_native/vulkan/RenderPassCache.cpp",
       "src/dawn_native/vulkan/RenderPassCache.h",
+      "src/dawn_native/vulkan/RenderPassDescriptorVk.cpp",
+      "src/dawn_native/vulkan/RenderPassDescriptorVk.h",
       "src/dawn_native/vulkan/RenderPipelineVk.cpp",
       "src/dawn_native/vulkan/RenderPipelineVk.h",
       "src/dawn_native/vulkan/SamplerVk.cpp",
@@ -420,7 +423,6 @@ dawn_generator("libdawn_wire_gen") {
     "dawn_wire/client/ClientPrototypes_autogen.inl",
     "dawn_wire/server/ServerBase_autogen.h",
     "dawn_wire/server/ServerCallbacks_autogen.cpp",
-    "dawn_wire/server/ServerDoers_autogen.cpp",
     "dawn_wire/server/ServerHandlers_autogen.cpp",
     "dawn_wire/server/ServerPrototypes_autogen.inl",
   ]
@@ -438,10 +440,9 @@ dawn_component("libdawn_wire") {
   configs = [ "${dawn_root}/src/common:dawn_internal" ]
   sources = get_target_outputs(":libdawn_wire_gen")
   sources += [
-    "src/dawn_wire/WireClient.cpp",
+    "src/dawn_wire/DawnWire.cpp",
     "src/dawn_wire/WireDeserializeAllocator.cpp",
     "src/dawn_wire/WireDeserializeAllocator.h",
-    "src/dawn_wire/WireServer.cpp",
     "src/dawn_wire/client/ApiObjects.h",
     "src/dawn_wire/client/ApiProcs.cpp",
     "src/dawn_wire/client/Buffer.cpp",
@@ -579,12 +580,12 @@ test("dawn_unittests") {
     "src/tests/unittests/SerialMapTests.cpp",
     "src/tests/unittests/SerialQueueTests.cpp",
     "src/tests/unittests/ToBackendTests.cpp",
+    "src/tests/unittests/WireTests.cpp",
     "src/tests/unittests/validation/BindGroupValidationTests.cpp",
     "src/tests/unittests/validation/BufferValidationTests.cpp",
     "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
     "src/tests/unittests/validation/ComputeValidationTests.cpp",
     "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
-    "src/tests/unittests/validation/DebugMarkerValidationTests.cpp",
     "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
     "src/tests/unittests/validation/FenceValidationTests.cpp",
     "src/tests/unittests/validation/InputStateValidationTests.cpp",
@@ -598,14 +599,6 @@ test("dawn_unittests") {
     "src/tests/unittests/validation/ValidationTest.cpp",
     "src/tests/unittests/validation/ValidationTest.h",
     "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
-    "src/tests/unittests/wire/WireArgumentTests.cpp",
-    "src/tests/unittests/wire/WireBasicTests.cpp",
-    "src/tests/unittests/wire/WireBufferMappingTests.cpp",
-    "src/tests/unittests/wire/WireCallbackTests.cpp",
-    "src/tests/unittests/wire/WireFenceTests.cpp",
-    "src/tests/unittests/wire/WireOptionalTests.cpp",
-    "src/tests/unittests/wire/WireTest.cpp",
-    "src/tests/unittests/wire/WireTest.h",
   ]
 
   if (dawn_enable_d3d12) {
@@ -639,13 +632,11 @@ test("dawn_end2end_tests") {
     "src/tests/DawnTest.h",
     "src/tests/end2end/BasicTests.cpp",
     "src/tests/end2end/BindGroupTests.cpp",
+    "src/tests/end2end/BlendStateTests.cpp",
     "src/tests/end2end/BufferTests.cpp",
-    "src/tests/end2end/ColorStateTests.cpp",
     "src/tests/end2end/ComputeCopyStorageBufferTests.cpp",
     "src/tests/end2end/CopyTests.cpp",
-    "src/tests/end2end/DebugMarkerTests.cpp",
     "src/tests/end2end/DepthStencilStateTests.cpp",
-    "src/tests/end2end/DestroyBufferTests.cpp",
     "src/tests/end2end/DrawIndexedTests.cpp",
     "src/tests/end2end/DrawTests.cpp",
     "src/tests/end2end/FenceTests.cpp",
@@ -654,20 +645,11 @@ test("dawn_end2end_tests") {
     "src/tests/end2end/PrimitiveTopologyTests.cpp",
     "src/tests/end2end/PushConstantTests.cpp",
     "src/tests/end2end/RenderPassLoadOpTests.cpp",
-    "src/tests/end2end/RenderPassTests.cpp",
     "src/tests/end2end/SamplerTests.cpp",
     "src/tests/end2end/ScissorTests.cpp",
     "src/tests/end2end/TextureViewTests.cpp",
     "src/tests/end2end/ViewportOrientationTests.cpp",
   ]
-
-  libs = []
-
-  if (dawn_enable_metal) {
-    sources += [ "src/tests/end2end/IOSurfaceWrappingTests.cpp" ]
-
-    libs += [ "IOSurface.framework" ]
-  }
 
   # When building inside Chromium, use their gtest main function because it is
   # needed to run in swarming correctly.

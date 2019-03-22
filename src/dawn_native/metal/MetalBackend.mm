@@ -17,25 +17,13 @@
 
 #include "dawn_native/MetalBackend.h"
 
-#include "dawn_native/Texture.h"
 #include "dawn_native/metal/DeviceMTL.h"
 
 namespace dawn_native { namespace metal {
 
-    id<MTLDevice> GetMetalDevice(DawnDevice cDevice) {
+    id<MTLDevice> GetMetalDevice(dawnDevice cDevice) {
         Device* device = reinterpret_cast<Device*>(cDevice);
         return device->GetMTLDevice();
-    }
-
-    DawnTexture WrapIOSurface(DawnDevice cDevice,
-                              const DawnTextureDescriptor* cDescriptor,
-                              IOSurfaceRef ioSurface,
-                              uint32_t plane) {
-        Device* device = reinterpret_cast<Device*>(cDevice);
-        const TextureDescriptor* descriptor =
-            reinterpret_cast<const TextureDescriptor*>(cDescriptor);
-        TextureBase* texture = device->CreateTextureWrappingIOSurface(descriptor, ioSurface, plane);
-        return reinterpret_cast<DawnTexture>(texture);
     }
 
 }}  // namespace dawn_native::metal

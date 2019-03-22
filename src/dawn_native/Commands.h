@@ -15,14 +15,10 @@
 #ifndef DAWNNATIVE_COMMANDS_H_
 #define DAWNNATIVE_COMMANDS_H_
 
-#include "common/Constants.h"
-
+#include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
-
-#include <array>
-#include <bitset>
 
 namespace dawn_native {
 
@@ -41,9 +37,6 @@ namespace dawn_native {
         DrawIndexed,
         EndComputePass,
         EndRenderPass,
-        InsertDebugMarker,
-        PopDebugGroup,
-        PushDebugGroup,
         SetComputePipeline,
         SetRenderPipeline,
         SetPushConstants,
@@ -57,34 +50,8 @@ namespace dawn_native {
 
     struct BeginComputePassCmd {};
 
-    struct RenderPassColorAttachmentInfo {
-        Ref<TextureViewBase> view;
-        Ref<TextureViewBase> resolveTarget;
-        dawn::LoadOp loadOp;
-        dawn::StoreOp storeOp;
-        dawn_native::Color clearColor;
-    };
-
-    struct RenderPassDepthStencilAttachmentInfo {
-        Ref<TextureViewBase> view;
-        dawn::LoadOp depthLoadOp;
-        dawn::StoreOp depthStoreOp;
-        dawn::LoadOp stencilLoadOp;
-        dawn::StoreOp stencilStoreOp;
-        float clearDepth;
-        uint32_t clearStencil;
-    };
-
     struct BeginRenderPassCmd {
-        std::bitset<kMaxColorAttachments> colorAttachmentsSet;
-        RenderPassColorAttachmentInfo colorAttachments[kMaxColorAttachments];
-        bool hasDepthStencilAttachment;
-        RenderPassDepthStencilAttachmentInfo depthStencilAttachment;
-
-        // Cache the width, height and sample count of all attachments for convenience
-        uint32_t width;
-        uint32_t height;
-        uint32_t sampleCount;
+        Ref<RenderPassDescriptorBase> info;
     };
 
     struct BufferCopy {
@@ -143,16 +110,6 @@ namespace dawn_native {
     struct EndComputePassCmd {};
 
     struct EndRenderPassCmd {};
-
-    struct InsertDebugMarkerCmd {
-        uint32_t length;
-    };
-
-    struct PopDebugGroupCmd {};
-
-    struct PushDebugGroupCmd {
-        uint32_t length;
-    };
 
     struct SetComputePipelineCmd {
         Ref<ComputePipelineBase> pipeline;

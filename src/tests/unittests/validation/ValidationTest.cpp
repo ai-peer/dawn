@@ -39,10 +39,10 @@ ValidationTest::ValidationTest() {
     ASSERT(foundNullAdapter);
     device = dawn::Device::Acquire(nullAdapter.CreateDevice());
 
-    DawnProcTable procs = dawn_native::GetProcs();
+    dawnProcTable procs = dawn_native::GetProcs();
     dawnSetProcs(&procs);
 
-    device.SetErrorCallback(ValidationTest::OnDeviceError, static_cast<DawnCallbackUserdata>(reinterpret_cast<uintptr_t>(this)));
+    device.SetErrorCallback(ValidationTest::OnDeviceError, static_cast<dawnCallbackUserdata>(reinterpret_cast<uintptr_t>(this)));
 }
 
 ValidationTest::~ValidationTest() {
@@ -84,8 +84,32 @@ std::string ValidationTest::GetLastDeviceErrorMessage() const {
     return mDeviceErrorMessage;
 }
 
-// static
-void ValidationTest::OnDeviceError(const char* message, DawnCallbackUserdata userdata) {
+dawn::RenderPassDescriptor ValidationTest::CreateSimpleRenderPass() {
+        dawn::TextureDescriptor descriptor;
+        descriptor.dimension = dawn::TextureDimension::e2D;
+        descriptor.size.width = 640;
+        descriptor.size.height = 480;
+        descriptor.size.depth = 1;
+        descriptor.arraySize = 1;
+        descriptor.sampleCount = 1;
+        descriptor.format = dawn::TextureFormat::R8G8B8A8Unorm;
+        descriptor.levelCount = 1;
+        descriptor.usage = dawn::TextureUsageBit::OutputAttachment;
+
+        auto colorBuffer = device.CreateTexture(&descriptor);
+        auto colorView = colorBuffer.CreateDefaultTextureView();
+        dawn::RenderPassColorAttachmentDescriptor colorAttachment;
+        colorAttachment.attachment = colorView;
+        colorAttachment.resolveTarget = nullptr;
+        colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+        colorAttachment.loadOp = dawn::LoadOp::Clear;
+        colorAttachment.storeOp = dawn::StoreOp::Store;
+        return device.CreateRenderPassDescriptorBuilder()
+            .SetColorAttachments(1, &colorAttachment)
+            .GetResult();
+}
+
+void ValidationTest::OnDeviceError(const char* message, dawnCallbackUserdata userdata) {
     auto self = reinterpret_cast<ValidationTest*>(static_cast<uintptr_t>(userdata));
     self->mDeviceErrorMessage = message;
 
@@ -101,8 +125,7 @@ void ValidationTest::OnDeviceError(const char* message, DawnCallbackUserdata use
     self->mError = true;
 }
 
-// static
-void ValidationTest::OnBuilderErrorStatus(DawnBuilderErrorStatus status, const char* message, dawn::CallbackUserdata userdata1, dawn::CallbackUserdata userdata2) {
+void ValidationTest::OnBuilderErrorStatus(dawnBuilderErrorStatus status, const char* message, dawn::CallbackUserdata userdata1, dawn::CallbackUserdata userdata2) {
     auto* self = reinterpret_cast<ValidationTest*>(static_cast<uintptr_t>(userdata1));
     size_t index = static_cast<size_t>(userdata2);
 
@@ -115,30 +138,34 @@ void ValidationTest::OnBuilderErrorStatus(DawnBuilderErrorStatus status, const c
     expectation.statusMessage = message;
 }
 
-ValidationTest::DummyRenderPass::DummyRenderPass(const dawn::Device& device)
-    : attachmentFormat(dawn::TextureFormat::R8G8B8A8Unorm), width(400), height(400) {
+ValidationTest::DummyRenderPass ValidationTest::CreateDummyRenderPass() {
+    DummyRenderPass dummy;
+    dummy.width = 400;
+    dummy.height = 400;
+    dummy.attachmentFormat = dawn::TextureFormat::R8G8B8A8Unorm;
 
     dawn::TextureDescriptor descriptor;
     descriptor.dimension = dawn::TextureDimension::e2D;
-    descriptor.size.width = width;
-    descriptor.size.height = height;
+    descriptor.size.width = dummy.width;
+    descriptor.size.height = dummy.height;
     descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
+    descriptor.arraySize = 1;
     descriptor.sampleCount = 1;
-    descriptor.format = attachmentFormat;
-    descriptor.mipLevelCount = 1;
+    descriptor.format = dummy.attachmentFormat;
+    descriptor.levelCount = 1;
     descriptor.usage = dawn::TextureUsageBit::OutputAttachment;
-    attachment = device.CreateTexture(&descriptor);
+    dummy.attachment = device.CreateTexture(&descriptor);
 
-    dawn::TextureView view = attachment.CreateDefaultTextureView();
-    mColorAttachment.attachment = view;
-    mColorAttachment.resolveTarget = nullptr;
-    mColorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
-    mColorAttachment.loadOp = dawn::LoadOp::Clear;
-    mColorAttachment.storeOp = dawn::StoreOp::Store;
-    mColorAttachments[0] = &mColorAttachment;
+    dawn::TextureView view = dummy.attachment.CreateDefaultTextureView();
+    dawn::RenderPassColorAttachmentDescriptor colorAttachment;
+    colorAttachment.attachment = view;
+    colorAttachment.resolveTarget = nullptr;
+    colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+    colorAttachment.loadOp = dawn::LoadOp::Clear;
+    colorAttachment.storeOp = dawn::StoreOp::Store;
+    dummy.renderPass = AssertWillBeSuccess(device.CreateRenderPassDescriptorBuilder())
+        .SetColorAttachments(1, &colorAttachment)
+        .GetResult();
 
-    colorAttachmentCount = 1;
-    colorAttachments = mColorAttachments;
-    depthStencilAttachment = nullptr;
+    return dummy;
 }
