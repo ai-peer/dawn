@@ -21,11 +21,10 @@
 
 namespace dawn_native { namespace d3d12 {
 
-    SwapChain::SwapChain(Device* device, const SwapChainDescriptor* descriptor)
-        : SwapChainBase(device, descriptor) {
+    SwapChain::SwapChain(SwapChainBuilder* builder) : SwapChainBase(builder) {
         const auto& im = GetImplementation();
-        DawnWSIContextD3D12 wsiContext = {};
-        wsiContext.device = reinterpret_cast<DawnDevice>(GetDevice());
+        dawnWSIContextD3D12 wsiContext = {};
+        wsiContext.device = reinterpret_cast<dawnDevice>(GetDevice());
         im.Init(im.userData, &wsiContext);
 
         ASSERT(im.textureUsage != DAWN_TEXTURE_USAGE_BIT_NONE);
@@ -37,8 +36,8 @@ namespace dawn_native { namespace d3d12 {
 
     TextureBase* SwapChain::GetNextTextureImpl(const TextureDescriptor* descriptor) {
         const auto& im = GetImplementation();
-        DawnSwapChainNextTexture next = {};
-        DawnSwapChainError error = im.GetNextTexture(im.userData, &next);
+        dawnSwapChainNextTexture next = {};
+        dawnSwapChainError error = im.GetNextTexture(im.userData, &next);
         if (error) {
             GetDevice()->HandleError(error);
             return nullptr;

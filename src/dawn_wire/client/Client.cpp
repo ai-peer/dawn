@@ -17,10 +17,12 @@
 
 namespace dawn_wire { namespace client {
 
-    Client::Client(CommandSerializer* serializer)
+    Client::Client(dawnProcTable* procs, dawnDevice* device, CommandSerializer* serializer)
         : ClientBase(),
           mDevice(DeviceAllocator().New(this)->object.get()),
           mSerializer(serializer) {
+        *device = reinterpret_cast<dawnDeviceImpl*>(mDevice);
+        *procs = client::GetProcs();
     }
 
     Client::~Client() {

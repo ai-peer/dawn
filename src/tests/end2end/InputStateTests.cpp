@@ -125,7 +125,7 @@ class InputStateTest : public DawnTest {
             descriptor.cVertexStage.module = vsModule;
             descriptor.cFragmentStage.module = fsModule;
             descriptor.inputState = inputState;
-            descriptor.cColorStates[0]->format = renderPass.colorFormat;
+            descriptor.cColorAttachments[0]->format = renderPass.colorFormat;
 
             return device.CreateRenderPipeline(&descriptor);
         }
@@ -145,21 +145,11 @@ class InputStateTest : public DawnTest {
             dawn::InputStateBuilder builder = device.CreateInputStateBuilder();
 
             for (const auto& input : inputs) {
-                dawn::VertexInputDescriptor descriptor;
-                descriptor.inputSlot = input.slot;
-                descriptor.stride = input.stride;
-                descriptor.stepMode = input.step;
-                builder.SetInput(&descriptor);
+                builder.SetInput(input.slot, input.stride, input.step);
             }
 
             for (const auto& attribute : attributes) {
-                dawn::VertexAttributeDescriptor descriptor;
-                descriptor.shaderLocation = attribute.location;
-                descriptor.inputSlot = attribute.slot;
-                descriptor.offset = attribute.offset;
-                descriptor.format = attribute.format;
-
-                builder.SetAttribute(&descriptor);
+                builder.SetAttribute(attribute.location, attribute.slot, attribute.format, attribute.offset);
             }
 
             return builder.GetResult();
@@ -178,9 +168,9 @@ class InputStateTest : public DawnTest {
             EXPECT_LE(triangles, 4u);
             EXPECT_LE(instances, 4u);
 
-            dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+            dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
 
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
             pass.SetPipeline(pipeline);
 
             uint32_t zeroOffset = 0;
@@ -191,7 +181,7 @@ class InputStateTest : public DawnTest {
             pass.Draw(triangles * 3, instances, 0, 0);
             pass.EndPass();
 
-            dawn::CommandBuffer commands = encoder.Finish();
+            dawn::CommandBuffer commands = builder.GetResult();
             queue.Submit(1, &commands);
 
             CheckResult(triangles, instances);
@@ -452,9 +442,9 @@ TEST_P(InputStateTest, UnusedVertexSlot) {
         3, 4, 5, 6,
     });
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
 
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
 
     uint32_t zeroOffset = 0;
     pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
@@ -465,7 +455,7 @@ TEST_P(InputStateTest, UnusedVertexSlot) {
 
     pass.EndPass();
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     CheckResult(1, 4);
@@ -497,9 +487,9 @@ TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
         3, 4, 5, 6,
     });
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
 
-    dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
 
     uint32_t zeroOffset = 0;
     pass.SetVertexBuffers(0, 1, &buffer, &zeroOffset);
@@ -513,13 +503,13 @@ TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
 
     pass.EndPass();
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     CheckResult(1, 4);
 }
 
-DAWN_INSTANTIATE_TEST(InputStateTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(InputStateTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)
 
 // TODO for the input state:
 //  - Add more vertex formats

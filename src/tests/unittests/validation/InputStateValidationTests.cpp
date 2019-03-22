@@ -17,15 +17,11 @@
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/DawnHelpers.h"
 
-constexpr static dawn::VertexInputDescriptor kBaseInput = {
-    0,                            // inputSlot
-    0,                            // stride
-    dawn::InputStepMode::Vertex,  // stepMode
-};
-
 class InputStateTest : public ValidationTest {
     protected:
         void CreatePipeline(bool success, const dawn::InputState& inputState, std::string vertexSource) {
+            DummyRenderPass renderpassData = CreateDummyRenderPass();
+
             dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, vertexSource.c_str());
             dawn::ShaderModule fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
                 #version 450
@@ -39,7 +35,7 @@ class InputStateTest : public ValidationTest {
             descriptor.cVertexStage.module = vsModule;
             descriptor.cFragmentStage.module = fsModule;
             descriptor.inputState = inputState;
-            descriptor.cColorStates[0]->format = dawn::TextureFormat::R8G8B8A8Unorm;
+            descriptor.cColorAttachments[0]->format = renderpassData.attachmentFormat;
 
             if (!success) {
                 ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
@@ -64,6 +60,7 @@ TEST_F(InputStateTest, EmptyIsOk) {
 
 // Check validation that pipeline vertex inputs are backed by attributes in the input state
 TEST_F(InputStateTest, PipelineCompatibility) {
+<<<<<<< HEAD
     dawn::VertexAttributeDescriptor attribute1;
     attribute1.shaderLocation = 0;
     attribute1.inputSlot = 0;
@@ -81,11 +78,13 @@ TEST_F(InputStateTest, PipelineCompatibility) {
     input.stride = 2 * sizeof(float);
     input.stepMode = dawn::InputStepMode::Vertex;
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
     dawn::InputState state = AssertWillBeSuccess(device.CreateInputStateBuilder())
-                                 .SetInput(&input)
-                                 .SetAttribute(&attribute1)
-                                 .SetAttribute(&attribute2)
-                                 .GetResult();
+        .SetInput(0, 2 * sizeof(float), dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32, 0)
+        .SetAttribute(1, 0, dawn::VertexFormat::FloatR32, sizeof(float))
+        .GetResult();
 
     // Control case: pipeline with one input per attribute
     CreatePipeline(true, state, R"(
@@ -119,33 +118,41 @@ TEST_F(InputStateTest, PipelineCompatibility) {
 // Test that a stride of 0 is valid
 TEST_F(InputStateTest, StrideZero) {
     // Works ok without attributes
-    AssertWillBeSuccess(device.CreateInputStateBuilder()).SetInput(&kBaseInput).GetResult();
+    AssertWillBeSuccess(device.CreateInputStateBuilder())
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .GetResult();
 
     // Works ok with attributes at a large-ish offset
+<<<<<<< HEAD
     dawn::VertexAttributeDescriptor attribute;
     attribute.shaderLocation = 0;
     attribute.inputSlot = 0;
     attribute.offset = 128;
     attribute.format = dawn::VertexFormat::Float;
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
     AssertWillBeSuccess(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32, 128)
         .GetResult();
 }
 
 // Test that we cannot set an already set input
 TEST_F(InputStateTest, AlreadySetInput) {
     // Control case
-    AssertWillBeSuccess(device.CreateInputStateBuilder()).SetInput(&kBaseInput).GetResult();
+    AssertWillBeSuccess(device.CreateInputStateBuilder())
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .GetResult();
 
     // Oh no, input 0 is set twice
     AssertWillBeError(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetInput(&kBaseInput)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
         .GetResult();
 }
 
+<<<<<<< HEAD
 // Check out of bounds condition on input slot
 TEST_F(InputStateTest, SetInputSlotOutOfBounds) {
     // Control case, setting last input slot
@@ -184,19 +191,22 @@ TEST_F(InputStateTest, AlreadySetAttribute) {
     attribute.offset = 0;
     attribute.format = dawn::VertexFormat::Float;
 
+=======
+// Check out of bounds condition on SetInput
+TEST_F(InputStateTest, SetInputOutOfBounds) {
+    // Control case, setting last input
+>>>>>>> [Not For Review] Revert to reproduce issue 101
     AssertWillBeSuccess(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(kMaxVertexInputs - 1, 0, dawn::InputStepMode::Vertex)
         .GetResult();
 
-    // Oh no, attribute 0 is set twice
+    // Test OOB
     AssertWillBeError(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
-        .SetAttribute(&attribute)
+        .SetInput(kMaxVertexInputs, 0, dawn::InputStepMode::Vertex)
         .GetResult();
 }
 
+<<<<<<< HEAD
 // Check out of bounds condition on attribute shader location
 TEST_F(InputStateTest, SetAttributeLocationOutOfBounds) {
     // Control case, setting last attribute shader location
@@ -206,19 +216,25 @@ TEST_F(InputStateTest, SetAttributeLocationOutOfBounds) {
     attribute.offset = 0;
     attribute.format = dawn::VertexFormat::Float;
 
+=======
+// Test that we cannot set an already set attribute
+TEST_F(InputStateTest, AlreadySetAttribute) {
+    // Control case, setting last attribute
+>>>>>>> [Not For Review] Revert to reproduce issue 101
     AssertWillBeSuccess(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32, 0)
         .GetResult();
 
-    // Test attribute location OOB
-    attribute.shaderLocation = kMaxVertexAttributes;
+    // Oh no, attribute 0 is set twice
     AssertWillBeError(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32, 0)
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32, 0)
         .GetResult();
 }
 
+<<<<<<< HEAD
 // Check attribute offset out of bounds
 TEST_F(InputStateTest, SetAttributeOffsetOutOfBounds) {
     // Control case, setting max attribute offset for FloatR32 vertex format
@@ -227,14 +243,19 @@ TEST_F(InputStateTest, SetAttributeOffsetOutOfBounds) {
     attribute.inputSlot = 0;
     attribute.offset = kMaxVertexAttributeEnd - sizeof(dawn::VertexFormat::Float);
     attribute.format = dawn::VertexFormat::Float;
+=======
+// Check out of bounds condition on SetAttribute
+TEST_F(InputStateTest, SetAttributeOutOfBounds) {
+    // Control case, setting last attribute
+>>>>>>> [Not For Review] Revert to reproduce issue 101
     AssertWillBeSuccess(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(kMaxVertexAttributes - 1, 0, dawn::VertexFormat::FloatR32, 0)
         .GetResult();
 
-    // Test attribute offset out of bounds
-    attribute.offset = kMaxVertexAttributeEnd - 1;
+    // Test OOB
     AssertWillBeError(device.CreateInputStateBuilder())
+<<<<<<< HEAD
         .SetInput(&kBaseInput)
         .SetAttribute(&attribute)
         .GetResult();
@@ -250,49 +271,57 @@ TEST_F(InputStateTest, SetAttributeOffsetOverflow) {
     AssertWillBeError(device.CreateInputStateBuilder())
         .SetInput(&kBaseInput)
         .SetAttribute(&attribute)
+=======
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(kMaxVertexAttributes, 0, dawn::VertexFormat::FloatR32, 0)
+>>>>>>> [Not For Review] Revert to reproduce issue 101
         .GetResult();
 }
 
 // Check that all attributes must be backed by an input
 TEST_F(InputStateTest, RequireInputForAttribute) {
     // Control case
+<<<<<<< HEAD
     dawn::VertexAttributeDescriptor attribute;
     attribute.shaderLocation = 0;
     attribute.inputSlot = 0;
     attribute.offset = 0;
     attribute.format = dawn::VertexFormat::Float;
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
     AssertWillBeSuccess(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32, 0)
         .GetResult();
 
     // Attribute 0 uses input 1 which doesn't exist
-    attribute.inputSlot = 1;
     AssertWillBeError(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 1, dawn::VertexFormat::FloatR32, 0)
         .GetResult();
 }
 
 // Check OOB checks for an attribute's input
 TEST_F(InputStateTest, SetAttributeOOBCheckForInputs) {
     // Control case
+<<<<<<< HEAD
     dawn::VertexAttributeDescriptor attribute;
     attribute.shaderLocation = 0;
     attribute.inputSlot = 0;
     attribute.offset = 0;
     attribute.format = dawn::VertexFormat::Float;
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
     AssertWillBeSuccess(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32, 0)
         .GetResult();
 
     // Could crash if we didn't check for OOB
-    attribute.inputSlot = 1000000;
     AssertWillBeError(device.CreateInputStateBuilder())
-        .SetInput(&kBaseInput)
-        .SetAttribute(&attribute)
+        .SetInput(0, 0, dawn::InputStepMode::Vertex)
+        .SetAttribute(0, 1000000, dawn::VertexFormat::FloatR32, 0)
         .GetResult();
 }

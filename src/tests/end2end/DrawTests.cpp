@@ -26,6 +26,7 @@ class DrawTest : public DawnTest {
 
         renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
+<<<<<<< HEAD
         dawn::VertexInputDescriptor input;
         input.inputSlot = 0;
         input.stride = 4 * sizeof(float);
@@ -37,8 +38,13 @@ class DrawTest : public DawnTest {
         attribute.offset = 0;
         attribute.format = dawn::VertexFormat::Float4;
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
         dawn::InputState inputState =
-            device.CreateInputStateBuilder().SetInput(&input).SetAttribute(&attribute).GetResult();
+            device.CreateInputStateBuilder()
+                .SetInput(0, 4 * sizeof(float), dawn::InputStepMode::Vertex)
+                .SetAttribute(0, 0, dawn::VertexFormat::FloatR32G32B32A32, 0)
+                .GetResult();
 
         dawn::ShaderModule vsModule =
             utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
@@ -62,7 +68,7 @@ class DrawTest : public DawnTest {
         descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleStrip;
         descriptor.indexFormat = dawn::IndexFormat::Uint32;
         descriptor.inputState = inputState;
-        descriptor.cColorStates[0]->format = renderPass.colorFormat;
+        descriptor.cColorAttachments[0]->format = renderPass.colorFormat;
 
         pipeline = device.CreateRenderPipeline(&descriptor);
 
@@ -86,16 +92,16 @@ class DrawTest : public DawnTest {
               RGBA8 bottomLeftExpected,
               RGBA8 topRightExpected) {
         uint32_t zeroOffset = 0;
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
         {
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+            dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
             pass.SetPipeline(pipeline);
             pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
             pass.Draw(vertexCount, instanceCount, firstIndex, firstInstance);
             pass.EndPass();
         }
 
-        dawn::CommandBuffer commands = encoder.Finish();
+        dawn::CommandBuffer commands = builder.GetResult();
         queue.Submit(1, &commands);
 
         EXPECT_PIXEL_RGBA8_EQ(bottomLeftExpected, renderPass.color, 1, 3);
@@ -118,4 +124,4 @@ TEST_P(DrawTest, Uint32) {
     Test(6, 1, 0, 0, filled, filled);
 }
 
-DAWN_INSTANTIATE_TEST(DrawTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(DrawTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)

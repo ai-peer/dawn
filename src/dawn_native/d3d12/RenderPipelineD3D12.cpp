@@ -127,9 +127,9 @@ namespace dawn_native { namespace d3d12 {
             return static_cast<uint8_t>(colorWriteMask);
         }
 
-        D3D12_RENDER_TARGET_BLEND_DESC ComputeColorDesc(const ColorStateDescriptor* descriptor) {
+        D3D12_RENDER_TARGET_BLEND_DESC ComputeBlendDesc(const BlendStateDescriptor* descriptor) {
             D3D12_RENDER_TARGET_BLEND_DESC blendDesc;
-            blendDesc.BlendEnable = BlendEnabled(descriptor);
+            blendDesc.BlendEnable = descriptor->blendEnabled;
             blendDesc.SrcBlend = D3D12Blend(descriptor->colorBlend.srcFactor);
             blendDesc.DestBlend = D3D12Blend(descriptor->colorBlend.dstFactor);
             blendDesc.BlendOp = D3D12BlendOperation(descriptor->colorBlend.operation);
@@ -287,7 +287,7 @@ namespace dawn_native { namespace d3d12 {
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
             descriptorD3D12.RTVFormats[i] = D3D12TextureFormat(GetColorAttachmentFormat(i));
             descriptorD3D12.BlendState.RenderTarget[i] =
-                ComputeColorDesc(GetColorStateDescriptor(i));
+                ComputeBlendDesc(GetBlendStateDescriptor(i));
         }
         descriptorD3D12.NumRenderTargets = static_cast<uint32_t>(GetColorAttachmentsMask().count());
 

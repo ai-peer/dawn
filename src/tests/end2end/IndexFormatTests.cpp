@@ -31,6 +31,7 @@ class IndexFormatTest : public DawnTest {
         utils::BasicRenderPass renderPass;
 
         dawn::RenderPipeline MakeTestPipeline(dawn::IndexFormat format) {
+<<<<<<< HEAD
             dawn::VertexInputDescriptor input;
             input.inputSlot = 0;
             input.stride = 4 * sizeof(float);
@@ -42,10 +43,12 @@ class IndexFormatTest : public DawnTest {
             attribute.offset = 0;
             attribute.format = dawn::VertexFormat::Float4;
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
             dawn::InputState inputState = device.CreateInputStateBuilder()
-                                              .SetInput(&input)
-                                              .SetAttribute(&attribute)
-                                              .GetResult();
+                .SetInput(0, 4 * sizeof(float), dawn::InputStepMode::Vertex)
+                .SetAttribute(0, 0, dawn::VertexFormat::FloatR32G32B32A32, 0)
+                .GetResult();
 
             dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
                 #version 450
@@ -69,7 +72,7 @@ class IndexFormatTest : public DawnTest {
             descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleStrip;
             descriptor.indexFormat = format;
             descriptor.inputState = inputState;
-            descriptor.cColorStates[0]->format = renderPass.colorFormat;
+            descriptor.cColorAttachments[0]->format = renderPass.colorFormat;
 
             return device.CreateRenderPipeline(&descriptor);
         }
@@ -91,9 +94,9 @@ TEST_P(IndexFormatTest, Uint32) {
     });
 
     uint32_t zeroOffset = 0;
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
         pass.SetIndexBuffer(indexBuffer, 0);
@@ -101,7 +104,7 @@ TEST_P(IndexFormatTest, Uint32) {
         pass.EndPass();
     }
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 100, 300);
@@ -122,9 +125,9 @@ TEST_P(IndexFormatTest, Uint16) {
     });
 
     uint32_t zeroOffset = 0;
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
         pass.SetIndexBuffer(indexBuffer, 0);
@@ -132,7 +135,7 @@ TEST_P(IndexFormatTest, Uint16) {
         pass.EndPass();
     }
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 100, 300);
@@ -166,9 +169,9 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
     });
 
     uint32_t zeroOffset = 0;
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
         pass.SetIndexBuffer(indexBuffer, 0);
@@ -176,7 +179,7 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
         pass.EndPass();
     }
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 190, 190);  // A
@@ -197,14 +200,12 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
     });
     dawn::Buffer indexBuffer = utils::CreateBufferFromData<uint16_t>(device, dawn::BufferUsageBit::Index, {
         0, 1, 2, 0xFFFFu, 3, 4, 2,
-        // This value is for padding.
-        0xFFFFu,
     });
 
     uint32_t zeroOffset = 0;
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
         pass.SetIndexBuffer(indexBuffer, 0);
@@ -212,7 +213,7 @@ TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
         pass.EndPass();
     }
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 190, 190);  // A
@@ -241,9 +242,9 @@ TEST_P(IndexFormatTest, ChangePipelineAfterSetIndexBuffer) {
     });
 
     uint32_t zeroOffset = 0;
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
         pass.SetPipeline(pipeline16);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
         pass.SetIndexBuffer(indexBuffer, 0);
@@ -252,7 +253,7 @@ TEST_P(IndexFormatTest, ChangePipelineAfterSetIndexBuffer) {
         pass.EndPass();
     }
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 100, 300);
@@ -276,9 +277,9 @@ TEST_P(IndexFormatTest, DISABLED_SetIndexBufferBeforeSetPipeline) {
     });
 
     uint32_t zeroOffset = 0;
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass.renderPassInfo);
         pass.SetIndexBuffer(indexBuffer, 0);
         pass.SetPipeline(pipeline);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
@@ -286,10 +287,10 @@ TEST_P(IndexFormatTest, DISABLED_SetIndexBufferBeforeSetPipeline) {
         pass.EndPass();
     }
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
 
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 100, 300);
 }
 
-DAWN_INSTANTIATE_TEST(IndexFormatTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(IndexFormatTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)

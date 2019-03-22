@@ -102,41 +102,28 @@ namespace dawn_native { namespace metal {
             if (!attributesSetMask[i]) {
                 continue;
             }
-            const VertexAttributeDescriptor& info = GetAttribute(i);
+            const AttributeInfo& info = GetAttribute(i);
 
             auto attribDesc = [MTLVertexAttributeDescriptor new];
             attribDesc.format = VertexFormatType(info.format);
             attribDesc.offset = info.offset;
-            attribDesc.bufferIndex = kMaxBindingsPerGroup + info.inputSlot;
+            attribDesc.bufferIndex = kMaxBindingsPerGroup + info.bindingSlot;
             mMtlVertexDescriptor.attributes[i] = attribDesc;
             [attribDesc release];
         }
 
         for (uint32_t i : IterateBitSet(GetInputsSetMask())) {
-            const VertexInputDescriptor& info = GetInput(i);
+            const InputInfo& info = GetInput(i);
 
             auto layoutDesc = [MTLVertexBufferLayoutDescriptor new];
             if (info.stride == 0) {
                 // For MTLVertexStepFunctionConstant, the stepRate must be 0,
-                // but the stride must NOT be 0, so we made up it with
-                // max(attrib.offset + sizeof(attrib) for each attrib)
-                uint32_t max_stride = 0;
-                for (uint32_t attribIndex : IterateBitSet(attributesSetMask)) {
-                    const VertexAttributeDescriptor& attrib = GetAttribute(attribIndex);
-                    // Only use the attributes that use the current input
-                    if (attrib.inputSlot != info.inputSlot) {
-                        continue;
-                    }
-                    max_stride = std::max(
-                        max_stride,
-                        static_cast<uint32_t>(VertexFormatSize(attrib.format)) + attrib.offset);
-                }
-
+                // but the stride must NOT be 0, so I made up a value (256).
+                // TODO(cwallez@chromium.org): the made up value will need to be at least
+                //    max(attrib.offset + sizeof(attrib) for each attrib)
                 layoutDesc.stepFunction = MTLVertexStepFunctionConstant;
                 layoutDesc.stepRate = 0;
-                // Metal requires the stride must be a multiple of 4 bytes, align it with next
-                // multiple of 4 if it's not.
-                layoutDesc.stride = Align(max_stride, 4);
+                layoutDesc.stride = 256;
             } else {
                 layoutDesc.stepFunction = InputStepModeFunction(info.stepMode);
                 layoutDesc.stepRate = 1;

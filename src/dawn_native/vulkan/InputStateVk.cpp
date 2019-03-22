@@ -121,7 +121,7 @@ namespace dawn_native { namespace vulkan {
 
             auto& attributeDesc = mAttributes[attributeCount];
             attributeDesc.location = i;
-            attributeDesc.binding = attributeInfo.inputSlot;
+            attributeDesc.binding = attributeInfo.bindingSlot;
             attributeDesc.format = VulkanVertexFormat(attributeInfo.format);
             attributeDesc.offset = attributeInfo.offset;
 

@@ -26,16 +26,14 @@ namespace dawn_native { namespace opengl {
     class Buffer : public BufferBase {
       public:
         Buffer(Device* device, const BufferDescriptor* descriptor);
-        ~Buffer();
 
         GLuint GetHandle() const;
 
       private:
         MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) override;
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
+        void MapReadAsyncImpl(uint32_t serial, uint32_t start, uint32_t count) override;
+        void MapWriteAsyncImpl(uint32_t serial, uint32_t start, uint32_t count) override;
         void UnmapImpl() override;
-        void DestroyImpl() override;
 
         GLuint mBuffer = 0;
     };
