@@ -17,16 +17,16 @@
 
 #include "dawn_native/MetalBackend.h"
 
-#include "dawn_native/Texture.h"
 #include "dawn_native/metal/DeviceMTL.h"
 
 namespace dawn_native { namespace metal {
 
-    id<MTLDevice> GetMetalDevice(DawnDevice cDevice) {
+    id<MTLDevice> GetMetalDevice(dawnDevice cDevice) {
         Device* device = reinterpret_cast<Device*>(cDevice);
         return device->GetMTLDevice();
     }
 
+<<<<<<< HEAD
     DawnTexture WrapIOSurface(DawnDevice cDevice,
                               const DawnTextureDescriptor* cDescriptor,
                               IOSurfaceRef ioSurface,
@@ -43,4 +43,6 @@ namespace dawn_native { namespace metal {
         device->WaitForCommandsToBeScheduled();
     }
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
 }}  // namespace dawn_native::metal

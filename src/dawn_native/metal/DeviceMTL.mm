@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/RenderPassDescriptor.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
@@ -25,9 +26,9 @@
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 #include "dawn_native/metal/QueueMTL.h"
 #include "dawn_native/metal/RenderPipelineMTL.h"
+#include "dawn_native/metal/ResourceUploader.h"
 #include "dawn_native/metal/SamplerMTL.h"
 #include "dawn_native/metal/ShaderModuleMTL.h"
-#include "dawn_native/metal/StagingBufferMTL.h"
 #include "dawn_native/metal/SwapChainMTL.h"
 #include "dawn_native/metal/TextureMTL.h"
 
@@ -39,7 +40,11 @@ namespace dawn_native { namespace metal {
         : DeviceBase(adapter),
           mMtlDevice([mtlDevice retain]),
           mMapTracker(new MapRequestTracker(this)),
+<<<<<<< HEAD
           mCompletedSerial(0) {
+=======
+          mResourceUploader(new ResourceUploader(this)) {
+>>>>>>> [Not For Review] Revert to reproduce issue 101
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
     }
@@ -59,7 +64,7 @@ namespace dawn_native { namespace metal {
         mPendingCommands = nil;
 
         mMapTracker = nullptr;
-        mDynamicUploader = nullptr;
+        mResourceUploader = nullptr;
 
         [mCommandQueue release];
         mCommandQueue = nil;
@@ -79,8 +84,8 @@ namespace dawn_native { namespace metal {
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return new Buffer(this, descriptor);
     }
-    CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder) {
-        return new CommandBuffer(this, encoder);
+    CommandBufferBase* Device::CreateCommandBuffer(CommandBufferBuilder* builder) {
+        return new CommandBuffer(builder);
     }
     ResultOrError<ComputePipelineBase*> Device::CreateComputePipelineImpl(
         const ComputePipelineDescriptor* descriptor) {
@@ -92,6 +97,10 @@ namespace dawn_native { namespace metal {
     ResultOrError<PipelineLayoutBase*> Device::CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) {
         return new PipelineLayout(this, descriptor);
+    }
+    RenderPassDescriptorBase* Device::CreateRenderPassDescriptor(
+        RenderPassDescriptorBuilder* builder) {
+        return new RenderPassDescriptor(builder);
     }
     ResultOrError<QueueBase*> Device::CreateQueueImpl() {
         return new Queue(this);
@@ -107,9 +116,8 @@ namespace dawn_native { namespace metal {
         const ShaderModuleDescriptor* descriptor) {
         return new ShaderModule(this, descriptor);
     }
-    ResultOrError<SwapChainBase*> Device::CreateSwapChainImpl(
-        const SwapChainDescriptor* descriptor) {
-        return new SwapChain(this, descriptor);
+    SwapChainBase* Device::CreateSwapChain(SwapChainBuilder* builder) {
+        return new SwapChain(builder);
     }
     ResultOrError<TextureBase*> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
         return new Texture(this, descriptor);
@@ -134,10 +142,15 @@ namespace dawn_native { namespace metal {
     }
 
     void Device::TickImpl() {
+<<<<<<< HEAD
         Serial completedSerial = GetCompletedCommandSerial();
 
         mDynamicUploader->Tick(completedSerial);
         mMapTracker->Tick(completedSerial);
+=======
+        mResourceUploader->Tick(mCompletedSerial);
+        mMapTracker->Tick(mCompletedSerial);
+>>>>>>> [Not For Review] Revert to reproduce issue 101
 
         if (mPendingCommands != nil) {
             SubmitPendingCommandBuffer();
@@ -212,10 +225,12 @@ namespace dawn_native { namespace metal {
         return mMapTracker.get();
     }
 
+    ResourceUploader* Device::GetResourceUploader() const {
+        return mResourceUploader.get();
+    }
+
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
-        std::unique_ptr<StagingBufferBase> stagingBuffer =
-            std::make_unique<StagingBuffer>(size, this);
-        return std::move(stagingBuffer);
+        return DAWN_UNIMPLEMENTED_ERROR("Device unable to create staging buffer.");
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
@@ -223,36 +238,15 @@ namespace dawn_native { namespace metal {
                                                BufferBase* destination,
                                                uint32_t destinationOffset,
                                                uint32_t size) {
-        id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
-        id<MTLBuffer> buffer = ToBackend(destination)->GetMTLBuffer();
-        id<MTLCommandBuffer> commandBuffer = GetPendingCommandBuffer();
-        id<MTLBlitCommandEncoder> encoder = [commandBuffer blitCommandEncoder];
-        [encoder copyFromBuffer:uploadBuffer
-                   sourceOffset:sourceOffset
-                       toBuffer:buffer
-              destinationOffset:destinationOffset
-                           size:size];
-        [encoder endEncoding];
-
-        return {};
+        return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
     }
 
-    TextureBase* Device::CreateTextureWrappingIOSurface(const TextureDescriptor* descriptor,
-                                                        IOSurfaceRef ioSurface,
-                                                        uint32_t plane) {
-        if (ConsumedError(ValidateTextureDescriptor(this, descriptor))) {
-            return nullptr;
-        }
-        if (ConsumedError(ValidateIOSurfaceCanBeWrapped(this, descriptor, ioSurface, plane))) {
-            return nullptr;
-        }
-
-        return new Texture(this, descriptor, ioSurface, plane);
-    }
-
+<<<<<<< HEAD
     void Device::WaitForCommandsToBeScheduled() {
         SubmitPendingCommandBuffer();
         [mLastSubmittedCommands waitUntilScheduled];
     }
 
+=======
+>>>>>>> [Not For Review] Revert to reproduce issue 101
 }}  // namespace dawn_native::metal

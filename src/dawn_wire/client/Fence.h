@@ -22,7 +22,6 @@
 
 namespace dawn_wire { namespace client {
 
-    struct Queue;
     struct Fence : ObjectBase {
         using ObjectBase::ObjectBase;
 
@@ -30,10 +29,9 @@ namespace dawn_wire { namespace client {
         void CheckPassedFences();
 
         struct OnCompletionData {
-            DawnFenceOnCompletionCallback completionCallback = nullptr;
-            DawnCallbackUserdata userdata = 0;
+            dawnFenceOnCompletionCallback completionCallback = nullptr;
+            dawnCallbackUserdata userdata = 0;
         };
-        Queue* queue = nullptr;
         uint64_t signaledValue = 0;
         uint64_t completedValue = 0;
         SerialMap<OnCompletionData> requests;

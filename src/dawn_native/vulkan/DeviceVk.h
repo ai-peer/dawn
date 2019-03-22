@@ -64,8 +64,11 @@ namespace dawn_native { namespace vulkan {
         void AddWaitSemaphore(VkSemaphore semaphore);
 
         // Dawn API
-        CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
+        CommandBufferBase* CreateCommandBuffer(CommandBufferBuilder* builder) override;
         InputStateBase* CreateInputState(InputStateBuilder* builder) override;
+        RenderPassDescriptorBase* CreateRenderPassDescriptor(
+            RenderPassDescriptorBuilder* builder) override;
+        SwapChainBase* CreateSwapChain(SwapChainBuilder* builder) override;
 
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
@@ -77,6 +80,9 @@ namespace dawn_native { namespace vulkan {
                                            BufferBase* destination,
                                            uint32_t destinationOffset,
                                            uint32_t size) override;
+
+        ResultOrError<DynamicUploader*> GetDynamicUploader() const;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -93,8 +99,6 @@ namespace dawn_native { namespace vulkan {
         ResultOrError<SamplerBase*> CreateSamplerImpl(const SamplerDescriptor* descriptor) override;
         ResultOrError<ShaderModuleBase*> CreateShaderModuleImpl(
             const ShaderModuleDescriptor* descriptor) override;
-        ResultOrError<SwapChainBase*> CreateSwapChainImpl(
-            const SwapChainDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
@@ -112,6 +116,7 @@ namespace dawn_native { namespace vulkan {
         uint32_t mQueueFamily = 0;
         VkQueue mQueue = VK_NULL_HANDLE;
 
+        std::unique_ptr<DynamicUploader> mDynamicUploader;
         std::unique_ptr<FencedDeleter> mDeleter;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<MemoryAllocator> mMemoryAllocator;
@@ -142,6 +147,9 @@ namespace dawn_native { namespace vulkan {
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
         std::vector<VkSemaphore> mWaitSemaphores;
+
+        static constexpr size_t kDefaultUploadBufferSize =
+            64000;  // TODO(b-brber): Figure out this value.
     };
 
 }}  // namespace dawn_native::vulkan

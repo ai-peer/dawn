@@ -20,30 +20,30 @@ using namespace testing;
 
 class MockFenceOnCompletionCallback {
   public:
-    MOCK_METHOD2(Call, void(DawnFenceCompletionStatus status, DawnCallbackUserdata userdata));
+    MOCK_METHOD2(Call, void(dawnFenceCompletionStatus status, dawnCallbackUserdata userdata));
 };
 
 struct FenceOnCompletionExpectation {
     dawn::Fence fence;
     uint64_t value;
-    DawnFenceCompletionStatus status;
+    dawnFenceCompletionStatus status;
 };
 
 static std::unique_ptr<MockFenceOnCompletionCallback> mockFenceOnCompletionCallback;
-static void ToMockFenceOnCompletionCallback(DawnFenceCompletionStatus status,
-                                            DawnCallbackUserdata userdata) {
+static void ToMockFenceOnCompletionCallback(dawnFenceCompletionStatus status,
+                                            dawnCallbackUserdata userdata) {
     mockFenceOnCompletionCallback->Call(status, userdata);
 }
 
 class FenceValidationTest : public ValidationTest {
   protected:
-    void TestOnCompletion(dawn::Fence fence, uint64_t value, DawnFenceCompletionStatus status) {
+    void TestOnCompletion(dawn::Fence fence, uint64_t value, dawnFenceCompletionStatus status) {
         FenceOnCompletionExpectation* expectation = new FenceOnCompletionExpectation;
         expectation->fence = fence;
         expectation->value = value;
         expectation->status = status;
-        DawnCallbackUserdata userdata =
-            static_cast<DawnCallbackUserdata>(reinterpret_cast<uintptr_t>(expectation));
+        dawnCallbackUserdata userdata =
+            static_cast<dawnCallbackUserdata>(reinterpret_cast<uintptr_t>(expectation));
 
         EXPECT_CALL(*mockFenceOnCompletionCallback, Call(status, userdata)).Times(1);
         fence.OnCompletion(value, ToMockFenceOnCompletionCallback, userdata);
@@ -77,7 +77,7 @@ TEST_F(FenceValidationTest, CreationSuccess) {
     {
         dawn::FenceDescriptor descriptor;
         descriptor.initialValue = 0;
-        queue.CreateFence(&descriptor);
+        device.CreateFence(&descriptor);
     }
 }
 
@@ -86,7 +86,7 @@ TEST_F(FenceValidationTest, GetCompletedValue) {
     {
         dawn::FenceDescriptor descriptor;
         descriptor.initialValue = 1;
-        dawn::Fence fence = queue.CreateFence(&descriptor);
+        dawn::Fence fence = device.CreateFence(&descriptor);
         EXPECT_EQ(fence.GetCompletedValue(), 1u);
     }
 }
@@ -96,7 +96,7 @@ TEST_F(FenceValidationTest, GetCompletedValue) {
 TEST_F(FenceValidationTest, OnCompletionImmediate) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     EXPECT_CALL(*mockFenceOnCompletionCallback, Call(DAWN_FENCE_COMPLETION_STATUS_SUCCESS, 0))
         .Times(1);
@@ -111,7 +111,7 @@ TEST_F(FenceValidationTest, OnCompletionImmediate) {
 TEST_F(FenceValidationTest, OnCompletionLargerThanSignaled) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     // Cannot signal for values > signaled value
     EXPECT_CALL(*mockFenceOnCompletionCallback, Call(DAWN_FENCE_COMPLETION_STATUS_ERROR, 0))
@@ -130,12 +130,12 @@ TEST_F(FenceValidationTest, OnCompletionLargerThanSignaled) {
 TEST_F(FenceValidationTest, GetCompletedValueInsideCallback) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     queue.Signal(fence, 3);
     fence.OnCompletion(2u, ToMockFenceOnCompletionCallback, 0);
     EXPECT_CALL(*mockFenceOnCompletionCallback, Call(DAWN_FENCE_COMPLETION_STATUS_SUCCESS, 0))
-        .WillOnce(Invoke([&](DawnFenceCompletionStatus status, DawnCallbackUserdata userdata) {
+        .WillOnce(Invoke([&](dawnFenceCompletionStatus status, dawnCallbackUserdata userdata) {
             EXPECT_EQ(fence.GetCompletedValue(), 3u);
         }));
 
@@ -145,7 +145,7 @@ TEST_F(FenceValidationTest, GetCompletedValueInsideCallback) {
 TEST_F(FenceValidationTest, GetCompletedValueAfterCallback) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     queue.Signal(fence, 2);
     fence.OnCompletion(2u, ToMockFenceOnCompletionCallback, 0);
@@ -159,7 +159,7 @@ TEST_F(FenceValidationTest, GetCompletedValueAfterCallback) {
 TEST_F(FenceValidationTest, SignalError) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     // value < fence signaled value
     ASSERT_DEVICE_ERROR(queue.Signal(fence, 0));
@@ -171,7 +171,7 @@ TEST_F(FenceValidationTest, SignalError) {
 TEST_F(FenceValidationTest, SignalSuccess) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     // Success
     queue.Signal(fence, 2);
@@ -182,35 +182,4 @@ TEST_F(FenceValidationTest, SignalSuccess) {
     queue.Signal(fence, 6);
     Flush();
     EXPECT_EQ(fence.GetCompletedValue(), 6u);
-}
-
-// Test it is invalid to signal a fence on a different queue than it was created on
-TEST_F(FenceValidationTest, SignalWrongQueue) {
-    dawn::Queue queue2 = device.CreateQueue();
-
-    dawn::FenceDescriptor descriptor;
-    descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
-
-    ASSERT_DEVICE_ERROR(queue2.Signal(fence, 2));
-}
-
-// Test that signaling a fence on a wrong queue does not update fence signaled value
-TEST_F(FenceValidationTest, SignalWrongQueueDoesNotUpdateValue) {
-    dawn::Queue queue2 = device.CreateQueue();
-
-    dawn::FenceDescriptor descriptor;
-    descriptor.initialValue = 1;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
-
-    ASSERT_DEVICE_ERROR(queue2.Signal(fence, 2));
-
-    // Fence value should be unchanged.
-    Flush();
-    EXPECT_EQ(fence.GetCompletedValue(), 1u);
-
-    // Signaling with 2 on the correct queue should succeed
-    queue.Signal(fence, 2);
-    Flush();
-    EXPECT_EQ(fence.GetCompletedValue(), 2u);
 }

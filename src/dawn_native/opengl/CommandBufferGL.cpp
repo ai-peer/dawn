@@ -15,11 +15,9 @@
 #include "dawn_native/opengl/CommandBufferGL.h"
 
 #include "dawn_native/BindGroup.h"
-#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/opengl/BufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
-#include "dawn_native/opengl/DeviceGL.h"
 #include "dawn_native/opengl/Forward.h"
 #include "dawn_native/opengl/InputStateGL.h"
 #include "dawn_native/opengl/PersistentPipelineStateGL.h"
@@ -47,44 +45,22 @@ namespace dawn_native { namespace opengl {
 
         GLenum VertexFormatType(dawn::VertexFormat format) {
             switch (format) {
-                case dawn::VertexFormat::UChar2:
-                case dawn::VertexFormat::UChar4:
-                case dawn::VertexFormat::UChar2Norm:
-                case dawn::VertexFormat::UChar4Norm:
-                    return GL_UNSIGNED_BYTE;
-                case dawn::VertexFormat::Char2:
-                case dawn::VertexFormat::Char4:
-                case dawn::VertexFormat::Char2Norm:
-                case dawn::VertexFormat::Char4Norm:
-                    return GL_BYTE;
-                case dawn::VertexFormat::UShort2:
-                case dawn::VertexFormat::UShort4:
-                case dawn::VertexFormat::UShort2Norm:
-                case dawn::VertexFormat::UShort4Norm:
-                    return GL_UNSIGNED_SHORT;
-                case dawn::VertexFormat::Short2:
-                case dawn::VertexFormat::Short4:
-                case dawn::VertexFormat::Short2Norm:
-                case dawn::VertexFormat::Short4Norm:
-                    return GL_SHORT;
-                case dawn::VertexFormat::Half2:
-                case dawn::VertexFormat::Half4:
-                    return GL_HALF_FLOAT;
-                case dawn::VertexFormat::Float:
-                case dawn::VertexFormat::Float2:
-                case dawn::VertexFormat::Float3:
-                case dawn::VertexFormat::Float4:
+                case dawn::VertexFormat::FloatR32G32B32A32:
+                case dawn::VertexFormat::FloatR32G32B32:
+                case dawn::VertexFormat::FloatR32G32:
+                case dawn::VertexFormat::FloatR32:
                     return GL_FLOAT;
-                case dawn::VertexFormat::UInt:
-                case dawn::VertexFormat::UInt2:
-                case dawn::VertexFormat::UInt3:
-                case dawn::VertexFormat::UInt4:
-                    return GL_UNSIGNED_INT;
-                case dawn::VertexFormat::Int:
-                case dawn::VertexFormat::Int2:
-                case dawn::VertexFormat::Int3:
-                case dawn::VertexFormat::Int4:
+                case dawn::VertexFormat::IntR32G32B32A32:
+                case dawn::VertexFormat::IntR32G32B32:
+                case dawn::VertexFormat::IntR32G32:
+                case dawn::VertexFormat::IntR32:
                     return GL_INT;
+                case dawn::VertexFormat::UshortR16G16B16A16:
+                case dawn::VertexFormat::UshortR16G16:
+                    return GL_UNSIGNED_SHORT;
+                case dawn::VertexFormat::UnormR8G8B8A8:
+                case dawn::VertexFormat::UnormR8G8:
+                    return GL_UNSIGNED_BYTE;
                 default:
                     UNREACHABLE();
             }
@@ -92,14 +68,8 @@ namespace dawn_native { namespace opengl {
 
         GLboolean VertexFormatIsNormalized(dawn::VertexFormat format) {
             switch (format) {
-                case dawn::VertexFormat::UChar2Norm:
-                case dawn::VertexFormat::UChar4Norm:
-                case dawn::VertexFormat::Char2Norm:
-                case dawn::VertexFormat::Char4Norm:
-                case dawn::VertexFormat::UShort2Norm:
-                case dawn::VertexFormat::UShort4Norm:
-                case dawn::VertexFormat::Short2Norm:
-                case dawn::VertexFormat::Short4Norm:
+                case dawn::VertexFormat::UnormR8G8B8A8:
+                case dawn::VertexFormat::UnormR8G8:
                     return GL_TRUE;
                 default:
                     return GL_FALSE;
@@ -306,19 +276,13 @@ namespace dawn_native { namespace opengl {
                         glBindBufferRange(GL_SHADER_STORAGE_BUFFER, ssboIndex, buffer,
                                           binding.offset, binding.size);
                     } break;
-
-                    // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-                    case dawn::BindingType::DynamicUniformBuffer:
-                    case dawn::BindingType::DynamicStorageBuffer:
-                        UNREACHABLE();
-                        break;
                 }
             }
         }
     }  // namespace
 
-    CommandBuffer::CommandBuffer(Device* device, CommandEncoderBase* encoder)
-        : CommandBufferBase(device, encoder), mCommands(encoder->AcquireCommands()) {
+    CommandBuffer::CommandBuffer(CommandBufferBuilder* builder)
+        : CommandBufferBase(builder), mCommands(builder->AcquireCommands()) {
     }
 
     CommandBuffer::~CommandBuffer() {
@@ -336,7 +300,7 @@ namespace dawn_native { namespace opengl {
 
                 case Command::BeginRenderPass: {
                     auto* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
-                    ExecuteRenderPass(cmd);
+                    ExecuteRenderPass(ToBackend(cmd->info.Get()));
                 } break;
 
                 case Command::CopyBufferToBuffer: {
@@ -496,7 +460,7 @@ namespace dawn_native { namespace opengl {
         UNREACHABLE();
     }
 
-    void CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
+    void CommandBuffer::ExecuteRenderPass(RenderPassDescriptorBase* renderPass) {
         GLuint fbo = 0;
 
         // Create the framebuffer used for this render pass and calls the correct glDrawBuffers
@@ -519,8 +483,8 @@ namespace dawn_native { namespace opengl {
             // Construct GL framebuffer
 
             unsigned int attachmentCount = 0;
-            for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
-                TextureViewBase* textureView = renderPass->colorAttachments[i].view.Get();
+            for (uint32_t i : IterateBitSet(renderPass->GetColorAttachmentMask())) {
+                TextureViewBase* textureView = renderPass->GetColorAttachment(i).view.Get();
                 GLuint texture = ToBackend(textureView->GetTexture())->GetHandle();
 
                 // Attach color buffers.
@@ -545,8 +509,8 @@ namespace dawn_native { namespace opengl {
             }
             glDrawBuffers(attachmentCount, drawBuffers.data());
 
-            if (renderPass->hasDepthStencilAttachment) {
-                TextureViewBase* textureView = renderPass->depthStencilAttachment.view.Get();
+            if (renderPass->HasDepthStencilAttachment()) {
+                TextureViewBase* textureView = renderPass->GetDepthStencilAttachment().view.Get();
                 GLuint texture = ToBackend(textureView->GetTexture())->GetHandle();
                 dawn::TextureFormat format = textureView->GetTexture()->GetFormat();
 
@@ -575,17 +539,17 @@ namespace dawn_native { namespace opengl {
 
         // Clear framebuffer attachments as needed
         {
-            for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
-                const auto& attachmentInfo = renderPass->colorAttachments[i];
+            for (uint32_t i : IterateBitSet(renderPass->GetColorAttachmentMask())) {
+                const auto& attachmentInfo = renderPass->GetColorAttachment(i);
 
                 // Load op - color
                 if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
-                    glClearBufferfv(GL_COLOR, i, &attachmentInfo.clearColor.r);
+                    glClearBufferfv(GL_COLOR, i, attachmentInfo.clearColor.data());
                 }
             }
 
-            if (renderPass->hasDepthStencilAttachment) {
-                const auto& attachmentInfo = renderPass->depthStencilAttachment;
+            if (renderPass->HasDepthStencilAttachment()) {
+                const auto& attachmentInfo = renderPass->GetDepthStencilAttachment();
                 dawn::TextureFormat attachmentFormat =
                     attachmentInfo.view->GetTexture()->GetFormat();
 
@@ -617,8 +581,8 @@ namespace dawn_native { namespace opengl {
         // Set defaults for dynamic state
         persistentPipelineState.SetDefaultState();
         glBlendColor(0, 0, 0, 0);
-        glViewport(0, 0, renderPass->width, renderPass->height);
-        glScissor(0, 0, renderPass->width, renderPass->height);
+        glViewport(0, 0, renderPass->GetWidth(), renderPass->GetHeight());
+        glScissor(0, 0, renderPass->GetWidth(), renderPass->GetHeight());
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
@@ -656,27 +620,19 @@ namespace dawn_native { namespace opengl {
                     GLenum formatType = IndexFormatType(indexFormat);
 
                     if (draw->firstInstance > 0) {
-                        glDrawElementsInstancedBaseVertexBaseInstance(
+                        glDrawElementsInstancedBaseInstance(
                             lastPipeline->GetGLPrimitiveTopology(), draw->indexCount, formatType,
                             reinterpret_cast<void*>(draw->firstIndex * formatSize +
                                                     indexBufferBaseOffset),
-                            draw->instanceCount, draw->baseVertex, draw->firstInstance);
+                            draw->instanceCount, draw->firstInstance);
                     } else {
                         // This branch is only needed on OpenGL < 4.2
-                        glDrawElementsInstancedBaseVertex(
+                        glDrawElementsInstanced(
                             lastPipeline->GetGLPrimitiveTopology(), draw->indexCount, formatType,
                             reinterpret_cast<void*>(draw->firstIndex * formatSize +
                                                     indexBufferBaseOffset),
-                            draw->instanceCount, draw->baseVertex);
+                            draw->instanceCount);
                     }
-                } break;
-
-                case Command::InsertDebugMarker:
-                case Command::PopDebugGroup:
-                case Command::PushDebugGroup: {
-                    // Due to lack of linux driver support for GL_EXT_debug_marker
-                    // extension these functions are skipped.
-                    SkipCommand(&mCommands, type);
                 } break;
 
                 case Command::SetRenderPipeline: {

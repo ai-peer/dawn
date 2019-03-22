@@ -48,7 +48,7 @@ namespace dawn_wire { namespace server {
     };
 
     template <>
-    struct ObjectData<DawnBuffer, false> : public ObjectDataBase<DawnBuffer> {
+    struct ObjectData<dawnBuffer, false> : public ObjectDataBase<dawnBuffer> {
         void* mappedData = nullptr;
         size_t mappedDataSize = 0;
     };
@@ -60,14 +60,12 @@ namespace dawn_wire { namespace server {
         using Data = ObjectData<T>;
 
         KnownObjects() {
-            // Reserve ID 0 so that it can be used to represent nullptr for optional object values
-            // in the wire format. However don't tag it as allocated so that it is an error to ask
-            // KnownObjects for ID 0.
-            Data reservation;
-            reservation.handle = nullptr;
-            reservation.valid = false;
-            reservation.allocated = false;
-            mKnown.push_back(reservation);
+            // Pre-allocate ID 0 to refer to the null handle.
+            Data nullObject;
+            nullObject.handle = nullptr;
+            nullObject.valid = true;
+            nullObject.allocated = true;
+            mKnown.push_back(nullObject);
         }
 
         // Get a backend objects for a given client ID.

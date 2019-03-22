@@ -19,6 +19,7 @@
 #include "dawn_native/vulkan/InputStateVk.h"
 #include "dawn_native/vulkan/PipelineLayoutVk.h"
 #include "dawn_native/vulkan/RenderPassCache.h"
+#include "dawn_native/vulkan/RenderPassDescriptorVk.h"
 #include "dawn_native/vulkan/ShaderModuleVk.h"
 #include "dawn_native/vulkan/UtilsVulkan.h"
 
@@ -111,10 +112,10 @@ namespace dawn_native { namespace vulkan {
             return static_cast<VkColorComponentFlagBits>(mask);
         }
 
-        VkPipelineColorBlendAttachmentState ComputeColorDesc(
-            const ColorStateDescriptor* descriptor) {
+        VkPipelineColorBlendAttachmentState ComputeBlendDesc(
+            const BlendStateDescriptor* descriptor) {
             VkPipelineColorBlendAttachmentState attachment;
-            attachment.blendEnable = BlendEnabled(descriptor) ? VK_TRUE : VK_FALSE;
+            attachment.blendEnable = descriptor->blendEnabled ? VK_TRUE : VK_FALSE;
             attachment.srcColorBlendFactor = VulkanBlendFactor(descriptor->colorBlend.srcFactor);
             attachment.dstColorBlendFactor = VulkanBlendFactor(descriptor->colorBlend.dstFactor);
             attachment.colorBlendOp = VulkanBlendOperation(descriptor->colorBlend.operation);
@@ -199,6 +200,10 @@ namespace dawn_native { namespace vulkan {
 
     RenderPipeline::RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor)
         : RenderPipelineBase(device, descriptor) {
+        // Eventually a bunch of the structures that need to be chained in the create info will be
+        // held by objects such as the BlendState. They aren't implemented yet so we initialize
+        // everything here.
+
         VkPipelineShaderStageCreateInfo shaderStages[2];
         {
             shaderStages[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -279,11 +284,11 @@ namespace dawn_native { namespace vulkan {
             ComputeDepthStencilDesc(GetDepthStencilStateDescriptor());
 
         // Initialize the "blend state info" that will be chained in the "create info" from the data
-        // pre-computed in the ColorState
+        // pre-computed in the BlendState
         std::array<VkPipelineColorBlendAttachmentState, kMaxColorAttachments> colorBlendAttachments;
         for (uint32_t i : IterateBitSet(GetColorAttachmentsMask())) {
-            const ColorStateDescriptor* descriptor = GetColorStateDescriptor(i);
-            colorBlendAttachments[i] = ComputeColorDesc(descriptor);
+            const BlendStateDescriptor* descriptor = GetBlendStateDescriptor(i);
+            colorBlendAttachments[i] = ComputeBlendDesc(descriptor);
         }
         VkPipelineColorBlendStateCreateInfo colorBlend;
         colorBlend.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;

@@ -12,30 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_STAGINGBUFFERMETAL_H_
-#define DAWNNATIVE_STAGINGBUFFERMETAL_H_
+#ifndef DAWNNATIVE_VULKAN_RENDERPASSDESCRIPTORVK_H_
+#define DAWNNATIVE_VULKAN_RENDERPASSDESCRIPTORVK_H_
 
-#include "dawn_native/StagingBuffer.h"
+#include "dawn_native/RenderPassDescriptor.h"
 
-#import <Metal/Metal.h>
+#include "common/vulkan_platform.h"
 
-namespace dawn_native { namespace metal {
+namespace dawn_native { namespace vulkan {
 
     class Device;
 
-    class StagingBuffer : public StagingBufferBase {
+    class RenderPassDescriptor : public RenderPassDescriptorBase {
       public:
-        StagingBuffer(size_t size, Device* device);
-        ~StagingBuffer();
+        RenderPassDescriptor(RenderPassDescriptorBuilder* builder);
 
-        id<MTLBuffer> GetBufferHandle() const;
-
-        MaybeError Initialize() override;
+        // Compute all the arguments for, and record the vkCmdBeginRenderPass command.
+        void RecordBeginRenderPass(VkCommandBuffer commands);
 
       private:
-        Device* mDevice;
-        id<MTLBuffer> mBuffer = nil;
+        Device* mDevice = nullptr;
     };
-}}  // namespace dawn_native::metal
 
-#endif  // DAWNNATIVE_STAGINGBUFFERMETAL_H_
+}}  // namespace dawn_native::vulkan
+
+#endif  // DAWNNATIVE_VULKAN_RENDERPASSDESCRIPTORVK_H_

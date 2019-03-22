@@ -19,7 +19,7 @@
 #include "dawn_native/CommandBuffer.h"
 
 namespace dawn_native {
-    struct BeginRenderPassCmd;
+    class RenderPassDescriptorBase;
 }  // namespace dawn_native
 
 namespace dawn_native { namespace opengl {
@@ -28,14 +28,14 @@ namespace dawn_native { namespace opengl {
 
     class CommandBuffer : public CommandBufferBase {
       public:
-        CommandBuffer(Device* device, CommandEncoderBase* encoder);
+        CommandBuffer(CommandBufferBuilder* builder);
         ~CommandBuffer();
 
         void Execute();
 
       private:
         void ExecuteComputePass();
-        void ExecuteRenderPass(BeginRenderPassCmd* renderPass);
+        void ExecuteRenderPass(RenderPassDescriptorBase* renderPass);
 
         CommandIterator mCommands;
     };

@@ -30,10 +30,10 @@ class DepthStencilStateTest : public DawnTest {
             renderTargetDescriptor.size.width = kRTSize;
             renderTargetDescriptor.size.height = kRTSize;
             renderTargetDescriptor.size.depth = 1;
-            renderTargetDescriptor.arrayLayerCount = 1;
+            renderTargetDescriptor.arraySize = 1;
             renderTargetDescriptor.sampleCount = 1;
             renderTargetDescriptor.format = dawn::TextureFormat::R8G8B8A8Unorm;
-            renderTargetDescriptor.mipLevelCount = 1;
+            renderTargetDescriptor.levelCount = 1;
             renderTargetDescriptor.usage = dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::TransferSrc;
             renderTarget = device.CreateTexture(&renderTargetDescriptor);
 
@@ -44,14 +44,34 @@ class DepthStencilStateTest : public DawnTest {
             depthDescriptor.size.width = kRTSize;
             depthDescriptor.size.height = kRTSize;
             depthDescriptor.size.depth = 1;
-            depthDescriptor.arrayLayerCount = 1;
+            depthDescriptor.arraySize = 1;
             depthDescriptor.sampleCount = 1;
             depthDescriptor.format = dawn::TextureFormat::D32FloatS8Uint;
-            depthDescriptor.mipLevelCount = 1;
+            depthDescriptor.levelCount = 1;
             depthDescriptor.usage = dawn::TextureUsageBit::OutputAttachment;
             depthTexture = device.CreateTexture(&depthDescriptor);
 
             depthTextureView = depthTexture.CreateDefaultTextureView();
+
+            dawn::RenderPassColorAttachmentDescriptor colorAttachment;
+            colorAttachment.attachment = renderTargetView;
+            colorAttachment.resolveTarget = nullptr;
+            colorAttachment.clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
+            colorAttachment.loadOp = dawn::LoadOp::Clear;
+            colorAttachment.storeOp = dawn::StoreOp::Store;
+
+            dawn::RenderPassDepthStencilAttachmentDescriptor depthStencilAttachment;
+            depthStencilAttachment.attachment = depthTextureView;
+            depthStencilAttachment.depthLoadOp = dawn::LoadOp::Clear;
+            depthStencilAttachment.stencilLoadOp = dawn::LoadOp::Clear;
+            depthStencilAttachment.clearDepth = 1.0f;
+            depthStencilAttachment.clearStencil = 0;
+            depthStencilAttachment.depthStoreOp = dawn::StoreOp::Store;
+            depthStencilAttachment.stencilStoreOp = dawn::StoreOp::Store;
+            renderpass = device.CreateRenderPassDescriptorBuilder()
+                .SetColorAttachments(1, &colorAttachment)
+                .SetDepthStencilAttachment(&depthStencilAttachment)
+                .GetResult();
 
             vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
                 #version 450
@@ -246,15 +266,14 @@ class DepthStencilStateTest : public DawnTest {
         // Each test param represents a pair of triangles with a color, depth, stencil value, and depthStencil state, one frontfacing, one backfacing
         // Draw the triangles in order and check the expected colors for the frontfaces and backfaces
         void DoTest(const std::vector<TestSpec> &testParams, const RGBA8& expectedFront, const RGBA8& expectedBack) {
-            dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+            dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
 
             struct TriangleData {
                 float color[3];
                 float depth;
             };
 
-            utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+            dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderpass);
 
             for (size_t i = 0; i < testParams.size(); ++i) {
                 const TestSpec& test = testParams[i];
@@ -275,20 +294,20 @@ class DepthStencilStateTest : public DawnTest {
                 descriptor.layout = pipelineLayout;
                 descriptor.cVertexStage.module = vsModule;
                 descriptor.cFragmentStage.module = fsModule;
-                descriptor.cDepthStencilState = test.depthStencilState;
-                descriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
-                descriptor.depthStencilState = &descriptor.cDepthStencilState;
+                descriptor.cAttachmentsState.hasDepthStencilAttachment = true;
+                descriptor.cDepthStencilAttachment.format = dawn::TextureFormat::D32FloatS8Uint;
+                descriptor.depthStencilState = &test.depthStencilState;
 
                 dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
 
                 pass.SetPipeline(pipeline);
                 pass.SetStencilReference(test.stencil);  // Set the stencil reference
-                pass.SetBindGroup(0, bindGroup, 0, nullptr);         // Set the bind group which contains color and depth data
+                pass.SetBindGroup(0, bindGroup);         // Set the bind group which contains color and depth data
                 pass.Draw(6, 1, 0, 0);
             }
             pass.EndPass();
 
-            dawn::CommandBuffer commands = encoder.Finish();
+            dawn::CommandBuffer commands = builder.GetResult();
             queue.Submit(1, &commands);
 
             EXPECT_PIXEL_RGBA8_EQ(expectedFront, renderTarget, kRTSize / 4, kRTSize / 2) << "Front face check failed";
@@ -299,6 +318,7 @@ class DepthStencilStateTest : public DawnTest {
             DoTest(testParams, expected, expected);
         }
 
+        dawn::RenderPassDescriptor renderpass;
         dawn::Texture renderTarget;
         dawn::Texture depthTexture;
         dawn::TextureView renderTargetView;
@@ -683,4 +703,4 @@ DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
                      D3D12Backend,
                      MetalBackend,
                      OpenGLBackend,
-                     VulkanBackend);
+                     VulkanBackend)
