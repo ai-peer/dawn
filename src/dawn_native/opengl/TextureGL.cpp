@@ -124,9 +124,29 @@ namespace dawn_native { namespace opengl {
         mTarget = TargetForDimensionAndArrayLayers(GetDimension(), GetArrayLayers());
     }
 
+    // With this constructor, the lifetime of the resource is externally managed
+    Texture::Texture(Device* device,
+                     const TextureDescriptor* descriptor,
+                     GLuint handle,
+                     TextureState state)
+        : TextureBase(device, descriptor), mHandle(handle) {
+        mState = state;
+        mTarget = TargetForDimensionAndArrayLayers(GetDimension(), GetArrayLayers());
+    }
+
     Texture::~Texture() {
         // TODO(kainino@chromium.org): delete texture (but only when not using the native texture
         // constructor?)
+        if (mState != TextureState::OwnedExternal) {
+            DestroyImpl();
+        }
+    }
+
+    void Texture::DestroyImpl() {
+        if (mHandle != 0) {
+            glDeleteTextures(1, &mHandle);
+            mHandle = 0;
+        }
     }
 
     GLuint Texture::GetHandle() const {
