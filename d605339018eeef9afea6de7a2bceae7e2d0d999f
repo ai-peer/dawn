@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc24fea6_311c492e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-22T18:30:28Z",
+      "side": 1,
+      "message": "FYI - the WebGPU is lacking on restrictions, so I\u0027ve restricted to the lowest common feature set. Let me know if anyone has something different in mind.",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
