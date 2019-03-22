@@ -214,6 +214,24 @@
     },
     {
       "key": {
+        "uuid": "fe34724e_2cb9b462",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "How about the following?\n\n    class ComboInputStateDescriptor: public dawn::InputStateDescriptor {\n      public:\n        std::array\u003cdawn::VertexAttributeDescriptor, kMaxVertexAttributs\u003e cAttributes;\n        std::array\u003cdawn::VertexInputDescriptor, kMaxVertexInputs\u003e cInputs;\n    }\n\n    class ComboRenderPipelineDescriptor : public dawn::RenderPipelineDescriptor {\n      public:\n        ComboRenderPipelineDescriptor(const dawn::Device\u0026 device);\n\n        dawn::PipelineStageDescriptor cVertexStage;\n        dawn::PipelineStageDescriptor cFragmentStage;\n\n        ComboInputStateDescriptor cInputState;\n        std::array\u003cdawn::ColorStateDescriptor*, kMaxColorAttachments\u003e cColorStates;\n        dawn::DepthStencilStateDescriptor cDepthStencilState;\n\n      private:\n        dawn::ColorStateDescriptor mColorStates[kMaxColorAttachments];\n    };\n\nIt seems it would allow doing\n\n    desc.cInputState.cAttributes[0].inputSlot \u003d 0;\n\nI\u0027m asking for this change because it means that code can be written in such a way that it sets parts of the tree of variables of ComboRenderPipelineDescriptor and doesn\u0027t have to allocate side structure, which looks closer to what we\u0027d be doing in Javascript.",
+      "parentUuid": "22f2466c_0812970f",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1011a0b_4877b20a",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 4
@@ -331,6 +349,24 @@
     },
     {
       "key": {
+        "uuid": "891b4f9b_7ab13e76",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "I\u0027m just suggesting changing the name of the error but I know realize this suggestion didn\u0027t make much sense.",
+      "parentUuid": "92dd705f_ed9189ed",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec71c324_dfff869e",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -360,6 +396,24 @@
       "side": 1,
       "message": "Same reason as above.",
       "parentUuid": "ec71c324_dfff869e",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75e200f7_74ec8a2c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "3d04eddd_cc220cba",
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -401,6 +455,30 @@
       "side": 1,
       "message": "We need to set their values, they are not constant.",
       "parentUuid": "14ea919e_a22e82b8",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "166d95e2_27f44b11",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "If you need to pass a variable to be modified it should be passed by pointer. Basically the only valid things are:\n\n - const T*\n - T*\n - const T\u0026\n\nAnd T\u0026 without const should be used very rarely.\n\nSo in this case the function signature should become \n\n        MaybeError ValidateInputStateDescriptor(\n            const InputStateDescriptor* descriptor,\n            std::bitset\u003ckMaxVertexInputs\u003e* inputsSetMask) // \u003c-- notice the * here.",
+      "parentUuid": "4a2a24fd_b3202ee0",
       "range": {
         "startLine": 79,
         "startChar": 0,
@@ -577,6 +655,30 @@
     },
     {
       "key": {
+        "uuid": "9901dafc_b6d8540a",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "Thanks for the pointer, I didn\u0027t realize this was moved from InputStateGL to here.",
+      "parentUuid": "ec11e05c_c275d252",
+      "range": {
+        "startLine": 66,
+        "startChar": 42,
+        "endLine": 66,
+        "endChar": 65
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60aff73f_ff0d2292",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 4
@@ -612,6 +714,24 @@
     },
     {
       "key": {
+        "uuid": "79b118a5_6c81e625",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "I don\u0027t see it used anywhere except inside RenderPipeline, so it should be private.",
+      "parentUuid": "cef8dbaf_54823ff8",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "53dc994f_4f4e27b4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
         "patchSetId": 4
@@ -641,6 +761,24 @@
       "side": 1,
       "message": "CommandBuffer also used some const variables included in PerStage.h and other files, which is included in RenderPipeline.h (and InputState.h in previous code). \n\nSo, adding RenderPipeline below is not enough. We need to add a few other header files. However, if you have solid reason to add both RenderPipeline object below and those header files in order to replace the single line of adding RenderPipeline.h, I will do that.",
       "parentUuid": "53dc994f_4f4e27b4",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6332e3e6_ac40dc3e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "In general we try to minimize the number of headers included in headers so as to minimize compile time. It is generally fine to add more includes if they are \"smaller\", in this case I think the header only needs Constants.h",
+      "parentUuid": "ff4c9e60_aa9f3280",
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -769,6 +907,24 @@
     },
     {
       "key": {
+        "uuid": "8900d226_727edc95",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "I think you forgot to address this, the suggestion was to rename to MakeVertexDesc to match the ObjectiveC naming convention.",
+      "parentUuid": "6a502203_fac8d948",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8875b4f_7002deed",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 4
@@ -798,6 +954,24 @@
       "side": 1,
       "message": "Do you mean add one line like [descriptorMTL.vertexDescriptor release] on line 290 (before we release descriptorMTL on line 291)? If I do this and run end2end tests, it reported that vertexDescriptor was over-released, the end2end tests can pass though.\n\nSo I don\u0027t change the code here.",
       "parentUuid": "a8875b4f_7002deed",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0c7309d_675647ab",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "Oh it\u0027s because you used autorelease in ComputeVertexDesc. Can we avoid autorelease and do the explicit release line 290? It\u0027s because Dawn doesn\u0027t have its own autorelease pool, so it is less clear what happens with autorelease.",
+      "parentUuid": "2aab61d8_94916b70",
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false

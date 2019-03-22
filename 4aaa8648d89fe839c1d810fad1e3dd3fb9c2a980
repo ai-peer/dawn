@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1102b049_4c15574f",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "The C version also needs nextInChain \u003d nullptr because there are no default values.",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dafffafc_7f5e4d98",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "References should be const, use a pointer here.",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 71
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1118f0d5_4f26a306",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "Instead of lazily creating the VAO, can we do it on pipeline creation and call the function CreateVAOForInputState or something like that?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 9
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ef7bc5f_60ea09fe",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "Again these should be pointers, since all references should be const.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fbb3f9c_d94b97a8",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "This isn\u0027t needed if [2] return a ComboInputStateDescriptor. Also we should avoid static variables even in tests, because they could run on multiple threads at the same time.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc72d7c6_8a5b7660",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8178db37_90f71403",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "This should probably still be \"const static\", const so that we\u0027re sure it isn\u0027t modified by tests, static because it is a variable that shouldn\u0027t be exported outside of this compilation unit.",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "632c276e_3666efaa",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-22T09:20:15Z",
+      "side": 1,
+      "message": "nit: this could take a const dawn::ComboInputStateDescriptor\u0026 and copy it into descriptor.cInputState.",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
