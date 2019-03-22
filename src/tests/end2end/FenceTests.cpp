@@ -20,12 +20,12 @@
 
 class MockFenceOnCompletionCallback {
   public:
-    MOCK_METHOD2(Call, void(DawnFenceCompletionStatus status, DawnCallbackUserdata userdata));
+    MOCK_METHOD2(Call, void(dawnFenceCompletionStatus status, dawnCallbackUserdata userdata));
 };
 
 static std::unique_ptr<MockFenceOnCompletionCallback> mockFenceOnCompletionCallback;
-static void ToMockFenceOnCompletionCallback(DawnFenceCompletionStatus status,
-                                            DawnCallbackUserdata userdata) {
+static void ToMockFenceOnCompletionCallback(dawnFenceCompletionStatus status,
+                                            dawnCallbackUserdata userdata) {
     mockFenceOnCompletionCallback->Call(status, userdata);
 }
 class FenceTests : public DawnTest {
@@ -33,10 +33,10 @@ class FenceTests : public DawnTest {
     struct CallbackInfo {
         FenceTests* test;
         uint64_t value;
-        DawnFenceCompletionStatus status;
+        dawnFenceCompletionStatus status;
         int32_t callIndex = -1;  // If this is -1, the callback was not called
 
-        void Update(DawnFenceCompletionStatus status) {
+        void Update(dawnFenceCompletionStatus status) {
             this->callIndex = test->mCallIndex++;
             this->status = status;
         }
@@ -69,7 +69,7 @@ class FenceTests : public DawnTest {
 TEST_P(FenceTests, SimpleSignal) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 1u;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     // Completed value starts at initial value
     EXPECT_EQ(fence.GetCompletedValue(), 1u);
@@ -85,14 +85,14 @@ TEST_P(FenceTests, SimpleSignal) {
 TEST_P(FenceTests, OnCompletionOrdering) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 0u;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     queue.Signal(fence, 4);
 
-    DawnCallbackUserdata userdata0 = 1282;
-    DawnCallbackUserdata userdata1 = 4382;
-    DawnCallbackUserdata userdata2 = 1211;
-    DawnCallbackUserdata userdata3 = 1882;
+    dawnCallbackUserdata userdata0 = 1282;
+    dawnCallbackUserdata userdata1 = 4382;
+    dawnCallbackUserdata userdata2 = 1211;
+    dawnCallbackUserdata userdata3 = 1882;
 
     {
         testing::InSequence s;
@@ -126,12 +126,12 @@ TEST_P(FenceTests, OnCompletionOrdering) {
 TEST_P(FenceTests, MultipleSignalOnCompletion) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 0u;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     queue.Signal(fence, 2);
     queue.Signal(fence, 4);
 
-    DawnCallbackUserdata userdata = 1234;
+    dawnCallbackUserdata userdata = 1234;
     EXPECT_CALL(*mockFenceOnCompletionCallback,
                 Call(DAWN_FENCE_COMPLETION_STATUS_SUCCESS, userdata))
         .Times(1);
@@ -144,14 +144,14 @@ TEST_P(FenceTests, MultipleSignalOnCompletion) {
 TEST_P(FenceTests, OnCompletionMultipleCallbacks) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 0u;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     queue.Signal(fence, 4);
 
-    DawnCallbackUserdata userdata0 = 2341;
-    DawnCallbackUserdata userdata1 = 4598;
-    DawnCallbackUserdata userdata2 = 5690;
-    DawnCallbackUserdata userdata3 = 2783;
+    dawnCallbackUserdata userdata0 = 2341;
+    dawnCallbackUserdata userdata1 = 4598;
+    dawnCallbackUserdata userdata2 = 5690;
+    dawnCallbackUserdata userdata3 = 2783;
 
     EXPECT_CALL(*mockFenceOnCompletionCallback,
                 Call(DAWN_FENCE_COMPLETION_STATUS_SUCCESS, userdata0))
@@ -182,20 +182,20 @@ TEST_P(FenceTests, OnCompletionMultipleCallbacks) {
 TEST_P(FenceTests, DISABLED_DestroyBeforeOnCompletionEnd) {
     dawn::FenceDescriptor descriptor;
     descriptor.initialValue = 0u;
-    dawn::Fence fence = queue.CreateFence(&descriptor);
+    dawn::Fence fence = device.CreateFence(&descriptor);
 
     // The fence in this block will be deleted when it goes out of scope
     {
         dawn::FenceDescriptor descriptor;
         descriptor.initialValue = 0u;
-        dawn::Fence testFence = queue.CreateFence(&descriptor);
+        dawn::Fence testFence = device.CreateFence(&descriptor);
 
         queue.Signal(testFence, 4);
 
-        DawnCallbackUserdata userdata0 = 1341;
-        DawnCallbackUserdata userdata1 = 1598;
-        DawnCallbackUserdata userdata2 = 1690;
-        DawnCallbackUserdata userdata3 = 1783;
+        dawnCallbackUserdata userdata0 = 1341;
+        dawnCallbackUserdata userdata1 = 1598;
+        dawnCallbackUserdata userdata2 = 1690;
+        dawnCallbackUserdata userdata3 = 1783;
 
         EXPECT_CALL(*mockFenceOnCompletionCallback,
                     Call(DAWN_FENCE_COMPLETION_STATUS_UNKNOWN, userdata0))
@@ -224,4 +224,4 @@ TEST_P(FenceTests, DISABLED_DestroyBeforeOnCompletionEnd) {
     WaitForCompletedValue(fence, 1);
 }
 
-DAWN_INSTANTIATE_TEST(FenceTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(FenceTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend)

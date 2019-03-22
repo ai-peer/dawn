@@ -76,14 +76,14 @@ void ComputeCopyStorageBufferTests::BasicTest(const char* shader) {
 
     dawn::CommandBuffer commands;
     {
-        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-        dawn::ComputePassEncoder pass = encoder.BeginComputePass();
+        dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
+        dawn::ComputePassEncoder pass = builder.BeginComputePass();
         pass.SetPipeline(pipeline);
-        pass.SetBindGroup(0, bindGroup, 0, nullptr);
+        pass.SetBindGroup(0, bindGroup);
         pass.Dispatch(kInstances, 1, 1);
         pass.EndPass();
 
-        commands = encoder.Finish();
+        commands = builder.GetResult();
     }
 
     queue.Submit(1, &commands);
@@ -191,4 +191,4 @@ DAWN_INSTANTIATE_TEST(ComputeCopyStorageBufferTests,
                      D3D12Backend,
                      MetalBackend,
                      OpenGLBackend,
-                     VulkanBackend);
+                     VulkanBackend)

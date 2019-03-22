@@ -30,14 +30,18 @@
 namespace dawn_native { namespace metal {
 
     class MapRequestTracker;
+    class ResourceUploader;
 
     class Device : public DeviceBase {
       public:
         Device(AdapterBase* adapter, id<MTLDevice> mtlDevice);
         ~Device();
 
-        CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
+        CommandBufferBase* CreateCommandBuffer(CommandBufferBuilder* builder) override;
         InputStateBase* CreateInputState(InputStateBuilder* builder) override;
+        RenderPassDescriptorBase* CreateRenderPassDescriptor(
+            RenderPassDescriptorBuilder* builder) override;
+        SwapChainBase* CreateSwapChain(SwapChainBuilder* builder) override;
 
         Serial GetCompletedCommandSerial() const final override;
         Serial GetLastSubmittedCommandSerial() const final override;
@@ -50,10 +54,7 @@ namespace dawn_native { namespace metal {
         void SubmitPendingCommandBuffer();
 
         MapRequestTracker* GetMapTracker() const;
-
-        TextureBase* CreateTextureWrappingIOSurface(const TextureDescriptor* descriptor,
-                                                    IOSurfaceRef ioSurface,
-                                                    uint32_t plane);
+        ResourceUploader* GetResourceUploader() const;
 
         ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(size_t size) override;
         MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
@@ -78,8 +79,6 @@ namespace dawn_native { namespace metal {
         ResultOrError<SamplerBase*> CreateSamplerImpl(const SamplerDescriptor* descriptor) override;
         ResultOrError<ShaderModuleBase*> CreateShaderModuleImpl(
             const ShaderModuleDescriptor* descriptor) override;
-        ResultOrError<SwapChainBase*> CreateSwapChainImpl(
-            const SwapChainDescriptor* descriptor) override;
         ResultOrError<TextureBase*> CreateTextureImpl(const TextureDescriptor* descriptor) override;
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
@@ -90,6 +89,7 @@ namespace dawn_native { namespace metal {
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;
         std::unique_ptr<MapRequestTracker> mMapTracker;
+        std::unique_ptr<ResourceUploader> mResourceUploader;
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;

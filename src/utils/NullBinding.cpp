@@ -23,25 +23,40 @@ namespace utils {
 
     class NullBinding : public BackendBinding {
       public:
-        NullBinding(GLFWwindow* window, DawnDevice device) : BackendBinding(window, device) {
+        void SetupGLFWWindowHints() override {
         }
+        dawnDevice CreateDevice() override {
+            // Make an instance and find the null adapter
+            mInstance = std::make_unique<dawn_native::Instance>();
+            mInstance->DiscoverDefaultAdapters();
 
+            std::vector<dawn_native::Adapter> adapters = mInstance->GetAdapters();
+            for (dawn_native::Adapter adapter : adapters) {
+                if (adapter.GetBackendType() == dawn_native::BackendType::Null) {
+                    return adapter.CreateDevice();
+                }
+            }
+
+            UNREACHABLE();
+            return {};
+        }
         uint64_t GetSwapChainImplementation() override {
             if (mSwapchainImpl.userData == nullptr) {
                 mSwapchainImpl = dawn_native::null::CreateNativeSwapChainImpl();
             }
             return reinterpret_cast<uint64_t>(&mSwapchainImpl);
         }
-        DawnTextureFormat GetPreferredSwapChainTextureFormat() override {
+        dawnTextureFormat GetPreferredSwapChainTextureFormat() override {
             return DAWN_TEXTURE_FORMAT_R8_G8_B8_A8_UNORM;
         }
 
       private:
-        DawnSwapChainImplementation mSwapchainImpl = {};
+        std::unique_ptr<dawn_native::Instance> mInstance;
+        dawnSwapChainImplementation mSwapchainImpl = {};
     };
 
-    BackendBinding* CreateNullBinding(GLFWwindow* window, DawnDevice device) {
-        return new NullBinding(window, device);
+    BackendBinding* CreateNullBinding() {
+        return new NullBinding;
     }
 
 }  // namespace utils

@@ -25,10 +25,10 @@ namespace dawn_native { namespace opengl {
     namespace {
 
         GLenum TargetForDimensionAndArrayLayers(dawn::TextureDimension dimension,
-                                                uint32_t arrayLayerCount) {
+                                                uint32_t arrayLayer) {
             switch (dimension) {
                 case dawn::TextureDimension::e2D:
-                    return (arrayLayerCount > 1) ? GL_TEXTURE_2D_ARRAY : GL_TEXTURE_2D;
+                    return (arrayLayer > 1) ? GL_TEXTURE_2D_ARRAY : GL_TEXTURE_2D;
                 default:
                     UNREACHABLE();
                     return GL_TEXTURE_2D;
@@ -89,6 +89,12 @@ namespace dawn_native { namespace opengl {
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
         : Texture(device, descriptor, GenTexture()) {
+    }
+
+    Texture::Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle)
+        : TextureBase(device, descriptor), mHandle(handle) {
+        mTarget = TargetForDimensionAndArrayLayers(GetDimension(), GetArrayLayers());
+
         uint32_t width = GetSize().width;
         uint32_t height = GetSize().height;
         uint32_t levels = GetNumMipLevels();
@@ -96,7 +102,7 @@ namespace dawn_native { namespace opengl {
 
         auto formatInfo = GetGLFormatInfo(GetFormat());
 
-        glBindTexture(mTarget, mHandle);
+        glBindTexture(mTarget, handle);
 
         // glTextureView() requires the value of GL_TEXTURE_IMMUTABLE_FORMAT for origtexture to be
         // GL_TRUE, so the storage of the texture must be allocated with glTexStorage*D.
@@ -117,11 +123,6 @@ namespace dawn_native { namespace opengl {
         // The texture is not complete if it uses mipmapping and not all levels up to
         // MAX_LEVEL have been defined.
         glTexParameteri(mTarget, GL_TEXTURE_MAX_LEVEL, levels - 1);
-    }
-
-    Texture::Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle)
-        : TextureBase(device, descriptor), mHandle(handle) {
-        mTarget = TargetForDimensionAndArrayLayers(GetDimension(), GetArrayLayers());
     }
 
     Texture::~Texture() {
@@ -153,8 +154,8 @@ namespace dawn_native { namespace opengl {
         const Texture* textureGL = ToBackend(texture);
         TextureFormatInfo textureViewFormat = GetGLFormatInfo(descriptor->format);
         glTextureView(mHandle, mTarget, textureGL->GetHandle(), textureViewFormat.internalFormat,
-                      descriptor->baseMipLevel, descriptor->mipLevelCount,
-                      descriptor->baseArrayLayer, descriptor->arrayLayerCount);
+                      descriptor->baseMipLevel, descriptor->levelCount, descriptor->baseArrayLayer,
+                      descriptor->layerCount);
     }
 
     TextureView::~TextureView() {

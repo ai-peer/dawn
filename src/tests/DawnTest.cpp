@@ -19,17 +19,13 @@
 #include "common/Math.h"
 #include "common/Platform.h"
 #include "dawn_native/DawnNative.h"
-#include "dawn_wire/WireClient.h"
-#include "dawn_wire/WireServer.h"
+#include "dawn_wire/Wire.h"
 #include "utils/BackendBinding.h"
 #include "utils/DawnHelpers.h"
 #include "utils/SystemUtils.h"
 #include "utils/TerribleCommandBuffer.h"
 
-#include <algorithm>
-#include <iomanip>
 #include <iostream>
-#include <sstream>
 #include <unordered_map>
 #include "GLFW/glfw3.h"
 
@@ -52,6 +48,38 @@ namespace {
         }
     }
 
+    // Windows don't usually like to be bound to one API than the other, for example switching
+    // from Vulkan to OpenGL causes crashes on some drivers. Because of this, we lazily created
+    // a window for each backing API.
+    std::unordered_map<dawn_native::BackendType, GLFWwindow*> windows;
+
+    // Creates a GLFW window set up for use with a given backend.
+    GLFWwindow* GetWindowForBackend(utils::BackendBinding* binding, dawn_native::BackendType type) {
+        GLFWwindow** window = &windows[type];
+
+        if (*window != nullptr) {
+            return *window;
+        }
+
+        if (!glfwInit()) {
+            return nullptr;
+        }
+
+        glfwDefaultWindowHints();
+        binding->SetupGLFWWindowHints();
+
+        std::string windowName = "Dawn " + ParamName(type) + " test window";
+        *window = glfwCreateWindow(400, 400, windowName.c_str(), nullptr, nullptr);
+
+        return *window;
+    }
+
+    // End2end tests should test valid commands produce the expected result so no error
+    // should happen. Failure cases should be tested in the validation tests.
+    void DeviceErrorCauseTestFailure(const char* message, dawnCallbackUserdata) {
+        FAIL() << "Device level failure: " << message;
+    }
+
     struct MapReadUserdata {
         DawnTest* test;
         size_t slot;
@@ -64,102 +92,7 @@ namespace {
     constexpr uint32_t kVendorID_Nvidia = 0x10DE;
     constexpr uint32_t kVendorID_Qualcomm = 0x5143;
 
-    DawnTestEnvironment* gTestEnv = nullptr;
-
 }  // namespace
-
-// Implementation of DawnTestEnvironment
-
-void InitDawnEnd2EndTestEnvironment(int argc, char** argv) {
-    gTestEnv = new DawnTestEnvironment(argc, argv);
-    testing::AddGlobalTestEnvironment(gTestEnv);
-}
-
-DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
-    for (int i = 1; i < argc; ++i) {
-        if (strcmp("-w", argv[i]) == 0 || strcmp("--use-wire", argv[i]) == 0) {
-            mUseWire = true;
-            continue;
-        }
-
-        if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
-            std::cout << "\n\nUsage: " << argv[0] << " [GTEST_FLAGS...] [-w] \n";
-            std::cout << "  -w, --use-wire: Run the tests through the wire (defaults to no wire)";
-            std::cout << std::endl;
-            continue;
-        }
-    }
-}
-
-void DawnTestEnvironment::SetUp() {
-    ASSERT_TRUE(glfwInit());
-
-    mInstance = std::make_unique<dawn_native::Instance>();
-
-    static constexpr dawn_native::BackendType kAllBackends[] = {
-        D3D12Backend,
-        MetalBackend,
-        OpenGLBackend,
-        VulkanBackend,
-    };
-
-    // Create a test window for each backend and discover an adapter using it.
-    for (dawn_native::BackendType backend : kAllBackends) {
-        if (detail::IsBackendAvailable(backend)) {
-            CreateBackendWindow(backend);
-            utils::DiscoverAdapter(mInstance.get(), mWindows[backend], backend);
-        }
-    }
-
-    std::cout << "Testing configuration\n";
-    std::cout << "---------------------\n";
-    std::cout << "UseWire: " << (mUseWire ? "true" : "false") << "\n";
-    std::cout << "\n";
-
-    // Preparing for outputting hex numbers
-    std::cout << std::showbase << std::hex << std::setfill('0') << std::setw(4);
-
-    std::cout << "System adapters: \n";
-    for (const dawn_native::Adapter& adapter : mInstance->GetAdapters()) {
-        const dawn_native::PCIInfo& pci = adapter.GetPCIInfo();
-
-        std::ostringstream vendorId;
-        std::ostringstream deviceId;
-        vendorId << std::setfill('0') << std::uppercase << std::internal << std::hex << std::setw(4)
-                 << pci.vendorId;
-        deviceId << std::setfill('0') << std::uppercase << std::internal << std::hex << std::setw(4)
-                 << pci.deviceId;
-
-        std::cout << " - \"" << pci.name << "\" on " << ParamName(adapter.GetBackendType()) << "\n";
-        std::cout << "   vendorId: 0x" << vendorId.str() << ", deviceId: 0x" << deviceId.str()
-                  << "\n";
-    }
-    std::cout << std::endl;
-}
-
-bool DawnTestEnvironment::UseWire() const {
-    return mUseWire;
-}
-
-dawn_native::Instance* DawnTestEnvironment::GetInstance() const {
-    return mInstance.get();
-}
-
-GLFWwindow* DawnTestEnvironment::GetWindowForBackend(dawn_native::BackendType type) const {
-    return mWindows.at(type);
-}
-
-void DawnTestEnvironment::CreateBackendWindow(dawn_native::BackendType type) {
-    glfwDefaultWindowHints();
-    utils::SetupGLFWWindowHintsForBackend(type);
-
-    std::string windowName = "Dawn " + ParamName(type) + " test window";
-    GLFWwindow* window = glfwCreateWindow(400, 400, windowName.c_str(), nullptr, nullptr);
-
-    mWindows[type] = window;
-}
-
-// Implementation of DawnTest
 
 DawnTest::DawnTest() = default;
 
@@ -237,54 +170,35 @@ bool DawnTest::IsMacOS() const {
 #endif
 }
 
+bool gTestUsesWire = false;
+
 void DawnTest::SetUp() {
-    // Get an adapter for the backend to use, and create the device.
-    dawn_native::Adapter backendAdapter;
-    {
-        dawn_native::Instance* instance = gTestEnv->GetInstance();
-        std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
-
-        for (const dawn_native::Adapter& adapter : adapters) {
-            if (adapter.GetBackendType() == GetParam()) {
-                backendAdapter = adapter;
-                // On Metal, select the last adapter so that the discrete GPU is tested on
-                // multi-GPU systems.
-                // TODO(cwallez@chromium.org): Replace this with command line arguments requesting
-                // a specific device / vendor ID once the macOS 10.13 SDK is rolled and correct
-                // PCI info collection is implemented on Metal.
-                if (GetParam() != MetalBackend) {
-                    break;
-                }
-            }
-        }
-
-        ASSERT(backendAdapter);
-    }
-
-    mPCIInfo = backendAdapter.GetPCIInfo();
-    DawnDevice backendDevice = backendAdapter.CreateDevice();
-    DawnProcTable backendProcs = dawn_native::GetProcs();
-
-    // Get the test window and create the device using it (esp. for OpenGL)
-    GLFWwindow* testWindow = gTestEnv->GetWindowForBackend(GetParam());
-    DAWN_ASSERT(testWindow != nullptr);
-    mBinding.reset(utils::CreateBinding(GetParam(), testWindow, backendDevice));
+    mBinding.reset(utils::CreateBinding(GetParam()));
     DAWN_ASSERT(mBinding != nullptr);
 
-    // Choose whether to use the backend procs and devices directly, or set up the wire.
-    DawnDevice cDevice = nullptr;
-    DawnProcTable procs;
+    GLFWwindow* testWindow = GetWindowForBackend(mBinding.get(), GetParam());
+    DAWN_ASSERT(testWindow != nullptr);
 
-    if (gTestEnv->UseWire()) {
+    mBinding->SetWindow(testWindow);
+
+    dawnDevice backendDevice = mBinding->CreateDevice();
+    dawnProcTable backendProcs = dawn_native::GetProcs();
+
+    // Choose whether to use the backend procs and devices directly, or set up the wire.
+    dawnDevice cDevice = nullptr;
+    dawnProcTable procs;
+
+    if (gTestUsesWire) {
         mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
         mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
 
-        mWireServer.reset(new dawn_wire::WireServer(backendDevice, backendProcs, mS2cBuf.get()));
+        mWireServer.reset(
+            dawn_wire::NewServerCommandHandler(backendDevice, backendProcs, mS2cBuf.get()));
         mC2sBuf->SetHandler(mWireServer.get());
 
-        mWireClient.reset(new dawn_wire::WireClient(mC2sBuf.get()));
-        DawnDevice clientDevice = mWireClient->GetDevice();
-        DawnProcTable clientProcs = mWireClient->GetProcs();
+        dawnDevice clientDevice;
+        dawnProcTable clientProcs;
+        mWireClient.reset(dawn_wire::NewClientDevice(&clientProcs, &clientDevice, mC2sBuf.get()));
         mS2cBuf->SetHandler(mWireClient.get());
 
         procs = clientProcs;
@@ -302,15 +216,17 @@ void DawnTest::SetUp() {
 
     // The swapchain isn't used by tests but is useful when debugging with graphics debuggers that
     // capture at frame boundaries.
-    dawn::SwapChainDescriptor swapChainDesc;
-    swapChainDesc.implementation = mBinding->GetSwapChainImplementation();
-    swapchain = device.CreateSwapChain(&swapChainDesc);
+    swapchain = device.CreateSwapChainBuilder()
+                    .SetImplementation(mBinding->GetSwapChainImplementation())
+                    .GetResult();
     swapchain.Configure(
         static_cast<dawn::TextureFormat>(mBinding->GetPreferredSwapChainTextureFormat()),
         dawn::TextureUsageBit::OutputAttachment, 400, 400);
 
-    device.SetErrorCallback(OnDeviceError,
-                            static_cast<DawnCallbackUserdata>(reinterpret_cast<uintptr_t>(this)));
+    // The end2end tests should never cause validation errors. These should be tested in unittests.
+    device.SetErrorCallback(DeviceErrorCauseTestFailure, 0);
+
+    mPCIInfo = dawn_native::GetPCIInfo(backendDevice);
 }
 
 void DawnTest::TearDown() {
@@ -324,24 +240,6 @@ void DawnTest::TearDown() {
     }
 }
 
-void DawnTest::StartExpectDeviceError() {
-    mExpectError = true;
-    mError = false;
-}
-bool DawnTest::EndExpectDeviceError() {
-    mExpectError = false;
-    return mError;
-}
-
-// static
-void DawnTest::OnDeviceError(const char* message, DawnCallbackUserdata userdata) {
-    DawnTest* self = reinterpret_cast<DawnTest*>(static_cast<uintptr_t>(userdata));
-
-    ASSERT_TRUE(self->mExpectError) << "Got unexpected device error: " << message;
-    ASSERT_FALSE(self->mError) << "Got two errors in expect block";
-    self->mError = true;
-}
-
 std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
                                                    int line,
                                                    const dawn::Buffer& buffer,
@@ -352,10 +250,11 @@ std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
 
     // We need to enqueue the copy immediately because by the time we resolve the expectation,
     // the buffer might have been modified.
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-    encoder.CopyBufferToBuffer(buffer, offset, readback.buffer, readback.offset, size);
+    dawn::CommandBuffer commands =
+        device.CreateCommandBufferBuilder()
+            .CopyBufferToBuffer(buffer, offset, readback.buffer, readback.offset, size)
+            .GetResult();
 
-    dawn::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
     DeferredExpectation deferred;
@@ -396,11 +295,11 @@ std::ostringstream& DawnTest::AddTextureExpectation(const char* file,
     dawn::BufferCopyView bufferCopyView =
         utils::CreateBufferCopyView(readback.buffer, readback.offset, rowPitch, 0);
     dawn::Extent3D copySize = {width, height, 1};
+    dawn::CommandBuffer commands =
+        device.CreateCommandBufferBuilder()
+            .CopyTextureToBuffer(&textureCopyView, &bufferCopyView, &copySize)
+            .GetResult();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-    encoder.CopyTextureToBuffer(&textureCopyView, &bufferCopyView, &copySize);
-
-    dawn::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
     DeferredExpectation deferred;
@@ -432,11 +331,9 @@ void DawnTest::SwapBuffersForCapture() {
 }
 
 void DawnTest::FlushWire() {
-    if (gTestEnv->UseWire()) {
-        bool C2SFlushed = mC2sBuf->Flush();
-        bool S2CFlushed = mS2cBuf->Flush();
-        ASSERT(C2SFlushed);
-        ASSERT(S2CFlushed);
+    if (gTestUsesWire) {
+        ASSERT(mC2sBuf->Flush());
+        ASSERT(mS2cBuf->Flush());
     }
 }
 
@@ -470,8 +367,9 @@ void DawnTest::MapSlotsSynchronously() {
         auto userdata = new MapReadUserdata{this, i};
 
         auto& slot = mReadbackSlots[i];
-        slot.buffer.MapReadAsync(SlotMapReadCallback, static_cast<dawn::CallbackUserdata>(
-                                                          reinterpret_cast<uintptr_t>(userdata)));
+        slot.buffer.MapReadAsync(
+            0, slot.bufferSize, SlotMapReadCallback,
+            static_cast<dawn::CallbackUserdata>(reinterpret_cast<uintptr_t>(userdata)));
     }
 
     // Busy wait until all map operations are done.
@@ -481,10 +379,9 @@ void DawnTest::MapSlotsSynchronously() {
 }
 
 // static
-void DawnTest::SlotMapReadCallback(DawnBufferMapAsyncStatus status,
+void DawnTest::SlotMapReadCallback(dawnBufferMapAsyncStatus status,
                                    const void* data,
-                                   uint32_t,
-                                   DawnCallbackUserdata userdata_) {
+                                   dawnCallbackUserdata userdata_) {
     DAWN_ASSERT(status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS);
 
     auto userdata = reinterpret_cast<MapReadUserdata*>(static_cast<uintptr_t>(userdata_));

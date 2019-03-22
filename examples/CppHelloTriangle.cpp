@@ -54,10 +54,10 @@ void initTextures() {
     descriptor.size.width = 1024;
     descriptor.size.height = 1024;
     descriptor.size.depth = 1;
-    descriptor.arrayLayerCount = 1;
+    descriptor.arraySize = 1;
     descriptor.sampleCount = 1;
     descriptor.format = dawn::TextureFormat::R8G8B8A8Unorm;
-    descriptor.mipLevelCount = 1;
+    descriptor.levelCount = 1;
     descriptor.usage = dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Sampled;
     texture = device.CreateTexture(&descriptor);
 
@@ -74,11 +74,11 @@ void initTextures() {
     dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(stagingBuffer, 0, 0, 0);
     dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, 0, {0, 0, 0});
     dawn::Extent3D copySize = {1024, 1024, 1};
+    dawn::CommandBuffer copy =
+        device.CreateCommandBufferBuilder()
+            .CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize)
+            .GetResult();
 
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
-    encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
-
-    dawn::CommandBuffer copy = encoder.Finish();
     queue.Submit(1, &copy);
 }
 
@@ -111,19 +111,10 @@ void init() {
             fragColor = texture(sampler2D(myTexture, mySampler), gl_FragCoord.xy / vec2(640.0, 480.0));
         })");
 
-    dawn::VertexAttributeDescriptor attribute;
-    attribute.shaderLocation = 0;
-    attribute.inputSlot = 0;
-    attribute.offset = 0;
-    attribute.format = dawn::VertexFormat::FloatR32G32B32A32;
-
-    dawn::VertexInputDescriptor input;
-    input.inputSlot = 0;
-    input.stride = 4 * sizeof(float);
-    input.stepMode = dawn::InputStepMode::Vertex;
-
-    auto inputState =
-        device.CreateInputStateBuilder().SetAttribute(&attribute).SetInput(&input).GetResult();
+    auto inputState = device.CreateInputStateBuilder()
+        .SetAttribute(0, 0, dawn::VertexFormat::FloatR32G32B32A32, 0)
+        .SetInput(0, 4 * sizeof(float), dawn::InputStepMode::Vertex)
+        .GetResult();
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
@@ -140,9 +131,9 @@ void init() {
     descriptor.cVertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
     descriptor.inputState = inputState;
-    descriptor.depthStencilState = &descriptor.cDepthStencilState;
-    descriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
-    descriptor.cColorStates[0]->format = GetPreferredSwapChainTextureFormat();
+    descriptor.cAttachmentsState.hasDepthStencilAttachment = true;
+    descriptor.cDepthStencilAttachment.format = dawn::TextureFormat::D32FloatS8Uint;
+    descriptor.cColorAttachments[0]->format = GetPreferredSwapChainTextureFormat();
 
     pipeline = device.CreateRenderPipeline(&descriptor);
 
@@ -160,23 +151,23 @@ void frame() {
     s.b += 0.02f;
     if (s.b >= 1.0f) {s.b = 0.0f;}
 
-    dawn::Texture backbuffer = swapchain.GetNextTexture();
-    utils::ComboRenderPassDescriptor renderPass({backbuffer.CreateDefaultTextureView()},
-                                                depthStencilView);
+    dawn::Texture backbuffer;
+    dawn::RenderPassDescriptor renderPass;
+    GetNextRenderPassDescriptor(device, swapchain, depthStencilView, &backbuffer, &renderPass);
 
     static const uint32_t vertexBufferOffsets[1] = {0};
-    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    dawn::CommandBufferBuilder builder = device.CreateCommandBufferBuilder();
     {
-        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        dawn::RenderPassEncoder pass = builder.BeginRenderPass(renderPass);
         pass.SetPipeline(pipeline);
-        pass.SetBindGroup(0, bindGroup, 0, nullptr);
+        pass.SetBindGroup(0, bindGroup);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, vertexBufferOffsets);
         pass.SetIndexBuffer(indexBuffer, 0);
         pass.DrawIndexed(3, 1, 0, 0, 0);
         pass.EndPass();
     }
 
-    dawn::CommandBuffer commands = encoder.Finish();
+    dawn::CommandBuffer commands = builder.GetResult();
     queue.Submit(1, &commands);
     swapchain.Present(backbuffer);
     DoFlush();
