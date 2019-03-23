@@ -16,6 +16,58 @@
       "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df824a61_5c059e80",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-23T05:15:54Z",
+      "side": 1,
+      "message": "Thank you for discovering and implementing these restrictions! I think this is exactly what we want.",
+      "parentUuid": "dc24fea6_311c492e",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50aa9ab6_62ae6aa2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-23T05:15:54Z",
+      "side": 1,
+      "message": "Needs encoders.EnsureBlit(commandBuffer); beforehand. Can you also try to make a test which catches this?",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dcb22b2_1de3bd46",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-23T05:15:54Z",
+      "side": 1,
+      "message": "nit: Missing punctuation",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
