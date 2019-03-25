@@ -106,6 +106,15 @@ namespace dawn_native { namespace opengl {
             }
         }
 
+        GLint GetStencilMaskFromStencilFormat(dawn::TextureFormat depthStencilFormat) {
+            switch (depthStencilFormat) {
+            case dawn::TextureFormat::D32FloatS8Uint:
+                return 0xFF;
+            default:
+                UNREACHABLE();
+            }
+        }
+
         // Push constants are implemented using OpenGL uniforms, however they aren't part of the
         // global OpenGL state but are part of the program state instead. This means that we have to
         // reapply push constants on pipeline change.
@@ -314,6 +323,67 @@ namespace dawn_native { namespace opengl {
                         break;
                 }
             }
+        }
+
+        void ResolveMultisampledRenderTargets(const BeginRenderPassCmd* renderPass) {
+            ASSERT(renderPass);
+
+            GLuint fbos[2] = {};
+            constexpr uint32_t kIndexForRead = 0;
+            constexpr uint32_t kIndexForWrite = 1;
+
+            for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
+                if (renderPass->colorAttachments[i].resolveTarget.Get() != nullptr) {
+                    if (fbos[kIndexForRead] == 0) {
+                        ASSERT(fbos[kIndexForWrite] == 0);
+                        glGenFramebuffers(2, fbos);
+                    }
+
+                    const TextureBase* colorTexture =
+                        renderPass->colorAttachments[i].view->GetTexture();
+                    ASSERT(colorTexture->IsMultisampledTexture());
+
+                    GLuint colorHandle = ToBackend(colorTexture)->GetHandle();
+                    ASSERT(renderPass->colorAttachments[i].view->GetBaseMipLevel() == 0);
+                    GLuint colorAttachmentArrayLayer =
+                        renderPass->colorAttachments[i].view->GetBaseArrayLayer();
+                    glBindFramebuffer(GL_FRAMEBUFFER, fbos[kIndexForRead]);
+                    if (colorTexture->GetArrayLayers() > 1) {
+                        glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, colorHandle,
+                                                  0, colorAttachmentArrayLayer);
+                    } else {
+                        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                               ToBackend(colorTexture)->GetGLTarget(), colorHandle,
+                                               0);
+                    }
+
+                    const TextureBase* resolveTexture =
+                        renderPass->colorAttachments[i].resolveTarget->GetTexture();
+                    GLuint resolveTextureHandle = ToBackend(resolveTexture)->GetHandle();
+                    glBindFramebuffer(GL_FRAMEBUFFER, fbos[kIndexForWrite]);
+                    if (resolveTexture->GetArrayLayers() == 1 &&
+                        resolveTexture->GetNumMipLevels() == 1) {
+                        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+                                               resolveTextureHandle, 0);
+                    } else {
+                        GLuint resolveTargetMipLevel =
+                            renderPass->colorAttachments[i].resolveTarget->GetBaseMipLevel();
+                        GLuint resolveTargetArrayLayer =
+                            renderPass->colorAttachments[i].resolveTarget->GetBaseArrayLayer();
+                        glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                                  resolveTextureHandle, resolveTargetMipLevel,
+                                                  resolveTargetArrayLayer);
+                    }
+
+                    glBindFramebuffer(GL_READ_FRAMEBUFFER, fbos[kIndexForRead]);
+                    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbos[kIndexForWrite]);
+                    glBlitFramebuffer(0, 0, renderPass->width, renderPass->height, 0, 0,
+                                      renderPass->width, renderPass->height, GL_COLOR_BUFFER_BIT,
+                                      GL_NEAREST);
+                }
+            }
+
+            glDeleteFramebuffers(2, fbos);
         }
     }  // namespace
 
@@ -525,8 +595,9 @@ namespace dawn_native { namespace opengl {
 
                 // Attach color buffers.
                 if (textureView->GetTexture()->GetArrayLayers() == 1) {
-                    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
-                                           GL_TEXTURE_2D, texture, textureView->GetBaseMipLevel());
+                    GLenum target = ToBackend(textureView->GetTexture())->GetGLTarget();
+                    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, target,
+                                           texture, textureView->GetBaseMipLevel());
                 } else {
                     glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
                                               texture, textureView->GetBaseMipLevel(),
@@ -564,8 +635,8 @@ namespace dawn_native { namespace opengl {
                     glAttachment = GL_STENCIL_ATTACHMENT;
                 }
 
-                glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, GL_TEXTURE_2D, texture,
-                                       0);
+                GLenum target = ToBackend(textureView->GetTexture())->GetGLTarget();
+                glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, target, texture, 0);
 
                 // TODO(kainino@chromium.org): the depth/stencil clears (later in
                 // this function) may be undefined for other texture formats.
@@ -594,6 +665,14 @@ namespace dawn_native { namespace opengl {
                                     (attachmentInfo.depthLoadOp == dawn::LoadOp::Clear);
                 bool doStencilClear = TextureFormatHasStencil(attachmentFormat) &&
                                       (attachmentInfo.stencilLoadOp == dawn::LoadOp::Clear);
+
+                if (doDepthClear) {
+                    glDepthMask(GL_TRUE);
+                }
+                if (doStencilClear) {
+                    glStencilMask(GetStencilMaskFromStencilFormat(attachmentFormat));
+                }
+
                 if (doDepthClear && doStencilClear) {
                     glClearBufferfi(GL_DEPTH_STENCIL, 0, attachmentInfo.clearDepth,
                                     attachmentInfo.clearStencil);
@@ -625,6 +704,11 @@ namespace dawn_native { namespace opengl {
             switch (type) {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
+
+                    if (renderPass->sampleCount > 1) {
+                        ResolveMultisampledRenderTargets(renderPass);
+                    }
+
                     glDeleteFramebuffers(1, &fbo);
                     return;
                 } break;
