@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "9da14bf0_eabd4ee8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T20:27:48Z",
+      "side": 1,
+      "message": "Yeah, I didn\u0027t find any case where Vulkan restricted something others didn\u0027t.",
+      "parentUuid": "e5fc6637_7952e6a2",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2df9e6af_3133cc3b",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 10
@@ -69,6 +87,24 @@
       "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0165a652_a799748f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T20:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df9e6af_3133cc3b",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -89,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "a6ab7fa0_4a611342",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T20:27:48Z",
+      "side": 1,
+      "message": "Yeah, good catch. I\u0027ve restricted this path to source-\u003eGetMipLevels() \u003d\u003d 1",
+      "parentUuid": "4fc27ce4_f0592588",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "50aa9ab6_62ae6aa2",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 10
@@ -100,6 +154,24 @@
       "writtenOn": "2019-03-23T05:15:54Z",
       "side": 1,
       "message": "Needs encoders.EnsureBlit(commandBuffer); beforehand. Can you also try to make a test which catches this?",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff6243d_9cc3d93d",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T20:27:48Z",
+      "side": 1,
+      "message": "Added the ensure, but are you okay with a TODO for the test for now? I don\u0027t have consistent access to a Mac at the moment, but will have one soon. I added a TODO near the bottom of CopyTests.cpp",
+      "parentUuid": "50aa9ab6_62ae6aa2",
       "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -129,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "4ef69ba3_8e294ea2",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T20:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f95236_8c11d579",
+      "range": {
+        "startLine": 338,
+        "startChar": 20,
+        "endLine": 339,
+        "endChar": 29
+      },
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2dcb22b2_1de3bd46",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 10
@@ -146,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "266467a3_06a58fb1",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T20:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dcb22b2_1de3bd46",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bd65503_cb361365",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 10
@@ -157,6 +271,24 @@
       "writtenOn": "2019-03-25T06:43:08Z",
       "side": 1,
       "message": "Mmmh why does this fail? It seems the copy fits in both textures.",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ece45759_8352484b",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T20:27:48Z",
+      "side": 1,
+      "message": "I was just copying from the other copy APIs here - I reused ValidateCopySizeFitsInTexture, which will error when copySize.depth !\u003d 1. This restriction seems to just be regarding lack of 3D texture support, so maybe changing to error when copySize.depth \u003e 1 would be correct.",
+      "parentUuid": "8bd65503_cb361365",
       "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
