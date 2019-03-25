@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "50539935_4de267a1",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-03-25T07:33:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "529015f7_048c85d6",
+      "range": {
+        "startLine": 643,
+        "startChar": 23,
+        "endLine": 643,
+        "endChar": 32
+      },
+      "revId": "56f1c9372199c0212c99bb66c161251d6d3cc6c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "650a6fd6_a4d6e7b6",
         "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "56f1c9372199c0212c99bb66c161251d6d3cc6c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "479a9edc_dfbd72ef",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-03-25T07:33:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "650a6fd6_a4d6e7b6",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 90
+      },
+      "revId": "56f1c9372199c0212c99bb66c161251d6d3cc6c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
