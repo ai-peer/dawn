@@ -292,6 +292,24 @@
       "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f92a0052_6c1a4fef",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T20:37:32Z",
+      "side": 1,
+      "message": "Yeah this and others should be \u003e 0 I think. Empty copies should be ok. It could be in a different CL to avoid blocking this.",
+      "parentUuid": "ece45759_8352484b",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
