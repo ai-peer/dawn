@@ -37,6 +37,58 @@
     },
     {
       "key": {
+        "uuid": "e5fc6637_7952e6a2",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T06:43:08Z",
+      "side": 1,
+      "message": "+1, restrictions look great. There is no mention of Vulkan but I assume you looked at it as well?",
+      "parentUuid": "df824a61_5c059e80",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df9e6af_3133cc3b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T06:43:08Z",
+      "side": 1,
+      "message": "Should this check for srcSize \u003d\u003d dstSize \u003d\u003d copySize? It would take into account support for 3d texture copies.",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fc27ce4_f0592588",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T06:43:08Z",
+      "side": 1,
+      "message": "Won\u0027t this also copy other mip levels contrary to Dawn\u0027s semantics?",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "50aa9ab6_62ae6aa2",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 10
@@ -54,6 +106,29 @@
     },
     {
       "key": {
+        "uuid": "76f95236_8c11d579",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T06:43:08Z",
+      "side": 1,
+      "message": "u-nit: avoid usage of auto for simple types.",
+      "range": {
+        "startLine": 338,
+        "startChar": 20,
+        "endLine": 339,
+        "endChar": 29
+      },
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2dcb22b2_1de3bd46",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 10
@@ -65,6 +140,23 @@
       "writtenOn": "2019-03-23T05:15:54Z",
       "side": 1,
       "message": "nit: Missing punctuation",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bd65503_cb361365",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T06:43:08Z",
+      "side": 1,
+      "message": "Mmmh why does this fail? It seems the copy fits in both textures.",
       "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
