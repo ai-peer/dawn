@@ -22,6 +22,30 @@
       "revId": "d2642733ba85999880021f5a8afbe349ddd97509",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d7fec59_09a758e7",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-25T21:04:43Z",
+      "side": 1,
+      "message": "The texture usage is modified below, so making this const wouldn\u0027t be correct.",
+      "parentUuid": "61899cb4_78110c8f",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 24
+      },
+      "revId": "d2642733ba85999880021f5a8afbe349ddd97509",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
