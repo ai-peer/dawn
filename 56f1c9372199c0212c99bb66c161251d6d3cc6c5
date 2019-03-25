@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "529015f7_048c85d6",
+        "filename": "BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T06:23:15Z",
+      "side": 1,
+      "message": "nit: ClipSpaceTests?",
+      "range": {
+        "startLine": 643,
+        "startChar": 23,
+        "endLine": 643,
+        "endChar": 32
+      },
+      "revId": "56f1c9372199c0212c99bb66c161251d6d3cc6c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "650a6fd6_a4d6e7b6",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-25T06:23:15Z",
+      "side": 1,
+      "message": "This line will move because the link always points to the latest commit on master. Maybe replace with something like \"see documentation of spirv_cross::CompilerGLSL::Options::...\" ?",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 90
+      },
+      "revId": "56f1c9372199c0212c99bb66c161251d6d3cc6c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
