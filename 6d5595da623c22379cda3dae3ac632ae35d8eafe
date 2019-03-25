@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a09de3dd_6fe8a3f4",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-25T22:40:32Z",
+      "side": 1,
+      "message": "This fuzzer needs to be updated too, as it says here.",
+      "revId": "6d5595da623c22379cda3dae3ac632ae35d8eafe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
