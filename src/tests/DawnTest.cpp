@@ -52,6 +52,11 @@ namespace {
         }
     }
 
+    bool ThresholdCompare(uint8_t v1, uint8_t v2, uint8_t threshold) {
+        int32_t diff = abs(static_cast<int32_t>(v1) - static_cast<int32_t>(v2));
+        return diff < static_cast<int32_t> (threshold);
+    }
+
     struct MapReadUserdata {
         DawnTest* test;
         size_t slot;
@@ -535,7 +540,9 @@ void DawnTest::ResolveExpectations() {
 }
 
 bool RGBA8::operator==(const RGBA8& other) const {
-    return r == other.r && g == other.g && b == other.b && a == other.a;
+    constexpr uint8_t kThreshold = 1;
+    return ThresholdCompare(r, other.r, kThreshold) && ThresholdCompare(g, other.g, kThreshold) &&
+           ThresholdCompare(b, other.b, kThreshold) && ThresholdCompare(a, other.a, kThreshold);
 }
 
 bool RGBA8::operator!=(const RGBA8& other) const {
