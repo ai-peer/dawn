@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ff1fbc9_73dc2db7",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-03-26T16:56:48Z",
+      "side": 1,
+      "message": "This should add an additional reference to the texture because the wire does not own the injected texture. If the wire is destructed, it would destroy the injected texture as well.",
+      "revId": "7c19698c25a5a7b2cb9a1d4398653617d470b276",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1afd265_dc8f4f36",
+        "filename": "src/tests/unittests/wire/WireInjectTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-03-26T16:56:48Z",
+      "side": 1,
+      "message": "Add a test that destroying the wire does not destroy injected textures.",
+      "revId": "7c19698c25a5a7b2cb9a1d4398653617d470b276",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
