@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b7b3e1e_1377d14c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T10:49:07Z",
+      "side": 1,
+      "message": "nit: this should be in the same include block as dawn_native.",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbc9dbfc_495dfbdc",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T10:49:07Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c96dc8e_15add638",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T10:49:07Z",
+      "side": 1,
+      "message": "nit: for type safety this could be std::array\u003cD3D12_INPUT_ELEMENT_DESC, kMaxVertexAttributes\u003e*",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b273c5d_efc68958",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T10:49:07Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
