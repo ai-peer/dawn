@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1d29006c_a02cfcdd",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1102b049_4c15574f",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dafffafc_7f5e4d98",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
         "patchSetId": 7
@@ -39,6 +57,30 @@
       "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "890bea60_225c335f",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dafffafc_7f5e4d98",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 71
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "933c1537_d6013fb8",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1118f0d5_4f26a306",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 9
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef7bc5f_60ea09fe",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
         "patchSetId": 7
@@ -85,6 +151,30 @@
       "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4c2cf3e_3dd8140c",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ef7bc5f_60ea09fe",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "1185a668_143c4dd1",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Whoops. I should have noticed that this couldn\u0027t support tests running in multiple thread. Fixed this issue. \n \nSince this patch is very big and take a long time to review. Can I have another patch to construct ComboInputStateDescriptor and change the corresponding code in examples/, end2end tests and unittests? [3]",
+      "parentUuid": "7fbb3f9c_d94b97a8",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc72d7c6_8a5b7660",
         "filename": "src/tests/end2end/InputStateTests.cpp",
         "patchSetId": 7
@@ -125,6 +239,24 @@
       "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba8ec90a_e798bb08",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bc72d7c6_8a5b7660",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +277,24 @@
     },
     {
       "key": {
+        "uuid": "f19549c2_95d16f60",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "True. My original code used \"const*const*\" to annotate PipelineDescriptor.inputState. I need to remove constexpr for that. But right now, we only use \"const*\" to annotate inputState, we can keep it as what it should be.",
+      "parentUuid": "8178db37_90f71403",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "632c276e_3666efaa",
         "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
         "patchSetId": 7
@@ -159,6 +309,24 @@
       "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56641a29_eedca520",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "See comments [3]",
+      "parentUuid": "632c276e_3666efaa",
+      "revId": "4aaa8648d89fe839c1d810fad1e3dd3fb9c2a980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

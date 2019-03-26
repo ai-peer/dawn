@@ -232,6 +232,24 @@
     },
     {
       "key": {
+        "uuid": "4e96d835_b5e381c3",
+        "filename": "examples/CppHelloTriangle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Yes. this is a better choice. And it is close to what web devs be doing in JS. \n\nSince this patch is very big and take a long time to review. Can I have another patch to construct ComboInputStateDescriptor as you suggested and change the corresponding code in examples/, end2end tests and unittest, in order to avoid too long time for review and code rebase? [3]",
+      "parentUuid": "fe34724e_2cb9b462",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1011a0b_4877b20a",
         "filename": "examples/CubeReflection.cpp",
         "patchSetId": 4
@@ -491,6 +509,30 @@
     },
     {
       "key": {
+        "uuid": "ff971368_af856790",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done\n\nThanks for your detailed explanation, Corentin.",
+      "parentUuid": "166d95e2_27f44b11",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e80279b_dd0705d3",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -732,6 +774,24 @@
     },
     {
       "key": {
+        "uuid": "87fdbba0_ee4ec8db",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Ah... It is used in RenderPipelineGL. If it is private, then RenderPipelineGL have no access to it.\n\nI can revisit the design for InputState later. Maybe we can remove both GetAttributesUsingInput() and attributesUsingInput. The previous design use builder and we need to setAttribute and setInput one by one. Right now we use inputState descriptor, and we know all inputs and attributes in one shot. As a result, maybe we can optimize the design for inputState. But this patch is more like a (big) refactoring, so I don\u0027t want to change its original design in this change.",
+      "parentUuid": "79b118a5_6c81e625",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53dc994f_4f4e27b4",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
         "patchSetId": 4
@@ -785,6 +845,24 @@
     },
     {
       "key": {
+        "uuid": "38ec6517_25faee99",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done.\n\nWe also need to add \u003carray\u003e, in addition to \"Constants.h\". Another option is to add \"PerStage.h\", which will add \"Constants.h\" and \u003carray\u003e and a few other head files.",
+      "parentUuid": "6332e3e6_ac40dc3e",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7010a44_0448168e",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
         "patchSetId": 4
@@ -799,6 +877,24 @@
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e35b7324_1862065f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7010a44_0448168e",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -925,6 +1021,24 @@
     },
     {
       "key": {
+        "uuid": "ce74df81_d314342c",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Sorry, I misunderstood you here. You suggestion was just to rename the function.",
+      "parentUuid": "8900d226_727edc95",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8875b4f_7002deed",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 4
@@ -972,6 +1086,24 @@
       "side": 1,
       "message": "Oh it\u0027s because you used autorelease in ComputeVertexDesc. Can we avoid autorelease and do the explicit release line 290? It\u0027s because Dawn doesn\u0027t have its own autorelease pool, so it is less clear what happens with autorelease.",
       "parentUuid": "2aab61d8_94916b70",
+      "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bde23bf7_c58fa64a",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T03:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0c7309d_675647ab",
       "revId": "56c8d79e608394435d88d08a19afa74d1a52e84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
