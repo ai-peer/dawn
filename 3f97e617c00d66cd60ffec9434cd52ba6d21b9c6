@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f203c438_7f5675ca",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-26T21:38:57Z",
+      "side": 1,
+      "message": "So should we just check that the state is not destroyed, then create the texture view? and not have error when it is destroyed, just don\u0027t do anything in that case?",
+      "parentUuid": "06271379_40d5a8c0",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e64dc79_d25f639d",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 11
@@ -33,6 +51,24 @@
       "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4772eb8_f45bd1b3",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-26T21:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e64dc79_d25f639d",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8d21b1eb_5ff2cbed",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-26T21:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0d728a2_6e088b25",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6dc48eb_cc64bc37",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2019-03-26T18:17:41Z",
       "side": 1,
       "message": "This handle is owned externally, so we should defer to the 3-parameter constructor. The 2 parameter constructor tries to do a bunch of operations of the handle to initialize it when here it is already initialized.",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33ec4083_da222ffa",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-26T21:38:57Z",
+      "side": 1,
+      "message": "I\u0027m not sure which 3 parameter constructor you\u0027re referring to here, but I ended up combining the constructor above this with this constructor to take the texture state and pass that into the texturebase",
+      "parentUuid": "b6dc48eb_cc64bc37",
       "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4b88c451_76c6fd26",
+        "filename": "src/dawn_native/opengl/TextureGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-26T21:38:57Z",
+      "side": 1,
+      "message": "this is used in the SwapChainGL to set the state as owned external",
+      "parentUuid": "fef9b12b_125f15f0",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b23c45d_ccedc7ed",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2019-03-26T18:17:41Z",
       "side": 1,
       "message": "I\u0027m not sure, would it make sense to ASSERT(state is InternallyOwned) in all these DestroyImpl?",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b425345f_92886d2a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-26T21:38:57Z",
+      "side": 1,
+      "message": "It depends if swapchain texture will ever call destroyimpl intentionally? If swapchain doesn\u0027t need to call destroyimpl ever, then yes we can assert the state is not owned externally (since we\u0027re allowing multiple destroys to be called, destroyed state would be acceptable too).",
+      "parentUuid": "9b23c45d_ccedc7ed",
       "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -118,6 +226,24 @@
       "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1f61bc1_c27accca",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-26T21:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a815c083_98bf06b2",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
