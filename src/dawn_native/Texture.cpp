@@ -322,7 +322,9 @@ namespace dawn_native {
 
     // TextureBase
 
-    TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor)
+    TextureBase::TextureBase(DeviceBase* device,
+                             const TextureDescriptor* descriptor,
+                             TextureState state)
         : ObjectBase(device),
           mDimension(descriptor->dimension),
           mFormat(descriptor->format),
@@ -330,7 +332,8 @@ namespace dawn_native {
           mArrayLayerCount(descriptor->arrayLayerCount),
           mMipLevelCount(descriptor->mipLevelCount),
           mSampleCount(descriptor->sampleCount),
-          mUsage(descriptor->usage) {
+          mUsage(descriptor->usage),
+          mState(state) {
     }
 
     TextureBase::TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -371,8 +374,24 @@ namespace dawn_native {
         return mUsage;
     }
 
+    TextureBase::TextureState TextureBase::GetTextureState() const {
+        ASSERT(!IsError());
+        return mState;
+    }
+
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
         ASSERT(!IsError());
+        if (mState == TextureState::Destroyed) {
+            return DAWN_VALIDATION_ERROR("Destroyed texture used in a submit");
+        }
+        return {};
+    }
+
+    MaybeError TextureBase::ValidateCanCreateTextureViewNow() const {
+        ASSERT(!IsError());
+        if (mState == TextureState::Destroyed) {
+            return DAWN_VALIDATION_ERROR("Destroyed texture used to create texture view");
+        }
         return {};
     }
 
@@ -395,6 +414,15 @@ namespace dawn_native {
         return GetDevice()->CreateTextureView(this, descriptor);
     }
 
+    void TextureBase::Destroy() {
+        if (mState != TextureState::OwnedExternal) {
+            DestroyImpl();
+            mState = TextureState::Destroyed;
+        }
+    }
+
+    void TextureBase::DestroyImpl() {
+    }
     // TextureViewBase
 
     TextureViewBase::TextureViewBase(TextureBase* texture, const TextureViewDescriptor* descriptor)
