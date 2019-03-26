@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f5096be6_de271f1f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T13:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b7b3e1e_1377d14c",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dbc9dbfc_495dfbdc",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c37687a_bf6ac72b",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T13:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbc9dbfc_495dfbdc",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b4ae3394_8ff57dde",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T13:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c96dc8e_15add638",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b273c5d_efc68958",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
         "patchSetId": 8
@@ -67,6 +121,24 @@
       "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d29075_9ae3e14c",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-26T13:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b273c5d_efc68958",
+      "revId": "f3baed4aef4286594576409cb8589a7cf697334c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
