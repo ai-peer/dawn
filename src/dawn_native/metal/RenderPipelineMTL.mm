@@ -246,6 +246,8 @@ namespace dawn_native { namespace metal {
         InputState* inputState = ToBackend(GetInputState());
         descriptorMTL.vertexDescriptor = inputState->GetMTLVertexDescriptor();
 
+        descriptorMTL.sampleCount = GetSampleCount();
+
         // TODO(kainino@chromium.org): push constants, textures, samplers
 
         {
