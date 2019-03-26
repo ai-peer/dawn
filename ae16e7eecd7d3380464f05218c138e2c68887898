@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb65b22f_c1494f26",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T10:40:58Z",
+      "side": 1,
+      "message": "This modifies the compare function for all the tests which currently all want to do exact equality tests. If we need to do this (do we really need to?) we should have a new EXPECT_PIXEL_EQ macro that takes an additional threshold.",
+      "revId": "ae16e7eecd7d3380464f05218c138e2c68887898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
