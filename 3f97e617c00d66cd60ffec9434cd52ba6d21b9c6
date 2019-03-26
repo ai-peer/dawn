@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06271379_40d5a8c0",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T18:17:41Z",
+      "side": 1,
+      "message": "Note sure, should extra validation be in ValidateTextureViewDescriptor and should we use texture-\u003eGetState() !\u003d Destroyed? ValidateCanCreateTextureViewNow is a bit weird because it looks like ValidateCanUseInSubmitNow but they are very different since the latter is for queue submit (which is a very special call that does TONs of validation)",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e64dc79_d25f639d",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T18:17:41Z",
+      "side": 1,
+      "message": "Backends seem to set this manually in the constructor, would it make sense to make it a required TextureBase constructor argument, the member private and add a getter?",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0d728a2_6e088b25",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T18:17:41Z",
+      "side": 1,
+      "message": "nit: Can this be a deleted method so that backends are forced to implement it? Also in general we put method implementations in the .cpp file.",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6dc48eb_cc64bc37",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T18:17:41Z",
+      "side": 1,
+      "message": "This handle is owned externally, so we should defer to the 3-parameter constructor. The 2 parameter constructor tries to do a bunch of operations of the handle to initialize it when here it is already initialized.",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fef9b12b_125f15f0",
+        "filename": "src/dawn_native/opengl/TextureGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T18:17:41Z",
+      "side": 1,
+      "message": "nit: This constructor (with only three parameters) is only used internally, could it be private?",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b23c45d_ccedc7ed",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T18:17:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure, would it make sense to ASSERT(state is InternallyOwned) in all these DestroyImpl?",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a815c083_98bf06b2",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T18:17:41Z",
+      "side": 1,
+      "message": "Could we have a second command encoder for this? Right now they happen to be reusable but I think it won\u0027t be the case in the future.",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
