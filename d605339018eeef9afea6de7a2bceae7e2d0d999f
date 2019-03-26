@@ -328,6 +328,24 @@
       "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59ef4df4_fef1d2c5",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-26T11:05:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "db209188_d8619188",
+      "revId": "d605339018eeef9afea6de7a2bceae7e2d0d999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
