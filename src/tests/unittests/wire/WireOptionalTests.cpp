@@ -59,7 +59,6 @@ TEST_F(WireOptionalTests, OptionalObjectValue) {
                          })))
         .WillOnce(Return(nullptr));
 
-    EXPECT_CALL(api, BindGroupLayoutRelease(apiBindGroupLayout));
     FlushClient();
 }
 
@@ -189,11 +188,6 @@ TEST_F(WireOptionalTests, OptionalStructPointer) {
                         return desc->depthStencilState == nullptr;
                     })))
         .WillOnce(Return(nullptr));
-
-    EXPECT_CALL(api, ShaderModuleRelease(apiVsModule));
-    EXPECT_CALL(api, InputStateBuilderRelease(apiInputStateBuilder));
-    EXPECT_CALL(api, InputStateRelease(apiInputState));
-    EXPECT_CALL(api, PipelineLayoutRelease(apiLayout));
 
     FlushClient();
 }
