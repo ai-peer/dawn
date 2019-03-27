@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8f0e301_f6f4d383",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T21:36:01Z",
+      "side": 1,
+      "message": "unit: we could assert that the texture is in the destroyed state in ~TextureBase.",
+      "revId": "0716d856adb406be8559502d2047126eeceb37af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
