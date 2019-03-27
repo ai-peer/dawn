@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8d755ab5_695790ec",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T16:17:52Z",
+      "side": 1,
+      "message": "Yeah the comment doesn\u0027t match things anymore. Looking at the current code it looks like we could have a single check like this that would be guaranteed to not overflow:\n\n            ASSERT(kMaxVertexAttributeEnd \u003e\u003d VertexFormatSize(attribute-\u003eformat));\n            if (attribute-\u003eoffset \u003e kMaxVertexAttributeEnd - VertexFormatSize(attribute-\u003eformat)) {\n                return DAWN_VALIDATION_ERROR(\"Setting attribute offset out of bounds\");\n            }",
+      "parentUuid": "7c803903_ee5b06d7",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb6cbefd_233f2f52",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 12
