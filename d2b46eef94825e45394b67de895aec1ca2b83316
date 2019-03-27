@@ -34,6 +34,24 @@
       "revId": "d2b46eef94825e45394b67de895aec1ca2b83316",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7743fed_de0b5b9d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T21:31:33Z",
+      "side": 1,
+      "message": "I tried this but ValidateFinish checks that mEncodingState is TopLevel because you need to have ended the passes before Finish. So doing this would cause all calls to Finish to fail.",
+      "parentUuid": "87723437_fe58bdb8",
+      "revId": "d2b46eef94825e45394b67de895aec1ca2b83316",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
