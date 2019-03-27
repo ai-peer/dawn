@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "b7d5f59e_9e2f7f49",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-27T19:40:00Z",
+      "side": 1,
+      "message": "I thought we agreed in a previous iteration that mState should be set to \u0027Destroyed\u0027 even for OwnedExternal textures as well. If so, that means mState should be set to \u0027Destroyed\u0027 unconditionally and we should only call DestroyImpl if the state is `OwnedInternal`.",
+      "range": {
+        "startLine": 423,
+        "startChar": 12,
+        "endLine": 423,
+        "endChar": 45
+      },
+      "revId": "e3aa8048cc0ba843e3185a6074b57096f998ba0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "807767f6_47ffd625",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-27T19:40:00Z",
+      "side": 1,
+      "message": "According to the Google C++ style guide, enum values should be prefaced with the letter k and each be on their own line. \n\n@Kai and @Corentin, should we follow this style for enums?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 76
+      },
+      "revId": "e3aa8048cc0ba843e3185a6074b57096f998ba0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b6f926c_29030882",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 14
@@ -13,6 +59,75 @@
       "writtenOn": "2019-03-27T18:37:51Z",
       "side": 1,
       "message": "nit: probably could also be \u003d\u003d OwnedInternal?",
+      "revId": "e3aa8048cc0ba843e3185a6074b57096f998ba0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a2b13c6_317499cf",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-27T19:40:00Z",
+      "side": 1,
+      "message": "I see a pattern where several functions check \"GetTextureState() !\u003d TextureState::OwnedExternal\".  In many places, the same check is performed both in the caller and callee.\n\nTo have better separation of concerns, we should have TextureBase::Destroy be soley responsible for checking the texture state and calling DestroyImpl if the state is not \u0027OwnedExternal\u0027.  The DestroyImpl overrides should always destroy the resource unconditionally if the underlying native pointer is not \"null\".\n\nThe destructor for each backend should call TextureBase::Destroy unconditionally, not DestroyImpl. This leaves DestroyImpl\u0027s only caller being TextureBase::Destroy. \n\nI think this will make the code more readable and the ownership clearer.",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 60
+      },
+      "revId": "e3aa8048cc0ba843e3185a6074b57096f998ba0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ffd03a9_fd8b2d79",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-27T19:40:00Z",
+      "side": 1,
+      "message": "I think this comment can now be deleted since you fixed it.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 24
+      },
+      "revId": "e3aa8048cc0ba843e3185a6074b57096f998ba0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "076d22ac_eaafc1e1",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-27T19:40:00Z",
+      "side": 1,
+      "message": "What is the rationale for defining two descriptors when you only pass one to CreateTextureView?",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 1
+      },
       "revId": "e3aa8048cc0ba843e3185a6074b57096f998ba0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
