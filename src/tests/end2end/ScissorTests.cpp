@@ -156,7 +156,7 @@ TEST_P(ScissorTest, NoInheritanceBetweenRenderPass) {
     // RenderPass 1 set the scissor
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-        pass.SetScissorRect(0, 0, 0, 0);
+        pass.SetScissorRect(1, 1, 1, 1);
         pass.EndPass();
     }
     // RenderPass 2 draw a full quad, it shouldn't be scissored
