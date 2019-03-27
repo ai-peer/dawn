@@ -65,6 +65,46 @@
     },
     {
       "key": {
+        "uuid": "4be5122c_160ad545",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T22:50:17Z",
+      "side": 1,
+      "message": "if you use GL_READ_FRAMEBUFFER here... [1]",
+      "range": {
+        "startLine": 348,
+        "startChar": 38,
+        "endLine": 348,
+        "endChar": 52
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cc89936_745dd1fe",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T22:50:17Z",
+      "side": 1,
+      "message": "[1] ... and GL_WRITE_FRAMEBUFFER here, then... [2]",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e2684f9_ad3e6bee",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 9
@@ -76,6 +116,23 @@
       "writtenOn": "2019-03-27T13:39:14Z",
       "side": 1,
       "message": "Can\u0027t we just always use glFramebufferTextureLayer?",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df58e80a_bcedad36",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T22:50:17Z",
+      "side": 1,
+      "message": "[2] ... you should be able to avoid these two extra glBindFramebuffer calls.",
       "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -150,6 +207,23 @@
       "writtenOn": "2019-03-27T13:39:14Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2e70232_61b4f006",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T22:50:17Z",
+      "side": 1,
+      "message": "It seems like resolveTargetViews could also be std::initializer_list, like colorViews.",
       "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -293,6 +367,23 @@
       "writtenOn": "2019-03-27T13:39:14Z",
       "side": 1,
       "message": "nit: explain because samples default to black and we rendered two samples to green. Also it would be nice to not just drop the constant 102 but compute it from the clear color.",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18006e96_d1bfe068",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T22:50:17Z",
+      "side": 1,
+      "message": "+1 to computing (or at least explaining) 102.\n\nThese comments pretty much just describe the same thing the next line says - a reader could understand it by reading just the EXPECT_ line.\n\nI\u0027d make these more compact, like \"// Middle pixel should be 102 \u003d 255 * 0.8 * 0.5.\"",
       "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
