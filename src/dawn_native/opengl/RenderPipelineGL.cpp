@@ -171,6 +171,14 @@ namespace dawn_native { namespace opengl {
             glStencilMask(descriptor->stencilWriteMask);
         }
 
+        void ApplyMultisampleState(uint32_t sampleCount) {
+            if (sampleCount > 1) {
+                glEnable(GL_MULTISAMPLE);
+            } else {
+                glDisable(GL_MULTISAMPLE);
+            }
+        }
+
     }  // anonymous namespace
 
     RenderPipeline::RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor)
@@ -192,6 +200,8 @@ namespace dawn_native { namespace opengl {
 
         auto inputState = ToBackend(GetInputState());
         glBindVertexArray(inputState->GetVAO());
+
+        ApplyMultisampleState(GetSampleCount());
 
         ApplyDepthStencilState(GetDepthStencilStateDescriptor(), &persistentPipelineState);
 
