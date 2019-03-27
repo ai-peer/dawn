@@ -26,29 +26,13 @@ class DrawIndexedTest : public DawnTest {
 
             renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-            dawn::VertexInputDescriptor input;
-            input.inputSlot = 0;
-            input.stride = 4 * sizeof(float);
-            input.stepMode = dawn::InputStepMode::Vertex;
-
-            dawn::VertexAttributeDescriptor attribute;
-            attribute.shaderLocation = 0;
-            attribute.inputSlot = 0;
-            attribute.offset = 0;
-            attribute.format = dawn::VertexFormat::Float4;
-
-            dawn::InputState inputState = device.CreateInputStateBuilder()
-                                              .SetInput(&input)
-                                              .SetAttribute(&attribute)
-                                              .GetResult();
-
-            dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
+            dawn::ShaderModule vsModule =
+                utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
                 #version 450
                 layout(location = 0) in vec4 pos;
                 void main() {
                     gl_Position = pos;
-                })"
-            );
+                })");
 
             dawn::ShaderModule fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
                 #version 450
@@ -63,7 +47,10 @@ class DrawIndexedTest : public DawnTest {
             descriptor.cFragmentStage.module = fsModule;
             descriptor.primitiveTopology = dawn::PrimitiveTopology::TriangleStrip;
             descriptor.indexFormat = dawn::IndexFormat::Uint32;
-            descriptor.inputState = inputState;
+            descriptor.cInputState.numInputs = 1;
+            descriptor.cInputState.cInputs[0].stride = 4 * sizeof(float);
+            descriptor.cInputState.numAttributes = 1;
+            descriptor.cInputState.cAttributes[0].format = dawn::VertexFormat::Float4;
             descriptor.cColorStates[0]->format = renderPass.colorFormat;
 
             pipeline = device.CreateRenderPipeline(&descriptor);
