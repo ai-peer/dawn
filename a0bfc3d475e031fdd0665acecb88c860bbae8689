@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4876b6e9_e4eb750a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-27T22:26:43Z",
+      "side": 1,
+      "message": "Consider employing a similar strategy to textures where DestroyImpl destroys unconditionally and the base class\u0027s destroy method takes care of calling DestroyImpl when necessary.",
+      "revId": "a0bfc3d475e031fdd0665acecb88c860bbae8689",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
