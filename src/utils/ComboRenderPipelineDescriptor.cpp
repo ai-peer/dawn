@@ -18,6 +18,33 @@
 
 namespace utils {
 
+    ComboInputStateDescriptor::ComboInputStateDescriptor() {
+        dawn::InputStateDescriptor* descriptor = this;
+
+        // Fill the default values for vertexInput.
+        descriptor->numInputs = 0;
+        dawn::VertexInputDescriptor vertexInput;
+        vertexInput.inputSlot = 0;
+        vertexInput.stride = 0;
+        vertexInput.stepMode = dawn::InputStepMode::Vertex;
+        for (uint32_t i = 0; i < kMaxVertexInputs; ++i) {
+            cInputs[i] = vertexInput;
+        }
+        descriptor->inputs = &cInputs[0];
+
+        // Fill the default values for vertexAttribute.
+        descriptor->numAttributes = 0;
+        dawn::VertexAttributeDescriptor vertexAttribute;
+        vertexAttribute.shaderLocation = 0;
+        vertexAttribute.inputSlot = 0;
+        vertexAttribute.offset = 0;
+        vertexAttribute.format = dawn::VertexFormat::Float;
+        for (uint32_t i = 0; i < kMaxVertexAttributes; ++i) {
+            cAttributes[i] = vertexAttribute;
+        }
+        descriptor->attributes = &cAttributes[0];
+    }
+
     ComboRenderPipelineDescriptor::ComboRenderPipelineDescriptor(const dawn::Device& device) {
         dawn::RenderPipelineDescriptor* descriptor = this;
 
@@ -36,6 +63,9 @@ namespace utils {
             descriptor->fragmentStage = &cFragmentStage;
             cFragmentStage.entryPoint = "main";
         }
+
+        // Set defaults for the input state descriptors.
+        descriptor->inputState = &cInputState;
 
         // Set defaults for the color state descriptors.
         {
@@ -75,7 +105,6 @@ namespace utils {
             descriptor->depthStencilState = nullptr;
         }
 
-        descriptor->inputState = device.CreateInputStateBuilder().GetResult();
         descriptor->layout = utils::MakeBasicPipelineLayout(device, nullptr);
     }
 

@@ -111,20 +111,6 @@ void init() {
             fragColor = texture(sampler2D(myTexture, mySampler), gl_FragCoord.xy / vec2(640.0, 480.0));
         })");
 
-    dawn::VertexAttributeDescriptor attribute;
-    attribute.shaderLocation = 0;
-    attribute.inputSlot = 0;
-    attribute.offset = 0;
-    attribute.format = dawn::VertexFormat::Float4;
-
-    dawn::VertexInputDescriptor input;
-    input.inputSlot = 0;
-    input.stride = 4 * sizeof(float);
-    input.stepMode = dawn::InputStepMode::Vertex;
-
-    auto inputState =
-        device.CreateInputStateBuilder().SetAttribute(&attribute).SetInput(&input).GetResult();
-
     auto bgl = utils::MakeBindGroupLayout(
         device, {
                     {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler},
@@ -139,7 +125,10 @@ void init() {
     descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
     descriptor.cVertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
-    descriptor.inputState = inputState;
+    descriptor.cInputState.numAttributes = 1;
+    descriptor.cInputState.cAttributes[0].format = dawn::VertexFormat::Float4;
+    descriptor.cInputState.numInputs = 1;
+    descriptor.cInputState.cInputs[0].stride = 4 * sizeof(float);
     descriptor.depthStencilState = &descriptor.cDepthStencilState;
     descriptor.cDepthStencilState.format = dawn::TextureFormat::D32FloatS8Uint;
     descriptor.cColorStates[0]->format = GetPreferredSwapChainTextureFormat();
