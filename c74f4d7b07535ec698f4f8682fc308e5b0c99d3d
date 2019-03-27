@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "03a0b3eb_96d3cb5e",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T16:21:33Z",
+      "side": 1,
+      "message": "...* added in a later patchset in that CL.",
+      "parentUuid": "0d2115b6_7ff27d12",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb6cbefd_233f2f52",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 12
