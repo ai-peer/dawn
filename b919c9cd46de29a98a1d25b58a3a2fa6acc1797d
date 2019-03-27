@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a77f728_655ed6fb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T18:37:51Z",
+      "side": 1,
+      "message": "nit: makes more sense to write \u003d\u003d OwnedInternal, IMO, unless it also needs to DestroyImpl() on Destroyed textures.",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b477f07_61c683d3",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T18:37:51Z",
+      "side": 1,
+      "message": "nit: \u003d\u003d OwnedInternal?",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46fd208e_6554824e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T18:37:51Z",
+      "side": 1,
+      "message": "nit: remove this todo :)",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00aedea7_9f5a4132",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T18:37:51Z",
+      "side": 1,
+      "message": "nit: \u003d\u003d OwnedInternal?",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1620fdbd_0ec165ab",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T18:37:51Z",
+      "side": 1,
+      "message": "We should test both cases:\n- encode, destroy, submit\n- destroy, encode, submit\n\n(although it does look like the old test was wrong - it shouldn\u0027t have submitted the same command buffer twice)",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

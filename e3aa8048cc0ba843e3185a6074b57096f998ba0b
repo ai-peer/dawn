@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b6f926c_29030882",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T18:37:51Z",
+      "side": 1,
+      "message": "nit: probably could also be \u003d\u003d OwnedInternal?",
+      "revId": "e3aa8048cc0ba843e3185a6074b57096f998ba0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
