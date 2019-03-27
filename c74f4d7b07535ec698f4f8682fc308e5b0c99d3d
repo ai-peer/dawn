@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7c803903_ee5b06d7",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-27T15:44:29Z",
+      "side": 1,
+      "message": "I also thought this before, but it is probably not true. See the comments here: https://dawn-review.googlesource.com/c/dawn/+/4901/6/src/dawn_native/InputState.cpp#138.",
+      "parentUuid": "ab2de470_1097c882",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb6cbefd_233f2f52",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 12
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f9052eaf_b2b8d99c",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-27T15:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb6cbefd_233f2f52",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05bd5aae_dc334bb8",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 12
@@ -50,6 +86,24 @@
       "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c9a6a6e_f6a472a8",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-27T15:44:29Z",
+      "side": 1,
+      "message": "How about keep the logic exactly the same as the code snippet in InputStateGL.cpp, but revisit it in my follow-up patch, because this big change looks like a code refactoring. And let\u0027s merge it in order to avoid code rebase.",
+      "parentUuid": "05bd5aae_dc334bb8",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
