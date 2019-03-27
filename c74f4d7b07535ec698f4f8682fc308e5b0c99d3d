@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0d2115b6_7ff27d12",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T16:19:53Z",
+      "side": 1,
+      "message": "(unmarking resolved)\n\nBTW, the code you linked to (InputState.cpp#138 above) isn\u0027t the same as this code; it doesn\u0027t have the (attribute-\u003eoffset \u003e\u003d kMaxVertexAttributeEnd) check, which was added later.",
+      "parentUuid": "8d755ab5_695790ec",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bb6cbefd_233f2f52",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 12
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "How about keep the logic exactly the same as the code snippet in InputStateGL.cpp, but revisit it in my follow-up patch, because this big change looks like a code refactoring. And let\u0027s merge it in order to avoid code rebase.",
       "parentUuid": "05bd5aae_dc334bb8",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3535862_54152d4f",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T16:19:53Z",
+      "side": 1,
+      "message": "Ack, please do revisit it so we don\u0027t forget about it.",
+      "parentUuid": "1c9a6a6e_f6a472a8",
       "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
