@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "a9bc08b7_8d6ae7af",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-27T17:01:54Z",
+      "side": 1,
+      "message": "Well. the comment tried to explained that even you have code snippet 62 - 64 [2], you still need code snippet 59 - 61 [1] to prevent bad things. Because you can pass [2] via data overflow, say offset \u003d 0xFFFFFFFF, VertexFormatSize is 4, then the addition is 3 on 32 bit machine, it might less than kMaxVertexAttributeEnd. So it can pass [2], but actually 0xFFFFFFFF is way too large. It\u0027s invalid. So we still need code snippet 59 - 61 to catch this bad situation. \n\nMaybe I should use this link: https://dawn-review.googlesource.com/c/dawn/+/4901/6..11/src/dawn_native/InputState.cpp. \n\nYou can see that my original code in patchset 6 have already had the logic [2], then I added logic [1] after Corentin\u0027s review, in order to catch the overflow issue above. You can remove [1], and dawn_unittest will fail. (Well, if you remove [2], dawn_unittest also fails, but the comment was added for [1], on the basis that we have already had code snippet [2]. So it\u0027s still useful. \n\nAnyway, the code Corentin suggested can avoid the overflow via subtraction. It is a smarter method. And we don\u0027t need the comment right now.",
+      "parentUuid": "03a0b3eb_96d3cb5e",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb6cbefd_233f2f52",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 12
