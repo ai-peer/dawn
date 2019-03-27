@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "5d545eea_694e287a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-27T20:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a729ee02_491482b7",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e64dc79_d25f639d",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 11
@@ -178,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "80dfc07d_4151f5f9",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-27T20:13:03Z",
+      "side": 1,
+      "message": "I think with the new patch update, the constructor that SwapChainGL\u0027s GetNextTextureImpl calls should not be calling GL operations.",
+      "parentUuid": "fa20695d_df4d92a8",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fef9b12b_125f15f0",
         "filename": "src/dawn_native/opengl/TextureGL.h",
         "patchSetId": 11
@@ -281,6 +317,24 @@
       "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36cf476b_e76b746c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-27T20:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f8eac81_271558f0",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
