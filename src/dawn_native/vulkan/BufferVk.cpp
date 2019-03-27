@@ -137,7 +137,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     Buffer::~Buffer() {
-        DestroyImpl();
+        Destroy();
     }
 
     void Buffer::OnMapReadCommandSerialFinished(uint32_t mapSerial, const void* data) {

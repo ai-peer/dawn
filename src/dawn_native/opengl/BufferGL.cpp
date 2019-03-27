@@ -28,7 +28,7 @@ namespace dawn_native { namespace opengl {
     }
 
     Buffer::~Buffer() {
-        DestroyImpl();
+        Destroy();
     }
 
     GLuint Buffer::GetHandle() const {

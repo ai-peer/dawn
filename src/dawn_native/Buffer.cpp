@@ -235,7 +235,9 @@ namespace dawn_native {
         if (mState == BufferState::Mapped) {
             Unmap();
         }
-        DestroyImpl();
+        if (mState != BufferState::Destroyed) {
+            DestroyImpl();
+        }
         mState = BufferState::Destroyed;
     }
 
