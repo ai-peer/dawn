@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09fc776b_0f792bd7",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T17:18:59Z",
+      "side": 1,
+      "message": "nit: this could be returned by value, C++ has a thing called \"return value optimization\" which makes it just as fast as what\u0027s here.",
+      "range": {
+        "startLine": 147,
+        "startChar": 28,
+        "endLine": 147,
+        "endChar": 72
+      },
+      "revId": "cd69f7c387962952eb2f8f30dfe4955d1dc207d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "340a041a_b49629d7",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T17:18:59Z",
+      "side": 1,
+      "message": "nit: const std::vector\u0026",
+      "range": {
+        "startLine": 148,
+        "startChar": 28,
+        "endLine": 149,
+        "endChar": 54
+      },
+      "revId": "cd69f7c387962952eb2f8f30dfe4955d1dc207d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
