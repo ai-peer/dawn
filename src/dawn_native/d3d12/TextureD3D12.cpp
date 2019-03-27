@@ -108,7 +108,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
-        : TextureBase(device, descriptor) {
+        : TextureBase(device, descriptor, TextureState::OwnedInternal) {
         D3D12_RESOURCE_DESC resourceDescriptor;
         resourceDescriptor.Dimension = D3D12TextureDimension(GetDimension());
         resourceDescriptor.Alignment = 0;
@@ -136,13 +136,19 @@ namespace dawn_native { namespace d3d12 {
     Texture::Texture(Device* device,
                      const TextureDescriptor* descriptor,
                      ID3D12Resource* nativeTexture)
-        : TextureBase(device, descriptor), mResourcePtr(nativeTexture) {
+        : TextureBase(device, descriptor, TextureState::OwnedExternal),
+          mResourcePtr(nativeTexture) {
     }
 
     Texture::~Texture() {
+        Destroy();
+    }
+
+    void Texture::DestroyImpl() {
         if (mResource) {
             // If we own the resource, release it.
             ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
+            mResource = nullptr;
         }
     }
 
