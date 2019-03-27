@@ -80,5 +80,14 @@ TEST_F(TextureValidationTest, SampleCount) {
 
         ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
     }
+
+    // Currently we do not support multisampled 2D array textures.
+    {
+        dawn::TextureDescriptor descriptor = defaultDescriptor;
+        descriptor.sampleCount = 4;
+        descriptor.arrayLayerCount = 2;
+
+        ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+    }
 }
 }  // namespace
