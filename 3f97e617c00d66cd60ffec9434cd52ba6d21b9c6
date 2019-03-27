@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a729ee02_491482b7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T12:22:16Z",
+      "side": 1,
+      "message": "We should probably error out if the texture is destroyed so we return an error texture view.\n\nBasically my suggestion was to move the content of ValidateCanCreateTextureViewNow inside ValidateTextureViewDescriptor.",
+      "parentUuid": "f203c438_7f5675ca",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e64dc79_d25f639d",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 11
@@ -142,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "fa20695d_df4d92a8",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T12:22:16Z",
+      "side": 1,
+      "message": "My worry is that the current change undoes the fix in https://dawn-review.googlesource.com/c/dawn/+/5640 for the case where externally managed textures are specified a second time in the constructor.",
+      "parentUuid": "33ec4083_da222ffa",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fef9b12b_125f15f0",
         "filename": "src/dawn_native/opengl/TextureGL.h",
         "patchSetId": 11
@@ -177,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "848ffa85_f33f279e",
+        "filename": "src/dawn_native/opengl/TextureGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T12:22:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b88c451_76c6fd26",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b23c45d_ccedc7ed",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 11
@@ -206,6 +260,24 @@
       "side": 1,
       "message": "It depends if swapchain texture will ever call destroyimpl intentionally? If swapchain doesn\u0027t need to call destroyimpl ever, then yes we can assert the state is not owned externally (since we\u0027re allowing multiple destroys to be called, destroyed state would be acceptable too).",
       "parentUuid": "9b23c45d_ccedc7ed",
+      "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f8eac81_271558f0",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T12:22:16Z",
+      "side": 1,
+      "message": "Yeah I\u0027m pretty sure all swapchains would destroy their resources manually.",
+      "parentUuid": "b425345f_92886d2a",
       "revId": "3f97e617c00d66cd60ffec9434cd52ba6d21b9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
