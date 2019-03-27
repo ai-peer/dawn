@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "289e5ae0_70eadfe3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T20:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a77f728_655ed6fb",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b477f07_61c683d3",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36cce2bb_4cffbf8f",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T20:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b477f07_61c683d3",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -85,6 +121,24 @@
       "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2ce4fc_76ff1560",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T20:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00aedea7_9f5a4132",
+      "revId": "b919c9cd46de29a98a1d25b58a3a2fa6acc1797d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

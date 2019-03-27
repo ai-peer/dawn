@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8eb9b0c0_388ed796",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T20:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc48a804_d0fee626",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 130,
+        "endChar": 24
+      },
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18ae4dc6_ee0cdc9a",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 3
@@ -63,6 +87,24 @@
       "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ef85606_be600399",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T20:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18ae4dc6_ee0cdc9a",
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -130,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "be4902b1_e657d591",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T20:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6ae6d02_10c5cecc",
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df780123_8cc6c4e4",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 3
@@ -150,6 +210,30 @@
       "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f550fc1_58e6343e",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T20:35:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df780123_8cc6c4e4",
+      "range": {
+        "startLine": 110,
+        "startChar": 48,
+        "endLine": 110,
+        "endChar": 54
+      },
+      "revId": "80e3f01aad8c9e891f9daa4bffd7d23f7a0e6687",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
