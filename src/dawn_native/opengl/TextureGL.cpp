@@ -88,7 +88,7 @@ namespace dawn_native { namespace opengl {
     // Texture
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
-        : Texture(device, descriptor, GenTexture()) {
+        : Texture(device, descriptor, GenTexture(), TextureState::OwnedInternal) {
         uint32_t width = GetSize().width;
         uint32_t height = GetSize().height;
         uint32_t levels = GetNumMipLevels();
@@ -119,14 +119,27 @@ namespace dawn_native { namespace opengl {
         glTexParameteri(mTarget, GL_TEXTURE_MAX_LEVEL, levels - 1);
     }
 
-    Texture::Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle)
-        : TextureBase(device, descriptor), mHandle(handle) {
+    Texture::Texture(Device* device,
+                     const TextureDescriptor* descriptor,
+                     GLuint handle,
+                     TextureState state)
+        : TextureBase(device, descriptor, state), mHandle(handle) {
         mTarget = TargetForDimensionAndArrayLayers(GetDimension(), GetArrayLayers());
     }
 
     Texture::~Texture() {
         // TODO(kainino@chromium.org): delete texture (but only when not using the native texture
         // constructor?)
+        if (GetTextureState() != TextureState::OwnedExternal) {
+            DestroyImpl();
+        }
+    }
+
+    void Texture::DestroyImpl() {
+        if (GetTextureState() != TextureState::OwnedExternal && mHandle != 0) {
+            glDeleteTextures(1, &mHandle);
+            mHandle = 0;
+        }
     }
 
     GLuint Texture::GetHandle() const {

@@ -246,7 +246,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
-        : TextureBase(device, descriptor) {
+        : TextureBase(device, descriptor, TextureState::OwnedInternal) {
         // Create the Vulkan image "container". We don't need to check that the format supports the
         // combination of sample, usage etc. because validation should have been done in the Dawn
         // frontend already based on the minimum supported formats in the Vulkan spec
@@ -291,24 +291,34 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
+    // With this constructor, the lifetime of the resource is externally managed.
     Texture::Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage)
-        : TextureBase(device, descriptor), mHandle(nativeImage) {
+        : TextureBase(device, descriptor, TextureState::OwnedExternal), mHandle(nativeImage) {
     }
 
     Texture::~Texture() {
-        Device* device = ToBackend(GetDevice());
-
-        // If we own the resource, release it.
-        if (mMemoryAllocation.GetMemory() != VK_NULL_HANDLE) {
-            // We need to free both the memory allocation and the container. Memory should be freed
-            // after the VkImage is destroyed and this is taken care of by the FencedDeleter.
-            device->GetMemoryAllocator()->Free(&mMemoryAllocation);
-
-            if (mHandle != VK_NULL_HANDLE) {
-                device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
-            }
+        if (GetTextureState() != TextureState::OwnedExternal) {
+            DestroyImpl();
         }
-        mHandle = VK_NULL_HANDLE;
+    }
+
+    void Texture::DestroyImpl() {
+        if (GetTextureState() != TextureState::OwnedExternal && mHandle != VK_NULL_HANDLE) {
+            Device* device = ToBackend(GetDevice());
+
+            // If we own the resource, release it.
+            if (mMemoryAllocation.GetMemory() != VK_NULL_HANDLE) {
+                // We need to free both the memory allocation and the container. Memory should be
+                // freed after the VkImage is destroyed and this is taken care of by the
+                // FencedDeleter.
+                device->GetMemoryAllocator()->Free(&mMemoryAllocation);
+
+                if (mHandle != VK_NULL_HANDLE) {
+                    device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+                }
+            }
+            mHandle = VK_NULL_HANDLE;
+        }
     }
 
     VkImage Texture::GetHandle() const {
