@@ -16,6 +16,24 @@
       "revId": "2c1653166f1a3b3e1860a15e112441f120fbb9c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49baaf80_f87743de",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-27T20:52:45Z",
+      "side": 1,
+      "message": "It used to be here to prevent double freeing, but since now we are only calling destroyimpl from destroy, and that checks the state, you\u0027re right I don\u0027t think it\u0027s necessary anymore.",
+      "parentUuid": "044668de_9a70a936",
+      "revId": "2c1653166f1a3b3e1860a15e112441f120fbb9c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
