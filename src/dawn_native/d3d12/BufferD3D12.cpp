@@ -190,8 +190,10 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void Buffer::DestroyImpl() {
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
-        mResource = nullptr;
+        if (mResource) {
+            ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
+            mResource = nullptr;
+        }
     }
 
     MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {

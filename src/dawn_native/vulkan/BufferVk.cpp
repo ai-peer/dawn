@@ -219,11 +219,13 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Buffer::DestroyImpl() {
-        ToBackend(GetDevice())->GetMemoryAllocator()->Free(&mMemoryAllocation);
-
         if (mHandle != VK_NULL_HANDLE) {
-            ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
-            mHandle = VK_NULL_HANDLE;
+            ToBackend(GetDevice())->GetMemoryAllocator()->Free(&mMemoryAllocation);
+
+            if (mHandle != VK_NULL_HANDLE) {
+                ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+                mHandle = VK_NULL_HANDLE;
+            }
         }
     }
 

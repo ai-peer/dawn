@@ -62,8 +62,10 @@ namespace dawn_native { namespace metal {
     }
 
     void Buffer::DestroyImpl() {
-        [mMtlBuffer release];
-        mMtlBuffer = nil;
+        if (mMtlBuffer != nil) {
+            [mMtlBuffer release];
+            mMtlBuffer = nil;
+        }
     }
 
     MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {

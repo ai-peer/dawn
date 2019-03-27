@@ -63,8 +63,10 @@ namespace dawn_native { namespace opengl {
     }
 
     void Buffer::DestroyImpl() {
-        glDeleteBuffers(1, &mBuffer);
-        mBuffer = 0;
+        if (mBuffer != 0) {
+            glDeleteBuffers(1, &mBuffer);
+            mBuffer = 0;
+        }
     }
 
 }}  // namespace dawn_native::opengl
