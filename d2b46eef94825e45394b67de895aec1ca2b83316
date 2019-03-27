@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbf7bf0c_dff5fdf6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-27T19:03:36Z",
+      "side": 1,
+      "message": "Could just move above the if.\n\nAlternatively, add an EncodingState::Error or ::Invalid to represent this state. It would let you implement the todo below (which I think we should at some point).",
+      "revId": "d2b46eef94825e45394b67de895aec1ca2b83316",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
