@@ -1,0 +1,324 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f40c7cf9_e7926542",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: !\u003d nullptr",
+      "range": {
+        "startLine": 329,
+        "startChar": 19,
+        "endLine": 329,
+        "endChar": 29
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7356e018_c70b36fd",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: having two fbos called read and write would be more clear than indexing in the array. I think it\u0027s ok to call glGenFbo and glDeleteFbo twice.",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 21
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9571edae_a03b28f7",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: for readability can we have all the asserts together so the prechecks and the actual code are easier to distinguish?",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e2684f9_ad3e6bee",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "Can\u0027t we just always use glFramebufferTextureLayer?",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f67cebc5_e0b98ca1",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "I think in Dawn we\u0027ll always have multisampled rendering on because either both the pipeline and attachments are multisampled or none of them are. We should enable it when we create the device.",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aadb25aa_6127f91b",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to talk about the metal backend in the OpenGL backend, this comment would be better fit next to the relevant validation.",
+      "range": {
+        "startLine": 30,
+        "startChar": 58,
+        "endLine": 32,
+        "endChar": 75
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92a9ffe2_7ab612ab",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5474916e_b760fe51",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01816d5e_9a448dc4",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: top",
+      "range": {
+        "startLine": 142,
+        "startChar": 49,
+        "endLine": 142,
+        "endChar": 53
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3be191a7_99351730",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "Mmmmh can we explain very clearly that in the standard MSAA pattern this will only touch two samples of the pixel in the middle?",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eb06843_a8cc7364",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: no need for the parenthesis",
+      "range": {
+        "startLine": 170,
+        "startChar": 48,
+        "endLine": 170,
+        "endChar": 87
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e596c01a_e7b7223c",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "This is also testing that depth works in multisampled mode. Can we split testing depth in its own test?",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8cbd4fd_7edd4de8",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: EncodeRenderPassForTest",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 195,
+        "endChar": 32
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2a7aa23_d3ac0d83",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: because",
+      "range": {
+        "startLine": 199,
+        "startChar": 49,
+        "endLine": 199,
+        "endChar": 56
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d424c437_caf5143a",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: explain because samples default to black and we rendered two samples to green. Also it would be nice to not just drop the constant 102 but compute it from the clear color.",
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "673bb32b_3d3ebcc6",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-27T13:39:14Z",
+      "side": 1,
+      "message": "nit: middle",
+      "range": {
+        "startLine": 283,
+        "startChar": 39,
+        "endLine": 283,
+        "endChar": 46
+      },
+      "revId": "50e55e6080e86d0049813cd0fd735f745f1bc940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
