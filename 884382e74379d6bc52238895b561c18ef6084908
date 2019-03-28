@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7baa5be1_bbcb3062",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-03-28T15:50:58Z",
+      "side": 1,
+      "message": "Instead of keeping this method, maybe it should be removed and callers should use GetInputStateDescriptor()-\u003eGetIndexFormat()",
+      "revId": "884382e74379d6bc52238895b561c18ef6084908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
