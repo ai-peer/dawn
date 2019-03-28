@@ -69,7 +69,6 @@ namespace dawn_native {
       private:
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
-        dawn::IndexFormat mIndexFormat;
         InputStateDescriptor mInputState;
         std::bitset<kMaxVertexAttributes> mAttributesSetMask;
         std::array<VertexAttributeDescriptor, kMaxVertexAttributes> mAttributeInfos;
