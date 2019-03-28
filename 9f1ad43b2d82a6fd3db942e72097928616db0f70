@@ -70,6 +70,30 @@
       "revId": "9f1ad43b2d82a6fd3db942e72097928616db0f70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6521dcc_fc59bc90",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-28T18:04:22Z",
+      "side": 1,
+      "message": "Either would be ok I think.",
+      "parentUuid": "fc66871f_08536242",
+      "range": {
+        "startLine": 233,
+        "startChar": 1,
+        "endLine": 233,
+        "endChar": 27
+      },
+      "revId": "9f1ad43b2d82a6fd3db942e72097928616db0f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
