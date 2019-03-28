@@ -46,6 +46,30 @@
       "revId": "9f1ad43b2d82a6fd3db942e72097928616db0f70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc66871f_08536242",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-28T18:02:24Z",
+      "side": 1,
+      "message": "Should I do this split for textures in this change as well? Or keep this soley for buffers and open a new change for textures",
+      "parentUuid": "9810adf7_94590342",
+      "range": {
+        "startLine": 233,
+        "startChar": 1,
+        "endLine": 233,
+        "endChar": 27
+      },
+      "revId": "9f1ad43b2d82a6fd3db942e72097928616db0f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
