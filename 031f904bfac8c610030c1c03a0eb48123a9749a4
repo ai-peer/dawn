@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "47fbb861_9fcc1f2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-28T09:07:22Z",
+      "side": 1,
+      "message": "This commit message is very vague, how about:\n\n Vulkan: Fix layout of destination image of T2T copies",
+      "revId": "031f904bfac8c610030c1c03a0eb48123a9749a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23b04aee_e8c95abf",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 2
