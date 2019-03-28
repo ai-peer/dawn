@@ -22,6 +22,30 @@
       "revId": "9f1ad43b2d82a6fd3db942e72097928616db0f70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9810adf7_94590342",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-28T09:22:43Z",
+      "side": 1,
+      "message": "This validation would always be true in this case. However we might add checks for devices being lost eventually which means the validation could fail when we don\u0027t want it to (in a destructor).\n\nThe split you suggested sounds good, including for textures.",
+      "parentUuid": "d9522c61_0406ac58",
+      "range": {
+        "startLine": 233,
+        "startChar": 1,
+        "endLine": 233,
+        "endChar": 27
+      },
+      "revId": "9f1ad43b2d82a6fd3db942e72097928616db0f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
