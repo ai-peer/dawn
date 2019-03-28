@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9522c61_0406ac58",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-03-28T00:53:22Z",
+      "side": 1,
+      "message": "Apologies, I didn\u0027t realize BufferBase::Destroy consumes errors and had this assert.  \n\nIf the developer gets the buffer object into the error state, we definitely do want the native object to be destroyed in the destructor. \n\nBy the same token, I think we\u0027ll need calls to TextureBase::Destroy that come from users of the API to have similar validation as exists here in BufferBase::Destroy.\n\nOne option is to split destroy into three methods, from today\u0027s two\na) Destroy: checks validation and calls DestroyInternal\nb) DestroyInternal: Checks mState and decides whether to call DestroyImpl\nc) DestroyImpl: Implemented by the backends.   \n\nDestructors would call DestroyInternal.  \n\nThoughts?  \n\n@Corentin and @Kai, when would the following validation in DeviceBase::ValidateObject fail?  \n       if (DAWN_UNLIKELY(object-\u003eGetDevice() !\u003d this)) {\n            return DAWN_VALIDATION_ERROR(\"Object from a different device.\");\n        }",
+      "range": {
+        "startLine": 233,
+        "startChar": 1,
+        "endLine": 233,
+        "endChar": 27
+      },
+      "revId": "9f1ad43b2d82a6fd3db942e72097928616db0f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
