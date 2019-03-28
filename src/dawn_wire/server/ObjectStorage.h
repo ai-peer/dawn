@@ -29,26 +29,17 @@ namespace dawn_wire { namespace server {
         T handle;
         uint32_t serial = 0;
 
-        // Used by the error-propagation mechanism to know if this object is an error.
-        // TODO(cwallez@chromium.org): this is doubling the memory usage of
-        // std::vector<ObjectDataBase> consider making it a special marker value in handle instead.
-        bool valid;
         // Whether this object has been allocated, used by the KnownObjects queries
         // TODO(cwallez@chromium.org): make this an internal bit vector in KnownObjects.
         bool allocated;
     };
 
     // Stores what the backend knows about the type.
-    template <typename T, bool IsBuilder = IsBuilderType<T>::value>
+    template <typename T>
     struct ObjectData : public ObjectDataBase<T> {};
 
-    template <typename T>
-    struct ObjectData<T, true> : public ObjectDataBase<T> {
-        ObjectHandle builtObject = ObjectHandle{0, 0};
-    };
-
     template <>
-    struct ObjectData<DawnBuffer, false> : public ObjectDataBase<DawnBuffer> {
+    struct ObjectData<DawnBuffer> : public ObjectDataBase<DawnBuffer> {
         void* mappedData = nullptr;
         size_t mappedDataSize = 0;
     };
@@ -65,7 +56,6 @@ namespace dawn_wire { namespace server {
             // KnownObjects for ID 0.
             Data reservation;
             reservation.handle = nullptr;
-            reservation.valid = false;
             reservation.allocated = false;
             mKnown.push_back(reservation);
         }
@@ -109,7 +99,6 @@ namespace dawn_wire { namespace server {
 
             Data data;
             data.allocated = true;
-            data.valid = false;
             data.handle = nullptr;
 
             if (id >= mKnown.size()) {
@@ -136,7 +125,6 @@ namespace dawn_wire { namespace server {
             for (Data& data : mKnown) {
                 if (data.allocated && data.handle != nullptr) {
                     objects.push_back(data.handle);
-                    data.valid = false;
                     data.allocated = false;
                     data.handle = nullptr;
                 }
