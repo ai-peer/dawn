@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "1d2c73c9_d7cd0806",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-03-28T05:10:30Z",
+      "side": 1,
+      "message": "I admit that my comment for the code snippet is a little confusing...",
+      "parentUuid": "b605301a_c5ccb7cd",
+      "revId": "c74f4d7b07535ec698f4f8682fc308e5b0c99d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb6cbefd_233f2f52",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 12
