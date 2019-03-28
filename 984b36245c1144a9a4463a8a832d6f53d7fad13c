@@ -22,6 +22,30 @@
       "revId": "984b36245c1144a9a4463a8a832d6f53d7fad13c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50f6d51d_464344af",
+        "filename": "src/tests/unittests/validation/RenderPassValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-03-28T15:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f2d79eb_978f2a44",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "984b36245c1144a9a4463a8a832d6f53d7fad13c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
