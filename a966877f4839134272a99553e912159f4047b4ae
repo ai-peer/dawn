@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf51a95c_ebd054df",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "This could be a helper on d3d12::Texture itself.",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da051211_6d6b11b0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "This transitions the resources back to the state they were in previously. We should avoid this because it can introduce redundant barriers, and adds another barrier insertion point. More precisely:\n\n - If the resource was previously Sampled, but will get used as TransferSrc, then this makes barriers look like this: Sampled-\u003eResolveDest-\u003eSampled-\u003eTransferSrc when we could just do Sampled-\u003eResolveDest-\u003eTransferSrc by deferring the barrier later.\n - If the extra barrier causes a GPU stall, then it likely won\u0027t get combined with other barriers, while a later barrier could get combined.\n\nI suggest we do whole resource transitions for now and cache the current (resource-global) state in texture. Basically we could have a second TransitionUsageNow that takes a D3D12_RESOURCE_STATE instead of a Dawn texture usage.",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70e9c385_b1733e63",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "nit: to avoid deep nesting, we could do\n\n  if (resolveTarget \u003d\u003d nullptr) {\n    continue;\n  }",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41fcfb71_bb2cd59a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "Overall it would be nice if code had some more comments that explained what\u0027s happening briefly so we don\u0027t have to read 20+ lines of code to figure out what happens.",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fbe007c_0cea71f1",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "this block of comment is for 2D non-multisampled only.",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 1
+      },
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34c50778_9e1b64ad",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "This should also check that base layer and levels are 0.",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "339b8e28_2d97ed26",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1289c175_31941e63",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:31:38Z",
+      "side": 1,
+      "message": "Can we have a check that the mipLevel range is [0, 1)?",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
