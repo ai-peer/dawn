@@ -120,8 +120,8 @@ namespace dawn_native { namespace d3d12 {
         resourceDescriptor.DepthOrArraySize = GetDepthOrArraySize();
         resourceDescriptor.MipLevels = static_cast<UINT16>(GetNumMipLevels());
         resourceDescriptor.Format = D3D12TextureFormat(GetFormat());
-        resourceDescriptor.SampleDesc.Count = 1;
-        resourceDescriptor.SampleDesc.Quality = 0;
+        resourceDescriptor.SampleDesc.Count = descriptor->sampleCount;
+        resourceDescriptor.SampleDesc.Quality = 0xFFFFFFFF;  // D3D11_STANDARD_MULTISAMPLE_PATTERN
         resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
         resourceDescriptor.Flags = D3D12ResourceFlags(GetUsage(), GetFormat());
 
@@ -175,7 +175,7 @@ namespace dawn_native { namespace d3d12 {
             return;
         }
 
-        D3D12_RESOURCE_STATES lastState = D3D12TextureUsage(mLastUsage, GetFormat());
+        D3D12_RESOURCE_STATES lastState = GetLastResourceState();
         D3D12_RESOURCE_STATES newState = D3D12TextureUsage(usage, GetFormat());
 
         D3D12_RESOURCE_BARRIER barrier;
@@ -191,6 +191,10 @@ namespace dawn_native { namespace d3d12 {
         mLastUsage = usage;
     }
 
+    D3D12_RESOURCE_STATES Texture::GetLastResourceState() const {
+        return D3D12TextureUsage(mLastUsage, GetFormat());
+    }
+
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
         : TextureViewBase(texture, descriptor) {
         mSrvDesc.Format = D3D12TextureFormat(descriptor->format);
@@ -202,6 +206,7 @@ namespace dawn_native { namespace d3d12 {
         // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_srv
         // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_array_srv
         // TODO(jiawei.shao@intel.com): support more texture view dimensions.
+        // TODO(jiawei.shao@intel.com): support creating SRV on multisampled textures.
         switch (descriptor->dimension) {
             case dawn::TextureViewDimension::e2D:
             case dawn::TextureViewDimension::e2DArray:
@@ -247,11 +252,17 @@ namespace dawn_native { namespace d3d12 {
         // array textures. (Just like how we treat SRVs)
         // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_rtv
         // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_array_rtv
-        rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DARRAY;
-        rtvDesc.Texture2DArray.FirstArraySlice = GetBaseArrayLayer();
-        rtvDesc.Texture2DArray.ArraySize = GetLayerCount();
-        rtvDesc.Texture2DArray.MipSlice = GetBaseMipLevel();
-        rtvDesc.Texture2DArray.PlaneSlice = 0;
+        if (GetTexture()->IsMultisampledTexture()) {
+            ASSERT(GetTexture()->GetArrayLayers() == 1 && GetTexture()->GetNumMipLevels() == 1);
+            rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DMS;
+        } else {
+            rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2DARRAY;
+            rtvDesc.Texture2DArray.FirstArraySlice = GetBaseArrayLayer();
+            rtvDesc.Texture2DArray.ArraySize = GetLayerCount();
+            rtvDesc.Texture2DArray.MipSlice = GetBaseMipLevel();
+            rtvDesc.Texture2DArray.PlaneSlice = 0;
+        }
+
         return rtvDesc;
     }
 
@@ -259,9 +270,15 @@ namespace dawn_native { namespace d3d12 {
     D3D12_DEPTH_STENCIL_VIEW_DESC TextureView::GetDSVDescriptor() const {
         D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc;
         dsvDesc.Format = ToBackend(GetTexture())->GetD3D12Format();
-        dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-        dsvDesc.Texture2D.MipSlice = 0;
         dsvDesc.Flags = D3D12_DSV_FLAG_NONE;
+        if (GetTexture()->IsMultisampledTexture()) {
+            ASSERT(GetTexture()->GetArrayLayers() == 1 && GetTexture()->GetNumMipLevels() == 1);
+            dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2DMS;
+        } else {
+            dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+            dsvDesc.Texture2D.MipSlice = 0;
+        }
+
         return dsvDesc;
     }
 

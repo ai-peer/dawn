@@ -44,13 +44,18 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
+        uint32_t GetSubresourceIndex(uint32_t numMipLevels, uint32_t level, uint32_t slice) {
+            return numMipLevels * slice + level;
+        }
+
         D3D12_TEXTURE_COPY_LOCATION CreateTextureCopyLocationForTexture(const Texture& texture,
                                                                         uint32_t level,
                                                                         uint32_t slice) {
             D3D12_TEXTURE_COPY_LOCATION copyLocation;
             copyLocation.pResource = texture.GetD3D12Resource();
             copyLocation.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
-            copyLocation.SubresourceIndex = texture.GetNumMipLevels() * slice + level;
+            copyLocation.SubresourceIndex =
+                GetSubresourceIndex(texture.GetNumMipLevels(), level, slice);
 
             return copyLocation;
         }
@@ -343,6 +348,60 @@ namespace dawn_native { namespace d3d12 {
                     bindingTracker->samplerGPUDescriptorHeap.GetCPUHandle(0),
                     bindingTracker->samplerCPUDescriptorHeap.GetCPUHandle(0),
                     D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
+            }
+        }
+
+        void ResolveMultisampledRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                           BeginRenderPassCmd* renderPass) {
+            ASSERT(renderPass != nullptr);
+
+            for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
+                TextureViewBase* resolveTarget =
+                    renderPass->colorAttachments[i].resolveTarget.Get();
+                if (resolveTarget != nullptr) {
+                    Texture* colorTexture =
+                        ToBackend(renderPass->colorAttachments[i].view->GetTexture());
+                    Texture* resolveTexture = ToBackend(resolveTarget->GetTexture());
+
+                    ID3D12Resource* colorTextureHandle = colorTexture->GetD3D12Resource();
+                    ID3D12Resource* resolveTextureHandle = resolveTexture->GetD3D12Resource();
+
+                    D3D12_RESOURCE_STATES colorTextureState = colorTexture->GetLastResourceState();
+                    D3D12_RESOURCE_STATES resolveTextureState =
+                        resolveTexture->GetLastResourceState();
+
+                    const uint32_t resolveTextureSubresourceIndex = GetSubresourceIndex(
+                        resolveTexture->GetNumMipLevels(), resolveTarget->GetBaseMipLevel(),
+                        resolveTarget->GetBaseArrayLayer());
+                    constexpr uint32_t kColorTextureSubresourceIndex = 0;
+
+                    D3D12_RESOURCE_BARRIER barriers[2];
+                    barriers[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+                    barriers[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+                    barriers[0].Transition.pResource = colorTextureHandle;
+                    barriers[0].Transition.StateBefore = colorTextureState;
+                    barriers[0].Transition.StateAfter = D3D12_RESOURCE_STATE_RESOLVE_SOURCE;
+                    barriers[0].Transition.Subresource = kColorTextureSubresourceIndex;
+
+                    barriers[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+                    barriers[1].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+                    barriers[1].Transition.pResource = resolveTextureHandle;
+                    barriers[1].Transition.StateBefore = resolveTextureState;
+                    barriers[1].Transition.StateAfter = D3D12_RESOURCE_STATE_RESOLVE_DEST;
+                    barriers[1].Transition.Subresource = resolveTextureSubresourceIndex;
+                    commandList->ResourceBarrier(2, barriers);
+
+                    commandList->ResolveSubresource(
+                        resolveTextureHandle, resolveTextureSubresourceIndex, colorTextureHandle,
+                        kColorTextureSubresourceIndex, colorTexture->GetD3D12Format());
+
+                    // TODO(jiawei.shao@intel.com): don't set these barriers until we need to do so.
+                    barriers[0].Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_SOURCE;
+                    barriers[0].Transition.StateAfter = colorTextureState;
+                    barriers[1].Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_DEST;
+                    barriers[1].Transition.StateAfter = resolveTextureState;
+                    commandList->ResourceBarrier(2, barriers);
+                }
             }
         }
 
@@ -734,6 +793,12 @@ namespace dawn_native { namespace d3d12 {
             switch (type) {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
+
+                    // TODO(jiawei.shao@intel.com): avoid calling this function and enable MSAA
+                    // resolve in D3D12 render pass on the platforms that support this feature.
+                    if (renderPass->sampleCount > 1) {
+                        ResolveMultisampledRenderPass(commandList, renderPass);
+                    }
                     return;
                 } break;
 
