@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c15c0f29_c99f76aa",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-03-29T10:33:52Z",
+      "side": 1,
+      "message": "A comment on the previous CL was that this should be default deleted in the header (DestroyImpl() \u003d 0) so this function doesn\u0027t need to be implemented in this cpp file.",
+      "revId": "a350f7877a4cf0e9340b9a2b49ed040feb213ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
