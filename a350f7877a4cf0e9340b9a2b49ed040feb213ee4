@@ -16,6 +16,24 @@
       "revId": "a350f7877a4cf0e9340b9a2b49ed040feb213ee4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60151f74_899bad11",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-03-29T17:27:35Z",
+      "side": 1,
+      "message": "I think because TextureBase is instantiated in Texture.cpp line 333, there\u0027s compiler errors on  allocating abstract class.",
+      "parentUuid": "c15c0f29_c99f76aa",
+      "revId": "a350f7877a4cf0e9340b9a2b49ed040feb213ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
