@@ -37,6 +37,8 @@ namespace dawn_native { namespace d3d12 {
         void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                 dawn::TextureUsageBit usage);
 
+        D3D12_RESOURCE_STATES GetLastResourceState() const;
+
       private:
         // Dawn API
         void DestroyImpl() override;
