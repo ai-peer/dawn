@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "34b64869_d82f9a46",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-29T16:20:37Z",
+      "side": 1,
+      "message": "D3D12 has a dedicated function for this: D3D12CalcSubresource\nhttps://docs.microsoft.com/en-us/windows/desktop/direct3d12/d3d12calcsubresource",
+      "parentUuid": "bf51a95c_ebd054df",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da051211_6d6b11b0",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -64,6 +82,91 @@
       "writtenOn": "2019-03-29T10:31:38Z",
       "side": 1,
       "message": "Overall it would be nice if code had some more comments that explained what\u0027s happening briefly so we don\u0027t have to read 20+ lines of code to figure out what happens.",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cfa7852_63758093",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-29T16:20:37Z",
+      "side": 1,
+      "message": "Assign this to me if you like. I\u0027m handling the D3D12 native render pass code already.",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "042b0300_7c7c53ed",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-29T16:20:37Z",
+      "side": 1,
+      "message": "nit: I\u0027d prefer keeping the TRUE/FALSE macros here. i.e. GetSampleCount() \u003e 1 ? FALSE : TRUE;",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b6b5b95_e0207c27",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-29T16:20:37Z",
+      "side": 1,
+      "message": "You\u0027ll need to set quality \u003d 0xFFFFFFFF here, just like in the other SampleDescs",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c526ad4a_9e640d43",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-29T16:20:37Z",
+      "side": 1,
+      "message": "Quality should be 0 when samples \u003d 1",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8cb2ed0_b07e8a2d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-29T16:20:37Z",
+      "side": 1,
+      "message": "Whenever samples is \u003e 1, you must set flags _ALLOW_RENDER_TARGET or _ALLOW_DEPTH_STENCIL. This works currently because the tests include TextureUsageBit::OutputAttachment - but resource creation will fail when usage doesn\u0027t include OutputAttachment.",
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
