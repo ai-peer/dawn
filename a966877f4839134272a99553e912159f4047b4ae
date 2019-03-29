@@ -139,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "ee294186_b81ad634",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-03-29T19:07:39Z",
+      "side": 1,
+      "message": "Update: In our email about quality levels, it looks like 0 is correct. But we should still explicitly set it, and make sure RTVs/DSVs/Pipelines all have the same SampleDesc.",
+      "parentUuid": "1b6b5b95_e0207c27",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c526ad4a_9e640d43",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
