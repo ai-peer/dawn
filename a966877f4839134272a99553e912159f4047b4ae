@@ -371,6 +371,24 @@
     },
     {
       "key": {
+        "uuid": "618e62a0_1931151a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T08:28:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b4a1d89_e6603a12",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fbe007c_0cea71f1",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
