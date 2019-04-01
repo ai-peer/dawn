@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "28fc8c43_7b5cf20a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done\nD3D12CalcSubresource is defined in d3dx12.h, which is available separately from D3D12 headers.",
+      "parentUuid": "34b64869_d82f9a46",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da051211_6d6b11b0",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -51,6 +69,24 @@
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75153213_aba31aa9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da051211_6d6b11b0",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ab31e66b_436904a3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70e9c385_b1733e63",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41fcfb71_bb2cd59a",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -85,6 +139,24 @@
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21ce1859_f26d47d8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41fcfb71_bb2cd59a",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "205428c7_2a55c645",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cfa7852_63758093",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "042b0300_7c7c53ed",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 2
@@ -119,6 +209,24 @@
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "339d55ac_bbced949",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "042b0300_7c7c53ed",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -157,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "d5135127_cb12af03",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee294186_b81ad634",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c526ad4a_9e640d43",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -174,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "255e75af_c4cdb9be",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c526ad4a_9e640d43",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8cb2ed0_b07e8a2d",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -185,6 +329,24 @@
       "writtenOn": "2019-03-29T16:20:37Z",
       "side": 1,
       "message": "Whenever samples is \u003e 1, you must set flags _ALLOW_RENDER_TARGET or _ALLOW_DEPTH_STENCIL. This works currently because the tests include TextureUsageBit::OutputAttachment - but resource creation will fail when usage doesn\u0027t include OutputAttachment.",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac4710b2_ed7aa5eb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Ack\nAs this patch does not implement multisampled texture sampling, I suggest we not do this in this patch.",
+      "parentUuid": "f8cb2ed0_b07e8a2d",
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -214,6 +376,30 @@
     },
     {
       "key": {
+        "uuid": "f3175b37_8fce2559",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fbe007c_0cea71f1",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 1
+      },
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34c50778_9e1b64ad",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -228,6 +414,24 @@
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d7f8709_5f1864fe",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34c50778_9e1b64ad",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -248,6 +452,24 @@
     },
     {
       "key": {
+        "uuid": "fdca9c14_e7ecbb6f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "339b8e28_2d97ed26",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1289c175_31941e63",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -259,6 +481,24 @@
       "writtenOn": "2019-03-29T10:31:38Z",
       "side": 1,
       "message": "Can we have a check that the mipLevel range is [0, 1)?",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df0e690d_9a45010c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-01T06:21:03Z",
+      "side": 1,
+      "message": "Creating DSV on a layer of a depth stencil 2D array texture is not supported yet, so in this patch I move the ASSERT outside this \"if\".",
+      "parentUuid": "1289c175_31941e63",
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
