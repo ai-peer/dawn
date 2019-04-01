@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a63b6cc0_9afa41d5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-01T07:44:57Z",
+      "side": 1,
+      "message": "Let\u0027s not have subresource transitions for now because we only track a single state per resource so the state-tracking could get out of sync for example with a resource in ResolveDest for the first mip level and Sampled for the rest. It is ok to over-transition right now because we are planning to do fine-grained barrier tracking later.",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 65
+      },
+      "revId": "d9e9a5f986313ece76450b20585814d49f3c4bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

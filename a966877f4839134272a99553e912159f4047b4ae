@@ -353,6 +353,24 @@
     },
     {
       "key": {
+        "uuid": "7b4a1d89_e6603a12",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-01T07:44:57Z",
+      "side": 1,
+      "message": "Mmmmh we might as well fix it now because this patch introduces support for multi-sampled textures.",
+      "parentUuid": "ac4710b2_ed7aa5eb",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0fbe007c_0cea71f1",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -502,6 +520,24 @@
       "revId": "a966877f4839134272a99553e912159f4047b4ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1a8804f_24ea4873",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-01T07:44:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "df0e690d_9a45010c",
+      "revId": "a966877f4839134272a99553e912159f4047b4ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
