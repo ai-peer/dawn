@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a584e13e_1b63cf9c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-01T18:03:36Z",
+      "side": 1,
+      "message": "From the previous comments it seems like you were going to set Quality\u003d0 always. Did that change?\n\nIf there is any documentation on how to set this in D3D12, it would be nice to include it in a comment - I can\u0027t find anything at all (neither STANDARD_MULTISAMPLE_PATTERN nor CheckMultisampleQualityLevels exists).",
+      "revId": "fb6a9111e6718ac612d37df29d691625e2ec1f37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86a7d916_04b39dd9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-01T18:03:36Z",
+      "side": 1,
+      "message": "nit: might be better to rename to mLastState since the type has changed, then this will match.",
+      "range": {
+        "startLine": 193,
+        "startChar": 12,
+        "endLine": 193,
+        "endChar": 34
+      },
+      "revId": "fb6a9111e6718ac612d37df29d691625e2ec1f37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
