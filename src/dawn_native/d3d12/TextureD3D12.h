@@ -24,6 +24,7 @@ namespace dawn_native { namespace d3d12 {
     class Device;
 
     DXGI_FORMAT D3D12TextureFormat(dawn::TextureFormat format);
+    DXGI_SAMPLE_DESC D3D12SampleDesc(uint32_t sampleCount);
 
     class Texture : public TextureBase {
       public:
@@ -36,6 +37,10 @@ namespace dawn_native { namespace d3d12 {
 
         void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                 dawn::TextureUsageBit usage);
+        void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                D3D12_RESOURCE_STATES newState);
+
+        uint32_t GetSubresourceIndex(uint32_t mipmapLevel, uint32_t arraySlice) const;
 
       private:
         // Dawn API
@@ -45,7 +50,7 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3D12Resource> mResource = {};
         ID3D12Resource* mResourcePtr = nullptr;
-        dawn::TextureUsageBit mLastUsage = dawn::TextureUsageBit::None;
+        D3D12_RESOURCE_STATES mLastUsage = D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON;
     };
 
     class TextureView : public TextureViewBase {
