@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72e736e2_a27f6a19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-01T07:25:17Z",
+      "side": 1,
+      "message": "Also BUG\u003dchromium:947246",
+      "revId": "f495d234583d1514722bd590bfea5e4cf9be8373",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cc6458c_78a27797",
+        "filename": "src/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-01T07:25:17Z",
+      "side": 1,
+      "message": "Can we also have a link to dawn:126?",
+      "revId": "f495d234583d1514722bd590bfea5e4cf9be8373",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
