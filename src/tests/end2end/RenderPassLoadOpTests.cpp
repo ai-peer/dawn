@@ -112,6 +112,9 @@ class RenderPassLoadOpTests : public DawnTest {
 
 // Tests clearing, loading, and drawing into color attachments
 TEST_P(RenderPassLoadOpTests, ColorClearThenLoadAndDraw) {
+    // TODO(jiawei.shao@intel.com): investigate why the test is flaky on Linux Intel OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
+
     // Part 1: clear once, check to make sure it's cleared
     utils::ComboRenderPassDescriptor renderPassClearZero({renderTargetView});
     auto commandsClearZeroEncoder = device.CreateCommandEncoder();
