@@ -22,6 +22,29 @@
       "revId": "f740d6e341dc9af66673671b993ebf7af12c9832",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5d9814f_62e73f41",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-01T07:23:05Z",
+      "side": 1,
+      "message": "nit: \u003d\u003d 0",
+      "range": {
+        "startLine": 118,
+        "startChar": 12,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "f740d6e341dc9af66673671b993ebf7af12c9832",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
