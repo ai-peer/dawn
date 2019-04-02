@@ -61,9 +61,46 @@ TEST_F(SetScissorRectTest, EmptyScissor) {
     ASSERT_DEVICE_ERROR(encoder.Finish());
 }
 
+// Test to check that it is not allowed if any value in (x, y, width, height) in scissor rect is
+// negative
+TEST_F(SetScissorRectTest, NegativeScissor) {
+    DummyRenderPass renderPass(device);
+
+    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    // x value in scissor rect is negative.
+    {
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetScissorRect(-1, 0, 2, 2);
+        pass.EndPass();
+    }
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+
+    // y value in scissor rect is negative.
+    {
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetScissorRect(0, -1, 2, 2);
+        pass.EndPass();
+    }
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+
+    // width value in scissor rect is negative.
+    {
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetScissorRect(0, 0, -2, 2);
+        pass.EndPass();
+    }
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+
+    // height value in scissor rect is negative.
+    {
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetScissorRect(0, 0, 2, -2);
+        pass.EndPass();
+    }
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+
 // Test to check that a scissor larger than the framebuffer is allowed
-// TODO(cwallez@chromium.org): scissor values seem to be integers in all APIs do the same
-// and test negative values?
 TEST_F(SetScissorRectTest, ScissorLargerThanFramebuffer) {
     DummyRenderPass renderPass(device);
 
