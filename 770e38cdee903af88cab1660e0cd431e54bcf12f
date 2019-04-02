@@ -16,6 +16,24 @@
       "revId": "770e38cdee903af88cab1660e0cd431e54bcf12f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a13c7113_06ad276a",
+        "filename": "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-04-02T14:29:00Z",
+      "side": 1,
+      "message": "Done.\n\nThat\u0027s true. it\u0027s impossible to set negative values in web app because they are all positive in web idl. We can only set negative values in C++ code like this.",
+      "parentUuid": "63384aee_c7bf93c0",
+      "revId": "770e38cdee903af88cab1660e0cd431e54bcf12f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
