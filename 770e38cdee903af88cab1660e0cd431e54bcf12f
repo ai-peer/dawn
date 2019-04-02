@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63384aee_c7bf93c0",
+        "filename": "src/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-02T12:22:52Z",
+      "side": 1,
+      "message": "Erhm in Dawn these are u32 so they are always positive, and this test is doing UB casts. Let\u0027s just remove that comment. Thanks for looking into it though!",
+      "revId": "770e38cdee903af88cab1660e0cd431e54bcf12f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
