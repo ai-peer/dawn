@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e2c3cb9c_6fff5e13",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-02T01:20:30Z",
+      "side": 1,
+      "message": "Thanks for Bryan\u0027s explanation. In this patch I suggest we use 0, and we can update it later after more investigations.",
+      "parentUuid": "e3129148_136f44af",
+      "revId": "fb6a9111e6718ac612d37df29d691625e2ec1f37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86a7d916_04b39dd9",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -57,6 +75,30 @@
       "revId": "fb6a9111e6718ac612d37df29d691625e2ec1f37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed9bc96c_fad4d3bc",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-02T01:20:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86a7d916_04b39dd9",
+      "range": {
+        "startLine": 193,
+        "startChar": 12,
+        "endLine": 193,
+        "endChar": 34
+      },
+      "revId": "fb6a9111e6718ac612d37df29d691625e2ec1f37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
