@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e3129148_136f44af",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-04-02T00:25:57Z",
+      "side": 1,
+      "message": "The use of this value was not specified by D3D12. The assumption was that since DXGI (dxgicommon.h) defines its use near DXGI_SAMPLE_DESC, it would be safe for D3D12 too. I believe such a value is actually permitted. However, I would not make such an assumption for D3D12. I suggest we go with \"Quality\u003dO always\" then tune it based on GPU adapter. Sorry for the confusion.",
+      "parentUuid": "a584e13e_1b63cf9c",
+      "revId": "fb6a9111e6718ac612d37df29d691625e2ec1f37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86a7d916_04b39dd9",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
