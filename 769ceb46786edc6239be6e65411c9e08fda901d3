@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c4b89db2_fc8f8112",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-03T21:22:27Z",
+      "side": 1,
+      "message": "Can you also split off the depthStencilAttachment?\n\nTypes would be the following:\n\nstd::array\u003cVkAttachmentReference, kMaxAttachmentCount\u003e colorAttachmentRefs;\nstd::array\u003cVkAttachmentReference, kMaxAttachmentCount\u003e resolveAttachmentRefs;\nVkAttachmentReference depthStencilAttachmentRef;",
+      "parentUuid": "1db1bcac_a12ed779",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d4e158b0_300c9f73",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 4
