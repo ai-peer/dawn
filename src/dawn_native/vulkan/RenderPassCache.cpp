@@ -38,10 +38,12 @@ namespace dawn_native { namespace vulkan {
 
     void RenderPassCacheQuery::SetColor(uint32_t index,
                                         dawn::TextureFormat format,
-                                        dawn::LoadOp loadOp) {
+                                        dawn::LoadOp loadOp,
+                                        bool hasResolveTarget) {
         colorMask.set(index);
         colorFormats[index] = format;
         colorLoadOp[index] = loadOp;
+        resolveTargetMask[index] = hasResolveTarget;
     }
 
     void RenderPassCacheQuery::SetDepthStencil(dawn::TextureFormat format,
@@ -51,6 +53,10 @@ namespace dawn_native { namespace vulkan {
         depthStencilFormat = format;
         this->depthLoadOp = depthLoadOp;
         this->stencilLoadOp = stencilLoadOp;
+    }
+
+    void RenderPassCacheQuery::SetSampleCount(uint32_t sampleCount) {
+        this->sampleCount = sampleCount;
     }
 
     // RenderPassCache
@@ -80,10 +86,13 @@ namespace dawn_native { namespace vulkan {
         const RenderPassCacheQuery& query) const {
         // The Vulkan subpasses want to know the layout of the attachments with VkAttachmentRef.
         // Precompute them as they must be pointer-chained in VkSubpassDescription
-        std::array<VkAttachmentReference, kMaxColorAttachments + 1> attachmentRefs;
+        constexpr uint32_t kMaxAttachmentCount = kMaxColorAttachments * 2 + 1;
+        std::array<VkAttachmentReference, kMaxAttachmentCount> attachmentRefs;
 
         // Contains the attachment description that will be chained in the create info
-        std::array<VkAttachmentDescription, kMaxColorAttachments + 1> attachmentDescs = {};
+        std::array<VkAttachmentDescription, kMaxAttachmentCount> attachmentDescs = {};
+
+        VkSampleCountFlagBits vkSampleCount = VulkanSampleCount(query.sampleCount);
 
         uint32_t attachmentCount = 0;
         for (uint32_t i : IterateBitSet(query.colorMask)) {
@@ -95,7 +104,7 @@ namespace dawn_native { namespace vulkan {
 
             attachmentDesc.flags = 0;
             attachmentDesc.format = VulkanImageFormat(query.colorFormats[i]);
-            attachmentDesc.samples = VK_SAMPLE_COUNT_1_BIT;
+            attachmentDesc.samples = vkSampleCount;
             attachmentDesc.loadOp = VulkanAttachmentLoadOp(query.colorLoadOp[i]);
             attachmentDesc.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
             attachmentDesc.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
@@ -117,7 +126,7 @@ namespace dawn_native { namespace vulkan {
 
             attachmentDesc.flags = 0;
             attachmentDesc.format = VulkanImageFormat(query.depthStencilFormat);
-            attachmentDesc.samples = VK_SAMPLE_COUNT_1_BIT;
+            attachmentDesc.samples = vkSampleCount;
             attachmentDesc.loadOp = VulkanAttachmentLoadOp(query.depthLoadOp);
             attachmentDesc.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
             attachmentDesc.stencilLoadOp = VulkanAttachmentLoadOp(query.stencilLoadOp);
@@ -128,6 +137,32 @@ namespace dawn_native { namespace vulkan {
             attachmentCount++;
         }
 
+        uint32_t colorAndDepthStencilAttachmentCount = attachmentCount;
+
+        bool hasResolveTarget = false;
+        for (uint32_t i : IterateBitSet(query.resolveTargetMask)) {
+            hasResolveTarget = true;
+
+            auto& attachmentRef = attachmentRefs[attachmentCount];
+            auto& attachmentDesc = attachmentDescs[attachmentCount];
+
+            attachmentRef.attachment = attachmentCount;
+            attachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+            attachmentDesc.flags = 0;
+            attachmentDesc.format = VulkanImageFormat(query.colorFormats[i]);
+            attachmentDesc.samples = VK_SAMPLE_COUNT_1_BIT;
+            attachmentDesc.loadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+            attachmentDesc.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+            attachmentDesc.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+            attachmentDesc.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+            attachmentCount++;
+        }
+
+        VkAttachmentReference* resolveTargetAttachment = hasResolveTarget ?
+            attachmentRefs.data() + colorAndDepthStencilAttachmentCount : nullptr;
+
         // Create the VkSubpassDescription that will be chained in the VkRenderPassCreateInfo
         VkSubpassDescription subpassDesc;
         subpassDesc.flags = 0;
@@ -136,7 +171,7 @@ namespace dawn_native { namespace vulkan {
         subpassDesc.pInputAttachments = nullptr;
         subpassDesc.colorAttachmentCount = colorAttachmentCount;
         subpassDesc.pColorAttachments = attachmentRefs.data();
-        subpassDesc.pResolveAttachments = nullptr;
+        subpassDesc.pResolveAttachments = resolveTargetAttachment;
         subpassDesc.pDepthStencilAttachment = depthStencilAttachment;
         subpassDesc.preserveAttachmentCount = 0;
         subpassDesc.pPreserveAttachments = nullptr;
@@ -168,6 +203,8 @@ namespace dawn_native { namespace vulkan {
     size_t RenderPassCache::CacheFuncs::operator()(const RenderPassCacheQuery& query) const {
         size_t hash = Hash(query.colorMask);
 
+        HashCombine(&hash, Hash(query.resolveTargetMask));
+
         for (uint32_t i : IterateBitSet(query.colorMask)) {
             HashCombine(&hash, query.colorFormats[i], query.colorLoadOp[i]);
         }
@@ -177,12 +214,22 @@ namespace dawn_native { namespace vulkan {
             HashCombine(&hash, query.depthStencilFormat, query.depthLoadOp, query.stencilLoadOp);
         }
 
+        HashCombine(&hash, query.sampleCount);
+
         return hash;
     }
 
     bool RenderPassCache::CacheFuncs::operator()(const RenderPassCacheQuery& a,
                                                  const RenderPassCacheQuery& b) const {
         if (a.colorMask != b.colorMask) {
+            return false;
+        }
+
+        if (a.resolveTargetMask != b.resolveTargetMask) {
+            return false;
+        }
+
+        if (a.sampleCount != b.sampleCount) {
             return false;
         }
 

@@ -34,12 +34,17 @@ namespace dawn_native { namespace vulkan {
     struct RenderPassCacheQuery {
         // Use these helpers to build the query, they make sure all relevant data is initialized and
         // masks set.
-        void SetColor(uint32_t index, dawn::TextureFormat format, dawn::LoadOp loadOp);
+        void SetColor(uint32_t index,
+                      dawn::TextureFormat format,
+                      dawn::LoadOp loadOp,
+                      bool hasResolveTarget);
         void SetDepthStencil(dawn::TextureFormat format,
                              dawn::LoadOp depthLoadOp,
                              dawn::LoadOp stencilLoadOp);
+        void SetSampleCount(uint32_t sampleCount);
 
         std::bitset<kMaxColorAttachments> colorMask;
+        std::bitset<kMaxColorAttachments> resolveTargetMask;
         std::array<dawn::TextureFormat, kMaxColorAttachments> colorFormats;
         std::array<dawn::LoadOp, kMaxColorAttachments> colorLoadOp;
 
@@ -47,6 +52,8 @@ namespace dawn_native { namespace vulkan {
         dawn::TextureFormat depthStencilFormat;
         dawn::LoadOp depthLoadOp;
         dawn::LoadOp stencilLoadOp;
+
+        uint32_t sampleCount;
     };
 
     // Caches VkRenderPasses so that we don't create duplicate ones for every RenderPipeline or
