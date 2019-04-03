@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1db1bcac_a12ed779",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-03T21:16:39Z",
+      "side": 1,
+      "message": "+1 for some reason I thought all attachment refs were set in one pointer but resolve attachments have their own pointer so we should definitely split the arrays.",
+      "parentUuid": "c5355590_3e99f6d1",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d4e158b0_300c9f73",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 4
