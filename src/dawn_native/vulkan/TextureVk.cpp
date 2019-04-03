@@ -245,6 +245,18 @@ namespace dawn_native { namespace vulkan {
         return flags;
     }
 
+    // TODO(jiawei.shao@intel.com): support more sample counts
+    VkSampleCountFlagBits VulkanSampleCount(uint32_t sampleCount) {
+        switch (sampleCount) {
+            case 1:
+                return VK_SAMPLE_COUNT_1_BIT;
+            case 4:
+                return VK_SAMPLE_COUNT_4_BIT;
+            default:
+                UNREACHABLE();
+        }
+    }
+
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
         : TextureBase(device, descriptor, TextureState::OwnedInternal) {
         // Create the Vulkan image "container". We don't need to check that the format supports the
@@ -259,7 +271,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.extent = VulkanExtent3D(GetSize());
         createInfo.mipLevels = GetNumMipLevels();
         createInfo.arrayLayers = GetArrayLayers();
-        createInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+        createInfo.samples = VulkanSampleCount(GetSampleCount());
         createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
         createInfo.usage = VulkanImageUsage(GetUsage(), GetFormat());
         createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
