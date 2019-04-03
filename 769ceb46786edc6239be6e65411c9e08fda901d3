@@ -141,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "003fee61_e4d62c92",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-03T21:16:09Z",
+      "side": 1,
+      "message": "oh wait, I see now that CommandBufferVk is supposed to match how it is done here, not the other way around. Disregard my comment, +1 to Corentin\u0027s comment.",
+      "parentUuid": "07d961d1_ffd9a1c6",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23a9e3c3_ffe43d9a",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
