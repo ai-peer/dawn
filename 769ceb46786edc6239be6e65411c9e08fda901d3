@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4e158b0_300c9f73",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-03T09:18:05Z",
+      "side": 1,
+      "message": "nit: resolveAttachmentStartIndex?",
+      "range": {
+        "startLine": 140,
+        "startChar": 17,
+        "endLine": 140,
+        "endChar": 52
+      },
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a6bf42d_8e8dc906",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-03T09:18:05Z",
+      "side": 1,
+      "message": "This can be computed using query.resolveTargetMask.any()",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 38
+      },
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21cdb8f0_7bdc8a2b",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-03T09:18:05Z",
+      "side": 1,
+      "message": "Can you add a comment that explains how the VkRenderPasses created pack the attachments so that we can easily make sure we match the same order in CommandBufferVk?",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23a9e3c3_ffe43d9a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-03T09:18:05Z",
+      "side": 1,
+      "message": "WebGPU doesn\u0027t support other sample counts, no need for a TODO.",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a23bbfbf_95282a57",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-03T09:18:05Z",
+      "side": 1,
+      "message": "Can we have an assert that uses vkGetPhysicalDeviceImageFormatProperties to make sure this image is supported? Vulkan has very few guarantees that all formats can be used as 4xMSAA. To avoid adding too much code here, it could be in a helper function.",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
