@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c5355590_3e99f6d1",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-03T21:14:13Z",
+      "side": 1,
+      "message": "I don\u0027t think it makes sense to use attachmentRefs for both color/depthstencil attachments and resolve attachments, because it just makes the array bigger and confuses things later. Instead I\u0027d use two std::arrays colorAttachmentRefs and resolveAttachmentRefs, each with appropriate size. It shouldn\u0027t waste any space.\n\n(Actually, I would personally prefer to separate the depthstencil attachment out from the color attachments as well if possible.)",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d4e158b0_300c9f73",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 4
@@ -13,6 +30,30 @@
       "writtenOn": "2019-04-03T09:18:05Z",
       "side": 1,
       "message": "nit: resolveAttachmentStartIndex?",
+      "range": {
+        "startLine": 140,
+        "startChar": 17,
+        "endLine": 140,
+        "endChar": 52
+      },
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83241375_d2b9ca8d",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-03T21:14:13Z",
+      "side": 1,
+      "message": "Comment above would make this unnecessary.",
+      "parentUuid": "d4e158b0_300c9f73",
       "range": {
         "startLine": 140,
         "startChar": 17,
@@ -48,6 +89,23 @@
     },
     {
       "key": {
+        "uuid": "4c5fe7e6_325781bd",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-03T21:14:13Z",
+      "side": 1,
+      "message": "Comment above would make this simpler by removing the pointer arithmetic.",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "21cdb8f0_7bdc8a2b",
         "filename": "src/dawn_native/vulkan/RenderPassCache.h",
         "patchSetId": 4
@@ -59,6 +117,24 @@
       "writtenOn": "2019-04-03T09:18:05Z",
       "side": 1,
       "message": "Can you add a comment that explains how the VkRenderPasses created pack the attachments so that we can easily make sure we match the same order in CommandBufferVk?",
+      "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07d961d1_ffd9a1c6",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-03T21:14:13Z",
+      "side": 1,
+      "message": "Maybe just refer to the function that does it, IMO, because I wouldn\u0027t want this comment to get out of sync with the implementation there. e.g. \"Needs to match the attachment layout created by RecordBeginRenderPass\"",
+      "parentUuid": "21cdb8f0_7bdc8a2b",
       "revId": "769ceb46786edc6239be6e65411c9e08fda901d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
