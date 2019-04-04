@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddbf466a_70027a81",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-04T09:16:25Z",
+      "side": 1,
+      "message": "Erhm that shouldn\u0027t be BufferCopy because we don\u0027t care about rowPitch and imageHeight. Can you fix it to contain the same arguments as BufferToBufferCopy on the API side on a separate CL?",
+      "revId": "bd04c06bf1f1bcaf7a4a657742739eb3bb58484f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa1a3332_900a40c3",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-04T09:16:25Z",
+      "side": 1,
+      "message": "Can we assert that this is smaller than D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT?",
+      "range": {
+        "startLine": 73,
+        "startChar": 50,
+        "endLine": 73,
+        "endChar": 72
+      },
+      "revId": "bd04c06bf1f1bcaf7a4a657742739eb3bb58484f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
