@@ -75,6 +75,15 @@ namespace dawn_native {
             return {};
         }
 
+        MaybeError ValidateCopySizeFitsInBuffer(const BufferRegionCopy& bufferCopy,
+                                                uint64_t dataSize) {
+            if (!FitsInBuffer(bufferCopy.buffer.Get(), bufferCopy.offset, dataSize)) {
+                return DAWN_VALIDATION_ERROR("Copy would overflow the buffer");
+            }
+
+            return {};
+        }
+
         MaybeError ValidateB2BCopySizeAlignment(uint64_t dataSize,
                                                 uint64_t srcOffset,
                                                 uint64_t dstOffset) {
@@ -92,7 +101,8 @@ namespace dawn_native {
             return {};
         }
 
-        MaybeError ValidateTexelBufferOffset(TextureBase* texture, const BufferCopy& bufferCopy) {
+        MaybeError ValidateTexelBufferOffset(TextureBase* texture,
+                                             const BufferRegionCopy& bufferCopy) {
             uint32_t texelSize =
                 static_cast<uint32_t>(TextureFormatPixelSize(texture->GetFormat()));
             if (bufferCopy.offset % texelSize != 0) {

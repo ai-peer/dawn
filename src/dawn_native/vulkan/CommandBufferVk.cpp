@@ -41,7 +41,7 @@ namespace dawn_native { namespace vulkan {
             }
         }
 
-        VkBufferImageCopy ComputeBufferImageCopyRegion(const BufferCopy& bufferCopy,
+        VkBufferImageCopy ComputeBufferImageCopyRegion(const BufferRegionCopy& bufferCopy,
                                                        const TextureCopy& textureCopy,
                                                        const Extent3D& copySize) {
             const Texture* texture = ToBackend(textureCopy.texture.Get());
