@@ -90,6 +90,11 @@ namespace dawn_native {
 
     struct BufferCopy {
         Ref<BufferBase> buffer;
+        uint64_t offset;  // Bytes
+    };
+
+    struct BufferRegionCopy {
+        Ref<BufferBase> buffer;
         uint64_t offset;       // Bytes
         uint32_t rowPitch;     // Bytes
         uint32_t imageHeight;  // Texels
@@ -109,14 +114,14 @@ namespace dawn_native {
     };
 
     struct CopyBufferToTextureCmd {
-        BufferCopy source;
+        BufferRegionCopy source;
         TextureCopy destination;
         Extent3D copySize;  // Texels
     };
 
     struct CopyTextureToBufferCmd {
         TextureCopy source;
-        BufferCopy destination;
+        BufferRegionCopy destination;
         Extent3D copySize;  // Texels
     };
 
