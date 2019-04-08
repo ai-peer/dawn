@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "5cb52490_e53c7374",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:29:42Z",
+      "side": 1,
+      "message": "I was using the term workaround but replace this with \"feature\", which would be using a similar path to workaround for emulation.",
+      "parentUuid": "4b1d4dda_35475aae",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8c65239_bd679c37",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 16
