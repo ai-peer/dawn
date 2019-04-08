@@ -1,0 +1,192 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "333f1354_588915a4",
+        "filename": "src/common/Math.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "nit: using unsigned_type \u003d typename ...",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 67
+      },
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16ab0027_b48d2c4d",
+        "filename": "src/common/Math.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "The implementation could be in the .cpp file. Also we should use uint32_t and int32_t so that we know exactly what the bit widths are.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a66aa333_c8d14dc5",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "nit: type / typeName / variableType",
+      "range": {
+        "startLine": 204,
+        "startChar": 20,
+        "endLine": 204,
+        "endChar": 30
+      },
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90eb86db_4aefe48f",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "Is there the same issue if we use std::to_string?",
+      "range": {
+        "startLine": 228,
+        "startChar": 16,
+        "endLine": 228,
+        "endChar": 76
+      },
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59b6cbd2_244212d5",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "Instead of having a separate commaPos variable, we could have the following just after the loop on j:\n\n if (j !\u003d 0) {\n   vs \u003c\u003c \", \";\n }",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28c5d9ac_cdcdb98a",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "This seems like a really big threshold, normally vertex data should be perfectly forwarded so we have at max one (or maybe two) ULP differences. If the problem is that text-based representations of the data aren\u0027t precise enough (because not all digits after the comma are written), we could upload a UBO with the expected data and have perfect forwarding of bits.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6637cf4c_cecc84d4",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "Can you explain how these numbers were chosen? max() and min() make sense but the others are just random?",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6510c8c9_12fb6b69",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "nit: here and in other places, just pass vertexData twice :)",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce475249_07f039e2",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "We could also have a helper in this file that takes a vector and normalizes all elements, so that we can just do DoVertexFormatTest(dawn::VertexFormat::UChar2Norm, vertexData, Normalize(vertexData));",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4676cb27_85766505",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T16:04:00Z",
+      "side": 1,
+      "message": "Can we have floats for +0, -0 (assuming exact comparison) as well as values that aren\u0027t representable in half floats? Not sure about NaN and infinites though.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
