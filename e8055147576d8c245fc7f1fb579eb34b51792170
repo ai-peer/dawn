@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ca638ff5_47f997f6",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-08T13:46:43Z",
+      "side": 1,
+      "message": "OK so do you mean in this patch (the first one to support MSAA on Metal) I should always use MTLStoreActionStoreAndMultisampleResolve without checking if it is really supported, and add the workaround with \"non-store and resolve\" later?\n\nFor the implementation of MSAA resolve on Metal, we need to add another workaround for the failures in the end2end test. I suggest we discuss the design of the infrastructure of driver workarounds in that patch.",
+      "parentUuid": "5cb52490_e53c7374",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8c65239_bd679c37",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 16
