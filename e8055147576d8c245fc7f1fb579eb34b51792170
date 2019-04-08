@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4b1d4dda_35475aae",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:28:11Z",
+      "side": 1,
+      "message": "You\u0027re right that the @available syntax is not enough.\n\nWe don\u0027t really have a good story to test with and without workarounds, even ANGLE doesn\u0027t have that at this point. I\u0027m thinking we could force the enablement of some workarounds for some tests using an extension of the INSTANTIATE_TEST syntax but that would come later.\n\nIn this patch we should definitely implement the good, no-workaround case in priority. Would you like to implement the workaround facilities in Dawn so we can test the second path?",
+      "parentUuid": "a32bf6db_953a5b34",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8c65239_bd679c37",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 16
