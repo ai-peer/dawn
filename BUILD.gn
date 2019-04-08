@@ -468,6 +468,7 @@ static_library("dawn_utils") {
     "src/utils/ComboRenderPipelineDescriptor.h",
     "src/utils/DawnHelpers.cpp",
     "src/utils/DawnHelpers.h",
+    "src/utils/Math.h",
     "src/utils/SystemUtils.cpp",
     "src/utils/SystemUtils.h",
     "src/utils/TerribleCommandBuffer.cpp",
@@ -647,6 +648,7 @@ test("dawn_end2end_tests") {
     "src/tests/end2end/SamplerTests.cpp",
     "src/tests/end2end/ScissorTests.cpp",
     "src/tests/end2end/TextureViewTests.cpp",
+    "src/tests/end2end/VertexFormatTests.cpp",
     "src/tests/end2end/ViewportOrientationTests.cpp",
   ]
 
