@@ -410,6 +410,8 @@ TEST_P(MultisampledRenderingTest, ResolveIntoOneMipmapLevelOf2DTexture) {
 
 // Test using a level or a layer of a 2D array texture as resolve target works correctly.
 TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
+    // TODO(jiawei.shao@intel.com): investigate why this case causes crashes on Intel and Nvidia.
+    DAWN_SKIP_TEST_IF(IsMetal() && (IsIntel() || IsNvidia()));
     dawn::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateDefaultTextureView();
 
@@ -468,5 +470,4 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
     VerifyResolveTarget(kGreen, resolveTexture2, kBaseMipLevel2, kBaseArrayLayer2);
 }
 
-// TODO(jiawei.shao@intel.com): enable multisampled rendering on all Dawn backends.
-DAWN_INSTANTIATE_TEST(MultisampledRenderingTest, D3D12Backend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(MultisampledRenderingTest, D3D12Backend, OpenGLBackend, MetalBackend, VulkanBackend);
