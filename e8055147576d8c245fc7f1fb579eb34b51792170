@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e80562c3_05bba6b1",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T08:05:25Z",
+      "side": 1,
+      "message": "You could do it now using the \"if (@available(macOS 10.13, *)) {\" type of syntax. This function will also need to export if we need to resolve using a different render pass.",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8c65239_bd679c37",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T08:05:25Z",
+      "side": 1,
+      "message": "nit: let\u0027s use the texture\u0027s array layer and mip level even if it is always 0 for now.",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f33ed96_0ba90345",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T08:05:25Z",
+      "side": 1,
+      "message": "That\u0027s more because all WebGPU target APIs don\u0027t support it. Can we replace this with an assert that arrayLayers is 1 in the if (sampleCount \u003e1)?",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
