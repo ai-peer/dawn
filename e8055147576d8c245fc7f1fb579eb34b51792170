@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a32bf6db_953a5b34",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-08T08:41:31Z",
+      "side": 1,
+      "message": "Do you mean we should also implement MTLStoreActionStoreAndMultisampleResolve in this patch?\n\nI have tested all the try bots support MTLStoreActionStoreAndMultisampleResolve, so if we use this MTLStoreActionStoreAndMultisampleResolve now, the path that resolving in another render pass won\u0027t be tested on the try bots with this CL. \n\nWe may also need to add queries to determine if we can use this action on the creation of MTLDevice, which I think is better to be added in another patch (maybe just like this:\nhttps://github.com/KhronosGroup/MoltenVK/blob/master/MoltenVK/MoltenVK/GPUObjects/MVKDevice.mm#L739)",
+      "parentUuid": "e80562c3_05bba6b1",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8c65239_bd679c37",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 16
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "00adef71_3dff13d2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-08T08:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8c65239_bd679c37",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f33ed96_0ba90345",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 16
@@ -50,6 +86,24 @@
       "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5071164_4590f286",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-08T08:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f33ed96_0ba90345",
+      "revId": "e8055147576d8c245fc7f1fb579eb34b51792170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
