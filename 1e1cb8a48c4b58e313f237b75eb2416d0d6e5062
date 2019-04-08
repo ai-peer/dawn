@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8ccf375_f56c7793",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "nit: ComponentCount?",
+      "range": {
+        "startLine": 125,
+        "startChar": 13,
+        "endLine": 125,
+        "endChar": 26
+      },
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efe245fd_632bf299",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "This is missing a DAWN_UNREACHABLE();",
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "024521ba_691285c2",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "nit: ShaderVariableType?",
+      "range": {
+        "startLine": 164,
+        "startChar": 16,
+        "endLine": 164,
+        "endChar": 30
+      },
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d020cd98_fed4e729",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "Please let the code breath and add comments that describe what the generated code does and look like, see what\u0027s in InputStateTests.cpp.\n\nRight now this is really hard to read and understand.",
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1448d887_44fd8681",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "this should be done in ShaderVariableType",
+      "range": {
+        "startLine": 202,
+        "startChar": 14,
+        "endLine": 202,
+        "endChar": 71
+      },
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cd7f1cb_8e055771",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "Consider splitting expected into a declaration and an assignment per array member to help make code generation more readable.\n\nI\u0027ll review the rest of code generation after this and other comments are done.",
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a50246b6_6930e2c3",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "range": {
+        "startLine": 256,
+        "startChar": 38,
+        "endLine": 256,
+        "endChar": 39
+      },
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d954491_6d31870e",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "The code in these tests looks like it good be factored more: the only things that change are vertexData, expectedData and the dawn::VertexFormat. We could have the main test function be just data and a call to a helper like this:\n\ntemplate\u003ctypename VertexType, typename ExpectedType\u003e\nvoid DoVertexFormatTest(dawn::VertexFormat format, std::vector\u003cVertexType\u003e, std::vector\u003cExpectedType\u003e);\n\nAnd a test would look like the following:\n\n    std::vector\u003cuint8_t\u003e vertexData \u003d {\n        std::numeric_limits\u003cint8_t\u003e::max(),\n        std::numeric_limits\u003cint8_t\u003e::min(),\n        std::numeric_limits\u003cint8_t\u003e::max() / 2,\n        std::numeric_limits\u003cint8_t\u003e::min() / 2,\n        120,\n        -121,\n        0,\n        0  // padding two bytes for buffer copy\n    };\n    std::vector\u003cfloat\u003e expectedData \u003d {utils::Normalize(vertexData[0]), utils::Normalize(vertexData[1]),\n                             utils::Normalize(vertexData[2]), utils::Normalize(vertexData[3]),\n                             utils::Normalize(vertexData[4]), utils::Normalize(vertexData[5])};\n    DoVertexFormatTest(dawn::VertexFormat:Char2Norm, vertexData, expectedData);",
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e4831c6_66d41fa9",
+        "filename": "src/utils/Math.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "Any reason this is not in src/common/Math.cpp/h?",
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae536ee5_90e362ac",
+        "filename": "src/utils/Math.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:46:04Z",
+      "side": 1,
+      "message": "Does ANGLE have unittests for this and Normalize? Can we port the over?",
+      "revId": "1e1cb8a48c4b58e313f237b75eb2416d0d6e5062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
