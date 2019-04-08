@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0728b4d9_ba23ac3d",
+        "filename": "src/dawn_native/Commands.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-08T12:19:18Z",
+      "side": 1,
+      "message": "That makes the commands not look like the prototype of the functions, can we just have the 5 arguments inline in CopyBufferToBuffer?",
+      "revId": "e77bd0762c8658def582fdb6e1846213f5713267",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
