@@ -122,6 +122,23 @@
     },
     {
       "key": {
+        "uuid": "7098e0c5_cb91e79f",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-09T06:54:14Z",
+      "side": 1,
+      "message": "For integer and unsigned integer vertex formats, I think you can directly compare if test is exactly equal to expected.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6637cf4c_cecc84d4",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
