@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "266dd9dc_7e61aeea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-09T06:36:23Z",
+      "side": 1,
+      "message": "Can we have a BUG\u003d? It can be for the Chromium bug you\u0027re working on.",
+      "revId": "a99ab503cff293dfe88204f3ea3d0c7bf19e0dc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
