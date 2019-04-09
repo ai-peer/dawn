@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "21ed89dd_d0c12d17",
+        "filename": "src/common/Math.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-09T23:41:09Z",
+      "side": 1,
+      "message": "Instead of min, this should static_assert that the sizes are equal.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16ab0027_b48d2c4d",
         "filename": "src/common/Math.h",
         "patchSetId": 2
@@ -36,6 +53,70 @@
       "writtenOn": "2019-04-08T16:04:00Z",
       "side": 1,
       "message": "The implementation could be in the .cpp file. Also we should use uint32_t and int32_t so that we know exactly what the bit widths are.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a77ff80_1dc11353",
+        "filename": "src/common/Math.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-09T23:41:09Z",
+      "side": 1,
+      "message": "uint32_t and uint16_t, I think",
+      "parentUuid": "16ab0027_b48d2c4d",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63116ec9_5144f034",
+        "filename": "src/common/Math.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-09T23:41:09Z",
+      "side": 1,
+      "message": "nit: sign16?",
+      "range": {
+        "startLine": 67,
+        "startChar": 17,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e640cb38_96d854d1",
+        "filename": "src/common/Math.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-09T23:41:09Z",
+      "side": 1,
+      "message": "nit: name isn\u0027t very descriptive",
+      "range": {
+        "startLine": 68,
+        "startChar": 17,
+        "endLine": 68,
+        "endChar": 20
+      },
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -224,6 +305,24 @@
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eeba3f04_7d67c53c",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-09T23:41:09Z",
+      "side": 1,
+      "message": "marking unresolved",
+      "parentUuid": "bb03dd85_3f9b0436",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
