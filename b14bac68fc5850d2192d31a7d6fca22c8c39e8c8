@@ -139,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "a0cd3863_6dc3cfa0",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-09T01:02:07Z",
+      "side": 1,
+      "message": "Yes, the others are just random.",
+      "parentUuid": "6637cf4c_cecc84d4",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6510c8c9_12fb6b69",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -153,6 +171,24 @@
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb03dd85_3f9b0436",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-09T01:02:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6510c8c9_12fb6b69",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +209,24 @@
     },
     {
       "key": {
+        "uuid": "f02ae672_c81c82d9",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-09T01:02:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ce475249_07f039e2",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4676cb27_85766505",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -184,6 +238,24 @@
       "writtenOn": "2019-04-08T16:04:00Z",
       "side": 1,
       "message": "Can we have floats for +0, -0 (assuming exact comparison) as well as values that aren\u0027t representable in half floats? Not sure about NaN and infinites though.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf128d63_a99db22c",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-09T01:02:07Z",
+      "side": 1,
+      "message": "Hmm, good point. TBH, I just pick some random value to check float. I agree with you and I\u0027ll think about the value.",
+      "parentUuid": "4676cb27_85766505",
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
