@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <sstream>
+
 #include "dawn_native/ShaderModule.h"
 
 #include "dawn_native/BindGroupLayout.h"
@@ -153,7 +155,8 @@ namespace dawn_native {
         }
 
         // Fill in bindingInfo with the SPIRV bindings
-        auto ExtractResourcesBinding = [this](const std::vector<spirv_cross::Resource>& resources,
+        auto ExtractResourcesBinding = [this](const spirv_cross::SmallVector<spirv_cross::Resource>&
+                                                  resources,
                                               const spirv_cross::Compiler& compiler,
                                               dawn::BindingType bindingType) {
             for (const auto& resource : resources) {
