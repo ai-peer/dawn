@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07a7eb96_30e933b8",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-10T12:13:47Z",
+      "side": 1,
+      "message": "Can this be CCW and CW? It is an acronym for (Counter)ClockWise so it should always be capitalized.",
+      "range": {
+        "startLine": 564,
+        "startChar": 34,
+        "endLine": 564,
+        "endChar": 37
+      },
+      "revId": "245e89ab398861d203245ecabcd11b935bdab6c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23cb49f9_00c935b8",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-10T12:13:47Z",
+      "side": 1,
+      "message": "This should be None, it seems that it will be the default in WebGPU.",
+      "revId": "245e89ab398861d203245ecabcd11b935bdab6c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
