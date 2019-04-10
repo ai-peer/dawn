@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0c9da149_25ebf45b",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-04-10T13:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07a7eb96_30e933b8",
+      "range": {
+        "startLine": 564,
+        "startChar": 34,
+        "endLine": 564,
+        "endChar": 37
+      },
+      "revId": "245e89ab398861d203245ecabcd11b935bdab6c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23cb49f9_00c935b8",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 2
@@ -39,6 +63,24 @@
       "revId": "245e89ab398861d203245ecabcd11b935bdab6c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99587792_26706db3",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-04-10T13:27:55Z",
+      "side": 1,
+      "message": "Done.\n\nJust let you know that the default value is Back in D3D, and None in Metal. While Vulkan doesn\u0027t have default value.",
+      "parentUuid": "23cb49f9_00c935b8",
+      "revId": "245e89ab398861d203245ecabcd11b935bdab6c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
