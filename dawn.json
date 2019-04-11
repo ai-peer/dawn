@@ -749,7 +749,7 @@
                     {"name": "index count", "type": "uint32_t"},
                     {"name": "instance count", "type": "uint32_t"},
                     {"name": "first index", "type": "uint32_t"},
-                    {"name": "base vertex", "type": "uint32_t"},
+                    {"name": "base vertex", "type": "int32_t"},
                     {"name": "first instance", "type": "uint32_t"}
                 ]
             },
@@ -1092,6 +1092,9 @@
         "category": "native"
     },
     "uint32_t": {
+        "category": "native"
+    },
+    "int32_t": {
         "category": "native"
     },
     "uint64_t": {
