@@ -18,6 +18,10 @@
 #include <cstddef>
 #include <cstdint>
 
+#include <algorithm>
+#include <limits>
+#include <type_traits>
+
 // The following are not valid for 0
 uint32_t ScanForward(uint32_t bits);
 uint32_t Log2(uint32_t value);
@@ -37,5 +41,29 @@ template <typename T>
 const T* AlignPtr(const T* ptr, size_t alignment) {
     return reinterpret_cast<const T*>(AlignVoidPtr(const_cast<T*>(ptr), alignment));
 }
+
+template <typename T>
+float Normalize(T value) {
+    static_assert(std::is_integral<T>::value, "Integer required.");
+    if (std::is_signed<T>::value) {
+        using unsigned_type = typename std::make_unsigned<T>::type;
+        return (2.0f * static_cast<float>(value) + 1.0f) /
+               static_cast<float>(std::numeric_limits<unsigned_type>::max());
+    } else {
+        return static_cast<float>(value) / static_cast<float>(std::numeric_limits<T>::max());
+    }
+}
+
+template <typename destType, typename sourceType>
+destType bitCast(const sourceType& source) {
+    static_assert(sizeof(destType) == sizeof(sourceType), "bitCast: cannot lose precision.");
+    destType output;
+    memcpy(&output, &source, sizeof(destType));
+    return output;
+}
+
+uint16_t float32ToFloat16(float fp32);
+
+float float16ToFloat32(uint16_t fp16);
 
 #endif  // COMMON_MATH_H_
