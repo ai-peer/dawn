@@ -146,6 +146,30 @@
     },
     {
       "key": {
+        "uuid": "445c82c5_20ec988f",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a66aa333_c8d14dc5",
+      "range": {
+        "startLine": 204,
+        "startChar": 20,
+        "endLine": 204,
+        "endChar": 30
+      },
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90eb86db_4aefe48f",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -169,6 +193,30 @@
     },
     {
       "key": {
+        "uuid": "4204ec27_108640bc",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "It works fine! Done.",
+      "parentUuid": "90eb86db_4aefe48f",
+      "range": {
+        "startLine": 228,
+        "startChar": 16,
+        "endLine": 228,
+        "endChar": 76
+      },
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59b6cbd2_244212d5",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -186,6 +234,24 @@
     },
     {
       "key": {
+        "uuid": "126215a9_7cb06abc",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59b6cbd2_244212d5",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28c5d9ac_cdcdb98a",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -197,6 +263,24 @@
       "writtenOn": "2019-04-08T16:04:00Z",
       "side": 1,
       "message": "This seems like a really big threshold, normally vertex data should be perfectly forwarded so we have at max one (or maybe two) ULP differences. If the problem is that text-based representations of the data aren\u0027t precise enough (because not all digits after the comma are written), we could upload a UBO with the expected data and have perfect forwarding of bits.",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4716ae75_6a80703c",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "Uniform buffer cannot support as many format type as vertex buffer. So I tried another method, PTAL",
+      "parentUuid": "28c5d9ac_cdcdb98a",
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -238,6 +322,24 @@
     },
     {
       "key": {
+        "uuid": "a58394a8_8aecc759",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "Apply the exactly equal method. Done.",
+      "parentUuid": "6c27626a_baeb29b3",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6637cf4c_cecc84d4",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -267,6 +369,24 @@
       "side": 1,
       "message": "Yes, the others are just random.",
       "parentUuid": "6637cf4c_cecc84d4",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74b84283_e12f9dba",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "Still random...",
+      "parentUuid": "a0cd3863_6dc3cfa0",
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -326,6 +446,24 @@
     },
     {
       "key": {
+        "uuid": "9544f4ea_4fe0c278",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeba3f04_7d67c53c",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce475249_07f039e2",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -361,6 +499,24 @@
     },
     {
       "key": {
+        "uuid": "89fc2618_b3589451",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f02ae672_c81c82d9",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4676cb27_85766505",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 2
@@ -390,6 +546,24 @@
       "side": 1,
       "message": "Hmm, good point. TBH, I just pick some random value to check float. I agree with you and I\u0027ll think about the value.",
       "parentUuid": "4676cb27_85766505",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82f8bde3_183f9fe9",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-11T11:48:18Z",
+      "side": 1,
+      "message": "NaN is good but don\u0027t know how can it be used in shader. float.IsNaN() cannot be used in shader I think.",
+      "parentUuid": "bf128d63_a99db22c",
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
