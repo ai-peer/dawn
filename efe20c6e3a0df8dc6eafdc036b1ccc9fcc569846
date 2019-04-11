@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d132f582_4c8153b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-11T07:18:39Z",
+      "side": 1,
+      "message": "This rolls way more than shaderc. Can we say \"Roll all SPIR-V dependencies together\"?",
+      "revId": "efe20c6e3a0df8dc6eafdc036b1ccc9fcc569846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "219cda0e_0b9cc862",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-11T07:18:39Z",
+      "side": 1,
+      "message": "nit: standard lib includes are at the bottom of the list of includes (in a separate block)",
+      "revId": "efe20c6e3a0df8dc6eafdc036b1ccc9fcc569846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
