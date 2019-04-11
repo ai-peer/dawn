@@ -567,6 +567,24 @@
       "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebed1388_772889da",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-11T12:26:02Z",
+      "side": 1,
+      "message": "This still needs to be addressed.",
+      "parentUuid": "82f8bde3_183f9fe9",
+      "revId": "b14bac68fc5850d2192d31a7d6fca22c8c39e8c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
