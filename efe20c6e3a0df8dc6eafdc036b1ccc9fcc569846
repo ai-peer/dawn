@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b5ced001_06868874",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000270
+      },
+      "writtenOn": "2019-04-11T13:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d132f582_4c8153b5",
+      "revId": "efe20c6e3a0df8dc6eafdc036b1ccc9fcc569846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "219cda0e_0b9cc862",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "efe20c6e3a0df8dc6eafdc036b1ccc9fcc569846",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8451f9bc_d560dc10",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000270
+      },
+      "writtenOn": "2019-04-11T13:39:38Z",
+      "side": 1,
+      "message": "I thought git cl format would take care of includes.  Now I know.",
+      "parentUuid": "219cda0e_0b9cc862",
+      "revId": "efe20c6e3a0df8dc6eafdc036b1ccc9fcc569846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
