@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c71e6507_bce9aac2",
+        "filename": "src/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-11T01:39:42Z",
+      "side": 1,
+      "message": "You can use the macro DAWN_SKIP_TEST_IF() in dawn end2end tests.",
+      "revId": "f4c3f4562eeeaeab99a19d4a293d062936c5a2ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
