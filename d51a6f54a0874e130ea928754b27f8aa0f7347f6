@@ -16,6 +16,24 @@
       "revId": "d51a6f54a0874e130ea928754b27f8aa0f7347f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea1f54cb_b168fe48",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-04-12T06:21:48Z",
+      "side": 1,
+      "message": "Done\n\nAnd I also add tests to cover negative baseVertex.",
+      "parentUuid": "2e8f8ca7_27ce0ac6",
+      "revId": "d51a6f54a0874e130ea928754b27f8aa0f7347f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
