@@ -67,9 +67,8 @@ class DrawIndexedTest : public DawnTest {
                  1.0f, -1.0f, 0.0f, 1.0f,
                 -1.0f,  1.0f, 0.0f, 1.0f
             });
-            indexBuffer = utils::CreateBufferFromData<uint32_t>(device, dawn::BufferUsageBit::Index, {
-                0, 1, 2, 0, 3, 1
-            });
+            indexBuffer = utils::CreateBufferFromData<uint32_t>(
+                device, dawn::BufferUsageBit::Index, {0, 1, 2, 0, 3, 1, 4, 5, 6, 4, 7, 5});
         }
 
         utils::BasicRenderPass renderPass;
@@ -77,8 +76,13 @@ class DrawIndexedTest : public DawnTest {
         dawn::Buffer vertexBuffer;
         dawn::Buffer indexBuffer;
 
-        void Test(uint32_t indexCount, uint32_t instanceCount, uint32_t firstIndex,
-                  uint32_t baseVertex, uint32_t firstInstance, RGBA8 bottomLeftExpected,
+        void Test(uint32_t indexCount,
+                  uint32_t instanceCount,
+                  uint32_t firstIndex,
+                  int32_t baseVertex,
+                  uint32_t firstInstance,
+                  uint64_t bufferOffset,
+                  RGBA8 bottomLeftExpected,
                   RGBA8 topRightExpected) {
             uint64_t zeroOffset = 0;
             dawn::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -87,7 +91,7 @@ class DrawIndexedTest : public DawnTest {
                     &renderPass.renderPassInfo);
                 pass.SetPipeline(pipeline);
                 pass.SetVertexBuffers(0, 1, &vertexBuffer, &zeroOffset);
-                pass.SetIndexBuffer(indexBuffer, 0);
+                pass.SetIndexBuffer(indexBuffer, bufferOffset);
                 pass.DrawIndexed(indexCount, instanceCount, firstIndex, baseVertex, firstInstance);
                 pass.EndPass();
             }
@@ -107,13 +111,13 @@ TEST_P(DrawIndexedTest, Uint32) {
     RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with no indices.
-    Test(0, 0, 0, 0, 0, notFilled, notFilled);
+    Test(0, 0, 0, 0, 0, 0, notFilled, notFilled);
     // Test a draw with only the first 3 indices of the first quad (bottom left triangle)
-    Test(3, 1, 0, 0, 0, filled, notFilled);
+    Test(3, 1, 0, 0, 0, 0, filled, notFilled);
     // Test a draw with only the last 3 indices of the first quad (top right triangle)
-    Test(3, 1, 3, 0, 0, notFilled, filled);
+    Test(3, 1, 3, 0, 0, 0, notFilled, filled);
     // Test a draw with all 6 indices (both triangles).
-    Test(6, 1, 0, 0, 0, filled, filled);
+    Test(6, 1, 0, 0, 0, 0, filled, filled);
 }
 
 // Test the parameter 'baseVertex' of DrawIndexed() works.
@@ -122,9 +126,14 @@ TEST_P(DrawIndexedTest, BaseVertex) {
     RGBA8 notFilled(0, 0, 0, 0);
 
     // Test a draw with only the first 3 indices of the second quad (top right triangle)
-    Test(3, 1, 0, 4, 0, notFilled, filled);
+    Test(3, 1, 0, 4, 0, 0, notFilled, filled);
     // Test a draw with only the last 3 indices of the second quad (bottom left triangle)
-    Test(3, 1, 3, 4, 0, filled, notFilled);
+    Test(3, 1, 3, 4, 0, 0, filled, notFilled);
+
+    // Test a draw with only the first 3 indices of the first quad (bottom left triangle)
+    Test(3, 1, 0, -4, 0, 24, filled, notFilled);
+    // Test a draw with only the last 3 indices of the first quad (top right triangle)
+    Test(3, 1, 3, -4, 0, 24, notFilled, filled);
 }
 
 DAWN_INSTANTIATE_TEST(DrawIndexedTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
