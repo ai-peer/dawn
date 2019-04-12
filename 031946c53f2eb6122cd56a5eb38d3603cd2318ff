@@ -1,0 +1,238 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62af7337_9ef425f0",
+        "filename": "src/common/Math.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "This include isn\u0027t used.",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b037d9a_9fc513ea",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "Let\u0027s not land commented out code.",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20c43b61_14fa288c",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "nit: this is the same as ShaderVariableType with componentCount \u003d 1.",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "466954c4_fe74d023",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "To simplify code, I think an array of 1 is valid.",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "848d11ca_88d199a2",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "This could also be simplified with an array of 1.",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69de1465_79e468fa",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "This is used many times can we have a variable for it, like isInputTypeFloat?",
+      "range": {
+        "startLine": 278,
+        "startChar": 24,
+        "endLine": 278,
+        "endChar": 47
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a53142c2_a8c16f0a",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "nit: use std::isnan()\n\nLogic could be simplified with\n\nif ((isFloat || isNormalized) \u0026\u0026 std::isnan(expectedData...)) {\n  vs \u003c\u003c \"0.0 / 0.0\"\n} else {\n  vs \u003c\u003c std::to_string(expectedData[i * componentCount + j]) \u003c\u003c \");\\n\";\n}",
+      "range": {
+        "startLine": 280,
+        "startChar": 28,
+        "endLine": 281,
+        "endChar": 64
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b029730d_dff7e129",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "ditto this could be simplified with arrays of size 1",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79230e86_9f4703de",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "019a6858_e053d3d5",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "This is a conversion so uint(1.2f) is 1. You need to use GLSL\u0027s floatBitsToUint.",
+      "range": {
+        "startLine": 326,
+        "startChar": 35,
+        "endLine": 326,
+        "endChar": 39
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6dac5f5_1c488611",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "Unsigned integers that are \u003c 1 are exactly 0.",
+      "range": {
+        "startLine": 330,
+        "startChar": 74,
+        "endLine": 330,
+        "endChar": 78
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35034a4b_6939e05a",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-12T11:42:40Z",
+      "side": 1,
+      "message": "Can we also have checks for + or - 1 and 18.23f? You could call DoVertexFormatTest twice.",
+      "range": {
+        "startLine": 653,
+        "startChar": 0,
+        "endLine": 655,
+        "endChar": 74
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
