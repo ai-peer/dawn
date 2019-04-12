@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2fe9eb07_e7fd31fb",
+        "filename": "src/common/Math.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-12T08:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f66a139b_99938fb3",
+      "range": {
+        "startLine": 65,
+        "startChar": 9,
+        "endLine": 65,
+        "endChar": 25
+      },
+      "revId": "d103d3bad54ba81668d14b11ac00183e10457a8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b2b2b0_9896f57b",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "24738f02_a6f06935",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-12T08:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b2b2b0_9896f57b",
+      "range": {
+        "startLine": 31,
+        "startChar": 19,
+        "endLine": 31,
+        "endChar": 34
+      },
+      "revId": "d103d3bad54ba81668d14b11ac00183e10457a8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2aaf2816_4973ee72",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 5
@@ -62,6 +110,24 @@
       "revId": "d103d3bad54ba81668d14b11ac00183e10457a8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbf2e26b_bfd6e88c",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-12T08:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aaf2816_4973ee72",
+      "revId": "d103d3bad54ba81668d14b11ac00183e10457a8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -85,6 +151,30 @@
       "revId": "d103d3bad54ba81668d14b11ac00183e10457a8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a89ef603_54c0744d",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-12T08:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "012b64a1_d57bca6d",
+      "range": {
+        "startLine": 622,
+        "startChar": 62,
+        "endLine": 622,
+        "endChar": 85
+      },
+      "revId": "d103d3bad54ba81668d14b11ac00183e10457a8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
