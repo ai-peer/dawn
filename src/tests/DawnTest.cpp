@@ -174,19 +174,19 @@ DawnTest::~DawnTest() {
 }
 
 bool DawnTest::IsD3D12() const {
-    return GetParam() == D3D12Backend;
+    return std::get<0>(GetParam()) == D3D12Backend;
 }
 
 bool DawnTest::IsMetal() const {
-    return GetParam() == MetalBackend;
+    return std::get<0>(GetParam()) == MetalBackend;
 }
 
 bool DawnTest::IsOpenGL() const {
-    return GetParam() == OpenGLBackend;
+    return std::get<0>(GetParam()) == OpenGLBackend;
 }
 
 bool DawnTest::IsVulkan() const {
-    return GetParam() == VulkanBackend;
+    return std::get<0>(GetParam()) == VulkanBackend;
 }
 
 bool DawnTest::IsAMD() const {
@@ -237,7 +237,17 @@ bool DawnTest::IsMacOS() const {
 #endif
 }
 
+void DawnTest::ImplementDawnTestOptions(const DawnTestOptions& options) {
+    if (options.test(static_cast<size_t>(DawnTestOption::ForceEmulatingStoreAndMSAAResolve))) {
+        mUseCustomWorkaround = true;
+        mWorkarounds.emulateStoreAndMSAAResolve = true;
+    }
+}
+
 void DawnTest::SetUp() {
+    const dawn_native::BackendType backendType = std::get<0>(GetParam());
+    const DawnTestOptions options = std::get<1>(GetParam());
+
     // Get an adapter for the backend to use, and create the device.
     dawn_native::Adapter backendAdapter;
     {
@@ -245,14 +255,14 @@ void DawnTest::SetUp() {
         std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
 
         for (const dawn_native::Adapter& adapter : adapters) {
-            if (adapter.GetBackendType() == GetParam()) {
+            if (adapter.GetBackendType() == backendType) {
                 backendAdapter = adapter;
                 // On Metal, select the last adapter so that the discrete GPU is tested on
                 // multi-GPU systems.
                 // TODO(cwallez@chromium.org): Replace this with command line arguments requesting
                 // a specific device / vendor ID once the macOS 10.13 SDK is rolled and correct
                 // PCI info collection is implemented on Metal.
-                if (GetParam() != MetalBackend) {
+                if (std::get<0>(GetParam()) != MetalBackend) {
                     break;
                 }
             }
@@ -262,13 +272,22 @@ void DawnTest::SetUp() {
     }
 
     mPCIInfo = backendAdapter.GetPCIInfo();
-    DawnDevice backendDevice = backendAdapter.CreateDevice();
+    DawnDevice backendDevice;
+
+    ImplementDawnTestOptions(options);
+
+    if (mUseCustomWorkaround) {
+        backendDevice = backendAdapter.CreateDevice(&mWorkarounds);
+    } else {
+        backendDevice = backendAdapter.CreateDevice();
+    }
+
     DawnProcTable backendProcs = dawn_native::GetProcs();
 
     // Get the test window and create the device using it (esp. for OpenGL)
-    GLFWwindow* testWindow = gTestEnv->GetWindowForBackend(GetParam());
+    GLFWwindow* testWindow = gTestEnv->GetWindowForBackend(backendType);
     DAWN_ASSERT(testWindow != nullptr);
-    mBinding.reset(utils::CreateBinding(GetParam(), testWindow, backendDevice));
+    mBinding.reset(utils::CreateBinding(backendType, testWindow, backendDevice));
     DAWN_ASSERT(mBinding != nullptr);
 
     // Choose whether to use the backend procs and devices directly, or set up the wire.
@@ -581,8 +600,16 @@ namespace detail {
         return backends;
     }
 
-    std::string GetParamName(const testing::TestParamInfo<dawn_native::BackendType>& info) {
-        return ParamName(info.param);
+    std::string GetParamName(const testing::TestParamInfo<DawnTestParam>& info) {
+        std::ostringstream ostream;
+        ostream << ParamName(std::get<0>(info.param));
+
+        DawnTestOptions options = std::get<1>(info.param);
+        if (options.test(static_cast<size_t>(DawnTestOption::ForceEmulatingStoreAndMSAAResolve))) {
+            ostream << "_force_emulating_store_and_msaa_resolve";
+        }
+
+        return ostream.str();
     }
 
     // Helper classes to set expectations

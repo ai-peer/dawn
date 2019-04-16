@@ -62,6 +62,7 @@ source_set("libdawn_native_headers") {
     "src/include/dawn_native/NullBackend.h",
     "src/include/dawn_native/OpenGLBackend.h",
     "src/include/dawn_native/VulkanBackend.h",
+    "src/include/platform/Workarounds.h",
   ]
 }
 

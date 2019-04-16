@@ -18,6 +18,8 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 
+#include "platform/Workarounds.h"
+
 #import <Metal/Metal.h>
 
 namespace dawn_native {
@@ -31,7 +33,7 @@ namespace dawn_native { namespace metal {
 
     class CommandBuffer : public CommandBufferBase {
       public:
-        CommandBuffer(Device* device, CommandEncoderBase* encoder);
+        CommandBuffer(Device* device, CommandEncoderBase* encoder, const Workarounds& workarounds);
         ~CommandBuffer();
 
         void FillCommands(id<MTLCommandBuffer> commandBuffer);
@@ -41,6 +43,7 @@ namespace dawn_native { namespace metal {
         void EncodeRenderPass(id<MTLCommandBuffer> commandBuffer, BeginRenderPassCmd* renderPass);
 
         CommandIterator mCommands;
+        Workarounds mWorkarounds;
     };
 
 }}  // namespace dawn_native::metal

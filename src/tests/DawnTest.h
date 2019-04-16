@@ -15,7 +15,10 @@
 #include "dawn/dawncpp.h"
 #include "dawn_native/DawnNative.h"
 
+#include "platform/Workarounds.h"
+
 #include <gtest/gtest.h>
+#include <bitset>
 #include <memory>
 #include <unordered_map>
 
@@ -107,7 +110,22 @@ class DawnTestEnvironment : public testing::Environment {
     std::unordered_map<dawn_native::BackendType, GLFWwindow*> mWindows;
 };
 
-class DawnTest : public ::testing::TestWithParam<dawn_native::BackendType> {
+enum class DawnTestOption : uint8_t
+{
+    ForceEmulatingStoreAndMSAAResolve = 0,
+
+    EnumCount = 1
+};
+
+using DawnTestOptions = std::bitset<static_cast<size_t>(DawnTestOption::EnumCount)>;
+
+constexpr DawnTestOptions kNoOptions = DawnTestOptions();
+constexpr DawnTestOptions kForceEmulatingStoreAndMSAAResolve =
+    DawnTestOptions(1 << static_cast<size_t>(DawnTestOption::ForceEmulatingStoreAndMSAAResolve));
+
+using DawnTestParam = std::tuple<dawn_native::BackendType, DawnTestOptions>;
+
+class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
   public:
     DawnTest();
     ~DawnTest();
@@ -138,6 +156,8 @@ class DawnTest : public ::testing::TestWithParam<dawn_native::BackendType> {
     dawn::Device device;
     dawn::Queue queue;
     dawn::SwapChain swapchain;
+    bool mUseCustomWorkaround = false;
+    dawn_native::Workarounds mWorkarounds;
 
     // Helper methods to implement the EXPECT_ macros
     std::ostringstream& AddBufferExpectation(const char* file,
@@ -161,6 +181,8 @@ class DawnTest : public ::testing::TestWithParam<dawn_native::BackendType> {
     void WaitABit();
 
     void SwapBuffersForCapture();
+
+    void ImplementDawnTestOptions(const DawnTestOptions& options);
 
   private:
     // Things used to set up testing through the Wire.
@@ -222,15 +244,26 @@ class DawnTest : public ::testing::TestWithParam<dawn_native::BackendType> {
     dawn_native::PCIInfo mPCIInfo;
 };
 
+// Instantiate the same test for each backend provided after the third argument with option. Each
+// test will run once under each option in optionsList. Use it like this:
+//     DAWN_INSTANTIATE_TEST_TWICE(MyTestFixture, option1, option2, MetalBackend, OpenGLBackend)
+#define DAWN_INSTANTIATE_TEST_WITH_OPTIONS(testName, optionsList, firstParam, ...)           \
+    const decltype(firstParam) testName##params[] = {firstParam, ##__VA_ARGS__};         \
+    INSTANTIATE_TEST_SUITE_P(                                                            \
+        , testName,                                                                      \
+       testing::Combine(testing::ValuesIn(::detail::FilterBackends(                      \
+            testName##params, sizeof(testName##params) / sizeof(firstParam))),           \
+            testing::ValuesIn(optionsList)), ::detail::GetParamName)
+
 // Instantiate the test once for each backend provided after the first argument. Use it like this:
 //     DAWN_INSTANTIATE_TEST(MyTestFixture, MetalBackend, OpenGLBackend)
-#define DAWN_INSTANTIATE_TEST(testName, firstParam, ...)                         \
-    const decltype(firstParam) testName##params[] = {firstParam, ##__VA_ARGS__}; \
-    INSTANTIATE_TEST_SUITE_P(                                                    \
-        , testName,                                                              \
-        testing::ValuesIn(::detail::FilterBackends(                              \
-            testName##params, sizeof(testName##params) / sizeof(firstParam))),   \
-        ::detail::GetParamName)
+#define DAWN_INSTANTIATE_TEST(testName, firstParam, ...)                                   \
+    const decltype(firstParam) testName##params[] = {firstParam, ##__VA_ARGS__};           \
+    INSTANTIATE_TEST_SUITE_P(                                                              \
+        , testName,                                                                        \
+       testing::Combine(testing::ValuesIn(::detail::FilterBackends(                        \
+            testName##params, sizeof(testName##params) / sizeof(firstParam))),             \
+            testing::Values<DawnTestOptions>(DawnTestOptions())), ::detail::GetParamName)
 
 // Skip a test when the given condition is satisfied.
 #define DAWN_SKIP_TEST_IF(condition)                               \
@@ -244,7 +277,7 @@ namespace detail {
     bool IsBackendAvailable(dawn_native::BackendType type);
     std::vector<dawn_native::BackendType> FilterBackends(const dawn_native::BackendType* types,
                                                          size_t numParams);
-    std::string GetParamName(const testing::TestParamInfo<dawn_native::BackendType>& info);
+    std::string GetParamName(const testing::TestParamInfo<std::tuple<dawn_native::BackendType, DawnTestOptions>>& info);
 
     // All classes used to implement the deferred expectations should inherit from this.
     class Expectation {

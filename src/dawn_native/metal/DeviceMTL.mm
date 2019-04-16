@@ -33,14 +33,19 @@
 #include <type_traits>
 
 namespace dawn_native { namespace metal {
-
-    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice)
+    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, const Workarounds* workarounds)
         : DeviceBase(adapter),
           mMtlDevice([mtlDevice retain]),
           mMapTracker(new MapRequestTracker(this)),
           mCompletedSerial(0) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
+
+        if (workarounds != nullptr) {
+            mWorkarounds = *workarounds;
+        } else {
+            initWorkarounds();
+        }
     }
 
     Device::~Device() {
@@ -67,6 +72,17 @@ namespace dawn_native { namespace metal {
         mMtlDevice = nil;
     }
 
+    void Device::initWorkarounds() {
+        if ([mMtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v1] ||
+            [mMtlDevice supportsFeatureSet: MTLFeatureSet_macOS_GPUFamily1_v2]) {
+            mWorkarounds.emulateStoreAndMSAAResolve = false;
+        }
+    }
+
+    const Workarounds& Device::GetWorkarounds() const {
+        return mWorkarounds;
+    }
+
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) {
         return new BindGroup(this, descriptor);
@@ -79,7 +95,7 @@ namespace dawn_native { namespace metal {
         return new Buffer(this, descriptor);
     }
     CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder) {
-        return new CommandBuffer(this, encoder);
+        return new CommandBuffer(this, encoder, mWorkarounds);
     }
     ResultOrError<ComputePipelineBase*> Device::CreateComputePipelineImpl(
         const ComputePipelineDescriptor* descriptor) {

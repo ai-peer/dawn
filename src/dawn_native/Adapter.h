@@ -22,6 +22,7 @@
 namespace dawn_native {
 
     class DeviceBase;
+    struct Workarounds;
 
     class AdapterBase {
       public:
@@ -32,15 +33,15 @@ namespace dawn_native {
         const PCIInfo& GetPCIInfo() const;
         InstanceBase* GetInstance() const;
 
-        DeviceBase* CreateDevice();
+        DeviceBase* CreateDevice(const Workarounds* workarounds = nullptr);
 
       protected:
         PCIInfo mPCIInfo = {};
 
       private:
-        virtual ResultOrError<DeviceBase*> CreateDeviceImpl() = 0;
+        virtual ResultOrError<DeviceBase*> CreateDeviceImpl(const Workarounds* workarounds) = 0;
 
-        MaybeError CreateDeviceInternal(DeviceBase** result);
+        MaybeError CreateDeviceInternal(DeviceBase** result, const Workarounds* workarounds);
 
         InstanceBase* mInstance = nullptr;
         BackendType mBackend;
