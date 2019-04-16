@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "ec4675ec_effbe5d7",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T08:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "848d11ca_88d199a2",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69de1465_79e468fa",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 8
@@ -179,6 +197,30 @@
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21298c94_0410e111",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T08:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69de1465_79e468fa",
+      "range": {
+        "startLine": 278,
+        "startChar": 24,
+        "endLine": 278,
+        "endChar": 47
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -447,6 +489,30 @@
       "side": 1,
       "message": "That would make sense because data is passed as is. What you could do to experiment know what is happening for normalized and half float would be to render the color to a float render target and EXPECT_EQ the pixel so that the failure prints the actual value.",
       "parentUuid": "38e959e8_e717ba15",
+      "range": {
+        "startLine": 330,
+        "startChar": 74,
+        "endLine": 330,
+        "endChar": 78
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fff0e5f5_65b3f77f",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T08:35:47Z",
+      "side": 1,
+      "message": "Yes and that\u0027s exactly what I\u0027m doing :). (The comments here means that because uint() do cast so compare with 1 always right, and in that time, I was surprised by test and experiment value are same in all bits(actually they\u0027re not :-( )). I\u0027m doing experiments to see how to change normalize function and how to deal with float16 type now.",
+      "parentUuid": "de764ffa_e1a6d865",
       "range": {
         "startLine": 330,
         "startChar": 74,
