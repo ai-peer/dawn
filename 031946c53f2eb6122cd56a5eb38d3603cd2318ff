@@ -229,6 +229,30 @@
     },
     {
       "key": {
+        "uuid": "6928e214_965ecba0",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-16T08:18:50Z",
+      "side": 1,
+      "message": "Try std::isnan(static_cast\u003cfloat\u003e()) I think that should work.",
+      "parentUuid": "f3ce707c_42810fe5",
+      "range": {
+        "startLine": 280,
+        "startChar": 28,
+        "endLine": 281,
+        "endChar": 64
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b029730d_dff7e129",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 8
@@ -261,6 +285,24 @@
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dcc0471_1bf50690",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-16T08:18:50Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "6ee575d4_54b4b65a",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -381,6 +423,30 @@
       "side": 1,
       "message": "I tried 4 but normalization still cannot pass, so keep 2 here temp. And I was surprised by setting 1 passed all the float realted tests....(I think they\u0027re compeletly the same in bits..)",
       "parentUuid": "e6dac5f5_1c488611",
+      "range": {
+        "startLine": 330,
+        "startChar": 74,
+        "endLine": 330,
+        "endChar": 78
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de764ffa_e1a6d865",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-16T08:18:50Z",
+      "side": 1,
+      "message": "That would make sense because data is passed as is. What you could do to experiment know what is happening for normalized and half float would be to render the color to a float render target and EXPECT_EQ the pixel so that the failure prints the actual value.",
+      "parentUuid": "38e959e8_e717ba15",
       "range": {
         "startLine": 330,
         "startChar": 74,
