@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "260020f1_ce9a56db",
+        "filename": "src/common/Math.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62af7337_9ef425f0",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b037d9a_9fc513ea",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c032f95_e2370b4c",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "Sorry for the garbage... Done.",
+      "parentUuid": "9b037d9a_9fc513ea",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "908904ab_88dd6537",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "Change ShaderVariableType to ShaderTypeGenerator and reuse it. Done.",
+      "parentUuid": "20c43b61_14fa288c",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "466954c4_fe74d023",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 8
@@ -67,6 +121,24 @@
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b052d11_32d45f36",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "466954c4_fe74d023",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +205,30 @@
     },
     {
       "key": {
+        "uuid": "f3ce707c_42810fe5",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "I tried isnan but failed to compile because expectedData could be integers and isnan is ambiguous, so keep the silly judgement.",
+      "parentUuid": "a53142c2_a8c16f0a",
+      "range": {
+        "startLine": 280,
+        "startChar": 28,
+        "endLine": 281,
+        "endChar": 64
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b029730d_dff7e129",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 8
@@ -144,6 +240,24 @@
       "writtenOn": "2019-04-12T11:42:40Z",
       "side": 1,
       "message": "ditto this could be simplified with arrays of size 1",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ee575d4_54b4b65a",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "For expectedData it is true, but for test, because the type of it maybe \"in float test\", the judgement is still needed. I use \": ?\" to make the format be more clear.",
+      "parentUuid": "b029730d_dff7e129",
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -164,6 +278,24 @@
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e47d36af_e118f018",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79230e86_9f4703de",
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -190,6 +322,30 @@
     },
     {
       "key": {
+        "uuid": "af9d2c27_2ff80a00",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "Thank you for telling me about this.... and I suddenly realized my experiments are not correct to prove uint() is a bit transfer....",
+      "parentUuid": "019a6858_e053d3d5",
+      "range": {
+        "startLine": 326,
+        "startChar": 35,
+        "endLine": 326,
+        "endChar": 39
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6dac5f5_1c488611",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 8
@@ -201,6 +357,30 @@
       "writtenOn": "2019-04-12T11:42:40Z",
       "side": 1,
       "message": "Unsigned integers that are \u003c 1 are exactly 0.",
+      "range": {
+        "startLine": 330,
+        "startChar": 74,
+        "endLine": 330,
+        "endChar": 78
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38e959e8_e717ba15",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "I tried 4 but normalization still cannot pass, so keep 2 here temp. And I was surprised by setting 1 passed all the float realted tests....(I think they\u0027re compeletly the same in bits..)",
+      "parentUuid": "e6dac5f5_1c488611",
       "range": {
         "startLine": 330,
         "startChar": 74,
@@ -233,6 +413,30 @@
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd4020c0_76c58431",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-16T02:01:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35034a4b_6939e05a",
+      "range": {
+        "startLine": 653,
+        "startChar": 0,
+        "endLine": 655,
+        "endChar": 74
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
