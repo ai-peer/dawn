@@ -38,20 +38,24 @@ namespace dawn_native {
         return mInstance;
     }
 
-    DeviceBase* AdapterBase::CreateDevice() {
+    DeviceBase* AdapterBase::CreateDevice(const WorkaroundsMask* workaroundsMask,
+                                          const WorkaroundsMask* appliedWorkaroundsMask) {
         DeviceBase* result = nullptr;
 
-        if (mInstance->ConsumedError(CreateDeviceInternal(&result))) {
+        if (mInstance->ConsumedError(
+                CreateDeviceInternal(&result, workaroundsMask, appliedWorkaroundsMask))) {
             return nullptr;
         }
 
         return result;
     }
 
-    MaybeError AdapterBase::CreateDeviceInternal(DeviceBase** result) {
+    MaybeError AdapterBase::CreateDeviceInternal(DeviceBase** result,
+                                                 const WorkaroundsMask* workaroundsMask,
+                                                 const WorkaroundsMask* appliedWorkaroundsMask) {
         // TODO(cwallez@chromium.org): This will eventually have validation that the device
         // descriptor is valid and is a subset what's allowed on this adapter.
-        DAWN_TRY_ASSIGN(*result, CreateDeviceImpl());
+        DAWN_TRY_ASSIGN(*result, CreateDeviceImpl(workaroundsMask, appliedWorkaroundsMask));
         return {};
     }
 

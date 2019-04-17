@@ -39,7 +39,9 @@ namespace dawn_native { namespace opengl {
         virtual ~Adapter() = default;
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl() override {
+        ResultOrError<DeviceBase*> CreateDeviceImpl(
+            const WorkaroundsMask* workaroundsMask,
+            const WorkaroundsMask* appliedWorkaroundsMask) override {
             // There is no limit on the number of devices created from this adapter because they can
             // all share the same backing OpenGL context.
             return {new Device(this)};
