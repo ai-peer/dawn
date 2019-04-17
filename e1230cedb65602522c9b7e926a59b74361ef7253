@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d180b6f_f9dba7c2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-17T08:11:08Z",
+      "side": 1,
+      "message": "We should only do this if the store action is store (which is the only option now but we\u0027ll have discard soon)",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be8fba31_fe392702",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-17T08:11:08Z",
+      "side": 1,
+      "message": "ditto, this should only happen if the store action is store.",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91114528_9f0e08b3",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-17T08:11:08Z",
+      "side": 1,
+      "message": "We\u0027re going to add many more optional creation parameters over time (like memory tracking, tracing, stats reporting, and also extensions and limits...), I suggest making a DeviceDescriptor and passing it to CreateDevice (plus having it default to nullptr, and all values in DeviceDescriptor having defaults).\n\nAnother thing is that this misses the Chromium requirements:\n\u003e For Chromium, we need to be able to surface workarounds in about:gpu and override them with command line flags:\n\u003e  - Chromium must get a callback for each workaround/emulation, even if it disabled.\n\u003e  - For each workaround we should have a name, description, URL and URL text.\n\u003e  - Chromium should have a chance to override the decision Dawn took for a workaround/emulation so we can force disable or force enable from the command line.\n\nNote that the callback would likely be a pure virtual class like WorkaroundsObserver or Overrides or Chooser with default-deleted methods that are the callbacks. Also the requirements weren\u0027t clear but the callback is what should get the name, description, URL etc. so it can display it in about:gpu.",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51dbab1f_ba308452",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-17T08:11:08Z",
+      "side": 1,
+      "message": "Workarounds are part of the dawn_native API so we don\u0027t need a new folder for them. They can just be next to DawnNative.h",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a803850d_b5c09347",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-17T08:11:08Z",
+      "side": 1,
+      "message": "Workarounds being enums allows packing them in a bitfields but we will also need to interact with them as strings. Maybe the interface outside Dawn could be with const char* and internally we use enums and bitfields?\n\nStrings are slower but they help with extensibility and not breaking compatibility as we add and remove workarounds.",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2a6a6f1_2cf211ea",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-17T08:11:08Z",
+      "side": 1,
+      "message": "We should separate the two cases because they are for different backends and results in different types of code paths. No need to mention OpenGL since it doesn\u0027t need this code path.\n\nAlso Workarounds is ok for code paths that add complexity to support the base level of the API but we\u0027ll also need something for code paths that optimize using new API features (Features, should the two of them together be called CodePaths not sure.)",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09ab68df_79a957d0",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-17T08:11:08Z",
+      "side": 1,
+      "message": "I have concerns that this duplicates the number of test for all backends even those who don\u0027t care about the workaround. This gets even worse as more workarounds are added because the number of test runs grows in NxM.\n\nThe test template parameter could be a new class that has constructors from dawn_native::BackendType but also other constructors so we can do the ForceWorkaround(MetalBackend, \"copy_for_nonzero_subresource_resolve\").",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
