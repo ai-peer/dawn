@@ -43,4 +43,8 @@ namespace dawn_native { namespace metal {
         device->WaitForCommandsToBeScheduled();
     }
 
+    AdapterDiscoveryOptions::AdapterDiscoveryOptions()
+        : AdapterDiscoveryOptionsBase(BackendType::Metal) {
+    }
+
 }}  // namespace dawn_native::metal

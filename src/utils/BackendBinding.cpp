@@ -22,6 +22,10 @@
 #    include "dawn_native/OpenGLBackend.h"
 #endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
 
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+#    include "dawn_native/MetalBackend.h"
+#endif  // defined(DAWN_ENABLE_BACKEND_METAL)
+
 namespace utils {
 
 #if defined(DAWN_ENABLE_BACKEND_D3D12)
@@ -57,7 +61,8 @@ namespace utils {
 
     void DiscoverAdapter(dawn_native::Instance* instance,
                          GLFWwindow* window,
-                         dawn_native::BackendType type) {
+                         dawn_native::BackendType type,
+                         bool enableAPIValidation) {
         DAWN_UNUSED(type);
         DAWN_UNUSED(window);
 
@@ -68,6 +73,12 @@ namespace utils {
             adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
             instance->DiscoverAdapters(&adapterOptions);
 #endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+        } else if (type == dawn_native::BackendType::Metal) {
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+            dawn_native::metal::AdapterDiscoveryOptions adapterOptions;
+            adapterOptions.enableAPIValidation = enableAPIValidation;
+            instance->DiscoverAdapters(&adapterOptions);
+#endif  // defined(DAWN_ENABLE_BACKEND_METAL)
         } else {
             instance->DiscoverDefaultAdapters();
         }

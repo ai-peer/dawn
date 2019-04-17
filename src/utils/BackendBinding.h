@@ -39,7 +39,8 @@ namespace utils {
     void SetupGLFWWindowHintsForBackend(dawn_native::BackendType type);
     void DiscoverAdapter(dawn_native::Instance* instance,
                          GLFWwindow* window,
-                         dawn_native::BackendType type);
+                         dawn_native::BackendType type,
+                         bool enableAPIValidation);
     BackendBinding* CreateBinding(dawn_native::BackendType type,
                                   GLFWwindow* window,
                                   DawnDevice device);

@@ -44,6 +44,12 @@ namespace dawn_native { namespace metal {
     // when they are "scheduled". Submitting other operations before the command buffer is
     // scheduled could lead to races in who gets scheduled first and incorrect rendering.
     DAWN_NATIVE_EXPORT void WaitForCommandsToBeScheduled(DawnDevice device);
+
+    struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
+        AdapterDiscoveryOptions();
+
+        bool enableAPIValidation = false;
+    };
 }}  // namespace dawn_native::metal
 
 #ifdef __OBJC__
