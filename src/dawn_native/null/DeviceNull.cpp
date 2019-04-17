@@ -32,7 +32,9 @@ namespace dawn_native { namespace null {
         virtual ~Adapter() = default;
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl() override {
+        ResultOrError<DeviceBase*> CreateDeviceImpl(
+            const WorkaroundsMask* workaroundsMask,
+            const WorkaroundsMask* appliedWorkaroundsMask) override {
             return {new Device(this)};
         }
     };
@@ -57,7 +59,7 @@ namespace dawn_native { namespace null {
 
     // Device
 
-    Device::Device(Adapter* adapter) : DeviceBase(adapter) {
+    Device::Device(Adapter* adapter) : DeviceBase(adapter, nullptr, nullptr) {
     }
 
     Device::~Device() {

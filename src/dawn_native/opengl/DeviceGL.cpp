@@ -31,7 +31,7 @@
 
 namespace dawn_native { namespace opengl {
 
-    Device::Device(AdapterBase* adapter) : DeviceBase(adapter) {
+    Device::Device(AdapterBase* adapter) : DeviceBase(adapter, nullptr, nullptr) {
     }
 
     Device::~Device() {

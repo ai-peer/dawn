@@ -40,7 +40,7 @@
 
 namespace dawn_native { namespace vulkan {
 
-    Device::Device(Adapter* adapter) : DeviceBase(adapter) {
+    Device::Device(Adapter* adapter) : DeviceBase(adapter, nullptr, nullptr) {
     }
 
     MaybeError Device::Initialize() {

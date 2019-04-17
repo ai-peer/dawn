@@ -44,7 +44,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Device::Device(Adapter* adapter, ComPtr<ID3D12Device> d3d12Device)
-        : DeviceBase(adapter), mD3d12Device(d3d12Device) {
+        : DeviceBase(adapter, nullptr, nullptr), mD3d12Device(d3d12Device) {
         // Create device-global objects
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;

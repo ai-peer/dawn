@@ -50,10 +50,26 @@ namespace dawn_native {
 
     // DeviceBase
 
-    DeviceBase::DeviceBase(AdapterBase* adapter) : mAdapter(adapter) {
+    DeviceBase::DeviceBase(AdapterBase* adapter,
+                           const WorkaroundsMask* workaroundsMask,
+                           const WorkaroundsMask* appliedWorkaroundsMask) : mAdapter(adapter) {
         mCaches = std::make_unique<DeviceBase::Caches>();
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
+
+        InitWorkarounds();
+
+        if (workaroundsMask == nullptr) {
+            return;
+        }
+
+        if (appliedWorkaroundsMask == nullptr) {
+            mWorkaroundsMask = *workaroundsMask;
+        } else {
+            for (uint32_t i : IterateBitSet(*appliedWorkaroundsMask)) {
+                mWorkaroundsMask[i] = (*workaroundsMask)[i];
+            }
+        }
     }
 
     DeviceBase::~DeviceBase() {
@@ -361,4 +377,10 @@ namespace dawn_native {
         return mDynamicUploader.get();
     }
 
+    const WorkaroundsMask& DeviceBase::GetWorkaroundsMask() const {
+        return mWorkaroundsMask;
+    }
+
+    void DeviceBase::InitWorkarounds() {
+    }
 }  // namespace dawn_native

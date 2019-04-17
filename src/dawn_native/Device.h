@@ -36,7 +36,9 @@ namespace dawn_native {
 
     class DeviceBase {
       public:
-        DeviceBase(AdapterBase* adapter);
+        DeviceBase(AdapterBase* adapter,
+                   const WorkaroundsMask* workaroundsMask,
+                   const WorkaroundsMask* appliedWorkaroundsMask);
         virtual ~DeviceBase();
 
         void HandleError(const char* message);
@@ -115,8 +117,13 @@ namespace dawn_native {
 
         ResultOrError<DynamicUploader*> GetDynamicUploader() const;
 
+        const WorkaroundsMask& GetWorkaroundsMask() const;
+
       protected:
+        virtual void InitWorkarounds();
+
         std::unique_ptr<DynamicUploader> mDynamicUploader;
+        WorkaroundsMask mWorkaroundsMask;
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
