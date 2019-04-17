@@ -172,6 +172,24 @@
       "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9175b06_f65f78ed",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-17T08:46:17Z",
+      "side": 1,
+      "message": "Also I find if I call DAWN_INSTANTIATE_TEST twice with same tests, I will get compile errors. For example:\n\nDAWN_INSTANTIATE_TEST(MultisampledRenderingTest, D3D12Backend);\n\nDAWN_INSTANTIATE_TEST_WITH_OPTIONS(MultisampledRenderingTest,\n                                   kMultisampledRenderingTestOptions,\n                                   D3D12Backend);\n\nWill get \"error : redefinition of \u0027gtest_MultisampledRenderingTest_EvalGenerator_\u0027\" error, so I failed to find a better way to run the test twice on Metal backends with and without the workaround.. sorry about that.",
+      "parentUuid": "fa21d2bf_dfd780fc",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
