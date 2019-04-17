@@ -49,8 +49,10 @@ namespace dawn_native {
         return mImpl != nullptr;
     }
 
-    DawnDevice Adapter::CreateDevice() {
-        return reinterpret_cast<DawnDevice>(mImpl->CreateDevice());
+    DawnDevice Adapter::CreateDevice(const WorkaroundsMask* workaroundsMask,
+                                     const WorkaroundsMask* appliedWorkaroundsMask) {
+        return reinterpret_cast<DawnDevice>(
+            mImpl->CreateDevice(workaroundsMask, appliedWorkaroundsMask));
     }
 
     // AdapterDiscoverOptionsBase

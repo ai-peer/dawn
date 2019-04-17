@@ -21,6 +21,8 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/metal/Forward.h"
 
+#include "platform/Workarounds.h"
+
 #import <Metal/Metal.h>
 #import <QuartzCore/CAMetalLayer.h>
 
@@ -34,7 +36,10 @@ namespace dawn_native { namespace metal {
 
     class Device : public DeviceBase {
       public:
-        Device(AdapterBase* adapter, id<MTLDevice> mtlDevice);
+        Device(AdapterBase* adapter,
+               id<MTLDevice> mtlDevice,
+               const WorkaroundsMask* workaroundsMask,
+               const WorkaroundsMask* appliedWorkaroundsMask);
         ~Device();
 
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
@@ -63,6 +68,8 @@ namespace dawn_native { namespace metal {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        const WorkaroundsMask& GetWorkaroundsMask() const;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -86,6 +93,8 @@ namespace dawn_native { namespace metal {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
+        void InitWorkarounds();
+
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;
         std::unique_ptr<MapRequestTracker> mMapTracker;
@@ -101,6 +110,8 @@ namespace dawn_native { namespace metal {
         // a different thread so we guard access to it with a mutex.
         std::mutex mLastSubmittedCommandsMutex;
         id<MTLCommandBuffer> mLastSubmittedCommands = nil;
+
+        WorkaroundsMask mWorkaroundsMask;
     };
 
 }}  // namespace dawn_native::metal
