@@ -33,14 +33,27 @@
 #include <type_traits>
 
 namespace dawn_native { namespace metal {
-
-    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice)
+    Device::Device(AdapterBase* adapter,
+                   id<MTLDevice> mtlDevice,
+                   const WorkaroundsMask* workaroundsMask,
+                   const WorkaroundsMask* appliedWorkaroundsMask)
         : DeviceBase(adapter),
           mMtlDevice([mtlDevice retain]),
           mMapTracker(new MapRequestTracker(this)),
           mCompletedSerial(0) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
+
+        InitWorkarounds();
+        if (workaroundsMask != nil && appliedWorkaroundsMask != nil) {
+            // We only care about the workarounds related to Metal.
+            constexpr size_t kEmulateStoreAndMSAAResolve =
+                static_cast<size_t>(Workarounds::EmulateStoreAndMSAAResolve);
+            if (appliedWorkaroundsMask->test(kEmulateStoreAndMSAAResolve)) {
+                mWorkaroundsMask[kEmulateStoreAndMSAAResolve] =
+                    (*workaroundsMask)[kEmulateStoreAndMSAAResolve];
+            }
+        }
     }
 
     Device::~Device() {
@@ -65,6 +78,17 @@ namespace dawn_native { namespace metal {
 
         [mMtlDevice release];
         mMtlDevice = nil;
+    }
+
+    void Device::InitWorkarounds() {
+        // TODO(jiawei.shao@intel.com): check iOS feature sets
+        if (![mMtlDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2]) {
+            mWorkaroundsMask.set(static_cast<size_t>(Workarounds::EmulateStoreAndMSAAResolve));
+        }
+    }
+
+    const WorkaroundsMask& Device::GetWorkaroundsMask() const {
+        return mWorkaroundsMask;
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(

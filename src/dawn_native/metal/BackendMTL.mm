@@ -17,6 +17,8 @@
 #include "dawn_native/MetalBackend.h"
 #include "dawn_native/metal/DeviceMTL.h"
 
+#include "platform/Workarounds.h"
+
 #include <IOKit/graphics/IOGraphicsLib.h>
 
 namespace dawn_native { namespace metal {
@@ -142,8 +144,10 @@ namespace dawn_native { namespace metal {
         }
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl() override {
-            return {new Device(this, mDevice)};
+        ResultOrError<DeviceBase*> CreateDeviceImpl(
+            const WorkaroundsMask* workaroundsMask,
+            const WorkaroundsMask* appliedWorkaroundsMask) override {
+            return {new Device(this, mDevice, workaroundsMask, appliedWorkaroundsMask)};
         }
 
         id<MTLDevice> mDevice = nil;
