@@ -18,6 +18,8 @@
 #include <dawn/dawn.h>
 #include <dawn_native/dawn_native_export.h>
 
+#include "platform/Workarounds.h"
+
 #include <string>
 #include <vector>
 
@@ -60,7 +62,8 @@ namespace dawn_native {
         // Create a device on this adapter, note that the interface will change to include at least
         // a device descriptor and a pointer to backend specific options.
         // On an error, nullptr is returned.
-        DawnDevice CreateDevice();
+        DawnDevice CreateDevice(const WorkaroundsMask* workaroundsMask = nullptr,
+                                const WorkaroundsMask* appliedWorkaroundsMask = nullptr);
 
       private:
         AdapterBase* mImpl = nullptr;
