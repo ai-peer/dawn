@@ -360,5 +360,4 @@ namespace dawn_native {
         }
         return mDynamicUploader.get();
     }
-
 }  // namespace dawn_native

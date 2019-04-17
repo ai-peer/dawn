@@ -31,7 +31,9 @@ namespace dawn_native { namespace d3d12 {
         Backend* GetBackend() const;
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl() override;
+        ResultOrError<DeviceBase*> CreateDeviceImpl(
+            const WorkaroundsMask* workaroundsMask,
+            const WorkaroundsMask* appliedWorkaroundsMask) override;
 
         ComPtr<IDXGIAdapter1> mHardwareAdapter;
         Backend* mBackend;
