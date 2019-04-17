@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "f4586984_5b80e8ef",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-17T08:40:13Z",
+      "side": 1,
+      "message": "OK so should DeviceDescriptor be added into dawn.json?\n\nAlso, do you mean the CreateDevice() function and all the constructors of Device should be something like this:\n\nCreateDevice(const DeviceDescriptor* descriptor, WorkaroundsObserver* observer)\nDevice(const DeviceDescriptor* descriptor, WorkaroundsObserver* observer)\n\nAnd from the observer we will find out whether a workaround is enabled or not after the creation of Device? I just wonder the information about each workaround like name and description should be hard-coded and pre-defined and do not need to be added in observer.",
+      "parentUuid": "91114528_9f0e08b3",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "51dbab1f_ba308452",
         "filename": "src/include/platform/Workarounds.h",
         "patchSetId": 9
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "a9e27c5c_38a1c806",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-17T08:40:13Z",
+      "side": 1,
+      "message": "So do you mean in the DeviceDescriptor we should record if we should enable a workaround or not with a Map? Map\u003cconst char*, bool\u003e?\n\nI am just considering that maybe a more common use-case should be just testing disable or enable one workarounds and leaving others \"don\u0027t care\", so in this patch I use two bitsets to specify the workarounds we really care about. What\u0027s your thought about it?",
+      "parentUuid": "a803850d_b5c09347",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2a6a6f1_2cf211ea",
         "filename": "src/include/platform/Workarounds.h",
         "patchSetId": 9
@@ -115,6 +151,24 @@
       "writtenOn": "2019-04-17T08:11:08Z",
       "side": 1,
       "message": "I have concerns that this duplicates the number of test for all backends even those who don\u0027t care about the workaround. This gets even worse as more workarounds are added because the number of test runs grows in NxM.\n\nThe test template parameter could be a new class that has constructors from dawn_native::BackendType but also other constructors so we can do the ForceWorkaround(MetalBackend, \"copy_for_nonzero_subresource_resolve\").",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa21d2bf_dfd780fc",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-17T08:40:13Z",
+      "side": 1,
+      "message": "I add this duplicates because I think it necessary to test both with and without user-set workarounds on Metal, and it is also necessary to ensure the newly added workarounds won\u0027t affect other backends.\n\nActually you can test multiple workarounds in one run through setting multiple flags in DawnTestOptions, so it seems we don\u0027t need to run NxM tests.",
+      "parentUuid": "09ab68df_79a957d0",
       "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
