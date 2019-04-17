@@ -19,6 +19,8 @@
 
 #include "dawn_native/Error.h"
 
+#include "platform/Workarounds.h"
+
 namespace dawn_native {
 
     class DeviceBase;
@@ -32,15 +34,23 @@ namespace dawn_native {
         const PCIInfo& GetPCIInfo() const;
         InstanceBase* GetInstance() const;
 
-        DeviceBase* CreateDevice();
+        // Create device with optional workarounds. When the bit of the workaround is set in
+        // the parameter appliedWorkaroundsMask, whether the workaround is enabled or not will
+        // depend on the bit in the parameter workaroundsMask. Other workarounds won't be affected.
+        DeviceBase* CreateDevice(const WorkaroundsMask* workaroundsMask = nullptr,
+                                 const WorkaroundsMask* appliedWorkaroundsMask = nullptr);
 
       protected:
         PCIInfo mPCIInfo = {};
 
       private:
-        virtual ResultOrError<DeviceBase*> CreateDeviceImpl() = 0;
+        virtual ResultOrError<DeviceBase*> CreateDeviceImpl(
+            const WorkaroundsMask* workarounds,
+            const WorkaroundsMask* appliedWorkaroundsMask) = 0;
 
-        MaybeError CreateDeviceInternal(DeviceBase** result);
+        MaybeError CreateDeviceInternal(DeviceBase** result,
+            const WorkaroundsMask* workarounds,
+            const WorkaroundsMask* appliedWorkaroundsMask);
 
         InstanceBase* mInstance = nullptr;
         BackendType mBackend;

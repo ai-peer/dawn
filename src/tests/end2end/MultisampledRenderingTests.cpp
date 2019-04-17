@@ -511,4 +511,12 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
     VerifyResolveTarget(kGreen, resolveTexture2, kBaseMipLevel2, kBaseArrayLayer2);
 }
 
-DAWN_INSTANTIATE_TEST(MultisampledRenderingTest, D3D12Backend, OpenGLBackend, MetalBackend, VulkanBackend);
+constexpr std::array<DawnTestOptions, 2> kMultisampledRenderingTestOptions =
+    {kNoOptions, kForceEmulatingStoreAndMSAAResolve};
+
+DAWN_INSTANTIATE_TEST_WITH_OPTIONS(MultisampledRenderingTest,
+                                   kMultisampledRenderingTestOptions,
+                                   D3D12Backend,
+                                   MetalBackend,
+                                   OpenGLBackend,
+                                   VulkanBackend);
