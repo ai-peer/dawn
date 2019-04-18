@@ -17,6 +17,7 @@
 
 #include <dawn/dawn.h>
 #include <dawn_native/dawn_native_export.h>
+#include <dawn_native/Workarounds.h>
 
 #include <string>
 #include <vector>
@@ -47,6 +48,14 @@ namespace dawn_native {
     class InstanceBase;
     class AdapterBase;
 
+    // An optional parameter of Adapter::CreateDevice() to send additional information when creating
+    // a Device and return necessary information after the creation of the device. For example, we
+    // can use it to both enable specific workaround and know which workarounds are enabled after
+    // the creation of the device.
+    struct DAWN_NATIVE_EXPORT DeviceDescriptor {
+        WorkaroundsController workaroundsController;
+    };
+
     // An adapter is an object that represent on possibility of creating devices in the system.
     // Most of the time it will represent a combination of a physical GPU and an API. Not that the
     // same GPU can be represented by multiple adapters but on different APIs.
@@ -68,7 +77,7 @@ namespace dawn_native {
         // Create a device on this adapter, note that the interface will change to include at least
         // a device descriptor and a pointer to backend specific options.
         // On an error, nullptr is returned.
-        DawnDevice CreateDevice();
+        DawnDevice CreateDevice(DeviceDescriptor* deviceDescriptor = nullptr);
 
       private:
         AdapterBase* mImpl = nullptr;

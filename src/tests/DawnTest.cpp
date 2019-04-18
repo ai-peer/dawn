@@ -15,6 +15,7 @@
 #include "tests/DawnTest.h"
 
 #include "common/Assert.h"
+#include "common/BitSetIterator.h"
 #include "common/Constants.h"
 #include "common/Math.h"
 #include "common/Platform.h"
@@ -67,6 +68,35 @@ namespace {
         }
     }
 
+    std::string OptionName(DawnTestOption option) {
+        switch (option) {
+            case DawnTestOption::ForceEmulatingStoreAndMSAAResolve:
+                return "force_emulating_store_and_msaa_resolve";
+            default:
+                UNREACHABLE();
+        }
+    }
+
+    std::string OptionsName(DawnTestOptions testOptions) {
+        std::ostringstream optionsName;
+        for (uint32_t i : IterateBitSet(testOptions)) {
+            optionsName << "_" << OptionName(static_cast<DawnTestOption>(i));
+        }
+
+        return optionsName.str();
+    }
+
+    dawn_native::WorkaroundsController InitWorkarounds(DawnTestOptions testOptions) {
+        dawn_native::WorkaroundsController workarounds;
+
+        if (testOptions.test(
+                static_cast<size_t>(DawnTestOption::ForceEmulatingStoreAndMSAAResolve))) {
+            workarounds[dawn_native::kEmulateStoreAndMSAAResolve] = true;
+        }
+
+        return workarounds;
+    }
+
     struct MapReadUserdata {
         DawnTest* test;
         size_t slot;
@@ -112,10 +142,10 @@ void DawnTestEnvironment::SetUp() {
     mInstance = std::make_unique<dawn_native::Instance>();
 
     static constexpr dawn_native::BackendType kAllBackends[] = {
-        D3D12Backend,
-        MetalBackend,
-        OpenGLBackend,
-        VulkanBackend,
+        dawn_native::BackendType::D3D12,
+        dawn_native::BackendType::Metal,
+        dawn_native::BackendType::OpenGL,
+        dawn_native::BackendType::Vulkan,
     };
 
     // Create a test window for each backend and discover an adapter using it.
@@ -191,19 +221,19 @@ DawnTest::~DawnTest() {
 }
 
 bool DawnTest::IsD3D12() const {
-    return GetParam() == D3D12Backend;
+    return GetParam().first == dawn_native::BackendType::D3D12;
 }
 
 bool DawnTest::IsMetal() const {
-    return GetParam() == MetalBackend;
+    return GetParam().first == dawn_native::BackendType::Metal;
 }
 
 bool DawnTest::IsOpenGL() const {
-    return GetParam() == OpenGLBackend;
+    return GetParam().first == dawn_native::BackendType::OpenGL;
 }
 
 bool DawnTest::IsVulkan() const {
-    return GetParam() == VulkanBackend;
+    return GetParam().first == dawn_native::BackendType::Vulkan;
 }
 
 bool DawnTest::IsAMD() const {
@@ -257,19 +287,20 @@ bool DawnTest::IsMacOS() const {
 void DawnTest::SetUp() {
     // Get an adapter for the backend to use, and create the device.
     dawn_native::Adapter backendAdapter;
+    const dawn_native::BackendType backendType = GetParam().first;
     {
         dawn_native::Instance* instance = gTestEnv->GetInstance();
         std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
 
         for (const dawn_native::Adapter& adapter : adapters) {
-            if (adapter.GetBackendType() == GetParam()) {
+            if (adapter.GetBackendType() == backendType) {
                 backendAdapter = adapter;
                 // On Metal, select the last adapter so that the discrete GPU is tested on
                 // multi-GPU systems.
                 // TODO(cwallez@chromium.org): Replace this with command line arguments requesting
                 // a specific device / vendor ID once the macOS 10.13 SDK is rolled and correct
                 // PCI info collection is implemented on Metal.
-                if (GetParam() != MetalBackend) {
+                if (backendType != dawn_native::BackendType::Metal) {
                     break;
                 }
             }
@@ -279,13 +310,23 @@ void DawnTest::SetUp() {
     }
 
     mPCIInfo = backendAdapter.GetPCIInfo();
-    DawnDevice backendDevice = backendAdapter.CreateDevice();
+
+    DawnDevice backendDevice;
+    DawnTestOptions testOptions = GetParam().second;
+    if (testOptions.any()) {
+        dawn_native::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.workaroundsController = InitWorkarounds(testOptions);
+        backendDevice = backendAdapter.CreateDevice(&deviceDescriptor);
+    } else {
+        backendDevice = backendAdapter.CreateDevice(nullptr);
+    }
+
     DawnProcTable backendProcs = dawn_native::GetProcs();
 
     // Get the test window and create the device using it (esp. for OpenGL)
-    GLFWwindow* testWindow = gTestEnv->GetWindowForBackend(GetParam());
+    GLFWwindow* testWindow = gTestEnv->GetWindowForBackend(backendType);
     DAWN_ASSERT(testWindow != nullptr);
-    mBinding.reset(utils::CreateBinding(GetParam(), testWindow, backendDevice));
+    mBinding.reset(utils::CreateBinding(backendType, testWindow, backendDevice));
     DAWN_ASSERT(mBinding != nullptr);
 
     // Choose whether to use the backend procs and devices directly, or set up the wire.
@@ -586,20 +627,27 @@ namespace detail {
         }
     }
 
-    std::vector<dawn_native::BackendType> FilterBackends(const dawn_native::BackendType* types,
-                                                         size_t numParams) {
-        std::vector<dawn_native::BackendType> backends;
+    std::vector<DawnTestParam> FilterBackends(const DawnTestParam* params, size_t numParams) {
+        std::vector<DawnTestParam> backends;
 
         for (size_t i = 0; i < numParams; ++i) {
-            if (IsBackendAvailable(types[i])) {
-                backends.push_back(types[i]);
+            if (IsBackendAvailable(params[i].first)) {
+                backends.push_back(params[i]);
             }
         }
         return backends;
     }
 
-    std::string GetParamName(const testing::TestParamInfo<dawn_native::BackendType>& info) {
-        return ParamName(info.param);
+    std::string GetParamName(const testing::TestParamInfo<DawnTestParam>& info) {
+        std::ostringstream ostream;
+        ostream << ParamName(info.param.first);
+
+        const DawnTestOptions testOptions = info.param.second;
+        if (info.param.second.any()) {
+            ostream << OptionsName(testOptions);
+        }
+
+        return ostream.str();
     }
 
     // Helper classes to set expectations

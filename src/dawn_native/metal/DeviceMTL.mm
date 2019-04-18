@@ -34,13 +34,25 @@
 
 namespace dawn_native { namespace metal {
 
-    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice)
+    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, DeviceDescriptor* descriptor)
         : DeviceBase(adapter),
           mMtlDevice([mtlDevice retain]),
           mMapTracker(new MapRequestTracker(this)),
           mCompletedSerial(0) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
+
+        InitWorkarounds();
+
+        if (descriptor != nil) {
+            auto result = descriptor->workaroundsController.find(kEmulateStoreAndMSAAResolve);
+            if (result != descriptor->workaroundsController.end()) {
+                mSupportsStoreAndMSAAResolve = result->second;
+            } else {
+                descriptor->workaroundsController[kEmulateStoreAndMSAAResolve] =
+                    mSupportsStoreAndMSAAResolve;
+            }
+        }
     }
 
     Device::~Device() {
@@ -65,6 +77,12 @@ namespace dawn_native { namespace metal {
 
         [mMtlDevice release];
         mMtlDevice = nil;
+    }
+
+    void Device::InitWorkarounds() {
+        // TODO(jiawei.shao@intel.com): check iOS feature sets
+        mSupportsStoreAndMSAAResolve =
+            [mMtlDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -249,6 +267,10 @@ namespace dawn_native { namespace metal {
     void Device::WaitForCommandsToBeScheduled() {
         SubmitPendingCommandBuffer();
         [mLastSubmittedCommands waitUntilScheduled];
+    }
+
+    bool Device::SupportsStoreAndMSAAResolve() const {
+        return mSupportsStoreAndMSAAResolve;
     }
 
 }}  // namespace dawn_native::metal

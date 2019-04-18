@@ -53,7 +53,7 @@ namespace dawn_native {
         return mImpl != nullptr;
     }
 
-    DawnDevice Adapter::CreateDevice() {
+    DawnDevice Adapter::CreateDevice(DeviceDescriptor* deviceDescriptor) {
         return reinterpret_cast<DawnDevice>(mImpl->CreateDevice());
     }
 
