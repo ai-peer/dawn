@@ -62,7 +62,7 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
-    ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl() {
+    ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(DeviceDescriptor* descriptor) {
         std::unique_ptr<Device> device = std::make_unique<Device>(this);
         DAWN_TRY(device->Initialize());
         return device.release();
