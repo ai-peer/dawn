@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "be2f9ab8_3517daec",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T12:55:25Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8bcf42fb0042f562c799ee9094392d979d89dd3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e16c71ce_5737fd4f",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 12
