@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59ff80c0_fca960e3",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8bcf42fb0042f562c799ee9094392d979d89dd3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

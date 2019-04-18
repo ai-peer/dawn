@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3e4f2a80_5e15b4e3",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d180b6f_f9dba7c2",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be8fba31_fe392702",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 9
@@ -30,6 +48,24 @@
       "writtenOn": "2019-04-17T08:11:08Z",
       "side": 1,
       "message": "ditto, this should only happen if the store action is store.",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baceecbe_953fc614",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "Done in [1]",
+      "parentUuid": "be8fba31_fe392702",
       "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "04b45cc7_25a8adcf",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "038d21ee_d31c3221",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51dbab1f_ba308452",
         "filename": "src/include/platform/Workarounds.h",
         "patchSetId": 9
@@ -121,6 +175,24 @@
       "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecaa9fb6_a7d11587",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51dbab1f_ba308452",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -195,6 +267,24 @@
     },
     {
       "key": {
+        "uuid": "97050e76_ea5bb944",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "I implement this with a map for simplicity. With a map, we only need to care about the item in the map, and the workarounds not included in the map will be treated as \"don\u0027t care\".\n\nPTAL, thanks!",
+      "parentUuid": "94035145_f7df4393",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2a6a6f1_2cf211ea",
         "filename": "src/include/platform/Workarounds.h",
         "patchSetId": 9
@@ -209,6 +299,24 @@
       "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9792d067_f7af1f50",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "Done\nThis patch will only handle Metal issue.",
+      "parentUuid": "d2a6a6f1_2cf211ea",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -298,6 +406,24 @@
       "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76b8a15f_f4808fd7",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-18T08:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "136eff90_bfdabb28",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
