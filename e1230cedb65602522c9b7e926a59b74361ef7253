@@ -285,6 +285,24 @@
     },
     {
       "key": {
+        "uuid": "57ffdb61_2071afcd",
+        "filename": "src/include/platform/Workarounds.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-18T12:38:01Z",
+      "side": 1,
+      "message": "The map misses the requirement that Chromium needs to know which workarounds are used (and which ones are not used). If you don\u0027t like the virtual method thing we could have something where workarounds and features are each represented with an enum value (which we can never remove to not break compatibility). The device descriptors take a list of forceEnabledWorkarounds and forceDisabledWorkarounds. Then given a device we can ask for a list of enabled workarounds, and there are query functions to get data like description url etc for a given workaround.",
+      "parentUuid": "97050e76_ea5bb944",
+      "revId": "e1230cedb65602522c9b7e926a59b74361ef7253",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2a6a6f1_2cf211ea",
         "filename": "src/include/platform/Workarounds.h",
         "patchSetId": 9

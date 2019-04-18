@@ -16,6 +16,46 @@
       "revId": "8bcf42fb0042f562c799ee9094392d979d89dd3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e16c71ce_5737fd4f",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-18T12:38:01Z",
+      "side": 1,
+      "message": "nit: libraries and the standard library includes should be in separate blocks.",
+      "revId": "8bcf42fb0042f562c799ee9094392d979d89dd3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42e1768c_85b89462",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-18T12:38:01Z",
+      "side": 1,
+      "message": "With this approach we need to add a new option and fill new code for each workaround that we add. It is also no extensible to supporting multiple workaround and more types of options.\n\nI\u0027d suggest making DawnTestParam a structure like so:\n\n  struct DawnTestParam {\n    constexpr DawnTestParam(dawn_native::BackendType backendType)\n      : backendType(backendType) {\n    }\n\n    dawn_native::BackendType backendType;\n\n    // Note how this can easily be changed to support a vector of workarounds\n    const char* forceEnabledWorkaround \u003d nullptr;\n\n    // Note how more options can be added.\n  };\n\n\nThis structure is never used directly (or super rarely) instead the code can use the following things:\n\n  static constexpr DawnTestParam D3D12Backend(dawn_native::BackendType::D3D12);\n\n  DawnTestParam ForceWorkaround(dawn_native::BackendType type, const char* workaround);\n\nThe point is that it is extensible in term of adding more types of options. Also adding a new workaround is free because the const char* just gets passed around, no need for conversions.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 2
+      },
+      "revId": "8bcf42fb0042f562c799ee9094392d979d89dd3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
