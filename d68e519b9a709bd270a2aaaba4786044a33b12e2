@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af3b9844_1907f46b",
+        "filename": "src/include/dawn_native/Workarounds.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-19T15:47:59Z",
+      "side": 1,
+      "message": "So we talked about this at length with Geoff that is thinking about a similar thing for ANGLE.\n\nFirst we need the same thing for workarounds but also features and conditional optimizations and can regroup all of these behind the name \"toggle\".\n\nThen we need the embedder to override toggles but that\u0027s mostly for troubleshooting so the negotiation can be kept simple: the embedder says \"forceEnableToggle\" and \"forceDisableToggle\". So the device descriptor would just have:\n\n  std::vector\u003cconst char*\u003e forceEnabledToggles;\n  std::vector\u003cconst char*\u003e forceDisabledToggles;\n\nThe embedder needs to be able to know the toggles used so we can have:\n\n  std::vector\u003cconst char*\u003e GetTogglesUsed(DawnDevice device);\n\nFinally we need to get info about the toggles and there\u0027s probably going to be a lazily created hashmap for this in the instance (?) so we\u0027d have:\n\n  bool GetToggleInfo(Instance instance, const char* toggleName, ToggleInfo* info); // or maybe DawnDevice?\n\nANGLE would have a similar API but using EGL, and we\u0027d have a unified path for both types of toggles to interact with command line flags and displaying on about:gpu.\n\nThe advantage is that the API is really simple and small, 4 lines plus the addition of the DeviceDescriptor for device creation.",
+      "revId": "d68e519b9a709bd270a2aaaba4786044a33b12e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c3c9aa_9b752eb6",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-19T15:47:59Z",
+      "side": 1,
+      "message": "Changes for DawnTest LGTM, thanks!",
+      "revId": "d68e519b9a709bd270a2aaaba4786044a33b12e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
