@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_METAL_DEVICEMTL_H_
 #define DAWNNATIVE_METAL_DEVICEMTL_H_
 
+#include "dawn_native/Workarounds.h"
 #include "dawn_native/dawn_platform.h"
 
 #include "common/Serial.h"
@@ -34,7 +35,7 @@ namespace dawn_native { namespace metal {
 
     class Device : public DeviceBase {
       public:
-        Device(AdapterBase* adapter, id<MTLDevice> mtlDevice);
+        Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, DeviceDescriptor* descriptor);
         ~Device();
 
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
@@ -63,6 +64,8 @@ namespace dawn_native { namespace metal {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        bool ShouldEmulateStoreAndMSAAResolve() const;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -86,6 +89,8 @@ namespace dawn_native { namespace metal {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
+        void InitWorkarounds();
+
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;
         std::unique_ptr<MapRequestTracker> mMapTracker;
@@ -101,6 +106,9 @@ namespace dawn_native { namespace metal {
         // a different thread so we guard access to it with a mutex.
         std::mutex mLastSubmittedCommandsMutex;
         id<MTLCommandBuffer> mLastSubmittedCommands = nil;
+
+        // A flag to specify if we should emulate MTLStoreActionStoreAndMultisampleResolve.
+        bool mEmulateStoreAndMSAAResolve;
     };
 
 }}  // namespace dawn_native::metal
