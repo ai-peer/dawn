@@ -73,6 +73,30 @@
       "revId": "8bcf42fb0042f562c799ee9094392d979d89dd3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79deefe_0b53f1cf",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-19T00:25:44Z",
+      "side": 1,
+      "message": "\"It is also no extensible to supporting multiple workaround and more types of options.\"\n\nOh in fact we use DawnTestOptions instead of DawnTestOption, and DawnTestOptions is a bitset where you can set multiple bits at the same time to enable multiple workarounds and more types of options.",
+      "parentUuid": "42e1768c_85b89462",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 2
+      },
+      "revId": "8bcf42fb0042f562c799ee9094392d979d89dd3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
