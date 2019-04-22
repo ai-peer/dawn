@@ -19,6 +19,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/Toggles.h"
 
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
@@ -115,7 +116,14 @@ namespace dawn_native {
 
         ResultOrError<DynamicUploader*> GetDynamicUploader() const;
 
+        std::vector<const char*> GetTogglesUsed() const;
+        bool GetToggleInfo(ToggleInfo* info) const;
+        bool IsToggleEnabled(Toggle toggle) const;
+
       protected:
+        void SetToggle(Toggle toggle, bool isEnabled);
+        bool IsToggleValid(Toggle) const;
+
         std::unique_ptr<DynamicUploader> mDynamicUploader;
 
       private:
@@ -179,6 +187,8 @@ namespace dawn_native {
         dawn::DeviceErrorCallback mErrorCallback = nullptr;
         dawn::CallbackUserdata mErrorUserdata = 0;
         uint32_t mRefCount = 1;
+
+        TogglesSet mTogglesSet;
     };
 
 }  // namespace dawn_native

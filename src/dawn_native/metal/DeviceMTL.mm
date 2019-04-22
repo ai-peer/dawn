@@ -34,13 +34,14 @@
 
 namespace dawn_native { namespace metal {
 
-    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice)
+    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, DeviceDescriptor* descriptor)
         : DeviceBase(adapter),
           mMtlDevice([mtlDevice retain]),
           mMapTracker(new MapRequestTracker(this)),
           mCompletedSerial(0) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
+        InitToggles(descriptor);
     }
 
     Device::~Device() {
@@ -65,6 +66,47 @@ namespace dawn_native { namespace metal {
 
         [mMtlDevice release];
         mMtlDevice = nil;
+    }
+
+    void Device::InitToggles(DeviceDescriptor* descriptor) {
+        if (descriptor != nil) {
+            // Only set the toggles which are valid on Metal
+            for (const char* toggleName : descriptor->forceEnabledToggles) {
+                if (ToggleNameToEnum(toggleName) == Toggle::EmulateStoreAndMSAAResolve) {
+                    SetToggle(Toggle::EmulateStoreAndMSAAResolve, true);
+                }
+            }
+
+            for (const char* toggleName : descriptor->forceDisabledToggles) {
+                if (ToggleNameToEnum(toggleName) == Toggle::EmulateStoreAndMSAAResolve) {
+                    SetToggle(Toggle::EmulateStoreAndMSAAResolve, false);
+                }
+            }
+        }
+
+        InitTogglesFromDriver(descriptor);
+    }
+
+    void Device::InitTogglesFromDriver(DeviceDescriptor* descriptor) {
+        // Skip the toggles that are set with DeviceDescriptor
+        if (!IsToggleValid(Toggle::EmulateStoreAndMSAAResolve)) {
+            // TODO(jiawei.shao@intel.com): check iOS feature sets
+            bool emulateStoreAndMSAAResolve =
+                ![mMtlDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
+
+            SetToggle(Toggle::EmulateStoreAndMSAAResolve, emulateStoreAndMSAAResolve);
+
+            // Write data to the callback if it exists
+            if (descriptor != nullptr) {
+                if (emulateStoreAndMSAAResolve) {
+                    descriptor->forceEnabledToggles.push_back(
+                        ToggleEnumToName(Toggle::EmulateStoreAndMSAAResolve));
+                } else {
+                    descriptor->forceDisabledToggles.push_back(
+                        ToggleEnumToName(Toggle::EmulateStoreAndMSAAResolve));
+                }
+            }
+        }
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(

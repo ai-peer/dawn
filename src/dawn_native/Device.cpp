@@ -257,6 +257,25 @@ namespace dawn_native {
         }
     }
 
+    std::vector<const char*> DeviceBase::GetTogglesUsed() const {
+        std::vector<const char*> togglesNameInUse(mTogglesSet.availableToggleBitset.count());
+
+        for (uint32_t i : IterateBitSet(mTogglesSet.availableToggleBitset)) {
+            togglesNameInUse.push_back(ToggleEnumToName(static_cast<Toggle>(i)));
+        }
+
+        return togglesNameInUse;
+    }
+
+    bool DeviceBase::GetToggleInfo(ToggleInfo* info) const {
+        mTogglesSet.GetToggleInfo(info);
+        return info->isValid;
+    }
+
+    bool DeviceBase::IsToggleEnabled(Toggle toggle) const {
+        return mTogglesSet.IsValid(toggle) && mTogglesSet.IsEnabled(toggle);
+    }
+
     // Implementation details of object creation
 
     MaybeError DeviceBase::CreateBindGroupInternal(BindGroupBase** result,
@@ -359,6 +378,14 @@ namespace dawn_native {
             DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer());
         }
         return mDynamicUploader.get();
+    }
+
+    void DeviceBase::SetToggle(Toggle toggle, bool isEnabled) {
+        mTogglesSet.SetToggle(toggle, isEnabled);
+    }
+
+    bool DeviceBase::IsToggleValid(Toggle toggle) const {
+        return mTogglesSet.IsValid(toggle);
     }
 
 }  // namespace dawn_native

@@ -34,7 +34,7 @@ namespace dawn_native { namespace metal {
 
     class Device : public DeviceBase {
       public:
-        Device(AdapterBase* adapter, id<MTLDevice> mtlDevice);
+        Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, DeviceDescriptor* descriptor);
         ~Device();
 
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
@@ -85,6 +85,9 @@ namespace dawn_native { namespace metal {
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
+
+        void InitToggles(DeviceDescriptor* descriptor);
+        void InitTogglesFromDriver(DeviceDescriptor* descriptor);
 
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;
