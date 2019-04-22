@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "06f3de66_bd85eac3",
+        "filename": "src/include/dawn_native/Workarounds.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-22T08:27:21Z",
+      "side": 1,
+      "message": "Done\n\nI have implemented the interfaces in DeviceBase defined here. \nFor the toggles inside Dawn, I still think it better to use bitset + enum than using strings.\nPTAL, thanks!",
+      "parentUuid": "af3b9844_1907f46b",
+      "revId": "d68e519b9a709bd270a2aaaba4786044a33b12e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2c3c9aa_9b752eb6",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 16
