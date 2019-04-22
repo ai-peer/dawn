@@ -34,13 +34,15 @@
 
 namespace dawn_native { namespace metal {
 
-    Device::Device(AdapterBase* adapter, id<MTLDevice> mtlDevice)
-        : DeviceBase(adapter),
+    Device::Device(AdapterBase* adapter, DeviceDescriptor* descriptor, id<MTLDevice> mtlDevice)
+        : DeviceBase(adapter, descriptor),
           mMtlDevice([mtlDevice retain]),
           mMapTracker(new MapRequestTracker(this)),
           mCompletedSerial(0) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
+        
+        InitToggles();
     }
 
     Device::~Device() {
@@ -65,6 +67,34 @@ namespace dawn_native { namespace metal {
 
         [mMtlDevice release];
         mMtlDevice = nil;
+    }
+    
+    void Device::InitToggles(const DeviceDescriptor* descriptor) {
+        InitTogglesFromDriver();
+
+        if (descriptor == nil) {
+            return;
+        }
+        
+        // Only set the toggles which are valid on Metal
+        for (const char* toggleName : descriptor->forceEnabledToggles) {
+            if (ToggleNameToEnum(toggleName) == Toggle::EmulateStoreAndMSAAResolve) {
+                SetToggle(Toggle::EmulateStoreAndMSAAResolve, true);
+            }
+        }
+        
+        for (const char* toggleName : descriptor->forceDisabledToggles) {
+            if (ToggleNameToEnum(toggleName) == Toggle::EmulateStoreAndMSAAResolve) {
+                SetToggle(Toggle::EmulateStoreAndMSAAResolve, false);
+            }
+        }
+    }
+
+    void Device::InitTogglesFromDriver() {
+        // TODO(jiawei.shao@intel.com): check iOS feature sets
+        bool emulateStoreAndMSAAResolve =
+            ![mMtlDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
+        mTogglesSet.SetToggle(Toggle::EmulateStoreAndMSAAResolve, emulateStoreAndMSAAResolve); 
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(

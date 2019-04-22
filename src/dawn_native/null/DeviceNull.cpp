@@ -33,8 +33,8 @@ namespace dawn_native { namespace null {
         virtual ~Adapter() = default;
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl() override {
-            return {new Device(this)};
+        ResultOrError<DeviceBase*> CreateDeviceImpl(DeviceDescriptor* descriptor) override {
+            return {new Device(this, descriptor)};
         }
     };
 
@@ -58,7 +58,8 @@ namespace dawn_native { namespace null {
 
     // Device
 
-    Device::Device(Adapter* adapter) : DeviceBase(adapter) {
+    Device::Device(Adapter* adapter, DeviceDescriptor* descriptor)
+        : DeviceBase(adapter, descriptor) {
     }
 
     Device::~Device() {

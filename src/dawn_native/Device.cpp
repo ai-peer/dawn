@@ -50,7 +50,8 @@ namespace dawn_native {
 
     // DeviceBase
 
-    DeviceBase::DeviceBase(AdapterBase* adapter) : mAdapter(adapter) {
+    DeviceBase::DeviceBase(AdapterBase* adapter, DeviceDescriptor* descriptor)
+        : mAdapter(adapter) {
         mCaches = std::make_unique<DeviceBase::Caches>();
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
@@ -68,7 +69,7 @@ namespace dawn_native {
     }
 
     void DeviceBase::SetErrorCallback(dawn::DeviceErrorCallback callback,
-                                      dawn::CallbackUserdata userdata) {
+        dawn::CallbackUserdata userdata) {
         mErrorCallback = callback;
         mErrorUserdata = userdata;
     }
@@ -227,7 +228,7 @@ namespace dawn_native {
         return result;
     }
     TextureViewBase* DeviceBase::CreateTextureView(TextureBase* texture,
-                                                   const TextureViewDescriptor* descriptor) {
+        const TextureViewDescriptor* descriptor) {
         TextureViewBase* result = nullptr;
 
         if (ConsumedError(CreateTextureViewInternal(&result, texture, descriptor))) {
@@ -255,6 +256,29 @@ namespace dawn_native {
         if (mRefCount == 0) {
             delete this;
         }
+    }
+
+    std::vector<const char*> DeviceBase::GetTogglesUsed() const {
+        std::vector<const char*> togglesNameInUse(mTogglesSet.availableToggleBitset.count());
+
+        for (uint32_t i : IterateBitSet(mTogglesSet.availableToggleBitset)) {
+            togglesNameInUse.push_back(ToggleEnumToName(static_cast<Toggle>(i)));
+        }
+
+        return togglesNameInUse;
+    }
+
+    bool DeviceBase::GetToggleInfo(ToggleInfo* info) const {
+        mTogglesSet.GetToggleInfo(info);
+        return info->isValid;
+    }
+
+    void DeviceBase::SetToggle(Toggle toggle, bool isEnabled) {
+        mTogglesSet.SetToggle(toggle, isEnabled);
+    }
+
+    bool DeviceBase::IsToggleEnabled(Toggle toggle) {
+        return mTogglesSet.IsValid(toggle) && mTogglesSet.IsEnabled(toggle);
     }
 
     // Implementation details of object creation

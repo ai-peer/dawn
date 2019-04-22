@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_METAL_DEVICEMTL_H_
 #define DAWNNATIVE_METAL_DEVICEMTL_H_
 
+#include "dawn_native/Workarounds.h"
 #include "dawn_native/dawn_platform.h"
 
 #include "common/Serial.h"
@@ -34,7 +35,7 @@ namespace dawn_native { namespace metal {
 
     class Device : public DeviceBase {
       public:
-        Device(AdapterBase* adapter, id<MTLDevice> mtlDevice);
+        Device(AdapterBase* adapter, DeviceDescriptor* descriptor, id<MTLDevice> mtlDevice);
         ~Device();
 
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
@@ -85,6 +86,9 @@ namespace dawn_native { namespace metal {
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
+
+        void InitToggles(const DeviceDescriptor* descriptor);
+        void InitTogglesFromDriver();
 
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;

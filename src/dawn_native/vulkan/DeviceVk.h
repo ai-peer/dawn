@@ -38,7 +38,7 @@ namespace dawn_native { namespace vulkan {
 
     class Device : public DeviceBase {
       public:
-        Device(Adapter* adapter);
+        Device(Adapter* adapter, DeviceDescriptor* descriptor);
         ~Device();
 
         MaybeError Initialize();
