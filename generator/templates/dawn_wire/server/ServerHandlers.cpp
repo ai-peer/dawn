@@ -13,6 +13,7 @@
 //* limitations under the License.
 
 #include "common/Assert.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 #include "dawn_wire/server/Server.h"
 
 namespace dawn_wire { namespace server {
@@ -92,6 +93,7 @@ namespace dawn_wire { namespace server {
     {% endfor %}
 
     const char* Server::HandleCommands(const char* commands, size_t size) {
+        TRACE_EVENT0(TRACE_DISABLED_BY_DEFAULT("gpu.dawn"), "Server::HandleCommands");
         mProcs.deviceTick(DeviceObjects().Get(1)->handle);
 
         while (size >= sizeof(WireCmd)) {
