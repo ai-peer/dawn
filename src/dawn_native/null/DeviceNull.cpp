@@ -33,7 +33,7 @@ namespace dawn_native { namespace null {
         virtual ~Adapter() = default;
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl() override {
+        ResultOrError<DeviceBase*> CreateDeviceImpl(DeviceDescriptor* descriptor) override {
             return {new Device(this)};
         }
     };
