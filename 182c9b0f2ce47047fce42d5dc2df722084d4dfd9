@@ -1,0 +1,306 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64497b3b_fbe4e9d2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed on the device.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9160ea14_900c3cf1",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This should get the DeviceDescriptor because it will extract limits and extensions from it eventually.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd345dcb_e5805c95",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This map will be created on every call to this function. Let\u0027s cache it in the Instance (to avoid static initializers). It could be created programmatically from the list of all Toogles, see below.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02ccc962_9469676e",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This could be replaced by an array of:\n\n  struct ToggleAndInfo {\n    Toggle toggle;\n    ToggleInfo info;\n  }\n\nthat is in the same order as the enum (could be checked with asserts at runtime with toggle \u003d index of toggle and info).\n\nIt would avoid having to duplicate the switch in many places: there would be a single toggle enum definition, and a single definition of the array. No switches.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2692d0b_140bc6e1",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This isn\u0027t needed if we compute the driver toggles and then apply the overrides.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14b66978_845b900b",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "Ditto this wouldn\u0027t be needed.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 42
+      },
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9dc9e65_ead54238",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This is independent of the TogglesSet and could be a static function.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "193f3e16_2743a14f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This will be needed by all backends. It could be a DeviceBase method like ApplyToggleOverrides(descriptor) and called after InitTogglesFromDriver.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "365b770e_1abaeab8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "To avoid having to add manual code for every toggle, this could use the helper function from toggle name to enum.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "596ef1a7_9c0953f4",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f1cc6fa_106e6404",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "By overriding after the initialization from driver, we don\u0027t need to check this.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2212aa49_8e3aa361",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed if the descriptor is const.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c595abf_a07682bf",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This doesn\u0027t match the name for \"forceEnabled\" and I don\u0027t think the application needs to care about disabled toggles. The device descriptor being mutable will also introduce complexity in the backends were we don\u0027t know what has been previously modified and how (vs. state being in the DeviceBase class directly).",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 81
+      },
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61128b94_66c3ca54",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "nit: does",
+      "range": {
+        "startLine": 62,
+        "startChar": 56,
+        "endLine": 62,
+        "endChar": 58
+      },
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "004f23bf_f8dba7f3",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "There is no entry point to get a ToggleInfo in DawnNative.h did you mean to add one? It would help check that we didn\u0027t misspell the toggle name in ForceWorkaround. We also need an urlName.\n\nisEnabled isn\u0027t needed because we get that information somewhere else. ToggleInfos would probably be returned by pointer so isValid can be replaced by the return value not being nullptr.\n\nGetting ToggleInfo would probably need to be an instance method so that we can build a map lazily.",
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d234ce2_a4bd6e45",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-23T10:02:58Z",
+      "side": 1,
+      "message": "This should probably be const and a getter added for the list of enabled toggles for a given device.",
+      "range": {
+        "startLine": 92,
+        "startChar": 32,
+        "endLine": 92,
+        "endChar": 48
+      },
+      "revId": "182c9b0f2ce47047fce42d5dc2df722084d4dfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
