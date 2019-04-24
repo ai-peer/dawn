@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12162ee2_a8524684",
+        "filename": "src/common/Math.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-24T11:31:32Z",
+      "side": 1,
+      "message": "These aren\u0027t used",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "revId": "bfcda4bd3dc112b6b502099134670192c285d164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b80f77a_4bc6e51f",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-24T11:31:32Z",
+      "side": 1,
+      "message": "nit: kNegativeZeroInHalf \u003d 0x8000",
+      "revId": "bfcda4bd3dc112b6b502099134670192c285d164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95ca0a2e_99ec8336",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-24T11:31:32Z",
+      "side": 1,
+      "message": "Why does this need to be special-cased? Float16ToFloat32 looks like it should handle that.",
+      "revId": "bfcda4bd3dc112b6b502099134670192c285d164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d68165a3_5dad0116",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-24T11:31:32Z",
+      "side": 1,
+      "message": "nit: Integer / unsigned integer need to match exactly.",
+      "range": {
+        "startLine": 298,
+        "startChar": 67,
+        "endLine": 298,
+        "endChar": 95
+      },
+      "revId": "bfcda4bd3dc112b6b502099134670192c285d164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8537a8eb_5581c900",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-24T11:31:32Z",
+      "side": 1,
+      "message": "This is repeated, can it be a variable declared in the shader above the if?",
+      "range": {
+        "startLine": 312,
+        "startChar": 22,
+        "endLine": 312,
+        "endChar": 88
+      },
+      "revId": "bfcda4bd3dc112b6b502099134670192c285d164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dee55b88_497e9ab1",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-24T11:31:32Z",
+      "side": 1,
+      "message": "This is really hard to read, can we have variables for the expected and test values so the expression reads in one block?",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 38
+      },
+      "revId": "bfcda4bd3dc112b6b502099134670192c285d164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
