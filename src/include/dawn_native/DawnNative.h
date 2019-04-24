@@ -78,6 +78,7 @@ namespace dawn_native {
     struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptionsBase {
       public:
         const BackendType backendType;
+        bool enableAPIValidation = false;
 
       protected:
         AdapterDiscoveryOptionsBase(BackendType type);

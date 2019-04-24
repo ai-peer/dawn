@@ -26,6 +26,9 @@
 #include "dawn_native/vulkan/NativeSwapChainImplVk.h"
 
 namespace dawn_native { namespace vulkan {
+    AdapterDiscoveryOptions::AdapterDiscoveryOptions()
+        : AdapterDiscoveryOptionsBase(BackendType::Vulkan) {
+    }
 
     VkInstance GetInstance(DawnDevice device) {
         Device* backendDevice = reinterpret_cast<Device*>(device);

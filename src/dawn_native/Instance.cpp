@@ -125,6 +125,8 @@ namespace dawn_native {
     }
 
     MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options) {
+        mEnableAPIValidation = options->enableAPIValidation;
+
         EnsureBackendConnections();
 
         BackendConnection* backend;
@@ -153,6 +155,10 @@ namespace dawn_native {
             return true;
         }
         return false;
+    }
+
+    bool InstanceBase::GetEnableAPIValidation() {
+        return mEnableAPIValidation;
     }
 
 }  // namespace dawn_native

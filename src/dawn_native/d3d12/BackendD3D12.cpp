@@ -97,6 +97,11 @@ namespace dawn_native { namespace d3d12 {
         return adapters;
     }
 
+    ResultOrError<std::vector<std::unique_ptr<AdapterBase>>> Backend::DiscoverAdapters(
+        const AdapterDiscoveryOptionsBase* optionsBase) {
+        return DiscoverDefaultAdapters();
+    }
+
     BackendConnection* Connect(InstanceBase* instance) {
         Backend* backend = new Backend(instance);
 

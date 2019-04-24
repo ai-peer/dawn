@@ -21,6 +21,10 @@
 #include <windows.h>
 
 namespace dawn_native { namespace d3d12 {
+    struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
+        AdapterDiscoveryOptions();
+    };
+
     DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl(DawnDevice device,
                                                                              HWND window);
     DAWN_NATIVE_EXPORT DawnTextureFormat

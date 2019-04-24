@@ -50,6 +50,11 @@ namespace dawn_native { namespace null {
             adapters.push_back(std::make_unique<Adapter>(GetInstance()));
             return adapters;
         }
+
+        ResultOrError<std::vector<std::unique_ptr<AdapterBase>>> DiscoverAdapters(
+            const AdapterDiscoveryOptionsBase* optionsBase) override {
+            return DiscoverDefaultAdapters();
+        }
     };
 
     BackendConnection* Connect(InstanceBase* instance) {

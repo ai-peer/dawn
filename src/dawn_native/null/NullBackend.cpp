@@ -21,6 +21,9 @@
 #include "dawn_native/null/DeviceNull.h"
 
 namespace dawn_native { namespace null {
+    AdapterDiscoveryOptions::AdapterDiscoveryOptions()
+        : AdapterDiscoveryOptionsBase(BackendType::Null) {
+    }
 
     DawnSwapChainImplementation CreateNativeSwapChainImpl() {
         DawnSwapChainImplementation impl;

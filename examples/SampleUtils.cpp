@@ -84,7 +84,7 @@ dawn::Device CreateCppDawnDevice() {
     }
 
     instance = std::make_unique<dawn_native::Instance>();
-    utils::DiscoverAdapter(instance.get(), window, backendType);
+    utils::DiscoverAdapter(instance.get(), window, backendType, false);
 
     // Get an adapter for the backend to use, and create the device.
     dawn_native::Adapter backendAdapter;

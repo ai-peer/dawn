@@ -95,6 +95,11 @@ namespace dawn_native { namespace vulkan {
         return adapters;
     }
 
+    ResultOrError<std::vector<std::unique_ptr<AdapterBase>>> Backend::DiscoverAdapters(
+        const AdapterDiscoveryOptionsBase* optionsBase) {
+        return DiscoverDefaultAdapters();
+    }
+
     ResultOrError<VulkanGlobalKnobs> Backend::CreateInstance() {
         VulkanGlobalKnobs usedKnobs = {};
 
@@ -120,16 +125,16 @@ namespace dawn_native { namespace vulkan {
             usedKnobs.renderDocCapture = true;
         }
 #endif
-#if defined(DAWN_ENABLE_ASSERTS)
-        if (mGlobalInfo.standardValidation) {
-            layersToRequest.push_back(kLayerNameLunargStandardValidation);
-            usedKnobs.standardValidation = true;
+        if (GetInstance()->GetEnableAPIValidation()) {
+            if (mGlobalInfo.standardValidation) {
+                layersToRequest.push_back(kLayerNameLunargStandardValidation);
+                usedKnobs.standardValidation = true;
+            }
+            if (mGlobalInfo.debugReport) {
+                extensionsToRequest.push_back(kExtensionNameExtDebugReport);
+                usedKnobs.debugReport = true;
+            }
         }
-        if (mGlobalInfo.debugReport) {
-            extensionsToRequest.push_back(kExtensionNameExtDebugReport);
-            usedKnobs.debugReport = true;
-        }
-#endif
         // Always request all extensions used to create VkSurfaceKHR objects so that they are
         // always available for embedders looking to create VkSurfaceKHR on our VkInstance.
         if (mGlobalInfo.macosSurface) {
@@ -156,7 +161,6 @@ namespace dawn_native { namespace vulkan {
             extensionsToRequest.push_back(kExtensionNameKhrXlibSurface);
             usedKnobs.xlibSurface = true;
         }
-
         VkApplicationInfo appInfo;
         appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
         appInfo.pNext = nullptr;
@@ -175,7 +179,6 @@ namespace dawn_native { namespace vulkan {
         createInfo.ppEnabledLayerNames = layersToRequest.data();
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionsToRequest.size());
         createInfo.ppEnabledExtensionNames = extensionsToRequest.data();
-
         DAWN_TRY(CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
                                 "vkCreateInstance"));
 

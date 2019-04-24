@@ -19,6 +19,10 @@
 #include <dawn_native/DawnNative.h>
 
 namespace dawn_native { namespace null {
+    struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
+        AdapterDiscoveryOptions();
+    };
+
     DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl();
 }}  // namespace dawn_native::null
 
