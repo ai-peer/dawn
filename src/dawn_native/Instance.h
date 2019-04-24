@@ -40,6 +40,7 @@ namespace dawn_native {
 
         // Used to handle error that happen up to device creation.
         bool ConsumedError(MaybeError maybeError);
+        bool GetEnableAPIValidation();
 
       private:
         // Lazily creates connections to all backends that have been compiled.
@@ -51,6 +52,7 @@ namespace dawn_native {
 
         bool mBackendsConnected = false;
         bool mDiscoveredDefaultAdapters = false;
+        bool mEnableAPIValidation = false;
 
         std::vector<std::unique_ptr<BackendConnection>> mBackends;
         std::vector<std::unique_ptr<AdapterBase>> mAdapters;

@@ -18,9 +18,21 @@
 
 #include "GLFW/glfw3.h"
 
+#if defined(DAWN_ENABLE_BACKEND_D3D12)
+#    include "dawn_native/D3D12Backend.h"
+#endif  // defined(DAWN_ENABLE_BACKEND_D3D12)
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+#    include "dawn_native/MetalBackend.h"
+#endif  // defined(DAWN_ENABLE_BACKEND_METAL)
+#if defined(DAWN_ENABLE_BACKEND_NULL)
+#    include "dawn_native/NullBackend.h"
+#endif  // defined(DAWN_ENABLE_BACKEND_NULL)
 #if defined(DAWN_ENABLE_BACKEND_OPENGL)
 #    include "dawn_native/OpenGLBackend.h"
 #endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_VULKAN)
+#    include "dawn_native/VulkanBackend.h"
+#endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
 
 namespace utils {
 
@@ -57,17 +69,42 @@ namespace utils {
 
     void DiscoverAdapter(dawn_native::Instance* instance,
                          GLFWwindow* window,
-                         dawn_native::BackendType type) {
+                         dawn_native::BackendType type,
+                         bool enableAPIValidation) {
         DAWN_UNUSED(type);
         DAWN_UNUSED(window);
-
-        if (type == dawn_native::BackendType::OpenGL) {
+        if (type == dawn_native::BackendType::D3D12) {
+#if defined(DAWN_ENABLE_BACKEND_D3D12)
+            dawn_native::d3d12::AdapterDiscoveryOptions adapterOptions;
+            adapterOptions.enableAPIValidation = enableAPIValidation;
+            instance->DiscoverAdapters(&adapterOptions);
+#endif  // defined(DAWN_ENABLE_BACKEND_D3D12)
+        } else if (type == dawn_native::BackendType::Metal) {
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+            dawn_native::metal::AdapterDiscoveryOptions adapterOptions;
+            adapterOptions.enableAPIValidation = enableAPIValidation;
+            instance->DiscoverAdapters(&adapterOptions);
+#endif  // defined(DAWN_ENABLE_BACKEND_METAL)
+        } else if (type == dawn_native::BackendType::Null) {
+#if defined(DAWN_ENABLE_BACKEND_NULL)
+            dawn_native::null::AdapterDiscoveryOptions adapterOptions;
+            adapterOptions.enableAPIValidation = enableAPIValidation;
+            instance->DiscoverAdapters(&adapterOptions);
+#endif  // defined(DAWN_ENABLE_BACKEND_NULL)
+        } else if (type == dawn_native::BackendType::OpenGL) {
 #if defined(DAWN_ENABLE_BACKEND_OPENGL)
             glfwMakeContextCurrent(window);
             dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
             adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
+            adapterOptions.enableAPIValidation = enableAPIValidation;
             instance->DiscoverAdapters(&adapterOptions);
 #endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+        } else if (type == dawn_native::BackendType::Vulkan) {
+#if defined(DAWN_ENABLE_BACKEND_VULKAN)
+            dawn_native::vulkan::AdapterDiscoveryOptions adapterOptions;
+            adapterOptions.enableAPIValidation = enableAPIValidation;
+            instance->DiscoverAdapters(&adapterOptions);
+#endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
         } else {
             instance->DiscoverDefaultAdapters();
         }

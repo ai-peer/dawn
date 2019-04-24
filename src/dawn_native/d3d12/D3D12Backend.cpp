@@ -22,6 +22,9 @@
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
+    AdapterDiscoveryOptions::AdapterDiscoveryOptions()
+        : AdapterDiscoveryOptionsBase(BackendType::D3D12) {
+    }
 
     DawnSwapChainImplementation CreateNativeSwapChainImpl(DawnDevice device, HWND window) {
         Device* backendDevice = reinterpret_cast<Device*>(device);

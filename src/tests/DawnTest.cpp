@@ -97,9 +97,15 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
             continue;
         }
 
+        if (strcmp("--enable-api-validation", argv[i]) == 0) {
+            mEnableAPIValidation = true;
+            continue;
+        }
+
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
             std::cout << "\n\nUsage: " << argv[0] << " [GTEST_FLAGS...] [-w] \n";
             std::cout << "  -w, --use-wire: Run the tests through the wire (defaults to no wire)";
+            std::cout << "  --enable-api-validation: Enable API validation (defaults to disabled)";
             std::cout << std::endl;
             continue;
         }
@@ -122,13 +128,15 @@ void DawnTestEnvironment::SetUp() {
     for (dawn_native::BackendType backend : kAllBackends) {
         if (detail::IsBackendAvailable(backend)) {
             CreateBackendWindow(backend);
-            utils::DiscoverAdapter(mInstance.get(), mWindows[backend], backend);
+            utils::DiscoverAdapter(mInstance.get(), mWindows[backend], backend,
+                                   mEnableAPIValidation);
         }
     }
 
     std::cout << "Testing configuration\n";
     std::cout << "---------------------\n";
     std::cout << "UseWire: " << (mUseWire ? "true" : "false") << "\n";
+    std::cout << "EnableAPIValidation: " << (mEnableAPIValidation ? "true" : "false") << "\n";
     std::cout << "\n";
 
     // Preparing for outputting hex numbers

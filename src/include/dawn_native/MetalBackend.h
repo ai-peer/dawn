@@ -33,6 +33,10 @@ typedef __IOSurface* IOSurfaceRef;
 #endif  //__OBJC__
 
 namespace dawn_native { namespace metal {
+    struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
+        AdapterDiscoveryOptions();
+    };
+
     DAWN_NATIVE_EXPORT DawnTexture WrapIOSurface(DawnDevice device,
                                                  const DawnTextureDescriptor* descriptor,
                                                  IOSurfaceRef ioSurface,
@@ -44,6 +48,7 @@ namespace dawn_native { namespace metal {
     // when they are "scheduled". Submitting other operations before the command buffer is
     // scheduled could lead to races in who gets scheduled first and incorrect rendering.
     DAWN_NATIVE_EXPORT void WaitForCommandsToBeScheduled(DawnDevice device);
+
 }}  // namespace dawn_native::metal
 
 #ifdef __OBJC__

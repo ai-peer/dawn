@@ -23,6 +23,10 @@
 #include <vector>
 
 namespace dawn_native { namespace vulkan {
+    struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
+        AdapterDiscoveryOptions();
+    };
+
     DAWN_NATIVE_EXPORT VkInstance GetInstance(DawnDevice device);
 
     DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl(DawnDevice device,

@@ -22,6 +22,10 @@
 
 namespace dawn_native { namespace metal {
 
+    AdapterDiscoveryOptions::AdapterDiscoveryOptions()
+        : AdapterDiscoveryOptionsBase(BackendType::Metal) {
+    }
+
     id<MTLDevice> GetMetalDevice(DawnDevice cDevice) {
         Device* device = reinterpret_cast<Device*>(cDevice);
         return device->GetMTLDevice();
