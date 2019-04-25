@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5f3df8f_010ddf0d",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-25T14:07:19Z",
+      "side": 1,
+      "message": "It\u0027s weired that on mac bots(10.13.6), the loss need to be last 3 bit. I tried 10.14.2 mac, and the loss can be restricted to last 2 bits with same test values.",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
