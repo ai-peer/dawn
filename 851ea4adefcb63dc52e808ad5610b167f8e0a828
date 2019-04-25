@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fd83ee63_49204117",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-25T08:49:34Z",
+      "side": 1,
+      "message": "Without this the unittest will crash when passing a nullptr into map.find().",
+      "parentUuid": "f067d729_c5f95ac7",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5b0fe95_463be01a",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 28
@@ -59,6 +83,30 @@
       "writtenOn": "2019-04-25T08:39:25Z",
       "side": 1,
       "message": "This could be done by iterating over the toggleInfoList so we don\u0027t need to add stuff twice.\n\nAlso while iterating we should assert that each toggle is in the right position in the array. This way when adding a toggle, we add an enum, the compiler forces us to add an entry to the std::array otherwise we don\u0027t have enough elements, and the assert makes sure we don\u0027t mess up the order. Adding toggle would require just 2 code changes in addition to the code path that\u0027s toggled.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7157d60e_c192f5fc",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-25T08:49:34Z",
+      "side": 1,
+      "message": "So do you mean we get the Toggle Enum by searching the vector mToggleInfoList instead of a hashmap?",
+      "parentUuid": "201d3f99_48c759c8",
       "range": {
         "startLine": 121,
         "startChar": 0,
