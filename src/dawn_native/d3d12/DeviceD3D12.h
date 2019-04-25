@@ -19,9 +19,13 @@
 
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/d3d12/D3D12Info.h"
 #include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
+#include "dawn_native/d3d12/ResourceAllocatorD3D12.h"
+
+#include <map>
 #include <memory>
 
 namespace dawn_native { namespace d3d12 {
@@ -40,6 +44,8 @@ namespace dawn_native { namespace d3d12 {
         Device(Adapter* adapter, ComPtr<ID3D12Device> d3d12Device);
         ~Device();
 
+        MaybeError Initialize();
+
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
 
         Serial GetCompletedCommandSerial() const final override;
@@ -47,6 +53,7 @@ namespace dawn_native { namespace d3d12 {
         void TickImpl() override;
 
         ComPtr<ID3D12Device> GetD3D12Device() const;
+        const D3D12DeviceInfo& GetDeviceInfo() const;
         ComPtr<ID3D12CommandQueue> GetCommandQueue() const;
 
         DescriptorHeapAllocator* GetDescriptorHeapAllocator() const;
@@ -74,6 +81,11 @@ namespace dawn_native { namespace d3d12 {
                                            uint32_t destinationOffset,
                                            uint32_t size) override;
 
+        ResultOrError<ResourceAllocation> GetSubAllocation(uint32_t memoryTypeBits,
+                                                           AllocatorType usage,
+                                                           size_t size);
+        BufferAllocator* GetAllocator(uint32_t heapTypeIndex, AllocatorType usage);
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -97,6 +109,8 @@ namespace dawn_native { namespace d3d12 {
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
 
+        uint32_t GetHeapTypeIndexImpl(uint32_t memoryTypeBits) const;
+
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
         ComPtr<ID3D12Fence> mFence;
@@ -104,6 +118,7 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3D12Device> mD3d12Device;
         ComPtr<ID3D12CommandQueue> mCommandQueue;
+        D3D12DeviceInfo mDeviceInfo = {};
 
         struct PendingCommandList {
             ComPtr<ID3D12GraphicsCommandList> commandList;
@@ -116,6 +131,8 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<DescriptorHeapAllocator> mDescriptorHeapAllocator;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<ResourceAllocator> mResourceAllocator;
+
+        std::map<uint32_t, std::unique_ptr<BufferAllocator>> mResourceAllocators;
 
         dawn_native::PCIInfo mPCIInfo;
     };

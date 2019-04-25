@@ -41,12 +41,13 @@ namespace dawn_native { namespace opengl {
         return {};
     }
 
-    void Buffer::MapReadAsyncImpl(uint32_t serial) {
+    MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
         // TODO(cwallez@chromium.org): this does GPU->CPU synchronization, we could require a high
         // version of OpenGL that would let us map the buffer unsynchronized.
         glBindBuffer(GL_ARRAY_BUFFER, mBuffer);
         void* data = glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
         CallMapReadCallback(serial, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, data, GetSize());
+        return {};
     }
 
     void Buffer::MapWriteAsyncImpl(uint32_t serial) {
@@ -57,9 +58,10 @@ namespace dawn_native { namespace opengl {
         CallMapWriteCallback(serial, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, data, GetSize());
     }
 
-    void Buffer::UnmapImpl() {
+    MaybeError Buffer::UnmapImpl() {
         glBindBuffer(GL_ARRAY_BUFFER, mBuffer);
         glUnmapBuffer(GL_ARRAY_BUFFER);
+        return {};
     }
 
     void Buffer::DestroyImpl() {

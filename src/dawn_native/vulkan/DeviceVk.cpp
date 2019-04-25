@@ -528,4 +528,117 @@ namespace dawn_native { namespace vulkan {
 
         return {};
     }
+
+    uint32_t Device::GetHeapTypeIndexImpl(uint32_t memoryTypeBits, bool mappable) const {
+        const VulkanDeviceInfo& info = GetDeviceInfo();
+
+        // Find a suitable memory type for this allocation
+        int bestType = -1;
+        for (size_t i = 0; i < info.memoryTypes.size(); ++i) {
+            // Resource must support this memory type
+            if ((memoryTypeBits & (1 << i)) == 0) {
+                continue;
+            }
+
+            // Mappable resource must be host visible
+            if (mappable &&
+                (info.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) == 0) {
+                continue;
+            }
+
+            // Mappable must also be host coherent.
+            if (mappable &&
+                (info.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) == 0) {
+                continue;
+            }
+
+            // Found the first candidate memory type
+            if (bestType == -1) {
+                bestType = static_cast<int>(i);
+                continue;
+            }
+
+            // For non-mappable resources, favor device local memory.
+            if (!mappable) {
+                if ((info.memoryTypes[bestType].propertyFlags &
+                     VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT) == 0 &&
+                    (info.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT) !=
+                        0) {
+                    bestType = static_cast<int>(i);
+                    continue;
+                }
+            }
+
+            // All things equal favor the memory in the biggest heap
+            VkDeviceSize bestTypeHeapSize =
+                info.memoryHeaps[info.memoryTypes[bestType].heapIndex].size;
+            VkDeviceSize candidateHeapSize = info.memoryHeaps[info.memoryTypes[i].heapIndex].size;
+            if (candidateHeapSize > bestTypeHeapSize) {
+                bestType = static_cast<int>(i);
+                continue;
+            }
+        }
+
+        // TODO(cwallez@chromium.org): I think the Vulkan spec guarantees this should never happen
+        if (bestType == -1) {
+            ASSERT(false);
+        }
+
+        return bestType;
+    }
+
+    // Creates an allocator using the heap memory type for an expected resource usage (dynamic,
+    // upload, etc).
+    BufferAllocator* Device::GetAllocator(uint32_t heapTypeIndex,
+                                          AllocatorType usage,
+                                          size_t alignment) {
+        // Create a new allocator of the heap type.
+        if (mMemoryAllocators.find(heapTypeIndex) == mMemoryAllocators.end()) {
+            // TODO(bryan.bernhart@intel.com): Move to front-end?
+            static const size_t kAllocatorBlockMaxSize = 16ll * 1024ll * 1024ll;  // 16GB
+            static const size_t kAllocatorResourceMaxSize = 64 * 1024ll;          // 64KB
+
+            std::unique_ptr<BufferAllocator> allocator = std::make_unique<BufferAllocator>(
+                kAllocatorBlockMaxSize, alignment, kAllocatorResourceMaxSize, this, heapTypeIndex);
+
+            mMemoryAllocators.insert(std::pair<uint32_t, std::unique_ptr<BufferAllocator>>(
+                heapTypeIndex, std::move(allocator)));
+        }
+
+        return mMemoryAllocators[heapTypeIndex].get();
+    }
+
+    // SubAllocates resource memory for given usage and memory/heap type.
+    ResultOrError<ResourceAllocation> Device::GetSubAllocation(uint32_t memoryTypeBits,
+                                                               AllocatorType usage,
+                                                               size_t size,
+                                                               size_t alignment) {
+        // TODO(bryan.bernhart@intel.com): Need to figure out cases we must direct allocate.
+        bool isDirect = false;
+
+        // Sub-allocate only for CPU-visible buffers.
+        if (usage == AllocatorType::Unknown) {
+            isDirect = true;
+        }
+
+        const bool mappable = (usage == AllocatorType::Upload || usage == AllocatorType::Dynamic);
+        BufferAllocator* allocator =
+            GetAllocator(GetHeapTypeIndexImpl(memoryTypeBits, mappable), usage, alignment);
+
+        // Attempt to allocate with our preferred allocator.
+        // Should it attempt sub-allocation and fail, fall-back to the direct allocator.
+        // For example, the requested size is larger than the allocator's max block size.
+        HeapSubAllocationBlock block = allocator->Allocate(size, isDirect);
+        if (isDirect == false && block.GetSize() == 0) {
+            // TODO(bryan.bernhart@intel.com): consider logging these failures?
+            block = allocator->Allocate(size, true);
+        }
+
+        // Neither allocation worked, we're likely device lost or OOM.
+        if (block.GetSize() == 0) {
+            return DAWN_CONTEXT_LOST_ERROR("Cannot allocate memory for resource");
+        }
+
+        return allocator->GetSubAllocation(block);
+    }
 }}  // namespace dawn_native::vulkan

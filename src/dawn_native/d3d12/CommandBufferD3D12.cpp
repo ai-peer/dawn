@@ -464,8 +464,10 @@ namespace dawn_native { namespace d3d12 {
                     dstBuffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::TransferDst);
 
                     commandList->CopyBufferRegion(
-                        dstBuffer->GetD3D12Resource().Get(), copy->destination.offset,
-                        srcBuffer->GetD3D12Resource().Get(), copy->source.offset, copy->size);
+                        dstBuffer->GetD3D12Resource().Get(),
+                        dstBuffer->GetAllocation().GetOffset() + copy->destination.offset,
+                        srcBuffer->GetD3D12Resource().Get(),
+                        srcBuffer->GetAllocation().GetOffset() + copy->source.offset, copy->size);
                 } break;
 
                 case Command::CopyBufferToTexture: {
@@ -491,7 +493,8 @@ namespace dawn_native { namespace d3d12 {
                         D3D12_TEXTURE_COPY_LOCATION bufferLocation;
                         bufferLocation.pResource = buffer->GetD3D12Resource().Get();
                         bufferLocation.Type = D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;
-                        bufferLocation.PlacedFootprint.Offset = copySplit.offset;
+                        bufferLocation.PlacedFootprint.Offset =
+                            buffer->GetAllocation().GetOffset() + copySplit.offset;
                         bufferLocation.PlacedFootprint.Footprint.Format = texture->GetD3D12Format();
                         bufferLocation.PlacedFootprint.Footprint.Width = info.bufferSize.width;
                         bufferLocation.PlacedFootprint.Footprint.Height = info.bufferSize.height;
@@ -536,7 +539,25 @@ namespace dawn_native { namespace d3d12 {
                         D3D12_TEXTURE_COPY_LOCATION bufferLocation;
                         bufferLocation.pResource = buffer->GetD3D12Resource().Get();
                         bufferLocation.Type = D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;
-                        bufferLocation.PlacedFootprint.Offset = copySplit.offset;
+
+                        // Offset of the subresource (buffer) within the parent resource (heap), in
+                        // bytes. The offset is between the start of the heap and buffer. If the
+                        // buffer was sub-allocated, the base offset cannot be assumed to be zero
+                        // and must be added (adjusted).
+                        //
+                        //      Buffer          +---------+
+                        //      Size=4B         |    A2   |
+                        //                      +---------+
+                        //
+                        //  Offset   0          4         8         12
+                        //           +----------+---------+---------+
+                        //    Heap   |    A1    |    A2   |         |
+                        //           +----------+---------+-------- +
+                        //                          ^
+                        //                          offset = allocation offset + copy offset
+                        //
+                        bufferLocation.PlacedFootprint.Offset =
+                            buffer->GetAllocation().GetOffset() + copySplit.offset;
                         bufferLocation.PlacedFootprint.Footprint.Format = texture->GetD3D12Format();
                         bufferLocation.PlacedFootprint.Footprint.Width = info.bufferSize.width;
                         bufferLocation.PlacedFootprint.Footprint.Height = info.bufferSize.height;

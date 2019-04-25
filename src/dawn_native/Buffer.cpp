@@ -38,14 +38,17 @@ namespace dawn_native {
                 UNREACHABLE();
                 return {};
             }
-            void MapReadAsyncImpl(uint32_t serial) override {
+            MaybeError MapReadAsyncImpl(uint32_t serial) override {
                 UNREACHABLE();
+                return {};
             }
-            void MapWriteAsyncImpl(uint32_t serial) override {
+            MaybeError MapWriteAsyncImpl(uint32_t serial) override {
                 UNREACHABLE();
+                return {};
             }
-            void UnmapImpl() override {
+            MaybeError UnmapImpl() override {
                 UNREACHABLE();
+                return {};
             }
             void DestroyImpl() override {
                 UNREACHABLE();
@@ -112,6 +115,11 @@ namespace dawn_native {
     dawn::BufferUsageBit BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
+    }
+
+    ResourceAllocation BufferBase::GetAllocation() const {
+        ASSERT(!IsError());
+        return mAllocation;
     }
 
     MaybeError BufferBase::ValidateCanUseInSubmitNow() const {
@@ -184,7 +192,9 @@ namespace dawn_native {
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
-        MapReadAsyncImpl(mMapSerial);
+        if (GetDevice()->ConsumedError(MapReadAsyncImpl(mMapSerial))) {
+            return;
+        }
     }
 
     MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
@@ -223,7 +233,9 @@ namespace dawn_native {
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
-        MapWriteAsyncImpl(mMapSerial);
+        if (GetDevice()->ConsumedError(MapWriteAsyncImpl(mMapSerial))) {
+            return;
+        }
     }
 
     void BufferBase::Destroy() {
@@ -248,7 +260,11 @@ namespace dawn_native {
         // completed before the Unmap
         CallMapReadCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
         CallMapWriteCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
-        UnmapImpl();
+
+        if (GetDevice()->ConsumedError(UnmapImpl())) {
+            return;
+        }
+
         mState = BufferState::Unmapped;
         mMapReadCallback = nullptr;
         mMapWriteCallback = nullptr;
@@ -332,9 +348,13 @@ namespace dawn_native {
 
     void BufferBase::DestroyInternal() {
         if (mState != BufferState::Destroyed) {
+            // When the buffer was mapped, it holds a reference on the heap to prevent it from being
+            // destroyed.
+            if (mState == BufferState::Mapped) {
+                DAWN_UNUSED(UnmapImpl());
+            }
             DestroyImpl();
         }
         mState = BufferState::Destroyed;
     }
-
 }  // namespace dawn_native

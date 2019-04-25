@@ -24,6 +24,9 @@
 #include "dawn_native/vulkan/VulkanFunctions.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
 
+#include "dawn_native/vulkan/MemoryAllocatorVk.h"
+
+#include <map>
 #include <memory>
 #include <queue>
 
@@ -76,6 +79,15 @@ namespace dawn_native { namespace vulkan {
                                            BufferBase* destination,
                                            uint32_t destinationOffset,
                                            uint32_t size) override;
+
+        ResultOrError<ResourceAllocation> GetSubAllocation(uint32_t memoryTypeBits,
+                                                           AllocatorType usage,
+                                                           size_t size,
+                                                           size_t alignment);
+        BufferAllocator* GetAllocator(uint32_t heapTypeIndex,
+                                      AllocatorType usage,
+                                      size_t alignment);
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -102,6 +114,8 @@ namespace dawn_native { namespace vulkan {
         ResultOrError<VulkanDeviceKnobs> CreateDevice(VkPhysicalDevice physicalDevice);
         void GatherQueueFromDevice();
 
+        uint32_t GetHeapTypeIndexImpl(uint32_t memoryTypeBits, bool mappable) const;
+
         // To make it easier to use fn it is a public const member. However
         // the Device is allowed to mutate them through these private methods.
         VulkanFunctions* GetMutableFunctions();
@@ -115,6 +129,8 @@ namespace dawn_native { namespace vulkan {
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<MemoryAllocator> mMemoryAllocator;
         std::unique_ptr<RenderPassCache> mRenderPassCache;
+
+        std::map<uint32_t, std::unique_ptr<BufferAllocator>> mMemoryAllocators;
 
         VkFence GetUnusedFence();
         void CheckPassedFences();

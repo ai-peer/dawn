@@ -16,6 +16,7 @@
 
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
+#include "dawn_native/vulkan/MemoryHeapVk.h"
 
 #include <cstring>
 
@@ -104,6 +105,14 @@ namespace dawn_native { namespace vulkan {
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
+        if (GetDevice()->ConsumedError(Initialize())) {
+            return;
+        }
+    }
+
+    MaybeError Buffer::Initialize() {
+        Device* device = ToBackend(GetDevice());
+
         VkBufferCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
         createInfo.pNext = nullptr;
@@ -116,24 +125,26 @@ namespace dawn_native { namespace vulkan {
 
         if (device->fn.CreateBuffer(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
             VK_SUCCESS) {
-            ASSERT(false);
+            return DAWN_CONTEXT_LOST_ERROR("Failed to create buffer");
         }
 
         VkMemoryRequirements requirements;
         device->fn.GetBufferMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
 
-        bool requestMappable =
-            (GetUsage() & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) != 0;
-        if (!device->GetMemoryAllocator()->Allocate(requirements, requestMappable,
-                                                    &mMemoryAllocation)) {
-            ASSERT(false);
+        if (GetUsage() & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) {
+            mAllocatorType = AllocatorType::Upload;
         }
 
+        DAWN_TRY_ASSIGN(mAllocation,
+                        device->GetSubAllocation(requirements.memoryTypeBits, mAllocatorType,
+                                                 requirements.size, requirements.alignment));
+
         if (device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
-                                        mMemoryAllocation.GetMemory(),
-                                        mMemoryAllocation.GetMemoryOffset()) != VK_SUCCESS) {
-            ASSERT(false);
+                                        ToBackend(mAllocation.GetResourceHeap())->GetMemory(),
+                                        mAllocation.GetOffset()) != VK_SUCCESS) {
+            return DAWN_CONTEXT_LOST_ERROR("Failed to bind buffer");
         }
+        return {};
     }
 
     Buffer::~Buffer() {
@@ -188,38 +199,45 @@ namespace dawn_native { namespace vulkan {
         mLastUsage = usage;
     }
 
-    void Buffer::MapReadAsyncImpl(uint32_t serial) {
+    MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
         Device* device = ToBackend(GetDevice());
 
         VkCommandBuffer commands = device->GetPendingCommandBuffer();
         TransitionUsageNow(commands, dawn::BufferUsageBit::MapRead);
 
-        uint8_t* memory = mMemoryAllocation.GetMappedPointer();
-        ASSERT(memory != nullptr);
+        void* data = nullptr;
+        DAWN_TRY_ASSIGN(data, mAllocation.Map());
+        ASSERT(data != nullptr);
 
         MapRequestTracker* tracker = device->GetMapRequestTracker();
-        tracker->Track(this, serial, memory, false);
+        tracker->Track(this, serial, static_cast<uint8_t*>(data), false);
+        return {};
     }
 
-    void Buffer::MapWriteAsyncImpl(uint32_t serial) {
+    MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
         Device* device = ToBackend(GetDevice());
 
         VkCommandBuffer commands = device->GetPendingCommandBuffer();
         TransitionUsageNow(commands, dawn::BufferUsageBit::MapWrite);
 
-        uint8_t* memory = mMemoryAllocation.GetMappedPointer();
-        ASSERT(memory != nullptr);
+        void* data = nullptr;
+        DAWN_TRY_ASSIGN(data, mAllocation.Map());
 
         MapRequestTracker* tracker = device->GetMapRequestTracker();
-        tracker->Track(this, serial, memory, true);
+        tracker->Track(this, serial, static_cast<uint8_t*>(data), true);
+        return {};
     }
 
-    void Buffer::UnmapImpl() {
-        // No need to do anything, we keep CPU-visible memory mapped at all time.
+    MaybeError Buffer::UnmapImpl() {
+        DAWN_TRY(mAllocation.Unmap());
+        return {};
     }
 
     void Buffer::DestroyImpl() {
-        ToBackend(GetDevice())->GetMemoryAllocator()->Free(&mMemoryAllocation);
+        ToBackend(GetDevice())
+            ->GetAllocator(mAllocation.GetResourceHeap()->GetHeapTypeIndex(), mAllocatorType,
+                           mAllocation.GetAlignment())
+            ->Deallocate(mAllocation.GetSubAllocationBlock());
 
         if (mHandle != VK_NULL_HANDLE) {
             ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);

@@ -31,15 +31,15 @@ TEST(Math, ScanForward) {
 // Tests for Log2
 TEST(Math, Log2) {
     // Test extrema
-    ASSERT_EQ(Log2(1), 0u);
+    ASSERT_EQ(Log2(1), 0);
     ASSERT_EQ(Log2(0xFFFFFFFF), 31u);
 
     // Test boundary between two logs
     ASSERT_EQ(Log2(0x80000000), 31u);
-    ASSERT_EQ(Log2(0x7FFFFFFF), 30u);
+    ASSERT_EQ(Log2(0x7FFFFFFF), 30);
 
-    ASSERT_EQ(Log2(16), 4u);
-    ASSERT_EQ(Log2(15), 3u);
+    ASSERT_EQ(Log2(16), 4);
+    ASSERT_EQ(Log2(15), 3);
 }
 
 // Tests for IsPowerOfTwo

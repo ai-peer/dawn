@@ -32,9 +32,9 @@ namespace dawn_native { namespace opengl {
 
       private:
         MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) override;
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
-        void UnmapImpl() override;
+        MaybeError MapReadAsyncImpl(uint32_t serial) override;
+        MaybeError MapWriteAsyncImpl(uint32_t serial) override;
+        MaybeError UnmapImpl() override;
         void DestroyImpl() override;
 
         GLuint mBuffer = 0;

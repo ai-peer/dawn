@@ -18,10 +18,27 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "common/Assert.h"
+
 // The following are not valid for 0
 uint32_t ScanForward(uint32_t bits);
-uint32_t Log2(uint32_t value);
 bool IsPowerOfTwo(size_t n);
+
+template <typename T>
+T Log2(T value) {
+    ASSERT(value != 0);
+#if defined(DAWN_COMPILER_MSVC)
+    unsigned long firstBitIndex = 0ul;
+    unsigned char ret = (sizeof(T) == 4) ? _BitScanReverse(&firstBitIndex, value)
+                                         : _BitScanReverse64(&firstBitIndex, value);
+    ASSERT(ret != 0);
+    return firstBitIndex;
+#else
+    unsigned long numOfBits = (sizeof(T) * CHAR_BIT) - 1;
+    return ((sizeof(T) == 4)) ? numOfBits - static_cast<uint32_t>(__builtin_clz(value))
+                              : numOfBits - static_cast<uint32_t>(__builtin_clzll(value));
+#endif
+}
 
 bool IsPtrAligned(const void* ptr, size_t alignment);
 void* AlignVoidPtr(void* ptr, size_t alignment);

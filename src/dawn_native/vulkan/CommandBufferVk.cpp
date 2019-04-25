@@ -48,7 +48,10 @@ namespace dawn_native { namespace vulkan {
 
             VkBufferImageCopy region;
 
+            // Note: Allocation offset of buffer is within device memory but does not require
+            // further adjustment as the offset starts at zero when bound..
             region.bufferOffset = bufferCopy.offset;
+
             // In Vulkan the row length is in texels while it is in bytes for Dawn
             region.bufferRowLength =
                 bufferCopy.rowPitch / TextureFormatPixelSize(texture->GetFormat());
@@ -273,18 +276,19 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
-                    ToBackend(src.buffer)
-                        ->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferSrc);
-                    ToBackend(dst.buffer)
-                        ->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferDst);
+                    Buffer* srcBuffer = ToBackend(src.buffer.Get());
+                    Buffer* dstBuffer = ToBackend(dst.buffer.Get());
+
+                    srcBuffer->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferSrc);
+                    dstBuffer->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferDst);
 
                     VkBufferCopy region;
                     region.srcOffset = src.offset;
                     region.dstOffset = dst.offset;
                     region.size = copy->size;
 
-                    VkBuffer srcHandle = ToBackend(src.buffer)->GetHandle();
-                    VkBuffer dstHandle = ToBackend(dst.buffer)->GetHandle();
+                    VkBuffer srcHandle = srcBuffer->GetHandle();
+                    VkBuffer dstHandle = dstBuffer->GetHandle();
                     device->fn.CmdCopyBuffer(commands, srcHandle, dstHandle, 1, &region);
                 } break;
 

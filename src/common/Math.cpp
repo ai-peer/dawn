@@ -14,8 +14,6 @@
 
 #include "common/Math.h"
 
-#include "common/Assert.h"
-
 #if defined(DAWN_COMPILER_MSVC)
 #    include <intrin.h>
 #endif
@@ -29,18 +27,6 @@ uint32_t ScanForward(uint32_t bits) {
     return firstBitIndex;
 #else
     return static_cast<uint32_t>(__builtin_ctz(bits));
-#endif
-}
-
-uint32_t Log2(uint32_t value) {
-    ASSERT(value != 0);
-#if defined(DAWN_COMPILER_MSVC)
-    unsigned long firstBitIndex = 0ul;
-    unsigned char ret = _BitScanReverse(&firstBitIndex, value);
-    ASSERT(ret != 0);
-    return firstBitIndex;
-#else
-    return 31 - static_cast<uint32_t>(__builtin_clz(value));
 #endif
 }
 

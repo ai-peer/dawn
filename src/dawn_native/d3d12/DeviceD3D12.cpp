@@ -31,6 +31,7 @@
 #include "dawn_native/d3d12/QueueD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
+#include "dawn_native/d3d12/ResourceAllocatorD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
@@ -45,6 +46,11 @@ namespace dawn_native { namespace d3d12 {
 
     Device::Device(Adapter* adapter, ComPtr<ID3D12Device> d3d12Device)
         : DeviceBase(adapter), mD3d12Device(d3d12Device) {
+    }
+
+    MaybeError Device::Initialize() {
+        mDeviceInfo = ToBackend(GetAdapter())->GetDeviceInfo();
+
         // Create device-global objects
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
@@ -63,6 +69,8 @@ namespace dawn_native { namespace d3d12 {
         mResourceAllocator = std::make_unique<ResourceAllocator>(this);
 
         NextSerial();
+
+        return {};
     }
 
     Device::~Device() {
@@ -80,6 +88,10 @@ namespace dawn_native { namespace d3d12 {
 
         ASSERT(mUsedComObjectRefs.Empty());
         ASSERT(mPendingCommands.commandList == nullptr);
+    }
+
+    const D3D12DeviceInfo& Device::GetDeviceInfo() const {
+        return mDeviceInfo;
     }
 
     ComPtr<ID3D12Device> Device::GetD3D12Device() const {
@@ -267,4 +279,84 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    // Used to figure out "heap type" by looking up which set ith bit in memoryTypes corresponds to
+    // the heap types.
+    uint32_t Device::GetHeapTypeIndexImpl(uint32_t memoryTypeBits) const {
+        const D3D12DeviceInfo& info = GetDeviceInfo();
+
+        // Find a suitable memory type for this allocation
+        int heapTypeIndex = -1;
+        for (size_t i = 0; i < info.heapTypes.size(); ++i) {
+            if ((memoryTypeBits & (1 << i)) == 0) {
+                continue;
+            }
+
+            // Found the first candidate memory type
+            if (heapTypeIndex == -1) {
+                heapTypeIndex = static_cast<int>(i);
+                // No need to continue (only one heap type is allowed).
+                break;
+            }
+        }
+
+        ASSERT(heapTypeIndex != -1);
+
+        return static_cast<uint32_t>(heapTypeIndex);
+    }
+
+    // Creates an allocator using the heap memory type for an expected resource usage (dynamic,
+    // upload, etc).
+    BufferAllocator* Device::GetAllocator(uint32_t heapTypeIndex, AllocatorType usage) {
+        // Create a new allocator of the heap type.
+        if (mResourceAllocators.find(heapTypeIndex) == mResourceAllocators.end()) {
+            // TODO(bryan.bernhart@intel.com): Move to front-end.
+            static const size_t kAllocatorBlockMaxSize = 16ll * 1024ll * 1024ll;  // 16GB
+            static const size_t kAllocatorResourceMaxSize = 64 * 1024ll;          // 64KB
+
+            std::unique_ptr<BufferAllocator> allocator = std::make_unique<BufferAllocator>(
+                kAllocatorBlockMaxSize, D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT,
+                kAllocatorResourceMaxSize, this, heapTypeIndex);
+
+            mResourceAllocators.insert(std::pair<uint32_t, std::unique_ptr<BufferAllocator>>(
+                heapTypeIndex, std::move(allocator)));
+        }
+
+        return mResourceAllocators[heapTypeIndex].get();
+    }
+
+    // SubAllocates resource memory for given usage and memory/heap type.
+    ResultOrError<ResourceAllocation> Device::GetSubAllocation(uint32_t memoryTypeBits,
+                                                               AllocatorType usage,
+                                                               size_t size) {
+        // TODO: Need to figure out cases we must direct allocate.
+        bool isDirect = false;
+
+        // Sub-allocate only for CPU-visible buffers.
+        if (usage == AllocatorType::Unknown) {
+            isDirect = true;
+        }
+
+        // In D3D, memoryTypeBits should be already configured to use a heap type with the desired
+        // CPU cache properties. For example, if AllocatorType::Upload was specified,
+        // GetHeapTypeIndexImpl returns the heap index of D3D12_HEAP_TYPE_UPLOAD. However, we can't
+        // always assume the heap type will map 1:1 with resource usage. For example,
+        // D3D12_HEAP_TYPE_CUSTOM will requires CPU cache properties to be explicitly specified.
+        BufferAllocator* allocator = GetAllocator(GetHeapTypeIndexImpl(memoryTypeBits), usage);
+
+        // Attempt to allocate with our preferred allocator.
+        // Should it attempt sub-allocation and fail, fall-back to the direct allocator.
+        // For example, the requested size is larger than the allocator's max block size.
+        HeapSubAllocationBlock block = allocator->Allocate(size, isDirect);
+        if (isDirect == false && block.GetSize() == 0) {
+            // TODO: Should consider logging these failures.
+            block = allocator->Allocate(size, true);
+        }
+
+        // Neither allocation worked, we're likely device lost or OOM.
+        if (block.GetSize() == 0) {
+            return DAWN_CONTEXT_LOST_ERROR("Cannot allocate memory for resource");
+        }
+
+        return allocator->GetSubAllocation(block);
+    }
 }}  // namespace dawn_native::d3d12

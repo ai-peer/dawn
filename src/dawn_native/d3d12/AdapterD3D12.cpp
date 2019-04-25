@@ -48,8 +48,17 @@ namespace dawn_native { namespace d3d12 {
         mPCIInfo.name = converter.to_bytes(adapterDesc.Description);
     }
 
+    const D3D12DeviceInfo& Adapter::GetDeviceInfo() const {
+        return mDeviceInfo;
+    }
+
     Backend* Adapter::GetBackend() const {
         return mBackend;
+    }
+
+    MaybeError Adapter::Initialize() {
+        DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
+        return {};
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl() {
@@ -58,9 +67,11 @@ namespace dawn_native { namespace d3d12 {
                 mHardwareAdapter.Get(), D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&d3d12Device)))) {
             return DAWN_CONTEXT_LOST_ERROR("D3D12CreateDevice failed");
         }
-
         ASSERT(d3d12Device != nullptr);
-        return new Device(this, d3d12Device);
+
+        std::unique_ptr<Device> device = std::make_unique<Device>(this, d3d12Device);
+        DAWN_TRY(device->Initialize());
+        return device.release();
     }
 
 }}  // namespace dawn_native::d3d12

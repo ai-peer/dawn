@@ -18,6 +18,7 @@
 #include "common/SerialQueue.h"
 #include "dawn_native/Buffer.h"
 
+#include "dawn_native/d3d12/ResourceAllocatorD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -29,6 +30,8 @@ namespace dawn_native { namespace d3d12 {
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
 
+        MaybeError Initialize();
+
         uint32_t GetD3D12Size() const;
         ComPtr<ID3D12Resource> GetD3D12Resource();
         D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
@@ -39,15 +42,13 @@ namespace dawn_native { namespace d3d12 {
 
       private:
         // Dawn API
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
-        void UnmapImpl() override;
+        MaybeError MapReadAsyncImpl(uint32_t serial) override;
+        MaybeError MapWriteAsyncImpl(uint32_t serial) override;
+        MaybeError UnmapImpl() override;
         void DestroyImpl() override;
 
-        ComPtr<ID3D12Resource> mResource;
         bool mFixedResourceState = false;
         dawn::BufferUsageBit mLastUsage = dawn::BufferUsageBit::None;
-        D3D12_RANGE mWrittenMappedRange;
     };
 
     class MapRequestTracker {

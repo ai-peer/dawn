@@ -34,9 +34,9 @@ namespace dawn_native { namespace metal {
         void OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite);
 
       private:
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
-        void UnmapImpl() override;
+        MaybeError MapReadAsyncImpl(uint32_t serial) override;
+        MaybeError MapWriteAsyncImpl(uint32_t serial) override;
+        MaybeError UnmapImpl() override;
         void DestroyImpl() override;
 
         id<MTLBuffer> mMtlBuffer = nil;

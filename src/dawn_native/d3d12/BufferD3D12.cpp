@@ -18,20 +18,11 @@
 #include "common/Constants.h"
 #include "common/Math.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/ResourceAllocator.h"
+#include "dawn_native/d3d12/ResourceHeapD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
     namespace {
-        D3D12_RESOURCE_FLAGS D3D12ResourceFlags(dawn::BufferUsageBit usage) {
-            D3D12_RESOURCE_FLAGS flags = D3D12_RESOURCE_FLAG_NONE;
-
-            if (usage & dawn::BufferUsageBit::Storage) {
-                flags |= D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
-            }
-
-            return flags;
-        }
 
         D3D12_RESOURCE_STATES D3D12BufferUsage(dawn::BufferUsageBit usage) {
             D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_COMMON;
@@ -64,44 +55,54 @@ namespace dawn_native { namespace d3d12 {
                 return D3D12_HEAP_TYPE_DEFAULT;
             }
         }
+
+        uint32_t D3D12MemoryTypeBits(D3D12_HEAP_TYPE heapType) {
+            switch (heapType) {
+                case D3D12_HEAP_TYPE_DEFAULT:
+                    return 1;
+                case D3D12_HEAP_TYPE_UPLOAD:
+                    return 2;
+                case D3D12_HEAP_TYPE_READBACK:
+                    return 4;
+                case D3D12_HEAP_TYPE_CUSTOM:  // TODO
+                default:
+                    UNREACHABLE();
+            }
+        }
     }  // namespace
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
-        D3D12_RESOURCE_DESC resourceDescriptor;
-        resourceDescriptor.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-        resourceDescriptor.Alignment = 0;
-        resourceDescriptor.Width = GetD3D12Size();
-        resourceDescriptor.Height = 1;
-        resourceDescriptor.DepthOrArraySize = 1;
-        resourceDescriptor.MipLevels = 1;
-        resourceDescriptor.Format = DXGI_FORMAT_UNKNOWN;
-        resourceDescriptor.SampleDesc.Count = 1;
-        resourceDescriptor.SampleDesc.Quality = 0;
-        resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-        resourceDescriptor.Flags = D3D12ResourceFlags(GetUsage());
+        if (GetDevice()->ConsumedError(Initialize())) {
+            return;
+        }
+    }
 
+    // TODO(bryan.bernhart@intel.com): Move into BufferBase.
+    MaybeError Buffer::Initialize() {
         auto heapType = D3D12HeapType(GetUsage());
-        auto bufferUsage = D3D12_RESOURCE_STATE_COMMON;
 
         // D3D12 requires buffers on the READBACK heap to have the D3D12_RESOURCE_STATE_COPY_DEST
         // state
         if (heapType == D3D12_HEAP_TYPE_READBACK) {
-            bufferUsage |= D3D12_RESOURCE_STATE_COPY_DEST;
             mFixedResourceState = true;
             mLastUsage = dawn::BufferUsageBit::TransferDst;
+            mAllocatorType = AllocatorType::Upload;
         }
 
         // D3D12 requires buffers on the UPLOAD heap to have the D3D12_RESOURCE_STATE_GENERIC_READ
         // state
         if (heapType == D3D12_HEAP_TYPE_UPLOAD) {
-            bufferUsage |= D3D12_RESOURCE_STATE_GENERIC_READ;
             mFixedResourceState = true;
             mLastUsage = dawn::BufferUsageBit::TransferSrc;
+            mAllocatorType = AllocatorType::Upload;
         }
 
-        mResource =
-            device->GetResourceAllocator()->Allocate(heapType, resourceDescriptor, bufferUsage);
+        // TODO(bryan.bernhart@intel.com): Move into DeviceBase when supported.
+        DAWN_TRY_ASSIGN(mAllocation, ToBackend(GetDevice())
+                                         ->GetSubAllocation(D3D12MemoryTypeBits(heapType),
+                                                            mAllocatorType, GetD3D12Size()));
+        return {};
     }
 
     Buffer::~Buffer() {
@@ -114,7 +115,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ComPtr<ID3D12Resource> Buffer::GetD3D12Resource() {
-        return mResource;
+        return ToBackend(mAllocation.GetResourceHeap())->GetD3D12Resource();
     }
 
     void Buffer::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
@@ -138,7 +139,7 @@ namespace dawn_native { namespace d3d12 {
         D3D12_RESOURCE_BARRIER barrier;
         barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
         barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-        barrier.Transition.pResource = mResource.Get();
+        barrier.Transition.pResource = GetD3D12Resource().Get();
         barrier.Transition.StateBefore = lastState;
         barrier.Transition.StateAfter = newState;
         barrier.Transition.Subresource = 0;
@@ -149,7 +150,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     D3D12_GPU_VIRTUAL_ADDRESS Buffer::GetVA() const {
-        return mResource->GetGPUVirtualAddress();
+        return ToBackend(mAllocation.GetResourceHeap())->GetGPUPointer();
     }
 
     void Buffer::OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite) {
@@ -160,38 +161,38 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    void Buffer::MapReadAsyncImpl(uint32_t serial) {
-        mWrittenMappedRange = {};
-        D3D12_RANGE readRange = {0, GetSize()};
-        char* data = nullptr;
-        ASSERT_SUCCESS(mResource->Map(0, &readRange, reinterpret_cast<void**>(&data)));
+    MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
+        void* data = nullptr;
+        DAWN_TRY_ASSIGN(data, mAllocation.Map());
 
         // There is no need to transition the resource to a new state: D3D12 seems to make the GPU
         // writes available when the fence is passed.
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
-        tracker->Track(this, serial, data, false);
+        tracker->Track(this, serial, static_cast<char*>(data), false);
+        return {};
     }
 
-    void Buffer::MapWriteAsyncImpl(uint32_t serial) {
-        mWrittenMappedRange = {0, GetSize()};
-        char* data = nullptr;
-        ASSERT_SUCCESS(mResource->Map(0, &mWrittenMappedRange, reinterpret_cast<void**>(&data)));
+    MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        void* data = nullptr;
+        DAWN_TRY_ASSIGN(data, mAllocation.Map());
 
         // There is no need to transition the resource to a new state: D3D12 seems to make the CPU
         // writes available on queue submission.
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
         tracker->Track(this, serial, data, true);
+        return {};
     }
 
-    void Buffer::UnmapImpl() {
-        mResource->Unmap(0, &mWrittenMappedRange);
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
-        mWrittenMappedRange = {};
+    MaybeError Buffer::UnmapImpl() {
+        DAWN_TRY(mAllocation.Unmap());
+        return {};
     }
 
     void Buffer::DestroyImpl() {
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
-        mResource = nullptr;
+        ToBackend(GetDevice())
+            ->GetAllocator(mAllocation.GetResourceHeap()->GetHeapTypeIndex(), mAllocatorType)
+            ->Deallocate(mAllocation.GetSubAllocationBlock());
+        mAllocation = ResourceAllocation();  // Invalidate the allocation handle.
     }
 
     MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {

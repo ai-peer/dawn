@@ -200,12 +200,14 @@ namespace dawn_native { namespace null {
         return {};
     }
 
-    void Buffer::MapReadAsyncImpl(uint32_t serial) {
+    MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
         MapAsyncImplCommon(serial, false);
+        return {};
     }
 
-    void Buffer::MapWriteAsyncImpl(uint32_t serial) {
+    MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
         MapAsyncImplCommon(serial, true);
+        return {};
     }
 
     void Buffer::MapAsyncImplCommon(uint32_t serial, bool isWrite) {
@@ -220,7 +222,8 @@ namespace dawn_native { namespace null {
         ToBackend(GetDevice())->AddPendingOperation(std::unique_ptr<PendingOperation>(operation));
     }
 
-    void Buffer::UnmapImpl() {
+    MaybeError Buffer::UnmapImpl() {
+        return {};
     }
 
     void Buffer::DestroyImpl() {
@@ -301,4 +304,23 @@ namespace dawn_native { namespace null {
         return {};
     }
 
+    // ResourceHeap
+
+    ResourceHeap::ResourceHeap(std::unique_ptr<uint8_t[]> buffer, size_t size)
+        : ResourceHeapBase(size, 0), mBuffer(std::move(buffer)) {
+    }
+
+    ResultOrError<void*> ResourceHeap::Map() {
+        mMappedPointer = mBuffer.get();
+        return mMappedPointer;
+    }
+
+    MaybeError ResourceHeap::Unmap() {
+        mMappedPointer = nullptr;
+        return {};
+    }
+
+    std::unique_ptr<ResourceHeapBase> ResourceAllocator::Allocate(size_t heapSize) {
+        return std::make_unique<ResourceHeap>(std::make_unique<uint8_t[]>(heapSize), heapSize);
+    }
 }}  // namespace dawn_native::null

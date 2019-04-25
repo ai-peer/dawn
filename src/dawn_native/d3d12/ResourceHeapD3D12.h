@@ -1,4 +1,4 @@
-// Copyright 2019 The Dawn Authors
+// Copyright 2018 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,36 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_D3D12_ADAPTERD3D12_H_
-#define DAWNNATIVE_D3D12_ADAPTERD3D12_H_
+#ifndef DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
+#define DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
 
-#include "dawn_native/Adapter.h"
-
-#include "dawn_native/d3d12/D3D12Info.h"
+#include "dawn_native/ResourceHeap.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Backend;
-
-    class Adapter : public AdapterBase {
+    // Wrapper for ID3D12Resource.
+    class ResourceHeap : public ResourceHeapBase {
       public:
-        Adapter(Backend* backend, ComPtr<IDXGIAdapter1> hardwareAdapter);
-        virtual ~Adapter() = default;
+        ResourceHeap(ComPtr<ID3D12Resource> resource, size_t size, uint32_t heapTypeIndex);
+        ~ResourceHeap();
 
-        const D3D12DeviceInfo& GetDeviceInfo() const;
-        Backend* GetBackend() const;
+        ResultOrError<void*> Map() override;
+        MaybeError Unmap() override;
 
-        MaybeError Initialize();
+        ComPtr<ID3D12Resource> GetD3D12Resource() const;
+        D3D12_GPU_VIRTUAL_ADDRESS GetGPUPointer() const;
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl() override;
-
-        ComPtr<IDXGIAdapter1> mHardwareAdapter;
-        Backend* mBackend;
-        D3D12DeviceInfo mDeviceInfo = {};
+        ComPtr<ID3D12Resource> mResource;
+        uint32_t mMapRefCount = 0;
     };
-
 }}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_D3D12_ADAPTERD3D12_H_
+#endif  // DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_

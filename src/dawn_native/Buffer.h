@@ -19,6 +19,7 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
 
+#include "dawn_native/ResourceAllocator.h"
 #include "dawn_native/dawn_platform.h"
 
 namespace dawn_native {
@@ -48,6 +49,7 @@ namespace dawn_native {
 
         uint32_t GetSize() const;
         dawn::BufferUsageBit GetUsage() const;
+        ResourceAllocation GetAllocation() const;
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
@@ -72,11 +74,14 @@ namespace dawn_native {
 
         void DestroyInternal();
 
+        ResourceAllocation mAllocation;
+        AllocatorType mAllocatorType = AllocatorType::Unknown;
+
       private:
         virtual MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data);
-        virtual void MapReadAsyncImpl(uint32_t serial) = 0;
-        virtual void MapWriteAsyncImpl(uint32_t serial) = 0;
-        virtual void UnmapImpl() = 0;
+        virtual MaybeError MapReadAsyncImpl(uint32_t serial) = 0;
+        virtual MaybeError MapWriteAsyncImpl(uint32_t serial) = 0;
+        virtual MaybeError UnmapImpl() = 0;
         virtual void DestroyImpl() = 0;
 
         MaybeError ValidateSetSubData(uint32_t start, uint32_t count) const;
