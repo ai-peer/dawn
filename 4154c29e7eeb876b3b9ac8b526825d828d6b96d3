@@ -16,6 +16,24 @@
       "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d045f06_fac157fb",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T15:44:04Z",
+      "side": 1,
+      "message": "That\u0027s ok I guess, we can just leave a comment that explains we need to compare with some ULP of precision.",
+      "parentUuid": "e5f3df8f_010ddf0d",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
