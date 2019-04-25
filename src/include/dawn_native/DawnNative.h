@@ -47,6 +47,24 @@ namespace dawn_native {
     class InstanceBase;
     class AdapterBase;
 
+    // An optional parameter of Adapter::CreateDevice() to send additional information when creating
+    // a Device and return necessary information after the creation of the device. For example, we
+    // can use it to both enable a specific workaround, feature or optimization and know if they are
+    // enabled or not after the creation of a device.
+    struct DAWN_NATIVE_EXPORT DeviceDescriptor {
+        std::vector<const char*> forceEnabledToggles;
+        std::vector<const char*> forceDisabledToggles;
+    };
+
+    // A struct to record the information of a toggle. A toggle is a code path in Dawn device that
+    // can be manually configured to run or not outside Dawn, including workarounds, special
+    // features and optimizations.
+    struct ToggleInfo {
+        const char* name;
+        const char* description;
+        const char* url;
+    };
+
     // An adapter is an object that represent on possibility of creating devices in the system.
     // Most of the time it will represent a combination of a physical GPU and an API. Not that the
     // same GPU can be represented by multiple adapters but on different APIs.
@@ -68,7 +86,7 @@ namespace dawn_native {
         // Create a device on this adapter, note that the interface will change to include at least
         // a device descriptor and a pointer to backend specific options.
         // On an error, nullptr is returned.
-        DawnDevice CreateDevice();
+        DawnDevice CreateDevice(const DeviceDescriptor* deviceDescriptor = nullptr);
 
       private:
         AdapterBase* mImpl = nullptr;
@@ -106,6 +124,8 @@ namespace dawn_native {
 
         // Returns all the adapters that the instance knows about.
         std::vector<Adapter> GetAdapters() const;
+
+        const ToggleInfo* GetToggleInfo(const char* toggleName);
 
       private:
         InstanceBase* mImpl = nullptr;

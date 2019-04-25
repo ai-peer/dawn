@@ -53,8 +53,8 @@ namespace dawn_native {
         return mImpl != nullptr;
     }
 
-    DawnDevice Adapter::CreateDevice() {
-        return reinterpret_cast<DawnDevice>(mImpl->CreateDevice());
+    DawnDevice Adapter::CreateDevice(const DeviceDescriptor* deviceDescriptor) {
+        return reinterpret_cast<DawnDevice>(mImpl->CreateDevice(deviceDescriptor));
     }
 
     // AdapterDiscoverOptionsBase
@@ -87,6 +87,10 @@ namespace dawn_native {
             adapters.push_back({adapter.get()});
         }
         return adapters;
+    }
+
+    const ToggleInfo* Instance::GetToggleInfo(const char* toggleName) {
+        return mImpl->GetToggleInfo(toggleName);
     }
 
 }  // namespace dawn_native
