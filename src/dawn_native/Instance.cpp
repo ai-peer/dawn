@@ -78,6 +78,63 @@ namespace dawn_native {
         return !ConsumedError(DiscoverAdaptersInternal(options));
     }
 
+    const ToggleInfo* InstanceBase::GetToggleInfo(const char* toggleName) {
+        if (toggleName == nullptr) {
+            return nullptr;
+        }
+
+        EnsureToggleInfoInitialized();
+
+        const auto& iter = mToggleNameToEnumMap.find(toggleName);
+        if (iter != mToggleNameToEnumMap.cend()) {
+            return &mToggleInfoList[static_cast<size_t>(iter->second)].info;
+        }
+        return nullptr;
+    }
+
+    Toggle InstanceBase::ToggleNameToEnum(const char* toggleName) {
+        if (toggleName == nullptr) {
+            return Toggle::InvalidEnum;
+        }
+
+        EnsureToggleInfoInitialized();
+
+        const auto& iter = mToggleNameToEnumMap.find(toggleName);
+        if (iter != mToggleNameToEnumMap.cend()) {
+            return mToggleInfoList[static_cast<size_t>(iter->second)].toggle;
+        }
+        return Toggle::InvalidEnum;
+    }
+
+    const char* InstanceBase::ToggleEnumToName(Toggle toggle) {
+        ASSERT(toggle != Toggle::InvalidEnum);
+
+        EnsureToggleInfoInitialized();
+
+        return mToggleInfoList[static_cast<size_t>(toggle)].info.name;
+    }
+
+    void InstanceBase::EnsureToggleInfoInitialized() {
+        if (mToggleInfoInitialized) {
+            return;
+        }
+
+        mToggleNameToEnumMap = {
+            {"emulate_store_and_msaa_resolve", Toggle::EmulateStoreAndMSAAResolve}};
+
+        mToggleInfoList = {
+            {{Toggle::EmulateStoreAndMSAAResolve,
+              {"emulate_store_and_msaa_resolve",
+               "Emulate storing into multisampled color attachments and doing MSAA resolve "
+               "simultaneously. This workaround is enabled by default on the Metal drivers that do "
+               "not support MTLStoreActionStoreAndMultisampleResolve. To support StoreOp::Store on "
+               "those platforms, we should do MSAA resolve in another render pass after ending the "
+               "previous one.",
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=56"}}}};
+
+        mToggleInfoInitialized = true;
+    }
+
     const std::vector<std::unique_ptr<AdapterBase>>& InstanceBase::GetAdapters() const {
         return mAdapters;
     }
