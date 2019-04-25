@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2984b871_25dd523c",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:55:17Z",
+      "side": 1,
+      "message": "Yep the unittests for this case could be removed. The check for nullptr could just be an ASSERT.",
+      "parentUuid": "fd83ee63_49204117",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5b0fe95_463be01a",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 28
@@ -107,6 +131,30 @@
       "side": 1,
       "message": "So do you mean we get the Toggle Enum by searching the vector mToggleInfoList instead of a hashmap?",
       "parentUuid": "201d3f99_48c759c8",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49376948_2ae5980e",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:55:17Z",
+      "side": 1,
+      "message": "Sorry, \"this\" meant building the hashmap. Basically we have duplicates of the enum value and name between the construction of this hashmap and mToggleInfoList. We could just keep the name and enum values from toggleInfoList and build the hashmap by iterating over the info list and inserting the (name \u003d\u003e enum) correspondances.",
+      "parentUuid": "7157d60e_c192f5fc",
       "range": {
         "startLine": 121,
         "startChar": 0,
