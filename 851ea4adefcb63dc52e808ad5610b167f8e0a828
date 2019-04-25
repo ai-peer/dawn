@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f067d729_c5f95ac7",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:39:25Z",
+      "side": 1,
+      "message": "nit: not sure this is necessary, calls to dawn_native don\u0027t need to be validated.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5b0fe95_463be01a",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:39:25Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "201d3f99_48c759c8",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:39:25Z",
+      "side": 1,
+      "message": "This could be done by iterating over the toggleInfoList so we don\u0027t need to add stuff twice.\n\nAlso while iterating we should assert that each toggle is in the right position in the array. This way when adding a toggle, we add an enum, the compiler forces us to add an entry to the std::array otherwise we don\u0027t have enough elements, and the assert makes sure we don\u0027t mess up the order. Adding toggle would require just 2 code changes in addition to the code path that\u0027s toggled.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c239680a_1410b73c",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:39:25Z",
+      "side": 1,
+      "message": "nit: this could be a static const array so that it is pre-baked in the program.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 74
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8f5879c_b2518394",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:39:25Z",
+      "side": 1,
+      "message": "nit: comment that this wrapper is necessary to convert enum classes to indices.",
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7da3831_4346a47f",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T08:39:25Z",
+      "side": 1,
+      "message": "nit: I don\u0027t see this used.",
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
