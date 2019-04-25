@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a3d05e5f_7ee1f837",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-25T10:19:16Z",
+      "side": 1,
+      "message": "But it is possible that someone puts a nullptr in the vector\u003cconst char*\u003e DeviceDescriptor.forceEnabledToggles, and this check is useful for this case.",
+      "parentUuid": "2984b871_25dd523c",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5b0fe95_463be01a",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 28
