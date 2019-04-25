@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "7d1c7251_25f11630",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-25T20:17:46Z",
+      "side": 1,
+      "message": "This isn\u0027t very precise. Normalized formats are fed in as fixed-point, not floating-point, though they come into the shader as float. You could sidestep this naming complexity by turning this around and writing VertexFormatIsInt, I think.",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9098923c_790bca2a",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-25T20:17:46Z",
+      "side": 1,
+      "message": "This seems like it is supposed to be uint16_t. If it can\u0027t be, can you have a very short comment saying why?",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44ea15f4_f1967414",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-25T20:17:46Z",
+      "side": 1,
+      "message": "Does this conversion (max and division) need to happen inside the shader rather than in C++?",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc0c66b0_57f63507",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-25T20:17:46Z",
+      "side": 1,
+      "message": "Same here, does this conversion need to be inside the shader? It would be nicer to have the conversion helper be in C++, IMO.\n\nIf this is for precision reasons or something, please add a small comment.",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5f3df8f_010ddf0d",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 25
@@ -31,6 +99,24 @@
       "side": 1,
       "message": "That\u0027s ok I guess, we can just leave a comment that explains we need to compare with some ULP of precision.",
       "parentUuid": "e5f3df8f_010ddf0d",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd2dc699_6ec8ec31",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-25T20:17:46Z",
+      "side": 1,
+      "message": "I\u0027m doubtful that this would change across OS versions; it\u0027s probably a hardware difference.",
+      "parentUuid": "3d045f06_fac157fb",
       "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
