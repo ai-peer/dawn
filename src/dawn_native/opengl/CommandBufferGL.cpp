@@ -105,6 +105,28 @@ namespace dawn_native { namespace opengl {
             }
         }
 
+        bool VertexFormatIsFloat(dawn::VertexFormat format) {
+            switch (format) {
+                case dawn::VertexFormat::UChar2Norm:
+                case dawn::VertexFormat::UChar4Norm:
+                case dawn::VertexFormat::Char2Norm:
+                case dawn::VertexFormat::Char4Norm:
+                case dawn::VertexFormat::UShort2Norm:
+                case dawn::VertexFormat::UShort4Norm:
+                case dawn::VertexFormat::Short2Norm:
+                case dawn::VertexFormat::Short4Norm:
+                case dawn::VertexFormat::Half2:
+                case dawn::VertexFormat::Half4:
+                case dawn::VertexFormat::Float:
+                case dawn::VertexFormat::Float2:
+                case dawn::VertexFormat::Float3:
+                case dawn::VertexFormat::Float4:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         GLint GetStencilMaskFromStencilFormat(dawn::TextureFormat depthStencilFormat) {
             switch (depthStencilFormat) {
                 case dawn::TextureFormat::D32FloatS8Uint:
@@ -242,10 +264,16 @@ namespace dawn_native { namespace opengl {
 
                         GLboolean normalized = VertexFormatIsNormalized(attribute.format);
                         glBindBuffer(GL_ARRAY_BUFFER, buffer);
-                        glVertexAttribPointer(
-                            location, components, formatType, normalized, input.stride,
-                            reinterpret_cast<void*>(
-                                static_cast<intptr_t>(offset + attribute.offset)));
+                        if (VertexFormatIsFloat(attribute.format)) {
+                            glVertexAttribPointer(
+                                location, components, formatType, normalized, input.stride,
+                                reinterpret_cast<void*>(
+                                    static_cast<intptr_t>(offset + attribute.offset)));
+                        } else {
+                            glVertexAttribIPointer(location, components, formatType, input.stride,
+                                                   reinterpret_cast<void*>(static_cast<intptr_t>(
+                                                       offset + attribute.offset)));
+                        }
                     }
                 }
 
