@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "b90d2292_ff4c6d4e",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-25T11:04:11Z",
+      "side": 1,
+      "message": "They can put a non-null pointer to invalid memory too. This API isn\u0027t security-sensitive so I we shouldn\u0027t add unnecessary validation (asserts are fine), otherwise people will rely on that behavior.",
+      "parentUuid": "a3d05e5f_7ee1f837",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "851ea4adefcb63dc52e808ad5610b167f8e0a828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5b0fe95_463be01a",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 28
