@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "6539704a_13fa3caa",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-26T02:01:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8440db1d_645d8a57",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc0c66b0_57f63507",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 25
@@ -139,6 +157,24 @@
       "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52135e23_12617b24",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-26T02:01:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "594c1020_792211c1",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -207,6 +243,24 @@
       "side": 1,
       "message": "Maybe. But we don\u0027t have both this old type macbook pro and 10.13.6 OS, so I\u0027m not sure...",
       "parentUuid": "dd2dc699_6ec8ec31",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c4fb490_8745c1fc",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-26T02:01:38Z",
+      "side": 1,
+      "message": "That\u0027s fine. Please add a short TODO explaining that a difference of 8 ULPs is allowed in this test because it is required on [specify the hardware and OS], but that it might be possible to tighten.",
+      "parentUuid": "330a055d_f8411c1b",
       "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
