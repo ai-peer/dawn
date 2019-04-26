@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d98f331d_45fc969b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-04-26T14:28:49Z",
+      "side": 1,
+      "message": "nit: I think this is more clearly described as validating that the mip chain can\u0027t be longer than the maximum for a given texture size. No empty sounds like something is sparse.",
+      "range": {
+        "startLine": 7,
+        "startChar": 32,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "c0fcc72225d209e8ee82f94af590c149520da905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
