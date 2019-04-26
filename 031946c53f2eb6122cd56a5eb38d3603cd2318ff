@@ -295,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "5c76665f_c658598c",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-26T01:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6928e214_965ecba0",
+      "range": {
+        "startLine": 280,
+        "startChar": 28,
+        "endLine": 281,
+        "endChar": 64
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b029730d_dff7e129",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 8
@@ -522,6 +546,30 @@
       "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32827fcf_e63ef8d0",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-26T01:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fff0e5f5_65b3f77f",
+      "range": {
+        "startLine": 330,
+        "startChar": 74,
+        "endLine": 330,
+        "endChar": 78
+      },
+      "revId": "031946c53f2eb6122cd56a5eb38d3603cd2318ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

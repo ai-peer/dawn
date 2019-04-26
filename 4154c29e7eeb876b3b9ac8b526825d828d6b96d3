@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cfe63b41_4db6c621",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-26T01:37:22Z",
+      "side": 1,
+      "message": "Thank you and done.",
+      "parentUuid": "7d1c7251_25f11630",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9098923c_790bca2a",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 25
@@ -33,6 +51,24 @@
       "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af0f5f7b_3031a058",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-26T01:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9098923c_790bca2a",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8440db1d_645d8a57",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-26T01:37:22Z",
+      "side": 1,
+      "message": "Yes, the reason why it should be in shader is that for x86 architecture, float operation will be extended to 80-bit. That\u0027s so called \"extended precision\"(https://en.wikipedia.org/wiki/Extended_precision) and a paper of Nvidia point out this(https://developer.nvidia.com/sites/default/files/akamai/cuda/files/NVIDIA-CUDA-Floating-Point.pdf).\nSo I moved all of the algorithm into shader and that\u0027s work.\nAnd I\u0027ll add comment to explain this.",
+      "parentUuid": "44ea15f4_f1967414",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bc0c66b0_57f63507",
         "filename": "src/tests/end2end/VertexFormatTests.cpp",
         "patchSetId": 25
@@ -64,6 +118,24 @@
       "writtenOn": "2019-04-25T20:17:46Z",
       "side": 1,
       "message": "Same here, does this conversion need to be inside the shader? It would be nicer to have the conversion helper be in C++, IMO.\n\nIf this is for precision reasons or something, please add a small comment.",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "594c1020_792211c1",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-26T01:37:22Z",
+      "side": 1,
+      "message": "Add comments to explain this.",
+      "parentUuid": "bc0c66b0_57f63507",
       "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -117,6 +189,24 @@
       "side": 1,
       "message": "I\u0027m doubtful that this would change across OS versions; it\u0027s probably a hardware difference.",
       "parentUuid": "3d045f06_fac157fb",
+      "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "330a055d_f8411c1b",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-04-26T01:37:22Z",
+      "side": 1,
+      "message": "Maybe. But we don\u0027t have both this old type macbook pro and 10.13.6 OS, so I\u0027m not sure...",
+      "parentUuid": "dd2dc699_6ec8ec31",
       "revId": "4154c29e7eeb876b3b9ac8b526825d828d6b96d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
