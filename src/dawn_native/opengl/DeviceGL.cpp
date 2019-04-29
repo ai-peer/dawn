@@ -127,13 +127,29 @@ namespace dawn_native { namespace opengl {
 
             GLint status = 0;
             GLsizei length;
-            glGetSynciv(sync, GL_SYNC_CONDITION, sizeof(GLint), &length, &status);
+            glGetSynciv(sync, GL_SYNC_STATUS, sizeof(GLint), &length, &status);
             ASSERT(length == 1);
 
             // Fence are added in order, so we can stop searching as soon
             // as we see one that's not ready.
-            if (!status) {
-                return;
+            if (status == GL_UNSIGNALED) {
+                printf("unsignaled\n");
+                GLenum result = glClientWaitSync(sync, GL_SYNC_FLUSH_COMMANDS_BIT, 1000000);
+                switch (result) {
+                    case GL_ALREADY_SIGNALED:
+                        printf("Already signaled\n");
+                        break;
+                    case GL_TIMEOUT_EXPIRED:
+                        printf("Time out\n");
+                        continue;
+
+                    case GL_CONDITION_SATISFIED:
+                        printf("Signaled in time\n");
+                        break;
+                    default:
+                        printf("GL error\n");
+                        break;
+                }
             }
 
             glDeleteSync(sync);
