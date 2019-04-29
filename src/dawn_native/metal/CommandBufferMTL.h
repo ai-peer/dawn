@@ -37,8 +37,33 @@ namespace dawn_native { namespace metal {
         void FillCommands(id<MTLCommandBuffer> commandBuffer);
 
       private:
+        struct GlobalEncoders {
+            id<MTLBlitCommandEncoder> blit = nil;
+
+            void Finish() {
+                if (blit != nil) {
+                    [blit endEncoding];
+                    blit = nil;  // This will be autoreleased.
+                }
+            }
+
+            void EnsureBlit(id<MTLCommandBuffer> commandBuffer) {
+                if (blit == nil) {
+                    blit = [commandBuffer blitCommandEncoder];
+                }
+            }
+        };
+
         void EncodeComputePass(id<MTLCommandBuffer> commandBuffer);
-        void EncodeRenderPass(id<MTLCommandBuffer> commandBuffer, BeginRenderPassCmd* renderPass);
+        void EncodeRenderPass(id<MTLCommandBuffer> commandBuffer,
+                              BeginRenderPassCmd* renderPass,
+                              GlobalEncoders* globalEncoders);
+
+        static void CopyIntoTrueResolveTarget(
+            id<MTLCommandBuffer> commandBuffer,
+            BeginRenderPassCmd* renderPass,
+            std::array<id<MTLTexture>, kMaxColorAttachments>* temporaryResolveTextures,
+            GlobalEncoders* globalEncoders);
 
         CommandIterator mCommands;
     };
