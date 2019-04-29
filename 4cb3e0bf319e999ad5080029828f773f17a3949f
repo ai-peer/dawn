@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1fc89b6_62eaa9e9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-29T09:35:44Z",
+      "side": 1,
+      "message": "Why is this moved to the header? It is an implementation detail of CommandBufferMTL and isn\u0027t used elsewhere apart from that one pointer as a function arguments. This could use a forward declaration instead.",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8c7bb24_8079f97e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-29T09:35:44Z",
+      "side": 1,
+      "message": "[1] I have concerns that this logic is duplicated. How about doing the following:\n\nHave the EncodeRenderPass function renamed to EncodeRenderPassImpl and make a new EncodeRenderPass that looks if we have workarounds and creates a new BeginRenderPassCmd that\u0027s modified to do the workarounds. This way all the workaround magic is there and not duplicated. This would also work for shouldEmulateStoreAndMSAAREsolve that could be handled entirely in EncodeRenderPass. Of course this would require being able to create fake texture views, that\u0027s probably ok.",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5b3a711_d4391174",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-29T09:35:44Z",
+      "side": 1,
+      "message": "I have concerns that this logic is duplicated. See [1]",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9516a4ba_acccdb90",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-29T09:35:44Z",
+      "side": 1,
+      "message": "It seems this doesn\u0027t use a member function of the COmmandBufferMTL so it could be made a function in the anonymous namespace.",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ba79cc1_3d92e9e5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-29T09:35:44Z",
+      "side": 1,
+      "message": "nit: if (mtlTexture \u003d\u003d nil) { continue; } to decrease the indentation for readability.",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f72e1dc_dbe6ceb7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-04-29T09:35:44Z",
+      "side": 1,
+      "message": "No need to do this, it should be called automatically if it is needed later.",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
