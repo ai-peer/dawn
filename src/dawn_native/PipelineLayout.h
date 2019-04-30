@@ -34,7 +34,10 @@ namespace dawn_native {
 
     class PipelineLayoutBase : public ObjectBase {
       public:
-        PipelineLayoutBase(DeviceBase* device, const PipelineLayoutDescriptor* descriptor);
+        PipelineLayoutBase(DeviceBase* device,
+                           const PipelineLayoutDescriptor* descriptor,
+                           bool blueprint = false);
+        ~PipelineLayoutBase() override;
 
         static PipelineLayoutBase* MakeError(DeviceBase* device);
 
@@ -49,11 +52,21 @@ namespace dawn_native {
         // [1, kMaxBindGroups + 1]
         uint32_t GroupsInheritUpTo(const PipelineLayoutBase* other) const;
 
+        // Implements the functors necessary for the unordered_set<PipelineLayoutBase*>-based cache.
+        struct CacheFuncs {
+            // The hash function
+            size_t operator()(const PipelineLayoutBase* pl) const;
+
+            // The equality predicate
+            bool operator()(const PipelineLayoutBase* a, const PipelineLayoutBase* b) const;
+        };
+
       protected:
         PipelineLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         BindGroupLayoutArray mBindGroupLayouts;
         std::bitset<kMaxBindGroups> mMask;
+        bool mIsBlueprint = false;
     };
 
 }  // namespace dawn_native

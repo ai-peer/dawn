@@ -42,11 +42,13 @@ namespace dawn_native {
 
     // The caches are unordered_sets of pointers with special hash and compare functions
     // to compare the value of the objects, instead of the pointers.
-    using BindGroupLayoutCache = std::
-        unordered_set<BindGroupLayoutBase*, BindGroupLayoutCacheFuncs, BindGroupLayoutCacheFuncs>;
+    template <typename Object>
+    using ObjectCache =
+        std::unordered_set<Object*, typename Object::CacheFuncs, typename Object::CacheFuncs>;
 
     struct DeviceBase::Caches {
-        BindGroupLayoutCache bindGroupLayouts;
+        ObjectCache<BindGroupLayoutBase> bindGroupLayouts;
+        ObjectCache<PipelineLayoutBase> pipelineLayouts;
     };
 
     // DeviceBase
@@ -114,7 +116,29 @@ namespace dawn_native {
     }
 
     void DeviceBase::UncacheBindGroupLayout(BindGroupLayoutBase* obj) {
+        ASSERT(mCaches->bindGroupLayouts.count(obj) != 0);
         mCaches->bindGroupLayouts.erase(obj);
+    }
+
+    ResultOrError<PipelineLayoutBase*> DeviceBase::GetOrCreatePipelineLayout(
+        const PipelineLayoutDescriptor* descriptor) {
+        PipelineLayoutBase blueprint(this, descriptor, true);
+
+        auto iter = mCaches->pipelineLayouts.find(&blueprint);
+        if (iter != mCaches->pipelineLayouts.end()) {
+            (*iter)->Reference();
+            return *iter;
+        }
+
+        PipelineLayoutBase* backendObj;
+        DAWN_TRY_ASSIGN(backendObj, CreatePipelineLayoutImpl(descriptor));
+        mCaches->pipelineLayouts.insert(backendObj);
+        return backendObj;
+    }
+
+    void DeviceBase::UncachePipelineLayout(PipelineLayoutBase* obj) {
+        ASSERT(mCaches->pipelineLayouts.count(obj) != 0);
+        mCaches->pipelineLayouts.erase(obj);
     }
 
     // Object creation API methods
@@ -331,7 +355,7 @@ namespace dawn_native {
         PipelineLayoutBase** result,
         const PipelineLayoutDescriptor* descriptor) {
         DAWN_TRY(ValidatePipelineLayoutDescriptor(this, descriptor));
-        DAWN_TRY_ASSIGN(*result, CreatePipelineLayoutImpl(descriptor));
+        DAWN_TRY_ASSIGN(*result, GetOrCreatePipelineLayout(descriptor));
         return {};
     }
 
