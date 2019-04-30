@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c41e7b76_1b60b92e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-04-30T17:18:22Z",
+      "side": 1,
+      "message": "nit: Same comment about ASSERT-ing |erase| returns 1.",
+      "revId": "904cf543bcb8c8b11e79d3b9e0240a5f9d7f9280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
