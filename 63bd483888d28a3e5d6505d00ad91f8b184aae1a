@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69088e3d_f2665a65",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-04-30T17:01:02Z",
+      "side": 1,
+      "message": "nit: It would be more precise to ASSERT that |erase| returned 1.",
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ef51c6c_dab2a9e8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-04-30T17:01:02Z",
+      "side": 1,
+      "message": "nit: It would be more precise to ASSERT that |erase| returned 1.",
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78aa4c02_671dc14a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-04-30T17:01:02Z",
+      "side": 1,
+      "message": "uNit: Did you want these changes in the previous patch?",
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
