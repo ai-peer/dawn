@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9ec7d8f_8acc05bc",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-04-30T17:15:43Z",
+      "side": 1,
+      "message": "nit: Same comment about ASSERT-ing |erase| returns 1.",
+      "revId": "d5800c6af4653c68a5bb86673e8eb43d278f010b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1998837d_9611a746",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-04-30T17:15:43Z",
+      "side": 1,
+      "message": "I like that idea. Are you worried about collisions?",
+      "revId": "d5800c6af4653c68a5bb86673e8eb43d278f010b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
