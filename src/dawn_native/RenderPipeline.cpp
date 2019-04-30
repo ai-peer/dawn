@@ -15,6 +15,7 @@
 #include "dawn_native/RenderPipeline.h"
 
 #include "common/BitSetIterator.h"
+#include "common/HashUtils.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Texture.h"
@@ -328,15 +329,21 @@ namespace dawn_native {
     // RenderPipelineBase
 
     RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
-                                           const RenderPipelineDescriptor* descriptor)
+                                           const RenderPipelineDescriptor* descriptor,
+                                           bool blueprint)
         : PipelineBase(device,
                        descriptor->layout,
                        dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment),
           mInputState(*descriptor->inputState),
+          mHasDepthStencilAttachment(descriptor->depthStencilState != nullptr),
           mPrimitiveTopology(descriptor->primitiveTopology),
           mRasterizationState(*descriptor->rasterizationState),
-          mHasDepthStencilAttachment(descriptor->depthStencilState != nullptr),
-          mSampleCount(descriptor->sampleCount) {
+          mSampleCount(descriptor->sampleCount),
+          mVertexModule(descriptor->vertexStage->module),
+          mVertexEntryPoint(descriptor->vertexStage->entryPoint),
+          mFragmentModule(descriptor->fragmentStage->module),
+          mFragmentEntryPoint(descriptor->fragmentStage->entryPoint),
+          mIsBlueprint(blueprint) {
         uint32_t location = 0;
         for (uint32_t i = 0; i < mInputState.numAttributes; ++i) {
             location = mInputState.attributes[i].shaderLocation;
@@ -391,6 +398,14 @@ namespace dawn_native {
         return new RenderPipelineBase(device, ObjectBase::kError);
     }
 
+    RenderPipelineBase::~RenderPipelineBase() {
+        // Do not uncache the actual cached object if we are a blueprint
+        if (!mIsBlueprint) {
+            ASSERT(!IsError());
+            GetDevice()->UncacheRenderPipeline(this);
+        }
+    }
+
     const InputStateDescriptor* RenderPipelineBase::GetInputStateDescriptor() const {
         ASSERT(!IsError());
         return &mInputState;
@@ -419,13 +434,13 @@ namespace dawn_native {
     }
 
     const ColorStateDescriptor* RenderPipelineBase::GetColorStateDescriptor(
-        uint32_t attachmentSlot) {
+        uint32_t attachmentSlot) const {
         ASSERT(!IsError());
         ASSERT(attachmentSlot < mColorStates.size());
         return &mColorStates[attachmentSlot];
     }
 
-    const DepthStencilStateDescriptor* RenderPipelineBase::GetDepthStencilStateDescriptor() {
+    const DepthStencilStateDescriptor* RenderPipelineBase::GetDepthStencilStateDescriptor() const {
         ASSERT(!IsError());
         return &mDepthStencilState;
     }
@@ -507,6 +522,104 @@ namespace dawn_native {
         uint32_t slot) const {
         ASSERT(!IsError());
         return attributesUsingInput[slot];
+    }
+
+    size_t RenderPipelineBase::CacheFuncs::operator()(const RenderPipelineBase* pipeline) const {
+        size_t hash = 0;
+
+        // Hash modules and layout
+        HashCombine(&hash, pipeline->GetLayout());
+        HashCombine(&hash, pipeline->mVertexModule.Get(), pipeline->mFragmentEntryPoint);
+        HashCombine(&hash, pipeline->mFragmentModule.Get(), pipeline->mFragmentEntryPoint);
+
+        // Hash attachments
+        HashCombine(&hash, pipeline->mColorAttachmentsSet);
+        for (uint32_t i : IterateBitSet(pipeline->mColorAttachmentsSet)) {
+            const ColorStateDescriptor& desc = *pipeline->GetColorStateDescriptor(i);
+            HashCombine(&hash, desc.format, desc.writeMask);
+            HashCombine(&hash, desc.colorBlend.operation, desc.colorBlend.srcFactor,
+                        desc.colorBlend.dstFactor);
+            HashCombine(&hash, desc.alphaBlend.operation, desc.alphaBlend.srcFactor,
+                        desc.alphaBlend.dstFactor);
+        }
+
+        if (pipeline->mHasDepthStencilAttachment) {
+            const DepthStencilStateDescriptor& desc = pipeline->mDepthStencilState;
+            HashCombine(&hash, desc.format, desc.depthWriteEnabled, desc.depthCompare);
+            HashCombine(&hash, desc.stencilReadMask, desc.stencilWriteMask);
+            HashCombine(&hash, desc.stencilFront.compare, desc.stencilFront.failOp,
+                        desc.stencilFront.depthFailOp, desc.stencilFront.passOp);
+            HashCombine(&hash, desc.stencilBack.compare, desc.stencilBack.failOp,
+                        desc.stencilBack.depthFailOp, desc.stencilBack.passOp);
+        }
+
+        // Hash vertex input state
+        HashCombine(&hash, pipeline->mAttributesSetMask);
+        for (uint32_t i : IterateBitSet(pipeline->mAttributesSetMask)) {
+            const VertexAttributeDescriptor& desc = pipeline->GetAttribute(i);
+            HashCombine(&hash, desc.shaderLocation, desc.inputSlot, desc.offset, desc.format);
+        }
+
+        HashCombine(&hash, pipeline->mInputsSetMask);
+        for (uint32_t i : IterateBitSet(pipeline->mInputsSetMask)) {
+            const VertexInputDescriptor& desc = pipeline->GetInput(i);
+            HashCombine(&hash, desc.inputSlot, desc.stride, desc.stepMode);
+        }
+
+        HashCombine(&hash, pipeline->mInputState.indexFormat);
+
+        // Hash rasterization state
+        {
+            const RasterizationStateDescriptor& desc = pipeline->mRasterizationState;
+            HashCombine(&hash, desc.frontFace, desc.cullMode);
+            HashCombine(&hash, desc.depthBias, desc.depthBiasSlopeScale, desc.depthBiasClamp);
+        }
+
+        // Hash other state
+        HashCombine(&hash, pipeline->mSampleCount, pipeline->mPrimitiveTopology);
+
+        return hash;
+    }
+
+    bool RenderPipelineBase::CacheFuncs::operator()(const RenderPipelineBase* a,
+                                                    const RenderPipelineBase* b) const {
+        // Check modules and layout
+        if (a->GetLayout() != b->GetLayout() || a->mVertexModule.Get() != b->mVertexModule.Get() ||
+            a->mVertexEntryPoint != b->mVertexEntryPoint ||
+            a->mFragmentModule.Get() != b->mFragmentModule.Get() ||
+            a->mFragmentEntryPoint != b->mFragmentEntryPoint) {
+            return false;
+        }
+
+        // Check attachments
+        if (a->mColorAttachmentsSet != b->mColorAttachmentsSet ||
+            a->mHasDepthStencilAttachment != b->mHasDepthStencilAttachment) {
+            return false;
+        }
+
+        for (uint32_t i : IterateBitSet(a->mColorAttachmentsSet)) {
+            const ColorStateDescriptor& descA = *a->GetColorStateDescriptor(i);
+            const ColorStateDescriptor& descB = *b->GetColorStateDescriptor(i);
+            if (descA.format != descB.format || descA.writeMask != descB.writeMask) {
+                return false;
+            }
+            if (descA.colorBlend.operation != descB.colorBlend.operation ||
+                descA.colorBlend.srcFactor != descB.colorBlend.srcFactor ||
+                descA.colorBlend.dstFactor != descB.colorBlend.dstFactor) {
+                return false;
+            }
+            if (descA.alphaBlend.operation != descB.alphaBlend.operation ||
+                descA.alphaBlend.srcFactor != descB.alphaBlend.srcFactor ||
+                descA.alphaBlend.dstFactor != descB.alphaBlend.dstFactor) {
+                return false;
+            }
+        }
+
+        if (a->mHasDepthStencilAttachment) {
+            const DepthStencilStateDescriptor& descA = a->mDepthStencilState;
+            const DepthStencilStateDescriptor& descB = b->mDepthStencilState;
+            if (descA.format != descB.format || descA.depthWriteEnabled != descB.depthWriteEnabled || descA.depthCompate != descB.depthCompare)
+        }
     }
 
 }  // namespace dawn_native
