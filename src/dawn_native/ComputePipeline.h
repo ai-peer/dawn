@@ -26,12 +26,30 @@ namespace dawn_native {
 
     class ComputePipelineBase : public PipelineBase {
       public:
-        ComputePipelineBase(DeviceBase* device, const ComputePipelineDescriptor* descriptor);
+        ComputePipelineBase(DeviceBase* device,
+                            const ComputePipelineDescriptor* descriptor,
+                            bool blueprint = false);
+        ~ComputePipelineBase() override;
 
         static ComputePipelineBase* MakeError(DeviceBase* device);
 
+        // Implements the functors necessary for the unordered_set<ComputePipelineBase*>-based
+        // cache.
+        struct CacheFuncs {
+            // The hash function
+            size_t operator()(const ComputePipelineBase* pipeline) const;
+
+            // The equality predicate
+            bool operator()(const ComputePipelineBase* a, const ComputePipelineBase* b) const;
+        };
+
       private:
         ComputePipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        // TODO(cwallez@chromium.org): Store a crypto hash of the module instead.
+        Ref<ShaderModuleBase> mModule;
+        std::string mEntryPoint;
+        bool mIsBlueprint = false;
     };
 
 }  // namespace dawn_native
