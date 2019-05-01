@@ -767,6 +767,12 @@ if (dawn_standalone) {
     ]
   }
 
+  dawn_sample("MatrixMultiply") {
+    sources = [
+      "examples/MatrixMultiply.cpp",
+    ]
+  }
+
   group("dawn_samples") {
     deps = [
       ":Animometer",
@@ -774,6 +780,7 @@ if (dawn_standalone) {
       ":ComputeBoids",
       ":CppHelloTriangle",
       ":CubeReflection",
+      ":MatrixMultiply",
       ":glTFViewer",
     ]
   }
