@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c669d038_2f833c34",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:16:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcf251f8_511d7776",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ff561f4_44339128",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9b6f7840_aa1a7615",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:16:00Z",
+      "side": 1,
+      "message": "Renamed to ContentLessObjectCache. Object seems ok-ish because it is used in a very narrow scope.",
+      "parentUuid": "2ff561f4_44339128",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69088e3d_f2665a65",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 1
@@ -62,6 +110,24 @@
       "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3a46cb0_b4b4caaf",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:16:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69088e3d_f2665a65",
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "4adda5b6_3a6aa288",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:16:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ef51c6c_dab2a9e8",
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78aa4c02_671dc14a",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 1
@@ -93,6 +177,41 @@
       "writtenOn": "2019-04-30T17:01:02Z",
       "side": 1,
       "message": "uNit: Did you want these changes in the previous patch?",
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32b9d452_33922ee4",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:16:00Z",
+      "side": 1,
+      "message": "UsesWire is only needed in this patch because the first time it is used is at [1]",
+      "parentUuid": "78aa4c02_671dc14a",
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1779b308_09d2f299",
+        "filename": "src/tests/end2end/ObjectCachingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:16:00Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
