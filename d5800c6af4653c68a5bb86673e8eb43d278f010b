@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "862d046f_c061c21f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9ec7d8f_8acc05bc",
+      "revId": "d5800c6af4653c68a5bb86673e8eb43d278f010b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1998837d_9611a746",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "d5800c6af4653c68a5bb86673e8eb43d278f010b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2fe62df_e933c86c",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-01T12:20:00Z",
+      "side": 1,
+      "message": "Yes, if an application is able to craft two shadermodules with the same hash for the code, then the second one that\u0027s registered would instead return the first one. This isn\u0027t a security concern but a conformance concern.\n\nThe reason I didn\u0027t do it is because we don\u0027t have any crypto in Dawn and adding some would require some new third_party library.",
+      "parentUuid": "1998837d_9611a746",
+      "revId": "d5800c6af4653c68a5bb86673e8eb43d278f010b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
