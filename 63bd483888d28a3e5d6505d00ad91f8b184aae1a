@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "bcf251f8_511d7776",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-01T00:46:37Z",
+      "side": 1,
+      "message": "optional nit: Splitting this into 2 structs would remove the need for these comments. (The info would be in the struct name.)",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ff561f4_44339128",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-01T00:46:37Z",
+      "side": 1,
+      "message": "nit: Object and ObjectCache are very generic names, though I don\u0027t have much better suggestions.",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "63bd483888d28a3e5d6505d00ad91f8b184aae1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "69088e3d_f2665a65",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 1
