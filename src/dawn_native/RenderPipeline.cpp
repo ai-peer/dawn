@@ -118,7 +118,7 @@ namespace dawn_native {
             DAWN_TRY(ValidateBlendOperation(descriptor->colorBlend.operation));
             DAWN_TRY(ValidateBlendFactor(descriptor->colorBlend.srcFactor));
             DAWN_TRY(ValidateBlendFactor(descriptor->colorBlend.dstFactor));
-            DAWN_TRY(ValidateColorWriteMask(descriptor->writeMask));
+            DAWN_TRY(ValidateColorWriteMask(descriptor->colorWriteMask));
 
             dawn::TextureFormat format = descriptor->format;
             DAWN_TRY(ValidateTextureFormat(format));
@@ -535,7 +535,7 @@ namespace dawn_native {
         HashCombine(&hash, pipeline->mColorAttachmentsSet);
         for (uint32_t i : IterateBitSet(pipeline->mColorAttachmentsSet)) {
             const ColorStateDescriptor& desc = *pipeline->GetColorStateDescriptor(i);
-            HashCombine(&hash, desc.format, desc.writeMask);
+            HashCombine(&hash, desc.format, desc.colorWriteMask);
             HashCombine(&hash, desc.colorBlend.operation, desc.colorBlend.srcFactor,
                         desc.colorBlend.dstFactor);
             HashCombine(&hash, desc.alphaBlend.operation, desc.alphaBlend.srcFactor,
@@ -599,7 +599,7 @@ namespace dawn_native {
         for (uint32_t i : IterateBitSet(a->mColorAttachmentsSet)) {
             const ColorStateDescriptor& descA = *a->GetColorStateDescriptor(i);
             const ColorStateDescriptor& descB = *b->GetColorStateDescriptor(i);
-            if (descA.format != descB.format || descA.writeMask != descB.writeMask) {
+            if (descA.format != descB.format || descA.colorWriteMask != descB.colorWriteMask) {
                 return false;
             }
             if (descA.colorBlend.operation != descB.colorBlend.operation ||
