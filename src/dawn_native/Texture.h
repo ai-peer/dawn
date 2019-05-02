@@ -59,6 +59,8 @@ namespace dawn_native {
         uint32_t GetSampleCount() const;
         dawn::TextureUsageBit GetUsage() const;
         TextureState GetTextureState() const;
+        bool IsClear() const;
+        void SetIsClear();
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
@@ -85,6 +87,7 @@ namespace dawn_native {
         uint32_t mSampleCount;
         dawn::TextureUsageBit mUsage = dawn::TextureUsageBit::None;
         TextureState mState;
+        bool mIsClear;
     };
 
     class TextureViewBase : public ObjectBase {

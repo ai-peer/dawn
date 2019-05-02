@@ -392,6 +392,25 @@ namespace dawn_native { namespace vulkan {
         mLastUsage = usage;
     }
 
+    void Texture::ClearTexture(VkCommandBuffer commands) {
+        VkImageSubresourceRange range = {};
+        range.aspectMask = GetVkAspectMask();
+        range.baseMipLevel = 0;
+        range.levelCount = GetNumMipLevels();
+        range.baseArrayLayer = 0;
+        range.layerCount = GetArrayLayers();
+
+        VkClearColorValue clear_color[1];
+        clear_color[0].float32[0] = 0.0f;
+        clear_color[0].float32[1] = 0.0f;
+        clear_color[0].float32[2] = 0.0f;
+        clear_color[0].float32[3] = 0.0f;
+        ToBackend(GetDevice())
+            ->fn.CmdClearColorImage(commands, GetHandle(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                    clear_color, 1, &range);
+        SetIsClear();
+    }
+
     // TODO(jiawei.shao@intel.com): create texture view by TextureViewDescriptor
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
         : TextureViewBase(texture, descriptor) {

@@ -191,6 +191,14 @@ namespace dawn_native { namespace vulkan {
                     clearValues[attachmentCount].color.float32[3] = attachmentInfo.clearColor.a;
 
                     attachmentCount++;
+                    if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
+                        attachmentInfo.view->GetTexture()->SetIsClear();
+                    }
+                    auto resolveTarget = attachmentInfo.resolveTarget.Get();
+                    if (resolveTarget && !resolveTarget->GetTexture()->IsClear()) {
+                        ToBackend(attachmentInfo.resolveTarget.Get()->GetTexture())
+                            ->ClearTexture(commands);
+                    }
                 }
 
                 if (renderPass->hasDepthStencilAttachment) {
@@ -308,6 +316,10 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    if (!dst.texture->IsClear()) {
+                        ToBackend(dst.texture)->ClearTexture(commands);
+                    }
+
                     ToBackend(src.buffer)
                         ->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferSrc);
                     ToBackend(dst.texture)
@@ -330,6 +342,10 @@ namespace dawn_native { namespace vulkan {
                     CopyTextureToBufferCmd* copy = mCommands.NextCommand<CopyTextureToBufferCmd>();
                     auto& src = copy->source;
                     auto& dst = copy->destination;
+
+                    if (!src.texture->IsClear()) {
+                        ToBackend(src.texture)->ClearTexture(commands);
+                    }
 
                     ToBackend(src.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferSrc);
@@ -360,6 +376,13 @@ namespace dawn_native { namespace vulkan {
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
+
+                    if (!src.texture->IsClear()) {
+                        ToBackend(src.texture)->ClearTexture(commands);
+                    }
+                    if (!dst.texture->IsClear()) {
+                        ToBackend(dst.texture)->ClearTexture(commands);
+                    }
 
                     VkImageCopy region = ComputeImageCopyRegion(src, dst, copy->copySize);
 

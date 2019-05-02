@@ -328,7 +328,8 @@ namespace dawn_native {
           mMipLevelCount(descriptor->mipLevelCount),
           mSampleCount(descriptor->sampleCount),
           mUsage(descriptor->usage),
-          mState(state) {
+          mState(state),
+          mIsClear(false) {
     }
 
     TextureBase::TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -372,6 +373,16 @@ namespace dawn_native {
     TextureBase::TextureState TextureBase::GetTextureState() const {
         ASSERT(!IsError());
         return mState;
+    }
+
+    bool TextureBase::IsClear() const {
+        ASSERT(!IsError());
+        return mIsClear;
+    }
+
+    void TextureBase::SetIsClear() {
+        ASSERT(!IsError());
+        mIsClear = true;
     }
 
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {
