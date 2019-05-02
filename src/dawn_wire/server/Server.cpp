@@ -34,21 +34,4 @@ namespace dawn_wire { namespace server {
         return mSerializer->GetCmdSpace(size);
     }
 
-    bool Server::InjectTexture(DawnTexture texture, uint32_t id, uint32_t generation) {
-        ObjectData<DawnTexture>* data = TextureObjects().Allocate(id);
-        if (data == nullptr) {
-            return false;
-        }
-
-        data->handle = texture;
-        data->serial = generation;
-        data->allocated = true;
-
-        // The texture is externally owned so it shouldn't be destroyed when we receive a destroy
-        // message from the client. Add a reference to counterbalance the eventual release.
-        mProcs.textureReference(texture);
-
-        return true;
-    }
-
 }}  // namespace dawn_wire::server

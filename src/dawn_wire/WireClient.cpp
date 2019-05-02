@@ -36,8 +36,4 @@ namespace dawn_wire {
         return mImpl->HandleCommands(commands, size);
     }
 
-    ReservedTexture WireClient::ReserveTexture(DawnDevice device) {
-        return mImpl->ReserveTexture(device);
-    }
-
 }  // namespace dawn_wire
