@@ -46,8 +46,21 @@ namespace dawn_native { namespace d3d12 {
         if (adapterDesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
             mDeviceType = DeviceType::CPU;
         } else {
-            // TODO(cwallez@chromium.org): properly detect integrated vs. discrete.
-            mDeviceType = DeviceType::DiscreteGPU;
+            // Using DXGI_ADAPTER_DESC1 approach to determine integrated vs dedicated is
+            // vendor-specific.
+            switch (mPCIInfo.vendorId) {
+                // On Intel GPUs, dedicated video memory is always set to 128MB when the GPU is
+                // integrated.
+                case 0x8086:
+                    mDeviceType = (adapterDesc.DedicatedVideoMemory == 128 * 1024 * 1024)
+                                      ? DeviceType::IntegratedGPU
+                                      : DeviceType::DiscreteGPU;
+                    break;
+
+                default:
+                    // TODO(cwallez@chromium.org): properly detect integrated vs. discrete.
+                    mDeviceType = DeviceType::DiscreteGPU;
+            }
         }
 
         std::wstring_convert<DeletableFacet<std::codecvt<wchar_t, char, std::mbstate_t>>> converter(
