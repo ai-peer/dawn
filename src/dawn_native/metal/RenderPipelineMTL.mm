@@ -182,19 +182,19 @@ namespace dawn_native { namespace metal {
             }
         }
 
-        MTLColorWriteMask MetalColorWriteMask(dawn::ColorWriteMask writeMask) {
+        MTLColorWriteMask MetalColorWriteMask(dawn::ColorWriteMask colorWriteMask) {
             MTLColorWriteMask mask = MTLColorWriteMaskNone;
 
-            if (writeMask & dawn::ColorWriteMask::Red) {
+            if (colorWriteMask & dawn::ColorWriteMask::Red) {
                 mask |= MTLColorWriteMaskRed;
             }
-            if (writeMask & dawn::ColorWriteMask::Green) {
+            if (colorWriteMask & dawn::ColorWriteMask::Green) {
                 mask |= MTLColorWriteMaskGreen;
             }
-            if (writeMask & dawn::ColorWriteMask::Blue) {
+            if (colorWriteMask & dawn::ColorWriteMask::Blue) {
                 mask |= MTLColorWriteMaskBlue;
             }
-            if (writeMask & dawn::ColorWriteMask::Alpha) {
+            if (colorWriteMask & dawn::ColorWriteMask::Alpha) {
                 mask |= MTLColorWriteMaskAlpha;
             }
 
@@ -214,7 +214,7 @@ namespace dawn_native { namespace metal {
             attachment.destinationAlphaBlendFactor =
                 MetalBlendFactor(descriptor->alphaBlend.dstFactor, true);
             attachment.alphaBlendOperation = MetalBlendOperation(descriptor->alphaBlend.operation);
-            attachment.writeMask = MetalColorWriteMask(descriptor->writeMask);
+            attachment.writeMask = MetalColorWriteMask(descriptor->colorWriteMask);
         }
 
         MTLStencilOperation MetalStencilOperation(dawn::StencilOperation stencilOperation) {
