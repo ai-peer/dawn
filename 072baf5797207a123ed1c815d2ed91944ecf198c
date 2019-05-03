@@ -42,6 +42,29 @@
     },
     {
       "key": {
+        "uuid": "bf6a8867_33dddf6b",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-05-03T17:41:55Z",
+      "side": 1,
+      "message": "Nit: Please rename this to something a bit more explicit like \"AreContentsDefined\"",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 26
+      },
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9079db0d_e852b099",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 2
