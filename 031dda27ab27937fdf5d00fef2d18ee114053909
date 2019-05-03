@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0655c7e_12987596",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-03T22:17:17Z",
+      "side": 1,
+      "message": "I thought there was a BIOS option to change this.\n\nIs this really the best way to detect whether an Intel chip is integrated or discrete? E.g. is there a flag indicating whether the device has unified memory (UMA)? That\u0027s the most important distinction between discrete and integrated for us, I think.",
+      "revId": "031dda27ab27937fdf5d00fef2d18ee114053909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
