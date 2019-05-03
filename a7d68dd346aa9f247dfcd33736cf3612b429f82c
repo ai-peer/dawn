@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d650c93a_f08468f4",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T17:51:20Z",
+      "side": 1,
+      "message": "This should have a name to make it clear what it is. The constant is also defined here: https://cs.chromium.org/chromium/src/third_party/dawn/src/tests/DawnTest.cpp?type\u003dcs\u0026q\u003ddawn+8086\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d81 they could both go in a shared header somewhere in common/",
+      "range": {
+        "startLine": 54,
+        "startChar": 21,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "a7d68dd346aa9f247dfcd33736cf3612b429f82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d73ffdf4_06437329",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T17:51:20Z",
+      "side": 1,
+      "message": "nit: name this constant as well.",
+      "range": {
+        "startLine": 55,
+        "startChar": 71,
+        "endLine": 55,
+        "endChar": 88
+      },
+      "revId": "a7d68dd346aa9f247dfcd33736cf3612b429f82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
