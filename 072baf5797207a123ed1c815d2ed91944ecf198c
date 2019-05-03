@@ -1,0 +1,249 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b22f09e_25ca1827",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "Please add a BUG\u003ddawn:X tag so that commit-bot posts a message on the issue and we can track which commits are relevant for which issue.",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c96ba090_a1b0496d",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "u-nit: mIsCleared, TextureBase::IsCleared, etc.",
+      "range": {
+        "startLine": 332,
+        "startChar": 10,
+        "endLine": 332,
+        "endChar": 18
+      },
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9079db0d_e852b099",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43d8c30b_d6caf1a5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "The tracking in TextureBase is global for the texture while the loadOp::Clear results in clearing only the subresource that\u0027s used as an attachment.\n\nThe tracking in TextureBase should be made per-subresource so that here we can only tag as cleared the correct subresource and not the rest of the texture.",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "775e0de6_3fdbc838",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "If loadOp is Load and the texture not cleared, we should change it to clear to 0. This could be done by modifying the renderPassCacheQuery at [1].\n\nAnd actually every backend will need to transform Load into Clear is the texture isn\u0027t cleared so this could be a helper function for example in CommandBuffer.h",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3914f7b_4e441a24",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "nit: spell out this simple type.",
+      "range": {
+        "startLine": 197,
+        "startChar": 20,
+        "endLine": 197,
+        "endChar": 24
+      },
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9ee4342_74900c28",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "The resolve target gets 100% written at the end of the render pass so we shouldn\u0027t need to clear it.",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e725887_ab135ac4",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "These textures should also be lazy cleared if needed.",
+      "range": {
+        "startLine": 282,
+        "startChar": 1,
+        "endLine": 285,
+        "endChar": 13
+      },
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6316286a_2c1056e6",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "Can we have a TODO here and in other places that this should be skipped if we copy to a whole subresource? We could have a helper function in CommandBuffer that helps factor this code for all backends.\n\nditto in other places.",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8ed230a_360e1a77",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "Since the tracking needs to be per-subresource, this would probably clear only a subresource.",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eeb943d_1d94e30e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "This need to match the current layout of the texture, so we should TransitionNow to TransferDst inside that function probably.",
+      "range": {
+        "startLine": 409,
+        "startChar": 59,
+        "endLine": 409,
+        "endChar": 95
+      },
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f8fb71b_237ab735",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "Most of the new code paths aren\u0027t exercised by the test, can we add more coverage?",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0636fd86_0ae61e60",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-03T09:06:01Z",
+      "side": 1,
+      "message": "This test relies on driver recycling memory and not clearing textures when it does. Instead for testing we should introduce a new Toggle that\u0027s \"nonzero_clear_resources_on_creation_for_testing\" that clears textures to say pink or full 1 bits as soon as they are created but doesn\u0027t update the state tracking. This way we can create a texture and if the logic in dawn_native is wrong, we\u0027ll keep seeing the nonzero values.\n\nI\u0027d suggest making this a CL before this one, with its own set of tests.",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
