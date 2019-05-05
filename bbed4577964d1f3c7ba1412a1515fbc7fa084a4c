@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7c9eb47_6b016c70",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-05T06:27:49Z",
+      "side": 1,
+      "message": "Hi Corentin,\nIn WebGL, generateMipmap starts with the resolution of the texture image and halves the resolution until a 1x1 dimension texture image is created.\nhttps://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/generateMipmap\n\nI calculated mipmap levels in Aquarium by like this, std::log2(std::max(texWidth, texHeight)) + 1, and failed in this validation.",
+      "range": {
+        "startLine": 177,
+        "startChar": 7,
+        "endLine": 180,
+        "endChar": 9
+      },
+      "revId": "bbed4577964d1f3c7ba1412a1515fbc7fa084a4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
