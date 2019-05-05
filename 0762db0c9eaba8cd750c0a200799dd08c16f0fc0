@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c0d8110_d5918de2",
+        "filename": "src/common/Math.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-05T08:44:26Z",
+      "side": 1,
+      "message": "Remove this?",
+      "revId": "0762db0c9eaba8cd750c0a200799dd08c16f0fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "246a78da_79d22a71",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-05T08:44:26Z",
+      "side": 1,
+      "message": "#include \u003calgorithm\u003e",
+      "revId": "0762db0c9eaba8cd750c0a200799dd08c16f0fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
