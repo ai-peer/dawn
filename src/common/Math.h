@@ -15,6 +15,7 @@
 #ifndef COMMON_MATH_H_
 #define COMMON_MATH_H_
 
+#include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <cstring>

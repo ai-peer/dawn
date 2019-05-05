@@ -16,8 +16,6 @@
 
 #include "common/Assert.h"
 
-#include <algorithm>
-
 #if defined(DAWN_COMPILER_MSVC)
 #    include <intrin.h>
 #endif
