@@ -23,8 +23,9 @@ namespace dawn_native {
 
     enum class Toggle {
         EmulateStoreAndMSAAResolve = 0,
+        AlwaysResolveIntoZeroLevelAndLayer = 1,
 
-        EnumCount = 1,
+        EnumCount = 2,
         InvalidEnum = EnumCount,
     };
 
