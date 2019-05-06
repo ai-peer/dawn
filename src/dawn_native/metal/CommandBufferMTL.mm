@@ -27,31 +27,55 @@
 
 namespace dawn_native { namespace metal {
 
+    struct GlobalEncoders {
+        id<MTLBlitCommandEncoder> blit = nil;
+
+        void Finish() {
+            if (blit != nil) {
+                [blit endEncoding];
+                blit = nil;  // This will be autoreleased.
+            }
+        }
+
+        void EnsureBlit(id<MTLCommandBuffer> commandBuffer) {
+            if (blit == nil) {
+                blit = [commandBuffer blitCommandEncoder];
+            }
+        }
+    };
+
     namespace {
 
-        struct GlobalEncoders {
-            id<MTLBlitCommandEncoder> blit = nil;
-
-            void Finish() {
-                if (blit != nil) {
-                    [blit endEncoding];
-                    blit = nil;  // This will be autoreleased.
-                }
-            }
-
-            void EnsureBlit(id<MTLCommandBuffer> commandBuffer) {
-                if (blit == nil) {
-                    blit = [commandBuffer blitCommandEncoder];
-                }
-            }
-        };
+        id<MTLTexture> CreateResolveTextureForWorkaround(Device* device,
+                                                         const TextureViewBase* textureView) {
+            const TextureBase* texture = textureView->GetTexture();
+            const uint32_t baseMipmapLevel = textureView->GetBaseMipLevel();
+            MTLTextureDescriptor* mtlDesc = [MTLTextureDescriptor new];
+            mtlDesc.textureType = MTLTextureType2D;
+            mtlDesc.usage = MTLTextureUsageRenderTarget;
+            mtlDesc.pixelFormat = MetalPixelFormat(texture->GetFormat());
+            mtlDesc.width = texture->GetSize().width >> baseMipmapLevel;
+            mtlDesc.height = texture->GetSize().height >> baseMipmapLevel;
+            mtlDesc.depth = 1;
+            mtlDesc.mipmapLevelCount = 1;
+            mtlDesc.arrayLength = 1;
+            mtlDesc.storageMode = MTLStorageModePrivate;
+            mtlDesc.sampleCount = 1;
+            id<MTLTexture> resolveTexture =
+                [device->GetMTLDevice() newTextureWithDescriptor:mtlDesc];
+            [mtlDesc release];
+            return resolveTexture;
+        }
 
         // Creates an autoreleased MTLRenderPassDescriptor matching desc
         MTLRenderPassDescriptor* CreateMTLRenderPassDescriptor(
+            Device* device,
             BeginRenderPassCmd* renderPass,
-            bool shouldEmulateStoreAndMSAAResolve) {
+            bool shouldEmulateStoreAndMSAAResolve,
+            std::array<id<MTLTexture>, kMaxColorAttachments>* resolveTexturesForWorkaround) {
             MTLRenderPassDescriptor* descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
 
+            const bool UseResolveTargetsForWorkaround = (resolveTexturesForWorkaround != nil);
             for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
                 auto& attachmentInfo = renderPass->colorAttachments[i];
 
@@ -69,19 +93,42 @@ namespace dawn_native { namespace metal {
                 descriptor.colorAttachments[i].level = attachmentInfo.view->GetBaseMipLevel();
                 descriptor.colorAttachments[i].slice = attachmentInfo.view->GetBaseArrayLayer();
 
-                if (attachmentInfo.storeOp == dawn::StoreOp::Store) {
-                    if (attachmentInfo.resolveTarget.Get() != nullptr &&
-                        !shouldEmulateStoreAndMSAAResolve) {
+                if (attachmentInfo.resolveTarget.Get() != nil) {
+                    TextureViewBase* resolveTarget = attachmentInfo.resolveTarget.Get();
+                    uint32_t resolveLevel = resolveTarget->GetBaseMipLevel();
+                    uint32_t resolveSlice = resolveTarget->GetBaseArrayLayer();
+
+                    // Create the temporary 2D single-level resolve texture if necessary
+                    if (UseResolveTargetsForWorkaround && (resolveLevel > 0 || resolveSlice > 0)) {
+                        (*resolveTexturesForWorkaround)[i] =
+                            CreateResolveTextureForWorkaround(device, resolveTarget);
+                    }
+
+                    // Set proper store operation
+                    if (attachmentInfo.storeOp == dawn::StoreOp::Store) {
+                        // If we need to emulate MTLStoreActionStoreAndMSAAResolve, we should do
+                        // MSAA resolve at the end of the render pass instead of here
+                        if (shouldEmulateStoreAndMSAAResolve) {
+                            descriptor.colorAttachments[i].storeAction = MTLStoreActionStore;
+                            continue;
+                        } else {
+                            descriptor.colorAttachments[i].storeAction =
+                                MTLStoreActionStoreAndMultisampleResolve;
+                        }
+                    }
+
+                    // Set resolve target (temporary or true resolve texture)
+                    if (UseResolveTargetsForWorkaround &&
+                        (*resolveTexturesForWorkaround)[i] != nil) {
                         descriptor.colorAttachments[i].resolveTexture =
-                            ToBackend(attachmentInfo.resolveTarget->GetTexture())->GetMTLTexture();
-                        descriptor.colorAttachments[i].resolveLevel =
-                            attachmentInfo.resolveTarget->GetBaseMipLevel();
-                        descriptor.colorAttachments[i].resolveSlice =
-                            attachmentInfo.resolveTarget->GetBaseArrayLayer();
-                        descriptor.colorAttachments[i].storeAction =
-                            MTLStoreActionStoreAndMultisampleResolve;
+                            (*resolveTexturesForWorkaround)[i];
+                        descriptor.colorAttachments[i].resolveLevel = 0;
+                        descriptor.colorAttachments[i].resolveSlice = 0;
                     } else {
-                        descriptor.colorAttachments[i].storeAction = MTLStoreActionStore;
+                        descriptor.colorAttachments[i].resolveTexture =
+                            ToBackend(resolveTarget->GetTexture())->GetMTLTexture();
+                        descriptor.colorAttachments[i].resolveLevel = resolveLevel;
+                        descriptor.colorAttachments[i].resolveSlice = resolveSlice;
                     }
                 }
             }
@@ -123,9 +170,12 @@ namespace dawn_native { namespace metal {
         }
 
         // Do MSAA resolve in another render pass.
-        void ResolveInAnotherRenderPass(id<MTLCommandBuffer> commandBuffer,
-                                        BeginRenderPassCmd* renderPass) {
+        void ResolveInAnotherRenderPass(
+            id<MTLCommandBuffer> commandBuffer,
+            BeginRenderPassCmd* renderPass,
+            std::array<id<MTLTexture>, kMaxColorAttachments>* resolveTexturesForWorkaround) {
             ASSERT(renderPass->sampleCount > 1);
+            ASSERT(resolveTexturesForWorkaround);
             MTLRenderPassDescriptor* renderPassForResolve = nil;
             for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
                 auto& attachmentInfo = renderPass->colorAttachments[i];
@@ -141,21 +191,65 @@ namespace dawn_native { namespace metal {
                     ToBackend(attachmentInfo.view->GetTexture())->GetMTLTexture();
                 renderPassForResolve.colorAttachments[i].level = 0;
                 renderPassForResolve.colorAttachments[i].slice = 0;
-
                 renderPassForResolve.colorAttachments[i].storeAction =
                     MTLStoreActionMultisampleResolve;
-                renderPassForResolve.colorAttachments[i].resolveTexture =
-                    ToBackend(attachmentInfo.resolveTarget->GetTexture())->GetMTLTexture();
-                renderPassForResolve.colorAttachments[i].resolveLevel =
-                    attachmentInfo.resolveTarget->GetBaseMipLevel();
-                renderPassForResolve.colorAttachments[i].resolveSlice =
-                    attachmentInfo.resolveTarget->GetBaseArrayLayer();
+
+                id<MTLTexture> resolveTextureForWorkaround = (*resolveTexturesForWorkaround)[i];
+                if (resolveTextureForWorkaround != nil) {
+                    renderPassForResolve.colorAttachments[i].resolveTexture =
+                        resolveTextureForWorkaround;
+                    renderPassForResolve.colorAttachments[i].resolveLevel = 0;
+                    renderPassForResolve.colorAttachments[i].resolveSlice = 0;
+                } else {
+                    renderPassForResolve.colorAttachments[i].resolveTexture =
+                        ToBackend(attachmentInfo.resolveTarget->GetTexture())->GetMTLTexture();
+                    renderPassForResolve.colorAttachments[i].resolveLevel =
+                        attachmentInfo.resolveTarget->GetBaseMipLevel();
+                    renderPassForResolve.colorAttachments[i].resolveSlice =
+                        attachmentInfo.resolveTarget->GetBaseArrayLayer();
+                }
             }
 
             if (renderPassForResolve != nil) {
                 id<MTLRenderCommandEncoder> encoder =
                     [commandBuffer renderCommandEncoderWithDescriptor:renderPassForResolve];
                 [encoder endEncoding];
+            }
+        }
+
+        void CopyIntoTrueResolveTarget(
+            id<MTLCommandBuffer> commandBuffer,
+            BeginRenderPassCmd* renderPass,
+            std::array<id<MTLTexture>, kMaxColorAttachments>* temporaryResolveTextures,
+            GlobalEncoders* encoders) {
+            ASSERT(renderPass && temporaryResolveTextures && encoders);
+            for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+                id<MTLTexture> mtlTexture = (*temporaryResolveTextures)[i];
+                if (mtlTexture == nil) {
+                    continue;
+                }
+
+                TextureViewBase* trueResolveTarget =
+                    renderPass->colorAttachments[i].resolveTarget.Get();
+                encoders->EnsureBlit(commandBuffer);
+                MTLOrigin origin;
+                origin.x = 0;
+                origin.y = 0;
+                origin.z = 0;
+                const auto& size = trueResolveTarget->GetTexture()->GetSize();
+                const uint32_t baseMipmapLevel = trueResolveTarget->GetBaseMipLevel();
+                const uint32_t width = size.width >> baseMipmapLevel;
+                const uint32_t height = size.height >> baseMipmapLevel;
+                [encoders->blit
+                     copyFromTexture:mtlTexture
+                         sourceSlice:0
+                         sourceLevel:0
+                        sourceOrigin:origin
+                          sourceSize:MTLSizeMake(width, height, size.depth)
+                           toTexture:ToBackend(trueResolveTarget->GetTexture())->GetMTLTexture()
+                    destinationSlice:trueResolveTarget->GetBaseArrayLayer()
+                    destinationLevel:baseMipmapLevel
+                   destinationOrigin:origin];
             }
         }
 
@@ -286,7 +380,7 @@ namespace dawn_native { namespace metal {
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
                     encoders.Finish();
-                    EncodeRenderPass(commandBuffer, cmd);
+                    EncodeRenderPass(commandBuffer, cmd, &encoders);
                 } break;
 
                 case Command::CopyBufferToBuffer: {
@@ -630,7 +724,8 @@ namespace dawn_native { namespace metal {
     }
 
     void CommandBuffer::EncodeRenderPass(id<MTLCommandBuffer> commandBuffer,
-                                         BeginRenderPassCmd* renderPassCmd) {
+                                         BeginRenderPassCmd* renderPassCmd,
+                                         GlobalEncoders* blitEncoders) {
         RenderPipeline* lastPipeline = nullptr;
         id<MTLBuffer> indexBuffer = nil;
         uint32_t indexBufferBaseOffset = 0;
@@ -640,11 +735,18 @@ namespace dawn_native { namespace metal {
 
         bool shouldEmulateStoreAndMSAAResolve =
             GetDevice()->IsToggleEnabled(Toggle::EmulateStoreAndMSAAResolve);
+
+        std::array<id<MTLTexture>, kMaxColorAttachments> resolveTexturesForWorkaround = {};
+        std::array<id<MTLTexture>, kMaxColorAttachments>* resolveTexturesForWorkaroundPtr =
+            GetDevice()->IsToggleEnabled(Toggle::AlwaysResolveIntoZeroLevelAndLayer)
+                ? &resolveTexturesForWorkaround
+                : nil;
         // This will be autoreleased
         id<MTLRenderCommandEncoder> encoder = [commandBuffer
             renderCommandEncoderWithDescriptor:CreateMTLRenderPassDescriptor(
-                                                   renderPassCmd,
-                                                   shouldEmulateStoreAndMSAAResolve)];
+                                                   ToBackend(GetDevice()), renderPassCmd,
+                                                   shouldEmulateStoreAndMSAAResolve,
+                                                   resolveTexturesForWorkaroundPtr)];
 
         // Set default values for push constants
         vertexPushConstants.fill(0);
@@ -663,8 +765,19 @@ namespace dawn_native { namespace metal {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
                     [encoder endEncoding];
-                    if (renderPassCmd->sampleCount > 1 && shouldEmulateStoreAndMSAAResolve) {
-                        ResolveInAnotherRenderPass(commandBuffer, renderPassCmd);
+                    if (renderPassCmd->sampleCount > 1) {
+                        if (shouldEmulateStoreAndMSAAResolve) {
+                            ResolveInAnotherRenderPass(commandBuffer, renderPassCmd,
+                                                       resolveTexturesForWorkaroundPtr);
+                        }
+                        if (resolveTexturesForWorkaroundPtr != nil) {
+                            CopyIntoTrueResolveTarget(commandBuffer, renderPassCmd,
+                                                      resolveTexturesForWorkaroundPtr,
+                                                      blitEncoders);
+                            for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+                                [resolveTexturesForWorkaround[i] release];
+                            }
+                        }
                     }
                     return;
                 } break;
