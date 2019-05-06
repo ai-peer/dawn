@@ -13,9 +13,14 @@
 // limitations under the License.
 
 #include "dawn_wire/WireClient.h"
+#include "dawn_platform/DawnPlatform.h"
 #include "dawn_wire/client/Client.h"
 
 namespace dawn_wire {
+
+    void SetPlatform(dawn_platform::Platform* platform) {
+        dawn_platform::Platform::Set(platform);
+    }
 
     WireClient::WireClient(CommandSerializer* serializer) : mImpl(new client::Client(serializer)) {
     }
