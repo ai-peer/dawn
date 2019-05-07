@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f2fabee_6c6fb4ab",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-07T15:00:08Z",
+      "side": 1,
+      "message": "nit: we don\u0027t need to explicitly number these. Removing the values would have the same result and would ensure we don\u0027t forget to update EnumCount.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 22
+      },
+      "revId": "b334bdc9464444d6bece24de354210c75eb5b24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89958f58_f4727030",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-07T15:00:08Z",
+      "side": 1,
+      "message": "nit: could replace with an MTLOriginMake in the copyFromTexture call.",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 29
+      },
+      "revId": "b334bdc9464444d6bece24de354210c75eb5b24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aca3a42_de7666c0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-07T15:00:08Z",
+      "side": 1,
+      "message": "nit: Extent3D",
+      "range": {
+        "startLine": 272,
+        "startChar": 22,
+        "endLine": 272,
+        "endChar": 26
+      },
+      "revId": "b334bdc9464444d6bece24de354210c75eb5b24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80c98b53_10493413",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-07T15:00:08Z",
+      "side": 1,
+      "message": "Shouldn\u0027t that be off on AMD?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 68
+      },
+      "revId": "b334bdc9464444d6bece24de354210c75eb5b24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e324365b_61f3287c",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-07T15:00:08Z",
+      "side": 1,
+      "message": "Can we add another test configuration with the workaround forced on?",
+      "revId": "b334bdc9464444d6bece24de354210c75eb5b24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

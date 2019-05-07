@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "439f6ee0_422d3586",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-07T15:00:08Z",
+      "side": 1,
+      "message": "I\u0027m sorry, maybe it is my jetlagged brain but I find it extremely difficult to understand the current iteration of the code and I no idea whether it is correct or not. This is because state is passed from function to function and is modified in different places.\n\nHaving \"transforms\" on the BeginRenderPassCmd that can be composed would be more clear imho.",
+      "parentUuid": "4cd853ec_1438bb15",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5b3a711_d4391174",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
