@@ -680,6 +680,11 @@ namespace dawn_native { namespace opengl {
             }
         }
 
+        // Set viewport and scissor rectangles so that we can clear the attachments in the right
+        // area.
+        glViewport(0, 0, renderPass->width, renderPass->height);
+        glScissor(0, 0, renderPass->width, renderPass->height);
+
         // Clear framebuffer attachments as needed
         {
             for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
@@ -733,8 +738,6 @@ namespace dawn_native { namespace opengl {
         // Set defaults for dynamic state
         persistentPipelineState.SetDefaultState();
         glBlendColor(0, 0, 0, 0);
-        glViewport(0, 0, renderPass->width, renderPass->height);
-        glScissor(0, 0, renderPass->width, renderPass->height);
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
