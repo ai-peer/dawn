@@ -67,6 +67,14 @@ namespace dawn_native {
                "not support MTLStoreActionStoreAndMultisampleResolve. To support StoreOp::Store on "
                "those platforms, we should do MSAA resolve in another render pass after ending the "
                "previous one.",
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=56"}},
+             {Toggle::AlwaysResolveIntoZeroLevelAndLayer,
+              {"always_resolve_into_zero_level_and_layer",
+               "When the resolve target is a texture view that is created on the non-zero level or "
+               "layer of a texture, we first resolve into a temporarily 2D texture with only one "
+               "mipmap level and one array layer, and copy the result of MSAA resolve into the "
+               "true resolve target. This workaround is enabled by default on the Metal drivers "
+               "that have bugs when setting non-zero resolveLevel or resolveSlice.",
                "https://bugs.chromium.org/p/dawn/issues/detail?id=56"}}}};
 
     }  // anonymous namespace
