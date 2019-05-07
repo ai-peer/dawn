@@ -410,8 +410,6 @@ TEST_P(MultisampledRenderingTest, ResolveOneMultisampledTextureTwice) {
 
 // Test using a layer of a 2D texture as resolve target works correctly.
 TEST_P(MultisampledRenderingTest, ResolveIntoOneMipmapLevelOf2DTexture) {
-    // TODO(jiawei.shao@intel.com): investigate why this case fails on Intel and Nvidia.
-    DAWN_SKIP_TEST_IF(IsMetal() && (IsIntel() || IsNvidia()));
     constexpr uint32_t kBaseMipLevel = 2;
 
     dawn::TextureViewDescriptor textureViewDescriptor;
@@ -450,8 +448,6 @@ TEST_P(MultisampledRenderingTest, ResolveIntoOneMipmapLevelOf2DTexture) {
 
 // Test using a level or a layer of a 2D array texture as resolve target works correctly.
 TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
-    // TODO(jiawei.shao@intel.com): investigate why this case fails on Intel and Nvidia.
-    DAWN_SKIP_TEST_IF(IsMetal() && (IsIntel() || IsNvidia()));
     dawn::TextureView multisampledColorView2 =
         CreateTextureForOutputAttachment(kColorFormat, kSampleCount).CreateDefaultView();
 
