@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e1a288e_36465185",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-07T03:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1fc89b6_62eaa9e9",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b8c7bb24_8079f97e",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2019-04-29T09:35:44Z",
       "side": 1,
       "message": "[1] I have concerns that this logic is duplicated. How about doing the following:\n\nHave the EncodeRenderPass function renamed to EncodeRenderPassImpl and make a new EncodeRenderPass that looks if we have workarounds and creates a new BeginRenderPassCmd that\u0027s modified to do the workarounds. This way all the workaround magic is there and not duplicated. This would also work for shouldEmulateStoreAndMSAAREsolve that could be handled entirely in EncodeRenderPass. Of course this would require being able to create fake texture views, that\u0027s probably ok.",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cd853ec_1438bb15",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-07T03:11:52Z",
+      "side": 1,
+      "message": "I suggest we use another simpler way to do this:\nPass resolveTexturesForWorkaround into CreateMTLRenderPassDescriptorImpl, and if the temporary resolve texture exists in resolveTexturesForWorkaround, then we use it in the newly-created MTLRenderPassDescriptor.\n\nI use this method here because I find it a bit complex to create a texture view object as a wrapper of the id\u003cMTLTexture\u003e used for workaround. Using this method we only need to manage the lifecycle of id\u003cMTLTexture\u003e, and we do not need to care about the ones of the textures and texture views.\n\nHow do you think about it?",
+      "parentUuid": "b8c7bb24_8079f97e",
       "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "276d3c6a_65fdb22f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-07T03:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9516a4ba_acccdb90",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ba79cc1_3d92e9e5",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "2fdd019d_fbb7f7f5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-07T03:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ba79cc1_3d92e9e5",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f72e1dc_dbe6ceb7",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -101,6 +173,24 @@
       "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "422eb396_68b259a2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-07T03:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f72e1dc_dbe6ceb7",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
