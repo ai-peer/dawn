@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84cd8b2e_8ff72301",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-07T18:29:43Z",
+      "side": 1,
+      "message": "It\u0027s important to keep the old comment attached to these calls (\"Set defaults for dynamic state\").\n\nWould it work to just move the entire \"Set defaults for dynamic state\" block up to here? And then maybe rewrite the comment as \"Set defaults for dynamic state (before executing clears and commands).\"",
+      "revId": "677976910777872b1b07d9fa106c8b4135fc9ce0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
