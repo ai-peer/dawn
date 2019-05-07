@@ -31,7 +31,23 @@ namespace dawn_native {
             ErrorBuffer(DeviceBase* device) : BufferBase(device, ObjectBase::kError) {
             }
 
+            static ErrorBuffer* MakeMapped(DeviceBase* device,
+                                           uint64_t size,
+                                           uint8_t** mappedPointer) {
+                ASSERT(mappedPointer != nullptr);
+
+                ErrorBuffer* buffer = new ErrorBuffer(device);
+                buffer->mFakeMappedData = std::unique_ptr<uint8_t[]>(new uint8_t[size]);
+                *mappedPointer = buffer->mFakeMappedData.get();
+
+                return buffer;
+            }
+
           private:
+            void MapAtCreationImpl(uint8_t** mappedPointer) override {
+                UNREACHABLE();
+            }
+
             MaybeError SetSubDataImpl(uint32_t start,
                                       uint32_t count,
                                       const uint8_t* data) override {
@@ -45,11 +61,14 @@ namespace dawn_native {
                 UNREACHABLE();
             }
             void UnmapImpl() override {
-                UNREACHABLE();
+                ASSERT(mFakeMappedData);
+                mFakeMappedData.reset();
             }
             void DestroyImpl() override {
                 UNREACHABLE();
             }
+
+            std::unique_ptr<uint8_t[]> mFakeMappedData;
         };
 
     }  // anonymous namespace
@@ -104,6 +123,13 @@ namespace dawn_native {
         return new ErrorBuffer(device);
     }
 
+    // static
+    BufferBase* BufferBase::MakeErrorMapped(DeviceBase* device,
+                                            uint64_t size,
+                                            uint8_t** mappedPointer) {
+        return ErrorBuffer::MakeMapped(device, size, mappedPointer);
+    }
+
     uint32_t BufferBase::GetSize() const {
         ASSERT(!IsError());
         return mSize;
@@ -112,6 +138,22 @@ namespace dawn_native {
     dawn::BufferUsageBit BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
+    }
+
+    MaybeError BufferBase::MapAtCreation(uint8_t** mappedPointer) {
+        ASSERT(!IsError());
+        ASSERT(mappedPointer != nullptr);
+
+        mState = BufferState::Mapped;
+        if ((mUsage & dawn::BufferUsageBit::MapWrite) == 0) {
+            // TODO(enga): Support non-mappable buffers with a staging buffer.
+            return DAWN_VALIDATION_ERROR("MapWrite usage required");
+        }
+
+        MapAtCreationImpl(mappedPointer);
+        ASSERT(*mappedPointer != nullptr);
+
+        return {};
     }
 
     MaybeError BufferBase::ValidateCanUseInSubmitNow() const {
@@ -239,6 +281,11 @@ namespace dawn_native {
     }
 
     void BufferBase::Unmap() {
+        if (IsError()) {
+            // It is an error to call Unmap() on an ErrorBuffer, but we still need to reclaim the
+            // fake mapped staging data.
+            UnmapImpl();
+        }
         if (GetDevice()->ConsumedError(ValidateUnmap())) {
             return;
         }
