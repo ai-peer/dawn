@@ -2,6 +2,108 @@
   "comments": [
     {
       "key": {
+        "uuid": "e27970e9_172caf52",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "This should be a property of the layout because the value doesn\u0027t depend on the content of the bindgroup, only on its layout.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6051fefb_a0fac22f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "This should be done if the dynamicOffsetCount isn\u0027t zero. The logic needs to match the logic in the recording function otherwise we might be consuming a different number of bytes and have crashes.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae3ca0dc_57a5337f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e86bd61c_b3077bd9",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "The number of dynamic offsets should be exactly the number required by the layout I think.\n\nThe error would be something like \"danymicOffset count mismatch\"",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8123843d_d7daaf1c",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "We should also check (being careful about int overflows) that offset + dynamicOffset + size of the binding is \u003c\u003d bufferLength.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d813cbcb_26ea9340",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "nit: or we could have conversion function like NonDynamicBindingType that just converts DynamicUniformBuffer to UniformBuffer and the same for storage. It might make the logic slightly simpler.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62a017f8_b39980a7",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -19,6 +121,115 @@
         "endLine": 259,
         "endChar": 53
       },
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3ee4128_510e7d15",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "Let\u0027s not worry about this until we start benchmarking and profiling real applications. TBH I don\u0027t think it will be an issue.",
+      "parentUuid": "62a017f8_b39980a7",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 53
+      },
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "023c8886_587aff4a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b18c20b6_31ca987c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "Likewise we should do this only if dynamicOffsetCount is 0 to not risk carshes.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "036bba75_227e730f",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "nit: for simplicity we could do the loading from UBOs in the fragment shader so we don\u0027t need to pass a varying with the color.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deff6a58_29733220",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "nit: std::array\u003cuint32_t, kDynamicBufferAlignment / sizeof(uint32_t) + 2\u003e uniformData;, it should be filled with zeros in the constructor.\nThen\nuniformData[0] \u003d ...\nuniformData[1] \u003d ...\nuniformData[uniformData.length() -2] \u003d ...\nuniformData[uniformData.length() -1] \u003d ...",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "287a076b_8182d6a2",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-08T16:08:41Z",
+      "side": 1,
+      "message": "This should probably be a validation error. Same for some other places in this test.",
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
