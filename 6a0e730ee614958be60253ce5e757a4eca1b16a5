@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef0da30e_6f47de0d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-08T22:16:58Z",
+      "side": 1,
+      "message": "Going to add checking if the texture\u0027s been cleared here when that\u0027s implemented in the other CL (and other spots below)",
+      "revId": "6a0e730ee614958be60253ce5e757a4eca1b16a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
