@@ -476,6 +476,13 @@
                     {"name": "callback", "type": "device error callback"},
                     {"name": "userdata", "type": "callback userdata"}
                 ]
+            },
+            {
+                "name": "set toggle",
+                "args": [
+                    {"name": "toggle", "type": "toggle"},
+                    {"name": "is enabled", "type": "bool"}
+                ]
             }
         ]
     },
@@ -1067,6 +1074,14 @@
         ],
         "TODO": [
             "jiawei.shao@intel.com: support 1D and 3D texture views"
+        ]
+    },
+    "toggle" : {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "EmulateStoreAndMSAAResolve"},
+            {"value": 1, "name": "NonzeroClearResourcesOnCreationForTesting"},
+            {"value": 2, "name": "EnumCount"}
         ]
     },
     "vertex format": {

@@ -489,8 +489,8 @@ namespace dawn_native {
         return mDynamicUploader.get();
     }
 
-    void DeviceBase::SetToggle(Toggle toggle, bool isEnabled) {
-        mTogglesSet.SetToggle(toggle, isEnabled);
+    void DeviceBase::SetToggle(dawn::Toggle toggle, bool isEnabled) {
+        mTogglesSet.SetToggle((Toggle) toggle, isEnabled);
     }
 
 }  // namespace dawn_native
