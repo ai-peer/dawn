@@ -134,9 +134,9 @@ namespace dawn_native {
 
         std::vector<const char*> GetTogglesUsed() const;
         bool IsToggleEnabled(Toggle toggle) const;
+        void SetToggle(dawn::Toggle toggle, bool isEnabled);
 
       protected:
-        void SetToggle(Toggle toggle, bool isEnabled);
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
