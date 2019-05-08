@@ -78,7 +78,7 @@ namespace dawn_native { namespace metal {
         // TODO(jiawei.shao@intel.com): check iOS feature sets
         bool emulateStoreAndMSAAResolve =
             ![mMtlDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v2];
-        SetToggle(Toggle::EmulateStoreAndMSAAResolve, emulateStoreAndMSAAResolve);
+        SetToggle(dawn::Toggle::EmulateStoreAndMSAAResolve, emulateStoreAndMSAAResolve);
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
