@@ -274,6 +274,10 @@ namespace dawn_native { namespace vulkan {
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
                 texture->TransitionUsageNow(commands, usages.textureUsages[i]);
+                if (texture->GetDevice()->IsToggleEnabled(
+                        Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                    texture->NonzeroTextureClearForTesting(commands);
+                }
             }
         };
 
@@ -308,10 +312,16 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    if (device->IsToggleEnabled(
+                            Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                        ToBackend(dst.texture)->NonzeroTextureClearForTesting(commands);
+                    }
+
                     ToBackend(src.buffer)
                         ->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferSrc);
                     ToBackend(dst.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferDst);
+
 
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
@@ -331,10 +341,16 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    if (device->IsToggleEnabled(
+                            Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                        ToBackend(src.texture)->NonzeroTextureClearForTesting(commands);
+                    }
+
                     ToBackend(src.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferSrc);
                     ToBackend(dst.buffer)
                         ->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferDst);
+
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkBuffer dstBuffer = ToBackend(dst.buffer)->GetHandle();
@@ -352,6 +368,12 @@ namespace dawn_native { namespace vulkan {
                         mCommands.NextCommand<CopyTextureToTextureCmd>();
                     TextureCopy& src = copy->source;
                     TextureCopy& dst = copy->destination;
+
+                    if (device->IsToggleEnabled(
+                            Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                        ToBackend(dst.texture)->NonzeroTextureClearForTesting(commands);
+                        ToBackend(src.texture)->NonzeroTextureClearForTesting(commands);
+                    }
 
                     ToBackend(src.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferSrc);
