@@ -274,6 +274,10 @@ namespace dawn_native { namespace vulkan {
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
                 texture->TransitionUsageNow(commands, usages.textureUsages[i]);
+                if (texture->GetDevice()->IsToggleEnabled(
+                        Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                    texture->NonzeroTextureClearForTesting(commands);
+                }
             }
         };
 
@@ -313,6 +317,11 @@ namespace dawn_native { namespace vulkan {
                     ToBackend(dst.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferDst);
 
+                    if (device->IsToggleEnabled(
+                            Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                        ToBackend(dst.texture)->NonzeroTextureClearForTesting(commands);
+                    }
+
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
@@ -336,6 +345,11 @@ namespace dawn_native { namespace vulkan {
                     ToBackend(dst.buffer)
                         ->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferDst);
 
+                    if (device->IsToggleEnabled(
+                            Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                        ToBackend(src.texture)->NonzeroTextureClearForTesting(commands);
+                    }
+
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkBuffer dstBuffer = ToBackend(dst.buffer)->GetHandle();
 
@@ -357,6 +371,12 @@ namespace dawn_native { namespace vulkan {
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferSrc);
                     ToBackend(dst.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferDst);
+
+                    if (device->IsToggleEnabled(
+                            Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+                        ToBackend(dst.texture)->NonzeroTextureClearForTesting(commands);
+                        ToBackend(src.texture)->NonzeroTextureClearForTesting(commands);
+                    }
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
