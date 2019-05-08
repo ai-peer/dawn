@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "c9d3d9b2_24072575",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-08T08:45:38Z",
+      "side": 1,
+      "message": "I\u0027m sorry that I should have written the patch in a clearer logic...\n\nIn the latest version I create a new BeginRenderPassCmd with ResolveTarget unset if \"store and MSAA resolve\" should be emulated. There are only two states that are changed:\n1. The newly created BeginRenderPassCmd\n2. The array to contain the temporary resovle textures (resolveTexturesForWorkaround). It is created in CreateMTLRenderPassDescriptor if necessary, and passed into ResolveInAnotherRenderPass (as resolve target) and CopyIntoTrueResolveTarget(as the source of copy).\n\nI also directly pass resolveTexturesForWorkaround into CreateMTLRenderPassDescriptorImpl and the newly-created MTLRenderPassDescriptor will use the texture in resolveTexturesForWorkaround first if it exists. In this way we can directly manage the lifecycle of id\u003cMTLTexture\u003e in resolveTexturesForWorkaround instead creating and managing the wrappers of id\u003cMTLTexture\u003e (dawn_native::metal::Texture and dawn_native::metal::TextureView objects)",
+      "parentUuid": "439f6ee0_422d3586",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5b3a711_d4391174",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
