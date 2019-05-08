@@ -283,14 +283,30 @@ namespace dawn_native {
         const auto& layoutInfo = layout->GetBindingInfo();
         for (size_t i = 0; i < kMaxBindingsPerGroup; ++i) {
             const auto& moduleInfo = mBindingInfo[group][i];
+            const auto& layoutBindingType = layoutInfo.types[i];
 
             if (!moduleInfo.used) {
                 continue;
             }
 
-            if (moduleInfo.type != layoutInfo.types[i]) {
-                return false;
+            // DynamicUniformBuffer and DynamicStorageBuffer are uniform buffer and
+            // storage buffer in shader. Their compatible verification are different.
+            if (layoutBindingType == dawn::BindingType::DynamicUniformBuffer ||
+                layoutBindingType == dawn::BindingType::DynamicStorageBuffer) {
+                if (layoutBindingType == dawn::BindingType::DynamicUniformBuffer &&
+                    moduleInfo.type != dawn::BindingType::UniformBuffer) {
+                    return false;
+                }
+
+                if (layoutBindingType == dawn::BindingType::DynamicStorageBuffer &&
+                    moduleInfo.type != dawn::BindingType::StorageBuffer)
+                    return false;
+            } else {
+                if (moduleInfo.type != layoutInfo.types[i]) {
+                    return false;
+                }
             }
+
             if ((layoutInfo.visibilities[i] & StageBit(mExecutionModel)) == 0) {
                 return false;
             }

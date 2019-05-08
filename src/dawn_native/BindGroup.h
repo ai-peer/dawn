@@ -48,6 +48,7 @@ namespace dawn_native {
         BufferBinding GetBindingAsBufferBinding(size_t binding);
         SamplerBase* GetBindingAsSampler(size_t binding);
         TextureViewBase* GetBindingAsTextureView(size_t binding);
+        uint32_t GetDynamicBufferCount() const;
 
       private:
         BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);
@@ -56,6 +57,8 @@ namespace dawn_native {
         std::array<Ref<ObjectBase>, kMaxBindingsPerGroup> mBindings;
         std::array<uint32_t, kMaxBindingsPerGroup> mOffsets;
         std::array<uint32_t, kMaxBindingsPerGroup> mSizes;
+
+        uint32_t mDynamicBufferCount = 0;
     };
 
 }  // namespace dawn_native

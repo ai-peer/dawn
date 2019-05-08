@@ -96,16 +96,26 @@ namespace dawn_native {
             return;
         }
 
-        // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-        if (dynamicOffsetCount != 0) {
-            mTopLevelEncoder->HandleError("Dynamic Buffer Offset not supported yet");
-            return;
+        if (group->GetDynamicBufferCount() < dynamicOffsetCount) {
+            mTopLevelEncoder->HandleError("Offsets overflow");
+        }
+
+        for (uint32_t i = 0; i < dynamicOffsetCount; ++i) {
+            if (dynamicOffsets[i] % kMinDynamicBufferOffsetAlignment != 0) {
+                mTopLevelEncoder->HandleError("Dynamic Buffer Offset need to be aligned");
+                return;
+            }
         }
 
         SetBindGroupCmd* cmd = mAllocator->Allocate<SetBindGroupCmd>(Command::SetBindGroup);
         new (cmd) SetBindGroupCmd;
         cmd->index = groupIndex;
         cmd->group = group;
+        cmd->dynamicOffsetCount = dynamicOffsetCount;
+        if (dynamicOffsetCount > 0) {
+            uint64_t* offsets = mAllocator->AllocateData<uint64_t>(cmd->dynamicOffsetCount);
+            memcpy(offsets, dynamicOffsets, dynamicOffsetCount * sizeof(uint64_t));
+        }
     }
 
     void ProgrammablePassEncoder::SetPushConstants(dawn::ShaderStageBit stages,
