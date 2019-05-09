@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "fc03f986_8fdbc4d7",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-09T00:00:32Z",
+      "side": 1,
+      "message": "Sorry to miss this comment...\nAlthough the related end2end tests can pass on the MacOS-AMD try bot, we find this driver bug can also be reproduced on some other AMD GPUs (e.g. Macbook Pro 2018), so I decide to enable this workaround on all Metal drivers.",
+      "parentUuid": "80c98b53_10493413",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 68
+      },
+      "revId": "b334bdc9464444d6bece24de354210c75eb5b24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e324365b_61f3287c",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 23
