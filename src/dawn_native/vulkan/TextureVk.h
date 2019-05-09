@@ -40,6 +40,8 @@ namespace dawn_native { namespace vulkan {
         // TODO(cwallez@chromium.org): coalesce barriers and do them early when possible.
         void TransitionUsageNow(VkCommandBuffer commands, dawn::TextureUsageBit usage);
 
+        void NonzeroTextureClearForTesting();
+
       private:
         void DestroyImpl() override;
 
