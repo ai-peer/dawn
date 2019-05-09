@@ -121,11 +121,11 @@ namespace dawn_native { namespace vulkan {
         }
 #endif
 #if defined(DAWN_ENABLE_ASSERTS)
-        if (mGlobalInfo.standardValidation) {
+        if (GetInstance()->IsValidationLayersEnabled() && mGlobalInfo.standardValidation) {
             layersToRequest.push_back(kLayerNameLunargStandardValidation);
             usedKnobs.standardValidation = true;
         }
-        if (mGlobalInfo.debugReport) {
+        if (GetInstance()->IsValidationLayersEnabled() && mGlobalInfo.debugReport) {
             extensionsToRequest.push_back(kExtensionNameExtDebugReport);
             usedKnobs.debugReport = true;
         }

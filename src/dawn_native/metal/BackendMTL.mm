@@ -13,7 +13,9 @@
 // limitations under the License.
 
 #include "dawn_native/metal/BackendMTL.h"
-
+#ifdef DAWN_ENABLE_ASSERTS
+#    include "dawn_native/Instance.h"
+#endif
 #include "dawn_native/MetalBackend.h"
 #include "dawn_native/metal/DeviceMTL.h"
 
@@ -152,6 +154,11 @@ namespace dawn_native { namespace metal {
     // Implementation of the Metal backend's BackendConnection
 
     Backend::Backend(InstanceBase* instance) : BackendConnection(instance, BackendType::Metal) {
+#ifdef DAWN_ENABLE_ASSERTS
+        if (GetInstance()->IsValidationLayersEnabled()) {
+            setenv("METAL_DEVICE_WRAPPER_TYPE", "1", 1);
+        }
+#endif
     }
 
     std::vector<std::unique_ptr<AdapterBase>> Backend::DiscoverDefaultAdapters() {

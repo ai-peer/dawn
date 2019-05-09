@@ -109,9 +109,17 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
             continue;
         }
 
+        if (strcmp("--enable-validation-layers", argv[i]) == 0) {
+            mEnableValidationLayers = true;
+            continue;
+        }
+
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
-            std::cout << "\n\nUsage: " << argv[0] << " [GTEST_FLAGS...] [-w] \n";
-            std::cout << "  -w, --use-wire: Run the tests through the wire (defaults to no wire)";
+            std::cout << "\n\nUsage: " << argv[0]
+                      << " [GTEST_FLAGS...] [-w] [--enable-validation-layers]\n";
+            std::cout << "  -w, --use-wire: Run the tests through the wire (defaults to no wire)\n";
+            std::cout << "  --enable-validation-layers: Enable validation layers in DEBUG mode "
+                         "(defaults to disabled)\n";
             std::cout << std::endl;
             continue;
         }
@@ -122,7 +130,9 @@ void DawnTestEnvironment::SetUp() {
     ASSERT_TRUE(glfwInit());
 
     mInstance = std::make_unique<dawn_native::Instance>();
-
+#if defined(DAWN_ENABLE_ASSERTS)
+    mInstance->EnableValidationLayers(mEnableValidationLayers);
+#endif  // defined(DAWN_ENABLE_ASSERTS)
     static constexpr dawn_native::BackendType kAllBackends[] = {
         dawn_native::BackendType::D3D12,
         dawn_native::BackendType::Metal,
@@ -141,6 +151,8 @@ void DawnTestEnvironment::SetUp() {
     std::cout << "Testing configuration\n";
     std::cout << "---------------------\n";
     std::cout << "UseWire: " << (mUseWire ? "true" : "false") << "\n";
+    std::cout << "EnableValidationLayers: "
+              << (mInstance->IsValidationLayersEnabled() ? "true" : "false") << "\n";
     std::cout << "\n";
 
     // Preparing for outputting hex numbers

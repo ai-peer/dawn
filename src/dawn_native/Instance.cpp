@@ -224,4 +224,12 @@ namespace dawn_native {
         return false;
     }
 
+    void InstanceBase::EnableValidationLayers(bool enableValidationLayers) {
+        mEnableValidationLayers = enableValidationLayers;
+    }
+
+    bool InstanceBase::IsValidationLayersEnabled() {
+        return mEnableValidationLayers;
+    }
+
 }  // namespace dawn_native
