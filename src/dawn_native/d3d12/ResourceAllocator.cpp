@@ -55,10 +55,23 @@ namespace dawn_native { namespace d3d12 {
         }
 
         ComPtr<ID3D12Resource> resource;
+        D3D12_CLEAR_VALUE* clear_value = nullptr;
 
+        // if(mDevice->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
+        //  (resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE1D ||
+        //     resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE2D ||
+        //     resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE3D) )
+        //  {
+        //     clear_value = (D3D12_CLEAR_VALUE*)alloca(sizeof(D3D12_CLEAR_VALUE));
+        //     clear_value->Format = resourceDescriptor.Format;
+        //     clear_value->Color[0] = 1;
+        //     clear_value->Color[1] = 1;
+        //     clear_value->Color[2] = 1;
+        //     clear_value->Color[3] = 1;
+        // }
         // TODO(enga@google.com): Use CreatePlacedResource
         ASSERT_SUCCESS(mDevice->GetD3D12Device()->CreateCommittedResource(
-            heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage, nullptr,
+            heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage, clear_value,
             IID_PPV_ARGS(&resource)));
 
         return resource;

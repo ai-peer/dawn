@@ -69,4 +69,17 @@ TEST_F(ToggleValidationTest, OverrideToggleUsage) {
         ASSERT_EQ(0u, toggleNames.size());
     }
 }
+
+// Tests querying for NonzeroClearResourcesOnCreationForTesting toggle works
+TEST_F(ToggleValidationTest, QueryToggleInfoClearTexture) {
+    // Query with a valid toggle name
+    {
+        const char* kValidToggleName = "nonzero_clear_resources_on_creation_for_testing";
+        const dawn_native::ToggleInfo* toggleInfo = instance->GetToggleInfo(kValidToggleName);
+        ASSERT_NE(nullptr, toggleInfo);
+        ASSERT_NE(nullptr, toggleInfo->name);
+        ASSERT_NE(nullptr, toggleInfo->description);
+        ASSERT_NE(nullptr, toggleInfo->url);
+    }
+}
 }  // anonymous namespace
