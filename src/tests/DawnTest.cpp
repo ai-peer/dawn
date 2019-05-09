@@ -109,9 +109,16 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
             continue;
         }
 
+        if (strcmp("--enable-validation-layers", argv[i]) == 0) {
+            mEnableValidationLayers = true;
+            continue;
+        }
+
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
             std::cout << "\n\nUsage: " << argv[0] << " [GTEST_FLAGS...] [-w] \n";
             std::cout << "  -w, --use-wire: Run the tests through the wire (defaults to no wire)";
+            std::cout
+                << "  --enable-validation-layers: Enable validation layers (defaults to disabled)";
             std::cout << std::endl;
             continue;
         }
@@ -122,6 +129,10 @@ void DawnTestEnvironment::SetUp() {
     ASSERT_TRUE(glfwInit());
 
     mInstance = std::make_unique<dawn_native::Instance>();
+
+    if (mEnableValidationLayers) {
+        mInstance->EnableValidationLayers(mEnableValidationLayers);
+    }
 
     static constexpr dawn_native::BackendType kAllBackends[] = {
         dawn_native::BackendType::D3D12,
@@ -141,6 +152,7 @@ void DawnTestEnvironment::SetUp() {
     std::cout << "Testing configuration\n";
     std::cout << "---------------------\n";
     std::cout << "UseWire: " << (mUseWire ? "true" : "false") << "\n";
+    std::cout << "EnableValidationLayers: " << (mEnableValidationLayers ? "true" : "false") << "\n";
     std::cout << "\n";
 
     // Preparing for outputting hex numbers

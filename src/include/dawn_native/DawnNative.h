@@ -125,6 +125,10 @@ namespace dawn_native {
 
         const ToggleInfo* GetToggleInfo(const char* toggleName);
 
+        // Enable backend's validation layers if it has.
+        void EnableValidationLayers(bool enableValidationLayers);
+        bool IsValidationLayersEnabled();
+
       private:
         InstanceBase* mImpl = nullptr;
     };

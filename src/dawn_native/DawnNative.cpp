@@ -99,4 +99,11 @@ namespace dawn_native {
         return mImpl->GetToggleInfo(toggleName);
     }
 
+    void Instance::EnableValidationLayers(bool enableValidationLayers) {
+        mImpl->EnableValidationLayers(enableValidationLayers);
+    }
+
+    bool Instance::IsValidationLayersEnabled() {
+        return mImpl->IsValidationLayersEnabled();
+    }
 }  // namespace dawn_native
