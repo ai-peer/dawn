@@ -185,6 +185,24 @@
     },
     {
       "key": {
+        "uuid": "8b9ec6f1_101ed536",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-09T00:30:04Z",
+      "side": 1,
+      "message": "Yes, I tried guard this and ditto with if else, but it crashes when the dynamicOffsetCount isn\u0027t 0.... So I think it is still a remain issue.",
+      "parentUuid": "b18c20b6_31ca987c",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "036bba75_227e730f",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -230,6 +248,24 @@
       "writtenOn": "2019-05-08T16:08:41Z",
       "side": 1,
       "message": "This should probably be a validation error. Same for some other places in this test.",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cb57207_e2a66d01",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-09T00:30:04Z",
+      "side": 1,
+      "message": "But with uint32_t modification version in my local, they works fine :)",
+      "parentUuid": "287a076b_8182d6a2",
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
