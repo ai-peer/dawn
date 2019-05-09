@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "45728423_1aaf9174",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T16:49:40Z",
+      "side": 1,
+      "message": "Would it be possible to apply the two workarounds consecutively? Right now I find it a little confusing because the code to handle both resolving into layer 0 and resolving in a separate render pass happens together.\n\nBoth workarounds get applied in CreateMTLRenderPassDescriptor which makes it hard to follow. I like the way you separate them in EndRenderPassCmd into ResolveInAnotherRenderPass and CopyIntoTrueResolveTarget much better.\n\nI like Corentin\u0027s suggestion of having iterative transforms. Maybe instead of transforming BeginRenderPassCmd, you can apply transforms to the MTLRenderPassDescriptor. That way you don\u0027t have to manage the Dawn objects.\n\nEmulateStoreAndMSAAResolve would:\n - Set the storeAction and clear the resolveTarget.\n - Produce a MTLRenderPassDescriptor that does the resolve.\n\nAlwaysResolveIntoZeroLevelAndLayer would:\n - In EndRenderPass, transform the MTLRenderPassDescriptor so it resolves into the 0-level of new textures and encode a copy",
+      "parentUuid": "c9d3d9b2_24072575",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5b3a711_d4391174",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
