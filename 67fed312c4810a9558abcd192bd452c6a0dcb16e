@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9329082_3b430632",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "We don\u0027t need to expose this. (see comment in test)",
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bac55ccd_7bb2b690",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "Don\u0027t need to expose this either (see comment in test)",
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "850d28ce_34d87179",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "And we wouldn\u0027t need this dawn:: namespace (see comment in test)",
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebd455ba_e5a330cb",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "This can stay protected  (see comment in test)",
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c44f5d7e_0bedc393",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "Or this namespace (see comment in test)",
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c64b72fb_40a74979",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "We can enable this toggle when the test is instantiated like here:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/tests/end2end/MultisampledRenderingTests.cpp?q\u003dMultiSampledRenderin\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d518\n\nThen we don\u0027t need to add SetToggle to Device.\n\nIf this workaround is \"NonzeroClearResourcesOnCreationForTesting\" should it be enabled in all other tests as well?",
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bd5a93c_5e9952cb",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "nit: cleared",
+      "range": {
+        "startLine": 48,
+        "startChar": 21,
+        "endLine": 48,
+        "endChar": 27
+      },
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d70f7a8_d4358cbd",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-09T17:28:02Z",
+      "side": 1,
+      "message": "nit: disabled",
+      "range": {
+        "startLine": 49,
+        "startChar": 53,
+        "endLine": 49,
+        "endChar": 60
+      },
+      "revId": "67fed312c4810a9558abcd192bd452c6a0dcb16e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
