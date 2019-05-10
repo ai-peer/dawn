@@ -21,7 +21,13 @@
 #include <string>
 #include <vector>
 
+namespace dawn_platform {
+    class Platform;
+}  // namespace dawn_platform
+
 namespace dawn_native {
+
+    DAWN_NATIVE_EXPORT void SetPlatform(dawn_platform::Platform* platform);
 
     struct PCIInfo {
         uint32_t deviceId = 0;
