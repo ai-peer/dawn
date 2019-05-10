@@ -16,6 +16,24 @@
       "revId": "031dda27ab27937fdf5d00fef2d18ee114053909",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d76520d3_41a72868",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-05-10T01:02:13Z",
+      "side": 1,
+      "message": "For the amount of VRAM? That shouldn\u0027t modify this dummy value. D3D doesn\u0027t offer a Vulkan-style \"device type\" flag. The D3D12 way is QueryVideoMemoryInfo but that comes later, ala GPU budgets.",
+      "parentUuid": "a0655c7e_12987596",
+      "revId": "031dda27ab27937fdf5d00fef2d18ee114053909",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
