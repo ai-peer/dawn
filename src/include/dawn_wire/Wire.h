@@ -20,7 +20,13 @@
 #include "dawn/dawn.h"
 #include "dawn_wire/dawn_wire_export.h"
 
+namespace dawn_platform {
+    class Platform;
+}  // namespace dawn_platform
+
 namespace dawn_wire {
+
+    DAWN_WIRE_EXPORT void SetPlatform(dawn_platform::Platform* platform);
 
     class DAWN_WIRE_EXPORT CommandSerializer {
       public:
