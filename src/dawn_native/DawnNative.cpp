@@ -15,10 +15,15 @@
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Instance.h"
+#include "dawn_platform/DawnPlatform.h"
 
 // Contains the entry-points into dawn_native
 
 namespace dawn_native {
+
+    void SetPlatform(dawn_platform::Platform* platform) {
+        dawn_platform::Platform::Set(platform);
+    }
 
     DawnProcTable GetProcsAutogen();
 
