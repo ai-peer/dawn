@@ -56,6 +56,7 @@ namespace dawn_native {
         MaybeError ValidateObject(const ObjectBase* object) const;
 
         AdapterBase* GetAdapter() const;
+        dawn_platform::Platform* GetPlatform() const;
 
         FenceSignalTracker* GetFenceSignalTracker() const;
 
@@ -221,6 +222,7 @@ namespace dawn_native {
         void SetDefaultToggles();
 
         AdapterBase* mAdapter = nullptr;
+        dawn_platform::Platform* mPlatform = nullptr;
 
         // The object caches aren't exposed in the header as they would require a lot of
         // additional includes.

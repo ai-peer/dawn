@@ -61,6 +61,9 @@ namespace dawn_native {
 
     DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
         : mAdapter(adapter) {
+        if (descriptor != nullptr) {
+            mPlatform = descriptor->platform;
+        }
         mCaches = std::make_unique<DeviceBase::Caches>();
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
@@ -110,6 +113,10 @@ namespace dawn_native {
 
     AdapterBase* DeviceBase::GetAdapter() const {
         return mAdapter;
+    }
+
+    dawn_platform::Platform* DeviceBase::GetPlatform() const {
+        return mPlatform;
     }
 
     FenceSignalTracker* DeviceBase::GetFenceSignalTracker() const {

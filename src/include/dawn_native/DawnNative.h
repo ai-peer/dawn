@@ -21,6 +21,10 @@
 #include <string>
 #include <vector>
 
+namespace dawn_platform {
+    class Platform;
+}  // namespace dawn_platform
+
 namespace dawn_native {
 
     struct PCIInfo {
@@ -53,6 +57,7 @@ namespace dawn_native {
         std::vector<const char*> requiredExtensions;
         std::vector<const char*> forceEnabledToggles;
         std::vector<const char*> forceDisabledToggles;
+        dawn_platform::Platform* platform = nullptr;
     };
 
     // A struct to record the information of a toggle. A toggle is a code path in Dawn device that
