@@ -13,6 +13,7 @@
 //* limitations under the License.
 
 #include "common/Assert.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 #include "dawn_wire/client/Client.h"
 
 #include <string>
@@ -54,6 +55,7 @@ namespace dawn_wire { namespace client {
     {% endfor %}
 
     const char* Client::HandleCommands(const char* commands, size_t size) {
+        TRACE_EVENT0(TRACE_DISABLED_BY_DEFAULT("gpu.dawn"), "Client::HandleCommands");
         while (size >= sizeof(ReturnWireCmd)) {
             ReturnWireCmd cmdId = *reinterpret_cast<const ReturnWireCmd*>(commands);
 

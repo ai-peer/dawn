@@ -21,6 +21,26 @@ import("generator/dawn_generator.gni")
 import("//testing/test.gni")
 
 ###############################################################################
+# dawn_platform
+###############################################################################
+
+static_library("dawn_platform") {
+  configs += [ "${dawn_root}/src/common:dawn_internal" ]
+
+  sources = [
+    "${dawn_root}/src/include/dawn_platform/DawnPlatform.h",
+    "src/dawn_platform/DawnPlatform.cpp",
+    "src/dawn_platform/tracing/EventTracer.cpp",
+    "src/dawn_platform/tracing/EventTracer.h",
+    "src/dawn_platform/tracing/TraceEvent.h",
+  ]
+
+  deps = [
+    "${dawn_root}/src/common",
+  ]
+}
+
+###############################################################################
 # libdawn_native
 ###############################################################################
 
@@ -70,6 +90,7 @@ source_set("libdawn_native_headers") {
 # except those that define exported symbols.
 source_set("libdawn_native_sources") {
   deps = [
+    ":dawn_platform",
     ":libdawn_native_headers",
     ":libdawn_native_utils_gen",
     "${dawn_root}/src/common",
@@ -363,6 +384,7 @@ dawn_component("libdawn_native") {
   ]
 
   deps = [
+    ":dawn_platform",
     ":libdawn_native_sources",
     "${dawn_root}/src/common",
   ]
@@ -416,6 +438,7 @@ dawn_component("libdawn_wire") {
   DEFINE_PREFIX = "DAWN_WIRE"
 
   deps = [
+    ":dawn_platform",
     ":libdawn_wire_gen",
     "${dawn_root}/src/common",
     "${dawn_root}/src/dawn_wire:libdawn_wire_headers",
