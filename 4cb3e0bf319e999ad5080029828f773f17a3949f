@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "6e9722c0_6d8dbe16",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-10T08:39:01Z",
+      "side": 1,
+      "message": "Hi Austin, thanks very much for your advice! I have followed your suggestion in the latest patch set and it looks much better.\n\nI\u0027m not sure if I have fully understood your idea. PTAL, thanks!",
+      "parentUuid": "45728423_1aaf9174",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5b3a711_d4391174",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
