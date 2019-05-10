@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24e5e919_5927e2e9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-10T15:15:06Z",
+      "side": 1,
+      "message": "nit: This function no longer needs to change. It can be the original code.",
+      "revId": "2d0d2bcdc43121996220db7a4787d6722e739ba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d88f6422_374ef02f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-10T15:15:06Z",
+      "side": 1,
+      "message": "nit: This array could be passed in as a const reference",
+      "revId": "2d0d2bcdc43121996220db7a4787d6722e739ba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cc78711_6fa58d63",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-10T15:15:06Z",
+      "side": 1,
+      "message": "nit: Check Toggle::AlwaysResolveIntoZeroLevelAndLayer",
+      "range": {
+        "startLine": 190,
+        "startChar": 20,
+        "endLine": 190,
+        "endChar": 55
+      },
+      "revId": "2d0d2bcdc43121996220db7a4787d6722e739ba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0812764_3f0f1d2c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-10T15:15:06Z",
+      "side": 1,
+      "message": "nit: This array could be passed in as a const reference.",
+      "revId": "2d0d2bcdc43121996220db7a4787d6722e739ba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20acafe3_3cfffed1",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-10T15:15:06Z",
+      "side": 1,
+      "message": "nit: I would rather you check\nGetDevice()-\u003eIsToggleEnabled(Toggle::AlwaysResolveIntoZeroLevelAndLayer)\n\nThis way, someone reading the code doesn\u0027t have to remember that |resolveTexturesForWorkaround| is not nil if and only if the toggle is enabled.",
+      "revId": "2d0d2bcdc43121996220db7a4787d6722e739ba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba2ad3ca_0589acf5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-10T15:15:06Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we need to conditionally assign this pointer.\n\nWe can check IsToggleEnabled(Toggle::AlwaysResolveIntoZeroLevelAndLayer) everywhere which I think is more clear.",
+      "range": {
+        "startLine": 772,
+        "startChar": 58,
+        "endLine": 772,
+        "endChar": 89
+      },
+      "revId": "2d0d2bcdc43121996220db7a4787d6722e739ba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "463e727c_ad182734",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 39
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-10T15:15:06Z",
+      "side": 1,
+      "message": "nit: Same here, I think it would be better to check\nGetDevice()-\u003eIsToggleEnabled(Toggle::AlwaysResolveIntoZeroLevelAndLayer)",
+      "revId": "2d0d2bcdc43121996220db7a4787d6722e739ba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
