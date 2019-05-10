@@ -37,6 +37,7 @@
 #include "dawn_native/vulkan/SwapChainVk.h"
 #include "dawn_native/vulkan/TextureVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 
 namespace dawn_native { namespace vulkan {
 

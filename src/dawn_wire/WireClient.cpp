@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_wire/WireClient.h"
+#include "dawn_platform/DawnPlatform.h"
 #include "dawn_wire/client/Client.h"
 
 namespace dawn_wire {
