@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a611946_f226ff9e",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-10T21:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a725c218_14908eb4",
+      "revId": "1f76c287ca6d6e586ce3e499b749c967d5a7116e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a27792c_b07731b4",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 10
@@ -33,6 +51,24 @@
       "revId": "1f76c287ca6d6e586ce3e499b749c967d5a7116e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35259d86_1dc4e23f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-10T21:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a27792c_b07731b4",
+      "revId": "1f76c287ca6d6e586ce3e499b749c967d5a7116e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "61930fda_e0b9c9f1",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-10T21:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "123115b4_90326d64",
+      "revId": "1f76c287ca6d6e586ce3e499b749c967d5a7116e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3580f239_e60bdd07",
         "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
         "patchSetId": 10
@@ -67,6 +121,24 @@
       "revId": "1f76c287ca6d6e586ce3e499b749c967d5a7116e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97cb49df_67687c1c",
+        "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-10T21:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3580f239_e60bdd07",
+      "revId": "1f76c287ca6d6e586ce3e499b749c967d5a7116e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
