@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d708a942_8e66e954",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-10T21:52:55Z",
+      "side": 1,
+      "message": "nit: this should be an ASSERT, right now if it is false the test will still run without failing.",
+      "range": {
+        "startLine": 303,
+        "startChar": 8,
+        "endLine": 303,
+        "endChar": 81
+      },
+      "revId": "c3cd6e4030b7b9e31e43bbfe8e299bb918ccefc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "919bba2d_4c932dd5",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-10T21:52:55Z",
+      "side": 1,
+      "message": "u-nit: Could be a single kSize",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "c3cd6e4030b7b9e31e43bbfe8e299bb918ccefc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aea7d786_28a2aee5",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-10T21:52:55Z",
+      "side": 1,
+      "message": "nit: constexpr (might need to make the constructor constexpr) and kFilledWithOnes.",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "c3cd6e4030b7b9e31e43bbfe8e299bb918ccefc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b314831c_5e426f7f",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-10T21:52:55Z",
+      "side": 1,
+      "message": "nit: constexpr uint32_t kMipLevels",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 22
+      },
+      "revId": "c3cd6e4030b7b9e31e43bbfe8e299bb918ccefc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5be78460_71f6c517",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-10T21:52:55Z",
+      "side": 1,
+      "message": "nit: Not sure why we need logic here when this is handling a single case. You could just use kHeight \u003e\u003e 2 and kWidth \u003e\u003e2 in the EXPECT_TEXTURE_RGBA8_EQ. Also if that\u0027s more convenient, here and in the other tests you can check a single pixel.",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 73,
+        "endChar": 6
+      },
+      "revId": "c3cd6e4030b7b9e31e43bbfe8e299bb918ccefc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
