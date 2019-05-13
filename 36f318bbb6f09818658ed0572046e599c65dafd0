@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a73153f5_68ebe5d8",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-13T21:00:08Z",
+      "side": 1,
+      "message": "One of these can be 0 if the texture is not square and the baseMipmapLevel is greater than lg(min(width,height)). Do these need to be clamped to be \u003e\u003d1?\n\nDo we have a helper to compute the size of a mipmap level? If not it would be best to add that.",
+      "revId": "36f318bbb6f09818658ed0572046e599c65dafd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6698d47_606caaff",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 42
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-13T21:00:08Z",
+      "side": 1,
+      "message": "Assert (*resolveTexturesForWorkaround)[i] is nil before this?",
+      "revId": "36f318bbb6f09818658ed0572046e599c65dafd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
