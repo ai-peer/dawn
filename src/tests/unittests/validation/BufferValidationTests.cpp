@@ -82,6 +82,14 @@ class BufferValidationTest : public ValidationTest {
             return device.CreateBuffer(&descriptor);
         }
 
+        dawn::CreateBufferMappedResult CreateBufferMapped(uint32_t size) {
+            dawn::BufferDescriptor descriptor;
+            descriptor.size = size;
+            descriptor.usage = dawn::BufferUsageBit::MapWrite;
+
+            return device.CreateBufferMapped(&descriptor);
+        }
+
         dawn::Queue queue;
 
     private:
@@ -181,6 +189,14 @@ TEST_F(BufferValidationTest, MapWriteSuccess) {
     queue.Submit(0, nullptr);
 
     buf.Unmap();
+}
+
+// Test the success case for CreateBufferMapped
+TEST_F(BufferValidationTest, CreateBufferMappedSuccess) {
+    dawn::CreateBufferMappedResult result = CreateBufferMapped(4);
+    ASSERT_NE(result.data, nullptr);
+    ASSERT_EQ(result.dataLength, 4u);
+    result.buffer.Unmap();
 }
 
 // Test map reading a buffer with wrong current usage
