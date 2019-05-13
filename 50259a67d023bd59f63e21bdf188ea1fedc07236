@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "affa60e6_2138459b",
+        "filename": "src/dawn_native/Instance.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-13T21:06:02Z",
+      "side": 1,
+      "message": "Or instead of this, maybe \"EnableBackendValidation\"/\"IsBackendValidationEnabled\"?",
+      "parentUuid": "ba233e48_010952d4",
+      "range": {
+        "startLine": 55,
+        "startChar": 13,
+        "endLine": 55,
+        "endChar": 15
+      },
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18475211_377b9a56",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 2
@@ -138,6 +162,29 @@
       "writtenOn": "2019-05-13T17:34:31Z",
       "side": 1,
       "message": "Can we also have a shortcut for it, like \"-l\" for layers?",
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a54c0db1_ca64f2c8",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-13T21:06:02Z",
+      "side": 1,
+      "message": "Seems like this will no longer be debug-only if the #ifs are removed, so update this string.",
+      "range": {
+        "startLine": 121,
+        "startChar": 81,
+        "endLine": 121,
+        "endChar": 94
+      },
       "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
