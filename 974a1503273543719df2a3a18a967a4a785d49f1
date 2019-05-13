@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d1c6129_f7efe455",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-13T17:34:31Z",
+      "side": 0,
+      "message": "nit: unrelated change?",
+      "revId": "974a1503273543719df2a3a18a967a4a785d49f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
