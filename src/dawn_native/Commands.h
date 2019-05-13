@@ -47,7 +47,6 @@ namespace dawn_native {
         PushDebugGroup,
         SetComputePipeline,
         SetRenderPipeline,
-        SetPushConstants,
         SetStencilReference,
         SetScissorRect,
         SetBlendColor,

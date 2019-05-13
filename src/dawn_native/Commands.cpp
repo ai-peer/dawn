@@ -96,11 +96,6 @@ namespace dawn_native {
                     SetRenderPipelineCmd* cmd = commands->NextCommand<SetRenderPipelineCmd>();
                     cmd->~SetRenderPipelineCmd();
                 } break;
-                case Command::SetPushConstants: {
-                    SetPushConstantsCmd* cmd = commands->NextCommand<SetPushConstantsCmd>();
-                    commands->NextData<uint32_t>(cmd->count);
-                    cmd->~SetPushConstantsCmd();
-                } break;
                 case Command::SetStencilReference: {
                     SetStencilReferenceCmd* cmd = commands->NextCommand<SetStencilReferenceCmd>();
                     cmd->~SetStencilReferenceCmd();
@@ -202,11 +197,6 @@ namespace dawn_native {
             case Command::SetRenderPipeline:
                 commands->NextCommand<SetRenderPipelineCmd>();
                 break;
-
-            case Command::SetPushConstants: {
-                auto* cmd = commands->NextCommand<SetPushConstantsCmd>();
-                commands->NextData<uint32_t>(cmd->count);
-            } break;
 
             case Command::SetStencilReference:
                 commands->NextCommand<SetStencilReferenceCmd>();
