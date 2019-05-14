@@ -28,6 +28,7 @@ namespace dawn_native {
 namespace dawn_native { namespace metal {
 
     class Device;
+    struct GlobalEncoders;
 
     class CommandBuffer : public CommandBufferBase {
       public:
@@ -38,7 +39,14 @@ namespace dawn_native { namespace metal {
 
       private:
         void EncodeComputePass(id<MTLCommandBuffer> commandBuffer);
-        void EncodeRenderPass(id<MTLCommandBuffer> commandBuffer, BeginRenderPassCmd* renderPass);
+        void EncodeRenderPass(id<MTLCommandBuffer> commandBuffer,
+                              MTLRenderPassDescriptor* mtlRenderPass,
+                              GlobalEncoders* globalEncoders,
+                              const BeginRenderPassCmd* renderPassCmd);
+
+        void EncodeRenderPassInternal(id<MTLCommandBuffer> commandBuffer,
+                                      MTLRenderPassDescriptor* mtlRenderPass,
+                                      const BeginRenderPassCmd* renderPassCmd);
 
         CommandIterator mCommands;
     };
