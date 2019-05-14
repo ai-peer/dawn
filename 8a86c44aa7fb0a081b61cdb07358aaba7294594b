@@ -34,6 +34,24 @@
       "revId": "8a86c44aa7fb0a081b61cdb07358aaba7294594b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57467ec9_1c81935e",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-14T19:22:42Z",
+      "side": 1,
+      "message": "I remembered to open a PR for this. https://github.com/gpuweb/gpuweb/pull/300",
+      "parentUuid": "6a2dde9a_2c69fd04",
+      "revId": "8a86c44aa7fb0a081b61cdb07358aaba7294594b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
