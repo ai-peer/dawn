@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "efb5ec40_e160ace2",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4832c3db_f9e85cf5",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71afd887_e2573f10",
         "filename": "dawn.json",
         "patchSetId": 10
@@ -39,6 +57,30 @@
       "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e90e2162_c4b8646d",
+        "filename": "dawn.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71afd887_e2573f10",
+      "range": {
+        "startLine": 251,
+        "startChar": 26,
+        "endLine": 251,
+        "endChar": 30
+      },
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -73,6 +115,24 @@
       "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35328e52_86d14734",
+        "filename": "generator/main.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b405466_46b05c56",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +227,24 @@
     },
     {
       "key": {
+        "uuid": "49db5341_abf57fe4",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc4d55cd_359bfcf6",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7197035_ce5eccd9",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 10
@@ -181,6 +259,24 @@
       "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12755245_d766e6a9",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7197035_ce5eccd9",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -201,6 +297,24 @@
     },
     {
       "key": {
+        "uuid": "65b5440a_f84155d6",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5807d19_eda90227",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98ce51be_3e1dd2a3",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 10
@@ -218,6 +332,24 @@
     },
     {
       "key": {
+        "uuid": "9edb41c7_57a24d94",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98ce51be_3e1dd2a3",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e449e641_ed9cdde7",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 10
@@ -232,6 +364,24 @@
       "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c53f16ff_cadcd120",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e449e641_ed9cdde7",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -258,6 +408,30 @@
     },
     {
       "key": {
+        "uuid": "0b516ff7_03dcaeaa",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dbd5e86_0f336f9d",
+      "range": {
+        "startLine": 319,
+        "startChar": 54,
+        "endLine": 319,
+        "endChar": 65
+      },
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f212620_f866418a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 10
@@ -272,6 +446,24 @@
       "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "604d2b3d_11bf8b51",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f212620_f866418a",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -292,6 +484,24 @@
     },
     {
       "key": {
+        "uuid": "5f3da41a_25552ec2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bdb1d05_f8ae5a74",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "106c5fa0_0cc495fe",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 10
@@ -309,6 +519,24 @@
     },
     {
       "key": {
+        "uuid": "512630dc_f8ca1573",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "106c5fa0_0cc495fe",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "033659fc_2978c1dc",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 10
@@ -323,6 +551,24 @@
       "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e66272e_2853cd94",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:07:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "033659fc_2978c1dc",
+      "revId": "06fd5d727a1f2ff29a01c7329aa8ba4ab2139c9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
