@@ -24,6 +24,7 @@
 
 #include <array>
 #include <bitset>
+#include <unordered_map>
 
 namespace dawn_native {
 
@@ -54,11 +55,25 @@ namespace dawn_native {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
         };
 
+        using ShaderModuleBufferBlockSize =
+            std::array<std::array<uint64_t, kMaxBindingsPerGroup>, kMaxBindGroups>;
+        using ShaderStageBufferBlockSize =
+            std::unordered_map<dawn::ShaderStage, ShaderModuleBufferBlockSize>;
+
+        uint32_t GetDynamicBufferCount() const;
+
+        void SetShaderStageBufferBlockSize(dawn::ShaderStage stage,
+                                           const ShaderModuleBufferBlockSize size);
+        const ShaderStageBufferBlockSize& GetShaderStageBufferBlockSize() const;
+
       private:
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         LayoutBindingInfo mBindingInfo;
         bool mIsBlueprint = false;
+        uint32_t mDynamicBufferCount = 0;
+
+        ShaderStageBufferBlockSize mShaderStageBufferBlockSize;
     };
 
 }  // namespace dawn_native

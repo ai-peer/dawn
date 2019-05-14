@@ -27,13 +27,13 @@ namespace dawn_native {
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
                                                  CommandEncoderBase* topLevelEncoder,
                                                  CommandAllocator* allocator)
-        : ProgrammablePassEncoder(device, topLevelEncoder, allocator) {
+        : ProgrammablePassEncoder(device, topLevelEncoder, allocator, true) {
     }
 
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
                                                  CommandEncoderBase* topLevelEncoder,
                                                  ErrorTag errorTag)
-        : ProgrammablePassEncoder(device, topLevelEncoder, errorTag) {
+        : ProgrammablePassEncoder(device, topLevelEncoder, errorTag, true) {
     }
 
     RenderPassEncoderBase* RenderPassEncoderBase::MakeError(DeviceBase* device,

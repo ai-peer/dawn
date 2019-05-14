@@ -15,26 +15,32 @@
 #include "dawn_native/ProgrammablePassEncoder.h"
 
 #include "dawn_native/BindGroup.h"
+#include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <string.h>
+#include <algorithm>
 
 namespace dawn_native {
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
                                                      CommandEncoderBase* topLevelEncoder,
-                                                     CommandAllocator* allocator)
+                                                     CommandAllocator* allocator,
+                                                     bool isRenderPass)
         : ObjectBase(device), mTopLevelEncoder(topLevelEncoder), mAllocator(allocator) {
         DAWN_ASSERT(allocator != nullptr);
+        mIsRenderPass = isRenderPass;
     }
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
                                                      CommandEncoderBase* topLevelEncoder,
-                                                     ErrorTag errorTag)
+                                                     ErrorTag errorTag,
+                                                     bool isRenderPass)
         : ObjectBase(device, errorTag), mTopLevelEncoder(topLevelEncoder), mAllocator(nullptr) {
+        mIsRenderPass = isRenderPass;
     }
 
     void ProgrammablePassEncoder::EndPass() {
@@ -86,6 +92,8 @@ namespace dawn_native {
                                                BindGroupBase* group,
                                                uint32_t dynamicOffsetCount,
                                                const uint64_t* dynamicOffsets) {
+        const BindGroupLayoutBase* layout = group->GetLayout();
+
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
             mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(group))) {
             return;
@@ -96,16 +104,61 @@ namespace dawn_native {
             return;
         }
 
-        // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-        if (dynamicOffsetCount != 0) {
-            mTopLevelEncoder->HandleError("Dynamic Buffer Offset not supported yet");
-            return;
+        if (layout->GetDynamicBufferCount() < dynamicOffsetCount) {
+            mTopLevelEncoder->HandleError("dynamicOffset count overflow");
+        }
+
+        for (uint32_t i = 0; i < dynamicOffsetCount; ++i) {
+            if (dynamicOffsets[i] % kMinDynamicBufferOffsetAlignment != 0) {
+                mTopLevelEncoder->HandleError("Dynamic Buffer Offset need to be aligned");
+                return;
+            }
+
+            BufferBinding bufferBinding = group->GetBindingAsBufferBinding(i);
+
+            // For using [] operator and we know we don't change values in bufferBlockSize
+            BindGroupLayoutBase::ShaderStageBufferBlockSize bufferBlockSize =
+                const_cast<BindGroupLayoutBase::ShaderStageBufferBlockSize&>(
+                    layout->GetShaderStageBufferBlockSize());
+
+            const BindGroupLayoutBase::LayoutBindingInfo& bindingInfo = layout->GetBindingInfo();
+
+            uint64_t maxBufferBlockSize = 0;
+
+            // For render pipeline, we need to ensure no overflow happens by picking max block size
+            // in all shader stages.
+            if (mIsRenderPass) {
+                uint64_t vertexBlockSize = 0;
+                uint64_t fragmentBlockSize = 0;
+
+                if (bindingInfo.visibilities[i] & dawn::ShaderStageBit::Vertex) {
+                    vertexBlockSize = bufferBlockSize[dawn::ShaderStage::Vertex][groupIndex][i];
+                }
+                if (bindingInfo.visibilities[i] & dawn::ShaderStageBit::Fragment) {
+                    fragmentBlockSize = bufferBlockSize[dawn::ShaderStage::Fragment][groupIndex][i];
+                }
+                maxBufferBlockSize =
+                    vertexBlockSize > fragmentBlockSize ? vertexBlockSize : fragmentBlockSize;
+            } else {
+                maxBufferBlockSize = bufferBlockSize[dawn::ShaderStage::Compute][groupIndex][i];
+            }
+
+            if (dynamicOffsets[i] + bufferBinding.offset + maxBufferBlockSize >
+                bufferBinding.size) {
+                mTopLevelEncoder->HandleError("dynamic offset overflow");
+                return;
+            }
         }
 
         SetBindGroupCmd* cmd = mAllocator->Allocate<SetBindGroupCmd>(Command::SetBindGroup);
         new (cmd) SetBindGroupCmd;
         cmd->index = groupIndex;
         cmd->group = group;
+        cmd->dynamicOffsetCount = dynamicOffsetCount;
+        if (dynamicOffsetCount > 0) {
+            uint64_t* offsets = mAllocator->AllocateData<uint64_t>(cmd->dynamicOffsetCount);
+            memcpy(offsets, dynamicOffsets, dynamicOffsetCount * sizeof(uint64_t));
+        }
     }
 
     void ProgrammablePassEncoder::SetPushConstants(dawn::ShaderStageBit stages,

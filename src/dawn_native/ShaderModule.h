@@ -61,12 +61,16 @@ namespace dawn_native {
             dawn::BindingType type;
             bool used = false;
         };
+
         using ModuleBindingInfo =
             std::array<std::array<BindingInfo, kMaxBindingsPerGroup>, kMaxBindGroups>;
+        using BufferBlockSize =
+            std::array<std::array<uint64_t, kMaxBindingsPerGroup>, kMaxBindGroups>;
 
         const PushConstantInfo& GetPushConstants() const;
         const ModuleBindingInfo& GetBindingInfo() const;
         const std::bitset<kMaxVertexAttributes>& GetUsedVertexAttributes() const;
+        const BufferBlockSize& GetBufferBlockSize() const;
         dawn::ShaderStage GetExecutionModel() const;
 
         bool IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout);
@@ -91,6 +95,7 @@ namespace dawn_native {
 
         PushConstantInfo mPushConstants = {};
         ModuleBindingInfo mBindingInfo;
+        BufferBlockSize mBufferBlockSize;
         std::bitset<kMaxVertexAttributes> mUsedVertexAttributes;
         dawn::ShaderStage mExecutionModel;
     };

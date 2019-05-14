@@ -14,6 +14,7 @@
 
 #include "dawn_native/Pipeline.h"
 
+#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/ShaderModule.h"
@@ -68,6 +69,12 @@ namespace dawn_native {
                 info->types[i + offset] = moduleInfo.types[i];
             }
             i += size - 1;
+        }
+
+        for (uint32_t groupIndex : IterateBitSet(mLayout->GetBindGroupLayoutsMask())) {
+            BindGroupLayoutBase* group =
+                const_cast<BindGroupLayoutBase*>(mLayout->GetBindGroupLayout(groupIndex));
+            group->SetShaderStageBufferBlockSize(stage, module->GetBufferBlockSize());
         }
     }
 

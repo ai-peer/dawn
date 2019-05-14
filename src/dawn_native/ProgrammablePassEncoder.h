@@ -31,7 +31,8 @@ namespace dawn_native {
       public:
         ProgrammablePassEncoder(DeviceBase* device,
                                 CommandEncoderBase* topLevelEncoder,
-                                CommandAllocator* allocator);
+                                CommandAllocator* allocator,
+                                bool isRenderPass);
 
         void EndPass();
 
@@ -52,7 +53,8 @@ namespace dawn_native {
         // Construct an "error" programmable pass encoder.
         ProgrammablePassEncoder(DeviceBase* device,
                                 CommandEncoderBase* topLevelEncoder,
-                                ErrorTag errorTag);
+                                ErrorTag errorTag,
+                                bool isRenderPass);
 
         MaybeError ValidateCanRecordCommands() const;
 
@@ -61,6 +63,8 @@ namespace dawn_native {
         Ref<CommandEncoderBase> mTopLevelEncoder = nullptr;
         // mAllocator is cleared at the end of the pass so it acts as a tag that EndPass was called
         CommandAllocator* mAllocator = nullptr;
+        // For SetBindGroup validation
+        bool mIsRenderPass = false;
     };
 
 }  // namespace dawn_native
