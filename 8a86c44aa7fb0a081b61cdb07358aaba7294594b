@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9e8c6ea_3e6a46c5",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-14T18:11:00Z",
+      "side": 1,
+      "message": "I think we wanted to implicitly enable whatever flag is needed for createBufferMapped, in the backends. Depending on backend, hardware, and wire/nowire, it could either be MapWrite or TransferDst.",
+      "revId": "8a86c44aa7fb0a081b61cdb07358aaba7294594b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
