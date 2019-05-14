@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2773882c_7be32456",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:18:18Z",
+      "side": 1,
+      "message": "Maybe this should be a DAWN_TRY, I think we might have cases where backends can produce error on mapping.",
+      "revId": "1aa0eeffcc6e70b21b423d289e5e49c440a0b624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c0efa4d_ecd04029",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:18:18Z",
+      "side": 1,
+      "message": "Don\u0027t we have UNIMPLEMENTED? Maybe we should have it.",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 19
+      },
+      "revId": "1aa0eeffcc6e70b21b423d289e5e49c440a0b624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2d6d4ce_e1c2e951",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T04:18:18Z",
+      "side": 1,
+      "message": "We want to test with more than this usage in the future, maybe we should do the creation in the test function?",
+      "range": {
+        "startLine": 85,
+        "startChar": 17,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "1aa0eeffcc6e70b21b423d289e5e49c440a0b624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
