@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "60ccf022_19d13f10",
+        "filename": "src/dawn_native/Instance.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-05-14T09:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "affa60e6_2138459b",
+      "range": {
+        "startLine": 55,
+        "startChar": 13,
+        "endLine": 55,
+        "endChar": 15
+      },
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18475211_377b9a56",
         "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
         "patchSetId": 2
@@ -134,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "caaf254e_69f3bd7a",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-05-14T09:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54dac8a4_d7a97fda",
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3d7ae2a_d46a45c7",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 2
@@ -148,6 +190,24 @@
       "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4948c574_d04fbf10",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-05-14T09:51:33Z",
+      "side": 1,
+      "message": "Use IsBackendValidationEnabled instead.",
+      "parentUuid": "d3d7ae2a_d46a45c7",
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -191,6 +251,48 @@
     },
     {
       "key": {
+        "uuid": "20e95d43_b261dd34",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-05-14T09:51:33Z",
+      "side": 1,
+      "message": "I will update the method name to EnableBackendValidation in Instance.h, so \u0027--enable-validation-layers\u0027 will also be changed to \u0027--enable-backend-validation\", how do you think about \u0027-b\u0027 for backend or \u0027-d\u0027 for debugging?",
+      "parentUuid": "4449afe5_cf6234c5",
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efd4f7ee_f236939d",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-05-14T09:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a54c0db1_ca64f2c8",
+      "range": {
+        "startLine": 121,
+        "startChar": 81,
+        "endLine": 121,
+        "endChar": 94
+      },
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2e3a26c_b952978b",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
@@ -205,6 +307,24 @@
       "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0045288f_87b22ec2",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-05-14T09:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2e3a26c_b952978b",
+      "revId": "50259a67d023bd59f63e21bdf188ea1fedc07236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
