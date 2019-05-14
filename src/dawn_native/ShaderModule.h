@@ -61,6 +61,7 @@ namespace dawn_native {
             dawn::BindingType type;
             bool used = false;
         };
+
         using ModuleBindingInfo =
             std::array<std::array<BindingInfo, kMaxBindingsPerGroup>, kMaxBindGroups>;
 

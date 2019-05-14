@@ -14,6 +14,7 @@
 
 #include "dawn_native/Pipeline.h"
 
+#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/ShaderModule.h"
