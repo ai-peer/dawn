@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12ae502d_a48e3121",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "When I look into the crash stack, I find that the reason is due to wrong access during commands free period.\nMaybe it\u0027s just lucky that uint32_t can work but uint64_t can work. However, changes here is the root cause.",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

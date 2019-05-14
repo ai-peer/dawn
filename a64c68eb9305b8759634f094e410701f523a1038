@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4d96c395_d017764e",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e27970e9_172caf52",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6051fefb_a0fac22f",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5e95673_090c364f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6051fefb_a0fac22f",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5db54702_18675fbf",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae3ca0dc_57a5337f",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e86bd61c_b3077bd9",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2019-05-08T16:08:41Z",
       "side": 1,
       "message": "The number of dynamic offsets should be exactly the number required by the layout I think.\n\nThe error would be something like \"danymicOffset count mismatch\"",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1a58e6f_fa5f70c4",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "So does it means when user set bind group layout with DynamicUniformBuffer or DynamicStorageBuffer, they must set the offset, even the offsets are 0?",
+      "parentUuid": "e86bd61c_b3077bd9",
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "3875327a_f1b23cdc",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "As we discussed this morning, just a simple check now.\nPatch set 2 is the record for how to get buffer block size from shader module. It brings const_cast and bool variables and lots of Get/Set and build links between objects. So I don\u0027t think it is a good design. And happy to know this issue can be resolved in spirv.",
+      "parentUuid": "8123843d_d7daaf1c",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d813cbcb_26ea9340",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -101,6 +191,24 @@
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69d5a9a7_115efd51",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d813cbcb_26ea9340",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "3d2cc1d5_a30519cb",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d3ee4128_510e7d15",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 53
+      },
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "023c8886_587aff4a",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -162,6 +294,24 @@
       "writtenOn": "2019-05-08T16:08:41Z",
       "side": 1,
       "message": "ditto",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e359ccb7_a7d20313",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Will fix this in metal backend patch.",
+      "parentUuid": "023c8886_587aff4a",
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -200,6 +350,24 @@
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09b8b55c_21a78fe0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b9ec6f1_101ed536",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

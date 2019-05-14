@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5531f2d2_0a6a79d6",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-14T08:52:46Z",
+      "side": 1,
+      "message": "Patch Set 2 is just a record about how to collecting buffer block size info.",
+      "revId": "acb083e78a0d38f09f08ec27bd580d35b7fe3bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
