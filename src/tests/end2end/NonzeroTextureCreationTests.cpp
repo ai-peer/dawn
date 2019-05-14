@@ -96,4 +96,6 @@ TEST_P(NonzeroTextureCreationTests, ArrayLayerClears) {
 
 DAWN_INSTANTIATE_TEST(NonzeroTextureCreationTests,
                       ForceWorkaround(VulkanBackend,
+                                      "nonzero_clear_resources_on_creation_for_testing"),
+                      ForceWorkaround(OpenGLBackend,
                                       "nonzero_clear_resources_on_creation_for_testing"));
