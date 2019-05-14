@@ -16,6 +16,24 @@
       "revId": "8a86c44aa7fb0a081b61cdb07358aaba7294594b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a2dde9a_2c69fd04",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:34:58Z",
+      "side": 1,
+      "message": "For non-mappable buffers that are CreateMapped we want to have a Staging buffer allocated besides it so we can still have the real data be in device local memory. So I don\u0027t think we need MApWrite but definitely TransferDst in the backend itself.",
+      "parentUuid": "c9e8c6ea_3e6a46c5",
+      "revId": "8a86c44aa7fb0a081b61cdb07358aaba7294594b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
