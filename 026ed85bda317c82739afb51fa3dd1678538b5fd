@@ -16,6 +16,218 @@
       "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "363e0143_19c9f579",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "Uuuh this should work, maybe it\u0027s a bug in the CommandAllocator?",
+      "parentUuid": "12ae502d_a48e3121",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1734f19e_3343e105",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "nit: \"must be exactly equal to\" or \"must match\"",
+      "range": {
+        "startLine": 101,
+        "startChar": 38,
+        "endLine": 101,
+        "endChar": 51
+      },
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "569df474_c97ff3df",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "This should be \u003e\u003d to ensure there is at least one byte available.",
+      "range": {
+        "startLine": 114,
+        "startChar": 57,
+        "endLine": 114,
+        "endChar": 58
+      },
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7678064_42af0d5e",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "u-nit: no newline",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebacce65_ddfb236a",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "but newline here :)",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff9e5cf1_4e5eae45",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "nit: we\u0027re not doing any actual rendering using these shaders because validation tests run on the Null backend. We could just have empty shaders that declare the interface and that\u0027s it.",
+      "range": {
+        "startLine": 483,
+        "startChar": 1,
+        "endLine": 502,
+        "endChar": 21
+      },
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4118100_a63968b6",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "nit: This could return a ComputePipeline and be called CreateTestComputePipeline. Same thing for render.",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb7cafb8_7d84e7ea",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf057979_81bacc01",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "nit: this bind group and the pipeline layout are the same as for render, maybe we could factor the creation in SetUp?",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 99
+      },
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30121c5a_68ee598c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "nit: comment before test. Ditto below",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "881a9ccd_3b1d6a82",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-14T18:49:44Z",
+      "side": 1,
+      "message": "Can we have a comment before each case that explains what it does? Ditto below.",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
