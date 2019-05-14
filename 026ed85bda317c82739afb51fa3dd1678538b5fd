@@ -83,6 +83,46 @@
     },
     {
       "key": {
+        "uuid": "e7a6ab61_c5581fcf",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-14T18:59:39Z",
+      "side": 1,
+      "message": "Is this overflow safe? (dynamicOffsets[i] \u003e bufferBinding.size - bufferBinding.offset) would probably be safer (if size is guaranteed to be \u003e offset)",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cc6f1e0_b12c0b25",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-14T18:59:39Z",
+      "side": 1,
+      "message": "\"out of bounds\"",
+      "range": {
+        "startLine": 115,
+        "startChar": 62,
+        "endLine": 115,
+        "endChar": 70
+      },
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7678064_42af0d5e",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 4
@@ -208,6 +248,52 @@
       "writtenOn": "2019-05-14T18:49:44Z",
       "side": 1,
       "message": "nit: comment before test. Ditto below",
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7693260_407bbf23",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-14T18:59:39Z",
+      "side": 1,
+      "message": "Can you split these 2 tests into many small tests?",
+      "range": {
+        "startLine": 554,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 6
+      },
+      "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc8a93df_9c059b85",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-14T18:59:39Z",
+      "side": 1,
+      "message": "nit: \"SetBindGroup(...).SetBindGroup(...)\" is redundant.",
+      "range": {
+        "startLine": 554,
+        "startChar": 35,
+        "endLine": 554,
+        "endChar": 47
+      },
       "revId": "026ed85bda317c82739afb51fa3dd1678538b5fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
