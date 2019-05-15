@@ -95,5 +95,7 @@ TEST_P(NonzeroTextureCreationTests, ArrayLayerClears) {
 }
 
 DAWN_INSTANTIATE_TEST(NonzeroTextureCreationTests,
+                      ForceWorkaround(D3D12Backend,
+                                      "nonzero_clear_resources_on_creation_for_testing"),
                       ForceWorkaround(VulkanBackend,
                                       "nonzero_clear_resources_on_creation_for_testing"));
