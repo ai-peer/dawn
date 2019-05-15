@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b81272c4_3ba2172c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-15T06:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42afc3e5_a557148d",
+      "revId": "458f3253dfb4c82cd9f342c9c203a38d514243a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d3f7457_cc76515c",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "458f3253dfb4c82cd9f342c9c203a38d514243a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7a69ec1_cfce81cd",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-15T06:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d3f7457_cc76515c",
+      "revId": "458f3253dfb4c82cd9f342c9c203a38d514243a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "458f3253dfb4c82cd9f342c9c203a38d514243a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae02455f_26c02be9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-15T06:04:11Z",
+      "side": 1,
+      "message": "Actually cbvSrvUavDescriptorHeapSize can be zero if they are not needed.",
+      "parentUuid": "c9470655_247a154b",
+      "range": {
+        "startLine": 125,
+        "startChar": 47,
+        "endLine": 125,
+        "endChar": 74
+      },
+      "revId": "458f3253dfb4c82cd9f342c9c203a38d514243a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +147,24 @@
       "writtenOn": "2019-05-15T04:48:07Z",
       "side": 1,
       "message": "We\u0027re going to hit the limit of the number of descriptors in the respective heaps before that.",
+      "revId": "458f3253dfb4c82cd9f342c9c203a38d514243a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16788bc1_378cfdb3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-15T06:04:11Z",
+      "side": 1,
+      "message": "Ack\nSo do you mean we should add checks on the maximum number of total views in one command buffer in the front end?",
+      "parentUuid": "bb3a5790_e657d110",
       "revId": "458f3253dfb4c82cd9f342c9c203a38d514243a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
