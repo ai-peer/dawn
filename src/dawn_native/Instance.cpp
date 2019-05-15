@@ -224,4 +224,12 @@ namespace dawn_native {
         return false;
     }
 
+    void InstanceBase::EnableBackendValidation(bool enableBackendValidation) {
+        mEnableBackendValidation = enableBackendValidation;
+    }
+
+    bool InstanceBase::IsBackendValidationEnabled() {
+        return mEnableBackendValidation;
+    }
+
 }  // namespace dawn_native
