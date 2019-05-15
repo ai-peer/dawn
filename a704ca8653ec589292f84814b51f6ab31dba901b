@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c6f4d8d_9fece81b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-15T14:32:39Z",
+      "side": 1,
+      "message": "nit: CreateRenderPipeline, ditto for compute.",
+      "range": {
+        "startLine": 489,
+        "startChar": 25,
+        "endLine": 489,
+        "endChar": 48
+      },
+      "revId": "a704ca8653ec589292f84814b51f6ab31dba901b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
