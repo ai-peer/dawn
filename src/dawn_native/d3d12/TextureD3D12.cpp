@@ -14,6 +14,7 @@
 
 #include "dawn_native/d3d12/TextureD3D12.h"
 
+#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
 
@@ -138,6 +139,26 @@ namespace dawn_native { namespace d3d12 {
                         ->Allocate(D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor,
                                    D3D12_RESOURCE_STATE_COMMON);
         mResourcePtr = mResource.Get();
+
+        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+            TransitionUsageNow(device->GetPendingCommandList(), D3D12_RESOURCE_STATE_RENDER_TARGET);
+
+            TextureViewBase* view = CreateDefaultView();
+            D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = ToBackend(view)->GetRTVDescriptor();
+
+            DescriptorHeapAllocator* descriptorHeapAllocator = device->GetDescriptorHeapAllocator();
+            DescriptorHeapHandle rtvHeap =
+                descriptorHeapAllocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 1);
+            D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap.GetCPUHandle(0);
+
+            const float clearColor[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+            for (int i = 0; i < resourceDescriptor.MipLevels; i++) {
+                rtvDesc.Texture2DArray.MipSlice = i;
+                device->GetD3D12Device()->CreateRenderTargetView(mResourcePtr, &rtvDesc, rtvHandle);
+                device->GetPendingCommandList()->ClearRenderTargetView(rtvHandle, clearColor, 0,
+                                                                       nullptr);
+            }
+        }
     }
 
     // With this constructor, the lifetime of the ID3D12Resource is externally managed.
