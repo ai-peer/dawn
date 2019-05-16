@@ -22,6 +22,30 @@
       "revId": "de7df01a278fea8aded0d6f323bf4143425c2ce6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "127c35c5_6c24dbeb",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-16T02:31:44Z",
+      "side": 1,
+      "message": "Done\nI have re-organized all the member variables in BindGroupStateTracker in the latest patch set.",
+      "parentUuid": "a0422a39_78b838dc",
+      "range": {
+        "startLine": 82,
+        "startChar": 31,
+        "endLine": 82,
+        "endChar": 45
+      },
+      "revId": "de7df01a278fea8aded0d6f323bf4143425c2ce6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
