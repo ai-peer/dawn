@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "db40eecc_53fbfc7d",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-16T00:38:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1a58e6f_fa5f70c4",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8123843d_d7daaf1c",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 1
@@ -174,6 +192,24 @@
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "414d7957_ec6827d8",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-16T00:38:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3875327a_f1b23cdc",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -315,6 +351,24 @@
       "revId": "a64c68eb9305b8759634f094e410701f523a1038",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47c9d3a4_e9943568",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-16T00:38:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e359ccb7_a7d20313",
+      "revId": "a64c68eb9305b8759634f094e410701f523a1038",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
