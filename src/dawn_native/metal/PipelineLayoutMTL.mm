@@ -56,7 +56,8 @@ namespace dawn_native { namespace metal {
                         // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset
                         case dawn::BindingType::DynamicUniformBuffer:
                         case dawn::BindingType::DynamicStorageBuffer:
-                            UNREACHABLE();
+                            mIndexInfo[stage][group][binding] = bufferIndex;
+                            bufferIndex++;
                             break;
                     }
                 }
