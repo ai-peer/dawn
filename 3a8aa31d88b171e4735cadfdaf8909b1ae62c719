@@ -33,6 +33,23 @@
       "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18c70335_8742078f",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-17T22:48:21Z",
+      "side": 0,
+      "message": "Was this file already removed? I can\u0027t find it. (*shrug*)",
+      "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
