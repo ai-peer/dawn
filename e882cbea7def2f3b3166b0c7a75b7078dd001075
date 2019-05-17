@@ -1,0 +1,215 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d5869a9_013b6857",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "This should always be true because of validation and could be replaced by an ASSERT",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4672134a_444ed75a",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "mMapReadBuffer shouldn\u0027t be needed.",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50ff9fb8_70e096d0",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed if the tests use CreateBasicRenderPass.",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bef8f6a_2e22da68",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "ditto: shouldn\u0027t be needed",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c7be1ef_b140cf50",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed, the test harness provides expectation helpers for buffers.",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dace2a88_d09ea0b1",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1b069c3_afe8b3ac",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "We should submit a single instance. Having multiple instances write to the same place in memory isn\u0027t what we\u0027re testing here.",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 1
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cf1bc04_5f6b93aa",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "nit: this should be intended one more time.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc2d493c_69fbec69",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "Use EXPECT_BUFFER_U32_EQ or EXPECT_BUFFER_RANGE_U32_EQ. Ditto below",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5af67b02_50314f5f",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "typo:zero",
+      "range": {
+        "startLine": 202,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 16
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3a0d81c_c0ceec89",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:27:38Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 248,
+        "startChar": 12,
+        "endLine": 248,
+        "endChar": 16
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
