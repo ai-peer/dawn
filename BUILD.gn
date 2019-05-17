@@ -13,10 +13,10 @@
 # limitations under the License.
 
 import("//build_overrides/build.gni")
+import("generator/dawn_generator.gni")
 import("scripts/dawn_component.gni")
 import("scripts/dawn_features.gni")
 import("scripts/dawn_overrides_with_defaults.gni")
-import("generator/dawn_generator.gni")
 
 import("//testing/test.gni")
 
@@ -422,6 +422,7 @@ dawn_component("libdawn_wire") {
   ]
 
   configs = [ "${dawn_root}/src/common:dawn_internal" ]
+  set_sources_assignment_filter([ "*.inl" ])
   sources = get_target_outputs(":libdawn_wire_gen")
   sources += [
     "src/dawn_wire/WireClient.cpp",
