@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "96197b20_036a6e11",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 44
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-17T05:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5735a39c_42b4b003",
+      "range": {
+        "startLine": 182,
+        "startChar": 12,
+        "endLine": 182,
+        "endChar": 54
+      },
+      "revId": "53afc261b5c155cc718bcd60783f269a71d828a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3742b6a_857cd31f",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 44
@@ -36,6 +60,24 @@
       "writtenOn": "2019-05-17T04:56:18Z",
       "side": 1,
       "message": "nit: if the interaction between the workarounds is important, maybe we could force enable both of them at the same time in testing too, just to make sure that the interaction doesn\u0027t break.",
+      "revId": "53afc261b5c155cc718bcd60783f269a71d828a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "712abca4_ecd2aac7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 44
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-17T05:36:57Z",
+      "side": 1,
+      "message": "I find it a bit complex to support multiple workarounds in Dawn end2end tests, shall we do it in another patch separately?",
+      "parentUuid": "b3742b6a_857cd31f",
       "revId": "53afc261b5c155cc718bcd60783f269a71d828a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -62,6 +104,30 @@
       "revId": "53afc261b5c155cc718bcd60783f269a71d828a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5ac46b2_88b02c6c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 44
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-17T05:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e56a14_ac536290",
+      "range": {
+        "startLine": 682,
+        "startChar": 52,
+        "endLine": 682,
+        "endChar": 59
+      },
+      "revId": "53afc261b5c155cc718bcd60783f269a71d828a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
