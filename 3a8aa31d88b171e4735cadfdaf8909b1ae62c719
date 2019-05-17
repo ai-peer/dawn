@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36c02b7a_384383ef",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:59:07Z",
+      "side": 0,
+      "message": "Is GLM still used somewhere?",
+      "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b9d9e18_e4ff8fa3",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-17T20:59:07Z",
+      "side": 0,
+      "message": "Can this dependency be removed from DEPS?",
+      "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
