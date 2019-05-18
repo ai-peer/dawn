@@ -16,6 +16,24 @@
       "revId": "f53987fbc36662ae1792aeb902c2cd2632144e6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b1806e9_74f1dbfc",
+        "filename": "src/tests/end2end/ObjectCachingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-18T00:38:51Z",
+      "side": 1,
+      "message": "Probably fine because min/max defaults are 0.f and 1000.f. So there shouldn\u0027t be integer wrap around or something like that.\nNot sure if we\u0027ve investigated actual limits for these.",
+      "parentUuid": "940ce4a9_90fb12bc",
+      "revId": "f53987fbc36662ae1792aeb902c2cd2632144e6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
