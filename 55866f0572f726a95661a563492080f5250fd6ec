@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a44d5a67_e557bf54",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-18T01:30:05Z",
+      "side": 1,
+      "message": "formatInfo.format is a GLenum, not the size of the format. The size of the format can be found with dawn_native::TextureFormatPixelSize().\n\nAlternatively, you could assume that no pixel format will be more than 16 bytes (RGBA32F), and use\n\n  static constexpr MAX_TEXEL_SIZE \u003d 16;\n  ASSERT(TextureFormatPixelSize(GetFormat()) \u003c\u003d MAX_TEXEL_SIZE);\n  GLubyte clearColor[16] \u003d {};\n\nwhich avoids a heap allocation and would be much faster.\n\nAll that said, glClearTexImage is not available until OpenGL 4.4. I do not know if it is available on macOS (it could be, if ARB_clear_texture is available). It would be unfortunate to break the OpenGL backend on macOS (even though compute already doesn\u0027t work). But I can\u0027t find a reasonable alternative, so it\u0027s ok for now.",
+      "revId": "55866f0572f726a95661a563492080f5250fd6ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
