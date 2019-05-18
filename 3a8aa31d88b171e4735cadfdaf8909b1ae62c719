@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "59cde8fe_aa05ddba",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-18T02:40:39Z",
+      "side": 0,
+      "message": "Yes, it\u0027s still used in the samples.",
+      "parentUuid": "36c02b7a_384383ef",
+      "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b9d9e18_e4ff8fa3",
         "filename": "third_party/BUILD.gn",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1502ff1b_034d165f",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-18T02:40:39Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8b9d9e18_e4ff8fa3",
+      "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18c70335_8742078f",
         "filename": "third_party/BUILD.gn",
         "patchSetId": 3
@@ -50,6 +86,24 @@
       "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c129a78_d50bb2c2",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-18T02:40:39Z",
+      "side": 0,
+      "message": "It was from DEPS",
+      "parentUuid": "18c70335_8742078f",
+      "revId": "3a8aa31d88b171e4735cadfdaf8909b1ae62c719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
