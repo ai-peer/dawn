@@ -34,6 +34,24 @@
       "revId": "f53987fbc36662ae1792aeb902c2cd2632144e6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e7d7e0e_d83f3bf5",
+        "filename": "src/tests/end2end/ObjectCachingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-18T00:58:37Z",
+      "side": 1,
+      "message": "Oh, seems fine then. I didn\u0027t check what it actually defaults to. Although I suppose if we changed the default then this could technically end up becoming invalid or in a state where (default lod max clamp + 1 \u003d\u003d default lod max clamp) :P\n\nThat said, I\u0027m pretty sure this is totally fine because if it were an error, the test would pass (because it doesn\u0027t EXPECT an object creation error).",
+      "parentUuid": "9b1806e9_74f1dbfc",
+      "revId": "f53987fbc36662ae1792aeb902c2cd2632144e6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
