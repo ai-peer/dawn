@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "6b1b8220_571952c9",
+        "filename": "src/dawn_native/metal/PipelineLayoutMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-18T01:36:47Z",
+      "side": 1,
+      "message": "obsolete TODO",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "102e0756_0d4b9a31",
+        "filename": "src/dawn_native/metal/PipelineLayoutMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-18T01:36:47Z",
+      "side": 1,
+      "message": "Isn\u0027t this the same as the UniformBuffer and StorageBuffer cases?",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4672134a_444ed75a",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
