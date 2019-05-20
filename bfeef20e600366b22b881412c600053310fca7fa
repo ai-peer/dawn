@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67279c84_8d8e8b0e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-20T19:06:05Z",
+      "side": 1,
+      "message": "This still doesn\u0027t clear all the subresources for 2D array images. Can you leave a TODO for later?",
+      "revId": "bfeef20e600366b22b881412c600053310fca7fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
