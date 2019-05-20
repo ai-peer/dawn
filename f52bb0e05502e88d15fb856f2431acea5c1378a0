@@ -16,6 +16,24 @@
       "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aea4cc1_f8abcb71",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-20T18:22:40Z",
+      "side": 1,
+      "message": "I think ArraySize gets set in GetRTVDescriptor() with the correct size. Does the total array size depend on which mip slice we are on?",
+      "parentUuid": "0337642a_26c0a547",
+      "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
