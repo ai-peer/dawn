@@ -98,6 +98,29 @@
       "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2df08b7_4d04f04b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-05-20T19:09:35Z",
+      "side": 1,
+      "message": "It is dangerous to override what GetRTVDescriptor returns.  D3D12_RENDER_TARGET_VIEW_DESC contains a union of different structures, one of which is Texture2DArray. If the texture is a multi-sampled texture, GetRTVDescriptor sets the view dimension to D3D12_RTV_DIMENSION_TEXTURE2DMS, this means you must use the Texture2DMS field\n\nI recommend changing GetRTVDescriptor such that it accepts a miplevel parameter and have it take care of setting the correct structure field in the union.",
+      "range": {
+        "startLine": 156,
+        "startChar": 16,
+        "endLine": 156,
+        "endChar": 52
+      },
+      "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
