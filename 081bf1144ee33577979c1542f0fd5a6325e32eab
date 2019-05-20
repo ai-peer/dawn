@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e2795f8c_b85e0d92",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-20T17:11:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "295d6ba6_8453523f",
+      "revId": "081bf1144ee33577979c1542f0fd5a6325e32eab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c6046a0_b02745a7",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8c90784e_1ef74a9d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-20T17:11:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c6046a0_b02745a7",
+      "revId": "081bf1144ee33577979c1542f0fd5a6325e32eab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13bf7625_169087a2",
         "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "081bf1144ee33577979c1542f0fd5a6325e32eab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01120ca2_db4705a8",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-20T17:11:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13bf7625_169087a2",
+      "revId": "081bf1144ee33577979c1542f0fd5a6325e32eab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
