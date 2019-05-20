@@ -145,6 +145,30 @@
       "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8143aded_f5ccb6e9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-20T22:09:14Z",
+      "side": 1,
+      "message": "I see, could I instead check here for the right texture type and modify the field here? The MipSlice field is the index of the mipmap level in use, so it needs to iterate through each level.",
+      "parentUuid": "e2df08b7_4d04f04b",
+      "range": {
+        "startLine": 156,
+        "startChar": 16,
+        "endLine": 156,
+        "endChar": 52
+      },
+      "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
