@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "e20c8bb2_8dd3bdbf",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-05-20T18:48:22Z",
+      "side": 1,
+      "message": "I see this if check for descriptor in multiple places. \n\nWhen is it the case that descriptor will be nullptr?  \n\nIf multiple codepaths are doing this nullptr check, should we put the check in ApplyToogleOverrides itself?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 36
+      },
+      "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb52cbe7_89de36de",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-05-20T18:48:22Z",
+      "side": 1,
+      "message": "From looking at the code, CreateDefaultView allocates a new object. Do we leak this pointer?",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 33
+      },
+      "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0337642a_26c0a547",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
