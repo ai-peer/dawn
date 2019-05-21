@@ -486,8 +486,8 @@ TEST_P(VertexFormatTest, UChar2Norm) {
         std::numeric_limits<uint8_t>::min(),
         0,  // padding two bytes for stride
         0,
-        std::numeric_limits<uint8_t>::max() / 2,
-        std::numeric_limits<uint8_t>::min() / 2,
+        static_cast<uint8_t>(std::numeric_limits<uint8_t>::max() / 2),
+        static_cast<uint8_t>(std::numeric_limits<uint8_t>::min() / 2),
         0,  // padding two bytes for stride
         0,
         200,
@@ -496,29 +496,31 @@ TEST_P(VertexFormatTest, UChar2Norm) {
         0  // padding two bytes for buffer copy
     };
 
-    std::vector<uint8_t> expectedData = {std::numeric_limits<uint8_t>::max(),
-                                         std::numeric_limits<uint8_t>::min(),
-                                         std::numeric_limits<uint8_t>::max() / 2,
-                                         std::numeric_limits<uint8_t>::min() / 2,
-                                         200,
-                                         201};
+    std::vector<uint8_t> expectedData = {
+        std::numeric_limits<uint8_t>::max(),
+        std::numeric_limits<uint8_t>::min(),
+        static_cast<uint8_t>(std::numeric_limits<uint8_t>::max() / 2),
+        static_cast<uint8_t>(std::numeric_limits<uint8_t>::min() / 2),
+        200,
+        201};
 
     DoVertexFormatTest(dawn::VertexFormat::UChar2Norm, vertexData, expectedData);
 }
 
 TEST_P(VertexFormatTest, UChar4Norm) {
-    std::vector<uint8_t> vertexData = {std::numeric_limits<uint8_t>::max(),
-                                       std::numeric_limits<uint8_t>::min(),
-                                       0,
-                                       0,
-                                       std::numeric_limits<uint8_t>::max() / 2,
-                                       std::numeric_limits<uint8_t>::min() / 2,
-                                       0,
-                                       0,
-                                       200,
-                                       201,
-                                       202,
-                                       203};
+    std::vector<uint8_t> vertexData = {
+        std::numeric_limits<uint8_t>::max(),
+        std::numeric_limits<uint8_t>::min(),
+        0,
+        0,
+        static_cast<uint8_t>(std::numeric_limits<uint8_t>::max() / 2),
+        static_cast<uint8_t>(std::numeric_limits<uint8_t>::min() / 2),
+        0,
+        0,
+        200,
+        201,
+        202,
+        203};
 
     DoVertexFormatTest(dawn::VertexFormat::UChar4Norm, vertexData, vertexData);
 }
@@ -629,29 +631,31 @@ TEST_P(VertexFormatTest, Short4) {
 }
 
 TEST_P(VertexFormatTest, UShort2Norm) {
-    std::vector<uint16_t> vertexData = {std::numeric_limits<uint16_t>::max(),
-                                        std::numeric_limits<uint16_t>::min(),
-                                        std::numeric_limits<uint16_t>::max() / 2,
-                                        std::numeric_limits<uint16_t>::min() / 2,
-                                        3456,
-                                        6543};
+    std::vector<uint16_t> vertexData = {
+        std::numeric_limits<uint16_t>::max(),
+        std::numeric_limits<uint16_t>::min(),
+        static_cast<uint16_t>(std::numeric_limits<uint16_t>::max() / 2),
+        static_cast<uint16_t>(std::numeric_limits<uint16_t>::min() / 2),
+        3456,
+        6543};
 
     DoVertexFormatTest(dawn::VertexFormat::UShort2Norm, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UShort4Norm) {
-    std::vector<uint16_t> vertexData = {std::numeric_limits<uint16_t>::max(),
-                                        std::numeric_limits<uint16_t>::min(),
-                                        0,
-                                        0,
-                                        std::numeric_limits<uint16_t>::max() / 2,
-                                        std::numeric_limits<uint16_t>::min() / 2,
-                                        0,
-                                        0,
-                                        2987,
-                                        3055,
-                                        2987,
-                                        2987};
+    std::vector<uint16_t> vertexData = {
+        std::numeric_limits<uint16_t>::max(),
+        std::numeric_limits<uint16_t>::min(),
+        0,
+        0,
+        static_cast<uint16_t>(std::numeric_limits<uint16_t>::max() / 2),
+        static_cast<uint16_t>(std::numeric_limits<uint16_t>::min() / 2),
+        0,
+        0,
+        2987,
+        3055,
+        2987,
+        2987};
 
     DoVertexFormatTest(dawn::VertexFormat::UShort4Norm, vertexData, vertexData);
 }
@@ -686,14 +690,14 @@ TEST_P(VertexFormatTest, Short4Norm) {
 
 TEST_P(VertexFormatTest, Half2) {
     std::vector<uint16_t> vertexData =
-        Float32ToFloat16(std::vector<float>({14.8, -0.0, 22.5, 1.3, +0.0, -24.8}));
+        Float32ToFloat16(std::vector<float>({14.8f, -0.0f, 22.5f, 1.3f, +0.0f, -24.8f}));
 
     DoVertexFormatTest(dawn::VertexFormat::Half2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Half4) {
     std::vector<uint16_t> vertexData = Float32ToFloat16(std::vector<float>(
-        {+0.0, -16.8, 18.2, -0.0, 12.5, 1.3, 14.8, -12.4, 22.5, -48.8, 47.4, -24.8}));
+        {+0.0f, -16.8f, 18.2f, -0.0f, 12.5f, 1.3f, 14.8f, -12.4f, 22.5f, -48.8f, 47.4f, -24.8f}));
 
     DoVertexFormatTest(dawn::VertexFormat::Half4, vertexData, vertexData);
 }
