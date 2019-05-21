@@ -24,6 +24,7 @@
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
+#include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
@@ -791,12 +792,39 @@ namespace dawn_native { namespace d3d12 {
                                                       draw->firstInstance);
                 } break;
 
-                case Command::InsertDebugMarker:
-                case Command::PopDebugGroup:
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
+                    Device* device = ToBackend(GetDevice());
+                    const char* label = mCommands.NextData<char>(cmd->length + 1);
+                    // PIX color is 2 bytes per channel in ARGB format
+                    const UINT64 kPIXBlackColor = 0xff000000;
+
+                    if (device->GetFunctions()->isPIXEventRuntimeLoaded()) {
+                        device->GetFunctions()->pixSetMarkerOnCommandList(commandList.Get(),
+                                                                          kPIXBlackColor, label);
+                    }
+                } break;
+
+                case Command::PopDebugGroup: {
+                    mCommands.NextCommand<PopDebugGroupCmd>();
+                    Device* device = ToBackend(GetDevice());
+
+                    if (device->GetFunctions()->isPIXEventRuntimeLoaded()) {
+                        device->GetFunctions()->pixEndEventOnCommandList(commandList.Get());
+                    }
+                } break;
+
                 case Command::PushDebugGroup: {
-                    // TODO(brandon1.jones@intel.com): Implement debug markers after PIX licensing
-                    // issue is resolved.
-                    SkipCommand(&mCommands, type);
+                    PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
+                    Device* device = ToBackend(GetDevice());
+                    const char* label = mCommands.NextData<char>(cmd->length + 1);
+                    // PIX color is 2 bytes per channel in ARGB format
+                    const UINT64 kPIXBlackColor = 0xff000000;
+
+                    if (device->GetFunctions()->isPIXEventRuntimeLoaded()) {
+                        device->GetFunctions()->pixBeginEventOnCommandList(commandList.Get(),
+                                                                           kPIXBlackColor, label);
+                    }
                 } break;
 
                 case Command::SetRenderPipeline: {
