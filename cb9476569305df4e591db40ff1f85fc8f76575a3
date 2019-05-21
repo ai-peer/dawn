@@ -16,6 +16,24 @@
       "revId": "cb9476569305df4e591db40ff1f85fc8f76575a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00556947_2830b1b2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-21T20:24:53Z",
+      "side": 1,
+      "message": "Fixed. Code was right, comment was wrong.",
+      "parentUuid": "3539d6d9_70dde3c4",
+      "revId": "cb9476569305df4e591db40ff1f85fc8f76575a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
