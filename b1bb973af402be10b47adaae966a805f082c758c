@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "89bcc79b_7b443364",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T23:46:28Z",
+      "side": 1,
+      "message": "I think it\u0027s fine to keep, we\u0027ll probably do some refactoring later on to make better error messages easier.",
+      "parentUuid": "e5b8a593_5ed1e5eb",
+      "range": {
+        "startLine": 31,
+        "startChar": 42,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "058280f2_5da57feb",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T23:46:28Z",
+      "side": 1,
+      "message": "uNit: could put the ASSERTS after this early-out, since they\u0027re only necessary for the correctness of the non-early path.",
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "241581f7_2effb13b",
         "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
         "patchSetId": 1
@@ -36,6 +77,30 @@
       "writtenOn": "2019-05-21T23:19:10Z",
       "side": 1,
       "message": "nit: If the check is std::isfinite, we should test infinity here as well.",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dee6702_5236e09b",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T23:46:28Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "241581f7_2effb13b",
       "range": {
         "startLine": 23,
         "startChar": 10,
