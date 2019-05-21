@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9b6ef89b_f5d26dc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-21T19:24:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "059ea976_f2c61429",
+      "revId": "acfb13bca5d229b071f0b5da0e538ccb6c8dba87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43e82e8c_f7a1a06d",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "80e976a1_d8e438ab",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-21T19:24:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43e82e8c_f7a1a06d",
+      "revId": "acfb13bca5d229b071f0b5da0e538ccb6c8dba87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "258957a5_d342d8ba",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "acfb13bca5d229b071f0b5da0e538ccb6c8dba87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b502dd6_28b17f14",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-21T19:24:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "258957a5_d342d8ba",
+      "revId": "acfb13bca5d229b071f0b5da0e538ccb6c8dba87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -102,6 +156,24 @@
       "revId": "acfb13bca5d229b071f0b5da0e538ccb6c8dba87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1962de27_7f0e022f",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-21T19:24:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4475da2b_4628e1f6",
+      "revId": "acfb13bca5d229b071f0b5da0e538ccb6c8dba87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
