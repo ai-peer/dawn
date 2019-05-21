@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "a206da1e_102f1d74",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-21T00:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc03f986_8fdbc4d7",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 68
+      },
+      "revId": "b334bdc9464444d6bece24de354210c75eb5b24b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e324365b_61f3287c",
         "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 23

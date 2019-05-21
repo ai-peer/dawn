@@ -144,6 +144,24 @@
     },
     {
       "key": {
+        "uuid": "3c8fe6b4_8f4067b3",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-21T00:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e9722c0_6d8dbe16",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5b3a711_d4391174",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -158,6 +176,24 @@
       "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f912b0b3_3e7572f9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-21T00:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5b3a711_d4391174",
+      "revId": "4cb3e0bf319e999ad5080029828f773f17a3949f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
