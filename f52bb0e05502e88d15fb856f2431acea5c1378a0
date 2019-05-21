@@ -193,6 +193,30 @@
       "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d5fd4c5_9e0ee677",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-21T14:22:13Z",
+      "side": 1,
+      "message": "Though, given the leak of TextureViewBase* above, I agree with Corentin\u0027s suggestion to factor the creation of the RTV descriptor into a helper function. It will be more clear if creation of the descriptor is in one place. This way we can directly produce the D3D12_RENDER_TARGET_VIEW_DESC with the correct fields and simultaneously not leak the TextureViewBase.",
+      "parentUuid": "b38caaef_e273a160",
+      "range": {
+        "startLine": 156,
+        "startChar": 16,
+        "endLine": 156,
+        "endChar": 52
+      },
+      "revId": "f52bb0e05502e88d15fb856f2431acea5c1378a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
