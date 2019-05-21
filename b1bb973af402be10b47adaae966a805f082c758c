@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5b8a593_5ed1e5eb",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-21T23:19:10Z",
+      "side": 1,
+      "message": "uNit: These could be separate checks with separate messages. This isn\u0027t super important now as we plan to improve all of our error messages much more in the future.",
+      "range": {
+        "startLine": 31,
+        "startChar": 42,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "241581f7_2effb13b",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-21T23:19:10Z",
+      "side": 1,
+      "message": "nit: If the check is std::isfinite, we should test infinity here as well.",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
