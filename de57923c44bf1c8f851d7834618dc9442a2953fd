@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14eaac6e_665789ca",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-21T14:18:54Z",
+      "side": 1,
+      "message": "Please check if simply changing 2 to 2u fixes the issue by making the result of the multiplication unsigned.",
+      "range": {
+        "startLine": 489,
+        "startChar": 67,
+        "endLine": 489,
+        "endChar": 68
+      },
+      "revId": "de57923c44bf1c8f851d7834618dc9442a2953fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
