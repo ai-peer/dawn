@@ -16,6 +16,24 @@
       "revId": "d26d9562614531cf9bba162ba1ea905dbf0f32b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5987201_51e61a0e",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-22T02:46:03Z",
+      "side": 1,
+      "message": "Happens when you Uncache an entry.",
+      "parentUuid": "d3778a6b_1b805156",
+      "revId": "d26d9562614531cf9bba162ba1ea905dbf0f32b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
