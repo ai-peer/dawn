@@ -22,6 +22,30 @@
       "revId": "78fbb11a65662ec57572a9997337b38376de1808",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ca9ccbd_1d177c0d",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-05-22T20:28:04Z",
+      "side": 1,
+      "message": "I can do this. I just think that we are talking about maxVertexInputBindingStride (a vulkan limit) at the beginning part of the comment, and here we talk about a totally new one \"maxVertxBufferStride\" suddenly. I am afraid that readers might don\u0027t know what it is.",
+      "parentUuid": "eacdae6f_c4bcf661",
+      "range": {
+        "startLine": 29,
+        "startChar": 11,
+        "endLine": 29,
+        "endChar": 79
+      },
+      "revId": "78fbb11a65662ec57572a9997337b38376de1808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
