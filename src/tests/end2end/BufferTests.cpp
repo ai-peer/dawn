@@ -269,6 +269,73 @@ TEST_P(CreateBufferMappedTests, LargeSyncWrite) {
     EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), result.buffer, 0, kDataSize);
 }
 
+TEST_P(CreateBufferMappedTests, CreateThenMapSuccess) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+
+    static uint32_t myData = 230502;
+    static uint32_t myData2 = 1337;
+    dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+    ASSERT_EQ(result.dataLength, descriptor.size);
+    memcpy(result.data, &myData, sizeof(myData));
+    result.buffer.Unmap();
+
+    EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
+
+    bool done = false;
+    result.buffer.MapWriteAsync(
+        [](DawnBufferMapAsyncStatus status, void* data, uint64_t, DawnCallbackUserdata userdata) {
+            ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
+            ASSERT_NE(nullptr, data);
+
+            *reinterpret_cast<uint32_t*>(data) = myData2;
+            *reinterpret_cast<bool*>(static_cast<uintptr_t>(userdata)) = true;
+        },
+        static_cast<DawnCallbackUserdata>(reinterpret_cast<uintptr_t>(&done)));
+
+    while (!done) {
+        WaitABit();
+    }
+
+    result.buffer.Unmap();
+    EXPECT_BUFFER_U32_EQ(myData2, result.buffer, 0);
+}
+
+TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailure) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+
+    uint32_t myData = 230502;
+    dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+    ASSERT_EQ(result.dataLength, descriptor.size);
+    memcpy(result.data, &myData, sizeof(myData));
+
+    ASSERT_DEVICE_ERROR([&]() {
+        bool done = false;
+        result.buffer.MapWriteAsync(
+            [](DawnBufferMapAsyncStatus status, void* data, uint64_t,
+                DawnCallbackUserdata userdata) {
+                ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR, status);
+                ASSERT_EQ(nullptr, data);
+
+                *reinterpret_cast<bool*>(static_cast<uintptr_t>(userdata)) = true;
+            },
+            static_cast<DawnCallbackUserdata>(reinterpret_cast<uintptr_t>(&done)));
+
+        while (!done) {
+            WaitABit();
+        }
+    }());
+
+    // CreateBufferMapped is unaffected by the MapWrite error.
+    result.buffer.Unmap();
+    EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
+}
+
 DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
                       D3D12Backend,
                       MetalBackend,
