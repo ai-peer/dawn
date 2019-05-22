@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c7d1da31_463c832a",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T02:45:13Z",
+      "side": 1,
+      "message": "Oh, good catch, sorry about the misleading comment on the previous patchset.",
+      "parentUuid": "1363fb4c_d116f677",
+      "revId": "c935f94782131905c9f401a2fe73c9eb0343cbcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5caa3fdb_827065ca",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 5
