@@ -33,200 +33,208 @@ constexpr static unsigned int kRTSize = 400;
 constexpr static unsigned int kRTCellOffset = 50;
 constexpr static unsigned int kRTCellSize = 100;
 
-class InputStateTest : public DawnTest {
-    protected:
-        void SetUp() override {
-            DawnTest::SetUp();
+class VertexInputTest : public DawnTest {
+  protected:
+    void SetUp() override {
+        DawnTest::SetUp();
 
-            renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+        renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+    }
+
+    bool ShouldComponentBeDefault(VertexFormat format, int component) {
+        EXPECT_TRUE(component >= 0 && component < 4);
+        switch (format) {
+            case VertexFormat::Float4:
+            case VertexFormat::UChar4Norm:
+                return component >= 4;
+            case VertexFormat::Float3:
+                return component >= 3;
+            case VertexFormat::Float2:
+            case VertexFormat::UChar2Norm:
+                return component >= 2;
+            case VertexFormat::Float:
+                return component >= 1;
+            default:
+                DAWN_UNREACHABLE();
+        }
+    }
+
+    struct ShaderTestSpec {
+        uint32_t location;
+        VertexFormat format;
+        InputStepMode step;
+    };
+    dawn::RenderPipeline MakeTestPipeline(const dawn::VertexInputDescriptor& vertexInput,
+                                          int multiplier,
+                                          const std::vector<ShaderTestSpec>& testSpec) {
+        std::ostringstream vs;
+        vs << "#version 450\n";
+
+        // TODO(cwallez@chromium.org): this only handles float attributes, we should extend it to
+        // other types Adds line of the form
+        //    layout(location=1) in vec4 input1;
+        for (const auto& input : testSpec) {
+            vs << "layout(location=" << input.location << ") in vec4 input" << input.location
+               << ";\n";
         }
 
-        bool ShouldComponentBeDefault(VertexFormat format, int component) {
-            EXPECT_TRUE(component >= 0 && component < 4);
-            switch (format) {
-                case VertexFormat::Float4:
-                case VertexFormat::UChar4Norm:
-                    return component >= 4;
-                case VertexFormat::Float3:
-                    return component >= 3;
-                case VertexFormat::Float2:
-                case VertexFormat::UChar2Norm:
-                    return component >= 2;
-                case VertexFormat::Float:
-                    return component >= 1;
-                default:
-                    DAWN_UNREACHABLE();
-            }
-        }
+        vs << "layout(location = 0) out vec4 color;\n";
+        vs << "void main() {\n";
 
-        struct ShaderTestSpec {
-            uint32_t location;
-            VertexFormat format;
-            InputStepMode step;
-        };
-        dawn::RenderPipeline MakeTestPipeline(const dawn::InputStateDescriptor& inputState,
-                                              int multiplier,
-                                              const std::vector<ShaderTestSpec>& testSpec) {
-            std::ostringstream vs;
-            vs << "#version 450\n";
+        // Hard code the triangle in the shader so that we don't have to add a vertex input for it.
+        // Also this places the triangle in the grid based on its VertexID and InstanceID
+        vs << "    const vec2 pos[3] = vec2[3](vec2(0.5f, 1.0f), vec2(0.0f, 0.0f), vec2(1.0f, "
+              "0.0f));\n";
+        vs << "    vec2 offset = vec2(float(gl_VertexIndex / 3), float(gl_InstanceIndex));\n";
+        vs << "    vec2 worldPos = pos[gl_VertexIndex % 3] + offset;\n";
+        vs << "    gl_Position = vec4(worldPos / 2 - vec2(1.0f), 0.0f, 1.0f);\n";
 
-            // TODO(cwallez@chromium.org): this only handles float attributes, we should extend it to other types
-            // Adds line of the form
-            //    layout(location=1) in vec4 input1;
-            for (const auto& input : testSpec) {
-                vs << "layout(location=" << input.location << ") in vec4 input" << input.location << ";\n";
-            }
-
-            vs << "layout(location = 0) out vec4 color;\n";
-            vs << "void main() {\n";
-
-            // Hard code the triangle in the shader so that we don't have to add a vertex input for it.
-            // Also this places the triangle in the grid based on its VertexID and InstanceID
-            vs << "    const vec2 pos[3] = vec2[3](vec2(0.5f, 1.0f), vec2(0.0f, 0.0f), vec2(1.0f, 0.0f));\n";
-            vs << "    vec2 offset = vec2(float(gl_VertexIndex / 3), float(gl_InstanceIndex));\n";
-            vs << "    vec2 worldPos = pos[gl_VertexIndex % 3] + offset;\n";
-            vs << "    gl_Position = vec4(worldPos / 2 - vec2(1.0f), 0.0f, 1.0f);\n";
-
-            // Perform the checks by successively ANDing a boolean
-            vs << "    bool success = true;\n";
-            for (const auto& input : testSpec) {
-                for (int component = 0; component < 4; ++component) {
-                    vs << "    success = success && (input" << input.location << "[" << component << "] == ";
-                    if (ShouldComponentBeDefault(input.format, component)) {
-                        vs << (component == 3 ? "1.0f" : "0.0f");
+        // Perform the checks by successively ANDing a boolean
+        vs << "    bool success = true;\n";
+        for (const auto& input : testSpec) {
+            for (int component = 0; component < 4; ++component) {
+                vs << "    success = success && (input" << input.location << "[" << component
+                   << "] == ";
+                if (ShouldComponentBeDefault(input.format, component)) {
+                    vs << (component == 3 ? "1.0f" : "0.0f");
+                } else {
+                    if (input.step == InputStepMode::Vertex) {
+                        vs << multiplier << " * gl_VertexIndex + " << component << ".0f";
                     } else {
-                        if (input.step == InputStepMode::Vertex) {
-                            vs << multiplier << " * gl_VertexIndex + " << component << ".0f";
-                        } else {
-                            vs << multiplier << " * gl_InstanceIndex + " << component << ".0f";
-                        }
+                        vs << multiplier << " * gl_InstanceIndex + " << component << ".0f";
                     }
-                    vs << ");\n";
                 }
+                vs << ");\n";
             }
+        }
 
-            // Choose the color
-            vs << "    if (success) {\n";
-            vs << "        color = vec4(0.0f, 1.0f, 0.0f, 1.0f);\n";
-            vs << "    } else {\n";
-            vs << "        color = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n";
-            vs << "    }\n;";
-            vs << "}\n";
+        // Choose the color
+        vs << "    if (success) {\n";
+        vs << "        color = vec4(0.0f, 1.0f, 0.0f, 1.0f);\n";
+        vs << "    } else {\n";
+        vs << "        color = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n";
+        vs << "    }\n;";
+        vs << "}\n";
 
-            dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, vs.str().c_str());
-            dawn::ShaderModule fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
+        dawn::ShaderModule vsModule =
+            utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, vs.str().c_str());
+        dawn::ShaderModule fsModule =
+            utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
                 #version 450
                 layout(location = 0) in vec4 color;
                 layout(location = 0) out vec4 fragColor;
                 void main() {
                     fragColor = color;
-                })"
-            );
+                })");
 
-            utils::ComboRenderPipelineDescriptor descriptor(device);
-            descriptor.cVertexStage.module = vsModule;
-            descriptor.cFragmentStage.module = fsModule;
-            descriptor.inputState = &inputState;
-            descriptor.cColorStates[0]->format = renderPass.colorFormat;
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.cVertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        descriptor.vertexInput = &vertexInput;
+        descriptor.cColorStates[0]->format = renderPass.colorFormat;
 
-            return device.CreateRenderPipeline(&descriptor);
+        return device.CreateRenderPipeline(&descriptor);
+    }
+
+    struct VertexBufferSpec {
+        uint32_t slot;
+        uint64_t stride;
+        InputStepMode step;
+    };
+    struct AttributeSpec {
+        uint32_t location;
+        uint32_t slot;
+        uint64_t offset;
+        VertexFormat format;
+    };
+
+    utils::ComboVertexInputDescriptor MakeVertexInput(
+        const std::vector<VertexBufferSpec>& buffers,
+        const std::vector<AttributeSpec>& attributes) {
+        utils::ComboVertexInputDescriptor vertexInput;
+        uint32_t numBuffers = 0;
+        for (const auto& buffer : buffers) {
+            vertexInput.cBuffers[numBuffers].inputSlot = buffer.slot;
+            vertexInput.cBuffers[numBuffers].stride = buffer.stride;
+            vertexInput.cBuffers[numBuffers].stepMode = buffer.step;
+            numBuffers++;
         }
 
-        struct InputSpec {
-            uint32_t slot;
-            uint64_t stride;
-            InputStepMode step;
-        };
-        struct AttributeSpec {
-            uint32_t location;
-            uint32_t slot;
-            uint64_t offset;
-            VertexFormat format;
-        };
+        uint32_t numAttributes = 0;
+        for (const auto& attribute : attributes) {
+            vertexInput.cAttributes[numAttributes].shaderLocation = attribute.location;
+            vertexInput.cAttributes[numAttributes].inputSlot = attribute.slot;
+            vertexInput.cAttributes[numAttributes].offset = attribute.offset;
+            vertexInput.cAttributes[numAttributes].format = attribute.format;
+            numAttributes++;
+        }
+        vertexInput.numBuffers = numBuffers;
+        vertexInput.numAttributes = numAttributes;
+        return vertexInput;
+    }
 
-        utils::ComboInputStateDescriptor MakeInputState(
-            const std::vector<InputSpec>& inputs,
-            const std::vector<AttributeSpec>& attributes) {
-            utils::ComboInputStateDescriptor inputState;
-            uint32_t numInputs = 0;
-            for (const auto& input : inputs) {
-                inputState.cInputs[numInputs].inputSlot = input.slot;
-                inputState.cInputs[numInputs].stride = input.stride;
-                inputState.cInputs[numInputs].stepMode = input.step;
-                numInputs++;
-            }
+    template <typename T>
+    dawn::Buffer MakeVertexBuffer(std::vector<T> data) {
+        return utils::CreateBufferFromData(device, data.data(),
+                                           static_cast<uint32_t>(data.size() * sizeof(T)),
+                                           dawn::BufferUsageBit::Vertex);
+    }
 
-            uint32_t numAttributes = 0;
-            for (const auto& attribute : attributes) {
-                inputState.cAttributes[numAttributes].shaderLocation = attribute.location;
-                inputState.cAttributes[numAttributes].inputSlot = attribute.slot;
-                inputState.cAttributes[numAttributes].offset = attribute.offset;
-                inputState.cAttributes[numAttributes].format = attribute.format;
-                numAttributes++;
-            }
-            inputState.numInputs = numInputs;
-            inputState.numAttributes = numAttributes;
-            return inputState;
+    struct DrawVertexBuffer {
+        uint32_t location;
+        dawn::Buffer* buffer;
+    };
+    void DoTestDraw(const dawn::RenderPipeline& pipeline,
+                    unsigned int triangles,
+                    unsigned int instances,
+                    std::vector<DrawVertexBuffer> vertexBuffers) {
+        EXPECT_LE(triangles, 4u);
+        EXPECT_LE(instances, 4u);
+
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+
+        uint64_t zeroOffset = 0;
+        for (const auto& buffer : vertexBuffers) {
+            pass.SetVertexBuffers(buffer.location, 1, buffer.buffer, &zeroOffset);
         }
 
-        template<typename T>
-        dawn::Buffer MakeVertexBuffer(std::vector<T> data) {
-            return utils::CreateBufferFromData(device, data.data(), static_cast<uint32_t>(data.size() * sizeof(T)), dawn::BufferUsageBit::Vertex);
-        }
+        pass.Draw(triangles * 3, instances, 0, 0);
+        pass.EndPass();
 
-        struct DrawVertexBuffer {
-            uint32_t location;
-            dawn::Buffer* buffer;
-        };
-        void DoTestDraw(const dawn::RenderPipeline& pipeline, unsigned int triangles, unsigned int instances, std::vector<DrawVertexBuffer> vertexBuffers) {
-            EXPECT_LE(triangles, 4u);
-            EXPECT_LE(instances, 4u);
+        dawn::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
 
-            dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        CheckResult(triangles, instances);
+    }
 
-            dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-            pass.SetPipeline(pipeline);
-
-            uint64_t zeroOffset = 0;
-            for (const auto& buffer : vertexBuffers) {
-                pass.SetVertexBuffers(buffer.location, 1, buffer.buffer, &zeroOffset);
-            }
-
-            pass.Draw(triangles * 3, instances, 0, 0);
-            pass.EndPass();
-
-            dawn::CommandBuffer commands = encoder.Finish();
-            queue.Submit(1, &commands);
-
-            CheckResult(triangles, instances);
-        }
-
-        void CheckResult(unsigned int triangles, unsigned int instances) {
-            // Check that the center of each triangle is pure green, so that if a single vertex shader
-            // instance fails, linear interpolation makes the pixel check fail.
-            for (unsigned int triangle = 0; triangle < 4; triangle++) {
-                for (unsigned int instance = 0; instance < 4; instance++) {
-                    unsigned int x = kRTCellOffset + kRTCellSize * triangle;
-                    unsigned int y = kRTCellOffset + kRTCellSize * instance;
-                    if (triangle < triangles && instance < instances) {
-                        EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, x, y);
-                    } else {
-                        EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 0, 0, 0), renderPass.color, x, y);
-                    }
+    void CheckResult(unsigned int triangles, unsigned int instances) {
+        // Check that the center of each triangle is pure green, so that if a single vertex shader
+        // instance fails, linear interpolation makes the pixel check fail.
+        for (unsigned int triangle = 0; triangle < 4; triangle++) {
+            for (unsigned int instance = 0; instance < 4; instance++) {
+                unsigned int x = kRTCellOffset + kRTCellSize * triangle;
+                unsigned int y = kRTCellOffset + kRTCellSize * instance;
+                if (triangle < triangles && instance < instances) {
+                    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, x, y);
+                } else {
+                    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 0, 0, 0), renderPass.color, x, y);
                 }
             }
         }
+    }
 
-        utils::BasicRenderPass renderPass;
+    utils::BasicRenderPass renderPass;
 };
 
 // Test compilation and usage of the fixture :)
-TEST_P(InputStateTest, Basic) {
-    utils::ComboInputStateDescriptor inputState = MakeInputState(
+TEST_P(VertexInputTest, Basic) {
+    utils::ComboVertexInputDescriptor vertexInput = MakeVertexInput(
         {{0, 4 * sizeof(float), InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float4}});
-    dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
-    });
+    dawn::RenderPipeline pipeline =
+        MakeTestPipeline(vertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Vertex}});
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
         0, 1, 2, 3,
@@ -237,15 +245,14 @@ TEST_P(InputStateTest, Basic) {
 }
 
 // Test a stride of 0 works
-TEST_P(InputStateTest, ZeroStride) {
+TEST_P(VertexInputTest, ZeroStride) {
     // This test was failing only on AMD but the OpenGL backend doesn't gather PCI info yet.
     DAWN_SKIP_TEST_IF(IsLinux() && IsOpenGL());
 
-    utils::ComboInputStateDescriptor inputState =
-        MakeInputState({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float4}});
-    dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
-    });
+    utils::ComboVertexInputDescriptor vertexInput =
+        MakeVertexInput({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float4}});
+    dawn::RenderPipeline pipeline =
+        MakeTestPipeline(vertexInput, 0, {{0, VertexFormat::Float4, InputStepMode::Vertex}});
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
         0, 1, 2, 3,
@@ -254,17 +261,16 @@ TEST_P(InputStateTest, ZeroStride) {
 }
 
 // Test attributes defaults to (0, 0, 0, 1) if the input state doesn't have all components
-TEST_P(InputStateTest, AttributeExpanding) {
+TEST_P(VertexInputTest, AttributeExpanding) {
     // This test was failing only on AMD but the OpenGL backend doesn't gather PCI info yet.
     DAWN_SKIP_TEST_IF(IsLinux() && IsOpenGL());
 
     // R32F case
     {
-        utils::ComboInputStateDescriptor inputState =
-            MakeInputState({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float}});
-        dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-            {0, VertexFormat::Float, InputStepMode::Vertex}
-        });
+        utils::ComboVertexInputDescriptor vertexInput =
+            MakeVertexInput({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float}});
+        dawn::RenderPipeline pipeline =
+            MakeTestPipeline(vertexInput, 0, {{0, VertexFormat::Float, InputStepMode::Vertex}});
 
         dawn::Buffer buffer0 = MakeVertexBuffer<float>({
             0, 1, 2, 3
@@ -273,11 +279,10 @@ TEST_P(InputStateTest, AttributeExpanding) {
     }
     // RG32F case
     {
-        utils::ComboInputStateDescriptor inputState =
-            MakeInputState({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float2}});
-        dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-            {0, VertexFormat::Float2, InputStepMode::Vertex}
-        });
+        utils::ComboVertexInputDescriptor vertexInput =
+            MakeVertexInput({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float2}});
+        dawn::RenderPipeline pipeline =
+            MakeTestPipeline(vertexInput, 0, {{0, VertexFormat::Float2, InputStepMode::Vertex}});
 
         dawn::Buffer buffer0 = MakeVertexBuffer<float>({
             0, 1, 2, 3
@@ -286,11 +291,10 @@ TEST_P(InputStateTest, AttributeExpanding) {
     }
     // RGB32F case
     {
-        utils::ComboInputStateDescriptor inputState =
-            MakeInputState({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float3}});
-        dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 0, {
-            {0, VertexFormat::Float3, InputStepMode::Vertex}
-        });
+        utils::ComboVertexInputDescriptor vertexInput =
+            MakeVertexInput({{0, 0, InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float3}});
+        dawn::RenderPipeline pipeline =
+            MakeTestPipeline(vertexInput, 0, {{0, VertexFormat::Float3, InputStepMode::Vertex}});
 
         dawn::Buffer buffer0 = MakeVertexBuffer<float>({
             0, 1, 2, 3
@@ -300,15 +304,14 @@ TEST_P(InputStateTest, AttributeExpanding) {
 }
 
 // Test a stride larger than the attributes
-TEST_P(InputStateTest, StrideLargerThanAttributes) {
+TEST_P(VertexInputTest, StrideLargerThanAttributes) {
     // This test was failing only on AMD but the OpenGL backend doesn't gather PCI info yet.
     DAWN_SKIP_TEST_IF(IsLinux() && IsOpenGL());
 
-    utils::ComboInputStateDescriptor inputState = MakeInputState(
+    utils::ComboVertexInputDescriptor vertexInput = MakeVertexInput(
         {{0, 8 * sizeof(float), InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float4}});
-    dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
-    });
+    dawn::RenderPipeline pipeline =
+        MakeTestPipeline(vertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Vertex}});
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
         0, 1, 2, 3, 0, 0, 0, 0,
@@ -319,13 +322,12 @@ TEST_P(InputStateTest, StrideLargerThanAttributes) {
 }
 
 // Test two attributes at an offset, vertex version
-TEST_P(InputStateTest, TwoAttributesAtAnOffsetVertex) {
-    utils::ComboInputStateDescriptor inputState = MakeInputState(
+TEST_P(VertexInputTest, TwoAttributesAtAnOffsetVertex) {
+    utils::ComboVertexInputDescriptor vertexInput = MakeVertexInput(
         {{0, 8 * sizeof(float), InputStepMode::Vertex}},
         {{0, 0, 0, VertexFormat::Float4}, {1, 0, 4 * sizeof(float), VertexFormat::Float4}});
-    dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Vertex}
-    });
+    dawn::RenderPipeline pipeline =
+        MakeTestPipeline(vertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Vertex}});
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
         0, 1, 2, 3, 0, 1, 2, 3,
@@ -336,13 +338,12 @@ TEST_P(InputStateTest, TwoAttributesAtAnOffsetVertex) {
 }
 
 // Test two attributes at an offset, instance version
-TEST_P(InputStateTest, TwoAttributesAtAnOffsetInstance) {
-    utils::ComboInputStateDescriptor inputState = MakeInputState(
+TEST_P(VertexInputTest, TwoAttributesAtAnOffsetInstance) {
+    utils::ComboVertexInputDescriptor vertexInput = MakeVertexInput(
         {{0, 8 * sizeof(float), InputStepMode::Instance}},
         {{0, 0, 0, VertexFormat::Float4}, {1, 0, 4 * sizeof(float), VertexFormat::Float4}});
-    dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Instance}
-    });
+    dawn::RenderPipeline pipeline =
+        MakeTestPipeline(vertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
         0, 1, 2, 3, 0, 1, 2, 3,
@@ -353,12 +354,11 @@ TEST_P(InputStateTest, TwoAttributesAtAnOffsetInstance) {
 }
 
 // Test a pure-instance input state
-TEST_P(InputStateTest, PureInstance) {
-    utils::ComboInputStateDescriptor inputState = MakeInputState(
+TEST_P(VertexInputTest, PureInstance) {
+    utils::ComboVertexInputDescriptor vertexInput = MakeVertexInput(
         {{0, 4 * sizeof(float), InputStepMode::Instance}}, {{0, 0, 0, VertexFormat::Float4}});
-    dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float4, InputStepMode::Instance}
-    });
+    dawn::RenderPipeline pipeline =
+        MakeTestPipeline(vertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
         0, 1, 2, 3,
@@ -371,8 +371,8 @@ TEST_P(InputStateTest, PureInstance) {
 
 // Test with mixed everything, vertex vs. instance, different stride and offsets
 // different attribute types
-TEST_P(InputStateTest, MixedEverything) {
-    utils::ComboInputStateDescriptor inputState = MakeInputState(
+TEST_P(VertexInputTest, MixedEverything) {
+    utils::ComboVertexInputDescriptor vertexInput = MakeVertexInput(
         {
             {0, 12 * sizeof(float), InputStepMode::Vertex},
             {1, 10 * sizeof(float), InputStepMode::Instance},
@@ -381,12 +381,12 @@ TEST_P(InputStateTest, MixedEverything) {
          {1, 0, 6 * sizeof(float), VertexFormat::Float2},
          {2, 1, 0, VertexFormat::Float3},
          {3, 1, 5 * sizeof(float), VertexFormat::Float4}});
-    dawn::RenderPipeline pipeline = MakeTestPipeline(inputState, 1, {
-        {0, VertexFormat::Float, InputStepMode::Vertex},
-        {1, VertexFormat::Float2, InputStepMode::Vertex},
-        {2, VertexFormat::Float3, InputStepMode::Instance},
-        {3, VertexFormat::Float4, InputStepMode::Instance}
-    });
+    dawn::RenderPipeline pipeline =
+        MakeTestPipeline(vertexInput, 1,
+                         {{0, VertexFormat::Float, InputStepMode::Vertex},
+                          {1, VertexFormat::Float2, InputStepMode::Vertex},
+                          {2, VertexFormat::Float3, InputStepMode::Instance},
+                          {3, VertexFormat::Float4, InputStepMode::Instance}});
 
     dawn::Buffer buffer0 = MakeVertexBuffer<float>({
         0, 1, 2, 3, 0, 0, 0, 1, 2, 3, 0, 0,
@@ -404,12 +404,12 @@ TEST_P(InputStateTest, MixedEverything) {
 }
 
 // Test input state is unaffected by unused vertex slot
-TEST_P(InputStateTest, UnusedVertexSlot) {
+TEST_P(VertexInputTest, UnusedVertexSlot) {
     // Instance input state, using slot 1
-    utils::ComboInputStateDescriptor instanceInputState = MakeInputState(
+    utils::ComboVertexInputDescriptor instanceVertexInput = MakeVertexInput(
         {{1, 4 * sizeof(float), InputStepMode::Instance}}, {{0, 1, 0, VertexFormat::Float4}});
     dawn::RenderPipeline instancePipeline = MakeTestPipeline(
-        instanceInputState, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
+        instanceVertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
 
     dawn::Buffer buffer = MakeVertexBuffer<float>({
         0, 1, 2, 3,
@@ -441,18 +441,18 @@ TEST_P(InputStateTest, UnusedVertexSlot) {
 // This was a problem with the D3D12 backend where SetVertexBuffers
 // was getting the input from the last set pipeline, not the current.
 // SetVertexBuffers should be reapplied when the input state changes.
-TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
+TEST_P(VertexInputTest, MultiplePipelinesMixedVertexInput) {
     // Basic input state, using slot 0
-    utils::ComboInputStateDescriptor vertexInputState = MakeInputState(
+    utils::ComboVertexInputDescriptor vertexVertexInput = MakeVertexInput(
         {{0, 4 * sizeof(float), InputStepMode::Vertex}}, {{0, 0, 0, VertexFormat::Float4}});
-    dawn::RenderPipeline vertexPipeline = MakeTestPipeline(
-        vertexInputState, 1, {{0, VertexFormat::Float4, InputStepMode::Vertex}});
+    dawn::RenderPipeline vertexPipeline =
+        MakeTestPipeline(vertexVertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Vertex}});
 
     // Instance input state, using slot 1
-    utils::ComboInputStateDescriptor instanceInputState = MakeInputState(
+    utils::ComboVertexInputDescriptor instanceVertexInput = MakeVertexInput(
         {{1, 4 * sizeof(float), InputStepMode::Instance}}, {{0, 1, 0, VertexFormat::Float4}});
     dawn::RenderPipeline instancePipeline = MakeTestPipeline(
-        instanceInputState, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
+        instanceVertexInput, 1, {{0, VertexFormat::Float4, InputStepMode::Instance}});
 
     dawn::Buffer buffer = MakeVertexBuffer<float>({
         0, 1, 2, 3,
@@ -483,7 +483,7 @@ TEST_P(InputStateTest, MultiplePipelinesMixedInputState) {
     CheckResult(1, 4);
 }
 
-DAWN_INSTANTIATE_TEST(InputStateTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(VertexInputTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
 
 // TODO for the input state:
 //  - Add more vertex formats
