@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3778a6b_1b805156",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T02:44:09Z",
+      "side": 1,
+      "message": "FYI I don\u0027t think this would ever happen in practice because we always compare blueprints (stack allocated) against cached entries.",
+      "revId": "d26d9562614531cf9bba162ba1ea905dbf0f32b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
