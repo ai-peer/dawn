@@ -71,9 +71,30 @@ namespace dawn_wire { namespace client {
     DawnCreateBufferMappedResult ClientDeviceCreateBufferMapped(
         DawnDevice cDevice,
         const DawnBufferDescriptor* descriptor) {
-        // TODO(enga): Not implemented
-        UNREACHABLE();
-        return {};
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        auto* bufferObjectAndSerial = device->GetClient()->BufferAllocator().New(device);
+
+        DeviceCreateBufferMappedCmd cmd;
+        cmd.device = cDevice;
+        cmd.descriptor = descriptor;
+        cmd.result = ObjectHandle{bufferObjectAndSerial->object->id, bufferObjectAndSerial->serial};
+
+        size_t requiredSize = cmd.GetRequiredSize();
+        char* allocatedBuffer = static_cast<char*>(device->GetClient()->GetCmdSpace(requiredSize));
+        cmd.Serialize(allocatedBuffer, *device->GetClient());
+
+        DawnBuffer cBuffer = reinterpret_cast<DawnBuffer>(bufferObjectAndSerial->object.get());
+        Buffer* buffer = reinterpret_cast<Buffer*>(cBuffer);
+        buffer->isWriteMapped = true;
+        buffer->mappedData = malloc(descriptor->size);
+        buffer->mappedDataSize = descriptor->size;
+
+        DawnCreateBufferMappedResult result;
+        result.buffer = cBuffer;
+        result.data = reinterpret_cast<uint8_t*>(buffer->mappedData);
+        result.dataLength = descriptor->size;
+
+        return result;
     }
 
     uint64_t ClientFenceGetCompletedValue(DawnFence cSelf) {
