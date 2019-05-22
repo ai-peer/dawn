@@ -22,6 +22,30 @@
       "revId": "de57923c44bf1c8f851d7834618dc9442a2953fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b145b4ec_861597b8",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T01:02:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14eaac6e_665789ca",
+      "range": {
+        "startLine": 489,
+        "startChar": 67,
+        "endLine": 489,
+        "endChar": 68
+      },
+      "revId": "de57923c44bf1c8f851d7834618dc9442a2953fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
