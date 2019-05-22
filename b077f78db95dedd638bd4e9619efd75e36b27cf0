@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a1ee0bc_15085018",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T01:00:31Z",
+      "side": 1,
+      "message": "I\u0027m confused, why do we have two allocations (here and malloc)? what do they represent? (can you rename this variable?)",
+      "revId": "b077f78db95dedd638bd4e9619efd75e36b27cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
