@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0202a3a6_fece0862",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T19:11:37Z",
+      "side": 1,
+      "message": "Since you renamed everything in the code, no need to explain the rename in the comment.",
+      "range": {
+        "startLine": 29,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 53
+      },
+      "revId": "59d1bb862e056a45ad68afe57871e92e73abc8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25444acd_6518c085",
+        "filename": "src/tests/end2end/InputStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T19:11:37Z",
+      "side": 1,
+      "message": "nit: Maybe also rename this file?",
+      "revId": "59d1bb862e056a45ad68afe57871e92e73abc8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bf1e32c_f796d0e0",
+        "filename": "src/tests/unittests/validation/InputStateValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T19:11:37Z",
+      "side": 1,
+      "message": "nit: maybe also rename this file?",
+      "revId": "59d1bb862e056a45ad68afe57871e92e73abc8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
