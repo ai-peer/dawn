@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "202f7076_c8bfeb56",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T15:31:28Z",
+      "side": 1,
+      "message": "The ObjectAllocators should be changed to use the ObjectHandle type unless we use tyhe unique_ptr somewhere.",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ea45718_f4735d74",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T15:31:28Z",
+      "side": 1,
+      "message": "nit: this is only used in the result and could be cast inline.",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59c43ec1_633ccbb5",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T15:31:28Z",
+      "side": 1,
+      "message": "nit: this is just bufferObjectAndSerial-\u003eobject.get(); we should probably have buffer declared much earlier in the function for some factorization.",
+      "range": {
+        "startLine": 87,
+        "startChar": 25,
+        "endLine": 87,
+        "endChar": 59
+      },
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca7debfa_ba92ac28",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T15:31:28Z",
+      "side": 1,
+      "message": "nit: also assert mappedData !\u003d nullptr",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c37c82f2_88aed621",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T15:31:28Z",
+      "side": 1,
+      "message": "Can we have a TODO that this should use the initialize resources to one toggle eventually?\n\nuNit: comment before tests.",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "028306e2_0ae12171",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-22T15:31:28Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be in the validation unittests instead?",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
