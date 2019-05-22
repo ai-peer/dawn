@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "016e1be1_92f65930",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-22T15:49:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930f64b6_03fe1c46",
+      "revId": "c935f94782131905c9f401a2fe73c9eb0343cbcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1363fb4c_d116f677",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 5
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "0ab9adb8_bd469052",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-22T15:49:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7d1da31_463c832a",
+      "revId": "c935f94782131905c9f401a2fe73c9eb0343cbcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5caa3fdb_827065ca",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 5
@@ -68,6 +104,24 @@
       "revId": "c935f94782131905c9f401a2fe73c9eb0343cbcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73468315_171ac620",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-05-22T15:49:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5caa3fdb_827065ca",
+      "revId": "c935f94782131905c9f401a2fe73c9eb0343cbcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
