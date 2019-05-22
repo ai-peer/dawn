@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6c23eda2_c66bb014",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d5869a9_013b6857",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b1b8220_571952c9",
         "filename": "src/dawn_native/metal/PipelineLayoutMTL.mm",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ce0bf03_61413f67",
+        "filename": "src/dawn_native/metal/PipelineLayoutMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b1b8220_571952c9",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "470c1046_331e1336",
+        "filename": "src/dawn_native/metal/PipelineLayoutMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "102e0756_0d4b9a31",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4672134a_444ed75a",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "282436e5_d7c2cfa5",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4672134a_444ed75a",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "1124857b_6658111d",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50ff9fb8_70e096d0",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bef8f6a_2e22da68",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -101,6 +191,24 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecac1bbe_a6677dd7",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bef8f6a_2e22da68",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "1180b5d6_b4bb1d5f",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c7be1ef_b140cf50",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dace2a88_d09ea0b1",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -135,6 +261,24 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b50566e_1ae6dacd",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dace2a88_d09ea0b1",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +305,30 @@
     },
     {
       "key": {
+        "uuid": "591d3318_2f7daa78",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1b069c3_afe8b3ac",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 1
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cf1bc04_5f6b93aa",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -181,6 +349,30 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6faec1fa_ee867b6b",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cf1bc04_5f6b93aa",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -207,6 +399,30 @@
     },
     {
       "key": {
+        "uuid": "71b64a59_357f20ce",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "449cddc0_d1d679e7",
+      "range": {
+        "startLine": 189,
+        "startChar": 50,
+        "endLine": 189,
+        "endChar": 51
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc2d493c_69fbec69",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -221,6 +437,24 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edcbce09_aa098255",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc2d493c_69fbec69",
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -247,6 +481,30 @@
     },
     {
       "key": {
+        "uuid": "ca58c070_f933bb86",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5af67b02_50314f5f",
+      "range": {
+        "startLine": 202,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 16
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59f0b931_e92814f5",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -267,6 +525,30 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "593f556c_7cdf5d3f",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59f0b931_e92814f5",
+      "range": {
+        "startLine": 214,
+        "startChar": 50,
+        "endLine": 214,
+        "endChar": 51
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -293,6 +575,30 @@
     },
     {
       "key": {
+        "uuid": "8cf300b0_f4bea2d0",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9ad94f4_02abc055",
+      "range": {
+        "startLine": 236,
+        "startChar": 51,
+        "endLine": 236,
+        "endChar": 52
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3a0d81c_c0ceec89",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -316,6 +622,30 @@
     },
     {
       "key": {
+        "uuid": "9c6559da_fa980565",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3a0d81c_c0ceec89",
+      "range": {
+        "startLine": 248,
+        "startChar": 12,
+        "endLine": 248,
+        "endChar": 16
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bbe47f2f_2bf54e1c",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -336,6 +666,30 @@
       "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db9362a5_fbb34465",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-05-22T02:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbe47f2f_2bf54e1c",
+      "range": {
+        "startLine": 258,
+        "startChar": 51,
+        "endLine": 258,
+        "endChar": 52
+      },
+      "revId": "e882cbea7def2f3b3166b0c7a75b7078dd001075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
