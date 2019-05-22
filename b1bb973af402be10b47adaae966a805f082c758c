@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "795f2f30_0f947ebf",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-22T00:34:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "89bcc79b_7b443364",
+      "range": {
+        "startLine": 31,
+        "startChar": 42,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "058280f2_5da57feb",
         "filename": "src/dawn_native/Sampler.cpp",
         "patchSetId": 1
@@ -63,6 +87,24 @@
       "revId": "b1bb973af402be10b47adaae966a805f082c758c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b406187_d1e57a10",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-22T00:34:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "058280f2_5da57feb",
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -110,6 +152,30 @@
       "revId": "b1bb973af402be10b47adaae966a805f082c758c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4e24f0b_06801406",
+        "filename": "src/tests/unittests/validation/SamplerValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-22T00:34:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dee6702_5236e09b",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "b1bb973af402be10b47adaae966a805f082c758c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
