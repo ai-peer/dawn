@@ -26,7 +26,7 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
-        VkVertexInputRate VulkanInputRate(dawn::InputStepMode stepMode) {
+        VkVertexBufferRate VulkanInputRate(dawn::InputStepMode stepMode) {
             switch (stepMode) {
                 case dawn::InputStepMode::Vertex:
                     return VK_VERTEX_INPUT_RATE_VERTEX;
@@ -296,11 +296,11 @@ namespace dawn_native { namespace vulkan {
             shaderStages[1].pName = descriptor->fragmentStage->entryPoint;
         }
 
-        std::array<VkVertexInputBindingDescription, kMaxVertexInputs> mBindings;
-        std::array<VkVertexInputAttributeDescription, kMaxVertexAttributes> mAttributes;
-        const InputStateDescriptor* inputState = GetInputStateDescriptor();
-        VkPipelineVertexInputStateCreateInfo inputStateCreateInfo =
-            ComputeInputStateDesc(inputState, &mBindings, &mAttributes);
+        std::array<VkVertexBufferBindingDescription, kMaxVertexBuffers> mBindings;
+        std::array<VkVertexBufferAttributeDescription, kMaxVertexAttributes> mAttributes;
+        const VertexInputDescriptor* vertexInput = GetVertexInputDescriptor();
+        VkPipelineVertexBufferStateCreateInfo vertexInputCreateInfo =
+            ComputeVertexInputDesc(vertexInput, &mBindings, &mAttributes);
 
         VkPipelineInputAssemblyStateCreateInfo inputAssembly;
         inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
@@ -427,7 +427,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.flags = 0;
         createInfo.stageCount = 2;
         createInfo.pStages = shaderStages;
-        createInfo.pVertexInputState = &inputStateCreateInfo;
+        createInfo.pVertexBufferState = &vertexInputCreateInfo;
         createInfo.pInputAssemblyState = &inputAssembly;
         createInfo.pTessellationState = nullptr;
         createInfo.pViewportState = &viewport;
@@ -448,10 +448,10 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
-    VkPipelineVertexInputStateCreateInfo RenderPipeline::ComputeInputStateDesc(
-        const InputStateDescriptor* inputState,
-        std::array<VkVertexInputBindingDescription, kMaxVertexInputs>* mBindings,
-        std::array<VkVertexInputAttributeDescription, kMaxVertexAttributes>* mAttributes) {
+    VkPipelineVertexBufferStateCreateInfo RenderPipeline::ComputeVertexInputDesc(
+        const VertexInputDescriptor* vertexInput,
+        std::array<VkVertexBufferBindingDescription, kMaxVertexBuffers>* mBindings,
+        std::array<VkVertexBufferAttributeDescription, kMaxVertexAttributes>* mAttributes) {
         // Fill in the "binding info" that will be chained in the create info
         uint32_t bindingCount = 0;
         for (uint32_t i : IterateBitSet(GetInputsSetMask())) {
@@ -480,7 +480,7 @@ namespace dawn_native { namespace vulkan {
         }
 
         // Build the create info
-        VkPipelineVertexInputStateCreateInfo mCreateInfo;
+        VkPipelineVertexBufferStateCreateInfo mCreateInfo;
         mCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
         mCreateInfo.pNext = nullptr;
         mCreateInfo.flags = 0;
