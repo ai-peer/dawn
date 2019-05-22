@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e6b7be01_057ddc47",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-22T17:11:12Z",
+      "side": 1,
+      "message": "As noted below, it\u0027s used to get the Buffer* as well. Factored a bunch of this code.",
+      "parentUuid": "202f7076_c8bfeb56",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ea45718_f4735d74",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03437de3_90d0cdcc",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-22T17:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ea45718_f4735d74",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "fddb9d16_26a2e50b",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-22T17:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59c43ec1_633ccbb5",
+      "range": {
+        "startLine": 87,
+        "startChar": 25,
+        "endLine": 87,
+        "endChar": 59
+      },
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca7debfa_ba92ac28",
         "filename": "src/dawn_wire/server/ServerBuffer.cpp",
         "patchSetId": 4
@@ -73,6 +133,24 @@
       "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e688f1e_2bacaea3",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-22T17:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca7debfa_ba92ac28",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "dc750140_d8b07178",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-22T17:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c37c82f2_88aed621",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "028306e2_0ae12171",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 4
@@ -107,6 +203,24 @@
       "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcf9e762_43d6f0a6",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-22T17:11:12Z",
+      "side": 1,
+      "message": "Still tests the correctness that the final Unmap updates the buffer.",
+      "parentUuid": "028306e2_0ae12171",
+      "revId": "ca9aa734dc1d1e7ac2601c25af77e5bd56db3705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
