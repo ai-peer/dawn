@@ -1,4 +1,4 @@
-// Copyright 2018 The Dawn Authors
+// Copyright 2019 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,31 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_STAGINGBUFFER_H_
-#define DAWNNATIVE_STAGINGBUFFER_H_
+#ifndef DAWNNATIVE_REFCOUNTEDTRACKER_H_
+#define DAWNNATIVE_REFCOUNTEDTRACKER_H_
 
-#include "dawn_native/Error.h"
+#include "common/SerialQueue.h"
 #include "dawn_native/RefCounted.h"
 
 namespace dawn_native {
 
-    class StagingBufferBase : public RefCounted {
+    class DeviceBase;
+
+    class RefCountedTracker {
       public:
-        StagingBufferBase(size_t size);
-        virtual ~StagingBufferBase() = default;
+        RefCountedTracker(DeviceBase* device);
+        ~RefCountedTracker() = default;
 
-        virtual MaybeError Initialize() = 0;
-
-        void* GetMappedPointer() const;
-        size_t GetSize() const;
-
-      protected:
-        void* mMappedPointer = nullptr;
+        void Track(RefCounted* object);
+        void Tick(Serial finishedSerial);
 
       private:
-        const size_t mBufferSize;
+        DeviceBase* mDevice;
+        SerialQueue<Ref<RefCounted>> mRefsInFlight;
     };
 
 }  // namespace dawn_native
 
-#endif  // DAWNNATIVE_STAGINGBUFFER_H_
+#endif  // DAWNNATIVE_REFCOUNTEDTRACKER_H_
