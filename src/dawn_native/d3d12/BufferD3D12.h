@@ -26,7 +26,9 @@ namespace dawn_native { namespace d3d12 {
 
     class Buffer : public BufferBase {
       public:
-        Buffer(Device* device, const BufferDescriptor* descriptor);
+        Buffer(Device* device,
+               const BufferDescriptor* descriptor,
+               dawn::BufferUsageBit additionalInternalUsage);
         ~Buffer();
 
         uint32_t GetD3D12Size() const;
@@ -44,6 +46,7 @@ namespace dawn_native { namespace d3d12 {
         void UnmapImpl() override;
         void DestroyImpl() override;
 
+        bool IsCPUVisible() const override;
         virtual MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
 
         ComPtr<ID3D12Resource> mResource;

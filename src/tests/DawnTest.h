@@ -33,6 +33,14 @@
     AddBufferExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint32_t) * count, \
                          new detail::ExpectEq<uint32_t>(expected, count))
 
+#define EXPECT_BUFFER_MAP_READ_U32_EQ(expected, buffer, offset)                       \
+    AddBufferMapReadExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint32_t), \
+                                new detail::ExpectEq<uint32_t>(expected))
+
+#define EXPECT_BUFFER_MAP_READ_U32_RANGE_EQ(expected, buffer, offset, count)                  \
+    AddBufferMapReadExpectation(__FILE__, __LINE__, buffer, offset, sizeof(uint32_t) * count, \
+                                new detail::ExpectEq<uint32_t>(expected, count))
+
 // Test a pixel of the mip level 0 of a 2D texture.
 #define EXPECT_PIXEL_RGBA8_EQ(expected, texture, x, y)                                  \
     AddTextureExpectation(__FILE__, __LINE__, texture, x, y, 1, 1, 0, 0, sizeof(RGBA8), \
@@ -178,6 +186,12 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
                                               uint32_t slice,
                                               uint32_t pixelSize,
                                               detail::Expectation* expectation);
+    testing::AssertionResult AddBufferMapReadExpectation(const char* file,
+                                                         int line,
+                                                         const dawn::Buffer& buffer,
+                                                         uint64_t offset,
+                                                         uint64_t size,
+                                                         detail::Expectation* expectation);
 
     void WaitABit();
     void FlushWire();

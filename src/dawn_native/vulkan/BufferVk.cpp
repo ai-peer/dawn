@@ -102,14 +102,16 @@ namespace dawn_native { namespace vulkan {
 
     }  // namespace
 
-    Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
+    Buffer::Buffer(Device* device,
+                   const BufferDescriptor* descriptor,
+                   dawn::BufferUsageBit additionalInternalUsage)
         : BufferBase(device, descriptor) {
         VkBufferCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
         createInfo.pNext = nullptr;
         createInfo.flags = 0;
         createInfo.size = GetSize();
-        createInfo.usage = VulkanBufferUsage(GetUsage());
+        createInfo.usage = VulkanBufferUsage(GetUsage() | additionalInternalUsage);
         createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
         createInfo.queueFamilyIndexCount = 0;
         createInfo.pQueueFamilyIndices = 0;
@@ -186,6 +188,11 @@ namespace dawn_native { namespace vulkan {
                                     nullptr);
 
         mLastUsage = usage;
+    }
+
+    bool Buffer::IsCPUVisible() const {
+        // TODO(enga): Handle CPU-visible memory on UMA
+        return mMemoryAllocation.GetMappedPointer() != nullptr;
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {

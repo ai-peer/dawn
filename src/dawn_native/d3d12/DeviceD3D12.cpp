@@ -71,6 +71,12 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Device::~Device() {
+        // Immediately forget about all pending commands
+        if (mPendingCommands.open) {
+            mPendingCommands.commandList->Close();
+            mPendingCommands.open = false;
+            mPendingCommands.commandList = nullptr;
+        }
         NextSerial();
         WaitForSerial(mLastSubmittedSerial);  // Wait for all in-flight commands to finish executing
         TickImpl();                    // Call tick one last time so resources are cleaned up
@@ -210,8 +216,10 @@ namespace dawn_native { namespace d3d12 {
         const BindGroupLayoutDescriptor* descriptor) {
         return new BindGroupLayout(this, descriptor);
     }
-    ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-        return new Buffer(this, descriptor);
+    ResultOrError<BufferBase*> Device::CreateBufferImpl(
+        const BufferDescriptor* descriptor,
+        dawn::BufferUsageBit additionalInternalUsage) {
+        return new Buffer(this, descriptor, additionalInternalUsage);
     }
     CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder) {
         return new CommandBuffer(this, encoder);

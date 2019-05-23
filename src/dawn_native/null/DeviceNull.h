@@ -110,7 +110,9 @@ namespace dawn_native { namespace null {
             const BindGroupDescriptor* descriptor) override;
         ResultOrError<BindGroupLayoutBase*> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor) override;
-        ResultOrError<BufferBase*> CreateBufferImpl(const BufferDescriptor* descriptor) override;
+        ResultOrError<BufferBase*> CreateBufferImpl(
+            const BufferDescriptor* descriptor,
+            dawn::BufferUsageBit additionalInternalUsage) override;
         ResultOrError<ComputePipelineBase*> CreateComputePipelineImpl(
             const ComputePipelineDescriptor* descriptor) override;
         ResultOrError<PipelineLayoutBase*> CreatePipelineLayoutImpl(
@@ -142,6 +144,10 @@ namespace dawn_native { namespace null {
         ~Buffer();
 
         void MapReadOperationCompleted(uint32_t serial, void* ptr, bool isWrite);
+        void CopyFromStaging(StagingBufferBase* staging,
+                             uint64_t sourceOffset,
+                             uint64_t destinationOffset,
+                             uint64_t size);
 
       private:
         // Dawn API
@@ -151,6 +157,7 @@ namespace dawn_native { namespace null {
         void UnmapImpl() override;
         void DestroyImpl() override;
 
+        bool IsCPUVisible() const override;
         MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
         void MapAsyncImplCommon(uint32_t serial, bool isWrite);
 

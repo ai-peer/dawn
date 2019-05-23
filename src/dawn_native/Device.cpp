@@ -263,7 +263,18 @@ namespace dawn_native {
         BufferBase* buffer = nullptr;
         uint8_t* data = nullptr;
 
-        if (ConsumedError(CreateBufferInternal(&buffer, descriptor)) ||
+        constexpr dawn::BufferUsageBit writeableUsages =
+            dawn::BufferUsageBit::TransferDst | dawn::BufferUsageBit::MapWrite;
+        dawn::BufferUsageBit usage = descriptor->usage;
+
+        // If the buffer is not writeable, add a TransferDst usage so it can be
+        // copied to.
+        dawn::BufferUsageBit additionalInternalUsage = dawn::BufferUsageBit::None;
+        if ((usage & writeableUsages) == 0) {
+            additionalInternalUsage |= dawn::BufferUsageBit::TransferDst;
+        }
+
+        if (ConsumedError(CreateBufferInternal(&buffer, descriptor, additionalInternalUsage)) ||
             ConsumedError(buffer->MapAtCreation(&data))) {
             // Map failed. Replace the buffer with an error buffer.
             if (buffer != nullptr) {
@@ -449,9 +460,10 @@ namespace dawn_native {
     }
 
     MaybeError DeviceBase::CreateBufferInternal(BufferBase** result,
-                                                const BufferDescriptor* descriptor) {
+                                                const BufferDescriptor* descriptor,
+                                                dawn::BufferUsageBit additionalInternalUsage) {
         DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
-        DAWN_TRY_ASSIGN(*result, CreateBufferImpl(descriptor));
+        DAWN_TRY_ASSIGN(*result, CreateBufferImpl(descriptor, additionalInternalUsage));
         return {};
     }
 

@@ -92,7 +92,9 @@ namespace dawn_native { namespace metal {
         const BindGroupLayoutDescriptor* descriptor) {
         return new BindGroupLayout(this, descriptor);
     }
-    ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
+    ResultOrError<BufferBase*> Device::CreateBufferImpl(
+        const BufferDescriptor* descriptor,
+        dawn::BufferUsageBit additionalInternalUsage) {
         return new Buffer(this, descriptor);
     }
     CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder) {
