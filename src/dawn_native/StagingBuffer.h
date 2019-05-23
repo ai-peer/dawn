@@ -16,10 +16,11 @@
 #define DAWNNATIVE_STAGINGBUFFER_H_
 
 #include "dawn_native/Error.h"
+#include "dawn_native/RefCounted.h"
 
 namespace dawn_native {
 
-    class StagingBufferBase {
+    class StagingBufferBase : public RefCounted {
       public:
         StagingBufferBase(size_t size);
         virtual ~StagingBufferBase() = default;
