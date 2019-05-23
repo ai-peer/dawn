@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/RefCountedTracker.h"
 #include "dawn_native/opengl/BufferGL.h"
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
@@ -47,9 +48,10 @@ namespace dawn_native { namespace opengl {
         // operations to look as if they were completed (because they were).
         mCompletedSerial = mLastSubmittedSerial + 1;
 
-        mDynamicUploader = nullptr;
-
         Tick();
+
+        mDynamicUploader = nullptr;
+        mRefCountedTracker = nullptr;
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -121,6 +123,7 @@ namespace dawn_native { namespace opengl {
 
     void Device::TickImpl() {
         CheckPassedFences();
+        mRefCountedTracker->Tick(mCompletedSerial);
     }
 
     void Device::CheckPassedFences() {
