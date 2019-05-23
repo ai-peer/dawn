@@ -124,7 +124,7 @@ namespace dawn_native { namespace null {
         return new TextureView(texture, descriptor);
     }
 
-    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
+    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(uint64_t size) {
         std::unique_ptr<StagingBufferBase> stagingBuffer =
             std::make_unique<StagingBuffer>(size, this);
         return std::move(stagingBuffer);
@@ -303,7 +303,7 @@ namespace dawn_native { namespace null {
 
     // StagingBuffer
 
-    StagingBuffer::StagingBuffer(size_t size, Device* device) : StagingBufferBase(size) {
+    StagingBuffer::StagingBuffer(uint64_t size, Device* device) : StagingBufferBase(size) {
     }
 
     MaybeError StagingBuffer::Initialize() {

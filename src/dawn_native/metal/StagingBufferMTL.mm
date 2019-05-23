@@ -17,12 +17,12 @@
 
 namespace dawn_native { namespace metal {
 
-    StagingBuffer::StagingBuffer(size_t size, Device* device)
+    StagingBuffer::StagingBuffer(uint64_t size, Device* device)
         : StagingBufferBase(size), mDevice(device) {
     }
 
     MaybeError StagingBuffer::Initialize() {
-        const size_t bufferSize = GetSize();
+        const uint64_t bufferSize = GetSize();
         mBuffer = [mDevice->GetMTLDevice() newBufferWithLength:bufferSize
                                                        options:MTLResourceStorageModeShared];
         mMappedPointer = [mBuffer contents];

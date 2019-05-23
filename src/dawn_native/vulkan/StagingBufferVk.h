@@ -24,7 +24,7 @@ namespace dawn_native { namespace vulkan {
 
     class StagingBuffer : public StagingBufferBase {
       public:
-        StagingBuffer(size_t size, Device* device);
+        StagingBuffer(uint64_t size, Device* device);
         ~StagingBuffer();
 
         VkBuffer GetBufferHandle() const;

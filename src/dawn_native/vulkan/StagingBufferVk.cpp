@@ -19,7 +19,7 @@
 
 namespace dawn_native { namespace vulkan {
 
-    StagingBuffer::StagingBuffer(size_t size, Device* device)
+    StagingBuffer::StagingBuffer(uint64_t size, Device* device)
         : StagingBufferBase(size), mDevice(device) {
     }
 

@@ -80,6 +80,15 @@ uint32_t Align(uint32_t value, size_t alignment) {
     return (value + (alignment32 - 1)) & ~(alignment32 - 1);
 }
 
+uint64_t Align(uint64_t value, size_t alignment) {
+    ASSERT(alignment <= UINT32_MAX);
+    ASSERT(IsPowerOfTwo(alignment));
+    ASSERT(alignment != 0);
+    uint64_t value_upper = (value >> 32) << 32;
+    uint32_t aligned_lower = Align(static_cast<uint32_t>(value), alignment);
+    return value_upper + static_cast<uint64_t>(aligned_lower);
+}
+
 uint16_t Float32ToFloat16(float fp32) {
     uint32_t fp32i = BitCast<uint32_t>(fp32);
     uint32_t sign16 = (fp32i & 0x80000000) >> 16;

@@ -21,19 +21,19 @@ namespace dawn_native {
 
     class StagingBufferBase {
       public:
-        StagingBufferBase(size_t size);
+        StagingBufferBase(uint64_t size);
         virtual ~StagingBufferBase() = default;
 
         virtual MaybeError Initialize() = 0;
 
         void* GetMappedPointer() const;
-        size_t GetSize() const;
+        uint64_t GetSize() const;
 
       protected:
         void* mMappedPointer = nullptr;
 
       private:
-        const size_t mBufferSize;
+        const uint64_t mBufferSize;
     };
 
 }  // namespace dawn_native

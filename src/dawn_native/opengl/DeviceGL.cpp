@@ -144,7 +144,7 @@ namespace dawn_native { namespace opengl {
         }
     }
 
-    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
+    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(uint64_t size) {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to create staging buffer.");
     }
 

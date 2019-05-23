@@ -25,7 +25,7 @@ namespace dawn_native { namespace metal {
 
     class StagingBuffer : public StagingBufferBase {
       public:
-        StagingBuffer(size_t size, Device* device);
+        StagingBuffer(uint64_t size, Device* device);
         ~StagingBuffer();
 
         id<MTLBuffer> GetBufferHandle() const;

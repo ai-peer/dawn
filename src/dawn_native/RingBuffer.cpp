@@ -30,9 +30,9 @@
 // TODO(bryan.bernhart@intel.com): Follow-up with ringbuffer optimization.
 namespace dawn_native {
 
-    static constexpr size_t INVALID_OFFSET = std::numeric_limits<size_t>::max();
+    static constexpr uint64_t INVALID_OFFSET = std::numeric_limits<uint64_t>::max();
 
-    RingBuffer::RingBuffer(DeviceBase* device, size_t size) : mBufferSize(size), mDevice(device) {
+    RingBuffer::RingBuffer(DeviceBase* device, uint64_t size) : mBufferSize(size), mDevice(device) {
     }
 
     MaybeError RingBuffer::Initialize() {
@@ -70,11 +70,11 @@ namespace dawn_native {
         mInflightRequests.ClearUpTo(lastCompletedSerial);
     }
 
-    size_t RingBuffer::GetSize() const {
+    uint64_t RingBuffer::GetSize() const {
         return mBufferSize;
     }
 
-    size_t RingBuffer::GetUsedSize() const {
+    uint64_t RingBuffer::GetUsedSize() const {
         return mUsedSize;
     }
 
@@ -94,7 +94,7 @@ namespace dawn_native {
     // queue, which identifies an existing (or new) frames-worth of resources. Internally, the
     // ring-buffer maintains offsets of 3 "memory" states: Free, Reclaimed, and Used. This is done
     // in FIFO order as older frames would free resources before newer ones.
-    UploadHandle RingBuffer::SubAllocate(size_t allocSize) {
+    UploadHandle RingBuffer::SubAllocate(uint64_t allocSize) {
         ASSERT(mStagingBuffer != nullptr);
 
         // Check if the buffer is full by comparing the used size.
@@ -104,7 +104,7 @@ namespace dawn_native {
         if (mUsedSize >= mBufferSize)
             return UploadHandle{};
 
-        size_t startOffset = INVALID_OFFSET;
+        uint64_t startOffset = INVALID_OFFSET;
 
         // Check if the buffer is NOT split (i.e sub-alloc on ends)
         if (mUsedStartOffset <= mUsedEndOffset) {
@@ -119,7 +119,7 @@ namespace dawn_native {
             } else if (allocSize <= mUsedStartOffset) {  // Try to sub-alloc at front.
                 // Count the space at front in the request size so that a subsequent
                 // sub-alloc cannot not succeed when the buffer is full.
-                const size_t requestSize = (mBufferSize - mUsedEndOffset) + allocSize;
+                const uint64_t requestSize = (mBufferSize - mUsedEndOffset) + allocSize;
 
                 startOffset = 0;
                 mUsedEndOffset = allocSize;

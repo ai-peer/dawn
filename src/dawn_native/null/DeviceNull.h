@@ -95,7 +95,8 @@ namespace dawn_native { namespace null {
         void AddPendingOperation(std::unique_ptr<PendingOperation> operation);
         void SubmitPendingOperations();
 
-        ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(size_t size) override;
+        ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(
+            uint64_t size) override;
         MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
                                            uint64_t sourceOffset,
                                            BufferBase* destination,
@@ -194,7 +195,7 @@ namespace dawn_native { namespace null {
 
     class StagingBuffer : public StagingBufferBase {
       public:
-        StagingBuffer(size_t size, Device* device);
+        StagingBuffer(uint64_t size, Device* device);
         MaybeError Initialize() override;
 
       private:

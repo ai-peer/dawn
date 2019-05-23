@@ -131,7 +131,7 @@ namespace dawn_native {
         return ErrorBuffer::MakeMapped(device, size, mappedPointer);
     }
 
-    uint32_t BufferBase::GetSize() const {
+    uint64_t BufferBase::GetSize() const {
         ASSERT(!IsError());
         return mSize;
     }
@@ -236,7 +236,7 @@ namespace dawn_native {
 
         // TODO(bryan.bernhart@intel.com): Remove once alignment constraint is added to validation
         // (dawn:73). D3D12 does not specify so we assume 4-byte alignment to be safe.
-        static constexpr size_t kDefaultAlignment = 4;
+        static constexpr uint32_t kDefaultAlignment = 4;
 
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(count, kDefaultAlignment));

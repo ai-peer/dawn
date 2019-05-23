@@ -25,7 +25,7 @@ namespace dawn_native {
 
     struct UploadHandle {
         uint8_t* mappedBuffer = nullptr;
-        size_t startOffset = 0;
+        uint64_t startOffset = 0;
         StagingBufferBase* stagingBuffer = nullptr;
     };
 
@@ -33,17 +33,17 @@ namespace dawn_native {
 
     class RingBuffer {
       public:
-        RingBuffer(DeviceBase* device, size_t size);
+        RingBuffer(DeviceBase* device, uint64_t size);
         ~RingBuffer() = default;
 
         MaybeError Initialize();
 
-        UploadHandle SubAllocate(size_t requestedSize);
+        UploadHandle SubAllocate(uint64_t requestedSize);
 
         void Tick(Serial lastCompletedSerial);
-        size_t GetSize() const;
+        uint64_t GetSize() const;
         bool Empty() const;
-        size_t GetUsedSize() const;
+        uint64_t GetUsedSize() const;
         StagingBufferBase* GetStagingBuffer() const;
 
         // Seperated for testing.
@@ -53,18 +53,18 @@ namespace dawn_native {
         std::unique_ptr<StagingBufferBase> mStagingBuffer;
 
         struct Request {
-            size_t endOffset;
-            size_t size;
+            uint64_t endOffset;
+            uint64_t size;
         };
 
         SerialQueue<Request> mInflightRequests;  // Queue of the recorded sub-alloc requests (e.g.
                                                  // frame of resources).
 
-        size_t mUsedEndOffset = 0;    // Tail of used sub-alloc requests (in bytes).
-        size_t mUsedStartOffset = 0;  // Head of used sub-alloc requests (in bytes).
-        size_t mBufferSize = 0;       // Max size of the ring buffer (in bytes).
-        size_t mUsedSize = 0;  // Size of the sub-alloc requests (in bytes) of the ring buffer.
-        size_t mCurrentRequestSize =
+        uint64_t mUsedEndOffset = 0;    // Tail of used sub-alloc requests (in bytes).
+        uint64_t mUsedStartOffset = 0;  // Head of used sub-alloc requests (in bytes).
+        uint64_t mBufferSize = 0;       // Max size of the ring buffer (in bytes).
+        uint64_t mUsedSize = 0;  // Size of the sub-alloc requests (in bytes) of the ring buffer.
+        uint64_t mCurrentRequestSize =
             0;  // Size of the sub-alloc requests (in bytes) of the current serial.
 
         DeviceBase* mDevice;

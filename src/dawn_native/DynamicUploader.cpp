@@ -21,18 +21,18 @@ namespace dawn_native {
     DynamicUploader::DynamicUploader(DeviceBase* device) : mDevice(device) {
     }
 
-    MaybeError DynamicUploader::CreateAndAppendBuffer(size_t size) {
+    MaybeError DynamicUploader::CreateAndAppendBuffer(uint64_t size) {
         std::unique_ptr<RingBuffer> ringBuffer = std::make_unique<RingBuffer>(mDevice, size);
         DAWN_TRY(ringBuffer->Initialize());
         mRingBuffers.emplace_back(std::move(ringBuffer));
         return {};
     }
 
-    ResultOrError<UploadHandle> DynamicUploader::Allocate(uint32_t size, uint32_t alignment) {
+    ResultOrError<UploadHandle> DynamicUploader::Allocate(uint64_t size, uint32_t alignment) {
         ASSERT(IsPowerOfTwo(alignment));
 
         // Align the requested allocation size
-        const size_t alignedSize = Align(size, alignment);
+        const uint64_t alignedSize = Align(size, alignment);
 
         RingBuffer* largestRingBuffer = GetLargestBuffer();
         UploadHandle uploadHandle = largestRingBuffer->SubAllocate(alignedSize);
@@ -41,7 +41,7 @@ namespace dawn_native {
         // request.
         if (uploadHandle.mappedBuffer == nullptr) {
             // Compute the new max size (in powers of two to preserve alignment).
-            size_t newMaxSize = largestRingBuffer->GetSize() * 2;
+            uint64_t newMaxSize = largestRingBuffer->GetSize() * 2;
             while (newMaxSize < size) {
                 newMaxSize *= 2;
             }

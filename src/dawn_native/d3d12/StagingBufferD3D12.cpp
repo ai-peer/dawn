@@ -18,7 +18,7 @@
 
 namespace dawn_native { namespace d3d12 {
 
-    StagingBuffer::StagingBuffer(size_t size, Device* device)
+    StagingBuffer::StagingBuffer(uint64_t size, Device* device)
         : StagingBufferBase(size), mDevice(device) {
     }
 

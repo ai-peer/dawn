@@ -499,7 +499,7 @@ namespace dawn_native { namespace vulkan {
         commands->commandBuffer = VK_NULL_HANDLE;
     }
 
-    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
+    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(uint64_t size) {
         std::unique_ptr<StagingBufferBase> stagingBuffer =
             std::make_unique<StagingBuffer>(size, this);
         return std::move(stagingBuffer);

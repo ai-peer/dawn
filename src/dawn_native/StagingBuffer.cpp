@@ -16,10 +16,10 @@
 
 namespace dawn_native {
 
-    StagingBufferBase::StagingBufferBase(size_t size) : mBufferSize(size) {
+    StagingBufferBase::StagingBufferBase(uint64_t size) : mBufferSize(size) {
     }
 
-    size_t StagingBufferBase::GetSize() const {
+    uint64_t StagingBufferBase::GetSize() const {
         return mBufferSize;
     }
 

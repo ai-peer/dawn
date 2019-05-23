@@ -248,7 +248,7 @@ namespace dawn_native { namespace d3d12 {
         return new TextureView(texture, descriptor);
     }
 
-    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
+    ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(uint64_t size) {
         std::unique_ptr<StagingBufferBase> stagingBuffer =
             std::make_unique<StagingBuffer>(size, this);
         return std::move(stagingBuffer);

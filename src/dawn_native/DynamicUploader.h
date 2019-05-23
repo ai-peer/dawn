@@ -27,18 +27,18 @@ namespace dawn_native {
         DynamicUploader(DeviceBase* device);
         ~DynamicUploader() = default;
 
-        ResultOrError<UploadHandle> Allocate(uint32_t requiredSize, uint32_t alignment);
+        ResultOrError<UploadHandle> Allocate(uint64_t requiredSize, uint32_t alignment);
         void Tick(Serial lastCompletedSerial);
 
         RingBuffer* GetLargestBuffer();
 
-        MaybeError CreateAndAppendBuffer(size_t size = kBaseUploadBufferSize);
+        MaybeError CreateAndAppendBuffer(uint64_t size = kBaseUploadBufferSize);
 
         bool IsEmpty() const;
 
       private:
         // TODO(bryan.bernhart@intel.com): Figure out this value.
-        static constexpr size_t kBaseUploadBufferSize = 64000;
+        static constexpr uint64_t kBaseUploadBufferSize = 64000;
 
         std::vector<std::unique_ptr<RingBuffer>> mRingBuffers;
         DeviceBase* mDevice;

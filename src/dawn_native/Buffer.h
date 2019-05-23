@@ -49,7 +49,7 @@ namespace dawn_native {
                                            uint64_t size,
                                            uint8_t** mappedPointer);
 
-        uint32_t GetSize() const;
+        uint64_t GetSize() const;
         dawn::BufferUsageBit GetUsage() const;
 
         MaybeError MapAtCreation(uint8_t** mappedPointer);
