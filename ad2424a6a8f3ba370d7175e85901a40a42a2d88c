@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d9e5b78_2105706c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-23T17:11:58Z",
+      "side": 1,
+      "message": "nit: implements",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "ad2424a6a8f3ba370d7175e85901a40a42a2d88c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62803cf4_77e06463",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-23T17:11:58Z",
+      "side": 1,
+      "message": "nit: which is not the same size as the VkDeviceSize used to create buffers so we cast them for now.",
+      "range": {
+        "startLine": 19,
+        "startChar": 37,
+        "endLine": 19,
+        "endChar": 87
+      },
+      "revId": "ad2424a6a8f3ba370d7175e85901a40a42a2d88c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c07690de_bafbaf40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-23T17:11:58Z",
+      "side": 1,
+      "message": "Did you open a Vulkan bug for this, or do you want me to do it?",
+      "revId": "ad2424a6a8f3ba370d7175e85901a40a42a2d88c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
