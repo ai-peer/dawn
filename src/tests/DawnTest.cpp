@@ -428,6 +428,46 @@ std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
     return *(mDeferredExpectations.back().message.get());
 }
 
+testing::AssertionResult DawnTest::AddBufferMapReadExpectation(const char* file,
+                                                               int line,
+                                                               const dawn::Buffer& buffer,
+                                                               uint64_t offset,
+                                                               uint64_t size,
+                                                               detail::Expectation* expectation) {
+    struct MapReadResult {
+        const void* data = nullptr;
+        uint64_t dataLength = 0;
+        bool done = false;
+    };
+
+    MapReadResult mapResult = {};
+
+    buffer.MapReadAsync(
+        [](DawnBufferMapAsyncStatus status, const void* data, uint64_t dataLength,
+           DawnCallbackUserdata userdata) {
+            auto* mapResult = reinterpret_cast<MapReadResult*>(static_cast<uintptr_t>(userdata));
+            EXPECT_EQ(status, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS);
+            mapResult->data = data;
+            mapResult->dataLength = dataLength;
+            mapResult->done = true;
+        },
+        static_cast<dawn::CallbackUserdata>(reinterpret_cast<uintptr_t>(&mapResult)));
+
+    while (!mapResult.done) {
+        WaitABit();
+    }
+
+    // Get the result for the expectation and add context to failures
+    testing::AssertionResult result = expectation->Check(mapResult.data, mapResult.dataLength);
+    if (!result) {
+        result << " Expectation created at " << file << ":" << line << std::endl;
+    }
+    buffer.Unmap();
+
+    EXPECT_TRUE(result);
+    return result;
+}
+
 std::ostringstream& DawnTest::AddTextureExpectation(const char* file,
                                                     int line,
                                                     const dawn::Texture& texture,

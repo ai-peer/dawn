@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/RefCountedTracker.h"
 #include "dawn_native/opengl/BufferGL.h"
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
@@ -48,6 +49,7 @@ namespace dawn_native { namespace opengl {
         mCompletedSerial = mLastSubmittedSerial + 1;
 
         mDynamicUploader = nullptr;
+        mRefCountedTracker = nullptr;
 
         Tick();
     }

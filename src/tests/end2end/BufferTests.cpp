@@ -232,8 +232,8 @@ DAWN_INSTANTIATE_TEST(BufferSetSubDataTests,
 
 class CreateBufferMappedTests : public DawnTest {};
 
-// Test that the simplest CreateBufferMapped works.
-TEST_P(CreateBufferMappedTests, SmallSyncWrite) {
+// Test that the simplest CreateBufferMapped works for MapWrite buffers.
+TEST_P(CreateBufferMappedTests, MapWriteUsageSmall) {
     dawn::BufferDescriptor descriptor;
     descriptor.nextInChain = nullptr;
     descriptor.size = 4;
@@ -248,8 +248,40 @@ TEST_P(CreateBufferMappedTests, SmallSyncWrite) {
     EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
 }
 
-// Test CreateBufferMapped for a large buffer
-TEST_P(CreateBufferMappedTests, LargeSyncWrite) {
+// Test that the simplest CreateBufferMapped works for MapRead buffers.
+TEST_P(CreateBufferMappedTests, MapReadUsageSmall) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::MapRead;
+
+    uint32_t myData = 230502;
+    dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+    ASSERT_EQ(result.dataLength, descriptor.size);
+    memcpy(result.data, &myData, sizeof(myData));
+    result.buffer.Unmap();
+
+    EXPECT_BUFFER_MAP_READ_U32_EQ(myData, result.buffer, 0);
+}
+
+// Test that the simplest CreateBufferMapped works for non-mappable buffers.
+TEST_P(CreateBufferMappedTests, NonMappableUsageSmall) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::TransferSrc;
+
+    uint32_t myData = 4239;
+    dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+    ASSERT_EQ(result.dataLength, descriptor.size);
+    memcpy(result.data, &myData, sizeof(myData));
+    result.buffer.Unmap();
+
+    EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
+}
+
+// Test CreateBufferMapped for a large MapWrite buffer
+TEST_P(CreateBufferMappedTests, MapWriteUsageLarge) {
     constexpr uint64_t kDataSize = 1000 * 1000;
     std::vector<uint32_t> myData;
     for (uint32_t i = 0; i < kDataSize; ++i) {
@@ -269,13 +301,69 @@ TEST_P(CreateBufferMappedTests, LargeSyncWrite) {
     EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), result.buffer, 0, kDataSize);
 }
 
+// Test CreateBufferMapped for a large MapRead buffer
+TEST_P(CreateBufferMappedTests, MapReadUsageLarge) {
+    constexpr uint64_t kDataSize = 1000 * 1000;
+    std::vector<uint32_t> myData;
+    for (uint32_t i = 0; i < kDataSize; ++i) {
+        myData.push_back(i);
+    }
+
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = static_cast<uint64_t>(kDataSize * sizeof(uint32_t));
+    descriptor.usage = dawn::BufferUsageBit::MapRead;
+
+    dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+    ASSERT_EQ(result.dataLength, descriptor.size);
+    memcpy(result.data, myData.data(), kDataSize * sizeof(uint32_t));
+    result.buffer.Unmap();
+
+    EXPECT_BUFFER_MAP_READ_U32_RANGE_EQ(myData.data(), result.buffer, 0, kDataSize);
+}
+
+// Test CreateBufferMapped for a large non-mappable buffer
+TEST_P(CreateBufferMappedTests, NonMappableUsageLarge) {
+    constexpr uint64_t kDataSize = 1000 * 1000;
+    std::vector<uint32_t> myData;
+    for (uint32_t i = 0; i < kDataSize; ++i) {
+        myData.push_back(i);
+    }
+
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = static_cast<uint64_t>(kDataSize * sizeof(uint32_t));
+    descriptor.usage = dawn::BufferUsageBit::TransferSrc;
+
+    dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+    ASSERT_EQ(result.dataLength, descriptor.size);
+    memcpy(result.data, myData.data(), kDataSize * sizeof(uint32_t));
+    result.buffer.Unmap();
+
+    EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), result.buffer, 0, kDataSize);
+}
+
 // Test that CreateBufferMapped returns zero-initialized data
 // TODO(enga): This should use the testing toggle to initialize resources to 1.
-TEST_P(CreateBufferMappedTests, ZeroInitialized) {
+TEST_P(CreateBufferMappedTests, MappableZeroInitialized) {
     dawn::BufferDescriptor descriptor;
     descriptor.nextInChain = nullptr;
     descriptor.size = 4;
     descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+
+    dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+    ASSERT_EQ(result.dataLength, descriptor.size);
+    ASSERT_EQ(*result.data, 0);
+    result.buffer.Unmap();
+}
+
+// Test that CreateBufferMapped returns zero-initialized data
+// TODO(enga): This should use the testing toggle to initialize resources to 1.
+TEST_P(CreateBufferMappedTests, NonMappableZeroInitialized) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.size = 4;
+    descriptor.usage = dawn::BufferUsageBit::TransferSrc;
 
     dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
     ASSERT_EQ(result.dataLength, descriptor.size);

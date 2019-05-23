@@ -17,6 +17,7 @@
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/RefCountedTracker.h"
 
 #include <spirv-cross/spirv_cross.hpp>
 
@@ -68,6 +69,7 @@ namespace dawn_native { namespace null {
 
     Device::~Device() {
         mDynamicUploader = nullptr;
+        mRefCountedTracker = nullptr;
 
         // Ensure any in-flight maps have been cleaned up.
         SubmitPendingOperations();
@@ -140,7 +142,10 @@ namespace dawn_native { namespace null {
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
                                                uint64_t size) {
-        return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+        uint8_t* ptr = reinterpret_cast<uint8_t*>(source->GetMappedPointer());
+        memcpy(reinterpret_cast<Buffer*>(destination)->mBackingData.get() + destinationOffset,
+               ptr + sourceOffset, size);
+        return {};
     }
 
     MaybeError Device::IncrementMemoryUsage(size_t bytes) {
@@ -201,8 +206,8 @@ namespace dawn_native { namespace null {
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
-        if (GetUsage() & (dawn::BufferUsageBit::TransferDst | dawn::BufferUsageBit::MapRead |
-                          dawn::BufferUsageBit::MapWrite)) {
+        if (GetUsage() & (dawn::BufferUsageBit::TransferDst | dawn::BufferUsageBit::TransferSrc |
+                          dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) {
             mBackingData = std::unique_ptr<uint8_t[]>(new uint8_t[GetSize()]);
         }
     }
@@ -210,6 +215,12 @@ namespace dawn_native { namespace null {
     Buffer::~Buffer() {
         DestroyInternal();
         ToBackend(GetDevice())->DecrementMemoryUsage(GetSize());
+    }
+
+    bool Buffer::IsCPUVisible() const {
+        // Only return true for mappable buffers so we can test cases that need / don't need a
+        // staging buffer.
+        return (GetUsage() & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) != 0;
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
