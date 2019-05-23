@@ -188,6 +188,11 @@ namespace dawn_native { namespace vulkan {
         mLastUsage = usage;
     }
 
+    bool Buffer::IsCPUVisible() const {
+        // TODO(enga): Handle CPU-visible memory on UMA
+        return mMemoryAllocation.GetMappedPointer() != nullptr;
+    }
+
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
         *mappedPointer = mMemoryAllocation.GetMappedPointer();
         return {};

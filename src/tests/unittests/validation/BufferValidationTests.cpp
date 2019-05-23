@@ -198,6 +198,15 @@ TEST_F(BufferValidationTest, CreateBufferMappedSuccess) {
     result.buffer.Unmap();
 }
 
+// Test the success case for non-mappable CreateBufferMapped
+TEST_F(BufferValidationTest, NonMappableCreateBufferMappedSuccess) {
+    dawn::CreateBufferMappedResult result =
+        CreateBufferMapped(4, dawn::BufferUsageBit::TransferSrc);
+    ASSERT_NE(result.data, nullptr);
+    ASSERT_EQ(result.dataLength, 4u);
+    result.buffer.Unmap();
+}
+
 // Test map reading a buffer with wrong current usage
 TEST_F(BufferValidationTest, MapReadWrongUsage) {
     dawn::BufferDescriptor descriptor;
@@ -601,6 +610,20 @@ TEST_F(BufferValidationTest, MapMappedbuffer) {
     }
 }
 
+// Test that is is invalid to Map a CreateBufferMapped buffer
+TEST_F(BufferValidationTest, MapCreateBufferMappedbuffer) {
+    {
+        dawn::Buffer buf = CreateBufferMapped(4, dawn::BufferUsageBit::MapRead).buffer;
+        ASSERT_DEVICE_ERROR(buf.MapReadAsync(ToMockBufferMapReadCallback, nullptr));
+        queue.Submit(0, nullptr);
+    }
+    {
+        dawn::Buffer buf = CreateBufferMapped(4, dawn::BufferUsageBit::MapWrite).buffer;
+        ASSERT_DEVICE_ERROR(buf.MapWriteAsync(ToMockBufferMapWriteCallback, nullptr));
+        queue.Submit(0, nullptr);
+    }
+}
+
 // Test that it is invalid to call SetSubData on a mapped buffer
 TEST_F(BufferValidationTest, SetSubDataMappedBuffer) {
     {
@@ -664,6 +687,26 @@ TEST_F(BufferValidationTest, SubmitMappedBuffer) {
         dawn::Buffer bufB = device.CreateBuffer(&descriptorB);
 
         bufB.MapReadAsync(ToMockBufferMapReadCallback, nullptr);
+
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
+        dawn::CommandBuffer commands = encoder.Finish();
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+        queue.Submit(0, nullptr);
+    }
+    {
+        dawn::Buffer bufA = device.CreateBufferMapped(&descriptorA).buffer;
+        dawn::Buffer bufB = device.CreateBuffer(&descriptorB);
+
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);
+        dawn::CommandBuffer commands = encoder.Finish();
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+        queue.Submit(0, nullptr);
+    }
+    {
+        dawn::Buffer bufA = device.CreateBuffer(&descriptorA);
+        dawn::Buffer bufB = device.CreateBufferMapped(&descriptorB).buffer;
 
         dawn::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.CopyBufferToBuffer(bufA, 0, bufB, 0, 4);

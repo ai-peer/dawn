@@ -263,6 +263,19 @@ namespace dawn_native {
         BufferBase* buffer = nullptr;
         uint8_t* data = nullptr;
 
+        constexpr dawn::BufferUsageBit writeableUsages =
+            dawn::BufferUsageBit::TransferDst | dawn::BufferUsageBit::MapWrite;
+        dawn::BufferUsageBit usage = descriptor->usage;
+
+        // If the buffer is not writeable, add a TransferDst usage so it can be
+        // copied to.
+        BufferDescriptor modifiedDescriptor = {};
+        if ((usage & writeableUsages) == 0) {
+            modifiedDescriptor = *descriptor;
+            modifiedDescriptor.usage = usage | dawn::BufferUsageBit::TransferDst;
+            descriptor = &modifiedDescriptor;
+        }
+
         if (ConsumedError(CreateBufferInternal(&buffer, descriptor)) ||
             ConsumedError(buffer->MapAtCreation(&data))) {
             // Map failed. Replace the buffer with an error buffer.
