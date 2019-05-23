@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/RefCountedTracker.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
@@ -66,6 +67,7 @@ namespace dawn_native { namespace metal {
 
         mMapTracker = nullptr;
         mDynamicUploader = nullptr;
+        mRefCountedTracker = nullptr;
 
         [mCommandQueue release];
         mCommandQueue = nil;

@@ -35,6 +35,10 @@ namespace dawn_native { namespace opengl {
         return mBuffer;
     }
 
+    bool Buffer::IsCPUVisible() const {
+        return true;
+    }
+
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
         glBindBuffer(GL_ARRAY_BUFFER, mBuffer);
         void* data = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);

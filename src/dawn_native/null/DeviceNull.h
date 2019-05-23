@@ -138,6 +138,8 @@ namespace dawn_native { namespace null {
         void MapReadOperationCompleted(uint32_t serial, void* ptr, bool isWrite);
 
       private:
+        friend class Device;
+
         // Dawn API
         MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) override;
         void MapReadAsyncImpl(uint32_t serial) override;
@@ -145,6 +147,7 @@ namespace dawn_native { namespace null {
         void UnmapImpl() override;
         void DestroyImpl() override;
 
+        bool IsCPUVisible() const override;
         MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
         void MapAsyncImplCommon(uint32_t serial, bool isWrite);
 
