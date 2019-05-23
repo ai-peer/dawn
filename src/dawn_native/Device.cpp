@@ -28,6 +28,7 @@
 #include "dawn_native/Instance.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
+#include "dawn_native/RefCountedTracker.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/Sampler.h"
 #include "dawn_native/ShaderModule.h"
@@ -62,6 +63,7 @@ namespace dawn_native {
         mCaches = std::make_unique<DeviceBase::Caches>();
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
+        mRefCountedTracker = std::make_unique<RefCountedTracker>(this);
     }
 
     DeviceBase::~DeviceBase() {
@@ -96,10 +98,6 @@ namespace dawn_native {
 
     DeviceBase* DeviceBase::GetDevice() {
         return this;
-    }
-
-    FenceSignalTracker* DeviceBase::GetFenceSignalTracker() const {
-        return mFenceSignalTracker.get();
     }
 
     ResultOrError<BindGroupLayoutBase*> DeviceBase::GetOrCreateBindGroupLayout(
@@ -379,7 +377,9 @@ namespace dawn_native {
 
     void DeviceBase::Tick() {
         TickImpl();
-        mFenceSignalTracker->Tick(GetCompletedCommandSerial());
+        const Serial completedSerial = GetCompletedCommandSerial();
+        mFenceSignalTracker->Tick(completedSerial);
+        mRefCountedTracker->Tick(completedSerial);
     }
 
     void DeviceBase::Reference() {
@@ -533,6 +533,14 @@ namespace dawn_native {
             DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer());
         }
         return mDynamicUploader.get();
+    }
+
+    FenceSignalTracker* DeviceBase::GetFenceSignalTracker() const {
+        return mFenceSignalTracker.get();
+    }
+
+    RefCountedTracker* DeviceBase::GetRefCountedTracker() const {
+        return mRefCountedTracker.get();
     }
 
     void DeviceBase::SetToggle(Toggle toggle, bool isEnabled) {
