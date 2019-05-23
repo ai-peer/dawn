@@ -210,8 +210,10 @@ namespace dawn_native { namespace d3d12 {
         const BindGroupLayoutDescriptor* descriptor) {
         return new BindGroupLayout(this, descriptor);
     }
-    ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-        return new Buffer(this, descriptor);
+    ResultOrError<BufferBase*> Device::CreateBufferImpl(
+        const BufferDescriptor* descriptor,
+        dawn::BufferUsageBit additionalInternalUsage) {
+        return new Buffer(this, descriptor, additionalInternalUsage);
     }
     CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder) {
         return new CommandBuffer(this, encoder);

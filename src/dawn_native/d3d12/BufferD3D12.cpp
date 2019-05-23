@@ -66,7 +66,9 @@ namespace dawn_native { namespace d3d12 {
         }
     }  // namespace
 
-    Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
+    Buffer::Buffer(Device* device,
+                   const BufferDescriptor* descriptor,
+                   dawn::BufferUsageBit additionalInternalUsage)
         : BufferBase(device, descriptor) {
         D3D12_RESOURCE_DESC resourceDescriptor;
         resourceDescriptor.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
@@ -79,7 +81,7 @@ namespace dawn_native { namespace d3d12 {
         resourceDescriptor.SampleDesc.Count = 1;
         resourceDescriptor.SampleDesc.Quality = 0;
         resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-        resourceDescriptor.Flags = D3D12ResourceFlags(GetUsage());
+        resourceDescriptor.Flags = D3D12ResourceFlags(GetUsage() | additionalInternalUsage);
 
         auto heapType = D3D12HeapType(GetUsage());
         auto bufferUsage = D3D12_RESOURCE_STATE_COMMON;
@@ -158,6 +160,11 @@ namespace dawn_native { namespace d3d12 {
         } else {
             CallMapReadCallback(mapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, data, GetSize());
         }
+    }
+
+    bool Buffer::IsCPUVisible() const {
+        // TODO(enga): Handle CPU-visible memory on UMA
+        return (GetUsage() & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) != 0;
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {

@@ -27,7 +27,9 @@ namespace dawn_native { namespace vulkan {
 
     class Buffer : public BufferBase {
       public:
-        Buffer(Device* device, const BufferDescriptor* descriptor);
+        Buffer(Device* device,
+               const BufferDescriptor* descriptor,
+               dawn::BufferUsageBit additionalInternalUsage);
         ~Buffer();
 
         void OnMapReadCommandSerialFinished(uint32_t mapSerial, const void* data);
@@ -47,6 +49,7 @@ namespace dawn_native { namespace vulkan {
         void UnmapImpl() override;
         void DestroyImpl() override;
 
+        bool IsCPUVisible() const override;
         MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
 
         VkBuffer mHandle = VK_NULL_HANDLE;
