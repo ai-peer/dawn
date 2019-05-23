@@ -47,6 +47,10 @@ namespace dawn_native { namespace metal {
         }
     }
 
+    bool Buffer::IsCPUVisible() const {
+        return (GetUsage() & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) != 0;
+    }
+
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
         *mappedPointer = reinterpret_cast<uint8_t*>([mMtlBuffer contents]);
         return {};

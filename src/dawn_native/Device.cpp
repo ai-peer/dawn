@@ -98,10 +98,6 @@ namespace dawn_native {
         return this;
     }
 
-    FenceSignalTracker* DeviceBase::GetFenceSignalTracker() const {
-        return mFenceSignalTracker.get();
-    }
-
     ResultOrError<BindGroupLayoutBase*> DeviceBase::GetOrCreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor) {
         BindGroupLayoutBase blueprint(this, descriptor, true);
@@ -262,6 +258,19 @@ namespace dawn_native {
         const BufferDescriptor* descriptor) {
         BufferBase* buffer = nullptr;
         uint8_t* data = nullptr;
+
+        constexpr dawn::BufferUsageBit writeableUsages =
+            dawn::BufferUsageBit::TransferDst | dawn::BufferUsageBit::MapWrite;
+        dawn::BufferUsageBit usage = descriptor->usage;
+
+        // If the buffer is not writeable, add a TransferDst usage so it can be
+        // copied to.
+        BufferDescriptor modifiedDescriptor = {};
+        if ((usage & writeableUsages) == 0) {
+            modifiedDescriptor = *descriptor;
+            modifiedDescriptor.usage = usage | dawn::BufferUsageBit::TransferDst;
+            descriptor = &modifiedDescriptor;
+        }
 
         if (ConsumedError(CreateBufferInternal(&buffer, descriptor)) ||
             ConsumedError(buffer->MapAtCreation(&data))) {
@@ -533,6 +542,10 @@ namespace dawn_native {
             DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer());
         }
         return mDynamicUploader.get();
+    }
+
+    FenceSignalTracker* DeviceBase::GetFenceSignalTracker() const {
+        return mFenceSignalTracker.get();
     }
 
     void DeviceBase::SetToggle(Toggle toggle, bool isEnabled) {

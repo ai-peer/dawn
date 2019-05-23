@@ -16,7 +16,7 @@
 
 namespace dawn_native {
 
-    StagingBufferBase::StagingBufferBase(size_t size) : mBufferSize(size) {
+    StagingBufferBase::StagingBufferBase(size_t size) : RefCounted(), mBufferSize(size) {
     }
 
     size_t StagingBufferBase::GetSize() const {
@@ -26,4 +26,5 @@ namespace dawn_native {
     void* StagingBufferBase::GetMappedPointer() const {
         return mMappedPointer;
     }
+
 }  // namespace dawn_native

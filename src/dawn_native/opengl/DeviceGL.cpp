@@ -47,9 +47,9 @@ namespace dawn_native { namespace opengl {
         // operations to look as if they were completed (because they were).
         mCompletedSerial = mLastSubmittedSerial + 1;
 
-        mDynamicUploader = nullptr;
-
         Tick();
+
+        mDynamicUploader = nullptr;
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(

@@ -71,9 +71,15 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Device::~Device() {
+        // Immediately forget about all pending commands so we don't try to submit them in Tick
+        if (mPendingCommands.open) {
+            mPendingCommands.commandList->Close();
+            mPendingCommands.open = false;
+            mPendingCommands.commandList = nullptr;
+        }
         NextSerial();
         WaitForSerial(mLastSubmittedSerial);  // Wait for all in-flight commands to finish executing
-        TickImpl();                    // Call tick one last time so resources are cleaned up
+        Tick();                               // Call tick one last time so resources are cleaned up
 
         // Free services explicitly so that they can free D3D12 resources before destruction of the
         // device.
