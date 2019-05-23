@@ -773,6 +773,21 @@ if (dawn_standalone) {
     ]
   }
 
+  dawn_sample("Indirect") {
+    sources = [
+      "examples/Indirect.cpp",
+    ]
+  }
+
+  dawn_sample("IndirectCompute") {
+    sources = [
+      "examples/IndirectCompute.cpp",
+    ]
+    deps = [
+      "third_party:glm",
+    ]
+  }
+
   group("dawn_samples") {
     deps = [
       ":Animometer",
@@ -780,6 +795,8 @@ if (dawn_standalone) {
       ":ComputeBoids",
       ":CppHelloTriangle",
       ":CubeReflection",
+      ":Indirect",
+      ":IndirectCompute",
       ":glTFViewer",
     ]
   }
