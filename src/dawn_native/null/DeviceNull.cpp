@@ -79,6 +79,7 @@ namespace dawn_native { namespace null {
         return new BindGroupLayout(this, descriptor);
     }
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
+        DAWN_TRY(IncrementMemoryUsage(descriptor->size));
         return new Buffer(this, descriptor);
     }
     CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder) {
@@ -138,6 +139,19 @@ namespace dawn_native { namespace null {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
     }
 
+    MaybeError Device::IncrementMemoryUsage(size_t bytes) {
+        if (bytes > kMaxMemoryUsage || mMemoryUsage + bytes > kMaxMemoryUsage) {
+            return DAWN_CONTEXT_LOST_ERROR("Out of memory.");
+        }
+        mMemoryUsage += bytes;
+        return {};
+    }
+
+    void Device::DecrementMemoryUsage(size_t bytes) {
+        ASSERT(mMemoryUsage >= bytes);
+        mMemoryUsage -= bytes;
+    }
+
     Serial Device::GetCompletedCommandSerial() const {
         return mCompletedSerial;
     }
@@ -189,6 +203,7 @@ namespace dawn_native { namespace null {
     }
 
     Buffer::~Buffer() {
+        ToBackend(GetDevice())->DecrementMemoryUsage(GetSize());
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
