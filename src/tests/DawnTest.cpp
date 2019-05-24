@@ -67,12 +67,6 @@ namespace {
         }
     }
 
-    dawn_native::DeviceDescriptor InitWorkaround(const char* forceEnabledWorkaround) {
-        dawn_native::DeviceDescriptor deviceDescriptor;
-        deviceDescriptor.forceEnabledToggles.push_back(forceEnabledWorkaround);
-        return deviceDescriptor;
-    }
-
     struct MapReadUserdata {
         DawnTest* test;
         size_t slot;
@@ -82,9 +76,12 @@ namespace {
 
 }  // namespace
 
-DawnTestParam ForceWorkaround(const DawnTestParam& originParam, const char* workaround) {
+DawnTestParam ForceWorkarounds(const DawnTestParam& originParam,
+                               const char** forceEnabledWorkarounds,
+                               uint32_t numForceEnabledWorkarounds) {
     DawnTestParam newTestParam = originParam;
-    newTestParam.forceEnabledWorkaround = workaround;
+    newTestParam.forceEnabledWorkarounds = forceEnabledWorkarounds;
+    newTestParam.numForceEnabledWorkarounds = numForceEnabledWorkarounds;
     return newTestParam;
 }
 
@@ -302,10 +299,13 @@ void DawnTest::SetUp() {
     mPCIInfo = backendAdapter.GetPCIInfo();
 
     DawnDevice backendDevice;
-    const char* forceEnabledWorkaround = GetParam().forceEnabledWorkaround;
-    if (forceEnabledWorkaround != nullptr) {
-        ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceEnabledWorkaround) != nullptr);
-        dawn_native::DeviceDescriptor deviceDescriptor = InitWorkaround(forceEnabledWorkaround);
+    const char** forceEnabledWorkarounds = GetParam().forceEnabledWorkarounds;
+    if (forceEnabledWorkarounds != nullptr) {
+        dawn_native::DeviceDescriptor deviceDescriptor;
+        for (uint32_t i = 0; i < GetParam().numForceEnabledWorkarounds; ++i) {
+            ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceEnabledWorkarounds[i]) != nullptr);
+            deviceDescriptor.forceEnabledToggles.push_back(forceEnabledWorkarounds[i]);
+        }
         backendDevice = backendAdapter.CreateDevice(&deviceDescriptor);
     } else {
         backendDevice = backendAdapter.CreateDevice(nullptr);
@@ -634,8 +634,10 @@ namespace detail {
         std::ostringstream ostream;
         ostream << ParamName(info.param.backendType);
 
-        if (info.param.forceEnabledWorkaround != nullptr) {
-            ostream << "_" << info.param.forceEnabledWorkaround;
+        if (info.param.forceEnabledWorkarounds != nullptr) {
+            for (uint32_t i = 0; i < info.param.numForceEnabledWorkarounds; ++i) {
+                ostream << "_" << info.param.forceEnabledWorkarounds[i];
+            }
         }
 
         return ostream.str();

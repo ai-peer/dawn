@@ -506,10 +506,16 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
     VerifyResolveTarget(kGreen, resolveTexture2, kBaseMipLevel2, kBaseArrayLayer2);
 }
 
+const char* kEmulateStoreAndMSAAResolve[] = {"emulate_store_and_msaa_resolve"};
+const char* kAlwaysResolveIntoZeroLevelAndLayer[] = {"always_resolve_into_zero_level_and_layer"};
+const char* kAllMSAAToggles[] = {"emulate_store_and_msaa_resolve",
+                                 "always_resolve_into_zero_level_and_layer"};
 DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
                       D3D12Backend,
                       MetalBackend,
                       OpenGLBackend,
                       VulkanBackend,
-                      ForceWorkaround(MetalBackend, "emulate_store_and_msaa_resolve"),
-                      ForceWorkaround(MetalBackend, "always_resolve_into_zero_level_and_layer"));
+                      ForceWorkarounds(MetalBackend, kEmulateStoreAndMSAAResolve, 1),
+                      ForceWorkarounds(MetalBackend, kAlwaysResolveIntoZeroLevelAndLayer, 1),
+                      ForceWorkarounds(MetalBackend, kAllMSAAToggles,
+                                       GTEST_ARRAY_SIZE_(kAllMSAAToggles)));

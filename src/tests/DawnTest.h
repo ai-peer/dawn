@@ -69,8 +69,8 @@ struct DawnTestParam {
 
     dawn_native::BackendType backendType;
 
-    // TODO(jiawei.shao@intel.com): support enabling and disabling multiple workarounds.
-    const char* forceEnabledWorkaround = nullptr;
+    const char** forceEnabledWorkarounds = nullptr;
+    uint32_t numForceEnabledWorkarounds = 0;
 };
 
 // Shorthands for backend types used in the DAWN_INSTANTIATE_TEST
@@ -79,7 +79,9 @@ static constexpr DawnTestParam MetalBackend(dawn_native::BackendType::Metal);
 static constexpr DawnTestParam OpenGLBackend(dawn_native::BackendType::OpenGL);
 static constexpr DawnTestParam VulkanBackend(dawn_native::BackendType::Vulkan);
 
-DawnTestParam ForceWorkaround(const DawnTestParam& originParam, const char* workaround);
+DawnTestParam ForceWorkarounds(const DawnTestParam& originParam,
+                               const char** forceEnabledWorkarounds,
+                               uint32_t numForceEnabledWorkarounds);
 
 struct GLFWwindow;
 

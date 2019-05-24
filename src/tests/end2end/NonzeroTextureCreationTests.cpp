@@ -94,8 +94,10 @@ TEST_P(NonzeroTextureCreationTests, ArrayLayerClears) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), texture, 0, 0, kSize, kSize, 0, 2);
 }
 
+const char* kNonZeroClearResourcesOnCreatingForTesting[] = {
+    "nonzero_clear_resources_on_creation_for_testing"};
 DAWN_INSTANTIATE_TEST(NonzeroTextureCreationTests,
-                      ForceWorkaround(OpenGLBackend,
-                                      "nonzero_clear_resources_on_creation_for_testing"),
-                      ForceWorkaround(VulkanBackend,
-                                      "nonzero_clear_resources_on_creation_for_testing"));
+                      ForceWorkarounds(OpenGLBackend,
+                                       kNonZeroClearResourcesOnCreatingForTesting, 1),
+                      ForceWorkarounds(VulkanBackend,
+                                       kNonZeroClearResourcesOnCreatingForTesting, 1));
