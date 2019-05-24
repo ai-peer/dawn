@@ -16,6 +16,29 @@
       "revId": "3be83bb69d6b5d2a70621d6693db90fbe2c0b700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "498b5f67_1d8231ac",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-05-24T22:00:39Z",
+      "side": 1,
+      "message": "Nit: Prefer to have each of the expressions as a separate assert. This way, if the assert fires in test logs or on your local machine, it will be easier to determine which condition is causing the problem.",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 34
+      },
+      "revId": "3be83bb69d6b5d2a70621d6693db90fbe2c0b700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
