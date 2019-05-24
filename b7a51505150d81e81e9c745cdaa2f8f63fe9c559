@@ -16,6 +16,24 @@
       "revId": "b7a51505150d81e81e9c745cdaa2f8f63fe9c559",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fce79fa_39a72a70",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-24T22:28:59Z",
+      "side": 1,
+      "message": "In that case, it would be a double free because the client and server devices are actually the same.",
+      "parentUuid": "2603de7e_e34adaec",
+      "revId": "b7a51505150d81e81e9c745cdaa2f8f63fe9c559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
