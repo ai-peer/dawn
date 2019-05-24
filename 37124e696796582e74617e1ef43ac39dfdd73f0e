@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4c44793_7ffe682e",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-24T13:09:10Z",
+      "side": 1,
+      "message": "And this would probably be std::vector\u003cconst char*\u003e",
+      "revId": "37124e696796582e74617e1ef43ac39dfdd73f0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "271d948b_ffedb226",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-24T13:09:10Z",
+      "side": 1,
+      "message": "If this were replaced by std::initializer_list\u003cconst char*\u003e, we could keep the names inline in the backend variant declarations.",
+      "range": {
+        "startLine": 83,
+        "startChar": 31,
+        "endLine": 84,
+        "endChar": 66
+      },
+      "revId": "37124e696796582e74617e1ef43ac39dfdd73f0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
