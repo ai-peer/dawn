@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c56aad2_58d75c31",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-24T02:35:28Z",
+      "side": 1,
+      "message": "nit: static assert that kMaxMemoryUsage \u003e\u003d limits\u003csize_t\u003e::max() / 2; so we know no overflow happens below.",
+      "revId": "7ca6d4e400d10b921a06d08e4ed9ae858bfe1e63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8e9bdec_950f3c66",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-24T02:35:28Z",
+      "side": 1,
+      "message": "Also on device destruction all sub objects should have been destroyed so can we assert mMemoryUsage is 0?",
+      "revId": "7ca6d4e400d10b921a06d08e4ed9ae858bfe1e63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
