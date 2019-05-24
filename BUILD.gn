@@ -639,6 +639,7 @@ test("dawn_end2end_tests") {
     "src/tests/end2end/DepthStencilStateTests.cpp",
     "src/tests/end2end/DestroyTests.cpp",
     "src/tests/end2end/DrawIndexedTests.cpp",
+    "src/tests/end2end/DrawIndirectTests.cpp",
     "src/tests/end2end/DrawTests.cpp",
     "src/tests/end2end/DynamicBufferOffsetTests.cpp",
     "src/tests/end2end/FenceTests.cpp",
@@ -764,6 +765,21 @@ if (dawn_standalone) {
     ]
   }
 
+  dawn_sample("Indirect") {
+    sources = [
+      "examples/Indirect.cpp",
+    ]
+  }
+
+  dawn_sample("IndirectCompute") {
+    sources = [
+      "examples/IndirectCompute.cpp",
+    ]
+    deps = [
+      "third_party:glm",
+    ]
+  }
+
   group("dawn_samples") {
     deps = [
       ":Animometer",
@@ -771,6 +787,8 @@ if (dawn_standalone) {
       ":ComputeBoids",
       ":CppHelloTriangle",
       ":CubeReflection",
+      ":Indirect",
+      ":IndirectCompute",
     ]
   }
 }
