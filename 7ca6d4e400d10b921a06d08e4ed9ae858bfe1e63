@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5e2cb593_b7020aff",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T03:01:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c56aad2_58d75c31",
+      "revId": "7ca6d4e400d10b921a06d08e4ed9ae858bfe1e63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8e9bdec_950f3c66",
         "filename": "src/dawn_native/null/DeviceNull.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "7ca6d4e400d10b921a06d08e4ed9ae858bfe1e63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3dd77dc_922cdd2f",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T03:01:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8e9bdec_950f3c66",
+      "revId": "7ca6d4e400d10b921a06d08e4ed9ae858bfe1e63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
