@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "42257480_2ded999d",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-24T02:45:54Z",
+      "side": 1,
+      "message": "Probably separated by blocks of four to make it easier to count? 0xFFFF\u0027FFFF\u00270000\u00270000\n\nLove this small C++14 feature.",
+      "parentUuid": "826bf8f9_10e4bcff",
+      "revId": "3917c2d2f5b0531be03e8763e09519471a817574",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e1144d02_def789da",
         "filename": "src/common/Math.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-24T00:26:35Z",
       "side": 1,
       "message": "do we have unittests for this? I think that Align(0xffffffffLLU, 4) will return the wrong value. Probably better to implement this without referring to Align(uint32_t,).",
+      "revId": "3917c2d2f5b0531be03e8763e09519471a817574",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2ccbb82_0e7cc91f",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-24T02:45:54Z",
+      "side": 1,
+      "message": "+1 for tests and we could copy the logic from Align32",
+      "parentUuid": "e1144d02_def789da",
       "revId": "3917c2d2f5b0531be03e8763e09519471a817574",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
