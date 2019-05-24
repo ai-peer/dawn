@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "740ac5ea_ba430379",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T21:49:44Z",
+      "side": 1,
+      "message": "nit: this declaration doesn\u0027t need to be ahead of time, it can be down at \u0027rtvDesc \u003d ...\u0027.",
+      "revId": "3be83bb69d6b5d2a70621d6693db90fbe2c0b700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
