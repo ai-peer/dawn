@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "826bf8f9_10e4bcff",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T00:26:35Z",
+      "side": 1,
+      "message": "uNit: (value \u0026 0xffffffff\u002700000000) might be slightly clearer?",
+      "revId": "3917c2d2f5b0531be03e8763e09519471a817574",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1144d02_def789da",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T00:26:35Z",
+      "side": 1,
+      "message": "do we have unittests for this? I think that Align(0xffffffffLLU, 4) will return the wrong value. Probably better to implement this without referring to Align(uint32_t,).",
+      "revId": "3917c2d2f5b0531be03e8763e09519471a817574",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "312fc079_4f3eee60",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T00:26:35Z",
+      "side": 1,
+      "message": "uNit: type doesn\u0027t seem consistent with the alignment in Align(), above. Doesn\u0027t seem to matter though.",
+      "revId": "3917c2d2f5b0531be03e8763e09519471a817574",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
