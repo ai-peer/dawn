@@ -36,6 +36,7 @@ namespace dawn_native {
     class BufferBase : public ObjectBase {
         enum class BufferState {
             Unmapped,
+            CreateMapped,
             Mapped,
             Destroyed,
         };
@@ -85,6 +86,8 @@ namespace dawn_native {
         virtual void UnmapImpl() = 0;
         virtual void DestroyImpl() = 0;
 
+        virtual bool IsCPUVisible() const = 0;
+
         MaybeError ValidateSetSubData(uint32_t start, uint32_t count) const;
         MaybeError ValidateMap(dawn::BufferUsageBit requiredUsage) const;
         MaybeError ValidateUnmap() const;
@@ -97,6 +100,8 @@ namespace dawn_native {
         DawnBufferMapWriteCallback mMapWriteCallback = nullptr;
         DawnCallbackUserdata mMapUserdata = 0;
         uint32_t mMapSerial = 0;
+
+        std::unique_ptr<StagingBufferBase> mStagingBuffer;
 
         BufferState mState;
     };

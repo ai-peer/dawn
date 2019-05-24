@@ -44,6 +44,11 @@ namespace dawn_native {
             }
 
           private:
+            bool IsCPUVisible() const override {
+                UNREACHABLE();
+                return false;
+            };
+
             MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override {
                 UNREACHABLE();
                 return {};
@@ -145,14 +150,23 @@ namespace dawn_native {
         ASSERT(!IsError());
         ASSERT(mappedPointer != nullptr);
 
-        mState = BufferState::Mapped;
-        if ((mUsage & dawn::BufferUsageBit::MapWrite) == 0) {
-            // TODO(enga): Support non-mappable buffers with a staging buffer.
-            return DAWN_VALIDATION_ERROR("MapWrite usage required");
+        mState = BufferState::CreateMapped;
+
+        if (IsCPUVisible()) {
+            DAWN_TRY(MapAtCreationImpl(mappedPointer));
+            ASSERT(*mappedPointer != nullptr);
+            return {};
         }
 
-        DAWN_TRY(MapAtCreationImpl(mappedPointer));
-        ASSERT(*mappedPointer != nullptr);
+        std::unique_ptr<StagingBufferBase> stagingBuffer;
+        DAWN_TRY_ASSIGN(stagingBuffer, GetDevice()->CreateStagingBuffer(GetSize()));
+        DAWN_TRY(stagingBuffer->Initialize());
+
+        // This unique_ptr is used to track if we should do a copy or do UnmapImpl inside
+        // Unmap. Don't assign to it until we're sure the staging buffer was created successfully.
+        mStagingBuffer = std::move(stagingBuffer);
+        ASSERT(mStagingBuffer->GetMappedPointer() != nullptr);
+        *mappedPointer = reinterpret_cast<uint8_t*>(mStagingBuffer->GetMappedPointer());
 
         return {};
     }
@@ -163,6 +177,7 @@ namespace dawn_native {
         switch (mState) {
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Destroyed buffer used in a submit");
+            case BufferState::CreateMapped:
             case BufferState::Mapped:
                 return DAWN_VALIDATION_ERROR("Buffer used in a submit while mapped");
             case BufferState::Unmapped:
@@ -292,11 +307,17 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        // A map request can only be called once, so this will fire only if the request wasn't
-        // completed before the Unmap
-        CallMapReadCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
-        CallMapWriteCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
-        UnmapImpl();
+        if (mState == BufferState::CreateMapped && mStagingBuffer) {
+            GetDevice()->ConsumedError(
+                GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.get(), 0, this, 0, GetSize()));
+            mStagingBuffer.reset();
+        } else {
+            // A map request can only be called once, so this will fire only if the request wasn't
+            // completed before the Unmap
+            CallMapReadCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
+            CallMapWriteCallback(mMapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0u);
+            UnmapImpl();
+        }
         mState = BufferState::Unmapped;
         mMapReadCallback = nullptr;
         mMapWriteCallback = nullptr;
@@ -306,12 +327,14 @@ namespace dawn_native {
     MaybeError BufferBase::ValidateSetSubData(uint32_t start, uint32_t count) const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
-        if (mState == BufferState::Destroyed) {
-            return DAWN_VALIDATION_ERROR("Buffer is destroyed");
-        }
-
-        if (mState == BufferState::Mapped) {
-            return DAWN_VALIDATION_ERROR("Buffer is mapped");
+        switch (mState) {
+            case BufferState::CreateMapped:
+            case BufferState::Mapped:
+                return DAWN_VALIDATION_ERROR("Buffer is mapped");
+            case BufferState::Destroyed:
+                return DAWN_VALIDATION_ERROR("Buffer is destroyed");
+            case BufferState::Unmapped:
+                break;
         }
 
         if (count > GetSize()) {
@@ -343,12 +366,14 @@ namespace dawn_native {
     MaybeError BufferBase::ValidateMap(dawn::BufferUsageBit requiredUsage) const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
-        if (mState == BufferState::Destroyed) {
-            return DAWN_VALIDATION_ERROR("Buffer is destroyed");
-        }
-
-        if (mState == BufferState::Mapped) {
-            return DAWN_VALIDATION_ERROR("Buffer already mapped");
+        switch (mState) {
+            case BufferState::CreateMapped:
+            case BufferState::Mapped:
+                return DAWN_VALIDATION_ERROR("Buffer already mapped");
+            case BufferState::Destroyed:
+                return DAWN_VALIDATION_ERROR("Buffer is destroyed");
+            case BufferState::Unmapped:
+                break;
         }
 
         if (!(mUsage & requiredUsage)) {
@@ -361,12 +386,15 @@ namespace dawn_native {
     MaybeError BufferBase::ValidateUnmap() const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
-        if ((mUsage & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) == 0) {
-            return DAWN_VALIDATION_ERROR("Buffer does not have map usage");
-        }
         switch (mState) {
-            case BufferState::Unmapped:
+            case BufferState::CreateMapped:
             case BufferState::Mapped:
+                return {};
+            case BufferState::Unmapped:
+                if ((mUsage & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) ==
+                    0) {
+                    return DAWN_VALIDATION_ERROR("Buffer does not have map usage");
+                }
                 return {};
             case BufferState::Destroyed:
                 return DAWN_VALIDATION_ERROR("Buffer is destroyed");
