@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5237d44_dd854018",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-27T13:17:09Z",
+      "side": 1,
+      "message": "Can these be externs that are defined in DawnTest.cpp?",
+      "revId": "93edd4ac67dc1bf2d0e240f5149e9ded26dd344b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
