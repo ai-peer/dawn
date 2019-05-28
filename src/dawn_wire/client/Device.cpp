@@ -32,7 +32,7 @@ namespace dawn_wire { namespace client {
     }
 
     void Device::SetErrorCallback(DawnDeviceErrorCallback errorCallback,
-                                  DawnCallbackUserdata errorUserdata) {
+                                  void* errorUserdata) {
         mErrorCallback = errorCallback;
         mErrorUserdata = errorUserdata;
     }

@@ -42,7 +42,7 @@ namespace dawn_native {
         uint64_t GetCompletedValue() const;
         void OnCompletion(uint64_t value,
                           dawn::FenceOnCompletionCallback callback,
-                          dawn::CallbackUserdata userdata);
+                          void* userdata);
 
       protected:
         friend class QueueBase;
@@ -57,7 +57,7 @@ namespace dawn_native {
 
         struct OnCompletionData {
             dawn::FenceOnCompletionCallback completionCallback = nullptr;
-            dawn::CallbackUserdata userdata = 0;
+            void* userdata = nullptr;
         };
 
         uint64_t mSignalValue;
