@@ -56,10 +56,10 @@ class ValidationTest : public testing::Test {
         std::unique_ptr<dawn_native::Instance> instance;
 
     private:
-        static void OnDeviceError(const char* message, DawnCallbackUserdata userdata);
-        std::string mDeviceErrorMessage;
-        bool mExpectError = false;
-        bool mError = false;
+      static void OnDeviceError(const char* message, void* userdata);
+      std::string mDeviceErrorMessage;
+      bool mExpectError = false;
+      bool mError = false;
 };
 
 #endif // TESTS_UNITTESTS_VALIDATIONTEST_H_
