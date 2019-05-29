@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "9fffa835_ea41c7a0",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-29T23:24:42Z",
+      "side": 1,
+      "message": "We should have the numbering be contiguous with the other numbers, because sparse enums hurt compiler optimization of switch blocks.",
+      "parentUuid": "b3f1f426_37ba552f",
+      "range": {
+        "startLine": 1043,
+        "startChar": 36,
+        "endLine": 1057,
+        "endChar": 10
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a36ddef_5fb63250",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-29T23:24:42Z",
+      "side": 1,
+      "message": "nit: might be nice to name these \"BC\" instead of \"bc\" so they capitalize more nicely\"",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0816e0cd_b4806d8a",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -36,6 +77,64 @@
       "writtenOn": "2019-05-29T11:20:13Z",
       "side": 1,
       "message": "nit: This is true for all compressed formats we could rename IsBCFormat to IsCompressedFormat",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22cd090c_c75fc7aa",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-29T23:24:42Z",
+      "side": 1,
+      "message": "The usage of IsBCFormat below is specific to BC (although most of the compressed formats use 4x4 blocks as well). Maybe it should just be several helpers? IsCompressedFormat here, Is4x4CompressedFormat at [1], and IsWritableFormat at [2].",
+      "parentUuid": "0816e0cd_b4806d8a",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27e04cf7_009f8c96",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-29T23:24:42Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure we have this same math in multiple places in the code now. Let\u0027s extract it into a helper.",
+      "range": {
+        "startLine": 168,
+        "startChar": 16,
+        "endLine": 168,
+        "endChar": 83
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "899d7a1d_77fba1e5",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-29T23:24:42Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -65,6 +164,23 @@
     },
     {
       "key": {
+        "uuid": "356d9d49_2cfeb3f2",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-29T23:24:42Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0b8de68_ff181b1c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -76,6 +192,23 @@
       "writtenOn": "2019-05-29T11:20:13Z",
       "side": 1,
       "message": "This would be invalid for all compressed texture formats. Also we should use a whitelist instead of a blacklist so that we don\u0027t forget to update it, for example when we add storage textures.",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "883f13f9_be697c5c",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-29T23:24:42Z",
+      "side": 1,
+      "message": "Can you add a test for a multiple-of-4, but non-square, non-power-of-two size? Like 12x32.",
       "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
