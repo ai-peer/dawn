@@ -81,7 +81,11 @@ namespace dawn_native {
                "mipmap level and one array layer, and copy the result of MSAA resolve into the "
                "true resolve target. This workaround is enabled by default on the Metal drivers "
                "that have bugs when setting non-zero resolveLevel or resolveSlice.",
-               "https://bugs.chromium.org/p/dawn/issues/detail?id=56"}}}};
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=56"}},
+             {Toggle::OptOutLazyClearResourceOnFirstUse,
+              {"opt_out_lazy_clear_resource_on_first_use",
+               "Don't use lazy clear, opt out on clearing subresource to 0 bits on first usage",
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=145"}}}};
 
     }  // anonymous namespace
 
