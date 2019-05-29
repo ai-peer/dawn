@@ -331,6 +331,12 @@ namespace dawn_native {
           mSampleCount(descriptor->sampleCount),
           mUsage(descriptor->usage),
           mState(state) {
+        uint32_t maxSubresourceIndex =
+            GetSubresourceIndex(descriptor->mipLevelCount, descriptor->arrayLayerCount);
+        mIsSubresourceContentClearedAtIndex = new bool[maxSubresourceIndex];
+        for (uint32_t i = 0; i < maxSubresourceIndex; ++i) {
+            mIsSubresourceContentClearedAtIndex[i] = false;
+        }
     }
 
     TextureBase::TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -374,6 +380,41 @@ namespace dawn_native {
     TextureBase::TextureState TextureBase::GetTextureState() const {
         ASSERT(!IsError());
         return mState;
+    }
+
+    uint32_t TextureBase::GetSubresourceIndex(uint32_t mipmapLevel, uint32_t arraySlice) const {
+        return GetNumMipLevels() * arraySlice + mipmapLevel;
+    }
+
+    bool TextureBase::IsSubresourceContentCleared(uint32_t mipLevel,
+                                                  uint32_t levelCount,
+                                                  uint32_t baseArrayLayer,
+                                                  uint32_t layerCount) const {
+        ASSERT(!IsError());
+        for (uint32_t mipCount = mipLevel; mipCount < mipLevel + levelCount; ++mipCount) {
+            for (uint32_t arrayCount = baseArrayLayer; arrayCount < baseArrayLayer + layerCount;
+                 ++arrayCount) {
+                uint32_t subresourceIndex = GetSubresourceIndex(mipCount, arrayCount);
+                if (!mIsSubresourceContentClearedAtIndex[subresourceIndex]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    void TextureBase::SetIsSubresourceContentCleared(uint32_t mipLevel,
+                                                     uint32_t levelCount,
+                                                     uint32_t baseArrayLayer,
+                                                     uint32_t layerCount) {
+        ASSERT(!IsError());
+        for (uint32_t mipCount = mipLevel; mipCount < mipLevel + levelCount; ++mipCount) {
+            for (uint32_t arrayCount = baseArrayLayer; arrayCount < baseArrayLayer + layerCount;
+                 ++arrayCount) {
+                uint32_t subresourceIndex = GetSubresourceIndex(mipCount, arrayCount);
+                mIsSubresourceContentClearedAtIndex[subresourceIndex] = true;
+            }
+        }
     }
 
     MaybeError TextureBase::ValidateCanUseInSubmitNow() const {

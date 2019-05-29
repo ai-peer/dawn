@@ -171,8 +171,18 @@ namespace dawn_native { namespace vulkan {
                 for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
                     const auto& attachmentInfo = renderPass->colorAttachments[i];
                     bool hasResolveTarget = attachmentInfo.resolveTarget.Get() != nullptr;
-                    query.SetColor(i, attachmentInfo.view->GetFormat(), attachmentInfo.loadOp,
-                                   hasResolveTarget);
+
+                    dawn::LoadOp loadOp = attachmentInfo.loadOp;
+                    if (loadOp == dawn::LoadOp::Load &&
+                        !attachmentInfo.view->GetTexture()->IsSubresourceContentCleared(
+                            attachmentInfo.view->GetBaseMipLevel(),
+                            attachmentInfo.view->GetLevelCount(),
+                            attachmentInfo.view->GetBaseArrayLayer(),
+                            attachmentInfo.view->GetLayerCount())) {
+                        loadOp = dawn::LoadOp::Clear;
+                    }
+
+                    query.SetColor(i, attachmentInfo.view->GetFormat(), loadOp, hasResolveTarget);
                 }
 
                 if (renderPass->hasDepthStencilAttachment) {
@@ -207,6 +217,11 @@ namespace dawn_native { namespace vulkan {
                     clearValues[attachmentCount].color.float32[3] = attachmentInfo.clearColor.a;
 
                     attachmentCount++;
+                    if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
+                        attachmentInfo.view->GetTexture()->SetIsSubresourceContentCleared(
+                            view->GetBaseMipLevel(), view->GetLevelCount(),
+                            view->GetBaseArrayLayer(), view->GetLayerCount());
+                    }
                 }
 
                 if (renderPass->hasDepthStencilAttachment) {
@@ -290,6 +305,11 @@ namespace dawn_native { namespace vulkan {
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
                 texture->TransitionUsageNow(commands, usages.textureUsages[i]);
+                if (!texture->IsSubresourceContentCleared(0, texture->GetNumMipLevels(), 0,
+                                                          texture->GetArrayLayers())) {
+                    texture->ClearTexture(commands, 0, texture->GetNumMipLevels(), 0,
+                                          texture->GetArrayLayers());
+                }
             }
         };
 
@@ -324,6 +344,10 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    VkBufferImageCopy region =
+                        ComputeBufferImageCopyRegion(src, dst, copy->copySize);
+                    VkImageSubresourceLayers subresource = region.imageSubresource;
+
                     ToBackend(src.buffer)
                         ->TransitionUsageNow(commands, dawn::BufferUsageBit::TransferSrc);
                     ToBackend(dst.texture)
@@ -331,21 +355,34 @@ namespace dawn_native { namespace vulkan {
 
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
-
-                    VkBufferImageCopy region =
-                        ComputeBufferImageCopyRegion(src, dst, copy->copySize);
-
                     // The image is written to so the Dawn guarantees make sure it is in the
                     // TRANSFER_DST_OPTIMAL layout
                     device->fn.CmdCopyBufferToImage(commands, srcBuffer, dstImage,
                                                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
                                                     &region);
+
+                    // Since texture has been overwritten, it has been "cleared"
+                    dst.texture->SetIsSubresourceContentCleared(subresource.mipLevel, 1,
+                                                                subresource.baseArrayLayer,
+                                                                subresource.layerCount);
                 } break;
 
                 case Command::CopyTextureToBuffer: {
                     CopyTextureToBufferCmd* copy = mCommands.NextCommand<CopyTextureToBufferCmd>();
                     auto& src = copy->source;
                     auto& dst = copy->destination;
+
+                    VkBufferImageCopy region =
+                        ComputeBufferImageCopyRegion(dst, src, copy->copySize);
+                    VkImageSubresourceLayers subresource = region.imageSubresource;
+
+                    if (!src.texture->IsSubresourceContentCleared(subresource.mipLevel, 1,
+                                                                  subresource.baseArrayLayer,
+                                                                  subresource.layerCount)) {
+                        ToBackend(src.texture)
+                            ->ClearTexture(commands, subresource.mipLevel, 1,
+                                           subresource.baseArrayLayer, subresource.layerCount);
+                    }
 
                     ToBackend(src.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferSrc);
@@ -354,10 +391,6 @@ namespace dawn_native { namespace vulkan {
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkBuffer dstBuffer = ToBackend(dst.buffer)->GetHandle();
-
-                    VkBufferImageCopy region =
-                        ComputeBufferImageCopyRegion(dst, src, copy->copySize);
-
                     // The Dawn TransferSrc usage is always mapped to GENERAL
                     device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
                                                     dstBuffer, 1, &region);
@@ -369,20 +402,36 @@ namespace dawn_native { namespace vulkan {
                     TextureCopy& src = copy->source;
                     TextureCopy& dst = copy->destination;
 
+                    VkImage srcImage = ToBackend(src.texture)->GetHandle();
+                    VkImage dstImage = ToBackend(dst.texture)->GetHandle();
+
+                    VkImageCopy region = ComputeImageCopyRegion(src, dst, copy->copySize);
+                    VkImageSubresourceLayers dstSubresource = region.dstSubresource;
+                    VkImageSubresourceLayers srcSubresource = region.srcSubresource;
+
+                    if (!src.texture->IsSubresourceContentCleared(srcSubresource.mipLevel, 1,
+                                                                  srcSubresource.baseArrayLayer,
+                                                                  srcSubresource.layerCount)) {
+                        ToBackend(src.texture)
+                            ->ClearTexture(commands, srcSubresource.mipLevel, 1,
+                                           srcSubresource.baseArrayLayer,
+                                           srcSubresource.layerCount);
+                    }
+
                     ToBackend(src.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferSrc);
                     ToBackend(dst.texture)
                         ->TransitionUsageNow(commands, dawn::TextureUsageBit::TransferDst);
 
-                    VkImage srcImage = ToBackend(src.texture)->GetHandle();
-                    VkImage dstImage = ToBackend(dst.texture)->GetHandle();
-
-                    VkImageCopy region = ComputeImageCopyRegion(src, dst, copy->copySize);
-
                     // The dstImage is written to so the Dawn guarantees make sure it is in the
                     // TRANSFER_DST_OPTIMAL layout
                     device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL, dstImage,
                                             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+
+                    // Since destination texture has been overwritten, it has been "cleared"
+                    dst.texture->SetIsSubresourceContentCleared(dstSubresource.mipLevel, 1,
+                                                                dstSubresource.baseArrayLayer,
+                                                                dstSubresource.layerCount);
                 } break;
 
                 case Command::BeginRenderPass: {

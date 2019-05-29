@@ -59,6 +59,15 @@ namespace dawn_native {
         uint32_t GetSampleCount() const;
         dawn::TextureUsageBit GetUsage() const;
         TextureState GetTextureState() const;
+        uint32_t GetSubresourceIndex(uint32_t mipmapLevel, uint32_t arraySlice) const;
+        bool IsSubresourceContentCleared(uint32_t mipLevel,
+                                         uint32_t levelCount,
+                                         uint32_t baseArrayLayer,
+                                         uint32_t layerCount) const;
+        void SetIsSubresourceContentCleared(uint32_t mipLevel,
+                                            uint32_t levelCount,
+                                            uint32_t baseArrayLayer,
+                                            uint32_t layerCount);
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
@@ -85,6 +94,7 @@ namespace dawn_native {
         uint32_t mSampleCount;
         dawn::TextureUsageBit mUsage = dawn::TextureUsageBit::None;
         TextureState mState;
+        bool* mIsSubresourceContentClearedAtIndex;
     };
 
     class TextureViewBase : public ObjectBase {

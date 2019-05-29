@@ -403,6 +403,16 @@ namespace dawn_native {
             if (toggle != Toggle::InvalidEnum) {
                 mTogglesSet.SetToggle(toggle, true);
             }
+
+            // To test that the NonzeroClearResourcesOnCreationForTesting toggle is
+            // working correctly, we want to disable lazy clearing resources on first use.
+            // Otherwise, always enable lazy clear to clear resource on first use.
+            if (toggle == Toggle::NonzeroClearResourcesAndNoLazyClear) {
+                mTogglesSet.SetToggle(Toggle::NonzeroClearResourcesOnCreationForTesting, true);
+                mTogglesSet.SetToggle(Toggle::LazyClearResourceOnFirstUse, false);
+            } else {
+                mTogglesSet.SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
+            }
         }
 
         for (const char* toggleName : deviceDescriptor->forceDisabledToggles) {
