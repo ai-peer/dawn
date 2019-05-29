@@ -1039,7 +1039,24 @@
             {"value": 4, "name": "r8 g8 uint"},
             {"value": 5, "name": "r8 uint"},
             {"value": 6, "name": "b8 g8 r8 a8 unorm"},
-            {"value": 7, "name": "d32 float s8 uint"}
+            {"value": 7, "name": "d32 float s8 uint"},
+            {"value": 100, "name": "bc1 unorm"},
+            {"value": 101, "name": "bc1 unorm srgb"},
+            {"value": 102, "name": "bc2 unorm"},
+            {"value": 103, "name": "bc2 unorm srgb"},
+            {"value": 104, "name": "bc3 unorm"},
+            {"value": 105, "name": "bc3 unorm srgb"},
+            {"value": 106, "name": "bc4 unorm"},
+            {"value": 107, "name": "bc4 snorm"},
+            {"value": 108, "name": "bc5 unorm"},
+            {"value": 109, "name": "bc5 snorm"},
+            {"value": 110, "name": "bc6h ufloat"},
+            {"value": 111, "name": "bc6h sfloat"},
+            {"value": 112, "name": "bc7 unorm"},
+            {"value": 113, "name": "bc7 unorm srgb"}
+        ],
+        "TODO": [
+            "jiawei.shao@intel.com: support BC formats as extension"
         ]
     },
     "texture usage bit": {

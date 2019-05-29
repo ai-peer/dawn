@@ -34,6 +34,7 @@ namespace dawn_native {
     bool IsColorRenderableTextureFormat(dawn::TextureFormat format);
     bool IsDepthStencilRenderableTextureFormat(dawn::TextureFormat format);
     bool IsValidSampleCount(uint32_t sampleCount);
+    bool IsBCFormat(dawn::TextureFormat format);
 
     static constexpr dawn::TextureUsageBit kReadOnlyTextureUsages =
         dawn::TextureUsageBit::TransferSrc | dawn::TextureUsageBit::Sampled |
@@ -42,6 +43,9 @@ namespace dawn_native {
     static constexpr dawn::TextureUsageBit kWritableTextureUsages =
         dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Storage |
         dawn::TextureUsageBit::OutputAttachment;
+
+    static constexpr uint32_t kBCTexelBlockWidth = 4;
+    static constexpr uint32_t kBCTexelBlockHeight = 4;
 
     class TextureBase : public ObjectBase {
       public:
