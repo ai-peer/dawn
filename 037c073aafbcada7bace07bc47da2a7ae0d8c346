@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3f1f426_37ba552f",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-29T11:20:13Z",
+      "side": 1,
+      "message": "nit: these would probably need to contain rg / rgba like the metal names. Also why start the numbering at 100?",
+      "range": {
+        "startLine": 1043,
+        "startChar": 36,
+        "endLine": 1057,
+        "endChar": 10
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0816e0cd_b4806d8a",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-29T11:20:13Z",
+      "side": 1,
+      "message": "nit: This is true for all compressed formats we could rename IsBCFormat to IsCompressedFormat",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edad8ea7_0941c430",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-29T11:20:13Z",
+      "side": 1,
+      "message": "nit: This would be a getter function as well probably, ditto for height.",
+      "range": {
+        "startLine": 174,
+        "startChar": 45,
+        "endLine": 174,
+        "endChar": 63
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0b8de68_ff181b1c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-29T11:20:13Z",
+      "side": 1,
+      "message": "This would be invalid for all compressed texture formats. Also we should use a whitelist instead of a blacklist so that we don\u0027t forget to update it, for example when we add storage textures.",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c096cdf_c8ad387e",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-29T11:20:13Z",
+      "side": 1,
+      "message": "Is it valid to create 2D array (and 3D) textures with a BC format?",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
