@@ -73,6 +73,30 @@ namespace dawn_native {
         draw->firstInstance = firstInstance;
     }
 
+    void RenderPassEncoderBase::DrawIndirect(BufferBase* indirectBuffer, uint64_t indirectOffset) {
+        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
+            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
+            return;
+        }
+
+        DrawIndirectCmd* cmd = mAllocator->Allocate<DrawIndirectCmd>(Command::DrawIndirect);
+        cmd->indirectBuffer = indirectBuffer;
+        cmd->indirectOffset = indirectOffset;
+    }
+
+    void RenderPassEncoderBase::DrawIndexedIndirect(BufferBase* indirectBuffer,
+                                                    uint64_t indirectOffset) {
+        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
+            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
+            return;
+        }
+
+        DrawIndexedIndirectCmd* cmd =
+            mAllocator->Allocate<DrawIndexedIndirectCmd>(Command::DrawIndexedIndirect);
+        cmd->indirectBuffer = indirectBuffer;
+        cmd->indirectOffset = indirectOffset;
+    }
+
     void RenderPassEncoderBase::SetPipeline(RenderPipelineBase* pipeline) {
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
             mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(pipeline))) {
