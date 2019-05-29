@@ -994,6 +994,11 @@ namespace dawn_native {
                     DAWN_TRY(persistentState.ValidateCanDispatch());
                 } break;
 
+                case Command::DispatchIndirect: {
+                    mIterator.NextCommand<DispatchIndirectCmd>();
+                    DAWN_TRY(persistentState.ValidateCanDispatch());
+                } break;
+
                 case Command::InsertDebugMarker: {
                     InsertDebugMarkerCmd* cmd = mIterator.NextCommand<InsertDebugMarkerCmd>();
                     mIterator.NextData<char>(cmd->length + 1);
@@ -1089,6 +1094,16 @@ namespace dawn_native {
 
                 case Command::DrawIndexed: {
                     mIterator.NextCommand<DrawIndexedCmd>();
+                    DAWN_TRY(persistentState.ValidateCanDrawIndexed());
+                } break;
+
+                case Command::DrawIndirect: {
+                    mIterator.NextCommand<DrawIndirectCmd>();
+                    DAWN_TRY(persistentState.ValidateCanDraw());
+                } break;
+
+                case Command::DrawIndexedIndirect: {
+                    mIterator.NextCommand<DrawIndexedIndirectCmd>();
                     DAWN_TRY(persistentState.ValidateCanDrawIndexed());
                 } break;
 
