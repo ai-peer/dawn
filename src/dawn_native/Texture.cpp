@@ -102,6 +102,11 @@ namespace dawn_native {
                 if (descriptor->arrayLayerCount > 1) {
                     return DAWN_VALIDATION_ERROR("Multisampled 2D array texture is not supported.");
                 }
+
+                if (IsBCFormat(descriptor->format)) {
+                    return DAWN_VALIDATION_ERROR(
+                        "The sample counts of the textures in BC formats must be 1.");
+                }
             }
 
             return {};
@@ -157,14 +162,69 @@ namespace dawn_native {
             return descriptor;
         }
 
+        MaybeError ValidateTextureSize(const TextureDescriptor* descriptor) {
+            ASSERT(descriptor->size.width != 0 && descriptor->size.height != 0);
+
+            if (Log2(std::max(descriptor->size.width, descriptor->size.height)) + 1 <
+                descriptor->mipLevelCount) {
+                return DAWN_VALIDATION_ERROR("Texture has too many mip levels");
+            }
+
+            if (IsBCFormat(descriptor->format)) {
+                if (descriptor->size.width % kBCTexelBlockWidth != 0 ||
+                    descriptor->size.height % kBCTexelBlockHeight != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "The size of the texture is incompatible with the texture format");
+                }
+            }
+
+            return {};
+        }
     }  // anonymous namespace
+
+    bool IsBCFormat(dawn::TextureFormat format) {
+        switch (format) {
+            case dawn::TextureFormat::Bc1Unorm:
+            case dawn::TextureFormat::Bc1UnormSrgb:
+            case dawn::TextureFormat::Bc2Unorm:
+            case dawn::TextureFormat::Bc2UnormSrgb:
+            case dawn::TextureFormat::Bc3Unorm:
+            case dawn::TextureFormat::Bc3UnormSrgb:
+            case dawn::TextureFormat::Bc4Unorm:
+            case dawn::TextureFormat::Bc4Snorm:
+            case dawn::TextureFormat::Bc5Unorm:
+            case dawn::TextureFormat::Bc5Snorm:
+            case dawn::TextureFormat::Bc6hUfloat:
+            case dawn::TextureFormat::Bc6hSfloat:
+            case dawn::TextureFormat::Bc7Unorm:
+            case dawn::TextureFormat::Bc7UnormSrgb:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    MaybeError ValidateTextureUsageBit(const TextureDescriptor* descriptor) {
+        DAWN_TRY(ValidateTextureUsageBit(descriptor->usage));
+        if (IsBCFormat(descriptor->format)) {
+            constexpr dawn::TextureUsageBit kInvalidUsageForBCFormats =
+                dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::Storage |
+                dawn::TextureUsageBit::Present;
+            if (descriptor->usage & kInvalidUsageForBCFormats) {
+                return DAWN_VALIDATION_ERROR(
+                    "Texture format is incompatible with the texture usage");
+            }
+        }
+
+        return {};
+    }
 
     MaybeError ValidateTextureDescriptor(DeviceBase*, const TextureDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
 
-        DAWN_TRY(ValidateTextureUsageBit(descriptor->usage));
+        DAWN_TRY(ValidateTextureUsageBit(descriptor));
         DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
         DAWN_TRY(ValidateTextureFormat(descriptor->format));
         DAWN_TRY(ValidateSampleCount(descriptor));
@@ -176,10 +236,7 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Cannot create an empty texture");
         }
 
-        if (Log2(std::max(descriptor->size.width, descriptor->size.height)) + 1 <
-            descriptor->mipLevelCount) {
-            return DAWN_VALIDATION_ERROR("Texture has too many mip levels");
-        }
+        DAWN_TRY(ValidateTextureSize(descriptor));
 
         return {};
     }
