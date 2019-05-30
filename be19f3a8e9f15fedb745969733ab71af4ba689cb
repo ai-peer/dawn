@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "397c7186_c2cfcecc",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-05-30T22:55:35Z",
+      "side": 1,
+      "message": "I think your DepthStencil tests may be crashing because this should be using vkCmdClearDepthStencilImage for depth/stencil textures.\n\nhttps://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdClearDepthStencilImage.html",
+      "range": {
+        "startLine": 436,
+        "startChar": 17,
+        "endLine": 436,
+        "endChar": 35
+      },
+      "revId": "be19f3a8e9f15fedb745969733ab71af4ba689cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
