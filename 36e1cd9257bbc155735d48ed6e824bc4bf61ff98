@@ -1,0 +1,250 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23e51a2f_0aa9062e",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "uNit: \"max\" kind of makes it sound like it would be a valid index, but IIUC it would not. Maybe rename to \"subresourceCount\"?",
+      "range": {
+        "startLine": 334,
+        "startChar": 17,
+        "endLine": 334,
+        "endChar": 36
+      },
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe129d5_24a38613",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "nit: baseMipLevel?",
+      "range": {
+        "startLine": 389,
+        "startChar": 59,
+        "endLine": 389,
+        "endChar": 67
+      },
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7182076c_0592d416",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "uNit: this says \"count\" but it sounds like it\u0027s actually a \"level\". change to mipLevel or level?",
+      "range": {
+        "startLine": 394,
+        "startChar": 22,
+        "endLine": 394,
+        "endChar": 30
+      },
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6513d743_1fa2c86b",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "uNit: same, change to arrayLayer or layer?",
+      "range": {
+        "startLine": 395,
+        "startChar": 26,
+        "endLine": 395,
+        "endChar": 36
+      },
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5194c0c0_b197d523",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "uNit: mipLevel for consistency, here and in cpp",
+      "range": {
+        "startLine": 62,
+        "startChar": 46,
+        "endLine": 62,
+        "endChar": 57
+      },
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fc8f7ac_8c925ff4",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "use a std::vector instead, so we don\u0027t have to manually new/delete.",
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9b791b9_c2fc6783",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "Hm, this doesn\u0027t quite make sense. Firstly, it doesn\u0027t make sense to force all loads to load cleared data - does \"IsSubresourceContentCleared\" really mean \"IsSubresourceContentInitialized\"? Maybe that needs a rename.\n\nSecond, it doesn\u0027t make sense to clear the ENTIRE attachment just because PART of it is not already initialized. But that\u0027s not actually a problem - level count and layer count are both validated to be 1 for attachments. So here, assert layer count \u003d\u003d 1 and level count \u003d\u003d 1 before this if().",
+      "range": {
+        "startLine": 176,
+        "startChar": 24,
+        "endLine": 177,
+        "endChar": 87
+      },
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e5c00a4_114e630a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "loadOp defines what data is seen when the render pass reads the attachment. But IsSubResourceContentCleared is tracking whether the actual data inside of the resource is cleared (initialized?). The resource becomes initialized after the end of the render pass iff the storeOp Store. So this block should be at the end of the render pass, and it should check storeOp\u003d\u003dStore instead.",
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcb3043b_9dd858e9",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "maybe factor this out into a texture-\u003eEnsureSubresourceInitialized(, , , )?\n\nAlso, this will change when we have subresource usage tracking, so add a TODO. (https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/CommandEncoder.cpp?l\u003d492\u0026rcl\u003d26d3cf08c209c662a6e2298c301272e2eb8246e4)",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 17
+      },
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30dcb005_5b69d5b6",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "update comment if you rename IsSubresourceContentCleared",
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dac3fa8_a26736ab",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "use EnsureSubresourceInitialized here",
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5e162aa_069a7048",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T00:02:35Z",
+      "side": 1,
+      "message": "use EnsureSubresourceInitialized here",
+      "revId": "36e1cd9257bbc155735d48ed6e824bc4bf61ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
