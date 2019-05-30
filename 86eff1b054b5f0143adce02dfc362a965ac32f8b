@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0afc0457_9cf42653",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-30T23:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5656fef_8c8504ad",
+      "range": {
+        "startLine": 653,
+        "startChar": 20,
+        "endLine": 653,
+        "endChar": 24
+      },
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d146783_292f9be7",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 11
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4db07cb9_d60b6a68",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-30T23:02:46Z",
+      "side": 1,
+      "message": "tested and it was indeed git cl format, so I\u0027ll leave it as is",
+      "parentUuid": "9d146783_292f9be7",
+      "range": {
+        "startLine": 839,
+        "startChar": 44,
+        "endLine": 839,
+        "endChar": 45
+      },
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9de1f35_0c8830fc",
         "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
         "patchSetId": 11
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "b2035690_1d5b34d3",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-30T23:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9de1f35_0c8830fc",
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0289ab7_da02db71",
         "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
         "patchSetId": 11
@@ -79,6 +145,24 @@
       "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3bb3321_72cb158e",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-30T23:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0289ab7_da02db71",
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -102,6 +186,30 @@
       "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dcc9264_dc031ac9",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-05-30T23:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5da1a5fb_394a33aa",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 28
+      },
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
