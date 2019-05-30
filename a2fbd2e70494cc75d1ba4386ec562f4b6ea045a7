@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5eaf753c_b797d6c8",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T17:01:13Z",
+      "side": 1,
+      "message": "uNit: h should also be capitalized",
+      "range": {
+        "startLine": 1024,
+        "startChar": 38,
+        "endLine": 1024,
+        "endChar": 39
+      },
+      "revId": "a2fbd2e70494cc75d1ba4386ec562f4b6ea045a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

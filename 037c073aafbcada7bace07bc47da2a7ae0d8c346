@@ -208,6 +208,30 @@
     },
     {
       "key": {
+        "uuid": "df6f677a_5c5c7417",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T17:01:13Z",
+      "side": 1,
+      "message": "Oops, I didn\u0027t realize that this came from moving the same math from elsewhere, and there\u0027s still only one copy.",
+      "parentUuid": "c8e2bfef_7d1d0bb4",
+      "range": {
+        "startLine": 168,
+        "startChar": 16,
+        "endLine": 168,
+        "endChar": 83
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "899d7a1d_77fba1e5",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -278,6 +302,30 @@
       "side": 1,
       "message": "Now I think we can directly use 4 here because this block of code is under \"if(Is4x4CompressedFormat(format))\".",
       "parentUuid": "edad8ea7_0941c430",
+      "range": {
+        "startLine": 174,
+        "startChar": 45,
+        "endLine": 174,
+        "endChar": 63
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2cb7172e_58e6296b",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T17:01:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "70d01225_6b2cee85",
       "range": {
         "startLine": 174,
         "startChar": 45,
@@ -377,6 +425,24 @@
     },
     {
       "key": {
+        "uuid": "9f7760b9_65fdbb7d",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T17:01:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "883f13f9_be697c5c",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c096cdf_c8ad387e",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 3
@@ -388,6 +454,24 @@
       "writtenOn": "2019-05-29T11:20:13Z",
       "side": 1,
       "message": "Is it valid to create 2D array (and 3D) textures with a BC format?",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e57c6852_e722f902",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T17:01:13Z",
+      "side": 1,
+      "message": "I know you didn\u0027t mark this as \"Done\" yet, but looks like you added test for 2d array, but not 3d yet.",
+      "parentUuid": "6c096cdf_c8ad387e",
       "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
