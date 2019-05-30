@@ -66,6 +66,48 @@
     },
     {
       "key": {
+        "uuid": "baad7938_bd8fa753",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a36ddef_5fb63250",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5730eaa_f5d69dec",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9fffa835_ea41c7a0",
+      "range": {
+        "startLine": 1043,
+        "startChar": 36,
+        "endLine": 1057,
+        "endChar": 10
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0816e0cd_b4806d8a",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -101,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "5447f531_9bedf907",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22cd090c_c75fc7aa",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27e04cf7_009f8c96",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -112,6 +172,30 @@
       "writtenOn": "2019-05-29T23:24:42Z",
       "side": 1,
       "message": "I\u0027m pretty sure we have this same math in multiple places in the code now. Let\u0027s extract it into a helper.",
+      "range": {
+        "startLine": 168,
+        "startChar": 16,
+        "endLine": 168,
+        "endChar": 83
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8e2bfef_7d1d0bb4",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Oh after searching all the code of Dawn I failed to find another place that uses this math.\nThe other place that uses \"Log2\" is here:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/PerStage.h?l\u003d68",
+      "parentUuid": "27e04cf7_009f8c96",
       "range": {
         "startLine": 168,
         "startChar": 16,
@@ -141,6 +225,24 @@
     },
     {
       "key": {
+        "uuid": "2ef98951_94904cb7",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "899d7a1d_77fba1e5",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "edad8ea7_0941c430",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -164,6 +266,30 @@
     },
     {
       "key": {
+        "uuid": "70d01225_6b2cee85",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Now I think we can directly use 4 here because this block of code is under \"if(Is4x4CompressedFormat(format))\".",
+      "parentUuid": "edad8ea7_0941c430",
+      "range": {
+        "startLine": 174,
+        "startChar": 45,
+        "endLine": 174,
+        "endChar": 63
+      },
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "356d9d49_2cfeb3f2",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -181,6 +307,24 @@
     },
     {
       "key": {
+        "uuid": "01a39299_015c9364",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "356d9d49_2cfeb3f2",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0b8de68_ff181b1c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -195,6 +339,24 @@
       "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b75e85ca_a9861b60",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-30T07:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0b8de68_ff181b1c",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
