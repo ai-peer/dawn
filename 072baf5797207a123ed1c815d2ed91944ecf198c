@@ -499,6 +499,24 @@
     },
     {
       "key": {
+        "uuid": "a13f50a1_a30f680f",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-05-30T23:47:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f8fb71b_237ab735",
+      "revId": "072baf5797207a123ed1c815d2ed91944ecf198c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0636fd86_0ae61e60",
         "filename": "src/tests/end2end/TextureResetTests.cpp",
         "patchSetId": 2
