@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5656fef_8c8504ad",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T02:28:19Z",
+      "side": 1,
+      "message": "nit: We use auto in many places in the code, but we\u0027ve been moving away from it where possible for readability.",
+      "range": {
+        "startLine": 653,
+        "startChar": 20,
+        "endLine": 653,
+        "endChar": 24
+      },
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d146783_292f9be7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T02:28:19Z",
+      "side": 1,
+      "message": "uNit: align colons (unless git cl format makes it this way)",
+      "range": {
+        "startLine": 839,
+        "startChar": 44,
+        "endLine": 839,
+        "endChar": 45
+      },
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9de1f35_0c8830fc",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T02:28:19Z",
+      "side": 1,
+      "message": "These tests will of course need skips on D3D12 NVIDIA for now.\n\nsee also https://dawn-review.googlesource.com/c/dawn/+/7560",
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0289ab7_da02db71",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T02:28:19Z",
+      "side": 1,
+      "message": "Seems like every case is doing this bit, maybe it could be moved inside Test()? e.g. Test could take an initializer_list instead of dawn::Buffer as the first arg.",
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5da1a5fb_394a33aa",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-30T02:28:19Z",
+      "side": 1,
+      "message": "Can you file a bug about this on crbug.com/dawn/new, explaining the problem in a bit more detail, and then include that crbug.com/dawn/### link here? It can replace your email address (TODO(crbug.com/dawn/###)) and you can assign the bug to yourself.",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 28
+      },
+      "revId": "86eff1b054b5f0143adce02dfc362a965ac32f8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
