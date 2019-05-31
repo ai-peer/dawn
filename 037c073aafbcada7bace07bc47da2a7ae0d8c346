@@ -493,6 +493,24 @@
       "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9da1eb7_82bef099",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-31T02:44:18Z",
+      "side": 1,
+      "message": "\u003e won\u0027t allow creating a 3D texture (and 1D texture) with BC format\n\nI agree.\n\n\u003e only texture dimension supported in Dawn is 2D\n\nOh, right, I forgot. Can you add TODOs here to test 1D and 3D?",
+      "parentUuid": "b78095ce_95b4bbdd",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
