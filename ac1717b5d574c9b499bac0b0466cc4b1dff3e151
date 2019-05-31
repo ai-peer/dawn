@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdf29afe_8cd6cdaa",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-31T02:33:22Z",
+      "side": 1,
+      "message": "uNit: should probably also rename these to mipLevelCount for consistency.",
+      "range": {
+        "startLine": 66,
+        "startChar": 54,
+        "endLine": 66,
+        "endChar": 64
+      },
+      "revId": "ac1717b5d574c9b499bac0b0466cc4b1dff3e151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b106027_24ba8903",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-31T02:33:22Z",
+      "side": 1,
+      "message": "hm, we\u0027re going to need to spec whether the default value for depth is 0.0 or 1.0. I will open a gpuweb issue about this.\nhttps://github.com/gpuweb/gpuweb/issues/312",
+      "revId": "ac1717b5d574c9b499bac0b0466cc4b1dff3e151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc2ff063_d9df1983",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-31T02:33:22Z",
+      "side": 1,
+      "message": "stencil is a uint32_t; this should be 0 or 0u.",
+      "range": {
+        "startLine": 432,
+        "startChar": 37,
+        "endLine": 432,
+        "endChar": 41
+      },
+      "revId": "ac1717b5d574c9b499bac0b0466cc4b1dff3e151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
