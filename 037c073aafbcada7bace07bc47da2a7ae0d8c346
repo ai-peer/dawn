@@ -475,6 +475,24 @@
       "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b78095ce_95b4bbdd",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-05-31T00:14:33Z",
+      "side": 1,
+      "message": "Sorry I forgot to response to this comment. I think we won\u0027t allow creating a 3D texture (and 1D texture) with BC format because Metal does not allow doing so:\nhttps://developer.apple.com/library/archive/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Mem-Obj/Mem-Obj.html#//apple_ref/doc/uid/TP40014221-CH4-SW12\n\nAnd I didn\u0027t test 3D textures because it is not supported in Dawn now. The only texture dimension supported in Dawn is 2D:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/dawn.json?l\u003d1026",
+      "parentUuid": "e57c6852_e722f902",
+      "revId": "037c073aafbcada7bace07bc47da2a7ae0d8c346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
