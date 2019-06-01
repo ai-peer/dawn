@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ef3b6b1e_8943e929",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-01T02:41:43Z",
+      "side": 1,
+      "message": "Sorry for the delay. Yeah, that\u0027s fine.",
+      "parentUuid": "72e96abc_d7f40d78",
+      "range": {
+        "startLine": 66,
+        "startChar": 54,
+        "endLine": 66,
+        "endChar": 64
+      },
+      "revId": "ac1717b5d574c9b499bac0b0466cc4b1dff3e151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b106027_24ba8903",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 8
