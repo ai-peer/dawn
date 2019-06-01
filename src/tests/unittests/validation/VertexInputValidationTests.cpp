@@ -63,7 +63,7 @@ TEST_F(VertexInputTest, PipelineCompatibility) {
     utils::ComboVertexInputDescriptor state;
     state.numBuffers = 1;
     state.cBuffers[0].stride = 2 * sizeof(float);
-    state.numAttributes = 2;
+    state.cBuffers[0].numAttributes = 2;
     state.cAttributes[1].shaderLocation = 1;
     state.cAttributes[1].offset = sizeof(float);
 
@@ -109,7 +109,7 @@ TEST_F(VertexInputTest, StrideZero) {
     )");
 
     // Works ok with attributes at a large-ish offset
-    state.numAttributes = 1;
+    state.cBuffers[0].numAttributes = 1;
     state.cAttributes[0].offset = 128;
     CreatePipeline(true, state, R"(
         #version 450
@@ -119,34 +119,16 @@ TEST_F(VertexInputTest, StrideZero) {
     )");
 }
 
-// Test that we cannot set an already set input
-TEST_F(VertexInputTest, AlreadySetInput) {
-    // Control case
-    utils::ComboVertexInputDescriptor state;
-    state.numBuffers = 1;
-    CreatePipeline(true, state, R"(
-        #version 450
-        void main() {
-            gl_Position = vec4(0.0);
-        }
-    )");
-
-    // Oh no, input 0 is set twice
-    state.numBuffers = 2;
-    CreatePipeline(false, state, R"(
-        #version 450
-        void main() {
-            gl_Position = vec4(0.0);
-        }
-    )");
-}
-
-// Check out of bounds condition on input slot
-TEST_F(VertexInputTest, SetInputSlotOutOfBounds) {
+// Check out of bounds condition on total number of buffers
+TEST_F(VertexInputTest, SetInputBufferNumExceedMax) {
     // Control case, setting last input slot
     utils::ComboVertexInputDescriptor state;
-    state.numBuffers = 1;
-    state.cBuffers[0].inputSlot = kMaxVertexBuffers - 1;
+    state.numBuffers = kMaxVertexBuffers;
+    for (uint32_t i = 0; i < kMaxVertexBuffers; ++i) {
+        state.cBuffers[i].numAttributes = 1;
+        state.cBuffers[i].attributes = &state.cAttributes[i];
+        state.cAttributes[i].shaderLocation = i;
+    }
     CreatePipeline(true, state, R"(
         #version 450
         void main() {
@@ -155,7 +137,33 @@ TEST_F(VertexInputTest, SetInputSlotOutOfBounds) {
     )");
 
     // Test input slot OOB
-    state.cBuffers[0].inputSlot = kMaxVertexBuffers;
+    state.numBuffers = kMaxVertexBuffers + 1;
+    CreatePipeline(false, state, R"(
+        #version 450
+        void main() {
+            gl_Position = vec4(0.0);
+        }
+    )");
+}
+
+// Check out of bounds condition on total number of attributes
+TEST_F(VertexInputTest, SetVertexAttributesExceedMax) {
+    // Control case, setting last input slot
+    utils::ComboVertexInputDescriptor state;
+    state.numBuffers = 2;
+    state.cBuffers[0].numAttributes = kMaxVertexAttributes;
+    for (uint32_t i = 0; i < kMaxVertexAttributes; ++i) {
+        state.cAttributes[i].shaderLocation = i;
+    }
+    CreatePipeline(true, state, R"(
+        #version 450
+        void main() {
+            gl_Position = vec4(0.0);
+        }
+    )");
+
+    // Test input slot OOB
+    state.cBuffers[1].numAttributes = 1;
     CreatePipeline(false, state, R"(
         #version 450
         void main() {
@@ -192,7 +200,7 @@ TEST_F(VertexInputTest, AlreadySetAttribute) {
     // Control case, setting last attribute
     utils::ComboVertexInputDescriptor state;
     state.numBuffers = 1;
-    state.numAttributes = 1;
+    state.cBuffers[0].numAttributes = 1;
     CreatePipeline(true, state, R"(
         #version 450
         void main() {
@@ -201,7 +209,7 @@ TEST_F(VertexInputTest, AlreadySetAttribute) {
     )");
 
     // Oh no, attribute 0 is set twice
-    state.numAttributes = 2;
+    state.cBuffers[0].numAttributes = 2;
     CreatePipeline(false, state, R"(
         #version 450
         void main() {
@@ -215,7 +223,7 @@ TEST_F(VertexInputTest, SetAttributeLocationOutOfBounds) {
     // Control case, setting last attribute shader location
     utils::ComboVertexInputDescriptor state;
     state.numBuffers = 1;
-    state.numAttributes = 1;
+    state.cBuffers[0].numAttributes = 1;
     state.cAttributes[0].shaderLocation = kMaxVertexAttributes - 1;
     CreatePipeline(true, state, R"(
         #version 450
@@ -239,7 +247,7 @@ TEST_F(VertexInputTest, SetAttributeOffsetOutOfBounds) {
     // Control case, setting max attribute offset for FloatR32 vertex format
     utils::ComboVertexInputDescriptor state;
     state.numBuffers = 1;
-    state.numAttributes = 1;
+    state.cBuffers[0].numAttributes = 1;
     state.cAttributes[0].offset = kMaxVertexAttributeEnd - sizeof(dawn::VertexFormat::Float);
     CreatePipeline(true, state, R"(
         #version 450
@@ -262,54 +270,8 @@ TEST_F(VertexInputTest, SetAttributeOffsetOutOfBounds) {
 TEST_F(VertexInputTest, SetAttributeOffsetOverflow) {
     utils::ComboVertexInputDescriptor state;
     state.numBuffers = 1;
-    state.numAttributes = 1;
+    state.cBuffers[0].numAttributes = 1;
     state.cAttributes[0].offset = std::numeric_limits<uint32_t>::max();
-    CreatePipeline(false, state, R"(
-        #version 450
-        void main() {
-            gl_Position = vec4(0.0);
-        }
-    )");
-}
-
-// Check that all attributes must be backed by an input
-TEST_F(VertexInputTest, RequireInputForAttribute) {
-    // Control case
-    utils::ComboVertexInputDescriptor state;
-    state.numBuffers = 1;
-    state.numAttributes = 1;
-    CreatePipeline(true, state, R"(
-        #version 450
-        void main() {
-            gl_Position = vec4(0.0);
-        }
-    )");
-
-    // Attribute 0 uses input 1 which doesn't exist
-    state.cAttributes[0].inputSlot = 1;
-    CreatePipeline(false, state, R"(
-        #version 450
-        void main() {
-            gl_Position = vec4(0.0);
-        }
-    )");
-}
-
-// Check OOB checks for an attribute's input
-TEST_F(VertexInputTest, SetAttributeOOBCheckForInputs) {
-    // Control case
-    utils::ComboVertexInputDescriptor state;
-    state.numBuffers = 1;
-    state.numAttributes = 1;
-    CreatePipeline(true, state, R"(
-        #version 450
-        void main() {
-            gl_Position = vec4(0.0);
-        }
-    )");
-
-    // Could crash if we didn't check for OOB
-    state.cAttributes[0].inputSlot = 1000000;
     CreatePipeline(false, state, R"(
         #version 450
         void main() {

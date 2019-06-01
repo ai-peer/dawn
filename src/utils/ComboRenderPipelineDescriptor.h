@@ -38,6 +38,7 @@ namespace utils {
         dawn::PipelineStageDescriptor cVertexStage;
         dawn::PipelineStageDescriptor cFragmentStage;
 
+        dawn::VertexAttributeDescriptor defaultAttribute;
         ComboVertexInputDescriptor cVertexInput;
         dawn::RasterizationStateDescriptor cRasterizationState;
         std::array<dawn::ColorStateDescriptor*, kMaxColorAttachments> cColorStates;
