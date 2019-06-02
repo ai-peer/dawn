@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "335bc8d7_4053bc7a",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-02T00:21:59Z",
+      "side": 0,
+      "message": "According to the spec for VertexInputDescriptor: https://github.com/gpuweb/gpuweb/blob/master/spec/index.bs, some members of vertex buffers can be NULL, but the pointer of all vertex buffers (\"buffers\" here) can\u0027t be nullptr. And we use \"const*\" for buffers, which means its elements are structs, not pointers to structs (which require \"const *const*\" for the annotation). So we can\u0027t set nullptr for the particular elements in buffers when it\u0027s NULL. \n\nWe do have tests for this situation in VertexInputTest.cpp in end2end tests. I added a couple of TODOs. One solution is that we construct vertex buffer objects, but set their numAttributes to 0, in order to implicitly indicate that these vertex buffers are NULL.\n\nWDYT?",
+      "revId": "8dfc593eb7bbe67829255f95308d7b2e696fb698",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

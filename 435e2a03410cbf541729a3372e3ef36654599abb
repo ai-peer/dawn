@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b55c9375_93ce6c5a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-02T00:21:59Z",
+      "side": 1,
+      "message": "This code snippet is not necessary. But I\u0027d like to keep it if no objection. Every vertex attribute has a member called shaderLocation, and the shaderLocation sets some limit: 1) \u003e\u003d0, 2) values are different across different attributes, 3) can\u0027t exceed kMaxVertexAttributes. So it can ensure that total attribute number never exceed kMaxVertexAttributes. \n\nBut the logic is obscure. And the previous code (at line 85 - 87) also checked total vertex attributes number. So I keep the logic here.",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 13
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
