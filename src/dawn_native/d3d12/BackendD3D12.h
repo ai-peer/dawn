@@ -17,11 +17,9 @@
 
 #include "dawn_native/BackendConnection.h"
 
-#include "dawn_native/d3d12/d3d12_platform.h"
+#include "dawn_native/d3d12/PlatformFunctions.h"
 
 namespace dawn_native { namespace d3d12 {
-
-    class PlatformFunctions;
 
     class Backend : public BackendConnection {
       public:
