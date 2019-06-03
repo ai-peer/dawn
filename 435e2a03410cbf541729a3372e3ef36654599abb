@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "98f7af09_472b786b",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "I will do this in another patch.",
+      "parentUuid": "4fc820b0_93693a2e",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66084b61_a4ea118c",
         "filename": "dawn.json",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb27d7e7_3eb8da4d",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "66084b61_a4ea118c",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e5b608d_ec79a22f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Per my understanding, the stride can be zero if stepMode is perVertex. So I did this when stride is not zero.",
+      "parentUuid": "42c0c84d_9c9f7bb6",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 13
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "6646abd2_be2610fa",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feef1250_e0fb7690",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 13
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be62c4ce_46da6bb9",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 4
@@ -129,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "19c1c798_9807f317",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be62c4ce_46da6bb9",
+      "range": {
+        "startLine": 403,
+        "startChar": 18,
+        "endLine": 403,
+        "endChar": 22
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cd2d47c_ead6a8b7",
         "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 4
@@ -143,6 +251,24 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60c165f0_3cb0a230",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cd2d47c_ead6a8b7",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "82306589_fe4c6ef3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dd0437a_1bd804fd",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db2425f1_cb2f5b26",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 4
@@ -180,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "ddcaeef1_56cfa355",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db2425f1_cb2f5b26",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95537816_39d7f0f7",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 4
@@ -194,6 +356,24 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d398a398_b46a1d12",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95537816_39d7f0f7",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -220,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "eb09ef0d_ebc4b5aa",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4d4a88d_b84367c4",
+      "range": {
+        "startLine": 149,
+        "startChar": 7,
+        "endLine": 150,
+        "endChar": 53
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c765773_60f976d5",
         "filename": "src/tests/end2end/VertexInputTests.cpp",
         "patchSetId": 4
@@ -243,6 +447,30 @@
     },
     {
       "key": {
+        "uuid": "aa2ecb23_4b3a6358",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c765773_60f976d5",
+      "range": {
+        "startLine": 158,
+        "startChar": 19,
+        "endLine": 158,
+        "endChar": 23
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a05989e_376ad753",
         "filename": "src/tests/end2end/VertexInputTests.cpp",
         "patchSetId": 4
@@ -257,6 +485,24 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42be5393_fb3aaa8b",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a05989e_376ad753",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -277,6 +523,24 @@
     },
     {
       "key": {
+        "uuid": "545c9d37_7e1c4ddd",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4525eed6_59fc1ada",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8848ce7c_19918e2d",
         "filename": "src/tests/end2end/VertexInputTests.cpp",
         "patchSetId": 4
@@ -291,6 +555,24 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5d9044c_c3105844",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8848ce7c_19918e2d",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -311,6 +593,24 @@
     },
     {
       "key": {
+        "uuid": "b8a3d67a_89db287c",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64e178a6_748e0922",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "372b8f68_4daf8936",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 4
@@ -325,6 +625,24 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1906d9dc_74aa3cfc",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "For end2end or unittest, yes, we can. but it\u0027s impossible for dawn users because VertexAttributeDescriptor is not optional.",
+      "parentUuid": "372b8f68_4daf8936",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -348,6 +666,30 @@
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbaec810_b9bb7ddf",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "520f0c74_6b40d81f",
+      "range": {
+        "startLine": 40,
+        "startChar": 54,
+        "endLine": 40,
+        "endChar": 56
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

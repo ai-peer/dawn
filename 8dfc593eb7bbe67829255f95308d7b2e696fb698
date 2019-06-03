@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9b1d1cd2_f76a99c2",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 0,
+      "message": "Yes. Personally I\u0027d like to change the spec (Then it is easy here):\n1) add inputSlot to VertexBufferDescriptor. \n2) Change \"required sequence\u003cGPUVertexBufferDescriptor?\u003e vertexBuffers;\" to \"required sequence\u003cGPUVertexBufferDescriptor\u003e vertexBuffers;\" (remove \"?\")\n\nIn this way, we explicitly point out the inputSlot of buffer. Then we don\u0027t need to set \"NULL\" object for the buffers that are not existed in vertex input. Otherwise, If the first buffer\u0027s inputSlot is 3, and the second buffer\u0027s inputSlot is 9. We might need to list them like this \u003cNULLObj, NULLObj, NullObj, VertexBuffer1, NULLObj, NullObj, NULLObj, NULLObj, NULLObj, VertexBuffer2\u003e. I think this is not good. It seems to be a little bit silly to count the NULLObj one by one and set the correct inputSlot implicitly. \n\nBut it\u0027s a good idea that we gather all attributes in the same vertex buffer together and remove inputSlot for each attribute. \n\nWDYT? Corentin and Kai(Kai did the change for vertexInput from original vulkan-like InputState).",
+      "parentUuid": "3a926914_ef1a3b3d",
+      "revId": "8dfc593eb7bbe67829255f95308d7b2e696fb698",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "073a019f_0a1139fe",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -51,6 +69,24 @@
       "revId": "8dfc593eb7bbe67829255f95308d7b2e696fb698",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5922ad0_e9ede7f6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-03T21:15:57Z",
+      "side": 0,
+      "message": "We validate shaderLocation above. Not this one.",
+      "parentUuid": "073a019f_0a1139fe",
+      "revId": "8dfc593eb7bbe67829255f95308d7b2e696fb698",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
