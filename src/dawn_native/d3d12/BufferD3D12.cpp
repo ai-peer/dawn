@@ -64,6 +64,7 @@ namespace dawn_native { namespace d3d12 {
                 return D3D12_HEAP_TYPE_DEFAULT;
             }
         }
+
     }  // namespace
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
@@ -89,7 +90,7 @@ namespace dawn_native { namespace d3d12 {
         if (heapType == D3D12_HEAP_TYPE_READBACK) {
             bufferUsage |= D3D12_RESOURCE_STATE_COPY_DEST;
             mFixedResourceState = true;
-            mLastUsage = dawn::BufferUsageBit::TransferDst;
+            mLastState = D3D12_RESOURCE_STATE_COPY_DEST;
         }
 
         // D3D12 requires buffers on the UPLOAD heap to have the D3D12_RESOURCE_STATE_GENERIC_READ
@@ -97,7 +98,7 @@ namespace dawn_native { namespace d3d12 {
         if (heapType == D3D12_HEAP_TYPE_UPLOAD) {
             bufferUsage |= D3D12_RESOURCE_STATE_GENERIC_READ;
             mFixedResourceState = true;
-            mLastUsage = dawn::BufferUsageBit::TransferSrc;
+            mLastState = D3D12_RESOURCE_STATE_COPY_SOURCE;
         }
 
         mResource =
@@ -117,35 +118,61 @@ namespace dawn_native { namespace d3d12 {
         return mResource;
     }
 
-    void Buffer::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
-                                    dawn::BufferUsageBit usage) {
+    bool Buffer::CanSkipTransition(D3D12_RESOURCE_STATES newState) const {
         // Resources in upload and readback heaps must be kept in the COPY_SOURCE/DEST state
         if (mFixedResourceState) {
-            ASSERT(usage == mLastUsage);
-            return;
+            ASSERT(mLastState == newState);
+            return true;
         }
 
         // We can skip transitions to already current usages.
-        // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
-        bool lastIncludesTarget = (mLastUsage & usage) == usage;
-        if (lastIncludesTarget) {
-            return;
+        if (mLastState == newState) {
+            return true;
         }
 
-        D3D12_RESOURCE_STATES lastState = D3D12BufferUsage(mLastUsage);
+        return false;
+    }
+
+    void Buffer::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                    dawn::BufferUsageBit usage) {
         D3D12_RESOURCE_STATES newState = D3D12BufferUsage(usage);
+
+        // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
+        if (CanSkipTransition(newState)) {
+            return;
+        }
 
         D3D12_RESOURCE_BARRIER barrier;
         barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
         barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
         barrier.Transition.pResource = mResource.Get();
-        barrier.Transition.StateBefore = lastState;
+        barrier.Transition.StateBefore = mLastState;
         barrier.Transition.StateAfter = newState;
         barrier.Transition.Subresource = 0;
 
         commandList->ResourceBarrier(1, &barrier);
 
-        mLastUsage = usage;
+        mLastState = newState;
+    }
+
+    bool Buffer::TransitionUsageLater(D3D12_RESOURCE_BARRIER& barrier,
+                                      dawn::BufferUsageBit newUsage) {
+        D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
+
+        if (CanSkipTransition(newState)) {
+            return false;
+        }
+
+        barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+        barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+        barrier.Transition.pResource = mResource.Get();
+        barrier.Transition.StateBefore = mLastState;
+        barrier.Transition.StateAfter = newState;
+        barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+
+        mLastState = newState;
+
+        return true;
     }
 
     D3D12_GPU_VIRTUAL_ADDRESS Buffer::GetVA() const {
