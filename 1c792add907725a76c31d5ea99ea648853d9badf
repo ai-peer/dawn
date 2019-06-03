@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52ba7867_b395e2ab",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:08:21Z",
+      "side": 1,
+      "message": "We also need to record the buffer\u0027s usage with usageTracker.BufferUsedAs(cmd-\u003ebuffer.Get(), dawn::BufferUsageBit::Indirect);\n\nditto for other uses.\n\nThis is important for correctness of the validation, and because the \"PassResourceUsage\" is used to generate memory barriers in D3D12 and Vulkan",
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2400af30_868507ff",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:08:21Z",
+      "side": 1,
+      "message": "Can we validate that indirectOffset + sizeof(indirect command struct) \u003c\u003d indirectBuffer.size()? Ditto for DrawIndirect and DrawIndexedIndirect. This would also need some validation tests.",
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1127f859_a02dd33f",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:08:21Z",
+      "side": 1,
+      "message": "uNit: these can be concatenated in a single line, ditto below.",
+      "range": {
+        "startLine": 508,
+        "startChar": 40,
+        "endLine": 509,
+        "endChar": 63
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69c40bf9_a5fc56ae",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:08:21Z",
+      "side": 1,
+      "message": "nit: This could more precisely test DispatchIndirect: we don\u0027t need the shared memory and tmp counting logic, but we\u0027d need to make sure a dispatch(3, 5, 7) is correctly dispatch to 3, 5, 7 (so that we know the order of arguments is correct for example). Can you look at making a test shader for this instead?",
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ca791f8_19f1d14b",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:08:21Z",
+      "side": 1,
+      "message": "nit: here and in other places spell out simple type names.",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 8
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c32d224_27724497",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:08:21Z",
+      "side": 1,
+      "message": "nit: this is probably not needed because the buffer is only written to.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4910c4d_16a6f7e3",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:08:21Z",
+      "side": 1,
+      "message": "Having a stack variable isn\u0027t necessary if you use EXPECT_BUFFER_U32_EQ",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 1
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
