@@ -111,10 +111,6 @@ namespace dawn_native {
             return IsBCFormat(format);
         }
 
-        bool Is4x4CompressedFormat(dawn::TextureFormat format) {
-            return IsBCFormat(format);
-        }
-
         bool IsWritableFormat(dawn::TextureFormat format) {
             return !IsBCFormat(format);
         }
@@ -215,6 +211,10 @@ namespace dawn_native {
         }
     }  // anonymous namespace
 
+    bool Is4x4CompressedFormat(dawn::TextureFormat format) {
+        return IsBCFormat(format);
+    }
+
     MaybeError ValidateTextureUsageBit(const TextureDescriptor* descriptor) {
         DAWN_TRY(ValidateTextureUsageBit(descriptor->usage));
         if (!IsWritableFormat(descriptor->format)) {
@@ -302,6 +302,8 @@ namespace dawn_native {
                 return 4;
             case dawn::TextureFormat::D32FloatS8Uint:
                 return 8;
+            case dawn::TextureFormat::BC7RGBAUnorm:
+                return 4;
             default:
                 UNREACHABLE();
         }

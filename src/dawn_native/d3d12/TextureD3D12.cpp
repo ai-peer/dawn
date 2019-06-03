@@ -109,6 +109,8 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_B8G8R8A8_UNORM;
             case dawn::TextureFormat::D32FloatS8Uint:
                 return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+            case dawn::TextureFormat::BC7RGBAUnorm:
+                return DXGI_FORMAT_BC7_UNORM;
             default:
                 UNREACHABLE();
         }

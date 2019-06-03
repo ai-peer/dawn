@@ -35,45 +35,82 @@ dawn::RenderPipeline pipeline;
 dawn::BindGroup bindGroup;
 
 void initBuffers() {
-    static const uint32_t indexData[3] = {
-        0, 1, 2,
-    };
-    indexBuffer = utils::CreateBufferFromData(device, indexData, sizeof(indexData), dawn::BufferUsageBit::Index);
+    static const uint32_t indexData[6] = {0, 1, 2, 2, 0, 3};
+    indexBuffer = utils::CreateBufferFromData(device, indexData, sizeof(indexData),
+                                              dawn::BufferUsageBit::Index);
 
-    static const float vertexData[12] = {
-        0.0f, 0.5f, 0.0f, 1.0f,
-        -0.5f, -0.5f, 0.0f, 1.0f,
-        0.5f, -0.5f, 0.0f, 1.0f,
-    };
-    vertexBuffer = utils::CreateBufferFromData(device, vertexData, sizeof(vertexData), dawn::BufferUsageBit::Vertex);
+    static const float vertexData[16] = {-1.0f, 1.0f,  0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f,
+                                         1.0f,  -1.0f, 0.0f, 1.0f, 1.0f,  1.0f,  0.0f, 1.0f};
+    vertexBuffer = utils::CreateBufferFromData(device, vertexData, sizeof(vertexData),
+                                               dawn::BufferUsageBit::Vertex);
 }
 
-void initTextures() {
+constexpr uint32_t kBlockWidthCount = 2;
+constexpr uint32_t kBlockHeightCount = 2;
+
+constexpr uint32_t kBCBlockWidth = 4;
+constexpr uint32_t kBCBlockHeight = 4;
+
+void fillUploadData(std::array<uint8_t, kTextureRowPitchAlignment * kBlockHeightCount>* uploadData,
+                    dawn::TextureFormat format) {
+    // The pixel data represents a 4x4 pixel image with the left side colored red and the right side
+    // green. It was BC7 encoded using Microsoft's BC6HBC7Encoder.
+    constexpr std::array<uint8_t, kBCBlockWidth* kBCBlockHeight> kBC7Data4x4 = {
+        0x50, 0x1f, 0xfc, 0xf, 0x0, 0xf0, 0xe3, 0xe1, 0xe1, 0xe1, 0xc1, 0xf, 0xfc, 0xc0, 0xf,  0xfc};
+
+    const uint8_t* compressedDataPtr = nullptr;
+    uint32_t compressedDataSize = 0;
+
+    switch (format) {
+        case dawn::TextureFormat::BC7RGBAUnorm:
+            compressedDataPtr = kBC7Data4x4.data();
+            compressedDataSize = kBC7Data4x4.size();
+            break;
+        default:
+            compressedDataPtr = kBC7Data4x4.data();
+            compressedDataSize = kBC7Data4x4.size();
+            break;
+    }
+
+    for (uint32_t i = 0; i < kBlockHeightCount; ++i) {
+        for (uint32_t j = 0; j < kBlockWidthCount; ++j) {
+            for (uint32_t k = 0; k < compressedDataSize; ++k) {
+                (*uploadData)[kTextureRowPitchAlignment * i + compressedDataSize * j + k] = compressedDataPtr[k];
+            }
+        }
+    }
+}
+
+void initTextures(dawn::TextureFormat format) {
     dawn::TextureDescriptor descriptor;
     descriptor.dimension = dawn::TextureDimension::e2D;
-    descriptor.size.width = 1024;
-    descriptor.size.height = 1024;
+    descriptor.size.width = kBCBlockWidth * kBlockWidthCount;
+    descriptor.size.height = kBCBlockHeight * kBlockHeightCount;
     descriptor.size.depth = 1;
     descriptor.arrayLayerCount = 1;
     descriptor.sampleCount = 1;
-    descriptor.format = dawn::TextureFormat::R8G8B8A8Unorm;
+    descriptor.format = format;
     descriptor.mipLevelCount = 1;
     descriptor.usage = dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Sampled;
     texture = device.CreateTexture(&descriptor);
 
     dawn::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
+    samplerDesc.minFilter = dawn::FilterMode::Nearest;
+    samplerDesc.magFilter = dawn::FilterMode::Nearest;
     sampler = device.CreateSampler(&samplerDesc);
 
-    // Initialize the texture with arbitrary data until we can load images
-    std::vector<uint8_t> data(4 * 1024 * 1024, 0);
-    for (size_t i = 0; i < data.size(); ++i) {
-        data[i] = static_cast<uint8_t>(i % 253);
-    }
 
-    dawn::Buffer stagingBuffer = utils::CreateBufferFromData(device, data.data(), static_cast<uint32_t>(data.size()), dawn::BufferUsageBit::TransferSrc);
-    dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(stagingBuffer, 0, 0, 0);
+    std::array<uint8_t, kTextureRowPitchAlignment * kBlockHeightCount> uploadData;
+    fillUploadData(&uploadData, format);
+
+    dawn::Buffer stagingBuffer = utils::CreateBufferFromData(
+        device, uploadData.data(), static_cast<uint32_t>(uploadData.size()),
+                                    dawn::BufferUsageBit::TransferSrc);
+    dawn::BufferCopyView bufferCopyView =
+        utils::CreateBufferCopyView(stagingBuffer, 0, kTextureRowPitchAlignment, 0);
     dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, 0, {0, 0, 0});
-    dawn::Extent3D copySize = {1024, 1024, 1};
+    dawn::Extent3D copySize = {kBlockWidthCount * kBCBlockWidth, kBlockHeightCount * kBCBlockHeight,
+                               1};
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
@@ -91,7 +128,7 @@ void init() {
                         dawn::TextureUsageBit::OutputAttachment, 640, 480);
 
     initBuffers();
-    initTextures();
+    initTextures(dawn::TextureFormat::BC7RGBAUnorm);
 
     dawn::ShaderModule vsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
         #version 450
@@ -161,7 +198,7 @@ void frame() {
         pass.SetBindGroup(0, bindGroup, 0, nullptr);
         pass.SetVertexBuffers(0, 1, &vertexBuffer, vertexBufferOffsets);
         pass.SetIndexBuffer(indexBuffer, 0);
-        pass.DrawIndexed(3, 1, 0, 0, 0);
+        pass.DrawIndexed(6, 1, 0, 0, 0);
         pass.EndPass();
     }
 

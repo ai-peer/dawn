@@ -102,8 +102,8 @@ namespace dawn_native {
             return {};
         }
 
-        MaybeError ValidateImageHeight(uint32_t imageHeight, uint32_t copyHeight) {
-            if (imageHeight < copyHeight) {
+        MaybeError ValidateImageHeight(uint32_t imageHeight, uint32_t copyHeight, uint32_t blockHeight) {
+            if (imageHeight * blockHeight < copyHeight) {
                 return DAWN_VALIDATION_ERROR("Image height must not be less than the copy height.");
             }
 
@@ -185,14 +185,17 @@ namespace dawn_native {
         }
 
         MaybeError ComputeTextureCopyBufferSize(const Extent3D& copySize,
+                                                uint32_t blockWidth,
+                                                uint32_t blockHeight,
                                                 uint32_t rowPitch,
                                                 uint32_t imageHeight,
                                                 uint32_t* bufferSize) {
-            DAWN_TRY(ValidateImageHeight(imageHeight, copySize.height));
+            DAWN_TRY(ValidateImageHeight(imageHeight, copySize.height, blockHeight));
 
             // TODO(cwallez@chromium.org): check for overflows
             uint32_t slicePitch = rowPitch * imageHeight;
-            uint32_t sliceSize = rowPitch * (copySize.height - 1) + copySize.width;
+            uint32_t sliceSize =
+                rowPitch * (copySize.height / blockHeight - 1) + copySize.width;
             *bufferSize = (slicePitch * (copySize.depth - 1)) + sliceSize;
 
             return {};
@@ -727,7 +730,11 @@ namespace dawn_native {
             copy->source.rowPitch = source->rowPitch;
         }
         if (source->imageHeight == 0) {
-            copy->source.imageHeight = copySize->height;
+            uint32_t texelBlockHeight = 1;
+            if (Is4x4CompressedFormat(destination->texture->GetFormat())) {
+                texelBlockHeight = 4;            
+            }
+            copy->source.imageHeight = copySize->height / texelBlockHeight;
         } else {
             copy->source.imageHeight = source->imageHeight;
         }
@@ -763,7 +770,11 @@ namespace dawn_native {
             copy->destination.rowPitch = destination->rowPitch;
         }
         if (destination->imageHeight == 0) {
-            copy->destination.imageHeight = copySize->height;
+            uint32_t texelBlockHeight = 1;
+            if (Is4x4CompressedFormat(source->texture->GetFormat())) {
+                texelBlockHeight = 4;
+            }
+            copy->destination.imageHeight = copySize->height / texelBlockHeight;
         } else {
             copy->destination.imageHeight = destination->imageHeight;
         }
@@ -901,7 +912,11 @@ namespace dawn_native {
                     DAWN_TRY(ValidateRowPitch(copy->destination.texture->GetFormat(),
                                               copy->copySize, copy->source.rowPitch));
 
-                    DAWN_TRY(ComputeTextureCopyBufferSize(copy->copySize, copy->source.rowPitch,
+                    uint32_t blockWidth = 1, blockHeight = 1;
+                    if (Is4x4CompressedFormat(copy->destination.texture.Get()->GetFormat())) {
+                        blockWidth = blockHeight = 4;
+                    }
+                    DAWN_TRY(ComputeTextureCopyBufferSize(copy->copySize, blockWidth, blockHeight, copy->source.rowPitch,
                                                           copy->source.imageHeight,
                                                           &bufferCopySize));
 
@@ -927,8 +942,14 @@ namespace dawn_native {
                     uint32_t bufferCopySize = 0;
                     DAWN_TRY(ValidateRowPitch(copy->source.texture->GetFormat(), copy->copySize,
                                               copy->destination.rowPitch));
+
+                    uint32_t blockWidth = 1, blockHeight = 1;
+                    if (Is4x4CompressedFormat(copy->source.texture.Get()->GetFormat())) {
+                        blockWidth = blockHeight = 4;
+                    }
+
                     DAWN_TRY(ComputeTextureCopyBufferSize(
-                        copy->copySize, copy->destination.rowPitch, copy->destination.imageHeight,
+                        copy->copySize, blockWidth, blockHeight, copy->destination.rowPitch, copy->destination.imageHeight,
                         &bufferCopySize));
 
                     DAWN_TRY(ValidateCopySizeFitsInTexture(copy->source, copy->copySize));

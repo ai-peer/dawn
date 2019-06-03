@@ -137,6 +137,8 @@ namespace dawn_native { namespace metal {
                 return MTLPixelFormatBGRA8Unorm;
             case dawn::TextureFormat::D32FloatS8Uint:
                 return MTLPixelFormatDepth32Float_Stencil8;
+            case dawn::TextureFormat::BC7RGBAUnorm:
+                return MTLPixelFormatBC7_RGBAUnorm;
             default:
                 UNREACHABLE();
                 return MTLPixelFormatRGBA8Unorm;
