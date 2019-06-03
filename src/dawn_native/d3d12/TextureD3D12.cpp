@@ -221,6 +221,26 @@ namespace dawn_native { namespace d3d12 {
         mLastState = newState;
     }
 
+    bool Texture::TransitionUsageLater(D3D12_RESOURCE_BARRIER& barrier,
+                                       dawn::TextureUsageBit newUsage) {
+        D3D12_RESOURCE_STATES newState = D3D12TextureUsage(newUsage, GetFormat());
+
+        if (mLastState == newState) {
+            return false;
+        }
+
+        barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+        barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+        barrier.Transition.pResource = mResourcePtr;
+        barrier.Transition.StateBefore = mLastState;
+        barrier.Transition.StateAfter = newState;
+        barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+
+        mLastState = newState;
+
+        return true;
+    }
+
     D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(uint32_t mipSlice,
                                                             uint32_t arrayLayers,
                                                             uint32_t baseArrayLayer) const {
