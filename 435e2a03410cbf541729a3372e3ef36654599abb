@@ -2,6 +2,63 @@
   "comments": [
     {
       "key": {
+        "uuid": "4fc820b0_93693a2e",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "We can take advantage of this patch to rename to: \"attribute count\"",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66084b61_a4ea118c",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "In this CL or a different one: \"buffer count\"",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42c0c84d_9c9f7bb6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "Note: validation here will likely need to be that attribute-\u003eoffset \u003e vertexBufferStride - VertexFormatSize because I think Metal requires all the attributes to be contained in the stride.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 13
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b55c9375_93ce6c5a",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4
@@ -18,6 +75,275 @@
         "startChar": 12,
         "endLine": 85,
         "endChar": 13
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feef1250_e0fb7690",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "My worry is that this condition will never be covered by a test, instead can we have a comment describing exactly what you said and an ASSERT? This way we can still have 100% coverage of validation.",
+      "parentUuid": "b55c9375_93ce6c5a",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 13
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be62c4ce_46da6bb9",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "nit: spell out simple to write types.",
+      "range": {
+        "startLine": 403,
+        "startChar": 18,
+        "endLine": 403,
+        "endChar": 22
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cd2d47c_ead6a8b7",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dd0437a_1bd804fd",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db2425f1_cb2f5b26",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95537816_39d7f0f7",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4d4a88d_b84367c4",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "I think this could be a std::vector\u003cVertexAttributeSpec\u003e so that tests can look like this:\n  MakeVertexInput({{0, InputStepMode::Vertex, {{0, 0, VertexFormat::Float4}}}})",
+      "range": {
+        "startLine": 149,
+        "startChar": 7,
+        "endLine": 150,
+        "endChar": 53
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c765773_60f976d5",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "nit: spell out simple types.",
+      "range": {
+        "startLine": 158,
+        "startChar": 19,
+        "endLine": 158,
+        "endChar": 23
+      },
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a05989e_376ad753",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "We can do this for cBuffers[0] as well so the condition isn\u0027t needed.",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4525eed6_59fc1ada",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "nit: no need to track this, we can just iterate over the std::vector of attributes and set attributeCount \u003d static_cast\u003cuint32_t\u003e(attributes.size());",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8848ce7c_19918e2d",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64e178a6_748e0922",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "Can we have a check that we get an error for two attribute having the same shaderLocation?",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "372b8f68_4daf8936",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "nit: can we initialize attributes to nullptr to make the application crash if it forgets to set it?",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "520f0c74_6b40d81f",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T11:29:59Z",
+      "side": 1,
+      "message": "nit: in",
+      "range": {
+        "startLine": 40,
+        "startChar": 54,
+        "endLine": 40,
+        "endChar": 56
       },
       "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
