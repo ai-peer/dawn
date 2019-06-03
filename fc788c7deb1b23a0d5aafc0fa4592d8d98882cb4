@@ -283,6 +283,24 @@
       "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d9be104_532b2d07",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-03T17:01:45Z",
+      "side": 1,
+      "message": "It can, but this type of expectation is used for buffers that are mappable but not TransferSrc.\n\nIf we defer the MapRead till the end of test, then it wouldn\u0027t be possible to modify the buffer after creating the expectation. You couldn\u0027t MapWrite, add expectation, MapWrite, add expectation.\n\nFor the current uses this is not a problem, but it could be used wrongly and result in expected failures in the future.",
+      "parentUuid": "a12280cd_a4b97c9a",
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
