@@ -1,0 +1,421 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb1861c4_97e9dddd",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "LazyClearResourceOnFirstUse should be the toggle, and tests should use DeviceDescriptor.forceDisableWorkarounds to opt-out.",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f7b2b5e_afb8f0ef",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "nit: we\u0027ll need to make sure this doesn\u0027t overflow uint32_t. It is unlikely but we need to be safe. We could have a static_assert with kMaxTexture2DArrayLayers and kMaxTexture2DMipLevels when we have them.",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e4677c4_397bb21c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "nit: let\u0027s not use bounds checking that could produce exception, use operator[] instead. We can have asserts that the arguments are in range though.",
+      "range": {
+        "startLine": 395,
+        "startChar": 61,
+        "endLine": 395,
+        "endChar": 63
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "267e5ab3_c8ea7d6f",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "Can we have a TODO that this should be using a more optimized data-structure at some point? Right now it uses a lot of space and an extra allocation when the resource is completely initialized for example.",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0f3cd25_c6065e74",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "I think this and GetLayerCount should be 1, because the code will need to change if we support layered rendering to handle the case where only some of the layers are initialized. (we\u0027d need to clear before the render pass instead of doing loadOp::Clear for all of them)",
+      "range": {
+        "startLine": 181,
+        "startChar": 28,
+        "endLine": 181,
+        "endChar": 64
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5026d216_388ec69d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "This should be before the TransitionUsageNow because it can modify the layout of the texture, and the initialization also need to be made available to the inside of the render pass.",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 91
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "036b5568_ed1d67e9",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "this is always 1",
+      "range": {
+        "startLine": 364,
+        "startChar": 68,
+        "endLine": 364,
+        "endChar": 90
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5af91914_f6f8fac9",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "This should only be the case if the whole subresource has been written to. Otherwise we still need to initialize before doing the copy.",
+      "range": {
+        "startLine": 361,
+        "startChar": 7,
+        "endLine": 364,
+        "endChar": 92
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8a40fd6_8947a6e8",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "this is always 1",
+      "range": {
+        "startLine": 379,
+        "startChar": 62,
+        "endLine": 379,
+        "endChar": 84
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df4b9de_8d3bd15c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 409,
+        "startChar": 62,
+        "endLine": 409,
+        "endChar": 87
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f724c407_6ba1d011",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "ditto, this should be done only if the whole subresource is written to, otherwise we need to EnsureSubResourceContentInitialized prior to doing the copy.",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "795f3291_dc8e0911",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "nit: this could be a private member function.",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3241a97a_d5c62ffb",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "This checks mip level 2 is filled with zeros but that one hasn\u0027t been renderered to so this will only check the CopyTextureToBuffer path. Can we check mip level 0 instead?",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c52e23d_33545dae",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "nit: kArrayLayers.",
+      "range": {
+        "startLine": 89,
+        "startChar": 23,
+        "endLine": 89,
+        "endChar": 34
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cef5ec2b_2a28bc87",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "ditto but for array layers",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88a9fa31_c8128500",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "or just pass 100 in the vector constructor.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 6
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1293fb24_02e342b2",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "Can we also have a test for a copy only to a subset of the subresource?",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2a8a84e_ded17a71",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "nit: weird formatting",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3447a498_c598866f",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "Can we also have a test only for a subset of the subresource?",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cde8fda_69afe68b",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "nit: weird formatting",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41016555_6bb04031",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:55:09Z",
+      "side": 1,
+      "message": "This can be done as a vector constructor, here and in other places in this file.",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 6
+      },
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
