@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b62f7fe_912304d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "nit: this is a bit long for a first commit message line. Maybe split off this part into a paragraph below?",
+      "range": {
+        "startLine": 7,
+        "startChar": 53,
+        "endLine": 7,
+        "endChar": 88
+      },
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c37fb7b_79747c92",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "nit: IsMapWriteable?",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 158,
+        "endChar": 24
+      },
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75ebf2ab_39de5b33",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "nit: this could be unconditional and in the mState \u003d\u003d BufferState::Mapped condition (there\u0027s still an issue that we don\u0027t want to call UnmapImpl in that case)",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 9
+      },
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b95aad62_b3a70f86",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "This could be simplified with:\n\n  if (mStagingBuffer !\u003d nullptr) {\n     CopyFromStagingToBuffer\n  } else {\n    Call both callback and UnmapImpl.\n  }",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 33
+      },
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cefa5512_f3689972",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "nit: CreatedMapped. Also we might avoid the need for this enum value: mStagingBuffer !\u003d nullptr \u0026\u0026 mState \u003d\u003d Mapped should be sufficient in most places.",
+      "range": {
+        "startLine": 39,
+        "startChar": 12,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deeeb996_40e2cbf7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "Maybe this could probably be made unconditionally in the backends, we need it for robust resource initialization anyway. WDYT?",
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9146443a_4888f910",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "This seems correct but can you explain why it is needed in this CL?",
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36ba1312_65fe5da0",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "nit: also TODO for UMA",
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26ad4a88_ca77fb21",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "Can you add a TODO that while all GL buffers can be mapped, we need to investigate if this will cause drivers to migrate them to shared memory?",
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a12280cd_a4b97c9a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-03T12:29:53Z",
+      "side": 1,
+      "message": "Can this be a deferred expectation like the other expectations?",
+      "revId": "fc788c7deb1b23a0d5aafc0fa4592d8d98882cb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
