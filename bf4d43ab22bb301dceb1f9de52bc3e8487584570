@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "d59a70a9_e8f85d23",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-03T22:49:27Z",
+      "side": 1,
+      "message": "I was talking to Rafael about this this morning. I suggested this because std::vector\u003cbool\u003e is apparently the only STL way to do this. Depending on implementation, it is allowed to be implemented as a bitset, but I don\u0027t know if we want to rely on that.\nhttps://en.cppreference.com/w/cpp/container/vector_bool\n\nHowever, if there\u0027s a reasonably-sized static cap, we could just use std::bitset (how big is max level count * max layer count? probably too big). Otherwise a TODO is fine. (Maybe to fix this later we could make a simple class that wraps std::vector\u003cstd::bitset\u003c\u003e\u003e?)",
+      "parentUuid": "267e5ab3_c8ea7d6f",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0f3cd25_c6065e74",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 9
