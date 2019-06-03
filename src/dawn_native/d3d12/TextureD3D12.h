@@ -39,6 +39,8 @@ namespace dawn_native { namespace d3d12 {
         void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                 D3D12_RESOURCE_STATES newState);
 
+        bool TransitionUsageLater(D3D12_RESOURCE_BARRIER& barrier, dawn::TextureUsageBit newUsage);
+
         uint32_t GetSubresourceIndex(uint32_t mipmapLevel, uint32_t arraySlice) const;
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(uint32_t mipSlice,
                                                        uint32_t arrayLayers,

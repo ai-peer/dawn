@@ -429,13 +429,26 @@ namespace dawn_native { namespace d3d12 {
         // Records the necessary barriers for the resource usage pre-computed by the frontend
         auto TransitionForPass = [](ComPtr<ID3D12GraphicsCommandList> commandList,
                                     const PassResourceUsage& usages) {
+            std::vector<D3D12_RESOURCE_BARRIER> barriers;
+
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
-                Buffer* buffer = ToBackend(usages.buffers[i]);
-                buffer->TransitionUsageNow(commandList, usages.bufferUsages[i]);
+                D3D12_RESOURCE_BARRIER barrierOut;
+                if (ToBackend(usages.buffers[i])
+                        ->TransitionUsageLater(barrierOut, usages.bufferUsages[i])) {
+                    barriers.push_back(barrierOut);
+                }
             }
+
             for (size_t i = 0; i < usages.textures.size(); ++i) {
-                Texture* texture = ToBackend(usages.textures[i]);
-                texture->TransitionUsageNow(commandList, usages.textureUsages[i]);
+                D3D12_RESOURCE_BARRIER barrierOut;
+                if (ToBackend(usages.textures[i])
+                        ->TransitionUsageLater(barrierOut, usages.textureUsages[i])) {
+                    barriers.push_back(barrierOut);
+                }
+            }
+
+            if (barriers.size()) {
+                commandList->ResourceBarrier(barriers.size(), barriers.data());
             }
         };
 

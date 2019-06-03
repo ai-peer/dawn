@@ -36,6 +36,7 @@ namespace dawn_native { namespace d3d12 {
 
         void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                 dawn::BufferUsageBit usage);
+        bool TransitionUsageLater(D3D12_RESOURCE_BARRIER& barrier, dawn::BufferUsageBit newUsage);
 
       private:
         // Dawn API
@@ -43,12 +44,12 @@ namespace dawn_native { namespace d3d12 {
         void MapWriteAsyncImpl(uint32_t serial) override;
         void UnmapImpl() override;
         void DestroyImpl() override;
-
+        bool CanSkipTransition(D3D12_RESOURCE_STATES newState) const;
         virtual MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
 
         ComPtr<ID3D12Resource> mResource;
         bool mFixedResourceState = false;
-        dawn::BufferUsageBit mLastUsage = dawn::BufferUsageBit::None;
+        D3D12_RESOURCE_STATES mLastState = D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON;
         D3D12_RANGE mWrittenMappedRange;
     };
 
