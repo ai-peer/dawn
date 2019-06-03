@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fda31e6_801f891a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-03T23:19:22Z",
+      "side": 1,
+      "message": "Can this be implemented as a wrapper around TransitionUsageLater? They look the same, the only difference is Subresource; I don\u0027t know why that\u0027s different. Probably 0 and ALL_SUBRESOURCES are equivalent for buffers?",
+      "revId": "98ee4f2c5bb98679011432f3df810c16105c7d92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "109a33c3_d2b2adad",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-03T23:19:22Z",
+      "side": 1,
+      "message": "The fact that this calling code could forget to issue the ResourceBarriers, leaving the resources in inconsistent states, makes me very slightly uncomfortable. What would you (Brandon and other reviewers) think of this? Too complex?\n\n  class ResourceBarrierBatcher {\n    public:\n      ~ResourceBarrierBatcher() {\n        ASSERT(mBarriers.size() \u003d\u003d 0);\n      }\n      void push(const D3D12_RESOURCE_BARRIER\u0026 barrier) {\n        mBarriers.push_back(barrier);\n      }\n      void submit(ComPtr\u003cID3D12GraphicsCommandList\u003e commandList) {\n        if (barriers.size()) {\n          commandList-\u003eResourceBarrier(mBarriers.size(), mBarriers.data());\n        }\n        mBarriers.clear();\n      }\n    private:\n      std::vector\u003cD3D12_RESOURCE_BARRIER\u003e mBarriers;\n  };\n\n  ResourceBarrierBatcher batcher;\n  for (size_t i \u003d 0; i \u003c usages.buffers.size(); ++i) {\n    ToBackend(usages.buffers[i])\n        -\u003eTransitionUsageLater(\u0026batcher, usages.bufferUsages[i]);\n  }\n  for (size_t i \u003d 0; i \u003c usages.textures.size(); ++i) {\n    ToBackend(usages.textures[i])\n        -\u003eTransitionUsageLater(\u0026batcher, usages.textureUsages[i]);\n  }\n  batcher.submit(commandList);",
+      "revId": "98ee4f2c5bb98679011432f3df810c16105c7d92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
