@@ -112,6 +112,24 @@
     },
     {
       "key": {
+        "uuid": "d76470c5_843a9d78",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T18:27:16Z",
+      "side": 1,
+      "message": "Ah, good idea.",
+      "parentUuid": "8d11bb65_80be72a3",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0f3cd25_c6065e74",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 9
