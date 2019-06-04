@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "9301284d_99aa7fb5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T18:30:26Z",
+      "side": 1,
+      "message": "That sounds good to me. Nit: come up with a name for CreateD3D12ResourceBarrier that conveys that it will return false if none is needed.",
+      "parentUuid": "79ffb84e_fd584e02",
+      "revId": "98ee4f2c5bb98679011432f3df810c16105c7d92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c7e842b_fe90865d",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
