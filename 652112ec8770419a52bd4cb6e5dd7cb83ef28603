@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ff7b2048_e99b2ee8",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Ack\n\nAdded one more ASSERT.",
+      "parentUuid": "13409d19_bb8f6248",
+      "range": {
+        "startLine": 40,
+        "startChar": 37,
+        "endLine": 40,
+        "endChar": 93
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a507afbc_7c45bf5c",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff444f53_7123e5b2",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "This is used by the backend. Corentin suggested that separate the frontend impl and backend impl. It is easier to review. Otherwise, this patch might be too large. \n\nIn addition, I suppose that the backend do need slot information.",
+      "parentUuid": "a507afbc_7c45bf5c",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "e1fa8b94_36c0c167",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Same reason",
+      "parentUuid": "61c1b90a_bb111239",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "171a07b2_cd378e94",
         "filename": "src/tests/end2end/VertexInputTests.cpp",
         "patchSetId": 5
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "da237f20_23eae090",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "171a07b2_cd378e94",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4132514f_6a43b5cb",
         "filename": "src/tests/end2end/VertexInputTests.cpp",
         "patchSetId": 5
@@ -90,6 +168,24 @@
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b1609e8_37c41f3b",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4132514f_6a43b5cb",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "e8eb4490_18af8e4f",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca2a3e4b_f44ff11b",
+      "range": {
+        "startLine": 123,
+        "startChar": 34,
+        "endLine": 123,
+        "endChar": 38
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "520f489f_c7201ba5",
         "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
         "patchSetId": 5
@@ -130,6 +250,24 @@
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbeac7c3_31a066ac",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Thanks for your suggestion, Kai. I also felt that the values were not clearly set and they depended heavily on the default values. I changed this one and explicitly assigned values to params, and I did so for all others, especially for the values that the tests focused on.",
+      "parentUuid": "520f489f_c7201ba5",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "4d03d290_167c7853",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Whoops. Sorry...",
+      "parentUuid": "7d5f22fe_a95efab8",
+      "range": {
+        "startLine": 260,
+        "startChar": 63,
+        "endLine": 260,
+        "endChar": 72
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57669ad5_54a89f9a",
         "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
         "patchSetId": 5
@@ -179,6 +341,30 @@
     },
     {
       "key": {
+        "uuid": "7f36df82_d732188b",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57669ad5_54a89f9a",
+      "range": {
+        "startLine": 273,
+        "startChar": 40,
+        "endLine": 273,
+        "endChar": 49
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8beeba4d_e5434e54",
         "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
         "patchSetId": 5
@@ -199,6 +385,30 @@
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89b0c593_bd755afa",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-04T18:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8beeba4d_e5434e54",
+      "range": {
+        "startLine": 282,
+        "startChar": 40,
+        "endLine": 282,
+        "endChar": 49
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
