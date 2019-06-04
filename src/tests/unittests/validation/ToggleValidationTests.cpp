@@ -55,14 +55,29 @@ TEST_F(ToggleValidationTest, OverrideToggleUsage) {
 
         DawnDevice deviceWithToggle = adapter.CreateDevice(&descriptor);
         std::vector<const char*> toggleNames = dawn_native::GetTogglesUsed(deviceWithToggle);
-        ASSERT_EQ(1u, toggleNames.size());
+        ASSERT_EQ(2u, toggleNames.size());
         ASSERT_EQ(0, strcmp(kValidToggleName, toggleNames[0]));
+        // lazy_clear_resource_on_first_use toggle is always enabled
+        ASSERT_EQ(0, strcmp("lazy_clear_resource_on_first_use", toggleNames[1]));
     }
 
     // Create device with an invalid toggle name
     {
         dawn_native::DeviceDescriptor descriptor;
         descriptor.forceEnabledToggles.push_back("!@#$%^&*");
+
+        DawnDevice deviceWithToggle = adapter.CreateDevice(&descriptor);
+        std::vector<const char*> toggleNames = dawn_native::GetTogglesUsed(deviceWithToggle);
+        ASSERT_EQ(1u, toggleNames.size());
+        // lazy_clear_resource_on_first_use toggle is always enabled
+        ASSERT_EQ(0, strcmp("lazy_clear_resource_on_first_use", toggleNames[1]));
+    }
+
+    // Create device disabling lazy_clear_resource_on_first_use toggle, device should have 0 toggles
+    // enabled
+    {
+        dawn_native::DeviceDescriptor descriptor;
+        descriptor.forceDisabledToggles.push_back("lazy_clear_resource_on_first_use");
 
         DawnDevice deviceWithToggle = adapter.CreateDevice(&descriptor);
         std::vector<const char*> toggleNames = dawn_native::GetTogglesUsed(deviceWithToggle);
