@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e83f8fa4_4ba493bc",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:33:18Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem like this should ever be hit by a well formed app. Why would be be here if it\u0027s an ErrorBuffer? (Looks like it would only happen at the same time an error is produced.)\n\nIf this isn\u0027t here, it gets reclaimed by destruction.",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fefca1d2_163ff0f8",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:33:18Z",
+      "side": 1,
+      "message": "Is there a way to assert this?",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9439775_9993249a",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:33:18Z",
+      "side": 1,
+      "message": "Comment that this validation is intentionally skipped if state is Mapped, and why",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae36484_9ec50cd7",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:33:18Z",
+      "side": 1,
+      "message": "we spell this as \"Writable\" elsewhere (... except in one error message).",
+      "range": {
+        "startLine": 88,
+        "startChar": 21,
+        "endLine": 88,
+        "endChar": 35
+      },
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8293ebc_592edeb9",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:33:18Z",
+      "side": 1,
+      "message": "nit: would prefer to put the std::unique_ptr up here next to the new (actually, can use make_unique), so it\u0027s clear that a corresponding delete isn\u0027t needed",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d0e322a_52555480",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:33:18Z",
+      "side": 1,
+      "message": "Is it necessary to actually do the memcpy in the null backend? Seems like we could just ignore it. (maybe comment otherwise?)",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57ed2e24_700d5ced",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:33:18Z",
+      "side": 1,
+      "message": "B?",
+      "range": {
+        "startLine": 614,
+        "startChar": 50,
+        "endLine": 614,
+        "endChar": 51
+      },
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
