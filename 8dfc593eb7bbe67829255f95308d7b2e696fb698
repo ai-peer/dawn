@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ab354b65_3d2efdaf",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 0,
+      "message": "I\u0027m ok with it. The group did talk about this for quite a while already but I don\u0027t think ever quite all agreed on these details. Would you please open a PR to gpuweb?",
+      "parentUuid": "9b1d1cd2_f76a99c2",
+      "revId": "8dfc593eb7bbe67829255f95308d7b2e696fb698",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "073a019f_0a1139fe",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 4

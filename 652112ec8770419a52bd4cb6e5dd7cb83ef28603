@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13409d19_bb8f6248",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "this looks like it will underflow",
+      "range": {
+        "startLine": 40,
+        "startChar": 37,
+        "endLine": 40,
+        "endChar": 93
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a507afbc_7c45bf5c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "\u0027slot\u0027 seems redundant now, can it be removed?",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61c1b90a_bb111239",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "This also looks redundant. (Is it?)",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "171a07b2_cd378e94",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "Can you make this a little more descriptive? e.g. (I think this is correct) \"This is not actually testing slot 1 right now; need to allow null for buffer[0].\"",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4132514f_6a43b5cb",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "same",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca2a3e4b_f44ff11b",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "zero",
+      "range": {
+        "startLine": 123,
+        "startChar": 34,
+        "endLine": 123,
+        "endChar": 38
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "520f489f_c7201ba5",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "It\u0027s hard to tell what case this is testing, since it relies on defaults. Can you explicitly specify the two things that set attribute 0, for clarity?",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d5f22fe_a95efab8",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "attributes",
+      "range": {
+        "startLine": 260,
+        "startChar": 63,
+        "endLine": 260,
+        "endChar": 72
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57669ad5_54a89f9a",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "attributes",
+      "range": {
+        "startLine": 273,
+        "startChar": 40,
+        "endLine": 273,
+        "endChar": 49
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8beeba4d_e5434e54",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T00:03:59Z",
+      "side": 1,
+      "message": "attributes",
+      "range": {
+        "startLine": 282,
+        "startChar": 40,
+        "endLine": 282,
+        "endChar": 49
+      },
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
