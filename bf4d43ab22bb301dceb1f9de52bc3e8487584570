@@ -94,6 +94,24 @@
     },
     {
       "key": {
+        "uuid": "8d11bb65_80be72a3",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-04T10:03:12Z",
+      "side": 1,
+      "message": "I was actually thinking that this should be a hierarchical data structure with a very small memory footprint for the common case where the whole structure is initialized. But a TODO is fine.",
+      "parentUuid": "d59a70a9_e8f85d23",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0f3cd25_c6065e74",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 9
