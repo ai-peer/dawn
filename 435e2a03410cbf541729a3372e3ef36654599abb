@@ -646,6 +646,24 @@
     },
     {
       "key": {
+        "uuid": "b4c2bbae_dcd96807",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-04T12:28:21Z",
+      "side": 1,
+      "message": "Sorry what I meant is add a cBuffers[i].attributes \u003d nullptr line here because except for attribute 0 there is no good default because it depends on the number of attributes used by previous buffers. Instead of having an unintialized value we\u0027d have nullptr.",
+      "parentUuid": "1906d9dc_74aa3cfc",
+      "revId": "435e2a03410cbf541729a3372e3ef36654599abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "520f0c74_6b40d81f",
         "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
         "patchSetId": 4
