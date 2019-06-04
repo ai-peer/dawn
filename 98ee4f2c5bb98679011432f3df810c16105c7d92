@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "79ffb84e_fd584e02",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-06-04T18:15:09Z",
+      "side": 1,
+      "message": "The batcher idea is interesting - but if I\u0027m understanding the issue correctly - I\u0027m not sure it entirely resolves it. TransitionUsageLater is still executing an under-the-hood state transition - and the concern of the calling code forgetting to issue a ResourceBarrier still exists (just in a different spot).\n\nI think a simpler idea may be to make the caller\u0027s operation on the resource state explicit. Roughly:\n\nauto TransitionForPass \u003d [](ComPtr\u003cID3D12GraphicsCommandList\u003e commandList,\n                                    const PassResourceUsage\u0026 usages) {\n\n    std::vector\u003cD3D12_RESOURCE_BARRIER\u003e barriers;\n\n    for (size_t i \u003d 0; i \u003c usages.textures.size(); ++i) {\n    D3D12_RESOURCE_BARRIER barrierOut;\n    if (ToBackend(usages.textures[i])\n            -\u003eCreateD3D12ResourceBarrier(barrierOut, usages.textureUsages[i]) {\n        barriers.push_back(barrierOut);\n        ToBackend(usages.textures[i])-\u003eSetUsage(usages.textureUsages[i]));\n    }\n     \n    // Same for buffers\n    \n    if (barriers.size()) {\n        commandList-\u003eResourceBarrier(barriers.size(), barriers.data());\n    }\n}\n\nCreateD3D12ResourceBarrier would return true and a filled out RESOURCE_BARRIER struct if we should transition, and false if we can skip the call. It would not update the resource state.\n\nSetUsage would make it more obvious that the caller changes the resource usage in tandem with the ResourceBarrier call.\n\nWhat do you all think?",
+      "parentUuid": "6854ca9f_4a70894b",
+      "revId": "98ee4f2c5bb98679011432f3df810c16105c7d92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c7e842b_fe90865d",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
