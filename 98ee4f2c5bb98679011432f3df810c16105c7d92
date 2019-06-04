@@ -33,6 +33,24 @@
       "revId": "98ee4f2c5bb98679011432f3df810c16105c7d92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6854ca9f_4a70894b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-04T01:39:42Z",
+      "side": 1,
+      "message": "I like Kai\u0027s idea. With this approach, We can rename \"TransitionUsageLater\" to \"TransitionUsageBatched\".",
+      "parentUuid": "109a33c3_d2b2adad",
+      "revId": "98ee4f2c5bb98679011432f3df810c16105c7d92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
