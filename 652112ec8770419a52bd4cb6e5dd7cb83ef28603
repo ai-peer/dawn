@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "c3f7d9b8_71040969",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T19:29:39Z",
+      "side": 1,
+      "message": "I just mean you could refactor these 3 lines as\n\n  for (uint_32_t slot \u003d 0; slot \u003c mVertexInput.numBuffers; ++slot) {\n\nand it should be equivalent AFAICT.",
+      "parentUuid": "ff444f53_7123e5b2",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "61c1b90a_bb111239",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 5
@@ -113,6 +131,24 @@
       "side": 1,
       "message": "Same reason",
       "parentUuid": "61c1b90a_bb111239",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9b599fe_2e40bf74",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T19:29:39Z",
+      "side": 1,
+      "message": "Ok. The slot info is still visible as the index in mInputInfos though. So if the backend can see the index, then it should be possible to eventually remove.",
+      "parentUuid": "e1fa8b94_36c0c167",
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false

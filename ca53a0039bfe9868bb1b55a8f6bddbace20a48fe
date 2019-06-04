@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54ffb997_cc1d28a0",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T19:29:39Z",
+      "side": 1,
+      "message": "I don\u0027t see why this assertion is true. Can\u0027t vertexBufferStride be passed in as 1?",
+      "revId": "ca53a0039bfe9868bb1b55a8f6bddbace20a48fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0746d9c0_70547722",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T19:29:39Z",
+      "side": 1,
+      "message": "nit: In this case, shouldn\u0027t state.cAttributes[0].shaderLocation \u003d 0; also be specified (just for clarity)?",
+      "revId": "ca53a0039bfe9868bb1b55a8f6bddbace20a48fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
