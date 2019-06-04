@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "052e7b87_8f22801a",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-04T15:26:39Z",
+      "side": 1,
+      "message": "Correct it wouldn\u0027t be hit by a well formed app, but it\u0027s still rather easy to hit and we shouldn\u0027t hold memory for no reason. An error with the buffer, like an incorrect usage passed to the constructor would create this mapped ErrorBuffer state.",
+      "parentUuid": "e83f8fa4_4ba493bc",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fefca1d2_163ff0f8",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 17
@@ -30,6 +48,24 @@
       "writtenOn": "2019-06-04T00:33:18Z",
       "side": 1,
       "message": "Is there a way to assert this?",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fe0b71c_5456372c",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-04T15:26:39Z",
+      "side": 1,
+      "message": "Not really, since we dropped the CreateMapped state.",
+      "parentUuid": "fefca1d2_163ff0f8",
       "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
