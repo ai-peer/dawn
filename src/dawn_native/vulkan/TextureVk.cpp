@@ -229,6 +229,18 @@ namespace dawn_native { namespace vulkan {
                 return VK_FORMAT_B8G8R8A8_UNORM;
             case dawn::TextureFormat::D32FloatS8Uint:
                 return VK_FORMAT_D32_SFLOAT_S8_UINT;
+            case dawn::TextureFormat::BC7RGBAUnorm:
+                return VK_FORMAT_BC7_UNORM_BLOCK;
+            case dawn::TextureFormat::BC1RGBAUnorm:
+                return VK_FORMAT_BC1_RGBA_UNORM_BLOCK;
+            case dawn::TextureFormat::BC5RGSnorm:
+                return VK_FORMAT_BC5_SNORM_BLOCK;
+            case dawn::TextureFormat::BC5RGUnorm:
+                return VK_FORMAT_BC5_UNORM_BLOCK;
+            case dawn::TextureFormat::BC6HRGBSfloat:
+                return VK_FORMAT_BC6H_SFLOAT_BLOCK;
+            case dawn::TextureFormat::BC6HRGBUfloat:
+                return VK_FORMAT_BC6H_UFLOAT_BLOCK;
             default:
                 UNREACHABLE();
         }
