@@ -364,7 +364,8 @@ class VertexFormatTest : public DawnTest {
         descriptor.cFragmentStage.module = fsModule;
         descriptor.cVertexInput.numBuffers = 1;
         descriptor.cVertexInput.cBuffers[0].stride = strideBytes;
-        descriptor.cVertexInput.numAttributes = 1;
+        descriptor.cVertexInput.cBuffers[0].numAttributes = 1;
+        descriptor.cVertexInput.cBuffers[0].attributes = &descriptor.cVertexInput.cAttributes[0];
         descriptor.cVertexInput.cAttributes[0].format = format;
         descriptor.cColorStates[0]->format = renderPass.colorFormat;
 
