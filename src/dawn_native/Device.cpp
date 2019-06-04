@@ -404,7 +404,7 @@ namespace dawn_native {
                 mTogglesSet.SetToggle(toggle, true);
             }
         }
-
+        mTogglesSet.SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
         for (const char* toggleName : deviceDescriptor->forceDisabledToggles) {
             Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(toggleName);
             if (toggle != Toggle::InvalidEnum) {
