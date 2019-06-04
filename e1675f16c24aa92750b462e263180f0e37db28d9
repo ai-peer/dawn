@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f55fad0b_63cbbbec",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T17:48:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "052e7b87_8f22801a",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fefca1d2_163ff0f8",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 17
@@ -69,6 +87,24 @@
       "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1215c38c_2048cdd4",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T17:48:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3fe0b71c_5456372c",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -221,6 +257,24 @@
       "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fae2f56_b41cd1bd",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-04T17:48:31Z",
+      "side": 1,
+      "message": "SGTM for fuzzer.",
+      "parentUuid": "3a9289fa_b2f2d439",
+      "revId": "e1675f16c24aa92750b462e263180f0e37db28d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
