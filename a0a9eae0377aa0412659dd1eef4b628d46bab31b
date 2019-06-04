@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e063a80_6ffc8548",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-04T18:39:04Z",
+      "side": 1,
+      "message": "Somehow this is no longer called, can we fix it in this CL?",
+      "revId": "a0a9eae0377aa0412659dd1eef4b628d46bab31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
