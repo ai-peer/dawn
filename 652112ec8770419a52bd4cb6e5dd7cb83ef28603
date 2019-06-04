@@ -445,6 +445,23 @@
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "faefd18c_ab2251dc",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-04T20:03:46Z",
+      "side": 1,
+      "message": "Sorry again, having this first one set seems fine too, if you want to keep it to help have nicer defaults.",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
