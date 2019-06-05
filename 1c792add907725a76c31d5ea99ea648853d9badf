@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e4f9e11f_a1373e87",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-05T15:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ba7867_b395e2ab",
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2400af30_868507ff",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3e8eae6_0f4a99cf",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-05T15:22:24Z",
+      "side": 1,
+      "message": "Done, also checked the case where adding the size of the struct overflows the sum.",
+      "parentUuid": "2400af30_868507ff",
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "d2317366_aef3e705",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-05T15:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1127f859_a02dd33f",
+      "range": {
+        "startLine": 508,
+        "startChar": 40,
+        "endLine": 509,
+        "endChar": 63
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69c40bf9_a5fc56ae",
         "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
         "patchSetId": 12
@@ -73,6 +133,24 @@
       "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fa61890_326b6348",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-05T15:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69c40bf9_a5fc56ae",
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "c8de50f2_1365922a",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-05T15:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ca791f8_19f1d14b",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 8
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c32d224_27724497",
         "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
         "patchSetId": 12
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "9195b2de_679bb879",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-05T15:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c32d224_27724497",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4910c4d_16a6f7e3",
         "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
         "patchSetId": 12
@@ -142,6 +268,30 @@
       "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75d5f4b7_2d669af4",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-05T15:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4910c4d_16a6f7e3",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 1
+      },
+      "revId": "1c792add907725a76c31d5ea99ea648853d9badf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
