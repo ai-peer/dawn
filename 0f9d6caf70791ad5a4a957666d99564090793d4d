@@ -1,0 +1,394 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70252cf2_d1eb3100",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "Can this be moved in the DeviceBase constructor or a function called from there with a comment calling out that this sets up the default-enabled toggles?",
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b52dffed_3b45575b",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "nit: zero",
+      "range": {
+        "startLine": 87,
+        "startChar": 35,
+        "endLine": 87,
+        "endChar": 40
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54c75741_ab63316f",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "Ditto, the transitions should be made after the resource is initialized.",
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79b8976b_6aaa6167",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "This actually should depend on the mip level. This logic is a bit complicated, can it be moved to a helper function like \"bool IsCompleteSubResourceCopiedTo(const TextureCopyView* dst, const Extent3D* copySize)\" and used in all three types of texture copies? The helper could be somewhere in the frontend code so it is shared by all backends.",
+      "range": {
+        "startLine": 352,
+        "startChar": 24,
+        "endLine": 354,
+        "endChar": 78
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88a1c25f_99d00168",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "nit: this is always 1",
+      "range": {
+        "startLine": 358,
+        "startChar": 72,
+        "endLine": 358,
+        "endChar": 94
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdcf8464_d6a7043a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "nit: this is always 1",
+      "range": {
+        "startLine": 358,
+        "startChar": 72,
+        "endLine": 358,
+        "endChar": 94
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6057271_bcbff576",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t needed until after the transitions",
+      "range": {
+        "startLine": 401,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 0
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad1af5d1_5efd3760",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "nit: extra new line?",
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f3f2587_99d3647e",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "nit: should probably be a switch statement with a default: UNREACHABLE so we get an ASSERT when we implement the discard store op.",
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dc5e492_1a21e16c",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "Maybe BasicRenderPass is confusing. renderPass.color here is a newly created texture that\u0027s used by the render pass. Setting it doesn\u0027t do anything, you need to change the colorAttachments[].attachment texture view and set it to a view on texture with mip level 2.\n\nRight now the render pass renders to mip level 0 of a texture that\u0027s not `texture` and then EXPECT_TEXTURE_RGBA_EQ is the first use of `texture` which causes it to be cleared to black.",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 32
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a04b8fef_6697298f",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "This is reading pixel (0, 0) to (mipSize, mipSize) of mip level 0, you probably meant\n\nEXPECT_TEXTURE_RGBA8_EQ(expected.data(), renderPass.color, 0, 0, mipSize, mipSize, 2, 0);",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 94
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb83f19f_b01f773a",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "Same as for the mip level test.",
+      "range": {
+        "startLine": 86,
+        "startChar": 1,
+        "endLine": 89,
+        "endChar": 1
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff612f62_2b8a3c72",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "ditto you need to set the last argument to non-0.",
+      "range": {
+        "startLine": 99,
+        "startChar": 65,
+        "endLine": 102,
+        "endChar": 2
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2073e412_23e8dbbc",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "this is only a quarter of the texture, can the second be just kSize and expectations below updated accordingly?",
+      "range": {
+        "startLine": 142,
+        "startChar": 22,
+        "endLine": 142,
+        "endChar": 57
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c31bea8f_f1a9935b",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "nit: when a subresource is only partially written to.",
+      "range": {
+        "startLine": 191,
+        "startChar": 65,
+        "endLine": 191,
+        "endChar": 66
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8497d2f4_ed0419be",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "This is a bit unfortunate, could the first texture be initialized with some data so the destination isn\u0027t pure zeroes?",
+      "range": {
+        "startLine": 216,
+        "startChar": 65,
+        "endLine": 219,
+        "endChar": 84
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59a11d71_211d64c4",
+        "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "We might have new toggles over time and we don\u0027t want to update the test every time. I think we should instead replace the check by a check that kValidToggleName is present in the list.",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 81
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "943efdfc_a6e4d4cc",
+        "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:48:13Z",
+      "side": 1,
+      "message": "ditto for these, we shouldn\u0027t assume what the exact list of toggles is, just that the ones being tested are present / not present.",
+      "range": {
+        "startLine": 71,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 42
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
