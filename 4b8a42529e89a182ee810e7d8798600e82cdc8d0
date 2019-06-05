@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ee61595_9b5618ee",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:52:17Z",
+      "side": 1,
+      "message": "uNit: not sure, would just {} work?",
+      "range": {
+        "startLine": 57,
+        "startChar": 44,
+        "endLine": 57,
+        "endChar": 58
+      },
+      "revId": "4b8a42529e89a182ee810e7d8798600e82cdc8d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a24108f_a4ae4903",
+        "filename": "src/common/SerialQueue.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:52:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 67,
+        "startChar": 44,
+        "endLine": 67,
+        "endChar": 60
+      },
+      "revId": "4b8a42529e89a182ee810e7d8798600e82cdc8d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "432b5416_c8db7808",
+        "filename": "src/dawn_native/DynamicUploader.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T09:52:17Z",
+      "side": 1,
+      "message": "This is a bit weird because it makes the DynamicUploader have two jobs: handing out UploadHandles and StagingBuffer reclamation. There is no good place for the latter right now, but at the minimum can we have a comment calling out these two different and independent roles?",
+      "revId": "4b8a42529e89a182ee810e7d8798600e82cdc8d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
