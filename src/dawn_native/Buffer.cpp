@@ -49,9 +49,7 @@ namespace dawn_native {
                 return {};
             }
 
-            MaybeError SetSubDataImpl(uint32_t start,
-                                      uint32_t count,
-                                      const uint8_t* data) override {
+            MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const void* data) override {
                 UNREACHABLE();
                 return {};
             }
@@ -200,7 +198,7 @@ namespace dawn_native {
         }
     }
 
-    void BufferBase::SetSubData(uint32_t start, uint32_t count, const uint8_t* data) {
+    void BufferBase::SetSubData(uint32_t start, uint32_t count, const void* data) {
         if (GetDevice()->ConsumedError(ValidateSetSubData(start, count))) {
             return;
         }
@@ -229,7 +227,7 @@ namespace dawn_native {
         MapReadAsyncImpl(mMapSerial);
     }
 
-    MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const uint8_t* data) {
+    MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const void* data) {
         DynamicUploader* uploader = nullptr;
         DAWN_TRY_ASSIGN(uploader, GetDevice()->GetDynamicUploader());
 
