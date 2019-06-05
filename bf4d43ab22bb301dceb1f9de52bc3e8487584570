@@ -208,6 +208,24 @@
     },
     {
       "key": {
+        "uuid": "2ec0eb01_b76b6bcb",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-05T00:03:19Z",
+      "side": 1,
+      "message": "Perhaps a simple data structure could be a combination of an enum and boolean maintained by helper functions. Values of the enum could be \u0027Initialized\u0027, \u0027Uninitialized\u0027, \u0027SeeBitVector\u0027.  Setting to anything but \u0027SeeBitVector\u0027 would, of course, clear the vector.",
+      "parentUuid": "193b0511_860e760e",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e0f3cd25_c6065e74",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 9
