@@ -46,6 +46,30 @@
       "revId": "b1da0c439e8d00610b1be45e32c0165c7ab75d5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8afea8d_b66afce2",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T21:56:00Z",
+      "side": 1,
+      "message": "Ah, as you wish",
+      "parentUuid": "e499a792_eb7dbbfe",
+      "range": {
+        "startLine": 65,
+        "startChar": 54,
+        "endLine": 65,
+        "endChar": 70
+      },
+      "revId": "b1da0c439e8d00610b1be45e32c0165c7ab75d5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
