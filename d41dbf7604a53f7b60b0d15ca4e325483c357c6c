@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1725af2b_5ec95149",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-05T15:56:43Z",
+      "side": 1,
+      "message": "nit: This is command_suffix",
+      "range": {
+        "startLine": 41,
+        "startChar": 15,
+        "endLine": 41,
+        "endChar": 45
+      },
+      "revId": "d41dbf7604a53f7b60b0d15ca4e325483c357c6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
