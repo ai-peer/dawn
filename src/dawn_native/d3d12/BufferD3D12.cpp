@@ -119,33 +119,39 @@ namespace dawn_native { namespace d3d12 {
 
     void Buffer::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                     dawn::BufferUsageBit usage) {
+        D3D12_RESOURCE_BARRIER barrier;
+
+        if (CreateD3D12ResourceBarrierIfNeeded(barrier, usage)) {
+            commandList->ResourceBarrier(1, &barrier);
+        }
+
+        mLastUsage = usage;
+    }
+
+    bool Buffer::CreateD3D12ResourceBarrierIfNeeded(D3D12_RESOURCE_BARRIER& barrier,
+                                                    dawn::BufferUsageBit newUsage) const {
         // Resources in upload and readback heaps must be kept in the COPY_SOURCE/DEST state
         if (mFixedResourceState) {
-            ASSERT(usage == mLastUsage);
-            return;
+            ASSERT(mLastUsage == newUsage);
+            return false;
         }
 
         // We can skip transitions to already current usages.
         // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
-        bool lastIncludesTarget = (mLastUsage & usage) == usage;
-        if (lastIncludesTarget) {
-            return;
+        if ((mLastUsage & newUsage) == newUsage) {
+            return false;
         }
 
         D3D12_RESOURCE_STATES lastState = D3D12BufferUsage(mLastUsage);
-        D3D12_RESOURCE_STATES newState = D3D12BufferUsage(usage);
-
-        D3D12_RESOURCE_BARRIER barrier;
+        D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
         barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
         barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
         barrier.Transition.pResource = mResource.Get();
         barrier.Transition.StateBefore = lastState;
         barrier.Transition.StateAfter = newState;
-        barrier.Transition.Subresource = 0;
+        barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
 
-        commandList->ResourceBarrier(1, &barrier);
-
-        mLastUsage = usage;
+        return true;
     }
 
     D3D12_GPU_VIRTUAL_ADDRESS Buffer::GetVA() const {
@@ -158,6 +164,10 @@ namespace dawn_native { namespace d3d12 {
         } else {
             CallMapReadCallback(mapSerial, DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, data, GetSize());
         }
+    }
+
+    void Buffer::SetUsage(dawn::BufferUsageBit newUsage) {
+        mLastUsage = newUsage;
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
