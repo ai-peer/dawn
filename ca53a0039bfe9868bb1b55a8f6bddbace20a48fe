@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a10f9cf1_ab94c083",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-05T17:44:50Z",
+      "side": 1,
+      "message": "Per my understanding, if vertexBuffer-\u003estepMode is per vertex, then vertexBufferStride can be either zero, or the real length of one set of vertex attributes in this buffer: sizeof(struct attribute). Otherwise, if stepMode is per instance, then the length should be the real length: sizeof(struct attribute). I don\u0027t think that stride can be any number beteen 0 and kMaxVertexBufferStride if stepMode is per vertex. But I didn\u0027t see any statement about this. So it is possible. WDYT?   \n\nIn Vulkan spec, I even can\u0027t find any statement that stride can be zero... But the end2end tests can pass if the stride is zero.",
+      "parentUuid": "54ffb997_cc1d28a0",
+      "revId": "ca53a0039bfe9868bb1b55a8f6bddbace20a48fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0746d9c0_70547722",
         "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "ca53a0039bfe9868bb1b55a8f6bddbace20a48fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "563e8e5e_7adbb13b",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-05T17:44:50Z",
+      "side": 1,
+      "message": "Hmm. It is set on line 251 and we don\u0027t change it. I suppose it is OK? Anyway, I can add it.",
+      "parentUuid": "0746d9c0_70547722",
+      "revId": "ca53a0039bfe9868bb1b55a8f6bddbace20a48fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "4da359ed_9ae88ad5",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-05T17:44:50Z",
+      "side": 1,
+      "message": "Done. \n\nSorry. I misunderstood you here.",
+      "parentUuid": "c3f7d9b8_71040969",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61c1b90a_bb111239",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 5
@@ -149,6 +167,24 @@
       "side": 1,
       "message": "Ok. The slot info is still visible as the index in mInputInfos though. So if the backend can see the index, then it should be possible to eventually remove.",
       "parentUuid": "e1fa8b94_36c0c167",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a9ca141_f136df0c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-05T17:44:50Z",
+      "side": 1,
+      "message": "Yes. Will revisit this soon when I look into the backends about vertexInput.",
+      "parentUuid": "d9b599fe_2e40bf74",
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -462,6 +498,24 @@
       "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfe15eab_24254506",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-05T17:44:50Z",
+      "side": 1,
+      "message": "OK. Then let\u0027s keep this code. Assigning $cAttributes[0] to cBuffer[0].attributes again and again seems to be annoying.",
+      "parentUuid": "faefd18c_ab2251dc",
+      "revId": "652112ec8770419a52bd4cb6e5dd7cb83ef28603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
