@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e02d2f2_5cf6ffab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:13:20Z",
+      "side": 1,
+      "message": "Could the commit message call out more explicitly what was improved?",
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44a57347_d133dffb",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:13:20Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7534b0f3_b3e516df",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:13:20Z",
+      "side": 1,
+      "message": "This is creating the D3D12Device a first time, and then we\u0027ll create it again when the dawn::Device is created. Is this double the cost of creating a single time, or does the driver amortise things?\n\nNo change needed in this CL because we don\u0027t have a choice atm, but this is to know how important caching this info across Chromium restarts will be in the future.",
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac2b2d7e_b1aab9eb",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:13:20Z",
+      "side": 1,
+      "message": "nit: stray comment?",
+      "range": {
+        "startLine": 40,
+        "startChar": 56,
+        "endLine": 40,
+        "endChar": 79
+      },
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44360d50_2183a40f",
+        "filename": "src/dawn_native/d3d12/D3D12Info.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:13:20Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ba3694c_935e7b86",
+        "filename": "src/dawn_native/d3d12/D3D12Info.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:13:20Z",
+      "side": 1,
+      "message": "uNit: isUMA",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

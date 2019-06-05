@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54fe7a5f_f1b43d36",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:13:20Z",
+      "side": 0,
+      "message": "It doesn\u0027t seem this type is used differently here, what\u0027s making the forward declaration not enough anymore? Maybe having an explicit (and \u003d default) Backend::~Backend implemented in the .cpp would help.",
+      "revId": "c2750abd0c62608f0ebed44aae3716257e8dec41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
