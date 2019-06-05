@@ -70,7 +70,6 @@ namespace dawn_wire { namespace server {
 
         DawnCreateBufferMappedResult result = mProcs.deviceCreateBufferMapped(device, descriptor);
         ASSERT(result.buffer != nullptr);
-        ASSERT(result.data != nullptr);
         resultData->handle = result.buffer;
         resultData->mappedData = result.data;
         resultData->mappedDataSize = result.dataLength;
