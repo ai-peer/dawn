@@ -22,6 +22,30 @@
       "revId": "b1da0c439e8d00610b1be45e32c0165c7ab75d5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e499a792_eb7dbbfe",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-05T21:53:30Z",
+      "side": 1,
+      "message": "Less typing \".Get()\" but I don\u0027t feel strongly about it. I can change it back.",
+      "parentUuid": "b56c9c1d_03cd9173",
+      "range": {
+        "startLine": 65,
+        "startChar": 54,
+        "endLine": 65,
+        "endChar": 70
+      },
+      "revId": "b1da0c439e8d00610b1be45e32c0165c7ab75d5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
