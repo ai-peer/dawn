@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "65defdc2_c9e481af",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-05T22:00:52Z",
+      "side": 1,
+      "message": "I think the concern is that we can easily set stride \u003d 1 and a fat vertexFormat like Float4 and the assert will fail. I think we should change the second part of the condition validation below to:\n\n  attribute-\u003eoffset + VertexFormatSize(attribute-\u003eformat) \u003e vertexBufferStride\n\nSo that we avoid the possibility of underflow which was Kai\u0027s original concern.",
+      "parentUuid": "a10f9cf1_ab94c083",
+      "revId": "ca53a0039bfe9868bb1b55a8f6bddbace20a48fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0746d9c0_70547722",
         "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
         "patchSetId": 6
