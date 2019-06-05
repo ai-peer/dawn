@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4078e83d_e0a5246d",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-05T00:12:57Z",
+      "side": 1,
+      "message": "We actually already discussed the limits at the F2F:\nhttps://docs.google.com/document/d/1HR9vPk48-lhzHAsyF57QzjKMmi0gQHfSXMmyqZuFWkc/edit#heading\u003dh.b0mn8bdz63vs\n\nSo you can go ahead and add the constants in if you want.\n\nMax array layers: 256\nMax texture size: 8192\nMax mip levels: log2(max texture size) + 1.\n\nI think the static_assert should be inside GetSubresourceIndex.",
+      "parentUuid": "5d16d216_2cfc1c2f",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e4677c4_397bb21c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 9
@@ -219,6 +237,24 @@
       "writtenOn": "2019-06-05T00:03:19Z",
       "side": 1,
       "message": "Perhaps a simple data structure could be a combination of an enum and boolean maintained by helper functions. Values of the enum could be \u0027Initialized\u0027, \u0027Uninitialized\u0027, \u0027SeeBitVector\u0027.  Setting to anything but \u0027SeeBitVector\u0027 would, of course, clear the vector.",
+      "parentUuid": "193b0511_860e760e",
+      "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90582250_18826757",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-05T00:12:57Z",
+      "side": 1,
+      "message": "Yeah, I think we should avoid hashing for that reason.\n\nbit_vector would be nice but I assume it\u0027s not a stable API of SPIRV-Tools, so we would probably want to make a copy of it.\n\nIMO, let\u0027s leave as TODO since there are so many possibilities here. (As an aside, I had a silly idea:\n\n  enum class FullyInitialized;\n  enum class FullyUninitialized;\n  std::variant\u003cFullyInitialized, FullyUninitialized, std::vector\u003cbool\u003e\u003e mWhatever;\n\n. But agreed that it should be factored out into a tiny helper class.)",
       "parentUuid": "193b0511_860e760e",
       "revId": "bf4d43ab22bb301dceb1f9de52bc3e8487584570",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
