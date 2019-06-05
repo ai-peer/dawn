@@ -186,6 +186,10 @@ namespace dawn_native { namespace d3d12 {
         return mResourcePtr;
     }
 
+    void Texture::SetUsage(dawn::TextureUsageBit newUsage) {
+        mLastState = D3D12TextureUsage(newUsage, GetFormat());
+    }
+
     UINT16 Texture::GetDepthOrArraySize() {
         switch (GetDimension()) {
             case dawn::TextureDimension::e2D:
@@ -202,13 +206,28 @@ namespace dawn_native { namespace d3d12 {
 
     void Texture::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                      D3D12_RESOURCE_STATES newState) {
+        D3D12_RESOURCE_BARRIER barrier;
+        if (CreateD3D12ResourceBarrierIfNeeded(barrier, newState))
+        {
+            commandList->ResourceBarrier(1, &barrier);
+        }
+
+        mLastState = newState;
+    }
+
+    bool Texture::CreateD3D12ResourceBarrierIfNeeded(D3D12_RESOURCE_BARRIER& barrier,
+                                                     dawn::TextureUsageBit newUsage) const {
+        return CreateD3D12ResourceBarrierIfNeeded(barrier, D3D12TextureUsage(newUsage, GetFormat()));
+    }
+
+    bool Texture::CreateD3D12ResourceBarrierIfNeeded(D3D12_RESOURCE_BARRIER& barrier,
+                                                     D3D12_RESOURCE_STATES newState) const {
         // Avoid transitioning the texture when it isn't needed.
         // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
         if (mLastState == newState) {
-            return;
+            return false;
         }
 
-        D3D12_RESOURCE_BARRIER barrier;
         barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
         barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
         barrier.Transition.pResource = mResourcePtr;
@@ -216,9 +235,7 @@ namespace dawn_native { namespace d3d12 {
         barrier.Transition.StateAfter = newState;
         barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
 
-        commandList->ResourceBarrier(1, &barrier);
-
-        mLastState = newState;
+        return true;
     }
 
     D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(uint32_t mipSlice,
