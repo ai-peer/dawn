@@ -47,4 +47,9 @@ static constexpr uint32_t kVendorID_Intel = 0x8086;
 static constexpr uint32_t kVendorID_Nvidia = 0x10DE;
 static constexpr uint32_t kVendorID_Qualcomm = 0x5143;
 
+// Max texture size constants
+static constexpr uint32_t kMaxTexture2DArrayLayers = 256u;
+static constexpr uint32_t kMaxTexture2DMipLevels = 14u;
+static constexpr uint32_t kMaxTextureSize = 8192u;
+
 #endif  // COMMON_CONSTANTS_H_

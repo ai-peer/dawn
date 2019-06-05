@@ -30,6 +30,11 @@ namespace dawn_native {
 
         const CommandBufferResourceUsage& GetResourceUsages() const;
 
+      protected:
+        bool IsCompleteSubresourceCopiedTo(const TextureBase* texture,
+                                           const Extent3D copySize,
+                                           const uint32_t mipLevel);
+
       private:
         CommandBufferBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
