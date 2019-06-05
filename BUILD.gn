@@ -387,6 +387,26 @@ dawn_component("libdawn_native") {
   if (dawn_enable_vulkan) {
     sources += [ "src/dawn_native/vulkan/VulkanBackend.cpp" ]
     deps += [ "third_party:vulkan_headers" ]
+
+    # Use self-build Vulkan validation layers
+    if (dawn_enable_vulkan_validation_layers) {
+      vulkan_validation_layers = [
+        "VkLayer_core_validation",
+        "VkLayer_object_lifetimes",
+        "VkLayer_stateless_validation",
+        "VkLayer_thread_safety",
+        "VkLayer_unique_objects",
+      ]
+
+      if (build_with_chromium) {
+        # TODO(haoxli): Use vulkan validation layers taht built in angle
+      } else {
+        foreach(_layer, vulkan_validation_layers) {
+          deps +=
+              [ "${dawn_root}/third_party/vulkan-validation-layers:${_layer}" ]
+        }
+      }
+    }
   }
 }
 
