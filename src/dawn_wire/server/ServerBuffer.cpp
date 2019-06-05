@@ -70,7 +70,6 @@ namespace dawn_wire { namespace server {
 
         DawnCreateBufferMappedResult result = mProcs.deviceCreateBufferMapped(device, descriptor);
         ASSERT(result.buffer != nullptr);
-        ASSERT(result.data != nullptr);
         resultData->handle = result.buffer;
         resultData->mappedData = result.data;
         resultData->mappedDataSize = result.dataLength;
@@ -85,12 +84,18 @@ namespace dawn_wire { namespace server {
         }
 
         auto* buffer = BufferObjects().Get(bufferId);
-        if (buffer == nullptr || buffer->mappedData == nullptr || buffer->mappedDataSize != count) {
+        if (buffer == nullptr || buffer->mappedDataSize != count || data == nullptr) {
             return false;
         }
-
-        if (data == nullptr) {
-            return false;
+        if (buffer->mappedData == nullptr) {
+            if (buffer->mappedDataSize == 0) {
+                // The buffer is not mapped.
+                return false;
+            } else {
+                // The buffer was mapped but there was an error allocating mapped data.
+                // The buffer is an error buffer; doing nothing is not an error.
+                return true;
+            }
         }
 
         memcpy(buffer->mappedData, data, count);
