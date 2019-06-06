@@ -158,6 +158,14 @@ class PrimitiveTopologyTest : public DawnTest {
                 })"
             );
 
+            vsModuleWithPointSize = utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(
+                #version 450
+                layout(location = 0) in vec4 pos;
+                void main() {
+                    gl_Position = pos;
+                    gl_PointSize = 1.0;
+                })");
+
             fsModule = utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(
                 #version 450
                 layout(location = 0) out vec4 fragColor;
@@ -182,7 +190,9 @@ class PrimitiveTopologyTest : public DawnTest {
         // Draw the vertices with the given primitive topology and check the pixel values of the test locations
         void DoTest(dawn::PrimitiveTopology primitiveTopology, const std::vector<LocationSpec> &locationSpecs) {
             utils::ComboRenderPipelineDescriptor descriptor(device);
-            descriptor.cVertexStage.module = vsModule;
+            descriptor.cVertexStage.module = primitiveTopology == dawn::PrimitiveTopology::PointList
+                                                 ? vsModuleWithPointSize
+                                                 : vsModule;
             descriptor.cFragmentStage.module = fsModule;
             descriptor.primitiveTopology = primitiveTopology;
             descriptor.cVertexInput.numBuffers = 1;
