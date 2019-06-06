@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2b22f2e_9658aa1d",
+        "filename": "src/tests/end2end/ComputeIndirectTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T13:11:25Z",
+      "side": 1,
+      "message": "It should be implemented by SPIRV-Cross at some point, can you check the latest version still doesn\u0027t have it and raise an issue on their repo if needed?",
+      "range": {
+        "startLine": 26,
+        "startChar": 53,
+        "endLine": 26,
+        "endChar": 69
+      },
+      "revId": "2b36d2b9d9fc938756fe7ca6e8956e52451468a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81105f3c_c8e93476",
+        "filename": "src/tests/unittests/validation/ComputeIndirectValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T13:11:25Z",
+      "side": 1,
+      "message": "The compute pipeline could be compiled only once in SetUp.",
+      "revId": "2b36d2b9d9fc938756fe7ca6e8956e52451468a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca75c783_87b1d1ab",
+        "filename": "src/tests/unittests/validation/DrawIndirectValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T13:11:25Z",
+      "side": 1,
+      "message": "The shader could be made simpler and only output gl_Position \u003d vec4(0.0); ditto for the fragment shader that could be simpler, and overall we wouldn\u0027t need bindgroups.",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 96
+      },
+      "revId": "2b36d2b9d9fc938756fe7ca6e8956e52451468a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f759583_7dcead0a",
+        "filename": "src/tests/unittests/validation/DrawIndirectValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T13:11:25Z",
+      "side": 1,
+      "message": "The pipeline could be compiled only once in SetUp.",
+      "revId": "2b36d2b9d9fc938756fe7ca6e8956e52451468a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "569b0ffc_d008a120",
+        "filename": "src/tests/unittests/validation/DrawIndirectValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T13:11:25Z",
+      "side": 1,
+      "message": "maybe put some data in it so we\u0027re sure it\u0027s not robust buffer access errors that are produced.",
+      "range": {
+        "startLine": 109,
+        "startChar": 91,
+        "endLine": 109,
+        "endChar": 93
+      },
+      "revId": "2b36d2b9d9fc938756fe7ca6e8956e52451468a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
