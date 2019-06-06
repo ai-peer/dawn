@@ -22,6 +22,30 @@
       "revId": "d41dbf7604a53f7b60b0d15ca4e325483c357c6c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5720ec68_475675c4",
+        "filename": "generator/wire_cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T15:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1725af2b_5ec95149",
+      "range": {
+        "startLine": 41,
+        "startChar": 15,
+        "endLine": 41,
+        "endChar": 45
+      },
+      "revId": "d41dbf7604a53f7b60b0d15ca4e325483c357c6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
