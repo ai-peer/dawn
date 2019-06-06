@@ -16,6 +16,24 @@
       "revId": "c2750abd0c62608f0ebed44aae3716257e8dec41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24ab5c92_a5d93997",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-06-06T18:01:47Z",
+      "side": 0,
+      "message": "The full type is needed by D3D12Info, so only the header is only needed there. This was following the Vulkan impl.",
+      "parentUuid": "54fe7a5f_f1b43d36",
+      "revId": "c2750abd0c62608f0ebed44aae3716257e8dec41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
