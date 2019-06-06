@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c6b1b94_2fab8bcb",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T09:57:17Z",
+      "side": 1,
+      "message": "nit: pass this as a pointer instead, Chromium\u0027s convention is that output arguments should be pointers so that we can see at the call site that the variable will be modified.",
+      "range": {
+        "startLine": 32,
+        "startChar": 48,
+        "endLine": 32,
+        "endChar": 71
+      },
+      "revId": "702bca6273d0b67d481b7fbe87cd1ff85e1ec2c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46e02e3b_ed6e73aa",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T09:57:17Z",
+      "side": 1,
+      "message": "uNit: with Chromium\u0027s convention of using pointers, we don\u0027t need the Out suffix to know this is an output parameter.",
+      "range": {
+        "startLine": 435,
+        "startChar": 39,
+        "endLine": 435,
+        "endChar": 49
+      },
+      "revId": "702bca6273d0b67d481b7fbe87cd1ff85e1ec2c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ecd359f_7d71d229",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T09:57:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 444,
+        "startChar": 39,
+        "endLine": 444,
+        "endChar": 49
+      },
+      "revId": "702bca6273d0b67d481b7fbe87cd1ff85e1ec2c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac1ae878_b511a675",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T09:57:17Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 70
+      },
+      "revId": "702bca6273d0b67d481b7fbe87cd1ff85e1ec2c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66b1165f_3892c7b3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T09:57:17Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 36,
+        "startChar": 48,
+        "endLine": 36,
+        "endChar": 70
+      },
+      "revId": "702bca6273d0b67d481b7fbe87cd1ff85e1ec2c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
