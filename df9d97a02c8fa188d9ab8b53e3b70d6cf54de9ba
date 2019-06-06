@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "effa1ac5_11984357",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-06T14:30:09Z",
+      "side": 1,
+      "message": "uNit: Do we still care about this?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 43
+      },
+      "revId": "df9d97a02c8fa188d9ab8b53e3b70d6cf54de9ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e938355_3a61d863",
+        "filename": "generator/main.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-06T14:30:09Z",
+      "side": 1,
+      "message": "uNit: This name makes it sound like the generator is creating JSON, although I don\u0027t have any better suggestions.",
+      "range": {
+        "startLine": 232,
+        "startChar": 6,
+        "endLine": 232,
+        "endChar": 23
+      },
+      "revId": "df9d97a02c8fa188d9ab8b53e3b70d6cf54de9ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
