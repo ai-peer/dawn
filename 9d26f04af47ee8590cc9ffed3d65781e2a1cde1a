@@ -1,0 +1,346 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb92a83_f8100931",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "A simpler way to round up multiples of 4 would be (widthAtLevel + 3 / 4) * 4 same for height. Can you also add a TODO for overflows?",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 58,
+        "endChar": 17
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f55ca0e_f2b5a424",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "Maybe we could consider non-compressed textures to be 1x1 blocked so we\u0027d replace all usage of TextureFormatPixelSize with TextureFormatTexelBlockSize and have unified code paths here for both compressed and non-compressed?",
+      "range": {
+        "startLine": 113,
+        "startChar": 44,
+        "endLine": 113,
+        "endChar": 76
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ce87f5c_9a039ea4",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "ditto unified code path.",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "effb50e8_5f3b1acb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "ditto unified code path",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf322aef_c21191f8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "ditto unified code path",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a15225c_df2a9b2e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need to validate the buffer copy view image height is a multiple of 4 because that\u0027s the number of images to skip when doing a 3D copy, which doesn\u0027t have constraints when copying compressed textures.",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "440aa093_82f44f34",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "Always going through the switch is a bit unfortunate. Eventually Dawn should have a format table like ANGLE. But let\u0027s not worry about it in this CL.",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f7f68b5_35e9293a",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t needed.",
+      "range": {
+        "startLine": 1019,
+        "startChar": 26,
+        "endLine": 1019,
+        "endChar": 62
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ef06060_899f5700",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "Could we have a \"TestBothTBCopies\" helper that does B2T and T2B to avoid duplicating all the tests?",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43d71a9e_39696ca6",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "Buffer copy source image height should be 1 in all tests because it isn\u0027t relevant for compressed textures.",
+      "range": {
+        "startLine": 1027,
+        "startChar": 85,
+        "endLine": 1027,
+        "endChar": 86
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5baa3898_e6a46f39",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "Could this be CompressedFormatBlockSizeInBytes() / 2 so we know exactly the correct constraint is checked on the offset?",
+      "range": {
+        "startLine": 1035,
+        "startChar": 54,
+        "endLine": 1035,
+        "endChar": 55
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ee712b4_e3207553",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "Can we also have tests for the smallest correct value for these cases? In general for tests on numerical constraints it is good to test the closest value on each side of the boundary.",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f84d6e6_193efcc5",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "And maybe have a test were it fails too because the texture size * blocksie isn\u0027t a multiple of 256?",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7354f46b_a1a9e1d0",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "This test should be removed because there are no constraints on the image height.",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81371df5_f3582a64",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "Ditto, have a helper that tests both T2T copies (swapping the arguments)",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cfbda22_e9a9b55d",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "nit: can this have the smallest difference possible to the control case?",
+      "range": {
+        "startLine": 1139,
+        "startChar": 0,
+        "endLine": 1139,
+        "endChar": 66
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ae1e319_02db15c2",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a90dc973_b0d042e6",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-06T14:26:26Z",
+      "side": 1,
+      "message": "This doesn\u0027t test T2B",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
