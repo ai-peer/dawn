@@ -46,10 +46,25 @@ namespace dawn_native {
             // All texture dimensions are in uint32_t so by doing checks in uint64_t we avoid
             // overflows.
             uint64_t level = textureCopy.level;
+
+            uint32_t widthAtLevel = texture->GetSize().width >> level;
+            uint32_t heightAtLevel = texture->GetSize().height >> level;
+
+            // Compressed Textures will have paddings if their width or height is not a multiple of
+            // 4 at non-zero mipmap levels.
+            if (Is4x4CompressedFormat(texture->GetFormat())) {
+                if (widthAtLevel % 4 != 0) {
+                    widthAtLevel = (widthAtLevel / 4 + 1) * 4;
+                }
+                if (heightAtLevel % 4 != 0) {
+                    heightAtLevel = (heightAtLevel / 4 + 1) * 4;
+                }
+            }
+
             if (uint64_t(textureCopy.origin.x) + uint64_t(copySize.width) >
-                    (static_cast<uint64_t>(texture->GetSize().width) >> level) ||
+                    static_cast<uint64_t>(widthAtLevel) ||
                 uint64_t(textureCopy.origin.y) + uint64_t(copySize.height) >
-                    (static_cast<uint64_t>(texture->GetSize().height) >> level)) {
+                    static_cast<uint64_t>(heightAtLevel)) {
                 return DAWN_VALIDATION_ERROR("Copy would touch outside of the texture");
             }
 
@@ -93,10 +108,19 @@ namespace dawn_native {
         }
 
         MaybeError ValidateTexelBufferOffset(TextureBase* texture, const BufferCopy& bufferCopy) {
-            uint32_t texelSize =
-                static_cast<uint32_t>(TextureFormatPixelSize(texture->GetFormat()));
-            if (bufferCopy.offset % texelSize != 0) {
-                return DAWN_VALIDATION_ERROR("Buffer offset must be a multiple of the texel size");
+            const dawn::TextureFormat format = texture->GetFormat();
+            if (Is4x4CompressedFormat(format)) {
+                uint32_t blockSizeInBytes = CompressedFormatBlockSizeInBytes(format);
+                if (bufferCopy.offset % blockSizeInBytes != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Buffer offset must be a multiple of the compressed texture block size");
+                }
+            } else {
+                uint32_t texelSize = TextureFormatPixelSize(format);
+                if (bufferCopy.offset % texelSize != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Buffer offset must be a multiple of the texel size");
+                }
             }
 
             return {};
@@ -184,23 +208,42 @@ namespace dawn_native {
             return {};
         }
 
-        MaybeError ComputeTextureCopyBufferSize(const Extent3D& copySize,
+        MaybeError ComputeTextureCopyBufferSize(dawn::TextureFormat format,
+                                                const Extent3D& copySize,
                                                 uint32_t rowPitch,
                                                 uint32_t imageHeight,
                                                 uint32_t* bufferSize) {
             DAWN_TRY(ValidateImageHeight(imageHeight, copySize.height));
 
+            uint32_t slicePitch = 0;
+            uint32_t sliceSize = 0;
+
             // TODO(cwallez@chromium.org): check for overflows
-            uint32_t slicePitch = rowPitch * imageHeight;
-            uint32_t sliceSize = rowPitch * (copySize.height - 1) + copySize.width;
+            if (Is4x4CompressedFormat(format)) {
+                slicePitch = rowPitch * imageHeight / 4;
+                sliceSize = rowPitch * (copySize.height / 4 - 1) +
+                            (copySize.width / 4) * CompressedFormatBlockSizeInBytes(format);
+            } else {
+                uint32_t texelSizeInBytes = TextureFormatPixelSize(format);
+                slicePitch = rowPitch * imageHeight;
+                sliceSize = rowPitch * (copySize.height - 1) + copySize.width * texelSizeInBytes;
+            }
+
             *bufferSize = (slicePitch * (copySize.depth - 1)) + sliceSize;
 
             return {};
         }
 
         uint32_t ComputeDefaultRowPitch(TextureBase* texture, uint32_t width) {
-            uint32_t texelSize = TextureFormatPixelSize(texture->GetFormat());
-            return texelSize * width;
+            const dawn::TextureFormat format = texture->GetFormat();
+            if (Is4x4CompressedFormat(format)) {
+                constexpr uint32_t kBlockWidthInTexels = 4;
+                uint32_t blockSizeInBytes = CompressedFormatBlockSizeInBytes(format);
+                return width / kBlockWidthInTexels * blockSizeInBytes;
+            } else {
+                uint32_t texelSize = TextureFormatPixelSize(format);
+                return texelSize * width;
+            }
         }
 
         MaybeError ValidateRowPitch(dawn::TextureFormat format,
@@ -210,10 +253,63 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Row pitch must be a multiple of 256");
             }
 
-            uint32_t texelSize = TextureFormatPixelSize(format);
-            if (rowPitch < copySize.width * texelSize) {
+            bool invalidRowPitch = false;
+            if (Is4x4CompressedFormat(format)) {
+                constexpr uint32_t kBlockWidthInTexels = 4;
+                uint32_t blockSizeInBytes = CompressedFormatBlockSizeInBytes(format);
+                invalidRowPitch =
+                    (rowPitch < copySize.width / kBlockWidthInTexels * blockSizeInBytes);
+            } else {
+                uint32_t texelSize = TextureFormatPixelSize(format);
+                invalidRowPitch = (rowPitch < copySize.width * texelSize);
+            }
+
+            if (invalidRowPitch) {
                 return DAWN_VALIDATION_ERROR(
                     "Row pitch must not be less than the number of bytes per row");
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateImageHeight(dawn::TextureFormat format, uint32_t imageHeight) {
+            if (Is4x4CompressedFormat(format)) {
+                if (imageHeight % 4 != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Image height must be a multiple of compressed texture format width");
+                }
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateImageOrigin(dawn::TextureFormat format, const Origin3D& offset) {
+            if (Is4x4CompressedFormat(format)) {
+                if (offset.x % 4 != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Offset.x must be a multiple of compressed texture format width");
+                }
+
+                if (offset.y % 4 != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Offset.y must be a multiple of compressed texture format height");
+                }
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateImageCopySize(dawn::TextureFormat format, const Extent3D& extent) {
+            if (Is4x4CompressedFormat(format)) {
+                if (extent.width % 4 != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Extent.width must be a multiple of compressed texture format width");
+                }
+
+                if (extent.height % 4 != 0) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Extent.height must be a multiple of compressed texture format height");
+                }
             }
 
             return {};
@@ -897,11 +993,19 @@ namespace dawn_native {
                     DAWN_TRY(
                         ValidateTextureSampleCountInCopyCommands(copy->destination.texture.Get()));
 
+                    DAWN_TRY(ValidateImageHeight(copy->destination.texture->GetFormat(),
+                                                 copy->source.imageHeight));
+                    DAWN_TRY(ValidateImageOrigin(copy->destination.texture->GetFormat(),
+                                                 copy->destination.origin));
+                    DAWN_TRY(ValidateImageCopySize(copy->destination.texture->GetFormat(),
+                                                   copy->copySize));
+
                     uint32_t bufferCopySize = 0;
                     DAWN_TRY(ValidateRowPitch(copy->destination.texture->GetFormat(),
                                               copy->copySize, copy->source.rowPitch));
 
-                    DAWN_TRY(ComputeTextureCopyBufferSize(copy->copySize, copy->source.rowPitch,
+                    DAWN_TRY(ComputeTextureCopyBufferSize(copy->destination.texture->GetFormat(),
+                                                          copy->copySize, copy->source.rowPitch,
                                                           copy->source.imageHeight,
                                                           &bufferCopySize));
 
@@ -924,12 +1028,21 @@ namespace dawn_native {
 
                     DAWN_TRY(ValidateTextureSampleCountInCopyCommands(copy->source.texture.Get()));
 
+                    DAWN_TRY(ValidateImageHeight(copy->source.texture->GetFormat(),
+                                                 copy->destination.imageHeight));
+                    DAWN_TRY(ValidateImageOrigin(copy->source.texture->GetFormat(),
+                                                 copy->source.origin));
+                    DAWN_TRY(ValidateImageCopySize(copy->source.texture->GetFormat(),
+                                                   copy->copySize));
+
                     uint32_t bufferCopySize = 0;
                     DAWN_TRY(ValidateRowPitch(copy->source.texture->GetFormat(), copy->copySize,
                                               copy->destination.rowPitch));
-                    DAWN_TRY(ComputeTextureCopyBufferSize(
-                        copy->copySize, copy->destination.rowPitch, copy->destination.imageHeight,
-                        &bufferCopySize));
+                    DAWN_TRY(ComputeTextureCopyBufferSize(copy->source.texture->GetFormat(),
+                                                          copy->copySize,
+                                                          copy->destination.rowPitch,
+                                                          copy->destination.imageHeight,
+                                                          &bufferCopySize));
 
                     DAWN_TRY(ValidateCopySizeFitsInTexture(copy->source, copy->copySize));
                     DAWN_TRY(ValidateCopySizeFitsInBuffer(copy->destination, bufferCopySize));
@@ -951,6 +1064,15 @@ namespace dawn_native {
 
                     DAWN_TRY(ValidateTextureToTextureCopyRestrictions(
                         copy->source, copy->destination, copy->copySize));
+
+                    DAWN_TRY(ValidateImageOrigin(copy->source.texture->GetFormat(),
+                                                 copy->source.origin));
+                    DAWN_TRY(ValidateImageCopySize(copy->source.texture->GetFormat(),
+                                                   copy->copySize));
+                    DAWN_TRY(ValidateImageOrigin(copy->destination.texture->GetFormat(),
+                                                 copy->destination.origin));
+                    DAWN_TRY(ValidateImageCopySize(copy->destination.texture->GetFormat(),
+                                                   copy->copySize));
 
                     DAWN_TRY(ValidateCopySizeFitsInTexture(copy->source, copy->copySize));
                     DAWN_TRY(ValidateCopySizeFitsInTexture(copy->destination, copy->copySize));
