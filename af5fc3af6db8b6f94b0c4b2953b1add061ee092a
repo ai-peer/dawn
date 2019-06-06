@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "211a3677_eac9a396",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-06T18:00:05Z",
+      "side": 1,
+      "message": "Don\u0027t forget to rename to attributeCount",
+      "range": {
+        "startLine": 372,
+        "startChar": 22,
+        "endLine": 372,
+        "endChar": 35
+      },
+      "revId": "af5fc3af6db8b6f94b0c4b2953b1add061ee092a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
