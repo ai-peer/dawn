@@ -43,13 +43,23 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(SUCCEEDED(hr));
     }
 
-    Device::Device(Adapter* adapter,
-                   ComPtr<ID3D12Device> d3d12Device,
-                   const DeviceDescriptor* descriptor)
-        : DeviceBase(adapter, descriptor), mD3d12Device(d3d12Device) {
+    Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor)
+        : DeviceBase(adapter, descriptor) {
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
         }
+    }
+
+    MaybeError Device::Initialize() {
+        const PlatformFunctions* functions = ToBackend(GetAdapter())->GetBackend()->GetFunctions();
+        if (FAILED(functions->d3d12CreateDevice(ToBackend(GetAdapter())->GetHardwareAdapter(),
+                                                D3D_FEATURE_LEVEL_11_0,
+                                                IID_PPV_ARGS(&mD3d12Device)))) {
+            return DAWN_CONTEXT_LOST_ERROR("D3D12CreateDevice failed");
+        }
+
+        ASSERT(mD3d12Device != nullptr);
+
         // Create device-global objects
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
@@ -68,6 +78,8 @@ namespace dawn_native { namespace d3d12 {
         mResourceAllocator = std::make_unique<ResourceAllocator>(this);
 
         NextSerial();
+
+        return {};
     }
 
     Device::~Device() {
