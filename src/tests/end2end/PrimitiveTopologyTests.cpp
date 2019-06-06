@@ -155,6 +155,7 @@ class PrimitiveTopologyTest : public DawnTest {
                 layout(location = 0) in vec4 pos;
                 void main() {
                     gl_Position = pos;
+                    gl_PointSize = 1.0;
                 })"
             );
 
