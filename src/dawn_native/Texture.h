@@ -35,6 +35,10 @@ namespace dawn_native {
     bool IsDepthStencilRenderableTextureFormat(dawn::TextureFormat format);
     bool IsValidSampleCount(uint32_t sampleCount);
 
+    bool Is4x4CompressedFormat(dawn::TextureFormat format);
+    uint32_t CompressedFormatBlockSizeInBytes(dawn::TextureFormat);
+    uint32_t CompressedFormatBlockWidthInBytes(dawn::TextureFormat format);
+
     static constexpr dawn::TextureUsageBit kReadOnlyTextureUsages =
         dawn::TextureUsageBit::TransferSrc | dawn::TextureUsageBit::Sampled |
         dawn::TextureUsageBit::Present;

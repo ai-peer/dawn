@@ -111,10 +111,6 @@ namespace dawn_native {
             return IsBCFormat(format);
         }
 
-        bool Is4x4CompressedFormat(dawn::TextureFormat format) {
-            return IsBCFormat(format);
-        }
-
         bool IsWritableFormat(dawn::TextureFormat format) {
             return !IsBCFormat(format);
         }
@@ -214,6 +210,45 @@ namespace dawn_native {
             return {};
         }
     }  // anonymous namespace
+
+    bool Is4x4CompressedFormat(dawn::TextureFormat format) {
+        return IsBCFormat(format);
+    }
+
+    uint32_t CompressedFormatBlockSizeInBytes(dawn::TextureFormat format) {
+        switch (format) {
+            case dawn::TextureFormat::BC1RGBAUnorm:
+            case dawn::TextureFormat::BC1RGBAUnormSrgb:
+            case dawn::TextureFormat::BC4RSnorm:
+            case dawn::TextureFormat::BC4RUnorm:
+                return 8;
+            case dawn::TextureFormat::BC2RGBAUnorm:
+            case dawn::TextureFormat::BC2RGBAUnormSrgb:
+            case dawn::TextureFormat::BC3RGBAUnorm:
+            case dawn::TextureFormat::BC3RGBAUnormSrgb:
+            case dawn::TextureFormat::BC5RGSnorm:
+            case dawn::TextureFormat::BC5RGUnorm:
+            case dawn::TextureFormat::BC6HRGBSfloat:
+            case dawn::TextureFormat::BC6HRGBUfloat:
+            case dawn::TextureFormat::BC7RGBAUnorm:
+            case dawn::TextureFormat::BC7RGBAUnormSrgb:
+                return 16;
+            default:
+                UNREACHABLE();
+                return 1;
+        }
+    }
+
+    uint32_t CompressedFormatBlockWidthInBytes(dawn::TextureFormat format) {
+        const uint32_t blockSizeInBytes = CompressedFormatBlockSizeInBytes(format);
+
+        if (Is4x4CompressedFormat(format)) {
+            return blockSizeInBytes / 4;
+        }
+
+        UNREACHABLE();
+        return 1;
+    }
 
     MaybeError ValidateTextureUsageBit(const TextureDescriptor* descriptor) {
         DAWN_TRY(ValidateTextureUsageBit(descriptor->usage));
