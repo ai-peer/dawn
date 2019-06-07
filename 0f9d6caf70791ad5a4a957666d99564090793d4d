@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "a518a0b0_730e737c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "+1 for the ASSERT, I\u0027m pretty sure that for now we don\u0027t allow z-strided array layer copies.",
+      "parentUuid": "50d75e11_006e1f3a",
+      "range": {
+        "startLine": 358,
+        "startChar": 72,
+        "endLine": 358,
+        "endChar": 94
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6057271_bcbff576",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 14

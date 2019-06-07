@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "69b505ef_590526a8",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "nit: this could be a static function that\u0027s outside of CommandBufferBase",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7263ceac_5e9b6f2a",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 16
@@ -59,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "7c3c2c31_a68f26f7",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "We should just divide on the other side of the \u003c\u003d",
+      "parentUuid": "9c5c11a7_35fde6ba",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "822c6338_7d0fff34",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 16
@@ -70,6 +105,201 @@
       "writtenOn": "2019-06-07T01:28:18Z",
       "side": 1,
       "message": "nit: no reason to have this in a separate variable afaict",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46611733_59702918",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "This should just be texture since we override with `view` which is a view of `texture`. `color` would become unused and should disappear.",
+      "range": {
+        "startLine": 79,
+        "startChar": 45,
+        "endLine": 79,
+        "endChar": 50
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d58a8a5_b6b00d6b",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "nit: we only need mipSize * mipSize zeroes, this could go below the computation of mipSize.",
+      "range": {
+        "startLine": 91,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 65
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "629ea21c_1ab70094",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 107,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 66
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98532127_2857146a",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "Comment is misleading. this tests the code path of CopyBufferToTexture where we don\u0027t need to lazy-init. Can you add a TODO to add a backdoor to dawn native to query the number of zero-inited subresources so far so we know zero-init didn\u0027t happen here?",
+      "range": {
+        "startLine": 129,
+        "startChar": 3,
+        "endLine": 129,
+        "endChar": 70
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d41d6c9c_5818ea79",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "both of these only need to be sized with kSize^2 / 2",
+      "range": {
+        "startLine": 174,
+        "startChar": 45,
+        "endLine": 176,
+        "endChar": 70
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "548b8965_b69de15a",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "nit: Test name should probably be TextureZeroInitTest?",
+      "range": {
+        "startLine": 216,
+        "startChar": 7,
+        "endLine": 216,
+        "endChar": 19
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6e0209f_a4c0d39e",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "nit: this can probably be std::vector\u003cRGBA8\u003e expectedWithZeros(kSize * kSize, {0, 0, 0, 0});\n\n\nditto in all other places and with 100.",
+      "range": {
+        "startLine": 259,
+        "startChar": 1,
+        "endLine": 259,
+        "endChar": 74
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93641fd7_d4baffd5",
+        "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "nit: always use braces",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84f7b78c_a2d544f2",
+        "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:34:22Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
