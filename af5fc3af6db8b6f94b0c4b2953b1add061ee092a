@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d6b72d28_799a6386",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:37:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88a33636_fb6383ac",
+      "revId": "af5fc3af6db8b6f94b0c4b2953b1add061ee092a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "211a3677_eac9a396",
         "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "af5fc3af6db8b6f94b0c4b2953b1add061ee092a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7e30533_bb1f438c",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-07T10:37:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "211a3677_eac9a396",
+      "range": {
+        "startLine": 372,
+        "startChar": 22,
+        "endLine": 372,
+        "endChar": 35
+      },
+      "revId": "af5fc3af6db8b6f94b0c4b2953b1add061ee092a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
