@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "983a7847_bb2fb5f5",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:56:38Z",
+      "side": 1,
+      "message": "TIL.",
+      "revId": "9e903d56e4346f78bc9de4c02c7c1005df0c2747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9110cb4_921110cf",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:56:38Z",
+      "side": 1,
+      "message": "\"nullptr data\"?",
+      "range": {
+        "startLine": 279,
+        "startChar": 39,
+        "endLine": 279,
+        "endChar": 51
+      },
+      "revId": "9e903d56e4346f78bc9de4c02c7c1005df0c2747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6969bfef_99b1b6f2",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:56:38Z",
+      "side": 1,
+      "message": "Would mappedDataSize !\u003d count always be true in this case?",
+      "revId": "9e903d56e4346f78bc9de4c02c7c1005df0c2747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
