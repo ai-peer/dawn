@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "a12d89e2_d24cba26",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-07T17:39:06Z",
+      "side": 1,
+      "message": "Why can\u0027t the adapter create and own the Dawn device object and/or the D3D12 device? Then GetDeviceInfo can use information for all of the sources to do its business like the Vulkan backend does. No double create.",
+      "parentUuid": "62e33a26_e06d32ce",
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac2b2d7e_b1aab9eb",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 4
