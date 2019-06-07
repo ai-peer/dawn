@@ -260,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "50d75e11_006e1f3a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:28:18Z",
+      "side": 1,
+      "message": "Hm, this is true, but should it be? Do we allow z-strided copies for 3d textures, but not layer-strided copies for texture arrays?\n\nI think we should at least assert layerCount \u003d\u003d 1.",
+      "parentUuid": "d166cba5_b9a423a7",
+      "range": {
+        "startLine": 358,
+        "startChar": 72,
+        "endLine": 358,
+        "endChar": 94
+      },
+      "revId": "0f9d6caf70791ad5a4a957666d99564090793d4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6057271_bcbff576",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 14

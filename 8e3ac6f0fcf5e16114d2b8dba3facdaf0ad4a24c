@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86ba8009_6c3d9c9b",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:28:18Z",
+      "side": 1,
+      "message": "nit: It would be nice to compute this inline from kMaxTextureSize, but that looks like it may be hard.\n\nIf it would be, can you add a static_assert(1 \u003c\u003c (kMaxTexture2DMipLevels - 1) \u003d\u003d kMaxTextureSize) instead?\n\nWe could make kMaxTextureSize derived instead, but I\u0027d rather keep it explicit.",
+      "range": {
+        "startLine": 52,
+        "startChar": 51,
+        "endLine": 52,
+        "endChar": 54
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7263ceac_5e9b6f2a",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:28:18Z",
+      "side": 1,
+      "message": "Any reason to not assert these inside GetSubresourceIndex instead of here?",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c5c11a7_35fde6ba",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:28:18Z",
+      "side": 1,
+      "message": "I don\u0027t think this actually works, because if the * overflows, the static_assert will still pass. (bleh, but I just tried it on godbolt and it seems to be true)",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "822c6338_7d0fff34",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T01:28:18Z",
+      "side": 1,
+      "message": "nit: no reason to have this in a separate variable afaict",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
