@@ -426,8 +426,9 @@ namespace dawn_native { namespace metal {
                 size_t max_stride = 0;
                 for (uint32_t attribIndex : IterateBitSet(GetAttributesSetMask())) {
                     const VertexAttributeInfo& attrib = GetAttribute(attribIndex);
-                    // Only use the attributes that use the current input
-                    if (attrib.inputSlot != info.inputSlot) {
+                    // Only use the attributes that use the current input. Index i is the
+                    // inputSlot in vertex buffer.
+                    if (attrib.inputSlot != i) {
                         continue;
                     }
                     max_stride = std::max(max_stride,
