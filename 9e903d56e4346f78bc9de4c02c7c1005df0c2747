@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "fe0dbb9f_cdd18904",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-07T03:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9110cb4_921110cf",
+      "range": {
+        "startLine": 279,
+        "startChar": 39,
+        "endLine": 279,
+        "endChar": 51
+      },
+      "revId": "9e903d56e4346f78bc9de4c02c7c1005df0c2747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6969bfef_99b1b6f2",
         "filename": "src/dawn_wire/server/ServerBuffer.cpp",
         "patchSetId": 4
@@ -56,6 +80,24 @@
       "revId": "9e903d56e4346f78bc9de4c02c7c1005df0c2747",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db87ba19_51025ffb",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-07T03:05:50Z",
+      "side": 1,
+      "message": "As noted in other comments that set the MapError state, non-zero dataLength and nullptr data is used to indicate there should be mapped data but the allocation failed.\n\nSo the data is nullptr but the size is still correct.",
+      "parentUuid": "6969bfef_99b1b6f2",
+      "revId": "9e903d56e4346f78bc9de4c02c7c1005df0c2747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
