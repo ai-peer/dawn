@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d836a54c_d78a84c1",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-07T18:37:24Z",
+      "side": 1,
+      "message": "Adding if() for the mInputsSetMask.set() sounds good.",
+      "parentUuid": "d465a5ba_6c027899",
+      "revId": "431d9144e7fea8a346b03f725755e19847d7fc5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f0a226d_7e5a6f0b",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 3
@@ -39,6 +57,30 @@
       "revId": "431d9144e7fea8a346b03f725755e19847d7fc5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae62ab57_253e37b0",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-07T18:37:24Z",
+      "side": 1,
+      "message": "Good suggestion. Done.",
+      "parentUuid": "2f0a226d_7e5a6f0b",
+      "range": {
+        "startLine": 429,
+        "startChar": 75,
+        "endLine": 430,
+        "endChar": 50
+      },
+      "revId": "431d9144e7fea8a346b03f725755e19847d7fc5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
