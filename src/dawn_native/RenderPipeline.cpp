@@ -347,6 +347,9 @@ namespace dawn_native {
           mFragmentEntryPoint(descriptor->fragmentStage->entryPoint),
           mIsBlueprint(blueprint) {
         for (uint32_t slot = 0; slot < mVertexInput.bufferCount; ++slot) {
+            if (mVertexInput.buffers[slot].attributeCount == 0) {
+                continue;
+            }
             mInputsSetMask.set(slot);
             mInputInfos[slot].inputSlot = slot;
             mInputInfos[slot].stride = mVertexInput.buffers[slot].stride;
