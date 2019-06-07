@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d465a5ba_6c027899",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T18:03:01Z",
+      "side": 1,
+      "message": "I can\u0027t tell for sure, but mInputInfos[slot] might be uninitialized since you skip initializing it here. I think it would be best to either do\n\n  mInputInfos[slot] \u003d {};\n\nor not do this \u0027continue\u0027 at all (just if() the mInputsSetMask.set() call.)",
+      "revId": "431d9144e7fea8a346b03f725755e19847d7fc5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f0a226d_7e5a6f0b",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-07T18:03:01Z",
+      "side": 1,
+      "message": "How about renaming \u0027i\u0027 to \u0027vbInputSlot\u0027? Then this extra comment addition isn\u0027t needed.",
+      "range": {
+        "startLine": 429,
+        "startChar": 75,
+        "endLine": 430,
+        "endChar": 50
+      },
+      "revId": "431d9144e7fea8a346b03f725755e19847d7fc5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
