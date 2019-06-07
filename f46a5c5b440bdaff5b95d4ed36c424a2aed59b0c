@@ -101,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "62e33a26_e06d32ce",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-06-07T16:07:51Z",
+      "side": 1,
+      "message": "I can\u0027t speak for others but we don\u0027t do anything of the sort. I would treat it as \"double the cost\". If we think this is an issue, one optimization could be to forward these already created devices then release the ones unused. WDYT?",
+      "parentUuid": "7534b0f3_b3e516df",
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac2b2d7e_b1aab9eb",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 4
