@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "82458d4e_84fd3a3d",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86ba8009_6c3d9c9b",
+      "range": {
+        "startLine": 52,
+        "startChar": 51,
+        "endLine": 52,
+        "endChar": 54
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69b505ef_590526a8",
         "filename": "src/dawn_native/CommandBuffer.h",
         "patchSetId": 16
@@ -36,6 +60,24 @@
       "writtenOn": "2019-06-07T10:34:22Z",
       "side": 1,
       "message": "nit: this could be a static function that\u0027s outside of CommandBufferBase",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2e6519e_d0b002ac",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "do you want me to move it to utils DawnHelpers? by making this static, there are other files that include CommandBuffer.h and compiler gives the warning of unused static function in those other files.",
+      "parentUuid": "69b505ef_590526a8",
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -56,6 +98,24 @@
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d81a90d1_c24eb9e2",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Just thought we could assert on creation, but I can move it into GetSubresourceIndex!",
+      "parentUuid": "7263ceac_5e9b6f2a",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "4da884df_d317c469",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c3c2c31_a68f26f7",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "822c6338_7d0fff34",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 16
@@ -108,6 +186,24 @@
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "163c1dea_8dce39d4",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "822c6338_7d0fff34",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +230,30 @@
     },
     {
       "key": {
+        "uuid": "387e0b26_a1ca0e32",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46611733_59702918",
+      "range": {
+        "startLine": 79,
+        "startChar": 45,
+        "endLine": 79,
+        "endChar": 50
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d58a8a5_b6b00d6b",
         "filename": "src/tests/end2end/TextureResetTests.cpp",
         "patchSetId": 16
@@ -154,6 +274,30 @@
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "715a1cd3_3e9b1a54",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d58a8a5_b6b00d6b",
+      "range": {
+        "startLine": 91,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 65
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "ffeead5c_87364a6d",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "629ea21c_1ab70094",
+      "range": {
+        "startLine": 107,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 66
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98532127_2857146a",
         "filename": "src/tests/end2end/TextureResetTests.cpp",
         "patchSetId": 16
@@ -200,6 +368,30 @@
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "beefbf7a_f034041f",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98532127_2857146a",
+      "range": {
+        "startLine": 129,
+        "startChar": 3,
+        "endLine": 129,
+        "endChar": 70
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -226,6 +418,30 @@
     },
     {
       "key": {
+        "uuid": "245910f4_03312c30",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d41d6c9c_5818ea79",
+      "range": {
+        "startLine": 174,
+        "startChar": 45,
+        "endLine": 176,
+        "endChar": 70
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "548b8965_b69de15a",
         "filename": "src/tests/end2end/TextureResetTests.cpp",
         "patchSetId": 16
@@ -246,6 +462,30 @@
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e1937df_c6db9035",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "548b8965_b69de15a",
+      "range": {
+        "startLine": 216,
+        "startChar": 7,
+        "endLine": 216,
+        "endChar": 19
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -272,6 +512,30 @@
     },
     {
       "key": {
+        "uuid": "d89e6da9_38adddde",
+        "filename": "src/tests/end2end/TextureResetTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6e0209f_a4c0d39e",
+      "range": {
+        "startLine": 259,
+        "startChar": 1,
+        "endLine": 259,
+        "endChar": 74
+      },
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93641fd7_d4baffd5",
         "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
         "patchSetId": 16
@@ -289,6 +553,24 @@
     },
     {
       "key": {
+        "uuid": "a0a4bbda_e0731e9f",
+        "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93641fd7_d4baffd5",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84f7b78c_a2d544f2",
         "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
         "patchSetId": 16
@@ -303,6 +585,24 @@
       "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0be018bf_6d666b49",
+        "filename": "src/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-07T18:40:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84f7b78c_a2d544f2",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
