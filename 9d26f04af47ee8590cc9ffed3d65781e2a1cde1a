@@ -134,6 +134,24 @@
     },
     {
       "key": {
+        "uuid": "16761783_1fbeba21",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-10T09:48:04Z",
+      "side": 1,
+      "message": "Ah, thanks for the explanation, it makes sense.",
+      "parentUuid": "a1d38bf2_b091e75d",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "440aa093_82f44f34",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 2
