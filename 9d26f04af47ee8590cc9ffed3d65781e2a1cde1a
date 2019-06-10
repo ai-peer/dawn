@@ -116,6 +116,24 @@
     },
     {
       "key": {
+        "uuid": "a1d38bf2_b091e75d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-10T08:49:13Z",
+      "side": 1,
+      "message": "I add this check because it seems Vulkan requires this:\nhttps://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#copies-buffers-images (Chapter 18.4)\n\"For struct VkBufferImageCopy:\nIf the calling command’s VkImage parameter is a compressed image, bufferImageHeight must be a multiple of the compressed texel block height\"",
+      "parentUuid": "4a15225c_df2a9b2e",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "440aa093_82f44f34",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 2
