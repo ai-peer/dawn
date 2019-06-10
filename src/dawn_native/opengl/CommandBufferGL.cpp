@@ -506,8 +506,7 @@ namespace dawn_native { namespace opengl {
                     Buffer* indirectBuffer = ToBackend(dispatch->indirectBuffer.Get());
 
                     glBindBuffer(GL_DISPATCH_INDIRECT_BUFFER, indirectBuffer->GetHandle());
-                    glDispatchComputeIndirect(
-                        reinterpret_cast<GLintptr>(static_cast<intptr_t>(indirectBufferOffset)));
+                    glDispatchComputeIndirect(static_cast<GLintptr>(indirectBufferOffset));
                     // TODO(cwallez@chromium.org): add barriers to the API
                     glMemoryBarrier(GL_ALL_BARRIER_BITS);
                 } break;
