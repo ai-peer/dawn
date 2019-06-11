@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d3c6fea_b56e60a7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T19:57:49Z",
+      "side": 1,
+      "message": "I do not think this code is going to work.  You\u0027re mixing immediate state transitions that happen in EnsureSubresourceContentInitialized with batched ones that happen at the end of the for loop. \n\nI think we need to iterate over the loop a couple of times, one to clear render textures on first use and one to do \"normal\" state transitions requested by the developers. \n\nPerhaps later, we should consider whether we want to batch the resource barriers for the clearing operation.",
+      "range": {
+        "startLine": 443,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 13
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88a7ec3f_592eb463",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T19:57:49Z",
+      "side": 1,
+      "message": "If the source texture is uninitialized, and you just clear the destination, then uninitialized pixels will be copied from the source to the destination right after this.  I think all that is required here is for you to clear the source. Then initialized pixels will be copied to the destination.",
+      "range": {
+        "startLine": 635,
+        "startChar": 0,
+        "endLine": 637,
+        "endChar": 35
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80853fc3_44d1f120",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T19:57:49Z",
+      "side": 1,
+      "message": "Don\u0027t we also need to initialize depth textures if the loadOp\u003d\u003d Load?",
+      "range": {
+        "startLine": 812,
+        "startChar": 20,
+        "endLine": 813,
+        "endChar": 97
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66979fbb_3f7a1ac0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T19:57:49Z",
+      "side": 1,
+      "message": "If all of the textures we will be providing to developers will be initialized before the beginning of the render pass, why do we need to set this state flag at the end of the render pass?\n\nIf we\u0027re not giving developers initialized textures to draw to at the beginning of the render pass, then we need to do so for security.",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 864,
+        "endChar": 0
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d14855d_d694f429",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T19:57:49Z",
+      "side": 1,
+      "message": "Having fairly generic helper called ClearTexture check the toggle seems wrong. A subsequent person using it as a pure helper will be surprised to discover it does not work as they expect.   \n\nConsider checking the toggle in the caller (EnsureSubresourceContentInitialized) before it calls IsSubresourceContentInitialized.",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 75
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f364977_4f4c8aaf",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T19:57:49Z",
+      "side": 1,
+      "message": "If you\u0027re clearing depth or stencil, you need to transition to the D3D12_RESOURCE_STATE_DEPTH_WRITE state.",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 62
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed9b5489_031bb26f",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T19:57:49Z",
+      "side": 1,
+      "message": "For the problems I encountered in the change, please add an additional test verification.",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 42
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
