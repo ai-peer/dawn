@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8985d034_6d14cfe0",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-11T11:10:17Z",
+      "side": 1,
+      "message": "nit: could this be reversed like so:\n\n\n  if (mVertexBuffers[slot].attributeCount \u003d\u003d 0) {\n       break;\n  }\n\n  mInputsSetMask.set(slot)",
+      "revId": "84b067c71429d63bf4ef70b904ffabf6cb387404",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
