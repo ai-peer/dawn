@@ -256,5 +256,7 @@ TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
 }
 
 DAWN_INSTANTIATE_TEST(TextureZeroInitTest,
+                      ForceWorkarounds(D3D12Backend,
+                                       {"nonzero_clear_resources_on_creation_for_testing"}),
                       ForceWorkarounds(VulkanBackend,
                                        {"nonzero_clear_resources_on_creation_for_testing"}));
