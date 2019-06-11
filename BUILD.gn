@@ -44,6 +44,20 @@ dawn_json_generator("libdawn_native_utils_gen") {
   ]
 }
 
+if (dawn_enable_opengl) {
+  dawn_generator("libdawn_native_opengl_loader_gen") {
+    script = "generator/opengl_loader_generator.py"
+    args = [
+      "--gl-xml",
+      rebase_path("third_party/gl.xml", root_build_dir)
+    ]
+    outputs = [
+      "dawn_native/opengl/OpenGLFunctionsBase_autogen.cpp",
+      "dawn_native/opengl/OpenGLFunctionsBase_autogen.h",
+    ]
+  }
+}
+
 # Public libdawn_native headers so they can be publically visible for
 # dependencies of libdawn_native
 source_set("libdawn_native_headers") {
@@ -259,7 +273,11 @@ source_set("libdawn_native_sources") {
   }
 
   if (dawn_enable_opengl) {
-    deps += [ "third_party:glad" ]
+    deps += [
+      "third_party:glad",
+      ":libdawn_native_opengl_loader_gen"
+    ]
+    sources += get_target_outputs(":libdawn_native_opengl_loader_gen")
     sources += [
       "src/dawn_native/opengl/BackendGL.cpp",
       "src/dawn_native/opengl/BackendGL.h",
