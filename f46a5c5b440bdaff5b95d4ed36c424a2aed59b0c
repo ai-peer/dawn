@@ -173,6 +173,24 @@
     },
     {
       "key": {
+        "uuid": "02bfbca3_a91064b6",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-06-11T18:51:27Z",
+      "side": 1,
+      "message": "SGTM w.r.t moving actual device creation to Adapter:Init.",
+      "parentUuid": "085b8040_e809a20b",
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac2b2d7e_b1aab9eb",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 4
