@@ -186,6 +186,14 @@ namespace dawn_native { namespace d3d12 {
             return false;
         }
 
+        // Certain transitions in D3D12 can occur without an explicit ResourceBarrier call.
+        // https://docs.microsoft.com/en-us/windows/desktop/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#implicit-state-transitions
+        if (mLastState == D3D12_RESOURCE_STATE_COMMON &&
+            ((newState == D3D12_RESOURCE_STATE_COPY_DEST) ^
+             (newState == (newState & kD3D12TextureReadOnlyStates)))) {
+            return false;
+        }
+
         barrier->Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
         barrier->Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
         barrier->Transition.pResource = mResourcePtr;
