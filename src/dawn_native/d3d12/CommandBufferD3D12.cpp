@@ -442,10 +442,15 @@ namespace dawn_native { namespace d3d12 {
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 D3D12_RESOURCE_BARRIER barrier;
-                if (ToBackend(usages.textures[i])
-                        ->CreateD3D12ResourceBarrierIfNeeded(&barrier, usages.textureUsages[i])) {
+                Texture* texture = ToBackend(usages.textures[i]);
+                // TODO(natlee@microsoft.com): Update clearing here when subresource tracking is
+                // implemented
+                texture->EnsureSubresourceContentInitialized(
+                    commandList, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                if (texture->CreateD3D12ResourceBarrierIfNeeded(&barrier,
+                                                                usages.textureUsages[i])) {
                     barriers.push_back(barrier);
-                    ToBackend(usages.textures[i])->SetUsage(usages.textureUsages[i]);
+                    texture->SetUsage(usages.textureUsages[i]);
                 }
             }
 
@@ -500,6 +505,15 @@ namespace dawn_native { namespace d3d12 {
                     Buffer* buffer = ToBackend(copy->source.buffer.Get());
                     Texture* texture = ToBackend(copy->destination.texture.Get());
 
+                    if (IsCompleteSubresourceCopiedTo(texture, copy->copySize,
+                                                      copy->destination.level)) {
+                        texture->SetIsSubresourceContentInitialized(copy->destination.level, 1,
+                                                                    copy->destination.slice, 1);
+                    } else {
+                        texture->EnsureSubresourceContentInitialized(
+                            commandList, copy->destination.level, 1, copy->destination.slice, 1);
+                    }
+
                     buffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::TransferSrc);
                     texture->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferDst);
 
@@ -543,6 +557,9 @@ namespace dawn_native { namespace d3d12 {
                     CopyTextureToBufferCmd* copy = mCommands.NextCommand<CopyTextureToBufferCmd>();
                     Texture* texture = ToBackend(copy->source.texture.Get());
                     Buffer* buffer = ToBackend(copy->destination.buffer.Get());
+
+                    texture->EnsureSubresourceContentInitialized(commandList, copy->source.level, 1,
+                                                                 copy->source.slice, 1);
 
                     texture->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferSrc);
                     buffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::TransferDst);
@@ -592,16 +609,34 @@ namespace dawn_native { namespace d3d12 {
                     Texture* source = ToBackend(copy->source.texture.Get());
                     Texture* destination = ToBackend(copy->destination.texture.Get());
 
-                    source->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferSrc);
-                    destination->TransitionUsageNow(commandList,
-                                                    dawn::TextureUsageBit::TransferDst);
-
                     if (CanUseCopyResource(source->GetNumMipLevels(), source->GetSize(),
                                            destination->GetSize(), copy->copySize)) {
+                        // CopyResource will copy the entire texture, need to ensure entire source
+                        // is initialized and since destination will be entirely overwritten, set it
+                        // as initialized
+                        source->EnsureSubresourceContentInitialized(
+                            commandList, 0, source->GetNumMipLevels(), 0, source->GetArrayLayers());
+                        destination->SetIsSubresourceContentInitialized(
+                            0, destination->GetNumMipLevels(), 0, destination->GetArrayLayers());
+
+                        source->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferSrc);
+                        destination->TransitionUsageNow(commandList,
+                                                        dawn::TextureUsageBit::TransferDst);
                         commandList->CopyResource(destination->GetD3D12Resource(),
                                                   source->GetD3D12Resource());
-
                     } else {
+                        source->EnsureSubresourceContentInitialized(commandList, copy->source.level,
+                                                                    1, copy->source.slice, 1);
+                        if (IsCompleteSubresourceCopiedTo(destination, copy->copySize,
+                                                          copy->destination.level)) {
+                            destination->SetIsSubresourceContentInitialized(
+                                copy->destination.level, 1, copy->destination.slice, 1);
+                        } else {
+                            destination->EnsureSubresourceContentInitialized(
+                                commandList, copy->destination.level, 1, copy->destination.slice,
+                                1);
+                        }
+
                         D3D12_TEXTURE_COPY_LOCATION srcLocation =
                             CreateTextureCopyLocationForTexture(*source, copy->source.level,
                                                                 copy->source.slice);
@@ -618,6 +653,9 @@ namespace dawn_native { namespace d3d12 {
                         sourceRegion.bottom = copy->source.origin.y + copy->copySize.height;
                         sourceRegion.back = copy->source.origin.z + copy->copySize.depth;
 
+                        source->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferSrc);
+                        destination->TransitionUsageNow(commandList,
+                                                        dawn::TextureUsageBit::TransferDst);
                         commandList->CopyTextureRegion(
                             &dstLocation, copy->destination.origin.x, copy->destination.origin.y,
                             copy->destination.origin.z, &srcLocation, &sourceRegion);
@@ -739,6 +777,12 @@ namespace dawn_native { namespace d3d12 {
                     D3D12_CPU_DESCRIPTOR_HANDLE handle = args.RTVs[i];
                     commandList->ClearRenderTargetView(handle, &attachmentInfo.clearColor.r, 0,
                                                        nullptr);
+                } else if (attachmentInfo.loadOp == dawn::LoadOp::Load &&
+                           attachmentInfo.view->GetTexture()) {
+                    ToBackend(attachmentInfo.view->GetTexture())
+                        ->EnsureSubresourceContentInitialized(
+                            commandList, attachmentInfo.view->GetBaseMipLevel(), 1,
+                            attachmentInfo.view->GetBaseArrayLayer(), 1);
                 }
             }
 
@@ -803,6 +847,22 @@ namespace dawn_native { namespace d3d12 {
             switch (type) {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
+                    for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
+                        auto& attachmentInfo = renderPass->colorAttachments[i];
+                        TextureView* view = ToBackend(attachmentInfo.view.Get());
+                        switch (attachmentInfo.storeOp) {
+                            case dawn::StoreOp::Store: {
+                                attachmentInfo.view->GetTexture()
+                                    ->SetIsSubresourceContentInitialized(
+                                        view->GetBaseMipLevel(), view->GetLevelCount(),
+                                        view->GetBaseArrayLayer(), view->GetLayerCount());
+                            } break;
+
+                            default: {
+                                UNREACHABLE();
+                            } break;
+                        }
+                    }
 
                     // TODO(brandon1.jones@intel.com): avoid calling this function and enable MSAA
                     // resolve in D3D12 render pass on the platforms that support this feature.
