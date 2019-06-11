@@ -22,6 +22,30 @@
       "revId": "e52fb702049e2f060b310f7734e65258238724bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b07ff3a6_d102c235",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-06-11T18:47:00Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "194dcada_baab0db8",
+      "range": {
+        "startLine": 138,
+        "startChar": 14,
+        "endLine": 138,
+        "endChar": 22
+      },
+      "revId": "e52fb702049e2f060b310f7734e65258238724bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
