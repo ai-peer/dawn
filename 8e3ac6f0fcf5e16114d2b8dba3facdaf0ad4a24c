@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "91a51a38_532e3820",
+        "filename": "src/dawn_native/CommandBuffer.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-11T11:39:34Z",
+      "side": 1,
+      "message": "Sorry, \"static\" was wrong, but this function doesn\u0027t need to be in the command buffer because it never uses \"this\" can it be moved to be standalone?",
+      "parentUuid": "c2e6519e_d0b002ac",
+      "revId": "8e3ac6f0fcf5e16114d2b8dba3facdaf0ad4a24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7263ceac_5e9b6f2a",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 16
