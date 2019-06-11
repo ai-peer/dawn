@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a6eda6_a85f7789",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-11T17:05:36Z",
+      "side": 1,
+      "message": "same as below",
+      "range": {
+        "startLine": 134,
+        "startChar": 58,
+        "endLine": 134,
+        "endChar": 59
+      },
+      "revId": "0770d95e165b2df86befc0e03f59c736b93fcd75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "decb4525_7f3b451d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-11T17:05:36Z",
+      "side": 1,
+      "message": "My reading of the linked documentation is that even though an explicit transition isn\u0027t needed, a transition still occurs, leaving the resource no longer in the COMMON state.\n\nIf that\u0027s the case, then calls to SetUsage in CommandBufferD3D12.cpp need to be moved outside of the if (CreateD3D12ResourceBarrierIfNeeded()) block.",
+      "revId": "0770d95e165b2df86befc0e03f59c736b93fcd75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42144989_b4ac1535",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-11T17:05:36Z",
+      "side": 1,
+      "message": "nit: xor is technically correct here, but I think it\u0027s equivalent and clearer to use ||. That also allows you to rewrite more clearly, something like:\n\n  if (mLastState \u003d\u003d D3D12_RESOURCE_STATE_COMMON) {\n    if (newState \u003d\u003d D3D12_RESOURCE_STATE_COPY_DEST) {\n      return false;\n    }\n    if (newState \u003d\u003d (newState \u0026 kD3D12TextureReadOnlyStates)) {\n      return false;\n    }\n  }",
+      "range": {
+        "startLine": 192,
+        "startChar": 58,
+        "endLine": 192,
+        "endChar": 59
+      },
+      "revId": "0770d95e165b2df86befc0e03f59c736b93fcd75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
