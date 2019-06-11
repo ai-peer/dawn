@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b34519d4_7856b5fc",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-11T09:59:35Z",
+      "side": 1,
+      "message": "TextureCupyBufferSizeLastRowComputation?",
+      "range": {
+        "startLine": 530,
+        "startChar": 0,
+        "endLine": 532,
+        "endChar": 52
+      },
+      "revId": "c6521eaf0af183fbd0e92fce257f90409f1d674d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "402f0ca5_fe47f4be",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-11T09:59:35Z",
+      "side": 1,
+      "message": "nit: comment to explain that the last row isn\u0027t long enough because it is in bytes and not texels. Alternatively use BufferSizeForTextureCopy() - 1 to check the exact correct size is computed in Dawn.",
+      "revId": "c6521eaf0af183fbd0e92fce257f90409f1d674d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62aa985a_17575036",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-11T09:59:35Z",
+      "side": 1,
+      "message": "Ditto",
+      "revId": "c6521eaf0af183fbd0e92fce257f90409f1d674d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
