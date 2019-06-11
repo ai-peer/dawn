@@ -155,6 +155,24 @@
     },
     {
       "key": {
+        "uuid": "085b8040_e809a20b",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-11T18:18:09Z",
+      "side": 1,
+      "message": "@Corentin, +1 to your point about avoiding driver starts. I expect many web pages will use the adapter portion of the API to gather data about users, even if there is no intention of using WebGPU to render anything. \n\nIf the device type is only needed for rendering purposes, we should make it and other attributes \u0027initialize on demand\u0027 as much as possible.",
+      "parentUuid": "88493519_943f2e45",
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac2b2d7e_b1aab9eb",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 4
