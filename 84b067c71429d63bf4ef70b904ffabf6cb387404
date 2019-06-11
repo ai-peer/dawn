@@ -16,6 +16,24 @@
       "revId": "84b067c71429d63bf4ef70b904ffabf6cb387404",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1a72e2c_2b5cca1f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-11T16:08:35Z",
+      "side": 1,
+      "message": "Done (\"break\" should be \"continue\").",
+      "parentUuid": "8985d034_6d14cfe0",
+      "revId": "84b067c71429d63bf4ef70b904ffabf6cb387404",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
