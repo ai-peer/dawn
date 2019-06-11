@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90556ee7_3f30710a",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-11T16:48:44Z",
+      "side": 1,
+      "message": "nit: This looks like it\u0027s part of the previous sentence; add punctuation or conjunction",
+      "range": {
+        "startLine": 148,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 7
+      },
+      "revId": "9a7870b7976c679abae27234cfb77b2705f7cb0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b2b95fe_92faeaf9",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-11T16:48:44Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 207,
+        "startChar": 3,
+        "endLine": 207,
+        "endChar": 7
+      },
+      "revId": "9a7870b7976c679abae27234cfb77b2705f7cb0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
