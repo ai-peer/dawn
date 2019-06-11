@@ -146,6 +146,30 @@
       "revId": "0770d95e165b2df86befc0e03f59c736b93fcd75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d19723c9_1b758e10",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-06-11T17:52:13Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "9287eda3_e0136172",
+      "range": {
+        "startLine": 192,
+        "startChar": 58,
+        "endLine": 192,
+        "endChar": 59
+      },
+      "revId": "0770d95e165b2df86befc0e03f59c736b93fcd75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
