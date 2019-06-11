@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "88493519_943f2e45",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-11T11:16:01Z",
+      "side": 1,
+      "message": "That sounds ok too because device creation doesn\u0027t take any parameter in D3D12 except the minimum feature level. We would still want to cache at the Chromium level to avoid starting the driver and booting the GPU if we can avoid it (for power reasons).",
+      "parentUuid": "a12d89e2_d24cba26",
+      "revId": "f46a5c5b440bdaff5b95d4ed36c424a2aed59b0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac2b2d7e_b1aab9eb",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 4
