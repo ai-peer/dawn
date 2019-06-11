@@ -122,6 +122,30 @@
       "revId": "0770d95e165b2df86befc0e03f59c736b93fcd75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9287eda3_e0136172",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-11T17:50:23Z",
+      "side": 1,
+      "message": "OK, sounds good. I\u0027d still like to layer the logic just to make it easier to read. Something along these lines:\n\n  if (mLastState \u003d\u003d D3D12_RESOURCE_STATE_COMMON) {\n    bool singleWrite \u003d newState \u003d\u003d D3D12_RESOURCE_STATE_COPY_DEST;\n    bool multipleRead \u003d newState \u003d\u003d (newState \u0026 kD3D12TextureReadOnlyStates);\n    if (singleWrite ^ multipleRead) {\n      return false;\n    }\n  }\n\nWDYT?",
+      "parentUuid": "d97eb70d_72a6857f",
+      "range": {
+        "startLine": 192,
+        "startChar": 58,
+        "endLine": 192,
+        "endChar": 59
+      },
+      "revId": "0770d95e165b2df86befc0e03f59c736b93fcd75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
