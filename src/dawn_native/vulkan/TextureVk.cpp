@@ -301,6 +301,12 @@ namespace dawn_native { namespace vulkan {
             createInfo.flags |= VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
         }
 
+        // Vulkan images that are used in vkCmdClearColorImage() must have been created with
+        // VK_IMAGE_USAGE_TRANSFER_DST_BIT usage flag.
+        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+            createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+        }
+
         if (device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
             VK_SUCCESS) {
             ASSERT(false);
