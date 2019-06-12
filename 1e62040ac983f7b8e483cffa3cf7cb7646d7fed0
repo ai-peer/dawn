@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25c76f18_1d5898e1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-12T06:09:49Z",
+      "side": 1,
+      "message": "Here is another bug that I plan to fix in the next patch:\nFor textures in depth stencil formats, we should use vkCmdClearDepthStencilImage() instead of vkCmdClearColorImage().",
+      "revId": "1e62040ac983f7b8e483cffa3cf7cb7646d7fed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
