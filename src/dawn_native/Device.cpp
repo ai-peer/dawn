@@ -290,6 +290,18 @@ namespace dawn_native {
 
         return result;
     }
+    void DeviceBase::CreateBufferMappedAsync(const BufferDescriptor* descriptor,
+                                             dawn::BufferCreateMappedCallback callback,
+                                             void* userdata) {
+        DawnCreateBufferMappedResult result = CreateBufferMapped(descriptor);
+
+        DawnBufferMapAsyncStatus status = DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS;
+        if (result.data == nullptr || result.dataLength != descriptor->size) {
+            status = DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR;
+        }
+
+        callback(status, result, userdata);
+    }
     CommandEncoderBase* DeviceBase::CreateCommandEncoder() {
         return new CommandEncoderBase(this);
     }
