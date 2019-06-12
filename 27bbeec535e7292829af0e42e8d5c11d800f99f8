@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "656a4337_6e3ef3ad",
+        "filename": "src/dawn_native/opengl/OpenGLFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-12T21:52:55Z",
+      "side": 1,
+      "message": "nit: could maybe assert against versions like \"4.10\" which wouldn\u0027t work here",
+      "revId": "27bbeec535e7292829af0e42e8d5c11d800f99f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
