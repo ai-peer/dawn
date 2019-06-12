@@ -111,6 +111,30 @@
     },
     {
       "key": {
+        "uuid": "94317beb_2d6e5ffe",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-12T14:15:54Z",
+      "side": 1,
+      "message": "@Corentin, I too was bummed when I saw the code to force render targets. The only other way to do clearing that I am aware of is to upload a bunch of zeros from the CPU. \n\nMaybe we should revisit the need to clear source/destination textures to zero and, instead, make usage of uninitialized resources be a validation error like Dzmitry was pushing for in the conference calls.",
+      "parentUuid": "2c504743_b7e34a5d",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c0de767_0b169c8e",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
