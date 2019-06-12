@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "efed2089_e475aff2",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T20:51:54Z",
+      "side": 1,
+      "message": "An idea we talked about a long time ago was having some sort of device discovery caching: embedders of Dawn (like Chromium) would dependency inject a generic FS cache from which Dawn could retrieve compiled ShaderModules and Pipelines, but also find data about the previous device discovery that happened and decide to skip it if the system stayed the same.\n\nAdded an item about this in the Dawn Tracker.",
+      "parentUuid": "fd8b472a_d36db4c3",
+      "range": {
+        "startLine": 64,
+        "startChar": 19,
+        "endLine": 64,
+        "endChar": 47
+      },
+      "revId": "59012fd2541428ee9a34bedf562579eb628b9fe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "84e56c1b_5f3f1ee3",
         "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2019-06-12T18:35:54Z",
       "side": 1,
       "message": "D3D12 device creation failure could be caused by D3D12 not being supported by the driver or the OS. This isn\u0027t \u0027context lost\u0027. You never acquired the context to begin with.\n\nIs there a better error we can return here?",
+      "range": {
+        "startLine": 66,
+        "startChar": 24,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "59012fd2541428ee9a34bedf562579eb628b9fe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc53fb15_41e7b0e7",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T20:51:54Z",
+      "side": 1,
+      "message": "Existing error types in Dawn are found here. We could add new ones but ideally we don\u0027t have \"generic error\": https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/Error.h?q\u003df:dawn+Error.h\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d28\n\nErrors during adapter initialization are never surfaced to the Web, they would translate in log entries in about:gpu and maybe some terminal spam, as well as the backend being ignored by the dawn_native::Instance.",
+      "parentUuid": "84e56c1b_5f3f1ee3",
       "range": {
         "startLine": 66,
         "startChar": 24,
