@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46ef1adf_e687d7ec",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T08:53:22Z",
+      "side": 1,
+      "message": "nit: ComPtr\u003c\u003e is ok because it is refcounting. Either that or add a comment that the device is owned by the adapter which outlives the Device.",
+      "revId": "0e0622590c1af8b1828f99355843eacc9891fef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
