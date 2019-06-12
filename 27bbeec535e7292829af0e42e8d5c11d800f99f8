@@ -34,6 +34,24 @@
       "revId": "27bbeec535e7292829af0e42e8d5c11d800f99f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a5b168f_83618542",
+        "filename": "src/dawn_native/opengl/OpenGLFunctions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-12T22:45:33Z",
+      "side": 1,
+      "message": "No, not currently, AFAIK.",
+      "parentUuid": "613ae48d_5c3e09f2",
+      "revId": "27bbeec535e7292829af0e42e8d5c11d800f99f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
