@@ -135,6 +135,30 @@
     },
     {
       "key": {
+        "uuid": "d2023122_5a770c1f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T15:55:39Z",
+      "side": 1,
+      "message": "TBH I see this as an implementation detail that can be optimized. For example we could support the clear path for renderable textures and fall back to having a small-ish buffer and multiple copies if it isn\u0027t.",
+      "parentUuid": "94317beb_2d6e5ffe",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c0de767_0b169c8e",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
