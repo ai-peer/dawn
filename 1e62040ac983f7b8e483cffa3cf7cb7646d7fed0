@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b5d75cf6_402e5a6b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T08:42:24Z",
+      "side": 1,
+      "message": "Let\u0027s add it unconditionally because it will used for robust resource initialization as well. See comment in BufferVk in this review: https://dawn-review.googlesource.com/c/dawn/+/7500",
+      "revId": "1e62040ac983f7b8e483cffa3cf7cb7646d7fed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4a88b02_b64fae72",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 2
@@ -25,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "6e1eae42_9d0933ca",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T08:42:24Z",
+      "side": 1,
+      "message": "Yep, that code was written before we had UNREACHABLE(). Also I have an item in the Dawn tracker to use Error.h error handling in the backends, including this one.",
+      "parentUuid": "b4a88b02_b64fae72",
+      "range": {
+        "startLine": 312,
+        "startChar": 12,
+        "endLine": 312,
+        "endChar": 26
+      },
+      "revId": "1e62040ac983f7b8e483cffa3cf7cb7646d7fed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "25c76f18_1d5898e1",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 2
@@ -36,6 +77,24 @@
       "writtenOn": "2019-06-12T06:09:49Z",
       "side": 1,
       "message": "Here is another bug that I plan to fix in the next patch:\nFor textures in depth stencil formats, we should use vkCmdClearDepthStencilImage() instead of vkCmdClearColorImage().",
+      "revId": "1e62040ac983f7b8e483cffa3cf7cb7646d7fed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcf15338_4a018499",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T08:42:24Z",
+      "side": 1,
+      "message": "Sounds good. I might revisit the clear for testing in the Vulkan backend at some point to use copies from a buffer to make it simpler.",
+      "parentUuid": "25c76f18_1d5898e1",
       "revId": "1e62040ac983f7b8e483cffa3cf7cb7646d7fed0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
