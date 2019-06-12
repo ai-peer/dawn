@@ -25,3 +25,6 @@ use_system_xcode = true
 # Android 32-bit non-component, non-clang builds cannot have symbol_level=2
 # due to 4GiB file size limit, see https://crbug.com/648948.
 ignore_elf32_limitations = false
+
+# Use self-build Vulkan validation layers
+dawn_enable_vulkan_validation_layers = is_linux

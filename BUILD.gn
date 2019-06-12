@@ -348,6 +348,11 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/VulkanInfo.cpp",
       "src/dawn_native/vulkan/VulkanInfo.h",
     ]
+
+    if (dawn_enable_vulkan_validation_layers) {
+      configs +=
+          [ "third_party/vulkan-validation-layers:vulkan_internal_config" ]
+    }
   }
 }
 
@@ -387,6 +392,12 @@ dawn_component("libdawn_native") {
   if (dawn_enable_vulkan) {
     sources += [ "src/dawn_native/vulkan/VulkanBackend.cpp" ]
     deps += [ "third_party:vulkan_headers" ]
+
+    # Use self-build Vulkan validation layers
+    if (dawn_enable_vulkan_validation_layers) {
+      deps +=
+          [ "third_party/vulkan-validation-layers:vulkan_validation_layers" ]
+    }
   }
 }
 
