@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b65b883_296450b3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "nit: these two blocks of code can be factored as a single block before CanCopyResource. It might do some very small redundant computation but that shouldn\u0027t matter.",
+      "range": {
+        "startLine": 617,
+        "startChar": 1,
+        "endLine": 641,
+        "endChar": 25
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8587d256_add54232",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "ditto, it would be factored above.",
+      "range": {
+        "startLine": 658,
+        "startChar": 0,
+        "endLine": 661,
+        "endChar": 92
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6ce571b_2801b0d4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "How about this attachment? We missed it in the Vulkan backend as well. Can we add a test that the depth is cleared and the fix for Vulkan in a CL before this one? (We can keep iterating on this still)",
+      "range": {
+        "startLine": 791,
+        "startChar": 0,
+        "endLine": 795,
+        "endChar": 0
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a04fe3d1_04a23b50",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "We can do this at the beginning of the render pass so the code dealing with subresources being initialized can all be in the same spot. Same thing for the Vulkan backend.",
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c504743_b7e34a5d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "This is pretty unfortunate because render targets can be less optimized / use more memory than non-render targets. Maybe we could add a TODO to have texture clearing without needing this?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c0de767_0b169c8e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "levelCount is never used, can it be removed?",
+      "range": {
+        "startLine": 248,
+        "startChar": 60,
+        "endLine": 248,
+        "endChar": 80
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95d663f3_bc1e928a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 277,
+        "startChar": 60,
+        "endLine": 277,
+        "endChar": 80
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6e1f86e_86b2a231",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "This is not true for this function anymore because we could be lazy-clearing multiple array layers at the same time (and not jsut the zeroth one). Maybe leave part of these ASSERTs in the original method?",
+      "range": {
+        "startLine": 284,
+        "startChar": 1,
+        "endLine": 289,
+        "endChar": 0
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "116bbf84_6b110f12",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "Can we add a test for this as well if nothing is failing now? Or ASSERT(layerCount) \u003d 1",
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40525684_58d6238a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-12T12:00:33Z",
+      "side": 1,
+      "message": "nit: usually it is more clear to phrase these as early outs:\n\n if (some condition) {\n     return\n }",
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
