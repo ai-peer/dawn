@@ -159,6 +159,30 @@
     },
     {
       "key": {
+        "uuid": "e4c441fd_97750a01",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-12T18:38:08Z",
+      "side": 1,
+      "message": "I agree it is an implementation detail but the less code we have to write and maintain, the better. Optimization should be saved for places where developers do the correct thing, not the wrong thing.",
+      "parentUuid": "d2023122_5a770c1f",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c0de767_0b169c8e",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
