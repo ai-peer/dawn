@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "666abba4_a835c1de",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6aa50ef6_4561048a",
+      "range": {
+        "startLine": 635,
+        "startChar": 0,
+        "endLine": 637,
+        "endChar": 35
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80853fc3_44d1f120",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -167,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "477cd1ea_a8cb2ef1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80853fc3_44d1f120",
+      "range": {
+        "startLine": 812,
+        "startChar": 20,
+        "endLine": 813,
+        "endChar": 97
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66979fbb_3f7a1ac0",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -187,6 +235,30 @@
       "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bc6123b_1f332c9e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66979fbb_3f7a1ac0",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 864,
+        "endChar": 0
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -295,6 +367,30 @@
       "writtenOn": "2019-06-11T19:57:49Z",
       "side": 1,
       "message": "For the problems I encountered in the change, please add an additional test verification.",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 42
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d17715f7_1c830fd4",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "WIP going to add testing here https://dawn-review.googlesource.com/c/dawn/+/8140",
+      "parentUuid": "ed9b5489_031bb26f",
       "range": {
         "startLine": 258,
         "startChar": 0,

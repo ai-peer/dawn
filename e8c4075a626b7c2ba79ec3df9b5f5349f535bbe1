@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e651b1e_f577a286",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Is there a chance where CopyResource overwrites the entire destination, and we then need to set the whole resource as initialized rather than just the subresource?\nI just know CopyResource will copy the entire resource, which is why I broke it up into two parts. But maybe I\u0027m overthinking it.",
+      "parentUuid": "8b65b883_296450b3",
+      "range": {
+        "startLine": 617,
+        "startChar": 1,
+        "endLine": 641,
+        "endChar": 25
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8587d256_add54232",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "333b61c5_699fb7d1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done, https://dawn-review.googlesource.com/c/dawn/+/8140, test WIP",
+      "parentUuid": "e6ce571b_2801b0d4",
+      "range": {
+        "startLine": 791,
+        "startChar": 0,
+        "endLine": 795,
+        "endChar": 0
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a04fe3d1_04a23b50",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -85,6 +133,24 @@
       "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ad072ee_df247b5e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a04fe3d1_04a23b50",
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -183,6 +249,30 @@
     },
     {
       "key": {
+        "uuid": "d41ae82c_3326c19f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "I added a todo here for now, let me know if we want to go the validation route.",
+      "parentUuid": "e4c441fd_97750a01",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 13
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c0de767_0b169c8e",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -203,6 +293,30 @@
       "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3ee8f0d_eb9f2553",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c0de767_0b169c8e",
+      "range": {
+        "startLine": 248,
+        "startChar": 60,
+        "endLine": 248,
+        "endChar": 80
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -229,6 +343,30 @@
     },
     {
       "key": {
+        "uuid": "b5c48d87_da438c73",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95d663f3_bc1e928a",
+      "range": {
+        "startLine": 277,
+        "startChar": 60,
+        "endLine": 277,
+        "endChar": 80
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6e1f86e_86b2a231",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -252,6 +390,30 @@
     },
     {
       "key": {
+        "uuid": "3209338d_4fb56732",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6e1f86e_86b2a231",
+      "range": {
+        "startLine": 284,
+        "startChar": 1,
+        "endLine": 289,
+        "endChar": 0
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "116bbf84_6b110f12",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -263,6 +425,24 @@
       "writtenOn": "2019-06-12T12:00:33Z",
       "side": 1,
       "message": "Can we add a test for this as well if nothing is failing now? Or ASSERT(layerCount) \u003d 1",
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9061a8ce_160742eb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "WIP going to add testing here https://dawn-review.googlesource.com/c/dawn/+/8140",
+      "parentUuid": "116bbf84_6b110f12",
       "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -283,6 +463,24 @@
       "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9bb309c_0a322a30",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-12T21:28:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40525684_58d6238a",
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
