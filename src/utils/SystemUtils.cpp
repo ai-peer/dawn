@@ -22,6 +22,8 @@
 #    error "Unsupported platform."
 #endif
 
+#include <iostream>
+
 namespace utils {
 
 #if defined(DAWN_PLATFORM_WINDOWS)
@@ -35,5 +37,9 @@ namespace utils {
 #else
 #    error "Implement USleep for your platform."
 #endif
+
+    bool SetEnvironmentVar(const char* name, const char* value) {
+        return (setenv(name, value, 1) == 0);
+    }
 
 }  // namespace utils

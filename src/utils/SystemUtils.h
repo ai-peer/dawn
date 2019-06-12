@@ -18,6 +18,8 @@
 namespace utils {
 
     void USleep(unsigned int usecs);
+
+    bool SetEnvironmentVar(const char* name, const char* value);
 }
 
 #endif  // UTILS_SYSTEMUTILS_H_
