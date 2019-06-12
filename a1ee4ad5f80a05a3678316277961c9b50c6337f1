@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "6aa50ef6_4561048a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-12T00:31:44Z",
+      "side": 1,
+      "message": "You are correct. I overlooked line 628.",
+      "parentUuid": "a37c2e8f_ed049468",
+      "range": {
+        "startLine": 635,
+        "startChar": 0,
+        "endLine": 637,
+        "endChar": 35
+      },
+      "revId": "a1ee4ad5f80a05a3678316277961c9b50c6337f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80853fc3_44d1f120",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
