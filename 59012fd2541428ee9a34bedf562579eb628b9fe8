@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd8b472a_d36db4c3",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-12T18:35:54Z",
+      "side": 1,
+      "message": "Putting device creation in Adapter initialization does not address my concern about creating the device on demand. At a minimum, we should have a bug to find a better way to do this on demand at a later point.",
+      "range": {
+        "startLine": 64,
+        "startChar": 19,
+        "endLine": 64,
+        "endChar": 47
+      },
+      "revId": "59012fd2541428ee9a34bedf562579eb628b9fe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84e56c1b_5f3f1ee3",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-12T18:35:54Z",
+      "side": 1,
+      "message": "D3D12 device creation failure could be caused by D3D12 not being supported by the driver or the OS. This isn\u0027t \u0027context lost\u0027. You never acquired the context to begin with.\n\nIs there a better error we can return here?",
+      "range": {
+        "startLine": 66,
+        "startChar": 24,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "59012fd2541428ee9a34bedf562579eb628b9fe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
