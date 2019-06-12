@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b4a88b02_b64fae72",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-12T06:19:11Z",
+      "side": 1,
+      "message": "Also I think all \"ASSERT(false)\" should be replaced with \"UNREACHABLE()\".",
+      "range": {
+        "startLine": 312,
+        "startChar": 12,
+        "endLine": 312,
+        "endChar": 26
+      },
+      "revId": "1e62040ac983f7b8e483cffa3cf7cb7646d7fed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "25c76f18_1d5898e1",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 2
