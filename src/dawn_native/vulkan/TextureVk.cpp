@@ -415,37 +415,33 @@ namespace dawn_native { namespace vulkan {
                                uint32_t levelCount,
                                uint32_t baseArrayLayer,
                                uint32_t layerCount) {
-        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            VkImageSubresourceRange range = {};
-            range.aspectMask = GetVkAspectMask();
-            range.baseMipLevel = baseMipLevel;
-            range.levelCount = levelCount;
-            range.baseArrayLayer = baseArrayLayer;
-            range.layerCount = layerCount;
+        VkImageSubresourceRange range = {};
+        range.aspectMask = GetVkAspectMask();
+        range.baseMipLevel = baseMipLevel;
+        range.levelCount = levelCount;
+        range.baseArrayLayer = baseArrayLayer;
+        range.layerCount = layerCount;
 
-            TransitionUsageNow(commands, dawn::TextureUsageBit::TransferDst);
-            if (TextureFormatHasDepthOrStencil(GetFormat())) {
-                VkClearDepthStencilValue clear_color[1];
-                clear_color[0].depth = 0.0f;
-                clear_color[0].stencil = 0u;
-                ToBackend(GetDevice())
-                    ->fn.CmdClearDepthStencilImage(commands, GetHandle(),
-                                                   VulkanImageLayout(GetUsage(), GetFormat()),
-                                                   clear_color, 1, &range);
-            } else {
-                VkClearColorValue clear_color[1];
-                clear_color[0].float32[0] = 0.0f;
-                clear_color[0].float32[1] = 0.0f;
-                clear_color[0].float32[2] = 0.0f;
-                clear_color[0].float32[3] = 0.0f;
-                ToBackend(GetDevice())
-                    ->fn.CmdClearColorImage(commands, GetHandle(),
-                                            VulkanImageLayout(GetUsage(), GetFormat()), clear_color,
-                                            1, &range);
-            }
-            SetIsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                               layerCount);
+        TransitionUsageNow(commands, dawn::TextureUsageBit::TransferDst);
+        if (TextureFormatHasDepthOrStencil(GetFormat())) {
+            VkClearDepthStencilValue clear_color[1];
+            clear_color[0].depth = 0.0f;
+            clear_color[0].stencil = 0u;
+            ToBackend(GetDevice())
+                ->fn.CmdClearDepthStencilImage(commands, GetHandle(),
+                                               VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, clear_color, 1,
+                                               &range);
+        } else {
+            VkClearColorValue clear_color[1];
+            clear_color[0].float32[0] = 0.0f;
+            clear_color[0].float32[1] = 0.0f;
+            clear_color[0].float32[2] = 0.0f;
+            clear_color[0].float32[3] = 0.0f;
+            ToBackend(GetDevice())
+                ->fn.CmdClearColorImage(commands, GetHandle(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                                        clear_color, 1, &range);
         }
+        SetIsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer, layerCount);
     }
 
     void Texture::EnsureSubresourceContentInitialized(VkCommandBuffer commands,
@@ -453,6 +449,9 @@ namespace dawn_native { namespace vulkan {
                                                       uint32_t levelCount,
                                                       uint32_t baseArrayLayer,
                                                       uint32_t layerCount) {
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            return;
+        }
         if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
                                              layerCount)) {
             // If subresource has not been initialized, clear it to black as it could contain dirty

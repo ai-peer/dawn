@@ -169,7 +169,7 @@ namespace dawn_native { namespace vulkan {
                 RenderPassCacheQuery query;
 
                 for (uint32_t i : IterateBitSet(renderPass->colorAttachmentsSet)) {
-                    const auto& attachmentInfo = renderPass->colorAttachments[i];
+                    auto& attachmentInfo = renderPass->colorAttachments[i];
                     bool hasResolveTarget = attachmentInfo.resolveTarget.Get() != nullptr;
 
                     dawn::LoadOp loadOp = attachmentInfo.loadOp;
@@ -179,14 +179,30 @@ namespace dawn_native { namespace vulkan {
                             attachmentInfo.view->GetBaseArrayLayer(), 1)) {
                         loadOp = dawn::LoadOp::Clear;
                     }
+                    TextureView* view = ToBackend(attachmentInfo.view.Get());
+                    switch (attachmentInfo.storeOp) {
+                        case dawn::StoreOp::Store: {
+                            attachmentInfo.view->GetTexture()->SetIsSubresourceContentInitialized(
+                                view->GetBaseMipLevel(), view->GetLevelCount(),
+                                view->GetBaseArrayLayer(), view->GetLayerCount());
+                        } break;
+
+                        default: { UNREACHABLE(); } break;
+                    }
 
                     query.SetColor(i, attachmentInfo.view->GetFormat(), loadOp, hasResolveTarget);
                 }
 
                 if (renderPass->hasDepthStencilAttachment) {
-                    const auto& attachmentInfo = renderPass->depthStencilAttachment;
+                    auto& attachmentInfo = renderPass->depthStencilAttachment;
                     query.SetDepthStencil(attachmentInfo.view->GetTexture()->GetFormat(),
                                           attachmentInfo.depthLoadOp, attachmentInfo.stencilLoadOp);
+                    ToBackend(attachmentInfo.view->GetTexture())
+                        ->EnsureSubresourceContentInitialized(
+                            commands, attachmentInfo.view->GetBaseMipLevel(),
+                            attachmentInfo.view->GetLevelCount(),
+                            attachmentInfo.view->GetBaseArrayLayer(),
+                            attachmentInfo.view->GetLayerCount());
                 }
 
                 query.SetSampleCount(renderPass->sampleCount);
@@ -553,20 +569,6 @@ namespace dawn_native { namespace vulkan {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
                     device->fn.CmdEndRenderPass(commands);
-                    for (uint32_t i : IterateBitSet(renderPassCmd->colorAttachmentsSet)) {
-                        auto& attachmentInfo = renderPassCmd->colorAttachments[i];
-                        TextureView* view = ToBackend(attachmentInfo.view.Get());
-                        switch (attachmentInfo.storeOp) {
-                            case dawn::StoreOp::Store: {
-                                attachmentInfo.view->GetTexture()
-                                    ->SetIsSubresourceContentInitialized(
-                                        view->GetBaseMipLevel(), view->GetLevelCount(),
-                                        view->GetBaseArrayLayer(), view->GetLayerCount());
-                            } break;
-
-                            default: { UNREACHABLE(); } break;
-                        }
-                    }
                     return;
                 } break;
 
