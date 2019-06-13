@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b17f983b_628956ac",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-13T21:57:46Z",
+      "side": 1,
+      "message": "I think this tuple is a little unwieldy, a local struct would probably be nicer (even though these fields are mostly apparent from their types).",
+      "range": {
+        "startLine": 208,
+        "startChar": 20,
+        "endLine": 211,
+        "endChar": 37
+      },
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf4e709_f3420e4a",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-13T21:57:46Z",
+      "side": 1,
+      "message": "nit: Could this be accomplished with CreateBufferMappedWithData(usage, {number}) at the call sites? (instead of 2 extra helpers)",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8394849_7ff5a2cc",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-13T21:57:46Z",
+      "side": 1,
+      "message": "uNit: could be initialized inline\n\nAlternatively, could probably be a std::optional\u003cdawn::CreateBufferMappedResult\u003e",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1cf6a7d_f28cb870",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-13T21:57:46Z",
+      "side": 1,
+      "message": "This is most likely a silly idea, but if there are a lot of duplicate tests between CreateBufferMapped and CreateBufferMappedAsync, could they be deduplicated?\n\nUnfortunately I can only think of 2 ugly ways to do this:\n- have a .inc file with all the tests, with a placeholder for the fixture or something, then have 2 test files\n\n  class CreateBufferMappedWithDataTests { dawn::CreateBufferMappedResult CreateBufferMappedWithData() { create buffer mapped } };\n  #define FIXTURE CreateBufferMappedWithDataTests\n  #include \"thing.inc\"\n\n  class CreateBufferMappedAsyncWithDataTests { dawn::CreateBufferMappedResult CreateBufferMappedWithData() { create buffer mapped async and wait } };\n  #define FIXTURE CreateBufferMappedAsyncWithDataTests\n  #include \"thing.inc\"\n\n- or try to parameterize it over the 2 versions with DAWN_INSTANTIATE_TEST somehow.",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
