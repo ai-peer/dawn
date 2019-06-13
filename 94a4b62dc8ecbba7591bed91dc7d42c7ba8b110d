@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca1cbfb2_82dcc5e9",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:18:23Z",
+      "side": 1,
+      "message": "This should also check for unordered access no? Overall it would be good to have the exact data rom the link\u0027s table somewhere even if it contains usages irrelevant for buffers, just so we forget nothing.\n\nAlso it would be good if the comment explained something like \"Buffers in the COMMON state can be implicitly promoted to multiple read usages or a single write usage without a barrier. This is because the COMMON state represents a state where all previous writes to the buffers are completed and visible to all parts of the GPU so it can be instantly used for most usages.\".",
+      "revId": "94a4b62dc8ecbba7591bed91dc7d42c7ba8b110d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ffe2c4e_00d867ea",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:18:23Z",
+      "side": 1,
+      "message": "Could this be next to the code for promotion? It doesn\u0027t seem used outside of d3d12::Texture",
+      "revId": "94a4b62dc8ecbba7591bed91dc7d42c7ba8b110d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "906ea604_f705fca9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:18:23Z",
+      "side": 1,
+      "message": "ditto for having data from the table somewhere. And a comment except this time \"COMMON state represents a texture where all previous writes are complete, visible to all parts of the GPU and where pixels are decompressed (no \"frambuffer compression\")\"",
+      "revId": "94a4b62dc8ecbba7591bed91dc7d42c7ba8b110d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15a01e70_06dcf17f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:18:23Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "94a4b62dc8ecbba7591bed91dc7d42c7ba8b110d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
