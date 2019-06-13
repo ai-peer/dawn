@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ebd3833_952c1ddc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:31:12Z",
+      "side": 1,
+      "message": "This could be moved right after the declaration of attachmentInfo and code simplified inside the loop to use \"view\" instead of \"attachmentInfo.view\". I assume the same comment applies to the Vulkan CL too.",
+      "revId": "fca3aa6e4b9f260da0193ddf4043c0bc4e914596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ab8302c_6466bf66",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:31:12Z",
+      "side": 1,
+      "message": "This branch can be taken even if one of stencil or depth isn\u0027t cleared. We\u0027ll need to make sure we have tests for all these cases.",
+      "revId": "fca3aa6e4b9f260da0193ddf4043c0bc4e914596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
