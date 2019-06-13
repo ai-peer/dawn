@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1f3568f2_2e218033",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:28:16Z",
+      "side": 1,
+      "message": "Ditto from the D3D12 CL this can be moved on top of the loop and code simplified a bit.",
+      "revId": "b37f9ac360718216dc8d46d9fc5220a4069e6254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "32138536_1291221f",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 1
@@ -13,6 +30,24 @@
       "writtenOn": "2019-06-12T20:42:08Z",
       "side": 1,
       "message": "Can we have test for this?",
+      "revId": "b37f9ac360718216dc8d46d9fc5220a4069e6254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "878aa377_5e220d39",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T12:28:16Z",
+      "side": 1,
+      "message": "Also right now this doesn\u0027t check if there is a clear op for one of them or not. We should clear the depth or stencil or both depending on the load ops. This is turning out bigger than just this CL so we could have the test + fixes in a CL after D3D12 if you want.",
+      "parentUuid": "32138536_1291221f",
       "revId": "b37f9ac360718216dc8d46d9fc5220a4069e6254",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
