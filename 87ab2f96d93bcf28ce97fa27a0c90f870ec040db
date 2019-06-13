@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53f163e1_413ddd58",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 0,
+      "message": "nit: Can we leave the check for overflow comment?",
+      "revId": "87ab2f96d93bcf28ce97fa27a0c90f870ec040db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

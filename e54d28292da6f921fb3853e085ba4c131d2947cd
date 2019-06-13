@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31d6eb46_96116fc0",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 1,
+      "message": "This should be blockHeightInTexels",
+      "range": {
+        "startLine": 213,
+        "startChar": 63,
+        "endLine": 213,
+        "endChar": 81
+      },
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c6bc681_123e7601",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 1,
+      "message": "Note: at some point we\u0027ll want texture::GetFormat to return something like angle\u0027s InternalFormat structure so that we don\u0027t need to go through switch statements everywhere. https://cs.chromium.org/chromium/src/third_party/angle/src/libANGLE/formatutils.h?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d80",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50adc94f_1adcf28e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 1,
+      "message": "nit: This could also use BlockHeightInTexels",
+      "range": {
+        "startLine": 245,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 43
+      },
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e723d45_f0bdfb38",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 1,
+      "message": "nit: these two could use BlockWidth/HeightInTexels",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d91dbac_5a8fe4ac",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 1,
+      "message": "Ditto",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d59dd5e_1216ac02",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure if the splitter will work correctly for compressed texture, can you check? (not necessary for this CL)",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62ab55a5_af529de4",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-13T09:58:42Z",
+      "side": 1,
+      "message": "nit: Can we test rowpitch \u003d\u003d 0 with a texture size that makes it so the computed rowpitch isn\u0027t a multiple of 256?",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
