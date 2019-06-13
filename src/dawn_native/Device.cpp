@@ -290,6 +290,20 @@ namespace dawn_native {
 
         return result;
     }
+    void DeviceBase::CreateBufferMappedAsync(const BufferDescriptor* descriptor,
+                                             dawn::BufferCreateMappedCallback callback,
+                                             void* userdata) {
+        DawnCreateBufferMappedResult result = CreateBufferMapped(descriptor);
+
+        DawnBufferMapAsyncStatus status = DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS;
+        if (result.data == nullptr || result.dataLength != descriptor->size) {
+            status = DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR;
+        }
+
+        // The callback is deferred so it matches the async behavior of WebGPU.
+        mDeferredCreateBufferMappedAsyncResults.push_back(
+            std::make_tuple(callback, status, result, userdata));
+    }
     CommandEncoderBase* DeviceBase::CreateCommandEncoder() {
         return new CommandEncoderBase(this);
     }
@@ -386,6 +400,17 @@ namespace dawn_native {
 
     void DeviceBase::Tick() {
         TickImpl();
+        {
+            dawn::BufferCreateMappedCallback callback;
+            DawnBufferMapAsyncStatus status;
+            DawnCreateBufferMappedResult result;
+            void* userdata;
+            for (const auto& entry : mDeferredCreateBufferMappedAsyncResults) {
+                std::tie(callback, status, result, userdata) = entry;
+                callback(status, result, userdata);
+            }
+            mDeferredCreateBufferMappedAsyncResults.clear();
+        }
         mFenceSignalTracker->Tick(GetCompletedCommandSerial());
     }
 
