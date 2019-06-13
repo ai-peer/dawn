@@ -385,7 +385,7 @@ namespace dawn_native { namespace opengl {
                     glBindTexture(target, texture->GetHandle());
 
                     glPixelStorei(GL_UNPACK_ROW_LENGTH,
-                                  src.rowPitch / TextureFormatPixelSize(texture->GetFormat()));
+                                  src.rowPitch / TextureFormatTexelBlockSizeInBytes(texture->GetFormat()));
                     glPixelStorei(GL_UNPACK_IMAGE_HEIGHT, src.imageHeight);
                     switch (texture->GetDimension()) {
                         case dawn::TextureDimension::e2D:
@@ -447,7 +447,7 @@ namespace dawn_native { namespace opengl {
 
                     glBindBuffer(GL_PIXEL_PACK_BUFFER, buffer->GetHandle());
                     glPixelStorei(GL_PACK_ROW_LENGTH,
-                                  dst.rowPitch / TextureFormatPixelSize(texture->GetFormat()));
+                                  dst.rowPitch / TextureFormatTexelBlockSizeInBytes(texture->GetFormat()));
                     glPixelStorei(GL_PACK_IMAGE_HEIGHT, dst.imageHeight);
                     ASSERT(copySize.depth == 1 && src.origin.z == 0);
                     void* offset = reinterpret_cast<void*>(static_cast<uintptr_t>(dst.offset));
