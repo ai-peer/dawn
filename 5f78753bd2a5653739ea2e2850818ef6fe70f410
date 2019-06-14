@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1bf37a25_38db8681",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T17:12:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b408eb7_5c616ff4",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b17f983b_628956ac",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a9d9f9a_4eb106a5",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T17:12:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b17f983b_628956ac",
+      "range": {
+        "startLine": 208,
+        "startChar": 20,
+        "endLine": 211,
+        "endChar": 37
+      },
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "f2e2cc8a_c0550ad5",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T17:12:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e6ed564_59751d06",
+      "range": {
+        "startLine": 252,
+        "startChar": 11,
+        "endLine": 252,
+        "endChar": 22
+      },
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaf4e709_f3420e4a",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 2
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "98bb31b5_dd4d1a6b",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T17:12:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaf4e709_f3420e4a",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8394849_7ff5a2cc",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 2
@@ -96,6 +180,24 @@
       "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df248505_980bec84",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T17:12:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8394849_7ff5a2cc",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +236,24 @@
     },
     {
       "key": {
+        "uuid": "7d04fd9b_d315d6c5",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T17:12:09Z",
+      "side": 1,
+      "message": "Yea, this seems pretty hard to do without sacrificing readability :/",
+      "parentUuid": "d40db3cc_c9ac0f24",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68b767fc_cd174526",
         "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
         "patchSetId": 2
@@ -148,6 +268,24 @@
       "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c33a0846_85ddf7c6",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T17:12:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68b767fc_cd174526",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
