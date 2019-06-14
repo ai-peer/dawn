@@ -254,6 +254,24 @@
     },
     {
       "key": {
+        "uuid": "cdfb8198_c3a50de3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-14T08:39:48Z",
+      "side": 1,
+      "message": "Ok, let\u0027s make a note of that somewhere, maybe on the bug and address some time in the CL chain for backend implementation, no need to do it now.",
+      "parentUuid": "ad3aea86_520185be",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62ab55a5_af529de4",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 6
