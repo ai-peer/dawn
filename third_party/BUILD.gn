@@ -15,6 +15,7 @@
 import("../scripts/dawn_overrides_with_defaults.gni")
 import("../scripts/dawn_features.gni")
 import("//build_overrides/build.gni")
+import("//build_overrides/vulkan_validation_layers.gni")
 
 is_msvc = is_win && !is_clang
 
@@ -140,6 +141,15 @@ source_set("vulkan_headers") {
   ]
 
   public_configs = [ ":vulkan_headers_public" ]
+}
+
+# Vulkan validation layers
+config("vulkan_validation_layers_config") {
+  abs_vulkan_data_dir = rebase_path("$root_out_dir/$vulkan_data_subdir")
+  defines = [
+    "DAWN_ENABLE_VULKAN_VALIDATION_LAYERS",
+    "DAWN_VK_DATA_DIR=\"$abs_vulkan_data_dir\"",
+  ]
 }
 
 ###############################################################################
