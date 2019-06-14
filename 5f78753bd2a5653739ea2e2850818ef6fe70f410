@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "3b408eb7_5c616ff4",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-14T09:10:45Z",
+      "side": 1,
+      "message": "nit: Can we check this is empty in the destructor?",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b17f983b_628956ac",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 2
@@ -18,6 +35,29 @@
         "startChar": 20,
         "endLine": 211,
         "endChar": 37
+      },
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e6ed564_59751d06",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-14T09:10:45Z",
+      "side": 1,
+      "message": "nit: CheckResultStartsZeroed?",
+      "range": {
+        "startLine": 252,
+        "startChar": 11,
+        "endLine": 252,
+        "endChar": 22
       },
       "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -70,6 +110,41 @@
       "writtenOn": "2019-06-13T21:57:46Z",
       "side": 1,
       "message": "This is most likely a silly idea, but if there are a lot of duplicate tests between CreateBufferMapped and CreateBufferMappedAsync, could they be deduplicated?\n\nUnfortunately I can only think of 2 ugly ways to do this:\n- have a .inc file with all the tests, with a placeholder for the fixture or something, then have 2 test files\n\n  class CreateBufferMappedWithDataTests { dawn::CreateBufferMappedResult CreateBufferMappedWithData() { create buffer mapped } };\n  #define FIXTURE CreateBufferMappedWithDataTests\n  #include \"thing.inc\"\n\n  class CreateBufferMappedAsyncWithDataTests { dawn::CreateBufferMappedResult CreateBufferMappedWithData() { create buffer mapped async and wait } };\n  #define FIXTURE CreateBufferMappedAsyncWithDataTests\n  #include \"thing.inc\"\n\n- or try to parameterize it over the 2 versions with DAWN_INSTANTIATE_TEST somehow.",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d40db3cc_c9ac0f24",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-14T09:10:45Z",
+      "side": 1,
+      "message": "In the JS CTS it should be much easier to do this,but yeah I\u0027m not sure how to do it nicely here.",
+      "parentUuid": "f1cf6a7d_f28cb870",
+      "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68b767fc_cd174526",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-14T09:10:45Z",
+      "side": 1,
+      "message": "nit: comment doesn\u0027t match the code",
       "revId": "5f78753bd2a5653739ea2e2850818ef6fe70f410",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
