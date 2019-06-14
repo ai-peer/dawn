@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee76e0c_7bb0d359",
+        "filename": "src/dawn_native/opengl/OpenGLBackend.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T13:16:50Z",
+      "side": 1,
+      "message": "nit: The OpenGL swapchain implementation doesn\u0027t use this. I\u0027m okay setting it for consistency.",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 58
+      },
+      "revId": "197ff11377cb0b616c5c2ac64a7dc452751ebf98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
