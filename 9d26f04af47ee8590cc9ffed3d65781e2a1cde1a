@@ -354,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "9ea51bc7_08e9454d",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69df178b_7f55605b",
+      "range": {
+        "startLine": 1019,
+        "startChar": 26,
+        "endLine": 1019,
+        "endChar": 62
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ef06060_899f5700",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 2
@@ -433,6 +457,30 @@
       "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adf17316_c83dd14f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f10b0555_4d1236d1",
+      "range": {
+        "startLine": 1027,
+        "startChar": 85,
+        "endLine": 1027,
+        "endChar": 86
+      },
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -585,6 +633,24 @@
       "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d28aee38_941ca0bd",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e9817f3a_e3c9e257",
+      "revId": "9d26f04af47ee8590cc9ffed3d65781e2a1cde1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

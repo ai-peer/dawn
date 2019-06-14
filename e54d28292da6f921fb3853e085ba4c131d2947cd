@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f8b8b8f3_101d6b29",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31d6eb46_96116fc0",
+      "range": {
+        "startLine": 213,
+        "startChar": 63,
+        "endLine": 213,
+        "endChar": 81
+      },
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c6bc681_123e7601",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65310c38_1707e257",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Ack\nI have added a TODO at Texture::GetFormat() for this issue.",
+      "parentUuid": "6c6bc681_123e7601",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "0bb0c94e_e98bd4ba",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50adc94f_1adcf28e",
+      "range": {
+        "startLine": 245,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 43
+      },
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e723d45_f0bdfb38",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 6
@@ -79,6 +145,24 @@
       "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ce5e3bf_8f2abd3d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e723d45_f0bdfb38",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "71ab41ff_1cfe95ef",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d91dbac_5a8fe4ac",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d59dd5e_1216ac02",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -110,6 +212,24 @@
       "writtenOn": "2019-06-13T09:58:42Z",
       "side": 1,
       "message": "nit: I\u0027m not sure if the splitter will work correctly for compressed texture, can you check? (not necessary for this CL)",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0e47bca_633308ae",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "I think you don\u0027t need to worry about this because I had done some experiments before I started writing this patch:\nhttps://dawn-review.googlesource.com/c/dawn/+/7740\n\nIf we could support submitting a patch chain like ANGLE then I could rebase that patch and run the end2end tests for you.",
+      "parentUuid": "8d59dd5e_1216ac02",
       "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -130,6 +250,24 @@
       "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e1bb695_67ab743a",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-14T04:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62ab55a5_af529de4",
+      "revId": "e54d28292da6f921fb3853e085ba4c131d2947cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
