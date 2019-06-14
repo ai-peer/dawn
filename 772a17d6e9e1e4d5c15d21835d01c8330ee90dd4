@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39db9b15_5e97e403",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-14T13:33:05Z",
+      "side": 1,
+      "message": "Compressed texture formats are padded so if the copy covers the entire texture, then I believe it\u0027s valid even if the size is not a multiple of the block size.\n\nVulkan: \"If extent.width is not a multiple of the compressed texel block width, then (extent.width + srcOffset.x) must equal the image subresource width\"\nhttps://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdCopyImage.html\n\nD3D12: Would use CopyResource which doesn\u0027t have texture layout / size restrictions\n\nMetal: Not sure, where to find this information.\n\nOpenGL: \"\u003cwidth\u003e is not a multiple of four, \u003cwidth\u003e plus \u003cxoffset\u003e is not\n          equal to TEXTURE_WIDTH, and either \u003cxoffset\u003e or \u003cyoffset\u003e is\n          non-zero;\" (is a validation error)\nhttps://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_compression_rgtc.txt\n(I\u0027m pretty sure all of the other compressed texture extensions have similar language)",
+      "range": {
+        "startLine": 1026,
+        "startChar": 30,
+        "endLine": 1026,
+        "endChar": 50
+      },
+      "revId": "772a17d6e9e1e4d5c15d21835d01c8330ee90dd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
