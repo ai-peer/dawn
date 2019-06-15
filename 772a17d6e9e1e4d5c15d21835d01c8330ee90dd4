@@ -22,6 +22,30 @@
       "revId": "772a17d6e9e1e4d5c15d21835d01c8330ee90dd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "858fc1af_1611d6af",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-15T03:08:05Z",
+      "side": 1,
+      "message": "I think in WebGPU we cannot support creating a texture in BC formats with any of its dimensions not a multiple of 4 at all because it is not allowed in D3D:\n\"https://docs.microsoft.com/en-us/windows/desktop/direct3d10/d3d10-graphics-programming-guide-resources-block-compression\" mentions \"A block-compressed texture must be created as a multiple of size 4 in all dimensions\".\n\nAs all the dimensions in Origin must be multiple of 4, and all the dimensions of a texture in BC format must be multiple of 4, the dimensions in Extent must also be multiple of 4 if you want \"(extent.width + srcOffset.x) must equal the image subresource width\".",
+      "parentUuid": "39db9b15_5e97e403",
+      "range": {
+        "startLine": 1026,
+        "startChar": 30,
+        "endLine": 1026,
+        "endChar": 50
+      },
+      "revId": "772a17d6e9e1e4d5c15d21835d01c8330ee90dd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
