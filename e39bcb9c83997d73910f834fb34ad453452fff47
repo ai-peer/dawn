@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "1bd7935f_98fabda1",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-15T02:19:27Z",
+      "side": 1,
+      "message": "uNit: \"For example\", \"Some examples\", \"Here are some examples\"",
+      "range": {
+        "startLine": 50,
+        "startChar": 10,
+        "endLine": 50,
+        "endChar": 26
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2846e888_7cf1a0b9",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-15T02:19:27Z",
+      "side": 1,
+      "message": "uNit: This language is also confusing",
+      "range": {
+        "startLine": 55,
+        "startChar": 10,
+        "endLine": 55,
+        "endChar": 46
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a297150_24ffe812",
         "filename": "generator/opengl_loader_generator.py",
         "patchSetId": 2
