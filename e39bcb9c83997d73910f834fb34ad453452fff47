@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a297150_24ffe812",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-15T00:45:33Z",
+      "side": 1,
+      "message": "nit: is \u0027\u0027\u0027 needed?",
+      "range": {
+        "startLine": 73,
+        "startChar": 37,
+        "endLine": 73,
+        "endChar": 40
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "187b4b9b_79e471e7",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-15T00:45:33Z",
+      "side": 1,
+      "message": "nit: extra space",
+      "range": {
+        "startLine": 126,
+        "startChar": 47,
+        "endLine": 126,
+        "endChar": 48
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08fc0b9a_1d51b7fb",
+        "filename": "generator/templates/opengl/opengl_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-15T00:45:33Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
