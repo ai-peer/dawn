@@ -22,6 +22,30 @@
       "revId": "197ff11377cb0b616c5c2ac64a7dc452751ebf98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4440a52c_3edbb726",
+        "filename": "src/dawn_native/opengl/OpenGLBackend.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-17T08:22:46Z",
+      "side": 1,
+      "message": "I\u0027ll keep this for now. In the future we\u0027ll want to replicate the Web API for native Windows and rewrite all our swapchain code anyway and this usage will disappear.",
+      "parentUuid": "eee76e0c_7bb0d359",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 58
+      },
+      "revId": "197ff11377cb0b616c5c2ac64a7dc452751ebf98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
