@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5e662aa9_9b2a0dde",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-17T09:07:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bd7935f_98fabda1",
+      "range": {
+        "startLine": 50,
+        "startChar": 10,
+        "endLine": 50,
+        "endChar": 26
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2846e888_7cf1a0b9",
         "filename": "generator/opengl_loader_generator.py",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "003ff3cf_8f01e738",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-17T09:07:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2846e888_7cf1a0b9",
+      "range": {
+        "startLine": 55,
+        "startChar": 10,
+        "endLine": 55,
+        "endChar": 46
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "3133bd09_dd4107cf",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-17T09:07:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a297150_24ffe812",
+      "range": {
+        "startLine": 73,
+        "startChar": 37,
+        "endLine": 73,
+        "endChar": 40
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "187b4b9b_79e471e7",
         "filename": "generator/opengl_loader_generator.py",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "e73c1ed3_e075ad7c",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-17T09:07:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "187b4b9b_79e471e7",
+      "range": {
+        "startLine": 126,
+        "startChar": 47,
+        "endLine": 126,
+        "endChar": 48
+      },
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08fc0b9a_1d51b7fb",
         "filename": "generator/templates/opengl/opengl_platform.h",
         "patchSetId": 2
@@ -108,6 +204,24 @@
       "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "740bc7a4_99c83c1a",
+        "filename": "generator/templates/opengl/opengl_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-17T09:07:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08fc0b9a_1d51b7fb",
+      "revId": "e39bcb9c83997d73910f834fb34ad453452fff47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
