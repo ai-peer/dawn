@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edb6b02f_dec6e3d7",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-17T20:42:57Z",
+      "side": 1,
+      "message": "I am unsure how this clearDepth value works alongside with the CmdClearDepthStencilImage\u0027s clear_color field.",
+      "revId": "b0aa68e6a9f034755e411f9f7fd67cb0cd29d187",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
