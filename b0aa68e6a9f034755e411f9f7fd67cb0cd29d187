@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "e413183a_1413b367",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-18T14:42:37Z",
+      "side": 1,
+      "message": "We need to do this only the depthLoadOp and stencilLoadOp aren\u0027t both Clear.",
+      "revId": "b0aa68e6a9f034755e411f9f7fd67cb0cd29d187",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3521cb1_a510847a",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-18T14:42:37Z",
+      "side": 1,
+      "message": "This will be used in a single test, can it be inline in the test case?",
+      "revId": "b0aa68e6a9f034755e411f9f7fd67cb0cd29d187",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edb6b02f_dec6e3d7",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -13,6 +47,24 @@
       "writtenOn": "2019-06-17T20:42:57Z",
       "side": 1,
       "message": "I am unsure how this clearDepth value works alongside with the CmdClearDepthStencilImage\u0027s clear_color field.",
+      "revId": "b0aa68e6a9f034755e411f9f7fd67cb0cd29d187",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b487f952_46ce2bb0",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-18T14:42:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand the question. Here for testing you want to use dawn::LoadOp::Load because otherwise Clear will initialize the texture. What you want is the following:\n\n - Have a test that Loads the depth and checks that it is correctly 0 (by rendering a triangle with depth test Equal and at depth 0)\n - Have a test that Loads the stencil and checks that it is correctly 0 (by rendering a triangle with stencil test Equal and reference stencil 0)",
+      "parentUuid": "edb6b02f_dec6e3d7",
       "revId": "b0aa68e6a9f034755e411f9f7fd67cb0cd29d187",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
