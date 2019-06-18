@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "286cb3f2_748dc3ab",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-18T07:56:46Z",
+      "side": 1,
+      "message": "Oh wow I didn\u0027t know that these were unavailable in D3D12. This warrants removing them from WebGPU. Opened https://github.com/gpuweb/gpuweb/issues/332\n\nCan you add a TODO that this is required temporarily but should be removed once WebGPU requires there is no gl_PointSize builtin?\n\n+cc Ryan and David for programming model issue.",
+      "revId": "366606ce3e6d2b07ed0ef28956fdf4df9bad9e47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1205edde_2aea0dcf",
+        "filename": "src/tests/end2end/PrimitiveTopologyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-18T07:56:46Z",
+      "side": 1,
+      "message": "Can the shader module always have gl_PointSize \u003d 1.0 so we don\u0027t have to dynamically choose one or does it trigger some other validation error?",
+      "revId": "366606ce3e6d2b07ed0ef28956fdf4df9bad9e47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d68ca334_27a70d02",
+        "filename": "src/tests/end2end/PrimitiveTopologyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-18T07:56:46Z",
+      "side": 1,
+      "message": "This ternary would disappear.",
+      "revId": "366606ce3e6d2b07ed0ef28956fdf4df9bad9e47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
