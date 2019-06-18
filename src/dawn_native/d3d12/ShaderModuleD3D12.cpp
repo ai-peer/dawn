@@ -42,6 +42,9 @@ namespace dawn_native { namespace d3d12 {
 
         spirv_cross::CompilerHLSL::Options options_hlsl;
         options_hlsl.shader_model = 51;
+        // PointCoord and PointSize are not supported in HLSL
+        options_hlsl.point_coord_compat = true;
+        options_hlsl.point_size_compat = true;
         compiler.set_hlsl_options(options_hlsl);
 
         const ModuleBindingInfo& moduleBindingInfo = GetBindingInfo();

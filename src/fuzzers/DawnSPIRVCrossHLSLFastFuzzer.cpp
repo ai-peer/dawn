@@ -32,6 +32,8 @@ namespace {
             // Using the options that are used by Dawn, they appear in ShaderModuleD3D12.cpp
             options.SetFlipVertY(true);
             options.SetShaderModel(51);
+            options.SetHLSLPointCoordCompat(true);
+            options.SetHLSLPointSizeCompat(true);
             compiler.CompileSpvToHlsl(input.data(), input.size(), options);
         });
 
