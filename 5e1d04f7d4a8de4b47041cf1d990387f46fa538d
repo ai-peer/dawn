@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5943be23_4311a5a8",
+        "filename": "scripts/roll-shaderc-deps.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-18T23:46:42Z",
+      "side": 1,
+      "message": "Maybe could be slightly clearer... \"This script assumes that its directory\u0027s parent is the repo root.\"?",
+      "revId": "5e1d04f7d4a8de4b47041cf1d990387f46fa538d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97c70514_eb6f4b79",
+        "filename": "scripts/roll-shaderc-deps.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-18T23:46:42Z",
+      "side": 1,
+      "message": "would it work to just compute this as\n\n  repo_path\u003d$(dirname \"$0\")/..\n\n?",
+      "revId": "5e1d04f7d4a8de4b47041cf1d990387f46fa538d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c955b8c1_99a60427",
+        "filename": "scripts/roll-shaderc-deps.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-18T23:46:42Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "range": {
+        "startLine": 25,
+        "startChar": 37,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "5e1d04f7d4a8de4b47041cf1d990387f46fa538d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5df30e72_1af65cbe",
+        "filename": "scripts/roll-shaderc-deps.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-18T23:46:42Z",
+      "side": 1,
+      "message": "nit: cd is a no-op if this fails, so the condition isn\u0027t really needed.",
+      "revId": "5e1d04f7d4a8de4b47041cf1d990387f46fa538d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7add71b_7d9cbc7b",
+        "filename": "scripts/roll-shaderc-deps.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-18T23:46:42Z",
+      "side": 1,
+      "message": "I don\u0027t think it should be necessary to cd back to the original working directory. It only affects the rest of the commands inside this script (of which there are none).\n\nThen you don\u0027t need to save off pwd_path.",
+      "revId": "5e1d04f7d4a8de4b47041cf1d990387f46fa538d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
