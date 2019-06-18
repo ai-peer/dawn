@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6fdc1c76_40f98df1",
+        "filename": "scripts/roll-shaderc-deps",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-06-18T21:06:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b661701e_163f33e5",
+      "revId": "5bf7b8a7a08ba05583cc5a9af5ec326882fda8f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "613b3236_1ff839a0",
         "filename": "scripts/roll-shaderc-deps",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "5bf7b8a7a08ba05583cc5a9af5ec326882fda8f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2bb556e_9903f1f6",
+        "filename": "scripts/roll-shaderc-deps",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-06-18T21:06:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "613b3236_1ff839a0",
+      "revId": "5bf7b8a7a08ba05583cc5a9af5ec326882fda8f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
