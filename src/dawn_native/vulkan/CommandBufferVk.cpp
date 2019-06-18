@@ -51,7 +51,7 @@ namespace dawn_native { namespace vulkan {
             region.bufferOffset = bufferCopy.offset;
             // In Vulkan the row length is in texels while it is in bytes for Dawn
             region.bufferRowLength =
-                bufferCopy.rowPitch / TextureFormatTexelBlockSizeInBytes(texture->GetFormat());
+                bufferCopy.rowPitch / texture->GetFormat().blockByteSize;
             region.bufferImageHeight = bufferCopy.imageHeight;
 
             region.imageSubresource.aspectMask = texture->GetVkAspectMask();
@@ -180,12 +180,12 @@ namespace dawn_native { namespace vulkan {
                         loadOp = dawn::LoadOp::Clear;
                     }
 
-                    query.SetColor(i, attachmentInfo.view->GetFormat(), loadOp, hasResolveTarget);
+                    query.SetColor(i, attachmentInfo.view->GetFormat().format, loadOp, hasResolveTarget);
                 }
 
                 if (renderPass->hasDepthStencilAttachment) {
                     const auto& attachmentInfo = renderPass->depthStencilAttachment;
-                    query.SetDepthStencil(attachmentInfo.view->GetTexture()->GetFormat(),
+                    query.SetDepthStencil(attachmentInfo.view->GetTexture()->GetFormat().format,
                                           attachmentInfo.depthLoadOp, attachmentInfo.stencilLoadOp);
                 }
 
