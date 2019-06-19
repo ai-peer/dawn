@@ -19,6 +19,8 @@
 #include <dxgi1_4.h>
 #include <wrl.h>
 
+#include <DXProgrammableCapture.h>
+
 #include <dxgidebug.h>
 
 using Microsoft::WRL::ComPtr;
