@@ -16,6 +16,58 @@
       "revId": "1ed5307697704748674cc9b8b24105fc7ae644ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7becc25_c3ab1016",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T14:32:45Z",
+      "side": 1,
+      "message": "I think it is a great idea, and why I added the TODOs at [1] and [2]. Instead of doing it statically like ANGLE we should take advantage of the fact that we have devices. But otherwise yes!",
+      "parentUuid": "ff75a0aa_0dd8eaa1",
+      "revId": "1ed5307697704748674cc9b8b24105fc7ae644ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "580dd230_dae0e889",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T14:32:45Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1ed5307697704748674cc9b8b24105fc7ae644ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10f6c47b_f8cd9d44",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T14:32:45Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "1ed5307697704748674cc9b8b24105fc7ae644ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
