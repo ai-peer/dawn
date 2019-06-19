@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e59efa7_74598c9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:30:36Z",
+      "side": 1,
+      "message": "nit: BUG\u003d, we could reuse the PIX bug. We could also update docs/DebugMarkers.md to explain how to use the new flag.",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1dbf89d_a1282db8",
+        "filename": "src/dawn_native/Instance.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:30:36Z",
+      "side": 1,
+      "message": "note: I was wondering if this was D3D12 specific or not and concluded it would probably be useful on Vulkan too.",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d7d81c1_bd6bbcc2",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:30:36Z",
+      "side": 1,
+      "message": "This reference is removed at the end of this block so graphicsAnalysis should be destroyed. Do we need to keep it around?",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33a50679_ab438cc0",
+        "filename": "src/dawn_native/d3d12/d3d12_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:30:36Z",
+      "side": 1,
+      "message": "nit: all system includes can be in one block",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d207d6f6_b48e8b01",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:30:36Z",
+      "side": 1,
+      "message": "nit: (defaults to disabled)",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
