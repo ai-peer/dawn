@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b79ed0b_d807e39d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T15:43:00Z",
+      "side": 1,
+      "message": "Can we have a BUG id?",
+      "revId": "8a41f2ff93bc6d768ee1f546e0604d11b07fcb51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
