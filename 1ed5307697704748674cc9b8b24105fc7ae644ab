@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff75a0aa_0dd8eaa1",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-19T13:53:17Z",
+      "side": 1,
+      "message": "Note that ANGLE stores all the format information into an internalFormat-FormatInfo map in the first time and get the information by querying from the map later to avoid generating the struct Format again and again, so how do you think of this method?\n\nhttps://cs.chromium.org/chromium/src/third_party/angle/src/libANGLE/formatutils.cpp?l\u003d715",
+      "revId": "1ed5307697704748674cc9b8b24105fc7ae644ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
