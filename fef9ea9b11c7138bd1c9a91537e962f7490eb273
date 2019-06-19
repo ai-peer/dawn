@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f4d5abb_4a111b66",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:39:03Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think that\u0027s needed",
+      "revId": "fef9ea9b11c7138bd1c9a91537e962f7490eb273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf8b41f2_9d80d7c2",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:39:03Z",
+      "side": 1,
+      "message": "nit: here and for other tests: a comment that describes what is tested.",
+      "revId": "fef9ea9b11c7138bd1c9a91537e962f7490eb273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8131b0dc_38ff0a59",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-19T09:39:03Z",
+      "side": 1,
+      "message": "nit: can we explicitly initialize the stencil like is done for depth in StencilClear?",
+      "revId": "fef9ea9b11c7138bd1c9a91537e962f7490eb273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
