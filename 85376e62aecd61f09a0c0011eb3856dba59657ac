@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "149334a9_76811aac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-19T17:39:26Z",
+      "side": 1,
+      "message": "I presume by \"the PIX bug\", you mean bug 44. I\u0027ve added that to the change description.\n\nI\u0027ve also included a blurb about the flag in DebugMarkers.md. Thank you for the pointer.",
+      "parentUuid": "7e59efa7_74598c9a",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1dbf89d_a1282db8",
         "filename": "src/dawn_native/Instance.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21c2e6dc_3db6d576",
+        "filename": "src/dawn_native/Instance.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-19T17:39:26Z",
+      "side": 1,
+      "message": "I agree it would be useful for Vulkan.",
+      "parentUuid": "a1dbf89d_a1282db8",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "24c411a5_57edb052",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-19T17:39:26Z",
+      "side": 1,
+      "message": "No, we do not need to keep a reference to graphicsAnalysis around after the call to BeginCapture().",
+      "parentUuid": "0d7d81c1_bd6bbcc2",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33a50679_ab438cc0",
         "filename": "src/dawn_native/d3d12/d3d12_platform.h",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "acd6d2ff_f3b74345",
+        "filename": "src/dawn_native/d3d12/d3d12_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-19T17:39:26Z",
+      "side": 1,
+      "message": "The reason I put it here is because DXProgrammableCapture.h must go after d3d12.h or you\u0027ll get compiler errors.  However, \u0027git cl format\u0027 insists on moving it before d3d12.h because of the alphabet. To defeat it, I have to either put it in its own block or combine it with an existing block that comes after d3d12.h\n\ndxgidebug.h is already in a block by itself so I\u0027ve combined it with that one.",
+      "parentUuid": "33a50679_ab438cc0",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d207d6f6_b48e8b01",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
@@ -84,6 +156,24 @@
       "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "721f1a72_83be523b",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-19T17:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d207d6f6_b48e8b01",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
