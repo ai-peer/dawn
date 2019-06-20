@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdc47995_6ad10127",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-20T18:45:26Z",
+      "side": 1,
+      "message": "nit: I think this should assert the level and layer count are 1, since the loadOp code already assumed this",
+      "revId": "7318567d5073e97375e51b4252e082fb26cba7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f452239_e89dcf1b",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-20T18:45:26Z",
+      "side": 1,
+      "message": "nit: Level count and layer count should both be 1 here, right? (Looks like the code right above this assumes so.)\n\nLet\u0027s use 1s here to match.",
+      "range": {
+        "startLine": 185,
+        "startChar": 57,
+        "endLine": 185,
+        "endChar": 78
+      },
+      "revId": "7318567d5073e97375e51b4252e082fb26cba7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
