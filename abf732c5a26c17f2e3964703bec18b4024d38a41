@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c90cf559_425bf6c8",
+        "filename": "src/fuzzers/DawnSPIRVCrossHLSLFastFuzzer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-20T21:15:28Z",
+      "side": 1,
+      "message": "TODO to make sure we update this when we remove these options in ShaderModuleD3D12.cpp?",
+      "revId": "abf732c5a26c17f2e3964703bec18b4024d38a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
