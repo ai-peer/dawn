@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "a4ccdcc3_f31766bb",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-20T08:23:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "24c411a5_57edb052",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33a50679_ab438cc0",
         "filename": "src/dawn_native/d3d12/d3d12_platform.h",
         "patchSetId": 2
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "The reason I put it here is because DXProgrammableCapture.h must go after d3d12.h or you\u0027ll get compiler errors.  However, \u0027git cl format\u0027 insists on moving it before d3d12.h because of the alphabet. To defeat it, I have to either put it in its own block or combine it with an existing block that comes after d3d12.h\n\ndxgidebug.h is already in a block by itself so I\u0027ve combined it with that one.",
       "parentUuid": "33a50679_ab438cc0",
+      "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7b492ef_99ba7d8a",
+        "filename": "src/dawn_native/d3d12/d3d12_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-20T08:23:47Z",
+      "side": 1,
+      "message": "Thanks for the explanation, nit: can we have a comment that explains that? We should probably have put on for dxgidebug.h in the first place.",
+      "parentUuid": "acd6d2ff_f3b74345",
       "revId": "85376e62aecd61f09a0c0011eb3856dba59657ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
