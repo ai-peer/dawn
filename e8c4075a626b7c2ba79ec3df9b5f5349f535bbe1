@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "30ba42a3_3e91dc08",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-20T21:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b58b0568_19b132b9",
+      "range": {
+        "startLine": 617,
+        "startChar": 1,
+        "endLine": 641,
+        "endChar": 25
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8587d256_add54232",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -93,6 +117,30 @@
       "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84a125b6_89a973ab",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-20T21:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8587d256_add54232",
+      "range": {
+        "startLine": 658,
+        "startChar": 0,
+        "endLine": 661,
+        "endChar": 92
+      },
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -494,6 +542,24 @@
       "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "070edfb8_1d580735",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-20T21:27:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9061a8ce_160742eb",
+      "revId": "e8c4075a626b7c2ba79ec3df9b5f5349f535bbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
