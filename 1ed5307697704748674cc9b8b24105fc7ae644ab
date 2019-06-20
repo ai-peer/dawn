@@ -55,6 +55,23 @@
     },
     {
       "key": {
+        "uuid": "34c7a397_b2b38827",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-20T20:58:05Z",
+      "side": 1,
+      "message": "\u003d {}; so the rest of the struct is initialized",
+      "revId": "1ed5307697704748674cc9b8b24105fc7ae644ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "580dd230_dae0e889",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 5
