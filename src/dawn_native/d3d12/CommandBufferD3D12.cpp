@@ -402,7 +402,9 @@ namespace dawn_native { namespace d3d12 {
     }  // anonymous namespace
 
     CommandBuffer::CommandBuffer(Device* device, CommandEncoderBase* encoder)
-        : CommandBufferBase(device, encoder), mCommands(encoder->AcquireCommands()) {
+        : CommandBufferBase(device, encoder),
+          mCommands(encoder->AcquireCommands()),
+          mDevice(device) {
     }
 
     CommandBuffer::~CommandBuffer() {
@@ -427,8 +429,8 @@ namespace dawn_native { namespace d3d12 {
         }
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](ComPtr<ID3D12GraphicsCommandList> commandList,
-                                    const PassResourceUsage& usages) {
+        auto TransitionForPass = [device](ComPtr<ID3D12GraphicsCommandList> commandList,
+                                          const PassResourceUsage& usages) {
             std::vector<D3D12_RESOURCE_BARRIER> barriers;
 
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
@@ -438,15 +440,30 @@ namespace dawn_native { namespace d3d12 {
                     barriers.push_back(barrier);
                 }
                 ToBackend(usages.buffers[i])->SetUsage(usages.bufferUsages[i]);
+                ToBackend(usages.buffers[i])->SetNextDecaySerial(device->GetPendingCommandSerial());
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 D3D12_RESOURCE_BARRIER barrier;
-                if (ToBackend(usages.textures[i])
+                switch (
+                    ToBackend(usages.textures[i])
                         ->CreateD3D12ResourceBarrierIfNeeded(&barrier, usages.textureUsages[i])) {
-                    barriers.push_back(barrier);
+                    case TextureBarrierResult::ExplicitTransition:
+                        barriers.push_back(barrier);
+                        ToBackend(usages.textures[i])->SetUsage(usages.textureUsages[i]);
+                        ToBackend(usages.textures[i])->SetValidToDecay(false);
+                        break;
+                    case TextureBarrierResult::ImplicitTransition:
+                        ToBackend(usages.textures[i])->SetUsage(usages.textureUsages[i]);
+                        ToBackend(usages.textures[i])->SetValidToDecay(true);
+                        ToBackend(usages.textures[i])
+                            ->SetNextDecaySerial(device->GetPendingCommandSerial());
+                        break;
+                    case TextureBarrierResult::RedundantTransition:
+                        break;
+                    default:
+                        break;
                 }
-                ToBackend(usages.textures[i])->SetUsage(usages.textureUsages[i]);
             }
 
             if (barriers.size()) {

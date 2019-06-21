@@ -70,7 +70,7 @@ namespace dawn_native { namespace d3d12 {
     }  // namespace
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
-        : BufferBase(device, descriptor) {
+        : BufferBase(device, descriptor), mDevice(device) {
         D3D12_RESOURCE_DESC resourceDescriptor;
         resourceDescriptor.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
         resourceDescriptor.Alignment = 0;
@@ -129,6 +129,16 @@ namespace dawn_native { namespace d3d12 {
         }
 
         D3D12_RESOURCE_STATES lastState = D3D12BufferUsage(mLastUsage);
+
+        // All buffers used by a command list will implicitly decay to the COMMON state after the
+        // call to ExecuteCommandLists has completed. Whenever it is determined that a buffer will
+        // transition, we must record the serial on which the transition occurs. When that buffer
+        // is used again, the previously recorded serial must be compared to the last completed
+        // serial to determine if the buffer has implicity decayed to the common state.
+        if (mDevice->GetPendingCommandSerial() > mNextDecaySerial) {
+            lastState = D3D12_RESOURCE_STATE_COMMON;
+        }
+
         D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
 
         // The COMMON state represents a state where no write operations can be pending, which makes
@@ -173,6 +183,10 @@ namespace dawn_native { namespace d3d12 {
         return mResource;
     }
 
+    void Buffer::SetNextDecaySerial(uint32_t serial) {
+        mNextDecaySerial = serial;
+    }
+
     void Buffer::SetUsage(dawn::BufferUsageBit newUsage) {
         mLastUsage = newUsage;
     }
@@ -186,6 +200,7 @@ namespace dawn_native { namespace d3d12 {
         }
 
         mLastUsage = usage;
+        SetNextDecaySerial(mDevice->GetPendingCommandSerial());
     }
 
     D3D12_GPU_VIRTUAL_ADDRESS Buffer::GetVA() const {
