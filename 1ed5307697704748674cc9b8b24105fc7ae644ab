@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "753b66f7_13a0822f",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:06:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34c7a397_b2b38827",
+      "revId": "1ed5307697704748674cc9b8b24105fc7ae644ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "580dd230_dae0e889",
         "filename": "src/dawn_native/Texture.h",
         "patchSetId": 5
