@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "578adbe2_6879e9e1",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T14:31:17Z",
+      "side": 1,
+      "message": "This will become GetFormat().HasDepthOrStencil() after a recent refactor",
+      "revId": "b9c8c22a24fd4f094f3409181a984ed9a646d46c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
