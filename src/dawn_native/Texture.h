@@ -99,6 +99,10 @@ namespace dawn_native {
 
         bool IsMultisampledTexture() const;
 
+        void calculateTextureSizeByMipmapLevel(uint64_t level,
+                                               uint32_t* widthAtLevel,
+                                               uint32_t* heightAtLevel) const;
+
         // Dawn API
         TextureViewBase* CreateDefaultView();
         TextureViewBase* CreateView(const TextureViewDescriptor* descriptor);

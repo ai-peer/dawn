@@ -497,6 +497,23 @@ namespace dawn_native {
         return mSampleCount > 1;
     }
 
+    void TextureBase::calculateTextureSizeByMipmapLevel(uint64_t level,
+                                                        uint32_t* widthAtLevel,
+                                                        uint32_t* heightAtLevel) const {
+        *widthAtLevel = mSize.width >> level == 0 ? 1 : mSize.width >> level;
+        *heightAtLevel = mSize.height >> level == 0 ? 1 : mSize.height >> level;
+
+        // Compressed Textures will have paddings if their width or height is not a multiple of
+        // 4 at non-zero mipmap levels.
+        if (mFormat.isCompressed) {
+            // TODO(jiawei.shao@intel.com): check if there are any overflows.
+            uint32_t blockWidth = mFormat.blockWidth;
+            uint32_t blockHeight = mFormat.blockHeight;
+            *widthAtLevel = (*widthAtLevel + blockWidth - 1) / blockWidth * blockWidth;
+            *heightAtLevel = (*heightAtLevel + blockHeight - 1) / blockHeight * blockHeight;
+        }
+    }
+
     TextureViewBase* TextureBase::CreateDefaultView() {
         TextureViewDescriptor descriptor = {};
 

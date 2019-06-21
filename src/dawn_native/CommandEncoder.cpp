@@ -47,19 +47,9 @@ namespace dawn_native {
             // overflows.
             uint64_t level = textureCopy.level;
 
-            uint32_t widthAtLevel = texture->GetSize().width >> level;
-            uint32_t heightAtLevel = texture->GetSize().height >> level;
-
-            // Compressed Textures will have paddings if their width or height is not a multiple of
-            // 4 at non-zero mipmap levels.
-            const Format& textureFormat = texture->GetFormat();
-            if (textureFormat.isCompressed) {
-                // TODO(jiawei.shao@intel.com): check if there are any overflows.
-                uint32_t blockWidth = textureFormat.blockWidth;
-                uint32_t blockHeight = textureFormat.blockHeight;
-                widthAtLevel = (widthAtLevel + blockWidth - 1) / blockWidth * blockWidth;
-                heightAtLevel = (heightAtLevel + blockHeight - 1) / blockHeight * blockHeight;
-            }
+            uint32_t widthAtLevel = 0;
+            uint32_t heightAtLevel = 0;
+            texture->calculateTextureSizeByMipmapLevel(level, &widthAtLevel, &heightAtLevel);
 
             if (uint64_t(textureCopy.origin.x) + uint64_t(copySize.width) >
                     static_cast<uint64_t>(widthAtLevel) ||
