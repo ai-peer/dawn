@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f40b21b_6e243201",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "Fix computation of mipmap sizes used in validation.",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3009d93d_98c96113",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "Nit: that doesn\u0027t really describe the problem. The problem is that the width and height of the mipmaps level \u003e 0 weren\u0027t computed correctly.",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fb64c77_b2f8b8d1",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "This could return an extent3D because it\u0027s also useful for 3D textures.",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0be4b1d0_b7bfe8ba",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "This will need to be updated like this snippet that should land today:\n\n            const Format\u0026 textureFormat \u003d texture-\u003eGetFormat();\n            if (textureFormat.isCompressed) {\n                // TODO(jiawei.shao@intel.com): check if there are any overflows.\n                uint32_t blockWidth \u003d textureFormat.blockWidth;\n                uint32_t blockHeight \u003d textureFormat.blockHeight;\n                widthAtLevel \u003d (widthAtLevel + blockWidth - 1) / blockWidth * blockWidth;\n                heightAtLevel \u003d (heightAtLevel + blockHeight - 1) / blockHeight * blockHeight;\n            }",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "295ba58c_06ec9ede",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "nit: CopyToMipmapOfNonSquareTexture",
+      "range": {
+        "startLine": 584,
+        "startChar": 28,
+        "endLine": 584,
+        "endChar": 48
+      },
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68a5963d_ef88c35d",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "nit: Can we also have test for error cases here so we know we validate the exact limit?",
+      "range": {
+        "startLine": 592,
+        "startChar": 1,
+        "endLine": 595,
+        "endChar": 38
+      },
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a08cfd9d_e0ab355b",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "745412ec_f2fa0f1c",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9203de36_227626d8",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4695750b_4e6830a4",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-21T10:53:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
