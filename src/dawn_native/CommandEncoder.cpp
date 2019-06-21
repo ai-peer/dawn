@@ -47,8 +47,10 @@ namespace dawn_native {
             // overflows.
             uint64_t level = textureCopy.level;
 
-            uint32_t widthAtLevel = texture->GetSize().width >> level;
-            uint32_t heightAtLevel = texture->GetSize().height >> level;
+            uint32_t widthAtLevel =
+                texture->GetSize().width >> level == 0 ? 1 : texture->GetSize().width >> level;
+            uint32_t heightAtLevel =
+                texture->GetSize().height >> level == 0 ? 1 : texture->GetSize().height >> level;
 
             // Compressed Textures will have paddings if their width or height is not a multiple of
             // 4 at non-zero mipmap levels.
