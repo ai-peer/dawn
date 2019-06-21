@@ -334,6 +334,8 @@ namespace dawn_native {
             case dawn::TextureFormat::BC2RGBAUnormSrgb:
             case dawn::TextureFormat::BC3RGBAUnorm:
             case dawn::TextureFormat::BC3RGBAUnormSrgb:
+            case dawn::TextureFormat::BC1RGBAUnorm:
+                return 2;
             case dawn::TextureFormat::BC5RGSnorm:
             case dawn::TextureFormat::BC5RGUnorm:
             case dawn::TextureFormat::BC6HRGBSfloat:
@@ -341,7 +343,6 @@ namespace dawn_native {
             case dawn::TextureFormat::BC7RGBAUnorm:
             case dawn::TextureFormat::BC7RGBAUnormSrgb:
                 return 16;
-
             default:
                 UNREACHABLE();
         }
