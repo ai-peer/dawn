@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "328bf475_42083c89",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-24T14:28:38Z",
+      "side": 1,
+      "message": "nit: CopyFrom?",
+      "range": {
+        "startLine": 919,
+        "startChar": 28,
+        "endLine": 919,
+        "endChar": 34
+      },
+      "revId": "b2fdac0bab1bc7798fe3a08776ab9058722949cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
