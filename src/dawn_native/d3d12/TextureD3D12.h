@@ -21,6 +21,12 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    enum class TextureBarrierResult {
+        ImplicitTransition = 0,
+        ExplicitTransition = 1,
+        RedundantTransition = 2
+    };
+
     class Device;
 
     DXGI_FORMAT D3D12TextureFormat(dawn::TextureFormat format);
@@ -31,13 +37,17 @@ namespace dawn_native { namespace d3d12 {
         Texture(Device* device, const TextureDescriptor* descriptor, ID3D12Resource* nativeTexture);
         ~Texture();
 
-        bool CreateD3D12ResourceBarrierIfNeeded(D3D12_RESOURCE_BARRIER* barrier,
-                                                dawn::TextureUsageBit newUsage) const;
-        bool CreateD3D12ResourceBarrierIfNeeded(D3D12_RESOURCE_BARRIER* barrier,
-                                                D3D12_RESOURCE_STATES newState) const;
+        TextureBarrierResult CreateD3D12ResourceBarrierIfNeeded(
+            D3D12_RESOURCE_BARRIER* barrier,
+            dawn::TextureUsageBit newUsage) const;
+        TextureBarrierResult CreateD3D12ResourceBarrierIfNeeded(
+            D3D12_RESOURCE_BARRIER* barrier,
+            D3D12_RESOURCE_STATES newState) const;
         DXGI_FORMAT GetD3D12Format() const;
         ID3D12Resource* GetD3D12Resource() const;
+        void SetValidToDecay(bool validToDecay);
         void SetUsage(dawn::TextureUsageBit newUsage);
+        void SetNextDecaySerial(uint32_t serial);
         void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                 dawn::TextureUsageBit usage);
         void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
@@ -53,9 +63,17 @@ namespace dawn_native { namespace d3d12 {
 
         UINT16 GetDepthOrArraySize();
 
+        static constexpr D3D12_RESOURCE_STATES kD3D12TextureReadOnlyStates =
+            D3D12_RESOURCE_STATE_COPY_SOURCE | D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE |
+            D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE;
+
+        Device* mDevice;
         ComPtr<ID3D12Resource> mResource = {};
         ID3D12Resource* mResourcePtr = nullptr;
         D3D12_RESOURCE_STATES mLastState = D3D12_RESOURCE_STATES::D3D12_RESOURCE_STATE_COMMON;
+
+        uint32_t mNextDecaySerial = 0xFFFFFFFF;
+        bool mValidToDecay = false;
     };
 
     class TextureView : public TextureViewBase {

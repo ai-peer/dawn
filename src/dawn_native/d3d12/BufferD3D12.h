@@ -35,6 +35,7 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12Resource> GetD3D12Resource();
         D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
         void OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite);
+        void SetNextDecaySerial(uint32_t nextDecaySerial);
         void SetUsage(dawn::BufferUsageBit newUsage);
         void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                 dawn::BufferUsageBit usage);
@@ -49,9 +50,11 @@ namespace dawn_native { namespace d3d12 {
         bool IsMapWritable() const override;
         virtual MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
 
+        Device* mDevice;
         ComPtr<ID3D12Resource> mResource;
         bool mFixedResourceState = false;
         dawn::BufferUsageBit mLastUsage = dawn::BufferUsageBit::None;
+        uint32_t mNextDecaySerial = 0xFFFFFFFF;
         D3D12_RANGE mWrittenMappedRange;
     };
 
