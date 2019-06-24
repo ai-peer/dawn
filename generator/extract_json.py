@@ -14,6 +14,20 @@
 # limitations under the License.
 import os, sys, json
 
+"""Extract the JSON tarball generated from generator_lib.py."""
+
+def _write_file_if_not_changed(file_path, file_data):
+    """Write |file_data| to |file_path| if needed only."""
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as f:
+            existing_data = f.read()
+        if existing_data == file_data:
+            return False
+    with open(file_path, 'wb') as f:
+        f.write(file_data)
+    return True
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: extract_json.py JSON DIR")
@@ -24,12 +38,11 @@ if __name__ == "__main__":
 
     output_dir = sys.argv[2]
 
-    for (name, content) in files.iteritems():
-        output_file = output_dir + os.path.sep + name
+    for name, content in files.iteritems():
+        output_file = os.path.join(output_dir, name)
 
         directory = os.path.dirname(output_file)
         if not os.path.exists(directory):
             os.makedirs(directory)
 
-        with open(output_file, 'w') as outfile:
-            outfile.write(content)
+        _write_file_if_not_changed(output_file, content)

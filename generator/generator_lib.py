@@ -13,31 +13,77 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Module to create generators that render multiple Jinja2 templates for GN.
+
+A helper module that can be used to create generator scripts (clients)
+that expand one or more Jinja2 templates, without outputs usable from
+GN and Ninja build-based systems. See generator_lib.gni as well.
+
+Clients should create a Generator sub-class, then call run_generator()
+with a proper derived class instance.
+
+Clients specify a list of FileRender operations, each one of them will
+output a file into a temporary output directory through Jinja2 expansion.
+All temporary output files are then grouped and written to into a single JSON
+file, that acts as a convenient single GN output target. Use extra_json.py
+to extract the output files from the JSON tarball in another GN action.
+
+--depfile can be used to specify an output Ninja dependency file for the
+JSON tarball, to ensure it is regenerated any time one of its dependencies
+changes.
+
+Finally, --expected-output-files can be used to check the list of generated
+output files.
+"""
+
 import argparse, json, os, re, sys
 from collections import namedtuple
+
+# A FileRender represents a single Jinja2 template render operation:
+#
+#   template: Jinja2 template name, relative to --template-dir path.
+#
+#   output: Output file path, relative to temporary output directory.
+#
+#   params_dicts: iterable of (name:string -> value:string) dictionaries.
+#       All of them will be merged before being sent as Jinja2 template
+#       expansion parameters.
+#
+# Example:
+#   FileRender('api.c', 'src/project_api.c', [{'PROJECT_VERSION': '1.0.0'}])
+#
+FileRender = namedtuple('FileRender', ['template', 'output', 'params_dicts'])
 
 # The interface that must be implemented by generators.
 class Generator:
     def get_description(self):
+        """Return generator description for --help."""
         return ""
 
     def add_commandline_arguments(self, parser):
+        """Add generator-specific argparse arguments."""
         pass
 
     def get_file_renders(self, args):
+        """Return the list of FileRender objects to process."""
         return []
 
     def get_dependencies(self, args):
+        """Return a list of extra input dependencies."""
         return []
 
-FileRender = namedtuple('FileRender', ['template', 'output', 'params_dicts'])
-
-# Try using an additional python path from the arguments if present. This
-# isn't done through the regular argparse because PreprocessingLoader uses
-# jinja2 in the global scope before "main" gets to run.
-kExtraPythonPath = '--extra-python-path'
-if kExtraPythonPath in sys.argv:
-    path = sys.argv[sys.argv.index(kExtraPythonPath) + 1]
+# Allow custom Jinja2 installation path through an additional python
+# path from the arguments if present. This isn't done through the regular
+# argparse because PreprocessingLoader uses jinja2 in the global scope before
+# "main" gets to run.
+#
+# NOTE: If this argument appears several times, this only uses the first
+#       value, while argparse would typically keep the last one!
+kJinja2Path = '--jinja2-path'
+jinja2_path_argv_index = sys.argv.index(kJinja2Path)
+if jinja2_path_argv_index >= 0:
+    # Add parent path for the import to succeed.
+    path = os.path.join(sys.argv[jinja2_path_argv_index + 1], os.pardir)
     sys.path.insert(1, path)
 
 import jinja2
@@ -92,6 +138,18 @@ class _PreprocessingLoader(jinja2.BaseLoader):
 
 _FileOutput = namedtuple('FileOutput', ['name', 'content'])
 
+def _write_file_if_not_changed(file_path, file_data):
+    """Write |file_data| to |file_path| if needed only."""
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as f:
+            existing_data = f.read()
+        if existing_data == file_data:
+            return False
+    with open(file_path, 'wb') as f:
+        f.write(file_data)
+    return True
+
+
 def _do_renders(renders, template_dir):
     loader = _PreprocessingLoader(template_dir)
     env = jinja2.Environment(loader=loader, lstrip_blocks=True, trim_blocks=True, line_comment_prefix='//*')
@@ -123,9 +181,12 @@ def _do_renders(renders, template_dir):
     return outputs
 
 # Compute the list of imported, non-system Python modules.
-# It assumes that any path outside of Dawn's root directory is system.
-def _compute_python_dependencies():
-    dawn_root = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+# It assumes that any path outside of the root directory is system.
+def _compute_python_dependencies(root_dir = None):
+    if not root_dir:
+        # Assume this script is under generator/ by default.
+        root_dir = os.path.join(os.path.dirname(__file__), os.pardir)
+    root_dir = os.path.abspath(root_dir)
 
     module_paths = (module.__file__ for module in sys.modules.values()
                                     if module and hasattr(module, '__file__'))
@@ -134,7 +195,7 @@ def _compute_python_dependencies():
     for path in module_paths:
         path = os.path.abspath(path)
 
-        if not path.startswith(dawn_root):
+        if not path.startswith(root_dir):
             continue
 
         if (path.endswith('.pyc')
@@ -153,10 +214,11 @@ def run_generator(generator):
 
     generator.add_commandline_arguments(parser);
     parser.add_argument('-t', '--template-dir', default='templates', type=str, help='Directory with template files.')
-    parser.add_argument(kExtraPythonPath, default=None, type=str, help='Additional python path to set before loading Jinja2')
+    parser.add_argument(kJinja2Path, default=None, type=str, help='Additional python path to set before loading Jinja2')
     parser.add_argument('--output-json-tarball', default=None, type=str, help='Name of the "JSON tarball" to create (tar is too annoying to use in python).')
     parser.add_argument('--depfile', default=None, type=str, help='Name of the Ninja depfile to create for the JSON tarball')
     parser.add_argument('--expected-outputs-file', default=None, type=str, help="File to compare outputs with and fail if it doesn't match")
+    parser.add_argument('--root-dir', default=None, type=str, help='Optional source root directory for Python dependency computations')
 
     args = parser.parse_args()
 
@@ -168,19 +230,12 @@ def run_generator(generator):
         with open(args.expected_outputs_file) as f:
             expected = set([line.strip() for line in f.readlines()])
 
-        actual = set()
-        actual.update([render.output for render in renders])
+        actual = {render.output for render in renders}
 
         if actual != expected:
-            print("Wrong expected outputs, caller expected:\n    " + repr(list(expected)))
-            print("Actual output:\n    " + repr(list(actual)))
+            print("Wrong expected outputs, caller expected:\n    " + repr(sorted(expected)))
+            print("Actual output:\n    " + repr(sorted(actual)))
             return 1
-
-    # Add a any extra Python path before importing Jinja2 so invokers can point
-    # to a checkout of Jinja2 and note require it to be installed on the system
-    if args.extra_python_path != None:
-        sys.path.insert(1, args.extra_python_path)
-    import jinja2
 
     outputs = _do_renders(renders, args.template_dir)
 
@@ -190,14 +245,13 @@ def run_generator(generator):
         for output in outputs:
             json_root[output.name] = output.content
 
-        with open(args.output_json_tarball, 'w') as f:
-            f.write(json.dumps(json_root))
+        _write_file_if_not_changed(args.output_json_tarball, json.dumps(json_root))
 
     # Output a list of all dependencies for the tarball for Ninja.
     if args.depfile != None:
         dependencies = generator.get_dependencies(args)
         dependencies += [args.template_dir + os.path.sep + render.template for render in renders]
-        dependencies += _compute_python_dependencies()
+        dependencies += _compute_python_dependencies(args.root_dir)
 
-        with open(args.depfile, 'w') as f:
-            f.write(args.output_json_tarball + ": " + " ".join(dependencies))
+        _write_file_if_not_changed(args.depfile,
+                                   args.output_json_tarball + ": " + " ".join(dependencies))
