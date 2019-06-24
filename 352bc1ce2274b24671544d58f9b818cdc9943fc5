@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "693f55fa_9bd1f878",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-24T16:19:41Z",
+      "side": 1,
+      "message": "Whoops, this might have been caused by the CL that introduces `Format`.",
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
