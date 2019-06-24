@@ -212,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "9534ef1f_0aa62820",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-24T08:34:23Z",
+      "side": 1,
+      "message": "Oh, sorry this wasn\u0027t clear. Error cases here would be a copy that;s too big in X or Y. We want to test that the computation of mip level sizes is correct so we should test with the exact value that\u0027s computeted and the same value + 1.",
+      "parentUuid": "68a5963d_ef88c35d",
+      "range": {
+        "startLine": 592,
+        "startChar": 1,
+        "endLine": 595,
+        "endChar": 38
+      },
+      "revId": "d2f63fbf266d0a13db323d71e2e73466f324947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a08cfd9d_e0ab355b",
         "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
         "patchSetId": 2
