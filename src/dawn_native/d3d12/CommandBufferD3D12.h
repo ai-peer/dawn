@@ -63,8 +63,11 @@ namespace dawn_native { namespace d3d12 {
                               BindGroupStateTracker* bindingTracker,
                               RenderPassDescriptorHeapTracker* renderPassTracker,
                               BeginRenderPassCmd* renderPass);
+        void TransitionForPass(ComPtr<ID3D12GraphicsCommandList> commandList,
+                               const PassResourceUsage& usages);
 
         CommandIterator mCommands;
+        Device* mDevice;
     };
 
 }}  // namespace dawn_native::d3d12
