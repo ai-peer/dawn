@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68ec8108_f94e2e8a",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-24T13:43:04Z",
+      "side": 1,
+      "message": "nit: extract_json",
+      "range": {
+        "startLine": 28,
+        "startChar": 61,
+        "endLine": 28,
+        "endChar": 71
+      },
+      "revId": "27f18ccd1ef60a1e8eedaff91effe1bbf7c43a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce18d951_2d577724",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-24T13:43:04Z",
+      "side": 1,
+      "message": "TIL :)",
+      "revId": "27f18ccd1ef60a1e8eedaff91effe1bbf7c43a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
