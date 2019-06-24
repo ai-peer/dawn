@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c569ea87_f47e6823",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-24T16:52:42Z",
+      "side": 1,
+      "message": "Why not? Are we certain that after adding them we won\u0027t need to make changes to the Vulkan backend?",
+      "range": {
+        "startLine": 15,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "693f55fa_9bd1f878",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 4
@@ -13,6 +36,75 @@
       "writtenOn": "2019-06-24T16:19:41Z",
       "side": 1,
       "message": "Whoops, this might have been caused by the CL that introduces `Format`.",
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed0c9611_846b61fc",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-24T16:52:42Z",
+      "side": 1,
+      "message": "Can we use EXPECT_TEXTURE_RGBA8_EQ here? It supports checking a whole block of texels from a texture.",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 200,
+        "endChar": 9
+      },
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3160605_2d802c82",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-24T16:52:42Z",
+      "side": 1,
+      "message": "The std::vector constructor has a variant with two arguments where the first is the |count| of elements and the second is the |value| to initialize all the elements to.",
+      "range": {
+        "startLine": 256,
+        "startChar": 3,
+        "endLine": 274,
+        "endChar": 0
+      },
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b1ea87c_c8fda48f",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-24T16:52:42Z",
+      "side": 1,
+      "message": "Can this use |VerifyCopyRegion| if we update |VerifyCopyRegion| to compute kActualWidthAtLevel, etc.?",
+      "range": {
+        "startLine": 376,
+        "startChar": 8,
+        "endLine": 385,
+        "endChar": 77
+      },
       "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
