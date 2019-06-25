@@ -349,6 +349,16 @@ namespace dawn_native { namespace vulkan {
         : TextureBase(device, descriptor, TextureState::OwnedExternal), mHandle(nativeImage) {
     }
 
+    // Internally managed, but not constructed
+    Texture::Texture(Device* device,
+                     const TextureDescriptor* descriptor,
+                     VkImage nativeImage,
+                     VkDeviceMemory memory)
+        : TextureBase(device, descriptor, TextureState::OwnedInternal),
+          mHandle(nativeImage),
+          mProvidedMemoryAllocation(memory) {
+    }
+
     Texture::~Texture() {
         DestroyInternal();
     }
@@ -367,7 +377,17 @@ namespace dawn_native { namespace vulkan {
                 device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             }
         }
+
+        if (mProvidedMemoryAllocation != VK_NULL_HANDLE) {
+            device->fn.FreeMemory(device->GetVkDevice(), mProvidedMemoryAllocation, nullptr);
+
+            if (mHandle != VK_NULL_HANDLE) {
+                device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            }
+        }
+
         mHandle = VK_NULL_HANDLE;
+        mProvidedMemoryAllocation = VK_NULL_HANDLE;
     }
 
     VkImage Texture::GetHandle() const {

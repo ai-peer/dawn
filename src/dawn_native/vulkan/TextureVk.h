@@ -30,6 +30,10 @@ namespace dawn_native { namespace vulkan {
       public:
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage);
+        Texture(Device* device,
+                const TextureDescriptor* descriptor,
+                VkImage nativeImage,
+                VkDeviceMemory memory);
         ~Texture();
 
         VkImage GetHandle() const;
@@ -54,6 +58,7 @@ namespace dawn_native { namespace vulkan {
                           uint32_t layerCount);
 
         VkImage mHandle = VK_NULL_HANDLE;
+        VkDeviceMemory mProvidedMemoryAllocation = VK_NULL_HANDLE;
         DeviceMemoryAllocation mMemoryAllocation;
 
         // A usage of none will make sure the texture is transitioned before its first use as
