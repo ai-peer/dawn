@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "283c0d91_becd3533",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-25T05:11:50Z",
+      "side": 1,
+      "message": "Here I refer the tests that cover the special situations in B2T and T2B copies on Metal and D3D12:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/TextureCopySplitter.cpp?l\u003d39\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/metal/CommandBufferMTL.mm?l\u003d378\n\nFor copies on Vulkan, I don\u0027t think these tests will go to any special code path, so these tests are more useful for the implementations on Metal and D3D12. That\u0027s why I don\u0027t add them in this patch.\n\nDo you prefer me adding these tests in this patch?",
+      "parentUuid": "c569ea87_f47e6823",
+      "range": {
+        "startLine": 15,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "693f55fa_9bd1f878",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 4
@@ -39,6 +63,24 @@
       "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce91402a_ade49d60",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-25T05:11:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "693f55fa_9bd1f878",
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "e667c286_54502bbf",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-25T05:11:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed0c9611_846b61fc",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 200,
+        "endChar": 9
+      },
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3160605_2d802c82",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 4
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "f29ad6fe_93191d4d",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-25T05:11:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3160605_2d802c82",
+      "range": {
+        "startLine": 256,
+        "startChar": 3,
+        "endLine": 274,
+        "endChar": 0
+      },
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b1ea87c_c8fda48f",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 4
@@ -108,6 +198,30 @@
       "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3dc52f0e_385f6e20",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-25T05:11:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b1ea87c_c8fda48f",
+      "range": {
+        "startLine": 376,
+        "startChar": 8,
+        "endLine": 385,
+        "endChar": 77
+      },
+      "revId": "352bc1ce2274b24671544d58f9b818cdc9943fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
