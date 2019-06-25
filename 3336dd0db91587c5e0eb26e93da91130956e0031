@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fcb90dd_e60066ff",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-25T09:36:17Z",
+      "side": 1,
+      "message": "In WebGPU we want to make sure that accesses don\u0027t go outside of the range provided by the application, so this shouldn\u0027t be WHOLE_SIZE. What is the error exact triggered and by which test?",
+      "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
