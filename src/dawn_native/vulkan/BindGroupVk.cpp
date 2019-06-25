@@ -88,7 +88,9 @@ namespace dawn_native { namespace vulkan {
 
                     writeBufferInfo[numWrites].buffer = ToBackend(binding.buffer)->GetHandle();
                     writeBufferInfo[numWrites].offset = binding.offset;
-                    writeBufferInfo[numWrites].range = binding.size;
+                    // range is the size in bytes that is used for this descriptor update.
+                    // VK_WHOLE_SIZE means to use the range from offset to the end of the buffer.
+                    writeBufferInfo[numWrites].range = VK_WHOLE_SIZE;
 
                     write.pBufferInfo = &writeBufferInfo[numWrites];
                 } break;
