@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b811b783_3589300a",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-26T20:24:35Z",
+      "side": 1,
+      "message": "I\u0027m looking at the old part of this code more closely, and I\u0027m actually not sure it\u0027s 100% correct. In particular: this check says an fp32 \u003e\u003d 131040.0 becomes fp16 infinity, but the largest fp16 number is 65504.0. So 0x47FFF000\u003d131040.0 would become infinity, while 0x47FFEFFF (131039.99) would go to the last codepath and produce fp16 NaN (I think).",
+      "revId": "2f1c1f42dd4583b6e0aa9a2195a3fc08803f310a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
