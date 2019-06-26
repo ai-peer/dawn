@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a4a46754_fa17d38b",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done\nCurrently we don\u0027t check it because as we requires rowPitch % 256 \u003d\u003d 0 and the blockByteSizes of the formats we support in Dawn (1, 2, 4, 8, 16) can all divide 256.",
+      "parentUuid": "9d0e07c6_dbb62cc1",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa904abd_837c21a6",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 7
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "9490d86a_12e80847",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa904abd_837c21a6",
+      "range": {
+        "startLine": 54,
+        "startChar": 46,
+        "endLine": 54,
+        "endChar": 57
+      },
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "281917f7_4e579950",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "4621afa8_c4320c4d",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "281917f7_4e579950",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38c44c56_ce8305ef",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -73,6 +133,24 @@
       "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "081b3065_9b2c20c1",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38c44c56_ce8305ef",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "9a5b4632_f1443cf8",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c2855d0_a21bdea8",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 85
+      },
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d32d715e_7d08f41a",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -119,6 +221,30 @@
       "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adeac945_0a94918f",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d32d715e_7d08f41a",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 35
+      },
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "c32987e3_163d37ee",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd46e3b9_55f97241",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 17
+      },
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "799c9768_80c35867",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -159,6 +309,24 @@
       "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6314d046_ccdfdb2d",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "799c9768_80c35867",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -179,6 +347,24 @@
     },
     {
       "key": {
+        "uuid": "2982b52b_2cadaa1b",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9753c6e7_a1ca2c82",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c6043b8_fb556fe9",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -193,6 +379,24 @@
       "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fe4ff38_c602189d",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c6043b8_fb556fe9",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -219,6 +423,30 @@
     },
     {
       "key": {
+        "uuid": "ff824fe0_e7037e1c",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ea4b89b_3d8a950a",
+      "range": {
+        "startLine": 215,
+        "startChar": 39,
+        "endLine": 215,
+        "endChar": 41
+      },
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9067df56_5c90d123",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -230,6 +458,30 @@
       "writtenOn": "2019-06-25T12:15:03Z",
       "side": 1,
       "message": "Why is this needed? Can we have a comment that clarifies it?",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 0
+      },
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "216cd310_4498cb39",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Because Extent3D may exceed the size of the subresource, so we need to do this restriction.\nFor example, in \"CopyIntoNonZeroMipmapLevel\" test, the size of the subresource is 15x15, but the Extent3D is 16x16, so to make the size of the expectedData matches that of the subresource, we need to limit it to 15x15.",
+      "parentUuid": "9067df56_5c90d123",
       "range": {
         "startLine": 214,
         "startChar": 0,
@@ -259,6 +511,24 @@
     },
     {
       "key": {
+        "uuid": "8d9718cd_6b6f6ce8",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "The size of a block of BC format in bytes differs among different BC formats (8 bytes for BC1 and BC4, and 16 bytes for others), so I think it should be queried in tests.\n\nThe width and height of a block of BC format in texels are always 4 for all BC formats, so I just treat them as constant values in all the tests on BC formats.",
+      "parentUuid": "b2eb1be0_9b012bdb",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5cb3321a_253dcc35",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -282,6 +552,30 @@
     },
     {
       "key": {
+        "uuid": "6bc23ddf_b030da4a",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cb3321a_253dcc35",
+      "range": {
+        "startLine": 280,
+        "startChar": 46,
+        "endLine": 280,
+        "endChar": 77
+      },
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b42ce7c9_9f3ab229",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -299,6 +593,24 @@
     },
     {
       "key": {
+        "uuid": "215deeed_15fc7836",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b42ce7c9_9f3ab229",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "687db4e9_a374d22d",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
@@ -310,6 +622,24 @@
       "writtenOn": "2019-06-25T12:15:03Z",
       "side": 1,
       "message": "Can we have a similar test but for a sub-block BC texture? Like 3x3?",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ffbb74d_f20adb32",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:49:43Z",
+      "side": 1,
+      "message": "I think we cannot create a BC texture whose size is not multiple of 4 because D3D does not allow it, and the offsets and extents must all be multiple of 4. \n\nDo you mean a test that copies data into a part of a BC texture with the size of the region not multiple of 4?\n\nIn \"CopyIntoNonZeroMipmapLevel\" I intent to test copying into a mipmap level of a BC texture whose size is not multiple of 4 (60 \u003e\u003e 2 \u003d 15)",
+      "parentUuid": "687db4e9_a374d22d",
       "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
