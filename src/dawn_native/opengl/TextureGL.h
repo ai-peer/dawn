@@ -42,8 +42,25 @@ namespace dawn_native { namespace opengl {
         GLenum GetGLTarget() const;
         TextureFormatInfo GetGLFormat() const;
 
+        void EnsureSubresourceContentInitialized(GLuint target,
+                                                 uint32_t baseMipLevel,
+                                                 uint32_t levelCount,
+                                                 uint32_t baseArrayLayer,
+                                                 uint32_t layerCount,
+                                                 Origin3D origin,
+                                                 Extent3D copySize);
+
       private:
         void DestroyImpl() override;
+        void ClearTexture(GLuint texture,
+                          GLint baseMipLevel,
+                          GLint levelCount,
+                          GLint xOffset,
+                          GLint yOffset,
+                          GLint zOffset,
+                          uint32_t width,
+                          uint32_t height,
+                          uint32_t depth);
 
         GLuint mHandle;
         GLenum mTarget;
