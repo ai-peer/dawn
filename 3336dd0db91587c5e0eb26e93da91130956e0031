@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "6bc5269f_460ec35a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T00:36:18Z",
+      "side": 1,
+      "message": "Fix the failures in dynamic buffer offset tests with Vulkan validation layer enabled",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 87
+      },
+      "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "621915fd_3ebf84a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T00:36:18Z",
+      "side": 1,
+      "message": "The root causes of these failures are as follows:",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 32
+      },
+      "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb7c2612_a2def263",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T00:36:18Z",
+      "side": 1,
+      "message": "1. \u0027fragmentStoresAndAtomics\u0027 feature is not enabled when we create the Vulkan device.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a40576bd_745bd551",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T00:36:18Z",
+      "side": 1,
+      "message": "The range value of dynamic storage buffer is not set correctly.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 53
+      },
+      "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fcb90dd_e60066ff",
         "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
         "patchSetId": 1
