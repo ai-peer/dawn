@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcf15194_9a1393d1",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-26T23:52:15Z",
+      "side": 1,
+      "message": "I added TransitionForPass that we had in vulkan and d3d12 to go through all the textures and initialize them before the render pass and compute pass ( I can probably rename it to \"InitializeForPass\"). But since that happens before generating the framebuffers and linking them glClearBuffer doesn\u0027t work, and an error occurs.\n\nin patch 1, I had checked in TransitionForPass that if it was a depth/stencil texture then skip the clear call, but it failed in the try job. I couldn\u0027t repro that fail locally, so I added this check here but it doesn\u0027t seem right to me, I think I need to fix the logic somewhere else.",
+      "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
