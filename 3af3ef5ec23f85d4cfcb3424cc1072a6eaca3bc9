@@ -611,6 +611,24 @@
     },
     {
       "key": {
+        "uuid": "c8741116_2034e9be",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-26T02:55:37Z",
+      "side": 1,
+      "message": "Actually this test copies data into a BC texture with 2x2 blocks.",
+      "parentUuid": "215deeed_15fc7836",
+      "revId": "3af3ef5ec23f85d4cfcb3424cc1072a6eaca3bc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "687db4e9_a374d22d",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 7
