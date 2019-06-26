@@ -399,8 +399,8 @@ TEST_P(TextureZeroInitTest, DepthStencilClear) {
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
 }
 
-DAWN_INSTANTIATE_TEST(TextureZeroInitTest,
-                      ForceWorkarounds(D3D12Backend,
-                                       {"nonzero_clear_resources_on_creation_for_testing"}),
-                      ForceWorkarounds(VulkanBackend,
-                                       {"nonzero_clear_resources_on_creation_for_testing"}));
+DAWN_INSTANTIATE_TEST(
+    TextureZeroInitTest,
+    ForceWorkarounds(D3D12Backend, {"nonzero_clear_resources_on_creation_for_testing"}),
+    ForceWorkarounds(OpenGLBackend, {"nonzero_clear_resources_on_creation_for_testing"}),
+    ForceWorkarounds(VulkanBackend, {"nonzero_clear_resources_on_creation_for_testing"}));

@@ -14,8 +14,10 @@
 
 #include "dawn_native/opengl/TextureGL.h"
 #include "dawn_native/opengl/DeviceGL.h"
+#include "dawn_native/opengl/UtilsGL.h"
 
 #include "common/Assert.h"
+#include "dawn_native/Commands.h"
 
 #include <algorithm>
 #include <vector>
@@ -174,10 +176,13 @@ namespace dawn_native { namespace opengl {
             ASSERT(GetFormat().blockByteSize <= MAX_TEXEL_SIZE);
             GLubyte clearColor[MAX_TEXEL_SIZE];
             std::fill(clearColor, clearColor + MAX_TEXEL_SIZE, 255);
-
-            // TODO(natlee@microsoft.com): clear all subresources
-            for (uint32_t i = 0; i < GL_TEXTURE_MAX_LEVEL; i++) {
-                gl.ClearTexImage(mHandle, i, formatInfo.format, formatInfo.type, clearColor);
+            if (GetFormat().HasDepthOrStencil()) {
+                gl.ClearTexImage(mHandle, 0, formatInfo.format, formatInfo.type, clearColor);
+            } else {
+                // TODO(natlee@microsoft.com): clear all subresources
+                for (uint32_t i = 0; i < GL_TEXTURE_MAX_LEVEL; i++) {
+                    gl.ClearTexImage(mHandle, i, formatInfo.format, formatInfo.type, clearColor);
+                }
             }
         }
     }
@@ -209,6 +214,64 @@ namespace dawn_native { namespace opengl {
 
     TextureFormatInfo Texture::GetGLFormat() const {
         return GetGLFormatInfo(GetFormat().format);
+    }
+
+    void Texture::ClearTexture(GLint baseMipLevel,
+                               GLint levelCount,
+                               GLint baseArrayLayer,
+                               uint32_t layerCount,
+                               GLint xOffset,
+                               GLint yOffset,
+                               uint32_t width,
+                               uint32_t height);
+    {
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+        if (GetFormat().HasDepthOrStencil()) {
+            bool doDepthClear = GetFormat().HasDepth();
+            bool doStencilClear = GetFormat().HasStencil();
+            GLfloat depth = 0.0f;
+            GLint stencil = 0u;
+            if (doDepthClear) {
+                gl.DepthMask(GL_TRUE);
+            }
+            if (doStencilClear) {
+                gl.StencilMask(GetStencilMaskFromStencilFormat(GetFormat().format));
+            }
+
+            if (doDepthClear && doStencilClear) {
+                gl.ClearBufferfi(GL_DEPTH_STENCIL, 0, depth, stencil);
+            } else if (doDepthClear) {
+                gl.ClearBufferfv(GL_DEPTH, 0, &depth);
+            } else if (doStencilClear) {
+                gl.ClearBufferiv(GL_STENCIL, 0, &stencil);
+            }
+            if (gl.GetError() == GL_NO_ERROR) {
+                SetIsSubresourceContentInitialized(baseMipLevel, levelCount, zOffset, depth);
+            }
+        } else {
+            auto formatInfo = GetGLFormatInfo(GetFormat().format);
+            for (GLint level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                gl.ClearTexSubImage(mHandle, level, xOffset, yOffset, baseArrayLayer, width, height,
+                                    layerCount, formatInfo.format, formatInfo.type, nullptr);
+            }
+            SetIsSubresourceContentInitialized(baseMipLevel, levelCount, zOffset, depth);
+        }
+    }
+
+    void Texture::EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
+                                                      uint32_t levelCount,
+                                                      uint32_t baseArrayLayer,
+                                                      uint32_t layerCount,
+                                                      Origin3D origin,
+                                                      Extent3D size) {
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            return;
+        }
+        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
+                                             layerCount)) {
+            ClearTexture(baseMipLevel, levelCount, baseArrayLayer, layerCount, origin.x, origin.y,
+                         size.width, size.height);
+        }
     }
 
     // TextureView
