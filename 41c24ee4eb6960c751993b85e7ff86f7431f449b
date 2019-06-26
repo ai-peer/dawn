@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "628f4095_95c97e4e",
+        "filename": "src/tests/end2end/ComputeCopyStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-26T02:58:34Z",
+      "side": 0,
+      "message": "Is it possible now to remove these from ComputeIndirectTests.cpp and ComputeSharedMemoryTests.cpp as well?",
+      "revId": "41c24ee4eb6960c751993b85e7ff86f7431f449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
