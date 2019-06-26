@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b628283_fc2e46aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-26T19:28:42Z",
+      "side": 1,
+      "message": "How good are we on the test coverage for all of the decay scenarios? Do we have a test for each case that runs validation-error free? \n\nIf not, I think now would be a good time to shore up the test coverage here so that validation errors do not shore up while people are working on some random other feature.",
+      "range": {
+        "startLine": 10,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fa78411_704a9bca",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-26T19:28:42Z",
+      "side": 1,
+      "message": "Now that we\u0027re accessing the texture multiple times in this block of code, please pull the ToBackend(usages.textures[i]) part out into its own variable.",
+      "range": {
+        "startLine": 453,
+        "startChar": 24,
+        "endLine": 453,
+        "endChar": 53
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2513d86d_eb9ee547",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-26T19:28:42Z",
+      "side": 1,
+      "message": "Since CreateD3D12ResourceBarrierIfNeeded always returns a value barrier result, the default case should have an UNREACHABLE macro.",
+      "range": {
+        "startLine": 464,
+        "startChar": 20,
+        "endLine": 464,
+        "endChar": 28
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fb026c3_32db138d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-26T19:28:42Z",
+      "side": 1,
+      "message": "Any reason we need to leave this random nested scoping?",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 1
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a41fff4a_364b57b8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-26T19:28:42Z",
+      "side": 1,
+      "message": "Please add comments that describe the purpose of SetValidToDecay and why we need to keep track of the boolean. The comment should include why explicit transitions always need it and why only some implicit transitions do.\n\nIs there a reason why we can\u0027t use the value of mLastState to determine whether it is valid to decay?",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 39
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71df771b_95682f1a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-26T19:28:42Z",
+      "side": 1,
+      "message": "Since we\u0027re not using the TextureBarrierResult enum as indices into arrays or anything like that, we do not need to assign the values to particular indices.",
+      "range": {
+        "startLine": 25,
+        "startChar": 26,
+        "endLine": 25,
+        "endChar": 30
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6503d52f_9ed371a3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-06-26T19:28:42Z",
+      "side": 1,
+      "message": "Can the \u0027newState\u0027 version of CreateD3D12ResourceBarrierIfNeeded be private to the class?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 50
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
