@@ -108,6 +108,24 @@
       "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c29cc2_de4b54a6",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-06-26T01:39:56Z",
+      "side": 1,
+      "message": "The error presents when running compute shader dynamic offset test case:  Descriptor set 0x2415 bound as set #0 encountered the following validation error at vkCmdDispatch() time: Dynamic descriptor in binding #0 index 0 uses buffer 0x240d with dynamic offset 256 combined with offset 0 and range 264 that oversteps the buffer size of 264.\n\nAnd by reading vulkan spec, in VkDescriptorBufferInfo , it says, \"range is the size in bytes that is used for this descriptor update, or VK_WHOLE_SIZE to use the range from offset to the end of the buffer\".\n\nCurrently, the binding range are always set to binding.size which maybe a whole buffer size.So this will trigger range + offset \u003e buffer.size. \n\nSet this value with VK_WHOLE_SIZE or the real size used in shaders can fix this issue.",
+      "parentUuid": "6fcb90dd_e60066ff",
+      "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
