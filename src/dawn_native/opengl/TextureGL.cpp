@@ -64,26 +64,122 @@ namespace dawn_native { namespace opengl {
             }
         }
 
+        // For a reference on texture formats support in OpenGL, see ANGLE's formatutils.cpp and
+        // formatutilsgl.cpp. It is more clear and comprehensive than doing your own spec digging.
+        // TODO(cwallez@chromium.org): Build the format support table based on the GL version at
+        // Device initialization time.
         TextureFormatInfo GetGLFormatInfo(dawn::TextureFormat format) {
             switch (format) {
-                case dawn::TextureFormat::RGBA8Unorm:
-                    return {GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE};
-                case dawn::TextureFormat::RG8Unorm:
-                    return {GL_RG8, GL_RG, GL_UNSIGNED_BYTE};
                 case dawn::TextureFormat::R8Unorm:
                     return {GL_R8, GL_RED, GL_UNSIGNED_BYTE};
-                case dawn::TextureFormat::RGBA8Uint:
-                    return {GL_RGBA8UI, GL_RGBA, GL_UNSIGNED_INT};
-                case dawn::TextureFormat::RG8Uint:
-                    return {GL_RG8UI, GL_RG, GL_UNSIGNED_INT};
+                case dawn::TextureFormat::R8Snorm:
+                    return {GL_R8_SNORM, GL_RED, GL_BYTE};
                 case dawn::TextureFormat::R8Uint:
-                    return {GL_R8UI, GL_RED, GL_UNSIGNED_INT};
+                    return {GL_R8UI, GL_RED_INTEGER, GL_UNSIGNED_BYTE};
+                case dawn::TextureFormat::R8Sint:
+                    return {GL_R8I, GL_RED_INTEGER, GL_BYTE};
+
+                case dawn::TextureFormat::R16Unorm:
+                    return {GL_R16, GL_RED, GL_UNSIGNED_SHORT};
+                case dawn::TextureFormat::R16Snorm:
+                    return {GL_R16_SNORM, GL_RED, GL_SHORT};
+                case dawn::TextureFormat::R16Uint:
+                    return {GL_R16UI, GL_RED_INTEGER, GL_UNSIGNED_SHORT};
+                case dawn::TextureFormat::R16Sint:
+                    return {GL_R16I, GL_RED_INTEGER, GL_SHORT};
+                case dawn::TextureFormat::R16Float:
+                    return {GL_R16F, GL_RED, GL_HALF_FLOAT};
+                case dawn::TextureFormat::RG8Unorm:
+                    return {GL_RG8, GL_RG, GL_UNSIGNED_BYTE};
+                case dawn::TextureFormat::RG8Snorm:
+                    return {GL_RG8_SNORM, GL_RG, GL_INT};
+                case dawn::TextureFormat::RG8Uint:
+                    return {GL_RG8UI, GL_RG_INTEGER, GL_UNSIGNED_INT};
+                case dawn::TextureFormat::RG8Sint:
+                    return {GL_RG8I, GL_RG_INTEGER, GL_INT};
+
+                case dawn::TextureFormat::R32Uint:
+                    return {GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT};
+                case dawn::TextureFormat::R32Sint:
+                    return {GL_R32I, GL_RED_INTEGER, GL_INT};
+                case dawn::TextureFormat::R32Float:
+                    return {GL_R32F, GL_RED, GL_FLOAT};
+                case dawn::TextureFormat::RG16Unorm:
+                    return {GL_RG16, GL_RG, GL_UNSIGNED_SHORT};
+                case dawn::TextureFormat::RG16Snorm:
+                    return {GL_RG16_SNORM, GL_RG, GL_SHORT};
+                case dawn::TextureFormat::RG16Uint:
+                    return {GL_RG16UI, GL_RG_INTEGER, GL_UNSIGNED_SHORT};
+                case dawn::TextureFormat::RG16Sint:
+                    return {GL_RG16I, GL_RG_INTEGER, GL_SHORT};
+                case dawn::TextureFormat::RG16Float:
+                    return {GL_RG16F, GL_RG, GL_HALF_FLOAT};
+                case dawn::TextureFormat::RGBA8Unorm:
+                    return {GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE};
+                case dawn::TextureFormat::RGBA8UnormSrgb:
+                    return {GL_SRGB8_ALPHA8, GL_RGBA, GL_UNSIGNED_BYTE};
+                case dawn::TextureFormat::RGBA8Snorm:
+                    return {GL_RGBA8_SNORM, GL_RGBA, GL_BYTE};
+                case dawn::TextureFormat::RGBA8Uint:
+                    return {GL_RGBA8UI, GL_RGBA_INTEGER, GL_UNSIGNED_INT};
+                case dawn::TextureFormat::RGBA8Sint:
+                    return {GL_RGBA8I, GL_RGBA_INTEGER, GL_INT};
                 case dawn::TextureFormat::BGRA8Unorm:
                     // This doesn't have an enum for the internal format in OpenGL, so use RGBA8.
                     return {GL_RGBA8, GL_BGRA, GL_UNSIGNED_BYTE};
+                case dawn::TextureFormat::RGB10A2Unorm:
+                    return {GL_RGB10_A2, GL_RGBA, GL_UNSIGNED_INT_2_10_10_10_REV};
+                case dawn::TextureFormat::RG11B10Float:
+                    return {GL_R11F_G11F_B10F, GL_RGB, GL_UNSIGNED_INT_10F_11F_11F_REV};
+
+                case dawn::TextureFormat::RG32Uint:
+                    return {GL_RG32UI, GL_RG_INTEGER, GL_UNSIGNED_INT};
+                case dawn::TextureFormat::RG32Sint:
+                    return {GL_RG32I, GL_RG_INTEGER, GL_INT};
+                case dawn::TextureFormat::RG32Float:
+                    return {GL_RG32F, GL_RG, GL_FLOAT};
+                case dawn::TextureFormat::RGBA16Unorm:
+                    return {GL_RGBA16, GL_RGBA, GL_UNSIGNED_SHORT};
+                case dawn::TextureFormat::RGBA16Snorm:
+                    return {GL_RGBA16_SNORM, GL_RGBA, GL_UNSIGNED_SHORT};
+                case dawn::TextureFormat::RGBA16Uint:
+                    return {GL_RGBA16UI, GL_RGBA_INTEGER, GL_UNSIGNED_SHORT};
+                case dawn::TextureFormat::RGBA16Sint:
+                    return {GL_RGBA16I, GL_RGBA_INTEGER, GL_SHORT};
+                case dawn::TextureFormat::RGBA16Float:
+                    return {GL_RGBA16F, GL_RGBA, GL_HALF_FLOAT};
+
+                case dawn::TextureFormat::RGBA32Uint:
+                    return {GL_RGBA32UI, GL_RGBA_INTEGER, GL_UNSIGNED_INT};
+                case dawn::TextureFormat::RGBA32Sint:
+                    return {GL_RGBA32I, GL_RGBA_INTEGER, GL_INT};
+                case dawn::TextureFormat::RGBA32Float:
+                    return {GL_RGBA32F, GL_RGBA, GL_FLOAT};
+
+                case dawn::TextureFormat::Depth32Float:
+                case dawn::TextureFormat::Depth24Plus:
                 case dawn::TextureFormat::Depth24PlusStencil8:
                     return {GL_DEPTH32F_STENCIL8, GL_DEPTH_STENCIL,
                             GL_FLOAT_32_UNSIGNED_INT_24_8_REV};
+
+                case dawn::TextureFormat::BC1RGBAUnorm:
+                case dawn::TextureFormat::BC1RGBAUnormSrgb:
+                case dawn::TextureFormat::BC2RGBAUnorm:
+                case dawn::TextureFormat::BC2RGBAUnormSrgb:
+                case dawn::TextureFormat::BC3RGBAUnorm:
+                case dawn::TextureFormat::BC3RGBAUnormSrgb:
+                case dawn::TextureFormat::BC4RSnorm:
+                case dawn::TextureFormat::BC4RUnorm:
+                case dawn::TextureFormat::BC5RGSnorm:
+                case dawn::TextureFormat::BC5RGUnorm:
+                case dawn::TextureFormat::BC6HRGBSfloat:
+                case dawn::TextureFormat::BC6HRGBUfloat:
+                case dawn::TextureFormat::BC7RGBAUnorm:
+                case dawn::TextureFormat::BC7RGBAUnormSrgb:
+
+                // Not supported, only non-SRGB exists
+                case dawn::TextureFormat::BGRA8UnormSrgb:
+
                 default:
                     UNREACHABLE();
                     return {GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE};
