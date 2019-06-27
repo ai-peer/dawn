@@ -144,6 +144,24 @@
       "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9baef47c_e04f594b",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-06-27T01:36:27Z",
+      "side": 1,
+      "message": "I think I know your point.\n1. binding size users set is what they want to use in shader\n2. Dynamic buffer also obey rule 1.\n3. binding.size is not the buffer size, they\u0027re different.",
+      "parentUuid": "e7b9f77f_01af9a27",
+      "revId": "3336dd0db91587c5e0eb26e93da91130956e0031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
