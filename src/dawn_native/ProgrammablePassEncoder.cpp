@@ -15,6 +15,7 @@
 #include "dawn_native/ProgrammablePassEncoder.h"
 
 #include "dawn_native/BindGroup.h"
+#include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
@@ -108,7 +109,7 @@ namespace dawn_native {
 
             BufferBinding bufferBinding = group->GetBindingAsBufferBinding(i);
 
-            if (dynamicOffsets[i] >= bufferBinding.size - bufferBinding.offset) {
+            if (dynamicOffsets[i] > bufferBinding.buffer->GetSize() - bufferBinding.offset - bufferBinding.size) {
                 mTopLevelEncoder->HandleError("dynamic offset out of bounds");
                 return;
             }
