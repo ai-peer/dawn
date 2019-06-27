@@ -186,6 +186,7 @@ namespace dawn_native { namespace vulkan {
         GET_DEVICE_PROC(GetDeviceQueue);
         GET_DEVICE_PROC(GetEventStatus);
         GET_DEVICE_PROC(GetFenceStatus);
+        GET_DEVICE_PROC(GetSemaphoreFdKHR);
         GET_DEVICE_PROC(GetImageMemoryRequirements);
         GET_DEVICE_PROC(GetImageSparseMemoryRequirements);
         GET_DEVICE_PROC(GetImageSubresourceLayout);
@@ -193,6 +194,7 @@ namespace dawn_native { namespace vulkan {
         GET_DEVICE_PROC(GetQueryPoolResults);
         GET_DEVICE_PROC(GetRenderAreaGranularity);
         GET_DEVICE_PROC(InvalidateMappedMemoryRanges);
+        GET_DEVICE_PROC(ImportSemaphoreFdKHR);
         GET_DEVICE_PROC(MapMemory);
         GET_DEVICE_PROC(MergePipelineCaches);
         GET_DEVICE_PROC(QueueBindSparse);

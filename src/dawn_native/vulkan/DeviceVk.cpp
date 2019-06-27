@@ -295,8 +295,8 @@ namespace dawn_native { namespace vulkan {
         submitInfo.pWaitDstStageMask = dstStageMasks.data();
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = &mPendingCommands.commandBuffer;
-        submitInfo.signalSemaphoreCount = 0;
-        submitInfo.pSignalSemaphores = 0;
+        submitInfo.signalSemaphoreCount = mSignalSemaphores.size();
+        submitInfo.pSignalSemaphores = mSignalSemaphores.data();
 
         VkFence fence = GetUnusedFence();
         if (fn.QueueSubmit(mQueue, 1, &submitInfo, fence) != VK_SUCCESS) {
@@ -312,10 +312,16 @@ namespace dawn_native { namespace vulkan {
             mDeleter->DeleteWhenUnused(semaphore);
         }
         mWaitSemaphores.clear();
+        // TODO: delete signals
+        mSignalSemaphores.clear();
     }
 
     void Device::AddWaitSemaphore(VkSemaphore semaphore) {
         mWaitSemaphores.push_back(semaphore);
+    }
+
+    void Device::AddSignalSemaphore(VkSemaphore semaphore) {
+        mSignalSemaphores.push_back(semaphore);
     }
 
     ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalDevice) {

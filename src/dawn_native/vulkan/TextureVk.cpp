@@ -349,8 +349,30 @@ namespace dawn_native { namespace vulkan {
         : TextureBase(device, descriptor, TextureState::OwnedExternal), mHandle(nativeImage) {
     }
 
+    // Internally managed, but not constructed
+    Texture::Texture(Device* device,
+                     const TextureDescriptor* descriptor,
+                     VkImage nativeImage,
+                     VkDeviceMemory memory,
+                     const std::vector<VkSemaphore>* waitRequirements,
+                     VkSemaphore signalSemaphore)
+        : TextureBase(device, descriptor, TextureState::OwnedInternal),
+          mHandle(nativeImage),
+          mProvidedMemoryAllocation(memory),
+          mSignalSemaphore(signalSemaphore),
+          mWaitRequirements(*waitRequirements) {
+    }
+
     Texture::~Texture() {
         DestroyInternal();
+    }
+
+    const std::vector<VkSemaphore>* Texture::GetWaitRequirements() const {
+        return &mWaitRequirements;
+    }
+
+    VkSemaphore Texture::GetSignalSemaphore() const {
+        return mSignalSemaphore;
     }
 
     void Texture::DestroyImpl() {
@@ -367,7 +389,17 @@ namespace dawn_native { namespace vulkan {
                 device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             }
         }
+
+        if (mProvidedMemoryAllocation != VK_NULL_HANDLE) {
+            device->fn.FreeMemory(device->GetVkDevice(), mProvidedMemoryAllocation, nullptr);
+
+            if (mHandle != VK_NULL_HANDLE) {
+                device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            }
+        }
+
         mHandle = VK_NULL_HANDLE;
+        mProvidedMemoryAllocation = VK_NULL_HANDLE;
     }
 
     VkImage Texture::GetHandle() const {
