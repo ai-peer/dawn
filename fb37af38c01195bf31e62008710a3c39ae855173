@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ebd206e_ced3ae8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-27T13:06:07Z",
+      "side": 1,
+      "message": "After reading the whole patch I think the title should be \"Add all WebGPU texture formats on Vulkan\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "fb37af38c01195bf31e62008710a3c39ae855173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "565cfdc2_bf73c37a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-27T13:06:07Z",
+      "side": 1,
+      "message": "Shall we have multisampled tests to verify these formats all support 4xMSAA?",
+      "range": {
+        "startLine": 28,
+        "startChar": 32,
+        "endLine": 28,
+        "endChar": 72
+      },
+      "revId": "fb37af38c01195bf31e62008710a3c39ae855173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "939ca3c1_07a6d56b",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-27T13:06:07Z",
+      "side": 1,
+      "message": "As the depth formats are not tested in this patch, I think maybe it is better not to include them here.",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 84
+      },
+      "revId": "fb37af38c01195bf31e62008710a3c39ae855173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66e86436_45871715",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-27T13:06:07Z",
+      "side": 1,
+      "message": "I suggest adding all the BC formats in my patch instead of here, what do you think?",
+      "revId": "fb37af38c01195bf31e62008710a3c39ae855173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
