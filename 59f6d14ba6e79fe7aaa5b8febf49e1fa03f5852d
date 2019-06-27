@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "274de6c8_1f6fec01",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-27T08:25:07Z",
+      "side": 1,
+      "message": "Can we add a comment that this was already validated to not overflow on BindGroup creation, and an assert for it? Also it would be good to have a validation test for it.",
+      "range": {
+        "startLine": 113,
+        "startChar": 17,
+        "endLine": 113,
+        "endChar": 91
+      },
+      "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
