@@ -2,6 +2,86 @@
   "comments": [
     {
       "key": {
+        "uuid": "c4d8dd74_4f0d9643",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-27T16:02:45Z",
+      "side": 1,
+      "message": "Always prefer using C++ style casts instead of C casts. Also this cast shouldn\u0027t be needed since you\u0027ve used ToBackend().",
+      "range": {
+        "startLine": 660,
+        "startChar": 36,
+        "endLine": 660,
+        "endChar": 50
+      },
+      "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e47fb52c_1306b85b",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-27T16:02:45Z",
+      "side": 1,
+      "message": "Can\u0027t we transform the loadOp to clear when we\u0027re in this case? In TransitionForPass we can detect these textures by looking is they are used as OutpuAttachment",
+      "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2d6c914_6b7465ab",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-27T16:02:45Z",
+      "side": 1,
+      "message": "WebGPU doesn\u0027t support any form of tracking of the inside of subresources so we shouldn\u0027t need to pass in an extent or a size.",
+      "range": {
+        "startLine": 670,
+        "startChar": 45,
+        "endLine": 670,
+        "endChar": 76
+      },
+      "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad59a838_1d05c249",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-27T16:02:45Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fcf15194_9a1393d1",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 4
@@ -13,6 +93,24 @@
       "writtenOn": "2019-06-26T23:52:15Z",
       "side": 1,
       "message": "I added TransitionForPass that we had in vulkan and d3d12 to go through all the textures and initialize them before the render pass and compute pass ( I can probably rename it to \"InitializeForPass\"). But since that happens before generating the framebuffers and linking them glClearBuffer doesn\u0027t work, and an error occurs.\n\nin patch 1, I had checked in TransitionForPass that if it was a depth/stencil texture then skip the clear call, but it failed in the try job. I couldn\u0027t repro that fail locally, so I added this check here but it doesn\u0027t seem right to me, I think I need to fix the logic somewhere else.",
+      "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bed95618_72b270cc",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-27T16:02:45Z",
+      "side": 1,
+      "message": "glClearBuffer acts on the texture that are attachments on the currently bound framebuffer. What we should do here is temporarily create a framebuffer, attach the texture, then clear.\n\nDawn should never check GetError() because we should not produce any errors (except OOM / Context Lost, but that would be checked on Tick probably)",
+      "parentUuid": "fcf15194_9a1393d1",
       "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
