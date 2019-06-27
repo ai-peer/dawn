@@ -23,8 +23,8 @@ class ClipSpaceTest : public DawnTest {
         utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
 
         // Draw two triangles:
-        // 1. The depth value of the top-left one is >= 0.5
-        // 2. The depth value of the bottom-right one is <= 0.5
+        // 1. The depth value of the bottom-left one is >= 0.5
+        // 2. The depth value of the top-right one is <= 0.5
         const char* vs =
             R"(#version 450
         const vec3 pos[6] = vec3[6](vec3(-1.0f, -1.0f, 1.0f),
@@ -81,7 +81,7 @@ TEST_P(ClipSpaceTest, ClipSpace) {
     renderPassDescriptor.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 1.0, 0.0, 1.0};
     renderPassDescriptor.cColorAttachmentsInfoPtr[0]->loadOp = dawn::LoadOp::Clear;
 
-    // Clear the depth stencil attachment to 0.5f, so only the bottom-right triangle should be
+    // Clear the depth stencil attachment to 0.5f, so only the top-right triangle should be
     // drawn.
     renderPassDescriptor.cDepthStencilAttachmentInfo.clearDepth = 0.5f;
     renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = dawn::LoadOp::Clear;
@@ -96,7 +96,17 @@ TEST_P(ClipSpaceTest, ClipSpace) {
     queue.Submit(1, &commandBuffer);
 
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 0, 0, 255), colorTexture, kSize - 1, kSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 0, 0, 255), colorTexture, kSize - 2, kSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 0, 0, 255), colorTexture, kSize - 3, kSize - 1);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 0, 0, 255), colorTexture, kSize - 1, kSize - 2);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 0, 0, 255), colorTexture, kSize - 2, kSize - 2);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 0, 0, 255), colorTexture, kSize - 1, kSize - 3);
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), colorTexture, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), colorTexture, 0, 1);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), colorTexture, 0, 2);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), colorTexture, 1, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), colorTexture, 1, 1);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), colorTexture, 2, 0);
 }
 
 DAWN_INSTANTIATE_TEST(ClipSpaceTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
