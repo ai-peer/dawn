@@ -175,9 +175,7 @@ namespace dawn_native { namespace vulkan {
                     dawn::LoadOp loadOp = attachmentInfo.loadOp;
                     ASSERT(view->GetLayerCount() == 1);
                     ASSERT(view->GetLevelCount() == 1);
-                    if (loadOp == dawn::LoadOp::Load && view->GetTexture() &&
-                        !view->GetTexture()->IsSubresourceContentInitialized(
-                            view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1)) {
+                    if (loadOp == dawn::LoadOp::Load && !view->GetTexture()->IsSubresourceContentInitialized(view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1)) {
                         loadOp = dawn::LoadOp::Clear;
                     }
                     switch (attachmentInfo.storeOp) {
