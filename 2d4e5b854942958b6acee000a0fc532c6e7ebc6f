@@ -234,6 +234,24 @@
     },
     {
       "key": {
+        "uuid": "95a0c37a_8a0dbc08",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-28T22:38:07Z",
+      "side": 1,
+      "message": "Shouldn\u0027t WebGPU\u0027s CCW always match the winding as it appears on the screen? Regardless of framebuffer coordinates.",
+      "parentUuid": "74cc03fb_c7a94ba4",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05f1a44c_de352b6f",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
