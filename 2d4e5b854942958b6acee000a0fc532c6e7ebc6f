@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "11b16cff_88f905d3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-28T18:05:00Z",
+      "side": 1,
+      "message": "Ok. (-1, -1) is the upper left. This is consistent across the backends.\n\nI forgot we don\u0027t have culling on the other backends yet. How does this test pass on those backends?",
+      "parentUuid": "2d55336e_a6dcf056",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
@@ -101,6 +119,30 @@
       "writtenOn": "2019-06-28T17:54:38Z",
       "side": 1,
       "message": "nit: factor out these constants into \"kTriangleVisible\" and \"kTriangleCulled\"",
+      "range": {
+        "startLine": 91,
+        "startChar": 34,
+        "endLine": 91,
+        "endChar": 55
+      },
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcc9d8e4_52e58f28",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-28T18:05:00Z",
+      "side": 1,
+      "message": "And then you can have kCCWTriangleColor \u003d isCCWTriangleCulled ? ... : ...",
+      "parentUuid": "05f1a44c_de352b6f",
       "range": {
         "startLine": 91,
         "startChar": 34,
