@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "0af19bf6_1d3310a0",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-28T18:16:46Z",
+      "side": 1,
+      "message": "(Whoops, sent it too fast and made a mistake) BTW, did you test (-1, -1) via dawn with different backends, or you tested it on native backends directly? For dawn, I suspected that we might flip Y, so it is consistent across different backends and Y axis is DOWN on all backends. But for native OpenGL backend, I am afraid Y is UP.",
+      "parentUuid": "59b4f0c6_bbc252b5",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
