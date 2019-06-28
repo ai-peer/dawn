@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d8a7bd83_2151a37e",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-28T16:44:35Z",
+      "side": 1,
+      "message": "I thought you added a test for this behavior, but I guess not.",
+      "parentUuid": "d1a4f46c_2261f011",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
