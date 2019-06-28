@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "342ccbe4_7dabe8d9",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-28T17:44:38Z",
+      "side": 1,
+      "message": "Sorry, Corentin and Austin, I didn\u0027t understand you. What do you mean? Did you mean that the original code here was correct, and I shouldn\u0027t change the code snippet here? \n\nBut the test fail (see patchset 3, and the bots failure was: https://ci.chromium.org/p/chromium/builders/try/mac-dawn-rel/1428). So, the root cause is that either the new added culling tests were incorrect, or the original code snippet here was incorrect. I think the reason was the latter, not the new added tests. \n\nPer my understanding, if we say that Y axis is down in WebGPU (Corentin told me about this in https://dawn-review.googlesource.com/c/dawn/+/8401), and Y is actually down on some backend (like Metal backend and Vulkan backend), then we don\u0027t need to invert winding. Otherwise (like OpenGL backend) we have to invert winding.  \n\nOne example here: if we draw a triangle with 3 points in this sequence: A(-1, -1), B(-1, 0), C(0, -1). The triangle is CW if Y is up, and it is CCW if Y is down. So if we say Y axis is down is WebGPU, then web developers will think that triangle ABC is CCW. As a result, when we map it to Metal, we don\u0027t need to invert CCW to CW. On the contrary, when we implement it on OpenGL, we need to invert CCW to CW.    \n\nWhat do you think?\n\n(btw, I didn\u0027t invert CCW/CW to CW/CCW on Vulkan backend and the new added culling tests can pass on my local machine.)",
+      "parentUuid": "d8a7bd83_2151a37e",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
