@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "682d9ec0_a734d57d",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-28T03:09:41Z",
+      "side": 1,
+      "message": "Instead of pass parameters to isCCWTriangleCulled, we can also compute the its value according to frontFace and cullMode. It equals to (frontFace \u003d\u003d dawn::FrontFace::CCW \u0026\u0026 cullMode \u003d\u003d dawn::CullMode::Front) || (frontFace \u003d\u003d dawn::FrontFace::CW \u0026\u0026 cullMode \u003d\u003d dawn::CullMode::Back). \n\nA little bit long, so I pass parameter. If you prefer to compute the value, I can do that.",
+      "range": {
+        "startLine": 90,
+        "startChar": 12,
+        "endLine": 90,
+        "endChar": 31
+      },
+      "revId": "01cc350188ec7fd033fba3b9b412b74a20d71780",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6c1aa65_5161e63a",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-28T03:09:41Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 96,
+        "startChar": 12,
+        "endLine": 96,
+        "endChar": 30
+      },
+      "revId": "01cc350188ec7fd033fba3b9b412b74a20d71780",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

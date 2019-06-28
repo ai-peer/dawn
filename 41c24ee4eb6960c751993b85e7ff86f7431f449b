@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97f641d3_a5d3b6e3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-28T03:09:41Z",
+      "side": 0,
+      "message": "The tests showed that we couldn\u0027t invert front face. Otherwise, the tests fail on all HWs.",
+      "range": {
+        "startLine": 286,
+        "startChar": 12,
+        "endLine": 286,
+        "endChar": 97
+      },
+      "revId": "41c24ee4eb6960c751993b85e7ff86f7431f449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
