@@ -163,6 +163,24 @@
     },
     {
       "key": {
+        "uuid": "6536cb64_a30d6443",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-06-28T18:56:28Z",
+      "side": 1,
+      "message": "Make sense. So I think that we don\u0027t need to invert CCW to CW for Metal backend if we tell web developers that Y axis is down.",
+      "parentUuid": "78231ef0_fc16122d",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
