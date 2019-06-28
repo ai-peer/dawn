@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1a4f46c_2261f011",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-28T10:23:43Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this was correct see explanation in [1]",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74cc03fb_c7a94ba4",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-28T10:23:43Z",
+      "side": 1,
+      "message": "[1] These triangles are actually the inverse of what\u0027s described in the comment. The winding of a triangle is done in \"framebuffer coordinate\" (Vulkan 1.1 spec 24.7.1. Basic Polygon Rasterization) (GLES 3.1 spec 13.5.1 Basic Polygon Rasterization) using the regular mathematical convention of Y being \"up\". That the displaying of textures on the screen is Y down is independent of frontFace computations.",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
