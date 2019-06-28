@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "fd6a050c_d5949323",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-28T11:14:36Z",
+      "side": 1,
+      "message": "Sorry I wasn\u0027t being clear, and while the comment above would help mobile GPU drivers optimize we probably don\u0027t need this complexity yet. See comment on latest patchset.",
+      "parentUuid": "2c2594f3_ac949aa9",
+      "revId": "ba9ad74345b85f69640848d974c77fec9d230e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2d6c914_6b7465ab",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 4
