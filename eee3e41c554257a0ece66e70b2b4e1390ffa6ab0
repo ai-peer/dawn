@@ -22,6 +22,30 @@
       "revId": "eee3e41c554257a0ece66e70b2b4e1390ffa6ab0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0584673_9591f80c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-06-28T17:43:44Z",
+      "side": 0,
+      "message": "I think I added this when testing because I was getting a nullptr but it shouldn\u0027t be a problem anymore and can be removed.",
+      "parentUuid": "cb5641b6_e64688e1",
+      "range": {
+        "startLine": 178,
+        "startChar": 56,
+        "endLine": 178,
+        "endChar": 74
+      },
+      "revId": "eee3e41c554257a0ece66e70b2b4e1390ffa6ab0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
