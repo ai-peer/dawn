@@ -181,6 +181,17 @@ namespace dawn_native { namespace vulkan {
                     }
 
                     query.SetColor(i, attachmentInfo.view->GetFormat(), loadOp, hasResolveTarget);
+
+                    const Texture* backendTexture = ToBackend(attachmentInfo.view->GetTexture());
+                    VkSemaphore signalSemaphore = backendTexture->GetSignalSemaphore();
+                    const std::vector<VkSemaphore>* waitRequirements =
+                        backendTexture->GetWaitRequirements();
+                    for (const VkSemaphore& semaphore : *waitRequirements) {
+                        device->AddWaitSemaphore(semaphore);
+                    }
+                    if (signalSemaphore != VK_NULL_HANDLE) {
+                        device->AddSignalSemaphore(signalSemaphore);
+                    }
                 }
 
                 if (renderPass->hasDepthStencilAttachment) {

@@ -30,10 +30,19 @@ namespace dawn_native { namespace vulkan {
       public:
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage);
+        Texture(Device* device,
+                const TextureDescriptor* descriptor,
+                VkImage nativeImage,
+                VkDeviceMemory memory,
+                const std::vector<VkSemaphore>* waitRequirements,
+                VkSemaphore doneSemaphore);
         ~Texture();
 
         VkImage GetHandle() const;
         VkImageAspectFlags GetVkAspectMask() const;
+        VkSemaphore GetSignalSemaphore() const;
+
+        const std::vector<VkSemaphore>* GetWaitRequirements() const;
 
         // Transitions the texture to be used as `usage`, recording any necessary barrier in
         // `commands`.
@@ -54,6 +63,9 @@ namespace dawn_native { namespace vulkan {
                           uint32_t layerCount);
 
         VkImage mHandle = VK_NULL_HANDLE;
+        VkDeviceMemory mProvidedMemoryAllocation = VK_NULL_HANDLE;
+        VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
+        std::vector<VkSemaphore> mWaitRequirements;
         DeviceMemoryAllocation mMemoryAllocation;
 
         // A usage of none will make sure the texture is transitioned before its first use as
