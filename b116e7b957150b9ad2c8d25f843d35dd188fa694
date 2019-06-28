@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a09b7df_be058ed3",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-06-28T02:50:50Z",
+      "side": 1,
+      "message": "nit: This is the same texture as on line 656.\nBut also, when is the texture ever nullptr?",
+      "range": {
+        "startLine": 662,
+        "startChar": 74,
+        "endLine": 662,
+        "endChar": 92
+      },
+      "revId": "b116e7b957150b9ad2c8d25f843d35dd188fa694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
