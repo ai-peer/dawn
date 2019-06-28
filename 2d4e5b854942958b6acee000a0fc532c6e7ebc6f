@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "2d55336e_a6dcf056",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-28T17:54:38Z",
+      "side": 1,
+      "message": "I was looking at this at the same time, and I\u0027m confused as well: If these tests all pass on all backends, then they must be behaving consistently. And yet, this switch was needed for actual demos to render correctly.\n\nDoes shader (-1,-1) show up in the lower left or the upper left? This test seems to say it\u0027s the upper left, but I thought it was the lower left. I\u0027m trying to test this now.",
+      "parentUuid": "342ccbe4_7dabe8d9",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
@@ -66,6 +84,29 @@
       "writtenOn": "2019-06-28T10:23:43Z",
       "side": 1,
       "message": "[1] These triangles are actually the inverse of what\u0027s described in the comment. The winding of a triangle is done in \"framebuffer coordinate\" (Vulkan 1.1 spec 24.7.1. Basic Polygon Rasterization) (GLES 3.1 spec 13.5.1 Basic Polygon Rasterization) using the regular mathematical convention of Y being \"up\". That the displaying of textures on the screen is Y down is independent of frontFace computations.",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05f1a44c_de352b6f",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-28T17:54:38Z",
+      "side": 1,
+      "message": "nit: factor out these constants into \"kTriangleVisible\" and \"kTriangleCulled\"",
+      "range": {
+        "startLine": 91,
+        "startChar": 34,
+        "endLine": 91,
+        "endChar": 55
+      },
       "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
