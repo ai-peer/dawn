@@ -236,6 +236,24 @@
     },
     {
       "key": {
+        "uuid": "d35f6313_e9ed63a8",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T08:08:24Z",
+      "side": 1,
+      "message": ":(",
+      "parentUuid": "346b4cd5_3513cc3c",
+      "revId": "a5bcc7501de94a3a38d417b41c1cc6b6cbc93e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "833382cf_a714dfea",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 14
@@ -300,6 +318,24 @@
       "side": 1,
       "message": "Yes but the virtual sizes of both source and destination texture are all 15x15, so here we does not meet errors from Vulkan validation layer because we are following the \"... or (imageExtent.width + imageOffset.x) must equal the image subresource width\" rule.",
       "parentUuid": "726b877e_1a2d38a3",
+      "revId": "a5bcc7501de94a3a38d417b41c1cc6b6cbc93e3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc1c3e7a_074a00c0",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T08:08:24Z",
+      "side": 1,
+      "message": "Makes sense!",
+      "parentUuid": "1e229241_38ec9042",
       "revId": "a5bcc7501de94a3a38d417b41c1cc6b6cbc93e3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
