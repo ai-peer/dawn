@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "53c5d4df_04ff7c6a",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-01T18:47:07Z",
+      "side": 1,
+      "message": "Done. I looked into it, and it was passing because none of the textures in the tests had usage with just outputAttachments, so actually none of them went through this path.",
+      "parentUuid": "4a9123b3_6e035d23",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 17
+      },
+      "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f4bec96_f58a4bbf",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2019-07-01T09:59:18Z",
       "side": 1,
       "message": "Why is this a separate code path from color?",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 20
+      },
+      "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4b5b1b2_4c5fe292",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-01T18:47:07Z",
+      "side": 1,
+      "message": "probably because my loop went to max texture level, which caused an error on depth stencil images. it should be ok now to be the same path.",
+      "parentUuid": "0f4bec96_f58a4bbf",
       "range": {
         "startLine": 179,
         "startChar": 0,
@@ -68,6 +116,30 @@
       "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce94d412_4f4842ee",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-01T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b6e0d9d_c4a91190",
+      "range": {
+        "startLine": 183,
+        "startChar": 41,
+        "endLine": 183,
+        "endChar": 61
+      },
+      "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
