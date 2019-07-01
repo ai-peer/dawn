@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a9123b3_6e035d23",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T09:59:18Z",
+      "side": 1,
+      "message": "Actually since we removed all the logic for BeginRenderPass we need to clear OutputAttachment texture otherwise the render targets are never cleared. I\u0027m surprised the tests pass.",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 17
+      },
+      "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f4bec96_f58a4bbf",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T09:59:18Z",
+      "side": 1,
+      "message": "Why is this a separate code path from color?",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 20
+      },
+      "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b6e0d9d_c4a91190",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T09:59:18Z",
+      "side": 1,
+      "message": "This should be GetMipLevelCount()",
+      "range": {
+        "startLine": 183,
+        "startChar": 41,
+        "endLine": 183,
+        "endChar": 61
+      },
+      "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59657732_f6a2c206",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T09:59:18Z",
+      "side": 1,
+      "message": "We\u0027re also missing a test for color attachments being cleared. That would have caught the fact that we completely skip clearing color attachments.",
+      "revId": "8d804467926623d04c09bc24832f765a738bb5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
