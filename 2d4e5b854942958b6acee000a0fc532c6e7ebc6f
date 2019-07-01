@@ -235,6 +235,24 @@
     },
     {
       "key": {
+        "uuid": "e48fca30_f791e5b9",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-01T18:32:13Z",
+      "side": 1,
+      "message": "With the CW/CCW flipped here, the culling behavior is still reversed relative to the Vulkan backend in Yunchao\u0027s other patch. We also already have one thing which flips Y relative to the shader code - flip_vert_y in MTLShaderModule, which I think takes care of Metal\u0027s flip between clipspace and framebuffer coordinates.",
+      "parentUuid": "6f041a63_5c565a47",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
