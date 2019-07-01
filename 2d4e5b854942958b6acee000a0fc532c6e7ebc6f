@@ -217,6 +217,24 @@
     },
     {
       "key": {
+        "uuid": "6f041a63_5c565a47",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T09:15:35Z",
+      "side": 1,
+      "message": "I\u0027m still convinced that we shouldn\u0027t change the MTLFrontFace here. There are three coordinate systems and frontFace only applies on one of them:\n\n - clipspace coordinates: what\u0027s in gl_Position with X in [-1, 1] and Y in [-1, 1] (this is actually called normalized device coordinates but w/e)\n - framebuffer coordinates: in texels, X in [0, w], and Y in [0, h]. **This is where frontFace computation happens**. ClipSpaceTest checks that the transform from clipspace to framebuffer is frambufferCoords \u003d (clipspaceCoord + vec2(1.0)) * vec2(w, h) /  2. Note that there is no inversion of Y. This is where Metal differs from other APIs because it flips the transform from clipspace to framebuffer, flipping the winding of triangles at the same time.\n - window coordinates: in screen pixels, only for textures that are presented to the screen. This is where we say that OpenGL is Y up while WebGPU and Vulkan/D3D12 are Y down.\n\nYou can see the difference in https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf section 1.6 Metal Coordinate Systems vs. Vulkan\u0027s section 23.5. Controlling the Viewport.",
+      "parentUuid": "d6053a19_8e95d98b",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
@@ -246,6 +264,24 @@
       "side": 1,
       "message": "Shouldn\u0027t WebGPU\u0027s CCW always match the winding as it appears on the screen? Regardless of framebuffer coordinates.",
       "parentUuid": "74cc03fb_c7a94ba4",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a781581_33ef56d7",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-01T09:15:35Z",
+      "side": 1,
+      "message": "It shouldn\u0027t because how a texture is presented is not linked at all to how it is rendered.",
+      "parentUuid": "95a0c37a_8a0dbc08",
       "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
