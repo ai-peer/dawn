@@ -22,35 +22,34 @@ class ClipSpaceTest : public DawnTest {
     dawn::RenderPipeline CreatePipelineForTest() {
         utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
 
-        // Draw two triangles:
-        // 1. The depth value of the top-left one is >= 0.5
-        // 2. The depth value of the bottom-right one is <= 0.5
-        const char* vs =
-            R"(#version 450
-        const vec3 pos[6] = vec3[6](vec3(-1.0f, -1.0f, 1.0f),
-                                    vec3(-1.0f,  1.0f, 0.5f),
-                                    vec3( 1.0f, -1.0f, 0.5f),
-                                    vec3( 1.0f, -1.0f, 0.5f),
-                                    vec3(-1.0f,  1.0f, 0.5f),
-                                    vec3( 1.0f,  1.0f, 0.0f));
-        void main() {
-           gl_Position = vec4(pos[gl_VertexIndex], 1.0);
-       })";
+        // Draws two points. Assuming a 2x2 render target they are the following:
+        //   - A green point at clipspace coordinate -0.5, -0.5 which should be in texel 0, 0
+        //   - A red point at clipspace coordinate 0.5, 0.5 which should be in texel 1, 1
         pipelineDescriptor.cVertexStage.module =
-            utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, vs);
+            utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, R"(#version 450
+                const vec2 pos[2] = vec2[2](
+                    vec2(-0.5f, -0.5f),
+                    vec2(0.5f, 0.5f)
+                );
+                const vec4 color[2] = vec4[2](
+                    vec4(0.0f, 1.0f, 0.0f, 1.0f),
+                    vec4(1.0f, 0.0f, 0.0f, 1.0f)
+                );
+                layout(location = 0) out vec4 pointColor;
+                void main() {
+                    gl_Position = vec4(pos[gl_VertexIndex], 0.0f, 1.0f);
+                    pointColor = color[gl_VertexIndex];
+                })");
 
-        const char* fs =
-            "#version 450\n"
-            "layout(location = 0) out vec4 fragColor;"
-            "void main() {\n"
-            "   fragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
-            "}\n";
         pipelineDescriptor.cFragmentStage.module =
-            utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, fs);
+            utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, R"(#version 450
+            layout(location = 0) in vec4 pointColor;
+            layout(location = 0) out vec4 fragColor;
+            void main() {
+               fragColor = pointColor;
+            })");
 
-        pipelineDescriptor.cDepthStencilState.depthCompare = dawn::CompareFunction::LessEqual;
-        pipelineDescriptor.depthStencilState = &pipelineDescriptor.cDepthStencilState;
-
+        pipelineDescriptor.primitiveTopology = dawn::PrimitiveTopology::PointList;
         return device.CreateRenderPipeline(&pipelineDescriptor);
     }
 
@@ -67,29 +66,22 @@ class ClipSpaceTest : public DawnTest {
         return device.CreateTexture(&textureDescriptor);
     }
 
-    static constexpr uint32_t kSize = 4;
+    static constexpr uint32_t kSize = 2;
 };
 
 // Test that the clip space is correctly configured.
 TEST_P(ClipSpaceTest, ClipSpace) {
     dawn::Texture colorTexture = Create2DTextureForTest(dawn::TextureFormat::RGBA8Unorm);
-    dawn::Texture depthStencilTexture =
-        Create2DTextureForTest(dawn::TextureFormat::Depth24PlusStencil8);
 
     utils::ComboRenderPassDescriptor renderPassDescriptor(
-        {colorTexture.CreateDefaultView()}, depthStencilTexture.CreateDefaultView());
-    renderPassDescriptor.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 1.0, 0.0, 1.0};
+        {colorTexture.CreateDefaultView()});
+    renderPassDescriptor.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 0.0, 0.0, 0.0};
     renderPassDescriptor.cColorAttachmentsInfoPtr[0]->loadOp = dawn::LoadOp::Clear;
-
-    // Clear the depth stencil attachment to 0.5f, so only the bottom-right triangle should be
-    // drawn.
-    renderPassDescriptor.cDepthStencilAttachmentInfo.clearDepth = 0.5f;
-    renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = dawn::LoadOp::Clear;
 
     dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     dawn::RenderPassEncoder renderPass = commandEncoder.BeginRenderPass(&renderPassDescriptor);
     renderPass.SetPipeline(CreatePipelineForTest());
-    renderPass.Draw(6, 1, 0, 0);
+    renderPass.Draw(2, 1, 0, 0);
     renderPass.EndPass();
     dawn::CommandBuffer commandBuffer = commandEncoder.Finish();
     dawn::Queue queue = device.CreateQueue();
