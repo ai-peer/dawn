@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43fc126c_dc721902",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-02T14:52:03Z",
+      "side": 1,
+      "message": "nit: Right now |imageExtent| and |imageExtendDst| are the same. Looks like you\u0027re going to add a workaround here so I\u0027m okay with this if the redundancy will be removed later.",
+      "range": {
+        "startLine": 127,
+        "startChar": 21,
+        "endLine": 127,
+        "endChar": 32
+      },
+      "revId": "dcca723ffa7133d9c5f74a94c15b4115b81f4511",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
