@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "173a85a1_fafdbac9",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-02T15:02:14Z",
+      "side": 1,
+      "message": "Probably, but it looks like SRVs may be more optimal for read-only cases.\nhttps://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/shader-resource-view--srv-\n\n\"Unordered access views are slightly more costly in terms of performance, but allow, for example, a texture to be written to at the same time that it is being read from. This enables the updated texture to be re-used by the graphics pipeline for some other purpose. Shader resource views are for read only use (which is the most common use of resources).\"",
+      "parentUuid": "d1d42c1d_c8c87ec0",
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c1fd8bcb_6b3ee25b",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
