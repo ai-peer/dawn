@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b071424a_1cfbbc57",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-02T02:21:24Z",
+      "side": 1,
+      "message": "Why you use strstr instead of strcmp here?",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 18
+      },
+      "revId": "367012070d1b901982e67c016a6cc051671f39df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce0c8a0e_9d34bfaa",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-02T02:21:24Z",
+      "side": 1,
+      "message": "nullptr",
+      "range": {
+        "startLine": 120,
+        "startChar": 53,
+        "endLine": 120,
+        "endChar": 57
+      },
+      "revId": "367012070d1b901982e67c016a6cc051671f39df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e60a256c_72b75f95",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-02T02:21:24Z",
+      "side": 1,
+      "message": "Maybe we can get vendor id from the vendor name returned by OpenGL and Metal APIs instead.",
+      "range": {
+        "startLine": 339,
+        "startChar": 54,
+        "endLine": 339,
+        "endChar": 60
+      },
+      "revId": "367012070d1b901982e67c016a6cc051671f39df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b5eee71_68dcee0d",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-02T02:21:24Z",
+      "side": 1,
+      "message": "Could you define a constant as the flag to allow all vendor ids instead of using \"0\" here?\nThe name of the constant could be \"kAllVendors\"?",
+      "range": {
+        "startLine": 341,
+        "startChar": 43,
+        "endLine": 341,
+        "endChar": 44
+      },
+      "revId": "367012070d1b901982e67c016a6cc051671f39df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
