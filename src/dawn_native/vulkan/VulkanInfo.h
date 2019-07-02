@@ -32,6 +32,8 @@ namespace dawn_native { namespace vulkan {
     extern const char kExtensionNameExtDebugMarker[];
     extern const char kExtensionNameExtDebugReport[];
     extern const char kExtensionNameMvkMacosSurface[];
+    extern const char kExtensionNameKhrExternalSemaphore[];
+    extern const char kExtensionNameKhrExternalSemaphoreFd[];
     extern const char kExtensionNameKhrSurface[];
     extern const char kExtensionNameKhrSwapchain[];
     extern const char kExtensionNameKhrWaylandSurface[];
@@ -68,6 +70,8 @@ namespace dawn_native { namespace vulkan {
 
         // Extensions
         bool debugMarker = false;
+        bool externalSemaphore = false;
+        bool externalSemaphoreFd = false;
         bool swapchain = false;
     };
 
