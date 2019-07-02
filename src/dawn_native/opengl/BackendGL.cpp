@@ -14,6 +14,7 @@
 
 #include "dawn_native/opengl/BackendGL.h"
 
+#include <iostream>
 #include "dawn_native/OpenGLBackend.h"
 #include "dawn_native/opengl/DeviceGL.h"
 
@@ -37,6 +38,9 @@ namespace dawn_native { namespace opengl {
             mFunctions.Enable(GL_MULTISAMPLE);
 
             mPCIInfo.name = reinterpret_cast<const char*>(mFunctions.GetString(GL_RENDERER));
+
+            std::string vendorName = reinterpret_cast<const char*>(mFunctions.GetString(GL_VENDOR));
+            std::cout << "OpenGL: Vendor Name = " << vendorName << std::endl;
 
             return {};
         }
