@@ -265,7 +265,8 @@ namespace dawn_native { namespace opengl {
                         }
                     } break;
 
-                    case dawn::BindingType::StorageBuffer: {
+                    case dawn::BindingType::StorageBuffer:
+                    case dawn::BindingType::ReadonlyStorageBuffer: {
                         BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                         GLuint buffer = ToBackend(binding.buffer)->GetHandle();
                         GLuint ssboIndex = indices[bindingIndex];
@@ -274,11 +275,7 @@ namespace dawn_native { namespace opengl {
                                            binding.offset, binding.size);
                     } break;
 
-                    // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-                    case dawn::BindingType::DynamicUniformBuffer:
-                    case dawn::BindingType::DynamicStorageBuffer:
-                        UNREACHABLE();
-                        break;
+                        // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
                 }
             }
         }

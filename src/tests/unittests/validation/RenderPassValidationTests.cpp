@@ -49,9 +49,9 @@ void main() {
 
     dawn::BindGroupLayout bgls[] = {
         utils::MakeBindGroupLayout(
-            device, {{0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer}}),
-        utils::MakeBindGroupLayout(
-            device, {{0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}})};
+            device, {{0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer, false}}),
+        utils::MakeBindGroupLayout(device, {{0, dawn::ShaderStageBit::Fragment,
+                                             dawn::BindingType::UniformBuffer, false}})};
 
     dawn::PipelineLayoutDescriptor pipelineLayoutDesc;
     pipelineLayoutDesc.bindGroupLayoutCount = 2;

@@ -168,8 +168,8 @@ void init() {
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer},
-                    {1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer},
+                    {0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer, false},
+                    {1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer, false},
                 });
 
     dawn::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);

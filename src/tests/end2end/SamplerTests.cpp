@@ -43,10 +43,11 @@ protected:
         mRenderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
         mBindGroupLayout = utils::MakeBindGroupLayout(
-            device, {
-                        {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler},
-                        {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture},
-                    });
+            device,
+            {
+                {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler, false},
+                {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture, false},
+            });
 
         auto pipelineLayout = utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
 

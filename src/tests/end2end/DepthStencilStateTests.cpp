@@ -83,7 +83,7 @@ class DepthStencilStateTest : public DawnTest {
             bindGroupLayout = utils::MakeBindGroupLayout(
                 device, {
                             {0, dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment,
-                             dawn::BindingType::UniformBuffer},
+                             dawn::BindingType::UniformBuffer, false},
                         });
 
             pipelineLayout = utils::MakeBasicPipelineLayout(device, &bindGroupLayout);

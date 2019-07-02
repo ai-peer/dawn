@@ -123,7 +123,8 @@ namespace dawn_native { namespace opengl {
                         gl.UniformBlockBinding(mProgram, location, indices[group][binding]);
                     } break;
 
-                    case dawn::BindingType::StorageBuffer: {
+                    case dawn::BindingType::StorageBuffer:
+                    case dawn::BindingType::ReadonlyStorageBuffer: {
                         GLuint location = gl.GetProgramResourceIndex(
                             mProgram, GL_SHADER_STORAGE_BLOCK, name.c_str());
                         gl.ShaderStorageBlockBinding(mProgram, location, indices[group][binding]);
@@ -136,10 +137,6 @@ namespace dawn_native { namespace opengl {
                         break;
 
                     // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-                    case dawn::BindingType::DynamicUniformBuffer:
-                    case dawn::BindingType::DynamicStorageBuffer:
-                        UNREACHABLE();
-                        break;
                 }
             }
         }

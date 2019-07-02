@@ -22,11 +22,11 @@ class ObjectCachingTest : public DawnTest {};
 // Test that BindGroupLayouts are correctly deduplicated.
 TEST_P(ObjectCachingTest, BindGroupLayoutDeduplication) {
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false}});
     dawn::BindGroupLayout sameBgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false}});
     dawn::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer, false}});
 
     EXPECT_NE(bgl.Get(), otherBgl.Get());
     EXPECT_EQ(bgl.Get() == sameBgl.Get(), !UsesWire());
@@ -36,16 +36,17 @@ TEST_P(ObjectCachingTest, BindGroupLayoutDeduplication) {
 TEST_P(ObjectCachingTest, ErrorObjectDoesntUncache) {
     ASSERT_DEVICE_ERROR(
         dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-            device, {{0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer},
-                     {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}}));
+            device,
+            {{0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false},
+             {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false}}));
 }
 
 // Test that PipelineLayouts are correctly deduplicated.
 TEST_P(ObjectCachingTest, PipelineLayoutDeduplication) {
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false}});
     dawn::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer, false}});
 
     dawn::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
     dawn::PipelineLayout samePl = utils::MakeBasicPipelineLayout(device, &bgl);
@@ -131,9 +132,9 @@ TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnShaderModule) {
 // Test that ComputePipeline are correctly deduplicated wrt. their layout
 TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnLayout) {
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false}});
     dawn::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer, false}});
 
     dawn::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
     dawn::PipelineLayout samePl = utils::MakeBasicPipelineLayout(device, &bgl);
@@ -169,9 +170,9 @@ TEST_P(ObjectCachingTest, ComputePipelineDeduplicationOnLayout) {
 // Test that RenderPipelines are correctly deduplicated wrt. their layout
 TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnLayout) {
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false}});
     dawn::BindGroupLayout otherBgl = utils::MakeBindGroupLayout(
-        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer}});
+        device, {{1, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer, false}});
 
     dawn::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
     dawn::PipelineLayout samePl = utils::MakeBasicPipelineLayout(device, &bgl);

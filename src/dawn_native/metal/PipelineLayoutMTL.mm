@@ -42,8 +42,7 @@ namespace dawn_native { namespace metal {
                     switch (groupInfo.types[binding]) {
                         case dawn::BindingType::UniformBuffer:
                         case dawn::BindingType::StorageBuffer:
-                        case dawn::BindingType::DynamicUniformBuffer:
-                        case dawn::BindingType::DynamicStorageBuffer:
+                        case dawn::BindingType::ReadonlyStorageBuffer:
                             mIndexInfo[stage][group][binding] = bufferIndex;
                             bufferIndex++;
                             break;

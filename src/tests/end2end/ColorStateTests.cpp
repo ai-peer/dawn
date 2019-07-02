@@ -38,9 +38,10 @@ class ColorStateTest : public DawnTest {
             )");
 
         bindGroupLayout = utils::MakeBindGroupLayout(
-            device, {
-                        {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer},
-                    });
+            device,
+            {
+                {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer, false},
+            });
 
         pipelineLayout = utils::MakeBasicPipelineLayout(device, &bindGroupLayout);
 

@@ -126,11 +126,10 @@ namespace dawn_native {
             // Perform binding-type specific validation.
             switch (layoutInfo.types[bindingIndex]) {
                 case dawn::BindingType::UniformBuffer:
-                case dawn::BindingType::DynamicUniformBuffer:
                     DAWN_TRY(ValidateBufferBinding(device, binding, dawn::BufferUsageBit::Uniform));
                     break;
                 case dawn::BindingType::StorageBuffer:
-                case dawn::BindingType::DynamicStorageBuffer:
+                case dawn::BindingType::ReadonlyStorageBuffer:
                     DAWN_TRY(ValidateBufferBinding(device, binding, dawn::BufferUsageBit::Storage));
                     break;
                 case dawn::BindingType::SampledTexture:
@@ -209,8 +208,7 @@ namespace dawn_native {
         ASSERT(mLayout->GetBindingInfo().types[binding] == dawn::BindingType::UniformBuffer ||
                mLayout->GetBindingInfo().types[binding] == dawn::BindingType::StorageBuffer ||
                mLayout->GetBindingInfo().types[binding] ==
-                   dawn::BindingType::DynamicUniformBuffer ||
-               mLayout->GetBindingInfo().types[binding] == dawn::BindingType::DynamicStorageBuffer);
+                   dawn::BindingType::ReadonlyStorageBuffer);
         BufferBase* buffer = static_cast<BufferBase*>(mBindings[binding].Get());
         return {buffer, mOffsets[binding], mSizes[binding]};
     }

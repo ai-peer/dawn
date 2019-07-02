@@ -47,8 +47,8 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
                                      uint64_t indirectOffset) {
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer},
-                    {1, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer},
+                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, false},
+                    {1, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, false},
                 });
 
     // Set up shader and pipeline

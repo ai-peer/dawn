@@ -28,7 +28,7 @@ class ComputeSharedMemoryTests : public DawnTest {
 void ComputeSharedMemoryTests::BasicTest(const char* shader) {
     auto bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer},
+                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, false},
                 });
 
     // Set up shader and pipeline

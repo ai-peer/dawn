@@ -77,8 +77,9 @@ class TextureFormatTest : public DawnTest {
         DawnTest::SetUp();
 
         mSampleBGL = utils::MakeBindGroupLayout(
-            device, {{0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler},
-                     {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture}});
+            device,
+            {{0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler, false},
+             {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture, false}});
     }
 
     // Describes what the "decompressed" data type for a texture format is. For example normalized

@@ -257,10 +257,11 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
             dawn::Sampler sampler = device.CreateSampler(&samplerDescriptor);
 
             bgl = utils::MakeBindGroupLayout(
-                device, {
-                            {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler},
-                            {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture},
-                        });
+                device,
+                {
+                    {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler, false},
+                    {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture, false},
+                });
 
             bindGroup = utils::MakeBindGroup(device, bgl, {{0, sampler}, {1, textureView}});
         }

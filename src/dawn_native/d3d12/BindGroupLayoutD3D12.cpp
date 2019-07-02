@@ -31,6 +31,7 @@ namespace dawn_native { namespace d3d12 {
                 case dawn::BindingType::StorageBuffer:
                     mBindingOffsets[binding] = mDescriptorCounts[UAV]++;
                     break;
+                case dawn::BindingType::ReadonlyStorageBuffer:
                 case dawn::BindingType::SampledTexture:
                     mBindingOffsets[binding] = mDescriptorCounts[SRV]++;
                     break;
@@ -38,10 +39,6 @@ namespace dawn_native { namespace d3d12 {
                     mBindingOffsets[binding] = mDescriptorCounts[Sampler]++;
                     break;
                 // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-                case dawn::BindingType::DynamicUniformBuffer:
-                case dawn::BindingType::DynamicStorageBuffer:
-                    UNREACHABLE();
-                    break;
             }
         }
 
@@ -94,6 +91,7 @@ namespace dawn_native { namespace d3d12 {
                 case dawn::BindingType::StorageBuffer:
                     mBindingOffsets[binding] += descriptorOffsets[UAV];
                     break;
+                case dawn::BindingType::ReadonlyStorageBuffer:
                 case dawn::BindingType::SampledTexture:
                     mBindingOffsets[binding] += descriptorOffsets[SRV];
                     break;
@@ -101,10 +99,6 @@ namespace dawn_native { namespace d3d12 {
                     mBindingOffsets[binding] += descriptorOffsets[Sampler];
                     break;
                 // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-                case dawn::BindingType::DynamicUniformBuffer:
-                case dawn::BindingType::DynamicStorageBuffer:
-                    UNREACHABLE();
-                    break;
             }
         }
     }
