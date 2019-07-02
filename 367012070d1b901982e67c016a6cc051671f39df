@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "68d05544_d568c31a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-02T07:21:41Z",
+      "side": 1,
+      "message": "I suggest you use the style in Dawn samples.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/examples/SampleUtils.cpp?l\u003d175\n\ne.g. ./CppHelloTriangle --backend vulkan\n\nHere \"--backend\" is argv[1] and \"vulkan\" is argv[2]",
+      "parentUuid": "c4cd61ee_795401a9",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 18
+      },
+      "revId": "367012070d1b901982e67c016a6cc051671f39df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce0c8a0e_9d34bfaa",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 1
