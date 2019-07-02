@@ -396,6 +396,24 @@
     },
     {
       "key": {
+        "uuid": "64529211_c7bb24ce",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-02T20:30:51Z",
+      "side": 1,
+      "message": "Agreed with Kai. As I said at another comment. clipping/culling are applied on NDC (Nornalized Device Coordinates, aka clip coordinates). If we say Y is down in NDC for WebGPU, and WebGPU developers follow this rule and set appropriate cull mode and winding direction, it should behave correctly (for example, enable back-face culling), and the CCW triangle in NDC should be presented CCW on screen. If WebGPU developers set a triangle at top-left in its model according to WebGPU\u0027s spec (for example, WebGPU\u0027s spec need to clearly state that Y is down, where is the origin of NDC, where is the origin of framebuffer coordinate, where is the origin of texture coordinate, etc.) but it isn\u0027t drawn at top-left on the screen because of flip Y or CCW/CW intersion, then it is weird. Developers can\u0027t rely on such an implementation. \n\nHowever, this is done by an implementation chain, not only by dawn project.\n\nWebGPU\u0027s implementations, say dawn project, need to map its NDC and framebuffer coordinate to different backends. This means some operations like flip Y or CCW/CW inversion is needed for some backends. Likewise, every backend has its own behavior (Y is up or down in its NDC), and its driver implementation should map its coordinates correctly on different HWs. Finally, a CCW triangle in WebGPU\u0027s NDC coordinates went through all these implementation chains, and being presented CCW on screen on all backends and hws. But Dawn doesn\u0027t need to care about how Metal/D3D12/Vulkan/OpenGL backends map their own coordinates to hw and how to correctly present triangles on the screen (Well, sometime we do need to know this if the driver is broken for some reason and we have to have a workaround for a particular case). What we need to do is mapping WebGPU\u0027s coordinates to backends correctly and make sure it is finnally presentend correctly on the screen (via tests to verify this).",
+      "parentUuid": "f1aca285_5867edc8",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05f1a44c_de352b6f",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
