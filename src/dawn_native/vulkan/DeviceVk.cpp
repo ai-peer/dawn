@@ -295,8 +295,8 @@ namespace dawn_native { namespace vulkan {
         submitInfo.pWaitDstStageMask = dstStageMasks.data();
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = &mPendingCommands.commandBuffer;
-        submitInfo.signalSemaphoreCount = 0;
-        submitInfo.pSignalSemaphores = 0;
+        submitInfo.signalSemaphoreCount = mSignalSemaphores.size();
+        submitInfo.pSignalSemaphores = mSignalSemaphores.data();
 
         VkFence fence = GetUnusedFence();
         if (fn.QueueSubmit(mQueue, 1, &submitInfo, fence) != VK_SUCCESS) {
@@ -312,10 +312,25 @@ namespace dawn_native { namespace vulkan {
             mDeleter->DeleteWhenUnused(semaphore);
         }
         mWaitSemaphores.clear();
+
+        for (VkSemaphore semaphore : mSignalSemaphores) {
+            mDeleter->DeleteWhenUnused(semaphore);
+        }
+        mSignalSemaphores.clear();
     }
 
     void Device::AddWaitSemaphore(VkSemaphore semaphore) {
-        mWaitSemaphores.push_back(semaphore);
+        if (std::find(mWaitSemaphores.begin(), mWaitSemaphores.end(), semaphore) ==
+            mWaitSemaphores.end()) {
+            mWaitSemaphores.push_back(semaphore);
+        }
+    }
+
+    void Device::AddSignalSemaphore(VkSemaphore semaphore) {
+        if (std::find(mSignalSemaphores.begin(), mSignalSemaphores.end(), semaphore) ==
+            mSignalSemaphores.end()) {
+            mSignalSemaphores.push_back(semaphore);
+        }
     }
 
     ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalDevice) {
@@ -334,6 +349,16 @@ namespace dawn_native { namespace vulkan {
         if (mDeviceInfo.swapchain) {
             extensionsToRequest.push_back(kExtensionNameKhrSwapchain);
             usedKnobs.swapchain = true;
+        }
+
+        if (mDeviceInfo.externalSemaphore) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphore);
+            usedKnobs.externalSemaphore = true;
+        }
+
+        if (mDeviceInfo.externalSemaphoreFd) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreFd);
+            usedKnobs.externalSemaphoreFd = true;
         }
 
         // Always require independentBlend because it is a core Dawn feature

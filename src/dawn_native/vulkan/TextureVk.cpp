@@ -467,6 +467,21 @@ namespace dawn_native { namespace vulkan {
         : TextureBase(device, descriptor, TextureState::OwnedExternal), mHandle(nativeImage) {
     }
 
+    // Internally managed, but not constructed
+    Texture::Texture(Device* device,
+                     const TextureDescriptor* descriptor,
+                     VkImage nativeImage,
+                     VkDeviceMemory memory,
+                     const std::vector<VkSemaphore>* waitRequirements,
+                     VkSemaphore signalSemaphore)
+        : TextureBase(device, descriptor, TextureState::OwnedInternal),
+          mHandle(nativeImage),
+          mProvidedMemoryAllocation(memory),
+          mSignalSemaphore(signalSemaphore),
+          mWaitRequirements(*waitRequirements) {
+        SetIsSubresourceContentInitialized(0, 1, 0, 1);
+    }
+
     Texture::~Texture() {
         DestroyInternal();
     }
@@ -485,7 +500,24 @@ namespace dawn_native { namespace vulkan {
                 device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             }
         }
+
+        // Resource we own but allocated externally
+        if (mProvidedMemoryAllocation != VK_NULL_HANDLE) {
+            device->fn.FreeMemory(device->GetVkDevice(), mProvidedMemoryAllocation, nullptr);
+
+            if (mHandle != VK_NULL_HANDLE) {
+                device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+
+                // Force a queue submit to signal we are done with the texture
+                // Make sure some buffer exists before submitting
+                device->GetPendingCommandBuffer();
+                device->AddSignalSemaphore(mSignalSemaphore);
+                device->SubmitPendingCommands();
+            }
+        }
+
         mHandle = VK_NULL_HANDLE;
+        mProvidedMemoryAllocation = VK_NULL_HANDLE;
     }
 
     VkImage Texture::GetHandle() const {
@@ -581,6 +613,18 @@ namespace dawn_native { namespace vulkan {
             // bits from recycled memory
             ClearTexture(commands, baseMipLevel, levelCount, baseArrayLayer, layerCount);
         }
+    }
+
+    const std::vector<VkSemaphore>& Texture::GetWaitRequirements() const {
+        return mWaitRequirements;
+    }
+
+    VkSemaphore Texture::GetSignalSemaphore() const {
+        return mSignalSemaphore;
+    }
+
+    void Texture::ClearWaitRequirements() {
+        mWaitRequirements.clear();
     }
 
     // TODO(jiawei.shao@intel.com): create texture view by TextureViewDescriptor

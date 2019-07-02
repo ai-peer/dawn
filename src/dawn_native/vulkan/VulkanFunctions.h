@@ -33,6 +33,10 @@ namespace dawn_native { namespace vulkan {
         MaybeError LoadInstanceProcs(VkInstance instance, const VulkanGlobalKnobs& usedGlobals);
         MaybeError LoadDeviceProcs(VkDevice device, const VulkanDeviceKnobs& usedKnobs);
 
+        // TODO ?
+        PFN_vkImportSemaphoreFdKHR ImportSemaphoreFdKHR = nullptr;
+        PFN_vkGetSemaphoreFdKHR GetSemaphoreFdKHR = nullptr;
+
         // ---------- Global procs
 
         // Initial proc from which we can get all the others
