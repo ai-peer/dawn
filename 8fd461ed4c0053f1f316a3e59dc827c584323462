@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ff32d98_72348c47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:28:24Z",
+      "side": 1,
+      "message": "I don\u0027t think we should handle readonly storage buffers in this patch because it requires being very carefully around usage validation, and synchronization in the backends (in addition to many more tests). ReadonlyStorageBuffer is in milestone 5 too so we can do it later.\n\nThis patch should focus on splitting the dynamicness from the BindingType. That part of the CL LGTM",
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb23a914_59634d08",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:28:24Z",
+      "side": 1,
+      "message": "We should also validate that dynamic is false for BindingType for which dynamic doesn\u0027t make sense. And have a validation test for it.",
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "558ef41a_20a1d438",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:28:24Z",
+      "side": 1,
+      "message": "std::bitset\u003ckMaxBindingsPerGroup\u003e",
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1d42c1d_c8c87ec0",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:28:24Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this should be using an UAV and could share the code path with StorageBuffer.",
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1fd8bcb_6b3ee25b",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:28:24Z",
+      "side": 1,
+      "message": "nit: ++",
+      "range": {
+        "startLine": 245,
+        "startChar": 54,
+        "endLine": 245,
+        "endChar": 58
+      },
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfde03bd_65cc13f8",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:28:24Z",
+      "side": 1,
+      "message": "note: We should add default to Dawn at some point and this should default to false. Maybe in the meantime we can have DawnHelpers MakeBindGroup not take a lit of dawn::BindGroupLayoutBinding but something a bit like utils::BindingInitializationHelper so that we can have dynamic default to false.",
+      "range": {
+        "startLine": 251,
+        "startChar": 85,
+        "endLine": 251,
+        "endChar": 91
+      },
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
