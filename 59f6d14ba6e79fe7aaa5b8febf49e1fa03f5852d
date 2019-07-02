@@ -22,6 +22,30 @@
       "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "117c99ee_c862b7d7",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-02T02:30:21Z",
+      "side": 1,
+      "message": "Comment and assert add.\nFor validation test, I think https://cs.chromium.org/chromium/src/third_party/dawn/src/tests/unittests/validation/BindGroupValidationTests.cpp?l\u003d354\nand https://cs.chromium.org/chromium/src/third_party/dawn/src/tests/unittests/validation/BindGroupValidationTests.cpp?l\u003d645\ncover the validation, Am I right?",
+      "parentUuid": "274de6c8_1f6fec01",
+      "range": {
+        "startLine": 113,
+        "startChar": 17,
+        "endLine": 113,
+        "endChar": 91
+      },
+      "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
