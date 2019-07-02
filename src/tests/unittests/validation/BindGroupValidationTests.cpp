@@ -450,6 +450,7 @@ TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutCache) {
 
 constexpr uint32_t kBufferElementsCount = kMinDynamicBufferOffsetAlignment / sizeof(uint32_t) + 2;
 constexpr uint32_t kBufferSize = kBufferElementsCount * sizeof(uint32_t);
+constexpr uint32_t kBindingSize = 4;
 
 class SetBindGroupValidationTest : public ValidationTest {
   public:
@@ -477,7 +478,7 @@ class SetBindGroupValidationTest : public ValidationTest {
 
         mBindGroup = utils::MakeBindGroup(
             device, mBindGroupLayout,
-            {{0, mUniformBuffer, 0, kBufferSize}, {1, mStorageBuffer, 0, kBufferSize}});
+            {{0, mUniformBuffer, 0, kBindingSize}, {1, mStorageBuffer, 0, kBindingSize}});
     }
     // Create objects to use as resources inside test bind groups.
 
