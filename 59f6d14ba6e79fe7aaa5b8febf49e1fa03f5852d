@@ -46,6 +46,30 @@
       "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "058757c8_4ea5bd57",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T07:39:07Z",
+      "side": 1,
+      "message": "This test bindgroup creation, but there is not test to cover the validation you just added (otherwise it wouldn\u0027t have been missing). Somewhere here https://cs.chromium.org/chromium/src/third_party/dawn/src/tests/unittests/validation/BindGroupValidationTests.cpp?l\u003d645 we need to add a test with a bindgroup that already has an offset set.",
+      "parentUuid": "117c99ee_c862b7d7",
+      "range": {
+        "startLine": 113,
+        "startChar": 17,
+        "endLine": 113,
+        "endChar": 91
+      },
+      "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
