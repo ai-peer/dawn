@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "900fddc5_8f27c0fd",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:14:22Z",
+      "side": 1,
+      "message": "nit: no need to allocated the string, we can just have the if at [1] and output conditionally.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 9
+      },
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef3f8714_a0c613c2",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:14:22Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43535ff3_f5737488",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:14:22Z",
+      "side": 1,
+      "message": "nit: no need to check for Null because it is never used in end2end tests. Since the vendor id is set by command line args, maybe we can assume that when the user passes it we can skip the OpenGL backend and remove that condition too?",
+      "range": {
+        "startLine": 350,
+        "startChar": 40,
+        "endLine": 351,
+        "endChar": 65
+      },
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c70ebc0e_1daa9667",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T09:14:22Z",
+      "side": 1,
+      "message": "PCI vendor ID of 0 is probably valid. Can we have both a mVendorIdFilter and boolean mVendorIfFilterSet?",
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
