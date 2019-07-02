@@ -289,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "2e546317_243681de",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-02T17:30:11Z",
+      "side": 1,
+      "message": "We do have many coordinate systems, for example, clip coordinates (also aka normalized device coordinates, NDC), framebuffer coordinates, and texture coordinates. And there are more coordinate systems like window coordinates and hw device coordinates. I don\u0027t care about window coordinates, because it\u0027s the drivers\u0027 (or system compositors\u0027 or system window manager\u0027s) duty to map Graphics API\u0027s framebuffer coordinates to window coordinates. I don\u0027t care hw device coordinates (or hw device memory layout for graphics) either, because it is display/kernel\u0027s duty. \n\nPer my understanding, clip and culling are applied on NDC, and clip/culling are done after vertex shader but before rasterization. However, viewport and scissor are applied on framebuffer coordinates, and they are done during or after rasterization.\n\nIn OpenGL: Y is up for both NDC and framebuffer coordinates. \nIn Metal and D3D12: Y is up for NDC, but Y is down for framebuffer coordinates. \nIn Vulkan: Y is down for both NDC and framebuffer coordinates. \n(An investigation about this: http://hacksoflife.blogspot.com/2019/04/keeping-blue-side-up-coordinate.html)\n\nCurrently, we inverted CCW/CW on OpenGL but no flip in shader. On Metal/D3D12, we flipped Y in vertex shader on Metal/D3D12 (after flipping, Y is down. And culling will be applied after flipping, so we don\u0027t need to invert CCW/CW on Metal/D3D12). On Vulkan, no flip and no invert at all. Then culling tests can pass on all backends.\n\nSo, it looks like that WebGPU follows Vulkan\u0027s tradition: Y is down in both NDC and framebuffer coordinates. \n\nI may make mistake here, please correct me if I am incorrect.",
+      "parentUuid": "a9b5bc98_34f6671d",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
