@@ -253,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "d817d7cf_fe4ec926",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-02T07:49:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure flip-vert-y helps for CCW vs. CW. I really don\u0027t know how to interpret the Metal spec so we\u0027re 100% sure. At this point what we need are tests that pass on all other backends where we understand what happens (and shouldn\u0027t need CW/CCW inversion), then make Metal pass that test.",
+      "parentUuid": "e48fca30_f791e5b9",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
