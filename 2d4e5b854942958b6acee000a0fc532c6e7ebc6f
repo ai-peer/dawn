@@ -307,6 +307,24 @@
     },
     {
       "key": {
+        "uuid": "30f791b1_cd9d7129",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-02T18:21:52Z",
+      "side": 1,
+      "message": "This seems probably right to me, but do we have tests? If we can test everything (except for the final presentation to the screen) to make sure that all of the following are consistent across backends, then I think we\u0027re OK (might be missing something):\n- which corner is gl_Position\u003d(-1, -1)\n- which corner is gl_FragCoord\u003d(0, 0)\n- which winding has gl_FrontFacing\u003d\u003dtrue (don\u0027t know for sure if spirv-cross supports this everywhere, but hopefully)\n- which winding is considered Front by the cull mode",
+      "parentUuid": "2e546317_243681de",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
@@ -354,6 +372,24 @@
       "side": 1,
       "message": "It shouldn\u0027t because how a texture is presented is not linked at all to how it is rendered.",
       "parentUuid": "95a0c37a_8a0dbc08",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1aca285_5867edc8",
+        "filename": "src/tests/end2end/CullingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-02T18:21:52Z",
+      "side": 1,
+      "message": "But it has to be presented in the same way on all systems, or apps won\u0027t appear consistently. And of the 2 options, we should set it up so that CCW means CCW-on-screen, because the opposite would be confusing to developers.",
+      "parentUuid": "8a781581_33ef56d7",
       "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
