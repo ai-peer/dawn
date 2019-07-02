@@ -40,6 +40,18 @@ namespace dawn_native { namespace opengl {
             }
         }
 
+        void ApplyFrontFaceAndCulling(dawn::FrontFace face, dawn::CullMode mode) {
+            if (mode == dawn::CullMode::None) {
+                gl.Disable(GL_CULL_FACE);
+            } else {
+                GLenum direction = (face == dawn::FrontFace::CCW) ? GL_CCW : GL_CW;
+                gl.FrontFace(direction);
+
+                GLenum cullMode = (mode == dawn::CullMode::Front) ? GL_FRONT : GL_BACK;
+                gl.CullFace(cullMode);
+            }
+        }
+
         GLenum GLBlendFactor(dawn::BlendFactor factor, bool alpha) {
             switch (factor) {
                 case dawn::BlendFactor::Zero:
@@ -235,6 +247,8 @@ namespace dawn_native { namespace opengl {
 
         ASSERT(mVertexArrayObject);
         gl.BindVertexArray(mVertexArrayObject);
+
+        ApplyFrontFaceAndCulling(GetFrontFace(), GetCullMode());
 
         ApplyDepthStencilState(gl, GetDepthStencilStateDescriptor(), &persistentPipelineState);
 
