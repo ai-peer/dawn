@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "482d70c6_9374c031",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-07-02T07:29:14Z",
+      "side": 1,
+      "message": "I want to keep the same style with gtest_filter, otherwise there will be two styles for passing value to args: --adapter-vendor-id 8086 --gtest_filter\u003d\"*\"",
+      "parentUuid": "68d05544_d568c31a",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 18
+      },
+      "revId": "367012070d1b901982e67c016a6cc051671f39df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce0c8a0e_9d34bfaa",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 1
