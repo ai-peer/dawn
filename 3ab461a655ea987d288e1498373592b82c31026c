@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "25012377_a93948f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "We\u0027re missing a case for implicit promote \u0026 decay of a texture. I need to create a test for this before this can merge.",
+      "parentUuid": "8b628283_fc2e46aa",
+      "range": {
+        "startLine": 10,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6999460a_fe6f5952",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "f59a521e_9b7e4335",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6999460a_fe6f5952",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3932190_3279c284",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -53,6 +95,24 @@
       "writtenOn": "2019-06-27T13:57:48Z",
       "side": 1,
       "message": "This paragraph should explain that this decaying means: my understanding is it is because at the end of an ExecuteCommandList there is a \"wait for idle\" before the next ExecuteCommandList is processed, so all previous operations on the buffer have completed, meaning it is in the COMMON state.",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4dce327_1d30b014",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Let me know what you think since I\u0027ve revised the comments.\n\nI think the statement \"The COMMON state represents a state where no write operations can be pending\" implies why a decay is possible according to MSDN - I haven\u0027t found an explanation beyond this. I\u0027d be speculating if I made further claims.\n\n\"my understanding is it is because at the end of an ExecuteCommandList there is a \"wait for idle\" before the next ExecuteCommandList is processed\"\n\nI agree this is a reasonable explanation - do you have a reference?",
+      "parentUuid": "b3932190_3279c284",
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "f07593c0_34034ede",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d08c8b9_426da972",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae5d3f31_73f46420",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -87,6 +165,30 @@
       "writtenOn": "2019-06-27T13:57:48Z",
       "side": 1,
       "message": "Turns out this is always the case because of the ResourceBarrier validation rules. I should have caught that in the previous CL.",
+      "range": {
+        "startLine": 160,
+        "startChar": 15,
+        "endLine": 165,
+        "endChar": 17
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e001fc26_cbcce90b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "I\u0027ve changed this to ||. Is that what you were implying?",
+      "parentUuid": "ae5d3f31_73f46420",
       "range": {
         "startLine": 160,
         "startChar": 15,
@@ -116,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "e3d0694d_75c463e0",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39fcb996_37bff576",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91b8c871_321754ed",
         "filename": "src/dawn_native/d3d12/BufferD3D12.h",
         "patchSetId": 3
@@ -130,6 +250,24 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d971ccc1_4141060d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91b8c871_321754ed",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -150,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "38203e40_a89b5dd6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6c3e8ab_5dc460e9",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "225eb937_a98d2367",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -164,6 +320,24 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10a51fc6_d31f38a1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "225eb937_a98d2367",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -190,6 +364,30 @@
     },
     {
       "key": {
+        "uuid": "3e13a1f1_9151df6f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "n/a after revision",
+      "parentUuid": "3fa78411_704a9bca",
+      "range": {
+        "startLine": 453,
+        "startChar": 24,
+        "endLine": 453,
+        "endChar": 53
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40a6815d_a420f47f",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -204,6 +402,24 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0249061a_c07736a6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40a6815d_a420f47f",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -230,6 +446,30 @@
     },
     {
       "key": {
+        "uuid": "d55375cb_44403abf",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "n/a after revision",
+      "parentUuid": "2513d86d_eb9ee547",
+      "range": {
+        "startLine": 464,
+        "startChar": 20,
+        "endLine": 464,
+        "endChar": 28
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0855fcfb_10c59ff3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
         "patchSetId": 3
@@ -244,6 +484,24 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cafa5540_7f6d6b11",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0855fcfb_10c59ff3",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -270,6 +528,30 @@
     },
     {
       "key": {
+        "uuid": "b762a9d7_f77539ac",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "n/a after revision",
+      "parentUuid": "7fb026c3_32db138d",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 1
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a41fff4a_364b57b8",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -281,6 +563,30 @@
       "writtenOn": "2019-06-26T19:28:42Z",
       "side": 1,
       "message": "Please add comments that describe the purpose of SetValidToDecay and why we need to keep track of the boolean. The comment should include why explicit transitions always need it and why only some implicit transitions do.\n\nIs there a reason why we can\u0027t use the value of mLastState to determine whether it is valid to decay?",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 39
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "237d1c68_66e56067",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Added a brief comment. \n\nIn order to decay - the resource must be in read-only state that was achieved through implicit promotion. [1]\n\nExample: Two (webGPU) render passes are executed in a single ExecuteCommandLists call. Between the two render passes, a texture is transitioned from a write state to a read-only state. After ExecuteCommandLists, the texture would end in a read state - however it would not be eligible for decay because it did not meet the implicit promotion qualification. \n\n[1] MSDN:  \n\"The following resources will decay when an ExecuteCommandLists operation is completed on the GPU: ... Any resource implicitly promoted to a read-only state.\"\nhttps://docs.microsoft.com/en-us/windows/desktop/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#state-decay-to-common",
+      "parentUuid": "a41fff4a_364b57b8",
       "range": {
         "startLine": 280,
         "startChar": 0,
@@ -310,6 +616,24 @@
     },
     {
       "key": {
+        "uuid": "41170dca_66062138",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b6dfdd6_560284b6",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71df771b_95682f1a",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 3
@@ -330,6 +654,30 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e61b5acd_479d2390",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "n/a after revision",
+      "parentUuid": "71df771b_95682f1a",
+      "range": {
+        "startLine": 25,
+        "startChar": 26,
+        "endLine": 25,
+        "endChar": 30
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -356,6 +704,30 @@
     },
     {
       "key": {
+        "uuid": "7954eb1b_73358127",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6503d52f_9ed371a3",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 50
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a95ab54_952c97e9",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 3
@@ -373,6 +745,24 @@
     },
     {
       "key": {
+        "uuid": "ba714ce4_7ede8e71",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a95ab54_952c97e9",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c1330e6_edbea178",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 3
@@ -387,6 +777,24 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44e66ad5_e6396a53",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-03T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c1330e6_edbea178",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
