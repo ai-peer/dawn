@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "849dba7c_50bff628",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-03T23:48:20Z",
+      "side": 1,
+      "message": "I\u0027m still not entirely clear what mValidToDecay flag is needed or used for. The comment right above this if statement talks about the serial number but not the flag. Please beef up the comments here in that regard.  \n\nInstead of having a flag, is it possible to compute the same thing by using mLastState?",
+      "range": {
+        "startLine": 271,
+        "startChar": 12,
+        "endLine": 271,
+        "endChar": 25
+      },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
