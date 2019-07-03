@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "1aa9448a_9e035407",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-07-03T05:21:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure if you mean that we can skip all tests on OpenGL backend when the user passes vendor id. And if the user passes vendor id with 0, do we also need skip Vulkan, Metal and D3D12? Error will be thrown becuase of no adapter found for these backends.",
+      "parentUuid": "43535ff3_f5737488",
+      "range": {
+        "startLine": 350,
+        "startChar": 40,
+        "endLine": 351,
+        "endChar": 65
+      },
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c70ebc0e_1daa9667",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
