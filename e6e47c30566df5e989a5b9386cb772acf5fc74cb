@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "676d03f3_d916a32b",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:37:11Z",
+      "side": 1,
+      "message": "I think computations could be simplified if this was returning an offset in blocks instead of texels.",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff4950d3_3795570c",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:37:11Z",
+      "side": 1,
+      "message": "nit: This can be declared just before its members are set. Even better we could initialize it in the return statement like this:\n\nreturn {\n   byteOffsetX / ....,\n   byteOffsetY / ...\n...\n};",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa27dc2d_f19fc11f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:37:11Z",
+      "side": 1,
+      "message": "nit: byteOffsetInRowPitch",
+      "range": {
+        "startLine": 81,
+        "startChar": 17,
+        "endLine": 81,
+        "endChar": 38
+      },
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9c9ed18_650381fd",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:37:11Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b229cb1_84d889bb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:37:11Z",
+      "side": 1,
+      "message": "This comment is weirdly scoped because it seems like it belongs with the previous if. I\u0027m not sure how to make it look nice though.\n\nAlso the previous code was incorrect because we also need this for sampled textures. We should probably make the condition in [1] have an extra || !format.isCompressed with a big TODO to not require render target for lazy clearing.",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a72b4248_f4fcabb0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:37:11Z",
+      "side": 1,
+      "message": "ditto for the weird comment. This check could be replaced by an early out at the beginning of  the function.",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fec3e290_0a90a41b",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:37:11Z",
+      "side": 1,
+      "message": "This should use ConvertValidFormat and we could replace TextureSpec::texelSize with TextureSpec::format and add some specs for compressed formats.",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
