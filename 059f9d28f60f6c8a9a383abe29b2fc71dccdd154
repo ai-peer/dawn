@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d933f39e_8fdd2576",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T13:52:06Z",
+      "side": 1,
+      "message": "The computation of the size seems more complicated than necessary, how about 2 * kMinDynamicBufferOffsetAlignment + 8?",
+      "revId": "059f9d28f60f6c8a9a383abe29b2fc71dccdd154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ba98235_5e276d19",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T13:52:06Z",
+      "side": 1,
+      "message": "This is a bit hidden when reading the test code. Could the tests explicitly create the bindgroup (or call a helper function) so that inside the test body we see what the size is? Overall the factoring of the code in the test should be inverted: we should have something like TestRenderPassBindGroup(bindgroup, offsets, true /*success*/) and explicit creation of buffer sizes and bindgroups in the test. WDYT?",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 36
+      },
+      "revId": "059f9d28f60f6c8a9a383abe29b2fc71dccdd154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa7687a4_1a2b5e8c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T13:52:06Z",
+      "side": 1,
+      "message": "This will overflow because uniformData doesn\u0027t match kBufferSize anymore. Overall we don\u0027t need to initialize the data at all because we are in a validation test which would remove the need for uniformData.",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 84
+      },
+      "revId": "059f9d28f60f6c8a9a383abe29b2fc71dccdd154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62e26102_b086956c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T13:52:06Z",
+      "side": 1,
+      "message": "nit: These interfaces declared by the shaders aren\u0027t used in validation so they don\u0027t need to be a specific size in bytes.",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 33
+      },
+      "revId": "059f9d28f60f6c8a9a383abe29b2fc71dccdd154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
