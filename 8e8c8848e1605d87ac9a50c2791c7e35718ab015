@@ -180,6 +180,30 @@
       "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52da7b9e_a5faeb3f",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-03T19:05:41Z",
+      "side": 1,
+      "message": "Clamping only refers to the \"x \u003c 0 or y \u003c 0 or width \u003e backbufferWidth or height \u003e backbufferHeight...\" part. Those values would be out of bounds but the hardware / driver can clamp. It doesn\u0027t make sense to pass such values, but is easily understood as a clamp.\n\nminDepth \u003e\u003d maxDepth doesn\u0027t even make sense as a clamp operation which is why it\u0027s odd.\nI suppose you could do this if you wanted your pixel shader to run for the whole viewport but not draw? And you didn\u0027t want to swap pipelines to change the depth test?",
+      "parentUuid": "af1e976a_ec597c6c",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
