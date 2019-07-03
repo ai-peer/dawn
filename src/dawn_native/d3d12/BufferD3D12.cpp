@@ -114,8 +114,28 @@ namespace dawn_native { namespace d3d12 {
         DestroyInternal();
     }
 
-    bool Buffer::CreateD3D12ResourceBarrierIfNeeded(D3D12_RESOURCE_BARRIER* barrier,
-                                                    dawn::BufferUsageBit newUsage) const {
+    uint32_t Buffer::GetD3D12Size() const {
+        // TODO(enga@google.com): TODO investigate if this needs to be a constraint at the API level
+        return Align(GetSize(), 256);
+    }
+
+    ComPtr<ID3D12Resource> Buffer::GetD3D12Resource() {
+        return mResource;
+    }
+
+    void Buffer::SetNextDecaySerial(uint32_t serial) {
+        mNextDecaySerial = serial;
+    }
+
+    void Buffer::SetUsage(dawn::BufferUsageBit newUsage) {
+        mLastUsage = newUsage;
+    }
+
+    // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
+    // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
+    // cause subsequent errors.
+    bool Buffer::TransitionUsageAndGetResourceBarrier(D3D12_RESOURCE_BARRIER* barrier,
+                                                      dawn::BufferUsageBit newUsage) {
         // Resources in upload and readback heaps must be kept in the COPY_SOURCE/DEST state
         if (mFixedResourceState) {
             ASSERT(mLastUsage == newUsage);
@@ -129,16 +149,32 @@ namespace dawn_native { namespace d3d12 {
         }
 
         D3D12_RESOURCE_STATES lastState = D3D12BufferUsage(mLastUsage);
-        D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
 
         // The COMMON state represents a state where no write operations can be pending, which makes
-        // it possible to transition to some states without synchronizaton (i.e. without an explicit
-        // ResourceBarrier call). This can be to 1) a single write state, or 2) multiple read
-        // states.
-        //
-        // Destination states used in Dawn that qualify for implicit transition for a buffer:
-        // COPY_SOURCE, VERTEX_AND_CONSTANT_BUFFER, INDEX_BUFFER, COPY_DEST, UNORDERED_ACCESS
+        // it possible to transition to and from some states without synchronizaton (i.e. without an
+        // explicit ResourceBarrier call). A buffer can be implicitly promoted to 1) a single write
+        // state, or 2) multiple read states. A buffer that is accessed within a command list will
+        // always implicitly decay to the COMMON state when the call to ExecuteCommandLists
+        // completes.
         // https://docs.microsoft.com/en-us/windows/desktop/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#implicit-state-transitions
+
+        // To track implicit decays, we must record the pending serial on which a transition will
+        // occur. When that buffer is used again, the previously recorded serial must be compared to
+        // the last completed serial to determine if the buffer has implicity decayed to the common
+        // state.
+        SetNextDecaySerial(ToBackend(GetDevice())->GetPendingCommandSerial());
+
+        if (ToBackend(GetDevice())->GetPendingCommandSerial() > mNextDecaySerial) {
+            lastState = D3D12_RESOURCE_STATE_COMMON;
+        }
+
+        D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
+
+        // Update the tracked state.
+        mLastUsage = newUsage;
+
+        // Destination states used in Dawn that qualify for implicit promotion for a buffer:
+        // COPY_SOURCE, VERTEX_AND_CONSTANT_BUFFER, INDEX_BUFFER, COPY_DEST, UNORDERED_ACCESS.
         {
             static constexpr D3D12_RESOURCE_STATES kD3D12BufferReadOnlyStates =
                 D3D12_RESOURCE_STATE_COPY_SOURCE | D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER |
@@ -148,7 +184,7 @@ namespace dawn_native { namespace d3d12 {
                 bool singleWriteState = ((newState == D3D12_RESOURCE_STATE_COPY_DEST) ||
                                          (newState == D3D12_RESOURCE_STATE_UNORDERED_ACCESS));
                 bool readOnlyState = newState == (newState & kD3D12BufferReadOnlyStates);
-                if (singleWriteState ^ readOnlyState) {
+                if (singleWriteState || readOnlyState) {
                     return false;
                 }
             }
@@ -164,28 +200,15 @@ namespace dawn_native { namespace d3d12 {
         return true;
     }
 
-    uint32_t Buffer::GetD3D12Size() const {
-        // TODO(enga@google.com): TODO investigate if this needs to be a constraint at the API level
-        return Align(GetSize(), 256);
-    }
-
-    ComPtr<ID3D12Resource> Buffer::GetD3D12Resource() {
-        return mResource;
-    }
-
-    void Buffer::SetUsage(dawn::BufferUsageBit newUsage) {
-        mLastUsage = newUsage;
-    }
-
     void Buffer::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                     dawn::BufferUsageBit usage) {
         D3D12_RESOURCE_BARRIER barrier;
 
-        if (CreateD3D12ResourceBarrierIfNeeded(&barrier, usage)) {
+        if (TransitionUsageAndGetResourceBarrier(&barrier, usage)) {
             commandList->ResourceBarrier(1, &barrier);
         }
 
-        mLastUsage = usage;
+        SetNextDecaySerial(ToBackend(GetDevice())->GetPendingCommandSerial());
     }
 
     D3D12_GPU_VIRTUAL_ADDRESS Buffer::GetVA() const {
