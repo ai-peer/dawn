@@ -72,8 +72,9 @@ namespace dawn_native { namespace d3d12 {
                 } else {
                     flags |= D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
                 }
-            } else if ((usage & dawn::TextureUsageBit::TransferDst) ||
-                       (usage & dawn::TextureUsageBit::TransferSrc)) {
+                // Textures in compressed formats cannot be used as render targets.
+            } else if (!format.isCompressed && ((usage & dawn::TextureUsageBit::TransferDst) ||
+                                                (usage & dawn::TextureUsageBit::TransferSrc))) {
                 // if texture is used as copy source or destination, it may need to be
                 // cleared/initialized, which requires it to be a render target
                 // TODO(natlee@microsoft.com): optimize texture clearing without render target
@@ -114,6 +115,13 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_B8G8R8A8_UNORM;
             case dawn::TextureFormat::Depth24PlusStencil8:
                 return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+
+            // TODO(jiawei.shao@intel.com): support all BC formats
+            case dawn::TextureFormat::BC5RGSnorm:
+                return DXGI_FORMAT_BC5_SNORM;
+            case dawn::TextureFormat::BC5RGUnorm:
+                return DXGI_FORMAT_BC5_UNORM;
+
             default:
                 UNREACHABLE();
         }
@@ -355,7 +363,9 @@ namespace dawn_native { namespace d3d12 {
             }
 
             commandList->ClearDepthStencilView(dsvHandle, clearFlags, 0.0f, 0u, 0, nullptr);
-        } else {
+            // TODO(jiawei.shao@intel.com): initialize the textures in compressed formats with
+            // copies.
+        } else if (!GetFormat().isCompressed) {
             TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET);
             DescriptorHeapHandle rtvHeap =
                 descriptorHeapAllocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 1);
