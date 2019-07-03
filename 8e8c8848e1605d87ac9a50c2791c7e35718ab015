@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "368cf61c_9e9209aa",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:11:16Z",
+      "side": 1,
+      "message": "There are no validation constraints on x and y currently, but I assume that for WebGPU 1 we\u0027ll need to add some similarly to Vulkan.",
+      "range": {
+        "startLine": 143,
+        "startChar": 44,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65c82c5_f312a315",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:11:16Z",
+      "side": 1,
+      "message": "We should also check that all parameters aren\u0027t NaN because comparisons with NaNs always return false so it would pass validation currently.",
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e880ebf_d8451891",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 2
@@ -22,6 +62,30 @@
       "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c551967_9ffb0480",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:11:16Z",
+      "side": 1,
+      "message": "Ack this seems ok for now but not that Vulkan allows negative height in 1.1 and with VK_KHR_maintenance1 We might want to do the same in WebGPU for v1.",
+      "parentUuid": "8e880ebf_d8451891",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -48,6 +112,30 @@
     },
     {
       "key": {
+        "uuid": "64df06dd_416a8057",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:11:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "107328b7_fcaf01ec",
+      "range": {
+        "startLine": 157,
+        "startChar": 8,
+        "endLine": 160,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "187f5144_20d241db",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 2
@@ -59,6 +147,30 @@
       "writtenOn": "2019-07-03T06:40:22Z",
       "side": 1,
       "message": "This is not requred by any native graphics API, maybe we can remove this validation if it can pass validation layers on all backends. However, minDepth \u003e\u003d maxDepth doesn\u0027t make sense, it will draw nothing. \n\nIn addition, x \u003c 0 or y \u003c 0 or width \u003e backbufferWidth or height \u003e backbufferHeight or x + width \u003e backbufferWidth or y + height \u003e backbufferHeight doesn\u0027t make sense either. But I doesn\u0027t validate that because I suppose that the underlying graphics can clamp these values to appropriate values. \n\nI don\u0027t think underlying clamp operation is an error. But minDepth \u003e maxDepth is unintuitive. So I\u0027d like to report an error for this. Vulkan spec says that minDepth \u003e maxDepth is allowed, though. \n\nWDYT?\n\nAnother question is that we should clearly state these validation rules in the webgpu spec.",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af1e976a_ec597c6c",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-03T14:11:16Z",
+      "side": 1,
+      "message": "Why is minDepth \u003e maxDepth doing a clamp? Reading the Vulkan spec it seems like it will just invert it. Am I missing something?\n\nWe\u0027ll start writing a proper WebGPU spec soon and for every command we\u0027ll have sections listing error cases.",
+      "parentUuid": "187f5144_20d241db",
       "range": {
         "startLine": 162,
         "startChar": 8,
