@@ -140,6 +140,39 @@ namespace dawn_native {
         cmd->color = *color;
     }
 
+    void RenderPassEncoderBase::SetViewport(float x,
+                                            float y,
+                                            float width,
+                                            float height,
+                                            float minDepth,
+                                            float maxDepth) {
+        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+            return;
+        }
+        if (width <= 0 || height <= 0) {
+            mTopLevelEncoder->HandleError("Width and height must be greater than 0.");
+            return;
+        }
+
+        if (minDepth < 0 || minDepth > 1 || maxDepth < 0 || maxDepth > 1) {
+            mTopLevelEncoder->HandleError("minDepth and maxDepth must be in [0, 1].");
+            return;
+        }
+
+        if (minDepth >= maxDepth) {
+            mTopLevelEncoder->HandleError("minDepth must be less than maxDepth");
+            return;
+        }
+
+        SetViewportCmd* cmd = mAllocator->Allocate<SetViewportCmd>(Command::SetViewport);
+        cmd->x = x;
+        cmd->y = y;
+        cmd->width = width;
+        cmd->height = height;
+        cmd->minDepth = minDepth;
+        cmd->maxDepth = maxDepth;
+    }
+
     void RenderPassEncoderBase::SetScissorRect(uint32_t x,
                                                uint32_t y,
                                                uint32_t width,
