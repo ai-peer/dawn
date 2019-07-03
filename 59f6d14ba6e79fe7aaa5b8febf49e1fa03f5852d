@@ -70,6 +70,30 @@
       "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb94b94a_ab7aa638",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-03T05:54:00Z",
+      "side": 1,
+      "message": "The root cause of the missing catch is due to misunderstanding binding size and doesn\u0027t take binding size into consideration. \nNew validation tests have been added to track this. PTAL.",
+      "parentUuid": "058757c8_4ea5bd57",
+      "range": {
+        "startLine": 113,
+        "startChar": 17,
+        "endLine": 113,
+        "endChar": 91
+      },
+      "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
