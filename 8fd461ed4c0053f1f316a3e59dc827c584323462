@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1250ed59_aa8a6d10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-03T18:44:08Z",
+      "side": 1,
+      "message": "I think it would still be of value to split these into separate CLs. One is a semantic change from an enum to a boolean indicating |dynamic|. The other is a new resource type that is more involved than just adding an enum as Corentin pointed out.",
+      "parentUuid": "d32e7fb1_dcdc73de",
+      "revId": "8fd461ed4c0053f1f316a3e59dc827c584323462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eb23a914_59634d08",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1
