@@ -14,6 +14,7 @@
 
 #include <gtest/gtest.h>
 
+#include "dawn_native/Texture.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
 #include "common/Assert.h"
@@ -228,9 +229,13 @@ namespace {
 class CopySplitTest : public testing::Test {
     protected:
         TextureCopySplit DoTest(const TextureSpec& textureSpec, const BufferSpec& bufferSpec) {
+            dawn_native::Format nonCompressedFormat;
+            nonCompressedFormat.blockWidth = 1;
+            nonCompressedFormat.blockHeight = 1;
+            nonCompressedFormat.blockByteSize = textureSpec.texelSize;
             TextureCopySplit copySplit = ComputeTextureCopySplit(
                 {textureSpec.x, textureSpec.y, textureSpec.z},
-                {textureSpec.width, textureSpec.height, textureSpec.depth}, textureSpec.texelSize,
+                {textureSpec.width, textureSpec.height, textureSpec.depth}, nonCompressedFormat,
                 bufferSpec.offset, bufferSpec.rowPitch, bufferSpec.imageHeight);
             ValidateCopySplit(textureSpec, bufferSpec, copySplit);
             return copySplit;
