@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e880ebf_d8451891",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-03T06:40:22Z",
+      "side": 1,
+      "message": "This is required by Vulkan spec. See https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#VkViewport",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "107328b7_fcaf01ec",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-03T06:40:22Z",
+      "side": 1,
+      "message": "This is required by Vulkan spec (https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#VkViewport) and D3D12 at MSDN (https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_viewport)",
+      "range": {
+        "startLine": 157,
+        "startChar": 8,
+        "endLine": 160,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "187f5144_20d241db",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-03T06:40:22Z",
+      "side": 1,
+      "message": "This is not requred by any native graphics API, maybe we can remove this validation if it can pass validation layers on all backends. However, minDepth \u003e\u003d maxDepth doesn\u0027t make sense, it will draw nothing. \n\nIn addition, x \u003c 0 or y \u003c 0 or width \u003e backbufferWidth or height \u003e backbufferHeight or x + width \u003e backbufferWidth or y + height \u003e backbufferHeight doesn\u0027t make sense either. But I doesn\u0027t validate that because I suppose that the underlying graphics can clamp these values to appropriate values. \n\nI don\u0027t think underlying clamp operation is an error. But minDepth \u003e maxDepth is unintuitive. So I\u0027d like to report an error for this. Vulkan spec says that minDepth \u003e maxDepth is allowed, though. \n\nWDYT?\n\nAnother question is that we should clearly state these validation rules in the webgpu spec.",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
