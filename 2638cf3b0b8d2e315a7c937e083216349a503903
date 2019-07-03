@@ -113,6 +113,30 @@
     },
     {
       "key": {
+        "uuid": "2f280b86_e22c9491",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-03T19:22:41Z",
+      "side": 1,
+      "message": "I was a little confused reading this conversation. To clarify:\n\n1. We should have a separate boolean to indicate if a filter was set because vendor id 0 may be valid. Alternatively, std::optional.\n2. Because OpenGL doesn\u0027t have PCIInfo, we should do \n   `if (UseVendorIdFilter() \u0026\u0026 backendType\u003d\u003dOpenGL) { continue; }`.\n\n   This will skip the OpenGL backend completely when vendor id is passed.\n   Right now, the code will always run the OpenGL backend regardless of the vendor id passed.\n\nIf that\u0027s the conclusion of the discussion, LGTM.",
+      "parentUuid": "904bedb3_60869619",
+      "range": {
+        "startLine": 350,
+        "startChar": 40,
+        "endLine": 351,
+        "endChar": 65
+      },
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c70ebc0e_1daa9667",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
