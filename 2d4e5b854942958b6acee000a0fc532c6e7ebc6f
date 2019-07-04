@@ -343,6 +343,24 @@
     },
     {
       "key": {
+        "uuid": "cedaa9b8_62d0441b",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-04T06:35:02Z",
+      "side": 1,
+      "message": "I think item 2) is not related to culling. We need to make it correct for sampling and drawing though. For item 3), I am not familiar with spirv-cross, do we need more tests to cover this? Can we land this patch at first if no objection, and I can write more tests for item 3) for spirv-cross (It\u0027s OK for me to add tests for item 3) in this patch if you want, just let me know how to step forward for this feature. :) )\n\nBTW, I think that we need to clearly state item 1) and 2) and other things like y axis direction in NDC and framebuffer coordinate in WebGPU spec, if we begin to detail the spec.",
+      "parentUuid": "017ecf72_34b3bb19",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
