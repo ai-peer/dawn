@@ -64,12 +64,13 @@ namespace dawn_native { namespace d3d12 {
 
             // A multisampled resource must have either D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET or
             // D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL set in D3D12_RESOURCE_DESC::Flags.
-            // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_resource
-            // _desc
-            if ((usage & dawn::TextureUsageBit::OutputAttachment) || isMultisampledTexture) {
+            // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_resource_desc
+            // TODO(jiawei.shao@intel.com): do not require render target for lazy clearing.
+            if ((usage & dawn::TextureUsageBit::OutputAttachment) || isMultisampledTexture ||
+                format.isCompressed) {
                 if (format.HasDepthOrStencil()) {
                     flags |= D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-                } else {
+                } else if (!format.isCompressed) {
                     flags |= D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
                 }
             } else if ((usage & dawn::TextureUsageBit::TransferDst) ||
@@ -114,6 +115,13 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_B8G8R8A8_UNORM;
             case dawn::TextureFormat::Depth24PlusStencil8:
                 return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+
+            // TODO(jiawei.shao@intel.com): support all BC formats
+            case dawn::TextureFormat::BC5RGSnorm:
+                return DXGI_FORMAT_BC5_SNORM;
+            case dawn::TextureFormat::BC5RGUnorm:
+                return DXGI_FORMAT_BC5_UNORM;
+
             default:
                 UNREACHABLE();
         }
@@ -335,6 +343,13 @@ namespace dawn_native { namespace d3d12 {
                                uint32_t levelCount,
                                uint32_t baseArrayLayer,
                                uint32_t layerCount) {
+        // TODO(jiawei.shao@intel.com): initialize the textures in compressed formats with copies.
+        if (GetFormat().isCompressed) {
+            SetIsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
+                                               layerCount);
+            return;
+        }
+
         Device* device = ToBackend(GetDevice());
         DescriptorHeapAllocator* descriptorHeapAllocator = device->GetDescriptorHeapAllocator();
 
