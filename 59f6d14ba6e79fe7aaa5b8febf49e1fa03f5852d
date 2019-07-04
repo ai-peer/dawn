@@ -94,6 +94,30 @@
       "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09b38517_e57ba8dc",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-04T03:46:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb94b94a_ab7aa638",
+      "range": {
+        "startLine": 113,
+        "startChar": 17,
+        "endLine": 113,
+        "endChar": 91
+      },
+      "revId": "59f6d14ba6e79fe7aaa5b8febf49e1fa03f5852d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
