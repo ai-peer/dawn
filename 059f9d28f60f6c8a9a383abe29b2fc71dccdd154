@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "16d1cf3a_5c96fa01",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T08:47:11Z",
+      "side": 1,
+      "message": "I think you missed the part of the comment about TestRenderPassBindGroup that could help simplify the code. WDYT?",
+      "parentUuid": "ffc5efca_923f4c72",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 36
+      },
+      "revId": "059f9d28f60f6c8a9a383abe29b2fc71dccdd154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa7687a4_1a2b5e8c",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 8
