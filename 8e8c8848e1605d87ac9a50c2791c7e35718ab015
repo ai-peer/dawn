@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "036ed3fb_16eac8de",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-04T02:55:37Z",
+      "side": 1,
+      "message": "Yes. I added a TODO",
+      "parentUuid": "368cf61c_9e9209aa",
+      "range": {
+        "startLine": 143,
+        "startChar": 44,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b65c82c5_f312a315",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 2
@@ -39,6 +63,24 @@
       "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f0e5797_4466b252",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-04T02:55:37Z",
+      "side": 1,
+      "message": "Done.\n\nAnd I will submit another patch to handle and test other APIs in RenderPassEncoder.",
+      "parentUuid": "b65c82c5_f312a315",
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -77,6 +119,30 @@
       "side": 1,
       "message": "Ack this seems ok for now but not that Vulkan allows negative height in 1.1 and with VK_KHR_maintenance1 We might want to do the same in WebGPU for v1.",
       "parentUuid": "8e880ebf_d8451891",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0837380_1424060d",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-04T02:55:37Z",
+      "side": 1,
+      "message": "Added this in TODO",
+      "parentUuid": "8c551967_9ffb0480",
       "range": {
         "startLine": 152,
         "startChar": 8,
@@ -204,6 +270,30 @@
       "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ec72ecd_b49c62e5",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-04T02:55:37Z",
+      "side": 1,
+      "message": "Yes. Clamping only refers to the \"x\u003c0 or ....\". \n\nOK, I removed the validation that minDepth must be less than maxDepth.",
+      "parentUuid": "52da7b9e_a5faeb3f",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 9
+      },
+      "revId": "8e8c8848e1605d87ac9a50c2791c7e35718ab015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
