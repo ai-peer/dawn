@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "32b8176e_c30994a8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T12:51:16Z",
+      "side": 1,
+      "message": "Oh sorry, in the previous comment I meant !compressed so that we don\u0027t need to check in [2]\n\nThe logic would become:\n\n            // A multisampled resource must have either D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET or\n            // D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL set in D3D12_RESOURCE_DESC::Flags.\n            // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_resource_desc\n            // Currently all textures are zero-initialized via the render-target path so always\n            // add the render target flag, except for compressed textures for which the render-target\n            // flag is invalid.\n            // TODO(natlee@microsoft.com, jiawei.shao@intel.com): do not require render target for lazy clearing.\n            if ((usage \u0026 dawn::TextureUsageBit::OutputAttachment) || isMultisampledTexture ||\n                !format.isCompressed) {\n                if (format.HasDepthOrStencil()) {\n                    flags |\u003d D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;\n                } else {\n                    flags |\u003d D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;\n                }\n            }\n\n            ASSERT(!(flags \u0026 D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL) ||\n                   flags \u003d\u003d D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL);\n            return flags;",
+      "range": {
+        "startLine": 70,
+        "startChar": 16,
+        "endLine": 70,
+        "endChar": 35
+      },
+      "revId": "5e0a57c6fb68e597fd3c43645a758c61207bcc49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13842a81_84293544",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T12:51:16Z",
+      "side": 1,
+      "message": "Let\u0027s at least default-initialize this variable so that we don\u0027t have uninitialized data.\n\n    dawn_native::Format fakeFormat{}; // (or \u003d {};)",
+      "revId": "5e0a57c6fb68e597fd3c43645a758c61207bcc49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1034e371_1205b8bf",
         "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
         "patchSetId": 5
