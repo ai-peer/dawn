@@ -361,6 +361,24 @@
     },
     {
       "key": {
+        "uuid": "6c89cd0e_486ca333",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-04T18:31:44Z",
+      "side": 1,
+      "message": "2 is winding related because if it is wrong we may have to flip the winding. I think what we have is right, but I would love to have those tests sooner rather than later - they should be pretty easy to implement (don\u0027t have to be super thorough - but I\u0027m personally ok landing this first.",
+      "parentUuid": "cedaa9b8_62d0441b",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
