@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1034e371_1205b8bf",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5e0a57c6fb68e597fd3c43645a758c61207bcc49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

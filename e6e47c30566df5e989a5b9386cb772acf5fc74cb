@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2d2f32ab_acfff77a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "Oh if we return block counts instead of texels, I think the computation won\u0027t be simplified too much because the return value of this function cannot be directly assigned to  copy.copies[].bufferOffset and used to calculate copy.copies[].bufferSize.width.",
+      "parentUuid": "676d03f3_d916a32b",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ff4950d3_3795570c",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9524a441_4f82957f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff4950d3_3795570c",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "d8e162e7_b8747884",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa27dc2d_f19fc11f",
+      "range": {
+        "startLine": 81,
+        "startChar": 17,
+        "endLine": 81,
+        "endChar": 38
+      },
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9c9ed18_650381fd",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -73,6 +133,24 @@
       "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54bce8c8_2f38d454",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a9c9ed18_650381fd",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "2152cf67_20195b7c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b229cb1_84d889bb",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a72b4248_f4fcabb0",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -110,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "1250a0d3_3bb4a68f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a72b4248_f4fcabb0",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fec3e290_0a90a41b",
         "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
         "patchSetId": 4
@@ -124,6 +238,24 @@
       "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bba08a13_789d415d",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-04T11:14:02Z",
+      "side": 1,
+      "message": "The specs for compressed formats have been added.\n\nI suggest we replace TextureSpec::TexelSize with TextureSpec::format in another patch because I found it may require huge changes in this file, how do you think about it?\n\nAnother issue is that in [1] some fake texel block sizes are used (I don\u0027t think currently we support any format whose texel block size is 32 bytes or 64 bytes), so maybe we will still need to use some faked formats for that test.",
+      "parentUuid": "fec3e290_0a90a41b",
+      "revId": "e6e47c30566df5e989a5b9386cb772acf5fc74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
