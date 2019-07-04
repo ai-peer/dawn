@@ -206,6 +206,18 @@ namespace dawn_native { namespace vulkan {
             return properties.sampleCounts & imageCreateInfo.samples;
         }
 
+        VkComponentMapping VulkanComponentMappingForFormat(dawn::TextureFormat format) {
+            // RGB10A2's equivalent in Vulkan is actually BGR10A2 so we need to swizzle the texture
+            // view to invert R and B
+            if (format == dawn::TextureFormat::RGB10A2Unorm) {
+                return {VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_G, VK_COMPONENT_SWIZZLE_R,
+                        VK_COMPONENT_SWIZZLE_A};
+            }
+
+            return {VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G, VK_COMPONENT_SWIZZLE_B,
+                    VK_COMPONENT_SWIZZLE_A};
+        }
+
     }  // namespace
 
     // Converts Dawn texture format to Vulkan formats.
@@ -269,9 +281,9 @@ namespace dawn_native { namespace vulkan {
                 return VK_FORMAT_B8G8R8A8_UNORM;
             case dawn::TextureFormat::BGRA8UnormSrgb:
                 return VK_FORMAT_B8G8R8A8_SRGB;
-            case dawn::TextureFormat::A2RGB10Unorm:
+            case dawn::TextureFormat::RGB10A2Unorm:
                 return VK_FORMAT_A2R10G10B10_UNORM_PACK32;
-            case dawn::TextureFormat::B10GR11Float:
+            case dawn::TextureFormat::RG11B10Float:
                 return VK_FORMAT_B10G11R11_UFLOAT_PACK32;
 
             case dawn::TextureFormat::RG32Uint:
@@ -599,8 +611,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.image = ToBackend(GetTexture())->GetHandle();
         createInfo.viewType = VulkanImageViewType(descriptor->dimension);
         createInfo.format = VulkanImageFormat(descriptor->format);
-        createInfo.components = VkComponentMapping{VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G,
-                                                   VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A};
+        createInfo.components = VulkanComponentMappingForFormat(descriptor->format);
         createInfo.subresourceRange.aspectMask = VulkanAspectMask(GetFormat());
         createInfo.subresourceRange.baseMipLevel = descriptor->baseMipLevel;
         createInfo.subresourceRange.levelCount = descriptor->mipLevelCount;
