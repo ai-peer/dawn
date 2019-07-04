@@ -21,6 +21,7 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/RenderPipeline.h"
 
+#include <math.h>
 #include <string.h>
 
 namespace dawn_native {
@@ -126,6 +127,11 @@ namespace dawn_native {
             return;
         }
 
+        if (isnan(reference)) {
+            mTopLevelEncoder->HandleError("NaN is not allowed.");
+            return;
+        }
+
         SetStencilReferenceCmd* cmd =
             mAllocator->Allocate<SetStencilReferenceCmd>(Command::SetStencilReference);
         cmd->reference = reference;
@@ -133,6 +139,11 @@ namespace dawn_native {
 
     void RenderPassEncoderBase::SetBlendColor(const Color* color) {
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+            return;
+        }
+
+        if (isnan(color->r) || isnan(color->g) || isnan(color->b) || isnan(color->a)) {
+            mTopLevelEncoder->HandleError("NaN is not allowed.");
             return;
         }
 
@@ -147,6 +158,12 @@ namespace dawn_native {
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
+
+        if (isnan(x) || isnan(y) || isnan(width) || isnan(height)) {
+            mTopLevelEncoder->HandleError("NaN is not allowed.");
+            return;
+        }
+
         if (width == 0 || height == 0) {
             mTopLevelEncoder->HandleError("Width and height must be greater than 0.");
             return;

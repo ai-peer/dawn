@@ -14,6 +14,8 @@
 
 #include "tests/unittests/validation/ValidationTest.h"
 
+#include <cmath>
+
 class SetScissorRectTest : public ValidationTest {
 };
 
@@ -28,6 +30,29 @@ TEST_F(SetScissorRectTest, Success) {
         pass.EndPass();
     }
     encoder.Finish();
+}
+
+// Test to check that any scissor rect parameter is NaN is not allowed
+TEST_F(SetScissorRectTest, ScissorRectIsNaN) {
+    DummyRenderPass renderPass(device);
+
+    // x or y is NAN.
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetScissorRect(NAN, 0, 1, 1);
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // width or height is NAN.
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetScissorRect(0, 0, NAN, 1);
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
 }
 
 // Test to check that an empty scissor is not allowed
@@ -92,6 +117,29 @@ TEST_F(SetBlendColorTest, Success) {
     encoder.Finish();
 }
 
+// Test that color or alpha is NaN is not allowed
+TEST_F(SetBlendColorTest, ColorOrAlphaIsNaN) {
+    DummyRenderPass renderPass(device);
+
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        constexpr dawn::Color kNaNColor{NAN, 0.0f, 0.0f, 0.0f};
+        pass.SetBlendColor(&kNaNColor);
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        constexpr dawn::Color kNaNAlpha{0.0f, 0.0f, 0.0f, NAN};
+        pass.SetBlendColor(&kNaNAlpha);
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
 // Test that SetBlendColor allows any value, large, small or negative
 TEST_F(SetBlendColorTest, AnyValueAllowed) {
     DummyRenderPass renderPass(device);
@@ -120,6 +168,19 @@ TEST_F(SetStencilReferenceTest, Success) {
         pass.EndPass();
     }
     encoder.Finish();
+}
+
+// Test that reference is NaN is not allowed
+TEST_F(SetStencilReferenceTest, ReferenceIsNaN) {
+    DummyRenderPass renderPass(device);
+
+    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetStencilReference(NAN);
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
 }
 
 // Test that SetStencilReference allows any bit to be set
