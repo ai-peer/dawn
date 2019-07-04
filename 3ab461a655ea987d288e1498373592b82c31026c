@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "ae1a37b2_90db3f7a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "I don\u0027t have a reference but the rules for decaying logically imply this because the buffer being in the common state means all previous writes have completed which means all previous operations have completed (i.e a wait for idle).",
+      "parentUuid": "e4dce327_1d30b014",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d08c8b9_426da972",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -189,6 +207,30 @@
       "side": 1,
       "message": "I\u0027ve changed this to ||. Is that what you were implying?",
       "parentUuid": "ae5d3f31_73f46420",
+      "range": {
+        "startLine": 160,
+        "startChar": 15,
+        "endLine": 165,
+        "endChar": 17
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b963f89_1f45cb87",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "Oh, what I meant is that the D3D12 resource usage transition rules make it so it is always true that we\u0027re in a single write state xor a combination of read only states. So we don\u0027t need to check it and this while block of code can AFAIU be deleted. (or at most be an assert)",
+      "parentUuid": "e001fc26_cbcce90b",
       "range": {
         "startLine": 160,
         "startChar": 15,

@@ -2,6 +2,137 @@
   "comments": [
     {
       "key": {
+        "uuid": "d91794a6_d42f74c9",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "Is this method still needed?",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ddf22ce_e75022db",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5faf8e42_599d3094",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "Uh, this should be inverted, we should check the decay serial only after checking it, otherwise decaying will never happen. These two things could move at [1] as well. Code could be like this:\n\n if (pendingCommandSerial \u003e mLastUsageSerial) {\n     lastState \u003d ...;\n     mLastUsageSerial \u003d pendingCommandSerial;\n }",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 9
+      },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5d01256_05684ecd",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "[2] This should probably be done around [1] in TransitionUsageAndGetResourceBarrier which would remove the need for the SetNextDecaySerial method. The decay serial could be renamed to \"last used serial\".",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f713add7_26f67c47",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be a method, see comment [2]",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a72c81a9_85d16eb9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "Overall same comments as BufferD3D12.cpp",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e8132a5_0ea78202",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "all of the following are true:",
+      "range": {
+        "startLine": 262,
+        "startChar": 52,
+        "endLine": 262,
+        "endChar": 53
+      },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "849dba7c_50bff628",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -43,6 +174,98 @@
         "endLine": 271,
         "endChar": 25
       },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d8c9b1b_5f278a48",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "Based on our understanding of what the COMMON state is, I would have imagined that the rules would have been: implicitly promoted from common and no write usage since then. Rafael can we check with the D3D12 team if that is correct? It would help avoid even more barriers.\n\nThe fact that we need it to be an implicit promotion from COMMON is because we need to make sure all the different caches have been flushed to receive the new writes. You could imagine something were the \"copy engine\" cache has been flushed but not the \"sampled texture\" cache which means an implicit decay to common would be a contradiction because the texture would be in the COMMON state all the while previous writes wouldn\u0027t be visible in the \"sampled texture\" cache.",
+      "parentUuid": "bb282045_ce70424e",
+      "range": {
+        "startLine": 271,
+        "startChar": 12,
+        "endLine": 271,
+        "endChar": 25
+      },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9063215a_43dfb131",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "Lines 286-295 are equivalent to (after moving the SetNextDecaySerial call)\n\n   mValidToDecay \u003d newState \u0026 kD3D12TextureReadOnlyStates;\n   return false;",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c09f43ec_b00974d4",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "This can be set as \"last used serial\" unconditionally around [3] (and the call inlined since it is a setter that\u0027s only used by d3d12::Texture itself)",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6fdee01_a8b651bb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "This and SetValidToDecay aren\u0027t needed anymore.",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b4e21f3_6c78cf2c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-04T09:13:19Z",
+      "side": 1,
+      "message": "This method is probably not needed anymore.",
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
