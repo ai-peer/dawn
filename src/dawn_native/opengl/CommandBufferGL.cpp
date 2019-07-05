@@ -274,11 +274,7 @@ namespace dawn_native { namespace opengl {
                                            binding.offset, binding.size);
                     } break;
 
-                    // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
-                    case dawn::BindingType::DynamicUniformBuffer:
-                    case dawn::BindingType::DynamicStorageBuffer:
-                        UNREACHABLE();
-                        break;
+                        // TODO(shaobo.yan@intel.com): Implement dynamic buffer offset.
                 }
             }
         }

@@ -88,9 +88,24 @@ namespace utils {
     dawn::SamplerDescriptor GetDefaultSamplerDescriptor();
     dawn::PipelineLayout MakeBasicPipelineLayout(const dawn::Device& device,
                                                  const dawn::BindGroupLayout* bindGroupLayout);
+
+    // Helpers to make creating bind group layout with dynamic attribute default as false.
+    struct BindGroupLayoutBindingInitializationHelper {
+        BindGroupLayoutBindingInitializationHelper(uint32_t binding,
+                                                   dawn::ShaderStageBit visibility,
+                                                   dawn::BindingType type,
+                                                   bool dynamic = false);
+        dawn::BindGroupLayoutBinding GetAsBindGroupLayoutBinding() const;
+
+        uint32_t binding;
+        dawn::ShaderStageBit visibility;
+        dawn::BindingType type;
+        bool dynamic;
+    };
+
     dawn::BindGroupLayout MakeBindGroupLayout(
         const dawn::Device& device,
-        std::initializer_list<dawn::BindGroupLayoutBinding> bindingsInitializer);
+        std::initializer_list<BindGroupLayoutBindingInitializationHelper> bindingsInitializer);
 
     // Helpers to make creating bind groups look nicer:
     //
