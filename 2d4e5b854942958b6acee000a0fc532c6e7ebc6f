@@ -397,6 +397,24 @@
     },
     {
       "key": {
+        "uuid": "88b733bc_ee188edd",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-05T23:49:39Z",
+      "side": 1,
+      "message": "OK. Land this patch now. For 2, is it necessary to draw some color to a texture, then apply that texture to triangles and verity the color at some locations? In addition, do you have any idea to add more tests to verify the potential issues? I will write more tests if needed in order to expose potential issues.",
+      "parentUuid": "f9d2167a_4db23e73",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
