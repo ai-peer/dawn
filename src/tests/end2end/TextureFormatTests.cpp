@@ -149,7 +149,6 @@ class TextureFormatTest : public DawnTest {
                     vec2( 0.0f,  2.0f)
                 );
                 gl_Position = vec4(pos[gl_VertexIndex], 0.0f, 1.0f);
-                texCoord = gl_Position.xy / 2.0f + vec2(0.5f);
             })");
 
         // Compute the prefix needed for GLSL types that handle our texture's data.
@@ -173,13 +172,11 @@ class TextureFormatTest : public DawnTest {
         fsSource << "#version 450\n";
         fsSource << "layout(set=0, binding=0) uniform sampler mySampler;\n";
         fsSource << "layout(set=0, binding=1) uniform " << prefix << "texture2D myTexture;\n";
-
-        fsSource << "layout(location=0) in vec2 texCoord;\n";
         fsSource << "layout(location=0) out " << prefix << "vec4 fragColor;\n";
 
         fsSource << "void main() {\n";
-        fsSource << "    fragColor = texture(" << prefix
-                 << "sampler2D(myTexture, mySampler), texCoord);\n";
+        fsSource << "    fragColor = texelFetch(" << prefix
+                 << "sampler2D(myTexture, mySampler), ivec2(gl_FragCoord), 0);\n";
         fsSource << "}";
 
         dawn::ShaderModule fsModule =
@@ -686,4 +683,4 @@ TEST_P(TextureFormatTest, RG11B10Float) {
 // TODO(cwallez@chromium.org): Add tests for depth-stencil formats when we know if they are copyable
 // in WebGPU.
 
-DAWN_INSTANTIATE_TEST(TextureFormatTest, MetalBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(TextureFormatTest, D3D12Backend, MetalBackend, VulkanBackend);
