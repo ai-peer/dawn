@@ -379,6 +379,24 @@
     },
     {
       "key": {
+        "uuid": "f9d2167a_4db23e73",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-05T12:46:38Z",
+      "side": 1,
+      "message": "+1 at this point I\u0027m 90% sure this CL is correct but 2) would be more like 95% :)",
+      "parentUuid": "6c89cd0e_486ca333",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
