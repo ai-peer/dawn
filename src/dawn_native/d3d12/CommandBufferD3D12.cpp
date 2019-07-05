@@ -495,8 +495,8 @@ namespace dawn_native { namespace d3d12 {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
-                    srcBuffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::TransferSrc);
-                    dstBuffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::TransferDst);
+                    srcBuffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::CopySrc);
+                    dstBuffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::CopyDst);
 
                     commandList->CopyBufferRegion(
                         dstBuffer->GetD3D12Resource().Get(), copy->destinationOffset,
@@ -517,8 +517,8 @@ namespace dawn_native { namespace d3d12 {
                             commandList, copy->destination.level, 1, copy->destination.slice, 1);
                     }
 
-                    buffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::TransferSrc);
-                    texture->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferDst);
+                    buffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::CopySrc);
+                    texture->TransitionUsageNow(commandList, dawn::TextureUsageBit::CopyDst);
 
                     auto copySplit = ComputeTextureCopySplit(
                         copy->destination.origin, copy->copySize, texture->GetFormat(),
@@ -563,8 +563,8 @@ namespace dawn_native { namespace d3d12 {
                     texture->EnsureSubresourceContentInitialized(commandList, copy->source.level, 1,
                                                                  copy->source.slice, 1);
 
-                    texture->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferSrc);
-                    buffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::TransferDst);
+                    texture->TransitionUsageNow(commandList, dawn::TextureUsageBit::CopySrc);
+                    buffer->TransitionUsageNow(commandList, dawn::BufferUsageBit::CopyDst);
 
                     auto copySplit = ComputeTextureCopySplit(
                         copy->source.origin, copy->copySize, texture->GetFormat(),
@@ -620,9 +620,8 @@ namespace dawn_native { namespace d3d12 {
                         destination->EnsureSubresourceContentInitialized(
                             commandList, copy->destination.level, 1, copy->destination.slice, 1);
                     }
-                    source->TransitionUsageNow(commandList, dawn::TextureUsageBit::TransferSrc);
-                    destination->TransitionUsageNow(commandList,
-                                                    dawn::TextureUsageBit::TransferDst);
+                    source->TransitionUsageNow(commandList, dawn::TextureUsageBit::CopySrc);
+                    destination->TransitionUsageNow(commandList, dawn::TextureUsageBit::CopyDst);
 
                     if (CanUseCopyResource(source->GetNumMipLevels(), source->GetSize(),
                                            destination->GetSize(), copy->copySize)) {
