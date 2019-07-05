@@ -49,11 +49,9 @@ protected:
 // This test passes by not asserting or crashing.
 TEST_P(BindGroupTests, ReusedBindGroupSingleSubmit) {
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device,
-        {
-            {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer},
-        }
-    );
+        device, {
+                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer},
+                });
     dawn::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
 
     const char* shader = R"(
@@ -122,12 +120,10 @@ TEST_P(BindGroupTests, ReusedUBO) {
     );
 
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device,
-        {
-            {0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer},
-            {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer},
-        }
-    );
+        device, {
+                    {0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer},
+                    {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer},
+                });
     dawn::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
     utils::ComboRenderPipelineDescriptor textureDescriptor(device);
@@ -206,13 +202,11 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     );
 
     dawn::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device,
-        {
-            {0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer},
-            {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler},
-            {2, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture},
-        }
-    );
+        device, {
+                    {0, dawn::ShaderStageBit::Vertex, dawn::BindingType::UniformBuffer},
+                    {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler},
+                    {2, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture},
+                });
     dawn::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
     utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
@@ -424,9 +418,7 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets)
         })");
 
     dawn::BindGroupLayout layout = utils::MakeBindGroupLayout(
-        device, {
-            { 0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer }
-        });
+        device, {{0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer}});
     dawn::PipelineLayout pipelineLayout = MakeBasicPipelineLayout(
         device, { layout, layout, layout, layout });
 

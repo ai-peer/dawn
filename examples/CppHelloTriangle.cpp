@@ -113,8 +113,8 @@ void init() {
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler},
-                    {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture},
+                    {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::Sampler, false},
+                    {1, dawn::ShaderStageBit::Fragment, dawn::BindingType::SampledTexture, false},
                 });
 
     dawn::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);

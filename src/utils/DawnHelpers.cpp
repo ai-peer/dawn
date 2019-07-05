@@ -288,15 +288,35 @@ namespace utils {
         return device.CreatePipelineLayout(&descriptor);
     }
 
+    BindGroupLayoutBindingInitializationHelper::BindGroupLayoutBindingInitializationHelper(
+        uint32_t binding,
+        dawn::ShaderStageBit visibility,
+        dawn::BindingType type,
+        bool dynamic)
+        : binding(binding), visibility(visibility), type(type), dynamic(dynamic) {
+    }
+
+    dawn::BindGroupLayoutBinding
+    BindGroupLayoutBindingInitializationHelper::GetAsBindGroupLayoutBinding() const {
+        dawn::BindGroupLayoutBinding result;
+
+        result.binding = binding;
+        result.visibility = visibility;
+        result.type = type;
+        result.dynamic = dynamic;
+
+        return result;
+    }
+
     dawn::BindGroupLayout MakeBindGroupLayout(
         const dawn::Device& device,
-        std::initializer_list<dawn::BindGroupLayoutBinding> bindingsInitializer) {
+        std::initializer_list<BindGroupLayoutBindingInitializationHelper> bindingsInitializer) {
         constexpr dawn::ShaderStageBit kNoStages{};
 
         std::vector<dawn::BindGroupLayoutBinding> bindings;
-        for (const dawn::BindGroupLayoutBinding& binding : bindingsInitializer) {
-            if (binding.visibility != kNoStages) {
-                bindings.push_back(binding);
+        for (const BindGroupLayoutBindingInitializationHelper& helper : bindingsInitializer) {
+            if (helper.GetAsBindGroupLayoutBinding().visibility != kNoStages) {
+                bindings.push_back(helper.GetAsBindGroupLayoutBinding());
             }
         }
 

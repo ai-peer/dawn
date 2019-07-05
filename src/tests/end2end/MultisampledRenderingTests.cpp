@@ -204,11 +204,10 @@ class MultisampledRenderingTest : public DawnTest {
         pipelineDescriptor.cFragmentStage.module =
             utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, fs);
 
-
         mBindGroupLayout = utils::MakeBindGroupLayout(
             device, {
-                {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer},
-            });
+                        {0, dawn::ShaderStageBit::Fragment, dawn::BindingType::UniformBuffer},
+                    });
         dawn::PipelineLayout pipelineLayout =
             utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
         pipelineDescriptor.layout = pipelineLayout;

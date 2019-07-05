@@ -233,9 +233,9 @@ void initSim() {
 
     auto bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer},
-                    {1, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer},
-                    {2, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer},
+                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, false},
+                    {1, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, false},
+                    {2, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, false},
                 });
 
     dawn::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
