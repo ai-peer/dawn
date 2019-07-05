@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c81afac9_efba3049",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-05T11:37:48Z",
+      "side": 1,
+      "message": "nit: either both of these should use the getter or both should use the member for consistency.",
+      "range": {
+        "startLine": 196,
+        "startChar": 22,
+        "endLine": 196,
+        "endChar": 60
+      },
+      "revId": "71362ddef16c0db275cec741bc8eda6160b1861c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f83abfa_031734ce",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-05T11:37:48Z",
+      "side": 1,
+      "message": "nit: is resolved.",
+      "range": {
+        "startLine": 347,
+        "startChar": 72,
+        "endLine": 347,
+        "endChar": 74
+      },
+      "revId": "71362ddef16c0db275cec741bc8eda6160b1861c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e21b2ab_46bbac83",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-05T11:37:48Z",
+      "side": 1,
+      "message": "nit: boolean getters are use IsSomething or HasSomething, in this case it would be HasVendorIdFilter (or IsVendorIdFilterSet but that\u0027s slightly less pretty)",
+      "range": {
+        "startLine": 115,
+        "startChar": 9,
+        "endLine": 115,
+        "endChar": 26
+      },
+      "revId": "71362ddef16c0db275cec741bc8eda6160b1861c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3edea53c_200f5f6e",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-05T11:37:48Z",
+      "side": 1,
+      "message": "nit: mHasVendorIdFilter?",
+      "range": {
+        "startLine": 124,
+        "startChar": 9,
+        "endLine": 124,
+        "endChar": 27
+      },
+      "revId": "71362ddef16c0db275cec741bc8eda6160b1861c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37d2ab01_28049572",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-05T11:37:48Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "71362ddef16c0db275cec741bc8eda6160b1861c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
