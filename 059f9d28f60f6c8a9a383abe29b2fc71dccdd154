@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "9a5128c8_a2b50a23",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-05T02:04:53Z",
+      "side": 1,
+      "message": "Oops... Sry, and done.",
+      "parentUuid": "16d1cf3a_5c96fa01",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 36
+      },
+      "revId": "059f9d28f60f6c8a9a383abe29b2fc71dccdd154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa7687a4_1a2b5e8c",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 8
