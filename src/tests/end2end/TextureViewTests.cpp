@@ -115,7 +115,7 @@ protected:
         const uint32_t textureWidthLevel0 = 1 << mipLevelCount;
         const uint32_t textureHeightLevel0 = 1 << mipLevelCount;
         constexpr dawn::TextureUsageBit kUsage =
-            dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Sampled;
+            dawn::TextureUsageBit::CopyDst | dawn::TextureUsageBit::Sampled;
         mTexture = Create2DTexture(
             device, textureWidthLevel0, textureHeightLevel0, arrayLayerCount, mipLevelCount, kUsage);
 
@@ -145,7 +145,7 @@ protected:
                 std::vector<RGBA8> data(kPaddedTexWidth * texHeight, RGBA8(0, 0, 0, pixelValue));
                 dawn::Buffer stagingBuffer = utils::CreateBufferFromData(
                     device, data.data(), data.size() * sizeof(RGBA8),
-                    dawn::BufferUsageBit::TransferSrc);
+                    dawn::BufferUsageBit::CopySrc);
                 dawn::BufferCopyView bufferCopyView =
                     utils::CreateBufferCopyView(stagingBuffer, 0, kTextureRowPitchAlignment, 0);
                 dawn::TextureCopyView textureCopyView =
@@ -475,7 +475,7 @@ class TextureViewRenderingTest : public DawnTest {
         const uint32_t textureWidthLevel0 = 1 << levelCount;
         const uint32_t textureHeightLevel0 = 1 << levelCount;
         constexpr dawn::TextureUsageBit kUsage = dawn::TextureUsageBit::OutputAttachment |
-                                                 dawn::TextureUsageBit::TransferSrc;
+                                                 dawn::TextureUsageBit::CopySrc;
         dawn::Texture texture = Create2DTexture(
             device, textureWidthLevel0, textureHeightLevel0, layerCount, levelCount, kUsage);
 

@@ -32,11 +32,11 @@ namespace dawn_native {
     bool IsValidSampleCount(uint32_t sampleCount);
 
     static constexpr dawn::TextureUsageBit kReadOnlyTextureUsages =
-        dawn::TextureUsageBit::TransferSrc | dawn::TextureUsageBit::Sampled |
+        dawn::TextureUsageBit::CopySrc | dawn::TextureUsageBit::Sampled |
         dawn::TextureUsageBit::Present;
 
     static constexpr dawn::TextureUsageBit kWritableTextureUsages =
-        dawn::TextureUsageBit::TransferDst | dawn::TextureUsageBit::Storage |
+        dawn::TextureUsageBit::CopyDst | dawn::TextureUsageBit::Storage |
         dawn::TextureUsageBit::OutputAttachment;
 
     struct Format {
