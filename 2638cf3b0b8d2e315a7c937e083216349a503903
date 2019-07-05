@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7cd248ea_55375360",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-07-05T09:29:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "900fddc5_8f27c0fd",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 9
+      },
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef3f8714_a0c613c2",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 4
@@ -39,6 +63,24 @@
       "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36677cd8_a0024091",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-07-05T09:29:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef3f8714_a0c613c2",
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -137,6 +179,30 @@
     },
     {
       "key": {
+        "uuid": "00810a4d_c1fe34fd",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-07-05T09:29:21Z",
+      "side": 1,
+      "message": "@Corentin, thanks for your explanations. @Austin, your understanding is correct.\nBut I found it\u0027s not easy to skip all tests for OpenGL, which had been inintiallized by DAWN_INSTANTIATE_TEST. If we only skip OpenGL backend when choosing the adapters, the en2end tests will fail with unavailable adapter for OpenGL backend. So this condition of \u0027backendType !\u003d dawn_native::BackendType::OpenGL\u0027 will be kept, to make sure the tests could get an adapter for OpenGL regardless of the vendor id passed. TODO: I will update here when we can get vendor id from vendor name for OpenGL and Metal.",
+      "parentUuid": "2f280b86_e22c9491",
+      "range": {
+        "startLine": 350,
+        "startChar": 40,
+        "endLine": 351,
+        "endChar": 65
+      },
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c70ebc0e_1daa9667",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
@@ -151,6 +217,24 @@
       "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3195d2e9_7d8ce5eb",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-07-05T09:29:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c70ebc0e_1daa9667",
+      "revId": "2638cf3b0b8d2e315a7c937e083216349a503903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
