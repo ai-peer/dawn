@@ -26,21 +26,29 @@ namespace dawn_wire { namespace client {
         uint32_t serial = buffer->requestSerial++;
         ASSERT(buffer->requests.find(serial) == buffer->requests.end());
 
-        Buffer::MapRequestData request;
+        MemoryTransfer::ReadHandle* readHandle =
+            buffer->device->GetClient()->GetMemoryTransfer()->CreateReadHandle(buffer->size);
+
+        Buffer::MapRequestData request = {};
         request.readCallback = callback;
         request.userdata = userdata;
-        request.isWrite = false;
-        buffer->requests[serial] = request;
+        request.readHandle = std::unique_ptr<MemoryTransfer::ReadHandle>(readHandle);
+        buffer->requests[serial] = std::move(request);
+
+        uint32_t handleCreateInfoLength = readHandle->SerializeCreate();
 
         BufferMapAsyncCmd cmd;
         cmd.bufferId = buffer->id;
         cmd.requestSerial = serial;
         cmd.isWrite = false;
+        cmd.handleCreateInfoLength = handleCreateInfoLength;
+        cmd.handleCreateInfo = nullptr;
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer =
             static_cast<char*>(buffer->device->GetClient()->GetCmdSpace(requiredSize));
         cmd.Serialize(allocatedBuffer);
+        readHandle->SerializeCreate(allocatedBuffer + requiredSize - handleCreateInfoLength);
     }
 
     void ClientBufferMapWriteAsync(DawnBuffer cBuffer,
@@ -51,21 +59,50 @@ namespace dawn_wire { namespace client {
         uint32_t serial = buffer->requestSerial++;
         ASSERT(buffer->requests.find(serial) == buffer->requests.end());
 
-        Buffer::MapRequestData request;
+        MemoryTransfer::WriteHandle* writeHandle =
+            buffer->device->GetClient()->GetMemoryTransfer()->CreateWriteHandle(buffer->size);
+
+        Buffer::MapRequestData request = {};
         request.writeCallback = callback;
         request.userdata = userdata;
-        request.isWrite = true;
-        buffer->requests[serial] = request;
+        request.writeHandle = std::unique_ptr<MemoryTransfer::WriteHandle>(writeHandle);
+        buffer->requests[serial] = std::move(request);
+
+        uint32_t handleCreateInfoLength = writeHandle->SerializeCreate();
 
         BufferMapAsyncCmd cmd;
         cmd.bufferId = buffer->id;
         cmd.requestSerial = serial;
         cmd.isWrite = true;
+        cmd.handleCreateInfoLength = handleCreateInfoLength;
+        cmd.handleCreateInfo = nullptr;
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer =
             static_cast<char*>(buffer->device->GetClient()->GetCmdSpace(requiredSize));
         cmd.Serialize(allocatedBuffer);
+        writeHandle->SerializeCreate(allocatedBuffer + requiredSize - handleCreateInfoLength);
+    }
+
+    DawnBuffer ClientDeviceCreateBuffer(DawnDevice cDevice,
+                                        const DawnBufferDescriptor* descriptor) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        Client* wireClient = device->GetClient();
+
+        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device);
+        Buffer* buffer = bufferObjectAndSerial->object.get();
+        buffer->size = descriptor->size;
+
+        DeviceCreateBufferCmd cmd;
+        cmd.self = cDevice;
+        cmd.descriptor = descriptor;
+        cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->serial};
+
+        size_t requiredSize = cmd.GetRequiredSize();
+        char* allocatedBuffer = static_cast<char*>(wireClient->GetCmdSpace(requiredSize));
+        cmd.Serialize(allocatedBuffer, *wireClient);
+
+        return reinterpret_cast<DawnBuffer>(buffer);
     }
 
     DawnCreateBufferMappedResult ClientDeviceCreateBufferMapped(
@@ -76,27 +113,36 @@ namespace dawn_wire { namespace client {
 
         auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device);
         Buffer* buffer = bufferObjectAndSerial->object.get();
-        buffer->isWriteMapped = true;
-        // |mappedData| is freed in Unmap or the Buffer destructor.
-        // TODO(enga): Add dependency injection for buffer mapping so staging
-        // memory can live in shared memory.
-        buffer->mappedData = malloc(descriptor->size);
-        memset(buffer->mappedData, 0, descriptor->size);
-        buffer->mappedDataSize = descriptor->size;
+        buffer->size = descriptor->size;
+
+        MemoryTransfer::WriteHandle* writeHandle =
+            wireClient->GetMemoryTransfer()->CreateWriteHandle(descriptor->size);
+
+        buffer->writeHandle = std::unique_ptr<MemoryTransfer::WriteHandle>(writeHandle);
+
+        uint32_t handleCreateInfoLength = writeHandle->SerializeCreate();
 
         DeviceCreateBufferMappedCmd cmd;
         cmd.device = cDevice;
         cmd.descriptor = descriptor;
         cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->serial};
+        cmd.handleCreateInfoLength = handleCreateInfoLength;
+        cmd.handleCreateInfo = nullptr;
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer = static_cast<char*>(wireClient->GetCmdSpace(requiredSize));
         cmd.Serialize(allocatedBuffer, *wireClient);
+        writeHandle->SerializeCreate(allocatedBuffer + requiredSize - handleCreateInfoLength);
+
+        void* mappedData;
+        size_t mappedDataLength;
+        std::tie(mappedData, mappedDataLength) = buffer->writeHandle->Open();
+        ASSERT(mappedDataLength == descriptor->size);
 
         DawnCreateBufferMappedResult result;
         result.buffer = reinterpret_cast<DawnBuffer>(buffer);
-        result.data = reinterpret_cast<uint8_t*>(buffer->mappedData);
-        result.dataLength = descriptor->size;
+        result.data = reinterpret_cast<uint8_t*>(mappedData);
+        result.dataLength = static_cast<uint64_t>(mappedDataLength);
 
         return result;
     }
@@ -110,6 +156,7 @@ namespace dawn_wire { namespace client {
 
         auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device);
         Buffer* buffer = bufferObjectAndSerial->object.get();
+        buffer->size = descriptor->size;
 
         uint32_t serial = buffer->requestSerial++;
 
@@ -123,6 +170,9 @@ namespace dawn_wire { namespace client {
         info->buffer = reinterpret_cast<DawnBuffer>(buffer);
         info->callback = callback;
         info->userdata = userdata;
+
+        MemoryTransfer::WriteHandle* writeHandle =
+            wireClient->GetMemoryTransfer()->CreateWriteHandle(descriptor->size);
 
         Buffer::MapRequestData request;
         request.writeCallback = [](DawnBufferMapAsyncStatus status, void* data, uint64_t dataLength,
@@ -138,18 +188,23 @@ namespace dawn_wire { namespace client {
             info->callback(status, result, info->userdata);
         };
         request.userdata = info;
-        request.isWrite = true;
-        buffer->requests[serial] = request;
+        request.writeHandle = std::unique_ptr<MemoryTransfer::WriteHandle>(writeHandle);
+        buffer->requests[serial] = std::move(request);
+
+        uint32_t handleCreateInfoLength = writeHandle->SerializeCreate();
 
         DeviceCreateBufferMappedAsyncCmd cmd;
         cmd.device = cDevice;
         cmd.descriptor = descriptor;
         cmd.requestSerial = serial;
         cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->serial};
+        cmd.handleCreateInfoLength = handleCreateInfoLength;
+        cmd.handleCreateInfo = nullptr;
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer = static_cast<char*>(wireClient->GetCmdSpace(requiredSize));
         cmd.Serialize(allocatedBuffer, *wireClient);
+        writeHandle->SerializeCreate(allocatedBuffer + requiredSize - handleCreateInfoLength);
     }
 
     uint64_t ClientFenceGetCompletedValue(DawnFence cSelf) {
@@ -208,22 +263,27 @@ namespace dawn_wire { namespace client {
         //   - Server -> Client: Result of MapRequest1
         //   - Unmap locally on the client
         //   - Server -> Client: Result of MapRequest2
-        if (buffer->mappedData) {
-            // If the buffer was mapped for writing, send the update to the data to the server
-            if (buffer->isWriteMapped) {
-                BufferUpdateMappedDataCmd cmd;
-                cmd.bufferId = buffer->id;
-                cmd.dataLength = static_cast<uint32_t>(buffer->mappedDataSize);
-                cmd.data = static_cast<const uint8_t*>(buffer->mappedData);
+        if (buffer->writeHandle) {
+            ASSERT(buffer->readHandle == nullptr);
 
-                size_t requiredSize = cmd.GetRequiredSize();
-                char* allocatedBuffer =
-                    static_cast<char*>(buffer->device->GetClient()->GetCmdSpace(requiredSize));
-                cmd.Serialize(allocatedBuffer);
-            }
+            uint32_t writeFlushInfoLength = buffer->writeHandle->SerializeClose();
 
-            free(buffer->mappedData);
-            buffer->mappedData = nullptr;
+            BufferUpdateMappedDataCmd cmd;
+            cmd.bufferId = buffer->id;
+            cmd.writeFlushInfoLength = writeFlushInfoLength;
+            cmd.writeFlushInfo = nullptr;
+
+            size_t requiredSize = cmd.GetRequiredSize();
+            char* allocatedBuffer =
+                static_cast<char*>(buffer->device->GetClient()->GetCmdSpace(requiredSize));
+            cmd.Serialize(allocatedBuffer);
+            buffer->writeHandle->SerializeClose(allocatedBuffer + requiredSize -
+                                                writeFlushInfoLength);
+            buffer->writeHandle = nullptr;
+
+        } else if (buffer->readHandle) {
+            buffer->readHandle->Close();
+            buffer->readHandle = nullptr;
         }
         buffer->ClearMapRequests(DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN);
 

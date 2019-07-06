@@ -13,11 +13,18 @@
 // limitations under the License.
 
 #include "dawn_wire/server/Server.h"
+#include "dawn_wire/WireServer.h"
 
 namespace dawn_wire { namespace server {
 
-    Server::Server(DawnDevice device, const DawnProcTable& procs, CommandSerializer* serializer)
-        : mSerializer(serializer), mProcs(procs) {
+    Server::Server(DawnDevice device,
+                   const DawnProcTable& procs,
+                   CommandSerializer* serializer,
+                   MemoryTransfer* memoryTransfer)
+        : mSerializer(serializer), mProcs(procs), mMemoryTransfer(memoryTransfer) {
+        if (mMemoryTransfer == nullptr) {
+            mMemoryTransfer = InitializeInlineMemoryTransfer();
+        }
         // The client-server knowledge is bootstrapped with device 1.
         auto* deviceData = DeviceObjects().Allocate(1);
         deviceData->handle = device;

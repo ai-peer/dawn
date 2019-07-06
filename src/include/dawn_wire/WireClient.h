@@ -23,6 +23,64 @@ namespace dawn_wire {
 
     namespace client {
         class Client;
+
+        class DAWN_WIRE_EXPORT MemoryTransfer {
+          public:
+            class ReadHandle;
+            class WriteHandle;
+
+            virtual ~MemoryTransfer() = default;
+
+            // Create a handle for reading server data.
+            virtual ReadHandle* CreateReadHandle(size_t) = 0;
+
+            // Create a handle for writing server data.
+            virtual WriteHandle* CreateWriteHandle(size_t) = 0;
+
+            // Imported memory implementation needs to override these to create Read/Write
+            // handles associated with a particular buffer. The client should receive a file
+            // descriptor for the buffer out-of-band.
+            virtual ReadHandle* CreateReadHandle(DawnBuffer, uint64_t offset, size_t size) {
+                return CreateReadHandle(size);
+            }
+            virtual WriteHandle* CreateWriteHandle(DawnBuffer, uint64_t offset, size_t size) {
+                return CreateWriteHandle(size);
+            }
+
+            class ReadHandle {
+              public:
+                // Serialize the handle into |serializePointer| so it can be received by the server.
+                // If |serializePointer| is nullptr, this returns the required serialization space.
+                virtual uint32_t SerializeCreate(void* serializePointer = nullptr) = 0;
+
+                // Open the handle for reading.
+                // This function takes in the serialized result of
+                // server::MemoryTransfer::ReadHandle::SerializeInitialize.
+                virtual std::pair<const void*, size_t> DeserializeOpen(
+                    const void* deserializePointer,
+                    uint32_t size) = 0;
+
+                // Close the handle for reading.
+                virtual void Close() = 0;
+                virtual ~ReadHandle() = default;
+            };
+
+            class WriteHandle {
+              public:
+                // Serialize the handle into |serializePointer| so it can be received by the server.
+                // If |serializePointer| is nullptr, this returns the required serialization space.
+                virtual uint32_t SerializeCreate(void* serializePointer = nullptr) = 0;
+
+                // Open the handle for reading. The data returned should be zero-initialized.
+                virtual std::pair<void*, size_t> Open() = 0;
+
+                // Close the handle for writing. This should serialize info to send updates to the
+                // server.
+                // If |serializePointer| is nullptr, this returns the required serialization space.
+                virtual uint32_t SerializeClose(void* serializePointer = nullptr) = 0;
+                virtual ~WriteHandle() = default;
+            };
+        };
     }
 
     struct ReservedTexture {
@@ -33,7 +91,7 @@ namespace dawn_wire {
 
     class DAWN_WIRE_EXPORT WireClient : public CommandHandler {
       public:
-        WireClient(CommandSerializer* serializer);
+        WireClient(CommandSerializer* serializer, client::MemoryTransfer* memoryTransfer = nullptr);
         ~WireClient();
 
         DawnDevice GetDevice() const;
