@@ -137,6 +137,11 @@ namespace dawn_native {
             return;
         }
 
+        if (isnan(color->r) || isnan(color->g) || isnan(color->b) || isnan(color->a)) {
+            mTopLevelEncoder->HandleError("NaN is not allowed.");
+            return;
+        }
+
         SetBlendColorCmd* cmd = mAllocator->Allocate<SetBlendColorCmd>(Command::SetBlendColor);
         cmd->color = *color;
     }
@@ -186,6 +191,7 @@ namespace dawn_native {
         if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
+
         if (width == 0 || height == 0) {
             mTopLevelEncoder->HandleError("Width and height must be greater than 0.");
             return;

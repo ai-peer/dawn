@@ -301,6 +301,29 @@ TEST_F(SetBlendColorTest, Success) {
     encoder.Finish();
 }
 
+// Test that color or alpha is NaN is not allowed
+TEST_F(SetBlendColorTest, ColorOrAlphaIsNaN) {
+    DummyRenderPass renderPass(device);
+
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        constexpr dawn::Color kNaNColor{NAN, 0.0f, 0.0f, 0.0f};
+        pass.SetBlendColor(&kNaNColor);
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    {
+        dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        constexpr dawn::Color kNaNAlpha{0.0f, 0.0f, 0.0f, NAN};
+        pass.SetBlendColor(&kNaNAlpha);
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
 // Test that SetBlendColor allows any value, large, small or negative
 TEST_F(SetBlendColorTest, AnyValueAllowed) {
     DummyRenderPass renderPass(device);
