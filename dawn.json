@@ -114,16 +114,6 @@
             {"value": 4, "name": "max"}
         ]
     },
-    "color state descriptor": {
-        "category": "structure",
-        "extensible": true,
-        "members": [
-            {"name": "format", "type": "texture format"},
-            {"name": "alpha blend", "type": "blend descriptor"},
-            {"name": "color blend", "type": "blend descriptor"},
-            {"name": "write mask", "type": "color write mask", "default": "all"}
-        ]
-    },
     "bool": {
         "category": "native"
     },
@@ -231,6 +221,16 @@
             {"name": "a", "type": "float"}
         ]
     },
+    "color state descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "format", "type": "texture format"},
+            {"name": "alpha blend", "type": "blend descriptor"},
+            {"name": "color blend", "type": "blend descriptor"},
+            {"name": "write mask", "type": "color write mask", "default": "all"}
+        ]
+    },
     "color write mask": {
         "category": "bitmask",
         "values": [
@@ -259,7 +259,7 @@
             {
                 "name": "begin render pass",
                 "args": [
-                    {"name": "info", "type": "render pass descriptor", "annotation": "const*"}
+                    {"name": "descriptor", "type": "render pass descriptor", "annotation": "const*"}
                 ],
                 "returns": "render pass encoder"
             },
@@ -632,12 +632,6 @@
             {"value": 1, "name": "load"}
         ]
     },
-    "store op": {
-        "category": "enum",
-        "values": [
-            {"value": 0, "name": "store"}
-        ]
-    },
     "origin 3D": {
         "category": "structure",
         "members": [
@@ -701,7 +695,6 @@
             }
         ]
     },
-
     "rasterization state descriptor": {
         "category": "structure",
         "extensible": true,
@@ -713,7 +706,6 @@
             {"name": "depth bias clamp", "type": "float", "default": "0.0f"}
         ]
     },
-
     "render pass color attachment descriptor": {
         "category": "structure",
         "members": [
@@ -724,7 +716,6 @@
             {"name": "clear color", "type": "color"}
         ]
     },
-
     "render pass depth stencil attachment descriptor": {
         "category": "structure",
         "members": [
@@ -915,14 +906,6 @@
             {"name": "code", "type": "uint32_t", "annotation": "const*", "length": "code size"}
         ]
     },
-    "shader stage": {
-        "category": "enum",
-        "values": [
-            {"value": 0, "name": "vertex"},
-            {"value": 1, "name": "fragment"},
-            {"value": 2, "name": "compute"}
-        ]
-    },
     "shader stage bit": {
         "category": "bitmask",
         "values": [
@@ -953,6 +936,12 @@
             {"name": "fail op", "type": "stencil operation", "default": "keep"},
             {"name": "depth fail op", "type": "stencil operation", "default": "keep"},
             {"name": "pass op", "type": "stencil operation", "default": "keep"}
+        ]
+    },
+    "store op": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "store"}
         ]
     },
     "swap chain": {
