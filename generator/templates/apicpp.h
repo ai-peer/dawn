@@ -165,6 +165,7 @@ namespace dawn {
         struct {{as_cppType(type.name)}} {
             {% if type.extensible %}
                 const void* nextInChain = nullptr;
+                StructureType structureType = StructureType::Default;
             {% endif %}
             {% for member in type.members %}
                 {{as_annotated_cppType(member)}};
