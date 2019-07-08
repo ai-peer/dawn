@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09cc5db4_7f054277",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-08T11:14:10Z",
+      "side": 1,
+      "message": "nit: thi",
+      "range": {
+        "startLine": 344,
+        "startChar": 63,
+        "endLine": 344,
+        "endChar": 64
+      },
+      "revId": "6aef6783864ba5ac8b7d4be4ce22a16905325f4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81c52bf9_7fecb8f0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-08T11:14:10Z",
+      "side": 1,
+      "message": "nit: copying textures from/to",
+      "range": {
+        "startLine": 344,
+        "startChar": 20,
+        "endLine": 344,
+        "endChar": 44
+      },
+      "revId": "6aef6783864ba5ac8b7d4be4ce22a16905325f4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
