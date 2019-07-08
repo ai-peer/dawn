@@ -101,6 +101,7 @@ typedef void (*WGPUProc)();
 
 #if !defined(WGPU_SKIP_PROCS)
 
+typedef WGPUSurface (*WGPUProcCreateInstance)(WGPUInstanceDescriptor const * descriptor);
 typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, const char* procName);
 
 {% for type in by_category["object"] if len(c_methods(type)) > 0 %}
@@ -119,6 +120,7 @@ typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, const char* procNa
 
 #if !defined(WGPU_SKIP_DECLARATIONS)
 
+WGPU_EXPORT WGPUSurface wgpuCreateInstance(WGPUInstanceDescriptor const * descriptor);
 WGPU_EXPORT WGPUProc WGPUGetProcAddress(WGPUDevice device, const char* procName);
 
 {% for type in by_category["object"] if len(c_methods(type)) > 0 %}
