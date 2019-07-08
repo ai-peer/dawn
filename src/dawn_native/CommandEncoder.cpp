@@ -650,7 +650,7 @@ namespace dawn_native {
 
     // Implementation of the API's command recording methods
 
-    ComputePassEncoderBase* CommandEncoderBase::BeginComputePass() {
+    ComputePassEncoderBase* CommandEncoderBase::BeginComputePass(const ComputePassDescriptor*) {
         DeviceBase* device = GetDevice();
         if (ConsumedError(ValidateCanRecordTopLevelCommands())) {
             return ComputePassEncoderBase::MakeError(device, this);
@@ -662,7 +662,7 @@ namespace dawn_native {
         return new ComputePassEncoderBase(device, this, &mAllocator);
     }
 
-    RenderPassEncoderBase* CommandEncoderBase::BeginRenderPass(const RenderPassDescriptor* info) {
+    RenderPassEncoderBase* CommandEncoderBase::BeginRenderPass(const RenderPassDescriptor* descriptor) {
         DeviceBase* device = GetDevice();
 
         if (ConsumedError(ValidateCanRecordTopLevelCommands())) {
@@ -673,7 +673,7 @@ namespace dawn_native {
         uint32_t height = 0;
         uint32_t sampleCount = 0;
         if (ConsumedError(
-                ValidateRenderPassDescriptor(device, info, &width, &height, &sampleCount))) {
+                ValidateRenderPassDescriptor(device, descriptor, &width, &height, &sampleCount))) {
             return RenderPassEncoderBase::MakeError(device, this);
         }
 
@@ -683,28 +683,28 @@ namespace dawn_native {
 
         BeginRenderPassCmd* cmd = mAllocator.Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
 
-        for (uint32_t i = 0; i < info->colorAttachmentCount; ++i) {
-            if (info->colorAttachments[i] != nullptr) {
+        for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
+            if (descriptor->colorAttachments[i] != nullptr) {
                 cmd->colorAttachmentsSet.set(i);
-                cmd->colorAttachments[i].view = info->colorAttachments[i]->attachment;
-                cmd->colorAttachments[i].resolveTarget = info->colorAttachments[i]->resolveTarget;
-                cmd->colorAttachments[i].loadOp = info->colorAttachments[i]->loadOp;
-                cmd->colorAttachments[i].storeOp = info->colorAttachments[i]->storeOp;
-                cmd->colorAttachments[i].clearColor = info->colorAttachments[i]->clearColor;
+                cmd->colorAttachments[i].view = descriptor->colorAttachments[i]->attachment;
+                cmd->colorAttachments[i].resolveTarget = descriptor->colorAttachments[i]->resolveTarget;
+                cmd->colorAttachments[i].loadOp = descriptor->colorAttachments[i]->loadOp;
+                cmd->colorAttachments[i].storeOp = descriptor->colorAttachments[i]->storeOp;
+                cmd->colorAttachments[i].clearColor = descriptor->colorAttachments[i]->clearColor;
             }
         }
 
-        cmd->hasDepthStencilAttachment = info->depthStencilAttachment != nullptr;
+        cmd->hasDepthStencilAttachment = descriptor->depthStencilAttachment != nullptr;
         if (cmd->hasDepthStencilAttachment) {
             cmd->hasDepthStencilAttachment = true;
-            cmd->depthStencilAttachment.view = info->depthStencilAttachment->attachment;
-            cmd->depthStencilAttachment.clearDepth = info->depthStencilAttachment->clearDepth;
-            cmd->depthStencilAttachment.clearStencil = info->depthStencilAttachment->clearStencil;
-            cmd->depthStencilAttachment.depthLoadOp = info->depthStencilAttachment->depthLoadOp;
-            cmd->depthStencilAttachment.depthStoreOp = info->depthStencilAttachment->depthStoreOp;
-            cmd->depthStencilAttachment.stencilLoadOp = info->depthStencilAttachment->stencilLoadOp;
+            cmd->depthStencilAttachment.view = descriptor->depthStencilAttachment->attachment;
+            cmd->depthStencilAttachment.clearDepth = descriptor->depthStencilAttachment->clearDepth;
+            cmd->depthStencilAttachment.clearStencil = descriptor->depthStencilAttachment->clearStencil;
+            cmd->depthStencilAttachment.depthLoadOp = descriptor->depthStencilAttachment->depthLoadOp;
+            cmd->depthStencilAttachment.depthStoreOp = descriptor->depthStencilAttachment->depthStoreOp;
+            cmd->depthStencilAttachment.stencilLoadOp = descriptor->depthStencilAttachment->stencilLoadOp;
             cmd->depthStencilAttachment.stencilStoreOp =
-                info->depthStencilAttachment->stencilStoreOp;
+                descriptor->depthStencilAttachment->stencilStoreOp;
         }
 
         cmd->width = width;
@@ -842,8 +842,8 @@ namespace dawn_native {
         copy->copySize = *copySize;
     }
 
-    CommandBufferBase* CommandEncoderBase::Finish() {
-        if (GetDevice()->ConsumedError(ValidateFinish())) {
+    CommandBufferBase* CommandEncoderBase::Finish(const CommandBufferDescriptor* descriptor) {
+        if (GetDevice()->ConsumedError(ValidateFinish(descriptor))) {
             // Even if finish validation fails, it is now invalid to call any encoding commands on
             // this object, so we set its state to finished.
             mEncodingState = EncodingState::Finished;
@@ -854,7 +854,7 @@ namespace dawn_native {
         mEncodingState = EncodingState::Finished;
 
         MoveToIterator();
-        return GetDevice()->CreateCommandBuffer(this);
+        return GetDevice()->CreateCommandBuffer(this, descriptor);
     }
 
     // Implementation of functions to interact with sub-encoders
@@ -892,7 +892,7 @@ namespace dawn_native {
 
     // Implementation of the command buffer validation that can be precomputed before submit
 
-    MaybeError CommandEncoderBase::ValidateFinish() {
+    MaybeError CommandEncoderBase::ValidateFinish(const CommandBufferDescriptor*) {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         if (mGotError) {

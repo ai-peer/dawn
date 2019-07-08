@@ -244,21 +244,32 @@
     "command buffer": {
         "category": "object"
     },
+    "command buffer descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
     "command encoder": {
         "category": "object",
         "methods": [
             {
                 "name": "finish",
+                "args": [
+                    {"name": "descriptor", "type": "command buffer descriptor", "annotation": "const*", "optional": true}
+                ],
                 "returns": "command buffer"
             },
             {
                 "name": "begin compute pass",
+                "args": [
+                    {"name": "descriptor", "type": "compute pass descriptor", "annotation": "const*", "optional": true}
+                ],
                 "returns": "compute pass encoder"
             },
             {
                 "name": "begin render pass",
                 "args": [
-                    {"name": "info", "type": "render pass descriptor", "annotation": "const*"}
+                    {"name": "descriptor", "type": "render pass descriptor", "annotation": "const*"}
                 ],
                 "returns": "render pass encoder"
             },
@@ -313,6 +324,11 @@
             {"value": 6, "name": "not equal"},
             {"value": 7, "name": "always"}
         ]
+    },
+    "compute pass descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
     },
     "compute pass encoder": {
         "category": "object",

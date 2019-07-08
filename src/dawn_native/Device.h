@@ -56,7 +56,7 @@ namespace dawn_native {
 
         FenceSignalTracker* GetFenceSignalTracker() const;
 
-        virtual CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) = 0;
+        virtual CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder, const CommandBufferDescriptor* descriptor) = 0;
 
         virtual Serial GetCompletedCommandSerial() const = 0;
         virtual Serial GetLastSubmittedCommandSerial() const = 0;

@@ -38,14 +38,14 @@ TEST_F(WireBasicTests, CallForwarded) {
 // Test that calling methods on a new object works as expected.
 TEST_F(WireBasicTests, CreateThenCall) {
     DawnCommandEncoder encoder = dawnDeviceCreateCommandEncoder(device);
-    dawnCommandEncoderFinish(encoder);
+    dawnCommandEncoderFinish(encoder, nullptr);
 
     DawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
     EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice))
         .WillOnce(Return(apiCmdBufEncoder));
 
     DawnCommandBuffer apiCmdBuf = api.GetNewCommandBuffer();
-    EXPECT_CALL(api, CommandEncoderFinish(apiCmdBufEncoder)).WillOnce(Return(apiCmdBuf));
+    EXPECT_CALL(api, CommandEncoderFinish(apiCmdBufEncoder, nullptr)).WillOnce(Return(apiCmdBuf));
 
     FlushClient();
 }
