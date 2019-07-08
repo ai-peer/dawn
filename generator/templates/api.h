@@ -39,6 +39,7 @@
     typedef struct {{as_cType(type.name)}} {
         {% if type.extensible %}
             const void* nextInChain;
+            DawnStructureType structureType;
         {% endif %}
         {% for member in type.members %}
             {{as_annotated_cType(member)}};
