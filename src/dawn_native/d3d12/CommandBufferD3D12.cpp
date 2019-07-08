@@ -441,14 +441,6 @@ namespace dawn_native { namespace d3d12 {
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
-                Texture* texture = ToBackend(usages.textures[i]);
-                // TODO(natlee@microsoft.com): Update clearing here when subresource tracking is
-                // implemented
-                texture->EnsureSubresourceContentInitialized(
-                    commandList, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
-            }
-
-            for (size_t i = 0; i < usages.textures.size(); ++i) {
                 D3D12_RESOURCE_BARRIER barrier;
                 if (ToBackend(usages.textures[i])
                         ->CreateD3D12ResourceBarrierIfNeeded(&barrier, usages.textureUsages[i])) {
@@ -771,11 +763,23 @@ namespace dawn_native { namespace d3d12 {
                     D3D12_CPU_DESCRIPTOR_HANDLE handle = args.RTVs[i];
                     commandList->ClearRenderTargetView(handle, &attachmentInfo.clearColor.r, 0,
                                                        nullptr);
-                } else if (attachmentInfo.loadOp == dawn::LoadOp::Load && view->GetTexture()) {
+                } else if (attachmentInfo.loadOp == dawn::LoadOp::Load) {
+                    // TODO(natlee@microsoft.com): Use loadop to clear here instead of clear
+                    // operation when available on D3D12 to optimize on modern GPUs
                     ToBackend(view->GetTexture())
                         ->EnsureSubresourceContentInitialized(commandList, view->GetBaseMipLevel(),
                                                               1, view->GetBaseArrayLayer(), 1);
                 }
+
+                TextureView* resolveView = ToBackend(attachmentInfo.resolveTarget.Get());
+                if (resolveView) {
+                    ToBackend(resolveView->GetTexture())
+                        ->EnsureSubresourceContentInitialized(
+                            commandList, resolveView->GetBaseMipLevel(),
+                            resolveView->GetLevelCount(), resolveView->GetBaseArrayLayer(),
+                            resolveView->GetLayerCount());
+                }
+
                 switch (attachmentInfo.storeOp) {
                     case dawn::StoreOp::Store: {
                         view->GetTexture()->SetIsSubresourceContentInitialized(
