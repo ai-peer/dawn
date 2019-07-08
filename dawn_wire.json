@@ -102,10 +102,8 @@
             "SurfaceDescriptorFromXlib"
         ],
         "client_side_commands": [
+            "AdapterGetProperties",
             "BufferMapAsync",
-            "BufferMapReadAsync",
-            "BufferMapWriteAsync",
-            "BufferSetSubData",
             "BufferGetConstMappedRange",
             "BufferGetMappedRange",
             "DevicePopErrorScope",
