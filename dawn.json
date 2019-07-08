@@ -57,7 +57,8 @@
             {"name": "visibility", "type": "shader stage bit"},
             {"name": "type", "type": "binding type"},
             {"name": "dynamic", "type": "bool", "default": "false" },
-            {"name": "multisampled", "type": "bool", "default": "false" }
+            {"name": "multisampled", "type": "bool", "default": "false" },
+            {"name": "texture dimension", "type": "texture view dimension"}
         ]
     },
     "bind group layout descriptor": {
@@ -132,14 +133,6 @@
     "buffer": {
         "category": "object",
         "methods": [
-            {
-                "name": "set sub data",
-                "args": [
-                    {"name": "start", "type": "uint64_t"},
-                    {"name": "count", "type": "uint64_t"},
-                    {"name": "data", "type": "void", "annotation": "const*", "length": "count"}
-                ]
-            },
             {
                 "name": "map read async",
                 "args": [
@@ -311,6 +304,22 @@
                     {"name": "source", "type": "texture copy view", "annotation": "const*"},
                     {"name": "destination", "type": "texture copy view", "annotation": "const*"},
                     {"name": "copy size", "type": "extent 3D", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "insert debug marker",
+                "args": [
+                    {"name": "group label", "type": "char", "annotation": "const*", "length": "strlen"}
+                ]
+            },
+            {
+                "name": "pop debug group",
+                "args": []
+            },
+            {
+                "name": "push debug group",
+                "args": [
+                    {"name": "group label", "type": "char", "annotation": "const*", "length": "strlen"}
                 ]
             }
         ]
@@ -498,27 +507,10 @@
                 ]
             },
             {
-                "name": "create swap chain",
-                "returns": "swap chain",
-                "args": [
-                    {"name": "descriptor", "type": "swap chain descriptor", "annotation": "const*"}
-                ]
-            },
-            {
                 "name": "create texture",
                 "returns": "texture",
                 "args": [
                     {"name": "descriptor", "type": "texture descriptor", "annotation": "const*"}
-                ]
-            },
-            {
-                "name": "tick"
-            },
-            {
-                "name": "set error callback",
-                "args": [
-                    {"name": "callback", "type": "device error callback"},
-                    {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             }
         ]
@@ -535,9 +527,6 @@
             {"name": "stencil read mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
             {"name": "stencil write mask", "type": "uint32_t", "default": "0xFFFFFFFF"}
         ]
-    },
-    "device error callback": {
-        "category": "natively defined"
     },
     "extent 3D": {
         "category": "structure",
@@ -975,35 +964,11 @@
             {"name": "pass op", "type": "stencil operation", "default": "keep"}
         ]
     },
-    "swap chain": {
-        "category": "object",
-        "methods": [
-            {
-                "name": "configure",
-                "args": [
-                    {"name": "format", "type": "texture format"},
-                    {"name": "allowed usage", "type": "texture usage bit"},
-                    {"name": "width", "type": "uint32_t"},
-                    {"name": "height", "type": "uint32_t"}
-                ]
-            },
-            {
-                "name": "get next texture",
-                "returns": "texture"
-            },
-            {
-                "name": "present",
-                "args": [
-                    {"name": "texture", "type": "texture"}
-                ]
-            }
-        ]
-    },
-    "swap chain descriptor": {
-        "category": "structure",
-        "extensible": true,
-        "members": [
-            {"name": "implementation", "type": "uint64_t"}
+    "structure type": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "default"},
+            {"value": 1, "name": "todo put the rest"}
         ]
     },
     "texture": {
@@ -1144,8 +1109,7 @@
             {"value": 2, "name": "copy dst"},
             {"value": 4, "name": "sampled"},
             {"value": 8, "name": "storage"},
-            {"value": 16, "name": "output attachment"},
-            {"value": 32, "name": "present"}
+            {"value": 16, "name": "output attachment"}
         ]
     },
     "texture view descriptor": {
@@ -1157,7 +1121,8 @@
             {"name": "base mip level", "type": "uint32_t", "default": "0"},
             {"name": "mip level count", "type": "uint32_t", "default": "1"},
             {"name": "base array layer", "type": "uint32_t", "default": "0"},
-            {"name": "array layer count", "type": "uint32_t", "default": "1"}
+            {"name": "array layer count", "type": "uint32_t", "default": "1"},
+            {"name": "aspect", "type": "texture aspect"}
         ],
         "TODO": [
             "jiawei.shao@intel.com: Allow choosing the aspect (depth vs. stencil)"

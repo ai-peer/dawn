@@ -29,7 +29,6 @@ namespace dawn {
 
     {% endfor %}
 
-
     {% for type in by_category["structure"] %}
         {% set CppType = as_cppType(type.name) %}
         {% set CType = as_cType(type.name) %}
@@ -40,6 +39,8 @@ namespace dawn {
         {% if type.extensible %}
             static_assert(offsetof({{CppType}}, nextInChain) == offsetof({{CType}}, nextInChain),
                     "offsetof mismatch for {{CppType}}::nextInChain");
+            static_assert(offsetof({{CppType}}, structureType) == offsetof({{CType}}, structureType),
+                    "offsetof mismatch for {{CppType}}::structureType");
         {% endif %}
         {% for member in type.members %}
             {% set memberName = member.name.camelCase() %}
