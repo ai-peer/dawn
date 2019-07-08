@@ -27,10 +27,10 @@
 // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#ifndef WEBGPU_H_
-#define WEBGPU_H_
+#ifndef WGPU_WGPU_H_
+#define WGPU_WGPU_H_
 
-#if defined(WGPU_SHARED_LIBRARY)
+#if !defined(WGPU_EXPORT)
 #    if defined(_WIN32)
 #        if defined(WGPU_IMPLEMENTATION)
 #            define WGPU_EXPORT __declspec(dllexport)
@@ -44,9 +44,7 @@
 #            define WGPU_EXPORT
 #        endif
 #    endif  // defined(_WIN32)
-#else       // defined(WGPU_SHARED_LIBRARY)
-#    define WGPU_EXPORT
-#endif  // defined(WGPU_SHARED_LIBRARY)
+#endif  // defined(WGPU_EXPORT)
 
 #include <stdint.h>
 #include <stddef.h>
@@ -108,7 +106,6 @@ typedef void (*WGPUProc)();
 
 #if !defined(WGPU_SKIP_PROCS)
 
-typedef WGPUSurface (*WGPUProcCreateSurface)(WGPUSurfaceDescriptor const * descriptor);
 typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, const char* procName);
 
 {% for type in by_category["object"] if len(native_methods(type)) > 0 %}
@@ -127,7 +124,6 @@ typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, const char* procNa
 
 #if !defined(WGPU_SKIP_DECLARATIONS)
 
-WGPU_EXPORT WGPUSurface wgpuCreateSurface(WGPUSurfaceDescriptor const * descriptor);
 WGPU_EXPORT WGPUProc WGPUGetProcAddress(WGPUDevice device, const char* procName);
 
 {% for type in by_category["object"] if len(native_methods(type)) > 0 %}
@@ -148,4 +144,4 @@ WGPU_EXPORT WGPUProc WGPUGetProcAddress(WGPUDevice device, const char* procName)
 } // extern "C"
 #endif
 
-#endif // WEBGPU_H_
+#endif // WGPU_WGPU_H_
