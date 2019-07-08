@@ -149,7 +149,7 @@ void frame() {
         dawnRenderPassEncoderEndPass(pass);
         dawnRenderPassEncoderRelease(pass);
 
-        commands = dawnCommandEncoderFinish(encoder);
+        commands = dawnCommandEncoderFinish(encoder, nullptr);
         dawnCommandEncoderRelease(encoder);
     }
 

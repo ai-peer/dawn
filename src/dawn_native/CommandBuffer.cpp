@@ -19,7 +19,7 @@
 
 namespace dawn_native {
 
-    CommandBufferBase::CommandBufferBase(DeviceBase* device, CommandEncoderBase* encoder)
+    CommandBufferBase::CommandBufferBase(DeviceBase* device, CommandEncoderBase* encoder, const CommandBufferDescriptor*)
         : ObjectBase(device), mResourceUsages(encoder->AcquireResourceUsages()) {
     }
 

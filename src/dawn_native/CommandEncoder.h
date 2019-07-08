@@ -37,8 +37,8 @@ namespace dawn_native {
         CommandBufferResourceUsage AcquireResourceUsages();
 
         // Dawn API
-        ComputePassEncoderBase* BeginComputePass();
-        RenderPassEncoderBase* BeginRenderPass(const RenderPassDescriptor* info);
+        ComputePassEncoderBase* BeginComputePass(const ComputePassDescriptor* descriptor);
+        RenderPassEncoderBase* BeginRenderPass(const RenderPassDescriptor* descriptor);
         void CopyBufferToBuffer(BufferBase* source,
                                 uint64_t sourceOffset,
                                 BufferBase* destination,
@@ -53,7 +53,7 @@ namespace dawn_native {
         void CopyTextureToTexture(const TextureCopyView* source,
                                   const TextureCopyView* destination,
                                   const Extent3D* copySize);
-        CommandBufferBase* Finish();
+        CommandBufferBase* Finish(const CommandBufferDescriptor* descriptor);
 
         // Functions to interact with the encoders
         void HandleError(const char* message);
@@ -69,7 +69,7 @@ namespace dawn_native {
         void PassEnded();
 
       private:
-        MaybeError ValidateFinish();
+        MaybeError ValidateFinish(const CommandBufferDescriptor* descriptor);
         MaybeError ValidateComputePass();
         MaybeError ValidateRenderPass(BeginRenderPassCmd* renderPass);
         MaybeError ValidateCanRecordTopLevelCommands() const;
