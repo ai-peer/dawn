@@ -14,6 +14,25 @@
         "See the License for the specific language governing permissions and",
         "limitations under the License."
     ],
+    "adapter": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "request device",
+                "args": [
+                    {"name": "descriptor", "type": "device descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request device callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "get properties",
+                "args": [
+                    {"name": "properties", "type": "adapter properties", "annotation": "*"}
+                ]
+            }
+        ]
+    },
     "adapter properties": {
         "category": "structure",
         "extensible": true,
@@ -168,13 +187,6 @@
             {"name": "binding", "type": "uint32_t"},
             {"name": "visibility", "type": "shader stage"},
 
-            {"name": "type", "type": "binding type", "default": "undefined"},
-            {"name": "has dynamic offset", "type": "bool", "default": "false"},
-            {"name": "min buffer binding size", "type": "uint64_t", "default": "0"},
-            {"name": "view dimension", "type": "texture view dimension", "default": "undefined"},
-            {"name": "texture component type", "type": "texture component type", "default": "float"},
-            {"name": "storage texture format", "type": "texture format", "default": "undefined"},
-
             {"name": "buffer", "type": "buffer binding layout"},
             {"name": "sampler", "type": "sampler binding layout"},
             {"name": "texture", "type": "texture binding layout"},
@@ -188,21 +200,6 @@
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "entry count", "type": "uint32_t"},
             {"name": "entries", "type": "bind group layout entry", "annotation": "const*", "length": "entry count"}
-        ]
-    },
-    "binding type": {
-        "category": "enum",
-        "values": [
-            {"value": 0, "name": "undefined", "jsrepr": "undefined", "valid": false},
-            {"value": 1, "name": "uniform buffer"},
-            {"value": 2, "name": "storage buffer"},
-            {"value": 3, "name": "readonly storage buffer"},
-            {"value": 4, "name": "sampler"},
-            {"value": 5, "name": "comparison sampler"},
-            {"value": 6, "name": "sampled texture"},
-            {"value": 7, "name": "multisampled texture"},
-            {"value": 8, "name": "readonly storage texture"},
-            {"value": 9, "name": "writeonly storage texture"}
         ]
     },
     "blend descriptor": {
@@ -439,13 +436,6 @@
                 ]
             },
             {
-                "name": "inject validation error",
-                "args": [
-                    {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ],
-                "TODO": "enga@: Make this a Dawn extension"
-            },
-            {
                 "name": "insert debug marker",
                 "args": [
                     {"name": "marker label", "type": "char", "annotation": "const*", "length": "strlen"}
@@ -565,6 +555,16 @@
                 ]
             },
             {
+                "name": "begin pipeline statistics query",
+                "args": [
+                    {"name": "query set", "type": "query set"},
+                    {"name": "query index", "type": "uint32_t"}
+                ]
+            },
+            {
+                "name": "end pipeline statistics query"
+            },
+            {
                 "name": "end pass"
             }
         ]
@@ -588,13 +588,6 @@
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "layout", "type": "pipeline layout", "optional": true},
             {"name": "compute stage", "type": "programmable stage descriptor"}
-        ]
-    },
-    "copy texture for browser options": {
-        "category": "structure",
-        "extensible": true,
-        "members": [
-            {"name": "flipY", "type": "bool", "default": "false"}
         ]
     },
     "create ready compute pipeline callback": {
@@ -656,11 +649,6 @@
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
                 ]
-            },
-            {
-                "name": "create error buffer",
-                "returns": "buffer",
-                "TODO": "enga@: Make this part of a dawn_wire extension"
             },
             {
                 "name": "create command encoder",
@@ -756,20 +744,6 @@
                 "returns": "queue"
             },
             {
-                "name": "inject error",
-                "args": [
-                    {"name": "type", "type": "error type"},
-                    {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ],
-                "TODO": "enga@: Make this a Dawn extension"
-            },
-            {
-                "name": "lose for testing"
-            },
-            {
-                "name": "tick"
-            },
-            {
                 "name": "set uncaptured error callback",
                 "args": [
                     {"name": "callback", "type": "error callback"},
@@ -799,21 +773,16 @@
             }
         ]
     },
+    "device descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
     "device lost callback": {
         "category": "callback",
         "args": [
             {"name": "message", "type": "char", "annotation": "const*"},
             {"name": "userdata", "type": "void", "annotation": "*"}
-        ]
-    },
-    "device properties": {
-        "category": "structure",
-        "extensible": false,
-        "members": [
-            {"name": "texture compression BC", "type": "bool", "default": "false"},
-            {"name": "shader float16", "type": "bool", "default": "false"},
-            {"name": "pipeline statistics query", "type": "bool", "default": "false"},
-            {"name": "timestamp query", "type": "bool", "default": "false"}
         ]
     },
     "depth stencil state descriptor": {
@@ -924,6 +893,13 @@
             {"value": 1, "name": "CW"}
         ]
     },
+    "surface get preferred format callback": {
+        "category": "callback",
+        "args": [
+            {"name": "format", "type": "texture format"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
     "index format": {
         "category": "enum",
         "values": [
@@ -940,6 +916,17 @@
                 "returns": "surface",
                 "args": [
                     {"name": "descriptor", "type": "surface descriptor", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "process events"
+            },
+            {
+                "name": "request adapter",
+                "args": [
+                    {"name": "options", "type": "request adapter options", "annotation": "const*"},
+                    {"name": "callback", "type": "request adapter callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             }
         ]
@@ -994,7 +981,6 @@
     "map mode": {
         "category": "bitmask",
         "values": [
-            {"value": 0, "name": "none"},
             {"value": 1, "name": "read"},
             {"value": 2, "name": "write"}
         ]
@@ -1131,20 +1117,9 @@
                     {"name": "data layout", "type": "texture data layout", "annotation": "const*"},
                     {"name": "write size", "type": "extent 3D", "annotation": "const*"}
                 ]
-            },
-            {
-                "name": "copy texture for browser",
-                "extensible": true,
-                "args": [
-                    {"name": "source", "type": "texture copy view", "annotation": "const*"},
-                    {"name": "destination", "type": "texture copy view", "annotation": "const*"},
-                    {"name": "copy size", "type": "extent 3D", "annotation": "const*"},
-                    {"name": "options", "type": "copy texture for browser options", "annotation": "const*"}
-                ]
             }
         ]
     },
-
     "rasterization state descriptor": {
         "category": "structure",
         "extensible": true,
@@ -1153,7 +1128,8 @@
             {"name": "cull mode", "type": "cull mode", "default": "none"},
             {"name": "depth bias", "type": "int32_t", "default": "0"},
             {"name": "depth bias slope scale", "type": "float", "default": "0.0f"},
-            {"name": "depth bias clamp", "type": "float", "default": "0.0f"}
+            {"name": "depth bias clamp", "type": "float", "default": "0.0f"},
+            {"name": "clamp depth", "type": "bool", "default": "false"}
         ]
     },
 
@@ -1239,15 +1215,6 @@
             },
             {
                 "name": "set index buffer",
-                "args": [
-                    {"name": "buffer", "type": "buffer"},
-                    {"name": "format", "type": "index format"},
-                    {"name": "offset", "type": "uint64_t", "default": "0"},
-                    {"name": "size", "type": "uint64_t", "default": "0"}
-                ]
-            },
-            {
-                "name": "set index buffer with format",
                 "args": [
                     {"name": "buffer", "type": "buffer"},
                     {"name": "format", "type": "index format"},
@@ -1447,15 +1414,6 @@
                 ]
             },
             {
-                "name": "set index buffer with format",
-                "args": [
-                    {"name": "buffer", "type": "buffer"},
-                    {"name": "format", "type": "index format"},
-                    {"name": "offset", "type": "uint64_t", "default": "0"},
-                    {"name": "size", "type": "uint64_t", "default": "0"}
-                ]
-            },
-            {
                 "name": "begin occlusion query",
                 "args": [
                     {"name": "query index", "type": "uint32_t"}
@@ -1470,6 +1428,16 @@
                     {"name": "query set", "type": "query set"},
                     {"name": "query index", "type": "uint32_t"}
                 ]
+            },
+            {
+                "name": "begin pipeline statistics query",
+                "args": [
+                    {"name": "query set", "type": "query set"},
+                    {"name": "query index", "type": "uint32_t"}
+                ]
+            },
+            {
+                "name": "end pipeline statistics query"
             },
             {
                 "name": "end pass"
@@ -1507,11 +1475,25 @@
             {"name": "alpha to coverage enabled", "type": "bool", "default": "false"}
         ]
     },
-    "render pipeline descriptor dummy extension": {
+    "request adapter callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "adapter"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "request adapter options": {
         "category": "structure",
-        "chained": true,
+        "extensible": true,
         "members": [
-            {"name": "dummy stage", "type": "programmable stage descriptor"}
+            {"name": "compatible surface", "type": "surface"}
+        ]
+    },
+    "request device callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "device"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
     "sampler": {
@@ -1532,13 +1514,6 @@
             {"name": "lod max clamp", "type": "float", "default": "1000.0f"},
             {"name": "compare", "type": "compare function", "default": "undefined"},
             {"name": "max anisotropy", "type": "uint16_t", "default": "1"}
-        ]
-    },
-    "sampler descriptor dummy anisotropic filtering": {
-        "category": "structure",
-        "chained": true,
-        "members": [
-            {"name": "max anisotropy", "type": "float"}
         ]
     },
     "shader module": {
@@ -1599,7 +1574,17 @@
         ]
     },
     "surface": {
-        "category": "object"
+        "category": "object",
+        "methods": [
+            {
+                "name": "get preferred format",
+                "args": [
+                    {"name": "adapter", "type": "adapter"},
+                    {"name": "callback", "type": "surface get preferred format callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            }
+        ]
     },
     "surface descriptor": {
         "category": "structure",
@@ -1644,15 +1629,6 @@
     "swap chain": {
         "category": "object",
         "methods": [
-            {
-                "name": "configure",
-                "args": [
-                    {"name": "format", "type": "texture format"},
-                    {"name": "allowed usage", "type": "texture usage"},
-                    {"name": "width", "type": "uint32_t"},
-                    {"name": "height", "type": "uint32_t"}
-                ]
-            },
             {"name": "get current texture view", "returns": "texture view"},
             {"name": "present"}
         ]
@@ -1666,8 +1642,7 @@
             {"name": "format", "type": "texture format"},
             {"name": "width", "type": "uint32_t"},
             {"name": "height", "type": "uint32_t"},
-            {"name": "present mode", "type": "present mode"},
-            {"name": "implementation", "type": "uint64_t", "default": 0}
+            {"name": "present mode", "type": "present mode"}
         ]
     },
     "s type": {
@@ -1680,9 +1655,7 @@
             {"value": 3, "name": "surface descriptor from xlib"},
             {"value": 4, "name": "surface descriptor from canvas HTML selector"},
             {"value": 5, "name": "shader module SPIRV descriptor"},
-            {"value": 6, "name": "shader module WGSL descriptor"},
-            {"value": 7, "name": "sampler descriptor dummy anisotropic filtering"},
-            {"value": 8, "name": "render pipeline descriptor dummy extension"}
+            {"value": 6, "name": "shader module WGSL descriptor"}
         ]
     },
     "texture": {
@@ -1805,21 +1778,22 @@
             {"value": 37, "name": "depth32 float"},
             {"value": 38, "name": "depth24 plus"},
             {"value": 39, "name": "depth24 plus stencil8"},
+            {"value": 40, "name": "stencil8"},
 
-            {"value": 40, "name": "BC1 RGBA unorm"},
-            {"value": 41, "name": "BC1 RGBA unorm srgb"},
-            {"value": 42, "name": "BC2 RGBA unorm"},
-            {"value": 43, "name": "BC2 RGBA unorm srgb"},
-            {"value": 44, "name": "BC3 RGBA unorm"},
-            {"value": 45, "name": "BC3 RGBA unorm srgb"},
-            {"value": 46, "name": "BC4 R unorm"},
-            {"value": 47, "name": "BC4 R snorm"},
-            {"value": 48, "name": "BC5 RG unorm"},
-            {"value": 49, "name": "BC5 RG snorm"},
-            {"value": 50, "name": "BC6H RGB ufloat"},
-            {"value": 51, "name": "BC6H RGB float"},
-            {"value": 52, "name": "BC7 RGBA unorm"},
-            {"value": 53, "name": "BC7 RGBA unorm srgb"}
+            {"value": 41, "name": "BC1 RGBA unorm"},
+            {"value": 42, "name": "BC1 RGBA unorm srgb"},
+            {"value": 43, "name": "BC2 RGBA unorm"},
+            {"value": 44, "name": "BC2 RGBA unorm srgb"},
+            {"value": 45, "name": "BC3 RGBA unorm"},
+            {"value": 46, "name": "BC3 RGBA unorm srgb"},
+            {"value": 47, "name": "BC4 R unorm"},
+            {"value": 48, "name": "BC4 R snorm"},
+            {"value": 49, "name": "BC5 RG unorm"},
+            {"value": 50, "name": "BC5 RG snorm"},
+            {"value": 51, "name": "BC6H RGB ufloat"},
+            {"value": 52, "name": "BC6H RGB float"},
+            {"value": 53, "name": "BC7 RGBA unorm"},
+            {"value": 54, "name": "BC7 RGBA unorm srgb"}
         ]
     },
     "texture usage": {
@@ -1830,9 +1804,7 @@
             {"value": 2, "name": "copy dst"},
             {"value": 4, "name": "sampled"},
             {"value": 8, "name": "storage"},
-            {"value": 16, "name": "output attachment"},
-            {"value": 16, "name": "render attachment"},
-            {"value": 32, "name": "present"}
+            {"value": 16, "name": "render attachment"}
         ]
     },
     "texture view descriptor": {
