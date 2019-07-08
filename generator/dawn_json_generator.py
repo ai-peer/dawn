@@ -466,10 +466,7 @@ def cpp_native_methods(types, typ):
     return sorted(typ.methods + typ.native_methods, key=lambda method: method.name.canonical_case())
 
 def c_native_methods(types, typ):
-    return cpp_native_methods(types, typ) + [
-        Method(Name('reference'), types['void'], []),
-        Method(Name('release'), types['void'], []),
-    ]
+    return cpp_native_methods(types, typ)
 
 def get_methods_sorted_by_name(api_params):
     unsorted = [(as_MethodSuffix(typ.name, method.name), typ, method) \
