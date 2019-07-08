@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "443209df_0f6d62e1",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-08T22:59:53Z",
+      "side": 1,
+      "message": "This is the only Deserialize method that returns a bool.\nMaybe the others should return a success status as well? (or take in bool* success)",
+      "range": {
+        "startLine": 166,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 52
+      },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
