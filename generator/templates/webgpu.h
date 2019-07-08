@@ -100,6 +100,7 @@ typedef void (*WGPUBufferMapWriteCallback)(WGPUBufferMapAsyncStatus status,
                                            void* data,
                                            uint64_t dataLength,
                                            void* userdata);
+typedef void (*WGPUDeviceLostCallback)(const char* message, void* userdata);
 typedef void (*WGPUFenceOnCompletionCallback)(WGPUFenceCompletionStatus status, void* userdata);
 typedef void (*WGPUErrorCallback)(WGPUErrorType type, const char* message, void* userdata);
 
@@ -107,6 +108,7 @@ typedef void (*WGPUProc)();
 
 #if !defined(WGPU_SKIP_PROCS)
 
+typedef WGPUSurface (*WGPUProcCreateSurface)(WGPUSurfaceDescriptor const * descriptor);
 typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, const char* procName);
 
 {% for type in by_category["object"] if len(native_methods(type)) > 0 %}
@@ -125,6 +127,7 @@ typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, const char* procNa
 
 #if !defined(WGPU_SKIP_DECLARATIONS)
 
+WGPU_EXPORT WGPUSurface wgpuCreateSurface(WGPUSurfaceDescriptor const * descriptor);
 WGPU_EXPORT WGPUProc WGPUGetProcAddress(WGPUDevice device, const char* procName);
 
 {% for type in by_category["object"] if len(native_methods(type)) > 0 %}
