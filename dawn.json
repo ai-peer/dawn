@@ -137,14 +137,6 @@
         "category": "object",
         "methods": [
             {
-                "name": "set sub data",
-                "args": [
-                    {"name": "start", "type": "uint64_t"},
-                    {"name": "count", "type": "uint64_t"},
-                    {"name": "data", "type": "void", "annotation": "const*", "length": "count"}
-                ]
-            },
-            {
                 "name": "map read async",
                 "args": [
                     {"name": "callback", "type": "buffer map read callback"},
@@ -532,13 +524,6 @@
                 ]
             },
             {
-                "name": "create swap chain",
-                "returns": "swap chain",
-                "args": [
-                    {"name": "descriptor", "type": "swap chain descriptor", "annotation": "const*"}
-                ]
-            },
-            {
                 "name": "create texture",
                 "returns": "texture",
                 "args": [
@@ -564,6 +549,13 @@
                 ]
             },
             {
+                "name": "set device lost callback",
+                "args": [
+                    {"name": "callback", "type": "device lost callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
                 "name": "push error scope",
                 "args": [
                     {"name": "filter", "type": "error filter"}
@@ -578,6 +570,9 @@
                 ]
             }
         ]
+    },
+    "device lost callback": {
+        "category": "natively defined"
     },
     "depth stencil state descriptor": {
         "category": "structure",
@@ -1170,6 +1165,7 @@
             {"name": "pass op", "type": "stencil operation", "default": "keep"}
         ]
     },
+<<<<<<< HEAD
     "swap chain": {
         "category": "object",
         "methods": [
@@ -1202,6 +1198,8 @@
             {"name": "implementation", "type": "uint64_t"}
         ]
     },
+=======
+>>>>>>> 37086b9b... Changes for webgpu.h
     "texture": {
         "category": "object",
         "methods": [
@@ -1337,8 +1335,7 @@
             {"value": 2, "name": "copy dst"},
             {"value": 4, "name": "sampled"},
             {"value": 8, "name": "storage"},
-            {"value": 16, "name": "output attachment"},
-            {"value": 32, "name": "present"}
+            {"value": 16, "name": "output attachment"}
         ]
     },
     "texture view descriptor": {
