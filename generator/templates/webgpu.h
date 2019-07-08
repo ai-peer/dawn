@@ -74,8 +74,11 @@
 #include <stdbool.h>
 
 #define WGPU_WHOLE_SIZE (0xffffffffffffffffULL)
+<<<<<<< HEAD
 // TODO(crbug.com/dawn/520): Remove WGPU_STRIDE_UNDEFINED in favor of WGPU_COPY_STRIDE_UNDEFINED.
 #define WGPU_STRIDE_UNDEFINED (0xffffffffUL)
+=======
+>>>>>>> f9563020 (Changes for webgpu.h)
 #define WGPU_COPY_STRIDE_UNDEFINED (0xffffffffUL)
 
 typedef uint32_t WGPUFlags;
