@@ -1,27 +1,58 @@
-//* Copyright 2017 The Dawn Authors
-//*
-//* Licensed under the Apache License, Version 2.0 (the "License");
-//* you may not use this file except in compliance with the License.
-//* You may obtain a copy of the License at
-//*
-//*     http://www.apache.org/licenses/LICENSE-2.0
-//*
-//* Unless required by applicable law or agreed to in writing, software
-//* distributed under the License is distributed on an "AS IS" BASIS,
-//* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//* See the License for the specific language governing permissions and
-//* limitations under the License.
+// BSD 3-Clause License
+//
+// Copyright (c) 2019, "WebGPU native" developers
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice, this
+//    list of conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice,
+//    this list of conditions and the following disclaimer in the documentation
+//    and/or other materials provided with the distribution.
+//
+// 3. Neither the name of the copyright holder nor the names of its
+//    contributors may be used to endorse or promote products derived from
+//    this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#ifndef WGPU_WGPU_H_
+#define WGPU_WGPU_H_
 
-#ifndef DAWN_DAWN_H_
-#define DAWN_DAWN_H_
-
-#include "dawn/dawn_export.h"
+#if !defined(WGPU_EXPORT)
+#    if defined(_WIN32)
+#        if defined(WGPU_IMPLEMENTATION)
+#            define WGPU_EXPORT __declspec(dllexport)
+#        else
+#            define WGPU_EXPORT __declspec(dllimport)
+#        endif
+#    else  // defined(_WIN32)
+#        if defined(WGPU_IMPLEMENTATION)
+#            define WGPU_EXPORT __attribute__((visibility("default")))
+#        else
+#            define WGPU_EXPORT
+#        endif
+#    endif  // defined(_WIN32)
+#endif  // defined(WGPU_EXPORT)
 
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
 
-const uint64_t DAWN_WHOLE_SIZE = 0xffffffffffffffffULL; // UINT64_MAX
+const uint64_t WGPU_WHOLE_SIZE = 0xffffffffffffffffULL; // UINT64_MAX
+
+typedef uint32_t WGPUFlags;
 
 typedef uint32_t WGPUFlags;
 
@@ -58,28 +89,28 @@ typedef uint32_t WGPUFlags;
 extern "C" {
 #endif
 
-// Custom types depending on the target language
-typedef void (*DawnBufferCreateMappedCallback)(DawnBufferMapAsyncStatus status,
-                                               DawnCreateBufferMappedResult result,
+typedef void (*WGPUBufferCreateMappedCallback)(WGPUBufferMapAsyncStatus status,
+                                               WGPUCreateBufferMappedResult result,
                                                void* userdata);
-typedef void (*DawnBufferMapReadCallback)(DawnBufferMapAsyncStatus status,
+typedef void (*WGPUBufferMapReadCallback)(WGPUBufferMapAsyncStatus status,
                                           const void* data,
                                           uint64_t dataLength,
                                           void* userdata);
-typedef void (*DawnBufferMapWriteCallback)(DawnBufferMapAsyncStatus status,
+typedef void (*WGPUBufferMapWriteCallback)(WGPUBufferMapAsyncStatus status,
                                            void* data,
                                            uint64_t dataLength,
                                            void* userdata);
-typedef void (*DawnFenceOnCompletionCallback)(DawnFenceCompletionStatus status, void* userdata);
-typedef void (*DawnErrorCallback)(DawnErrorType type, const char* message, void* userdata);
+typedef void (*WGPUDeviceLostCallback)(const char* message, void* userdata);
+typedef void (*WGPUFenceOnCompletionCallback)(WGPUFenceCompletionStatus status, void* userdata);
+typedef void (*WGPUErrorCallback)(WGPUErrorType type, const char* message, void* userdata);
 
-typedef void (*DawnProc)();
+typedef void (*WGPUProc)();
 
-#if !defined(DAWN_SKIP_PROCS)
+#if !defined(WGPU_SKIP_PROCS)
 
-typedef DawnProc (*DawnProcGetProcAddress)(DawnDevice device, const char* procName);
+typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, const char* procName);
 
-{% for type in by_category["object"] %}
+{% for type in by_category["object"] if len(native_methods(type)) > 0 %}
     // Procs of {{type.name.CamelCase()}}
     {% for method in native_methods(type) %}
         typedef {{as_cType(method.return_type.name)}} (*{{as_cProc(type.name, method.name)}})(
@@ -91,16 +122,16 @@ typedef DawnProc (*DawnProcGetProcAddress)(DawnDevice device, const char* procNa
     {% endfor %}
 
 {% endfor %}
-#endif  // !defined(DAWN_SKIP_PROCS)
+#endif  // !defined(WGPU_SKIP_PROCS)
 
-#if !defined(DAWN_SKIP_DECLARATIONS)
+#if !defined(WGPU_SKIP_DECLARATIONS)
 
-DAWN_EXPORT DawnProc DawnGetProcAddress(DawnDevice device, const char* procName);
+WGPU_EXPORT WGPUProc WGPUGetProcAddress(WGPUDevice device, const char* procName);
 
-{% for type in by_category["object"] %}
+{% for type in by_category["object"] if len(native_methods(type)) > 0 %}
     // Methods of {{type.name.CamelCase()}}
     {% for method in native_methods(type) %}
-        DAWN_EXPORT {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(
+        WGPU_EXPORT {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(
             {{-as_cType(type.name)}} {{as_varName(type.name)}}
             {%- for arg in method.arguments -%}
                 , {{as_annotated_cType(arg)}}
@@ -109,10 +140,10 @@ DAWN_EXPORT DawnProc DawnGetProcAddress(DawnDevice device, const char* procName)
     {% endfor %}
 
 {% endfor %}
-#endif  // !defined(DAWN_SKIP_DECLARATIONS)
+#endif  // !defined(WGPU_SKIP_DECLARATIONS)
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-#endif // DAWN_DAWN_H_
+#endif // WGPU_WGPU_H_

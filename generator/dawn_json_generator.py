@@ -352,7 +352,13 @@ def as_cType(name):
     if name.native:
         return name.concatcase()
     else:
-        return 'Dawn' + name.CamelCase()
+        return 'WGPU' + name.CamelCase()
+
+def as_cTypeEnumSpecialCase(typ):
+    if typ.category == 'bitmask':
+        return as_cType(typ.name) + 'Flags'
+    return as_cType(typ.name)
+
 
 def as_cTypeEnumSpecialCase(typ):
     if typ.category == 'bitmask':
@@ -406,7 +412,7 @@ def annotated(typ, arg):
 
 def as_cEnum(type_name, value_name):
     assert(not type_name.native and not value_name.native)
-    return 'DAWN' + '_' + type_name.SNAKE_CASE() + '_' + value_name.SNAKE_CASE()
+    return 'WGPU' + type_name.CamelCase() + '_' + value_name.CamelCase()
 
 def as_cppEnum(value_name):
     assert(not value_name.native)
@@ -416,7 +422,7 @@ def as_cppEnum(value_name):
 
 def as_cMethod(type_name, method_name):
     assert(not type_name.native and not method_name.native)
-    return 'dawn' + type_name.CamelCase() + method_name.CamelCase()
+    return 'wgpu' + type_name.CamelCase() + method_name.CamelCase()
 
 def as_MethodSuffix(type_name, method_name):
     assert(not type_name.native and not method_name.native)
@@ -424,7 +430,7 @@ def as_MethodSuffix(type_name, method_name):
 
 def as_cProc(type_name, method_name):
     assert(not type_name.native and not method_name.native)
-    return 'Dawn' + 'Proc' + type_name.CamelCase() + method_name.CamelCase()
+    return 'WGPU' + 'Proc' + type_name.CamelCase() + method_name.CamelCase()
 
 def as_frontendType(typ):
     if typ.category == 'object':
@@ -448,10 +454,7 @@ def cpp_native_methods(types, typ):
     return sorted(typ.methods + typ.native_methods, key=lambda method: method.name.canonical_case())
 
 def c_native_methods(types, typ):
-    return cpp_native_methods(types, typ) + [
-        Method(Name('reference'), types['void'], []),
-        Method(Name('release'), types['void'], []),
-    ]
+    return cpp_native_methods(types, typ)
 
 def get_methods_sorted_by_name(api_params):
     unsorted = [(as_MethodSuffix(typ.name, method.name), typ, method) \

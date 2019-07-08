@@ -137,14 +137,6 @@
         "category": "object",
         "methods": [
             {
-                "name": "set sub data",
-                "args": [
-                    {"name": "start", "type": "uint64_t"},
-                    {"name": "count", "type": "uint64_t"},
-                    {"name": "data", "type": "void", "annotation": "const*", "length": "count"}
-                ]
-            },
-            {
                 "name": "map read async",
                 "args": [
                     {"name": "callback", "type": "buffer map read callback"},
@@ -532,13 +524,6 @@
                 ]
             },
             {
-                "name": "create swap chain",
-                "returns": "swap chain",
-                "args": [
-                    {"name": "descriptor", "type": "swap chain descriptor", "annotation": "const*"}
-                ]
-            },
-            {
                 "name": "create texture",
                 "returns": "texture",
                 "args": [
@@ -546,20 +531,16 @@
                 ]
             },
             {
-                "name": "inject error",
-                "args": [
-                    {"name": "type", "type": "error type"},
-                    {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ],
-                "TODO": "enga@: Make this a Dawn extension"
-            },
-            {
-                "name": "tick"
-            },
-            {
                 "name": "set uncaptured error callback",
                 "args": [
                     {"name": "callback", "type": "error callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "set device lost callback",
+                "args": [
+                    {"name": "callback", "type": "device lost callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             },
@@ -578,6 +559,9 @@
                 ]
             }
         ]
+    },
+    "device lost callback": {
+        "category": "natively defined"
     },
     "depth stencil state descriptor": {
         "category": "structure",
@@ -1169,38 +1153,6 @@
             {"name": "pass op", "type": "stencil operation", "default": "keep"}
         ]
     },
-    "swap chain": {
-        "category": "object",
-        "methods": [
-            {
-                "name": "configure",
-                "args": [
-                    {"name": "format", "type": "texture format"},
-                    {"name": "allowed usage", "type": "texture usage"},
-                    {"name": "width", "type": "uint32_t"},
-                    {"name": "height", "type": "uint32_t"}
-                ]
-            },
-            {
-                "name": "get next texture",
-                "returns": "texture"
-            },
-            {
-                "name": "present",
-                "args": [
-                    {"name": "texture", "type": "texture"}
-                ]
-            }
-        ]
-    },
-    "swap chain descriptor": {
-        "category": "structure",
-        "extensible": true,
-        "members": [
-            {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
-            {"name": "implementation", "type": "uint64_t"}
-        ]
-    },
     "texture": {
         "category": "object",
         "methods": [
@@ -1336,8 +1288,7 @@
             {"value": 2, "name": "copy dst"},
             {"value": 4, "name": "sampled"},
             {"value": 8, "name": "storage"},
-            {"value": 16, "name": "output attachment"},
-            {"value": 32, "name": "present"}
+            {"value": 16, "name": "output attachment"}
         ]
     },
     "texture view descriptor": {
