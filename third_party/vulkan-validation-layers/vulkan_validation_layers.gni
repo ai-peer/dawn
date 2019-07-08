@@ -12,22 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/dotfile_settings.gni")
-import("//dotfile_settings.gni")
+# Paths to validation layer dependencies
+vulkan_headers_dir = "./src/external/Vulkan-Headers"
+vvl_spirv_tools_dir = "//third_party/SPIRV-Tools"
+vvl_glslang_dir = "//third_party/glslang"
 
-buildconfig = "//build/config/BUILDCONFIG.gn"
-
-exec_script_whitelist = dawn_dotfile_settings.exec_script_whitelist +
-                        build_dotfile_settings.exec_script_whitelist
-
-default_args = {
-  clang_use_chrome_plugins = false
-}
-
-check_targets = [
-  # Everything in BUILD.gn
-  "//:*",
-
-  # Everything in third_party/BUILD.gn
-  "//third_party/:*",
-]
+# Subdirectories for generated files
+vulkan_data_subdir = "vulkandata"
+vulkan_gen_subdir = ""
