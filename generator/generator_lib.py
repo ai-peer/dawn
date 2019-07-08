@@ -123,6 +123,9 @@ class _PreprocessingLoader(jinja2.BaseLoader):
 
         # Remove indentation templates have for the Jinja control flow.
         for line in lines:
+            if line.startswith('//*'):
+                continue
+
             # The capture in the regex adds one element per block start or end so we divide by two
             # there is also an extra line chunk corresponding to the line end, so we substract it.
             numends = (len(self.blockend.split(line)) - 1) // 2
