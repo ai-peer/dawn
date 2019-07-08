@@ -415,6 +415,24 @@
     },
     {
       "key": {
+        "uuid": "aab9ccab_51f894fe",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-08T09:26:54Z",
+      "side": 1,
+      "message": "For 2) we can just have each fragment output its gl_FragCoord and check that the values are what we expect, no need to sample from a texture.",
+      "parentUuid": "88b733bc_ee188edd",
+      "revId": "2d4e5b854942958b6acee000a0fc532c6e7ebc6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74cc03fb_c7a94ba4",
         "filename": "src/tests/end2end/CullingTests.cpp",
         "patchSetId": 6
