@@ -14,6 +14,30 @@
         "See the License for the specific language governing permissions and",
         "limitations under the License."
     ],
+    "adapter": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "request device",
+                "args": [
+                    {"name": "descriptor", "type": "device descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request device callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "get properties",
+                "args": [
+                    {"name": "properties", "type": "adapter properties", "annotation": "*"}
+                ]
+            }
+        ]
+    },
+    "adapter descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
     "adapter properties": {
         "category": "structure",
         "extensible": true,
@@ -59,7 +83,7 @@
     "bind group": {
         "category": "object"
     },
-    "bind group binding": {
+    "bind group entry": {
         "category": "structure",
         "extensible": false,
         "members": [
@@ -77,14 +101,14 @@
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "layout", "type": "bind group layout"},
-            {"name": "binding count", "type": "uint32_t"},
-            {"name": "bindings", "type": "bind group binding", "annotation": "const*", "length": "binding count"}
+            {"name": "entry count", "type": "uint32_t"},
+            {"name": "entries", "type": "bind group entry", "annotation": "const*", "length": "entry count"}
         ]
     },
     "bind group layout": {
         "category": "object"
     },
-    "bind group layout binding": {
+    "bind group layout entry": {
         "category": "structure",
         "extensible": false,
         "members": [
@@ -93,7 +117,7 @@
             {"name": "type", "type": "binding type"},
             {"name": "has dynamic offset", "type": "bool", "default": "false"},
             {"name": "multisampled", "type": "bool", "default": "false"},
-            {"name": "texture dimension", "type": "texture view dimension", "default": "undefined"},
+            {"name": "view dimension", "type": "texture view dimension", "default": "undefined"},
             {"name": "texture component type", "type": "texture component type", "default": "float"},
             {"name": "storage texture format", "type": "texture format", "default": "undefined"}
         ]
@@ -103,8 +127,8 @@
         "extensible": true,
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
-            {"name": "binding count", "type": "uint32_t"},
-            {"name": "bindings", "type": "bind group layout binding", "annotation": "const*", "length": "binding count"}
+            {"name": "entry count", "type": "uint32_t"},
+            {"name": "entries", "type": "bind group layout entry", "annotation": "const*", "length": "entry count"}
         ]
     },
     "binding type": {
@@ -114,8 +138,8 @@
             {"value": 1, "name": "storage buffer"},
             {"value": 2, "name": "readonly storage buffer"},
             {"value": 3, "name": "sampler"},
-            {"value": 4, "name": "sampled texture"},
-            {"value": 5, "name": "storage texture"},
+            {"value": 4, "name": "comparison sampler"},
+            {"value": 5, "name": "sampled texture"},
             {"value": 6, "name": "readonly storage texture"},
             {"value": 7, "name": "writeonly storage texture"}
         ]
@@ -174,14 +198,6 @@
         "category": "object",
         "methods": [
             {
-                "name": "set sub data",
-                "args": [
-                    {"name": "start", "type": "uint64_t"},
-                    {"name": "count", "type": "uint64_t"},
-                    {"name": "data", "type": "void", "annotation": "const*", "length": "count"}
-                ]
-            },
-            {
                 "name": "map read async",
                 "args": [
                     {"name": "callback", "type": "buffer map read callback"},
@@ -203,22 +219,14 @@
             }
         ]
     },
-    "buffer create mapped callback": {
-        "category": "callback",
-        "args": [
-            {"name": "status", "type": "buffer map async status"},
-            {"name": "result", "type": "create buffer mapped result"},
-            {"name": "userdata", "type": "void", "annotation": "*"}
-        ]
-    },
     "buffer copy view": {
         "category": "structure",
         "extensible": true,
         "members": [
             {"name": "buffer", "type": "buffer"},
             {"name": "offset", "type": "uint64_t", "default": 0},
-            {"name": "row pitch", "type": "uint32_t"},
-            {"name": "image height", "type": "uint32_t"}
+            {"name": "bytes per row", "type": "uint32_t"},
+            {"name": "rows per image", "type": "uint32_t", "default": 0}
         ]
     },
     "buffer descriptor": {
@@ -402,14 +410,15 @@
     "compare function": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "never"},
-            {"value": 1, "name": "less"},
-            {"value": 2, "name": "less equal"},
-            {"value": 3, "name": "greater"},
-            {"value": 4, "name": "greater equal"},
-            {"value": 5, "name": "equal"},
-            {"value": 6, "name": "not equal"},
-            {"value": 7, "name": "always"}
+            {"value": 0, "name": "undefined"},
+            {"value": 1, "name": "never"},
+            {"value": 2, "name": "less"},
+            {"value": 3, "name": "less equal"},
+            {"value": 4, "name": "greater"},
+            {"value": 5, "name": "greater equal"},
+            {"value": 6, "name": "equal"},
+            {"value": 7, "name": "not equal"},
+            {"value": 8, "name": "always"}
         ]
     },
     "compute pass descriptor": {
@@ -480,7 +489,7 @@
                 "name": "get bind group layout",
                 "returns": "bind group layout",
                 "args": [
-                    {"name": "group", "type": "uint32_t"}
+                    {"name": "group index", "type": "uint32_t"}
                 ]
             }
         ]
@@ -534,14 +543,6 @@
                 ]
             },
             {
-                "name": "create buffer mapped async",
-                "args": [
-                    {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"},
-                    {"name": "callback", "type": "buffer create mapped callback"},
-                    {"name": "userdata", "type": "void", "annotation": "*"}
-                ]
-            },
-            {
                 "name": "create command encoder",
                 "returns": "command encoder",
                 "args": [
@@ -570,7 +571,7 @@
                 ]
             },
             {
-                "name": "create queue",
+                "name": "get default queue",
                 "returns": "queue"
             },
             {
@@ -610,20 +611,6 @@
                 ]
             },
             {
-                "name": "inject error",
-                "args": [
-                    {"name": "type", "type": "error type"},
-                    {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ],
-                "TODO": "enga@: Make this a Dawn extension"
-            },
-            {
-                "name": "lose for testing"
-            },
-            {
-                "name": "tick"
-            },
-            {
                 "name": "set uncaptured error callback",
                 "args": [
                     {"name": "callback", "type": "error callback"},
@@ -653,18 +640,16 @@
             }
         ]
     },
+    "device descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
     "device lost callback": {
         "category": "callback",
         "args": [
             {"name": "message", "type": "char", "annotation": "const*"},
             {"name": "userdata", "type": "void", "annotation": "*"}
-        ]
-    },
-    "device properties": {
-        "category": "structure",
-        "extensible": false,
-        "members": [
-            {"name": "texture compression BC", "type": "bool", "default": "false"}
         ]
     },
     "depth stencil state descriptor": {
@@ -772,6 +757,13 @@
             {"value": 1, "name": "CW"}
         ]
     },
+    "surface get preferred format callback": {
+        "category": "callback",
+        "args": [
+            {"name": "format", "type": "texture format"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
     "index format": {
         "category": "enum",
         "values": [
@@ -787,6 +779,17 @@
                 "returns": "surface",
                 "args": [
                     {"name": "descriptor", "type": "surface descriptor", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "process events"
+            },
+            {
+                "name": "request adapter",
+                "args": [
+                    {"name": "descriptor", "type": "adapter descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request adapter callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             }
         ]
@@ -868,8 +871,9 @@
     "present mode": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "no v sync"},
-            {"value": 1, "name": "v sync"}
+            {"value": 0, "name": "Immediate"},
+            {"value": 1, "name": "Mailbox"},
+            {"value": 2, "name": "Fifo"}
         ]
     },
     "programmable stage descriptor": {
@@ -1005,14 +1009,16 @@
                 "args": [
                     {"name": "slot", "type": "uint32_t"},
                     {"name": "buffer", "type": "buffer"},
-                    {"name": "offset", "type": "uint64_t", "default": "0"}
+                    {"name": "offset", "type": "uint64_t", "default": "0"},
+                    {"name": "size", "type": "uint64_t", "default": "0"}
                 ]
             },
             {
                 "name": "set index buffer",
                 "args": [
                     {"name": "buffer", "type": "buffer"},
-                    {"name": "offset", "type": "uint64_t", "default": "0"}
+                    {"name": "offset", "type": "uint64_t", "default": "0"},
+                    {"name": "size", "type": "uint64_t", "default": "0"}
                 ]
             },
             {
@@ -1190,14 +1196,16 @@
                 "args": [
                     {"name": "slot", "type": "uint32_t"},
                     {"name": "buffer", "type": "buffer"},
-                    {"name": "offset", "type": "uint64_t", "default": "0"}
+                    {"name": "offset", "type": "uint64_t", "default": "0"},
+                    {"name": "size", "type": "uint64_t", "default": "0"}
                 ]
             },
             {
                 "name": "set index buffer",
                 "args": [
                     {"name": "buffer", "type": "buffer"},
-                    {"name": "offset", "type": "uint64_t", "default": "0"}
+                    {"name": "offset", "type": "uint64_t", "default": "0"},
+                    {"name": "size", "type": "uint64_t", "default": "0"}
                 ]
             },
             {
@@ -1212,7 +1220,7 @@
                 "name": "get bind group layout",
                 "returns": "bind group layout",
                 "args": [
-                    {"name": "group", "type": "uint32_t"}
+                    {"name": "group index", "type": "uint32_t"}
                 ]
             }
         ]
@@ -1234,6 +1242,20 @@
             {"name": "color states", "type": "color state descriptor", "annotation": "const*", "length": "color state count"},
             {"name": "sample mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
             {"name": "alpha to coverage enabled", "type": "bool", "default": "false"}
+        ]
+    },
+    "request adapter callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "adapter"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "request device callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "device"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
     "sampler": {
@@ -1300,7 +1322,17 @@
         ]
     },
     "surface": {
-        "category": "object"
+        "category": "object",
+        "methods": [
+            {
+                "name": "get preferred format",
+                "args": [
+                    {"name": "adapter", "type": "adapter"},
+                    {"name": "callback", "type": "surface get preferred format callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            }
+        ]
     },
     "surface descriptor": {
         "category": "structure",
@@ -1345,15 +1377,6 @@
     "swap chain": {
         "category": "object",
         "methods": [
-            {
-                "name": "configure",
-                "args": [
-                    {"name": "format", "type": "texture format"},
-                    {"name": "allowed usage", "type": "texture usage"},
-                    {"name": "width", "type": "uint32_t"},
-                    {"name": "height", "type": "uint32_t"}
-                ]
-            },
             {"name": "get current texture view", "returns": "texture view"},
             {"name": "present"}
         ]
@@ -1367,8 +1390,7 @@
             {"name": "format", "type": "texture format"},
             {"name": "width", "type": "uint32_t"},
             {"name": "height", "type": "uint32_t"},
-            {"name": "present mode", "type": "present mode"},
-            {"name": "implementation", "type": "uint64_t", "default": 0}
+            {"name": "present mode", "type": "present mode"}
         ]
     },
     "s type": {
@@ -1431,7 +1453,6 @@
             {"name": "usage", "type": "texture usage"},
             {"name": "dimension", "type": "texture dimension", "default": "2D"},
             {"name": "size", "type": "extent 3D"},
-            {"name": "array layer count", "type": "uint32_t", "default": "1"},
             {"name": "format", "type": "texture format"},
             {"name": "mip level count", "type": "uint32_t", "default": 1},
             {"name": "sample count", "type": "uint32_t", "default": 1}
@@ -1517,8 +1538,7 @@
             {"value": 2, "name": "copy dst"},
             {"value": 4, "name": "sampled"},
             {"value": 8, "name": "storage"},
-            {"value": 16, "name": "output attachment"},
-            {"value": 32, "name": "present"}
+            {"value": 16, "name": "output attachment"}
         ]
     },
     "texture view descriptor": {
