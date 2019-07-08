@@ -586,10 +586,7 @@ def as_wireType(typ):
 
 
 def c_methods(types, typ):
-    return typ.methods + [
-        Method(Name('reference'), types['void'], []),
-        Method(Name('release'), types['void'], []),
-    ]
+    return typ.methods
 
 
 def get_c_methods_sorted_by_name(api_params):
