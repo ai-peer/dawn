@@ -99,7 +99,7 @@ class TextureFormatTest : public DawnTest {
 
     // Returns a texture format that can be used to contain the interpreted value of the format in
     // formatInfo.
-    dawn::TextureFormat GetComponentFormat(FormatTestInfo formatInfo) {
+    FormatTestInfo GetUncompressedFormatInfo(FormatTestInfo formatInfo) {
         std::array<dawn::TextureFormat, 4> floatFormats = {
             dawn::TextureFormat::R32Float,
             dawn::TextureFormat::RG32Float,
@@ -118,24 +118,31 @@ class TextureFormatTest : public DawnTest {
             dawn::TextureFormat::RGBA32Uint,
             dawn::TextureFormat::RGBA32Uint,
         };
+        std::array<uint32_t, 4> componentCounts = {1, 2, 4, 4};
 
         ASSERT(formatInfo.componentCount > 0 && formatInfo.componentCount <= 4);
+        dawn::TextureFormat format;
         switch (formatInfo.type) {
             case Float:
-                return floatFormats[formatInfo.componentCount - 1];
+                format = floatFormats[formatInfo.componentCount - 1];
+                break;
             case Sint:
-                return sintFormats[formatInfo.componentCount - 1];
+                format = sintFormats[formatInfo.componentCount - 1];
+                break;
             case Uint:
-                return uintFormats[formatInfo.componentCount - 1];
+                format = uintFormats[formatInfo.componentCount - 1];
+                break;
             default:
                 UNREACHABLE();
-                return dawn::TextureFormat::R32Float;
         }
+
+        uint32_t componentCount = componentCounts[formatInfo.componentCount - 1];
+        return {format, 4 * componentCount, formatInfo.type, componentCount};
     }
 
     // Return a pipeline that can be used in a full-texture draw to sample from the texture in the
     // bindgroup and output its decompressed values to the render target.
-    dawn::RenderPipeline CreateSamplePipeline(FormatTestInfo formatInfo) {
+    dawn::RenderPipeline CreateSamplePipeline(FormatTestInfo sampleFormatInfo, FormatTestInfo renderFormatInfo) {
         utils::ComboRenderPipelineDescriptor desc(device);
 
         dawn::ShaderModule vsModule =
@@ -154,7 +161,7 @@ class TextureFormatTest : public DawnTest {
 
         // Compute the prefix needed for GLSL types that handle our texture's data.
         const char* prefix = nullptr;
-        switch (formatInfo.type) {
+        switch (sampleFormatInfo.type) {
             case Float:
                 prefix = "";
                 break;
@@ -188,49 +195,53 @@ class TextureFormatTest : public DawnTest {
         desc.cVertexStage.module = vsModule;
         desc.cFragmentStage.module = fsModule;
         desc.layout = utils::MakeBasicPipelineLayout(device, &mSampleBGL);
-        desc.cColorStates[0]->format = GetComponentFormat(formatInfo);
+        desc.cColorStates[0]->format = renderFormatInfo.format;
 
         return device.CreateRenderPipeline(&desc);
     }
 
     // The sampling test uploads the textureData in a texture with the formatInfo.format format and
     // the samples from it, then checks that the sampled values correspond to expectedRenderData.
-    void DoSampleTest(FormatTestInfo formatInfo,
-                      const void* textureData,
-                      size_t textureDataSize,
+    void DoSampleTest(FormatTestInfo sampleFormatInfo,
+                      const void* sampleData,
+                      size_t sampleDataSize,
+                      FormatTestInfo renderFormatInfo,
                       const void* expectedRenderData,
                       size_t expectedRenderDataSize,
                       float floatTolerance) {
         // The input data should contain an exact number of texels
-        ASSERT(textureDataSize % formatInfo.texelByteSize == 0);
-        uint32_t width = textureDataSize / formatInfo.texelByteSize;
+        ASSERT(sampleDataSize % sampleFormatInfo.texelByteSize == 0);
+        uint32_t width = sampleDataSize / sampleFormatInfo.texelByteSize;
 
         // The input data must be a multiple of 4 byte in length for setSubData
-        ASSERT(textureDataSize % 4 == 0);
+        ASSERT(sampleDataSize % 4 == 0);
+        ASSERT(expectedRenderDataSize % 4 == 0);
 
         // Create the texture we will sample from
-        dawn::TextureDescriptor textureDesc;
-        textureDesc.usage = dawn::TextureUsageBit::CopyDst | dawn::TextureUsageBit::Sampled;
-        textureDesc.dimension = dawn::TextureDimension::e2D;
-        textureDesc.size = {width, 1, 1};
-        textureDesc.arrayLayerCount = 1;
-        textureDesc.format = formatInfo.format;
-        textureDesc.mipLevelCount = 1;
-        textureDesc.sampleCount = 1;
+        dawn::TextureDescriptor sampleTextureDesc;
+        sampleTextureDesc.usage = dawn::TextureUsageBit::CopyDst | dawn::TextureUsageBit::Sampled;
+        sampleTextureDesc.dimension = dawn::TextureDimension::e2D;
+        sampleTextureDesc.size = {width, 1, 1};
+        sampleTextureDesc.arrayLayerCount = 1;
+        sampleTextureDesc.format = sampleFormatInfo.format;
+        sampleTextureDesc.mipLevelCount = 1;
+        sampleTextureDesc.sampleCount = 1;
 
-        dawn::Texture texture = device.CreateTexture(&textureDesc);
+        dawn::Texture sampleTexture = device.CreateTexture(&sampleTextureDesc);
 
         dawn::Buffer uploadBuffer = utils::CreateBufferFromData(
-            device, textureData, textureDataSize, dawn::BufferUsageBit::CopySrc);
+            device, sampleData, sampleDataSize, dawn::BufferUsageBit::CopySrc);
 
         // Create the texture that we will render results to
+        ASSERT(expectedRenderDataSize == width * renderFormatInfo.texelByteSize);
+
         dawn::TextureDescriptor renderTargetDesc;
         renderTargetDesc.usage =
             dawn::TextureUsageBit::CopySrc | dawn::TextureUsageBit::OutputAttachment;
         renderTargetDesc.dimension = dawn::TextureDimension::e2D;
         renderTargetDesc.size = {width, 1, 1};
         renderTargetDesc.arrayLayerCount = 1;
-        renderTargetDesc.format = GetComponentFormat(formatInfo);
+        renderTargetDesc.format = renderFormatInfo.format;
         renderTargetDesc.mipLevelCount = 1;
         renderTargetDesc.sampleCount = 1;
 
@@ -239,15 +250,15 @@ class TextureFormatTest : public DawnTest {
         // Create the readback buffer for the data in renderTarget
         dawn::BufferDescriptor readbackBufferDesc;
         readbackBufferDesc.usage = dawn::BufferUsageBit::CopyDst | dawn::BufferUsageBit::CopySrc;
-        readbackBufferDesc.size = 4 * width * formatInfo.componentCount;
+        readbackBufferDesc.size = 4 * width * sampleFormatInfo.componentCount;
         dawn::Buffer readbackBuffer = device.CreateBuffer(&readbackBufferDesc);
 
         // Prepare objects needed to sample from texture in the renderpass
-        dawn::RenderPipeline pipeline = CreateSamplePipeline(formatInfo);
+        dawn::RenderPipeline pipeline = CreateSamplePipeline(sampleFormatInfo, renderFormatInfo);
         dawn::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
         dawn::Sampler sampler = device.CreateSampler(&samplerDesc);
         dawn::BindGroup bindGroup = utils::MakeBindGroup(
-            device, mSampleBGL, {{0, sampler}, {1, texture.CreateDefaultView()}});
+            device, mSampleBGL, {{0, sampler}, {1, sampleTexture.CreateDefaultView()}});
 
         // Encode commands for the test that fill texture, sample it to render to renderTarget then
         // copy renderTarget in a buffer so we can read it easily.
@@ -256,7 +267,7 @@ class TextureFormatTest : public DawnTest {
         {
             dawn::BufferCopyView bufferView = utils::CreateBufferCopyView(uploadBuffer, 0, 256, 0);
             dawn::TextureCopyView textureView =
-                utils::CreateTextureCopyView(texture, 0, 0, {0, 0, 0});
+                utils::CreateTextureCopyView(sampleTexture, 0, 0, {0, 0, 0});
             dawn::Extent3D extent{width, 1, 1};
             encoder.CopyBufferToTexture(&bufferView, &textureView, &extent);
         }
@@ -282,7 +293,7 @@ class TextureFormatTest : public DawnTest {
 
         // For floats use a special expectation that understands how to compare NaNs and support a
         // tolerance.
-        if (formatInfo.type == Float) {
+        if (renderFormatInfo.type == Float) {
             const float* expectedFloats = static_cast<const float*>(expectedRenderData);
             std::vector<float> expectedVector(
                 expectedFloats, expectedFloats + expectedRenderDataSize / sizeof(float));
@@ -296,11 +307,25 @@ class TextureFormatTest : public DawnTest {
     }
 
     template <typename TextureData, typename RenderData>
-    void DoSampleTest(FormatTestInfo formatInfo,
+    void DoFormatSamplingTest(FormatTestInfo formatInfo,
                       const std::vector<TextureData>& textureData,
                       const std::vector<RenderData>& expectedRenderData,
                       float floatTolerance = 0.0f) {
+        FormatTestInfo renderFormatInfo = GetUncompressedFormatInfo(formatInfo);
         DoSampleTest(formatInfo, textureData.data(), textureData.size() * sizeof(TextureData),
+                     renderFormatInfo,
+                     expectedRenderData.data(), expectedRenderData.size() * sizeof(RenderData),
+                     floatTolerance);
+    }
+
+    template <typename TextureData, typename RenderData>
+    void DoFormatRenderingTest(FormatTestInfo formatInfo,
+                      const std::vector<TextureData>& textureData,
+                      const std::vector<RenderData>& expectedRenderData,
+                      float floatTolerance = 0.0f) {
+        FormatTestInfo sampleFormatInfo = GetUncompressedFormatInfo(formatInfo);
+        DoSampleTest(sampleFormatInfo, textureData.data(), textureData.size() * sizeof(TextureData),
+                     formatInfo,
                      expectedRenderData.data(), expectedRenderData.size() * sizeof(RenderData),
                      floatTolerance);
     }
@@ -316,9 +341,10 @@ class TextureFormatTest : public DawnTest {
 
         T maxValue = std::numeric_limits<T>::max();
         std::vector<T> textureData = {0, 1, maxValue, maxValue};
-        std::vector<float> expectedData = {0.0f, 1.0f / maxValue, 1.0f, 1.0f};
+        std::vector<float> uncompressedData = {0.0f, 1.0f / maxValue, 1.0f, 1.0f};
 
-        DoSampleTest(formatInfo, textureData, expectedData);
+        DoFormatSamplingTest(formatInfo, textureData, uncompressedData);
+        DoFormatRenderingTest(formatInfo, uncompressedData, textureData);
     }
 
     template <typename T>
@@ -330,9 +356,10 @@ class TextureFormatTest : public DawnTest {
         T maxValue = std::numeric_limits<T>::max();
         T minValue = std::numeric_limits<T>::min();
         std::vector<T> textureData = {0, 1, maxValue, minValue};
-        std::vector<float> expectedData = {0.0f, 1.0f / maxValue, 1.0f, -1.0f};
+        std::vector<float> uncompressedData = {0.0f, 1.0f / maxValue, 1.0f, -1.0f};
 
-        DoSampleTest(formatInfo, textureData, expectedData, 0.0001f / maxValue);
+        DoFormatSamplingTest(formatInfo, textureData, uncompressedData, 0.0001f / maxValue);
+        DoFormatRenderingTest(formatInfo, uncompressedData, textureData, 0.0001f / maxValue);
     }
 
     template <typename T>
@@ -343,9 +370,10 @@ class TextureFormatTest : public DawnTest {
 
         T maxValue = std::numeric_limits<T>::max();
         std::vector<T> textureData = {0, 1, maxValue, maxValue};
-        std::vector<uint32_t> expectedData = {0, 1, maxValue, maxValue};
+        std::vector<uint32_t> uncompressedData = {0, 1, maxValue, maxValue};
 
-        DoSampleTest(formatInfo, textureData, expectedData);
+        DoFormatSamplingTest(formatInfo, textureData, uncompressedData);
+        DoFormatRenderingTest(formatInfo, uncompressedData, textureData);
     }
 
     template <typename T>
@@ -357,9 +385,10 @@ class TextureFormatTest : public DawnTest {
         T maxValue = std::numeric_limits<T>::max();
         T minValue = std::numeric_limits<T>::min();
         std::vector<T> textureData = {0, 1, maxValue, minValue};
-        std::vector<int32_t> expectedData = {0, 1, maxValue, minValue};
+        std::vector<int32_t> uncompressedData = {0, 1, maxValue, minValue};
 
-        DoSampleTest(formatInfo, textureData, expectedData);
+        DoFormatSamplingTest(formatInfo, textureData, uncompressedData);
+        DoFormatRenderingTest(formatInfo, uncompressedData, textureData);
     }
 
     void DoFloat32Test(FormatTestInfo formatInfo) {
@@ -369,21 +398,23 @@ class TextureFormatTest : public DawnTest {
         std::vector<float> textureData = {+0.0f,  -0.0f, 1.0f,     1.0e-29f,
                                           1.0e29, NAN,   INFINITY, -INFINITY};
 
-        DoSampleTest(formatInfo, textureData, textureData);
+        DoFormatSamplingTest(formatInfo, textureData, textureData);
+        DoFormatRenderingTest(formatInfo, textureData, textureData);
     }
 
     void DoFloat16Test(FormatTestInfo formatInfo) {
         ASSERT(sizeof(int16_t) * formatInfo.componentCount == formatInfo.texelByteSize);
         ASSERT(formatInfo.type == Float);
 
-        std::vector<float> expectedData = {+0.0f,  -0.0f, 1.0f,     1.0e-4f,
+        std::vector<float> uncompressedData = {+0.0f,  -0.0f, 1.0f,     1.0e-4f,
                                            1.0e4f, NAN,   INFINITY, -INFINITY};
         std::vector<uint16_t> textureData;
-        for (float value : expectedData) {
+        for (float value : uncompressedData) {
             textureData.push_back(Float32ToFloat16(value));
         }
 
-        DoSampleTest(formatInfo, textureData, expectedData, 1.0e-5);
+        DoFormatSamplingTest(formatInfo, textureData, uncompressedData, 1.0e-5);
+        DoFormatRenderingTest(formatInfo, uncompressedData, textureData, 1.0e-5);
     }
 
   private:
@@ -424,8 +455,9 @@ TEST_P(TextureFormatTest, RGBA16Unorm) {
 TEST_P(TextureFormatTest, BGRA8Unorm) {
     uint8_t maxValue = std::numeric_limits<uint8_t>::max();
     std::vector<uint8_t> textureData = {maxValue, 1, 0, maxValue};
-    std::vector<float> expectedData = {0.0f, 1.0f / maxValue, 1.0f, 1.0f};
-    DoSampleTest({dawn::TextureFormat::BGRA8Unorm, 4, Float, 4}, textureData, expectedData);
+    std::vector<float> uncompressedData = {0.0f, 1.0f / maxValue, 1.0f, 1.0f};
+    DoFormatSamplingTest({dawn::TextureFormat::BGRA8Unorm, 4, Float, 4}, textureData, uncompressedData);
+    DoFormatRenderingTest({dawn::TextureFormat::BGRA8Unorm, 4, Float, 4}, uncompressedData, textureData);
 }
 
 // Test the R8Snorm format
@@ -583,35 +615,39 @@ TEST_P(TextureFormatTest, RGBA8UnormSrgb) {
     uint8_t maxValue = std::numeric_limits<uint8_t>::max();
     std::vector<uint8_t> textureData = {0, 1, maxValue, 64, 35, 68, 152, 168};
 
-    std::vector<float> expectedData;
+    std::vector<float> uncompressedData;
     for (size_t i = 0; i < textureData.size(); i += 4) {
-        expectedData.push_back(SRGBToLinear(textureData[i + 0] / float(maxValue)));
-        expectedData.push_back(SRGBToLinear(textureData[i + 1] / float(maxValue)));
-        expectedData.push_back(SRGBToLinear(textureData[i + 2] / float(maxValue)));
+        uncompressedData.push_back(SRGBToLinear(textureData[i + 0] / float(maxValue)));
+        uncompressedData.push_back(SRGBToLinear(textureData[i + 1] / float(maxValue)));
+        uncompressedData.push_back(SRGBToLinear(textureData[i + 2] / float(maxValue)));
         // Alpha is linear for sRGB formats
-        expectedData.push_back(textureData[i + 3] / float(maxValue));
+        uncompressedData.push_back(textureData[i + 3] / float(maxValue));
     }
 
-    DoSampleTest({dawn::TextureFormat::RGBA8UnormSrgb, 4, Float, 4}, textureData, expectedData,
+    DoFormatSamplingTest({dawn::TextureFormat::RGBA8UnormSrgb, 4, Float, 4}, textureData, uncompressedData,
+                 1.0e-3);
+    DoFormatRenderingTest({dawn::TextureFormat::RGBA8UnormSrgb, 4, Float, 4}, uncompressedData, textureData,
                  1.0e-3);
 }
 
-// Test the BGRA8Unorm format
+// Test the BGRA8UnormSrgb format
 TEST_P(TextureFormatTest, BGRA8UnormSrgb) {
     uint8_t maxValue = std::numeric_limits<uint8_t>::max();
     std::vector<uint8_t> textureData = {0, 1, maxValue, 64, 35, 68, 152, 168};
 
-    std::vector<float> expectedData;
+    std::vector<float> uncompressedData;
     for (size_t i = 0; i < textureData.size(); i += 4) {
         // Note that R and B are swapped
-        expectedData.push_back(SRGBToLinear(textureData[i + 2] / float(maxValue)));
-        expectedData.push_back(SRGBToLinear(textureData[i + 1] / float(maxValue)));
-        expectedData.push_back(SRGBToLinear(textureData[i + 0] / float(maxValue)));
+        uncompressedData.push_back(SRGBToLinear(textureData[i + 2] / float(maxValue)));
+        uncompressedData.push_back(SRGBToLinear(textureData[i + 1] / float(maxValue)));
+        uncompressedData.push_back(SRGBToLinear(textureData[i + 0] / float(maxValue)));
         // Alpha is linear for sRGB formats
-        expectedData.push_back(textureData[i + 3] / float(maxValue));
+        uncompressedData.push_back(textureData[i + 3] / float(maxValue));
     }
 
-    DoSampleTest({dawn::TextureFormat::BGRA8UnormSrgb, 4, Float, 4}, textureData, expectedData,
+    DoFormatSamplingTest({dawn::TextureFormat::BGRA8UnormSrgb, 4, Float, 4}, textureData, uncompressedData,
+                 1.0e-3);
+    DoFormatRenderingTest({dawn::TextureFormat::BGRA8UnormSrgb, 4, Float, 4}, uncompressedData, textureData,
                  1.0e-3);
 }
 
@@ -628,7 +664,7 @@ TEST_P(TextureFormatTest, RGB10A2Unorm) {
     std::vector<uint32_t> textureData = {MakeRGB10A2(0, 0, 0, 0), MakeRGB10A2(1023, 1023, 1023, 1),
                                          MakeRGB10A2(243, 578, 765, 2), MakeRGB10A2(0, 0, 0, 3)};
     // clang-format off
-    std::vector<float> expectedData = {
+    std::vector<float> uncompressedData = {
         0.0f, 0.0f, 0.0f, 0.0f,
         1.0f, 1.0f, 1.0f, 1 / 3.0f,
         243 / 1023.0f, 576 / 1023.0f, 765 / 1023.0f, 2 / 3.0f,
@@ -636,7 +672,9 @@ TEST_P(TextureFormatTest, RGB10A2Unorm) {
     };
     // clang-format on
 
-    DoSampleTest({dawn::TextureFormat::RGB10A2Unorm, 4, Float, 4}, textureData, expectedData,
+    DoFormatSamplingTest({dawn::TextureFormat::RGB10A2Unorm, 4, Float, 4}, textureData, uncompressedData,
+                 2.0e-3);
+    DoFormatRenderingTest({dawn::TextureFormat::RGB10A2Unorm, 4, Float, 4}, uncompressedData, textureData,
                  2.0e-3);
 }
 
@@ -671,7 +709,7 @@ TEST_P(TextureFormatTest, RG11B10Float) {
     // This is one of the only 3-channel formats, so we don't have specific testing for them. Alpha
     // should slways be sampled as 1
     // clang-format off
-    std::vector<float> expectedData = {
+    std::vector<float> uncompressedData = {
         0.0f,     INFINITY, NAN,      1.0f,
         INFINITY, NAN,      1.0f,     1.0f,
         NAN,      1.0f,     0.0f,     1.0f,
@@ -679,7 +717,8 @@ TEST_P(TextureFormatTest, RG11B10Float) {
     };
     // clang-format on
 
-    DoSampleTest({dawn::TextureFormat::RG11B10Float, 4, Float, 4}, textureData, expectedData);
+    DoFormatSamplingTest({dawn::TextureFormat::RG11B10Float, 4, Float, 4}, textureData, uncompressedData);
+    // This format is not renderable.
 }
 
 // TODO(cwallez@chromium.org): Add tests for depth-stencil formats when we know if they are copyable
