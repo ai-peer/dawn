@@ -366,6 +366,7 @@ void DawnTest::SetUp() {
         }
 
         ASSERT(backendAdapter);
+        std::cout << backendAdapter.GetPCIInfo().name << std::endl;
     }
 
     mPCIInfo = backendAdapter.GetPCIInfo();
