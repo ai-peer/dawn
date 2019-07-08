@@ -29,6 +29,13 @@ namespace dawn_native { namespace vulkan {
                                                                              VkSurfaceKHR surface);
     DAWN_NATIVE_EXPORT DawnTextureFormat
     GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
+
+    DAWN_NATIVE_EXPORT DawnTexture WrapVulkanImage(DawnDevice device,
+                                                   const DawnTextureDescriptor* desc,
+                                                   int memoryFd,
+                                                   const std::vector<int>& waitFDs);
+
+    DAWN_NATIVE_EXPORT int GetSignalSemaphore(DawnDevice device, DawnTexture texture);
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKANBACKEND_H_

@@ -422,7 +422,8 @@ namespace dawn_native { namespace vulkan {
         VkMemoryRequirements requirements;
         device->fn.GetImageMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
 
-        if (!device->GetMemoryAllocator()->Allocate(requirements, false, &mMemoryAllocation)) {
+        if (!device->GetMemoryAllocator()->Allocate(requirements, false, nullptr,
+                                                    &mMemoryAllocation)) {
             ASSERT(false);
         }
 
@@ -467,6 +468,102 @@ namespace dawn_native { namespace vulkan {
         : TextureBase(device, descriptor, TextureState::OwnedExternal), mHandle(nativeImage) {
     }
 
+    // Internally managed, but imported from file descriptor
+    Texture::Texture(Device* device,
+                     const TextureDescriptor* descriptor,
+                     int memoryFd,
+                     const std::vector<int>& waitFDs)
+        : TextureBase(device, descriptor, TextureState::OwnedInternal) {
+        VkImageCreateInfo createInfo;
+        createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+        createInfo.pNext = nullptr;
+        createInfo.flags = 0;
+        createInfo.imageType = VulkanImageType(GetDimension());
+        createInfo.format = VulkanImageFormat(GetFormat().format);
+        createInfo.extent = VulkanExtent3D(GetSize());
+        createInfo.mipLevels = GetNumMipLevels();
+        createInfo.arrayLayers = GetArrayLayers();
+        createInfo.samples = VulkanSampleCount(GetSampleCount());
+        createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+        createInfo.usage = VulkanImageUsage(GetUsage(), GetFormat());
+        createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+        createInfo.queueFamilyIndexCount = 0;
+        createInfo.pQueueFamilyIndices = nullptr;
+        createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+
+        ASSERT(IsSampleCountSupported(device, createInfo));
+
+        if (GetArrayLayers() >= 6 && GetSize().width == GetSize().height) {
+            createInfo.flags |= VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
+        }
+
+        // We always set VK_IMAGE_USAGE_TRANSFER_DST_BIT unconditionally beause the Vulkan images
+        // that are used in vkCmdClearColorImage() must have been created with this flag, which is
+        // also required for the implementation of robust resource initialization.
+        createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+
+        if (device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
+            VK_SUCCESS) {
+            ASSERT(false);
+        }
+
+        // Create the image memory and associate it with the container
+        VkMemoryRequirements requirements;
+        device->fn.GetImageMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
+
+        // Import memory from file descriptor
+        VkImportMemoryFdInfoKHR importInfo = {VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR, NULL,
+                                              VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR,
+                                              memoryFd};
+
+        if (!device->GetMemoryAllocator()->Allocate(requirements, false, &importInfo,
+                                                    &mMemoryAllocation)) {
+            ASSERT(false);
+        }
+
+        if (device->fn.BindImageMemory(device->GetVkDevice(), mHandle,
+                                       mMemoryAllocation.GetMemory(),
+                                       mMemoryAllocation.GetMemoryOffset()) != VK_SUCCESS) {
+            ASSERT(false);
+        }
+
+        // Import semaphores we must wait on before using texture
+        for (const int& i : waitFDs) {
+            VkSemaphore semaphore;
+            VkSemaphoreCreateInfo info = {VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO};
+            if (device->fn.CreateSemaphore(device->GetVkDevice(), &info, nullptr, &semaphore) !=
+                VK_SUCCESS) {
+                ASSERT(false);
+            }
+
+            VkImportSemaphoreFdInfoKHR import = {VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR};
+            import.semaphore = semaphore;
+            import.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
+            import.fd = i;
+
+            if (device->fn.ImportSemaphoreFdKHR(device->GetVkDevice(), &import) != VK_SUCCESS) {
+                ASSERT(false);
+            }
+
+            mWaitRequirements.emplace_back(semaphore);
+        }
+
+        // Create semaphore we must signal when done using texture
+        VkExportSemaphoreCreateInfoKHR exportInfo = {
+            VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR};
+        exportInfo.handleTypes = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
+
+        VkSemaphoreCreateInfo semInfo = {VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO, &exportInfo};
+
+        if (device->fn.CreateSemaphore(device->GetVkDevice(), &semInfo, nullptr,
+                                       &mSignalSemaphore) != VK_SUCCESS) {
+            ASSERT(false);
+        }
+
+        // Don't clear imported texture
+        SetIsSubresourceContentInitialized(0, 1, 0, 1);
+    }
+
     Texture::~Texture() {
         DestroyInternal();
     }
@@ -484,8 +581,18 @@ namespace dawn_native { namespace vulkan {
             if (mHandle != VK_NULL_HANDLE) {
                 device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             }
+
+            if (mSignalSemaphore != VK_NULL_HANDLE) {
+                // Force a queue submit to signal we are done with the texture
+                // Make sure some buffer exists before submitting
+                device->GetPendingCommandBuffer();
+                device->AddSignalSemaphore(mSignalSemaphore);
+                device->SubmitPendingCommands();
+            }
         }
+
         mHandle = VK_NULL_HANDLE;
+        mSignalSemaphore = VK_NULL_HANDLE;
     }
 
     VkImage Texture::GetHandle() const {
@@ -581,6 +688,18 @@ namespace dawn_native { namespace vulkan {
             // bits from recycled memory
             ClearTexture(commands, baseMipLevel, levelCount, baseArrayLayer, layerCount);
         }
+    }
+
+    const std::vector<VkSemaphore>& Texture::GetWaitRequirements() const {
+        return mWaitRequirements;
+    }
+
+    VkSemaphore Texture::GetSignalSemaphore() const {
+        return mSignalSemaphore;
+    }
+
+    void Texture::ClearWaitRequirements() {
+        mWaitRequirements.clear();
     }
 
     // TODO(jiawei.shao@intel.com): create texture view by TextureViewDescriptor

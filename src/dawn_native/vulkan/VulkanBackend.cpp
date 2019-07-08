@@ -22,8 +22,10 @@
 #include "dawn_native/VulkanBackend.h"
 
 #include "common/SwapChainUtils.h"
+#include "dawn_native/dawn_structs_autogen.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/NativeSwapChainImplVk.h"
+#include "dawn_native/vulkan/TextureVk.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -50,6 +52,32 @@ namespace dawn_native { namespace vulkan {
         const DawnSwapChainImplementation* swapChain) {
         NativeSwapChainImpl* impl = reinterpret_cast<NativeSwapChainImpl*>(swapChain->userData);
         return static_cast<DawnTextureFormat>(impl->GetPreferredFormat());
+    }
+
+    DawnTexture WrapVulkanImage(DawnDevice device,
+                                const DawnTextureDescriptor* desc,
+                                int memoryFd,
+                                const std::vector<int>& waitFDs) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        const TextureDescriptor* backendDesc = reinterpret_cast<const TextureDescriptor*>(desc);
+        return reinterpret_cast<DawnTexture>(
+            new Texture(backendDevice, backendDesc, memoryFd, waitFDs));
+    }
+
+    int GetSignalSemaphore(DawnDevice device, DawnTexture texture) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        VkSemaphore signalSemaphore = reinterpret_cast<Texture*>(texture)->GetSignalSemaphore();
+        VkSemaphoreGetFdInfoKHR info = {VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR};
+        info.semaphore = signalSemaphore;
+        info.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
+
+        int fd = -1;
+        VkResult result =
+            backendDevice->fn.GetSemaphoreFdKHR(backendDevice->GetVkDevice(), &info, &fd);
+        if (result != VK_SUCCESS) {
+            ASSERT(false);
+        }
+        return fd;
     }
 
 }}  // namespace dawn_native::vulkan

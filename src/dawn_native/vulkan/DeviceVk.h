@@ -62,6 +62,7 @@ namespace dawn_native { namespace vulkan {
         Serial GetPendingCommandSerial() const override;
         void SubmitPendingCommands();
         void AddWaitSemaphore(VkSemaphore semaphore);
+        void AddSignalSemaphore(VkSemaphore semaphore);
 
         // Dawn API
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder) override;
@@ -142,6 +143,7 @@ namespace dawn_native { namespace vulkan {
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
         std::vector<VkSemaphore> mWaitSemaphores;
+        std::vector<VkSemaphore> mSignalSemaphores;
     };
 
 }}  // namespace dawn_native::vulkan
