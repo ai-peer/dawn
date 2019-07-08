@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a188c0d2_3b36b254",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-08T09:34:47Z",
+      "side": 1,
+      "message": "A2RGB10 is the Vulkan PACK32 notation but the respective WebGPU/Dawn notation is BGR10A2 (because components are written in the opposite order)",
+      "parentUuid": "d618a836_6f67ab62",
+      "range": {
+        "startLine": 13,
+        "startChar": 30,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "60512cdc929b7161b278829c7c5cbbe8ef9db1f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91091329_c4325b2f",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "60512cdc929b7161b278829c7c5cbbe8ef9db1f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ff98ff0_16bcfd26",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-08T09:34:47Z",
+      "side": 1,
+      "message": "Done\n\nNice find, I somehow had missed this format completely. It removes the need for the component mapping which simplifies the code even more!",
+      "parentUuid": "91091329_c4325b2f",
+      "range": {
+        "startLine": 285,
+        "startChar": 23,
+        "endLine": 285,
+        "endChar": 58
+      },
+      "revId": "60512cdc929b7161b278829c7c5cbbe8ef9db1f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
