@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d618a836_6f67ab62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-08T05:49:59Z",
+      "side": 1,
+      "message": "A2BGR10?",
+      "range": {
+        "startLine": 13,
+        "startChar": 30,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "60512cdc929b7161b278829c7c5cbbe8ef9db1f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91091329_c4325b2f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-08T05:49:59Z",
+      "side": 1,
+      "message": "Should here be VK_FORMAT_A2B10G10R10_UNORM_PACK32?\n\nI see VK_FORMAT_A2R10G10B10_UNORM_PACK32 is not required to be supported on all Vulkan backends according to Vulkan SPEC:\nhttps://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#features-required-format-support, \"Table 44. Mandatory format support: 10- and 12-bit channels\"",
+      "range": {
+        "startLine": 285,
+        "startChar": 23,
+        "endLine": 285,
+        "endChar": 58
+      },
+      "revId": "60512cdc929b7161b278829c7c5cbbe8ef9db1f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
