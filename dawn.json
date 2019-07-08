@@ -14,6 +14,30 @@
         "See the License for the specific language governing permissions and",
         "limitations under the License."
     ],
+    "adapter": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "request device",
+                "args": [
+                    {"name": "descriptor", "type": "device descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request device callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "get properties",
+                "args": [
+                    {"name": "properties", "type": "adapter properties", "annotation": "*"}
+                ]
+            }
+        ]
+    },
+    "adapter descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
     "adapter properties": {
         "category": "structure",
         "extensible": true,
@@ -168,14 +192,6 @@
     "buffer": {
         "category": "object",
         "methods": [
-            {
-                "name": "set sub data",
-                "args": [
-                    {"name": "start", "type": "uint64_t"},
-                    {"name": "count", "type": "uint64_t"},
-                    {"name": "data", "type": "void", "annotation": "const*", "length": "count"}
-                ]
-            },
             {
                 "name": "map read async",
                 "args": [
@@ -469,16 +485,7 @@
         ]
     },
     "compute pipeline": {
-        "category": "object",
-        "methods": [
-            {
-                "name": "get bind group layout",
-                "returns": "bind group layout",
-                "args": [
-                    {"name": "group", "type": "uint32_t"}
-                ]
-            }
-        ]
+        "category": "object"
     },
     "compute pipeline descriptor": {
         "category": "structure",
@@ -593,6 +600,7 @@
                 "name": "create swap chain",
                 "returns": "swap chain",
                 "args": [
+                    {"name": "surface", "type": "surface"},
                     {"name": "descriptor", "type": "swap chain descriptor", "annotation": "const*"}
                 ]
             },
@@ -602,20 +610,6 @@
                 "args": [
                     {"name": "descriptor", "type": "texture descriptor", "annotation": "const*"}
                 ]
-            },
-            {
-                "name": "inject error",
-                "args": [
-                    {"name": "type", "type": "error type"},
-                    {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ],
-                "TODO": "enga@: Make this a Dawn extension"
-            },
-            {
-                "name": "lose for testing"
-            },
-            {
-                "name": "tick"
             },
             {
                 "name": "set uncaptured error callback",
@@ -647,18 +641,16 @@
             }
         ]
     },
+    "device descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
     "device lost callback": {
         "category": "callback",
-        "args" : [
+        "args": [
             {"name": "message", "type": "char", "annotation": "const*"},
             {"name": "userdata", "type": "void", "annotation": "*"}
-        ]
-    },
-    "device properties": {
-        "category": "structure",
-        "extensible": false,
-        "members": [
-            {"name": "texture compression BC", "type": "bool", "default": "false"}
         ]
     },
     "depth stencil state descriptor": {
@@ -766,6 +758,13 @@
             {"value": 1, "name": "CW"}
         ]
     },
+    "get surface preferred format callback": {
+        "category": "callback",
+        "args": [
+            {"name": "format", "type": "texture format"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
     "index format": {
         "category": "enum",
         "values": [
@@ -781,6 +780,26 @@
                 "returns": "surface",
                 "args": [
                     {"name": "descriptor", "type": "surface descriptor", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "get surface preferred format",
+                "args": [
+                    {"name": "surface", "type": "surface"},
+                    {"name": "adapter", "type": "adapter"},
+                    {"name": "callback", "type": "get surface preferred format callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "process events"
+            },
+            {
+                "name": "request adapter",
+                "args": [
+                    {"name": "descriptor", "type": "adapter descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request adapter callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             }
         ]
@@ -865,6 +884,13 @@
         "members": [
             {"name": "module", "type": "shader module"},
             {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"}
+        ]
+    },
+    "present mode": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "no v sync"},
+            {"value": 1, "name": "v sync"}
         ]
     },
     "primitive topology": {
@@ -1193,16 +1219,7 @@
         ]
     },
     "render pipeline": {
-        "category": "object",
-        "methods": [
-            {
-                "name": "get bind group layout",
-                "returns": "bind group layout",
-                "args": [
-                    {"name": "group", "type": "uint32_t"}
-                ]
-            }
-        ]
+        "category": "object"
     },
     "render pipeline descriptor": {
         "category": "structure",
@@ -1221,6 +1238,20 @@
             {"name": "color states", "type": "color state descriptor", "annotation": "const*", "length": "color state count"},
             {"name": "sample mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
             {"name": "alpha to coverage enabled", "type": "bool", "default": "false"}
+        ]
+    },
+    "request adapter callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "adapter"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "request device callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "device"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
     "sampler": {
@@ -1329,15 +1360,6 @@
     "swap chain": {
         "category": "object",
         "methods": [
-            {
-                "name": "configure",
-                "args": [
-                    {"name": "format", "type": "texture format"},
-                    {"name": "allowed usage", "type": "texture usage"},
-                    {"name": "width", "type": "uint32_t"},
-                    {"name": "height", "type": "uint32_t"}
-                ]
-            },
             {"name": "get current texture view", "returns": "texture view"},
             {"name": "present"}
         ]
@@ -1347,7 +1369,11 @@
         "extensible": true,
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
-            {"name": "implementation", "type": "uint64_t"}
+            {"name": "usage", "type": "texture usage"},
+            {"name": "format", "type": "texture format"},
+            {"name": "width", "type": "uint32_t"},
+            {"name": "height", "type": "uint32_t"},
+            {"name": "present mode", "type": "present mode"}
         ]
     },
     "s type": {
@@ -1495,8 +1521,7 @@
             {"value": 2, "name": "copy dst"},
             {"value": 4, "name": "sampled"},
             {"value": 8, "name": "storage"},
-            {"value": 16, "name": "output attachment"},
-            {"value": 32, "name": "present"}
+            {"value": 16, "name": "output attachment"}
         ]
     },
     "texture view descriptor": {
