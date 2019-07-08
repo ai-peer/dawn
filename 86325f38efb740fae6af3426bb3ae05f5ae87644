@@ -22,6 +22,30 @@
       "revId": "86325f38efb740fae6af3426bb3ae05f5ae87644",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45c3614e_6a1cbde2",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-08T09:21:07Z",
+      "side": 1,
+      "message": "Done. Yes I think we want to match the names.",
+      "parentUuid": "2b47ea0d_9a86a404",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 60
+      },
+      "revId": "86325f38efb740fae6af3426bb3ae05f5ae87644",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
