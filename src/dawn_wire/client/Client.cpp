@@ -17,10 +17,14 @@
 
 namespace dawn_wire { namespace client {
 
-    Client::Client(CommandSerializer* serializer)
+    Client::Client(CommandSerializer* serializer, MemoryTransfer* memoryTransfer)
         : ClientBase(),
           mDevice(DeviceAllocator().New(this)->object.get()),
-          mSerializer(serializer) {
+          mSerializer(serializer),
+          mMemoryTransfer(memoryTransfer) {
+        if (mMemoryTransfer == nullptr) {
+            mMemoryTransfer = InitializeInlineMemoryTransfer();
+        }
     }
 
     Client::~Client() {

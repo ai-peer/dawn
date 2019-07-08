@@ -25,10 +25,11 @@
 namespace dawn_wire { namespace client {
 
     class Device;
+    class MemoryTransfer;
 
     class Client : public ClientBase {
       public:
-        Client(CommandSerializer* serializer);
+        Client(CommandSerializer* serializer, MemoryTransfer* memoryTransfer);
         ~Client();
 
         const char* HandleCommands(const char* commands, size_t size);
@@ -42,12 +43,20 @@ namespace dawn_wire { namespace client {
             return reinterpret_cast<DawnDeviceImpl*>(mDevice);
         }
 
+        MemoryTransfer* GetMemoryTransfer() const {
+            return mMemoryTransfer;
+        }
+
       private:
 #include "dawn_wire/client/ClientPrototypes_autogen.inc"
+
+        MemoryTransfer* InitializeInlineMemoryTransfer();
 
         Device* mDevice = nullptr;
         CommandSerializer* mSerializer = nullptr;
         WireDeserializeAllocator mAllocator;
+        MemoryTransfer* mMemoryTransfer = nullptr;
+        std::unique_ptr<MemoryTransfer> mOwnedMemoryTransfer = nullptr;
     };
 
     DawnProcTable GetProcs();

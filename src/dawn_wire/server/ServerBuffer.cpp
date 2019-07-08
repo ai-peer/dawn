@@ -23,7 +23,8 @@ namespace dawn_wire { namespace server {
         auto* buffer = BufferObjects().Get(cmd.selfId);
         DAWN_ASSERT(buffer != nullptr);
 
-        buffer->mappedData = nullptr;
+        buffer->readHandle = nullptr;
+        buffer->writeHandle = nullptr;
         buffer->mapWriteState = BufferMapWriteState::Unmapped;
 
         return true;
@@ -31,7 +32,9 @@ namespace dawn_wire { namespace server {
 
     bool Server::DoBufferMapAsync(ObjectId bufferId,
                                   uint32_t requestSerial,
-                                  bool isWrite) {
+                                  bool isWrite,
+                                  uint32_t handleCreateInfoLength,
+                                  const uint8_t* handleCreateInfo) {
         // These requests are just forwarded to the buffer, with userdata containing what the
         // client will require in the return command.
 
@@ -49,11 +52,14 @@ namespace dawn_wire { namespace server {
         userdata->server = this;
         userdata->buffer = ObjectHandle{bufferId, buffer->serial};
         userdata->requestSerial = requestSerial;
-        userdata->isWrite = isWrite;
 
         if (isWrite) {
+            userdata->writeHandle = std::unique_ptr<MemoryTransfer::WriteHandle>(
+                mMemoryTransfer->DeserializeWriteHandle(handleCreateInfo, handleCreateInfoLength));
             mProcs.bufferMapWriteAsync(buffer->handle, ForwardBufferMapWriteAsync, userdata);
         } else {
+            userdata->readHandle = std::unique_ptr<MemoryTransfer::ReadHandle>(
+                mMemoryTransfer->DeserializeReadHandle(handleCreateInfo, handleCreateInfoLength));
             mProcs.bufferMapReadAsync(buffer->handle, ForwardBufferMapReadAsync, userdata);
         }
 
@@ -62,7 +68,9 @@ namespace dawn_wire { namespace server {
 
     bool Server::DoDeviceCreateBufferMapped(DawnDevice device,
                                             const DawnBufferDescriptor* descriptor,
-                                            ObjectHandle bufferResult) {
+                                            ObjectHandle bufferResult,
+                                            uint32_t handleCreateInfoLength,
+                                            const uint8_t* handleCreateInfo) {
         auto* resultData = BufferObjects().Allocate(bufferResult.id);
         if (resultData == nullptr) {
             return false;
@@ -80,8 +88,9 @@ namespace dawn_wire { namespace server {
             resultData->mapWriteState = BufferMapWriteState::Mapped;
         }
         resultData->handle = result.buffer;
-        resultData->mappedData = result.data;
-        resultData->mappedDataSize = result.dataLength;
+        resultData->writeHandle = std::unique_ptr<MemoryTransfer::WriteHandle>(
+            mMemoryTransfer->DeserializeWriteHandle(handleCreateInfo, handleCreateInfoLength));
+        resultData->writeHandle->SetTarget(result.data, result.dataLength);
 
         return true;
     }
@@ -89,8 +98,11 @@ namespace dawn_wire { namespace server {
     bool Server::DoDeviceCreateBufferMappedAsync(DawnDevice device,
                                                  const DawnBufferDescriptor* descriptor,
                                                  uint32_t requestSerial,
-                                                 ObjectHandle bufferResult) {
-        if (!DoDeviceCreateBufferMapped(device, descriptor, bufferResult)) {
+                                                 ObjectHandle bufferResult,
+                                                 uint32_t handleCreateInfoLength,
+                                                 const uint8_t* handleCreateInfo) {
+        if (!DoDeviceCreateBufferMapped(device, descriptor, bufferResult, handleCreateInfoLength,
+                                        handleCreateInfo)) {
             return false;
         }
 
@@ -103,7 +115,6 @@ namespace dawn_wire { namespace server {
         cmd.status = bufferData->mapWriteState == BufferMapWriteState::Mapped
                          ? DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS
                          : DAWN_BUFFER_MAP_ASYNC_STATUS_ERROR;
-        cmd.dataLength = bufferData->mappedDataSize;
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer = static_cast<char*>(GetCmdSpace(requiredSize));
@@ -130,14 +141,16 @@ namespace dawn_wire { namespace server {
         return true;
     }
 
-    bool Server::DoBufferUpdateMappedData(ObjectId bufferId, uint32_t count, const uint8_t* data) {
+    bool Server::DoBufferUpdateMappedData(ObjectId bufferId,
+                                          uint32_t writeFlushInfoLength,
+                                          const uint8_t* writeFlushInfo) {
         // The null object isn't valid as `self`
         if (bufferId == 0) {
             return false;
         }
 
         auto* buffer = BufferObjects().Get(bufferId);
-        if (buffer == nullptr || buffer->mappedDataSize != count) {
+        if (buffer == nullptr || !buffer->writeHandle) {
             return false;
         }
         switch (buffer->mapWriteState) {
@@ -150,12 +163,7 @@ namespace dawn_wire { namespace server {
             case BufferMapWriteState::Mapped:
                 break;
         }
-
-        ASSERT(data != nullptr);
-        ASSERT(buffer->mappedData != nullptr);
-        memcpy(buffer->mappedData, data, count);
-
-        return true;
+        return buffer->writeHandle->DeserializeClose(writeFlushInfo, writeFlushInfoLength);
     }
 
     void Server::ForwardBufferMapReadAsync(DawnBufferMapAsyncStatus status,
@@ -186,20 +194,26 @@ namespace dawn_wire { namespace server {
             return;
         }
 
+        if (status != DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
+            dataLength = 0;
+        }
+
+        bufferData->readHandle = std::move(data->readHandle);
+        uint32_t handleInitializeInfoLength =
+            bufferData->readHandle->SerializeInitialize(ptr, dataLength);
+
         ReturnBufferMapReadAsyncCallbackCmd cmd;
         cmd.buffer = data->buffer;
         cmd.requestSerial = data->requestSerial;
         cmd.status = status;
-        cmd.dataLength = 0;
-        cmd.data = static_cast<const uint8_t*>(ptr);
-
-        if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
-            cmd.dataLength = dataLength;
-        }
+        cmd.handleInitializeInfoLength = static_cast<uint32_t>(handleInitializeInfoLength);
+        cmd.handleInitializeInfo = nullptr;
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer = static_cast<char*>(GetCmdSpace(requiredSize));
         cmd.Serialize(allocatedBuffer);
+        bufferData->readHandle->SerializeInitialize(
+            ptr, dataLength, allocatedBuffer + requiredSize - handleInitializeInfoLength);
     }
 
     void Server::OnBufferMapWriteAsyncCallback(DawnBufferMapAsyncStatus status,
@@ -218,16 +232,15 @@ namespace dawn_wire { namespace server {
         cmd.buffer = data->buffer;
         cmd.requestSerial = data->requestSerial;
         cmd.status = status;
-        cmd.dataLength = dataLength;
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer = static_cast<char*>(GetCmdSpace(requiredSize));
         cmd.Serialize(allocatedBuffer);
 
         if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
+            bufferData->writeHandle = std::move(data->writeHandle);
             bufferData->mapWriteState = BufferMapWriteState::Mapped;
-            bufferData->mappedData = ptr;
-            bufferData->mappedDataSize = dataLength;
+            bufferData->writeHandle->SetTarget(ptr, dataLength);
         }
     }
 

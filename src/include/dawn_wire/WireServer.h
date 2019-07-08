@@ -23,11 +23,54 @@ namespace dawn_wire {
 
     namespace server {
         class Server;
+
+        class DAWN_WIRE_EXPORT MemoryTransfer {
+          public:
+            class ReadHandle;
+            class WriteHandle;
+
+            virtual ~MemoryTransfer() = default;
+
+            // Deserialize data to create Read/Write handles. These handles are for the client
+            // to Read/Write data.
+            virtual ReadHandle* DeserializeReadHandle(const void* deserializePointer,
+                                                      uint32_t size) = 0;
+            virtual WriteHandle* DeserializeWriteHandle(const void* deserializePointer,
+                                                        uint32_t size) = 0;
+
+            class ReadHandle {
+              public:
+                // Initialize the handle data.
+                // Serialize into |serializePointer| so the client can update handle data.
+                // If |serializePointer| is nullptr, this returns the required serialization space.
+                virtual uint32_t SerializeInitialize(const void* data,
+                                                     size_t dataLength,
+                                                     void* serializePointer = nullptr) = 0;
+
+                virtual void Close() = 0;
+                virtual ~ReadHandle() = default;
+            };
+
+            class WriteHandle {
+              public:
+                // Set the target for writes from the client. DeserializeClose should copy data
+                // into the target.
+                virtual void SetTarget(void* data, size_t dataLength) = 0;
+
+                // This function takes in the serialized result of
+                // client::MemoryTransferManager::WriteHandle::SerializeClose.
+                virtual bool DeserializeClose(const void* deserializePointer, uint32_t size) = 0;
+                virtual ~WriteHandle() = default;
+            };
+        };
     }
 
     class DAWN_WIRE_EXPORT WireServer : public CommandHandler {
       public:
-        WireServer(DawnDevice device, const DawnProcTable& procs, CommandSerializer* serializer);
+        WireServer(DawnDevice device,
+                   const DawnProcTable& procs,
+                   CommandSerializer* serializer,
+                   server::MemoryTransfer* memoryTransfer = nullptr);
         ~WireServer();
 
         const char* HandleCommands(const char* commands, size_t size) override final;

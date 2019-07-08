@@ -17,7 +17,8 @@
 
 namespace dawn_wire {
 
-    WireClient::WireClient(CommandSerializer* serializer) : mImpl(new client::Client(serializer)) {
+    WireClient::WireClient(CommandSerializer* serializer, client::MemoryTransfer* memoryTransfer)
+        : mImpl(new client::Client(serializer, memoryTransfer)) {
     }
 
     WireClient::~WireClient() {
