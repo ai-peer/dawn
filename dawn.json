@@ -14,12 +14,68 @@
         "See the License for the specific language governing permissions and",
         "limitations under the License."
     ],
+    "adapter": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "request device",
+                "args": [
+                    {"name": "descriptor", "type": "device descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request device callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "get properties",
+                "returns": "bool",
+                "args": [
+                    {"name": "properties", "type": "adapter properties", "annotation": "*"}
+                ]
+            }
+        ]
+    },
+    "adapter descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
+    "adapter properties": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "device ID", "type": "uint32_t"},
+            {"name": "vendor ID", "type": "uint32_t"},
+            {"name": "name", "type": "char", "annotation": "const*"},
+            {"name": "adapter type", "type": "adapter type"},
+            {"name": "backend type", "type": "backend type"}
+        ]
+    },
+    "adapter type": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "discrete GPU"},
+            {"value": 1, "name": "integrated GPU"},
+            {"value": 2, "name": "CPU"},
+            {"value": 3, "name": "Unknown"}
+        ]
+    },
     "address mode": {
         "category": "enum",
         "values": [
             {"value": 0, "name": "repeat"},
             {"value": 1, "name": "mirror repeat"},
             {"value": 2, "name": "clamp to edge"}
+        ]
+    },
+    "backend type": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "D3D11"},
+            {"value": 1, "name": "D3D12"},
+            {"value": 2, "name": "metal"},
+            {"value": 3, "name": "vulkan"},
+            {"value": 4, "name": "openGL"},
+            {"value": 5, "name": "openGLES"}
         ]
     },
     "bind group": {
@@ -136,14 +192,6 @@
     "buffer": {
         "category": "object",
         "methods": [
-            {
-                "name": "set sub data",
-                "args": [
-                    {"name": "start", "type": "uint64_t"},
-                    {"name": "count", "type": "uint64_t"},
-                    {"name": "data", "type": "void", "annotation": "const*", "length": "count"}
-                ]
-            },
             {
                 "name": "map read async",
                 "args": [
@@ -561,6 +609,7 @@
                 "name": "create swap chain",
                 "returns": "swap chain",
                 "args": [
+                    {"name": "surface", "type": "surface"},
                     {"name": "descriptor", "type": "swap chain descriptor", "annotation": "const*"}
                 ]
             },
@@ -572,20 +621,16 @@
                 ]
             },
             {
-                "name": "inject error",
-                "args": [
-                    {"name": "type", "type": "error type"},
-                    {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ],
-                "TODO": "enga@: Make this a Dawn extension"
-            },
-            {
-                "name": "tick"
-            },
-            {
                 "name": "set uncaptured error callback",
                 "args": [
                     {"name": "callback", "type": "error callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "set device lost callback",
+                "args": [
+                    {"name": "callback", "type": "device lost callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             },
@@ -605,11 +650,16 @@
             }
         ]
     },
-    "device properties": {
+    "device descriptor": {
         "category": "structure",
-        "extensible": false,
-        "members": [
-            {"name": "texture compression BC", "type": "bool", "default": "false"}
+        "extensible": true,
+        "members": []
+    },
+    "device lost callback": {
+        "category": "callback",
+        "args": [
+            {"name": "message", "type": "char", "annotation": "const*"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
     "depth stencil state descriptor": {
@@ -724,6 +774,34 @@
             {"value": 1, "name": "uint32"}
         ]
     },
+    "instance": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "request adapter",
+                "args": [
+                    {"name": "descriptor", "type": "adapter descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request adapter callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "process events"
+            },
+            {
+                "name": "create surface",
+                "returns": "surface",
+                "args": [
+                    {"name": "descriptor", "type": "surface descriptor", "annotation": "const*"}
+                ]
+            }
+        ]
+    },
+    "instance descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": []
+    },
     "vertex attribute descriptor": {
         "category": "structure",
         "extensible": false,
@@ -799,6 +877,13 @@
         "members": [
             {"name": "module", "type": "shader module"},
             {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"}
+        ]
+    },
+    "present mode": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "no v sync"},
+            {"value": 1, "name": "v sync"}
         ]
     },
     "primitive topology": {
@@ -1157,6 +1242,20 @@
             {"name": "alpha to coverage enabled", "type": "bool", "default": "false"}
         ]
     },
+    "request adapter callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "adapter"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "request device callback": {
+        "category": "callback",
+        "args": [
+            {"name": "result", "type": "device"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
     "sampler": {
         "category": "object"
     },
@@ -1220,18 +1319,54 @@
             {"name": "pass op", "type": "stencil operation", "default": "keep"}
         ]
     },
+    "s type": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "invalid"},
+            {"value": 1, "name": "surface descriptor from metal layer"},
+            {"value": 2, "name": "surface descriptor from windows hwnd"},
+            {"value": 3, "name": "surface descriptor from xlib"}
+        ]
+    },
+    "surface": {
+        "category": "object"
+    },
+    "surface descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
+    },
+    "surface descriptor from metal layer": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "s type", "type": "s type", "default": "surface descriptor from metal layer"},
+            {"name": "layer", "type": "void", "annotation": "*"}
+        ]
+    },
+    "surface descriptor from windows hwnd": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "s type", "type": "s type", "default": "surface descriptor from windows hwnd"},
+            {"name": "hinstance", "type": "void", "annotation": "*"},
+            {"name": "hwnd", "type": "void", "annotation": "*"}
+        ]
+    },
+    "surface descriptor from windows xlib": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "s type", "type": "s type", "default": "surface descriptor from xlib"},
+            {"name": "display", "type": "void", "annotation": "*"},
+            {"name": "window", "type": "uint64_t"}
+        ]
+    },
     "swap chain": {
         "category": "object",
         "methods": [
-            {
-                "name": "configure",
-                "args": [
-                    {"name": "format", "type": "texture format"},
-                    {"name": "allowed usage", "type": "texture usage"},
-                    {"name": "width", "type": "uint32_t"},
-                    {"name": "height", "type": "uint32_t"}
-                ]
-            },
             {"name": "get current texture view", "returns": "texture view"},
             {"name": "present"}
         ]
@@ -1241,7 +1376,11 @@
         "extensible": true,
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
-            {"name": "implementation", "type": "uint64_t"}
+            {"name": "usage", "type": "texture usage"},
+            {"name": "format", "type": "texture format"},
+            {"name": "width", "type": "uint32_t"},
+            {"name": "height", "type": "uint32_t"},
+            {"name": "present mode", "type": "present mode"}
         ]
     },
     "texture": {
@@ -1379,8 +1518,7 @@
             {"value": 2, "name": "copy dst"},
             {"value": 4, "name": "sampled"},
             {"value": 8, "name": "storage"},
-            {"value": 16, "name": "output attachment"},
-            {"value": 32, "name": "present"}
+            {"value": 16, "name": "output attachment"}
         ]
     },
     "texture view descriptor": {
