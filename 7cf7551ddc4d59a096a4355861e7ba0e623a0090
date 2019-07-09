@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "084b2baa_0f26a065",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-09T02:24:01Z",
+      "side": 1,
+      "message": "- Yes we could use a tagged pointer for the callback functions.\n- Although I\u0027m not sure how we could ergonomically have a single tag and two pointers. Seems easier and equally space efficient to use two tagged pointers.\n- Multiple request types can be in `requests` because the client can submit whatever it wants.",
+      "parentUuid": "d54d1368_cac0599e",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "90f1fb76_28c6251c",
         "filename": "src/dawn_wire/client/Client.cpp",
         "patchSetId": 2
@@ -145,6 +163,30 @@
       "side": 1,
       "message": "Result\u003c\u003e would be nice if we can use it here.",
       "parentUuid": "443209df_0f6d62e1",
+      "range": {
+        "startLine": 166,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 52
+      },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "555dfe05_a75a7626",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-09T02:24:01Z",
+      "side": 1,
+      "message": "I don\u0027t think we want to expose the headers for Result as part of Dawn\u0027s public API. @cwallez?",
+      "parentUuid": "5062ef09_c652db88",
       "range": {
         "startLine": 166,
         "startChar": 8,
