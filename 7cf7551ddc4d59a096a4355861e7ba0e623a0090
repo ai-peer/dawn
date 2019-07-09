@@ -2,6 +2,114 @@
   "comments": [
     {
       "key": {
+        "uuid": "31f5f35c_f8e55245",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-09T01:55:34Z",
+      "side": 1,
+      "message": "could this return a unique_ptr? It would convey clearer ownership. Could be separate CL.",
+      "range": {
+        "startLine": 30,
+        "startChar": 62,
+        "endLine": 30,
+        "endChar": 78
+      },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d54d1368_cac0599e",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-09T01:55:34Z",
+      "side": 1,
+      "message": "Does this apply to the read/writeCallback above too? If so, one tag should be used for both. Also, the tag doesn\u0027t have to be inside MapRequestData, unless multiple requests of different types can be in `requests` at once.",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90f1fb76_28c6251c",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-09T01:55:34Z",
+      "side": 1,
+      "message": "Maybe comment about what this case means, e.g. \"if preallocated memory isn\u0027t provided, fall back to inline memory\"",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c4ce375_d711b12f",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransfer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-09T01:55:34Z",
+      "side": 1,
+      "message": "nit: newline between ctor/dtor?",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cfb9d7d_b4cd99b5",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransfer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-09T01:55:34Z",
+      "side": 1,
+      "message": "same",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2975d06b_2d41184c",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-09T01:55:34Z",
+      "side": 1,
+      "message": "should this have TODO: tagged union?",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "443209df_0f6d62e1",
         "filename": "src/dawn_wire/server/ServerBuffer.cpp",
         "patchSetId": 2
@@ -13,6 +121,30 @@
       "writtenOn": "2019-07-08T22:59:53Z",
       "side": 1,
       "message": "This is the only Deserialize method that returns a bool.\nMaybe the others should return a success status as well? (or take in bool* success)",
+      "range": {
+        "startLine": 166,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 52
+      },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5062ef09_c652db88",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-09T01:55:34Z",
+      "side": 1,
+      "message": "Result\u003c\u003e would be nice if we can use it here.",
+      "parentUuid": "443209df_0f6d62e1",
       "range": {
         "startLine": 166,
         "startChar": 8,
