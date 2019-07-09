@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "1cf014fe_e3b279a5",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t reach into the memoryTransfer, so maybe it doesn\u0027t need to be manually implemented?",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d54d1368_cac0599e",
         "filename": "src/dawn_wire/client/Buffer.h",
         "patchSetId": 2
@@ -88,6 +105,23 @@
       "writtenOn": "2019-07-09T01:55:34Z",
       "side": 1,
       "message": "nit: newline between ctor/dtor?",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d7e080c_9a4566a7",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransfer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "This should produce an error that\u0027s propagated and causes a device loss. The client should in general be defensive towards the server (and not just the server being defensive towards the client)",
       "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -193,6 +227,206 @@
         "endLine": 166,
         "endChar": 52
       },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34191baa_53d670c0",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "Yeah that\u0027d be exposing an implementation detail.",
+      "parentUuid": "555dfe05_a75a7626",
+      "range": {
+        "startLine": 166,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 52
+      },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd711c5a_8887a2f5",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "This is a bit like magic, I\u0027m wondering if we could avoid counting the data in GetRequireSize() and instead call GetCmdSpace twice.",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6be97cb1_2bda21ad",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransfer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be u64 to match the WebGPU buffers being 64bit sized?",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb6ceb80_ee38e03a",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransfer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "Note: I\u0027m not sure what the standard is in Chromium to split a class over multiple files. I was surprised to find this here.",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cffe607_eef30267",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "nit: implementation in the cpp file.",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a548507_02dd2ef8",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "Open as in it received the data?",
+      "range": {
+        "startLine": 59,
+        "startChar": 55,
+        "endLine": 59,
+        "endChar": 70
+      },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0330757c_47d66229",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "u-nit: forward declare MemoryTransfer and put it after the Server that\u0027s the main class here? Same thing for the client. Also MemoryTransfer seems like it is missing a word like \"manager\" or \"service\" in the name?",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ae9f654_5772ee02",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "nit: \u003d default should be in the cpp file. Ditto in other places in this file and in the client.",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6f7751d_a4d3d62d",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "Just so I understand, this Serializes an initialization message from the server ReadHandle to the client ReadHandle? I can\u0027t find a better name, except maybe SerializeInitializeMessage, but the comment could be more clear as to what happens.",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d81f8bf1_79133051",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "Can\u0027t the data be passed to DeserializeClose directly instead of having this state modifying function? Alternatively SetTarget isn\u0027t overridable and just sets protected members.",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef4a821b_ad8a3a18",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T14:58:50Z",
+      "side": 1,
+      "message": "As we add more dependency injection this will grow, maybe it would be a good time to introduce a \"descriptor\" for the creation of WireServer, ditto for the client.",
       "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
