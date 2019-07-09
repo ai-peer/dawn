@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "b2887a11_ced7ea63",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-09T21:34:24Z",
+      "side": 1,
+      "message": "How about we have two pipelines in the render pass.\n\n1st pipeline:\n - draw a fullscreen quad to clear the render target to 1.\n2nd pipeline:\n - Sample the uninitialized texture. The render target should be 0 now because the texture was lazy cleared.\n\nWhat do you think?",
+      "parentUuid": "4da8193b_aab64afa",
+      "range": {
+        "startLine": 456,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 82
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22f2175f_ec9b00d5",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 1
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "I will look into doing it this way, I don\u0027t think I\u0027m not as familiar with compute shaders",
       "parentUuid": "d4148fca_86cd8655",
+      "range": {
+        "startLine": 545,
+        "startChar": 4,
+        "endLine": 545,
+        "endChar": 29
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d360333_1940dd25",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-09T21:34:24Z",
+      "side": 1,
+      "message": "I think you\u0027ll want to do pass.Dispatch(kSize, kSize, 1);\n\nThen in the shader, you\u0027ll have gl_GlobalInvocationID.x and gl_GlobalInvocationID.y which you can use to texelFetch the texture and write the results to a buffer of size 4 * kSize * kSize.",
+      "parentUuid": "291f35be_11b7d361",
       "range": {
         "startLine": 545,
         "startChar": 4,
