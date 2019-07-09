@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "d05a50cf_c14a9605",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T12:31:03Z",
+      "side": 1,
+      "message": "gl_FragCoord are integers in pixels, while texture() uses floating point numbers in [0, 1]. Using texelFetch would remove the need for this. Alternatively, a varying can be written on the vertex shader that corresponds to the texture coordinate.",
+      "parentUuid": "22f2175f_ec9b00d5",
+      "range": {
+        "startLine": 483,
+        "startChar": 24,
+        "endLine": 483,
+        "endChar": 84
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c50cc908_ea2d6b85",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 1
