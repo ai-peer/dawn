@@ -55,6 +55,7 @@ struct CopyConfig {
     uint32_t baseArrayLayer = 0;
     uint32_t bufferOffset = 0;
     uint32_t rowPitchAlignment = kTextureRowPitchAlignment;
+    uint32_t imageHeight = 0;
 };
 
 class CompressedTextureBCFormatTest : public DawnTest {
@@ -102,8 +103,9 @@ class CompressedTextureBCFormatTest : public DawnTest {
         // Copy texture data from a staging buffer to the destination texture.
         dawn::Buffer stagingBuffer = utils::CreateBufferFromData(
             device, uploadData.data(), uploadBufferSize, dawn::BufferUsageBit::CopySrc);
-        dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(
-            stagingBuffer, copyConfig.bufferOffset, copyConfig.rowPitchAlignment, 0);
+        dawn::BufferCopyView bufferCopyView =
+            utils::CreateBufferCopyView(stagingBuffer, copyConfig.bufferOffset,
+                                        copyConfig.rowPitchAlignment, copyConfig.imageHeight);
         dawn::TextureCopyView textureCopyView =
             utils::CreateTextureCopyView(bcCompressedTexture, copyConfig.baseMipmapLevel,
                                          copyConfig.baseArrayLayer, copyConfig.copyOrigin3D);
@@ -654,5 +656,22 @@ TEST_P(CompressedTextureBCFormatTest, RowPitchEqualToSlicePitch) {
     }
 }
 
-// TODO(jiawei.shao@intel.com): support BC formats on Metal and OpenGL backend
-DAWN_INSTANTIATE_TEST(CompressedTextureBCFormatTest, D3D12Backend, VulkanBackend);
+// Test the workaround in the B2T copies when (bufferSize - bufferOffset < bytesPerImage *
+// copyExtent.depth) on Metal backends. As copyExtent.depth can only be 1 for BC formats, on Metal
+// backend we will use two copies to implement such copy.
+TEST_P(CompressedTextureBCFormatTest, LargeImageHeight) {
+    CopyConfig config;
+    config.textureWidthLevel0 = 8;
+    config.textureHeightLevel0 = 8;
+    config.copyExtent3D = {config.textureWidthLevel0, config.textureHeightLevel0, 1};
+
+    config.imageHeight = config.textureHeightLevel0 * 2;
+
+    for (dawn::TextureFormat format : kBCFormats) {
+        config.format = format;
+        TestCopyRegionIntoBCFormatTextures(config);
+    }
+}
+
+// TODO(jiawei.shao@intel.com): support BC formats on OpenGL backend
+DAWN_INSTANTIATE_TEST(CompressedTextureBCFormatTest, D3D12Backend, MetalBackend, VulkanBackend);
