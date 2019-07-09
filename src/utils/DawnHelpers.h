@@ -90,6 +90,7 @@ namespace utils {
     dawn::SamplerDescriptor GetDefaultSamplerDescriptor();
     dawn::PipelineLayout MakeBasicPipelineLayout(const dawn::Device& device,
                                                  const dawn::BindGroupLayout* bindGroupLayout);
+
     dawn::BindGroupLayout MakeBindGroupLayout(
         const dawn::Device& device,
         std::initializer_list<dawn::BindGroupLayoutBinding> bindingsInitializer);
