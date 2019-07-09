@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edea493a_2a4fe007",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T11:58:13Z",
+      "side": 1,
+      "message": "nit: or?",
+      "range": {
+        "startLine": 345,
+        "startChar": 90,
+        "endLine": 345,
+        "endChar": 92
+      },
+      "revId": "d7432305581de246956d4aaf1518b89b4ac39e18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c296bc36_236d7b54",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T11:58:13Z",
+      "side": 1,
+      "message": "I think this should be inverted and be copyExtent.height - clampedCopyExtentHeight. Can we add a test that would have found that issue and an assert for overflows?",
+      "range": {
+        "startLine": 410,
+        "startChar": 44,
+        "endLine": 410,
+        "endChar": 90
+      },
+      "revId": "d7432305581de246956d4aaf1518b89b4ac39e18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
