@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b1ca63dc_36125cbc",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-09T20:23:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98a725b9_82ce7b4b",
+      "range": {
+        "startLine": 429,
+        "startChar": 37,
+        "endLine": 429,
+        "endChar": 48
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2030463_3e845189",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-07-08T23:08:43Z",
       "side": 1,
       "message": "This copies to part of the texture. I think that will cause the lazy clear to occur.\n\nIn this test, don\u0027t we want to check if the lazy clear is happening because the texture is used as Sampled? I think this is only hitting the path where it\u0027s cleared on partial-copy.\n\nWe could instead leave the texture completely uninitialized and check that sampling from it returns all 0. What do you think?",
+      "range": {
+        "startLine": 456,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 82
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4da8193b_aab64afa",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-09T20:23:59Z",
+      "side": 1,
+      "message": "Good point. I was thinking that leaving it uninitialized could mean that the render target texture itself was cleared rather than checking that it was the sampled target was cleared. this test is supposed to see that the sampled texture is cleared in renderpass. Begin render pass should call ensure on all its attachments before beginning the render pass, so it should clear before the copybuffertotexture cmd. Leaving it unfilled could work as well, but doesn\u0027t really show that sampling worked? Let me know if there\u0027s any other ideas.",
+      "parentUuid": "c2030463_3e845189",
       "range": {
         "startLine": 456,
         "startChar": 8,
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "60312a69_38918d4d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-09T20:23:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d05a50cf_c14a9605",
+      "range": {
+        "startLine": 483,
+        "startChar": 24,
+        "endLine": 483,
+        "endChar": 84
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c50cc908_ea2d6b85",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 1
@@ -129,6 +201,30 @@
       "writtenOn": "2019-07-08T23:08:43Z",
       "side": 1,
       "message": "Here, we can\u0027t distinguish if the texture was lazy-cleared before the ComputePass or if it was lazy-cleared because of this copy. Can we use the compute shader to sample the texture to a different output texture and check the results of that texture?",
+      "range": {
+        "startLine": 545,
+        "startChar": 4,
+        "endLine": 545,
+        "endChar": 29
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291f35be_11b7d361",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-09T20:23:59Z",
+      "side": 1,
+      "message": "I will look into doing it this way, I don\u0027t think I\u0027m not as familiar with compute shaders",
+      "parentUuid": "d4148fca_86cd8655",
       "range": {
         "startLine": 545,
         "startChar": 4,
