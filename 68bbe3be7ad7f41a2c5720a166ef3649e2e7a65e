@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a585355c_ff3b6ee5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-09T12:02:53Z",
+      "side": 1,
+      "message": "Yes eventually we should add that logic in the Vulkan backend. Note that the D3D12 backend always supports D32 so we don\u0027t need special logic.",
+      "parentUuid": "19e32ec7_c7de8b03",
+      "range": {
+        "startLine": 189,
+        "startChar": 38,
+        "endLine": 189,
+        "endChar": 49
+      },
+      "revId": "68bbe3be7ad7f41a2c5720a166ef3649e2e7a65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d3ff1d8_198b17dc",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
