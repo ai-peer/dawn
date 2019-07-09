@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "19e32ec7_c7de8b03",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-09T10:30:40Z",
+      "side": 1,
+      "message": "Ack\nSo it seems we should add the logic to choose the supported format here?",
+      "parentUuid": "6fb532f4_da56bd7f",
+      "range": {
+        "startLine": 189,
+        "startChar": 38,
+        "endLine": 189,
+        "endChar": 49
+      },
+      "revId": "68bbe3be7ad7f41a2c5720a166ef3649e2e7a65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d3ff1d8_198b17dc",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -93,6 +117,30 @@
       "revId": "68bbe3be7ad7f41a2c5720a166ef3649e2e7a65e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db3b715c_0c47ceea",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-09T10:30:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69ecac0d_b0d64c10",
+      "range": {
+        "startLine": 191,
+        "startChar": 22,
+        "endLine": 191,
+        "endChar": 58
+      },
+      "revId": "68bbe3be7ad7f41a2c5720a166ef3649e2e7a65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
