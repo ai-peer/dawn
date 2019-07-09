@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dd653ef_64beb6b2",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-09T01:24:41Z",
+      "side": 1,
+      "message": "As this is always translated to the same format as Depth32Float (DXGI_FORMAT_D32_FLOAT, VK_FORMAT_D32_SFLOAT, MTLPixelFormatDepth32Float), why we need this format?",
+      "range": {
+        "startLine": 189,
+        "startChar": 38,
+        "endLine": 189,
+        "endChar": 49
+      },
+      "revId": "68bbe3be7ad7f41a2c5720a166ef3649e2e7a65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d3ff1d8_198b17dc",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-09T01:24:41Z",
+      "side": 1,
+      "message": "Should this be called Depth32FloatStencil8 instead? I see this format is translated into MTLPixelFormatDepth32Float_Stencil8 on Metal and VK_FORMAT_D32_SFLOAT_S8_UINT on Vulkan.\n\nNote that we have the support of D24_UNORM_STENCIL8_UINT in D3D feature level 11_0.\n\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/metal/TextureMTL.mm?l\u003d215\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/TextureVk.cpp?l\u003d305",
+      "range": {
+        "startLine": 191,
+        "startChar": 22,
+        "endLine": 191,
+        "endChar": 58
+      },
+      "revId": "68bbe3be7ad7f41a2c5720a166ef3649e2e7a65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
