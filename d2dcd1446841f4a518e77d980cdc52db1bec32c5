@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "4cda4374_4658b8ac",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-10T09:03:31Z",
+      "side": 1,
+      "message": "Or use a single pipeline and loadOp clear to non-zero in the render pass.",
+      "parentUuid": "b2887a11_ced7ea63",
+      "range": {
+        "startLine": 456,
+        "startChar": 8,
+        "endLine": 456,
+        "endChar": 82
+      },
+      "revId": "d2dcd1446841f4a518e77d980cdc52db1bec32c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22f2175f_ec9b00d5",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 1
