@@ -39,11 +39,13 @@ class CullingTest : public DawnTest {
         pipelineDescriptor.cVertexStage.module =
             utils::CreateShaderModule(device, dawn::ShaderStage::Vertex, vs);
 
+        // Note that the width and height of back buffer is 4.0. So the gl_FragColor is divided
+        // by 4.0 in pixel shader
         const char* fs =
             "#version 450\n"
             "layout(location = 0) out vec4 fragColor;"
             "void main() {\n"
-            "   fragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
+            "   fragColor = vec4(gl_FragCoord.xy / 4.0, 0.0, 1.0);\n"
             "}\n";
         pipelineDescriptor.cFragmentStage.module =
             utils::CreateShaderModule(device, dawn::ShaderStage::Fragment, fs);
@@ -75,7 +77,7 @@ class CullingTest : public DawnTest {
         dawn::Texture colorTexture = Create2DTextureForTest(dawn::TextureFormat::RGBA8Unorm);
 
         utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateDefaultView()});
-        renderPassDescriptor.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 1.0, 0.0, 1.0};
+        renderPassDescriptor.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 0.0, 1.0, 1.0};
         renderPassDescriptor.cColorAttachmentsInfoPtr[0]->loadOp = dawn::LoadOp::Clear;
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
@@ -87,14 +89,20 @@ class CullingTest : public DawnTest {
         dawn::Queue queue = device.CreateQueue();
         queue.Submit(1, &commandBuffer);
 
-        constexpr RGBA8 kDrawingColor = RGBA8(255, 0, 0, 255);
-        constexpr RGBA8 kBackgroundColor = RGBA8(0, 255, 0, 255);
+        // The top left pixel is (0, 0), its center is (0.5, 0.5). According to the pixel shader
+        // algorithm, its x and y channel in its frag color should be: 0.5 / 4.0 * 255 = 32.
+        // Likewise, the x and y channel in its frag color of the bottom right pixel is 3.5 / 4.0 *
+        // 255 = 223.
+        constexpr RGBA8 kTopLeftColor = RGBA8(32, 32, 0, 255);
+        constexpr RGBA8 kBottomRightColor = RGBA8(223, 223, 0, 255);
+        constexpr RGBA8 kBackgroundColor = RGBA8(0, 0, 255, 255);
 
-        RGBA8 kCCWTriangleColor = isCCWTriangleCulled ? kBackgroundColor : kDrawingColor;
-        EXPECT_PIXEL_RGBA8_EQ(kCCWTriangleColor, colorTexture, 0, 0);
+        RGBA8 kCCWTriangleTopLeftColor = isCCWTriangleCulled ? kBackgroundColor : kTopLeftColor;
+        EXPECT_PIXEL_RGBA8_EQ(kCCWTriangleTopLeftColor, colorTexture, 0, 0);
 
-        RGBA8 kCWTriangleColor = isCWTriangleCulled ? kBackgroundColor : kDrawingColor;
-        EXPECT_PIXEL_RGBA8_EQ(kCWTriangleColor, colorTexture, kSize - 1, kSize - 1);
+        RGBA8 kCWTriangleBottomRightColor =
+            isCWTriangleCulled ? kBackgroundColor : kBottomRightColor;
+        EXPECT_PIXEL_RGBA8_EQ(kCWTriangleBottomRightColor, colorTexture, kSize - 1, kSize - 1);
     }
 
     static constexpr uint32_t kSize = 4;
