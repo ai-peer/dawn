@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59122b7e_12730012",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "typo - \"more than one\"",
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

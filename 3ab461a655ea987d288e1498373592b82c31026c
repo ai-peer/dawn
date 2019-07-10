@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2d2011f2_c006d810",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Implicit texture decays will only occur when a sequence begins in the COMMON state. (At the moment) a texture should only be in a COMMON state after a present. It doesn\u0027t seem that E2E tests are capable of using a swap chain (unless I integrated it). This means I can\u0027t write a test for implicit decays in E2E. \n\nI did do a local test to verify the functionality is working correctly by augmenting CppHelloTriangle.",
+      "parentUuid": "25012377_a93948f0",
+      "range": {
+        "startLine": 10,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6999460a_fe6f5952",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -134,6 +158,24 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34f01f82_204875d5",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Sounds good. Added.",
+      "parentUuid": "ae1a37b2_90db3f7a",
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -240,6 +282,30 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "166ab25b_71eb8116",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "1b963f89_1f45cb87",
+      "range": {
+        "startLine": 160,
+        "startChar": 15,
+        "endLine": 165,
+        "endChar": 17
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -638,6 +704,30 @@
       "revId": "3ab461a655ea987d288e1498373592b82c31026c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "965db42b_e7e46b81",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Resolving. Conversation moved to PS#5",
+      "parentUuid": "237d1c68_66e56067",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 39
+      },
+      "revId": "3ab461a655ea987d288e1498373592b82c31026c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

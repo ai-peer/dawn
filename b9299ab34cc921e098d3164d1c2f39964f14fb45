@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "87360f00_006faca1",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91794a6_d42f74c9",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ddf22ce_e75022db",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2019-07-04T09:13:19Z",
       "side": 1,
       "message": "[1]",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bc0146e_224e8226",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "I moved this past the redundant case block. There\u0027s no need to update the serial in this case. pendingCommandSerial will still be greater than the originally recorded serial, so the COMMON decay still occurs.",
+      "parentUuid": "0ddf22ce_e75022db",
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "e623889b_56b12f22",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "...right. Careless mistake. Fixed.",
+      "parentUuid": "5faf8e42_599d3094",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 9
+      },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5d01256_05684ecd",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
@@ -73,6 +133,24 @@
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6969fa6e_406fcb52",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5d01256_05684ecd",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "f3d4826a_8aedf04e",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f713add7_26f67c47",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a72c81a9_85d16eb9",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -107,6 +203,24 @@
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fc45610_e4964f83",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a72c81a9_85d16eb9",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -130,6 +244,30 @@
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c55f0f40_a99d33b5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e8132a5_0ea78202",
+      "range": {
+        "startLine": 262,
+        "startChar": 52,
+        "endLine": 262,
+        "endChar": 53
+      },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -204,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "955d87e8_e58a43c7",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Given the concept of implicit decays - I agree this should be possible. When doing the initial implementation, I had strictly followed the MSDN guidelines. I just did an experiment on this, attempting to do an implicit decay from a read state achieved by an explicit transition - and the validation layer emitted an error.\n\nI think this is likely related to differences in color compression for different usages.",
+      "parentUuid": "4d8c9b1b_5f278a48",
+      "range": {
+        "startLine": 271,
+        "startChar": 12,
+        "endLine": 271,
+        "endChar": 25
+      },
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9063215a_43dfb131",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -215,6 +377,24 @@
       "writtenOn": "2019-07-04T09:13:19Z",
       "side": 1,
       "message": "Lines 286-295 are equivalent to (after moving the SetNextDecaySerial call)\n\n   mValidToDecay \u003d newState \u0026 kD3D12TextureReadOnlyStates;\n   return false;",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f27cc5c_4cfe72b0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "We must still check that the destination state is eligible for implicit promotion. If we removed these if() statements, a COMMON to RENDER_TARGET transition would return false implying an implicit transition - which is incorrect.\n\nSince we have to check, I think we should just leave the mValidToDecay \u003d true/false for clarity. We also only need to update the serial when mValidToDecay is true - so I don\u0027t see a reason to move it out.",
+      "parentUuid": "9063215a_43dfb131",
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -238,6 +418,24 @@
     },
     {
       "key": {
+        "uuid": "eb097efa_7eabbc0e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Not sure where [3] is, but I\u0027m thinking this is invalidated by the above response.",
+      "parentUuid": "c09f43ec_b00974d4",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a6fdee01_a8b651bb",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 5
@@ -255,6 +453,24 @@
     },
     {
       "key": {
+        "uuid": "8448950a_60850b9a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6fdee01_a8b651bb",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b4e21f3_6c78cf2c",
         "filename": "src/dawn_native/d3d12/TextureD3D12.h",
         "patchSetId": 5
@@ -269,6 +485,24 @@
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdcd1ebe_63672dee",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-10T22:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b4e21f3_6c78cf2c",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
