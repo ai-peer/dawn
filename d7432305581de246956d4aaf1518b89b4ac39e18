@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "14835b62_8a1f8c6c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-10T01:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edea493a_2a4fe007",
+      "range": {
+        "startLine": 345,
+        "startChar": 90,
+        "endLine": 345,
+        "endChar": 92
+      },
+      "revId": "d7432305581de246956d4aaf1518b89b4ac39e18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c296bc36_236d7b54",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "d7432305581de246956d4aaf1518b89b4ac39e18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dba3fa8d_02feed2d",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-10T01:24:52Z",
+      "side": 1,
+      "message": "Done\nThe reason I failed to catch this bug is because in the previous test clampedCopyExtentHeight \u003d\u003d copyExtent.height. Sorry about that.",
+      "parentUuid": "c296bc36_236d7b54",
+      "range": {
+        "startLine": 410,
+        "startChar": 44,
+        "endLine": 410,
+        "endChar": 90
+      },
+      "revId": "d7432305581de246956d4aaf1518b89b4ac39e18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
