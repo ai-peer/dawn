@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "10ea290d_c87ccdf8",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-10T09:30:04Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "81a2baeb_78bf5cbc",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d54d1368_cac0599e",
         "filename": "src/dawn_wire/client/Buffer.h",
         "patchSetId": 2
@@ -328,6 +346,24 @@
     },
     {
       "key": {
+        "uuid": "364306ef_9212f580",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-10T09:30:04Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this work? Make skip_serialize skip the member in GetCmdSpace and the \"Transfer\" version of the records. Then on the wire everything is serialized but the pointer.\n\nThen code here becomes\n\n  size_t commandSize \u003d cmd.GetRequiredSize();\n  size_t requiredSize \u003d commandSize + handleInitializeInfoLength;\n  char* allocatedBuffer \u003d static_cast\u003cchar*\u003e(GetCmdSpace(requiredSize));\n  cmd.Serialize(allocatedBuffer);\n  bufferData-\u003ereadHandle-\u003eSerializeInitialize(ptr, dataLength, allocatedBuffer + commandSize);\n\nIt removes one of the pointer arithmetic things but doesn\u0027t get rid of them completely.",
+      "parentUuid": "ee9a3684_010fe54b",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6be97cb1_2bda21ad",
         "filename": "src/dawn_wire/server/ServerInlineMemoryTransfer.cpp",
         "patchSetId": 2
@@ -357,6 +393,24 @@
       "side": 1,
       "message": "I think it would make more sense for it to be size_t. I avoided that because that wouldn\u0027t work nicely if client/server were on different architectures over the network or something. And u64 seems like an excessive amount of data to serialize without a more optimal implementation. We could make it u64 to cover all cases though. WDYT?",
       "parentUuid": "6be97cb1_2bda21ad",
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dafca0e3_d65da046",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransfer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-10T09:30:04Z",
+      "side": 1,
+      "message": "TBH I\u0027m not too worried about 4 additional bytes for this given the amount of work that happens around ReadHandle etc (like there\u0027s at least a malloc)",
+      "parentUuid": "c58d0fba_74b7abca",
       "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -432,6 +486,30 @@
       "side": 1,
       "message": "Maybe server::SendInitialData -\u003e client::ReceiveInitialData",
       "parentUuid": "7a548507_02dd2ef8",
+      "range": {
+        "startLine": 59,
+        "startChar": 55,
+        "endLine": 59,
+        "endChar": 70
+      },
+      "revId": "7cf7551ddc4d59a096a4355861e7ba0e623a0090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d305fef_740bede7",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-10T09:30:04Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "6222cea9_5db6a955",
       "range": {
         "startLine": 59,
         "startChar": 55,
