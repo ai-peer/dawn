@@ -63,11 +63,13 @@ namespace dawn_native {
                 UNREACHABLE();
                 return {};
             }
-            void MapReadAsyncImpl(uint32_t serial) override {
+            MaybeError MapReadAsyncImpl(uint32_t serial) override {
                 UNREACHABLE();
+                return {};
             }
-            void MapWriteAsyncImpl(uint32_t serial) override {
+            MaybeError MapWriteAsyncImpl(uint32_t serial) override {
                 UNREACHABLE();
+                return {};
             }
             void UnmapImpl() override {
                 UNREACHABLE();
@@ -146,6 +148,11 @@ namespace dawn_native {
     dawn::BufferUsageBit BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
+    }
+
+    ResourceMemoryAllocation BufferBase::GetAllocation() const {
+        ASSERT(!IsError());
+        return mAllocation;
     }
 
     MaybeError BufferBase::MapAtCreation(uint8_t** mappedPointer) {
@@ -243,7 +250,9 @@ namespace dawn_native {
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
-        MapReadAsyncImpl(mMapSerial);
+        if (GetDevice()->ConsumedError(MapReadAsyncImpl(mMapSerial))) {
+            return;
+        }
     }
 
     MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const void* data) {
@@ -281,7 +290,9 @@ namespace dawn_native {
         mMapUserdata = userdata;
         mState = BufferState::Mapped;
 
-        MapWriteAsyncImpl(mMapSerial);
+        if (GetDevice()->ConsumedError(MapWriteAsyncImpl(mMapSerial))) {
+            return;
+        }
     }
 
     void BufferBase::Destroy() {
