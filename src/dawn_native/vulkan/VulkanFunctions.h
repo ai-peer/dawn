@@ -209,6 +209,10 @@ namespace dawn_native { namespace vulkan {
         PFN_vkCmdDebugMarkerEndEXT CmdDebugMarkerEndEXT = nullptr;
         PFN_vkCmdDebugMarkerInsertEXT CmdDebugMarkerInsertEXT = nullptr;
 
+        // VK_KHR_external_semaphore_fd
+        PFN_vkImportSemaphoreFdKHR ImportSemaphoreFdKHR = nullptr;
+        PFN_vkGetSemaphoreFdKHR GetSemaphoreFdKHR = nullptr;
+
         // VK_KHR_swapchain
         PFN_vkCreateSwapchainKHR CreateSwapchainKHR = nullptr;
         PFN_vkDestroySwapchainKHR DestroySwapchainKHR = nullptr;
