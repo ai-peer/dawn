@@ -215,6 +215,10 @@ namespace dawn_native { namespace vulkan {
         PFN_vkGetSwapchainImagesKHR GetSwapchainImagesKHR = nullptr;
         PFN_vkAcquireNextImageKHR AcquireNextImageKHR = nullptr;
         PFN_vkQueuePresentKHR QueuePresentKHR = nullptr;
+
+        // VK_KHR_external_semaphore_fd
+        PFN_vkImportSemaphoreFdKHR ImportSemaphoreFdKHR = nullptr;
+        PFN_vkGetSemaphoreFdKHR GetSemaphoreFdKHR = nullptr;
     };
 
 }}  // namespace dawn_native::vulkan

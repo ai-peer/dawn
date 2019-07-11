@@ -24,6 +24,7 @@
 #include "common/SwapChainUtils.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/NativeSwapChainImplVk.h"
+#include "dawn_native/vulkan/TextureVk.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -50,6 +51,39 @@ namespace dawn_native { namespace vulkan {
         const DawnSwapChainImplementation* swapChain) {
         NativeSwapChainImpl* impl = reinterpret_cast<NativeSwapChainImpl*>(swapChain->userData);
         return static_cast<DawnTextureFormat>(impl->GetPreferredFormat());
+    }
+
+    DawnTexture WrapVulkanImage(DawnDevice cDevice,
+                                const DawnTextureDescriptor* cDescriptor,
+                                int memoryFd,
+                                const std::vector<int>& waitFds) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        const TextureDescriptor* descriptor =
+            reinterpret_cast<const TextureDescriptor*>(cDescriptor);
+        TextureBase* texture =
+            device->CreateTextureWrappingVulkanImage(descriptor, memoryFd, waitFds);
+        return reinterpret_cast<DawnTexture>(texture);
+    }
+
+    // Extracts signal semaphore into a file descriptor, for synchronizing texture usage
+    int ExportSignalSemaphoreFd(DawnDevice cDevice, DawnTexture cTexture) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        Texture* texture = reinterpret_cast<Texture*>(cTexture);
+        VkSemaphore signalSemaphore = texture->GetSignalSemaphore();
+
+        VkSemaphoreGetFdInfoKHR semaphoreGetFdInfo;
+        semaphoreGetFdInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
+        semaphoreGetFdInfo.pNext = nullptr;
+        semaphoreGetFdInfo.semaphore = signalSemaphore;
+        semaphoreGetFdInfo.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
+
+        int fd = -1;
+        if (device->fn.GetSemaphoreFdKHR(device->GetVkDevice(), &semaphoreGetFdInfo, &fd) !=
+            VK_SUCCESS) {
+            ASSERT(false);
+        }
+
+        return fd;
     }
 
 }}  // namespace dawn_native::vulkan

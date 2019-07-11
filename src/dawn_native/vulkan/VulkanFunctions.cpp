@@ -214,6 +214,11 @@ namespace dawn_native { namespace vulkan {
             GET_DEVICE_PROC(CmdDebugMarkerInsertEXT);
         }
 
+        if (usedKnobs.externalSemaphoreFd) {
+            GET_DEVICE_PROC(ImportSemaphoreFdKHR);
+            GET_DEVICE_PROC(GetSemaphoreFdKHR);
+        }
+
         if (usedKnobs.swapchain) {
             GET_DEVICE_PROC(CreateSwapchainKHR);
             GET_DEVICE_PROC(DestroySwapchainKHR);
