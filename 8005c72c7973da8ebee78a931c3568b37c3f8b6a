@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9f5a3703_c795c0be",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-11T15:11:11Z",
+      "side": 1,
+      "message": "clarify: buffer states.\nimplicit promotion from COMMON?",
+      "range": {
+        "startLine": 165,
+        "startChar": 11,
+        "endLine": 165,
+        "endChar": 89
+      },
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "59122b7e_12730012",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 7
