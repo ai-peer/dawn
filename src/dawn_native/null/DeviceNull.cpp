@@ -263,12 +263,14 @@ namespace dawn_native { namespace null {
         return {};
     }
 
-    void Buffer::MapReadAsyncImpl(uint32_t serial) {
+    MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
         MapAsyncImplCommon(serial, false);
+        return {};
     }
 
-    void Buffer::MapWriteAsyncImpl(uint32_t serial) {
+    MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
         MapAsyncImplCommon(serial, true);
+        return {};
     }
 
     void Buffer::MapAsyncImplCommon(uint32_t serial, bool isWrite) {
@@ -372,4 +374,21 @@ namespace dawn_native { namespace null {
         return {};
     }
 
+    // ResourceHeap
+
+    ResourceHeap::ResourceHeap(std::unique_ptr<uint8_t[]> buffer) : mBuffer(std::move(buffer)) {
+    }
+
+    MaybeError ResourceHeap::MapImpl() {
+        mMappedPointer = mBuffer.get();
+        return {};
+    }
+
+    void ResourceHeap::UnmapImpl() {
+        mMappedPointer = nullptr;
+    }
+
+    std::unique_ptr<ResourceHeapBase> ResourceAllocator::Allocate(size_t heapSize) {
+        return std::make_unique<ResourceHeap>(std::make_unique<uint8_t[]>(heapSize));
+    }
 }}  // namespace dawn_native::null
