@@ -135,7 +135,7 @@ namespace dawn_native { namespace vulkan {
 
         bool requestMappable =
             (GetUsage() & (dawn::BufferUsageBit::MapRead | dawn::BufferUsageBit::MapWrite)) != 0;
-        if (!device->GetMemoryAllocator()->Allocate(requirements, requestMappable,
+        if (!device->GetMemoryAllocator()->Allocate(requirements, requestMappable, nullptr,
                                                     &mMemoryAllocation)) {
             ASSERT(false);
         }

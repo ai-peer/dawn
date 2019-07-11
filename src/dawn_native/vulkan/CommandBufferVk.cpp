@@ -30,6 +30,15 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
+        void AddSemaphores(Device* device, Texture* texture) {
+            for (const VkSemaphore& semaphore : texture->GetWaitRequirements()) {
+                device->AddWaitSemaphore(semaphore);
+            }
+            // Only wait on each semaphore once
+            // Because semaphores are unsignaled after wait
+            texture->ClearWaitRequirements();
+        }
+
         VkIndexType VulkanIndexType(dawn::IndexFormat format) {
             switch (format) {
                 case dawn::IndexFormat::Uint16:
@@ -221,6 +230,8 @@ namespace dawn_native { namespace vulkan {
 
                     query.SetColor(i, attachmentInfo.view->GetFormat().format, loadOp,
                                    hasResolveTarget);
+
+                    AddSemaphores(device, ToBackend(view->GetTexture()));
                 }
 
                 if (renderPass->hasDepthStencilAttachment) {
@@ -410,6 +421,8 @@ namespace dawn_native { namespace vulkan {
                     device->fn.CmdCopyBufferToImage(commands, srcBuffer, dstImage,
                                                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
                                                     &region);
+
+                    AddSemaphores(device, ToBackend(dst.texture.Get()));
                 } break;
 
                 case Command::CopyTextureToBuffer: {
@@ -435,6 +448,8 @@ namespace dawn_native { namespace vulkan {
                     // The Dawn CopySrc usage is always mapped to GENERAL
                     device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
                                                     dstBuffer, 1, &region);
+
+                    AddSemaphores(device, ToBackend(src.texture.Get()));
                 } break;
 
                 case Command::CopyTextureToTexture: {
@@ -472,6 +487,9 @@ namespace dawn_native { namespace vulkan {
                     // TRANSFER_DST_OPTIMAL layout
                     device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL, dstImage,
                                             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+
+                    AddSemaphores(device, ToBackend(src.texture.Get()));
+                    AddSemaphores(device, ToBackend(dst.texture.Get()));
                 } break;
 
                 case Command::BeginRenderPass: {
