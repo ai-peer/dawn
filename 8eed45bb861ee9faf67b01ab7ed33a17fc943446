@@ -91,6 +91,30 @@
       "revId": "8eed45bb861ee9faf67b01ab7ed33a17fc943446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "215ba44b_e1b798ef",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-11T22:41:09Z",
+      "side": 1,
+      "message": "Oh I found we have a comment elsewhere that HLSL doesn\u0027t have NumWorkGroups.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/tests/end2end/ComputeIndirectTests.cpp?type\u003dcs\u0026q\u003dD3D12+NumWorkGroups\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d26\n\nand it\u0027s a known issue here https://github.com/gfx-rs/gfx/issues/2604\n\nSo I think it\u0027d be good to do the string concatenation.",
+      "parentUuid": "54336910_3f8145b4",
+      "range": {
+        "startLine": 512,
+        "startChar": 66,
+        "endLine": 512,
+        "endChar": 69
+      },
+      "revId": "8eed45bb861ee9faf67b01ab7ed33a17fc943446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
