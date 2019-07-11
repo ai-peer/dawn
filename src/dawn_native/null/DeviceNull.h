@@ -25,6 +25,7 @@
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
 #include "dawn_native/RenderPipeline.h"
+#include "dawn_native/ResourceHeap.h"
 #include "dawn_native/RingBuffer.h"
 #include "dawn_native/Sampler.h"
 #include "dawn_native/ShaderModule.h"
@@ -33,6 +34,8 @@
 #include "dawn_native/Texture.h"
 #include "dawn_native/ToBackend.h"
 #include "dawn_native/dawn_platform.h"
+
+#include "dawn_native/Allocator.cpp"  // Required for allocator definitions.
 
 namespace dawn_native { namespace null {
 
@@ -46,6 +49,7 @@ namespace dawn_native { namespace null {
     using PipelineLayout = PipelineLayoutBase;
     class Queue;
     using RenderPipeline = RenderPipelineBase;
+    class ResourceHeap;
     using Sampler = SamplerBase;
     using ShaderModule = ShaderModuleBase;
     class SwapChain;
@@ -63,6 +67,7 @@ namespace dawn_native { namespace null {
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
         using RenderPipelineType = RenderPipeline;
+        using ResourceHeapType = ResourceHeap;
         using SamplerType = Sampler;
         using ShaderModuleType = ShaderModule;
         using SwapChainType = SwapChain;
@@ -151,8 +156,8 @@ namespace dawn_native { namespace null {
       private:
         // Dawn API
         MaybeError SetSubDataImpl(uint32_t start, uint32_t count, const void* data) override;
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
+        MaybeError MapReadAsyncImpl(uint32_t serial) override;
+        MaybeError MapWriteAsyncImpl(uint32_t serial) override;
         void UnmapImpl() override;
         void DestroyImpl() override;
 
@@ -213,6 +218,28 @@ namespace dawn_native { namespace null {
       private:
         Device* mDevice;
         std::unique_ptr<uint8_t[]> mBuffer;
+    };
+
+    class ResourceHeap : public ResourceHeapBase {
+      public:
+        ResourceHeap(std::unique_ptr<uint8_t[]> buffer);
+        ~ResourceHeap() = default;
+
+      private:
+        MaybeError MapImpl() override;
+        void UnmapImpl() override;
+
+        std::unique_ptr<uint8_t[]> mBuffer;
+    };
+
+    class ResourceAllocator {
+      public:
+        ResourceAllocator() = default;
+        ~ResourceAllocator() = default;
+
+        std::unique_ptr<ResourceHeapBase> Allocate(size_t heapSize);
+        void Deallocate(ResourceHeapBase* heap) {
+        }
     };
 
 }}  // namespace dawn_native::null
