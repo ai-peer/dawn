@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e0b663c_f470899c",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-11T22:22:59Z",
+      "side": 1,
+      "message": "nit: Only needs sampled usage.",
+      "range": {
+        "startLine": 428,
+        "startChar": 14,
+        "endLine": 428,
+        "endChar": 77
+      },
+      "revId": "8eed45bb861ee9faf67b01ab7ed33a17fc943446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5807e8a0_3fe545e1",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-11T22:22:59Z",
+      "side": 1,
+      "message": "nit: This texture only needs Sampled usage.",
+      "range": {
+        "startLine": 494,
+        "startChar": 32,
+        "endLine": 495,
+        "endChar": 66
+      },
+      "revId": "8eed45bb861ee9faf67b01ab7ed33a17fc943446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00e1d125_b1ddfda9",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-11T22:22:59Z",
+      "side": 1,
+      "message": "nit: Could we indent this shader less? It\u0027s hard to read with the wrapping.",
+      "range": {
+        "startLine": 511,
+        "startChar": 52,
+        "endLine": 511,
+        "endChar": 68
+      },
+      "revId": "8eed45bb861ee9faf67b01ab7ed33a17fc943446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54336910_3f8145b4",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-11T22:22:59Z",
+      "side": 1,
+      "message": "kainino@ Natasha had an issue with the gl_NumWorkGroups builtin? Something about remap_num_workgroups_builtin. Any ideas?\n\nAlternatively, you could std::to_string the kSize variable from C++ into this shader code so that if kSize changes in the future, the shader will be in sync.",
+      "range": {
+        "startLine": 512,
+        "startChar": 66,
+        "endLine": 512,
+        "endChar": 69
+      },
+      "revId": "8eed45bb861ee9faf67b01ab7ed33a17fc943446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
