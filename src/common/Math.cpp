@@ -34,18 +34,6 @@ uint32_t ScanForward(uint32_t bits) {
 #endif
 }
 
-uint32_t Log2(uint32_t value) {
-    ASSERT(value != 0);
-#if defined(DAWN_COMPILER_MSVC)
-    unsigned long firstBitIndex = 0ul;
-    unsigned char ret = _BitScanReverse(&firstBitIndex, value);
-    ASSERT(ret != 0);
-    return firstBitIndex;
-#else
-    return 31 - static_cast<uint32_t>(__builtin_clz(value));
-#endif
-}
-
 bool IsPowerOfTwo(size_t n) {
     ASSERT(n != 0);
     return (n & (n - 1)) == 0;

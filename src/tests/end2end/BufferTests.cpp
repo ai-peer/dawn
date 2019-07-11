@@ -100,7 +100,11 @@ class BufferMapWriteTests : public DawnTest {
               WaitABit();
           }
 
-          return mappedData;
+          // Ensure the prior write's status is updated.
+          void* pMappedData = mappedData;
+          mappedData = nullptr;
+
+          return pMappedData;
       }
 
     private:
@@ -140,6 +144,31 @@ TEST_P(BufferMapWriteTests, LargeWrite) {
     buffer.Unmap();
 
     EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), buffer, 0, kDataSize);
+}
+
+// Stress test mapping many buffers.
+TEST_P(BufferMapWriteTests, ManyWrites) {
+    constexpr uint32_t kDataSize = 1000;
+    std::vector<uint32_t> myData;
+    for (uint32_t i = 0; i < kDataSize; ++i) {
+        myData.push_back(i);
+    }
+
+    std::vector<dawn::Buffer> buffers;
+
+    constexpr uint32_t kBuffers = 5000;
+    for (uint32_t i = 0; i < kBuffers; ++i) {
+        dawn::BufferDescriptor descriptor;
+        descriptor.size = static_cast<uint32_t>(kDataSize * sizeof(uint32_t));
+        descriptor.usage = dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::TransferSrc;
+        dawn::Buffer buffer = device.CreateBuffer(&descriptor);
+
+        void* mappedData = MapWriteAsyncAndWait(buffer);
+        memcpy(mappedData, myData.data(), kDataSize * sizeof(uint32_t));
+        buffer.Unmap();
+
+        buffers.push_back(buffer);  // Destory buffers upon return.
+    }
 }
 
 DAWN_INSTANTIATE_TEST(BufferMapWriteTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
@@ -186,7 +215,7 @@ TEST_P(BufferSetSubDataTests, ManySetSubData) {
     // fails the test. Since GPUs may or may not complete by then, this test must be disabled OR
     // modified to be well-below the timeout limit.
     constexpr uint64_t kSize = 4000 * 1000;
-    constexpr uint32_t kElements = 500 * 500;
+    constexpr uint32_t kElements = 400 * 400;
     dawn::BufferDescriptor descriptor;
     descriptor.size = kSize;
     descriptor.usage = dawn::BufferUsageBit::TransferSrc | dawn::BufferUsageBit::TransferDst;
