@@ -44,6 +44,7 @@ namespace dawn_native { namespace vulkan {
 
         bool Allocate(VkMemoryRequirements requirements,
                       bool mappable,
+                      void* pNext,
                       DeviceMemoryAllocation* allocation);
         void Free(DeviceMemoryAllocation* allocation);
 
