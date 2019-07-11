@@ -39,6 +39,52 @@
       "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "951aad2e_c6851466",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-11T15:46:28Z",
+      "side": 1,
+      "message": "typo although I can\u0027t write this word correctly without a spellchecker either :)",
+      "range": {
+        "startLine": 351,
+        "startChar": 79,
+        "endLine": 351,
+        "endChar": 92
+      },
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db8f494a_7ff35c89",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-11T15:46:28Z",
+      "side": 1,
+      "message": "nit: transitioned.",
+      "range": {
+        "startLine": 362,
+        "startChar": 75,
+        "endLine": 362,
+        "endChar": 86
+      },
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

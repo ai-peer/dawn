@@ -401,6 +401,24 @@
     },
     {
       "key": {
+        "uuid": "cf820685_8369f531",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-11T15:46:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3f27cc5c_4cfe72b0",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c09f43ec_b00974d4",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -433,6 +451,24 @@
       "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "180b776d_4a5b2746",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-11T15:46:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eb097efa_7eabbc0e",
+      "revId": "b9299ab34cc921e098d3164d1c2f39964f14fb45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
