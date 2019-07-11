@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6ad50402_9aec6954",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-11T17:27:05Z",
+      "side": 1,
+      "message": "\u003e clarify: buffer states.\nDone.\n\u003e implicit promotion from COMMON?\nDon\u0027t think this is necessary as the block is only referring to the promotion case. decay case is handled above.",
+      "parentUuid": "9f5a3703_c795c0be",
+      "range": {
+        "startLine": 165,
+        "startChar": 11,
+        "endLine": 165,
+        "endChar": 89
+      },
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "59122b7e_12730012",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 7
@@ -39,6 +63,24 @@
       "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35462d23_add74c2a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-11T17:27:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59122b7e_12730012",
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "70f2e4e8_db415028",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-11T17:27:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "951aad2e_c6851466",
+      "range": {
+        "startLine": 351,
+        "startChar": 79,
+        "endLine": 351,
+        "endChar": 92
+      },
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db8f494a_7ff35c89",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 7
@@ -85,6 +151,30 @@
       "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc231310_80d39066",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-07-11T17:27:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db8f494a_7ff35c89",
+      "range": {
+        "startLine": 362,
+        "startChar": 75,
+        "endLine": 362,
+        "endChar": 86
+      },
+      "revId": "8005c72c7973da8ebee78a931c3568b37c3f8b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
