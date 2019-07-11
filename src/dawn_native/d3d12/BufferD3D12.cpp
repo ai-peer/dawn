@@ -18,7 +18,7 @@
 #include "common/Constants.h"
 #include "common/Math.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/ResourceAllocator.h"
+#include "dawn_native/d3d12/ResourceHeapD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -71,6 +71,12 @@ namespace dawn_native { namespace d3d12 {
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
+        if (GetDevice()->ConsumedError(Initialize())) {
+            return;
+        }
+    }
+
+    MaybeError Buffer::Initialize() {
         D3D12_RESOURCE_DESC resourceDescriptor;
         resourceDescriptor.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
         resourceDescriptor.Alignment = 0;
@@ -88,12 +94,10 @@ namespace dawn_native { namespace d3d12 {
             D3D12ResourceFlags(GetUsage() | dawn::BufferUsageBit::TransferDst);
 
         auto heapType = D3D12HeapType(GetUsage());
-        auto bufferUsage = D3D12_RESOURCE_STATE_COMMON;
 
         // D3D12 requires buffers on the READBACK heap to have the D3D12_RESOURCE_STATE_COPY_DEST
         // state
         if (heapType == D3D12_HEAP_TYPE_READBACK) {
-            bufferUsage |= D3D12_RESOURCE_STATE_COPY_DEST;
             mFixedResourceState = true;
             mLastUsage = dawn::BufferUsageBit::TransferDst;
         }
@@ -101,13 +105,14 @@ namespace dawn_native { namespace d3d12 {
         // D3D12 requires buffers on the UPLOAD heap to have the D3D12_RESOURCE_STATE_GENERIC_READ
         // state
         if (heapType == D3D12_HEAP_TYPE_UPLOAD) {
-            bufferUsage |= D3D12_RESOURCE_STATE_GENERIC_READ;
             mFixedResourceState = true;
             mLastUsage = dawn::BufferUsageBit::TransferSrc;
         }
 
-        mResource =
-            device->GetResourceAllocator()->Allocate(heapType, resourceDescriptor, bufferUsage);
+        DAWN_TRY_ASSIGN(mAllocation, ToBackend(GetDevice())
+                                         ->AllocateMemory(heapType, resourceDescriptor,
+                                                          D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS));
+        return {};
     }
 
     Buffer::~Buffer() {
@@ -156,7 +161,7 @@ namespace dawn_native { namespace d3d12 {
 
         barrier->Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
         barrier->Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-        barrier->Transition.pResource = mResource.Get();
+        barrier->Transition.pResource = GetD3D12Resource().Get();
         barrier->Transition.StateBefore = lastState;
         barrier->Transition.StateAfter = newState;
         barrier->Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
@@ -169,8 +174,8 @@ namespace dawn_native { namespace d3d12 {
         return Align(GetSize(), 256);
     }
 
-    ComPtr<ID3D12Resource> Buffer::GetD3D12Resource() {
-        return mResource;
+    ComPtr<ID3D12Resource> Buffer::GetD3D12Resource() const {
+        return ToBackend(mAllocation.GetResourceHeap())->GetD3D12Resource();
     }
 
     void Buffer::SetUsage(dawn::BufferUsageBit newUsage) {
@@ -179,17 +184,33 @@ namespace dawn_native { namespace d3d12 {
 
     void Buffer::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
                                     dawn::BufferUsageBit usage) {
-        D3D12_RESOURCE_BARRIER barrier;
+        D3D12_RESOURCE_BARRIER transitionBarrier;
 
-        if (CreateD3D12ResourceBarrierIfNeeded(&barrier, usage)) {
-            commandList->ResourceBarrier(1, &barrier);
+        if (CreateD3D12ResourceBarrierIfNeeded(&transitionBarrier, usage)) {
+            commandList->ResourceBarrier(1, &transitionBarrier);
         }
+
+        D3D12_RESOURCE_BARRIER aliasingBarrier;
+        aliasingBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_ALIASING;
+        aliasingBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+        // Deactivate all other resources mapped to the same physical resource heap.
+        // Note: pResourceBefore tells the driver to optimize out the temporary overlap
+        // during the aliasing transition. Resource allocations (placed resource) are disjoint and
+        // there is no overlap in the physical heap space. But the same physical heap space may get
+        // reallocated with a new placed resource. In that case, only the previous resource needs to
+        // be specified for this transition. In addition, placed resources on two seperate
+        // commandLists do not require a aliasing transition at all.
+        // TODO(bryan.bernhart@intel.com): Optimize out these cases of aliasing transitions.
+        aliasingBarrier.Aliasing.pResourceBefore = nullptr;
+        aliasingBarrier.Aliasing.pResourceAfter = GetD3D12Resource().Get();
+
+        commandList->ResourceBarrier(1, &aliasingBarrier);
 
         mLastUsage = usage;
     }
 
     D3D12_GPU_VIRTUAL_ADDRESS Buffer::GetVA() const {
-        return mResource->GetGPUVirtualAddress();
+        return ToBackend(mAllocation.GetResourceHeap())->GetGPUPointer();
     }
 
     void Buffer::OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite) {
@@ -206,44 +227,41 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
-        mWrittenMappedRange = {0, GetSize()};
-        ASSERT_SUCCESS(
-            mResource->Map(0, &mWrittenMappedRange, reinterpret_cast<void**>(mappedPointer)));
+        void* data = nullptr;
+        DAWN_TRY_ASSIGN(data, mAllocation.GetResourceHeap()->Map());
+        *mappedPointer = static_cast<uint8_t*>(data);
         return {};
     }
 
-    void Buffer::MapReadAsyncImpl(uint32_t serial) {
-        mWrittenMappedRange = {};
-        D3D12_RANGE readRange = {0, GetSize()};
-        char* data = nullptr;
-        ASSERT_SUCCESS(mResource->Map(0, &readRange, reinterpret_cast<void**>(&data)));
+    MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
+        void* data = nullptr;
+        DAWN_TRY_ASSIGN(data, mAllocation.GetResourceHeap()->Map());
 
         // There is no need to transition the resource to a new state: D3D12 seems to make the GPU
         // writes available when the fence is passed.
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
-        tracker->Track(this, serial, data, false);
+        tracker->Track(this, serial, static_cast<char*>(data), false);
+        return {};
     }
 
-    void Buffer::MapWriteAsyncImpl(uint32_t serial) {
-        mWrittenMappedRange = {0, GetSize()};
-        char* data = nullptr;
-        ASSERT_SUCCESS(mResource->Map(0, &mWrittenMappedRange, reinterpret_cast<void**>(&data)));
+    MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        void* data = nullptr;
+        DAWN_TRY_ASSIGN(data, mAllocation.GetResourceHeap()->Map());
 
         // There is no need to transition the resource to a new state: D3D12 seems to make the CPU
         // writes available on queue submission.
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
         tracker->Track(this, serial, data, true);
+        return {};
     }
 
     void Buffer::UnmapImpl() {
-        mResource->Unmap(0, &mWrittenMappedRange);
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
-        mWrittenMappedRange = {};
+        mAllocation.GetResourceHeap()->Unmap();
     }
 
     void Buffer::DestroyImpl() {
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
-        mResource = nullptr;
+        ToBackend(GetDevice())->DeallocateMemory(mAllocation, D3D12HeapType(GetUsage()));
+        mAllocation = ResourceMemoryAllocation();  // Invalidate the allocation handle.
     }
 
     MapRequestTracker::MapRequestTracker(Device* device) : mDevice(device) {
