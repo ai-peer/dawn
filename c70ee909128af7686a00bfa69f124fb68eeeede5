@@ -22,6 +22,30 @@
       "revId": "c70ee909128af7686a00bfa69f124fb68eeeede5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fe924e1_1c4026d6",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-11T15:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e285b033_17da1299",
+      "range": {
+        "startLine": 238,
+        "startChar": 71,
+        "endLine": 238,
+        "endChar": 83
+      },
+      "revId": "c70ee909128af7686a00bfa69f124fb68eeeede5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
