@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e285b033_17da1299",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-11T14:37:20Z",
+      "side": 1,
+      "message": "nit: sampleFormatInfo\nAlso, update this comment to talk about renderFormatInfo as well.",
+      "range": {
+        "startLine": 238,
+        "startChar": 71,
+        "endLine": 238,
+        "endChar": 83
+      },
+      "revId": "c70ee909128af7686a00bfa69f124fb68eeeede5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
