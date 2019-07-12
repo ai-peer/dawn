@@ -39,10 +39,11 @@ void WireTest::SetUp() {
     mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
     mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>(mWireServer.get());
 
-    mWireServer.reset(new WireServer({mockDevice, mockProcs, mS2cBuf.get()}));
+    mWireServer.reset(
+        new WireServer({mockDevice, mockProcs, mS2cBuf.get(), &serverMemoryTransferService}));
     mC2sBuf->SetHandler(mWireServer.get());
 
-    mWireClient.reset(new WireClient({mC2sBuf.get()}));
+    mWireClient.reset(new WireClient({mC2sBuf.get(), &clientMemoryTransferService}));
     mS2cBuf->SetHandler(mWireClient.get());
 
     device = mWireClient->GetDevice();
@@ -67,11 +68,13 @@ void WireTest::FlushClient() {
     ASSERT_TRUE(mC2sBuf->Flush());
 
     Mock::VerifyAndClearExpectations(&api);
+    Mock::VerifyAndClearExpectations(&clientMemoryTransferService);
     SetupIgnoredCallExpectations();
 }
 
 void WireTest::FlushServer() {
     ASSERT_TRUE(mS2cBuf->Flush());
+    Mock::VerifyAndClearExpectations(&serverMemoryTransferService);
 }
 
 dawn_wire::WireServer* WireTest::GetWireServer() {

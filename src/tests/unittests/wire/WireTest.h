@@ -13,6 +13,9 @@
 // limitations under the License.
 
 #include "gtest/gtest.h"
+
+#include "dawn_wire/client/ClientMockMemoryTransferService.h"
+#include "dawn_wire/server/ServerMockMemoryTransferService.h"
 #include "mock/mock_dawn.h"
 
 #include <memory>
@@ -69,6 +72,12 @@ inline testing::Matcher<MatcherLambdaArgument<Lambda>> MatchesLambda(Lambda lamb
 namespace dawn_wire {
     class WireClient;
     class WireServer;
+    namespace client {
+        class MockMemoryTransferService;
+    }
+    namespace server {
+        class MockMemoryTransferService;
+    }
 }  // namespace dawn_wire
 
 namespace utils {
@@ -86,6 +95,8 @@ class WireTest : public testing::Test {
     void FlushServer();
 
     testing::StrictMock<MockProcTable> api;
+    testing::StrictMock<dawn_wire::server::MockMemoryTransferService> serverMemoryTransferService;
+    testing::StrictMock<dawn_wire::client::MockMemoryTransferService> clientMemoryTransferService;
     DawnDevice apiDevice;
     DawnDevice device;
 

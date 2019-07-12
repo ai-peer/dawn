@@ -138,7 +138,46 @@ class WireBufferMappingTests : public WireTest {
 
 // Check mapping for reading a succesfully created buffer
 TEST_F(WireBufferMappingTests, MappingForReadSuccessBuffer) {
+    client::MemoryTransferService::ReadHandle* clientHandle = nullptr;
+    server::MemoryTransferService::ReadHandle* serverHandle = nullptr;
+
+    uint32_t serializeCreateInfo = 123;
+    EXPECT_CALL(clientMemoryTransferService, OnCreateReadHandle(kBufferSize))
+        .WillOnce(InvokeWithoutArgs([&]() {
+            clientHandle = clientMemoryTransferService.NewReadHandle();
+
+            EXPECT_CALL(clientMemoryTransferService, OnReadHandleSerializeCreate(clientHandle, _))
+                .WillOnce(InvokeWithoutArgs([&]() { return sizeof(serializeCreateInfo); }))
+                .WillOnce(WithArg<1>([&](void* serializePointer) {
+                    memcpy(serializePointer, &serializeCreateInfo, sizeof(serializeCreateInfo));
+                    return sizeof(serializeCreateInfo);
+                }));
+
+            return clientHandle;
+        }));
+
     dawnBufferMapReadAsync(buffer, ToMockBufferMapReadCallback, nullptr);
+
+    uint32_t serializeInitialDataInfo = 4523;
+    EXPECT_CALL(serverMemoryTransferService,
+                OnDeserializeReadHandle(MatcherCast<const void*>(SafeMatcherCast<const uint32_t*>(
+                                            Pointee(Eq(serializeCreateInfo)))),
+                                        sizeof(serializeCreateInfo), _))
+        .WillOnce(WithArg<2>([&](server::MemoryTransferService::ReadHandle** readHandle) {
+            serverHandle = serverMemoryTransferService.NewReadHandle();
+            *readHandle = serverHandle;
+
+            EXPECT_CALL(serverMemoryTransferService,
+                        OnReadHandleSerializeInitialData(serverHandle, _, _, _))
+                .WillOnce(InvokeWithoutArgs([&]() { return sizeof(serializeInitialDataInfo); }))
+                .WillOnce(WithArg<3>([&](void* serializePointer) {
+                    memcpy(serializePointer, &serializeInitialDataInfo,
+                           sizeof(serializeInitialDataInfo));
+                    return sizeof(serializeInitialDataInfo);
+                }));
+
+            return true;
+        }));
 
     uint32_t bufferContent = 31337;
     EXPECT_CALL(api, OnBufferMapReadAsyncCallback(apiBuffer, _, _))
@@ -149,13 +188,29 @@ TEST_F(WireBufferMappingTests, MappingForReadSuccessBuffer) {
 
     FlushClient();
 
+    EXPECT_CALL(clientMemoryTransferService,
+                OnReadHandleDeserializeInitialData(
+                    clientHandle,
+                    MatcherCast<const void*>(
+                        SafeMatcherCast<const uint32_t*>(Pointee(Eq(serializeInitialDataInfo)))),
+                    sizeof(serializeInitialDataInfo), _, _))
+        .WillOnce(WithArgs<3, 4>([&](const void** data, size_t* dataLength) {
+            *data = &bufferContent;
+            *dataLength = kBufferSize;
+            return true;
+        }));
+
     EXPECT_CALL(*mockBufferMapReadCallback, Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS,
                                                  Pointee(Eq(bufferContent)), kBufferSize, _))
         .Times(1);
 
     FlushServer();
 
+    EXPECT_CALL(clientMemoryTransferService, OnReadHandleDestroy(clientHandle)).Times(1);
+
     dawnBufferUnmap(buffer);
+
+    EXPECT_CALL(serverMemoryTransferService, OnReadHandleDestroy(serverHandle)).Times(1);
     EXPECT_CALL(api, BufferUnmap(apiBuffer)).Times(1);
 
     FlushClient();
