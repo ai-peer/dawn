@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bbe0a0d_81c177ec",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "This could be simpler if we drew only two points.",
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cd3007f_309598cb",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "nit: indentation is weird here, it could make more sense for everything to be aligned with the R\"(.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "498b95f5_a18a0b1c",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "This isn\u0027t using R\"(",
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0192936_9b7e2f7a",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "This has a lot of parameters, could we have a TestInfo structure like this?\n\n struct ViewportParams {\n     float x, y, w, h, minDepth, maxDepth;\n };\n\n struct TestInfo {\n     ViewportParams viewport;\n     bool setViewport \u003d true;\n     bool zeroZeroPointDrawn \u003d true;\n     bool oneOnePointDrawn \u003d true;\n     float clearDepth \u003d 1.0f;\n };\n\nThis would help make it more clear what tests does. (and includes the suggestions from other comments.)",
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43ea0c99_d3ab873e",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "nit: This would be more clear as a clearDepth parameter.",
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8da566e_b0562075",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "Can we have comments on the tests that explain what each of them does?",
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "915da9e0_551b5116",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "Can we also have tests where the viewport params are 2, 2, 2, 2, 0, 1 and 0, 0, 2, 2, 0, 1 so we test with a viewport width/height that doesn\u0027t match the attachments?",
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "977d3e3c_f7ba45f6",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:38:18Z",
+      "side": 1,
+      "message": "Can we also have a tests that checks that the default viewport is 0, 0, w, h, 0, 1? (we could have an extra argument to skip the setViewport call)",
+      "revId": "5118225dfb0920ae188c5b28a874702b7050e9c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
