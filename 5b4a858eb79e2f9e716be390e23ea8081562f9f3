@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "725061ae_329a3d00",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-12T14:30:06Z",
+      "side": 1,
+      "message": "Looks like ANGLE puts them right next to the interface definition like I\u0027m doing here.\n\nhttps://cs.chromium.org/chromium/src/third_party/angle/src/libANGLE/renderer/BufferImpl_mock.h?sq\u003dpackage:chromium\u0026dr\u003dCSs\u0026g\u003d0\n\nAlthough the naming is *_mock instead of Mock*.",
+      "parentUuid": "8340e12f_cd6ae51d",
+      "range": {
+        "startLine": 581,
+        "startChar": 0,
+        "endLine": 584,
+        "endChar": 61
+      },
+      "revId": "5b4a858eb79e2f9e716be390e23ea8081562f9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da13f4ed_58d31252",
         "filename": "src/dawn_wire/client/ClientMockMemoryTransferService.h",
         "patchSetId": 1
@@ -53,6 +77,24 @@
       "writtenOn": "2019-07-12T14:07:51Z",
       "side": 1,
       "message": "Using these in all tests will require adding a TON new expectations. Maybe we could leave most buffer mapping tests as is, and only use these mocks in the test we think are the most useful. Actually we could have a new separate test file for the MemoryTransferService and copy over a couple buffer mapping tests plus write some more test for failure cases etc.",
+      "revId": "5b4a858eb79e2f9e716be390e23ea8081562f9f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c30c77ee_459d468a",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-12T14:30:06Z",
+      "side": 1,
+      "message": "+1 new test file of MemoryTransferService.",
+      "parentUuid": "c7cac1b2_890b1395",
       "revId": "5b4a858eb79e2f9e716be390e23ea8081562f9f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
