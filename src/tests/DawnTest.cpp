@@ -397,10 +397,18 @@ void DawnTest::SetUp() {
         mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
         mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
 
-        mWireServer.reset(new dawn_wire::WireServer(backendDevice, backendProcs, mS2cBuf.get()));
+        WireServerDescriptor serverDesc = {};
+        serverDesc.device = backendDevice;
+        serverDesc.procs = &backendProcs;
+        serverDesc.serializer = mS2cBuf.get();
+
+        mWireServer.reset(new dawn_wire::WireServer(serverDesc));
         mC2sBuf->SetHandler(mWireServer.get());
 
-        mWireClient.reset(new dawn_wire::WireClient(mC2sBuf.get()));
+        WireClientDescriptor clientDesc = {};
+        clientDesc.serializer = mC2sBuf.get();
+
+        mWireClient.reset(new dawn_wire::WireClient(clientDesc));
         DawnDevice clientDevice = mWireClient->GetDevice();
         DawnProcTable clientProcs = mWireClient->GetProcs();
         mS2cBuf->SetHandler(mWireClient.get());
