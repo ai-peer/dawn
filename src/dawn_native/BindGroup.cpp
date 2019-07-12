@@ -38,13 +38,14 @@ namespace dawn_native {
             DAWN_TRY(device->ValidateObject(binding.buffer));
 
             uint64_t bufferSize = binding.buffer->GetSize();
-            if (binding.size > bufferSize) {
+            if (binding.size != UINT64_MAX && binding.size > bufferSize) {
                 return DAWN_VALIDATION_ERROR("Buffer binding size larger than the buffer");
             }
 
             // Note that no overflow can happen because we already checked that
             // bufferSize >= binding.size
-            if (binding.offset > bufferSize - binding.size) {
+            if ((binding.size == UINT64_MAX && binding.offset > 0) ||
+                (binding.offset > bufferSize - binding.size)) {
                 return DAWN_VALIDATION_ERROR("Buffer binding doesn't fit in the buffer");
             }
 
@@ -175,7 +176,10 @@ namespace dawn_native {
                 ASSERT(mBindings[bindingIndex].Get() == nullptr);
                 mBindings[bindingIndex] = binding.buffer;
                 mOffsets[bindingIndex] = binding.offset;
-                mSizes[bindingIndex] = binding.size;
+                // If buffer binding size is UINT64_MAX, use the whole size of the buffer.
+                uint64_t bufferSize =
+                    (binding.size == UINT64_MAX) ? binding.buffer->GetSize() : binding.size;
+                mSizes[bindingIndex] = bufferSize;
                 continue;
             }
 
