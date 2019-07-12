@@ -58,4 +58,6 @@ static constexpr uint32_t kMaxTexture2DMipLevels = 14u;
 static_assert(1 << (kMaxTexture2DMipLevels - 1) == kMaxTextureSize,
               "kMaxTexture2DMipLevels and kMaxTextureSize size mismatch");
 
+static constexpr uint64_t kWholeSize = UINT64_MAX;
+
 #endif  // COMMON_CONSTANTS_H_
