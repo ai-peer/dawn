@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d778d890_2cb459c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T14:20:51Z",
+      "side": 1,
+      "message": "nit: missing a BUG\u003d, you could maybe use dawn:22 as it is the catchall \"match WebGPU\" bug.",
+      "revId": "21c9f568b1da8cbc5ade096cc84e112dc9d736e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5c769fc_2c4d27ab",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 2
