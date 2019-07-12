@@ -526,20 +526,14 @@ namespace dawn_native { namespace metal {
                     Texture* srcTexture = ToBackend(copy->source.texture.Get());
                     Texture* dstTexture = ToBackend(copy->destination.texture.Get());
 
-                    MTLOrigin srcOrigin;
-                    srcOrigin.x = copy->source.origin.x;
-                    srcOrigin.y = copy->source.origin.y;
-                    srcOrigin.z = copy->source.origin.z;
+                    MTLOrigin srcOrigin = MTLOriginMake(
+                        copy->source.origin.x, copy->source.origin.y, copy->source.origin.z);
+                    MTLOrigin dstOrigin =
+                        MTLOriginMake(copy->destination.origin.x, copy->destination.origin.y,
+                                      copy->destination.origin.z);
 
-                    MTLOrigin dstOrigin;
-                    dstOrigin.x = copy->destination.origin.x;
-                    dstOrigin.y = copy->destination.origin.y;
-                    dstOrigin.z = copy->destination.origin.z;
-
-                    MTLSize size;
-                    size.width = copy->copySize.width;
-                    size.height = copy->copySize.height;
-                    size.depth = copy->copySize.depth;
+                    MTLSize size = MTLSizeMake(copy->copySize.width, copy->copySize.height,
+                                               copy->copySize.depth);
 
                     encoders.EnsureBlit(commandBuffer);
 
