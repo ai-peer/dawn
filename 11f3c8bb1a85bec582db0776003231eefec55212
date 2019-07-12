@@ -1,0 +1,214 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c384c8ef_e184a1bf",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "unit: this will break as soon as we add new required members, maybe never?",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb3f1a76_5bcab4d3",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "missing comments here ;)",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6ca7eaf_f1ac1062",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "This is actually because the client can unmap and remap before the map operations is processed and returned by the server, so we can have multiple map requests in flight.",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e58bd842_50f11b52",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "This block of code appears multiple times, maybe it could be factored in a function?",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4618ca2e_93491c5f",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43c92778_372e348d",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "I think both if (isWrite) blocks could be factored if we moved [1] in [2] (with a unique_ptr\u003cMapUserdata\u003e)",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89833980_7785c308",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90196d83_35f7b199",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "Also explain that this should never be the case and only when we are fuzzing. That probably means we can early out in this case actually.",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b475600a_0ee5d5e0",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "nit: Maybe use std::numeric_limits for this?",
+      "range": {
+        "startLine": 193,
+        "startChar": 35,
+        "endLine": 193,
+        "endChar": 43
+      },
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d08d472_8998bdd4",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "Are these allowed to fail and return nulltpr? (probably and it would cause a context loss?)",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0bd957c_2c7dc61f",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "Can the comment explain that data is the pointer that will be given to the application and must live at least until ~ReadHandle?",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c912aa29_d50f5d53",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T13:59:40Z",
+      "side": 1,
+      "message": "ditto, can this fail?",
+      "revId": "11f3c8bb1a85bec582db0776003231eefec55212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
