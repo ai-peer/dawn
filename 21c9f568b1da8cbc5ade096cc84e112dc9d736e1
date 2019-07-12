@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "79d4c575_e83c1c17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-07-12T14:46:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d778d890_2cb459c6",
+      "revId": "21c9f568b1da8cbc5ade096cc84e112dc9d736e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5c769fc_2c4d27ab",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "041309bb_e1214fa6",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-07-12T14:46:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5c769fc_2c4d27ab",
+      "revId": "21c9f568b1da8cbc5ade096cc84e112dc9d736e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c50fdb26_8d2f8009",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "21c9f568b1da8cbc5ade096cc84e112dc9d736e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a17d51d_a73faece",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-07-12T14:46:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c50fdb26_8d2f8009",
+      "revId": "21c9f568b1da8cbc5ade096cc84e112dc9d736e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
