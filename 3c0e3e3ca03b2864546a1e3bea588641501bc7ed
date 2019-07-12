@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "174c34cf_a9720395",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "ditto put this just before encoding the whole pass.",
+      "range": {
+        "startLine": 440,
+        "startChar": 1,
+        "endLine": 442,
+        "endChar": 77
+      },
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37c29e5f_0be0bd63",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "This isn\u0027t needed yet, please put it around [1]",
+      "range": {
+        "startLine": 444,
+        "startChar": 1,
+        "endLine": 446,
+        "endChar": 0
+      },
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5bfbf1c_491ff78f",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "nit: This should use the raw string literals (the R\"( )\" syntax)",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 15
+      },
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30e9b68d_c33e3faf",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "ditto, this should go in 1 and the pipeline creation separated. The code would look like\n\n  Create resources\n  Create pipeline\n  Create bindgroup\n  Encode the pass and submit\n  Expectations",
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a08fb34b_b7075d37",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e0026a1_2f8fd55e",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "Ditto for code structure and making it breath.",
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ba4922a_ab8e9552",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "ditto, use raw string literals.",
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96512a4e_26a4be6f",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "We could remove the need for kSize if we use a 1x1 texture, which is ok because what we\u0027re testing is the clearing of the texture and the size is independent.",
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fa42e06_84a23ea3",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T07:51:49Z",
+      "side": 1,
+      "message": "nit: the buffer doesn\u0027t need to be filled with data as it will be done by the compute shader, you can use a dawn::BufferDescriptor and device.CreateBuffer directly.",
+      "range": {
+        "startLine": 530,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 0
+      },
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
