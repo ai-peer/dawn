@@ -29,8 +29,10 @@ namespace dawn_native { namespace d3d12 {
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
 
+        MaybeError Initialize();
+
         uint32_t GetD3D12Size() const;
-        ComPtr<ID3D12Resource> GetD3D12Resource();
+        ComPtr<ID3D12Resource> GetD3D12Resource() const;
         D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
         void OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite);
         bool TransitionUsageAndGetResourceBarrier(D3D12_RESOURCE_BARRIER* barrier,
@@ -40,19 +42,17 @@ namespace dawn_native { namespace d3d12 {
 
       private:
         // Dawn API
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
+        MaybeError MapReadAsyncImpl(uint32_t serial) override;
+        MaybeError MapWriteAsyncImpl(uint32_t serial) override;
         void UnmapImpl() override;
         void DestroyImpl() override;
 
         bool IsMapWritable() const override;
         virtual MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
 
-        ComPtr<ID3D12Resource> mResource;
         bool mFixedResourceState = false;
         dawn::BufferUsageBit mLastUsage = dawn::BufferUsageBit::None;
         Serial mLastUsedSerial = UINT64_MAX;
-        D3D12_RANGE mWrittenMappedRange;
     };
 
     class MapRequestTracker {

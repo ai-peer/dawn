@@ -120,6 +120,8 @@ namespace dawn_native { namespace d3d12 {
         // Call Tick() again to clear them before releasing the allocator.
         mResourceAllocator->Tick(mCompletedSerial);
 
+        ReleaseResourceAllocators();
+
         ASSERT(mUsedComObjectRefs.Empty());
         ASSERT(mPendingCommands.commandList == nullptr);
     }
@@ -199,6 +201,23 @@ namespace dawn_native { namespace d3d12 {
         return mLastSubmittedSerial + 1;
     }
 
+    // TODO(bryan.bernhart@intel.com): Reuse these heaps rather then release.
+    void Device::ReleaseResourceAllocators() {
+        // Release heaps in deletion queue from sub-allocations.
+        for (auto& allocatorOfHeapFlags : mResourceAllocators) {
+            for (auto& allocatorOfHeapType : allocatorOfHeapFlags.second) {
+                for (auto& allocator : allocatorOfHeapType.second) {
+                    allocator->Tick(mCompletedSerial);
+                }
+            }
+        }
+
+        // Release heaps in deletion queue from direct allocations
+        for (auto& allocatorOfHeapType : mDirectResourceAllocators) {
+            allocatorOfHeapType.second->Tick(mCompletedSerial);
+        }
+    }
+
     void Device::TickImpl() {
         // Perform cleanup operations to free unused objects
         mCompletedSerial = mFence->GetCompletedValue();
@@ -208,6 +227,9 @@ namespace dawn_native { namespace d3d12 {
         mDynamicUploader->Tick(mCompletedSerial);
 
         mResourceAllocator->Tick(mCompletedSerial);
+
+        ReleaseResourceAllocators();
+
         mCommandAllocatorManager->Tick(mCompletedSerial);
         mDescriptorHeapAllocator->Tick(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
@@ -322,4 +344,120 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    // Create the sub-allocators which allocate resource heaps of power-of-two sizes.
+    std::vector<std::unique_ptr<PlacedResourceAllocator>> Device::CreateResourceAllocators(
+        D3D12_HEAP_TYPE heapType) {
+        // One approach is a create a list of these heaps of various sizes (ie. linear pool), but
+        // this strategy has two issues: 1) a seperate allocator instance is required to manage
+        // every heap no matter the size and 2) the largest heap would always stay resident (or
+        // pinned) preventing smaller heaps from being reused.
+        //
+        // A better strategy would be to align the heap size to a power-of-two then get the
+        // corresponding allocator by computing the 2^index or level. Then only
+        // Log2(MaxBlockSize) allocators ever exist and smaller heaps can be reused by
+        // specifying a smaller level.
+        std::vector<std::unique_ptr<PlacedResourceAllocator>> allocators;
+        for (uint64_t resourceHeapSize = D3D12_TILED_RESOURCE_TILE_SIZE_IN_BYTES;
+             resourceHeapSize <= kMaxResourceSize; resourceHeapSize *= 2) {
+            std::unique_ptr<PlacedResourceAllocator> allocator =
+                std::make_unique<PlacedResourceAllocator>(kMaxResourceSize, resourceHeapSize, this,
+                                                          heapType);
+            allocators.push_back(std::move(allocator));
+        }
+        return allocators;
+    }
+
+    // Helper to compute the index of which allocator to use that has a heap large enough to satisfy
+    // the allocation request. Needed by [Allocate|Deallocate]Memory.
+    size_t Device::ComputeLevelFromHeapSize(size_t heapSize) const {
+        return Log2(heapSize) - Log2(D3D12_TILED_RESOURCE_TILE_SIZE_IN_BYTES);
+    }
+
+    void Device::DeallocateMemory(ResourceMemoryAllocation& allocation, D3D12_HEAP_TYPE heapType) {
+        PlacedResourceAllocator* allocator = nullptr;
+        if (allocation.IsDirect()) {
+            allocator = mDirectResourceAllocators[heapType].get();
+        } else {
+            const D3D12_HEAP_DESC heapInfo =
+                ToBackend(allocation.GetResourceHeap())->GetD3D12Heap()->GetDesc();
+            const size_t heapLevel = ComputeLevelFromHeapSize(heapInfo.SizeInBytes);
+
+            allocator = mResourceAllocators[heapInfo.Flags][heapType][heapLevel].get();
+        }
+        allocator->Deallocate(allocation);
+    }
+
+    ResultOrError<ResourceMemoryAllocation> Device::AllocateMemory(
+        D3D12_HEAP_TYPE heapType,
+        D3D12_RESOURCE_DESC resourceDescriptor,
+        D3D12_HEAP_FLAGS heapFlags) {
+        const D3D12_RESOURCE_ALLOCATION_INFO resourceInfo =
+            GetD3D12Device()->GetResourceAllocationInfo(0, 1, &resourceDescriptor);
+
+        // TODO(bryan.bernhart@intel.com): Dynamically disable sub-allocation.
+        // For very large resources, there is no beneifit to sub-allocate them from a larger heap
+        // and would otherwise increase internal fragementation (due to power-of-two).
+        //
+        // For very small resources, it is inefficent to sub-allocate them since the min. heap size
+        // or page-size is 64KB.
+        //
+        // This decision could be determined at allocation-time or when a budget event fires.
+        bool isDirect = true;
+
+        PlacedResourceAllocator* allocator = nullptr;
+        uint64_t allocationSize = resourceInfo.SizeInBytes;
+
+        if (isDirect) {
+            // Get the direct allocator using a tightly sized heap (aka CreateCommittedResource).
+            ASSERT(IsAligned(resourceInfo.SizeInBytes, D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT));
+
+            if (mDirectResourceAllocators.find(heapType) == mDirectResourceAllocators.end()) {
+                mDirectResourceAllocators[heapType] =
+                    std::make_unique<PlacedResourceAllocator>(this, heapType);
+            }
+
+            allocator = mDirectResourceAllocators[heapType].get();
+        } else {
+            // PlacedResourceAllocator (aka CreateHeap) requires heap flags to be explicitly
+            // specified. Not all GPUs allow mixed resource types to co-exist on the same
+            // physical heap nor does PlacedResourceAllocator allow sub-allocation with multiple
+            // heap options. Instead, a seperate set of allocators (per heap flag) is needed.
+            if (mResourceAllocators.find(heapFlags) == mResourceAllocators.end()) {
+                std::map<D3D12_HEAP_TYPE, SubAllocatorPool> allocators;
+                allocators.insert(std::pair<D3D12_HEAP_TYPE, SubAllocatorPool>(
+                    heapType, CreateResourceAllocators(heapType)));
+
+                mResourceAllocators.insert(
+                    std::pair<D3D12_HEAP_FLAGS, std::map<D3D12_HEAP_TYPE, SubAllocatorPool>>(
+                        heapFlags, std::move(allocators)));
+            } else if (mResourceAllocators[heapFlags].find(heapType) ==
+                       mResourceAllocators[heapFlags].end()) {
+                mResourceAllocators[heapFlags].insert(std::pair<D3D12_HEAP_TYPE, SubAllocatorPool>(
+                    heapType, CreateResourceAllocators(heapType)));
+            }
+
+            // SubAllocations must be power-of-two aligned.
+            allocationSize = (IsPowerOfTwo(allocationSize)) ? allocationSize
+                                                            : AlignToNextPowerOfTwo(allocationSize);
+
+            // TODO(bryan.bernhart@intel.com): Adjust the heap size based on
+            // a heuristic. Smaller but frequent allocations benefit by sub-allocating from a larger
+            // heap.
+            const size_t heapSize = allocationSize;
+            const size_t heapLevel = ComputeLevelFromHeapSize(heapSize);
+
+            allocator = mResourceAllocators[heapFlags][heapType][heapLevel].get();
+        }
+
+        ResourceMemoryAllocation allocation =
+            allocator->Allocate(resourceDescriptor, allocationSize, heapFlags);
+
+        // Device lost or OOM.
+        if (allocation.GetOffset() == INVALID_OFFSET) {
+            return DAWN_CONTEXT_LOST_ERROR("Unable to allocate memory for resource");
+        }
+
+        return ResourceMemoryAllocation{allocation.GetOffset(), allocation.GetResourceHeap(),
+                                        isDirect};
+    }
 }}  // namespace dawn_native::d3d12
