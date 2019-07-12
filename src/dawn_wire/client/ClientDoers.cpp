@@ -27,8 +27,8 @@ namespace dawn_wire { namespace client {
     bool Client::DoBufferMapReadAsyncCallback(Buffer* buffer,
                                               uint32_t requestSerial,
                                               uint32_t status,
-                                              uint64_t dataLength,
-                                              const uint8_t* data) {
+                                              uint64_t initialDataInfoLength,
+                                              const uint8_t* initialDataInfo) {
         // The buffer might have been deleted or recreated so this isn't an error.
         if (buffer == nullptr) {
             return true;
@@ -41,11 +41,11 @@ namespace dawn_wire { namespace client {
         }
 
         // It is an error for the server to call the read callback when we asked for a map write
-        if (requestIt->second.isWrite) {
+        if (requestIt->second.writeHandle) {
             return false;
         }
 
-        auto request = requestIt->second;
+        auto request = std::move(requestIt->second);
         // Delete the request before calling the callback otherwise the callback could be fired a
         // second time. If, for example, buffer.Unmap() is called inside the callback.
         buffer->requests.erase(requestIt);
@@ -53,19 +53,33 @@ namespace dawn_wire { namespace client {
         // On success, we copy the data locally because the IPC buffer isn't valid outside of this
         // function
         if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
-            ASSERT(data != nullptr);
-
-            if (buffer->mappedData != nullptr) {
+            if (buffer->readHandle || buffer->writeHandle) {
+                // Buffer is already mapped.
                 return false;
             }
+            if (initialDataInfoLength > SIZE_MAX) {
+                // This is the size of data deserialized from the command stream, which must be
+                // CPU-addressable.
+                return false;
+            }
+            ASSERT(request.readHandle != nullptr);
 
-            buffer->isWriteMapped = false;
-            buffer->mappedDataSize = dataLength;
-            buffer->mappedData = malloc(dataLength);
-            memcpy(buffer->mappedData, data, dataLength);
+            // The server serializes metadata to initialize the contents of the ReadHandle.
+            // Deserialize the message and return a pointer and size of the mapped data for reading.
+            const void* mappedData = nullptr;
+            size_t mappedDataLength = 0;
+            if (!request.readHandle->DeserializeInitialData(
+                    initialDataInfo, static_cast<size_t>(initialDataInfoLength), &mappedData,
+                    &mappedDataLength)) {
+                return false;
+            }
+            ASSERT(mappedData != nullptr);
 
-            request.readCallback(static_cast<DawnBufferMapAsyncStatus>(status), buffer->mappedData,
-                                 dataLength, request.userdata);
+            // The MapRead request was successful. The buffer now owns the ReadHandle until Unmap().
+            buffer->readHandle = std::move(request.readHandle);
+
+            request.readCallback(static_cast<DawnBufferMapAsyncStatus>(status), mappedData,
+                                 mappedDataLength, request.userdata);
         } else {
             request.readCallback(static_cast<DawnBufferMapAsyncStatus>(status), nullptr, 0,
                                  request.userdata);
@@ -76,8 +90,7 @@ namespace dawn_wire { namespace client {
 
     bool Client::DoBufferMapWriteAsyncCallback(Buffer* buffer,
                                                uint32_t requestSerial,
-                                               uint32_t status,
-                                               uint64_t dataLength) {
+                                               uint32_t status) {
         // The buffer might have been deleted or recreated so this isn't an error.
         if (buffer == nullptr) {
             return true;
@@ -90,11 +103,11 @@ namespace dawn_wire { namespace client {
         }
 
         // It is an error for the server to call the write callback when we asked for a map read
-        if (!requestIt->second.isWrite) {
+        if (requestIt->second.readHandle) {
             return false;
         }
 
-        auto request = requestIt->second;
+        auto request = std::move(requestIt->second);
         // Delete the request before calling the callback otherwise the callback could be fired a
         // second time. If, for example, buffer.Unmap() is called inside the callback.
         buffer->requests.erase(requestIt);
@@ -102,20 +115,21 @@ namespace dawn_wire { namespace client {
         // On success, we copy the data locally because the IPC buffer isn't valid outside of this
         // function
         if (status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS) {
-            if (buffer->mappedData != nullptr) {
+            if (buffer->readHandle || buffer->writeHandle) {
+                // Buffer is already mapped.
                 return false;
             }
+            ASSERT(request.writeHandle != nullptr);
+            buffer->writeHandle = std::move(request.writeHandle);
 
-            buffer->isWriteMapped = true;
-            buffer->mappedDataSize = dataLength;
-            // |mappedData| is freed in Unmap or the Buffer destructor.
-            // TODO(enga): Add dependency injection for buffer mapping so staging
-            // memory can live in shared memory.
-            buffer->mappedData = malloc(dataLength);
-            memset(buffer->mappedData, 0, dataLength);
+            // Open the ReadHandle. This returns a pointer and size of mapped memory.
+            void* mappedData;
+            size_t mappedDataLength;
+            std::tie(mappedData, mappedDataLength) = buffer->writeHandle->Open();
 
-            request.writeCallback(static_cast<DawnBufferMapAsyncStatus>(status), buffer->mappedData,
-                                  dataLength, request.userdata);
+            ASSERT(mappedData != nullptr);
+            request.writeCallback(static_cast<DawnBufferMapAsyncStatus>(status), mappedData,
+                                  mappedDataLength, request.userdata);
         } else {
             request.writeCallback(static_cast<DawnBufferMapAsyncStatus>(status), nullptr, 0,
                                   request.userdata);

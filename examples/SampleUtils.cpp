@@ -121,10 +121,10 @@ dawn::Device CreateCppDawnDevice() {
                 c2sBuf = new utils::TerribleCommandBuffer();
                 s2cBuf = new utils::TerribleCommandBuffer();
 
-                wireServer = new dawn_wire::WireServer(backendDevice, backendProcs, s2cBuf);
+                wireServer = new dawn_wire::WireServer({backendDevice, backendProcs, s2cBuf});
                 c2sBuf->SetHandler(wireServer);
 
-                wireClient = new dawn_wire::WireClient(c2sBuf);
+                wireClient = new dawn_wire::WireClient({c2sBuf});
                 DawnDevice clientDevice = wireClient->GetDevice();
                 DawnProcTable clientProcs = wireClient->GetProcs();
                 s2cBuf->SetHandler(wireClient);
