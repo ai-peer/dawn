@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "e7cefc5a_209ddf5d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-12T21:35:47Z",
+      "side": 1,
+      "message": "Sorry for the back and forth Natasha, you can do this and the other shader without the \"...\\n\" on every line like this:\n\nR\"(\n    #version 450\n    layout(set \u003d 0, binding \u003d 0) uniform sampler sampler0;\n    layout(set \u003d 0, binding \u003d 1) uniform texture2D texture0;\n    layout(location \u003d 0) out vec4 fragColor;\n    void main() {\n        fragColor \u003d texelFetch(sampler2D(texture0, sampler0), ivec2(gl_FragCoord), 0);\n    }\n)\";\n\nSee here: https://cs.chromium.org/chromium/src/third_party/dawn/src/tests/end2end/RenderPassLoadOpTests.cpp?type\u003dcs\u0026q\u003df:dawn+vsSource\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d85",
+      "parentUuid": "7db3a325_8e5bf82b",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 15
+      },
+      "revId": "3c0e3e3ca03b2864546a1e3bea588641501bc7ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "30e9b68d_c33e3faf",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 4
