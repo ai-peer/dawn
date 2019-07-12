@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5c769fc_2c4d27ab",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T14:20:19Z",
+      "side": 1,
+      "message": "We could introduce a bindingSize like you\u0027ve done at [1] so that we don\u0027t duplicate the checks for UINT64_MAX",
+      "revId": "21c9f568b1da8cbc5ade096cc84e112dc9d736e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c50fdb26_8d2f8009",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-12T14:20:19Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "21c9f568b1da8cbc5ade096cc84e112dc9d736e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
