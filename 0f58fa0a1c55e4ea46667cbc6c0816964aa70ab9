@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfaae81f_9bb734bc",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-12T17:56:31Z",
+      "side": 1,
+      "message": "Based on this comment, it seems like this one is supposed to be here.\n\nKind of gross though; I\u0027m not sure this ignore actually matters. If we want this file to have consistent line endings, we should just remove this line entirely since this change probably breaks it.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 4
+      },
+      "revId": "0f58fa0a1c55e4ea46667cbc6c0816964aa70ab9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
