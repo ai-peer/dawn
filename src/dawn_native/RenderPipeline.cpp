@@ -305,6 +305,14 @@ namespace dawn_native {
             DAWN_TRY(ValidateDepthStencilStateDescriptor(descriptor->depthStencilState));
         }
 
+        if (descriptor->sampleMask != 0xFFFFFFFF) {
+            return DAWN_VALIDATION_ERROR("sampleMask must be 0xFFFFFFFF (for now)");
+        }
+
+        if (descriptor->alphaToCoverageEnabled) {
+            return DAWN_VALIDATION_ERROR("alphaToCoverageEnabled isn't supported (yet)");
+        }
+
         return {};
     }
 

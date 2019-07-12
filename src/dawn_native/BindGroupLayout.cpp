@@ -53,6 +53,15 @@ namespace dawn_native {
                             "Samplers and textures are expected to be not dynamic");
                     }
                     break;
+                case dawn::BindingType::ReadonlyStorageBuffer:
+                    return DAWN_VALIDATION_ERROR("readonly storage buffers aren't supported (yet)");
+                case dawn::BindingType::StorageTexture:
+                    return DAWN_VALIDATION_ERROR("storage textures aren't supported (yet)");
+            }
+
+            if (binding.multisampled) {
+                return DAWN_VALIDATION_ERROR(
+                    "BindGroupLayoutBinding::multisampled must be false (for now)");
             }
 
             bindingsSet.set(binding.binding);
