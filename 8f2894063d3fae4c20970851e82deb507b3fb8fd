@@ -45,6 +45,30 @@
       "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e52095b_a19a414e",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T17:00:46Z",
+      "side": 1,
+      "message": "This should be part of webgpu.h, do you want to have it in dawn.h before then?",
+      "parentUuid": "51ea8dd9_620b6395",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
