@@ -14,10 +14,40 @@
 
 #include "dawn_native/opengl/BackendGL.h"
 
+#include "common/Constants.h"
 #include "dawn_native/OpenGLBackend.h"
 #include "dawn_native/opengl/DeviceGL.h"
 
+#include <map>
+
 namespace dawn_native { namespace opengl {
+
+    namespace {
+        // Map for vendor name and vendor id.
+        // Key  : keywords of vendor name
+        // Value: vendor id
+        std::map<std::string, uint32_t> kVendorIdMap = {{"ATI", kVendorID_AMD},
+                                                        {"ARM", kVendorID_ARM},
+                                                        {"Imagination", kVendorID_ImgTec},
+                                                        {"Intel", kVendorID_Intel},
+                                                        {"NVIDIA", kVendorID_Nvidia},
+                                                        {"Qualcomm", kVendorID_Qualcomm}};
+
+        uint32_t GetVendorIdFromVendors(std::string vendor) {
+            uint32_t vendorId = 0;
+
+            std::map<std::string, uint32_t>::const_iterator it = kVendorIdMap.begin();
+            while (it != kVendorIdMap.end()) {
+                // Matching device name with vendor name
+                if (vendor.find(it->first) != std::string::npos) {
+                    vendorId = it->second;
+                    break;
+                }
+                it++;
+            }
+            return vendorId;
+        }
+    }  // namespace
 
     // The OpenGL backend's Adapter.
 
@@ -37,6 +67,10 @@ namespace dawn_native { namespace opengl {
             mFunctions.Enable(GL_MULTISAMPLE);
 
             mPCIInfo.name = reinterpret_cast<const char*>(mFunctions.GetString(GL_RENDERER));
+
+            // Workaroud to find vendor id from vendor name
+            std::string vendor = reinterpret_cast<const char*>(mFunctions.GetString(GL_VENDOR));
+            mPCIInfo.vendorId = GetVendorIdFromVendors(vendor);
 
             return {};
         }
