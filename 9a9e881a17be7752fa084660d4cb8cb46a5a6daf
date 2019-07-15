@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc56cc68_37e4f2be",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-15T21:14:05Z",
+      "side": 1,
+      "message": "I don\u0027t think this math is correct. Since we can\u0027t use gl_NumWorkGroups it might be best to use a 1x1 texture as Corentin suggested instead of kSize x kSize texture.\n\nThe reason this is passing the tests is because bufferTex is also getting lazy cleared. I apologize and should have noticed this earlier, but we should first do an explicit copy to bufferTex to clear it to non-zero. Then, we should sample the texture and copy into the buffer.",
+      "range": {
+        "startLine": 527,
+        "startChar": 11,
+        "endLine": 529,
+        "endChar": 31
+      },
+      "revId": "9a9e881a17be7752fa084660d4cb8cb46a5a6daf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
