@@ -145,6 +145,18 @@ class alignas(kNativeVkHandleAlignment) VkNonDispatchableHandle {
     static_assert(sizeof(object) == sizeof(object##Native), "");           \
     static_assert(alignof(object) == kNativeVkHandleAlignment, "");
 
+// Ensure platform-specific extensions are declared appropriately.
+#if defined(DAWN_PLATFORM_LINUX)
+#  define VK_USE_PLATFORM_XLIB_KHR
+#  define VK_USE_PLATFORM_XCB_KHR
+#  define VK_USE_PLATFORM_WAYLAND_KHR
+#elif defined(DAWN_PLATFORM_WINDOWS)
+#  define VK_USE_PLATFORM_WIN32_KHR
+#elif defined(DAWN_PLATFORM_ANDROID)
+#  define VK_USE_PLATFORM_ANDROID_KHR
+#elif defined(DAWN_PLATFORM_FUCHSIA)
+#  define VK_USE_PLATFORM_FUCHSIA
+#endif
 #    include <vulkan/vulkan.h>
 
     // VK_NULL_HANDLE is defined to 0 but we don't want our handle type to compare to arbitrary
@@ -155,6 +167,9 @@ class alignas(kNativeVkHandleAlignment) VkNonDispatchableHandle {
 // Remove windows.h macros after vulkan_platform's include of windows.h
 #if defined(DAWN_PLATFORM_WINDOWS)
 #    include "common/windows_with_undefs.h"
+#endif
+#if defined(DAWN_PLATFORM_LINUX)
+#    include "common/xlib_with_undefs.h"
 #endif
 
 #endif  // COMMON_VULKANPLATFORM_H_
