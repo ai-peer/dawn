@@ -93,6 +93,71 @@
       "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f75012a7_b11a97f3",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-15T18:44:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7e7182e9_0a73333a",
+      "range": {
+        "startLine": 61,
+        "startChar": 26,
+        "endLine": 61,
+        "endChar": 36
+      },
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab641860_b166bf44",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-15T18:44:42Z",
+      "side": 1,
+      "message": "Comment threads got split, separating this one again:\n\n\u003e nit: FFFFull or ffffULL for readability if the formatter will allow it",
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72a93ced_6306218a",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-15T18:44:42Z",
+      "side": 1,
+      "message": "Can we just add it to the template(s)?",
+      "parentUuid": "10e95063_da45fb79",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
