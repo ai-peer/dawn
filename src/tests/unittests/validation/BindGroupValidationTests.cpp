@@ -690,3 +690,30 @@ TEST_F(SetBindGroupValidationTest, BindingSizeOutOfBoundDynamicStorageBuffer) {
 
     TestComputePassBindGroup(bindGroup, offsets.data(), 2, false);
 }
+
+// Test cases that test two similar bind group layout won't refer to the same one.
+TEST_F(SetBindGroupValidationTest, ReferToCorrectBindGroupLayout) {
+    // A similar bind group layout which dynamic field set to false. This will trigger
+    // dawn cache system register this bind group layout first, and try to refer this
+    // by checking whether two bind group layouts have the same bindingInfo.
+    dawn::BindGroupLayout interfereBindGroupLayout = utils::MakeBindGroupLayout(
+        device, {{0, dawn::ShaderStageBit::Compute | dawn::ShaderStageBit::Fragment,
+                  dawn::BindingType::UniformBuffer, false},
+                 {1, dawn::ShaderStageBit::Compute | dawn::ShaderStageBit::Fragment,
+                  dawn::BindingType::StorageBuffer, false}});
+
+    // Set up the bind group.
+    dawn::Buffer uniformBuffer = CreateBuffer(kBufferSize, dawn::BufferUsageBit::Uniform);
+    dawn::Buffer storageBuffer = CreateBuffer(kBufferSize, dawn::BufferUsageBit::Storage);
+    dawn::BindGroup bindGroup = utils::MakeBindGroup(
+        device, mBindGroupLayout,
+        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+
+    // Tests should return correct because they should refer to the right bind group layout,
+    // which record dynamic buffer count correctly.
+    std::array<uint64_t, 2> offsets = {256, 0};
+
+    TestRenderPassBindGroup(bindGroup, offsets.data(), 2, true);
+
+    TestComputePassBindGroup(bindGroup, offsets.data(), 2, true);
+}
