@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "303ea84c_124ef43e",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:05:11Z",
+      "side": 1,
+      "message": "Same comments as for the OpenGL CL.",
+      "revId": "28967037a679d1da7d2a2238d77f5cb83e862603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aba6ca55_74f83249",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:05:11Z",
+      "side": 1,
+      "message": "Metal doesn\u0027t run on ARM or Qualcomm GPUs and we can\u0027t discover the device IDs on iOS so we don\u0027t need PowerVR either.",
+      "range": {
+        "startLine": 38,
+        "startChar": 43,
+        "endLine": 38,
+        "endChar": 67
+      },
+      "revId": "28967037a679d1da7d2a2238d77f5cb83e862603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e155ab25_15876b1f",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:05:11Z",
+      "side": 1,
+      "message": "Why is Geforce needed instead of \"NVIDIA\"? There are also NVIDIA Quadro-based Macs.",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "28967037a679d1da7d2a2238d77f5cb83e862603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf521515_6f08acfb",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:05:11Z",
+      "side": 1,
+      "message": "Note for other reviewers, this is ok because CFDataGetBytePtr seems to never return nullptr.",
+      "revId": "28967037a679d1da7d2a2238d77f5cb83e862603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c136dbb_99c0d041",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:05:11Z",
+      "side": 1,
+      "message": "The vendor ID is much more important than the device ID, maybe we could just use GetVendorIdFromVendors and not go through the hassle of doing the display discovery?",
+      "revId": "28967037a679d1da7d2a2238d77f5cb83e862603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
