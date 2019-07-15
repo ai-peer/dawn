@@ -46,6 +46,30 @@
       "revId": "9a9e881a17be7752fa084660d4cb8cb46a5a6daf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fec229ba_51e4cf9c",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-15T21:22:51Z",
+      "side": 1,
+      "message": "Hmm.. I don\u0027t think his comment was correct because right now we\u0027re using the compute shader to copy from an uninitialized texture to an uninitialized buffer.\n\nBoth will be lazy cleared so we can\u0027t tell if the clear is happening in the texture.\nWe can wait to see what cwallez@ thinks so you don\u0027t undo too much work.",
+      "parentUuid": "65663e66_fd656a44",
+      "range": {
+        "startLine": 527,
+        "startChar": 11,
+        "endLine": 529,
+        "endChar": 31
+      },
+      "revId": "9a9e881a17be7752fa084660d4cb8cb46a5a6daf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
