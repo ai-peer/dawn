@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5e818c4e_51958fc5",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:17:23Z",
+      "side": 1,
+      "message": "Actually we should also HashCombine dynamic here.",
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a3b7c5c_68a7c02d",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 3
