@@ -69,6 +69,30 @@
       "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e95063_da45fb79",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-15T17:47:50Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have it in dawn.h, but as far as I know, the generator doesn\u0027t support constants (that aren\u0027t enums) right now. Probably should be #define\u0027d in dawn.h and constexpr in dawncpp.h? If we want to do that, we can do that later and land this first.",
+      "parentUuid": "4e52095b_a19a414e",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
