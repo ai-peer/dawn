@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cda105c_aa8743ae",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:33:25Z",
+      "side": 1,
+      "message": "Are the test fixed on Intel if this is LessEqual ?",
+      "range": {
+        "startLine": 60,
+        "startChar": 84,
+        "endLine": 60,
+        "endChar": 88
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "824593c9_c1b055a6",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:33:25Z",
+      "side": 1,
+      "message": "nit: ColorTypeCount?",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dccbe62_e2fa12a0",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:33:25Z",
+      "side": 1,
+      "message": "nit: defaulted parameters can be skipped.",
+      "range": {
+        "startLine": 153,
+        "startChar": 79,
+        "endLine": 153,
+        "endChar": 90
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd0c610b_763acaae",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:33:25Z",
+      "side": 1,
+      "message": "nit: projecting",
+      "range": {
+        "startLine": 175,
+        "startChar": 59,
+        "endLine": 175,
+        "endChar": 66
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1eff4b81_8979089f",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:33:25Z",
+      "side": 1,
+      "message": "nit: applying",
+      "range": {
+        "startLine": 175,
+        "startChar": 9,
+        "endLine": 175,
+        "endChar": 14
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f11c0790_d8d487a3",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:33:25Z",
+      "side": 1,
+      "message": "It is really weird that this is failing, looking at the open source intel driver, code related to scissor hasn\u0027t changed in 3 years so it is unlikely a driver bug. Maybe the problem is that the pixel somehow gets exactly the value 0.25?",
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
