@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0341f548_8bd57503",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:04:48Z",
+      "side": 1,
+      "message": "This will introduce a \"static initializer\" that is run before \"main\" and is something that Chromium would like to avoid.\n\nAlso here we don\u0027t use the fact that this is a map, and it could just be an array instead.",
+      "revId": "240c6bcb8506c20fecbb17dc2fba833091ada255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f08a24e1_b26b3255",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:04:48Z",
+      "side": 1,
+      "message": "FYI there is the \"range-based for loop\" C++11 feature that allows writing this\n\n   for (const auto\u0026 it : kVendorIdMap)",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 40,
+        "endChar": 46
+      },
+      "revId": "240c6bcb8506c20fecbb17dc2fba833091ada255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ebc99a9_72fc7cf5",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:04:48Z",
+      "side": 1,
+      "message": "nit: We aren\u0027t using the fact that this is an std::string and could use a const char* instead.",
+      "revId": "240c6bcb8506c20fecbb17dc2fba833091ada255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
