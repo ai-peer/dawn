@@ -225,8 +225,15 @@ config("glfw_public") {
 static_library("glfw") {
   public_configs = [ ":glfw_public" ]
 
-  configs -= [ "//build/config/compiler:chromium_code" ]
-  configs += [ "//build/config/compiler:no_chromium_code" ]
+  if (build_with_chromium || dawn_standalone) {
+    configs -= [ "//build/config/compiler:chromium_code" ]
+    configs += [ "//build/config/compiler:no_chromium_code" ]
+  }
+
+  # Avoid CFI call failures at runtime due to function pointer casts.
+  if (build_with_chromium) {
+    configs += [ "//build/config/sanitizers:cfi_icall_disable" ]
+  }
 
   if (is_msvc) {
     # nonstandard extension, function/data pointer conversion in expression

@@ -60,6 +60,12 @@ config("dawn_internal") {
     defines += [ "DAWN_ENABLE_BACKEND_VULKAN" ]
   }
 
+  # Disable CFI icall runtime checks because Dawn performs many function
+  # pointer casts that will trigger failures at runtime.
+  if (build_with_chromium) {
+    configs = [ "//build/config/sanitizers:cfi_icall_disable" ]
+  }
+
   # Only internal Dawn targets can use this config, this means only targets in
   # this BUILD.gn file.
   visibility = [ ":*" ]
