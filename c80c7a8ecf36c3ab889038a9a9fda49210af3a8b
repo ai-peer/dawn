@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2dc2cc7e_b4759362",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-15T17:44:45Z",
+      "side": 1,
+      "message": "I tried, it still failed on bots. See the details below",
+      "parentUuid": "3cda105c_aa8743ae",
+      "range": {
+        "startLine": 60,
+        "startChar": 84,
+        "endLine": 60,
+        "endChar": 88
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "824593c9_c1b055a6",
         "filename": "src/tests/end2end/ViewportTests.cpp",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ce1eef41_0f449548",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-15T17:44:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "824593c9_c1b055a6",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6dccbe62_e2fa12a0",
         "filename": "src/tests/end2end/ViewportTests.cpp",
         "patchSetId": 7
@@ -68,6 +116,30 @@
       "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3da53345_c75db021",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-15T17:44:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dccbe62_e2fa12a0",
+      "range": {
+        "startLine": 153,
+        "startChar": 79,
+        "endLine": 153,
+        "endChar": 90
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +189,54 @@
     },
     {
       "key": {
+        "uuid": "b4f1f429_972c254a",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-15T17:44:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eff4b81_8979089f",
+      "range": {
+        "startLine": 175,
+        "startChar": 9,
+        "endLine": 175,
+        "endChar": 14
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3efb3e96_968aa9c3",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-15T17:44:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd0c610b_763acaae",
+      "range": {
+        "startLine": 175,
+        "startChar": 59,
+        "endLine": 175,
+        "endChar": 66
+      },
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f11c0790_d8d487a3",
         "filename": "src/tests/end2end/ViewportTests.cpp",
         "patchSetId": 7
@@ -131,6 +251,24 @@
       "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef6797b8_3ba9d4f4",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-15T17:44:45Z",
+      "side": 1,
+      "message": "3 tests failed on bots as follow:\nShiftToTopLeftAndApplyDepth: pixel(0, 0)\u0027s depth value should be 3/16 (centroid), or 1/4 (top-left). It can pass if I use LessEqual. It looks like that it use top-left rasterized value as its depth value. So it failed if we use Less but it can pass if we use LessEqual. But I think we should use centroid depth value, not top-left. \nEnlargeViewportAndShiftToTopLeftAndApplyDepth: pixel(3, 3)\u0027s depth value should be 5/32 (centroid), or 3/16 (top-left). Both of these two depth values are less than 0.25. They should be covered by bottom-right triangle. It failed no matter we use LessEqual or Less.\nShrinkViewportAndShiftToTopLeftAndApplyDepth: pixel(0,0)\u0027s depth value should be 1/8 (centroid), or 1/4 (top-left). It can pass if I use LessEuqal. It looks like that it use top-left rasterized value as its depth value. So it failed if we use Less but it can pass if we use LessEqual. But I think we should use centroid depth value, not top-left.",
+      "parentUuid": "f11c0790_d8d487a3",
+      "revId": "c80c7a8ecf36c3ab889038a9a9fda49210af3a8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
