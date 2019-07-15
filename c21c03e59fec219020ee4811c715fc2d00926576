@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "413e096e_86c6e1e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-15T18:02:14Z",
+      "side": 1,
+      "message": "typo: different",
+      "range": {
+        "startLine": 12,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 50
+      },
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2143e161_9f0618a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-15T18:02:14Z",
+      "side": 1,
+      "message": "typo: only one \":\"",
+      "range": {
+        "startLine": 17,
+        "startChar": 8,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e818c4e_51958fc5",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 3
