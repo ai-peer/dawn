@@ -158,6 +158,30 @@
       "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bab8265_bd622e64",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T18:56:38Z",
+      "side": 1,
+      "message": "Yeah we could special case it in the templates.",
+      "parentUuid": "72a93ced_6306218a",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
