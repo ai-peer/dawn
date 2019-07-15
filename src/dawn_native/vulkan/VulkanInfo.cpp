@@ -27,6 +27,22 @@ namespace {
     bool IsExtensionName(const VkExtensionProperties& extension, const char* name) {
         return strncmp(extension.extensionName, name, VK_MAX_EXTENSION_NAME_SIZE) == 0;
     }
+
+    bool EnumerateInstanceExtensions(const char* layer_name,
+                                     const dawn_native::vulkan::VulkanFunctions& vkFunctions,
+                                     std::vector<VkExtensionProperties>* extensions) {
+        uint32_t count = 0;
+        VkResult result =
+            vkFunctions.EnumerateInstanceExtensionProperties(nullptr, &count, nullptr);
+        if (result != VK_SUCCESS && result != VK_INCOMPLETE) {
+            return false;
+        }
+        extensions->resize(count);
+        result =
+            vkFunctions.EnumerateInstanceExtensionProperties(nullptr, &count, extensions->data());
+        return (result == VK_SUCCESS);
+    }
+
 }  // namespace
 
 namespace dawn_native { namespace vulkan {
@@ -34,6 +50,7 @@ namespace dawn_native { namespace vulkan {
     const char kLayerNameLunargStandardValidation[] = "VK_LAYER_LUNARG_standard_validation";
     const char kLayerNameLunargVKTrace[] = "VK_LAYER_LUNARG_vktrace";
     const char kLayerNameRenderDocCapture[] = "VK_LAYER_RENDERDOC_Capture";
+    const char kLayerNameFuchsiaImagePipeSwapchainFb[] = "VK_LAYER_FUCHSIA_imagepipe_swapchain_fb";
 
     const char kExtensionNameExtDebugMarker[] = "VK_EXT_debug_marker";
     const char kExtensionNameExtDebugReport[] = "VK_EXT_debug_report";
@@ -44,10 +61,12 @@ namespace dawn_native { namespace vulkan {
     const char kExtensionNameKhrWin32Surface[] = "VK_KHR_win32_surface";
     const char kExtensionNameKhrXcbSurface[] = "VK_KHR_xcb_surface";
     const char kExtensionNameKhrXlibSurface[] = "VK_KHR_xlib_surface";
+    const char kExtensionNameFuchsiaImagePipeSurface[] = "VK_FUCHSIA_imagepipe_surface";
 
     ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Backend& backend) {
         VulkanGlobalInfo info = {};
         const VulkanFunctions& vkFunctions = backend.GetFunctions();
+        const char* fuchsia_swapchain_layer_name = nullptr;
 
         // Gather the info about the instance layers
         {
@@ -76,22 +95,34 @@ namespace dawn_native { namespace vulkan {
                 if (IsLayerName(layer, kLayerNameRenderDocCapture)) {
                     info.renderDocCapture = true;
                 }
+                // Technical note: Fuchsia implements swapchains through three
+                // different layers that provide the same extension. These are:
+                //
+                // - VK_LAYER_FUCHSIA_image_pipe_swapchain:
+                //   The most sophisticated swapchain implementation, which requires
+                //   a handle from the 'sysmem' system service which manages all kind
+                //   of buffers shared between Fuchsia processes.
+                //
+                // - VK_LAYER_FUCHSIA_image_pipe_swapchain_fb:
+                //   A simple swapchain that allows one to display images directly
+                //   onto the device's framebuffer.
+                //
+                // - VK_LAYER_FUCHSIA_image_pipe_swapchain_fb_skip_present:
+                //   Same as the previous one, but never perform any synchronisation
+                //   with the presentation layer, only useful to benchmark rendering
+                //   performance.
+                //
+                // For now, only use the second one.
+                if (IsLayerName(layer, kLayerNameFuchsiaImagePipeSwapchainFb)) {
+                    info.fuchsiaImagePipeSwapchainFb = true;
+                    fuchsia_swapchain_layer_name = kLayerNameFuchsiaImagePipeSwapchainFb;
+                }
             }
         }
 
         // Gather the info about the instance extensions
         {
-            uint32_t count = 0;
-            VkResult result =
-                vkFunctions.EnumerateInstanceExtensionProperties(nullptr, &count, nullptr);
-            if (result != VK_SUCCESS && result != VK_INCOMPLETE) {
-                return DAWN_CONTEXT_LOST_ERROR("vkEnumerateInstanceExtensionProperties");
-            }
-
-            info.extensions.resize(count);
-            result = vkFunctions.EnumerateInstanceExtensionProperties(nullptr, &count,
-                                                                      info.extensions.data());
-            if (result != VK_SUCCESS) {
+            if (!EnumerateInstanceExtensions(nullptr, vkFunctions, &info.extensions)) {
                 return DAWN_CONTEXT_LOST_ERROR("vkEnumerateInstanceExtensionProperties");
             }
 
@@ -116,6 +147,27 @@ namespace dawn_native { namespace vulkan {
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrXlibSurface)) {
                     info.xlibSurface = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameFuchsiaImagePipeSurface)) {
+                    info.fuchsiaImagePipeSurface = true;
+                }
+            }
+        }
+
+        // Specific handling for the Fuchsia swapchain surface creation extension
+        // which is normally part of the Fuchsia-specific swapchain layer..
+        if (fuchsia_swapchain_layer_name && !info.fuchsiaImagePipeSurface) {
+            std::vector<VkExtensionProperties> layer_extensions;
+            if (!EnumerateInstanceExtensions(fuchsia_swapchain_layer_name, vkFunctions,
+                                             &layer_extensions)) {
+                return DAWN_CONTEXT_LOST_ERROR("vkEnumerateInstanceExtensionProperties");
+            }
+
+            for (const auto& extension : layer_extensions) {
+                if (IsExtensionName(extension, kExtensionNameFuchsiaImagePipeSurface)) {
+                    info.fuchsiaImagePipeSurface = true;
+                    // For now, copy this to the global extension list.
+                    info.extensions.push_back(extension);
                 }
             }
         }
