@@ -25,6 +25,8 @@
 const char kVulkanLibName[] = "libvulkan.so.1";
 #elif DAWN_PLATFORM_WINDOWS
 const char kVulkanLibName[] = "vulkan-1.dll";
+#elif DAWN_PLATFORM_FUCHSIA
+const char kVulkanLibName[] = "libvulkan.so";
 #else
 #    error "Unimplemented Vulkan backend platform"
 #endif
@@ -56,8 +58,9 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Backend::Initialize() {
-        if (!mVulkanLib.Open(kVulkanLibName)) {
-            return DAWN_CONTEXT_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName);
+        std::string error;
+        if (!mVulkanLib.Open(kVulkanLibName, &error)) {
+            return DAWN_CONTEXT_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName + ": " + error);
         }
 
         DAWN_TRY(mFunctions.LoadGlobalProcs(mVulkanLib));
