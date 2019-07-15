@@ -35,15 +35,26 @@ uint32_t ScanForward(uint32_t bits) {
 #endif
 }
 
-uint32_t Log2(uint32_t value) {
+uint32_t Log2(size_t value) {
     ASSERT(value != 0);
 #if defined(DAWN_COMPILER_MSVC)
     unsigned long firstBitIndex = 0ul;
-    unsigned char ret = _BitScanReverse(&firstBitIndex, value);
+    unsigned char ret = (sizeof(size_t) == 4) ? _BitScanReverse(&firstBitIndex, value)
+                                              : _BitScanReverse64(&firstBitIndex, value);
     ASSERT(ret != 0);
     return firstBitIndex;
 #else
-    return 31 - static_cast<uint32_t>(__builtin_clz(value));
+    unsigned long numOfBits = (sizeof(size_t) * __CHAR_BIT__) - 1;
+    return ((sizeof(size_t) == 4)) ? numOfBits - static_cast<uint32_t>(__builtin_clz(value))
+                                   : numOfBits - static_cast<uint32_t>(__builtin_clzll(value));
+#endif
+}
+
+uint64_t AlignToNextPowerOfTwo(uint64_t x) {
+#if defined(DAWN_COMPILER_MSVC)
+    return x == 1 ? 1 : 1 << (64 - __lzcnt64(x - 1));
+#else
+    return x == 1 ? 1 : 1 << (64 - __builtin_clzll(x - 1));
 #endif
 }
 
