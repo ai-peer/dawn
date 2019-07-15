@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "b8a57bec_73d9f62a",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:20:35Z",
+      "side": 1,
+      "message": "And we can compare the whole bitsets together directly at the same point we compare masks.",
+      "parentUuid": "7a3b7c5c_68a7c02d",
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8d39065_d7c3a790",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
