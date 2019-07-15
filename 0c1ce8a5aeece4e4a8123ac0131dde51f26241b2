@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e89634e_cf0d9ae6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:11:13Z",
+      "side": 1,
+      "message": "Whoops, apparently I forgot to remove support for the other BC format in my Vulkan patch, sorry about that.",
+      "revId": "0c1ce8a5aeece4e4a8123ac0131dde51f26241b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3e73d56_3755a6fc",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T11:11:13Z",
+      "side": 1,
+      "message": "I didn\u0027t parse this, do you mean that the sampled values are different because one format is sRGB and the other isn\u0027t? Can we rephrase the comment?",
+      "range": {
+        "startLine": 266,
+        "startChar": 85,
+        "endLine": 267,
+        "endChar": 92
+      },
+      "revId": "0c1ce8a5aeece4e4a8123ac0131dde51f26241b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
