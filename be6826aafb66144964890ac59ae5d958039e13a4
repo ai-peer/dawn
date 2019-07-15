@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49da5522_38612dc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T16:29:46Z",
+      "side": 1,
+      "message": "nit: we should create a bug for this serie of CLs on crbug.com/dawn and reference it in commit messages using BUG\u003ddawn:XXX",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "922b10f8_bbd2c652",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T16:29:46Z",
+      "side": 1,
+      "message": "note: I\u0027m slightly worried that this will break when compiling on systems that are missing headers for one of these (not all systems have wayland yet?), but we can deal with this issue when it arises.",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "468f31f0_626d6179",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T16:29:46Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6f50406_c46cc20d",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T16:29:46Z",
+      "side": 1,
+      "message": "uNit: same comments as for windows.h in [1] here, or we should rephrase [1] to mentions both headers.",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "764b63f8_9868cde4",
+        "filename": "src/common/xlib_with_undefs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T16:29:46Z",
+      "side": 1,
+      "message": "nit: Only Platform.h is needed.",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
