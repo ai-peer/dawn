@@ -77,6 +77,12 @@ namespace dawn_native { namespace vulkan {
             GET_INSTANCE_PROC(GetPhysicalDeviceSurfacePresentModesKHR);
         }
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+        if (usedKnobs.fuchsiaImagePipeSurface) {
+            GET_INSTANCE_PROC(CreateImagePipeSurfaceFUCHSIA);
+        }
+#endif
+
         return {};
     }
 
