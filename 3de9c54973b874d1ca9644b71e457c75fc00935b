@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4763e008_b7668cb7",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-15T20:52:14Z",
+      "side": 1,
+      "message": "I thought we only had structureType in the extension objects, not in the toplevel ones? Did you decide to add it?",
+      "revId": "3de9c54973b874d1ca9644b71e457c75fc00935b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
