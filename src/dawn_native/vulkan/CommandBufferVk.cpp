@@ -30,6 +30,15 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
+        void AddSemaphores(Device* device, Texture* texture) {
+            for (const VkSemaphore& semaphore : texture->GetWaitRequirements()) {
+                device->AddWaitSemaphore(semaphore);
+            }
+            // Only wait on each semaphore once
+            // Because semaphores are unsignaled after wait
+            texture->ClearWaitRequirements();
+        }
+
         VkIndexType VulkanIndexType(dawn::IndexFormat format) {
             switch (format) {
                 case dawn::IndexFormat::Uint16:
@@ -339,7 +348,8 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](VkCommandBuffer commands, const PassResourceUsage& usages) {
+        auto TransitionForPass = [device](VkCommandBuffer commands,
+                                          const PassResourceUsage& usages) {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
                 buffer->TransitionUsageNow(commands, usages.bufferUsages[i]);
@@ -352,6 +362,8 @@ namespace dawn_native { namespace vulkan {
                 texture->EnsureSubresourceContentInitialized(
                     commands, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
                 texture->TransitionUsageNow(commands, usages.textureUsages[i]);
+
+                AddSemaphores(device, texture);
             }
         };
 
@@ -410,6 +422,8 @@ namespace dawn_native { namespace vulkan {
                     device->fn.CmdCopyBufferToImage(commands, srcBuffer, dstImage,
                                                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
                                                     &region);
+
+                    AddSemaphores(device, ToBackend(dst.texture.Get()));
                 } break;
 
                 case Command::CopyTextureToBuffer: {
@@ -435,6 +449,8 @@ namespace dawn_native { namespace vulkan {
                     // The Dawn CopySrc usage is always mapped to GENERAL
                     device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
                                                     dstBuffer, 1, &region);
+
+                    AddSemaphores(device, ToBackend(src.texture.Get()));
                 } break;
 
                 case Command::CopyTextureToTexture: {
@@ -472,6 +488,9 @@ namespace dawn_native { namespace vulkan {
                     // TRANSFER_DST_OPTIMAL layout
                     device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL, dstImage,
                                             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+
+                    AddSemaphores(device, ToBackend(src.texture.Get()));
+                    AddSemaphores(device, ToBackend(dst.texture.Get()));
                 } break;
 
                 case Command::BeginRenderPass: {

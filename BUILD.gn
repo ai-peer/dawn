@@ -642,6 +642,7 @@ test("dawn_end2end_tests") {
   deps = [
     ":dawn_utils",
     ":libdawn_native",
+    ":libdawn_native_sources",
     ":libdawn_wire",
     "${dawn_root}/src/common",
     "${dawn_root}/src/dawn:libdawn",
@@ -695,6 +696,12 @@ test("dawn_end2end_tests") {
     sources += [ "src/tests/end2end/IOSurfaceWrappingTests.cpp" ]
 
     libs += [ "IOSurface.framework" ]
+  }
+
+  if (dawn_enable_vulkan) {
+    deps += [ "third_party:vulkan_headers" ]
+
+    sources += [ "src/tests/end2end/VulkanImageWrappingTests.cpp" ]
   }
 
   # When building inside Chromium, use their gtest main function because it is
