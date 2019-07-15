@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a3b7c5c_68a7c02d",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T09:50:38Z",
+      "side": 1,
+      "message": "Whoops sorry I didn\u0027t notice it during the review.",
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8d39065_d7c3a790",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T09:50:38Z",
+      "side": 1,
+      "message": "This would be a better fit in the ObjectCachingTest file that tests exactly these issues.",
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
