@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e7182e9_0a73333a",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-15T16:57:04Z",
+      "side": 1,
+      "message": "Can we export this constant so it can be used outside Dawn as well? (In particular in Blink)",
+      "range": {
+        "startLine": 61,
+        "startChar": 26,
+        "endLine": 61,
+        "endChar": 36
+      },
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51ea8dd9_620b6395",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-15T16:57:04Z",
+      "side": 1,
+      "message": "nit: FFFFull or ffffULL for readability if the formatter will allow it",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "8f2894063d3fae4c20970851e82deb507b3fb8fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
