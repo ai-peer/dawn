@@ -22,6 +22,30 @@
       "revId": "0f58fa0a1c55e4ea46667cbc6c0816964aa70ab9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7885d5c_b979c3db",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-15T12:14:32Z",
+      "side": 1,
+      "message": "Good catch, I\u0027ll just remove the line :)",
+      "parentUuid": "bfaae81f_9bb734bc",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 4
+      },
+      "revId": "0f58fa0a1c55e4ea46667cbc6c0816964aa70ab9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
