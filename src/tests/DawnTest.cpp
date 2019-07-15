@@ -340,12 +340,9 @@ void DawnTest::SetUp() {
     {
         dawn_native::Instance* instance = gTestEnv->GetInstance();
         std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
-
         for (const dawn_native::Adapter& adapter : adapters) {
             if (adapter.GetBackendType() == backendType) {
-                // TODO(hao.x.li@intel.com): Filter adapter for OpenGL backend once
-                // https://bugs.chromium.org/p/dawn/issues/detail?id=184 is resolved.
-                if (HasVendorIdFilter() && backendType != dawn_native::BackendType::OpenGL) {
+                if (HasVendorIdFilter()) {
                     if (adapter.GetPCIInfo().vendorId == GetVendorIdFilter()) {
                         backendAdapter = adapter;
                         break;
