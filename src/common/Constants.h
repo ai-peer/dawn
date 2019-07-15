@@ -16,6 +16,7 @@
 #define COMMON_CONSTANTS_H_
 
 #include <cstdint>
+#include <string>
 
 static constexpr uint32_t kMaxBindGroups = 4u;
 // TODO(cwallez@chromium.org): investigate bindgroup limits
@@ -50,6 +51,14 @@ static constexpr uint32_t kVendorID_ImgTec = 0x1010;
 static constexpr uint32_t kVendorID_Intel = 0x8086;
 static constexpr uint32_t kVendorID_Nvidia = 0x10DE;
 static constexpr uint32_t kVendorID_Qualcomm = 0x5143;
+
+static const std::string kVendorName_AMD = "AMD";
+static const std::string kVendorName_ARM = "ARM";
+static const std::string kVendorName_ATI = "ATI";
+static const std::string kVendorName_ImgTec = "IMAGINATION";
+static const std::string kVendorName_Intel = "INTEL";
+static const std::string kVendorName_Nvidia = "NVIDIA";
+static const std::string kVendorName_Qualcomm = "QUALCOMM";
 
 // Max texture size constants
 static constexpr uint32_t kMaxTextureSize = 8192u;
