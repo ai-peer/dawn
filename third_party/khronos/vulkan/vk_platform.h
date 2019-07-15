@@ -117,4 +117,8 @@ extern "C"
 #include <xcb/xcb.h>
 #endif
 
+#ifdef VK_USE_PLATFORM_FUCHSIA
+#include <zircon/types.h>
+#endif
+
 #endif
