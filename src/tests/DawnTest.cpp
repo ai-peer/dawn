@@ -441,6 +441,8 @@ void DawnTest::TearDown() {
     for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
         mReadbackSlots[i].buffer.Unmap();
     }
+
+    FlushWire();
 }
 
 void DawnTest::StartExpectDeviceError() {
