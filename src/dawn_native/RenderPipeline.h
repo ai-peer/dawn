@@ -107,9 +107,12 @@ namespace dawn_native {
         std::bitset<kMaxColorAttachments> mColorAttachmentsSet;
         std::array<ColorStateDescriptor, kMaxColorAttachments> mColorStates;
 
+        // Rasterization state
+        bool mHasRasterizationState = false;
+        RasterizationStateDescriptor mRasterizationState;
+
         // Other state
         dawn::PrimitiveTopology mPrimitiveTopology;
-        RasterizationStateDescriptor mRasterizationState;
         uint32_t mSampleCount;
 
         // Stage information
