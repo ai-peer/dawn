@@ -808,6 +808,13 @@ namespace dawn_native { namespace opengl {
                     persistentPipelineState.SetStencilReference(gl, cmd->reference);
                 } break;
 
+                case Command::SetViewport: {
+                    SetViewportCmd* cmd = mCommands.NextCommand<SetViewportCmd>();
+                    gl.Viewport(static_cast<int>(cmd->x), static_cast<int>(cmd->y),
+                                static_cast<int>(cmd->width), static_cast<int>(cmd->height));
+                    gl.DepthRangef(cmd->minDepth, cmd->maxDepth);
+                } break;
+
                 case Command::SetScissorRect: {
                     SetScissorRectCmd* cmd = mCommands.NextCommand<SetScissorRectCmd>();
                     gl.Scissor(cmd->x, cmd->y, cmd->width, cmd->height);

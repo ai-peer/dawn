@@ -325,4 +325,4 @@ TEST_P(ViewportTest, ShrinkViewportAndShiftToBottomRightAndApplyDepth) {
     DoTest(info);
 }
 
-DAWN_INSTANTIATE_TEST(ViewportTest, VulkanBackend);
+DAWN_INSTANTIATE_TEST(ViewportTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
