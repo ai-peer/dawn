@@ -22,6 +22,30 @@
       "revId": "275a5622639b3a6df75dacc14dc833431c7b22c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac5f1a66_23a0d2f9",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-07-16T10:00:54Z",
+      "side": 1,
+      "message": "Sorry, I misunderstood your last comment. Fixed.",
+      "parentUuid": "c5f4b1e7_6965d18c",
+      "range": {
+        "startLine": 28,
+        "startChar": 12,
+        "endLine": 28,
+        "endChar": 23
+      },
+      "revId": "275a5622639b3a6df75dacc14dc833431c7b22c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
