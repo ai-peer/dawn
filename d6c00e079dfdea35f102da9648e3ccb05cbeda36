@@ -87,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "e57c7a80_31162f07",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-16T18:09:33Z",
+      "side": 1,
+      "message": "Don\u0027t we only allow arraylayers\u003d1 textures to be imported?",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "747db590_4f24e27a",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 15
