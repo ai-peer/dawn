@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "3f1de285_3249a05b",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T11:24:36Z",
+      "side": 1,
+      "message": "Uh that\u0027s unfortunate but probably ok for the fallback path.",
+      "parentUuid": "3c649011_a2bdbb67",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "28967037a679d1da7d2a2238d77f5cb83e862603",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf521515_6f08acfb",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 4
