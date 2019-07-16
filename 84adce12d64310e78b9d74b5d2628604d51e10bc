@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20549859_9f7ce3e9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-16T23:18:49Z",
+      "side": 1,
+      "message": "Metal documentation says that \"The x/y rectangle of the viewport must lie entirely within the current attachment size\". This statement is the same as what it is for SetScissorRect. See https://developer.apple.com/documentation/metal/mtlrendercommandencoder/1515527-setviewport?language\u003dobjc. \n\nThe implementation of scissorRect obeys this rule and clip the scissor rect if needed (see the code below), but I didn\u0027t do that. If we have this restriction, then lots of test in ViewportTest can\u0027t pass (and they are impossible to test at all). For example, I enlarged the viewport as twice as the attachment size, I shifted the viewport to top-left or bottom-right of the attachment, making the viewport rect out of the bounds of attachment. If the viewport rect must lie inside the attachment, these tests are not allowed at all.  \n\nHowever, all tests can pass. It looks like Metal doesn\u0027t obey this rule. \n\nWDYT?",
+      "range": {
+        "startLine": 831,
+        "startChar": 1,
+        "endLine": 834,
+        "endChar": 50
+      },
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
