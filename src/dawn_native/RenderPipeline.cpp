@@ -277,7 +277,10 @@ namespace dawn_native {
                                                  descriptor->layout, ShaderStage::Vertex));
         DAWN_TRY(ValidatePipelineStageDescriptor(device, descriptor->fragmentStage,
                                                  descriptor->layout, ShaderStage::Fragment));
-        DAWN_TRY(ValidateRasterizationStateDescriptor(descriptor->rasterizationState));
+
+        if (descriptor->rasterizationState) {
+            DAWN_TRY(ValidateRasterizationStateDescriptor(descriptor->rasterizationState));
+        }
 
         if ((descriptor->vertexStage->module->GetUsedVertexAttributes() & ~attributesSetMask)
                 .any()) {
@@ -339,7 +342,6 @@ namespace dawn_native {
           mVertexInput(*descriptor->vertexInput),
           mHasDepthStencilAttachment(descriptor->depthStencilState != nullptr),
           mPrimitiveTopology(descriptor->primitiveTopology),
-          mRasterizationState(*descriptor->rasterizationState),
           mSampleCount(descriptor->sampleCount),
           mVertexModule(descriptor->vertexStage->module),
           mVertexEntryPoint(descriptor->vertexStage->entryPoint),
@@ -364,6 +366,12 @@ namespace dawn_native {
                 mAttributeInfos[location].offset = mVertexInput.buffers[slot].attributes[i].offset;
                 mAttributeInfos[location].format = mVertexInput.buffers[slot].attributes[i].format;
             }
+        }
+
+        if (descriptor->rasterizationState != nullptr) {
+            mRasterizationState = *descriptor->rasterizationState;
+        } else {
+            mRasterizationState = RasterizationStateDescriptor();
         }
 
         if (mHasDepthStencilAttachment) {
