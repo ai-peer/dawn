@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "6ab5d5eb_60b1425b",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-16T01:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6980fd9e_f3db6045",
+      "range": {
+        "startLine": 266,
+        "startChar": 85,
+        "endLine": 267,
+        "endChar": 92
+      },
+      "revId": "0c1ce8a5aeece4e4a8123ac0131dde51f26241b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f98d062_7a148f6b",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 4
@@ -86,6 +110,30 @@
       "revId": "0c1ce8a5aeece4e4a8123ac0131dde51f26241b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce57528b_8c60be16",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-16T01:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f98d062_7a148f6b",
+      "range": {
+        "startLine": 277,
+        "startChar": 85,
+        "endLine": 279,
+        "endChar": 90
+      },
+      "revId": "0c1ce8a5aeece4e4a8123ac0131dde51f26241b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
