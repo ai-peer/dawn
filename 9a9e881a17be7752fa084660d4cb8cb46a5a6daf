@@ -94,6 +94,30 @@
       "revId": "9a9e881a17be7752fa084660d4cb8cb46a5a6daf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce6192f2_18fbeae6",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-16T21:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaaf9847_ff4817cd",
+      "range": {
+        "startLine": 527,
+        "startChar": 11,
+        "endLine": 529,
+        "endChar": 31
+      },
+      "revId": "9a9e881a17be7752fa084660d4cb8cb46a5a6daf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
