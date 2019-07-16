@@ -34,6 +34,24 @@
       "revId": "3de9c54973b874d1ca9644b71e457c75fc00935b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "508ce889_6136f1d2",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-16T18:30:42Z",
+      "side": 1,
+      "message": "No, just saw it on gerrit\u0027s dependency chain and skimmed it. I\u0027ll look there.",
+      "parentUuid": "a93360e9_71592f75",
+      "revId": "3de9c54973b874d1ca9644b71e457c75fc00935b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
