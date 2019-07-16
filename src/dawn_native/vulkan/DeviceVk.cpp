@@ -296,8 +296,8 @@ namespace dawn_native { namespace vulkan {
         submitInfo.pWaitDstStageMask = dstStageMasks.data();
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = &mPendingCommands.commandBuffer;
-        submitInfo.signalSemaphoreCount = 0;
-        submitInfo.pSignalSemaphores = 0;
+        submitInfo.signalSemaphoreCount = mSignalSemaphores.size();
+        submitInfo.pSignalSemaphores = mSignalSemaphores.data();
 
         VkFence fence = GetUnusedFence();
         if (fn.QueueSubmit(mQueue, 1, &submitInfo, fence) != VK_SUCCESS) {
@@ -313,10 +313,19 @@ namespace dawn_native { namespace vulkan {
             mDeleter->DeleteWhenUnused(semaphore);
         }
         mWaitSemaphores.clear();
+
+        for (VkSemaphore semaphore : mSignalSemaphores) {
+            mDeleter->DeleteWhenUnused(semaphore);
+        }
+        mSignalSemaphores.clear();
     }
 
     void Device::AddWaitSemaphore(VkSemaphore semaphore) {
         mWaitSemaphores.push_back(semaphore);
+    }
+
+    void Device::AddSignalSemaphore(VkSemaphore semaphore) {
+        mSignalSemaphores.push_back(semaphore);
     }
 
     ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalDevice) {
@@ -330,6 +339,26 @@ namespace dawn_native { namespace vulkan {
         if (mDeviceInfo.debugMarker) {
             extensionsToRequest.push_back(kExtensionNameExtDebugMarker);
             usedKnobs.debugMarker = true;
+        }
+
+        if (mDeviceInfo.externalMemory) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalMemory);
+            usedKnobs.externalMemory = true;
+        }
+
+        if (mDeviceInfo.externalMemoryFd) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalMemoryFd);
+            usedKnobs.externalMemoryFd = true;
+        }
+
+        if (mDeviceInfo.externalSemaphore) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphore);
+            usedKnobs.externalSemaphore = true;
+        }
+
+        if (mDeviceInfo.externalSemaphoreFd) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreFd);
+            usedKnobs.externalSemaphoreFd = true;
         }
 
         if (mDeviceInfo.swapchain) {
@@ -537,5 +566,18 @@ namespace dawn_native { namespace vulkan {
                                ToBackend(destination)->GetHandle(), 1, &copy);
 
         return {};
+    }
+
+    TextureBase* Device::CreateTextureWrappingVulkanImage(const TextureDescriptor* descriptor,
+                                                          int memoryFd,
+                                                          const std::vector<int>& waitFds) {
+        if (ConsumedError(ValidateTextureDescriptor(this, descriptor))) {
+            return nullptr;
+        }
+        if (ConsumedError(ValidateVulkanImageCanBeWrapped(this, descriptor))) {
+            return nullptr;
+        }
+
+        return new Texture(this, descriptor, memoryFd, waitFds);
     }
 }}  // namespace dawn_native::vulkan

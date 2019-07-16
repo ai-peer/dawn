@@ -706,6 +706,42 @@ test("dawn_end2end_tests") {
   }
 }
 
+test("dawn_white_box_tests") {
+  configs += [ "${dawn_root}/src/common:dawn_internal" ]
+
+  deps = [
+    ":dawn_utils",
+    ":libdawn_native",
+    ":libdawn_native_sources",
+    ":libdawn_wire",
+    "${dawn_root}/src/common",
+    "${dawn_root}/src/dawn:libdawn",
+    "third_party:glfw",
+    "third_party:gmock_and_gtest",
+  ]
+
+  sources = [
+    "src/tests/DawnTest.cpp",
+    "src/tests/DawnTest.h",
+  ]
+
+  libs = []
+
+  if (dawn_enable_vulkan) {
+    deps += [ "third_party:vulkan_headers" ]
+
+    sources += [ "src/tests/whitebox/VulkanImageWrappingTests.cpp" ]
+  }
+
+  # When building inside Chromium, use their gtest main function because it is
+  # needed to run in swarming correctly.
+  if (build_with_chromium) {
+    sources += [ "//gpu/dawn_end2end_tests_main.cc" ]
+  } else {
+    sources += [ "src/tests/End2EndTestsMain.cpp" ]
+  }
+}
+
 # Temporary groups to make a 5-way patch to fix crbug.com/913171
 group("dawn_unittests_temp_group") {
   testonly = true

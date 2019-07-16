@@ -62,6 +62,7 @@ namespace dawn_native { namespace vulkan {
         Serial GetPendingCommandSerial() const override;
         void SubmitPendingCommands();
         void AddWaitSemaphore(VkSemaphore semaphore);
+        void AddSignalSemaphore(VkSemaphore semaphore);
 
         // Dawn API
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder,
@@ -77,6 +78,10 @@ namespace dawn_native { namespace vulkan {
                                            BufferBase* destination,
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
+
+        TextureBase* CreateTextureWrappingVulkanImage(const TextureDescriptor* descriptor,
+                                                      int memoryFd,
+                                                      const std::vector<int>& waitFds);
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -143,6 +148,7 @@ namespace dawn_native { namespace vulkan {
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
         std::vector<VkSemaphore> mWaitSemaphores;
+        std::vector<VkSemaphore> mSignalSemaphores;
     };
 
 }}  // namespace dawn_native::vulkan
