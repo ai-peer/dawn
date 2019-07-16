@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "b98e41c7_cc439e92",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2019-07-16T14:29:51Z",
+      "side": 1,
+      "message": "I have removed the WAYLAND definition with a comment explaining why.",
+      "parentUuid": "922b10f8_bbd2c652",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "468f31f0_626d6179",
         "filename": "src/common/vulkan_platform.h",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2019-07-15T16:29:46Z",
       "side": 1,
       "message": "[1]",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b8a424a_a66a560f",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2019-07-16T14:29:51Z",
+      "side": 1,
+      "message": "Not sure what you meant here",
+      "parentUuid": "468f31f0_626d6179",
       "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "21c6c2f9_529f0ac6",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2019-07-16T14:29:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6f50406_c46cc20d",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "764b63f8_9868cde4",
         "filename": "src/common/xlib_with_undefs.h",
         "patchSetId": 2
@@ -90,6 +144,30 @@
       "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cacd05e7_0d20eb46",
+        "filename": "src/common/xlib_with_undefs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2019-07-16T14:29:51Z",
+      "side": 1,
+      "message": "Good point. Done",
+      "parentUuid": "764b63f8_9868cde4",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
