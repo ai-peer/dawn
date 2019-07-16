@@ -88,7 +88,8 @@ namespace dawn_native {
 
             for (uint32_t binding : IterateBitSet(a.mask)) {
                 if ((a.visibilities[binding] != b.visibilities[binding]) ||
-                    (a.types[binding] != b.types[binding])) {
+                    (a.types[binding] != b.types[binding]) ||
+                    (a.dynamic[binding] != b.dynamic[binding])) {
                     return false;
                 }
             }
