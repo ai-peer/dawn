@@ -1,0 +1,283 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22687640_02ac490b",
+        "filename": "BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "This is a bunch of additional work bu can we split this into a new test harness called dawn_whitebox_tests like we have angle_whitebox_tests? dawn_end2end_tests is great to test the API surface of dawn but won\u0027t scale to test backend internals.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "934f9fde_468dd2b3",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "When this is refactored in TransitionUsageNow, note that we only need to add the semaphores once (and it would actually be invalid to do it multiple times)",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b3a8ebd_673b02a3",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "All the AddSemaphores are in places where we also do TransitionUsageNow. I suggest we introduce a \"CommandRecordingContext\" that\u0027s passed to the TransitionUsageNow on which semaphores can be added. TransitionUsageNow could be (could probably find a better name): AccessOnRecordingContext.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4129cb78_2d72fb06",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "We also need to validate that we have the correct Vulkan extensions, and also that the handle types are supported by our physical device (which means we also need to query data about these imported handles from the physical device).",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d89e2ea_5d8b417d",
+        "filename": "src/dawn_native/vulkan/MemoryAllocator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed: right now it is used for tests which could do their own allocation for each resources, and for TextureVk\u0027s import path that doesn\u0027t need to go through the memory allocator since we already have it in the FD.\n\nAlso we need to get the size and memorytype from the outside because Vulkan asks that they match the initial creation of the FD.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "747db590_4f24e27a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "In the descriptors for wrapping the texture the external world should tell us whether the texture was cleared. We should also be able to query if the texture was cleared before it is destroyed. I think Rafael will handle that part.",
+      "range": {
+        "startLine": 595,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 55
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a948a82d_38396687",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "This should be done probably on the device. VulkanBackend.cpp should be almost as passthrough as possible because it is compiled multiple times.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03381062_ecf45b95",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "Can we have some validation here like the device is valid, the texture isn\u0027t destroyed and this is actually an external texture?",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5abeab11_ce45e627",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "The non-fd extensions here have also been merged in Vulkan 1.1 can we add logic here and in VulkanFunctions that handles that? (here is would at the end of the function do if 1.1 then extension is true, in VulkanFunctions first check 1.1 and load core entrypoints otherwise load extension.)",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cf14d00_df3c9403",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "WrapVulkanExternalMemoryImageFd or something like this?",
+      "range": {
+        "startLine": 33,
+        "startChar": 35,
+        "endLine": 33,
+        "endChar": 50
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d25b8ca7_77297033",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "This should also have a detailed comment explaining what happens and what all the parameters do as well as what happens on failure.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6760363_0b38af71",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "Along with the memory fd we need the memorySize and memoryTypeIndex (and maybe physical device for validation) because they are required to match the initial allocation. We also likely need the handle type for that fd. We could have a descriptor for this.",
+      "range": {
+        "startLine": 35,
+        "startChar": 51,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0c64dd0_99059815",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "The name should also explain that this is only for imported textures.",
+      "range": {
+        "startLine": 38,
+        "startChar": 27,
+        "endLine": 38,
+        "endChar": 50
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6d358da_023e378e",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "This needs to be able to fail.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61ad6114_796618dd",
+        "filename": "src/tests/end2end/VulkanImageWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:26:35Z",
+      "side": 1,
+      "message": "I didn\u0027t review the tests in detail, and as noted in BUILD.gn this should live in a dawn_whitebox_tests binary because dawn_end2end_tests isn\u0027t well set up to test internal details of the backends, and to split tests between those testing through the API surface and those testing implementation details.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
