@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5f4b1e7_6965d18c",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T08:32:08Z",
+      "side": 1,
+      "message": "This is a static initializer when used in kVendors as well, please use const char*",
+      "range": {
+        "startLine": 28,
+        "startChar": 12,
+        "endLine": 28,
+        "endChar": 23
+      },
+      "revId": "275a5622639b3a6df75dacc14dc833431c7b22c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
