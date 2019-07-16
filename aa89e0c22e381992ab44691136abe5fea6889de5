@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "700a53c1_0c714eff",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T08:40:01Z",
+      "side": 1,
+      "message": "This member is only used in the constructor, instead of storing mHasRasterizationState, we could use \"descriptor-\u003erasterizationState !\u003d nullptr\" in the condition that\u0027s added in this CL.",
+      "revId": "aa89e0c22e381992ab44691136abe5fea6889de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbc57bfb_7e602242",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T08:40:01Z",
+      "side": 1,
+      "message": "This is equivalent to mRasterizationState \u003d RasterizationStateDescriptor(). Or it would if that descriptor had defaults. We can add them to dawn_platform.h the same way we did it for dawncpp.h (I can make a CL for that if you want)",
+      "range": {
+        "startLine": 375,
+        "startChar": 1,
+        "endLine": 380,
+        "endChar": 53
+      },
+      "revId": "aa89e0c22e381992ab44691136abe5fea6889de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d12576b_d9d9e514",
+        "filename": "src/tests/unittests/wire/WireOptionalTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T08:40:01Z",
+      "side": 1,
+      "message": "As discussed offline, this test isn\u0027t really needed.",
+      "revId": "aa89e0c22e381992ab44691136abe5fea6889de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
