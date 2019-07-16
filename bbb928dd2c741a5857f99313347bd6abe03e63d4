@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75bb8665_66d66605",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T13:28:09Z",
+      "side": 1,
+      "message": "This should be 0xFFFFFFFFFFFFFFFFull (or opposite casing)",
+      "range": {
+        "startLine": 24,
+        "startChar": 33,
+        "endLine": 24,
+        "endChar": 42
+      },
+      "revId": "bbb928dd2c741a5857f99313347bd6abe03e63d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
