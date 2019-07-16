@@ -59,13 +59,14 @@ namespace dawn_native {
 
         bool operator==(const BindGroupLayoutBase::LayoutBindingInfo& a,
                         const BindGroupLayoutBase::LayoutBindingInfo& b) {
-            if (a.mask != b.mask) {
+            if (a.mask != b.mask || a.dynamic != b.dynamic) {
                 return false;
             }
 
             for (uint32_t binding : IterateBitSet(a.mask)) {
                 if ((a.visibilities[binding] != b.visibilities[binding]) ||
-                    (a.types[binding] != b.types[binding])) {
+                    (a.types[binding] != b.types[binding]) ||
+                    (a.dynamic[binding] != b.dynamic[binding])) {
                     return false;
                 }
             }
