@@ -16,6 +16,24 @@
       "revId": "3de9c54973b874d1ca9644b71e457c75fc00935b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a93360e9_71592f75",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T08:42:38Z",
+      "side": 1,
+      "message": "I assume you looked at this based on the GitHub PR for webgpu.h? Because this is just me storing patches and not for review :) See discussion on webgpu.h for why I think we should add it.",
+      "parentUuid": "4763e008_b7668cb7",
+      "revId": "3de9c54973b874d1ca9644b71e457c75fc00935b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
