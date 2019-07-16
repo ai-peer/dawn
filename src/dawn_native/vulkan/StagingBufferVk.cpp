@@ -42,7 +42,7 @@ namespace dawn_native { namespace vulkan {
         VkMemoryRequirements requirements;
         mDevice->fn.GetBufferMemoryRequirements(mDevice->GetVkDevice(), mBuffer, &requirements);
 
-        if (!mDevice->GetMemoryAllocator()->Allocate(requirements, true, &mAllocation)) {
+        if (!mDevice->GetMemoryAllocator()->Allocate(requirements, true, nullptr, &mAllocation)) {
             return DAWN_CONTEXT_LOST_ERROR("Unable to allocate memory for staging buffer.");
         }
 
