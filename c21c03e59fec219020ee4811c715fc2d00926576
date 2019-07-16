@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "04816301_c68c8c22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "413e096e_86c6e1e1",
+      "range": {
+        "startLine": 12,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 50
+      },
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2143e161_9f0618a0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3604d96b_a6e31e98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2143e161_9f0618a0",
+      "range": {
+        "startLine": 17,
+        "startChar": 8,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e818c4e_51958fc5",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 3
@@ -62,6 +110,24 @@
       "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa57d93e_b7a19607",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e818c4e_51958fc5",
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -100,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "159dcbc4_38e736a4",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8a57bec_73d9f62a",
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8d39065_d7c3a790",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -114,6 +198,24 @@
       "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57b36725_3efd31b0",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8d39065_d7c3a790",
+      "revId": "c21c03e59fec219020ee4811c715fc2d00926576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

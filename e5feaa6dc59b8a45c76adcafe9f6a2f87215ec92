@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3da99a83_703aa05d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98e75234_07138fab",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fcb56b7_3c890b78",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "4769acfd_2b386195",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fcb56b7_3c890b78",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68af16d7_a67058b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87e233c6_919cae2a",
+      "range": {
+        "startLine": 9,
+        "startChar": 15,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76684f59_abf9b67b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88d71508_8cfacb33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76684f59_abf9b67b",
+      "range": {
+        "startLine": 10,
+        "startChar": 19,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "354192c3_a42362c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69fcbd04_e86174d5",
+      "range": {
+        "startLine": 12,
+        "startChar": 62,
+        "endLine": 12,
+        "endChar": 68
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0ddda16_9f693d0f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f92ee7c_dcf63694",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0ddda16_9f693d0f",
+      "range": {
+        "startLine": 13,
+        "startChar": 78,
+        "endLine": 13,
+        "endChar": 81
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "8e31e9d6_9866af81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9751069_04a796e6",
+      "range": {
+        "startLine": 15,
+        "startChar": 16,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f5d6784_c100c27e",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
@@ -183,6 +351,30 @@
       "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17ec13b8_275cc46b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f5d6784_c100c27e",
+      "range": {
+        "startLine": 694,
+        "startChar": 47,
+        "endLine": 694,
+        "endChar": 54
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "734643d6_419698ab",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15c49ed8_abf69d12",
+      "range": {
+        "startLine": 696,
+        "startChar": 55,
+        "endLine": 696,
+        "endChar": 58
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a300df25_15c919fd",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
@@ -229,6 +445,30 @@
       "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a668057_d217a039",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a300df25_15c919fd",
+      "range": {
+        "startLine": 697,
+        "startChar": 25,
+        "endLine": 697,
+        "endChar": 33
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "4a4d32dc_62bcfbee",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4904dc5_d6d7732a",
+      "range": {
+        "startLine": 712,
+        "startChar": 20,
+        "endLine": 712,
+        "endChar": 35
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b084015a_c662c05c",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
@@ -275,6 +539,30 @@
       "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "850fa3b4_043d73ca",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-16T02:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b084015a_c662c05c",
+      "range": {
+        "startLine": 713,
+        "startChar": 13,
+        "endLine": 713,
+        "endChar": 19
+      },
+      "revId": "e5feaa6dc59b8a45c76adcafe9f6a2f87215ec92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
