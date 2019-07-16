@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4314be0f_ffff251e",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T14:46:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b98e41c7_cc439e92",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "468f31f0_626d6179",
         "filename": "src/common/vulkan_platform.h",
         "patchSetId": 2
@@ -86,6 +104,24 @@
       "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fc8c1f8_f162719f",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-16T14:46:22Z",
+      "side": 1,
+      "message": "(it was a reference used in the comment line 171)",
+      "parentUuid": "6b8a424a_a66a560f",
+      "revId": "be6826aafb66144964890ac59ae5d958039e13a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
