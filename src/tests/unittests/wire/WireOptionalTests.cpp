@@ -199,4 +199,16 @@ TEST_F(WireOptionalTests, OptionalStructPointer) {
         .WillOnce(Return(apiDummyPipeline));
 
     FlushClient();
+
+    // Third case: rasterizationState is null.
+    pipelineDescriptor.rasterizationState = nullptr;
+    dawnDeviceCreateRenderPipeline(device, &pipelineDescriptor);
+    EXPECT_CALL(api,
+                DeviceCreateRenderPipeline(
+                    apiDevice, MatchesLambda([](const DawnRenderPipelineDescriptor* desc) -> bool {
+                        return desc->rasterizationState == nullptr;
+                    })))
+        .WillOnce(Return(apiDummyPipeline));
+
+    FlushClient();
 }

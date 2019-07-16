@@ -277,7 +277,10 @@ namespace dawn_native {
                                                  descriptor->layout, ShaderStage::Vertex));
         DAWN_TRY(ValidatePipelineStageDescriptor(device, descriptor->fragmentStage,
                                                  descriptor->layout, ShaderStage::Fragment));
-        DAWN_TRY(ValidateRasterizationStateDescriptor(descriptor->rasterizationState));
+
+        if (descriptor->rasterizationState) {
+            DAWN_TRY(ValidateRasterizationStateDescriptor(descriptor->rasterizationState));
+        }
 
         if ((descriptor->vertexStage->module->GetUsedVertexAttributes() & ~attributesSetMask)
                 .any()) {
@@ -338,8 +341,8 @@ namespace dawn_native {
                        dawn::ShaderStageBit::Vertex | dawn::ShaderStageBit::Fragment),
           mVertexInput(*descriptor->vertexInput),
           mHasDepthStencilAttachment(descriptor->depthStencilState != nullptr),
+          mHasRasterizationState(descriptor->rasterizationState != nullptr),
           mPrimitiveTopology(descriptor->primitiveTopology),
-          mRasterizationState(*descriptor->rasterizationState),
           mSampleCount(descriptor->sampleCount),
           mVertexModule(descriptor->vertexStage->module),
           mVertexEntryPoint(descriptor->vertexStage->entryPoint),
@@ -364,6 +367,17 @@ namespace dawn_native {
                 mAttributeInfos[location].offset = mVertexInput.buffers[slot].attributes[i].offset;
                 mAttributeInfos[location].format = mVertexInput.buffers[slot].attributes[i].format;
             }
+        }
+
+        if (mHasRasterizationState) {
+            mRasterizationState = *descriptor->rasterizationState;
+        } else {
+            mRasterizationState.nextInChain = nullptr;
+            mRasterizationState.frontFace = dawn::FrontFace::CCW;
+            mRasterizationState.cullMode = dawn::CullMode::None;
+            mRasterizationState.depthBias = 0;
+            mRasterizationState.depthBiasSlopeScale = 0.0;
+            mRasterizationState.depthBiasClamp = 0.0;
         }
 
         if (mHasDepthStencilAttachment) {
