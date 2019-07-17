@@ -35,6 +35,10 @@ static constexpr uint32_t kMaxColorAttachments = 4u;
 static constexpr uint32_t kTextureRowPitchAlignment = 256u;
 // Dynamic buffer offsets require offset to be divisible by 256
 static constexpr uint64_t kMinDynamicBufferOffsetAlignment = 256u;
+// Max numbers of dynamic buffers
+static constexpr uint32_t kMaxUniformDynamicBufferCount = 5u;
+static constexpr uint32_t kMaxStorageDynamicBufferCount = 2u;
+static constexpr uint32_t kMaxDynamicBufferCount = 7u;
 // Indirect command sizes
 static constexpr uint64_t kDispatchIndirectSize = 3 * sizeof(uint32_t);
 static constexpr uint64_t kDrawIndirectSize = 4 * sizeof(uint32_t);

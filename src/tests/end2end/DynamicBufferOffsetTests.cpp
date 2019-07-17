@@ -212,4 +212,5 @@ TEST_P(DynamicBufferOffsetTests, SetDynamicOffestsComputePipeline) {
                                kMinDynamicBufferOffsetAlignment, expectedData.size());
 }
 
-DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests, MetalBackend, VulkanBackend);
+// DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests, MetalBackend, VulkanBackend, D3D12Backend);
+DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests, D3D12Backend);

@@ -151,10 +151,49 @@ namespace dawn_native { namespace d3d12 {
                           PipelineLayout* pipelineLayout,
                           BindGroup* group,
                           uint32_t index,
+                          uint32_t dynamicOffsetCount,
+                          uint64_t* dynamicOffsets,
                           bool force = false) {
             if (mBindGroups[index] != group || force) {
                 mBindGroups[index] = group;
+                uint32_t currentDynamicBufferIndex = 0;
 
+                auto& layout = group->GetLayout()->GetBindingInfo();
+                for (uint32_t bindingIndex : IterateBitSet(layout.dynamic)) {
+                    ASSERT(dynamicOffsetCount > 0);
+                    uint32_t parameterIndex =
+                        pipelineLayout->GetRootParameterInfo(index, bindingIndex);
+                    BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
+                    uint64_t offset = dynamicOffsets[currentDynamicBufferIndex++] + binding.offset;
+                    D3D12_GPU_VIRTUAL_ADDRESS bufferLocation =
+                        ToBackend(binding.buffer)->GetVA() + offset;
+                    switch (layout.types[bindingIndex]) {
+                        case dawn::BindingType::UniformBuffer:
+                            if (mInCompute) {
+                                commandList->SetComputeRootConstantBufferView(parameterIndex,
+                                                                              bufferLocation);
+                            } else {
+                                commandList->SetGraphicsRootConstantBufferView(parameterIndex,
+                                                                               bufferLocation);
+                            }
+                            break;
+                        case dawn::BindingType::StorageBuffer:
+                            if (mInCompute) {
+                                commandList->SetComputeRootUnorderedAccessView(parameterIndex,
+                                                                               bufferLocation);
+                            } else {
+                                commandList->SetGraphicsRootUnorderedAccessView(parameterIndex,
+                                                                                bufferLocation);
+                            }
+                            break;
+                        case dawn::BindingType::SampledTexture:
+                        case dawn::BindingType::Sampler:
+                        case dawn::BindingType::StorageTexture:
+                        case dawn::BindingType::ReadonlyStorageBuffer:
+                            UNREACHABLE();
+                            break;
+                    }
+                }
                 uint32_t cbvUavSrvCount =
                     ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount();
                 uint32_t samplerCount = ToBackend(group->GetLayout())->GetSamplerDescriptorCount();
@@ -198,7 +237,7 @@ namespace dawn_native { namespace d3d12 {
 
             uint32_t inheritUntil = oldLayout->GroupsInheritUpTo(newLayout);
             for (uint32_t i = 0; i < inheritUntil; ++i) {
-                SetBindGroup(commandList, newLayout, mBindGroups[i], i, true);
+                SetBindGroup(commandList, newLayout, mBindGroups[i], i, 0, nullptr, true);
             }
         }
 
@@ -743,7 +782,12 @@ namespace dawn_native { namespace d3d12 {
                 case Command::SetBindGroup: {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     BindGroup* group = ToBackend(cmd->group.Get());
-                    bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index);
+                    uint64_t* dynamicOffsets = nullptr;
+                    if (cmd->dynamicOffsetCount > 0) {
+                        dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
+                    }
+                    bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index,
+                                                 cmd->dynamicOffsetCount, dynamicOffsets);
                 } break;
 
                 default: { UNREACHABLE(); } break;
@@ -987,7 +1031,13 @@ namespace dawn_native { namespace d3d12 {
                 case Command::SetBindGroup: {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     BindGroup* group = ToBackend(cmd->group.Get());
-                    bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index);
+                    uint64_t* dynamicOffsets = nullptr;
+                    if (cmd->dynamicOffsetCount > 0) {
+                        dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
+                    }
+
+                    bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index,
+                                                 cmd->dynamicOffsetCount, dynamicOffsets);
                 } break;
 
                 case Command::SetIndexBuffer: {
