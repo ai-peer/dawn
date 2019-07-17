@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "985c33cb_15f75cd4",
+        "filename": "src/dawn_wire/server/ServerMemoryTransferService_mock.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "Do these `new`s get freed?",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 41
+      },
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "989bacfb_1ea1cb2e",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -69,6 +92,137 @@
       "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c438c1b7_c4d85bb9",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "nit: separate static and non-static declarations?",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 37
+      },
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "648144b0_61ee2a62",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "mBufferContent, etc?\n\nMaybe m is the wrong prefix for statics, but it\u0027s harder to read code when you can\u0027t tell the variables are not from local scope. I think m is fine.",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 98
+      },
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77e0213b_124c0222",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "Are these expects actually hit? There\u0027s no flush in this test like the others.\n\nAlso couldn\u0027t this equivalently be done with a mock expectation like most other tests?",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "756e7bee_3ca77fda",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "Is this expected to not be called? IIRC we try to guarantee it will always be called. Should have a mock expectation like everywhere else, I think.",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "637b7b01_96c730be",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f75cafe0_f31ad66e",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab73dc29_9744e94c",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T18:41:56Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {
