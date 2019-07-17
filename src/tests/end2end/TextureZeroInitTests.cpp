@@ -501,14 +501,15 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
     dawn::Texture texture = device.CreateTexture(&descriptor);
 
     uint32_t bufferSize = 4;
-    dawn::BufferDescriptor bufferDescriptor;
-    bufferDescriptor.size = bufferSize;
-    bufferDescriptor.usage = dawn::BufferUsageBit::CopySrc | dawn::BufferUsageBit::Storage |
-                             dawn::BufferUsageBit::CopyDst;
-    dawn::Buffer bufferTex = device.CreateBuffer(&bufferDescriptor);
+    // dawn::BufferDescriptor bufferDescriptor;
+    // bufferDescriptor.size = bufferSize;
+    // bufferDescriptor.usage = dawn::BufferUsageBit::CopySrc | dawn::BufferUsageBit::Storage |
+    //                          dawn::BufferUsageBit::CopyDst;
     // Add data to buffer to ensure it is initialized
-    uint32_t data = 100;
-    bufferTex.SetSubData(0, sizeof(data), &data);
+    std::vector<uint32_t> data(bufferSize, 100);
+    dawn::Buffer bufferTex =
+        utils::CreateBufferFromData(device, data.data(), data.size(),
+                                    dawn::BufferUsageBit::CopySrc | dawn::BufferUsageBit::Storage);
 
     dawn::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
     dawn::Sampler sampler = device.CreateSampler(&samplerDesc);
