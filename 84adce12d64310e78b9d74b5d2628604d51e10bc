@@ -46,6 +46,29 @@
       "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b92a618f_70bdca30",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-17T14:35:23Z",
+      "side": 1,
+      "message": "Does this need to be reset at the beginning of a RenderPass? Otherwise, the state will persist between render passes. If it does need to be reset, let\u0027s add tests that would have caught the problem.",
+      "range": {
+        "startLine": 815,
+        "startChar": 23,
+        "endLine": 815,
+        "endChar": 34
+      },
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
