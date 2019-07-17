@@ -117,13 +117,76 @@ config("khronos_headers_public") {
   include_dirs = [ "khronos" ]
 }
 
-source_set("vulkan_headers") {
-  sources = [
-    "khronos/vulkan/vk_platform.h",
-    "khronos/vulkan/vulkan.h",
-  ]
+# NOTE: The upstream Khronos Vulkan-Headers source tree now provides a
+# BUILD.gn that defines a "vulkan_headers" source_set target that includes
+# non-platform-specific headers and a public config that defines
+# VK_USE_PLATFORM_XXX depending on the target platform.
+#
+# However, the situation in Chromium is currently a little bit messy:
+#
+# - Chromium has third_party/vulkan/BUILD.gn which defines a
+#   "vulkan_config" target that simply adds third_party/vulkan/include
+#   to include_dirs and defines VK_NO_PROTOTYPES.
+#
+# - Dependent targets will depend on that config, but also tend to
+#   add //third_party/vulkan/include to their include_dirs explicitly.
+#
+# - Some other targets include their own copies of a more recent
+#   checkout of Vulkan-Headers and use its BUILD.gn file.
+#
+# - None of the existing build_overrides/<project>.gni provide settings
+#   to locate the vulkan-headers directory.
+#
+# To work around the issue, and support a future Chromium checkout where
+# the newer upstream is available from //third_party/vulkan-headers/
+# in Chromium, do the following:
+#
+# - Check if dawn_vulkan_header_dirs is defined. It is not defined by
+#   the current Chromium //build_overrides/dawn.gni, so if this is the
+#   case, assume everything is located under //third_party/vulkan/include
+#   and add the necessary VK_USE_PLATFORM_XXX definitions.
+#
+# - Otherwise, use the upstream BUILD.gn and GN target name.
+#
+if (build_with_chromium && !defined(dawn_vulkan_headers_dirs)) {
+  # The following is a copy of a recent upstream Vulkan-Headers BUILD.gn
+  # with the path changed to the Chromium-specific //third_party/vulkan/include
+  config("vulkan_headers_config") {
+    include_dirs = [ "//third_party/vulkan/include" ]
 
-  public_configs = [ ":khronos_headers_public" ]
+    if (is_win) {
+      defines = [ "VK_USE_PLATFORM_WIN32_KHR" ]
+    }
+    if (is_linux) {
+      defines = [ "VK_USE_PLATFORM_XCB_KHR" ]
+    }
+    if (is_android) {
+      defines = [ "VK_USE_PLATFORM_ANDROID_KHR" ]
+    }
+    if (is_fuchsia) {
+      defines = [ "VK_USE_PLATFORM_FUCHSIA" ]
+    }
+  }
+
+  # Vulkan headers only, no compiled sources.
+  source_set("vulkan_headers") {
+    sources = [
+      "//third_party/vulkan/include/vulkan/vk_icd.h",
+      "//third_party/vulkan/include/vulkan/vk_layer.h",
+      "//third_party/vulkan/include/vulkan/vk_platform.h",
+      "//third_party/vulkan/include/vulkan/vk_sdk_platform.h",
+      "//third_party/vulkan/include/vulkan/vulkan.h",
+      "//third_party/vulkan/include/vulkan/vulkan.hpp",
+      "//third_party/vulkan/include/vulkan/vulkan_core.h",
+    ]
+    public_configs = [ ":vulkan_headers_config" ]
+  }
+} else {
+  group("vulkan_headers") {
+    public_deps = [
+      "${dawn_vulkan_headers_dir}:vulkan_headers",
+    ]
+  }
 }
 
 source_set("khronos_platform") {

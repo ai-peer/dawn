@@ -20,6 +20,7 @@ third_party/shaderc/
 third_party/spirv-cross/
 third_party/spirv-headers/
 third_party/stb/
+third_party/vulkan-headers/
 tools
 out
 

@@ -19,6 +19,7 @@
 # inside if constructs.
 
 import("//build_overrides/dawn.gni")
+import("//build_overrides/build.gni")  # For build_with_chromium
 
 if (!defined(dawn_standalone)) {
   dawn_standalone = false
@@ -50,4 +51,12 @@ if (!defined(dawn_spirv_cross_dir)) {
 
 if (!defined(dawn_spirv_tools_dir)) {
   dawn_spirv_tools_dir = "//third_party/SPIRV-Tools"
+}
+
+if (!defined(dawn_vulkan_headers_dir)) {
+  # NOTE: Chromium uses a very old checkout of upstream Vulkan-Headers
+  # without the right BUILD.gn, see third_party:vulkan_headers for details.
+  if (!build_with_chromium) {
+    dawn_vulkan_headers_dir = "//third_party/vulkan-headers"
+  }
 }

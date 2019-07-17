@@ -71,7 +71,10 @@ deps = {
     'url': '{chromium_git}/external/github.com/google/shaderc@e9bb8f287417084d30c924026de9fa59dd32db41',
     'condition': 'dawn_standalone',
   },
-
+  'third_party/vulkan-headers': {
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@v1.1.115',
+    'condition': 'dawn_standalone',
+  },
   # GLFW for tests and samples
   'third_party/glfw': {
     'url': '{chromium_git}/external/github.com/glfw/glfw@2de2589f910b1a85905f425be4d32f33cec092df',
