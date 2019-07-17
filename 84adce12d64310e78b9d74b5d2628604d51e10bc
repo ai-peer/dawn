@@ -22,6 +22,30 @@
       "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "717c5fbe_0ff0082e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-17T10:57:11Z",
+      "side": 1,
+      "message": "Since it passes even with the Metal debug device enabled, I think it is ok to submit as is. We\u0027ll be sure to check with Apple when we write the relevant part of the spec.",
+      "parentUuid": "20549859_9f7ce3e9",
+      "range": {
+        "startLine": 831,
+        "startChar": 1,
+        "endLine": 834,
+        "endChar": 50
+      },
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
