@@ -17,6 +17,7 @@
 
 #include "common/Serial.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/Toggles.h"
@@ -55,6 +56,14 @@ namespace dawn_native {
         AdapterBase* GetAdapter() const;
 
         FenceSignalTracker* GetFenceSignalTracker() const;
+
+        // Returns the Format corresponding to the dawn::TextureFormat or an error if the format
+        // isn't a valid dawn::TextureFormat or isn't supported by this device.
+        ResultOrError<const Format*> GetInternalFormat(dawn::TextureFormat format) const;
+
+        // Returns the Format corresponding to the dawn::TextureFormat and assumes the format is
+        // valid and supported.
+        const Format& GetValidInternalFormat(dawn::TextureFormat format) const;
 
         virtual CommandBufferBase* CreateCommandBuffer(
             CommandEncoderBase* encoder,
@@ -217,6 +226,8 @@ namespace dawn_native {
         dawn::DeviceErrorCallback mErrorCallback = nullptr;
         void* mErrorUserdata = 0;
         uint32_t mRefCount = 1;
+
+        FormatTable mFormatTable;
 
         TogglesSet mTogglesSet;
     };
