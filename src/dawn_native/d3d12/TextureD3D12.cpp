@@ -446,12 +446,12 @@ namespace dawn_native { namespace d3d12 {
                                uint32_t levelCount,
                                uint32_t baseArrayLayer,
                                uint32_t layerCount) {
-        // TODO(jiawei.shao@intel.com): initialize the textures in compressed formats with copies.
-        if (GetFormat().isCompressed) {
-            SetIsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                               layerCount);
-            return;
-        }
+        // // TODO(jiawei.shao@intel.com): initialize the textures in compressed formats with copies.
+        // if (GetFormat().isCompressed) {
+        //     SetIsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
+        //                                        layerCount);
+        //     return;
+        // }
 
         Device* device = ToBackend(GetDevice());
         DescriptorHeapAllocator* descriptorHeapAllocator = device->GetDescriptorHeapAllocator();
