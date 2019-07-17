@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b0084a82_19e8524b",
+        "filename": "src/dawn_wire/server/ServerMemoryTransferService_mock.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T19:20:10Z",
+      "side": 1,
+      "message": "Ok, I thought that was probably what happened, but I was having trouble tracing it out to make sure that\u0027s where it went. LGTM",
+      "parentUuid": "f69073f6_ef97140e",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 41
+      },
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "989bacfb_1ea1cb2e",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -166,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "a756c1b9_54450e0a",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T19:20:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8785822c_054ff6a0",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 37
+      },
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "648144b0_61ee2a62",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -224,6 +272,24 @@
     },
     {
       "key": {
+        "uuid": "67d1786f_2452d630",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T19:20:10Z",
+      "side": 1,
+      "message": "ASSERTing on the userdata seems best to me.",
+      "parentUuid": "6f0773bb_a752e27e",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "756e7bee_3ca77fda",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -253,6 +319,24 @@
       "side": 1,
       "message": "We could do the mock, but we don\u0027t have the buffer mapping callback mocks in the test file. Do you want to add them? I didn\u0027t feel it was necessary because it duplicates the testing already in WireBufferMappingTests.",
       "parentUuid": "756e7bee_3ca77fda",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ff00eb9_70ec7fc9",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T19:20:10Z",
+      "side": 1,
+      "message": "Is it different from the EXPECT_CALL(api, OnBufferMapReadAsyncCallback... above?\n\nOk to not duplicate if you don\u0027t want to, but seems like this test is slightly different and we may as well just double check it here.",
+      "parentUuid": "0000f26b_b85cac6f",
       "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
