@@ -17,6 +17,7 @@
 
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/vulkan/CommandRecordingContext.h"
 
 #include "common/vulkan_platform.h"
 
@@ -33,11 +34,13 @@ namespace dawn_native { namespace vulkan {
         CommandBuffer(CommandEncoderBase* encoder, const CommandBufferDescriptor* descriptor);
         ~CommandBuffer();
 
-        void RecordCommands(VkCommandBuffer commands);
+        void RecordCommands(VkCommandBuffer commands, CommandRecordingContext* recordingContext);
 
       private:
         void RecordComputePass(VkCommandBuffer commands);
-        void RecordRenderPass(VkCommandBuffer commands, BeginRenderPassCmd* renderPass);
+        void RecordRenderPass(VkCommandBuffer commands,
+                              CommandRecordingContext* recordingContext,
+                              BeginRenderPassCmd* renderPass);
 
         CommandIterator mCommands;
     };
