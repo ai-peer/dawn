@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b13ae453_79592b3f",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T22:21:33Z",
+      "side": 1,
+      "message": "nit: constexpr",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "785bb922_fb7beb96",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-17T22:21:33Z",
+      "side": 1,
+      "message": "nit: how about a helper function that abstracts clz, handling (MSVC, clang) x (size_t 4, size_t 8)? Then use it here and below.",
+      "range": {
+        "startLine": 49,
+        "startChar": 49,
+        "endLine": 49,
+        "endChar": 93
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
