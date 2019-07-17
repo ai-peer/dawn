@@ -20,6 +20,10 @@ import("scripts/dawn_overrides_with_defaults.gni")
 
 import("//testing/test.gni")
 
+if(build_with_chromium) {
+  import("//build_overrides//angle.gni")
+}
+
 ###############################################################################
 # libdawn_native
 ###############################################################################
@@ -374,6 +378,10 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/VulkanInfo.cpp",
       "src/dawn_native/vulkan/VulkanInfo.h",
     ]
+
+    if (dawn_enable_vulkan_validation_layers) {
+      configs += [ "third_party:vulkan_validation_layers_config" ]
+    }
   }
 }
 
@@ -412,6 +420,25 @@ dawn_component("libdawn_native") {
   if (dawn_enable_vulkan) {
     sources += [ "src/dawn_native/vulkan/VulkanBackend.cpp" ]
     deps += [ "third_party:vulkan_headers" ]
+
+    # Reuse the Vulkan validation layers built by ANGLE if built with chromium
+    if (dawn_enable_vulkan_validation_layers) {
+      if(build_with_chromium) {
+        data_deps += [ "$angle_root/third_party/vulkan-validation-layers:vulkan_validation_layers" ]
+        if (!is_android) {
+          data_deps += [ "$angle_root/third_party/vulkan-validation-layers:vulkan_gen_json_files" ]
+        }
+      } else {
+        data_deps = [
+          "third_party/vulkan-validation-layers:vulkan_validation_layers",
+        ]
+        if (!is_android) {
+          data_deps +=
+              [ "third_party/vulkan-validation-layers:vulkan_gen_json_files" ]
+        }
+      }
+
+    }
   }
 }
 
