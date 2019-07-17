@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e67c110d_291be83a",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-17T18:41:52Z",
+      "side": 1,
+      "message": "Added comments.\n\nDo we currently test multithreaded? I added a TODO to support it later. It should just involve copying into thread-local info data in SetUp(), and perhaps putting locks around the increment if we really want tests to use unique data.",
+      "parentUuid": "989bacfb_1ea1cb2e",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c12e0963_64ef2928",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "031d06a6_1205909a",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-17T18:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c12e0963_64ef2928",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
