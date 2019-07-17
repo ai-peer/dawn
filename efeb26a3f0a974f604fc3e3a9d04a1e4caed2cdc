@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "989bacfb_1ea1cb2e",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-17T11:46:42Z",
+      "side": 1,
+      "message": "Can we have a comment at the top that explains the structure of the tests, why and how we use the static data (not sure if it would break when we test in multithreaded fashion?) And what are all these helper methods?",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c12e0963_64ef2928",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-17T11:46:42Z",
+      "side": 1,
+      "message": "Can this have a comment explaining that at some point outResult will be written, and when?",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fc7cd31_836accc9",
+        "filename": "src/tests/unittests/wire/WireTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-17T11:46:42Z",
+      "side": 1,
+      "message": "Uh that\u0027s not super pretty but I don\u0027t see a better idea.",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
