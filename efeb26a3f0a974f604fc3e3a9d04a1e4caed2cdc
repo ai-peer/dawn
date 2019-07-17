@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f69073f6_ef97140e",
+        "filename": "src/dawn_wire/server/ServerMemoryTransferService_mock.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-17T19:10:26Z",
+      "side": 1,
+      "message": "Yea, they get returned from the OnCreate(R/W)Handle mocks which pass it to the wire which then owns it and frees it later. I remember you commented about making the interface return unique_ptr instead.\n\ndiscussion was here: https://dawn-review.googlesource.com/c/dawn/+/8642/2/src/dawn_wire/client/ApiProcs.cpp#30\n\nWhat do you think?",
+      "parentUuid": "985c33cb_15f75cd4",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 41
+      },
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "989bacfb_1ea1cb2e",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -118,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "8785822c_054ff6a0",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-17T19:10:26Z",
+      "side": 1,
+      "message": "These were separated in the latest patch.",
+      "parentUuid": "c438c1b7_c4d85bb9",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 37
+      },
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "648144b0_61ee2a62",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -158,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "6f0773bb_a752e27e",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-17T19:10:26Z",
+      "side": 1,
+      "message": "1. It is hit because the fatal ReadHandle creation failure calls the callback with CONTEXT_LOST immediately. Since we failed to create a ReadHandle, we can\u0027t really even make the Map request.\nWe could pass a flag in as the userdata to ASSERT it\u0027s actually called.\n\nThis has the issue of not being called asynchronously. We could introduce an OnNextTick concept into the wire client. That feels messy to me though, and would prefer we allow CONTEXT_LOST errors to call callbacks immediately. In Chrome, we\u0027d get the error right away and tear down the context.\n\n2. Same comment as below.",
+      "parentUuid": "77e0213b_124c0222",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "756e7bee_3ca77fda",
         "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
         "patchSetId": 5
@@ -169,6 +235,24 @@
       "writtenOn": "2019-07-17T18:41:56Z",
       "side": 1,
       "message": "Is this expected to not be called? IIRC we try to guarantee it will always be called. Should have a mock expectation like everywhere else, I think.",
+      "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0000f26b_b85cac6f",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-17T19:10:26Z",
+      "side": 1,
+      "message": "We could do the mock, but we don\u0027t have the buffer mapping callback mocks in the test file. Do you want to add them? I didn\u0027t feel it was necessary because it duplicates the testing already in WireBufferMappingTests.",
+      "parentUuid": "756e7bee_3ca77fda",
       "revId": "efeb26a3f0a974f604fc3e3a9d04a1e4caed2cdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
