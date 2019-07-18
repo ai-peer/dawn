@@ -49,6 +49,23 @@
     },
     {
       "key": {
+        "uuid": "86471c6c_909ee981",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-18T01:13:19Z",
+      "side": 1,
+      "message": "I just realized that we can in fact set float viewports in OpenGL with glViewportIndexedf:\nhttps://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glViewportIndexed.xhtml\n\nSo I think we should do that.",
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b92a618f_70bdca30",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
