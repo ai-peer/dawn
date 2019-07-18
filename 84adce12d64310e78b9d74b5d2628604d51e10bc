@@ -69,6 +69,30 @@
       "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4a846b7_9c9c509c",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-18T01:03:22Z",
+      "side": 1,
+      "message": "Hi Austin, your concern is valid, see the newly added tests at https://dawn-review.googlesource.com/c/dawn/+/9140. Thank you.",
+      "parentUuid": "b92a618f_70bdca30",
+      "range": {
+        "startLine": 815,
+        "startChar": 23,
+        "endLine": 815,
+        "endChar": 34
+      },
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
