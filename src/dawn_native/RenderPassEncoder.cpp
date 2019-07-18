@@ -27,48 +27,57 @@
 namespace dawn_native {
 
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
-                                                 CommandEncoderBase* topLevelEncoder,
-                                                 CommandAllocator* allocator)
-        : RenderEncoderBase(device, topLevelEncoder, allocator) {
+                                                 CommandEncoderBase* commandEncoder,
+                                                 EncodingContext* encodingContext)
+        : RenderEncoderBase(device, encodingContext), mCommandEncoder(commandEncoder) {
     }
 
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
-                                                 CommandEncoderBase* topLevelEncoder,
+                                                 CommandEncoderBase* commandEncoder,
+                                                 EncodingContext* encodingContext,
                                                  ErrorTag errorTag)
-        : RenderEncoderBase(device, topLevelEncoder, errorTag) {
+        : RenderEncoderBase(device, encodingContext, errorTag), mCommandEncoder(commandEncoder) {
     }
 
     RenderPassEncoderBase* RenderPassEncoderBase::MakeError(DeviceBase* device,
-                                                            CommandEncoderBase* topLevelEncoder) {
-        return new RenderPassEncoderBase(device, topLevelEncoder, ObjectBase::kError);
+                                                            CommandEncoderBase* commandEncoder,
+                                                            EncodingContext* encodingContext) {
+        return new RenderPassEncoderBase(device, commandEncoder, encodingContext,
+                                         ObjectBase::kError);
     }
 
     void RenderPassEncoderBase::EndPass() {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mEncodingContext->IsFinished()) {
+            // This is because endPass after the CommandEncoder has been Finished, creates
+            // an encoder error in the tests. It should probably be a Device error and we
+            // we can remove this condition.
             return;
         }
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            mEncodingContext->PopEncoder(this);
+            allocator->Allocate<EndRenderPassCmd>(Command::EndRenderPass);
 
-        mTopLevelEncoder->PassEnded();
-        mAllocator = nullptr;
+            return {};
+        });
     }
 
     void RenderPassEncoderBase::SetStencilReference(uint32_t reference) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
-            return;
-        }
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            SetStencilReferenceCmd* cmd =
+                allocator->Allocate<SetStencilReferenceCmd>(Command::SetStencilReference);
+            cmd->reference = reference;
 
-        SetStencilReferenceCmd* cmd =
-            mAllocator->Allocate<SetStencilReferenceCmd>(Command::SetStencilReference);
-        cmd->reference = reference;
+            return {};
+        });
     }
 
     void RenderPassEncoderBase::SetBlendColor(const Color* color) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
-            return;
-        }
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            SetBlendColorCmd* cmd = allocator->Allocate<SetBlendColorCmd>(Command::SetBlendColor);
+            cmd->color = *color;
 
-        SetBlendColorCmd* cmd = mAllocator->Allocate<SetBlendColorCmd>(Command::SetBlendColor);
-        cmd->color = *color;
+            return {};
+        });
     }
 
     void RenderPassEncoderBase::SetViewport(float x,
@@ -77,55 +86,49 @@ namespace dawn_native {
                                             float height,
                                             float minDepth,
                                             float maxDepth) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
-            return;
-        }
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_VALIDATE_FALSE((isnan(x) || isnan(y) || isnan(width) || isnan(height) ||
+                                 isnan(minDepth) || isnan(maxDepth)),
+                                "NaN is not allowed.");
 
-        if (isnan(x) || isnan(y) || isnan(width) || isnan(height) || isnan(minDepth) ||
-            isnan(maxDepth)) {
-            mTopLevelEncoder->HandleError("NaN is not allowed.");
-            return;
-        }
+            // TODO(yunchao.he@intel.com): there are more restrictions for x, y, width and height in
+            // Vulkan, and height can be a negative value in Vulkan 1.1. Revisit this part later
+            // (say, for WebGPU v1).
+            DAWN_VALIDATE_FALSE(width <= 0 || height <= 0,
+                                "Width and height must be greater than 0.");
 
-        // TODO(yunchao.he@intel.com): there are more restrictions for x, y, width and height in
-        // Vulkan, and height can be a negative value in Vulkan 1.1. Revisit this part later (say,
-        // for WebGPU v1).
-        if (width <= 0 || height <= 0) {
-            mTopLevelEncoder->HandleError("Width and height must be greater than 0.");
-            return;
-        }
+            DAWN_VALIDATE_FALSE(minDepth < 0 || minDepth > 1 || maxDepth < 0 || maxDepth > 1,
+                                "minDepth and maxDepth must be in [0, 1].");
 
-        if (minDepth < 0 || minDepth > 1 || maxDepth < 0 || maxDepth > 1) {
-            mTopLevelEncoder->HandleError("minDepth and maxDepth must be in [0, 1].");
-            return;
-        }
+            SetViewportCmd* cmd = allocator->Allocate<SetViewportCmd>(Command::SetViewport);
+            cmd->x = x;
+            cmd->y = y;
+            cmd->width = width;
+            cmd->height = height;
+            cmd->minDepth = minDepth;
+            cmd->maxDepth = maxDepth;
 
-        SetViewportCmd* cmd = mAllocator->Allocate<SetViewportCmd>(Command::SetViewport);
-        cmd->x = x;
-        cmd->y = y;
-        cmd->width = width;
-        cmd->height = height;
-        cmd->minDepth = minDepth;
-        cmd->maxDepth = maxDepth;
+            return {};
+        });
     }
 
     void RenderPassEncoderBase::SetScissorRect(uint32_t x,
                                                uint32_t y,
                                                uint32_t width,
                                                uint32_t height) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
-            return;
-        }
-        if (width == 0 || height == 0) {
-            mTopLevelEncoder->HandleError("Width and height must be greater than 0.");
-            return;
-        }
+        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_VALIDATE_FALSE(width == 0 || height == 0,
+                                "Width and height must be greater than 0.");
 
-        SetScissorRectCmd* cmd = mAllocator->Allocate<SetScissorRectCmd>(Command::SetScissorRect);
-        cmd->x = x;
-        cmd->y = y;
-        cmd->width = width;
-        cmd->height = height;
+            SetScissorRectCmd* cmd =
+                allocator->Allocate<SetScissorRectCmd>(Command::SetScissorRect);
+            cmd->x = x;
+            cmd->y = y;
+            cmd->width = width;
+            cmd->height = height;
+
+            return {};
+        });
     }
 
 }  // namespace dawn_native

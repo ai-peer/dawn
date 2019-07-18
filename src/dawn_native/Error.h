@@ -83,6 +83,17 @@ namespace dawn_native {
     for (;;)                                                                     \
     break
 
+    // DAWN_VALIDATE_FALSE expects an expression to be false. If true, it returns
+    // a validation error.
+#define DAWN_VALIDATE_FALSE(EXPR, MESSAGE)         \
+    {                                              \
+        if (DAWN_UNLIKELY((EXPR))) {               \
+            return DAWN_VALIDATION_ERROR(MESSAGE); \
+        }                                          \
+    }                                              \
+    for (;;)                                       \
+    break
+
     // Implementation detail of DAWN_TRY and DAWN_TRY_ASSIGN's adding to the Error's backtrace.
     void AppendBacktrace(ErrorData* error, const char* file, const char* function, int line);
 
