@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fcaa648b_e5f5eac6",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T11:15:40Z",
+      "side": 1,
+      "message": "This is a bit weird a pattern, and the alternative would be to split code that can fail in an inner function and then check its result before calling the callback. Inner function could be a lambda probably. WDYT?",
+      "revId": "c87b916487c420c4aa7c0bd10a733999db5d3e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d0dd3db_d42c7c81",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T11:15:40Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c87b916487c420c4aa7c0bd10a733999db5d3e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
