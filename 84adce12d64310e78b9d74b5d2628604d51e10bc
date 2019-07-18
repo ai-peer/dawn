@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "e8ea1652_8e491a1d",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-18T01:13:52Z",
+      "side": 1,
+      "message": "(And add a test. I think it should be pretty easy to write a very simple test for this.)",
+      "parentUuid": "86471c6c_909ee981",
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b92a618f_70bdca30",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
