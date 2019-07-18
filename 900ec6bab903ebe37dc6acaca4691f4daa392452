@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9faef844_d8a831b2",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-18T01:21:33Z",
+      "side": 1,
+      "message": "Oh it\u0027s really helpful for me to add the extension mechanism!\n\n(Not related to this patch)\nDo you think we should provide more detailed information here? For example, now we can only know this format is not supported, if we record the extension it belongs to, then we can give the error message \"the format is not allowed to used because CompressedTextureBCFormat is not enabled\".",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 25
+      },
+      "revId": "900ec6bab903ebe37dc6acaca4691f4daa392452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
