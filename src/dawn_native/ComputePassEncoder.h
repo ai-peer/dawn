@@ -27,11 +27,11 @@ namespace dawn_native {
     class ComputePassEncoderBase : public ProgrammablePassEncoder {
       public:
         ComputePassEncoderBase(DeviceBase* device,
-                               CommandEncoderBase* topLevelEncoder,
+                               CommandRecorder* commandRecorder,
                                CommandAllocator* allocator);
 
         static ComputePassEncoderBase* MakeError(DeviceBase* device,
-                                                 CommandEncoderBase* topLevelEncoder);
+                                                 CommandRecorder* commandRecorder);
 
         void EndPass();
 
@@ -41,7 +41,7 @@ namespace dawn_native {
 
       protected:
         ComputePassEncoderBase(DeviceBase* device,
-                               CommandEncoderBase* topLevelEncoder,
+                               CommandRecorder* commandRecorder,
                                ErrorTag errorTag);
     };
 

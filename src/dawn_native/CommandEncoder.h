@@ -17,9 +17,8 @@
 
 #include "dawn_native/dawn_platform.h"
 
-#include "dawn_native/CommandAllocator.h"
+#include "dawn_native/CommandRecorder.h"
 #include "dawn_native/Error.h"
-#include "dawn_native/ObjectBase.h"
 #include "dawn_native/PassResourceUsage.h"
 
 #include <string>
@@ -28,12 +27,10 @@ namespace dawn_native {
 
     struct BeginRenderPassCmd;
 
-    class CommandEncoderBase : public ObjectBase {
+    class CommandEncoderBase : public CommandRecorder {
       public:
         CommandEncoderBase(DeviceBase* device, const CommandEncoderDescriptor* descriptor);
-        ~CommandEncoderBase();
 
-        CommandIterator AcquireCommands();
         CommandBufferResourceUsage AcquireResourceUsages();
 
         // Dawn API
@@ -55,17 +52,6 @@ namespace dawn_native {
                                   const Extent3D* copySize);
         CommandBufferBase* Finish(const CommandBufferDescriptor* descriptor);
 
-        // Functions to interact with the encoders
-        void HandleError(const char* message);
-        void ConsumeError(ErrorData* error);
-        bool ConsumedError(MaybeError maybeError) {
-            if (DAWN_UNLIKELY(maybeError.IsError())) {
-                ConsumeError(maybeError.AcquireError());
-                return true;
-            }
-            return false;
-        }
-
         void PassEnded();
 
       private:
@@ -77,19 +63,10 @@ namespace dawn_native {
         enum class EncodingState : uint8_t;
         EncodingState mEncodingState;
 
-        void MoveToIterator();
-        CommandAllocator mAllocator;
-        CommandIterator mIterator;
-        bool mWasMovedToIterator = false;
-        bool mWereCommandsAcquired = false;
-
         bool mWereResourceUsagesAcquired = false;
         CommandBufferResourceUsage mResourceUsages;
 
         unsigned int mDebugGroupStackSize = 0;
-
-        bool mGotError = false;
-        std::string mErrorMessage;
     };
 
 }  // namespace dawn_native

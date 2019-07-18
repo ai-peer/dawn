@@ -115,6 +115,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/CommandBufferStateTracker.h",
     "src/dawn_native/CommandEncoder.cpp",
     "src/dawn_native/CommandEncoder.h",
+    "src/dawn_native/CommandRecorder.cpp",
+    "src/dawn_native/CommandRecorder.h",
     "src/dawn_native/Commands.cpp",
     "src/dawn_native/Commands.h",
     "src/dawn_native/ComputePassEncoder.cpp",

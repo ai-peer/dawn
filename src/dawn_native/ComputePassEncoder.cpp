@@ -23,33 +23,33 @@
 namespace dawn_native {
 
     ComputePassEncoderBase::ComputePassEncoderBase(DeviceBase* device,
-                                                   CommandEncoderBase* topLevelEncoder,
+                                                   CommandRecorder* commandRecorder,
                                                    CommandAllocator* allocator)
-        : ProgrammablePassEncoder(device, topLevelEncoder, allocator) {
+        : ProgrammablePassEncoder(device, commandRecorder, allocator) {
     }
 
     ComputePassEncoderBase::ComputePassEncoderBase(DeviceBase* device,
-                                                   CommandEncoderBase* topLevelEncoder,
+                                                   CommandRecorder* commandRecorder,
                                                    ErrorTag errorTag)
-        : ProgrammablePassEncoder(device, topLevelEncoder, errorTag) {
+        : ProgrammablePassEncoder(device, commandRecorder, errorTag) {
     }
 
     ComputePassEncoderBase* ComputePassEncoderBase::MakeError(DeviceBase* device,
-                                                              CommandEncoderBase* topLevelEncoder) {
-        return new ComputePassEncoderBase(device, topLevelEncoder, ObjectBase::kError);
+                                                              CommandRecorder* commandRecorder) {
+        return new ComputePassEncoderBase(device, commandRecorder, ObjectBase::kError);
     }
 
     void ComputePassEncoderBase::EndPass() {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
-        mTopLevelEncoder->PassEnded();
+        reinterpret_cast<CommandEncoderBase*>(mCommandRecorder.Get())->PassEnded();
         mAllocator = nullptr;
     }
 
     void ComputePassEncoderBase::Dispatch(uint32_t x, uint32_t y, uint32_t z) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -61,14 +61,14 @@ namespace dawn_native {
 
     void ComputePassEncoderBase::DispatchIndirect(BufferBase* indirectBuffer,
                                                   uint64_t indirectOffset) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
+            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
             return;
         }
 
         if (indirectOffset >= indirectBuffer->GetSize() ||
             indirectOffset + kDispatchIndirectSize > indirectBuffer->GetSize()) {
-            mTopLevelEncoder->HandleError("Indirect offset out of bounds");
+            mCommandRecorder->HandleError("Indirect offset out of bounds");
             return;
         }
 
@@ -79,8 +79,8 @@ namespace dawn_native {
     }
 
     void ComputePassEncoderBase::SetPipeline(ComputePipelineBase* pipeline) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(pipeline))) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
+            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(pipeline))) {
             return;
         }
 

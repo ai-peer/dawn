@@ -44,16 +44,16 @@ namespace dawn_native {
     }
 
     void RenderPassEncoderBase::EndPass() {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
-        mTopLevelEncoder->PassEnded();
+        reinterpret_cast<CommandEncoderBase*>(mCommandRecorder.Get())->PassEnded();
         mAllocator = nullptr;
     }
 
     void RenderPassEncoderBase::SetStencilReference(uint32_t reference) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -63,7 +63,7 @@ namespace dawn_native {
     }
 
     void RenderPassEncoderBase::SetBlendColor(const Color* color) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -77,13 +77,13 @@ namespace dawn_native {
                                             float height,
                                             float minDepth,
                                             float maxDepth) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
         if (isnan(x) || isnan(y) || isnan(width) || isnan(height) || isnan(minDepth) ||
             isnan(maxDepth)) {
-            mTopLevelEncoder->HandleError("NaN is not allowed.");
+            mCommandRecorder->HandleError("NaN is not allowed.");
             return;
         }
 
@@ -91,12 +91,12 @@ namespace dawn_native {
         // Vulkan, and height can be a negative value in Vulkan 1.1. Revisit this part later (say,
         // for WebGPU v1).
         if (width <= 0 || height <= 0) {
-            mTopLevelEncoder->HandleError("Width and height must be greater than 0.");
+            mCommandRecorder->HandleError("Width and height must be greater than 0.");
             return;
         }
 
         if (minDepth < 0 || minDepth > 1 || maxDepth < 0 || maxDepth > 1) {
-            mTopLevelEncoder->HandleError("minDepth and maxDepth must be in [0, 1].");
+            mCommandRecorder->HandleError("minDepth and maxDepth must be in [0, 1].");
             return;
         }
 
@@ -113,11 +113,11 @@ namespace dawn_native {
                                                uint32_t y,
                                                uint32_t width,
                                                uint32_t height) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
         if (width == 0 || height == 0) {
-            mTopLevelEncoder->HandleError("Width and height must be greater than 0.");
+            mCommandRecorder->HandleError("Width and height must be greater than 0.");
             return;
         }
 

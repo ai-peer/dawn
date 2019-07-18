@@ -629,33 +629,13 @@ namespace dawn_native {
     };
 
     CommandEncoderBase::CommandEncoderBase(DeviceBase* device, const CommandEncoderDescriptor*)
-        : ObjectBase(device), mEncodingState(EncodingState::TopLevel) {
-    }
-
-    CommandEncoderBase::~CommandEncoderBase() {
-        if (!mWereCommandsAcquired) {
-            MoveToIterator();
-            FreeCommands(&mIterator);
-        }
-    }
-
-    CommandIterator CommandEncoderBase::AcquireCommands() {
-        ASSERT(!mWereCommandsAcquired);
-        mWereCommandsAcquired = true;
-        return std::move(mIterator);
+        : CommandRecorder(device), mEncodingState(EncodingState::TopLevel) {
     }
 
     CommandBufferResourceUsage CommandEncoderBase::AcquireResourceUsages() {
         ASSERT(!mWereResourceUsagesAcquired);
         mWereResourceUsagesAcquired = true;
         return std::move(mResourceUsages);
-    }
-
-    void CommandEncoderBase::MoveToIterator() {
-        if (!mWasMovedToIterator) {
-            mIterator = std::move(mAllocator);
-            mWasMovedToIterator = true;
-        }
     }
 
     // Implementation of the API's command recording methods
@@ -867,11 +847,13 @@ namespace dawn_native {
         if (GetDevice()->ConsumedError(ValidateFinish(descriptor))) {
             // Even if finish validation fails, it is now invalid to call any encoding commands on
             // this object, so we set its state to finished.
+            mIsRecording = false;
             mEncodingState = EncodingState::Finished;
             return CommandBufferBase::MakeError(GetDevice());
         }
         ASSERT(!IsError());
 
+        mIsRecording = false;
         mEncodingState = EncodingState::Finished;
 
         MoveToIterator();
@@ -879,22 +861,6 @@ namespace dawn_native {
     }
 
     // Implementation of functions to interact with sub-encoders
-
-    void CommandEncoderBase::HandleError(const char* message) {
-        if (mEncodingState != EncodingState::Finished) {
-            if (!mGotError) {
-                mGotError = true;
-                mErrorMessage = message;
-            }
-        } else {
-            GetDevice()->HandleError(message);
-        }
-    }
-
-    void CommandEncoderBase::ConsumeError(ErrorData* error) {
-        HandleError(error->GetMessage().c_str());
-        delete error;
-    }
 
     void CommandEncoderBase::PassEnded() {
         // This function may still be called when the command encoder is finished, just do nothing.

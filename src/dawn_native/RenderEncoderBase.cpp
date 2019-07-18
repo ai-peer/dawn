@@ -27,22 +27,22 @@
 namespace dawn_native {
 
     RenderEncoderBase::RenderEncoderBase(DeviceBase* device,
-                                         CommandEncoderBase* topLevelEncoder,
+                                         CommandRecorder* commandRecorder,
                                          CommandAllocator* allocator)
-        : ProgrammablePassEncoder(device, topLevelEncoder, allocator) {
+        : ProgrammablePassEncoder(device, commandRecorder, allocator) {
     }
 
     RenderEncoderBase::RenderEncoderBase(DeviceBase* device,
-                                         CommandEncoderBase* topLevelEncoder,
+                                         CommandRecorder* commandRecorder,
                                          ErrorTag errorTag)
-        : ProgrammablePassEncoder(device, topLevelEncoder, errorTag) {
+        : ProgrammablePassEncoder(device, commandRecorder, errorTag) {
     }
 
     void RenderEncoderBase::Draw(uint32_t vertexCount,
                                  uint32_t instanceCount,
                                  uint32_t firstVertex,
                                  uint32_t firstInstance) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -58,7 +58,7 @@ namespace dawn_native {
                                         uint32_t firstIndex,
                                         int32_t baseVertex,
                                         uint32_t firstInstance) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -71,14 +71,14 @@ namespace dawn_native {
     }
 
     void RenderEncoderBase::DrawIndirect(BufferBase* indirectBuffer, uint64_t indirectOffset) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
+            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
             return;
         }
 
         if (indirectOffset >= indirectBuffer->GetSize() ||
             indirectOffset + kDrawIndirectSize > indirectBuffer->GetSize()) {
-            mTopLevelEncoder->HandleError("Indirect offset out of bounds");
+            mCommandRecorder->HandleError("Indirect offset out of bounds");
             return;
         }
 
@@ -89,14 +89,14 @@ namespace dawn_native {
 
     void RenderEncoderBase::DrawIndexedIndirect(BufferBase* indirectBuffer,
                                                 uint64_t indirectOffset) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
+            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
             return;
         }
 
         if (indirectOffset >= indirectBuffer->GetSize() ||
             indirectOffset + kDrawIndexedIndirectSize > indirectBuffer->GetSize()) {
-            mTopLevelEncoder->HandleError("Indirect offset out of bounds");
+            mCommandRecorder->HandleError("Indirect offset out of bounds");
             return;
         }
 
@@ -107,8 +107,8 @@ namespace dawn_native {
     }
 
     void RenderEncoderBase::SetPipeline(RenderPipelineBase* pipeline) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(pipeline))) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
+            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(pipeline))) {
             return;
         }
 
@@ -118,8 +118,8 @@ namespace dawn_native {
     }
 
     void RenderEncoderBase::SetIndexBuffer(BufferBase* buffer, uint64_t offset) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(buffer))) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
+            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(buffer))) {
             return;
         }
 
@@ -132,12 +132,12 @@ namespace dawn_native {
                                              uint32_t count,
                                              BufferBase* const* buffers,
                                              uint64_t const* offsets) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
         for (size_t i = 0; i < count; ++i) {
-            if (mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(buffers[i]))) {
+            if (mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(buffers[i]))) {
                 return;
             }
         }

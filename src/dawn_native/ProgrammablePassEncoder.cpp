@@ -26,20 +26,20 @@
 namespace dawn_native {
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
-                                                     CommandEncoderBase* topLevelEncoder,
+                                                     CommandRecorder* commandRecorder,
                                                      CommandAllocator* allocator)
-        : ObjectBase(device), mTopLevelEncoder(topLevelEncoder), mAllocator(allocator) {
+        : ObjectBase(device), mCommandRecorder(commandRecorder), mAllocator(allocator) {
         DAWN_ASSERT(allocator != nullptr);
     }
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
-                                                     CommandEncoderBase* topLevelEncoder,
+                                                     CommandRecorder* commandRecorder,
                                                      ErrorTag errorTag)
-        : ObjectBase(device, errorTag), mTopLevelEncoder(topLevelEncoder), mAllocator(nullptr) {
+        : ObjectBase(device, errorTag), mCommandRecorder(commandRecorder), mAllocator(nullptr) {
     }
 
     void ProgrammablePassEncoder::InsertDebugMarker(const char* groupLabel) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -52,7 +52,7 @@ namespace dawn_native {
     }
 
     void ProgrammablePassEncoder::PopDebugGroup() {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -60,7 +60,7 @@ namespace dawn_native {
     }
 
     void ProgrammablePassEncoder::PushDebugGroup(const char* groupLabel) {
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands())) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
             return;
         }
 
@@ -77,24 +77,24 @@ namespace dawn_native {
                                                const uint64_t* dynamicOffsets) {
         const BindGroupLayoutBase* layout = group->GetLayout();
 
-        if (mTopLevelEncoder->ConsumedError(ValidateCanRecordCommands()) ||
-            mTopLevelEncoder->ConsumedError(GetDevice()->ValidateObject(group))) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
+            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(group))) {
             return;
         }
 
         if (groupIndex >= kMaxBindGroups) {
-            mTopLevelEncoder->HandleError("Setting bind group over the max");
+            mCommandRecorder->HandleError("Setting bind group over the max");
             return;
         }
 
         // Dynamic offsets count must match the number required by the layout perfectly.
         if (layout->GetDynamicBufferCount() != dynamicOffsetCount) {
-            mTopLevelEncoder->HandleError("dynamicOffset count mismatch");
+            mCommandRecorder->HandleError("dynamicOffset count mismatch");
         }
 
         for (uint32_t i = 0; i < dynamicOffsetCount; ++i) {
             if (dynamicOffsets[i] % kMinDynamicBufferOffsetAlignment != 0) {
-                mTopLevelEncoder->HandleError("Dynamic Buffer Offset need to be aligned");
+                mCommandRecorder->HandleError("Dynamic Buffer Offset need to be aligned");
                 return;
             }
 
@@ -108,7 +108,7 @@ namespace dawn_native {
 
             if (dynamicOffsets[i] >
                 bufferBinding.buffer->GetSize() - bufferBinding.offset - bufferBinding.size) {
-                mTopLevelEncoder->HandleError("dynamic offset out of bounds");
+                mCommandRecorder->HandleError("dynamic offset out of bounds");
                 return;
             }
         }

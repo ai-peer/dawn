@@ -30,7 +30,7 @@ namespace dawn_native {
     class ProgrammablePassEncoder : public ObjectBase {
       public:
         ProgrammablePassEncoder(DeviceBase* device,
-                                CommandEncoderBase* topLevelEncoder,
+                                CommandRecorder* commandRecorder,
                                 CommandAllocator* allocator);
 
         void InsertDebugMarker(const char* groupLabel);
@@ -45,14 +45,14 @@ namespace dawn_native {
       protected:
         // Construct an "error" programmable pass encoder.
         ProgrammablePassEncoder(DeviceBase* device,
-                                CommandEncoderBase* topLevelEncoder,
+                                CommandRecorder* commandRecorder,
                                 ErrorTag errorTag);
 
         MaybeError ValidateCanRecordCommands() const;
 
-        // The allocator is borrowed from the top level encoder. Keep a reference to the encoder
+        // The allocator is borrowed from the command recorder. Keep a reference to the recorder
         // to make sure the allocator isn't freed.
-        Ref<CommandEncoderBase> mTopLevelEncoder = nullptr;
+        Ref<CommandRecorder> mCommandRecorder = nullptr;
         // mAllocator is cleared at the end of the pass so it acts as a tag that EndPass was called
         CommandAllocator* mAllocator = nullptr;
     };
