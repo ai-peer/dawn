@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "d8f930dc_591670ef",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-07-18T16:22:33Z",
+      "side": 1,
+      "message": "It\u0027s true, we can use glViewportIndexedf. And this API can be supported on OpenGL 4.1. The GL version required is reasonable. It is not very high. \n\nRegarding adding a test, what do you want to test? I am not very clear about it.",
+      "parentUuid": "e8ea1652_8e491a1d",
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b92a618f_70bdca30",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
