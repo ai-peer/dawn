@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "9f1dbf05_06e3ce18",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "Can we have tests for the new / modified function here in MathTests.cpp?",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b13ae453_79592b3f",
         "filename": "src/common/Math.cpp",
         "patchSetId": 32
@@ -13,6 +30,24 @@
       "writtenOn": "2019-07-17T22:21:33Z",
       "side": 1,
       "message": "nit: constexpr",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b95f41a_1c0cad51",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "This wouldn\u0027t be needed with separate overloads.",
+      "parentUuid": "b13ae453_79592b3f",
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -35,6 +70,693 @@
         "startChar": 49,
         "endLine": 49,
         "endChar": 93
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ce4d0bf_66129ed3",
+        "filename": "src/common/Math.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "This will likely break at some point when we try passing an uint64_t on a 32 bit configuration, how about separating two overloads Log2(uint32_t) and Log2(uint64_t)?",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09fa9b6f_59e42f10",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b70556e2_adc7db00",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84dbc872_17f04334",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "This class is self contained, so to ease the review can it be landed along with its tests in it\u0027s own CL?",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8a177a2_c8ddd4c3",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "This should probably have both allocationSize and alignment.",
+      "range": {
+        "startLine": 34,
+        "startChar": 31,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "712063df_242c0c70",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "In all places here we should use uint64_t because even if we have a 32bit application, we can address more than 4GB of GPU memory. Alternatively we should use uint32_t and explain that a buddy system will never be more than 4GB.",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67e64249_ee4a17d0",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "This is never used by the frontend and is an implementation detail of the backends (not all of them need the concept of allocation) so maybe it could only live in the relevant backends? Ditto for GetAllocation()",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfb632cb_df180c62",
+        "filename": "src/dawn_native/ResourceHeap.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f84a9c5_bc185ffd",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d0725b3_c3b7d69b",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "ditto: all of these aren\u0027t used by the frontend and seem to be implementation details of the backends, so maybe it could live in the relevant subclass of the backends?",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7106ea7c_64f13e92",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0e13de5_d2e9b697",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": ".inc files should as much as possible not include other files because it risks nesting namespace or defines.",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "723e59e8_f0f32b12",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b0424de_416a3f98",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "I think this comment is stale because these types don\u0027t exist in this CL.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 58
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63dbaa27_49cc9cee",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 58
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "734ca538_541ee11c",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "Any reason to use static polymorphism here instead of dynamic polymorphism with a base class like ResourceMemoryHeapAllocator or ResourceMemoryAllocator::Client?",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d497d069_6e12a81f",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "Isn\u0027t this going to always be the same for a given allocator so it could be a property of the ResourceMemoryAllocator::Client and invisible to the BuffyResourceMemoryAllocator/DirectAllocator?",
+      "range": {
+        "startLine": 72,
+        "startChar": 65,
+        "endLine": 72,
+        "endChar": 84
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bce50962_e0b47287",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: this would usually be called ResourceHeapAllocator.inc but shouldn\u0027t be needed with static polymorphism.",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea2fd82c_45ca7236",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4295baf6_dda94dad",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b1a626d_2ece2f3e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "This is always true at this point?",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdb48779_9fc95337",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "Here this is making the size a power of two. I\u0027m pretty sure that the size doesn\u0027t need to be a power of two, but the alignment of the offset must be. Basically in both D3D12 and Vulkan, the driver tells you for a resource \"I\u0027d like a block of memory of size 7542 for which the start is at a multiple of 64 from the start of the heap\". The size is arbitrary but the offset has to be a power of two.\n\nRight now it is possible for the driver to tell us \"I\u0027d like a resource of size 4 aligned with 64 bits from the top\" and we\u0027d allocate a resource aligned with only 4, not 64.\n\nSo we should pass both allocationSize and the alignment to the buddy allocator.",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2e43469_c1f67a0a",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed729f80_cc8884b3",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2d766c2_9b27c14a",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa7596b2_4dbaba1a",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b110a14_a55cf92e",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "I don\u0027t think this class is ever used which makes dawn_native::null::ResourceHeap unused as well.",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86ea8c6b_a61bfe83",
+        "filename": "src/dawn_native/vulkan/BufferVk.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: MaybeError changes to buffers could be landed separately.",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98cd32e1_fa9f4f54",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "Test changes could be landed separately with the correct suppressions.",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbc362b1_0821c0ba",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: we don\u0027t use hungarian notation, this could be \"resultPointer\"",
+      "range": {
+        "startLine": 104,
+        "startChar": 16,
+        "endLine": 104,
+        "endChar": 27
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "497ed6a5_80e96c4d",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: Destroy",
+      "range": {
+        "startLine": 170,
+        "startChar": 39,
+        "endLine": 170,
+        "endChar": 46
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2fe4c1a_513c3571",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "Any reason for this change?",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4023b33_b2bbc62a",
+        "filename": "src/tests/unittests/ResourceAllocatorTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-18T12:26:43Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
       },
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
