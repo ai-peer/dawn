@@ -17,6 +17,7 @@
 
 #include "common/Constants.h"
 
+#include "dawn_native/RenderBundle.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -45,6 +46,7 @@ namespace dawn_native {
         DrawIndexedIndirect,
         EndComputePass,
         EndRenderPass,
+        ExecuteBundles,
         InsertDebugMarker,
         PopDebugGroup,
         PushDebugGroup,
@@ -170,6 +172,10 @@ namespace dawn_native {
     struct EndComputePassCmd {};
 
     struct EndRenderPassCmd {};
+
+    struct ExecuteBundlesCmd {
+        uint32_t count;
+    };
 
     struct InsertDebugMarkerCmd {
         uint32_t length;
