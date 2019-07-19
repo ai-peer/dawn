@@ -16,6 +16,24 @@
       "revId": "b572347344abdc023f5d106c420c358b69c3da9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73e49bea_70556c2b",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-19T16:29:54Z",
+      "side": 1,
+      "message": "Overall, I like this idea a lot. I thought about making it a \"has a\" relationship but didn\u0027t find a nice way yesterday without moving a lot of stuff into CommandRecorder and forwarding everything to it. I\u0027ll try doing something like what you suggested. I kinda love templates that take lambdas.",
+      "parentUuid": "a42794e0_870c064b",
+      "revId": "b572347344abdc023f5d106c420c358b69c3da9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
