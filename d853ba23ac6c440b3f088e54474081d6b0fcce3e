@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7abd3e4_e3234be8",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-19T09:31:46Z",
+      "side": 1,
+      "message": "ultra uNit: missing an empty line to match the start of the namespace ^^",
+      "revId": "d853ba23ac6c440b3f088e54474081d6b0fcce3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
