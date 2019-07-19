@@ -550,6 +550,41 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError RenderPipelineBase::ValidateCompatibleWith(
+        const RenderBundleAttachmentInfo* renderBundle) const {
+        ASSERT(renderBundle != nullptr);
+        ASSERT(!IsError());
+
+        if (renderBundle->colorFormatsSet != mColorAttachmentsSet) {
+            return DAWN_VALIDATION_ERROR(
+                "Pipeline doesn't have same color attachments set as render bundle");
+        }
+
+        for (uint32_t i : IterateBitSet(mColorAttachmentsSet)) {
+            if (mColorStates[i].format != renderBundle->colorFormats[i]) {
+                return DAWN_VALIDATION_ERROR(
+                    "Pipeline color attachment format doesn't match render bundle");
+            }
+        }
+
+        if (mHasDepthStencilAttachment != renderBundle->hasDepthStencilFormat) {
+            return DAWN_VALIDATION_ERROR(
+                "Pipeline depth stencil attachment format doesn't match render bundle");
+        }
+
+        if (mHasDepthStencilAttachment &&
+            mDepthStencilState.format != renderBundle->depthStencilFormat) {
+            return DAWN_VALIDATION_ERROR(
+                "Pipeline depth stencil attachment format doesn't match render bundle");
+        }
+
+        if (mSampleCount != renderBundle->sampleCount) {
+            return DAWN_VALIDATION_ERROR("Pipeline sample count doesn't match render bundle");
+        }
+
+        return {};
+    }
+
     std::bitset<kMaxVertexAttributes> RenderPipelineBase::GetAttributesUsingInput(
         uint32_t slot) const {
         ASSERT(!IsError());

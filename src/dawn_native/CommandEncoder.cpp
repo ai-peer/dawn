@@ -23,6 +23,7 @@
 #include "dawn_native/ComputePassEncoder.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 
@@ -1088,19 +1089,9 @@ namespace dawn_native {
             usageTracker.TextureUsedAs(texture, dawn::TextureUsageBit::OutputAttachment);
         }
 
-        Command type;
-        while (commands->NextCommandId(&type)) {
+        auto ValidateRenderBundleCommand = [&](CommandIterator* commands, Command type,
+                                               const char* errorMessage) -> MaybeError {
             switch (type) {
-                case Command::EndRenderPass: {
-                    commands->NextCommand<EndRenderPassCmd>();
-
-                    DAWN_TRY(ValidateDebugGroups(mDebugGroupStackSize));
-
-                    DAWN_TRY(usageTracker.ValidateUsages(PassType::Render));
-                    mResourceUsages.perPass.push_back(usageTracker.AcquireResourceUsage());
-                    return {};
-                } break;
-
                 case Command::Draw: {
                     commands->NextCommand<DrawCmd>();
                     DAWN_TRY(persistentState.ValidateCanDraw());
@@ -1149,22 +1140,6 @@ namespace dawn_native {
                     persistentState.SetRenderPipeline(pipeline);
                 } break;
 
-                case Command::SetStencilReference: {
-                    commands->NextCommand<SetStencilReferenceCmd>();
-                } break;
-
-                case Command::SetBlendColor: {
-                    commands->NextCommand<SetBlendColorCmd>();
-                } break;
-
-                case Command::SetViewport: {
-                    commands->NextCommand<SetViewportCmd>();
-                } break;
-
-                case Command::SetScissorRect: {
-                    commands->NextCommand<SetScissorRectCmd>();
-                } break;
-
                 case Command::SetBindGroup: {
                     SetBindGroupCmd* cmd = commands->NextCommand<SetBindGroupCmd>();
                     if (cmd->dynamicOffsetCount > 0) {
@@ -1194,7 +1169,59 @@ namespace dawn_native {
                 } break;
 
                 default:
-                    return DAWN_VALIDATION_ERROR("Command disallowed inside a render pass");
+                    return DAWN_VALIDATION_ERROR(errorMessage);
+            }
+
+            return {};
+        };
+
+        Command type;
+        while (commands->NextCommandId(&type)) {
+            switch (type) {
+                case Command::EndRenderPass: {
+                    commands->NextCommand<EndRenderPassCmd>();
+
+                    DAWN_TRY(ValidateDebugGroups(mDebugGroupStackSize));
+
+                    DAWN_TRY(usageTracker.ValidateUsages(PassType::Render));
+                    mResourceUsages.perPass.push_back(usageTracker.AcquireResourceUsage());
+                    return {};
+                } break;
+
+                case Command::ExecuteBundles: {
+                    ExecuteBundlesCmd* cmd = commands->NextCommand<ExecuteBundlesCmd>();
+                    auto bundles = commands->NextData<Ref<RenderBundleBase>>(cmd->count);
+
+                    for (uint32_t i = 0; i < cmd->count; ++i) {
+                        DAWN_TRY(bundles[i]->ValidateCompatibleWith(renderPass));
+                        CommandIterator* commands = bundles[i]->GetCommands();
+                        commands->Reset();
+                        while (commands->NextCommandId(&type)) {
+                            DAWN_TRY(ValidateRenderBundleCommand(
+                                commands, type, "Command disallowed inside a render bundle"));
+                        }
+                    }
+                } break;
+
+                case Command::SetStencilReference: {
+                    commands->NextCommand<SetStencilReferenceCmd>();
+                } break;
+
+                case Command::SetBlendColor: {
+                    commands->NextCommand<SetBlendColorCmd>();
+                } break;
+
+                case Command::SetViewport: {
+                    commands->NextCommand<SetViewportCmd>();
+                } break;
+
+                case Command::SetScissorRect: {
+                    commands->NextCommand<SetScissorRectCmd>();
+                } break;
+
+                default:
+                    DAWN_TRY(ValidateRenderBundleCommand(
+                        commands, type, "Command disallowed inside a render pass"));
             }
         }
 
