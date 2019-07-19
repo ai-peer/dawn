@@ -39,7 +39,7 @@ namespace dawn_native {
 
     void CommandRecorder::MoveToIterator() {
         if (!mWasMovedToIterator) {
-            mIterator = std::move(mAllocator);
+            mIterator = std::move(mCommandAllocator);
             mWasMovedToIterator = true;
         }
     }

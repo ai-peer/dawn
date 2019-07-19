@@ -23,8 +23,10 @@
 #include "dawn_native/ComputePassEncoder.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/RenderPipeline.h"
+#include "dawn_native/Texture.h"
 
 #include <map>
 
@@ -651,10 +653,10 @@ namespace dawn_native {
             return ComputePassEncoderBase::MakeError(device, this);
         }
 
-        mAllocator.Allocate<BeginComputePassCmd>(Command::BeginComputePass);
+        mCommandAllocator.Allocate<BeginComputePassCmd>(Command::BeginComputePass);
 
         mEncodingState = EncodingState::ComputePass;
-        return new ComputePassEncoderBase(device, this, &mAllocator);
+        return new ComputePassEncoderBase(device, this, &mCommandAllocator);
     }
 
     RenderPassEncoderBase* CommandEncoderBase::BeginRenderPass(
@@ -677,7 +679,8 @@ namespace dawn_native {
 
         mEncodingState = EncodingState::RenderPass;
 
-        BeginRenderPassCmd* cmd = mAllocator.Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
+        BeginRenderPassCmd* cmd =
+            mCommandAllocator.Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
 
         for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
             if (descriptor->colorAttachments[i] != nullptr) {
@@ -712,7 +715,7 @@ namespace dawn_native {
         cmd->height = height;
         cmd->sampleCount = sampleCount;
 
-        return new RenderPassEncoderBase(device, this, &mAllocator);
+        return new RenderPassEncoderBase(device, this, &mCommandAllocator);
     }
 
     void CommandEncoderBase::CopyBufferToBuffer(BufferBase* source,
@@ -733,7 +736,7 @@ namespace dawn_native {
         }
 
         CopyBufferToBufferCmd* copy =
-            mAllocator.Allocate<CopyBufferToBufferCmd>(Command::CopyBufferToBuffer);
+            mCommandAllocator.Allocate<CopyBufferToBufferCmd>(Command::CopyBufferToBuffer);
         copy->source = source;
         copy->sourceOffset = sourceOffset;
         copy->destination = destination;
@@ -757,7 +760,7 @@ namespace dawn_native {
         }
 
         CopyBufferToTextureCmd* copy =
-            mAllocator.Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
+            mCommandAllocator.Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
         copy->source.buffer = source->buffer;
         copy->source.offset = source->offset;
         copy->destination.texture = destination->texture;
@@ -794,7 +797,7 @@ namespace dawn_native {
         }
 
         CopyTextureToBufferCmd* copy =
-            mAllocator.Allocate<CopyTextureToBufferCmd>(Command::CopyTextureToBuffer);
+            mCommandAllocator.Allocate<CopyTextureToBufferCmd>(Command::CopyTextureToBuffer);
         copy->source.texture = source->texture;
         copy->source.origin = source->origin;
         copy->copySize = *copySize;
@@ -831,7 +834,7 @@ namespace dawn_native {
         }
 
         CopyTextureToTextureCmd* copy =
-            mAllocator.Allocate<CopyTextureToTextureCmd>(Command::CopyTextureToTexture);
+            mCommandAllocator.Allocate<CopyTextureToTextureCmd>(Command::CopyTextureToTexture);
         copy->source.texture = source->texture;
         copy->source.origin = source->origin;
         copy->source.mipLevel = source->mipLevel;
@@ -869,10 +872,10 @@ namespace dawn_native {
         }
 
         if (mEncodingState == EncodingState::ComputePass) {
-            mAllocator.Allocate<EndComputePassCmd>(Command::EndComputePass);
+            mCommandAllocator.Allocate<EndComputePassCmd>(Command::EndComputePass);
         } else {
             ASSERT(mEncodingState == EncodingState::RenderPass);
-            mAllocator.Allocate<EndRenderPassCmd>(Command::EndRenderPass);
+            mCommandAllocator.Allocate<EndRenderPassCmd>(Command::EndRenderPass);
         }
         mEncodingState = EncodingState::TopLevel;
     }
@@ -1122,6 +1125,92 @@ namespace dawn_native {
             usageTracker.TextureUsedAs(texture, dawn::TextureUsageBit::OutputAttachment);
         }
 
+        auto ValidateRenderBundleCommand = [&](CommandIterator* iterator, Command type,
+                                               const char* errorMessage) -> MaybeError {
+            switch (type) {
+                case Command::Draw: {
+                    iterator->NextCommand<DrawCmd>();
+                    DAWN_TRY(persistentState.ValidateCanDraw());
+                } break;
+
+                case Command::DrawIndexed: {
+                    iterator->NextCommand<DrawIndexedCmd>();
+                    DAWN_TRY(persistentState.ValidateCanDrawIndexed());
+                } break;
+
+                case Command::DrawIndirect: {
+                    DrawIndirectCmd* cmd = iterator->NextCommand<DrawIndirectCmd>();
+                    DAWN_TRY(persistentState.ValidateCanDraw());
+                    usageTracker.BufferUsedAs(cmd->indirectBuffer.Get(),
+                                              dawn::BufferUsageBit::Indirect);
+                } break;
+
+                case Command::DrawIndexedIndirect: {
+                    DrawIndexedIndirectCmd* cmd = iterator->NextCommand<DrawIndexedIndirectCmd>();
+                    DAWN_TRY(persistentState.ValidateCanDrawIndexed());
+                    usageTracker.BufferUsedAs(cmd->indirectBuffer.Get(),
+                                              dawn::BufferUsageBit::Indirect);
+                } break;
+
+                case Command::InsertDebugMarker: {
+                    InsertDebugMarkerCmd* cmd = iterator->NextCommand<InsertDebugMarkerCmd>();
+                    iterator->NextData<char>(cmd->length + 1);
+                } break;
+
+                case Command::PopDebugGroup: {
+                    iterator->NextCommand<PopDebugGroupCmd>();
+                    DAWN_TRY(PopDebugMarkerStack(&mDebugGroupStackSize));
+                } break;
+
+                case Command::PushDebugGroup: {
+                    PushDebugGroupCmd* cmd = iterator->NextCommand<PushDebugGroupCmd>();
+                    iterator->NextData<char>(cmd->length + 1);
+                    DAWN_TRY(PushDebugMarkerStack(&mDebugGroupStackSize));
+                } break;
+
+                case Command::SetRenderPipeline: {
+                    SetRenderPipelineCmd* cmd = iterator->NextCommand<SetRenderPipelineCmd>();
+                    RenderPipelineBase* pipeline = cmd->pipeline.Get();
+
+                    DAWN_TRY(pipeline->ValidateCompatibleWith(renderPass));
+                    persistentState.SetRenderPipeline(pipeline);
+                } break;
+
+                case Command::SetBindGroup: {
+                    SetBindGroupCmd* cmd = iterator->NextCommand<SetBindGroupCmd>();
+                    if (cmd->dynamicOffsetCount > 0) {
+                        iterator->NextData<uint64_t>(cmd->dynamicOffsetCount);
+                    }
+
+                    TrackBindGroupResourceUsage(cmd->group.Get(), &usageTracker);
+                    persistentState.SetBindGroup(cmd->index, cmd->group.Get());
+                } break;
+
+                case Command::SetIndexBuffer: {
+                    SetIndexBufferCmd* cmd = iterator->NextCommand<SetIndexBufferCmd>();
+
+                    usageTracker.BufferUsedAs(cmd->buffer.Get(), dawn::BufferUsageBit::Index);
+                    persistentState.SetIndexBuffer();
+                } break;
+
+                case Command::SetVertexBuffers: {
+                    SetVertexBuffersCmd* cmd = iterator->NextCommand<SetVertexBuffersCmd>();
+                    auto buffers = iterator->NextData<Ref<BufferBase>>(cmd->count);
+                    iterator->NextData<uint64_t>(cmd->count);
+
+                    for (uint32_t i = 0; i < cmd->count; ++i) {
+                        usageTracker.BufferUsedAs(buffers[i].Get(), dawn::BufferUsageBit::Vertex);
+                    }
+                    persistentState.SetVertexBuffer(cmd->startSlot, cmd->count);
+                } break;
+
+                default:
+                    return DAWN_VALIDATION_ERROR(errorMessage);
+            }
+
+            return {};
+        };
+
         Command type;
         while (mIterator.NextCommandId(&type)) {
             switch (type) {
@@ -1135,52 +1224,19 @@ namespace dawn_native {
                     return {};
                 } break;
 
-                case Command::Draw: {
-                    mIterator.NextCommand<DrawCmd>();
-                    DAWN_TRY(persistentState.ValidateCanDraw());
-                } break;
+                case Command::ExecuteBundles: {
+                    ExecuteBundlesCmd* cmd = mIterator.NextCommand<ExecuteBundlesCmd>();
+                    auto bundles = mIterator.NextData<Ref<RenderBundleBase>>(cmd->count);
 
-                case Command::DrawIndexed: {
-                    mIterator.NextCommand<DrawIndexedCmd>();
-                    DAWN_TRY(persistentState.ValidateCanDrawIndexed());
-                } break;
-
-                case Command::DrawIndirect: {
-                    DrawIndirectCmd* cmd = mIterator.NextCommand<DrawIndirectCmd>();
-                    DAWN_TRY(persistentState.ValidateCanDraw());
-                    usageTracker.BufferUsedAs(cmd->indirectBuffer.Get(),
-                                              dawn::BufferUsageBit::Indirect);
-                } break;
-
-                case Command::DrawIndexedIndirect: {
-                    DrawIndexedIndirectCmd* cmd = mIterator.NextCommand<DrawIndexedIndirectCmd>();
-                    DAWN_TRY(persistentState.ValidateCanDrawIndexed());
-                    usageTracker.BufferUsedAs(cmd->indirectBuffer.Get(),
-                                              dawn::BufferUsageBit::Indirect);
-                } break;
-
-                case Command::InsertDebugMarker: {
-                    InsertDebugMarkerCmd* cmd = mIterator.NextCommand<InsertDebugMarkerCmd>();
-                    mIterator.NextData<char>(cmd->length + 1);
-                } break;
-
-                case Command::PopDebugGroup: {
-                    mIterator.NextCommand<PopDebugGroupCmd>();
-                    DAWN_TRY(PopDebugMarkerStack(&mDebugGroupStackSize));
-                } break;
-
-                case Command::PushDebugGroup: {
-                    PushDebugGroupCmd* cmd = mIterator.NextCommand<PushDebugGroupCmd>();
-                    mIterator.NextData<char>(cmd->length + 1);
-                    DAWN_TRY(PushDebugMarkerStack(&mDebugGroupStackSize));
-                } break;
-
-                case Command::SetRenderPipeline: {
-                    SetRenderPipelineCmd* cmd = mIterator.NextCommand<SetRenderPipelineCmd>();
-                    RenderPipelineBase* pipeline = cmd->pipeline.Get();
-
-                    DAWN_TRY(pipeline->ValidateCompatibleWith(renderPass));
-                    persistentState.SetRenderPipeline(pipeline);
+                    for (uint32_t i = 0; i < cmd->count; ++i) {
+                        DAWN_TRY(bundles[i]->ValidateCompatibleWith(renderPass));
+                        CommandIterator* iterator = bundles[i]->GetCommands();
+                        iterator->Reset();
+                        while (iterator->NextCommandId(&type)) {
+                            DAWN_TRY(ValidateRenderBundleCommand(
+                                iterator, type, "Command disallowed inside a render bundle"));
+                        }
+                    }
                 } break;
 
                 case Command::SetStencilReference: {
@@ -1209,26 +1265,9 @@ namespace dawn_native {
                     persistentState.SetBindGroup(cmd->index, cmd->group.Get());
                 } break;
 
-                case Command::SetIndexBuffer: {
-                    SetIndexBufferCmd* cmd = mIterator.NextCommand<SetIndexBufferCmd>();
-
-                    usageTracker.BufferUsedAs(cmd->buffer.Get(), dawn::BufferUsageBit::Index);
-                    persistentState.SetIndexBuffer();
-                } break;
-
-                case Command::SetVertexBuffers: {
-                    SetVertexBuffersCmd* cmd = mIterator.NextCommand<SetVertexBuffersCmd>();
-                    auto buffers = mIterator.NextData<Ref<BufferBase>>(cmd->count);
-                    mIterator.NextData<uint64_t>(cmd->count);
-
-                    for (uint32_t i = 0; i < cmd->count; ++i) {
-                        usageTracker.BufferUsedAs(buffers[i].Get(), dawn::BufferUsageBit::Vertex);
-                    }
-                    persistentState.SetVertexBuffer(cmd->startSlot, cmd->count);
-                } break;
-
                 default:
-                    return DAWN_VALIDATION_ERROR("Command disallowed inside a render pass");
+                    DAWN_TRY(ValidateRenderBundleCommand(
+                        &mIterator, type, "Command disallowed inside a render pass"));
             }
         }
 

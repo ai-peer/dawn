@@ -34,7 +34,7 @@ namespace dawn_native {
 
     RenderEncoderBase::RenderEncoderBase(DeviceBase* device,
                                          CommandRecorder* commandRecorder,
-                                         ErrorTag errorTag)
+                                         ObjectBase::ErrorTag errorTag)
         : ProgrammablePassEncoder(device, commandRecorder, errorTag) {
     }
 
@@ -72,7 +72,7 @@ namespace dawn_native {
 
     void RenderEncoderBase::DrawIndirect(BufferBase* indirectBuffer, uint64_t indirectOffset) {
         if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
-            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
+            mCommandRecorder->ConsumedError(mDevice->ValidateObject(indirectBuffer))) {
             return;
         }
 
@@ -90,7 +90,7 @@ namespace dawn_native {
     void RenderEncoderBase::DrawIndexedIndirect(BufferBase* indirectBuffer,
                                                 uint64_t indirectOffset) {
         if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
-            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(indirectBuffer))) {
+            mCommandRecorder->ConsumedError(mDevice->ValidateObject(indirectBuffer))) {
             return;
         }
 
@@ -108,7 +108,7 @@ namespace dawn_native {
 
     void RenderEncoderBase::SetPipeline(RenderPipelineBase* pipeline) {
         if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
-            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(pipeline))) {
+            mCommandRecorder->ConsumedError(mDevice->ValidateObject(pipeline))) {
             return;
         }
 
@@ -119,7 +119,7 @@ namespace dawn_native {
 
     void RenderEncoderBase::SetIndexBuffer(BufferBase* buffer, uint64_t offset) {
         if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
-            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(buffer))) {
+            mCommandRecorder->ConsumedError(mDevice->ValidateObject(buffer))) {
             return;
         }
 
@@ -137,7 +137,7 @@ namespace dawn_native {
         }
 
         for (size_t i = 0; i < count; ++i) {
-            if (mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(buffers[i]))) {
+            if (mCommandRecorder->ConsumedError(mDevice->ValidateObject(buffers[i]))) {
                 return;
             }
         }

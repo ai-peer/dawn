@@ -19,6 +19,7 @@
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPipeline.h"
 
 #include <math.h>
@@ -29,13 +30,13 @@ namespace dawn_native {
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
                                                  CommandEncoderBase* topLevelEncoder,
                                                  CommandAllocator* allocator)
-        : RenderEncoderBase(device, topLevelEncoder, allocator) {
+        : RenderEncoderBase(device, topLevelEncoder, allocator), ObjectBase(device) {
     }
 
     RenderPassEncoderBase::RenderPassEncoderBase(DeviceBase* device,
                                                  CommandEncoderBase* topLevelEncoder,
                                                  ErrorTag errorTag)
-        : RenderEncoderBase(device, topLevelEncoder, errorTag) {
+        : RenderEncoderBase(device, topLevelEncoder, errorTag), ObjectBase(device, errorTag) {
     }
 
     RenderPassEncoderBase* RenderPassEncoderBase::MakeError(DeviceBase* device,
@@ -126,6 +127,27 @@ namespace dawn_native {
         cmd->y = y;
         cmd->width = width;
         cmd->height = height;
+    }
+
+    void RenderPassEncoderBase::ExecuteBundles(uint32_t count,
+                                               RenderBundleBase* const* renderBundles) {
+        if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands())) {
+            return;
+        }
+
+        for (uint32_t i = 0; i < count; ++i) {
+            if (mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(renderBundles[i]))) {
+                return;
+            }
+        }
+
+        ExecuteBundlesCmd* cmd = mAllocator->Allocate<ExecuteBundlesCmd>(Command::ExecuteBundles);
+        cmd->count = count;
+
+        Ref<RenderBundleBase>* bundles = mAllocator->AllocateData<Ref<RenderBundleBase>>(count);
+        for (uint32_t i = 0; i < count; ++i) {
+            bundles[i] = renderBundles[i];
+        }
     }
 
 }  // namespace dawn_native

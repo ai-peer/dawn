@@ -27,7 +27,7 @@ namespace dawn_native {
     class DeviceBase;
 
     // Base class for shared functionality between ComputePassEncoder and RenderPassEncoder.
-    class ProgrammablePassEncoder : public ObjectBase {
+    class ProgrammablePassEncoder {
       public:
         ProgrammablePassEncoder(DeviceBase* device,
                                 CommandRecorder* commandRecorder,
@@ -46,10 +46,11 @@ namespace dawn_native {
         // Construct an "error" programmable pass encoder.
         ProgrammablePassEncoder(DeviceBase* device,
                                 CommandRecorder* commandRecorder,
-                                ErrorTag errorTag);
+                                ObjectBase::ErrorTag errorTag);
 
         MaybeError ValidateCanRecordCommands() const;
 
+        DeviceBase* mDevice = nullptr;
         // The allocator is borrowed from the command recorder. Keep a reference to the recorder
         // to make sure the allocator isn't freed.
         Ref<CommandRecorder> mCommandRecorder = nullptr;

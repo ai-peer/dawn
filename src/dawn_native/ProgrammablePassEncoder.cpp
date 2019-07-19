@@ -28,14 +28,14 @@ namespace dawn_native {
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
                                                      CommandRecorder* commandRecorder,
                                                      CommandAllocator* allocator)
-        : ObjectBase(device), mCommandRecorder(commandRecorder), mAllocator(allocator) {
+        : mDevice(device), mCommandRecorder(commandRecorder), mAllocator(allocator) {
         DAWN_ASSERT(allocator != nullptr);
     }
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
                                                      CommandRecorder* commandRecorder,
-                                                     ErrorTag errorTag)
-        : ObjectBase(device, errorTag), mCommandRecorder(commandRecorder), mAllocator(nullptr) {
+                                                     ObjectBase::ErrorTag errorTag)
+        : mDevice(device), mCommandRecorder(commandRecorder), mAllocator(nullptr) {
     }
 
     void ProgrammablePassEncoder::InsertDebugMarker(const char* groupLabel) {
@@ -78,7 +78,7 @@ namespace dawn_native {
         const BindGroupLayoutBase* layout = group->GetLayout();
 
         if (mCommandRecorder->ConsumedError(ValidateCanRecordCommands()) ||
-            mCommandRecorder->ConsumedError(GetDevice()->ValidateObject(group))) {
+            mCommandRecorder->ConsumedError(mDevice->ValidateObject(group))) {
             return;
         }
 

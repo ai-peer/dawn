@@ -16,6 +16,7 @@
 #define DAWNNATIVE_COMPUTEPASSENCODER_H_
 
 #include "dawn_native/Error.h"
+#include "dawn_native/ObjectBase.h"
 #include "dawn_native/ProgrammablePassEncoder.h"
 
 namespace dawn_native {
@@ -24,7 +25,7 @@ namespace dawn_native {
     // is a pure frontend type to record in its parent CommandEncoder and never has a backend
     // implementation.
     // TODO(cwallez@chromium.org): Remove that generator limitation and rename to ComputePassEncoder
-    class ComputePassEncoderBase : public ProgrammablePassEncoder {
+    class ComputePassEncoderBase : public ProgrammablePassEncoder, public ObjectBase {
       public:
         ComputePassEncoderBase(DeviceBase* device,
                                CommandRecorder* commandRecorder,
