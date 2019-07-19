@@ -43,6 +43,7 @@ namespace dawn_native { namespace vulkan {
 
     bool MemoryAllocator::Allocate(VkMemoryRequirements requirements,
                                    bool mappable,
+                                   void* pNext,
                                    DeviceMemoryAllocation* allocation) {
         const VulkanDeviceInfo& info = mDevice->GetDeviceInfo();
 
@@ -101,7 +102,7 @@ namespace dawn_native { namespace vulkan {
 
         VkMemoryAllocateInfo allocateInfo;
         allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        allocateInfo.pNext = nullptr;
+        allocateInfo.pNext = pNext;
         allocateInfo.allocationSize = requirements.size;
         allocateInfo.memoryTypeIndex = static_cast<uint32_t>(bestType);
 

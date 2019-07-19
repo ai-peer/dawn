@@ -30,6 +30,15 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
+        void AddSemaphores(Device* device, Texture* texture) {
+            for (const VkSemaphore& semaphore : texture->GetWaitRequirements()) {
+                device->AddWaitSemaphore(semaphore);
+            }
+            // Only wait on each semaphore once
+            // Because semaphores are unsignaled after wait
+            texture->ClearWaitRequirements();
+        }
+
         VkIndexType VulkanIndexType(dawn::IndexFormat format) {
             switch (format) {
                 case dawn::IndexFormat::Uint16:
@@ -190,6 +199,7 @@ namespace dawn_native { namespace vulkan {
         };
 
         void RecordBeginRenderPass(VkCommandBuffer commands,
+                                   CommandRecordingContext* recordingContext,
                                    Device* device,
                                    BeginRenderPassCmd* renderPass) {
             // Query a VkRenderPass from the cache
@@ -231,7 +241,7 @@ namespace dawn_native { namespace vulkan {
                         attachmentInfo.stencilLoadOp == dawn::LoadOp::Load) {
                         ToBackend(attachmentInfo.view->GetTexture())
                             ->EnsureSubresourceContentInitialized(
-                                commands, attachmentInfo.view->GetBaseMipLevel(),
+                                commands, recordingContext, attachmentInfo.view->GetBaseMipLevel(),
                                 attachmentInfo.view->GetLevelCount(),
                                 attachmentInfo.view->GetBaseArrayLayer(),
                                 attachmentInfo.view->GetLayerCount());
@@ -336,11 +346,14 @@ namespace dawn_native { namespace vulkan {
         FreeCommands(&mCommands);
     }
 
-    void CommandBuffer::RecordCommands(VkCommandBuffer commands) {
+    void CommandBuffer::RecordCommands(VkCommandBuffer commands,
+                                       CommandRecordingContext* recordingContext) {
         Device* device = ToBackend(GetDevice());
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](VkCommandBuffer commands, const PassResourceUsage& usages) {
+        auto TransitionForPass = [](VkCommandBuffer commands,
+                                    CommandRecordingContext* recordingContext,
+                                    const PassResourceUsage& usages) {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
                 buffer->TransitionUsageNow(commands, usages.bufferUsages[i]);
@@ -350,9 +363,10 @@ namespace dawn_native { namespace vulkan {
 
                 // TODO(natlee@microsoft.com): Update clearing here when subresource tracking is
                 // implemented
-                texture->EnsureSubresourceContentInitialized(
-                    commands, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
-                texture->TransitionUsageNow(commands, usages.textureUsages[i]);
+                texture->EnsureSubresourceContentInitialized(commands, recordingContext, 0,
+                                                             texture->GetNumMipLevels(), 0,
+                                                             texture->GetArrayLayers());
+                texture->TransitionUsageNow(commands, recordingContext, usages.textureUsages[i]);
             }
         };
 
@@ -396,13 +410,15 @@ namespace dawn_native { namespace vulkan {
                             subresource.mipLevel, 1, subresource.baseArrayLayer, 1);
                     } else {
                         ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(commands, subresource.mipLevel, 1,
+                            ->EnsureSubresourceContentInitialized(commands, recordingContext,
+                                                                  subresource.mipLevel, 1,
                                                                   subresource.baseArrayLayer, 1);
                     }
                     ToBackend(src.buffer)
                         ->TransitionUsageNow(commands, dawn::BufferUsageBit::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopyDst);
+                        ->TransitionUsageNow(commands, recordingContext,
+                                             dawn::TextureUsageBit::CopyDst);
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
@@ -411,6 +427,8 @@ namespace dawn_native { namespace vulkan {
                     device->fn.CmdCopyBufferToImage(commands, srcBuffer, dstImage,
                                                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
                                                     &region);
+
+                    AddSemaphores(device, ToBackend(dst.texture.Get()));
                 } break;
 
                 case Command::CopyTextureToBuffer: {
@@ -423,11 +441,13 @@ namespace dawn_native { namespace vulkan {
                     VkImageSubresourceLayers subresource = region.imageSubresource;
 
                     ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(commands, subresource.mipLevel, 1,
+                        ->EnsureSubresourceContentInitialized(commands, recordingContext,
+                                                              subresource.mipLevel, 1,
                                                               subresource.baseArrayLayer, 1);
 
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopySrc);
+                        ->TransitionUsageNow(commands, recordingContext,
+                                             dawn::TextureUsageBit::CopySrc);
                     ToBackend(dst.buffer)
                         ->TransitionUsageNow(commands, dawn::BufferUsageBit::CopyDst);
 
@@ -436,6 +456,8 @@ namespace dawn_native { namespace vulkan {
                     // The Dawn CopySrc usage is always mapped to GENERAL
                     device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
                                                     dstBuffer, 1, &region);
+
+                    AddSemaphores(device, ToBackend(src.texture.Get()));
                 } break;
 
                 case Command::CopyTextureToTexture: {
@@ -449,7 +471,8 @@ namespace dawn_native { namespace vulkan {
                     VkImageSubresourceLayers srcSubresource = region.srcSubresource;
 
                     ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(commands, srcSubresource.mipLevel, 1,
+                        ->EnsureSubresourceContentInitialized(commands, recordingContext,
+                                                              srcSubresource.mipLevel, 1,
                                                               srcSubresource.baseArrayLayer, 1);
                     if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
                                                       dstSubresource.mipLevel)) {
@@ -458,14 +481,16 @@ namespace dawn_native { namespace vulkan {
                             dstSubresource.mipLevel, 1, dstSubresource.baseArrayLayer, 1);
                     } else {
                         ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(commands, dstSubresource.mipLevel,
-                                                                  1, dstSubresource.baseArrayLayer,
-                                                                  1);
+                            ->EnsureSubresourceContentInitialized(commands, recordingContext,
+                                                                  dstSubresource.mipLevel, 1,
+                                                                  dstSubresource.baseArrayLayer, 1);
                     }
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopySrc);
+                        ->TransitionUsageNow(commands, recordingContext,
+                                             dawn::TextureUsageBit::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopyDst);
+                        ->TransitionUsageNow(commands, recordingContext,
+                                             dawn::TextureUsageBit::CopyDst);
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
@@ -473,13 +498,17 @@ namespace dawn_native { namespace vulkan {
                     // TRANSFER_DST_OPTIMAL layout
                     device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL, dstImage,
                                             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+
+                    AddSemaphores(device, ToBackend(src.texture.Get()));
+                    AddSemaphores(device, ToBackend(dst.texture.Get()));
                 } break;
 
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    TransitionForPass(commands, passResourceUsages[nextPassNumber]);
-                    RecordRenderPass(commands, cmd);
+                    TransitionForPass(commands, recordingContext,
+                                      passResourceUsages[nextPassNumber]);
+                    RecordRenderPass(commands, recordingContext, cmd);
 
                     nextPassNumber++;
                 } break;
@@ -487,7 +516,8 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(commands, passResourceUsages[nextPassNumber]);
+                    TransitionForPass(commands, recordingContext,
+                                      passResourceUsages[nextPassNumber]);
                     RecordComputePass(commands);
 
                     nextPassNumber++;
@@ -556,10 +586,11 @@ namespace dawn_native { namespace vulkan {
         UNREACHABLE();
     }
     void CommandBuffer::RecordRenderPass(VkCommandBuffer commands,
+                                         CommandRecordingContext* recordingContext,
                                          BeginRenderPassCmd* renderPassCmd) {
         Device* device = ToBackend(GetDevice());
 
-        RecordBeginRenderPass(commands, device, renderPassCmd);
+        RecordBeginRenderPass(commands, recordingContext, device, renderPassCmd);
 
         // Set the default value for the dynamic state
         {

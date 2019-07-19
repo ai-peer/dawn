@@ -30,9 +30,19 @@ namespace dawn_native { namespace vulkan {
 
         device->Tick();
 
+        CommandRecordingContext recordingContext;
         VkCommandBuffer commandBuffer = device->GetPendingCommandBuffer();
         for (uint32_t i = 0; i < commandCount; ++i) {
-            ToBackend(commands[i])->RecordCommands(commandBuffer);
+            ToBackend(commands[i])->RecordCommands(commandBuffer, &recordingContext);
+        }
+
+        // Add all the recorded wait and signal semaphores
+        for (VkSemaphore semaphore : recordingContext.waitSemaphores) {
+            device->AddWaitSemaphore(semaphore);
+        }
+
+        for (VkSemaphore semaphore : recordingContext.signalSemaphores) {
+            device->AddSignalSemaphore(semaphore);
         }
 
         device->SubmitPendingCommands();
