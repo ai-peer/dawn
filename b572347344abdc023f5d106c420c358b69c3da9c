@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a42794e0_870c064b",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-19T10:00:15Z",
+      "side": 1,
+      "message": "I\u0027m wondering if this is should be CommandEncoderBase is a CommandRecoder or CommandEncoderBase has a CommandRecorder. If we view the CommandRecoder as an \"EncodingContext\" with errors, and the allocators then it looks more like \"has a\".\n\nI\u0027m also thinking about how we could refactor the error handling inside encoders to be more readable and not always call into the recorder. Here\u0027s a first idea https://gist.github.com/Kangz/c239a84f5b496b0b699562bbd40fa2c8 that tries to optimize to make the ValidateCanRecordCommands a single check, and tries to do the minimum number of ConsumedError (each of them is an additional branch to check if the MaybeError is an error).\n\nWDYT?",
+      "revId": "b572347344abdc023f5d106c420c358b69c3da9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
