@@ -704,21 +704,10 @@ namespace dawn_native { namespace opengl {
 
         InputBufferTracker inputBuffers;
 
-        Command type;
-        while (mCommands.NextCommandId(&type)) {
+        auto DoRenderBundleCommand = [&](CommandIterator* commands, Command type) {
             switch (type) {
-                case Command::EndRenderPass: {
-                    mCommands.NextCommand<EndRenderPassCmd>();
-
-                    if (renderPass->sampleCount > 1) {
-                        ResolveMultisampledRenderTargets(gl, renderPass);
-                    }
-                    gl.DeleteFramebuffers(1, &fbo);
-                    return;
-                } break;
-
                 case Command::Draw: {
-                    DrawCmd* draw = mCommands.NextCommand<DrawCmd>();
+                    DrawCmd* draw = commands->NextCommand<DrawCmd>();
                     inputBuffers.Apply(gl);
 
                     if (draw->firstInstance > 0) {
@@ -734,7 +723,7 @@ namespace dawn_native { namespace opengl {
                 } break;
 
                 case Command::DrawIndexed: {
-                    DrawIndexedCmd* draw = mCommands.NextCommand<DrawIndexedCmd>();
+                    DrawIndexedCmd* draw = commands->NextCommand<DrawIndexedCmd>();
                     inputBuffers.Apply(gl);
 
                     dawn::IndexFormat indexFormat =
@@ -759,7 +748,7 @@ namespace dawn_native { namespace opengl {
                 } break;
 
                 case Command::DrawIndirect: {
-                    DrawIndirectCmd* draw = mCommands.NextCommand<DrawIndirectCmd>();
+                    DrawIndirectCmd* draw = commands->NextCommand<DrawIndirectCmd>();
                     inputBuffers.Apply(gl);
 
                     uint64_t indirectBufferOffset = draw->indirectOffset;
@@ -772,7 +761,7 @@ namespace dawn_native { namespace opengl {
                 } break;
 
                 case Command::DrawIndexedIndirect: {
-                    DrawIndexedIndirectCmd* draw = mCommands.NextCommand<DrawIndexedIndirectCmd>();
+                    DrawIndexedIndirectCmd* draw = commands->NextCommand<DrawIndexedIndirectCmd>();
                     inputBuffers.Apply(gl);
 
                     dawn::IndexFormat indexFormat =
@@ -793,15 +782,66 @@ namespace dawn_native { namespace opengl {
                 case Command::PushDebugGroup: {
                     // Due to lack of linux driver support for GL_EXT_debug_marker
                     // extension these functions are skipped.
-                    SkipCommand(&mCommands, type);
+                    SkipCommand(commands, type);
                 } break;
 
                 case Command::SetRenderPipeline: {
-                    SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
+                    SetRenderPipelineCmd* cmd = commands->NextCommand<SetRenderPipelineCmd>();
                     lastPipeline = ToBackend(cmd->pipeline).Get();
                     lastPipeline->ApplyNow(persistentPipelineState);
 
                     inputBuffers.OnSetPipeline(lastPipeline);
+                } break;
+
+                case Command::SetBindGroup: {
+                    SetBindGroupCmd* cmd = commands->NextCommand<SetBindGroupCmd>();
+                    ApplyBindGroup(gl, cmd->index, cmd->group.Get(),
+                                   ToBackend(lastPipeline->GetLayout()), lastPipeline);
+                } break;
+
+                case Command::SetIndexBuffer: {
+                    SetIndexBufferCmd* cmd = commands->NextCommand<SetIndexBufferCmd>();
+                    indexBufferBaseOffset = cmd->offset;
+                    inputBuffers.OnSetIndexBuffer(cmd->buffer.Get());
+                } break;
+
+                case Command::SetVertexBuffers: {
+                    SetVertexBuffersCmd* cmd = commands->NextCommand<SetVertexBuffersCmd>();
+                    auto buffers = commands->NextData<Ref<BufferBase>>(cmd->count);
+                    auto offsets = commands->NextData<uint64_t>(cmd->count);
+                    inputBuffers.OnSetVertexBuffers(cmd->startSlot, cmd->count, buffers, offsets);
+                } break;
+
+                default:
+                    UNREACHABLE();
+                    break;
+            }
+        };
+
+        Command type;
+        while (mCommands.NextCommandId(&type)) {
+            switch (type) {
+                case Command::EndRenderPass: {
+                    mCommands.NextCommand<EndRenderPassCmd>();
+
+                    if (renderPass->sampleCount > 1) {
+                        ResolveMultisampledRenderTargets(gl, renderPass);
+                    }
+                    gl.DeleteFramebuffers(1, &fbo);
+                    return;
+                } break;
+
+                case Command::ExecuteBundles: {
+                    ExecuteBundlesCmd* cmd = mCommands.NextCommand<ExecuteBundlesCmd>();
+                    auto bundles = mCommands.NextData<Ref<RenderBundleBase>>(cmd->count);
+
+                    for (uint32_t i = 0; i < cmd->count; ++i) {
+                        CommandIterator* commands = bundles[i]->GetCommands();
+                        commands->Reset();
+                        while (commands->NextCommandId(&type)) {
+                            DoRenderBundleCommand(commands, type);
+                        }
+                    }
                 } break;
 
                 case Command::SetStencilReference: {
@@ -825,26 +865,9 @@ namespace dawn_native { namespace opengl {
                     gl.BlendColor(cmd->color.r, cmd->color.g, cmd->color.b, cmd->color.a);
                 } break;
 
-                case Command::SetBindGroup: {
-                    SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
-                    ApplyBindGroup(gl, cmd->index, cmd->group.Get(),
-                                   ToBackend(lastPipeline->GetLayout()), lastPipeline);
-                } break;
-
-                case Command::SetIndexBuffer: {
-                    SetIndexBufferCmd* cmd = mCommands.NextCommand<SetIndexBufferCmd>();
-                    indexBufferBaseOffset = cmd->offset;
-                    inputBuffers.OnSetIndexBuffer(cmd->buffer.Get());
-                } break;
-
-                case Command::SetVertexBuffers: {
-                    SetVertexBuffersCmd* cmd = mCommands.NextCommand<SetVertexBuffersCmd>();
-                    auto buffers = mCommands.NextData<Ref<BufferBase>>(cmd->count);
-                    auto offsets = mCommands.NextData<uint64_t>(cmd->count);
-                    inputBuffers.OnSetVertexBuffers(cmd->startSlot, cmd->count, buffers, offsets);
-                } break;
-
-                default: { UNREACHABLE(); } break;
+                default:
+                    DoRenderBundleCommand(&mCommands, type);
+                    break;
             }
         }
 
