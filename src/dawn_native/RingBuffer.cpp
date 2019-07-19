@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/RingBuffer.h"
+#include <limits>
 #include "dawn_native/Device.h"
 
 // Note: Current RingBuffer implementation uses two indices (start and end) to implement a circular
