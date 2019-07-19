@@ -283,7 +283,7 @@ class TextureFormatTest : public DawnTest {
 
         // Prepare objects needed to sample from texture in the renderpass
         dawn::RenderPipeline pipeline = CreateSamplePipeline(sampleFormatInfo, renderFormatInfo);
-        dawn::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
+        dawn::SamplerDescriptor samplerDesc;
         dawn::Sampler sampler = device.CreateSampler(&samplerDesc);
         dawn::BindGroup bindGroup = utils::MakeBindGroup(
             device, mSampleBGL, {{0, sampler}, {1, sampleTexture.CreateDefaultView()}});
@@ -438,7 +438,8 @@ class TextureFormatTest : public DawnTest {
                                           1.0e29f, NAN,   INFINITY, -INFINITY};
 
         DoFloatFormatSamplingTest(formatInfo, textureData, textureData);
-        DoFormatRenderingTest(formatInfo, textureData, textureData);
+        DoFormatRenderingTest(formatInfo, textureData, textureData,
+                              new ExpectFloatWithTolerance(textureData, 0.0f));
     }
 
     void DoFloat16Test(FormatTestInfo formatInfo) {
@@ -676,6 +677,10 @@ TEST_P(TextureFormatTest, RGBA8UnormSrgb) {
 
 // Test the BGRA8UnormSrgb format
 TEST_P(TextureFormatTest, BGRA8UnormSrgb) {
+    // TODO(cwallez@chromium.org): This format doesn't exist in OpenGL, emulate it using
+    // RGBA8UnormSrgb and swizzling / shader twiddling
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
     uint8_t maxValue = std::numeric_limits<uint8_t>::max();
     std::vector<uint8_t> textureData = {0, 1, maxValue, 64, 35, 68, 152, 168};
 
@@ -769,4 +774,4 @@ TEST_P(TextureFormatTest, RG11B10Float) {
 // TODO(cwallez@chromium.org): Add tests for depth-stencil formats when we know if they are copyable
 // in WebGPU.
 
-DAWN_INSTANTIATE_TEST(TextureFormatTest, D3D12Backend, MetalBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(TextureFormatTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
