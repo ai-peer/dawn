@@ -57,7 +57,9 @@ namespace dawn_native {
 
       protected:
         // Construct an "error" render encoder base.
-        RenderEncoderBase(DeviceBase* device, CommandRecorder* commandRecorder, ErrorTag errorTag);
+        RenderEncoderBase(DeviceBase* device,
+                          CommandRecorder* commandRecorder,
+                          ObjectBase::ErrorTag errorTag);
     };
 }  // namespace dawn_native
 

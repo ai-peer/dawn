@@ -46,7 +46,7 @@ namespace dawn_native {
 
       protected:
         void MoveToIterator();
-        CommandAllocator mAllocator;
+        CommandAllocator mCommandAllocator;
         CommandIterator mIterator;
         bool mWasMovedToIterator = false;
         bool mWereCommandsAcquired = false;

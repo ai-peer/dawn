@@ -549,6 +549,13 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError RenderPipelineBase::ValidateCompatibleWith(
+        const RenderBundleAttachmentInfo* renderBundle) const {
+        ASSERT(!IsError());
+
+        return {};
+    }
+
     std::bitset<kMaxVertexAttributes> RenderPipelineBase::GetAttributesUsingInput(
         uint32_t slot) const {
         ASSERT(!IsError());
