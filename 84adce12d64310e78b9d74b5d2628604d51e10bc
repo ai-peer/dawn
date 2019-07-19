@@ -138,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "7e57acc9_a69d359e",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-19T01:45:49Z",
+      "side": 1,
+      "message": "Also, it\u0027s only dawn_end2end_wire_tests not dawn_end2end_tests. So that\u0027s pretty weird.",
+      "parentUuid": "d59c2b2a_14935756",
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b92a618f_70bdca30",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
