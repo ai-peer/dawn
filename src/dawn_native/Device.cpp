@@ -28,6 +28,7 @@
 #include "dawn_native/Instance.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
+#include "dawn_native/RenderBundleEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/Sampler.h"
 #include "dawn_native/ShaderModule.h"
@@ -374,6 +375,10 @@ namespace dawn_native {
         }
 
         return result;
+    }
+    RenderBundleEncoderBase* DeviceBase::CreateRenderBundleEncoder(
+        const RenderBundleEncoderDescriptor* descriptor) {
+        return new RenderBundleEncoderBase(this, descriptor);
     }
     RenderPipelineBase* DeviceBase::CreateRenderPipeline(
         const RenderPipelineDescriptor* descriptor) {
