@@ -120,6 +120,24 @@
     },
     {
       "key": {
+        "uuid": "d59c2b2a_14935756",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-19T01:44:11Z",
+      "side": 1,
+      "message": "The tests that failed are BCCompressedTexture tests on Intel Vulkan though, which has nothing to do with OpenGL or SetViewport. Maybe they\u0027re flaky? I saw these fail randomly once before as well.\n\nI\u0027m running another tryjob on win-dawn-rel on Patchset 4 to see.",
+      "parentUuid": "86d689a4_c9be4823",
+      "revId": "84adce12d64310e78b9d74b5d2628604d51e10bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b92a618f_70bdca30",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 1
