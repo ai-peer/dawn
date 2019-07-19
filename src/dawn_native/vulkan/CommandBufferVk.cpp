@@ -170,10 +170,10 @@ namespace dawn_native { namespace vulkan {
                 mCurrentLayout = layout;
             }
 
-            void Flush(Device* device, VkCommandBuffer commands, VkPipelineBindPoint bindPoint) {
+            void Flush(Device* device, VkCommandBuffer vkCommands, VkPipelineBindPoint bindPoint) {
                 for (uint32_t dirtyIndex : IterateBitSet(mDirtySets)) {
                     device->fn.CmdBindDescriptorSets(
-                        commands, bindPoint, mCurrentLayout->GetHandle(), dirtyIndex, 1,
+                        vkCommands, bindPoint, mCurrentLayout->GetHandle(), dirtyIndex, 1,
                         &mSets[dirtyIndex], mDynamicOffsetCounts[dirtyIndex],
                         mDynamicOffsetCounts[dirtyIndex] > 0 ? mDynamicOffsets[dirtyIndex].data()
                                                              : nullptr);
@@ -189,7 +189,7 @@ namespace dawn_native { namespace vulkan {
             std::array<std::array<uint32_t, kMaxBindingsPerGroup>, kMaxBindGroups> mDynamicOffsets;
         };
 
-        void RecordBeginRenderPass(VkCommandBuffer commands,
+        void RecordBeginRenderPass(VkCommandBuffer vkCommands,
                                    Device* device,
                                    BeginRenderPassCmd* renderPass) {
             // Query a VkRenderPass from the cache
@@ -231,7 +231,7 @@ namespace dawn_native { namespace vulkan {
                         attachmentInfo.stencilLoadOp == dawn::LoadOp::Load) {
                         ToBackend(attachmentInfo.view->GetTexture())
                             ->EnsureSubresourceContentInitialized(
-                                commands, attachmentInfo.view->GetBaseMipLevel(),
+                                vkCommands, attachmentInfo.view->GetBaseMipLevel(),
                                 attachmentInfo.view->GetLevelCount(),
                                 attachmentInfo.view->GetBaseArrayLayer(),
                                 attachmentInfo.view->GetLayerCount());
@@ -323,7 +323,7 @@ namespace dawn_native { namespace vulkan {
             beginInfo.clearValueCount = attachmentCount;
             beginInfo.pClearValues = clearValues.data();
 
-            device->fn.CmdBeginRenderPass(commands, &beginInfo, VK_SUBPASS_CONTENTS_INLINE);
+            device->fn.CmdBeginRenderPass(vkCommands, &beginInfo, VK_SUBPASS_CONTENTS_INLINE);
         }
     }  // anonymous namespace
 
@@ -336,14 +336,14 @@ namespace dawn_native { namespace vulkan {
         FreeCommands(&mCommands);
     }
 
-    void CommandBuffer::RecordCommands(VkCommandBuffer commands) {
+    void CommandBuffer::RecordCommands(VkCommandBuffer vkCommands) {
         Device* device = ToBackend(GetDevice());
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](VkCommandBuffer commands, const PassResourceUsage& usages) {
+        auto TransitionForPass = [](VkCommandBuffer vkCommands, const PassResourceUsage& usages) {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
-                buffer->TransitionUsageNow(commands, usages.bufferUsages[i]);
+                buffer->TransitionUsageNow(vkCommands, usages.bufferUsages[i]);
             }
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
@@ -351,8 +351,8 @@ namespace dawn_native { namespace vulkan {
                 // TODO(natlee@microsoft.com): Update clearing here when subresource tracking is
                 // implemented
                 texture->EnsureSubresourceContentInitialized(
-                    commands, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
-                texture->TransitionUsageNow(commands, usages.textureUsages[i]);
+                    vkCommands, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                texture->TransitionUsageNow(vkCommands, usages.textureUsages[i]);
             }
         };
 
@@ -367,8 +367,8 @@ namespace dawn_native { namespace vulkan {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
-                    srcBuffer->TransitionUsageNow(commands, dawn::BufferUsageBit::CopySrc);
-                    dstBuffer->TransitionUsageNow(commands, dawn::BufferUsageBit::CopyDst);
+                    srcBuffer->TransitionUsageNow(vkCommands, dawn::BufferUsageBit::CopySrc);
+                    dstBuffer->TransitionUsageNow(vkCommands, dawn::BufferUsageBit::CopyDst);
 
                     VkBufferCopy region;
                     region.srcOffset = copy->sourceOffset;
@@ -377,7 +377,7 @@ namespace dawn_native { namespace vulkan {
 
                     VkBuffer srcHandle = srcBuffer->GetHandle();
                     VkBuffer dstHandle = dstBuffer->GetHandle();
-                    device->fn.CmdCopyBuffer(commands, srcHandle, dstHandle, 1, &region);
+                    device->fn.CmdCopyBuffer(vkCommands, srcHandle, dstHandle, 1, &region);
                 } break;
 
                 case Command::CopyBufferToTexture: {
@@ -396,19 +396,19 @@ namespace dawn_native { namespace vulkan {
                             subresource.mipLevel, 1, subresource.baseArrayLayer, 1);
                     } else {
                         ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(commands, subresource.mipLevel, 1,
-                                                                  subresource.baseArrayLayer, 1);
+                            ->EnsureSubresourceContentInitialized(vkCommands, subresource.mipLevel,
+                                                                  1, subresource.baseArrayLayer, 1);
                     }
                     ToBackend(src.buffer)
-                        ->TransitionUsageNow(commands, dawn::BufferUsageBit::CopySrc);
+                        ->TransitionUsageNow(vkCommands, dawn::BufferUsageBit::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopyDst);
+                        ->TransitionUsageNow(vkCommands, dawn::TextureUsageBit::CopyDst);
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
                     // The image is written to so the Dawn guarantees make sure it is in the
                     // TRANSFER_DST_OPTIMAL layout
-                    device->fn.CmdCopyBufferToImage(commands, srcBuffer, dstImage,
+                    device->fn.CmdCopyBufferToImage(vkCommands, srcBuffer, dstImage,
                                                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
                                                     &region);
                 } break;
@@ -423,18 +423,18 @@ namespace dawn_native { namespace vulkan {
                     VkImageSubresourceLayers subresource = region.imageSubresource;
 
                     ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(commands, subresource.mipLevel, 1,
+                        ->EnsureSubresourceContentInitialized(vkCommands, subresource.mipLevel, 1,
                                                               subresource.baseArrayLayer, 1);
 
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopySrc);
+                        ->TransitionUsageNow(vkCommands, dawn::TextureUsageBit::CopySrc);
                     ToBackend(dst.buffer)
-                        ->TransitionUsageNow(commands, dawn::BufferUsageBit::CopyDst);
+                        ->TransitionUsageNow(vkCommands, dawn::BufferUsageBit::CopyDst);
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkBuffer dstBuffer = ToBackend(dst.buffer)->GetHandle();
                     // The Dawn CopySrc usage is always mapped to GENERAL
-                    device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
+                    device->fn.CmdCopyImageToBuffer(vkCommands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
                                                     dstBuffer, 1, &region);
                 } break;
 
@@ -449,8 +449,8 @@ namespace dawn_native { namespace vulkan {
                     VkImageSubresourceLayers srcSubresource = region.srcSubresource;
 
                     ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(commands, srcSubresource.mipLevel, 1,
-                                                              srcSubresource.baseArrayLayer, 1);
+                        ->EnsureSubresourceContentInitialized(vkCommands, srcSubresource.mipLevel,
+                                                              1, srcSubresource.baseArrayLayer, 1);
                     if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
                                                       dstSubresource.mipLevel)) {
                         // Since destination texture has been overwritten, it has been "initialized"
@@ -458,28 +458,28 @@ namespace dawn_native { namespace vulkan {
                             dstSubresource.mipLevel, 1, dstSubresource.baseArrayLayer, 1);
                     } else {
                         ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(commands, dstSubresource.mipLevel,
-                                                                  1, dstSubresource.baseArrayLayer,
-                                                                  1);
+                            ->EnsureSubresourceContentInitialized(vkCommands,
+                                                                  dstSubresource.mipLevel, 1,
+                                                                  dstSubresource.baseArrayLayer, 1);
                     }
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopySrc);
+                        ->TransitionUsageNow(vkCommands, dawn::TextureUsageBit::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(commands, dawn::TextureUsageBit::CopyDst);
+                        ->TransitionUsageNow(vkCommands, dawn::TextureUsageBit::CopyDst);
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
                     // The dstImage is written to so the Dawn guarantees make sure it is in the
                     // TRANSFER_DST_OPTIMAL layout
-                    device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL, dstImage,
+                    device->fn.CmdCopyImage(vkCommands, srcImage, VK_IMAGE_LAYOUT_GENERAL, dstImage,
                                             VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
                 } break;
 
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    TransitionForPass(commands, passResourceUsages[nextPassNumber]);
-                    RecordRenderPass(commands, cmd);
+                    TransitionForPass(vkCommands, passResourceUsages[nextPassNumber]);
+                    RecordRenderPass(vkCommands, cmd);
 
                     nextPassNumber++;
                 } break;
@@ -487,8 +487,8 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(commands, passResourceUsages[nextPassNumber]);
-                    RecordComputePass(commands);
+                    TransitionForPass(vkCommands, passResourceUsages[nextPassNumber]);
+                    RecordComputePass(vkCommands);
 
                     nextPassNumber++;
                 } break;
@@ -498,7 +498,7 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
-    void CommandBuffer::RecordComputePass(VkCommandBuffer commands) {
+    void CommandBuffer::RecordComputePass(VkCommandBuffer vkCommands) {
         Device* device = ToBackend(GetDevice());
 
         DescriptorSetTracker descriptorSets;
@@ -513,17 +513,17 @@ namespace dawn_native { namespace vulkan {
 
                 case Command::Dispatch: {
                     DispatchCmd* dispatch = mCommands.NextCommand<DispatchCmd>();
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
-                    device->fn.CmdDispatch(commands, dispatch->x, dispatch->y, dispatch->z);
+                    descriptorSets.Flush(device, vkCommands, VK_PIPELINE_BIND_POINT_COMPUTE);
+                    device->fn.CmdDispatch(vkCommands, dispatch->x, dispatch->y, dispatch->z);
                 } break;
 
                 case Command::DispatchIndirect: {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
                     VkBuffer indirectBuffer = ToBackend(dispatch->indirectBuffer)->GetHandle();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
+                    descriptorSets.Flush(device, vkCommands, VK_PIPELINE_BIND_POINT_COMPUTE);
                     device->fn.CmdDispatchIndirect(
-                        commands, indirectBuffer,
+                        vkCommands, indirectBuffer,
                         static_cast<VkDeviceSize>(dispatch->indirectOffset));
                 } break;
 
@@ -543,7 +543,7 @@ namespace dawn_native { namespace vulkan {
                     SetComputePipelineCmd* cmd = mCommands.NextCommand<SetComputePipelineCmd>();
                     ComputePipeline* pipeline = ToBackend(cmd->pipeline).Get();
 
-                    device->fn.CmdBindPipeline(commands, VK_PIPELINE_BIND_POINT_COMPUTE,
+                    device->fn.CmdBindPipeline(vkCommands, VK_PIPELINE_BIND_POINT_COMPUTE,
                                                pipeline->GetHandle());
                     descriptorSets.OnPipelineLayoutChange(ToBackend(pipeline->GetLayout()));
                 } break;
@@ -555,18 +555,18 @@ namespace dawn_native { namespace vulkan {
         // EndComputePass should have been called
         UNREACHABLE();
     }
-    void CommandBuffer::RecordRenderPass(VkCommandBuffer commands,
+    void CommandBuffer::RecordRenderPass(VkCommandBuffer vkCommands,
                                          BeginRenderPassCmd* renderPassCmd) {
         Device* device = ToBackend(GetDevice());
 
-        RecordBeginRenderPass(commands, device, renderPassCmd);
+        RecordBeginRenderPass(vkCommands, device, renderPassCmd);
 
         // Set the default value for the dynamic state
         {
-            device->fn.CmdSetLineWidth(commands, 1.0f);
-            device->fn.CmdSetDepthBounds(commands, 0.0f, 1.0f);
+            device->fn.CmdSetLineWidth(vkCommands, 1.0f);
+            device->fn.CmdSetDepthBounds(vkCommands, 0.0f, 1.0f);
 
-            device->fn.CmdSetStencilReference(commands, VK_STENCIL_FRONT_AND_BACK, 0);
+            device->fn.CmdSetStencilReference(vkCommands, VK_STENCIL_FRONT_AND_BACK, 0);
 
             float blendConstants[4] = {
                 0.0f,
@@ -574,7 +574,7 @@ namespace dawn_native { namespace vulkan {
                 0.0f,
                 0.0f,
             };
-            device->fn.CmdSetBlendConstants(commands, blendConstants);
+            device->fn.CmdSetBlendConstants(vkCommands, blendConstants);
 
             // The viewport and scissor default to cover all of the attachments
             VkViewport viewport;
@@ -584,122 +584,185 @@ namespace dawn_native { namespace vulkan {
             viewport.height = static_cast<float>(renderPassCmd->height);
             viewport.minDepth = 0.0f;
             viewport.maxDepth = 1.0f;
-            device->fn.CmdSetViewport(commands, 0, 1, &viewport);
+            device->fn.CmdSetViewport(vkCommands, 0, 1, &viewport);
 
             VkRect2D scissorRect;
             scissorRect.offset.x = 0;
             scissorRect.offset.y = 0;
             scissorRect.extent.width = renderPassCmd->width;
             scissorRect.extent.height = renderPassCmd->height;
-            device->fn.CmdSetScissor(commands, 0, 1, &scissorRect);
+            device->fn.CmdSetScissor(vkCommands, 0, 1, &scissorRect);
         }
 
         DescriptorSetTracker descriptorSets;
         RenderPipeline* lastPipeline = nullptr;
+
+        auto EncodeRenderBundleCommand = [&](CommandIterator* commands, Command type) {
+            switch (type) {
+                case Command::Draw: {
+                    DrawCmd* draw = commands->NextCommand<DrawCmd>();
+
+                    descriptorSets.Flush(device, vkCommands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    device->fn.CmdDraw(vkCommands, draw->vertexCount, draw->instanceCount,
+                                       draw->firstVertex, draw->firstInstance);
+                } break;
+
+                case Command::DrawIndexed: {
+                    DrawIndexedCmd* draw = commands->NextCommand<DrawIndexedCmd>();
+
+                    descriptorSets.Flush(device, vkCommands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    device->fn.CmdDrawIndexed(vkCommands, draw->indexCount, draw->instanceCount,
+                                              draw->firstIndex, draw->baseVertex,
+                                              draw->firstInstance);
+                } break;
+
+                case Command::DrawIndirect: {
+                    DrawIndirectCmd* draw = commands->NextCommand<DrawIndirectCmd>();
+                    VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
+
+                    descriptorSets.Flush(device, vkCommands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    device->fn.CmdDrawIndirect(vkCommands, indirectBuffer,
+                                               static_cast<VkDeviceSize>(draw->indirectOffset), 1,
+                                               0);
+                } break;
+
+                case Command::DrawIndexedIndirect: {
+                    DrawIndirectCmd* draw = commands->NextCommand<DrawIndirectCmd>();
+                    VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
+
+                    descriptorSets.Flush(device, vkCommands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    device->fn.CmdDrawIndexedIndirect(
+                        vkCommands, indirectBuffer, static_cast<VkDeviceSize>(draw->indirectOffset),
+                        1, 0);
+                } break;
+
+                case Command::InsertDebugMarker: {
+                    if (device->GetDeviceInfo().debugMarker) {
+                        InsertDebugMarkerCmd* cmd = commands->NextCommand<InsertDebugMarkerCmd>();
+                        const char* label = commands->NextData<char>(cmd->length + 1);
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = nullptr;
+                        markerInfo.pMarkerName = label;
+                        // Default color to black
+                        markerInfo.color[0] = 0.0;
+                        markerInfo.color[1] = 0.0;
+                        markerInfo.color[2] = 0.0;
+                        markerInfo.color[3] = 1.0;
+                        device->fn.CmdDebugMarkerInsertEXT(vkCommands, &markerInfo);
+                    } else {
+                        SkipCommand(commands, Command::InsertDebugMarker);
+                    }
+                } break;
+
+                case Command::PopDebugGroup: {
+                    if (device->GetDeviceInfo().debugMarker) {
+                        commands->NextCommand<PopDebugGroupCmd>();
+                        device->fn.CmdDebugMarkerEndEXT(vkCommands);
+                    } else {
+                        SkipCommand(commands, Command::PopDebugGroup);
+                    }
+                } break;
+
+                case Command::PushDebugGroup: {
+                    if (device->GetDeviceInfo().debugMarker) {
+                        PushDebugGroupCmd* cmd = commands->NextCommand<PushDebugGroupCmd>();
+                        const char* label = commands->NextData<char>(cmd->length + 1);
+                        VkDebugMarkerMarkerInfoEXT markerInfo;
+                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+                        markerInfo.pNext = nullptr;
+                        markerInfo.pMarkerName = label;
+                        // Default color to black
+                        markerInfo.color[0] = 0.0;
+                        markerInfo.color[1] = 0.0;
+                        markerInfo.color[2] = 0.0;
+                        markerInfo.color[3] = 1.0;
+                        device->fn.CmdDebugMarkerBeginEXT(vkCommands, &markerInfo);
+                    } else {
+                        SkipCommand(commands, Command::PushDebugGroup);
+                    }
+                } break;
+
+                case Command::SetBindGroup: {
+                    SetBindGroupCmd* cmd = commands->NextCommand<SetBindGroupCmd>();
+                    VkDescriptorSet set = ToBackend(cmd->group.Get())->GetHandle();
+                    uint64_t* dynamicOffsets = nullptr;
+                    if (cmd->dynamicOffsetCount > 0) {
+                        dynamicOffsets = commands->NextData<uint64_t>(cmd->dynamicOffsetCount);
+                    }
+
+                    descriptorSets.OnSetBindGroup(cmd->index, set, cmd->dynamicOffsetCount,
+                                                  dynamicOffsets);
+                } break;
+
+                case Command::SetRenderPipeline: {
+                    SetRenderPipelineCmd* cmd = commands->NextCommand<SetRenderPipelineCmd>();
+                    RenderPipeline* pipeline = ToBackend(cmd->pipeline).Get();
+
+                    device->fn.CmdBindPipeline(vkCommands, VK_PIPELINE_BIND_POINT_GRAPHICS,
+                                               pipeline->GetHandle());
+                    lastPipeline = pipeline;
+
+                    descriptorSets.OnPipelineLayoutChange(ToBackend(pipeline->GetLayout()));
+                } break;
+
+                case Command::SetIndexBuffer: {
+                    SetIndexBufferCmd* cmd = commands->NextCommand<SetIndexBufferCmd>();
+                    VkBuffer indexBuffer = ToBackend(cmd->buffer)->GetHandle();
+
+                    // TODO(cwallez@chromium.org): get the index type from the last render pipeline
+                    // and rebind if needed on pipeline change
+                    ASSERT(lastPipeline != nullptr);
+                    VkIndexType indexType =
+                        VulkanIndexType(lastPipeline->GetVertexInputDescriptor()->indexFormat);
+                    device->fn.CmdBindIndexBuffer(
+                        vkCommands, indexBuffer, static_cast<VkDeviceSize>(cmd->offset), indexType);
+                } break;
+
+                case Command::SetVertexBuffers: {
+                    SetVertexBuffersCmd* cmd = commands->NextCommand<SetVertexBuffersCmd>();
+                    auto buffers = commands->NextData<Ref<BufferBase>>(cmd->count);
+                    auto offsets = commands->NextData<uint64_t>(cmd->count);
+
+                    std::array<VkBuffer, kMaxVertexBuffers> vkBuffers;
+                    std::array<VkDeviceSize, kMaxVertexBuffers> vkOffsets;
+
+                    for (uint32_t i = 0; i < cmd->count; ++i) {
+                        Buffer* buffer = ToBackend(buffers[i].Get());
+                        vkBuffers[i] = buffer->GetHandle();
+                        vkOffsets[i] = static_cast<VkDeviceSize>(offsets[i]);
+                    }
+
+                    device->fn.CmdBindVertexBuffers(vkCommands, cmd->startSlot, cmd->count,
+                                                    vkBuffers.data(), vkOffsets.data());
+                } break;
+
+                default:
+                    UNREACHABLE();
+                    break;
+            }
+        };
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
-                    device->fn.CmdEndRenderPass(commands);
+                    device->fn.CmdEndRenderPass(vkCommands);
                     return;
                 } break;
 
-                case Command::Draw: {
-                    DrawCmd* draw = mCommands.NextCommand<DrawCmd>();
+                case Command::ExecuteBundles: {
+                    ExecuteBundlesCmd* cmd = mCommands.NextCommand<ExecuteBundlesCmd>();
+                    auto bundles = mCommands.NextData<Ref<RenderBundleBase>>(cmd->count);
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
-                    device->fn.CmdDraw(commands, draw->vertexCount, draw->instanceCount,
-                                       draw->firstVertex, draw->firstInstance);
-                } break;
-
-                case Command::DrawIndexed: {
-                    DrawIndexedCmd* draw = mCommands.NextCommand<DrawIndexedCmd>();
-
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
-                    device->fn.CmdDrawIndexed(commands, draw->indexCount, draw->instanceCount,
-                                              draw->firstIndex, draw->baseVertex,
-                                              draw->firstInstance);
-                } break;
-
-                case Command::DrawIndirect: {
-                    DrawIndirectCmd* draw = mCommands.NextCommand<DrawIndirectCmd>();
-                    VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
-
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
-                    device->fn.CmdDrawIndirect(commands, indirectBuffer,
-                                               static_cast<VkDeviceSize>(draw->indirectOffset), 1,
-                                               0);
-                } break;
-
-                case Command::DrawIndexedIndirect: {
-                    DrawIndirectCmd* draw = mCommands.NextCommand<DrawIndirectCmd>();
-                    VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
-
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
-                    device->fn.CmdDrawIndexedIndirect(
-                        commands, indirectBuffer, static_cast<VkDeviceSize>(draw->indirectOffset),
-                        1, 0);
-                } break;
-
-                case Command::InsertDebugMarker: {
-                    if (device->GetDeviceInfo().debugMarker) {
-                        InsertDebugMarkerCmd* cmd = mCommands.NextCommand<InsertDebugMarkerCmd>();
-                        const char* label = mCommands.NextData<char>(cmd->length + 1);
-                        VkDebugMarkerMarkerInfoEXT markerInfo;
-                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
-                        markerInfo.pNext = nullptr;
-                        markerInfo.pMarkerName = label;
-                        // Default color to black
-                        markerInfo.color[0] = 0.0;
-                        markerInfo.color[1] = 0.0;
-                        markerInfo.color[2] = 0.0;
-                        markerInfo.color[3] = 1.0;
-                        device->fn.CmdDebugMarkerInsertEXT(commands, &markerInfo);
-                    } else {
-                        SkipCommand(&mCommands, Command::InsertDebugMarker);
+                    for (uint32_t i = 0; i < cmd->count; ++i) {
+                        CommandIterator* commands = bundles[i]->GetCommands();
+                        commands->Reset();
+                        while (commands->NextCommandId(&type)) {
+                            EncodeRenderBundleCommand(commands, type);
+                        }
                     }
-                } break;
-
-                case Command::PopDebugGroup: {
-                    if (device->GetDeviceInfo().debugMarker) {
-                        mCommands.NextCommand<PopDebugGroupCmd>();
-                        device->fn.CmdDebugMarkerEndEXT(commands);
-                    } else {
-                        SkipCommand(&mCommands, Command::PopDebugGroup);
-                    }
-                } break;
-
-                case Command::PushDebugGroup: {
-                    if (device->GetDeviceInfo().debugMarker) {
-                        PushDebugGroupCmd* cmd = mCommands.NextCommand<PushDebugGroupCmd>();
-                        const char* label = mCommands.NextData<char>(cmd->length + 1);
-                        VkDebugMarkerMarkerInfoEXT markerInfo;
-                        markerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
-                        markerInfo.pNext = nullptr;
-                        markerInfo.pMarkerName = label;
-                        // Default color to black
-                        markerInfo.color[0] = 0.0;
-                        markerInfo.color[1] = 0.0;
-                        markerInfo.color[2] = 0.0;
-                        markerInfo.color[3] = 1.0;
-                        device->fn.CmdDebugMarkerBeginEXT(commands, &markerInfo);
-                    } else {
-                        SkipCommand(&mCommands, Command::PushDebugGroup);
-                    }
-                } break;
-
-                case Command::SetBindGroup: {
-                    SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
-                    VkDescriptorSet set = ToBackend(cmd->group.Get())->GetHandle();
-                    uint64_t* dynamicOffsets = nullptr;
-                    if (cmd->dynamicOffsetCount > 0) {
-                        dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
-                    }
-
-                    descriptorSets.OnSetBindGroup(cmd->index, set, cmd->dynamicOffsetCount,
-                                                  dynamicOffsets);
                 } break;
 
                 case Command::SetBlendColor: {
@@ -710,36 +773,12 @@ namespace dawn_native { namespace vulkan {
                         cmd->color.b,
                         cmd->color.a,
                     };
-                    device->fn.CmdSetBlendConstants(commands, blendConstants);
-                } break;
-
-                case Command::SetIndexBuffer: {
-                    SetIndexBufferCmd* cmd = mCommands.NextCommand<SetIndexBufferCmd>();
-                    VkBuffer indexBuffer = ToBackend(cmd->buffer)->GetHandle();
-
-                    // TODO(cwallez@chromium.org): get the index type from the last render pipeline
-                    // and rebind if needed on pipeline change
-                    ASSERT(lastPipeline != nullptr);
-                    VkIndexType indexType =
-                        VulkanIndexType(lastPipeline->GetVertexInputDescriptor()->indexFormat);
-                    device->fn.CmdBindIndexBuffer(
-                        commands, indexBuffer, static_cast<VkDeviceSize>(cmd->offset), indexType);
-                } break;
-
-                case Command::SetRenderPipeline: {
-                    SetRenderPipelineCmd* cmd = mCommands.NextCommand<SetRenderPipelineCmd>();
-                    RenderPipeline* pipeline = ToBackend(cmd->pipeline).Get();
-
-                    device->fn.CmdBindPipeline(commands, VK_PIPELINE_BIND_POINT_GRAPHICS,
-                                               pipeline->GetHandle());
-                    lastPipeline = pipeline;
-
-                    descriptorSets.OnPipelineLayoutChange(ToBackend(pipeline->GetLayout()));
+                    device->fn.CmdSetBlendConstants(vkCommands, blendConstants);
                 } break;
 
                 case Command::SetStencilReference: {
                     SetStencilReferenceCmd* cmd = mCommands.NextCommand<SetStencilReferenceCmd>();
-                    device->fn.CmdSetStencilReference(commands, VK_STENCIL_FRONT_AND_BACK,
+                    device->fn.CmdSetStencilReference(vkCommands, VK_STENCIL_FRONT_AND_BACK,
                                                       cmd->reference);
                 } break;
 
@@ -753,7 +792,7 @@ namespace dawn_native { namespace vulkan {
                     viewport.minDepth = cmd->minDepth;
                     viewport.maxDepth = cmd->maxDepth;
 
-                    device->fn.CmdSetViewport(commands, 0, 1, &viewport);
+                    device->fn.CmdSetViewport(vkCommands, 0, 1, &viewport);
                 } break;
 
                 case Command::SetScissorRect: {
@@ -764,28 +803,12 @@ namespace dawn_native { namespace vulkan {
                     rect.extent.width = cmd->width;
                     rect.extent.height = cmd->height;
 
-                    device->fn.CmdSetScissor(commands, 0, 1, &rect);
+                    device->fn.CmdSetScissor(vkCommands, 0, 1, &rect);
                 } break;
 
-                case Command::SetVertexBuffers: {
-                    SetVertexBuffersCmd* cmd = mCommands.NextCommand<SetVertexBuffersCmd>();
-                    auto buffers = mCommands.NextData<Ref<BufferBase>>(cmd->count);
-                    auto offsets = mCommands.NextData<uint64_t>(cmd->count);
-
-                    std::array<VkBuffer, kMaxVertexBuffers> vkBuffers;
-                    std::array<VkDeviceSize, kMaxVertexBuffers> vkOffsets;
-
-                    for (uint32_t i = 0; i < cmd->count; ++i) {
-                        Buffer* buffer = ToBackend(buffers[i].Get());
-                        vkBuffers[i] = buffer->GetHandle();
-                        vkOffsets[i] = static_cast<VkDeviceSize>(offsets[i]);
-                    }
-
-                    device->fn.CmdBindVertexBuffers(commands, cmd->startSlot, cmd->count,
-                                                    vkBuffers.data(), vkOffsets.data());
-                } break;
-
-                default: { UNREACHABLE(); } break;
+                default:
+                    EncodeRenderBundleCommand(&mCommands, type);
+                    break;
             }
         }
 
