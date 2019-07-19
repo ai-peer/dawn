@@ -215,8 +215,9 @@ namespace dawn_native { namespace opengl {
         } else {
             const GLFormat& glFormat = GetGLFormat();
             for (GLint level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
-                gl.ClearTexSubImage(mHandle, level, 0, 0, baseArrayLayer, GetSize().width,
-                                    GetSize().height, layerCount, glFormat.format, glFormat.type,
+                Extent3D mipSize = GetMipLevelPhysicalSize(level);
+                gl.ClearTexSubImage(mHandle, level, 0, 0, baseArrayLayer, mipSize.width,
+                                    mipSize.height, layerCount, glFormat.format, glFormat.type,
                                     nullptr);
             }
         }
