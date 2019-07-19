@@ -24,6 +24,8 @@ namespace dawn_native {
     // is a pure frontend type to record in its parent CommandEncoder and never has a backend
     // implementation.
     // TODO(cwallez@chromium.org): Remove that generator limitation and rename to ComputePassEncoder
+    class RenderBundleBase;
+
     class RenderPassEncoderBase : public RenderEncoderBase {
       public:
         RenderPassEncoderBase(DeviceBase* device,
@@ -45,6 +47,7 @@ namespace dawn_native {
                          float minDepth,
                          float maxDepth);
         void SetScissorRect(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+        void ExecuteBundles(uint32_t count, RenderBundleBase* const* renderBundles);
 
       protected:
         RenderPassEncoderBase(DeviceBase* device,
