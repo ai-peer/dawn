@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f649abaf_ba42c1ab",
+        "filename": "src/dawn_native/opengl/GLFormat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-19T17:05:03Z",
+      "side": 1,
+      "message": "nit: Why does this take the device? Is it for future extension-enabled formats?",
+      "range": {
+        "startLine": 19,
+        "startChar": 37,
+        "endLine": 19,
+        "endChar": 50
+      },
+      "revId": "98e23595234120a8d1f65d6c3187a01939aa3366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e146073d_daa5acea",
+        "filename": "src/dawn_native/opengl/GLFormat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-19T17:05:03Z",
+      "side": 1,
+      "message": "ultra uNit: \"Simple\" doesn\u0027t mean much if it\u0027s the only one. Just \"AddFormat\" ?",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "98e23595234120a8d1f65d6c3187a01939aa3366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
