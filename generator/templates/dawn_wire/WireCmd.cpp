@@ -58,13 +58,15 @@
         {% else %}
             {{as_cType(member.type.name)}}Serialize({{in}}, &{{out}}, buffer{{Provider}});
         {% endif %}
+    {%- elif member.type.category == "enum" and member.annotation == "const*const*" -%}
+        {{out}} = {{in}} == nullptr ? static_cast<{{as_cType(member.type.name)}}>(0x7FFFFFFF) : *{{in}};
     {%- else -%}
         {{out}} = {{in}};
     {%- endif -%}
 {% endmacro %}
 
 //* Outputs the deserialization code to put `in` in `out`
-{% macro deserialize_member(member, in, out) %}
+{% macro deserialize_member(member, in, out, out_ptr) %}
     {%- if member.type.category == "object" -%}
         {%- set Optional = "Optional" if member.optional else "" -%}
         DESERIALIZE_TRY(resolver.Get{{Optional}}FromId({{in}}, &{{out}}));
@@ -74,6 +76,12 @@
                 , resolver
             {%- endif -%}
         ));
+    {%- elif member.type.category == "enum" and member.annotation == "const*const*" -%}
+        if ({{in}} == static_cast<{{as_cType(member.type.name)}}>(0x7FFFFFFF)) {
+          {{out_ptr}} = nullptr;
+        } else {
+          {{out}} = {{in}};
+        }
     {%- else -%}
         {{out}} = {{in}};
     {%- endif -%}
@@ -277,7 +285,7 @@
                 {% endif %}
 
                 for (size_t i = 0; i < memberLength; ++i) {
-                    {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]")}}
+                    {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]", "pointerArray[i]")}}
                 }
             }
         {% endfor %}
