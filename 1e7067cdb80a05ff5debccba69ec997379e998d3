@@ -16,6 +16,24 @@
       "revId": "1e7067cdb80a05ff5debccba69ec997379e998d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0cc642a_d65ebfb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T14:16:02Z",
+      "side": 1,
+      "message": "I don\u0027t know what introduced that bug :S",
+      "parentUuid": "363bd389_3ff1536c",
+      "revId": "1e7067cdb80a05ff5debccba69ec997379e998d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
