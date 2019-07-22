@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "363bd389_3ff1536c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-22T14:11:46Z",
+      "side": 1,
+      "message": "nit: maybe this could be the same bug where you introduced the headers / compilation failure",
+      "revId": "1e7067cdb80a05ff5debccba69ec997379e998d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
