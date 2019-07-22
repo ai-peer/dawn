@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2bc4366_aa9fa143",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T16:06:23Z",
+      "side": 1,
+      "message": "nit: Maybe just \"NextPowerOfTwo\"?",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 30
+      },
+      "revId": "585903efb9759626c1b37ea31093a155557bf50f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70851580_fc576163",
+        "filename": "src/tests/unittests/MathTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T16:06:23Z",
+      "side": 1,
+      "message": "nit: this ca be written 0x8000000000000000ull",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 60
+      },
+      "revId": "585903efb9759626c1b37ea31093a155557bf50f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
