@@ -1,0 +1,220 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4af35992_51cc25a3",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "Explain that this has side effects even when the validation fails.",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5943b37f_eebada43",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "Maybe the iterator should be passed into ValidateComputePass? Same for render pass.",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bef4413e_111211fe",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "The EncodingContext could be a by-value member because it has the same lifetime as the CommandEncoderBase.",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f29b5a33_bd8661d9",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be present on every CommandEncoderBase and could instead be a single error encoding context on the device, or a statically created one with a constexpr constructor.",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7af53362_874f1f1a",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "We could update the corresponding tests in this CL as it is the better behavior.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30c7d3e1_941e725d",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "nit: if the error encoding context is created on the device / statically, then it doesn\u0027t need to be passed here.",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1d321c5_b6e6e5d0",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "Isn\u0027t this functionally equivalent to the simpler version below?\n\n        currentEncoder \u003d ...\n        topLevelEncode \u003d ....\n\n        mCurrentEncoder \u003d nullptr;\n        mTopLevelEncoder \u003d nullptr;\n\n            if (mGotError) {\n                return DAWN_VALIDATION_ERROR(mErrorMessage);\n            }\n            if (currentEncoder !\u003d topLevelEncoder) {\n                return DAWN_VALIDATION_ERROR(\"Command buffer recording ended mid-pass\");\n            }\n            return {};",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 5
+      },
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01c8385_5192d413",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "I don\u0027t think this include is needed.",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a5a9378_6442e24a",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24006891_a2132264",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "This looks like an implementation detail, maybe it could be private (I\u0027m not sure the external uses are important).",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a12159fa_22860793",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "We had something like this previously but decided to remove it because it was very-non-explicit. I\u0027m not sure how to make the addition of DAWN_UNLIKELY for validation checks automatic.\n\nMaybe a VALIDATION_IF macro? But in any case it probably should be a separate CL.",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db0a77a8_d909dce6",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T09:51:33Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
