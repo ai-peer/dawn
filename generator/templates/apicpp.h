@@ -66,10 +66,14 @@ namespace dawn {
       public:
         ObjectBase() = default;
         ObjectBase(CType handle): mHandle(handle) {
-            if (mHandle) Derived::DawnReference(mHandle);
+            if (mHandle != nullptr) {
+                dawnReference(mHandle);
+            }
         }
         ~ObjectBase() {
-            if (mHandle) Derived::DawnRelease(mHandle);
+            if (mHandle != nullptr) {
+                dawnRelease(mHandle);
+            }
         }
 
         ObjectBase(ObjectBase const& other)
@@ -77,9 +81,13 @@ namespace dawn {
         }
         Derived& operator=(ObjectBase const& other) {
             if (&other != this) {
-                if (mHandle) Derived::DawnRelease(mHandle);
+                if (mHandle != nullptr) {
+                    dawnRelease(mHandle);
+                }
                 mHandle = other.mHandle;
-                if (mHandle) Derived::DawnReference(mHandle);
+                if (mHandle != nullptr) {
+                    dawnReference(mHandle);
+                }
             }
 
             return static_cast<Derived&>(*this);
@@ -91,7 +99,9 @@ namespace dawn {
         }
         Derived& operator=(ObjectBase&& other) {
             if (&other != this) {
-                if (mHandle) Derived::DawnRelease(mHandle);
+                if (mHandle != nullptr) {
+                    dawnRelease(mHandle);
+                }
                 mHandle = other.mHandle;
                 other.mHandle = 0;
             }
@@ -102,7 +112,7 @@ namespace dawn {
         ObjectBase(std::nullptr_t) {}
         Derived& operator=(std::nullptr_t) {
             if (mHandle != nullptr) {
-                Derived::DawnRelease(mHandle);
+                dawnRelease(mHandle);
                 mHandle = nullptr;
             }
             return static_cast<Derived&>(*this);
@@ -167,11 +177,6 @@ namespace dawn {
             {% for method in native_methods(type) %}
                 {{render_cpp_method_declaration(type, method)}};
             {% endfor %}
-
-          private:
-            friend ObjectBase<{{CppType}}, {{CType}}>;
-            static DAWN_EXPORT void DawnReference({{CType}} handle);
-            static DAWN_EXPORT void DawnRelease({{CType}} handle);
         };
 
     {% endfor %}

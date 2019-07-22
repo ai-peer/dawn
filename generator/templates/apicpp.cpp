@@ -100,16 +100,6 @@ namespace dawn {
                 {% endif %}
             }
         {% endfor %}
-        void {{CppType}}::DawnReference({{CType}} handle) {
-            if (handle != nullptr) {
-                {{as_cMethod(type.name, Name("reference"))}}(handle);
-            }
-        }
-        void {{CppType}}::DawnRelease({{CType}} handle) {
-            if (handle != nullptr) {
-                {{as_cMethod(type.name, Name("release"))}}(handle);
-            }
-        }
 
     {% endfor %}
 

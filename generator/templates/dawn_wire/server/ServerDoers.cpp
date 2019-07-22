@@ -85,7 +85,7 @@ namespace dawn_wire { namespace server {
                             {{type.name.CamelCase()}}ObjectIdTable().Remove(data->handle);
                         {% endif %}
                         if (data->handle != nullptr) {
-                            mProcs.{{as_varName(type.name, Name("release"))}}(data->handle);
+                            mProcs.release(data->handle);
                         }
                         {{type.name.CamelCase()}}Objects().Free(objectId);
                         return true;

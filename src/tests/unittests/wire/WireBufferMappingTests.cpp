@@ -194,8 +194,8 @@ TEST_F(WireBufferMappingTests, DestroyBeforeReadRequestEnd) {
     EXPECT_CALL(*mockBufferMapReadCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0, _))
         .Times(1);
-    dawnBufferRelease(buffer);
-    EXPECT_CALL(api, BufferRelease(apiBuffer));
+    dawnRelease(buffer);
+    EXPECT_CALL(api, Release(apiBuffer));
 
     FlushClient();
     FlushServer();
@@ -301,11 +301,11 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapReadCallback) {
 
     EXPECT_CALL(*mockBufferMapReadCallback, Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS,
                                                  Pointee(Eq(bufferContent)), kBufferSize, _))
-        .WillOnce(InvokeWithoutArgs([&]() { dawnBufferRelease(buffer); }));
+        .WillOnce(InvokeWithoutArgs([&]() { dawnRelease(buffer); }));
 
     FlushServer();
 
-    EXPECT_CALL(api, BufferRelease(apiBuffer));
+    EXPECT_CALL(api, Release(apiBuffer));
 
     FlushClient();
 }
@@ -381,8 +381,8 @@ TEST_F(WireBufferMappingTests, DestroyBeforeWriteRequestEnd) {
     EXPECT_CALL(*mockBufferMapWriteCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_UNKNOWN, nullptr, 0, _))
         .Times(1);
-    dawnBufferRelease(buffer);
-    EXPECT_CALL(api, BufferRelease(apiBuffer));
+    dawnRelease(buffer);
+    EXPECT_CALL(api, Release(apiBuffer));
 
     FlushClient();
     FlushServer();
@@ -492,11 +492,11 @@ TEST_F(WireBufferMappingTests, DestroyInsideMapWriteCallback) {
 
     EXPECT_CALL(*mockBufferMapWriteCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, Pointee(Eq(zero)), kBufferSize, _))
-        .WillOnce(InvokeWithoutArgs([&]() { dawnBufferRelease(buffer); }));
+        .WillOnce(InvokeWithoutArgs([&]() { dawnRelease(buffer); }));
 
     FlushServer();
 
-    EXPECT_CALL(api, BufferRelease(apiBuffer));
+    EXPECT_CALL(api, Release(apiBuffer));
 
     FlushClient();
 }
@@ -549,8 +549,8 @@ TEST_F(WireBufferMappingTests, ReleaseAfterCreateBufferMapped) {
 
     FlushClient();
 
-    dawnBufferRelease(result.buffer);
-    EXPECT_CALL(api, BufferRelease(apiBuffer)).Times(1);
+    dawnRelease(result.buffer);
+    EXPECT_CALL(api, Release(apiBuffer)).Times(1);
 
     FlushClient();
 }
@@ -780,11 +780,11 @@ TEST_F(WireBufferMappingTests, ReleaseInsideCreateBufferMappedAsyncCallback) {
     EXPECT_CALL(*mockCreateBufferMappedCallback,
                 Call(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, _, Pointee(Eq(zero)), kBufferSize, _))
         .WillOnce(DoAll(::testing::SaveArg<1>(&buffer),
-                        InvokeWithoutArgs([&]() { dawnBufferRelease(buffer); })));
+                        InvokeWithoutArgs([&]() { dawnRelease(buffer); })));
 
     FlushServer();
 
-    EXPECT_CALL(api, BufferRelease(apiBuffer));
+    EXPECT_CALL(api, Release(apiBuffer));
 
     FlushClient();
 }

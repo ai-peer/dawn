@@ -37,6 +37,9 @@ class ProcTableAsClass {
             {{as_cType(type.name)}} GetNew{{type.name.CamelCase()}}();
         {% endfor %}
 
+        virtual void Reference(DawnObject object) = 0;
+        virtual void Release(DawnObject object) = 0;
+
         {% for type in by_category["object"] %}
             {% for method in type.methods if len(method.arguments) < 10 %}
                 virtual {{as_cType(method.return_type.name)}} {{as_MethodSuffix(type.name, method.name)}}(
@@ -46,8 +49,6 @@ class ProcTableAsClass {
                     {%- endfor -%}
                 ) = 0;
             {% endfor %}
-            virtual void {{as_MethodSuffix(type.name, Name("reference"))}}({{as_cType(type.name)}} self) = 0;
-            virtual void {{as_MethodSuffix(type.name, Name("release"))}}({{as_cType(type.name)}} self) = 0;
         {% endfor %}
 
         // Stores callback and userdata and calls the On* methods
@@ -117,6 +118,9 @@ class MockProcTable : public ProcTableAsClass {
 
         void IgnoreAllReleaseCalls();
 
+        MOCK_METHOD1(Reference, void(DawnObject object));
+        MOCK_METHOD1(Release, void(DawnObject object));
+
         {% for type in by_category["object"] %}
             {% for method in type.methods if len(method.arguments) < 10 %}
                 MOCK_METHOD{{len(method.arguments) + 1}}(
@@ -129,8 +133,6 @@ class MockProcTable : public ProcTableAsClass {
                     ));
             {% endfor %}
 
-            MOCK_METHOD1({{as_MethodSuffix(type.name, Name("reference"))}}, void({{as_cType(type.name)}} self));
-            MOCK_METHOD1({{as_MethodSuffix(type.name, Name("release"))}}, void({{as_cType(type.name)}} self));
         {% endfor %}
 
         MOCK_METHOD3(OnDeviceSetErrorCallback, void(DawnDevice device, DawnDeviceErrorCallback callback, void* userdata));

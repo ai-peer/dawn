@@ -33,7 +33,7 @@ TEST_F(WireInjectTextureTests, CallAfterReserveInject) {
     ReservedTexture reservation = GetWireClient()->ReserveTexture(device);
 
     DawnTexture apiTexture = api.GetNewTexture();
-    EXPECT_CALL(api, TextureReference(apiTexture));
+    EXPECT_CALL(api, Reference(apiTexture));
     ASSERT_TRUE(GetWireServer()->InjectTexture(apiTexture, reservation.id, reservation.generation));
 
     dawnTextureCreateDefaultView(reservation.texture);
@@ -56,7 +56,7 @@ TEST_F(WireInjectTextureTests, InjectExistingID) {
     ReservedTexture reservation = GetWireClient()->ReserveTexture(device);
 
     DawnTexture apiTexture = api.GetNewTexture();
-    EXPECT_CALL(api, TextureReference(apiTexture));
+    EXPECT_CALL(api, Reference(apiTexture));
     ASSERT_TRUE(GetWireServer()->InjectTexture(apiTexture, reservation.id, reservation.generation));
 
     // ID already in use, call fails.
@@ -70,12 +70,12 @@ TEST_F(WireInjectTextureTests, InjectedTextureLifetime) {
 
     // Injecting the texture adds a reference
     DawnTexture apiTexture = api.GetNewTexture();
-    EXPECT_CALL(api, TextureReference(apiTexture));
+    EXPECT_CALL(api, Reference(apiTexture));
     ASSERT_TRUE(GetWireServer()->InjectTexture(apiTexture, reservation.id, reservation.generation));
 
     // Releasing the texture removes a single reference.
-    dawnTextureRelease(reservation.texture);
-    EXPECT_CALL(api, TextureRelease(apiTexture));
+    dawnRelease(reservation.texture);
+    EXPECT_CALL(api, Release(apiTexture));
     FlushClient();
 
     // Deleting the server doesn't release a second reference.

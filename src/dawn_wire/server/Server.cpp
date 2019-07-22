@@ -54,7 +54,7 @@ namespace dawn_wire { namespace server {
 
         // The texture is externally owned so it shouldn't be destroyed when we receive a destroy
         // message from the client. Add a reference to counterbalance the eventual release.
-        mProcs.textureReference(texture);
+        mProcs.reference(texture);
 
         return true;
     }

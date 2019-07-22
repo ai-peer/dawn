@@ -34,7 +34,7 @@ namespace dawn_wire { namespace server {
                 {
                     std::vector<{{as_cType(type.name)}}> handles = mKnown{{type.name.CamelCase()}}.AcquireAllHandles();
                     for ({{as_cType(type.name)}} handle : handles) {
-                        procs.{{as_varName(type.name, Name("release"))}}(handle);
+                        procs.release(handle);
                     }
                 }
             {% endfor %}

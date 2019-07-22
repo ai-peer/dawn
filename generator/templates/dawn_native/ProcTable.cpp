@@ -71,6 +71,14 @@ namespace dawn_native {
                 }
             {% endfor %}
         {% endfor %}
+
+        void CToCppReference(DawnObject object) {
+            reinterpret_cast<ObjectBase*>(object)->Reference();
+        }
+
+        void CToCppRelease(DawnObject object) {
+            reinterpret_cast<ObjectBase*>(object)->Release();
+        }
     }
 
     DawnProcTable GetProcsAutogen() {
@@ -80,6 +88,8 @@ namespace dawn_native {
                 table.{{as_varName(type.name, method.name)}} = CToCpp{{as_MethodSuffix(type.name, method.name)}};
             {% endfor %}
         {% endfor %}
+        table.reference = CToCppReference;
+        table.release = CToCppRelease;
         return table;
     }
 

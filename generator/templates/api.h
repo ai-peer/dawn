@@ -22,6 +22,7 @@
 #include <stdbool.h>
 
 const uint64_t DAWN_WHOLE_SIZE = 0xffffffffffffffffULL; // UINT64_MAX
+typedef void* DawnObject;
 
 {% for type in by_category["object"] %}
     typedef struct {{as_cType(type.name)}}Impl* {{as_cType(type.name)}};
@@ -68,7 +69,10 @@ typedef void (*DawnFenceOnCompletionCallback)(DawnFenceCompletionStatus status, 
 extern "C" {
 #endif
 
-{% for type in by_category["object"] %}
+typedef void (*DawnProcReference)(DawnObject object);
+typedef void (*DawnProcRelease)(DawnObject object);
+
+{% for type in by_category["object"] if len(native_methods(type)) > 0 %}
     // Procs of {{type.name.CamelCase()}}
     {% for method in native_methods(type) %}
         typedef {{as_cType(method.return_type.name)}} (*{{as_cProc(type.name, method.name)}})(
@@ -82,7 +86,10 @@ extern "C" {
 {% endfor %}
 
 struct DawnProcTable_s {
-    {% for type in by_category["object"] %}
+    DawnProcReference reference;
+    DawnProcRelease release;
+
+    {% for type in by_category["object"] if len(native_methods(type)) > 0 %}
         {% for method in native_methods(type) %}
             {{as_cProc(type.name, method.name)}} {{as_varName(type.name, method.name)}};
         {% endfor %}
@@ -96,7 +103,10 @@ typedef struct DawnProcTable_s DawnProcTable;
 // Set which DawnProcTable will be used
 DAWN_EXPORT void dawnSetProcs(const DawnProcTable* procs);
 
-{% for type in by_category["object"] %}
+DAWN_EXPORT void dawnReference(DawnObject object);
+DAWN_EXPORT void dawnRelease(DawnObject object);
+
+{% for type in by_category["object"] if len(native_methods(type)) > 0 %}
     // Methods of {{type.name.CamelCase()}}
     {% for method in native_methods(type) %}
         DAWN_EXPORT {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(

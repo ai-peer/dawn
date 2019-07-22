@@ -54,8 +54,8 @@ TEST_F(WireBasicTests, CreateThenCall) {
 TEST_F(WireBasicTests, RefCountKeptInClient) {
     DawnCommandEncoder encoder = dawnDeviceCreateCommandEncoder(device, nullptr);
 
-    dawnCommandEncoderReference(encoder);
-    dawnCommandEncoderRelease(encoder);
+    dawnReference(encoder);
+    dawnRelease(encoder);
 
     DawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
     EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice, nullptr))
@@ -64,17 +64,17 @@ TEST_F(WireBasicTests, RefCountKeptInClient) {
     FlushClient();
 }
 
-// Test that client reference/release do not call the backend API.
+// Test that removing the last ref on the client causes the server to destroy the object.
 TEST_F(WireBasicTests, ReleaseCalledOnRefCount0) {
     DawnCommandEncoder encoder = dawnDeviceCreateCommandEncoder(device, nullptr);
 
-    dawnCommandEncoderRelease(encoder);
+    dawnRelease(encoder);
 
     DawnCommandEncoder apiCmdBufEncoder = api.GetNewCommandEncoder();
     EXPECT_CALL(api, DeviceCreateCommandEncoder(apiDevice, nullptr))
         .WillOnce(Return(apiCmdBufEncoder));
 
-    EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
+    EXPECT_CALL(api, Release(apiCmdBufEncoder));
 
     FlushClient();
 }

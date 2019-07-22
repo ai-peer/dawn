@@ -26,6 +26,14 @@ void dawnSetProcs(const DawnProcTable* procs_) {
     }
 }
 
+void dawnReference(DawnObject object) {
+    procs.reference(object);
+}
+
+void dawnRelease(DawnObject object) {
+    procs.release(object);
+}
+
 {% for type in by_category["object"] %}
     {% for method in native_methods(type) %}
         {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(

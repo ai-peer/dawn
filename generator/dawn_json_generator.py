@@ -430,14 +430,8 @@ def as_frontendType(typ):
     else:
         return as_cType(typ.name)
 
-def cpp_native_methods(types, typ):
+def native_methods(types, typ):
     return typ.methods + typ.native_methods
-
-def c_native_methods(types, typ):
-    return cpp_native_methods(types, typ) + [
-        Method(Name('reference'), types['void'], []),
-        Method(Name('release'), types['void'], []),
-    ]
 
 class MultiGeneratorFromDawnJSON(Generator):
     def get_description(self):
@@ -477,31 +471,27 @@ class MultiGeneratorFromDawnJSON(Generator):
             'convert_cType_to_cppType': convert_cType_to_cppType,
             'as_varName': as_varName,
             'decorate': decorate,
+            'native_methods': lambda typ: native_methods(api_params['types'], typ)
         }
 
         renders = []
 
-        c_params = {'native_methods': lambda typ: c_native_methods(api_params['types'], typ)}
-        cpp_params = {'native_methods': lambda typ: cpp_native_methods(api_params['types'], typ)}
-
         if 'dawn_headers' in targets:
-            renders.append(FileRender('api.h', 'dawn/dawn.h', [base_params, api_params, c_params]))
-            renders.append(FileRender('apicpp.h', 'dawn/dawncpp.h', [base_params, api_params, cpp_params]))
+            renders.append(FileRender('api.h', 'dawn/dawn.h', [base_params, api_params]))
+            renders.append(FileRender('apicpp.h', 'dawn/dawncpp.h', [base_params, api_params]))
 
         if 'libdawn' in targets:
-            additional_params = {'native_methods': lambda typ: cpp_native_methods(api_params['types'], typ)}
-            renders.append(FileRender('api.c', 'dawn/dawn.c', [base_params, api_params, c_params]))
-            renders.append(FileRender('apicpp.cpp', 'dawn/dawncpp.cpp', [base_params, api_params, cpp_params]))
+            renders.append(FileRender('api.c', 'dawn/dawn.c', [base_params, api_params]))
+            renders.append(FileRender('apicpp.cpp', 'dawn/dawncpp.cpp', [base_params, api_params]))
 
         if 'mock_dawn' in targets:
-            renders.append(FileRender('mock_api.h', 'mock/mock_dawn.h', [base_params, api_params, c_params]))
-            renders.append(FileRender('mock_api.cpp', 'mock/mock_dawn.cpp', [base_params, api_params, c_params]))
+            renders.append(FileRender('mock_api.h', 'mock/mock_dawn.h', [base_params, api_params]))
+            renders.append(FileRender('mock_api.cpp', 'mock/mock_dawn.cpp', [base_params, api_params]))
 
         if 'dawn_native_utils' in targets:
             frontend_params = [
                 base_params,
                 api_params,
-                c_params,
                 {
                     'as_frontendType': lambda typ: as_frontendType(typ), # TODO as_frontendType and friends take a Type and not a Name :(
                     'as_annotated_frontendType': lambda arg: annotated(as_frontendType(arg.type), arg)
@@ -520,7 +510,6 @@ class MultiGeneratorFromDawnJSON(Generator):
             wire_params = [
                 base_params,
                 api_params,
-                c_params,
                 {
                     'as_wireType': lambda typ: typ.name.CamelCase() + '*' if typ.category == 'object' else as_cppType(typ.name)
                 },

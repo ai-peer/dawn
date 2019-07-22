@@ -247,7 +247,7 @@ DawnTest::~DawnTest() {
     mWireClient = nullptr;
     mWireServer = nullptr;
     if (gTestEnv->UsesWire()) {
-        backendProcs.deviceRelease(backendDevice);
+        backendProcs.release(backendDevice);
     }
 
     dawnSetProcs(nullptr);

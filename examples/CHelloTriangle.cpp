@@ -120,8 +120,8 @@ void init() {
         pipeline = dawnDeviceCreateRenderPipeline(device, &descriptor);
     }
 
-    dawnShaderModuleRelease(vsModule);
-    dawnShaderModuleRelease(fsModule);
+    dawnRelease(vsModule);
+    dawnRelease(fsModule);
 }
 
 void frame() {
@@ -151,16 +151,16 @@ void frame() {
         dawnRenderPassEncoderSetPipeline(pass, pipeline);
         dawnRenderPassEncoderDraw(pass, 3, 1, 0, 0);
         dawnRenderPassEncoderEndPass(pass);
-        dawnRenderPassEncoderRelease(pass);
+        dawnRelease(pass);
 
         commands = dawnCommandEncoderFinish(encoder, nullptr);
-        dawnCommandEncoderRelease(encoder);
+        dawnRelease(encoder);
     }
 
     dawnQueueSubmit(queue, 1, &commands);
-    dawnCommandBufferRelease(commands);
+    dawnRelease(commands);
     dawnSwapChainPresent(swapchain, backbuffer);
-    dawnTextureViewRelease(backbufferView);
+    dawnRelease(backbufferView);
 
     DoFlush();
 }
