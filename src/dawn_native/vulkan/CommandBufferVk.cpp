@@ -210,6 +210,16 @@ namespace dawn_native { namespace vulkan {
                             view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1)) {
                         loadOp = dawn::LoadOp::Clear;
                     }
+
+                    if (hasResolveTarget) {
+                        TextureView* resolveView = ToBackend(attachmentInfo.resolveTarget.Get());
+                        ToBackend(resolveView->GetTexture())
+                            ->EnsureSubresourceContentInitialized(
+                                commands, resolveView->GetBaseMipLevel(),
+                                resolveView->GetLevelCount(), resolveView->GetBaseArrayLayer(),
+                                resolveView->GetLayerCount());
+                    }
+
                     switch (attachmentInfo.storeOp) {
                         case dawn::StoreOp::Store: {
                             view->GetTexture()->SetIsSubresourceContentInitialized(
@@ -340,18 +350,18 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](VkCommandBuffer commands, const PassResourceUsage& usages) {
+        auto TransitionForPass = [](VkCommandBuffer commands, const PassResourceUsage& usages,
+                                    bool initTexturesForPass) {
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 Buffer* buffer = ToBackend(usages.buffers[i]);
                 buffer->TransitionUsageNow(commands, usages.bufferUsages[i]);
             }
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
-
-                // TODO(natlee@microsoft.com): Update clearing here when subresource tracking is
-                // implemented
-                texture->EnsureSubresourceContentInitialized(
-                    commands, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                if (initTexturesForPass || (texture->GetUsage() & dawn::TextureUsageBit::Sampled)) {
+                    texture->EnsureSubresourceContentInitialized(
+                        commands, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                }
                 texture->TransitionUsageNow(commands, usages.textureUsages[i]);
             }
         };
@@ -478,7 +488,7 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    TransitionForPass(commands, passResourceUsages[nextPassNumber]);
+                    TransitionForPass(commands, passResourceUsages[nextPassNumber], false);
                     RecordRenderPass(commands, cmd);
 
                     nextPassNumber++;
@@ -487,7 +497,7 @@ namespace dawn_native { namespace vulkan {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(commands, passResourceUsages[nextPassNumber]);
+                    TransitionForPass(commands, passResourceUsages[nextPassNumber], true);
                     RecordComputePass(commands);
 
                     nextPassNumber++;
