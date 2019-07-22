@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2c3966de_7829d765",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done via https://dawn-review.googlesource.com/c/dawn/+/9224",
+      "parentUuid": "9f1dbf05_06e3ce18",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b13ae453_79592b3f",
         "filename": "src/common/Math.cpp",
         "patchSetId": 32
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "08621530_b12b1c93",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5b95f41a_1c0cad51",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "785bb922_fb7beb96",
         "filename": "src/common/Math.cpp",
         "patchSetId": 32
@@ -77,6 +113,30 @@
     },
     {
       "key": {
+        "uuid": "0f77e85a_d0c52908",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "785bb922_fb7beb96",
+      "range": {
+        "startLine": 49,
+        "startChar": 49,
+        "endLine": 49,
+        "endChar": 93
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ce4d0bf_66129ed3",
         "filename": "src/common/Math.h",
         "patchSetId": 32
@@ -91,6 +151,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "995bb35d_abc6db1b",
+        "filename": "src/common/Math.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ce4d0bf_66129ed3",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +195,30 @@
     },
     {
       "key": {
+        "uuid": "f90e8633_17c38757",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09fa9b6f_59e42f10",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b70556e2_adc7db00",
         "filename": "src/dawn_native/BuddyAllocator.h",
         "patchSetId": 32
@@ -140,6 +242,30 @@
     },
     {
       "key": {
+        "uuid": "31329608_c6162fdb",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b70556e2_adc7db00",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84dbc872_17f04334",
         "filename": "src/dawn_native/BuddyAllocator.h",
         "patchSetId": 32
@@ -154,6 +280,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eabd9369_2355fc70",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "84dbc872_17f04334",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "fd178b1c_52ef3c80",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "See other comment.",
+      "parentUuid": "b8a177a2_c8ddd4c3",
+      "range": {
+        "startLine": 34,
+        "startChar": 31,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "712063df_242c0c70",
         "filename": "src/dawn_native/BuddyAllocator.h",
         "patchSetId": 32
@@ -203,6 +371,30 @@
     },
     {
       "key": {
+        "uuid": "81d00b66_9492671d",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "712063df_242c0c70",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67e64249_ee4a17d0",
         "filename": "src/dawn_native/Buffer.h",
         "patchSetId": 32
@@ -217,6 +409,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3710909e_50f8fbdc",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67e64249_ee4a17d0",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -243,6 +453,30 @@
     },
     {
       "key": {
+        "uuid": "a03f4b47_1d02eba7",
+        "filename": "src/dawn_native/ResourceHeap.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfb632cb_df180c62",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f84a9c5_bc185ffd",
         "filename": "src/dawn_native/ResourceHeap.h",
         "patchSetId": 32
@@ -266,6 +500,30 @@
     },
     {
       "key": {
+        "uuid": "39a03071_2ceedb59",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f84a9c5_bc185ffd",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d0725b3_c3b7d69b",
         "filename": "src/dawn_native/ResourceHeap.h",
         "patchSetId": 32
@@ -277,6 +535,30 @@
       "writtenOn": "2019-07-18T12:26:43Z",
       "side": 1,
       "message": "ditto: all of these aren\u0027t used by the frontend and seem to be implementation details of the backends, so maybe it could live in the relevant subclass of the backends?",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86638df1_ac63d633",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Are we certain? This definition isn\u0027t back-end specific \u0026 buffer mapping can use it.",
+      "parentUuid": "7d0725b3_c3b7d69b",
       "range": {
         "startLine": 25,
         "startChar": 1,
@@ -309,6 +591,30 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce3ed4a5_d007aa40",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7106ea7c_64f13e92",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -352,6 +658,30 @@
     },
     {
       "key": {
+        "uuid": "9df6b598_68c89616",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "723e59e8_f0f32b12",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b0424de_416a3f98",
         "filename": "src/dawn_native/ResourceHeapAllocator.h",
         "patchSetId": 32
@@ -363,6 +693,30 @@
       "writtenOn": "2019-07-18T12:26:43Z",
       "side": 1,
       "message": "I think this comment is stale because these types don\u0027t exist in this CL.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 58
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a44d08f_5ebc79d7",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "The comment was made generic since the full configuration is back-end specific. For example, D3D has a PlacedResourceAllocator on-top.",
+      "parentUuid": "1b0424de_416a3f98",
       "range": {
         "startLine": 41,
         "startChar": 6,
@@ -398,6 +752,30 @@
     },
     {
       "key": {
+        "uuid": "9e597066_e4c3b1f7",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "See other comment.",
+      "parentUuid": "63dbaa27_49cc9cee",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 58
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "734ca538_541ee11c",
         "filename": "src/dawn_native/ResourceHeapAllocator.h",
         "patchSetId": 32
@@ -426,6 +804,30 @@
       "writtenOn": "2019-07-18T12:26:43Z",
       "side": 1,
       "message": "Isn\u0027t this going to always be the same for a given allocator so it could be a property of the ResourceMemoryAllocator::Client and invisible to the BuffyResourceMemoryAllocator/DirectAllocator?",
+      "range": {
+        "startLine": 72,
+        "startChar": 65,
+        "endLine": 72,
+        "endChar": 84
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "579ca1f1_d7fcbae4",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "It will be for the BuddyResourceMemoryAllocator but not DirectResourceMemoryAllocator. If we create this as allocator state, the device will need to retrieve it anyway to get a corresponding sub-allocator. Otherwise, it can be specified at allocation-time and still work in both cases.",
+      "parentUuid": "d497d069_6e12a81f",
       "range": {
         "startLine": 72,
         "startChar": 65,
@@ -478,6 +880,30 @@
     },
     {
       "key": {
+        "uuid": "44e4b3a4_e8a5bf73",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea2fd82c_45ca7236",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4295baf6_dda94dad",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 32
@@ -501,6 +927,30 @@
     },
     {
       "key": {
+        "uuid": "75f2b2b4_70e7dab0",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4295baf6_dda94dad",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b1a626d_2ece2f3e",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 32
@@ -518,6 +968,24 @@
     },
     {
       "key": {
+        "uuid": "a94e440f_82d69eb6",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "If you\u0027re referring to using direct mode, then yes. This CL aims to ensure equivalent behavior of CreateCommittedResource.",
+      "parentUuid": "9b1a626d_2ece2f3e",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdb48779_9fc95337",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 32
@@ -532,6 +1000,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf620a3d_f06f57ff",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Yea, we will need to pass alignment. But I still use the size information to allocate a block and it must be a power-of-two.",
+      "parentUuid": "bdb48779_9fc95337",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -558,6 +1044,30 @@
     },
     {
       "key": {
+        "uuid": "79e91746_2df4dbda",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2e43469_c1f67a0a",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed729f80_cc8884b3",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
         "patchSetId": 32
@@ -578,6 +1088,30 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a47b26c_f8bb50af",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed729f80_cc8884b3",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -604,6 +1138,30 @@
     },
     {
       "key": {
+        "uuid": "405f7f28_1ceca1b2",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2d766c2_9b27c14a",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa7596b2_4dbaba1a",
         "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
         "patchSetId": 32
@@ -627,6 +1185,30 @@
     },
     {
       "key": {
+        "uuid": "02612655_141bc0fe",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa7596b2_4dbaba1a",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b110a14_a55cf92e",
         "filename": "src/dawn_native/null/DeviceNull.h",
         "patchSetId": 32
@@ -641,6 +1223,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6eba91ab_ed1fa765",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b110a14_a55cf92e",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -661,6 +1261,24 @@
     },
     {
       "key": {
+        "uuid": "d9863253_fc313fa4",
+        "filename": "src/dawn_native/vulkan/BufferVk.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "86ea8c6b_a61bfe83",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98cd32e1_fa9f4f54",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 32
@@ -675,6 +1293,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65dc1a15_fe188eba",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "98cd32e1_fa9f4f54",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -701,6 +1337,30 @@
     },
     {
       "key": {
+        "uuid": "611dca43_cda034b1",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbc362b1_0821c0ba",
+      "range": {
+        "startLine": 104,
+        "startChar": 16,
+        "endLine": 104,
+        "endChar": 27
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "497ed6a5_80e96c4d",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 32
@@ -724,6 +1384,30 @@
     },
     {
       "key": {
+        "uuid": "c6351198_45cfd02b",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "497ed6a5_80e96c4d",
+      "range": {
+        "startLine": 170,
+        "startChar": 39,
+        "endLine": 170,
+        "endChar": 46
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2fe4c1a_513c3571",
         "filename": "src/tests/end2end/BufferTests.cpp",
         "patchSetId": 32
@@ -738,6 +1422,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "197d315c_2c1f0130",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Was hitting TDR on a slower GPU. Will revert.",
+      "parentUuid": "d2fe4c1a_513c3571",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -761,6 +1463,30 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c3fc7b1_8a9052d4",
+        "filename": "src/tests/unittests/ResourceAllocatorTests.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-22T16:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4023b33_b2bbc62a",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
