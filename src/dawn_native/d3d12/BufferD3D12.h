@@ -29,6 +29,8 @@ namespace dawn_native { namespace d3d12 {
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
 
+        MaybeError Initialize();
+
         uint32_t GetD3D12Size() const;
         ComPtr<ID3D12Resource> GetD3D12Resource();
         D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
@@ -40,8 +42,8 @@ namespace dawn_native { namespace d3d12 {
 
       private:
         // Dawn API
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
+        MaybeError MapReadAsyncImpl(uint32_t serial) override;
+        MaybeError MapWriteAsyncImpl(uint32_t serial) override;
         void UnmapImpl() override;
         void DestroyImpl() override;
 

@@ -30,6 +30,8 @@ namespace dawn_native { namespace vulkan {
         Buffer(Device* device, const BufferDescriptor* descriptor);
         ~Buffer();
 
+        MaybeError Initialize();
+
         void OnMapReadCommandSerialFinished(uint32_t mapSerial, const void* data);
         void OnMapWriteCommandSerialFinished(uint32_t mapSerial, void* data);
 
@@ -42,8 +44,8 @@ namespace dawn_native { namespace vulkan {
 
       private:
         // Dawn API
-        void MapReadAsyncImpl(uint32_t serial) override;
-        void MapWriteAsyncImpl(uint32_t serial) override;
+        MaybeError MapReadAsyncImpl(uint32_t serial) override;
+        MaybeError MapWriteAsyncImpl(uint32_t serial) override;
         void UnmapImpl() override;
         void DestroyImpl() override;
 
