@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c69af9dd_d32e1e2d",
+        "filename": "src/dawn_native/opengl/GLFormat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-22T14:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b1b1d5a_4eceda77",
+      "range": {
+        "startLine": 19,
+        "startChar": 37,
+        "endLine": 19,
+        "endChar": 50
+      },
+      "revId": "98e23595234120a8d1f65d6c3187a01939aa3366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e146073d_daa5acea",
         "filename": "src/dawn_native/opengl/GLFormat.cpp",
         "patchSetId": 1
