@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1e86813_d6d80e2a",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-22T08:53:24Z",
+      "side": 1,
+      "message": "nit: \u003ccstring\u003e",
+      "revId": "472bd1ec29d8d4e03404bf4b4e0233e4fc6031ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
