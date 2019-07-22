@@ -92,9 +92,12 @@ namespace dawn_native {
         dawn::BufferUsageBit usage = descriptor->usage;
 
         const dawn::BufferUsageBit kMapWriteAllowedUsages =
-            dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::CopySrc;
+            dawn::BufferUsageBit::MapWrite | dawn::BufferUsageBit::CopySrc |
+            dawn::BufferUsageBit::Uniform | dawn::BufferUsageBit::Vertex |
+            dawn::BufferUsageBit::Index;
         if (usage & dawn::BufferUsageBit::MapWrite && (usage & kMapWriteAllowedUsages) != usage) {
-            return DAWN_VALIDATION_ERROR("Only CopySrc is allowed with MapWrite");
+            return DAWN_VALIDATION_ERROR(
+                "Only CopySrc, Uniform, Vertex, Index are allowed with MapWrite");
         }
 
         const dawn::BufferUsageBit kMapReadAllowedUsages =
