@@ -52,6 +52,24 @@
       "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e46f837_0abff881",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T18:09:47Z",
+      "side": 1,
+      "message": "You\u0027re correct that Unmap won\u0027t be called in the backends, but this still performs the Unmap on the client.\n\nSo then after this, the backend will be destroyed and buffers will be destroyed while still mapped (and implicitly Unmap). As Corentin mentioned, the backend should handle this.",
+      "parentUuid": "37822bec_1dc64056",
+      "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
