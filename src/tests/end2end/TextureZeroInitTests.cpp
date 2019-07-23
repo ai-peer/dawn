@@ -466,7 +466,7 @@ TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
         void main() {
            fragColor = texelFetch(sampler2D(texture0, sampler0), ivec2(gl_FragCoord), 0);
         })");
-    renderPipelineDescriptor.cColorStates[0]->format = kColorFormat;
+    renderPipelineDescriptor.cColorStates[0].format = kColorFormat;
     dawn::RenderPipeline renderPipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
 
     // Create bindgroup
@@ -533,9 +533,9 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
            bufferTex.result =
                  texelFetch(sampler2D(sampleTex, sampler0), ivec2(0,0), 0);
         })";
-    computeStage.module = utils::CreateShaderModule(device, utils::ShaderStage::Compute, cs);
-    computeStage.entryPoint = "main";
-    computePipelineDescriptor.computeStage = &computeStage;
+    computePipelineDescriptor.computeStage.module =
+        utils::CreateShaderModule(device, utils::ShaderStage::Compute, cs);
+    computePipelineDescriptor.computeStage.entryPoint = "main";
     dawn::ComputePipeline computePipeline =
         device.CreateComputePipeline(&computePipelineDescriptor);
 
