@@ -106,6 +106,24 @@
       "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c51e415_9a8a3ce8",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-23T23:38:32Z",
+      "side": 1,
+      "message": "Yup. I\u0027m not 100% sure, though. Will defer.",
+      "parentUuid": "3cea1fda_0237eee6",
+      "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
