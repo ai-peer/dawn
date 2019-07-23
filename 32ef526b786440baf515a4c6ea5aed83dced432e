@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39a340a8_69422ef8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:35:33Z",
+      "side": 1,
+      "message": "nit: commit lines are usually kept under 80 characters.\n\n\nAlso I\u0027m not sure I understand why would the test block? It should crash because of the asserts and getting an empty adapter.",
+      "revId": "32ef526b786440baf515a4c6ea5aed83dced432e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc8a38d2_0b01de61",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:35:33Z",
+      "side": 1,
+      "message": "nit: This check is probably not needed because there is always a single OpenGL adapter so the loop will always end up choosing it.",
+      "revId": "32ef526b786440baf515a4c6ea5aed83dced432e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc7b0606_d06dc10f",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:35:33Z",
+      "side": 1,
+      "message": "I\u0027m worried that the logic will end up choosing the software renderer in this configuration.\n\nhttps://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket.appspot.com/8907165298344284128/+/steps/dawn_end2end_wire_tests_on__nvidia-quadro-p400-win10-stable__GPU_on_Windows__with_patch__on_Windows-10/0/stdout\n\nCan we make a new test that prints information about the chosen adapter (like just the name would be fine) so we know we selected the correct one?",
+      "revId": "32ef526b786440baf515a4c6ea5aed83dced432e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
