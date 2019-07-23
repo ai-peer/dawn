@@ -70,6 +70,24 @@
       "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "854ce3d3_a3a730d8",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-23T19:13:29Z",
+      "side": 1,
+      "message": "Is there any issue doing so explicitly in DestoryImpl? This would allow a check that ensures Unmap is always called which i believe is required when re-using the same heap.",
+      "parentUuid": "7e46f837_0abff881",
+      "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
