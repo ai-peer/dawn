@@ -1,0 +1,432 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "347319a3_63cd06d2",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "when is that the case?",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 33
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5700c1cb_91ddab23",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "There\u0027s also the funny currLevel --\u003e 0 idiom",
+      "range": {
+        "startLine": 86,
+        "startChar": 53,
+        "endLine": 86,
+        "endChar": 82
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cda9bb0_c7c31d55",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: we usually compare pointers to nullptr instead of using the implicit bool conversion.",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 34
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26b5f51c_d10c2c65",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "block-\u003efree.pPrev \u003d nullptr;\nblock-\u003efree.pNext \u003d mFreeLists[level].head;\nmFreeLists[level].head \u003d block;\n\nThis always needs to happen, maybe extract it out of the condition and just have extra code when we need to handle a previously freed block?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 43
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3292cbf_d8ffda5c",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "Maybe assert on the state of pPrev and pNext",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d1ee20a_7ffc2105",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: we prefer having brackets even for short blocks here and in other places",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca1eebf3_fe0325ee",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: to ?",
+      "range": {
+        "startLine": 162,
+        "startChar": 58,
+        "endLine": 162,
+        "endChar": 59
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fff56bd_a1bc4b55",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why the order matters, isn\u0027t is the case that deallocation can happen in any order which means left could be inserted in the freelist after right? The freelist is a chained list so it doesn\u0027t need ordering no?",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d589f3b_053f2963",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: and with the allocationSize we can also assert we\u0027re at the right level.",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1851fcb3_2b1bc7e7",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "Ditto why does the order matter?",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0bf734e_8aa9313e",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06ee9671_39a38c0b",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "typo: guaranteed",
+      "range": {
+        "startLine": 28,
+        "startChar": 51,
+        "endLine": 28,
+        "endChar": 61
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b534716_680df829",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: to",
+      "range": {
+        "startLine": 33,
+        "startChar": 28,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32b37e38_e9229934",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "Why do we need a default constructor?",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48f7d9d8_ea5e2b89",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "Maybe this could take the allocationSize as well, it would eventually help to do optimizations such as what\u0027s described in http://bitsquid.blogspot.com/2015/08/allocation-adventures-3-buddy-allocator.html",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30336576_c4efc67f",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think the default values are ever used.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 31
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53f356fb_efd09d57",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "If this fixture is unused, you can just replace all tests by TEST(BuddyAllocatorTests, foo) and remove the fixture",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 52
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbee0b5d_1040d928",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: comment before test",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1592f2d_cce4ef53",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "And GetNumFreeBlocks \u003d 0",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7568defc_a1505859",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: brackets even for single statement blocks, unfortunately there is no clang-format option to enforce this.",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f84fb5c_96d2d7c8",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: comment before tests.",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47554832_57cef389",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T12:50:56Z",
+      "side": 1,
+      "message": "nit: comment before tests.",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
