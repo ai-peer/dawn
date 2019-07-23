@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bebee01d_1ab4c2bb",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:05:16Z",
+      "side": 0,
+      "message": "For this and ComputePassEndedTwice, Kai and I discussed that we think this shouldn\u0027t be a device error because the encoder hasn\u0027t been finished yet.\n\ncwallez WDYT?",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 36
+      },
+      "revId": "23dd12459c540fa0f12102be900fca9a69a66a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

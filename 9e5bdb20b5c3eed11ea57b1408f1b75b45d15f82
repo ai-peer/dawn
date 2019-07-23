@@ -466,6 +466,30 @@
       "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "317b0e8b_441d63a4",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:05:16Z",
+      "side": 1,
+      "message": "Moving comment.",
+      "parentUuid": "6cd30029_0a53b4d1",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 36
+      },
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
