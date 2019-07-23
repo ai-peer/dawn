@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f7047b0_ccb5cdb0",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:22:53Z",
+      "side": 1,
+      "message": "Since the dispatch is 1x1 this doesn\u0027t need to be an array.",
+      "range": {
+        "startLine": 529,
+        "startChar": 22,
+        "endLine": 529,
+        "endChar": 24
+      },
+      "revId": "48cfa86a1eac028d597b83014dd82529f05021e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55c33762_3bbb5d42",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:22:53Z",
+      "side": 1,
+      "message": "Since we have a 1x1 texture and doing a 1x1 dispatch this logic isn\u0027t needed anymore",
+      "range": {
+        "startLine": 533,
+        "startChar": 1,
+        "endLine": 535,
+        "endChar": 31
+      },
+      "revId": "48cfa86a1eac028d597b83014dd82529f05021e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
