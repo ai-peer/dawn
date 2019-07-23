@@ -142,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "51f1e17e_77d6b02d",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:11:45Z",
+      "side": 1,
+      "message": "It\u0027s still there though :)",
+      "parentUuid": "d7ee103b_8e4a7aa4",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7af53362_874f1f1a",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 3
@@ -341,6 +359,24 @@
     },
     {
       "key": {
+        "uuid": "b681cea5_7698c335",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:11:45Z",
+      "side": 1,
+      "message": "Ah, that\u0027s unfortunate.",
+      "parentUuid": "68c08fac_0ea893a6",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24006891_a2132264",
         "filename": "src/dawn_native/EncodingContext.h",
         "patchSetId": 3
@@ -481,6 +517,30 @@
       "side": 1,
       "message": "Moving comment.",
       "parentUuid": "6cd30029_0a53b4d1",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 36
+      },
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59febb49_ac338ad6",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:11:45Z",
+      "side": 1,
+      "message": "In my mind the render pass encoder is detached on EndPass, but that semantic would work as well.\n\nWe\u0027ll need to discuss all that in the group as well.",
+      "parentUuid": "317b0e8b_441d63a4",
       "range": {
         "startLine": 104,
         "startChar": 8,
