@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "b3d3a0b7_37ca35a7",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T16:18:32Z",
+      "side": 1,
+      "message": "Whoops, fixed.",
+      "parentUuid": "51f1e17e_77d6b02d",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7af53362_874f1f1a",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 3

@@ -16,6 +16,24 @@
       "revId": "51f40e7a96d94e8795d52b1dd246499f6d795164",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7aaa4e8_9aa2adcb",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T16:18:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa88f266_a70bd73d",
+      "revId": "51f40e7a96d94e8795d52b1dd246499f6d795164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
