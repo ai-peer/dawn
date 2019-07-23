@@ -42,6 +42,9 @@ namespace dawn_native { namespace d3d12 {
 
         auto d3d12Device = ToBackend(GetDevice())->GetD3D12Device();
         for (uint32_t bindingIndex : IterateBitSet(layout.mask)) {
+            if (layout.dynamic[bindingIndex]) {
+                continue;
+			}
             switch (layout.types[bindingIndex]) {
                 case dawn::BindingType::UniformBuffer: {
                     BufferBinding binding = GetBindingAsBufferBinding(bindingIndex);
