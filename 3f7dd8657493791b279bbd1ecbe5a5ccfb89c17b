@@ -34,6 +34,24 @@
       "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37822bec_1dc64056",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-23T17:59:15Z",
+      "side": 1,
+      "message": "When using the wire, the above code doesn\u0027t do what it suggests. Unmap is never called. Is that the expected behavior?",
+      "parentUuid": "42344c43_c4bb1707",
+      "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
