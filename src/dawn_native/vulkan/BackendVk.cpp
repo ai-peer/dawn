@@ -21,6 +21,13 @@
 
 #include <iostream>
 
+#include <dirent.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #if DAWN_PLATFORM_LINUX
 const char kVulkanLibName[] = "libvulkan.so.1";
 #elif DAWN_PLATFORM_WINDOWS
@@ -30,6 +37,43 @@ const char kVulkanLibName[] = "vulkan-1.dll";
 #endif
 
 namespace dawn_native { namespace vulkan {
+    namespace {
+
+        /* Show all files under dir_name , do not show directories ! */
+        void showAllFiles(const char* dir_name) {
+            // check the parameter !
+            if (NULL == dir_name) {
+                std::cout << " dir_name is null ! " << std::endl;
+                return;
+            }
+
+            // check if dir_name is a valid dir
+            struct stat s;
+            lstat(dir_name, &s);
+            if (!S_ISDIR(s.st_mode)) {
+                std::cout << "dir_name is not a valid directory !" << std::endl;
+                return;
+            }
+
+            struct dirent* filename;  // return value for readdir()
+            DIR* dir;                 // return value for opendir()
+            dir = opendir(dir_name);
+            if (NULL == dir) {
+                std::cout << "Can not open dir " << dir_name << std::endl;
+                return;
+            }
+            std::cout << "Successfully opened the dir !" << std::endl;
+
+            /* read all the files in the dir ~ */
+            while ((filename = readdir(dir)) != NULL) {
+                // get rid of "." and ".."
+                if (strcmp(filename->d_name, ".") == 0 || strcmp(filename->d_name, "..") == 0)
+                    continue;
+                std::cout << filename->d_name << std::endl;
+            }
+        }
+
+    }  // namespace
 
     Backend::Backend(InstanceBase* instance) : BackendConnection(instance, BackendType::Vulkan) {
     }
@@ -56,6 +100,14 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Backend::Initialize() {
+#if defined(DAWN_ENABLE_VULKAN_VALIDATION_LAYERS)
+        std::cout << "DAWN_VK_DATA_DIR = " << DAWN_VK_DATA_DIR << std::endl;
+
+        showAllFiles(DAWN_VK_DATA_DIR);
+
+        setenv("VK_LAYER_PATH", DAWN_VK_DATA_DIR, 1);
+#endif
+
         if (!mVulkanLib.Open(kVulkanLibName)) {
             return DAWN_CONTEXT_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName);
         }
