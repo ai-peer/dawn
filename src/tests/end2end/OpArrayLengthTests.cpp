@@ -111,9 +111,10 @@ TEST_P(OpArrayLengthTest, Compute) {
     plDesc.bindGroupLayouts = bgls;
     dawn::PipelineLayout pl = device.CreatePipelineLayout(&plDesc);
 
-    dawn::PipelineStageDescriptor computeStage;
-    computeStage.entryPoint = "main";
-    computeStage.module = utils::CreateShaderModule(device, utils::SingleShaderStage::Compute,
+    dawn::ComputePipelineDescriptor pipelineDesc;
+    pipelineDesc.layout = pl;
+    pipelineDesc.computeStage.entryPoint = "main";
+    pipelineDesc.computeStage.module = utils::CreateShaderModule(device, utils::SingleShaderStage::Compute,
                                                     (R"(#version 450
             layout(std430, set = 1, binding = 0) buffer ResultBuffer {
                 uint result[3];
@@ -125,10 +126,6 @@ TEST_P(OpArrayLengthTest, Compute) {
                 result[2] = buffer3.data.length();
             })")
                                                         .c_str());
-
-    dawn::ComputePipelineDescriptor pipelineDesc;
-    pipelineDesc.layout = pl;
-    pipelineDesc.computeStage = &computeStage;
     dawn::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
 
     // Run a single instance of the compute shader
