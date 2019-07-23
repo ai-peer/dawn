@@ -88,6 +88,24 @@
       "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cea1fda_0237eee6",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T19:53:42Z",
+      "side": 1,
+      "message": "Oh, okay I see now. Thanks for pointing that out. So if we must call ID3D12Resource::Unmap to reuse memory, then it seems right to do so inside DestroyImpl.\n\nAnd then we don\u0027t need this FlushWire() in the tests?",
+      "parentUuid": "854ce3d3_a3a730d8",
+      "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
