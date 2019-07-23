@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42344c43_c4bb1707",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-23T07:25:38Z",
+      "side": 1,
+      "message": "Why is this needed? Is it so the backends see the unmaps? Seems fine to have but the backends should be able to handle destroying buffers that are still mapped.",
+      "revId": "3f7dd8657493791b279bbd1ecbe5a5ccfb89c17b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
