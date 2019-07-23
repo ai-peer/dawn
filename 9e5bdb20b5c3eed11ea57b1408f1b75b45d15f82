@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7020840e_4181673f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4af35992_51cc25a3",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5943b37f_eebada43",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40b052af_b7ed7cb0",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5943b37f_eebada43",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "94ee95e6_7b82e92e",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bef4413e_111211fe",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f29b5a33_bd8661d9",
         "filename": "src/dawn_native/CommandEncoder.h",
         "patchSetId": 3
@@ -67,6 +121,24 @@
       "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7ee103b_8e4a7aa4",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "No need for an error context now.",
+      "parentUuid": "f29b5a33_bd8661d9",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "833b02bf_ce4fd523",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af53362_874f1f1a",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30c7d3e1_941e725d",
         "filename": "src/dawn_native/ComputePassEncoder.h",
         "patchSetId": 3
@@ -107,6 +203,24 @@
       "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1782718_73717fc4",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "No need for this anymore.",
+      "parentUuid": "30c7d3e1_941e725d",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "675b118d_576600fd",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "I\u0027m not sure why I didn\u0027t think of this..",
+      "parentUuid": "e1d321c5_b6e6e5d0",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 5
+      },
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f01c8385_5192d413",
         "filename": "src/dawn_native/EncodingContext.h",
         "patchSetId": 3
@@ -147,6 +285,24 @@
       "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33cbbed5_4ed6bf16",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f01c8385_5192d413",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "68c08fac_0ea893a6",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Needed for error-\u003eGetMessage",
+      "parentUuid": "7a5a9378_6442e24a",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24006891_a2132264",
         "filename": "src/dawn_native/EncodingContext.h",
         "patchSetId": 3
@@ -181,6 +355,24 @@
       "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b1620ae_697a2dc8",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24006891_a2132264",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -201,6 +393,24 @@
     },
     {
       "key": {
+        "uuid": "a31052fe_4fa6e10b",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a12159fa_22860793",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db0a77a8_d909dce6",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 3
@@ -212,6 +422,47 @@
       "writtenOn": "2019-07-22T09:51:33Z",
       "side": 1,
       "message": "ditto",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d88c00cf_edfc2c34",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db0a77a8_d909dce6",
+      "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6cd30029_0a53b4d1",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-23T00:02:11Z",
+      "side": 1,
+      "message": "For this and ComputePassEndedTwice, Kai and I discussed that we think this shouldn\u0027t be a device error because the encoder hasn\u0027t been finished yet.\n\nWDYT?",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 36
+      },
       "revId": "9e5bdb20b5c3eed11ea57b1408f1b75b45d15f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
