@@ -72,6 +72,13 @@ namespace dawn_native { namespace vulkan {
                                                       DawnTextureUsageBit usage,
                                                       uint32_t width,
                                                       uint32_t height) {
+        mDevice->fn.DeviceWaitIdle(mDevice->GetVkDevice());
+        if (mSwapChain != VK_NULL_HANDLE) {
+            mDevice->fn.DestroySwapchainKHR(mDevice->GetVkDevice(), mSwapChain, nullptr);
+        }
+
+        Init(nullptr);
+
         ASSERT(mInfo.capabilities.minImageExtent.width <= width);
         ASSERT(mInfo.capabilities.maxImageExtent.width >= width);
         ASSERT(mInfo.capabilities.minImageExtent.height <= height);
