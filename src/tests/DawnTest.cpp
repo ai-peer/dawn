@@ -343,22 +343,24 @@ void DawnTest::SetUp() {
 
         for (const dawn_native::Adapter& adapter : adapters) {
             if (adapter.GetBackendType() == backendType) {
+                // OpenGL does not support to choose GPUs, get default.
+                if (backendType == dawn_native::BackendType::OpenGL) {
+                    backendAdapter = adapter;
+                    break;
+                }
+
                 if (HasVendorIdFilter()) {
                     if (adapter.GetPCIInfo().vendorId == GetVendorIdFilter()) {
                         backendAdapter = adapter;
                         break;
                     }
-                } else {
-                    backendAdapter = adapter;
+                    continue;
+                }
 
-                    // On Metal, select the last adapter so that the discrete GPU is tested on
-                    // multi-GPU systems.
-                    // TODO(cwallez@chromium.org): Replace this with command line arguments
-                    // requesting a specific device / vendor ID once the macOS 10.13 SDK is rolled
-                    // and correct PCI info collection is implemented on Metal.
-                    if (backendType != dawn_native::BackendType::Metal) {
-                        break;
-                    }
+                // Prefer discrete GPU on multi-GPUs system, otherwise get integrated GPU
+                backendAdapter = adapter;
+                if (backendAdapter.GetDeviceType() == dawn_native::DeviceType::DiscreteGPU) {
+                    break;
                 }
             }
         }
