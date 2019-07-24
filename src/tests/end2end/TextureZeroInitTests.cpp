@@ -90,6 +90,7 @@ class TextureZeroInitTest : public DawnTest {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly to Zero after first usage
 TEST_P(TextureZeroInitTest, CopyTextureToBufferSource) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor descriptor = CreateTextureDescriptor(
         1, 1, dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::CopySrc,
         kColorFormat);
@@ -98,11 +99,13 @@ TEST_P(TextureZeroInitTest, CopyTextureToBufferSource) {
     // Texture's first usage is in EXPECT_PIXEL_RGBA8_EQ's call to CopyTextureToBuffer
     RGBA8 filledWithZeros(0, 0, 0, 0);
     EXPECT_PIXEL_RGBA8_EQ(filledWithZeros, texture, 0, 0);
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // Test that non-zero mip level clears subresource to Zero after first use
 // This goes through the BeginRenderPass's code path
 TEST_P(TextureZeroInitTest, RenderingMipMapClearsToZero) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor descriptor = CreateTextureDescriptor(
         4, 1, dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::CopySrc,
         kColorFormat);
@@ -127,11 +130,13 @@ TEST_P(TextureZeroInitTest, RenderingMipMapClearsToZero) {
     std::vector<RGBA8> expected(mipSize * mipSize, {0, 0, 0, 0});
 
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), renderPass.color, 0, 0, mipSize, mipSize, 2, 0);
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // Test that non-zero array layers clears subresource to Zero after first use.
 // This goes through the BeginRenderPass's code path
 TEST_P(TextureZeroInitTest, RenderingArrayLayerClearsToZero) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor descriptor = CreateTextureDescriptor(
         1, 4, dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::CopySrc,
         kColorFormat);
@@ -154,12 +159,14 @@ TEST_P(TextureZeroInitTest, RenderingArrayLayerClearsToZero) {
     std::vector<RGBA8> expected(kSize * kSize, {0, 0, 0, 0});
 
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), renderPass.color, 0, 0, kSize, kSize, 0, 2);
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests CopyBufferToTexture fully overwrites copy so lazy init is not needed.
 // TODO(natlee@microsoft.com): Add backdoor to dawn native to query the number of zero-inited
 // subresources
 TEST_P(TextureZeroInitTest, CopyBufferToTexture) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor descriptor =
         CreateTextureDescriptor(4, 1,
                                 dawn::TextureUsageBit::CopyDst | dawn::TextureUsageBit::Sampled |
@@ -183,11 +190,13 @@ TEST_P(TextureZeroInitTest, CopyBufferToTexture) {
     std::vector<RGBA8> expected(kSize * kSize, {100, 100, 100, 100});
 
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), texture, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_EQ(0u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // Test for a copy only to a subset of the subresource, lazy init is necessary to clear the other
 // half.
 TEST_P(TextureZeroInitTest, CopyBufferToTextureHalf) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor descriptor =
         CreateTextureDescriptor(4, 1,
                                 dawn::TextureUsageBit::CopyDst | dawn::TextureUsageBit::Sampled |
@@ -214,10 +223,12 @@ TEST_P(TextureZeroInitTest, CopyBufferToTextureHalf) {
     EXPECT_TEXTURE_RGBA8_EQ(expected100.data(), texture, 0, 0, kSize / 2, kSize, 0, 0);
     // second half should be cleared
     EXPECT_TEXTURE_RGBA8_EQ(expectedZeros.data(), texture, kSize / 2, 0, kSize / 2, kSize, 0, 0);
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests CopyTextureToTexture fully overwrites copy so lazy init is not needed.
 TEST_P(TextureZeroInitTest, CopyTextureToTexture) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor srcDescriptor = CreateTextureDescriptor(
         1, 1, dawn::TextureUsageBit::Sampled | dawn::TextureUsageBit::CopySrc, kColorFormat);
     dawn::Texture srcTexture = device.CreateTexture(&srcDescriptor);
@@ -246,11 +257,13 @@ TEST_P(TextureZeroInitTest, CopyTextureToTexture) {
 
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), dstTexture, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This Tests the CopyTextureToTexture's copy only to a subset of the subresource, lazy init is
 // necessary to clear the other half.
 TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsageBit::Sampled | dawn::TextureUsageBit::CopySrc |
@@ -299,11 +312,15 @@ TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
     EXPECT_TEXTURE_RGBA8_EQ(expectedWith100.data(), dstTexture, 0, 0, kSize / 2, kSize, 0, 0);
     EXPECT_TEXTURE_RGBA8_EQ(expectedWithZeros.data(), dstTexture, kSize / 2, 0, kSize / 2, kSize, 0,
                             0);
+    // only one clear on dstTexture because srcTexture was completely written to, so it did not lazy
+    // clear
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests the texture with depth attachment and load op load will init depth stencil texture to
 // 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsageBit::CopySrc | dawn::TextureUsageBit::CopyDst |
@@ -333,11 +350,13 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
     // Expect the texture to be red because depth test passed.
     std::vector<RGBA8> expected(kSize * kSize, {255, 0, 0, 255});
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_EQ(2u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests the texture with stencil attachment and load op load will init depth stencil texture
 // to 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsageBit::CopySrc | dawn::TextureUsageBit::CopyDst |
@@ -367,11 +386,13 @@ TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
     // Expect the texture to be red because stencil test passed.
     std::vector<RGBA8> expected(kSize * kSize, {255, 0, 0, 255});
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_EQ(2u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests the texture with depth stencil attachment and load op load will init depth stencil
 // texture to 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsageBit::CopySrc | dawn::TextureUsageBit::CopyDst |
@@ -400,10 +421,12 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
     // Expect the texture to be red because both depth and stencil tests passed.
     std::vector<RGBA8> expected(kSize * kSize, {255, 0, 0, 255});
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), srcTexture, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_EQ(2u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests the color attachments clear to 0s
 TEST_P(TextureZeroInitTest, ColorAttachmentsClear) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     dawn::TextureDescriptor descriptor = CreateTextureDescriptor(
         1, 1, dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::CopySrc,
         kColorFormat);
@@ -420,10 +443,12 @@ TEST_P(TextureZeroInitTest, ColorAttachmentsClear) {
 
     std::vector<RGBA8> expected(kSize * kSize, {0, 0, 0, 0});
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), renderPass.color, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests the clearing of sampled textures in render pass
 TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     // Create needed resources
     dawn::TextureDescriptor descriptor =
         CreateTextureDescriptor(1, 1, dawn::TextureUsageBit::Sampled, kColorFormat);
@@ -489,10 +514,12 @@ TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
     // Expect the rendered texture to be cleared
     std::vector<RGBA8> expectedWithZeros(kSize * kSize, {0, 0, 0, 0});
     EXPECT_TEXTURE_RGBA8_EQ(expectedWithZeros.data(), renderTexture, 0, 0, kSize, kSize, 0, 0);
+    EXPECT_EQ(2u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 }
 
 // This tests the clearing of sampled textures during compute pass
 TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
+    DAWN_SKIP_TEST_IF(UsesWire());
     // Create needed resources
     dawn::TextureDescriptor descriptor =
         CreateTextureDescriptor(1, 1, dawn::TextureUsageBit::Sampled, kColorFormat);
@@ -553,6 +580,7 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
     pass.EndPass();
     dawn::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
+    EXPECT_EQ(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));
 
     // Expect the buffer to be zeroed out by the compute pass
     std::vector<uint32_t> expectedWithZeros(bufferSize, 0);
