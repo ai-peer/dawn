@@ -556,6 +556,24 @@
       "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68524683_874687a9",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T05:53:51Z",
+      "side": 1,
+      "message": "What I mean is it is better to use the name of the constants instead of the hard-coded number (0, 1, 2, etc) because the value of these constants may be changed in the future, and at that time if you use the name of the constants here you won\u0027t need to update the tests here.",
+      "parentUuid": "9dd72d9e_bc303b33",
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
