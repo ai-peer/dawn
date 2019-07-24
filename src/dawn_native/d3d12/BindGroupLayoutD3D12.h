@@ -35,6 +35,11 @@ namespace dawn_native { namespace d3d12 {
             Count,
         };
 
+        struct RootDescriptorInfo {
+            D3D12_ROOT_PARAMETER_TYPE parameterType;
+            D3D12_ROOT_DESCRIPTOR descriptor;
+        };
+
         const std::array<uint32_t, kMaxBindingsPerGroup>& GetBindingOffsets() const;
         uint32_t GetCbvUavSrvDescriptorTableSize() const;
         uint32_t GetSamplerDescriptorTableSize() const;
@@ -43,10 +48,17 @@ namespace dawn_native { namespace d3d12 {
         const D3D12_DESCRIPTOR_RANGE* GetCbvUavSrvDescriptorRanges() const;
         const D3D12_DESCRIPTOR_RANGE* GetSamplerDescriptorRanges() const;
 
+        uint32_t GetRootDescriptorCount() const;
+        const BindGroupLayout::RootDescriptorInfo* GetRootDescriptors() const;
+
       private:
         std::array<uint32_t, kMaxBindingsPerGroup> mBindingOffsets;
         std::array<uint32_t, DescriptorType::Count> mDescriptorCounts;
         D3D12_DESCRIPTOR_RANGE mRanges[DescriptorType::Count];
+
+        // TODO: maybe I can combine them with a struct contains ROOT_DESCRIPTOR and type.
+        uint32_t mRootDescriptorCounts;
+        RootDescriptorInfo mRootDescriptors[kMaxDynamicBufferCount];
     };
 
 }}  // namespace dawn_native::d3d12

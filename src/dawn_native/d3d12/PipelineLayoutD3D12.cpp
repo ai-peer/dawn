@@ -26,7 +26,8 @@ namespace dawn_native { namespace d3d12 {
 
     PipelineLayout::PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor)
         : PipelineLayoutBase(device, descriptor) {
-        D3D12_ROOT_PARAMETER rootParameters[kMaxBindGroups * 2];
+        D3D12_ROOT_PARAMETER rootParameters[kMaxBindGroups * 2 + kMaxDynamicBufferCount];
+        D3D12_ROOT_DESCRIPTOR rootDescriptor;
 
         // A root parameter is one of these types
         union {
@@ -72,6 +73,21 @@ namespace dawn_native { namespace d3d12 {
                 return true;
             };
 
+            auto SetRootDescriptor =
+                [&](uint32_t descriptorCount,
+                    const BindGroupLayout::RootDescriptorInfo* rootDescriptorInfo) {
+                    for (uint32_t i = 0; i < descriptorCount; ++i) {
+                        auto& rootParameter = rootParameters[parameterIndex];
+                        const uint32_t binding = rootDescriptorInfo[i].descriptor.ShaderRegister;
+                        rootDescriptor = rootDescriptorInfo[i].descriptor;
+                        rootDescriptor.RegisterSpace = group;
+                        rootParameter.ParameterType = rootDescriptorInfo[i].parameterType;
+                        rootParameter.Descriptor = rootDescriptor;
+                        rootParameter.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+                        mRootParameterInfo[group][binding] = parameterIndex++;
+                    }
+                };
+
             if (SetRootDescriptorTable(bindGroupLayout->GetCbvUavSrvDescriptorTableSize(),
                                        bindGroupLayout->GetCbvUavSrvDescriptorRanges())) {
                 mCbvUavSrvRootParameterInfo[group] = parameterIndex++;
@@ -81,7 +97,10 @@ namespace dawn_native { namespace d3d12 {
                                        bindGroupLayout->GetSamplerDescriptorRanges())) {
                 mSamplerRootParameterInfo[group] = parameterIndex++;
             }
-        }
+
+            SetRootDescriptor(bindGroupLayout->GetRootDescriptorCount(),
+                              bindGroupLayout->GetRootDescriptors());
+        };
 
         D3D12_ROOT_SIGNATURE_DESC rootSignatureDescriptor;
         rootSignatureDescriptor.NumParameters = parameterIndex;
@@ -112,5 +131,10 @@ namespace dawn_native { namespace d3d12 {
 
     ComPtr<ID3D12RootSignature> PipelineLayout::GetRootSignature() {
         return mRootSignature;
+    }
+
+    uint32_t PipelineLayout::GetRootParameterInfo(uint32_t group, uint32_t binding) const {
+        ASSERT(group < kMaxBindGroups);
+        return mRootParameterInfo[group][binding];
     }
 }}  // namespace dawn_native::d3d12
