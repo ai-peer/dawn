@@ -47,7 +47,6 @@ class ValidationTest : public testing::Test {
 
       private:
         dawn::RenderPassColorAttachmentDescriptor mColorAttachment;
-        dawn::RenderPassColorAttachmentDescriptor* mColorAttachments[1];
     };
 
   protected:
