@@ -65,6 +65,7 @@ namespace dawn_native { namespace metal {
         // gl_PointSize builtin (https://github.com/gpuweb/gpuweb/issues/332).
         spirv_cross::CompilerMSL::Options options_msl;
         options_msl.enable_point_size_builtin = false;
+        options_msl.buffer_size_buffer_index = 30;
         compiler.set_msl_options(options_msl);
 
         // By default SPIRV-Cross will give MSL resources indices in increasing order.
