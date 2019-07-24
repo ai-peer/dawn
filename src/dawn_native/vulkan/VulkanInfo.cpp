@@ -106,7 +106,7 @@ namespace dawn_native { namespace vulkan {
                     info.surface = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrWaylandSurface)) {
-                    info.waylandSurface = true;
+                    // info.waylandSurface = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrWin32Surface)) {
                     info.win32Surface = true;
@@ -115,7 +115,7 @@ namespace dawn_native { namespace vulkan {
                     info.xcbSurface = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrXlibSurface)) {
-                    info.xlibSurface = true;
+                    // info.xlibSurface = true;
                 }
             }
         }
