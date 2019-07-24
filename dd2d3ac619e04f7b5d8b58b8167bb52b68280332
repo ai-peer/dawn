@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "03049d22_4457097a",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T16:05:25Z",
+      "side": 1,
+      "message": "I moved this around so the encoding of the Begin command is inside the TryEncode,\nand the creation of the encoder and EnterPass is after checking the success status.\n\nI didn\u0027t see a good way to return Result\u003c\u003e because we\u0027d have to pass the Result back to the EncodingContext to Consume the error.",
+      "parentUuid": "6eec2178_0d713ef6",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cba0f5a5_d39a60a5",
         "filename": "src/dawn_native/ComputePassEncoder.h",
         "patchSetId": 5
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "53e93cec_dcfbbfe2",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T16:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cba0f5a5_d39a60a5",
+      "range": {
+        "startLine": 50,
+        "startChar": 11,
+        "endLine": 50,
+        "endChar": 29
+      },
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb05887a_f6f5979a",
         "filename": "src/dawn_native/EncodingContext.h",
         "patchSetId": 5
@@ -56,6 +98,24 @@
       "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f910f7f_134b5182",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T16:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb05887a_f6f5979a",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "ad93d83e_28cc42d8",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T16:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3758be9b_6057a4ce",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5151b1cc_27d315a3",
         "filename": "src/dawn_native/EncodingContext.h",
         "patchSetId": 5
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "d9cc2c3c_df855437",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T16:05:25Z",
+      "side": 1,
+      "message": "Also made this ObjectBase because it will be the union of CommandEncoder and RenderBundleEncoder.",
+      "parentUuid": "5151b1cc_27d315a3",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "123d55d7_76ac5704",
         "filename": "src/dawn_native/EncodingContext.h",
         "patchSetId": 5
@@ -107,6 +203,24 @@
       "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2af25636_d1f0bcdf",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T16:05:25Z",
+      "side": 1,
+      "message": "ObjectBase",
+      "parentUuid": "123d55d7_76ac5704",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -130,6 +244,30 @@
       "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a439db48_dd13af7d",
+        "filename": "src/dawn_native/RenderPassEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T16:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75bb2867_8118c6a8",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
