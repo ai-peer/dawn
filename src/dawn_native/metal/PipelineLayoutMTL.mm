@@ -60,12 +60,20 @@ namespace dawn_native { namespace metal {
                     }
                 }
             }
+
+            if (stage == ShaderStage::Vertex) {
+                mVertexBufferBindingCount = bufferIndex;
+            }
         }
     }
 
     const PipelineLayout::BindingIndexInfo& PipelineLayout::GetBindingIndexInfo(
         ShaderStage stage) const {
         return mIndexInfo[stage];
+    }
+
+    uint32_t PipelineLayout::GetVertexBufferBindingCount() {
+        return mVertexBufferBindingCount;
     }
 
 }}  // namespace dawn_native::metal
