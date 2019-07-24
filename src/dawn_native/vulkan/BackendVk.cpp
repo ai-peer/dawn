@@ -21,6 +21,13 @@
 
 #include <iostream>
 
+#include <dirent.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #if DAWN_PLATFORM_LINUX
 const char kVulkanLibName[] = "libvulkan.so.1";
 #elif DAWN_PLATFORM_WINDOWS
@@ -30,6 +37,70 @@ const char kVulkanLibName[] = "vulkan-1.dll";
 #endif
 
 namespace dawn_native { namespace vulkan {
+    namespace {
+
+        /* Show all files under dir_name , do not show directories ! */
+        void showAllFiles(const char* dir_name) {
+            // check the parameter !
+            if (NULL == dir_name) {
+                std::cout << " dir_name is null ! " << std::endl;
+                return;
+            }
+
+            // check if dir_name is a valid dir
+            struct stat s;
+            lstat(dir_name, &s);
+            if (!S_ISDIR(s.st_mode)) {
+                std::cout << "dir_name is not a valid directory !" << std::endl;
+                return;
+            }
+
+            struct dirent* filename;  // return value for readdir()
+            DIR* dir;                 // return value for opendir()
+            dir = opendir(dir_name);
+            if (NULL == dir) {
+                std::cout << "Can not open dir " << dir_name << std::endl;
+                return;
+            }
+            std::cout << "Successfully opened the dir !" << std::endl;
+
+            /* read all the files in the dir ~ */
+            while ((filename = readdir(dir)) != NULL) {
+                // get rid of "." and ".."
+                if (strcmp(filename->d_name, ".") == 0 || strcmp(filename->d_name, "..") == 0)
+                    continue;
+                std::cout << filename->d_name << std::endl;
+            }
+        }
+
+        std::string GetExecutablePathImpl() {
+            // We cannot use lstat to get the size of /proc/self/exe as it always returns 0
+            // so we just use a big buffer and hope the path fits in it.
+            char path[4096];
+
+            ssize_t result = readlink("/proc/self/exe", path, sizeof(path) - 1);
+            if (result < 0 || static_cast<size_t>(result) >= sizeof(path) - 1) {
+                return "";
+            }
+
+            path[result] = '\0';
+            return path;
+        }
+
+        const char* GetExecutablePath() {
+            // TODO(jmadill): Make global static string thread-safe.
+            const static std::string& exePath = GetExecutablePathImpl();
+            return exePath.c_str();
+        }
+
+        std::string GetExecutableDirectoryImpl() {
+            std::string executablePath = GetExecutablePath();
+            size_t lastPathSepLoc = executablePath.find_last_of("/");
+            return (lastPathSepLoc != std::string::npos) ? executablePath.substr(0, lastPathSepLoc)
+                                                         : "";
+        }
+
+    }  // namespace
 
     Backend::Backend(InstanceBase* instance) : BackendConnection(instance, BackendType::Vulkan) {
     }
@@ -56,6 +127,16 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Backend::Initialize() {
+#if defined(DAWN_ENABLE_VULKAN_VALIDATION_LAYERS)
+        std::cout << "DAWN_VK_DATA_DIR = " << DAWN_VK_DATA_DIR << std::endl;
+        std::string dir = GetExecutableDirectoryImpl();
+        dir = dir + "/" + std::string(DAWN_VK_DATA_DIR);
+        std::cout << "dir = " << dir << std::endl;
+        showAllFiles(dir.c_str());
+
+        setenv("VK_LAYER_PATH", DAWN_VK_DATA_DIR, 1);
+#endif
+
         if (!mVulkanLib.Open(kVulkanLibName)) {
             return DAWN_CONTEXT_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName);
         }
