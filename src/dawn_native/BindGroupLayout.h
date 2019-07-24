@@ -57,6 +57,8 @@ namespace dawn_native {
         };
 
         uint32_t GetDynamicBufferCount() const;
+        uint32_t GetDynamicUniformBufferCount() const;
+        uint32_t GetDynamicStorageBufferCount() const;
 
       private:
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
@@ -64,6 +66,8 @@ namespace dawn_native {
         LayoutBindingInfo mBindingInfo;
         bool mIsBlueprint = false;
         uint32_t mDynamicBufferCount = 0;
+        uint32_t mDynamicUniformBufferCount = 0;
+        uint32_t mDynamicStorageBufferCount = 0;
     };
 
 }  // namespace dawn_native
