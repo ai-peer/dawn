@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "02176d57_42c85cb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21a30f2a_d0334e20",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b78fc20e_d87cea2c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05b6e171_ace74890",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b78fc20e_d87cea2c",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2b4f2e42_0467332f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b671c76d_74d1a7dc",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c42d9305_b3097670",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -91,6 +163,30 @@
       "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f66d017_ada3e5e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42d9305_b3097670",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "f29c7b5b_fecab496",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d74c04_1fb5fea4",
+      "range": {
+        "startLine": 43,
+        "startChar": 25,
+        "endLine": 43,
+        "endChar": 54
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d4b5547_0ddeb409",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 6
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "06d96ceb_8dff7e7b",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d4b5547_0ddeb409",
+      "range": {
+        "startLine": 53,
+        "startChar": 33,
+        "endLine": 53,
+        "endChar": 88
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10f3a9dc_a285552f",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 6
@@ -160,6 +304,30 @@
       "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "688764a2_f3fd1508",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10f3a9dc_a285552f",
+      "range": {
+        "startLine": 62,
+        "startChar": 33,
+        "endLine": 62,
+        "endChar": 88
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "6436be31_39a0e6f1",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b48146d_bc5a7cc1",
+      "range": {
+        "startLine": 81,
+        "startChar": 31,
+        "endLine": 81,
+        "endChar": 35
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db7c1b0a_2ef27dac",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -232,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "92d90d86_06cba11a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "The return type is already the const\u0026 https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/BindGroupLayout.h?l\u003d49\nSo I think auto\u0026 is enough? (if not compiler may yield :P).",
+      "parentUuid": "db7c1b0a_2ef27dac",
+      "range": {
+        "startLine": 161,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 29
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "49f2e310_061a2bd6",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 6
@@ -243,6 +459,24 @@
       "writtenOn": "2019-07-24T04:33:56Z",
       "side": 1,
       "message": "Do you think it necessary to ASSERT the size of the root signature is never over 64 DWORDS?\nAccording to the document from Microsoft, \"the OS has the option to add root arguments (of any type) past the API limit imposted on the application\" (https://microsoft.github.io/DirectX-Specs/d3d/ResourceBinding.html#additional-root-argument-capacity-for-system-instrumentation), but we always want to limit the size of the root signature to be less than 64 DWORDS.",
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93b60bef_ab5a3d23",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Good question, (and good link :-) ).\nBut, first, this d3d12SerializeRootSignature API has been superceded by D3D12SerializeVersionedRootSignature as of the Windows 10 Anniversary Update (14393). I\u0027d like to replace this one but decide not to add review workload in this patch.\n\nSecond, assume we choose 64DWORD. For me, an ASSERT for root signature means we need to compute the size by ourselves through rootSignatureDescriptor in dawn(maybe not?), I agree this will help to not call into driver with large root signature, but I think maybe check this in driver and catch the error by ASSERT_SUCCESS is ok?\n\nThird, should dawn only use 64DWORD? Even the second-half doesn\u0027t commit a performance improvement.",
+      "parentUuid": "49f2e310_061a2bd6",
       "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -301,6 +535,24 @@
       "side": 1,
       "message": "I don\u0027t know whether we need this kMaxDynamicUniformBufferCount. AFAK, for all of these three backends, maybe max value for each dynamic type is enough...",
       "parentUuid": "75bd0696_cea6a078",
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dd72d9e_bc303b33",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-24T05:48:11Z",
+      "side": 1,
+      "message": "Sry, I mean kMaxyDynamicBufferCount. For implementation, I\u0027d like to have this constant. But for validation, max value for each dynamic type is enough (and no such total dynamic limit)",
+      "parentUuid": "24c7641c_58e30346",
       "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
