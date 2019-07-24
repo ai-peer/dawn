@@ -274,7 +274,7 @@ namespace dawn_native {
         std::bitset<kMaxVertexAttributes> attributesSetMask;
         DAWN_TRY(ValidateVertexInputDescriptor(descriptor->vertexInput, &attributesSetMask));
         DAWN_TRY(ValidatePrimitiveTopology(descriptor->primitiveTopology));
-        DAWN_TRY(ValidatePipelineStageDescriptor(device, descriptor->vertexStage,
+        DAWN_TRY(ValidatePipelineStageDescriptor(device, &descriptor->vertexStage,
                                                  descriptor->layout, ShaderStage::Vertex));
         DAWN_TRY(ValidatePipelineStageDescriptor(device, descriptor->fragmentStage,
                                                  descriptor->layout, ShaderStage::Fragment));
@@ -283,7 +283,7 @@ namespace dawn_native {
             DAWN_TRY(ValidateRasterizationStateDescriptor(descriptor->rasterizationState));
         }
 
-        if ((descriptor->vertexStage->module->GetUsedVertexAttributes() & ~attributesSetMask)
+        if ((descriptor->vertexStage.module->GetUsedVertexAttributes() & ~attributesSetMask)
                 .any()) {
             return DAWN_VALIDATION_ERROR(
                 "Pipeline vertex stage uses inputs not in the input state");
@@ -354,8 +354,8 @@ namespace dawn_native {
           mSampleCount(descriptor->sampleCount),
           mSampleMask(descriptor->sampleMask),
           mAlphaToCoverageEnabled(descriptor->alphaToCoverageEnabled),
-          mVertexModule(descriptor->vertexStage->module),
-          mVertexEntryPoint(descriptor->vertexStage->entryPoint),
+          mVertexModule(descriptor->vertexStage.module),
+          mVertexEntryPoint(descriptor->vertexStage.entryPoint),
           mFragmentModule(descriptor->fragmentStage->module),
           mFragmentEntryPoint(descriptor->fragmentStage->entryPoint),
           mIsBlueprint(blueprint) {
