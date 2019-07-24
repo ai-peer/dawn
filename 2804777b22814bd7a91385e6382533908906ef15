@@ -1,0 +1,248 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8f664f1_8516613b",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "How did you choose the value of these constants? Vulkan has limits like 8 and 4 for example.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e503ca9d_8de7474e",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "This check and its friend at [1] can be done only once after the loop over all the bindings.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34efc960_9ccff962",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7608374_8abadfbc",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "We probably don\u0027t need to store this variable anymore and can just compute it inside GetDynamicBufferCount.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06235cfb_132fcdc4",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "Likewise, this check can be done at the end of the loop to not have redundant checks.\n\nAlso it should be split between uniform and storage to have clearer error messages.\n\nCan we have ASSERTs in static_asserts in places to guarantee we don\u0027t have overflows?",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebeca5f2_d41d7e1f",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "Nothing in this header is implemented in BindGroupLayoutD3D12.cpp",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2852c720_d11aaad4",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "Can the TODO be more explicit or removed? Right now it\u0027s difficult to understand what it means.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5f548cd_7e5cdc92",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "Please write down simple types, also reference types should almost always be const.",
+      "range": {
+        "startLine": 161,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 20
+      },
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85085d66_29a6dbe1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "Can we have some empty lines to separate relevant code blocks and let the code breathe a bit?",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b761d25_e8732eac",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "This is only used in the lambda can we declare it there? Even better can we put stuff in rootParameter.Descriptor directly?",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3961e72d_ad934f69",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "Why is this in a lambda? It is used only once.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21713b5b_9f2b7bf6",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "This could be the visibility of the binding in the bind group layout instead.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72d9fbf7_d99439b3",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "GetDynamicRootParameterIndex and we can ASSERT in it the parameter is indeed dynamic.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13dfe26f_57ded387",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T09:59:17Z",
+      "side": 1,
+      "message": "This is not an info but a rootParameterIndex (for dynamic buffer) so mDynamicRootParameterIndices? Sorry the current naming of everything related to layouts is \"info\" that\u0027s bad practice from when we originally made NXT.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
