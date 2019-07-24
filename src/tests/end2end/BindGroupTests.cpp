@@ -129,7 +129,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
     textureDescriptor.layout = pipelineLayout;
     textureDescriptor.vertexStage.module = vsModule;
     textureDescriptor.cFragmentStage.module = fsModule;
-    textureDescriptor.cColorStates[0]->format = renderPass.colorFormat;
+    textureDescriptor.cColorStates[0].format = renderPass.colorFormat;
 
     dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&textureDescriptor);
 
@@ -213,7 +213,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     pipelineDescriptor.layout = pipelineLayout;
     pipelineDescriptor.vertexStage.module = vsModule;
     pipelineDescriptor.cFragmentStage.module = fsModule;
-    pipelineDescriptor.cColorStates[0]->format = renderPass.colorFormat;
+    pipelineDescriptor.cColorStates[0].format = renderPass.colorFormat;
 
     dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
 
@@ -335,7 +335,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     textureDescriptor.layout = pipelineLayout;
     textureDescriptor.vertexStage.module = vsModule;
     textureDescriptor.cFragmentStage.module = fsModule;
-    textureDescriptor.cColorStates[0]->format = renderPass.colorFormat;
+    textureDescriptor.cColorStates[0].format = renderPass.colorFormat;
 
     dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&textureDescriptor);
 
@@ -429,7 +429,7 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets)
     pipelineDescriptor.layout = pipelineLayout;
     pipelineDescriptor.vertexStage.module = vsModule;
     pipelineDescriptor.cFragmentStage.module = fsModule;
-    pipelineDescriptor.cColorStates[0]->format = renderPass.colorFormat;
+    pipelineDescriptor.cColorStates[0].format = renderPass.colorFormat;
 
     dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();

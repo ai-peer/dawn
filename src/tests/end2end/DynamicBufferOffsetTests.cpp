@@ -90,7 +90,7 @@ class DynamicBufferOffsetTests : public DawnTest {
         utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
         pipelineDescriptor.vertexStage.module = vsModule;
         pipelineDescriptor.cFragmentStage.module = fsModule;
-        pipelineDescriptor.cColorStates[0]->format = dawn::TextureFormat::RGBA8Unorm;
+        pipelineDescriptor.cColorStates[0].format = dawn::TextureFormat::RGBA8Unorm;
         dawn::PipelineLayout pipelineLayout =
             utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
         pipelineDescriptor.layout = pipelineLayout;
