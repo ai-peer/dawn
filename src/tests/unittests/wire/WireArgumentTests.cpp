@@ -175,8 +175,7 @@ TEST_F(WireArgumentTests, CStringArgument) {
     pipelineDescriptor.fragmentStage = &fragmentStage;
 
     pipelineDescriptor.colorStateCount = 1;
-    DawnColorStateDescriptor* colorStatesPtr[] = {&colorStateDescriptor};
-    pipelineDescriptor.colorStates = colorStatesPtr;
+    pipelineDescriptor.colorStates = &colorStateDescriptor;
 
     pipelineDescriptor.sampleCount = 1;
     pipelineDescriptor.sampleMask = 0xFFFFFFFF;
