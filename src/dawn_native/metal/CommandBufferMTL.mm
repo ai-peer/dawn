@@ -191,6 +191,61 @@ namespace dawn_native { namespace metal {
                           destinationOrigin:MTLOriginMake(0, 0, 0)];
         }
 
+        // Metal uses a physical addressing mode which means buffers in the shading language are
+        // just pointers to the virtual address of their start. This means there is no way to know
+        // the length of a buffer to compute the length() of unsized arrays at the end of storage
+        // buffers. SPIRV-Cross implements the length() of unsized arrays by requiring an extra
+        // buffer that contains the length of other buffers. This structure that keeps track of the
+        // length of storage buffers and can apply them to the reserved "buffer length buffer" when
+        // needed for a draw or a dispatch.
+        struct StorageBufferLengthTracker {
+            dawn::ShaderStageBit dirtyStages = dawn::ShaderStageBit::None;
+            PerStage<std::array<uint32_t, kGenericMetalBufferSlots>> data;
+
+            void Apply(RenderPipeline* pipeline, id<MTLRenderCommandEncoder> render) {
+                dawn::ShaderStageBit stagesToApply =
+                    dirtyStages & pipeline->GetStagesRequiringStorageBufferLength();
+
+                if (stagesToApply == dawn::ShaderStageBit::None) {
+                    return;
+                }
+
+                if (stagesToApply & dawn::ShaderStageBit::Vertex) {
+                    uint32_t bufferCount = ToBackend(pipeline->GetLayout())
+                                               ->GetBufferBindingCount(ShaderStage::Vertex);
+                    [render setVertexBytes:data[ShaderStage::Vertex].data()
+                                    length:sizeof(uint32_t) * bufferCount
+                                   atIndex:kBufferLengthBufferSlot];
+                }
+
+                if (stagesToApply & dawn::ShaderStageBit::Fragment) {
+                    uint32_t bufferCount = ToBackend(pipeline->GetLayout())
+                                               ->GetBufferBindingCount(ShaderStage::Fragment);
+                    [render setFragmentBytes:data[ShaderStage::Fragment].data()
+                                      length:sizeof(uint32_t) * bufferCount
+                                     atIndex:kBufferLengthBufferSlot];
+                }
+
+                // Only mark clean stages that were actually applied.
+                dirtyStages ^= stagesToApply;
+            }
+
+            void Apply(ComputePipeline* pipeline, id<MTLComputeCommandEncoder> compute) {
+                bool computeDirty = dirtyStages & dawn::ShaderStageBit::Compute;
+                if (!(pipeline->RequiresStorageBufferLength() && computeDirty)) {
+                    return;
+                }
+
+                uint32_t bufferCount =
+                    ToBackend(pipeline->GetLayout())->GetBufferBindingCount(ShaderStage::Compute);
+                [compute setBytes:data[ShaderStage::Compute].data()
+                           length:sizeof(uint32_t) * bufferCount
+                          atIndex:kBufferLengthBufferSlot];
+
+                dirtyStages ^= dawn::ShaderStageBit::Compute;
+            }
+        };
+
         // Handles a call to SetBindGroup, directing the commands to the correct encoder.
         // There is a single function that takes both encoders to factor code. Other approaches like
         // templates wouldn't work because the name of methods are different between the two encoder
@@ -200,6 +255,7 @@ namespace dawn_native { namespace metal {
                             uint32_t dynamicOffsetCount,
                             uint64_t* dynamicOffsets,
                             PipelineLayout* pipelineLayout,
+                            StorageBufferLengthTracker* lengthTracker,
                             id<MTLRenderCommandEncoder> render,
                             id<MTLComputeCommandEncoder> compute) {
             const auto& layout = group->GetLayout()->GetBindingInfo();
@@ -234,7 +290,8 @@ namespace dawn_native { namespace metal {
                 switch (layout.types[bindingIndex]) {
                     case dawn::BindingType::UniformBuffer:
                     case dawn::BindingType::StorageBuffer: {
-                        BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
+                        const BufferBinding& binding =
+                            group->GetBindingAsBufferBinding(bindingIndex);
                         const id<MTLBuffer> buffer = ToBackend(binding.buffer)->GetMTLBuffer();
                         NSUInteger offset = binding.offset;
 
@@ -246,16 +303,22 @@ namespace dawn_native { namespace metal {
                         }
 
                         if (hasVertStage) {
+                            lengthTracker->data[ShaderStage::Vertex][vertIndex] = binding.size;
+                            lengthTracker->dirtyStages |= dawn::ShaderStageBit::Vertex;
                             [render setVertexBuffers:&buffer
                                              offsets:&offset
                                            withRange:NSMakeRange(vertIndex, 1)];
                         }
                         if (hasFragStage) {
+                            lengthTracker->data[ShaderStage::Fragment][fragIndex] = binding.size;
+                            lengthTracker->dirtyStages |= dawn::ShaderStageBit::Fragment;
                             [render setFragmentBuffers:&buffer
                                                offsets:&offset
                                              withRange:NSMakeRange(fragIndex, 1)];
                         }
                         if (hasComputeStage) {
+                            lengthTracker->data[ShaderStage::Compute][computeIndex] = binding.size;
+                            lengthTracker->dirtyStages |= dawn::ShaderStageBit::Compute;
                             [compute setBuffers:&buffer
                                         offsets:&offset
                                       withRange:NSMakeRange(computeIndex, 1)];
@@ -611,6 +674,7 @@ namespace dawn_native { namespace metal {
 
     void CommandBuffer::EncodeComputePass(id<MTLCommandBuffer> commandBuffer) {
         ComputePipeline* lastPipeline = nullptr;
+        StorageBufferLengthTracker storageBufferLength = {};
 
         // Will be autoreleased
         id<MTLComputeCommandEncoder> encoder = [commandBuffer computeCommandEncoder];
@@ -626,12 +690,15 @@ namespace dawn_native { namespace metal {
 
                 case Command::Dispatch: {
                     DispatchCmd* dispatch = mCommands.NextCommand<DispatchCmd>();
+                    storageBufferLength.Apply(lastPipeline, encoder);
+
                     [encoder dispatchThreadgroups:MTLSizeMake(dispatch->x, dispatch->y, dispatch->z)
                             threadsPerThreadgroup:lastPipeline->GetLocalWorkGroupSize()];
                 } break;
 
                 case Command::DispatchIndirect: {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
+                    storageBufferLength.Apply(lastPipeline, encoder);
 
                     Buffer* buffer = ToBackend(dispatch->indirectBuffer.Get());
                     id<MTLBuffer> indirectBuffer = buffer->GetMTLBuffer();
@@ -656,8 +723,8 @@ namespace dawn_native { namespace metal {
                     }
 
                     ApplyBindGroup(cmd->index, ToBackend(cmd->group.Get()), cmd->dynamicOffsetCount,
-                                   dynamicOffsets, ToBackend(lastPipeline->GetLayout()), nil,
-                                   encoder);
+                                   dynamicOffsets, ToBackend(lastPipeline->GetLayout()),
+                                   &storageBufferLength, nil, encoder);
                 } break;
 
                 default: { UNREACHABLE(); } break;
@@ -768,6 +835,7 @@ namespace dawn_native { namespace metal {
         id<MTLBuffer> indexBuffer = nil;
         uint32_t indexBufferBaseOffset = 0;
         VertexInputBufferTracker vertexInputBuffers;
+        StorageBufferLengthTracker storageBufferLength = {};
 
         // This will be autoreleased
         id<MTLRenderCommandEncoder> encoder =
@@ -786,6 +854,7 @@ namespace dawn_native { namespace metal {
                     DrawCmd* draw = mCommands.NextCommand<DrawCmd>();
 
                     vertexInputBuffers.Apply(encoder, lastPipeline);
+                    storageBufferLength.Apply(lastPipeline, encoder);
 
                     // The instance count must be non-zero, otherwise no-op
                     if (draw->instanceCount != 0) {
@@ -803,6 +872,7 @@ namespace dawn_native { namespace metal {
                         IndexFormatSize(lastPipeline->GetVertexInputDescriptor()->indexFormat);
 
                     vertexInputBuffers.Apply(encoder, lastPipeline);
+                    storageBufferLength.Apply(lastPipeline, encoder);
 
                     // The index and instance count must be non-zero, otherwise no-op
                     if (draw->indexCount != 0 && draw->instanceCount != 0) {
@@ -822,6 +892,7 @@ namespace dawn_native { namespace metal {
                     DrawIndirectCmd* draw = mCommands.NextCommand<DrawIndirectCmd>();
 
                     vertexInputBuffers.Apply(encoder, lastPipeline);
+                    storageBufferLength.Apply(lastPipeline, encoder);
 
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     id<MTLBuffer> indirectBuffer = buffer->GetMTLBuffer();
@@ -834,6 +905,7 @@ namespace dawn_native { namespace metal {
                     DrawIndirectCmd* draw = mCommands.NextCommand<DrawIndirectCmd>();
 
                     vertexInputBuffers.Apply(encoder, lastPipeline);
+                    storageBufferLength.Apply(lastPipeline, encoder);
 
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     id<MTLBuffer> indirectBuffer = buffer->GetMTLBuffer();
@@ -936,8 +1008,8 @@ namespace dawn_native { namespace metal {
                     }
 
                     ApplyBindGroup(cmd->index, ToBackend(cmd->group.Get()), cmd->dynamicOffsetCount,
-                                   dynamicOffsets, ToBackend(lastPipeline->GetLayout()), encoder,
-                                   nil);
+                                   dynamicOffsets, ToBackend(lastPipeline->GetLayout()),
+                                   &storageBufferLength, encoder, nil);
                 } break;
 
                 case Command::SetIndexBuffer: {
