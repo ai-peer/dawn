@@ -113,7 +113,7 @@ TEST_P(TextureZeroInitTest, RenderingMipMapClearsToZero) {
 
     utils::BasicRenderPass renderPass = utils::BasicRenderPass(kSize, kSize, texture, kColorFormat);
 
-    renderPass.renderPassInfo.cColorAttachmentsInfoPtr[0]->attachment = view;
+    renderPass.renderPassInfo.cColorAttachments[0].attachment = view;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         // Texture's first usage is in BeginRenderPass's call to RecordRenderPass
@@ -142,7 +142,7 @@ TEST_P(TextureZeroInitTest, RenderingArrayLayerClearsToZero) {
 
     utils::BasicRenderPass renderPass = utils::BasicRenderPass(kSize, kSize, texture, kColorFormat);
 
-    renderPass.renderPassInfo.cColorAttachmentsInfoPtr[0]->attachment = view;
+    renderPass.renderPassInfo.cColorAttachments[0].attachment = view;
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -409,7 +409,7 @@ TEST_P(TextureZeroInitTest, ColorAttachmentsClear) {
         kColorFormat);
     dawn::Texture texture = device.CreateTexture(&descriptor);
     utils::BasicRenderPass renderPass = utils::BasicRenderPass(kSize, kSize, texture, kColorFormat);
-    renderPass.renderPassInfo.cColorAttachmentsInfoPtr[0]->loadOp = dawn::LoadOp::Load;
+    renderPass.renderPassInfo.cColorAttachments[0].loadOp = dawn::LoadOp::Load;
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     {
