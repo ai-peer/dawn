@@ -472,6 +472,111 @@ TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutCache) {
     ASSERT_EQ(layout1.Get(), layout2.Get());
 }
 
+// Check that dynamic buffer numbers exceed maximum value in one bind group layout.
+TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberExceedsMaximumInOneBindGroupLayout) {
+    utils::MakeBindGroupLayout(
+        device, {
+                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {1, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {2, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {3, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {4, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {5, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                    {6, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                });
+
+    // Too many dynamic uniform buffers.
+    ASSERT_DEVICE_ERROR(utils::MakeBindGroupLayout(
+        device, {
+                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {1, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {2, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {3, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {4, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    {5, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                }));
+
+    // Too many dynamic storage buffers.
+    ASSERT_DEVICE_ERROR(utils::MakeBindGroupLayout(
+        device, {
+                    {0, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                    {1, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                    {2, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                }));
+}
+
+// Check that dynamic buffer numbers exceed maximum value in pipeline layout.
+TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberExceedsMaximumInPipelineLayout) {
+    dawn::BindGroupLayout bgl[2];
+
+    {
+        bgl[0] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {1, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {2, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {3, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {4, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    });
+
+        bgl[1] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                        {1, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                    });
+
+        dawn::PipelineLayoutDescriptor descriptor;
+        descriptor.bindGroupLayoutCount = 2;
+        descriptor.bindGroupLayouts = bgl;
+
+        device.CreatePipelineLayout(&descriptor);
+    }
+
+    // Too many dynamic uniform buffers.
+    {
+        bgl[0] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {1, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {2, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {3, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    });
+
+        bgl[1] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {1, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                        {2, dawn::ShaderStageBit::Compute, dawn::BindingType::UniformBuffer, true},
+                    });
+
+        dawn::PipelineLayoutDescriptor descriptor;
+        descriptor.bindGroupLayoutCount = 2;
+        descriptor.bindGroupLayouts = bgl;
+
+        ASSERT_DEVICE_ERROR(device.CreatePipelineLayout(&descriptor));
+    }
+
+    // Too many dynamic storage buffers.
+    {
+        bgl[0] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                    });
+
+        bgl[1] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                        {1, dawn::ShaderStageBit::Compute, dawn::BindingType::StorageBuffer, true},
+                    });
+
+        dawn::PipelineLayoutDescriptor descriptor;
+        descriptor.bindGroupLayoutCount = 2;
+        descriptor.bindGroupLayouts = bgl;
+
+        ASSERT_DEVICE_ERROR(device.CreatePipelineLayout(&descriptor));
+    }
+}
+
 constexpr uint64_t kBufferSize = 2 * kMinDynamicBufferOffsetAlignment + 8;
 constexpr uint32_t kBindingSize = 9;
 
