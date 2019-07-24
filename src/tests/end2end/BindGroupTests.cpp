@@ -127,7 +127,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
 
     utils::ComboRenderPipelineDescriptor textureDescriptor(device);
     textureDescriptor.layout = pipelineLayout;
-    textureDescriptor.cVertexStage.module = vsModule;
+    textureDescriptor.vertexStage.module = vsModule;
     textureDescriptor.cFragmentStage.module = fsModule;
     textureDescriptor.cColorStates[0]->format = renderPass.colorFormat;
 
@@ -211,7 +211,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
 
     utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
     pipelineDescriptor.layout = pipelineLayout;
-    pipelineDescriptor.cVertexStage.module = vsModule;
+    pipelineDescriptor.vertexStage.module = vsModule;
     pipelineDescriptor.cFragmentStage.module = fsModule;
     pipelineDescriptor.cColorStates[0]->format = renderPass.colorFormat;
 
@@ -333,7 +333,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
 
     utils::ComboRenderPipelineDescriptor textureDescriptor(device);
     textureDescriptor.layout = pipelineLayout;
-    textureDescriptor.cVertexStage.module = vsModule;
+    textureDescriptor.vertexStage.module = vsModule;
     textureDescriptor.cFragmentStage.module = fsModule;
     textureDescriptor.cColorStates[0]->format = renderPass.colorFormat;
 
@@ -427,7 +427,7 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets)
 
     utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
     pipelineDescriptor.layout = pipelineLayout;
-    pipelineDescriptor.cVertexStage.module = vsModule;
+    pipelineDescriptor.vertexStage.module = vsModule;
     pipelineDescriptor.cFragmentStage.module = fsModule;
     pipelineDescriptor.cColorStates[0]->format = renderPass.colorFormat;
 

@@ -64,7 +64,7 @@ class TextureZeroInitTest : public DawnTest {
             void main() {
                 gl_Position = vec4(pos[gl_VertexIndex], 0.0, 1.0);
             })";
-        pipelineDescriptor.cVertexStage.module =
+        pipelineDescriptor.vertexStage.module =
             utils::CreateShaderModule(device, utils::ShaderStage::Vertex, vs);
 
         const char* fs =

@@ -36,7 +36,7 @@ class DrawQuad {
 
             utils::ComboRenderPipelineDescriptor descriptor(device);
             descriptor.layout = pipelineLayout;
-            descriptor.cVertexStage.module = vsModule;
+            descriptor.vertexStage.module = vsModule;
             descriptor.cFragmentStage.module = fsModule;
 
             auto renderPipeline = device.CreateRenderPipeline(&descriptor);

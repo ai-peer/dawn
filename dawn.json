@@ -892,7 +892,7 @@
         "extensible": true,
         "members": [
             {"name": "layout", "type": "pipeline layout"},
-            {"name": "vertex stage", "type": "pipeline stage descriptor", "annotation": "const*"},
+            {"name": "vertex stage", "type": "pipeline stage descriptor"},
             {"name": "fragment stage", "type": "pipeline stage descriptor", "annotation": "const*"},
             {"name": "vertex input", "type": "vertex input descriptor", "annotation": "const*"},
             {"name": "primitive topology", "type": "primitive topology"},
