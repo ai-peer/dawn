@@ -1,0 +1,291 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21a30f2a_d0334e20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "In a typical graphics application it is a common usage to update some uniforms once per draw, and such uniforms include the word positions, orientations, and so on.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b78fc20e_d87cea2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "for each draw call we have to create a new bind group to set the right uniform values.",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b671c76d_74d1a7dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "a memory allocation is required.",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c42d9305_b3097670",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "The functionality of Dynamic Buffer Offset",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1d74c04_1fb5fea4",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "kMaxDynamicBufferCount \u003d kMaxDynamicUniformBufferCount + kMaxDynamicStorageBufferCount;",
+      "range": {
+        "startLine": 43,
+        "startChar": 25,
+        "endLine": 43,
+        "endChar": 54
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d4b5547_0ddeb409",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "The number of dynamic uniform buffers exceeds the maximum value.",
+      "range": {
+        "startLine": 53,
+        "startChar": 33,
+        "endLine": 53,
+        "endChar": 88
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10f3a9dc_a285552f",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "The number of dynamic storage buffers exceeds the maximum value.",
+      "range": {
+        "startLine": 62,
+        "startChar": 33,
+        "endLine": 62,
+        "endChar": 88
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a53dac6_3e7a9ddd",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "is using",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 25
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b48146d_bc5a7cc1",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "needs",
+      "range": {
+        "startLine": 81,
+        "startChar": 31,
+        "endLine": 81,
+        "endChar": 35
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db7c1b0a_2ef27dac",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "const\u0026 ?",
+      "range": {
+        "startLine": 161,
+        "startChar": 16,
+        "endLine": 161,
+        "endChar": 29
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49f2e310_061a2bd6",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "Do you think it necessary to ASSERT the size of the root signature is never over 64 DWORDS?\nAccording to the document from Microsoft, \"the OS has the option to add root arguments (of any type) past the API limit imposted on the application\" (https://microsoft.github.io/DirectX-Specs/d3d/ResourceBinding.html#additional-root-argument-capacity-for-system-instrumentation), but we always want to limit the size of the root signature to be less than 64 DWORDS.",
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30606234_0d3f1d7d",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "Sort the backends in alphabetical order",
+      "range": {
+        "startLine": 215,
+        "startChar": 76,
+        "endLine": 215,
+        "endChar": 89
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75bd0696_cea6a078",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T04:33:56Z",
+      "side": 1,
+      "message": "I think it better to construct these tests with the constants in Constant.h:\n- kMaxDynamicUniformBufferCount\n- kMaxDynamicStorageBufferCount\n- kMaxDynamicBufferCount",
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
