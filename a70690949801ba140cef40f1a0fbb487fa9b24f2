@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b3dfaf58_834dfc13",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T02:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9398929c_c3e27e2a",
+      "revId": "a70690949801ba140cef40f1a0fbb487fa9b24f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7ed3135_6d5a2383",
         "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "a70690949801ba140cef40f1a0fbb487fa9b24f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0bf612d_34290cda",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T02:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7ed3135_6d5a2383",
+      "revId": "a70690949801ba140cef40f1a0fbb487fa9b24f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
