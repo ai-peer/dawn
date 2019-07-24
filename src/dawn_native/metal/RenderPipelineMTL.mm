@@ -400,24 +400,21 @@ namespace dawn_native { namespace metal {
         return mMtlDepthStencilState;
     }
 
+    uint32_t RenderPipeline::GetMtlVertexBufferIndex(uint32_t dawnIndex) {
+        ASSERT(dawnIndex < kMaxVertexBuffers);
+        return mMtlVertexBufferIndices[dawnIndex];
+    }
+
     MTLVertexDescriptor* RenderPipeline::MakeVertexDesc() {
         MTLVertexDescriptor* mtlVertexDescriptor = [MTLVertexDescriptor new];
 
-        for (uint32_t i : IterateBitSet(GetAttributesSetMask())) {
-            const VertexAttributeInfo& info = GetAttribute(i);
+        uint32_t mtlVertexBufferIndex =
+            ToBackend(GetLayout())->GetVertexBufferBindingCount();
 
-            auto attribDesc = [MTLVertexAttributeDescriptor new];
-            attribDesc.format = VertexFormatType(info.format);
-            attribDesc.offset = info.offset;
-            attribDesc.bufferIndex = kMaxBindingsPerGroup + info.inputSlot;
-            mtlVertexDescriptor.attributes[i] = attribDesc;
-            [attribDesc release];
-        }
+        for (uint32_t dawnVertexBufferIndex : IterateBitSet(GetInputsSetMask())) {
+            const VertexBufferInfo& info = GetInput(dawnVertexBufferIndex);
 
-        for (uint32_t vbInputSlot : IterateBitSet(GetInputsSetMask())) {
-            const VertexBufferInfo& info = GetInput(vbInputSlot);
-
-            auto layoutDesc = [MTLVertexBufferLayoutDescriptor new];
+            MTLVertexBufferLayoutDescriptor* layoutDesc = [MTLVertexBufferLayoutDescriptor new];
             if (info.stride == 0) {
                 // For MTLVertexStepFunctionConstant, the stepRate must be 0,
                 // but the stride must NOT be 0, so we made up it with
@@ -426,7 +423,7 @@ namespace dawn_native { namespace metal {
                 for (uint32_t attribIndex : IterateBitSet(GetAttributesSetMask())) {
                     const VertexAttributeInfo& attrib = GetAttribute(attribIndex);
                     // Only use the attributes that use the current input
-                    if (attrib.inputSlot != vbInputSlot) {
+                    if (attrib.inputSlot != dawnVertexBufferIndex) {
                         continue;
                     }
                     max_stride = std::max(max_stride,
@@ -442,10 +439,25 @@ namespace dawn_native { namespace metal {
                 layoutDesc.stepRate = 1;
                 layoutDesc.stride = info.stride;
             }
-            // TODO(cwallez@chromium.org): make the offset depend on the pipeline layout
-            mtlVertexDescriptor.layouts[kMaxBindingsPerGroup + vbInputSlot] = layoutDesc;
+
+            mtlVertexDescriptor.layouts[mtlVertexBufferIndex] = layoutDesc;
             [layoutDesc release];
+
+            mMtlVertexBufferIndices[dawnVertexBufferIndex] = mtlVertexBufferIndex;
+            mtlVertexBufferIndex++;
         }
+
+        for (uint32_t i : IterateBitSet(GetAttributesSetMask())) {
+            const VertexAttributeInfo& info = GetAttribute(i);
+
+            auto attribDesc = [MTLVertexAttributeDescriptor new];
+            attribDesc.format = VertexFormatType(info.format);
+            attribDesc.offset = info.offset;
+            attribDesc.bufferIndex = mMtlVertexBufferIndices[info.inputSlot];
+            mtlVertexDescriptor.attributes[i] = attribDesc;
+            [attribDesc release];
+        }
+
         return mtlVertexDescriptor;
     }
 
