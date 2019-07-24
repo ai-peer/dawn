@@ -65,6 +65,7 @@ namespace dawn_native {
         SetDefaultToggles();
 
         mFormatTable = BuildFormatTable(this);
+        mLazyClearCountForTesting = 0;
     }
 
     DeviceBase::~DeviceBase() {
@@ -482,6 +483,14 @@ namespace dawn_native {
 
     bool DeviceBase::IsToggleEnabled(Toggle toggle) const {
         return mTogglesSet.IsEnabled(toggle);
+    }
+
+    size_t DeviceBase::GetLazyClearCountForTesting() {
+        return mLazyClearCountForTesting;
+    }
+
+    void DeviceBase::SetLazyClearCountForTesting(size_t count) {
+        mLazyClearCountForTesting = count;
     }
 
     void DeviceBase::SetDefaultToggles() {

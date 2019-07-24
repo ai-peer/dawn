@@ -513,6 +513,8 @@ namespace dawn_native { namespace d3d12 {
             }
         }
         SetIsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer, layerCount);
+        size_t lazyClearCount = GetDevice()->GetLazyClearCountForTesting();
+        GetDevice()->SetLazyClearCountForTesting(++lazyClearCount);
     }
 
     void Texture::EnsureSubresourceContentInitialized(ComPtr<ID3D12GraphicsCommandList> commandList,

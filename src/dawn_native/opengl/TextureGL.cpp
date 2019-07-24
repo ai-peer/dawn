@@ -222,6 +222,8 @@ namespace dawn_native { namespace opengl {
             }
         }
         SetIsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer, layerCount);
+        size_t lazyClearCount = GetDevice()->GetLazyClearCountForTesting();
+        GetDevice()->SetLazyClearCountForTesting(++lazyClearCount);
     }
 
     void Texture::EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
