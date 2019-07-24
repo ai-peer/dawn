@@ -87,6 +87,91 @@
     },
     {
       "key": {
+        "uuid": "979298eb_4d137470",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T10:05:38Z",
+      "side": 1,
+      "message": "Comments should also explain why the code is doing what it is doing.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c9b0bf_761dc127",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T10:05:38Z",
+      "side": 1,
+      "message": "Why is this in a lambda? It is used only once.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "914c71af_f979e6f2",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T10:05:38Z",
+      "side": 1,
+      "message": "nit: write out simple types and references should be const. You can use a pointer to mutate the value.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd9fc2d5_126b597e",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T10:05:38Z",
+      "side": 1,
+      "message": "I\u0027m not sure there too much value in pre-computing these descriptors because they don\u0027t depend on the previous descriptors or anything. Maybe we don\u0027t need to store them and instead do everything in the pipeline layout, WDYT?",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18382c0c_695a09dc",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T10:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ebeca5f2_d41d7e1f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 11
@@ -98,6 +183,24 @@
       "writtenOn": "2019-07-24T09:59:17Z",
       "side": 1,
       "message": "Nothing in this header is implemented in BindGroupLayoutD3D12.cpp",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdacbc33_3070670d",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-24T10:05:38Z",
+      "side": 1,
+      "message": "Never mind I somehow missed a file.",
+      "parentUuid": "ebeca5f2_d41d7e1f",
       "revId": "2804777b22814bd7a91385e6382533908906ef15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
