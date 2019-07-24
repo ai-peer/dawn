@@ -20,10 +20,15 @@
 namespace dawn_native { namespace d3d12 {
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
-        : BindGroupLayoutBase(device, descriptor), mDescriptorCounts{} {
+        : BindGroupLayoutBase(device, descriptor), mDescriptorCounts{}, mRootDescriptorCounts{} {
         const auto& groupInfo = GetBindingInfo();
 
         for (uint32_t binding : IterateBitSet(groupInfo.mask)) {
+            // No need to count dynamic resources.
+            if (groupInfo.dynamic[binding]) {
+                continue;
+            }
+
             switch (groupInfo.types[binding]) {
                 case dawn::BindingType::UniformBuffer:
                     mBindingOffsets[binding] = mDescriptorCounts[CBV]++;
@@ -68,6 +73,30 @@ namespace dawn_native { namespace d3d12 {
         uint32_t rangeIndex = 0;
         uint32_t baseRegister = 0;
 
+        auto SetRootDescriptor = [&](dawn::BindingType type, uint32_t shaderRegister) {
+            auto& descriptorInfo = mRootDescriptors[mRootDescriptorCounts++];
+            descriptorInfo.descriptor.ShaderRegister = shaderRegister;
+            descriptorInfo.descriptor.RegisterSpace = 0;
+            // Dawn using values in mBindingOffsets to decide register number in HLSL.
+            // Root descriptor need to set this value to set correct register number in
+            // generated HLSL shader.
+            mBindingOffsets[shaderRegister] = shaderRegister;
+            switch (type) {
+                case dawn::BindingType::UniformBuffer:
+                    descriptorInfo.parameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+                    break;
+                case dawn::BindingType::StorageBuffer:
+                    descriptorInfo.parameterType = D3D12_ROOT_PARAMETER_TYPE_UAV;
+                    break;
+                case dawn::BindingType::Sampler:
+                case dawn::BindingType::SampledTexture:
+                case dawn::BindingType::StorageTexture:
+                case dawn::BindingType::ReadonlyStorageBuffer:
+                    UNREACHABLE();
+                    break;
+            }
+        };
+
         std::array<uint32_t, DescriptorType::Count> descriptorOffsets;
         // Ranges 0-2 contain the CBV, UAV, and SRV ranges, if they exist, tightly packed
         // Range 3 contains the Sampler range, if there is one
@@ -89,6 +118,12 @@ namespace dawn_native { namespace d3d12 {
         descriptorOffsets[Sampler] = 0;
 
         for (uint32_t binding : IterateBitSet(groupInfo.mask)) {
+            // No need to set offset for dynamic resources.
+            if (groupInfo.dynamic[binding]) {
+                SetRootDescriptor(groupInfo.types[binding], binding);
+                continue;
+            }
+
             switch (groupInfo.types[binding]) {
                 case dawn::BindingType::UniformBuffer:
                     mBindingOffsets[binding] += descriptorOffsets[CBV];
@@ -141,6 +176,14 @@ namespace dawn_native { namespace d3d12 {
 
     const D3D12_DESCRIPTOR_RANGE* BindGroupLayout::GetSamplerDescriptorRanges() const {
         return &mRanges[Sampler];
+    }
+
+    uint32_t BindGroupLayout::GetRootDescriptorCount() const {
+        return mRootDescriptorCounts;
+    }
+
+    const BindGroupLayout::RootDescriptorInfo* BindGroupLayout::GetRootDescriptors() const {
+        return mRootDescriptors;
     }
 
 }}  // namespace dawn_native::d3d12
