@@ -76,10 +76,10 @@ TEST_P(ClipSpaceTest, ClipSpace) {
     dawn::Texture depthStencilTexture =
         Create2DTextureForTest(dawn::TextureFormat::Depth24PlusStencil8);
 
-    utils::ComboRenderPassDescriptor renderPassDescriptor({colorTexture.CreateView()},
-                                                          depthStencilTexture.CreateView());
-    renderPassDescriptor.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 1.0, 0.0, 1.0};
-    renderPassDescriptor.cColorAttachmentsInfoPtr[0]->loadOp = dawn::LoadOp::Clear;
+    utils::ComboRenderPassDescriptor renderPassDescriptor(
+        {colorTexture.CreateView()}, depthStencilTexture.CreateView());
+    renderPassDescriptor.cColorAttachments[0].clearColor = {0.0, 1.0, 0.0, 1.0};
+    renderPassDescriptor.cColorAttachments[0].loadOp = dawn::LoadOp::Clear;
 
     // Clear the depth stencil attachment to 0.5f, so only the bottom-right triangle should be
     // drawn.
