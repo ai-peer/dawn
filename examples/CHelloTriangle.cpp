@@ -129,7 +129,6 @@ void frame() {
     }
     DawnRenderPassDescriptor renderpassInfo;
     DawnRenderPassColorAttachmentDescriptor colorAttachment;
-    DawnRenderPassColorAttachmentDescriptor* colorAttachments = {&colorAttachment};
     {
         colorAttachment.attachment = backbufferView;
         colorAttachment.resolveTarget = nullptr;
@@ -137,7 +136,7 @@ void frame() {
         colorAttachment.loadOp = DAWN_LOAD_OP_CLEAR;
         colorAttachment.storeOp = DAWN_STORE_OP_STORE;
         renderpassInfo.colorAttachmentCount = 1;
-        renderpassInfo.colorAttachments = &colorAttachments;
+        renderpassInfo.colorAttachments = &colorAttachment;
         renderpassInfo.depthStencilAttachment = nullptr;
     }
     DawnCommandBuffer commands;
