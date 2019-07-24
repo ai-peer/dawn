@@ -113,8 +113,8 @@ class ViewportTest : public DawnTest {
         {
             utils::ComboRenderPassDescriptor renderPassDescriptor1(
                 {colorTexture1.CreateDefaultView()}, depthStencilTexture1.CreateDefaultView());
-            renderPassDescriptor1.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 0.0, 1.0, 1.0};
-            renderPassDescriptor1.cColorAttachmentsInfoPtr[0]->loadOp = dawn::LoadOp::Clear;
+            renderPassDescriptor1.cColorAttachments[0].clearColor = {0.0, 0.0, 1.0, 1.0};
+            renderPassDescriptor1.cColorAttachments[0].loadOp = dawn::LoadOp::Clear;
 
             renderPassDescriptor1.cDepthStencilAttachmentInfo.clearDepth = info.clearDepth;
             renderPassDescriptor1.cDepthStencilAttachmentInfo.depthLoadOp = dawn::LoadOp::Clear;
@@ -138,8 +138,8 @@ class ViewportTest : public DawnTest {
         {
             utils::ComboRenderPassDescriptor renderPassDescriptor2(
                 {colorTexture2.CreateDefaultView()}, depthStencilTexture2.CreateDefaultView());
-            renderPassDescriptor2.cColorAttachmentsInfoPtr[0]->clearColor = {0.0, 0.0, 1.0, 1.0};
-            renderPassDescriptor2.cColorAttachmentsInfoPtr[0]->loadOp = dawn::LoadOp::Clear;
+            renderPassDescriptor2.cColorAttachments[0].clearColor = {0.0, 0.0, 1.0, 1.0};
+            renderPassDescriptor2.cColorAttachments[0].loadOp = dawn::LoadOp::Clear;
 
             renderPassDescriptor2.cDepthStencilAttachmentInfo.clearDepth = 0.5;
             renderPassDescriptor2.cDepthStencilAttachmentInfo.depthLoadOp = dawn::LoadOp::Clear;
