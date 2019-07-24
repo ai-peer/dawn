@@ -40,7 +40,7 @@
 // DAWN_ASSERT_CALLSITE_HELPER generates the actual assert code. In Debug it does what you would
 // expect of an assert and in release it tries to give hints to make the compiler generate better
 // code.
-#if defined(DAWN_ENABLE_ASSERTS)
+#if defined(DAWN_ENABLE_ASSERTS) || 1
 #    define DAWN_ASSERT_CALLSITE_HELPER(file, func, line, condition)  \
         do {                                                          \
             if (!(condition)) {                                       \
