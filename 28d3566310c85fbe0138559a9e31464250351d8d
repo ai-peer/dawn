@@ -16,6 +16,24 @@
       "revId": "28d3566310c85fbe0138559a9e31464250351d8d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3dace16_3e02a768",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T11:12:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1a86e8d_3a141d5e",
+      "revId": "28d3566310c85fbe0138559a9e31464250351d8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
