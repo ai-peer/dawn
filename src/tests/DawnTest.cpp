@@ -71,6 +71,14 @@ namespace {
         DawnTest* test;
         size_t slot;
     };
+    std::string get_path() {
+        char arg1[20];
+        char exepath[PATH_MAX + 1] = {0};
+
+        sprintf(arg1, "/proc/%d/exe", getpid());
+        readlink(arg1, exepath, 1024);
+        return std::string(exepath);
+    }
 
     DawnTestEnvironment* gTestEnv = nullptr;
 
@@ -153,7 +161,7 @@ void DawnTestEnvironment::SetUp() {
         dawn_native::BackendType::OpenGL,
         dawn_native::BackendType::Vulkan,
     };
-
+    std::cout << "file path: " << get_path() << std::endl;
     // Create a test window for each backend and discover an adapter using it.
     for (dawn_native::BackendType backend : kAllBackends) {
         if (detail::IsBackendAvailable(backend)) {
