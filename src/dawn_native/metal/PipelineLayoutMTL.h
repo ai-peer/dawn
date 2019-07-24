@@ -37,8 +37,12 @@ namespace dawn_native { namespace metal {
             std::array<std::array<uint32_t, kMaxBindingsPerGroup>, kMaxBindGroups>;
         const BindingIndexInfo& GetBindingIndexInfo(ShaderStage stage) const;
 
+        // The number of Metal vertex stage buffers used for the whole pipeline layout.
+        uint32_t GetVertexBufferBindingCount();
+
       private:
         PerStage<BindingIndexInfo> mIndexInfo;
+        uint32_t mVertexBufferBindingCount = 0;
     };
 
 }}  // namespace dawn_native::metal
