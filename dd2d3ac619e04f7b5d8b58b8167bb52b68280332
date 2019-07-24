@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eec2178_0d713ef6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-24T01:52:39Z",
+      "side": 1,
+      "message": "It doesn\u0027t make that much sense to me to call PushEncoder inside the TryEncode call, because they\u0027re weirdly meshed - PushEncoder is just assuming the right state which is only guaranteed by TryEncode. Would it make sense to have a special EncodingContext method for starting an encoder, which takes a lambda that returns Result\u003cencoder object\u003e?\n\nIf there\u0027s not a good way to do this, OK to leave as is (since we have asserts to make sure it\u0027s right).",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cba0f5a5_d39a60a5",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-24T01:52:39Z",
+      "side": 1,
+      "message": "nit: \"For passes\" or \"For compute and render passes\"\n\nSpecifying \"compute\" makes it sound like it\u0027s different from render passes.",
+      "range": {
+        "startLine": 50,
+        "startChar": 11,
+        "endLine": 50,
+        "endChar": 29
+      },
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb05887a_f6f5979a",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-24T01:52:39Z",
+      "side": 1,
+      "message": "nit: I\u0027d expect true to mean there was no error. (Unless that\u0027s not the convention we use elsewhere in Dawn)",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3758be9b_6057a4ce",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-24T01:52:39Z",
+      "side": 1,
+      "message": "nit: Push and pop seem misleading since it\u0027s not a stack, maybe EnterPass/ExitPass?\n\nAlso fine to just keep it this way.",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5151b1cc_27d315a3",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-24T01:52:39Z",
+      "side": 1,
+      "message": "Does this actually need to be void*? Seems like it\u0027s always the same type",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "123d55d7_76ac5704",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-24T01:52:39Z",
+      "side": 1,
+      "message": "Is there a common type between the 3 encoders that could be used here? Even if it\u0027s just ObjectBase or something?",
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75bb2867_8118c6a8",
+        "filename": "src/dawn_native/RenderPassEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-24T01:52:39Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "dd2d3ac619e04f7b5d8b58b8167bb52b68280332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
