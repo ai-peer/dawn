@@ -39,7 +39,7 @@ TEST_P(ViewportOrientationTests, OriginAt0x0) {
         })");
 
     utils::ComboRenderPipelineDescriptor descriptor(device);
-    descriptor.cVertexStage.module = vsModule;
+    descriptor.vertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
     descriptor.primitiveTopology = dawn::PrimitiveTopology::PointList;
     descriptor.cColorStates[0].format = renderPass.colorFormat;
