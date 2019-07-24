@@ -63,6 +63,30 @@
       "revId": "6eda57252b921a538522a04046b73a1f4af5f3bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8a277d3_2e82a4f4",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-24T23:02:54Z",
+      "side": 1,
+      "message": "Ah, okay. LGTM then.",
+      "parentUuid": "1764964b_136eb0b1",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 27
+      },
+      "revId": "6eda57252b921a538522a04046b73a1f4af5f3bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
