@@ -123,21 +123,27 @@
         {% endfor %}
 
         //* Gather how much space will be needed for pointer members.
-        {% for member in members if member.annotation != "value" and member.length != "strlen" and not member.skip_serialize %}
+        {% for member in members if member.length != "strlen" and not member.skip_serialize %}
             {% if member.type.category != "object" and member.optional %}
                 if (record.{{as_varName(member.name)}} != nullptr)
             {% endif %}
             {
-                size_t memberLength = {{member_length(member, "record.")}};
-                result += memberLength * {{member_transfer_sizeof(member)}};
+                {% if member.annotation != "value" %}
+                    size_t memberLength = {{member_length(member, "record.")}};
+                    result += memberLength * {{member_transfer_sizeof(member)}};
+                {% elif member.type.category == "structure" %}
+                    size_t memberLength = 1;
+                {% endif %}
 
                 //* Structures might contain more pointers so we need to add their extra size as well.
                 {% if member.type.category == "structure" %}
                     for (size_t i = 0; i < memberLength; ++i) {
                         {% if member.annotation == "const*const*" %}
                             result += {{as_cType(member.type.name)}}GetExtraRequiredSize(*record.{{as_varName(member.name)}}[i]);
-                        {% else %}
+                        {% elif member.annotation == "const*" %}
                             result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}}[i]);
+                        {% else %}
+                            result += {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}});
                         {% endif %}
                     }
                 {% endif %}
@@ -192,8 +198,8 @@
             {
                 size_t memberLength = {{member_length(member, "record.")}};
                 auto memberBuffer = reinterpret_cast<{{member_transfer_type(member)}}*>(*buffer);
-
                 *buffer += memberLength * {{member_transfer_sizeof(member)}};
+
                 for (size_t i = 0; i < memberLength; ++i) {
                     {{serialize_member(member, "record." + memberName + "[i]", "memberBuffer[i]" )}}
                 }

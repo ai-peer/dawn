@@ -124,7 +124,7 @@ void init() {
 
     utils::ComboRenderPipelineDescriptor descriptor(device);
     descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
-    descriptor.cVertexStage.module = vsModule;
+    descriptor.vertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
     descriptor.cVertexInput.bufferCount = 1;
     descriptor.cVertexInput.cBuffers[0].stride = 4 * sizeof(float);

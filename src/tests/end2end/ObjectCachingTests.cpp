@@ -188,7 +188,7 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnLayout) {
     EXPECT_EQ(pl.Get() == samePl.Get(), !UsesWire());
 
     utils::ComboRenderPipelineDescriptor desc(device);
-    desc.cVertexStage.module = utils::CreateShaderModule(device, utils::ShaderStage::Vertex, R"(
+    desc.vertexStage.module = utils::CreateShaderModule(device, utils::ShaderStage::Vertex, R"(
             #version 450
             void main() {
                 gl_Position = vec4(0.0);
@@ -240,13 +240,13 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnVertexModule) {
             void main() {
             })");
 
-    desc.cVertexStage.module = module;
+    desc.vertexStage.module = module;
     dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&desc);
 
-    desc.cVertexStage.module = sameModule;
+    desc.vertexStage.module = sameModule;
     dawn::RenderPipeline samePipeline = device.CreateRenderPipeline(&desc);
 
-    desc.cVertexStage.module = otherModule;
+    desc.vertexStage.module = otherModule;
     dawn::RenderPipeline otherPipeline = device.CreateRenderPipeline(&desc);
 
     EXPECT_NE(pipeline.Get(), otherPipeline.Get());
@@ -275,7 +275,7 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnFragmentModule) {
     EXPECT_EQ(module.Get() == sameModule.Get(), !UsesWire());
 
     utils::ComboRenderPipelineDescriptor desc(device);
-    desc.cVertexStage.module = utils::CreateShaderModule(device, utils::ShaderStage::Vertex, R"(
+    desc.vertexStage.module = utils::CreateShaderModule(device, utils::ShaderStage::Vertex, R"(
             #version 450
             void main() {
                 gl_Position = vec4(0.0);
