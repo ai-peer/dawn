@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e8c63bc9_96b1284d",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-24T22:17:12Z",
+      "side": 1,
+      "message": "Although these values are hard-coded here, in fact we need to query them from mSurface instead.",
+      "revId": "6eda57252b921a538522a04046b73a1f4af5f3bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "290783e4_fdeffe2e",
         "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 4
