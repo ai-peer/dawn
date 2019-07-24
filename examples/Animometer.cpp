@@ -118,7 +118,7 @@ void init() {
     descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
     descriptor.cVertexStage.module = vsModule;
     descriptor.cFragmentStage.module = fsModule;
-    descriptor.cColorStates[0]->format = GetPreferredSwapChainTextureFormat();
+    descriptor.cColorStates[0].format = GetPreferredSwapChainTextureFormat();
 
     pipeline = device.CreateRenderPipeline(&descriptor);
 

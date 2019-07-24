@@ -79,7 +79,7 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.cVertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
-        descriptor.cColorStates[0]->format = dawn::TextureFormat::RGBA8Unorm;
+        descriptor.cColorStates[0].format = dawn::TextureFormat::RGBA8Unorm;
 
         device.CreateRenderPipeline(&descriptor);
     }
@@ -89,7 +89,7 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.cVertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
-        descriptor.cColorStates[0]->format = dawn::TextureFormat::RG11B10Float;
+        descriptor.cColorStates[0].format = dawn::TextureFormat::RG11B10Float;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
