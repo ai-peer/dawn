@@ -360,6 +360,24 @@
     },
     {
       "key": {
+        "uuid": "9ca9aaab_1695cf3c",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "The free-list doesn\u0027t require a specific order. But it\u0027s ideal to keep the leftmost block in HEAD (for insertion) to use-up lower addresses first, but in De-allocate, we could always delete them in any order we like.",
+      "parentUuid": "c0c9a820_9dd1b6c5",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d589f3b_053f2963",
         "filename": "src/dawn_native/BuddyAllocator.cpp",
         "patchSetId": 2

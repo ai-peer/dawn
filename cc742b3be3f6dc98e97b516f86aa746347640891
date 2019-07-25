@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "48b596cb_f1f53883",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a17a8a16_cc0d4357",
+      "range": {
+        "startLine": 40,
+        "startChar": 29,
+        "endLine": 40,
+        "endChar": 32
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe4e7c44_968506ed",
         "filename": "src/dawn_native/BuddyAllocator.cpp",
         "patchSetId": 3
@@ -68,6 +92,30 @@
       "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "300617cb_8b676d29",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe4e7c44_968506ed",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 10
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -102,6 +150,24 @@
       "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6853eb9c_457d7b25",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6d23d2a_51b74699",
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +217,30 @@
     },
     {
       "key": {
+        "uuid": "1b71cd18_8e95b987",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea5c2dc_f9ff94f8",
+      "range": {
+        "startLine": 201,
+        "startChar": 35,
+        "endLine": 201,
+        "endChar": 51
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e36e84b4_dbece131",
         "filename": "src/dawn_native/BuddyAllocator.cpp",
         "patchSetId": 3
@@ -171,6 +261,30 @@
       "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97bb26fe_8db553e1",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e36e84b4_dbece131",
+      "range": {
+        "startLine": 204,
+        "startChar": 45,
+        "endLine": 204,
+        "endChar": 48
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -197,6 +311,30 @@
     },
     {
       "key": {
+        "uuid": "a5e8d905_a252a1ce",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "5ae75e11_272ed6f1",
+      "range": {
+        "startLine": 42,
+        "startChar": 51,
+        "endLine": 42,
+        "endChar": 73
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28db06d3_00b7695f",
         "filename": "src/dawn_native/BuddyAllocator.h",
         "patchSetId": 3
@@ -211,6 +349,24 @@
       "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d1c26c4_f34b3452",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28db06d3_00b7695f",
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -237,6 +393,30 @@
     },
     {
       "key": {
+        "uuid": "4e654ca3_144b8983",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "They don\u0027t but I figured it wouldn\u0027t be of any harm.",
+      "parentUuid": "635db77a_2edc54f2",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 48
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54e66929_14d7b936",
         "filename": "src/dawn_native/BuddyAllocator.h",
         "patchSetId": 3
@@ -257,6 +437,30 @@
       "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6e00b5e_7cb6eab7",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54e66929_14d7b936",
+      "range": {
+        "startLine": 81,
+        "startChar": 40,
+        "endLine": 81,
+        "endChar": 47
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -283,6 +487,30 @@
     },
     {
       "key": {
+        "uuid": "c5295d9e_fdae2513",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e58bac_3ac87bed",
+      "range": {
+        "startLine": 31,
+        "startChar": 37,
+        "endLine": 31,
+        "endChar": 48
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23373efd_c080a9f8",
         "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
         "patchSetId": 3
@@ -306,6 +534,30 @@
     },
     {
       "key": {
+        "uuid": "d583ee5b_daee0108",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23373efd_c080a9f8",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 5
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c6b4ee2_475cd291",
         "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
         "patchSetId": 3
@@ -320,6 +572,24 @@
       "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8e2a1e9_a0351321",
+        "filename": "src/tests/unittests/BuddyAllocatorTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-25T21:55:44Z",
+      "side": 1,
+      "message": "Upon split, we always insert back into HEAD. Order in free-list does not matter.",
+      "parentUuid": "2c6b4ee2_475cd291",
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
