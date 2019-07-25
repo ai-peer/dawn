@@ -243,6 +243,24 @@
     },
     {
       "key": {
+        "uuid": "77e3da8b_3319aee2",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-25T23:14:39Z",
+      "side": 1,
+      "message": "typo: I think he meant minus, not equal\n\nEXPECT_EQ(N, lazyClearsAfter - lazyClearsBefore);\n\nNote that this suggestion is a slightly different semantic from what you currently have.\n\nYou\u0027re checking the total number of lazy clears that have ever occurred. Doing the subtraction checks the number of new lazy clears that have occurred.",
+      "parentUuid": "8b8505ba_b79051fd",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5662098_aaa7ea3d",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
