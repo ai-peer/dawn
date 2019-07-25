@@ -1,0 +1,267 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2c2ef0c_042be6e0",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "nit: could also have a comment here that explains why we\u0027re skipping this?",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c6e943_0685967c",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "Skip counting",
+      "range": {
+        "startLine": 28,
+        "startChar": 76,
+        "endLine": 28,
+        "endChar": 89
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c7c98b6_6d9df094",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "so there is no need",
+      "range": {
+        "startLine": 28,
+        "startChar": 15,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87d743f1_7ac8c3c5",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "nit: descriptor",
+      "range": {
+        "startLine": 29,
+        "startChar": 57,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe4e078d_a154352b",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "[1] Also that comment is misleading because we are setting the offset for dynamic resources.",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a6dbfba_b207906e",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "nit: we don\u0027t need dynamicResourceCount and can use baseRegister directly and increment it",
+      "range": {
+        "startLine": 107,
+        "startChar": 51,
+        "endLine": 108,
+        "endChar": 47
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8899fb5_75e1d70d",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "This isn\u0027t used.",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "808263a3_5cccc71d",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "Logic here could be simplified like this:\n\n  if (visibility \u003d\u003d dawn::ShaderStageBit::Vertex) {\n    return VERTEX\n  }\n  if (visibility \u003d\u003d Fragment) {\n    return FRAGMENT\n  }\n\n  // For compute or any two combination of stages, visibility must be ALL\n  return ALL",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81d33ec6_c23981dd",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "References should be const, you could use a pointer here.",
+      "range": {
+        "startLine": 123,
+        "startChar": 16,
+        "endLine": 123,
+        "endChar": 37
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "708b73e7_ea26eb55",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this use the register number we computed in [1] so that it matches HLSL?",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "707ef535_40fe90ce",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "nit: extraneous semicolon?",
+      "range": {
+        "startLine": 141,
+        "startChar": 9,
+        "endLine": 141,
+        "endChar": 10
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1d0212d_f21b3c34",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "Can we have a comment that explains what this is, like \"Returns the index of the root parameter reserved for a dynamic buffer binding\"?",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58952248_bede27c9",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:37:35Z",
+      "side": 1,
+      "message": "nit: [device] since that\u0027s the only useful variable.",
+      "range": {
+        "startLine": 519,
+        "startChar": 32,
+        "endLine": 519,
+        "endChar": 33
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
