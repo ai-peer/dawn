@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3077aa8b_658f9468",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bf5f2fc_afd4b16a",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1fceeb1_b6bad138",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00094043_db03b267",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1fceeb1_b6bad138",
+      "range": {
+        "startLine": 517,
+        "startChar": 49,
+        "endLine": 517,
+        "endChar": 65
+      },
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -89,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "14b1f25c_0710fef2",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddd2df13_5361dd02",
+      "range": {
+        "startLine": 147,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 77
+      },
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfc566b3_f68ebc13",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -103,6 +169,24 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1035fc6c_15afee6d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfc566b3_f68ebc13",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +225,24 @@
     },
     {
       "key": {
+        "uuid": "8b8505ba_b79051fd",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "why do we assign lazyClearsAfter \u003d lazyClearsBefore at the end?",
+      "parentUuid": "74c14a7d_f52e91a3",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5662098_aaa7ea3d",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -155,6 +257,24 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c92b9eef_5a7c41d8",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5662098_aaa7ea3d",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -175,6 +295,24 @@
     },
     {
       "key": {
+        "uuid": "fdeeabe7_61b1e60d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc04272a_ba7bc782",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e01c736a_0e63641d",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -189,6 +327,24 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d1452f2_f6b56638",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e01c736a_0e63641d",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +365,24 @@
     },
     {
       "key": {
+        "uuid": "1f83d148_b05d8667",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f8b76b_de52d023",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee1de8e9_ad88dd6b",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -223,6 +397,24 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bc63615_1a74364d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee1de8e9_ad88dd6b",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -243,6 +435,24 @@
     },
     {
       "key": {
+        "uuid": "a1dcd0a6_c48843a0",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffcafe64_1bbfccc3",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7a0ed61_724fb503",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -257,6 +467,24 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c634ff7_4a897c82",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7a0ed61_724fb503",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -277,6 +505,24 @@
     },
     {
       "key": {
+        "uuid": "5aa4d87c_ccdbccf1",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83dfe586_95abbdf8",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "209e4d06_f19911a6",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -291,6 +537,24 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d8f5c04_01d8fd71",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "209e4d06_f19911a6",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -311,6 +575,24 @@
     },
     {
       "key": {
+        "uuid": "7895e0db_9d77870f",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "872028fe_c3790db2",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9bba04f_597035b5",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -328,6 +610,24 @@
     },
     {
       "key": {
+        "uuid": "39d4c472_6ca2b587",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9bba04f_597035b5",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9893f530_a4de052a",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -342,6 +642,24 @@
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2306005c_22bf3488",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-07-25T22:34:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9893f530_a4de052a",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
