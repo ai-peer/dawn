@@ -120,6 +120,8 @@ namespace dawn_native { namespace d3d12 {
         // Call Tick() again to clear them before releasing the allocator.
         mResourceAllocator->Tick(mCompletedSerial);
 
+        ReleaseResourceAllocators();
+
         ASSERT(mUsedComObjectRefs.Empty());
         ASSERT(mPendingCommands.commandList == nullptr);
     }
@@ -199,6 +201,14 @@ namespace dawn_native { namespace d3d12 {
         return mLastSubmittedSerial + 1;
     }
 
+    // TODO(bryan.bernhart@intel.com): Reuse these heaps rather then release.
+    void Device::ReleaseResourceAllocators() {
+        // Release heaps in deletion queue from direct allocations
+        for (auto& allocatorOfHeapType : mDirectResourceAllocators) {
+            allocatorOfHeapType.second->Tick(mCompletedSerial);
+        }
+    }
+
     void Device::TickImpl() {
         // Perform cleanup operations to free unused objects
         mCompletedSerial = mFence->GetCompletedValue();
@@ -208,6 +218,9 @@ namespace dawn_native { namespace d3d12 {
         mDynamicUploader->Tick(mCompletedSerial);
 
         mResourceAllocator->Tick(mCompletedSerial);
+
+        ReleaseResourceAllocators();
+
         mCommandAllocatorManager->Tick(mCompletedSerial);
         mDescriptorHeapAllocator->Tick(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
@@ -322,4 +335,42 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    void Device::DeallocateMemory(ResourceMemoryAllocation& allocation) {
+        PlacedResourceAllocator* allocator = nullptr;
+        const D3D12_HEAP_DESC heapInfo =
+            ToBackend(allocation.GetResourceHeap())->GetD3D12Heap()->GetDesc();
+        allocator = mDirectResourceAllocators[heapInfo.Properties.Type].get();
+        allocator->Deallocate(allocation);
+    }
+
+    ResultOrError<ResourceMemoryAllocation> Device::AllocateMemory(
+        D3D12_HEAP_TYPE heapType,
+        D3D12_RESOURCE_DESC resourceDescriptor,
+        D3D12_HEAP_FLAGS heapFlags) {
+        const D3D12_RESOURCE_ALLOCATION_INFO resourceInfo =
+            GetD3D12Device()->GetResourceAllocationInfo(0, 1, &resourceDescriptor);
+
+        PlacedResourceAllocator* allocator = nullptr;
+        uint64_t allocationSize = resourceInfo.SizeInBytes;
+
+        // Get the direct allocator using a tightly sized heap (aka CreateCommittedResource).
+        ASSERT(IsAligned(resourceInfo.SizeInBytes, D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT));
+
+        if (mDirectResourceAllocators.find(heapType) == mDirectResourceAllocators.end()) {
+            mDirectResourceAllocators[heapType] =
+                std::make_unique<PlacedResourceAllocator>(this, heapType);
+        }
+
+        allocator = mDirectResourceAllocators[heapType].get();
+
+        ResourceMemoryAllocation allocation = allocator->Allocate(
+            resourceDescriptor, allocationSize, resourceInfo.Alignment, heapFlags);
+
+        // Device lost or OOM.
+        if (allocation.GetOffset() == INVALID_OFFSET) {
+            return DAWN_CONTEXT_LOST_ERROR("Unable to allocate memory for resource");
+        }
+
+        return ResourceMemoryAllocation{allocation.GetOffset(), allocation.GetResourceHeap()};
+    }
 }}  // namespace dawn_native::d3d12
