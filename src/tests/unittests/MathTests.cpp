@@ -60,7 +60,7 @@ TEST(Math, IsPowerOfTwo) {
 // Tests for NextPowerOfTwo
 TEST(Math, NextPowerOfTwo) {
     // Test extrema
-    ASSERT_EQ(NextPowerOfTwo(0), 1ull);
+    ASSERT_EQ(NextPowerOfTwo(1), 1ull);
     ASSERT_EQ(NextPowerOfTwo(0x7FFFFFFFFFFFFFFF), 0x8000000000000000);
 
     // Test boundary between powers-of-two.
