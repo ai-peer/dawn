@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1fceeb1_b6bad138",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-25T01:39:53Z",
+      "side": 1,
+      "message": "nit: If we only ever increment the lazy clear count, could we just have IncrementLazyClearCountForTesting() instead of using both Get and Set here?",
+      "range": {
+        "startLine": 517,
+        "startChar": 49,
+        "endLine": 517,
+        "endChar": 65
+      },
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2acbb835_b63ff283",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-25T01:39:53Z",
+      "side": 1,
+      "message": "nit: Couldn\u0027t this be a clear count per-texture instead of per-device?\nThat would allow more precise expectations to check the count on each texture.",
+      "range": {
+        "startLine": 147,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 77
+      },
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfc566b3_f68ebc13",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-25T01:39:53Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "680bd5b9_c75a9473",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-25T01:39:53Z",
+      "side": 1,
+      "message": "As Corentin said in his email, we can remove [1] (and all other ones like it)\n\nAnd this could be:\nEXPECT_LAZY_CLEAR(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));\n\n#define EXPECT_LAZY_CLEAR(N, statement) \\\nif (!UsesWire()) {                      \\\n  EXPECT_EQ(N, statement);              \\\n}\n\n\nThat way, we still run the test with the Wire, but just skip clear count expectation.",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
