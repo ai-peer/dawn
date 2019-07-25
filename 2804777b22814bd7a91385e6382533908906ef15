@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c640f7a5_a96b63b1",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:10:37Z",
+      "side": 1,
+      "message": "Ok, we can keep them as is for now and wait for the WebGPU group to decide on the limits.",
+      "parentUuid": "1cf923be_d3eea203",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e503ca9d_8de7474e",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 11
