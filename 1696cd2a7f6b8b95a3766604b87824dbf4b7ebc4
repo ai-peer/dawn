@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "de0dd431_8de0f8ae",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "That\u0027s when our code generators are useful :D",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "25805301_536c51ca",
         "filename": "dawn.json",
         "patchSetId": 7
@@ -13,6 +30,92 @@
       "writtenOn": "2019-07-25T03:26:24Z",
       "side": 1,
       "message": "should/do we require that debug groups be balanced within bundles?",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e01ac07_5d901255",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "I think we should be we should discuss it with the group I guess.",
+      "parentUuid": "25805301_536c51ca",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a636b28e_99c258b7",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "This should be extensible.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b54dbe4c_5d2574fe",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "This should be extensible.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19273261_da6e56e2",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "This is an ok first implementation but I think we\u0027ll eventually want to precompute most of the validation in the render bundle itself. It will allow easier parallel validation, and will avoid walking through the render bundle every time if it is used in multiple command buffers.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1e7b9a4_c08b23fb",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "nit: why is this needed?",
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -134,6 +237,23 @@
     },
     {
       "key": {
+        "uuid": "878ba833_8ed53f55",
+        "filename": "src/dawn_native/RenderBundle.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "nit: std::array",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d76dfae2_365d2c23",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 7
@@ -157,6 +277,40 @@
     },
     {
       "key": {
+        "uuid": "181fe4cc_d7ebf664",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "Uh, even for error object we still happily encode commands, we just validate on Finish. Maybe we could change that eventually so we don\u0027t encode on errors.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "139ee440_22091cae",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "We really need to fix the TODO where we deduplicate the attachment state between RenderPass / RenderPipeline / RenderBundle so it is easy to check equality by comparing pointers. Also this validation should probably move to RenderEncoderBase so we don\u0027t have to walk the commands again on Finish.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3dead9b1_04c9f5f6",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 7
@@ -174,6 +328,142 @@
     },
     {
       "key": {
+        "uuid": "0a70c477_e1553cfe",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "Is it possible to reach this at all?",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "910216b5_f012fb72",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "nit: This TODO would apply for render bundles too.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1c0ddd2_f6045ef1",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "nit: shaders don\u0027t need to be filled with stuff for validation tests. The pipeline layout is sufficient to test compatibility with bind groups.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d4510b2_1ff0159e",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "nit: also test ExecuteBundles with 0 bundles?",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb1a0f1_79eba9a3",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "These semantics sound good but the group will have to discuss them.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc157835_4974af04",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "nit: explain why the draw is invalid.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd0b7363_546148ae",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "It is supposed to be supported. Jiawei implemented most of the multisampling features.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e468cefc_1dfe8f36",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "44c9eb85_6e7b1c0f",
         "filename": "src/utils/ComboRenderBundleEncoderDescriptor.cpp",
         "patchSetId": 7
@@ -185,6 +475,30 @@
       "writtenOn": "2019-07-25T03:26:24Z",
       "side": 1,
       "message": "should this be something other than 0? (or colorFormats could be nullptr)",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddb30aa7_b42a7c18",
+        "filename": "src/utils/ComboRenderBundleEncoderDescriptor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:07:32Z",
+      "side": 1,
+      "message": "The idea is that users of the class can do descriptor-\u003ecolorFormatCount \u003d 1 and automatically have cColorFormats[0] used.",
+      "parentUuid": "44c9eb85_6e7b1c0f",
       "range": {
         "startLine": 26,
         "startChar": 40,
