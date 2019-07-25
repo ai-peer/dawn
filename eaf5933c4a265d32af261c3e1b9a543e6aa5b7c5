@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec3af120_01fd29a7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-25T14:02:47Z",
+      "side": 1,
+      "message": "In the D3D12 backend, we got feedback that it\u0027s probably better to set one large range instead of splitting it up into multiple smaller ones and making many API calls. I wonder if the same applies here?\n\nMight be tricky though because the Metal range is packed, but the Dawn range could skip slots. We\u0027d have to like iterate contiguous chunks of the bitset.",
+      "range": {
+        "startLine": 470,
+        "startChar": 16,
+        "endLine": 470,
+        "endChar": 19
+      },
+      "revId": "eaf5933c4a265d32af261c3e1b9a543e6aa5b7c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
