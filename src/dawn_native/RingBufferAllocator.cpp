@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn_native/RingBuffer.h"
+#include "dawn_native/RingBufferAllocator.h"
 #include "dawn_native/Device.h"
 
 #include <limits>
@@ -32,13 +32,12 @@
 // TODO(bryan.bernhart@intel.com): Follow-up with ringbuffer optimization.
 namespace dawn_native {
 
-    static constexpr size_t INVALID_OFFSET = std::numeric_limits<size_t>::max();
-
-    RingBuffer::RingBuffer(DeviceBase* device, size_t size) : mBufferSize(size), mDevice(device) {
+    RingBuffer::RingBuffer(DeviceBase* device, StagingBufferBase* buffer)
+        : mStagingBuffer(buffer), mDevice(device) {
+        mBufferSize = mStagingBuffer->GetSize();
     }
 
     MaybeError RingBuffer::Initialize() {
-        DAWN_TRY_ASSIGN(mStagingBuffer, mDevice->CreateStagingBuffer(mBufferSize));
         DAWN_TRY(mStagingBuffer->Initialize());
         return {};
     }
@@ -96,7 +95,7 @@ namespace dawn_native {
     // queue, which identifies an existing (or new) frames-worth of resources. Internally, the
     // ring-buffer maintains offsets of 3 "memory" states: Free, Reclaimed, and Used. This is done
     // in FIFO order as older frames would free resources before newer ones.
-    UploadHandle RingBuffer::SubAllocate(size_t allocSize) {
+    size_t RingBuffer::SubAllocate(size_t allocSize) {
         ASSERT(mStagingBuffer != nullptr);
 
         // Check if the buffer is full by comparing the used size.
@@ -104,7 +103,7 @@ namespace dawn_native {
         // subsequent sub-alloc could fail where the used size was previously adjusted to include
         // the wasted.
         if (mUsedSize >= mBufferSize)
-            return UploadHandle{};
+            return INVALID_OFFSET;
 
         size_t startOffset = INVALID_OFFSET;
 
@@ -137,14 +136,6 @@ namespace dawn_native {
             mCurrentRequestSize += allocSize;
         }
 
-        if (startOffset == INVALID_OFFSET)
-            return UploadHandle{};
-
-        UploadHandle uploadHandle;
-        uploadHandle.mappedBuffer =
-            static_cast<uint8_t*>(mStagingBuffer->GetMappedPointer()) + startOffset;
-        uploadHandle.startOffset = startOffset;
-
-        return uploadHandle;
+        return startOffset;
     }
 }  // namespace dawn_native

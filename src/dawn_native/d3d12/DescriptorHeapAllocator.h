@@ -21,6 +21,8 @@
 #include <vector>
 #include "common/SerialQueue.h"
 
+#include "dawn_native/RingBufferAllocator.h"
+
 namespace dawn_native { namespace d3d12 {
 
     class Device;
@@ -42,6 +44,29 @@ namespace dawn_native { namespace d3d12 {
         uint32_t mOffset;
     };
 
+    // CR: RingBuffer has ownership of StagingBuffer and requires to know its type. This type is
+    // named for staging buffers. However, the type could be made generic to better describe its
+    // general purpose to wrap the underlying heap type.
+    class DescriptorHeap : public StagingBufferBase {
+      public:
+        DescriptorHeap(uint32_t size,
+                       D3D12_DESCRIPTOR_HEAP_TYPE type,
+                       D3D12_DESCRIPTOR_HEAP_FLAGS flags,
+                       Device* device);
+        ~DescriptorHeap() = default;
+
+        MaybeError Initialize();
+
+        ID3D12DescriptorHeap* GetDescriptorHeap() const;
+
+      private:
+        D3D12_DESCRIPTOR_HEAP_FLAGS mFlags;
+        D3D12_DESCRIPTOR_HEAP_TYPE mType;
+
+        Device* mDevice;
+        ComPtr<ID3D12DescriptorHeap> mDescriptorHeap;  // TODO: Defer delete?
+    };
+
     class DescriptorHeapAllocator {
       public:
         DescriptorHeapAllocator(Device* device);
@@ -56,25 +81,18 @@ namespace dawn_native { namespace d3d12 {
         static constexpr unsigned int kDescriptorHeapTypes =
             D3D12_DESCRIPTOR_HEAP_TYPE::D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES;
 
-        struct AllocationInfo {
-            uint32_t size = 0;
-            uint32_t remaining = 0;
-        };
-
-        using DescriptorHeapInfo = std::pair<ComPtr<ID3D12DescriptorHeap>, AllocationInfo>;
-
         DescriptorHeapHandle Allocate(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                       uint32_t count,
                                       uint32_t allocationSize,
-                                      DescriptorHeapInfo* heapInfo,
+                                      std::unique_ptr<RingBuffer>& buffer,
                                       D3D12_DESCRIPTOR_HEAP_FLAGS flags);
         void Release(DescriptorHeapHandle handle);
 
         Device* mDevice;
 
         std::array<uint32_t, kDescriptorHeapTypes> mSizeIncrements;
-        std::array<DescriptorHeapInfo, kDescriptorHeapTypes> mCpuDescriptorHeapInfos;
-        std::array<DescriptorHeapInfo, kDescriptorHeapTypes> mGpuDescriptorHeapInfos;
+        std::array<std::unique_ptr<RingBuffer>, kDescriptorHeapTypes> mCpuDescriptorHeapInfos;
+        std::array<std::unique_ptr<RingBuffer>, kDescriptorHeapTypes> mGpuDescriptorHeapInfos;
         SerialQueue<DescriptorHeapHandle> mReleasedHandles;
     };
 

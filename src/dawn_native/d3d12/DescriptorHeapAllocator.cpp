@@ -47,6 +47,31 @@ namespace dawn_native { namespace d3d12 {
         return handle;
     }
 
+    DescriptorHeap::DescriptorHeap(uint32_t size,
+                                   D3D12_DESCRIPTOR_HEAP_TYPE type,
+                                   D3D12_DESCRIPTOR_HEAP_FLAGS flags,
+                                   Device* device)
+        : StagingBufferBase(size), mFlags(flags), mType(type), mDevice(device) {
+    }
+
+    ID3D12DescriptorHeap* DescriptorHeap::GetDescriptorHeap() const {
+        return mDescriptorHeap.Get();
+    }
+
+    MaybeError DescriptorHeap::Initialize() {
+        D3D12_DESCRIPTOR_HEAP_DESC heapDescriptor;
+        heapDescriptor.Type = mType;
+        heapDescriptor.NumDescriptors = GetSize();
+        heapDescriptor.Flags = mFlags;
+        heapDescriptor.NodeMask = 0;
+        if (FAILED(mDevice->GetD3D12Device()->CreateDescriptorHeap(
+                &heapDescriptor, IID_PPV_ARGS(&mDescriptorHeap)))) {
+            return DAWN_CONTEXT_LOST_ERROR("Unable to  allocate descriptor heap");
+        }
+
+        return {};
+    }
+
     DescriptorHeapAllocator::DescriptorHeapAllocator(Device* device)
         : mDevice(device),
           mSizeIncrements{
@@ -64,50 +89,37 @@ namespace dawn_native { namespace d3d12 {
     DescriptorHeapHandle DescriptorHeapAllocator::Allocate(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                                            uint32_t count,
                                                            uint32_t allocationSize,
-                                                           DescriptorHeapInfo* heapInfo,
+                                                           std::unique_ptr<RingBuffer>& buffer,
                                                            D3D12_DESCRIPTOR_HEAP_FLAGS flags) {
-        // TODO(enga@google.com): This is just a linear allocator so the heap will quickly run out
-        // of space causing a new one to be allocated We should reuse heap subranges that have been
-        // released
         if (count == 0) {
             return DescriptorHeapHandle();
         }
 
-        {
-            // If the current pool for this type has space, linearly allocate count bytes in the
-            // pool
-            auto& allocationInfo = heapInfo->second;
-            if (allocationInfo.remaining >= count) {
-                DescriptorHeapHandle handle(heapInfo->first, mSizeIncrements[type],
-                                            allocationInfo.size - allocationInfo.remaining);
-                allocationInfo.remaining -= count;
-                Release(handle);
-                return handle;
-            }
+        size_t offset = (buffer == nullptr) ? INVALID_OFFSET : buffer->SubAllocate(count);
+        if (offset != INVALID_OFFSET) {
+            DescriptorHeapHandle handle(
+                static_cast<DescriptorHeap*>(buffer->GetStagingBuffer())->GetDescriptorHeap(),
+                mSizeIncrements[type], offset);
+            return handle;
         }
 
-        // If the pool has no more space, replace the pool with a new one of the specified size
+        std::unique_ptr<StagingBufferBase> descriptorHeap =
+            std::make_unique<DescriptorHeap>(allocationSize, type, flags, mDevice);
+        DAWN_UNUSED(descriptorHeap->Initialize());  // TODO: MaybeError?
 
-        D3D12_DESCRIPTOR_HEAP_DESC heapDescriptor;
-        heapDescriptor.Type = type;
-        heapDescriptor.NumDescriptors = allocationSize;
-        heapDescriptor.Flags = flags;
-        heapDescriptor.NodeMask = 0;
-        ComPtr<ID3D12DescriptorHeap> heap;
-        ASSERT_SUCCESS(
-            mDevice->GetD3D12Device()->CreateDescriptorHeap(&heapDescriptor, IID_PPV_ARGS(&heap)));
+        buffer = std::make_unique<RingBuffer>(mDevice, descriptorHeap.release());
+        offset = buffer->SubAllocate(count);
+        ASSERT(offset != INVALID_OFFSET);
 
-        AllocationInfo allocationInfo = {allocationSize, allocationSize - count};
-        *heapInfo = std::make_pair(heap, allocationInfo);
-
-        DescriptorHeapHandle handle(heap, mSizeIncrements[type], 0);
-        Release(handle);
+        DescriptorHeapHandle handle(
+            static_cast<DescriptorHeap*>(buffer->GetStagingBuffer())->GetDescriptorHeap(),
+            mSizeIncrements[type], offset);
         return handle;
     }
 
     DescriptorHeapHandle DescriptorHeapAllocator::AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                                                   uint32_t count) {
-        return Allocate(type, count, count, &mCpuDescriptorHeapInfos[type],
+        return Allocate(type, count, count, mCpuDescriptorHeapInfos[type],
                         D3D12_DESCRIPTOR_HEAP_FLAG_NONE);
     }
 
@@ -118,11 +130,21 @@ namespace dawn_native { namespace d3d12 {
         unsigned int heapSize =
             (type == D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV ? kMaxCbvUavSrvHeapSize
                                                             : kMaxSamplerHeapSize);
-        return Allocate(type, count, heapSize, &mGpuDescriptorHeapInfos[type],
+        return Allocate(type, count, heapSize, mGpuDescriptorHeapInfos[type],
                         D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE);
     }
 
     void DescriptorHeapAllocator::Tick(uint64_t lastCompletedSerial) {
+        for (size_t i = 0; i < D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES; i++) {
+            if (mCpuDescriptorHeapInfos[i] != nullptr) {
+                mCpuDescriptorHeapInfos[i]->Tick(lastCompletedSerial);
+            }
+
+            if (mGpuDescriptorHeapInfos[i] != nullptr) {
+                mGpuDescriptorHeapInfos[i]->Tick(lastCompletedSerial);
+            }
+        }
+
         mReleasedHandles.ClearUpTo(lastCompletedSerial);
     }
 

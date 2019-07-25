@@ -16,11 +16,17 @@
 #define DAWNNATIVE_DYNAMICUPLOADER_H_
 
 #include "dawn_native/Forward.h"
-#include "dawn_native/RingBuffer.h"
+#include "dawn_native/RingBufferAllocator.h"
 
 // DynamicUploader is the front-end implementation used to manage multiple ring buffers for upload
 // usage.
 namespace dawn_native {
+
+    struct UploadHandle {
+        uint8_t* mappedBuffer = nullptr;
+        size_t startOffset = 0;
+        StagingBufferBase* stagingBuffer = nullptr;
+    };
 
     class DynamicUploader {
       public:
