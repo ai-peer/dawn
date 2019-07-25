@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "84990956_634c2bed",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:16:34Z",
+      "side": 1,
+      "message": "It seems that we\u0027re missing this change in the latest patch.",
+      "parentUuid": "db59dcd4_5c599503",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 33
+      },
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5700c1cb_91ddab23",
         "filename": "src/dawn_native/BuddyAllocator.cpp",
         "patchSetId": 2
@@ -312,6 +336,24 @@
       "side": 1,
       "message": "The free-list only contains free blocks where Deallocate must also remove and delete split blocks. When it splits during Allocate, there is an order (a left and right child). We store only one child (the left one) in the split block so later; Deallocate can also traverse with it.",
       "parentUuid": "8fff56bd_a1bc4b55",
+      "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0c9a820_9dd1b6c5",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:16:34Z",
+      "side": 1,
+      "message": "Sorry I still don\u0027t understand why this requires a specific ordering of the freelist because Deallocate tags the parent as free so the information about split.pLeft isn\u0027t needed anymore.",
+      "parentUuid": "c2d823b8_7785a414",
       "revId": "cd87dec835a9d2394cd8dd2c926177291919a545",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
