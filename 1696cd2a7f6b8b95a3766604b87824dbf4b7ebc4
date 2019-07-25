@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25805301_536c51ca",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "should/do we require that debug groups be balanced within bundles?",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64da5019_d027a197",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "nit: order differs from header. Static before others, maybe?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 5
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7591b60e_7f9bcddd",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "color attachment format",
+      "range": {
+        "startLine": 62,
+        "startChar": 60,
+        "endLine": 62,
+        "endChar": 72
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbdb5357_258515d0",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "nit \"render pass\" or \"this render pass\"",
+      "range": {
+        "startLine": 62,
+        "startChar": 87,
+        "endLine": 62,
+        "endChar": 97
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67442895_fe464646",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "maybe shuffle this around:\n\n  if (renderPass-\u003ehasDepthStencilAttachment) {\n    if (mAttachmentInfo.hasDepthStencilFormat) {\n      if (format check fails) {\n        error \"Render bundle depth stencil attachment format doesn\u0027t match this render pass\"\n      }\n    } else {\n      error \"Render bundle must have a depth stencil attachment to be used in this render pass\"\n    }\n  }",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 9
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1837b9c_c1ae7aa5",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 79,
+        "startChar": 83,
+        "endLine": 79,
+        "endChar": 93
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d76dfae2_365d2c23",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "\"attachment format\"?",
+      "range": {
+        "startLine": 36,
+        "startChar": 67,
+        "endLine": 36,
+        "endChar": 81
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3dead9b1_04c9f5f6",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "I think I get it, but comment on why you skip here",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44c9eb85_6e7b1c0f",
+        "filename": "src/utils/ComboRenderBundleEncoderDescriptor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-25T03:26:24Z",
+      "side": 1,
+      "message": "should this be something other than 0? (or colorFormats could be nullptr)",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
