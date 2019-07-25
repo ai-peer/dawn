@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8bf5f2fc_afd4b16a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "nit: this can be a default initializer in the member declaration",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e1fceeb1_b6bad138",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -48,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "ddd2df13_5361dd02",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "Per texture would use more memory unnecessarily when not testing. Per-device is ok if we change the tests to very accurately target when the lazy-clear happens.",
+      "parentUuid": "2acbb835_b63ff283",
+      "range": {
+        "startLine": 147,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 77
+      },
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bfc566b3_f68ebc13",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 2
@@ -76,6 +117,228 @@
       "writtenOn": "2019-07-25T01:39:53Z",
       "side": 1,
       "message": "As Corentin said in his email, we can remove [1] (and all other ones like it)\n\nAnd this could be:\nEXPECT_LAZY_CLEAR(1u, dawn_native::GetLazyClearCountForTesting(device.Get()));\n\n#define EXPECT_LAZY_CLEAR(N, statement) \\\nif (!UsesWire()) {                      \\\n  EXPECT_EQ(N, statement);              \\\n}\n\n\nThat way, we still run the test with the Wire, but just skip clear count expectation.",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74c14a7d_f52e91a3",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "Even better I think we should see exactly which operation performs a lazy clear with a macro like the following:\n\n#define EXPECT_LAZY_CLEAR(N, statement) \\\nif (UsesWire()) {                      \\\n  statement; \\\n} else { \\\n  size_t lazyClearsBefore \u003d dawn_native::GetLazyClearCountForTesting(device.Get()) \\\n  statement; \\\n  size_t lazyClearsAfter \u003d dawn_native::GetLazyClearCountForTesting(device.Get()) \\\n  EXPECT_EQ(N, lazyClearsAfter \u003d lazyClearsBefore);              \\\n}",
+      "parentUuid": "680bd5b9_c75a9473",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5662098_aaa7ea3d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "The expectation for lazy clear would be on this QueueSubmit.",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc04272a_ba7bc782",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e01c736a_0e63641d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "Expecting zero lazy clears at the end of the test like this sound good.",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49f8b76b_de52d023",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee1de8e9_ad88dd6b",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffcafe64_1bbfccc3",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto, this would help make sure the lazy clear isn\u0027t done in the previous submit.",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7a0ed61_724fb503",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto, and explain why it is 2.",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83dfe586_95abbdf8",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto and explain why it is 2",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "209e4d06_f19911a6",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "872028fe_c3790db2",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9bba04f_597035b5",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto explain why it is 2",
+      "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9893f530_a4de052a",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T09:52:17Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "faaed246804ab7d75b098974e7d14fcbd913c221",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
