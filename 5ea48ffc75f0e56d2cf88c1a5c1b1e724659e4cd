@@ -354,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "81ce5360_07d63a2f",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-25T00:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a53dac6_3e7a9ddd",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 25
+      },
+      "revId": "5ea48ffc75f0e56d2cf88c1a5c1b1e724659e4cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b48146d_bc5a7cc1",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 6

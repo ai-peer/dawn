@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1cf923be_d3eea203",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-25T00:38:16Z",
+      "side": 1,
+      "message": "I choose these value for reserving some dynamic resrouces for dawn vulkan backend internal usage.\nBut for myself, I totally agree with setting it to 8 and 4 and developers can do the optimization.",
+      "parentUuid": "f8f664f1_8516613b",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e503ca9d_8de7474e",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 11
@@ -218,6 +236,24 @@
       "writtenOn": "2019-07-24T09:59:17Z",
       "side": 1,
       "message": "Can the TODO be more explicit or removed? Right now it\u0027s difficult to understand what it means.",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cbf9d95_9938b060",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-25T00:38:16Z",
+      "side": 1,
+      "message": "Sry, this is a WIP remains(to remind my self) and I forget to remove it.",
+      "parentUuid": "2852c720_d11aaad4",
       "revId": "2804777b22814bd7a91385e6382533908906ef15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
