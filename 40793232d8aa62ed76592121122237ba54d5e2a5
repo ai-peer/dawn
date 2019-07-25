@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d9f8469_3ce3a0de",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-25T11:27:15Z",
+      "side": 1,
+      "message": "This is failing on the MSVC builders with the following error:\n\n[ RUN      ] Math.NextPowerOfTwo\n../../src/tests/unittests/MathTests.cpp(63): error: Expected equality of these values:\n  NextPowerOfTwo(0)\n    Which is: 2\n  1ull\n    Which is: 1\n[  FAILED  ] Math.NextPowerOfTwo (11 ms)\n\nI think it\u0027s because we need to check for x \u003c\u003d 1 in both cases.",
+      "revId": "40793232d8aa62ed76592121122237ba54d5e2a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
