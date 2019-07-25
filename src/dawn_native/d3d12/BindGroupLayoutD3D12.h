@@ -35,6 +35,11 @@ namespace dawn_native { namespace d3d12 {
             Count,
         };
 
+        struct RootDescriptorInfo {
+            D3D12_ROOT_PARAMETER_TYPE parameterType;
+            D3D12_ROOT_DESCRIPTOR descriptor;
+        };
+
         const std::array<uint32_t, kMaxBindingsPerGroup>& GetBindingOffsets() const;
         uint32_t GetCbvUavSrvDescriptorTableSize() const;
         uint32_t GetSamplerDescriptorTableSize() const;
