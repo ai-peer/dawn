@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "068308ca_b0cc6d0e",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:05:07Z",
+      "side": 1,
+      "message": "unit: since we rely on the copy constructor maybe have it here and \u003d default it in the .cpp?",
+      "revId": "a92ffd6fdcf66e3d96ca5b5927897a065b97baee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "beb96c25_e09aff2d",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:05:07Z",
+      "side": 1,
+      "message": "nit: comment that explains that this hashes a bunch of state hierarchically.",
+      "revId": "a92ffd6fdcf66e3d96ca5b5927897a065b97baee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60b439a6_aa12adaf",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:05:07Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a92ffd6fdcf66e3d96ca5b5927897a065b97baee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
