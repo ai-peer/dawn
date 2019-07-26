@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e7baa196_1e7f028f",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2c2ef0c_042be6e0",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7c6e943_0685967c",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 13
@@ -88,6 +106,78 @@
     },
     {
       "key": {
+        "uuid": "8910076d_7067903a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7c6e943_0685967c",
+      "range": {
+        "startLine": 28,
+        "startChar": 76,
+        "endLine": 28,
+        "endChar": 89
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc810968_6720684a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54c70b82_46547c69",
+      "range": {
+        "startLine": 28,
+        "startChar": 43,
+        "endLine": 28,
+        "endChar": 69
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d420e5b3_d6268cf9",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c7c98b6_6d9df094",
+      "range": {
+        "startLine": 28,
+        "startChar": 15,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87d743f1_7ac8c3c5",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 13
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "e20400a2_b3713ece",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d743f1_7ac8c3c5",
+      "range": {
+        "startLine": 29,
+        "startChar": 57,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe4e078d_a154352b",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 13
@@ -125,6 +239,24 @@
       "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63360c56_8b58fa45",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe4e078d_a154352b",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "834848e6_ac2771c1",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a6dbfba_b207906e",
+      "range": {
+        "startLine": 107,
+        "startChar": 51,
+        "endLine": 108,
+        "endChar": 47
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8899fb5_75e1d70d",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 13
@@ -168,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "b3494006_85ab5c5f",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8899fb5_75e1d70d",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "808263a3_5cccc71d",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 13
@@ -182,6 +356,24 @@
       "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f00e63c_309d0ea1",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "808263a3_5cccc71d",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -208,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "83fc7c93_99fbb1f1",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d33ec6_c23981dd",
+      "range": {
+        "startLine": 123,
+        "startChar": 16,
+        "endLine": 123,
+        "endChar": 37
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "708b73e7_ea26eb55",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 13
@@ -219,6 +435,24 @@
       "writtenOn": "2019-07-25T09:37:35Z",
       "side": 1,
       "message": "Shouldn\u0027t this use the register number we computed in [1] so that it matches HLSL?",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c714b6f_4c86db88",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Oops, thx for catching this. Done.",
+      "parentUuid": "708b73e7_ea26eb55",
       "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -248,6 +482,30 @@
     },
     {
       "key": {
+        "uuid": "2c033db8_7cf637d8",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707ef535_40fe90ce",
+      "range": {
+        "startLine": 141,
+        "startChar": 9,
+        "endLine": 141,
+        "endChar": 10
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d0212d_f21b3c34",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
         "patchSetId": 13
@@ -265,6 +523,24 @@
     },
     {
       "key": {
+        "uuid": "2df1cf28_d2dde326",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d0212d_f21b3c34",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58952248_bede27c9",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 13
@@ -276,6 +552,30 @@
       "writtenOn": "2019-07-25T09:37:35Z",
       "side": 1,
       "message": "nit: [device] since that\u0027s the only useful variable.",
+      "range": {
+        "startLine": 519,
+        "startChar": 32,
+        "endLine": 519,
+        "endChar": 33
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58912ef2_6abf8272",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-26T06:30:47Z",
+      "side": 1,
+      "message": "Sry, [device] or [\u0026device] will report error \"not a local variable\". And after searching, I cannot find how to make it work.",
+      "parentUuid": "58952248_bede27c9",
       "range": {
         "startLine": 519,
         "startChar": 32,
