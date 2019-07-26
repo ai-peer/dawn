@@ -17,6 +17,7 @@
 #include "dawn_native/Instance.h"
 #include "dawn_native/VulkanBackend.h"
 #include "dawn_native/vulkan/AdapterVk.h"
+#include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
 #include <iostream>
@@ -30,7 +31,6 @@ const char kVulkanLibName[] = "vulkan-1.dll";
 #endif
 
 namespace dawn_native { namespace vulkan {
-
     Backend::Backend(InstanceBase* instance) : BackendConnection(instance, BackendType::Vulkan) {
     }
 
@@ -56,6 +56,13 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Backend::Initialize() {
+#if defined(DAWN_ENABLE_VULKAN_VALIDATION_LAYERS)
+        if (GetInstance()->IsBackendValidationEnabled()) {
+            std::string vkDataDir = GetExecutableDirectory() + SYSTEM_SEP + DAWN_VK_DATA_DIR;
+            SetEnvironmentVar("VK_LAYER_PATH", vkDataDir.c_str());
+        }
+#endif
+
         if (!mVulkanLib.Open(kVulkanLibName)) {
             return DAWN_CONTEXT_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName);
         }
