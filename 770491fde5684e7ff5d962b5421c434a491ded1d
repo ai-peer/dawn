@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86ba733e_ea37b9ae",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:16:07Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure such visibility isn\u0027t validated out yet. Maybe add validation for it as a follow up?",
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0324b37c_5f48ef1c",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:16:07Z",
+      "side": 1,
+      "message": "nit: Get",
+      "range": {
+        "startLine": 116,
+        "startChar": 15,
+        "endLine": 116,
+        "endChar": 21
+      },
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a03d3eba_249a8de5",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:16:07Z",
+      "side": 1,
+      "message": "I\u0027m surprised, I thought DBO was implement on GL too.",
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

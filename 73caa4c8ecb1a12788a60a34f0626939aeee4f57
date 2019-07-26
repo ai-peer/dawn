@@ -459,6 +459,24 @@
     },
     {
       "key": {
+        "uuid": "be6e2e8e_d9be9004",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:16:07Z",
+      "side": 1,
+      "message": "Ack, I see that you also added a test for this :)",
+      "parentUuid": "4c714b6f_4c86db88",
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "707ef535_40fe90ce",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 13
@@ -576,6 +594,30 @@
       "side": 1,
       "message": "Sry, [device] or [\u0026device] will report error \"not a local variable\". And after searching, I cannot find how to make it work.",
       "parentUuid": "58952248_bede27c9",
+      "range": {
+        "startLine": 519,
+        "startChar": 32,
+        "endLine": 519,
+        "endChar": 33
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70c760c3_cfa5ff08",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T11:16:07Z",
+      "side": 1,
+      "message": "Oh yes it is a member variable so you should use [this] so that the \"this\" pointer is copied by value and used to access this-\u003evalue. Maybe less useful because this is pretty large.",
+      "parentUuid": "58912ef2_6abf8272",
       "range": {
         "startLine": 519,
         "startChar": 32,
