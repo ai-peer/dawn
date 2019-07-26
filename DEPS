@@ -89,6 +89,12 @@ deps = {
     'url': '{dawn_git}/clang-format@2451c56cd368676cdb230fd5ad11731ab859f1a3',
     'condition': 'dawn_standalone and checkout_linux',
   },
+
+  # Vulkan validation layers v1.1.108
+  'third_party/vulkan-validation-layers': {
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-ValidationLayers@5a0de260eeffa5f52cd3ed1f672ca437d5ec11ee',
+    'condition': 'dawn_standalone and (host_os == "linux")',
+  },
 }
 
 hooks = [
@@ -225,6 +231,16 @@ hooks = [
     'pattern': '.',
     'action': ['python', 'build/util/lastchange.py',
                '-o', 'build/util/LASTCHANGE'],
+  },
+  # Update dependencies of Vulkan validation layers
+  {
+    'name': 'vulkan_validation_layers',
+    'pattern': '.',
+    'action': ['python',
+               './third_party/vulkan-validation-layers/scripts/update_deps.py',
+               '--dir=third_party/vulkan-validation-layers/external',
+               '--no-build'],
+    'condition': 'dawn_standalone and (host_os == "linux")',
   },
 ]
 

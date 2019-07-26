@@ -16,6 +16,10 @@ import("../scripts/dawn_overrides_with_defaults.gni")
 import("../scripts/dawn_features.gni")
 import("//build_overrides/build.gni")
 
+if (dawn_enable_vulkan_validation_layers) {
+  import("//build_overrides/vulkan_validation_layers.gni")
+}
+
 is_msvc = is_win && !is_clang
 
 ###############################################################################
@@ -152,6 +156,34 @@ source_set("khronos_platform") {
   ]
 
   public_configs = [ ":khronos_headers_public" ]
+}
+
+# Vulkan validation layers
+if (dawn_enable_vulkan_validation_layers) {
+  config("vulkan_validation_layers_config") {
+    defines = [
+      "DAWN_ENABLE_VULKAN_VALIDATION_LAYERS",
+      "DAWN_VK_DATA_DIR=\"$vulkan_data_subdir\"",
+    ]
+  }
+
+  source_set("vulkan_validation_layers") {
+    if (build_with_chromium) {
+      data_deps = [
+        "//third_party/angle/third_party/vulkan-validation-layers:vulkan_validation_layers",
+      ]
+      if (!is_android) {
+        data_deps += [ "//third_party/angle/third_party/vulkan-validation-layers:vulkan_gen_json_files" ]
+      }
+    } else {
+      data_deps = [
+        "vulkan-validation-layers:vulkan_validation_layers",
+      ]
+      if (!is_android) {
+        data_deps += [ "vulkan-validation-layers:vulkan_gen_json_files" ]
+      }
+    }
+  }
 }
 
 ###############################################################################
