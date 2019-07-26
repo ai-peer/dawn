@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "d076b6e1_971862a1",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-26T16:55:38Z",
+      "side": 1,
+      "message": "nit: Not sure what is meant by \"progress\". \nMaybe \"skip allocating descriptors\" ?",
+      "range": {
+        "startLine": 46,
+        "startChar": 23,
+        "endLine": 46,
+        "endChar": 41
+      },
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1226a34f_b543bfb3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-26T16:55:38Z",
+      "side": 1,
+      "message": "I think this means we could \"inherit\" a dynamic bind group, but then lose the dynamic offsets.\nAnd hit the ASSERT(dynamicOffsetCount \u003e 0) on line 164.\n\nRight now, Dawn doesn\u0027t match how we discussed bind group inheritance is supposed to work in WebGPU, so this code will have to change regardless.\n\nFor now, we could change the state tracking so that dynamic bind groups are not inherited and the application needs to set them again.\n\nWhat do you think?",
+      "range": {
+        "startLine": 245,
+        "startChar": 72,
+        "endLine": 245,
+        "endChar": 82
+      },
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86ba733e_ea37b9ae",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 15
