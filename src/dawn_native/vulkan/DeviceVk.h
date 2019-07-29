@@ -20,6 +20,7 @@
 #include "common/Serial.h"
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/vulkan/CommandRecordingContext.h"
 #include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/VulkanFunctions.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
@@ -59,9 +60,11 @@ namespace dawn_native { namespace vulkan {
         RenderPassCache* GetRenderPassCache() const;
 
         VkCommandBuffer GetPendingCommandBuffer();
+        CommandRecordingContext* GetPendingCommandRecordingContext();
         Serial GetPendingCommandSerial() const override;
         void SubmitPendingCommands();
         void AddWaitSemaphore(VkSemaphore semaphore);
+        void AddSignalSemaphore(VkSemaphore semaphore);
 
         // Dawn API
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder,
@@ -77,6 +80,10 @@ namespace dawn_native { namespace vulkan {
                                            BufferBase* destination,
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
+
+        TextureBase* CreateTextureWrappingVulkanImage(const TextureDescriptor* descriptor,
+                                                      int memoryFd,
+                                                      const std::vector<int>& waitFds);
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -142,7 +149,9 @@ namespace dawn_native { namespace vulkan {
         SerialQueue<CommandPoolAndBuffer> mCommandsInFlight;
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
+        CommandRecordingContext mCommandRecordingContext;
         std::vector<VkSemaphore> mWaitSemaphores;
+        std::vector<VkSemaphore> mSignalSemaphores;
     };
 
 }}  // namespace dawn_native::vulkan
