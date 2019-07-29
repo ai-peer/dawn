@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/Format.h"
+#include "dawn_native/Device.h"
 
 #include <bitset>
 
@@ -48,7 +49,7 @@ namespace dawn_native {
         return static_cast<size_t>(static_cast<uint32_t>(format));
     }
 
-    FormatTable BuildFormatTable(const DeviceBase*) {
+    FormatTable BuildFormatTable(const DeviceBase* device) {
         FormatTable table;
         std::bitset<kKnownFormatCount> formatsSet;
 
@@ -93,12 +94,12 @@ namespace dawn_native {
         };
 
         auto AddCompressedFormat = [&AddFormat](dawn::TextureFormat format, uint32_t byteSize,
-                                                uint32_t width, uint32_t height) {
+                                                uint32_t width, uint32_t height, bool isSupported) {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = false;
             internalFormat.isCompressed = true;
-            internalFormat.isSupported = true;
+            internalFormat.isSupported = isSupported;
             internalFormat.aspect = Format::Aspect::Color;
             internalFormat.blockByteSize = byteSize;
             internalFormat.blockWidth = width;
@@ -167,21 +168,23 @@ namespace dawn_native {
         // because its size isn't well defined, is it 4, 5 or 8?
         AddDepthStencilFormat(dawn::TextureFormat::Depth24PlusStencil8, Format::Aspect::DepthStencil, 4);
 
+        const Extensions enabledExtensions = device->GetEnabledExtensions();
         // BC compressed formats
-        AddCompressedFormat(dawn::TextureFormat::BC1RGBAUnorm, 8, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC1RGBAUnormSrgb, 8, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC4RSnorm, 8, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC4RUnorm, 8, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC2RGBAUnorm, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC2RGBAUnormSrgb, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC3RGBAUnorm, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC3RGBAUnormSrgb, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC5RGSnorm, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC5RGUnorm, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC6HRGBSfloat, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC6HRGBUfloat, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC7RGBAUnorm, 16, 4, 4);
-        AddCompressedFormat(dawn::TextureFormat::BC7RGBAUnormSrgb, 16, 4, 4);
+        bool isBCFormatSupported = enabledExtensions.textureCompressionBC;
+        AddCompressedFormat(dawn::TextureFormat::BC1RGBAUnorm, 8, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC1RGBAUnormSrgb, 8, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC4RSnorm, 8, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC4RUnorm, 8, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC2RGBAUnorm, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC2RGBAUnormSrgb, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC3RGBAUnorm, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC3RGBAUnormSrgb, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC5RGSnorm, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC5RGUnorm, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC6HRGBSfloat, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC6HRGBUfloat, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC7RGBAUnorm, 16, 4, 4, isBCFormatSupported);
+        AddCompressedFormat(dawn::TextureFormat::BC7RGBAUnormSrgb, 16, 4, 4, isBCFormatSupported);
 
         // clang-format on
 

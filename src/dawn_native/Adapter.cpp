@@ -38,6 +38,19 @@ namespace dawn_native {
         return mInstance;
     }
 
+    Extensions AdapterBase::GetSupportedExtensions() const {
+        return mSupportedExtensions;
+    }
+
+    bool AdapterBase::SupportAllRequestedExtensions(Extensions requestedExtensions) const {
+        if (requestedExtensions.textureCompressionBC &&
+            !mSupportedExtensions.textureCompressionBC) {
+            return false;
+        }
+
+        return true;
+    }
+
     DeviceBase* AdapterBase::CreateDevice(const DeviceDescriptor* descriptor) {
         DeviceBase* result = nullptr;
 
@@ -50,6 +63,12 @@ namespace dawn_native {
 
     MaybeError AdapterBase::CreateDeviceInternal(DeviceBase** result,
                                                  const DeviceDescriptor* descriptor) {
+        if (descriptor != nullptr) {
+            if (!SupportAllRequestedExtensions(descriptor->requiredExtensions)) {
+                return DAWN_VALIDATION_ERROR("One or more requested extensions are not supported");
+            }
+        }
+
         // TODO(cwallez@chromium.org): This will eventually have validation that the device
         // descriptor is valid and is a subset what's allowed on this adapter.
         DAWN_TRY_ASSIGN(*result, CreateDeviceImpl(descriptor));

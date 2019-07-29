@@ -168,6 +168,8 @@ namespace dawn_native { namespace opengl {
             const char* vendor = reinterpret_cast<const char*>(mFunctions.GetString(GL_VENDOR));
             mPCIInfo.vendorId = GetVendorIdFromVendors(vendor);
 
+            InitializeSupportedExtensions();
+
             return {};
         }
 
@@ -180,6 +182,11 @@ namespace dawn_native { namespace opengl {
             // There is no limit on the number of devices created from this adapter because they can
             // all share the same backing OpenGL context.
             return {new Device(this, descriptor, mFunctions)};
+        }
+        void InitializeSupportedExtensions() override {
+            // TODO(jiawei.shao@intel.com): enable BC formats on OpenGL backends when all the
+            // required extensions are supported.
+            mSupportedExtensions.textureCompressionBC = false;
         }
     };
 

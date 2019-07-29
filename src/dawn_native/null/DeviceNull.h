@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_NULL_DEVICENULL_H_
 #define DAWNNATIVE_NULL_DEVICENULL_H_
 
+#include "dawn_native/Adapter.h"
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
@@ -135,6 +136,31 @@ namespace dawn_native { namespace null {
 
         static constexpr size_t kMaxMemoryUsage = 256 * 1024 * 1024;
         size_t mMemoryUsage = 0;
+    };
+
+    class Adapter : public AdapterBase {
+      public:
+        Adapter(InstanceBase* instance) : AdapterBase(instance, BackendType::Null) {
+            mPCIInfo.name = "Null backend";
+            mDeviceType = DeviceType::CPU;
+            InitializeSupportedExtensions();
+        }
+        virtual ~Adapter() = default;
+
+        // Used for the tests that intend to use an adapter without all extensions enabled.
+        void SetSupportedExtensions(Extensions supportedExtensions) {
+            mSupportedExtensions = supportedExtensions;
+        }
+
+      private:
+        ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override {
+            return {new Device(this, descriptor)};
+        }
+
+        // Enable all extensions by default for the convenience of tests.
+        void InitializeSupportedExtensions() override {
+            mSupportedExtensions.textureCompressionBC = true;
+        }
     };
 
     class Buffer : public BufferBase {

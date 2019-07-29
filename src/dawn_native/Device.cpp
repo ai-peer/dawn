@@ -66,6 +66,11 @@ namespace dawn_native {
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
         SetDefaultToggles();
 
+        if (descriptor != nullptr) {
+            ASSERT(adapter->SupportAllRequestedExtensions(descriptor->requiredExtensions));
+            mEnabledExtensions = descriptor->requiredExtensions;
+        }
+
         mFormatTable = BuildFormatTable(this);
     }
 
@@ -94,6 +99,10 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Object is an error.");
         }
         return {};
+    }
+
+    Extensions DeviceBase::GetEnabledExtensions() const {
+        return mEnabledExtensions;
     }
 
     AdapterBase* DeviceBase::GetAdapter() const {

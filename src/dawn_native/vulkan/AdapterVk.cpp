@@ -40,6 +40,8 @@ namespace dawn_native { namespace vulkan {
     MaybeError Adapter::Initialize() {
         DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
 
+        InitializeSupportedExtensions();
+
         mPCIInfo.deviceId = mDeviceInfo.properties.deviceID;
         mPCIInfo.vendorId = mDeviceInfo.properties.vendorID;
         mPCIInfo.name = mDeviceInfo.properties.deviceName;
@@ -60,6 +62,11 @@ namespace dawn_native { namespace vulkan {
         }
 
         return {};
+    }
+
+    void Adapter::InitializeSupportedExtensions() {
+        mSupportedExtensions.textureCompressionBC =
+            mDeviceInfo.features.textureCompressionBC == VK_TRUE;
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {

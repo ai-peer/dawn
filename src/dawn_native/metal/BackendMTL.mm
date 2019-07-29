@@ -172,6 +172,8 @@ namespace dawn_native { namespace metal {
             } else {
                 mDeviceType = DeviceType::DiscreteGPU;
             }
+
+            InitializeSupportedExtensions();
         }
 
         ~Adapter() override {
@@ -181,6 +183,11 @@ namespace dawn_native { namespace metal {
       private:
         ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override {
             return {new Device(this, mDevice, descriptor)};
+        }
+        void InitializeSupportedExtensions() override {
+            if ([mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
+                mSupportedExtensions.textureCompressionBC = true;
+            }
         }
 
         id<MTLDevice> mDevice = nil;

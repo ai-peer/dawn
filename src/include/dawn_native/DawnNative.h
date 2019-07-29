@@ -47,9 +47,16 @@ namespace dawn_native {
     class InstanceBase;
     class AdapterBase;
 
+    // A struct to store if an extension is enabled or disabled for all Dawn extensions
+    struct DAWN_NATIVE_EXPORT Extensions {
+        // Support all Block Compressed (BC) texture formats
+        bool textureCompressionBC = false;
+    };
+
     // An optional parameter of Adapter::CreateDevice() to send additional information when creating
     // a Device. For example, we can use it to enable a workaround, optimization or feature.
     struct DAWN_NATIVE_EXPORT DeviceDescriptor {
+        Extensions requiredExtensions;
         std::vector<const char*> forceEnabledToggles;
         std::vector<const char*> forceDisabledToggles;
     };
@@ -78,6 +85,8 @@ namespace dawn_native {
         BackendType GetBackendType() const;
         DeviceType GetDeviceType() const;
         const PCIInfo& GetPCIInfo() const;
+        Extensions GetSupportedExtensions() const;
+        bool SupportAllRequestedExtensions(Extensions extensions) const;
 
         explicit operator bool() const;
 

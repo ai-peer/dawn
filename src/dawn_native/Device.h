@@ -159,11 +159,14 @@ namespace dawn_native {
         size_t GetLazyClearCountForTesting();
         void IncrementLazyClearCountForTesting();
 
+        Extensions GetEnabledExtensions() const;
+
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
+        Extensions mEnabledExtensions;
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
