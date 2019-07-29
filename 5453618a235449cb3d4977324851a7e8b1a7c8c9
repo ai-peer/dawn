@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "55faff19_37887085",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-29T17:25:30Z",
+      "side": 1,
+      "message": "Added, if there\u0027s a better one to put let me know.",
+      "parentUuid": "c7e4271b_a36b70a5",
+      "revId": "5453618a235449cb3d4977324851a7e8b1a7c8c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d7236db0_a1b109a6",
         "filename": "src/dawn_native/vulkan/VulkanFunctions.h",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-07-29T11:13:37Z",
       "side": 1,
       "message": "Is it the only new function in Vulkan 1.1? If there aren\u0027t too many (\u003c10-15?) let\u0027s add them all.",
+      "revId": "5453618a235449cb3d4977324851a7e8b1a7c8c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fbfa3b7_68f35dcc",
+        "filename": "src/dawn_native/vulkan/VulkanFunctions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-29T17:25:30Z",
+      "side": 1,
+      "message": "I ran a diff of vulkan.h vs vulkan_core.h (1.0 and 1.1) here: https://www.diffchecker.com/uM82pxOi\n\nSeems like there are 28 new functions around EnumerateInstanceVersion, and a bunch of new functions from extensions merged into core. Probably easier to add these when needed then?",
+      "parentUuid": "d7236db0_a1b109a6",
       "revId": "5453618a235449cb3d4977324851a7e8b1a7c8c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
