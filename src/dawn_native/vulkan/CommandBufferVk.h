@@ -26,6 +26,7 @@ namespace dawn_native {
 
 namespace dawn_native { namespace vulkan {
 
+    struct CommandRecordingContext;
     class Device;
 
     class CommandBuffer : public CommandBufferBase {
@@ -33,7 +34,7 @@ namespace dawn_native { namespace vulkan {
         CommandBuffer(CommandEncoderBase* encoder, const CommandBufferDescriptor* descriptor);
         ~CommandBuffer();
 
-        void RecordCommands(VkCommandBuffer commands);
+        void RecordCommands(VkCommandBuffer commands, CommandRecordingContext* recordingContext);
 
       private:
         void RecordComputePass(VkCommandBuffer commands);

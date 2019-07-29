@@ -17,19 +17,29 @@
 
 #include "dawn_native/Texture.h"
 
-#include "common/vulkan_platform.h"
 #include "dawn_native/vulkan/MemoryAllocator.h"
 
 namespace dawn_native { namespace vulkan {
+
+    struct CommandRecordingContext;
 
     VkFormat VulkanImageFormat(dawn::TextureFormat format);
     VkImageUsageFlags VulkanImageUsage(dawn::TextureUsageBit usage, const Format& format);
     VkSampleCountFlagBits VulkanSampleCount(uint32_t sampleCount);
 
+    MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase* device,
+                                               const TextureDescriptor* descriptor);
+
     class Texture : public TextureBase {
       public:
+        enum class ExternalState { None, PendingAcquire, Acquired, PendingRelease, Released };
+
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage);
+        Texture(Device* device,
+                const TextureDescriptor* descriptor,
+                int memoryFd,
+                const std::vector<int>& waitFds);
         ~Texture();
 
         VkImage GetHandle() const;
@@ -38,12 +48,18 @@ namespace dawn_native { namespace vulkan {
         // Transitions the texture to be used as `usage`, recording any necessary barrier in
         // `commands`.
         // TODO(cwallez@chromium.org): coalesce barriers and do them early when possible.
-        void TransitionUsageNow(VkCommandBuffer commands, dawn::TextureUsageBit usage);
+        void TransitionUsageNow(VkCommandBuffer commands,
+                                CommandRecordingContext* recordingContext,
+                                dawn::TextureUsageBit usage);
         void EnsureSubresourceContentInitialized(VkCommandBuffer commands,
                                                  uint32_t baseMipLevel,
                                                  uint32_t levelCount,
                                                  uint32_t baseArrayLayer,
                                                  uint32_t layerCount);
+
+        const std::vector<VkSemaphore>& GetWaitRequirements() const;
+        void ClearWaitRequirements();
+        VkSemaphore SignalAndDestroy();
 
       private:
         void DestroyImpl() override;
@@ -55,6 +71,11 @@ namespace dawn_native { namespace vulkan {
 
         VkImage mHandle = VK_NULL_HANDLE;
         DeviceMemoryAllocation mMemoryAllocation;
+
+        ExternalState mExternalState = ExternalState::None;
+        ExternalState mLastExternalState = ExternalState::None;
+        VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
+        std::vector<VkSemaphore> mWaitRequirements;
 
         // A usage of none will make sure the texture is transitioned before its first use as
         // required by the spec.
