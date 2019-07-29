@@ -483,6 +483,30 @@
     },
     {
       "key": {
+        "uuid": "92d727fb_b816fdd5",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-29T23:23:10Z",
+      "side": 1,
+      "message": "No problem, I thought they were confusing because I looked at an initialization site, and it initialized pPrev/pNext, which looked redundant. But removing them would have caused uninitialized data because `free` would still be uninitialized.",
+      "parentUuid": "4e654ca3_144b8983",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 48
+      },
+      "revId": "cc742b3be3f6dc98e97b516f86aa746347640891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54e66929_14d7b936",
         "filename": "src/dawn_native/BuddyAllocator.h",
         "patchSetId": 3
