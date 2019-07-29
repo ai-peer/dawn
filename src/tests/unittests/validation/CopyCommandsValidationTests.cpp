@@ -1155,6 +1155,13 @@ TEST_F(CopyCommandTest_T2T, CopyToMipmapOfNonSquareTexture) {
 }
 
 class CopyCommandTest_CompressedTextureFormats : public CopyCommandTest {
+  public:
+    CopyCommandTest_CompressedTextureFormats() : CopyCommandTest() {
+        dawn_native::Extensions requiredExtensions;
+        requiredExtensions.textureCompressionBC = true;
+        device = InitDeviceFromAdapter(adapter, requiredExtensions);
+    }
+
   protected:
     dawn::Texture Create2DTexture(dawn::TextureFormat format,
                                   uint32_t mipmapLevels = 1,

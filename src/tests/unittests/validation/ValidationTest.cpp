@@ -35,12 +35,20 @@ ValidationTest::ValidationTest() {
     }
 
     ASSERT(foundNullAdapter);
-    device = dawn::Device::Acquire(adapter.CreateDevice());
+    device = InitDeviceFromAdapter(adapter, dawn_native::Extensions());
+}
+
+dawn::Device ValidationTest::InitDeviceFromAdapter(dawn_native::Adapter adapterToTest,
+                                                   dawn_native::Extensions requiredExtensions) {
+    dawn_native::DeviceDescriptor descriptor;
+    descriptor.requiredExtensions = requiredExtensions;
+    dawn::Device deviceToTest = dawn::Device::Acquire(adapterToTest.CreateDevice(&descriptor));
 
     DawnProcTable procs = dawn_native::GetProcs();
     dawnSetProcs(&procs);
 
-    device.SetErrorCallback(ValidationTest::OnDeviceError, this);
+    deviceToTest.SetErrorCallback(ValidationTest::OnDeviceError, this);
+    return deviceToTest;
 }
 
 ValidationTest::~ValidationTest() {

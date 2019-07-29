@@ -182,6 +182,8 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
     DawnProcTable backendProcs = {};
     DawnDevice backendDevice = nullptr;
 
+    dawn_native::Extensions mRequiredExtensions;
+
     // Helper methods to implement the EXPECT_ macros
     std::ostringstream& AddBufferExpectation(const char* file,
                                              int line,
@@ -205,6 +207,11 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
     void FlushWire();
 
     void SwapBuffersForCapture();
+
+    bool SupportAllRequiredExtensions(dawn_native::Extensions extensions) const;
+
+    // Called in SetUp() to get the extensions required to be enabled in the tests.
+    virtual dawn_native::Extensions GetRequiredExtensions();
 
   private:
     // Things used to set up testing through the Wire.
@@ -263,6 +270,8 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
     std::unique_ptr<utils::BackendBinding> mBinding;
 
     dawn_native::PCIInfo mPCIInfo;
+
+    dawn_native::Adapter GetBackendAdapter() const;
 };
 
 // Instantiate the test once for each backend provided after the first argument. Use it like this:

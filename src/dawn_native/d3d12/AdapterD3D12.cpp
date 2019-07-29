@@ -84,7 +84,13 @@ namespace dawn_native { namespace d3d12 {
             "Error converting");
         mPCIInfo.name = converter.to_bytes(adapterDesc.Description);
 
+        InitializeSupportedExtensions();
+
         return {};
+    }
+
+    void Adapter::InitializeSupportedExtensions() {
+        mSupportedExtensions.textureCompressionBC = true;
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {

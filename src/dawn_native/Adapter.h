@@ -35,13 +35,19 @@ namespace dawn_native {
 
         DeviceBase* CreateDevice(const DeviceDescriptor* descriptor = nullptr);
 
+        Extensions GetSupportedExtensions() const;
+        bool SupportAllRequestedExtensions(Extensions requestedExtensions) const;
+
       protected:
         PCIInfo mPCIInfo = {};
         DeviceType mDeviceType = DeviceType::Unknown;
+        Extensions mSupportedExtensions;
 
       private:
         virtual ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) = 0;
+        virtual void InitializeSupportedExtensions() = 0;
 
+        MaybeError ValidateAllRequiredExtensionsSupported(Extensions requiredExtensions) const;
         MaybeError CreateDeviceInternal(DeviceBase** result, const DeviceDescriptor* descriptor);
 
         InstanceBase* mInstance = nullptr;

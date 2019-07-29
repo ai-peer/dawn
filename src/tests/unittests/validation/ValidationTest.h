@@ -29,6 +29,9 @@ class ValidationTest : public testing::Test {
     ValidationTest();
     ~ValidationTest();
 
+    dawn::Device InitDeviceFromAdapter(dawn_native::Adapter adapter,
+                                       dawn_native::Extensions requiredExtensions);
+
     void TearDown() override;
 
     void StartExpectDeviceError();

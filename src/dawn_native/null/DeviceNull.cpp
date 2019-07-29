@@ -22,21 +22,7 @@
 
 namespace dawn_native { namespace null {
 
-    // Implementation of pre-Device objects: the null adapter, null backend connection and Connect()
-
-    class Adapter : public AdapterBase {
-      public:
-        Adapter(InstanceBase* instance) : AdapterBase(instance, BackendType::Null) {
-            mPCIInfo.name = "Null backend";
-            mDeviceType = DeviceType::CPU;
-        }
-        virtual ~Adapter() = default;
-
-      private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override {
-            return {new Device(this, descriptor)};
-        }
-    };
+    // Implementation of pre-Device objects: the null backend connection and Connect()
 
     class Backend : public BackendConnection {
       public:
@@ -75,6 +61,7 @@ namespace dawn_native { namespace null {
         // Apply toggle overrides if necessary for test
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
+            mEnabledExtensions = descriptor->requiredExtensions;
         }
     }
 

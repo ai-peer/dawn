@@ -55,6 +55,14 @@ namespace dawn_native {
         return mImpl->GetPCIInfo();
     }
 
+    Extensions Adapter::GetSupportedExtensions() const {
+        return mImpl->GetSupportedExtensions();
+    }
+
+    bool Adapter::SupportAllRequestedExtensions(Extensions extensions) const {
+        return mImpl->SupportAllRequestedExtensions(extensions);
+    }
+
     Adapter::operator bool() const {
         return mImpl != nullptr;
     }
