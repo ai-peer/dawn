@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "18e50551_733fd763",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T09:51:59Z",
+      "side": 1,
+      "message": "This is the current implementation in Dawn because we made the choice to follow the Vulkan inheritance rules, but the WebGPU CG decided that we wouldn\u0027t have inheritance. Instead bind groups are persistent state and have to match the pipeline layout when draw or dispatch are called.\n\nSo the correct behavior here I think would be to store the dynamic offsets somewhere and re-apply them.",
+      "parentUuid": "d16da9f8_48c6aebf",
+      "range": {
+        "startLine": 245,
+        "startChar": 72,
+        "endLine": 245,
+        "endChar": 82
+      },
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86ba733e_ea37b9ae",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 15
