@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "70649527_2ae0d05f",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-29T05:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d076b6e1_971862a1",
+      "range": {
+        "startLine": 46,
+        "startChar": 23,
+        "endLine": 46,
+        "endChar": 41
+      },
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1226a34f_b543bfb3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 15
@@ -36,6 +60,30 @@
       "writtenOn": "2019-07-26T16:55:38Z",
       "side": 1,
       "message": "I think this means we could \"inherit\" a dynamic bind group, but then lose the dynamic offsets.\nAnd hit the ASSERT(dynamicOffsetCount \u003e 0) on line 164.\n\nRight now, Dawn doesn\u0027t match how we discussed bind group inheritance is supposed to work in WebGPU, so this code will have to change regardless.\n\nFor now, we could change the state tracking so that dynamic bind groups are not inherited and the application needs to set them again.\n\nWhat do you think?",
+      "range": {
+        "startLine": 245,
+        "startChar": 72,
+        "endLine": 245,
+        "endChar": 82
+      },
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d16da9f8_48c6aebf",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-29T05:18:49Z",
+      "side": 1,
+      "message": "Oooh, you\u0027re right, this implementation is not correct. When coming to this inherited issue, I plan to inherit dynamic bind group but not the dynamic offset. It seems that application set them again is better. Thank you for catching this!\nBTW, according to inherit logic here https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/PipelineLayout.cpp?l\u003d92\nit seems dawn only inherits consist bind groups.(if bind group 0 and bind group 2 are set, only bind group 0 will be inherited), is this the proposal inherit strategy or just a simple implementation in dawn?",
+      "parentUuid": "1226a34f_b543bfb3",
       "range": {
         "startLine": 245,
         "startChar": 72,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "ab21b96c_b15d74e2",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-29T05:18:49Z",
+      "side": 1,
+      "message": "Ack. Maybe I can resolve this in OpenGL DBO backend.",
+      "parentUuid": "86ba733e_ea37b9ae",
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0324b37c_5f48ef1c",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 15
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "674879eb_39a10cac",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-29T05:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0324b37c_5f48ef1c",
+      "range": {
+        "startLine": 116,
+        "startChar": 15,
+        "endLine": 116,
+        "endChar": 21
+      },
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a03d3eba_249a8de5",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 15
@@ -99,6 +189,24 @@
       "writtenOn": "2019-07-26T11:16:07Z",
       "side": 1,
       "message": "I\u0027m surprised, I thought DBO was implement on GL too.",
+      "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8257e112_bcbdbc17",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-29T05:18:49Z",
+      "side": 1,
+      "message": "Sry but no. The good news is that most unclear issues are resolved in D3D12 backend.",
+      "parentUuid": "a03d3eba_249a8de5",
       "revId": "770491fde5684e7ff5d962b5421c434a491ded1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
