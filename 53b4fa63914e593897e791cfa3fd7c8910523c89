@@ -1,0 +1,215 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2987c78_12e4d0a2",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "Like for toggle we should avoid having too many places where we need to have a list of all the extensions. We could have an extensionSet like we have a ToggleSet internally. See also [1] for a discussion of having extensions as strings names instead of a structure of bool. This would make extension very similar to toggles and they could use very similar code paths.",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69992fa3_c79c568d",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "This will become a big structure so we should pass it around as a const\u0026",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c17de9a_d8bcef0c",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 39,
+        "startChar": 43,
+        "endLine": 39,
+        "endChar": 53
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2bb492a_91f906e0",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this should be a virtual call because the frontend doesn\u0027t use it. Backends can definitely have a helper function for extensions though!",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ded7ae93_7b823ecc",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "nit: Why is this exposed in DawnNative? It seems like things should be computable from GetSupportedExtensions easily.",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2cdfbfe_314aa84b",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "ditto\n\nAnd maybe we could have IsExtensionEnabled like we have IsToggleEnabled?",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 162,
+        "endChar": 18
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0160e38_93c52162",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "nit: Implementation of methods (including the \u003ddefault) should be in the .cpp file.",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e032fcf_b8f44ca6",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "TODO see if this is needed.",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f814a73_643bd5c2",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "nit: only when all the ... because right now we enable it even when it isn\u0027t correct.\n\nAnd we might want to skip this completely because the extension isn\u0027t implemented at all.",
+      "range": {
+        "startLine": 187,
+        "startChar": 80,
+        "endLine": 187,
+        "endChar": 81
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2d7d88a_dfec114f",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "Can this check that the required Vulkan feature bit it present in the device info?",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de773464_df0aa8ab",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-29T12:31:10Z",
+      "side": 1,
+      "message": "Like for Toggle, this might be better expressed as strings for the following reasons:\n\n - Like toggles, we might add or remove some at any time which would cause the structure to change size and make code compiled with one version of DawnNative.h not work with code compiled with a different one.\n - For Dawn we could ask people to always compile with the version they use, but this would be an option when we have webgpu.h and some form of device creation in webgpu.h (I expect we\u0027ll want to have at least parts of instance and device creation in there for better interoperability).\n\nWDYT?",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
