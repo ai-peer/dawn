@@ -48,7 +48,8 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError VulkanFunctions::LoadInstanceProcs(VkInstance instance,
-                                                  const VulkanGlobalKnobs& usedKnobs) {
+                                                  const VulkanGlobalKnobs& usedKnobs,
+                                                  uint32_t apiVersion) {
         // Load this proc first so that we can destroy the instance even if some other
         // GET_INSTANCE_PROC fails
         GET_INSTANCE_PROC(DestroyInstance);
@@ -71,6 +72,25 @@ namespace dawn_native { namespace vulkan {
             GET_INSTANCE_PROC(CreateDebugReportCallbackEXT);
             GET_INSTANCE_PROC(DebugReportMessageEXT);
             GET_INSTANCE_PROC(DestroyDebugReportCallbackEXT);
+        }
+
+        // Vulkan 1.1 is not required to report promoted extensions from 1.0
+        if (usedKnobs.externalMemoryCapabilities || apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            GET_INSTANCE_PROC(GetPhysicalDeviceExternalBufferProperties);
+        }
+
+        if (usedKnobs.externalSemaphoreCapabilities || apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            GET_INSTANCE_PROC(GetPhysicalDeviceExternalSemaphoreProperties);
+        }
+
+        if (usedKnobs.getPhysicalDeviceProperties2 || apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            GET_INSTANCE_PROC(GetPhysicalDeviceFeatures2);
+            GET_INSTANCE_PROC(GetPhysicalDeviceProperties2);
+            GET_INSTANCE_PROC(GetPhysicalDeviceFormatProperties2);
+            GET_INSTANCE_PROC(GetPhysicalDeviceImageFormatProperties2);
+            GET_INSTANCE_PROC(GetPhysicalDeviceQueueFamilyProperties2);
+            GET_INSTANCE_PROC(GetPhysicalDeviceMemoryProperties2);
+            GET_INSTANCE_PROC(GetPhysicalDeviceSparseImageFormatProperties2);
         }
 
         if (usedKnobs.surface) {
@@ -216,6 +236,16 @@ namespace dawn_native { namespace vulkan {
             GET_DEVICE_PROC(CmdDebugMarkerBeginEXT);
             GET_DEVICE_PROC(CmdDebugMarkerEndEXT);
             GET_DEVICE_PROC(CmdDebugMarkerInsertEXT);
+        }
+
+        if (usedKnobs.externalMemoryFD) {
+            GET_DEVICE_PROC(GetMemoryFdKHR);
+            GET_DEVICE_PROC(GetMemoryFdPropertiesKHR);
+        }
+
+        if (usedKnobs.externalSemaphoreFD) {
+            GET_DEVICE_PROC(ImportSemaphoreFdKHR);
+            GET_DEVICE_PROC(GetSemaphoreFdKHR);
         }
 
         if (usedKnobs.swapchain) {

@@ -30,7 +30,9 @@ namespace dawn_native { namespace vulkan {
     // and the vkGet*ProcAddress entry points.
     struct VulkanFunctions {
         MaybeError LoadGlobalProcs(const DynamicLib& vulkanLib);
-        MaybeError LoadInstanceProcs(VkInstance instance, const VulkanGlobalKnobs& usedGlobals);
+        MaybeError LoadInstanceProcs(VkInstance instance,
+                                     const VulkanGlobalKnobs& usedGlobals,
+                                     uint32_t apiVersion);
         MaybeError LoadDeviceProcs(VkDevice device, const VulkanDeviceKnobs& usedKnobs);
 
         // ---------- Global procs
@@ -83,6 +85,28 @@ namespace dawn_native { namespace vulkan {
         PFN_vkGetPhysicalDeviceSurfaceFormatsKHR GetPhysicalDeviceSurfaceFormatsKHR = nullptr;
         PFN_vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR =
             nullptr;
+
+        // Core Vulkan 1.1 promoted extensions
+
+        // VK_KHR_external_memory_capabilities
+        PFN_vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties =
+            nullptr;
+
+        // VK_KHR_external_semaphore_capabilities
+        PFN_vkGetPhysicalDeviceExternalSemaphoreProperties
+            GetPhysicalDeviceExternalSemaphoreProperties = nullptr;
+
+        // VK_KHR_get_physical_device_properties2
+        PFN_vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2 = nullptr;
+        PFN_vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2 = nullptr;
+        PFN_vkGetPhysicalDeviceFormatProperties2 GetPhysicalDeviceFormatProperties2 = nullptr;
+        PFN_vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2 =
+            nullptr;
+        PFN_vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2 =
+            nullptr;
+        PFN_vkGetPhysicalDeviceMemoryProperties2 GetPhysicalDeviceMemoryProperties2 = nullptr;
+        PFN_vkGetPhysicalDeviceSparseImageFormatProperties2
+            GetPhysicalDeviceSparseImageFormatProperties2 = nullptr;
 
         // ---------- Device procs
 
@@ -218,6 +242,14 @@ namespace dawn_native { namespace vulkan {
         PFN_vkGetSwapchainImagesKHR GetSwapchainImagesKHR = nullptr;
         PFN_vkAcquireNextImageKHR AcquireNextImageKHR = nullptr;
         PFN_vkQueuePresentKHR QueuePresentKHR = nullptr;
+
+        // VK_KHR_external_memory_fd
+        PFN_vkGetMemoryFdKHR GetMemoryFdKHR = nullptr;
+        PFN_vkGetMemoryFdPropertiesKHR GetMemoryFdPropertiesKHR = nullptr;
+
+        // VK_KHR_external_semaphore_fd
+        PFN_vkImportSemaphoreFdKHR ImportSemaphoreFdKHR = nullptr;
+        PFN_vkGetSemaphoreFdKHR GetSemaphoreFdKHR = nullptr;
     };
 
 }}  // namespace dawn_native::vulkan
