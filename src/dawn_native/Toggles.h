@@ -16,6 +16,8 @@
 #define DAWNNATIVE_TOGGLES_H_
 
 #include <bitset>
+#include <unordered_map>
+#include <vector>
 
 #include "dawn_native/DawnNative.h"
 
@@ -36,17 +38,25 @@ namespace dawn_native {
     struct TogglesSet {
         std::bitset<static_cast<size_t>(Toggle::EnumCount)> toggleBitset;
 
-        void SetToggle(Toggle toggle, bool enabled) {
-            ASSERT(toggle != Toggle::InvalidEnum);
-            const size_t toggleIndex = static_cast<size_t>(toggle);
-            toggleBitset.set(toggleIndex, enabled);
-        }
+        void SetToggle(Toggle toggle, bool enabled);
+        bool IsEnabled(Toggle toggle) const;
+    };
 
-        bool IsEnabled(Toggle toggle) const {
-            ASSERT(toggle != Toggle::InvalidEnum);
-            const size_t toggleIndex = static_cast<size_t>(toggle);
-            return toggleBitset.test(toggleIndex);
-        }
+    class TogglesInfo {
+      public:
+        // Used to query the details of a toggle. Return nullptr if toggleName is not a valid name
+        // of a toggle supported in Dawn.
+        const ToggleInfo* GetToggleInfo(const char* toggleName);
+
+        Toggle ToggleNameToEnum(const char* toggleName);
+        static const char* ToggleEnumToName(Toggle toggle);
+        static std::vector<const char*> GetEnabledToggleNamesFromTogglesSet(TogglesSet togglesSet);
+
+      private:
+        void EnsureToggleNameToEnumMapInitialized();
+
+        bool mToggleNameToEnumMapInitialized = false;
+        std::unordered_map<std::string, Toggle> mToggleNameToEnumMap;
     };
 
 }  // namespace dawn_native
