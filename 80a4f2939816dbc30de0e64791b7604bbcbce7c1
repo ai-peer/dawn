@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bf392a7_1feff388",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T13:14:47Z",
+      "side": 1,
+      "message": "Can be addressed in a follow up but I think right now things could fail if we ask for an alignment bigger than the size, because we\u0027d start at a level smaller than the alignment and could never reach the alignment \u003d\u003d 0 condition.",
+      "revId": "80a4f2939816dbc30de0e64791b7604bbcbce7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
