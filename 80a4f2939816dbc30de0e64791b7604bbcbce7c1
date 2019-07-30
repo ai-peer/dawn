@@ -16,6 +16,24 @@
       "revId": "80a4f2939816dbc30de0e64791b7604bbcbce7c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cf5f9da_c0306ac8",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-07-30T16:35:52Z",
+      "side": 1,
+      "message": "I think the alignment would need to approach the max block size for that condition to occur. If unlucky, we\u0027ll simply fall-back to direct allocation. Another approach is to always use a min block size equal to the alignment. Then alignment \u003d\u003d 0 is irreverent but in exchange, there is more internal fragmentation. Will come back to that once sub-allocation is working.",
+      "parentUuid": "1bf392a7_1feff388",
+      "revId": "80a4f2939816dbc30de0e64791b7604bbcbce7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
