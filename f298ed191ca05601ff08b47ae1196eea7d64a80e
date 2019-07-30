@@ -1,0 +1,362 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3a0cbaf_80214da8",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "This likely needs to be tagged as virtual.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85a05a2_53fae003",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t used in the frontend so it could be put in the child classes.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7efefd24_85a790c7",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: kInvalidOffset",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1fce754_d4195780",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: This could be using DAWN_TRY_ASSIGN and CreateHeap return an ResultOrError\u003cResourceHeapBase*\u003e. This would also mean this Allocate would return ResultOrError\u003cResourceMemoryAllocation\u003e",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2d6f3e9_eca69697",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "This might not be needed with dynamic polymorphism because the backend\u0027s allocator would wrap the direct resource memory allocator so it can have Tick() called on it directly.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08104d37_fe9c0254",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "Why is this using static polymorphism? We could create a \"Client\" interface that needs to be implemented and passed in the constructor of DirectResourceMemoryAllocator.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ef4c7ff_60d500a1",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "This would disappear with dynamic polymorphism, also such files are named .inc usually.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f68d738c_12f4eea3",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: this pattern with Initialize is likely to happen often, ideally very few places in the code use ConsumedError. How about changing Device::CreateBufferImpl like this?\n\n    ResultOrError\u003cBufferBase*\u003e Device::CreateBufferImpl(const BufferDescriptor* descriptor) {\n        std::unique_ptr\u003cBuffer\u003e buffer \u003d std::make_unique\u003cBuffer\u003e(this, descriptor);\n        DAWN_TRY(buffer-\u003eInitialize());\n        return buffer.reset();\n    }",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2b43987_27797df1",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "Not sure what this means, can you expand a bit including a link to some msdn doc?",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "779aed4a_0cb0c6a9",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "Why is this needed? If you look at the advanced model in https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-createplacedresource we can see a resource barrier is only needed between uses of two resources sharing the same memory (that\u0027s why it is called aliasing), and sometimes special initialization is needed (not for buffers).",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa39a0c1_deac5bf9",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: this can be declared the first time it\u0027s used.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d6f6bef_2d01dd12",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: explain that heaps have their own alignment and for alignment computations to be correct their alignment must be a multiple of the resource\u0027s alignment.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6af3f16_83d50b02",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: This could use DAWN_TRY_ASSIGN",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e4999a7_7d4aff73",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: this should be merged in the previous include block.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f770cfa4_27d4dfb0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "nit: const\u0026 since this is a largeish structure.",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 31
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "103fc416_bce66ffe",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "Note: I didn\u0027t have the time to finish reviewing this file.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83d27f49_68d87462",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "Maybe we could centralizes these deferred freeing queues in d3d12::Device? D3D12::ReferenceUntilUnused is the relevant function.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63916a2e_057a1a6d",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "With the dynamic polymorphism, this PlacedResourceAllocator would likely be merged with ResourceHeapAllocator and heapFlags wouldn\u0027t need to be piped around.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54009f9f_4a9db692",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 58,
+        "startChar": 42,
+        "endLine": 58,
+        "endChar": 61
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b3fe48d_46f4354e",
+        "filename": "src/tests/unittests/ResourceAllocatorTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T15:29:04Z",
+      "side": 1,
+      "message": "It should be allowed with sub allocation too no?",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
