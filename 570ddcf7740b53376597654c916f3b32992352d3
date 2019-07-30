@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "762d7405_8da23340",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T12:10:18Z",
+      "side": 1,
+      "message": "This could be a method on ToggleSet so the code look like mToggleSet.GetEnableToggleNames()",
+      "revId": "570ddcf7740b53376597654c916f3b32992352d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4c05564_ec800fc6",
+        "filename": "src/dawn_native/Instance.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T12:10:18Z",
+      "side": 1,
+      "message": "This seems redundant because all the code could use Toggle.h to do that.",
+      "revId": "570ddcf7740b53376597654c916f3b32992352d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "288db5f8_bc3d6196",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T12:10:18Z",
+      "side": 1,
+      "message": "nit: Both of these can be freestanding function",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "570ddcf7740b53376597654c916f3b32992352d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
