@@ -276,6 +276,14 @@ namespace dawn_native { namespace vulkan {
         return mPendingCommands.commandBuffer;
     }
 
+    CommandRecordingContext* Device::GetPendingRecordingContext() {
+        if (mRecordingContext.commandBuffer == VK_NULL_HANDLE) {
+            mRecordingContext.commandBuffer = GetPendingCommandBuffer();
+        }
+
+        return &mRecordingContext;
+    }
+
     void Device::SubmitPendingCommands() {
         if (mPendingCommands.pool == VK_NULL_HANDLE) {
             return;
@@ -296,8 +304,8 @@ namespace dawn_native { namespace vulkan {
         submitInfo.pWaitDstStageMask = dstStageMasks.data();
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = &mPendingCommands.commandBuffer;
-        submitInfo.signalSemaphoreCount = 0;
-        submitInfo.pSignalSemaphores = 0;
+        submitInfo.signalSemaphoreCount = static_cast<uint32_t>(mSignalSemaphores.size());
+        submitInfo.pSignalSemaphores = mSignalSemaphores.data();
 
         VkFence fence = GetUnusedFence();
         if (fn.QueueSubmit(mQueue, 1, &submitInfo, fence) != VK_SUCCESS) {
@@ -307,16 +315,26 @@ namespace dawn_native { namespace vulkan {
         mLastSubmittedSerial++;
         mCommandsInFlight.Enqueue(mPendingCommands, mLastSubmittedSerial);
         mPendingCommands = CommandPoolAndBuffer();
+        mRecordingContext = CommandRecordingContext();
         mFencesInFlight.emplace(fence, mLastSubmittedSerial);
 
         for (VkSemaphore semaphore : mWaitSemaphores) {
             mDeleter->DeleteWhenUnused(semaphore);
         }
         mWaitSemaphores.clear();
+
+        for (VkSemaphore semaphore : mSignalSemaphores) {
+            mDeleter->DeleteWhenUnused(semaphore);
+        }
+        mSignalSemaphores.clear();
     }
 
     void Device::AddWaitSemaphore(VkSemaphore semaphore) {
         mWaitSemaphores.push_back(semaphore);
+    }
+
+    void Device::AddSignalSemaphore(VkSemaphore semaphore) {
+        mSignalSemaphores.push_back(semaphore);
     }
 
     ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalDevice) {

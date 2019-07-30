@@ -51,8 +51,7 @@ namespace dawn_native { namespace vulkan {
 
         // Perform the necessary pipeline barriers for the texture to be used with the usage
         // requested by the implementation.
-        VkCommandBuffer commands = device->GetPendingCommandBuffer();
-        ToBackend(texture)->TransitionUsageNow(commands, mTextureUsage);
+        ToBackend(texture)->TransitionUsageNow(device->GetPendingRecordingContext(), mTextureUsage);
 
         device->SubmitPendingCommands();
     }
