@@ -65,6 +65,29 @@
     },
     {
       "key": {
+        "uuid": "aea9a404_aab8acb1",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-30T16:50:48Z",
+      "side": 1,
+      "message": "unit: I think this would be better named \"SupportsAllRequestedExtensions\"",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 20
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2bb492a_91f906e0",
         "filename": "src/dawn_native/Adapter.h",
         "patchSetId": 2
@@ -207,6 +230,29 @@
       "writtenOn": "2019-07-29T12:31:10Z",
       "side": 1,
       "message": "Like for Toggle, this might be better expressed as strings for the following reasons:\n\n - Like toggles, we might add or remove some at any time which would cause the structure to change size and make code compiled with one version of DawnNative.h not work with code compiled with a different one.\n - For Dawn we could ask people to always compile with the version they use, but this would be an option when we have webgpu.h and some form of device creation in webgpu.h (I expect we\u0027ll want to have at least parts of instance and device creation in there for better interoperability).\n\nWDYT?",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f390b6c8_2e1bf940",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-30T16:50:48Z",
+      "side": 1,
+      "message": "nit: This can be outside the loop.",
+      "range": {
+        "startLine": 322,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 88
+      },
       "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
