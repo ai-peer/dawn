@@ -17,6 +17,7 @@
 
 #include <dawn/dawn_wsi.h>
 #include <dawn_native/DawnNative.h>
+#include <dawn_native/vulkan/ExternalHandle.h>
 
 #include <vulkan/vulkan.h>
 
@@ -29,6 +30,16 @@ namespace dawn_native { namespace vulkan {
                                                                              VkSurfaceKHR surface);
     DAWN_NATIVE_EXPORT DawnTextureFormat
     GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
+
+    DAWN_NATIVE_EXPORT DawnTexture WrapVulkanImage(DawnDevice cDevice,
+                                                   const DawnTextureDescriptor* cDescriptor,
+                                                   ExternalHandle memoryHandle,
+                                                   VkDeviceSize allocationSize,
+                                                   uint32_t memoryTypeIndex,
+                                                   const std::vector<ExternalHandle>& waitFds);
+
+    DAWN_NATIVE_EXPORT ExternalHandle ExportSignalSemaphore(DawnDevice cDevice,
+                                                            DawnTexture cTexture);
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKANBACKEND_H_

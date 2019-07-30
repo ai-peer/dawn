@@ -31,8 +31,9 @@ namespace dawn_native { namespace vulkan {
         device->Tick();
 
         VkCommandBuffer commandBuffer = device->GetPendingCommandBuffer();
+        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
         for (uint32_t i = 0; i < commandCount; ++i) {
-            ToBackend(commands[i])->RecordCommands(commandBuffer);
+            ToBackend(commands[i])->RecordCommands(commandBuffer, recordingContext);
         }
 
         device->SubmitPendingCommands();
