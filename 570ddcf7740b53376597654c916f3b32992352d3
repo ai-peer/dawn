@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dce8aeec_1954cbf7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-30T13:49:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "762d7405_8da23340",
+      "revId": "570ddcf7740b53376597654c916f3b32992352d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4c05564_ec800fc6",
         "filename": "src/dawn_native/Instance.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "570ddcf7740b53376597654c916f3b32992352d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05ed0be4_9a66d401",
+        "filename": "src/dawn_native/Instance.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-30T13:49:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4c05564_ec800fc6",
+      "revId": "570ddcf7740b53376597654c916f3b32992352d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "570ddcf7740b53376597654c916f3b32992352d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "482b9103_cfe0eca0",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-30T13:49:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "288db5f8_bc3d6196",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "570ddcf7740b53376597654c916f3b32992352d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
