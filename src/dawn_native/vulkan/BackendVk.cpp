@@ -55,6 +55,10 @@ namespace dawn_native { namespace vulkan {
         return mInstance;
     }
 
+    const VulkanGlobalInfo& Backend::GetGlobalInfo() const {
+        return mGlobalInfo;
+    }
+
     MaybeError Backend::Initialize() {
         if (!mVulkanLib.Open(kVulkanLibName)) {
             return DAWN_CONTEXT_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName);
@@ -68,7 +72,7 @@ namespace dawn_native { namespace vulkan {
         DAWN_TRY_ASSIGN(usedGlobalKnobs, CreateInstance());
         *static_cast<VulkanGlobalKnobs*>(&mGlobalInfo) = usedGlobalKnobs;
 
-        DAWN_TRY(mFunctions.LoadInstanceProcs(mInstance, mGlobalInfo));
+        DAWN_TRY(mFunctions.LoadInstanceProcs(mInstance, mGlobalInfo, mGlobalInfo.apiVersion));
 
         if (usedGlobalKnobs.debugReport) {
             DAWN_TRY(RegisterDebugReport());
@@ -137,6 +141,18 @@ namespace dawn_native { namespace vulkan {
         if (mGlobalInfo.macosSurface) {
             extensionsToRequest.push_back(kExtensionNameMvkMacosSurface);
             usedKnobs.macosSurface = true;
+        }
+        if (mGlobalInfo.externalMemoryCapabilities) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalMemoryCapabilities);
+            usedKnobs.externalMemoryCapabilities = true;
+        }
+        if (mGlobalInfo.externalSemaphoreCapabilities) {
+            extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreCapabilities);
+            usedKnobs.externalSemaphoreCapabilities = true;
+        }
+        if (mGlobalInfo.getPhysicalDeviceProperties2) {
+            extensionsToRequest.push_back(kExtensionNameKhrGetPhysicalDeviceProperties2);
+            usedKnobs.getPhysicalDeviceProperties2 = true;
         }
         if (mGlobalInfo.surface) {
             extensionsToRequest.push_back(kExtensionNameKhrSurface);
