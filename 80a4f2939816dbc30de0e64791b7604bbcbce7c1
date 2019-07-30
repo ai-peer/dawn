@@ -34,6 +34,24 @@
       "revId": "80a4f2939816dbc30de0e64791b7604bbcbce7c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a2223c8_acc54c64",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T16:44:37Z",
+      "side": 1,
+      "message": "Sounds good!",
+      "parentUuid": "3cf5f9da_c0306ac8",
+      "revId": "80a4f2939816dbc30de0e64791b7604bbcbce7c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
