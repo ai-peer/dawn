@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "832fcc65_c1671a13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-30T07:03:42Z",
+      "side": 1,
+      "message": "unit: keeping",
+      "range": {
+        "startLine": 15,
+        "startChar": 54,
+        "endLine": 15,
+        "endChar": 58
+      },
+      "revId": "2cb26ad7015b01a89918863ebdfadcba215de6e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf6b3687_a8e325e8",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-07-30T07:03:42Z",
+      "side": 1,
+      "message": "nit: Just looking at this tracker, it\u0027s not immediately obvious why we need the \"buffer length buffer\". It would also be plausible to believe that buffer lengths might be prepended and stored as the first few bytes of a buffer (or something else). As you did in the commit message, describe the SPIRV-Cross requirement for OpArrayLength to explain the format of how lengths need to be stored.",
+      "range": {
+        "startLine": 196,
+        "startChar": 15,
+        "endLine": 196,
+        "endChar": 41
+      },
+      "revId": "2cb26ad7015b01a89918863ebdfadcba215de6e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
