@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "637c5f0b_0caf6c71",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T09:02:10Z",
+      "side": 1,
+      "message": "nit: this only needs to be created inside the if.",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 56
+      },
+      "revId": "861bfc7076aea6df43e355b5abb9dfe9b9606e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e243bea8_cdb7b43f",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T09:02:10Z",
+      "side": 1,
+      "message": "This was part of a different patch?",
+      "revId": "861bfc7076aea6df43e355b5abb9dfe9b9606e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2390172d_ad82ba34",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-30T09:02:10Z",
+      "side": 1,
+      "message": "ditto?",
+      "revId": "861bfc7076aea6df43e355b5abb9dfe9b9606e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
