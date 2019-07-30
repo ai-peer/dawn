@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7775c53a_98916d1d",
+        "filename": "BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Added a separate build target only for the whitebox tests which behaves the same as the end2end harness but includes native sources. Should we have it like this for now? I found a bug about this here http://crbug.com/dawn/67 if relevant.",
+      "parentUuid": "22687640_02ac490b",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "934f9fde_468dd2b3",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 15
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b38813ac_4a8a2b2a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Right now texture-\u003eClearWaitRequirements() is used to remove semaphores from the texture after they\u0027re added. This is so we don\u0027t need to verify a semaphore we are adding isn\u0027t already added in AddWaitSemaphore().",
+      "parentUuid": "934f9fde_468dd2b3",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b3a8ebd_673b02a3",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 15
@@ -47,6 +83,24 @@
       "writtenOn": "2019-07-16T13:26:35Z",
       "side": 1,
       "message": "All the AddSemaphores are in places where we also do TransitionUsageNow. I suggest we introduce a \"CommandRecordingContext\" that\u0027s passed to the TransitionUsageNow on which semaphores can be added. TransitionUsageNow could be (could probably find a better name): AccessOnRecordingContext.",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7a0e995_0c2e433c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Added the recording context.\n\nAlso, should we rename TransitionUsageNow only for textures? There is one in BufferVk but we don\u0027t have a reason to pass the recording context into it yet.",
+      "parentUuid": "0b3a8ebd_673b02a3",
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "a0c1f783_80561ae4",
+        "filename": "src/dawn_native/vulkan/MemoryAllocator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Agreed, removed the pNext.",
+      "parentUuid": "0d89e2ea_5d8b417d",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e57c7a80_31162f07",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 15
@@ -101,6 +173,24 @@
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1418277_ed05385d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Yep good catch",
+      "parentUuid": "e57c7a80_31162f07",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -144,6 +234,24 @@
     },
     {
       "key": {
+        "uuid": "d77a00af_edc2819f",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Moved.",
+      "parentUuid": "a948a82d_38396687",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03381062_ecf45b95",
         "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
         "patchSetId": 15
@@ -172,6 +280,24 @@
       "writtenOn": "2019-07-16T13:26:35Z",
       "side": 1,
       "message": "The non-fd extensions here have also been merged in Vulkan 1.1 can we add logic here and in VulkanFunctions that handles that? (here is would at the end of the function do if 1.1 then extension is true, in VulkanFunctions first check 1.1 and load core entrypoints otherwise load extension.)",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a38d73fd_47141eed",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Will do after patch for asking for Vulkan 1.1.\nEDIT: cant remove the comment, but still need to do this after the patch landed.",
+      "parentUuid": "5abeab11_ce45e627",
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -295,6 +421,24 @@
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "483382fd_23acb8ed",
+        "filename": "src/tests/end2end/VulkanImageWrappingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-07-30T06:36:28Z",
+      "side": 1,
+      "message": "Commented on in BUILD.gn.",
+      "parentUuid": "61ad6114_796618dd",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
