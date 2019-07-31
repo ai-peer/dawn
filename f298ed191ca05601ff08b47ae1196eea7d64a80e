@@ -144,6 +144,24 @@
     },
     {
       "key": {
+        "uuid": "7ab25c75_5e61a23b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-31T22:45:03Z",
+      "side": 1,
+      "message": "An alternative approach would be to add a static \u0027Create\u0027 method on the class. The static method would create all of the resources that can fail. If all of them succeed, the static method allocates an instance of the object and passes the all of the resources to the constructor.\n\nThis approach has the advantage that you avoid unnecessary object allocation for the failure case.",
+      "parentUuid": "f68d738c_12f4eea3",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2b43987_27797df1",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -212,6 +230,29 @@
     },
     {
       "key": {
+        "uuid": "98c294a7_acb29218",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-31T22:45:03Z",
+      "side": 1,
+      "message": "Please rework this so that you only pay the cost of doing two lookups when you need to insert a new item. The current code always does two lookups no matter what.",
+      "range": {
+        "startLine": 364,
+        "startChar": 1,
+        "endLine": 364,
+        "endChar": 62
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6af3f16_83d50b02",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 3
@@ -269,6 +310,29 @@
     },
     {
       "key": {
+        "uuid": "701b195f_9da0ad44",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-31T22:45:03Z",
+      "side": 1,
+      "message": "I\u0027ve been told that on some hardware, creating a committed resource will be better/faster than using placed resources. Given this, is there a way we can re-jigger things such that the implementation of a \u0027direct allocator\u0027 simply calls CreateCommitedResource and the \u0027suballocator\u0027 implementation is what uses CreateHeap+CreatePlacedResource? \n\nDoing this will also avoid needing to use aliasing barriers altogether for direct allocation.",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "103fc416_bce66ffe",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -280,6 +344,29 @@
       "writtenOn": "2019-07-30T15:29:04Z",
       "side": 1,
       "message": "Note: I didn\u0027t have the time to finish reviewing this file.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aa9f59a_3c10c84d",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-31T22:45:03Z",
+      "side": 1,
+      "message": "Every time you pass a ComPtr by value like this, it AddRefs/Releases the object. Not only does this waste CPU cycles incrementing and decrementing the reference count, the next time you look at a PIX trace, there will be more entries you have to sift through. :-)\n\nThe Google C++ style guide says that if you\u0027re passing a reference counted object to a function that takes ownership of the object, then the parameter should be declared as a smart pointer. Your use case falls into this category but it means you need to be aggressive about using std::move to avoid unnecessary AddRef/Release.",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 83
+      },
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -320,6 +407,29 @@
     },
     {
       "key": {
+        "uuid": "d1ac7a7a_1158a072",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-31T22:45:03Z",
+      "side": 1,
+      "message": "To make finding classes easier for people, please have one class per .h/cpp pair.",
+      "range": {
+        "startLine": 51,
+        "startChar": 10,
+        "endLine": 51,
+        "endChar": 33
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "54009f9f_4a9db692",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
         "patchSetId": 3
@@ -336,6 +446,52 @@
         "startChar": 42,
         "endLine": 58,
         "endChar": 61
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5064ab55_559bc9db",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-31T22:45:03Z",
+      "side": 1,
+      "message": "Out of curiosity, why does GetD3D12Resource return a ComPtr\u003cID3D12Resource\u003e but GetD3D12Heap returns a ID3D12Heap*?",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4223ae8f_d559f28f",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-07-31T22:45:03Z",
+      "side": 1,
+      "message": "When I think of the word heap, I think of an aggregation of multiple resources. I was surprised that GetD3D12Resource was on the generic ResourceHeap object. What is the plan moving forward for this function when a heap actually contains more than one resource?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 41
       },
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
