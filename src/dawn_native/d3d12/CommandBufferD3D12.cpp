@@ -158,6 +158,11 @@ namespace dawn_native { namespace d3d12 {
                 mBindGroups[index] = group;
                 uint32_t currentDynamicBufferIndex = 0;
 
+                if (dynamicOffsetCount > 0) {
+                    pipelineLayout->SetLastDynamicOffsets(index, dynamicOffsetCount,
+                                                          dynamicOffsets);
+                }
+
                 const BindGroupLayout::LayoutBindingInfo& layout =
                     group->GetLayout()->GetBindingInfo();
                 for (uint32_t bindingIndex : IterateBitSet(layout.dynamic)) {
@@ -244,12 +249,11 @@ namespace dawn_native { namespace d3d12 {
             for (uint32_t i = 0; i < inheritUntil; ++i) {
                 const BindGroupLayout* layout = ToBackend(mBindGroups[i]->GetLayout());
                 const uint32_t dynamicBufferCount = layout->GetDynamicBufferCount();
-                // TODO(shaobo.yan@intel.com) : Need to handle dynamic resources inherited with last
-                // dynamic offsets.
+
+                // Inherit dynamic offsets
                 if (dynamicBufferCount > 0) {
-                    std::vector<uint64_t> zeroOffsets(dynamicBufferCount, 0);
                     SetBindGroup(commandList, newLayout, mBindGroups[i], i, dynamicBufferCount,
-                                 zeroOffsets.data(), true);
+                                 oldLayout->GetLastDynamicOffsets(i), true);
                 } else {
                     SetBindGroup(commandList, newLayout, mBindGroups[i], i, 0, nullptr, true);
                 }
@@ -805,11 +809,30 @@ namespace dawn_native { namespace d3d12 {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     BindGroup* group = ToBackend(cmd->group.Get());
                     uint64_t* dynamicOffsets = nullptr;
+
+                    // Use this flag to determine whether we need to force set bind group for
+                    // updating dynamic offsets
+                    bool refreshDynamicOffsets = false;
+
                     if (cmd->dynamicOffsetCount > 0) {
                         dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
+                        // Check whether we need to update dynamic offsets
+                        uint64_t* oldDynamicOffsets = lastLayout->GetLastDynamicOffsets(cmd->index);
+                        if (!oldDynamicOffsets) {
+                            refreshDynamicOffsets = true;
+                        } else {
+                            for (uint32_t i = 0; i < cmd->dynamicOffsetCount; ++i) {
+                                if (oldDynamicOffsets[i] != dynamicOffsets[i]) {
+                                    refreshDynamicOffsets = true;
+                                    break;
+                                }
+                            }
+                        }
                     }
+
                     bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index,
-                                                 cmd->dynamicOffsetCount, dynamicOffsets);
+                                                 cmd->dynamicOffsetCount, dynamicOffsets,
+                                                 refreshDynamicOffsets);
                 } break;
 
                 default: { UNREACHABLE(); } break;
@@ -1068,12 +1091,30 @@ namespace dawn_native { namespace d3d12 {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     BindGroup* group = ToBackend(cmd->group.Get());
                     uint64_t* dynamicOffsets = nullptr;
+
+                    // Use this flag to determine whether we need to force set bind group for
+                    // updating dynamic offsets
+                    bool refreshDynamicOffsets = false;
+
                     if (cmd->dynamicOffsetCount > 0) {
                         dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
+                        // Check whether we need to update dynamic offsets
+                        uint64_t* oldDynamicOffsets = lastLayout->GetLastDynamicOffsets(cmd->index);
+                        if (!oldDynamicOffsets) {
+                            refreshDynamicOffsets = true;
+                        } else {
+                            for (uint32_t i = 0; i < cmd->dynamicOffsetCount; ++i) {
+                                if (oldDynamicOffsets[i] != dynamicOffsets[i]) {
+                                    refreshDynamicOffsets = true;
+                                    break;
+                                }
+                            }
+                        }
                     }
 
                     bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index,
-                                                 cmd->dynamicOffsetCount, dynamicOffsets);
+                                                 cmd->dynamicOffsetCount, dynamicOffsets,
+                                                 refreshDynamicOffsets);
                 } break;
 
                 case Command::SetIndexBuffer: {
