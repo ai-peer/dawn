@@ -20,6 +20,7 @@
 #include "common/Serial.h"
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/vulkan/CommandRecordingContext.h"
 #include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/VulkanFunctions.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
@@ -59,9 +60,11 @@ namespace dawn_native { namespace vulkan {
         RenderPassCache* GetRenderPassCache() const;
 
         VkCommandBuffer GetPendingCommandBuffer();
+        CommandRecordingContext* GetPendingRecordingContext();
         Serial GetPendingCommandSerial() const override;
         void SubmitPendingCommands();
         void AddWaitSemaphore(VkSemaphore semaphore);
+        void AddSignalSemaphore(VkSemaphore semaphore);
 
         // Dawn API
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder,
@@ -143,6 +146,9 @@ namespace dawn_native { namespace vulkan {
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
         std::vector<VkSemaphore> mWaitSemaphores;
+        std::vector<VkSemaphore> mSignalSemaphores;
+
+        CommandRecordingContext mRecordingContext;
     };
 
 }}  // namespace dawn_native::vulkan
