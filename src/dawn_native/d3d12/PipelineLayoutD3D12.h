@@ -35,9 +35,14 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3D12RootSignature> GetRootSignature();
 
+        uint64_t* GetLastDynamicOffsets(uint32_t group);
+        void SetLastDynamicOffsets(uint32_t group, uint32_t count, uint64_t* offsets);
+
       private:
         std::array<uint32_t, kMaxBindGroups> mCbvUavSrvRootParameterInfo;
         std::array<uint32_t, kMaxBindGroups> mSamplerRootParameterInfo;
+        std::array<std::array<uint64_t, kMaxBindingsPerGroup>, kMaxBindGroups> mLastDynamicOffsets;
+        std::bitset<kMaxBindGroups> mGroupsWithInheritedDynamicOffsets;
         std::array<std::array<uint32_t, kMaxBindingsPerGroup>, kMaxBindGroups>
             mDynamicRootParameterIndices;
         ComPtr<ID3D12RootSignature> mRootSignature;

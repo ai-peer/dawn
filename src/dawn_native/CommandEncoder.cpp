@@ -486,13 +486,15 @@ namespace dawn_native {
         // information.
         class PassResourceUsageTracker {
           public:
-            void BufferUsedAs(BufferBase* buffer, dawn::BufferUsageBit usage) {
+            void BufferUsedAs(BufferBase* buffer,
+                              dawn::BufferUsageBit usage,
+                              bool isDynamic = false) {
                 // std::map's operator[] will create the key and return 0 if the key didn't exist
                 // before.
                 dawn::BufferUsageBit& storedUsage = mBufferUsages[buffer];
 
                 if (usage == dawn::BufferUsageBit::Storage &&
-                    storedUsage & dawn::BufferUsageBit::Storage) {
+                    storedUsage & dawn::BufferUsageBit::Storage && !isDynamic) {
                     mStorageUsedMultipleTimes = true;
                 }
 
@@ -595,12 +597,14 @@ namespace dawn_native {
                 switch (type) {
                     case dawn::BindingType::UniformBuffer: {
                         BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
-                        tracker->BufferUsedAs(buffer, dawn::BufferUsageBit::Uniform);
+                        tracker->BufferUsedAs(buffer, dawn::BufferUsageBit::Uniform,
+                                              layoutInfo.dynamic[i]);
                     } break;
 
                     case dawn::BindingType::StorageBuffer: {
                         BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
-                        tracker->BufferUsedAs(buffer, dawn::BufferUsageBit::Storage);
+                        tracker->BufferUsedAs(buffer, dawn::BufferUsageBit::Storage,
+                                              layoutInfo.dynamic[i]);
                     } break;
 
                     case dawn::BindingType::SampledTexture: {
