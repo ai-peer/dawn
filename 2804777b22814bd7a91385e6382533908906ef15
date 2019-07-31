@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d485db19_cd27708f",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-31T01:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c640f7a5_a96b63b1",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e503ca9d_8de7474e",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 11
@@ -405,6 +423,24 @@
     },
     {
       "key": {
+        "uuid": "f9ff9fb6_bd2eb240",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-31T01:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdacbc33_3070670d",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2852c720_d11aaad4",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 11
@@ -589,6 +625,24 @@
       "revId": "2804777b22814bd7a91385e6382533908906ef15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a99574a_80386c30",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-31T01:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3961e72d_ad934f69",
+      "revId": "2804777b22814bd7a91385e6382533908906ef15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

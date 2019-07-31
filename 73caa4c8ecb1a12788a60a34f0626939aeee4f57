@@ -627,6 +627,30 @@
       "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "981d6648_caa7c99c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-31T01:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70c760c3_cfa5ff08",
+      "range": {
+        "startLine": 519,
+        "startChar": 32,
+        "endLine": 519,
+        "endChar": 33
+      },
+      "revId": "73caa4c8ecb1a12788a60a34f0626939aeee4f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
