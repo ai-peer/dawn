@@ -1,0 +1,296 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0e0500c_2c5c9b82",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t used?",
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b3d6d32_85e90dd9",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: equivalently extensionBitSet[extensionIndex]",
+      "range": {
+        "startLine": 48,
+        "startChar": 31,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42e08ad5_e5ffd628",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "Maybe the map could be created in the constructor instead of lazily.",
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc3de75e_a774afab",
+        "filename": "src/dawn_native/Extensions.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "note: Maybe one day we could use something similar to ANGLE\u0027s PackedEnumBitSet: https://cs.chromium.org/chromium/src/third_party/angle/src/common/PackedEnums.h?q\u003dEnumBitSet\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d159",
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8985629b_488e9bf4",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "unit: This could be replaced by a forward declaration",
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05d20ac9_ab3e200e",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: {} should work here because the compiler can deduce what type it should construct.",
+      "range": {
+        "startLine": 337,
+        "startChar": 11,
+        "endLine": 337,
+        "endChar": 38
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51daeb8d_e73e2f31",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "Here the backend adapter gets recomputed in SupportAllRequiredExtensions. Maybe instead we could store it as a member of DawnTest and have GetBackendAdapter() return it? (or maybe GetBackendAdapter can be removed entirely?)",
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90ad2cb4_cbb846a9",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: Supports\n\nAlso I don\u0027t think \"Required\" is correct because tests could also use this function to test optional extension. Maybe SupportsExtensions?",
+      "range": {
+        "startLine": 209,
+        "startChar": 9,
+        "endLine": 209,
+        "endChar": 37
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1be8dffd_84516ccc",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: Here this could be SupportsExtensions({\"texture_compression_bc\"});",
+      "range": {
+        "startLine": 72,
+        "startChar": 60,
+        "endLine": 72,
+        "endChar": 79
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1fa36cf_0c9ed506",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: return {}? I don\u0027t think DawnTest needs to add specific extensions, and if it needs to, it can do it inside SetUp.",
+      "range": {
+        "startLine": 74,
+        "startChar": 19,
+        "endLine": 74,
+        "endChar": 52
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d78f8a0c_83ed7b86",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1161,
+        "startChar": 50,
+        "endLine": 1161,
+        "endChar": 69
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7e405f3_d13d90b3",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: likewise this can be {\"texture_compression_bc\"}",
+      "range": {
+        "startLine": 259,
+        "startChar": 50,
+        "endLine": 259,
+        "endChar": 69
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18dc6693_1d43cc4d",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: Enabling",
+      "range": {
+        "startLine": 319,
+        "startChar": 66,
+        "endLine": 319,
+        "endChar": 72
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b846d6a2_df712f39",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:21:26Z",
+      "side": 1,
+      "message": "nit: This could stay in the initialization.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 25
+      },
+      "revId": "b1639b7964f7c44592d6f857651e8a469e149d1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
