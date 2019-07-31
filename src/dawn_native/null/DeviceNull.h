@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_NULL_DEVICENULL_H_
 #define DAWNNATIVE_NULL_DEVICENULL_H_
 
+#include "dawn_native/Adapter.h"
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
@@ -43,6 +44,7 @@ namespace dawn_native { namespace null {
     class CommandBuffer;
     using ComputePipeline = ComputePipelineBase;
     class Device;
+    using Instance = InstanceBase;
     using PipelineLayout = PipelineLayoutBase;
     class Queue;
     using RenderPipeline = RenderPipelineBase;
@@ -135,6 +137,18 @@ namespace dawn_native { namespace null {
 
         static constexpr size_t kMaxMemoryUsage = 256 * 1024 * 1024;
         size_t mMemoryUsage = 0;
+    };
+
+    class Adapter : public AdapterBase {
+      public:
+        Adapter(Instance* instance);
+        virtual ~Adapter();
+
+        // Used for the tests that intend to use an adapter without all extensions enabled.
+        void SetSupportedExtensions(const std::vector<const char*>& requiredExtensions);
+
+      private:
+        ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;
     };
 
     class Buffer : public BufferBase {
