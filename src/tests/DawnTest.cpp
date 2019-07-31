@@ -333,38 +333,29 @@ uint32_t DawnTest::GetVendorIdFilter() const {
     return gTestEnv->GetVendorIdFilter();
 }
 
+std::vector<const char*> DawnTest::GetRequiredExtensions() {
+    return std::vector<const char*>();
+}
+
+bool DawnTest::SupportAllRequiredExtensions(
+    const std::vector<const char*>& requiredExtensions) const {
+    std::set<std::string> supportedExtensionsSet;
+    for (const char* supportedExtensionName : GetBackendAdapter().GetSupportedExtensions()) {
+        supportedExtensionsSet.insert(supportedExtensionName);
+    }
+
+    for (const char* requiredExtensionName : requiredExtensions) {
+        if (supportedExtensionsSet.find(requiredExtensionName) == supportedExtensionsSet.end()) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 void DawnTest::SetUp() {
     // Get an adapter for the backend to use, and create the device.
-    dawn_native::Adapter backendAdapter;
-    const dawn_native::BackendType backendType = GetParam().backendType;
-    {
-        dawn_native::Instance* instance = gTestEnv->GetInstance();
-        std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
-
-        for (const dawn_native::Adapter& adapter : adapters) {
-            if (adapter.GetBackendType() == backendType) {
-                if (HasVendorIdFilter()) {
-                    if (adapter.GetPCIInfo().vendorId == GetVendorIdFilter()) {
-                        backendAdapter = adapter;
-                        break;
-                    }
-                } else {
-                    backendAdapter = adapter;
-
-                    // On Metal, select the last adapter so that the discrete GPU is tested on
-                    // multi-GPU systems.
-                    // TODO(cwallez@chromium.org): Replace this with command line arguments
-                    // requesting a specific device / vendor ID once the macOS 10.13 SDK is rolled
-                    // and correct PCI info collection is implemented on Metal.
-                    if (backendType != dawn_native::BackendType::Metal) {
-                        break;
-                    }
-                }
-            }
-        }
-
-        ASSERT(backendAdapter);
-    }
+    dawn_native::Adapter backendAdapter = GetBackendAdapter();
 
     mPCIInfo = backendAdapter.GetPCIInfo();
 
@@ -377,11 +368,14 @@ void DawnTest::SetUp() {
     dawn_native::DeviceDescriptor deviceDescriptor;
     deviceDescriptor.forceEnabledToggles = GetParam().forceEnabledWorkarounds;
     deviceDescriptor.forceDisabledToggles = GetParam().forceDisabledWorkarounds;
+    deviceDescriptor.requiredExtensions = GetRequiredExtensions();
     backendDevice = backendAdapter.CreateDevice(&deviceDescriptor);
+    ASSERT_NE(nullptr, backendDevice);
 
     backendProcs = dawn_native::GetProcs();
 
     // Get the test window and create the device using it (esp. for OpenGL)
+    const dawn_native::BackendType backendType = GetParam().backendType;
     GLFWwindow* testWindow = gTestEnv->GetWindowForBackend(backendType);
     DAWN_ASSERT(testWindow != nullptr);
     mBinding.reset(utils::CreateBinding(backendType, testWindow, backendDevice));
@@ -435,6 +429,41 @@ void DawnTest::SetUp() {
         dawn::TextureUsageBit::OutputAttachment, 400, 400);
 
     device.SetErrorCallback(OnDeviceError, this);
+}
+
+dawn_native::Adapter DawnTest::GetBackendAdapter() const {
+    dawn_native::Adapter backendAdapter;
+    const dawn_native::BackendType backendType = GetParam().backendType;
+    {
+        dawn_native::Instance* instance = gTestEnv->GetInstance();
+        std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
+
+        for (const dawn_native::Adapter& adapter : adapters) {
+            if (adapter.GetBackendType() == backendType) {
+                if (HasVendorIdFilter()) {
+                    if (adapter.GetPCIInfo().vendorId == GetVendorIdFilter()) {
+                        backendAdapter = adapter;
+                        break;
+                    }
+                } else {
+                    backendAdapter = adapter;
+
+                    // On Metal, select the last adapter so that the discrete GPU is tested on
+                    // multi-GPU systems.
+                    // TODO(cwallez@chromium.org): Replace this with command line arguments
+                    // requesting a specific device / vendor ID once the macOS 10.13 SDK is rolled
+                    // and correct PCI info collection is implemented on Metal.
+                    if (backendType != dawn_native::BackendType::Metal) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        ASSERT(backendAdapter);
+    }
+
+    return backendAdapter;
 }
 
 void DawnTest::TearDown() {
