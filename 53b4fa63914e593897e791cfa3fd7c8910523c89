@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "accb4a63_2149af48",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2987c78_12e4d0a2",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69992fa3_c79c568d",
         "filename": "src/dawn_native/Adapter.h",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2019-07-29T12:31:10Z",
       "side": 1,
       "message": "This will become a big structure so we should pass it around as a const\u0026",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b544b3ab_b01354d9",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Now it is just a bitset, shall we still return it as a const\u0026?",
+      "parentUuid": "69992fa3_c79c568d",
       "range": {
         "startLine": 38,
         "startChar": 8,
@@ -88,6 +130,54 @@
     },
     {
       "key": {
+        "uuid": "2b4818a9_cb97a4aa",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aea9a404_aab8acb1",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 20
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70689717_102598e2",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c17de9a_d8bcef0c",
+      "range": {
+        "startLine": 39,
+        "startChar": 43,
+        "endLine": 39,
+        "endChar": 53
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2bb492a_91f906e0",
         "filename": "src/dawn_native/Adapter.h",
         "patchSetId": 2
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "1b21f301_d1b65b58",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2bb492a_91f906e0",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ded7ae93_7b823ecc",
         "filename": "src/dawn_native/DawnNative.cpp",
         "patchSetId": 2
@@ -119,6 +227,24 @@
       "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "642726f9_3564e50a",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done\nIt is only used in tests and I have removed it.",
+      "parentUuid": "ded7ae93_7b823ecc",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "b578248c_3b91e7aa",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2cdfbfe_314aa84b",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 162,
+        "endChar": 18
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0160e38_93c52162",
         "filename": "src/dawn_native/null/DeviceNull.h",
         "patchSetId": 2
@@ -162,6 +312,24 @@
     },
     {
       "key": {
+        "uuid": "b7fd74dd_b50df03b",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0160e38_93c52162",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e032fcf_b8f44ca6",
         "filename": "src/dawn_native/null/DeviceNull.h",
         "patchSetId": 2
@@ -173,6 +341,24 @@
       "writtenOn": "2019-07-29T12:31:10Z",
       "side": 1,
       "message": "TODO see if this is needed.",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "574694c9_74990dcc",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "I am using it in the unit tests ExtensionTests.",
+      "parentUuid": "6e032fcf_b8f44ca6",
       "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -202,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "745329d2_4c94acda",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f814a73_643bd5c2",
+      "range": {
+        "startLine": 187,
+        "startChar": 80,
+        "endLine": 187,
+        "endChar": 81
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2d7d88a_dfec114f",
         "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
         "patchSetId": 2
@@ -219,6 +429,24 @@
     },
     {
       "key": {
+        "uuid": "059dfd81_2a89cf0b",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2d7d88a_dfec114f",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de773464_df0aa8ab",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 2
@@ -233,6 +461,24 @@
       "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "414cf777_e24c3be0",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done\nI also prefer the implementation in this CL.",
+      "parentUuid": "de773464_df0aa8ab",
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -256,6 +502,30 @@
       "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6df9c78e_66ca6bea",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-07-31T05:15:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f390b6c8_2e1bf940",
+      "range": {
+        "startLine": 322,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 88
+      },
+      "revId": "53b4fa63914e593897e791cfa3fd7c8910523c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
