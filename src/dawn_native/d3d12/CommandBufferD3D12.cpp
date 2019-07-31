@@ -158,6 +158,11 @@ namespace dawn_native { namespace d3d12 {
                 mBindGroups[index] = group;
                 uint32_t currentDynamicBufferIndex = 0;
 
+                if (dynamicOffsetCount > 0) {
+                    pipelineLayout->SetLastDynamicOffsets(index, dynamicOffsetCount,
+                                                          dynamicOffsets);
+                }
+
                 const BindGroupLayout::LayoutBindingInfo& layout =
                     group->GetLayout()->GetBindingInfo();
                 for (uint32_t bindingIndex : IterateBitSet(layout.dynamic)) {
@@ -244,12 +249,11 @@ namespace dawn_native { namespace d3d12 {
             for (uint32_t i = 0; i < inheritUntil; ++i) {
                 const BindGroupLayout* layout = ToBackend(mBindGroups[i]->GetLayout());
                 const uint32_t dynamicBufferCount = layout->GetDynamicBufferCount();
-                // TODO(shaobo.yan@intel.com) : Need to handle dynamic resources inherited with last
-                // dynamic offsets.
+
+                // Inherit dynamic offsets
                 if (dynamicBufferCount > 0) {
-                    std::vector<uint64_t> zeroOffsets(dynamicBufferCount, 0);
                     SetBindGroup(commandList, newLayout, mBindGroups[i], i, dynamicBufferCount,
-                                 zeroOffsets.data(), true);
+                                 oldLayout->GetLastDynamicOffsets(i), true);
                 } else {
                     SetBindGroup(commandList, newLayout, mBindGroups[i], i, 0, nullptr, true);
                 }

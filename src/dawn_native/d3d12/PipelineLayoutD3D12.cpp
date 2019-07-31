@@ -175,4 +175,14 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(GetBindGroupLayout(group)->GetBindingInfo().dynamic[binding]);
         return mDynamicRootParameterIndices[group][binding];
     }
+
+    uint64_t* PipelineLayout::GetLastDynamicOffsets(uint32_t group) {
+        return mLastDynamicOffsets[group].data();
+    }
+
+    void PipelineLayout::SetLastDynamicOffsets(uint32_t group, uint32_t count, uint64_t* offsets) {
+        for (uint32_t i = 0; i < count; ++i) {
+            mLastDynamicOffsets[group][i] = offsets[i];
+        }
+    }
 }}  // namespace dawn_native::d3d12
