@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7dce87bf_ecea74dc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-31T01:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "637c5f0b_0caf6c71",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 56
+      },
+      "revId": "861bfc7076aea6df43e355b5abb9dfe9b9606e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e243bea8_cdb7b43f",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 19
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "1b297811_c8cd39eb",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-31T01:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6e7990b_08bf1d10",
+      "revId": "861bfc7076aea6df43e355b5abb9dfe9b9606e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2390172d_ad82ba34",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 19
@@ -71,6 +113,24 @@
       "writtenOn": "2019-07-30T09:02:10Z",
       "side": 1,
       "message": "ditto?",
+      "revId": "861bfc7076aea6df43e355b5abb9dfe9b9606e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ef0e4a1_b08e5a43",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-07-31T01:24:18Z",
+      "side": 1,
+      "message": "ditto. Done.",
+      "parentUuid": "2390172d_ad82ba34",
       "revId": "861bfc7076aea6df43e355b5abb9dfe9b9606e0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
