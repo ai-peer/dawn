@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0941044e_c8e0cf94",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:25:33Z",
+      "side": 1,
+      "message": "This should probably be updated to use the recordingContext, it will be useful in the future when we try to do barrier coalescing.",
+      "range": {
+        "startLine": 354,
+        "startChar": 24,
+        "endLine": 354,
+        "endChar": 42
+      },
+      "revId": "5326ff4bbe886638c70619ab28a9a7971f198e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61df084d_20bcd935",
+        "filename": "src/dawn_native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:25:33Z",
+      "side": 1,
+      "message": "nit: Comment that explains what this is used for?",
+      "revId": "5326ff4bbe886638c70619ab28a9a7971f198e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6df0295_8858f064",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:25:33Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need these two anymore because the semaphores are on the recording context and can be looked up directly in SubmitPendingCommands.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 55
+      },
+      "revId": "5326ff4bbe886638c70619ab28a9a7971f198e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f1a1702_664eae95",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:25:33Z",
+      "side": 1,
+      "message": "ditto this could be removed.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "5326ff4bbe886638c70619ab28a9a7971f198e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ba6e2e8_3c59a0bf",
+        "filename": "src/dawn_native/vulkan/QueueVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T09:25:33Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "5326ff4bbe886638c70619ab28a9a7971f198e8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
