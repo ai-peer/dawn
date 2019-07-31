@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0dae226_87c0739c",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T15:00:40Z",
+      "side": 1,
+      "message": "unit: that\u0027s not necessary because InstanceBase will never be subclassed, it\u0027s true that the name isn\u0027t great.",
+      "revId": "0895c8d85279dfaac72bcb41997057b98ae6b6fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6263dbe3_ef1a7d41",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-31T15:00:40Z",
+      "side": 1,
+      "message": "If we don\u0027t move the initialization in its own function and instead keep it where it was, it seems all uses of SupportsExtensions would be after adapter creation so we don\u0027t need it to be lazy like this? Basically what I\u0027m suggesting is keeping the code like before, just storing the adapter in a member variable with a getter.",
+      "revId": "0895c8d85279dfaac72bcb41997057b98ae6b6fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
