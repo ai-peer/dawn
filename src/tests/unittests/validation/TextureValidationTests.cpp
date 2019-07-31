@@ -250,10 +250,15 @@ TEST_F(TextureValidationTest, NonRenderableAndOutputAttachment) {
     ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
 }
 
-// TODO(jiawei.shao@intel.com): use compressed texture formats as extensions.
 // TODO(jiawei.shao@intel.com): add tests to verify we cannot create 1D or 3D textures with
 // compressed texture formats.
 class CompressedTextureFormatsValidationTests : public TextureValidationTest {
+  public:
+    CompressedTextureFormatsValidationTests() : TextureValidationTest() {
+        const std::vector<const char*> kRequiredExtensions(1, "texture_compression_bc");
+        device = CreateDeviceFromAdapter(adapter, kRequiredExtensions);
+    }
+
   protected:
     dawn::TextureDescriptor CreateDefaultTextureDescriptor() {
         dawn::TextureDescriptor descriptor =
@@ -306,6 +311,18 @@ TEST_F(CompressedTextureFormatsValidationTests, TextureSize) {
             descriptor.size.height = 32;
             device.CreateTexture(&descriptor);
         }
+    }
+}
+
+// Test the creation of a texture with BC format will fail when the extension textureCompressionBC
+// is not enabled.
+TEST_F(CompressedTextureFormatsValidationTests, UseBCFormatWithoutEnableExtension) {
+    const std::vector<const char*> kEmptyVector;
+    dawn::Device deviceWithoutExtension = CreateDeviceFromAdapter(adapter, kEmptyVector);
+    for (dawn::TextureFormat format : kBCFormats) {
+        dawn::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
+        descriptor.format = format;
+        ASSERT_DEVICE_ERROR(deviceWithoutExtension.CreateTexture(&descriptor));
     }
 }
 
