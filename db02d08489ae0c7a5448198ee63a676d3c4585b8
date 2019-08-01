@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ef30cacc_0efe1326",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-01T07:59:34Z",
+      "side": 1,
+      "message": "Sounds good. But keep some checks to avoid useless updates. PTAL.",
+      "parentUuid": "cfaaba2c_dfa31670",
+      "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c1bc17cb_a8cefb67",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e89a4073_c695b6a7",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-01T07:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1bc17cb_a8cefb67",
+      "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fe83946e_b4d54a07",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-01T07:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d8a4704_7dc08c87",
+      "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c333fbdd_17cfd46e",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2019-07-31T09:57:55Z",
       "side": 1,
       "message": "This doesn\u0027t seem to test inheritance because the pipeline layout isn\u0027t changed. TBH I don\u0027t think we should test this right now because we are going to change things to match WebGPU and remove the partial inheritance mechanism.",
+      "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de120ed3_a0188799",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-01T07:59:34Z",
+      "side": 1,
+      "message": "Sry but this test indeed test the inheritance logics. I agree with that this is not a typical inheritance (because they are identical but they\u0027re different pipelines. It will trigger pipeline change and no need to rebind all the bind groups again). I also debug the case and find it indeed walk through the inheritance logic(on d3d12 backend).\n\nHowever, I update the cases to make it a normal inherit case :P\n\nSince inherit logic is part of dawn now and we add logic to complete it, I think we should have test to cover it to make it works fine and remove the test if dawn remove related logic. WDYT?",
+      "parentUuid": "c333fbdd_17cfd46e",
       "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "7779b886_cc0f8c0c",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-01T07:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "338a1381_fec1c8e6",
+      "range": {
+        "startLine": 363,
+        "startChar": 8,
+        "endLine": 363,
+        "endChar": 11
+      },
+      "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02a4f604_388c1a12",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 5
@@ -107,6 +203,24 @@
       "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e354d018_72eef77f",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-01T07:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02a4f604_388c1a12",
+      "revId": "db02d08489ae0c7a5448198ee63a676d3c4585b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
