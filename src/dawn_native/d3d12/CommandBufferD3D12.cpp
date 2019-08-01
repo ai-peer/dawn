@@ -154,51 +154,85 @@ namespace dawn_native { namespace d3d12 {
                           uint32_t dynamicOffsetCount,
                           uint64_t* dynamicOffsets,
                           bool force = false) {
-            if (mBindGroups[index] != group || force) {
-                mBindGroups[index] = group;
-                uint32_t currentDynamicBufferIndex = 0;
-
-                const BindGroupLayout::LayoutBindingInfo& layout =
-                    group->GetLayout()->GetBindingInfo();
-                for (uint32_t bindingIndex : IterateBitSet(layout.dynamic)) {
-                    ASSERT(dynamicOffsetCount > 0);
-                    uint32_t parameterIndex =
-                        pipelineLayout->GetDynamicRootParameterIndex(index, bindingIndex);
-                    BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
-
-                    // Calculate buffer locations that root descriptors links to. The location is
-                    // (base buffer location + initial offset + dynamic offset)
-                    uint64_t offset = dynamicOffsets[currentDynamicBufferIndex++] + binding.offset;
-                    D3D12_GPU_VIRTUAL_ADDRESS bufferLocation =
-                        ToBackend(binding.buffer)->GetVA() + offset;
-
-                    switch (layout.types[bindingIndex]) {
-                        case dawn::BindingType::UniformBuffer:
-                            if (mInCompute) {
-                                commandList->SetComputeRootConstantBufferView(parameterIndex,
-                                                                              bufferLocation);
-                            } else {
-                                commandList->SetGraphicsRootConstantBufferView(parameterIndex,
-                                                                               bufferLocation);
-                            }
+            // Always try to apply dynamic offsets even if the bidgroup stays the same
+            if (dynamicOffsetCount) {
+                // Avoid useless root descriptor updates to reduce udate frequency of root
+                // signature. Update dynamic offsets in below situations:
+                // 1. force update
+                // 2. bind this group first time
+                // 3. new dynamic offsets are different from last time.
+                bool updateDynamicOffsets = false;
+                if (force) {
+                    updateDynamicOffsets = true;
+                } else if (!mGroupsWithInheritedDynamicOffsets[index]) {
+                    updateDynamicOffsets = true;
+                } else {
+                    for (uint32_t i = 0; i < dynamicOffsetCount; ++i) {
+                        if (mLastDynamicOffsets[index][i] != dynamicOffsets[i]) {
+                            updateDynamicOffsets = true;
                             break;
-                        case dawn::BindingType::StorageBuffer:
-                            if (mInCompute) {
-                                commandList->SetComputeRootUnorderedAccessView(parameterIndex,
-                                                                               bufferLocation);
-                            } else {
-                                commandList->SetGraphicsRootUnorderedAccessView(parameterIndex,
-                                                                                bufferLocation);
-                            }
-                            break;
-                        case dawn::BindingType::SampledTexture:
-                        case dawn::BindingType::Sampler:
-                        case dawn::BindingType::StorageTexture:
-                        case dawn::BindingType::ReadonlyStorageBuffer:
-                            UNREACHABLE();
-                            break;
+                        }
                     }
                 }
+
+                if (updateDynamicOffsets) {
+                    // Update dynamic offsets
+                    const BindGroupLayout::LayoutBindingInfo& layout =
+                        group->GetLayout()->GetBindingInfo();
+                    uint32_t currentDynamicBufferIndex = 0;
+
+                    for (uint32_t bindingIndex : IterateBitSet(layout.dynamic)) {
+                        ASSERT(dynamicOffsetCount > 0);
+                        uint32_t parameterIndex =
+                            pipelineLayout->GetDynamicRootParameterIndex(index, bindingIndex);
+                        BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
+
+                        // Calculate buffer locations that root descriptors links to. The location
+                        // is (base buffer location + initial offset + dynamic offset)
+                        uint64_t dynamicOffset = dynamicOffsets[currentDynamicBufferIndex];
+                        uint64_t offset = binding.offset + dynamicOffset;
+                        D3D12_GPU_VIRTUAL_ADDRESS bufferLocation =
+                            ToBackend(binding.buffer)->GetVA() + offset;
+
+                        switch (layout.types[bindingIndex]) {
+                            case dawn::BindingType::UniformBuffer:
+                                if (mInCompute) {
+                                    commandList->SetComputeRootConstantBufferView(parameterIndex,
+                                                                                  bufferLocation);
+                                } else {
+                                    commandList->SetGraphicsRootConstantBufferView(parameterIndex,
+                                                                                   bufferLocation);
+                                }
+                                break;
+                            case dawn::BindingType::StorageBuffer:
+                                if (mInCompute) {
+                                    commandList->SetComputeRootUnorderedAccessView(parameterIndex,
+                                                                                   bufferLocation);
+                                } else {
+                                    commandList->SetGraphicsRootUnorderedAccessView(parameterIndex,
+                                                                                    bufferLocation);
+                                }
+                                break;
+                            case dawn::BindingType::SampledTexture:
+                            case dawn::BindingType::Sampler:
+                            case dawn::BindingType::StorageTexture:
+                            case dawn::BindingType::ReadonlyStorageBuffer:
+                                UNREACHABLE();
+                                break;
+                        }
+
+                        // Record current dynamic offsets for inheriting
+                        mLastDynamicOffsets[index][currentDynamicBufferIndex] = dynamicOffset;
+                        ++currentDynamicBufferIndex;
+                    }
+
+                    // Mark this group as contatining dynamic offsets value
+                    mGroupsWithInheritedDynamicOffsets.set(index);
+                }
+            }
+
+            if (mBindGroups[index] != group || force) {
+                mBindGroups[index] = group;
                 uint32_t cbvUavSrvCount =
                     ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount();
                 uint32_t samplerCount = ToBackend(group->GetLayout())->GetSamplerDescriptorCount();
@@ -244,12 +278,11 @@ namespace dawn_native { namespace d3d12 {
             for (uint32_t i = 0; i < inheritUntil; ++i) {
                 const BindGroupLayout* layout = ToBackend(mBindGroups[i]->GetLayout());
                 const uint32_t dynamicBufferCount = layout->GetDynamicBufferCount();
-                // TODO(shaobo.yan@intel.com) : Need to handle dynamic resources inherited with last
-                // dynamic offsets.
+
+                // Inherit dynamic offsets
                 if (dynamicBufferCount > 0) {
-                    std::vector<uint64_t> zeroOffsets(dynamicBufferCount, 0);
                     SetBindGroup(commandList, newLayout, mBindGroups[i], i, dynamicBufferCount,
-                                 zeroOffsets.data(), true);
+                                 mLastDynamicOffsets[i].data(), true);
                 } else {
                     SetBindGroup(commandList, newLayout, mBindGroups[i], i, 0, nullptr, true);
                 }
@@ -280,6 +313,8 @@ namespace dawn_native { namespace d3d12 {
         uint32_t mSamplerDescriptorHeapSize = 0;
         std::array<BindGroup*, kMaxBindGroups> mBindGroups = {};
         std::deque<BindGroup*> mBindGroupsList = {};
+        std::array<std::array<uint64_t, kMaxBindingsPerGroup>, kMaxBindGroups> mLastDynamicOffsets;
+        std::bitset<kMaxBindGroups> mGroupsWithInheritedDynamicOffsets;
         bool mInCompute = false;
 
         DescriptorHeapHandle mCbvSrvUavGPUDescriptorHeap = {};
@@ -805,9 +840,11 @@ namespace dawn_native { namespace d3d12 {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     BindGroup* group = ToBackend(cmd->group.Get());
                     uint64_t* dynamicOffsets = nullptr;
+
                     if (cmd->dynamicOffsetCount > 0) {
                         dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
                     }
+
                     bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index,
                                                  cmd->dynamicOffsetCount, dynamicOffsets);
                 } break;
@@ -1068,6 +1105,7 @@ namespace dawn_native { namespace d3d12 {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
                     BindGroup* group = ToBackend(cmd->group.Get());
                     uint64_t* dynamicOffsets = nullptr;
+
                     if (cmd->dynamicOffsetCount > 0) {
                         dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
                     }
