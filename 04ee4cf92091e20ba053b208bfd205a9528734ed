@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9044221_04b904f4",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-01T04:35:08Z",
+      "side": 1,
+      "message": "If the texture has an integer / unsigned integer format, then only NEAREST sampler is allowed.\nIt seems all the tests with integer / unsigned integer format can pass if you use NEAREST here on Intel OpenGL drivers.",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 83
+      },
+      "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
