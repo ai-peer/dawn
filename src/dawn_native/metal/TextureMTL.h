@@ -40,11 +40,13 @@ namespace dawn_native { namespace metal {
         ~Texture();
 
         id<MTLTexture> GetMTLTexture();
+        dawn::TextureFormat GetInternalFormat();
 
       private:
         void DestroyImpl() override;
 
         id<MTLTexture> mMtlTexture = nil;
+        dawn::TextureFormat mInternalFormat;
     };
 
     class TextureView : public TextureViewBase {
