@@ -22,6 +22,30 @@
       "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b24426c1_157aa939",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-01T10:54:33Z",
+      "side": 1,
+      "message": "According to Table 59 in Vulkan SPEC, VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT is not required to be supported for VK_FORMAT_R8_UINT, VK_FORMAT_R8_SINT, VK_FORMAT_R8G8_UINT, VK_FORMAT_R8G8_SINT, etc. I think we should add such validation in Dawn to forbid using linear filters on the textures with integer and unsigned integer format.",
+      "parentUuid": "a9044221_04b904f4",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 83
+      },
+      "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
