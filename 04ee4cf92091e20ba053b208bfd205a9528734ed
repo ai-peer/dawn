@@ -70,6 +70,30 @@
       "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f487378_bb9ad9da",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-01T13:13:27Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to add another member to the GPUBindGroupLayoutBinding that tells the \"type\" of the texture. \n\nAccording to https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdDraw.html, the validation is done before the draw call. At that time we can know which sampler will be used on which texture from the shaders and bind groups, and thus we can check if a linear sampler is applied on a texture whose format does not support linear filtering.",
+      "parentUuid": "345ea556_2615f97d",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 83
+      },
+      "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
