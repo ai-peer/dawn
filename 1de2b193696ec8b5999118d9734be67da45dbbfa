@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "cdb25d85_718b9792",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-01T17:47:26Z",
+      "side": 1,
+      "message": "Should this be done after checking the vendor id? Right now we can never test a software rasterizer.",
+      "range": {
+        "startLine": 346,
+        "startChar": 16,
+        "endLine": 348,
+        "endChar": 17
+      },
+      "revId": "1de2b193696ec8b5999118d9734be67da45dbbfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "147d44bf_aa11fceb",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 4
