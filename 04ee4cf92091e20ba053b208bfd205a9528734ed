@@ -46,6 +46,30 @@
       "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "345ea556_2615f97d",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T11:51:48Z",
+      "side": 1,
+      "message": "That\u0027s interesting. Ideally we shouldn\u0027t add these constraints to the API because if we wanted to validate it, we\u0027d have to add yet another member to the GPUBindGroupLayoutBinding that tells the \"type\" of the texture. We should investigate the validation constraint in Vulkan.\n\nThis can be fixed entirely in the GL backend by using nearest sampling when we use the texture.\n\nI also have a number of things I\u0027d like to change for texture formats, for example making snorm formats non-renderable as its not required by Vulkan but as follow up. Would that be ok?",
+      "parentUuid": "b24426c1_157aa939",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 83
+      },
+      "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
