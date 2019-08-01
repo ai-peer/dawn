@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95998f34_d3132d58",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T10:01:24Z",
+      "side": 1,
+      "message": "Applications should basically never send the exact same list of dynamic offsets, I don\u0027t think we should optimize for that. Basically updateDynamicOffsets should always be true, which leads to code simplifications.",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aec3f8e_ce217db5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T10:01:24Z",
+      "side": 1,
+      "message": "nit: We could have a kMaxDynamicOffsetPerGroup that\u0027s kMaxDynamicDynamicUniformBuffer + kMaxDynamicDynamicStorageBuffer",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "025cdbfe_16b4096e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T10:01:24Z",
+      "side": 1,
+      "message": "This wouldn\u0027t be needed.",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76758b20_e01f6703",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T10:01:24Z",
+      "side": 1,
+      "message": "sorry I meant ComPtr\u003cID3D12RootSignature\u003e GetRootSignature() const;",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
