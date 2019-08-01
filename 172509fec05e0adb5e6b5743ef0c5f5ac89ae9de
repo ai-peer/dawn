@@ -22,6 +22,30 @@
       "revId": "172509fec05e0adb5e6b5743ef0c5f5ac89ae9de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6459bfaf_45755e81",
+        "filename": "src/dawn_native/vulkan/VulkanFunctions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-01T17:39:09Z",
+      "side": 1,
+      "message": "Right, so I was thinking about this for a while. If you check the Vulkan spec for 1.1 it doesn\u0027t say anything about the KHR versions. However, the 1.1 + extensions spec says: \n\n\"All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. The original type, enum and command names are still available as aliases of the core functionality.\"\n\nSo this leads me to interpret that the code works as-is in 1.1. Then that only leaves the style question of if we want the KHR suffix in the codebase. My impression is that we are targeting 1.0 and using some extensions on top of that, so I\u0027m leaning towards keeping the KHR suffix. I think setting api to 1.1 is just a fix for getting these extensions enabled on more platforms, but we are still coding as if we were in 1.0. Thoughts?",
+      "parentUuid": "dc05eefc_9edaa481",
+      "range": {
+        "startLine": 79,
+        "startChar": 30,
+        "endLine": 79,
+        "endChar": 74
+      },
+      "revId": "172509fec05e0adb5e6b5743ef0c5f5ac89ae9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
