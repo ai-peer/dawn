@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "147d44bf_aa11fceb",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T11:10:53Z",
+      "side": 1,
+      "message": "nit: \"Skip filter for the OpenGL backend that only has one adapter anyway.\"",
+      "revId": "1de2b193696ec8b5999118d9734be67da45dbbfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

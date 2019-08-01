@@ -94,6 +94,30 @@
       "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b470b364_f3f325b5",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T11:10:53Z",
+      "side": 1,
+      "message": "I still don\u0027t understand, if you ask for a vendor ID but OpenGL uses a different one that\u0027s not correct either. You need to not run testing on the GL backend when it isn\u0027t the vendor ID you asked no?",
+      "parentUuid": "38088e0b_9b0708e6",
+      "range": {
+        "startLine": 350,
+        "startChar": 43,
+        "endLine": 350,
+        "endChar": 52
+      },
+      "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
