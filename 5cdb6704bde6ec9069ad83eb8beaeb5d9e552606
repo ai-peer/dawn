@@ -16,6 +16,24 @@
       "revId": "5cdb6704bde6ec9069ad83eb8beaeb5d9e552606",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fee3aa69_d36a78c5",
+        "filename": "src/utils/MetalBinding.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T17:56:52Z",
+      "side": 1,
+      "message": "Not really, that\u0027s not used in Chromium and needs to be rewritten at some point. This isn\u0027t using the IOSurface path.",
+      "parentUuid": "196a201d_303c6521",
+      "revId": "5cdb6704bde6ec9069ad83eb8beaeb5d9e552606",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
