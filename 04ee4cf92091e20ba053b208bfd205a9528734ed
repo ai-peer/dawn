@@ -94,6 +94,30 @@
       "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc5676b5_ae3ed6dc",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T14:04:31Z",
+      "side": 1,
+      "message": "In Vulkan and WebGPU the textures and samplers can be dynamically combined in the shader such that it isn\u0027t possible to know at drawcall time which combinations will be used.\n\nThe Vulkan doc you linked seems to indicate we need to add some validation on the WebGPU side, that\u0027s super unfortunate. We should raise this to the group.",
+      "parentUuid": "3f487378_bb9ad9da",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 83
+      },
+      "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
