@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "71282afd_0fbf4fd2",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3a0cbaf_80214da8",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c85a05a2_53fae003",
         "filename": "src/dawn_native/ResourceHeap.h",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d8e1e19_09413b37",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "c85a05a2_53fae003",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "eb6a2a89_78f3db7f",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7efefd24_85a790c7",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1fce754_d4195780",
         "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
         "patchSetId": 3
@@ -70,6 +130,24 @@
       "writtenOn": "2019-07-30T15:29:04Z",
       "side": 1,
       "message": "nit: This could be using DAWN_TRY_ASSIGN and CreateHeap return an ResultOrError\u003cResourceHeapBase*\u003e. This would also mean this Allocate would return ResultOrError\u003cResourceMemoryAllocation\u003e",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79fdbbb6_63e0434b",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Why wouldn\u0027t this also implement the \"client\" interface?",
+      "parentUuid": "b1fce754_d4195780",
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "3c19f3d7_90a0ef0c",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f2d6f3e9_eca69697",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08104d37_fe9c0254",
         "filename": "src/dawn_native/ResourceHeapAllocator.h",
         "patchSetId": 3
@@ -110,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "45e215e1_d3292268",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "08104d37_fe9c0254",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ef4c7ff_60d500a1",
         "filename": "src/dawn_native/ResourceHeapAllocator.h",
         "patchSetId": 3
@@ -124,6 +238,24 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f92a8fb2_dfd23926",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ef4c7ff_60d500a1",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -162,6 +294,24 @@
     },
     {
       "key": {
+        "uuid": "6d2d9d6b_7d3f3d8d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "SGTM. But I think we want release() not reset().",
+      "parentUuid": "f68d738c_12f4eea3",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2b43987_27797df1",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -196,6 +346,24 @@
     },
     {
       "key": {
+        "uuid": "20d574b4_07a3224f",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Accidentally merged.",
+      "parentUuid": "779aed4a_0cb0c6a9",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa39a0c1_deac5bf9",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 3
@@ -213,6 +381,24 @@
     },
     {
       "key": {
+        "uuid": "64680493_7273942e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa39a0c1_deac5bf9",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d6f6bef_2d01dd12",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 3
@@ -227,6 +413,24 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "584adcf7_89a07bd3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done \u0026 moved.",
+      "parentUuid": "9d6f6bef_2d01dd12",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -253,6 +457,30 @@
     },
     {
       "key": {
+        "uuid": "1877e2d0_296e0c53",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c294a7_acb29218",
+      "range": {
+        "startLine": 364,
+        "startChar": 1,
+        "endLine": 364,
+        "endChar": 62
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6af3f16_83d50b02",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 3
@@ -270,6 +498,24 @@
     },
     {
       "key": {
+        "uuid": "5ef2295d_320c2817",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6af3f16_83d50b02",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e4999a7_7d4aff73",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 3
@@ -281,6 +527,24 @@
       "writtenOn": "2019-07-30T15:29:04Z",
       "side": 1,
       "message": "nit: this should be merged in the previous include block.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7cb21c1_e1efe819",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Moved up to Line#24?",
+      "parentUuid": "7e4999a7_7d4aff73",
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -307,6 +571,30 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ab4660c_237ddaf2",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f770cfa4_27d4dfb0",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 31
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -397,6 +685,30 @@
     },
     {
       "key": {
+        "uuid": "78264e2a_d71c3839",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3aa9f59a_3c10c84d",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 83
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83d27f49_68d87462",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
         "patchSetId": 3
@@ -454,6 +766,24 @@
     },
     {
       "key": {
+        "uuid": "3a6c6a23_9acca4d7",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "These were separated as they will eventually allocate independently.",
+      "parentUuid": "63916a2e_057a1a6d",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "54009f9f_4a9db692",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
         "patchSetId": 3
@@ -477,6 +807,30 @@
     },
     {
       "key": {
+        "uuid": "9e8a7667_9e795f7e",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54009f9f_4a9db692",
+      "range": {
+        "startLine": 58,
+        "startChar": 42,
+        "endLine": 58,
+        "endChar": 61
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5064ab55_559bc9db",
         "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.cpp",
         "patchSetId": 3
@@ -488,6 +842,30 @@
       "writtenOn": "2019-07-31T22:45:03Z",
       "side": 1,
       "message": "Out of curiosity, why does GetD3D12Resource return a ComPtr\u003cID3D12Resource\u003e but GetD3D12Heap returns a ID3D12Heap*?",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e382910b_d417983d",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "Its for when a new resource is created on the same heap. It doesn\u0027t need to ref-count since the sub-allocator already tracks when the heap needs to be freed. However, the resource can be ref-counted by the client per usual as the heap would be a weak reference.",
+      "parentUuid": "5064ab55_559bc9db",
       "range": {
         "startLine": 28,
         "startChar": 4,
@@ -523,6 +901,30 @@
     },
     {
       "key": {
+        "uuid": "6201a3dc_bac9ff9a",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "It would use the same heap but with different resources.",
+      "parentUuid": "4223ae8f_d559f28f",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b3fe48d_46f4354e",
         "filename": "src/tests/unittests/ResourceAllocatorTests.cpp",
         "patchSetId": 3
@@ -537,6 +939,24 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca39a546_afb1fbbd",
+        "filename": "src/tests/unittests/ResourceAllocatorTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-01T18:43:37Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "2b3fe48d_46f4354e",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
