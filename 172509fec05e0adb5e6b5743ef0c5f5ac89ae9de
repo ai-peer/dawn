@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9032ac38_a2876c6e",
+        "filename": "src/dawn_native/vulkan/VulkanFunctions.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-02T17:55:17Z",
+      "side": 1,
+      "message": "Ah, I see, didn\u0027t realize this was controlling extension requests as well. It would be nice if we could detangle this somehow so we could use a single check here, but fine to leave as is for now.",
+      "parentUuid": "5700dd20_a42de74d",
+      "revId": "172509fec05e0adb5e6b5743ef0c5f5ac89ae9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc05eefc_9edaa481",
         "filename": "src/dawn_native/vulkan/VulkanFunctions.cpp",
         "patchSetId": 7
