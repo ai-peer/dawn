@@ -121,6 +121,15 @@ namespace dawn_native { namespace metal {
             }
         }
 
+        bool IOSurfaceFormatCompatibleWithFormat(wgpu::TextureFormat descriptorFormat,
+                                                 wgpu::TextureFormat surfaceFormat) {
+            return descriptorFormat == surfaceFormat ||
+                   (descriptorFormat == wgpu::TextureFormat::RGBA8Unorm &&
+                    surfaceFormat == wgpu::TextureFormat::BGRA8Unorm) ||
+                   (descriptorFormat == wgpu::TextureFormat::BGRA8Unorm &&
+                    surfaceFormat == wgpu::TextureFormat::RGBA8Unorm);
+        }
+
 #if defined(DAWN_PLATFORM_MACOS)
         MTLStorageMode kIOSurfaceStorageMode = MTLStorageModeManaged;
 #elif defined(DAWN_PLATFORM_IOS)
@@ -286,19 +295,20 @@ namespace dawn_native { namespace metal {
         wgpu::TextureFormat ioSurfaceFormat;
         DAWN_TRY_ASSIGN(ioSurfaceFormat,
                         GetFormatEquivalentToIOSurfaceFormat(IOSurfaceGetPixelFormat(ioSurface)));
-        if (descriptor->format != ioSurfaceFormat) {
-            return DAWN_VALIDATION_ERROR("IOSurface format doesn't match descriptor");
+        if (!IOSurfaceFormatCompatibleWithFormat(descriptor->format, ioSurfaceFormat)) {
+            return DAWN_VALIDATION_ERROR("IOSurface format isn't compatible with descriptor");
         }
 
         return {};
     }
 
-    MTLTextureDescriptor* CreateMetalTextureDescriptor(const TextureDescriptor* descriptor) {
+    MTLTextureDescriptor* CreateMetalTextureDescriptor(const TextureDescriptor* descriptor,
+                                                       wgpu::TextureFormat pixelFormat) {
         MTLTextureDescriptor* mtlDesc = [MTLTextureDescriptor new];
         mtlDesc.textureType = MetalTextureType(descriptor->dimension, descriptor->arrayLayerCount,
                                                descriptor->sampleCount);
         mtlDesc.usage = MetalTextureUsage(descriptor->usage);
-        mtlDesc.pixelFormat = MetalPixelFormat(descriptor->format);
+        mtlDesc.pixelFormat = MetalPixelFormat(pixelFormat);
 
         mtlDesc.width = descriptor->size.width;
         mtlDesc.height = descriptor->size.height;
@@ -315,7 +325,8 @@ namespace dawn_native { namespace metal {
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
         : TextureBase(device, descriptor, TextureState::OwnedInternal) {
-        MTLTextureDescriptor* mtlDesc = CreateMetalTextureDescriptor(descriptor);
+        MTLTextureDescriptor* mtlDesc =
+            CreateMetalTextureDescriptor(descriptor, descriptor->format);
         mMtlTexture = [device->GetMTLDevice() newTextureWithDescriptor:mtlDesc];
         [mtlDesc release];
     }
@@ -330,7 +341,10 @@ namespace dawn_native { namespace metal {
                      IOSurfaceRef ioSurface,
                      uint32_t plane)
         : TextureBase(device, descriptor, TextureState::OwnedInternal) {
-        MTLTextureDescriptor* mtlDesc = CreateMetalTextureDescriptor(descriptor);
+        wgpu::TextureFormat format =
+            GetFormatEquivalentToIOSurfaceFormat(IOSurfaceGetPixelFormat(ioSurface))
+                .AcquireSuccess();
+        MTLTextureDescriptor* mtlDesc = CreateMetalTextureDescriptor(descriptor, format);
         mtlDesc.storageMode = kIOSurfaceStorageMode;
         mMtlTexture = [device->GetMTLDevice() newTextureWithDescriptor:mtlDesc
                                                              iosurface:ioSurface

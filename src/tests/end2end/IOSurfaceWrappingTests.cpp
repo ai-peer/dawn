@@ -110,7 +110,8 @@ namespace {
 class IOSurfaceValidationTests : public IOSurfaceTestBase {
   public:
     IOSurfaceValidationTests() {
-        defaultIOSurface = CreateSinglePlaneIOSurface(10, 10, 'BGRA', 4);
+        BGRAIOSurface = CreateSinglePlaneIOSurface(10, 10, 'BGRA', 4);
+        RGBAIOSurface = CreateSinglePlaneIOSurface(10, 10, 'RGBA', 4);
 
         descriptor.dimension = wgpu::TextureDimension::e2D;
         descriptor.format = wgpu::TextureFormat::BGRA8Unorm;
@@ -123,14 +124,30 @@ class IOSurfaceValidationTests : public IOSurfaceTestBase {
 
   protected:
     wgpu::TextureDescriptor descriptor;
-    ScopedIOSurfaceRef defaultIOSurface;
+    ScopedIOSurfaceRef BGRAIOSurface;
+    ScopedIOSurfaceRef RGBAIOSurface;
 };
 
 // Test a successful wrapping of an IOSurface in a texture
 TEST_P(IOSurfaceValidationTests, Success) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    wgpu::Texture texture = WrapIOSurface(&descriptor, defaultIOSurface.get(), 0);
+    wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0);
     ASSERT_NE(texture.Get(), nullptr);
+}
+
+// Test a successful wrapping of an IOSurface in a texture with non-equal but compatible format
+TEST_P(IOSurfaceValidationTests, SuccessCompatible) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+    {
+        descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+        wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0);
+        ASSERT_NE(texture.Get(), nullptr);
+    }
+    {
+        descriptor.format = wgpu::TextureFormat::BGRA8Unorm;
+        wgpu::Texture texture = WrapIOSurface(&descriptor, RGBAIOSurface.get(), 0);
+        ASSERT_NE(texture.Get(), nullptr);
+    }
 }
 
 // Test an error occurs if the texture descriptor is invalid
@@ -138,16 +155,14 @@ TEST_P(IOSurfaceValidationTests, InvalidTextureDescriptor) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.nextInChain = this;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
 // Test an error occurs if the plane is too large
 TEST_P(IOSurfaceValidationTests, PlaneTooLarge) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 1));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 1));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -157,8 +172,7 @@ TEST_P(IOSurfaceValidationTests, DISABLED_InvalidTextureDimension) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.dimension = wgpu::TextureDimension::e2D;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -167,8 +181,7 @@ TEST_P(IOSurfaceValidationTests, InvalidMipLevelCount) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.mipLevelCount = 2;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -177,8 +190,7 @@ TEST_P(IOSurfaceValidationTests, InvalidArrayLayerCount) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.arrayLayerCount = 2;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -187,8 +199,7 @@ TEST_P(IOSurfaceValidationTests, InvalidSampleCount) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.sampleCount = 4;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -197,8 +208,7 @@ TEST_P(IOSurfaceValidationTests, InvalidWidth) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.size.width = 11;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -207,8 +217,7 @@ TEST_P(IOSurfaceValidationTests, InvalidHeight) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.size.height = 11;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -217,8 +226,7 @@ TEST_P(IOSurfaceValidationTests, InvalidFormat) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.format = wgpu::TextureFormat::R8Unorm;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapIOSurface(&descriptor, defaultIOSurface.get(), 0));
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapIOSurface(&descriptor, BGRAIOSurface.get(), 0));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -435,6 +443,44 @@ TEST_P(IOSurfaceUsageTests, ClearRGBA8IOSurface) {
 
     uint32_t data = 0x04030201;
     DoClearTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data));
+}
+
+// Test sampling from an RGBA8 texture backed by a BGRA8 IOSurface
+TEST_P(IOSurfaceUsageTests, SampleFromRGBA8BackedByBGRA8IOSurface) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, 'BGRA', 4);
+
+    uint32_t data = 0x01020304;  // Stored as (A, R, G, B)
+    DoSampleTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data),
+                 RGBA8(2, 3, 4, 1));
+}
+
+// Test clearing an RGBA8 texture backed by a BGRA8 IOSurface
+TEST_P(IOSurfaceUsageTests, ClearRGBA8BackedByBGRA8IOSurface) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, 'BGRA', 4);
+
+    uint32_t data = 0x04010203;
+    DoClearTest(ioSurface.get(), wgpu::TextureFormat::RGBA8Unorm, &data, sizeof(data));
+}
+
+// Test sampling from an BGRA8 texture backed by a RGBA8 IOSurface
+TEST_P(IOSurfaceUsageTests, SampleFromBGRA8BackedByRGBA8IOSurface) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, 'RGBA', 4);
+
+    uint32_t data = 0x01020304;  // Stored as (A, B, G, R)
+    DoSampleTest(ioSurface.get(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data),
+                 RGBA8(4, 3, 2, 1));
+}
+
+// Test clearing an BGRA8 texture backed by a RGBA8 IOSurface
+TEST_P(IOSurfaceUsageTests, ClearBGRA8BackedByRGBA8IOSurface) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+    ScopedIOSurfaceRef ioSurface = CreateSinglePlaneIOSurface(1, 1, 'RGBA', 4);
+
+    uint32_t data = 0x04030201;
+    DoClearTest(ioSurface.get(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data));
 }
 
 DAWN_INSTANTIATE_TEST(IOSurfaceValidationTests, MetalBackend);
