@@ -645,6 +645,30 @@
     },
     {
       "key": {
+        "uuid": "56d3bbe1_7009699a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-02T00:06:01Z",
+      "side": 1,
+      "message": "To my understanding, aliasing barriers are only needed when the heap is reused. Direct allocation does not reuse the heap.\n\nUsing committed resources in direct allocation would be an optimization for some hardware in cases sub-allocation cannot be used. Such as 1) allocation is too large or 2) sub-allocator failure. For 1) very large resources tend to be persisted where the cost would be amortized over many frames, and 2) only occurs when allocations near ~32GB or hit OOM. Both are unusual conditions to optimize.\n\nAre there other conditions that can be shared?",
+      "parentUuid": "0094d4f4_c529d24b",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "103fc416_bce66ffe",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
         "patchSetId": 3
