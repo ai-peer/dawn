@@ -118,6 +118,30 @@
       "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8fe0fe8_3204832c",
+        "filename": "src/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-02T02:01:07Z",
+      "side": 1,
+      "message": "In fact SPIR-V Cross can raise a compile error when texture sampling on integer formats, and if we use \"texture()\" instead of \"texelFetch()\" in this test we will get a compile error from SPIR-V Cross: \"There was a compiler error: Sampling non-float textures is not supported in HLSL.\"\n(https://github.com/KhronosGroup/SPIRV-Cross/blob/master/spirv_hlsl.cpp#L2638)\n\nIn HLSL shaders the textures should be declared with their formats. For example, Texture2D\u003cfloat4\u003e myTexture; Texture2D\u003cuint4\u003e myTexture2;\nAnd HLSL does not allow sampling from non-floating point texture formats, or we will get the following compile error from FXC:\n\"error X4582: cannot sample from non-floating point texture formats.\" (https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/hlsl-errors-and-warnings)\n\nSo I still think we should disallow using linear filters on the textures with non-float formats, and as SPIR-V Cross can catch such error we can also catch it in Dawn.",
+      "parentUuid": "dc5676b5_ae3ed6dc",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 83
+      },
+      "revId": "04ee4cf92091e20ba053b208bfd205a9528734ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
