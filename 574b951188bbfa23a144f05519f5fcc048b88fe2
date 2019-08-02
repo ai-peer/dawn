@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7341283e_a8a0bb2d",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T08:03:41Z",
+      "side": 0,
+      "message": "These should be using something like this in Chromium\u0027s DEPS https://cs.chromium.org/chromium/src/DEPS?q\u003dDEPS\u0026sq\u003dpackage:chromium\u0026dr\u003dC\u0026l\u003d343",
+      "revId": "574b951188bbfa23a144f05519f5fcc048b88fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
