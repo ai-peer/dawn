@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a562f3e3_8927cc4f",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T09:26:11Z",
+      "side": 0,
+      "message": "I\u0027m worried that moving this to the GetHeapProperties function splits logic related to the initial state of the buffer to two different places. Can we keep the determination of the initial resource state next to the place that computes the initial value of mLastUsage?\n\nIf need be we can add asserts that the initial d3d12 usage is correct in the allocate function.",
+      "revId": "271817784100310e8e694a537e2c036deaac6f46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

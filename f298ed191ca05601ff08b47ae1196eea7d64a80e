@@ -329,6 +329,24 @@
     },
     {
       "key": {
+        "uuid": "e31c5540_010787ba",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T09:26:11Z",
+      "side": 1,
+      "message": "This hasn\u0027t been addressed",
+      "parentUuid": "a2b43987_27797df1",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "779aed4a_0cb0c6a9",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -551,6 +569,24 @@
     },
     {
       "key": {
+        "uuid": "745eec40_539a6d2e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T09:26:11Z",
+      "side": 1,
+      "message": "Yep, although clang-format will move it to line 23",
+      "parentUuid": "d7cb21c1_e1efe819",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f770cfa4_27d4dfb0",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 3
@@ -693,6 +729,30 @@
     },
     {
       "key": {
+        "uuid": "50bace20_f638149c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T09:26:11Z",
+      "side": 1,
+      "message": "Do you have details on why committed resources could be faster? I\u0027m not able to find a reason why they would. There is a lot of hearsay in GPU performance where GPU vendors say one thing can be faster on their driver but brings only small benefits and balances out to be neutral benefits over all drivers.\n\nIMO this type of optimization should be undertaken when we have real-world benchmarks to test against otherwise it\u0027s difficult to justify the added code complexity (for just one of these things it might be ok, but all the little tentative optimizations add up).",
+      "parentUuid": "f9c533d5_c6e1c94e",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "103fc416_bce66ffe",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -768,6 +828,24 @@
       "writtenOn": "2019-07-30T15:29:04Z",
       "side": 1,
       "message": "Maybe we could centralizes these deferred freeing queues in d3d12::Device? D3D12::ReferenceUntilUnused is the relevant function.",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92d39ff5_88987261",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T09:26:11Z",
+      "side": 1,
+      "message": "This hasn\u0027t been addressed",
+      "parentUuid": "83d27f49_68d87462",
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
