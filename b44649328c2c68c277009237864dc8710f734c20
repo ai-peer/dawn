@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e1a9e19_8ed650f1",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T11:44:59Z",
+      "side": 1,
+      "message": "Oh sorry, we don\u0027t want to implement texture view format compatibility just yet. What I meant was that the following should be valid:\n\n - WrapIOSurface(BGRAIosurface, dawn::TextureFormat::RGBA8Unorm) -\u003e a texture that believes it is RGBA8Unorm\n - WrapIOSurface(RGBAIosurface, dawn::TextureFormat::BGRA8Unorm) -\u003e a texture that believes it is BGRA8Unorm\n\nThis removes the need for mInternalFormat and the TextureView changes. All that changes is the following:\n\n        DAWN_TRY_ASSIGN(ioSurfaceFormat,\n            GetFormatEquivalentToIOSurfaceFormat(IOSurfaceGetPixelFormat(ioSurface)));\n        if (descriptor-\u003eformat !\u003d ioSurfaceFormat) {\n            return DAWN_VALIDATION_ERROR(\"IOSurface format doesn\u0027t match descriptor\");\n        }\n\nbecomes\n\n        if (!IOSurfaceFormatCompatibleWithFormat(descriptor-\u003eformat, IOSurfaceGetPixelFormat(ioSurface))) {\n              return some error;\n        }",
+      "revId": "b44649328c2c68c277009237864dc8710f734c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
