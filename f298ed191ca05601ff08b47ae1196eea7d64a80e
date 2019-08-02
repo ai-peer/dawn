@@ -669,6 +669,30 @@
     },
     {
       "key": {
+        "uuid": "f9c533d5_c6e1c94e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-02T00:57:24Z",
+      "side": 1,
+      "message": "I been told that certain hardware/driver combinations can more efficiently manage committed resources over placed resources. \n\nI think we should continue to use placed resources in cases where we want to subdivide a heap. But in the case where a heap will only ever contain one placed resource, we should simply use a committed resource.",
+      "parentUuid": "56d3bbe1_7009699a",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "103fc416_bce66ffe",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -902,6 +926,30 @@
     },
     {
       "key": {
+        "uuid": "cf5ebe0a_a0633145",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-02T00:57:24Z",
+      "side": 1,
+      "message": "Thanks, that makes sense.",
+      "parentUuid": "e382910b_d417983d",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4223ae8f_d559f28f",
         "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
         "patchSetId": 3
@@ -937,6 +985,30 @@
       "side": 1,
       "message": "It would use the same heap but with different resources.",
       "parentUuid": "4223ae8f_d559f28f",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fc215d8_9fdb5ff4",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-02T00:57:24Z",
+      "side": 1,
+      "message": "In the future, I presume that the buffer object would continue to contain a ResourceMemoryAllocation. \n\nHow would the buffer get the corresponding ID3D12Resource from the allocation? I would have expected GetD3D12Resource to be method on the ResourceMemoryAllocation, not on the Heap. If the Buffer object asks the heap for the resource object, how does the heap object know which D3D12 resource to hand out if it aggregates multiple ones?",
+      "parentUuid": "6201a3dc_bac9ff9a",
       "range": {
         "startLine": 30,
         "startChar": 0,
