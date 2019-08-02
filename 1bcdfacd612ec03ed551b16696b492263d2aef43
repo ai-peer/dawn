@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8c4a2ed_c65e61d0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T09:29:13Z",
+      "side": 1,
+      "message": "nit: methods should be CamelCase, we can fix that in a different CL (I can do it after this lands if you want)",
+      "range": {
+        "startLine": 842,
+        "startChar": 64,
+        "endLine": 842,
+        "endChar": 65
+      },
+      "revId": "1bcdfacd612ec03ed551b16696b492263d2aef43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
