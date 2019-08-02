@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d006acbd_a1122e21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T17:43:40Z",
+      "side": 1,
+      "message": "Commit messages should usually be wrapped to 80 characters, I\u0027m surprised you editor doesn\u0027t do it for you.",
+      "revId": "54fdc8696152c7a2df496cc81630de0e00892656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1131dd75_c465d1d8",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T17:43:40Z",
+      "side": 1,
+      "message": "Can\u0027t that just use the format from the descriptor instead? We just checked it is compatible with the iosurface format.",
+      "revId": "54fdc8696152c7a2df496cc81630de0e00892656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
