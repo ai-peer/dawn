@@ -16,6 +16,24 @@
       "revId": "b44649328c2c68c277009237864dc8710f734c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b757e14b_a7f6ed08",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-02T15:53:30Z",
+      "side": 1,
+      "message": "Ahh, cool. I still had to pass in the iosurface format when creating the texture otherwise it would be flipped in chrome.",
+      "parentUuid": "9e1a9e19_8ed650f1",
+      "revId": "b44649328c2c68c277009237864dc8710f734c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
