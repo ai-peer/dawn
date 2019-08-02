@@ -69,6 +69,24 @@
       "revId": "54fdc8696152c7a2df496cc81630de0e00892656",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86a463f6_cbc3cbbd",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T18:06:35Z",
+      "side": 1,
+      "message": "My point is that in the case the descriptor says RGBA and we have a BGRA iosurface, we should create an RGBA texture from the iosurface. We don\u0027t need to pass the ioSurface format because it should be valid to create an RGBA Metal texture on top of a BGRA iosurface.",
+      "parentUuid": "a0251354_b131a37f",
+      "revId": "54fdc8696152c7a2df496cc81630de0e00892656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
