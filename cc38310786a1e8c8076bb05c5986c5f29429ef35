@@ -142,6 +142,30 @@
       "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6d0f594_7ee9e4d7",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-02T22:21:35Z",
+      "side": 1,
+      "message": "How about we perform adapter filtering inside of DawnTestEnvironment::SetUp()?\n\nI see here https://github.com/google/googletest/blob/master/googletest/docs/advanced.md#global-set-up-and-tear-down\n\n\"Now, when RUN_ALL_TESTS() is called, it first calls the SetUp() method of each environment object, then runs the tests if none of the environments reported fatal failures and GTEST_SKIP() was not called.\"\n\nSo if we do GTEST_SKIP() in the environment SetUp() instead of the test SetUp() we\u0027ll skip running all tests.\n\nDawnTestEnvironment::SetUp() {\n  dawn_native::Instance* instance \u003d gTestEnv-\u003eGetInstance();\n  std::vector\u003cdawn_native::Adapter\u003e adapters \u003d instance-\u003eGetAdapters();\n  \n  mAdapters \u003d FilterAdapters(adapters);\n  if (mAdapters.size() \u003d\u003d 0) {\n    GTEST_SKIP();\n  }\n}\n\nDawnTest::SetUp() {\n  // Iterate through gTestEnv-\u003emAdapters and prefer to select the discrete GPU.\n}",
+      "parentUuid": "9b617f43_ee294951",
+      "range": {
+        "startLine": 350,
+        "startChar": 43,
+        "endLine": 350,
+        "endChar": 52
+      },
+      "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
