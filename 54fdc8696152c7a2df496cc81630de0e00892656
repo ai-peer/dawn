@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "399373ee_489432bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-02T17:59:13Z",
+      "side": 1,
+      "message": "Weird... I think its because I\u0027m editing it on gerrit.",
+      "parentUuid": "d006acbd_a1122e21",
+      "revId": "54fdc8696152c7a2df496cc81630de0e00892656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1131dd75_c465d1d8",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2019-08-02T17:43:40Z",
       "side": 1,
       "message": "Can\u0027t that just use the format from the descriptor instead? We just checked it is compatible with the iosurface format.",
+      "revId": "54fdc8696152c7a2df496cc81630de0e00892656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0251354_b131a37f",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-02T17:59:13Z",
+      "side": 1,
+      "message": "In the case where descriptor says RGBA and we pass a BGRA iosurface, descriptor-\u003eformat \u003d RGBA while GetFormatEquivalentToIOSurfaceFormat(...) \u003d BGRA. So I think we either pass the iosurface format as part of the constructor arguments or get it like I did here. Or add something to the descriptor?",
+      "parentUuid": "1131dd75_c465d1d8",
       "revId": "54fdc8696152c7a2df496cc81630de0e00892656",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
