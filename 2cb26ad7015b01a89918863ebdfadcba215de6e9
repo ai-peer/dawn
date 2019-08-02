@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d4218832_169e34d7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T08:22:05Z",
+      "side": 1,
+      "message": "That\u0027s because it is the width that SPIRV-Cross uses in the generated code, and 64bit math can be expensive on the GPU (it is still rare in hardware AFAIK). Added a comment explaining this.",
+      "parentUuid": "ab618187_e09ae9d2",
+      "range": {
+        "startLine": 198,
+        "startChar": 32,
+        "endLine": 198,
+        "endChar": 40
+      },
+      "revId": "2cb26ad7015b01a89918863ebdfadcba215de6e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c777215_5acf3caf",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -133,6 +157,24 @@
       "revId": "2cb26ad7015b01a89918863ebdfadcba215de6e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c691d9b_f648db28",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T08:22:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c777215_5acf3caf",
+      "revId": "2cb26ad7015b01a89918863ebdfadcba215de6e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +198,30 @@
       "revId": "2cb26ad7015b01a89918863ebdfadcba215de6e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f8984b4_90869155",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-02T08:22:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0201b0b_7e6de72b",
+      "range": {
+        "startLine": 672,
+        "startChar": 35,
+        "endLine": 672,
+        "endChar": 54
+      },
+      "revId": "2cb26ad7015b01a89918863ebdfadcba215de6e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
