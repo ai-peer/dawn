@@ -242,6 +242,30 @@
     },
     {
       "key": {
+        "uuid": "69c2414e_318fe540",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-02T19:19:55Z",
+      "side": 1,
+      "message": "See remarks in getresourceallocationinfo (note: this change is specific to buffers).",
+      "parentUuid": "61570564_4bfaec1d",
+      "range": {
+        "startLine": 124,
+        "startChar": 43,
+        "endLine": 124,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab3cabd2_e5106cd8",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
         "patchSetId": 4
