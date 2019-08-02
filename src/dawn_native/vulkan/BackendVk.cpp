@@ -80,6 +80,9 @@ namespace dawn_native { namespace vulkan {
 
         DAWN_TRY_ASSIGN(mPhysicalDevices, GetPhysicalDevices(*this));
 
+        mExternalSemaphoreService = external_semaphore::GeneratePlatformService();
+        mExternalMemoryService = external_memory::GeneratePlatformService();
+
         return {};
     }
 
@@ -237,6 +240,14 @@ namespace dawn_native { namespace vulkan {
         }
 
         return backend;
+    }
+
+    external_semaphore::Service* Backend::GetExternalSemaphoreService() {
+        return mExternalSemaphoreService.get();
+    }
+
+    external_memory::Service* Backend::GetExternalMemoryService() {
+        return mExternalMemoryService.get();
     }
 
 }}  // namespace dawn_native::vulkan

@@ -21,6 +21,9 @@
 #include "dawn_native/vulkan/VulkanFunctions.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
 
+#include "dawn_native/vulkan/external_memory/MemoryService.h"
+#include "dawn_native/vulkan/external_semaphore/SemaphoreService.h"
+
 namespace dawn_native { namespace vulkan {
 
     class Backend : public BackendConnection {
@@ -35,6 +38,9 @@ namespace dawn_native { namespace vulkan {
         MaybeError Initialize();
 
         std::vector<std::unique_ptr<AdapterBase>> DiscoverDefaultAdapters() override;
+
+        external_semaphore::Service* GetExternalSemaphoreService();
+        external_memory::Service* GetExternalMemoryService();
 
       private:
         ResultOrError<VulkanGlobalKnobs> CreateInstance();
@@ -58,6 +64,9 @@ namespace dawn_native { namespace vulkan {
         VkDebugReportCallbackEXT mDebugReportCallback = VK_NULL_HANDLE;
 
         std::vector<VkPhysicalDevice> mPhysicalDevices;
+
+        std::unique_ptr<external_semaphore::Service> mExternalSemaphoreService;
+        std::unique_ptr<external_memory::Service> mExternalMemoryService;
     };
 
 }}  // namespace dawn_native::vulkan
