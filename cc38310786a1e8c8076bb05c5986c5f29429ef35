@@ -118,6 +118,30 @@
       "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b617f43_ee294951",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-08-02T10:56:43Z",
+      "side": 1,
+      "message": "I also tried this way when I submitted the path for adding the filter of vendor id (https://dawn-review.googlesource.com/c/dawn/+/8460/4/src/tests/DawnTest.cpp#351). But all test suites and test arguments are initialized before we choose the adapter, if we want to skip a OpenGL tests at runtime when choosing another GPU, we can use GTEST_SKIP() which could mark current test is skipped.\nvoid DawnTest::SetUp() {\n    ...\n    if(HasVendorIdFilter()) {\n        if (adapter.GetPCIInfo().vendorId \u003d\u003d GetVendorIdFilter()) {\n            backendAdapter \u003d adapter;\n            break;\n        }\n        if(IsOpenGL()) {\n            GTEST_SKIP();\n            return;\n        }\n        continue;\n   }\n   ...\n}\n\nUnfortunately this way does not work for these end2end tests overrided DawnTest::SetUp(), for example in the ColorStateTest.cpp:\nvoid SetUp() override {\n    DawnTest::SetUp();\n    ...\n    renderPass \u003d utils::CreateBasicRenderPass(device, kRTSize, kRTSize);\n}\n\nThis test for OpenGL isn\u0027t skipped but crash because there is no available device created for OpenGL if we choose integrated GPU on dual GPU system, so it\u0027s difficut to skip these tests in that case.\n\nAn ugly implementation is add IsSkippedTest() in DawnTest and call it in tests which override  DawnTest::SetUp(). How do you think about this?",
+      "parentUuid": "b470b364_f3f325b5",
+      "range": {
+        "startLine": 350,
+        "startChar": 43,
+        "endLine": 350,
+        "endChar": 52
+      },
+      "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
