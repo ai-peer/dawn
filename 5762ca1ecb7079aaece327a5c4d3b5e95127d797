@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "288ac70d_a3c64706",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-02T07:31:52Z",
+      "side": 1,
+      "message": "nit: EncodeRenderPass uses `auto`, but the type is short enough that we can use `char*`",
+      "range": {
+        "startLine": 665,
+        "startChar": 20,
+        "endLine": 665,
+        "endChar": 24
+      },
+      "revId": "5762ca1ecb7079aaece327a5c4d3b5e95127d797",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15a5ad2d_83b43fe0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-02T07:31:52Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 680,
+        "startChar": 20,
+        "endLine": 680,
+        "endChar": 24
+      },
+      "revId": "5762ca1ecb7079aaece327a5c4d3b5e95127d797",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
