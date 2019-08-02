@@ -46,6 +46,30 @@
       "revId": "1bcdfacd612ec03ed551b16696b492263d2aef43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dc7b90a_c887893e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-08-02T09:37:54Z",
+      "side": 1,
+      "message": "See https://dawn-review.googlesource.com/c/dawn/+/9681",
+      "parentUuid": "89f37920_df26e758",
+      "range": {
+        "startLine": 842,
+        "startChar": 64,
+        "endLine": 842,
+        "endChar": 65
+      },
+      "revId": "1bcdfacd612ec03ed551b16696b492263d2aef43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
