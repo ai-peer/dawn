@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "acdbdbb5_989a2704",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-02T17:45:31Z",
+      "side": 1,
+      "message": "bind group (or bindgroup)",
+      "range": {
+        "startLine": 157,
+        "startChar": 63,
+        "endLine": 157,
+        "endChar": 71
+      },
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "95998f34_d3132d58",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -13,6 +36,24 @@
       "writtenOn": "2019-08-01T10:01:24Z",
       "side": 1,
       "message": "Applications should basically never send the exact same list of dynamic offsets, I don\u0027t think we should optimize for that. Basically updateDynamicOffsets should always be true, which leads to code simplifications.",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32b59128_c5708478",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-02T17:45:31Z",
+      "side": 1,
+      "message": "+1, it should be quite a lot simpler and I would prefer that.",
+      "parentUuid": "95998f34_d3132d58",
       "revId": "cd830762e71340af175077d82734636ad97ca282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
