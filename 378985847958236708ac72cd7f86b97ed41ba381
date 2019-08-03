@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97cc3175_d6bbd0d2",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-03T01:12:24Z",
+      "side": 1,
+      "message": "Ran into some issues with this validation. I think it should just be:\ndynamicOffsets[i] \u003e\u003d bufferBinding.size - bufferBinding.offset\n?",
+      "range": {
+        "startLine": 119,
+        "startChar": 16,
+        "endLine": 119,
+        "endChar": 91
+      },
+      "revId": "378985847958236708ac72cd7f86b97ed41ba381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
