@@ -25,6 +25,9 @@
 #include "dawn_native/vulkan/VulkanFunctions.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
 
+#include "dawn_native/vulkan/external_memory/MemoryService.h"
+#include "dawn_native/vulkan/external_semaphore/SemaphoreService.h"
+
 #include <memory>
 #include <queue>
 
@@ -78,6 +81,23 @@ namespace dawn_native { namespace vulkan {
                                            BufferBase* destination,
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
+
+        TextureBase* CreateTextureWrappingVulkanImage(
+            const TextureDescriptor* descriptor,
+            ExternalHandle memoryHandle,
+            VkDeviceSize allocationSize,
+            uint32_t memoryTypeIndex,
+            const std::vector<ExternalHandle>& waitHandles);
+
+        MaybeError CreateExportableSemaphore(VkSemaphore* outSemaphore);
+
+        MaybeError ImportSemaphore(const ExternalHandle& handle, VkSemaphore* outSemaphore);
+        MaybeError ExportSemaphore(VkSemaphore semaphore, ExternalHandle* outHandle);
+
+        MaybeError ImportImageMemory(ExternalHandle handle,
+                                     VkDeviceSize allocationSize,
+                                     uint32_t memoryTypeIndex,
+                                     VkDeviceMemory* outAllocation);
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -143,8 +163,10 @@ namespace dawn_native { namespace vulkan {
         SerialQueue<CommandPoolAndBuffer> mCommandsInFlight;
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
-
         CommandRecordingContext mRecordingContext;
+
+        external_semaphore::Service mExternalSemaphoreService;
+        external_memory::Service mExternalMemoryService;
     };
 
 }}  // namespace dawn_native::vulkan

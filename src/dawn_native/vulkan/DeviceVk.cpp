@@ -18,6 +18,7 @@
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/Error.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/BackendVk.h"
@@ -567,5 +568,77 @@ namespace dawn_native { namespace vulkan {
                                ToBackend(destination)->GetHandle(), 1, &copy);
 
         return {};
+    }
+
+    MaybeError Device::ImportSemaphore(const ExternalHandle& handle, VkSemaphore* outSemaphore) {
+        DAWN_TRY_ASSIGN(*outSemaphore, mExternalSemaphoreService.ImportSemaphore(this, handle));
+        return {};
+    }
+
+    MaybeError Device::CreateExportableSemaphore(VkSemaphore* outSemaphore) {
+        DAWN_TRY_ASSIGN(*outSemaphore, mExternalSemaphoreService.CreateExportableSemaphore(this));
+        return {};
+    }
+
+    MaybeError Device::ExportSemaphore(VkSemaphore semaphore, ExternalHandle* outHandle) {
+        DAWN_TRY_ASSIGN(*outHandle, mExternalSemaphoreService.ExportSemaphore(this, semaphore));
+        return {};
+    }
+
+    MaybeError Device::ImportImageMemory(ExternalHandle handle,
+                                         VkDeviceSize allocationSize,
+                                         uint32_t memoryTypeIndex,
+                                         VkDeviceMemory* outAllocation) {
+        DAWN_TRY_ASSIGN(*outAllocation, mExternalMemoryService.ImportImageMemory(
+                                            this, handle, allocationSize, memoryTypeIndex));
+        return {};
+    }
+
+    TextureBase* Device::CreateTextureWrappingVulkanImage(
+        const TextureDescriptor* descriptor,
+        ExternalHandle memoryHandle,
+        VkDeviceSize allocationSize,
+        uint32_t memoryTypeIndex,
+        const std::vector<ExternalHandle>& waitHandles) {
+        if (ConsumedError(ValidateTextureDescriptor(this, descriptor))) {
+            return nullptr;
+        }
+        if (ConsumedError(ValidateVulkanImageCanBeWrapped(this, descriptor))) {
+            return nullptr;
+        }
+
+        if (!mExternalSemaphoreService.Supported() || !mExternalMemoryService.Supported()) {
+            return nullptr;
+        }
+
+        VkSemaphore signalSemaphore;
+        if (ConsumedError(CreateExportableSemaphore(&signalSemaphore))) {
+            return nullptr;
+        }
+
+        VkDeviceMemory allocation;
+        if (ConsumedError(
+                ImportImageMemory(memoryHandle, allocationSize, memoryTypeIndex, &allocation))) {
+            return nullptr;
+        }
+
+        bool importSuccess = true;
+        std::vector<VkSemaphore> semaphores;
+        for (const ExternalHandle& handle : waitHandles) {
+            VkSemaphore semaphore;
+            if (ConsumedError(ImportSemaphore(handle, &semaphore))) {
+                importSuccess = false;
+            }
+        }
+
+        if (!importSuccess) {
+            // Clear any wait semaphores we were able to import
+            for (VkSemaphore semaphore : semaphores) {
+                fn.DestroySemaphore(GetVkDevice(), semaphore, nullptr);
+            }
+            return nullptr;
+        }
+
+        return new Texture(this, descriptor, semaphores, signalSemaphore, allocation);
     }
 }}  // namespace dawn_native::vulkan
