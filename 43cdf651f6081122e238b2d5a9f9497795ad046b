@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48d0339c_595eabe7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-05T17:38:48Z",
+      "side": 1,
+      "message": "nit: With the latest patch, we always update dynamic offsets, even if they didn\u0027t change.",
+      "range": {
+        "startLine": 18,
+        "startChar": 65,
+        "endLine": 19,
+        "endChar": 60
+      },
+      "revId": "43cdf651f6081122e238b2d5a9f9497795ad046b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
