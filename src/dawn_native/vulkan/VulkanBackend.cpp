@@ -24,6 +24,7 @@
 #include "common/SwapChainUtils.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/NativeSwapChainImplVk.h"
+#include "dawn_native/vulkan/TextureVk.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -50,6 +51,34 @@ namespace dawn_native { namespace vulkan {
         const DawnSwapChainImplementation* swapChain) {
         NativeSwapChainImpl* impl = reinterpret_cast<NativeSwapChainImpl*>(swapChain->userData);
         return static_cast<DawnTextureFormat>(impl->GetPreferredFormat());
+    }
+
+    DawnTexture WrapVulkanImage(DawnDevice cDevice,
+                                const DawnTextureDescriptor* cDescriptor,
+                                ExternalHandle memoryHandle,
+                                VkDeviceSize allocationSize,
+                                uint32_t memoryTypeIndex,
+                                const std::vector<ExternalHandle>& waitFds) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        const TextureDescriptor* descriptor =
+            reinterpret_cast<const TextureDescriptor*>(cDescriptor);
+        TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+            descriptor, memoryHandle, allocationSize, memoryTypeIndex, waitFds);
+        return reinterpret_cast<DawnTexture>(texture);
+    }
+
+    // Extracts signal semaphore into a file descriptor, for synchronizing texture usage
+    ExternalHandle ExportSignalSemaphore(DawnDevice cDevice, DawnTexture cTexture) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        Texture* texture = reinterpret_cast<Texture*>(cTexture);
+        VkSemaphore signalSemaphore = texture->SignalAndDestroy();
+
+        ExternalHandle outHandle;
+        if (device->ConsumedError(device->ExportSemaphore(signalSemaphore, &outHandle))) {
+            ASSERT(false);
+        }
+
+        return outHandle;
     }
 
 }}  // namespace dawn_native::vulkan
