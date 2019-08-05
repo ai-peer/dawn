@@ -154,7 +154,7 @@ namespace dawn_native { namespace d3d12 {
                           uint32_t dynamicOffsetCount,
                           uint64_t* dynamicOffsets,
                           bool force = false) {
-            if (mBindGroups[index] != group || force) {
+            if (mBindGroups[index] != group || force || dynamicOffsetCount != 0) {
                 mBindGroups[index] = group;
                 uint32_t currentDynamicBufferIndex = 0;
 
