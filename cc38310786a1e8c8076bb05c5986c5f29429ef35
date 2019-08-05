@@ -166,6 +166,30 @@
       "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ef1f2cf_cafa282a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-08-05T08:55:17Z",
+      "side": 1,
+      "message": "Thanks for your suggestion, I tried this way, but it seems that GTEST_SKIP() cannot skip tests during environment SetUp(). The \"GTEST_SKIP()\" said in the sentence of \"runs the tests if none of the environments reported fatal failures and GTEST_SKIP() was not called.\" should reference these in the test class.",
+      "parentUuid": "e6d0f594_7ee9e4d7",
+      "range": {
+        "startLine": 350,
+        "startChar": 43,
+        "endLine": 350,
+        "endChar": 52
+      },
+      "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
