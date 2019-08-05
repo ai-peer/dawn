@@ -393,7 +393,24 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/VulkanFunctions.h",
       "src/dawn_native/vulkan/VulkanInfo.cpp",
       "src/dawn_native/vulkan/VulkanInfo.h",
+      "src/dawn_native/vulkan/external_memory/MemoryService.cpp",
+      "src/dawn_native/vulkan/external_memory/MemoryService.h",
+      "src/dawn_native/vulkan/external_memory/MemoryServiceNull.cpp",
+      "src/dawn_native/vulkan/external_memory/MemoryServiceNull.h",
+      "src/dawn_native/vulkan/external_semaphore/SemaphoreService.cpp",
+      "src/dawn_native/vulkan/external_semaphore/SemaphoreService.h",
+      "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceNull.cpp",
+      "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceNull.h",
     ]
+
+    if (is_linux) {
+      sources += [
+        "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.h",
+        "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp",
+        "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceOpaqueFD.h",
+      ]
+    }
   }
 }
 
@@ -726,6 +743,48 @@ test("dawn_end2end_tests") {
     sources += [ "src/tests/end2end/IOSurfaceWrappingTests.cpp" ]
 
     libs += [ "IOSurface.framework" ]
+  }
+
+  if (is_linux && dawn_enable_vulkan) {
+    deps += [ "third_party:vulkan_headers" ]
+
+    sources += [ "src/tests/end2end/VulkanImageWrappingValidationTests.cpp" ]
+  }
+
+  # When building inside Chromium, use their gtest main function because it is
+  # needed to run in swarming correctly.
+  if (build_with_chromium) {
+    sources += [ "//gpu/dawn_end2end_tests_main.cc" ]
+  } else {
+    sources += [ "src/tests/End2EndTestsMain.cpp" ]
+  }
+}
+
+test("dawn_white_box_tests") {
+  configs += [ "${dawn_root}/src/common:dawn_internal" ]
+
+  deps = [
+    ":dawn_utils",
+    ":libdawn_native",
+    ":libdawn_native_sources",
+    ":libdawn_wire",
+    "${dawn_root}/src/common",
+    "${dawn_root}/src/dawn:libdawn",
+    "third_party:glfw",
+    "third_party:gmock_and_gtest",
+  ]
+
+  sources = [
+    "src/tests/DawnTest.cpp",
+    "src/tests/DawnTest.h",
+  ]
+
+  libs = []
+
+  if (is_linux && dawn_enable_vulkan) {
+    deps += [ "third_party:vulkan_headers" ]
+
+    sources += [ "src/tests/whitebox/VulkanImageWrappingTests.cpp" ]
   }
 
   # When building inside Chromium, use their gtest main function because it is
