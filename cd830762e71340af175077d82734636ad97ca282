@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "481e2b7e_36e36b41",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-05T02:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acdbdbb5_989a2704",
+      "range": {
+        "startLine": 157,
+        "startChar": 63,
+        "endLine": 157,
+        "endChar": 71
+      },
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95998f34_d3132d58",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "7c9a43f9_04e95d35",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-05T02:12:17Z",
+      "side": 1,
+      "message": "Agree with the comments but has some comments about should basically never send the exact same list of dynamic offsets. Does this means we should add validation for this behaviour and report error? I think application shouldn\u0027t do this(set exact same list of dynamic offsets) but can do it(this means maybe we shouldn\u0027t add the validation). WDYT?",
+      "parentUuid": "32b59128_c5708478",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2aec3f8e_ce217db5",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -74,6 +116,24 @@
       "revId": "cd830762e71340af175077d82734636ad97ca282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00e34ec9_ebad5603",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-05T02:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aec3f8e_ce217db5",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "01b49e17_8d48eba9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-05T02:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "025cdbfe_16b4096e",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76758b20_e01f6703",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
         "patchSetId": 6
@@ -108,6 +186,24 @@
       "revId": "cd830762e71340af175077d82734636ad97ca282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0059b85d_a336cafa",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-05T02:12:17Z",
+      "side": 1,
+      "message": "Oops, sry. Done.",
+      "parentUuid": "76758b20_e01f6703",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
