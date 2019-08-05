@@ -22,6 +22,30 @@
       "revId": "378985847958236708ac72cd7f86b97ed41ba381",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b542329_8f3bbe50",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-05T02:55:21Z",
+      "side": 1,
+      "message": "Sorry, I was confused. This code is correct!",
+      "parentUuid": "97cc3175_d6bbd0d2",
+      "range": {
+        "startLine": 119,
+        "startChar": 16,
+        "endLine": 119,
+        "endChar": 91
+      },
+      "revId": "378985847958236708ac72cd7f86b97ed41ba381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
