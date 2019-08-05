@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "198b2db5_1e183027",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-05T02:47:26Z",
+      "side": 1,
+      "message": "unit: DynamicOffset -\u003e DynamicOffsets",
+      "range": {
+        "startLine": 46,
+        "startChar": 30,
+        "endLine": 46,
+        "endChar": 43
+      },
+      "revId": "cbd5fbd28251afe89daddabb15d061dfc81a48d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46a07f44_787d5a2f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-05T02:47:26Z",
+      "side": 1,
+      "message": "unit: Usually, the application",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "revId": "cbd5fbd28251afe89daddabb15d061dfc81a48d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4c34052_f9596f93",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-05T02:47:26Z",
+      "side": 1,
+      "message": "unit: the offsets stay",
+      "range": {
+        "startLine": 158,
+        "startChar": 66,
+        "endLine": 158,
+        "endChar": 82
+      },
+      "revId": "cbd5fbd28251afe89daddabb15d061dfc81a48d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

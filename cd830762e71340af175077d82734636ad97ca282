@@ -102,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "0c0085aa_6731d763",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-05T02:47:26Z",
+      "side": 1,
+      "message": "Yes, you are completely correct that an application shouldn\u0027t do this, but can do it. We shouldn\u0027t add validation for it.\n\nIt\u0027s uncommon that the same set of offsets will be used, so it\u0027s not important to optimize for that case right now.",
+      "parentUuid": "7c9a43f9_04e95d35",
+      "revId": "cd830762e71340af175077d82734636ad97ca282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2aec3f8e_ce217db5",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
