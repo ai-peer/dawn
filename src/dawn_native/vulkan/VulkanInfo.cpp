@@ -105,7 +105,9 @@ namespace dawn_native { namespace vulkan {
                 return DAWN_CONTEXT_LOST_ERROR("vkEnumerateInstanceExtensionProperties");
             }
 
+            printf("Instance exts\n");
             for (const auto& extension : info.extensions) {
+                printf("%s\n", extension.extensionName);
                 if (IsExtensionName(extension, kExtensionNameExtDebugReport)) {
                     info.debugReport = true;
                 }
@@ -239,7 +241,9 @@ namespace dawn_native { namespace vulkan {
                 return DAWN_CONTEXT_LOST_ERROR("vkEnumerateDeviceExtensionProperties");
             }
 
+            printf("Device exts\n");
             for (const auto& extension : info.extensions) {
+                printf("%s\n", extension.extensionName);
                 if (IsExtensionName(extension, kExtensionNameExtDebugMarker)) {
                     info.debugMarker = true;
                 }
