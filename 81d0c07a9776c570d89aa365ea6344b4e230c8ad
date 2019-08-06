@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37752b91_7b616272",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-06T21:32:20Z",
+      "side": 1,
+      "message": "Even though we\u0027re using ClearRenderTargetView, I think we should still consider it a \"lazy clear\".\n\nAlso, should this call SetIsSubresourceContentInitialized ?",
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4907465d_ae21b744",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-06T21:32:20Z",
+      "side": 1,
+      "message": "nit: We usually explicitly check pointers with \"ptr !\u003d nullptr\"",
+      "range": {
+        "startLine": 882,
+        "startChar": 20,
+        "endLine": 882,
+        "endChar": 31
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43311399_c14a6ad1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-06T21:32:20Z",
+      "side": 1,
+      "message": "Why do we need to initialize the resolve texture? Won\u0027t it be initialized when we resolve into it from the source color attachment?",
+      "range": {
+        "startLine": 884,
+        "startChar": 26,
+        "endLine": 884,
+        "endChar": 61
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
