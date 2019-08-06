@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90191e33_9e282956",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-06T17:50:14Z",
+      "side": 1,
+      "message": "Nit: Please rename to kMaxDynamicOffsetsPerBindGroup to make it clear which type of group you\u0027re referring to. Same goes for the comment.",
+      "range": {
+        "startLine": 45,
+        "startChar": 37,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "8a498a9e15d90b0b3c1d12f82a15f268f6a680fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d239763d_31529017",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-06T17:50:14Z",
+      "side": 1,
+      "message": "Nit: dynaic --\u003e dynamic.",
+      "range": {
+        "startLine": 45,
+        "startChar": 18,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "8a498a9e15d90b0b3c1d12f82a15f268f6a680fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
