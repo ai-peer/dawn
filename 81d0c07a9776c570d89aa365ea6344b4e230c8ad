@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5ff794ad_0cd9b960",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-06T21:55:37Z",
+      "side": 1,
+      "message": "Ah, I was thinking we would also count it on Vulkan, so right here and at [1] we would just do:\nGetDevice()-\u003eIncrementLazyClearCountForTesting();\n\nDid Corentin say that we should not count the standalone clear operations as lazy clears?",
+      "parentUuid": "2c32ca11_bbe39e5d",
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4907465d_ae21b744",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -124,6 +142,29 @@
         "startChar": 26,
         "endLine": 884,
         "endChar": 61
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13c6c5af_ce90290a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-06T21:55:37Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 215,
+        "startChar": 24,
+        "endLine": 215,
+        "endChar": 52
       },
       "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
