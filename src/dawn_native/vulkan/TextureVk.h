@@ -17,7 +17,7 @@
 
 #include "dawn_native/Texture.h"
 
-#include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/ExternalHandle.h"
 #include "dawn_native/vulkan/MemoryAllocator.h"
 
 namespace dawn_native { namespace vulkan {
@@ -28,10 +28,21 @@ namespace dawn_native { namespace vulkan {
     VkImageUsageFlags VulkanImageUsage(dawn::TextureUsageBit usage, const Format& format);
     VkSampleCountFlagBits VulkanSampleCount(uint32_t sampleCount);
 
+    MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase* device,
+                                               const TextureDescriptor* descriptor);
+
     class Texture : public TextureBase {
       public:
+        enum class ExternalState { None, PendingAcquire, Acquired, PendingRelease, Released };
+
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage);
+        Texture(Device* device,
+                const TextureDescriptor* descriptor,
+                const std::vector<VkSemaphore>& waitFds,
+                VkSemaphore signalSemaphore,
+                VkDeviceMemory externalMemoryAllocation,
+                bool isCleared);
         ~Texture();
 
         VkImage GetHandle() const;
@@ -48,6 +59,8 @@ namespace dawn_native { namespace vulkan {
                                                  uint32_t baseArrayLayer,
                                                  uint32_t layerCount);
 
+        MaybeError SignalAndDestroy(VkSemaphore* outSignalSemaphore);
+
       private:
         void DestroyImpl() override;
         void ClearTexture(CommandRecordingContext* recordingContext,
@@ -58,6 +71,12 @@ namespace dawn_native { namespace vulkan {
 
         VkImage mHandle = VK_NULL_HANDLE;
         DeviceMemoryAllocation mMemoryAllocation;
+        VkDeviceMemory mExternalAllocation = VK_NULL_HANDLE;
+
+        ExternalState mExternalState = ExternalState::None;
+        ExternalState mLastExternalState = ExternalState::None;
+        VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
+        std::vector<VkSemaphore> mWaitRequirements;
 
         // A usage of none will make sure the texture is transitioned before its first use as
         // required by the spec.
