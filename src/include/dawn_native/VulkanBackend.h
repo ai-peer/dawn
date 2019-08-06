@@ -23,12 +23,26 @@
 #include <vector>
 
 namespace dawn_native { namespace vulkan {
+    struct ExternalImageDescriptorOpaqueFD {
+        const DawnTextureDescriptor* cTextureDescriptor;
+        bool isCleared;
+        int memoryHandle;
+        VkDeviceSize allocationSize;
+        uint32_t memoryTypeIndex;
+        std::vector<int> waitFDs;
+    };
+
     DAWN_NATIVE_EXPORT VkInstance GetInstance(DawnDevice device);
 
     DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl(DawnDevice device,
                                                                              VkSurfaceKHR surface);
     DAWN_NATIVE_EXPORT DawnTextureFormat
     GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
+
+    DAWN_NATIVE_EXPORT DawnTexture
+    WrapVulkanImageOpaqueFD(DawnDevice cDevice, const ExternalImageDescriptorOpaqueFD* descriptor);
+
+    DAWN_NATIVE_EXPORT int ExportSignalSemaphoreOpaqueFD(DawnDevice cDevice, DawnTexture cTexture);
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKANBACKEND_H_
