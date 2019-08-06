@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2c32ca11_bbe39e5d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-06T21:37:38Z",
+      "side": 1,
+      "message": "we set it initialized if the storeop is store. since vulkan doens\u0027t count this part as a \"lazy clear\" if we count it here, the backdoor counts are not the same and the TextureZero test fails when comparing the expected lazy clear counts. I think corentin said we could mock the count for GL, i wasn\u0027t sure if we could mock it here too.",
+      "parentUuid": "37752b91_7b616272",
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4907465d_ae21b744",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "ce086301_5a27b6f3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-06T21:37:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4907465d_ae21b744",
+      "range": {
+        "startLine": 882,
+        "startChar": 20,
+        "endLine": 882,
+        "endChar": 31
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43311399_c14a6ad1",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -53,6 +95,30 @@
       "writtenOn": "2019-08-06T21:32:20Z",
       "side": 1,
       "message": "Why do we need to initialize the resolve texture? Won\u0027t it be initialized when we resolve into it from the source color attachment?",
+      "range": {
+        "startLine": 884,
+        "startChar": 26,
+        "endLine": 884,
+        "endChar": 61
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11d50c71_bb6a1f58",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-06T21:37:38Z",
+      "side": 1,
+      "message": "is it possible that not the entire texture gets resolved? I think i ran into some test failures without this.",
+      "parentUuid": "43311399_c14a6ad1",
       "range": {
         "startLine": 884,
         "startChar": 26,
