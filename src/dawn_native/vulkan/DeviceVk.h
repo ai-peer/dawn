@@ -25,6 +25,9 @@
 #include "dawn_native/vulkan/VulkanFunctions.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
 
+#include "dawn_native/vulkan/external_memory/MemoryService.h"
+#include "dawn_native/vulkan/external_semaphore/SemaphoreService.h"
+
 #include <memory>
 #include <queue>
 
@@ -79,6 +82,25 @@ namespace dawn_native { namespace vulkan {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        TextureBase* CreateTextureWrappingVulkanImage(
+            const TextureDescriptor* descriptor,
+            bool isCleared,
+            ExternalMemoryHandle memoryHandle,
+            VkDeviceSize allocationSize,
+            uint32_t memoryTypeIndex,
+            const std::vector<ExternalSemaphoreHandle>& waitHandles);
+
+        MaybeError CreateExportableSemaphore(VkSemaphore* outSemaphore);
+
+        MaybeError ImportSemaphore(const ExternalSemaphoreHandle& handle,
+                                   VkSemaphore* outSemaphore);
+        MaybeError ExportSemaphore(VkSemaphore semaphore, ExternalSemaphoreHandle* outHandle);
+
+        MaybeError ImportImageMemory(ExternalMemoryHandle handle,
+                                     VkDeviceSize allocationSize,
+                                     uint32_t memoryTypeIndex,
+                                     VkDeviceMemory* outAllocation);
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -119,6 +141,9 @@ namespace dawn_native { namespace vulkan {
         std::unique_ptr<MemoryAllocator> mMemoryAllocator;
         std::unique_ptr<RenderPassCache> mRenderPassCache;
 
+        std::unique_ptr<external_memory::Service> mExternalMemoryService;
+        std::unique_ptr<external_semaphore::Service> mExternalSemaphoreService;
+
         VkFence GetUnusedFence();
         void CheckPassedFences();
 
@@ -143,7 +168,6 @@ namespace dawn_native { namespace vulkan {
         SerialQueue<CommandPoolAndBuffer> mCommandsInFlight;
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         CommandPoolAndBuffer mPendingCommands;
-
         CommandRecordingContext mRecordingContext;
     };
 
