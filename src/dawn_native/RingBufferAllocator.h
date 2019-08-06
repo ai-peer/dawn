@@ -12,33 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_RINGBUFFER_H_
-#define DAWNNATIVE_RINGBUFFER_H_
+#ifndef DAWNNATIVE_RINGBUFFERALLOCATOR_H_
+#define DAWNNATIVE_RINGBUFFERALLOCATOR_H_
 
 #include "common/SerialQueue.h"
 #include "dawn_native/StagingBuffer.h"
 
 #include <memory>
 
-// RingBuffer is the front-end implementation used to manage a ring buffer in GPU memory.
+// RingBufferAllocator is the front-end implementation used to manage a ring buffer in GPU memory.
 namespace dawn_native {
 
-    struct UploadHandle {
-        uint8_t* mappedBuffer = nullptr;
-        size_t startOffset = 0;
-        StagingBufferBase* stagingBuffer = nullptr;
-    };
+    static constexpr size_t INVALID_OFFSET = std::numeric_limits<size_t>::max();
 
     class DeviceBase;
 
-    class RingBuffer {
+    class RingBufferAllocator {
       public:
-        RingBuffer(DeviceBase* device, size_t size);
-        ~RingBuffer() = default;
+        RingBufferAllocator(DeviceBase* device, StagingBufferBase* buffer);
+        ~RingBufferAllocator() = default;
 
         MaybeError Initialize();
 
-        UploadHandle SubAllocate(size_t requestedSize);
+        size_t Allocate(size_t allocationSize);
 
         void Tick(Serial lastCompletedSerial);
         size_t GetSize() const;
@@ -50,6 +46,7 @@ namespace dawn_native {
         void Track();
 
       private:
+        // TODO(bryan.bernhart@intel.com): Enable sub-allocation on non-staging buffers.
         std::unique_ptr<StagingBufferBase> mStagingBuffer;
 
         struct Request {
@@ -71,4 +68,4 @@ namespace dawn_native {
     };
 }  // namespace dawn_native
 
-#endif  // DAWNNATIVE_RINGBUFFER_H_
+#endif  // DAWNNATIVE_RINGBUFFERALLOCATOR_H_

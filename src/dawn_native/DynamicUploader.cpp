@@ -35,7 +35,12 @@ namespace dawn_native {
     }
 
     MaybeError DynamicUploader::CreateAndAppendBuffer(size_t size) {
-        std::unique_ptr<RingBuffer> ringBuffer = std::make_unique<RingBuffer>(mDevice, size);
+        std::unique_ptr<StagingBufferBase> stagingBuffer;
+        DAWN_TRY_ASSIGN(stagingBuffer, mDevice->CreateStagingBuffer(size));
+
+        std::unique_ptr<RingBufferAllocator> ringBuffer =
+            std::make_unique<RingBufferAllocator>(mDevice, stagingBuffer.release());
+
         DAWN_TRY(ringBuffer->Initialize());
         mRingBuffers.emplace_back(std::move(ringBuffer));
         return {};
@@ -47,12 +52,12 @@ namespace dawn_native {
         // Align the requested allocation size
         const size_t alignedSize = Align(size, alignment);
 
-        RingBuffer* largestRingBuffer = GetLargestBuffer();
-        UploadHandle uploadHandle = largestRingBuffer->SubAllocate(alignedSize);
+        RingBufferAllocator* largestRingBuffer = GetLargestBuffer();
+        size_t startOffset = largestRingBuffer->Allocate(alignedSize);
 
         // Upon failure, append a newly created (and much larger) ring buffer to fulfill the
         // request.
-        if (uploadHandle.mappedBuffer == nullptr) {
+        if (startOffset == INVALID_OFFSET) {
             // Compute the new max size (in powers of two to preserve alignment).
             size_t newMaxSize = largestRingBuffer->GetSize();
             while (newMaxSize < size) {
@@ -62,10 +67,15 @@ namespace dawn_native {
             // TODO(bryan.bernhart@intel.com): Fall-back to no sub-allocations should this fail.
             DAWN_TRY(CreateAndAppendBuffer(newMaxSize));
             largestRingBuffer = GetLargestBuffer();
-            uploadHandle = largestRingBuffer->SubAllocate(alignedSize);
+            startOffset = largestRingBuffer->Allocate(alignedSize);
         }
 
+        // Create the UploadHandle with the sub-allocated offset.
+        UploadHandle uploadHandle;
         uploadHandle.stagingBuffer = largestRingBuffer->GetStagingBuffer();
+        uploadHandle.mappedBuffer =
+            static_cast<uint8_t*>(uploadHandle.stagingBuffer->GetMappedPointer()) + startOffset;
+        uploadHandle.startOffset = startOffset;
 
         return uploadHandle;
     }
@@ -85,7 +95,7 @@ namespace dawn_native {
         mReleasedStagingBuffers.ClearUpTo(lastCompletedSerial);
     }
 
-    RingBuffer* DynamicUploader::GetLargestBuffer() {
+    RingBufferAllocator* DynamicUploader::GetLargestBuffer() {
         ASSERT(!mRingBuffers.empty());
         return mRingBuffers.back().get();
     }

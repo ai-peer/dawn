@@ -16,11 +16,17 @@
 #define DAWNNATIVE_DYNAMICUPLOADER_H_
 
 #include "dawn_native/Forward.h"
-#include "dawn_native/RingBuffer.h"
+#include "dawn_native/RingBufferAllocator.h"
 
 // DynamicUploader is the front-end implementation used to manage multiple ring buffers for upload
 // usage.
 namespace dawn_native {
+
+    struct UploadHandle {
+        uint8_t* mappedBuffer = nullptr;
+        size_t startOffset = 0;
+        StagingBufferBase* stagingBuffer = nullptr;
+    };
 
     class DynamicUploader {
       public:
@@ -37,7 +43,7 @@ namespace dawn_native {
         ResultOrError<UploadHandle> Allocate(uint32_t requiredSize, uint32_t alignment);
         void Tick(Serial lastCompletedSerial);
 
-        RingBuffer* GetLargestBuffer();
+        RingBufferAllocator* GetLargestBuffer();
 
         MaybeError CreateAndAppendBuffer(size_t size = kBaseUploadBufferSize);
 
@@ -47,7 +53,7 @@ namespace dawn_native {
         // TODO(bryan.bernhart@intel.com): Figure out this value.
         static constexpr size_t kBaseUploadBufferSize = 64000;
 
-        std::vector<std::unique_ptr<RingBuffer>> mRingBuffers;
+        std::vector<std::unique_ptr<RingBufferAllocator>> mRingBuffers;
         SerialQueue<std::unique_ptr<StagingBufferBase>> mReleasedStagingBuffers;
         DeviceBase* mDevice;
     };
