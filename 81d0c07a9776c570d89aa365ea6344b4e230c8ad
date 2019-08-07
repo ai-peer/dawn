@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "f217bd78_3a3b706f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-07T16:49:01Z",
+      "side": 1,
+      "message": "I thought we wanted to differentiate the standalone clear operation with the load op clearing, even if D3D12 isn\u0027t doing that right now (in the email he said D3D12 will eventually be optimized). I think only Vulkan is optimizing the clears using the loadop (And Metal but we haven\u0027t implemented clearing in Metal). What do you think we should do? \n\n\nthis is from the original email from Corentin\n\"In backends with the concept of render passes (Metal, Vulkan, eventually D3D12) we need to make sure the clearing of attachments is done via the renderpass load op instead of a standalone clear operation because that\u0027s much more efficient on modern desktop GPUs and mobile GPUs.\"",
+      "parentUuid": "5ff794ad_0cd9b960",
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4907465d_ae21b744",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
