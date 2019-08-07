@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0605b8c2_4e764122",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T18:18:12Z",
+      "side": 1,
+      "message": "Okay, let\u0027s continue with separating these counts then.",
+      "parentUuid": "f217bd78_3a3b706f",
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4907465d_ae21b744",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -178,6 +196,30 @@
       "writtenOn": "2019-08-07T17:52:54Z",
       "side": 1,
       "message": "I, too, had the same question as Austin. Since the resolve texture is the output of the render pass, correctly clearing the inputs should result in the resolve target containing initialized data. If we clear the resolve target, there\u0027s no point in running the render pass to begin with.\n\n(Same comment goes for the Vulkan backend)",
+      "parentUuid": "11d50c71_bb6a1f58",
+      "range": {
+        "startLine": 884,
+        "startChar": 26,
+        "endLine": 884,
+        "endChar": 61
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eb05eef_2709f7e0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T18:18:12Z",
+      "side": 1,
+      "message": "Rafael: This is clearing the resolve target before we execute the render pass though.\n\nNatasha: If the storeop is Store (which is the only one Dawn has right now), then it\u0027s supposed to always completely resolve. Which tests fail?",
       "parentUuid": "11d50c71_bb6a1f58",
       "range": {
         "startLine": 884,

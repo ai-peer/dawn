@@ -25,6 +25,53 @@
     },
     {
       "key": {
+        "uuid": "498b209d_26414069",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T18:18:12Z",
+      "side": 1,
+      "message": "usages.textureUsages[i]\n\nA texture could have multiple usages, but we only care about its usage in this pass.",
+      "range": {
+        "startLine": 506,
+        "startChar": 44,
+        "endLine": 506,
+        "endChar": 63
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf7002f_c585f29f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T18:18:12Z",
+      "side": 1,
+      "message": "I believe the intent is that since OutputAttachment textures are going to be cleared using a loadOp and not the \"EnsureSubresourceContentInitialized\" method,\nwe want to lazy-clear other usages.\n\nI think it would be more clear to reverse the logic so that we \"skip lazy clear for OutputAttachments\"\n\nif ((usages.textureUsages[i] \u0026 dawn::TextureUsageBit::OutputAttachment) !\u003d 0) {\n  // Comment that uninitialized OutputAttachments are cleared by other means.\n  continue;\n}\n\nThen, since OutputAttachment usages only occur in RenderPasses, I don\u0027t think you need the bool \"initTexturesForPass\"",
+      "parentUuid": "e6c9f004_ee690230",
+      "range": {
+        "startLine": 506,
+        "startChar": 43,
+        "endLine": 506,
+        "endChar": 97
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a7e852d_ed650833",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
@@ -64,6 +111,52 @@
         "startChar": 69,
         "endLine": 362,
         "endChar": 93
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e7c0c73_ee7fd76e",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T18:18:12Z",
+      "side": 1,
+      "message": "// Comment...\n// If it\u0027s a color attachment, vulkan / d3d12 don\u0027t count..\nlazyClear \u003d (\n  (usages.textureUsages[i] \u0026 dawn::TextureUsageBit::OutputAttachment) !\u003d 0 \u0026\u0026\n  texture-\u003eGetFormat().IsColor());",
+      "range": {
+        "startLine": 366,
+        "startChar": 16,
+        "endLine": 374,
+        "endChar": 17
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c75c3d9b_ca915e4a",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T18:18:12Z",
+      "side": 1,
+      "message": "Won\u0027t this happen in TransitionForPass?",
+      "range": {
+        "startLine": 712,
+        "startChar": 16,
+        "endLine": 723,
+        "endChar": 17
       },
       "revId": "043e4c46d93b4a636898f0f134760027fc897022",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
