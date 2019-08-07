@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28e38f2e_83cc43ee",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T21:45:10Z",
+      "side": 1,
+      "message": "I\u0027m sure I\u0027m missing something, but why are depth stencil textures always lazy cleared? shouldn\u0027t all non-attachment textures be lazy cleared (like on d3d12/vulkan)?\n\nIf this is wrong, would be ideal to have a test that catches it.",
+      "range": {
+        "startLine": 365,
+        "startChar": 83,
+        "endLine": 366,
+        "endChar": 27
+      },
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b3ff873_fa35ab37",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T21:45:10Z",
+      "side": 1,
+      "message": "So EXPECT_LAZY_CLEAR now counts explicit clears (not loadop clears)? Do we track loadop clears to make sure they\u0027re happening when needed?",
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
