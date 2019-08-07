@@ -16,6 +16,24 @@
       "revId": "271817784100310e8e694a537e2c036deaac6f46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33636073_eb29d826",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T20:01:21Z",
+      "side": 0,
+      "message": "+1, in particular this duplicates the two `if (heapType \u003d\u003d ...)` blocks in both places, which could easily get out of sync in a future CL. Would be best to have those in a single place, here or there.",
+      "parentUuid": "a562f3e3_8927cc4f",
+      "revId": "271817784100310e8e694a537e2c036deaac6f46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

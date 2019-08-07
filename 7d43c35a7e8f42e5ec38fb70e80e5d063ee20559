@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0e91d04_46291fdb",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T20:01:21Z",
+      "side": 1,
+      "message": "ResourceHeap (which inherits ResourceHeapBase) actually does have a heap though. So what\u0027s confusing here is that \"resource heap\" sounds like it\u0027s just a heap, but in fact it\u0027s \"heap and maybe a resource\"? Under what conditions does it have a resource? (is it just when it\u0027s directly allocated?)",
+      "parentUuid": "032c006a_dd17b4e4",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
@@ -70,6 +94,30 @@
       "writtenOn": "2019-08-02T09:26:11Z",
       "side": 1,
       "message": "nit: spell out simple types",
+      "range": {
+        "startLine": 357,
+        "startChar": 8,
+        "endLine": 357,
+        "endChar": 13
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83762bc3_18ec5010",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T20:01:21Z",
+      "side": 1,
+      "message": "I think this is an iterator type which is not simple, in which case auto is fine.",
+      "parentUuid": "b9b1a857_ea0a7009",
       "range": {
         "startLine": 357,
         "startChar": 8,
@@ -196,6 +244,24 @@
     },
     {
       "key": {
+        "uuid": "811d9ed0_4ae25c6b",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T20:01:21Z",
+      "side": 1,
+      "message": "I don\u0027t think we do, but a TODO(crbug.com/dawn/153) would be good.",
+      "parentUuid": "de070a7c_48b6d89d",
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2c377ad6_721bbc79",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
         "patchSetId": 4
@@ -259,6 +325,53 @@
         "startChar": 43,
         "endLine": 124,
         "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cd2a18d_6ef7574e",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T20:01:21Z",
+      "side": 1,
+      "message": "I don\u0027t see that it says the size is a multiple of alignment, but that the size of a buffer is always a multiple of 64K. It seems like there are 2 possible alignments for heaps, but buffer sizes are always 64K.",
+      "parentUuid": "69c2414e_318fe540",
+      "range": {
+        "startLine": 124,
+        "startChar": 43,
+        "endLine": 124,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5068590_6c210cc1",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T20:01:21Z",
+      "side": 1,
+      "message": "nit: this is used 3 times, maybe have a variable for it",
+      "range": {
+        "startLine": 136,
+        "startChar": 12,
+        "endLine": 136,
+        "endChar": 55
       },
       "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
