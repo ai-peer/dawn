@@ -262,6 +262,30 @@
       "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "247885e9_cfff7045",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T19:45:50Z",
+      "side": 1,
+      "message": "I tested GTEST_SKIP in Environment SetUp here:\nhttps://dawn-review.googlesource.com/c/dawn/+/9820\n\nAlthough it looks like the bots will consider skipping everything a test failure. See here:\nhttps://ci.chromium.org/p/chromium/builders/try/linux-dawn-rel/1740\n\nI think failing would be okay if there are no available adapters.\nGTEST_FAIL() \u003c\u003c \"No available adapters\";\n\nWhat do you think?",
+      "parentUuid": "3ebb7e30_ec83f22a",
+      "range": {
+        "startLine": 350,
+        "startChar": 43,
+        "endLine": 350,
+        "endChar": 52
+      },
+      "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
