@@ -81,6 +81,24 @@
       "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27dc68c3_09f46920",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T23:12:13Z",
+      "side": 1,
+      "message": "Should be after this patch, but maybe we should consider it.",
+      "parentUuid": "f988e3b4_9cd5f4ae",
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
