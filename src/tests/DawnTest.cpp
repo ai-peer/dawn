@@ -143,6 +143,8 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
 void DawnTestEnvironment::SetUp() {
     ASSERT_TRUE(glfwInit());
 
+    GTEST_SKIP() << "Test skipping all tests";
+
     mInstance = std::make_unique<dawn_native::Instance>();
     mInstance->EnableBackendValidation(mEnableBackendValidation);
     mInstance->EnableBeginCaptureOnStartup(mBeginCaptureOnStartup);
