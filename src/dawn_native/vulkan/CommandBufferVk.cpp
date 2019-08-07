@@ -214,6 +214,15 @@ namespace dawn_native { namespace vulkan {
                             view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1)) {
                         loadOp = dawn::LoadOp::Clear;
                     }
+
+                    if (hasResolveTarget) {
+                        TextureView* resolveView = ToBackend(attachmentInfo.resolveTarget.Get());
+                        ToBackend(resolveView->GetTexture())
+                            ->SetIsSubresourceContentInitialized(
+                                resolveView->GetBaseMipLevel(), resolveView->GetLevelCount(),
+                                resolveView->GetBaseArrayLayer(), resolveView->GetLayerCount());
+                    }
+
                     switch (attachmentInfo.storeOp) {
                         case dawn::StoreOp::Store: {
                             view->GetTexture()->SetIsSubresourceContentInitialized(
@@ -355,15 +364,16 @@ namespace dawn_native { namespace vulkan {
             }
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
-
-                // TODO(natlee@microsoft.com): Update clearing here when subresource tracking is
-                // implemented
-                texture->EnsureSubresourceContentInitialized(
-                    recordingContext, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                // Clear textures that are not output attachments. Output attachments will be
+                // cleared by other means.
+                if (!(texture->GetUsage() & dawn::TextureUsageBit::OutputAttachment)) {
+                    texture->EnsureSubresourceContentInitialized(recordingContext, 0,
+                                                                 texture->GetNumMipLevels(), 0,
+                                                                 texture->GetArrayLayers());
+                }
                 texture->TransitionUsageNow(recordingContext, usages.textureUsages[i]);
             }
         };
-
         const std::vector<PassResourceUsage>& passResourceUsages = GetResourceUsages().perPass;
         size_t nextPassNumber = 0;
 
