@@ -16,6 +16,24 @@
       "revId": "a8a549f8883d0da90343b1ab6238e89712a8d4b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f11bf655_83e309c2",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "Decided to make a different function for each handle, and return the appropriate error value for the handle.",
+      "parentUuid": "96a52936_68c48716",
+      "revId": "a8a549f8883d0da90343b1ab6238e89712a8d4b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

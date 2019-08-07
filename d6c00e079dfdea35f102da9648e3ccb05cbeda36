@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6553be77_7e82b667",
+        "filename": "BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "We decided to split the sources for end2end and white box, but compile them both into the end2end harness.",
+      "parentUuid": "7775c53a_98916d1d",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "934f9fde_468dd2b3",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 15
@@ -69,6 +87,24 @@
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bb06027_b56ae5d5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "This is now done by clearing mWaitRequirements in TransitionUsage, after adding them to the recording context.",
+      "parentUuid": "b38813ac_4a8a2b2a",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "c9c7deb6_0a0552fa",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "We decided to make BufferVk also use the recording context.",
+      "parentUuid": "c7a0e995_0c2e433c",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4129cb78_2d72fb06",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 15
@@ -121,6 +175,24 @@
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0b85690_29101841",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "We will be doing the validation in \u003cservice\u003e.Supported(), in a followup CL.",
+      "parentUuid": "4129cb78_2d72fb06",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -217,6 +289,30 @@
     },
     {
       "key": {
+        "uuid": "ad463de8_95baf765",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "Added an isCleared parameter in the descriptor.",
+      "parentUuid": "747db590_4f24e27a",
+      "range": {
+        "startLine": 595,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 55
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a948a82d_38396687",
         "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
         "patchSetId": 15
@@ -269,6 +365,24 @@
     },
     {
       "key": {
+        "uuid": "bfd88b45_322db508",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "Added!",
+      "parentUuid": "03381062_ecf45b95",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5abeab11_ce45e627",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 15
@@ -301,6 +415,24 @@
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97849ac8_5714a31e",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "See the CL for adding extensions. We decided to request the KHR extensions if available. On 1.1, we get the entrypoints always but don\u0027t necessarily request the extension if it isn\u0027t reported by the device. This should work since according to the spec these promoted extensions are aliased, so importing the KHR suffix versions of the functions is valid.",
+      "parentUuid": "a38d73fd_47141eed",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -344,6 +476,48 @@
     },
     {
       "key": {
+        "uuid": "d6b43db2_c57361aa",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "d25b8ca7_77297033",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19cbad52_2610ce7c",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "These functions are now platform dependent like this. OpaqueFD refers to the service which will try to import the image.",
+      "parentUuid": "3cf14d00_df3c9403",
+      "range": {
+        "startLine": 33,
+        "startChar": 35,
+        "endLine": 33,
+        "endChar": 50
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6760363_0b38af71",
         "filename": "src/include/dawn_native/VulkanBackend.h",
         "patchSetId": 15
@@ -364,6 +538,30 @@
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "832fcd54_ba11917b",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "Descriptor added.",
+      "parentUuid": "b6760363_0b38af71",
+      "range": {
+        "startLine": 35,
+        "startChar": 51,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -404,6 +602,48 @@
       "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2be7af91_b40be942",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "Returns -1 on failure. For another future platform return whatever the null handle is.",
+      "parentUuid": "c6d358da_023e378e",
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "263158f7_59b8ac45",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-07T23:11:20Z",
+      "side": 1,
+      "message": "Name got even bigger, added a comment instead. If anyone has a better name feel free to suggest.",
+      "parentUuid": "c0c64dd0_99059815",
+      "range": {
+        "startLine": 38,
+        "startChar": 27,
+        "endLine": 38,
+        "endChar": 50
+      },
+      "revId": "d6c00e079dfdea35f102da9648e3ccb05cbeda36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
