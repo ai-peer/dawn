@@ -12,15 +12,15 @@ vars = {
 deps = {
   # Dependencies required to use GN/Clang in standalone
   'build': {
-    'url': '{chromium_git}/chromium/src/build@e439f6082423106f1fe2afa7e22f8fd4c00691df',
+    'url': '{chromium_git}/chromium/src/build@7e9c87e5a21a9c7f4f208159c2ba127932f54009',
     'condition': 'dawn_standalone',
   },
   'buildtools': {
-    'url': '{chromium_git}/chromium/buildtools@24ebce4578745db15274e180da1938ebc1358243',
+    'url': '{chromium_git}/chromium/src/buildtools.git@74cfb57006f83cfe050817526db359d5c8a11628',
     'condition': 'dawn_standalone',
   },
   'tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang@1d879cee563167a2b18baffb096cf9e29f2f9376',
+    'url': '{chromium_git}/chromium/src/tools/clang@210f1dc3ebf8504ae246d925e9110ec427eef43f',
     'condition': 'dawn_standalone',
   },
   'third_party/binutils': {
@@ -68,7 +68,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
   'third_party/shaderc': {
-    'url': '{chromium_git}/external/github.com/google/shaderc@e9bb8f287417084d30c924026de9fa59dd32db41',
+    'url': '{chromium_git}/external/github.com/google/shaderc@d289a55e46ff1c931ca0d90785218370f5ce68e0',
     'condition': 'dawn_standalone',
   },
 
@@ -130,44 +130,6 @@ hooks = [
     ],
   },
 
-  # Pull GN binaries using checked-in hashes.
-  {
-    'name': 'gn_win',
-    'pattern': '.',
-    'condition': 'host_os == "win" and dawn_standalone',
-    'action': [ 'download_from_google_storage',
-                '--no_resume',
-                '--platform=win32',
-                '--no_auth',
-                '--bucket', 'chromium-gn',
-                '-s', 'buildtools/win/gn.exe.sha1',
-    ],
-  },
-  {
-    'name': 'gn_mac',
-    'pattern': '.',
-    'condition': 'host_os == "mac" and dawn_standalone',
-    'action': [ 'download_from_google_storage',
-                '--no_resume',
-                '--platform=darwin',
-                '--no_auth',
-                '--bucket', 'chromium-gn',
-                '-s', 'buildtools/mac/gn.sha1',
-    ],
-  },
-  {
-    'name': 'gn_linux64',
-    'pattern': '.',
-    'condition': 'host_os == "linux" and dawn_standalone',
-    'action': [ 'download_from_google_storage',
-                '--no_resume',
-                '--platform=linux*',
-                '--no_auth',
-                '--bucket', 'chromium-gn',
-                '-s', 'buildtools/linux64/gn.sha1',
-    ],
-  },
-
   # Pull the compilers and system libraries for hermetic builds
   {
     'name': 'sysroot_x86',
@@ -189,6 +151,13 @@ hooks = [
     'pattern': '.',
     'condition': 'checkout_win and dawn_standalone',
     'action': ['python', 'build/vs_toolchain.py', 'update', '--force'],
+  },
+  {
+    # Update the Mac toolchain if necessary.
+    'name': 'mac_toolchain',
+    'pattern': '.',
+    'condition': 'checkout_mac and dawn_standalone',
+    'action': ['python', 'build/mac_toolchain.py'],
   },
   {
     # Note: On Win, this should run after win_toolchain, as it may use it.
