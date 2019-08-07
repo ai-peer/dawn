@@ -16,6 +16,24 @@
       "revId": "89ac9f44dac69f391f613ce22cc9ec8859d4bad6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02dead0d_568aeae8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-07T16:49:51Z",
+      "side": 1,
+      "message": "Ref\u003c\u003e is an internal reference. And all RefCounted objects start with a refcount of 1. So here, we\u0027re taking an internal reference and then dropping the external reference.\n\nAll of these other caching functions return an object to the application (external reference), which is why they manually increment the refcount instead of using Ref\u003c\u003e.",
+      "parentUuid": "4f7ff5d9_678f6cda",
+      "revId": "89ac9f44dac69f391f613ce22cc9ec8859d4bad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
