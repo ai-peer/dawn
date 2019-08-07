@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2ba4ddd_cb8de0bf",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T06:29:53Z",
+      "side": 1,
+      "message": "This can now be moved into ValidateComputePassUsages. After that, I don\u0027t think |pass| (and even |PassType|) is used at all anymore.",
+      "revId": "4151d6e8f5a53f86f37c21fa43ca28dcc6fe9d73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
