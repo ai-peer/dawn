@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fae9a1a_1fb91b09",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T07:12:15Z",
+      "side": 1,
+      "message": "This is identical to kMaxDynamicBufferCount right now. Does it actually have a different meaning? Or could we dedup them?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 66
+      },
+      "revId": "0b6513796872311c50ab6452e51462da27ee9e14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
