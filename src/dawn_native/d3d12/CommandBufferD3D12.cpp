@@ -490,7 +490,7 @@ namespace dawn_native { namespace d3d12 {
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
         auto TransitionForPass = [](ComPtr<ID3D12GraphicsCommandList> commandList,
-                                    const PassResourceUsage& usages) {
+                                    const PassResourceUsage& usages, bool initTexturesForPass) {
             std::vector<D3D12_RESOURCE_BARRIER> barriers;
 
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
@@ -503,10 +503,10 @@ namespace dawn_native { namespace d3d12 {
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 Texture* texture = ToBackend(usages.textures[i]);
-                // TODO(natlee@microsoft.com): Update clearing here when subresource tracking is
-                // implemented
-                texture->EnsureSubresourceContentInitialized(
-                    commandList, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                if (initTexturesForPass || (texture->GetUsage() & dawn::TextureUsageBit::Sampled)) {
+                    texture->EnsureSubresourceContentInitialized(
+                        commandList, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                }
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
@@ -531,7 +531,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(commandList, passResourceUsages[nextPassNumber]);
+                    TransitionForPass(commandList, passResourceUsages[nextPassNumber], true);
                     bindingTracker.SetInComputePass(true);
                     RecordComputePass(commandList, &bindingTracker);
 
@@ -542,7 +542,7 @@ namespace dawn_native { namespace d3d12 {
                     BeginRenderPassCmd* beginRenderPassCmd =
                         mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    TransitionForPass(commandList, passResourceUsages[nextPassNumber]);
+                    TransitionForPass(commandList, passResourceUsages[nextPassNumber], false);
                     bindingTracker.SetInComputePass(false);
                     RecordRenderPass(commandList, &bindingTracker, &renderPassTracker,
                                      beginRenderPassCmd);
@@ -869,15 +869,24 @@ namespace dawn_native { namespace d3d12 {
                 // Load op - color
                 ASSERT(view->GetLevelCount() == 1);
                 ASSERT(view->GetLayerCount() == 1);
-                if (attachmentInfo.loadOp == dawn::LoadOp::Clear) {
+                if (attachmentInfo.loadOp == dawn::LoadOp::Clear ||
+                    (attachmentInfo.loadOp == dawn::LoadOp::Load &&
+                     !view->GetTexture()->IsSubresourceContentInitialized(
+                         view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1))) {
                     D3D12_CPU_DESCRIPTOR_HANDLE handle = args.RTVs[i];
                     commandList->ClearRenderTargetView(handle, &attachmentInfo.clearColor.r, 0,
                                                        nullptr);
-                } else if (attachmentInfo.loadOp == dawn::LoadOp::Load && view->GetTexture()) {
-                    ToBackend(view->GetTexture())
-                        ->EnsureSubresourceContentInitialized(commandList, view->GetBaseMipLevel(),
-                                                              1, view->GetBaseArrayLayer(), 1);
                 }
+
+                TextureView* resolveView = ToBackend(attachmentInfo.resolveTarget.Get());
+                if (resolveView != nullptr) {
+                    ToBackend(resolveView->GetTexture())
+                        ->EnsureSubresourceContentInitialized(
+                            commandList, resolveView->GetBaseMipLevel(),
+                            resolveView->GetLevelCount(), resolveView->GetBaseArrayLayer(),
+                            resolveView->GetLayerCount());
+                }
+
                 switch (attachmentInfo.storeOp) {
                     case dawn::StoreOp::Store: {
                         view->GetTexture()->SetIsSubresourceContentInitialized(

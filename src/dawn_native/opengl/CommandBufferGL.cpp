@@ -359,11 +359,21 @@ namespace dawn_native { namespace opengl {
     void CommandBuffer::Execute() {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
-        auto TransitionForPass = [](const PassResourceUsage& usages) {
+        auto TransitionForPass = [](const PassResourceUsage& usages, bool initTexturesForPass) {
             for (size_t i = 0; i < usages.textures.size(); i++) {
                 Texture* texture = ToBackend(usages.textures[i]);
-                texture->EnsureSubresourceContentInitialized(0, texture->GetNumMipLevels(), 0,
-                                                             texture->GetArrayLayers());
+                bool isLazyClear;
+                if (initTexturesForPass || (texture->GetUsage() & dawn::TextureUsageBit::Sampled) ||
+                    texture->GetFormat().HasDepthOrStencil()) {
+                    isLazyClear = true;
+                } else {
+                    // We don't want to count all clear calls so the "lazy clear count" is the same
+                    // as vulkan and d3d12. We will continue to clear here since loadop optimization
+                    // is not in GL
+                    isLazyClear = false;
+                }
+                texture->EnsureSubresourceContentInitialized(
+                    0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers(), isLazyClear);
             }
         };
 
@@ -375,7 +385,7 @@ namespace dawn_native { namespace opengl {
             switch (type) {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
-                    TransitionForPass(passResourceUsages[nextPassNumber]);
+                    TransitionForPass(passResourceUsages[nextPassNumber], true);
                     ExecuteComputePass();
 
                     nextPassNumber++;
@@ -383,7 +393,7 @@ namespace dawn_native { namespace opengl {
 
                 case Command::BeginRenderPass: {
                     auto* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
-                    TransitionForPass(passResourceUsages[nextPassNumber]);
+                    TransitionForPass(passResourceUsages[nextPassNumber], false);
                     ExecuteRenderPass(cmd);
 
                     nextPassNumber++;
@@ -698,6 +708,19 @@ namespace dawn_native { namespace opengl {
             if (renderPass->attachmentState->HasDepthStencilAttachment()) {
                 const auto& attachmentInfo = renderPass->depthStencilAttachment;
                 const Format& attachmentFormat = attachmentInfo.view->GetTexture()->GetFormat();
+
+                if ((attachmentFormat.HasDepth() &&
+                     attachmentInfo.depthLoadOp == dawn::LoadOp::Load) ||
+                    (attachmentFormat.HasStencil() &&
+                     attachmentInfo.stencilLoadOp == dawn::LoadOp::Load)) {
+                    Texture* texture =
+                        ToBackend(renderPass->depthStencilAttachment.view->GetTexture());
+                    texture->EnsureSubresourceContentInitialized(
+                        attachmentInfo.view->GetBaseMipLevel(),
+                        attachmentInfo.view->GetLevelCount(),
+                        attachmentInfo.view->GetBaseArrayLayer(),
+                        attachmentInfo.view->GetLayerCount());
+                }
 
                 // Load op - depth/stencil
                 bool doDepthClear = attachmentFormat.HasDepth() &&
