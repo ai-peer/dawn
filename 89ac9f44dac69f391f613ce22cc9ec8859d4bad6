@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f7ff5d9_678f6cda",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T06:39:04Z",
+      "side": 1,
+      "message": "I don\u0027t quite get this, why doesn\u0027t it make the refcount go from 1 to 0 and free the AttachmentState?",
+      "revId": "89ac9f44dac69f391f613ce22cc9ec8859d4bad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
