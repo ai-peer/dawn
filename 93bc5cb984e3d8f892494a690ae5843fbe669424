@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a37e2c43_d9dca1fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T06:57:12Z",
+      "side": 1,
+      "message": "nit: preparation",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "93bc5cb984e3d8f892494a690ae5843fbe669424",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db37f04_61427e37",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-07T06:57:12Z",
+      "side": 1,
+      "message": "nit: These aren\u0027t really \"bases\" (i.e. starts of ranges), because a texture copy view always refers to only one of them. Can we rename these to viewMipmapLevel and viewArrayLayer while we\u0027re cleaning up this code? I think it would make the meanings much clearer.\n\nOK to do this later if you want, but feel free to land without re-review if you do only this rename.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "93bc5cb984e3d8f892494a690ae5843fbe669424",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
