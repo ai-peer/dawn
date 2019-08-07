@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "64222ee8_759875dc",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T01:44:02Z",
+      "side": 1,
+      "message": "Done\nI have added TextureDescriptor as a member of CopyConfig and directly use device.CreateTexture(\u0026config.textureDescriptor), what do you think?",
+      "parentUuid": "4fd47016_dff9d4d6",
+      "range": {
+        "startLine": 40,
+        "startChar": 51,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7eb79923_03200d0f",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "130ae9c7_b075f7a6",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T01:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eb79923_03200d0f",
+      "range": {
+        "startLine": 226,
+        "startChar": 8,
+        "endLine": 227,
+        "endChar": 57
+      },
+      "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e205fec7_a8cd02b3",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T01:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17a56210_244eeb5b",
+      "range": {
+        "startLine": 256,
+        "startChar": 8,
+        "endLine": 256,
+        "endChar": 37
+      },
+      "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6644c58b_560849b0",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "638e136a_8e5ee770",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T01:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6644c58b_560849b0",
+      "range": {
+        "startLine": 260,
+        "startChar": 18,
+        "endLine": 260,
+        "endChar": 49
+      },
+      "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "5e707676_33c9b2b8",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T01:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e1662c6_958b6be1",
+      "range": {
+        "startLine": 609,
+        "startChar": 8,
+        "endLine": 609,
+        "endChar": 37
+      },
+      "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c96de2f7_7bef579e",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b742cb30_bcffc1ce",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T01:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c96de2f7_7bef579e",
+      "range": {
+        "startLine": 670,
+        "startChar": 8,
+        "endLine": 670,
+        "endChar": 37
+      },
+      "revId": "d8dd20550f0036fe201810291fd468f54997c5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
