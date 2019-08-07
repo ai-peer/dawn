@@ -233,6 +233,30 @@
     },
     {
       "key": {
+        "uuid": "c723a15a_cb6069c2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-07T18:28:23Z",
+      "side": 1,
+      "message": "hmm i think i just need to set it as initialized here then, rather than ensuring it initialized, because the problem was that it wasn\u0027t set as initialized, and it was getting cleared later on in the pipeline and failing the multisampled tests.\n\n\nsetting it to initialized in the storeop was discussed back in the first clear CL for vulkan, I think Kai brought up that later on with other storeops, we wouldn\u0027t necessarily mark the texture as initialized if the clear isn\u0027t stored. Let me know if you have other thoughts on this, I think it has come up quite a lot if we should set it in the loadop or storeop.",
+      "parentUuid": "a0438795_0a33763e",
+      "range": {
+        "startLine": 884,
+        "startChar": 26,
+        "endLine": 884,
+        "endChar": 61
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13c6c5af_ce90290a",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 6

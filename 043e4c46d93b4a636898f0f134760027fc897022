@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c79ed965_d80dd637",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-07T18:28:23Z",
+      "side": 1,
+      "message": "because before, in transitionForPass, we would go through all the textures that would be used in the pass, and initialize them. But now, we want to initialize the textures in the renderpass using loadop clear instead. We lazy clear the attachments in RecordRenderPass, but sampled textures are not in the the list of attachments (since we\u0027re just sampling from them) so they get left dirty.\n\nJust got Austin\u0027s comment, and that sounds like a better idea. Thanks!",
+      "parentUuid": "e6c9f004_ee690230",
+      "range": {
+        "startLine": 506,
+        "startChar": 43,
+        "endLine": 506,
+        "endChar": 97
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a7e852d_ed650833",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 7
@@ -106,6 +130,30 @@
       "writtenOn": "2019-08-07T17:52:54Z",
       "side": 1,
       "message": "Since OpenGL does not (nor ever will) have a concept of render passes, consider keeping things for that implementation.",
+      "range": {
+        "startLine": 362,
+        "startChar": 69,
+        "endLine": 362,
+        "endChar": 93
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee027479_b4b6dc4e",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-07T18:28:23Z",
+      "side": 1,
+      "message": "do you mean to remove these?",
+      "parentUuid": "7759c115_43c0fd3d",
       "range": {
         "startLine": 362,
         "startChar": 69,
