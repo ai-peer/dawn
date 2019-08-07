@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "a0438795_0a33763e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-07T17:52:54Z",
+      "side": 1,
+      "message": "I, too, had the same question as Austin. Since the resolve texture is the output of the render pass, correctly clearing the inputs should result in the resolve target containing initialized data. If we clear the resolve target, there\u0027s no point in running the render pass to begin with.\n\n(Same comment goes for the Vulkan backend)",
+      "parentUuid": "11d50c71_bb6a1f58",
+      "range": {
+        "startLine": 884,
+        "startChar": 26,
+        "endLine": 884,
+        "endChar": 61
+      },
+      "revId": "81d0c07a9776c570d89aa365ea6344b4e230c8ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13c6c5af_ce90290a",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 6

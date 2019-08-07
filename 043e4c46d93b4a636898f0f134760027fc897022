@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6c9f004_ee690230",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-07T17:52:54Z",
+      "side": 1,
+      "message": "Out of curiosity, what is the rationale for only doing \"sampled\" textures? This doesn\u0027t seem to match the code in RecordRenderPass, which only appears to do render targets.\n\n(Same comment goes for the Vulkan backend)",
+      "range": {
+        "startLine": 506,
+        "startChar": 43,
+        "endLine": 506,
+        "endChar": 97
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a7e852d_ed650833",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-07T17:52:54Z",
+      "side": 1,
+      "message": "Please add a comment here explaining why you\u0027re passing true for BeginComputePass but false for BeginRenderpass.\n\n(Same comment goes for the Vulkan backend)",
+      "range": {
+        "startLine": 534,
+        "startChar": 87,
+        "endLine": 534,
+        "endChar": 91
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7759c115_43c0fd3d",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-07T17:52:54Z",
+      "side": 1,
+      "message": "Since OpenGL does not (nor ever will) have a concept of render passes, consider keeping things for that implementation.",
+      "range": {
+        "startLine": 362,
+        "startChar": 69,
+        "endLine": 362,
+        "endChar": 93
+      },
+      "revId": "043e4c46d93b4a636898f0f134760027fc897022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
