@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30c58858_f2e432f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T07:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a37e2c43_d9dca1fb",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "93bc5cb984e3d8f892494a690ae5843fbe669424",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3db37f04_61427e37",
         "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "93bc5cb984e3d8f892494a690ae5843fbe669424",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41b3412f_4c1c941d",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-07T07:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3db37f04_61427e37",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "93bc5cb984e3d8f892494a690ae5843fbe669424",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
