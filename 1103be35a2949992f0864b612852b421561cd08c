@@ -496,6 +496,24 @@
     },
     {
       "key": {
+        "uuid": "dc3ab606_a6ab2343",
+        "filename": "src/dawn_native/vulkan/ExternalHandle.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-08T23:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1af2f050_c294d607",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d60fb165_40ca27a2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 50
@@ -1759,6 +1777,30 @@
     },
     {
       "key": {
+        "uuid": "c1fd8d68_96ce5f45",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-08T23:02:10Z",
+      "side": 1,
+      "message": "Talked in-person decided using __linux__ is probably fine. On platforms like Android we don\u0027t want to compile stuff that takes in android handle types etc.",
+      "parentUuid": "ab5ffc76_5e74d82f",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 99
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e5ac033_959beed5",
         "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 50
@@ -1773,6 +1815,24 @@
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cced8d7_6538dafc",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-08T23:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e5ac033_959beed5",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
