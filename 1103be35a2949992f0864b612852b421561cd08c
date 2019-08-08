@@ -478,6 +478,24 @@
     },
     {
       "key": {
+        "uuid": "1af2f050_c294d607",
+        "filename": "src/dawn_native/vulkan/ExternalHandle.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T22:54:22Z",
+      "side": 1,
+      "message": "Seems fine, can you add a comment?",
+      "parentUuid": "baf3e543_5aacb546",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d60fb165_40ca27a2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 50
@@ -646,6 +664,30 @@
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f6e05f2_e1ab44b2",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T22:54:22Z",
+      "side": 1,
+      "message": "Never mind, I think I misunderstood when I read it the first time.",
+      "parentUuid": "cbe3217e_733b3f02",
+      "range": {
+        "startLine": 618,
+        "startChar": 48,
+        "endLine": 618,
+        "endChar": 87
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -1711,6 +1753,23 @@
         "endLine": 49,
         "endChar": 99
       },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e5ac033_959beed5",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T22:54:22Z",
+      "side": 1,
+      "message": "can be TODO(crbug.com/966500)",
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
