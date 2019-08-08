@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "02ad62c3_2aff10dd",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "Why not TextureBase::MakeError(...) ?",
+      "range": {
+        "startLine": 610,
+        "startChar": 19,
+        "endLine": 610,
+        "endChar": 26
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d053efdc_5fd89068",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 50
@@ -75,6 +98,339 @@
         "startChar": 0,
         "endLine": 87,
         "endChar": 68
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbb6d5de_0a6bec4b",
+        "filename": "src/dawn_native/vulkan/ExternalHandle.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: Comment that these are file descriptors.",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 40
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d60fb165_40ca27a2",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: createInfo \u003d {};",
+      "range": {
+        "startLine": 502,
+        "startChar": 26,
+        "endLine": 502,
+        "endChar": 36
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0826fbff_eccd9f22",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52d2f158_e8d4b262",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: explicit Service(Device* device)",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "788ceee5_dd2d53e0",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceNull.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: We have a DAWN_UNUSED macro",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54fe59ce_731638e9",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceNull.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: This is only used once: Just return the error without doing the #define",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82007491_d4851803",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "Validate this isn\u0027t negative? If it\u0027s validated elsewhere, add an ASSERT",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7daea109_197b6227",
+        "filename": "src/dawn_native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: add whitespace",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f663e031_61f95508",
+        "filename": "src/dawn_native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: explicit Service(Device* device)",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e37f6d5_cfe0c59f",
+        "filename": "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceNull.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "I\u0027d rather not do this :/",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 18
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45b1bc9e_431bcdae",
+        "filename": "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceNull.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: DAWN_UNUSED",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0018516f_ee4ccc20",
+        "filename": "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceNull.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: ~Service() \u003d default;",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 14,
+        "endChar": 5
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2d5a0e7_7230434f",
+        "filename": "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "nit: ~Service() \u003d default;",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 12,
+        "endChar": 5
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21115427_1e9cad96",
+        "filename": "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "ditto: Validate the file descriptor or ASSERT not negative",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 9
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1428bc29_d1874f89",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T00:28:14Z",
+      "side": 1,
+      "message": "#ifdef DAWN_PLATFORM_LINUX ?",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 99
       },
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
