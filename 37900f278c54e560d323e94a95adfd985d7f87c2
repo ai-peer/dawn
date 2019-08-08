@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c394eba4_61a4313c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-08T20:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f139ec_9c931054",
+      "range": {
+        "startLine": 507,
+        "startChar": 27,
+        "endLine": 507,
+        "endChar": 41
+      },
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63943998_b3581e64",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8a9a544_8ee0cc39",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-08T20:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63943998_b3581e64",
+      "range": {
+        "startLine": 883,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 0
+      },
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -92,6 +140,30 @@
       "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4757ce65_2f9fb0ee",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-08T20:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e60fe579_d3e63303",
+      "range": {
+        "startLine": 365,
+        "startChar": 83,
+        "endLine": 366,
+        "endChar": 27
+      },
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +217,24 @@
       "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4d18176_b4ffa9aa",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-08T20:21:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "27dc68c3_09f46920",
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
