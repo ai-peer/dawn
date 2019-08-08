@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "570b8e91_ee6d47fc",
+        "filename": "src/dawn_native/metal/StagingBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T23:50:57Z",
+      "side": 1,
+      "message": "This would fail on creation of the staging buffer, not mapping. (Is it necessary to check both?)",
+      "range": {
+        "startLine": 30,
+        "startChar": 54,
+        "endLine": 30,
+        "endChar": 57
+      },
+      "revId": "6fcea27799898e8a0a81d2692432c3ba2a0edac5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
