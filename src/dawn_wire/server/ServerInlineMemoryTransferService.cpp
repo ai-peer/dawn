@@ -26,14 +26,16 @@ namespace dawn_wire { namespace server {
             }
             ~ReadHandleImpl() override = default;
 
-            size_t SerializeInitialData(const void* data,
-                                        size_t dataLength,
-                                        void* serializePointer) override {
-                if (serializePointer != nullptr && dataLength > 0) {
-                    ASSERT(data != nullptr);
-                    memcpy(serializePointer, data, dataLength);
-                }
+            size_t SerializeInitialDataSize(const void* data, size_t dataLength) override {
                 return dataLength;
+            }
+
+            void SerializeInitialData(const void* data,
+                                      size_t dataLength,
+                                      void* serializePointer) override {
+                ASSERT(data != nullptr);
+                ASSERT(serializePointer != nullptr);
+                memcpy(serializePointer, data, dataLength);
             }
         };
 
