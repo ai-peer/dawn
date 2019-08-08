@@ -831,6 +831,30 @@
     },
     {
       "key": {
+        "uuid": "f6b05f74_f376aee2",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T18:29:34Z",
+      "side": 1,
+      "message": "Bryan pointed out that the NVidia D3D12 do\u0027s and don\u0027ts document also says this.\n\nhttps://developer.nvidia.com/dx12-dos-and-donts\n\nFrom the document:\n\"* Use committed resources where possible to give the driver more knowledge\n    * This allows the driver to better manage GPU memory\n    * A good use case for placed resources are resource heaps that are e.g. used during streaming and do hold different sets of read-only textures over their life time\"",
+      "parentUuid": "5d963c9b_014680af",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "103fc416_bce66ffe",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
         "patchSetId": 3
