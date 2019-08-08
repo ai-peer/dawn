@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b01cf8d_887398fe",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T19:49:36Z",
+      "side": 1,
+      "message": "Nit: Nobody should be making objects of type ResourceHeapBase directly. Hence, this constructor should be protected.",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 37
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05b7a969_e9549d3f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T19:49:36Z",
+      "side": 1,
+      "message": "Can we assert mUsedComObjectRefs.Empty() after the ClearUpTo call?",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 55
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efe7f6a2_38f20b0b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T19:49:36Z",
+      "side": 1,
+      "message": "Nit: \"could of enqueued\" ---\u003e \"could have enqueued\".",
+      "range": {
+        "startLine": 126,
+        "startChar": 70,
+        "endLine": 126,
+        "endChar": 87
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8a3edc_2247ce9c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T19:49:36Z",
+      "side": 1,
+      "message": "Nit: You can assign the allocator variable directly in line 337.",
+      "range": {
+        "startLine": 333,
+        "startChar": 8,
+        "endLine": 333,
+        "endChar": 56
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2c88e5e_3040e58c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T19:49:36Z",
+      "side": 1,
+      "message": "I believe that the first enum value in D3D12_HEAP_TYPE is 0.  If so, won\u0027t we underflow here?",
+      "range": {
+        "startLine": 349,
+        "startChar": 74,
+        "endLine": 349,
+        "endChar": 86
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daa0e432_a808ec29",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T19:49:36Z",
+      "side": 1,
+      "message": "Nit: Please have the name of the file match the name of the class.",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 36
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
