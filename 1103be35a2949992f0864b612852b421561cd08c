@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d053efdc_5fd89068",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T00:15:34Z",
+      "side": 1,
+      "message": "I think this returns nullptr without producing a device error; should probably send one here.",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "471d5c88_b29d4bb9",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T00:15:34Z",
+      "side": 1,
+      "message": "nit: move comment into the else if so the `} else if (` isn\u0027t broken across lines.",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70c67016_b191bd88",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T00:15:34Z",
+      "side": 1,
+      "message": "optional: moving this block into a separate function should avoid the weird control flow that\u0027s going on here, because you\u0027ll be able to return early. And that can return MaybeError and CreateExportableSemaphore et al can return ResultOrError (I think).",
+      "range": {
+        "startLine": 626,
+        "startChar": 0,
+        "endLine": 644,
+        "endChar": 9
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9bfb965_7c21d38b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T00:15:34Z",
+      "side": 1,
+      "message": "Internally these just unpack a ResultOrError into a MaybeError+out pointer. We could just change them to return the ResultOrError directly, after a small refactor below.\n\n(Or possibly they can be removed entirely, if that\u0027s the only reason they exist.)",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 68
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
