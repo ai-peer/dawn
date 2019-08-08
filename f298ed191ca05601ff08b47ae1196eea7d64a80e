@@ -347,6 +347,24 @@
     },
     {
       "key": {
+        "uuid": "27bd5ed5_a4f2a420",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-08T18:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e31c5540_010787ba",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "779aed4a_0cb0c6a9",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3
@@ -376,6 +394,24 @@
       "side": 1,
       "message": "Accidentally merged.",
       "parentUuid": "779aed4a_0cb0c6a9",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d180d70e_585f39ef",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-08T18:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20d574b4_07a3224f",
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -584,6 +620,24 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03d9aeb4_b8ff86fd",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-08T18:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "745eec40_539a6d2e",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -1052,6 +1106,30 @@
     },
     {
       "key": {
+        "uuid": "644c23b4_86224c4b",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-08T18:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf5ebe0a_a0633145",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4223ae8f_d559f28f",
         "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
         "patchSetId": 3
@@ -1120,6 +1198,30 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09a63d92_0b3b4d0a",
+        "filename": "src/dawn_native/d3d12/ResourceHeapD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-08T18:13:42Z",
+      "side": 1,
+      "message": "It would. See Buffer::GetD3D12Resource(). The allocator returns a handle used by the buffer object that has a created \"resource heap\" which contains both the d3d heap and placed resource. Only the placed resource is needed by the buffer object.",
+      "parentUuid": "8fc215d8_9fdb5ff4",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
