@@ -16,6 +16,24 @@
       "revId": "4151d6e8f5a53f86f37c21fa43ca28dcc6fe9d73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "750cd2f8_40e0d907",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T17:20:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2ba4ddd_cb8de0bf",
+      "revId": "4151d6e8f5a53f86f37c21fa43ca28dcc6fe9d73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
