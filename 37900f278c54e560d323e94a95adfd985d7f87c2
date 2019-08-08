@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "23f139ec_9c931054",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T18:21:16Z",
+      "side": 1,
+      "message": "Nit: Please amend this comment by clearly describing what the \"other means\" and where in the code it happens.",
+      "range": {
+        "startLine": 507,
+        "startChar": 27,
+        "endLine": 507,
+        "endChar": 41
+      },
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63943998_b3581e64",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-08T18:21:16Z",
+      "side": 1,
+      "message": "Nit: Based on the comments in Gerrit, I now understand (and agree with) the rationale as to why we\u0027re setting the texture as \"cleared\" instead of clearing it.  Please include a comment that describes the rationale.",
+      "range": {
+        "startLine": 883,
+        "startChar": 0,
+        "endLine": 890,
+        "endChar": 0
+      },
+      "revId": "37900f278c54e560d323e94a95adfd985d7f87c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28e38f2e_83cc43ee",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 8
