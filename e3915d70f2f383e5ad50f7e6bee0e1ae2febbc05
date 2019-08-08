@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30a16e4a_35bec450",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T23:44:34Z",
+      "side": 1,
+      "message": "Why does this need to be disabled? Seems like it should be possible to test now.",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89e2c1f2_18f14f95",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T23:44:34Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this pass even if the destroy weren\u0027t here, since the texture isn\u0027t external? Can this be tested with an external texture?",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bd29d2c_13ed9ce9",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-08T23:44:34Z",
+      "side": 1,
+      "message": "Is it possible to test:\n\nimport texture into device\ncopy color into texture on device\nimport texture into secondDevice\ncopy color into texture on secondDevice\nwait for whatever signals\nverify result on device (without reimporting)\n\n? I didn\u0027t spot any that do this.",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
