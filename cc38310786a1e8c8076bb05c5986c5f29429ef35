@@ -286,6 +286,30 @@
       "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a4b7505_e34a1087",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-08-08T09:04:31Z",
+      "side": 1,
+      "message": "Austin, Thank you for helping investigate the solutions. GTEST_FAIL() also skip all tests of OpenGL and Vulkan just like GTEST_SKIP() if put it in environment SetUp().\n\n\u003e [\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] Running 642 tests from 42 test suites.\n[----------] Global test environment set-up.\n../../src/tests/DawnTest.cpp:149: Failure\nFailed\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 642 tests from 42 test suites ran. (5 ms total)\n[  PASSED  ] 642 tests.\n[  FAILED  ] 0 tests, listed below:\n\nNow I\u0027m investigating two ways: one is whether we can update test envrionment with GTEST_FLAG(filter) to filter OpenGL tests in SetUp(), another is still put GTEST_SKIP() in DawnTest SetUp() and find a way to catch this in SetUp of child class (I described this background in the senventh comment above).",
+      "parentUuid": "247885e9_cfff7045",
+      "range": {
+        "startLine": 350,
+        "startChar": 43,
+        "endLine": 350,
+        "endChar": 52
+      },
+      "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
