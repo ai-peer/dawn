@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "367fd33b_f4f1bc4d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T20:24:28Z",
+      "side": 1,
+      "message": "[3] non output attachments",
+      "revId": "d3bf1bd6e4bb3931ca1c67ab0f8efd23da598e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e7dc5e8_a14244d1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T20:24:28Z",
+      "side": 1,
+      "message": "usages.textureUsages[i]",
+      "range": {
+        "startLine": 509,
+        "startChar": 22,
+        "endLine": 509,
+        "endChar": 41
+      },
+      "revId": "d3bf1bd6e4bb3931ca1c67ab0f8efd23da598e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f661e45c_80f28f29",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T20:24:28Z",
+      "side": 1,
+      "message": "[1] We don\u0027t replace the loadOp with a clearOp here",
+      "range": {
+        "startLine": 908,
+        "startChar": 16,
+        "endLine": 917,
+        "endChar": 17
+      },
+      "revId": "d3bf1bd6e4bb3931ca1c67ab0f8efd23da598e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52f17858_961b5327",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T20:24:28Z",
+      "side": 1,
+      "message": "[5] (non output attachments which are color) OR depthStencil",
+      "range": {
+        "startLine": 367,
+        "startChar": 16,
+        "endLine": 370,
+        "endChar": 63
+      },
+      "revId": "d3bf1bd6e4bb3931ca1c67ab0f8efd23da598e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a75876e4_aee4cba9",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T20:24:28Z",
+      "side": 1,
+      "message": "[2] We don\u0027t replace the loadOp with a clearOp here",
+      "range": {
+        "startLine": 246,
+        "startChar": 20,
+        "endLine": 254,
+        "endChar": 21
+      },
+      "revId": "d3bf1bd6e4bb3931ca1c67ab0f8efd23da598e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dcf44fd_48bbc100",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T20:24:28Z",
+      "side": 1,
+      "message": "usages.textureUsages[i]",
+      "range": {
+        "startLine": 373,
+        "startChar": 22,
+        "endLine": 373,
+        "endChar": 41
+      },
+      "revId": "d3bf1bd6e4bb3931ca1c67ab0f8efd23da598e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dae58e99_ac4a38dd",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T20:24:28Z",
+      "side": 1,
+      "message": "[4] non output attachments",
+      "revId": "d3bf1bd6e4bb3931ca1c67ab0f8efd23da598e9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
