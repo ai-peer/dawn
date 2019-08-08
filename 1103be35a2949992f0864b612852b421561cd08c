@@ -272,6 +272,24 @@
     },
     {
       "key": {
+        "uuid": "f72f1a47_1be619d6",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T22:52:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2530afb3_0f578173",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9bfb965_7c21d38b",
         "filename": "src/dawn_native/vulkan/DeviceVk.h",
         "patchSetId": 50
@@ -563,6 +581,24 @@
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf80ee9f_5650465a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T22:52:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "facbd26f_057de1a1",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -1657,6 +1693,30 @@
     },
     {
       "key": {
+        "uuid": "ab5ffc76_5e74d82f",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T22:52:58Z",
+      "side": 1,
+      "message": "Hm, how about we leave them here, and then implement them in VulkanBackend.cpp with {\n  NOTREACHED();\n  return nullptr\n}?\n(on not linux)",
+      "parentUuid": "481195d2_2ab12fb1",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 99
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a566b017_16dc322a",
         "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 50
@@ -1701,6 +1761,30 @@
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a9ef025_8fecaca6",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T22:52:58Z",
+      "side": 1,
+      "message": "I think an ASSERT should be fine. It really shouldn\u0027t ever be failing.",
+      "parentUuid": "424ca6c1_76e8b239",
+      "range": {
+        "startLine": 208,
+        "startChar": 8,
+        "endLine": 210,
+        "endChar": 42
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
