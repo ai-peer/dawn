@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "df387551_413a2548",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T16:54:14Z",
+      "side": 1,
+      "message": "nit: If I understand correctly, this doesn\u0027t actually have to memory for an image. It could just be some other Vulkan memory allocation. It could be used in the future to do something like \"CreateBufferWrappingVulkanBuffer\"\n\nRename to \"ImportMemory\"?",
+      "range": {
+        "startLine": 592,
+        "startChar": 23,
+        "endLine": 592,
+        "endChar": 40
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "02ad62c3_2aff10dd",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 50
@@ -82,6 +105,47 @@
     },
     {
       "key": {
+        "uuid": "6b9432e5_78491cc7",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T16:54:14Z",
+      "side": 1,
+      "message": "+1. To be more clear, probably something like\n\nMaybeError CreateExternalImageMemory(\n    VkSemaphore* signalSemaphore,\n    VkDeviceMemory* allocation,\n    const std::vector\u003cExternalSemaphoreHandle\u003e\u0026 waitHandles,\n    VkSemaphore** waitSemaphores) {\n  DAWN_TRY_ASSIGN(*signalSemaphore, CreateExportable...);\n  DAWN_TRY_ASSIGN(*allocation, ImportImage...);\n  for (i... waitHandles..) {\n    DAWN_TRY_ASSIGN(*waitSemaphores[i], ImportSempahore...);\n  }\n}\n\nOne question about destruction below though.",
+      "parentUuid": "70c67016_b191bd88",
+      "range": {
+        "startLine": 626,
+        "startChar": 0,
+        "endLine": 644,
+        "endChar": 9
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee85b8ce_1fdd3c92",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T16:54:14Z",
+      "side": 1,
+      "message": "There are failure cases where only some of these have been created. Is it okay to call destroy?",
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f9bfb965_7c21d38b",
         "filename": "src/dawn_native/vulkan/DeviceVk.h",
         "patchSetId": 50
@@ -93,6 +157,30 @@
       "writtenOn": "2019-08-08T00:15:34Z",
       "side": 1,
       "message": "Internally these just unpack a ResultOrError into a MaybeError+out pointer. We could just change them to return the ResultOrError directly, after a small refactor below.\n\n(Or possibly they can be removed entirely, if that\u0027s the only reason they exist.)",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 68
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6a4e719_6b7fd83d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 50
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T16:54:14Z",
+      "side": 1,
+      "message": "+1 to removing these.",
+      "parentUuid": "f9bfb965_7c21d38b",
       "range": {
         "startLine": 77,
         "startChar": 0,
@@ -179,6 +267,47 @@
         "endLine": 502,
         "endChar": 36
       },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "689e4cae_3b4d3cc5",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T16:54:14Z",
+      "side": 1,
+      "message": "Probably not necessary though because you set all the fields.",
+      "parentUuid": "d60fb165_40ca27a2",
+      "range": {
+        "startLine": 502,
+        "startChar": 26,
+        "endLine": 502,
+        "endChar": 36
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e55437d0_97abf7db",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T16:54:14Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -735,6 +864,29 @@
         "startChar": 4,
         "endLine": 49,
         "endChar": 99
+      },
+      "revId": "1103be35a2949992f0864b612852b421561cd08c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a566b017_16dc322a",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 50
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-08T16:54:14Z",
+      "side": 1,
+      "message": "I\u0027m guessing if these don\u0027t match the imported image, Vulkan will fail somewhere around [1]. Is there a way to validate and test this behavior?\n\nAt the very least, \"The size member of the VkMemoryRequirements structure returned from a call to vkGetImageMemoryRequirements with image must be less than or equal to the size of memory minus memoryOffset\" would be a problem.\nhttps://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkBindImageMemory.html\n\nI think we should at least be able to check that the exported memory allocation is big enough for the texture.",
+      "range": {
+        "startLine": 208,
+        "startChar": 8,
+        "endLine": 210,
+        "endChar": 42
       },
       "revId": "1103be35a2949992f0864b612852b421561cd08c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
