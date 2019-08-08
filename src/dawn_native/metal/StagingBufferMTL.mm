@@ -25,6 +25,11 @@ namespace dawn_native { namespace metal {
         const size_t bufferSize = GetSize();
         mBuffer = [mDevice->GetMTLDevice() newBufferWithLength:bufferSize
                                                        options:MTLResourceStorageModeShared];
+
+        if (mBuffer == nil) {
+            return DAWN_CONTEXT_LOST_ERROR("Unable to map staging buffer.");
+        }
+
         mMappedPointer = [mBuffer contents];
         return {};
     }
