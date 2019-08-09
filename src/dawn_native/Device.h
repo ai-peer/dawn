@@ -115,6 +115,8 @@ namespace dawn_native {
             const ShaderModuleDescriptor* descriptor);
         void UncacheShaderModule(ShaderModuleBase* obj);
 
+        Ref<AttachmentState> GetOrCreateAttachmentState(
+            const RenderBundleEncoderDescriptor* descriptor);
         Ref<AttachmentState> GetOrCreateAttachmentState(const RenderPipelineDescriptor* descriptor);
         Ref<AttachmentState> GetOrCreateAttachmentState(const RenderPassDescriptor* descriptor);
         void UncacheAttachmentState(AttachmentState* obj);
@@ -131,6 +133,8 @@ namespace dawn_native {
         ComputePipelineBase* CreateComputePipeline(const ComputePipelineDescriptor* descriptor);
         PipelineLayoutBase* CreatePipelineLayout(const PipelineLayoutDescriptor* descriptor);
         QueueBase* CreateQueue();
+        RenderBundleEncoderBase* CreateRenderBundleEncoder(
+            const RenderBundleEncoderDescriptor* descriptor);
         RenderPipelineBase* CreateRenderPipeline(const RenderPipelineDescriptor* descriptor);
         SamplerBase* CreateSampler(const SamplerDescriptor* descriptor);
         ShaderModuleBase* CreateShaderModule(const ShaderModuleDescriptor* descriptor);
@@ -203,6 +207,9 @@ namespace dawn_native {
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
                                                 const PipelineLayoutDescriptor* descriptor);
         MaybeError CreateQueueInternal(QueueBase** result);
+        MaybeError CreateRenderBundleEncoderInternal(
+            RenderBundleEncoderBase** result,
+            const RenderBundleEncoderDescriptor* descriptor);
         MaybeError CreateRenderPipelineInternal(RenderPipelineBase** result,
                                                 const RenderPipelineDescriptor* descriptor);
         MaybeError CreateSamplerInternal(SamplerBase** result, const SamplerDescriptor* descriptor);
