@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "f92ee41d_5d0d3d18",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T15:41:21Z",
+      "side": 1,
+      "message": "Hm.. that\u0027s true that that\u0027s weird.\nRight. because we lazily set the pipeline.\n\nI\u0027m okay to either disable for now or DAWN_SKIP_TEST_IF(IsWindows() \u0026\u0026 IsNVIDIA());\n\nWe\u0027re going to change how binding works anyway so inheritance won\u0027t be needed in the future.\nSee https://bugs.chromium.org/p/dawn/issues/detail?id\u003d201",
+      "parentUuid": "1c2a7a6e_60e03a05",
+      "range": {
+        "startLine": 365,
+        "startChar": 33,
+        "endLine": 365,
+        "endChar": 78
+      },
+      "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5765b814_bdfc7998",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1

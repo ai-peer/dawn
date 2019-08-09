@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e303b2a0_487f5225",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T15:41:21Z",
+      "side": 1,
+      "message": "nit: You can still use the string literal:\n\nfs \u003c\u003c R\"(\n  ...\n  ...\n)\"",
+      "revId": "48d05840048c1b754d2429f0e87e05714fbc0c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
