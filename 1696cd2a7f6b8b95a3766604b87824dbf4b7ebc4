@@ -600,6 +600,24 @@
     },
     {
       "key": {
+        "uuid": "500c65c1_9de3b4d2",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:10:14Z",
+      "side": 1,
+      "message": "This is a good idea; Will do as a follow-up",
+      "parentUuid": "181fe4cc_d7ebf664",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "139ee440_22091cae",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 7
