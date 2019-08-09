@@ -25,6 +25,7 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/PassResourceUsageTracker.h"
+#include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 

@@ -18,6 +18,7 @@
 #include "common/HashUtils.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/RenderBundleEncoder.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 namespace dawn_native {

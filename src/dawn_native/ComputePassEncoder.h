@@ -16,6 +16,7 @@
 #define DAWNNATIVE_COMPUTEPASSENCODER_H_
 
 #include "dawn_native/Error.h"
+#include "dawn_native/ObjectBase.h"
 #include "dawn_native/ProgrammablePassEncoder.h"
 
 namespace dawn_native {

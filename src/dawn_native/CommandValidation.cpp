@@ -165,6 +165,27 @@ namespace dawn_native {
 
     }  // namespace
 
+    MaybeError ValidateRenderBundle(CommandIterator* commands,
+                                    const AttachmentState* attachmentState,
+                                    PassResourceUsage* resourceUsage) {
+        PassResourceUsageTracker usageTracker;
+        CommandBufferStateTracker commandBufferState;
+        unsigned int debugGroupStackSize = 0;
+
+        Command type;
+        while (commands->NextCommandId(&type)) {
+            DAWN_TRY(ValidateRenderBundleCommand(commands, type, &usageTracker, &commandBufferState,
+                                                 attachmentState, &debugGroupStackSize,
+                                                 "Command disallowed inside a render bundle"));
+        }
+
+        DAWN_TRY(usageTracker.ValidateRenderPassUsages());
+        ASSERT(resourceUsage != nullptr);
+        *resourceUsage = usageTracker.AcquireResourceUsage();
+
+        return {};
+    }
+
     MaybeError ValidateRenderPass(CommandIterator* commands,
                                   BeginRenderPassCmd* renderPass,
                                   std::vector<PassResourceUsage>* perPassResourceUsages) {
@@ -203,6 +224,33 @@ namespace dawn_native {
                     perPassResourceUsages->push_back(usageTracker.AcquireResourceUsage());
 
                     return {};
+                } break;
+
+                case Command::ExecuteBundles: {
+                    ExecuteBundlesCmd* cmd = commands->NextCommand<ExecuteBundlesCmd>();
+                    auto bundles = commands->NextData<Ref<RenderBundleBase>>(cmd->count);
+                    for (uint32_t i = 0; i < cmd->count; ++i) {
+                        if (DAWN_UNLIKELY(renderPass->attachmentState.Get() !=
+                                          bundles[i]->GetAttachmentState())) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Render bundle is not compatible with render pass");
+                        }
+
+                        const PassResourceUsage& usages = bundles[i]->GetResourceUsage();
+                        for (uint32_t i = 0; i < usages.buffers.size(); ++i) {
+                            usageTracker.BufferUsedAs(usages.buffers[i], usages.bufferUsages[i]);
+                        }
+
+                        for (uint32_t i = 0; i < usages.textures.size(); ++i) {
+                            usageTracker.TextureUsedAs(usages.textures[i], usages.textureUsages[i]);
+                        }
+                    }
+
+                    if (cmd->count > 0) {
+                        // Reset state. It is invalidated after render bundle execution.
+                        commandBufferState = CommandBufferStateTracker{};
+                    }
+
                 } break;
 
                 case Command::SetStencilReference: {
