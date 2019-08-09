@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a17e42c1_c9904593",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "de0dd431_8de0f8ae",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25805301_536c51ca",
         "filename": "dawn.json",
         "patchSetId": 7
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4e67990c_d81ceca1",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "They do. This is now validated.",
+      "parentUuid": "1e01ac07_5d901255",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a636b28e_99c258b7",
         "filename": "dawn.json",
         "patchSetId": 7
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "ab535d90_9444e3e2",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a636b28e_99c258b7",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b54dbe4c_5d2574fe",
         "filename": "dawn.json",
         "patchSetId": 7
@@ -85,6 +139,24 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cb2d492_8eebb0ab",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b54dbe4c_5d2574fe",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -487,6 +559,30 @@
     },
     {
       "key": {
+        "uuid": "45b79c31_e4daa95c",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d76dfae2_365d2c23",
+      "range": {
+        "startLine": 36,
+        "startChar": 67,
+        "endLine": 36,
+        "endChar": 81
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "181fe4cc_d7ebf664",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 7
@@ -661,6 +757,24 @@
     },
     {
       "key": {
+        "uuid": "e29cbd10_09c4e162",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1c0ddd2_f6045ef1",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d4510b2_1ff0159e",
         "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
         "patchSetId": 7
@@ -707,6 +821,24 @@
       "writtenOn": "2019-07-25T11:07:32Z",
       "side": 1,
       "message": "These semantics sound good but the group will have to discuss them.",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e118f573_e4ee88cb",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "Opened an investigation and updated validation accordingly.",
+      "parentUuid": "2eb1a0f1_79eba9a3",
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -862,6 +994,30 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3d94685_18686656",
+        "filename": "src/utils/ComboRenderBundleEncoderDescriptor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:09:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ddb30aa7_b42a7c18",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
