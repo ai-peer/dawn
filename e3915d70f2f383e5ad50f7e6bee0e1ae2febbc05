@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4199b9f0_79de15bb",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-09T00:10:20Z",
+      "side": 1,
+      "message": "You\u0027re right, it\u0027s like this in IOSurface tests but it does work. Re-enabled.",
+      "parentUuid": "30a16e4a_35bec450",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89e2c1f2_18f14f95",
         "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 55
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1dd7511e_fe3ae7b9",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-09T00:10:20Z",
+      "side": 1,
+      "message": "We cant use .Destroy() on an external texture since it will fail the assert that we must signal before destroy in DestroyImpl in TextureVk:\n\n// If a signal semaphore exists it should be requested before we delete the texture\nASSERT(mSignalSemaphore \u003d\u003d VK_NULL_HANDLE);\n\nI guess this test makes sure that if a normal texture is destroyed, its still caught as a problem when trying to export a semaphore. We can\u0027t ever destroy an external texture except to grab the signal.",
+      "parentUuid": "89e2c1f2_18f14f95",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bd29d2c_13ed9ce9",
         "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 55
@@ -47,6 +83,24 @@
       "writtenOn": "2019-08-08T23:44:34Z",
       "side": 1,
       "message": "Is it possible to test:\n\nimport texture into device\ncopy color into texture on device\nimport texture into secondDevice\ncopy color into texture on secondDevice\nwait for whatever signals\nverify result on device (without reimporting)\n\n? I didn\u0027t spot any that do this.",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93166211_13095bba",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-09T00:10:20Z",
+      "side": 1,
+      "message": "Not currently possible. First, texture uses have to depend on signaled semaphores. So your case really looks like:\n\nimport texture into device\ncopy color into texture on device\nimport texture into secondDevice waiting on first device\ncopy color into texture on secondDevice\nwait for second device op on first device\nverify result on device (without reimporting)\n\nThis doesn\u0027t work since the last step requires us to wait on the signal from second device, and look at the texture from step 1. But for the second copy, we need to give a semaphore from the first device. To get the semaphore, we must destroy the texture from step 1. So in conclusion it\u0027s not valid to try to verify the result without reimporting since we dispose of the texture when extracting a signal semaphore.",
+      "parentUuid": "5bd29d2c_13ed9ce9",
       "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
