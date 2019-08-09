@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "209c4648_baf9e521",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T05:06:04Z",
+      "side": 0,
+      "message": "Could we instead keep this original function but pass a flag like:\nCreateRenderPipeline(boolean extraBindGroup)\n\nAnd if extraBindGroup \u003d\u003d true, then we insert the extra bind group into the shader?\n\nI think it would help deduplicate a lot of code.",
+      "range": {
+        "startLine": 81,
+        "startChar": 25,
+        "endLine": 81,
+        "endChar": 45
+      },
+      "revId": "ef2fac0b9447cb4cbb93616bc91508ffb6fef599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

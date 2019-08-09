@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b6fb3fc_7bb22d91",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T05:06:04Z",
+      "side": 1,
+      "message": "We could move the code at [1] here.",
+      "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b3bfe93_6143f395",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T05:06:04Z",
+      "side": 1,
+      "message": "Looking it again, I\u0027m pretty sure this is happening because we don\u0027t have the proper synchronization between Dispatch calls.\n\nThat being said, we don\u0027t need to do two Dispatch calls to check the bind group inheritance.\n\nWe can just do:\nSetPipeline(pipeline0)\nSetBindGroup(0, ...)\nSetPipeline(pipeline1)\nSetBindGroup(1, ...)\nDispatch(...)\n\nWhat do you think?",
+      "range": {
+        "startLine": 365,
+        "startChar": 33,
+        "endLine": 365,
+        "endChar": 78
+      },
+      "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5765b814_bdfc7998",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T05:06:04Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 381,
+        "startChar": 4,
+        "endLine": 385,
+        "endChar": 0
+      },
+      "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
