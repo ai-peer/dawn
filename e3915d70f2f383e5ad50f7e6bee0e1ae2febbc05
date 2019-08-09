@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "d510d709_504707c6",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-09T01:31:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1dd7511e_fe3ae7b9",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bd29d2c_13ed9ce9",
         "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 55
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Not currently possible. First, texture uses have to depend on signaled semaphores. So your case really looks like:\n\nimport texture into device\ncopy color into texture on device\nimport texture into secondDevice waiting on first device\ncopy color into texture on secondDevice\nwait for second device op on first device\nverify result on device (without reimporting)\n\nThis doesn\u0027t work since the last step requires us to wait on the signal from second device, and look at the texture from step 1. But for the second copy, we need to give a semaphore from the first device. To get the semaphore, we must destroy the texture from step 1. So in conclusion it\u0027s not valid to try to verify the result without reimporting since we dispose of the texture when extracting a signal semaphore.",
       "parentUuid": "5bd29d2c_13ed9ce9",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d636afcf_0a4d08f4",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-09T01:31:44Z",
+      "side": 1,
+      "message": "Isn\u0027t this how things work in Chrome, though? - import a Chrome texture, write into it, then let go and Chrome continues using the same texture? Seems like we should ideally find a way to test that code path.",
+      "parentUuid": "93166211_13095bba",
       "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
