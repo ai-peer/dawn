@@ -176,6 +176,24 @@
       "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd7f9f2c_ce2a6831",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:30:49Z",
+      "side": 1,
+      "message": "This seems good to me!",
+      "parentUuid": "478b02b7_142de47b",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
