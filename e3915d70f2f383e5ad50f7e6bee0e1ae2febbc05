@@ -140,6 +140,24 @@
       "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "794124ed_ae141f70",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 55
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T15:49:04Z",
+      "side": 1,
+      "message": "Chrome doesn\u0027t import the texture though?\nWouldn\u0027t the chrome pattern be.\n\nCREATE texture on device.\ncopy color into texture on device\nimport texture into secondDevice waiting on first device\ncopy color into texture on secondDevice\nexport signals from texture on secondDevice\nwait on signals on first device\nverify result",
+      "parentUuid": "d636afcf_0a4d08f4",
+      "revId": "e3915d70f2f383e5ad50f7e6bee0e1ae2febbc05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
