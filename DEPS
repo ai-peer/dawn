@@ -16,7 +16,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
   'buildtools': {
-    'url': '{chromium_git}/chromium/buildtools@24ebce4578745db15274e180da1938ebc1358243',
+    'url': '{chromium_git}/chromium/src/buildtools@24ebce4578745db15274e180da1938ebc1358243',
     'condition': 'dawn_standalone',
   },
   'tools/clang': {
