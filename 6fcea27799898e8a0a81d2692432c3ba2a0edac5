@@ -22,6 +22,30 @@
       "revId": "6fcea27799898e8a0a81d2692432c3ba2a0edac5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78f2ebee_20ee09f6",
+        "filename": "src/dawn_native/metal/StagingBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-09T00:12:39Z",
+      "side": 1,
+      "message": "I see no reason why we couldn\u0027t check both.",
+      "parentUuid": "570b8e91_ee6d47fc",
+      "range": {
+        "startLine": 30,
+        "startChar": 54,
+        "endLine": 30,
+        "endChar": 57
+      },
+      "revId": "6fcea27799898e8a0a81d2692432c3ba2a0edac5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
