@@ -141,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "be096013_b4f48d61",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Validation is now precomputed because we need to get it anyway to validate the render bundle.",
+      "parentUuid": "22665e04_5bde0b77",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1e7b9a4_c08b23fb",
         "filename": "src/dawn_native/ComputePassEncoder.h",
         "patchSetId": 7
@@ -155,6 +173,24 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7356ec7_18a8d6f6",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1e7b9a4_c08b23fb",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -178,6 +214,30 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54012134_6907f90e",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Order looks the same to me",
+      "parentUuid": "64da5019_d027a197",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 5
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -227,6 +287,54 @@
     },
     {
       "key": {
+        "uuid": "e553d5a4_44b05cbb",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Has been factored into AttachmentState object.",
+      "parentUuid": "fbdb5357_258515d0",
+      "range": {
+        "startLine": 62,
+        "startChar": 87,
+        "endLine": 62,
+        "endChar": 97
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5809dac4_dcc33797",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Has been factored into AttachmentState object.",
+      "parentUuid": "7591b60e_7f9bcddd",
+      "range": {
+        "startLine": 62,
+        "startChar": 60,
+        "endLine": 62,
+        "endChar": 72
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67442895_fe464646",
         "filename": "src/dawn_native/RenderBundle.cpp",
         "patchSetId": 7
@@ -247,6 +355,30 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8afc0015_a1eab7c8",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Has been factored into AttachmentState object.",
+      "parentUuid": "67442895_fe464646",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 9
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -273,6 +405,30 @@
     },
     {
       "key": {
+        "uuid": "50621d48_e46e5a9d",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Has been factored into AttachmentState object.",
+      "parentUuid": "b1837b9c_c1ae7aa5",
+      "range": {
+        "startLine": 79,
+        "startChar": 83,
+        "endLine": 79,
+        "endChar": 93
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "878ba833_8ed53f55",
         "filename": "src/dawn_native/RenderBundle.h",
         "patchSetId": 7
@@ -287,6 +443,24 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28db1c82_9d93e37b",
+        "filename": "src/dawn_native/RenderBundle.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "878ba833_8ed53f55",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -347,6 +521,24 @@
     },
     {
       "key": {
+        "uuid": "61f625bc_77ab1cfd",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "139ee440_22091cae",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dead9b1_04c9f5f6",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 7
@@ -361,6 +553,24 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7929bed1_21ee6bec",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Not relevant anymore. We do all the validation on the render bundle.",
+      "parentUuid": "3dead9b1_04c9f5f6",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -381,6 +591,24 @@
     },
     {
       "key": {
+        "uuid": "bfbe0118_2c2e0d3a",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Probably not. We have this validation on Render/Compute passes as well.",
+      "parentUuid": "0a70c477_e1553cfe",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "910216b5_f012fb72",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 7
@@ -395,6 +623,24 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9804e0c4_ee12412e",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "910216b5_f012fb72",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -432,6 +678,24 @@
     },
     {
       "key": {
+        "uuid": "5488ceda_bbd7e4bc",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d4510b2_1ff0159e",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2eb1a0f1_79eba9a3",
         "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
         "patchSetId": 7
@@ -466,6 +730,24 @@
     },
     {
       "key": {
+        "uuid": "6bce012e_fbf7650d",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc157835_4974af04",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd0b7363_546148ae",
         "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
         "patchSetId": 7
@@ -483,6 +765,24 @@
     },
     {
       "key": {
+        "uuid": "cb6fe938_0e228e0a",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd0b7363_546148ae",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e468cefc_1dfe8f36",
         "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
         "patchSetId": 7
@@ -497,6 +797,24 @@
       "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c159e87f_d33b2271",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-09T20:00:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e468cefc_1dfe8f36",
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
