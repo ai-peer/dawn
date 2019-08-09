@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c4af02eb_546784f7",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-09T13:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b6fb3fc_7bb22d91",
+      "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b3bfe93_6143f395",
         "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2019-08-09T05:06:04Z",
       "side": 1,
       "message": "Looking it again, I\u0027m pretty sure this is happening because we don\u0027t have the proper synchronization between Dispatch calls.\n\nThat being said, we don\u0027t need to do two Dispatch calls to check the bind group inheritance.\n\nWe can just do:\nSetPipeline(pipeline0)\nSetBindGroup(0, ...)\nSetPipeline(pipeline1)\nSetBindGroup(1, ...)\nDispatch(...)\n\nWhat do you think?",
+      "range": {
+        "startLine": 365,
+        "startChar": 33,
+        "endLine": 365,
+        "endChar": 78
+      },
+      "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c2a7a6e_60e03a05",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-09T13:17:27Z",
+      "side": 1,
+      "message": "First, sync issue seems reasonable but it is wired that only GTX1660 can reproduce this, I tried GTX2080Ti and GTX1060 on latest nvidia driver and cannot reproduce it.\nSecond, about set pipeline twice.\nI think it should work but it doesn\u0027t work on current dawn vulkan backend(but works on d3d12 backend). I tried this on Intel, Nvidia and AMD platform and none of the platform can get correct result, it seems they all failed to execute the pipeline (the readback result are all 0) Since I cannot find any words said this is forbidden in vulkan spec, I suspect this may be another issue related with barrier :( So, I have to disable the test for now :(.",
+      "parentUuid": "7b3bfe93_6143f395",
       "range": {
         "startLine": 365,
         "startChar": 33,
@@ -62,6 +104,30 @@
       "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7819da0_e2f6af75",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-09T13:17:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5765b814_bdfc7998",
+      "range": {
+        "startLine": 381,
+        "startChar": 4,
+        "endLine": 385,
+        "endChar": 0
+      },
+      "revId": "1354eab6446f49b6b86af157a7c4cbc801fcfe7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
