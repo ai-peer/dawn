@@ -16,6 +16,24 @@
       "revId": "48d05840048c1b754d2429f0e87e05714fbc0c25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1f09963_2639611a",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-08-12T01:44:44Z",
+      "side": 1,
+      "message": "Thanks for telling me about this. Done.",
+      "parentUuid": "e303b2a0_487f5225",
+      "revId": "48d05840048c1b754d2429f0e87e05714fbc0c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
