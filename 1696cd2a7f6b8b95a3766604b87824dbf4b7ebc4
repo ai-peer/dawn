@@ -313,6 +313,30 @@
     },
     {
       "key": {
+        "uuid": "a97c79d3_7cd47781",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:00:54Z",
+      "side": 1,
+      "message": "Must have misread something.",
+      "parentUuid": "54012134_6907f90e",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 5
+      },
+      "revId": "1696cd2a7f6b8b95a3766604b87824dbf4b7ebc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7591b60e_7f9bcddd",
         "filename": "src/dawn_native/RenderBundle.cpp",
         "patchSetId": 7
