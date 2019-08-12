@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c676d466_952cb6ee",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-12T15:28:23Z",
+      "side": 1,
+      "message": "Isn\u0027t this workaround only for compressed textures? It seems like we always apply it.",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 62
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74b51565_328e8e3b",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-12T15:28:23Z",
+      "side": 1,
+      "message": "I think we need to call Release() here.\nThe buffer starts with one reference when it created. Assigning to Ref\u003c\u003e will add another one.",
+      "range": {
+        "startLine": 381,
+        "startChar": 7,
+        "endLine": 381,
+        "endChar": 36
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "452dff0e_120ac094",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-12T15:28:23Z",
+      "side": 1,
+      "message": "nit: splitTextureToTextureCopy",
+      "range": {
+        "startLine": 548,
+        "startChar": 25,
+        "endLine": 548,
+        "endChar": 50
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da5b4d81_e35c44d1",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-12T15:28:23Z",
+      "side": 1,
+      "message": "nit: Check for compressed texture format?",
+      "range": {
+        "startLine": 550,
+        "startChar": 24,
+        "endLine": 550,
+        "endChar": 49
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba20c1e4_520b6bdf",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-12T15:28:23Z",
+      "side": 1,
+      "message": "Not sure what this comment means.",
+      "range": {
+        "startLine": 559,
+        "startChar": 54,
+        "endLine": 559,
+        "endChar": 86
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
