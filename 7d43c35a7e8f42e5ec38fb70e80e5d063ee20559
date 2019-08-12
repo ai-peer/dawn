@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a5b84571_5c473927",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "But this object doesn\u0027t actually uniquely represent a heap, right? So it\u0027s not a \"Heap\" as the name implies, but instead a \"Resource\". \"HeapResource\" seems to make sense to me.",
+      "parentUuid": "70331001_d0067c98",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
@@ -225,6 +249,24 @@
       "side": 1,
       "message": "It would. Maybe in follow-up?",
       "parentUuid": "6eb42847_43335c9e",
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b08844f_7c0799a1",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "Follow-up seems ok to me.",
+      "parentUuid": "656164b6_a12cc0ed",
       "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -587,6 +629,30 @@
       "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90c3ef63_8a9eacac",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "I don\u0027t disagree that D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT is 64KB and the buffer size also must be a multiple of 64KB. I just wasn\u0027t sure if the buffer size is specifically a multiple of the alignment or they just happen to be the same.\n\nThat said, the 4MB alignment is only for MSAA allocations. So I think it\u0027s safe to say that the buffer size is a multiple of D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT.",
+      "parentUuid": "cdab672d_a885f9d4",
+      "range": {
+        "startLine": 124,
+        "startChar": 43,
+        "endLine": 124,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

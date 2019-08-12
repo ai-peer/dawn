@@ -94,6 +94,40 @@
     },
     {
       "key": {
+        "uuid": "45a81a65_cbf31b1a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be heapType \u003c kMaxHeapTypes?",
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "257dced5_22f29294",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "same",
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2c88e5e_3040e58c",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 5
@@ -111,6 +145,70 @@
         "endLine": 349,
         "endChar": 86
       },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6ada4c6_6136c2e7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "Agreed. If we\u0027re wrong and there\u0027s a reason for this, document it by making a well-named temporary variable for \"heapType - 1\" and use it in all 3 places here and 1 above.",
+      "parentUuid": "b2c88e5e_3040e58c",
+      "range": {
+        "startLine": 349,
+        "startChar": 74,
+        "endLine": 349,
+        "endChar": 86
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffb47a5b_0ffe74a0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "nit: \"kNumHeapTypes\" for clarity, since the heap types are 0,1,2,3 (of which the \"max\" is 3, not 4).",
+      "range": {
+        "startLine": 140,
+        "startChar": 34,
+        "endLine": 140,
+        "endChar": 47
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3eecaff_80a8f17d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-12T23:54:02Z",
+      "side": 1,
+      "message": "It would still make sense to add the static_asserts cwallez suggested, probably here.\n\n static_assert(D3D12_HEAP_TYPE_READBACK \u003c kMaxHeapTypes);\n static_assert(D3D12_HEAP_TYPE_UPLOAD \u003c kMaxHeapTypes);\n static_assert(D3D12_HEAP_TYPE_DEFAULT \u003c kMaxHeapTypes);\n static_assert(D3D12_HEAP_TYPE_CUSTOM \u003c kMaxHeapTypes);",
       "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
