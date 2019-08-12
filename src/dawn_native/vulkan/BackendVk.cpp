@@ -21,6 +21,8 @@
 
 #include <iostream>
 
+#include <unistd.h>
+
 #if DAWN_PLATFORM_LINUX
 const char kVulkanLibName[] = "libvulkan.so.1";
 #elif DAWN_PLATFORM_WINDOWS
@@ -30,20 +32,50 @@ const char kVulkanLibName[] = "vulkan-1.dll";
 #endif
 
 namespace dawn_native { namespace vulkan {
+    namespace {
+
+        std::string GetExecutablePathImpl() {
+            // We cannot use lstat to get the size of /proc/self/exe as it always returns 0
+            // so we just use a big buffer and hope the path fits in it.
+            char path[4096];
+
+            ssize_t result = readlink("/proc/self/exe", path, sizeof(path) - 1);
+            if (result < 0 || static_cast<size_t>(result) >= sizeof(path) - 1) {
+                return "";
+            }
+
+            path[result] = '\0';
+            return path;
+        }
+
+        const char* GetExecutablePath() {
+            // TODO(jmadill): Make global static string thread-safe.
+            const static std::string& exePath = GetExecutablePathImpl();
+            return exePath.c_str();
+        }
+
+        std::string GetExecutableDirectoryImpl() {
+            std::string executablePath = GetExecutablePath();
+            size_t lastPathSepLoc = executablePath.find_last_of("/");
+            return (lastPathSepLoc != std::string::npos) ? executablePath.substr(0, lastPathSepLoc)
+                                                         : "";
+        }
+
+    }  // namespace
 
     Backend::Backend(InstanceBase* instance) : BackendConnection(instance, BackendType::Vulkan) {
     }
 
     Backend::~Backend() {
         if (mDebugReportCallback != VK_NULL_HANDLE) {
-            mFunctions.DestroyDebugReportCallbackEXT(mInstance, mDebugReportCallback, nullptr);
-            mDebugReportCallback = VK_NULL_HANDLE;
+            // mFunctions.DestroyDebugReportCallbackEXT(mInstance, mDebugReportCallback, nullptr);
+            // mDebugReportCallback = VK_NULL_HANDLE;
         }
 
         // VkPhysicalDevices are destroyed when the VkInstance is destroyed
         if (mInstance != VK_NULL_HANDLE) {
-            mFunctions.DestroyInstance(mInstance, nullptr);
-            mInstance = VK_NULL_HANDLE;
+            // mFunctions.DestroyInstance(mInstance, nullptr);
+            // mInstance = VK_NULL_HANDLE;
         }
     }
 
@@ -60,6 +92,14 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Backend::Initialize() {
+#if defined(DAWN_ENABLE_VULKAN_VALIDATION_LAYERS)
+        std::cout << "DAWN_VK_DATA_DIR = " << DAWN_VK_DATA_DIR << std::endl;
+        std::string dir = GetExecutableDirectoryImpl();
+        dir = dir + "/" + std::string(DAWN_VK_DATA_DIR);
+        std::cout << "dir = " << dir << std::endl;
+        setenv("VK_LAYER_PATH", dir.c_str(), 1);
+#endif
+
         if (!mVulkanLib.Open(kVulkanLibName)) {
             return DAWN_CONTEXT_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName);
         }
