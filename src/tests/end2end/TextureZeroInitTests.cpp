@@ -338,7 +338,7 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
 
 // This tests the texture with stencil attachment and load op load will init depth stencil texture
 // to 0s.
-TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
+TEST_P(TextureZeroInitTest, DISABLED_RenderingLoadingStencil) {
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsageBit::CopySrc | dawn::TextureUsageBit::CopyDst |
@@ -373,7 +373,7 @@ TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
 
 // This tests the texture with depth stencil attachment and load op load will init depth stencil
 // texture to 0s.
-TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
+TEST_P(TextureZeroInitTest, DISABLED_RenderingLoadingDepthStencil) {
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsageBit::CopySrc | dawn::TextureUsageBit::CopyDst |
