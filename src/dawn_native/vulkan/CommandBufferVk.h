@@ -22,6 +22,7 @@
 
 namespace dawn_native {
     struct BeginRenderPassCmd;
+    struct TextureCopy;
 }  // namespace dawn_native
 
 namespace dawn_native { namespace vulkan {
@@ -40,8 +41,16 @@ namespace dawn_native { namespace vulkan {
         void RecordComputePass(CommandRecordingContext* recordingContext);
         void RecordRenderPass(CommandRecordingContext* recordingContext,
                               BeginRenderPassCmd* renderPass);
+        void RecordCopyImageWithTemporaryBuffer(CommandRecordingContext* recordingContext,
+                                                const TextureCopy& srcCopy,
+                                                const TextureCopy& dstCopy,
+                                                const Extent3D& copySize);
 
         CommandIterator mCommands;
+
+        // The internal buffers used in the workaround of texture-to-texture copies with compressed
+        // formats.
+        std::vector<dawn_native::Ref<BufferBase>> mTempBuffers;
     };
 
 }}  // namespace dawn_native::vulkan
