@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "daab926d_19c920aa",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T01:06:20Z",
+      "side": 1,
+      "message": "nit: if it would make sense, you could refactor this into an enum class AllocationMethod { kDirect, kSuballocated }, or something like that, which would remove the need for /* isDirect */ elsewhere.",
+      "range": {
+        "startLine": 31,
+        "startChar": 33,
+        "endLine": 31,
+        "endChar": 54
+      },
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "05b7a969_e9549d3f",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 5
@@ -209,6 +232,29 @@
       "writtenOn": "2019-08-12T23:54:02Z",
       "side": 1,
       "message": "It would still make sense to add the static_asserts cwallez suggested, probably here.\n\n static_assert(D3D12_HEAP_TYPE_READBACK \u003c kMaxHeapTypes);\n static_assert(D3D12_HEAP_TYPE_UPLOAD \u003c kMaxHeapTypes);\n static_assert(D3D12_HEAP_TYPE_DEFAULT \u003c kMaxHeapTypes);\n static_assert(D3D12_HEAP_TYPE_CUSTOM \u003c kMaxHeapTypes);",
+      "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2957ca69_300bb281",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T01:06:20Z",
+      "side": 1,
+      "message": "optional: can just be TODO(crbug.com/dawn/153); no need to link it to yourself unless you want to",
+      "range": {
+        "startLine": 40,
+        "startChar": 20,
+        "endLine": 40,
+        "endChar": 44
+      },
       "revId": "3f82c11c9095e1f53c7502bbb7d1586c797933d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
