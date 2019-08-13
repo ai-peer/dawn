@@ -31,6 +31,7 @@
 #include "dawn_native/d3d12/QueueD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
+#include "dawn_native/d3d12/ResourceHeapD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
@@ -120,7 +121,11 @@ namespace dawn_native { namespace d3d12 {
         // Call Tick() again to clear them before releasing the allocator.
         mResourceAllocator->Tick(mCompletedSerial);
 
-        ASSERT(mUsedComObjectRefs.Empty());
+        mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
+
+        // Cannot ASSERT(mUsedComObjectRefs.empty()) as the allocator could have enqueued
+        // used com objects that could be released but the completed serial has not advanced.
+
         ASSERT(mPendingCommands.commandList == nullptr);
     }
 
@@ -260,7 +265,9 @@ namespace dawn_native { namespace d3d12 {
         return new BindGroupLayout(this, descriptor);
     }
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-        return new Buffer(this, descriptor);
+        std::unique_ptr<Buffer> buffer = std::make_unique<Buffer>(this, descriptor);
+        DAWN_TRY(buffer->Initialize());
+        return buffer.release();
     }
     CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder,
                                                    const CommandBufferDescriptor* descriptor) {
@@ -322,4 +329,36 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    void Device::DeallocateMemory(const ResourceMemoryAllocation& allocation) {
+        CommittedResourceAllocator* allocator = nullptr;
+        const D3D12_HEAP_TYPE heapType =
+            ToBackend(allocation.GetResourceHeap())->GetD3D12HeapType();
+        const size_t heapTypeIndex = heapType - 1;
+        ASSERT(heapTypeIndex < kNumHeapTypes);
+        allocator = mDirectResourceAllocators[heapType - 1].get();
+        allocator->Deallocate(allocation);
+    }
+
+    ResultOrError<ResourceMemoryAllocation> Device::AllocateMemory(
+        D3D12_HEAP_TYPE heapType,
+        const D3D12_RESOURCE_DESC& resourceDescriptor,
+        D3D12_RESOURCE_STATES initialUsage,
+        D3D12_HEAP_FLAGS heapFlags) {
+        const size_t heapTypeIndex = heapType - 1;
+        ASSERT(heapTypeIndex < kNumHeapTypes);
+
+        // Get the direct allocator using a tightly sized heap (aka CreateCommittedResource).
+        CommittedResourceAllocator* allocator = mDirectResourceAllocators[heapTypeIndex].get();
+        if (allocator == nullptr) {
+            mDirectResourceAllocators[heapTypeIndex] =
+                std::make_unique<CommittedResourceAllocator>(this, heapType);
+            allocator = mDirectResourceAllocators[heapTypeIndex].get();
+        }
+
+        ResourceMemoryAllocation allocation;
+        DAWN_TRY_ASSIGN(allocation,
+                        allocator->Allocate(resourceDescriptor, initialUsage, heapFlags));
+
+        return allocation;
+    }
 }}  // namespace dawn_native::d3d12
