@@ -159,6 +159,30 @@
     },
     {
       "key": {
+        "uuid": "f7578b4e_0e90741a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T01:39:03Z",
+      "side": 1,
+      "message": "Ah, didn\u0027t realize this. I understand now. Maybe add a comment?",
+      "parentUuid": "11186dc2_a7ccf18e",
+      "range": {
+        "startLine": 550,
+        "startChar": 24,
+        "endLine": 550,
+        "endChar": 49
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba20c1e4_520b6bdf",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 1
@@ -194,6 +218,30 @@
       "side": 1,
       "message": "I just keep the original comment here. I will update it and [1] because both you and I don\u0027t like it.",
       "parentUuid": "ba20c1e4_520b6bdf",
+      "range": {
+        "startLine": 559,
+        "startChar": 54,
+        "endLine": 559,
+        "endChar": 86
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2430e451_00c854a8",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T01:39:03Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "7e4f2ae5_7d8f5e65",
       "range": {
         "startLine": 559,
         "startChar": 54,
