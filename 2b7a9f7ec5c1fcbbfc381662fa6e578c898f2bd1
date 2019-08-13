@@ -16,6 +16,24 @@
       "revId": "2b7a9f7ec5c1fcbbfc381662fa6e578c898f2bd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d229cf36_5f0cd572",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T21:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c395ed0_8961e2fa",
+      "revId": "2b7a9f7ec5c1fcbbfc381662fa6e578c898f2bd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
