@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5768f29_e30f2b3f",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T22:29:17Z",
+      "side": 1,
+      "message": "nit: I\u0027d slightly prefer DAWN_OUT_OF_MEMORY_ERROR",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "54a1bcee73a15db13f9b43a5928b862f5a9c2462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
