@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4c89a8e0_bee3b98e",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-08-13T20:45:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd78fcbe_709124b6",
+      "revId": "3a7a86277fd042ebda0a5080ff152ab3394cacff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51e08730_c146bd28",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "3a7a86277fd042ebda0a5080ff152ab3394cacff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4642a949_0e6c20d0",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-08-13T20:45:03Z",
+      "side": 1,
+      "message": "Yeah, the autoformatter complained when I didn\u0027t have the whitespace.",
+      "parentUuid": "51e08730_c146bd28",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "3a7a86277fd042ebda0a5080ff152ab3394cacff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
