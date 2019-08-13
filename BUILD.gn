@@ -528,8 +528,6 @@ static_library("dawn_utils") {
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
 
   sources = [
-    "src/utils/BackendBinding.cpp",
-    "src/utils/BackendBinding.h",
     "src/utils/ComboRenderPipelineDescriptor.cpp",
     "src/utils/ComboRenderPipelineDescriptor.h",
     "src/utils/DawnHelpers.cpp",
@@ -549,38 +547,8 @@ static_library("dawn_utils") {
     ":libdawn_wire",
     "${dawn_root}/src/common",
     "${dawn_shaderc_dir}:libshaderc",
-    "third_party:glfw",
   ]
   libs = []
-
-  if (dawn_enable_d3d12) {
-    sources += [ "src/utils/D3D12Binding.cpp" ]
-  }
-
-  if (dawn_enable_metal) {
-    sources += [ "src/utils/MetalBinding.mm" ]
-    libs += [
-      "Metal.framework",
-      "QuartzCore.framework",
-    ]
-
-    # Suppress warnings that Metal isn't in the deployment target of Chrome
-    if (is_mac) {
-      cflags_objcc = [ "-Wno-unguarded-availability" ]
-    }
-  }
-
-  if (dawn_enable_null) {
-    sources += [ "src/utils/NullBinding.cpp" ]
-  }
-
-  if (dawn_enable_opengl) {
-    sources += [ "src/utils/OpenGLBinding.cpp" ]
-  }
-
-  if (dawn_enable_vulkan) {
-    sources += [ "src/utils/VulkanBinding.cpp" ]
-  }
 }
 
 ###############################################################################
@@ -694,7 +662,6 @@ source_set("dawn_end2end_tests_sources") {
     ":libdawn_wire",
     "${dawn_root}/src/common",
     "${dawn_root}/src/dawn:libdawn",
-    "third_party:glfw",
     "third_party:gmock_and_gtest",
   ]
 
@@ -746,6 +713,10 @@ source_set("dawn_end2end_tests_sources") {
 
     libs += [ "IOSurface.framework" ]
   }
+
+  if (dawn_enable_opengl) {
+    deps += [ "third_party:glfw" ]
+  }
 }
 
 source_set("dawn_white_box_tests_sources") {
@@ -759,7 +730,6 @@ source_set("dawn_white_box_tests_sources") {
     ":libdawn_wire",
     "${dawn_root}/src/common",
     "${dawn_root}/src/dawn:libdawn",
-    "third_party:glfw",
     "third_party:gmock_and_gtest",
   ]
 
@@ -773,6 +743,10 @@ source_set("dawn_white_box_tests_sources") {
     if (is_linux) {
       sources += [ "src/tests/white_box/VulkanImageWrappingTests.cpp" ]
     }
+  }
+
+  if (dawn_enable_opengl) {
+    deps += [ "third_party:glfw" ]
   }
 
   libs = []
@@ -789,7 +763,6 @@ test("dawn_end2end_tests") {
     ":libdawn_wire",
     "${dawn_root}/src/common",
     "${dawn_root}/src/dawn:libdawn",
-    "third_party:glfw",
     "third_party:gmock_and_gtest",
   ]
 
@@ -806,6 +779,10 @@ test("dawn_end2end_tests") {
     sources += [ "//gpu/dawn_end2end_tests_main.cc" ]
   } else {
     sources += [ "src/tests/End2EndTestsMain.cpp" ]
+  }
+
+  if (dawn_enable_opengl) {
+    deps += [ "third_party:glfw" ]
   }
 }
 
