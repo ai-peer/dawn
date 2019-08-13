@@ -45,6 +45,30 @@
       "revId": "6fa0612a0872410a74339a758464b65547076369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abc72b93_53276349",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T18:57:10Z",
+      "side": 1,
+      "message": "dawn_native::vulkan::Buffer::DestroyImpl will enqueue the Vulkan backing objects on a list to keep around until commands are submitted.",
+      "parentUuid": "679c85ae_0f798f55",
+      "range": {
+        "startLine": 580,
+        "startChar": 11,
+        "endLine": 581,
+        "endChar": 32
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
