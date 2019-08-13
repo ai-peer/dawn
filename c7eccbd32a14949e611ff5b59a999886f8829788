@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dd82fa7_892d8606",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-13T18:17:01Z",
+      "side": 1,
+      "message": "srcBuffer is leaked. Please use unique_ptr to track its memory.\n\nI presume you\u0027ll need to arrange such that the object is freed once the copy command is finished.",
+      "range": {
+        "startLine": 552,
+        "startChar": 12,
+        "endLine": 552,
+        "endChar": 85
+      },
+      "revId": "c7eccbd32a14949e611ff5b59a999886f8829788",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
