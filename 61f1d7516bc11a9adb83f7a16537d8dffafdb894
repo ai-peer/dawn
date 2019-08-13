@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4841d4ac_49e94dc9",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T00:07:55Z",
+      "side": 1,
+      "message": "This should probably go on the Instance and be accessed via GetAdapter-\u003eGetInstance-\u003eGetPlatform().",
+      "revId": "61f1d7516bc11a9adb83f7a16537d8dffafdb894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e53c60c_bd58722d",
+        "filename": "src/dawn_platform/tracing/TraceEvent.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T00:07:55Z",
+      "side": 1,
+      "message": "update copyright",
+      "revId": "61f1d7516bc11a9adb83f7a16537d8dffafdb894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
