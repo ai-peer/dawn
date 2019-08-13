@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b4097b3a_ee86901c",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-13T00:13:14Z",
+      "side": 1,
+      "message": "Yes this workaround is intended to be only applied to compressed textures. The condition to have this workaround is \"\u0027extent\u0027 parameter fits in the virtual size of one texture but does not fit in another\", and such condition can only be happened to compressed textures because the physical size of non-compressed textures is always equal to the virtual size, so we don\u0027t need to care about it for non-compressed textures.\n\nYou can refer the link for more details.",
+      "parentUuid": "c676d466_952cb6ee",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 62
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74b51565_328e8e3b",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 1
@@ -42,6 +66,23 @@
         "endLine": 381,
         "endChar": 36
       },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65532dd8_2d21bb9d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-13T00:13:14Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -94,6 +135,30 @@
     },
     {
       "key": {
+        "uuid": "11186dc2_a7ccf18e",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-13T00:13:14Z",
+      "side": 1,
+      "message": "Only compressed texture formats can make \"HasSameTextureCopyExtent\" to return false, and it is impossible for non-compressed texture formats to make this function return true because the block size of them is always to be 1.",
+      "parentUuid": "da5b4d81_e35c44d1",
+      "range": {
+        "startLine": 550,
+        "startChar": 24,
+        "endLine": 550,
+        "endChar": 49
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba20c1e4_520b6bdf",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 1
@@ -105,6 +170,30 @@
       "writtenOn": "2019-08-12T15:28:23Z",
       "side": 1,
       "message": "Not sure what this comment means.",
+      "range": {
+        "startLine": 559,
+        "startChar": 54,
+        "endLine": 559,
+        "endChar": 86
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e4f2ae5_7d8f5e65",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-13T00:13:14Z",
+      "side": 1,
+      "message": "I just keep the original comment here. I will update it and [1] because both you and I don\u0027t like it.",
+      "parentUuid": "ba20c1e4_520b6bdf",
       "range": {
         "startLine": 559,
         "startChar": 54,
