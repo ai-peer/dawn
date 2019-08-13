@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "cc542059_3b6e0d22",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T19:07:33Z",
+      "side": 1,
+      "message": "GetSize() is in texels. Since we\u0027re multiplying by blockByteSize, we need to get the width and height in blocks:\n(size.width / format.blockWidth) * (size.height / format.blockHeight) * format.blockByteSize",
+      "range": {
+        "startLine": 549,
+        "startChar": 30,
+        "endLine": 549,
+        "endChar": 92
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7df2a52f_1358c6d3",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
@@ -18,6 +41,29 @@
         "startChar": 12,
         "endLine": 554,
         "endChar": 75
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07821ff1_33c219a1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T19:07:33Z",
+      "side": 1,
+      "message": "We have a helper |ComputeBufferImageCopyRegion| in CommandBufferVk.cpp. We can move common helpers to something like CopyHelpersVk.cpp",
+      "range": {
+        "startLine": 558,
+        "startChar": 12,
+        "endLine": 572,
+        "endChar": 41
       },
       "revId": "6fa0612a0872410a74339a758464b65547076369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
