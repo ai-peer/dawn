@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b087572a_56ce6e1f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-13T20:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc542059_3b6e0d22",
+      "range": {
+        "startLine": 549,
+        "startChar": 30,
+        "endLine": 549,
+        "endChar": 92
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7df2a52f_1358c6d3",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "6fa0612a0872410a74339a758464b65547076369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3fa1164_d8b5e9b9",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-13T20:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7df2a52f_1358c6d3",
+      "range": {
+        "startLine": 554,
+        "startChar": 12,
+        "endLine": 554,
+        "endChar": 75
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +164,30 @@
       "revId": "6fa0612a0872410a74339a758464b65547076369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d694f50c_4beffc79",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-13T20:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd3b12e7_ebddc95c",
+      "range": {
+        "startLine": 558,
+        "startChar": 12,
+        "endLine": 572,
+        "endChar": 41
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -211,6 +283,30 @@
       "revId": "6fa0612a0872410a74339a758464b65547076369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fc075ee_9fd96036",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-13T20:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "423ff1e4_e751deb3",
+      "range": {
+        "startLine": 580,
+        "startChar": 11,
+        "endLine": 581,
+        "endChar": 32
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
