@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "dabf9324_d1a6779b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T23:49:40Z",
+      "side": 1,
+      "message": "It might be possible to use it now -- the issue hasn\u0027t come up in our tests but we suspect there\u0027s a problem. If you do, You\u0027ll want to use add usage MapWrite",
+      "parentUuid": "ae8d7f78_304fa0f1",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 77
+      },
+      "revId": "70b8e26419d3c67e5feea2d19b866f59bfd02c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5fbf52cd_ba5ab854",
         "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
         "patchSetId": 5

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8327d140_40b8b4b9",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T23:49:40Z",
+      "side": 1,
+      "message": "should be OR :)",
+      "range": {
+        "startLine": 571,
+        "startChar": 32,
+        "endLine": 571,
+        "endChar": 34
+      },
+      "revId": "ceeb10ba476137d78bb8a42fe15f6451e2ea0179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
