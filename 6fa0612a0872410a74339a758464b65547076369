@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7df2a52f_1358c6d3",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-13T18:54:23Z",
+      "side": 1,
+      "message": "Here, we are allocating a buffer of type uint32_t but giving it a size that is calculated using bytes. Hence, I think this buffer ends up being too big.",
+      "range": {
+        "startLine": 554,
+        "startChar": 12,
+        "endLine": 554,
+        "endChar": 75
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "679c85ae_0f798f55",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-13T18:54:23Z",
+      "side": 1,
+      "message": "Release does set the unique_ptr to null but does not free the allocation. So we still leak here. \n\nFor Vulkan, do we need to keep these buffer objects around until they\u0027re no longer in use by the GPU?",
+      "range": {
+        "startLine": 580,
+        "startChar": 11,
+        "endLine": 581,
+        "endChar": 32
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
