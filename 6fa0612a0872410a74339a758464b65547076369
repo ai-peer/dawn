@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "bd3b12e7_ebddc95c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T20:21:35Z",
+      "side": 1,
+      "message": "Didn\u0027t realize that existed. UtilsVulkan.cpp sounds good to me",
+      "parentUuid": "b547daa9_5a81fe3c",
+      "range": {
+        "startLine": 558,
+        "startChar": 12,
+        "endLine": 572,
+        "endChar": 41
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "679c85ae_0f798f55",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
@@ -154,6 +178,30 @@
       "side": 1,
       "message": "then i should just call destroy on the buffer?",
       "parentUuid": "abc72b93_53276349",
+      "range": {
+        "startLine": 580,
+        "startChar": 11,
+        "endLine": 581,
+        "endChar": 32
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "423ff1e4_e751deb3",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T20:21:35Z",
+      "side": 1,
+      "message": "You just need to remove this line. std::unique_ptr \"owns\" the Buffer so it\u0027ll handle destruction.\n\nWhen std::unique_ptr\u003cBuffer\u003e falls out of scope, ~Buffer() will be called which will call DestroyInternal() which will call DestroyImpl()",
+      "parentUuid": "0d4d0b02_541ae8d6",
       "range": {
         "startLine": 580,
         "startChar": 11,
