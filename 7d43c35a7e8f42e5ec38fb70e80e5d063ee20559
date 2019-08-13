@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "94671573_a173e4d1",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-13T17:23:49Z",
+      "side": 1,
+      "message": "It does. Either implicitly (via CommittedResourceAllocator) or explicitly (via PlacedResourceAllocator). The heap may also be exclusively used by a single resource. This happens when there is no sharing (eg. resourceSize \u003d\u003d heapSize). I went with ResourceHeap because only the resource gets used by the client.",
+      "parentUuid": "a5b84571_5c473927",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
@@ -270,6 +294,24 @@
       "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "265e0384_f594f927",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-13T17:23:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6b08844f_7c0799a1",
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
