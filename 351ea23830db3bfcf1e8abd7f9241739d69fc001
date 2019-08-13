@@ -16,6 +16,24 @@
       "revId": "351ea23830db3bfcf1e8abd7f9241739d69fc001",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5446967d_ab044889",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T21:16:05Z",
+      "side": 1,
+      "message": "As this is used in a for-loop I imagine we can\u0027t move it because it\u0027ll be null after the first iteration.\n\nCan we call ComPtr\u003c\u003e::Get() and pass that raw pointer around?\nIt would be great if you could upload a CL to fix this refcounting performance issues.",
+      "parentUuid": "f847279b_527b7961",
+      "revId": "351ea23830db3bfcf1e8abd7f9241739d69fc001",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
