@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69832702_5872562e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T22:35:45Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this path work for compressed textures? I think that \"cleared\" for compressed textures will end up being defined as \"whatever all zeros decompresses into\". Although not sure about the NonZero case; all 0x01s might not be a valid pattern in all formats. Probably ok to use though.\n\nThen the TODO above can become a \"TODO: test compressed texture initial values\"",
+      "revId": "70b8e26419d3c67e5feea2d19b866f59bfd02c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d30b1351_6314bf80",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T22:35:45Z",
+      "side": 1,
+      "message": "I think it would be a little faster to MapAtCreation, and use memset (should be one less copy).\n\nSide note, we just looked into this and we think there is a bug where we don\u0027t do the barrier between MapAtCreation and the next usage, because mLastUsage isn\u0027t initialized to MapWrite. Filed crbug.com/dawn/204",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 77
+      },
+      "revId": "70b8e26419d3c67e5feea2d19b866f59bfd02c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fbf52cd_ba5ab854",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T22:35:45Z",
+      "side": 1,
+      "message": "nit: explicitly \u0026\u0026 all the other backends so we can remove them one by one as they\u0027re implemented",
+      "revId": "70b8e26419d3c67e5feea2d19b866f59bfd02c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
