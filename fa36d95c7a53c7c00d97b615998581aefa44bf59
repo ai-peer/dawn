@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "54df0b02_8e28d695",
+        "filename": "src/dawn_native/AttachmentState.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T19:20:43Z",
+      "side": 1,
+      "message": "The spec doesn\u0027t say anything about it, but we have\n\n    required sequence\u003cGPURenderPassColorAttachmentDescriptor\u003e colorAttachments;\n\nand\n\n    required sequence\u003cGPUColorStateDescriptor\u003e colorStates;\n\nso I guess these are not inconsistent since they should both be implicitly nullable. (IDL is confusing...)",
+      "parentUuid": "4a14a178_7ba8ffa6",
+      "revId": "fa36d95c7a53c7c00d97b615998581aefa44bf59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0016272e_0285ddcf",
         "filename": "src/dawn_native/AttachmentState.h",
         "patchSetId": 10

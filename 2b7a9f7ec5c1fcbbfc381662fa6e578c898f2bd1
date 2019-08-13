@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c395ed0_8961e2fa",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-13T19:20:43Z",
+      "side": 1,
+      "message": "I think you could untemplate this by doing:\n\n  // nonstatic\n  Ref\u003cAttachmentState\u003e GetOrCreateAttachmentStateImpl(const AttachmentStateBlueprint\u0026 blueprint);\n\nand\n\n  return GetOrCreateAttachmentStateImpl(AttachmentStateBlueprint{descriptor});\n\nin each of the 3 places.",
+      "revId": "2b7a9f7ec5c1fcbbfc381662fa6e578c898f2bd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
