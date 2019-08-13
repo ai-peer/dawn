@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd78fcbe_709124b6",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T20:42:21Z",
+      "side": 1,
+      "message": "This should probably have \nconfigs +\u003d [ \"${dawn_root}/src/common:dawn_internal\" ]",
+      "revId": "3a7a86277fd042ebda0a5080ff152ab3394cacff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51e08730_c146bd28",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-13T20:42:21Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think this whitespace is necessary (unless the autoformatter wants it)",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "3a7a86277fd042ebda0a5080ff152ab3394cacff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
