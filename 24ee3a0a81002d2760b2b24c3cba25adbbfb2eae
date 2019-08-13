@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d16696ba_e612b705",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-13T18:07:16Z",
+      "side": 1,
+      "message": "I\u0027m not a big fan of default parameters. Does it make sense for someone to make a memory allocation with an an offset but have no corresponding ResourceHeapBase object? \n\nI do not see any code using these default parameters, please make them not be default.",
+      "range": {
+        "startLine": 41,
+        "startChar": 33,
+        "endLine": 42,
+        "endChar": 84
+      },
+      "revId": "24ee3a0a81002d2760b2b24c3cba25adbbfb2eae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29219932_2ec9ff23",
+        "filename": "src/dawn_native/d3d12/CommittedResourceAllocatorD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-13T18:07:16Z",
+      "side": 1,
+      "message": "Since GetResourceheap returns a naked pointer, will it end up getting freed out from under the allocation (and all of the other allocations) on account of the unique_ptr? If so, that leaves the allocation pointing to freed memory, a dangerous situation if someone accidentally calls Deallocate twice.",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 50
+      },
+      "revId": "24ee3a0a81002d2760b2b24c3cba25adbbfb2eae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cbfb267_56e1e906",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-13T18:07:16Z",
+      "side": 1,
+      "message": "Can you use the heapTypeIndex variable you created on line 336?",
+      "range": {
+        "startLine": 338,
+        "startChar": 46,
+        "endLine": 338,
+        "endChar": 58
+      },
+      "revId": "24ee3a0a81002d2760b2b24c3cba25adbbfb2eae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
