@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "b547daa9_5a81fe3c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-13T20:08:15Z",
+      "side": 1,
+      "message": "Does it make sense to move to UtilsVulkan.cpp? Or is it better to make CopyHelpersVk.cpp?",
+      "parentUuid": "07821ff1_33c219a1",
+      "range": {
+        "startLine": 558,
+        "startChar": 12,
+        "endLine": 572,
+        "endChar": 41
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "679c85ae_0f798f55",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 4
@@ -106,6 +130,30 @@
       "side": 1,
       "message": "dawn_native::vulkan::Buffer::DestroyImpl will enqueue the Vulkan backing objects on a list to keep around until commands are submitted.",
       "parentUuid": "679c85ae_0f798f55",
+      "range": {
+        "startLine": 580,
+        "startChar": 11,
+        "endLine": 581,
+        "endChar": 32
+      },
+      "revId": "6fa0612a0872410a74339a758464b65547076369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d4d0b02_541ae8d6",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-13T20:08:15Z",
+      "side": 1,
+      "message": "then i should just call destroy on the buffer?",
+      "parentUuid": "abc72b93_53276349",
       "range": {
         "startLine": 580,
         "startChar": 11,
