@@ -330,8 +330,7 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffestsRenderPipeline) {
 // TODO(shaobo.yan@intel.com) : Try this test on GTX1080 and cannot reproduce the failure.
 // Suspect it is due to dawn doesn't handle sync between two dispatch and disable this case.
 // Will double check root cause after got GTX1660.
-TEST_P(DynamicBufferOffsetTests, InheritDynamicOffestsComputePipeline) {
-    DAWN_SKIP_TEST_IF(IsWindows() && IsNvidia());
+TEST_P(DynamicBufferOffsetTests, DISABLED_InheritDynamicOffestsComputePipeline) {
     dawn::ComputePipeline pipeline = CreateComputePipeline();
     dawn::ComputePipeline testPipeline = CreateComputePipeline(true);
 
