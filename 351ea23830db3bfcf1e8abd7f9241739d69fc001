@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f847279b_527b7961",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000485
+      },
+      "writtenOn": "2019-08-13T19:17:38Z",
+      "side": 1,
+      "message": "Every time we pass the command-list like this, we introduce more COM ref-counting overhead. This call-path also occurs frequently and is becoming significant enough to show up in my CPU profiles. Could we not simply std::move this instead?",
+      "revId": "351ea23830db3bfcf1e8abd7f9241739d69fc001",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
