@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "2da62a84_f25f3137",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-14T19:58:52Z",
+      "side": 1,
+      "message": "This is a little confusing for me as well. I think that \"ID3D12Resource is really a \"resource and heap\" tied together\" is only true when we\u0027re using CreateCommittedResource.\n\nA CommittedResource is a Resource and is a Heap.\nA PlacedResource is a Resource and points to a Heap.\n\nI think it would be more clear if the classes reflected these relationships.\n\n// CommittedResourceHeap is created from an ID3D12Resource\nclass CommittedResourceHeap : public ResourceHeap {\n  CommittedResourceHeap(ComPtr\u003cID3D12Resource\u003e resource); \n};\n\n// PlacedResourceHeap is created from an ID3D12Heap\nclass PlacedResourceHeap : public ResourceHeap {\n  PlacedResourceHeap(ComPtr\u003cID3D12Heap\u003e heap); \n};\n\n// CommittedResource is both a Resource and a Heap \nclass CommittedResource : public Resource, public CommittedResourceHeap {\n  CommittedResource(ComPtr\u003cID3D12Resource\u003e resource)\n    : CommittedResourceHeap(resource) {\n  }\n};\n\n// PlacedResource is a Resource and created from a Heap.\nclass PlacedResource : public Resource {\n  PlacedResource(PlacedResourceHeap* heap, uint64_t offset);\n};",
+      "parentUuid": "c66f3d97_072077d1",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
