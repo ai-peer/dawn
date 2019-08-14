@@ -364,4 +364,36 @@ TEST_P(ViewportTest, ShrinkViewportAndShiftToBottomRightAndApplyDepth) {
     DoTest(info);
 }
 
+// X and y have fractions and they are smaller than 0.5, which is the center of point(0, 0). So
+// point(0, 0) is covered by the top left triangle as usual.
+TEST_P(ViewportTest, DoNotTruncateXAndY) {
+    ViewportParams viewport = {0.4, 0.4, 4.0, 4.0, 0.0, 1.0};
+    TestInfo info = {viewport, TopLeftTriangleColor, BottomRightTriangleColor};
+    DoTest(info);
+}
+
+// X and y have fractions and they are greater than 0.5, which is the center of point(0, 0). So
+// point(0, 0) is not covered by any trinagle.
+TEST_P(ViewportTest, DoNotTruncateXAndY2) {
+    ViewportParams viewport = {0.5, 0.5, 4.0, 4.0, 0.0, 1.0};
+    TestInfo info = {viewport, BackgroundColor, BottomRightTriangleColor};
+    DoTest(info);
+}
+
+// Width and height have fractions and they are smaller than 3.5, which is the center of
+// point(3, 3). So point(3, 3) is not covered by any triangle.
+TEST_P(ViewportTest, DoNotTruncateWidthAndHeight) {
+    ViewportParams viewport = {0.0, 0.0, 3.4, 3.4, 0.0, 1.0};
+    TestInfo info = {viewport, TopLeftTriangleColor, BackgroundColor};
+    DoTest(info);
+}
+
+// Width and height have fractions and they are greater than 3.5, which is the center of
+// point(3, 3). So point(3, 3) is covered by the bottom right triangle as usual.
+TEST_P(ViewportTest, DoNotTruncateWidthAndHeight2) {
+    ViewportParams viewport = {0.0, 0.0, 3.9, 3.9, 0.0, 1.0};
+    TestInfo info = {viewport, TopLeftTriangleColor, BottomRightTriangleColor};
+    DoTest(info);
+}
+
 DAWN_INSTANTIATE_TEST(ViewportTest, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
