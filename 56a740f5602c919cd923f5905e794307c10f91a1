@@ -16,6 +16,24 @@
       "revId": "56a740f5602c919cd923f5905e794307c10f91a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfbce69e_ed96a0b7",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-14T17:25:07Z",
+      "side": 1,
+      "message": "The error name was used to match the WebGPU spec. Likewise, D3D also uses OOM which is not the same as context loss. When we run out of memory during allocation, it\u0027s unlikely to be a context lost. AFAIK, we do not recover from OOM. If future work enables recovery, using a separate error seems better justified.",
+      "parentUuid": "49734fbc_746a4a71",
+      "revId": "56a740f5602c919cd923f5905e794307c10f91a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
