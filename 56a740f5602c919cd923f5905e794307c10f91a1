@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49734fbc_746a4a71",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-14T00:36:26Z",
+      "side": 1,
+      "message": "Sorry for the churn, but can we call this \"AllocationFailed\" or something like that? We will want this error to specifically only represent safe/recoverable allocation failures; any other kind of OOM would be a ContextLost.",
+      "revId": "56a740f5602c919cd923f5905e794307c10f91a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
