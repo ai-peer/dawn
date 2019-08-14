@@ -34,6 +34,24 @@
       "revId": "56a740f5602c919cd923f5905e794307c10f91a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d0289e2_3795abf0",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-14T18:16:51Z",
+      "side": 1,
+      "message": "OK, fair reasons. LGTM!",
+      "parentUuid": "bfbce69e_ed96a0b7",
+      "revId": "56a740f5602c919cd923f5905e794307c10f91a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
