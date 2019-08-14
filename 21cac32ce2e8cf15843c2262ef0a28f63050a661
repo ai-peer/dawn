@@ -34,6 +34,47 @@
       "revId": "21cac32ce2e8cf15843c2262ef0a28f63050a661",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "391bf374_f3dc09c7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-14T22:21:42Z",
+      "side": 1,
+      "message": "nit: if we keep this, I think (uint32_t*)(clearBuffer + descriptor.size) would be slightly clearer.",
+      "range": {
+        "startLine": 557,
+        "startChar": 46,
+        "endLine": 557,
+        "endChar": 92
+      },
+      "revId": "21cac32ce2e8cf15843c2262ef0a28f63050a661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "310561bc_eb060ecc",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-14T22:21:42Z",
+      "side": 1,
+      "message": "hm, I don\u0027t get how it passed before given the old code (patchset 7) seems to set it to 0x01010101.\n\nAnyway, I think this is the only codepath that test is testing anyway, so we could just change both. Either way is fine.",
+      "parentUuid": "46891ee0_16e8f237",
+      "revId": "21cac32ce2e8cf15843c2262ef0a28f63050a661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
