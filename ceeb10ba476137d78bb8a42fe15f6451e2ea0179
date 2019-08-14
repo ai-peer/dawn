@@ -46,6 +46,30 @@
       "revId": "ceeb10ba476137d78bb8a42fe15f6451e2ea0179",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92c4a4dd_d8b0c203",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-14T21:42:35Z",
+      "side": 1,
+      "message": "woops, should be fixed now :)",
+      "parentUuid": "1f271241_44a6cb65",
+      "range": {
+        "startLine": 571,
+        "startChar": 32,
+        "endLine": 571,
+        "endChar": 34
+      },
+      "revId": "ceeb10ba476137d78bb8a42fe15f6451e2ea0179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
