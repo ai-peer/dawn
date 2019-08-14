@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c795bb4_5a93793a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-14T22:14:23Z",
+      "side": 1,
+      "message": "nit: this could just be std::fill(clearBuffer, clearBuffer + descriptor.size, clearColor), right? The difference is it would fill with 0x01010101 instead of 0x00000001, but that is what it did before.",
+      "revId": "21cac32ce2e8cf15843c2262ef0a28f63050a661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
