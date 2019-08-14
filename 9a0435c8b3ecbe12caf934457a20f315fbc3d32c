@@ -46,6 +46,30 @@
       "revId": "9a0435c8b3ecbe12caf934457a20f315fbc3d32c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66440328_e552f962",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-14T22:30:32Z",
+      "side": 1,
+      "message": "Also, can we use an explicit reinterpret_cast?",
+      "parentUuid": "1087f57e_e932dd93",
+      "range": {
+        "startLine": 557,
+        "startChar": 88,
+        "endLine": 557,
+        "endChar": 93
+      },
+      "revId": "9a0435c8b3ecbe12caf934457a20f315fbc3d32c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
