@@ -15,12 +15,26 @@
 #ifndef DAWNNATIVE_D3D12_UTILSD3D12_H_
 #define DAWNNATIVE_D3D12_UTILSD3D12_H_
 
+#include "dawn_native/d3d12/TextureCopySplitter.h"
+#include "dawn_native/d3d12/TextureD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 #include "dawn_native/dawn_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
     D3D12_COMPARISON_FUNC ToD3D12ComparisonFunc(dawn::CompareFunction func);
+
+    D3D12_TEXTURE_COPY_LOCATION CreateTextureCopyLocationForTexture(const Texture* texture,
+                                                                    uint32_t level,
+                                                                    uint32_t slice);
+
+    D3D12_TEXTURE_COPY_LOCATION ComputeBufferLocationForCopyTextureRegion(
+        const Texture* texture,
+        const ComPtr<ID3D12Resource> buffer,
+        TextureCopySplit::CopyInfo info,
+        TextureCopySplit copySplit,
+        uint32_t rowPitch);
+    D3D12_BOX ComputeSourceRegionForCopyTextureRegion(TextureCopySplit::CopyInfo info);
 
 }}  // namespace dawn_native::d3d12
 
