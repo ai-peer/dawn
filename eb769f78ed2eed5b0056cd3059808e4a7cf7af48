@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38ce7667_7bbdca87",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-15T21:46:26Z",
+      "side": 1,
+      "message": "I just remember that for doing something like this, we have something similar. Buffers get updated by doing the following:\n\nUploadHandle handle \u003d DAWN_TRY(GetDevice()-\u003eGetDynamicUploader()-\u003eAllocate(size, alignment));\n// Write data to handle.mappedBuffer\nGetDevice()-\u003eCopyFromStagingToBuffer(handle.stagingBuffer, handle.startOffset, ..., destination, ...);\n\nThis code path has the benefit of better reusing and reallocating memory instead of creating a new Buffer every time.\n\nWe can probably have something similar like Device::CopyFromStagingToTexture.",
+      "range": {
+        "startLine": 486,
+        "startChar": 12,
+        "endLine": 497,
+        "endChar": 74
+      },
+      "revId": "eb769f78ed2eed5b0056cd3059808e4a7cf7af48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
