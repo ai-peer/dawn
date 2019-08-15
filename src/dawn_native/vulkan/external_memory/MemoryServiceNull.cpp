@@ -24,7 +24,11 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
 
     Service::~Service() = default;
 
-    bool Service::Supported() {
+    bool Service::Supported(VkFormat format,
+                            VkImageType type,
+                            VkImageTiling tiling,
+                            VkImageUsageFlags usage,
+                            VkImageCreateFlags flags) {
         return false;
     }
 
