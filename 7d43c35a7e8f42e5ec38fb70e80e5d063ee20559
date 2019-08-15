@@ -193,6 +193,30 @@
     },
     {
       "key": {
+        "uuid": "fbfab2d4_4944bb93",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-15T01:26:39Z",
+      "side": 1,
+      "message": "If a placed resource \"is a resource\" then wouldn\u0027t it accept a ID3D12Resource? If the goal is to separate them out then do as such:\n\nCommittedResource(ID3D12Resource*) : public ResourceBase // No heap required!\nPlacedResource(ID3D12Resource*, HeapBase*) : public ResourceBase\nHeap(ID3D12Heap*) : public HeapBase\n\nThen ResourceMemoryAllocation contains a ResourceBase*.",
+      "parentUuid": "2da62a84_f25f3137",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
