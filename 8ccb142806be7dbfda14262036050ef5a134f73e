@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ac22c3d_063c17c6",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-16T00:31:25Z",
+      "side": 1,
+      "message": "nit: Could we just rename this to mSupported? I feel like the early return in other parts of the code is sufficient enough to understand what\u0027s happening.",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 27
+      },
+      "revId": "8ccb142806be7dbfda14262036050ef5a134f73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
