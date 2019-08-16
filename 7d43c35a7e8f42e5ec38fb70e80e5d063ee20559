@@ -265,6 +265,30 @@
     },
     {
       "key": {
+        "uuid": "2e99d67c_77efe06d",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-16T17:03:26Z",
+      "side": 1,
+      "message": "Seems reasonable. ResourceMemoryAlloction and ResourceHeapBase would collapse into one. No need for ::AllocationMethod.",
+      "parentUuid": "874b2dba_02c1c872",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
