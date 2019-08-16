@@ -20,7 +20,7 @@
 #include "common/Platform.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/opengl/Forward.h"
-
+#include "dawn_native/opengl/IndirectUtilsGL.h"
 #include "glad/glad.h"
 
 #include <queue>
@@ -54,6 +54,8 @@ namespace dawn_native { namespace opengl {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        const IndirectUtils& GetIndirectUtils() const;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -82,6 +84,8 @@ namespace dawn_native { namespace opengl {
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
         std::queue<std::pair<GLsync, Serial>> mFencesInFlight;
+
+        IndirectUtils mIndirectUtils;
     };
 
 }}  // namespace dawn_native::opengl

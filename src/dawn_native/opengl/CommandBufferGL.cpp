@@ -17,6 +17,7 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
+#include "dawn_native/PassResourceUsage.h"
 #include "dawn_native/opengl/BufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
 #include "dawn_native/opengl/DeviceGL.h"
@@ -345,17 +346,25 @@ namespace dawn_native { namespace opengl {
     }
 
     void CommandBuffer::Execute() {
+        const std::vector<PassResourceUsage>& passResourceUsages = GetResourceUsages().perPass;
+        uint32_t nextPassNumber = 0;
+
         Command type;
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
                     ExecuteComputePass();
+                    nextPassNumber++;
                 } break;
 
                 case Command::BeginRenderPass: {
                     auto* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
+                    const std::vector<IndirectBufferUsage>& indirectUsages =
+                        passResourceUsages[nextPassNumber].indirectBufferUsages;
+                    ToBackend(GetDevice())->GetIndirectUtils().ProcessUsages(indirectUsages);
                     ExecuteRenderPass(cmd);
+                    nextPassNumber++;
                 } break;
 
                 case Command::CopyBufferToBuffer: {
@@ -661,6 +670,7 @@ namespace dawn_native { namespace opengl {
 
         RenderPipeline* lastPipeline = nullptr;
         uint64_t indexBufferBaseOffset = 0;
+        uint64_t indirectBufferOffset = 0;
 
         InputBufferTracker inputBuffers;
 
@@ -733,20 +743,23 @@ namespace dawn_native { namespace opengl {
                 } break;
 
                 case Command::DrawIndexedIndirect: {
-                    DrawIndexedIndirectCmd* draw = mCommands.NextCommand<DrawIndexedIndirectCmd>();
-                    inputBuffers.Apply();
+                    mCommands.NextCommand<DrawIndexedIndirectCmd>();
 
                     dawn::IndexFormat indexFormat =
                         lastPipeline->GetVertexInputDescriptor()->indexFormat;
                     GLenum formatType = IndexFormatType(indexFormat);
 
-                    uint64_t indirectBufferOffset = draw->indirectOffset;
-                    Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
+                    inputBuffers.Apply();
 
-                    glBindBuffer(GL_DRAW_INDIRECT_BUFFER, indirectBuffer->GetHandle());
+                    glBindBuffer(GL_DRAW_INDIRECT_BUFFER,
+                                 ToBackend(GetDevice())->GetIndirectUtils().mBufferHandle);
                     glDrawElementsIndirect(
                         lastPipeline->GetGLPrimitiveTopology(), formatType,
                         reinterpret_cast<void*>(static_cast<intptr_t>(indirectBufferOffset)));
+
+                    indirectBufferOffset = ToBackend(GetDevice())
+                                               ->GetIndirectUtils()
+                                               .NextBufferOffset(indirectBufferOffset, type);
                 } break;
 
                 case Command::InsertDebugMarker:

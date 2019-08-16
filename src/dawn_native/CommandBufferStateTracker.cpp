@@ -135,6 +135,10 @@ namespace dawn_native {
         UNREACHABLE();
     }
 
+    uint64_t CommandBufferStateTracker::GetIndexBufferOffset() const {
+        return mIndexBufferOffset;
+    }
+
     void CommandBufferStateTracker::SetComputePipeline(ComputePipelineBase* pipeline) {
         SetPipelineCommon(pipeline);
     }
@@ -148,8 +152,9 @@ namespace dawn_native {
         mBindgroups[index] = bindgroup;
     }
 
-    void CommandBufferStateTracker::SetIndexBuffer() {
+    void CommandBufferStateTracker::SetIndexBuffer(uint64_t offset) {
         mAspects.set(VALIDATION_ASPECT_INDEX_BUFFER);
+        mIndexBufferOffset = offset;
     }
 
     void CommandBufferStateTracker::SetVertexBuffer(uint32_t start, uint32_t count) {

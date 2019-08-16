@@ -23,6 +23,7 @@
 #include "dawn_native/ComputePassEncoder.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/PassResourceUsage.h"
 #include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 
@@ -452,6 +453,12 @@ namespace dawn_native {
                 storedUsage |= usage;
             }
 
+            void IndirectBufferUsedAs(BufferBase* buffer,
+                                      uint64_t indexBufferOffset,
+                                      uint64_t indirectOffset) {
+                mIndirectBufferUsages.push_back({buffer, indexBufferOffset, indirectOffset});
+            }
+
             void TextureUsedAs(TextureBase* texture, dawn::TextureUsageBit usage) {
                 // std::map's operator[] will create the key and return 0 if the key didn't exist
                 // before.
@@ -530,11 +537,14 @@ namespace dawn_native {
                     result.textureUsages.push_back(it.second);
                 }
 
+                result.indirectBufferUsages = mIndirectBufferUsages;
+
                 return result;
             }
 
           private:
             std::map<BufferBase*, dawn::BufferUsageBit> mBufferUsages;
+            std::vector<IndirectBufferUsage> mIndirectBufferUsages;
             std::map<TextureBase*, dawn::TextureUsageBit> mTextureUsages;
             bool mStorageUsedMultipleTimes = false;
         };
@@ -1104,6 +1114,9 @@ namespace dawn_native {
                     DAWN_TRY(persistentState.ValidateCanDrawIndexed());
                     usageTracker.BufferUsedAs(cmd->indirectBuffer.Get(),
                                               dawn::BufferUsageBit::Indirect);
+                    usageTracker.IndirectBufferUsedAs(cmd->indirectBuffer.Get(),
+                                                      persistentState.GetIndexBufferOffset(),
+                                                      cmd->indirectOffset);
                 } break;
 
                 case Command::InsertDebugMarker: {
@@ -1160,7 +1173,7 @@ namespace dawn_native {
                     SetIndexBufferCmd* cmd = mIterator.NextCommand<SetIndexBufferCmd>();
 
                     usageTracker.BufferUsedAs(cmd->buffer.Get(), dawn::BufferUsageBit::Index);
-                    persistentState.SetIndexBuffer();
+                    persistentState.SetIndexBuffer(cmd->offset);
                 } break;
 
                 case Command::SetVertexBuffers: {

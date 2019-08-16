@@ -124,7 +124,7 @@ TEST_P(DrawIndexedIndirectTest, Uint32) {
 TEST_P(DrawIndexedIndirectTest, BaseVertex) {
     // TODO(crbug.com/dawn/161): add workaround for OpenGL index buffer offset (could be compute
     // shader that adds it to the draw calls)
-    DAWN_SKIP_TEST_IF(IsOpenGL());
+    // DAWN_SKIP_TEST_IF(IsOpenGL());
 
     RGBA8 filled(0, 255, 0, 255);
     RGBA8 notFilled(0, 0, 0, 0);
@@ -141,6 +141,9 @@ TEST_P(DrawIndexedIndirectTest, BaseVertex) {
 
     // Test a draw with only the last 3 indices of the first quad (top right triangle)
     Test({3, 1, 3, -4, 0}, 6 * sizeof(uint32_t), 0, notFilled, filled);
+
+    // Test a draw with only the last 3 indices of the first quad (top right triangle) and offset
+    Test({0, 3, 1, 3, -4, 0}, 6 * sizeof(uint32_t), 1 * sizeof(uint32_t), notFilled, filled);
 }
 
 TEST_P(DrawIndexedIndirectTest, IndirectOffset) {

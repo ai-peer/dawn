@@ -156,4 +156,8 @@ namespace dawn_native { namespace opengl {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
     }
 
+    const IndirectUtils& Device::GetIndirectUtils() const {
+        return mIndirectUtils;
+    }
+
 }}  // namespace dawn_native::opengl

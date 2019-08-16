@@ -32,12 +32,13 @@ namespace dawn_native {
         MaybeError ValidateCanDispatch();
         MaybeError ValidateCanDraw();
         MaybeError ValidateCanDrawIndexed();
+        uint64_t GetIndexBufferOffset() const;
 
         // State-modifying methods
         void SetComputePipeline(ComputePipelineBase* pipeline);
         void SetRenderPipeline(RenderPipelineBase* pipeline);
         void SetBindGroup(uint32_t index, BindGroupBase* bindgroup);
-        void SetIndexBuffer();
+        void SetIndexBuffer(uint64_t offset);
         void SetVertexBuffer(uint32_t start, uint32_t count);
 
         static constexpr size_t kNumAspects = 4;
@@ -57,6 +58,8 @@ namespace dawn_native {
 
         PipelineLayoutBase* mLastPipelineLayout = nullptr;
         RenderPipelineBase* mLastRenderPipeline = nullptr;
+
+        uint64_t mIndexBufferOffset;
     };
 
 }  // namespace dawn_native

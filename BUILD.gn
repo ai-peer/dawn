@@ -272,6 +272,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/opengl/DeviceGL.cpp",
       "src/dawn_native/opengl/DeviceGL.h",
       "src/dawn_native/opengl/Forward.h",
+      "src/dawn_native/opengl/IndirectUtilsGL.cpp",
+      "src/dawn_native/opengl/IndirectUtilsGL.h",
       "src/dawn_native/opengl/PersistentPipelineStateGL.cpp",
       "src/dawn_native/opengl/PersistentPipelineStateGL.h",
       "src/dawn_native/opengl/PipelineGL.cpp",

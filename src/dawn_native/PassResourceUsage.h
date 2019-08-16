@@ -25,12 +25,20 @@ namespace dawn_native {
     class BufferBase;
     class TextureBase;
 
+    struct IndirectBufferUsage {
+        BufferBase* buffer;
+        uint64_t indexBufferOffset;
+        uint64_t indirectOffset;
+    };
+
     // Which resources are used by pass and how they are used. The command buffer validation
     // pre-computes this information so that backends with explicit barriers don't have to
     // re-compute it.
     struct PassResourceUsage {
         std::vector<BufferBase*> buffers;
         std::vector<dawn::BufferUsageBit> bufferUsages;
+
+        std::vector<IndirectBufferUsage> indirectBufferUsages;
 
         std::vector<TextureBase*> textures;
         std::vector<dawn::TextureUsageBit> textureUsages;
