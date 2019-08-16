@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e390b64c_e7b8d5ee",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-16T01:38:11Z",
+      "side": 1,
+      "message": "nit: And intel apparently? according to the DAWN_SKIP_TEST_IF",
+      "revId": "8eba9fbfda8ca4bdddae44f152aa93dd8dd11591",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b36f81e_18ae2b07",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-16T01:38:11Z",
+      "side": 1,
+      "message": "nit: on AMD",
+      "revId": "8eba9fbfda8ca4bdddae44f152aa93dd8dd11591",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
