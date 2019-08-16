@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "00fbde8b_b19c8792",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-16T03:35:56Z",
+      "side": 1,
+      "message": "Intel works, the skip is since we disabled all of these for intel until the bots are upgraded",
+      "parentUuid": "e390b64c_e7b8d5ee",
+      "revId": "8eba9fbfda8ca4bdddae44f152aa93dd8dd11591",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5b36f81e_18ae2b07",
         "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "8eba9fbfda8ca4bdddae44f152aa93dd8dd11591",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6d9c6b6_0738f08d",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-16T03:35:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b36f81e_18ae2b07",
+      "revId": "8eba9fbfda8ca4bdddae44f152aa93dd8dd11591",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
