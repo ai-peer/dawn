@@ -46,6 +46,30 @@
       "revId": "eb769f78ed2eed5b0056cd3059808e4a7cf7af48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ba92db_85877030",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-16T22:13:34Z",
+      "side": 1,
+      "message": "Hm, let\u0027s do it for D3D12 first, then then port it over to the other backends (since you already did the work there).\n\nThe idea is to reuse existing code that helps create and manage temporary buffers. We can do GetDevice()-\u003eGetDynamicUploader()-\u003eAllocate(size, alignment) to allocate the temporary buffer instead of directly doing it with new Buffer(...).\n\nAnd then we would perform the copy you\u0027re doing here inside a new function called something like Device::CopyFromStagingToTexture",
+      "parentUuid": "069ee09f_abf4d885",
+      "range": {
+        "startLine": 486,
+        "startChar": 12,
+        "endLine": 497,
+        "endChar": 74
+      },
+      "revId": "eb769f78ed2eed5b0056cd3059808e4a7cf7af48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
