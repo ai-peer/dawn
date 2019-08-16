@@ -22,6 +22,30 @@
       "revId": "eb769f78ed2eed5b0056cd3059808e4a7cf7af48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "069ee09f_abf4d885",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-16T18:37:27Z",
+      "side": 1,
+      "message": "so we keep a staging buffer in the texture class is the idea? Should that be a separate change for both vulkan and d3d12, or make this a big change?",
+      "parentUuid": "38ce7667_7bbdca87",
+      "range": {
+        "startLine": 486,
+        "startChar": 12,
+        "endLine": 497,
+        "endChar": 74
+      },
+      "revId": "eb769f78ed2eed5b0056cd3059808e4a7cf7af48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
