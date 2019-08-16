@@ -848,9 +848,9 @@ namespace dawn_native { namespace vulkan {
                     SetViewportCmd* cmd = mCommands.NextCommand<SetViewportCmd>();
                     VkViewport viewport;
                     viewport.x = cmd->x;
-                    viewport.y = cmd->y;
+                    viewport.y = cmd->y + cmd->height;
                     viewport.width = cmd->width;
-                    viewport.height = cmd->height;
+                    viewport.height = -cmd->height;
                     viewport.minDepth = cmd->minDepth;
                     viewport.maxDepth = cmd->maxDepth;
 
