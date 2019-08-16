@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6783a525_528ece1c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T23:50:02Z",
+      "side": 1,
+      "message": "Depth/Stencil formats are renderable as well so it was surprised at first to see this if statement here.\n\nFor better readability, might make sense to reword as follows:\nif (isRenderable()) {\n  if (HasDepthOrStencil()) {\n    // clear depth/stencil\n  } else {\n    // clear color\n  }\n} else {\n // Clear using the CPU\n}",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 46
+      },
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1a39256_159d67b5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T23:50:02Z",
+      "side": 1,
+      "message": "Don\u0027t the ToBackend helpers do this reinterpret_cast for you?",
+      "range": {
+        "startLine": 488,
+        "startChar": 12,
+        "endLine": 489,
+        "endChar": 61
+      },
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d04f347b_082b492b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T23:50:02Z",
+      "side": 1,
+      "message": "I know the previous code was already like this but, for better readability, please type out the full type here instead of using auto. I had to look up the return value in the code before I could review what you wrote.",
+      "range": {
+        "startLine": 505,
+        "startChar": 12,
+        "endLine": 505,
+        "endChar": 16
+      },
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efe62804_f71ae2f5",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T23:50:02Z",
+      "side": 1,
+      "message": "ComPtr\u0027s passed by value type AddRef the resource on entering the function and Release on exit. This is a waste of CPU resources and bloats PIX traces.\n\nSince this function is not taking ownership of the resource, please pass it by naked pointer.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 43
+      },
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dab2c64_c5331a1e",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T23:50:02Z",
+      "side": 1,
+      "message": "I think you can reuse this function in more places if you had it take an Origin3D and an Extent3D and called it something like ComputeD3D12BoxFromOffsetAndSize.",
+      "range": {
+        "startLine": 73,
+        "startChar": 14,
+        "endLine": 73,
+        "endChar": 53
+      },
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8495917d_689e3297",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T23:50:02Z",
+      "side": 1,
+      "message": "Since TextureCopySplit::CopyInfo is pretty sizable, please pass by const reference.",
+      "range": {
+        "startLine": 73,
+        "startChar": 54,
+        "endLine": 73,
+        "endChar": 85
+      },
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e338e85_b5fc90af",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T23:50:02Z",
+      "side": 1,
+      "message": "This function is called \u0027CreateXXXX\u0027 but the other two you introduced are called \u0027ComputeXXX\u0027.  I personally prefer using the word Compute since \u0027create\u0027 implies something is created on the in a non-stack location.",
+      "range": {
+        "startLine": 27,
+        "startChar": 32,
+        "endLine": 27,
+        "endChar": 67
+      },
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
