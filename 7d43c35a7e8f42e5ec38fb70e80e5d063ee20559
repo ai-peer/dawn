@@ -241,6 +241,30 @@
     },
     {
       "key": {
+        "uuid": "874b2dba_02c1c872",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-16T16:41:06Z",
+      "side": 1,
+      "message": "I agree and this makes sense to me.\n\nMaybe what we can do is in ResourceHeapD3D12.h, name that class d3d12::DirectResourceHeap instead of just d3d12::ResourceHeap. We will need to make another type of heap to suballocate PlacedResources. I think the current name is too general.",
+      "parentUuid": "87786da7_b8a58895",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
