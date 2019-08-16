@@ -217,6 +217,30 @@
     },
     {
       "key": {
+        "uuid": "87786da7_b8a58895",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-16T01:12:32Z",
+      "side": 1,
+      "message": "IMHO, it makes sense to organize the data structures into a Heap classes and allocation classes. \n\nHeap classes hand out instances of allocations.  The \u0027committed resource\u0027 (or \u0027direct allocation\u0027) heap implementations would only hand out one allocation object. The \u0027placed resource\u0027 or \u0027sub-allocating\u0027 heap doles out more than one allocation instance and contains logic to keep track off offsets.\n\nIf we want to reuse the logic of \u0027direct\u0027 vs. \u0027suballocating\u0027 heap types between backends and use inheritance, then the D3D12 \u0027direct\u0027 heap would inherit from the \u0027direct heap\u0027 base class and contain an instance of a ID3D12Resource.  Whereas the D3D12 \u0027sub-allocating\u0027 heap type would inherit from the sub-allocating base class and contain an instance of a ID3D12Heap. All D3D12 allocation classes would contain an instance of an ID3D12Resource and an offset. For the direct heap, the offset in the allocation class would always be zero.",
+      "parentUuid": "fbfab2d4_4944bb93",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
