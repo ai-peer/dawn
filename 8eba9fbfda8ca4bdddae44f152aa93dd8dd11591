@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c4854ddd_6a8c2336",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-16T03:38:07Z",
+      "side": 1,
+      "message": "Oh right.",
+      "parentUuid": "00fbde8b_b19c8792",
+      "revId": "8eba9fbfda8ca4bdddae44f152aa93dd8dd11591",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b36f81e_18ae2b07",
         "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 6
