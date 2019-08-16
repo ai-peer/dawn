@@ -22,6 +22,30 @@
       "revId": "8ccb142806be7dbfda14262036050ef5a134f73e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48bc3646_b8abdb86",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000418
+      },
+      "writtenOn": "2019-08-16T00:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ac22c3d_063c17c6",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 27
+      },
+      "revId": "8ccb142806be7dbfda14262036050ef5a134f73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
