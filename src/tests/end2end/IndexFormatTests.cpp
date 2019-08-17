@@ -66,12 +66,10 @@ class IndexFormatTest : public DawnTest {
 TEST_P(IndexFormatTest, Uint32) {
     dawn::RenderPipeline pipeline = MakeTestPipeline(dawn::IndexFormat::Uint32);
 
-    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(device, dawn::BufferUsageBit::Vertex, {
-        -1.0f,  1.0f, 0.0f, 1.0f, // Note Vertices[0] = Vertices[1]
-        -1.0f,  1.0f, 0.0f, 1.0f,
-         1.0f,  1.0f, 0.0f, 1.0f,
-        -1.0f, -1.0f, 0.0f, 1.0f
-    });
+    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
+        device, dawn::BufferUsageBit::Vertex,
+        {-1.0f, -1.0f, 0.0f, 1.0f,  // Note Vertices[0] = Vertices[1]
+         -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f});
     // If this is interpreted as Uint16, then it would be 0, 1, 0, ... and would draw nothing.
     dawn::Buffer indexBuffer = utils::CreateBufferFromData<uint32_t>(device, dawn::BufferUsageBit::Index, {
         1, 2, 3
@@ -98,11 +96,9 @@ TEST_P(IndexFormatTest, Uint32) {
 TEST_P(IndexFormatTest, Uint16) {
     dawn::RenderPipeline pipeline = MakeTestPipeline(dawn::IndexFormat::Uint16);
 
-    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(device, dawn::BufferUsageBit::Vertex, {
-        -1.0f,  1.0f, 0.0f, 1.0f,
-         1.0f,  1.0f, 0.0f, 1.0f,
-        -1.0f, -1.0f, 0.0f, 1.0f
-    });
+    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
+        device, dawn::BufferUsageBit::Vertex,
+        {-1.0f, -1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f});
     // If this is interpreted as uint32, it will have index 1 and 2 be both 0 and render nothing
     dawn::Buffer indexBuffer = utils::CreateBufferFromData<uint16_t>(device, dawn::BufferUsageBit::Index, {
         1, 2, 0, 0, 0, 0
@@ -141,13 +137,12 @@ TEST_P(IndexFormatTest, Uint16) {
 TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
     dawn::RenderPipeline pipeline = MakeTestPipeline(dawn::IndexFormat::Uint32);
 
-    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(device, dawn::BufferUsageBit::Vertex, {
-         0.0f,  1.0f, 0.0f, 1.0f,
-         1.0f,  0.0f, 0.0f, 1.0f,
-         0.0f,  0.0f, 0.0f, 1.0f,
-         0.0f, -1.0f, 0.0f, 1.0f,
-        -1.0f, -1.0f, 0.0f, 1.0f,
-    });
+    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
+        device, dawn::BufferUsageBit::Vertex,
+        {
+            0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,
+            0.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+        });
     dawn::Buffer indexBuffer = utils::CreateBufferFromData<uint32_t>(device, dawn::BufferUsageBit::Index, {
         0, 1, 2, 0xFFFFFFFFu, 3, 4, 2,
     });
@@ -175,13 +170,12 @@ TEST_P(IndexFormatTest, Uint32PrimitiveRestart) {
 TEST_P(IndexFormatTest, Uint16PrimitiveRestart) {
     dawn::RenderPipeline pipeline = MakeTestPipeline(dawn::IndexFormat::Uint16);
 
-    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(device, dawn::BufferUsageBit::Vertex, {
-         0.0f,  1.0f, 0.0f, 1.0f,
-         1.0f,  0.0f, 0.0f, 1.0f,
-         0.0f,  0.0f, 0.0f, 1.0f,
-         0.0f, -1.0f, 0.0f, 1.0f,
-        -1.0f, -1.0f, 0.0f, 1.0f,
-    });
+    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
+        device, dawn::BufferUsageBit::Vertex,
+        {
+            0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,
+            0.0f, 1.0f,  0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+        });
     dawn::Buffer indexBuffer = utils::CreateBufferFromData<uint16_t>(device, dawn::BufferUsageBit::Index, {
         0, 1, 2, 0xFFFFu, 3, 4, 2,
         // This value is for padding.
@@ -216,12 +210,10 @@ TEST_P(IndexFormatTest, ChangePipelineAfterSetIndexBuffer) {
     dawn::RenderPipeline pipeline32 = MakeTestPipeline(dawn::IndexFormat::Uint32);
     dawn::RenderPipeline pipeline16 = MakeTestPipeline(dawn::IndexFormat::Uint16);
 
-    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(device, dawn::BufferUsageBit::Vertex, {
-        -1.0f,  1.0f, 0.0f, 1.0f, // Note Vertices[0] = Vertices[1]
-        -1.0f,  1.0f, 0.0f, 1.0f,
-         1.0f,  1.0f, 0.0f, 1.0f,
-        -1.0f, -1.0f, 0.0f, 1.0f
-    });
+    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
+        device, dawn::BufferUsageBit::Vertex,
+        {-1.0f, -1.0f, 0.0f, 1.0f,  // Note Vertices[0] = Vertices[1]
+         -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f});
     // If this is interpreted as Uint16, then it would be 0, 1, 0, ... and would draw nothing.
     dawn::Buffer indexBuffer = utils::CreateBufferFromData<uint32_t>(device, dawn::BufferUsageBit::Index, {
         1, 2, 3
@@ -253,11 +245,9 @@ TEST_P(IndexFormatTest, ChangePipelineAfterSetIndexBuffer) {
 TEST_P(IndexFormatTest, DISABLED_SetIndexBufferBeforeSetPipeline) {
     dawn::RenderPipeline pipeline = MakeTestPipeline(dawn::IndexFormat::Uint32);
 
-    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(device, dawn::BufferUsageBit::Vertex, {
-        -1.0f,  1.0f, 0.0f, 1.0f,
-         1.0f,  1.0f, 0.0f, 1.0f,
-        -1.0f, -1.0f, 0.0f, 1.0f
-    });
+    dawn::Buffer vertexBuffer = utils::CreateBufferFromData<float>(
+        device, dawn::BufferUsageBit::Vertex,
+        {-1.0f, -1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f});
     dawn::Buffer indexBuffer = utils::CreateBufferFromData<uint32_t>(device, dawn::BufferUsageBit::Index, {
         0, 1, 2
     });

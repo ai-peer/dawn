@@ -140,9 +140,9 @@ namespace dawn_native { namespace vulkan {
         VkFrontFace VulkanFrontFace(dawn::FrontFace face) {
             switch (face) {
                 case dawn::FrontFace::CCW:
-                    return VK_FRONT_FACE_COUNTER_CLOCKWISE;
-                case dawn::FrontFace::CW:
                     return VK_FRONT_FACE_CLOCKWISE;
+                case dawn::FrontFace::CW:
+                    return VK_FRONT_FACE_COUNTER_CLOCKWISE;
             }
         }
 
