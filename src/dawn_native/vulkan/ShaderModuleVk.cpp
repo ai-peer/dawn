@@ -18,6 +18,7 @@
 #include "dawn_native/vulkan/FencedDeleter.h"
 
 #include <spirv-cross/spirv_cross.hpp>
+#include <spirv-cross/spirv_glsl.hpp>
 
 namespace dawn_native { namespace vulkan {
 
@@ -26,6 +27,9 @@ namespace dawn_native { namespace vulkan {
         // Use SPIRV-Cross to extract info from the SPIRV even if Vulkan consumes SPIRV. We want to
         // have a translation step eventually anyway.
         spirv_cross::Compiler compiler(descriptor->code, descriptor->codeSize);
+        //        spirv_cross::CompilerGLSL::Options options;
+        //        options.vertex.flip_vert_y = true;
+        //        compiler.set_common_options(options);
         ExtractSpirvInfo(compiler);
 
         VkShaderModuleCreateInfo createInfo;

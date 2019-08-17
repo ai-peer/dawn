@@ -50,6 +50,7 @@ namespace dawn_native { namespace opengl {
                 // Note that we invert winding direction in OpenGL. Because Y axis is up in OpenGL,
                 // which is different from WebGPU and other backends (Y axis is down).
                 GLenum direction = (face == dawn::FrontFace::CCW) ? GL_CW : GL_CCW;
+                // GLenum direction = (face == dawn::FrontFace::CCW) ? GL_CCW : GL_CW;
                 gl.FrontFace(direction);
 
                 GLenum cullMode = (mode == dawn::CullMode::Front) ? GL_FRONT : GL_BACK;
