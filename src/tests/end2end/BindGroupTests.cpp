@@ -104,7 +104,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
             mat2 transform;
         };
         void main() {
-            const vec2 pos[3] = vec2[3](vec2(-1.f, -1.f), vec2(1.f, -1.f), vec2(-1.f, 1.f));
+            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
             gl_Position = vec4(transform * pos[gl_VertexIndex], 0.f, 1.f);
         })");
 
@@ -188,7 +188,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
             mat2 transform;
         };
         void main() {
-            const vec2 pos[3] = vec2[3](vec2(-1.f, -1.f), vec2(1.f, -1.f), vec2(-1.f, 1.f));
+            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
             gl_Position = vec4(transform * pos[gl_VertexIndex], 0.f, 1.f);
         })");
 
@@ -308,7 +308,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
             mat2 transform2;
         };
         void main() {
-            const vec2 pos[3] = vec2[3](vec2(-1.f, -1.f), vec2(1.f, -1.f), vec2(-1.f, 1.f));
+            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
             gl_Position = vec4((transform1 + transform2) * pos[gl_VertexIndex], 0.f, 1.f);
         })");
 
@@ -397,7 +397,7 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets)
     dawn::ShaderModule vsModule = utils::CreateShaderModule(device, utils::ShaderStage::Vertex, R"(
         #version 450
         void main() {
-            const vec2 pos[3] = vec2[3](vec2(-1.f, -1.f), vec2(1.f, -1.f), vec2(-1.f, 1.f));
+            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
             gl_Position = vec4(pos[gl_VertexIndex], 0.f, 1.f);
         })");
 
