@@ -435,7 +435,35 @@ namespace dawn_native { namespace opengl {
                     gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, src.imageHeight);
                     switch (texture->GetDimension()) {
                         case dawn::TextureDimension::e2D:
-                            if (texture->GetArrayLayers() > 1) {
+                            if (texture->GetFormat().isCompressed) {
+                                uint64_t copyDataSize =
+                                    (copySize.width / texture->GetFormat().blockWidth) *
+                                    (copySize.height / texture->GetFormat().blockHeight) *
+                                    texture->GetFormat().blockByteSize;
+                                Extent3D virtualSize =
+                                    texture->GetMipLevelVirtualSize(dst.mipLevel);
+                                ASSERT(virtualSize.width >= dst.origin.x);
+                                ASSERT(virtualSize.height >= dst.origin.y);
+                                uint32_t width =
+                                    std::min(copySize.width, virtualSize.width - dst.origin.x);
+                                uint32_t height =
+                                    std::min(copySize.height, virtualSize.height - dst.origin.y);
+
+                                if (texture->GetArrayLayers() > 1) {
+                                    gl.CompressedTexSubImage3D(
+                                        target, dst.mipLevel, dst.origin.x, dst.origin.y,
+                                        dst.arrayLayer, width, height, 1, format.internalFormat,
+                                        copyDataSize,
+                                        reinterpret_cast<void*>(
+                                            static_cast<uintptr_t>(src.offset)));
+                                } else {
+                                    gl.CompressedTexSubImage2D(
+                                        target, dst.mipLevel, dst.origin.x, dst.origin.y, width,
+                                        height, format.internalFormat, copyDataSize,
+                                        reinterpret_cast<void*>(
+                                            static_cast<uintptr_t>(src.offset)));
+                                }
+                            } else if (texture->GetArrayLayers() > 1) {
                                 gl.TexSubImage3D(
                                     target, dst.mipLevel, dst.origin.x, dst.origin.y,
                                     dst.arrayLayer, copySize.width, copySize.height, 1,
@@ -467,6 +495,12 @@ namespace dawn_native { namespace opengl {
                     Buffer* buffer = ToBackend(dst.buffer.Get());
                     const GLFormat& format = texture->GetGLFormat();
                     GLenum target = texture->GetGLTarget();
+
+                    // TODO(jiawei.shao@intel.com): support texture-to-buffer copy with compressed
+                    // texture formats.
+                    if (texture->GetFormat().isCompressed) {
+                        break;
+                    }
 
                     texture->EnsureSubresourceContentInitialized(src.mipLevel, 1, src.arrayLayer,
                                                                  1);
