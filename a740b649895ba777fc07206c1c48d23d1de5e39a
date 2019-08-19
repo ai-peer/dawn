@@ -48,6 +48,23 @@
     },
     {
       "key": {
+        "uuid": "d1b90d59_377b5da5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T11:17:55Z",
+      "side": 1,
+      "message": "This would crash if an error is consumed because clearBuffer would be nullptr and written to. We could propagate the error by making this function and its caller return maybererror.\n\nEventaully it might make sense to have a small-ish buffer of zeroes (64k?) created at device initialization that can be used to do chunked copies to zero-init textures and buffers.",
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d04f347b_082b492b",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
