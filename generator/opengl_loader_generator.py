@@ -96,6 +96,7 @@ EnumDefine = namedtuple('EnumDefine', ['name', 'value'])
 Version = namedtuple('Version', ['major', 'minor'])
 VersionBlock = namedtuple('VersionBlock', ['version', 'procs', 'enums'])
 HeaderBlock = namedtuple('HeaderBlock', ['description', 'procs', 'enums'])
+ExtensionBlock = namedtuple('ExtensionBlock', ['extension', 'procs', 'enums'])
 
 def parse_version(version):
     return Version(*map(int, version.split('.')))
@@ -146,6 +147,25 @@ def compute_params(root):
     gles_blocks = parse_version_blocks('gles2')
     desktop_gl_blocks = parse_version_blocks('gl', core_removed_procs)
 
+    def parse_extension_block(extension):
+        section = root.find('''extensions/extension[@name='{}']'''.format(extension))
+        section_procs = []
+        for command in section.findall('./require/command'):
+            proc_name = command.attrib['name']
+            assert(all_procs[proc_name].alias == None)
+            if proc_name not in removed_procs:
+                section_procs.append(all_procs[proc_name])
+
+        section_enums = []
+        for enum in section.findall('./require/enum'):
+            section_enums.append(all_enums[enum.attrib['name']])
+
+        return ExtensionBlock(extension, section_procs, section_enums)
+
+    required_extensions = ['GL_EXT_texture_compression_s3tc', 'GL_EXT_texture_sRGB']
+
+    extension_blocks = [parse_extension_block(extension) for extension in required_extensions]
+
     # Compute the blocks for headers such that there is no duplicate definition
     already_added_header_procs = set()
     already_added_header_enums = set()
@@ -172,9 +192,13 @@ def compute_params(root):
     for block in desktop_gl_blocks:
         add_header_block('Desktop OpenGL {}.{}'.format(block.version.major, block.version.minor), block)
 
+    for block in extension_blocks:
+        add_header_block(block.extension, block)
+
     return {
         'gles_blocks': gles_blocks,
         'desktop_gl_blocks': desktop_gl_blocks,
+        'extension_blocks': extension_blocks,
         'header_blocks': header_blocks,
     }
 

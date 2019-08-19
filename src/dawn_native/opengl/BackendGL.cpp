@@ -169,6 +169,8 @@ namespace dawn_native { namespace opengl {
             const char* vendor = reinterpret_cast<const char*>(mFunctions.GetString(GL_VENDOR));
             mPCIInfo.vendorId = GetVendorIdFromVendors(vendor);
 
+            InitializeSupportedExtensions();
+
             return {};
         }
 
@@ -181,6 +183,45 @@ namespace dawn_native { namespace opengl {
             // There is no limit on the number of devices created from this adapter because they can
             // all share the same backing OpenGL context.
             return {new Device(this, descriptor, mFunctions)};
+        }
+
+        void InitializeSupportedExtensions() {
+            int32_t numExtensions;
+            mFunctions.GetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
+            // BC1, BC2 and BC3 formats are not supported in OpenGL core features.
+            bool supportS3TC = false;
+            bool supportTextureSRGB = false;
+            bool supportS3TCSRGB = false;
+            bool supportRGTC = mFunctions.IsAtLeastGL(3, 0);
+            bool supportBPTC = mFunctions.IsAtLeastGL(4, 2);
+
+            for (int32_t i = 0; i < numExtensions; ++i) {
+                const char* extension =
+                    reinterpret_cast<const char*>(mFunctions.GetStringi(GL_EXTENSIONS, i));
+                if ((strcmp(extension, "GL_EXT_texture_compression_s3tc") == 0)) {
+                    supportS3TC = true;
+                } else if ((strcmp(extension, "GL_EXT_texture_sRGB") == 0)) {
+                    // COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT, COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT and
+                    // COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT requires both GL_EXT_texture_sRGB and
+                    // GL_EXT_texture_compression_s3tc on desktop OpenGL drivers.
+                    // (https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_sRGB.txt)
+                    supportTextureSRGB = true;
+                } else if ((strcmp(extension, "GL_EXT_texture_compression_s3tc_srgb") == 0)) {
+                    // GL_EXT_texture_compression_s3tc_srgb is an extension in OpenGL ES.
+                    supportS3TCSRGB = true;
+                } else if ((strcmp(extension, "GL_ARB_texture_compression_rgtc") == 0) ||
+                           (strcmp(extension, "GL_EXT_texture_compression_rgtc") == 0)) {
+                    supportRGTC = true;
+                } else if ((strcmp(extension, "GL_ARB_texture_compression_bptc") == 0) ||
+                           (strcmp(extension, "GL_EXT_texture_compression_bptc") == 0)) {
+                    supportBPTC = true;
+                }
+            }
+
+            if (supportS3TC && (supportTextureSRGB || supportS3TCSRGB) && supportRGTC &&
+                supportBPTC) {
+                mSupportedExtensions.EnableExtension(dawn_native::Extension::TextureCompressionBC);
+            }
         }
     };
 
