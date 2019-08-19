@@ -289,6 +289,30 @@
     },
     {
       "key": {
+        "uuid": "0e8598f5_f5fbdd02",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "Using the heap types, named by the allocation method (eg. DirectResourceHeap and SubAllocatedResourceHeap) has two issues: 1) leaks the allocator implementation details to the Dawn buffer/texture object, and 2) incompatible with Device::[Allocation|Deallocate]Memory - not specific to the allocation method. The heap type is generic because it represents memory, not the allocation method used to allocate it.\n\nI\u0027ve merged ResourceHeap + ResourceMemoryAllocation into ResourceBase to resolve these issues and is consistent with the existing types (e.g. ID3D12Resource).",
+      "parentUuid": "2e99d67c_77efe06d",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c615cb94_9490af74",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 4
@@ -303,6 +327,24 @@
       "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "140cf849_bd5495e9",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c615cb94_9490af74",
+      "revId": "7d43c35a7e8f42e5ec38fb70e80e5d063ee20559",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

@@ -154,6 +154,24 @@
     },
     {
       "key": {
+        "uuid": "0a27eebb_232de016",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "79fdbbb6_63e0434b",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2d6f3e9_eca69697",
         "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
         "patchSetId": 3
@@ -855,6 +873,30 @@
     },
     {
       "key": {
+        "uuid": "c9c096bc_99d12b94",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6b05f74_f376aee2",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "103fc416_bce66ffe",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -869,6 +911,24 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4b06cb9_36e4fc64",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "103fc416_bce66ffe",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -954,6 +1014,24 @@
     },
     {
       "key": {
+        "uuid": "c8ca04d7_759fdfe7",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92d39ff5_88987261",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63916a2e_057a1a6d",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
         "patchSetId": 3
@@ -1009,6 +1087,48 @@
       "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5b6f87a_c3391059",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ac7a7a_1158a072",
+      "range": {
+        "startLine": 51,
+        "startChar": 10,
+        "endLine": 51,
+        "endChar": 33
+      },
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b525a2b1_9e4e4699",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-19T19:08:19Z",
+      "side": 1,
+      "message": "No longer relevant.",
+      "parentUuid": "3a6c6a23_9acca4d7",
+      "revId": "f298ed191ca05601ff08b47ae1196eea7d64a80e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
