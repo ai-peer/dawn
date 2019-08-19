@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87113725_8a5940a1",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "This will evolve over time so maybe we could have it in a json file instead of hardcoding it in the generator?",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a09777c_0798af4b",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "nit: supported_extensions? Dawn doesn\u0027t really require them to work but has support for using them.",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 23
+      },
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6d32332_c46e6d65",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "We\u0027re going to need to make the difference between Desktop and ES extensions because so the auto-generated code only checks for extensions available in ES when it loads an ES driver. You can check the \"supported\" attribute and split it with \"|\" to know where an extension is supported.",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea180b30_175a26d9",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "This functions does two things: it loads all the OpenGL extensions and decides which Dawn/WebGPU extensions should be exposed. Also the way it does things complexity will be (number of GL extensions) * (number of extensions we want to check for).\n\nI suggest putting the logic to detect supported GL extensions in OpenGLFunctions::Initialize with the result cached in a private member unordered_set\u003cconst char*\u003e mSupportedExtensions. Then we can do mFunctions.HasExtension(\"something\") in constant time. (ish, we need to hash the const char*).",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ff051fb_ba0e58dd",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "nit: supports\n\nAlso this conditions will become simpler because they can be computed directly instead of being updated inside the loop.",
+      "range": {
+        "startLine": 192,
+        "startChar": 17,
+        "endLine": 192,
+        "endChar": 24
+      },
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "611faa95_25cc9503",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "note: This is probably going to have issues when the last row pitch doesn\u0027t fit in the buffer (while the last row does fit.) This is similar to the workaround we had to do on Metal for texture copy last rows.",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fccb0aec_11b4a88f",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we need to reset the state because we are always going to set it before a copy.",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 76
+      },
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f43c8010_188e404e",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T08:04:35Z",
+      "side": 1,
+      "message": "nit: Maybe we should have an UNREACHABLE here so we don\u0027t just silently skip the operation.",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
