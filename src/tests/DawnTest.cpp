@@ -93,6 +93,10 @@ DawnTestParam ForceWorkarounds(const DawnTestParam& originParam,
     return newTestParam;
 }
 
+std::ostream& operator<<(std::ostream& os, const DawnTestParam& param) {
+    return os << ParamName(param.backendType);
+}
+
 // Implementation of DawnTestEnvironment
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv) {
