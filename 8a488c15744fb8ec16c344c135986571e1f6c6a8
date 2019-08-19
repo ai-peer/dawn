@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff68592d_fb372a1c",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T11:50:20Z",
+      "side": 1,
+      "message": "Should we validate that this is 0 after the commands have been validated?",
+      "revId": "8a488c15744fb8ec16c344c135986571e1f6c6a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "286df88d_f5f40e47",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T11:50:20Z",
+      "side": 1,
+      "message": "nit: The webgpu spec will probably not add text for this case and it will be executeBundles itself that invalidates the state.",
+      "revId": "8a488c15744fb8ec16c344c135986571e1f6c6a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4410a75_35392e16",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T11:50:20Z",
+      "side": 1,
+      "message": "nit: and validate these are color formats.",
+      "revId": "8a488c15744fb8ec16c344c135986571e1f6c6a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1dcb8ba_5d393694",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T11:50:20Z",
+      "side": 1,
+      "message": "nit: and validate these are depth-stencil formats.",
+      "revId": "8a488c15744fb8ec16c344c135986571e1f6c6a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
