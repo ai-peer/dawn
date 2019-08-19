@@ -41,4 +41,44 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
+    D3D12_TEXTURE_COPY_LOCATION ComputeTextureCopyLocationForTexture(const Texture* texture,
+                                                                     uint32_t level,
+                                                                     uint32_t slice) {
+        D3D12_TEXTURE_COPY_LOCATION copyLocation;
+        copyLocation.pResource = texture->GetD3D12Resource();
+        copyLocation.Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;
+        copyLocation.SubresourceIndex = texture->GetSubresourceIndex(level, slice);
+
+        return copyLocation;
+    }
+
+    D3D12_TEXTURE_COPY_LOCATION ComputeBufferLocationForCopyTextureRegion(
+        const Texture* texture,
+        Buffer* buffer,
+        const TextureCopySplit::CopyInfo info,
+        const TextureCopySplit copySplit,
+        const uint32_t rowPitch) {
+        D3D12_TEXTURE_COPY_LOCATION bufferLocation;
+        bufferLocation.pResource = buffer->GetD3D12Resource().Get();
+        bufferLocation.Type = D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;
+        bufferLocation.PlacedFootprint.Offset = copySplit.offset;
+        bufferLocation.PlacedFootprint.Footprint.Format = texture->GetD3D12Format();
+        bufferLocation.PlacedFootprint.Footprint.Width = info.bufferSize.width;
+        bufferLocation.PlacedFootprint.Footprint.Height = info.bufferSize.height;
+        bufferLocation.PlacedFootprint.Footprint.Depth = info.bufferSize.depth;
+        bufferLocation.PlacedFootprint.Footprint.RowPitch = rowPitch;
+        return bufferLocation;
+    }
+
+    D3D12_BOX ComputeD3D12BoxFromOffsetAndSize(const Origin3D offset, const Extent3D copySize) {
+        D3D12_BOX sourceRegion;
+        sourceRegion.left = offset.x;
+        sourceRegion.top = offset.y;
+        sourceRegion.front = offset.z;
+        sourceRegion.right = offset.x + copySize.width;
+        sourceRegion.bottom = offset.y + copySize.height;
+        sourceRegion.back = offset.z + copySize.depth;
+        return sourceRegion;
+    }
+
 }}  // namespace dawn_native::d3d12
