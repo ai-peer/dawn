@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d23134b2_fdc22851",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "When copying between compressed textures that don\u0027t have block-aligned sizes.",
+      "range": {
+        "startLine": 63,
+        "startChar": 98,
+        "endLine": 63,
+        "endChar": 99
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76eb4e9a_fc1a4cca",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "nit: the Vulkan spec",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "998b7988_04607db4",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "nit: InCompressedTextureToTextureCopy.",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 29
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32b87183_7b7f9c75",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "We don\u0027t know that this type is packed so memcmp might fail because there is some additional garbage data at the end of the type. We should write an explicit comparison.",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65053c3e_a2a90e59",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "Add a comment that we don\u0027t need to respect WebGPU\u0027s 256 alignment because it isn\u0027t a hard constraint in Vulkan.",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c92d5a13_f307c44b",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "nit: This could use device-\u003eCreateBuffer(\u0026descriptor) so error handling happens correctly. In the future we\u0027ll need to handle what happens when the returned buffer is an error.",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6deb8693_e2196b88",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "nit: bool copyUsingTemporaryBuffer \u003d device-\u003eIsToggleEnabled(Toggle::UseTemporaryBufferInTextureToTextureCopy) \u0026\u0026 source-\u003eGetFormat().isCompressed \u0026\u0026 !HasSameTextureCopyExtent(src, dst, copy-\u003ecopySize);\n\nAlso the comment should explain what the issue is and why the HasSameTextureCopyExtent check is exactly when the issue happens.",
+      "range": {
+        "startLine": 496,
+        "startChar": 20,
+        "endLine": 496,
+        "endChar": 50
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaecb654_74043180",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T13:19:52Z",
+      "side": 1,
+      "message": "This could be std::vector\u003cRef\u003cBuffer\u003e\u003e mTempBuffers and stored in the CommandRecordingContext so they can be put in the fenced deleter as soon as the submit is finished.",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
