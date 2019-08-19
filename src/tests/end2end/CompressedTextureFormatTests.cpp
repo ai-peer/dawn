@@ -635,9 +635,9 @@ TEST_P(CompressedTextureBCFormatTest, CopyPartofTextureSubResourceIntoNonZeroMip
     DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     // TODO(jiawei.shao@intel.com): add workaround on the T2T copies where Extent3D fits in one
-    // subresource and does not fit in another one on Vulkan. Currently this test causes an error if
-    // Vulkan validation layer is enabled.
-    DAWN_SKIP_TEST_IF(IsVulkan());
+    // subresource and does not fit in another one on Vulkan and OpenGL. Currently this test causes
+    // an error if Vulkan validation layer is enabled.
+    DAWN_SKIP_TEST_IF(IsVulkan() && IsOpenGL());
 
     CopyConfig srcConfig;
     srcConfig.textureDescriptor.size = {60, 60, 1};
