@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "634761c0_ef662755",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-19T11:53:46Z",
+      "side": 1,
+      "message": "Code-wise I think this is ok, but we\u0027ll have to make sure that the switch is inlined correctly and merged with the main render pass switch because this is super-hot code. ditto in all other iteration loops.",
+      "revId": "40618d0b93aa46edc2906ef318d50fb1cf4fe80a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
