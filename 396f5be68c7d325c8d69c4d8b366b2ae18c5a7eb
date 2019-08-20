@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7699e0c7_d29eb801",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-08-20T19:55:26Z",
+      "side": 1,
+      "message": "0.49 vs 0.50 and 0.50 vs 0.51 might be too strict. 0.4 vs 0.6 should be reasonable even the precision is low.",
+      "range": {
+        "startLine": 370,
+        "startChar": 36,
+        "endLine": 370,
+        "endChar": 39
+      },
+      "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
