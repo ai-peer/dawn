@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc429c27_3fe0c1f9",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T13:25:36Z",
+      "side": 1,
+      "message": "This could be in a local variable to avoid repeating recordingContext-\u003etempBuffers.back() everywhere. Actually the variable could be created first and then put in the recordingContext.\n\nNote that right now the buffer is leaked because it start with a refcount of 1.",
+      "range": {
+        "startLine": 335,
+        "startChar": 32,
+        "endLine": 335,
+        "endChar": 68
+      },
+      "revId": "bb6e8d0fa11bcdb349658a001ff6e60da60c54f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
