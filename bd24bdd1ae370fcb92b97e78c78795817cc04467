@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "74a4db2f_247e8212",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-20T17:08:51Z",
+      "side": 1,
+      "message": "We could move WaitForSerial on line 113 down here so we truly wait for everything to be destructed.",
+      "parentUuid": "923a76a2_904dd5cc",
+      "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "395a4aa8_0828b258",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8
