@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "b1325fda_9714de7d",
+        "filename": "generator/supported_extensions.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T09:13:41Z",
+      "side": 1,
+      "message": "nit: Could this be in src/dawn_native/opengl also it might grow to contain more types of data so maybe it could be \"opengl_platform_generator_data.json\" or something like that?",
+      "revId": "d37667e28fcd8c76c01fda69dccdb915d6b29dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdc604db_c4abf4f4",
+        "filename": "generator/supported_extensions.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T09:13:41Z",
+      "side": 1,
+      "message": "uNit: one extension per line?",
+      "revId": "d37667e28fcd8c76c01fda69dccdb915d6b29dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4162696_2afa4fa1",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 10
