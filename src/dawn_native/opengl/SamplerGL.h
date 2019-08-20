@@ -27,10 +27,17 @@ namespace dawn_native { namespace opengl {
       public:
         Sampler(Device* device, const SamplerDescriptor* descriptor);
 
-        GLuint GetHandle() const;
+        GLuint GetFilteringHandle() const;
+        GLuint GetNonFilteringHandle() const;
 
       private:
-        GLuint mHandle;
+        void SetupGLSampler(GLuint sampler, const SamplerDescriptor* descriptor, bool forceNearest);
+
+        GLuint mFilteringHandle;
+
+        // This is a sampler equivalent to mHandle except that it uses NEAREST filtering for
+        // everything, which is important to preserve texture completeness for u/int textures.
+        GLuint mNonFilteringHandle;
     };
 
 }}  // namespace dawn_native::opengl
