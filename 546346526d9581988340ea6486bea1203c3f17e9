@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b0f81b9_76d49cb2",
+        "filename": "src/dawn_native/opengl/SamplerGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-20T22:25:18Z",
+      "side": 1,
+      "message": "nit: mFilteringHandle",
+      "range": {
+        "startLine": 38,
+        "startChar": 43,
+        "endLine": 38,
+        "endChar": 50
+      },
+      "revId": "546346526d9581988340ea6486bea1203c3f17e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "021d7278_503f6b81",
+        "filename": "src/dawn_native/opengl/SamplerGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-20T22:25:18Z",
+      "side": 1,
+      "message": "We never delete these; there\u0027s no ~Sampler o_O\n\nAs a more minor note, we *could* lazily create these handles.",
+      "range": {
+        "startLine": 40,
+        "startChar": 15,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "546346526d9581988340ea6486bea1203c3f17e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
