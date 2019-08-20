@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "03746031_debc18e7",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-20T14:12:18Z",
+      "side": 1,
+      "message": "I think we should use the DynamicUploader here instead",
+      "parentUuid": "db28a409_345048c9",
+      "revId": "c26e3af5fb47606d534f4d15513e1252e7957163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edc4b2f5_bc611bb5",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
