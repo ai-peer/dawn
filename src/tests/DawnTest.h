@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef TESTS_DAWNTEST_H_
+#define TESTS_DAWNTEST_H_
+
 #include "dawn/dawncpp.h"
 #include "dawn_native/DawnNative.h"
 
@@ -113,6 +116,8 @@ class DawnTestEnvironment : public testing::Environment {
     DawnTestEnvironment(int argc, char** argv);
     ~DawnTestEnvironment() = default;
 
+    static void SetEnvironment(DawnTestEnvironment* env);
+
     void SetUp() override;
 
     bool UsesWire() const;
@@ -132,13 +137,13 @@ class DawnTestEnvironment : public testing::Environment {
     std::unique_ptr<dawn_native::Instance> mInstance;
 };
 
-class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
+class DawnTestBase {
   public:
-    DawnTest();
-    ~DawnTest();
+    DawnTestBase(const DawnTestParam& param);
+    ~DawnTestBase();
 
-    void SetUp() override;
-    void TearDown() override;
+    void SetUp();
+    void TearDown();
 
     bool IsD3D12() const;
     bool IsMetal() const;
@@ -203,6 +208,8 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
     virtual std::vector<const char*> GetRequiredExtensions();
 
   private:
+    DawnTestParam mParam;
+
     // Things used to set up testing through the Wire.
     std::unique_ptr<dawn_wire::WireServer> mWireServer;
     std::unique_ptr<dawn_wire::WireClient> mWireClient;
@@ -261,6 +268,53 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
     dawn_native::Adapter mBackendAdapter;
 };
 
+// class DawnTest : public DawnTestBase, public ::testing::TestWithParam<DawnTestParam> {
+//   protected:
+//     DawnTest() : DawnTestBase(GetParam()) {
+//     }
+//     virtual ~DawnTest() = default;
+
+//     virtual void SetUp() override {
+//       DawnTestBase::SetUp();
+//     }
+
+//     virtual void TearDown() override {
+//       DawnTestBase::TearDown();
+//     }
+// };
+
+template <typename Params = DawnTestParam>
+class DawnTestWithParams : public DawnTestBase, public ::testing::TestWithParam<Params> {
+  protected:
+    DawnTestWithParams();
+
+    virtual void SetUp() override {
+        DawnTestBase::SetUp();
+    }
+
+    virtual void TearDown() override {
+        DawnTestBase::TearDown();
+    }
+};
+
+template <typename Params>
+DawnTestWithParams<Params>::DawnTestWithParams()
+    : DawnTestBase(std::get<DawnTestParam>(this->GetParam())) {
+}
+
+template <>
+inline DawnTestWithParams<DawnTestParam>::DawnTestWithParams() : DawnTestBase(this->GetParam()) {
+}
+
+using DawnTest = DawnTestWithParams<>;
+
+#define FILTER_BACKENDS(first, ...)                                                \
+    ([]() {                                                                        \
+        const decltype(first) backends[] = {first, ##__VA_ARGS__};                 \
+        return testing::ValuesIn(                                                  \
+            ::detail::FilterBackends(backends, sizeof(backends) / sizeof(first))); \
+    }())
+
 // Instantiate the test once for each backend provided after the first argument. Use it like this:
 //     DAWN_INSTANTIATE_TEST(MyTestFixture, MetalBackend, OpenGLBackend)
 #define DAWN_INSTANTIATE_TEST(testName, firstParam, ...)                         \
@@ -283,6 +337,12 @@ namespace detail {
     bool IsBackendAvailable(dawn_native::BackendType type);
     std::vector<DawnTestParam> FilterBackends(const DawnTestParam* params, size_t numParams);
     std::string GetParamName(const testing::TestParamInfo<DawnTestParam>& info);
+
+    template <typename Param>
+    std::string GetDawnTestParamName(const ::testing::TestParamInfo<Param> info) {
+        return detail::GetParamName(::testing::TestParamInfo<DawnTestParam>(
+            std::get<DawnTestParam>(info.param), info.index));
+    }
 
     // All classes used to implement the deferred expectations should inherit from this.
     class Expectation {
@@ -309,3 +369,5 @@ namespace detail {
     extern template class ExpectEq<uint32_t>;
     extern template class ExpectEq<RGBA8>;
 }  // namespace detail
+
+#endif  // TESTS_DAWNTEST_H_
