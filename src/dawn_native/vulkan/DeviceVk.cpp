@@ -44,6 +44,7 @@ namespace dawn_native { namespace vulkan {
 
     Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor)
         : DeviceBase(adapter, descriptor) {
+        InitTogglesFromDriver();
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
         }
@@ -333,6 +334,10 @@ namespace dawn_native { namespace vulkan {
             mDeleter->DeleteWhenUnused(semaphore);
         }
 
+        for (Ref<BufferBase>& tempBuffer : mRecordingContext.tempBuffers) {
+            mDeleter->DeleteWhenUnused(ToBackend(tempBuffer)->GetHandle());
+        }
+
         mRecordingContext = CommandRecordingContext();
     }
 
@@ -434,6 +439,12 @@ namespace dawn_native { namespace vulkan {
 
     void Device::GatherQueueFromDevice() {
         fn.GetDeviceQueue(mVkDevice, mQueueFamily, 0, &mQueue);
+    }
+
+    void Device::InitTogglesFromDriver() {
+        // TODO(jiawei.shao@intel.com): tighten this workaround when this issue is fixed in both
+        // Vulkan SPEC and drivers.
+        SetToggle(Toggle::UseTemporaryBufferInCompressedTextureToTextureCopy, true);
     }
 
     VulkanFunctions* Device::GetMutableFunctions() {

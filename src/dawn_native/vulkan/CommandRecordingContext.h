@@ -18,6 +18,10 @@
 
 #include <vector>
 
+namespace dawn_native {
+    class BufferBase;
+}  // namespace dawn_native
+
 namespace dawn_native { namespace vulkan {
 
     // Used to track operations that are handled after recording.
@@ -26,6 +30,10 @@ namespace dawn_native { namespace vulkan {
         VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
         std::vector<VkSemaphore> waitSemaphores = {};
         std::vector<VkSemaphore> signalSemaphores = {};
+
+        // The internal buffers used in the workaround of texture-to-texture copies with compressed
+        // formats.
+        std::vector<Ref<BufferBase>> tempBuffers;
     };
 
 }}  // namespace dawn_native::vulkan
