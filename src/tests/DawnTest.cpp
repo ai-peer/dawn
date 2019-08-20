@@ -71,7 +71,7 @@ namespace {
     }
 
     struct MapReadUserdata {
-        DawnTest* test;
+        DawnTestBase* test;
         size_t slot;
     };
 
@@ -141,6 +141,11 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
             continue;
         }
     }
+}
+
+// static
+void DawnTestEnvironment::SetEnvironment(DawnTestEnvironment* env) {
+    gTestEnv = env;
 }
 
 void DawnTestEnvironment::SetUp() {
@@ -241,9 +246,10 @@ void DawnTestEnvironment::DiscoverOpenGLAdapter() {
 
 // Implementation of DawnTest
 
-DawnTest::DawnTest() = default;
+DawnTestBase::DawnTestBase(const DawnTestParam& param) : mParam(param) {
+}
 
-DawnTest::~DawnTest() {
+DawnTestBase::~DawnTestBase() {
     // We need to destroy child objects before the Device
     mReadbackSlots.clear();
     queue = dawn::Queue();
@@ -258,47 +264,47 @@ DawnTest::~DawnTest() {
     dawnSetProcs(nullptr);
 }
 
-bool DawnTest::IsD3D12() const {
-    return GetParam().backendType == dawn_native::BackendType::D3D12;
+bool DawnTestBase::IsD3D12() const {
+    return mParam.backendType == dawn_native::BackendType::D3D12;
 }
 
-bool DawnTest::IsMetal() const {
-    return GetParam().backendType == dawn_native::BackendType::Metal;
+bool DawnTestBase::IsMetal() const {
+    return mParam.backendType == dawn_native::BackendType::Metal;
 }
 
-bool DawnTest::IsOpenGL() const {
-    return GetParam().backendType == dawn_native::BackendType::OpenGL;
+bool DawnTestBase::IsOpenGL() const {
+    return mParam.backendType == dawn_native::BackendType::OpenGL;
 }
 
-bool DawnTest::IsVulkan() const {
-    return GetParam().backendType == dawn_native::BackendType::Vulkan;
+bool DawnTestBase::IsVulkan() const {
+    return mParam.backendType == dawn_native::BackendType::Vulkan;
 }
 
-bool DawnTest::IsAMD() const {
+bool DawnTestBase::IsAMD() const {
     return mPCIInfo.vendorId == kVendorID_AMD;
 }
 
-bool DawnTest::IsARM() const {
+bool DawnTestBase::IsARM() const {
     return mPCIInfo.vendorId == kVendorID_ARM;
 }
 
-bool DawnTest::IsImgTec() const {
+bool DawnTestBase::IsImgTec() const {
     return mPCIInfo.vendorId == kVendorID_ImgTec;
 }
 
-bool DawnTest::IsIntel() const {
+bool DawnTestBase::IsIntel() const {
     return mPCIInfo.vendorId == kVendorID_Intel;
 }
 
-bool DawnTest::IsNvidia() const {
+bool DawnTestBase::IsNvidia() const {
     return mPCIInfo.vendorId == kVendorID_Nvidia;
 }
 
-bool DawnTest::IsQualcomm() const {
+bool DawnTestBase::IsQualcomm() const {
     return mPCIInfo.vendorId == kVendorID_Qualcomm;
 }
 
-bool DawnTest::IsWindows() const {
+bool DawnTestBase::IsWindows() const {
 #ifdef DAWN_PLATFORM_WINDOWS
     return true;
 #else
@@ -306,7 +312,7 @@ bool DawnTest::IsWindows() const {
 #endif
 }
 
-bool DawnTest::IsLinux() const {
+bool DawnTestBase::IsLinux() const {
 #ifdef DAWN_PLATFORM_LINUX
     return true;
 #else
@@ -314,7 +320,7 @@ bool DawnTest::IsLinux() const {
 #endif
 }
 
-bool DawnTest::IsMacOS() const {
+bool DawnTestBase::IsMacOS() const {
 #ifdef DAWN_PLATFORM_APPLE
     return true;
 #else
@@ -322,29 +328,29 @@ bool DawnTest::IsMacOS() const {
 #endif
 }
 
-bool DawnTest::UsesWire() const {
+bool DawnTestBase::UsesWire() const {
     return gTestEnv->UsesWire();
 }
 
-bool DawnTest::IsBackendValidationEnabled() const {
+bool DawnTestBase::IsBackendValidationEnabled() const {
     return gTestEnv->IsBackendValidationEnabled();
 }
 
-bool DawnTest::HasVendorIdFilter() const {
+bool DawnTestBase::HasVendorIdFilter() const {
     return gTestEnv->HasVendorIdFilter();
 }
 
-uint32_t DawnTest::GetVendorIdFilter() const {
+uint32_t DawnTestBase::GetVendorIdFilter() const {
     return gTestEnv->GetVendorIdFilter();
 }
 
-std::vector<const char*> DawnTest::GetRequiredExtensions() {
+std::vector<const char*> DawnTestBase::GetRequiredExtensions() {
     return {};
 }
 
 // This function can only be called after SetUp() because it requires mBackendAdapter to be
 // initialized.
-bool DawnTest::SupportsExtensions(const std::vector<const char*>& extensions) {
+bool DawnTestBase::SupportsExtensions(const std::vector<const char*>& extensions) {
     ASSERT(mBackendAdapter);
 
     std::set<std::string> supportedExtensionsSet;
@@ -361,9 +367,9 @@ bool DawnTest::SupportsExtensions(const std::vector<const char*>& extensions) {
     return true;
 }
 
-void DawnTest::SetUp() {
+void DawnTestBase::SetUp() {
     // Initialize mBackendAdapter, and create the device.
-    const dawn_native::BackendType backendType = GetParam().backendType;
+    const dawn_native::BackendType backendType = mParam.backendType;
     {
         dawn_native::Instance* instance = gTestEnv->GetInstance();
         std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
@@ -395,15 +401,15 @@ void DawnTest::SetUp() {
 
     mPCIInfo = mBackendAdapter.GetPCIInfo();
 
-    for (const char* forceEnabledWorkaround : GetParam().forceEnabledWorkarounds) {
+    for (const char* forceEnabledWorkaround : mParam.forceEnabledWorkarounds) {
         ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceEnabledWorkaround) != nullptr);
     }
-    for (const char* forceDisabledWorkaround : GetParam().forceDisabledWorkarounds) {
+    for (const char* forceDisabledWorkaround : mParam.forceDisabledWorkarounds) {
         ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceDisabledWorkaround) != nullptr);
     }
     dawn_native::DeviceDescriptor deviceDescriptor;
-    deviceDescriptor.forceEnabledToggles = GetParam().forceEnabledWorkarounds;
-    deviceDescriptor.forceDisabledToggles = GetParam().forceDisabledWorkarounds;
+    deviceDescriptor.forceEnabledToggles = mParam.forceEnabledWorkarounds;
+    deviceDescriptor.forceDisabledToggles = mParam.forceDisabledWorkarounds;
     deviceDescriptor.requiredExtensions = GetRequiredExtensions();
     backendDevice = mBackendAdapter.CreateDevice(&deviceDescriptor);
     ASSERT_NE(nullptr, backendDevice);
@@ -441,8 +447,8 @@ void DawnTest::SetUp() {
         cDevice = backendDevice;
     }
 
-    // Set up the device and queue because all tests need them, and DawnTest needs them too for the
-    // deferred expectations.
+    // Set up the device and queue because all tests need them, and DawnTestBase needs them too for
+    // the deferred expectations.
     dawnSetProcs(&procs);
     device = dawn::Device::Acquire(cDevice);
     queue = device.CreateQueue();
@@ -450,7 +456,7 @@ void DawnTest::SetUp() {
     device.SetErrorCallback(OnDeviceError, this);
 }
 
-void DawnTest::TearDown() {
+void DawnTestBase::TearDown() {
     FlushWire();
 
     MapSlotsSynchronously();
@@ -461,30 +467,30 @@ void DawnTest::TearDown() {
     }
 }
 
-void DawnTest::StartExpectDeviceError() {
+void DawnTestBase::StartExpectDeviceError() {
     mExpectError = true;
     mError = false;
 }
-bool DawnTest::EndExpectDeviceError() {
+bool DawnTestBase::EndExpectDeviceError() {
     mExpectError = false;
     return mError;
 }
 
 // static
-void DawnTest::OnDeviceError(const char* message, void* userdata) {
-    DawnTest* self = static_cast<DawnTest*>(userdata);
+void DawnTestBase::OnDeviceError(const char* message, void* userdata) {
+    DawnTestBase* self = static_cast<DawnTestBase*>(userdata);
 
     ASSERT_TRUE(self->mExpectError) << "Got unexpected device error: " << message;
     ASSERT_FALSE(self->mError) << "Got two errors in expect block";
     self->mError = true;
 }
 
-std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
-                                                   int line,
-                                                   const dawn::Buffer& buffer,
-                                                   uint64_t offset,
-                                                   uint64_t size,
-                                                   detail::Expectation* expectation) {
+std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,
+                                                       int line,
+                                                       const dawn::Buffer& buffer,
+                                                       uint64_t offset,
+                                                       uint64_t size,
+                                                       detail::Expectation* expectation) {
     auto readback = ReserveReadback(size);
 
     // We need to enqueue the copy immediately because by the time we resolve the expectation,
@@ -510,17 +516,17 @@ std::ostringstream& DawnTest::AddBufferExpectation(const char* file,
     return *(mDeferredExpectations.back().message.get());
 }
 
-std::ostringstream& DawnTest::AddTextureExpectation(const char* file,
-                                                    int line,
-                                                    const dawn::Texture& texture,
-                                                    uint32_t x,
-                                                    uint32_t y,
-                                                    uint32_t width,
-                                                    uint32_t height,
-                                                    uint32_t level,
-                                                    uint32_t slice,
-                                                    uint32_t pixelSize,
-                                                    detail::Expectation* expectation) {
+std::ostringstream& DawnTestBase::AddTextureExpectation(const char* file,
+                                                        int line,
+                                                        const dawn::Texture& texture,
+                                                        uint32_t x,
+                                                        uint32_t y,
+                                                        uint32_t width,
+                                                        uint32_t height,
+                                                        uint32_t level,
+                                                        uint32_t slice,
+                                                        uint32_t pixelSize,
+                                                        detail::Expectation* expectation) {
     uint32_t rowPitch = Align(width * pixelSize, kTextureRowPitchAlignment);
     uint32_t size = rowPitch * (height - 1) + width * pixelSize;
 
@@ -555,14 +561,14 @@ std::ostringstream& DawnTest::AddTextureExpectation(const char* file,
     return *(mDeferredExpectations.back().message.get());
 }
 
-void DawnTest::WaitABit() {
+void DawnTestBase::WaitABit() {
     device.Tick();
     FlushWire();
 
     utils::USleep(100);
 }
 
-void DawnTest::FlushWire() {
+void DawnTestBase::FlushWire() {
     if (gTestEnv->UsesWire()) {
         bool C2SFlushed = mC2sBuf->Flush();
         bool S2CFlushed = mS2cBuf->Flush();
@@ -571,7 +577,7 @@ void DawnTest::FlushWire() {
     }
 }
 
-DawnTest::ReadbackReservation DawnTest::ReserveReadback(uint64_t readbackSize) {
+DawnTestBase::ReadbackReservation DawnTestBase::ReserveReadback(uint64_t readbackSize) {
     // For now create a new MapRead buffer for each readback
     // TODO(cwallez@chromium.org): eventually make bigger buffers and allocate linearly?
     dawn::BufferDescriptor descriptor;
@@ -591,7 +597,7 @@ DawnTest::ReadbackReservation DawnTest::ReserveReadback(uint64_t readbackSize) {
     return reservation;
 }
 
-void DawnTest::MapSlotsSynchronously() {
+void DawnTestBase::MapSlotsSynchronously() {
     // Initialize numPendingMapOperations before mapping, just in case the callback is called
     // immediately.
     mNumPendingMapOperations = mReadbackSlots.size();
@@ -611,10 +617,10 @@ void DawnTest::MapSlotsSynchronously() {
 }
 
 // static
-void DawnTest::SlotMapReadCallback(DawnBufferMapAsyncStatus status,
-                                   const void* data,
-                                   uint64_t,
-                                   void* userdata_) {
+void DawnTestBase::SlotMapReadCallback(DawnBufferMapAsyncStatus status,
+                                       const void* data,
+                                       uint64_t,
+                                       void* userdata_) {
     DAWN_ASSERT(status == DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS);
 
     auto userdata = static_cast<MapReadUserdata*>(userdata_);
@@ -624,7 +630,7 @@ void DawnTest::SlotMapReadCallback(DawnBufferMapAsyncStatus status,
     delete userdata;
 }
 
-void DawnTest::ResolveExpectations() {
+void DawnTestBase::ResolveExpectations() {
     for (const auto& expectation : mDeferredExpectations) {
         DAWN_ASSERT(mReadbackSlots[expectation.readbackSlot].mappedData != nullptr);
 
