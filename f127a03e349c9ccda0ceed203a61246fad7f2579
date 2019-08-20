@@ -42,6 +42,48 @@
     },
     {
       "key": {
+        "uuid": "82ec6c0f_20e1e5e1",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a09777c_0798af4b",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 23
+      },
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7112f3a_ed36fc36",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87113725_8a5940a1",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6d32332_c46e6d65",
         "filename": "generator/opengl_loader_generator.py",
         "patchSetId": 8
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "0199c2bf_3f3b941a",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6d32332_c46e6d65",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea180b30_175a26d9",
         "filename": "src/dawn_native/opengl/BackendGL.cpp",
         "patchSetId": 8
@@ -73,6 +133,24 @@
       "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5914a6e2_7a437589",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "Done\nI think we can just use supportedExtensionsSet as a local variable to initialize mSupportedExtensions, and in other places we can directly use mSupportedExtensions.\n\nWhat do you think?",
+      "parentUuid": "ea180b30_175a26d9",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "3f0cfc94_df06e7d8",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ff051fb_ba0e58dd",
+      "range": {
+        "startLine": 192,
+        "startChar": 17,
+        "endLine": 192,
+        "endChar": 24
+      },
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "611faa95_25cc9503",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 8
@@ -110,6 +212,24 @@
       "writtenOn": "2019-08-19T08:04:35Z",
       "side": 1,
       "message": "note: This is probably going to have issues when the last row pitch doesn\u0027t fit in the buffer (while the last row does fit.) This is similar to the workaround we had to do on Metal for texture copy last rows.",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fda091cc_622229ac",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "All the end2end tests for the special cases on Metal are also run on OpenGL backends, so I think maybe we don\u0027t need to fix it?",
+      "parentUuid": "611faa95_25cc9503",
       "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -139,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "9320d3cd_02de11a3",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "Done\nShall we also remove [1]?",
+      "parentUuid": "fccb0aec_11b4a88f",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 76
+      },
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f43c8010_188e404e",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 8
@@ -153,6 +297,24 @@
       "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8bd5342_b78e4c0c",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T08:38:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f43c8010_188e404e",
+      "revId": "f127a03e349c9ccda0ceed203a61246fad7f2579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
