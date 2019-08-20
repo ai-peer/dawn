@@ -22,6 +22,47 @@
       "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fe7277a_6fcb759b",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-20T20:54:45Z",
+      "side": 1,
+      "message": "Are these 3 tests (DoNotTruncateXAndY, DoNotTruncateXAndY2, and DoNotTruncateWidthAndHeight2) failing on particular platforms? I didn\u0027t realize it wasn\u0027t just DoNotTruncateWidthAndHeight.",
+      "parentUuid": "7699e0c7_d29eb801",
+      "range": {
+        "startLine": 370,
+        "startChar": 36,
+        "endLine": 370,
+        "endChar": 39
+      },
+      "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbeaf2f3_f622b3da",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-20T20:54:45Z",
+      "side": 1,
+      "message": "Are all of these skips still necessary with the loosened test?",
+      "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
