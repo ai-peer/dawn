@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db28a409_345048c9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T13:31:20Z",
+      "side": 1,
+      "message": "This is a refcounted object so it should be using Ref\u003c\u003e and note that it starts with a refcount of 1. Maybe we could use device-\u003eCreateBufferMapped directly? It makes Dawn a bit reentrant but that could be ok.",
+      "revId": "c26e3af5fb47606d534f4d15513e1252e7957163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edc4b2f5_bc611bb5",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T13:31:20Z",
+      "side": 1,
+      "message": "Maybe the offset could be passed directly since we only use that part of copySplit.",
+      "revId": "c26e3af5fb47606d534f4d15513e1252e7957163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb0db3fd_a948dce7",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T13:31:20Z",
+      "side": 1,
+      "message": "This should be a const\u0026",
+      "revId": "c26e3af5fb47606d534f4d15513e1252e7957163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a2476ad_69ef2661",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T13:31:20Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c26e3af5fb47606d534f4d15513e1252e7957163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "343a55ec_06881eab",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-20T13:31:20Z",
+      "side": 1,
+      "message": "ditto for both offset and copySize here.",
+      "revId": "c26e3af5fb47606d534f4d15513e1252e7957163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
