@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "923a76a2_904dd5cc",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-20T16:24:50Z",
+      "side": 1,
+      "message": "Calling TickImpl does not destroy the last allocation since the serial cannot advance. However, the allocation will be safely destroyed when the device is destroyed.",
+      "parentUuid": "aa30cd5d_10ae8ebd",
+      "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "395a4aa8_0828b258",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a87f0ef0_b7cd1c18",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-20T16:24:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "395a4aa8_0828b258",
+      "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
