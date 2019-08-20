@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7de5aad5_35776f50",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d23134b2_fdc22851",
+      "range": {
+        "startLine": 63,
+        "startChar": 98,
+        "endLine": 63,
+        "endChar": 99
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76eb4e9a_fc1a4cca",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45cd7fd6_8f937445",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76eb4e9a_fc1a4cca",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "61d4caaa_6105ca0d",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "998b7988_04607db4",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 29
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32b87183_7b7f9c75",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 3
@@ -85,6 +157,24 @@
       "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d59007d_cd89d9ad",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32b87183_7b7f9c75",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "59e5f66b_e816adbd",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65053c3e_a2a90e59",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c92d5a13_f307c44b",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 3
@@ -119,6 +227,24 @@
       "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c28806c4_05654fa6",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c92d5a13_f307c44b",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "44505be2_3d0a322f",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6deb8693_e2196b88",
+      "range": {
+        "startLine": 496,
+        "startChar": 20,
+        "endLine": 496,
+        "endChar": 50
+      },
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaecb654_74043180",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
         "patchSetId": 3
@@ -159,6 +309,24 @@
       "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48db7403_c83b397d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-20T12:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaecb654_74043180",
+      "revId": "bc3a5e18092e13600a148eaea5aa0b1cce035724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
