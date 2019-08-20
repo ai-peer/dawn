@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef TESTS_DAWNTEST_H_
+#define TESTS_DAWNTEST_H_
+
 #include "dawn/dawncpp.h"
 #include "dawn_native/DawnNative.h"
 
@@ -82,6 +85,7 @@ struct DawnTestParam {
     std::vector<const char*> forceEnabledWorkarounds;
     std::vector<const char*> forceDisabledWorkarounds;
 };
+std::ostream& operator<<(std::ostream& stream, const DawnTestParam& param);
 
 // Shorthands for backend types used in the DAWN_INSTANTIATE_TEST
 extern const DawnTestParam D3D12Backend;
@@ -113,6 +117,8 @@ class DawnTestEnvironment : public testing::Environment {
     DawnTestEnvironment(int argc, char** argv);
     ~DawnTestEnvironment() = default;
 
+    static void SetEnvironment(DawnTestEnvironment* env);
+
     void SetUp() override;
 
     bool UsesWire() const;
@@ -132,13 +138,15 @@ class DawnTestEnvironment : public testing::Environment {
     std::unique_ptr<dawn_native::Instance> mInstance;
 };
 
-class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
-  public:
-    DawnTest();
-    ~DawnTest();
+class DawnTestBase {
+    friend class DawnPerfTestBase;
 
-    void SetUp() override;
-    void TearDown() override;
+  public:
+    DawnTestBase(const DawnTestParam& param);
+    virtual ~DawnTestBase();
+
+    void SetUp();
+    void TearDown();
 
     bool IsD3D12() const;
     bool IsMetal() const;
@@ -203,6 +211,8 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
     virtual std::vector<const char*> GetRequiredExtensions();
 
   private:
+    DawnTestParam mParam;
+
     // Things used to set up testing through the Wire.
     std::unique_ptr<dawn_wire::WireServer> mWireServer;
     std::unique_ptr<dawn_wire::WireClient> mWireClient;
@@ -261,6 +271,27 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
     dawn_native::Adapter mBackendAdapter;
 };
 
+template <typename Params = DawnTestParam>
+class DawnTestWithParams : public DawnTestBase, public ::testing::TestWithParam<Params> {
+  protected:
+    DawnTestWithParams();
+    ~DawnTestWithParams() override = default;
+
+    void SetUp() override {
+        DawnTestBase::SetUp();
+    }
+
+    void TearDown() override {
+        DawnTestBase::TearDown();
+    }
+};
+
+template <typename Params>
+DawnTestWithParams<Params>::DawnTestWithParams() : DawnTestBase(this->GetParam()) {
+}
+
+using DawnTest = DawnTestWithParams<>;
+
 // Instantiate the test once for each backend provided after the first argument. Use it like this:
 //     DAWN_INSTANTIATE_TEST(MyTestFixture, MetalBackend, OpenGLBackend)
 #define DAWN_INSTANTIATE_TEST(testName, firstParam, ...)                         \
@@ -269,7 +300,7 @@ class DawnTest : public ::testing::TestWithParam<DawnTestParam> {
         , testName,                                                              \
         testing::ValuesIn(::detail::FilterBackends(                              \
             testName##params, sizeof(testName##params) / sizeof(firstParam))),   \
-        ::detail::GetParamName)
+        testing::PrintToStringParamName())
 
 // Skip a test when the given condition is satisfied.
 #define DAWN_SKIP_TEST_IF(condition)                               \
@@ -282,7 +313,6 @@ namespace detail {
     // Helper functions used for DAWN_INSTANTIATE_TEST
     bool IsBackendAvailable(dawn_native::BackendType type);
     std::vector<DawnTestParam> FilterBackends(const DawnTestParam* params, size_t numParams);
-    std::string GetParamName(const testing::TestParamInfo<DawnTestParam>& info);
 
     // All classes used to implement the deferred expectations should inherit from this.
     class Expectation {
@@ -309,3 +339,5 @@ namespace detail {
     extern template class ExpectEq<uint32_t>;
     extern template class ExpectEq<RGBA8>;
 }  // namespace detail
+
+#endif  // TESTS_DAWNTEST_H_
