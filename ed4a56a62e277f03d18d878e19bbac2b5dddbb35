@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8740df08_828de6bc",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:13:52Z",
+      "side": 1,
+      "message": "nit: group with dawn_enable_opengl?",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0eacf61_9685af1d",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:13:52Z",
+      "side": 1,
+      "message": "I think you\u0027ll need to land this before this CL.",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3d02c2b_15dc480a",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:13:52Z",
+      "side": 1,
+      "message": "Eek I forgot we still had these temp groups, we should finish splitting the BUILD.gn file at some point.",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "995e42ef_75aa11d5",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:13:52Z",
+      "side": 1,
+      "message": "nit: this is the same as not having these functions no?",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d73b1064_876e2b53",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:13:52Z",
+      "side": 1,
+      "message": "Why use a tuple instead of a struct with inheritance? It would help avoid ugly std::gets maybe",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fa4e904_4c5f9133",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:13:52Z",
+      "side": 1,
+      "message": "Would there be a way to make this nicer?",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
