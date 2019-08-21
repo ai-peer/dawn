@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7321a34d_ec4f8914",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-21T02:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74b51565_328e8e3b",
+      "range": {
+        "startLine": 381,
+        "startChar": 7,
+        "endLine": 381,
+        "endChar": 36
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "65532dd8_2d21bb9d",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 1
@@ -86,6 +110,24 @@
       "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db92b376_cca1fb51",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-21T02:24:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "65532dd8_2d21bb9d",
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -109,6 +151,30 @@
       "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2d94067_30c30357",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-21T02:24:56Z",
+      "side": 1,
+      "message": "Done\nCorentin has suggested another name.",
+      "parentUuid": "452dff0e_120ac094",
+      "range": {
+        "startLine": 548,
+        "startChar": 25,
+        "endLine": 548,
+        "endChar": 50
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -183,6 +249,30 @@
     },
     {
       "key": {
+        "uuid": "260bb99d_e00c59de",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-21T02:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7578b4e_0e90741a",
+      "range": {
+        "startLine": 550,
+        "startChar": 24,
+        "endLine": 550,
+        "endChar": 49
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba20c1e4_520b6bdf",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 1
@@ -251,6 +341,30 @@
       "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9f21bcc_b9cf1b81",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-21T02:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2430e451_00c854a8",
+      "range": {
+        "startLine": 559,
+        "startChar": 54,
+        "endLine": 559,
+        "endChar": 86
+      },
+      "revId": "2ac2babca71ef5161ed8f027de60088e9bcff18a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

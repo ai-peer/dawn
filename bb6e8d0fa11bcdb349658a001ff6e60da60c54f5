@@ -22,6 +22,30 @@
       "revId": "bb6e8d0fa11bcdb349658a001ff6e60da60c54f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08640edc_8da08aa4",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-21T02:24:56Z",
+      "side": 1,
+      "message": "Done\nIn fact Austin had pointed out this in previous reviews but I missed it. Sorry for that.",
+      "parentUuid": "bc429c27_3fe0c1f9",
+      "range": {
+        "startLine": 335,
+        "startChar": 32,
+        "endLine": 335,
+        "endChar": 68
+      },
+      "revId": "bb6e8d0fa11bcdb349658a001ff6e60da60c54f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
