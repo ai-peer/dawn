@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "283355c9_d67c8dda",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 904,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T14:55:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e0eacf61_9685af1d",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3d02c2b_15dc480a",
         "filename": "BUILD.gn",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2019-08-21T12:13:52Z",
       "side": 1,
       "message": "Eek I forgot we still had these temp groups, we should finish splitting the BUILD.gn file at some point.",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7537b947_73275070",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T14:55:39Z",
+      "side": 1,
+      "message": "I don\u0027t completely remember why these are here. What was the reason for them?",
+      "parentUuid": "c3d02c2b_15dc480a",
       "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -76,6 +112,30 @@
     },
     {
       "key": {
+        "uuid": "55758323_44df954f",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T14:55:39Z",
+      "side": 1,
+      "message": "Whoops, probably had something here previously and forgot to remove.",
+      "parentUuid": "995e42ef_75aa11d5",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d73b1064_876e2b53",
         "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 4
@@ -87,6 +147,24 @@
       "writtenOn": "2019-08-21T12:13:52Z",
       "side": 1,
       "message": "Why use a tuple instead of a struct with inheritance? It would help avoid ugly std::gets maybe",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e6f3f4d_07042cb1",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T14:55:39Z",
+      "side": 1,
+      "message": "std::tuple because I wanted to use testing::Combine which produces tuples. more discussion in the other comment.",
+      "parentUuid": "d73b1064_876e2b53",
       "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
