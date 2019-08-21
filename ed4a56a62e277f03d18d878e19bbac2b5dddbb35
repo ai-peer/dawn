@@ -203,6 +203,24 @@
       "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1ab9861_56d3f3b9",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T17:06:28Z",
+      "side": 1,
+      "message": "We can also write our own iterator which would do the combinations like testing::Combine but yield structs. WDYT?",
+      "parentUuid": "a0ee1e7f_250012d9",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
