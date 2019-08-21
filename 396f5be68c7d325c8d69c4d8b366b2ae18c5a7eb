@@ -123,6 +123,24 @@
       "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c7b5a9f_b9fdf086",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-08-21T17:01:52Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a precision issue. I suppose that a low precision float can distinguish 3.6 from 3.5 (if it can\u0027t distinguish 3.51 and 3.50), much less 3.99. \n\nLooks like Intel and NV driver truncate the fraction for width and height. I will report a bug to Intel driver team.",
+      "parentUuid": "82272358_6163c488",
+      "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
