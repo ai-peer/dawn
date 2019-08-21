@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "84bac876_7dc8db3c",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-08-21T02:08:20Z",
+      "side": 1,
+      "message": "These 3 tests can pass on bots. But the change make them symmetric on this kind of tests. If you think we don\u0027t need to change the others, I can roll back.",
+      "parentUuid": "8fe7277a_6fcb759b",
+      "range": {
+        "startLine": 370,
+        "startChar": 36,
+        "endLine": 370,
+        "endChar": 39
+      },
+      "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bbeaf2f3_f622b3da",
         "filename": "src/tests/end2end/ViewportTests.cpp",
         "patchSetId": 1
@@ -60,6 +84,24 @@
       "writtenOn": "2019-08-20T20:54:45Z",
       "side": 1,
       "message": "Are all of these skips still necessary with the loosened test?",
+      "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68421a2a_8e560da3",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-08-21T02:08:20Z",
+      "side": 1,
+      "message": "Yes. I even tested 3.99 when I added this test, it failed on Intel and D3D backend. The the bots can catch OpenGL failure though. OpenGL NV failure was report by you (from rharrison). \n\nIt looks to me that this tests fail on Intel and NV devices, but can pass on AMD devices (can pass on AMD Linux, AMD Mac, we don\u0027t have AMD Windows bot, though).",
+      "parentUuid": "bbeaf2f3_f622b3da",
       "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
