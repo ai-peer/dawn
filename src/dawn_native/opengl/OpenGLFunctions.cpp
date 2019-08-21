@@ -54,7 +54,23 @@ namespace dawn_native { namespace opengl {
             DAWN_TRY(LoadDesktopGLProcs(getProc, mMajorVersion, mMinorVersion));
         }
 
+        InitializeSupportedExtensions();
+
         return {};
+    }
+
+    void OpenGLFunctions::InitializeSupportedExtensions() {
+        int32_t numExtensions;
+        GetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
+
+        for (int32_t i = 0; i < numExtensions; ++i) {
+            const char* extensionName = reinterpret_cast<const char*>(GetStringi(GL_EXTENSIONS, i));
+            mSupportedExtensionsSet.insert(extensionName);
+        }
+    }
+
+    bool OpenGLFunctions::IsExtensionSupported(const char* extension) const {
+        return mSupportedExtensionsSet.find(extension) != mSupportedExtensionsSet.cend();
     }
 
     bool OpenGLFunctions::IsAtLeastGL(uint32_t majorVersion, uint32_t minorVersion) {
