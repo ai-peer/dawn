@@ -105,6 +105,24 @@
       "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82272358_6163c488",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T15:39:44Z",
+      "side": 1,
+      "message": "If loosening the tests doesn\u0027t make any of the bots pass, are we sure it\u0027s a precision problem?",
+      "parentUuid": "68421a2a_8e560da3",
+      "revId": "396f5be68c7d325c8d69c4d8b366b2ae18c5a7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
