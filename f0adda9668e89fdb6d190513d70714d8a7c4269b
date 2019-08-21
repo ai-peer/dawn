@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e58f231b_645d3517",
+        "filename": "src/dawn_native/Resource.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-21T02:11:01Z",
+      "side": 1,
+      "message": "Nit: Since GetAllocationMethod and mMethod is never used by code, we should remove them for now until we need them in the future.\n\nTechnically GetOffset is in the same boat but I figure you\u0027re going to need that in your next change.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 53
+      },
+      "revId": "f0adda9668e89fdb6d190513d70714d8a7c4269b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4fefa90_2e021ab3",
+        "filename": "src/dawn_native/d3d12/CommittedResourceAllocatorD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-21T02:11:01Z",
+      "side": 1,
+      "message": "Nit: Please remove this stray semicolon",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 9
+      },
+      "revId": "f0adda9668e89fdb6d190513d70714d8a7c4269b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31d07dc7_2f807cf8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-21T02:11:01Z",
+      "side": 1,
+      "message": "Nit: Please split this assert into two asserts. That way, if one of them fires in a bot, we\u0027ll know which expression caused the assert to fire.",
+      "range": {
+        "startLine": 333,
+        "startChar": 8,
+        "endLine": 333,
+        "endChar": 58
+      },
+      "revId": "f0adda9668e89fdb6d190513d70714d8a7c4269b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd7bafe0_9f7e4a5d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-21T02:11:01Z",
+      "side": 1,
+      "message": "Nit: I\u0027m all for having lots of asserts but since GetD3D12HeapTypeToIndex already does this assert for you, it is probably overkill to also add it on every single callsite.",
+      "range": {
+        "startLine": 342,
+        "startChar": 8,
+        "endLine": 342,
+        "endChar": 46
+      },
+      "revId": "f0adda9668e89fdb6d190513d70714d8a7c4269b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
