@@ -16,6 +16,24 @@
       "revId": "8c8b02d13d2e59473f8014db9db46d0afbade98f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68334bcc_7eeaa39d",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T11:46:13Z",
+      "side": 0,
+      "message": "This test was redundant with [1]",
+      "parentUuid": "1c9e990e_c1f6089a",
+      "revId": "8c8b02d13d2e59473f8014db9db46d0afbade98f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
