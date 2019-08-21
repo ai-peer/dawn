@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1f9cbade_1b1e0739",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T15:36:35Z",
+      "side": 1,
+      "message": "You should be able to do Ref\u003cBufferBase\u003e tempBuffer \u003d device-\u003eCreateBuffer(...);\nI think you only use |tempBufferRef| and not |tempBuffer|\n\ncwallez@: Thoughts on having a Ref constructor that doesn\u0027t take a reference? Lately we\u0027ve been adding this construct then release pattern a lot.",
+      "parentUuid": "dba79f99_4e7c11c6",
+      "revId": "1e2ffef88f224aa6e96a1566c7420cbdea7fc73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac3678d6_19697b03",
         "filename": "src/dawn_native/vulkan/CommandRecordingContext.h",
         "patchSetId": 5
