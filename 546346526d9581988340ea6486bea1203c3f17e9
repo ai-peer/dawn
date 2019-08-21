@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "150e02a6_e214a52a",
+        "filename": "src/dawn_native/opengl/SamplerGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:23:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b0f81b9_76d49cb2",
+      "range": {
+        "startLine": 38,
+        "startChar": 43,
+        "endLine": 38,
+        "endChar": 50
+      },
+      "revId": "546346526d9581988340ea6486bea1203c3f17e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "021d7278_503f6b81",
         "filename": "src/dawn_native/opengl/SamplerGL.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "546346526d9581988340ea6486bea1203c3f17e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dbb769d_e8c6f964",
+        "filename": "src/dawn_native/opengl/SamplerGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T12:23:18Z",
+      "side": 1,
+      "message": "Done\n\nDidn\u0027t lazy create the handles because that requires storing the sampler descriptor. We could do it later if we find it is important.",
+      "parentUuid": "021d7278_503f6b81",
+      "range": {
+        "startLine": 40,
+        "startChar": 15,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "546346526d9581988340ea6486bea1203c3f17e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
