@@ -136,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "7865ce3d_aa474378",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-21T18:34:08Z",
+      "side": 1,
+      "message": "Actually, this is because we\u0027re overriding the methods from ::testing::TestWithParams which are pure virtual, and then calling DawnTestBase::SetUp/TearDown which aren\u0027t virtual.",
+      "parentUuid": "55758323_44df954f",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d73b1064_876e2b53",
         "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 4
