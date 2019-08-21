@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0356801_1aa8b76b",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T11:51:00Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t needed anymore",
+      "revId": "81a96137f95c2677f2d02485fa71a513ff0a6028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06024560_f13b27b2",
+        "filename": "src/dawn_native/opengl/OpenGLFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-21T11:51:00Z",
+      "side": 1,
+      "message": "nit: can use .count(extension) !\u003d 0",
+      "range": {
+        "startLine": 74,
+        "startChar": 42,
+        "endLine": 74,
+        "endChar": 92
+      },
+      "revId": "81a96137f95c2677f2d02485fa71a513ff0a6028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
