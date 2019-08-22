@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "df43deff_f6ad29d4",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-22T21:04:57Z",
+      "side": 1,
+      "message": "Moving Ln:113 after Ln:124 will not work. The allocation is waiting on mLastSubmittedSerial + 1. Upon destruction, no additional commands execute and WaitForSerial blocks forever.",
+      "parentUuid": "74a4db2f_247e8212",
+      "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "395a4aa8_0828b258",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8
