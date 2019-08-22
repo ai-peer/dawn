@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "78ff8b96_406a7201",
+        "filename": "src/dawn_native/opengl/BackendGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-22T00:53:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0356801_1aa8b76b",
+      "revId": "81a96137f95c2677f2d02485fa71a513ff0a6028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06024560_f13b27b2",
         "filename": "src/dawn_native/opengl/OpenGLFunctions.cpp",
         "patchSetId": 13
@@ -39,6 +57,30 @@
       "revId": "81a96137f95c2677f2d02485fa71a513ff0a6028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9275b7a_ed19ed51",
+        "filename": "src/dawn_native/opengl/OpenGLFunctions.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-22T00:53:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06024560_f13b27b2",
+      "range": {
+        "startLine": 74,
+        "startChar": 42,
+        "endLine": 74,
+        "endChar": 92
+      },
+      "revId": "81a96137f95c2677f2d02485fa71a513ff0a6028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
