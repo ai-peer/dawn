@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "9605e318_1de7356d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-22T16:28:33Z",
+      "side": 1,
+      "message": "PTAL at this comment",
+      "parentUuid": "3d76beae_c3162521",
+      "revId": "1e2ffef88f224aa6e96a1566c7420cbdea7fc73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ac3678d6_19697b03",
         "filename": "src/dawn_native/vulkan/CommandRecordingContext.h",
         "patchSetId": 5
