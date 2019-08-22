@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f110609f_0a12d700",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-22T19:40:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be set by the combo render pipeline descriptor constructor?",
+      "revId": "3f21e11e240ae44f1b49606d42b062eaf208a5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
