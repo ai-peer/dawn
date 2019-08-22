@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "e73f435f_19fa0c3b",
+        "filename": "BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-22T08:59:19Z",
+      "side": 1,
+      "message": "We wanted to move the targets in src/tests so that Skia doesn\u0027t try to build the tests when it references libdawn_native.",
+      "parentUuid": "7537b947_73275070",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "995e42ef_75aa11d5",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 4
@@ -148,6 +166,30 @@
       "side": 1,
       "message": "Actually, this is because we\u0027re overriding the methods from ::testing::TestWithParams which are pure virtual, and then calling DawnTestBase::SetUp/TearDown which aren\u0027t virtual.",
       "parentUuid": "55758323_44df954f",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f64e3ef1_817d801c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-22T08:59:19Z",
+      "side": 1,
+      "message": "Ah makes sense",
+      "parentUuid": "7865ce3d_aa474378",
       "range": {
         "startLine": 279,
         "startChar": 1,
@@ -242,6 +284,24 @@
       "side": 1,
       "message": "We can also write our own iterator which would do the combinations like testing::Combine but yield structs. WDYT?",
       "parentUuid": "a0ee1e7f_250012d9",
+      "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60b9d6b4_a2360c98",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-22T08:59:19Z",
+      "side": 1,
+      "message": "Yeah I was thinking that we could have something like\n\nPerfTestVariation({MetalBackend, VulkandBackend}, {some configuration, some other configuration}) somehow.",
+      "parentUuid": "a1ab9861_56d3f3b9",
       "revId": "ed4a56a62e277f03d18d878e19bbac2b5dddbb35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
