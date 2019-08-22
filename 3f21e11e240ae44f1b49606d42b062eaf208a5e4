@@ -52,6 +52,24 @@
       "revId": "3f21e11e240ae44f1b49606d42b062eaf208a5e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77bd2d7e_c9e93bd3",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-22T20:48:35Z",
+      "side": 1,
+      "message": "We should probably just delete the copy assignment operator.\n\nComboVertexInputDescriptor\u0027s copy assignment would be pretty complicated to implement. Because there\u0027s two levels of indirection with the vertex buffers and vertex attributes, we\u0027d have to look at the pointers, compute the indices from that, and then point it correctly to the new struct. And then, it would also break if someone pointed descriptor-\u003ebuffers to something other than \u0026cBuffers[0].",
+      "parentUuid": "b529a870_433c35ae",
+      "revId": "3f21e11e240ae44f1b49606d42b062eaf208a5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
