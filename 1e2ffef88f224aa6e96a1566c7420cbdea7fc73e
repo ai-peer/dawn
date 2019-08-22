@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "798eeeeb_3512101c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-22T07:33:58Z",
+      "side": 1,
+      "message": "Done\nCurrently I use tempBuffer pointer, what do you think?",
+      "parentUuid": "1f9cbade_1b1e0739",
+      "revId": "1e2ffef88f224aa6e96a1566c7420cbdea7fc73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac3678d6_19697b03",
         "filename": "src/dawn_native/vulkan/CommandRecordingContext.h",
         "patchSetId": 5
@@ -57,6 +75,30 @@
       "revId": "1e2ffef88f224aa6e96a1566c7420cbdea7fc73e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba7ff493_4ac2f517",
+        "filename": "src/dawn_native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-22T07:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac3678d6_19697b03",
+      "range": {
+        "startLine": 36,
+        "startChar": 24,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "1e2ffef88f224aa6e96a1566c7420cbdea7fc73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
