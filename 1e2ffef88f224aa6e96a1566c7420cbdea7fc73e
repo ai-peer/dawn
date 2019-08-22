@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "3d76beae_c3162521",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-22T08:48:26Z",
+      "side": 1,
+      "message": "It would be much better to use some form of RAII because right now if we add a DAWN_TRY in this function we\u0027ll have to remember to add another Release call.\n\nIn the future we could have a template\u003ctypename T\u003e Ref\u003cT\u003e AcquireRef(T*) for such cases.",
+      "parentUuid": "798eeeeb_3512101c",
+      "revId": "1e2ffef88f224aa6e96a1566c7420cbdea7fc73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac3678d6_19697b03",
         "filename": "src/dawn_native/vulkan/CommandRecordingContext.h",
         "patchSetId": 5
