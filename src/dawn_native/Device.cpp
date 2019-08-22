@@ -661,6 +661,19 @@ namespace dawn_native {
                                                      TextureBase* texture,
                                                      const TextureViewDescriptor* descriptor) {
         DAWN_TRY(ValidateTextureViewDescriptor(this, texture, descriptor));
+
+        TextureViewDescriptor desc = *descriptor;
+        if (desc.arrayLayerCount == 0) {
+            desc.arrayLayerCount = texture->GetArrayLayers() - descriptor->baseArrayLayer;
+            ASSERT(desc.arrayLayerCount > 0);
+            ASSERT(desc.baseArrayLayer + desc.arrayLayerCount <= texture->GetArrayLayers());
+        }
+        if (desc.mipLevelCount == 0) {
+            desc.mipLevelCount = texture->GetNumMipLevels() - descriptor->baseMipLevel;
+            ASSERT(desc.mipLevelCount > 0);
+            ASSERT(desc.baseMipLevel + desc.mipLevelCount <= texture->GetNumMipLevels());
+        }
+
         DAWN_TRY_ASSIGN(*result, CreateTextureViewImpl(texture, descriptor));
         return {};
     }

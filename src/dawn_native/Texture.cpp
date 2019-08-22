@@ -139,30 +139,6 @@ namespace dawn_native {
             return {};
         }
 
-        TextureViewDescriptor MakeDefaultTextureViewDescriptor(const TextureBase* texture) {
-            TextureViewDescriptor descriptor;
-            descriptor.format = texture->GetFormat().format;
-            descriptor.baseArrayLayer = 0;
-            descriptor.arrayLayerCount = texture->GetArrayLayers();
-            descriptor.baseMipLevel = 0;
-            descriptor.mipLevelCount = texture->GetNumMipLevels();
-
-            // TODO(jiawei.shao@intel.com): support all texture dimensions.
-            switch (texture->GetDimension()) {
-                case dawn::TextureDimension::e2D:
-                    if (texture->GetArrayLayers() == 1u) {
-                        descriptor.dimension = dawn::TextureViewDimension::e2D;
-                    } else {
-                        descriptor.dimension = dawn::TextureViewDimension::e2DArray;
-                    }
-                    break;
-                default:
-                    UNREACHABLE();
-            }
-
-            return descriptor;
-        }
-
         MaybeError ValidateTextureSize(const TextureDescriptor* descriptor, const Format* format) {
             ASSERT(descriptor->size.width != 0 && descriptor->size.height != 0);
 
@@ -259,9 +235,6 @@ namespace dawn_native {
         DAWN_TRY(ValidateTextureFormat(descriptor->format));
 
         // TODO(jiawei.shao@intel.com): check stuff based on resource limits
-        if (descriptor->arrayLayerCount == 0 || descriptor->mipLevelCount == 0) {
-            return DAWN_VALIDATION_ERROR("Cannot create an empty texture view");
-        }
 
         if (uint64_t(descriptor->baseArrayLayer) + uint64_t(descriptor->arrayLayerCount) >
             uint64_t(texture->GetArrayLayers())) {
@@ -433,16 +406,6 @@ namespace dawn_native {
         }
 
         return extent;
-    }
-
-    TextureViewBase* TextureBase::CreateDefaultView() {
-        TextureViewDescriptor descriptor = {};
-
-        if (!IsError()) {
-            descriptor = MakeDefaultTextureViewDescriptor(this);
-        }
-
-        return GetDevice()->CreateTextureView(this, &descriptor);
     }
 
     TextureViewBase* TextureBase::CreateView(const TextureViewDescriptor* descriptor) {
