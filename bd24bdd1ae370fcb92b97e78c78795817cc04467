@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "65643b7d_074c798f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-23T12:42:45Z",
+      "side": 1,
+      "message": "Since we know the GPU is done with everything, maybe we could set mCompletedSerial to the max value meaning we clear stuff as if inifinite time passed?",
+      "parentUuid": "df43deff_f6ad29d4",
+      "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "395a4aa8_0828b258",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8
