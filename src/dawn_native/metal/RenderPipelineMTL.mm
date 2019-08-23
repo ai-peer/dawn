@@ -363,7 +363,8 @@ namespace dawn_native { namespace metal {
             [descriptorMTL release];
             if (error != nil) {
                 NSLog(@" error => %@", error);
-                device->HandleError("Error creating rendering pipeline state");
+                device->HandleError(dawn::ErrorType::ContextLost,
+                                    "Error creating rendering pipeline state");
                 return;
             }
         }
