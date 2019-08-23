@@ -69,8 +69,7 @@ TEST_F(TextureViewValidationTest, CreateTextureViewOnTexture2D) {
         texture.CreateView(&descriptor);
     }
 
-    // It is an error to specify the layer count of the texture view > 1 when texture view dimension
-    // is 2D.
+    // It is an error to view a layer past the end of the texture.
     {
         dawn::TextureViewDescriptor descriptor = base2DTextureViewDescriptor;
         descriptor.arrayLayerCount = 2;
@@ -85,18 +84,35 @@ TEST_F(TextureViewValidationTest, CreateTextureViewOnTexture2D) {
         texture.CreateView(&descriptor);
     }
 
-    // It is an error to specify mipLevelCount == 0.
+    // baseMipLevel == k && mipLevelCount == 0 means to use levels k..end.
     {
         dawn::TextureViewDescriptor descriptor = base2DTextureViewDescriptor;
         descriptor.mipLevelCount = 0;
+
+        descriptor.baseMipLevel = 0;
+        texture.CreateView(&descriptor);
+        descriptor.baseMipLevel = 1;
+        texture.CreateView(&descriptor);
+        descriptor.baseMipLevel = kDefaultMipLevels - 1;
+        texture.CreateView(&descriptor);
+        descriptor.baseMipLevel = kDefaultMipLevels;
         ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
     }
 
     // It is an error to make the mip level out of range.
     {
         dawn::TextureViewDescriptor descriptor = base2DTextureViewDescriptor;
+        descriptor.baseMipLevel = 0;
+        descriptor.mipLevelCount = kDefaultMipLevels + 1;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+        descriptor.baseMipLevel = 1;
+        descriptor.mipLevelCount = kDefaultMipLevels;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
         descriptor.baseMipLevel = kDefaultMipLevels - 1;
         descriptor.mipLevelCount = 2;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+        descriptor.baseMipLevel = kDefaultMipLevels;
+        descriptor.mipLevelCount = 1;
         ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
     }
 }
@@ -125,17 +141,35 @@ TEST_F(TextureViewValidationTest, CreateTextureViewOnTexture2DArray) {
         texture.CreateView(&descriptor);
     }
 
-    // It is an error to specify arrayLayerCount == 0.
+    // baseArrayLayer == k && arrayLayerCount == 0 means to use layers k..end.
     {
         dawn::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
         descriptor.arrayLayerCount = 0;
+
+        descriptor.baseArrayLayer = 0;
+        texture.CreateView(&descriptor);
+        descriptor.baseArrayLayer = 1;
+        texture.CreateView(&descriptor);
+        descriptor.baseArrayLayer = kDefaultArrayLayers - 1;
+        texture.CreateView(&descriptor);
+        descriptor.baseArrayLayer = kDefaultArrayLayers;
         ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
     }
 
     // It is an error to make the array layer out of range.
     {
         dawn::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
+        descriptor.baseArrayLayer = 0;
         descriptor.arrayLayerCount = kDefaultArrayLayers + 1;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+        descriptor.baseArrayLayer = 1;
+        descriptor.arrayLayerCount = kDefaultArrayLayers;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+        descriptor.baseArrayLayer = kDefaultArrayLayers - 1;
+        descriptor.arrayLayerCount = 2;
+        ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+        descriptor.baseArrayLayer = kDefaultArrayLayers;
+        descriptor.arrayLayerCount = 1;
         ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
     }
 }

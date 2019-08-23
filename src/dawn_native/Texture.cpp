@@ -139,28 +139,20 @@ namespace dawn_native {
             return {};
         }
 
-        TextureViewDescriptor MakeDefaultTextureViewDescriptor(const TextureBase* texture) {
-            TextureViewDescriptor descriptor;
-            descriptor.format = texture->GetFormat().format;
-            descriptor.baseArrayLayer = 0;
-            descriptor.arrayLayerCount = texture->GetArrayLayers();
-            descriptor.baseMipLevel = 0;
-            descriptor.mipLevelCount = texture->GetNumMipLevels();
-
+        dawn::TextureViewDimension GetDefaultViewDimension(const TextureBase* texture) {
             // TODO(jiawei.shao@intel.com): support all texture dimensions.
             switch (texture->GetDimension()) {
                 case dawn::TextureDimension::e2D:
+                    ASSERT(texture->GetArrayLayers() != 0);
                     if (texture->GetArrayLayers() == 1u) {
-                        descriptor.dimension = dawn::TextureViewDimension::e2D;
+                        return dawn::TextureViewDimension::e2D;
                     } else {
-                        descriptor.dimension = dawn::TextureViewDimension::e2DArray;
+                        return dawn::TextureViewDimension::e2DArray;
                     }
-                    break;
                 default:
                     UNREACHABLE();
+                    return dawn::TextureViewDimension::e1D;
             }
-
-            return descriptor;
         }
 
         MaybeError ValidateTextureSize(const TextureDescriptor* descriptor, const Format* format) {
@@ -238,14 +230,11 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
-                                             const TextureBase* texture,
+    MaybeError ValidateTextureViewDescriptor(const TextureBase* texture,
                                              const TextureViewDescriptor* descriptor) {
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
-
-        DAWN_TRY(device->ValidateObject(texture));
         if (texture->GetTextureState() == TextureBase::TextureState::Destroyed) {
             return DAWN_VALIDATION_ERROR("Destroyed texture used to create texture view");
         }
@@ -277,6 +266,26 @@ namespace dawn_native {
         DAWN_TRY(ValidateTextureViewDimensionCompatibility(texture, descriptor));
 
         return {};
+    }
+
+    TextureViewDescriptor GetTextureViewDescriptorOrDefault(
+        const TextureBase* texture,
+        const TextureViewDescriptor* descriptor) {
+        TextureViewDescriptor desc = {};
+        if (descriptor) {
+            desc = *descriptor;
+        } else {
+            desc.format = texture->GetFormat().format;
+            desc.dimension = GetDefaultViewDimension(texture);
+        }
+
+        if (desc.arrayLayerCount == 0) {
+            desc.arrayLayerCount = texture->GetArrayLayers() - desc.baseArrayLayer;
+        }
+        if (desc.mipLevelCount == 0) {
+            desc.mipLevelCount = texture->GetNumMipLevels() - desc.baseMipLevel;
+        }
+        return desc;
     }
 
     bool IsValidSampleCount(uint32_t sampleCount) {
@@ -435,16 +444,6 @@ namespace dawn_native {
         return extent;
     }
 
-    TextureViewBase* TextureBase::CreateDefaultView() {
-        TextureViewDescriptor descriptor = {};
-
-        if (!IsError()) {
-            descriptor = MakeDefaultTextureViewDescriptor(this);
-        }
-
-        return GetDevice()->CreateTextureView(this, &descriptor);
-    }
-
     TextureViewBase* TextureBase::CreateView(const TextureViewDescriptor* descriptor) {
         return GetDevice()->CreateTextureView(this, descriptor);
     }
@@ -482,6 +481,7 @@ namespace dawn_native {
           mMipLevelCount(descriptor->mipLevelCount),
           mBaseArrayLayer(descriptor->baseArrayLayer),
           mArrayLayerCount(descriptor->arrayLayerCount) {
+        printf("%d %d %d %d\n", mBaseMipLevel, mMipLevelCount, mBaseArrayLayer, mArrayLayerCount);
     }
 
     TextureViewBase::TextureViewBase(DeviceBase* device, ObjectBase::ErrorTag tag)

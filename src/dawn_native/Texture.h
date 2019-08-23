@@ -26,9 +26,11 @@
 namespace dawn_native {
     MaybeError ValidateTextureDescriptor(const DeviceBase* device,
                                          const TextureDescriptor* descriptor);
-    MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
-                                             const TextureBase* texture,
+    MaybeError ValidateTextureViewDescriptor(const TextureBase* texture,
                                              const TextureViewDescriptor* descriptor);
+    TextureViewDescriptor GetTextureViewDescriptorOrDefault(
+        const TextureBase* texture,
+        const TextureViewDescriptor* descriptor);
 
     bool IsValidSampleCount(uint32_t sampleCount);
 
@@ -79,7 +81,6 @@ namespace dawn_native {
         Extent3D GetMipLevelVirtualSize(uint32_t level) const;
 
         // Dawn API
-        TextureViewBase* CreateDefaultView();
         TextureViewBase* CreateView(const TextureViewDescriptor* descriptor);
         void Destroy();
 
