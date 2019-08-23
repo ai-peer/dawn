@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76c64def_1edfd5ea",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-23T23:25:28Z",
+      "side": 1,
+      "message": "Can this be 1ull \u003c\u003c firstBitIndex?",
+      "range": {
+        "startLine": 71,
+        "startChar": 11,
+        "endLine": 71,
+        "endChar": 48
+      },
+      "revId": "11835b23285e3c91bc98b4f1d430e6cca5c7bc6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
