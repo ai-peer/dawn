@@ -389,8 +389,7 @@
                 ]
             },
             {
-                "name": "end pass",
-                "TODO": "This returns the top-level encoder in the WebGPU IDL"
+                "name": "end pass"
             }
         ]
     },
@@ -1008,8 +1007,7 @@
                 ]
             },
             {
-                "name": "end pass",
-                "TODO": "This returns the top-level encoder in the WebGPU IDL"
+                "name": "end pass"
             }
         ]
     },
@@ -1130,14 +1128,10 @@
         "category": "object",
         "methods": [
             {
-                "name": "create default view",
-                "returns": "texture view"
-            },
-            {
                 "name": "create view",
                 "returns": "texture view",
                 "args": [
-                    {"name": "descriptor", "type": "texture view descriptor", "annotation": "const*"}
+                    {"name": "descriptor", "type": "texture view descriptor", "annotation": "const*", "optional": true}
                 ]
             },
             {
@@ -1274,9 +1268,9 @@
             {"name": "format", "type": "texture format"},
             {"name": "dimension", "type": "texture view dimension"},
             {"name": "base mip level", "type": "uint32_t", "default": "0"},
-            {"name": "mip level count", "type": "uint32_t", "default": "1"},
+            {"name": "mip level count", "type": "uint32_t", "default": "0"},
             {"name": "base array layer", "type": "uint32_t", "default": "0"},
-            {"name": "array layer count", "type": "uint32_t", "default": "1"}
+            {"name": "array layer count", "type": "uint32_t", "default": "0"}
         ],
         "TODO": [
             "jiawei.shao@intel.com: Allow choosing the aspect (depth vs. stencil)"
