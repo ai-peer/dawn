@@ -70,6 +70,24 @@
       "revId": "3f21e11e240ae44f1b49606d42b062eaf208a5e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db6a151_2c0237f9",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-23T09:44:57Z",
+      "side": 1,
+      "message": "Yeah removing the copy operator sounds good too.",
+      "parentUuid": "77bd2d7e_c9e93bd3",
+      "revId": "3f21e11e240ae44f1b49606d42b062eaf208a5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
