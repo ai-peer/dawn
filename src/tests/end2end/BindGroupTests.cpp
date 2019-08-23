@@ -248,7 +248,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     descriptor.mipLevelCount = 1;
     descriptor.usage = dawn::TextureUsageBit::CopyDst | dawn::TextureUsageBit::Sampled;
     dawn::Texture texture = device.CreateTexture(&descriptor);
-    dawn::TextureView textureView = texture.CreateDefaultView();
+    dawn::TextureView textureView = texture.CreateView();
 
     int width = kRTSize, height = kRTSize;
     int widthInBytes = width * sizeof(RGBA8);
