@@ -47,25 +47,36 @@ namespace dawn_native {
         // Align the requested allocation size
         const size_t alignedSize = Align(size, alignment);
 
-        RingBuffer* largestRingBuffer = GetLargestBuffer();
-        UploadHandle uploadHandle = largestRingBuffer->SubAllocate(alignedSize);
+        // First-fit: find next smallest buffer large enough to satisfy the allocation request.
+        RingBuffer* ringBuffer = GetLargestBuffer();
+        for (size_t i = 0; i < mRingBuffers.size(); ++i) {
+            if ((mRingBuffers[i]->GetUsedSize() + alignedSize) <= mRingBuffers[i]->GetSize()) {
+                ringBuffer = mRingBuffers[i].get();
+                break;
+            }
+        }
+
+        UploadHandle uploadHandle = UploadHandle{};
+        if (ringBuffer != nullptr) {
+            uploadHandle = ringBuffer->SubAllocate(alignedSize);
+        }
 
         // Upon failure, append a newly created (and much larger) ring buffer to fulfill the
         // request.
         if (uploadHandle.mappedBuffer == nullptr) {
             // Compute the new max size (in powers of two to preserve alignment).
-            size_t newMaxSize = largestRingBuffer->GetSize();
+            size_t newMaxSize = ringBuffer->GetSize() * 2;
             while (newMaxSize < size) {
                 newMaxSize *= 2;
             }
 
             // TODO(bryan.bernhart@intel.com): Fall-back to no sub-allocations should this fail.
             DAWN_TRY(CreateAndAppendBuffer(newMaxSize));
-            largestRingBuffer = GetLargestBuffer();
-            uploadHandle = largestRingBuffer->SubAllocate(alignedSize);
+            ringBuffer = GetLargestBuffer();
+            uploadHandle = ringBuffer->SubAllocate(alignedSize);
         }
 
-        uploadHandle.stagingBuffer = largestRingBuffer->GetStagingBuffer();
+        uploadHandle.stagingBuffer = ringBuffer->GetStagingBuffer();
 
         return uploadHandle;
     }
