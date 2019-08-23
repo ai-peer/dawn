@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e23fb2b9_61ba4bac",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-23T22:32:26Z",
+      "side": 1,
+      "message": "nit: could use a for-each loop",
+      "revId": "a0c3401a6fe421c3f59c64f6e64a06817f179e6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41bb7e7a_ff36725c",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-23T22:32:26Z",
+      "side": 1,
+      "message": "Hmm, shouldn\u0027t this need to be aligned too? (The logic would need to match SubAllocate. But it seems like SubAllocate does not do any alignment. Is that OK?)",
+      "range": {
+        "startLine": 53,
+        "startChar": 17,
+        "endLine": 53,
+        "endChar": 47
+      },
+      "revId": "a0c3401a6fe421c3f59c64f6e64a06817f179e6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
