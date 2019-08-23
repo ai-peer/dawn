@@ -444,16 +444,6 @@ namespace dawn_native {
         return extent;
     }
 
-    TextureViewBase* TextureBase::CreateDefaultView() {
-        TextureViewDescriptor descriptor = {};
-
-        if (!IsError()) {
-            descriptor = GetTextureViewDescriptorOrDefault(this, nullptr);
-        }
-
-        return GetDevice()->CreateTextureView(this, &descriptor);
-    }
-
     TextureViewBase* TextureBase::CreateView(const TextureViewDescriptor* descriptor) {
         return GetDevice()->CreateTextureView(this, descriptor);
     }
