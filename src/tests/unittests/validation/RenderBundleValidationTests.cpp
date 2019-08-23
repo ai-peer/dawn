@@ -842,9 +842,9 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
     // Test the success case
     {
         utils::ComboRenderPassDescriptor renderPass({
-            tex0.CreateDefaultView(),
-            tex1.CreateDefaultView(),
-            tex2.CreateDefaultView(),
+            tex0.CreateView(),
+            tex1.CreateView(),
+            tex2.CreateView(),
         });
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
@@ -857,9 +857,9 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
     // Test the failure case for mismatched format
     {
         utils::ComboRenderPassDescriptor renderPass({
-            tex0.CreateDefaultView(),
-            tex1.CreateDefaultView(),
-            tex0.CreateDefaultView(),
+            tex0.CreateView(),
+            tex1.CreateView(),
+            tex0.CreateView(),
         });
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
@@ -872,8 +872,8 @@ TEST_F(RenderBundleValidationTest, RenderPassColorFormatMismatch) {
     // Test the failure case for missing format
     {
         utils::ComboRenderPassDescriptor renderPass({
-            tex0.CreateDefaultView(),
-            tex1.CreateDefaultView(),
+            tex0.CreateView(),
+            tex1.CreateView(),
         });
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
@@ -912,8 +912,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
 
     // Test the success case
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateDefaultView()},
-                                                    tex1.CreateDefaultView());
+        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex1.CreateView());
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         dawn::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -924,8 +923,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
 
     // Test the failure case for mismatched format
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateDefaultView()},
-                                                    tex2.CreateDefaultView());
+        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex2.CreateView());
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         dawn::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -936,7 +934,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
 
     // Test the failure case for missing format
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateDefaultView()});
+        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()});
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         dawn::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -968,7 +966,7 @@ TEST_F(RenderBundleValidationTest, RenderPassSampleCountMismatch) {
 
     // Test the success case
     {
-        utils::ComboRenderPassDescriptor renderPass({tex0.CreateDefaultView()});
+        utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()});
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         dawn::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -979,7 +977,7 @@ TEST_F(RenderBundleValidationTest, RenderPassSampleCountMismatch) {
 
     // Test the failure case
     {
-        utils::ComboRenderPassDescriptor renderPass({tex1.CreateDefaultView()});
+        utils::ComboRenderPassDescriptor renderPass({tex1.CreateView()});
 
         dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         dawn::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
