@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f004da7_155ad7e5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-23T12:51:18Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we should assert on refcount values, that\u0027s kind of an implementation detail. Maybe in a different CL we could add an assert to ~RefCounted that the refcount is 0?",
+      "revId": "1e81c71cfd9f0314283081791205b0a28290fe9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
