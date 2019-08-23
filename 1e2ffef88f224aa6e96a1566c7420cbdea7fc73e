@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "5ea0f47b_c0cf6690",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-23T08:01:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9605e318_1de7356d",
+      "revId": "1e2ffef88f224aa6e96a1566c7420cbdea7fc73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac3678d6_19697b03",
         "filename": "src/dawn_native/vulkan/CommandRecordingContext.h",
         "patchSetId": 5
