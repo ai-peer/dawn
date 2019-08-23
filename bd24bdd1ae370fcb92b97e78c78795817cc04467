@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "a09c2d09_4648f8cc",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-23T22:22:49Z",
+      "side": 1,
+      "message": "un-marking resolved",
+      "parentUuid": "65643b7d_074c798f",
+      "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "395a4aa8_0828b258",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8
