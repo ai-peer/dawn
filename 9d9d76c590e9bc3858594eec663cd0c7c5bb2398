@@ -16,6 +16,24 @@
       "revId": "9d9d76c590e9bc3858594eec663cd0c7c5bb2398",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b3e906b_d9748e36",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-23T02:04:29Z",
+      "side": 0,
+      "message": "never mind, this should probably be another patch. Removing the support for now.",
+      "parentUuid": "dcf6b7fc_92da9d08",
+      "revId": "9d9d76c590e9bc3858594eec663cd0c7c5bb2398",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
