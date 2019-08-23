@@ -70,7 +70,7 @@ class RenderPassLoadOpTests : public DawnTest {
                 dawn::TextureUsageBit::OutputAttachment | dawn::TextureUsageBit::CopySrc;
             renderTarget = device.CreateTexture(&descriptor);
 
-            renderTargetView = renderTarget.CreateDefaultView();
+            renderTargetView = renderTarget.CreateView();
 
             RGBA8 zero(0, 0, 0, 0);
             std::fill(expectZero.begin(), expectZero.end(), zero);
