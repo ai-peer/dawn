@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73542dae_e2f4f130",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-23T21:57:08Z",
+      "side": 1,
+      "message": "Since this is inside the backend, could this just be Resource instead of unique_ptr\u003cResourceBase\u003e? (here and many other places)\nIt doesn\u0027t seem like we\u0027re really using it as virtual - ToBackend() doesn\u0027t treat it that way.",
+      "revId": "318bf308bc6fc115f2cbdde394f206b4a1759147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
