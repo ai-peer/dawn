@@ -34,6 +34,24 @@
       "revId": "318bf308bc6fc115f2cbdde394f206b4a1759147",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e092ab25_f998b9ab",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-24T01:08:09Z",
+      "side": 1,
+      "message": "Hm, I don\u0027t think most of these cases will ever cause extra refcounting. If it\u0027s a member like this one, that would only happen if the containing object was copied or passed-by-value, but at least for these virtual *Base objects, that shouldn\u0027t ever happen IIRC.\n\nFor other cases like Allocate(), as long as the resulting thing is moved it would be OK. This should happen most of the time, e.g. DAWN_TRY_ASSIGN will do a move.\n\nI suspect it would also be possible to just \u003ddelete the copy constructor and copy-assignment operator to be sure.",
+      "parentUuid": "273bc594_84671553",
+      "revId": "318bf308bc6fc115f2cbdde394f206b4a1759147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

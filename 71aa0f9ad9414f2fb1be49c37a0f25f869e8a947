@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a7410ff_373614a4",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-24T01:08:09Z",
+      "side": 1,
+      "message": "nit: Use std::numeric_limits\u003cSerial\u003e::max()",
+      "revId": "71aa0f9ad9414f2fb1be49c37a0f25f869e8a947",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
