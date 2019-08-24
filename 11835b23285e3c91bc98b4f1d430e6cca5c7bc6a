@@ -46,6 +46,30 @@
       "revId": "11835b23285e3c91bc98b4f1d430e6cca5c7bc6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac6ad509_45a69f7c",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-24T00:19:39Z",
+      "side": 1,
+      "message": "Sorry, I did this because I was trying to directly translate __lzcnt64.\n\nWe can just do\n_BitScanReverse64(\u0026firstBitIndex, n - 1);\n1ull \u003c\u003c (firstBitIndex + 1)",
+      "parentUuid": "6755d816_f79b1cff",
+      "range": {
+        "startLine": 71,
+        "startChar": 11,
+        "endLine": 71,
+        "endChar": 48
+      },
+      "revId": "11835b23285e3c91bc98b4f1d430e6cca5c7bc6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
