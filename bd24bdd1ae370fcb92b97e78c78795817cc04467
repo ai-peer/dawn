@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "84aadcce_579e4ecf",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-24T00:39:58Z",
+      "side": 1,
+      "message": "That would be equivalent but also not obvious to me of the benefit.",
+      "parentUuid": "a09c2d09_4648f8cc",
+      "revId": "bd24bdd1ae370fcb92b97e78c78795817cc04467",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "395a4aa8_0828b258",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 8

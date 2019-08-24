@@ -16,6 +16,24 @@
       "revId": "318bf308bc6fc115f2cbdde394f206b4a1759147",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "273bc594_84671553",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-24T00:39:58Z",
+      "side": 1,
+      "message": "Done. I would think using `Resource` should be avoided as it could be ref\u0027ing COM objects around.",
+      "parentUuid": "73542dae_e2f4f130",
+      "revId": "318bf308bc6fc115f2cbdde394f206b4a1759147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
