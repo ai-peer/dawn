@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c89f1a_3f64b60c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:32:46Z",
+      "side": 1,
+      "message": "Not sure the best way to stringify this, but should have the disabled workarounds too for completeness",
+      "revId": "104dd9f276c3f7559509279355d0ee71ba56f688",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
