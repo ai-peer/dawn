@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ec6b545_39891e63",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-26T07:46:43Z",
+      "side": 0,
+      "message": "nit: add a comment in ValidateTextureViewDescriptor that explains that the parent texture is validated before the call.",
+      "revId": "9d9d76c590e9bc3858594eec663cd0c7c5bb2398",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
