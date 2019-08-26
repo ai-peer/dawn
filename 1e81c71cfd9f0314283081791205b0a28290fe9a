@@ -16,6 +16,24 @@
       "revId": "1e81c71cfd9f0314283081791205b0a28290fe9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b51cdc4_a01f8bbf",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-08-26T02:14:04Z",
+      "side": 1,
+      "message": "Done\nYes I agree with you that we should assert refcount \u003d\u003d 0 in ~RefCounted to prevent others forgetting to call Release() like me.",
+      "parentUuid": "3f004da7_155ad7e5",
+      "revId": "1e81c71cfd9f0314283081791205b0a28290fe9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
