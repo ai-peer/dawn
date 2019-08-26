@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "8f2cc1b7_bd145393",
+        "filename": "src/tests/ParamGenerator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T16:26:00Z",
+      "side": 1,
+      "message": "Should just be !(*this \u003d\u003d other) or similar",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f1f6849_2816aba8",
         "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 6
@@ -48,6 +65,40 @@
       "writtenOn": "2019-08-26T11:24:04Z",
       "side": 1,
       "message": "I think this could  be replaced by operator \u003c\u003c with ostringstream, which might allow getting rid of [1]",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73ddb5f6_6374200c",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T16:26:00Z",
+      "side": 1,
+      "message": "Does this do anything? Remove this or add a comment",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e753daff_9d058503",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T16:26:00Z",
+      "side": 1,
+      "message": "Should this be in FinishTest?",
       "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -94,6 +145,23 @@
         "endLine": 123,
         "endChar": 37
       },
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d728a1c_eeab82b6",
+        "filename": "src/tests/perf_tests/DawnPerfTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T16:26:00Z",
+      "side": 1,
+      "message": "This is virtual but private. Is it even possible to override?",
       "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
