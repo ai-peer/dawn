@@ -582,8 +582,7 @@ TEST_F(RenderBundleValidationTest, RequiresAtLeastOneTextureFormat) {
     // Test success with a depth stencil format.
     {
         utils::ComboRenderBundleEncoderDescriptor desc = {};
-        desc.cDepthStencilFormat = dawn::TextureFormat::Depth24PlusStencil8;
-        desc.depthStencilFormat = &desc.cDepthStencilFormat;
+        desc.depthStencilFormat = dawn::TextureFormat::Depth24PlusStencil8;
         device.CreateRenderBundleEncoder(&desc);
     }
 }
@@ -597,8 +596,7 @@ TEST_F(RenderBundleValidationTest, ColorFormatNone) {
 
 TEST_F(RenderBundleValidationTest, DepthStencilFormatNone) {
     utils::ComboRenderBundleEncoderDescriptor desc = {};
-    const dawn::TextureFormat kFormatNone = dawn::TextureFormat::None;
-    desc.depthStencilFormat = &kFormatNone;
+    desc.depthStencilFormat = dawn::TextureFormat::None;
     ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
 }
 
@@ -751,8 +749,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
     utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = dawn::TextureFormat::RGBA8Unorm;
-    renderBundleDesc.cDepthStencilFormat = dawn::TextureFormat::Depth24PlusStencil8;
-    renderBundleDesc.depthStencilFormat = &renderBundleDesc.cDepthStencilFormat;
+    renderBundleDesc.depthStencilFormat = dawn::TextureFormat::Depth24PlusStencil8;
 
     utils::ComboRenderPipelineDescriptor renderPipelineDesc = MakeRenderPipelineDescriptor();
     renderPipelineDesc.colorStateCount = 1;
@@ -904,8 +901,7 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
     utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = dawn::TextureFormat::RGBA8Unorm;
-    renderBundleDesc.cDepthStencilFormat = dawn::TextureFormat::Depth24Plus;
-    renderBundleDesc.depthStencilFormat = &renderBundleDesc.cDepthStencilFormat;
+    renderBundleDesc.depthStencilFormat = dawn::TextureFormat::Depth24Plus;
 
     dawn::RenderBundleEncoder renderBundleEncoder =
         device.CreateRenderBundleEncoder(&renderBundleDesc);
@@ -1025,8 +1021,7 @@ TEST_F(RenderBundleValidationTest, TextureFormats) {
     // Test that depth/stencil formats are validated as depth/stencil.
     {
         utils::ComboRenderBundleEncoderDescriptor desc = {};
-        desc.cDepthStencilFormat = dawn::TextureFormat::RGBA8Unorm;
-        desc.depthStencilFormat = &desc.cDepthStencilFormat;
+        desc.depthStencilFormat = dawn::TextureFormat::RGBA8Unorm;
         ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
     }
 
