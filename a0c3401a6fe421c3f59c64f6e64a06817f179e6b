@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4b4ea7bb_41b313c5",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-26T09:54:30Z",
+      "side": 1,
+      "message": "nit: This Align call could overflow, we should check for it (or add a TODO to check for it)",
+      "revId": "a0c3401a6fe421c3f59c64f6e64a06817f179e6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e23fb2b9_61ba4bac",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 1
@@ -36,6 +53,47 @@
         "endLine": 53,
         "endChar": 47
       },
+      "revId": "a0c3401a6fe421c3f59c64f6e64a06817f179e6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3738aeef_59618470",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-26T09:54:30Z",
+      "side": 1,
+      "message": "\u003e Hmm, shouldn\u0027t this need to be aligned too? (The logic would need to match SubAllocate. But it seems like SubAllocate does not do any alignment. Is that OK?)\n\nI think we can remove all the alignment stuff because we added validation that fixes this TODO: https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/Buffer.cpp?type\u003dcs\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d258 . We should also prevents overflows in this if by moving GetUsedSize on the other side.",
+      "parentUuid": "41bb7e7a_ff36725c",
+      "range": {
+        "startLine": 53,
+        "startChar": 17,
+        "endLine": 53,
+        "endChar": 47
+      },
+      "revId": "a0c3401a6fe421c3f59c64f6e64a06817f179e6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0ba5bde_5a2f817b",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-26T09:54:30Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "a0c3401a6fe421c3f59c64f6e64a06817f179e6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
