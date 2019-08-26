@@ -159,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "31160530_9f7359d4",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-26T16:45:56Z",
+      "side": 1,
+      "message": "Start/FinishTest are kinda like SetUp() and TearDown() that count for time. We do\n\ntimer-\u003eStart();\nStartTest();\nfor s in steps: Step();\nFinishTest();\ntimer-\u003eStop();\n\n\nI took them from ANGLE, but looking again, there are 0 perf tests that actually override them. I\u0027ll remove them from the harness for now until we need them.",
+      "parentUuid": "b3b28442_455047ec",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "640c328a_62aa8bfc",
         "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 6
