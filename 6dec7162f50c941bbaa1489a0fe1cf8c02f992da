@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "cbae1fde_3d03cd14",
+        "filename": "src/tests/ParamGenerator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-26T16:37:28Z",
+      "side": 1,
+      "message": "Good idea, thanks!",
+      "parentUuid": "8f2cc1b7_bd145393",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f1f6849_2816aba8",
         "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 6
@@ -88,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "4a300581_9cca01f0",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-26T16:37:28Z",
+      "side": 1,
+      "message": "I\u0027ll add a comment. It makes sure we flush the SetSubData\u0027s for this batch of iterations.",
+      "parentUuid": "73ddb5f6_6374200c",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e753daff_9d058503",
         "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 6
@@ -99,6 +135,24 @@
       "writtenOn": "2019-08-26T16:26:00Z",
       "side": 1,
       "message": "Should this be in FinishTest?",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3b28442_455047ec",
+        "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-26T16:37:28Z",
+      "side": 1,
+      "message": "I\u0027ll add a comment.\nIt shouldn\u0027t because then the calibration step will compute a ridiculously high number of steps to execute because it can\u0027t determine how long stuff will take to last 1 second.\n\nAlthough now that I think about it, maybe we can have:\n\nvoid Step() {\n  // stuff\n  if (mIsCalibrating) WaitForGPU();\n}\n\nvoid FinishTest() {\n  WaitForGPU();\n}",
+      "parentUuid": "e753daff_9d058503",
       "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -165,6 +219,24 @@
       "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0a2cfff_dc6e7970",
+        "filename": "src/tests/perf_tests/DawnPerfTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-26T16:37:28Z",
+      "side": 1,
+      "message": "Yes. Step() is also virtual and private and it\u0027s overriden in BufferUploadPerf.\n\nvirtual private lets derived classes define functionality without exposing access to them. This is so that StartTest(), Step(), and FinishTest() can only be called the way we want them to in DoRunLoop.",
+      "parentUuid": "6d728a1c_eeab82b6",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
