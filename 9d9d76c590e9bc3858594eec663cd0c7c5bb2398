@@ -16,6 +16,24 @@
       "revId": "9d9d76c590e9bc3858594eec663cd0c7c5bb2398",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40c271b3_6d0772eb",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 0,
+      "message": "Added comment and assert.",
+      "parentUuid": "3ec6b545_39891e63",
+      "revId": "9d9d76c590e9bc3858594eec663cd0c7c5bb2398",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

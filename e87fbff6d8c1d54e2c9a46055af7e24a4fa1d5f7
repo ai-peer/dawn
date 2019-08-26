@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a22cc09d_bfdc8261",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd810339_f3a2f706",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6021719_dcb65a9c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "673d99e0_7a07fb52",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6021719_dcb65a9c",
+      "range": {
+        "startLine": 271,
+        "startChar": 26,
+        "endLine": 271,
+        "endChar": 59
+      },
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "466fb95f_c4a25e9c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0efaa324_b116b950",
+      "range": {
+        "startLine": 272,
+        "startChar": 27,
+        "endLine": 272,
+        "endChar": 34
+      },
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe1e510d_71003be2",
         "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 4
@@ -76,6 +142,24 @@
       "writtenOn": "2019-08-26T07:46:43Z",
       "side": 1,
       "message": "nit: comment here hasn\u0027t een updated.",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0575f0e_c160ca54",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Not sure why this comment needs to be updated, these 4 tests are still just for (explicitly specified) array layer ranges out of range. Clarified comment though.",
+      "parentUuid": "fe1e510d_71003be2",
       "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "c39447a1_a240062c",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2798fe39_39163ca9",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42efb3cd_dce9a1ee",
         "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 4
@@ -113,6 +215,24 @@
       "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a617242d_e603abc7",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "It\u0027s the opposite, this one is (kDefaultArrayLayers, 1), the other one is (1, kDefaultArrayLayers). There are base cases elsewhere so didn\u0027t add one.",
+      "parentUuid": "42efb3cd_dce9a1ee",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "01f7360a_cc18d1e9",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "331b74a9_8c24e8b3",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0dfb0cf_75af7eb4",
         "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 4
@@ -147,6 +285,24 @@
       "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52355dee_bffc5b05",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0dfb0cf_75af7eb4",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "cf3827a9_30477a19",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67c8320_844b8055",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9afc58b_91cba8e9",
         "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 4
@@ -181,6 +355,24 @@
       "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8620ea93_f4c21eb3",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:00:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9afc58b_91cba8e9",
+      "revId": "e87fbff6d8c1d54e2c9a46055af7e24a4fa1d5f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
