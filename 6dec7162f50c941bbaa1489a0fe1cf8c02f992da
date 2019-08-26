@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6a349bf7_20d1414a",
+        "filename": "src/tests/ParamGenerator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-26T14:46:39Z",
+      "side": 1,
+      "message": "1D param will also be useful I think.\nAnd, I think making it work for both 1D and 2D params would be enough magic or special-casing that the general case of n-D params isn\u0027t more complex.\n\nMore params could also be useful. ex.) it could be nice paramterize tests like the one I have now by both \"method\" and \"size\" in case there are nonlinear perf characteristics which change with the size of the data being operated on (or something analogous).",
+      "parentUuid": "3497c015_7b9bc5fd",
+      "revId": "6dec7162f50c941bbaa1489a0fe1cf8c02f992da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f1f6849_2816aba8",
         "filename": "src/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 6
