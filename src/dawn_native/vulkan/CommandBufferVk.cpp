@@ -319,7 +319,7 @@ namespace dawn_native { namespace vulkan {
                 // Clear textures that are not output attachments. Output attachments will be
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the
                 // texture subresource has not been initialized before the render pass.
-                if (!(usages.textureUsages[i] & dawn::TextureUsageBit::OutputAttachment)) {
+                if (!(usages.textureUsages[i] & dawn::TextureUsage::OutputAttachment)) {
                     texture->EnsureSubresourceContentInitialized(recordingContext, 0,
                                                                  texture->GetNumMipLevels(), 0,
                                                                  texture->GetArrayLayers());
@@ -338,8 +338,8 @@ namespace dawn_native { namespace vulkan {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
-                    srcBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsageBit::CopySrc);
-                    dstBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsageBit::CopyDst);
+                    srcBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopySrc);
+                    dstBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopyDst);
 
                     VkBufferCopy region;
                     region.srcOffset = copy->sourceOffset;
@@ -372,9 +372,9 @@ namespace dawn_native { namespace vulkan {
                                                                   subresource.baseArrayLayer, 1);
                     }
                     ToBackend(src.buffer)
-                        ->TransitionUsageNow(recordingContext, dawn::BufferUsageBit::CopySrc);
+                        ->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsageBit::CopyDst);
+                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopyDst);
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
@@ -400,9 +400,9 @@ namespace dawn_native { namespace vulkan {
                                                               subresource.baseArrayLayer, 1);
 
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsageBit::CopySrc);
+                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopySrc);
                     ToBackend(dst.buffer)
-                        ->TransitionUsageNow(recordingContext, dawn::BufferUsageBit::CopyDst);
+                        ->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopyDst);
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkBuffer dstBuffer = ToBackend(dst.buffer)->GetHandle();
@@ -437,9 +437,9 @@ namespace dawn_native { namespace vulkan {
                                                                   dstSubresource.baseArrayLayer, 1);
                     }
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsageBit::CopySrc);
+                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsageBit::CopyDst);
+                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopyDst);
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
