@@ -16,6 +16,24 @@
       "revId": "6878d1212988c2cc56e150cf9df1e22975f113db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21d0f816_24bdeb32",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-26T22:39:01Z",
+      "side": 1,
+      "message": "Should be okay, your follow-up CL fixes this validation in Texture and RenderBundle it seems",
+      "parentUuid": "b73ba8b6_6da7eeb4",
+      "revId": "6878d1212988c2cc56e150cf9df1e22975f113db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
