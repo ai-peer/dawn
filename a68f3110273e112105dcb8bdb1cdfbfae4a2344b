@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18b24a63_fe61ecd7",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-26T22:54:00Z",
+      "side": 1,
+      "message": "oops, looks like this is the same as https://dawn-review.googlesource.com/c/dawn/+/10240\n\nAlso, same comment as there: should include forceDisabledWorkarounds too",
+      "revId": "a68f3110273e112105dcb8bdb1cdfbfae4a2344b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
