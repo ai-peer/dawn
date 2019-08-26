@@ -83,6 +83,8 @@ struct DawnTestParam {
     std::vector<const char*> forceDisabledWorkarounds;
 };
 
+std::ostream& operator<<(std::ostream& os, const DawnTestParam& param);
+
 // Shorthands for backend types used in the DAWN_INSTANTIATE_TEST
 extern const DawnTestParam D3D12Backend;
 extern const DawnTestParam MetalBackend;
