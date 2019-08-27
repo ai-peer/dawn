@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c0844d0_4070e5c9",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-27T20:51:09Z",
+      "side": 1,
+      "message": "Is it actually possible to get device lost errors via uncaptured error?",
+      "revId": "228b2d2dd70a492679c7e5788770c60f35dc1def",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5183ebd_5c58a86a",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-27T20:51:09Z",
+      "side": 1,
+      "message": "nit: Device lost",
+      "revId": "228b2d2dd70a492679c7e5788770c60f35dc1def",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
