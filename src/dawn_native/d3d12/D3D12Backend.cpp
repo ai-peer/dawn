@@ -39,4 +39,18 @@ namespace dawn_native { namespace d3d12 {
         return static_cast<DawnTextureFormat>(impl->GetPreferredFormat());
     }
 
+    DawnTexture WrapSharedHandle(DawnDevice device,
+                                 const DawnTextureDescriptor* descriptor,
+                                 HANDLE sharedHandle,
+                                 UINT64 acquireKey) {
+        // TODO: Implement keyed shared mutexes that enable us to accept nonzero keys
+        ASSERT(acquireKey == 0);
+
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        const TextureDescriptor* backendDescriptor =
+            reinterpret_cast<const TextureDescriptor*>(descriptor);
+        TextureBase* texture =
+            backendDevice->WrapSharedHandle(backendDescriptor, sharedHandle, acquireKey);
+        return reinterpret_cast<DawnTexture>(texture);
+    }
 }}  // namespace dawn_native::d3d12
