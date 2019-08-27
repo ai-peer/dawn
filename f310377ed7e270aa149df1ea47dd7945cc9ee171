@@ -140,6 +140,30 @@
       "revId": "f310377ed7e270aa149df1ea47dd7945cc9ee171",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58cfabca_2b9b398d",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-27T14:39:57Z",
+      "side": 1,
+      "message": "Ok, DeviceError is weird because it seems like an error on device methods only but DeviceUncapturedError is better.",
+      "parentUuid": "3e8a62f8_19347a14",
+      "range": {
+        "startLine": 57,
+        "startChar": 20,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "f310377ed7e270aa149df1ea47dd7945cc9ee171",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
