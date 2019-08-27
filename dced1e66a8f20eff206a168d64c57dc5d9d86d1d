@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b0dada8_214505fe",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-27T06:37:17Z",
+      "side": 1,
+      "message": "nit: comment that this can be none?",
+      "revId": "dced1e66a8f20eff206a168d64c57dc5d9d86d1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
