@@ -196,7 +196,7 @@
             {"value": 0, "name": "success"},
             {"value": 1, "name": "error"},
             {"value": 2, "name": "unknown"},
-            {"value": 3, "name": "context lost"}
+            {"value": 3, "name": "device lost"}
         ]
     },
     "buffer usage bit": {
@@ -581,7 +581,7 @@
             {"value": 0, "name": "success"},
             {"value": 1, "name": "error"},
             {"value": 2, "name": "unknown"},
-            {"value": 3, "name": "context lost"}
+            {"value": 3, "name": "device lost"}
         ]
     },
     "fence descriptor": {
