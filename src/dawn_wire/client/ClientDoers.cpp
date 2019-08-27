@@ -18,7 +18,7 @@
 
 namespace dawn_wire { namespace client {
 
-    bool Client::DoDeviceErrorCallback(uint32_t errorType, const char* message) {
+    bool Client::DoDeviceUncapturedErrorCallback(uint32_t errorType, const char* message) {
         switch (errorType) {
             case DAWN_ERROR_TYPE_NONE:
             case DAWN_ERROR_TYPE_VALIDATION:
