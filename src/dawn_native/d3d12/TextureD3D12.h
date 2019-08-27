@@ -25,6 +25,8 @@ namespace dawn_native { namespace d3d12 {
     class Device;
 
     DXGI_FORMAT D3D12TextureFormat(dawn::TextureFormat format);
+    MaybeError ValidateD3D12ResourceCanBeWrapped(ID3D12Resource* d3d12Resource,
+                                                 const TextureDescriptor* descriptor);
 
     class Texture : public TextureBase {
       public:
