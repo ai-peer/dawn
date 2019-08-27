@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b6d486e_07828f40",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-27T07:46:43Z",
+      "side": 1,
+      "message": "We can still have an overflow here if \"size\" is huge and makes u32 wrap around. Instead you could do the following:\n\n  ASSERT(ringBuffer-\u003eGetSize() \u003e\u003d ringBuffer-\u003eGetUsedSize());\n  const size_t remainingSize \u003d ringBuffer-\u003eGetSize() - ringBuffer-\u003eGetUsedSize();\n  if (size \u003c\u003d remainingSize) {\n    stuff\n  }",
+      "revId": "e5f54cdf1967896cf0602d72f2ac4c8f7488c71a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
