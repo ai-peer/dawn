@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14a52cc7_55af01fd",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-27T18:09:29Z",
+      "side": 1,
+      "message": "nit: rename this to no error to match webgpu.h PR",
+      "range": {
+        "startLine": 553,
+        "startChar": 34,
+        "endLine": 553,
+        "endChar": 38
+      },
+      "revId": "800d46ef0d7f7a88c176fc87febb10955c86d1f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
