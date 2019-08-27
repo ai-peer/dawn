@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c9877014_f9f6e369",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-27T23:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3ffdbdc_a76dfa43",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "b6f8f1b2cc8be0b27a9f2d26d3674174f46d7933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "adcb4ca2_98a2b40f",
         "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
         "patchSetId": 15
@@ -62,6 +86,24 @@
       "revId": "b6f8f1b2cc8be0b27a9f2d26d3674174f46d7933",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c8a55f9_cfcfad91",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-27T23:21:48Z",
+      "side": 1,
+      "message": "No longer necessary. Device::DeallocateMemory always invalidates the allocation.",
+      "parentUuid": "d501b229_a648ac69",
+      "revId": "b6f8f1b2cc8be0b27a9f2d26d3674174f46d7933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
