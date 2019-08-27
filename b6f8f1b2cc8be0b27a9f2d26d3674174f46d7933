@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3ffdbdc_a76dfa43",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-27T22:17:48Z",
+      "side": 1,
+      "message": "nit: kInvalidOffset",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "b6f8f1b2cc8be0b27a9f2d26d3674174f46d7933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adcb4ca2_98a2b40f",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-27T22:17:48Z",
+      "side": 1,
+      "message": "optional nit: it\u0027s not actually necessary for mOffset to have any particular value. Could just initialize to 0.",
+      "range": {
+        "startLine": 25,
+        "startChar": 47,
+        "endLine": 25,
+        "endChar": 70
+      },
+      "revId": "b6f8f1b2cc8be0b27a9f2d26d3674174f46d7933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d501b229_a648ac69",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-27T22:17:48Z",
+      "side": 1,
+      "message": "In PS6 you had mResourceAllocation \u003d ResourceMemoryAllocation(). Is it still needed?",
+      "revId": "b6f8f1b2cc8be0b27a9f2d26d3674174f46d7933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
