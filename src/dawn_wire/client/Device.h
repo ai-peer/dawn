@@ -19,6 +19,8 @@
 
 #include "dawn_wire/client/ObjectBase.h"
 
+#include <map>
+
 namespace dawn_wire { namespace client {
 
     class Client;
@@ -30,8 +32,17 @@ namespace dawn_wire { namespace client {
         Client* GetClient();
         void HandleError(DawnErrorType errorType, const char* message);
         void SetUncapturedErrorCallback(DawnErrorCallback errorCallback, void* errorUserdata);
+        void RequestPopErrorScope(DawnErrorCallback callback, void* userdata);
+        bool PopErrorScope(uint32_t requestSerial, DawnErrorType type, const char* message);
 
       private:
+        struct ErrorScopeData {
+            DawnErrorCallback callback = nullptr;
+            void* userdata = nullptr;
+        };
+        std::map<uint32_t, ErrorScopeData> mErrorScopes;
+        uint32_t mErrorScopeRequestSerial = 0;
+
         Client* mClient = nullptr;
         DawnErrorCallback mErrorCallback = nullptr;
         void* mErrorUserdata;
