@@ -30,6 +30,16 @@ namespace {
         mockDeviceErrorCallback->Call(type, message, userdata);
     }
 
+    class MockDevicePopErrorScopeCallback {
+      public:
+        MOCK_METHOD3(Call, void(DawnErrorType type, const char* message, void* userdata));
+    };
+
+    std::unique_ptr<StrictMock<MockDevicePopErrorScopeCallback>> mockDevicePopErrorScopeCallback;
+    void ToMockDevicePopErrorScopeCallback(DawnErrorType type, const char* message, void* userdata) {
+        mockDevicePopErrorScopeCallback->Call(type, message, userdata);
+    }
+
 }  // anonymous namespace
 
 class WireErrorCallbackTests : public WireTest {
@@ -42,18 +52,21 @@ class WireErrorCallbackTests : public WireTest {
         WireTest::SetUp();
 
         mockDeviceErrorCallback = std::make_unique<StrictMock<MockDeviceErrorCallback>>();
+        mockDevicePopErrorScopeCallback = std::make_unique<StrictMock<MockDevicePopErrorScopeCallback>>();
     }
 
     void TearDown() override {
         WireTest::TearDown();
 
         mockDeviceErrorCallback = nullptr;
+        mockDevicePopErrorScopeCallback = nullptr;
     }
 
     void FlushServer() {
         WireTest::FlushServer();
 
         Mock::VerifyAndClearExpectations(&mockDeviceErrorCallback);
+        Mock::VerifyAndClearExpectations(&mockDevicePopErrorScopeCallback);
     }
 };
 
@@ -71,4 +84,91 @@ TEST_F(WireErrorCallbackTests, DeviceErrorCallback) {
     EXPECT_CALL(*mockDeviceErrorCallback, Call(DAWN_ERROR_TYPE_VALIDATION, StrEq("Some error message"), this)).Times(1);
 
     FlushServer();
+}
+
+// Test the return wire for error scopes.
+TEST_F(WireErrorCallbackTests, PopErrorScopeCallback) {
+    dawnDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this);
+
+    DawnErrorCallback callback;
+    void* userdata;
+    EXPECT_CALL(api, OnDevicePopErrorScopeCallback(apiDevice, _, _))
+        .WillOnce(DoAll(SaveArg<1>(&callback), SaveArg<2>(&userdata)));
+
+    FlushClient();
+
+    callback(DAWN_ERROR_TYPE_VALIDATION, "Some error message", userdata);
+    EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(DAWN_ERROR_TYPE_VALIDATION, StrEq("Some error message"), this)).Times(1);
+
+    FlushServer();
+}
+
+// Test the return wire for error scopes when callbacks return in a various orders.
+TEST_F(WireErrorCallbackTests, PopErrorScopeCallbackOrdering) {
+    // Two error scopes are popped, and the first one returns first.
+    {
+        dawnDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this);
+        dawnDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this + 1);
+
+        DawnErrorCallback callback1;
+        DawnErrorCallback callback2;
+        void* userdata1;
+        void* userdata2;
+        EXPECT_CALL(api, OnDevicePopErrorScopeCallback(apiDevice, _, _))
+            .WillOnce(DoAll(SaveArg<1>(&callback1), SaveArg<2>(&userdata1)))
+            .WillOnce(DoAll(SaveArg<1>(&callback2), SaveArg<2>(&userdata2)));
+
+        FlushClient();
+
+        callback1(DAWN_ERROR_TYPE_VALIDATION, "First error message", userdata1);
+        EXPECT_CALL(*mockDevicePopErrorScopeCallback,
+                    Call(DAWN_ERROR_TYPE_VALIDATION,
+                    StrEq("First error message"), this)).Times(1);
+        FlushServer();
+
+        callback2(DAWN_ERROR_TYPE_VALIDATION, "Second error message", userdata2);
+        EXPECT_CALL(*mockDevicePopErrorScopeCallback,
+                    Call(DAWN_ERROR_TYPE_VALIDATION,
+                    StrEq("Second error message"), this + 1)).Times(1);
+        FlushServer();
+    }
+
+    // Two error scopes are popped, and the second one returns first.
+    {
+        dawnDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this);
+        dawnDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this + 1);
+
+        DawnErrorCallback callback1;
+        DawnErrorCallback callback2;
+        void* userdata1;
+        void* userdata2;
+        EXPECT_CALL(api, OnDevicePopErrorScopeCallback(apiDevice, _, _))
+            .WillOnce(DoAll(SaveArg<1>(&callback1), SaveArg<2>(&userdata1)))
+            .WillOnce(DoAll(SaveArg<1>(&callback2), SaveArg<2>(&userdata2)));
+
+        FlushClient();
+
+        callback2(DAWN_ERROR_TYPE_VALIDATION, "Second error message", userdata2);
+        EXPECT_CALL(*mockDevicePopErrorScopeCallback,
+                    Call(DAWN_ERROR_TYPE_VALIDATION,
+                    StrEq("Second error message"), this + 1)).Times(1);
+        FlushServer();
+
+        callback1(DAWN_ERROR_TYPE_VALIDATION, "First error message", userdata1);
+        EXPECT_CALL(*mockDevicePopErrorScopeCallback,
+                    Call(DAWN_ERROR_TYPE_VALIDATION,
+                    StrEq("First error message"), this)).Times(1);
+        FlushServer();
+    }
+}
+
+// Test the return wire for error scopes in flight when the device is destroyed.
+TEST_F(WireErrorCallbackTests, PopErrorScopeDeviceDestroyed) {
+    dawnDevicePopErrorScope(device, ToMockDevicePopErrorScopeCallback, this);
+
+    EXPECT_CALL(api, OnDevicePopErrorScopeCallback(apiDevice, _, _)).Times(1);
+    FlushClient();
+
+    // Incomplete callback called in Device destructor.
+    EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(DAWN_ERROR_TYPE_UNKNOWN, _, this)).Times(1);
 }
