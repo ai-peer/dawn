@@ -52,6 +52,24 @@
       "revId": "318bf308bc6fc115f2cbdde394f206b4a1759147",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a1a5978_55ed4f98",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-27T01:55:54Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "e092ab25_f998b9ab",
+      "revId": "318bf308bc6fc115f2cbdde394f206b4a1759147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
