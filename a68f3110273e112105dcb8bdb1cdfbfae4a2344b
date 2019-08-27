@@ -16,6 +16,24 @@
       "revId": "a68f3110273e112105dcb8bdb1cdfbfae4a2344b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1e1cd58_5d07948a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-27T18:18:21Z",
+      "side": 1,
+      "message": "Rebased.",
+      "parentUuid": "18b24a63_fe61ecd7",
+      "revId": "a68f3110273e112105dcb8bdb1cdfbfae4a2344b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
