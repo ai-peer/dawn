@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f1c39d0_892e0f71",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-27T06:47:38Z",
+      "side": 1,
+      "message": "I think this should be \"device lost\"",
+      "range": {
+        "startLine": 557,
+        "startChar": 34,
+        "endLine": 557,
+        "endChar": 41
+      },
+      "revId": "f310377ed7e270aa149df1ea47dd7945cc9ee171",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a9b08a3_82c8724a",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-27T06:47:38Z",
+      "side": 1,
+      "message": "Can\u0027t this be \"error type\"?",
+      "range": {
+        "startLine": 70,
+        "startChar": 39,
+        "endLine": 70,
+        "endChar": 47
+      },
+      "revId": "f310377ed7e270aa149df1ea47dd7945cc9ee171",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2422c37f_4ca2312f",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-27T06:47:38Z",
+      "side": 1,
+      "message": "Maybe remove the notion of Device here? Or rename to UnreportedError in this CL if it isn\u0027t too extensive a change for this CL.",
+      "range": {
+        "startLine": 57,
+        "startChar": 20,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "f310377ed7e270aa149df1ea47dd7945cc9ee171",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
