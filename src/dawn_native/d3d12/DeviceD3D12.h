@@ -81,6 +81,10 @@ namespace dawn_native { namespace d3d12 {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        TextureBase* WrapSharedHandle(const TextureDescriptor* descriptor,
+                                      HANDLE sharedHandle,
+                                      UINT64 acquireKey);
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
