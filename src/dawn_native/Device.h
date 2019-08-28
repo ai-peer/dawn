@@ -17,6 +17,7 @@
 
 #include "common/Serial.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/ErrorScope.h"
 #include "dawn_native/Extensions.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
@@ -48,7 +49,7 @@ namespace dawn_native {
 
         bool ConsumedError(MaybeError maybeError) {
             if (DAWN_UNLIKELY(maybeError.IsError())) {
-                ConsumeError(maybeError.AcquireError());
+                mCurrentErrorScope->HandleError(maybeError.AcquireError());
                 return true;
             }
             return false;
@@ -230,10 +231,12 @@ namespace dawn_native {
 
         void ApplyExtensions(const DeviceDescriptor* deviceDescriptor);
 
-        void ConsumeError(ErrorData* error);
         void SetDefaultToggles();
 
         AdapterBase* mAdapter = nullptr;
+
+        ErrorScope mRootErrorScope;
+        Ref<ErrorScope> mCurrentErrorScope;
 
         // The object caches aren't exposed in the header as they would require a lot of
         // additional includes.
@@ -250,8 +253,6 @@ namespace dawn_native {
         std::unique_ptr<FenceSignalTracker> mFenceSignalTracker;
         std::vector<DeferredCreateBufferMappedAsync> mDeferredCreateBufferMappedAsyncResults;
 
-        dawn::ErrorCallback mErrorCallback = nullptr;
-        void* mErrorUserdata = 0;
         uint32_t mRefCount = 1;
 
         FormatTable mFormatTable;
