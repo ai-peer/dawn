@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "50820755_cc21fad2",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-28T14:40:30Z",
+      "side": 1,
+      "message": "Hm, I guess we had different readings of the doc. My impression is that *nested* error scopes always resolve in order, but because error scopes can contain asychronous operations, non-nested scopes might resolve out of order.\n\nExample:\nsomeFunction() {\n  device.pushErrorScope(...);\n  queue.submit([...]);\n  device.popErrorScope();  // Should resolve after the Queue::Submit finishes on the *GPU*\n\n  device.pushErrorScope(...);\n  // Do nothing. Or anything synchronous on the CPU like some validation\n  device.popErrorScope();  // Will end up resolving before the first error scope.\n}",
+      "parentUuid": "f35cd817_580c533b",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5b53e11_0cf50273",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2019-08-28T13:54:32Z",
       "side": 1,
       "message": "nit: Why is this not inlined like other procs?",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "763ca426_47aeee6d",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-28T14:40:30Z",
+      "side": 1,
+      "message": "Device is a class, not a struct, and it\u0027s members are private.",
+      "parentUuid": "f5b53e11_0cf50273",
       "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -82,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "fd9621a8_b25afc07",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-28T14:40:30Z",
+      "side": 1,
+      "message": "Device is a class, not a struct, and it\u0027s members are private.",
+      "parentUuid": "d6a8e8da_527f83a1",
+      "range": {
+        "startLine": 70,
+        "startChar": 17,
+        "endLine": 70,
+        "endChar": 30
+      },
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "51f96f0c_dbc919ec",
         "filename": "src/dawn_wire/server/Server.h",
         "patchSetId": 5
@@ -116,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "fb170d0a_19e4b231",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-28T14:40:30Z",
+      "side": 1,
+      "message": "Wouldn\u0027t we validate that on the server side though? We could ASSERT on the client though.",
+      "parentUuid": "1316b7dd_487a8a03",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8d54aae2_f76e6135",
         "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
         "patchSetId": 5
@@ -127,6 +205,24 @@
       "writtenOn": "2019-08-28T13:54:32Z",
       "side": 1,
       "message": "For other callbacks we store things in the mock_api object wrapper but you\u0027re doing this manually here to test multiple error scopes?",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4949254_410f1296",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-28T14:40:30Z",
+      "side": 1,
+      "message": "tldr; Yes.\n\nFor the other mocks, each object only has one callback in flight. (because Buffers can\u0027t be mapped before they\u0027re unmapped). For error scopes, you could do:\ndevice.pushErrorScope(...);\ndevice.pushErrorScope(...);\ndevice.pushErrorScope(...);\ndevice.popErrorScope();\ndevice.popErrorScope();\ndevice.popErrorScope();\n\nSo we\u0027d have to store all of them (which is not particularly a problem).\n\nThe problem is that the other mocks do a thing where they say:\napi.CallBufferMapReadAsyncCallback(...) which will call the stored callback with arguments.\n\nHere, there\u0027s multiple callbacks so a helper function like that wouldn\u0027t know which one to call.",
+      "parentUuid": "8d54aae2_f76e6135",
       "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -147,6 +243,24 @@
       "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "731ee94a_f2f24a8b",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-28T14:40:30Z",
+      "side": 1,
+      "message": "See other comment that I think the callbacks can happen out of order.",
+      "parentUuid": "17632bc3_f0a946b3",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
