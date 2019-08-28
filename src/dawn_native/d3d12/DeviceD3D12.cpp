@@ -380,4 +380,24 @@ namespace dawn_native { namespace d3d12 {
 
         return allocation;
     }
+
+    TextureBase* Device::WrapSharedHandle(const TextureDescriptor* descriptor,
+                                          HANDLE sharedHandle) {
+        if (ConsumedError(ValidateTextureDescriptor(this, descriptor))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D12Resource> d3d12Resource;
+        const HRESULT hr =
+            mD3d12Device->OpenSharedHandle(sharedHandle, IID_PPV_ARGS(&d3d12Resource));
+        if (FAILED(hr)) {
+            return nullptr;
+        }
+
+        if (ConsumedError(ValidateD3D12ResourceCanBeWrapped(d3d12Resource.Get(), descriptor))) {
+            return nullptr;
+        }
+
+        return new Texture(this, descriptor, d3d12Resource.Get());
+    }
 }}  // namespace dawn_native::d3d12

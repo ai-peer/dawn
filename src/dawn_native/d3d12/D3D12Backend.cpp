@@ -23,6 +23,13 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    void GetD3D12Device(DawnDevice device, ID3D12Device** d3d12DeviceOut) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+
+        ComPtr<ID3D12Device> d3d12Device = backendDevice->GetD3D12Device();
+        *d3d12DeviceOut = d3d12Device.Detach();
+    }
+
     DawnSwapChainImplementation CreateNativeSwapChainImpl(DawnDevice device, HWND window) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
 
@@ -39,4 +46,13 @@ namespace dawn_native { namespace d3d12 {
         return static_cast<DawnTextureFormat>(impl->GetPreferredFormat());
     }
 
+    DawnTexture WrapSharedHandle(DawnDevice device,
+                                 const DawnTextureDescriptor* descriptor,
+                                 HANDLE sharedHandle) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        const TextureDescriptor* backendDescriptor =
+            reinterpret_cast<const TextureDescriptor*>(descriptor);
+        TextureBase* texture = backendDevice->WrapSharedHandle(backendDescriptor, sharedHandle);
+        return reinterpret_cast<DawnTexture>(texture);
+    }
 }}  // namespace dawn_native::d3d12
