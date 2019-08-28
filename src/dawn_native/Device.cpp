@@ -25,6 +25,7 @@
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/ErrorScope.h"
+#include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/Instance.h"
@@ -65,6 +66,7 @@ namespace dawn_native {
     DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
         : mAdapter(adapter), mCurrentErrorScope(&mRootErrorScope) {
         mCaches = std::make_unique<DeviceBase::Caches>();
+        mErrorScopeTracker = std::make_unique<ErrorScopeTracker>(this);
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
         SetDefaultToggles();
@@ -114,6 +116,11 @@ namespace dawn_native {
         mCurrentErrorScope = Ref<ErrorScope>(mCurrentErrorScope->GetParent());
     }
 
+    ErrorScope* DeviceBase::GetCurrentErrorScope() {
+        ASSERT(mCurrentErrorScope.Get() != nullptr);
+        return mCurrentErrorScope.Get();
+    }
+
     MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
         if (DAWN_UNLIKELY(object->GetDevice() != this)) {
             return DAWN_VALIDATION_ERROR("Object from a different device.");
@@ -130,6 +137,10 @@ namespace dawn_native {
 
     dawn_platform::Platform* DeviceBase::GetPlatform() const {
         return GetAdapter()->GetInstance()->GetPlatform();
+    }
+
+    ErrorScopeTracker* DeviceBase::GetErrorScopeTracker() const {
+        return mErrorScopeTracker.get();
     }
 
     FenceSignalTracker* DeviceBase::GetFenceSignalTracker() const {
@@ -513,6 +524,7 @@ namespace dawn_native {
                 deferred.callback(deferred.status, deferred.result, deferred.userdata);
             }
         }
+        mErrorScopeTracker->Tick(GetCompletedCommandSerial());
         mFenceSignalTracker->Tick(GetCompletedCommandSerial());
     }
 
