@@ -17,6 +17,7 @@
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/ErrorScopeTracker.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/Texture.h"
@@ -30,13 +31,15 @@ namespace dawn_native {
     }
 
     void QueueBase::Submit(uint32_t commandCount, CommandBufferBase* const* commands) {
-        TRACE_EVENT0(GetDevice()->GetPlatform(), TRACE_DISABLED_BY_DEFAULT("gpu.dawn"),
-                     "Queue::Submit");
-        if (GetDevice()->ConsumedError(ValidateSubmit(commandCount, commands))) {
+        DeviceBase* device = GetDevice();
+        TRACE_EVENT0(device->GetPlatform(), TRACE_DISABLED_BY_DEFAULT("gpu.dawn"), "Queue::Submit");
+        if (device->ConsumedError(ValidateSubmit(commandCount, commands))) {
             return;
         }
         ASSERT(!IsError());
 
+        device->GetErrorScopeTracker()->ReferenceUntilPendingSubmitComplete(
+            device->GetCurrentErrorScope());
         SubmitImpl(commandCount, commands);
     }
 
