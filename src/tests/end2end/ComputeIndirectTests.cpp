@@ -67,10 +67,15 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
     dawn::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
 
     // Set up dst storage buffer to contain dispatch x, y, z
+    // Increase the buffer to 4 floats becuase Metal requires the buffer size must be no less than
+    // the buffer size decleared in shader, and the total size of structure must be aligned to a
+    // multiple of the max alignment of each member.
+    // Here the base alignment of uvec3 is 16 bytes on Metal, so the required size of inputBuf and
+    // outputBuf is 16 bytes.
     dawn::Buffer dst = utils::CreateBufferFromData<uint32_t>(
         device,
         dawn::BufferUsage::Storage | dawn::BufferUsage::CopySrc | dawn::BufferUsage::CopyDst,
-        {0, 0, 0});
+        {0, 0, 0, 0});
 
     std::vector<uint32_t> indirectBufferData = bufferList;
 
@@ -79,7 +84,7 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
 
     dawn::Buffer expectedBuffer =
         utils::CreateBufferFromData(device, &indirectBufferData[indirectOffset / sizeof(uint32_t)],
-                                    3 * sizeof(uint32_t), dawn::BufferUsage::Uniform);
+                                    4 * sizeof(uint32_t), dawn::BufferUsage::Uniform);
 
     // Set up bind group and issue dispatch
     dawn::BindGroup bindGroup =
@@ -109,21 +114,11 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
 
 // Test basic indirect
 TEST_P(ComputeIndirectTests, Basic) {
-    // TODO(hao.x.li@intel.com): Test failing on Metal with validation layer on, which blocks
-    // end2end tests run with validation layer in bots. Suppress this while we're fixing.
-    // See https://bugs.chromium.org/p/dawn/issues/detail?id=139
-    DAWN_SKIP_TEST_IF(IsMetal() && IsBackendValidationEnabled());
-
     BasicTest({2, 3, 4}, 0);
 }
 
 // Test indirect with buffer offset
 TEST_P(ComputeIndirectTests, IndirectOffset) {
-    // TODO(hao.x.li@intel.com): Test failing on Metal with validation layer on, which blocks
-    // end2end tests run with validation layer in bots. Suppress this while we're fixing.
-    // See https://bugs.chromium.org/p/dawn/issues/detail?id=139
-    DAWN_SKIP_TEST_IF(IsMetal() && IsBackendValidationEnabled());
-
     BasicTest({0, 0, 0, 2, 3, 4}, 3 * sizeof(uint32_t));
 }
 
