@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "bbf0ca45_1a98e053",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T15:02:49Z",
+      "side": 1,
+      "message": "Because WebGPU is a Web API I think we\u0027ll want to spec the order, and the natural order is first-in first-out. Kai what do you think?",
+      "parentUuid": "50820755_cc21fad2",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5b53e11_0cf50273",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Device is a class, not a struct, and it\u0027s members are private.",
       "parentUuid": "f5b53e11_0cf50273",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3690cec3_88dcfffa",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T15:02:49Z",
+      "side": 1,
+      "message": "Ah, makes sense. I think it could be a friend if we wanted to. Also the structure you went with makes more sense because all the code related to one feature is close to one another. Maybe we could move stuff in the wire to be like that eventually.",
+      "parentUuid": "763ca426_47aeee6d",
       "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
