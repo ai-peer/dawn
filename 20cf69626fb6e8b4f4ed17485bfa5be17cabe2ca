@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f35cd817_580c533b",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "PopErrorScope is always performed in order, so the serial is redundant. It\u0027s good to have it so that we can validate the server does things in order, but we\u0027re missing that validation for now.\n\nAlso making it a uint64_t would be good so it never wraps around (for the validation).",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5b53e11_0cf50273",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "nit: Why is this not inlined like other procs?",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "096cd180_250dbf92",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "nit: \u003d {callback, userdata} ?",
+      "range": {
+        "startLine": 58,
+        "startChar": 31,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6a8e8da_527f83a1",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "nit: Why isn\u0027t this in DoPopErrorScopeCallback directly?",
+      "range": {
+        "startLine": 70,
+        "startChar": 17,
+        "endLine": 70,
+        "endChar": 30
+      },
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51f96f0c_dbc919ec",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "It would be interesting to make it support multiple devices soon because that will be useful for Jiawei\u0027s implementation of adapters and extension requesting.",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1316b7dd_487a8a03",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "Do you think we need to validate on the client side that Push/PopErrorScopes are balanced?",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d54aae2_f76e6135",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "For other callbacks we store things in the mock_api object wrapper but you\u0027re doing this manually here to test multiple error scopes?",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17632bc3_f0a946b3",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-28T13:54:32Z",
+      "side": 1,
+      "message": "That can never happen but we can check a client error is produced.",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
