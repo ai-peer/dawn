@@ -168,6 +168,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/ErrorData.h",
     "src/dawn_native/ErrorScope.cpp",
     "src/dawn_native/ErrorScope.h",
+    "src/dawn_native/ErrorScopeTracker.cpp",
+    "src/dawn_native/ErrorScopeTracker.h",
     "src/dawn_native/Extensions.cpp",
     "src/dawn_native/Extensions.h",
     "src/dawn_native/Fence.cpp",
