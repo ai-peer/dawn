@@ -113,4 +113,11 @@ namespace dawn_native {
         }
     }
 
+    void ErrorScope::Destroy() {
+        if (!IsRoot()) {
+            mErrorType = dawn::ErrorType::Unknown;
+            mErrorMessage = "Error scope destroyed";
+        }
+    }
+
 }  // namespace dawn_native
