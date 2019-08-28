@@ -255,11 +255,6 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTexture) {
 
 // Test multisampled rendering with depth test works correctly.
 TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTest) {
-    // TODO(hao.x.li@intel.com): Test failing on Metal with validation layer on, which blocks
-    // end2end tests run with validation layer in bots. Suppress this while we're fixing.
-    // See https://bugs.chromium.org/p/dawn/issues/detail?id=139
-    DAWN_SKIP_TEST_IF(IsMetal() && IsBackendValidationEnabled());
-
     constexpr bool kTestDepth = true;
     dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     dawn::RenderPipeline pipeline = CreateRenderPipelineWithOneOutputForTest(kTestDepth);
@@ -272,8 +267,13 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTest) {
         utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
             {mMultisampledColorView}, {mResolveView}, dawn::LoadOp::Clear, dawn::LoadOp::Clear,
             true);
-        std::array<float, 5> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a, // Color
-                                             0.2f};                                  // depth
+        // Increase the buffer to 8 floats becuase Metal requires the buffer size must be no less
+        // than the buffer size decleared in shader, and the total size of structure must be aligned
+        // to a multiple of the max alignment of each member.
+        // Here the size of buffer for fragment shader should be algined to 16 bytes (the alignment
+        // of float4 on Metal) , so the required size is 32 bytes.
+        std::array<float, 8> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a,  // Color
+                                             0.2f};                                   // depth
         constexpr uint32_t kSize = sizeof(kUniformData);
         EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
     }
