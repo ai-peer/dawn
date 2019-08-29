@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6445da5b_fc6109fe",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T07:53:32Z",
+      "side": 1,
+      "message": "Let\u0027s put 2 because that the next lower power-of-two whereas the alignment of 3 is 1.",
+      "revId": "7fb400f8b89a02881a2316e27cb87e3672512122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
