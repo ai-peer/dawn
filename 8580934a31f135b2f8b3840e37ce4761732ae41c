@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f3824fb_bd084c05",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T11:57:20Z",
+      "side": 1,
+      "message": "This doesn\u0027t match gl_Position(0) as above. gl_Position should always have the 4th coordinate set to 1.0f, at least in tests because right now a division by zero happens (we\u0027ll have to see what to do about it in WebGPU).\n\nAlso your pixel is draw somewhere in the 49, 49 to 50, 50 block of pixels. If your render target were 3x3 then it would be at pixel 1, 1.",
+      "revId": "8580934a31f135b2f8b3840e37ce4761732ae41c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
