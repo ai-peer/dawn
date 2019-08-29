@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a8f0d58_ed584957",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-29T17:53:34Z",
+      "side": 1,
+      "message": "Indeed!",
+      "parentUuid": "c68c398f_b01e7d3b",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c42126a_811a5422",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -100,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "74d462b7_8599944b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-29T17:53:34Z",
+      "side": 1,
+      "message": "In my last meeting with Corentin, we agreed to tackle clearing as a separate CL. This will need an additional set of work on the Chromium side since the SharedImageBackingD3D class always returns true for IsCleared(). This is the reason why I\u0027ve skipped it in this initial change.",
+      "parentUuid": "20995d61_0d5b9d08",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 72
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2476955e_03a33dda",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 5
@@ -117,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "9f6cf3b9_331a47f8",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-29T17:53:34Z",
+      "side": 1,
+      "message": "The reason I have it as an out parameter is to force the user of the API to take a reference to the object and prevent it from getting freed out from under them. Are ComPtr\u003cID3D12Resource\u003e return values allowed in D3D12Backend.h? If not I think we should leave as is.",
+      "parentUuid": "2476955e_03a33dda",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0074e874_9e2e9e3c",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 5
@@ -128,6 +188,30 @@
       "writtenOn": "2019-08-29T08:09:39Z",
       "side": 1,
       "message": "nit: Do we expect other types of SharedHandle? Maybe it could be WrapTextureSharedHandle",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36366950_48f243e9",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-29T17:53:34Z",
+      "side": 1,
+      "message": "Besides possibly fence objects in the future, we do not expect to share other objects in the short term. But I like your suggested name becuase it makes things explicit. I\u0027ll change this in an upcoming patchset.",
+      "parentUuid": "0074e874_9e2e9e3c",
       "range": {
         "startLine": 32,
         "startChar": 35,
@@ -203,6 +287,30 @@
     },
     {
       "key": {
+        "uuid": "84105317_8f87818a",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-29T17:53:34Z",
+      "side": 1,
+      "message": "I was copying the code in IOSurfaceWrappingTests.cpp where the corresponding class is called IOSurfaceValidationTests and IOSurfaceTestbase. Did the person who wrote that code also do it wrong? :-)",
+      "parentUuid": "3bb70cb0_cc8aa970",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a9637ab_82dae2d0",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 5
@@ -240,6 +348,24 @@
       "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5d3c296_fb145c5a",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-29T17:53:34Z",
+      "side": 1,
+      "message": "Yes, I saw the IOSurface and Vulkan tests. I\u0027ll add these tests for the D3D12 backend when I add keyed shared mutex support. The tests will be flaky without them.",
+      "parentUuid": "d8c1d6ad_b6c1eba1",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
