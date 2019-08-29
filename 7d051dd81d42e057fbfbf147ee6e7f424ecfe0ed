@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17e9540d_b50832f4",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T15:23:00Z",
+      "side": 1,
+      "message": "nit: This should have default: 0",
+      "range": {
+        "startLine": 651,
+        "startChar": 12,
+        "endLine": 651,
+        "endChar": 57
+      },
+      "revId": "7d051dd81d42e057fbfbf147ee6e7f424ecfe0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
