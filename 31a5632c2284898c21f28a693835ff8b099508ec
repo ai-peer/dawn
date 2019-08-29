@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "549f2ce8_8aa6fb81",
+        "filename": "src/tests/unittests/validation/VertexInputValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T06:36:02Z",
+      "side": 1,
+      "message": "typo: multiple",
+      "revId": "31a5632c2284898c21f28a693835ff8b099508ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
