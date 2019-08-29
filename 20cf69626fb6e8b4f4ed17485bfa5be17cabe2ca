@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "63d5ce93_6bb1f54a",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-29T23:06:24Z",
+      "side": 1,
+      "message": "I decided it really doesn\u0027t make sense especially for pipeline creation. Imagine:\n\n push()\n  makeReallyExpensivePipeline()\n pop()\n push()\n  makeCheapPipeline()\n pop()",
+      "parentUuid": "5597dc79_59d286be",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5b53e11_0cf50273",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
