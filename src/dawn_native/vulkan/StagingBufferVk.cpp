@@ -15,7 +15,7 @@
 #include "dawn_native/vulkan/StagingBufferVk.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
-#include "dawn_native/vulkan/MemoryAllocator.h"
+#include "dawn_native/vulkan/ResourceMemoryVk.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -42,12 +42,11 @@ namespace dawn_native { namespace vulkan {
         VkMemoryRequirements requirements;
         mDevice->fn.GetBufferMemoryRequirements(mDevice->GetVkDevice(), mBuffer, &requirements);
 
-        if (!mDevice->GetMemoryAllocator()->Allocate(requirements, true, &mAllocation)) {
-            return DAWN_DEVICE_LOST_ERROR("Unable to allocate memory for staging buffer.");
-        }
+        DAWN_TRY_ASSIGN(mAllocation, mDevice->AllocateMemory(requirements, true));
 
-        if (mDevice->fn.BindBufferMemory(mDevice->GetVkDevice(), mBuffer, mAllocation.GetMemory(),
-                                         mAllocation.GetMemoryOffset()) != VK_SUCCESS) {
+        if (mDevice->fn.BindBufferMemory(mDevice->GetVkDevice(), mBuffer,
+                                         ToBackend(mAllocation.GetResourceHeap())->GetMemory(),
+                                         mAllocation.GetOffset()) != VK_SUCCESS) {
             return DAWN_DEVICE_LOST_ERROR("Unable to attach memory to the staging buffer.");
         }
 
@@ -62,7 +61,7 @@ namespace dawn_native { namespace vulkan {
     StagingBuffer::~StagingBuffer() {
         mMappedPointer = nullptr;
         mDevice->GetFencedDeleter()->DeleteWhenUnused(mBuffer);
-        mDevice->GetMemoryAllocator()->Free(&mAllocation);
+        mDevice->DeallocateMemory(mAllocation);
     }
 
     VkBuffer StagingBuffer::GetBufferHandle() const {
