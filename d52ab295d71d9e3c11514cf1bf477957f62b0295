@@ -16,6 +16,41 @@
       "revId": "d52ab295d71d9e3c11514cf1bf477957f62b0295",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5b1daa1_ede14e00",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T16:27:28Z",
+      "side": 1,
+      "message": "Hm, I think we should be okay here. When the client refcount goes to 0, we send a DestroyObjectCmd which will call dawnDeviceRelease on the server.\n\nThis will free the extra refcount added at [1], but the device won\u0027t actually be destroyed because it\u0027s externally owned.\n\nThat being said, we\u0027ll need to figure out:\n  1. Know when all objects are freed on the Server so we don\u0027t leak the native Device\n  2. \"Tombstoning\" wire ObjectIDs (don\u0027t think we did this yet) so you can\u0027t create a ton of Devices and eventually get an (id, serial) pair that\u0027s already been destroyed.",
+      "parentUuid": "c2ef7c1a_ffa42d06",
+      "revId": "d52ab295d71d9e3c11514cf1bf477957f62b0295",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "011cced0_1301fa18",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T16:27:28Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d52ab295d71d9e3c11514cf1bf477957f62b0295",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
