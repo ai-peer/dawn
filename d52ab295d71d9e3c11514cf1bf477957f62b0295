@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "f393854c_2645240b",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T16:47:54Z",
+      "side": 1,
+      "message": "This is true. Maybe it would be ideal for such an API in Blink to only signal *intent*?\n\nAnd then we can add a bunch of tracking in WireServer and have something like WireServer::ReleaseWhenUnused(DawnDevice) ?",
+      "parentUuid": "84767a84_2193f9a5",
+      "revId": "d52ab295d71d9e3c11514cf1bf477957f62b0295",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "011cced0_1301fa18",
         "filename": "src/dawn_wire/server/Server.cpp",
         "patchSetId": 1
