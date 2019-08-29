@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a696d29b_c247df5e",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-29T23:04:59Z",
+      "side": 1,
+      "message": "note: if we ever want to generate error messages instead of just returning static ones, we can\u0027t return char* here",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c93a316_a6a0e75c",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-29T23:04:59Z",
+      "side": 1,
+      "message": "Why move? I think it should get destroyed right after this destructor runs anyway, so this just causes an extra (very small) memcpy.",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "223da624_1d95d4d1",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-29T23:04:59Z",
+      "side": 1,
+      "message": "I think destructuring assignment should work here if you want to use it (not sure if it works in all of our toolchains though):\n\n for (auto\u0026 [k, v] : errorScopes)\n\nAlso, I think it can be const\u0026.\n\nCome to think of it, I guess this would also work in one other place where we use std::tie (WireMemoryTransferServiceTests).",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e9032e8_38d17cc7",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-29T23:04:59Z",
+      "side": 1,
+      "message": "ErrorScopeData",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 12
+      },
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57009cbe_b07c4fa9",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-08-29T23:04:59Z",
+      "side": 1,
+      "message": "Can be\n\n std::unique_ptr\u003cErrorScopeUserdata\u003e data{userdata};",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
