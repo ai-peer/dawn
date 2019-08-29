@@ -16,6 +16,24 @@
       "revId": "8580934a31f135b2f8b3840e37ce4761732ae41c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a321f31c_47c4685b",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-08-29T13:01:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f3824fb_bd084c05",
+      "revId": "8580934a31f135b2f8b3840e37ce4761732ae41c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
