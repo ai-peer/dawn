@@ -681,6 +681,7 @@ namespace dawn_native { namespace vulkan {
             descriptor.usage = dawn::BufferUsage::CopySrc | dawn::BufferUsage::MapWrite;
             std::unique_ptr<Buffer> srcBuffer =
                 std::make_unique<dawn_native::vulkan::Buffer>(device, &descriptor);
+            device->ConsumedError(srcBuffer->Initialize());
             uint8_t* clearBuffer = nullptr;
             device->ConsumedError(srcBuffer->MapAtCreation(&clearBuffer));
             std::fill(reinterpret_cast<uint32_t*>(clearBuffer),
