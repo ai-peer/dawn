@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2ef7c1a_ffa42d06",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T15:52:57Z",
+      "side": 1,
+      "message": "I\u0027m worried that this will allow a compromised renderer process to destroy devices before all the objects on it are freed. Right now every dawn_native object relies on the device being kept alive longer than itself.",
+      "revId": "d52ab295d71d9e3c11514cf1bf477957f62b0295",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
