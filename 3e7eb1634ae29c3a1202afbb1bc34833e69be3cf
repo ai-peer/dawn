@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d2ff53d1_f80d0593",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-08-29T11:47:56Z",
+      "side": 1,
+      "message": "Sorry for not catching this.",
+      "parentUuid": "fbfa5f66_763b0ba8",
+      "revId": "3e7eb1634ae29c3a1202afbb1bc34833e69be3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c39d4a60_ad279be1",
         "filename": "src/tests/end2end/VertexInputTests.cpp",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "3e7eb1634ae29c3a1202afbb1bc34833e69be3cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "282b8788_e884b073",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-08-29T11:47:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c39d4a60_ad279be1",
+      "revId": "3e7eb1634ae29c3a1202afbb1bc34833e69be3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
