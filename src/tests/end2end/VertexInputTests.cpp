@@ -518,3 +518,87 @@ DAWN_INSTANTIATE_TEST(VertexInputTest, D3D12Backend, MetalBackend, OpenGLBackend
 //  - Add checks for alignement of vertex buffers and attributes if needed
 //  - Check for attribute narrowing
 //  - Check that the input state and the pipeline vertex input types match
+
+class OptionalVertexInputTest : public DawnTest {
+  protected:
+    dawn::RenderPipeline CreateQuadPipeline(dawn::TextureFormat format) {
+        dawn::ShaderModule vsModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+            #version 450
+            const vec2 pos[6] = vec2[6](
+                vec2(-1.0f, -1.0f), vec2(-1.0f, 1.0f), vec2(1.0f, -1.0f),
+                vec2(1.0f, 1.0f), vec2(-1.0f, 1.0f), vec2(1.0f, -1.0f)
+            );
+            void main() {
+                gl_Position = vec4(pos[gl_VertexIndex], 0.5, 1.0);
+            })");
+
+        dawn::ShaderModule fsModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+            #version 450
+            layout(location = 0) out vec4 fragColor;
+            void main() {
+                fragColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);
+            })");
+
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.cVertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        descriptor.cColorStates[0]->format = format;
+
+        return device.CreateRenderPipeline(&descriptor);
+    }
+};
+
+// Test that vertex input is not required in render pipeline descriptor.
+TEST_P(OptionalVertexInputTest, Basic) {
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 100, 100);
+
+    dawn::ShaderModule vsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+            #version 450
+            const vec2 pos[6] = vec2[6](
+                vec2(-1.0f, -1.0f), vec2(-1.0f, 1.0f), vec2(1.0f, -1.0f),
+                vec2(1.0f, 1.0f), vec2(-1.0f, 1.0f), vec2(1.0f, -1.0f)
+            );
+            void main() {
+                gl_Position = vec4(pos[gl_VertexIndex], 0.5, 1.0);
+            })");
+
+    dawn::ShaderModule fsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+            #version 450
+            layout(location = 0) out vec4 fragColor;
+            void main() {
+                fragColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);
+            })");
+
+    utils::ComboRenderPipelineDescriptor descriptor(device);
+    descriptor.cVertexStage.module = vsModule;
+    descriptor.cFragmentStage.module = fsModule;
+    descriptor.vertexInput = nullptr;
+
+    dawn::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
+
+    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        dawn::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.Draw(6, 1, 0, 0);
+        pass.EndPass();
+    }
+
+    dawn::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 0, 99);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 99, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 99, 99);
+}
+
+DAWN_INSTANTIATE_TEST(OptionalVertexInputTest,
+                      D3D12Backend,
+                      MetalBackend,
+                      OpenGLBackend,
+                      VulkanBackend);
