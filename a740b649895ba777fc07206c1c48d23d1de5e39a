@@ -131,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "16c609dc_cf217200",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-29T21:01:00Z",
+      "side": 1,
+      "message": "this is probably still a problem with the dynamic uploader allocation failing, at which point should the error be consumed?",
+      "parentUuid": "898e099d_ba3eb7eb",
+      "revId": "a740b649895ba777fc07206c1c48d23d1de5e39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d04f347b_082b492b",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
