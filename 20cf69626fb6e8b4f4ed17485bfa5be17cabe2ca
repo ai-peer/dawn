@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "5597dc79_59d286be",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T19:55:26Z",
+      "side": 1,
+      "message": "Kai doesn\u0027t think we should restrict the order in this way and unnecessarily block operations. I guess we should bring it up in the group.",
+      "parentUuid": "bbf0ca45_1a98e053",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5b53e11_0cf50273",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -108,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "853fd977_e7998b14",
+        "filename": "src/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T19:55:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3690cec3_88dcfffa",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "096cd180_250dbf92",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 5
@@ -128,6 +164,30 @@
       "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66ed3450_5548310a",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T19:55:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "096cd180_250dbf92",
+      "range": {
+        "startLine": 58,
+        "startChar": 31,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -178,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "16efe7f7_9ad63652",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T19:55:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd9621a8_b25afc07",
+      "range": {
+        "startLine": 70,
+        "startChar": 17,
+        "endLine": 70,
+        "endChar": 30
+      },
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51f96f0c_dbc919ec",
         "filename": "src/dawn_wire/server/Server.h",
         "patchSetId": 5
@@ -192,6 +276,24 @@
       "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1125713_c42d1a54",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T19:55:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "51f96f0c_dbc919ec",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
