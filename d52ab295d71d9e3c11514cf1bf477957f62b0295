@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "84767a84_2193f9a5",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T16:30:53Z",
+      "side": 1,
+      "message": "Even with [1] there is going to be some command buffer API for Blink to destroy a device it created, and we need to handle the case where it is destoyed before child object. It just move the problem a bit later no?",
+      "parentUuid": "d5b1daa1_ede14e00",
+      "revId": "d52ab295d71d9e3c11514cf1bf477957f62b0295",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "011cced0_1301fa18",
         "filename": "src/dawn_wire/server/Server.cpp",
         "patchSetId": 1
