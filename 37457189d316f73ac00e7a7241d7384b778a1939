@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "ca7884bb_1809a5be",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-29T18:04:20Z",
+      "side": 1,
+      "message": "Since we\u0027re going to have an \u0027external object\u0027 descriptor anyways, what do you think of only having fields in the struct that cannot be determined from the object itself?  So things like TextureUsage will be in the struct but not width, height, miplevels, etc. Internally, Dawn would still make a DawnTextureDescriptor but it would be filled in from properties of the object it receives.",
+      "parentUuid": "22faa576_bcce4818",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "20995d61_0d5b9d08",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
