@@ -64,7 +64,7 @@ namespace dawn_native {
         // request.
         if (uploadHandle.mappedBuffer == nullptr) {
             // Compute the new max size (in powers of two to preserve alignment).
-            size_t newMaxSize = targetRingBuffer->GetSize() * 2;
+            size_t newMaxSize = targetRingBuffer->GetSize();
             while (newMaxSize < size) {
                 newMaxSize *= 2;
             }
