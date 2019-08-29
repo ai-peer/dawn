@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c68c398f_b01e7d3b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T08:09:39Z",
+      "side": 1,
+      "message": "Woa this is so much easier than in Vulkan :D",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8c42126a_811a5422",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -52,6 +69,70 @@
         "startChar": 8,
         "endLine": 322,
         "endChar": 72
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cfd2302_9511cc31",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T08:09:39Z",
+      "side": 1,
+      "message": "+1. Although for the clearing I think it might be useful to expose an API in DawnNative.h like:\n - bool IsTextureSubResourceInitialized(mipLevel, layer)\n - void SetTextureSubResourceInitialized(mipLevel, layer, bool initialized \u003d true);\n\nAnd then use it for the Vulkan backend too.",
+      "parentUuid": "20995d61_0d5b9d08",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 72
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2476955e_03a33dda",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T08:09:39Z",
+      "side": 1,
+      "message": "This could return the ID3D12Device directly instead of having it as an out parameter.",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0074e874_9e2e9e3c",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T08:09:39Z",
+      "side": 1,
+      "message": "nit: Do we expect other types of SharedHandle? Maybe it could be WrapTextureSharedHandle",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 51
       },
       "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -139,6 +220,23 @@
         "endLine": 187,
         "endChar": 30
       },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8c1d6ad_b6c1eba1",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-29T08:09:39Z",
+      "side": 1,
+      "message": "It would be nice to have rendering tests where the texture is written outside of Dawn and able to be read back through Dawn and vice-versa. Doesn\u0027t need to be in this CL though. You can look at the IOSurface or the more complex Vulkan tests for inspiration.",
       "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
