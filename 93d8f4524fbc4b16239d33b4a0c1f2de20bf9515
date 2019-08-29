@@ -16,6 +16,133 @@
       "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "847f52f1_fd8b74f6",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T22:22:18Z",
+      "side": 1,
+      "message": "The DynamicUploader manages a large region of memory and hands out smaller chunks of it.\n\nThe UploadHandle you get back is still the size you requested. See [1]",
+      "parentUuid": "2d25a47b_6224ff24",
+      "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85294b5b_6f310f52",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T22:22:18Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 75,
+        "startChar": 45,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02ebb3ca_9d0b98eb",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T22:22:18Z",
+      "side": 1,
+      "message": "I think the size of the buffer should really be the (rowPitch * height) instead of (width * height).\n\nThe |rowPitch| is computed at [2]",
+      "range": {
+        "startLine": 482,
+        "startChar": 13,
+        "endLine": 484,
+        "endChar": 60
+      },
+      "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6bf6d41_4d6da237",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T22:22:18Z",
+      "side": 1,
+      "message": "Natasha said:\n\u003e this is probably still a problem with the dynamic uploader allocation failing, at which point should the error be consumed?\n\nThis is okay now because we\u0027re using the TRY macros. They\u0027ll cause an early return from the function if there\u0027s an error.",
+      "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f274981_6d8c029f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T22:22:18Z",
+      "side": 1,
+      "message": "The DynamicUploader is essentially a big region of memory, and it will hand out smaller chunks at different offsets.\n\nThus, our buffer offset might not be 0 and we should pass |uploadHandle.startOffset| as well as the |rowPitch| here.",
+      "range": {
+        "startLine": 498,
+        "startChar": 74,
+        "endLine": 498,
+        "endChar": 81
+      },
+      "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "600f4795_ed7bbc0f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T22:22:18Z",
+      "side": 1,
+      "message": "[2] I think this should be Align(width / blockWidth * blockByteSize, kTextureRowPitchAlignment);",
+      "range": {
+        "startLine": 508,
+        "startChar": 24,
+        "endLine": 509,
+        "endChar": 56
+      },
+      "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
