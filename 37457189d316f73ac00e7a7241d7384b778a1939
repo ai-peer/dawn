@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c42126a_811a5422",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T00:40:11Z",
+      "side": 1,
+      "message": "Maybe we can split this validation function in two. The first part doesn\u0027t rely on having the resource so we can do it before OpenSharedHandle",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22faa576_bcce4818",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T00:40:11Z",
+      "side": 1,
+      "message": "nit: Also check DepthOrArraySize, MipLevels, DXGI_SAMPLE_DESC.Count are 1?",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20995d61_0d5b9d08",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T00:40:11Z",
+      "side": 1,
+      "message": "In the Vulkan backend we have a separate constructor which takes an ExternalImageDescriptor.\nExternalImageDescriptor has an |isCleared| boolean for controlling whether or not we set the content as initialized.\n\nThis descriptor is passed to WrapVulkanImage instead of the DawnTextureDescriptor. I suggest we do the same here. If Chrome knows the image is cleared, we need a way to tell Dawn so we don\u0027t clear it again.",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 72
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb65369f_58d7ecc5",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T00:40:11Z",
+      "side": 1,
+      "message": "nit: These could be factored as constants so they stay in sync with the descriptor sizes. And then at [1] we can do something like |kConstant + 1|",
+      "range": {
+        "startLine": 68,
+        "startChar": 25,
+        "endLine": 68,
+        "endChar": 27
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46a22069_021a8bbb",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T00:40:11Z",
+      "side": 1,
+      "message": "unit: newline to match to whitespace at the beginning of the namespace",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bb70cb0_cc8aa970",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T00:40:11Z",
+      "side": 1,
+      "message": "nit: D3D12ImageWrappingValidationTestBase. Probably could rename the base class too",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a9637ab_82dae2d0",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T00:40:11Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 187,
+        "startChar": 28,
+        "endLine": 187,
+        "endChar": 30
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
