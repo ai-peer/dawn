@@ -1019,9 +1019,9 @@ TEST_P(CompressedTextureBCFormatTest, LargeImageHeight) {
 // Test the workaround in the B2T copies when (bufferSize - bufferOffset < bytesPerImage *
 // copyExtent.depth) and copyExtent needs to be clamped.
 TEST_P(CompressedTextureBCFormatTest, LargeImageHeightAndClampedCopyExtent) {
-    // TODO(jiawei.shao@intel.com): find out why this test is flaky on Windows Intel Vulkan wire
+    // TODO(jiawei.shao@intel.com): find out why this test is flaky on Windows Intel Vulkan
     // bots.
-    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows() && UsesWire());
+    DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
 
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
