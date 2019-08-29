@@ -39,7 +39,7 @@ DawnPerfTestEnvironment::DawnPerfTestEnvironment(int argc, char** argv)
             continue;
         }
 
-        if (strcmp("--override-steps", argv[i]) == 0) {
+        if (strstr(argv[i], "--override-steps") != nullptr) {
             const char* value = strchr(argv[i], '=');
             if (value != nullptr) {
                 mOverrideStepsToRun = strtoul(value + 1, nullptr, 0);
