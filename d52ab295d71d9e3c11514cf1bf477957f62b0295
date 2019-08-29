@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "a392e307_d3d3149a",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-29T17:04:00Z",
+      "side": 1,
+      "message": "Okay I see your point now. Since we\u0027ll have to do some sort of tracking to know when it\u0027s safe to destroy the Server device, we might as well not have the reference/release in the wire?",
+      "parentUuid": "f393854c_2645240b",
+      "revId": "d52ab295d71d9e3c11514cf1bf477957f62b0295",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "011cced0_1301fa18",
         "filename": "src/dawn_wire/server/Server.cpp",
         "patchSetId": 1
