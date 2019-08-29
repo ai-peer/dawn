@@ -40,14 +40,14 @@ namespace dawn_wire { namespace server {
 
     class Server : public ServerBase {
       public:
-        Server(DawnDevice device,
-               const DawnProcTable& procs,
+        Server(const DawnProcTable& procs,
                CommandSerializer* serializer,
                MemoryTransferService* memoryTransferService);
         ~Server();
 
         const char* HandleCommands(const char* commands, size_t size);
 
+        bool InjectDevice(DawnDevice device, uint32_t id, uint32_t generation);
         bool InjectTexture(DawnTexture texture, uint32_t id, uint32_t generation);
 
       private:
@@ -66,7 +66,7 @@ namespace dawn_wire { namespace server {
         static void ForwardFenceCompletedValue(DawnFenceCompletionStatus status, void* userdata);
 
         // Error callbacks
-        void OnUncapturedError(DawnErrorType type, const char* message);
+        void OnUncapturedError(ObjectData<DawnDevice>*, DawnErrorType type, const char* message);
         void OnBufferMapReadAsyncCallback(DawnBufferMapAsyncStatus status,
                                           const void* ptr,
                                           uint64_t dataLength,

@@ -25,16 +25,16 @@ namespace dawn_wire {
         mImpl.reset();
     }
 
-    DawnDevice WireClient::GetDevice() const {
-        return mImpl->GetDevice();
-    }
-
     DawnProcTable WireClient::GetProcs() const {
         return client::GetProcs();
     }
 
     const char* WireClient::HandleCommands(const char* commands, size_t size) {
         return mImpl->HandleCommands(commands, size);
+    }
+
+    ReservedDevice WireClient::ReserveDevice() {
+        return mImpl->ReserveDevice();
     }
 
     ReservedTexture WireClient::ReserveTexture(DawnDevice device) {

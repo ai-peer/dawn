@@ -48,6 +48,11 @@ namespace dawn_wire { namespace server {
         BufferMapWriteState mapWriteState = BufferMapWriteState::Unmapped;
     };
 
+    template <>
+    struct ObjectData<DawnDevice> : public ObjectDataBase<DawnDevice> {
+        Server* server = nullptr;
+    };
+
     // Keeps track of the mapping between client IDs and backend objects.
     template <typename T>
     class KnownObjects {

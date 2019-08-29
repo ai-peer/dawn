@@ -34,14 +34,11 @@ namespace dawn_wire { namespace client {
         ~Client();
 
         const char* HandleCommands(const char* commands, size_t size);
+        ReservedDevice ReserveDevice();
         ReservedTexture ReserveTexture(DawnDevice device);
 
         void* GetCmdSpace(size_t size) {
             return mSerializer->GetCmdSpace(size);
-        }
-
-        DawnDevice GetDevice() const {
-            return reinterpret_cast<DawnDeviceImpl*>(mDevice);
         }
 
         MemoryTransferService* GetMemoryTransferService() const {
@@ -51,7 +48,6 @@ namespace dawn_wire { namespace client {
       private:
 #include "dawn_wire/client/ClientPrototypes_autogen.inc"
 
-        Device* mDevice = nullptr;
         CommandSerializer* mSerializer = nullptr;
         WireDeserializeAllocator mAllocator;
         MemoryTransferService* mMemoryTransferService = nullptr;

@@ -139,7 +139,6 @@ dawn::Device CreateCppDawnDevice() {
                 s2cBuf = new utils::TerribleCommandBuffer();
 
                 dawn_wire::WireServerDescriptor serverDesc = {};
-                serverDesc.device = backendDevice;
                 serverDesc.procs = &backendProcs;
                 serverDesc.serializer = s2cBuf;
 
@@ -150,12 +149,15 @@ dawn::Device CreateCppDawnDevice() {
                 clientDesc.serializer = c2sBuf;
 
                 wireClient = new dawn_wire::WireClient(clientDesc);
-                DawnDevice clientDevice = wireClient->GetDevice();
                 DawnProcTable clientProcs = wireClient->GetProcs();
+
+                dawn_wire::ReservedDevice reservation = wireClient->ReserveDevice();
+                wireServer->InjectDevice(backendDevice, reservation.id, reservation.generation);
+
                 s2cBuf->SetHandler(wireClient);
 
                 procs = clientProcs;
-                cDevice = clientDevice;
+                cDevice = reservation.device;
             }
             break;
     }

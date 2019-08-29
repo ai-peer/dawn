@@ -18,7 +18,9 @@
 
 namespace dawn_wire { namespace client {
 
-    bool Client::DoDeviceUncapturedErrorCallback(DawnErrorType errorType, const char* message) {
+    bool Client::DoDeviceUncapturedErrorCallback(Device* device,
+                                                 DawnErrorType errorType,
+                                                 const char* message) {
         switch (errorType) {
             case DAWN_ERROR_TYPE_NO_ERROR:
             case DAWN_ERROR_TYPE_VALIDATION:
@@ -29,7 +31,12 @@ namespace dawn_wire { namespace client {
             default:
                 return false;
         }
-        mDevice->HandleError(errorType, message);
+        // The device might have been deleted or recreated so this isn't an error.
+        if (device == nullptr) {
+            return true;
+        }
+
+        device->HandleError(errorType, message);
         return true;
     }
 

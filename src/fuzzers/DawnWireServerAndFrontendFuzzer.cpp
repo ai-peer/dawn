@@ -74,11 +74,11 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
 
     DevNull devNull;
     dawn_wire::WireServerDescriptor serverDesc = {};
-    serverDesc.device = nullDevice.Get();
     serverDesc.procs = &procs;
     serverDesc.serializer = &devNull;
 
     std::unique_ptr<dawn_wire::WireServer> wireServer(new dawn_wire::WireServer(serverDesc));
+    wireServer->InjectDevice(nullDevice.Get(), 1, 0);
 
     wireServer->HandleCommands(reinterpret_cast<const char*>(data), size);
 

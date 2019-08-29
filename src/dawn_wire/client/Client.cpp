@@ -19,7 +19,6 @@ namespace dawn_wire { namespace client {
 
     Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
         : ClientBase(),
-          mDevice(DeviceAllocator().New(this)->object.get()),
           mSerializer(serializer),
           mMemoryTransferService(memoryTransferService) {
         if (mMemoryTransferService == nullptr) {
@@ -29,8 +28,16 @@ namespace dawn_wire { namespace client {
         }
     }
 
-    Client::~Client() {
-        DeviceAllocator().Free(mDevice);
+    Client::~Client() = default;
+
+    ReservedDevice Client::ReserveDevice() {
+        ObjectAllocator<Device>::ObjectAndSerial* allocation = DeviceAllocator().New(this);
+
+        ReservedDevice result;
+        result.device = reinterpret_cast<DawnDevice>(allocation->object.get());
+        result.id = allocation->object->id;
+        result.generation = allocation->serial;
+        return result;
     }
 
     ReservedTexture Client::ReserveTexture(DawnDevice cDevice) {

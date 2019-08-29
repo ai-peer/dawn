@@ -40,15 +40,12 @@ void WireTest::SetUp() {
     DawnDevice mockDevice;
     api.GetProcTableAndDevice(&mockProcs, &mockDevice);
 
-    // This SetCallback call cannot be ignored because it is done as soon as we start the server
-    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(_, _, _)).Times(Exactly(1));
     SetupIgnoredCallExpectations();
 
     mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
     mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>(mWireServer.get());
 
     WireServerDescriptor serverDesc = {};
-    serverDesc.device = mockDevice;
     serverDesc.procs = &mockProcs;
     serverDesc.serializer = mS2cBuf.get();
     serverDesc.memoryTransferService = GetServerMemoryTransferService();
@@ -63,9 +60,16 @@ void WireTest::SetUp() {
     mWireClient.reset(new WireClient(clientDesc));
     mS2cBuf->SetHandler(mWireClient.get());
 
-    device = mWireClient->GetDevice();
     DawnProcTable clientProcs = mWireClient->GetProcs();
     dawnSetProcs(&clientProcs);
+
+    dawn_wire::ReservedDevice reservation = mWireClient->ReserveDevice();
+
+    EXPECT_CALL(api, DeviceReference(mockDevice)).Times(1);
+    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(mockDevice, _, _)).Times(1);
+    mWireServer->InjectDevice(mockDevice, reservation.id, reservation.generation);
+
+    device = reservation.device;
 
     apiDevice = mockDevice;
 }
@@ -102,6 +106,8 @@ dawn_wire::WireClient* WireTest::GetWireClient() {
 }
 
 void WireTest::DeleteServer() {
+    // The injected wire device is released.
+    EXPECT_CALL(api, DeviceRelease(apiDevice)).Times(1);
     mWireServer = nullptr;
 }
 

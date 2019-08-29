@@ -14,15 +14,24 @@
 
 #include "dawn_wire/server/Server.h"
 
+#include "common/Assert.h"
+
 namespace dawn_wire { namespace server {
 
+    // static
     void Server::ForwardUncapturedError(DawnErrorType type, const char* message, void* userdata) {
-        auto server = static_cast<Server*>(userdata);
-        server->OnUncapturedError(type, message);
+        auto* device = static_cast<ObjectData<DawnDevice>*>(userdata);
+        ASSERT(device->server != nullptr);
+        device->server->OnUncapturedError(device, type, message);
     }
 
-    void Server::OnUncapturedError(DawnErrorType type, const char* message) {
+    void Server::OnUncapturedError(ObjectData<DawnDevice>* device,
+                                   DawnErrorType type,
+                                   const char* message) {
+        ObjectId deviceId = DeviceObjectIdTable().Get(device->handle);
+
         ReturnDeviceUncapturedErrorCallbackCmd cmd;
+        cmd.device = ObjectHandle{deviceId, device->serial};
         cmd.type = type;
         cmd.message = message;
 

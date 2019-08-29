@@ -407,12 +407,6 @@ namespace dawn_wire { namespace client {
         cmd.Serialize(allocatedBuffer, *fence->device->GetClient());
     }
 
-    void ClientDeviceReference(DawnDevice) {
-    }
-
-    void ClientDeviceRelease(DawnDevice) {
-    }
-
     void ClientDeviceSetUncapturedErrorCallback(DawnDevice cSelf,
                                                 DawnErrorCallback callback,
                                                 void* userdata) {

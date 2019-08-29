@@ -18,8 +18,7 @@
 namespace dawn_wire {
 
     WireServer::WireServer(const WireServerDescriptor& descriptor)
-        : mImpl(new server::Server(descriptor.device,
-                                   *descriptor.procs,
+        : mImpl(new server::Server(*descriptor.procs,
                                    descriptor.serializer,
                                    descriptor.memoryTransferService)) {
     }
@@ -30,6 +29,10 @@ namespace dawn_wire {
 
     const char* WireServer::HandleCommands(const char* commands, size_t size) {
         return mImpl->HandleCommands(commands, size);
+    }
+
+    bool WireServer::InjectDevice(DawnDevice device, uint32_t id, uint32_t generation) {
+        return mImpl->InjectDevice(device, id, generation);
     }
 
     bool WireServer::InjectTexture(DawnTexture texture, uint32_t id, uint32_t generation) {

@@ -98,7 +98,6 @@ namespace dawn_wire { namespace client {
         uint32_t mCurrentId = 1;
         std::vector<uint32_t> mFreeIds;
         std::vector<ObjectAndSerial> mObjects;
-        Device* mDevice;
     };
 }}  // namespace dawn_wire::client
 

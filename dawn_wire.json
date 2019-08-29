@@ -67,6 +67,7 @@
             { "name": "status", "type": "uint32_t" }
         ],
         "device uncaptured error callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
             { "name": "type", "type": "error type"},
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
         ],
@@ -105,6 +106,7 @@
             "QueueSignal"
         ],
         "server_reverse_lookup_objects": [
+            "Device",
             "Fence"
         ]
     }

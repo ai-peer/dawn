@@ -26,6 +26,12 @@ namespace dawn_wire {
         class MemoryTransferService;
     }
 
+    struct ReservedDevice {
+        DawnDevice device;
+        uint32_t id;
+        uint32_t generation;
+    };
+
     struct ReservedTexture {
         DawnTexture texture;
         uint32_t id;
@@ -42,10 +48,10 @@ namespace dawn_wire {
         WireClient(const WireClientDescriptor& descriptor);
         ~WireClient();
 
-        DawnDevice GetDevice() const;
         DawnProcTable GetProcs() const;
         const char* HandleCommands(const char* commands, size_t size) override final;
 
+        ReservedDevice ReserveDevice();
         ReservedTexture ReserveTexture(DawnDevice device);
 
       private:

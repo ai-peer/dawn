@@ -27,7 +27,6 @@ namespace dawn_wire {
     }
 
     struct DAWN_WIRE_EXPORT WireServerDescriptor {
-        DawnDevice device;
         const DawnProcTable* procs;
         CommandSerializer* serializer;
         server::MemoryTransferService* memoryTransferService = nullptr;
@@ -40,6 +39,7 @@ namespace dawn_wire {
 
         const char* HandleCommands(const char* commands, size_t size) override final;
 
+        bool InjectDevice(DawnDevice device, uint32_t id, uint32_t generation);
         bool InjectTexture(DawnTexture texture, uint32_t id, uint32_t generation);
 
       private:

@@ -61,32 +61,30 @@ namespace dawn_wire { namespace client {
             {% endif %}
         {% endfor %}
 
-        {% if not type.name.canonical_case() == "device" %}
-            //* When an object's refcount reaches 0, notify the server side of it and delete it.
-            void Client{{as_MethodSuffix(type.name, Name("release"))}}({{cType}} cObj) {
-                {{Type}}* obj = reinterpret_cast<{{Type}}*>(cObj);
-                obj->refcount --;
+        //* When an object's refcount reaches 0, notify the server side of it and delete it.
+        void Client{{as_MethodSuffix(type.name, Name("release"))}}({{cType}} cObj) {
+            {{Type}}* obj = reinterpret_cast<{{Type}}*>(cObj);
+            obj->refcount --;
 
-                if (obj->refcount > 0) {
-                    return;
-                }
-
-                DestroyObjectCmd cmd;
-                cmd.objectType = ObjectType::{{type.name.CamelCase()}};
-                cmd.objectId = obj->id;
-
-                size_t requiredSize = cmd.GetRequiredSize();
-                char* allocatedBuffer = static_cast<char*>(obj->device->GetClient()->GetCmdSpace(requiredSize));
-                cmd.Serialize(allocatedBuffer);
-
-                obj->device->GetClient()->{{type.name.CamelCase()}}Allocator().Free(obj);
+            if (obj->refcount > 0) {
+                return;
             }
 
-            void Client{{as_MethodSuffix(type.name, Name("reference"))}}({{cType}} cObj) {
-                {{Type}}* obj = reinterpret_cast<{{Type}}*>(cObj);
-                obj->refcount ++;
-            }
-        {% endif %}
+            DestroyObjectCmd cmd;
+            cmd.objectType = ObjectType::{{type.name.CamelCase()}};
+            cmd.objectId = obj->id;
+
+            size_t requiredSize = cmd.GetRequiredSize();
+            char* allocatedBuffer = static_cast<char*>(obj->device->GetClient()->GetCmdSpace(requiredSize));
+            cmd.Serialize(allocatedBuffer);
+
+            obj->device->GetClient()->{{type.name.CamelCase()}}Allocator().Free(obj);
+        }
+
+        void Client{{as_MethodSuffix(type.name, Name("reference"))}}({{cType}} cObj) {
+            {{Type}}* obj = reinterpret_cast<{{Type}}*>(cObj);
+            obj->refcount ++;
+        }
     {% endfor %}
 
     //* Some commands don't have a custom wire format, but need to be handled manually to update
