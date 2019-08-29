@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d25a47b_6224ff24",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-29T21:35:26Z",
+      "side": 1,
+      "message": "if size was validated to be already aligned (line 45), why did we double it here? \n\nnot sure if my buffer size was calculated wrong or why this doubling of the size was causing my test to fail, any ideas? Thanks.",
+      "revId": "93d8f4524fbc4b16239d33b4a0c1f2de20bf9515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
