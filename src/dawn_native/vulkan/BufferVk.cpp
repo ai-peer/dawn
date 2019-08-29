@@ -16,6 +16,8 @@
 
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
+#include "dawn_native/vulkan/MemoryResourceAllocatorVk.h"
+#include "dawn_native/vulkan/ResourceMemoryVk.h"
 
 #include <cstring>
 
@@ -113,6 +115,9 @@ namespace dawn_native { namespace vulkan {
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
         : BufferBase(device, descriptor) {
+    }
+
+    MaybeError Buffer::Initialize() {
         VkBufferCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
         createInfo.pNext = nullptr;
@@ -125,6 +130,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.queueFamilyIndexCount = 0;
         createInfo.pQueueFamilyIndices = 0;
 
+        Device* device = ToBackend(GetDevice());
         if (device->fn.CreateBuffer(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
             VK_SUCCESS) {
             ASSERT(false);
@@ -135,16 +141,15 @@ namespace dawn_native { namespace vulkan {
 
         bool requestMappable =
             (GetUsage() & (dawn::BufferUsage::MapRead | dawn::BufferUsage::MapWrite)) != 0;
-        if (!device->GetMemoryAllocator()->Allocate(requirements, requestMappable,
-                                                    &mMemoryAllocation)) {
-            ASSERT(false);
-        }
+        DAWN_TRY_ASSIGN(mMemoryAllocation, device->AllocateMemory(requirements, requestMappable));
 
         if (device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
-                                        mMemoryAllocation.GetMemory(),
-                                        mMemoryAllocation.GetMemoryOffset()) != VK_SUCCESS) {
-            ASSERT(false);
+                                        ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
+                                        mMemoryAllocation.GetOffset()) != VK_SUCCESS) {
+            return DAWN_DEVICE_LOST_ERROR("Unable to attach memory to the buffer.");
         }
+
+        return {};
     }
 
     Buffer::~Buffer() {
@@ -243,7 +248,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Buffer::DestroyImpl() {
-        ToBackend(GetDevice())->GetMemoryAllocator()->Free(&mMemoryAllocation);
+        ToBackend(GetDevice())->DeallocateMemory(mMemoryAllocation);
 
         if (mHandle != VK_NULL_HANDLE) {
             ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
