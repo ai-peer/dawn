@@ -1031,7 +1031,7 @@
             {"name": "layout", "type": "pipeline layout"},
             {"name": "vertex stage", "type": "pipeline stage descriptor", "annotation": "const*"},
             {"name": "fragment stage", "type": "pipeline stage descriptor", "annotation": "const*", "optional": true},
-            {"name": "vertex input", "type": "vertex input descriptor", "annotation": "const*"},
+            {"name": "vertex input", "type": "vertex input descriptor", "annotation": "const*", "optional": true},
             {"name": "primitive topology", "type": "primitive topology"},
             {"name": "rasterization state", "type": "rasterization state descriptor", "annotation": "const*", "optional": true},
             {"name": "sample count", "type": "uint32_t", "default": "1"},

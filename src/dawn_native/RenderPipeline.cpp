@@ -267,17 +267,16 @@ namespace dawn_native {
 
         DAWN_TRY(device->ValidateObject(descriptor->layout));
 
-        if (descriptor->vertexInput == nullptr) {
-            return DAWN_VALIDATION_ERROR("Input state must not be null");
-        }
-
         // TODO(crbug.com/dawn/136): Support vertex-only pipelines.
         if (descriptor->fragmentStage == nullptr) {
             return DAWN_VALIDATION_ERROR("Null fragment stage is not supported (yet)");
         }
 
         std::bitset<kMaxVertexAttributes> attributesSetMask;
-        DAWN_TRY(ValidateVertexInputDescriptor(descriptor->vertexInput, &attributesSetMask));
+        if (descriptor->vertexInput) {
+            DAWN_TRY(ValidateVertexInputDescriptor(descriptor->vertexInput, &attributesSetMask));
+        }
+
         DAWN_TRY(ValidatePrimitiveTopology(descriptor->primitiveTopology));
         DAWN_TRY(ValidatePipelineStageDescriptor(device, descriptor->vertexStage,
                                                  descriptor->layout, SingleShaderStage::Vertex));
@@ -353,7 +352,6 @@ namespace dawn_native {
         : PipelineBase(device,
                        descriptor->layout,
                        dawn::ShaderStage::Vertex | dawn::ShaderStage::Fragment),
-          mVertexInput(*descriptor->vertexInput),
           mAttachmentState(device->GetOrCreateAttachmentState(descriptor)),
           mPrimitiveTopology(descriptor->primitiveTopology),
           mSampleMask(descriptor->sampleMask),
@@ -363,6 +361,13 @@ namespace dawn_native {
           mFragmentModule(descriptor->fragmentStage->module),
           mFragmentEntryPoint(descriptor->fragmentStage->entryPoint),
           mIsBlueprint(blueprint) {
+
+        if (descriptor->vertexInput != nullptr) {
+            mVertexInput = *descriptor->vertexInput;
+        } else {
+            mVertexInput = VertexInputDescriptor();
+        }
+
         for (uint32_t slot = 0; slot < mVertexInput.bufferCount; ++slot) {
             if (mVertexInput.buffers[slot].attributeCount == 0) {
                 continue;
