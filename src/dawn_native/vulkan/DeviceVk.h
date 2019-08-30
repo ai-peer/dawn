@@ -20,6 +20,7 @@
 #include "common/Serial.h"
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/ResourceMemoryAllocation.h"
 #include "dawn_native/vulkan/CommandRecordingContext.h"
 #include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/VulkanFunctions.h"
@@ -90,6 +91,11 @@ namespace dawn_native { namespace vulkan {
                                            BufferBase* destination,
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
+
+        ResultOrError<ResourceMemoryAllocation> AllocateMemory(VkMemoryRequirements requirements,
+                                                               bool mappable);
+
+        void DeallocateMemory(ResourceMemoryAllocation& allocation);
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(

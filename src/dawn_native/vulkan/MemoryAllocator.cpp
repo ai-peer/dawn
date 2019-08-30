@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2019 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,29 +16,12 @@
 
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
+#include "dawn_native/vulkan/ResourceMemoryVk.h"
+#include "dawn_native/vulkan/VulkanError.h"
 
 namespace dawn_native { namespace vulkan {
 
-    DeviceMemoryAllocation::~DeviceMemoryAllocation() {
-        ASSERT(mMemory == VK_NULL_HANDLE);
-    }
-
-    VkDeviceMemory DeviceMemoryAllocation::GetMemory() const {
-        return mMemory;
-    }
-
-    size_t DeviceMemoryAllocation::GetMemoryOffset() const {
-        return mOffset;
-    }
-
-    uint8_t* DeviceMemoryAllocation::GetMappedPointer() const {
-        return mMappedPointer;
-    }
-
     MemoryAllocator::MemoryAllocator(Device* device) : mDevice(device) {
-    }
-
-    MemoryAllocator::~MemoryAllocator() {
     }
 
     int MemoryAllocator::FindBestTypeIndex(VkMemoryRequirements requirements, bool mappable) {
@@ -94,15 +77,15 @@ namespace dawn_native { namespace vulkan {
         return bestType;
     }
 
-    bool MemoryAllocator::Allocate(VkMemoryRequirements requirements,
-                                   bool mappable,
-                                   DeviceMemoryAllocation* allocation) {
+    ResultOrError<ResourceMemoryAllocation> MemoryAllocator::Allocate(
+        VkMemoryRequirements requirements,
+        bool mappable) {
         int bestType = FindBestTypeIndex(requirements, mappable);
 
-        // TODO(cwallez@chromium.org): I think the Vulkan spec guarantees this should never happen
+        // TODO(cwallez@chromium.org): I think the Vulkan spec guarantees this should never
+        // happen
         if (bestType == -1) {
-            ASSERT(false);
-            return false;
+            return DAWN_DEVICE_LOST_ERROR("Unable to find memory of requirements.");
         }
 
         VkMemoryAllocateInfo allocateInfo;
@@ -112,33 +95,24 @@ namespace dawn_native { namespace vulkan {
         allocateInfo.memoryTypeIndex = static_cast<uint32_t>(bestType);
 
         VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
-        if (mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo, nullptr,
-                                       &allocatedMemory) != VK_SUCCESS) {
-            return false;
-        }
+        DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
+                                                           nullptr, &allocatedMemory),
+                                "vkAllocateMemory"));
 
         void* mappedPointer = nullptr;
         if (mappable) {
-            if (mDevice->fn.MapMemory(mDevice->GetVkDevice(), allocatedMemory, 0, requirements.size,
-                                      0, &mappedPointer) != VK_SUCCESS) {
-                return false;
-            }
+            DAWN_TRY(CheckVkSuccess(mDevice->fn.MapMemory(mDevice->GetVkDevice(), allocatedMemory,
+                                                          0, requirements.size, 0, &mappedPointer),
+                                    "vkMapMemory"));
         }
 
-        allocation->mMemory = allocatedMemory;
-        allocation->mOffset = 0;
-        allocation->mMappedPointer = static_cast<uint8_t*>(mappedPointer);
-
-        return true;
+        return ResourceMemoryAllocation(/*offset*/ 0, new ResourceMemory(allocatedMemory),
+                                        AllocationMethod::kDirect,
+                                        static_cast<uint8_t*>(mappedPointer));
     }
 
-    void MemoryAllocator::Free(DeviceMemoryAllocation* allocation) {
-        mDevice->GetFencedDeleter()->DeleteWhenUnused(allocation->mMemory);
-        allocation->mMemory = VK_NULL_HANDLE;
-        allocation->mOffset = 0;
-        allocation->mMappedPointer = nullptr;
-    }
-
-    void MemoryAllocator::Tick(Serial) {
+    void MemoryAllocator::Deallocate(ResourceMemoryAllocation& allocation) {
+        mDevice->GetFencedDeleter()->DeleteWhenUnused(
+            ToBackend(allocation.GetResourceHeap())->GetMemory());
     }
 }}  // namespace dawn_native::vulkan
