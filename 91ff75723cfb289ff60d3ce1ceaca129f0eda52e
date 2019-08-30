@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bec8846e_660a66c4",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T22:21:25Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "84160be0_405c026d",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "91ff75723cfb289ff60d3ce1ceaca129f0eda52e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2c4e358_c19acda3",
         "filename": "src/dawn_native/vulkan/MemoryResourceAllocatorVk.cpp",
         "patchSetId": 6
@@ -39,6 +63,24 @@
       "revId": "91ff75723cfb289ff60d3ce1ceaca129f0eda52e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54356ab7_7096a757",
+        "filename": "src/dawn_native/vulkan/MemoryResourceAllocatorVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T22:21:25Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e2c4e358_c19acda3",
+      "revId": "91ff75723cfb289ff60d3ce1ceaca129f0eda52e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
