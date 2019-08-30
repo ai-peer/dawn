@@ -286,6 +286,30 @@
     },
     {
       "key": {
+        "uuid": "2afdf0c6_58251d62",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-30T15:32:34Z",
+      "side": 1,
+      "message": "I think you\u0027ve covered it. If we move the clearing stuff as Corentin suggested, then we don\u0027t need the extra descriptor.",
+      "parentUuid": "f5d54b17_302fa7b7",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 72
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2476955e_03a33dda",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 5
