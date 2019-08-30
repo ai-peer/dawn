@@ -174,6 +174,24 @@
       "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84c27fae_ea081706",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T19:56:23Z",
+      "side": 1,
+      "message": "To clarify further - the intent is to eventually do as suggested; however, there is a substantial amount of error handling required for textures (vs buffers). Rather then try and do this all at once, I would prefer to break it up into a follow-up CL and have this CL follow the recent D3D changes (no textures there either, yet).\n\nAs a consequence, there would be two allocators (old and new) until everything moves to the new one then we can safely delete the old one.",
+      "parentUuid": "23b95120_aa0c3143",
+      "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
