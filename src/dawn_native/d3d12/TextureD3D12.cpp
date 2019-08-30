@@ -482,7 +482,10 @@ namespace dawn_native { namespace d3d12 {
             uint32_t rowPitch =
                 Align((GetSize().width / GetFormat().blockWidth) * GetFormat().blockByteSize,
                       kTextureRowPitchAlignment);
-            uint32_t bufferSize = rowPitch * (GetSize().height / GetFormat().blockHeight);
+            uint64_t bufferSize = rowPitch * (GetSize().height / GetFormat().blockHeight);
+            if (bufferSize > std::numeric_limits<uint32_t>::max()) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
+            }
             DynamicUploader* uploader = nullptr;
             DAWN_TRY_ASSIGN(uploader, device->GetDynamicUploader());
             UploadHandle uploadHandle;
