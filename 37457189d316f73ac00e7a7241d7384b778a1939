@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "8f44a890_e3edd3df",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-30T01:40:55Z",
+      "side": 1,
+      "message": "On second thought, using the resource itself means we now have to maintain a parallel DXGI_FORMAT to Dawn format lookup table. I\u0027ll keep using the DawnTextureDescriptor directly for now.",
+      "parentUuid": "2b4956f4_94fdf9a6",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "20995d61_0d5b9d08",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -202,6 +220,30 @@
     },
     {
       "key": {
+        "uuid": "8309cb28_06dfb3f2",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-30T01:40:55Z",
+      "side": 1,
+      "message": "Any reason why we can\u0027t keep using regular parameters for this like the Metal backend does?",
+      "parentUuid": "92d4df0d_3a018337",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 72
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2476955e_03a33dda",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 5
@@ -234,6 +276,24 @@
       "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "404dcf47_4eb9fe4d",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-30T01:40:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f6cf3b9_331a47f8",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -407,6 +467,30 @@
       "side": 1,
       "message": "Blame Corentin :) Although the name IOSurface implies it\u0027s a texture whereas D3D12Resource doesn\u0027t.",
       "parentUuid": "84105317_8f87818a",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "646fd2b6_f67aaadd",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-30T01:40:55Z",
+      "side": 1,
+      "message": "Since we\u0027re eventually going to also wrap D3D12Resources directly, I prefer the current name for the base class. I\u0027ll rename the subclass D3D12SharedHandleValidationTest.",
+      "parentUuid": "3f10ec7a_d3481ad6",
       "range": {
         "startLine": 112,
         "startChar": 6,
