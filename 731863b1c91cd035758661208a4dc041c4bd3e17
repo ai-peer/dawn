@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cb496002_e04ea7c7",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T18:08:08Z",
+      "side": 1,
+      "message": "Done. Note: need to follow-up on properly returning OOM errors.",
+      "parentUuid": "14e9399a_2132c032",
+      "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "323b6ad4_b5efeefb",
         "filename": "src/dawn_native/vulkan/DeviceVk.h",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae2e6ea3_fab8dfb7",
+        "filename": "src/dawn_native/vulkan/DeviceVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T18:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "323b6ad4_b5efeefb",
+      "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "55cbe85b_38bb5535",
+        "filename": "src/dawn_native/vulkan/MemoryResourceAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T18:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c052e455_dbdc3642",
+      "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e3fec58_139e7ae8",
         "filename": "src/dawn_native/vulkan/StagingBufferVk.cpp",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "4da95fe5_797a1ddc",
+        "filename": "src/dawn_native/vulkan/StagingBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T18:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e3fec58_139e7ae8",
+      "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b21628bb_298395b9",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 3
@@ -81,6 +153,24 @@
       "writtenOn": "2019-08-30T08:49:29Z",
       "side": 1,
       "message": "Note that eventually such ComsumedError should propagate all the way to the top.\n\nAlso I thought in a review we made this buffer use a Ref\u003c\u003e and not a unique_ptr.\n\nI think this is where Rafael\u0027s earlier suggestion of a static Create function makes sense because it could return ResultOrError\u003cBuffer*\u003e and would be easy to DAWN_TRY.",
+      "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23b95120_aa0c3143",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-08-30T18:08:08Z",
+      "side": 1,
+      "message": "+1. OK to defer to follow-up CL?",
+      "parentUuid": "b21628bb_298395b9",
       "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
