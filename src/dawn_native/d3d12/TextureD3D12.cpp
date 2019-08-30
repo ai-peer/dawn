@@ -479,10 +479,13 @@ namespace dawn_native { namespace d3d12 {
         } else {
             // TODO(natlee@microsoft.com): test compressed textures are cleared
             // create temp buffer with clear color to copy to the texture image
-            uint32_t rowPitch =
+            uint64_t rowPitch =
                 Align((GetSize().width / GetFormat().blockWidth) * GetFormat().blockByteSize,
                       kTextureRowPitchAlignment);
             uint32_t bufferSize = rowPitch * (GetSize().height / GetFormat().blockHeight);
+            if (bufferSize > std::numeric_limits<uint32_t>::max()) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
+            }
             DynamicUploader* uploader = nullptr;
             DAWN_TRY_ASSIGN(uploader, device->GetDynamicUploader());
             UploadHandle uploadHandle;
