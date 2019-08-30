@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "2aa433c8_8daf76ea",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:02:43Z",
+      "side": 1,
+      "message": "SGTM, and keeping the texture descriptor at the API level means that the user knows exactly what kind of DawnTexture they will get, and makes it so we don\u0027t have to build a descriptor internally for the state-tracking in TextureBase (that may or may not match what users expect).",
+      "parentUuid": "8f44a890_e3edd3df",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "20995d61_0d5b9d08",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -244,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "f5d54b17_302fa7b7",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:02:43Z",
+      "side": 1,
+      "message": "That\u0027s probably ok, right now this CL makes swapchain images not lazy cleared but it\u0027s probably ok. D3D12 and Metal are simpler and more consistent in their data-types so it\u0027s ok to use the same constructor for swapchains and external images I think. Austin did I miss something?",
+      "parentUuid": "8309cb28_06dfb3f2",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 72
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2476955e_03a33dda",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 5
@@ -291,6 +333,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9f6cf3b9_331a47f8",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ed4ab9c_92011fe0",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:02:43Z",
+      "side": 1,
+      "message": "note that you can mark comments as resolved directly with the small checkbox.\n\nWe could return a ComPtr in D3D12Backend.h if we wanted to I think. That said I\u0027m not sure how returning by pointer force the user to take a reference more than returning the same reference via a regular return value.",
+      "parentUuid": "404dcf47_4eb9fe4d",
       "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
@@ -503,6 +563,30 @@
     },
     {
       "key": {
+        "uuid": "d3fe94c8_a343cb2a",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:02:43Z",
+      "side": 1,
+      "message": "Why blame me :(, ^^\n\nSame concern as Austin though if we plan on wrapping more than one type of SharedHandle. Still kind of a nit.\n\nAlso if you find naming in places you think is bad, feel free to drive-by fix!",
+      "parentUuid": "646fd2b6_f67aaadd",
+      "range": {
+        "startLine": 112,
+        "startChar": 6,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a9637ab_82dae2d0",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 5
@@ -555,6 +639,24 @@
       "side": 1,
       "message": "Yes, I saw the IOSurface and Vulkan tests. I\u0027ll add these tests for the D3D12 backend when I add keyed shared mutex support. The tests will be flaky without them.",
       "parentUuid": "d8c1d6ad_b6c1eba1",
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "acb555d4_bdfe285f",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:02:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5d3c296_fb145c5a",
       "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
