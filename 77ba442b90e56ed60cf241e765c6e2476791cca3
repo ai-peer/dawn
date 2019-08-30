@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40de0c05_461b53a8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:41:16Z",
+      "side": 1,
+      "message": "Eventually these ConsumedError should be removed to bubble all the way up to Queue::SubmitInternal",
+      "revId": "77ba442b90e56ed60cf241e765c6e2476791cca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35caebf5_e0c7731c",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:41:16Z",
+      "side": 1,
+      "message": "no need to pass primitive datatypes by const\u0026",
+      "range": {
+        "startLine": 59,
+        "startChar": 21,
+        "endLine": 59,
+        "endChar": 23
+      },
+      "revId": "77ba442b90e56ed60cf241e765c6e2476791cca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
