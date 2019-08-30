@@ -20,7 +20,9 @@
 #include "dawn_native/vulkan/CommandRecordingContext.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
+#include "dawn_native/vulkan/ResourceMemoryVk.h"
 #include "dawn_native/vulkan/UtilsVulkan.h"
+#include "dawn_native/vulkan/VulkanError.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -392,6 +394,9 @@ namespace dawn_native { namespace vulkan {
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
         : TextureBase(device, descriptor, TextureState::OwnedInternal) {
+    }
+
+    MaybeError Texture::Initialize() {
         // Create the Vulkan image "container". We don't need to check that the format supports the
         // combination of sample, usage etc. because validation should have been done in the Dawn
         // frontend already based on the minimum supported formats in the Vulkan spec
@@ -412,6 +417,8 @@ namespace dawn_native { namespace vulkan {
         createInfo.pQueueFamilyIndices = nullptr;
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
+        Device* device = ToBackend(GetDevice());
+
         ASSERT(IsSampleCountSupported(device, createInfo));
 
         if (GetArrayLayers() >= 6 && GetSize().width == GetSize().height) {
@@ -423,28 +430,28 @@ namespace dawn_native { namespace vulkan {
         // also required for the implementation of robust resource initialization.
         createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
-        if (device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
-            VK_SUCCESS) {
-            ASSERT(false);
-        }
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle),
+            "vkCreateImage"));
 
         // Create the image memory and associate it with the container
         VkMemoryRequirements requirements;
         device->fn.GetImageMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
 
-        if (!device->GetMemoryAllocator()->Allocate(requirements, false, &mMemoryAllocation)) {
-            ASSERT(false);
-        }
+        DAWN_TRY_ASSIGN(mMemoryAllocation, device->AllocateMemory(requirements, false));
 
-        if (device->fn.BindImageMemory(device->GetVkDevice(), mHandle,
-                                       mMemoryAllocation.GetMemory(),
-                                       mMemoryAllocation.GetMemoryOffset()) != VK_SUCCESS) {
-            ASSERT(false);
-        }
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.BindImageMemory(device->GetVkDevice(), mHandle,
+                                       ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
+                                       mMemoryAllocation.GetOffset()),
+            "vkBindBufferMemory"));
+
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
             ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(), 0, GetNumMipLevels(),
                          0, GetArrayLayers(), TextureBase::ClearValue::NonZero);
         }
+
+        return {};
     }
 
     // With this constructor, the lifetime of the resource is externally managed.
@@ -549,11 +556,11 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
 
         // If we own the resource, release it.
-        if (mMemoryAllocation.GetMemory() != VK_NULL_HANDLE) {
+        if (mMemoryAllocation.GetResourceHeap() != nullptr) {
             // We need to free both the memory allocation and the container. Memory should be
             // freed after the VkImage is destroyed and this is taken care of by the
             // FencedDeleter.
-            device->GetMemoryAllocator()->Free(&mMemoryAllocation);
+            device->DeallocateMemory(mMemoryAllocation);
         }
 
         if (mHandle != VK_NULL_HANDLE) {
@@ -681,6 +688,7 @@ namespace dawn_native { namespace vulkan {
             descriptor.usage = dawn::BufferUsage::CopySrc | dawn::BufferUsage::MapWrite;
             std::unique_ptr<Buffer> srcBuffer =
                 std::make_unique<dawn_native::vulkan::Buffer>(device, &descriptor);
+            device->ConsumedError(srcBuffer->Initialize());
             uint8_t* clearBuffer = nullptr;
             device->ConsumedError(srcBuffer->MapAtCreation(&clearBuffer));
             std::fill(reinterpret_cast<uint32_t*>(clearBuffer),

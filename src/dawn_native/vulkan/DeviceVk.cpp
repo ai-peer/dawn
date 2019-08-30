@@ -153,7 +153,9 @@ namespace dawn_native { namespace vulkan {
         return new BindGroupLayout(this, descriptor);
     }
     ResultOrError<BufferBase*> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-        return new Buffer(this, descriptor);
+        std::unique_ptr<Buffer> buffer = std::make_unique<Buffer>(this, descriptor);
+        DAWN_TRY(buffer->Initialize());
+        return buffer.release();
     }
     CommandBufferBase* Device::CreateCommandBuffer(CommandEncoderBase* encoder,
                                                    const CommandBufferDescriptor* descriptor) {
@@ -215,8 +217,6 @@ namespace dawn_native { namespace vulkan {
         // Uploader should tick before the resource allocator
         // as it enqueues resources to be released.
         mDynamicUploader->Tick(mCompletedSerial);
-
-        mMemoryAllocator->Tick(mCompletedSerial);
 
         mDeleter->Tick(mCompletedSerial);
 
@@ -674,5 +674,22 @@ namespace dawn_native { namespace vulkan {
 
         return new Texture(this, descriptor, textureDescriptor, signalSemaphore, allocation,
                            waitSemaphores);
+    }
+
+    ResultOrError<ResourceMemoryAllocation> Device::AllocateMemory(
+        VkMemoryRequirements requirements,
+        bool mappable) {
+        // TODO(crbug.com/dawn/27): Support sub-allocation.
+        ResourceMemoryAllocation allocation;
+        DAWN_TRY_ASSIGN(allocation, mMemoryAllocator->Allocate(requirements, mappable));
+        return allocation;
+    }
+
+    void Device::DeallocateMemory(ResourceMemoryAllocation& allocation) {
+        mMemoryAllocator->Deallocate(allocation);
+
+        // Invalidate the underlying resource heap in case the client accidentally
+        // calls DeallocateMemory again using the same allocation.
+        allocation.Invalidate();
     }
 }}  // namespace dawn_native::vulkan
