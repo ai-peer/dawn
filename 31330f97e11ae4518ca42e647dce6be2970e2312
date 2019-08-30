@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2de72e83_18e53e4f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-30T19:16:31Z",
+      "side": 1,
+      "message": "nit: Should be uint64_t to avoid overflow.\n\nDynamicUploader::Allocate takes a uint32_t, so\nwe should check if |bufferSize| fits inside std::numeric_limits\u003cuint32_t\u003e::max()\nand if not, return an OutOfMemory error.\nIn the future, we won\u0027t run into this case because we\u0027ll use multiple small copies to clear the texture.\n\nSorry I didn\u0027t catch this in other review. Feel free to change in there in this CL as well.",
+      "range": {
+        "startLine": 684,
+        "startChar": 12,
+        "endLine": 684,
+        "endChar": 20
+      },
+      "revId": "31330f97e11ae4518ca42e647dce6be2970e2312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
