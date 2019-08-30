@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "bddd3f28_24e942fa",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-08-30T01:19:26Z",
+      "side": 1,
+      "message": "On second thought, the datatypes passed to the function have the word texture in them, so that should be enough to disambiguate between the two.",
+      "parentUuid": "36366950_48f243e9",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "37457189d316f73ac00e7a7241d7384b778a1939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb65369f_58d7ecc5",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 5
