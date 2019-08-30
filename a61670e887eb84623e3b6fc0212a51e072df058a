@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ad147a_5d344936",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-30T22:43:44Z",
+      "side": 1,
+      "message": "bufferSize should be uint64_t :)\n\nrowPitch can be uint32_t\n\n\nWe can do something like:\nuint64_t bufferSize64 \u003d ....\n// Validate bufferSize.\nuint32_t bufferSize \u003d static_cast\u003cuint32_t\u003e(bufferSize64);",
+      "range": {
+        "startLine": 485,
+        "startChar": 12,
+        "endLine": 485,
+        "endChar": 20
+      },
+      "revId": "a61670e887eb84623e3b6fc0212a51e072df058a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
