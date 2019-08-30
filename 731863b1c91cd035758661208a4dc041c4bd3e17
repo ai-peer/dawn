@@ -192,6 +192,24 @@
       "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cb0ec88_da0eff52",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-30T20:16:44Z",
+      "side": 1,
+      "message": "\u003e Also I thought in a review we made this buffer use a Ref\u003c\u003e and not a unique_ptr.\n\nNatasha is changing this code now in https://dawn-review.googlesource.com/c/dawn/+/10760\n\n\u003e As a consequence, there would be two allocators (old and new) until everything moves to the new one then we can safely delete the old one.\n\n(I think you meant to reply in the other thread) Sounds okay to me.",
+      "parentUuid": "84c27fae_ea081706",
+      "revId": "731863b1c91cd035758661208a4dc041c4bd3e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

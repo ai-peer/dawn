@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84160be0_405c026d",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-30T20:16:44Z",
+      "side": 1,
+      "message": "Is this used for anything since we have AllocationMethod::kInvalid?",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "91ff75723cfb289ff60d3ce1ceaca129f0eda52e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2c4e358_c19acda3",
+        "filename": "src/dawn_native/vulkan/MemoryResourceAllocatorVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-08-30T20:16:44Z",
+      "side": 1,
+      "message": "Should this check that the memory wasn\u0027t invalidated?",
+      "revId": "91ff75723cfb289ff60d3ce1ceaca129f0eda52e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
