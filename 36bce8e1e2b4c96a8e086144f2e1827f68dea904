@@ -16,6 +16,24 @@
       "revId": "36bce8e1e2b4c96a8e086144f2e1827f68dea904",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82e61619_f017bcd0",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:08:29Z",
+      "side": 1,
+      "message": "+1 for the strstr change but the memcmp risks looking at characters after the end of argv[i]",
+      "parentUuid": "45c52818_f55e6f96",
+      "revId": "36bce8e1e2b4c96a8e086144f2e1827f68dea904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
