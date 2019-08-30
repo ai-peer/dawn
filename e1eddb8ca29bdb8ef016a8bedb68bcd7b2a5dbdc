@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a54a860_31c1e46b",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:22:06Z",
+      "side": 1,
+      "message": "Why? We can say the string is only valid for the duration of the callback.",
+      "parentUuid": "a696d29b_c247df5e",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2c93a316_a6a0e75c",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 6

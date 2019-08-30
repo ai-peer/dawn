@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "1bbe6021_9dfeb406",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:22:06Z",
+      "side": 1,
+      "message": "Ok sounds good, let\u0027s go with these semantics then.",
+      "parentUuid": "63d5ce93_6bb1f54a",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5b53e11_0cf50273",
         "filename": "src/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 5
@@ -382,6 +400,24 @@
       "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15b6d9e2_6b16c9c7",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-30T08:22:06Z",
+      "side": 1,
+      "message": "Makes sense, thank you.",
+      "parentUuid": "c4949254_410f1296",
+      "revId": "20cf69626fb6e8b4f4ed17485bfa5be17cabe2ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
