@@ -16,6 +16,24 @@
       "revId": "f554d6d8b71af02e4155f7299c9e382634cc6e03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c46ba8f2_7b896e87",
+        "filename": ".vscode/settings.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-08-31T00:15:32Z",
+      "side": 1,
+      "message": "my bad again..",
+      "parentUuid": "43e2685f_4f119486",
+      "revId": "f554d6d8b71af02e4155f7299c9e382634cc6e03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
