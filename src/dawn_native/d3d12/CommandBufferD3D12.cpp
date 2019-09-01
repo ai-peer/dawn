@@ -38,6 +38,7 @@
 namespace dawn_native { namespace d3d12 {
 
     namespace {
+
         DXGI_FORMAT DXGIIndexFormat(dawn::IndexFormat format) {
             switch (format) {
                 case dawn::IndexFormat::Uint16:
@@ -63,322 +64,392 @@ namespace dawn_native { namespace d3d12 {
             return false;
         }
 
-    }  // anonymous namespace
-
-    class BindGroupStateTracker {
-      public:
-        BindGroupStateTracker(Device* device) : mDevice(device) {
-        }
-
-        void SetInComputePass(bool inCompute_) {
-            mInCompute = inCompute_;
-        }
-
-        void AllocateDescriptorHeaps(Device* device) {
-            // This function should only be called once.
-            ASSERT(mCbvSrvUavGPUDescriptorHeap.Get() == nullptr &&
-                   mSamplerGPUDescriptorHeap.Get() == nullptr);
-
-            DescriptorHeapAllocator* descriptorHeapAllocator = device->GetDescriptorHeapAllocator();
-
-            if (mCbvSrvUavDescriptorHeapSize > 0) {
-                mCbvSrvUavGPUDescriptorHeap = descriptorHeapAllocator->AllocateGPUHeap(
-                    D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, mCbvSrvUavDescriptorHeapSize);
+        class BindGroupStateTracker {
+          public:
+            BindGroupStateTracker(Device* device) : mDevice(device) {
             }
 
-            if (mSamplerDescriptorHeapSize > 0) {
-                mSamplerGPUDescriptorHeap = descriptorHeapAllocator->AllocateGPUHeap(
-                    D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, mSamplerDescriptorHeapSize);
+            void SetInComputePass(bool inCompute_) {
+                mInCompute = inCompute_;
             }
 
-            uint32_t cbvSrvUavDescriptorIndex = 0;
-            uint32_t samplerDescriptorIndex = 0;
-            for (BindGroup* group : mBindGroupsList) {
-                ASSERT(group);
-                ASSERT(cbvSrvUavDescriptorIndex +
-                           ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount() <=
-                       mCbvSrvUavDescriptorHeapSize);
-                ASSERT(samplerDescriptorIndex +
-                           ToBackend(group->GetLayout())->GetSamplerDescriptorCount() <=
-                       mSamplerDescriptorHeapSize);
-                group->AllocateDescriptors(mCbvSrvUavGPUDescriptorHeap, &cbvSrvUavDescriptorIndex,
-                                           mSamplerGPUDescriptorHeap, &samplerDescriptorIndex);
+            void AllocateDescriptorHeaps(Device* device) {
+                // This function should only be called once.
+                ASSERT(mCbvSrvUavGPUDescriptorHeap.Get() == nullptr &&
+                       mSamplerGPUDescriptorHeap.Get() == nullptr);
+
+                DescriptorHeapAllocator* descriptorHeapAllocator =
+                    device->GetDescriptorHeapAllocator();
+
+                if (mCbvSrvUavDescriptorHeapSize > 0) {
+                    mCbvSrvUavGPUDescriptorHeap = descriptorHeapAllocator->AllocateGPUHeap(
+                        D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, mCbvSrvUavDescriptorHeapSize);
+                }
+
+                if (mSamplerDescriptorHeapSize > 0) {
+                    mSamplerGPUDescriptorHeap = descriptorHeapAllocator->AllocateGPUHeap(
+                        D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, mSamplerDescriptorHeapSize);
+                }
+
+                uint32_t cbvSrvUavDescriptorIndex = 0;
+                uint32_t samplerDescriptorIndex = 0;
+                for (BindGroup* group : mBindGroupsList) {
+                    ASSERT(group);
+                    ASSERT(cbvSrvUavDescriptorIndex +
+                               ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount() <=
+                           mCbvSrvUavDescriptorHeapSize);
+                    ASSERT(samplerDescriptorIndex +
+                               ToBackend(group->GetLayout())->GetSamplerDescriptorCount() <=
+                           mSamplerDescriptorHeapSize);
+                    group->AllocateDescriptors(mCbvSrvUavGPUDescriptorHeap,
+                                               &cbvSrvUavDescriptorIndex, mSamplerGPUDescriptorHeap,
+                                               &samplerDescriptorIndex);
+                }
+
+                ASSERT(cbvSrvUavDescriptorIndex == mCbvSrvUavDescriptorHeapSize);
+                ASSERT(samplerDescriptorIndex == mSamplerDescriptorHeapSize);
             }
 
-            ASSERT(cbvSrvUavDescriptorIndex == mCbvSrvUavDescriptorHeapSize);
-            ASSERT(samplerDescriptorIndex == mSamplerDescriptorHeapSize);
-        }
+            // This function must only be called before calling AllocateDescriptorHeaps().
+            void TrackSetBindGroup(BindGroup* group, uint32_t index, uint32_t indexInSubmit) {
+                if (mBindGroups[index] != group) {
+                    mBindGroups[index] = group;
 
-        // This function must only be called before calling AllocateDescriptorHeaps().
-        void TrackSetBindGroup(BindGroup* group, uint32_t index, uint32_t indexInSubmit) {
-            if (mBindGroups[index] != group) {
-                mBindGroups[index] = group;
+                    if (!group->TestAndSetCounted(mDevice->GetPendingCommandSerial(),
+                                                  indexInSubmit)) {
+                        const BindGroupLayout* layout = ToBackend(group->GetLayout());
 
-                if (!group->TestAndSetCounted(mDevice->GetPendingCommandSerial(), indexInSubmit)) {
-                    const BindGroupLayout* layout = ToBackend(group->GetLayout());
-
-                    mCbvSrvUavDescriptorHeapSize += layout->GetCbvUavSrvDescriptorCount();
-                    mSamplerDescriptorHeapSize += layout->GetSamplerDescriptorCount();
-                    mBindGroupsList.push_back(group);
+                        mCbvSrvUavDescriptorHeapSize += layout->GetCbvUavSrvDescriptorCount();
+                        mSamplerDescriptorHeapSize += layout->GetSamplerDescriptorCount();
+                        mBindGroupsList.push_back(group);
+                    }
                 }
             }
-        }
 
-        // This function must only be called before calling AllocateDescriptorHeaps().
-        void TrackInheritedGroups(PipelineLayout* oldLayout,
-                                  PipelineLayout* newLayout,
-                                  uint32_t indexInSubmit) {
-            if (oldLayout == nullptr) {
-                return;
+            // This function must only be called before calling AllocateDescriptorHeaps().
+            void TrackInheritedGroups(PipelineLayout* oldLayout,
+                                      PipelineLayout* newLayout,
+                                      uint32_t indexInSubmit) {
+                if (oldLayout == nullptr) {
+                    return;
+                }
+
+                uint32_t inheritUntil = oldLayout->GroupsInheritUpTo(newLayout);
+                for (uint32_t i = 0; i < inheritUntil; ++i) {
+                    TrackSetBindGroup(mBindGroups[i], i, indexInSubmit);
+                }
             }
 
-            uint32_t inheritUntil = oldLayout->GroupsInheritUpTo(newLayout);
-            for (uint32_t i = 0; i < inheritUntil; ++i) {
-                TrackSetBindGroup(mBindGroups[i], i, indexInSubmit);
-            }
-        }
+            void SetBindGroup(ComPtr<ID3D12GraphicsCommandList> commandList,
+                              PipelineLayout* pipelineLayout,
+                              BindGroup* group,
+                              uint32_t index,
+                              uint32_t dynamicOffsetCount,
+                              uint64_t* dynamicOffsets,
+                              bool force = false) {
+                // Usually, the application won't set the same offsets many times,
+                // so always try to apply dynamic offsets even if the offsets stay the same
+                if (dynamicOffsetCount) {
+                    // Update dynamic offsets
+                    const BindGroupLayout::LayoutBindingInfo& layout =
+                        group->GetLayout()->GetBindingInfo();
+                    uint32_t currentDynamicBufferIndex = 0;
 
-        void SetBindGroup(ComPtr<ID3D12GraphicsCommandList> commandList,
-                          PipelineLayout* pipelineLayout,
-                          BindGroup* group,
-                          uint32_t index,
-                          uint32_t dynamicOffsetCount,
-                          uint64_t* dynamicOffsets,
-                          bool force = false) {
-            // Usually, the application won't set the same offsets many times,
-            // so always try to apply dynamic offsets even if the offsets stay the same
-            if (dynamicOffsetCount) {
-                // Update dynamic offsets
-                const BindGroupLayout::LayoutBindingInfo& layout =
-                    group->GetLayout()->GetBindingInfo();
-                uint32_t currentDynamicBufferIndex = 0;
+                    for (uint32_t bindingIndex : IterateBitSet(layout.dynamic)) {
+                        ASSERT(dynamicOffsetCount > 0);
+                        uint32_t parameterIndex =
+                            pipelineLayout->GetDynamicRootParameterIndex(index, bindingIndex);
+                        BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
 
-                for (uint32_t bindingIndex : IterateBitSet(layout.dynamic)) {
-                    ASSERT(dynamicOffsetCount > 0);
-                    uint32_t parameterIndex =
-                        pipelineLayout->GetDynamicRootParameterIndex(index, bindingIndex);
-                    BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
+                        // Calculate buffer locations that root descriptors links to. The location
+                        // is (base buffer location + initial offset + dynamic offset)
+                        uint64_t dynamicOffset = dynamicOffsets[currentDynamicBufferIndex];
+                        uint64_t offset = binding.offset + dynamicOffset;
+                        D3D12_GPU_VIRTUAL_ADDRESS bufferLocation =
+                            ToBackend(binding.buffer)->GetVA() + offset;
 
-                    // Calculate buffer locations that root descriptors links to. The location
-                    // is (base buffer location + initial offset + dynamic offset)
-                    uint64_t dynamicOffset = dynamicOffsets[currentDynamicBufferIndex];
-                    uint64_t offset = binding.offset + dynamicOffset;
-                    D3D12_GPU_VIRTUAL_ADDRESS bufferLocation =
-                        ToBackend(binding.buffer)->GetVA() + offset;
+                        switch (layout.types[bindingIndex]) {
+                            case dawn::BindingType::UniformBuffer:
+                                if (mInCompute) {
+                                    commandList->SetComputeRootConstantBufferView(parameterIndex,
+                                                                                  bufferLocation);
+                                } else {
+                                    commandList->SetGraphicsRootConstantBufferView(parameterIndex,
+                                                                                   bufferLocation);
+                                }
+                                break;
+                            case dawn::BindingType::StorageBuffer:
+                                if (mInCompute) {
+                                    commandList->SetComputeRootUnorderedAccessView(parameterIndex,
+                                                                                   bufferLocation);
+                                } else {
+                                    commandList->SetGraphicsRootUnorderedAccessView(parameterIndex,
+                                                                                    bufferLocation);
+                                }
+                                break;
+                            case dawn::BindingType::SampledTexture:
+                            case dawn::BindingType::Sampler:
+                            case dawn::BindingType::StorageTexture:
+                            case dawn::BindingType::ReadonlyStorageBuffer:
+                                UNREACHABLE();
+                                break;
+                        }
 
-                    switch (layout.types[bindingIndex]) {
-                        case dawn::BindingType::UniformBuffer:
-                            if (mInCompute) {
-                                commandList->SetComputeRootConstantBufferView(parameterIndex,
-                                                                              bufferLocation);
-                            } else {
-                                commandList->SetGraphicsRootConstantBufferView(parameterIndex,
-                                                                               bufferLocation);
-                            }
-                            break;
-                        case dawn::BindingType::StorageBuffer:
-                            if (mInCompute) {
-                                commandList->SetComputeRootUnorderedAccessView(parameterIndex,
-                                                                               bufferLocation);
-                            } else {
-                                commandList->SetGraphicsRootUnorderedAccessView(parameterIndex,
-                                                                                bufferLocation);
-                            }
-                            break;
-                        case dawn::BindingType::SampledTexture:
-                        case dawn::BindingType::Sampler:
-                        case dawn::BindingType::StorageTexture:
-                        case dawn::BindingType::ReadonlyStorageBuffer:
-                            UNREACHABLE();
-                            break;
+                        // Record current dynamic offsets for inheriting
+                        mLastDynamicOffsets[index][currentDynamicBufferIndex] = dynamicOffset;
+                        ++currentDynamicBufferIndex;
+                    }
+                }
+
+                if (mBindGroups[index] != group || force) {
+                    mBindGroups[index] = group;
+                    uint32_t cbvUavSrvCount =
+                        ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount();
+                    uint32_t samplerCount =
+                        ToBackend(group->GetLayout())->GetSamplerDescriptorCount();
+
+                    if (cbvUavSrvCount > 0) {
+                        uint32_t parameterIndex =
+                            pipelineLayout->GetCbvUavSrvRootParameterIndex(index);
+
+                        if (mInCompute) {
+                            commandList->SetComputeRootDescriptorTable(
+                                parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
+                                                    group->GetCbvUavSrvHeapOffset()));
+                        } else {
+                            commandList->SetGraphicsRootDescriptorTable(
+                                parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
+                                                    group->GetCbvUavSrvHeapOffset()));
+                        }
                     }
 
-                    // Record current dynamic offsets for inheriting
-                    mLastDynamicOffsets[index][currentDynamicBufferIndex] = dynamicOffset;
-                    ++currentDynamicBufferIndex;
+                    if (samplerCount > 0) {
+                        uint32_t parameterIndex =
+                            pipelineLayout->GetSamplerRootParameterIndex(index);
+
+                        if (mInCompute) {
+                            commandList->SetComputeRootDescriptorTable(
+                                parameterIndex, mSamplerGPUDescriptorHeap.GetGPUHandle(
+                                                    group->GetSamplerHeapOffset()));
+                        } else {
+                            commandList->SetGraphicsRootDescriptorTable(
+                                parameterIndex, mSamplerGPUDescriptorHeap.GetGPUHandle(
+                                                    group->GetSamplerHeapOffset()));
+                        }
+                    }
                 }
             }
 
-            if (mBindGroups[index] != group || force) {
-                mBindGroups[index] = group;
-                uint32_t cbvUavSrvCount =
-                    ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount();
-                uint32_t samplerCount = ToBackend(group->GetLayout())->GetSamplerDescriptorCount();
+            void SetInheritedBindGroups(ComPtr<ID3D12GraphicsCommandList> commandList,
+                                        PipelineLayout* oldLayout,
+                                        PipelineLayout* newLayout) {
+                if (oldLayout == nullptr) {
+                    return;
+                }
 
-                if (cbvUavSrvCount > 0) {
-                    uint32_t parameterIndex = pipelineLayout->GetCbvUavSrvRootParameterIndex(index);
+                uint32_t inheritUntil = oldLayout->GroupsInheritUpTo(newLayout);
+                for (uint32_t i = 0; i < inheritUntil; ++i) {
+                    const BindGroupLayout* layout = ToBackend(mBindGroups[i]->GetLayout());
+                    const uint32_t dynamicBufferCount = layout->GetDynamicBufferCount();
 
-                    if (mInCompute) {
-                        commandList->SetComputeRootDescriptorTable(
-                            parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
-                                                group->GetCbvUavSrvHeapOffset()));
+                    // Inherit dynamic offsets
+                    if (dynamicBufferCount > 0) {
+                        SetBindGroup(commandList, newLayout, mBindGroups[i], i, dynamicBufferCount,
+                                     mLastDynamicOffsets[i].data(), true);
                     } else {
-                        commandList->SetGraphicsRootDescriptorTable(
-                            parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
-                                                group->GetCbvUavSrvHeapOffset()));
-                    }
-                }
-
-                if (samplerCount > 0) {
-                    uint32_t parameterIndex = pipelineLayout->GetSamplerRootParameterIndex(index);
-
-                    if (mInCompute) {
-                        commandList->SetComputeRootDescriptorTable(
-                            parameterIndex,
-                            mSamplerGPUDescriptorHeap.GetGPUHandle(group->GetSamplerHeapOffset()));
-                    } else {
-                        commandList->SetGraphicsRootDescriptorTable(
-                            parameterIndex,
-                            mSamplerGPUDescriptorHeap.GetGPUHandle(group->GetSamplerHeapOffset()));
+                        SetBindGroup(commandList, newLayout, mBindGroups[i], i, 0, nullptr, true);
                     }
                 }
             }
-        }
 
-        void SetInheritedBindGroups(ComPtr<ID3D12GraphicsCommandList> commandList,
-                                    PipelineLayout* oldLayout,
-                                    PipelineLayout* newLayout) {
-            if (oldLayout == nullptr) {
-                return;
-            }
-
-            uint32_t inheritUntil = oldLayout->GroupsInheritUpTo(newLayout);
-            for (uint32_t i = 0; i < inheritUntil; ++i) {
-                const BindGroupLayout* layout = ToBackend(mBindGroups[i]->GetLayout());
-                const uint32_t dynamicBufferCount = layout->GetDynamicBufferCount();
-
-                // Inherit dynamic offsets
-                if (dynamicBufferCount > 0) {
-                    SetBindGroup(commandList, newLayout, mBindGroups[i], i, dynamicBufferCount,
-                                 mLastDynamicOffsets[i].data(), true);
-                } else {
-                    SetBindGroup(commandList, newLayout, mBindGroups[i], i, 0, nullptr, true);
+            void Reset() {
+                for (uint32_t i = 0; i < kMaxBindGroups; ++i) {
+                    mBindGroups[i] = nullptr;
                 }
             }
-        }
 
-        void Reset() {
-            for (uint32_t i = 0; i < kMaxBindGroups; ++i) {
-                mBindGroups[i] = nullptr;
-            }
-        }
-
-        void SetID3D12DescriptorHeaps(ComPtr<ID3D12GraphicsCommandList> commandList) {
-            ASSERT(commandList != nullptr);
-            ID3D12DescriptorHeap* descriptorHeaps[2] = {mCbvSrvUavGPUDescriptorHeap.Get(),
-                                                        mSamplerGPUDescriptorHeap.Get()};
-            if (descriptorHeaps[0] && descriptorHeaps[1]) {
-                commandList->SetDescriptorHeaps(2, descriptorHeaps);
-            } else if (descriptorHeaps[0]) {
-                commandList->SetDescriptorHeaps(1, descriptorHeaps);
-            } else if (descriptorHeaps[1]) {
-                commandList->SetDescriptorHeaps(1, &descriptorHeaps[1]);
-            }
-        }
-
-      private:
-        uint32_t mCbvSrvUavDescriptorHeapSize = 0;
-        uint32_t mSamplerDescriptorHeapSize = 0;
-        std::array<BindGroup*, kMaxBindGroups> mBindGroups = {};
-        std::deque<BindGroup*> mBindGroupsList = {};
-        std::array<std::array<uint64_t, kMaxDynamicBufferCount>, kMaxBindGroups>
-            mLastDynamicOffsets;
-        bool mInCompute = false;
-
-        DescriptorHeapHandle mCbvSrvUavGPUDescriptorHeap = {};
-        DescriptorHeapHandle mSamplerGPUDescriptorHeap = {};
-
-        Device* mDevice;
-    };
-
-    struct OMSetRenderTargetArgs {
-        unsigned int numRTVs = 0;
-        std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> RTVs = {};
-        D3D12_CPU_DESCRIPTOR_HANDLE dsv = {};
-    };
-
-    class RenderPassDescriptorHeapTracker {
-      public:
-        RenderPassDescriptorHeapTracker(Device* device) : mDevice(device) {
-        }
-
-        // This function must only be called before calling AllocateRTVAndDSVHeaps().
-        void TrackRenderPass(const BeginRenderPassCmd* renderPass) {
-            DAWN_ASSERT(mRTVHeap.Get() == nullptr && mDSVHeap.Get() == nullptr);
-
-            mNumRTVs += static_cast<uint32_t>(
-                renderPass->attachmentState->GetColorAttachmentsMask().count());
-            if (renderPass->attachmentState->HasDepthStencilAttachment()) {
-                ++mNumDSVs;
-            }
-        }
-
-        void AllocateRTVAndDSVHeaps() {
-            // This function should only be called once.
-            DAWN_ASSERT(mRTVHeap.Get() == nullptr && mDSVHeap.Get() == nullptr);
-            DescriptorHeapAllocator* allocator = mDevice->GetDescriptorHeapAllocator();
-            if (mNumRTVs > 0) {
-                mRTVHeap = allocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_RTV, mNumRTVs);
-            }
-            if (mNumDSVs > 0) {
-                mDSVHeap = allocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_DSV, mNumDSVs);
-            }
-        }
-
-        // TODO(jiawei.shao@intel.com): use hash map <RenderPass, OMSetRenderTargetArgs> as cache to
-        // avoid redundant RTV and DSV memory allocations.
-        OMSetRenderTargetArgs GetSubpassOMSetRenderTargetArgs(BeginRenderPassCmd* renderPass) {
-            OMSetRenderTargetArgs args = {};
-
-            unsigned int rtvIndex = 0;
-            uint32_t rtvCount = static_cast<uint32_t>(
-                renderPass->attachmentState->GetColorAttachmentsMask().count());
-            DAWN_ASSERT(mAllocatedRTVs + rtvCount <= mNumRTVs);
-            for (uint32_t i :
-                 IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
-                TextureView* view = ToBackend(renderPass->colorAttachments[i].view).Get();
-                D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = mRTVHeap.GetCPUHandle(mAllocatedRTVs);
-                D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = view->GetRTVDescriptor();
-                mDevice->GetD3D12Device()->CreateRenderTargetView(
-                    ToBackend(view->GetTexture())->GetD3D12Resource(), &rtvDesc, rtvHandle);
-                args.RTVs[i] = rtvHandle;
-
-                ++rtvIndex;
-                ++mAllocatedRTVs;
-            }
-            args.numRTVs = rtvIndex;
-
-            if (renderPass->attachmentState->HasDepthStencilAttachment()) {
-                DAWN_ASSERT(mAllocatedDSVs < mNumDSVs);
-                TextureView* view = ToBackend(renderPass->depthStencilAttachment.view).Get();
-                D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = mDSVHeap.GetCPUHandle(mAllocatedDSVs);
-                D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = view->GetDSVDescriptor();
-                mDevice->GetD3D12Device()->CreateDepthStencilView(
-                    ToBackend(view->GetTexture())->GetD3D12Resource(), &dsvDesc, dsvHandle);
-                args.dsv = dsvHandle;
-
-                ++mAllocatedDSVs;
+            void SetID3D12DescriptorHeaps(ComPtr<ID3D12GraphicsCommandList> commandList) {
+                ASSERT(commandList != nullptr);
+                ID3D12DescriptorHeap* descriptorHeaps[2] = {mCbvSrvUavGPUDescriptorHeap.Get(),
+                                                            mSamplerGPUDescriptorHeap.Get()};
+                if (descriptorHeaps[0] && descriptorHeaps[1]) {
+                    commandList->SetDescriptorHeaps(2, descriptorHeaps);
+                } else if (descriptorHeaps[0]) {
+                    commandList->SetDescriptorHeaps(1, descriptorHeaps);
+                } else if (descriptorHeaps[1]) {
+                    commandList->SetDescriptorHeaps(1, &descriptorHeaps[1]);
+                }
             }
 
-            return args;
-        }
+          private:
+            uint32_t mCbvSrvUavDescriptorHeapSize = 0;
+            uint32_t mSamplerDescriptorHeapSize = 0;
+            std::array<BindGroup*, kMaxBindGroups> mBindGroups = {};
+            std::deque<BindGroup*> mBindGroupsList = {};
+            std::array<std::array<uint64_t, kMaxDynamicBufferCount>, kMaxBindGroups>
+                mLastDynamicOffsets;
+            bool mInCompute = false;
 
-        bool IsHeapAllocationCompleted() const {
-            return mNumRTVs == mAllocatedRTVs && mNumDSVs == mAllocatedDSVs;
-        }
+            DescriptorHeapHandle mCbvSrvUavGPUDescriptorHeap = {};
+            DescriptorHeapHandle mSamplerGPUDescriptorHeap = {};
 
-      private:
-        Device* mDevice;
-        DescriptorHeapHandle mRTVHeap = {};
-        DescriptorHeapHandle mDSVHeap = {};
-        uint32_t mNumRTVs = 0;
-        uint32_t mNumDSVs = 0;
+            Device* mDevice;
+        };
 
-        uint32_t mAllocatedRTVs = 0;
-        uint32_t mAllocatedDSVs = 0;
-    };
+        struct OMSetRenderTargetArgs {
+            unsigned int numRTVs = 0;
+            std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> RTVs = {};
+            D3D12_CPU_DESCRIPTOR_HANDLE dsv = {};
+        };
 
-    namespace {
+        class RenderPassDescriptorHeapTracker {
+          public:
+            RenderPassDescriptorHeapTracker(Device* device) : mDevice(device) {
+            }
+
+            // This function must only be called before calling AllocateRTVAndDSVHeaps().
+            void TrackRenderPass(const BeginRenderPassCmd* renderPass) {
+                DAWN_ASSERT(mRTVHeap.Get() == nullptr && mDSVHeap.Get() == nullptr);
+
+                mNumRTVs += static_cast<uint32_t>(
+                    renderPass->attachmentState->GetColorAttachmentsMask().count());
+                if (renderPass->attachmentState->HasDepthStencilAttachment()) {
+                    ++mNumDSVs;
+                }
+            }
+
+            void AllocateRTVAndDSVHeaps() {
+                // This function should only be called once.
+                DAWN_ASSERT(mRTVHeap.Get() == nullptr && mDSVHeap.Get() == nullptr);
+                DescriptorHeapAllocator* allocator = mDevice->GetDescriptorHeapAllocator();
+                if (mNumRTVs > 0) {
+                    mRTVHeap = allocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_RTV, mNumRTVs);
+                }
+                if (mNumDSVs > 0) {
+                    mDSVHeap = allocator->AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_DSV, mNumDSVs);
+                }
+            }
+
+            // TODO(jiawei.shao@intel.com): use hash map <RenderPass, OMSetRenderTargetArgs> as
+            // cache to avoid redundant RTV and DSV memory allocations.
+            OMSetRenderTargetArgs GetSubpassOMSetRenderTargetArgs(BeginRenderPassCmd* renderPass) {
+                OMSetRenderTargetArgs args = {};
+
+                unsigned int rtvIndex = 0;
+                uint32_t rtvCount = static_cast<uint32_t>(
+                    renderPass->attachmentState->GetColorAttachmentsMask().count());
+                DAWN_ASSERT(mAllocatedRTVs + rtvCount <= mNumRTVs);
+                for (uint32_t i :
+                     IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+                    TextureView* view = ToBackend(renderPass->colorAttachments[i].view).Get();
+                    D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = mRTVHeap.GetCPUHandle(mAllocatedRTVs);
+                    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = view->GetRTVDescriptor();
+                    mDevice->GetD3D12Device()->CreateRenderTargetView(
+                        ToBackend(view->GetTexture())->GetD3D12Resource(), &rtvDesc, rtvHandle);
+                    args.RTVs[i] = rtvHandle;
+
+                    ++rtvIndex;
+                    ++mAllocatedRTVs;
+                }
+                args.numRTVs = rtvIndex;
+
+                if (renderPass->attachmentState->HasDepthStencilAttachment()) {
+                    DAWN_ASSERT(mAllocatedDSVs < mNumDSVs);
+                    TextureView* view = ToBackend(renderPass->depthStencilAttachment.view).Get();
+                    D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = mDSVHeap.GetCPUHandle(mAllocatedDSVs);
+                    D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = view->GetDSVDescriptor();
+                    mDevice->GetD3D12Device()->CreateDepthStencilView(
+                        ToBackend(view->GetTexture())->GetD3D12Resource(), &dsvDesc, dsvHandle);
+                    args.dsv = dsvHandle;
+
+                    ++mAllocatedDSVs;
+                }
+
+                return args;
+            }
+
+            bool IsHeapAllocationCompleted() const {
+                return mNumRTVs == mAllocatedRTVs && mNumDSVs == mAllocatedDSVs;
+            }
+
+          private:
+            Device* mDevice;
+            DescriptorHeapHandle mRTVHeap = {};
+            DescriptorHeapHandle mDSVHeap = {};
+            uint32_t mNumRTVs = 0;
+            uint32_t mNumDSVs = 0;
+
+            uint32_t mAllocatedRTVs = 0;
+            uint32_t mAllocatedDSVs = 0;
+        };
+
+        class VertexBufferTracker {
+          public:
+            void OnSetVertexBuffers(uint32_t startSlot,
+                                    uint32_t count,
+                                    Ref<BufferBase>* buffers,
+                                    uint64_t* offsets) {
+                mStartSlot = std::min(mStartSlot, startSlot);
+                mEndSlot = std::max(mEndSlot, startSlot + count);
+
+                for (uint32_t i = 0; i < count; ++i) {
+                    Buffer* buffer = ToBackend(buffers[i].Get());
+                    auto* d3d12BufferView = &mD3D12BufferViews[startSlot + i];
+                    d3d12BufferView->BufferLocation = buffer->GetVA() + offsets[i];
+                    d3d12BufferView->SizeInBytes = buffer->GetSize() - offsets[i];
+                    // The bufferView stride is set based on the input state before a draw.
+                }
+            }
+
+            void Apply(ID3D12GraphicsCommandList* commandList,
+                       const RenderPipeline* renderPipeline) {
+                ASSERT(renderPipeline != nullptr);
+
+                std::bitset<kMaxVertexBuffers> inputsMask = renderPipeline->GetInputsSetMask();
+
+                uint32_t startSlot = mStartSlot;
+                uint32_t endSlot = mEndSlot;
+
+                // If the input state has changed, we need to update the StrideInBytes
+                // for the D3D12 buffer views. We also need to extend the dirty range to
+                // touch all these slots because the stride may have changed.
+                if (mLastAppliedRenderPipeline != renderPipeline) {
+                    mLastAppliedRenderPipeline = renderPipeline;
+
+                    for (uint32_t slot : IterateBitSet(inputsMask)) {
+                        startSlot = std::min(startSlot, slot);
+                        endSlot = std::max(endSlot, slot + 1);
+                        mD3D12BufferViews[slot].StrideInBytes =
+                            renderPipeline->GetInput(slot).stride;
+                    }
+                }
+
+                if (endSlot <= startSlot) {
+                    return;
+                }
+
+                // mD3D12BufferViews is kept up to date with the most recent data passed
+                // to SetVertexBuffers. This makes it correct to only track the start
+                // and end of the dirty range. When Apply is called,
+                // we will at worst set non-dirty vertex buffers in duplicate.
+                uint32_t count = endSlot - startSlot;
+                commandList->IASetVertexBuffers(startSlot, count,
+                                                &mD3D12BufferViews[startSlot]);
+
+                mStartSlot = kMaxVertexBuffers;
+                mEndSlot = 0;
+            }
+
+          private:
+            // startSlot and endSlot indicate the range of dirty vertex buffers.
+            // If there are multiple calls to SetVertexBuffers, the start and end
+            // represent the union of the dirty ranges (the union may have non-dirty
+            // data in the middle of the range).
+            const RenderPipeline* mLastAppliedRenderPipeline = nullptr;
+            uint32_t mStartSlot = kMaxVertexBuffers;
+            uint32_t mEndSlot = 0;
+            std::array<D3D12_VERTEX_BUFFER_VIEW, kMaxVertexBuffers> mD3D12BufferViews = {};
+        };
 
         void AllocateAndSetDescriptorHeaps(Device* device,
                                            BindGroupStateTracker* bindingTracker,
@@ -719,47 +790,6 @@ namespace dawn_native { namespace d3d12 {
         DAWN_ASSERT(renderPassTracker.IsHeapAllocationCompleted());
     }
 
-    void CommandBuffer::FlushSetVertexBuffers(ComPtr<ID3D12GraphicsCommandList> commandList,
-                                              VertexBuffersInfo* vertexBuffersInfo,
-                                              const RenderPipeline* renderPipeline) {
-        DAWN_ASSERT(vertexBuffersInfo != nullptr);
-        DAWN_ASSERT(renderPipeline != nullptr);
-
-        auto inputsMask = renderPipeline->GetInputsSetMask();
-
-        uint32_t startSlot = vertexBuffersInfo->startSlot;
-        uint32_t endSlot = vertexBuffersInfo->endSlot;
-
-        // If the input state has changed, we need to update the StrideInBytes
-        // for the D3D12 buffer views. We also need to extend the dirty range to
-        // touch all these slots because the stride may have changed.
-        if (vertexBuffersInfo->lastRenderPipeline != renderPipeline) {
-            vertexBuffersInfo->lastRenderPipeline = renderPipeline;
-
-            for (uint32_t slot : IterateBitSet(inputsMask)) {
-                startSlot = std::min(startSlot, slot);
-                endSlot = std::max(endSlot, slot + 1);
-                vertexBuffersInfo->d3d12BufferViews[slot].StrideInBytes =
-                    renderPipeline->GetInput(slot).stride;
-            }
-        }
-
-        if (endSlot <= startSlot) {
-            return;
-        }
-
-        // d3d12BufferViews is kept up to date with the most recent data passed
-        // to SetVertexBuffers. This makes it correct to only track the start
-        // and end of the dirty range. When FlushSetVertexBuffers is called,
-        // we will at worst set non-dirty vertex buffers in duplicate.
-        uint32_t count = endSlot - startSlot;
-        commandList->IASetVertexBuffers(startSlot, count,
-                                        &vertexBuffersInfo->d3d12BufferViews[startSlot]);
-
-        vertexBuffersInfo->startSlot = kMaxVertexBuffers;
-        vertexBuffersInfo->endSlot = 0;
-    }
-
     void CommandBuffer::RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
                                           BindGroupStateTracker* bindingTracker) {
         PipelineLayout* lastLayout = nullptr;
@@ -969,14 +999,14 @@ namespace dawn_native { namespace d3d12 {
 
         RenderPipeline* lastPipeline = nullptr;
         PipelineLayout* lastLayout = nullptr;
-        VertexBuffersInfo vertexBuffersInfo = {};
+        VertexBufferTracker vertexBufferTracker = {};
 
         auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
             switch (type) {
                 case Command::Draw: {
                     DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
-                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastPipeline);
+                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     commandList->DrawInstanced(draw->vertexCount, draw->instanceCount,
                                                draw->firstVertex, draw->firstInstance);
                 } break;
@@ -984,7 +1014,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
-                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastPipeline);
+                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
                                                       draw->firstInstance);
@@ -993,7 +1023,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndirect: {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
-                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastPipeline);
+                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDrawIndirectSignature();
@@ -1005,7 +1035,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
-                    FlushSetVertexBuffers(commandList, &vertexBuffersInfo, lastPipeline);
+                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDrawIndexedIndirectSignature();
@@ -1096,22 +1126,10 @@ namespace dawn_native { namespace d3d12 {
 
                 case Command::SetVertexBuffers: {
                     SetVertexBuffersCmd* cmd = iter->NextCommand<SetVertexBuffersCmd>();
-                    auto buffers = iter->NextData<Ref<BufferBase>>(cmd->count);
-                    auto offsets = iter->NextData<uint64_t>(cmd->count);
+                    Ref<BufferBase>* buffers = iter->NextData<Ref<BufferBase>>(cmd->count);
+                    uint64_t* offsets = iter->NextData<uint64_t>(cmd->count);
 
-                    vertexBuffersInfo.startSlot =
-                        std::min(vertexBuffersInfo.startSlot, cmd->startSlot);
-                    vertexBuffersInfo.endSlot =
-                        std::max(vertexBuffersInfo.endSlot, cmd->startSlot + cmd->count);
-
-                    for (uint32_t i = 0; i < cmd->count; ++i) {
-                        Buffer* buffer = ToBackend(buffers[i].Get());
-                        auto* d3d12BufferView =
-                            &vertexBuffersInfo.d3d12BufferViews[cmd->startSlot + i];
-                        d3d12BufferView->BufferLocation = buffer->GetVA() + offsets[i];
-                        d3d12BufferView->SizeInBytes = buffer->GetSize() - offsets[i];
-                        // The bufferView stride is set based on the input state before a draw.
-                    }
+                    vertexBufferTracker.OnSetVertexBuffers(cmd->count, buffers, offsets);
                 } break;
 
                 default:
