@@ -451,6 +451,33 @@ namespace dawn_native { namespace d3d12 {
             std::array<D3D12_VERTEX_BUFFER_VIEW, kMaxVertexBuffers> mD3D12BufferViews = {};
         };
 
+        class IndexBufferTracker {
+          public:
+            void OnSetIndexBuffer(Buffer* buffer, uint64_t offset) {
+                mD3D12BufferView.BufferLocation = buffer->GetVA() + cmd->offset;
+                mD3D12BufferView.SizeInBytes = buffer->GetSize() - cmd->offset;
+            }
+
+            void OnSetPipeline(const RenderPipelineBase* pipeline) {
+                mIndexFormat = pipeline->GetVertexInputDescriptor()->indexFormat;
+            }
+
+            void Apply(ID3D12GraphicsCommandList* commandList) {
+                if (mIndexFormat == mLastAppliedIndexFormat) {
+                    return;
+                }
+
+                mD3D12BufferView.Format = DXGIIndexFormat(indexFormat);
+                commandList->IASetIndexBuffer(&mD3D12BufferView);
+                mLastAppliedIndexFormat = mIndexFormat;
+            }
+
+          private:
+            dwan::IndexFormat mIndexFormat;
+            dawn::IndexFormat mLastAppliedIndexFormat = static_cast<dawn::IndexFormat>(-1);
+            D3D12_INDEX_BUFFER_VIEW mD3D12BufferView = {};
+        };
+
         void AllocateAndSetDescriptorHeaps(Device* device,
                                            BindGroupStateTracker* bindingTracker,
                                            RenderPassDescriptorHeapTracker* renderPassTracker,
@@ -999,7 +1026,8 @@ namespace dawn_native { namespace d3d12 {
 
         RenderPipeline* lastPipeline = nullptr;
         PipelineLayout* lastLayout = nullptr;
-        VertexBufferTracker vertexBufferTracker = {};
+        VertexInputBufferTracker vertexBufferTracker = {};
+        IndexBufferTracker indexBufferTracker = {};
 
         auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
             switch (type) {
@@ -1014,6 +1042,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
+                    indexBufferTracker.Apply(commandList.Get());
                     vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
@@ -1035,6 +1064,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
+                    indexBufferTracker.Apply(commandList.Get());
                     vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
@@ -1089,6 +1119,7 @@ namespace dawn_native { namespace d3d12 {
                     commandList->SetPipelineState(pipeline->GetPipelineState().Get());
                     commandList->IASetPrimitiveTopology(pipeline->GetD3D12PrimitiveTopology());
 
+                    indexBufferTracker.OnSetPipeline(pipeline);
                     bindingTracker->SetInheritedBindGroups(commandList, lastLayout, layout);
 
                     lastPipeline = pipeline;
@@ -1111,17 +1142,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::SetIndexBuffer: {
                     SetIndexBufferCmd* cmd = iter->NextCommand<SetIndexBufferCmd>();
 
-                    Buffer* buffer = ToBackend(cmd->buffer.Get());
-                    D3D12_INDEX_BUFFER_VIEW bufferView;
-                    bufferView.BufferLocation = buffer->GetVA() + cmd->offset;
-                    bufferView.SizeInBytes = buffer->GetSize() - cmd->offset;
-                    // TODO(cwallez@chromium.org): Make index buffers lazily applied, right now
-                    // this will break if the pipeline is changed for one with a different index
-                    // format after SetIndexBuffer
-                    bufferView.Format =
-                        DXGIIndexFormat(lastPipeline->GetVertexInputDescriptor()->indexFormat);
-
-                    commandList->IASetIndexBuffer(&bufferView);
+                    indexBufferTracker.OnSetIndexBuffer(ToBackend(cmd->buffer.Get()), cmd->offset);
                 } break;
 
                 case Command::SetVertexBuffers: {
