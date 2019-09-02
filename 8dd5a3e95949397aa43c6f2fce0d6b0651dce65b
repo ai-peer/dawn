@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6409ef66_90b4d527",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-02T12:46:18Z",
+      "side": 1,
+      "message": "nit: let\u0027s not put type alias declarations in our headers because everyone using them will get the alises. Instead we could spell out the complete type in [1]",
+      "revId": "8dd5a3e95949397aa43c6f2fce0d6b0651dce65b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "128b2512_07044240",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-02T12:46:18Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8dd5a3e95949397aa43c6f2fce0d6b0651dce65b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
