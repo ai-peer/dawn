@@ -17,6 +17,7 @@ import("../scripts/dawn_features.gni")
 import("../scripts/dawn_overrides_with_defaults.gni")
 
 is_msvc = is_win && !is_clang
+is_fuchsia_tree = defined(is_fuchsia_tree) && is_fuchsia_tree
 
 ###############################################################################
 # Third-party dependencies needed by libdawn_native
@@ -170,7 +171,15 @@ source_set("khronos_platform") {
 # existing targets, both because Chromium has a special harness for swarming
 # and because otherwise the "gn check" fails.
 
-if (!build_with_chromium) {
+if (is_fuchsia_tree) {
+  group("gmock_and_gtest") {
+    testonly = true
+    public_deps = [
+      "//third_party/googletest:gmock",
+      "//third_party/googletest:gtest",
+    ]
+  }
+} else if (!build_with_chromium) {
   # When we aren't in Chromium we define out own targets based on the location
   # of the googletest repo.
   googletest_dir = dawn_googletest_dir
@@ -256,8 +265,10 @@ if (is_win || is_linux || is_mac) {
   static_library("glfw") {
     public_configs = [ ":glfw_public" ]
 
-    configs -= [ "//build/config/compiler:chromium_code" ]
-    configs += [ "//build/config/compiler:no_chromium_code" ]
+    if (build_with_chromium) {
+      configs -= [ "//build/config/compiler:chromium_code" ]
+      configs += [ "//build/config/compiler:no_chromium_code" ]
+    }
 
     if (is_msvc) {
       # nonstandard extension, function/data pointer conversion in expression

@@ -17,8 +17,7 @@ import("generator/dawn_generator.gni")
 import("scripts/dawn_component.gni")
 import("scripts/dawn_features.gni")
 import("scripts/dawn_overrides_with_defaults.gni")
-
-import("//testing/test.gni")
+import("scripts/dawn_test.gni")
 
 ###############################################################################
 # dawn_platform
@@ -459,15 +458,20 @@ source_set("libdawn_native_sources") {
         "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceNull.cpp",
       ]
     }
-    if (build_with_chromium && is_fuchsia) {
-      # Necessary to ensure that the Vulkan libraries will be in the
-      # final Fuchsia package.
-      data_deps = [
-        # NOTE: The line below is a work around for http://crbug.com/1001081
-        "//third_party/fuchsia-sdk/sdk:trace_engine",
-        "//third_party/fuchsia-sdk:vulkan_base",
-        "//third_party/fuchsia-sdk:vulkan_validation",
-      ]
+    if (is_fuchsia) {
+      if (build_with_chromium) {
+        # Necessary to ensure that the Vulkan libraries will be in the
+        # final Fuchsia package.
+        data_deps = [
+          # NOTE: The line below is a work around for http://crbug.com/1001081
+          "//third_party/fuchsia-sdk/sdk:trace_engine",
+          "//third_party/fuchsia-sdk:vulkan_base",
+          "//third_party/fuchsia-sdk:vulkan_validation",
+        ]
+      } else {
+        # Fuchsia platform tree.
+        libs = [ "zircon" ]
+      }
     }
   }
 }
@@ -725,8 +729,8 @@ dawn_json_generator("mock_dawn_gen") {
   ]
 }
 
-test("dawn_unittests") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
+dawn_test("dawn_unittests") {
+  configs = [ "${dawn_root}/src/common:dawn_internal" ]
 
   deps = [
     ":dawn_utils",
@@ -925,8 +929,8 @@ source_set("dawn_white_box_tests_sources") {
   libs = []
 }
 
-test("dawn_end2end_tests") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
+dawn_test("dawn_end2end_tests") {
+  configs = [ "${dawn_root}/src/common:dawn_internal" ]
 
   deps = [
     ":dawn_end2end_tests_sources",
@@ -959,8 +963,8 @@ test("dawn_end2end_tests") {
   }
 }
 
-test("dawn_perf_tests") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
+dawn_test("dawn_perf_tests") {
+  configs = [ "${dawn_root}/src/common:dawn_internal" ]
 
   deps = [
     ":dawn_utils",
