@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "546f5558_7e282667",
+        "filename": "dawn_wire.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-02T13:09:23Z",
+      "side": 1,
+      "message": "`type` doesn\u0027t match the type of `request serial` in `device pop error scope callback`. Can we update it to uin64_t?",
+      "range": {
+        "startLine": 53,
+        "startChar": 49,
+        "endLine": 53,
+        "endChar": 57
+      },
+      "revId": "204fd4e438dcdc55b69d50b01eb49db84436385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "044ff1d5_bca74473",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-02T13:09:23Z",
+      "side": 1,
+      "message": "Should we check the return value here and maybe return false if it is false ?",
+      "revId": "204fd4e438dcdc55b69d50b01eb49db84436385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
