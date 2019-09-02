@@ -50,6 +50,8 @@ config("libdawn_native_internal") {
   if (is_mac) {
     cflags_objcc = [ "-Wno-unguarded-availability" ]
   }
+  cflags = [ "-g" ]
+  ldflags = [ "-g" ]
 }
 
 dawn_json_generator("libdawn_native_utils_gen") {
@@ -983,6 +985,8 @@ if (dawn_standalone) {
       if (defined(invoker.deps)) {
         deps += invoker.deps
       }
+
+      ldflags = [ "-g" ]
     }
   }
 
