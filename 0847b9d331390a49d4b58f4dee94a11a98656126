@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71f2427c_e2b9634b",
+        "filename": "src/dawn_native/vulkan/MemoryResourceAllocatorVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-02T12:43:22Z",
+      "side": 1,
+      "message": "for",
+      "range": {
+        "startLine": 87,
+        "startChar": 65,
+        "endLine": 87,
+        "endChar": 67
+      },
+      "revId": "0847b9d331390a49d4b58f4dee94a11a98656126",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35b5685d_407eefbb",
+        "filename": "src/dawn_native/vulkan/MemoryResourceAllocatorVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-02T12:43:22Z",
+      "side": 1,
+      "message": "Note that this will need to be public for tests like in the other allocator.",
+      "revId": "0847b9d331390a49d4b58f4dee94a11a98656126",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
