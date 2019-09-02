@@ -193,16 +193,4 @@ namespace dawn_native {
         return a->mBindingInfo == b->mBindingInfo;
     }
 
-    uint32_t BindGroupLayoutBase::GetDynamicBufferCount() const {
-        return mDynamicStorageBufferCount + mDynamicUniformBufferCount;
-    }
-
-    uint32_t BindGroupLayoutBase::GetDynamicUniformBufferCount() const {
-        return mDynamicUniformBufferCount;
-    }
-
-    uint32_t BindGroupLayoutBase::GetDynamicStorageBufferCount() const {
-        return mDynamicStorageBufferCount;
-    }
-
 }  // namespace dawn_native

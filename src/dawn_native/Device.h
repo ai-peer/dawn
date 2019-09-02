@@ -54,9 +54,22 @@ namespace dawn_native {
             return false;
         }
 
-        MaybeError ValidateObject(const ObjectBase* object) const;
+        inline AdapterBase* GetAdapter() const {
+            return mAdapter;
+        }
 
-        AdapterBase* GetAdapter() const;
+        inline MaybeError ValidateObject(const ObjectBase* object) const {
+            if (DAWN_UNLIKELY(object->GetDevice() != this)) {
+                return DAWN_VALIDATION_ERROR("Object from a different device.");
+            }
+            if (DAWN_UNLIKELY(object->IsError())) {
+                return DAWN_VALIDATION_ERROR("Object is an error.");
+            }
+            return {};
+        }
+
+        
+
         dawn_platform::Platform* GetPlatform() const;
 
         FenceSignalTracker* GetFenceSignalTracker() const;

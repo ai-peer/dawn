@@ -17,10 +17,7 @@
 #include "common/Assert.h"
 #include "common/Math.h"
 #include "dawn_native/BindGroupLayout.h"
-#include "dawn_native/Buffer.h"
 #include "dawn_native/Device.h"
-#include "dawn_native/Sampler.h"
-#include "dawn_native/Texture.h"
 
 namespace dawn_native {
 
@@ -214,37 +211,6 @@ namespace dawn_native {
     // static
     BindGroupBase* BindGroupBase::MakeError(DeviceBase* device) {
         return new BindGroupBase(device, ObjectBase::kError);
-    }
-
-    const BindGroupLayoutBase* BindGroupBase::GetLayout() const {
-        ASSERT(!IsError());
-        return mLayout.Get();
-    }
-
-    BufferBinding BindGroupBase::GetBindingAsBufferBinding(size_t binding) {
-        ASSERT(!IsError());
-        ASSERT(binding < kMaxBindingsPerGroup);
-        ASSERT(mLayout->GetBindingInfo().mask[binding]);
-        ASSERT(mLayout->GetBindingInfo().types[binding] == dawn::BindingType::UniformBuffer ||
-               mLayout->GetBindingInfo().types[binding] == dawn::BindingType::StorageBuffer);
-        BufferBase* buffer = static_cast<BufferBase*>(mBindings[binding].Get());
-        return {buffer, mOffsets[binding], mSizes[binding]};
-    }
-
-    SamplerBase* BindGroupBase::GetBindingAsSampler(size_t binding) {
-        ASSERT(!IsError());
-        ASSERT(binding < kMaxBindingsPerGroup);
-        ASSERT(mLayout->GetBindingInfo().mask[binding]);
-        ASSERT(mLayout->GetBindingInfo().types[binding] == dawn::BindingType::Sampler);
-        return static_cast<SamplerBase*>(mBindings[binding].Get());
-    }
-
-    TextureViewBase* BindGroupBase::GetBindingAsTextureView(size_t binding) {
-        ASSERT(!IsError());
-        ASSERT(binding < kMaxBindingsPerGroup);
-        ASSERT(mLayout->GetBindingInfo().mask[binding]);
-        ASSERT(mLayout->GetBindingInfo().types[binding] == dawn::BindingType::SampledTexture);
-        return static_cast<TextureViewBase*>(mBindings[binding].Get());
     }
 
 }  // namespace dawn_native
