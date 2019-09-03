@@ -96,8 +96,6 @@ TEST_P(NonzeroTextureCreationTests, ArrayLayerClears) {
 
 // Test that nonrenderable texture formats clear to 1's because toggle is enabled
 TEST_P(NonzeroTextureCreationTests, NonrenderableTextureFormat) {
-    // skip test for other backends since they are not implemented yet
-    DAWN_SKIP_TEST_IF(IsOpenGL());
     dawn::TextureDescriptor descriptor;
     descriptor.dimension = dawn::TextureDimension::e2D;
     descriptor.size.width = kSize;
