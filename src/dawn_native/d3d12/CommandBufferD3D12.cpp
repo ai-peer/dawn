@@ -93,7 +93,7 @@ namespace dawn_native { namespace d3d12 {
 
                 uint32_t cbvSrvUavDescriptorIndex = 0;
                 uint32_t samplerDescriptorIndex = 0;
-                for (BindGroup* group : mBindGroupsList) {
+                for (BindGroup* group : mBindGroupsToAllocate) {
                     ASSERT(group);
                     ASSERT(cbvSrvUavDescriptorIndex +
                                ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount() <=
@@ -121,32 +121,60 @@ namespace dawn_native { namespace d3d12 {
 
                         mCbvSrvUavDescriptorHeapSize += layout->GetCbvUavSrvDescriptorCount();
                         mSamplerDescriptorHeapSize += layout->GetSamplerDescriptorCount();
-                        mBindGroupsList.push_back(group);
+                        mBindGroupsToAllocate.push_back(group);
                     }
                 }
             }
 
-            // This function must only be called before calling AllocateDescriptorHeaps().
-            void TrackInheritedGroups(PipelineLayout* oldLayout,
-                                      PipelineLayout* newLayout,
-                                      uint32_t indexInSubmit) {
-                if (oldLayout == nullptr) {
+            void OnSetBindGroup(uint32_t index,
+                                BindGroup* bindGroup,
+                                uint32_t dynamicOffsetCount,
+                                uint64_t* dynamicOffsets) {
+                ASSERT(index < kMaxBindGroups);
+                if (mBindGroupLayoutsMask[index]) {
+                    // It is okay to only dirty bind groups that are used by the current pipeline.
+                    // If the pipeline changes, then the bind groups it uses will become dirty.
+                    mDirtyBindGroups.set(index);
+                }
+                mBindGroups[index] = bindGroup;
+                mDynamicOffsetCounts[index] = dynamicOffsetCount;
+                memcpy(mDynamicOffsets[index].data(), dynamicOffsets,
+                       sizeof(uint64_t) * dynamicOffsetCount);
+            }
+
+            void OnSetPipeline(ID3D12GraphicsCommandList* commandList, PipelineBase* pipeline) {
+                mPipelineLayout = ToBackend(pipeline->GetLayout());
+                if (mLastAppliedPipelineLayout == mPipelineLayout) {
                     return;
                 }
 
-                uint32_t inheritUntil = oldLayout->GroupsInheritUpTo(newLayout);
-                for (uint32_t i = 0; i < inheritUntil; ++i) {
-                    TrackSetBindGroup(mBindGroups[i], i, indexInSubmit);
-                }
+                // Keep track of the bind group layout mask to avoid marking unused bind groups as
+                // dirty. This also allows us to avoid computing the interesection of the dirty bind
+                // groups and bind group layout mask in Draw or Dispatch which is very hot code.
+                mBindGroupLayoutsMask = mPipelineLayout->GetBindGroupLayoutsMask();
+
+                // Changing the pipeline layout sets all bind groups it uses as dirty.
+                mDirtyBindGroups = mBindGroupLayoutsMask;
             }
 
-            void SetBindGroup(ComPtr<ID3D12GraphicsCommandList> commandList,
-                              PipelineLayout* pipelineLayout,
-                              BindGroup* group,
-                              uint32_t index,
-                              uint32_t dynamicOffsetCount,
-                              uint64_t* dynamicOffsets,
-                              bool force = false) {
+            void Apply(ID3D12GraphicsCommandList* commandList) {
+                for (uint32_t index : IterateBitSet(mDirtyBindGroups)) {
+                    ApplyBindGroup(encoder, mPipelineLayout, index, mBindGroups[index],
+                                   mDynamicOffsetCounts[index], mDynamicOffsets[index].data());
+                }
+
+                // Reset all dirty bind groups. Dirty bind groups not in the bind group layout mask
+                // will be dirtied again by the next pipeline change.
+                mDirtyBindGroups.reset();
+                mLastAppliedPipelineLayout = mPipelineLayout;
+            }
+
+            void ApplyBindGroup(ID3D12GraphicsCommandList* commandList,
+                                PipelineLayout* pipelineLayout,
+                                uint32_t index,
+                                BindGroup* group,
+                                uint32_t dynamicOffsetCount,
+                                uint64_t* dynamicOffsets) {
                 // Usually, the application won't set the same offsets many times,
                 // so always try to apply dynamic offsets even if the offsets stay the same
                 if (dynamicOffsetCount) {
@@ -201,63 +229,38 @@ namespace dawn_native { namespace d3d12 {
                     }
                 }
 
-                if (mBindGroups[index] != group || force) {
-                    mBindGroups[index] = group;
-                    uint32_t cbvUavSrvCount =
-                        ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount();
-                    uint32_t samplerCount =
-                        ToBackend(group->GetLayout())->GetSamplerDescriptorCount();
+                uint32_t cbvUavSrvCount =
+                    ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount();
+                uint32_t samplerCount =
+                    ToBackend(group->GetLayout())->GetSamplerDescriptorCount();
 
-                    if (cbvUavSrvCount > 0) {
-                        uint32_t parameterIndex =
-                            pipelineLayout->GetCbvUavSrvRootParameterIndex(index);
+                if (cbvUavSrvCount > 0) {
+                    uint32_t parameterIndex =
+                        pipelineLayout->GetCbvUavSrvRootParameterIndex(index);
 
-                        if (mInCompute) {
-                            commandList->SetComputeRootDescriptorTable(
-                                parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
-                                                    group->GetCbvUavSrvHeapOffset()));
-                        } else {
-                            commandList->SetGraphicsRootDescriptorTable(
-                                parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
-                                                    group->GetCbvUavSrvHeapOffset()));
-                        }
-                    }
-
-                    if (samplerCount > 0) {
-                        uint32_t parameterIndex =
-                            pipelineLayout->GetSamplerRootParameterIndex(index);
-
-                        if (mInCompute) {
-                            commandList->SetComputeRootDescriptorTable(
-                                parameterIndex, mSamplerGPUDescriptorHeap.GetGPUHandle(
-                                                    group->GetSamplerHeapOffset()));
-                        } else {
-                            commandList->SetGraphicsRootDescriptorTable(
-                                parameterIndex, mSamplerGPUDescriptorHeap.GetGPUHandle(
-                                                    group->GetSamplerHeapOffset()));
-                        }
-                    }
-                }
-            }
-
-            void SetInheritedBindGroups(ComPtr<ID3D12GraphicsCommandList> commandList,
-                                        PipelineLayout* oldLayout,
-                                        PipelineLayout* newLayout) {
-                if (oldLayout == nullptr) {
-                    return;
-                }
-
-                uint32_t inheritUntil = oldLayout->GroupsInheritUpTo(newLayout);
-                for (uint32_t i = 0; i < inheritUntil; ++i) {
-                    const BindGroupLayout* layout = ToBackend(mBindGroups[i]->GetLayout());
-                    const uint32_t dynamicBufferCount = layout->GetDynamicBufferCount();
-
-                    // Inherit dynamic offsets
-                    if (dynamicBufferCount > 0) {
-                        SetBindGroup(commandList, newLayout, mBindGroups[i], i, dynamicBufferCount,
-                                     mLastDynamicOffsets[i].data(), true);
+                    if (mInCompute) {
+                        commandList->SetComputeRootDescriptorTable(
+                            parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
+                                                group->GetCbvUavSrvHeapOffset()));
                     } else {
-                        SetBindGroup(commandList, newLayout, mBindGroups[i], i, 0, nullptr, true);
+                        commandList->SetGraphicsRootDescriptorTable(
+                            parameterIndex, mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(
+                                                group->GetCbvUavSrvHeapOffset()));
+                    }
+                }
+
+                if (samplerCount > 0) {
+                    uint32_t parameterIndex =
+                        pipelineLayout->GetSamplerRootParameterIndex(index);
+
+                    if (mInCompute) {
+                        commandList->SetComputeRootDescriptorTable(
+                            parameterIndex, mSamplerGPUDescriptorHeap.GetGPUHandle(
+                                                group->GetSamplerHeapOffset()));
+                    } else {
+                        commandList->SetGraphicsRootDescriptorTable(
+                            parameterIndex, mSamplerGPUDescriptorHeap.GetGPUHandle(
+                                                group->GetSamplerHeapOffset()));
                     }
                 }
             }
@@ -282,12 +285,21 @@ namespace dawn_native { namespace d3d12 {
             }
 
           private:
+            std::bitset<kMaxBindGroups> mDirtyBindGroups;
+            std::bitset<kMaxBindGroups> mBindGroupLayoutsMask;
+            std::array<BindGroup*, kMaxBindGroups> mBindGroups;
+            std::array<uint32_t, kMaxBindGroups> mDynamicOffsetCounts;
+            std::array<std::array<uint64_t, kMaxBindingsPerGroup>, kMaxBindGroups> mDynamicOffsets;
+
+            // |mPipelineLayout| is the current pipeline layout set on the command buffer.
+            // |mLastAppliedPipelineLayout| is the last pipeline layout for which we applied changes
+            // to the bind group bindings.
+            PipelineLayout* mPipelineLayout = nullptr;
+            PipelineLayout* mLastAppliedPipelineLayout = nullptr;
+
             uint32_t mCbvSrvUavDescriptorHeapSize = 0;
             uint32_t mSamplerDescriptorHeapSize = 0;
-            std::array<BindGroup*, kMaxBindGroups> mBindGroups = {};
-            std::deque<BindGroup*> mBindGroupsList = {};
-            std::array<std::array<uint64_t, kMaxDynamicBufferCount>, kMaxBindGroups>
-                mLastDynamicOffsets;
+            std::deque<BindGroup*> mBindGroupsToAllocate = {};
             bool mInCompute = false;
 
             DescriptorHeapHandle mCbvSrvUavGPUDescriptorHeap = {};
@@ -826,12 +838,15 @@ namespace dawn_native { namespace d3d12 {
             switch (type) {
                 case Command::Dispatch: {
                     DispatchCmd* dispatch = mCommands.NextCommand<DispatchCmd>();
+
+                    bindingTracker->Apply(commandList.Get());
                     commandList->Dispatch(dispatch->x, dispatch->y, dispatch->z);
                 } break;
 
                 case Command::DispatchIndirect: {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
 
+                    bindingTracker->Apply(commandList.Get());
                     Buffer* buffer = ToBackend(dispatch->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDispatchIndirectSignature();
@@ -853,7 +868,8 @@ namespace dawn_native { namespace d3d12 {
                     commandList->SetComputeRootSignature(layout->GetRootSignature().Get());
                     commandList->SetPipelineState(pipeline->GetPipelineState().Get());
 
-                    bindingTracker->SetInheritedBindGroups(commandList, lastLayout, layout);
+                    bindingTracker->OnSetPipeline(pipeline);
+
                     lastLayout = layout;
                 } break;
 
@@ -866,8 +882,8 @@ namespace dawn_native { namespace d3d12 {
                         dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
                     }
 
-                    bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index,
-                                                 cmd->dynamicOffsetCount, dynamicOffsets);
+                    bindingTracker->OnSetBindGroup(cmd->index, group, cmd->dynamicOffsetCount,
+                                                   dynamicOffsets);
                 } break;
 
                 case Command::InsertDebugMarker: {
@@ -1034,6 +1050,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::Draw: {
                     DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
+                    bindingTracker->Apply(commandList.Get());
                     vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     commandList->DrawInstanced(draw->vertexCount, draw->instanceCount,
                                                draw->firstVertex, draw->firstInstance);
@@ -1042,6 +1059,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
+                    bindingTracker->Apply(commandList.Get());
                     indexBufferTracker.Apply(commandList.Get());
                     vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
@@ -1052,6 +1070,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndirect: {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
+                    bindingTracker->Apply(commandList.Get());
                     vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
@@ -1064,6 +1083,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
+                    bindingTracker->Apply(commandList.Get());
                     indexBufferTracker.Apply(commandList.Get());
                     vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
@@ -1119,8 +1139,8 @@ namespace dawn_native { namespace d3d12 {
                     commandList->SetPipelineState(pipeline->GetPipelineState().Get());
                     commandList->IASetPrimitiveTopology(pipeline->GetD3D12PrimitiveTopology());
 
+                    bindingTracker->OnSetPipeline(pipeline);
                     indexBufferTracker.OnSetPipeline(pipeline);
-                    bindingTracker->SetInheritedBindGroups(commandList, lastLayout, layout);
 
                     lastPipeline = pipeline;
                     lastLayout = layout;
@@ -1135,8 +1155,8 @@ namespace dawn_native { namespace d3d12 {
                         dynamicOffsets = iter->NextData<uint64_t>(cmd->dynamicOffsetCount);
                     }
 
-                    bindingTracker->SetBindGroup(commandList, lastLayout, group, cmd->index,
-                                                 cmd->dynamicOffsetCount, dynamicOffsets);
+                    bindingTracker->OnSetBindGroup(cmd->index, group, cmd->dynamicOffsetCount,
+                                                   dynamicOffsets);
                 } break;
 
                 case Command::SetIndexBuffer: {
