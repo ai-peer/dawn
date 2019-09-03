@@ -52,6 +52,24 @@
       "revId": "36bce8e1e2b4c96a8e086144f2e1827f68dea904",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c57107b3_54399682",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-03T20:58:44Z",
+      "side": 1,
+      "message": "Could do strlen + memcmp. But strstr should be ok.",
+      "parentUuid": "ce204ecf_1f3c1c07",
+      "revId": "36bce8e1e2b4c96a8e086144f2e1827f68dea904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
