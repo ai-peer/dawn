@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1a524f9f_ffcea5bf",
+        "filename": "dawn_wire.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-03T21:01:35Z",
+      "side": 1,
+      "message": "Oh, yeah, you\u0027re right. Forgot we control the call of the callback.",
+      "parentUuid": "9a54a860_31c1e46b",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c93a316_a6a0e75c",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 6
