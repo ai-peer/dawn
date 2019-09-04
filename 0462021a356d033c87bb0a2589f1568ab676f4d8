@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81d4e7e8_61f77b52",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:54:59Z",
+      "side": 1,
+      "message": "uNit: newline",
+      "revId": "0462021a356d033c87bb0a2589f1568ab676f4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b85d52d4_340d7ec4",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:54:59Z",
+      "side": 1,
+      "message": "uNit: \"an\"",
+      "range": {
+        "startLine": 207,
+        "startChar": 48,
+        "endLine": 207,
+        "endChar": 51
+      },
+      "revId": "0462021a356d033c87bb0a2589f1568ab676f4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
