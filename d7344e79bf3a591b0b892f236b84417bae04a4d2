@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ab4e59c_899e912b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:07:00Z",
+      "side": 1,
+      "message": "It doesn\u0027t really make sense to have this in the loop AFAICT. How about:\n\n {% if member.annotation !\u003d \"value\" %}\n     size_t memberLength \u003d {{member_length(member, \"record.\")}};\n     result +\u003d memberLength * {{member_transfer_sizeof(member)}};\n     //* Structures might contain more pointers so we need to add their extra size as well.\n     {% if member.type.category \u003d\u003d \"structure\" %}\n         for (size_t i \u003d 0; i \u003c memberLength; ++i) {\n             {% if member.annotation \u003d\u003d \"const*const*\" %}\n                 result +\u003d {{as_cType(member.type.name)}}GetExtraRequiredSize(*record.{{as_varName(member.name)}}[i]);\n             {% elif member.annotation \u003d\u003d \"const*\" %}\n                 result +\u003d {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}}[i]);\n             {% endif %}\n         }\n     {% endif %}\n {% elif member.type.category \u003d\u003d \"structure\" %}\n     result +\u003d {{as_cType(member.type.name)}}GetExtraRequiredSize(record.{{as_varName(member.name)}});\n {% endif %}",
+      "revId": "d7344e79bf3a591b0b892f236b84417bae04a4d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
