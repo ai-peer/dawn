@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1cfd960_a60dddd0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-04T02:36:46Z",
+      "side": 1,
+      "message": "typo..",
+      "range": {
+        "startLine": 572,
+        "startChar": 26,
+        "endLine": 572,
+        "endChar": 45
+      },
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
