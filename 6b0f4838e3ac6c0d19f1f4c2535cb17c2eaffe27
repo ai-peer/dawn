@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1b0cc7d_e17c2b02",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:50:18Z",
+      "side": 1,
+      "message": "nit: Prefer std::array\u003cGLbyte, MAX_TEXEL_SIZE\u003e clearColorData;",
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95937ad6_2673c66e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:50:18Z",
+      "side": 1,
+      "message": "In the Vulkan backend, we have an OUT_OF_MEMORY check here, which would be good to include here too.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/TextureVk.cpp?l\u003d687\u0026rcl\u003df5c44772a6999a37760f6b67ee73b33876e8f7a9",
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cc5a780_5eaad9b0",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:50:18Z",
+      "side": 1,
+      "message": "In the Vulkan backend, we used DynamicUploader here. Is that possible for the OpenGL backend?\n\nLeave a TODO if it\u0027s not possible now but we want to use it later.",
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e544777_ce1562b4",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:50:18Z",
+      "side": 1,
+      "message": "This looks equivalent to GetSize().width",
+      "range": {
+        "startLine": 265,
+        "startChar": 31,
+        "endLine": 265,
+        "endChar": 92
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ab85d87_57541b9d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:50:18Z",
+      "side": 1,
+      "message": "I think for compressed formats, glCompressedTexSubImage2/3D would be required here, but not 100% sure",
+      "range": {
+        "startLine": 272,
+        "startChar": 31,
+        "endLine": 272,
+        "endChar": 44
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15b7f9a4_4e63e39d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T21:50:18Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this initialize only the first layer of a 2d texture array?",
+      "range": {
+        "startLine": 273,
+        "startChar": 58,
+        "endLine": 273,
+        "endChar": 59
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
