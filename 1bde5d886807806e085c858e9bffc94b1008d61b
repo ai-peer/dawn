@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4582b1cc_de2f7aa9",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T15:36:28Z",
+      "side": 1,
+      "message": "Also these values don\u0027t match webgpu.h: validation should be 1 and out of memory should be 2",
+      "revId": "1bde5d886807806e085c858e9bffc94b1008d61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
