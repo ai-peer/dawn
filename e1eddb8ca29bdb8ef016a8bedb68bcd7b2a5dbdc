@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "8859344c_5abbd7cf",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T19:03:52Z",
+      "side": 1,
+      "message": "Good call.",
+      "parentUuid": "c258c9c4_f27805fa",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "223da624_1d95d4d1",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 6
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "Turns out it\u0027s a C++17 extension so we don\u0027t have it.",
       "parentUuid": "223da624_1d95d4d1",
+      "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f76c2d8_4638f123",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-04T19:03:52Z",
+      "side": 1,
+      "message": "Oh well.",
+      "parentUuid": "5430f9f4_cfb07bc1",
       "revId": "e1eddb8ca29bdb8ef016a8bedb68bcd7b2a5dbdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
