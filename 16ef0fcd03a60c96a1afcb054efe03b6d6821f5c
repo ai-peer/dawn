@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "ef35525c_bbff5ff2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "nit: ApplyForDrawDispatch?\n\nCould the pipeline change be handled separately so the logic to know what to dirty is done only then, and not on every draw / dispatch?",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d73ca163_45677e45",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "Note that on the Metal backend the inheritance rule should work to avoid setting all bindgroups again on pipeline change because bindgroups are packed in the buffer / texture tables in contiguous order.",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3b5e50a_729a171e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "nit \u003d 0 should work because any bindgroup not in the mask would be dirtied by the next pipeline change.",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d12571e_d544e99f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "I assume this didn\u0027t change at all?",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b1cfd960_a60dddd0",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -19,6 +87,74 @@
         "endLine": 572,
         "endChar": 45
       },
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b58e485c_3e4151f7",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "Couldn\u0027t this be inferred in MakeTestPipeline? BGL that are the same are idempotent.",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2444175_2bc856aa",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "nit: it would be nice to have some comments to delimitate blocks so it\u0027s a bit easier to read the tests.",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36202539_6388eab7",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "nit: can we initialize it to 0, otherwise ASAN builds will complain inside SetSubData.",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ac9d29b_08681f6c",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-04T12:40:17Z",
+      "side": 1,
+      "message": "If we had additive blending and uvec4(0s or 1s) it we wouldn\u0027t need this base case because we could easily determine which draws and bindgroups have been used.",
       "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
