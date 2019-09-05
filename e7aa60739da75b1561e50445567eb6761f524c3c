@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e0f4a2d6_31c52924",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-05T06:57:34Z",
+      "side": 1,
+      "message": "Maybe I can define this value in Buffer.h, it\u0027s only used in Metal backend.",
+      "parentUuid": "48737ba0_818892e6",
+      "range": {
+        "startLine": 35,
+        "startChar": 47,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "e7aa60739da75b1561e50445567eb6761f524c3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1cf8f252_5deb885c",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "Also I think maybe it is better not to add this function now as it is not being used. Instead we can leave a comment to explain this and add it when we actually need it.",
       "parentUuid": "1cf8f252_5deb885c",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "e7aa60739da75b1561e50445567eb6761f524c3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b6b4ba3_5b14a291",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-05T06:57:34Z",
+      "side": 1,
+      "message": "OK, I will add comment for it. But I think the physical size should be exactly the size of buffer data storaged in memory, and the virtual size is the size of buffer data loaded into memory.",
+      "parentUuid": "49e8272b_3ca0b82f",
       "range": {
         "startLine": 49,
         "startChar": 12,
