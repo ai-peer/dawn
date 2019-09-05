@@ -316,6 +316,30 @@
       "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47f8676b_f7617a77",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T22:13:47Z",
+      "side": 1,
+      "message": "hmm im not sure actually. I was just following what was done here https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/opengl/CommandBufferGL.cpp?l\u003d496\u0026rcl\u003da900ccebcf428c99184ca44a3fad6030b2e43fc7\nI also think depth is usually 1 when I worked in other backends, but maybe theyre not referring to the same \"depth\".",
+      "parentUuid": "da19f243_cd13f409",
+      "range": {
+        "startLine": 273,
+        "startChar": 58,
+        "endLine": 273,
+        "endChar": 59
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
