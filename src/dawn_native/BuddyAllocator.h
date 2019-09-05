@@ -20,7 +20,7 @@
 
 namespace dawn_native {
 
-    static constexpr uint64_t INVALID_OFFSET = std::numeric_limits<uint64_t>::max();
+    static constexpr uint64_t kInvalidOffset = std::numeric_limits<uint64_t>::max();
 
     // Buddy allocator uses the buddy memory allocation technique to satisify an allocation request.
     // Memory is split into halves until just large enough to fit to the request. This
@@ -35,6 +35,7 @@ namespace dawn_native {
     //
     class BuddyAllocator {
       public:
+        BuddyAllocator() = default;
         BuddyAllocator(uint64_t maxSize);
         ~BuddyAllocator();
 

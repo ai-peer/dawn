@@ -1,0 +1,72 @@
+// Copyright 2019 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef DAWNNATIVE_BUDDYRESOURCEHEAPALLOCATOR_H_
+#define DAWNNATIVE_BUDDYRESOURCEHEAPALLOCATOR_H_
+
+#include <vector>
+
+#include "dawn_native/BuddyAllocator.h"
+#include "dawn_native/ResourceMemoryAllocator.h"
+
+namespace dawn_native {
+    // BuddyResourceHeapAllocator uses the buddy allocator to sub-allocate blocks of device
+    // memory created by ResourceMemoryAllocator clients. It creates a very large buddy system
+    // where backing device memory blocks equal a specified level in the system.
+    //
+    // Upon sub-allocating, the offset gets mapped to device memory by computing the corresponding
+    // heap index and should the heap not exist, it is created. If two sub-allocations share the
+    // same heap index, the heap refcount is incremented to ensure de-allocating one doesn't release
+    // the other prematurely.
+    //
+    // The device will only create up to Log2(kMaxResourceSize) allocators and can prefer speed
+    // over memory footprint by selecting an allocator with a higher heap threshold which results
+    // into pre-allocating more memory.
+    //
+    class BuddyResourceHeapAllocator {
+      public:
+        BuddyResourceHeapAllocator() = default;
+        BuddyResourceHeapAllocator(uint64_t maxBlockSize,
+                                   uint64_t heapSize,
+                                   ResourceMemoryAllocator* mClient);
+        ~BuddyResourceHeapAllocator() = default;
+
+        ResultOrError<ResourceMemoryAllocation> Allocate(uint64_t allocationSize,
+                                                         uint64_t alignment,
+                                                         int memoryFlags = 0);
+        void Deallocate(ResourceMemoryAllocation& allocation);
+
+        uint64_t GetHeapSize() const;
+
+        // For testing purposes.
+        uint64_t ComputeTotalNumOfHeapsForTesting() const;
+
+      private:
+        uint64_t GetHeapIndex(uint64_t offset) const;
+
+        uint64_t mHeapSize = 0;
+
+        BuddyAllocator mBuddyBlockAllocator;
+        std::unique_ptr<ResourceMemoryAllocator> mClient;
+
+        struct TrackedSubAllocations {
+            size_t refcount = 0;
+            ResourceMemoryAllocation mHeapAllocation;
+        };
+
+        std::vector<TrackedSubAllocations> mTrackedSubAllocations;
+    };
+}  // namespace dawn_native
+
+#endif  // DAWNNATIVE_BUDDYRESOURCEHEAPALLOCATOR_H_
