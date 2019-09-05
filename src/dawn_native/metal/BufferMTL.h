@@ -30,6 +30,7 @@ namespace dawn_native { namespace metal {
         ~Buffer();
 
         id<MTLBuffer> GetMTLBuffer() const;
+        uint32_t GetVirtualSize() const;
 
         void OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite);
 
@@ -44,6 +45,8 @@ namespace dawn_native { namespace metal {
         MaybeError MapAtCreationImpl(uint8_t** mappedPointer) override;
 
         id<MTLBuffer> mMtlBuffer = nil;
+
+        uint32_t mVirtualSize = 0;
     };
 
     class MapRequestTracker {
