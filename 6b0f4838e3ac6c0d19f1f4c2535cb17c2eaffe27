@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f1b5af5e_6f06f93a",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T18:05:31Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 187,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 9
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a1b0cc7d_e17c2b02",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
@@ -16,6 +39,24 @@
       "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b510ec4d_de78191d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T18:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1b0cc7d_e17c2b02",
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -36,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "ce5cd35b_bd97a63a",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T18:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95937ad6_2673c66e",
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cc5a780_5eaad9b0",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
@@ -50,6 +109,24 @@
       "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bcb7036_5119390e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T18:05:31Z",
+      "side": 1,
+      "message": "ok i will leave a todo, i think this doesn\u0027t work right now because staging buffers are not implemented for opengl yet.",
+      "parentUuid": "9cc5a780_5eaad9b0",
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +153,30 @@
     },
     {
       "key": {
+        "uuid": "0e32e360_3501df5d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T18:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e544777_ce1562b4",
+      "range": {
+        "startLine": 265,
+        "startChar": 31,
+        "endLine": 265,
+        "endChar": 92
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab85d87_57541b9d",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
@@ -99,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "6192c3b7_1f069fde",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T18:05:31Z",
+      "side": 1,
+      "message": "i think we skip compressed formats for now at [1].",
+      "parentUuid": "9ab85d87_57541b9d",
+      "range": {
+        "startLine": 272,
+        "startChar": 31,
+        "endLine": 272,
+        "endChar": 44
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15b7f9a4_4e63e39d",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
@@ -110,6 +235,30 @@
       "writtenOn": "2019-09-04T21:50:18Z",
       "side": 1,
       "message": "Wouldn\u0027t this initialize only the first layer of a 2d texture array?",
+      "range": {
+        "startLine": 273,
+        "startChar": 58,
+        "endLine": 273,
+        "endChar": 59
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fa4f3e2_055e0887",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-05T18:05:31Z",
+      "side": 1,
+      "message": "oh yah, i think I need to use layercount for the z offset param.",
+      "parentUuid": "15b7f9a4_4e63e39d",
       "range": {
         "startLine": 273,
         "startChar": 58,
