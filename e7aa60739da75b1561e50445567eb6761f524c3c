@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "48737ba0_818892e6",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-05T05:13:12Z",
+      "side": 1,
+      "message": "I think it is better to define this constant value as a constexpr variable in Constants.h instead of directly using a \u0027magic\u0027 number.",
+      "range": {
+        "startLine": 35,
+        "startChar": 47,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "e7aa60739da75b1561e50445567eb6761f524c3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1cf8f252_5deb885c",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 3
