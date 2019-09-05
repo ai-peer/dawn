@@ -559,9 +559,6 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 TEST_P(TextureZeroInitTest, NonRenderableTextureClear) {
-    // skip test for other backends since they are not implemented yet
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
     dawn::TextureDescriptor descriptor =
         CreateTextureDescriptor(1, 1, dawn::TextureUsage::CopySrc, kNonrenderableColorFormat);
     dawn::Texture texture = device.CreateTexture(&descriptor);
