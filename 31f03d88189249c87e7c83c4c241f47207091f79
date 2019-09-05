@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6a17528_0620f0ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T09:37:26Z",
+      "side": 1,
+      "message": "nit: actual\n\nAnd the function doesn\u0027t exist in this patchset.",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 38
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d452be5a_a47c0154",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T09:37:26Z",
+      "side": 1,
+      "message": "nit: aligned. Also explain why vec4 requires this to be 16.",
+      "range": {
+        "startLine": 21,
+        "startChar": 64,
+        "endLine": 21,
+        "endChar": 71
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "090dbf07_3e4ba9fd",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T09:37:26Z",
+      "side": 1,
+      "message": "nit UniformOrStorage?",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08e41144_bf0b5ab9",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T09:37:26Z",
+      "side": 1,
+      "message": "nit: to\n\nA requires B to be C",
+      "range": {
+        "startLine": 34,
+        "startChar": 89,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
