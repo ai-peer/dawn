@@ -559,11 +559,37 @@ TEST_P(TextureZeroInitTest, ComputePassSampledTextureClear) {
 
 // This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures
 TEST_P(TextureZeroInitTest, NonRenderableTextureClear) {
-    // skip test for other backends since they are not implemented yet
+    dawn::TextureDescriptor descriptor =
+        CreateTextureDescriptor(1, 1, dawn::TextureUsage::CopySrc, kNonrenderableColorFormat);
+    dawn::Texture texture = device.CreateTexture(&descriptor);
+
+    // Set buffer with dirty data so we know it is cleared by the lazy cleared texture copy
+    uint32_t bufferSize = 4 * kSize * kSize;
+    std::vector<uint8_t> data(bufferSize, 100);
+    dawn::Buffer bufferDst = utils::CreateBufferFromData(
+        device, data.data(), static_cast<uint32_t>(data.size()), dawn::BufferUsage::CopySrc);
+
+    dawn::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(bufferDst, 0, 0, 0);
+    dawn::TextureCopyView textureCopyView = utils::CreateTextureCopyView(texture, 0, 0, {0, 0, 0});
+    dawn::Extent3D copySize = {kSize, kSize, 1};
+
+    dawn::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.CopyTextureToBuffer(&textureCopyView, &bufferCopyView, &copySize);
+    dawn::CommandBuffer commands = encoder.Finish();
+    EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commands));
+
+    std::vector<uint32_t> expectedWithZeros(bufferSize, 0);
+    EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferDst, 0, 8);
+}
+
+// This tests that the code path of CopyTextureToBuffer clears correctly for non-renderable textures with more than 1 array layers
+TEST_P(TextureZeroInitTest, NonRenderableTextureClearWithMultiArrayLayers) {
+    // TODO(natlee@microsoft.com): skip for now on opengl because TextureClear nonrenderable textures 
+    // does not create large enough buffers for array layers greater than 1.
     DAWN_SKIP_TEST_IF(IsOpenGL());
 
     dawn::TextureDescriptor descriptor =
-        CreateTextureDescriptor(1, 1, dawn::TextureUsage::CopySrc, kNonrenderableColorFormat);
+        CreateTextureDescriptor(1, 2, dawn::TextureUsage::CopySrc, kNonrenderableColorFormat);
     dawn::Texture texture = device.CreateTexture(&descriptor);
 
     // Set buffer with dirty data so we know it is cleared by the lazy cleared texture copy
