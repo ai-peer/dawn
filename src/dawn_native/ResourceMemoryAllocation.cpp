@@ -39,17 +39,14 @@ namespace dawn_native {
     }
 
     ResourceHeapBase* ResourceMemoryAllocation::GetResourceHeap() const {
-        ASSERT(mMethod != AllocationMethod::kInvalid);
         return mResourceHeap;
     }
 
     uint64_t ResourceMemoryAllocation::GetOffset() const {
-        ASSERT(mMethod != AllocationMethod::kInvalid);
         return mOffset;
     }
 
     AllocationMethod ResourceMemoryAllocation::GetAllocationMethod() const {
-        ASSERT(mMethod != AllocationMethod::kInvalid);
         return mMethod;
     }
 
