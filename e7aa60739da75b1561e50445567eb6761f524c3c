@@ -22,6 +22,30 @@
       "revId": "e7aa60739da75b1561e50445567eb6761f524c3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49e8272b_3ca0b82f",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-05T05:11:35Z",
+      "side": 1,
+      "message": "Also I think maybe it is better not to add this function now as it is not being used. Instead we can leave a comment to explain this and add it when we actually need it.",
+      "parentUuid": "1cf8f252_5deb885c",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "e7aa60739da75b1561e50445567eb6761f524c3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
