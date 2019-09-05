@@ -14,6 +14,7 @@
 
 #include "dawn_native/metal/BufferMTL.h"
 
+#include "common/Math.h"
 #include "dawn_native/metal/DeviceMTL.h"
 
 namespace dawn_native { namespace metal {
@@ -27,7 +28,14 @@ namespace dawn_native { namespace metal {
             storageMode = MTLResourceStorageModePrivate;
         }
 
-        mMtlBuffer = [device->GetMTLDevice() newBufferWithLength:GetSize() options:storageMode];
+        uint32 physicalSize = mVirtualSize = GetSize();
+        if (GetUsage() & (dawn::BufferUsage::Uniform | dawn::BufferUsage::Storage)) {
+            // Metal requires the size of constant buffer and storage buffer are aligned to the
+            // largest base alignment of its members.
+            physicalSize = Align(physicalSize, 16);
+        }
+
+        mMtlBuffer = [device->GetMTLDevice() newBufferWithLength:physicalSize options:storageMode];
     }
 
     Buffer::~Buffer() {
@@ -36,6 +44,10 @@ namespace dawn_native { namespace metal {
 
     id<MTLBuffer> Buffer::GetMTLBuffer() const {
         return mMtlBuffer;
+    }
+
+    uint32_t Buffer::GetVirtualSize() const {
+        return mVirtualSize;
     }
 
     void Buffer::OnMapCommandSerialFinished(uint32_t mapSerial, bool isWrite) {
