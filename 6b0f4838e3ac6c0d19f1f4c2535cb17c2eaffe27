@@ -340,6 +340,30 @@
       "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b167622f_272c52be",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-05T22:27:58Z",
+      "side": 1,
+      "message": "That one is using zoffset\u003dCopyBufferToTextureCommand.destination.arrayLayer, not zoffset\u003dlayerCount. For a 2d texture array, zoffset is the first layer to copy, and depth is the number of layers to copy. manpage:\n\n\u003e For three-dimensional textures, the z index refers to the third dimension. For two-dimensional array textures, the z index refers to the slice index. \nhttps://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexSubImage3D.xhtml\n\nSo we want zoffset\u003dbaseArrayLayer and depth\u003dlayerCount.\n\nHowever this won\u0027t actually work because of the problem Corentin pointed out. So we can either fix that or just take out the gl.TexSubImage3D and ASSERT layerCount \u003d\u003d 1 and add a TODO to implement layerCount \u003e 1.",
+      "parentUuid": "47f8676b_f7617a77",
+      "range": {
+        "startLine": 273,
+        "startChar": 58,
+        "endLine": 273,
+        "endChar": 59
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

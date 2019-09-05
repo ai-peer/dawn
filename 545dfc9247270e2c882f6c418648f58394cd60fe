@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "592175a5_9eb3f604",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-05T22:27:58Z",
+      "side": 1,
+      "message": "uNit: trailing whitespace",
+      "range": {
+        "startLine": 257,
+        "startChar": 47,
+        "endLine": 257,
+        "endChar": 48
+      },
+      "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b220b8f_cb766287",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-05T22:27:58Z",
+      "side": 1,
+      "message": "uNit: trailing whitespace",
+      "range": {
+        "startLine": 277,
+        "startChar": 93,
+        "endLine": 277,
+        "endChar": 94
+      },
+      "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
