@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "547156b0_2f363adf",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T19:23:34Z",
+      "side": 1,
+      "message": "This only clears the first mip and array layer. Can we have a TODO to clear all of them?",
+      "revId": "ee0f85c4a105afb8b9ad7cd5882b22d99a972724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9128dd4d_6f701396",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T19:23:34Z",
+      "side": 1,
+      "message": "Let\u0027s use Ref\u003c\u003e like in the D3D12 or Vulkan backend.",
+      "revId": "ee0f85c4a105afb8b9ad7cd5882b22d99a972724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a828d951_4ad278b7",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T19:23:34Z",
+      "side": 1,
+      "message": "That\u0027s exactly DAWN_TRY(srcBuffer-\u003eMapAtCreation(\u0026clearBuffer))",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "ee0f85c4a105afb8b9ad7cd5882b22d99a972724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7844f3d5_e5b977a6",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-05T19:23:34Z",
+      "side": 1,
+      "message": "This will break as soon as there is more than one layer because the buffer is sized only for one layer. Can we add a TODO and maye an assert?",
+      "revId": "ee0f85c4a105afb8b9ad7cd5882b22d99a972724",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
