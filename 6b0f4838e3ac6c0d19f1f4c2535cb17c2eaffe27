@@ -177,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "55815763_a80af120",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T19:08:54Z",
+      "side": 1,
+      "message": "I think Natasha\u0027s original code was correct. It used the rowPitch, converted to number of pixels.\n\nrowPitchInPixels can be greater than the texture\u0027s width if the width of the texture is not aligned to 512.\n\nRight now the test is using a 128 x 128 texture. Maybe we can test with something unaligned like 127x127 to help catch errors.",
+      "parentUuid": "0e32e360_3501df5d",
+      "range": {
+        "startLine": 265,
+        "startChar": 31,
+        "endLine": 265,
+        "endChar": 92
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab85d87_57541b9d",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
