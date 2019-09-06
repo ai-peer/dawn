@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78a1507f_7740899b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit: not",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 4
+      },
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6768084d_ab3d2b8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit: BUG\u003d? We could create a tracking bug for the efforts to port Dawn to Fuchisa in crbug.com/dawn",
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92292e0d_c23deb28",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem used?",
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cfce8a4_a104518c",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "I think you meant to use this in the calls to EnumerateInstanceExtensionProperties",
+      "range": {
+        "startLine": 32,
+        "startChar": 49,
+        "endLine": 32,
+        "endChar": 59
+      },
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2e9d651_0738ff90",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit: ..",
+      "range": {
+        "startLine": 161,
+        "startChar": 73,
+        "endLine": 161,
+        "endChar": 75
+      },
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abb09d4f_1df450b4",
+        "filename": "src/utils/Glfw3Fuchsia.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit:supports",
+      "range": {
+        "startLine": 15,
+        "startChar": 35,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b3a5f62_d2568c2b",
+        "filename": "src/utils/Glfw3Fuchsia.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit: DAWN_UNUSED(hint); ditto in other places in this file.",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfcd83ce_da4d7f7c",
+        "filename": "src/utils/Glfw3Fuchsia.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit: ASSERT",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 14
+      },
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0e379f8_085c1035",
+        "filename": "src/utils/Glfw3Fuchsia.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit: ASSERT",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 14
+      },
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67589ec8_bda4b4fd",
+        "filename": "src/utils/Glfw3Fuchsia.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T11:41:59Z",
+      "side": 1,
+      "message": "nit: we try to have bracket around all control flow to avoid forgetting to add them when we put a second statement in them.",
+      "revId": "dc956e3bafad80b60c2e2da93d5b4f870397fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
