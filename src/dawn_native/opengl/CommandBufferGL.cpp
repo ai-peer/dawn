@@ -394,9 +394,7 @@ namespace dawn_native { namespace opengl {
                 // We count the lazy clears for non output attachment textures and depth stencil
                 // textures in order to match the backdoor lazy clear counts in Vulkan and D3D12.
                 bool isLazyClear =
-                    ((!(usages.textureUsages[i] & dawn::TextureUsage::OutputAttachment) &&
-                      texture->GetFormat().IsColor()) ||
-                     texture->GetFormat().HasDepthOrStencil());
+                    !(usages.textureUsages[i] & dawn::TextureUsage::OutputAttachment);
                 texture->EnsureSubresourceContentInitialized(
                     0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers(), isLazyClear);
             }
