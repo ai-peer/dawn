@@ -45,6 +45,23 @@
       "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "beb04414_a1de3959",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T12:39:41Z",
+      "side": 1,
+      "message": "nit: What I meant was to remove this code path since it is broken and replace it with an assert, like so:\n\n                   case dawn::TextureDimension::e2D:\n                       // TODO(natlee@microsoft.com): This will break when layerCount is \n                       // greater than 1, because buffer is sized only for one layer.\n                       ASSERT(layerCount \u003d\u003d 1);\n                       gl.TexSubImage2D(GetGLTarget(), level, 0, 0, size.width, size.height,\n                                        GetGLFormat().format, GetGLFormat().type, 0);",
+      "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
