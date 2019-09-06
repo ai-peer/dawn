@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65424faa_10f020eb",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T16:34:12Z",
+      "side": 1,
+      "message": "nit: plural like the other members",
+      "revId": "0503822065aa76ab35e959c7dbe73f69c79a254f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
