@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39ecaf42_dcc4c013",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:30:11Z",
+      "side": 1,
+      "message": "nit: many",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 13
+      },
+      "revId": "8ce630894cc728d90f154645545c5b18c96e5b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
