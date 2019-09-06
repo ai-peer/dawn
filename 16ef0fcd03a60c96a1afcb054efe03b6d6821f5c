@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e35faa48_5f12afba",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Updated pipeline change logic.\n\nHm, I think that BindGroupTracker::Apply is clear that it\u0027s applying bind groups. Why \"ForDrawDispatch\"?",
+      "parentUuid": "ef35525c_bbff5ff2",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d73ca163_45677e45",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "368f247d_4f891b3a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Updated to skip inherited groups accordingly.",
+      "parentUuid": "d73ca163_45677e45",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "e96d80e1_32df4bef",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3b5e50a_729a171e",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d12571e_d544e99f",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f17703d_e4c4f1e5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Correct.",
+      "parentUuid": "8d12571e_d544e99f",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "0fdf8391_0a350284",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1cfd960_a60dddd0",
+      "range": {
+        "startLine": 572,
+        "startChar": 26,
+        "endLine": 572,
+        "endChar": 45
+      },
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b58e485c_3e4151f7",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -107,6 +203,24 @@
       "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50a2967a_27873c23",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Well,\n- We need to create the BGL here anyway because we need to make the bind group later.\n- We can\u0027t infer dynamic\u003dtrue/false? in MakeTestPipeline, so we would need to at the very least pass that in.\n\nSo I think that if the decision is to pass in the BGL or dynamic\u003dtrue/false, we might as well pass in the BGL because we already have it.",
+      "parentUuid": "b58e485c_3e4151f7",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "fabe5468_e75aa049",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2444175_2bc856aa",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36202539_6388eab7",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -144,6 +276,24 @@
     },
     {
       "key": {
+        "uuid": "a04c29b0_4e9715b7",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36202539_6388eab7",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ac9d29b_08681f6c",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -158,6 +308,24 @@
       "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73175b86_a1b5ab31",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-06T17:48:03Z",
+      "side": 1,
+      "message": "Done, but kept floats in the shader. I wanted to continue using utils::CreateBasicRenderPass",
+      "parentUuid": "0ac9d29b_08681f6c",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
