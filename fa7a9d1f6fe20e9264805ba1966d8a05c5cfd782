@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d21c2c5b_adb6389c",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T13:02:49Z",
+      "side": 1,
+      "message": "In which case do we need this?",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67a95656_99d5f116",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T13:02:49Z",
+      "side": 1,
+      "message": "I must be missing something.\n\nRight now ResourceMemoryAllocation is too many things: it represents both an ID3D12Heap and an ID3D12Resource with metadata like how it was allocated and where it was allocated in the ID3D12Heap.\n\nLikewise ResourceHeapBase is used both to return ID3D12Heaps from the ResourceMemoryAllocator, and hold ID3D12Resources for ResourceMemoryAllocations in d3d12::Buffer for example.\n\nI suggest having ResourceHeapBase represent an ID3D12Heap and its size and that\u0027s it, while ResourceMemoryAllocation represents an ID3D12Resource, how it was allocated and it\u0027s offset in the ID3D12Heap.",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50529d14_8c94a469",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T13:02:49Z",
+      "side": 1,
+      "message": "I think return {}; should work.",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5c1000d_562db566",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T13:02:49Z",
+      "side": 1,
+      "message": "Since we know the maximum number of heaps at creation, could we size the vector correctly at that time? This way only the \"mTrackedSubAllocations[heapIndex].refcount \u003d\u003d 0\" condition needs to be checked.",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3e537d7_e6cc373f",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T13:02:49Z",
+      "side": 1,
+      "message": "Isn\u0027t this the offset in the heap? Right now it the offset since the start of the vector of heaps and will cause issues when we use CreatePlacedResource.",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 18
+      },
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcc244d7_e6f13cea",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T13:02:49Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3521ecc_a29c1dbf",
+        "filename": "src/tests/unittests/BuddyResourceAllocatorTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-06T13:02:49Z",
+      "side": 1,
+      "message": "I didn\u0027t look at this yet.",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
