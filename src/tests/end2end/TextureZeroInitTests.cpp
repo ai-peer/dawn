@@ -317,6 +317,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
     renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = dawn::LoadOp::Load;
     renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = dawn::LoadOp::Clear;
     renderPassDescriptor.cDepthStencilAttachmentInfo.clearStencil = 0;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = dawn::StoreOp::Store;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp = dawn::StoreOp::Store;
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -324,8 +326,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
     pass.Draw(6, 1, 0, 0);
     pass.EndPass();
     dawn::CommandBuffer commandBuffer = encoder.Finish();
-    // Expect 1 lazy clear for the depthStencilTexture
-    EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+    // Expect 0 lazy clears, depth stencil texture will clear using loadop
+    EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
 
     // Expect the texture to be red because depth test passed.
     std::vector<RGBA8> expected(kSize * kSize, {255, 0, 0, 255});
@@ -352,6 +354,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
     renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = dawn::LoadOp::Clear;
     renderPassDescriptor.cDepthStencilAttachmentInfo.clearDepth = 0.0f;
     renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = dawn::LoadOp::Load;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = dawn::StoreOp::Store;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp = dawn::StoreOp::Store;
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -359,8 +363,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
     pass.Draw(6, 1, 0, 0);
     pass.EndPass();
     dawn::CommandBuffer commandBuffer = encoder.Finish();
-    // Expect 1 lazy clear for depthStencilTexture.
-    EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+    // Expect 0 lazy clears, depth stencil texture will clear using loadop
+    EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
 
     // Expect the texture to be red because stencil test passed.
     std::vector<RGBA8> expected(kSize * kSize, {255, 0, 0, 255});
@@ -386,6 +390,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
                                                           depthStencilTexture.CreateView());
     renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = dawn::LoadOp::Load;
     renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = dawn::LoadOp::Load;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = dawn::StoreOp::Store;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp = dawn::StoreOp::Store;
 
     dawn::CommandEncoder encoder = device.CreateCommandEncoder();
     auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
@@ -393,8 +399,8 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
     pass.Draw(6, 1, 0, 0);
     pass.EndPass();
     dawn::CommandBuffer commandBuffer = encoder.Finish();
-    // Expect 1 lazy clear for depthStencilTexture.
-    EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+    // Expect 0 lazy clears, depth stencil texture will clear using loadop
+    EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commandBuffer));
 
     // Expect the texture to be red because both depth and stencil tests passed.
     std::vector<RGBA8> expected(kSize * kSize, {255, 0, 0, 255});
