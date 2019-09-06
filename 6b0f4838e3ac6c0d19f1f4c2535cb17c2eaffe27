@@ -364,6 +364,30 @@
       "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "905265a3_3e3b2668",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-06T18:03:55Z",
+      "side": 1,
+      "message": "I see, thank you! I removed it and added the todo.",
+      "parentUuid": "b167622f_272c52be",
+      "range": {
+        "startLine": 273,
+        "startChar": 58,
+        "endLine": 273,
+        "endChar": 59
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

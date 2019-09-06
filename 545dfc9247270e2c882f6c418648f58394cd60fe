@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5d8da333_93798d77",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-06T18:03:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "592175a5_9eb3f604",
+      "range": {
+        "startLine": 257,
+        "startChar": 47,
+        "endLine": 257,
+        "endChar": 48
+      },
+      "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b220b8f_cb766287",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "934083fe_a0525f6b",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-06T18:03:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b220b8f_cb766287",
+      "range": {
+        "startLine": 277,
+        "startChar": 93,
+        "endLine": 277,
+        "endChar": 94
+      },
+      "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "beb04414_a1de3959",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 4
@@ -62,6 +110,24 @@
       "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a02634e_f964c230",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-06T18:03:55Z",
+      "side": 1,
+      "message": "Got it, thanks!",
+      "parentUuid": "beb04414_a1de3959",
+      "revId": "545dfc9247270e2c882f6c418648f58394cd60fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
