@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3f3b6747_4cdeee4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-06T08:37:14Z",
+      "side": 1,
+      "message": "Yes, it\u0027s removed because it\u0027s not needed now.",
+      "parentUuid": "f6a17528_0620f0ad",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 38
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d452be5a_a47c0154",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f6fb367_b125d380",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-06T08:37:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d452be5a_a47c0154",
+      "range": {
+        "startLine": 21,
+        "startChar": 64,
+        "endLine": 21,
+        "endChar": 71
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "37559819_1e3bd732",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-06T08:37:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "090dbf07_3e4ba9fd",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08e41144_bf0b5ab9",
         "filename": "src/dawn_native/metal/BufferMTL.mm",
         "patchSetId": 5
@@ -91,6 +163,30 @@
       "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6800de87_b1583abf",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-06T08:37:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08e41144_bf0b5ab9",
+      "range": {
+        "startLine": 34,
+        "startChar": 89,
+        "endLine": 34,
+        "endChar": 93
+      },
+      "revId": "31f03d88189249c87e7c83c4c241f47207091f79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
