@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c93a4060_596d1b52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T09:29:18Z",
+      "side": 1,
+      "message": "nit: Bug:dawn:221 (I usually use BUG\u003ddawn:221 formatting myself). Otherwise 221 will refer to the Chromium bug which is likely long closed :)",
+      "revId": "d30065d212e17b3b5e461b5e28912104ad8adc14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
