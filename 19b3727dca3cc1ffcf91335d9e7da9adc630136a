@@ -16,6 +16,24 @@
       "revId": "19b3727dca3cc1ffcf91335d9e7da9adc630136a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6a389c1_a72ece13",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-09T16:46:28Z",
+      "side": 1,
+      "message": "Nice suggestion; thanks!",
+      "parentUuid": "322d2632_d98c1ef3",
+      "revId": "19b3727dca3cc1ffcf91335d9e7da9adc630136a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
