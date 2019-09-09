@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3715f7d6_f4f9cf9c",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T19:55:04Z",
+      "side": 1,
+      "message": "Check this isn\u0027t rounding: ASSERT(GetSize().height % GetFormat().blockHeight \u003d\u003d 0)",
+      "revId": "a34167811132c20a1377efc93be6a3b543955b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc64136e_29436c42",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T19:55:04Z",
+      "side": 1,
+      "message": "I *think* these 2 lines set global state and can be outside the for-loop.",
+      "revId": "a34167811132c20a1377efc93be6a3b543955b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

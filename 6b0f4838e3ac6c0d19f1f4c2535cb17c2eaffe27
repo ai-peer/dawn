@@ -201,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "0f57d20f_f059120d",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T19:55:04Z",
+      "side": 1,
+      "message": "oops, I think you\u0027re right. Would be great to have a test for this.\n\nStill not totally sure whether this is the right formula - we\u0027ll have to test it better when we have compressed textures (where block size is \u003e 1). Ok to not worry about that for the moment.\n\nI think we also should have an assert that this isn\u0027t rounding: ASSERT(rowPitch % GetFormat().blockByteSize \u003d\u003d 0)",
+      "parentUuid": "55815763_a80af120",
+      "range": {
+        "startLine": 265,
+        "startChar": 31,
+        "endLine": 265,
+        "endChar": 92
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab85d87_57541b9d",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
