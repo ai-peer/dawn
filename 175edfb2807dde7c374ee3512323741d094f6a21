@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88621688_04d46648",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T15:46:44Z",
+      "side": 1,
+      "message": "nit: pipeline layout.",
+      "range": {
+        "startLine": 407,
+        "startChar": 89,
+        "endLine": 407,
+        "endChar": 97
+      },
+      "revId": "175edfb2807dde7c374ee3512323741d094f6a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ad0144b_60f31c8a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T15:46:44Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 408,
+        "startChar": 30,
+        "endLine": 408,
+        "endChar": 38
+      },
+      "revId": "175edfb2807dde7c374ee3512323741d094f6a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

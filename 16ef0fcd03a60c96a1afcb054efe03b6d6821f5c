@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7a20925f_68d956ef",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T15:46:44Z",
+      "side": 1,
+      "message": "This was to split the logic between \"ApplyPipeline\" and \"ApplyForDrawDispatch\". With the current renaming of \"OnSetPipeline\" things look good.",
+      "parentUuid": "e35faa48_5f12afba",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d73ca163_45677e45",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -224,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "77ec67ba_84ffc92d",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T15:46:44Z",
+      "side": 1,
+      "message": "Thanks for the explanation!",
+      "parentUuid": "50a2967a_27873c23",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2444175_2bc856aa",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -323,6 +359,24 @@
       "side": 1,
       "message": "Done, but kept floats in the shader. I wanted to continue using utils::CreateBasicRenderPass",
       "parentUuid": "0ac9d29b_08681f6c",
+      "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12947de9_42c95da1",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T15:46:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "73175b86_a1b5ab31",
       "revId": "16ef0fcd03a60c96a1afcb054efe03b6d6821f5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
