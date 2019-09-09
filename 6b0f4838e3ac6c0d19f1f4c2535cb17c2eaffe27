@@ -249,6 +249,30 @@
     },
     {
       "key": {
+        "uuid": "036a1fe6_22695d91",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-09T22:58:58Z",
+      "side": 1,
+      "message": "I added a new test case for this with 127x127 size",
+      "parentUuid": "92d5093c_a1b21413",
+      "range": {
+        "startLine": 265,
+        "startChar": 31,
+        "endLine": 265,
+        "endChar": 92
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab85d87_57541b9d",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
