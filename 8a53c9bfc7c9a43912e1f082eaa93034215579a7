@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09bd5eda_7c130cd7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T15:51:09Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s enough: the format could be the same but the BufferLocation or SizeInBytes could have changed. How about OnSetIndexBuffer setting the mLastAppliedIndexFormat to DXGI_FORMAT_NONE?",
+      "revId": "8a53c9bfc7c9a43912e1f082eaa93034215579a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
