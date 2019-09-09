@@ -197,16 +197,34 @@ namespace dawn_native { namespace vulkan {
 
                 if (renderPass->attachmentState->HasDepthStencilAttachment()) {
                     auto& attachmentInfo = renderPass->depthStencilAttachment;
-                    query.SetDepthStencil(attachmentInfo.view->GetTexture()->GetFormat().format,
-                                          attachmentInfo.depthLoadOp, attachmentInfo.stencilLoadOp);
-                    if (attachmentInfo.depthLoadOp == dawn::LoadOp::Load ||
-                        attachmentInfo.stencilLoadOp == dawn::LoadOp::Load) {
-                        ToBackend(attachmentInfo.view->GetTexture())
-                            ->EnsureSubresourceContentInitialized(
-                                recordingContext, attachmentInfo.view->GetBaseMipLevel(),
-                                attachmentInfo.view->GetLevelCount(),
-                                attachmentInfo.view->GetBaseArrayLayer(),
-                                attachmentInfo.view->GetLayerCount());
+                    TextureView* view = ToBackend(attachmentInfo.view.Get());
+                    dawn::LoadOp stencilLoadOp = attachmentInfo.stencilLoadOp;
+                    dawn::LoadOp depthLoadOp = attachmentInfo.depthLoadOp;
+
+                    // If the depth stencil texture has not been initialized, we want to use loadop
+                    // clear to init the contents to 0's
+                    if (!view->GetTexture()->IsSubresourceContentInitialized(
+                            view->GetBaseMipLevel(), view->GetLevelCount(),
+                            view->GetBaseArrayLayer(), view->GetLayerCount())) {
+                        if (view->GetTexture()->GetFormat().HasDepth() &&
+                            attachmentInfo.depthLoadOp == dawn::LoadOp::Load) {
+                            attachmentInfo.clearDepth = 0.0f;
+                            depthLoadOp = dawn::LoadOp::Clear;
+                        }
+                        if (view->GetTexture()->GetFormat().HasStencil() &&
+                            attachmentInfo.stencilLoadOp == dawn::LoadOp::Load) {
+                            attachmentInfo.clearStencil = 0u;
+                            stencilLoadOp = dawn::LoadOp::Clear;
+                        }
+                    }
+                    query.SetDepthStencil(view->GetTexture()->GetFormat().format, depthLoadOp,
+                                          stencilLoadOp);
+
+                    if (attachmentInfo.depthStoreOp == dawn::StoreOp::Store ||
+                        attachmentInfo.stencilStoreOp == dawn::StoreOp::Store) {
+                        view->GetTexture()->SetIsSubresourceContentInitialized(
+                            view->GetBaseMipLevel(), view->GetLevelCount(),
+                            view->GetBaseArrayLayer(), view->GetLayerCount());
                     }
                 }
 
