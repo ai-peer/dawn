@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "92d5093c_a1b21413",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-09T22:41:23Z",
+      "side": 1,
+      "message": "I think this will catch in the tests if the texture is 127x127 instead of 128x128.",
+      "parentUuid": "0f57d20f_f059120d",
+      "range": {
+        "startLine": 265,
+        "startChar": 31,
+        "endLine": 265,
+        "endChar": 92
+      },
+      "revId": "6b0f4838e3ac6c0d19f1f4c2535cb17c2eaffe27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab85d87_57541b9d",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 2
