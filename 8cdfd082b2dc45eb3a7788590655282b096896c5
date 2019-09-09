@@ -69,6 +69,24 @@
       "revId": "8cdfd082b2dc45eb3a7788590655282b096896c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcf37a0e_49aea5a8",
+        "filename": "src/common/vulkan_fuchsia_extras.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T10:26:32Z",
+      "side": 1,
+      "message": "Sounds good!",
+      "parentUuid": "c448b5cf_728867d9",
+      "revId": "8cdfd082b2dc45eb3a7788590655282b096896c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
