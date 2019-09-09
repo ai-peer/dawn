@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6871142_facf2d3e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:59:41Z",
+      "side": 1,
+      "message": "nit: since the static_cast moved up to 908, can you move this TODO there too?",
+      "revId": "5e3aac522f8bc6eb93d185409ec498d0c30341a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d528d85d_8ba025ce",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:59:41Z",
+      "side": 1,
+      "message": "outdated",
+      "range": {
+        "startLine": 394,
+        "startChar": 79,
+        "endLine": 395,
+        "endChar": 27
+      },
+      "revId": "5e3aac522f8bc6eb93d185409ec498d0c30341a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3846ffa4_e07b1e0d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:59:41Z",
+      "side": 1,
+      "message": "hmm, this seems to be the first time we\u0027re actually modifying the renderPass object like this in this function. This is probably OK since it\u0027s normally ignored if loadop is Load, although I found it a little surprising. I think it would be better to either:\n\n- In-place modify both clear{Depth,Stencil} and {depth,stencil}LoadOp (i.e. rewrite the command).\n- Don\u0027t in-place modify either one, change later usages to use the appropriate local clear{Depth,Stencil} variables.\n\nAny opinions from others?",
+      "revId": "5e3aac522f8bc6eb93d185409ec498d0c30341a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
