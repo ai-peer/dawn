@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15ae1de6_28013ce7",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:02:39Z",
+      "side": 1,
+      "message": "optional: Not sure if it would be better, but any reason to make this iterative instead of recursive? Seems like it might be a little clearer.",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "436cd573_9ecefee8",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:02:39Z",
+      "side": 1,
+      "message": "optional: Could merge with default case",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d3910be_348eb29a",
+        "filename": "src/dawn_native/RefCounted.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:02:39Z",
+      "side": 1,
+      "message": "I think there are a few other places we should use this, e.g.\nhttps://dawn-review.googlesource.com/c/dawn/+/10820/5/src/dawn_native/opengl/TextureGL.cpp#253",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "404dc57f_dfdea6a0",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:02:39Z",
+      "side": 1,
+      "message": "For these two tests, is it possible to also make sure it doesn\u0027t bubble to uncapturederror?",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ac604d4_0bd1a8aa",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T21:02:39Z",
+      "side": 1,
+      "message": "And here that it does bubble to uncaptured error?",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
