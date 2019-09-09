@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a9b62c5_d833179f",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T21:55:11Z",
+      "side": 1,
+      "message": "Recursive should be avoided if we can because it would be too easy for a JS app to do a stack overflow.",
+      "parentUuid": "15ae1de6_28013ce7",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "436cd573_9ecefee8",
         "filename": "src/dawn_native/ErrorScope.cpp",
         "patchSetId": 5
