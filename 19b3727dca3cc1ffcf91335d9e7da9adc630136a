@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "322d2632_d98c1ef3",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T13:38:19Z",
+      "side": 1,
+      "message": "I think this could be better phrased as a the following, to make it more clear there is forward progress and that we are going down the scope chain:\n\nfor (ErrorScope* currentScope \u003d scope; !currentScope.IsRoot(); currentScope \u003d currentScope-\u003eGetParent()) {\n  if (not in the filter) {\n    continue;\n  }\n  if (should consume) {\n    call callback, return;\n  }\n}\ndo stuff for root scope",
+      "revId": "19b3727dca3cc1ffcf91335d9e7da9adc630136a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
