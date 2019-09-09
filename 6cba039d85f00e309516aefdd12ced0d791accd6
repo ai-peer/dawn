@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62b2dd74_9dfae10b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T18:34:24Z",
+      "side": 1,
+      "message": "unused?\n\nIf you aren\u0027t using these, you could have the second field be a DXGI_FORMAT instead of D3D12_INDEX_BUFFER_VIEW",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 74
+      },
+      "revId": "6cba039d85f00e309516aefdd12ced0d791accd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
