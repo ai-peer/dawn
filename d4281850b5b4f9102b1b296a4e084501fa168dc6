@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20fe1e5d_24437016",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T16:07:42Z",
+      "side": 1,
+      "message": "Maybe for now we could track them combined but ensure depth and stencil tracking is always updated together. This is the case currently and will just need to stay true when we add discard, by making a discard happen only when both are discarded.",
+      "revId": "d4281850b5b4f9102b1b296a4e084501fa168dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6d0c6a6_d6e1926f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T16:07:42Z",
+      "side": 1,
+      "message": "This can just be if (attachmentInfo.depthStoreOp \u003d\u003d dawn::StoreOp::Store) instead of a switch with a single case. Unless you want to keep it because you are planning for discard. ditto below and in the Vulkan backend.",
+      "revId": "d4281850b5b4f9102b1b296a4e084501fa168dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f64d6dd3_09528222",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T16:07:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d4281850b5b4f9102b1b296a4e084501fa168dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
