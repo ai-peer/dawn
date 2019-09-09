@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3cee87ee_fc6536b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2019-09-09T10:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b8563ce_f95e8b35",
+      "revId": "8cdfd082b2dc45eb3a7788590655282b096896c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "736a7a22_3682a067",
         "filename": "src/common/vulkan_fuchsia_extras.h",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-09-09T09:01:34Z",
       "side": 1,
       "message": "This isn\u0027t the same license as Dawn code. Maybe it should go in third_party/khronos? Also can we add it to some target in our BUILD.gn file for `gn check` completeness?",
+      "revId": "8cdfd082b2dc45eb3a7788590655282b096896c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c448b5cf_728867d9",
+        "filename": "src/common/vulkan_fuchsia_extras.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2019-09-09T10:00:21Z",
+      "side": 1,
+      "message": "Done. Note that I have kept the include in src/common/vulkan_platform.h to avoid modifying vulkan.h, in order to make it easier to update to new versions of the headers.",
+      "parentUuid": "736a7a22_3682a067",
       "revId": "8cdfd082b2dc45eb3a7788590655282b096896c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
