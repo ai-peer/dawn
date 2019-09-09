@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "305eda93_f24287eb",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-09T18:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20fe1e5d_24437016",
+      "revId": "d4281850b5b4f9102b1b296a4e084501fa168dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6d0c6a6_d6e1926f",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c51fcea9_c6c7f738",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-09T18:49:22Z",
+      "side": 1,
+      "message": "I am working on discard, but I can make these changes on that CL.",
+      "parentUuid": "e6d0c6a6_d6e1926f",
+      "revId": "d4281850b5b4f9102b1b296a4e084501fa168dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f64d6dd3_09528222",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "d4281850b5b4f9102b1b296a4e084501fa168dc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db29bdd6_c2ef855d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-09T18:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f64d6dd3_09528222",
+      "revId": "d4281850b5b4f9102b1b296a4e084501fa168dc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
