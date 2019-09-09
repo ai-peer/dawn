@@ -16,6 +16,24 @@
       "revId": "d30065d212e17b3b5e461b5e28912104ad8adc14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ea51263_bdec86d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2019-09-09T10:05:58Z",
+      "side": 1,
+      "message": "Done. Thanks, I didn\u0027t know this redirected to the Chromium bugs by default.",
+      "parentUuid": "c93a4060_596d1b52",
+      "revId": "d30065d212e17b3b5e461b5e28912104ad8adc14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
