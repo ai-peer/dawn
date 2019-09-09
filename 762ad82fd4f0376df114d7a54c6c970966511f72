@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19223a8c_a2369d49",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T23:56:44Z",
+      "side": 1,
+      "message": "OK, I\u0027m looking at this closely now and realizing it probably doesn\u0027t work at all for compressed textures for a few reasons. It\u0027s OK to not support them now, but I think I\u0027d like to simplify this code in the mean time if that\u0027s OK.\n\n bool compressed \u003d blockWidth \u003e 1 || blockHeight \u003e 1;\n ASSERT(!compressed);\n ASSERT(kTextureRowPitchAlignment % blockByteSize \u003d\u003d 0);\n uint32_t rowPitchAlignmentInPixels \u003d kTextureRowPitchAlignment / blockByteSize;\n uint32_t rowPitchInPixels \u003d Align(width, rowPitchAlignmentInPixels);\n ...\n descriptor.size \u003d rowPitch * height * blockByteSize;\n gl.PixelStorei(GL_UNPACK_ROW_LENGTH, rowPitchInPixels);\n gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, 0);",
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba73ab93_e6608ee8",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T23:56:44Z",
+      "side": 1,
+      "message": "this seems to have blockByteSize factored in twice - would be removed by the suggestion above",
+      "range": {
+        "startLine": 250,
+        "startChar": 16,
+        "endLine": 250,
+        "endChar": 99
+      },
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "593f4709_92095cd7",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-09T23:56:44Z",
+      "side": 1,
+      "message": "uNit: \"kSize * 4\"",
+      "range": {
+        "startLine": 569,
+        "startChar": 30,
+        "endLine": 569,
+        "endChar": 39
+      },
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
