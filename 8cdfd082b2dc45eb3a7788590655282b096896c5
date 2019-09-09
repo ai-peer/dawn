@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b8563ce_f95e8b35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T09:01:34Z",
+      "side": 1,
+      "message": "nit: BUG\u003ddawn:221",
+      "revId": "8cdfd082b2dc45eb3a7788590655282b096896c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "736a7a22_3682a067",
+        "filename": "src/common/vulkan_fuchsia_extras.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-09T09:01:34Z",
+      "side": 1,
+      "message": "This isn\u0027t the same license as Dawn code. Maybe it should go in third_party/khronos? Also can we add it to some target in our BUILD.gn file for `gn check` completeness?",
+      "revId": "8cdfd082b2dc45eb3a7788590655282b096896c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
