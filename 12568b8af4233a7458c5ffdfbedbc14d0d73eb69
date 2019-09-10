@@ -228,6 +228,24 @@
       "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4232d95a_190236e6",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-10T21:30:11Z",
+      "side": 1,
+      "message": "Seems like that only checks there isn\u0027t an error, but here we expect there is.",
+      "parentUuid": "41ec2a2a_2b23033d",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

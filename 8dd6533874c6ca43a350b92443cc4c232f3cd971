@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1e2d5bc_8dff10bb",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-10T21:30:11Z",
+      "side": 1,
+      "message": "Should we return here to be safe?",
+      "revId": "8dd6533874c6ca43a350b92443cc4c232f3cd971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
