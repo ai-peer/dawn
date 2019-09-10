@@ -95,7 +95,12 @@ namespace dawn_native { namespace vulkan {
                                 VkDescriptorSet set,
                                 uint32_t dynamicOffsetCount,
                                 uint64_t* dynamicOffsets) {
-                mDirtySets.set(index);
+                if (mBindGroupLayoutsMask[index]) {
+                    // It is okay to only dirty descriptor sets that are used by the current
+                    // pipeline layout. If the pipeline layout changes, then the descriptor sets it
+                    // uses will become dirty.
+                    mDirtySets.set(index);
+                }
                 mSets[index] = set;
                 mDynamicOffsetCounts[index] = dynamicOffsetCount;
                 if (dynamicOffsetCount > 0) {
@@ -108,42 +113,56 @@ namespace dawn_native { namespace vulkan {
                 }
             }
 
-            void OnPipelineLayoutChange(PipelineLayout* layout) {
-                if (layout == mCurrentLayout) {
+            void OnSetPipeline(PipelineBase* pipeline) {
+                mPipelineLayout = ToBackend(pipeline->GetLayout());
+                if (mLastAppliedPipelineLayout == mPipelineLayout) {
                     return;
                 }
 
-                if (mCurrentLayout == nullptr) {
-                    // We're at the beginning of a pass so all bind groups will be set before any
-                    // draw / dispatch. Still clear the dirty sets to avoid leftover dirty sets
-                    // from previous passes.
-                    mDirtySets.reset();
+                // Keep track of the bind group layout mask to avoid marking unused descriptor sets
+                // as dirty. This also allows us to avoid computing the intersection of the dirty
+                // sets and bind group layout mask in Draw or Dispatch which is very hot code.
+                mBindGroupLayoutsMask = mPipelineLayout->GetBindGroupLayoutsMask();
+
+                if (mLastAppliedPipelineLayout != nullptr) {
+                    // Descriptor sets that are not inherited will be set again before any draw or
+                    // dispatch.
+                    mDirtySets |= ~mPipelineLayout->InheritedGroupsMask(mLastAppliedPipelineLayout);
+                    // Make sure we don't have leftover dirty descriptor sets that don't exist in
+                    // the pipeline layout.
+                    mDirtySets &= mBindGroupLayoutsMask;
                 } else {
-                    // Bindgroups that are not inherited will be set again before any draw or
-                    // dispatch. Resetting the bits also makes sure we don't have leftover dirty
-                    // bindgroups that don't exist in the pipeline layout.
-                    mDirtySets &= ~layout->InheritedGroupsMask(mCurrentLayout);
+                    mDirtySets = mBindGroupLayoutsMask;
                 }
-                mCurrentLayout = layout;
             }
 
-            void Flush(Device* device, VkCommandBuffer commands, VkPipelineBindPoint bindPoint) {
+            void Apply(Device* device, VkCommandBuffer commands, VkPipelineBindPoint bindPoint) {
                 for (uint32_t dirtyIndex : IterateBitSet(mDirtySets)) {
                     device->fn.CmdBindDescriptorSets(
-                        commands, bindPoint, mCurrentLayout->GetHandle(), dirtyIndex, 1,
+                        commands, bindPoint, mPipelineLayout->GetHandle(), dirtyIndex, 1,
                         &mSets[dirtyIndex], mDynamicOffsetCounts[dirtyIndex],
                         mDynamicOffsetCounts[dirtyIndex] > 0 ? mDynamicOffsets[dirtyIndex].data()
                                                              : nullptr);
                 }
+
+                // Reset all dirty descriptor sets. Dirty sets not in the bind group layout mask
+                // will be dirtied again by the next pipeline change.
                 mDirtySets.reset();
+                mLastAppliedPipelineLayout = mPipelineLayout;
             }
 
           private:
-            PipelineLayout* mCurrentLayout = nullptr;
-            std::array<VkDescriptorSet, kMaxBindGroups> mSets;
             std::bitset<kMaxBindGroups> mDirtySets;
+            std::bitset<kMaxBindGroups> mBindGroupLayoutsMask;
+            std::array<VkDescriptorSet, kMaxBindGroups> mSets;
             std::array<uint32_t, kMaxBindGroups> mDynamicOffsetCounts;
             std::array<std::array<uint32_t, kMaxBindingsPerGroup>, kMaxBindGroups> mDynamicOffsets;
+
+            // |mPipelineLayout| is the current pipeline layout set on the command buffer.
+            // |mLastAppliedPipelineLayout| is the last pipeline layout for which we applied changes
+            // to the bind group bindings.
+            PipelineLayout* mPipelineLayout = nullptr;
+            PipelineLayout* mLastAppliedPipelineLayout = nullptr;
         };
 
         void RecordBeginRenderPass(CommandRecordingContext* recordingContext,
@@ -562,7 +581,7 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
         VkCommandBuffer commands = recordingContext->commandBuffer;
 
-        DescriptorSetTracker descriptorSets;
+        DescriptorSetTracker descriptorSets = {};
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
@@ -574,7 +593,7 @@ namespace dawn_native { namespace vulkan {
 
                 case Command::Dispatch: {
                     DispatchCmd* dispatch = mCommands.NextCommand<DispatchCmd>();
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
+                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
                     device->fn.CmdDispatch(commands, dispatch->x, dispatch->y, dispatch->z);
                 } break;
 
@@ -582,7 +601,7 @@ namespace dawn_native { namespace vulkan {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
                     VkBuffer indirectBuffer = ToBackend(dispatch->indirectBuffer)->GetHandle();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
+                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
                     device->fn.CmdDispatchIndirect(
                         commands, indirectBuffer,
                         static_cast<VkDeviceSize>(dispatch->indirectOffset));
@@ -606,7 +625,7 @@ namespace dawn_native { namespace vulkan {
 
                     device->fn.CmdBindPipeline(commands, VK_PIPELINE_BIND_POINT_COMPUTE,
                                                pipeline->GetHandle());
-                    descriptorSets.OnPipelineLayoutChange(ToBackend(pipeline->GetLayout()));
+                    descriptorSets.OnSetPipeline(pipeline);
                 } break;
 
                 case Command::InsertDebugMarker: {
@@ -703,7 +722,7 @@ namespace dawn_native { namespace vulkan {
             device->fn.CmdSetScissor(commands, 0, 1, &scissorRect);
         }
 
-        DescriptorSetTracker descriptorSets;
+        DescriptorSetTracker descriptorSets = {};
         RenderPipeline* lastPipeline = nullptr;
 
         auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
@@ -711,7 +730,7 @@ namespace dawn_native { namespace vulkan {
                 case Command::Draw: {
                     DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDraw(commands, draw->vertexCount, draw->instanceCount,
                                        draw->firstVertex, draw->firstInstance);
                 } break;
@@ -719,7 +738,7 @@ namespace dawn_native { namespace vulkan {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDrawIndexed(commands, draw->indexCount, draw->instanceCount,
                                               draw->firstIndex, draw->baseVertex,
                                               draw->firstInstance);
@@ -729,7 +748,7 @@ namespace dawn_native { namespace vulkan {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
                     VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDrawIndirect(commands, indirectBuffer,
                                                static_cast<VkDeviceSize>(draw->indirectOffset), 1,
                                                0);
@@ -739,7 +758,7 @@ namespace dawn_native { namespace vulkan {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
                     VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
 
-                    descriptorSets.Flush(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDrawIndexedIndirect(
                         commands, indirectBuffer, static_cast<VkDeviceSize>(draw->indirectOffset),
                         1, 0);
@@ -825,7 +844,7 @@ namespace dawn_native { namespace vulkan {
                                                pipeline->GetHandle());
                     lastPipeline = pipeline;
 
-                    descriptorSets.OnPipelineLayoutChange(ToBackend(pipeline->GetLayout()));
+                    descriptorSets.OnSetPipeline(pipeline);
                 } break;
 
                 case Command::SetVertexBuffers: {
