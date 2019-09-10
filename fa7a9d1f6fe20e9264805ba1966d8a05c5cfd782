@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "04acc10e_cdf0ed57",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T12:12:35Z",
+      "side": 1,
+      "message": "I think it will be unused if you remove the default constructor for BuddyResourceHeapAllocator.",
+      "parentUuid": "5a0ead6e_4f1bbc9d",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67a95656_99d5f116",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "If ResourceHeapBase only represents a ID3D12Heap, shouldn\u0027t it be called as such (ie. HeapBase)? There is no resource.\n\nWe could have separate types with your suggestions, ResourceBase and HeapBase, for ID3D12Resource and ID3D12Heap respectively. ResourceMemoryAllocation would contain a ResourceBase.\n\nWDYT?",
       "parentUuid": "67a95656_99d5f116",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5c1c21b_12126573",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T12:12:35Z",
+      "side": 1,
+      "message": "That sounds good. An alternative is to not have ResourceBase at all, and instead have backends pass around a type that contains both a ResourceMemoryAllocation (with no ResourceBase) and the ID3D12Resource. Either would work.",
+      "parentUuid": "fe40d575_a031c7cd",
       "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "b76319d1_1407e76a",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T12:12:35Z",
+      "side": 1,
+      "message": "Ack :(",
+      "parentUuid": "bbc62481_3e35f66c",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5c1000d_562db566",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
         "patchSetId": 4
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "The following code block sizes the vector AND creates the minimum number of heaps required to satisfy the request. Following the buddy system, lower address will be used first and only those heaps need to be created. \n\nWe can size the vector during the creation of the allocator, though. However, this could waste space if the allocator is never used.",
       "parentUuid": "d5c1000d_562db566",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8409122f_ba9b2392",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T12:12:35Z",
+      "side": 1,
+      "message": "I wouldn\u0027t worry about the CPU space wasted yet, it\u0027s difficult to simplify code in the future but optimizing it is easy.",
+      "parentUuid": "4168b456_5e9fe7c4",
       "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -186,6 +258,30 @@
       "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "902e2735_bad9fae4",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T12:12:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "662cf485_83bf9a91",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 18
+      },
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
