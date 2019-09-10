@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abe50f34_6a5d8f38",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-10T20:23:13Z",
+      "side": 1,
+      "message": "In this test, I saw unorm(0.5 + 0.5) \u003d\u003e 254 on my machine",
+      "range": {
+        "startLine": 718,
+        "startChar": 35,
+        "endLine": 718,
+        "endChar": 40
+      },
+      "revId": "8b5e985453e6051cc2c816a7c9f2bfe02cbfec2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
