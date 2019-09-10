@@ -686,8 +686,13 @@ namespace dawn_native { namespace vulkan {
             return nullptr;
         }
 
-        return new Texture(this, descriptor, textureDescriptor, signalSemaphore, allocation,
-                           waitSemaphores);
+        Texture* result = nullptr;
+        if (ConsumedError(Texture::CreateFromExternal(this, descriptor, textureDescriptor,
+                                                      signalSemaphore, allocation, waitSemaphores),
+                          &result)) {
+            return nullptr;
+        }
+        return result;
     }
 
     ResultOrError<ResourceMemoryAllocation> Device::AllocateMemory(
