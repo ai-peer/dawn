@@ -246,6 +246,24 @@
       "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47d8690f_d734b777",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-10T21:55:28Z",
+      "side": 1,
+      "message": "Discussed offline that the uncaptured error callback does get called and is caught by the ASSERT_DEVICE_ERROR macro.",
+      "parentUuid": "4232d95a_190236e6",
+      "revId": "12568b8af4233a7458c5ffdfbedbc14d0d73eb69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
