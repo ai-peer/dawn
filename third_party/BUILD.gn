@@ -16,6 +16,10 @@ import("//build_overrides/build.gni")
 import("../scripts/dawn_features.gni")
 import("../scripts/dawn_overrides_with_defaults.gni")
 
+if (dawn_enable_vulkan_validation_layers) {
+  import("//build_overrides/vulkan_validation_layers.gni")
+}
+
 is_msvc = is_win && !is_clang
 
 ###############################################################################
@@ -159,6 +163,16 @@ source_set("khronos_platform") {
   ]
 
   public_configs = [ ":khronos_headers_public" ]
+}
+
+# Vulkan validation layers
+if (dawn_enable_vulkan_validation_layers) {
+  config("vulkan_validation_layers_config") {
+    defines = [
+      "DAWN_ENABLE_VULKAN_VALIDATION_LAYERS",
+      "DAWN_VK_DATA_DIR=\"$vulkan_data_subdir\"",
+    ]
+  }
 }
 
 ###############################################################################
