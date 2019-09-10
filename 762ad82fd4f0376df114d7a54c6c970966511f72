@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "3f2bcaa5_32c7e46e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-10T00:00:28Z",
+      "side": 1,
+      "message": "Here are some incomplete thoughts on supporting compressed textures, for later.\n\n bool compressed \u003d blockWidth \u003e 1 || blockHeight \u003e 1;\n ASSERT(kTextureRowPitchAlignment % blockByteSize \u003d\u003d 0);\n uint32_t rowPitchAlignmentInBlocks \u003d kTextureRowPitchAlignment / blockByteSize;\n \n ASSERT(width % blockWidth \u003d\u003d 0);\n uint32_t rowPitchInBlocks \u003d Align(width / blockWidth, rowPitchAlignmentInBlocks);\n ...\n ASSERT(height % blockHeight \u003d\u003d 0);\n uint32_t heightInBlocks \u003d height / blockHeight;\n descriptor.size \u003d widthInBlocks * heightInBlocks * blockByteSize;\n ...\n if (compressed) {\n   gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_SIZE, blockByteSize);\n   gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_WIDTH, blockWidth);\n   gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_HEIGHT, blockHeight);\n }\n gl.PixelStorei(GL_UNPACK_ROW_LENGTH, widthInBlocks * blockWidth);\n gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, 0);\n ...\n {\n   if (compressed) {\n     gl.CompressedTexSubImage2D(...);\n   } else {\n     ...\n   }\n }",
+      "parentUuid": "0e22e9a3_ab80abca",
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba73ab93_e6608ee8",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 6
