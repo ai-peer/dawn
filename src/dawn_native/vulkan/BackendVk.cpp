@@ -27,6 +27,8 @@ const char kVulkanLibName[] = "libvulkan.so.1";
 const char kVulkanLibName[] = "vulkan-1.dll";
 #elif DAWN_PLATFORM_FUCHSIA
 const char kVulkanLibName[] = "libvulkan.so";
+#elif DAWN_PLATFORM_APPLE
+const char kVulkanLibName[] = "libvulkan.dylib";
 #else
 #    error "Unimplemented Vulkan backend platform"
 #endif
