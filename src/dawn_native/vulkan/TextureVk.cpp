@@ -406,6 +406,20 @@ namespace dawn_native { namespace vulkan {
         return texture.release();
     }
 
+    // static
+    ResultOrError<Texture*> Texture::CreateFromExternal(Device* device,
+                                                        const ExternalImageDescriptor* descriptor,
+                                                        const TextureDescriptor* textureDescriptor,
+                                                        VkSemaphore signalSemaphore,
+                                                        VkDeviceMemory externalMemoryAllocation,
+                                                        std::vector<VkSemaphore> waitSemaphores) {
+        std::unique_ptr<Texture> texture =
+            std::make_unique<Texture>(device, textureDescriptor, TextureState::OwnedInternal);
+        DAWN_TRY(texture->InitializeFromExternal(
+            descriptor, signalSemaphore, externalMemoryAllocation, std::move((waitSemaphores))));
+        return texture.release();
+    }
+
     MaybeError Texture::InitializeAsInternalTexture() {
         Device* device = ToBackend(GetDevice());
 
@@ -471,18 +485,18 @@ namespace dawn_native { namespace vulkan {
         : TextureBase(device, descriptor, TextureState::OwnedExternal), mHandle(nativeImage) {
     }
 
-    // Internally managed, but imported from file descriptor
-    Texture::Texture(Device* device,
-                     const ExternalImageDescriptor* descriptor,
-                     const TextureDescriptor* textureDescriptor,
-                     VkSemaphore signalSemaphore,
-                     VkDeviceMemory externalMemoryAllocation,
-                     std::vector<VkSemaphore> waitSemaphores)
-        : TextureBase(device, textureDescriptor, TextureState::OwnedInternal),
-          mExternalAllocation(externalMemoryAllocation),
-          mExternalState(ExternalState::PendingAcquire),
-          mSignalSemaphore(signalSemaphore),
-          mWaitRequirements(std::move(waitSemaphores)) {
+    // Internally managed, but imported from external handle
+    MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptor* descriptor,
+                                               VkSemaphore signalSemaphore,
+                                               VkDeviceMemory externalMemoryAllocation,
+                                               std::vector<VkSemaphore> waitSemaphores) {
+        mExternalAllocation = externalMemoryAllocation;
+        mExternalState = ExternalState::PendingAcquire;
+        mSignalSemaphore = signalSemaphore;
+        mWaitRequirements = std::move(waitSemaphores);
+
+        Device* device = ToBackend(GetDevice());
+
         VkImageCreateInfo createInfo = {};
         createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
         createInfo.pNext = nullptr;
@@ -507,10 +521,9 @@ namespace dawn_native { namespace vulkan {
         // also required for the implementation of robust resource initialization.
         createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
-        if (device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle) !=
-            VK_SUCCESS) {
-            ASSERT(false);
-        }
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle),
+            "CreateImage"));
 
         // Create the image memory and associate it with the container
         VkMemoryRequirements requirements;
@@ -518,15 +531,16 @@ namespace dawn_native { namespace vulkan {
 
         ASSERT(requirements.size <= descriptor->allocationSize);
 
-        if (device->fn.BindImageMemory(device->GetVkDevice(), mHandle, mExternalAllocation, 0) !=
-            VK_SUCCESS) {
-            ASSERT(false);
-        }
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.BindImageMemory(device->GetVkDevice(), mHandle, mExternalAllocation, 0),
+            "BindImageMemory (external)"));
 
         // Don't clear imported texture if already cleared
         if (descriptor->isCleared) {
             SetIsSubresourceContentInitialized(true, 0, 1, 0, 1);
         }
+
+        return {};
     }
 
     MaybeError Texture::SignalAndDestroy(VkSemaphore* outSignalSemaphore) {
