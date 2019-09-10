@@ -300,6 +300,7 @@ TEST_P(TextureZeroInitTest, CopyTextureToTextureHalf) {
 // This tests the texture with depth attachment and load op load will init depth stencil texture to
 // 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
+    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan());
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsage::CopySrc | dawn::TextureUsage::CopyDst |
@@ -335,6 +336,7 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepth) {
 // This tests the texture with stencil attachment and load op load will init depth stencil texture
 // to 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
+    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan());
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsage::CopySrc | dawn::TextureUsage::CopyDst |
@@ -370,6 +372,7 @@ TEST_P(TextureZeroInitTest, RenderingLoadingStencil) {
 // This tests the texture with depth stencil attachment and load op load will init depth stencil
 // texture to 0s.
 TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
+    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan());
     dawn::TextureDescriptor srcDescriptor =
         CreateTextureDescriptor(1, 1,
                                 dawn::TextureUsage::CopySrc | dawn::TextureUsage::CopyDst |

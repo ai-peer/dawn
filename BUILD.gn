@@ -470,6 +470,10 @@ source_set("libdawn_native_sources") {
       ]
     }
   }
+
+  if (dawn_enable_vulkan_validation_layers) {
+    configs += [ "third_party:vulkan_validation_layers_config" ]
+  }
 }
 
 # The static and shared libraries for libdawn_native. Most of the files are
@@ -506,6 +510,25 @@ dawn_component("libdawn_native") {
   }
   if (dawn_enable_vulkan) {
     sources += [ "src/dawn_native/vulkan/VulkanBackend.cpp" ]
+  }
+
+  if (dawn_enable_vulkan_validation_layers) {
+    if (build_with_chromium) {
+      data_deps = [
+        "//third_party/angle/third_party/vulkan-validation-layers:vulkan_validation_layers",
+      ]
+      if (!is_android) {
+        data_deps += [ "//third_party/angle/third_party/vulkan-validation-layers:vulkan_gen_json_files" ]
+      }
+    } else {
+      data_deps = [
+        "third_party/vulkan-validation-layers:vulkan_validation_layers",
+      ]
+      if (!is_android) {
+        data_deps +=
+            [ "third_party/vulkan-validation-layers:vulkan_gen_json_files" ]
+      }
+    }
   }
 }
 

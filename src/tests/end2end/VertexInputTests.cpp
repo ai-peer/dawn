@@ -523,6 +523,7 @@ class OptionalVertexInputTest : public DawnTest {};
 
 // Test that vertex input is not required in render pipeline descriptor.
 TEST_P(OptionalVertexInputTest, Basic) {
+    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan());
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 3, 3);
 
     dawn::ShaderModule vsModule =

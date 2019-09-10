@@ -255,6 +255,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTexture) {
 
 // Test multisampled rendering with depth test works correctly.
 TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTest) {
+    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan());
     constexpr bool kTestDepth = true;
     dawn::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     dawn::RenderPipeline pipeline = CreateRenderPipelineWithOneOutputForTest(kTestDepth);
