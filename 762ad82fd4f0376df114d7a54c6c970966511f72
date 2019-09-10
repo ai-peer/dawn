@@ -98,6 +98,29 @@
       "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b475c85f_051220a9",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-10T00:02:34Z",
+      "side": 1,
+      "message": "This looks like it\u0027s duplicated with the 4 above. Should it just be rowPitch * kSize?\n\nAlso should use something other than 4 to make it clearer. (sizeof(...))",
+      "range": {
+        "startLine": 570,
+        "startChar": 26,
+        "endLine": 570,
+        "endChar": 46
+      },
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
