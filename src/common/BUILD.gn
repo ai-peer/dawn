@@ -23,6 +23,7 @@ if (build_with_chromium) {
   import("//build/config/dcheck_always_on.gni")
 } else {
   dcheck_always_on = false
+  not_needed([ "dcheck_always_on" ])
 }
 
 ###############################################################################
@@ -62,6 +63,13 @@ config("dawn_internal") {
 
   if (is_linux && !is_chromeos) {
     defines += [ "DAWN_USE_X11" ]
+  }
+
+  if (is_fuchsia) {
+    cflags_cc = [
+      "-Wno-newline-eof",
+      "-Wno-c++11-narrowing",
+    ]
   }
 
   # Only internal Dawn targets can use this config, this means only targets in

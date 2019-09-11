@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("dawn_overrides_with_defaults.gni")
+import("//build_overrides/build.gni")
 import("dawn_features.gni")
+import("dawn_overrides_with_defaults.gni")
 
 ###############################################################################
 # Template to produce a component for one of Dawn's libraries.
@@ -101,7 +102,9 @@ template("dawn_component") {
     # around we ended up with bad generated files in cached build
     # directories that get picked up because of the default inclusion of
     # target_gen_dir as an include directory.
-    configs -= [ "//build/config/compiler:default_include_dirs" ]
+    if (build_with_chromium) {
+      configs -= [ "//build/config/compiler:default_include_dirs" ]
+    }
   }
 
   static_library("${libname}_static") {
@@ -120,7 +123,9 @@ template("dawn_component") {
     # around we ended up with bad generated files in cached build
     # directories that get picked up because of the default inclusion of
     # target_gen_dir as an include directory.
-    configs -= [ "//build/config/compiler:default_include_dirs" ]
+    if (build_with_chromium) {
+      configs -= [ "//build/config/compiler:default_include_dirs" ]
+    }
   }
 
   group(libname) {

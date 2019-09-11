@@ -1,0 +1,142 @@
+# Copyright 2019 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Definition of the dawn_unittest() and dawn_test() GN templates for the
+# Fuchsia platform build system, which doesn't provide a GN test() target
+# or something equivalent, due to different ways to generate test-related
+# packages.
+
+assert(defined(is_fuchsia_tree) && is_fuchsia_tree)
+
+import("//build/test/test_package.gni")
+
+# Generate a Fuchsia package containing a binary and appropriate manifest
+# describing its sandbox features and services.
+#
+# Variables: Anything that executable() supports plus:
+#
+#   sandbox_features: optional list of Fuchsia sandbox features to use.
+#   sandbox_services: optional list of Fuchsia services to use.
+#
+template("dawn_fuchsia_packaged_binary") {
+  # Generate a binary program.
+  _binary_target = "bin_${target_name}"
+  _test_target_name = target_name
+
+  executable(_binary_target) {
+    forward_variables_from(invoker,
+                           "*",
+                           [
+                             "target_name",
+                             "sandbox_features",
+                             "sandbox_services",
+                           ])
+    testonly = true
+
+    # NOTE: ensure the test binary is recognized properly by the package target below.
+    output_name = _test_target_name
+  }
+
+  # Default sandbox features and services:
+  # - Ensure a /tmp directory exists during testing.
+  # - Ensure logs are sent to the proper sink during testing.
+  _sandbox_features = [ "system-temp" ]
+  _sandbox_services = [ "fuchsia.logger.LogSink" ]
+
+  if (defined(invoker.sandbox_features)) {
+    _sandbox_features += invoker.sandbox_features
+  }
+  if (defined(invoker.sandbox_services)) {
+    _sandbox_services += invoker.sandbox_services
+  }
+
+  # Generate a manifest describing the environment this test will run in.
+  _test_manifest = "${target_gen_dir}/meta/${_test_target_name}.cmx"
+  _test_manifest_target = "${_test_target_name}__manifest"
+  generated_file(_test_manifest_target) {
+    outputs = [
+      _test_manifest,
+    ]
+    contents = {
+      program = {
+        binary = "test/${_test_target_name}"
+      }
+      sandbox = {
+        features = _sandbox_features
+        services = _sandbox_services
+      }
+    }
+    output_conversion = "json"
+  }
+
+  test_package(target_name) {
+    forward_variables_from(invoker,
+                           [
+                             "binaries",
+                             "components",
+                             "data_deps",
+                             "extra",
+                             "public_deps",
+                             "resources",
+                             "drivers",
+                             "loadable_modules",
+                             "package_name",
+                             "meta",
+                           ])
+    tests = [
+      {
+        name = _test_target_name
+        manifest = _test_manifest
+      },
+    ]
+    deps = []
+    if (defined(invoker.deps)) {
+      deps = invoker.deps
+    }
+    deps += [
+      ":${_binary_target}",
+      ":${_test_manifest_target}",
+    ]
+  }
+}
+
+# Define a GoogleTest-based unit-test program for Dawn.
+template("dawn_unittest") {
+  dawn_fuchsia_packaged_binary(target_name) {
+    forward_variables_from(invoker, "*")
+    if (!defined(deps)) {
+      deps = []
+    }
+    deps += [
+      # This version of gtest_main setups logging properly for Fuchsia
+      "//src/lib/fxl/test:gtest_main",
+    ]
+  }
+}
+
+# Define a Vulkan-based test program for Dawn.
+template("dawn_test") {
+  dawn_fuchsia_packaged_binary(target_name) {
+    forward_variables_from(invoker, "*")
+
+    # These sandbox features and services are required to run Vulkan-based
+    # programs properly.
+    sandbox_features = [ "vulkan" ]
+    sandbox_services = [
+      "fuchsia.sysmem.Allocator",
+      "fuchsia.vulkan.loader.Loader",
+      "fuchsia.tracing.provider.Registry",
+    ]
+  }
+}
