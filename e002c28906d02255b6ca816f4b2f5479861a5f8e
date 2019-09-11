@@ -22,6 +22,64 @@
       "revId": "e002c28906d02255b6ca816f4b2f5479861a5f8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "234e8dd6_a522f9c8",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-11T01:49:43Z",
+      "side": 1,
+      "message": "Yea it\u0027s tricky. At the very least, this is testing that the callback isn\u0027t called immediately.\n\nIf it were called immediately, [1] would fail with an \"Uninteresting mock function call\" because the expectation hasn\u0027t been created yet, and [2] would fail because it\u0027s never called.",
+      "parentUuid": "8aa59ca5_e82996ea",
+      "range": {
+        "startLine": 136,
+        "startChar": 26,
+        "endLine": 136,
+        "endChar": 37
+      },
+      "revId": "e002c28906d02255b6ca816f4b2f5479861a5f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26b77e41_28750cbc",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-11T01:49:43Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e002c28906d02255b6ca816f4b2f5479861a5f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2655696f_61e2bb0e",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-11T01:49:43Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "e002c28906d02255b6ca816f4b2f5479861a5f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
