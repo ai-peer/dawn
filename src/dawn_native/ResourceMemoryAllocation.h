@@ -19,7 +19,7 @@
 
 namespace dawn_native {
 
-    class ResourceHeapBase;
+    class ResourceBase;
 
     // Allocation method determines how memory was sub-divided.
     // Used by the device to get the allocator that was responsible for the allocation.
@@ -35,27 +35,35 @@ namespace dawn_native {
         kInvalid
     };
 
+    // Metadata that describes how the allocation was allocated.
+    struct AllocationInfo {
+        uint64_t mBlockOffset = 0;
+        AllocationMethod mMethod = AllocationMethod::kInvalid;
+    };
+
     // Handle into a resource heap pool.
     class ResourceMemoryAllocation {
       public:
         ResourceMemoryAllocation();
-        ResourceMemoryAllocation(uint64_t offset,
-                                 ResourceHeapBase* resourceHeap,
-                                 AllocationMethod method,
+        ResourceMemoryAllocation(AllocationInfo& info,
+                                 uint64_t offset,
+                                 ResourceBase* resource,
                                  uint8_t* mappedPointer = nullptr);
         ~ResourceMemoryAllocation() = default;
 
-        ResourceHeapBase* GetResourceHeap() const;
+        ResourceBase* GetResource() const;
         uint64_t GetOffset() const;
-        AllocationMethod GetAllocationMethod() const;
         uint8_t* GetMappedPointer() const;
+
+        AllocationInfo GetInfo() const;
 
         void Invalidate();
 
       private:
-        AllocationMethod mMethod;
+        AllocationInfo mInfo;
+
         uint64_t mOffset;
-        ResourceHeapBase* mResourceHeap;
+        ResourceBase* mResource;
         uint8_t* mMappedPointer;
     };
 }  // namespace dawn_native

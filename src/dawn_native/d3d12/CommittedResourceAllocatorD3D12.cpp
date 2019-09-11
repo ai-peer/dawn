@@ -14,7 +14,7 @@
 
 #include "dawn_native/d3d12/CommittedResourceAllocatorD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/ResourceHeapD3D12.h"
+#include "dawn_native/d3d12/ResourceD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -40,13 +40,15 @@ namespace dawn_native { namespace d3d12 {
             return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate resource");
         }
 
-        return ResourceMemoryAllocation(
-            /*offset*/ 0, new ResourceHeap(std::move(committedResource)),
-            AllocationMethod::kDirect);
+        AllocationInfo info;
+        info.mMethod = AllocationMethod::kDirect;
+
+        return ResourceMemoryAllocation(info, /*offset*/ 0,
+                                        new Resource(std::move(committedResource)), nullptr);
     }
 
     void CommittedResourceAllocator::Deallocate(ResourceMemoryAllocation& allocation) {
-        std::unique_ptr<ResourceHeap> resourceHeap(ToBackend(allocation.GetResourceHeap()));
-        mDevice->ReferenceUntilUnused(resourceHeap->GetD3D12Resource());
+        std::unique_ptr<Resource> resource(ToBackend(allocation.GetResource()));
+        mDevice->ReferenceUntilUnused(resource->GetD3D12Resource());
     }
 }}  // namespace dawn_native::d3d12

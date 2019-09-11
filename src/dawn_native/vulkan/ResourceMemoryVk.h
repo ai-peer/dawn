@@ -16,12 +16,12 @@
 #define DAWNNATIVE_VULKAN_RESOURCEMEMORYVK_H_
 
 #include "common/vulkan_platform.h"
-#include "dawn_native/ResourceHeap.h"
+#include "dawn_native/Resource.h"
 
 namespace dawn_native { namespace vulkan {
 
     // Wrapper for physical memory used with or without a resource object.
-    class ResourceMemory : public ResourceHeapBase {
+    class ResourceMemory : public ResourceBase {
       public:
         ResourceMemory(VkDeviceMemory memory);
         ~ResourceMemory() = default;

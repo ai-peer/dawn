@@ -31,7 +31,7 @@
 #include "dawn_native/d3d12/QueueD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
-#include "dawn_native/d3d12/ResourceHeapD3D12.h"
+#include "dawn_native/d3d12/ResourceD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
@@ -345,7 +345,7 @@ namespace dawn_native { namespace d3d12 {
     void Device::DeallocateMemory(ResourceMemoryAllocation& allocation) {
         CommittedResourceAllocator* allocator = nullptr;
         D3D12_HEAP_PROPERTIES heapProp;
-        ToBackend(allocation.GetResourceHeap())
+        ToBackend(allocation.GetResource())
             ->GetD3D12Resource()
             ->GetHeapProperties(&heapProp, nullptr);
         const size_t heapTypeIndex = GetD3D12HeapTypeToIndex(heapProp.Type);

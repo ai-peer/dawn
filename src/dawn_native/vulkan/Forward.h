@@ -48,7 +48,7 @@ namespace dawn_native { namespace vulkan {
         using PipelineLayoutType = PipelineLayout;
         using QueueType = Queue;
         using RenderPipelineType = RenderPipeline;
-        using ResourceHeapType = ResourceMemory;
+        using ResourceType = ResourceMemory;
         using SamplerType = Sampler;
         using ShaderModuleType = ShaderModule;
         using StagingBufferType = StagingBuffer;
