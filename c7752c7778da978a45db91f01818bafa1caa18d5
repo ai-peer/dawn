@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ece5278_64cc5e6a",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-11T20:09:12Z",
+      "side": 1,
+      "message": "That seems unfortunate :-/\n\nMaybe we could try to dynamically create new temporary descriptor sets. VkDescriptorBufferInfo can have a VkDeviceSize offset. And hopefully most apps aren\u0027t using such large dynamic offsets.\n\nOr change the API so that dynamic offsets are only uint32_t.",
+      "parentUuid": "e3f2c804_6d881cd2",
+      "range": {
+        "startLine": 34,
+        "startChar": 61,
+        "endLine": 34,
+        "endChar": 94
+      },
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "455e63bc_2d44c73d",
         "filename": "src/dawn_native/BindGroupTracker.h",
         "patchSetId": 5
