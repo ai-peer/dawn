@@ -35,7 +35,10 @@ namespace dawn_native { namespace vulkan {
 
         CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
         for (uint32_t i = 0; i < commandCount; ++i) {
-            ToBackend(commands[i])->RecordCommands(recordingContext);
+            if (device->ConsumedError(ToBackend(commands[i])->RecordCommands(recordingContext))) {
+                // TODO(cwallez@chromium.org): This should lost the device so nothing else can happen.
+                return {};
+            }
         }
 
         device->SubmitPendingCommands();
