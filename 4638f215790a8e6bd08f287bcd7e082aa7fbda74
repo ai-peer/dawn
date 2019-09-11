@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a754d72_26283b63",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T19:47:14Z",
+      "side": 1,
+      "message": "nit: The texture is initialized only if both are true. We\u0027ll need special cases when for example depth is store but stencil is discard.",
+      "range": {
+        "startLine": 948,
+        "startChar": 72,
+        "endLine": 948,
+        "endChar": 74
+      },
+      "revId": "4638f215790a8e6bd08f287bcd7e082aa7fbda74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8efa02c8_2d4ca43d",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T19:47:14Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 221,
+        "startChar": 76,
+        "endLine": 221,
+        "endChar": 78
+      },
+      "revId": "4638f215790a8e6bd08f287bcd7e082aa7fbda74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
