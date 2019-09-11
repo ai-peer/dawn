@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../scripts/dawn_overrides_with_defaults.gni")
 import("//build_overrides/build.gni")
+import("../../scripts/dawn_overrides_with_defaults.gni")
 
 # We only have libfuzzer in Chromium builds but if we build fuzzer targets only
 # there, we would risk breaking fuzzer targets all the time when making changes
@@ -31,6 +31,25 @@ if (build_with_chromium) {
   template("dawn_fuzzer_test") {
     fuzzer_test(target_name) {
       forward_variables_from(invoker, "*")
+    }
+  }
+} else if (defined(is_fuchsia_tree) && is_fuchsia_tree) {
+  # In Fuchsia build
+  import("//build/fuzzing/fuzzer.gni")
+  template("dawn_fuzzer_test") {
+    fuzzer(target_name) {
+      # There is no equivalent to |asan_options| with Fuchsia fuzzers
+      # for now, so ignore the setting.
+      forward_variables_from(invoker,
+                             "*",
+                             [
+                               "asan_options",
+                               "additional_configs",
+                             ])
+
+      if (defined(invoker.additional_configs)) {
+        configs += invoker.additional_configs
+      }
     }
   }
 } else {

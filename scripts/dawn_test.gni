@@ -1,0 +1,40 @@
+# Copyright 2019 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Define dawn_unittest() and dawn_test() templates to be used by Dawn to
+# define test-related targets.
+
+if (defined(is_fuchsia_tree) && is_fuchsia_tree) {
+  # Special case for the Fuchsia platform build system, which doesn't provide
+  # a test() template, and has sophisticated rules to generate test-related
+  # packages.
+  import("dawn_test_for_fuchsia.gni")
+} else {
+  # Chromium or standalone build system.
+  import("//testing/test.gni")
+  template("dawn_test") {
+    test(target_name) {
+      # NOTE: The Chromium test() rule has a default configs[] value.
+      forward_variables_from(invoker, "*", [ "configs" ])
+      if (defined(invoker.configs)) {
+        configs += invoker.configs
+      }
+    }
+  }
+  template("dawn_unittest") {
+    dawn_test(target_name) {
+      forward_variables_from(invoker, "*")
+    }
+  }
+}
