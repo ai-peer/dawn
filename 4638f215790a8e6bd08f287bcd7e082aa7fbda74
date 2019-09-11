@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "08bcbc68_f8dc2b2e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-11T21:43:39Z",
+      "side": 1,
+      "message": "(But of course since Store is the only op, we can just add a TODO and maybe an ASSERT here.)\n\n if (.. || ..) {\n   ASSERT(attachmentInfo.depthStoreOp \u003d\u003d dawn::StoreOp::Store \u0026\u0026 attachmentInfo.stencilStoreOp \u003d\u003d dawn::StoreOp::Store)",
+      "parentUuid": "6a754d72_26283b63",
+      "range": {
+        "startLine": 948,
+        "startChar": 72,
+        "endLine": 948,
+        "endChar": 74
+      },
+      "revId": "4638f215790a8e6bd08f287bcd7e082aa7fbda74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8efa02c8_2d4ca43d",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 4
