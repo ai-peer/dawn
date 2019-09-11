@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "2c16a8b4_f0c20868",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-11T22:44:02Z",
+      "side": 1,
+      "message": "do we want to implement this for compressed textures? It\u0027s still being skipped for now",
+      "parentUuid": "3f2bcaa5_32c7e46e",
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba73ab93_e6608ee8",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 6
