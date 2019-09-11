@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8aa59ca5_e82996ea",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-11T00:40:41Z",
+      "side": 1,
+      "message": "I don\u0027t think this is actually being tested here - we\u0027re only saying that it *has* been called, at some point. But I have no idea how to test this.",
+      "range": {
+        "startLine": 136,
+        "startChar": 26,
+        "endLine": 136,
+        "endChar": 37
+      },
+      "revId": "e002c28906d02255b6ca816f4b2f5479861a5f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
