@@ -15,17 +15,17 @@
 #ifndef DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
 #define DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
 
-#include "dawn_native/ResourceHeap.h"
+#include "dawn_native/Resource.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
     // Wrapper for physical memory used with or without a resource object.
-    class ResourceHeap : public ResourceHeapBase {
+    class Resource : public ResourceBase {
       public:
-        ResourceHeap(ComPtr<ID3D12Resource> resource);
+        Resource(ComPtr<ID3D12Resource> resource);
 
-        ~ResourceHeap() = default;
+        ~Resource() = default;
 
         ComPtr<ID3D12Resource> GetD3D12Resource() const;
         D3D12_GPU_VIRTUAL_ADDRESS GetGPUPointer() const;
@@ -35,4 +35,4 @@ namespace dawn_native { namespace d3d12 {
     };
 }}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
+#endif  // DAWNNATIVE_D3D12_RESOURCED3D12_H_

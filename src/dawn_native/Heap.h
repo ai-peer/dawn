@@ -12,19 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn_native/d3d12/ResourceHeapD3D12.h"
-#include "dawn_native/d3d12/DeviceD3D12.h"
+#ifndef DAWNNATIVE_HEAP_H_
+#define DAWNNATIVE_HEAP_H_
 
-namespace dawn_native { namespace d3d12 {
+#include "dawn_native/Error.h"
 
-    ResourceHeap::ResourceHeap(ComPtr<ID3D12Resource> resource) : mResource(resource) {
-    }
+namespace dawn_native {
 
-    ComPtr<ID3D12Resource> ResourceHeap::GetD3D12Resource() const {
-        return mResource;
-    }
+    // Wrapper for a heap.
+    class HeapBase {
+      public:
+        HeapBase() = default;
+        virtual ~HeapBase() = default;
+    };
 
-    D3D12_GPU_VIRTUAL_ADDRESS ResourceHeap::GetGPUPointer() const {
-        return mResource->GetGPUVirtualAddress();
-    }
-}}  // namespace dawn_native::d3d12
+}  // namespace dawn_native
+
+#endif  // DAWNNATIVE_HEAP_H_

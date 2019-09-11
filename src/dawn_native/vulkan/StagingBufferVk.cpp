@@ -46,7 +46,7 @@ namespace dawn_native { namespace vulkan {
 
         DAWN_TRY(CheckVkSuccess(
             mDevice->fn.BindBufferMemory(mDevice->GetVkDevice(), mBuffer,
-                                         ToBackend(mAllocation.GetResourceHeap())->GetMemory(),
+                                         ToBackend(mAllocation.GetResource())->GetMemory(),
                                          mAllocation.GetOffset()),
             "vkBindBufferMemory"));
 
