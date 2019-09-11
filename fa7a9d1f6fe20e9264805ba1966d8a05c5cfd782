@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "48c41eaa_e1dfb995",
+        "filename": "src/dawn_native/BuddyAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-11T22:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04acc10e_cdf0ed57",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67a95656_99d5f116",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
         "patchSetId": 4
@@ -105,6 +123,24 @@
       "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54d311f2_746b1c82",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-11T22:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5c1c21b_12126573",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +197,24 @@
     },
     {
       "key": {
+        "uuid": "b25f5294_bed76556",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-11T22:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b76319d1_1407e76a",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5c1000d_562db566",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
         "patchSetId": 4
@@ -211,6 +265,24 @@
       "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36b75fc4_269b9aed",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-11T22:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8409122f_ba9b2392",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -285,6 +357,30 @@
     },
     {
       "key": {
+        "uuid": "f743b6de_91718bb5",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-11T22:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "902e2735_bad9fae4",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 18
+      },
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcc244d7_e6f13cea",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.h",
         "patchSetId": 4
@@ -314,6 +410,24 @@
       "side": 1,
       "message": "Removed.",
       "parentUuid": "fcc244d7_e6f13cea",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b55d5c0a_737d7f80",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-11T22:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2938cc89_ab7a79f4",
       "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
