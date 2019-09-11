@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3f2c804_6d881cd2",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T17:05:22Z",
+      "side": 1,
+      "message": "Will you look at fixing this in the Vulkan backend? We could just throw OOM when trying to allocate buffers more than 4GB.",
+      "range": {
+        "startLine": 34,
+        "startChar": 61,
+        "endLine": 34,
+        "endChar": 94
+      },
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "455e63bc_2d44c73d",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T17:05:22Z",
+      "side": 1,
+      "message": "This isn\u0027t used. Oh ok it is used to call the parent class.\n\nnit: Maybe define it in the backends themselves?",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cce8113_03d66d33",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T17:05:22Z",
+      "side": 1,
+      "message": "This loses the optimization where just changing the dynamic offset can skip updating the root descriptor tables. Is there a simple way to keep it?",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6af9391_ae446a4f",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T17:05:22Z",
+      "side": 1,
+      "message": "Why is the {} needed now?",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
