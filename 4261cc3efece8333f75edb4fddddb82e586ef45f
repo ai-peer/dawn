@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f668e65b_c7f4aea3",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T18:09:56Z",
+      "side": 1,
+      "message": "We are going to use this on all platform (except maybe mac) so we can probably remove this condition.",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 96,
+        "endChar": 56
+      },
+      "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "216f437c_b3e36e04",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T18:09:56Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 205,
+        "startChar": 33,
+        "endLine": 205,
+        "endChar": 56
+      },
+      "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cebc8cc_4fce8e98",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T18:09:56Z",
+      "side": 1,
+      "message": "This decvlare_args can be merged with the one above.",
+      "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
