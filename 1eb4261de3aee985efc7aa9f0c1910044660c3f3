@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad9fa382_f0cbb261",
+        "filename": "src/dawn_native/ErrorScopeTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T15:50:26Z",
+      "side": 1,
+      "message": "This could be done automatically if mScopesInFlight contained Ref\u003cErrorScope\u003e",
+      "revId": "1eb4261de3aee985efc7aa9f0c1910044660c3f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1e4a6c6_0096e101",
+        "filename": "src/dawn_native/ErrorScopeTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T15:50:26Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1eb4261de3aee985efc7aa9f0c1910044660c3f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76acf1b1_e14b553e",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-11T15:50:26Z",
+      "side": 1,
+      "message": "nit: maybe comment that the queue submit can only have been seen by dawn_native if a tick happened. ditto in other tests.",
+      "revId": "1eb4261de3aee985efc7aa9f0c1910044660c3f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
