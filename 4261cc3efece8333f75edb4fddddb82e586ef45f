@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "75348f2a_7cbb1039",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-12T14:06:05Z",
+      "side": 1,
+      "message": "Ah yes, that issue. :/",
+      "parentUuid": "5af596e6_29c8ea8d",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 96,
+        "endChar": 56
+      },
+      "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "216f437c_b3e36e04",
         "filename": "DEPS",
         "patchSetId": 3
@@ -101,6 +125,24 @@
       "side": 1,
       "message": "It seems that GN does not allow reading a variable defined in the same declare_args(). If we want to set the value of one argument based on another, need to put them in two separate declare_args().",
       "parentUuid": "8cebc8cc_4fce8e98",
+      "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b60c9f69_c14226a8",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-12T14:06:05Z",
+      "side": 1,
+      "message": "Ok, then could you add a comment for it?",
+      "parentUuid": "3d911658_983e9ed6",
       "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
