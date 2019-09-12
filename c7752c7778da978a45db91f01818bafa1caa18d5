@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "bef5d02a_f780698f",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-12T23:45:27Z",
+      "side": 1,
+      "message": "Done. Realized I didn\u0027t even need it.",
+      "parentUuid": "455e63bc_2d44c73d",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4cce8113_03d66d33",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5
@@ -83,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "bb8c2974_872e3bb4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-12T23:45:27Z",
+      "side": 1,
+      "message": "I added another bitset to do this. We\u0027ll have to profile all of this tracking at some point though.",
+      "parentUuid": "4cce8113_03d66d33",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6af9391_ae446a4f",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 5
@@ -94,6 +130,24 @@
       "writtenOn": "2019-09-11T17:05:22Z",
       "side": 1,
       "message": "Why is the {} needed now?",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "455a0bf4_8032e6d5",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-12T23:45:27Z",
+      "side": 1,
+      "message": "Just a personal preference so it\u0027s clear that everything is initialized. Would you like to remove it?",
+      "parentUuid": "e6af9391_ae446a4f",
       "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
