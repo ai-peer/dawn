@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5af596e6_29c8ea8d",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-12T07:26:52Z",
+      "side": 1,
+      "message": "Yes, it should be removed, but there is segmentation fault when running end2end tests with validation layers enabled, becuase debug callback handle cannot be destoryed in https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/BackendVk.cpp?l\u003d41, I\u0027m looking at this problem, so temporarily add this condition to make it work on Windows.",
+      "parentUuid": "f668e65b_c7f4aea3",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 96,
+        "endChar": 56
+      },
+      "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "216f437c_b3e36e04",
         "filename": "DEPS",
         "patchSetId": 3
@@ -59,6 +83,24 @@
       "writtenOn": "2019-09-11T18:09:56Z",
       "side": 1,
       "message": "This decvlare_args can be merged with the one above.",
+      "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d911658_983e9ed6",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-09-12T07:26:52Z",
+      "side": 1,
+      "message": "It seems that GN does not allow reading a variable defined in the same declare_args(). If we want to set the value of one argument based on another, need to put them in two separate declare_args().",
+      "parentUuid": "8cebc8cc_4fce8e98",
       "revId": "4261cc3efece8333f75edb4fddddb82e586ef45f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
