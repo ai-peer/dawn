@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b50a216_7e538ef4",
+        "filename": "BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000039
+      },
+      "writtenOn": "2019-09-12T13:45:52Z",
+      "side": 1,
+      "message": "this should be (is_linux \u0026\u0026 !is_chromeos) because chromeos is linux too.\n\nhttps://cs.chromium.org/chromium/src/build/config/BUILDCONFIG.gn?rcl\u003dc080a666f85b4068f8c6cc7b965de000037c4a67\u0026l\u003d291",
+      "revId": "fad96f6e59a7797af5a7eee9fb48fbfb73f02f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
