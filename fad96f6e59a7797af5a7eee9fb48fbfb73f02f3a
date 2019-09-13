@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f1812e8_61470322",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-13T18:04:50Z",
+      "side": 0,
+      "message": "Please changes the fuzzers as mentioned in this comment.",
+      "revId": "fad96f6e59a7797af5a7eee9fb48fbfb73f02f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b49b7985_9bf4b6fa",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-13T18:04:50Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "fad96f6e59a7797af5a7eee9fb48fbfb73f02f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

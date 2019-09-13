@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5ef466d_949c132c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-13T18:04:50Z",
+      "side": 1,
+      "message": "This requires KHR_maintenance1 please add code to load it, and fail device creation if it isn\u0027t present.",
+      "revId": "371084fde3b3895797342176ea971712a64e3cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
