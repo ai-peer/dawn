@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15b8eba8_9df52d43",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2019-09-13T19:22:17Z",
+      "side": 1,
+      "message": "The intended way to use this warning is to add API_AVAILABLE(macos(10.11)) here https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/metal/BackendMTL.h?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d22 so that it reads\n\n    class API_AVAILABLE(macos(10.11)) Backend : public BackendConnection {\n\nThen the compiler knows that this class is only instantiated on 10.11 and won\u0027t warn about stuff available in 10.11+ (while still warning you if you call a 10.12+ function, which is a good thing).\n\nAnd then in Connect() further down you do\n\n    BackendConnection* Connect(InstanceBase* instance) {\n        if (@available(mac 10.11, *)) {\n            return new Backend(instance);\n        }\n        return nullptr;\n    }\n\nand you remove IsMetalSupported(). Then everything should build fine with this warning enabled.\n\nI wrote some docs on this a while ago: http://clang.llvm.org/docs/LanguageExtensions.html#objective-c-available\n\nDoes that work?",
+      "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
