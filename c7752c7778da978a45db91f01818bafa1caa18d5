@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "98501c07_7bbb6e88",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-13T19:36:14Z",
+      "side": 1,
+      "message": "Mmmmh I think that\u0027s fine to prevent 4gb buffers until we have an extension or really need to do a workaround.",
+      "parentUuid": "2ece5278_64cc5e6a",
+      "range": {
+        "startLine": 34,
+        "startChar": 61,
+        "endLine": 34,
+        "endChar": 94
+      },
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "455e63bc_2d44c73d",
         "filename": "src/dawn_native/BindGroupTracker.h",
         "patchSetId": 5
@@ -119,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "829d7dd8_b88420e1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-13T19:36:14Z",
+      "side": 1,
+      "message": "Agreed",
+      "parentUuid": "bb8c2974_872e3bb4",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6af9391_ae446a4f",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 5
@@ -148,6 +190,24 @@
       "side": 1,
       "message": "Just a personal preference so it\u0027s clear that everything is initialized. Would you like to remove it?",
       "parentUuid": "e6af9391_ae446a4f",
+      "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3678c228_4af9e76c",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-13T19:36:14Z",
+      "side": 1,
+      "message": "Nope that\u0027s ok.",
+      "parentUuid": "455a0bf4_8032e6d5",
       "revId": "c7752c7778da978a45db91f01818bafa1caa18d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
