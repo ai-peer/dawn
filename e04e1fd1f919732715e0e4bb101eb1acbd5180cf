@@ -34,6 +34,24 @@
       "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbd026b3_ba5c55be",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2019-09-14T00:55:41Z",
+      "side": 1,
+      "message": "100 places doesn\u0027t seem all that much. Are you opposed to adding it? The warning gets you a lot of safety, which might come in handy if your metal code is so widely spread. As-is, it\u0027s easy to call metal code from non-metal code.",
+      "parentUuid": "6b1de526_56778c8b",
+      "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
