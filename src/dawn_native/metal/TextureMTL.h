@@ -17,7 +17,7 @@
 
 #include "dawn_native/Texture.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace dawn_native { namespace metal {
 
@@ -29,7 +29,7 @@ namespace dawn_native { namespace metal {
                                              IOSurfaceRef ioSurface,
                                              uint32_t plane);
 
-    class Texture : public TextureBase {
+    class METAL_AVAILABLE Texture : public TextureBase {
       public:
         Texture(Device* device, const TextureDescriptor* descriptor);
         Texture(Device* device, const TextureDescriptor* descriptor, id<MTLTexture> mtlTexture);
@@ -47,7 +47,7 @@ namespace dawn_native { namespace metal {
         id<MTLTexture> mMtlTexture = nil;
     };
 
-    class TextureView : public TextureViewBase {
+    class METAL_AVAILABLE TextureView : public TextureViewBase {
       public:
         TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor);
         ~TextureView();

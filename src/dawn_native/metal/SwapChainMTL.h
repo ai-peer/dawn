@@ -17,11 +17,13 @@
 
 #include "dawn_native/SwapChain.h"
 
+#include "dawn_native/metal/metal_platform.h"
+
 namespace dawn_native { namespace metal {
 
     class Device;
 
-    class SwapChain : public SwapChainBase {
+    class METAL_AVAILABLE SwapChain : public SwapChainBase {
       public:
         SwapChain(Device* device, const SwapChainDescriptor* descriptor);
         ~SwapChain();

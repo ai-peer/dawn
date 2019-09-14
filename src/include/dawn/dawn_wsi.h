@@ -68,7 +68,7 @@ typedef struct {
 #    import <Metal/Metal.h>
 
 typedef struct {
-    id<MTLDevice> device = nil;
+    id device = nil;
 } DawnWSIContextMetal;
 #endif
 

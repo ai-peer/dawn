@@ -12,22 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_METAL_BACKENDMTL_H_
-#define DAWNNATIVE_METAL_BACKENDMTL_H_
+#ifndef DAWNNATIVE_METAL_METALPLATFORM_H_
+#define DAWNNATIVE_METAL_METALPLATFORM_H_
 
-#include "dawn_native/BackendConnection.h"
+#import <Metal/Metal.h>
 
-#include "dawn_native/metal/metal_platform.h"
+#define METAL_AVAILABLE API_AVAILABLE(macos(10.11), ios(8.0))
 
-namespace dawn_native { namespace metal {
-
-    class METAL_AVAILABLE Backend : public BackendConnection {
-      public:
-        Backend(InstanceBase* instance);
-
-        std::vector<std::unique_ptr<AdapterBase>> DiscoverDefaultAdapters() override;
-    };
-
-}}  // namespace dawn_native::metal
-
-#endif  // DAWNNATIVE_METAL_BACKENDMTL_H_
+#endif  // DAWNNATIVE_METAL_METALPLATFORM_H_

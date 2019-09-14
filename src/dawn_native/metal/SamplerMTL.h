@@ -17,13 +17,13 @@
 
 #include "dawn_native/Sampler.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace dawn_native { namespace metal {
 
     class Device;
 
-    class Sampler : public SamplerBase {
+    class METAL_AVAILABLE Sampler : public SamplerBase {
       public:
         Sampler(Device* device, const SamplerDescriptor* descriptor);
         ~Sampler();

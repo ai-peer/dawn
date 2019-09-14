@@ -17,13 +17,13 @@
 
 #include "dawn_native/RenderPipeline.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace dawn_native { namespace metal {
 
     class Device;
 
-    class RenderPipeline : public RenderPipelineBase {
+    class METAL_AVAILABLE RenderPipeline : public RenderPipelineBase {
       public:
         RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor);
         ~RenderPipeline();

@@ -17,7 +17,7 @@
 
 #include "dawn_native/ShaderModule.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace spirv_cross {
     class CompilerMSL;
@@ -28,7 +28,7 @@ namespace dawn_native { namespace metal {
     class Device;
     class PipelineLayout;
 
-    class ShaderModule : public ShaderModuleBase {
+    class METAL_AVAILABLE ShaderModule : public ShaderModuleBase {
       public:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
 

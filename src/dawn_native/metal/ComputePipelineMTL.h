@@ -17,13 +17,13 @@
 
 #include "dawn_native/ComputePipeline.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace dawn_native { namespace metal {
 
     class Device;
 
-    class ComputePipeline : public ComputePipelineBase {
+    class METAL_AVAILABLE ComputePipeline : public ComputePipelineBase {
       public:
         ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor);
         ~ComputePipeline();

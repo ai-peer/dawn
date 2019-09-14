@@ -20,8 +20,8 @@
 #include "common/Serial.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/metal/Forward.h"
+#include "dawn_native/metal/metal_platform.h"
 
-#import <Metal/Metal.h>
 #import <QuartzCore/CAMetalLayer.h>
 
 #include <atomic>
@@ -32,7 +32,7 @@ namespace dawn_native { namespace metal {
 
     class MapRequestTracker;
 
-    class Device : public DeviceBase {
+    class METAL_AVAILABLE Device : public DeviceBase {
       public:
         Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, const DeviceDescriptor* descriptor);
         ~Device();

@@ -18,7 +18,7 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace dawn_native {
     class CommandEncoderBase;
@@ -29,7 +29,7 @@ namespace dawn_native { namespace metal {
     class Device;
     struct GlobalEncoders;
 
-    class CommandBuffer : public CommandBufferBase {
+    class METAL_AVAILABLE CommandBuffer : public CommandBufferBase {
       public:
         CommandBuffer(CommandEncoderBase* encoder, const CommandBufferDescriptor* descriptor);
         ~CommandBuffer();

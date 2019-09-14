@@ -19,7 +19,7 @@
 
 #include "dawn_native/PerStage.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace spirv_cross {
     class CompilerMSL;
@@ -36,7 +36,7 @@ namespace dawn_native { namespace metal {
     // The number of Metal buffers Dawn can use in a generic way (i.e. that aren't reserved)
     static constexpr size_t kGenericMetalBufferSlots = kMetalBufferTableSize - 1;
 
-    class PipelineLayout : public PipelineLayoutBase {
+    class METAL_AVAILABLE PipelineLayout : public PipelineLayoutBase {
       public:
         PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor);
 
