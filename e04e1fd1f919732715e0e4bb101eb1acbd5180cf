@@ -52,6 +52,24 @@
       "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3060a993_19bc6125",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-14T01:54:33Z",
+      "side": 1,
+      "message": "Dawn is a graphics API built upon Metal and all of dawn_native/metal can be accessed only through that Connect method or MetalBackend.h entrypoints (that require a Metal backend object to use). Users of Dawn don\u0027t need to see anything related to Metal.\n\nAs discussed offline I ran into issues adding API_AVAILABLE annotations (crbug.com/1004024) so instead is it possible to up the min_deployment_target to 10.11 for only some GN targets? As explained above Dawn could easily be made safe and the rest of the code would need to use API_AVAILABLE(macos(10.12)) when using newer Metal features.",
+      "parentUuid": "bbd026b3_ba5c55be",
+      "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
