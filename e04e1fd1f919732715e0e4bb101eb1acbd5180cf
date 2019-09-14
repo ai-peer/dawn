@@ -16,6 +16,24 @@
       "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b1de526_56778c8b",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-14T00:46:04Z",
+      "side": 1,
+      "message": "Makes sense, the problem is that we have a whole backend that is predicated on having Metal available. I tried what you suggested but it would require adding METAL_AVAILABLE in about a hundred places when really the whole backend but Connect is predicated on having metal available.\n\n(I am #defining METAL_AVAILABLE API_AVAILABLE(macos(10.11), ios(8.0))",
+      "parentUuid": "15b8eba8_9df52d43",
+      "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
