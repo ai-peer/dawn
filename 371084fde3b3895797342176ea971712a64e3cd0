@@ -16,6 +16,23 @@
       "revId": "371084fde3b3895797342176ea971712a64e3cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d47cd3ee_619e2864",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-14T04:17:07Z",
+      "side": 1,
+      "message": "Why is this y+height instead of height-y?",
+      "revId": "371084fde3b3895797342176ea971712a64e3cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
