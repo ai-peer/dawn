@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "12409a58_437b7deb",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-14T01:51:32Z",
+      "side": 1,
+      "message": "I would be okay landing this without compressed textures first and supporting that after. The clearing is skipped in all the other backends right now as well.",
+      "parentUuid": "e4d50eb6_bc7648d1",
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba73ab93_e6608ee8",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 6
