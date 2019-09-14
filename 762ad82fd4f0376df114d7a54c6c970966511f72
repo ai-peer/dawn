@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "ce974e16_518016d3",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-14T03:58:36Z",
+      "side": 1,
+      "message": "yeah, let\u0027s definitely land without compressed textures and add it afterward.",
+      "parentUuid": "12409a58_437b7deb",
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba73ab93_e6608ee8",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 6
