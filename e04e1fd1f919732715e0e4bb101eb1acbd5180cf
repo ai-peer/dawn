@@ -70,6 +70,24 @@
       "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9de52ab1_eb82c52c",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2019-09-14T02:08:35Z",
+      "side": 1,
+      "message": "\u003e Dawn is a graphics API built upon Metal and all of dawn_native/metal can be accessed only through that Connect method or MetalBackend.h entrypoints (that require a Metal backend object to use). Users of Dawn don\u0027t need to see anything related to Metal.\n\nUnderstood; else you\u0027d have to export this -Wno flag as a public_deps, which would make it everyone\u0027s problem :) But even dawn-internally having this warning enabled might be a good idea.\n\nCan you add a \"TODO: Consider using API_AVAILABLE annotations on all metal code in dawn once  crbug.com/1004024 is sorted out\"?\n\nBuilding a target with a newer deployment target is in theory doable, but it feels like it could cause all kinds of subtle issues. The linker seems to agree with that, it warns:\n\n```\n$ cat test1.cc\nint f();\nint main() { return f(); }\n$ cat test2.cc\nint f() { return 0; }\n$ clang -c test1.cc -mmacosx-version-min\u003d10.10\n$ clang -c test2.cc -mmacosx-version-min\u003d10.11\n$ clang test1.o test2.o -mmacosx-version-min\u003d10.10\nld: warning: object file (test2.o) was built for newer OSX version (10.11) than being linked (10.10)\n```",
+      "parentUuid": "3060a993_19bc6125",
+      "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
