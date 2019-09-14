@@ -2,6 +2,92 @@
   "comments": [
     {
       "key": {
+        "uuid": "a417bf07_e97745dd",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-14T01:38:32Z",
+      "side": 1,
+      "message": "BuddyResourceHeapAllocator allocator(128, 128, client);\n\nallocator.Allocate(64, 4, 0);\nallocator.Allocate(64, 4, 3);\n\nWon\u0027t these allocate in the same heapAllocation created at [1] even though they have different memory flags?",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed310968_1260a84d",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-14T01:38:32Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25be2a84_af221554",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-14T01:38:32Z",
+      "side": 1,
+      "message": "nit: Usually we pass mutable objects by pointer. Although, in this function, it looks like it can be const\u0026 ?",
+      "range": {
+        "startLine": 74,
+        "startChar": 48,
+        "endLine": 74,
+        "endChar": 84
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9fb6053_13a93dd6",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-14T01:38:32Z",
+      "side": 1,
+      "message": "nit: in",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 11
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "905b7025_deefe069",
         "filename": "src/dawn_native/Resource.h",
         "patchSetId": 5
@@ -13,6 +99,29 @@
       "writtenOn": "2019-09-13T20:21:36Z",
       "side": 1,
       "message": "I\u0027m still not 100% sure why we need this in the frontend: the BuddyResourceAllocator doesn\u0027t set the mResource member of ResourceMemoryAllocation. And nothing in the frontend calls GetResource. The design you did with the BuddyAllocator as a helper class is great as it allows using it as a utility in the backends such that the frontend never needs to know about the allocation shenanigans we are doing.\n\nOr do you plan to use ResourceBase and HeapBase in the frontend at some point?\n\nSorry to keep asking questions and restructurations like this. Landing the design little by little helps with review but we lost the big picture since we diverged from the design docs.",
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d3ee8c3_3364cec9",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-14T01:38:32Z",
+      "side": 1,
+      "message": "nit: const\u0026",
+      "range": {
+        "startLine": 26,
+        "startChar": 55,
+        "endLine": 26,
+        "endChar": 70
+      },
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -70,6 +179,30 @@
       "writtenOn": "2019-09-13T20:21:36Z",
       "side": 1,
       "message": "Wouldn\u0027t this corrspond to HeapBase instead? It encapsulates a VkMemory which is exactly like an ID3D12Heap",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "767870ea_2c190bb2",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-14T01:38:32Z",
+      "side": 1,
+      "message": "+1\n\nI think the separation between Resource and Heap is messy right now because the backend doesn\u0027t handle actual suballocation yet. This class really should be a Heap even though we use it as if it\u0027s a Resource everywhere else. I think the distinction will clear up in later patches.",
+      "parentUuid": "6819d774_50c57e18",
       "range": {
         "startLine": 24,
         "startChar": 10,
