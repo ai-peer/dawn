@@ -22,6 +22,8 @@ namespace {
     class BindGroup;
 }  // namespace
 
+#include "dawn_native/metal/metal_platform.h"
+
 namespace dawn_native { namespace metal {
 
     class Adapter;
@@ -42,7 +44,7 @@ namespace dawn_native { namespace metal {
     class Texture;
     class TextureView;
 
-    struct MetalBackendTraits {
+    struct METAL_AVAILABLE MetalBackendTraits {
         using AdapterType = Adapter;
         using BindGroupType = BindGroup;
         using BindGroupLayoutType = BindGroupLayout;
@@ -62,7 +64,7 @@ namespace dawn_native { namespace metal {
     };
 
     template <typename T>
-    auto ToBackend(T&& common) -> decltype(ToBackendBase<MetalBackendTraits>(common)) {
+    METAL_AVAILABLE auto METAL_AVAILABLE ToBackend(T&& common) -> decltype(ToBackendBase<MetalBackendTraits>(common)) {
         return ToBackendBase<MetalBackendTraits>(common);
     }
 

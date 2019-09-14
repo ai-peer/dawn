@@ -17,13 +17,13 @@
 
 #include "dawn_native/StagingBuffer.h"
 
-#import <Metal/Metal.h>
+#include "dawn_native/metal/metal_platform.h"
 
 namespace dawn_native { namespace metal {
 
     class Device;
 
-    class StagingBuffer : public StagingBufferBase {
+    class METAL_AVAILABLE StagingBuffer : public StagingBufferBase {
       public:
         StagingBuffer(size_t size, Device* device);
         ~StagingBuffer();

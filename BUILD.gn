@@ -45,11 +45,6 @@ source_set("dawn_platform") {
 
 config("libdawn_native_internal") {
   configs = [ "${dawn_root}/src/common:dawn_internal" ]
-
-  # Suppress warnings that Metal isn't in the deployment target of Chrome
-  if (is_mac) {
-    cflags_objcc = [ "-Wno-unguarded-availability" ]
-  }
 }
 
 dawn_json_generator("libdawn_native_utils_gen") {
@@ -328,6 +323,7 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/metal/TextureMTL.mm",
       "src/dawn_native/metal/UtilsMetal.h",
       "src/dawn_native/metal/UtilsMetal.mm",
+      "src/dawn_native/metal/metal_platform.h",
     ]
   }
 
