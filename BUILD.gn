@@ -111,6 +111,7 @@ source_set("libdawn_native_sources") {
     ":libdawn_native_utils_gen",
     "${dawn_root}/src/common",
     "${dawn_spirv_tools_dir}:spvtools_val",
+    "${dawn_spirv_tools_dir}:spvtools_opt",
     "third_party:spirv_cross",
   ]
 

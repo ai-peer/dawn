@@ -217,6 +217,7 @@ TEST_P(BufferSetSubDataTests, ManySetSubData) {
 
     // TODO (jiawei.shao@intel.com): find out why this test fails on Intel Vulkan Linux bots.
     DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsLinux());
+    DAWN_SKIP_TEST_IF(IsIntel() && IsMetal());
 
     constexpr uint64_t kSize = 4000 * 1000;
     constexpr uint32_t kElements = 500 * 500;
