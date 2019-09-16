@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4808b963_fcd1ee7b",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-16T16:27:15Z",
+      "side": 1,
+      "message": "The device will guarantee the allocation has matching (or compatible) memory/heap flags. Does that address your concern?",
+      "parentUuid": "a417bf07_e97745dd",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed310968_1260a84d",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
         "patchSetId": 5
@@ -102,6 +126,24 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81bcc3e6_dcd4eb43",
+        "filename": "src/dawn_native/Resource.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-16T16:27:15Z",
+      "side": 1,
+      "message": "I did plan to use ResourceMemoryAllocation::mResourceBase in the front-end. See the other comment.",
+      "parentUuid": "905b7025_deefe069",
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -202,6 +244,30 @@
       "writtenOn": "2019-09-14T01:38:32Z",
       "side": 1,
       "message": "+1\n\nI think the separation between Resource and Heap is messy right now because the backend doesn\u0027t handle actual suballocation yet. This class really should be a Heap even though we use it as if it\u0027s a Resource everywhere else. I think the distinction will clear up in later patches.",
+      "parentUuid": "6819d774_50c57e18",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4ded47e_3594f693",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-16T16:27:15Z",
+      "side": 1,
+      "message": "It needs to have the same memory type used by ResourceMemoryAllocation. \n\nIf we used HeapBase, the resource allocation would be unusable by the D3D API. For Vulkan, it wouldn\u0027t matter.\n\nVkDeviceMemory is not the same as ID3D12Heap. VkDeviceMemory can represent virtual and physical addresses. ID3D12Heap represents only physical (but not virtual) addresses. I think D3D12\u0027s equivalent of vkDeviceMemory is more ID3D12Pagable.\n\nWe could either: 1) move BuddyResourceHeapAllocator to the D3D12 back-end (requires separate Resource and Heap types) OR rather than combine them, we 2) keep the BuddyResourceHeapAllocator in the front-end by adding a Vulkan-like \"device memory\" type which both ResourceBase and HeapBase inherit from (ie. MemoryBase).\n\nI\u0027m in favor of the latter. WDYT?",
       "parentUuid": "6819d774_50c57e18",
       "range": {
         "startLine": 24,
