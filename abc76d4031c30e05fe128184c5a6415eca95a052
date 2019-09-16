@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c0a0f576_5c6caade",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-16T18:13:55Z",
+      "side": 1,
+      "message": "I figured this was the case. It looks like we don\u0027t store enough bits to track and ASSERT this is true, so I think we should add a comment here or in the header that the Device must guarantee this.",
+      "parentUuid": "4808b963_fcd1ee7b",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed310968_1260a84d",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
         "patchSetId": 5
