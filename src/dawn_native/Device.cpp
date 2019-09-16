@@ -687,9 +687,6 @@ namespace dawn_native {
     }
 
     ResultOrError<DynamicUploader*> DeviceBase::GetDynamicUploader() const {
-        if (mDynamicUploader->IsEmpty()) {
-            DAWN_TRY(mDynamicUploader->CreateAndAppendBuffer());
-        }
         return mDynamicUploader.get();
     }
 

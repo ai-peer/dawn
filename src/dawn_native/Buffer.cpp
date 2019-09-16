@@ -167,9 +167,7 @@ namespace dawn_native {
         // error buffer.
         // TODO(enga): Suballocate and reuse memory from a larger staging buffer so we don't create
         // many small buffers.
-        DynamicUploader* uploader = nullptr;
-        DAWN_TRY_ASSIGN(uploader, GetDevice()->GetDynamicUploader());
-        DAWN_TRY_ASSIGN(mStagingBuffer, uploader->CreateStagingBuffer(GetSize()));
+        DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateStagingBuffer(GetSize()));
 
         ASSERT(mStagingBuffer->GetMappedPointer() != nullptr);
         *mappedPointer = reinterpret_cast<uint8_t*>(mStagingBuffer->GetMappedPointer());
@@ -256,7 +254,8 @@ namespace dawn_native {
         DAWN_TRY_ASSIGN(uploader, GetDevice()->GetDynamicUploader());
 
         UploadHandle uploadHandle;
-        DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(count));
+        DAWN_TRY_ASSIGN(uploadHandle,
+                        uploader->Allocate(count, GetDevice()->GetPendingCommandSerial()));
         ASSERT(uploadHandle.mappedBuffer != nullptr);
 
         memcpy(uploadHandle.mappedBuffer, data, count);
