@@ -541,7 +541,8 @@ namespace dawn_native { namespace d3d12 {
             DynamicUploader* uploader = nullptr;
             DAWN_TRY_ASSIGN(uploader, device->GetDynamicUploader());
             UploadHandle uploadHandle;
-            DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(bufferSize));
+            DAWN_TRY_ASSIGN(uploadHandle,
+                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
             std::fill(reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer),
                       reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize),
                       clearColor);
