@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "b79f3d2e_db5e49b4",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-16T16:03:56Z",
+      "side": 1,
+      "message": "This thread is resolved for now then.",
+      "parentUuid": "ce974e16_518016d3",
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba73ab93_e6608ee8",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 6
