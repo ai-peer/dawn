@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "a8d2ff8e_993d2150",
+        "filename": "src/dawn_native/RingBufferAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-16T18:06:55Z",
+      "side": 1,
+      "message": "\u003e The allocation would only be in the current or next frame. If in the current frame (ie. same serial), it\u0027s now recorded separately whereas before, recording was deferred until Tick. \n\nThen, we can remove the condition at [2]. SerialQueue will ASSERT the serial is \u003e\u003d the last serial.",
+      "parentUuid": "a4be0b46_81cee7b9",
+      "revId": "72650a640060706e03a39f50075554ef2c67310d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1fdfd90_9fd677e0",
         "filename": "src/dawn_native/RingBufferAllocator.cpp",
         "patchSetId": 4
@@ -101,6 +119,23 @@
         "endLine": 89,
         "endChar": 43
       },
+      "revId": "72650a640060706e03a39f50075554ef2c67310d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2abc75e6_873f0ca0",
+        "filename": "src/dawn_native/RingBufferAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-16T18:06:55Z",
+      "side": 1,
+      "message": "[2]",
       "revId": "72650a640060706e03a39f50075554ef2c67310d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
