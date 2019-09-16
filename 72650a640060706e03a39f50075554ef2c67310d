@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "50e4daff_95785cbd",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-16T17:49:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fd88db4_3759337a",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 76
+      },
+      "revId": "72650a640060706e03a39f50075554ef2c67310d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5115053c_9c68b151",
         "filename": "src/dawn_native/RingBufferAllocator.cpp",
         "patchSetId": 4
@@ -36,6 +60,24 @@
       "writtenOn": "2019-09-14T00:35:35Z",
       "side": 1,
       "message": "IIUC, if a |serial| is passed that is less than the last serial, then the allocation should be considered as part of an existing frames-worth of resources. However, it looks like additional allocations to an existing frame are sort of \"leaked\" until the next allocation happens.\n\nRingBufferAllocator allocator(8);\n\nallocator.Allocate(4, 3);      // |xxxx|____|\n                               //   F3   \n\nallocator.Allocate(4, 1);      // |xxxx|xxxx|\n                               //   F3   F1\n\nallocator.Deallocate(3);       // |____|xxxx|  // Shouldn\u0027t this be empty?\n                               //        F1\n\nallocator.GetUsedSize() \u003d\u003e 4   // Shouldn\u0027t this be 0?\n                               //\n\nallocator.Allocate(4, 4);      // |____|xxxx|\n                               //   F4   F1\n\nallocator.Deallocate(4);       // |____|____|  // Now it\u0027s empty\n                               //\n\nallocator.GetUsedSize() \u003d\u003e 0   // Now it is 0\n                               //\n\nIs this the expected behavior?\n\nI think this difference occurs because the old RingBuffer implementation used to accumulate requests until Tick() was called, when it would enqueue them to the tracker. But now, Allocate(...) immediately enqueues them for tracking.",
+      "revId": "72650a640060706e03a39f50075554ef2c67310d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4be0b46_81cee7b9",
+        "filename": "src/dawn_native/RingBufferAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-16T17:49:39Z",
+      "side": 1,
+      "message": "The allocation would only be in the current or next frame. If in the current frame (ie. same serial), it\u0027s now recorded separately whereas before, recording was deferred until Tick. \n\nThe newer approach removes the need to plumb Tick/Track but does consume a bit more space (serial) for recordings. Alternatively, we leave it alone but disable Deallocate (ie. cannot reclaim manually).\n\nEither way, the current frames worth of allocations cannot be reclaimed.",
+      "parentUuid": "5115053c_9c68b151",
       "revId": "72650a640060706e03a39f50075554ef2c67310d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
