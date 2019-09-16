@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d5745cb4_aa568c19",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-16T17:59:03Z",
+      "side": 1,
+      "message": "OK, didn\u0027t realize that\u0027s how mocks work. I thought it allowed it if you set the expectations afterward.",
+      "parentUuid": "234e8dd6_a522f9c8",
+      "range": {
+        "startLine": 136,
+        "startChar": 26,
+        "endLine": 136,
+        "endChar": 37
+      },
+      "revId": "e002c28906d02255b6ca816f4b2f5479861a5f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "26b77e41_28750cbc",
         "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
         "patchSetId": 10
