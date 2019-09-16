@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "5e4997fe_0c5acb25",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-16T21:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba73ab93_e6608ee8",
+      "range": {
+        "startLine": 250,
+        "startChar": 16,
+        "endLine": 250,
+        "endChar": 99
+      },
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "593f4709_92095cd7",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 6
@@ -191,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "60ec298b_3c52abc3",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-16T21:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "593f4709_92095cd7",
+      "range": {
+        "startLine": 569,
+        "startChar": 30,
+        "endLine": 569,
+        "endChar": 39
+      },
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b475c85f_051220a9",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 6
@@ -211,6 +259,30 @@
       "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57091aca_d73568a7",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-16T21:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b475c85f_051220a9",
+      "range": {
+        "startLine": 570,
+        "startChar": 26,
+        "endLine": 570,
+        "endChar": 46
+      },
+      "revId": "762ad82fd4f0376df114d7a54c6c970966511f72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
