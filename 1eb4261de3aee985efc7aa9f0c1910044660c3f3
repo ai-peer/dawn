@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ff740c51_8ef2b8c0",
+        "filename": "src/dawn_native/ErrorScopeTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-16T17:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad9fa382_f0cbb261",
+      "revId": "1eb4261de3aee985efc7aa9f0c1910044660c3f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1e4a6c6_0096e101",
         "filename": "src/dawn_native/ErrorScopeTracker.cpp",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9e0c0b1c_72d34faa",
+        "filename": "src/dawn_native/ErrorScopeTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-16T17:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1e4a6c6_0096e101",
+      "revId": "1eb4261de3aee985efc7aa9f0c1910044660c3f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76acf1b1_e14b553e",
         "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
         "patchSetId": 11
@@ -50,6 +86,24 @@
       "revId": "1eb4261de3aee985efc7aa9f0c1910044660c3f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21e39d67_0cb0b408",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-16T17:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76acf1b1_e14b553e",
+      "revId": "1eb4261de3aee985efc7aa9f0c1910044660c3f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
