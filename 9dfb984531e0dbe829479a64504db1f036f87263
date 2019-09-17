@@ -16,6 +16,24 @@
       "revId": "9dfb984531e0dbe829479a64504db1f036f87263",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6755e080_fc33c522",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-17T19:03:33Z",
+      "side": 1,
+      "message": "Made this |mDirtyBindGroupsObjectChangedOrIsDynamic|",
+      "parentUuid": "05e78115_965ff73c",
+      "revId": "9dfb984531e0dbe829479a64504db1f036f87263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
