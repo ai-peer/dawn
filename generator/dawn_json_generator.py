@@ -495,6 +495,7 @@ class MultiGeneratorFromDawnJSON(Generator):
         if 'dawn_headers' in targets:
             renders.append(FileRender('api.h', 'dawn/dawn.h', [base_params, api_params, c_params]))
             renders.append(FileRender('apicpp.h', 'dawn/dawncpp.h', [base_params, api_params, cpp_params]))
+            renders.append(FileRender('api_struct_info.json', 'webgpu_struct_info.json.h', [base_params, api_params]))
 
         if 'libdawn' in targets:
             additional_params = {'native_methods': lambda typ: cpp_native_methods(api_params['types'], typ)}
