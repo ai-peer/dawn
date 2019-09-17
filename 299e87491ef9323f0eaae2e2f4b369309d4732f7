@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "827eec27_6b19f6d8",
+        "filename": "src/tests/perf_tests/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-17T20:37:22Z",
+      "side": 1,
+      "message": "This renders all on one line; is that intended?\nhttps://dawn.googlesource.com/dawn.git/+/299e87491ef9323f0eaae2e2f4b369309d4732f7/src/tests/perf_tests/README.md",
+      "revId": "299e87491ef9323f0eaae2e2f4b369309d4732f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eef1fa27_82364856",
+        "filename": "src/tests/perf_tests/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-17T20:37:22Z",
+      "side": 1,
+      "message": "Derived",
+      "range": {
+        "startLine": 10,
+        "startChar": 32,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "299e87491ef9323f0eaae2e2f4b369309d4732f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85c60c6b_6d3c50e8",
+        "filename": "src/tests/perf_tests/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-17T20:37:22Z",
+      "side": 1,
+      "message": "I think it\u0027s possible to hyperlink to this.",
+      "revId": "299e87491ef9323f0eaae2e2f4b369309d4732f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68444b94_84dfa1e9",
+        "filename": "src/tests/perf_tests/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-17T20:37:22Z",
+      "side": 1,
+      "message": "Probably best to escape the *s (\\*\\*) here and above to make sure they don\u0027t get parsed as syntax.",
+      "revId": "299e87491ef9323f0eaae2e2f4b369309d4732f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
