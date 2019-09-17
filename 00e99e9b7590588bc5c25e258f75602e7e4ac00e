@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49da6a36_61cebe4d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T00:46:20Z",
+      "side": 1,
+      "message": "unit: This doesn\u0027t preserve the order of empty push/pops and fence signals because they might all be associated with the same serial. Not that important though.",
+      "revId": "00e99e9b7590588bc5c25e258f75602e7e4ac00e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
