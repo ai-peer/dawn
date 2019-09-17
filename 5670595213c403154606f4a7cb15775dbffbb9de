@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e014489_a5e6bcd0",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-17T20:59:59Z",
+      "side": 1,
+      "message": "why .json.h?",
+      "revId": "5670595213c403154606f4a7cb15775dbffbb9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
