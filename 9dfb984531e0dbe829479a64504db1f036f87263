@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05e78115_965ff73c",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-17T18:36:39Z",
+      "side": 1,
+      "message": "mDirtyOrDynamicBindGroups makes it sound like it\u0027s supposed to always contain every dynamic bind group, not only if they\u0027ve been set recently. Maybe the name can be tweaked?\n\n mDirtyBindGroupsObjectChanged\n mDirtyBindGroupsObjectChangedOrIsDynamic\n\nfor example.",
+      "revId": "9dfb984531e0dbe829479a64504db1f036f87263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
