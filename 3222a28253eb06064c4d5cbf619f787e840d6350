@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aab60b8c_5f72beb5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T02:01:34Z",
+      "side": 1,
+      "message": "nit: This doesn\u0027t need to be ResultOrError anymore.",
+      "range": {
+        "startLine": 689,
+        "startChar": 4,
+        "endLine": 689,
+        "endChar": 35
+      },
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "232816a6_d6818cdd",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T02:01:34Z",
+      "side": 1,
+      "message": "nit: Maybe add a note that this handles both allocating a new ringbuffer created in this function but also lazily create the very first ringbuffer.",
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64eaaa28_bb47aa22",
+        "filename": "src/dawn_native/RingBufferAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T02:01:34Z",
+      "side": 1,
+      "message": "nit: #include \u003climits\u003e too.",
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c230667a_e420cb02",
+        "filename": "src/dawn_native/RingBufferAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T02:01:34Z",
+      "side": 1,
+      "message": "unit: when is the default needed?",
+      "range": {
+        "startLine": 32,
+        "startChar": 45,
+        "endLine": 32,
+        "endChar": 64
+      },
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
