@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "deee1bcf_f54a714b",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-17T17:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b78bf90e_8b6b9388",
+      "revId": "4f2eb598f99093b1a3b6da79fa215ac73e5fbfeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "977a0f6e_ee225487",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "4f2eb598f99093b1a3b6da79fa215ac73e5fbfeb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0442908a_890c2fd3",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-17T17:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977a0f6e_ee225487",
+      "revId": "4f2eb598f99093b1a3b6da79fa215ac73e5fbfeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
