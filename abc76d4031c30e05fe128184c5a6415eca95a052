@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "fe33c23b_7efb47ee",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T01:41:31Z",
+      "side": 1,
+      "message": "As mentioned in previous CLs, why isn\u0027t the memoryType stored in the client itself to prevent this type of mistake? Having a double indirection from this to mClient to some HeapServiceAndResidencyManagement doesn\u0027t seem too bad.",
+      "parentUuid": "c0a0f576_5c6caade",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ed310968_1260a84d",
         "filename": "src/dawn_native/BuddyResourceHeapAllocator.cpp",
         "patchSetId": 5
@@ -130,6 +154,23 @@
         "endLine": 36,
         "endChar": 11
       },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10733842_b9b0c737",
+        "filename": "src/dawn_native/BuddyResourceHeapAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T01:41:31Z",
+      "side": 1,
+      "message": "Can we have a comment here saying that the ownership of mClient is transferred? Even better the constructor could take a unique_ptr.",
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -293,6 +334,30 @@
       "side": 1,
       "message": "It needs to have the same memory type used by ResourceMemoryAllocation. \n\nIf we used HeapBase, the resource allocation would be unusable by the D3D API. For Vulkan, it wouldn\u0027t matter.\n\nVkDeviceMemory is not the same as ID3D12Heap. VkDeviceMemory can represent virtual and physical addresses. ID3D12Heap represents only physical (but not virtual) addresses. I think D3D12\u0027s equivalent of vkDeviceMemory is more ID3D12Pagable.\n\nWe could either: 1) move BuddyResourceHeapAllocator to the D3D12 back-end (requires separate Resource and Heap types) OR rather than combine them, we 2) keep the BuddyResourceHeapAllocator in the front-end by adding a Vulkan-like \"device memory\" type which both ResourceBase and HeapBase inherit from (ie. MemoryBase).\n\nI\u0027m in favor of the latter. WDYT?",
       "parentUuid": "6819d774_50c57e18",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5017782a_097870b4",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T01:41:31Z",
+      "side": 1,
+      "message": "I don\u0027t understand your comment, why would this make the allocation unusable for D3D12? I\u0027m suggesting wrapping VkDeviceMemory handles in HeapBase like we wrap ID3D12Heaps.\n\nVkDeviceMemory is an allocation of physical pages just like D3D12. VkBuffer or VkTexture are the allocations of virtual memory. You can see this in the fact that you can create sparse VkBuffer/VkTexture but not VkDeviceMemory.",
+      "parentUuid": "b4ded47e_3594f693",
       "range": {
         "startLine": 24,
         "startChar": 10,

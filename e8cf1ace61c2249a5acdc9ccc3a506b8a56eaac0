@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f70933bc_ac0f05ae",
+        "filename": "src/dawn_native/d3d12/ResourceD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T01:41:31Z",
+      "side": 1,
+      "message": "nit: leftover HEAP here and the line below",
+      "revId": "e8cf1ace61c2249a5acdc9ccc3a506b8a56eaac0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6856ba9a_b2abd91b",
+        "filename": "src/tests/unittests/BuddyResourceAllocatorTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T01:41:31Z",
+      "side": 1,
+      "message": "ditto Austin\u0027s comment on BuddyResourceAllocator.",
+      "revId": "e8cf1ace61c2249a5acdc9ccc3a506b8a56eaac0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
