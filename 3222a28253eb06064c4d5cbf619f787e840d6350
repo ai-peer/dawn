@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ed165f0_a9ac6a0b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-17T18:26:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aab60b8c_5f72beb5",
+      "range": {
+        "startLine": 689,
+        "startChar": 4,
+        "endLine": 689,
+        "endChar": 35
+      },
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "232816a6_d6818cdd",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 6
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "0bb344b2_d3437dba",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-17T18:26:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "232816a6_d6818cdd",
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64eaaa28_bb47aa22",
         "filename": "src/dawn_native/RingBufferAllocator.h",
         "patchSetId": 6
@@ -56,6 +98,24 @@
       "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "684ae6f5_82a09c7f",
+        "filename": "src/dawn_native/RingBufferAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-17T18:26:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64eaaa28_bb47aa22",
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -79,6 +139,30 @@
       "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c428bb3_2f9667eb",
+        "filename": "src/dawn_native/RingBufferAllocator.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-17T18:26:55Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "c230667a_e420cb02",
+      "range": {
+        "startLine": 32,
+        "startChar": 45,
+        "endLine": 32,
+        "endChar": 64
+      },
+      "revId": "3222a28253eb06064c4d5cbf619f787e840d6350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
