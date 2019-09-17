@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "b3f8a051_2d729056",
+        "filename": "src/dawn_native/RingBufferAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-17T20:30:29Z",
+      "side": 1,
+      "message": "i.e. so should the comment say \"end\" instead of \"front\"?",
+      "parentUuid": "a2f23aaa_b90ed633",
+      "range": {
+        "startLine": 89,
+        "startChar": 35,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "72650a640060706e03a39f50075554ef2c67310d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2abc75e6_873f0ca0",
         "filename": "src/dawn_native/RingBufferAllocator.cpp",
         "patchSetId": 4
