@@ -209,8 +209,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/ResourceHeap.h",
     "src/dawn_native/ResourceMemoryAllocation.cpp",
     "src/dawn_native/ResourceMemoryAllocation.h",
-    "src/dawn_native/RingBuffer.cpp",
-    "src/dawn_native/RingBuffer.h",
+    "src/dawn_native/RingBufferAllocator.cpp",
+    "src/dawn_native/RingBufferAllocator.h",
     "src/dawn_native/Sampler.cpp",
     "src/dawn_native/Sampler.h",
     "src/dawn_native/ShaderModule.cpp",
@@ -595,7 +595,6 @@ if (is_win || (is_linux && !is_chromeos) || is_mac) {
     # Allow inclusion of <GLFW/glfw3.h>
     include_dirs = [ "${dawn_glfw_dir}/include" ]
 
-
     # The GLFW/glfw3.h header includes <GL/gl.h> by default, but the latter
     # does not exist on Fuchsia. Defining GLFW_INCLUDE_NONE helps work around
     # the issue, but it needs to be defined for any file that includes the
@@ -762,7 +761,7 @@ test("dawn_unittests") {
     "src/tests/unittests/PerStageTests.cpp",
     "src/tests/unittests/RefCountedTests.cpp",
     "src/tests/unittests/ResultTests.cpp",
-    "src/tests/unittests/RingBufferTests.cpp",
+    "src/tests/unittests/RingBufferAllocatorTests.cpp",
     "src/tests/unittests/SerialMapTests.cpp",
     "src/tests/unittests/SerialQueueTests.cpp",
     "src/tests/unittests/ToBackendTests.cpp",
