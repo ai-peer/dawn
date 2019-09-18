@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "5b6542d0_6defe616",
+        "filename": "src/dawn_native/RingBufferAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-18T21:54:25Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "b3f8a051_2d729056",
+      "range": {
+        "startLine": 89,
+        "startChar": 35,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "72650a640060706e03a39f50075554ef2c67310d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2abc75e6_873f0ca0",
         "filename": "src/dawn_native/RingBufferAllocator.cpp",
         "patchSetId": 4
