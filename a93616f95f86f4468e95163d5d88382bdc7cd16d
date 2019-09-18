@@ -52,6 +52,24 @@
       "revId": "a93616f95f86f4468e95163d5d88382bdc7cd16d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f50c091_cf7ef5a2",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-18T21:52:22Z",
+      "side": 1,
+      "message": "Maybe we could collect a set of directories of all failing files and print the incorrect directories instead.",
+      "parentUuid": "c1a8736a_2cc5ae0c",
+      "revId": "a93616f95f86f4468e95163d5d88382bdc7cd16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
