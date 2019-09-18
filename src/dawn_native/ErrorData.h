@@ -31,6 +31,7 @@ namespace dawn_native {
       public:
         ErrorData();
         ErrorData(InternalErrorType type, std::string message);
+        ~ErrorData();
 
         struct BacktraceRecord {
             const char* file;

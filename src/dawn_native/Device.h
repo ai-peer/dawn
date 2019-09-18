@@ -17,6 +17,7 @@
 
 #include "common/Serial.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/ErrorData.h"
 #include "dawn_native/Extensions.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
@@ -51,7 +52,9 @@ namespace dawn_native {
 
         bool ConsumedError(MaybeError maybeError) {
             if (DAWN_UNLIKELY(maybeError.IsError())) {
-                HandleError(maybeError.AcquireError());
+                ErrorData* error = maybeError.AcquireError();
+                HandleError(error);
+                delete error;
                 return true;
             }
             return false;
