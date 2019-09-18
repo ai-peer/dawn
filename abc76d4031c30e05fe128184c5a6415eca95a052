@@ -391,6 +391,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d63bff08_e33d1938",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-09-18T02:02:57Z",
+      "side": 1,
+      "message": "One confusing aspect for me is that the classes that are supposed to be generic across all backends have names like \"heap\" which is a specific D3D datatype. Even in the D3D backend, a \u0027heap\u0027 can be implemented as a committed resource with one allocation, which is even more confusing.\n\nTo me, seems like we should have two class hierarchies. MemoryBlocks and Allocations. MemoryBlocks contain one or more allocations within a memory block. If you have better name than \"memory block\" feel free to suggest. \n\nIn the D3D backend, there are two subclasses of MemoryBlocks: HeapMemoryBlocks and CommittedResourceMemoryBlocks. A HeapMemoryBlock contains a pointer to an ID3D12Heap.  A CommittedResourceMemoryBlock contains a pointer to a ID3D12Resource, which is created as a committed resource. There would only be one kind of Allocation, a ResourceAllocation which contains a pointer to a D3D12Resource. The resource can either be a placed resource or a pointer to the same committed resource in the CommittedResourceMemoryBlock.  \n\nIn the Vulkan backend, the one subclass of MemoryBlock is DeviceMemoryBlock, which contains a VkDeviceMemory handle. On the allocation side, there would simply be DeviceMemoryAllocation which just contains an offset into the VkDeviceMemory owned by the DeviceMemoryBlock class.  \n\nThoughts?",
+      "parentUuid": "5ee20997_481b59e4",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
