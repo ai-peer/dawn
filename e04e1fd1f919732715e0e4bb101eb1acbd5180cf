@@ -88,6 +88,24 @@
       "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aa8cec1_0261d81a",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-18T00:41:33Z",
+      "side": 1,
+      "message": "Done, it\u0027s unfortunate that mixwed deployement target doesn\u0027t work, but it makes sense. Thanks for taking a look at the compilation issue!",
+      "parentUuid": "9de52ab1_eb82c52c",
+      "revId": "e04e1fd1f919732715e0e4bb101eb1acbd5180cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
