@@ -367,6 +367,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ee20997_481b59e4",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-18T01:14:13Z",
+      "side": 1,
+      "message": "ResourceMemoryAllocation expects a ResourceBase and if we use HeapBase instead (assuming HeapBase contains ID3D12Heap), then [Committed|Placed]ResourceAllocator returns a ResourceMemoryAllocation with the wrong back-end memory type on D3D. :(\n\nSince BuddyResourceHeapAllocator could work either by 1) offset into CommittedResource/VKDeviceMemory OR 2) PlacedResource + Heap. \n\nI think we\u0027ll benefit from a new MemoryBase type.\n\nMemoryBase could either contain a committed resource or heap (for D3D12) and a vkDeviceMemory (for Vulkan). Then we have ResourceMemoryAllocation[Vk|D3D] which uses the memory type expected by their API - Vk uses vkDeviceMemory and D3D uses ID3D12Resource.\n\nWDYT?",
+      "parentUuid": "5017782a_097870b4",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
