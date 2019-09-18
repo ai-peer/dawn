@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d99a30c1_35a0e219",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-18T21:00:08Z",
+      "side": 1,
+      "message": "nit: Could do these prints only once, instead of once per file - might be nicer if someone makes an error which moves a lot of files out of the allowed directories",
+      "revId": "a93616f95f86f4468e95163d5d88382bdc7cd16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
