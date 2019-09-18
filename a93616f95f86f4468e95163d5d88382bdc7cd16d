@@ -34,6 +34,24 @@
       "revId": "a93616f95f86f4468e95163d5d88382bdc7cd16d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1a8736a_2cc5ae0c",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-18T21:03:23Z",
+      "side": 1,
+      "message": "Oh duh. In that case, still might be nice to list all of the files which violate the check.",
+      "parentUuid": "cae3a185_fc2c9d4c",
+      "revId": "a93616f95f86f4468e95163d5d88382bdc7cd16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
