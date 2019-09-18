@@ -88,6 +88,24 @@
       "revId": "a93616f95f86f4468e95163d5d88382bdc7cd16d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b25a1969_5a83e6fc",
+        "filename": "generator/generator_lib.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-18T23:17:10Z",
+      "side": 1,
+      "message": "OK with me.",
+      "parentUuid": "07ab692c_5b11da95",
+      "revId": "a93616f95f86f4468e95163d5d88382bdc7cd16d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
