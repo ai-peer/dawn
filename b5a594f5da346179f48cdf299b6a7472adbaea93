@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "445c66ca_b3e47814",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-18T16:55:09Z",
+      "side": 1,
+      "message": "The problem is this makes ErrorData visible basically everywhere.",
+      "revId": "b5a594f5da346179f48cdf299b6a7472adbaea93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "039afeec_165c07b7",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 1
@@ -13,6 +30,30 @@
       "writtenOn": "2019-09-18T15:22:39Z",
       "side": 1,
       "message": "Previously, this was called ConsumeError and the delete was inside there.\nI prefer to put the delete here because it makes the acquisition / freeing of the ErrorData in the same place.",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "b5a594f5da346179f48cdf299b6a7472adbaea93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "412be8e0_b87e0935",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-18T16:55:09Z",
+      "side": 1,
+      "message": "Maybe HandleError could be called ConsumeError and the deletion kept in Device.cpp so not all of dawn_native sees ErrorData?",
+      "parentUuid": "039afeec_165c07b7",
       "range": {
         "startLine": 56,
         "startChar": 16,
