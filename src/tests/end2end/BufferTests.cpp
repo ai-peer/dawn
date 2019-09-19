@@ -17,29 +17,29 @@
 #include <cstring>
 
 class BufferMapReadTests : public DawnTest {
-    protected:
-      static void MapReadCallback(DawnBufferMapAsyncStatus status,
-                                  const void* data,
-                                  uint64_t,
-                                  void* userdata) {
-          ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
-          ASSERT_NE(nullptr, data);
+  protected:
+    static void MapReadCallback(DawnBufferMapAsyncStatus status,
+                                const void* data,
+                                uint64_t,
+                                void* userdata) {
+        ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
+        ASSERT_NE(nullptr, data);
 
-          static_cast<BufferMapReadTests*>(userdata)->mappedData = data;
-      }
+        static_cast<BufferMapReadTests*>(userdata)->mappedData = data;
+    }
 
-      const void* MapReadAsyncAndWait(const dawn::Buffer& buffer) {
-          buffer.MapReadAsync(MapReadCallback, this);
+    const void* MapReadAsyncAndWait(const dawn::Buffer& buffer) {
+        buffer.MapReadAsync(MapReadCallback, this);
 
-          while (mappedData == nullptr) {
-              WaitABit();
-          }
+        while (mappedData == nullptr) {
+            WaitABit();
+        }
 
-          return mappedData;
-      }
+        return mappedData;
+    }
 
-    private:
-        const void* mappedData = nullptr;
+  private:
+    const void* mappedData = nullptr;
 };
 
 // Test that the simplest map read works.
@@ -82,33 +82,33 @@ TEST_P(BufferMapReadTests, LargeRead) {
 DAWN_INSTANTIATE_TEST(BufferMapReadTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
 
 class BufferMapWriteTests : public DawnTest {
-    protected:
-      static void MapWriteCallback(DawnBufferMapAsyncStatus status,
-                                   void* data,
-                                   uint64_t,
-                                   void* userdata) {
-          ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
-          ASSERT_NE(nullptr, data);
+  protected:
+    static void MapWriteCallback(DawnBufferMapAsyncStatus status,
+                                 void* data,
+                                 uint64_t,
+                                 void* userdata) {
+        ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
+        ASSERT_NE(nullptr, data);
 
-          static_cast<BufferMapWriteTests*>(userdata)->mappedData = data;
-      }
+        static_cast<BufferMapWriteTests*>(userdata)->mappedData = data;
+    }
 
-      void* MapWriteAsyncAndWait(const dawn::Buffer& buffer) {
-          buffer.MapWriteAsync(MapWriteCallback, this);
+    void* MapWriteAsyncAndWait(const dawn::Buffer& buffer) {
+        buffer.MapWriteAsync(MapWriteCallback, this);
 
-          while (mappedData == nullptr) {
-              WaitABit();
-          }
+        while (mappedData == nullptr) {
+            WaitABit();
+        }
 
-          // Ensure the prior write's status is updated.
-          void* resultPointer = mappedData;
-          mappedData = nullptr;
+        // Ensure the prior write's status is updated.
+        void* resultPointer = mappedData;
+        mappedData = nullptr;
 
-          return resultPointer;
-      }
+        return resultPointer;
+    }
 
-    private:
-        void* mappedData = nullptr;
+  private:
+    void* mappedData = nullptr;
 };
 
 // Test that the simplest map write works.
@@ -175,10 +175,13 @@ TEST_P(BufferMapWriteTests, ManyWrites) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(BufferMapWriteTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(BufferMapWriteTests,
+                      D3D12Backend,
+                      MetalBackend,
+                      OpenGLBackend,
+                      VulkanBackend);
 
-class BufferSetSubDataTests : public DawnTest {
-};
+class BufferSetSubDataTests : public DawnTest {};
 
 // Test the simplest set sub data: setting one u32 at offset 0.
 TEST_P(BufferSetSubDataTests, SmallDataAtZero) {
@@ -254,109 +257,109 @@ TEST_P(BufferSetSubDataTests, LargeSetSubData) {
 }
 
 DAWN_INSTANTIATE_TEST(BufferSetSubDataTests,
-                     D3D12Backend,
-                     MetalBackend,
-                     OpenGLBackend,
-                     VulkanBackend);
+                      D3D12Backend,
+                      MetalBackend,
+                      OpenGLBackend,
+                      VulkanBackend);
 
 // TODO(enga): These tests should use the testing toggle to initialize resources to 1.
 class CreateBufferMappedTests : public DawnTest {
-    protected:
-      static void MapReadCallback(DawnBufferMapAsyncStatus status,
-                                  const void* data,
-                                  uint64_t,
-                                  void* userdata) {
-          ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
-          ASSERT_NE(nullptr, data);
+  protected:
+    static void MapReadCallback(DawnBufferMapAsyncStatus status,
+                                const void* data,
+                                uint64_t,
+                                void* userdata) {
+        ASSERT_EQ(DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS, status);
+        ASSERT_NE(nullptr, data);
 
-          static_cast<CreateBufferMappedTests*>(userdata)->mappedData = data;
-      }
+        static_cast<CreateBufferMappedTests*>(userdata)->mappedData = data;
+    }
 
-      const void* MapReadAsyncAndWait(const dawn::Buffer& buffer) {
-          buffer.MapReadAsync(MapReadCallback, this);
+    const void* MapReadAsyncAndWait(const dawn::Buffer& buffer) {
+        buffer.MapReadAsync(MapReadCallback, this);
 
-          while (mappedData == nullptr) {
-              WaitABit();
-          }
+        while (mappedData == nullptr) {
+            WaitABit();
+        }
 
-          return mappedData;
-      }
+        return mappedData;
+    }
 
-      void CheckResultStartsZeroed(const dawn::CreateBufferMappedResult& result, uint64_t size) {
-          ASSERT_EQ(result.dataLength, size);
-          for (uint64_t i = 0; i < result.dataLength; ++i) {
-              uint8_t value = *(reinterpret_cast<uint8_t*>(result.data) + i);
-              ASSERT_EQ(value, 0u);
-          }
-      }
+    void CheckResultStartsZeroed(const dawn::CreateBufferMappedResult& result, uint64_t size) {
+        ASSERT_EQ(result.dataLength, size);
+        for (uint64_t i = 0; i < result.dataLength; ++i) {
+            uint8_t value = *(reinterpret_cast<uint8_t*>(result.data) + i);
+            ASSERT_EQ(value, 0u);
+        }
+    }
 
-      dawn::CreateBufferMappedResult CreateBufferMapped(dawn::BufferUsage usage, uint64_t size) {
-          dawn::BufferDescriptor descriptor;
-          descriptor.nextInChain = nullptr;
-          descriptor.size = size;
-          descriptor.usage = usage;
+    dawn::CreateBufferMappedResult CreateBufferMapped(dawn::BufferUsage usage, uint64_t size) {
+        dawn::BufferDescriptor descriptor;
+        descriptor.nextInChain = nullptr;
+        descriptor.size = size;
+        descriptor.usage = usage;
 
-          dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
-          CheckResultStartsZeroed(result, size);
-          return result;
-      }
+        dawn::CreateBufferMappedResult result = device.CreateBufferMapped(&descriptor);
+        CheckResultStartsZeroed(result, size);
+        return result;
+    }
 
-      dawn::CreateBufferMappedResult CreateBufferMappedWithData(dawn::BufferUsage usage,
-                                                                const std::vector<uint32_t>& data) {
-          size_t byteLength = data.size() * sizeof(uint32_t);
-          dawn::CreateBufferMappedResult result = CreateBufferMapped(usage, byteLength);
-          memcpy(result.data, data.data(), byteLength);
+    dawn::CreateBufferMappedResult CreateBufferMappedWithData(dawn::BufferUsage usage,
+                                                              const std::vector<uint32_t>& data) {
+        size_t byteLength = data.size() * sizeof(uint32_t);
+        dawn::CreateBufferMappedResult result = CreateBufferMapped(usage, byteLength);
+        memcpy(result.data, data.data(), byteLength);
 
-          return result;
-      }
+        return result;
+    }
 
-      template <DawnBufferMapAsyncStatus expectedStatus = DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS>
-      dawn::CreateBufferMappedResult CreateBufferMappedAsyncAndWait(dawn::BufferUsage usage,
-                                                                    uint64_t size) {
-          dawn::BufferDescriptor descriptor;
-          descriptor.nextInChain = nullptr;
-          descriptor.size = size;
-          descriptor.usage = usage;
+    template <DawnBufferMapAsyncStatus expectedStatus = DAWN_BUFFER_MAP_ASYNC_STATUS_SUCCESS>
+    dawn::CreateBufferMappedResult CreateBufferMappedAsyncAndWait(dawn::BufferUsage usage,
+                                                                  uint64_t size) {
+        dawn::BufferDescriptor descriptor;
+        descriptor.nextInChain = nullptr;
+        descriptor.size = size;
+        descriptor.usage = usage;
 
-          struct ResultInfo {
-              dawn::CreateBufferMappedResult result;
-              bool done = false;
-          } resultInfo;
+        struct ResultInfo {
+            dawn::CreateBufferMappedResult result;
+            bool done = false;
+        } resultInfo;
 
-          device.CreateBufferMappedAsync(
-              &descriptor,
-              [](DawnBufferMapAsyncStatus status, DawnCreateBufferMappedResult result,
-                 void* userdata) {
-                  ASSERT_EQ(status, expectedStatus);
-                  auto* resultInfo = reinterpret_cast<ResultInfo*>(userdata);
-                  resultInfo->result.buffer = dawn::Buffer::Acquire(result.buffer);
-                  resultInfo->result.data = result.data;
-                  resultInfo->result.dataLength = result.dataLength;
-                  resultInfo->done = true;
-              },
-              &resultInfo);
+        device.CreateBufferMappedAsync(
+            &descriptor,
+            [](DawnBufferMapAsyncStatus status, DawnCreateBufferMappedResult result,
+               void* userdata) {
+                ASSERT_EQ(status, expectedStatus);
+                auto* resultInfo = reinterpret_cast<ResultInfo*>(userdata);
+                resultInfo->result.buffer = dawn::Buffer::Acquire(result.buffer);
+                resultInfo->result.data = result.data;
+                resultInfo->result.dataLength = result.dataLength;
+                resultInfo->done = true;
+            },
+            &resultInfo);
 
-          while (!resultInfo.done) {
-              WaitABit();
-          }
+        while (!resultInfo.done) {
+            WaitABit();
+        }
 
-          CheckResultStartsZeroed(resultInfo.result, size);
+        CheckResultStartsZeroed(resultInfo.result, size);
 
-          return resultInfo.result;
-      }
+        return resultInfo.result;
+    }
 
-      dawn::CreateBufferMappedResult CreateBufferMappedAsyncWithDataAndWait(
-          dawn::BufferUsage usage,
-          const std::vector<uint32_t>& data) {
-          size_t byteLength = data.size() * sizeof(uint32_t);
-          dawn::CreateBufferMappedResult result = CreateBufferMappedAsyncAndWait(usage, byteLength);
-          memcpy(result.data, data.data(), byteLength);
+    dawn::CreateBufferMappedResult CreateBufferMappedAsyncWithDataAndWait(
+        dawn::BufferUsage usage,
+        const std::vector<uint32_t>& data) {
+        size_t byteLength = data.size() * sizeof(uint32_t);
+        dawn::CreateBufferMappedResult result = CreateBufferMappedAsyncAndWait(usage, byteLength);
+        memcpy(result.data, data.data(), byteLength);
 
-          return result;
-      }
+        return result;
+    }
 
-    private:
-        const void* mappedData = nullptr;
+  private:
+    const void* mappedData = nullptr;
 };
 
 // Test that the simplest CreateBufferMapped works for MapWrite buffers.
@@ -625,6 +628,14 @@ TEST_P(CreateBufferMappedTests, CreateThenMapBeforeUnmapFailureAsync) {
     // CreateBufferMappedAsync is unaffected by the MapWrite error.
     result.buffer.Unmap();
     EXPECT_BUFFER_U32_EQ(myData, result.buffer, 0);
+}
+
+// Test that creating a very large buffers fails gracefully.
+TEST_P(CreateBufferMappedTests, LargeBufferFails) {
+    dawn::BufferDescriptor descriptor;
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+    descriptor.usage = dawn::BufferUsage::MapRead | dawn::BufferUsage::CopyDst;
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
 }
 
 DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
