@@ -415,6 +415,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5078cf31_e0b009f1",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-19T03:11:29Z",
+      "side": 1,
+      "message": "Hold on, this is much more complicated than it needs to be no?\n\nA HeapBase is something that is suballocated from, either ID3D12Heap or VkDeviceMemory. The ResourceMemoryAllocator should be renamed to HeapAllocator and hand out HeapBase objects to the BuddyResourceAllocator.\n\nThe BuddyResourceAllocator returns a ResourceMemoryAllocation which is the combination of a HeapBase, an offset in that HeapBase and whatever metadata the BuddyResourceAllocator needs to track state. Basically the following:\n\n struct ResourceMemoryAllocation {\n   HeapBase* heap;\n   uint64_t offsetInHeap;\n   BuddyResourceAllocatorMetadata metadata; // (contains the offset in the large buddy system)\n }\n\nThe backends call BuddyResourceAllocator, create a backend specific resource using the HeapBase and offset, then store it in backend::Buffer / backend::Texture. The frontend never gets to see ID3D12Resource or VkImage / VkBuffer and ResourceBase is removed.",
+      "parentUuid": "d63bff08_e33d1938",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
