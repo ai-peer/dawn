@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5a2c387_e8a4358c",
+        "filename": "src/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-09-20T02:26:14Z",
+      "side": 1,
+      "message": "should be color0?",
+      "revId": "a8b49f38fb49036256d412d2d3df7ed01b1a25f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
