@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84b2ed64_30f6ee9f",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-09-20T17:13:54Z",
+      "side": 1,
+      "message": "s/only//",
+      "range": {
+        "startLine": 57,
+        "startChar": 41,
+        "endLine": 57,
+        "endChar": 45
+      },
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deb9ec1b_8b34b7ed",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-09-20T17:13:54Z",
+      "side": 1,
+      "message": "Can you keep the TODO to do this even for 10.10, with a link to the bug?",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73511ed0_aa29b004",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-09-20T17:13:54Z",
+      "side": 1,
+      "message": "That\u0027s not \"this file\", that\u0027s \"this line\".\n\n...but can\u0027t you put the two references to this value in `if (@available(macOS 10.12))` blocks? It seems that would be less clever.",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
