@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "2b876a79_136b141f",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T21:20:59Z",
+      "side": 1,
+      "message": "This should be checked against the version supported by this device, not the version supported by the Vulkan loader.",
+      "range": {
+        "startLine": 314,
+        "startChar": 34,
+        "endLine": 314,
+        "endChar": 44
+      },
+      "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f293cc5a_dbd658e6",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T21:20:59Z",
+      "side": 1,
+      "message": "\"Dawn requires\" ?",
+      "range": {
+        "startLine": 316,
+        "startChar": 17,
+        "endLine": 316,
+        "endChar": 29
+      },
+      "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "50398e1d_a079baf7",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 9
@@ -13,6 +59,30 @@
       "writtenOn": "2019-09-20T20:13:44Z",
       "side": 1,
       "message": "I am not 100% sure about 2 issues here: \n1) It looks like we can generate error when enumerate physical device if it can\u0027t support KHR_maintenance1 and the vulkan version for the VkInstance is less than 1.1 for vulkan backend. Then you will can\u0027t get the adapter you want for Vulkan.  \n\nAnother option is  to defer the failure to logical device creation. \n\nWhich one is better? I think we can generate failure here.\n\n2) I am not sure which error to generate, DAWN_VALIDATION_ERROR or DAWN_DEVICE_LOST_ERROR or another type of error? \n\nWDYT?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 9
+      },
+      "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14668811_e7e32940",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T21:20:59Z",
+      "side": 1,
+      "message": "2) It doesn\u0027t really matter, I think in other places we use CONTEXT_LOST_ERROR for initialization errors.\n\n1) Ideally this file only have simple info gathering logic. Maybe we could have this check be after GatherDeviceInfo in vulkan::Adapter::Initialize?",
+      "parentUuid": "50398e1d_a079baf7",
       "range": {
         "startLine": 313,
         "startChar": 0,
