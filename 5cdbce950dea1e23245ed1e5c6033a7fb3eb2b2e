@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "fc0a9258_73d110f6",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-09-20T17:26:32Z",
+      "side": 1,
+      "message": "I meant put both in `if (@available())` -- [2] too. Would that help?",
+      "parentUuid": "25d0c297_c5619127",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7eece623_2ac5d3b6",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 2
