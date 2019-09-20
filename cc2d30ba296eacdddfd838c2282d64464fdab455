@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50398e1d_a079baf7",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-09-20T20:13:44Z",
+      "side": 1,
+      "message": "I am not 100% sure about 2 issues here: \n1) It looks like we can generate error when enumerate physical device if it can\u0027t support KHR_maintenance1 and the vulkan version for the VkInstance is less than 1.1 for vulkan backend. Then you will can\u0027t get the adapter you want for Vulkan.  \n\nAnother option is  to defer the failure to logical device creation. \n\nWhich one is better? I think we can generate failure here.\n\n2) I am not sure which error to generate, DAWN_VALIDATION_ERROR or DAWN_DEVICE_LOST_ERROR or another type of error? \n\nWDYT?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 9
+      },
+      "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

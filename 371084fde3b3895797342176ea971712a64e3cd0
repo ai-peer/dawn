@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "847d7dc0_8657c951",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-09-20T20:13:44Z",
+      "side": 1,
+      "message": "Done. \n\nLooks like we can fail when query physical device extensions.",
+      "parentUuid": "a5ef466d_949c132c",
+      "revId": "371084fde3b3895797342176ea971712a64e3cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d47cd3ee_619e2864",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "371084fde3b3895797342176ea971712a64e3cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a252df2_a8eaf6ef",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-09-20T20:13:44Z",
+      "side": 1,
+      "message": "Viewport projection will map [0, 1] in NDC to [y, y+height] by default, if we set y and height like the code snippet, it will map [0, 1] to [new y, new y + new height] \u003d [y+height, (y+height) + (-height)] \u003d [y+height, y]. See, it flips Y during viewport projection.\n\nSee the link here: https://www.saschawillems.de/blog/2019/03/29/flipping-the-vulkan-viewport/",
+      "parentUuid": "d47cd3ee_619e2864",
+      "revId": "371084fde3b3895797342176ea971712a64e3cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
