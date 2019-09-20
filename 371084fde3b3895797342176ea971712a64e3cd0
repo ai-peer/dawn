@@ -69,6 +69,24 @@
       "revId": "371084fde3b3895797342176ea971712a64e3cd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fd0f346_051b88c3",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-09-20T20:18:17Z",
+      "side": 1,
+      "message": "Correct the statement above. Viewport projection will map [-1, 1] (not [0, 1]) for y axis in NDC to [y, y+height] for y axis into viewport/framebuffer coordinate, where y and height are set via viewport rect (x, y, width, height, minDepth, maxDepth).",
+      "parentUuid": "4a252df2_a8eaf6ef",
+      "revId": "371084fde3b3895797342176ea971712a64e3cd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
