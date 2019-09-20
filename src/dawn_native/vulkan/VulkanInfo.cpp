@@ -74,6 +74,7 @@ namespace dawn_native { namespace vulkan {
     const char kExtensionNameKhrXcbSurface[] = "VK_KHR_xcb_surface";
     const char kExtensionNameKhrXlibSurface[] = "VK_KHR_xlib_surface";
     const char kExtensionNameFuchsiaImagePipeSurface[] = "VK_FUCHSIA_imagepipe_surface";
+    const char kExtensionNameKhrMaintenance1[] = "VK_KHR_maintenance1";
 
     ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Backend& backend) {
         VulkanGlobalInfo info = {};
@@ -301,10 +302,20 @@ namespace dawn_native { namespace vulkan {
                 if (IsExtensionName(extension, kExtensionNameKhrSwapchain)) {
                     info.swapchain = true;
                 }
+                if (IsExtensionName(extension, kExtensionNameKhrMaintenance1)) {
+                    info.maintenance1 = true;
+                }
             }
         }
 
         // TODO(cwallez@chromium.org): gather info about formats
+
+        const VulkanGlobalInfo& globalInfo = adapter.GetBackend()->GetGlobalInfo();
+        if (!info.maintenance1 && globalInfo.apiVersion < VK_MAKE_VERSION(1, 1, 0)) {
+            return DAWN_VALIDATION_ERROR(
+                "It should be Vulkan 1.1 or Vulkan 1.0 with KHR_Maintenance1 in order to support "
+                "viewport flipY");
+        }
 
         return info;
     }
