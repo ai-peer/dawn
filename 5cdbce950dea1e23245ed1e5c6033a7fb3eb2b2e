@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7754d8b4_b1dd2646",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:24:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84b2ed64_30f6ee9f",
+      "range": {
+        "startLine": 57,
+        "startChar": 41,
+        "endLine": 57,
+        "endChar": 45
+      },
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "deb9ec1b_8b34b7ed",
         "filename": "BUILD.gn",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "25c19dfd_85ed91e8",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:24:10Z",
+      "side": 1,
+      "message": "Added comment back with a small modification to remind people to check if this is actually needed when they look at it.",
+      "parentUuid": "deb9ec1b_8b34b7ed",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "73511ed0_aa29b004",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 2
@@ -53,6 +95,58 @@
       "writtenOn": "2019-09-20T17:13:54Z",
       "side": 1,
       "message": "That\u0027s not \"this file\", that\u0027s \"this line\".\n\n...but can\u0027t you put the two references to this value in `if (@available(macOS 10.12))` blocks? It seems that would be less clever.",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25d0c297_c5619127",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:24:10Z",
+      "side": 1,
+      "message": "The problem is that the [1] computes that we want to use that enum value, so that in [2] we can work around that not being supported when we are on macOS 10.11. If we put [1] in @available, then in [2] we would be reading uninitialized memory.",
+      "parentUuid": "73511ed0_aa29b004",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eece623_2ac5d3b6",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:24:10Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7c8dd2_e39c9da9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:24:10Z",
+      "side": 1,
+      "message": "[2]",
       "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
