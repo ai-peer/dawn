@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "3c18522e_1fb7f522",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:29:26Z",
+      "side": 1,
+      "message": "It doesn\u0027t help, because WebGPU supports the behavior represents by that enum, and on 10.11 we need to know that we should emulate it (which [2] checks).",
+      "parentUuid": "fc0a9258_73d110f6",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7eece623_2ac5d3b6",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 2
