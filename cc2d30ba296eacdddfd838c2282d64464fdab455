@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eba0bfca_d78e5133",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-09-20T22:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b876a79_136b141f",
+      "range": {
+        "startLine": 314,
+        "startChar": 34,
+        "endLine": 314,
+        "endChar": 44
+      },
+      "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f293cc5a_dbd658e6",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c078338_5b71a8e4",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-09-20T22:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f293cc5a_dbd658e6",
+      "range": {
+        "startLine": 316,
+        "startChar": 17,
+        "endLine": 316,
+        "endChar": 29
+      },
+      "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -92,6 +140,30 @@
       "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c7f7b72_34043b0d",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-09-20T22:40:52Z",
+      "side": 1,
+      "message": "Done\n\nI didn\u0027t find CONTEXT_LOST_ERROR, but I saw DEVICE_LOST_ERROR. So I use DEVICE_LOST_ERROR.",
+      "parentUuid": "14668811_e7e32940",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 9
+      },
+      "revId": "cc2d30ba296eacdddfd838c2282d64464fdab455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
