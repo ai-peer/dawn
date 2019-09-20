@@ -463,6 +463,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50c0e822_d17e73bb",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:18:37Z",
+      "side": 1,
+      "message": "1) Buffer / Texture creates its resource internally using the memory allocation (or the Device does, but not the memory allocator). The allocator doesn\u0027t need to know about the ID3D12Resource objects because their job is to hand out memory blocks, not fully created resources.\n\n2) I thought on the review for CommittedResourceAllocator we discussed it would be better to just create a heap and createPlacedResource on it so all the code paths are unified for now. So either we change it to do that, or we change CommittedResourceAllocator to return both an ID3D12Resource and a ResourceMemoryAllocation.\n\n2 again) what could happen is the following, Buffer when initialized calls Device::CreateResource (very pseudo-codish)\n\n  using D3D12ResourceAllocation \u003d std::pair\u003cResourceMemoryAllocation, ComPtr\u003cID3D12Resource\u003e;\n\n  ResultOrError\u003cD3D12ResourceAllocation\u003e Device::CreateResource(const RESOURCE_DESCRIPTOR* desc) {\n    // Of course there would be more error handling\n    if (ResourceWouldBeBig(desc)) {\n      resource \u003d CreateCommittedResource\n      return {InvalidAllocation, resource};\n    } else {\n      allocation \u003d mBuddyAllocator.allocate(descriptor.size);\n      resource \u003d CreatePlacedResource\n      return {allocation, resource}\n    }\n}",
+      "parentUuid": "aea6d1ca_fa5fb0df",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
