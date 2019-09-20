@@ -439,6 +439,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aea6d1ca_fa5fb0df",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-20T17:01:24Z",
+      "side": 1,
+      "message": "@CW\n\n1. How does backend::[Buffer|Texture] get at the ID3D12Resource when BuddyResourceAllocator returns a ResourceMemoryAllocation that\u0027s only backed by a ID3D12Heap?\n\n2. Likewise, what does CommittedResourceAllocator now return? A heap?!?\n\nSo far, we either call Resource a Heap (confusing), merge them together (still confusing), or separate memory/allocation per backend (more complicated).\n\nThe latter approach seems reasonable to me.",
+      "parentUuid": "5078cf31_e0b009f1",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
