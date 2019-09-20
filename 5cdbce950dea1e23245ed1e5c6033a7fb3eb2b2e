@@ -173,6 +173,24 @@
     },
     {
       "key": {
+        "uuid": "f13f571f_1ec7a9e6",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-20T17:43:40Z",
+      "side": 1,
+      "message": "That\u0027s correct. (although we query if it is supported on Dawn initialization but same thing).\n\nWhat happens in this file is:\n\n - The WebGPU semantic is translated directly to the equivalent Metal semantic.\n - Transforms are applied to handle working arounds this enum not being available (and another transform for a driver bug).\n\nIf we don\u0027t use this enum in this file, it means we need to use another tag to know that the transform needs to happen, and that would require a several bunches of additional code to pipe the values around.",
+      "parentUuid": "f2154c61_48e339fa",
+      "revId": "5cdbce950dea1e23245ed1e5c6033a7fb3eb2b2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7eece623_2ac5d3b6",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 2
