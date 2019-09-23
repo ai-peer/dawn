@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a405b583_48c9dae3",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-23T19:23:24Z",
+      "side": 1,
+      "message": "this can be \"has dynamic offset\". The code generator handles the casing.",
+      "range": {
+        "startLine": 59,
+        "startChar": 22,
+        "endLine": 59,
+        "endChar": 38
+      },
+      "revId": "05837e5f4c864bc3f7f433c14ea453ea03ef126c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
