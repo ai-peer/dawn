@@ -751,6 +751,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de7d183f_1e40445a",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T23:07:29Z",
+      "side": 1,
+      "message": "That\u0027s a minor issue. The bigger ones noted above is that:\n 1 - MemoryBase should map to ID3D12Heap and VkDeviceMemory while ResourceMemoryAllocation should map to ID3D12Resource or VkBuffer/VkImage.\n 2 - This patch has multiple orthogonal changes and should be split.",
+      "parentUuid": "654aaa0e_7d1a404f",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
