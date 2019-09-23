@@ -83,6 +83,8 @@ namespace dawn_native {
 
             // Dynamic offsets count must match the number required by the layout perfectly.
             const BindGroupLayoutBase* layout = group->GetLayout();
+            printf("layout->GetDynamicBufferCount(): %d\n" , layout->GetDynamicBufferCount());
+            printf("dynamicOffsetCount: %d\n", dynamicOffsetCount);
             if (layout->GetDynamicBufferCount() != dynamicOffsetCount) {
                 return DAWN_VALIDATION_ERROR("dynamicOffset count mismatch");
             }
