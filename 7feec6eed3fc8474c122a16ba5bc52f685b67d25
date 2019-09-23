@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4992f798_ae80180d",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T19:37:49Z",
+      "side": 1,
+      "message": "When does that happen? WebGPU error handling doesn\u0027t rely on nullptr objects so we should avoid adding such validation. Instead we should use ValidateObject which is done below for the ShaderModule.",
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
