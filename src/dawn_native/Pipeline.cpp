@@ -24,6 +24,10 @@ namespace dawn_native {
                                                const PipelineStageDescriptor* descriptor,
                                                const PipelineLayoutBase* layout,
                                                SingleShaderStage stage) {
+        if (descriptor->module == nullptr) {
+            return DAWN_VALIDATION_ERROR("Shader module is nullptr");
+        }
+
         DAWN_TRY(device->ValidateObject(descriptor->module));
 
         if (descriptor->entryPoint != std::string("main")) {
