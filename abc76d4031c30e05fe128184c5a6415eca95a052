@@ -703,6 +703,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae3d68ac_73cf083e",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T22:08:34Z",
+      "side": 1,
+      "message": "Patchset 7 still is still confusing where ResourceMemoryAllocation in D3D12 contains an ID3D12Resource while in Vulkan it contains a VkDeviceMemory. These are not the same concepts in their respective APIs.\n\nThe end state we want is the \"2 again)\" above. In that end state, there is only the frontend ResourceMemoryAllocation, MemoryBase and its backend classes (imho Memory is a bit generic because it could also be CPU memory to malloc into, but we can deal with that later), and there is no need to have backend classes for ResourceMemoryAllocation since it\u0027s just a pair. (a backend allocation has-a frontend allocation info, but not is-a frontend allocation info, it will help save some awkwardness when implementing buddy allocation in the backends).",
+      "parentUuid": "19bc57c1_c9cf9b43",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
