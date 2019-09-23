@@ -448,6 +448,24 @@
       "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2036d56b_426c143d",
+        "filename": "src/tests/unittests/BuddyResourceAllocatorTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-23T18:28:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c3521ecc_a29c1dbf",
+      "revId": "fa7a9d1f6fe20e9264805ba1966d8a05c5cfd782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

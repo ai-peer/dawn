@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fa8e3b73_c7f7053c",
+        "filename": "src/dawn_native/d3d12/ResourceD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-23T18:28:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f70933bc_ac0f05ae",
+      "revId": "e8cf1ace61c2249a5acdc9ccc3a506b8a56eaac0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6856ba9a_b2abd91b",
         "filename": "src/tests/unittests/BuddyResourceAllocatorTests.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "e8cf1ace61c2249a5acdc9ccc3a506b8a56eaac0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ecd6ee4_e4e92942",
+        "filename": "src/tests/unittests/BuddyResourceAllocatorTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-23T18:28:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6856ba9a_b2abd91b",
+      "revId": "e8cf1ace61c2249a5acdc9ccc3a506b8a56eaac0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
