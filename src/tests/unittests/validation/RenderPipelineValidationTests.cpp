@@ -114,6 +114,41 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
     }
 }
 
+// Tests that the format of the color state descriptor must match the output of the fragment shader.
+TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
+    // An error is generated when the fragment output variable is in a float format while the
+    // format of the corresponding color state is set to a signed integer format.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        descriptor.cColorStates[0].format = dawn::TextureFormat::RGBA8Sint;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    // An error is generated when the fragment output variable is in an unsigned integer format
+    // while the format of the corresponding color state is set to a float format.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+                #version 450
+                layout(location = 0) out vec4 fragColor0;
+                layout(location = 1) out uvec4 fragColor1;
+                void main() {
+                    fragColor0 = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+                    fragColor1 = uvec4(1u, 2u, 3u, 4u);
+                })");
+        descriptor.colorStateCount = 2;
+        descriptor.cColorStates[0].format = dawn::TextureFormat::RGBA8Unorm;
+        descriptor.cColorStates[1].format = dawn::TextureFormat::RGBA8Unorm;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
+
 /// Tests that the sample count of the render pipeline must be valid.
 TEST_F(RenderPipelineValidationTest, SampleCount) {
     {
