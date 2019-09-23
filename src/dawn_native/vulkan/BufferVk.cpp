@@ -17,7 +17,6 @@
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/MemoryResourceAllocatorVk.h"
-#include "dawn_native/vulkan/ResourceMemoryVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
 #include <cstring>
@@ -143,11 +142,10 @@ namespace dawn_native { namespace vulkan {
             (GetUsage() & (dawn::BufferUsage::MapRead | dawn::BufferUsage::MapWrite)) != 0;
         DAWN_TRY_ASSIGN(mMemoryAllocation, device->AllocateMemory(requirements, requestMappable));
 
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
-                                        ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
-                                        mMemoryAllocation.GetOffset()),
-            "vkBindBufferMemory"));
+        DAWN_TRY(CheckVkSuccess(device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
+                                                            mMemoryAllocation.GetMemory(),
+                                                            mMemoryAllocation.GetOffset()),
+                                "vkBindBufferMemory"));
 
         return {};
     }

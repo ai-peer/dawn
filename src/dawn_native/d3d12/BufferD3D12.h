@@ -18,7 +18,7 @@
 #include "common/SerialQueue.h"
 #include "dawn_native/Buffer.h"
 
-#include "dawn_native/ResourceMemoryAllocation.h"
+#include "dawn_native/d3d12/ResourceMemoryAllocationD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {

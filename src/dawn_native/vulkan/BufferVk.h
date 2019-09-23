@@ -19,8 +19,8 @@
 
 #include "common/SerialQueue.h"
 #include "common/vulkan_platform.h"
-#include "dawn_native/ResourceMemoryAllocation.h"
 #include "dawn_native/vulkan/MemoryAllocator.h"
+#include "dawn_native/vulkan/ResourceMemoryAllocationVk.h"
 
 namespace dawn_native { namespace vulkan {
 

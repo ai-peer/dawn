@@ -14,7 +14,6 @@
 
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
-#include "dawn_native/vulkan/ResourceMemoryVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
 namespace dawn_native { namespace vulkan {
@@ -76,7 +75,7 @@ namespace dawn_native { namespace vulkan {
         return bestType;
     }
 
-    ResultOrError<ResourceMemoryAllocation> MemoryResourceAllocator::Allocate(
+    ResultOrError<VkDeviceMemory> MemoryResourceAllocator::Allocate(
         VkMemoryRequirements requirements,
         bool mappable) {
         int bestType = FindBestTypeIndex(requirements, mappable);
@@ -98,20 +97,10 @@ namespace dawn_native { namespace vulkan {
                                                            nullptr, &allocatedMemory),
                                 "vkAllocateMemory"));
 
-        void* mappedPointer = nullptr;
-        if (mappable) {
-            DAWN_TRY(CheckVkSuccess(mDevice->fn.MapMemory(mDevice->GetVkDevice(), allocatedMemory,
-                                                          0, requirements.size, 0, &mappedPointer),
-                                    "vkMapMemory"));
-        }
-
-        return ResourceMemoryAllocation(/*offset*/ 0, new ResourceMemory(allocatedMemory),
-                                        AllocationMethod::kDirect,
-                                        static_cast<uint8_t*>(mappedPointer));
+        return allocatedMemory;
     }
 
-    void MemoryResourceAllocator::Deallocate(ResourceMemoryAllocation& allocation) {
-        mDevice->GetFencedDeleter()->DeleteWhenUnused(
-            ToBackend(allocation.GetResourceHeap())->GetMemory());
+    void MemoryResourceAllocator::Deallocate(VkDeviceMemory allocation) {
+        mDevice->GetFencedDeleter()->DeleteWhenUnused(allocation);
     }
 }}  // namespace dawn_native::vulkan

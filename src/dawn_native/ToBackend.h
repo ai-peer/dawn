@@ -74,11 +74,6 @@ namespace dawn_native {
     };
 
     template <typename BackendTraits>
-    struct ToBackendTraits<ResourceHeapBase, BackendTraits> {
-        using BackendType = typename BackendTraits::ResourceHeapType;
-    };
-
-    template <typename BackendTraits>
     struct ToBackendTraits<SamplerBase, BackendTraits> {
         using BackendType = typename BackendTraits::SamplerType;
     };
