@@ -22,6 +22,178 @@
       "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce49b57c_98af966c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "This should never be the case in practice so we can skip the check.",
+      "parentUuid": "82738343_6f64d3ec",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 61
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82bd86ee_69f96691",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "!\u003d nullptr, and no need to check for module, see comment in other CL.",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "584c492a_f3b0bd6f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "I don\u0027t think this can happen, maybe put an UNREACHABLE there?",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1af5df6_82a7ffe2",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "nit: maybe use .fill in the constructor instead?",
+      "range": {
+        "startLine": 93,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 74
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aea4ce0_e27eaf3d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "It shouldn\u0027t be possible to make it bigger than kMaxColorAttachments because SPIR-V validation wouldn\u0027t pass. Use an ASSERT instead?",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a82ae28c_d28e3cb0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "This should never happen, add an ASSERT instead maybe?",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25c6e198_d0215ee7",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "nit: make a type alias for this?",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 60
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d458b941_6f72d0e4",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "nit: can we have a control case?",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adbe272e_559c32f0",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-23T21:16:14Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
