@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82738343_6f64d3ec",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-23T20:34:44Z",
+      "side": 1,
+      "message": "I think it would be good to differentiate between \"Other\" and \"Unused\". Here, it looks like the code is allowing \"Other\" types to mismatch, when I think the real meaning is that this output isn\u0027t used.\n\nI think we should either:\n1) Have separate enums\n2) Name it \"OtherOrUnused\" and comment in the relevant places",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 61
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
