@@ -286,3 +286,64 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         }
     }
 }
+
+// Tests that the creation of the render pipeline object should fail when the shader module is null.
+TEST_F(RenderPipelineValidationTest, UseNullShaderModule) {
+    // Setting the vertex shader module to nullptr in the render pipeline object should cause an
+    // error.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = nullptr;
+        descriptor.cFragmentStage.module = fsModule;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    // Setting the fragment shader module to nullptr in the render pipeline object should cause an
+    // error.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = nullptr;
+        descriptor.cFragmentStage.entryPoint = "main";
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    // Using a shader module that is not successfully built as the vertex stage module should
+    // cause an error.
+    {
+        dawn::ShaderModule failedVSModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+                #version 450
+                void main() {
+                    gl_Position0 = vec4(0.0, 0.0, 0.0, 1.0);
+                })");
+        ASSERT_FALSE(failedVSModule);
+
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = failedVSModule;
+        descriptor.cFragmentStage.module = fsModule;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    // Using a shader module that is not successfully built as the fragment stage module should
+    // cause an error.
+    {
+        dawn::ShaderModule failedFSModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+                #version 450
+                layout(location = 0) out vec4 fragColor;
+                void main() {
+                    fragColor0 = vec4(0.0, 1.0, 0.0, 1.0);
+                })");
+        ASSERT_FALSE(failedFSModule);
+
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = failedFSModule;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
