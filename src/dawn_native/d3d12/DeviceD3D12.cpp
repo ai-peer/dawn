@@ -31,7 +31,6 @@
 #include "dawn_native/d3d12/QueueD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
-#include "dawn_native/d3d12/ResourceHeapD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
@@ -345,20 +344,18 @@ namespace dawn_native { namespace d3d12 {
     }
 
     void Device::DeallocateMemory(ResourceMemoryAllocation& allocation) {
-        if (allocation.GetAllocationMethod() == AllocationMethod::kInvalid) {
+        if (allocation.GetInfo().mMethod == AllocationMethod::kInvalid) {
             return;
         }
         CommittedResourceAllocator* allocator = nullptr;
         D3D12_HEAP_PROPERTIES heapProp;
-        ToBackend(allocation.GetResourceHeap())
-            ->GetD3D12Resource()
-            ->GetHeapProperties(&heapProp, nullptr);
+        allocation.GetD3D12Resource()->GetHeapProperties(&heapProp, nullptr);
         const size_t heapTypeIndex = GetD3D12HeapTypeToIndex(heapProp.Type);
         ASSERT(heapTypeIndex < kNumHeapTypes);
         allocator = mDirectResourceAllocators[heapTypeIndex].get();
-        allocator->Deallocate(allocation);
+        allocator->Deallocate(allocation.GetD3D12Resource());
 
-        // Invalidate the underlying resource heap in case the client accidentally
+        // Invalidate the underlying allocation in case the client accidentally
         // calls DeallocateMemory again using the same allocation.
         allocation.Invalidate();
     }
@@ -379,11 +376,14 @@ namespace dawn_native { namespace d3d12 {
             allocator = mDirectResourceAllocators[heapTypeIndex].get();
         }
 
-        ResourceMemoryAllocation allocation;
-        DAWN_TRY_ASSIGN(allocation,
+        ComPtr<ID3D12Resource> committedResource;
+        DAWN_TRY_ASSIGN(committedResource,
                         allocator->Allocate(resourceDescriptor, initialUsage, heapFlags));
 
-        return allocation;
+        AllocationInfo info;
+        info.mMethod = AllocationMethod::kDirect;
+
+        return ResourceMemoryAllocation(info, /*heapOffset*/ 0, std::move(committedResource));
     }
 
     TextureBase* Device::WrapSharedHandle(const TextureDescriptor* descriptor,

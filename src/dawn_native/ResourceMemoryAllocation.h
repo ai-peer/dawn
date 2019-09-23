@@ -1,4 +1,4 @@
-// Copyright 2018 The Dawn Authors
+// Copyright 2019 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,10 +19,7 @@
 
 namespace dawn_native {
 
-    class ResourceHeapBase;
-
     // Allocation method determines how memory was sub-divided.
-    // Used by the device to get the allocator that was responsible for the allocation.
     enum class AllocationMethod {
 
         // Memory not sub-divided.
@@ -35,27 +32,37 @@ namespace dawn_native {
         kInvalid
     };
 
-    // Handle into a resource heap pool.
-    class ResourceMemoryAllocation {
-      public:
-        ResourceMemoryAllocation();
-        ResourceMemoryAllocation(uint64_t offset,
-                                 ResourceHeapBase* resourceHeap,
-                                 AllocationMethod method,
-                                 uint8_t* mappedPointer = nullptr);
-        ~ResourceMemoryAllocation() = default;
+    // Metadata that describes how the allocation was allocated.
+    // Used by the device to get the allocator that was responsible for the allocation.
+    struct AllocationInfo {
+        // AllocationInfo contains a separate offset to not confuse block vs memory offsets.
+        // The block offset is within the entire allocator memory range and only required by the
+        // buddy sub-allocator to get the corresponding memory. Unlike the block offset, the
+        // allocation offset is always local to the memory.
+        uint64_t mBlockOffset = 0;
+        AllocationMethod mMethod = AllocationMethod::kInvalid;
+    };
 
-        ResourceHeapBase* GetResourceHeap() const;
+    // Handle into a resource memory pool.
+    class ResourceMemoryAllocationBase {
+      public:
+        ResourceMemoryAllocationBase();
+        ResourceMemoryAllocationBase(const AllocationInfo& info,
+                                     uint64_t offset,
+                                     uint8_t* mappedPointer = nullptr);
+        ~ResourceMemoryAllocationBase() = default;
+
         uint64_t GetOffset() const;
-        AllocationMethod GetAllocationMethod() const;
         uint8_t* GetMappedPointer() const;
+
+        AllocationInfo GetInfo() const;
 
         void Invalidate();
 
       private:
-        AllocationMethod mMethod;
-        uint64_t mOffset;
-        ResourceHeapBase* mResourceHeap;
+        AllocationInfo mInfo;
+
+        uint64_t mMemoryOffset;
         uint8_t* mMappedPointer;
     };
 }  // namespace dawn_native

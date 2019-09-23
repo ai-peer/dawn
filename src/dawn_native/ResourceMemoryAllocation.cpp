@@ -13,52 +13,32 @@
 // limitations under the License.
 
 #include "dawn_native/ResourceMemoryAllocation.h"
-#include "common/Assert.h"
-
-#include <limits>
 
 namespace dawn_native {
 
-    static constexpr uint64_t kInvalidOffset = std::numeric_limits<uint64_t>::max();
-
-    ResourceMemoryAllocation::ResourceMemoryAllocation()
-        : mMethod(AllocationMethod::kInvalid),
-          mOffset(0),
-          mResourceHeap(nullptr),
-          mMappedPointer(nullptr) {
+    ResourceMemoryAllocationBase::ResourceMemoryAllocationBase()
+        : mMemoryOffset(0), mMappedPointer(nullptr) {
     }
 
-    ResourceMemoryAllocation::ResourceMemoryAllocation(uint64_t offset,
-                                                       ResourceHeapBase* resourceHeap,
-                                                       AllocationMethod method,
-                                                       uint8_t* mappedPointer)
-        : mMethod(method),
-          mOffset(offset),
-          mResourceHeap(resourceHeap),
-          mMappedPointer(mappedPointer) {
+    ResourceMemoryAllocationBase::ResourceMemoryAllocationBase(const AllocationInfo& info,
+                                                               uint64_t offset,
+                                                               uint8_t* mappedPointer)
+        : mInfo(info), mMemoryOffset(offset), mMappedPointer(mappedPointer) {
     }
 
-    ResourceHeapBase* ResourceMemoryAllocation::GetResourceHeap() const {
-        ASSERT(mMethod != AllocationMethod::kInvalid);
-        return mResourceHeap;
+    uint64_t ResourceMemoryAllocationBase::GetOffset() const {
+        return mMemoryOffset;
     }
 
-    uint64_t ResourceMemoryAllocation::GetOffset() const {
-        ASSERT(mMethod != AllocationMethod::kInvalid);
-        return mOffset;
-    }
-
-    AllocationMethod ResourceMemoryAllocation::GetAllocationMethod() const {
-        return mMethod;
-    }
-
-    uint8_t* ResourceMemoryAllocation::GetMappedPointer() const {
+    uint8_t* ResourceMemoryAllocationBase::GetMappedPointer() const {
         return mMappedPointer;
     }
 
-    void ResourceMemoryAllocation::Invalidate() {
-        mResourceHeap = nullptr;
-        mMethod = AllocationMethod::kInvalid;
-        mOffset = kInvalidOffset;
+    AllocationInfo ResourceMemoryAllocationBase::GetInfo() const {
+        return mInfo;
+    }
+
+    void ResourceMemoryAllocationBase::Invalidate() {
+        mInfo = {};
     }
 }  // namespace dawn_native

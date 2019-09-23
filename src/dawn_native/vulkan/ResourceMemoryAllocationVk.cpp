@@ -12,25 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_VULKAN_RESOURCEMEMORYVK_H_
-#define DAWNNATIVE_VULKAN_RESOURCEMEMORYVK_H_
-
-#include "common/vulkan_platform.h"
-#include "dawn_native/ResourceHeap.h"
+#include "dawn_native/vulkan/ResourceMemoryAllocationVk.h"
 
 namespace dawn_native { namespace vulkan {
+    ResourceMemoryAllocation::ResourceMemoryAllocation(const AllocationInfo& info,
+                                                       uint64_t offset,
+                                                       VkDeviceMemory memory,
+                                                       uint8_t* mappedPointer)
+        : ResourceMemoryAllocationBase(info, offset, mappedPointer), mMemory(memory) {
+    }
 
-    // Wrapper for physical memory used with or without a resource object.
-    class ResourceMemory : public ResourceHeapBase {
-      public:
-        ResourceMemory(VkDeviceMemory memory);
-        ~ResourceMemory() = default;
-
-        VkDeviceMemory GetMemory() const;
-
-      private:
-        VkDeviceMemory mMemory = VK_NULL_HANDLE;
-    };
+    VkDeviceMemory ResourceMemoryAllocation::GetMemory() const {
+        return mMemory;
+    }
 }}  // namespace dawn_native::vulkan
-
-#endif  // DAWNNATIVE_VULKAN_RESOURCEMEMORYVK_H_
