@@ -34,6 +34,24 @@
       "revId": "dc84b1ab58a8874554b161df8c17eba60e1b9f2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58f5581b_0a1d1e0e",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-24T17:36:05Z",
+      "side": 1,
+      "message": "This is to avoid redefinition errors. Rather than have duplicates, maybe move to constants.h?",
+      "parentUuid": "7a157764_bf3cd372",
+      "revId": "dc84b1ab58a8874554b161df8c17eba60e1b9f2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
