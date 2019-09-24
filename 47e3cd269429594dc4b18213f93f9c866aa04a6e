@@ -135,6 +135,24 @@
       "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b7d6fda_2e417bb3",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T22:21:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8c1d8b1_a68ada5f",
+      "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

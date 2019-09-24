@@ -113,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "2175678a_1cd2aa27",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T22:21:49Z",
+      "side": 1,
+      "message": "that is mipLevelCount and arrayLayerCount\nCreateTextureDescriptor(uint32_t mipLevelCount, uint32_t arrayLayerCount...)",
+      "parentUuid": "c88cd16b_106a3d44",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "740da84f_b7730c7a",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 4
