@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "46d3da8c_9a86a098",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T12:45:56Z",
+      "side": 1,
+      "message": "Austin, renaming to OtherOrUnused is unfortunate because this enum value will be used for DepthStencil so it would be confusing. How about we add comments next to FragmentOutputBaseTypes that explains that Other actually means unused?",
+      "parentUuid": "e222e571_6d0c6c6b",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 61
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82bd86ee_69f96691",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -259,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "abd1451a_9b781de2",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T12:45:56Z",
+      "side": 1,
+      "message": "Thanks for adding that check!",
+      "parentUuid": "cfe584c5_230f3460",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a82ae28c_d28e3cb0",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -370,6 +412,24 @@
       "side": 1,
       "message": "I am not sure if I fully understand your comment. PTAL, thanks!",
       "parentUuid": "d458b941_6f72d0e4",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13e0504a_ee9212cd",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T12:45:56Z",
+      "side": 1,
+      "message": "A control case is when in a science experiment, you try the \"normal\" thing in addition to the \"new\" thing so that you can measure the difference and know that you did the setup correctly. For validation tests it would mean having a piece of code that passes validation, and another that changes a single thing and doesn\u0027t pass validation.\n\nNew tests are good, they go further than what I was asking for :)",
+      "parentUuid": "9c2c0cab_560fc49f",
       "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
