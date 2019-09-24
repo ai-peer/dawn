@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30448f6e_6a06b035",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T00:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "684ddc4d_3b3c73a1",
+      "range": {
+        "startLine": 712,
+        "startChar": 34,
+        "endLine": 712,
+        "endChar": 41
+      },
+      "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58c7fb9c_94af53d5",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2019-09-23T23:02:36Z",
       "side": 1,
       "message": "nit: Why did the const disappear?",
+      "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e464492c_5e7866c3",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T00:00:33Z",
+      "side": 1,
+      "message": "because i need to get the TextureView from the attachmentInfo and SetIsSubresourceContentInitialized is not a const function, so I can\u0027t make the TextureView const either.",
+      "parentUuid": "58c7fb9c_94af53d5",
       "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
