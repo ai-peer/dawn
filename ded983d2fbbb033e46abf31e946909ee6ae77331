@@ -88,6 +88,29 @@
     },
     {
       "key": {
+        "uuid": "4d0b19e1_2e831821",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-09-24T16:13:16Z",
+      "side": 1,
+      "message": "Nit: Use mCpuDescriptorHeapInfos.size() instead of a hardcoded size. If we need to change the size later on, we will not need to fixup this callsite.",
+      "range": {
+        "startLine": 122,
+        "startChar": 33,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "673f5616_4b49e614",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.h",
         "patchSetId": 3
