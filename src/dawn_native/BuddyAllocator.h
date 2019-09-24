@@ -20,8 +20,6 @@
 
 namespace dawn_native {
 
-    static constexpr uint64_t INVALID_OFFSET = std::numeric_limits<uint64_t>::max();
-
     // Buddy allocator uses the buddy memory allocation technique to satisify an allocation request.
     // Memory is split into halves until just large enough to fit to the request. This
     // requires the allocation size to be a power-of-two value. The allocator "allocates" a block by
@@ -44,6 +42,8 @@ namespace dawn_native {
 
         // For testing purposes only.
         uint64_t ComputeTotalNumOfFreeBlocksForTesting() const;
+
+        static constexpr uint64_t kInvalidOffset = std::numeric_limits<uint64_t>::max();
 
       private:
         uint32_t ComputeLevelFromBlockSize(uint64_t blockSize) const;
