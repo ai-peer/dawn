@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f2e6657f_4cc87c1c",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-24T13:49:13Z",
+      "side": 1,
+      "message": "Ah, seems okay to me to check this here then.",
+      "parentUuid": "61ecda07_f67deee7",
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98822262_1e5cfbb8",
         "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
         "patchSetId": 3
@@ -48,6 +66,29 @@
       "writtenOn": "2019-09-24T00:08:36Z",
       "side": 1,
       "message": "[1]",
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d462dfa4_b02c5c2d",
+        "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-24T13:49:13Z",
+      "side": 1,
+      "message": "This is sort of just testing our utils (which return nullptr on a failed compile) and not the API, but it\u0027s okay with me for now.\n\nIn the future, we\u0027re going to need to make ShaderModuleBase::ExtractSpirvInfo return a MaybeError, so that in DeviceBase::CreateShaderModuleImpl, we can return an ErrorShaderModule.",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 37
+      },
       "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
