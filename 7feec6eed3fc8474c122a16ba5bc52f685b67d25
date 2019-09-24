@@ -16,6 +16,41 @@
       "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61ecda07_f67deee7",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T00:08:36Z",
+      "side": 1,
+      "message": "I find it happens in the following situations (see [1] for the examples of them)\n1. We don\u0027t set descriptor-\u003emodule in the PipelineStageDescriptor. I don\u0027t think we will specify a default value for it.\n2. The shader compilation is failed. For example, when the program is written like this but the compilation is failed, we will pass a nullptr to the descriptor-\u003emodule.\nhttps://github.com/austinEng/webgpu-samples/blob/master/hello_triangle.html#L57\n\nIn fact the ValidateObject() function always assume the object is not a nullptr, which causes the error:\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/Device.cpp?g\u003d0\u0026l\u003d134\n\nI am not sure this should be validated here but I think at least it may be useful when Dawn is using as a native library because it can report the correct error rather than just crashes because of an access to a nullptr.",
+      "parentUuid": "4992f798_ae80180d",
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98822262_1e5cfbb8",
+        "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T00:08:36Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
