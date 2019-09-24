@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e222e571_6d0c6c6b",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "It happens when descriptor-\u003ecolorStateCount is greater than the number of fragment outputs declared in the shader. Here \"Other\" means there is no corresponding fragment output for the color state.",
+      "parentUuid": "ce49b57c_98af966c",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 61
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82bd86ee_69f96691",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 1
@@ -66,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "83a0eb5a_68c8b253",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82bd86ee_69f96691",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "584c492a_f3b0bd6f",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -80,6 +122,24 @@
       "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8a5848d_a575816f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "584c492a_f3b0bd6f",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +166,64 @@
     },
     {
       "key": {
+        "uuid": "52380d93_06b04721",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1af5df6_82a7ffe2",
+      "range": {
+        "startLine": 93,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 74
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "504d5d63_d89b4dc9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55b19e0e_25ed6b58",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3aea4ce0_e27eaf3d",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -123,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "cfe584c5_230f3460",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "Done\nI have tested that SPIR-V validation cannot catch this. We need to add the check in this file like [1] and [2].\n\nI have written another CL to add this check. PTAL, thanks!\nhttps://dawn-review.googlesource.com/c/dawn/+/11580",
+      "parentUuid": "3aea4ce0_e27eaf3d",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a82ae28c_d28e3cb0",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -137,6 +273,24 @@
       "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f3dddb0_a931cc1d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82ae28c_d28e3cb0",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +317,30 @@
     },
     {
       "key": {
+        "uuid": "f1bb97d8_863a4749",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25c6e198_d0215ee7",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 60
+      },
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d458b941_6f72d0e4",
         "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
         "patchSetId": 1
@@ -174,6 +352,24 @@
       "writtenOn": "2019-09-23T21:16:14Z",
       "side": 1,
       "message": "nit: can we have a control case?",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c2c0cab_560fc49f",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "I am not sure if I fully understand your comment. PTAL, thanks!",
+      "parentUuid": "d458b941_6f72d0e4",
       "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -194,6 +390,24 @@
       "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c32bbbc4_96b8ac34",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-24T02:42:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "adbe272e_559c32f0",
+      "revId": "02af19cba68203fca2dc402157be9087a828d8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
