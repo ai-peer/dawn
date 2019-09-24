@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <sstream>
+
 #include "tests/unittests/validation/ValidationTest.h"
 
 #include "common/Constants.h"
@@ -111,6 +113,44 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
         descriptor.cColorStates[0].format = dawn::TextureFormat::RG11B10Float;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
+
+// Tests that the format of the color state descriptor must match the output of the fragment shader.
+TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
+    constexpr uint32_t kNumTextureFormatBaseType = 3u;
+    std::array<const char*, kNumTextureFormatBaseType> kVecPreFix = {{"", "i", "u"}};
+    std::array<dawn::TextureFormat, kNumTextureFormatBaseType> kColorFormats = {
+        {dawn::TextureFormat::RGBA8Unorm, dawn::TextureFormat::RGBA8Sint,
+         dawn::TextureFormat::RGBA8Uint}};
+
+    for (size_t i = 0; i < kNumTextureFormatBaseType; ++i) {
+        for (size_t j = 0; j < kNumTextureFormatBaseType; ++j) {
+            utils::ComboRenderPipelineDescriptor descriptor(device);
+            descriptor.vertexStage.module = vsModule;
+            descriptor.cColorStates[0].format = kColorFormats[j];
+
+            std::ostringstream stream;
+            stream << R"(
+                #version 450
+                layout(location = 0) out )"
+                   << kVecPreFix[i] << R"(vec4 fragColor;
+                void main() {
+                    const vec4 kColor0 = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+                    const ivec4 kColor1 = ivec4(1, 2, 3, 4);
+                    const uvec4 kColor2 = uvec4(1u, 2u, 3u, 4u);
+                    fragColor = kColor)"
+                   << i << R"(;
+                })";
+            descriptor.cFragmentStage.module = utils::CreateShaderModule(
+                device, utils::SingleShaderStage::Fragment, stream.str().c_str());
+
+            if (i == j) {
+                device.CreateRenderPipeline(&descriptor);
+            } else {
+                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+            }
+        }
     }
 }
 
