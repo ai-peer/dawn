@@ -775,6 +775,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cde2191a_10b2eb30",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-24T23:15:51Z",
+      "side": 1,
+      "message": "\u003e Patchset 7 still is still confusing where ResourceMemoryAllocation in D3D12 contains an ID3D12Resource while in Vulkan it contains a VkDeviceMemory\n\nID3D12Resource can behave the same as vkDeviceMemory.\n\n\u003e VkDeviceMemory while ResourceMemoryAllocation should map to ID3D12Resource or VkBuffer/VkImage\n\nLooking at the pseudo-code, shouldn\u0027t this be?\n\n\u003e using VkResourceAllocation \u003d std::pair\u003cResourceMemoryAllocation, vkDeviceMemory\u003e;\n\nAlso, it might not be obvious what allocation.first means (or allocation.GetMemory) vs D3D12Allocation.GetResource().",
+      "parentUuid": "de7d183f_1e40445a",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
