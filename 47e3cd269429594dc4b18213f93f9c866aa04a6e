@@ -99,6 +99,24 @@
       "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e23d772f_1ecaaafe",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T21:11:31Z",
+      "side": 1,
+      "message": "it\u0027s still unhappy when I call SetIsSubresourceContentInitialized because by doing that, TextureView now needs to be const :(",
+      "parentUuid": "b59b24f7_94d7f8d1",
+      "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

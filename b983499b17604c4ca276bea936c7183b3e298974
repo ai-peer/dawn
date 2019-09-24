@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6d2c07dd_7fd28d5b",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T21:11:31Z",
+      "side": 1,
+      "message": "I will leave a TODO",
+      "parentUuid": "5ec2ae71_a73fd2e8",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85c33bfb_0e6c6806",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2019-09-24T13:20:41Z",
       "side": 1,
       "message": "The textures are 1x1 so doing a kSize x kSize copy shouldn\u0027t pass validation. Either there is a bug in the test or in texture validation (or I misread things)",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36f302d7_18116ca8",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T21:11:31Z",
+      "side": 1,
+      "message": "I thought the texture size in this test is kSize X kSize? \nI think ComputePassSampledTextureClear is the only test with 1 X 1 texture size.",
+      "parentUuid": "85c33bfb_0e6c6806",
       "revId": "b983499b17604c4ca276bea936c7183b3e298974",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "4b68e9b0_a0f54256",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T21:11:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "453338e0_ebf0d8f8",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34d687db_f7abc1ce",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 4
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "c9e86fd4_37366f3f",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T21:11:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34d687db_f7abc1ce",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "772b6520_23ce8a3c",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 4
@@ -98,6 +170,24 @@
       "writtenOn": "2019-09-24T13:20:41Z",
       "side": 1,
       "message": "Shouldn\u0027t there be a lazy clear happening on submit because we are using an uninitialized depth-stencil texture as an attachment?",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73495604_ac83c982",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-09-24T21:11:31Z",
+      "side": 1,
+      "message": "it will be cleared using loadop because loadop is load and the texture is uninitialized it will update loadop to be clear and set the clearDepth and clearStencil to be 0\u0027s.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/CommandBufferVk.cpp?l\u003d163-176\u0026rcl\u003dc3b613296d26ee9ffa1d0ecdb6e0bc8ab3ff9d7a",
+      "parentUuid": "772b6520_23ce8a3c",
       "revId": "b983499b17604c4ca276bea936c7183b3e298974",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
