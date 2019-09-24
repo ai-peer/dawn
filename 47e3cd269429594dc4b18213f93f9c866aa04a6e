@@ -117,6 +117,24 @@
       "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8c1d8b1_a68ada5f",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-24T22:09:01Z",
+      "side": 1,
+      "message": "Hmm, I think Corentin meant (without the const)\n\nauto* attachmentInfo \u003d \u0026renderPass-\u003edepthStencilAttachment;",
+      "parentUuid": "e23d772f_1ecaaafe",
+      "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
