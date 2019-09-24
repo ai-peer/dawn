@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1a728f91_3079bfdb",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-24T15:10:25Z",
+      "side": 1,
+      "message": "\u003e If we run out of space we need to make sure we don\u0027t destroy the descriptor heap before in flight commands are finished.\n\nWe could also bring back the mReleasedHandles SerialQueue and push a ComPtr\u003cID3D12DescriptorHeap\u003e there whenever we reset the RingBuffer. That way when we overflow the heap and make a new one, we\u0027ll keep the old one alive while it\u0027s in flight. Then, the code won\u0027t be wrong when we reallocate and we can add re-encoding bind groups later.\n\nIn fact, I think we need to do this? AllocateCPUHeap always makes a heap the size of the desired allocation, so I think we\u0027ll replace the RingBuffer every time.",
+      "parentUuid": "b678daf1_494c884d",
+      "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7917f152_0f6ccf3b",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
         "patchSetId": 3
@@ -47,6 +65,23 @@
       "writtenOn": "2019-09-24T14:33:35Z",
       "side": 1,
       "message": "nit: DescriptorHeap creation can be a in helper function.",
+      "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6985880_344f0037",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-24T15:10:25Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
