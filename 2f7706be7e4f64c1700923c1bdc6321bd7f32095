@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b4927f4_1d527aeb",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T12:36:39Z",
+      "side": 1,
+      "message": "nit: In Dawn we group include blocks like the following as much as possible:\n\n#include \"this file\u0027s header\"\n\n#include \"someDawnHeader.h\"\n#include \"someOtherDawnHeader.h\"\n\n#include \u003cc++ and c standard library headers\u003e",
+      "revId": "2f7706be7e4f64c1700923c1bdc6321bd7f32095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
