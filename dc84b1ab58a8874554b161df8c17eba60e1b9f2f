@@ -70,6 +70,24 @@
       "revId": "dc84b1ab58a8874554b161df8c17eba60e1b9f2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6bc5d3f_b5a75510",
+        "filename": "src/dawn_native/BuddyAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-24T18:09:27Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think it\u0027s necessary to put in Constants.h if it\u0027s only used for the BuddyAllocator and respective tests.\n\nIt\u0027s also redefined by RingBufferAllocator.",
+      "parentUuid": "48339192_ec585af8",
+      "revId": "dc84b1ab58a8874554b161df8c17eba60e1b9f2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
