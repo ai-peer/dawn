@@ -698,7 +698,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Device::DeallocateMemory(ResourceMemoryAllocation& allocation) {
-        if (allocation.GetAllocationMethod() == AllocationMethod::kInvalid) {
+        if (allocation.GetInfo().mMethod == AllocationMethod::kInvalid) {
             return;
         }
         mResourceAllocator->Deallocate(allocation);
