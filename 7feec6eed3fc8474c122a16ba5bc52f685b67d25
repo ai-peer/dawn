@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "5ffc5e40_0ad4b531",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T14:15:50Z",
+      "side": 1,
+      "message": "I have concerns of adding more validation for nullptrs that will happen once or even multiple times per WebGPU call. WDYT of putting a check in ValidateObject, only in Debug, that can be opted-out with a Toggle?",
+      "parentUuid": "f2e6657f_4cc87c1c",
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98822262_1e5cfbb8",
         "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
         "patchSetId": 3
