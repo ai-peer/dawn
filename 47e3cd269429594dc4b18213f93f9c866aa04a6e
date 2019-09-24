@@ -81,6 +81,24 @@
       "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b59b24f7_94d7f8d1",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T13:20:41Z",
+      "side": 1,
+      "message": "Ah yeah that\u0027s annoying. Like Chromium, we try to not have non-const references can this be const auto* attachmentInfo \u003d \u0026renderPass-\u003edepthStencilAttachment; ?",
+      "parentUuid": "e464492c_5e7866c3",
+      "revId": "47e3cd269429594dc4b18213f93f9c866aa04a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

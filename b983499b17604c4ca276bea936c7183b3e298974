@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ec2ae71_a73fd2e8",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T13:20:41Z",
+      "side": 1,
+      "message": "Could be in a follow-up, but at the end of the render pass, could we call one of the glDiscard functions to do the optimization on the GL backend too?",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85c33bfb_0e6c6806",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T13:20:41Z",
+      "side": 1,
+      "message": "The textures are 1x1 so doing a kSize x kSize copy shouldn\u0027t pass validation. Either there is a bug in the test or in texture validation (or I misread things)",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "740da84f_b7730c7a",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T13:20:41Z",
+      "side": 1,
+      "message": "ditto here",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "453338e0_ebf0d8f8",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T13:20:41Z",
+      "side": 1,
+      "message": "nit: this comment is a bit hard to read, maybe use bullet point to break it up a bit?",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34d687db_f7abc1ce",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T13:20:41Z",
+      "side": 1,
+      "message": "nit: comment before this?",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "772b6520_23ce8a3c",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-24T13:20:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be a lazy clear happening on submit because we are using an uninitialized depth-stencil texture as an attachment?",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
