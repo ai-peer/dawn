@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <cstring>
 #include "common/Assert.h"
 #include "dawn_wire/WireServer.h"
 #include "dawn_wire/server/Server.h"
