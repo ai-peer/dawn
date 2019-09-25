@@ -14,8 +14,11 @@
 
 #include "dawn_native/ErrorScopeTracker.h"
 
+#include <limits>
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorScope.h"
+
+#include <limits>
 
 namespace dawn_native {
 
