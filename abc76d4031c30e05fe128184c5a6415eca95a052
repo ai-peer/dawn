@@ -799,6 +799,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42bde981_164c3d7a",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T22:51:45Z",
+      "side": 1,
+      "message": "\u003e \u003e Patchset 7 still is still confusing where ResourceMemoryAllocation in D3D12 contains an ID3D12Resource while in Vulkan it contains a VkDeviceMemory\n\u003e \n\u003e ID3D12Resource can behave the same as vkDeviceMemory.\n\u003e \nIn what respect? (that they are the unit of mapping isn\u0027t really useful)\n\n\u003e \u003e VkDeviceMemory while ResourceMemoryAllocation should map to ID3D12Resource or VkBuffer/VkImage\n\u003e \n\u003e Looking at the pseudo-code, shouldn\u0027t this be?\n\u003e \nThe ResourceMemoryAllocation contains a HeapBase* so no?\n\n\u003e \u003e using VkResourceAllocation \u003d std::pair\u003cResourceMemoryAllocation, vkDeviceMemory\u003e;\n\u003e \n\u003e Also, it might not be obvious what allocation.first means (or allocation.GetMemory) vs D3D12Allocation.GetResource().\n\nGood point, let\u0027s make it a struct!",
+      "parentUuid": "cde2191a_10b2eb30",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
