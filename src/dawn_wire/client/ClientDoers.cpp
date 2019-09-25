@@ -12,9 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <limits>
 #include "common/Assert.h"
 #include "dawn_wire/client/Client.h"
 #include "dawn_wire/client/Device.h"
+
+#include <limits>
 
 namespace dawn_wire { namespace client {
 
