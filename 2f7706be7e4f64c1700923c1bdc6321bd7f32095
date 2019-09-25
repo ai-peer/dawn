@@ -16,6 +16,24 @@
       "revId": "2f7706be7e4f64c1700923c1bdc6321bd7f32095",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e52cfd2d_ad441d22",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-25T01:14:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b4927f4_1d527aeb",
+      "revId": "2f7706be7e4f64c1700923c1bdc6321bd7f32095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
