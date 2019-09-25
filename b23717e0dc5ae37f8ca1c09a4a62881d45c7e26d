@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a6ebf2f_b1c012cb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T13:17:38Z",
+      "side": 1,
+      "message": "nit: No need for this TODO, the labels would actually be used in ObjectBase\u0027s constructor and piped there from [1]. That\u0027s some work that needs to happen (and would basically touch every file in dawn_native) so I think we can skip the TODO maybe.",
+      "revId": "b23717e0dc5ae37f8ca1c09a4a62881d45c7e26d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07e6b579_3fe4d80c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T13:17:38Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b23717e0dc5ae37f8ca1c09a4a62881d45c7e26d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d7c979f_0a0aaf3f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T13:17:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b23717e0dc5ae37f8ca1c09a4a62881d45c7e26d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
