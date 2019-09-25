@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0286531d_e0590cfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T14:11:01Z",
+      "side": 1,
+      "message": "nit: dawn:229 otherwise it will post a message on Chromium bug 229",
+      "revId": "20356137b3a88874060cae6847ca87861d0d1ba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f04367b4_68cf4c7c",
+        "filename": "src/dawn_native/ErrorScopeTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T14:11:01Z",
+      "side": 1,
+      "message": "nit: standard library includes go in a separate block below includes for other parts of Dawn.",
+      "revId": "20356137b3a88874060cae6847ca87861d0d1ba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca0274a8_75600093",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T14:11:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "20356137b3a88874060cae6847ca87861d0d1ba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a47c6aab_cf6773e7",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T14:11:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "20356137b3a88874060cae6847ca87861d0d1ba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11a59fc9_94207840",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T14:11:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "20356137b3a88874060cae6847ca87861d0d1ba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
