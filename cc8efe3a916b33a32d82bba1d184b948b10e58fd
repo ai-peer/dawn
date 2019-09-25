@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e17da6f7_f2859f42",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-25T22:51:13Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "cc8efe3a916b33a32d82bba1d184b948b10e58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09c515e4_b2285aaa",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-25T22:51:13Z",
+      "side": 1,
+      "message": "This Release should be right before we replace the heap at [1]",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 24
+      },
+      "revId": "cc8efe3a916b33a32d82bba1d184b948b10e58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b85d330f_e9917a56",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-25T22:51:13Z",
+      "side": 1,
+      "message": "nit: We can simplify this now and only store ComPtr\u003cID3D12DescriptorHeap\u003e",
+      "range": {
+        "startLine": 75,
+        "startChar": 20,
+        "endLine": 75,
+        "endChar": 40
+      },
+      "revId": "cc8efe3a916b33a32d82bba1d184b948b10e58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
