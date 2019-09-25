@@ -252,7 +252,9 @@
     "command buffer descriptor": {
         "category": "structure",
         "extensible": true,
-        "members": []
+        "members": [
+            {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
     },
     "command encoder": {
         "category": "object",
@@ -354,7 +356,9 @@
     "compute pass descriptor": {
         "category": "structure",
         "extensible": true,
-        "members": []
+        "members": [
+            {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
     },
     "compute pass encoder": {
         "category": "object",
@@ -708,7 +712,8 @@
     "store op": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "store"}
+            {"value": 0, "name": "store"},
+            {"value": 1, "name": "clear"}
         ]
     },
     "origin 3D": {

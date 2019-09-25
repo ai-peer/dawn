@@ -369,6 +369,11 @@ namespace dawn_native {
             uint32_t* sampleCount) {
             DAWN_TRY(device->ValidateObject(colorAttachment.attachment));
 
+            if (colorAttachment.storeOp == dawn::StoreOp::Clear) {
+                return DAWN_VALIDATION_ERROR(
+                    "The color attachment storeOp clear value is not supported yet");
+            }
+
             const TextureViewBase* attachment = colorAttachment.attachment;
             if (!attachment->GetFormat().IsColor() || !attachment->GetFormat().isRenderable) {
                 return DAWN_VALIDATION_ERROR(
@@ -475,6 +480,7 @@ namespace dawn_native {
         const ComputePassDescriptor* descriptor) {
         DeviceBase* device = GetDevice();
 
+        // TODO: Use descriptor label if present.
         bool success =
             mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 DAWN_TRY(ValidateComputePassDescriptor(device, descriptor));
@@ -702,6 +708,8 @@ namespace dawn_native {
     CommandBufferBase* CommandEncoderBase::Finish(const CommandBufferDescriptor* descriptor) {
         TRACE_EVENT0(GetDevice()->GetPlatform(), TRACE_DISABLED_BY_DEFAULT("gpu.dawn"),
                      "CommandEncoderBase::Finish");
+
+        // TODO: Use descriptor label if present.
         if (GetDevice()->ConsumedError(ValidateFinish(descriptor))) {
             // Even if finish validation fails, it is now invalid to call any encoding commands on
             // this object, so we set its state to finished.
