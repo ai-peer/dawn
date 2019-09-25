@@ -173,6 +173,24 @@
     },
     {
       "key": {
+        "uuid": "c5fba51e_1c9836b9",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T04:25:58Z",
+      "side": 1,
+      "message": "Oh damn I missed it too!",
+      "parentUuid": "a50e553f_bd0bb460",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "740da84f_b7730c7a",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 4
@@ -187,6 +205,24 @@
       "revId": "b983499b17604c4ca276bea936c7183b3e298974",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fb2a21f_6d43665b",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T04:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "740da84f_b7730c7a",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -289,6 +325,24 @@
       "side": 1,
       "message": "it will be cleared using loadop because loadop is load and the texture is uninitialized it will update loadop to be clear and set the clearDepth and clearStencil to be 0\u0027s.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/CommandBufferVk.cpp?l\u003d163-176\u0026rcl\u003dc3b613296d26ee9ffa1d0ecdb6e0bc8ab3ff9d7a",
       "parentUuid": "772b6520_23ce8a3c",
+      "revId": "b983499b17604c4ca276bea936c7183b3e298974",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40990d14_7d2af64b",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T04:25:58Z",
+      "side": 1,
+      "message": "Yes sorry, I should have remembered that.",
+      "parentUuid": "73495604_ac83c982",
       "revId": "b983499b17604c4ca276bea936c7183b3e298974",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
