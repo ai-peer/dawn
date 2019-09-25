@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab4cfd11_789b1331",
+        "filename": "src/dawn_native/ErrorScopeTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T19:10:27Z",
+      "side": 1,
+      "message": "nit: I think you forgot to remove this one :)",
+      "revId": "320989d37e8d2b37a6dde6f2bce4446027fd6b73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f40bdaa1_64519633",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T19:10:27Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "320989d37e8d2b37a6dde6f2bce4446027fd6b73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed617ff1_54b8163e",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T19:10:27Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "320989d37e8d2b37a6dde6f2bce4446027fd6b73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22b994cb_8e948161",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-25T19:10:27Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "320989d37e8d2b37a6dde6f2bce4446027fd6b73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
