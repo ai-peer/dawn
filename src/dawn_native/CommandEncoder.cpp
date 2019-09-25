@@ -369,6 +369,11 @@ namespace dawn_native {
             uint32_t* sampleCount) {
             DAWN_TRY(device->ValidateObject(colorAttachment.attachment));
 
+            if (colorAttachment.storeOp == dawn::StoreOp::Clear) {
+                return DAWN_VALIDATION_ERROR(
+                    "The color attachment storeOp clear value is not supported yet");
+            }
+
             const TextureViewBase* attachment = colorAttachment.attachment;
             if (!attachment->GetFormat().IsColor() || !attachment->GetFormat().isRenderable) {
                 return DAWN_VALIDATION_ERROR(
