@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08cc94b8_4c20d815",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-26T23:43:36Z",
+      "side": 1,
+      "message": "[3] Not initialized with\" \u003d 0\"",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 53
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8d1f9fd_00facd10",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-26T23:43:36Z",
+      "side": 1,
+      "message": "[2] I think deserialization hits this block.",
+      "range": {
+        "startLine": 251,
+        "startChar": 8,
+        "endLine": 251,
+        "endChar": 64
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4b70b3e_8ee3996b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-26T23:43:36Z",
+      "side": 1,
+      "message": "Could be uninitialized because of [3]",
+      "range": {
+        "startLine": 254,
+        "startChar": 38,
+        "endLine": 254,
+        "endChar": 69
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe8180fe_aa95646a",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-26T23:43:36Z",
+      "side": 1,
+      "message": "Even if Strlen is 0, we\u0027ll end up with an empty null-terminated string i.e. \"\"",
+      "range": {
+        "startLine": 258,
+        "startChar": 16,
+        "endLine": 262,
+        "endChar": 54
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dad602fd_f6598895",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-26T23:43:36Z",
+      "side": 1,
+      "message": "[1] cwallez@ said deserialization would hit this path.",
+      "range": {
+        "startLine": 271,
+        "startChar": 16,
+        "endLine": 272,
+        "endChar": 49
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
