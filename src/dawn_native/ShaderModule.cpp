@@ -209,10 +209,12 @@ namespace dawn_native {
             }
 
             for (const auto& fragmentOutput : resources.stage_outputs) {
+                // SPIR-V requires location for user input/output.
                 ASSERT(
                     compiler.get_decoration_bitset(fragmentOutput.id).get(spv::DecorationLocation));
                 uint32_t location =
                     compiler.get_decoration(fragmentOutput.id, spv::DecorationLocation);
+
                 if (location >= kMaxColorAttachments) {
                     device->HandleError(dawn::ErrorType::Validation,
                                         "Fragment output location over limits in the SPIRV");

@@ -89,6 +89,7 @@ namespace dawn_native {
 
         ModuleBindingInfo mBindingInfo;
         std::bitset<kMaxVertexAttributes> mUsedVertexAttributes;
+        std::bitset<kMaxColorAttachments> mUsedFragmentOutputsMask;
         SingleShaderStage mExecutionModel;
 
         FragmentOutputBaseTypes mFragmentOutputFormatBaseTypes;
