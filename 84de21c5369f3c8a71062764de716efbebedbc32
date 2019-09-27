@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "11bc4c49_9bdd15ca",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-09-27T04:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08cc94b8_4c20d815",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 53
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8d1f9fd_00facd10",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fce2dba_278a2a5e",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-09-27T04:46:25Z",
+      "side": 1,
+      "message": "And you\u0027re right.\nI\u0027ve added printf logs and I can see them for both `label` and `message`.",
+      "parentUuid": "c8d1f9fd_00facd10",
+      "range": {
+        "startLine": 251,
+        "startChar": 8,
+        "endLine": 251,
+        "endChar": 64
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ed6068bc_12551314",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-09-27T04:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b70b3e_8ee3996b",
+      "range": {
+        "startLine": 254,
+        "startChar": 38,
+        "endLine": 254,
+        "endChar": 69
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe8180fe_aa95646a",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "5078094e_bcc6327e",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-09-27T04:46:25Z",
+      "side": 1,
+      "message": "I\u0027ve added a IF as discussed offline.",
+      "parentUuid": "fe8180fe_aa95646a",
+      "range": {
+        "startLine": 258,
+        "startChar": 16,
+        "endLine": 262,
+        "endChar": 54
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad602fd_f6598895",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42957827_7ada4cff",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-09-27T04:46:25Z",
+      "side": 1,
+      "message": "This path is only for `descriptor` as far I can tell in my tests. Not `label`.",
+      "parentUuid": "dad602fd_f6598895",
+      "range": {
+        "startLine": 271,
+        "startChar": 16,
+        "endLine": 272,
+        "endChar": 49
+      },
+      "revId": "84de21c5369f3c8a71062764de716efbebedbc32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
