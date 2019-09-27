@@ -119,7 +119,12 @@
 
         //* Special handling of const char* that have their length embedded directly in the command
         {% for member in members if member.length == "strlen" %}
+            {% if member.optional %}
+                if (record.{{as_varName(member.name)}} != nullptr)
+            {% endif %}
+            {
             result += std::strlen(record.{{as_varName(member.name)}});
+            }
         {% endfor %}
 
         //* Gather how much space will be needed for pointer members.
@@ -177,11 +182,16 @@
 
         //* Special handling of const char* that have their length embedded directly in the command
         {% for member in members if member.length == "strlen" %}
+            {% if member.optional %}
+                if (record.{{as_varName(member.name)}} != nullptr)
+            {% endif %}
+            {
             {% set memberName = as_varName(member.name) %}
             transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
 
             memcpy(*buffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
             *buffer += transfer->{{memberName}}Strlen;
+            }
         {% endfor %}
 
         //* Allocate space and write the non-value arguments in it.
@@ -240,6 +250,8 @@
         //* Special handling of const char* that have their length embedded directly in the command
         {% for member in members if member.length == "strlen" %}
             {% set memberName = as_varName(member.name) %}
+            bool has_{{memberName}} = transfer->has_{{memberName}};
+            if (has_{{memberName}})
             {
                 size_t stringLength = transfer->{{memberName}}Strlen;
                 const char* stringInBuffer = nullptr;
