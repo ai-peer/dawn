@@ -22,6 +22,30 @@
       "revId": "b977ef644d1b02198d5a1871f5f80a74bd18923e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07cf37a4_b0984b81",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-27T22:12:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60257df9_e7fdcfbc",
+      "range": {
+        "startLine": 59,
+        "startChar": 35,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "b977ef644d1b02198d5a1871f5f80a74bd18923e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
