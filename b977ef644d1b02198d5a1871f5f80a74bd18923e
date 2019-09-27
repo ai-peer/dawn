@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60257df9_e7fdcfbc",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-27T04:05:56Z",
+      "side": 1,
+      "message": "nit: I like this better in your previous patch when you made this a struct! It makes it easier to read than -\u003efirst and -\u003esecond later in the code.",
+      "range": {
+        "startLine": 59,
+        "startChar": 35,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "b977ef644d1b02198d5a1871f5f80a74bd18923e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

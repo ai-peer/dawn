@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "81eec7f0_5ea3bd45",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-27T04:05:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e17da6f7_f2859f42",
+      "revId": "cc8efe3a916b33a32d82bba1d184b948b10e58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09c515e4_b2285aaa",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
         "patchSetId": 4
@@ -101,6 +119,30 @@
       "side": 1,
       "message": "If we use device-\u003eRefUntilUnused, I think this goes away.",
       "parentUuid": "b85d330f_e9917a56",
+      "range": {
+        "startLine": 75,
+        "startChar": 20,
+        "endLine": 75,
+        "endChar": 40
+      },
+      "revId": "cc8efe3a916b33a32d82bba1d184b948b10e58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66a0d6e7_97fdac74",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-27T04:05:56Z",
+      "side": 1,
+      "message": "Nice, I like that :)",
+      "parentUuid": "dcefd927_1a2c2068",
       "range": {
         "startLine": 75,
         "startChar": 20,
