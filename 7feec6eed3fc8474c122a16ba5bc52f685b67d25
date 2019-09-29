@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "a029957e_1e712963",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-29T04:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ffc5e40_0ad4b531",
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98822262_1e5cfbb8",
         "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
         "patchSetId": 3
@@ -110,6 +128,30 @@
       "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5659bb46_415e4224",
+        "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-29T04:07:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d462dfa4_b02c5c2d",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "7feec6eed3fc8474c122a16ba5bc52f685b67d25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
