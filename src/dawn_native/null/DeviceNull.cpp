@@ -78,6 +78,8 @@ namespace dawn_native { namespace null {
 
     Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor)
         : DeviceBase(adapter, descriptor) {
+        SetDefaultToggles();
+
         // Apply toggle overrides if necessary for test
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
@@ -89,6 +91,10 @@ namespace dawn_native { namespace null {
 
         mPendingOperations.clear();
         ASSERT(mMemoryUsage == 0);
+    }
+
+    void Device::SetDefaultToggles() {
+        SetToggle(Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject, true);
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(

@@ -29,6 +29,7 @@ namespace dawn_native {
         AlwaysResolveIntoZeroLevelAndLayer,
         LazyClearResourceOnFirstUse,
         UseTemporaryBufferInCompressedTextureToTextureCopy,
+        ReportErrorOnNullptrObjectInDeviceValidateObject,
 
         EnumCount,
         InvalidEnum = EnumCount,

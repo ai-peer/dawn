@@ -131,6 +131,12 @@ namespace dawn_native {
     }
 
     MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
+        if (DAWN_UNLIKELY(
+                IsToggleEnabled(Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject) &&
+                object == nullptr)) {
+            return DAWN_VALIDATION_ERROR("Object is nullptr");
+        }
+
         if (DAWN_UNLIKELY(object->GetDevice() != this)) {
             return DAWN_VALIDATION_ERROR("Object from a different device.");
         }
@@ -601,6 +607,9 @@ namespace dawn_native {
     void DeviceBase::SetDefaultToggles() {
         // Sets the default-enabled toggles
         mTogglesSet.SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
+#if defined(_DEBUG)
+        mTogglesSet.SetToggle(Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject, true);
+#endif
     }
 
     // Implementation details of object creation
