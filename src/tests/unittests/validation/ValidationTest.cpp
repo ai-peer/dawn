@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "dawn/dawn.h"
+#include "dawn_native/Device.h"
 #include "dawn_native/NullBackend.h"
 
 ValidationTest::ValidationTest() {
@@ -81,6 +82,12 @@ bool ValidationTest::EndExpectDeviceError() {
 }
 std::string ValidationTest::GetLastDeviceErrorMessage() const {
     return mDeviceErrorMessage;
+}
+
+bool ValidationTest::IsToggleSupported(dawn::Device device, dawn_native::Toggle toggle) const {
+    ASSERT(device);
+    dawn_native::DeviceBase* deviceBase = reinterpret_cast<dawn_native::DeviceBase*>(device.Get());
+    return deviceBase->IsToggleEnabled(toggle);
 }
 
 // static

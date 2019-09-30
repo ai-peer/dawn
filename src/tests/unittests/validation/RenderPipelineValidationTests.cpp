@@ -321,3 +321,33 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         }
     }
 }
+
+// Tests that the creation of the render pipeline object should fail when the shader module is null
+// and Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject is set.
+TEST_F(RenderPipelineValidationTest, UseNullShaderModule) {
+    if (!IsToggleSupported(device,
+                           dawn_native::Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject)) {
+        return;
+    }
+
+    // Setting the vertex shader module to nullptr in the render pipeline object should cause an
+    // error.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = nullptr;
+        descriptor.cFragmentStage.module = fsModule;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    // Setting the fragment shader module to nullptr in the render pipeline object should cause an
+    // error.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = nullptr;
+        descriptor.cFragmentStage.entryPoint = "main";
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
