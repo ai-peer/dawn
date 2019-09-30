@@ -871,6 +871,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40bfdfdb_4b16daf8",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-30T18:03:19Z",
+      "side": 1,
+      "message": "\u003e I think it would be most accurate to say that ID3D12Heap and VkDeviceMemory are the memory/heap concepts. And Vulkan doesn\u0027t have an analogous ID3D12Resource.\n\nWhat is the rational to omit ID3D12Resource? ID3D12Resource is also memory/heap. Per MSDN,\n\n\u003e ID3D12Resource interface. Encapsulates a generalized ability of the CPU and GPU to read and write to physical memory, or heaps [1].\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nn-d3d12-id3d12resource\n\nDawn\u0027s resource memory type, ResourceHeap \u003d\u003e [Memory|Heap]Base, should reflect the fact ID3D12Resource OR ID3D12Heap is memory/heap.\n\nThe other suggestions SGTM or no strong preference.",
+      "parentUuid": "9961b7b4_a3b6199a",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
