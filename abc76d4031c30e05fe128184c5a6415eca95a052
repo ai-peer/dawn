@@ -967,6 +967,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fd88894_4f2e9e03",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-30T23:00:34Z",
+      "side": 1,
+      "message": "\u003e ID3D12Heap[1] and VkDeviceMemory[2] are the actual memory allocations.\n\nBoth are used for memory allocations but they are NOT the same concepts. vkDeviceMemory is ONLY a memory reference while ID3D12Heap is ONLY a memory location. Both concepts need to map to Dawn.\n\nThe Vulkan equivalent of a memory location is VkMemoryHeap (hence \"heap\" in the name). The D3D12 equivalent of memory reference is ID3D12Resource per RC.\n\n\u003e ....[3] and [4] indicate as well that the ID3D12Resource is not the heap.\n\nThat\u0027s not correct. When ID3D12Resource is committed, it has no separate heap because it represents one itself (see RC\u0027s comment). It is by definition (ie. inherits ID3D12Pageable) an actual heap and why he suggests \"CommittedResource : MemoryBase\". The MSDN docs do not spell that out very well IMHO.",
+      "parentUuid": "edc0cd60_fe368656",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
