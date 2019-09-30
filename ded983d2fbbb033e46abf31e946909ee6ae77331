@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "79fa1c1e_fe0a4330",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-30T23:11:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d83bfe1b_685b2b37",
+      "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b678daf1_494c884d",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
         "patchSetId": 3
@@ -176,6 +194,24 @@
       "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6f9ff69_53f87614",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-30T23:11:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "75c61f75_c58513c5",
+      "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -282,6 +318,30 @@
       "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f2846b0_9b12117a",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-30T23:11:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad5fdc45_284346a4",
+      "range": {
+        "startLine": 122,
+        "startChar": 33,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
