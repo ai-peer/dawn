@@ -943,6 +943,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edc0cd60_fe368656",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-30T22:07:29Z",
+      "side": 1,
+      "message": "\u003e I thought the level of abstraction is memory/heap. Both vkDeviceMemory and ID3D12Resource are memory/heap, respectively. \n\nSorry, I\u0027m not completely sure what you mean by this.\n\n---\n\nID3D12Heap[1] and VkDeviceMemory[2] are the actual memory allocations.\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nn-d3d12-id3d12heap\n\u003e A heap is an abstraction of contiguous memory allocation, used to manage physical memory.\n\n[2] https://vulkan.lunarg.com/doc/view/1.0.26.0/linux/vkspec.chunked/ch10s02.html\n\u003e Device memory is memory that is visible to the device, for example the contents of opaque images that can be natively used by the device, or uniform buffer objects that reside in on-device memory.\n\n[3] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-createcommittedresource\n\u003e Creates both a resource and an implicit heap\n\n[4] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-createplacedresource\n\u003e Creates a resource that is placed in a specific heap.\n\n[5] https://vulkan.lunarg.com/doc/view/1.0.26.0/linux/vkspec.chunked/ch11s06.html\n\u003e Device memory is allocated separately (see Section 10.2, “Device Memory”) and then associated with the resource.\n\n[3] and [4] indicate as well that the ID3D12Resource is not the heap. One of the functions has an implicit heap, where as one is given an explicit heap. An ID3D12Resource \"encapsulates a generalized ability of the CPU and GPU to read and write to physical memory, or heaps\" -- so it is the ability to write to a heap, but it is not the heap itself.\n\nIn Vulkan, memory is first allocated, and then a region is associated with some resource[5] using vkBindBufferMemory. This is analogous to how an ID3D12Resource provides the ability to read/write the physical memory.\n\nI think a good abstraction is the following:\n\n  Dawn Heap \u003d VkDeviceMemory | ID3D12Heap\n  Dawn Buffer \u003d VkBuffer | ID3D12Resource\n  Dawn Texture \u003d VkTexture | ID3D12Resource",
+      "parentUuid": "d232cbbc_1cf3cac3",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
