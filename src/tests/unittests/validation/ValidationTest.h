@@ -15,9 +15,10 @@
 #ifndef TESTS_UNITTESTS_VALIDATIONTEST_H_
 #define TESTS_UNITTESTS_VALIDATIONTEST_H_
 
-#include "gtest/gtest.h"
 #include "dawn/dawncpp.h"
 #include "dawn_native/DawnNative.h"
+#include "dawn_native/Toggles.h"
+#include "gtest/gtest.h"
 
 #define ASSERT_DEVICE_ERROR(statement) \
     StartExpectDeviceError(); \
@@ -37,6 +38,8 @@ class ValidationTest : public testing::Test {
     void StartExpectDeviceError();
     bool EndExpectDeviceError();
     std::string GetLastDeviceErrorMessage() const;
+
+    bool IsToggleSupported(dawn::Device device, dawn_native::Toggle toggle) const;
 
     // Helper functions to create objects to test validation.
 

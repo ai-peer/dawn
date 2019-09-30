@@ -52,8 +52,8 @@ namespace dawn_native {
                "true resolve target. This workaround is enabled by default on the Metal drivers "
                "that have bugs when setting non-zero resolveLevel or resolveSlice.",
                "https://bugs.chromium.org/p/dawn/issues/detail?id=56"}},
-             {Toggle::LazyClearResourceOnFirstUse,
-              {"lazy_clear_resource_on_first_use",
+             {"lazy_clear_resource_on_first_use",
+              {Toggle::LazyClearResourceOnFirstUse,
                "Clears resource to zero on first usage. This initializes the resource "
                "so that no dirty bits from recycled memory is present in the new resource.",
                "https://bugs.chromium.org/p/dawn/issues/detail?id=145"}},
@@ -65,7 +65,13 @@ namespace dawn_native {
                "workaround is enabled by default on all Vulkan drivers to solve an issue in the "
                "Vulkan SPEC about the texture-to-texture copies with compressed formats. See #1005 "
                "(https://github.com/KhronosGroup/Vulkan-Docs/issues/1005) for more details.",
-               "https://bugs.chromium.org/p/dawn/issues/detail?id=42"}}}};
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=42"}},
+             {Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject,
+              {"report_error_on_nullptr_object_in_device_validate_object",
+               "Report validation error when the parameter object in DeviceBase::ValidateObject() "
+               "is nullptr. Currently this toggle is only enabled when DAWN_ENABLE_ASSERTS is "
+               "true.",
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=209"}}}};
 
     }  // anonymous namespace
 
