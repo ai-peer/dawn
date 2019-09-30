@@ -847,6 +847,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9961b7b4_a3b6199a",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-30T04:17:50Z",
+      "side": 1,
+      "message": "\u003e \u003e In what respect? (that they are the unit of mapping isn\u0027t really useful)\n\u003e They both represent memory/heap referenced by a handle (ie. ResourceMemoryAllocation).\n\nI think it would be most accurate to say that ID3D12Heap and VkDeviceMemory are the memory/heap concepts. And Vulkan doesn\u0027t have an analogous ID3D12Resource.\n\nI think we should have ResourceMemoryAllocation only contain the offsets and ID3D12Heap/VkDeviceMemory.\n\nThen, we move the creation of D3D12Resource out of the allocators so that only the D3D12 backend needs to handle it. We don\u0027t need a ResourceBase.\n\nThe allocators return ResourceMemoryAllocation which is just the heap and an offset. Then, the individual backends unpack that to either create a D3D12Resource or vkBindBufferMemory. \n\n(Casting and stuff omitted).\n\nResourceMemoryAllocation {\n  AllocationInfo mInfo;\n  uint64_t mOffset;\n  HeapBase* mHeap;\n  uint8_t* mMappedPointer;\n};\n\nd3d12::Buffer::Initialize\nResourceMemoryAllocation* allocation \u003d AllocateMemory(...);\nmResource \u003d CreatePlacedResource(allocation-\u003emHeap, allocation-\u003emOffset, ...);\n// We can have some some metadata in AllocationInfo to tag when to use a committed resource instead.\n\nvulkan::Buffer::Initialize\nResourceMemoryAllocation* allocation \u003d AllocateMemory(...);\nvkBindBufferMemory(..., allocation-\u003emHeap, allocation-\u003emOffset, ...);",
+      "parentUuid": "d940dd1b_ca3d8de0",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
