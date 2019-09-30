@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e2367bd_69071852",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "nit: have some comments to delimitate blocks of code?",
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4c7e3ca_2128e08a",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "same as below",
+      "range": {
+        "startLine": 892,
+        "startChar": 0,
+        "endLine": 892,
+        "endChar": 20
+      },
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45f00278_9119414c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "nit: might as well do\n\nfor (uint32_t layoutIndex \u003d 0; layoutIndex \u003c layouts.size(); layoutIndex++) {\n    ...\n}",
+      "range": {
+        "startLine": 899,
+        "startChar": 0,
+        "endLine": 899,
+        "endChar": 16
+      },
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36d7cb04_392e70d2",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0682f041_50dd55da",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95fac60a_c51f8d9a",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "nit: maybe use a single storage buffer, it might become invalid to use the same storage buffer at multiple bind points.",
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9264c9b1_458b30e7",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "nit: I think this is now defaulted.",
+      "range": {
+        "startLine": 973,
+        "startChar": 63,
+        "endLine": 973,
+        "endChar": 80
+      },
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36b57c9e_ccc69c32",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "I think this is defaulted too.",
+      "range": {
+        "startLine": 983,
+        "startChar": 49,
+        "endLine": 983,
+        "endChar": 60
+      },
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92893a67_f58a96f9",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T12:14:35Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
