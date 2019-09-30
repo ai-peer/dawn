@@ -919,6 +919,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d232cbbc_1cf3cac3",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-09-30T19:16:15Z",
+      "side": 1,
+      "message": "\u003e Because Vulkan doesn\u0027t have a similar concept, so it doesn\u0027t fit at this level of abstraction\n\nI\u0027m confused. I thought the level of abstraction is memory/heap. Both vkDeviceMemory and ID3D12Resource are memory/heap, respectively. If not, could you please explain?\n\n\u003e ID3D12Resource either wraps an implicit heap or is created to explicitly wrap a slice of a heap.\n\nThe details _how_ physical pages were mapped are irrelevant to the handle. Only the memory type needs to be coherent across back-ends.",
+      "parentUuid": "3e8ef229_6d5adeca",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
