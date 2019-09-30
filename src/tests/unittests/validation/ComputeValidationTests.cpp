@@ -13,8 +13,24 @@
 // limitations under the License.
 
 #include "tests/unittests/validation/ValidationTest.h"
+#include "utils/DawnHelpers.h"
 
-class ComputeValidationTest : public ValidationTest {
-};
+class ComputeValidationTest : public ValidationTest {};
 
-//TODO(cwallez@chromium.org): Add a regression test for Disptach validation trying to acces the input state.
+// Test that the creation of the compute pipeline object should fail when the shader module is null
+// and Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject is set.
+TEST_F(ComputeValidationTest, UseNullShaderModule) {
+    if (!IsToggleSupported(device,
+                           dawn_native::Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject)) {
+        return;
+    }
+
+    dawn::ComputePipelineDescriptor csDesc;
+    csDesc.layout = utils::MakeBasicPipelineLayout(device, nullptr);
+    csDesc.computeStage.module = nullptr;
+    csDesc.computeStage.entryPoint = "main";
+    ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&csDesc));
+}
+
+// TODO(cwallez@chromium.org): Add a regression test for Disptach validation trying to acces the
+// input state.
