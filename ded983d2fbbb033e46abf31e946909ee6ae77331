@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4a0cd44b_e251ba45",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-09-30T03:46:03Z",
+      "side": 1,
+      "message": "Fine with me",
+      "parentUuid": "c7ef7389_cfa909fa",
+      "revId": "ded983d2fbbb033e46abf31e946909ee6ae77331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b678daf1_494c884d",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
         "patchSetId": 3
