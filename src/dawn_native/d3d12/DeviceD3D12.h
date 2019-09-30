@@ -33,7 +33,7 @@ namespace dawn_native { namespace d3d12 {
     class PlatformFunctions;
     class ResourceAllocator;
 
-    void ASSERT_SUCCESS(HRESULT hr);
+#define ASSERT_SUCCESS(hr) ASSERT(SUCCEEDED(hr));
 
     // Definition of backend types
     class Device : public DeviceBase {
