@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc04cd43_5e43dbfd",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T07:13:18Z",
+      "side": 1,
+      "message": "DAWN_UNLIKELY has the potential to make the code really slow when the toggle is actually enabled. Also I have concerns that this still adds a condition on the very hot path. How about removing the unlikely, but enabling the check only #if defined(DAWN_ENABLE_ASSERTS)?",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4dcfc0d_965fd80f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T07:13:18Z",
+      "side": 1,
+      "message": "DAWN_ENABLE_ASSERTS ?",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0c8b3e7_9d978aec",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T07:13:18Z",
+      "side": 1,
+      "message": "nit: this comment would change to say the toggle only has effect when DAWN_ENABLE_ASSERTS is true.",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a76e9d1_ccdecb59",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T07:13:18Z",
+      "side": 1,
+      "message": "nit: only run this if the toggle is enabled, otherwise we risk a crash.",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d818c23_aaf60dae",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T07:13:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d60a49e_d1179c4f",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T07:13:18Z",
+      "side": 1,
+      "message": "This is the same test as above so I don\u0027t think we need it: utils::CreateShaderModule returns nullptr and the exact same thing happens.",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0b84d51_3ca17249",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-30T07:13:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
