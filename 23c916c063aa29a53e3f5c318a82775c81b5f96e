@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "540c9551_0f092b3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-01T02:36:50Z",
+      "side": 1,
+      "message": "µnit: writing",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 13
+      },
+      "revId": "23c916c063aa29a53e3f5c318a82775c81b5f96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "227108f6_d047bdfa",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-01T02:36:50Z",
+      "side": 1,
+      "message": "What\u0027s the point in returning a validation error if we don\u0027t do it in release mode?\n\nWould it not work just as well to use a DCHECK instead of this whole thing? Should work if this is just for debugging while writing tests.",
+      "revId": "23c916c063aa29a53e3f5c318a82775c81b5f96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "332dcf92_290100bc",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-01T02:36:50Z",
+      "side": 1,
+      "message": "-\u003e \"Currently, enabling this toggle only takes effect when\"\n\nMakes it more specific/clear.",
+      "range": {
+        "startLine": 72,
+        "startChar": 28,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "23c916c063aa29a53e3f5c318a82775c81b5f96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

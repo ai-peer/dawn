@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0c8bac4f_6c0c0f17",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-01T02:36:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc04cd43_5e43dbfd",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4dcfc0d_965fd80f",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "796b8407_b61a53cb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-01T02:36:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4dcfc0d_965fd80f",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8cb8938d_4b4b61bb",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-01T02:36:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a76e9d1_ccdecb59",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d818c23_aaf60dae",
         "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
         "patchSetId": 4
@@ -101,6 +155,24 @@
       "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1525d6f2_f445a0bb",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-01T02:36:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d60a49e_d1179c4f",
+      "revId": "11e233273f8c3a760d3c47be60582be1e262dbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
