@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "a3dec221_0ec9f3ed",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-01T18:21:59Z",
+      "side": 1,
+      "message": "I also had the thought it would be better to just ASSERT this instead of having the complexity of a toggle. Not sure what Corentin\u0027s original intent was.",
+      "parentUuid": "227108f6_d047bdfa",
+      "revId": "23c916c063aa29a53e3f5c318a82775c81b5f96e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "332dcf92_290100bc",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 7
