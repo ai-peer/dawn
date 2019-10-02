@@ -283,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "59917e4b_3c02eb75",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-02T06:25:25Z",
+      "side": 1,
+      "message": "Ok, we could eventually default it in DawnHelpers too.",
+      "parentUuid": "d500a426_7b0b5047",
+      "range": {
+        "startLine": 973,
+        "startChar": 63,
+        "endLine": 973,
+        "endChar": 80
+      },
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36b57c9e_ccc69c32",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
@@ -318,6 +342,30 @@
       "side": 1,
       "message": "Only in Blink.",
       "parentUuid": "36b57c9e_ccc69c32",
+      "range": {
+        "startLine": 983,
+        "startChar": 49,
+        "endLine": 983,
+        "endChar": 60
+      },
+      "revId": "3bfe50c56129964592bd141ee6d0cb4bf2c90506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c861799c_d82e115b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-02T06:25:25Z",
+      "side": 1,
+      "message": "Oh, we should default it in Dawn too.",
+      "parentUuid": "4ca1bf79_7ef50cef",
       "range": {
         "startLine": 983,
         "startChar": 49,
