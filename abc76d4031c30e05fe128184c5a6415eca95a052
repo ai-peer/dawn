@@ -1039,6 +1039,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47310481_76bddf8c",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-02T17:34:15Z",
+      "side": 1,
+      "message": "\u003e Because Vulkan doesn\u0027t have something like CreateCommittedResource, I saw CreateHeap+CreatePlacedResource as the main way the allocators would work and CreateCommittedResource as a specialized optimized path we use for direct allocations in D3D12.\n\nThe problem with this is that there would be two places where the code would create resources, deep in the allocator, and close to the device/buffer. That\u0027s unnecessary complexity. The end state should have a single place where resources are created. See a previous comment that suggested something like this:\n\n  // Ok would be a struct.\n using D3D12ResourceAllocation \u003d std::pair\u003cResourceMemoryAllocation, ComPtr\u003cID3D12Resource\u003e;\n\n  ResultOrError\u003cD3D12ResourceAllocation\u003e Device::CreateResource(const RESOURCE_DESCRIPTOR* desc) {\n    // Of course there would be more error handling\n    if (ResourceWouldBeBig(desc)) {\n      resource \u003d CreateCommittedResource\n      return {InvalidAllocation, resource};\n    } else {\n      allocation \u003d mBuddyAllocator.allocate(descriptor.size);\n      resource \u003d CreatePlacedResource\n      return {allocation, resource}\n    }\n}\n\nThat said like you pointed out the current state of the code doesn\u0027t do suballocations so the CL LGTM.",
+      "parentUuid": "9ff33a8d_316999a9",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
