@@ -1015,6 +1015,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ff33a8d_316999a9",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-02T02:46:20Z",
+      "side": 1,
+      "message": "I think I see the confusion now. Because Vulkan doesn\u0027t have something like CreateCommittedResource, I saw CreateHeap+CreatePlacedResource as the main way the allocators would work and CreateCommittedResource as a specialized optimized path we use for direct allocations in D3D12.\n\nBut right now, everything is DirectAllocated and the Resource is a first-class citizen of the allocator. If this understanding is correct, then the direction looks good to me.",
+      "parentUuid": "64552f71_a1589a88",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
