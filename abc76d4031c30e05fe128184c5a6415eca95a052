@@ -991,6 +991,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64552f71_a1589a88",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-02T01:29:01Z",
+      "side": 1,
+      "message": "In D3D12, a heap is an abstraction of contiguous memory allocation, used to manage physical memory. A heap can be sub-allocated with placed resources. In order to create placed resource, you must pass in the corresponding heap and an offset into that heap. A placed resource is an instance of an ID3D12Resource.\n\nA committed resource is also an instance of an ID3D12Resource with an implicit heap under the covers. However, nothing says the implementation has to make an actual heap object. The driver can choose (and some do) to optimize CreateCommitedResource such that the implementation is faster and more efficient than CreateHeap+CreatePlacedResource. \n\nFor Dawn purposes, I think we should map single allocations (a.k.a direct allocations) to CreateCommittedResource and used placed resources for cases where we need to divide a large resource (a heap) into smaller resources (placed resources).",
+      "parentUuid": "0fd88894_4f2e9e03",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
