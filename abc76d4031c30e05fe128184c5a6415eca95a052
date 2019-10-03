@@ -1063,6 +1063,30 @@
       "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49caeaab_15ca8672",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-03T17:55:32Z",
+      "side": 1,
+      "message": "\u003e But right now, everything is DirectAllocated and the Resource is a first-class citizen of the allocator. If this understanding is correct, then the direction looks good to me.\n\nYup, that\u0027s correct. :)\n\n\u003e The problem with this is that there would be two places where the code would create resources, deep in the allocator, and close to the device/buffer. \n\nOnly ID3D12Heap is created deep in the allocator. ID3D12Resource is always created \"on top\" or next to the buffer/texture.\n\n\u003eThe end state should have a single place where resources are created.\n\nAllocateMemory would remain the single place where committed or placed resources are created.",
+      "parentUuid": "47310481_76bddf8c",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "abc76d4031c30e05fe128184c5a6415eca95a052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
