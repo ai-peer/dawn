@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "655c0aa8_5db780ab",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-04T22:52:51Z",
+      "side": 1,
+      "message": "Do we expect this to ever happen in absence of Dawn bugs? If not, a DCHECK(false) here would be good so the error is more visible during development.",
+      "revId": "900a907755f69d064eebd0ccc0cf7af73351b24d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
