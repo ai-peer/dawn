@@ -16,6 +16,24 @@
       "revId": "900a907755f69d064eebd0ccc0cf7af73351b24d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "312eee79_1a4f7c35",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-04T23:03:29Z",
+      "side": 1,
+      "message": "It wouldn\u0027t surprise me if you could get device removed as an error code code here.",
+      "parentUuid": "655c0aa8_5db780ab",
+      "revId": "900a907755f69d064eebd0ccc0cf7af73351b24d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
