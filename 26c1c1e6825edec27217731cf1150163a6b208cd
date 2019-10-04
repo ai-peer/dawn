@@ -45,6 +45,30 @@
       "revId": "26c1c1e6825edec27217731cf1150163a6b208cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfab3fdb_0cf3ca0a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-04T22:23:55Z",
+      "side": 1,
+      "message": "At the beginning of the Device destructor, it checks the open boolean and, among other things, releases the command list object. \n\nUnless I am missing, we shouldn\u0027t hit the assert in [1].",
+      "parentUuid": "10661135_4d7b143f",
+      "range": {
+        "startLine": 259,
+        "startChar": 16,
+        "endLine": 259,
+        "endChar": 85
+      },
+      "revId": "26c1c1e6825edec27217731cf1150163a6b208cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
