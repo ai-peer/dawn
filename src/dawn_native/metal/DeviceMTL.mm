@@ -151,7 +151,7 @@ namespace dawn_native { namespace metal {
         return mLastSubmittedSerial + 1;
     }
 
-    void Device::TickImpl() {
+    MaybeError Device::TickImpl() {
         Serial completedSerial = GetCompletedCommandSerial();
 
         mDynamicUploader->Deallocate(completedSerial);
