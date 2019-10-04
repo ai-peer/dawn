@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "938b505d_885bba7c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-04T21:55:25Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 137,
+        "startChar": 8,
+        "endLine": 137,
+        "endChar": 56
+      },
+      "revId": "26c1c1e6825edec27217731cf1150163a6b208cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10661135_4d7b143f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-04T21:55:25Z",
+      "side": 1,
+      "message": "We should also set mPendingCommands.open to false and  Reset() the ComPtr\u003cID3D12GraphicsCommandList\u003e or we\u0027ll fail the ASSERT at [1]",
+      "range": {
+        "startLine": 259,
+        "startChar": 16,
+        "endLine": 259,
+        "endChar": 85
+      },
+      "revId": "26c1c1e6825edec27217731cf1150163a6b208cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
