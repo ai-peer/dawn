@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "009585bf_c6b73c54",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-05T09:59:13Z",
+      "side": 1,
+      "message": "unit: can this access be put in a local variable like in [1]?",
+      "revId": "aa3f195f2bd5d94fdbd17d0003399ba4cd24ed6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a658f3f6_ccb3510e",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-05T09:59:13Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "aa3f195f2bd5d94fdbd17d0003399ba4cd24ed6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3c59825_728793b5",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-05T09:59:13Z",
+      "side": 1,
+      "message": "I double checked that we shouldn\u0027t need to make these pointers volatile because when we serialize data in the wire we should never need to read what we just wrote: array sizes and things like that are present on the non-shm memory.",
+      "revId": "aa3f195f2bd5d94fdbd17d0003399ba4cd24ed6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
