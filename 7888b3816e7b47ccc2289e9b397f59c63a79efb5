@@ -77,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "d5060caf_c5fd3e82",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T23:03:58Z",
+      "side": 1,
+      "message": "Ah, got it.",
+      "parentUuid": "e9f62936_66f6e3b1",
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed9f47e_44b8cc75",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 1
@@ -91,6 +109,24 @@
       "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1325498_5681bfe5",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T23:03:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1ed9f47e_44b8cc75",
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
