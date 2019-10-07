@@ -14,7 +14,6 @@
 
 #include "dawn_native/d3d12/CommittedResourceAllocatorD3D12.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
-#include "dawn_native/d3d12/ResourceHeapD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -22,10 +21,9 @@ namespace dawn_native { namespace d3d12 {
         : mDevice(device), mHeapType(heapType) {
     }
 
-    ResultOrError<ResourceMemoryAllocation> CommittedResourceAllocator::Allocate(
+    ResultOrError<ResourceHeapAllocation> CommittedResourceAllocator::Allocate(
         const D3D12_RESOURCE_DESC& resourceDescriptor,
-        D3D12_RESOURCE_STATES initialUsage,
-        D3D12_HEAP_FLAGS heapFlags) {
+        D3D12_RESOURCE_STATES initialUsage) {
         D3D12_HEAP_PROPERTIES heapProperties;
         heapProperties.Type = mHeapType;
         heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
@@ -35,7 +33,7 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3D12Resource> committedResource;
         if (FAILED(mDevice->GetD3D12Device()->CreateCommittedResource(
-                &heapProperties, heapFlags, &resourceDescriptor, initialUsage, nullptr,
+                &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage, nullptr,
                 IID_PPV_ARGS(&committedResource)))) {
             return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate resource");
         }
@@ -43,13 +41,11 @@ namespace dawn_native { namespace d3d12 {
         AllocationInfo info;
         info.mMethod = AllocationMethod::kDirect;
 
-        return ResourceMemoryAllocation{info,
-                                        /*offset*/ 0,
-                                        new ResourceHeap(std::move(committedResource))};
+        return ResourceHeapAllocation{info,
+                                      /*offset*/ 0, std::move(committedResource)};
     }
 
-    void CommittedResourceAllocator::Deallocate(ResourceMemoryAllocation& allocation) {
-        std::unique_ptr<ResourceHeap> resourceHeap(ToBackend(allocation.GetResourceHeap()));
-        mDevice->ReferenceUntilUnused(resourceHeap->GetD3D12Resource());
+    void CommittedResourceAllocator::Deallocate(ResourceHeapAllocation& allocation) {
+        mDevice->ReferenceUntilUnused(allocation.GetD3D12Resource());
     }
 }}  // namespace dawn_native::d3d12
