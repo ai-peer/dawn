@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4a8fd92_b16a1121",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T23:49:46Z",
+      "side": 1,
+      "message": "This code is now duplicated. It\u0027d be nice if we could update QueueD3D12 to use the recording context as well and get rid of Device::OpenCommandList (could be a separate CL).",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 183,
+        "endChar": 41
+      },
+      "revId": "163422e158cf4048b7a8669d3772b449801a49c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7f55ce0_8642cb50",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T23:49:46Z",
+      "side": 1,
+      "message": "This could be a private member function MaybeError Texture::Initialize(...);\nAnd then static Texture::Create will make the texture object and DAWN_TRY(texture-\u003eInitialize()).\n\nThat way, we can still use the member function helpers GetDepthOrArraySize(), etc.\n\nAnd then Initialize() will do the GPU allocation and assign mResource.",
+      "range": {
+        "startLine": 273,
+        "startChar": 32,
+        "endLine": 273,
+        "endChar": 47
+      },
+      "revId": "163422e158cf4048b7a8669d3772b449801a49c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08e142a8_b2d42d2c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T23:49:46Z",
+      "side": 1,
+      "message": "nit: We can use std::make_unique\u003cTexture\u003e(...) and then \nreturn dawnTexture.release();\n\nWhat you\u0027re doing will work just as well, but we already have the make_unique and return obj.release() in other places like Device::CreateBufferImpl, d3d12::Adapter::CreateDeviceImpl, etc.\n\nCorentin is also using unique_ptr in https://dawn-review.googlesource.com/c/dawn/+/11861",
+      "range": {
+        "startLine": 297,
+        "startChar": 8,
+        "endLine": 299,
+        "endChar": 0
+      },
+      "revId": "163422e158cf4048b7a8669d3772b449801a49c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
