@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2799e806_2bdc7998",
+        "filename": "src/common/Result.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T22:14:35Z",
+      "side": 1,
+      "message": "nit: I think is_base_of returns true in this case too.",
+      "range": {
+        "startLine": 278,
+        "startChar": 18,
+        "endLine": 278,
+        "endChar": 52
+      },
+      "revId": "8dbdc34f52b2466f6a67e376b0ad38a72c787dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
