@@ -12,35 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_D3D12_COMMITTEDRESOURCEALLOCATORD3D12_H_
-#define DAWNNATIVE_D3D12_COMMITTEDRESOURCEALLOCATORD3D12_H_
+#ifndef DAWNNATIVE_D3D12_BUDDYPLACEDRESOURCEALLOCATORD3D12_H_
+#define DAWNNATIVE_D3D12_BUDDYPLACEDRESOURCEALLOCATORD3D12_H_
 
-#include "common/SerialQueue.h"
-#include "dawn_native/Error.h"
+#include "dawn_native/BuddyMemoryAllocator.h"
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
-#include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
     class Device;
 
-    // Wrapper to allocate D3D12 committed resource.
-    // Committed resources are implicitly backed by a D3D12 heap.
-    class CommittedResourceAllocator {
+    // Wrapper to allocates a D3D12 placed resource with the buddy allocator.
+    class BuddyPlacedResourceAllocator {
       public:
-        CommittedResourceAllocator(Device* device, D3D12_HEAP_TYPE heapType);
-        ~CommittedResourceAllocator() = default;
+        BuddyPlacedResourceAllocator(uint64_t maxResourceSize,
+                                     uint64_t heapSize,
+                                     Device* device,
+                                     D3D12_HEAP_TYPE heapType);
+
+        ~BuddyPlacedResourceAllocator() = default;
 
         ResultOrError<ResourceHeapAllocation> Allocate(
             const D3D12_RESOURCE_DESC& resourceDescriptor,
-            D3D12_RESOURCE_STATES initialUsage);
+            uint64_t allocationSize,
+            uint64_t allocationAlignment,
+            D3D12_RESOURCE_STATES initialUsage,
+            D3D12_HEAP_FLAGS heapFlags);
+
         void Deallocate(ResourceHeapAllocation& allocation);
 
       private:
         Device* mDevice;
-        D3D12_HEAP_TYPE mHeapType;
+        BuddyMemoryAllocator mBuddyMemoryAllocator;
     };
-
 }}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_D3D12_COMMITTEDRESOURCEALLOCATORD3D12_H_
+#endif  // DAWNNATIVE_D3D12_BUDDYPLACEDRESOURCEALLOCATORD3D12_H_

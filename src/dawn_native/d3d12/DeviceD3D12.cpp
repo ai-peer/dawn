@@ -32,7 +32,6 @@
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocator.h"
 #include "dawn_native/d3d12/ResourceAllocatorManagerD3D12.h"
-#include "dawn_native/d3d12/ResourceHeapD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
@@ -336,17 +335,16 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    void Device::DeallocateMemory(ResourceMemoryAllocation& allocation) {
+    void Device::DeallocateMemory(ResourceHeapAllocation& allocation) {
         mResourceAllocatorManager->DeallocateMemory(allocation);
     }
 
-    ResultOrError<ResourceMemoryAllocation> Device::AllocateMemory(
+    ResultOrError<ResourceHeapAllocation> Device::AllocateMemory(
         D3D12_HEAP_TYPE heapType,
         const D3D12_RESOURCE_DESC& resourceDescriptor,
-        D3D12_RESOURCE_STATES initialUsage,
-        D3D12_HEAP_FLAGS heapFlags) {
-        return mResourceAllocatorManager->AllocateMemory(heapType, resourceDescriptor, initialUsage,
-                                                         heapFlags);
+        D3D12_RESOURCE_STATES initialUsage) {
+        return mResourceAllocatorManager->AllocateMemory(heapType, resourceDescriptor,
+                                                         initialUsage);
     }
 
     TextureBase* Device::WrapSharedHandle(const TextureDescriptor* descriptor,

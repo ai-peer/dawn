@@ -12,27 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
-#define DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
+#ifndef DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
+#define DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
 
-#include "dawn_native/ResourceHeap.h"
+#include "dawn_native/MemoryAllocator.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    // Wrapper for physical memory used with or without a resource object.
-    class ResourceHeap : public ResourceHeapBase {
+    class Device;
+
+    // Wrapper to allocate a D3D12 heap.
+    class HeapAllocator : public MemoryAllocator {
       public:
-        ResourceHeap(ComPtr<ID3D12Resource> resource);
+        HeapAllocator(Device* device, D3D12_HEAP_TYPE heapType);
+        ~HeapAllocator() = default;
 
-        ~ResourceHeap() = default;
-
-        ComPtr<ID3D12Resource> GetD3D12Resource() const;
-        D3D12_GPU_VIRTUAL_ADDRESS GetGPUPointer() const;
+        ResultOrError<std::unique_ptr<ResourceHeapBase>> Allocate(uint64_t size,
+                                                                  int memoryFlags) override;
+        void Deallocate(std::unique_ptr<ResourceHeapBase> allocation) override;
 
       private:
-        ComPtr<ID3D12Resource> mResource;
+        Device* mDevice;
+        D3D12_HEAP_TYPE mHeapType;
     };
+
 }}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_D3D12_RESOURCEHEAPD3D12_H_
+#endif  // DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
