@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ad23dc2d_562168fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T22:56:04Z",
+      "side": 1,
+      "message": "also typo",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 24
+      },
+      "revId": "eb5747057ecf1cf3f2471a157fa3170d1d48d565",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd5d3d9d_d2d8784a",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -59,6 +82,30 @@
       "writtenOn": "2019-10-07T17:29:50Z",
       "side": 1,
       "message": "unit: extra colon",
+      "range": {
+        "startLine": 399,
+        "startChar": 6,
+        "endLine": 399,
+        "endChar": 7
+      },
+      "revId": "eb5747057ecf1cf3f2471a157fa3170d1d48d565",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12f77498_8591f81c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T22:56:04Z",
+      "side": 1,
+      "message": "actually this looks like it\u0027s a commented out version of the superclass constructor call and should be removed",
+      "parentUuid": "b8b9f777_e2697e26",
       "range": {
         "startLine": 399,
         "startChar": 6,
