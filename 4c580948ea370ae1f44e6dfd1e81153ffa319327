@@ -46,6 +46,30 @@
       "revId": "4c580948ea370ae1f44e6dfd1e81153ffa319327",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40dc5b63_2763fc2c",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T23:06:14Z",
+      "side": 1,
+      "message": "Okay, sounds good.",
+      "parentUuid": "7b799d61_31816f18",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 76,
+        "endChar": 75
+      },
+      "revId": "4c580948ea370ae1f44e6dfd1e81153ffa319327",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
