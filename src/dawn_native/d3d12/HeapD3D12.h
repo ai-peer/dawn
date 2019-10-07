@@ -1,4 +1,4 @@
-// Copyright 2018 The Dawn Authors
+// Copyright 2019 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,30 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_STAGINGBUFFERD3D12_H_
-#define DAWNNATIVE_STAGINGBUFFERD3D12_H_
+#ifndef DAWNNATIVE_D3D12_HEAPD3D12_H_
+#define DAWNNATIVE_D3D12_HEAPD3D12_H_
 
-#include "dawn_native/StagingBuffer.h"
-#include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
+#include "dawn_native/ResourceHeap.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
-    class Device;
-
-    class StagingBuffer : public StagingBufferBase {
+    class Heap : public ResourceHeapBase {
       public:
-        StagingBuffer(size_t size, Device* device);
-        ~StagingBuffer();
+        Heap(ComPtr<ID3D12Heap> heap);
+        ~Heap() = default;
 
-        ID3D12Resource* GetResource() const;
-
-        MaybeError Initialize() override;
+        ComPtr<ID3D12Heap> GetD3D12Heap() const;
 
       private:
-        Device* mDevice;
-        ResourceHeapAllocation mUploadHeap;
+        ComPtr<ID3D12Heap> mHeap;
     };
 }}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_STAGINGBUFFERD3D12_H_
+#endif  // DAWNNATIVE_D3D12_HEAPD3D12_H_
