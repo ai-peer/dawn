@@ -102,11 +102,8 @@ namespace dawn_native { namespace d3d12 {
 
     Device::~Device() {
         // Immediately forget about all pending commands
-        if (mPendingCommands.open) {
-            mPendingCommands.commandList->Close();
-            mPendingCommands.open = false;
-            mPendingCommands.commandList = nullptr;
-        }
+        mPendingCommands.Release();
+
         NextSerial();
         WaitForSerial(mLastSubmittedSerial);  // Wait for all in-flight commands to finish executing
 
@@ -134,7 +131,7 @@ namespace dawn_native { namespace d3d12 {
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
 
         ASSERT(mUsedComObjectRefs.Empty());
-        ASSERT(mPendingCommands.commandList == nullptr);
+        ASSERT(!mPendingCommands.IsOpen());
     }
 
     ComPtr<ID3D12Device> Device::GetD3D12Device() const {
@@ -190,14 +187,13 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    ComPtr<ID3D12GraphicsCommandList> Device::GetPendingCommandList() {
+    ResultOrError<ComPtr<ID3D12GraphicsCommandList>> Device::GetPendingCommandList() {
         // Callers of GetPendingCommandList do so to record commands. Only reserve a command
         // allocator when it is needed so we don't submit empty command lists
-        if (!mPendingCommands.open) {
-            OpenCommandList(&mPendingCommands.commandList);
-            mPendingCommands.open = true;
+        if (!mPendingCommands.IsOpen()) {
+            DAWN_TRY(mPendingCommands.Open(mD3d12Device.Get(), mCommandAllocatorManager.get()));
         }
-        return mPendingCommands.commandList;
+        return mPendingCommands.GetCommandList();
     }
 
     Serial Device::GetCompletedCommandSerial() const {
@@ -252,23 +248,17 @@ namespace dawn_native { namespace d3d12 {
         UINT numLists = 0;
         std::array<ID3D12CommandList*, 2> d3d12CommandLists;
 
+        ComPtr<ID3D12GraphicsCommandList> d3d12PendingCommandList;
         // If there are pending commands, prepend them to ExecuteCommandLists
-        if (mPendingCommands.open) {
-            const HRESULT hr = mPendingCommands.commandList->Close();
-            if (FAILED(hr)) {
-                mPendingCommands.open = false;
-                mPendingCommands.commandList.Reset();
-                return DAWN_DEVICE_LOST_ERROR("Error closing pending command list.");
-            }
-            mPendingCommands.open = false;
-            d3d12CommandLists[numLists++] = mPendingCommands.commandList.Get();
+        if (mPendingCommands.IsOpen()) {
+            DAWN_TRY_ASSIGN(d3d12PendingCommandList, mPendingCommands.Close());
+            d3d12CommandLists[numLists++] = d3d12PendingCommandList.Get();
         }
         if (d3d12CommandList != nullptr) {
             d3d12CommandLists[numLists++] = d3d12CommandList;
         }
         if (numLists > 0) {
             mCommandQueue->ExecuteCommandLists(numLists, d3d12CommandLists.data());
-            mPendingCommands.commandList.Reset();
         }
 
         return {};
@@ -318,7 +308,7 @@ namespace dawn_native { namespace d3d12 {
         return new SwapChain(this, descriptor);
     }
     ResultOrError<TextureBase*> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
-        return new Texture(this, descriptor);
+        return Texture::Create(this, descriptor);
     }
     ResultOrError<TextureViewBase*> Device::CreateTextureViewImpl(
         TextureBase* texture,
@@ -338,10 +328,13 @@ namespace dawn_native { namespace d3d12 {
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
                                                uint64_t size) {
-        ToBackend(destination)
-            ->TransitionUsageNow(GetPendingCommandList(), dawn::BufferUsage::CopyDst);
+        ComPtr<ID3D12GraphicsCommandList> d3d12PendingCommandList;
+        DAWN_TRY_ASSIGN(d3d12PendingCommandList, GetPendingCommandList());
 
-        GetPendingCommandList()->CopyBufferRegion(
+        ToBackend(destination)
+            ->TransitionUsageNow(d3d12PendingCommandList.Get(), dawn::BufferUsage::CopyDst);
+
+        d3d12PendingCommandList->CopyBufferRegion(
             ToBackend(destination)->GetD3D12Resource().Get(), destinationOffset,
             ToBackend(source)->GetResource(), sourceOffset, size);
 
@@ -382,6 +375,7 @@ namespace dawn_native { namespace d3d12 {
             return nullptr;
         }
 
-        return new Texture(this, descriptor, d3d12Resource.Get());
+        return new Texture(this, descriptor, d3d12Resource.Get(),
+                           TextureBase::TextureState::OwnedExternal, true);
     }
 }}  // namespace dawn_native::d3d12

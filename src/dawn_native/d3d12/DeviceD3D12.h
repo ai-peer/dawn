@@ -20,6 +20,7 @@
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ResourceMemoryAllocation.h"
+#include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
@@ -70,7 +71,7 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<IDXGIFactory4> GetFactory() const;
 
         void OpenCommandList(ComPtr<ID3D12GraphicsCommandList>* commandList);
-        ComPtr<ID3D12GraphicsCommandList> GetPendingCommandList();
+        ResultOrError<ComPtr<ID3D12GraphicsCommandList>> GetPendingCommandList();
         Serial GetPendingCommandSerial() const override;
 
         void NextSerial();
@@ -132,10 +133,7 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12CommandSignature> mDrawIndirectSignature;
         ComPtr<ID3D12CommandSignature> mDrawIndexedIndirectSignature;
 
-        struct PendingCommandList {
-            ComPtr<ID3D12GraphicsCommandList> commandList;
-            bool open = false;
-        } mPendingCommands;
+        CommandRecordingContext mPendingCommands;
 
         SerialQueue<ComPtr<IUnknown>> mUsedComObjectRefs;
 
