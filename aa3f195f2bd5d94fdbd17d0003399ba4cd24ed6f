@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fad4427b_f1608297",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T17:47:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "009585bf_c6b73c54",
+      "revId": "aa3f195f2bd5d94fdbd17d0003399ba4cd24ed6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a658f3f6_ccb3510e",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "67da7ed9_3c42d588",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T17:47:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a658f3f6_ccb3510e",
+      "revId": "aa3f195f2bd5d94fdbd17d0003399ba4cd24ed6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3c59825_728793b5",
         "filename": "src/include/dawn_wire/Wire.h",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "aa3f195f2bd5d94fdbd17d0003399ba4cd24ed6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bda8b9dd_d9fb5484",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T17:47:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3c59825_728793b5",
+      "revId": "aa3f195f2bd5d94fdbd17d0003399ba4cd24ed6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
