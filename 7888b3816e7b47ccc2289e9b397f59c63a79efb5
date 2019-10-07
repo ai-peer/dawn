@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91bed71c_d3f53563",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T22:21:46Z",
+      "side": 1,
+      "message": "is false?",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36e79f7e_d8c1bf87",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T22:21:46Z",
+      "side": 1,
+      "message": "nit: Seems silly that this still checks on iOS, but otherwise fine",
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1516bb54_5a2a2233",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-07T22:21:46Z",
+      "side": 1,
+      "message": "This seems wrong because it throws UNREACHABLE on macOS 10.10.\n\nBoth of these comments would be fixed by\n\n #if macos\n   if (@available macos) {\n   }\n #elif ios\n   if (@available ios) {\n   }\n #endif\n   return adapters;",
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
