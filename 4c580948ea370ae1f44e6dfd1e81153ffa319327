@@ -22,6 +22,30 @@
       "revId": "4c580948ea370ae1f44e6dfd1e81153ffa319327",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b799d61_31816f18",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-07T23:04:08Z",
+      "side": 1,
+      "message": "Yea, +1 for both. I went with this version for now as we don\u0027t have any real case where uint64_t is required. I\u0027ll upgrade/match these in a follow-up CL.",
+      "parentUuid": "ac19f8c1_7b3d27b7",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 76,
+        "endChar": 75
+      },
+      "revId": "4c580948ea370ae1f44e6dfd1e81153ffa319327",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
