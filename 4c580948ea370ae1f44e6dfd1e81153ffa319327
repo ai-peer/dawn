@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac19f8c1_7b3d27b7",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-07T22:58:54Z",
+      "side": 1,
+      "message": "I think instead we should update DescriptorHeapHandle to have a uint64_t offset.\n\nD3D12_GPU_DESCRIPTOR_HANDLE has a uint64_t |ptr| member and\nD3D12_CPU_DESCRIPTOR_HANDLE has a size_t |ptr| member.\n\nThis can be separate CL, but looking at it now, RingBufferAllocator should probably also return uint64_t offsets instead of size_t.",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 76,
+        "endChar": 75
+      },
+      "revId": "4c580948ea370ae1f44e6dfd1e81153ffa319327",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
