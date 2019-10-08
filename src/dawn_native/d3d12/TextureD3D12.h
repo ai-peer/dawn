@@ -31,8 +31,13 @@ namespace dawn_native { namespace d3d12 {
 
     class Texture : public TextureBase {
       public:
-        Texture(Device* device, const TextureDescriptor* descriptor);
-        Texture(Device* device, const TextureDescriptor* descriptor, ID3D12Resource* nativeTexture);
+        static ResultOrError<TextureBase*> Create(Device* device,
+                                                  const TextureDescriptor* descriptor);
+        Texture(Device* device,
+                const TextureDescriptor* descriptor,
+                ComPtr<ID3D12Resource> nativeTexture,
+                TextureState textureState,
+                bool isInitialized);
         ~Texture();
 
         DXGI_FORMAT GetD3D12Format() const;
