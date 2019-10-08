@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd62a537_ba75ba89",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-08T01:18:21Z",
+      "side": 1,
+      "message": "Since the ComPtr is ref\u0027d in this class, we could probably return a raw pointer here. Unless a caller for some reason needs to hold onto the result of GetCommandList for a nontrivial amount of time.",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28861c4e_3a319865",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-08T01:18:21Z",
+      "side": 1,
+      "message": "For encapsulation, would it make sense to move this method into CommandAllocatorManager?",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "802cb656_cbf2ef8d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-08T01:18:21Z",
+      "side": 1,
+      "message": "Seems like dawnTexture is just Acquired and immediately detached. Couldn\u0027t it just be kept as a raw pointer all along?",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
