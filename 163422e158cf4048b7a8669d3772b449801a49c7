@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "4d03e770_54154165",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-08T16:57:23Z",
+      "side": 1,
+      "message": "\u003e I\u0027ve never been a fan of two phrase creation because it means you that in the error case, you create something and then immediately delete it again.  Not the end of the world, however.  \n\nThis is true, but I don\u0027t feel strongly about optimizing the error case. We could change this if it turns out to be problem. For now, I\u0027d prefer simplifying the creation.\n\nSee cwallez@\u0027s other comment on Patchset 5, Line 292. Both the constructor and Initialize() are private so a new user isn\u0027t responsible for deciding whether or not to call it.",
+      "parentUuid": "cc995900_75b42a08",
+      "range": {
+        "startLine": 273,
+        "startChar": 32,
+        "endLine": 273,
+        "endChar": 47
+      },
+      "revId": "163422e158cf4048b7a8669d3772b449801a49c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08e142a8_b2d42d2c",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 1
@@ -188,6 +212,30 @@
       "revId": "163422e158cf4048b7a8669d3772b449801a49c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a9747ad_6b832d7e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-08T16:57:23Z",
+      "side": 1,
+      "message": "Sounds good to me.",
+      "parentUuid": "255f34f4_3c57bd17",
+      "range": {
+        "startLine": 297,
+        "startChar": 8,
+        "endLine": 299,
+        "endChar": 0
+      },
+      "revId": "163422e158cf4048b7a8669d3772b449801a49c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
