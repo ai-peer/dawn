@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "14a46ef5_e2967f86",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-08T02:02:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9bd733a_574085ea",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28861c4e_3a319865",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 4
