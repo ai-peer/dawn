@@ -22,6 +22,30 @@
       "revId": "8dbdc34f52b2466f6a67e376b0ad38a72c787dac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8955b35_1eea5794",
+        "filename": "src/common/Result.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T07:34:30Z",
+      "side": 1,
+      "message": "I had issues where std::is_base_of\u003cint, int\u003e::value was false.",
+      "parentUuid": "2799e806_2bdc7998",
+      "range": {
+        "startLine": 278,
+        "startChar": 18,
+        "endLine": 278,
+        "endChar": 52
+      },
+      "revId": "8dbdc34f52b2466f6a67e376b0ad38a72c787dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
