@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5238396c_90ee749d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T07:30:51Z",
+      "side": 1,
+      "message": "Not sure what you mean. This problem is that this condition is actually true on iOS because of the mandatory * there is at the end.",
+      "parentUuid": "91bed71c_d3f53563",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "36e79f7e_d8c1bf87",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2019-10-07T22:21:46Z",
       "side": 1,
       "message": "nit: Seems silly that this still checks on iOS, but otherwise fine",
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc00762b_25da7537",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T07:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36e79f7e_d8c1bf87",
       "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -89,6 +131,24 @@
       "side": 1,
       "message": "Ah, got it.",
       "parentUuid": "e9f62936_66f6e3b1",
+      "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1c28613_9652b976",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T07:30:51Z",
+      "side": 1,
+      "message": "Fix for the other comment fixed this too.",
+      "parentUuid": "d5060caf_c5fd3e82",
       "revId": "7888b3816e7b47ccc2289e9b397f59c63a79efb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
