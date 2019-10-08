@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/Constants.h"
 #include "common/Math.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/ResourceHeapD3D12.h"
 
@@ -216,16 +217,21 @@ namespace dawn_native { namespace d3d12 {
 
     MaybeError Buffer::MapAtCreationImpl(uint8_t** mappedPointer) {
         mWrittenMappedRange = {0, GetSize()};
-        ASSERT_SUCCESS(GetD3D12Resource()->Map(0, &mWrittenMappedRange,
-                                               reinterpret_cast<void**>(mappedPointer)));
-        return {};
+        return CheckHRESULT(GetD3D12Resource()->Map(0, &mWrittenMappedRange,
+                                                    reinterpret_cast<void**>(mappedPointer)),
+                            "D3D12 map at creation");
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
         mWrittenMappedRange = {};
         D3D12_RANGE readRange = {0, GetSize()};
         char* data = nullptr;
-        ASSERT_SUCCESS(GetD3D12Resource()->Map(0, &readRange, reinterpret_cast<void**>(&data)));
+        MaybeError mapHResult =
+            CheckHRESULT(GetD3D12Resource()->Map(0, &readRange, reinterpret_cast<void**>(&data)),
+                         "D3D12 map read async");
+        if (mapHResult.IsError()) {
+            return mapHResult;
+        }
         // There is no need to transition the resource to a new state: D3D12 seems to make the GPU
         // writes available when the fence is passed.
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();
@@ -236,8 +242,12 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
         mWrittenMappedRange = {0, GetSize()};
         char* data = nullptr;
-        ASSERT_SUCCESS(
-            GetD3D12Resource()->Map(0, &mWrittenMappedRange, reinterpret_cast<void**>(&data)));
+        MaybeError mapHResult = CheckHRESULT(
+            GetD3D12Resource()->Map(0, &mWrittenMappedRange, reinterpret_cast<void**>(&data)),
+            "D3D12 map write async");
+        if (mapHResult.IsError()) {
+            return mapHResult;
+        }
         // There is no need to transition the resource to a new state: D3D12 seems to make the CPU
         // writes available on queue submission.
         MapRequestTracker* tracker = ToBackend(GetDevice())->GetMapRequestTracker();

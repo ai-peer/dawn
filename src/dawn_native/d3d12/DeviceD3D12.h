@@ -34,12 +34,6 @@ namespace dawn_native { namespace d3d12 {
     class ResourceAllocator;
     class ResourceAllocatorManager;
 
-#define ASSERT_SUCCESS(hr)            \
-    {                                 \
-        HRESULT succeeded = hr;       \
-        ASSERT(SUCCEEDED(succeeded)); \
-    }
-
     // Definition of backend types
     class Device : public DeviceBase {
       public:
@@ -73,8 +67,8 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12GraphicsCommandList> GetPendingCommandList();
         Serial GetPendingCommandSerial() const override;
 
-        void NextSerial();
-        void WaitForSerial(Serial serial);
+        MaybeError NextSerial();
+        MaybeError WaitForSerial(Serial serial);
 
         void ReferenceUntilUnused(ComPtr<IUnknown> object);
 

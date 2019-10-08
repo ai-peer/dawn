@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/BitSetIterator.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 
@@ -148,11 +149,15 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3DBlob> signature;
         ComPtr<ID3DBlob> error;
-        ASSERT_SUCCESS(device->GetFunctions()->d3d12SerializeRootSignature(
-            &rootSignatureDescriptor, D3D_ROOT_SIGNATURE_VERSION_1, &signature, &error));
-        ASSERT_SUCCESS(device->GetD3D12Device()->CreateRootSignature(
-            0, signature->GetBufferPointer(), signature->GetBufferSize(),
-            IID_PPV_ARGS(&mRootSignature)));
+        device->ConsumedError(CheckHRESULT(
+            device->GetFunctions()->d3d12SerializeRootSignature(
+                &rootSignatureDescriptor, D3D_ROOT_SIGNATURE_VERSION_1, &signature, &error),
+            "D3D12 serialize root signature"));
+        device->ConsumedError(CheckHRESULT(
+            device->GetD3D12Device()->CreateRootSignature(0, signature->GetBufferPointer(),
+                                                          signature->GetBufferSize(),
+                                                          IID_PPV_ARGS(&mRootSignature)),
+            "D3D12 signature get buffer size"));
     }
 
     uint32_t PipelineLayout::GetCbvUavSrvRootParameterIndex(uint32_t group) const {
