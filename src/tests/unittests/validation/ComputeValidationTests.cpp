@@ -13,8 +13,26 @@
 // limitations under the License.
 
 #include "tests/unittests/validation/ValidationTest.h"
+#include "utils/DawnHelpers.h"
 
-class ComputeValidationTest : public ValidationTest {
-};
+class ComputeValidationTest : public ValidationTest {};
 
-//TODO(cwallez@chromium.org): Add a regression test for Disptach validation trying to acces the input state.
+// Test that the creation of the compute pipeline object should fail when the shader module is null,
+// DAWN_ENABLE_ASSERTS is defined and Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject is
+// set.
+#if defined(DAWN_ENABLE_ASSERTS)
+TEST_F(ComputeValidationTest, UseNullShaderModule) {
+    std::vector<const char*> forceEnabledToggles(
+        {"report_error_on_nullptr_object_in_device_validate_object"});
+    dawn::Device deviceWithToggle = CreateDeviceFromAdapter(adapter, {}, forceEnabledToggles);
+
+    dawn::ComputePipelineDescriptor csDesc;
+    csDesc.layout = utils::MakeBasicPipelineLayout(deviceWithToggle, nullptr);
+    csDesc.computeStage.module = nullptr;
+    csDesc.computeStage.entryPoint = "main";
+    ASSERT_DEVICE_ERROR(deviceWithToggle.CreateComputePipeline(&csDesc));
+}
+#endif
+
+// TODO(cwallez@chromium.org): Add a regression test for Disptach validation trying to acces the
+// input state.
