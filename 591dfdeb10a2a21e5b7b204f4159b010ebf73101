@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "408ca473_9cecb30a",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-08T01:28:49Z",
+      "side": 1,
+      "message": "No current callers hold onto the command list for a non-trivial amount of time. If they want to, they can always put it into a SmartPointer themselves. \n\nI\u0027m happy to do this change. While we\u0027re at it, we can change GetPendingCommandList to also return a raw pointer as well.",
+      "parentUuid": "dd62a537_ba75ba89",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28861c4e_3a319865",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2019-10-08T01:18:21Z",
       "side": 1,
       "message": "For encapsulation, would it make sense to move this method into CommandAllocatorManager?",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5f1277d_996fae84",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-08T01:28:49Z",
+      "side": 1,
+      "message": "Kai, I\u0027m not sure I follow what you\u0027re getting at. Are you referring to GetCommandList? \n\nThe CommandRecordingContext encapsulates, among other things, a command list instance. So it needs to own the lifetime of the command list.",
+      "parentUuid": "28861c4e_3a319865",
       "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18bc066f_d7e9f8a0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-08T01:28:49Z",
+      "side": 1,
+      "message": "It cannot be kept in a raw pointer because there are flow control macros (DAWN_TRY_ASSIGN and DAWN_TRY) between the construction of the class and when it is returned to the caller. If the flow control macros early out, then we leak memory.",
+      "parentUuid": "802cb656_cbf2ef8d",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
