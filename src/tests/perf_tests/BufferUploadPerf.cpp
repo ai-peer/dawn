@@ -60,7 +60,7 @@ class BufferUploadPerf : public DawnPerfTestWithParams<BufferUploadParams> {
 
     void SetUp() override;
 
-  private:
+  protected:
     void Step() override;
 
     dawn::Buffer dst;
@@ -113,7 +113,27 @@ void BufferUploadPerf::Step() {
     WaitForGPU();
 }
 
-TEST_P(BufferUploadPerf, Run) {
+TEST_P(BufferUploadPerf, BufferSize_1KB) {
+    data.resize(1 * 1024);
+    RunTest();
+}
+
+TEST_P(BufferUploadPerf, BufferSize_64KB) {
+    data.resize(64 * 1024);
+    RunTest();
+}
+
+TEST_P(BufferUploadPerf, BufferSize_1MB) {
+    RunTest();
+}
+
+TEST_P(BufferUploadPerf, BufferSize_4MB) {
+    data.resize(4 * 1024 * 1024);
+    RunTest();
+}
+
+TEST_P(BufferUploadPerf, BufferSize_16MB) {
+    data.resize(16 * 1024 * 1024);
     RunTest();
 }
 
