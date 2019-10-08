@@ -45,16 +45,20 @@ namespace dawn_native { namespace d3d12 {
         }
 
         ID3D12Resource* nativeTexture = static_cast<ID3D12Resource*>(next.texture.ptr);
-        return new Texture(ToBackend(GetDevice()), descriptor, nativeTexture);
+        return new Texture(ToBackend(GetDevice()), descriptor, nativeTexture,
+                           TextureBase::TextureState::OwnedExternal, false);
     }
 
     MaybeError SwapChain::OnBeforePresent(TextureBase* texture) {
         Device* device = ToBackend(GetDevice());
 
-        // Perform the necessary transition for the texture to be presented.
-        ToBackend(texture)->TransitionUsageNow(device->GetPendingCommandList(), mTextureUsage);
+        ComPtr<ID3D12GraphicsCommandList> d3d12PendingCommandList;
+        DAWN_TRY_ASSIGN(d3d12PendingCommandList, device->GetPendingCommandList());
 
-        DAWN_TRY(device->ExecuteCommandList(nullptr));
+        // Perform the necessary transition for the texture to be presented.
+        ToBackend(texture)->TransitionUsageNow(d3d12PendingCommandList.Get(), mTextureUsage);
+
+        DAWN_TRY(device->ExecuteCommandContext(nullptr));
 
         return {};
     }
