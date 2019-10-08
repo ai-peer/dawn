@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "28e2da14_5a528a70",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-08T00:27:06Z",
+      "side": 1,
+      "message": "Actually, I have QueueD3D12 converted on my local machine. If you\u0027d like for me to make it be part of this change, I\u0027m happy to do that.",
+      "parentUuid": "1961a202_7467499e",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 183,
+        "endChar": 41
+      },
+      "revId": "163422e158cf4048b7a8669d3772b449801a49c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7f55ce0_8642cb50",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 1
