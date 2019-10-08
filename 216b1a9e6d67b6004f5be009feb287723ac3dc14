@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "158a785e_e483ce12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T07:56:19Z",
+      "side": 1,
+      "message": "This is no longer the case.",
+      "range": {
+        "startLine": 12,
+        "startChar": 34,
+        "endLine": 12,
+        "endChar": 53
+      },
+      "revId": "216b1a9e6d67b6004f5be009feb287723ac3dc14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37cd4be0_af90fb92",
+        "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T07:56:19Z",
+      "side": 1,
+      "message": "nit: stray comment, remove it?",
+      "revId": "216b1a9e6d67b6004f5be009feb287723ac3dc14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
