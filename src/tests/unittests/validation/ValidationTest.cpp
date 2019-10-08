@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "dawn/dawn.h"
+#include "dawn_native/Device.h"
 #include "dawn_native/NullBackend.h"
 
 ValidationTest::ValidationTest() {
@@ -39,12 +40,13 @@ ValidationTest::ValidationTest() {
     DawnProcTable procs = dawn_native::GetProcs();
     dawnSetProcs(&procs);
 
-    device = CreateDeviceFromAdapter(adapter, std::vector<const char*>());
+    device = CreateDeviceFromAdapter(adapter);
 }
 
 dawn::Device ValidationTest::CreateDeviceFromAdapter(
     dawn_native::Adapter adapterToTest,
-    const std::vector<const char*>& requiredExtensions) {
+    const std::vector<const char*>& requiredExtensions,
+    const std::vector<const char*>& enabledToggles) {
     dawn::Device deviceToTest;
 
     // Always keep the code path to test creating a device without a device descriptor.
@@ -53,6 +55,7 @@ dawn::Device ValidationTest::CreateDeviceFromAdapter(
     } else {
         dawn_native::DeviceDescriptor descriptor;
         descriptor.requiredExtensions = requiredExtensions;
+        descriptor.forceEnabledToggles = enabledToggles;
         deviceToTest = dawn::Device::Acquire(adapterToTest.CreateDevice(&descriptor));
     }
 
