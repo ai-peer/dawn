@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a9bd733a_574085ea",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-08T02:02:07Z",
+      "side": 1,
+      "message": "OK, this caused a little more churn than expected but it has reduced the number of places where we needlessly AddRef/Release objects. \n\nWe should do a followon change that further eliminates ComPtr from function parameters that do not take ownership of objects.",
+      "parentUuid": "408ca473_9cecb30a",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28861c4e_3a319865",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 4
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Oops, sorry, I meant move Device::GetPendingCommandList into *CommandRecordingContext*.",
       "parentUuid": "d5f1277d_996fae84",
+      "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1de866dc_f3f0c24b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-08T02:02:07Z",
+      "side": 1,
+      "message": "CommandRecordingContext is meant to encapsulate one commandlist, not more than one. In the current code, the pending command list is owned by the device. Each queue owns a command list of its own. My CL wasn\u0027t meant to change the lifetimes of the existing command lists.\n\nIs unifying the pending and queue command list something that is desired?",
+      "parentUuid": "92518570_18aafeee",
       "revId": "591dfdeb10a2a21e5b7b204f4159b010ebf73101",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
