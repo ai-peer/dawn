@@ -270,44 +270,52 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    Texture::Texture(Device* device, const TextureDescriptor* descriptor)
-        : TextureBase(device, descriptor, TextureState::OwnedInternal) {
+    ResultOrError<TextureBase*> Texture::Create(Device* device,
+                                                const TextureDescriptor* descriptor) {
         D3D12_RESOURCE_DESC resourceDescriptor;
-        resourceDescriptor.Dimension = D3D12TextureDimension(GetDimension());
+        resourceDescriptor.Dimension = D3D12TextureDimension(descriptor->dimension);
         resourceDescriptor.Alignment = 0;
 
-        const Extent3D& size = GetSize();
+        const Extent3D& size = descriptor->size;
         resourceDescriptor.Width = size.width;
         resourceDescriptor.Height = size.height;
 
-        resourceDescriptor.DepthOrArraySize = GetDepthOrArraySize();
-        resourceDescriptor.MipLevels = static_cast<UINT16>(GetNumMipLevels());
-        resourceDescriptor.Format = D3D12TextureFormat(GetFormat().format);
+        resourceDescriptor.DepthOrArraySize = descriptor->arrayLayerCount;
+        resourceDescriptor.MipLevels = static_cast<UINT16>(descriptor->mipLevelCount);
+        resourceDescriptor.Format = D3D12TextureFormat(descriptor->format);
         resourceDescriptor.SampleDesc.Count = descriptor->sampleCount;
         // TODO(bryan.bernhart@intel.com): investigate how to specify standard MSAA sample pattern.
         resourceDescriptor.SampleDesc.Quality = 0;
         resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
-        resourceDescriptor.Flags =
-            D3D12ResourceFlags(GetUsage(), GetFormat(), IsMultisampledTexture());
+        resourceDescriptor.Flags = D3D12ResourceFlags(
+            descriptor->usage, device->GetValidInternalFormat(descriptor->format),
+            descriptor->sampleCount > 1);
 
-        mResource = ToBackend(GetDevice())
-                        ->GetResourceAllocator()
-                        ->Allocate(D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor,
-                                   D3D12_RESOURCE_STATE_COMMON);
+        ComPtr<ID3D12Resource> d3d12Resource = device->GetResourceAllocator()->Allocate(
+            D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor, D3D12_RESOURCE_STATE_COMMON);
+
+        Ref<Texture> dawnTexture = AcquireRef(new Texture(
+            device, descriptor, std::move(d3d12Resource), TextureState::OwnedInternal, false));
 
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            device->ConsumedError(ClearTexture(device->GetPendingCommandList(), 0,
-                                               GetNumMipLevels(), 0, GetArrayLayers(),
-                                               TextureBase::ClearValue::NonZero));
+            ComPtr<ID3D12GraphicsCommandList> d3d12PendingCommandList;
+            DAWN_TRY_ASSIGN(d3d12PendingCommandList, device->GetPendingCommandList());
+
+            DAWN_TRY(dawnTexture->ClearTexture(
+                std::move(d3d12PendingCommandList), 0, descriptor->mipLevelCount, 0,
+                descriptor->arrayLayerCount, TextureBase::ClearValue::NonZero));
         }
+
+        return dawnTexture.Detach();
     }
 
-    // With this constructor, the lifetime of the ID3D12Resource is externally managed.
     Texture::Texture(Device* device,
                      const TextureDescriptor* descriptor,
-                     ID3D12Resource* nativeTexture)
-        : TextureBase(device, descriptor, TextureState::OwnedExternal), mResource(nativeTexture) {
-        SetIsSubresourceContentInitialized(true, 0, descriptor->mipLevelCount, 0,
+                     ComPtr<ID3D12Resource> nativeTexture,
+                     TextureState textureState,
+                     bool isInitialized)
+        : TextureBase(device, descriptor, textureState), mResource(std::move(nativeTexture)) {
+        SetIsSubresourceContentInitialized(isInitialized, 0, descriptor->mipLevelCount, 0,
                                            descriptor->arrayLayerCount);
     }
 
