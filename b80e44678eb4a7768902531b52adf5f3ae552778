@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d865106e_97b61366",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-08T01:53:35Z",
+      "side": 1,
+      "message": "Hm, if heapInfo-\u003eallocator.Allocate returned something larger than UINT32_MAX, this wouldn\u0027t be a valid cast. Perhaps Bryan can take a closer look? It seems maybe DescriptorHeapHandle should take a size_t.",
+      "revId": "b80e44678eb4a7768902531b52adf5f3ae552778",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
