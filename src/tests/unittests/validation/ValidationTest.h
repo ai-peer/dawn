@@ -15,13 +15,14 @@
 #ifndef TESTS_UNITTESTS_VALIDATIONTEST_H_
 #define TESTS_UNITTESTS_VALIDATIONTEST_H_
 
-#include "gtest/gtest.h"
 #include "dawn/dawncpp.h"
 #include "dawn_native/DawnNative.h"
+#include "dawn_native/Toggles.h"
+#include "gtest/gtest.h"
 
 #define ASSERT_DEVICE_ERROR(statement) \
-    StartExpectDeviceError(); \
-    statement; \
+    StartExpectDeviceError();          \
+    statement;                         \
     ASSERT_TRUE(EndExpectDeviceError());
 
 class ValidationTest : public testing::Test {
@@ -30,7 +31,8 @@ class ValidationTest : public testing::Test {
     ~ValidationTest();
 
     dawn::Device CreateDeviceFromAdapter(dawn_native::Adapter adapter,
-                                         const std::vector<const char*>& requiredExtensions);
+                                         const std::vector<const char*>& requiredExtensions = {},
+                                         const std::vector<const char*>& enabledToggles = {});
 
     void TearDown() override;
 
@@ -64,4 +66,4 @@ class ValidationTest : public testing::Test {
     bool mError = false;
 };
 
-#endif // TESTS_UNITTESTS_VALIDATIONTEST_H_
+#endif  // TESTS_UNITTESTS_VALIDATIONTEST_H_
