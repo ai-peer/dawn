@@ -321,3 +321,35 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
         }
     }
 }
+
+// Tests that the creation of the render pipeline object should fail when the shader module is null,
+// DAWN_ENABLE_ASSERTS is defined and Toggle::ReportErrorOnNullptrObjectInDeviceValidateObject is
+// set.
+#if defined(DAWN_ENABLE_ASSERTS)
+TEST_F(RenderPipelineValidationTest, UseNullShaderModule) {
+    std::vector<const char*> forceEnabledToggles(
+        {"report_error_on_nullptr_object_in_device_validate_object"});
+    dawn::Device deviceWithToggle = CreateDeviceFromAdapter(adapter, {}, forceEnabledToggles);
+
+    // Setting the vertex shader module to nullptr in the render pipeline object should cause an
+    // error.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(deviceWithToggle);
+        descriptor.vertexStage.module = nullptr;
+        descriptor.cFragmentStage.module = fsModule;
+
+        ASSERT_DEVICE_ERROR(deviceWithToggle.CreateRenderPipeline(&descriptor));
+    }
+
+    // Setting the fragment shader module to nullptr in the render pipeline object should cause an
+    // error.
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(deviceWithToggle);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = nullptr;
+        descriptor.cFragmentStage.entryPoint = "main";
+
+        ASSERT_DEVICE_ERROR(deviceWithToggle.CreateRenderPipeline(&descriptor));
+    }
+}
+#endif
