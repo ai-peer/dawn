@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "390d2d08_d9a8c5ec",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-08T02:25:35Z",
+      "side": 1,
+      "message": "Not to cause more churn, but maybe it would make sense to return a raw pointer here too. Semantically it almost makes sense to return a ComPtr, but in practice it wouldn\u0027t stay valid for very long anyway - IIUC, CommandRecordingContext::Open resets the command list itself and so would break any held-onto results from Close().",
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
