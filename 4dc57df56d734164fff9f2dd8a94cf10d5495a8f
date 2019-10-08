@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "03172de3_e2ce46a7",
+        "filename": "src/dawn_native/RefCounted.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T08:34:49Z",
+      "side": 1,
+      "message": "Rename to `Release` to match dawn::ObjectBase and unique_ptr?",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 17
+      },
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "390d2d08_d9a8c5ec",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 5
@@ -13,6 +36,63 @@
       "writtenOn": "2019-10-08T02:25:35Z",
       "side": 1,
       "message": "Not to cause more churn, but maybe it would make sense to return a raw pointer here too. Semantically it almost makes sense to return a ComPtr, but in practice it wouldn\u0027t stay valid for very long anyway - IIUC, CommandRecordingContext::Open resets the command list itself and so would break any held-onto results from Close().",
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f87a9bb_1196664b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T08:34:49Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74cef058_a440e632",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T08:34:49Z",
+      "side": 1,
+      "message": "Why does this need to be a member (apart from the fact the code before had it this way)? It seems like the command recording context could be mostly transient in SubmitImpl.\n\nAlternatively, like in the Vulkan backend, the Device can always have a CommandRecordingContext available that is exposed via GetCommandRecordingContext. This way in [1] we don\u0027t have to handle potentially two command recording context: there is only the \"current device recording context\". WDYT? This would also remove the need for MaybeError on GetPendingCommandList because there would always be a CommandRecordingContext open (its creation can only fail at Device init or at the end of ExecutePendingCommandRecordingContext)",
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "374a28ba_ce0f1b78",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T08:34:49Z",
+      "side": 1,
+      "message": "nit: Having Texture::Create like in this CL would avoid the need to duplicate this logic https://dawn-review.googlesource.com/c/dawn/+/11861",
+      "range": {
+        "startLine": 291,
+        "startChar": 31,
+        "endLine": 292,
+        "endChar": 39
+      },
       "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
