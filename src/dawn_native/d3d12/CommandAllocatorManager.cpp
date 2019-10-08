@@ -14,6 +14,7 @@
 
 #include "dawn_native/d3d12/CommandAllocatorManager.h"
 
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 #include "common/Assert.h"
@@ -30,7 +31,7 @@ namespace dawn_native { namespace d3d12 {
         // If there are no free allocators, get the oldest serial in flight and wait on it
         if (mFreeAllocators.none()) {
             const uint64_t firstSerial = mInFlightCommandAllocators.FirstSerial();
-            device->WaitForSerial(firstSerial);
+            device->ConsumedError(device->WaitForSerial(firstSerial));
             Tick(firstSerial);
         }
 
@@ -42,8 +43,11 @@ namespace dawn_native { namespace d3d12 {
         if (firstFreeIndex >= mAllocatorCount) {
             ASSERT(firstFreeIndex == mAllocatorCount);
             mAllocatorCount++;
-            ASSERT_SUCCESS(device->GetD3D12Device()->CreateCommandAllocator(
-                D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&mCommandAllocators[firstFreeIndex])));
+            device->ConsumedError(
+                CheckHRESULT((device->GetD3D12Device()->CreateCommandAllocator(
+                                 D3D12_COMMAND_LIST_TYPE_DIRECT,
+                                 IID_PPV_ARGS(&mCommandAllocators[firstFreeIndex]))),
+                             "D3D12 get device"));
         }
 
         // Mark the command allocator as used
@@ -60,7 +64,10 @@ namespace dawn_native { namespace d3d12 {
     void CommandAllocatorManager::Tick(uint64_t lastCompletedSerial) {
         // Reset all command allocators that are no longer in flight
         for (auto it : mInFlightCommandAllocators.IterateUpTo(lastCompletedSerial)) {
-            ASSERT_SUCCESS(it.commandAllocator->Reset());
+            if (device->ConsumedError(
+                    CheckHRESULT(it.commandAllocator->Reset(), "D3D12 reset command allocator"))) {
+                return;
+            }
             mFreeAllocators.set(it.index);
         }
         mInFlightCommandAllocators.ClearUpTo(lastCompletedSerial);

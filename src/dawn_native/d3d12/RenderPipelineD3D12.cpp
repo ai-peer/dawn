@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 
 #include "common/Assert.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
@@ -391,8 +392,9 @@ namespace dawn_native { namespace d3d12 {
         descriptorD3D12.SampleDesc.Count = GetSampleCount();
         descriptorD3D12.SampleDesc.Quality = 0;
 
-        ASSERT_SUCCESS(device->GetD3D12Device()->CreateGraphicsPipelineState(
-            &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)));
+        device->ConsumedError(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
+                                               &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
+                                           "D3D12 create graphics pipeline state"));
     }
 
     RenderPipeline::~RenderPipeline() {

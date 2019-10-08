@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
 
 #include "common/Assert.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 
@@ -71,15 +72,19 @@ namespace dawn_native { namespace d3d12 {
         swapChainDesc.SampleDesc.Quality = 0;
 
         ComPtr<IDXGISwapChain1> swapChain1;
-        ASSERT_SUCCESS(factory->CreateSwapChainForHwnd(queue.Get(), mWindow, &swapChainDesc,
-                                                       nullptr, nullptr, &swapChain1));
+        mDevice->ConsumedError(
+            CheckHRESULT(factory->CreateSwapChainForHwnd(queue.Get(), mWindow, &swapChainDesc,
+                                                         nullptr, nullptr, &swapChain1),
+                         "D3D12 create swapchain for Hwnd"));
 
-        ASSERT_SUCCESS(swapChain1.As(&mSwapChain));
+        mDevice->ConsumedError(CheckHRESULT(swapChain1.As(&mSwapChain), "D3D12 assign swapchain"));
 
         // Gather the resources that will be used to present to the swapchain
         mBuffers.resize(kFrameCount);
         for (uint32_t i = 0; i < kFrameCount; ++i) {
-            ASSERT_SUCCESS(mSwapChain->GetBuffer(i, IID_PPV_ARGS(&mBuffers[i])));
+            mDevice->ConsumedError(
+                CheckHRESULT(mSwapChain->GetBuffer(i, IID_PPV_ARGS(&mBuffers[i])),
+                             "D3D12 swapchain get buffer"));
         }
 
         // Set the initial serial of buffers to 0 so that we don't wait on them when they are first
@@ -95,7 +100,7 @@ namespace dawn_native { namespace d3d12 {
 
         // TODO(cwallez@chromium.org) Currently we force the CPU to wait for the GPU to be finished
         // with the buffer. Ideally the synchronization should be all done on the GPU.
-        mDevice->WaitForSerial(mBufferSerials[mCurrentBuffer]);
+        mDevice->ConsumedError(mDevice->WaitForSerial(mBufferSerials[mCurrentBuffer]));
 
         return DAWN_SWAP_CHAIN_NO_ERROR;
     }
@@ -103,9 +108,9 @@ namespace dawn_native { namespace d3d12 {
     DawnSwapChainError NativeSwapChainImpl::Present() {
         // This assumes the texture has already been transition to the PRESENT state.
 
-        ASSERT_SUCCESS(mSwapChain->Present(1, 0));
+        mDevice->ConsumedError(CheckHRESULT(mSwapChain->Present(1, 0), "D3D12 swapchain present"));
         // TODO(cwallez@chromium.org): Make the serial ticking implicit.
-        mDevice->NextSerial();
+        mDevice->ConsumedError(mDevice->NextSerial());
 
         mBufferSerials[mCurrentBuffer] = mDevice->GetPendingCommandSerial();
         return DAWN_SWAP_CHAIN_NO_ERROR;

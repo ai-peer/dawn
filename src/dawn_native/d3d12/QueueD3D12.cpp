@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/QueueD3D12.h"
 
 #include "dawn_native/d3d12/CommandBufferD3D12.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -31,12 +32,15 @@ namespace dawn_native { namespace d3d12 {
         for (uint32_t i = 0; i < commandCount; ++i) {
             DAWN_TRY(ToBackend(commands[i])->RecordCommands(mCommandList, i));
         }
-        ASSERT_SUCCESS(mCommandList->Close());
+        MaybeError closeCommandListResult =
+            CheckHRESULT(mCommandList->Close(), "D3D12 close command list");
+        if (closeCommandListResult.IsError()) {
+            return closeCommandListResult;
+        }
 
         DAWN_TRY(device->ExecuteCommandList(mCommandList.Get()));
 
-        device->NextSerial();
-        return {};
+        return device->NextSerial();
     }
 
 }}  // namespace dawn_native::d3d12

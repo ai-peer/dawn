@@ -25,6 +25,7 @@
 #include "dawn_native/d3d12/CommandAllocatorManager.h"
 #include "dawn_native/d3d12/CommandBufferD3D12.h"
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
@@ -57,10 +58,21 @@ namespace dawn_native { namespace d3d12 {
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
         queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
-        ASSERT_SUCCESS(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)));
+        MaybeError createCommandQueueResult =
+            CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+                         "D3D12 create command queue");
+        if (createCommandQueueResult.IsError()) {
+            return createCommandQueueResult;
+        }
 
-        ASSERT_SUCCESS(mD3d12Device->CreateFence(mLastSubmittedSerial, D3D12_FENCE_FLAG_NONE,
-                                                 IID_PPV_ARGS(&mFence)));
+        MaybeError createFenceResult =
+            CheckHRESULT(mD3d12Device->CreateFence(mLastSubmittedSerial, D3D12_FENCE_FLAG_NONE,
+                                                   IID_PPV_ARGS(&mFence)),
+                         "D3D12 create fence");
+        if (createFenceResult.IsError()) {
+            return createFenceResult;
+        }
+
         mFenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
         ASSERT(mFenceEvent != nullptr);
 
@@ -71,7 +83,10 @@ namespace dawn_native { namespace d3d12 {
         mResourceAllocator = std::make_unique<ResourceAllocator>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
-        NextSerial();
+        MaybeError nextSerialResult = NextSerial();
+        if (nextSerialResult.IsError()) {
+            return nextSerialResult;
+        }
 
         // Initialize indirect commands
         D3D12_INDIRECT_ARGUMENT_DESC argumentDesc = {};
@@ -107,8 +122,9 @@ namespace dawn_native { namespace d3d12 {
             mPendingCommands.open = false;
             mPendingCommands.commandList = nullptr;
         }
-        NextSerial();
-        WaitForSerial(mLastSubmittedSerial);  // Wait for all in-flight commands to finish executing
+        ConsumedError(NextSerial());
+        ConsumedError(WaitForSerial(
+            mLastSubmittedSerial));  // Wait for all in-flight commands to finish executing
 
         // Call tick one last time so resources are cleaned up. Ignore the return value so we can
         // continue shutting down in an orderly fashion.
@@ -180,13 +196,16 @@ namespace dawn_native { namespace d3d12 {
     void Device::OpenCommandList(ComPtr<ID3D12GraphicsCommandList>* commandList) {
         ComPtr<ID3D12GraphicsCommandList>& cmdList = *commandList;
         if (!cmdList) {
-            ASSERT_SUCCESS(mD3d12Device->CreateCommandList(
-                0, D3D12_COMMAND_LIST_TYPE_DIRECT,
-                mCommandAllocatorManager->ReserveCommandAllocator().Get(), nullptr,
-                IID_PPV_ARGS(&cmdList)));
+            ConsumedError(
+                CheckHRESULT(mD3d12Device->CreateCommandList(
+                                 0, D3D12_COMMAND_LIST_TYPE_DIRECT,
+                                 mCommandAllocatorManager->ReserveCommandAllocator().Get(), nullptr,
+                                 IID_PPV_ARGS(&cmdList)),
+                             "D3D12 create command list"));
         } else {
-            ASSERT_SUCCESS(
-                cmdList->Reset(mCommandAllocatorManager->ReserveCommandAllocator().Get(), nullptr));
+            ConsumedError(CheckHRESULT(
+                cmdList->Reset(mCommandAllocatorManager->ReserveCommandAllocator().Get(), nullptr),
+                "D3D12 reset command list"));
         }
     }
 
@@ -226,22 +245,26 @@ namespace dawn_native { namespace d3d12 {
         mMapRequestTracker->Tick(mCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
         DAWN_TRY(ExecuteCommandList(nullptr));
-        NextSerial();
-
-        return {};
+        return NextSerial();
     }
 
-    void Device::NextSerial() {
+    MaybeError Device::NextSerial() {
         mLastSubmittedSerial++;
-        ASSERT_SUCCESS(mCommandQueue->Signal(mFence.Get(), mLastSubmittedSerial));
+        return CheckHRESULT(mCommandQueue->Signal(mFence.Get(), mLastSubmittedSerial),
+                            "D3D12 command queue signal fence");
     }
 
-    void Device::WaitForSerial(uint64_t serial) {
+    MaybeError Device::WaitForSerial(uint64_t serial) {
         mCompletedSerial = mFence->GetCompletedValue();
         if (mCompletedSerial < serial) {
-            ASSERT_SUCCESS(mFence->SetEventOnCompletion(serial, mFenceEvent));
+            MaybeError result = CheckHRESULT(mFence->SetEventOnCompletion(serial, mFenceEvent),
+                                             "D3D12 set event on completion");
+            if (result.IsError()) {
+                return result;
+            }
             WaitForSingleObject(mFenceEvent, INFINITE);
         }
+        return {};
     }
 
     void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
