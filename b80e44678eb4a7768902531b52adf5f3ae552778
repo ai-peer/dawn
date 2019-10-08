@@ -16,6 +16,24 @@
       "revId": "b80e44678eb4a7768902531b52adf5f3ae552778",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85bedbec_c7761b04",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-08T07:47:17Z",
+      "side": 1,
+      "message": "This was fixed in https://dawn-review.googlesource.com/c/dawn/+/11960 with a followup to do that updates the offset types to avoid overflows.",
+      "parentUuid": "d865106e_97b61366",
+      "revId": "b80e44678eb4a7768902531b52adf5f3ae552778",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
