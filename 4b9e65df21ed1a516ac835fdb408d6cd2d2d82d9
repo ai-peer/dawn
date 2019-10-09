@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f69ada2_e51a9762",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-09T19:27:15Z",
+      "side": 1,
+      "message": "Note: This is getting a little scary. Recording command buffers has side effects, like marking stuff as cleared. If it turns out we never execute the recordingContext-\u003ecommandBuffer because of an error, it better be a DEVICE_LOST error so everything stops immediately.\n\nSome initial thoughts:\n\n1) We could try to \"undo\" marking resources as initialized, and any other assumptions based on successful command buffer execution\n2) We could store pending side-effects-to-apply on the CommandRecordingContext and then apply them on successful submission.\n3) We could make sure all errors are fatal. (This is currently true)\n\nWhat do you think?",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 64
+      },
+      "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
