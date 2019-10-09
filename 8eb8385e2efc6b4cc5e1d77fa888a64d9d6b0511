@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7046d7c9_fbff893b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T01:28:46Z",
+      "side": 0,
+      "message": "I was going to tackle introducing the recording context to TransitionUsageNow and friends in a subsequent change. \n\nI will add it now.",
+      "parentUuid": "c6466b08_a0958180",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "8eb8385e2efc6b4cc5e1d77fa888a64d9d6b0511",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37fa3a2b_d23bf210",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5

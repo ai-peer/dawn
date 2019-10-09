@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "b505d6c1_e270d78e",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T01:28:46Z",
+      "side": 1,
+      "message": "The documentation for Reset says that calling Reset is preferred over re-creating the command list because you can reuse command list tracking structures. So we do not want to make commandlist creation be a transient operation.\n\nI originally moved the opening of pending command list to device initialization but that caused problems in cases where nobody used it because resetting the command allocator would fail if there existing command lists opened. This is why I changed GetPendingCommandList to return an error.\n\nI will try removing the CommandRecordingContext out of the queue such that we only have one recording context in the device like the Vulkan backend does.",
+      "parentUuid": "74cef058_a440e632",
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "374a28ba_ce0f1b78",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
