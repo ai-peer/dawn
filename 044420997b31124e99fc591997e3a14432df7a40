@@ -34,6 +34,24 @@
       "revId": "044420997b31124e99fc591997e3a14432df7a40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f13eda6_cd5d6120",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T16:16:39Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation, agreed that doing glfw init in a static initializer sounds gross.",
+      "parentUuid": "837c0243_f58706d4",
+      "revId": "044420997b31124e99fc591997e3a14432df7a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
