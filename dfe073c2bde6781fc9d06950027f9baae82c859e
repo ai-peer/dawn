@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1e610859_eaeadbec",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-09T02:35:14Z",
+      "side": 1,
+      "message": "drive-by (haven\u0027t reviewed the code yet): Apparently FormatMessage can do this:\nhttps://stackoverflow.com/a/455533",
+      "parentUuid": "5e600b9b_3c7067d2",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 0
+      },
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e21f2e2e_6d3bec26",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 2
