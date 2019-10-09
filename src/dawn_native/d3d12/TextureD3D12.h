@@ -31,17 +31,19 @@ namespace dawn_native { namespace d3d12 {
 
     class Texture : public TextureBase {
       public:
-        Texture(Device* device, const TextureDescriptor* descriptor);
-        Texture(Device* device, const TextureDescriptor* descriptor, ID3D12Resource* nativeTexture);
+        static ResultOrError<TextureBase*> Create(Device* device,
+                                                  const TextureDescriptor* descriptor);
+        Texture(Device* device,
+                const TextureDescriptor* descriptor,
+                ComPtr<ID3D12Resource> nativeTexture);
         ~Texture();
 
         DXGI_FORMAT GetD3D12Format() const;
         ID3D12Resource* GetD3D12Resource() const;
         bool TransitionUsageAndGetResourceBarrier(D3D12_RESOURCE_BARRIER* barrier,
                                                   dawn::TextureUsage newUsage);
-        void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
-                                dawn::TextureUsage usage);
-        void TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
+        void TransitionUsageNow(ID3D12GraphicsCommandList* commandList, dawn::TextureUsage usage);
+        void TransitionUsageNow(ID3D12GraphicsCommandList* commandList,
                                 D3D12_RESOURCE_STATES newState);
 
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(uint32_t baseMipLevel,
@@ -55,6 +57,9 @@ namespace dawn_native { namespace d3d12 {
                                                  uint32_t layerCount);
 
       private:
+        Texture(Device* device, const TextureDescriptor* descriptor);
+        MaybeError InitializeAsInternalTexture();
+
         // Dawn API
         void DestroyImpl() override;
         MaybeError ClearTexture(ComPtr<ID3D12GraphicsCommandList> commandList,

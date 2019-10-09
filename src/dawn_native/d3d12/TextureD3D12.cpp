@@ -270,8 +270,18 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    ResultOrError<TextureBase*> Texture::Create(Device* device,
+                                                const TextureDescriptor* descriptor) {
+        Ref<Texture> dawnTexture = AcquireRef(new Texture(device, descriptor));
+        DAWN_TRY(dawnTexture->InitializeAsInternalTexture());
+        return dawnTexture.Detach();
+    }
+
     Texture::Texture(Device* device, const TextureDescriptor* descriptor)
         : TextureBase(device, descriptor, TextureState::OwnedInternal) {
+    }
+
+    MaybeError Texture::InitializeAsInternalTexture() {
         D3D12_RESOURCE_DESC resourceDescriptor;
         resourceDescriptor.Dimension = D3D12TextureDimension(GetDimension());
         resourceDescriptor.Alignment = 0;
@@ -283,7 +293,7 @@ namespace dawn_native { namespace d3d12 {
         resourceDescriptor.DepthOrArraySize = GetDepthOrArraySize();
         resourceDescriptor.MipLevels = static_cast<UINT16>(GetNumMipLevels());
         resourceDescriptor.Format = D3D12TextureFormat(GetFormat().format);
-        resourceDescriptor.SampleDesc.Count = descriptor->sampleCount;
+        resourceDescriptor.SampleDesc.Count = GetSampleCount();
         // TODO(bryan.bernhart@intel.com): investigate how to specify standard MSAA sample pattern.
         resourceDescriptor.SampleDesc.Quality = 0;
         resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
@@ -295,18 +305,25 @@ namespace dawn_native { namespace d3d12 {
                         ->Allocate(D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor,
                                    D3D12_RESOURCE_STATE_COMMON);
 
+        Device* device = ToBackend(GetDevice());
+
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            device->ConsumedError(ClearTexture(device->GetPendingCommandList(), 0,
-                                               GetNumMipLevels(), 0, GetArrayLayers(),
-                                               TextureBase::ClearValue::NonZero));
+            ID3D12GraphicsCommandList* d3d12PendingCommandList;
+            DAWN_TRY_ASSIGN(d3d12PendingCommandList, device->GetPendingCommandList());
+
+            DAWN_TRY(ClearTexture(d3d12PendingCommandList, 0, GetNumMipLevels(), 0,
+                                  GetArrayLayers(), TextureBase::ClearValue::NonZero));
         }
+
+        return {};
     }
 
     // With this constructor, the lifetime of the ID3D12Resource is externally managed.
     Texture::Texture(Device* device,
                      const TextureDescriptor* descriptor,
-                     ID3D12Resource* nativeTexture)
-        : TextureBase(device, descriptor, TextureState::OwnedExternal), mResource(nativeTexture) {
+                     ComPtr<ID3D12Resource> nativeTexture)
+        : TextureBase(device, descriptor, TextureState::OwnedExternal),
+          mResource(std::move(nativeTexture)) {
         SetIsSubresourceContentInitialized(true, 0, descriptor->mipLevelCount, 0,
                                            descriptor->arrayLayerCount);
     }
@@ -417,12 +434,12 @@ namespace dawn_native { namespace d3d12 {
         return true;
     }
 
-    void Texture::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
+    void Texture::TransitionUsageNow(ID3D12GraphicsCommandList* commandList,
                                      dawn::TextureUsage usage) {
         TransitionUsageNow(commandList, D3D12TextureUsage(usage, GetFormat()));
     }
 
-    void Texture::TransitionUsageNow(ComPtr<ID3D12GraphicsCommandList> commandList,
+    void Texture::TransitionUsageNow(ID3D12GraphicsCommandList* commandList,
                                      D3D12_RESOURCE_STATES newState) {
         D3D12_RESOURCE_BARRIER barrier;
 
@@ -493,7 +510,7 @@ namespace dawn_native { namespace d3d12 {
         uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
         if (GetFormat().isRenderable) {
             if (GetFormat().HasDepthOrStencil()) {
-                TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_DEPTH_WRITE);
+                TransitionUsageNow(commandList.Get(), D3D12_RESOURCE_STATE_DEPTH_WRITE);
                 DescriptorHeapHandle dsvHeap;
                 DAWN_TRY_ASSIGN(dsvHeap, descriptorHeapAllocator->AllocateCPUHeap(
                                              D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1));
@@ -513,7 +530,7 @@ namespace dawn_native { namespace d3d12 {
                 commandList->ClearDepthStencilView(dsvHandle, clearFlags, clearColor, clearColor, 0,
                                                    nullptr);
             } else {
-                TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_RENDER_TARGET);
+                TransitionUsageNow(commandList.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET);
                 DescriptorHeapHandle rtvHeap;
                 DAWN_TRY_ASSIGN(rtvHeap, descriptorHeapAllocator->AllocateCPUHeap(
                                              D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 1));
@@ -548,7 +565,7 @@ namespace dawn_native { namespace d3d12 {
                       reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize),
                       clearColor);
 
-            TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_COPY_DEST);
+            TransitionUsageNow(commandList.Get(), D3D12_RESOURCE_STATE_COPY_DEST);
 
             // compute d3d12 texture copy locations for texture and buffer
             Extent3D copySize = {GetSize().width, GetSize().height, 1};
