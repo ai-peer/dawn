@@ -2,6 +2,97 @@
   "comments": [
     {
       "key": {
+        "uuid": "0ee5dd22_1dbb5c75",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "You can use DAWN_TRY(CheckHRESULT(stuff))",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 9
+      },
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62a892bd_b78d9fa2",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "ditto DAWN_TRY(CheckHRESULT(stuff))",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69b06cdb_1994f0d1",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "Ideally we don\u0027t use ConsumedError in the backends and everything boils up to the frontend. This one is fine because I think it will be handled by Rafael as part of the CommandRecordingContext CL.",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfb0cefa_549b9347",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a897cdcb_3e99bf39",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "ditto. For example for this one you could make Tick return a MaybeError and DAWN_TRY() it in Device::TickImpl.",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e600b9b_3c7067d2",
         "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
         "patchSetId": 2
@@ -95,6 +186,23 @@
     },
     {
       "key": {
+        "uuid": "240c73d8_813724c9",
+        "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "ditto here and below, avoid ConsumedError.",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "19739f8a_f6565739",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 2
@@ -112,6 +220,74 @@
         "endLine": 161,
         "endChar": 0
       },
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4233f0f5_1858bb33",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "ditto DAWN_TRY(CheckHRESULT(stuff))",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc9b5281_94c2c4a6",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "Uh returning a u64 for MaybeError shouldn\u0027t work.",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f32f1dc_9c188f0d",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dca01e5_74347877",
+        "filename": "src/dawn_native/d3d12/ResourceAllocator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T08:32:44Z",
+      "side": 1,
+      "message": "Ditto, we should avoid ConsumedError.",
       "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
