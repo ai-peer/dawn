@@ -16,6 +16,24 @@
       "revId": "044420997b31124e99fc591997e3a14432df7a40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "837c0243_f58706d4",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-09T16:12:37Z",
+      "side": 1,
+      "message": "I spent a long time trying to do this but never really succeeded. IsBackendAvailable is called in the static initialization of DAWN_INSTANTIATE_TEST_SUITE. So we don\u0027t get a chance to make the backends unavailable because it runs before any test or test environment constructor or SetUp().\n\nMaybe we could glfwInit() in a static initializer as well, but that sounds gross.\n\nThat being said, I would like to come back to this at some point to see if there\u0027s a way to make it work nicely.",
+      "parentUuid": "1a7e2368_0d28bc58",
+      "revId": "044420997b31124e99fc591997e3a14432df7a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
