@@ -358,20 +358,16 @@ namespace dawn_native { namespace d3d12 {
 
         class VertexBufferTracker {
           public:
-            void OnSetVertexBuffers(uint32_t startSlot,
-                                    uint32_t count,
-                                    Ref<BufferBase>* buffers,
-                                    uint64_t* offsets) {
-                mStartSlot = std::min(mStartSlot, startSlot);
-                mEndSlot = std::max(mEndSlot, startSlot + count);
+            void OnSetVertexBuffer(uint32_t slot,
+                                    Buffer* buffer,
+                                    uint64_t offsets) {
+                mStartSlot = std::min(mStartSlot, slot);
+                mEndSlot = std::max(mEndSlot, slot + 1);
 
-                for (uint32_t i = 0; i < count; ++i) {
-                    Buffer* buffer = ToBackend(buffers[i].Get());
-                    auto* d3d12BufferView = &mD3D12BufferViews[startSlot + i];
-                    d3d12BufferView->BufferLocation = buffer->GetVA() + offsets[i];
-                    d3d12BufferView->SizeInBytes = buffer->GetSize() - offsets[i];
-                    // The bufferView stride is set based on the input state before a draw.
-                }
+                auto* d3d12BufferView = &mD3D12BufferViews[slot];
+                d3d12BufferView->BufferLocation = buffer->GetVA() + offset;
+                d3d12BufferView->SizeInBytes = buffer->GetSize() - offset;
+                // The bufferView stride is set based on the input state before a draw.
             }
 
             void Apply(ID3D12GraphicsCommandList* commandList,
@@ -414,7 +410,7 @@ namespace dawn_native { namespace d3d12 {
 
           private:
             // startSlot and endSlot indicate the range of dirty vertex buffers.
-            // If there are multiple calls to SetVertexBuffers, the start and end
+            // If there are multiple calls to SetVertexBuffer, the start and end
             // represent the union of the dirty ranges (the union may have non-dirty
             // data in the middle of the range).
             const RenderPipeline* mLastAppliedRenderPipeline = nullptr;
@@ -1134,12 +1130,9 @@ namespace dawn_native { namespace d3d12 {
                 } break;
 
                 case Command::SetVertexBuffers: {
-                    SetVertexBuffersCmd* cmd = iter->NextCommand<SetVertexBuffersCmd>();
-                    Ref<BufferBase>* buffers = iter->NextData<Ref<BufferBase>>(cmd->count);
-                    uint64_t* offsets = iter->NextData<uint64_t>(cmd->count);
+                    SetVertexBufferCmd* cmd = iter->NextCommand<SetVertexBufferCmd>();
 
-                    vertexBufferTracker.OnSetVertexBuffers(cmd->startSlot, cmd->count, buffers,
-                                                           offsets);
+                    vertexBufferTracker.OnSetVertexBuffer(cmd->slot, ToBackend(cmd->buffer.Get()), cmd->offset);
                 } break;
 
                 default:
