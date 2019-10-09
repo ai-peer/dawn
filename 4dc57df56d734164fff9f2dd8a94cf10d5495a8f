@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "86e56d5b_05783fde",
+        "filename": "src/dawn_native/RefCounted.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T01:51:59Z",
+      "side": 1,
+      "message": "Ref already has a method called Release which decrements the reference count. In order to rename Detach to Release, I need to rename the current Release to DecrementReference or something similar.  \n\nSure that\u0027s what you want?  :-)",
+      "parentUuid": "03172de3_e2ce46a7",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 17
+      },
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "390d2d08_d9a8c5ec",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34b423ee_2989b65f",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T01:51:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "390d2d08_d9a8c5ec",
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
