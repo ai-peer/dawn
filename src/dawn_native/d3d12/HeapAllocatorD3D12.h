@@ -12,29 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_D3D12_COMMITTEDRESOURCEALLOCATORD3D12_H_
-#define DAWNNATIVE_D3D12_COMMITTEDRESOURCEALLOCATORD3D12_H_
+#ifndef DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
+#define DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_
 
-#include "common/SerialQueue.h"
-#include "dawn_native/Error.h"
-#include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
+#include "dawn_native/MemoryAllocator.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
     class Device;
 
-    // Wrapper to allocate D3D12 committed resource.
-    // Committed resources are implicitly backed by a D3D12 heap.
-    class CommittedResourceAllocator {
+    // Wrapper to allocate a D3D12 heap.
+    class HeapAllocator : public MemoryAllocator {
       public:
-        CommittedResourceAllocator(Device* device, D3D12_HEAP_TYPE heapType);
-        ~CommittedResourceAllocator() = default;
+        HeapAllocator(Device* device, D3D12_HEAP_TYPE heapType);
+        ~HeapAllocator() = default;
 
-        ResultOrError<ResourceHeapAllocation> Allocate(
-            const D3D12_RESOURCE_DESC& resourceDescriptor,
-            D3D12_RESOURCE_STATES initialUsage);
-        void Deallocate(ResourceHeapAllocation& allocation);
+        ResultOrError<std::unique_ptr<ResourceHeapBase>> Allocate(uint64_t size,
+                                                                  int memoryFlags) override;
+        void Deallocate(std::unique_ptr<ResourceHeapBase> allocation) override;
 
       private:
         Device* mDevice;
@@ -43,4 +39,4 @@ namespace dawn_native { namespace d3d12 {
 
 }}  // namespace dawn_native::d3d12
 
-#endif  // DAWNNATIVE_D3D12_COMMITTEDRESOURCEALLOCATORD3D12_H_
+#endif  // DAWNNATIVE_D3D12_HEAPALLOCATORD3D12_H_

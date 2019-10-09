@@ -23,8 +23,7 @@ namespace dawn_native { namespace d3d12 {
 
     ResultOrError<ResourceHeapAllocation> CommittedResourceAllocator::Allocate(
         const D3D12_RESOURCE_DESC& resourceDescriptor,
-        D3D12_RESOURCE_STATES initialUsage,
-        D3D12_HEAP_FLAGS heapFlags) {
+        D3D12_RESOURCE_STATES initialUsage) {
         D3D12_HEAP_PROPERTIES heapProperties;
         heapProperties.Type = mHeapType;
         heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
@@ -32,9 +31,11 @@ namespace dawn_native { namespace d3d12 {
         heapProperties.CreationNodeMask = 0;
         heapProperties.VisibleNodeMask = 0;
 
+        // Note: Heap flags are inferred by the resource descriptor and cannot be explicitly
+        // provided to CreateCommittedResource.
         ComPtr<ID3D12Resource> committedResource;
         if (FAILED(mDevice->GetD3D12Device()->CreateCommittedResource(
-                &heapProperties, heapFlags, &resourceDescriptor, initialUsage, nullptr,
+                &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage, nullptr,
                 IID_PPV_ARGS(&committedResource)))) {
             return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate resource");
         }
