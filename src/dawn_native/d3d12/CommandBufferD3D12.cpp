@@ -525,8 +525,10 @@ namespace dawn_native { namespace d3d12 {
                 Texture* resolveTexture = ToBackend(resolveTarget->GetTexture());
 
                 // Transition the usages of the color attachment and resolve target.
-                colorTexture->TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_RESOLVE_SOURCE);
-                resolveTexture->TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_RESOLVE_DEST);
+                colorTexture->TransitionUsageNow(commandList.Get(),
+                                                 D3D12_RESOURCE_STATE_RESOLVE_SOURCE);
+                resolveTexture->TransitionUsageNow(commandList.Get(),
+                                                   D3D12_RESOURCE_STATE_RESOLVE_DEST);
 
                 // Do MSAA resolve with ResolveSubResource().
                 ID3D12Resource* colorTextureHandle = colorTexture->GetD3D12Resource();
@@ -551,7 +553,7 @@ namespace dawn_native { namespace d3d12 {
         FreeCommands(&mCommands);
     }
 
-    MaybeError CommandBuffer::RecordCommands(ComPtr<ID3D12GraphicsCommandList> commandList,
+    MaybeError CommandBuffer::RecordCommands(ID3D12GraphicsCommandList* commandList,
                                              uint32_t indexInSubmit) {
         Device* device = ToBackend(GetDevice());
         BindGroupStateTracker bindingTracker(device);
