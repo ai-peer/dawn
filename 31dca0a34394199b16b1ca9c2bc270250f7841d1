@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0b28da5_393b4fb7",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T14:37:27Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this template anymore. That was needed because we were passing an array of buffers.",
+      "revId": "31dca0a34394199b16b1ca9c2bc270250f7841d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d44da71f_c0293cfd",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T14:37:27Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 559,
+        "startChar": 39,
+        "endLine": 559,
+        "endChar": 59
+      },
+      "revId": "31dca0a34394199b16b1ca9c2bc270250f7841d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2682860_1cf6fd4c",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T14:37:27Z",
+      "side": 1,
+      "message": "This is just 1ull ;)",
+      "range": {
+        "startLine": 151,
+        "startChar": 39,
+        "endLine": 151,
+        "endChar": 59
+      },
+      "revId": "31dca0a34394199b16b1ca9c2bc270250f7841d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad00203d_b89152ec",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T14:37:27Z",
+      "side": 1,
+      "message": "no need for these arrays anymore, we can just store in regular variable and pass pointers to them.",
+      "range": {
+        "startLine": 814,
+        "startChar": 1,
+        "endLine": 816,
+        "endChar": 0
+      },
+      "revId": "31dca0a34394199b16b1ca9c2bc270250f7841d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "436baafe_7c5237af",
+        "filename": "src/tests/end2end/VertexInputTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T14:37:27Z",
+      "side": 1,
+      "message": "nit: spell out \"const DrawVertexBuffer\u0026\"",
+      "range": {
+        "startLine": 202,
+        "startChar": 19,
+        "endLine": 202,
+        "endChar": 23
+      },
+      "revId": "31dca0a34394199b16b1ca9c2bc270250f7841d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
