@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "5594d9ca_6ba608f3",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T20:55:48Z",
+      "side": 1,
+      "message": "Making this change (combining pending and active commandlists) will be more involved than originally though. Mind if we postpone to a subsequent CL?",
+      "parentUuid": "b505d6c1_e270d78e",
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "374a28ba_ce0f1b78",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 5
@@ -180,6 +198,30 @@
       "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7bfa52e_c1c2186e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T20:55:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "374a28ba_ce0f1b78",
+      "range": {
+        "startLine": 291,
+        "startChar": 31,
+        "endLine": 292,
+        "endChar": 39
+      },
+      "revId": "4dc57df56d734164fff9f2dd8a94cf10d5495a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
