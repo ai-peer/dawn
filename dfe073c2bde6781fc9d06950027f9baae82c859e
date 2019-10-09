@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e600b9b_3c7067d2",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T00:28:06Z",
+      "side": 1,
+      "message": "If we\u0027re going to output HRESULT strings, I\u0027d rather output the raw hex value instead of trying to map things to strings like you\u0027ve done. Most of the interesting errors D3D and DXGI return are not in your list and that list is quite substantial. !error in Windbg should give you a better error string that what you have here.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 0
+      },
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e21f2e2e_6d3bec26",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T00:28:06Z",
+      "side": 1,
+      "message": "Instead of what you have here, you should use the DAWN_TRY and DAWN_TRY_ASSIGN macros. Those output improved line numbers information and result in less code at the callsite.\n\nSame goes for all other instances where you explicitly check for IsError.",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 9
+      },
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f84699ea_13a78789",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T00:28:06Z",
+      "side": 1,
+      "message": "I have a CL which eliminates this function altogether. Might be best to wait until that one lands first.\n\nIf we decide to land yours first, then OpenCommandList needs to return MaybeError. Otherwise the caller will use the nullptr out parameter and crash.",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 0
+      },
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19739f8a_f6565739",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-09T00:28:06Z",
+      "side": 1,
+      "message": "This code needs to be pulled out into an Initialize function that is called from a static Create function. \n\nFollow the pattern Corentin started as part of https://dawn-review.googlesource.com/c/dawn/+/11861\n\n(Same goes for other places where you\u0027ve handled resource creation in constructors)",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 0
+      },
+      "revId": "dfe073c2bde6781fc9d06950027f9baae82c859e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
