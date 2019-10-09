@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a7e2368_0d28bc58",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-09T09:58:57Z",
+      "side": 1,
+      "message": "Maybe this should use some precomputed bitmask of which backends are available based on what the dawn_native::Instance has. It would make the list of tests that run match the available backends. (and avoid duplicated and differing logic). It would also avoid the need to support skipping tests when the backend isn\u0027t supported because we know it will be filtered in that case.",
+      "revId": "044420997b31124e99fc591997e3a14432df7a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
