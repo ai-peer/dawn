@@ -46,6 +46,30 @@
       "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "153caa93_49c72c4b",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-10T23:57:49Z",
+      "side": 1,
+      "message": "Okay, (3) sounds good to me. Maybe we can have Device::FatalConsumedError which will \"rethrow\" (rename) errors as DEVICE_LOST if they\u0027re not. My main concern is that we have to make sure that we never have other types of errors, which may be hard as things get more complex. Catching and rethrowing as device lost is safer.\n\nThen we can do device-\u003eFatalConsumedError(SubmitImpl(...))\n\nAlso: Right now EnsureSubresourceContentInitialized can have an OOM error if it can\u0027t allocate a big enough staging buffer to clear with.",
+      "parentUuid": "5809162b_9d4f5ab3",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 64
+      },
+      "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
