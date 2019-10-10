@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8a873835_1de8a252",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-10T00:26:46Z",
+      "side": 1,
+      "message": "Austin, yes you can have two placed resources aliasing the same memory.  Aliasing barriers are necessary if you want to change the representation of the heap memory from one resource to another. \nThe source and/or destination resource may require hardware specific formatting changes.  \n\nWhat I wrote above doesn\u0027t really apply to our use case.  Since we\u0027re implementing a general purpose allocator, we don\u0027t want to have the contents of the second resource stomp on the first resource if the GPU is not finished accessing the first resource.",
+      "parentUuid": "8bf8d684_3d96f262",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d14e926f_4c67ede4",
         "filename": "src/dawn_native/d3d12/CommittedResourceAllocatorD3D12.cpp",
         "patchSetId": 37
