@@ -22,6 +22,30 @@
       "revId": "87cee9c4664cd796dfc31e5d8586ccc1d7ee1f1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf7f5690_302766e7",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2019-10-10T05:40:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3aef35c8_78c9a99a",
+      "range": {
+        "startLine": 428,
+        "startChar": 50,
+        "endLine": 428,
+        "endChar": 65
+      },
+      "revId": "87cee9c4664cd796dfc31e5d8586ccc1d7ee1f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
