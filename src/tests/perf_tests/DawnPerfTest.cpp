@@ -14,7 +14,13 @@
 
 #include "tests/perf_tests/DawnPerfTest.h"
 
+#include "dawn_platform/tracing/TraceEvent.h"
+#include "tests/perf_tests/DawnPerfTestPlatform.h"
 #include "utils/Timer.h"
+
+#include <json/value.h>
+#include <json/writer.h>
+#include <fstream>
 
 namespace {
 
@@ -32,28 +38,41 @@ void InitDawnPerfTestEnvironment(int argc, char** argv) {
 }
 
 DawnPerfTestEnvironment::DawnPerfTestEnvironment(int argc, char** argv)
-    : DawnTestEnvironment(argc, argv) {
+    : DawnTestEnvironment(argc, argv), mPlatform(new DawnPerfTestPlatform(this)) {
     for (int i = 1; i < argc; ++i) {
         if (strcmp("--calibration", argv[i]) == 0) {
             mIsCalibrating = true;
             continue;
         }
 
-        if (strstr(argv[i], "--override-steps=") == argv[i]) {
-            const char* value = strchr(argv[i], '=');
-            if (value != nullptr) {
-                mOverrideStepsToRun = strtoul(value + 1, nullptr, 0);
+        constexpr const char kOverrideStepsArg[] = "--override-steps=";
+        if (strstr(argv[i], kOverrideStepsArg) == argv[i]) {
+            const char* overrideSteps = argv[i] + strlen(kOverrideStepsArg);
+            if (overrideSteps[0] != '\0') {
+                mOverrideStepsToRun = strtoul(overrideSteps, nullptr, 0);
+            }
+            continue;
+        }
+
+        constexpr const char kTraceFileArg[] = "--trace-file=";
+        if (strstr(argv[i], kTraceFileArg) == argv[i]) {
+            const char* traceFile = argv[i] + strlen(kTraceFileArg);
+            if (traceFile[0] != '\0') {
+                mTraceFile = traceFile;
             }
             continue;
         }
 
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
-            std::cout << "Additional flags:"
-                      << " [--calibration] [--override-steps=x]\n"
-                      << "  --calibration: Only run calibration. Calibration allows the perf test"
-                         " runner script to save some time.\n"
-                      << " --override-steps: Set a fixed number of steps to run for each test\n"
-                      << std::endl;
+            std::cout
+                << "Additional flags:"
+                << " [--calibration] [--override-steps=x] [--enable-tracing] [--trace-file=file]\n"
+                << "  --calibration: Only run calibration. Calibration allows the perf test"
+                   " runner script to save some time.\n"
+                << " --override-steps: Set a fixed number of steps to run for each test\n"
+                << " --enable-tracing: Enable tracing of Dawn's internals.\n"
+                << " --trace-file: The file to dump trace results.\n"
+                << std::endl;
             continue;
         }
     }
@@ -63,6 +82,12 @@ DawnPerfTestEnvironment::~DawnPerfTestEnvironment() = default;
 
 void DawnPerfTestEnvironment::SetUp() {
     DawnTestEnvironment::SetUp();
+    mInstance->SetPlatform(mPlatform.get());
+}
+
+void DawnPerfTestEnvironment::TearDown() {
+    DumpTraceEventsToJSONFile();
+    DawnTestEnvironment::TearDown();
 }
 
 bool DawnPerfTestEnvironment::IsCalibrating() const {
@@ -71,6 +96,57 @@ bool DawnPerfTestEnvironment::IsCalibrating() const {
 
 unsigned int DawnPerfTestEnvironment::OverrideStepsToRun() const {
     return mOverrideStepsToRun;
+}
+
+bool DawnPerfTestEnvironment::IsTracingEnabled() const {
+    return mTraceFile != nullptr;
+}
+
+void DawnPerfTestEnvironment::EnableTraceEventRecording(bool enable) {
+    mRecordTraceEvents = enable;
+}
+
+bool DawnPerfTestEnvironment::IsTraceEventRecordingEnabled() const {
+    return mRecordTraceEvents;
+}
+
+void DawnPerfTestEnvironment::DumpTraceEventsToJSONFile() const {
+    if (!IsTracingEnabled()) {
+        return;
+    }
+
+    Json::Value eventsValue(Json::arrayValue);
+
+    const std::vector<DawnPerfTestPlatform::TraceEvent>& traceEventBuffer =
+        mPlatform->GetTraceEventBuffer();
+
+    for (const DawnPerfTestPlatform::TraceEvent& traceEvent : traceEventBuffer) {
+        Json::Value value(Json::objectValue);
+
+        const Json::LargestInt microseconds =
+            static_cast<Json::LargestInt>(traceEvent.timestamp * 1000.0 * 1000.0);
+
+        char phase[2] = {traceEvent.phase, '\0'};
+
+        value["name"] = traceEvent.name;
+        value["cat"] = traceEvent.categoryName;
+        value["ph"] = &phase[0];
+        value["ts"] = microseconds;
+        value["pid"] = "Dawn";
+
+        eventsValue.append(value);
+    }
+
+    Json::Value root(Json::objectValue);
+    root["traceEvents"] = eventsValue;
+
+    std::ofstream outFile;
+    outFile.open(mTraceFile);
+
+    Json::StyledStreamWriter styledWrite;
+    styledWrite.write(outFile, root);
+
+    outFile.close();
 }
 
 DawnPerfTestBase::DawnPerfTestBase(DawnTestBase* test,
@@ -113,13 +189,24 @@ void DawnPerfTestBase::RunTest() {
     // Do another warmup run. Seems to consistently improve results.
     DoRunLoop(kMaximumRunTimeSeconds);
 
-    for (unsigned int trial = 0; trial < kNumTrials; ++trial) {
-        DoRunLoop(kMaximumRunTimeSeconds);
-        PrintResults();
+    dawn_platform::Platform* platform = gTestEnv->GetInstance()->GetPlatform();
+    const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+
+    gTestEnv->EnableTraceEventRecording(true);
+    {
+        TRACE_EVENT0(platform, "dawn.perf_test", testName);
+        for (unsigned int trial = 0; trial < kNumTrials; ++trial) {
+            TRACE_EVENT0(platform, "dawn.perf_test", "Trial");
+            DoRunLoop(kMaximumRunTimeSeconds);
+            PrintResults();
+        }
     }
+    gTestEnv->EnableTraceEventRecording(false);
 }
 
 void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
+    dawn_platform::Platform* platform = gTestEnv->GetInstance()->GetPlatform();
+
     mNumStepsPerformed = 0;
     mRunning = true;
 
@@ -135,6 +222,7 @@ void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
         while (signaledFenceValue - fence.GetCompletedValue() >= mMaxStepsInFlight) {
             mTest->WaitABit();
         }
+        TRACE_EVENT0(platform, "dawn.perf_test", "Step");
         Step();
         mTest->queue.Signal(fence, ++signaledFenceValue);
 
