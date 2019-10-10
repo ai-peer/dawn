@@ -22,6 +22,7 @@
 #include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/BufferD3D12.h"
+#include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
@@ -508,7 +509,7 @@ namespace dawn_native { namespace d3d12 {
             return {};
         }
 
-        void ResolveMultisampledRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
+        void ResolveMultisampledRenderPass(CommandRecordingContext* commandContext,
                                            BeginRenderPassCmd* renderPass) {
             ASSERT(renderPass != nullptr);
 
@@ -525,8 +526,10 @@ namespace dawn_native { namespace d3d12 {
                 Texture* resolveTexture = ToBackend(resolveTarget->GetTexture());
 
                 // Transition the usages of the color attachment and resolve target.
-                colorTexture->TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_RESOLVE_SOURCE);
-                resolveTexture->TransitionUsageNow(commandList, D3D12_RESOURCE_STATE_RESOLVE_DEST);
+                colorTexture->TransitionUsageNow(commandContext,
+                                                 D3D12_RESOURCE_STATE_RESOLVE_SOURCE);
+                resolveTexture->TransitionUsageNow(commandContext,
+                                                   D3D12_RESOURCE_STATE_RESOLVE_DEST);
 
                 // Do MSAA resolve with ResolveSubResource().
                 ID3D12Resource* colorTextureHandle = colorTexture->GetD3D12Resource();
@@ -534,7 +537,7 @@ namespace dawn_native { namespace d3d12 {
                 const uint32_t resolveTextureSubresourceIndex = resolveTexture->GetSubresourceIndex(
                     resolveTarget->GetBaseMipLevel(), resolveTarget->GetBaseArrayLayer());
                 constexpr uint32_t kColorTextureSubresourceIndex = 0;
-                commandList->ResolveSubresource(
+                commandContext->GetCommandList()->ResolveSubresource(
                     resolveTextureHandle, resolveTextureSubresourceIndex, colorTextureHandle,
                     kColorTextureSubresourceIndex, colorTexture->GetD3D12Format());
             }
@@ -551,11 +554,13 @@ namespace dawn_native { namespace d3d12 {
         FreeCommands(&mCommands);
     }
 
-    MaybeError CommandBuffer::RecordCommands(ComPtr<ID3D12GraphicsCommandList> commandList,
+    MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext,
                                              uint32_t indexInSubmit) {
         Device* device = ToBackend(GetDevice());
         BindGroupStateTracker bindingTracker(device);
         RenderPassDescriptorHeapTracker renderPassTracker(device);
+
+        ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
         // Precompute the allocation of bindgroups in descriptor heaps
         // TODO(cwallez@chromium.org): Iterating over all the commands here is inefficient. We
@@ -569,14 +574,17 @@ namespace dawn_native { namespace d3d12 {
         }
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
-        auto TransitionForPass = [](ComPtr<ID3D12GraphicsCommandList> commandList,
+        auto TransitionForPass = [](CommandRecordingContext* commandContext,
                                     const PassResourceUsage& usages) {
             std::vector<D3D12_RESOURCE_BARRIER> barriers;
+
+            ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
                 D3D12_RESOURCE_BARRIER barrier;
                 if (ToBackend(usages.buffers[i])
-                        ->TransitionUsageAndGetResourceBarrier(&barrier, usages.bufferUsages[i])) {
+                        ->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
+                                                               usages.bufferUsages[i])) {
                     barriers.push_back(barrier);
                 }
             }
@@ -587,15 +595,17 @@ namespace dawn_native { namespace d3d12 {
                 // cleared during record render pass if the texture subresource has not been
                 // initialized before the render pass.
                 if (!(usages.textureUsages[i] & dawn::TextureUsage::OutputAttachment)) {
-                    texture->EnsureSubresourceContentInitialized(
-                        commandList, 0, texture->GetNumMipLevels(), 0, texture->GetArrayLayers());
+                    texture->EnsureSubresourceContentInitialized(commandContext, 0,
+                                                                 texture->GetNumMipLevels(), 0,
+                                                                 texture->GetArrayLayers());
                 }
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
                 D3D12_RESOURCE_BARRIER barrier;
                 if (ToBackend(usages.textures[i])
-                        ->TransitionUsageAndGetResourceBarrier(&barrier, usages.textureUsages[i])) {
+                        ->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
+                                                               usages.textureUsages[i])) {
                     barriers.push_back(barrier);
                 }
             }
@@ -614,7 +624,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
-                    TransitionForPass(commandList, passResourceUsages[nextPassNumber]);
+                    TransitionForPass(commandContext, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(true);
                     RecordComputePass(commandList, &bindingTracker);
 
@@ -625,9 +635,9 @@ namespace dawn_native { namespace d3d12 {
                     BeginRenderPassCmd* beginRenderPassCmd =
                         mCommands.NextCommand<BeginRenderPassCmd>();
 
-                    TransitionForPass(commandList, passResourceUsages[nextPassNumber]);
+                    TransitionForPass(commandContext, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(false);
-                    RecordRenderPass(commandList, &bindingTracker, &renderPassTracker,
+                    RecordRenderPass(commandContext, &bindingTracker, &renderPassTracker,
                                      beginRenderPassCmd);
 
                     nextPassNumber++;
@@ -638,8 +648,8 @@ namespace dawn_native { namespace d3d12 {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
-                    srcBuffer->TransitionUsageNow(commandList, dawn::BufferUsage::CopySrc);
-                    dstBuffer->TransitionUsageNow(commandList, dawn::BufferUsage::CopyDst);
+                    srcBuffer->TransitionUsageNow(commandContext, dawn::BufferUsage::CopySrc);
+                    dstBuffer->TransitionUsageNow(commandContext, dawn::BufferUsage::CopyDst);
 
                     commandList->CopyBufferRegion(
                         dstBuffer->GetD3D12Resource().Get(), copy->destinationOffset,
@@ -657,12 +667,12 @@ namespace dawn_native { namespace d3d12 {
                             true, copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
                     } else {
                         texture->EnsureSubresourceContentInitialized(
-                            commandList, copy->destination.mipLevel, 1,
+                            commandContext, copy->destination.mipLevel, 1,
                             copy->destination.arrayLayer, 1);
                     }
 
-                    buffer->TransitionUsageNow(commandList, dawn::BufferUsage::CopySrc);
-                    texture->TransitionUsageNow(commandList, dawn::TextureUsage::CopyDst);
+                    buffer->TransitionUsageNow(commandContext, dawn::BufferUsage::CopySrc);
+                    texture->TransitionUsageNow(commandContext, dawn::TextureUsage::CopyDst);
 
                     auto copySplit = ComputeTextureCopySplit(
                         copy->destination.origin, copy->copySize, texture->GetFormat(),
@@ -693,11 +703,11 @@ namespace dawn_native { namespace d3d12 {
                     Texture* texture = ToBackend(copy->source.texture.Get());
                     Buffer* buffer = ToBackend(copy->destination.buffer.Get());
 
-                    texture->EnsureSubresourceContentInitialized(commandList, copy->source.mipLevel,
-                                                                 1, copy->source.arrayLayer, 1);
+                    texture->EnsureSubresourceContentInitialized(
+                        commandContext, copy->source.mipLevel, 1, copy->source.arrayLayer, 1);
 
-                    texture->TransitionUsageNow(commandList, dawn::TextureUsage::CopySrc);
-                    buffer->TransitionUsageNow(commandList, dawn::BufferUsage::CopyDst);
+                    texture->TransitionUsageNow(commandContext, dawn::TextureUsage::CopySrc);
+                    buffer->TransitionUsageNow(commandContext, dawn::BufferUsage::CopyDst);
 
                     TextureCopySplit copySplit = ComputeTextureCopySplit(
                         copy->source.origin, copy->copySize, texture->GetFormat(),
@@ -732,19 +742,19 @@ namespace dawn_native { namespace d3d12 {
                     Texture* source = ToBackend(copy->source.texture.Get());
                     Texture* destination = ToBackend(copy->destination.texture.Get());
 
-                    source->EnsureSubresourceContentInitialized(commandList, copy->source.mipLevel,
-                                                                1, copy->source.arrayLayer, 1);
+                    source->EnsureSubresourceContentInitialized(
+                        commandContext, copy->source.mipLevel, 1, copy->source.arrayLayer, 1);
                     if (IsCompleteSubresourceCopiedTo(destination, copy->copySize,
                                                       copy->destination.mipLevel)) {
                         destination->SetIsSubresourceContentInitialized(
                             true, copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
                     } else {
                         destination->EnsureSubresourceContentInitialized(
-                            commandList, copy->destination.mipLevel, 1,
+                            commandContext, copy->destination.mipLevel, 1,
                             copy->destination.arrayLayer, 1);
                     }
-                    source->TransitionUsageNow(commandList, dawn::TextureUsage::CopySrc);
-                    destination->TransitionUsageNow(commandList, dawn::TextureUsage::CopyDst);
+                    source->TransitionUsageNow(commandContext, dawn::TextureUsage::CopySrc);
+                    destination->TransitionUsageNow(commandContext, dawn::TextureUsage::CopyDst);
 
                     if (CanUseCopyResource(source->GetNumMipLevels(), source->GetSize(),
                                            destination->GetSize(), copy->copySize)) {
@@ -777,7 +787,7 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    void CommandBuffer::RecordComputePass(ComPtr<ID3D12GraphicsCommandList> commandList,
+    void CommandBuffer::RecordComputePass(ID3D12GraphicsCommandList* commandList,
                                           BindGroupStateTracker* bindingTracker) {
         PipelineLayout* lastLayout = nullptr;
 
@@ -787,14 +797,14 @@ namespace dawn_native { namespace d3d12 {
                 case Command::Dispatch: {
                     DispatchCmd* dispatch = mCommands.NextCommand<DispatchCmd>();
 
-                    bindingTracker->Apply(commandList.Get());
+                    bindingTracker->Apply(commandList);
                     commandList->Dispatch(dispatch->x, dispatch->y, dispatch->z);
                 } break;
 
                 case Command::DispatchIndirect: {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
 
-                    bindingTracker->Apply(commandList.Get());
+                    bindingTracker->Apply(commandList);
                     Buffer* buffer = ToBackend(dispatch->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDispatchIndirectSignature();
@@ -843,7 +853,7 @@ namespace dawn_native { namespace d3d12 {
                         constexpr uint64_t kPIXBlackColor = 0xff000000;
                         ToBackend(GetDevice())
                             ->GetFunctions()
-                            ->pixSetMarkerOnCommandList(commandList.Get(), kPIXBlackColor, label);
+                            ->pixSetMarkerOnCommandList(commandList, kPIXBlackColor, label);
                     }
                 } break;
 
@@ -853,7 +863,7 @@ namespace dawn_native { namespace d3d12 {
                     if (ToBackend(GetDevice())->GetFunctions()->IsPIXEventRuntimeLoaded()) {
                         ToBackend(GetDevice())
                             ->GetFunctions()
-                            ->pixEndEventOnCommandList(commandList.Get());
+                            ->pixEndEventOnCommandList(commandList);
                     }
                 } break;
 
@@ -866,7 +876,7 @@ namespace dawn_native { namespace d3d12 {
                         constexpr uint64_t kPIXBlackColor = 0xff000000;
                         ToBackend(GetDevice())
                             ->GetFunctions()
-                            ->pixBeginEventOnCommandList(commandList.Get(), kPIXBlackColor, label);
+                            ->pixBeginEventOnCommandList(commandList, kPIXBlackColor, label);
                     }
                 } break;
 
@@ -875,11 +885,12 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    void CommandBuffer::RecordRenderPass(ComPtr<ID3D12GraphicsCommandList> commandList,
+    void CommandBuffer::RecordRenderPass(CommandRecordingContext* commandContext,
                                          BindGroupStateTracker* bindingTracker,
                                          RenderPassDescriptorHeapTracker* renderPassTracker,
                                          BeginRenderPassCmd* renderPass) {
         OMSetRenderTargetArgs args = renderPassTracker->GetSubpassOMSetRenderTargetArgs(renderPass);
+        ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
         // Clear framebuffer attachments as needed and transition to render target
         {
@@ -1018,8 +1029,8 @@ namespace dawn_native { namespace d3d12 {
                 case Command::Draw: {
                     DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
-                    bindingTracker->Apply(commandList.Get());
-                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
+                    bindingTracker->Apply(commandList);
+                    vertexBufferTracker.Apply(commandList, lastPipeline);
                     commandList->DrawInstanced(draw->vertexCount, draw->instanceCount,
                                                draw->firstVertex, draw->firstInstance);
                 } break;
@@ -1027,9 +1038,9 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
-                    bindingTracker->Apply(commandList.Get());
-                    indexBufferTracker.Apply(commandList.Get());
-                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
+                    bindingTracker->Apply(commandList);
+                    indexBufferTracker.Apply(commandList);
+                    vertexBufferTracker.Apply(commandList, lastPipeline);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
                                                       draw->firstIndex, draw->baseVertex,
                                                       draw->firstInstance);
@@ -1038,8 +1049,8 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndirect: {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
-                    bindingTracker->Apply(commandList.Get());
-                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
+                    bindingTracker->Apply(commandList);
+                    vertexBufferTracker.Apply(commandList, lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDrawIndirectSignature();
@@ -1051,9 +1062,9 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
-                    bindingTracker->Apply(commandList.Get());
-                    indexBufferTracker.Apply(commandList.Get());
-                    vertexBufferTracker.Apply(commandList.Get(), lastPipeline);
+                    bindingTracker->Apply(commandList);
+                    indexBufferTracker.Apply(commandList);
+                    vertexBufferTracker.Apply(commandList, lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDrawIndexedIndirectSignature();
@@ -1071,7 +1082,7 @@ namespace dawn_native { namespace d3d12 {
                         constexpr uint64_t kPIXBlackColor = 0xff000000;
                         ToBackend(GetDevice())
                             ->GetFunctions()
-                            ->pixSetMarkerOnCommandList(commandList.Get(), kPIXBlackColor, label);
+                            ->pixSetMarkerOnCommandList(commandList, kPIXBlackColor, label);
                     }
                 } break;
 
@@ -1081,7 +1092,7 @@ namespace dawn_native { namespace d3d12 {
                     if (ToBackend(GetDevice())->GetFunctions()->IsPIXEventRuntimeLoaded()) {
                         ToBackend(GetDevice())
                             ->GetFunctions()
-                            ->pixEndEventOnCommandList(commandList.Get());
+                            ->pixEndEventOnCommandList(commandList);
                     }
                 } break;
 
@@ -1094,7 +1105,7 @@ namespace dawn_native { namespace d3d12 {
                         constexpr uint64_t kPIXBlackColor = 0xff000000;
                         ToBackend(GetDevice())
                             ->GetFunctions()
-                            ->pixBeginEventOnCommandList(commandList.Get(), kPIXBlackColor, label);
+                            ->pixBeginEventOnCommandList(commandList, kPIXBlackColor, label);
                     }
                 } break;
 
@@ -1157,7 +1168,7 @@ namespace dawn_native { namespace d3d12 {
                     // TODO(brandon1.jones@intel.com): avoid calling this function and enable MSAA
                     // resolve in D3D12 render pass on the platforms that support this feature.
                     if (renderPass->attachmentState->GetSampleCount() > 1) {
-                        ResolveMultisampledRenderPass(commandList, renderPass);
+                        ResolveMultisampledRenderPass(commandContext, renderPass);
                     }
                     return;
                 } break;
