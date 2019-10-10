@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "06059ccd_e21713f2",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "With comments other comments both of these wouldn\u0027t be needed:\n\n - mMemoryFlags would stay a backend-specific thing and could be stored in the ResourceHeapAllocation structure.\n - mMemorySize isn\u0027t needed anymore once we use a single buddy system per heapFlags + heapType combination.",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ad11cc59_0bd621bd",
         "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
         "patchSetId": 37
@@ -96,6 +113,64 @@
     },
     {
       "key": {
+        "uuid": "6aad2783_216489e2",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "In the D3D12 advanced barrier model, there is an implicit aliasing barrier between each command list, so we only need them if we reuse resource memory in the same command list. This can never happen here because in Dawn, at the moment, resource de-allocation is done one Tick, which happens after the last command list using the resource is done executing.\n\nWe should definitely have a comment to explain this non-trivial behavior here.",
+      "parentUuid": "8a873835_1de8a252",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18acd316_8f3078c8",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "nit: this is only every used by the ResourceAllocator so it could be a helper class defined in the same file and with just a forward declaration in the header.",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aae06a0_ab07e46d",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "heapFlags is constant for each BuddyPlacedResourceAllocator so it could be passed in the constructor and stored in a member. (we really don\u0027t want to mix heaps with different heapFlags in the same buddy system).",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d14e926f_4c67ede4",
         "filename": "src/dawn_native/d3d12/CommittedResourceAllocatorD3D12.cpp",
         "patchSetId": 37
@@ -107,6 +182,23 @@
       "writtenOn": "2019-10-09T21:12:14Z",
       "side": 1,
       "message": "Note to update this comment to \"...and do not need to be explicitly...\".",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9906a3f7_a053c366",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "We are piping the memoryFlags from [1] to here but there is always a single memory flag used for each buddy system.\n\nHow about making BuddyPlacedResourceAllocator implement the MemoryAllocator interface and pass itself to the BuddyMemoryAllocator?",
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -129,6 +221,53 @@
         "startChar": 8,
         "endLine": 45,
         "endChar": 26
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c903f16d_136b696c",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "Yeah it could maybe require:\n\n return {std::make_unique\u003cHeap\u003e(std::move(heap)));",
+      "parentUuid": "d8c2e205_6b3110f9",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe57ab4_b1805256",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "This should probably be called ResourceHeap so that the relation with ResourceHeapBase is clear wherever this type is used.",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 14
       },
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -182,6 +321,46 @@
     },
     {
       "key": {
+        "uuid": "905cda0a_469a413c",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "What else would we do for small resources? Also it will be a common advice for WebGPU users to batch things so small resources should be rare.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 66
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82288eaa_1977342c",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "Creating things lazily like this always adds complexity, since there are only 5 cases we care about, can we initialize things in the constructor?",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca9d457a_4202a7b7",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -199,6 +378,57 @@
         "endLine": 140,
         "endChar": 9
       },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0429a431_eaae8a65",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "This heapLevel logic would be simplified out when we use a single buddy system per heapType + heapFlags combination.",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b83aebf_4915c756",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "Having the logic here hides it a bit, how about moving it in [1] so we can do:\n\n if (resource is too large) {\n   create committed\n } else {\n   create placed\n }\n\nThis way SubAllocateMemory is guaranteed to provide an allocation or a DAWN_OUT_OF_MEMORY_ERROR.",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15db9dde_841480c8",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "This heapLevel logic would be simplified out when we use a single buddy system per heapType + heapFlags combination.",
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -239,6 +469,63 @@
       "writtenOn": "2019-10-09T21:08:05Z",
       "side": 1,
       "message": "+Rafael. Is it OK to use this enum as such?",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0328b9b1_06245c81",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "When / what do we expect to use the custom heap for?",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fef3083_f0ed0a16",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "nit: prefer using \"using\"\n\nWhy do we need this extra dimension? We seem to bucket by heap level, but the point of the buddy allocator is that it can allocate resources of various sizes in the same buddy system no?",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c46abb17_a3fb5f3d",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T12:55:08Z",
+      "side": 1,
+      "message": "There are only 5 cases that we care about (even with only Tier 1 support):\n\n - D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS + D3D12_HEAP_TYPE_READBACK\n - D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS + D3D12_HEAP_TYPE_UPLOAD\n - D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS | D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS + D3D12_HEAP_TYPE_DEFAULT\n - D3D12_HEAP_FLAG_ALLOW_ONLY_NON_RT_DS_TEXTURES | D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS + D3D12_HEAP_TYPE_DEFAULT\n - D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES | D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS + D3D12_HEAP_TYPE_DEFAULT\n\nHow about having an internal enum to represent them and just have an std::array of std::vector here.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 87
+      },
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
