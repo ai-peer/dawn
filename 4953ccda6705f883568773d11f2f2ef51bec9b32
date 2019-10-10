@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9219ef0_9df4d8bf",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-10T03:05:20Z",
+      "side": 1,
+      "message": "tiny nit: I think these could be local variables inside the if() blocks, now that they no longer define a ref scope.",
+      "revId": "4953ccda6705f883568773d11f2f2ef51bec9b32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
