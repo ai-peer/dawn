@@ -128,6 +128,9 @@ class DawnTestEnvironment : public testing::Environment {
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
 
+  protected:
+    std::unique_ptr<dawn_native::Instance> mInstance;
+
   private:
     void DiscoverOpenGLAdapter();
 
@@ -136,7 +139,6 @@ class DawnTestEnvironment : public testing::Environment {
     bool mBeginCaptureOnStartup = false;
     bool mHasVendorIdFilter = false;
     uint32_t mVendorIdFilter = 0;
-    std::unique_ptr<dawn_native::Instance> mInstance;
 };
 
 class DawnTestBase {

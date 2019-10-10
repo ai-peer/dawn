@@ -371,6 +371,58 @@ if (is_win || (is_linux && !is_chromeos) || is_mac) {
 }
 
 ###############################################################################
+# jsoncpp - We don't have the //testing deps to load third_party/jsoncpp's
+#           BUILD.gn, so we duplicate it here.
+###############################################################################
+
+config("jsoncpp_config") {
+  include_dirs = [
+    "jsoncpp/source/include",
+    "jsoncpp/generated",
+  ]
+
+  # TODO(crbug.com/983223): Update JsonCpp BUILD.gn to remove deprecated
+  # declaration flag.
+  # This temporary flag allowing clients to update to the new version, and then
+  # update to the new StreamWriter and CharReader classes.
+  if (!is_win || is_clang) {
+    cflags_cc = [ "-Wno-deprecated-declarations" ]
+  }
+}
+
+source_set("jsoncpp") {
+  sources = [
+    "jsoncpp/generated/version.h",
+    "jsoncpp/source/include/json/assertions.h",
+    "jsoncpp/source/include/json/autolink.h",
+    "jsoncpp/source/include/json/config.h",
+    "jsoncpp/source/include/json/features.h",
+    "jsoncpp/source/include/json/forwards.h",
+    "jsoncpp/source/include/json/json.h",
+    "jsoncpp/source/include/json/reader.h",
+    "jsoncpp/source/include/json/value.h",
+    "jsoncpp/source/include/json/writer.h",
+    "jsoncpp/source/src/lib_json/json_reader.cpp",
+    "jsoncpp/source/src/lib_json/json_tool.h",
+    "jsoncpp/source/src/lib_json/json_value.cpp",
+    "jsoncpp/source/src/lib_json/json_writer.cpp",
+  ]
+
+  public_configs = [ ":jsoncpp_config" ]
+
+  defines = [
+    "JSON_USE_EXCEPTION=0",
+    "JSON_USE_NULLREF=0",
+  ]
+
+  include_dirs = [ "jsoncpp/source/src/lib_json" ]
+
+  if (!is_win || is_clang) {
+    cflags_cc = [ "-Wno-implicit-fallthrough" ]
+  }
+}
+
+###############################################################################
 # Header-only dependencies for samples
 ###############################################################################
 

@@ -14,6 +14,8 @@
 
 #include "tests/perf_tests/DawnPerfTest.h"
 
+#include "dawn_platform/tracing/TraceEvent.h"
+#include "tests/perf_tests/DawnPerfTestPlatform.h"
 #include "utils/Timer.h"
 
 namespace {
@@ -32,7 +34,7 @@ void InitDawnPerfTestEnvironment(int argc, char** argv) {
 }
 
 DawnPerfTestEnvironment::DawnPerfTestEnvironment(int argc, char** argv)
-    : DawnTestEnvironment(argc, argv) {
+    : DawnTestEnvironment(argc, argv), mPlatform(new DawnPerfTestPlatform(this)) {
     for (int i = 1; i < argc; ++i) {
         if (strcmp("--calibration", argv[i]) == 0) {
             mIsCalibrating = true;
@@ -47,13 +49,29 @@ DawnPerfTestEnvironment::DawnPerfTestEnvironment(int argc, char** argv)
             continue;
         }
 
+        if (strcmp("--enable-tracing", argv[i]) == 0) {
+            mEnableTracing = true;
+            continue;
+        }
+
+        if (strstr(argv[i], "--trace-file=") == argv[i]) {
+            const char* value = strchr(argv[i], '=');
+            if (value != nullptr) {
+                mTraceFile = value + 1;
+            }
+            continue;
+        }
+
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
-            std::cout << "Additional flags:"
-                      << " [--calibration] [--override-steps=x]\n"
-                      << "  --calibration: Only run calibration. Calibration allows the perf test"
-                         " runner script to save some time.\n"
-                      << " --override-steps: Set a fixed number of steps to run for each test\n"
-                      << std::endl;
+            std::cout
+                << "Additional flags:"
+                << " [--calibration] [--override-steps=x] [--enable-tracing] [--trace-file=file]\n"
+                << "  --calibration: Only run calibration. Calibration allows the perf test"
+                   " runner script to save some time.\n"
+                << " --override-steps: Set a fixed number of steps to run for each test\n"
+                << " --enable-tracing: Enable tracing of Dawn's internals.\n"
+                << " --trace-file: The file to dump trace results.\n"
+                << std::endl;
             continue;
         }
     }
@@ -63,6 +81,12 @@ DawnPerfTestEnvironment::~DawnPerfTestEnvironment() = default;
 
 void DawnPerfTestEnvironment::SetUp() {
     DawnTestEnvironment::SetUp();
+    mInstance->SetPlatform(mPlatform.get());
+}
+
+void DawnPerfTestEnvironment::TearDown() {
+    mPlatform->DumpTraceEventsToJSONFile(mTraceFile);
+    DawnTestEnvironment::TearDown();
 }
 
 bool DawnPerfTestEnvironment::IsCalibrating() const {
@@ -71,6 +95,10 @@ bool DawnPerfTestEnvironment::IsCalibrating() const {
 
 unsigned int DawnPerfTestEnvironment::OverrideStepsToRun() const {
     return mOverrideStepsToRun;
+}
+
+bool DawnPerfTestEnvironment::IsTracingEnabled() const {
+    return mEnableTracing;
 }
 
 DawnPerfTestBase::DawnPerfTestBase(DawnTestBase* test, unsigned int iterationsPerStep)
@@ -128,19 +156,28 @@ void DawnPerfTestBase::RunTest() {
     // Do another warmup run. Seems to consistently improve results.
     DoRunLoop(kMaximumRunTimeSeconds);
 
+    dawn_platform::Platform* platform = gTestEnv->GetInstance()->GetPlatform();
+    const char* testName = ::testing::UnitTest::GetInstance()->current_test_info()->name();
+
+    TRACE_EVENT_BEGIN0(platform, "dawn.perf_test", testName);
     for (unsigned int trial = 0; trial < kNumTrials; ++trial) {
+        TRACE_EVENT0(platform, "dawn.perf_test", "Trial");
         DoRunLoop(kMaximumRunTimeSeconds);
         PrintResults();
     }
+    TRACE_EVENT_END0(platform, "dawn.perf_test", testName);
 }
 
 void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
+    dawn_platform::Platform* platform = gTestEnv->GetInstance()->GetPlatform();
+
     mNumStepsPerformed = 0;
     mRunning = true;
     mTimer->Start();
 
     // This loop can be canceled by calling AbortTest().
     while (mRunning) {
+        TRACE_EVENT0(platform, "dawn.perf_test", "Step");
         Step();
         if (mRunning) {
             ++mNumStepsPerformed;
