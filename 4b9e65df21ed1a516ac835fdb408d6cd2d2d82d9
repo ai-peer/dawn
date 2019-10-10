@@ -22,6 +22,30 @@
       "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5809162b_9d4f5ab3",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-10T13:53:12Z",
+      "side": 1,
+      "message": "I definitely think that we should be in the 3) case. There are three types of errors: validation (that happens before the backend or as a first step in a backend, for example for GLES 3 compat), out of memory for, only for resource creation, and everything else is unexpected and a device loss.\n\n1) is akin to exception safety and would be hugely complex and difficult to implement (and ensure doesn\u0027t break in the future).\n2) could actually make sense for optimizations, I don\u0027t see us using it for error handling.",
+      "parentUuid": "4f69ada2_e51a9762",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 64
+      },
+      "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
