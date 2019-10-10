@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "8bf8d684_3d96f262",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-10T00:15:53Z",
+      "side": 1,
+      "message": "Bryan is indeed calling mBuddyMemoryAllocator.Deallocate right away which will allow it to hand out an offset that\u0027s currently in use.\n\nThe Resource will still be in use by the GPU, but we\u0027ll allocate another PlacedResource that aliases the same memory. (Can you do that? I think the answer is yes).\n\nI don\u0027t think we have the necessary aliasing barriers though..",
+      "parentUuid": "b30212d3_8dd3a001",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d14e926f_4c67ede4",
         "filename": "src/dawn_native/d3d12/CommittedResourceAllocatorD3D12.cpp",
         "patchSetId": 37
@@ -59,6 +83,121 @@
       "writtenOn": "2019-10-09T21:12:14Z",
       "side": 1,
       "message": "Note to update this comment to \"...and do not need to be explicitly...\".",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8c2e205_6b3110f9",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-10T00:15:53Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think the assignment is necessary. We can just return std::make_unique\n\n(I may be wrong because of ResultOrError)",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a25b73_d6a49f05",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-10T00:15:53Z",
+      "side": 1,
+      "message": "unit: common/ before dawn_native/",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "686176da_42a14432",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-10T00:15:53Z",
+      "side": 1,
+      "message": "If the two allocators implemented the same interface, then we could switch on the allocation method to choose the allocator, and then factor the part where we call -\u003eDeallocate.\n\nIs there a reason the placed buddy allocator and committed resource allocators don\u0027t share a base class?\n\nWe could also factor ::AllocateMemory in the same way. First choose the allocator and then call -\u003eAllocate on it.",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 46
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca9d457a_4202a7b7",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-10T00:15:53Z",
+      "side": 1,
+      "message": "Reading this was quite confusing both branches do CreatePlacedResourceAllocators(...). \n\nCan we separate creating the map entry from populating it with the vector of allocators?\n\nif (allocators.find(...) \u003d\u003d allocators.end)) {\n    allocators.emplace(heapFlags, emptyArray);\n}\n\nif (allocators[heapFlags][heapTypeIndex].empty()) {\n    allocators[heapFlags][heapTypeIndex] \u003d CreatePlacedResourceAllocators(...);\n}",
+      "range": {
+        "startLine": 127,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 9
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b13a7674_325ce655",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-10T00:15:53Z",
+      "side": 1,
+      "message": "This bug seems unrelated?",
+      "range": {
+        "startLine": 189,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 44
+      },
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
