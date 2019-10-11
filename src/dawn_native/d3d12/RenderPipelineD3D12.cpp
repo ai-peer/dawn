@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 
 #include "common/Assert.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
@@ -288,9 +289,20 @@ namespace dawn_native { namespace d3d12 {
 
     }  // anonymous namespace
 
-    RenderPipeline::RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor)
-        : RenderPipelineBase(device, descriptor),
-          mD3d12PrimitiveTopology(D3D12PrimitiveTopology(GetPrimitiveTopology())) {
+    ResultOrError<RenderPipeline*> RenderPipeline::Create(
+        Device* device,
+        const RenderPipelineDescriptor* descriptor) {
+        //   mD3d12PrimitiveTopology(D3D12PrimitiveTopology(GetPrimitiveTopology())) {
+        std::unique_ptr<RenderPipeline> pipeline =
+            std::make_unique<RenderPipeline>(device, descriptor);
+        pipeline->mD3d12PrimitiveTopology =
+            D3D12PrimitiveTopology(pipeline->GetPrimitiveTopology());
+        DAWN_TRY(pipeline->Initialize(descriptor));
+        return pipeline.release();
+    }
+
+    MaybeError RenderPipeline::Initialize(const RenderPipelineDescriptor* descriptor) {
+        Device* device = ToBackend(GetDevice());
         uint32_t compileFlags = 0;
 #if defined(_DEBUG)
         // Enable better shader debugging with the graphics debugging tools.
@@ -391,8 +403,10 @@ namespace dawn_native { namespace d3d12 {
         descriptorD3D12.SampleDesc.Count = GetSampleCount();
         descriptorD3D12.SampleDesc.Quality = 0;
 
-        ASSERT_SUCCESS(device->GetD3D12Device()->CreateGraphicsPipelineState(
-            &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)));
+        DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
+                                  &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
+                              "D3D12 create graphics pipeline state"));
+        return {};
     }
 
     RenderPipeline::~RenderPipeline() {

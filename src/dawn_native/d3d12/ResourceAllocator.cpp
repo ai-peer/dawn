@@ -14,6 +14,7 @@
 
 #include "dawn_native/d3d12/ResourceAllocator.h"
 
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
