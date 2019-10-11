@@ -220,6 +220,7 @@ namespace dawn_native { namespace d3d12 {
         mDynamicUploader->Deallocate(mCompletedSerial);
 
         mResourceAllocator->Tick(mCompletedSerial);
+        mResourceAllocatorManager->Tick(mCompletedSerial);
         mCommandAllocatorManager->Tick(mCompletedSerial);
         mDescriptorHeapAllocator->Deallocate(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
@@ -354,10 +355,9 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<ResourceHeapAllocation> Device::AllocateMemory(
         D3D12_HEAP_TYPE heapType,
         const D3D12_RESOURCE_DESC& resourceDescriptor,
-        D3D12_RESOURCE_STATES initialUsage,
-        D3D12_HEAP_FLAGS heapFlags) {
-        return mResourceAllocatorManager->AllocateMemory(heapType, resourceDescriptor, initialUsage,
-                                                         heapFlags);
+        D3D12_RESOURCE_STATES initialUsage) {
+        return mResourceAllocatorManager->AllocateMemory(heapType, resourceDescriptor,
+                                                         initialUsage);
     }
 
     TextureBase* Device::WrapSharedHandle(const TextureDescriptor* descriptor,
