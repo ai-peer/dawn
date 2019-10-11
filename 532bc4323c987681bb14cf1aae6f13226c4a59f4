@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1786c68c_7a5d722c",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-11T11:18:57Z",
+      "side": 1,
+      "message": "Maybe we don\u0027t need --enable-tracing and the presence of --trace-file\u003d is enough to enable tracing.",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "294e098e_3c167be7",
         "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
         "patchSetId": 2
@@ -30,6 +47,97 @@
       "writtenOn": "2019-10-11T01:57:46Z",
       "side": 1,
       "message": "nit: could use TRACE_EVENT0 by putting a block around this section (or even not - it\u0027s the end of the function anyway)",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed17beb4_6cdcf940",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-11T11:18:57Z",
+      "side": 1,
+      "message": "As discussed in the original tracing CL, this specific function signature seems extremely Chromium specific. Could we have something more focused to what Dawn would use (we could even have several virtual functions). For example right now only categoryGroupEnabled, phase, name, category and timestamp are used.\n\nFor example Dawn probably doesn\u0027t need categories, or maybe a small fixed number of them.",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa79ca6f_ca2e19d6",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-11T11:18:57Z",
+      "side": 1,
+      "message": "The dependency seems inverted here, shouldn\u0027t DawnPerfTestEnvironment decide whether to write the file or not? Likewise printing to a file doesn\u0027t seem to be the responsibility of the environment so this function could return an std::string.",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51c343a9_382278e0",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-11T11:18:57Z",
+      "side": 1,
+      "message": "Why is this needed? Phase is just a char so we should be able to put it in value directly no?",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0fceb69_576cde6e",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-11T11:18:57Z",
+      "side": 1,
+      "message": "nit: spell out the type.",
+      "range": {
+        "startLine": 103,
+        "startChar": 14,
+        "endLine": 103,
+        "endChar": 18
+      },
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eb422ea_4ad3d88c",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-11T11:18:57Z",
+      "side": 1,
+      "message": "How about putting the fuzzers in Chromium\u0027s BUILD.gn for jsoncpp in a \"if (build_with_chromium)\" block?",
       "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
