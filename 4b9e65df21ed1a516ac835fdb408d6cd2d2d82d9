@@ -94,6 +94,30 @@
       "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44406821_9acefef0",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-11T10:54:53Z",
+      "side": 1,
+      "message": "Yeah I think this is more complicated than what can be addressed in this patch. I\u0027m not sure what the right approach would be: a type system-level thing would be cool, but what if we want to have validation errors for example for GLES 3.0 specific validation?",
+      "parentUuid": "512d3866_1ce4275b",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 64
+      },
+      "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
