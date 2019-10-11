@@ -44,6 +44,10 @@ namespace dawn_native {
         uint64_t mBlockOffset = 0;
 
         AllocationMethod mMethod = AllocationMethod::kInvalid;
+
+        // Memory size must be stored should memory be managed seperately from the
+        // allocation.
+        uint64_t mMemorySize = 0;
     };
 
     // Handle into a resource heap pool.

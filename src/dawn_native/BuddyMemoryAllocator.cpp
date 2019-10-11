@@ -62,6 +62,7 @@ namespace dawn_native {
         AllocationInfo info;
         info.mBlockOffset = blockOffset;
         info.mMethod = AllocationMethod::kSubAllocated;
+        info.mMemorySize = mMemorySize;
 
         // Allocation offset is always local to the memory.
         const uint64_t memoryOffset = blockOffset % mMemorySize;
