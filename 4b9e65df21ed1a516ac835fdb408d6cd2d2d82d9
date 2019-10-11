@@ -70,6 +70,30 @@
       "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "512d3866_1ce4275b",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-11T00:19:33Z",
+      "side": 1,
+      "message": "Rethrowing sounds like a pretty good idea to me. (followup is ok with me)\n\nAlternative idea: If there were a type-level way to say \"non-validation error\" then we could use MaybeBackendError\u003dResult\u003cvoid, BackendError\u003e instead of MaybeError\u003dResult\u003cvoid, ErrorData*\u003e. This could probably even work with DAWN_DEVICE_LOST_ERROR through some implicit type conversions.",
+      "parentUuid": "153caa93_49c72c4b",
+      "range": {
+        "startLine": 377,
+        "startChar": 20,
+        "endLine": 377,
+        "endChar": 64
+      },
+      "revId": "4b9e65df21ed1a516ac835fdb408d6cd2d2d82d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
