@@ -14,6 +14,7 @@
 
 #include "dawn_native/d3d12/ResourceAllocator.h"
 
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -57,9 +58,10 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12Resource> resource;
 
         // TODO(enga@google.com): Use CreatePlacedResource
-        ASSERT_SUCCESS(mDevice->GetD3D12Device()->CreateCommittedResource(
-            heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage, nullptr,
-            IID_PPV_ARGS(&resource)));
+        ASSERT_SUCCESS(
+            mDevice->GetD3D12Device()->CreateCommittedResource(heapProperties, D3D12_HEAP_FLAG_NONE,
+                                                               &resourceDescriptor, initialUsage,
+                                                               nullptr, IID_PPV_ARGS(&resource)));
 
         return resource;
     }
