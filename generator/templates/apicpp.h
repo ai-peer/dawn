@@ -49,6 +49,7 @@ namespace dawn {
 
     {% endfor %}
 
+    using Proc = DawnProc;
     {% for type in by_category["natively defined"] %}
         using {{as_cppType(type.name)}} = {{as_cType(type.name)}};
     {% endfor %}
@@ -175,6 +176,8 @@ namespace dawn {
         };
 
     {% endfor %}
+
+    DAWN_EXPORT Proc GetProcAddress(Device const& device, const char* procName);
 
     {% for type in by_category["structure"] %}
         struct {{as_cppType(type.name)}} {

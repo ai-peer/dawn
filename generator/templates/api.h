@@ -54,7 +54,6 @@ extern "C" {
 #endif
 
 // Custom types depending on the target language
-typedef void (*DawnErrorCallback)(DawnErrorType type, const char* message, void* userdata);
 typedef void (*DawnBufferCreateMappedCallback)(DawnBufferMapAsyncStatus status,
                                                DawnCreateBufferMappedResult result,
                                                void* userdata);
@@ -67,8 +66,13 @@ typedef void (*DawnBufferMapWriteCallback)(DawnBufferMapAsyncStatus status,
                                            uint64_t dataLength,
                                            void* userdata);
 typedef void (*DawnFenceOnCompletionCallback)(DawnFenceCompletionStatus status, void* userdata);
+typedef void (*DawnErrorCallback)(DawnErrorType type, const char* message, void* userdata);
+
+typedef void (*DawnProc)();
 
 #if !defined(DAWN_SKIP_PROCS)
+
+typedef DawnProc (*DawnProcGetProcAddress)(DawnDevice device, const char* procName);
 
 {% for type in by_category["object"] %}
     // Procs of {{type.name.CamelCase()}}
@@ -85,6 +89,8 @@ typedef void (*DawnFenceOnCompletionCallback)(DawnFenceCompletionStatus status, 
 #endif  // !defined(DAWN_SKIP_PROCS)
 
 struct DawnProcTable_s {
+    DawnProcGetProcAddress getProcAddress;
+
     {% for type in by_category["object"] %}
         {% for method in native_methods(type) %}
             {{as_cProc(type.name, method.name)}} {{as_varName(type.name, method.name)}};
@@ -100,6 +106,8 @@ typedef struct DawnProcTable_s DawnProcTable;
 
 // Set which DawnProcTable will be used
 DAWN_EXPORT void dawnSetProcs(const DawnProcTable* procs);
+
+DAWN_EXPORT DawnProc DawnGetProcAddress(DawnDevice device, const char* procName);
 
 {% for type in by_category["object"] %}
     // Methods of {{type.name.CamelCase()}}
