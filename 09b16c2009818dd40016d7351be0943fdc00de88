@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50bb40fe_22d4bed5",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-11T23:31:34Z",
+      "side": 1,
+      "message": "nit: Still DAWN_TRY this",
+      "range": {
+        "startLine": 221,
+        "startChar": 15,
+        "endLine": 221,
+        "endChar": 27
+      },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0c18e38_de49e122",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-11T23:31:34Z",
+      "side": 1,
+      "message": "unit: extra whitespace",
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7582ee4a_a8f39f4c",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-11T23:31:34Z",
+      "side": 1,
+      "message": "Rafael\u0027s patch landed. ReserveCommandAllocator is only called in CommandRecordingContext::Open, so we should be able to update this function to return ResultOrError\u003cID3D12CommandAllocator*\u003e and DAWN_TRY now.",
+      "range": {
+        "startLine": 35,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 53
+      },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06984182_87843557",
+        "filename": "src/dawn_native/d3d12/D3D12Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-11T23:31:34Z",
+      "side": 1,
+      "message": "typo: result",
+      "range": {
+        "startLine": 23,
+        "startChar": 33,
+        "endLine": 23,
+        "endChar": 40
+      },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a61be390_1dac0856",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-11T23:31:34Z",
+      "side": 1,
+      "message": "nit: stray comment?",
+      "range": {
+        "startLine": 295,
+        "startChar": 7,
+        "endLine": 295,
+        "endChar": 86
+      },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27a10fe7_795f1af7",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-11T23:31:34Z",
+      "side": 1,
+      "message": "nit: We can put this in the Initialize() function. That makes Create super small so all the initialization is in one place.",
+      "range": {
+        "startLine": 298,
+        "startChar": 8,
+        "endLine": 299,
+        "endChar": 69
+      },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
