@@ -24,8 +24,23 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
+        VkPresentModeKHR chooseSwapPresentMode(
+            const std::vector<VkPresentModeKHR>& availablePresentModes,
+            bool turnOffVsync) {
+            if (turnOffVsync) {
+                for (const auto& availablePresentMode : availablePresentModes) {
+                    if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
+                        return availablePresentMode;
+                    }
+                }
+            }
+
+            return VK_PRESENT_MODE_FIFO_KHR;
+        }
+
         bool ChooseSurfaceConfig(const VulkanSurfaceInfo& info,
-                                 NativeSwapChainImpl::ChosenConfig* config) {
+                                 NativeSwapChainImpl::ChosenConfig* config,
+                                 bool turnOffVsync) {
             // TODO(cwallez@chromium.org): For now this is hardcoded to what works with one NVIDIA
             // driver. Need to generalize
             config->nativeFormat = VK_FORMAT_B8G8R8A8_UNORM;
@@ -35,8 +50,9 @@ namespace dawn_native { namespace vulkan {
             // TODO(cwallez@chromium.org): This is upside down compared to what we want, at least
             // on Linux
             config->preTransform = info.capabilities.currentTransform;
-            config->presentMode = VK_PRESENT_MODE_FIFO_KHR;
+            config->presentMode = chooseSwapPresentMode(info.presentModes, turnOffVsync);
             config->compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+
             return true;
         }
 
@@ -63,7 +79,7 @@ namespace dawn_native { namespace vulkan {
             ASSERT(false);
         }
 
-        if (!ChooseSurfaceConfig(mInfo, &mConfig)) {
+        if (!ChooseSurfaceConfig(mInfo, &mConfig, mDevice->IsToggleEnabled(Toggle::TurnOffVsync))) {
             ASSERT(false);
         }
     }
