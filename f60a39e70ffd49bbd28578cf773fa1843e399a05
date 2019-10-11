@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2f66f938_cd56b7bb",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Only memory flags + type can be hard coded and dealt with ahead-of-time. Memory size is still needed for the optimization without over-committing memory.",
+      "parentUuid": "06059ccd_e21713f2",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad11cc59_0bd621bd",
         "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
         "patchSetId": 37
@@ -39,6 +57,30 @@
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cb67cf6_04235b63",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad11cc59_0bd621bd",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -137,6 +179,30 @@
     },
     {
       "key": {
+        "uuid": "661f36ab_00a11870",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Good catch, RC. \n\nSynchronization (not aliasing) is the issue. It needs a two-phase deletion: Deallocate + FreeMemory, like Vulkan\u0027s FencedDeleter.\n\nI also left a comment on aliasing to avoid future confusion.",
+      "parentUuid": "6aad2783_216489e2",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18acd316_8f3078c8",
         "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.h",
         "patchSetId": 37
@@ -151,6 +217,24 @@
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "844e1114_0b0dce19",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "SGTM. Also, moved committed resource allocator to be consistent.",
+      "parentUuid": "18acd316_8f3078c8",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -171,6 +255,24 @@
     },
     {
       "key": {
+        "uuid": "1ed4e693_377f4520",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6aae06a0_ab07e46d",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d14e926f_4c67ede4",
         "filename": "src/dawn_native/d3d12/CommittedResourceAllocatorD3D12.cpp",
         "patchSetId": 37
@@ -188,6 +290,24 @@
     },
     {
       "key": {
+        "uuid": "36ee9578_8f76d3e7",
+        "filename": "src/dawn_native/d3d12/CommittedResourceAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d14e926f_4c67ede4",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9906a3f7_a053c366",
         "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
         "patchSetId": 37
@@ -199,6 +319,24 @@
       "writtenOn": "2019-10-10T12:55:08Z",
       "side": 1,
       "message": "We are piping the memoryFlags from [1] to here but there is always a single memory flag used for each buddy system.\n\nHow about making BuddyPlacedResourceAllocator implement the MemoryAllocator interface and pass itself to the BuddyMemoryAllocator?",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d92b90be_c5326cb9",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "\u003e We are piping the memoryFlags from [1] to here but there is always a single memory flag used for each buddy system.\n\nThe memory flag is used here to create the sized heap on-demand.\n\n\u003e How about making BuddyPlacedResourceAllocator implement the MemoryAllocator interface and pass itself to the BuddyMemoryAllocator\n\nI think it\u0027s better to keep resources near the device and not tied to implementing heap-interfaces. Perhaps we can revisit for committed resource based sub-allocation.",
+      "parentUuid": "9906a3f7_a053c366",
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -252,6 +390,30 @@
     },
     {
       "key": {
+        "uuid": "47f99b22_15b1a4f8",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c903f16d_136b696c",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebe57ab4_b1805256",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 37
@@ -263,6 +425,30 @@
       "writtenOn": "2019-10-10T12:55:08Z",
       "side": 1,
       "message": "This should probably be called ResourceHeap so that the relation with ResourceHeapBase is clear wherever this type is used.",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "453eb3d7_f5404326",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Rather than rename d3d::Heap to be prefixed with something it\u0027s not, a Resource. How about we rename ResourceHeapBase to [Memory|Heap]Base?",
+      "parentUuid": "ebe57ab4_b1805256",
       "range": {
         "startLine": 23,
         "startChar": 10,
@@ -298,6 +484,30 @@
     },
     {
       "key": {
+        "uuid": "5760a83c_6f3e9c9e",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57a25b73_d6a49f05",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "686176da_42a14432",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -321,6 +531,30 @@
     },
     {
       "key": {
+        "uuid": "3c22aa0c_0984a97a",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "\u003e Is there a reason the placed buddy allocator and committed resource allocators don\u0027t share a base class?\n\nThey have unlike interfaces. Well, only ::Deallocate is common but that\u0027s by happenstance.",
+      "parentUuid": "686176da_42a14432",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 46
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "905cda0a_469a413c",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -332,6 +566,30 @@
       "writtenOn": "2019-10-10T12:55:08Z",
       "side": 1,
       "message": "What else would we do for small resources? Also it will be a common advice for WebGPU users to batch things so small resources should be rare.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 66
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2369298_1ff669d1",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "\u003e What else would we do for small resources?\n\nThat\u0027s where CommittedResource + BuddyAllocator comes in. \u003d)\n\n\u003e Also it will be a common advice for WebGPU users to batch things so small resources should be rare.\n\nAnecdotally, Aquarium allocates 4KB buffers which requires a whole new 64KB page per allocation.",
+      "parentUuid": "905cda0a_469a413c",
       "range": {
         "startLine": 125,
         "startChar": 0,
@@ -361,6 +619,24 @@
     },
     {
       "key": {
+        "uuid": "32655136_57a9a4f6",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82288eaa_1977342c",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca9d457a_4202a7b7",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -384,6 +660,30 @@
     },
     {
       "key": {
+        "uuid": "7a23a092_98211f87",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ca9d457a_4202a7b7",
+      "range": {
+        "startLine": 127,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 9
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0429a431_eaae8a65",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -401,6 +701,24 @@
     },
     {
       "key": {
+        "uuid": "501c99b4_0abb11db",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Please see my other response.",
+      "parentUuid": "0429a431_eaae8a65",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b83aebf_4915c756",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -412,6 +730,24 @@
       "writtenOn": "2019-10-10T12:55:08Z",
       "side": 1,
       "message": "Having the logic here hides it a bit, how about moving it in [1] so we can do:\n\n if (resource is too large) {\n   create committed\n } else {\n   create placed\n }\n\nThis way SubAllocateMemory is guaranteed to provide an allocation or a DAWN_OUT_OF_MEMORY_ERROR.",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6108893_88b95f45",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Does [1] refer to ::AllocateMemory?",
+      "parentUuid": "6b83aebf_4915c756",
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -435,6 +771,24 @@
     },
     {
       "key": {
+        "uuid": "ac1db9c0_4413f857",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Please see my other response.",
+      "parentUuid": "15db9dde_841480c8",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b13a7674_325ce655",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -455,6 +809,30 @@
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1de0bf82_228acb19",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b13a7674_325ce655",
+      "range": {
+        "startLine": 189,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 44
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -492,6 +870,24 @@
     },
     {
       "key": {
+        "uuid": "fea59386_f8d382ac",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "I do not have plans for using custom heaps. But I do plan to investigate.",
+      "parentUuid": "0328b9b1_06245c81",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fef3083_f0ed0a16",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
         "patchSetId": 37
@@ -503,6 +899,24 @@
       "writtenOn": "2019-10-10T12:55:08Z",
       "side": 1,
       "message": "nit: prefer using \"using\"\n\nWhy do we need this extra dimension? We seem to bucket by heap level, but the point of the buddy allocator is that it can allocate resources of various sizes in the same buddy system no?",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fe6c084_f705117b",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "The level is a heap threshold (or max resource size) each buddy system can satisfy. The fact the heap is created on-demand up to a specific threshold is very important for managing residency - we do not want to allocate a 32GB heap when only a 1MB heap was sufficient.",
+      "parentUuid": "9fef3083_f0ed0a16",
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -529,6 +943,30 @@
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b82dec8_d8ac4599",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "I\u0027m not sure what D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS does across drivers. It\u0027s not very well documented and I suspect its separated due to side-effects. This is a downside of that approach. If the flags are not combined right, more attention is needed.\n\nI don\u0027t have a strong opinion either way, SGTM.",
+      "parentUuid": "c46abb17_a3fb5f3d",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 87
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

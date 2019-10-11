@@ -571,6 +571,30 @@
     },
     {
       "key": {
+        "uuid": "5ab50a7d_78cdef6b",
+        "filename": "src/dawn_native/ResourceHeap.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86638df1_ac63d633",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7106ea7c_64f13e92",
         "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
         "patchSetId": 32
@@ -632,6 +656,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "424b0d8f_435be6d8",
+        "filename": "src/dawn_native/ResourceHeapAllocator.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f0e13de5_d2e9b697",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -729,6 +771,30 @@
     },
     {
       "key": {
+        "uuid": "215a038c_df82ff80",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a44d08f_5ebc79d7",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 58
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63dbaa27_49cc9cee",
         "filename": "src/dawn_native/ResourceHeapAllocator.h",
         "patchSetId": 32
@@ -793,6 +859,24 @@
     },
     {
       "key": {
+        "uuid": "4d42f7e2_b9ce967a",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "734ca538_541ee11c",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d497d069_6e12a81f",
         "filename": "src/dawn_native/ResourceHeapAllocator.h",
         "patchSetId": 32
@@ -840,6 +924,30 @@
     },
     {
       "key": {
+        "uuid": "4aee1fba_06aab439",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "579ca1f1_d7fcbae4",
+      "range": {
+        "startLine": 72,
+        "startChar": 65,
+        "endLine": 72,
+        "endChar": 84
+      },
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bce50962_e0b47287",
         "filename": "src/dawn_native/ResourceHeapAllocator.h",
         "patchSetId": 32
@@ -854,6 +962,24 @@
       "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4b3b42d_a186f219",
+        "filename": "src/dawn_native/ResourceHeapAllocator.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-11T18:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bce50962_e0b47287",
+      "revId": "708a8901d3ccbecdb0b5046f869aae6fd1594939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
