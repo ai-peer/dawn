@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "294e098e_3c167be7",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-11T01:57:46Z",
+      "side": 1,
+      "message": "nit: I know this is the same as the way other flags are handled, but the strstr already checks there\u0027s an \u0027\u003d\u0027 so it\u0027s not necessary to search for it. You could just do something like mTraceFile \u003d argv[i] + strlen(\"--trace-file\u003d\") and omit the if.",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2155f52_3045deaa",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-11T01:57:46Z",
+      "side": 1,
+      "message": "nit: could use TRACE_EVENT0 by putting a block around this section (or even not - it\u0027s the end of the function anyway)",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
