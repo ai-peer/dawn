@@ -19,6 +19,14 @@
 #include "dawn_native/Commands.h"
 #include "dawn_native/dawn_platform.h"
 
+#include <string>
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+#    define SYSTEM_SEP "\\"
+#else
+#    define SYSTEM_SEP "/"
+#endif
+
 namespace dawn_native { namespace vulkan {
 
     VkCompareOp ToVulkanCompareOp(dawn::CompareFunction op);
@@ -27,6 +35,9 @@ namespace dawn_native { namespace vulkan {
     VkBufferImageCopy ComputeBufferImageCopyRegion(const BufferCopy& bufferCopy,
                                                    const TextureCopy& textureCopy,
                                                    const Extent3D& copySize);
+
+    bool SetEnvironmentVar(const char* variableName, const char* value);
+    std::string GetExecutableDirectory();
 
 }}  // namespace dawn_native::vulkan
 

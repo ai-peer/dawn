@@ -19,6 +19,17 @@
 #include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/TextureVk.h"
 
+#if defined(DAWN_PLATFORM_WINDOWS)
+#    include <Windows.h>
+#    include <array>
+#elif defined(DAWN_PLATFORM_LINUX)
+#    include <limits.h>
+#    include <unistd.h>
+#    include <cstdlib>
+#else
+#    error "Unimplemented Vulkan backend platform."
+#endif
+
 namespace dawn_native { namespace vulkan {
 
     VkCompareOp ToVulkanCompareOp(dawn::CompareFunction op) {
@@ -95,4 +106,41 @@ namespace dawn_native { namespace vulkan {
 
         return region;
     }
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+    bool SetEnvironmentVar(const char* variableName, const char* value) {
+        return (SetEnvironmentVariableA(variableName, value) == TRUE);
+    }
+#elif defined(DAWN_PLATFORM_POSIX)
+    bool SetEnvironmentVar(const char* variableName, const char* value) {
+        return (setenv(variableName, value, 1) == 0);
+    }
+#else
+#    error "Implement SetEnvironmentVar for your platform."
+#endif
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+    std::string GetExecutableDirectory() {
+        std::array<char, MAX_PATH> executableFileBuf;
+        DWORD executablePathLen = GetModuleFileNameA(nullptr, executableFileBuf.data(),
+                                                     static_cast<DWORD>(executableFileBuf.size()));
+        std::string executablePath =
+            executablePathLen > 0 ? std::string(executableFileBuf.data()) : "";
+        size_t lastPathSepLoc = executablePath.find_last_of(SYSTEM_SEP);
+        return (lastPathSepLoc != std::string::npos) ? executablePath.substr(0, lastPathSepLoc)
+                                                     : "";
+    }
+#elif defined(DAWN_PLATFORM_LINUX)
+    std::string GetExecutableDirectory() {
+        std::array<char, PATH_MAX> path;
+        ssize_t result = readlink("/proc/self/exe", path.data(), PATH_MAX);
+        std::string executablePath = std::string(path.data(), (result > 0) ? result : 0);
+        size_t lastPathSepLoc = executablePath.find_last_of(SYSTEM_SEP);
+        return (lastPathSepLoc != std::string::npos) ? executablePath.substr(0, lastPathSepLoc)
+                                                     : "";
+    }
+#else
+#    error "Implement GetExecutableDirectory for your platform."
+#endif
+
 }}  // namespace dawn_native::vulkan
