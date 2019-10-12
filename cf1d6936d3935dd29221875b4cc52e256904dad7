@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "99a15a9a_066ecbdc",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-12T01:15:04Z",
+      "side": 1,
+      "message": "If we configure vsync in [1], then NativeSwapChainImpl::Configure() can return an error when VK_PRESENT_MODE_IMMEDIATE_KHR is not supported.",
+      "parentUuid": "cfccf99a_762ed7b0",
+      "range": {
+        "startLine": 32,
+        "startChar": 24,
+        "endLine": 32,
+        "endChar": 45
+      },
+      "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "080243da_3718e686",
         "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 4
@@ -36,6 +60,23 @@
       "writtenOn": "2019-10-12T00:22:27Z",
       "side": 1,
       "message": "Should the configure of vsync be the part of configuration of swap chain (here) ?",
+      "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40768426_effdf127",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-12T01:15:04Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
