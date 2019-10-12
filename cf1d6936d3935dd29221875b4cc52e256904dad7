@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "cfccf99a_762ed7b0",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-10-12T01:11:53Z",
+      "side": 1,
+      "message": "It seems turn off vsync may not work on some platform that cannot support VK_PRESENT_MODE_IMMEDIATE_KHR. Should user know when it fails to turn off vsync?",
+      "range": {
+        "startLine": 32,
+        "startChar": 24,
+        "endLine": 32,
+        "endChar": 45
+      },
+      "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "080243da_3718e686",
         "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 4
