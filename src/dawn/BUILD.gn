@@ -92,5 +92,5 @@ dawn_component("libdawn_proc") {
     ":libdawn_proc_gen",
   ]
   sources = get_target_outputs(":libdawn_proc_gen")
-  sources += [ "src/include/dawn/dawn_proc.h" ]
+  sources += [ "${dawn_root}/src/include/dawn/dawn_proc.h" ]
 }
