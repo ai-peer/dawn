@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "86087fa5_bc9ee7ee",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T22:41:05Z",
+      "side": 1,
+      "message": "Rafael, is your idea to do something like:\n\nDAWN_TRY(commandList-\u003eReset(...), {\n  // some cleanup code which happens if there\u0027s an error.\n});\n\n?\n\nI think for now, it\u0027d be better not to add extra complex macros unless we need this pattern in many places. Two ideas:\n\n1) Write it out as you suggested.\n\n2) Move-construct a ComPtr\u003cID3D12CommandList\u003e from mD3D12CommandList, and then Move it back after the DAWN_TRY.\n\nComPtr\u003cID3D12CommandList\u003e commandList(std::move(mD3D12CommandList));\nDAWN_TRY(commandList-\u003eReset(...));\nmD3D12CommandList \u003d std::move(commandList);\n\nWhat do you think?",
+      "parentUuid": "bb852d94_27fa5b2b",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "742a661847a22efd57f21447dab3fd8908ac3d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62115dff_2c66c678",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 7
