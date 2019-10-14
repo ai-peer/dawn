@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "035f8d8b_9735c38a",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T18:53:58Z",
+      "side": 1,
+      "message": "Why did we need to wrap this in unique_ptr and immediately release it? Can we just return |mCommandAllocators[firstFreeIndex]|?",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 23
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

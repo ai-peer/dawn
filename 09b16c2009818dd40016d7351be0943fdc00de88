@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "bb969967_cbb1b275",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T18:53:58Z",
+      "side": 1,
+      "message": "(Yes, also the DAWN_UNLIKELY inside)",
+      "parentUuid": "08aa9be5_53d33395",
+      "range": {
+        "startLine": 221,
+        "startChar": 15,
+        "endLine": 221,
+        "endChar": 27
+      },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0c18e38_de49e122",
         "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
         "patchSetId": 4
