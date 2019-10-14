@@ -33,6 +33,24 @@
       "revId": "2725f086dfb96905c794157bfa1e410bf6411299",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7317a9cc_4784affc",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T22:27:56Z",
+      "side": 1,
+      "message": "We\u0027re already in the Device destructor, so it\u0027s effectively lost.",
+      "parentUuid": "9fe3c2a1_eab06bfb",
+      "revId": "2725f086dfb96905c794157bfa1e410bf6411299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
