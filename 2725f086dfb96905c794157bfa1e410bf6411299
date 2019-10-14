@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56a98460_4e249e44",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-14T22:22:30Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we lose device on OOM?",
+      "revId": "2725f086dfb96905c794157bfa1e410bf6411299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fe3c2a1_eab06bfb",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-14T22:22:30Z",
+      "side": 1,
+      "message": "Technically yes, but why not lose the dawn device if we get device lost? I assume we\u0027ll get the signal elsewhere too but it seems best to catch it here too.",
+      "revId": "2725f086dfb96905c794157bfa1e410bf6411299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
