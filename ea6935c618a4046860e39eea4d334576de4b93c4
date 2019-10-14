@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bff06709_9a1593ec",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-10-14T20:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecbbb9e2_31519c36",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 23
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d828947a_0f5af0ad",
         "filename": "src/dawn_native/d3d12/CommandAllocatorManager.h",
         "patchSetId": 5
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "bed88cdd_166055cc",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-10-14T20:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d828947a_0f5af0ad",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 32
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "afa9e2ad_e20506bd",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 5
@@ -92,6 +140,30 @@
       "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dce90715_2e68d92f",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-10-14T20:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afa9e2ad_e20506bd",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
