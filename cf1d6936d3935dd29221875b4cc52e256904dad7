@@ -104,6 +104,24 @@
       "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "883cd815_55306f06",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T08:04:57Z",
+      "side": 1,
+      "message": "Eventually yes, but we\u0027ll handle that when we completely redo our swapchain once Mozilla has contributed that part to webgpu-native/webgpu-headers. A toggle is strictly less powerful and more annoying to use but is much much simpler to make and replace when we rewrite swapchains.",
+      "parentUuid": "080243da_3718e686",
+      "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
