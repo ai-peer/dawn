@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "180455ab_7c311d9e",
+        "filename": "README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T20:56:01Z",
+      "side": 1,
+      "message": "function pointers",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 55
+      },
+      "revId": "5b4c46c3aa32579a16937103e678c0e58333102f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
