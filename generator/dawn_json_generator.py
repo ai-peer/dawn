@@ -421,24 +421,6 @@ def as_cProc(type_name, method_name):
     assert(not type_name.native and not method_name.native)
     return 'Dawn' + 'Proc' + type_name.CamelCase() + method_name.CamelCase()
 
-def as_frontendType(typ):
-    if typ.category == 'object':
-        return typ.name.CamelCase() + 'Base*'
-    elif typ.category in ['bitmask', 'enum']:
-        return 'dawn::' + typ.name.CamelCase()
-    elif typ.category == 'structure':
-        return as_cppType(typ.name)
-    else:
-        return as_cType(typ.name)
-
-def as_wireType(typ):
-    if typ.category == 'object':
-        return typ.name.CamelCase() + '*'
-    elif typ.category in ['bitmask', 'enum']:
-        return 'Dawn' + typ.name.CamelCase()
-    else:
-        return as_cppType(typ.name)
-
 def cpp_native_methods(types, typ):
     return sorted(typ.methods + typ.native_methods, key=lambda method: method.name.canonical_case())
 
@@ -509,13 +491,24 @@ class MultiGeneratorFromDawnJSON(Generator):
             renders.append(FileRender('mock_api.cpp', 'src/dawn/mock_dawn.cpp', [base_params, api_params, c_params]))
 
         if 'dawn_native_utils' in targets:
+            def as_frontendType(typ):
+                if typ.category == 'object':
+                    return typ.name.CamelCase() + 'Base*'
+                elif typ.category in ['bitmask', 'enum']:
+                    return 'dawn::' + typ.name.CamelCase()
+                elif typ.category == 'structure':
+                    return as_cppType(typ.name)
+                else:
+                    return as_cType(typ.name)
+
             frontend_params = [
                 base_params,
                 api_params,
                 c_params,
                 {
-                    'as_frontendType': lambda typ: as_frontendType(typ), # TODO as_frontendType and friends take a Type and not a Name :(
-                    'as_annotated_frontendType': lambda arg: annotated(as_frontendType(arg.type), arg)
+                    'as_frontendType': as_frontendType,
+                    'as_annotated_frontendType': lambda arg: annotated(as_frontendType(arg.type), arg),
+                    'proc_table_namespaces': ['dawn_native']
                 }
             ]
 
@@ -527,6 +520,14 @@ class MultiGeneratorFromDawnJSON(Generator):
 
         if 'dawn_wire' in targets:
             additional_params = compute_wire_params(api_params, wire_json)
+
+            def as_wireType(typ):
+                if typ.category == 'object':
+                    return typ.name.CamelCase() + '*'
+                elif typ.category in ['bitmask', 'enum']:
+                    return 'Dawn' + typ.name.CamelCase()
+                else:
+                    return as_cppType(typ.name)
 
             wire_params = [
                 base_params,

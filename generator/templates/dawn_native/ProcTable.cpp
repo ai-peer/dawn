@@ -12,12 +12,7 @@
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
 
-#include "common/Assert.h"
-
 #include "dawn_native/dawn_platform.h"
-#include "dawn_native/DawnNative.h"
-#include "dawn_native/ErrorData.h"
-#include "dawn_native/ValidationUtils_autogen.h"
 
 {% for type in by_category["object"] %}
     {% if type.name.canonical_case() not in ["texture view"] %}
@@ -25,7 +20,9 @@
     {% endif %}
 {% endfor %}
 
-namespace dawn_native {
+{% for namespace_name in proc_table_namespaces %}
+    namespace {{namespace_name}} {
+{% endfor %}
 
     namespace {
         {% for type in by_category["object"] %}
@@ -83,4 +80,6 @@ namespace dawn_native {
         return table;
     }
 
-}
+{% for namespace_name in proc_table_namespaces %}
+    }  // namespace {{namespace_name}}
+{% endfor %}
