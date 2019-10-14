@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f92b872_0c36ed0d",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T20:44:17Z",
+      "side": 1,
+      "message": "nit: strcmp is probably undefined if procName is nullptr. Could we do a small\nif (procName \u003d\u003d nullptr) return nullptr;\n?",
+      "revId": "bace24480fa21f829cd9757307666f6ec1815649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4688c4b_d5a0f192",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T20:44:17Z",
+      "side": 1,
+      "message": "When would an application need to use this? Is this for completeness?",
+      "range": {
+        "startLine": 97,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 9
+      },
+      "revId": "bace24480fa21f829cd9757307666f6ec1815649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5254832_2e1acaca",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T20:44:17Z",
+      "side": 1,
+      "message": "uuunit: result.reserve(sProcMapSize);",
+      "revId": "bace24480fa21f829cd9757307666f6ec1815649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "920a382d_dfd36775",
+        "filename": "src/tests/unittests/GetProcAddressTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-14T20:44:17Z",
+      "side": 1,
+      "message": "typo: parameter",
+      "range": {
+        "startLine": 26,
+        "startChar": 85,
+        "endLine": 26,
+        "endChar": 94
+      },
+      "revId": "bace24480fa21f829cd9757307666f6ec1815649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
