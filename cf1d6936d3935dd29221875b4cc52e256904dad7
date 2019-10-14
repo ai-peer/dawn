@@ -140,6 +140,24 @@
       "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07e0e476_9a7f7b3d",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T08:47:50Z",
+      "side": 1,
+      "message": "We don\u0027t have a way to know at the moment, maybe an ASSERT() that it works.\n\nWhich is why the toggle is a bad solution that should be replaced with something better as soon as we have agreed upon the interface for it.",
+      "parentUuid": "f95d333b_5ef39e97",
+      "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
