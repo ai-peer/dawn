@@ -122,6 +122,24 @@
       "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f95d333b_5ef39e97",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-10-14T08:44:18Z",
+      "side": 1,
+      "message": "Hi,Corentin,\nThanks for your explain but my question is still here : if the platform fails to turn off vsync, how developers know it? We discuss some tricky way but seems not good enough. Do you have some suggestions about this if we use toggle?",
+      "parentUuid": "883cd815_55306f06",
+      "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
