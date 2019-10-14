@@ -46,6 +46,75 @@
       "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d828947a_0f5af0ad",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-14T20:01:21Z",
+      "side": 1,
+      "message": "Please put back the usage of ComPtr. Your new code now leaks these.",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 32
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afa9e2ad_e20506bd",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-14T20:01:21Z",
+      "side": 1,
+      "message": "Can this be CheckHRESULT?",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edfee09d_182527db",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-14T20:01:21Z",
+      "side": 1,
+      "message": "Why is this using clause needed?",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 53
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
