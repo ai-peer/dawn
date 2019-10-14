@@ -203,6 +203,30 @@
     },
     {
       "key": {
+        "uuid": "b00b0355_39d82833",
+        "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "I actually think the code here was correct: it is valid to reallocate resources even if the same memory region is in use by the GPU because by the time the new resource starts using the memory range, the old resource will have completely finished running on the GPU.",
+      "parentUuid": "661f36ab_00a11870",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18acd316_8f3078c8",
         "filename": "src/dawn_native/d3d12/BuddyPlacedResourceAllocatorD3D12.h",
         "patchSetId": 37
@@ -337,6 +361,24 @@
       "side": 1,
       "message": "\u003e We are piping the memoryFlags from [1] to here but there is always a single memory flag used for each buddy system.\n\nThe memory flag is used here to create the sized heap on-demand.\n\n\u003e How about making BuddyPlacedResourceAllocator implement the MemoryAllocator interface and pass itself to the BuddyMemoryAllocator\n\nI think it\u0027s better to keep resources near the device and not tied to implementing heap-interfaces. Perhaps we can revisit for committed resource based sub-allocation.",
       "parentUuid": "9906a3f7_a053c366",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfc16499_59a41c5f",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "\u003e \u003e We are piping the memoryFlags from [1] to here but there is always a single memory flag used for each buddy system.\n\u003e \n\u003e The memory flag is used here to create the sized heap on-demand.\n\u003e \nYes, that\u0027s orthogonal: we can store the memory flags as a member of this class instead of piping it through several function calls if we make this class implement the MemoryAllocator interface.\n\n\u003e \u003e How about making BuddyPlacedResourceAllocator implement the MemoryAllocator interface and pass itself to the BuddyMemoryAllocator\n\u003e \n\u003e I think it\u0027s better to keep resources near the device and not tied to implementing heap-interfaces. Perhaps we can revisit for committed resource based sub-allocation.\n\nI don\u0027t understand your answer, making this class implement MemoryAllocator doesn\u0027t make \"resources farther to the device\".",
+      "parentUuid": "d92b90be_c5326cb9",
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -602,6 +644,30 @@
     },
     {
       "key": {
+        "uuid": "ebc57219_16993117",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "\u003e \u003e What else would we do for small resources?\n\u003e \n\u003e That\u0027s where CommittedResource + BuddyAllocator comes in. \u003d)\n\u003e \n\nI thought we agreed that wouldn\u0027t work. For example with this mechanism we wouldn\u0027t be able to produce the correct resource transition barriers.",
+      "parentUuid": "a2369298_1ff669d1",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 66
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82288eaa_1977342c",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -748,6 +814,24 @@
       "side": 1,
       "message": "Does [1] refer to ::AllocateMemory?",
       "parentUuid": "6b83aebf_4915c756",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af6a438c_67763911",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "Yes, sorry, it should have been [2] and I forgot to add the marker.\n\nNot that this isn\u0027t solved in patchset 39.",
+      "parentUuid": "f6108893_88b95f45",
       "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -923,6 +1007,24 @@
     },
     {
       "key": {
+        "uuid": "f3386d1e_edb12d06",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "Yes, and the point of the meta-buddy system is that we can have code like the following:\n\n if (resourceSize \u003e kMaxBuddyBlock) {\n   create committed resource (or create a heap + create placed resource)\n } else {\n   get a memory range from the buddy system\n   create placed resource in that range\n }\n\nif kMaxBuddyBlock is 1MB you get the property you desire. Right now the logic is more like having a bunch of slab allocators for powers of two.",
+      "parentUuid": "8fe6c084_f705117b",
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c46abb17_a3fb5f3d",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
         "patchSetId": 37
@@ -958,6 +1060,30 @@
       "side": 1,
       "message": "I\u0027m not sure what D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS does across drivers. It\u0027s not very well documented and I suspect its separated due to side-effects. This is a downside of that approach. If the flags are not combined right, more attention is needed.\n\nI don\u0027t have a strong opinion either way, SGTM.",
       "parentUuid": "c46abb17_a3fb5f3d",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 87
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e56c4d92_77af2514",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "Yes it will be interesting to know what effect ALLOW_SHADER_ATOMICS has. We definitely need this flag for storage buffer / textures because they support atomic operations but we can see later if we need to split between atomic vs. not or use a single heap type for both.",
+      "parentUuid": "2b82dec8_d8ac4599",
       "range": {
         "startLine": 80,
         "startChar": 0,

@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36bd2b5d_5ac47b55",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "Same comment as before, see discussion over there.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f2bd5bf_132f4af0",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "nit: anonymous namespace.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c54594dc_1cfc4aa4",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "How does the bug relate to the assert?\n\nAlso the assert is correct because we are returning an unsigned number and Log2(4) - Log2(kMinHeapSize) will overflow.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9148b7a_55017055",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "nit: didn\u0027t we use to have ToBackend() for this?",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c85658c_70fbe384",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "Maybe DEVICE_LOST here? We already have memory, it\u0027s just assigning it to a resource that failed so it isn\u0027t an OOM.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f6e9142_008d7111",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "Now this doesn\u0027t need to be a class and can just be a helper method on ResourceAllocatorManager.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d568cc04_c82af387",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "nit: not sure what \"only\" means here.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02a5ed6f_6c1f7163",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "nit: Add NonRtDs or similar to better differentiate with RenderableTexturesOrDepthOnly",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79249f0_426f2d5d",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "These two classes are never used outside of the header (and never should) so they could be defined in the .cpp file itself. They would be replaced by forward declaration instead.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5dac19b_26ffdcf3",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T15:46:00Z",
+      "side": 1,
+      "message": "See comment on patchset 37, I don\u0027t think we need to defer deletion of the allocation.",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
