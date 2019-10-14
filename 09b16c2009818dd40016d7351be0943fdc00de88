@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "62ee4421_be71ef9b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T08:30:55Z",
+      "side": 1,
+      "message": "Correctness is ok, are you suggesting this to keep the full backtrace information?",
+      "parentUuid": "50bb40fe_22d4bed5",
+      "range": {
+        "startLine": 221,
+        "startChar": 15,
+        "endLine": 221,
+        "endChar": 27
+      },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0c18e38_de49e122",
         "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
         "patchSetId": 4
@@ -65,6 +89,23 @@
     },
     {
       "key": {
+        "uuid": "22bd8d67_9b178064",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T08:30:55Z",
+      "side": 1,
+      "message": "nit: if (DAWN_LIKELY(SUCCEEDED(result))) to maybe help a tiny bit performance in this hot path.",
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06984182_87843557",
         "filename": "src/dawn_native/d3d12/D3D12Error.h",
         "patchSetId": 4
@@ -82,6 +123,23 @@
         "endLine": 23,
         "endChar": 40
       },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "938d4bba_e934dc5f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T08:30:55Z",
+      "side": 1,
+      "message": "note for this CL, but this could be done after each QueueSubmit so we don\u0027t need NextSerial at all.",
       "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -128,6 +186,23 @@
         "endLine": 299,
         "endChar": 69
       },
+      "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cf0879a_944717f5",
+        "filename": "src/dawn_native/d3d12/ResourceAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T08:30:55Z",
+      "side": 1,
+      "message": "nit: include isn\u0027t used.",
       "revId": "09b16c2009818dd40016d7351be0943fdc00de88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
