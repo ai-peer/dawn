@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb852d94_27fa5b2b",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-14T21:38:43Z",
+      "side": 1,
+      "message": "Your new code removed the Reset call that the previous code had. Unfortunately, none of the DAWN_TRY macros handles this \"rethrow\" use case very well. Ideally, we would want to refactor the inner part of the DAWN_TRY macros to make this easier ... or write the code longhand.\n\n@Corentin and @Austin, do you have any better ideas?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "742a661847a22efd57f21447dab3fd8908ac3d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62115dff_2c66c678",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-14T21:38:43Z",
+      "side": 1,
+      "message": "Nit: The error string doesn\u0027t quite match the method we\u0027re calling.",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 62
+      },
+      "revId": "742a661847a22efd57f21447dab3fd8908ac3d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
