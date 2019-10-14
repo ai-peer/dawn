@@ -19,19 +19,19 @@ namespace dawn_native { namespace d3d12 {
     MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
                                              CommandAllocatorManager* commandAllocationManager) {
         ASSERT(!IsOpen());
+        ID3D12CommandAllocator* commandAllocator;
+        DAWN_TRY_ASSIGN(commandAllocator, commandAllocationManager->ReserveCommandAllocator());
         if (mD3d12CommandList != nullptr) {
-            const HRESULT hr = mD3d12CommandList->Reset(
-                commandAllocationManager->ReserveCommandAllocator().Get(), nullptr);
+            const HRESULT hr = mD3d12CommandList->Reset(commandAllocator, nullptr);
             if (FAILED(hr)) {
                 mD3d12CommandList.Reset();
                 return DAWN_DEVICE_LOST_ERROR("Error resetting command list.");
             }
         } else {
             ComPtr<ID3D12GraphicsCommandList> d3d12GraphicsCommandList;
-            const HRESULT hr = d3d12Device->CreateCommandList(
-                0, D3D12_COMMAND_LIST_TYPE_DIRECT,
-                commandAllocationManager->ReserveCommandAllocator().Get(), nullptr,
-                IID_PPV_ARGS(&d3d12GraphicsCommandList));
+            const HRESULT hr =
+                d3d12Device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator,
+                                               nullptr, IID_PPV_ARGS(&d3d12GraphicsCommandList));
             if (FAILED(hr)) {
                 return DAWN_DEVICE_LOST_ERROR("Error creating a direct command list.");
             }
