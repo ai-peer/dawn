@@ -24,46 +24,65 @@ import("${dawn_root}/scripts/dawn_component.gni")
 dawn_json_generator("dawn_headers_gen") {
   target = "dawn_headers"
   outputs = [
-    "src/include/dawn/dawncpp.h",
     "src/include/dawn/dawn.h",
+    "src/include/dawn/dawn_proc_table.h",
   ]
 }
 
 source_set("dawn_headers") {
   all_dependent_configs = [ "${dawn_root}/src/common:dawn_public_include_dirs" ]
-  deps = [
+  public_deps = [
     ":dawn_headers_gen",
   ]
 
   sources = get_target_outputs(":dawn_headers_gen")
   sources += [
-    "${dawn_root}/src/include/dawn/EnumClassBitmasks.h",
     "${dawn_root}/src/include/dawn/dawn_export.h",
     "${dawn_root}/src/include/dawn/dawn_wsi.h",
   ]
 }
 
 ###############################################################################
-# libdawn
+# Dawn C++ wrapper
 ###############################################################################
 
-dawn_json_generator("libdawn_gen") {
-  target = "libdawn"
+dawn_json_generator("dawncpp_gen") {
+  target = "dawncpp"
   outputs = [
     "src/dawn/dawncpp.cpp",
-    "src/dawn/dawn.c",
+    "src/include/dawn/dawncpp.h",
   ]
 }
 
-dawn_component("libdawn") {
+source_set("dawncpp") {
+  deps = [
+    ":dawn_headers",
+    ":dawncpp_gen",
+  ]
+  sources = get_target_outputs(":dawncpp_gen")
+  sources += [ "${dawn_root}/src/include/dawn/EnumClassBitmasks.h" ]
+}
+
+###############################################################################
+# libdawn_proc
+###############################################################################
+
+dawn_json_generator("libdawn_proc_gen") {
+  target = "dawn_proc"
+  outputs = [
+    "src/dawn/dawn_proc.c",
+  ]
+}
+
+dawn_component("libdawn_proc") {
   DEFINE_PREFIX = "DAWN"
 
   public_deps = [
     ":dawn_headers",
   ]
-
   deps = [
-    ":libdawn_gen",
+    ":libdawn_proc_gen",
   ]
-  sources = get_target_outputs(":libdawn_gen")
+  sources = get_target_outputs(":libdawn_proc_gen")
+  sources += [ "src/include/dawn/dawn_proc.h" ]
 }
