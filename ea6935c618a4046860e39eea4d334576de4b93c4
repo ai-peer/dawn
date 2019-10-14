@@ -115,6 +115,30 @@
       "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a5893dd_de77a1b7",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-14T20:08:41Z",
+      "side": 1,
+      "message": "This \"imports\" the PipelineLayoutBase constructor as a PipelineLayout constructor.\n\nOtherwise new PipelineLayout(DeviceBase*, const Descriptor*) doesn\u0027t exist.",
+      "parentUuid": "edfee09d_182527db",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 53
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
