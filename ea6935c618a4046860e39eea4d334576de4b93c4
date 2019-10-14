@@ -22,6 +22,30 @@
       "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecbbb9e2_31519c36",
+        "filename": "src/dawn_native/d3d12/CommandAllocatorManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-10-14T19:00:48Z",
+      "side": 1,
+      "message": "woops, yes, I was playing around with this when mCommandAllocators was still a ComPtr",
+      "parentUuid": "035f8d8b_9735c38a",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 23
+      },
+      "revId": "ea6935c618a4046860e39eea4d334576de4b93c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
