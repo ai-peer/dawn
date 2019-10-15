@@ -16,6 +16,24 @@
       "revId": "91d1e6e21b8ad2dde4dbfdf7832c58a15659ea57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f464b609_b2aefb3e",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T21:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "370a80da_ef426fa2",
+      "revId": "91d1e6e21b8ad2dde4dbfdf7832c58a15659ea57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
