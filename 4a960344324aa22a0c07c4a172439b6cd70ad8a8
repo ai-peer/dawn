@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "068d425f_6adb9f7f",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T22:01:33Z",
+      "side": 1,
+      "message": "Should we first compute NextPowerOfTwo(D3D12_RESOURCE_ALLOCATION_INFO.SizeInBytes) up front, compare with kMaxHeapSize, and then choose the allocation strategy?\n\nWe can pass D3D12_RESOURCE_ALLOCATION_INFO into CreatePlacedResource.\n\nRight now at [1] it looks like BuddyMemoryAllocator::Allocate will return kInvalidAllocation, and we\u0027ll go ahead and try to GetResourceHeap()-\u003eCreatePlacedResource it.\n\nI guess CreatePlacedResource could also early-return kInvalidAllocation after it calls BuddyMemoryAllocator::Allocate",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 9
+      },
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "918e9ab4_c4c64f3b",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T22:01:33Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 175,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 98
+      },
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
