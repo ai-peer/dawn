@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c5528d3_340cb89f",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T22:44:55Z",
+      "side": 1,
+      "message": "Failing msvc bot because we didn\u0027t include \u003cvector\u003e\nhttps://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket.appspot.com/8899504849007323536/+/steps/compile_with_ninja/0/stdout",
+      "range": {
+        "startLine": 125,
+        "startChar": 25,
+        "endLine": 125,
+        "endChar": 35
+      },
+      "revId": "c57b1802088a16065abb7897eb835cd277eb5ee2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
