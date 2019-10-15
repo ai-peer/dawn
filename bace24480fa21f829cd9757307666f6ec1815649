@@ -79,6 +79,23 @@
       "revId": "bace24480fa21f829cd9757307666f6ec1815649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d190100d_d63bda9d",
+        "filename": "src/tests/unittests/GetProcAddressTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-15T00:54:30Z",
+      "side": 1,
+      "message": "Will it also return the end if you ask for, say, \"0\" or \"\"?",
+      "revId": "bace24480fa21f829cd9757307666f6ec1815649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
