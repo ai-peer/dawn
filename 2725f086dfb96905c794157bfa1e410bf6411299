@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dacfc057_3dc46dbf",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-15T00:04:44Z",
+      "side": 1,
+      "message": "Never mind.",
+      "parentUuid": "56a98460_4e249e44",
+      "revId": "2725f086dfb96905c794157bfa1e410bf6411299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fe3c2a1_eab06bfb",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -51,6 +69,24 @@
       "revId": "2725f086dfb96905c794157bfa1e410bf6411299",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa1ed72a_4d23bad6",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-15T00:04:44Z",
+      "side": 1,
+      "message": "Oh, of course. I shouldn\u0027t try to review code on my phone.",
+      "parentUuid": "7317a9cc_4784affc",
+      "revId": "2725f086dfb96905c794157bfa1e410bf6411299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
