@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "89c901b6_1ec0240e",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36bd2b5d_5ac47b55",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f2bd5bf_132f4af0",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 39
@@ -33,6 +51,24 @@
       "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e419d00_b5e6c5f8",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "I thought Chromium allows unnamed namespaces so long as they are local to cpp.",
+      "parentUuid": "3f2bd5bf_132f4af0",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "03e01a1f_7ef3227f",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "No longer needed.",
+      "parentUuid": "c54594dc_1cfc4aa4",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9148b7a_55017055",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 39
@@ -67,6 +121,24 @@
       "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80b21e40_73745856",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Removed as a simple static_cast will suffice.",
+      "parentUuid": "c9148b7a_55017055",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "a9f8d352_dc3d63a1",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3c85658c_70fbe384",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f6e9142_008d7111",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 39
@@ -101,6 +191,24 @@
       "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1f0febe_a62b72b6",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f6e9142_008d7111",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "95fc74b2_065fcca1",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d568cc04_c82af387",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02a5ed6f_6c1f7163",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
         "patchSetId": 39
@@ -135,6 +261,24 @@
       "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e99895df_6959abe8",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02a5ed6f_6c1f7163",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4e59aae9_da770945",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Don\u0027t believe it\u0027s possible to forward declare a type used in a template (SerialQueue).",
+      "parentUuid": "b79249f0_426f2d5d",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5dac19b_26ffdcf3",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
         "patchSetId": 39
@@ -169,6 +331,24 @@
       "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74766dad_b26dbc4a",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
+        "patchSetId": 39
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-15T18:54:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d5dac19b_26ffdcf3",
+      "revId": "a10f797af8d5181e2a591ac14dae94454fa6e719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
