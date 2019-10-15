@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "24af702e_69961044",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-15T00:46:52Z",
+      "side": 1,
+      "message": "That looks good to me. It\u0027s even possible that the extra IsError will be elided by the compiler.",
+      "parentUuid": "ab0390e1_dcb47d9a",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "742a661847a22efd57f21447dab3fd8908ac3d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "62115dff_2c66c678",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 7
