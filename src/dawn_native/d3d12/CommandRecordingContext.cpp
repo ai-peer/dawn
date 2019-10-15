@@ -16,6 +16,11 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    void CommandRecordingContext::AddToAcquireList(Ref<Texture> texture) {
+        ASSERT(IsOpen());
+        mAcquireTextures.insert(std::move(texture));
+    }
+
     MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
                                              CommandAllocatorManager* commandAllocationManager) {
         ASSERT(!IsOpen());
@@ -43,15 +48,35 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    ResultOrError<ID3D12GraphicsCommandList*> CommandRecordingContext::Close() {
+    MaybeError CommandRecordingContext::PreExecute() {
         ASSERT(IsOpen());
-        mIsOpen = false;
+        for (auto texture : mAcquireTextures) {
+            MaybeError error = texture->AcquireKeyedMutex();
+            if (error.IsError()) {
+                PostExecute();
+                mD3d12CommandList.Reset();
+                DAWN_TRY(std::move(error));
+            }
+        }
+
         const HRESULT hr = mD3d12CommandList->Close();
         if (FAILED(hr)) {
+            PostExecute();
             mD3d12CommandList.Reset();
             return DAWN_DEVICE_LOST_ERROR("Error closing pending command list.");
         }
-        return mD3d12CommandList.Get();
+
+        return {};
+    }
+
+    void CommandRecordingContext::PostExecute() {
+        ASSERT(IsOpen());
+        for (auto texture : mAcquireTextures) {
+            texture->ReleaseKeyedMutex();
+        }
+
+        mIsOpen = false;
+        mAcquireTextures.clear();
     }
 
     ID3D12GraphicsCommandList* CommandRecordingContext::GetCommandList() const {
@@ -63,6 +88,7 @@ namespace dawn_native { namespace d3d12 {
     void CommandRecordingContext::Release() {
         mD3d12CommandList.Reset();
         mIsOpen = false;
+        mAcquireTextures.clear();
     }
 
     bool CommandRecordingContext::IsOpen() const {

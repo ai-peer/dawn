@@ -211,7 +211,7 @@ namespace dawn_native { namespace d3d12 {
         mDescriptorHeapAllocator->Deallocate(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
-        DAWN_TRY(ExecuteCommandContext(nullptr));
+        DAWN_TRY(ExecutePendingCommandContext());
         NextSerial();
 
         return {};
@@ -234,25 +234,13 @@ namespace dawn_native { namespace d3d12 {
         mUsedComObjectRefs.Enqueue(object, GetPendingCommandSerial());
     }
 
-    MaybeError Device::ExecuteCommandContext(CommandRecordingContext* commandContext) {
-        UINT numLists = 0;
-        std::array<ID3D12CommandList*, 2> d3d12CommandLists;
-
-        // If there are pending commands, prepend them to ExecuteCommandLists
+    MaybeError Device::ExecutePendingCommandContext() {
         if (mPendingCommands.IsOpen()) {
-            ID3D12GraphicsCommandList* d3d12CommandList;
-            DAWN_TRY_ASSIGN(d3d12CommandList, mPendingCommands.Close());
-            d3d12CommandLists[numLists++] = d3d12CommandList;
+            DAWN_TRY(mPendingCommands.PreExecute());
+            ID3D12CommandList* d3d12CommandList = mPendingCommands.GetCommandList();
+            mCommandQueue->ExecuteCommandLists(1, &d3d12CommandList);
+            mPendingCommands.PostExecute();
         }
-        if (commandContext != nullptr) {
-            ID3D12GraphicsCommandList* d3d12CommandList;
-            DAWN_TRY_ASSIGN(d3d12CommandList, commandContext->Close());
-            d3d12CommandLists[numLists++] = d3d12CommandList;
-        }
-        if (numLists > 0) {
-            mCommandQueue->ExecuteCommandLists(numLists, d3d12CommandLists.data());
-        }
-
         return {};
     }
 
@@ -367,6 +355,62 @@ namespace dawn_native { namespace d3d12 {
             return nullptr;
         }
 
-        return new Texture(this, descriptor, std::move(d3d12Resource));
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+        if (ConsumedError<ComPtr<IDXGIKeyedMutex>>(CreateKeyedMutexForTexture(d3d12Resource.Get()),
+                                                   &dxgiKeyedMutex))
+            return nullptr;
+
+        return new Texture(this, descriptor, std::move(d3d12Resource), std::move(dxgiKeyedMutex));
     }
+
+    ResultOrError<ComPtr<IDXGIKeyedMutex>> Device::CreateKeyedMutexForTexture(
+        ID3D12Resource* d3d12Resource) {
+        HRESULT hr;
+        if (mD3d11On12Device == nullptr) {
+            ComPtr<ID3D11Device> d3d11Device;
+            ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
+            D3D_FEATURE_LEVEL d3dFeatureLevel;
+            IUnknown* const iUnknownQueue = mCommandQueue.Get();
+            GetFunctions()->d3d11on12CreateDevice(mD3d12Device.Get(), 0, nullptr, 0, &iUnknownQueue,
+                                                  1, 1, &d3d11Device, &d3d11DeviceContext,
+                                                  &d3dFeatureLevel);
+            hr = d3d11Device.As(&mD3d11On12Device);
+            if (FAILED(hr)) {
+                return DAWN_DEVICE_LOST_ERROR("Unable to create 11on12 device");
+            }
+        }
+
+        ComPtr<ID3D11Texture2D> d3d11Texture;
+        D3D11_RESOURCE_FLAGS resourceFlags;
+        resourceFlags.BindFlags = 0;
+        resourceFlags.MiscFlags = D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
+        resourceFlags.CPUAccessFlags = 0;
+        resourceFlags.StructureByteStride = 0;
+        hr = mD3d11On12Device->CreateWrappedResource(
+            d3d12Resource, &resourceFlags, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COMMON,
+            IID_PPV_ARGS(&d3d11Texture));
+        if (FAILED(hr)) {
+            return DAWN_DEVICE_LOST_ERROR("Unable to create D3D12 wrapped resource.");
+        }
+
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+        hr = d3d11Texture.As(&dxgiKeyedMutex);
+        if (FAILED(hr)) {
+            return DAWN_DEVICE_LOST_ERROR("Unable to query 11on12 resource for keyed mutex.");
+        }
+
+        return dxgiKeyedMutex;
+    }
+
+    void Device::ReleaseKeyedMutexForTexture(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex) {
+        ComPtr<ID3D11Resource> d3d11Resource;
+        HRESULT hr = dxgiKeyedMutex.As(&d3d11Resource);
+        if (FAILED(hr)) {
+            return;
+        }
+
+        ID3D11Resource* d3d11ResourceRaw = d3d11Resource.Get();
+        mD3d11On12Device->ReleaseWrappedResources(&d3d11ResourceRaw, 1);
+    }
+
 }}  // namespace dawn_native::d3d12

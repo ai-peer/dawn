@@ -33,6 +33,8 @@ namespace dawn_native { namespace d3d12 {
     DAWN_NATIVE_EXPORT DawnTexture WrapSharedHandle(DawnDevice device,
                                                     const DawnTextureDescriptor* descriptor,
                                                     HANDLE sharedHandle);
+    DAWN_NATIVE_EXPORT void SetAcquireMutexKey(DawnTexture texture, uint64_t key);
+    DAWN_NATIVE_EXPORT uint64_t GetAcquireMutexKey(DawnTexture texture);
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12BACKEND_H_
