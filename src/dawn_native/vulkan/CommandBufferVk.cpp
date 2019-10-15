@@ -14,7 +14,7 @@
 
 #include "dawn_native/vulkan/CommandBufferVk.h"
 
-#include "dawn_native/BindGroupTracker.h"
+#include "dawn_native/BindGroupAndUsageTracker.h"
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/RenderBundle.h"
@@ -91,16 +91,74 @@ namespace dawn_native { namespace vulkan {
             return region;
         }
 
-        class DescriptorSetTracker : public BindGroupTrackerBase<VkDescriptorSet, true, uint32_t> {
+        void ApplyDescriptorSets(Device* device,
+                                 VkCommandBuffer commands,
+                                 VkPipelineBindPoint bindPoint,
+                                 VkPipelineLayout pipelineLayout,
+                                 const std::bitset<kMaxBindGroups>& bindGroupsToApply,
+                                 const std::array<BindGroupBase*, kMaxBindGroups>& bindGroups,
+                                 const std::array<uint32_t, kMaxBindGroups>& dynamicOffsetCounts,
+                                 const std::array<std::array<uint32_t, kMaxBindingsPerGroup>,
+                                                  kMaxBindGroups>& dynamicOffsets) {
+            for (uint32_t dirtyIndex : IterateBitSet(bindGroupsToApply)) {
+                VkDescriptorSet set = ToBackend(bindGroups[dirtyIndex])->GetHandle();
+                const uint32_t* dynamicOffset = dynamicOffsetCounts[dirtyIndex] > 0
+                                                    ? dynamicOffsets[dirtyIndex].data()
+                                                    : nullptr;
+                device->fn.CmdBindDescriptorSets(commands, bindPoint, pipelineLayout, dirtyIndex, 1,
+                                                 &set, dynamicOffsetCounts[dirtyIndex],
+                                                 dynamicOffset);
+            }
+        }
+
+        class RenderDescriptorSetTracker : public BindGroupTrackerBase<true, uint32_t> {
           public:
-            void Apply(Device* device, VkCommandBuffer commands, VkPipelineBindPoint bindPoint) {
-                for (uint32_t dirtyIndex :
-                     IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
-                    device->fn.CmdBindDescriptorSets(
-                        commands, bindPoint, ToBackend(mPipelineLayout)->GetHandle(), dirtyIndex, 1,
-                        &mBindGroups[dirtyIndex], mDynamicOffsetCounts[dirtyIndex],
-                        mDynamicOffsetCounts[dirtyIndex] > 0 ? mDynamicOffsets[dirtyIndex].data()
-                                                             : nullptr);
+            void Apply(Device* device,
+                       CommandRecordingContext* recordingContext,
+                       VkPipelineBindPoint bindPoint) {
+                ApplyDescriptorSets(device, recordingContext->commandBuffer, bindPoint,
+                                    ToBackend(mPipelineLayout)->GetHandle(),
+                                    mDirtyBindGroupsObjectChangedOrIsDynamic, mBindGroups,
+                                    mDynamicOffsetCounts, mDynamicOffsets);
+                DidApply();
+            }
+        };
+
+        class ComputeDescriptorSetTracker : public BindGroupAndUsageTrackerBase<true, uint32_t> {
+          public:
+            void Apply(Device* device,
+                       CommandRecordingContext* recordingContext,
+                       VkPipelineBindPoint bindPoint) {
+                ApplyDescriptorSets(device, recordingContext->commandBuffer, bindPoint,
+                                    ToBackend(mPipelineLayout)->GetHandle(),
+                                    mDirtyBindGroupsObjectChangedOrIsDynamic, mBindGroups,
+                                    mDynamicOffsetCounts, mDynamicOffsets);
+
+                for (uint32_t bgl : IterateBitSet(mBindGroupLayoutsMask)) {
+                    for (uint32_t binding : IterateBitSet(mBuffersNeedingTransition[bgl])) {
+                        switch (mBindingTypes[bgl][binding]) {
+                            case dawn::BindingType::UniformBuffer:
+                                ToBackend(mBuffers[bgl][binding])
+                                    ->TransitionUsageNow(recordingContext,
+                                                         dawn::BufferUsage::Uniform);
+                                break;
+
+                            case dawn::BindingType::StorageBuffer:
+                                ToBackend(mBuffers[bgl][binding])
+                                    ->TransitionUsageNow(recordingContext,
+                                                         dawn::BufferUsage::Storage);
+                                break;
+
+                            case dawn::BindingType::ReadonlyStorageBuffer:
+                            case dawn::BindingType::Sampler:
+                            case dawn::BindingType::SampledTexture:
+                            case dawn::BindingType::StorageTexture:
+                                // Not implemented.
+                            default:
+                                UNREACHABLE();
+                                break;
+                        }
+                    }
                 }
                 DidApply();
             }
@@ -553,7 +611,7 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
         VkCommandBuffer commands = recordingContext->commandBuffer;
 
-        DescriptorSetTracker descriptorSets = {};
+        ComputeDescriptorSetTracker descriptorSets = {};
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
@@ -565,7 +623,8 @@ namespace dawn_native { namespace vulkan {
 
                 case Command::Dispatch: {
                     DispatchCmd* dispatch = mCommands.NextCommand<DispatchCmd>();
-                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
+
+                    descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_COMPUTE);
                     device->fn.CmdDispatch(commands, dispatch->x, dispatch->y, dispatch->z);
                 } break;
 
@@ -573,7 +632,7 @@ namespace dawn_native { namespace vulkan {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
                     VkBuffer indirectBuffer = ToBackend(dispatch->indirectBuffer)->GetHandle();
 
-                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_COMPUTE);
+                    descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_COMPUTE);
                     device->fn.CmdDispatchIndirect(
                         commands, indirectBuffer,
                         static_cast<VkDeviceSize>(dispatch->indirectOffset));
@@ -581,13 +640,14 @@ namespace dawn_native { namespace vulkan {
 
                 case Command::SetBindGroup: {
                     SetBindGroupCmd* cmd = mCommands.NextCommand<SetBindGroupCmd>();
-                    VkDescriptorSet set = ToBackend(cmd->group.Get())->GetHandle();
+
+                    BindGroup* bindGroup = ToBackend(cmd->group.Get());
                     uint64_t* dynamicOffsets = nullptr;
                     if (cmd->dynamicOffsetCount > 0) {
                         dynamicOffsets = mCommands.NextData<uint64_t>(cmd->dynamicOffsetCount);
                     }
 
-                    descriptorSets.OnSetBindGroup(cmd->index, set, cmd->dynamicOffsetCount,
+                    descriptorSets.OnSetBindGroup(cmd->index, bindGroup, cmd->dynamicOffsetCount,
                                                   dynamicOffsets);
                 } break;
 
@@ -695,7 +755,7 @@ namespace dawn_native { namespace vulkan {
             device->fn.CmdSetScissor(commands, 0, 1, &scissorRect);
         }
 
-        DescriptorSetTracker descriptorSets = {};
+        RenderDescriptorSetTracker descriptorSets = {};
         RenderPipeline* lastPipeline = nullptr;
 
         auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
@@ -703,7 +763,7 @@ namespace dawn_native { namespace vulkan {
                 case Command::Draw: {
                     DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
-                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDraw(commands, draw->vertexCount, draw->instanceCount,
                                        draw->firstVertex, draw->firstInstance);
                 } break;
@@ -711,7 +771,7 @@ namespace dawn_native { namespace vulkan {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
-                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDrawIndexed(commands, draw->indexCount, draw->instanceCount,
                                               draw->firstIndex, draw->baseVertex,
                                               draw->firstInstance);
@@ -721,7 +781,7 @@ namespace dawn_native { namespace vulkan {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
                     VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
 
-                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDrawIndirect(commands, indirectBuffer,
                                                static_cast<VkDeviceSize>(draw->indirectOffset), 1,
                                                0);
@@ -731,7 +791,7 @@ namespace dawn_native { namespace vulkan {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
                     VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
 
-                    descriptorSets.Apply(device, commands, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                    descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDrawIndexedIndirect(
                         commands, indirectBuffer, static_cast<VkDeviceSize>(draw->indirectOffset),
                         1, 0);
@@ -786,13 +846,13 @@ namespace dawn_native { namespace vulkan {
 
                 case Command::SetBindGroup: {
                     SetBindGroupCmd* cmd = iter->NextCommand<SetBindGroupCmd>();
-                    VkDescriptorSet set = ToBackend(cmd->group.Get())->GetHandle();
+                    BindGroup* bindGroup = ToBackend(cmd->group.Get());
                     uint64_t* dynamicOffsets = nullptr;
                     if (cmd->dynamicOffsetCount > 0) {
                         dynamicOffsets = iter->NextData<uint64_t>(cmd->dynamicOffsetCount);
                     }
 
-                    descriptorSets.OnSetBindGroup(cmd->index, set, cmd->dynamicOffsetCount,
+                    descriptorSets.OnSetBindGroup(cmd->index, bindGroup, cmd->dynamicOffsetCount,
                                                   dynamicOffsets);
                 } break;
 
