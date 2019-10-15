@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c07634f5_4e837dc5",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-15T19:26:18Z",
+      "side": 1,
+      "message": "nit: traceFile can\u0027t be nullptr, could only have zero length",
+      "revId": "41b188f3e4e3cff0de0760ecf3a3ea204b08446b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
