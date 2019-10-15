@@ -19,6 +19,16 @@
 class BasicTests : public DawnTest {
 };
 
+// Test adapter is correctly chosen.
+TEST_P(BasicTests, PCIInfo) {
+    // Print the chosen adapter name
+    std::cout << "Adapter Name: " << GetPCIInfo().name << std::endl;
+
+    if (HasVendorIdFilter()) {
+        ASSERT_EQ(GetPCIInfo().vendorId, GetVendorIdFilter());
+    }
+}
+
 // Test Buffer::SetSubData changes the content of the buffer, but really this is the most
 // basic test possible, and tests the test harness
 TEST_P(BasicTests, BufferSetSubData) {
