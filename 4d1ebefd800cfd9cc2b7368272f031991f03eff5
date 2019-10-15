@@ -48,6 +48,29 @@
     },
     {
       "key": {
+        "uuid": "d30e2540_a05a1fdd",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T20:52:26Z",
+      "side": 1,
+      "message": "nit: Dawn headers first, then other system headers",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ecafc67_14abfdf0",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
         "patchSetId": 1
@@ -424,6 +447,24 @@
     },
     {
       "key": {
+        "uuid": "f11f09e7_cf6b70c2",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T20:52:26Z",
+      "side": 1,
+      "message": "Right now, in the Vulkan backend, doing this calls DestroyInternal on the texture, so you can\u0027t use it for anything anymore. We create a new wrapping texture every time.\n\nHowever, if we change things, as you mentioned in a previous comment, to reuse wrapped textures and expose Set/GetAcquireMutexKey, it will be safer if we rename them to something like Import/Export or Acquire/Release.\n\nTextureState can have OwnedExternal and OwnedExternalAcquired. \"Acquire\" sets the state to OwnedExternalAcquire, and \"Release\" has the side effect of setting the TextureState to OwnedExternal such that it\u0027s invalid to use in a Queue::Submit.",
+      "parentUuid": "28701781_65248bb6",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edd29f88_e6c67a15",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 1
@@ -533,6 +574,24 @@
       "side": 1,
       "message": "I am confused by your feedback. What do you mean when you say \"With comment on D3D12Backend we can\u0027t test this\"?  \n\nGet is an no-side-effect accessor for the acquire key. It is called by Chromium to know what key to acquire the texture with when it needs to render the texture to the webpage. The purpose of the test is to make sure the key is the value we expect based on how it is incremented internally by Dawn.",
       "parentUuid": "ad4eaef4_a9840495",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af2c0a42_acb2998f",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T20:52:26Z",
+      "side": 1,
+      "message": "Corentin\u0027s comment was to make GetAcquireMutexKey like ExportSignalSemaphoreOpaqueFD in that it implicitly destroys the texture. If we were to make it destroy the texture, then Get will have side effects and this won\u0027t work.",
+      "parentUuid": "70a5358b_94bb3526",
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
