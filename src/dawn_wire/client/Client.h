@@ -48,6 +48,14 @@ namespace dawn_wire { namespace client {
             return mMemoryTransferService;
         }
 
+        uint64_t GetAdapterId() const {
+            return mAdapterId;
+        }
+
+        const DawnAdapterProperties& GetAdapterProperties() const {
+            return mAdapterProperties;
+        }
+
       private:
 #include "dawn_wire/client/ClientPrototypes_autogen.inc"
 
@@ -56,6 +64,9 @@ namespace dawn_wire { namespace client {
         WireDeserializeAllocator mAllocator;
         MemoryTransferService* mMemoryTransferService = nullptr;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
+
+        DawnAdapterProperties mAdapterProperties;
+        uint64_t mAdapterId = 0;
     };
 
     DawnProcTable GetProcs();

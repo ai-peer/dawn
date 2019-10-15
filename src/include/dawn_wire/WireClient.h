@@ -49,6 +49,9 @@ namespace dawn_wire {
 
         ReservedTexture ReserveTexture(DawnDevice device);
 
+        uint64_t GetAdapterId() const;
+        const DawnAdapterProperties& GetAdapterProperties() const;
+
       private:
         std::unique_ptr<client::Client> mImpl;
     };

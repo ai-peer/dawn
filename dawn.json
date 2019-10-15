@@ -14,6 +14,13 @@
         "See the License for the specific language governing permissions and",
         "limitations under the License."
     ],
+    "adapter properties": {
+        "category": "structure",
+        "extensible": false,
+        "members": [
+            {"name": "texture compression BC", "type": "bool", "default": "false"}
+        ]
+    },
     "address mode": {
         "category": "enum",
         "values": [

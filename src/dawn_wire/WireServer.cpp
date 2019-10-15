@@ -36,6 +36,11 @@ namespace dawn_wire {
         return mImpl->InjectTexture(texture, id, generation);
     }
 
+    void WireServer::SendAdapterProperties(uint64_t adapterId,
+                                           const DawnAdapterProperties& adapterDescriptor) {
+        mImpl->SendAdapterProperties(adapterId, adapterDescriptor);
+    }
+
     namespace server {
         MemoryTransferService::~MemoryTransferService() = default;
 

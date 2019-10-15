@@ -14,6 +14,9 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include "dawn_wire/WireClient.h"
+#include "dawn_wire/WireServer.h"
+
 using namespace testing;
 using namespace dawn_wire;
 
@@ -77,4 +80,17 @@ TEST_F(WireBasicTests, ReleaseCalledOnRefCount0) {
     EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
 
     FlushClient();
+}
+
+TEST_F(WireBasicTests, GetAdapterProperties) {
+    DawnAdapterProperties properties;
+    properties.textureCompressionBC = true;
+    constexpr uint64_t kAdapterId = 1u;
+    GetWireServer()->SendAdapterProperties(kAdapterId, properties);
+    FlushServer();
+
+    ASSERT_EQ(kAdapterId, GetWireClient()->GetAdapterId());
+
+    DawnAdapterProperties adapterProperties = GetWireClient()->GetAdapterProperties();
+    ASSERT_TRUE(adapterProperties.textureCompressionBC);
 }

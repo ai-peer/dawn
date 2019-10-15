@@ -57,6 +57,9 @@ namespace dawn_wire { namespace server {
 
         bool InjectTexture(DawnTexture texture, uint32_t id, uint32_t generation);
 
+        void SendAdapterProperties(uint64_t adapterId,
+                                   const DawnAdapterProperties& adapterProperties);
+
       private:
         void* GetCmdSpace(size_t size);
 

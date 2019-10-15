@@ -434,7 +434,7 @@ def as_frontendType(typ):
 def as_wireType(typ):
     if typ.category == 'object':
         return typ.name.CamelCase() + '*'
-    elif typ.category in ['bitmask', 'enum']:
+    elif typ.category in ['bitmask', 'enum', "structure"]:
         return 'Dawn' + typ.name.CamelCase()
     else:
         return as_cppType(typ.name)

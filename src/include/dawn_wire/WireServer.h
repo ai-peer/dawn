@@ -43,6 +43,9 @@ namespace dawn_wire {
 
         bool InjectTexture(DawnTexture texture, uint32_t id, uint32_t generation);
 
+        void SendAdapterProperties(uint64_t adapterId,
+                                   const DawnAdapterProperties& adapterDescriptor);
+
       private:
         std::unique_ptr<server::Server> mImpl;
     };

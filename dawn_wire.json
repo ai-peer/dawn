@@ -82,6 +82,10 @@
         "fence update completed value": [
             { "name": "fence", "type": "ObjectHandle", "handle_type": "fence" },
             { "name": "value", "type": "uint64_t" }
+        ],
+        "get adapter properties": [
+            { "name": "adapter id", "type": "uint64_t" },
+            { "name": "descriptor", "type": "adapter properties", "annotation": "const*" }
         ]
     },
     "special items": {

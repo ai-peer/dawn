@@ -41,6 +41,14 @@ namespace dawn_wire {
         return mImpl->ReserveTexture(device);
     }
 
+    uint64_t WireClient::GetAdapterId() const {
+        return mImpl->GetAdapterId();
+    }
+
+    const DawnAdapterProperties& WireClient::GetAdapterProperties() const {
+        return mImpl->GetAdapterProperties();
+    }
+
     namespace client {
         MemoryTransferService::~MemoryTransferService() = default;
 

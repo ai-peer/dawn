@@ -190,4 +190,12 @@ namespace dawn_wire { namespace client {
         return true;
     }
 
+    bool Client::DoGetAdapterProperties(uint64_t adapterId,
+                                        DawnAdapterProperties const* descriptor) {
+        mAdapterId = adapterId;
+        mAdapterProperties.textureCompressionBC = descriptor->textureCompressionBC;
+
+        return true;
+    }
+
 }}  // namespace dawn_wire::client
