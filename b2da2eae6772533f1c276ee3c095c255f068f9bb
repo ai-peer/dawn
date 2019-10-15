@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e865ffc0_d9afd4bc",
+        "filename": "src/tests/end2end/BasicTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T10:08:12Z",
+      "side": 1,
+      "message": "nit: this tests the VendorIdFilter works correctly, so maybe \"VendorIdFilter\"?",
+      "revId": "b2da2eae6772533f1c276ee3c095c255f068f9bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70a7e531_f4e588c4",
+        "filename": "src/tests/end2end/BasicTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T10:08:12Z",
+      "side": 1,
+      "message": "We already have a ton of debug information in DawnTestEnvironment so maybe this isn\u0027t needed?",
+      "revId": "b2da2eae6772533f1c276ee3c095c255f068f9bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
