@@ -174,6 +174,8 @@ class DawnTestBase {
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
 
+    dawn_native::PCIInfo GetPCIInfo() const;
+
   protected:
     dawn::Device device;
     dawn::Queue queue;
