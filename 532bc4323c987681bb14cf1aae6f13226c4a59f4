@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "79bb6478_7eb2b41a",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "1786c68c_7a5d722c",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "294e098e_3c167be7",
         "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6d5dc88_dd4d185e",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Done. And updated all other similar usages.",
+      "parentUuid": "294e098e_3c167be7",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "aca0a840_6f5589cf",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2155f52_3045deaa",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed17beb4_6cdcf940",
         "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55c7ce80_3ee6859f",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Added a TODO to simplify this.",
+      "parentUuid": "ed17beb4_6cdcf940",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d006eb34_cba82fce",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa79ca6f_ca2e19d6",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51c343a9_382278e0",
         "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
         "patchSetId": 2
@@ -101,6 +191,24 @@
       "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4338102d_b2e35bc0",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Done. (and need to null-terminate it so I put it into a char[2])",
+      "parentUuid": "51c343a9_382278e0",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -127,6 +235,30 @@
     },
     {
       "key": {
+        "uuid": "e06e4d4a_7a46d154",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0fceb69_576cde6e",
+      "range": {
+        "startLine": 103,
+        "startChar": 14,
+        "endLine": 103,
+        "endChar": 18
+      },
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3eb422ea_4ad3d88c",
         "filename": "third_party/BUILD.gn",
         "patchSetId": 2
@@ -141,6 +273,24 @@
       "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b985ef79_1533eee1",
+        "filename": "third_party/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-15T19:15:03Z",
+      "side": 1,
+      "message": "Made CL to do so\nhttps://chromium-review.googlesource.com/c/chromium/src/+/1861014\n\nWill need to wait for that to land, and then update DEPS in this CL.",
+      "parentUuid": "3eb422ea_4ad3d88c",
+      "revId": "532bc4323c987681bb14cf1aae6f13226c4a59f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
