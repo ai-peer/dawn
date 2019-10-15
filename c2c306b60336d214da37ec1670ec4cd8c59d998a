@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee68c04_828d6a68",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "We should put this in the dawn_enable_vulkan branch above.",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f4de0e3_9e7760cc",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "The prefix to vulkan_validation_layers could be another dawn build_override variable so we don\u0027t need to make the difference between standalone and not.\n\nIt would be \"${dawn_vulkan_validaion_layer_dir}:vulkan_validation_layers\"\n\nYou\u0027ll need to add the definition of this variable to Chromium before we can land this CL.",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b85f036d_b6487bd5",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "nit: this could start with //",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43c0165d_9662d0e3",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38bc7fbc_98667b12",
+        "filename": "DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "ANGLE adds these dependencies directly in its DEPS. Please do the same so we don\u0027t depend in a third party script to download dependencies.",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a51fd220_cdd9d280",
+        "filename": "build_overrides/vulkan_validation_layers.gni",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "This would be in //third_party/vulkan-headers.",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bb929ad_a0ca010a",
+        "filename": "build_overrides/vulkan_validation_layers.gni",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "Maybe at least have a vulkan subdir?",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "373d4ba6_1b67db6f",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "Please put these in a SystemUtils.h/.cpp file in src/common and implement it for all platforms. It would be great to have tests for them too.",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab3f4654_bb540b20",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "This logic is the same as the Linux side. Maybe we could have GetExecutablePath that\u0027s system dependent and GetExecutableDirectory uses GetExecutablePath so it can be system independent.",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb9ab9a5_8ac36af9",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-15T09:14:00Z",
+      "side": 1,
+      "message": "Macros can be replaced by constexpr variables:\n\nstatic constexpr char kDawnPathSeparator \u003d \u0027\\\\\u0027; And it would be in src/common/SystemUtils.h",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
