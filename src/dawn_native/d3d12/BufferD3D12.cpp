@@ -140,15 +140,27 @@ namespace dawn_native { namespace d3d12 {
             return false;
         }
 
+        D3D12_RESOURCE_STATES lastState = D3D12BufferUsage(mLastUsage);
+        D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
+
+        // Write->Read or Write->Write usages need to synchronize UAV accesses.
+        bool needsUAVBarrier = lastState == D3D12_RESOURCE_STATE_UNORDERED_ACCESS &&
+                               newState == D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+
         // We can skip transitions to already current usages.
         // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
-        if ((mLastUsage & newUsage) == newUsage) {
+        if (!needsUAVBarrier && (mLastUsage & newUsage) == newUsage) {
             return false;
         }
 
-        D3D12_RESOURCE_STATES lastState = D3D12BufferUsage(mLastUsage);
-        D3D12_RESOURCE_STATES newState = D3D12BufferUsage(newUsage);
         mLastUsage = newUsage;
+
+        if (needsUAVBarrier) {
+            barrier->Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
+            barrier->Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+            barrier->UAV.pResource = GetD3D12Resource().Get();
+            return true;
+        }
 
         // The COMMON state represents a state where no write operations can be pending, which makes
         // it possible to transition to and from some states without synchronizaton (i.e. without an
