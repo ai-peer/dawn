@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "79e6186d_9135fe73",
+        "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-10-15T06:13:31Z",
+      "side": 1,
+      "message": "Oops, it\u0027s checked in line 83.",
+      "parentUuid": "23bd7280_0eda3d0f",
+      "range": {
+        "startLine": 32,
+        "startChar": 24,
+        "endLine": 32,
+        "endChar": 45
+      },
+      "revId": "cf1d6936d3935dd29221875b4cc52e256904dad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "080243da_3718e686",
         "filename": "src/dawn_native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 4
