@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8043edaf_c4ee4349",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-16T00:24:47Z",
+      "side": 1,
+      "message": "uNit: I think it would be clearer as traceFile[0] !\u003d \u0027\\0\u0027 or strlen(traceFile) !\u003d 0",
+      "revId": "501c3b8ee7f5a6e023b70de3af712cc76530ff3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
