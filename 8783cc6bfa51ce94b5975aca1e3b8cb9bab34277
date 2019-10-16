@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "45c3f8eb_2e13a322",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-16T06:03:31Z",
+      "side": 1,
+      "message": "The auto-generated deserialization functions all require a WireDeserializeAllocator variable as one of the parameters. According to your comment, dawn_wire::deserializeAdapterProperties() is called outside of WireClient, so could you give any suggestions on how to pass a WireDeserializeAllocator into the function? Shall we export the internal WireDeserializeAllocator of WireClient so that it can be used outside (used by DeserializeAdapterProperties)?",
+      "parentUuid": "86440909_58044011",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "8783cc6bfa51ce94b5975aca1e3b8cb9bab34277",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ea7fcf4_be19730a",
         "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
         "patchSetId": 1
