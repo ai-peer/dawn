@@ -87,6 +87,24 @@
       "revId": "b2da2eae6772533f1c276ee3c095c255f068f9bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8900e903_dee82f10",
+        "filename": "src/tests/end2end/BasicTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-16T06:00:07Z",
+      "side": 1,
+      "message": "Oh, maybe I misundertood the comments, we need the test for the filtering, right?",
+      "parentUuid": "6a92dc82_96d6ceb8",
+      "revId": "b2da2eae6772533f1c276ee3c095c255f068f9bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
