@@ -642,6 +642,24 @@
     },
     {
       "key": {
+        "uuid": "591d8705_1ffb58ec",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T23:27:58Z",
+      "side": 1,
+      "message": "We can report the error but there\u0027s nothing the caller can do to handle it.",
+      "parentUuid": "e40ee570_09e20695",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7279f037_a640686b",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 1
