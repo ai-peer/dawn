@@ -624,6 +624,24 @@
     },
     {
       "key": {
+        "uuid": "e40ee570_09e20695",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T22:54:54Z",
+      "side": 1,
+      "message": "If this can happen due to device removal, should it be a Device lost error then?",
+      "parentUuid": "2f147343_229b5c6a",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7279f037_a640686b",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 1

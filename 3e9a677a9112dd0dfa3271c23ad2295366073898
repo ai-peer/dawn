@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89041382_ada5f176",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T22:54:54Z",
+      "side": 1,
+      "message": "Why do we need to release the KeyedMutex immediately after executing?\n\nIf an imported texture is used in multiple back-to-back command lists, it seems like Dawn will unnecessarily Acquire/Release/Acquire/Release/etc. Can we acquire it once when we import the texture and release it once on \"ExportSharedTexture\"?\n\nThis also lets us simplify the error handling so that errors only happen on Import or on Export.\n\nWhat do you think?",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 9
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0aa6f092_1b083b26",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T22:54:54Z",
+      "side": 1,
+      "message": "I think we can also generate and consume a validation error here.",
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfa3c974_b04d1d33",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T22:54:54Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8345e506_0fd61e10",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T22:54:54Z",
+      "side": 1,
+      "message": "nit: DAWN_TRY(CheckHResult(...))",
+      "range": {
+        "startLine": 361,
+        "startChar": 8,
+        "endLine": 363,
+        "endChar": 9
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee94ac0d_d49af8ac",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T22:54:54Z",
+      "side": 1,
+      "message": "I think that if you use an imported texture twice in separate render passes, it\u0027ll get added to the acquire list twice. We do these transitions for the set of all resources in a pass, at the start of the pass.\n\nWe can either: \n  1) Make mAcquireList a set\n  2) At [1] guard AcquireKeyedMutex with if (!mAcquired) insteed of ASSERTing.",
+      "range": {
+        "startLine": 423,
+        "startChar": 18,
+        "endLine": 423,
+        "endChar": 54
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17eb3016_c5bd5ad2",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T22:54:54Z",
+      "side": 1,
+      "message": "Why do we skip this for external textures? The memory allocation and texture are still created with vkAllocateMemory and vkCreateImage. I think we still need to delete the imported handles even though the memory is owned externally.\n\nSame question about the Metal backend. (And OpenGL but we don\u0027t import textures there yet)",
+      "range": {
+        "startLine": 581,
+        "startChar": 8,
+        "endLine": 605,
+        "endChar": 5
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
