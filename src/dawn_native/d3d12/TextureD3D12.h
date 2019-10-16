@@ -36,8 +36,15 @@ namespace dawn_native { namespace d3d12 {
                                                   const TextureDescriptor* descriptor);
         Texture(Device* device,
                 const TextureDescriptor* descriptor,
-                ComPtr<ID3D12Resource> nativeTexture);
+                ComPtr<ID3D12Resource> d3d12Texture,
+                ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
         ~Texture();
+
+        MaybeError AcquireKeyedMutex();
+        void ReleaseKeyedMutex();
+
+        void SetAcquireMutexKey(Serial key);
+        Serial GetAcquireMutexKey() const;
 
         DXGI_FORMAT GetD3D12Format() const;
         ID3D12Resource* GetD3D12Resource() const;
@@ -82,6 +89,10 @@ namespace dawn_native { namespace d3d12 {
 
         Serial mLastUsedSerial = UINT64_MAX;
         bool mValidToDecay = false;
+
+        Serial mAcquireMutexKey = 0;
+        ComPtr<IDXGIKeyedMutex> mDxgiKeyedMutex;
+        bool mAcquired = false;
     };
 
     class TextureView : public TextureViewBase {
