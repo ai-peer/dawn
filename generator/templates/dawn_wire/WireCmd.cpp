@@ -16,6 +16,9 @@
 
 #include "common/Assert.h"
 
+#include "dawn_wire/Wire.h"
+#include "dawn_wire/WireDeserializeAllocator.h"
+
 #include <algorithm>
 #include <cstring>
 #include <limits>
@@ -452,5 +455,31 @@ namespace dawn_wire {
     {% for command in cmd_records["return command"] %}
         {{ write_command_serialization_methods(command, True) }}
     {% endfor %}
+
+        // Implementations of serialization/deeserialization of DawnDeviceProperties.
+        void SerializeDawnDeviceProperties(const DawnDeviceProperties* deviceProperties,
+                                           char* serializeBuffer) {
+            DawnDevicePropertiesTransfer* transfer =
+                reinterpret_cast<DawnDevicePropertiesTransfer*>(serializeBuffer);
+            serializeBuffer += sizeof(DawnDevicePropertiesTransfer);
+
+            DawnDevicePropertiesSerialize(*deviceProperties, transfer, &serializeBuffer);
+        }
+
+        bool DeserializeDawnDeviceProperties(DawnDeviceProperties* deviceProperties,
+                                             const char* deserializeBuffer) {
+            const volatile DawnDevicePropertiesTransfer* transfer = nullptr;
+            size_t size = sizeof(DawnDevicePropertiesTransfer);
+            const volatile char* deserializeBufferVolatilePtr =
+                reinterpret_cast<const volatile char*>(&deserializeBuffer);
+            if (GetPtrFromBuffer(&deserializeBufferVolatilePtr, &size, 1, &transfer) !=
+                DeserializeResult::Success) {
+                return false;
+            }
+
+            return DawnDevicePropertiesDeserialize(deviceProperties, transfer,
+                                                   &deserializeBufferVolatilePtr, &size,
+                                                   nullptr) == DeserializeResult::Success;
+        }
 
 }  // namespace dawn_wire

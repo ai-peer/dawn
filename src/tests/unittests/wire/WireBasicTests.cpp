@@ -14,6 +14,8 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include "dawn_wire/Wire.h"
+
 using namespace testing;
 using namespace dawn_wire;
 
@@ -77,4 +79,17 @@ TEST_F(WireBasicTests, ReleaseCalledOnRefCount0) {
     EXPECT_CALL(api, CommandEncoderRelease(apiCmdBufEncoder));
 
     FlushClient();
+}
+
+// Test that the serialization and deserialization of DawnDeviceProperties can work correctly.
+TEST_F(WireBasicTests, SerializeDawnDeviceProperties) {
+    DawnDeviceProperties sentDawnDeviceProperties;
+    sentDawnDeviceProperties.textureCompressionBC = true;
+
+    char buffer[sizeof(DawnDeviceProperties)];
+    SerializeDawnDeviceProperties(&sentDawnDeviceProperties, buffer);
+
+    DawnDeviceProperties receivedDawnDeviceProperties;
+    DeserializeDawnDeviceProperties(&receivedDawnDeviceProperties, buffer);
+    ASSERT_TRUE(receivedDawnDeviceProperties.textureCompressionBC);
 }
