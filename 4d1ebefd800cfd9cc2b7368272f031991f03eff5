@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8bc4eb9d_be13462f",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91ccb2a8_67f43d82",
+      "range": {
+        "startLine": 53,
+        "startChar": 13,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a40f9291_b719e382",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e925ba50_d3c54201",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40f9291_b719e382",
+      "range": {
+        "startLine": 74,
+        "startChar": 13,
+        "endLine": 74,
+        "endChar": 17
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "162576e8_045ca38a",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d30e2540_a05a1fdd",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ecafc67_14abfdf0",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c2adc10_b039a0cf",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ecafc67_14abfdf0",
+      "range": {
+        "startLine": 48,
+        "startChar": 17,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -129,6 +225,24 @@
     },
     {
       "key": {
+        "uuid": "42272172_971f3f59",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Changed this to pass the command queue to a new method on the CommandRecordingContext called ExecuteCommandList. PreExecute and PostExecute are now private to the CommandRecordingContext.",
+      "parentUuid": "93a20720_1fbadc57",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94534ee4_a4e74693",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -152,6 +266,30 @@
     },
     {
       "key": {
+        "uuid": "9a8606dc_98a54698",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Unfortunately, it is needed.  Here is the error I receive if I leave it out:\n\n../../src/dawn_native/d3d12/DeviceD3D12.cpp(361,13): error: no matching member function for call to \u0027ConsumedError\u0027\n        if (ConsumedError(CreateKeyedMutexForTexture(d3d12Resource.Get()),\n            ^~~~~~~~~~~~~\n../../src\\dawn_native/Device.h(60,14): note: candidate template ignored: could not match \u0027T *\u0027 against \u0027Details::ComPtrRef\u003cComPtr\u003cIDXGIKeyedMutex\u003e \u003e\u0027\n        bool ConsumedError(ResultOrError\u003cT\u003e resultOrError, T* result) {\n             ^\n../../src\\dawn_native/Device.h(51,14): note: candidate function not viable: requires single argument \u0027maybeError\u0027, but 2 arguments were provided\n        bool ConsumedError(MaybeError maybeError) {",
+      "parentUuid": "94534ee4_a4e74693",
+      "range": {
+        "startLine": 359,
+        "startChar": 25,
+        "endLine": 359,
+        "endChar": 50
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "232e13bc_bb460d6c",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -166,6 +304,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a072f32_43165fd7",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "232e13bc_bb460d6c",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -204,6 +360,24 @@
     },
     {
       "key": {
+        "uuid": "c76bc65e_f57a5c44",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c77ecd8e_d47c7832",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d657f7c_85660e53",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -218,6 +392,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "349e49c4_b15cd7de",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d657f7c_85660e53",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -238,6 +430,24 @@
     },
     {
       "key": {
+        "uuid": "58214fee_30b268de",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b4fcc85_29133c3c",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d170226_d09eb9c5",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -252,6 +462,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da0a359d_8d7b4c5a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d170226_d09eb9c5",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -325,6 +553,24 @@
     },
     {
       "key": {
+        "uuid": "f9629942_7ba0f753",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Since I haven\u0027t heard back from Corentin, I decided to leave the code the way it is for now. Let me know if you disagree.",
+      "parentUuid": "de10c98d_d90b345e",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb634dc3_3e20f5bb",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 1
@@ -360,6 +606,24 @@
     },
     {
       "key": {
+        "uuid": "2f147343_229b5c6a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Since I haven\u0027t heard back from Corentin, I decided to leave the code the way it is for now. Let me know if you disagree.",
+      "parentUuid": "c2afc031_6239f7b3",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7279f037_a640686b",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 1
@@ -374,6 +638,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b8e5199_232abd31",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7279f037_a640686b",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -409,6 +691,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19b658fa_56d6e33e",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3610aef3_823863b2",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -465,6 +765,24 @@
     },
     {
       "key": {
+        "uuid": "7fcfaee2_b89004db",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Replaced SetAcquireMutexKey with ExportSharedTexture which destroys the texture and returns an error if it is called with the same texture more than once.  \n\nGetAcquireMutexKey renamed to GetAcquireMutexKeyForTesting.",
+      "parentUuid": "f11f09e7_cf6b70c2",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "edd29f88_e6c67a15",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 1
@@ -479,6 +797,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d9c9bfe_1a369e00",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edd29f88_e6c67a15",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -505,6 +841,30 @@
     },
     {
       "key": {
+        "uuid": "e446afb6_d0454890",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84a49b2f_96eab6e6",
+      "range": {
+        "startLine": 319,
+        "startChar": 20,
+        "endLine": 319,
+        "endChar": 29
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bac5fb1_870f0f6a",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 1
@@ -528,6 +888,30 @@
     },
     {
       "key": {
+        "uuid": "fb9a8c28_27ecf5b2",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bac5fb1_870f0f6a",
+      "range": {
+        "startLine": 353,
+        "startChar": 5,
+        "endLine": 353,
+        "endChar": 24
+      },
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0c0830b_422481c0",
         "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
         "patchSetId": 1
@@ -542,6 +926,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbf4fb48_70b6ff74",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0c0830b_422481c0",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -595,6 +997,24 @@
       "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffa63413_4799400d",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T21:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af2c0a42_acb2998f",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
