@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f07ab05_998d5544",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:23:05Z",
+      "side": 1,
+      "message": "nit: this can be in the same header block as Assert.h",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dddfb020_4769a394",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:23:05Z",
+      "side": 1,
+      "message": "Adding manual code in generator templates always feels bad but we can figure out how to make this nicer in the future when we have more structs handled like this we can generalize the code.",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4be3c593_d8108efe",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:23:05Z",
+      "side": 1,
+      "message": "This should be const volatile char*",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d73df41c_e670dd7d",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:23:05Z",
+      "side": 1,
+      "message": "We also need to know the total serialized size of the descriptor. Right now it is sizeof(DawnDeviceProperties) but that could change in the future when we have sub-descriptors.",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c499df0_6dab6b53",
+        "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:23:05Z",
+      "side": 1,
+      "message": "This is more of a unittests that doesn\u0027t need the full Wire Client and Server to be brought up. Maybe split it in a different file and don\u0027t use a fixture?",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
