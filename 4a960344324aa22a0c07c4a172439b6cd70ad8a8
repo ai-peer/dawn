@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "9c901121_001ff481",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:54:45Z",
+      "side": 1,
+      "message": "nit: override too",
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d774579_5d900a20",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:54:45Z",
+      "side": 1,
+      "message": "We need to allow atomics on this too because buffer UAVs would be allocated here.",
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec837385_9f171397",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:54:45Z",
+      "side": 1,
+      "message": "Note: It\u0027s a bit weird that the BuddyMemoryAllocator has an owning reference to a backend type. But no need to address in this CL.",
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "068d425f_6adb9f7f",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 40
@@ -19,6 +70,23 @@
         "endLine": 115,
         "endChar": 9
       },
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dd1ce4b_806d11a6",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:54:45Z",
+      "side": 1,
+      "message": "We could store the heapKind in ResourceMemoryAllocation so we don\u0027t need to recompute it here. No need to address in this CL though.",
       "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
