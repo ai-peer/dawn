@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09f83f59_b606c439",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:07:13Z",
+      "side": 1,
+      "message": "If we created this after reading the command line args we could pass a boolean that says whether tracing is enabled or not. This way DawnPerfTestPlatform doesn\u0027t need to know about DawnPerfTestEnvironment at all!",
+      "range": {
+        "startLine": 41,
+        "startChar": 38,
+        "endLine": 41,
+        "endChar": 80
+      },
+      "revId": "88a3a422262198b064c41171c6ed497ae3c8d346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1aacffb8_e6ac6bcb",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T09:07:13Z",
+      "side": 1,
+      "message": "Can\u0027t we always have trace event recording enabled when IsTracingEnabled \u003d\u003d true?",
+      "revId": "88a3a422262198b064c41171c6ed497ae3c8d346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
