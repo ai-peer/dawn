@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6d991374_31d2f802",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-16T18:13:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c901121_001ff481",
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d774579_5d900a20",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 40
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6afaa656_69f083b4",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-16T18:13:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "8d774579_5d900a20",
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec837385_9f171397",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 40
@@ -50,6 +86,24 @@
       "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "983af5a2_895aa6f9",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-16T18:13:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ec837385_9f171397",
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "b362713d_2e6da6b8",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-16T18:13:08Z",
+      "side": 1,
+      "message": "\u003e Should we first compute NextPowerOfTwo(D3D12_RESOURCE_ALLOCATION_INFO.SizeInBytes) up front, compare with kMaxHeapSize, and then choose the allocation strategy?\n\nThat\u0027s right but I don\u0027t think it is needed for this CL and I have a TODO to figure out a better check (eg. resourceSize \u003c\u003d kHeapSize is not sufficient [1]).\n\n[1] There will be cases where internal fragmentation will be large, defeating the purpose of sub-allocation, where checking first could avoid. For example, if the bufferSize \u003d 516 KB, then NextPowerOfTwo(bufferSize) \u003d\u003d kHeapSize \u003d\u003d 1MB, then we wasted \u003e50% of memory.\n\n\u003e We can pass D3D12_RESOURCE_ALLOCATION_INFO into CreatePlacedResource.\n\nI don\u0027t think it\u0027s enough to pass only D3D12_RESOURCE_ALLOCATION_INFO into CreatePlacedResource. We must call NextPowerOfTwo again (now twice) or pass it separately (two sizes) - very minor.\n\n\u003e I guess CreatePlacedResource could also early-return kInvalidAllocation after it calls BuddyMemoryAllocator::Allocate\n\n+1 \u003d)",
+      "parentUuid": "068d425f_6adb9f7f",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 9
+      },
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2dd1ce4b_806d11a6",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 40
@@ -90,6 +168,24 @@
       "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "771987fb_ffdba997",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-16T18:13:08Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "2dd1ce4b_806d11a6",
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -113,6 +209,30 @@
       "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cd96498_afaacde6",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-16T18:13:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "918e9ab4_c4c64f3b",
+      "range": {
+        "startLine": 175,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 98
+      },
+      "revId": "4a960344324aa22a0c07c4a172439b6cd70ad8a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
