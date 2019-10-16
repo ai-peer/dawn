@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "602e851f_537fef71",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T23:41:53Z",
+      "side": 1,
+      "message": "Ah whoops. Thanks for the pointer. The name confused me.",
+      "parentUuid": "5a6717a6_d65cdf0d",
+      "range": {
+        "startLine": 423,
+        "startChar": 18,
+        "endLine": 423,
+        "endChar": 54
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17eb3016_c5bd5ad2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 3
@@ -269,6 +293,30 @@
       "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa6391e1_a50d1720",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T23:41:53Z",
+      "side": 1,
+      "message": "Thanks for clarifying. Sounds good.",
+      "parentUuid": "3c687fde_878c9c8a",
+      "range": {
+        "startLine": 581,
+        "startChar": 8,
+        "endLine": 605,
+        "endChar": 5
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
