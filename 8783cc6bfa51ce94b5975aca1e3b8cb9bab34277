@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0864fe0c_d6558152",
+        "filename": "src/dawn_wire/client/Client.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-16T07:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d9d8ee9_f576748c",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 9
+      },
+      "revId": "8783cc6bfa51ce94b5975aca1e3b8cb9bab34277",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86440909_58044011",
         "filename": "src/include/dawn_wire/WireServer.h",
         "patchSetId": 1
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "33863c26_4a1ba060",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-16T07:32:47Z",
+      "side": 1,
+      "message": "Done\n\nCurrently WireDeserializeAllocator is not used in DeserializeDeviceProperties() so I can just pass into a nullptr without thinking of this issue.",
+      "parentUuid": "45c3f8eb_2e13a322",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "8783cc6bfa51ce94b5975aca1e3b8cb9bab34277",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea7fcf4_be19730a",
         "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
         "patchSetId": 1
@@ -86,6 +134,24 @@
       "revId": "8783cc6bfa51ce94b5975aca1e3b8cb9bab34277",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "807b007e_877e7cce",
+        "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-16T07:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea7fcf4_be19730a",
+      "revId": "8783cc6bfa51ce94b5975aca1e3b8cb9bab34277",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
