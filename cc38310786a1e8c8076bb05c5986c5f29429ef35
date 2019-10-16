@@ -310,6 +310,30 @@
       "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66cee6fe_2f51bc12",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-16T04:50:34Z",
+      "side": 1,
+      "message": "Resolved.",
+      "parentUuid": "8a4b7505_e34a1087",
+      "range": {
+        "startLine": 350,
+        "startChar": 43,
+        "endLine": 350,
+        "endChar": 52
+      },
+      "revId": "cc38310786a1e8c8076bb05c5986c5f29429ef35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
