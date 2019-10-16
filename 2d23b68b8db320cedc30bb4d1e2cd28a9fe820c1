@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af407f63_59d1163c",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T22:48:36Z",
+      "side": 1,
+      "message": "nit: git cl format will complain about this, you could but it on its own, before all other includes.",
+      "revId": "2d23b68b8db320cedc30bb4d1e2cd28a9fe820c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec77ba84_f064035d",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-16T22:48:36Z",
+      "side": 1,
+      "message": "unit: add a comment that explain why this check is needed.",
+      "revId": "2d23b68b8db320cedc30bb4d1e2cd28a9fe820c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
