@@ -321,21 +321,73 @@ namespace dawn_native { namespace d3d12 {
     // With this constructor, the lifetime of the ID3D12Resource is externally managed.
     Texture::Texture(Device* device,
                      const TextureDescriptor* descriptor,
-                     ComPtr<ID3D12Resource> nativeTexture)
+                     ComPtr<ID3D12Resource> d3d12Texture,
+                     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
+                     uint64_t acquireMutexKey)
         : TextureBase(device, descriptor, TextureState::OwnedExternal),
-          mResource(std::move(nativeTexture)) {
+          mResource(std::move(d3d12Texture)),
+          mAcquireMutexKey(acquireMutexKey),
+          mDxgiKeyedMutex(std::move(dxgiKeyedMutex)) {
         SetIsSubresourceContentInitialized(true, 0, descriptor->mipLevelCount, 0,
                                            descriptor->arrayLayerCount);
+    }
+
+    Texture::Texture(Device* device,
+                     const TextureDescriptor* descriptor,
+                     ComPtr<ID3D12Resource> d3d12Texture)
+        : Texture(device, descriptor, std::move(d3d12Texture), nullptr, 0) {
     }
 
     Texture::~Texture() {
         DestroyInternal();
     }
 
+    uint64_t Texture::ExportSharedTexture() {
+        if (GetTextureState() == TextureState::Destroyed) {
+            return -1ull;
+        }
+
+        DestroyInternal();
+        return mAcquireMutexKey;
+    }
+
+    Serial Texture::GetAcquireMutexKey() const {
+        return mAcquireMutexKey;
+    }
+
+    MaybeError Texture::AcquireKeyedMutex() {
+        ASSERT(!mAcquired);
+        const HRESULT hr = mDxgiKeyedMutex->AcquireSync(mAcquireMutexKey, INFINITE);
+        if (FAILED(hr)) {
+            return DAWN_DEVICE_LOST_ERROR("Unable to acquire keyed mutex");
+        }
+        mAcquired = true;
+        return {};
+    }
+
+    void Texture::ReleaseKeyedMutex() {
+        if (mAcquired) {
+            // ReleaseSync returns an HRESULT. Not clear what, if anything,
+            // the caller would want to do on a failure HRESULT so we're
+            // swallowing it.
+            const Serial releaseKey = mAcquireMutexKey + 1;
+            mDxgiKeyedMutex->ReleaseSync(releaseKey);
+
+            // The code which acquires the mutex must do so with the key
+            // we released the mutex with.
+            mAcquireMutexKey = releaseKey;
+
+            mAcquired = false;
+        }
+    }
+
     void Texture::DestroyImpl() {
-        // If we own the resource, release it.
-        ToBackend(GetDevice())->GetResourceAllocator()->Release(mResource);
-        mResource = nullptr;
+        Device* device = ToBackend(GetDevice());
+        device->GetResourceAllocator()->Release(std::move(mResource));
+
+        if (mDxgiKeyedMutex != nullptr) {
+            device->ReleaseKeyedMutexForTexture(std::move(mDxgiKeyedMutex));
+        }
     }
 
     DXGI_FORMAT Texture::GetD3D12Format() const {
@@ -371,6 +423,13 @@ namespace dawn_native { namespace d3d12 {
     bool Texture::TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                                        D3D12_RESOURCE_BARRIER* barrier,
                                                        D3D12_RESOURCE_STATES newState) {
+        // Textures with keyed mutexes can be written from other graphics queues. Hence, they
+        // must be acquired before command list submission to ensure work from the other queues
+        // has finished. See Device::ExecuteCommandContext.
+        if (mDxgiKeyedMutex != nullptr) {
+            commandContext->AddToAcquireList(this);
+        }
+
         // Avoid transitioning the texture when it isn't needed.
         // TODO(cwallez@chromium.org): Need some form of UAV barriers at some point.
         if (mLastState == newState) {

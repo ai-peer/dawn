@@ -30,9 +30,17 @@ namespace dawn_native { namespace d3d12 {
     DAWN_NATIVE_EXPORT DawnTextureFormat
     GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
 
+    // Note: SharedHandle must be a handle to a texture object.
     DAWN_NATIVE_EXPORT DawnTexture WrapSharedHandle(DawnDevice device,
                                                     const DawnTextureDescriptor* descriptor,
-                                                    HANDLE sharedHandle);
+                                                    HANDLE sharedHandle,
+                                                    uint64_t acquireMutexKey);
+
+    // ExportSharedTexture destroys the Dawn representation of the texture and returns the
+    // acquire key that must be used to draw the texture.
+    DAWN_NATIVE_EXPORT uint64_t ExportSharedTexture(DawnTexture texture);
+
+    DAWN_NATIVE_EXPORT uint64_t GetAcquireMutexKeyForTesting(DawnTexture texture);
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12BACKEND_H_

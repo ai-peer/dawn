@@ -17,6 +17,11 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    void CommandRecordingContext::AddToAcquireList(Texture* texture) {
+        ASSERT(IsOpen());
+        mAcquireTextures.insert(texture);
+    }
+
     MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
                                              CommandAllocatorManager* commandAllocationManager) {
         ASSERT(!IsOpen());
@@ -43,16 +48,45 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    ResultOrError<ID3D12GraphicsCommandList*> CommandRecordingContext::Close() {
+    MaybeError CommandRecordingContext::ExecuteCommandList(ID3D12CommandQueue* d3d12CommandQueue) {
+        if (IsOpen()) {
+            DAWN_TRY(PreExecute());
+            ID3D12CommandList* d3d12CommandList = GetCommandList();
+            d3d12CommandQueue->ExecuteCommandLists(1, &d3d12CommandList);
+            PostExecute();
+        }
+        return {};
+    }
+
+    MaybeError CommandRecordingContext::PreExecute() {
         ASSERT(IsOpen());
-        mIsOpen = false;
-        MaybeError error =
-            CheckHRESULT(mD3d12CommandList->Close(), "D3D12 closing pending command list");
+        for (Texture* texture : mAcquireTextures) {
+            MaybeError error = texture->AcquireKeyedMutex();
+            if (error.IsError()) {
+                PostExecute();
+                mD3d12CommandList.Reset();
+                DAWN_TRY(std::move(error));
+            }
+        }
+
+        MaybeError error = CheckHRESULT(mD3d12CommandList->Close(), "D3D12 closing command list");
         if (error.IsError()) {
+            PostExecute();
             mD3d12CommandList.Reset();
             DAWN_TRY(std::move(error));
         }
-        return mD3d12CommandList.Get();
+
+        return {};
+    }
+
+    void CommandRecordingContext::PostExecute() {
+        ASSERT(IsOpen());
+        for (Texture* texture : mAcquireTextures) {
+            texture->ReleaseKeyedMutex();
+        }
+
+        mIsOpen = false;
+        mAcquireTextures.clear();
     }
 
     ID3D12GraphicsCommandList* CommandRecordingContext::GetCommandList() const {
@@ -64,6 +98,7 @@ namespace dawn_native { namespace d3d12 {
     void CommandRecordingContext::Release() {
         mD3d12CommandList.Reset();
         mIsOpen = false;
+        mAcquireTextures.clear();
     }
 
     bool CommandRecordingContext::IsOpen() const {
