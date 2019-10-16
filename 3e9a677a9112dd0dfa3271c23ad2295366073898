@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "081942fb_fefa68c1",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T23:11:21Z",
+      "side": 1,
+      "message": "I agree that acquiring the texture when you call WrapSharedHandle and releasing it when you call ExportSharedTexture would make the code easier.  \n\nHowever, Corentin insisted we do it this way so that the acquire/release is done in as narrow as window as possible for maximum concurrency. \n\nI do not have a strong opinion either way.\n\n@Corentin, what do you think?",
+      "parentUuid": "89041382_ada5f176",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 9
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0aa6f092_1b083b26",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -105,6 +129,30 @@
     },
     {
       "key": {
+        "uuid": "5a6717a6_d65cdf0d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T23:11:21Z",
+      "side": 1,
+      "message": "The acquire list is already a set: \n\n   set\u003cTexture*\u003e mAcquireTextures;\n\n    void CommandRecordingContext::AddToAcquireList(Texture* texture) {\n        ASSERT(IsOpen());\n        mAcquireTextures.insert(texture);\n    }",
+      "parentUuid": "ee94ac0d_d49af8ac",
+      "range": {
+        "startLine": 423,
+        "startChar": 18,
+        "endLine": 423,
+        "endChar": 54
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17eb3016_c5bd5ad2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 3
@@ -116,6 +164,30 @@
       "writtenOn": "2019-10-16T22:54:54Z",
       "side": 1,
       "message": "Why do we skip this for external textures? The memory allocation and texture are still created with vkAllocateMemory and vkCreateImage. I think we still need to delete the imported handles even though the memory is owned externally.\n\nSame question about the Metal backend. (And OpenGL but we don\u0027t import textures there yet)",
+      "range": {
+        "startLine": 581,
+        "startChar": 8,
+        "endLine": 605,
+        "endChar": 5
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c687fde_878c9c8a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-16T23:11:21Z",
+      "side": 1,
+      "message": "Here was the previous code for DestroyInternal in the base class: \n\n    void TextureBase::DestroyInternal() {\n        if (mState \u003d\u003d TextureState::OwnedInternal) { \n            DestroyImpl();\n        }\n        mState \u003d TextureState::Destroyed;\n    }\n\nFor the D3D12 backend, I need DestroyImpl to run even when the texture is external so I removed the if statement. To keep the other backends working the way they were before, I had to manually add the if statement to their code.\n\nWe can remove the if statement for the Vulkan backend if you wish but should probably tackle that as a separate change to avoid to much churn in one change.",
+      "parentUuid": "17eb3016_c5bd5ad2",
       "range": {
         "startLine": 581,
         "startChar": 8,
