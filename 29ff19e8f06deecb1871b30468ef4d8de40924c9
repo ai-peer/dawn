@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "b706fd29_a625e313",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-17T15:30:21Z",
+      "side": 1,
+      "message": "Whoops, sorry for the confusion. I think we should have a getter like\nsize_t SerializedDawnDevicePropertiesSize();\n\nRight now, it\u0027ll be fixed size. In the future, I think we should _try_ to keep the serialized size fixed.",
+      "parentUuid": "b968f936_9050ec33",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c499df0_6dab6b53",
         "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
         "patchSetId": 4
