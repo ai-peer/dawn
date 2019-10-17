@@ -14,6 +14,8 @@
 
 #include "tests/unittests/wire/WireTest.h"
 
+#include "dawn_wire/Wire.h"
+
 using namespace testing;
 using namespace dawn_wire;
 

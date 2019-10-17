@@ -15,6 +15,7 @@
 #include "dawn_wire/WireCmd_autogen.h"
 
 #include "common/Assert.h"
+#include "dawn_wire/Wire.h"
 
 #include <algorithm>
 #include <cstring>
@@ -452,5 +453,31 @@ namespace dawn_wire {
     {% for command in cmd_records["return command"] %}
         {{ write_command_serialization_methods(command, True) }}
     {% endfor %}
+
+        // Implementations of serialization/deeserialization of DawnDeviceProperties.
+        void SerializeDawnDeviceProperties(const DawnDeviceProperties* deviceProperties,
+                                           size_t size,
+                                           char* serializeBuffer) {
+            ASSERT(size >= sizeof(DawnDevicePropertiesTransfer));
+            DawnDevicePropertiesTransfer* transfer =
+                reinterpret_cast<DawnDevicePropertiesTransfer*>(serializeBuffer);
+            serializeBuffer += size;
+
+            DawnDevicePropertiesSerialize(*deviceProperties, transfer, &serializeBuffer);
+        }
+
+        bool DeserializeDawnDeviceProperties(DawnDeviceProperties* deviceProperties,
+                                             size_t size,
+                                             const volatile char* deserializeBuffer) {
+            ASSERT(size >= sizeof(DawnDevicePropertiesTransfer));
+            const volatile DawnDevicePropertiesTransfer* transfer = nullptr;
+            if (GetPtrFromBuffer(&deserializeBuffer, &size, 1, &transfer) !=
+                DeserializeResult::Success) {
+                return false;
+            }
+
+            return DawnDevicePropertiesDeserialize(deviceProperties, transfer, &deserializeBuffer,
+                                                   &size, nullptr) == DeserializeResult::Success;
+        }
 
 }  // namespace dawn_wire
