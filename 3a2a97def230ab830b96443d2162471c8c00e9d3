@@ -46,6 +46,30 @@
       "revId": "3a2a97def230ab830b96443d2162471c8c00e9d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7321faeb_54f5ea0c",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-17T21:57:53Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "27213339_af21fca2",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "3a2a97def230ab830b96443d2162471c8c00e9d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
