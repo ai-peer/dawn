@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ce4053aa_2287a687",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-17T07:48:00Z",
+      "side": 1,
+      "message": "Added in chromium: https://chromium-review.googlesource.com/c/chromium/src/+/1864394",
+      "parentUuid": "3f4de0e3_9e7760cc",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b85f036d_b6487bd5",
         "filename": "BUILD.gn",
         "patchSetId": 5
@@ -121,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "7091475d_ef663331",
+        "filename": "build_overrides/vulkan_validation_layers.gni",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-17T07:48:00Z",
+      "side": 1,
+      "message": "The generated json of Vulkan validation layers are under vulkan_data_subdir, and the library path in the generated json is \"../libVkLayer_khronos_validation.so\" which is in the same folder as vulkan_data_subdir, so there is only one level subdir for vulkan_data_subdir.\n\nIf you mean vulkan_gen_subdir, I think a vulkan subdir is unnecessary, the gen files of Vulkan validation layers will be under \"out/debug/gen/third_party/vulkan-validation-layers\".",
+      "parentUuid": "1bb929ad_a0ca010a",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "373d4ba6_1b67db6f",
         "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
         "patchSetId": 5
@@ -172,6 +208,24 @@
       "writtenOn": "2019-10-15T09:14:00Z",
       "side": 1,
       "message": "Macros can be replaced by constexpr variables:\n\nstatic constexpr char kDawnPathSeparator \u003d \u0027\\\\\u0027; And it would be in src/common/SystemUtils.h",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14c944b8_998c3997",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-17T07:48:00Z",
+      "side": 1,
+      "message": "There is SystemUtils.h/.cpp in src/utils, maybe we can put these here.",
+      "parentUuid": "cb9ab9a5_8ac36af9",
       "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
