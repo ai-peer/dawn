@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8190ef27_42300900",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-17T09:10:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cee68c04_828d6a68",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f4de0e3_9e7760cc",
         "filename": "BUILD.gn",
         "patchSetId": 5
@@ -157,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "747ef514_1bd3b09e",
+        "filename": "build_overrides/vulkan_validation_layers.gni",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-17T09:10:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7091475d_ef663331",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "373d4ba6_1b67db6f",
         "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
         "patchSetId": 5
@@ -226,6 +262,24 @@
       "side": 1,
       "message": "There is SystemUtils.h/.cpp in src/utils, maybe we can put these here.",
       "parentUuid": "cb9ab9a5_8ac36af9",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c98a5ae5_0b822c63",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-17T09:10:38Z",
+      "side": 1,
+      "message": "utils/ isn\u0027t allowed to be used from dawn_native so we have to put it in common/",
+      "parentUuid": "14c944b8_998c3997",
       "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
