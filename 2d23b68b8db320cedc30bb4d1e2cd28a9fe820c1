@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "264649a1_2b93b478",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-17T16:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af407f63_59d1163c",
+      "revId": "2d23b68b8db320cedc30bb4d1e2cd28a9fe820c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec77ba84_f064035d",
         "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
         "patchSetId": 42
@@ -33,6 +51,24 @@
       "revId": "2d23b68b8db320cedc30bb4d1e2cd28a9fe820c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ecca801_3041128f",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-17T16:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec77ba84_f064035d",
+      "revId": "2d23b68b8db320cedc30bb4d1e2cd28a9fe820c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

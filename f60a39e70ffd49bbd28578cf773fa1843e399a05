@@ -563,6 +563,30 @@
     },
     {
       "key": {
+        "uuid": "d27d5d9a_462b4e1a",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-17T16:11:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "453eb3d7_f5404326",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "f60a39e70ffd49bbd28578cf773fa1843e399a05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57a25b73_d6a49f05",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 37
