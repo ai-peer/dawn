@@ -17,13 +17,36 @@
 #include <string>
 
 namespace dawn_native { namespace d3d12 {
+    const char* HRESULTAsString(HRESULT result) {
+        switch (result) {
+            case S_OK:
+                return "S_OK";
+            case S_FALSE:
+                return "S_FALSE";
+            case E_FAIL:
+                return "E_FAIL";
+            case E_OUTOFMEMORY:
+                return "E_OUTOFMEMORY";
+            case E_INVALIDARG:
+                return "E_INVALIDARG";
+            default:
+                return "<Unknown HRESULT>";
+        }
+    }
+
     MaybeError CheckHRESULT(HRESULT result, const char* context) {
         if (DAWN_LIKELY(SUCCEEDED(result))) {
             return {};
         }
 
-        std::string message = std::string(context) + " failed with " + std::to_string(result);
-        return DAWN_DEVICE_LOST_ERROR(message);
+        std::string message = std::string(context) + " failed with " + HRESULTAsString(result);
+
+        switch (result) {
+            case E_OUTOFMEMORY:
+                return DAWN_OUT_OF_MEMORY_ERROR(message);
+            default:
+                return DAWN_DEVICE_LOST_ERROR(message);
+        }
     }
 
 }}  // namespace dawn_native::d3d12
