@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "243e5cb1_2adfd94c",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-17T16:50:01Z",
+      "side": 1,
+      "message": "Or have a setter that\u0027s like enable / disable. But the platform wouldn\u0027t query the test env. Instead the test env would manipulate the platform. It makes the flow of ownership clearer imho.",
+      "parentUuid": "09f83f59_b606c439",
+      "range": {
+        "startLine": 41,
+        "startChar": 38,
+        "endLine": 41,
+        "endChar": 80
+      },
+      "revId": "88a3a422262198b064c41171c6ed497ae3c8d346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1aacffb8_e6ac6bcb",
         "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
         "patchSetId": 5
@@ -54,6 +78,24 @@
       "side": 1,
       "message": "Didn\u0027t want to make logs unnecessarily bloated with traces from the calibration phase of the tests. If we keep this though, we can\u0027t do your suggested simplification. WDYT?",
       "parentUuid": "1aacffb8_e6ac6bcb",
+      "revId": "88a3a422262198b064c41171c6ed497ae3c8d346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eed9fb17_063394d1",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-17T16:50:01Z",
+      "side": 1,
+      "message": "Ah makes sense.",
+      "parentUuid": "30000456_a3122282",
       "revId": "88a3a422262198b064c41171c6ed497ae3c8d346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
