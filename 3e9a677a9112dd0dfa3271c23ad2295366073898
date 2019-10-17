@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "76714fd1_3e15c3b8",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-17T17:47:46Z",
+      "side": 1,
+      "message": "Hm, I could see the value in Acquiring the texture later on first Submit. Don\u0027t want to cause too much churn though. I think we should keep it simple for now until we measure a performance problem.",
+      "parentUuid": "f17481a4_a0aa10d1",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 9
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0aa6f092_1b083b26",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
