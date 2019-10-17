@@ -39,6 +39,24 @@
       "revId": "88a3a422262198b064c41171c6ed497ae3c8d346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30000456_a3122282",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-17T15:26:25Z",
+      "side": 1,
+      "message": "Didn\u0027t want to make logs unnecessarily bloated with traces from the calibration phase of the tests. If we keep this though, we can\u0027t do your suggested simplification. WDYT?",
+      "parentUuid": "1aacffb8_e6ac6bcb",
+      "revId": "88a3a422262198b064c41171c6ed497ae3c8d346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
