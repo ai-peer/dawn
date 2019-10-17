@@ -660,6 +660,24 @@
     },
     {
       "key": {
+        "uuid": "134a7326_ff49656c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-17T18:58:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "591d8705_1ffb58ec",
+      "revId": "4d1ebefd800cfd9cc2b7368272f031991f03eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7279f037_a640686b",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 1

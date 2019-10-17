@@ -193,6 +193,30 @@
     },
     {
       "key": {
+        "uuid": "fa3f23e8_ccbacf63",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-17T18:58:44Z",
+      "side": 1,
+      "message": "I realize I mistyped what I wrote earlier.  I meant to write, \"I am going to change *WrapSharedHandle* to acquire the mutex right away\".\n\nAgreed on keeping things simple for now.  \n\nI\u0027ll add that when the time comes that we need to do D3D12\u003c-\u003eD3D12 interop with shared images on the Chromium side, this can be done more efficiently with fences on command lists instead of these individual keyed mutex objects. In that case, we won\u0027t even bother with shared handles. \n\nIn fact, on later versions of Windows, you can even use fences with D3D11. The only reason we\u0027re doing keyed mutexes as part of this CL is because we want WebGPU to run on as many versions of Windows as possible.",
+      "parentUuid": "76714fd1_3e15c3b8",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 9
+      },
+      "revId": "3e9a677a9112dd0dfa3271c23ad2295366073898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0aa6f092_1b083b26",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3

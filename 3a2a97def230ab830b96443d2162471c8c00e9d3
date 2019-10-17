@@ -22,6 +22,30 @@
       "revId": "3a2a97def230ab830b96443d2162471c8c00e9d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27213339_af21fca2",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-10-17T18:58:44Z",
+      "side": 1,
+      "message": "I should have put the TransitionUsageNow call in the original patch but left it out.  I added comments to the code that should hopefully make clear why it is needed.",
+      "parentUuid": "5d1284cc_a9350a96",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "3a2a97def230ab830b96443d2162471c8c00e9d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
