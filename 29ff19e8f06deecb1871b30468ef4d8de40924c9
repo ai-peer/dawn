@@ -160,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "b968f936_9050ec33",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-17T11:39:18Z",
+      "side": 1,
+      "message": "Erhm we gave conflicting comments here.  What happens will depend on whether DawnDeviceDescriptor is part of webgpu.h or not. If it is we\u0027ll have some extension mechanism that will make the size variable. (think of limits introduced in an extension)\n\nIf it is purely internal, maybe we can have it fixed size, not sure.",
+      "parentUuid": "5aafbcba_79d90ccf",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c499df0_6dab6b53",
         "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
         "patchSetId": 4

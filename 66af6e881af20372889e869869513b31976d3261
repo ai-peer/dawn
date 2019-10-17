@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb40bd94_0fb5c892",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-17T11:39:18Z",
+      "side": 1,
+      "message": "nit: deserialization",
+      "range": {
+        "startLine": 457,
+        "startChar": 44,
+        "endLine": 457,
+        "endChar": 49
+      },
+      "revId": "66af6e881af20372889e869869513b31976d3261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
