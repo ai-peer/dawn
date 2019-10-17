@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "f556b3a2_17d366b2",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-17T00:04:04Z",
+      "side": 1,
+      "message": "Sounds okay. Eventually we could detect when deserialization doesn\u0027t require the allocator and omit that argument.",
+      "parentUuid": "33863c26_4a1ba060",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "8783cc6bfa51ce94b5975aca1e3b8cb9bab34277",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea7fcf4_be19730a",
         "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
         "patchSetId": 1

@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "5da4b2a3_c8f26f31",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-17T00:04:04Z",
+      "side": 1,
+      "message": "+1. I think we\u0027re going to want this to be constant-size so in Chromium the client knows exactly how large the result will be.",
+      "parentUuid": "d73df41c_e670dd7d",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c499df0_6dab6b53",
         "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
         "patchSetId": 4
