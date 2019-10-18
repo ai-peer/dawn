@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cc16e66e_ce2f7364",
+        "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-18T18:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f22f50f_4d7e4e77",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 45
+      },
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c50242e_d8c05c05",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 4
@@ -39,6 +63,24 @@
       "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "056ff758_41876343",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-18T18:40:05Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "0c50242e_d8c05c05",
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "2b1c527d_2dc0b0db",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-18T18:40:05Z",
+      "side": 1,
+      "message": "Yea, in the Vulkan backend it\u0027s only used for compute passes. The D3D12 backend was less separable. I agree we should do correctness first before performance. Perf tests for this stuff is incoming soon-ish.",
+      "parentUuid": "42da2054_09671407",
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "513bc4ec_fd1322d0",
         "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
         "patchSetId": 4
@@ -73,6 +133,24 @@
       "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e6074ee_193c86cb",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-18T18:40:05Z",
+      "side": 1,
+      "message": "Lots of random numbers :)",
+      "parentUuid": "513bc4ec_fd1322d0",
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
