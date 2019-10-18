@@ -22,6 +22,57 @@
       "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c50242e_d8c05c05",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T10:02:39Z",
+      "side": 1,
+      "message": "\u003e Unordered access view barriers indicate all UAV accesses (read or writes) to a particular resource must complete before any future UAV accesses (read or write) can begin.\n\nThis means that we only need to do the UAV barrier if both are exactly equal to UAV. We still need to produce transition barriers for example for a resource used as uniform in a pass then storage in a follow up pass (or vice-versa). Can you add a test for this?",
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42da2054_09671407",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T10:02:39Z",
+      "side": 1,
+      "message": "I\u0027m worried that this and the extra iterations in the BindGroupAndStorageBarrierTrackerBase are a lot of code to execute on each draw, there has to be a more efficient way. Maybe we could use that new tracker only for compute passes?\n\nThat said feel free to defer that because we\u0027re prioritizing correctness over performance right now.",
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "513bc4ec_fd1322d0",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T10:02:39Z",
+      "side": 1,
+      "message": "Does this test fail without the changes here?",
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
