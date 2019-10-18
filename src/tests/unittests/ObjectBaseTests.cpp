@@ -16,16 +16,16 @@
 
 #include "dawn/dawncpp.h"
 
-class Object : public dawn::ObjectBase<Object, int*> {
+class Object : public wgpu::ObjectBase<Object, int*> {
     public:
         using ObjectBase::ObjectBase;
         using ObjectBase::operator=;
 
-        static void DawnReference(int* handle) {
+        static void WGPUReference(int* handle) {
             ASSERT_LE(0, *handle);
             *handle += 1;
         }
-        static void DawnRelease(int* handle) {
+        static void WGPURelease(int* handle) {
             ASSERT_LT(0, *handle);
             *handle -= 1;
         }
