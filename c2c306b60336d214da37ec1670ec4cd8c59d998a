@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9639fa4e_6ebef43f",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8190ef27_42300900",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f4de0e3_9e7760cc",
         "filename": "BUILD.gn",
         "patchSetId": 5
@@ -72,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "53d13c7c_19108947",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce4053aa_2287a687",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b85f036d_b6487bd5",
         "filename": "BUILD.gn",
         "patchSetId": 5
@@ -86,6 +122,24 @@
       "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb89e2fc_58846643",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b85f036d_b6487bd5",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "02369f95_2b4bd3ba",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43c0165d_9662d0e3",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38bc7fbc_98667b12",
         "filename": "DEPS",
         "patchSetId": 5
@@ -123,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "6928884a_252e6117",
+        "filename": "DEPS",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38bc7fbc_98667b12",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a51fd220_cdd9d280",
         "filename": "build_overrides/vulkan_validation_layers.gni",
         "patchSetId": 5
@@ -137,6 +227,24 @@
       "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71e386e6_d0b5a1ef",
+        "filename": "build_overrides/vulkan_validation_layers.gni",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a51fd220_cdd9d280",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -210,6 +318,24 @@
     },
     {
       "key": {
+        "uuid": "2ebfb38f_f1e16170",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "373d4ba6_1b67db6f",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab3f4654_bb540b20",
         "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
         "patchSetId": 5
@@ -230,6 +356,30 @@
       "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da881ebf_02e1311d",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab3f4654_bb540b20",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -283,6 +433,24 @@
       "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1069336_b1073fa3",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-10-18T13:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c98a5ae5_0b822c63",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
