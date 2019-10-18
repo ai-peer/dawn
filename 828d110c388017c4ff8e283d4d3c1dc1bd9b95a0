@@ -1,0 +1,209 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45f32e89_eb3653d2",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "No need to, we can always import the DEPS, even on Mac. Same for the validation layers. (This way we\u0027ll be able to test on Mac when we have swiftshader support)",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3fb2c96_77323502",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "nit: no need for the parenthesis.",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 12
+      },
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0774d20e_62a3e53c",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 37,
+        "startChar": 11,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27e0f254_66d639ed",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "Uuuh, maybe do the reading in two parts, once with a size of 0 to get the size of the link and the second one with the actual size?",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41bafa64_25a61372",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "This isn\u0027t used.",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea9e48f0_3ba18817",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "I think std::vector\u003cchar\u003e buffer(size + 1); should work.",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddb4db0d_a7d86a14",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "Why do we need this condition?",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de991bda_c4610432",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "Put a TODO(digit) instead.",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8fbda13_3d91512e",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "Let\u0027s just make GetExecutableDirectory return a string. Static variable should almost never be used, especially not as something that\u0027s returned because their lifetime will be hard to control.",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b35a17e_4d40f133",
+        "filename": "src/common/SystemUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "nit: kDawnPathSeparator or kPathSeparator, here it\u0027s not clear what it is.",
+      "range": {
+        "startLine": 21,
+        "startChar": 22,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d06e8588_7bee140a",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T13:55:47Z",
+      "side": 1,
+      "message": "We should handle the error of setting the variable with a context lost error maybe?",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
