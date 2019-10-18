@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cae9b50e_f3c96caa",
+        "filename": "src/tests/unittests/wire/WireDawnDevicePropertiesTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-18T09:16:45Z",
+      "side": 1,
+      "message": "nit: size_t",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 12
+      },
+      "revId": "fe6ae83a2094a132ca22673d5a109d2a7817a8df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
