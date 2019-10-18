@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f22f50f_4d7e4e77",
+        "filename": "src/dawn_native/BindGroupAndStorageBarrierTracker.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-18T01:36:35Z",
+      "side": 1,
+      "message": "rename include guard",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 45
+      },
+      "revId": "e869c82b4602be07a8bbf957303a0e535a047d74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
