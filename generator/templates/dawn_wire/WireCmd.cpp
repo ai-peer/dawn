@@ -15,6 +15,7 @@
 #include "dawn_wire/WireCmd_autogen.h"
 
 #include "common/Assert.h"
+#include "dawn_wire/Wire.h"
 
 #include <algorithm>
 #include <cstring>
@@ -452,7 +453,38 @@ namespace dawn_wire {
     {% endfor %}
 
     {% for command in cmd_records["return command"] %}
-        {{ write_command_serialization_methods(command, True) }}
+        {{write_command_serialization_methods(command, True)}}
     {% endfor %}
+
+        // Implementations of serialization/deeserialization of DawnDeviceProperties.
+        size_t
+        SerializedDawnDevicePropertiesSize(const DawnDeviceProperties* deviceProperties) {
+            return sizeof(DawnDeviceProperties) +
+                   DawnDevicePropertiesGetExtraRequiredSize(*deviceProperties);
+        }
+
+        void SerializeDawnDeviceProperties(const DawnDeviceProperties* deviceProperties,
+                                           char* serializeBuffer) {
+            size_t devicePropertiesSize = SerializedDawnDevicePropertiesSize(deviceProperties);
+            DawnDevicePropertiesTransfer* transfer =
+                reinterpret_cast<DawnDevicePropertiesTransfer*>(serializeBuffer);
+            serializeBuffer += devicePropertiesSize;
+
+            DawnDevicePropertiesSerialize(*deviceProperties, transfer, &serializeBuffer);
+        }
+
+        bool DeserializeDawnDeviceProperties(DawnDeviceProperties* deviceProperties,
+                                             const volatile char* deserializeBuffer) {
+            size_t devicePropertiesSize = SerializedDawnDevicePropertiesSize(deviceProperties);
+            const volatile DawnDevicePropertiesTransfer* transfer = nullptr;
+            if (GetPtrFromBuffer(&deserializeBuffer, &devicePropertiesSize, 1, &transfer) !=
+                DeserializeResult::Success) {
+                return false;
+            }
+
+            return DawnDevicePropertiesDeserialize(deviceProperties, transfer, &deserializeBuffer,
+                                                   &devicePropertiesSize,
+                                                   nullptr) == DeserializeResult::Success;
+        }
 
 }  // namespace dawn_wire
