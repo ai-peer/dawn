@@ -100,6 +100,20 @@ deps = {
     'url': '{dawn_git}/clang-format@2451c56cd368676cdb230fd5ad11731ab859f1a3',
     'condition': 'dawn_standalone and checkout_linux',
   },
+
+  # Khronos Vulkan-Headers
+  # TODO(hao.x.li): add condition for linux once segmentation fault is resolved.
+  'third_party/vulkan-headers': {
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@5b44df19e040fca0048ab30c553a8c2d2cb9623e',
+    'condition': 'dawn_standalone and (host_os == "win")',
+  },
+
+  # Khronos Vulkan-ValidationLayers
+  # TODO(hao.x.li): add condition for linux once segmentation fault is resolved.
+  'third_party/vulkan-validation-layers': {
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-ValidationLayers@9fba37afae13a11bd49ae942bf82e5bf1098e381',
+    'condition': 'dawn_standalone and (host_os == "win")',
+  },
 }
 
 hooks = [
