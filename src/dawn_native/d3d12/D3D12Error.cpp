@@ -23,7 +23,13 @@ namespace dawn_native { namespace d3d12 {
         }
 
         std::string message = std::string(context) + " failed with " + std::to_string(result);
-        return DAWN_DEVICE_LOST_ERROR(message);
+
+        switch (result) {
+            case E_OUTOFMEMORY:
+                return DAWN_OUT_OF_MEMORY_ERROR(message);
+            default:
+                return DAWN_DEVICE_LOST_ERROR(message);
+        }
     }
 
 }}  // namespace dawn_native::d3d12
