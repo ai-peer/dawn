@@ -196,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "45e6906e_022c24fb",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-10-18T05:13:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b706fd29_a625e313",
+      "revId": "29ff19e8f06deecb1871b30468ef4d8de40924c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c499df0_6dab6b53",
         "filename": "src/tests/unittests/wire/WireBasicTests.cpp",
         "patchSetId": 4
