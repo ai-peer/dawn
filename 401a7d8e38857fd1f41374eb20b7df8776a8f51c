@@ -2,6 +2,160 @@
   "comments": [
     {
       "key": {
+        "uuid": "c0241cf5_31ea69f3",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "How does this boolean expression mean \"Write-\u003eRead or Write-\u003eWrite\"?",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7400d49_d75f4541",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "Are we assuming that if newState \u0026 UNORDERED_ACCESS, then newState \u003d\u003d UNORDERED_ACCESS?",
+      "range": {
+        "startLine": 148,
+        "startChar": 31,
+        "endLine": 148,
+        "endChar": 80
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a4bc860_13dd24db",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "Done?",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa4b5b77_670f8cae",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "nit: bgl -\u003e index for consistency. It\u0027s not really representing a BGL anyway.",
+      "range": {
+        "startLine": 151,
+        "startChar": 30,
+        "endLine": 151,
+        "endChar": 33
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae5f4d2_9a59d39e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "break, because these shouldn\u0027t reach UNREACHABLE\n\n(but StorageTexture should. I think it works best in the order you have in BindGroupAndStorageBarrierTracker.h.)",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f8a4c56_48d6d025",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "nit: bgl -\u003e index",
+      "range": {
+        "startLine": 142,
+        "startChar": 30,
+        "endLine": 142,
+        "endChar": 33
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb57df49_a21712c4",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eed4c328_5fcdcd08",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:19:41Z",
+      "side": 1,
+      "message": "nit: imo slightly clearer if you just have SetBindGroup, Dispatch, SetBindGroup, Dispatch in the loop.",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f788b52a_0f781e1c",
         "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
         "patchSetId": 5
