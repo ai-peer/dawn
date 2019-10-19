@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35ccdec5_191e46b4",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-19T00:42:52Z",
+      "side": 0,
+      "message": "Perhaps we should keep this #if and put an #error in it to make sure no one runs into this bug? Or maybe it\u0027s so old it\u0027s not worth it.",
+      "revId": "4794168ef8b16d0899ab6e6f6a862162ae2ad829",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
