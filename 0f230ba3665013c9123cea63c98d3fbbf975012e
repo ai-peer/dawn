@@ -69,6 +69,24 @@
       "revId": "0f230ba3665013c9123cea63c98d3fbbf975012e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ba4383_54cf6382",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-21T17:37:56Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it just go into the template? Shouldn\u0027t make things more complex.\n\nEither way is ok with me.",
+      "parentUuid": "471127ca_cafe89ca",
+      "revId": "0f230ba3665013c9123cea63c98d3fbbf975012e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

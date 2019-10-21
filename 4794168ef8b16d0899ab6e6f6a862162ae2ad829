@@ -34,6 +34,24 @@
       "revId": "4794168ef8b16d0899ab6e6f6a862162ae2ad829",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84fe200e_74b03d70",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-21T17:37:56Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "7145b026_6455ce3e",
+      "revId": "4794168ef8b16d0899ab6e6f6a862162ae2ad829",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
