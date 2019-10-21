@@ -34,6 +34,24 @@
       "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86639762_cfdefc09",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-10-21T18:19:14Z",
+      "side": 1,
+      "message": "Can you try and find out what exactly went wrong when you tried using ldflags directly?",
+      "parentUuid": "41ca34e6_0a2dc944",
+      "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
