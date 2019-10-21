@@ -33,6 +33,24 @@
       "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0cca98e_a07bef97",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000573
+      },
+      "writtenOn": "2019-10-21T10:11:24Z",
+      "side": 1,
+      "message": "If I understand you correctly you want to:\n- Create \"libdawn_native_weak_framework\" config with ldflags.\n- Modify libdawn_native_sources to have all_dependent_configs \u003d [ \":libdawn_native_weak_framework\" ] (leaving configs +\u003d [ \":libdawn_native_internal\" ]).\n- Restore removed configs +\u003d [ \"${dawn_root}/src/common:dawn_internal\" ]\nIs that correct?",
+      "parentUuid": "61e95d95_47c493a8",
+      "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
