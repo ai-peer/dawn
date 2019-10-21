@@ -53,6 +53,13 @@ config("libdawn_native_internal") {
   # metal code in dawn once crbug.com/1004024 is sorted out.
   if (is_mac) {
     cflags_objcc = [ "-Wno-unguarded-availability" ]
+
+    if (dawn_enable_metal) {
+      ldflags = [
+        "-weak_framework",
+        "Metal",
+      ]
+    }
   }
 }
 
@@ -118,7 +125,7 @@ source_set("libdawn_native_sources") {
     "third_party:spirv_cross",
   ]
 
-  configs += [ ":libdawn_native_internal" ]
+  all_dependent_configs = [ ":libdawn_native_internal" ]
   libs = []
 
   # Dependencies that are needed to compile libdawn_native entry points in
@@ -307,7 +314,6 @@ source_set("libdawn_native_sources") {
 
   if (dawn_enable_metal) {
     libs += [
-      "Metal.framework",
       "Cocoa.framework",
       "IOKit.framework",
       "IOSurface.framework",
@@ -509,7 +515,6 @@ dawn_component("libdawn_native") {
   sources = [
     "src/dawn_native/DawnNative.cpp",
   ]
-  configs = [ ":libdawn_native_internal" ]
 
   if (dawn_enable_d3d12) {
     sources += [ "src/dawn_native/d3d12/D3D12Backend.cpp" ]
@@ -646,8 +651,6 @@ if (is_win || (is_linux && !is_chromeos) || is_mac) {
 ###############################################################################
 
 static_library("dawn_utils") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
-
   sources = [
     "src/utils/ComboRenderBundleEncoderDescriptor.cpp",
     "src/utils/ComboRenderBundleEncoderDescriptor.h",
@@ -683,8 +686,6 @@ static_library("dawn_utils") {
 }
 
 static_library("dawn_bindings") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
-
   sources = [
     "src/utils/BackendBinding.cpp",
     "src/utils/BackendBinding.h",
@@ -744,8 +745,6 @@ dawn_json_generator("mock_dawn_gen") {
 }
 
 test("dawn_unittests") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
-
   deps = [
     ":dawn_utils",
     ":libdawn_native",
@@ -760,7 +759,6 @@ test("dawn_unittests") {
 
   # Add internal Dawn Native headers and config for internal unittests.
   deps += [ ":libdawn_native_headers" ]
-  configs += [ ":libdawn_native_internal" ]
 
   sources = get_target_outputs(":mock_dawn_gen")
   sources += [
@@ -839,7 +837,6 @@ test("dawn_unittests") {
 }
 
 source_set("dawn_end2end_tests_sources") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
   testonly = true
 
   deps = [
@@ -916,7 +913,6 @@ source_set("dawn_end2end_tests_sources") {
 }
 
 source_set("dawn_white_box_tests_sources") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
   testonly = true
 
   deps = [
@@ -950,8 +946,6 @@ source_set("dawn_white_box_tests_sources") {
 }
 
 test("dawn_end2end_tests") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
-
   deps = [
     ":dawn_end2end_tests_sources",
     ":dawn_utils",
@@ -985,8 +979,6 @@ test("dawn_end2end_tests") {
 }
 
 test("dawn_perf_tests") {
-  configs += [ "${dawn_root}/src/common:dawn_internal" ]
-
   deps = [
     ":dawn_platform",
     ":dawn_utils",
