@@ -51,6 +51,24 @@
       "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91e9debd_193deefd",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000573
+      },
+      "writtenOn": "2019-10-21T10:27:07Z",
+      "side": 1,
+      "message": "I\u0027m not fully convinced that only ldflags should go into separate config.\nShouldn\u0027t also `cflags_objcc` be moved to that new config since it touches the same root issue?",
+      "parentUuid": "d0cca98e_a07bef97",
+      "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
