@@ -69,6 +69,24 @@
       "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e66f270f_19aa5755",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-21T10:40:00Z",
+      "side": 1,
+      "message": "Yep your understanding in the first comment is 100% correct.\n\nChromium doesn\u0027t want to have the removal of that warning because it is important to ensure correctness of ObjC++ code. On the other hand in Dawn, everything uses Metal that requires 10.11 so we suppress that warning. We have a WIP CL to remove it here https://dawn-review.googlesource.com/c/dawn/+/11400 and I should push it forward. Dawn\u0027s API is C++ only so luckily we don\u0027t need to suppress that warning in all_dependants, only internally.",
+      "parentUuid": "91e9debd_193deefd",
+      "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
