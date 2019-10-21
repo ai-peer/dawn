@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81c2d10f_0a97d780",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-21T09:52:35Z",
+      "side": 1,
+      "message": "nit: Bug: chromium:1003381",
+      "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61e95d95_47c493a8",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-21T09:52:35Z",
+      "side": 1,
+      "message": "\"libdawn_native_internal\" is an internal config, could these ldflags go in another config like \"libdawn_native_weak_framework\" that contains only this? Most changes in this CL would be removed apart from [1]",
+      "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
