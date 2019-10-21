@@ -87,6 +87,24 @@
       "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc0383b9_808d22c0",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000573
+      },
+      "writtenOn": "2019-10-21T11:17:16Z",
+      "side": 1,
+      "message": "Updated CL. Can you run dry-run?",
+      "parentUuid": "e66f270f_19aa5755",
+      "revId": "b40efe2f509d14130474145214bc14d33e11dc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
