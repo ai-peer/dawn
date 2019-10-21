@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fdfd98dc_af3e2471",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-21T11:35:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3f299f3_ad47fb15",
+      "revId": "0f230ba3665013c9123cea63c98d3fbbf975012e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "338a8b93_e929a309",
         "filename": "src/include/dawn/EnumClassBitmasks.h",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2019-10-19T00:42:52Z",
       "side": 1,
       "message": "It seems like we only use this file in webgpu_cpp.h. Should we inline it to make webgpu_cpp.h standalone?",
+      "revId": "0f230ba3665013c9123cea63c98d3fbbf975012e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "471127ca_cafe89ca",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-21T11:35:30Z",
+      "side": 1,
+      "message": "This is tested in standalone and is a lot of manual code to add to a code generator. WDYT?",
+      "parentUuid": "338a8b93_e929a309",
       "revId": "0f230ba3665013c9123cea63c98d3fbbf975012e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

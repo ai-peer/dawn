@@ -16,6 +16,24 @@
       "revId": "4794168ef8b16d0899ab6e6f6a862162ae2ad829",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7145b026_6455ce3e",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-21T11:35:30Z",
+      "side": 0,
+      "message": "Yeah it\u0027s very old, we can always add it back if someone encounters the problem.",
+      "parentUuid": "35ccdec5_191e46b4",
+      "revId": "4794168ef8b16d0899ab6e6f6a862162ae2ad829",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
