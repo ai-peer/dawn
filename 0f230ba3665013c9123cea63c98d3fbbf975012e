@@ -87,6 +87,24 @@
       "revId": "0f230ba3665013c9123cea63c98d3fbbf975012e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62d382ac_1508c11c",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T17:43:42Z",
+      "side": 1,
+      "message": "I think I\u0027d rather keep it here. It\u0027s hard to work with and find code when it\u0027s all in the generator.",
+      "parentUuid": "92ba4383_54cf6382",
+      "revId": "0f230ba3665013c9123cea63c98d3fbbf975012e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
