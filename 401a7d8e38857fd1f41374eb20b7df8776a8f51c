@@ -90,6 +90,48 @@
     },
     {
       "key": {
+        "uuid": "63aeb69e_474dafa4",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "This is no longer a bitwise \u0026. It\u0027s an equality comparison because we only need a UAV barrier if they\u0027re both exactly UAV_ACCESS",
+      "parentUuid": "73afa471_ab4c262b",
+      "range": {
+        "startLine": 148,
+        "startChar": 31,
+        "endLine": 148,
+        "endChar": 80
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d33fd92d_c9fbadda",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "You have to do the barrier if you Write then Read from a UAV or if you do Write then a Write. It doesn\u0027t match exactly because D3D12 doesn\u0027t have readonly UAVs. So we can only generally say \"both have UAV\". Updated the comment to something better.",
+      "parentUuid": "c0241cf5_31ea69f3",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a4bc860_13dd24db",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
@@ -104,6 +146,24 @@
       "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7319b61_cf8d8b25",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a4bc860_13dd24db",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -130,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "ff782ee1_8cc93f5d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa4b5b77_670f8cae",
+      "range": {
+        "startLine": 151,
+        "startChar": 30,
+        "endLine": 151,
+        "endChar": 33
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fae5f4d2_9a59d39e",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5
@@ -144,6 +228,24 @@
       "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dadb9aac_22e7539e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "These should also be unreachable. We never set these binding types in mBuffersNeedingBarrier",
+      "parentUuid": "fae5f4d2_9a59d39e",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -170,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "a06209e9_5d0ed77b",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f8a4c56_48d6d025",
+      "range": {
+        "startLine": 142,
+        "startChar": 30,
+        "endLine": 142,
+        "endChar": 33
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb57df49_a21712c4",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 5
@@ -187,6 +313,24 @@
     },
     {
       "key": {
+        "uuid": "d67915b8_da74e034",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb57df49_a21712c4",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eed4c328_5fcdcd08",
         "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
         "patchSetId": 5
@@ -201,6 +345,24 @@
       "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7d25667_2bd44e6d",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eed4c328_5fcdcd08",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -224,6 +386,30 @@
       "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "622258a2_849f450f",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-21T19:55:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f788b52a_0f781e1c",
+      "range": {
+        "startLine": 141,
+        "startChar": 11,
+        "endLine": 141,
+        "endChar": 18
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
