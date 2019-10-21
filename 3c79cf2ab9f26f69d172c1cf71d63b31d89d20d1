@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9190314_77308660",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-10-21T16:43:20Z",
+      "side": 1,
+      "message": "I don\u0027t think you want all_dependent_configs here. This can just be a normal config, no?\n\nImagine some dylib linking to dawn, and then something linking to that dylib. You only want the dylib that directly uses dawn link against metal.\n\nIn other words, you can just put this in ldflags in this target; no need for a config.",
+      "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
