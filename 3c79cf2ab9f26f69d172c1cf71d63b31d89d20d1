@@ -16,6 +16,24 @@
       "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41ca34e6_0a2dc944",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000573
+      },
+      "writtenOn": "2019-10-21T17:51:47Z",
+      "side": 1,
+      "message": "I remember I\u0027ve tried that, but for some reason it didn\u0027t work.\nFrom what I remember: ldflags were not propagated and all targets using `libdawn_native` needed `-weak_framework Metal` flags.\nMaybe I\u0027ve done it incorrectly.",
+      "parentUuid": "b9190314_77308660",
+      "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
