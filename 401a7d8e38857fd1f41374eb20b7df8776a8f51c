@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "73afa471_ab4c262b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-21T17:42:29Z",
+      "side": 1,
+      "message": "Maybe add asserts then, given it\u0027s a key assumption of the logic here.",
+      "parentUuid": "d2955930_e1437374",
+      "range": {
+        "startLine": 148,
+        "startChar": 31,
+        "endLine": 148,
+        "endChar": 80
+      },
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a4bc860_13dd24db",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
