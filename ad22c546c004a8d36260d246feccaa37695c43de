@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69578289_310ee629",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-21T22:48:14Z",
+      "side": 1,
+      "message": "The logic as explained in the comment above (if I got it right) would be better expressed by the code (IMO) if this were an early out *before* the early out on line 155.\n\nThis would of course duplicate the mLastUsage \u003d newUsage; line, but also simplifies the early out logic on 154.",
+      "revId": "ad22c546c004a8d36260d246feccaa37695c43de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

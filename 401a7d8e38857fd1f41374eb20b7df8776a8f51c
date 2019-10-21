@@ -132,6 +132,24 @@
     },
     {
       "key": {
+        "uuid": "1272b6f9_3006ae64",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-21T22:48:14Z",
+      "side": 1,
+      "message": "ah, gotcha. Can we update the comment to say something like\n\n  // If the transition is from-UAV-to-UAV, then a UAV barrier is needed.\n  // (If one of the usages isn\u0027t UAV, then other barriers are used.)",
+      "parentUuid": "d33fd92d_c9fbadda",
+      "revId": "401a7d8e38857fd1f41374eb20b7df8776a8f51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a4bc860_13dd24db",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 5
