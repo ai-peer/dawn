@@ -70,6 +70,24 @@
       "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9019ef81_32a2a0dd",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000573
+      },
+      "writtenOn": "2019-10-22T07:51:10Z",
+      "side": 1,
+      "message": "Found the explanation https://gn.googlesource.com/gn/+/master/docs/reference.md#var_ldflags\n\nldflags are NOT pushed to dependents, so applying ldflags to source sets or\n  static libraries will be a no-op. If you want to apply ldflags to dependent\n  targets, put them in a config and set it in the all_dependent_configs or\n  public_configs.",
+      "parentUuid": "0f22d520_63a96c19",
+      "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
