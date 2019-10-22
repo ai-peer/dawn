@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5725aeb_d71f7d11",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this.",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4456027_263bde66",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this.",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab054518_a3921220",
+        "filename": "generator/templates/dawn_native/wgpu_structs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this.",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06470946_c0c1635b",
+        "filename": "generator/templates/dawn_native/wgpu_structs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this.",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aadf1f65_33cd9d57",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this and Buffer.cpp for other renames than just dawn:: to wgpu::",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8cd05da_cc1909d5",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14d20371_5a67e2ce",
+        "filename": "src/tests/unittests/EnumClassBitmasksTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9159b9c6_fb8eaa35",
+        "filename": "src/tests/unittests/GetProcAddressTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf881ce1_0db261f7",
+        "filename": "src/tests/unittests/PerStageTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T12:24:18Z",
+      "side": 1,
+      "message": "Review this",
+      "revId": "1b483af8286c26cbabcf770ba7f37853d9c0b2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
