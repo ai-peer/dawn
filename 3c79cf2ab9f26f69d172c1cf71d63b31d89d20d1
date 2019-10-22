@@ -52,6 +52,24 @@
       "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f22d520_63a96c19",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000573
+      },
+      "writtenOn": "2019-10-22T06:37:43Z",
+      "side": 1,
+      "message": "Inside source_set(\"libdawn_native_sources\") I\u0027ve added\n\nif (is_mac \u0026\u0026 dawn_enable_metal) {\n     ldflags \u003d [\n       \"-weak_framework\",\n       \"Metal\",\n     ]\n}\n\nExecuting \"ninja dawn_unittests\" results in:\n\nLINK ./dawn_unittests\nFAILED: dawn_unittests \nTOOL_VERSION\u003d1568023737 ../../build/toolchain/mac/linker_driver.py -Wcrl,strippath,/Applications/Xcode10.3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip ../../third_party/llvm-build/Release+Asserts/bin/clang++ -B /Applications/Xcode10.3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/  -Wl,-fatal_warnings -stdlib\u003dlibc++ -arch x86_64 -segprot PROTECTED_MEMORY rw r -Werror -nostdlib++ -isysroot ../../../../../../../../Applications/Xcode10.3.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min\u003d10.10.0 -Wl,-ObjC -o \"./dawn_unittests\" -Wl,-filelist,\"./dawn_unittests.rsp\"  -framework Cocoa -framework IOKit -framework IOSurface -framework ApplicationServices -framework AppKit -lbsm -framework CoreFoundation -framework OpenDirectory -lpmenergy -lpmsample -framework Security\nUndefined symbols for architecture x86_64:\n  \"_MTLCopyAllDevices\", referenced from:\n      dawn_native::metal::Backend::DiscoverDefaultAdapters() in BackendMTL.o\n  \"_OBJC_CLASS_$_MTLDepthStencilDescriptor\", referenced from:\n      objc-class-ref in RenderPipelineMTL.o\n  \"_OBJC_CLASS_$_MTLRenderPassDescriptor\", referenced from:\n      objc-class-ref in CommandBufferMTL.o\n  \"_OBJC_CLASS_$_MTLRenderPipelineDescriptor\", referenced from:\n      objc-class-ref in RenderPipelineMTL.o\n  \"_OBJC_CLASS_$_MTLSamplerDescriptor\", referenced from:\n      objc-class-ref in SamplerMTL.o\n  \"_OBJC_CLASS_$_MTLStencilDescriptor\", referenced from:\n      objc-class-ref in RenderPipelineMTL.o\n  \"_OBJC_CLASS_$_MTLTextureDescriptor\", referenced from:\n      objc-class-ref in CommandBufferMTL.o\n      objc-class-ref in TextureMTL.o\n  \"_OBJC_CLASS_$_MTLVertexAttributeDescriptor\", referenced from:\n      objc-class-ref in RenderPipelineMTL.o\n  \"_OBJC_CLASS_$_MTLVertexBufferLayoutDescriptor\", referenced from:\n      objc-class-ref in RenderPipelineMTL.o\n  \"_OBJC_CLASS_$_MTLVertexDescriptor\", referenced from:\n      objc-class-ref in RenderPipelineMTL.o\nld: symbol(s) not found for architecture x86_64\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\nFor some reason ldflags is not used.",
+      "parentUuid": "86639762_cfdefc09",
+      "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
