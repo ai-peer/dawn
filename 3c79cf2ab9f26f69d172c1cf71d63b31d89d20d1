@@ -88,6 +88,24 @@
       "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aecf968f_a535d30d",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000573
+      },
+      "writtenOn": "2019-10-22T17:43:24Z",
+      "side": 1,
+      "message": "Nico, will that change solve the problem?\n\n -  all_dependent_configs \u003d [ \":libdawn_native_weak_framework\" ]\n +  public_configs \u003d [ \":libdawn_native_weak_framework\" ]",
+      "parentUuid": "9019ef81_32a2a0dd",
+      "revId": "3c79cf2ab9f26f69d172c1cf71d63b31d89d20d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
