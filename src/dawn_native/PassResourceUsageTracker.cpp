@@ -19,24 +19,24 @@
 
 namespace dawn_native {
 
-    void PassResourceUsageTracker::BufferUsedAs(BufferBase* buffer, dawn::BufferUsage usage) {
+    void PassResourceUsageTracker::BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage usage) {
         // std::map's operator[] will create the key and return 0 if the key didn't exist
         // before.
-        dawn::BufferUsage& storedUsage = mBufferUsages[buffer];
+        wgpu::BufferUsage& storedUsage = mBufferUsages[buffer];
 
-        if (usage == dawn::BufferUsage::Storage && storedUsage & dawn::BufferUsage::Storage) {
+        if (usage == wgpu::BufferUsage::Storage && storedUsage & wgpu::BufferUsage::Storage) {
             mStorageUsedMultipleTimes = true;
         }
 
         storedUsage |= usage;
     }
 
-    void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture, dawn::TextureUsage usage) {
+    void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage) {
         // std::map's operator[] will create the key and return 0 if the key didn't exist
         // before.
-        dawn::TextureUsage& storedUsage = mTextureUsages[texture];
+        wgpu::TextureUsage& storedUsage = mTextureUsages[texture];
 
-        if (usage == dawn::TextureUsage::Storage && storedUsage & dawn::TextureUsage::Storage) {
+        if (usage == wgpu::TextureUsage::Storage && storedUsage & wgpu::TextureUsage::Storage) {
             mStorageUsedMultipleTimes = true;
         }
 
@@ -60,14 +60,14 @@ namespace dawn_native {
         // Buffers can only be used as single-write or multiple read.
         for (auto& it : mBufferUsages) {
             BufferBase* buffer = it.first;
-            dawn::BufferUsage usage = it.second;
+            wgpu::BufferUsage usage = it.second;
 
             if (usage & ~buffer->GetUsage()) {
                 return DAWN_VALIDATION_ERROR("Buffer missing usage for the pass");
             }
 
             bool readOnly = (usage & kReadOnlyBufferUsages) == usage;
-            bool singleUse = dawn::HasZeroOrOneBits(usage);
+            bool singleUse = wgpu::HasZeroOrOneBits(usage);
 
             if (!readOnly && !singleUse) {
                 return DAWN_VALIDATION_ERROR(
@@ -79,7 +79,7 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): implement per-subresource tracking
         for (auto& it : mTextureUsages) {
             TextureBase* texture = it.first;
-            dawn::TextureUsage usage = it.second;
+            wgpu::TextureUsage usage = it.second;
 
             if (usage & ~texture->GetUsage()) {
                 return DAWN_VALIDATION_ERROR("Texture missing usage for the pass");
@@ -87,7 +87,7 @@ namespace dawn_native {
 
             // For textures the only read-only usage in a pass is Sampled, so checking the
             // usage constraint simplifies to checking a single usage bit is set.
-            if (!dawn::HasZeroOrOneBits(it.second)) {
+            if (!wgpu::HasZeroOrOneBits(it.second)) {
                 return DAWN_VALIDATION_ERROR("Texture used with more than one usage in pass");
             }
         }

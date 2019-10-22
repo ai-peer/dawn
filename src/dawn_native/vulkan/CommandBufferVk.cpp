@@ -35,11 +35,11 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
-        VkIndexType VulkanIndexType(dawn::IndexFormat format) {
+        VkIndexType VulkanIndexType(wgpu::IndexFormat format) {
             switch (format) {
-                case dawn::IndexFormat::Uint16:
+                case wgpu::IndexFormat::Uint16:
                     return VK_INDEX_TYPE_UINT16;
-                case dawn::IndexFormat::Uint32:
+                case wgpu::IndexFormat::Uint32:
                     return VK_INDEX_TYPE_UINT32;
                 default:
                     UNREACHABLE();
@@ -122,13 +122,13 @@ namespace dawn_native { namespace vulkan {
                     TextureView* view = ToBackend(attachmentInfo.view.Get());
                     bool hasResolveTarget = attachmentInfo.resolveTarget.Get() != nullptr;
 
-                    dawn::LoadOp loadOp = attachmentInfo.loadOp;
+                    wgpu::LoadOp loadOp = attachmentInfo.loadOp;
                     ASSERT(view->GetLayerCount() == 1);
                     ASSERT(view->GetLevelCount() == 1);
-                    if (loadOp == dawn::LoadOp::Load &&
+                    if (loadOp == wgpu::LoadOp::Load &&
                         !view->GetTexture()->IsSubresourceContentInitialized(
                             view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1)) {
-                        loadOp = dawn::LoadOp::Clear;
+                        loadOp = wgpu::LoadOp::Clear;
                     }
 
                     if (hasResolveTarget) {
@@ -143,12 +143,12 @@ namespace dawn_native { namespace vulkan {
                     }
 
                     switch (attachmentInfo.storeOp) {
-                        case dawn::StoreOp::Store: {
+                        case wgpu::StoreOp::Store: {
                             view->GetTexture()->SetIsSubresourceContentInitialized(
                                 true, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
                         } break;
 
-                        case dawn::StoreOp::Clear: {
+                        case wgpu::StoreOp::Clear: {
                             view->GetTexture()->SetIsSubresourceContentInitialized(
                                 false, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
                         } break;
@@ -170,26 +170,26 @@ namespace dawn_native { namespace vulkan {
                             view->GetBaseMipLevel(), view->GetLevelCount(),
                             view->GetBaseArrayLayer(), view->GetLayerCount())) {
                         if (view->GetTexture()->GetFormat().HasDepth() &&
-                            attachmentInfo.depthLoadOp == dawn::LoadOp::Load) {
+                            attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
                             attachmentInfo.clearDepth = 0.0f;
-                            attachmentInfo.depthLoadOp = dawn::LoadOp::Clear;
+                            attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
                         }
                         if (view->GetTexture()->GetFormat().HasStencil() &&
-                            attachmentInfo.stencilLoadOp == dawn::LoadOp::Load) {
+                            attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
                             attachmentInfo.clearStencil = 0u;
-                            attachmentInfo.stencilLoadOp = dawn::LoadOp::Clear;
+                            attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
                         }
                     }
                     query.SetDepthStencil(view->GetTexture()->GetFormat().format,
                                           attachmentInfo.depthLoadOp, attachmentInfo.stencilLoadOp);
 
-                    if (attachmentInfo.depthStoreOp == dawn::StoreOp::Store &&
-                        attachmentInfo.stencilStoreOp == dawn::StoreOp::Store) {
+                    if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Store &&
+                        attachmentInfo.stencilStoreOp == wgpu::StoreOp::Store) {
                         view->GetTexture()->SetIsSubresourceContentInitialized(
                             true, view->GetBaseMipLevel(), view->GetLevelCount(),
                             view->GetBaseArrayLayer(), view->GetLayerCount());
-                    } else if (attachmentInfo.depthStoreOp == dawn::StoreOp::Clear &&
-                               attachmentInfo.stencilStoreOp == dawn::StoreOp::Clear) {
+                    } else if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Clear &&
+                               attachmentInfo.stencilStoreOp == wgpu::StoreOp::Clear) {
                         view->GetTexture()->SetIsSubresourceContentInitialized(
                             false, view->GetBaseMipLevel(), view->GetLevelCount(),
                             view->GetBaseArrayLayer(), view->GetLayerCount());
@@ -321,7 +321,7 @@ namespace dawn_native { namespace vulkan {
             format.blockByteSize;
         BufferDescriptor tempBufferDescriptor;
         tempBufferDescriptor.size = tempBufferSize;
-        tempBufferDescriptor.usage = dawn::BufferUsage::CopySrc | dawn::BufferUsage::CopyDst;
+        tempBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
 
         Device* device = ToBackend(GetDevice());
         Ref<Buffer> tempBuffer = AcquireRef(ToBackend(device->CreateBuffer(&tempBufferDescriptor)));
@@ -336,7 +336,7 @@ namespace dawn_native { namespace vulkan {
         VkImage srcImage = ToBackend(srcCopy.texture)->GetHandle();
         VkImage dstImage = ToBackend(dstCopy.texture)->GetHandle();
 
-        tempBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopyDst);
+        tempBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
         VkBufferImageCopy srcToTempBufferRegion =
             ComputeBufferImageCopyRegion(tempBufferCopy, srcCopy, copySize);
 
@@ -344,7 +344,7 @@ namespace dawn_native { namespace vulkan {
         device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
                                         tempBuffer->GetHandle(), 1, &srcToTempBufferRegion);
 
-        tempBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopySrc);
+        tempBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopySrc);
         VkBufferImageCopy tempBufferToDstRegion =
             ComputeBufferImageCopyRegion(tempBufferCopy, dstCopy, copySize);
 
@@ -373,7 +373,7 @@ namespace dawn_native { namespace vulkan {
                 // Clear textures that are not output attachments. Output attachments will be
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the
                 // texture subresource has not been initialized before the render pass.
-                if (!(usages.textureUsages[i] & dawn::TextureUsage::OutputAttachment)) {
+                if (!(usages.textureUsages[i] & wgpu::TextureUsage::OutputAttachment)) {
                     texture->EnsureSubresourceContentInitialized(recordingContext, 0,
                                                                  texture->GetNumMipLevels(), 0,
                                                                  texture->GetArrayLayers());
@@ -392,8 +392,8 @@ namespace dawn_native { namespace vulkan {
                     Buffer* srcBuffer = ToBackend(copy->source.Get());
                     Buffer* dstBuffer = ToBackend(copy->destination.Get());
 
-                    srcBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopySrc);
-                    dstBuffer->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopyDst);
+                    srcBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopySrc);
+                    dstBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
                     VkBufferCopy region;
                     region.srcOffset = copy->sourceOffset;
@@ -426,9 +426,9 @@ namespace dawn_native { namespace vulkan {
                                                                   subresource.baseArrayLayer, 1);
                     }
                     ToBackend(src.buffer)
-                        ->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopySrc);
+                        ->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopyDst);
+                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst);
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
@@ -454,9 +454,9 @@ namespace dawn_native { namespace vulkan {
                                                               subresource.baseArrayLayer, 1);
 
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopySrc);
+                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc);
                     ToBackend(dst.buffer)
-                        ->TransitionUsageNow(recordingContext, dawn::BufferUsage::CopyDst);
+                        ->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkBuffer dstBuffer = ToBackend(dst.buffer)->GetHandle();
@@ -486,9 +486,9 @@ namespace dawn_native { namespace vulkan {
                     }
 
                     ToBackend(src.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopySrc);
+                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc);
                     ToBackend(dst.texture)
-                        ->TransitionUsageNow(recordingContext, dawn::TextureUsage::CopyDst);
+                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst);
 
                     // In some situations we cannot do texture-to-texture copies with vkCmdCopyImage
                     // because as Vulkan SPEC always validates image copies with the virtual size of
