@@ -16,6 +16,24 @@
       "revId": "0e21e90365317d784386cfba09b8438fc0544696",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b708a805_8724a427",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-22T17:58:11Z",
+      "side": 1,
+      "message": "You\u0027re right. :)",
+      "parentUuid": "a086f387_4a562790",
+      "revId": "0e21e90365317d784386cfba09b8438fc0544696",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
