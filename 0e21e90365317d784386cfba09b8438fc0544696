@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a086f387_4a562790",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-22T17:47:44Z",
+      "side": 1,
+      "message": "I think with this the ResourceAllocator can be completely removed.",
+      "revId": "0e21e90365317d784386cfba09b8438fc0544696",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
