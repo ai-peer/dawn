@@ -67,7 +67,10 @@ namespace dawn_native {
                     }
                     break;
                 case dawn::BindingType::ReadonlyStorageBuffer:
-                    return DAWN_VALIDATION_ERROR("readonly storage buffers aren't supported (yet)");
+                    if (binding.hasDynamicOffset) {
+                        ++dynamicStorageBufferCount;
+                    }
+                    break;
                 case dawn::BindingType::StorageTexture:
                     return DAWN_VALIDATION_ERROR("storage textures aren't supported (yet)");
             }
@@ -154,9 +157,11 @@ namespace dawn_native {
                     case dawn::BindingType::StorageBuffer:
                         ++mDynamicStorageBufferCount;
                         break;
+                    case dawn::BindingType::ReadonlyStorageBuffer:
+                        ++mDynamicStorageBufferCount;
+                        break;
                     case dawn::BindingType::SampledTexture:
                     case dawn::BindingType::Sampler:
-                    case dawn::BindingType::ReadonlyStorageBuffer:
                     case dawn::BindingType::StorageTexture:
                         UNREACHABLE();
                         break;
