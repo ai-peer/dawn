@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "5920d7f8_5e96538b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-23T22:44:45Z",
+      "side": 1,
+      "message": "typo: by",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bc48107_a263e251",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-23T22:44:45Z",
+      "side": 1,
+      "message": "typo: in",
+      "range": {
+        "startLine": 36,
+        "startChar": 57,
+        "endLine": 36,
+        "endChar": 59
+      },
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "977d28e7_852d7e61",
         "filename": "src/dawn_native/BuddyMemoryAllocator.h",
         "patchSetId": 3
@@ -13,6 +59,29 @@
       "writtenOn": "2019-10-23T20:19:16Z",
       "side": 1,
       "message": "nit: rename to BuddyMemoryBlockAllocator?",
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95db5653_40b3a29b",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-23T22:44:45Z",
+      "side": 1,
+      "message": "nit: Maybe we can rename both the class and member to be ResourceHeapAllocator* mHeapAllocator since its methods are [De]AllocateResourceHeap",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 33
+      },
       "revId": "9fa80ad950d583463e02738875190e5536e2740f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
