@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "3f38a51b_a1f65981",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-23T20:14:30Z",
+      "side": 1,
+      "message": "I had this working by simply passing allocation.GetOffset() to MapMemory, before returning the ResourceMemoryAllocation. Since the Vulkan memory model uses handles, the approach should be compatible.",
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "374d13ac_6ff8f25f",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-23T20:14:30Z",
+      "side": 1,
+      "message": "Thoughts to cache this on the allocation itself? Then both back-ends can more simply and directly call, `allocation.GetInfo().mMemoryTypeIndex`.",
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2d6b0b4_b51543f2",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.h",
         "patchSetId": 3
