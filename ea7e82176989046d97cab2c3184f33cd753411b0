@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d33c5e57_f236e3fd",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-23T23:06:31Z",
+      "side": 1,
+      "message": "typo: surface",
+      "range": {
+        "startLine": 73,
+        "startChar": 83,
+        "endLine": 73,
+        "endChar": 91
+      },
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3f38a51b_a1f65981",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
         "patchSetId": 3
@@ -13,6 +36,24 @@
       "writtenOn": "2019-10-23T20:14:30Z",
       "side": 1,
       "message": "I had this working by simply passing allocation.GetOffset() to MapMemory, before returning the ResourceMemoryAllocation. Since the Vulkan memory model uses handles, the approach should be compatible.",
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c1ee407_b878706e",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-23T23:06:31Z",
+      "side": 1,
+      "message": "If I remember correctly, there\u0027s a concern that suballocating mappable resources will prevent us from compacting mapped resources in the future because their addresses are pinned.\n\nThat being said, the D3D12 side currently does this suballocation. Doesn\u0027t matter to me until compaction becomes important.",
+      "parentUuid": "3f38a51b_a1f65981",
       "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
