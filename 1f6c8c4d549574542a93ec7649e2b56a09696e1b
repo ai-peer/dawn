@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a254a9d5_5de5c973",
+        "filename": "src/dawn_native/vulkan/MemoryAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-23T20:11:32Z",
+      "side": 0,
+      "message": "Note: comment [1] refers to re-using this handle\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/12660/1/src/dawn_native/vulkan/TextureVk.cpp#468",
+      "revId": "1f6c8c4d549574542a93ec7649e2b56a09696e1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
