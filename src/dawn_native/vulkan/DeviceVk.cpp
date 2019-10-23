@@ -681,19 +681,11 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<ResourceMemoryAllocation> Device::AllocateMemory(
         VkMemoryRequirements requirements,
         bool mappable) {
-        // TODO(crbug.com/dawn/27): Support sub-allocation.
         return mResourceMemoryAllocator->Allocate(requirements, mappable);
     }
 
-    void Device::DeallocateMemory(ResourceMemoryAllocation& allocation) {
-        if (allocation.GetInfo().mMethod == AllocationMethod::kInvalid) {
-            return;
-        }
+    void Device::DeallocateMemory(ResourceMemoryAllocation* allocation) {
         mResourceMemoryAllocator->Deallocate(allocation);
-
-        // Invalidate the underlying resource heap in case the client accidentally
-        // calls DeallocateMemory again using the same allocation.
-        allocation.Invalidate();
     }
 
     ResourceMemoryAllocator* Device::GetResourceMemoryAllocatorForTesting() const {
