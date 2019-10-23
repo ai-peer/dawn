@@ -28,8 +28,9 @@ namespace dawn_native { namespace d3d12 {
         HeapAllocator(Device* device, D3D12_HEAP_TYPE heapType, D3D12_HEAP_FLAGS heapFlags);
         ~HeapAllocator() override = default;
 
-        ResultOrError<std::unique_ptr<ResourceHeapBase>> Allocate(uint64_t size) override;
-        void Deallocate(std::unique_ptr<ResourceHeapBase> allocation) override;
+        ResultOrError<std::unique_ptr<ResourceHeapBase>> AllocateResourceHeap(
+            uint64_t size) override;
+        void DeallocateResourceHeap(std::unique_ptr<ResourceHeapBase> allocation) override;
 
       private:
         Device* mDevice;

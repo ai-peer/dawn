@@ -22,6 +22,7 @@
 #include "dawn_native/ResourceMemoryAllocation.h"
 
 namespace dawn_native {
+
     // BuddyMemoryAllocator uses the buddy allocator to sub-allocate blocks of device
     // memory created by MemoryAllocator clients. It creates a very large buddy system
     // where backing device memory blocks equal a specified level in the system.
@@ -31,23 +32,20 @@ namespace dawn_native {
     // same memory index, the memory refcount is incremented to ensure de-allocating one doesn't
     // release the other prematurely.
     //
-    // The device will only create up to Log2(kMaxResourceSize) allocators and can prefer speed
-    // over memory footprint by selecting an allocator with a higher memory threshold which results
-    // in pre-allocating more memory.
-    //
-    // The resource allocation is guaranteed by the device to have compatible memory flags.
+    // The MemoryAllocator should return ResourceHeaps that are all compatible with each other.
+    // It should also outlive all the resources that are un the buddy allocator.
     class BuddyMemoryAllocator {
       public:
-        BuddyMemoryAllocator(uint64_t maxBlockSize,
-                             uint64_t memorySize,
-                             std::unique_ptr<MemoryAllocator> client);
+        BuddyMemoryAllocator(uint64_t maxSystemSize,
+                             uint64_t memoryBlockSize,
+                             MemoryAllocator* client);
         ~BuddyMemoryAllocator() = default;
 
         ResultOrError<ResourceMemoryAllocation> Allocate(uint64_t allocationSize,
                                                          uint64_t alignment);
         void Deallocate(const ResourceMemoryAllocation& allocation);
 
-        uint64_t GetMemorySize() const;
+        uint64_t GetMemoryBlockSize() const;
 
         // For testing purposes.
         uint64_t ComputeTotalNumOfHeapsForTesting() const;
@@ -55,10 +53,10 @@ namespace dawn_native {
       private:
         uint64_t GetMemoryIndex(uint64_t offset) const;
 
-        uint64_t mMemorySize = 0;
+        uint64_t mMemoryBlockSize = 0;
 
         BuddyAllocator mBuddyBlockAllocator;
-        std::unique_ptr<MemoryAllocator> mClient;
+        MemoryAllocator* mClient;
 
         struct TrackedSubAllocations {
             size_t refcount = 0;
@@ -67,6 +65,7 @@ namespace dawn_native {
 
         std::vector<TrackedSubAllocations> mTrackedSubAllocations;
     };
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_BUDDYMEMORYALLOCATOR_H_
