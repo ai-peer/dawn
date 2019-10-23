@@ -583,7 +583,7 @@ namespace dawn_native { namespace vulkan {
 
             // For textures created from a VkImage, don't try to deallocate the (absence of) memory
             if (mMemoryAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
-                device->DeallocateMemory(mMemoryAllocation);
+                device->DeallocateMemory(&mMemoryAllocation);
             }
 
             if (mHandle != VK_NULL_HANDLE) {
