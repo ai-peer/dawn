@@ -222,6 +222,8 @@ namespace dawn_native { namespace vulkan {
         // as it enqueues resources to be released.
         mDynamicUploader->Deallocate(mCompletedSerial);
 
+        mResourceMemoryAllocator->Tick(mCompletedSerial);
+
         mDeleter->Tick(mCompletedSerial);
 
         if (mRecordingContext.used) {
