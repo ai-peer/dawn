@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "892ec00b_c70a6bcd",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-23T23:17:33Z",
+      "side": 1,
+      "message": "\u003e To be clear, you want to store the VkDeviceMemory directly in ResourceMemoryAllocation?\n\nYup. Or keep DeviceMemoryAllocation.\n\n\u003e That sounds nice but I think it would require changing things away from ResourceHeapBase as a base class.\n\nIt would but looks straightforward. Perhaps we could address in a future CL?",
+      "parentUuid": "185d32a4_ec0092d0",
+      "revId": "9ace017e4b69d269aec22115392358af715059ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22983650_38d51c53",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
