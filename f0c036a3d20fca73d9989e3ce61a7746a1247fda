@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e3d5380_c5a9a647",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-10-23T23:49:03Z",
+      "side": 0,
+      "message": "The tests will definitely fail if we can catch the unalignment error, where we do catch that kind error at line 389.",
+      "range": {
+        "startLine": 424,
+        "startChar": 4,
+        "endLine": 426,
+        "endChar": 0
+      },
+      "revId": "f0c036a3d20fca73d9989e3ce61a7746a1247fda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
