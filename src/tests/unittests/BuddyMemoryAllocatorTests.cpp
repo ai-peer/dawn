@@ -20,17 +20,17 @@ using namespace dawn_native;
 
 class DummyMemoryAllocator : public MemoryAllocator {
   public:
-    ResultOrError<std::unique_ptr<ResourceHeapBase>> Allocate(uint64_t size) override {
+    ResultOrError<std::unique_ptr<ResourceHeapBase>> AllocateResourceHeap(uint64_t size) override {
         return std::make_unique<ResourceHeapBase>();
     }
-    void Deallocate(std::unique_ptr<ResourceHeapBase> allocation) override {
+    void DeallocateResourceHeap(std::unique_ptr<ResourceHeapBase> allocation) override {
     }
 };
 
 class DummyBuddyResourceAllocator {
   public:
     DummyBuddyResourceAllocator(uint64_t maxBlockSize, uint64_t memorySize)
-        : mAllocator(maxBlockSize, memorySize, std::make_unique<DummyMemoryAllocator>()) {
+        : mAllocator(maxBlockSize, memorySize, &mAllocatorClient) {
     }
 
     ResourceMemoryAllocation Allocate(uint64_t allocationSize, uint64_t alignment = 1) {
@@ -48,6 +48,7 @@ class DummyBuddyResourceAllocator {
     }
 
   private:
+    DummyMemoryAllocator mAllocatorClient;
     BuddyMemoryAllocator mAllocator;
 };
 

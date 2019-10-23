@@ -24,8 +24,9 @@ namespace dawn_native {
       public:
         virtual ~MemoryAllocator() = default;
 
-        virtual ResultOrError<std::unique_ptr<ResourceHeapBase>> Allocate(uint64_t size) = 0;
-        virtual void Deallocate(std::unique_ptr<ResourceHeapBase> allocation) = 0;
+        virtual ResultOrError<std::unique_ptr<ResourceHeapBase>> AllocateResourceHeap(
+            uint64_t size) = 0;
+        virtual void DeallocateResourceHeap(std::unique_ptr<ResourceHeapBase> allocation) = 0;
     };
 }  // namespace dawn_native
 
