@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "977d28e7_852d7e61",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-23T20:19:16Z",
+      "side": 1,
+      "message": "nit: rename to BuddyMemoryBlockAllocator?",
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5ace868_56d15414",
+        "filename": "src/dawn_native/MemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-23T20:19:16Z",
+      "side": 1,
+      "message": "nit: rename to AllocateMemoryBlock (to be consistent)?",
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
