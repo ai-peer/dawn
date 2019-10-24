@@ -21,7 +21,7 @@
 namespace dawn_native { namespace d3d12 {
 
     namespace {
-        DXGI_USAGE D3D12SwapChainBufferUsage(DawnTextureUsage allowedUsages) {
+        DXGI_USAGE D3D12SwapChainBufferUsage(WGPUTextureUsage allowedUsages) {
             DXGI_USAGE usage = DXGI_CPU_ACCESS_NONE;
             if (allowedUsages & DAWN_TEXTURE_USAGE_SAMPLED) {
                 usage |= DXGI_USAGE_SHADER_INPUT;
@@ -48,13 +48,13 @@ namespace dawn_native { namespace d3d12 {
     void NativeSwapChainImpl::Init(DawnWSIContextD3D12* /*context*/) {
     }
 
-    DawnSwapChainError NativeSwapChainImpl::Configure(DawnTextureFormat format,
-                                                      DawnTextureUsage usage,
+    DawnSwapChainError NativeSwapChainImpl::Configure(WGPUTextureFormat format,
+                                                      WGPUTextureUsage usage,
                                                       uint32_t width,
                                                       uint32_t height) {
         ASSERT(width > 0);
         ASSERT(height > 0);
-        ASSERT(format == static_cast<DawnTextureFormat>(GetPreferredFormat()));
+        ASSERT(format == static_cast<WGPUTextureFormat>(GetPreferredFormat()));
 
         ComPtr<IDXGIFactory4> factory = mDevice->GetFactory();
         ComPtr<ID3D12CommandQueue> queue = mDevice->GetCommandQueue();
