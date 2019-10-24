@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "484e8d43_c1e4fb14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:28:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5920d7f8_5e96538b",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7bc48107_a263e251",
         "filename": "src/dawn_native/BuddyMemoryAllocator.h",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a461ce0f_55a0be01",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:28:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bc48107_a263e251",
+      "range": {
+        "startLine": 36,
+        "startChar": 57,
+        "endLine": 36,
+        "endChar": 59
+      },
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "977d28e7_852d7e61",
         "filename": "src/dawn_native/BuddyMemoryAllocator.h",
         "patchSetId": 3
@@ -59,6 +107,24 @@
       "writtenOn": "2019-10-23T20:19:16Z",
       "side": 1,
       "message": "nit: rename to BuddyMemoryBlockAllocator?",
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aea54a76_3b2ddd55",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:28:08Z",
+      "side": 1,
+      "message": "I parse this as (buddy ((memory block) allocator)) which sounds like an allocator for memory blocks that uses a buddy system.\n\nHow about BuddyResourceMemoryAllocator since it returns ResourceMemory? If we choose to do this, I\u0027ll do it in another CL and also rename ResourceHeap to ResourceMemory for consistency (and ReasourceHeapAllocator to ResourceMemoryAllocator).",
+      "parentUuid": "977d28e7_852d7e61",
       "revId": "9fa80ad950d583463e02738875190e5536e2740f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "e23d0200_6545a143",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:28:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95db5653_40b3a29b",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 33
+      },
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5ace868_56d15414",
         "filename": "src/dawn_native/MemoryAllocator.h",
         "patchSetId": 3
@@ -102,6 +192,24 @@
       "revId": "9fa80ad950d583463e02738875190e5536e2740f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d4853e4_18ad7c01",
+        "filename": "src/dawn_native/MemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:28:08Z",
+      "side": 1,
+      "message": "It returns a ResourceHeapBase so I went ahead and renamed it to ResourceHeapAllocator following Austin\u0027s suggestion.",
+      "parentUuid": "d5ace868_56d15414",
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
