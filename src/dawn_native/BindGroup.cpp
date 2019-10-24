@@ -158,8 +158,10 @@ namespace dawn_native {
                 case dawn::BindingType::Sampler:
                     DAWN_TRY(ValidateSamplerBinding(device, binding));
                     break;
-                case dawn::BindingType::StorageTexture:
                 case dawn::BindingType::ReadonlyStorageBuffer:
+                    DAWN_TRY(ValidateBufferBinding(device, binding, dawn::BufferUsage::Storage));
+                    break;
+                case dawn::BindingType::StorageTexture:
                     UNREACHABLE();
                     break;
             }

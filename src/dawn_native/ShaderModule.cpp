@@ -170,6 +170,8 @@ namespace dawn_native {
         ExtractResourcesBinding(resources.separate_samplers, compiler, dawn::BindingType::Sampler);
         ExtractResourcesBinding(resources.storage_buffers, compiler,
                                 dawn::BindingType::StorageBuffer);
+        // ExtractResourcesBinding(resources.readonly_storage_buffers, compiler,
+        //                         dawn::BindingType::ReadonlyStorageBuffer);
 
         // Extract the vertex attributes
         if (mExecutionModel == SingleShaderStage::Vertex) {

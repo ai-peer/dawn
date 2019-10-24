@@ -49,11 +49,15 @@ namespace dawn_native {
                         usageTracker->TextureUsedAs(texture, dawn::TextureUsage::Sampled);
                     } break;
 
+                    case dawn::BindingType::ReadonlyStorageBuffer: {
+                        BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
+                        usageTracker->BufferUsedAs(buffer, dawn::BufferUsage::Storage);
+                    } break;
+
                     case dawn::BindingType::Sampler:
                         break;
 
                     case dawn::BindingType::StorageTexture:
-                    case dawn::BindingType::ReadonlyStorageBuffer:
                         UNREACHABLE();
                         break;
                 }
