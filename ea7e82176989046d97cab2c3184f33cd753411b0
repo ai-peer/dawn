@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "68f1dda4_17926f45",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:34:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cbc32b1e_a9e52eb2",
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2d6b0b4_b51543f2",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.h",
         "patchSetId": 3
