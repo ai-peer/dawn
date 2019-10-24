@@ -131,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "d6331c67_778416a1",
+        "filename": "src/dawn_native/BuddyMemoryAllocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-24T17:07:32Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "aea54a76_3b2ddd55",
+      "revId": "9fa80ad950d583463e02738875190e5536e2740f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95db5653_40b3a29b",
         "filename": "src/dawn_native/BuddyMemoryAllocator.h",
         "patchSetId": 3
