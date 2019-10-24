@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "643bc2e8_46209309",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T10:51:27Z",
+      "side": 1,
+      "message": "+CC Kai\n\nThis can make any D3D12 OOM error produce a WebGPU OutOfMemory error but IIRC we only want to produce them for texture or for buffer creation and everything else should bo Device lost.\n\nKai, does that sound correct?\n\nIf that\u0027s correct I suggest that for CreateCommittedResource and CreateHeap (and not descriptor heap) you do something like the following:\n\n HRESULT result \u003d ...\n if (result \u003d\u003d E_OUTOFMEMORY) {\n   return DAWN_OUT_OF_MEMORY_ERROR();\n }\n CheckHRESULT(result);",
+      "revId": "1abf3542ac95bb89e1a413226eb305390a9a62bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
