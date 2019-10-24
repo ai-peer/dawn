@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "b4c2fe4c_560e2a1b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-24T17:12:20Z",
+      "side": 1,
+      "message": "Let\u0027s talk about the details of simplifying this in another CL. Removing the indirection would be nice, but it\u0027s also not critical for the rest of the Vulkan suballocation work.",
+      "parentUuid": "b908e51d_c38afa4b",
+      "revId": "9ace017e4b69d269aec22115392358af715059ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22983650_38d51c53",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
