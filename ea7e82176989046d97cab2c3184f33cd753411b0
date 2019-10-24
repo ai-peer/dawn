@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7d173d02_8675f0c3",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d33c5e57_f236e3fd",
+      "range": {
+        "startLine": 73,
+        "startChar": 83,
+        "endLine": 73,
+        "endChar": 91
+      },
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f38a51b_a1f65981",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
         "patchSetId": 3
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "893b0e73_983549e3",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:34:33Z",
+      "side": 1,
+      "message": "Yes there\u0027s the concern of mapped memory being pinned but for now I\u0027m planning to ignore it in the Vulkan backend too.\n\nFor memory mapping my plan is to put the mapped pointer in the ResourceHeap, next to the VkDeviceMemory (there is a 1-1 relationship between them). But to do that I want to remove the mappedPointer from ResourceAllocation so I\u0027ll do all this in another CL.",
+      "parentUuid": "9c1ee407_b878706e",
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "374d13ac_6ff8f25f",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
         "patchSetId": 3
@@ -71,6 +113,24 @@
       "writtenOn": "2019-10-23T20:14:30Z",
       "side": 1,
       "message": "Thoughts to cache this on the allocation itself? Then both back-ends can more simply and directly call, `allocation.GetInfo().mMemoryTypeIndex`.",
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbc32b1e_a9e52eb2",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:34:33Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s worth it. The memoryTypeIndex is backend-specific and a property of the VkDeviceMemory, not of the resource and its allocation.",
+      "parentUuid": "374d13ac_6ff8f25f",
       "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -91,6 +151,24 @@
       "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e640783d_85e0e16c",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2d6b0b4_b51543f2",
+      "revId": "ea7e82176989046d97cab2c3184f33cd753411b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
