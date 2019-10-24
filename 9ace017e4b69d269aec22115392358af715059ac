@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "89b278c7_fd420cca",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T21:21:29Z",
+      "side": 1,
+      "message": "I still don\u0027t understand, we agree that VkDeviceMemory isn\u0027t refcounted so do you mean that the BuddyMemoryAllocator owns the ResourceHeap but also copies the information from the ResourceHeap into the ResourceMemoryAllocation (plus the offset)? It would duplicate information in ResourceMemoryAllocation that\u0027s better represented by a backend-specific ResourceHeap (like the backend-specific memory types and maybe more info in the future).",
+      "parentUuid": "b4c2fe4c_560e2a1b",
+      "revId": "9ace017e4b69d269aec22115392358af715059ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22983650_38d51c53",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
