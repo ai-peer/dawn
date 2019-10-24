@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "6f01a451_894155c4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:11:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, the ResourceHeap is an abstraction for a block of memory that is used to suballocated resources in. Isn\u0027t it exactly what a VkDeviceMemory is?\n\nAlso we need to keep the VkDeviceMemory in the ResourceHeap because the BuddyMemoryAllocator allocates block of memory represented as ResourceHeaps and gives us a ResourceMemoryAllocation that points to which block of memory it\u0027s in.",
+      "parentUuid": "892ec00b_c70a6bcd",
+      "revId": "9ace017e4b69d269aec22115392358af715059ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22983650_38d51c53",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "revId": "9ace017e4b69d269aec22115392358af715059ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6184e429_c5d1c48c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-24T11:11:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22983650_38d51c53",
+      "revId": "9ace017e4b69d269aec22115392358af715059ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
