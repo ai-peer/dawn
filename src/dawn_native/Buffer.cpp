@@ -255,6 +255,16 @@ namespace dawn_native {
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(uploadHandle,
                         uploader->Allocate(count, GetDevice()->GetPendingCommandSerial()));
+
+        // Fall-back if dynamic uploader had failed.
+        if (uploadHandle.mappedBuffer == nullptr) {
+            std::unique_ptr<StagingBufferBase> stagingBuffer;
+            DAWN_TRY_ASSIGN(stagingBuffer, GetDevice()->CreateStagingBuffer(count));
+            uploadHandle.mappedBuffer = static_cast<uint8_t*>(stagingBuffer->GetMappedPointer());
+            uploadHandle.stagingBuffer = stagingBuffer.get();
+            uploader->ReleaseStagingBuffer(std::move(stagingBuffer));
+        }
+
         ASSERT(uploadHandle.mappedBuffer != nullptr);
 
         memcpy(uploadHandle.mappedBuffer, data, count);
