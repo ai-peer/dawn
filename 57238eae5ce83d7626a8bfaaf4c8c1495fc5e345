@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32eb36d9_862bacc6",
+        "filename": "src/utils/MetalBinding.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-24T17:43:07Z",
+      "side": 1,
+      "message": "Was this texture format supposed to change?",
+      "range": {
+        "startLine": 49,
+        "startChar": 26,
+        "endLine": 49,
+        "endChar": 54
+      },
+      "revId": "57238eae5ce83d7626a8bfaaf4c8c1495fc5e345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "194f2b2f_3bc46ff3",
+        "filename": "src/utils/MetalBinding.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-24T17:43:07Z",
+      "side": 1,
+      "message": "same question here",
+      "range": {
+        "startLine": 125,
+        "startChar": 19,
+        "endLine": 125,
+        "endChar": 47
+      },
+      "revId": "57238eae5ce83d7626a8bfaaf4c8c1495fc5e345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
