@@ -67,7 +67,10 @@ namespace dawn_native {
                     }
                     break;
                 case wgpu::BindingType::ReadonlyStorageBuffer:
-                    return DAWN_VALIDATION_ERROR("readonly storage buffers aren't supported (yet)");
+                    if (binding.hasDynamicOffset) {
+                        ++dynamicStorageBufferCount;
+                    }
+                    break;
                 case wgpu::BindingType::StorageTexture:
                     return DAWN_VALIDATION_ERROR("storage textures aren't supported (yet)");
             }
@@ -154,9 +157,11 @@ namespace dawn_native {
                     case wgpu::BindingType::StorageBuffer:
                         ++mDynamicStorageBufferCount;
                         break;
+                    case wgpu::BindingType::ReadonlyStorageBuffer:
+                        ++mDynamicStorageBufferCount;
+                        break;
                     case wgpu::BindingType::SampledTexture:
                     case wgpu::BindingType::Sampler:
-                    case wgpu::BindingType::ReadonlyStorageBuffer:
                     case wgpu::BindingType::StorageTexture:
                         UNREACHABLE();
                         break;
