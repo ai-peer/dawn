@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b08ad0e3_3e457cf2",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-25T20:54:25Z",
+      "side": 1,
+      "message": "This always makes a ring buffer of |kMaxBufferSize|. Shouldn\u0027t we grow up until this size, not always allocate at this size?\nWith this change, the smallest SetSubData will allocate |kMaxBufferSize| bytes.",
+      "range": {
+        "startLine": 69,
+        "startChar": 60,
+        "endLine": 69,
+        "endChar": 74
+      },
+      "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
