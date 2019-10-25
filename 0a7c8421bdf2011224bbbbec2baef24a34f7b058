@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c527a7a_a40d5357",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-25T12:59:56Z",
+      "side": 1,
+      "message": "This case could be factored with StorageBuffer above.",
+      "revId": "0a7c8421bdf2011224bbbbec2baef24a34f7b058",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8476991c_980fe3ec",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-25T12:59:56Z",
+      "side": 1,
+      "message": "ditto, this could be factored with StorageBuffer",
+      "revId": "0a7c8421bdf2011224bbbbec2baef24a34f7b058",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42584c4f_30308932",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-25T12:59:56Z",
+      "side": 1,
+      "message": "This is the part where something interesting should happen: right now ReadOnlyStorage is treated like storage, which is a read-write usage and cannot be combined with other read-write usages in a render pass.\n\nWe should somehow tell to the usageTracker that this isn\u0027t a read-write storage but a read-only storage that can combined with others in the same renderpass. We should also have a test for this.",
+      "revId": "0a7c8421bdf2011224bbbbec2baef24a34f7b058",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
