@@ -16,6 +16,24 @@
       "revId": "1abf3542ac95bb89e1a413226eb305390a9a62bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf464a89_f0d71765",
+        "filename": "src/dawn_native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-25T01:03:31Z",
+      "side": 1,
+      "message": "Yes, that sounds right to me. Firstly, we should be very careful that we only report OOM in situations where it\u0027s safe and truly recoverable. Hopefully this is true if we get E_OUTOFMEMORY from CreateCommittedResource or CreateHeap.\n\nSecondly, as (to-be-)specced, out of memory errors can only come from createBuffer and createTexture, so we would have to convert any others into device losses at some point anyway.",
+      "parentUuid": "643bc2e8_46209309",
+      "revId": "1abf3542ac95bb89e1a413226eb305390a9a62bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
