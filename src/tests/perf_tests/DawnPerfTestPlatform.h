@@ -51,11 +51,12 @@ class DawnPerfTestPlatform : public dawn_platform::Platform {
         double timestamp = 0;
     };
 
-    explicit DawnPerfTestPlatform(bool enableTracing);
+    DawnPerfTestPlatform();
     ~DawnPerfTestPlatform() override;
 
     void EnableTraceEventRecording(bool enable);
     const std::vector<TraceEvent>& GetTraceEventBuffer() const;
+    void ResetTraceEventBuffer();
 
   private:
     const unsigned char* GetTraceCategoryEnabledFlag(const char* name) override;
@@ -73,7 +74,6 @@ class DawnPerfTestPlatform : public dawn_platform::Platform {
                            const uint64_t* argValues,
                            unsigned char flags) override;
 
-    bool mEnableTracing = false;
     bool mRecordTraceEvents = false;
     std::unique_ptr<utils::Timer> mTimer;
 
