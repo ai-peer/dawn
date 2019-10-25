@@ -158,8 +158,10 @@ namespace dawn_native {
                 case wgpu::BindingType::Sampler:
                     DAWN_TRY(ValidateSamplerBinding(device, binding));
                     break;
-                case wgpu::BindingType::StorageTexture:
                 case wgpu::BindingType::ReadonlyStorageBuffer:
+                    DAWN_TRY(ValidateBufferBinding(device, binding, wgpu::BufferUsage::Storage));
+                    break;
+                case wgpu::BindingType::StorageTexture:
                     UNREACHABLE();
                     break;
             }
