@@ -27,12 +27,13 @@ namespace dawn_native {
 
     MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor);
 
+    // Storage buffer might be readonly or writable. It depends on its binding type.
     static constexpr wgpu::BufferUsage kReadOnlyBufferUsages =
         wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::Index |
         wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Uniform;
 
     static constexpr wgpu::BufferUsage kWritableBufferUsages =
-        wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Storage;
+        wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopyDst;
 
     class BufferBase : public ObjectBase {
         enum class BufferState {

@@ -33,7 +33,10 @@ namespace dawn_native {
     // information.
     class PassResourceUsageTracker {
       public:
-        void BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage usage);
+        void BufferUsedAs(BufferBase* buffer,
+                          wgpu::BufferUsage usage,
+                          bool hasWritableStorageBinding = false,
+                          bool hasReadonlyStorageBinding = false);
         void TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage);
 
         MaybeError ValidateComputePassUsages() const;
@@ -46,7 +49,13 @@ namespace dawn_native {
         // Performs the per-pass usage validation checks
         MaybeError ValidateUsages() const;
 
-        std::map<BufferBase*, wgpu::BufferUsage> mBufferUsages;
+        struct BufferUsageInfo {
+            wgpu::BufferUsage usage;
+            bool hasWritableStorageBinding;
+            bool hasReadonlyStorageBinding;
+        };
+
+        std::map<BufferBase*, BufferUsageInfo> mBufferUsages;
         std::map<TextureBase*, wgpu::TextureUsage> mTextureUsages;
     };
 

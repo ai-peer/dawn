@@ -19,10 +19,21 @@
 
 namespace dawn_native {
 
-    void PassResourceUsageTracker::BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage usage) {
+    void PassResourceUsageTracker::BufferUsedAs(BufferBase* buffer,
+                                                wgpu::BufferUsage usage,
+                                                bool hasWritableStorageBinding,
+                                                bool hasReadonlyStorageBinding) {
         // std::map's operator[] will create the key and return 0 if the key didn't exist
         // before.
-        mBufferUsages[buffer] |= usage;
+        BufferUsageInfo info = mBufferUsages[buffer];
+        info.usage |= usage;
+        if (hasReadonlyStorageBinding && !info.hasReadonlyStorageBinding) {
+            info.hasReadonlyStorageBinding = true;
+        }
+        if (hasWritableStorageBinding && !info.hasWritableStorageBinding) {
+            info.hasWritableStorageBinding = true;
+        }
+        mBufferUsages[buffer] = info;
     }
 
     void PassResourceUsageTracker::TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage) {
@@ -44,14 +55,22 @@ namespace dawn_native {
         // Buffers can only be used as single-write or multiple read.
         for (auto& it : mBufferUsages) {
             BufferBase* buffer = it.first;
-            wgpu::BufferUsage usage = it.second;
+            wgpu::BufferUsage usage = it.second.usage;
 
             if (usage & ~buffer->GetUsage()) {
                 return DAWN_VALIDATION_ERROR("Buffer missing usage for the pass");
             }
 
             bool readOnly = (usage & kReadOnlyBufferUsages) == usage;
+            if (it.second.hasReadonlyStorageBinding && !it.second.hasWritableStorageBinding &&
+                (usage & ~kWritableBufferUsages) == usage) {
+                readOnly = true;
+            }
+
             bool singleUse = wgpu::HasZeroOrOneBits(usage);
+            if (it.second.hasReadonlyStorageBinding && it.second.hasWritableStorageBinding) {
+                singleUse = false;
+            }
 
             if (!readOnly && !singleUse) {
                 return DAWN_VALIDATION_ERROR(
@@ -89,7 +108,7 @@ namespace dawn_native {
 
         for (auto& it : mBufferUsages) {
             result.buffers.push_back(it.first);
-            result.bufferUsages.push_back(it.second);
+            result.bufferUsages.push_back(it.second.usage);
         }
 
         for (auto& it : mTextureUsages) {
