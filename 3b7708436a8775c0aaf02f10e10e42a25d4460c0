@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8377b057_835aacbc",
+        "filename": "src/dawn_native/PassResourceUsageTracker.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-25T23:50:22Z",
+      "side": 1,
+      "message": "I\u0027m not a big fan of having these extra booleans :/ It\u0027s additional complexity and extra space. Do you think we could have an internal Dawn enum for the buffer usage?\n\nIt could be exactly the same as wgpu::BufferUsage but it would have an extra value for Readonly",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 10
+      },
+      "revId": "3b7708436a8775c0aaf02f10e10e42a25d4460c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
