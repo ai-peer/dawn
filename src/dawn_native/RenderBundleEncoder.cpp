@@ -20,6 +20,8 @@
 #include "dawn_native/Format.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/ValidationUtils_autogen.h"
+#include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 
 namespace dawn_native {
 
@@ -101,6 +103,8 @@ namespace dawn_native {
     }
 
     RenderBundleBase* RenderBundleEncoderBase::Finish(const RenderBundleDescriptor* descriptor) {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), dawn_platform::TraceCategory::Validation,
+                     "RenderBundleEncoderBase::Finish");
         if (GetDevice()->ConsumedError(ValidateFinish(descriptor))) {
             return RenderBundleBase::MakeError(GetDevice());
         }
