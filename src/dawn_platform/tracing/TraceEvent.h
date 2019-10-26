@@ -156,12 +156,6 @@
 
 #include "dawn_platform/tracing/EventTracer.h"
 
-#define TRACE_DISABLED_BY_DEFAULT(name) "disabled-by-default-" name
-
-// By default, const char* argument values are assumed to have long-lived scope
-// and will not be copied. Use this macro to force a const char* to be copied.
-#define TRACE_STR_COPY(str) WebCore::TraceEvent::TraceStringWithCopy(str)
-
 // Records a pair of begin and end events called "name" for the current
 // scope, with 0, 1 or 2 associated arguments. If the category is not
 // enabled, then this does nothing.
