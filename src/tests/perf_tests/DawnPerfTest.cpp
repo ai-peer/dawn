@@ -14,6 +14,7 @@
 
 #include "tests/perf_tests/DawnPerfTest.h"
 
+#include "common/Assert.h"
 #include "dawn_platform/tracing/TraceEvent.h"
 #include "tests/perf_tests/DawnPerfTestPlatform.h"
 #include "utils/Timer.h"
@@ -47,7 +48,22 @@ namespace {
             char phase[2] = {traceEvent.phase, '\0'};
 
             value["name"] = traceEvent.name;
-            value["cat"] = traceEvent.categoryName;
+            switch (traceEvent.category) {
+                case dawn_platform::TraceCategory::General:
+                    value["cat"] = "general";
+                    break;
+                case dawn_platform::TraceCategory::Validation:
+                    value["cat"] = "validation";
+                    break;
+                case dawn_platform::TraceCategory::Recording:
+                    value["cat"] = "recording";
+                    break;
+                case dawn_platform::TraceCategory::GPU:
+                    value["cat"] = "gpu";
+                    break;
+                default:
+                    UNREACHABLE();
+            }
             value["ph"] = &phase[0];
             value["id"] = traceEvent.id;
             value["ts"] = microseconds;
@@ -208,9 +224,9 @@ void DawnPerfTestBase::RunTest() {
     // We don't care about trace events during warmup and calibration.
     platform->EnableTraceEventRecording(true);
     {
-        TRACE_EVENT0(platform, "dawn.perf_test", testName);
+        TRACE_EVENT0(platform, dawn_platform::TraceCategory::General, testName);
         for (unsigned int trial = 0; trial < kNumTrials; ++trial) {
-            TRACE_EVENT0(platform, "dawn.perf_test", "Trial");
+            TRACE_EVENT0(platform, dawn_platform::TraceCategory::General, "Trial");
             DoRunLoop(kMaximumRunTimeSeconds);
             OutputResults();
         }
@@ -236,7 +252,7 @@ void DawnPerfTestBase::DoRunLoop(double maxRunTime) {
         while (signaledFenceValue - fence.GetCompletedValue() >= mMaxStepsInFlight) {
             mTest->WaitABit();
         }
-        TRACE_EVENT0(platform, "dawn.perf_test", "Step");
+        TRACE_EVENT0(platform, dawn_platform::TraceCategory::General, "Step");
         Step();
         mTest->queue.Signal(fence, ++signaledFenceValue);
 
