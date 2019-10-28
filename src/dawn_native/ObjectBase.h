@@ -33,6 +33,16 @@ namespace dawn_native {
         DeviceBase* GetDevice() const;
         bool IsError() const;
 
+        // Marks an object as an error object if |err| is an error.
+        // It is only safe to call this after creation, as the function name implies.
+        // We should not, for example, create an object, use it in a command buffer (pass
+        // validation), and then mark is as an error. This is useful to mark objects which fail
+        // native backend initialization as errors. It may also help in the future if we have
+        // asynchronous command buffer validation or asynchronous pipeline creation. (Declared as a
+        // template so we don't need to include Error.h)
+        template <typename MaybeError>
+        MaybeError CheckCreationError(MaybeError err);
+
       private:
         DeviceBase* mDevice;
         // TODO(cwallez@chromium.org): This most likely adds 4 bytes to most Dawn objects, see if

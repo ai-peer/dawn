@@ -26,7 +26,7 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<ShaderModule*> ShaderModule::Create(Device* device,
                                                       const ShaderModuleDescriptor* descriptor) {
         std::unique_ptr<ShaderModule> module = std::make_unique<ShaderModule>(device, descriptor);
-        DAWN_TRY(module->Initialize(descriptor));
+        DAWN_TRY(module->CheckCreationError(module->Initialize(descriptor)));
         return module.release();
     }
 
