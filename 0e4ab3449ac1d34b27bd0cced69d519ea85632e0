@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b4dba041_4d3d0373",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T12:55:53Z",
+      "side": 1,
+      "message": "I don\u0027t know that we can call this direct allocation because that choice belong to the backend. Maybe just \"Make large allocations have their own staging buffer so as to not allocate huge persistent ringbuffers\" ?",
+      "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b08ad0e3_3e457cf2",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 3
@@ -91,6 +108,47 @@
         "endLine": 69,
         "endChar": 74
       },
+      "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "192eff0f_62a7614a",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T12:55:53Z",
+      "side": 1,
+      "message": "I think either way is fine for now, but eventually we will need better heuristics especially on mobile where 4MB can matter, and when we want to answer to memory pressure events from the system.",
+      "parentUuid": "8596b523_ca3f0dcf",
+      "range": {
+        "startLine": 69,
+        "startChar": 60,
+        "endLine": 69,
+        "endChar": 74
+      },
+      "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ef180cc_1dcea437",
+        "filename": "src/dawn_native/DynamicUploader.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T12:55:53Z",
+      "side": 1,
+      "message": "nit: kRingBuffersSize to match the new semantics?",
       "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
