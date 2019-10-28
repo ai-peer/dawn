@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f5f2f074_5e611c43",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T13:01:37Z",
+      "side": 1,
+      "message": "no need to check, we can store hasReadonlyStorageBinding unconditionally. Same below, and this allows not having separate loading and storing of mBufferUsages (this will be obsolete once we use an internal usage bitfield)",
+      "range": {
+        "startLine": 30,
+        "startChar": 37,
+        "endLine": 30,
+        "endChar": 73
+      },
+      "revId": "3b7708436a8775c0aaf02f10e10e42a25d4460c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8377b057_835aacbc",
         "filename": "src/dawn_native/PassResourceUsageTracker.h",
         "patchSetId": 7
@@ -43,6 +66,47 @@
         "endLine": 56,
         "endChar": 10
       },
+      "revId": "3b7708436a8775c0aaf02f10e10e42a25d4460c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aef59868_a2b65dce",
+        "filename": "src/dawn_native/PassResourceUsageTracker.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T13:01:37Z",
+      "side": 1,
+      "message": "Dawn should match WebGPU spec but we are definitely allowed to use an internal bitmask that we static_assert matches dawn::BufferUsage but has one extra value. This would make computations here much simpler and this is one of the biggest hot-paths of dawn so it is worth the slight added complexity.",
+      "parentUuid": "76f68365_8476c12f",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 10
+      },
+      "revId": "3b7708436a8775c0aaf02f10e10e42a25d4460c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2216d0b_5ee0c3b9",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T13:01:37Z",
+      "side": 1,
+      "message": "stray commetn?",
       "revId": "3b7708436a8775c0aaf02f10e10e42a25d4460c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
