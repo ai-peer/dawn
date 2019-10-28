@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a99c21d7_b1bacb47",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T12:27:42Z",
+      "side": 1,
+      "message": "nit: How about making GetTraceEventBuffer an AcquireEventBuffer that does both the returning and the clearing?",
+      "revId": "cc4a8238b7cd024995c62325be56b397fde93ede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
