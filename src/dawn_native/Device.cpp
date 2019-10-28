@@ -78,6 +78,7 @@ namespace dawn_native {
         }
 
         mFormatTable = BuildFormatTable(this);
+        mDeviceLost = false;
     }
 
     DeviceBase::~DeviceBase() {
@@ -96,6 +97,7 @@ namespace dawn_native {
 
     void DeviceBase::HandleError(wgpu::ErrorType type, const char* message) {
         mCurrentErrorScope->HandleError(type, message);
+        CheckAndHandleDeviceLost(type);
     }
 
     void DeviceBase::InjectError(wgpu::ErrorType type, const char* message) {
@@ -548,6 +550,14 @@ namespace dawn_native {
         }
         mErrorScopeTracker->Tick(GetCompletedCommandSerial());
         mFenceSignalTracker->Tick(GetCompletedCommandSerial());
+    }
+
+    bool DeviceBase::IsDeviceLost() {
+        return mDeviceLost;
+    }
+
+    void DeviceBase::SetDeviceLost() {
+        mDeviceLost = true;
     }
 
     void DeviceBase::Reference() {

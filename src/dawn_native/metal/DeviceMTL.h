@@ -66,6 +66,8 @@ namespace dawn_native { namespace metal {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;

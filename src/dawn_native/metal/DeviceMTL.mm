@@ -288,4 +288,26 @@ namespace dawn_native { namespace metal {
         [mLastSubmittedCommands waitUntilScheduled];
     }
 
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceLost();
+
+            // Device lost, ignore all pending commands and clean up resources
+            [mPendingCommands release];
+            mPendingCommands = nil;
+
+            Serial completedSerial = GetCompletedCommandSerial();
+            mDynamicUploader->Deallocate(completedSerial);
+            mDynamicUploader = nullptr;
+            mMapTracker->Tick(completedSerial);
+            mMapTracker = nullptr;
+
+            [mCommandQueue release];
+            mCommandQueue = nil;
+
+            [mMtlDevice release];
+            mMtlDevice = nil;
+        }
+    }
+
 }}  // namespace dawn_native::metal

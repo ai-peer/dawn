@@ -99,6 +99,8 @@ namespace dawn_native { namespace d3d12 {
             ID3D12Resource* d3d12Resource);
         void ReleaseKeyedMutexForTexture(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
 
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;

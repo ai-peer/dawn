@@ -406,4 +406,27 @@ namespace dawn_native { namespace d3d12 {
         mD3d11On12DeviceContext->Flush();
     }
 
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceLost();
+
+            // Device lost, ignore all pending commands and clean up resources
+            mPendingCommands.Release();
+            DAWN_UNUSED(TickImpl());
+
+            mCompletedSerial = std::numeric_limits<Serial>::max();
+
+            mDynamicUploader = nullptr;
+            if (mFenceEvent != nullptr) {
+                ::CloseHandle(mFenceEvent);
+            }
+            mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
+
+            mD3d12Device->Release();
+            mD3d12Device = nullptr;
+            mCommandQueue->Release();
+            mCommandQueue = nullptr;
+        }
+    }
+
 }}  // namespace dawn_native::d3d12
