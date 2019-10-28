@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05c7a469_3fdb16b0",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T12:48:03Z",
+      "side": 1,
+      "message": "nit: ValidateFinish",
+      "range": {
+        "startLine": 724,
+        "startChar": 42,
+        "endLine": 724,
+        "endChar": 48
+      },
+      "revId": "c81b255ee0721c18c2d642bec9d7dd35fb04e3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf73a7f4_af8da538",
+        "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-28T12:48:03Z",
+      "side": 1,
+      "message": "Since this is a macro, we could add the ::dawn_platform::TraceCategory:: in it.",
+      "revId": "c81b255ee0721c18c2d642bec9d7dd35fb04e3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
