@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32f9b57d_170555cc",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-28T22:49:45Z",
+      "side": 1,
+      "message": "nit: Why not make this a member instead of a static friend?",
+      "revId": "4e3d4d3b5db02b70fab2d56fe760da4bab7faa95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
