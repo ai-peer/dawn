@@ -61,7 +61,7 @@ namespace dawn_native { namespace vulkan {
     // static
     ResultOrError<Sampler*> Sampler::Create(Device* device, const SamplerDescriptor* descriptor) {
         std::unique_ptr<Sampler> sampler = std::make_unique<Sampler>(device, descriptor);
-        DAWN_TRY(sampler->Initialize(descriptor));
+        DAWN_TRY(CheckCreationError(sampler, sampler->Initialize(descriptor)));
         return sampler.release();
     }
 

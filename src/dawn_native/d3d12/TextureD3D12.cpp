@@ -275,7 +275,7 @@ namespace dawn_native { namespace d3d12 {
                                                 const TextureDescriptor* descriptor) {
         Ref<Texture> dawnTexture =
             AcquireRef(new Texture(device, descriptor, TextureState::OwnedInternal));
-        DAWN_TRY(dawnTexture->InitializeAsInternalTexture());
+        DAWN_TRY(CheckCreationError(dawnTexture, dawnTexture->InitializeAsInternalTexture()));
         return dawnTexture.Detach();
     }
 
@@ -286,7 +286,7 @@ namespace dawn_native { namespace d3d12 {
         Ref<Texture> dawnTexture =
             AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
         DAWN_TRY(
-            dawnTexture->InitializeAsExternalTexture(descriptor, sharedHandle, acquireMutexKey));
+            CheckCreationError(dawnTexture, dawnTexture->InitializeAsExternalTexture(descriptor, sharedHandle, acquireMutexKey)));
         return dawnTexture.Detach();
     }
 

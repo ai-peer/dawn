@@ -325,7 +325,7 @@ namespace dawn_native { namespace vulkan {
         const RenderPipelineDescriptor* descriptor) {
         std::unique_ptr<RenderPipeline> pipeline =
             std::make_unique<RenderPipeline>(device, descriptor);
-        DAWN_TRY(pipeline->Initialize(descriptor));
+        DAWN_TRY(CheckCreationError(pipeline, pipeline->Initialize(descriptor)));
         return pipeline.release();
     }
 

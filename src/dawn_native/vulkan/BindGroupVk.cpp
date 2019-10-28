@@ -29,7 +29,7 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<BindGroup*> BindGroup::Create(Device* device,
                                                 const BindGroupDescriptor* descriptor) {
         std::unique_ptr<BindGroup> group = std::make_unique<BindGroup>(device, descriptor);
-        DAWN_TRY(group->Initialize());
+        DAWN_TRY(CheckCreationError(group, group->Initialize()));
         return group.release();
     }
 
