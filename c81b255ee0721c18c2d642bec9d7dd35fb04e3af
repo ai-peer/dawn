@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "15397c4d_2425a9b6",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-28T17:05:27Z",
+      "side": 1,
+      "message": "ValidateFinish here too",
+      "revId": "c81b255ee0721c18c2d642bec9d7dd35fb04e3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf73a7f4_af8da538",
         "filename": "src/dawn_native/d3d12/QueueD3D12.cpp",
         "patchSetId": 3

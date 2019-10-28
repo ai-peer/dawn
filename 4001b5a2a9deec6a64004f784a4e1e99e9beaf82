@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ab98205_49006188",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-28T17:05:27Z",
+      "side": 1,
+      "message": "nit: commit message doesn\u0027t reflect the addition of new tracing",
+      "revId": "4001b5a2a9deec6a64004f784a4e1e99e9beaf82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c70ce0ea_e56712d8",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-28T17:05:27Z",
+      "side": 1,
+      "message": "Maybe GPUDevice, GPUWork, or something?\n\nWe only use this in Metal right now, I think. Would we be able to use it elsewhere?",
+      "revId": "4001b5a2a9deec6a64004f784a4e1e99e9beaf82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
