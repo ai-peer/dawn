@@ -16,6 +16,24 @@
       "revId": "4e3d4d3b5db02b70fab2d56fe760da4bab7faa95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7e9c409_3130b109",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-28T23:12:26Z",
+      "side": 1,
+      "message": "I thought it wouldn\u0027t compile, but it does! Thanks for the suggestion.",
+      "parentUuid": "32f9b57d_170555cc",
+      "revId": "4e3d4d3b5db02b70fab2d56fe760da4bab7faa95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
