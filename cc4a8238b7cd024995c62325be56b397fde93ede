@@ -52,6 +52,24 @@
       "revId": "cc4a8238b7cd024995c62325be56b397fde93ede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c37db8f5_f989eff4",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-28T22:40:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa805649_1229648a",
+      "revId": "cc4a8238b7cd024995c62325be56b397fde93ede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
