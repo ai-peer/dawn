@@ -14,6 +14,8 @@
 
 #include "dawn_native/ObjectBase.h"
 
+#include "dawn_native/Error.h"
+
 namespace dawn_native {
 
     ObjectBase::ObjectBase(DeviceBase* device) : mDevice(device), mIsError(false) {
@@ -31,6 +33,14 @@ namespace dawn_native {
 
     bool ObjectBase::IsError() const {
         return mIsError;
+    }
+
+    template <>
+    MaybeError ObjectBase::CheckCreationError<MaybeError>(MaybeError err) {
+        if (DAWN_UNLIKELY(err.IsError())) {
+            mIsError = true;
+        }
+        return err;
     }
 
 }  // namespace dawn_native

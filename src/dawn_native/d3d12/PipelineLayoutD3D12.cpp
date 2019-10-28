@@ -60,7 +60,7 @@ namespace dawn_native { namespace d3d12 {
         const PipelineLayoutDescriptor* descriptor) {
         std::unique_ptr<PipelineLayout> layout =
             std::make_unique<PipelineLayout>(device, descriptor);
-        DAWN_TRY(layout->Initialize());
+        DAWN_TRY(CheckCreationError(layout.get(), layout->Initialize()));
         return layout.release();
     }
 

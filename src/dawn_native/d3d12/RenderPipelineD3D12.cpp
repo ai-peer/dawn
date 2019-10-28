@@ -294,7 +294,7 @@ namespace dawn_native { namespace d3d12 {
         const RenderPipelineDescriptor* descriptor) {
         std::unique_ptr<RenderPipeline> pipeline =
             std::make_unique<RenderPipeline>(device, descriptor);
-        DAWN_TRY(pipeline->Initialize(descriptor));
+        DAWN_TRY(pipeline->CheckCreationError(pipeline->Initialize(descriptor)));
         return pipeline.release();
     }
 
