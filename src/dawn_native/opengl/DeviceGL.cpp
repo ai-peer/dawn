@@ -170,4 +170,14 @@ namespace dawn_native { namespace opengl {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
     }
 
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceLost();
+
+            // Device lost, ignore pending commands and clean up resources
+            mDynamicUploader = nullptr;
+            CheckPassedFences();
+        }
+    }
+
 }}  // namespace dawn_native::opengl

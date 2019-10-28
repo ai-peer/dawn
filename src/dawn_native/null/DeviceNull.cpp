@@ -154,6 +154,17 @@ namespace dawn_native { namespace null {
         return std::move(stagingBuffer);
     }
 
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceLost();
+            // Device lost, ignore pending operations and clean up resources
+            mDynamicUploader = nullptr;
+
+            mPendingOperations.clear();
+            ASSERT(mMemoryUsage == 0);
+        }
+    }
+
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,

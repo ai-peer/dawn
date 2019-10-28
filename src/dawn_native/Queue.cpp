@@ -33,6 +33,12 @@ namespace dawn_native {
 
     void QueueBase::Submit(uint32_t commandCount, CommandBufferBase* const* commands) {
         DeviceBase* device = GetDevice();
+
+        if (device->IsDeviceLost()) {
+            // if device is lost, don't let any commands be submitted
+            return;
+        };
+
         TRACE_EVENT0(device->GetPlatform(), TRACE_DISABLED_BY_DEFAULT("gpu.dawn"), "Queue::Submit");
         if (device->ConsumedError(ValidateSubmit(commandCount, commands))) {
             return;
