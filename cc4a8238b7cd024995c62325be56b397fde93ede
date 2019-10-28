@@ -16,6 +16,24 @@
       "revId": "cc4a8238b7cd024995c62325be56b397fde93ede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb1a7be7_e2969dfe",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-28T15:16:37Z",
+      "side": 1,
+      "message": "I initially had this as an Acquire which std::moves the buffer, but I don\u0027t want to actually delete the buffer\u0027s allocation and would like to recycle it between successive runs.\n\nWe could copy the contents, return the copy, and clear the original?\n\nWDYT?",
+      "parentUuid": "a99c21d7_b1bacb47",
+      "revId": "cc4a8238b7cd024995c62325be56b397fde93ede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
