@@ -401,7 +401,7 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<Texture*> Texture::Create(Device* device, const TextureDescriptor* descriptor) {
         std::unique_ptr<Texture> texture =
             std::make_unique<Texture>(device, descriptor, TextureState::OwnedInternal);
-        DAWN_TRY(texture->InitializeAsInternalTexture());
+        DAWN_TRY(CheckCreationError(texture.get(), texture->InitializeAsInternalTexture()));
         return texture.release();
     }
 
@@ -784,7 +784,7 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<TextureView*> TextureView::Create(TextureBase* texture,
                                                     const TextureViewDescriptor* descriptor) {
         std::unique_ptr<TextureView> view = std::make_unique<TextureView>(texture, descriptor);
-        DAWN_TRY(view->Initialize(descriptor));
+        DAWN_TRY(CheckCreationError(view.get(), view->Initialize(descriptor)));
         return view.release();
     }
 
