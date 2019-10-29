@@ -106,6 +106,7 @@ namespace dawn_native { namespace null {
 
         MaybeError IncrementMemoryUsage(size_t bytes);
         void DecrementMemoryUsage(size_t bytes);
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -129,6 +130,8 @@ namespace dawn_native { namespace null {
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
+
+        void RemoveDevice() override;
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
