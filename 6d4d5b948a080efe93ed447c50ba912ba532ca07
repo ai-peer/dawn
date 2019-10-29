@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "5be6aad1_fb502898",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-29T21:10:40Z",
+      "side": 1,
+      "message": "Could it be done by making CachedObject not an ObjectBase, and using multiple inheritance?",
+      "parentUuid": "1dba752b_44448eef",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2251a15_9d4d685c",
         "filename": "src/dawn_native/CachedObject.h",
         "patchSetId": 2
