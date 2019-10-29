@@ -95,6 +95,8 @@ namespace dawn_native { namespace vulkan {
 
         ResourceMemoryAllocator* GetResourceMemoryAllocatorForTesting() const;
 
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;

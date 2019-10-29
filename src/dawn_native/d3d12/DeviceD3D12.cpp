@@ -103,6 +103,11 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Device::~Device() {
+        if (IsDeviceLost()) {
+            // Already handled releasing resources
+            return;
+        }
+
         // Immediately forget about all pending commands
         mPendingCommands.Release();
 
@@ -404,6 +409,27 @@ namespace dawn_native { namespace d3d12 {
         // D3D12 backend since both D3D12 and 11on12 first appeared in Windows 10.
         mD3d11On12DeviceContext->TiledResourceBarrier(nullptr, nullptr);
         mD3d11On12DeviceContext->Flush();
+    }
+
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceLost();
+
+            // Device lost, ignore all pending commands and clean up resources
+            mPendingCommands.Release();
+            DAWN_UNUSED(TickImpl());
+
+            mCompletedSerial = std::numeric_limits<Serial>::max();
+
+            mDynamicUploader = nullptr;
+            if (mFenceEvent != nullptr) {
+                ::CloseHandle(mFenceEvent);
+            }
+            mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
+                
+            ASSERT(mUsedComObjectRefs.Empty());
+            ASSERT(!mPendingCommands.IsOpen());
+        }
     }
 
 }}  // namespace dawn_native::d3d12

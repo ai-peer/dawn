@@ -85,6 +85,11 @@ namespace dawn_native { namespace null {
     }
 
     Device::~Device() {
+        if (IsDeviceLost()) {
+            // Already handled releasing resources
+            return;
+        }
+        
         mDynamicUploader = nullptr;
 
         mPendingOperations.clear();
@@ -152,6 +157,17 @@ namespace dawn_native { namespace null {
             std::make_unique<StagingBuffer>(size, this);
         DAWN_TRY(stagingBuffer->Initialize());
         return std::move(stagingBuffer);
+    }
+
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceLost();
+            // Device lost, ignore pending operations and clean up resources
+            mDynamicUploader = nullptr;
+
+            mPendingOperations.clear();
+            ASSERT(mMemoryUsage == 0);
+        }
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,

@@ -106,6 +106,7 @@ namespace dawn_native { namespace null {
 
         MaybeError IncrementMemoryUsage(size_t bytes);
         void DecrementMemoryUsage(size_t bytes);
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(

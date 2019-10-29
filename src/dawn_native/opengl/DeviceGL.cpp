@@ -45,6 +45,10 @@ namespace dawn_native { namespace opengl {
         CheckPassedFences();
         ASSERT(mFencesInFlight.empty());
 
+        if (IsDeviceLost()) {
+            // Already handled releasing resources
+            return;
+        }
         // Some operations might have been started since the last submit and waiting
         // on a serial that doesn't have a corresponding fence enqueued. Force all
         // operations to look as if they were completed (because they were).
@@ -168,6 +172,17 @@ namespace dawn_native { namespace opengl {
                                                uint64_t destinationOffset,
                                                uint64_t size) {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+    }
+
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceLost();
+
+            // Device lost, ignore pending commands and clean up resources
+            CheckPassedFences();
+            mDynamicUploader = nullptr;
+            Tick();
+        }
     }
 
 }}  // namespace dawn_native::opengl
