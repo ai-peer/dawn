@@ -85,10 +85,11 @@ namespace dawn_native { namespace null {
     }
 
     Device::~Device() {
-        mDynamicUploader = nullptr;
-
-        mPendingOperations.clear();
-        ASSERT(mMemoryUsage == 0);
+        if (IsDeviceRemoved()) {
+            // Already handled releasing resources
+            return;
+        }
+        RemoveDevice();
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -152,6 +153,21 @@ namespace dawn_native { namespace null {
             std::make_unique<StagingBuffer>(size, this);
         DAWN_TRY(stagingBuffer->Initialize());
         return std::move(stagingBuffer);
+    }
+
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceRemoved();
+            // Device lost, clean up resources
+            RemoveDevice();
+        }
+    }
+
+    void Device::RemoveDevice() {
+        mDynamicUploader = nullptr;
+
+        mPendingOperations.clear();
+        ASSERT(mMemoryUsage == 0);
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,

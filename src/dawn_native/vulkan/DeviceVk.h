@@ -95,6 +95,8 @@ namespace dawn_native { namespace vulkan {
 
         ResourceMemoryAllocator* GetResourceMemoryAllocatorForTesting() const;
 
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -122,6 +124,7 @@ namespace dawn_native { namespace vulkan {
         void GatherQueueFromDevice();
 
         void InitTogglesFromDriver();
+        void RemoveDevice() override;
 
         // To make it easier to use fn it is a public const member. However
         // the Device is allowed to mutate them through these private methods.

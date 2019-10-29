@@ -406,4 +406,14 @@ namespace dawn_native { namespace d3d12 {
         mD3d11On12DeviceContext->Flush();
     }
 
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            // Handle device removal
+        }
+    }
+
+    void Device::RemoveDevice() {
+        return;
+    }
+
 }}  // namespace dawn_native::d3d12
