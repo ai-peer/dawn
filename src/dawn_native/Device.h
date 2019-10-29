@@ -166,6 +166,12 @@ namespace dawn_native {
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
         void PushErrorScope(wgpu::ErrorFilter filter);
         bool PopErrorScope(wgpu::ErrorCallback callback, void* userdata);
+
+        bool IsDeviceRemoved();
+        void SetDeviceRemoved();
+        virtual void CheckAndHandleDeviceLost(wgpu::ErrorType type) = 0;
+        virtual void RemoveDevice() = 0;
+
         ErrorScope* GetCurrentErrorScope();
 
         void Reference();
@@ -279,6 +285,7 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+        bool mDeviceRemoved;
     };
 
 }  // namespace dawn_native
