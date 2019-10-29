@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7bdfe0f_1f5f1435",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-29T17:02:52Z",
+      "side": 1,
+      "message": "nit: Refcounted.h isn\u0027t needed anymore",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00db32e7_12a11bf1",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-29T17:02:52Z",
+      "side": 1,
+      "message": "Ah that\u0027s unfortunate that now AttachmentState inherits from ObjectBase because semantically it isn\u0027t an API object. Probably ok for now though.",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2251a15_9d4d685c",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-29T17:02:52Z",
+      "side": 1,
+      "message": "nit: small comment to explain what this is?",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87164993_0895db05",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-29T17:02:52Z",
+      "side": 1,
+      "message": "Or just\n\nusing ObjectBase::ObjectBase",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
