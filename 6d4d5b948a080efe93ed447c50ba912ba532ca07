@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ae38d6e_0d04b9ad",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-29T17:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7bdfe0f_1f5f1435",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00db32e7_12a11bf1",
         "filename": "src/dawn_native/AttachmentState.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dba752b_44448eef",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-29T17:51:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "00db32e7_12a11bf1",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8a8a0007_fedee98c",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-29T17:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2251a15_9d4d685c",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87164993_0895db05",
         "filename": "src/dawn_native/CachedObject.h",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebd90955_bcf92ac0",
+        "filename": "src/dawn_native/CachedObject.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-29T17:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87164993_0895db05",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
