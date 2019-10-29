@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c684dca2_d68b9d35",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-29T17:25:00Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b4dba041_4d3d0373",
+      "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b08ad0e3_3e457cf2",
         "filename": "src/dawn_native/DynamicUploader.cpp",
         "patchSetId": 3
@@ -138,6 +156,30 @@
     },
     {
       "key": {
+        "uuid": "8ea01db3_58987789",
+        "filename": "src/dawn_native/DynamicUploader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-29T17:25:00Z",
+      "side": 1,
+      "message": "Austin -\n\nThis will inherit the existing resource allocation policy which always creates at-least 4MB heaps. If we cannot afford to allocate 4MB then it\u0027s OOM anyway. After this change, I see no benefit - it saves no memory and only wastes cycles creating additional resources.",
+      "parentUuid": "192eff0f_62a7614a",
+      "range": {
+        "startLine": 69,
+        "startChar": 60,
+        "endLine": 69,
+        "endChar": 74
+      },
+      "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ef180cc_1dcea437",
         "filename": "src/dawn_native/DynamicUploader.h",
         "patchSetId": 3
@@ -152,6 +194,24 @@
       "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "141bef20_63d98fb8",
+        "filename": "src/dawn_native/DynamicUploader.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-10-29T17:25:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ef180cc_1dcea437",
+      "revId": "0e4ab3449ac1d34b27bd0cced69d519ea85632e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
