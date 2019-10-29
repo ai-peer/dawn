@@ -62,6 +62,8 @@ namespace dawn_native { namespace opengl {
                                            uint64_t destinationOffset,
                                            uint64_t size) override;
 
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -86,7 +88,7 @@ namespace dawn_native { namespace opengl {
             const TextureViewDescriptor* descriptor) override;
 
         void CheckPassedFences();
-
+        Void RemoveDevice() override;
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
         std::queue<std::pair<GLsync, Serial>> mFencesInFlight;

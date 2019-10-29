@@ -45,14 +45,11 @@ namespace dawn_native { namespace opengl {
         CheckPassedFences();
         ASSERT(mFencesInFlight.empty());
 
-        // Some operations might have been started since the last submit and waiting
-        // on a serial that doesn't have a corresponding fence enqueued. Force all
-        // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
-
-        mDynamicUploader = nullptr;
-
-        Tick();
+        if (IsDeviceRemoved()) {
+            // Already handled releasing resources
+            return;
+        }
+        RemoveDevice();
     }
 
     const GLFormat& Device::GetGLFormat(const Format& format) {
@@ -168,6 +165,27 @@ namespace dawn_native { namespace opengl {
                                                uint64_t destinationOffset,
                                                uint64_t size) {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+    }
+
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            SetDeviceRemoved();
+
+            // Device lost, ignore pending commands and clean up resources
+            CheckPassedFences();
+            RemoveDevice();
+        }
+    }
+
+    void Device::RemoveDevice() {
+        // Some operations might have been started since the last submit and waiting
+        // on a serial that doesn't have a corresponding fence enqueued. Force all
+        // operations to look as if they were completed (because they were).
+        mCompletedSerial = mLastSubmittedSerial + 1;
+
+        mDynamicUploader = nullptr;
+
+        Tick();
     }
 
 }}  // namespace dawn_native::opengl
