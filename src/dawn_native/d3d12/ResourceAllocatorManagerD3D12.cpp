@@ -24,28 +24,40 @@ namespace dawn_native { namespace d3d12 {
         D3D12_HEAP_TYPE GetD3D12HeapType(ResourceHeapKind resourceHeapKind) {
             switch (resourceHeapKind) {
                 case Readback_OnlyBuffers:
+                case Readback_AllBuffersAndTextures:
                     return D3D12_HEAP_TYPE_READBACK;
+                case Default_AllBuffersAndTextures:
                 case Default_OnlyBuffers:
                 case Default_OnlyNonRenderableOrDepthTextures:
                 case Default_OnlyRenderableOrDepthTextures:
                     return D3D12_HEAP_TYPE_DEFAULT;
                 case Upload_OnlyBuffers:
+                case Upload_AllBuffersAndTextures:
                     return D3D12_HEAP_TYPE_UPLOAD;
                 default:
                     UNREACHABLE();
             }
         }
 
-        D3D12_HEAP_FLAGS GetD3D12HeapFlags(ResourceHeapKind resourceHeapKind) {
+        D3D12_HEAP_FLAGS GetD3D12HeapFlags(ResourceHeapKind resourceHeapKind,
+                                           bool supportsResourceHeapTier2) {
             switch (resourceHeapKind) {
+                case Default_AllBuffersAndTextures:
+                case Readback_AllBuffersAndTextures:
+                case Upload_AllBuffersAndTextures:
+                    return D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES;
                 case Default_OnlyBuffers:
                 case Readback_OnlyBuffers:
                 case Upload_OnlyBuffers:
                     return D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS;
                 case Default_OnlyNonRenderableOrDepthTextures:
-                    return D3D12_HEAP_FLAG_ALLOW_ONLY_NON_RT_DS_TEXTURES;
+                    return (supportsResourceHeapTier2)
+                               ? D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES
+                               : D3D12_HEAP_FLAG_ALLOW_ONLY_NON_RT_DS_TEXTURES;
                 case Default_OnlyRenderableOrDepthTextures:
-                    return D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES;
+                    return (supportsResourceHeapTier2)
+                               ? D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES
+                               : D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES;
                 default:
                     UNREACHABLE();
             }
@@ -53,16 +65,20 @@ namespace dawn_native { namespace d3d12 {
 
         ResourceHeapKind GetResourceHeapKind(D3D12_RESOURCE_DIMENSION dimension,
                                              D3D12_HEAP_TYPE heapType,
-                                             D3D12_RESOURCE_FLAGS flags) {
+                                             D3D12_RESOURCE_FLAGS flags,
+                                             bool supportsResourceHeapTier2) {
             switch (dimension) {
                 case D3D12_RESOURCE_DIMENSION_BUFFER: {
                     switch (heapType) {
                         case D3D12_HEAP_TYPE_UPLOAD:
-                            return Upload_OnlyBuffers;
+                            return (supportsResourceHeapTier2) ? Upload_AllBuffersAndTextures
+                                                               : Upload_OnlyBuffers;
                         case D3D12_HEAP_TYPE_DEFAULT:
-                            return Default_OnlyBuffers;
+                            return (supportsResourceHeapTier2) ? Default_AllBuffersAndTextures
+                                                               : Default_OnlyBuffers;
                         case D3D12_HEAP_TYPE_READBACK:
-                            return Readback_OnlyBuffers;
+                            return (supportsResourceHeapTier2) ? Readback_AllBuffersAndTextures
+                                                               : Readback_OnlyBuffers;
                         default:
                             UNREACHABLE();
                     }
@@ -74,9 +90,13 @@ namespace dawn_native { namespace d3d12 {
                         case D3D12_HEAP_TYPE_DEFAULT: {
                             if ((flags & D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL) ||
                                 (flags & D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET)) {
-                                return Default_OnlyRenderableOrDepthTextures;
+                                return (supportsResourceHeapTier2)
+                                           ? Default_AllBuffersAndTextures
+                                           : Default_OnlyRenderableOrDepthTextures;
                             } else {
-                                return Default_OnlyNonRenderableOrDepthTextures;
+                                return (supportsResourceHeapTier2)
+                                           ? Default_AllBuffersAndTextures
+                                           : Default_OnlyNonRenderableOrDepthTextures;
                             }
                         } break;
                         default:
@@ -90,10 +110,14 @@ namespace dawn_native { namespace d3d12 {
     }  // namespace
 
     ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(device) {
+        mUseResourceHeapTier2 = mDevice->GetDeviceInfo().supportsResourceHeapTier2 &&
+                                !mDevice->IsToggleEnabled(Toggle::DisableD3D12ResourceHeapTier2);
+
         for (uint32_t i = 0; i < ResourceHeapKind::EnumCount; i++) {
             const ResourceHeapKind resourceHeapKind = static_cast<ResourceHeapKind>(i);
             mHeapAllocators[i] = std::make_unique<HeapAllocator>(
-                mDevice, GetD3D12HeapType(resourceHeapKind), GetD3D12HeapFlags(resourceHeapKind));
+                mDevice, GetD3D12HeapType(resourceHeapKind),
+                GetD3D12HeapFlags(resourceHeapKind, mUseResourceHeapTier2));
             mSubAllocatedResourceAllocators[i] = std::make_unique<BuddyMemoryAllocator>(
                 kMaxHeapSize, kMinHeapSize, mHeapAllocators[i].get());
         }
@@ -153,8 +177,9 @@ namespace dawn_native { namespace d3d12 {
 
         const D3D12_RESOURCE_DESC resourceDescriptor = allocation.GetD3D12Resource()->GetDesc();
 
-        const size_t resourceHeapKindIndex = GetResourceHeapKind(
-            resourceDescriptor.Dimension, heapProp.Type, resourceDescriptor.Flags);
+        const size_t resourceHeapKindIndex =
+            GetResourceHeapKind(resourceDescriptor.Dimension, heapProp.Type,
+                                resourceDescriptor.Flags, mUseResourceHeapTier2);
 
         mSubAllocatedResourceAllocators[resourceHeapKindIndex]->Deallocate(allocation);
     }
@@ -164,7 +189,8 @@ namespace dawn_native { namespace d3d12 {
         const D3D12_RESOURCE_DESC& resourceDescriptor,
         D3D12_RESOURCE_STATES initialUsage) {
         const size_t resourceHeapKindIndex =
-            GetResourceHeapKind(resourceDescriptor.Dimension, heapType, resourceDescriptor.Flags);
+            GetResourceHeapKind(resourceDescriptor.Dimension, heapType, resourceDescriptor.Flags,
+                                mUseResourceHeapTier2);
 
         BuddyMemoryAllocator* allocator =
             mSubAllocatedResourceAllocators[resourceHeapKindIndex].get();
