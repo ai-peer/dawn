@@ -366,11 +366,11 @@ namespace dawn_native {
     // RenderPipelineBase
 
     RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
-                                           const RenderPipelineDescriptor* descriptor,
-                                           bool blueprint)
+                                           const RenderPipelineDescriptor* descriptor)
         : PipelineBase(device,
                        descriptor->layout,
                        wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment),
+          CachedObject(),
           mAttachmentState(device->GetOrCreateAttachmentState(descriptor)),
           mPrimitiveTopology(descriptor->primitiveTopology),
           mSampleMask(descriptor->sampleMask),
@@ -378,8 +378,7 @@ namespace dawn_native {
           mVertexModule(descriptor->vertexStage.module),
           mVertexEntryPoint(descriptor->vertexStage.entryPoint),
           mFragmentModule(descriptor->fragmentStage->module),
-          mFragmentEntryPoint(descriptor->fragmentStage->entryPoint),
-          mIsBlueprint(blueprint) {
+          mFragmentEntryPoint(descriptor->fragmentStage->entryPoint) {
         if (descriptor->vertexInput != nullptr) {
             mVertexInput = *descriptor->vertexInput;
         } else {
@@ -442,7 +441,7 @@ namespace dawn_native {
     }
 
     RenderPipelineBase::RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : PipelineBase(device, tag) {
+        : PipelineBase(device, tag), CachedObject() {
     }
 
     // static
@@ -451,8 +450,7 @@ namespace dawn_native {
     }
 
     RenderPipelineBase::~RenderPipelineBase() {
-        // Do not uncache the actual cached object if we are a blueprint
-        if (!mIsBlueprint && !IsError()) {
+        if (IsCachedReference()) {
             GetDevice()->UncacheRenderPipeline(this);
         }
     }

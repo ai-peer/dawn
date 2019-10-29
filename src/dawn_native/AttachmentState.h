@@ -16,6 +16,7 @@
 #define DAWNNATIVE_ATTACHMENTSTATE_H_
 
 #include "common/Constants.h"
+#include "dawn_native/CachedObject.h"
 #include "dawn_native/RefCounted.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -56,7 +57,9 @@ namespace dawn_native {
         uint32_t mSampleCount = 0;
     };
 
-    class AttachmentState : public AttachmentStateBlueprint, public RefCounted {
+    class AttachmentState : public AttachmentStateBlueprint,
+                            public RefCounted,
+                            public CachedObject {
       public:
         AttachmentState(DeviceBase* device, const AttachmentStateBlueprint& blueprint);
         ~AttachmentState() override;

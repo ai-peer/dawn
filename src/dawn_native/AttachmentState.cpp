@@ -116,7 +116,7 @@ namespace dawn_native {
     }
 
     AttachmentState::AttachmentState(DeviceBase* device, const AttachmentStateBlueprint& blueprint)
-        : AttachmentStateBlueprint(blueprint), RefCounted(), mDevice(device) {
+        : AttachmentStateBlueprint(blueprint), RefCounted(), CachedObject(), mDevice(device) {
     }
 
     AttachmentState::~AttachmentState() {

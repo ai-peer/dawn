@@ -84,22 +84,19 @@ namespace dawn_native {
 
     // ShaderModuleBase
 
-    ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
-                                       const ShaderModuleDescriptor* descriptor,
-                                       bool blueprint)
+    ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
         : ObjectBase(device),
-          mCode(descriptor->code, descriptor->code + descriptor->codeSize),
-          mIsBlueprint(blueprint) {
+          CachedObject(),
+          mCode(descriptor->code, descriptor->code + descriptor->codeSize) {
         mFragmentOutputFormatBaseTypes.fill(Format::Other);
     }
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag) {
+        : ObjectBase(device, tag), CachedObject() {
     }
 
     ShaderModuleBase::~ShaderModuleBase() {
-        // Do not uncache the actual cached object if we are a blueprint
-        if (!mIsBlueprint && !IsError()) {
+        if (IsCachedReference()) {
             GetDevice()->UncacheShaderModule(this);
         }
     }

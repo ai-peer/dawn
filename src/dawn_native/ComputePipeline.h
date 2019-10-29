@@ -24,11 +24,9 @@ namespace dawn_native {
     MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
                                                  const ComputePipelineDescriptor* descriptor);
 
-    class ComputePipelineBase : public PipelineBase {
+    class ComputePipelineBase : public PipelineBase, public CachedObject {
       public:
-        ComputePipelineBase(DeviceBase* device,
-                            const ComputePipelineDescriptor* descriptor,
-                            bool blueprint = false);
+        ComputePipelineBase(DeviceBase* device, const ComputePipelineDescriptor* descriptor);
         ~ComputePipelineBase() override;
 
         static ComputePipelineBase* MakeError(DeviceBase* device);
@@ -47,7 +45,6 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): Store a crypto hash of the module instead.
         Ref<ShaderModuleBase> mModule;
         std::string mEntryPoint;
-        bool mIsBlueprint = false;
     };
 
 }  // namespace dawn_native

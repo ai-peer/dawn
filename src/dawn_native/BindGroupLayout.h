@@ -16,6 +16,7 @@
 #define DAWNNATIVE_BINDGROUPLAYOUT_H_
 
 #include "common/Constants.h"
+#include "dawn_native/CachedObject.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
@@ -30,11 +31,9 @@ namespace dawn_native {
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase*,
                                                  const BindGroupLayoutDescriptor* descriptor);
 
-    class BindGroupLayoutBase : public ObjectBase {
+    class BindGroupLayoutBase : public ObjectBase, public CachedObject {
       public:
-        BindGroupLayoutBase(DeviceBase* device,
-                            const BindGroupLayoutDescriptor* descriptor,
-                            bool blueprint = false);
+        BindGroupLayoutBase(DeviceBase* device, const BindGroupLayoutDescriptor* descriptor);
         ~BindGroupLayoutBase() override;
 
         static BindGroupLayoutBase* MakeError(DeviceBase* device);
@@ -66,7 +65,6 @@ namespace dawn_native {
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         LayoutBindingInfo mBindingInfo;
-        bool mIsBlueprint = false;
         uint32_t mDynamicUniformBufferCount = 0;
         uint32_t mDynamicStorageBufferCount = 0;
     };
