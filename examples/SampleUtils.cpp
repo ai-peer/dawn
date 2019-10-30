@@ -179,11 +179,18 @@ wgpu::SwapChain GetSwapChain(const wgpu::Device& device) {
     return device.CreateSwapChain(&swapChainDesc);
 }
 
+void GetFramebufferSize(int* width, int* height) {
+    glfwGetFramebufferSize(window, width, height);
+}
+
 wgpu::TextureView CreateDefaultDepthStencilView(const wgpu::Device& device) {
+    int width, height;
+    GetFramebufferSize(&width, &height);
+
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = 640;
-    descriptor.size.height = 480;
+    descriptor.size.width = width;
+    descriptor.size.height = height;
     descriptor.size.depth = 1;
     descriptor.arrayLayerCount = 1;
     descriptor.sampleCount = 1;

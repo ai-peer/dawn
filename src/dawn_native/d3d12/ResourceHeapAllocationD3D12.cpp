@@ -30,4 +30,9 @@ namespace dawn_native { namespace d3d12 {
     D3D12_GPU_VIRTUAL_ADDRESS ResourceHeapAllocation::GetGPUPointer() const {
         return mResource->GetGPUVirtualAddress();
     }
+
+    void ResourceHeapAllocation::Invalidate() {
+        mResource = nullptr;
+        ResourceMemoryAllocation::Invalidate();
+    }
 }}  // namespace dawn_native::d3d12

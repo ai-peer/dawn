@@ -131,6 +131,8 @@ namespace dawn_native {
             return;
 
         mImplementation.Present(mImplementation.userData);
+
+        texture->Destroy();
     }
 
     const DawnSwapChainImplementation& SwapChainBase::GetImplementation() {

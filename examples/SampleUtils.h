@@ -26,4 +26,5 @@ wgpu::Device CreateCppDawnDevice();
 uint64_t GetSwapChainImplementation();
 wgpu::TextureFormat GetPreferredSwapChainTextureFormat();
 wgpu::SwapChain GetSwapChain(const wgpu::Device& device);
+void GetFramebufferSize(int* width, int* height);
 wgpu::TextureView CreateDefaultDepthStencilView(const wgpu::Device& device);

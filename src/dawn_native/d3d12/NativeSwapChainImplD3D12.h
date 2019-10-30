@@ -44,6 +44,11 @@ namespace dawn_native { namespace d3d12 {
         wgpu::TextureFormat GetPreferredFormat() const;
 
       private:
+        void InitializeDXGISwapChain(WGPUTextureFormat format,
+                                     WGPUTextureUsage usage,
+                                     uint32_t width,
+                                     uint32_t height);
+
         HWND mWindow = nullptr;
         Device* mDevice = nullptr;
         UINT mInterval;

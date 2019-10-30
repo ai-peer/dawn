@@ -18,10 +18,10 @@
 #include "utils/SystemUtils.h"
 #include "utils/WGPUHelpers.h"
 
-#include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <vector>
 
 wgpu::Device device;
 
@@ -114,13 +114,31 @@ struct CameraData {
     glm::mat4 proj;
 } cameraData;
 
+int swapchainWidth = 0;
+int swapchainHeight = 0;
+
+void ReconfigureSwapchainIfNeeded() {
+    int width, height;
+    GetFramebufferSize(&width, &height);
+
+    if (width == swapchainWidth && height == swapchainHeight) {
+        return;
+    }
+
+    swapchain.Configure(GetPreferredSwapChainTextureFormat(), wgpu::TextureUsage::OutputAttachment,
+                        width, height);
+    swapchainWidth = width;
+    swapchainHeight = height;
+
+    depthStencilView = CreateDefaultDepthStencilView(device);
+}
+
 void init() {
     device = CreateCppDawnDevice();
 
     queue = device.CreateQueue();
     swapchain = GetSwapChain(device);
-    swapchain.Configure(GetPreferredSwapChainTextureFormat(), wgpu::TextureUsage::OutputAttachment,
-                        640, 480);
+    ReconfigureSwapchainIfNeeded();
 
     initBuffers();
 
@@ -252,6 +270,8 @@ void init() {
 
 struct {uint32_t a; float b;} s;
 void frame() {
+    ReconfigureSwapchainIfNeeded();
+
     s.a = (s.a + 1) % 256;
     s.b += 0.01f;
     if (s.b >= 1.0f) {s.b = 0.0f;}

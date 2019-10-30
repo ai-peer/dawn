@@ -31,6 +31,8 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12Resource> GetD3D12Resource() const;
         D3D12_GPU_VIRTUAL_ADDRESS GetGPUPointer() const;
 
+        void Invalidate();
+
       private:
         ComPtr<ID3D12Resource> mResource;
     };
