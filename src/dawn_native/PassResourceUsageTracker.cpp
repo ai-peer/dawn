@@ -46,8 +46,15 @@ namespace dawn_native {
             BufferBase* buffer = it.first;
             wgpu::BufferUsage usage = it.second;
 
-            if (usage & ~buffer->GetUsage()) {
-                return DAWN_VALIDATION_ERROR("Buffer missing usage for the pass");
+            wgpu::BufferUsage verify = usage & ~buffer->GetUsage();
+            if (static_cast<bool>(verify)) {
+                // Buffer usage unmatch is invalid, but there is one exception: binding type is
+                // readonly storage and we track it as kReadOnlyStorage in BufferUsedAs(), and
+                // storage buffer usage is specified as one of buffer usages during buffer creation.
+                if (verify != kReadOnlyStorage ||
+                    !(buffer->GetUsage() & wgpu::BufferUsage::Storage)) {
+                    return DAWN_VALIDATION_ERROR("Buffer missing usage for the pass");
+                }
             }
 
             bool readOnly = (usage & kReadOnlyBufferUsages) == usage;
