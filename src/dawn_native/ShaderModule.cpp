@@ -155,6 +155,24 @@ namespace dawn_native {
                 info.id = resource.id;
                 info.base_type_id = resource.base_type_id;
                 info.type = bindingType;
+                if (info.type == wgpu::BindingType::SampledTexture) {
+                    // Check that Format::Type correctly mirrors TextureComponentType except for
+                    // "Other".
+                    static_assert(static_cast<wgpu::TextureComponentType>(Format::Type::Float) ==
+                                      wgpu::TextureComponentType::Float,
+                                  "");
+                    static_assert(static_cast<wgpu::TextureComponentType>(Format::Type::Sint) ==
+                                      wgpu::TextureComponentType::Sint,
+                                  "");
+                    static_assert(static_cast<wgpu::TextureComponentType>(Format::Type::Uint) ==
+                                      wgpu::TextureComponentType::Uint,
+                                  "");
+
+                    spirv_cross::SPIRType::BaseType textureComponentType =
+                        compiler.get_type(compiler.get_type(info.base_type_id).image.type).basetype;
+                    info.textureComponentType = static_cast<wgpu::TextureComponentType>(
+                        SpirvCrossBaseTypeToFormatType(textureComponentType));
+                }
             }
         };
 
@@ -283,6 +301,11 @@ namespace dawn_native {
             }
 
             if ((layoutInfo.visibilities[i] & StageBit(mExecutionModel)) == 0) {
+                return false;
+            }
+
+            if (layoutBindingType == wgpu::BindingType::SampledTexture &&
+                layoutInfo.textureComponentTypes[i] != moduleInfo.textureComponentType) {
                 return false;
             }
         }
