@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "576e9646_9a92b0b2",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-10-30T06:14:32Z",
+      "side": 1,
+      "message": "Looks like this code logic is unavoidable if we add a buffer usage for resource tracking, but we don\u0027t want to add it into the formal buffer usage during buffer creation (transparent to buffer creation). \n\nThe variable name like \"verify\" might not be very good, if you have better suggestion, please let me know.",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 73
+      },
+      "revId": "6d01e192052c223bf5506322a5e16437ca3b9eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
