@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7f890d2_4defce45",
+        "filename": "src/tests/perf_tests/DrawCallPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-30T22:46:16Z",
+      "side": 1,
+      "message": "std::vector\u003cchar\u003e?",
+      "revId": "02a8831b4669d927eb4982999021cc2acbbe47fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01cfe64_078a86aa",
+        "filename": "src/tests/perf_tests/DrawCallPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-10-30T22:46:16Z",
+      "side": 1,
+      "message": "Would it be useful to have a mode where we SetPipeline+SetBindGroup every time, but without pingponging? (i.e. redundant setting)",
+      "revId": "02a8831b4669d927eb4982999021cc2acbbe47fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
