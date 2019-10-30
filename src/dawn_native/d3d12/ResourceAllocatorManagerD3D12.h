@@ -61,7 +61,7 @@ namespace dawn_native { namespace d3d12 {
 
         ResultOrError<ResourceHeapAllocation> CreatePlacedResource(
             D3D12_HEAP_TYPE heapType,
-            const D3D12_RESOURCE_DESC& resourceDescriptor,
+            const D3D12_RESOURCE_DESC& requestedDescriptor,
             D3D12_RESOURCE_STATES initialUsage);
 
         ResultOrError<ResourceHeapAllocation> CreateCommittedResource(
