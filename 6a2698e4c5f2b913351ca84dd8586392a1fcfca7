@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a88577c7_99d791e5",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-30T08:59:54Z",
+      "side": 1,
+      "message": "Could we have a helper function in Format.cpp that does this conversion from wgpu::TextureComponentType to FormatType so that the logic is not duplicated between here and Format::HasComponentType?",
+      "revId": "6a2698e4c5f2b913351ca84dd8586392a1fcfca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
