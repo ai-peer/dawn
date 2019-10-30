@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "e67c3b9a_b6d3e4f7",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-30T00:17:26Z",
+      "side": 1,
+      "message": "It could, but I don\u0027t think it\u0027s a concern right now.",
+      "parentUuid": "5be6aad1_fb502898",
+      "revId": "6d4d5b948a080efe93ed447c50ba912ba532ca07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2251a15_9d4d685c",
         "filename": "src/dawn_native/CachedObject.h",
         "patchSetId": 2
