@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57846d61_12066ce3",
+        "filename": "src/dawn_native/SwapChain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-30T14:24:23Z",
+      "side": 1,
+      "message": "This is required so that after present we lose the ref to the swapchain buffer. What should actually happen is that on Configure we lose the ref to the current texture. But Dawn\u0027s code structure isn\u0027t set up to do this at the moment.",
+      "revId": "20339f607c3588573b906a82fc308e3e1e24a507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc94d0ad_b47811f5",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-30T14:24:23Z",
+      "side": 1,
+      "message": "This is so on Destroy() d3d12::Texture lose the ref to the swapchain buffer.",
+      "revId": "20339f607c3588573b906a82fc308e3e1e24a507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
