@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "165e182f_7cfe6cc3",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-31T18:24:47Z",
+      "side": 1,
+      "message": "@Bryan, Corentin wants this toggle to be the reverse.\nIf I understand correctly, it should Enable, not Disable, ResourceHeapTear2\n\nThe d3d12::Device constructor can have something like InitTogglesFromDriver(); in the Vulkan/Metal backends which checks the adapter, and by default enables the toggle if |info.resourceHeapTier \u003e\u003d 2|, unless explicitly disabled.",
+      "parentUuid": "86ad193d_178faaca",
+      "revId": "c979bdabe1e4ee4f839e8c86cf16718999680156",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57f75bd2_a80a4bcd",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 2
