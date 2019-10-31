@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "42fa2b57_503bebad",
+        "filename": "src/tests/perf_tests/DrawCallPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-31T03:07:34Z",
+      "side": 1,
+      "message": "heh. Not sure why I didn\u0027t do that originally",
+      "parentUuid": "b7f890d2_4defce45",
+      "revId": "02a8831b4669d927eb4982999021cc2acbbe47fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f01cfe64_078a86aa",
         "filename": "src/tests/perf_tests/DrawCallPerf.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "02a8831b4669d927eb4982999021cc2acbbe47fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b98333a_4c78c379",
+        "filename": "src/tests/perf_tests/DrawCallPerf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-10-31T03:07:34Z",
+      "side": 1,
+      "message": "Good idea! Added",
+      "parentUuid": "f01cfe64_078a86aa",
+      "revId": "02a8831b4669d927eb4982999021cc2acbbe47fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
