@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fc2fe691_10b02bc5",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-10-31T17:31:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fa9e04f6_1f4bdda7",
+      "revId": "6d01e192052c223bf5506322a5e16437ca3b9eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "576e9646_9a92b0b2",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 9
@@ -63,6 +81,30 @@
       "revId": "6d01e192052c223bf5506322a5e16437ca3b9eb3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a722f94c_5eac4241",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-10-31T17:31:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cabc61c1_384d7936",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 73
+      },
+      "revId": "6d01e192052c223bf5506322a5e16437ca3b9eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
