@@ -16,6 +16,24 @@
       "revId": "6a2698e4c5f2b913351ca84dd8586392a1fcfca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eb95fd6_b9c59fb0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000570
+      },
+      "writtenOn": "2019-10-31T07:18:26Z",
+      "side": 1,
+      "message": "Done, PTAL",
+      "parentUuid": "a88577c7_99d791e5",
+      "revId": "6a2698e4c5f2b913351ca84dd8586392a1fcfca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
