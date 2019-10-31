@@ -161,6 +161,14 @@ namespace dawn_native {
                     info.textureComponentType =
                         SpirvCrossBaseTypeToFormatType(textureComponentType);
                 }
+                // We added readonly storage binding type in WebGPU, so we need to change storage
+                // binding type to readonly storage binding type if it has NonWritable decoration
+                if (bindingType == wgpu::BindingType::StorageBuffer) {
+                    spirv_cross::Bitset flags = compiler.get_buffer_block_flags(resource.id);
+                    if (flags.get(spv::DecorationNonWritable)) {
+                        info.type = wgpu::BindingType::ReadonlyStorageBuffer;
+                    }
+                }
             }
         };
 
