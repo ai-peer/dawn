@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "86ad193d_178faaca",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-31T13:33:33Z",
+      "side": 1,
+      "message": "I\u0027m wondering what the best way to represent this things is. We want to show this Toggle in about:gpu and get useful information from it.\n\nMaybe it should be UseD3D12ResourceHeapTier2 along with a small description of what it does, and in tests we would force-diable the toggle. WDYT?",
+      "revId": "c979bdabe1e4ee4f839e8c86cf16718999680156",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57f75bd2_a80a4bcd",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-31T13:33:33Z",
+      "side": 1,
+      "message": "nit \u003e\u003d ? Or have info.resourceHeapTier \u003d 2.",
+      "range": {
+        "startLine": 45,
+        "startChar": 71,
+        "endLine": 45,
+        "endChar": 73
+      },
+      "revId": "c979bdabe1e4ee4f839e8c86cf16718999680156",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5dc16e8_fff2dc10",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
@@ -19,6 +59,23 @@
         "endLine": 43,
         "endChar": 73
       },
+      "revId": "c979bdabe1e4ee4f839e8c86cf16718999680156",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca587836_65a98921",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-31T13:33:33Z",
+      "side": 1,
+      "message": "This could be simplified with the following:\n\nif (heapTier \u003e\u003d 2) {\n  switch(heapType) {\n    // Only three cases\n  }\n}\n\n// Current code\nswitch(dimension) ...",
       "revId": "c979bdabe1e4ee4f839e8c86cf16718999680156",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
