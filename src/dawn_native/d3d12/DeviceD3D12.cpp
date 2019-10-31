@@ -406,4 +406,8 @@ namespace dawn_native { namespace d3d12 {
         mD3d11On12DeviceContext->Flush();
     }
 
+    const D3D12DeviceInfo& Device::GetDeviceInfo() const {
+        return ToBackend(GetAdapter())->GetDeviceInfo();
+    }
+
 }}  // namespace dawn_native::d3d12
