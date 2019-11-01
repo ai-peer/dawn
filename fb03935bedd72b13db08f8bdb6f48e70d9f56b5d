@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32be2f5a_d53baa41",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-01T10:12:20Z",
+      "side": 1,
+      "message": "Maybe we should start tagging functions that can change at any time because they are mostly used for Chromium embedding Dawn.\n\nWhy is this needed?",
+      "revId": "fb03935bedd72b13db08f8bdb6f48e70d9f56b5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
