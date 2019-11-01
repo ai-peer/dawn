@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3059ac1_842f132d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-01T00:00:15Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 158,
+        "startChar": 20,
+        "endLine": 158,
+        "endChar": 29
+      },
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17e7e56f_4030c8bd",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-01T00:00:15Z",
+      "side": 1,
+      "message": "nit: This reads |bindingType| and [1] reads |info.type|. They should both read the same thing. I think it would be most clear as a switch statement\n\nswitch (bindingType) {\n  case SampledTexture:\n    // stuff;\n    break;\n  case StorageBuffer:\n    // stuff\n    break;\n  case Others:\n    info.type \u003d bindingType;\n    break;\n}",
+      "range": {
+        "startLine": 166,
+        "startChar": 20,
+        "endLine": 166,
+        "endChar": 31
+      },
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
