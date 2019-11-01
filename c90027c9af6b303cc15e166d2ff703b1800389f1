@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "067c20f9_35bf414f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-01T10:03:14Z",
+      "side": 1,
+      "message": "This comment feels more like a commit message but not something that stays in the code.\n\nMaybe \"Differentiate between readonly storage bindings and writable ones based on the NonWritable decoration.\"",
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17e7e56f_4030c8bd",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -42,6 +59,63 @@
         "endLine": 166,
         "endChar": 31
       },
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abb0bf5e_2436f06b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-01T10:03:14Z",
+      "side": 1,
+      "message": "note: This will need to be updated to be uint32_t after Austin\u0027s CL.",
+      "range": {
+        "startLine": 816,
+        "startChar": 15,
+        "endLine": 816,
+        "endChar": 23
+      },
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "148fc88b_e00e24f4",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-01T10:03:14Z",
+      "side": 1,
+      "message": "nit: The number has to be exactly 3, so we should test all of 2, 3, and 4. You could use a single std::array for that since it is the count that\u0027s validated.",
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d170336e_13761fc2",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-01T10:03:14Z",
+      "side": 1,
+      "message": "Maybe has a single one of the offsets unaligned and be the largest alignment that\u0027s not sufficient: 128",
       "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
