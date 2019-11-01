@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2d3c9888_80f98459",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-01T10:10:31Z",
+      "side": 1,
+      "message": "https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_resource_desc says\n\n\u003e Using the non-render-target and non-depth-stencil texture as an example\n\nSince it is an example, it sounds like it can work for other types of resource. So maybe we don\u0027t need this check and can just always ask for that alignment first?",
+      "revId": "e833002198995485533bebc7468ba0c81b7931db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c0bbf0c8_46db93e1",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
