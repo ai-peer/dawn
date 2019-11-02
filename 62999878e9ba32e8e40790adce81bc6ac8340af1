@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76aef0cc_f281ad0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-02T15:37:05Z",
+      "side": 1,
+      "message": "nit: Fix conflicts ... :)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "62999878e9ba32e8e40790adce81bc6ac8340af1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f894e6f_a24859d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-02T15:37:05Z",
+      "side": 1,
+      "message": "Can we have a BUG\u003dangleproject:XXXX with the ANGLE bug for this?",
+      "revId": "62999878e9ba32e8e40790adce81bc6ac8340af1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cc7992b_7cf1608f",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-02T15:37:05Z",
+      "side": 1,
+      "message": "I think we rolled this recently if you update Dawn.",
+      "range": {
+        "startLine": 53,
+        "startChar": 72,
+        "endLine": 53,
+        "endChar": 112
+      },
+      "revId": "62999878e9ba32e8e40790adce81bc6ac8340af1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
