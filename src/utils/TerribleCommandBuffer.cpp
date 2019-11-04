@@ -35,7 +35,16 @@ namespace utils {
         //   instead of pointer to zero-sized allocation in mBuffer.
 
         if (size > sizeof(mBuffer)) {
-            return nullptr;
+            if (!Flush()) {
+                return nullptr;
+            }
+
+            if (mTempLargeBuffer.empty() || mTempLargeBuffer.size() < size) {
+                mTempLargeBuffer.resize(size);
+            }
+
+            mLargeBufferOffset = size;
+            return mTempLargeBuffer.data();
         }
 
         char* result = &mBuffer[mOffset];
@@ -52,8 +61,20 @@ namespace utils {
     }
 
     bool TerribleCommandBuffer::Flush() {
-        bool success = mHandler->HandleCommands(mBuffer, mOffset) != nullptr;
-        mOffset = 0;
+        bool success;
+
+        // Command buffer not empty, flush it!
+        if (mOffset > 0) {
+            success = mHandler->HandleCommands(mBuffer, mOffset) != nullptr;
+            mOffset = 0;
+        }
+
+        // Temp buffer not empty, flush it!
+        if (!mTempLargeBuffer.empty()) {
+            success =
+                mHandler->HandleCommands(mTempLargeBuffer.data(), mLargeBufferOffset) != nullptr;
+        }
+
         return success;
     }
 
