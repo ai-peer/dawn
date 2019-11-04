@@ -106,6 +106,24 @@
       "revId": "672707f76e2dfb7c12c1870adbe2e889ae217fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4efbec3d_d2eff479",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-04T19:26:21Z",
+      "side": 0,
+      "message": "It\u0027s still happy with that CL applied.\n\nI think it makes sense - they probably explicitly put that warning on MTLStoreActionStoreAndMultisampleResolve, but don\u0027t put it on MTLFeatureSet_* because it\u0027s always valid and will just return false. (hopefully)",
+      "parentUuid": "79381808_1c8cf1f3",
+      "revId": "672707f76e2dfb7c12c1870adbe2e889ae217fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
