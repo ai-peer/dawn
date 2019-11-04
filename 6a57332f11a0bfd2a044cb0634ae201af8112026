@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4cdc16e_3540ecf1",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-04T14:08:18Z",
+      "side": 1,
+      "message": "nit: ASSERT the invariant.",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b0b2c04_8154be64",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-04T14:08:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c730f4b5_9311260d",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-04T14:08:18Z",
+      "side": 1,
+      "message": "nit: explain that the invariant is that we can\u0027t have commands in mBuffer and mLargeBuffer at the same time.\n\nAlso maybe we could reduce the size of the buffer slightly (1MB?)",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "721a1ed5_ebfb40e5",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-04T14:08:18Z",
+      "side": 1,
+      "message": "The actual value is never used, all we check is whether it is zero, so it could be replaced by a boolean.",
+      "range": {
+        "startLine": 39,
+        "startChar": 15,
+        "endLine": 39,
+        "endChar": 34
+      },
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
