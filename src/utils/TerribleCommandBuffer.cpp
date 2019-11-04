@@ -35,8 +35,38 @@ namespace utils {
         //   instead of pointer to zero-sized allocation in mBuffer.
 
         if (size > sizeof(mBuffer)) {
-            return nullptr;
+            size_t totalSize = mOffset + size;
+
+            // Resize large buffer to the size that can
+            // contain all commands in mBuffer and incoming
+            // command.
+            if (mLargeBuffer.size() < totalSize) {
+                mLargeBuffer.resize(totalSize);
+            }
+
+            // Copy commands from nomral command buffer to big buffer.
+            for (uint32_t i = 0; i < mOffset; ++i) {
+                mLargeBuffer[i] = mBuffer[i];
+            }
+
+            // Record whole cmd space.
+            mLargeBufferCmdSize = totalSize;
+
+            char* cmdSpace = mLargeBuffer.data();
+
+            return &cmdSpace[mOffset];
         }
+
+        // Trigger flush if large buffer contain cmds.
+        if (mLargeBufferCmdSize > 0) {
+            if (!Flush()) {
+                return nullptr;
+            }
+            return GetCmdSpace(size);
+        }
+
+        // Need to flush large buffer first.
+        ASSERT(mLargeBufferCmdSize == 0);
 
         char* result = &mBuffer[mOffset];
         mOffset += size;
@@ -52,8 +82,19 @@ namespace utils {
     }
 
     bool TerribleCommandBuffer::Flush() {
-        bool success = mHandler->HandleCommands(mBuffer, mOffset) != nullptr;
+        bool success = false;
+        // Big buffer not empty, flush it!
+        if (mLargeBufferCmdSize > 0) {
+            success = mHandler->HandleCommands(mLargeBuffer.data(), mLargeBufferCmdSize) != nullptr;
+            // Flush all cmds, clear both command buffers.
+            mLargeBufferCmdSize = 0;
+            mOffset = 0;
+            return success;
+        }
+
+        success = mHandler->HandleCommands(mBuffer, mOffset) != nullptr;
         mOffset = 0;
+
         return success;
     }
 
