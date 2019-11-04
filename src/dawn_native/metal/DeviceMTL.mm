@@ -53,6 +53,11 @@ namespace dawn_native { namespace metal {
     }
 
     Device::~Device() {
+        if (IsDeviceRemoved()) {
+            // Already handled releasing resources
+            return;
+        }
+
         // Wait for all commands to be finished so we can free resources SubmitPendingCommandBuffer
         // may not increment the pendingCommandSerial if there are no pending commands, so we can't
         // store the pendingSerial before SubmitPendingCommandBuffer then wait for it to be passed.
@@ -63,17 +68,7 @@ namespace dawn_native { namespace metal {
         }
         Tick();
 
-        [mPendingCommands release];
-        mPendingCommands = nil;
-
-        mMapTracker = nullptr;
-        mDynamicUploader = nullptr;
-
-        [mCommandQueue release];
-        mCommandQueue = nil;
-
-        [mMtlDevice release];
-        mMtlDevice = nil;
+        RemoveDevice();
     }
 
     void Device::InitTogglesFromDriver() {
@@ -286,6 +281,33 @@ namespace dawn_native { namespace metal {
     void Device::WaitForCommandsToBeScheduled() {
         SubmitPendingCommandBuffer();
         [mLastSubmittedCommands waitUntilScheduled];
+    }
+
+    void Device::CheckAndHandleDeviceLost(wgpu::ErrorType type) {
+        if (type == wgpu::ErrorType::DeviceLost && !IsDeviceRemoved()) {
+            // Device lost, ignore all pending commands and clean up resources
+            Serial completedSerial = GetCompletedCommandSerial();
+            mDynamicUploader->Deallocate(completedSerial);
+            mMapTracker->Tick(completedSerial);
+            RemoveDevice();
+        }
+    }
+
+    void Device::RemoveDevice() {
+        [mPendingCommands release];
+        mPendingCommands = nil;
+
+        mMapTracker = nullptr;
+        mDynamicUploader = nullptr;
+
+        [mCommandQueue release];
+        mCommandQueue = nil;
+
+        [mMtlDevice release];
+        mMtlDevice = nil;
+
+        // Set device removed so we don't allow more submits and we don't try to remove device again
+        SetDeviceRemoved();
     }
 
 }}  // namespace dawn_native::metal

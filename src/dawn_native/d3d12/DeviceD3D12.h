@@ -103,6 +103,7 @@ namespace dawn_native { namespace d3d12 {
         void ReleaseKeyedMutexForTexture(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
 
         void InitTogglesFromDriver();
+        void CheckAndHandleDeviceLost(wgpu::ErrorType type) override;
 
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -126,6 +127,8 @@ namespace dawn_native { namespace d3d12 {
         ResultOrError<TextureViewBase*> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;
+
+        void RemoveDevice() override;
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;

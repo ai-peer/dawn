@@ -78,6 +78,7 @@ namespace dawn_native {
         }
 
         mFormatTable = BuildFormatTable(this);
+        mDeviceRemoved = false;
     }
 
     DeviceBase::~DeviceBase() {
@@ -96,6 +97,7 @@ namespace dawn_native {
 
     void DeviceBase::HandleError(wgpu::ErrorType type, const char* message) {
         mCurrentErrorScope->HandleError(type, message);
+        CheckAndHandleDeviceLost(type);
     }
 
     void DeviceBase::InjectError(wgpu::ErrorType type, const char* message) {
@@ -551,6 +553,9 @@ namespace dawn_native {
     // Other Device API methods
 
     void DeviceBase::Tick() {
+        if (IsDeviceRemoved()) {
+            return;
+        }
         if (ConsumedError(TickImpl()))
             return;
 
@@ -562,6 +567,14 @@ namespace dawn_native {
         }
         mErrorScopeTracker->Tick(GetCompletedCommandSerial());
         mFenceSignalTracker->Tick(GetCompletedCommandSerial());
+    }
+
+    bool DeviceBase::IsDeviceRemoved() {
+        return mDeviceRemoved;
+    }
+
+    void DeviceBase::SetDeviceRemoved() {
+        mDeviceRemoved = true;
     }
 
     void DeviceBase::Reference() {
