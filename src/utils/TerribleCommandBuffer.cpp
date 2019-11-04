@@ -35,8 +35,36 @@ namespace utils {
         //   instead of pointer to zero-sized allocation in mBuffer.
 
         if (size > sizeof(mBuffer)) {
-            return nullptr;
+            // Flush current cmds in mBuffer to keep order.
+            if (mOffset > 0) {
+                if (!Flush()) {
+                    return nullptr;
+                }
+                return GetCmdSpace(size);
+            }
+
+            // Resize large buffer to the size that can
+            // contain incoming command if needed.
+            if (mLargeBuffer.size() < size) {
+                mLargeBuffer.resize(size);
+            }
+
+            // Record whole cmd space.
+            mLargeBufferCmdSize = size;
+
+            return mLargeBuffer.data();
         }
+
+        // Trigger flush if large buffer contain cmds.
+        if (mLargeBufferCmdSize > 0) {
+            if (!Flush()) {
+                return nullptr;
+            }
+            return GetCmdSpace(size);
+        }
+
+        // Need to flush large buffer first.
+        ASSERT(mLargeBufferCmdSize == 0);
 
         char* result = &mBuffer[mOffset];
         mOffset += size;
@@ -52,8 +80,18 @@ namespace utils {
     }
 
     bool TerribleCommandBuffer::Flush() {
-        bool success = mHandler->HandleCommands(mBuffer, mOffset) != nullptr;
+        bool success = false;
+        // Big buffer not empty, flush it!
+        if (mLargeBufferCmdSize > 0) {
+            success = mHandler->HandleCommands(mLargeBuffer.data(), mLargeBufferCmdSize) != nullptr;
+            // Clear big command buffers.
+            mLargeBufferCmdSize = 0;
+            return success;
+        }
+
+        success = mHandler->HandleCommands(mBuffer, mOffset) != nullptr;
         mOffset = 0;
+
         return success;
     }
 
