@@ -70,6 +70,24 @@
       "revId": "672707f76e2dfb7c12c1870adbe2e889ae217fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cf56032_bdb7aba7",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-04T18:59:49Z",
+      "side": 0,
+      "message": "I\u0027m pretty sure it\u0027s not necessary. I think that since it\u0027s compiled with a newer sdk, it should compile in as literal integer data (10001). And then supportsFeatureSet (which does exist since the beginning of Metal) should just say no.",
+      "parentUuid": "c5914291_7a20948c",
+      "revId": "672707f76e2dfb7c12c1870adbe2e889ae217fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
