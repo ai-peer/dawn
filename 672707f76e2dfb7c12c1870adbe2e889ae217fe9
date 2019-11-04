@@ -88,6 +88,24 @@
       "revId": "672707f76e2dfb7c12c1870adbe2e889ae217fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79381808_1c8cf1f3",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-04T19:08:55Z",
+      "side": 0,
+      "message": "Can you try with https://dawn-review.googlesource.com/c/dawn/+/11400 applied locally?\n\nI\u0027ll see to push that CL forward.",
+      "parentUuid": "2cf56032_bdb7aba7",
+      "revId": "672707f76e2dfb7c12c1870adbe2e889ae217fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
