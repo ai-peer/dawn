@@ -35,6 +35,8 @@ namespace utils {
         dawn_wire::CommandHandler* mHandler = nullptr;
         size_t mOffset = 0;
         char mBuffer[10000000];
+        std::vector<char> mTempLargeBuffer;
+        size_t mLargeBufferOffset = 0;
     };
 
 }  // namespace utils
