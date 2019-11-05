@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a839d29_dd5ae229",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-05T02:09:28Z",
+      "side": 1,
+      "message": "Seems so, being generically named. If we find more cases, we\u0027ll revisit.",
+      "parentUuid": "2d3c9888_80f98459",
+      "revId": "e833002198995485533bebc7468ba0c81b7931db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0bbf0c8_46db93e1",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
