@@ -15,6 +15,7 @@
 #include "tests/perf_tests/DawnPerfTestPlatform.h"
 
 #include "common/Assert.h"
+#include "common/HashUtils.h"
 #include "dawn_platform/tracing/TraceEvent.h"
 #include "tests/perf_tests/DawnPerfTest.h"
 #include "utils/Timer.h"
@@ -67,6 +68,22 @@ double DawnPerfTestPlatform::MonotonicallyIncreasingTime() {
     return mTimer->GetAbsoluteTime() - origin;
 }
 
+std::vector<DawnPerfTestPlatform::TraceEvent>* DawnPerfTestPlatform::GetLocalTraceEventBuffer() {
+    // Cache the pointer to the vector in thread_local storage
+    thread_local std::vector<TraceEvent>* traceEventBuffer = nullptr;
+
+    if (traceEventBuffer == nullptr) {
+        auto buffer = std::make_unique<std::vector<TraceEvent>>();
+        traceEventBuffer = buffer.get();
+
+        // Add a new buffer to the map
+        std::lock_guard<std::mutex> guard(mTraceEventBufferMapMutex);
+        mTraceEventBuffers[std::this_thread::get_id()] = std::move(buffer);
+    }
+
+    return traceEventBuffer;
+}
+
 // TODO(enga): Simplify this API.
 uint64_t DawnPerfTestPlatform::AddTraceEvent(char phase,
                                              const unsigned char* categoryGroupEnabled,
@@ -90,8 +107,13 @@ uint64_t DawnPerfTestPlatform::AddTraceEvent(char phase,
     const TraceCategoryInfo* info =
         reinterpret_cast<const TraceCategoryInfo*>(categoryGroupEnabled);
 
-    mTraceEventBuffer.emplace_back(phase, info->category, name, id, timestamp);
-    return static_cast<uint64_t>(mTraceEventBuffer.size());
+    std::vector<TraceEvent>* buffer = GetLocalTraceEventBuffer();
+    buffer->emplace_back(phase, info->category, name, id, timestamp);
+
+    size_t hash = 0;
+    HashCombine(&hash, buffer->size());
+    HashCombine(&hash, std::this_thread::get_id());
+    return static_cast<uint64_t>(hash);
 }
 
 void DawnPerfTestPlatform::EnableTraceEventRecording(bool enable) {
@@ -99,7 +121,21 @@ void DawnPerfTestPlatform::EnableTraceEventRecording(bool enable) {
 }
 
 std::vector<DawnPerfTestPlatform::TraceEvent> DawnPerfTestPlatform::AcquireTraceEventBuffer() {
-    std::vector<DawnPerfTestPlatform::TraceEvent> buffer = mTraceEventBuffer;
-    mTraceEventBuffer.clear();
-    return buffer;
+    std::vector<TraceEvent> traceEventBuffer;
+    {
+        std::lock_guard<std::mutex> guard(mTraceEventBufferMapMutex);
+        for (auto it = mTraceEventBuffers.begin(); it != mTraceEventBuffers.end(); ++it) {
+            std::ostringstream stream;
+            stream << it->first;
+            std::string tid = stream.str();
+
+            std::transform(it->second->begin(), it->second->end(),
+                           std::back_inserter(traceEventBuffer), [&tid](TraceEvent ev) {
+                               ev.tid = tid;
+                               return ev;
+                           });
+            it->second->clear();
+        }
+    }
+    return traceEventBuffer;
 }
