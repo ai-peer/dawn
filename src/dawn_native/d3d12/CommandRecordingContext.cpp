@@ -80,6 +80,19 @@ namespace dawn_native { namespace d3d12 {
         return mD3d12CommandList.Get();
     }
 
+    ID3D12GraphicsCommandList4* CommandRecordingContext::GetCommandList4() const {
+        ASSERT(IsOpen());
+
+        // Cast to ID3D12GraphicsCommandList4. This allows us to use the D3D12 Render Pass APIs
+        // introduced in Windows build 1809. Versions of Windows prior to 1809 will fail the cast,
+        // so support should be queried through the device first.
+        ID3D12GraphicsCommandList4* commandList4 = nullptr;
+        mD3d12CommandList.CopyTo(IID_PPV_ARGS(&commandList4));
+        ASSERT(mD3d12CommandList != nullptr);
+
+        return commandList4;
+    }
+
     void CommandRecordingContext::Release() {
         mD3d12CommandList.Reset();
         mIsOpen = false;

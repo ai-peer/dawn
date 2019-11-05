@@ -167,4 +167,8 @@ namespace dawn_native { namespace d3d12 {
         return &mRanges[Sampler];
     }
 
+    uint32_t BindGroupLayout::GetUavDescriptorCount() const {
+        return mDescriptorCounts[UAV];
+    }
+
 }}  // namespace dawn_native::d3d12

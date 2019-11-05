@@ -31,10 +31,17 @@ namespace dawn_native {
 
 namespace dawn_native { namespace d3d12 {
 
+    struct OMSetRenderTargetArgs {
+        unsigned int numRTVs = 0;
+        std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> RTVs = {};
+        D3D12_CPU_DESCRIPTOR_HANDLE dsv = {};
+    };
+
     class BindGroupStateTracker;
     class CommandRecordingContext;
     class Device;
     class RenderPassDescriptorHeapTracker;
+    class RenderPassTracker;
     class RenderPipeline;
 
     class CommandBuffer : public CommandBufferBase {
@@ -51,6 +58,12 @@ namespace dawn_native { namespace d3d12 {
                               BindGroupStateTracker* bindingTracker,
                               RenderPassDescriptorHeapTracker* renderPassTracker,
                               BeginRenderPassCmd* renderPass);
+        void SetupRenderPass(CommandRecordingContext* commandContext,
+                             BeginRenderPassCmd* renderPass,
+                             RenderPassTracker* renderPassTracker);
+        void SetupEmulatedRenderPass(CommandRecordingContext* commandContext,
+                                     BeginRenderPassCmd* renderPass,
+                                     OMSetRenderTargetArgs const& args) const;
 
         CommandIterator mCommands;
     };

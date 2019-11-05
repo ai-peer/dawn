@@ -42,6 +42,7 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetSamplerDescriptorCount() const;
         const D3D12_DESCRIPTOR_RANGE* GetCbvUavSrvDescriptorRanges() const;
         const D3D12_DESCRIPTOR_RANGE* GetSamplerDescriptorRanges() const;
+        uint32_t GetUavDescriptorCount() const;
 
       private:
         std::array<uint32_t, kMaxBindingsPerGroup> mBindingOffsets;

@@ -45,6 +45,17 @@ namespace dawn_native { namespace d3d12 {
             info.resourceHeapTier = options.ResourceHeapTier;
         }
 
+        // Windows builds 1809 and above can use the D3D12 render pass API. If we query
+        // CheckFeatureSupport for D3D12_FEATURE_D3D12_OPTIONS5 successfully, then we can use
+        // the render pass API.
+        D3D12_FEATURE_DATA_D3D12_OPTIONS5 featureOptions5 = {};
+        if (SUCCEEDED(adapter.GetDevice()->CheckFeatureSupport(
+                D3D12_FEATURE_D3D12_OPTIONS5, &featureOptions5, sizeof(featureOptions5)))) {
+            info.supportsRenderPass = true;
+        } else {
+            info.supportsRenderPass = false;
+        }
+
         return info;
     }
 }}  // namespace dawn_native::d3d12

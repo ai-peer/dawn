@@ -28,6 +28,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
+#include "dawn_native/d3d12/RenderPassTrackerD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
@@ -65,12 +66,6 @@ namespace dawn_native { namespace d3d12 {
             return false;
         }
 
-        struct OMSetRenderTargetArgs {
-            unsigned int numRTVs = 0;
-            std::array<D3D12_CPU_DESCRIPTOR_HANDLE, kMaxColorAttachments> RTVs = {};
-            D3D12_CPU_DESCRIPTOR_HANDLE dsv = {};
-        };
-
     }  // anonymous namespace
 
     class BindGroupStateTracker : public BindGroupAndStorageBarrierTrackerBase<false, uint64_t> {
@@ -81,6 +76,10 @@ namespace dawn_native { namespace d3d12 {
 
         void SetInComputePass(bool inCompute_) {
             mInCompute = inCompute_;
+        }
+
+        bool HasUAV() {
+            return mHasUAV;
         }
 
         MaybeError AllocateDescriptorHeaps(Device* device) {
@@ -133,6 +132,9 @@ namespace dawn_native { namespace d3d12 {
                     mCbvSrvUavDescriptorHeapSize += layout->GetCbvUavSrvDescriptorCount();
                     mSamplerDescriptorHeapSize += layout->GetSamplerDescriptorCount();
                     mBindGroupsToAllocate.push_back(group);
+                    if (layout->GetUavDescriptorCount() != 0) {
+                        mHasUAV = true;
+                    }
                 }
             }
         }
@@ -295,6 +297,7 @@ namespace dawn_native { namespace d3d12 {
         uint32_t mSamplerDescriptorHeapSize = 0;
         std::deque<BindGroup*> mBindGroupsToAllocate = {};
         bool mInCompute = false;
+        bool mHasUAV = false;
 
         DescriptorHeapHandle mCbvSrvUavGPUDescriptorHeap = {};
         DescriptorHeapHandle mSamplerGPUDescriptorHeap = {};
@@ -911,11 +914,119 @@ namespace dawn_native { namespace d3d12 {
         }
     }
 
-    void CommandBuffer::RecordRenderPass(CommandRecordingContext* commandContext,
-                                         BindGroupStateTracker* bindingTracker,
-                                         RenderPassDescriptorHeapTracker* renderPassTracker,
-                                         BeginRenderPassCmd* renderPass) {
-        OMSetRenderTargetArgs args = renderPassTracker->GetSubpassOMSetRenderTargetArgs(renderPass);
+    void CommandBuffer::SetupRenderPass(CommandRecordingContext* commandContext,
+                                        BeginRenderPassCmd* renderPass,
+                                        RenderPassTracker* renderPassTracker) {
+        ID3D12GraphicsCommandList4* commandList = commandContext->GetCommandList4();
+
+        uint32_t attachmentCount = 0;
+
+        for (uint32_t i : IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+            RenderPassColorAttachmentInfo& attachmentInfo = renderPass->colorAttachments[i];
+            TextureView* view = ToBackend(attachmentInfo.view.Get());
+            Texture* texture = ToBackend(view->GetTexture());
+
+            // Load operation is changed to clear when the texture is uninitialized.
+            if (!texture->IsSubresourceContentInitialized(view->GetBaseMipLevel(), 1,
+                                                          view->GetBaseArrayLayer(), 1) &&
+                attachmentInfo.loadOp == wgpu::LoadOp::Load) {
+                attachmentInfo.loadOp = wgpu::LoadOp::Clear;
+                attachmentInfo.clearColor = {0.0f, 0.0f, 0.0f, 0.0f};
+            }
+
+            // Set color load operation.
+            renderPassTracker->SetRenderTargetBeginningAccess(
+                attachmentCount, attachmentInfo.loadOp, attachmentInfo.clearColor,
+                view->GetD3D12Format());
+
+            // Set color store operation.
+            if (attachmentInfo.resolveTarget.Get() != nullptr) {
+                TextureView* resolveDestinationView = ToBackend(attachmentInfo.resolveTarget.Get());
+                Texture* resolveDestinationTexture =
+                    ToBackend(resolveDestinationView->GetTexture());
+
+                resolveDestinationTexture->TransitionUsageNow(commandContext,
+                                                              D3D12_RESOURCE_STATE_RESOLVE_DEST);
+
+                // Mark resolve target as initialized to prevent clearing later.
+                resolveDestinationTexture->SetIsSubresourceContentInitialized(
+                    true, resolveDestinationView->GetBaseMipLevel(), 1,
+                    resolveDestinationView->GetBaseArrayLayer(), 1);
+
+                renderPassTracker->SetRenderTargetEndingAccessResolve(
+                    attachmentCount, attachmentInfo.storeOp, view, resolveDestinationView);
+            } else {
+                renderPassTracker->SetRenderTargetEndingAccess(attachmentCount,
+                                                               attachmentInfo.storeOp);
+            }
+
+            // Set whether or not the texture requires initialization.
+            if (attachmentInfo.storeOp == wgpu::StoreOp::Clear) {
+                texture->SetIsSubresourceContentInitialized(false, view->GetBaseMipLevel(), 1,
+                                                            view->GetBaseArrayLayer(), 1);
+            } else if (attachmentInfo.storeOp == wgpu::StoreOp::Store) {
+                texture->SetIsSubresourceContentInitialized(true, view->GetBaseMipLevel(), 1,
+                                                            view->GetBaseArrayLayer(), 1);
+            }
+
+            attachmentCount++;
+        }
+
+        if (renderPass->attachmentState->HasDepthStencilAttachment()) {
+            RenderPassDepthStencilAttachmentInfo& attachmentInfo =
+                renderPass->depthStencilAttachment;
+            TextureView* view = ToBackend(renderPass->depthStencilAttachment.view.Get());
+            Texture* texture = ToBackend(view->GetTexture());
+
+            // Load operations are changed to clear when the texture is uninitialized.
+            if (!view->GetTexture()->IsSubresourceContentInitialized(
+                    view->GetBaseMipLevel(), view->GetLevelCount(), view->GetBaseArrayLayer(),
+                    view->GetLayerCount())) {
+                if (attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
+                    attachmentInfo.clearDepth = 0.0f;
+                    attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+                }
+                if (view->GetTexture()->GetFormat().HasStencil() &&
+                    attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
+                    attachmentInfo.clearStencil = 0u;
+                    attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+                }
+            }
+
+            // Set depth/stencil load operations.
+            renderPassTracker->SetDepthAccess(attachmentInfo.depthLoadOp,
+                                              attachmentInfo.depthStoreOp,
+                                              attachmentInfo.clearDepth, view->GetD3D12Format());
+
+            if (view->GetTexture()->GetFormat().HasStencil()) {
+                renderPassTracker->SetStencilAccess(
+                    attachmentInfo.stencilLoadOp, attachmentInfo.stencilStoreOp,
+                    attachmentInfo.clearStencil, view->GetD3D12Format());
+            } else {
+                renderPassTracker->SetStencilNoAccess();
+            }
+
+            // Set whether or not the texture requires initialization.
+            if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Clear) {
+                texture->SetIsSubresourceContentInitialized(false, view->GetBaseMipLevel(), 1,
+                                                            view->GetBaseArrayLayer(), 1);
+            } else if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Store) {
+                texture->SetIsSubresourceContentInitialized(true, view->GetBaseMipLevel(), 1,
+                                                            view->GetBaseArrayLayer(), 1);
+            }
+        }
+
+        commandList->BeginRenderPass(attachmentCount,
+                                     renderPassTracker->GetRenderPassRenderTargetDescriptors(),
+                                     renderPass->attachmentState->HasDepthStencilAttachment()
+                                         ? renderPassTracker->GetRenderPassDepthStencilDescriptor()
+                                         : nullptr,
+                                     renderPassTracker->GetRenderPassFlags());
+    }
+
+    void CommandBuffer::SetupEmulatedRenderPass(CommandRecordingContext* commandContext,
+                                                BeginRenderPassCmd* renderPass,
+                                                const OMSetRenderTargetArgs& args) const {
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
         // Clear framebuffer attachments as needed and transition to render target
@@ -1030,6 +1141,27 @@ namespace dawn_native { namespace d3d12 {
                 commandList->OMSetRenderTargets(args.numRTVs, args.RTVs.data(), FALSE, nullptr);
             }
         }
+    }
+
+    void CommandBuffer::RecordRenderPass(
+        CommandRecordingContext* commandContext,
+        BindGroupStateTracker* bindingTracker,
+        RenderPassDescriptorHeapTracker* renderPassDescriptorHeapTracker,
+        BeginRenderPassCmd* renderPass) {
+        OMSetRenderTargetArgs args =
+            renderPassDescriptorHeapTracker->GetSubpassOMSetRenderTargetArgs(renderPass);
+
+        const bool useRenderPass = GetDevice()->IsToggleEnabled(Toggle::UseD3D12RenderPass);
+
+        RenderPassTracker renderPassTracker(args, bindingTracker->HasUAV());
+
+        if (useRenderPass) {
+            SetupRenderPass(commandContext, renderPass, &renderPassTracker);
+        } else {
+            SetupEmulatedRenderPass(commandContext, renderPass, args);
+        }
+
+        ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
         // Set up default dynamic state
         {
@@ -1188,10 +1320,9 @@ namespace dawn_native { namespace d3d12 {
             switch (type) {
                 case Command::EndRenderPass: {
                     mCommands.NextCommand<EndRenderPassCmd>();
-
-                    // TODO(brandon1.jones@intel.com): avoid calling this function and enable MSAA
-                    // resolve in D3D12 render pass on the platforms that support this feature.
-                    if (renderPass->attachmentState->GetSampleCount() > 1) {
+                    if (useRenderPass) {
+                        commandContext->GetCommandList4()->EndRenderPass();
+                    } else if (renderPass->attachmentState->GetSampleCount() > 1) {
                         ResolveMultisampledRenderPass(commandContext, renderPass);
                     }
                     return;
