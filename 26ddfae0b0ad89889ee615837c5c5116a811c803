@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea43f9ab_1ec21f55",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-05T00:26:21Z",
+      "side": 1,
+      "message": "nit: probably should be\n\n const auto\u0026",
+      "range": {
+        "startLine": 122,
+        "startChar": 13,
+        "endLine": 122,
+        "endChar": 17
+      },
+      "revId": "26ddfae0b0ad89889ee615837c5c5116a811c803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "093935f0_3922add6",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-05T00:26:21Z",
+      "side": 1,
+      "message": "nit: Would\n\n VkDescriptorPoolSize{it.first, it.second}\n\nwork here? just to be more explicit - the types aren\u0027t that clear here.",
+      "range": {
+        "startLine": 123,
+        "startChar": 33,
+        "endLine": 123,
+        "endChar": 34
+      },
+      "revId": "26ddfae0b0ad89889ee615837c5c5116a811c803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
