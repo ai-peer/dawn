@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "e80ae7c5_d4279cd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-05T05:50:55Z",
+      "side": 1,
+      "message": "nit: dawn:256",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 7
+      },
+      "revId": "26ddfae0b0ad89889ee615837c5c5116a811c803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea43f9ab_1ec21f55",
         "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
         "patchSetId": 3
@@ -41,6 +64,29 @@
         "startChar": 33,
         "endLine": 123,
         "endChar": 34
+      },
+      "revId": "26ddfae0b0ad89889ee615837c5c5116a811c803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "068f5a6f_cb632f90",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-05T05:50:55Z",
+      "side": 1,
+      "message": "nit: an",
+      "range": {
+        "startLine": 46,
+        "startChar": 91,
+        "endLine": 46,
+        "endChar": 94
       },
       "revId": "26ddfae0b0ad89889ee615837c5c5116a811c803",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
