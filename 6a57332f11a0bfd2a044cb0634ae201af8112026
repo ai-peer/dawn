@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "c15508e6_8ced0efa",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-11-05T11:22:23Z",
+      "side": 1,
+      "message": "When I shrink mBuffer to mBuffer[100], the test failed at the first Buffer test SmallReadAtZero(Failed at HandleBufferDestroy). Similar to ManySetSubData failed in 1M mBuffe(Failed at HandleSetSubData), when wire layer try to handle the last commands which contains a bufferId, it failed to get it and return nullptr.",
+      "parentUuid": "de3ba0d7_2430cb56",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "721a1ed5_ebfb40e5",
         "filename": "src/utils/TerribleCommandBuffer.h",
         "patchSetId": 5
