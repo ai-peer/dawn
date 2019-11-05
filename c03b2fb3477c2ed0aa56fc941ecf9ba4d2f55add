@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c858bbc4_0c092251",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-05T22:36:35Z",
+      "side": 1,
+      "message": "I think accessing thread-local storage is expensive. It would be best if we could make a local copy of the pointer (not thread-local) and use it here somehow, though not sure exactly how.",
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f1f8db0_847bf341",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-05T22:36:35Z",
+      "side": 1,
+      "message": "Why not just not initialize it in the constructor, then (and let it have its default value)? There is probably overhead to std::string(\"\").",
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48c05f00_08342b79",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-05T22:36:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure how will this will hash with ^. How much does it matter? Can we use our HashCombine?",
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8f7190f_e2a1c7a5",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-05T22:36:35Z",
+      "side": 1,
+      "message": "nit: spell this out (threadId?)",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
