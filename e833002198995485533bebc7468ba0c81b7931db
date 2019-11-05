@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "4fa13a9d_f1df2ccc",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-05T14:53:12Z",
+      "side": 1,
+      "message": "Maybe add a comment explaining that right know we only know that this works on non-renderable textures because that\u0027s what the doc has as an example, but could be extended later.",
+      "parentUuid": "35b20eb7_741e3049",
+      "revId": "e833002198995485533bebc7468ba0c81b7931db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c0bbf0c8_46db93e1",
         "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
         "patchSetId": 2
