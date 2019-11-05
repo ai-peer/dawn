@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "511f63cf_9e8fbe0f",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-05T02:25:22Z",
+      "side": 1,
+      "message": "Corentin means to ASSERT \"that we can\u0027t have commands in mBuffer and mLargeBuffer at the same time\"",
+      "parentUuid": "8776b321_df1b58f3",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b0b2c04_8154be64",
         "filename": "src/utils/TerribleCommandBuffer.cpp",
         "patchSetId": 5
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "Reduce mBuffer size to 1MB means that more buffer uploading operation will go to the mLargeBuffer, which will increase flushing times and possible resize times. I\u0027m not sure whether this will hurt performance a lot.",
       "parentUuid": "c730f4b5_9311260d",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebf25da7_58b45839",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-05T02:25:22Z",
+      "side": 1,
+      "message": "I don\u0027t think that TerribleCommandBuffer is intended to be particularly performant. We only use it for tests. If we are concerned about performance, then I think we should have the buffer be dynamically sized and grow/shrink it based on how much space is needed.",
+      "parentUuid": "ab4f324d_1a2c7c85",
       "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
