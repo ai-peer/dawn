@@ -65,6 +65,7 @@ namespace {
             }
             value["ph"] = &phase[0];
             value["id"] = traceEvent.id;
+            value["tid"] = traceEvent.threadId;
             value["ts"] = microseconds;
             value["pid"] = "Dawn";
 
