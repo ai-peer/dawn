@@ -179,6 +179,24 @@
     },
     {
       "key": {
+        "uuid": "06147d8f_a8182fb0",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-05T14:04:33Z",
+      "side": 1,
+      "message": "What Austin meant is that the performance of TerribleCommandBuffer doesn\u0027t matter so we can shrink mBuffer even if it means some things will get slower.\n\nThe crash you\u0027re getting sounds like an issue in this CL maybe?",
+      "parentUuid": "c15508e6_8ced0efa",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "721a1ed5_ebfb40e5",
         "filename": "src/utils/TerribleCommandBuffer.h",
         "patchSetId": 5
@@ -214,6 +232,30 @@
       "side": 1,
       "message": "Sry but I think this value is useful. It used as the length parameter for HandleCommands function. It prevents unnecessary vector resize operation. So I\u0027d like to keep it if you agree.",
       "parentUuid": "721a1ed5_ebfb40e5",
+      "range": {
+        "startLine": 39,
+        "startChar": 15,
+        "endLine": 39,
+        "endChar": 34
+      },
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0a675f4_7110bfde",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-05T14:04:33Z",
+      "side": 1,
+      "message": "Whoops I missed that. Sounds good.",
+      "parentUuid": "94b43280_751de2c1",
       "range": {
         "startLine": 39,
         "startChar": 15,
