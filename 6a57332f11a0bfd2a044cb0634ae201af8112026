@@ -215,6 +215,24 @@
     },
     {
       "key": {
+        "uuid": "380d6d67_379e44b2",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T13:06:27Z",
+      "side": 1,
+      "message": "I\u0027m not able to reproduce the crash on Linux when shrinking mBuffer to 100. What configuration are you using?\n\nOk for me to land and look at reducing the size + fixing the bug in another CL.",
+      "parentUuid": "cc22633a_c3563d08",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "721a1ed5_ebfb40e5",
         "filename": "src/utils/TerribleCommandBuffer.h",
         "patchSetId": 5
