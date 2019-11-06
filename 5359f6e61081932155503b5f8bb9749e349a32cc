@@ -57,6 +57,24 @@
       "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77a1585d_ef999d76",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T18:13:07Z",
+      "side": 1,
+      "message": "- All of the DeviceBase:: methods should first check if the device is alive. Like device.createBuffer, device.createPipeline, etc.\n- Command encoding (encoder.setBindGroup, etc.) probably don\u0027t need these checks because we don\u0027t use GPU resources, only record stuff on the CPU\n- Queue::Submit should first check that the device is alive. You already have this.\n- Probably Buffer::Map, Buffer::Unmap, etc.\n- + (Anything that may use the GPU)",
+      "parentUuid": "c59d2e7f_09b7e99d",
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
