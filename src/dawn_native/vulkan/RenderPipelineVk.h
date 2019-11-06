@@ -37,9 +37,8 @@ namespace dawn_native { namespace vulkan {
         MaybeError Initialize(const RenderPipelineDescriptor* descriptor);
 
         VkPipelineVertexInputStateCreateInfo ComputeVertexInputDesc(
-            const VertexInputDescriptor* vertexInput,
-            std::array<VkVertexInputBindingDescription, kMaxVertexBuffers>* mBindings,
-            std::array<VkVertexInputAttributeDescription, kMaxVertexAttributes>* mAttributes);
+            std::array<VkVertexInputBindingDescription, kMaxVertexBuffers>* tmpBindings,
+            std::array<VkVertexInputAttributeDescription, kMaxVertexAttributes>* tmpAttributes);
 
         VkPipeline mHandle = VK_NULL_HANDLE;
     };
