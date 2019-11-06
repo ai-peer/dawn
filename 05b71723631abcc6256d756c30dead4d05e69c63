@@ -53,6 +53,29 @@
     },
     {
       "key": {
+        "uuid": "07b8ebe3_a6a1622f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T19:25:13Z",
+      "side": 1,
+      "message": "If renderPassTracker is only going to be used in SetupRenderPass, why do we need to store it here in the caller?",
+      "range": {
+        "startLine": 1156,
+        "startChar": 0,
+        "endLine": 1156,
+        "endChar": 76
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "83303a75_6700ce7c",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 1
@@ -64,6 +87,52 @@
       "writtenOn": "2019-11-06T14:48:00Z",
       "side": 1,
       "message": "We could do the cast on Open so we don\u0027t pay the cost every time we call this function. In this function we could still assert that it is not nullptr, because callers should check for the features to be present before calling GetCommandList4.",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "addca636_2ba5331b",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T19:25:13Z",
+      "side": 1,
+      "message": "Since CopyTo addrefs the pointer and assigns it to a naked pointer, you\u0027re leaking memory here. \n\nInstead, create a new mD3D12CommandList4 ComPtr variable that is lazily initialized when GetCommandList4 is called. Lazy initialization should use the As member of ComPtr.",
+      "range": {
+        "startLine": 89,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 62
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a6e9302_4cd09d4c",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T19:25:13Z",
+      "side": 1,
+      "message": "I\u0027m not really sure why the original calls to CheckFeatureSupport are guarded with these braces. Seems unnecessary.\n\nIf you wouldn\u0027t mind, please remove these as part of your change.",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 9
+      },
       "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -110,6 +179,29 @@
         "startChar": 31,
         "endLine": 56,
         "endChar": 70
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1c45ae6_6712bea4",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T19:25:13Z",
+      "side": 1,
+      "message": "storeOp is not used in this method. I presume you will need to use it to set StencilEndingAccess.",
+      "range": {
+        "startLine": 167,
+        "startChar": 45,
+        "endLine": 167,
+        "endChar": 67
       },
       "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
