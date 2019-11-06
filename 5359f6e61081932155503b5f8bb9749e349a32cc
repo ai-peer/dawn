@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3d77f0ec_9c985ee9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T18:36:38Z",
+      "side": 1,
+      "message": "The other callsites of HandleError call this function when an error has already happened. Therefore, I do not think it makes sense for CheckAndHandleDeviceLost to be called from here because it\u0027s purpose is to determine whether there is an error.\n\nI think CheckAndHandleDeviceLost should be called as part of Tick. \n\nI think we should refactor things such that CheckAndHandleDeviceLost checks whether the device has been removed and, if so, calls HandleDeviceLost which cleans up everything. The \"device lost\" extension should skip the checking and call HandleDeviceLost directly.  \n\nHandleDeviceLost can be folded into HandleError as Corentin suggests.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 39
+      },
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ccea08b8_179532f5",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 11
@@ -18,6 +41,29 @@
         "startChar": 13,
         "endLine": 170,
         "endChar": 28
+      },
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a1c1707_929a78c8",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T18:36:38Z",
+      "side": 1,
+      "message": "I do not see any instances where SetDeviceRemoved is called externally. I think it should be a protected method and an implementation detail of Device and its subclasses.\n\nDepending on how you end up refactoring things from Corentin\u0027s feedback, the base class might be the one setting mDeviceRemoved anyways. In that case, the variable can be private.",
+      "range": {
+        "startLine": 171,
+        "startChar": 7,
+        "endLine": 171,
+        "endChar": 32
       },
       "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
@@ -72,6 +118,98 @@
       "side": 1,
       "message": "- All of the DeviceBase:: methods should first check if the device is alive. Like device.createBuffer, device.createPipeline, etc.\n- Command encoding (encoder.setBindGroup, etc.) probably don\u0027t need these checks because we don\u0027t use GPU resources, only record stuff on the CPU\n- Queue::Submit should first check that the device is alive. You already have this.\n- Probably Buffer::Map, Buffer::Unmap, etc.\n- + (Anything that may use the GPU)",
       "parentUuid": "c59d2e7f_09b7e99d",
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "326c7715_74787d83",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T18:36:38Z",
+      "side": 1,
+      "message": "Passing an error parameter to this function and checking whether the error matches the name of the method seems unnecessary. I think we should have CheckAndHandleDeviceLost take no parameters.",
+      "range": {
+        "startLine": 403,
+        "startChar": 12,
+        "endLine": 403,
+        "endChar": 47
+      },
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68f5993c_abe8c8bd",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T18:36:38Z",
+      "side": 1,
+      "message": "Why isn\u0027t mPendingCommands.Release() part of RemoveDevice?",
+      "range": {
+        "startLine": 404,
+        "startChar": 1,
+        "endLine": 405,
+        "endChar": 39
+      },
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77dbf725_7e23b193",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T18:36:38Z",
+      "side": 1,
+      "message": "IsDeviceRemoved only checks a boolean. You actually need to check whether the device has been removed. On D3D12, you need to call ID3D12Device::GetDeviceRemovedReason. On OpenGL, you need to ask the context whether it has been lost.",
+      "range": {
+        "startLine": 403,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 9
+      },
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a80c0ae_296d75cb",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T18:36:38Z",
+      "side": 1,
+      "message": "For uniformity with the other device types, you should call SetDeviceRemoved before calling RemoveDevice.\n\n(Might not matter after other refactoring is completed)",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 0
+      },
       "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
