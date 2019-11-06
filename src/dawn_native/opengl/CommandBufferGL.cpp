@@ -133,8 +133,8 @@ namespace dawn_native { namespace opengl {
         }
 
         // Vertex buffers and index buffers are implemented as part of an OpenGL VAO that
-        // corresponds to an VertexInput. On the contrary in Dawn they are part of the global state.
-        // This means that we have to re-apply these buffers on an VertexInput change.
+        // corresponds to an VertexState. On the contrary in Dawn they are part of the global state.
+        // This means that we have to re-apply these buffers on an VertexState change.
         class InputBufferTracker {
           public:
             void OnSetIndexBuffer(BufferBase* buffer) {
@@ -184,12 +184,12 @@ namespace dawn_native { namespace opengl {
                         GLboolean normalized = VertexFormatIsNormalized(attribute.format);
                         gl.BindBuffer(GL_ARRAY_BUFFER, buffer);
                         if (VertexFormatIsInt(attribute.format)) {
-                            gl.VertexAttribIPointer(location, components, formatType, input.stride,
+                            gl.VertexAttribIPointer(location, components, formatType, input.arrayStride,
                                                     reinterpret_cast<void*>(static_cast<intptr_t>(
                                                         offset + attribute.offset)));
                         } else {
                             gl.VertexAttribPointer(
-                                location, components, formatType, normalized, input.stride,
+                                location, components, formatType, normalized, input.arrayStride,
                                 reinterpret_cast<void*>(
                                     static_cast<intptr_t>(offset + attribute.offset)));
                         }
@@ -883,7 +883,7 @@ namespace dawn_native { namespace opengl {
                     bindGroupTracker.Apply(gl);
 
                     wgpu::IndexFormat indexFormat =
-                        lastPipeline->GetVertexInputDescriptor()->indexFormat;
+                        lastPipeline->GetVertexStateDescriptor()->indexFormat;
                     size_t formatSize = IndexFormatSize(indexFormat);
                     GLenum formatType = IndexFormatType(indexFormat);
 
@@ -923,7 +923,7 @@ namespace dawn_native { namespace opengl {
                     bindGroupTracker.Apply(gl);
 
                     wgpu::IndexFormat indexFormat =
-                        lastPipeline->GetVertexInputDescriptor()->indexFormat;
+                        lastPipeline->GetVertexStateDescriptor()->indexFormat;
                     GLenum formatType = IndexFormatType(indexFormat);
 
                     uint64_t indirectBufferOffset = draw->indirectOffset;
