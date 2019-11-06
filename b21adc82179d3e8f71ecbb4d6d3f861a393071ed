@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "7ddc094e_d6d70aff",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-06T09:05:03Z",
+      "side": 1,
+      "message": "This is actually one of the reasons I disliked the old WebGPU naming. It meant \"set of attributes\" but here we actually mean something different: \"attributes which are set\".",
+      "parentUuid": "05767657_28822424",
+      "range": {
+        "startLine": 98,
+        "startChar": 42,
+        "endLine": 98,
+        "endChar": 60
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5b086ae_1892da08",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 4
