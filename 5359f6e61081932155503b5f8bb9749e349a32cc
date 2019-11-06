@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ccea08b8_179532f5",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T15:27:12Z",
+      "side": 1,
+      "message": "The WebGPU-speak for this is \"lost\" so IsLost()?",
+      "range": {
+        "startLine": 170,
+        "startChar": 13,
+        "endLine": 170,
+        "endChar": 28
+      },
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "594c84cc_40d56f3e",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T15:27:12Z",
+      "side": 1,
+      "message": "All the backends have the same logic, instead we could have DeviceBase::HandleError check for device loss, call a LoseImpl method when that happens. Then TickImpl of various backends can check for device loss and return DAWN_DEVICE_LOST_ERROR in that case.\n\nWe\u0027ll also want a \"lose device extension\" for testing, so we could have device.Lose that calls LoseImpl.\n\nFinally in every single entrypoints (except maybe command recording outside of Finish / EndPass) we should DAWN_TRY(GetDevice()-\u003eValidateAlive()).",
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
