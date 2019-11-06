@@ -513,11 +513,11 @@ namespace dawn_native { namespace vulkan {
         // Fill in the "binding info" that will be chained in the create info
         uint32_t bindingCount = 0;
         for (uint32_t i : IterateBitSet(GetInputsSetMask())) {
-            const auto& bindingInfo = GetInput(i);
+            const VertexBufferInfo& bindingInfo = GetInput(i);
 
-            auto& bindingDesc = (*mBindings)[bindingCount];
+            VkVertexInputBindingDescription& bindingDesc = (*mBindings)[bindingCount];
             bindingDesc.binding = i;
-            bindingDesc.stride = bindingInfo.stride;
+            bindingDesc.stride = bindingInfo.arrayStride;
             bindingDesc.inputRate = VulkanInputRate(bindingInfo.stepMode);
 
             bindingCount++;
@@ -526,9 +526,9 @@ namespace dawn_native { namespace vulkan {
         // Fill in the "attribute info" that will be chained in the create info
         uint32_t attributeCount = 0;
         for (uint32_t i : IterateBitSet(GetAttributesSetMask())) {
-            const auto& attributeInfo = GetAttribute(i);
+            const VertexAttributeInfo& attributeInfo = GetAttribute(i);
 
-            auto& attributeDesc = (*mAttributes)[attributeCount];
+            VkVertexInputAttributeDescription& attributeDesc = (*mAttributes)[attributeCount];
             attributeDesc.location = i;
             attributeDesc.binding = attributeInfo.inputSlot;
             attributeDesc.format = VulkanVertexFormat(attributeInfo.format);
