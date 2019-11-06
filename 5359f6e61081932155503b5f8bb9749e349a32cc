@@ -39,6 +39,24 @@
       "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c59d2e7f_09b7e99d",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-11-06T18:02:49Z",
+      "side": 1,
+      "message": "Thanks for the guidance! What do you mean by entrypoints?",
+      "parentUuid": "594c84cc_40d56f3e",
+      "revId": "5359f6e61081932155503b5f8bb9749e349a32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
