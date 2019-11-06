@@ -77,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "c8a3334c_89f60b17",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T16:48:18Z",
+      "side": 1,
+      "message": "Thanks for the explanation LGTM",
+      "parentUuid": "d577dcd3_1cb0a101",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "784f42f4_45d23a11",
         "filename": "src/common/SystemUtils.cpp",
         "patchSetId": 7
@@ -106,6 +124,24 @@
       "side": 1,
       "message": "Similarly, I don\u0027t think readlink supports querying the size either.",
       "parentUuid": "784f42f4_45d23a11",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60d2b21c_27de538e",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T16:48:18Z",
+      "side": 1,
+      "message": "ditto, thanks!",
+      "parentUuid": "32104b4e_da309808",
       "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
