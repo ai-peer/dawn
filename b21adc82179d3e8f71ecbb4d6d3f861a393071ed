@@ -161,6 +161,29 @@
       "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16bef39f_e479ab85",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T09:30:16Z",
+      "side": 1,
+      "message": "nit: the tmp naming is weird, did you mean to change it afterwards? It could be just `binding` and `attributes`.",
+      "range": {
+        "startLine": 509,
+        "startChar": 72,
+        "endLine": 509,
+        "endChar": 83
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
