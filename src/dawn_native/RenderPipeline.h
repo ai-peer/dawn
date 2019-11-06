@@ -48,7 +48,7 @@ namespace dawn_native {
     };
 
     struct VertexBufferInfo {
-        uint64_t stride;
+        uint64_t arrayStride;
         wgpu::InputStepMode stepMode;
     };
 
@@ -59,7 +59,7 @@ namespace dawn_native {
 
         static RenderPipelineBase* MakeError(DeviceBase* device);
 
-        const VertexInputDescriptor* GetVertexInputDescriptor() const;
+        const VertexStateDescriptor* GetVertexStateDescriptor() const;
         const std::bitset<kMaxVertexAttributes>& GetAttributesSetMask() const;
         const VertexAttributeInfo& GetAttribute(uint32_t location) const;
         const std::bitset<kMaxVertexBuffers>& GetInputsSetMask() const;
@@ -94,7 +94,7 @@ namespace dawn_native {
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         // Vertex input
-        VertexInputDescriptor mVertexInput;
+        VertexStateDescriptor mVertexState;
         std::bitset<kMaxVertexAttributes> mAttributesSetMask;
         std::array<VertexAttributeInfo, kMaxVertexAttributes> mAttributeInfos;
         std::bitset<kMaxVertexBuffers> mInputsSetMask;
