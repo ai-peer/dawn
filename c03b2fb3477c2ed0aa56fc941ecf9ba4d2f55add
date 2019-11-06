@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aa86e70e_c16fe2a5",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T05:36:57Z",
+      "side": 1,
+      "message": "I don\u0027t think we can do anything better. We could either implement our own TLS with a map (which would be slower), or we could lock the entire buffer and not have a thread local buffer.\n\nChromium does something very similar to this with thread local storage.",
+      "parentUuid": "c858bbc4_0c092251",
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9f1f8db0_847bf341",
         "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7ee3e190_bbee22a9",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T05:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f1f8db0_847bf341",
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48c05f00_08342b79",
         "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2110739c_7718a028",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T05:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48c05f00_08342b79",
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -73,6 +127,30 @@
       "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6058030a_eb646fc9",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T05:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8f7190f_e2a1c7a5",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "revId": "c03b2fb3477c2ed0aa56fc941ecf9ba4d2f55add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
