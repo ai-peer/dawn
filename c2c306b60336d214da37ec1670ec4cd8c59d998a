@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "a96f427f_c9906a3e",
+        "filename": "BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "I added these defines directly in BUILD.gn, not config them in third_party\u0027s BUILD.gn now, becuase they are only referenced once, and other configs are moved to .gni, only two defines  are needed here.\n\nif (dawn_enable_vulkan_validation_layers) {\n    defines \u003d [\n        \"DAWN_ENABLE_VULKAN_VALIDATION_LAYERS\",\n        \"DAWN_VK_DATA_DIR\u003d\\\"$vulkan_data_subdir\\\"\",\n    ]\n}",
+      "parentUuid": "0f06c10a_72120cc9",
+      "revId": "c2c306b60336d214da37ec1670ec4cd8c59d998a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f4de0e3_9e7760cc",
         "filename": "BUILD.gn",
         "patchSetId": 5

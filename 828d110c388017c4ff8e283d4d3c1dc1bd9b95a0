@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4191234b_1e944e87",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45f32e89_eb3653d2",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3fb2c96_77323502",
         "filename": "src/common/SystemUtils.cpp",
         "patchSetId": 6
@@ -39,6 +57,30 @@
       "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80ae105e_cccfe653",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3fb2c96_77323502",
+      "range": {
+        "startLine": 33,
+        "startChar": 11,
+        "endLine": 33,
+        "endChar": 12
+      },
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "9357612d_b35cff15",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0774d20e_62a3e53c",
+      "range": {
+        "startLine": 37,
+        "startChar": 11,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27e0f254_66d639ed",
         "filename": "src/common/SystemUtils.cpp",
         "patchSetId": 6
@@ -76,6 +142,24 @@
       "writtenOn": "2019-10-18T13:55:47Z",
       "side": 1,
       "message": "Uuuh, maybe do the reading in two parts, once with a size of 0 to get the size of the link and the second one with the actual size?",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91b5e121_620126c4",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "It doesnot get actual path if we read it with a size of 0 and the returned value is -1 if the size is not greater than 0. If the size is less than the value of the symbolic link, the returned value is equal to the size we set, not the actually size of the symbolic link.",
+      "parentUuid": "27e0f254_66d639ed",
       "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "f28b8643_621bde20",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41bafa64_25a61372",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea9e48f0_3ba18817",
         "filename": "src/common/SystemUtils.cpp",
         "patchSetId": 6
@@ -113,6 +215,24 @@
       "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8550a4d5_78365230",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea9e48f0_3ba18817",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "0439c32c_03b61ac3",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "This is to make sure we get a valid path. We also can use the returned value of _NSGetExecutablePath() for that, I will update it.",
+      "parentUuid": "ddb4db0d_a7d86a14",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de991bda_c4610432",
         "filename": "src/common/SystemUtils.cpp",
         "patchSetId": 6
@@ -150,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "2fcbf0f7_49b789d0",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de991bda_c4610432",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8fbda13_3d91512e",
         "filename": "src/common/SystemUtils.cpp",
         "patchSetId": 6
@@ -164,6 +320,24 @@
       "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43c22e6d_2085ec68",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8fbda13_3d91512e",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -190,6 +364,30 @@
     },
     {
       "key": {
+        "uuid": "dcd14e7c_5f71499a",
+        "filename": "src/common/SystemUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b35a17e_4d40f133",
+      "range": {
+        "startLine": 21,
+        "startChar": 22,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d06e8588_7bee140a",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 6
@@ -204,6 +402,24 @@
       "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7bf467f_1b73e44c",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-11-06T06:39:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d06e8588_7bee140a",
+      "revId": "828d110c388017c4ff8e283d4d3c1dc1bd9b95a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
