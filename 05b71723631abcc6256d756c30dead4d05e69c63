@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "940285e0_64be7960",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T14:48:00Z",
+      "side": 1,
+      "message": "Instead of computing this at the BindGroupStateTracker, how about computing it in TransitionForPass? At [1].\n\nAsking for this because we are trying to remove the extra command walking required for bindgroups so we don\u0027t want to add more code to it.\n\nThis would allow reverting the changes to BindGroupLayoutD3D12 too.",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f40f24af_0cc21e9b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T14:48:00Z",
+      "side": 1,
+      "message": "[1]\n\nWe could OR the usage of all the buffers and the usage of all the textures, then check for UAV usages at the end.",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efbdb990_9bb19579",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T14:48:00Z",
+      "side": 1,
+      "message": "There is significant overlapping logic between this and SetupEmulatedRenderPass for deciding to clear uninitialized subresources or setting the initialized bit. Can we factor them?\n\nSince D3D12 render passes are the future, how about code that does the following:\n\n - Stack-allocate all the data needed for a D3D12 BeginRenderPass call\n - Fill it with data, while doing the load-\u003eclear conversion if needed and tagging subresources as un/initialized.\n - if (has native render passes) BeginRenderPass\n - else EmulateBeginRenderPass from the data needed for BeginRenderPass",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83303a75_6700ce7c",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T14:48:00Z",
+      "side": 1,
+      "message": "We could do the cast on Open so we don\u0027t pay the cost every time we call this function. In this function we could still assert that it is not nullptr, because callers should check for the features to be present before calling GetCommandList4.",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9faca96a_ed01f1ee",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T14:48:00Z",
+      "side": 1,
+      "message": "I\u0027m surprised this is a thing, do you know what optimization can be done if this flag isn\u0027t present?",
+      "range": {
+        "startLine": 56,
+        "startChar": 31,
+        "endLine": 56,
+        "endChar": 70
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
