@@ -76,6 +76,30 @@
     },
     {
       "key": {
+        "uuid": "14ac7a52_12ba87db",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-06T20:12:51Z",
+      "side": 1,
+      "message": "I found the subresource parameters struct that is set (as a pointer) when using end access resolve must be kept alive until after EndRenderPass() is called. Declaring this inside SetupRenderPass would mean the subresource parameter\u0027s memory is destroyed after going out of scope.",
+      "parentUuid": "07b8ebe3_a6a1622f",
+      "range": {
+        "startLine": 1156,
+        "startChar": 0,
+        "endLine": 1156,
+        "endChar": 76
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "83303a75_6700ce7c",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 1
