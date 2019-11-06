@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "d577dcd3_1cb0a101",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T16:45:23Z",
+      "side": 1,
+      "message": "GetEnvironmentVariableA supports the two step thing, but the docs for GetModuleFileNameA doesn\u0027t do that.\n\n\u003e If the buffer is too small to hold the module name, the string is truncated to nSize characters including the terminating null character, the function returns nSize, and the function sets the last error to ERROR_INSUFFICIENT_BUFFER",
+      "parentUuid": "13772496_1ff8ffbe",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "784f42f4_45d23a11",
         "filename": "src/common/SystemUtils.cpp",
         "patchSetId": 7
@@ -70,6 +88,47 @@
       "writtenOn": "2019-11-06T12:58:04Z",
       "side": 1,
       "message": "likewise we could just allocate a vector of the right size here.",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32104b4e_da309808",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T16:45:23Z",
+      "side": 1,
+      "message": "Similarly, I don\u0027t think readlink supports querying the size either.",
+      "parentUuid": "784f42f4_45d23a11",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c136600_b0a58073",
+        "filename": "src/tests/unittests/SystemUtilsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-06T16:45:23Z",
+      "side": 1,
+      "message": "nit: 2019",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
       "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
