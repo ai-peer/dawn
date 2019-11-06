@@ -197,6 +197,24 @@
     },
     {
       "key": {
+        "uuid": "cc22633a_c3563d08",
+        "filename": "src/utils/TerribleCommandBuffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-11-06T01:31:57Z",
+      "side": 1,
+      "message": "Sry for wasting your time on this trivial point. I think the take away is TerribleCommandBuffer will be replaced.\n\nAbout the crash, I tried with clean latest master and shrink  mBuffer size. The crash still happens. My investigation hints that this maybe caused by flusing a full commands buffer. So can we land this patch first and we resolve the crash issue in another CL?",
+      "parentUuid": "06147d8f_a8182fb0",
+      "revId": "6a57332f11a0bfd2a044cb0634ae201af8112026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "721a1ed5_ebfb40e5",
         "filename": "src/utils/TerribleCommandBuffer.h",
         "patchSetId": 5
