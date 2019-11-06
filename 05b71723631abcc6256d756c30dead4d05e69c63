@@ -100,6 +100,30 @@
     },
     {
       "key": {
+        "uuid": "2684e7c7_be20ddd9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-06T21:04:34Z",
+      "side": 1,
+      "message": "Reading through the D3D12 code, it appears you are correct. :-( \n\nPlease add a comment that describes this pit fall so that people do not end up re-figuring this out in the future.",
+      "parentUuid": "14ac7a52_12ba87db",
+      "range": {
+        "startLine": 1156,
+        "startChar": 0,
+        "endLine": 1156,
+        "endChar": 76
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "83303a75_6700ce7c",
         "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 1
