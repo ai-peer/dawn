@@ -90,6 +90,30 @@
       "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a3012c9_fbfc5cf0",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-06T18:45:15Z",
+      "side": 1,
+      "message": "Per MSDN [1]: \"Unordered access view (UAV) writes are permitted within a render pass, but you must specifically indicate that you\u0027ll be issuing UAV writes within the render pass by specifying D3D12_RENDER_PASS_FLAG_ALLOW_UAV_WRITES, so that the display driver can opt out of tiling if necessary.\"\n\nIt seems like this could be to mitigate performance on RENDER_PASS_TIER_1 [2] systems that cannot write UAVs efficiently when tiling.\n\n[1] https://docs.microsoft.com/en-us/windows/win32/direct3d12/direct3d-12-render-passes\n[2] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_render_pass_tier",
+      "parentUuid": "9faca96a_ed01f1ee",
+      "range": {
+        "startLine": 56,
+        "startChar": 31,
+        "endLine": 56,
+        "endChar": 70
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
