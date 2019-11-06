@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0adc3cd_74bc02a8",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T12:58:04Z",
+      "side": 1,
+      "message": "nit: our copy of the vulkan validation layers\n\nor \"our built version of\"",
+      "range": {
+        "startLine": 53,
+        "startChar": 9,
+        "endLine": 53,
+        "endChar": 16
+      },
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "792bcc57_678c8784",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T12:58:04Z",
+      "side": 1,
+      "message": "The size can be more than MAX_PATH: the docs say the max is 65536 so we should do the two step thing here too where we first pass a size of 0 to get the whole size, and then create a vector and pass that.",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13772496_1ff8ffbe",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T12:58:04Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "784f42f4_45d23a11",
+        "filename": "src/common/SystemUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T12:58:04Z",
+      "side": 1,
+      "message": "likewise we could just allocate a vector of the right size here.",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50ffb36c_50190140",
+        "filename": "src/tests/unittests/SystemUtilsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-06T12:58:04Z",
+      "side": 1,
+      "message": "Maybe assert the last charecter is GetPathSeparator()?",
+      "revId": "d4dc78551fd4a2d64d14b18d726cef1d22a8d15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
