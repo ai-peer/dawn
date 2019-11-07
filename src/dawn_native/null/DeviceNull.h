@@ -180,9 +180,6 @@ namespace dawn_native { namespace null {
       public:
         CommandBuffer(CommandEncoderBase* encoder, const CommandBufferDescriptor* descriptor);
         ~CommandBuffer();
-
-      private:
-        CommandIterator mCommands;
     };
 
     class Queue : public QueueBase {

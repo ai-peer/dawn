@@ -86,6 +86,7 @@ namespace dawn_native {
         // Needs to be called if iteration was stopped early.
         void Reset();
 
+        bool IsDestroyed() const;
         void DataWasDestroyed();
 
       private:

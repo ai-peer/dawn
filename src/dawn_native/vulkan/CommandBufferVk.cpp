@@ -358,12 +358,10 @@ namespace dawn_native { namespace vulkan {
 
     CommandBuffer::CommandBuffer(CommandEncoderBase* encoder,
                                  const CommandBufferDescriptor* descriptor)
-        : CommandBufferBase(encoder, descriptor), mCommands(encoder->AcquireCommands()) {
+        : CommandBufferBase(encoder, descriptor) {
     }
 
-    CommandBuffer::~CommandBuffer() {
-        FreeCommands(&mCommands);
-    }
+    CommandBuffer::~CommandBuffer() = default;
 
     void CommandBuffer::RecordCopyImageWithTemporaryBuffer(
         CommandRecordingContext* recordingContext,
