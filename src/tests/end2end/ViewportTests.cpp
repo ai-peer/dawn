@@ -383,9 +383,10 @@ TEST_P(ViewportTest, DoNotTruncateXAndY2) {
 // Width and height have fractions and they are greater than 3.5, which is the center of
 // point(3, 3). So point(3, 3) is covered by the bottom right triangle as usual.
 TEST_P(ViewportTest, DoNotTruncateWidthAndHeight) {
-    // Test failing on Intel devices (D3D, Vulkan and Metal) and D3D12.
+    // Test failing on D3D12, Vulkan and GL.
     // See https://bugs.chromium.org/p/dawn/issues/detail?id=205
-    DAWN_SKIP_TEST_IF(IsIntel() || IsD3D12());
+    // See https://bugs.chromium.org/p/dawn/issues/detail?id=257
+    DAWN_SKIP_TEST_IF(!IsMetal());
     ViewportParams viewport = {0.0, 0.0, 3.51, 3.51, 0.0, 1.0};
     TestInfo info = {viewport, TopLeftTriangleColor, BottomRightTriangleColor};
     DoTest(info);
