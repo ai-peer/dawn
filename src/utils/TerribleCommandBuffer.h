@@ -34,7 +34,7 @@ namespace utils {
       private:
         dawn_wire::CommandHandler* mHandler = nullptr;
         size_t mOffset = 0;
-        char mBuffer[10000000];
+        char mBuffer[1000000];
     };
 
 }  // namespace utils
