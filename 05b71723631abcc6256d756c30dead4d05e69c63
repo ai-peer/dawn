@@ -188,6 +188,30 @@
     },
     {
       "key": {
+        "uuid": "9e5edea6_bec02d0c",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-07T22:01:46Z",
+      "side": 1,
+      "message": "Using As in Open is fine with me.",
+      "parentUuid": "23a2fadf_55f6759f",
+      "range": {
+        "startLine": 89,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 62
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a6e9302_4cd09d4c",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 1
