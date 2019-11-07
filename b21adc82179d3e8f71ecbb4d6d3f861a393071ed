@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9c291d9f_fc5ffb81",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-07T00:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8979289d_8931b029",
+      "range": {
+        "startLine": 63,
+        "startChar": 49,
+        "endLine": 63,
+        "endChar": 69
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3c4565d_954e3f13",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "12a4e608_83ee0ce6",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-07T00:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3c4565d_954e3f13",
+      "range": {
+        "startLine": 65,
+        "startChar": 46,
+        "endLine": 65,
+        "endChar": 62
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c26064f1_11809933",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f42e5380_3c3618f4",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-07T00:32:08Z",
+      "side": 1,
+      "message": "Thanks for catching these!",
+      "parentUuid": "c26064f1_11809933",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 40
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "a7c6fe33_fc0e2fdb",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-07T00:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ddc094e_d6d70aff",
+      "range": {
+        "startLine": 98,
+        "startChar": 42,
+        "endLine": 98,
+        "endChar": 60
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5b086ae_1892da08",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 4
@@ -138,6 +234,30 @@
       "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23a3fef3_112ec1ca",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-07T00:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5b086ae_1892da08",
+      "range": {
+        "startLine": 100,
+        "startChar": 39,
+        "endLine": 100,
+        "endChar": 53
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -164,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "4ff5ac1d_17daf1b6",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-07T00:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f799b9d3_5cb4a1b6",
+      "range": {
+        "startLine": 101,
+        "startChar": 56,
+        "endLine": 101,
+        "endChar": 67
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16bef39f_e479ab85",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 4
@@ -184,6 +328,30 @@
       "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c36a0019_a44e5642",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-07T00:32:08Z",
+      "side": 1,
+      "message": "Wasn\u0027t sure what to call it. The old mPrefix wasn\u0027t right because it\u0027s not a member. These are temporary storage space to allow creation of a CreateInfo that points into them. Let me just refactor this slightly.",
+      "parentUuid": "16bef39f_e479ab85",
+      "range": {
+        "startLine": 509,
+        "startChar": 72,
+        "endLine": 509,
+        "endChar": 83
+      },
+      "revId": "b21adc82179d3e8f71ecbb4d6d3f861a393071ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
