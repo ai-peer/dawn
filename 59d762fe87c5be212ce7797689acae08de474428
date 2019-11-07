@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fbd1168_87c2de98",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-07T12:32:13Z",
+      "side": 1,
+      "message": "After some debugging, it seems at least on problem is that here we modify mOffset just before calling flush so we flush more than what we should.",
+      "revId": "59d762fe87c5be212ce7797689acae08de474428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
