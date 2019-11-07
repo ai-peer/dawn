@@ -150,6 +150,10 @@ namespace dawn_native {
                 } break;
             }
         }
+
+        // TODO(enga): Applications are usually continuously recording commands.
+        // Recycle command blocks instead of completely discarding them.
+        *commands = CommandIterator{};
         commands->DataWasDestroyed();
     }
 

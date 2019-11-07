@@ -40,7 +40,13 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
-        if (device->ConsumedError(SubmitImpl(commandCount, commands))) {
+        bool hadError = device->ConsumedError(SubmitImpl(commandCount, commands));
+
+        for (uint32_t i = 0; i < commandCount; ++i) {
+            commands[i]->Clear();
+        }
+
+        if (hadError) {
             return;
         }
         device->GetErrorScopeTracker()->TrackUntilLastSubmitComplete(
@@ -75,6 +81,7 @@ namespace dawn_native {
 
         for (uint32_t i = 0; i < commandCount; ++i) {
             DAWN_TRY(GetDevice()->ValidateObject(commands[i]));
+            DAWN_TRY(commands[i]->ValidateCanUseInSubmitNow());
 
             const CommandBufferResourceUsage& usages = commands[i]->GetResourceUsages();
 
