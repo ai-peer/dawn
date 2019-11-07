@@ -221,8 +221,8 @@ TEST_P(BufferSetSubDataTests, ManySetSubData) {
     // once the issue with Metal on 10.14.6 is fixed.
     DAWN_SKIP_TEST_IF(IsMacOS() && IsIntel() && IsMetal());
 
-    constexpr uint64_t kSize = 4000 * 1000;
-    constexpr uint32_t kElements = 500 * 500;
+    constexpr uint64_t kSize = 12000 * 1000;
+    constexpr uint32_t kElements = 3000 * 1000;
     wgpu::BufferDescriptor descriptor;
     descriptor.size = kSize;
     descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
