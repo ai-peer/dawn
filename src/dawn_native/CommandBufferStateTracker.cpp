@@ -106,7 +106,7 @@ namespace dawn_native {
         if (aspects[VALIDATION_ASPECT_VERTEX_BUFFERS]) {
             ASSERT(mLastRenderPipeline != nullptr);
 
-            auto requiredInputs = mLastRenderPipeline->GetInputsSetMask();
+            auto requiredInputs = mLastRenderPipeline->GetVertexBufferSlotsUsed();
             if ((mInputsSet & requiredInputs) == requiredInputs) {
                 mAspects.set(VALIDATION_ASPECT_VERTEX_BUFFERS);
             }
