@@ -202,7 +202,7 @@ namespace dawn_native { namespace opengl {
         modules[SingleShaderStage::Fragment] = ToBackend(descriptor->fragmentStage->module);
 
         PipelineGL::Initialize(device->gl, ToBackend(GetLayout()), modules);
-        CreateVAOForVertexInput(descriptor->vertexInput);
+        CreateVAOForVertexState(descriptor->vertexState);
     }
 
     RenderPipeline::~RenderPipeline() {
@@ -215,7 +215,7 @@ namespace dawn_native { namespace opengl {
         return mGlPrimitiveTopology;
     }
 
-    void RenderPipeline::CreateVAOForVertexInput(const VertexInputDescriptor* vertexInput) {
+    void RenderPipeline::CreateVAOForVertexState(const VertexStateDescriptor* vertexState) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
         gl.GenVertexArrays(1, &mVertexArrayObject);
@@ -225,10 +225,10 @@ namespace dawn_native { namespace opengl {
             const auto& attribute = GetAttribute(location);
             gl.EnableVertexAttribArray(location);
 
-            attributesUsingInput[attribute.inputSlot][location] = true;
-            auto input = GetInput(attribute.inputSlot);
+            attributesUsingVertexBuffer[attribute.vertexBufferSlot][location] = true;
+            const VertexBufferInfo& input = GetVertexBuffer(attribute.vertexBufferSlot);
 
-            if (input.stride == 0) {
+            if (input.arrayStride == 0) {
                 // Emulate a stride of zero (constant vertex attribute) by
                 // setting the attribute instance divisor to a huge number.
                 gl.VertexAttribDivisor(location, 0xffffffff);

@@ -404,7 +404,8 @@ namespace dawn_native { namespace d3d12 {
                        const RenderPipeline* renderPipeline) {
                 ASSERT(renderPipeline != nullptr);
 
-                std::bitset<kMaxVertexBuffers> inputsMask = renderPipeline->GetInputsSetMask();
+                std::bitset<kMaxVertexBuffers> inputsMask =
+                    renderPipeline->GetVertexBufferSlotsUsed();
 
                 uint32_t startSlot = mStartSlot;
                 uint32_t endSlot = mEndSlot;
@@ -419,7 +420,7 @@ namespace dawn_native { namespace d3d12 {
                         startSlot = std::min(startSlot, slot);
                         endSlot = std::max(endSlot, slot + 1);
                         mD3D12BufferViews[slot].StrideInBytes =
-                            renderPipeline->GetInput(slot).stride;
+                            renderPipeline->GetVertexBuffer(slot).arrayStride;
                     }
                 }
 
@@ -462,7 +463,7 @@ namespace dawn_native { namespace d3d12 {
 
             void OnSetPipeline(const RenderPipelineBase* pipeline) {
                 mD3D12BufferView.Format =
-                    DXGIIndexFormat(pipeline->GetVertexInputDescriptor()->indexFormat);
+                    DXGIIndexFormat(pipeline->GetVertexStateDescriptor()->indexFormat);
             }
 
             void Apply(ID3D12GraphicsCommandList* commandList) {
