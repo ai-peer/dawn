@@ -1146,6 +1146,12 @@ if (dawn_standalone) {
     ]
   }
 
+  dawn_sample("ReproduceVertexFormatError") {
+    sources = [
+      "examples/ReproduceVertexFormatTestError.cpp",
+    ]
+  }
+
   group("dawn_samples") {
     deps = [
       ":Animometer",
@@ -1153,6 +1159,7 @@ if (dawn_standalone) {
       ":ComputeBoids",
       ":CppHelloTriangle",
       ":CubeReflection",
+      ":ReproduceVertexFormatError",
     ]
   }
 }
