@@ -124,6 +124,8 @@ namespace dawn_native { namespace vulkan {
         void GatherQueueFromDevice();
 
         void InitTogglesFromDriver();
+        void DeviceLostImpl() override;
+        MaybeError CheckAndHandleDeviceLost() override;
 
         // To make it easier to use fn it is a public const member. However
         // the Device is allowed to mutate them through these private methods.

@@ -42,17 +42,11 @@ namespace dawn_native { namespace opengl {
     }
 
     Device::~Device() {
-        CheckPassedFences();
-        ASSERT(mFencesInFlight.empty());
-
-        // Some operations might have been started since the last submit and waiting
-        // on a serial that doesn't have a corresponding fence enqueued. Force all
-        // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
-
-        mDynamicUploader = nullptr;
-
-        Tick();
+        if (isDeviceLost()) {
+            // Already handled releasing resources
+            return;
+        }
+        DeviceLostImpl();
     }
 
     const GLFormat& Device::GetGLFormat(const Format& format) {
@@ -133,6 +127,7 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Device::TickImpl() {
+        DAWN_TRY(ValidateDeviceIsAlive());
         CheckPassedFences();
         return {};
     }
@@ -168,6 +163,30 @@ namespace dawn_native { namespace opengl {
                                                uint64_t destinationOffset,
                                                uint64_t size) {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+    }
+
+    void Device::DeviceLostImpl() {
+        CheckPassedFences();
+        ASSERT(mFencesInFlight.empty());
+
+        // Some operations might have been started since the last submit and waiting
+        // on a serial that doesn't have a corresponding fence enqueued. Force all
+        // operations to look as if they were completed (because they were).
+        mCompletedSerial = mLastSubmittedSerial + 1;
+
+        mDynamicUploader = nullptr;
+
+        Tick();
+
+        // Set device removed so we don't allow more submits and we don't try to remove device again
+        SetDeviceLost();
+    }
+
+    MaybeError Device::CheckAndHandleDeviceLost() {
+        if (gl.GetGraphicsResetStatus() != GL_NO_ERROR) {
+            return DAWN_DEVICE_LOST_ERROR("Device lost");
+        }
+        return {};
     }
 
 }}  // namespace dawn_native::opengl
