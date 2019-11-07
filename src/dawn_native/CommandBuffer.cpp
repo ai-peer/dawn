@@ -15,22 +15,46 @@
 #include "dawn_native/CommandBuffer.h"
 
 #include "dawn_native/CommandEncoder.h"
+#include "dawn_native/Commands.h"
 #include "dawn_native/Texture.h"
 
 namespace dawn_native {
 
     CommandBufferBase::CommandBufferBase(CommandEncoderBase* encoder,
                                          const CommandBufferDescriptor*)
-        : ObjectBase(encoder->GetDevice()), mResourceUsages(encoder->AcquireResourceUsages()) {
+        : ObjectBase(encoder->GetDevice()),
+          mCommands(encoder->AcquireCommands()),
+          mResourceUsages(encoder->AcquireResourceUsages()) {
     }
 
     CommandBufferBase::CommandBufferBase(DeviceBase* device, ObjectBase::ErrorTag tag)
         : ObjectBase(device, tag) {
     }
 
+    CommandBufferBase::~CommandBufferBase() {
+        Clear();
+    }
+
     // static
     CommandBufferBase* CommandBufferBase::MakeError(DeviceBase* device) {
         return new CommandBufferBase(device, ObjectBase::kError);
+    }
+
+    MaybeError CommandBufferBase::ValidateCanUseInSubmitNow() const {
+        ASSERT(!IsError());
+
+        if (mCommands.IsDestroyed()) {
+            return DAWN_VALIDATION_ERROR("Command buffer reused in submit");
+        }
+        return {};
+    }
+
+    void CommandBufferBase::Clear() {
+        FreeCommands(&mCommands);
+
+        // TODO(enga): Applications are usually continuously recording commands.
+        // Recycle command blocks instead of completely discarding them.
+        mCommands = CommandIterator{};
     }
 
     const CommandBufferResourceUsage& CommandBufferBase::GetResourceUsages() const {

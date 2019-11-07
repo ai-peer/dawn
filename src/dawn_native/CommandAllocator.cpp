@@ -89,6 +89,10 @@ namespace dawn_native {
         }
     }
 
+    bool CommandIterator::IsDestroyed() const {
+        return mDataWasDestroyed;
+    }
+
     void CommandIterator::DataWasDestroyed() {
         mDataWasDestroyed = true;
     }

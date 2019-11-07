@@ -572,12 +572,10 @@ namespace dawn_native { namespace d3d12 {
 
     CommandBuffer::CommandBuffer(CommandEncoderBase* encoder,
                                  const CommandBufferDescriptor* descriptor)
-        : CommandBufferBase(encoder, descriptor), mCommands(encoder->AcquireCommands()) {
+        : CommandBufferBase(encoder, descriptor) {
     }
 
-    CommandBuffer::~CommandBuffer() {
-        FreeCommands(&mCommands);
-    }
+    CommandBuffer::~CommandBuffer() = default;
 
     MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext,
                                              uint32_t indexInSubmit) {

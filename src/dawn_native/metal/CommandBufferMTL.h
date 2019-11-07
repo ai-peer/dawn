@@ -15,7 +15,6 @@
 #ifndef DAWNNATIVE_METAL_COMMANDBUFFERMTL_H_
 #define DAWNNATIVE_METAL_COMMANDBUFFERMTL_H_
 
-#include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 
 #import <Metal/Metal.h>
@@ -48,8 +47,6 @@ namespace dawn_native { namespace metal {
                                       MTLRenderPassDescriptor* mtlRenderPass,
                                       uint32_t width,
                                       uint32_t height);
-
-        CommandIterator mCommands;
     };
 
 }}  // namespace dawn_native::metal

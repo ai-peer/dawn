@@ -394,12 +394,10 @@ namespace dawn_native { namespace opengl {
 
     CommandBuffer::CommandBuffer(CommandEncoderBase* encoder,
                                  const CommandBufferDescriptor* descriptor)
-        : CommandBufferBase(encoder, descriptor), mCommands(encoder->AcquireCommands()) {
+        : CommandBufferBase(encoder, descriptor) {
     }
 
-    CommandBuffer::~CommandBuffer() {
-        FreeCommands(&mCommands);
-    }
+    CommandBuffer::~CommandBuffer() = default;
 
     void CommandBuffer::Execute() {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;

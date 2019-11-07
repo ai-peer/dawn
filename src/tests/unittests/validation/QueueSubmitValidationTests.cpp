@@ -59,11 +59,27 @@ TEST_F(QueueSubmitValidationTest, SubmitWithMappedBuffer) {
     queue.Submit(0, nullptr);
     ASSERT_TRUE(mapWriteFinished);
 
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(buffer, 0, targetBuffer, 0, 4);
+        commands = encoder.Finish();
+    }
     ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
 
     // Unmap the buffer, queue submit should succeed
     buffer.Unmap();
     queue.Submit(1, &commands);
+}
+
+// Test it is invalid to submit a command buffer twice
+TEST_F(QueueSubmitValidationTest, CommandBufferSubmittedTwice) {
+    wgpu::CommandBuffer commandBuffer = device.CreateCommandEncoder().Finish();
+    wgpu::Queue queue = device.CreateQueue();
+
+    // Should succeed
+    queue.Submit(1, &commandBuffer);
+
+    ASSERT_DEVICE_ERROR(queue.Submit(1, &commandBuffer));
 }
 
 }  // anonymous namespace
