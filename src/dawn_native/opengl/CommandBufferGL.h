@@ -15,7 +15,6 @@
 #ifndef DAWNNATIVE_OPENGL_COMMANDBUFFERGL_H_
 #define DAWNNATIVE_OPENGL_COMMANDBUFFERGL_H_
 
-#include "dawn_native/CommandAllocator.h"
 #include "dawn_native/CommandBuffer.h"
 
 namespace dawn_native {
@@ -29,15 +28,12 @@ namespace dawn_native { namespace opengl {
     class CommandBuffer : public CommandBufferBase {
       public:
         CommandBuffer(CommandEncoderBase* encoder, const CommandBufferDescriptor* descriptor);
-        ~CommandBuffer();
 
         void Execute();
 
       private:
         void ExecuteComputePass();
         void ExecuteRenderPass(BeginRenderPassCmd* renderPass);
-
-        CommandIterator mCommands;
     };
 
 }}  // namespace dawn_native::opengl

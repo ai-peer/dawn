@@ -19,19 +19,19 @@
 
 #include <type_traits>
 
-// Make our own Base - Backend object pair, reusing the CommandBuffer name
+// Make our own Base - Backend object pair, reusing the BindGroupLayout name
 namespace dawn_native {
-    class CommandBufferBase : public RefCounted {
+    class BindGroupLayoutBase : public RefCounted {
     };
 }
 
 using namespace dawn_native;
 
-class MyCommandBuffer : public CommandBufferBase {
+class MyBindGroupLayout : public BindGroupLayoutBase {
 };
 
 struct MyBackendTraits {
-    using CommandBufferType = MyCommandBuffer;
+    using BindGroupLayoutType = MyBindGroupLayout;
 };
 
 // Instanciate ToBackend for our "backend"
@@ -43,47 +43,47 @@ auto ToBackend(T&& common) -> decltype(ToBackendBase<MyBackendTraits>(common)) {
 // Test that ToBackend correctly converts pointers to base classes.
 TEST(ToBackend, Pointers) {
     {
-        MyCommandBuffer* cmdBuf = new MyCommandBuffer;
-        const CommandBufferBase* base = cmdBuf;
+        MyBindGroupLayout* bindGroup = new MyBindGroupLayout;
+        const BindGroupLayoutBase* base = bindGroup;
 
-        auto backendCmdBuf = ToBackend(base);
-        static_assert(std::is_same<decltype(backendCmdBuf), const MyCommandBuffer*>::value, "");
-        ASSERT_EQ(cmdBuf, backendCmdBuf);
+        auto backendBindGroupLayout = ToBackend(base);
+        static_assert(std::is_same<decltype(backendBindGroupLayout), const MyBindGroupLayout*>::value, "");
+        ASSERT_EQ(bindGroup, backendBindGroupLayout);
 
-        cmdBuf->Release();
+        bindGroup->Release();
     }
     {
-        MyCommandBuffer* cmdBuf = new MyCommandBuffer;
-        CommandBufferBase* base = cmdBuf;
+        MyBindGroupLayout* bindGroup = new MyBindGroupLayout;
+        BindGroupLayoutBase* base = bindGroup;
 
-        auto backendCmdBuf = ToBackend(base);
-        static_assert(std::is_same<decltype(backendCmdBuf), MyCommandBuffer*>::value, "");
-        ASSERT_EQ(cmdBuf, backendCmdBuf);
+        auto backendBindGroupLayout = ToBackend(base);
+        static_assert(std::is_same<decltype(backendBindGroupLayout), MyBindGroupLayout*>::value, "");
+        ASSERT_EQ(bindGroup, backendBindGroupLayout);
 
-        cmdBuf->Release();
+        bindGroup->Release();
     }
 }
 
 // Test that ToBackend correctly converts Refs to base classes.
 TEST(ToBackend, Ref) {
     {
-        MyCommandBuffer* cmdBuf = new MyCommandBuffer;
-        const Ref<CommandBufferBase> base(cmdBuf);
+        MyBindGroupLayout* bindGroup = new MyBindGroupLayout;
+        const Ref<BindGroupLayoutBase> base(bindGroup);
 
-        const auto& backendCmdBuf = ToBackend(base);
-        static_assert(std::is_same<decltype(ToBackend(base)), const Ref<MyCommandBuffer>&>::value, "");
-        ASSERT_EQ(cmdBuf, backendCmdBuf.Get());
+        const auto& backendBindGroupLayout = ToBackend(base);
+        static_assert(std::is_same<decltype(ToBackend(base)), const Ref<MyBindGroupLayout>&>::value, "");
+        ASSERT_EQ(bindGroup, backendBindGroupLayout.Get());
 
-        cmdBuf->Release();
+        bindGroup->Release();
     }
     {
-        MyCommandBuffer* cmdBuf = new MyCommandBuffer;
-        Ref<CommandBufferBase> base(cmdBuf);
+        MyBindGroupLayout* bindGroup = new MyBindGroupLayout;
+        Ref<BindGroupLayoutBase> base(bindGroup);
 
-        auto backendCmdBuf = ToBackend(base);
-        static_assert(std::is_same<decltype(ToBackend(base)), Ref<MyCommandBuffer>&>::value, "");
-        ASSERT_EQ(cmdBuf, backendCmdBuf.Get());
+        auto backendBindGroupLayout = ToBackend(base);
+        static_assert(std::is_same<decltype(ToBackend(base)), Ref<MyBindGroupLayout>&>::value, "");
+        ASSERT_EQ(bindGroup, backendBindGroupLayout.Get());
 
-        cmdBuf->Release();
+        bindGroup->Release();
     }
 }
