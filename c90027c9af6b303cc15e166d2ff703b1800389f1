@@ -245,6 +245,42 @@
       "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51caedb7_9291944d",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T08:16:00Z",
+      "side": 1,
+      "message": "\u003e Maybe has a single one of the offsets unaligned\n\nThis wasn\u0027t addressed :)",
+      "parentUuid": "ce01682d_ca7100eb",
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "391c9ed0_1b699caf",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T08:16:00Z",
+      "side": 1,
+      "message": "\u003e Maybe has a single one of the offsets unaligned\n\nThis wasn\u0027t addressed :)",
+      "parentUuid": "ce01682d_ca7100eb",
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

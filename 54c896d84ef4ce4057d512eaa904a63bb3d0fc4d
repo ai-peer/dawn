@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0b70ef5_995c7215",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T08:16:00Z",
+      "side": 1,
+      "message": "nit: I think this is clearer if expressed as !(... \u0026\u0026 ...) Maybe we could even extract the part in parenthesis like so:\n\n  bool isReadOnlyStorageToStorageConversion \u003d ....\n  if (!isReadOnlyStorageToStorageConversion) {\n    return false;\n  }",
+      "range": {
+        "startLine": 307,
+        "startChar": 20,
+        "endLine": 308,
+        "endChar": 79
+      },
+      "revId": "54c896d84ef4ce4057d512eaa904a63bb3d0fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc6dbce5_15cc221c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T08:16:00Z",
+      "side": 1,
+      "message": "This isn\u0027t a SetBindGroupValidationTest because all we care about is the pipeline creation. Maybe we could have a new tiny fixture BindGroupLayoutCompatibility at the bottom of this file? The pipeline could have a single binding.\n\nAlso the test name isn\u0027t descriptive, it doesn\u0027t contain the word \"storage\". ShaderWithROStorageVsRWLayout or something like this?\n\nChanges to helper functions of the SetBindGroupValidationTest could be reverted.",
+      "revId": "54c896d84ef4ce4057d512eaa904a63bb3d0fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
