@@ -70,6 +70,24 @@
       "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44626f38_0b778a24",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-08T21:03:15Z",
+      "side": 1,
+      "message": "@Austin, we can\u0027t make ResourceMemoryAllocation::Invalidate be a protected function because it is called by ResourceMemoryAllocator::Deallocate. ResourceMemoryAllocation is only subclassed by the D3D12 backend.",
+      "parentUuid": "1e468b9d_498e19ac",
+      "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
