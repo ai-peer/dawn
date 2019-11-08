@@ -16,6 +16,24 @@
       "revId": "59d762fe87c5be212ce7797689acae08de474428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d78e13bd_b299df49",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-11-08T02:50:13Z",
+      "side": 1,
+      "message": "Wow. It seems that I have a \"very good\" debug intuition 😄\nBut change mOffset behaviour won\u0027t solve all the issue. I hit another one after modifying this. A crash happens on TearDown()(previous crash happens in TestBody phase) phase when running ManySetSubData with 1MB mBuffer.\n\nenga@ cwallez@, I\u0027d like to continue investigating this if you agree so you guys can spend more time on something more important.\nAnd for this patch to resolve uploading big data block, I think maybe we can land it based on current finding. WDYT?",
+      "parentUuid": "4fbd1168_87c2de98",
+      "revId": "59d762fe87c5be212ce7797689acae08de474428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
