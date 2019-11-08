@@ -17,16 +17,23 @@
 
 #include "dawn_native/RenderPipeline.h"
 
+#include <thread>
+
 #import <Metal/Metal.h>
 
-namespace dawn_native { namespace metal {
+namespace dawn_native {
+    class ErrorScope;
+}
 
+namespace dawn_native { namespace metal {
     class Device;
 
     class RenderPipeline : public RenderPipelineBase {
       public:
         RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor);
         ~RenderPipeline();
+
+        void WaitForCreation() const;
 
         MTLIndexType GetMTLIndexType() const;
         MTLPrimitiveType GetMTLPrimitiveTopology() const;
@@ -55,6 +62,11 @@ namespace dawn_native { namespace metal {
         std::array<uint32_t, kMaxVertexBuffers> mMtlVertexBufferIndices;
 
         wgpu::ShaderStage mStagesRequiringStorageBufferLength = wgpu::ShaderStage::None;
+
+        Ref<ErrorScope> mCreationScope;
+        // HACK(enag): We need a thread pool
+        mutable std::thread mCreationThread;
+
     };
 
 }}  // namespace dawn_native::metal

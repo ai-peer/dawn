@@ -14,11 +14,19 @@
 
 #include "dawn_native/metal/RenderPipelineMTL.h"
 
+#include "dawn_native/ErrorScope.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 #include "dawn_native/metal/ShaderModuleMTL.h"
 #include "dawn_native/metal/TextureMTL.h"
 #include "dawn_native/metal/UtilsMetal.h"
+#include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/tracing/TraceEvent.h"
+
+#include <condition_variable>
+#include <future>
+#include <mutex>
+#include <thread>
 
 namespace dawn_native { namespace metal {
 
@@ -317,27 +325,12 @@ namespace dawn_native { namespace metal {
           mMtlPrimitiveTopology(MTLPrimitiveTopology(GetPrimitiveTopology())),
           mMtlFrontFace(MTLFrontFace(GetFrontFace())),
           mMtlCullMode(ToMTLCullMode(GetCullMode())) {
-        auto mtlDevice = device->GetMTLDevice();
+
+        TRACE_EVENT0(device->GetPlatform(), General, "RenderPipeline::RenderPipeline");
+
+        id<MTLDevice> mtlDevice = device->GetMTLDevice();
 
         MTLRenderPipelineDescriptor* descriptorMTL = [MTLRenderPipelineDescriptor new];
-
-        const ShaderModule* vertexModule = ToBackend(descriptor->vertexStage.module);
-        const char* vertexEntryPoint = descriptor->vertexStage.entryPoint;
-        ShaderModule::MetalFunctionData vertexData = vertexModule->GetFunction(
-            vertexEntryPoint, SingleShaderStage::Vertex, ToBackend(GetLayout()));
-        descriptorMTL.vertexFunction = vertexData.function;
-        if (vertexData.needsStorageBufferLength) {
-            mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Vertex;
-        }
-
-        const ShaderModule* fragmentModule = ToBackend(descriptor->fragmentStage->module);
-        const char* fragmentEntryPoint = descriptor->fragmentStage->entryPoint;
-        ShaderModule::MetalFunctionData fragmentData = fragmentModule->GetFunction(
-            fragmentEntryPoint, SingleShaderStage::Fragment, ToBackend(GetLayout()));
-        descriptorMTL.fragmentFunction = fragmentData.function;
-        if (fragmentData.needsStorageBufferLength) {
-            mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Fragment;
-        }
 
         if (HasDepthStencilAttachment()) {
             // TODO(kainino@chromium.org): Handle depth-only and stencil-only formats.
@@ -365,31 +358,84 @@ namespace dawn_native { namespace metal {
 
         descriptorMTL.sampleCount = GetSampleCount();
 
-        {
-            NSError* error = nil;
-            mMtlRenderPipelineState = [mtlDevice newRenderPipelineStateWithDescriptor:descriptorMTL
-                                                                                error:&error];
-            [descriptorMTL release];
-            if (error != nil) {
-                NSLog(@" error => %@", error);
-                device->HandleError(wgpu::ErrorType::DeviceLost,
-                                    "Error creating rendering pipeline state");
-                return;
-            }
-        }
-
         // Create depth stencil state and cache it, fetch the cached depth stencil state when we
-        // call setDepthStencilState() for a given render pipeline in CommandEncoder, in order to
-        // improve performance.
+        // call setDepthStencilState() for a given render pipeline in CommandEncoder, in order
+        // to improve performance.
         MTLDepthStencilDescriptor* depthStencilDesc =
             MakeDepthStencilDesc(GetDepthStencilStateDescriptor());
         mMtlDepthStencilState = [mtlDevice newDepthStencilStateWithDescriptor:depthStencilDesc];
         [depthStencilDesc release];
+
+        Ref<ShaderModule> vertexModule = ToBackend(descriptor->vertexStage.module);
+        std::string vertexEntryPoint = descriptor->vertexStage.entryPoint;
+
+        Ref<ShaderModule> fragmentModule = ToBackend(descriptor->fragmentStage->module);
+        std::string fragmentEntryPoint = descriptor->fragmentStage->entryPoint;
+
+        mCreationScope = device->GetCurrentErrorScope();
+        mCreationThread = std::thread([&, mtlDevice, descriptorMTL, vertexModule, fragmentModule,
+                                       vertexEntryPoint, fragmentEntryPoint]() {
+            ShaderModule::MetalFunctionData vertexData = vertexModule->GetFunction(
+                vertexEntryPoint.c_str(), SingleShaderStage::Vertex, ToBackend(GetLayout()));
+            descriptorMTL.vertexFunction = vertexData.function;
+            if (vertexData.needsStorageBufferLength) {
+                mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Vertex;
+            }
+
+            ShaderModule::MetalFunctionData fragmentData = fragmentModule->GetFunction(
+                fragmentEntryPoint.c_str(), SingleShaderStage::Fragment, ToBackend(GetLayout()));
+            descriptorMTL.fragmentFunction = fragmentData.function;
+            if (fragmentData.needsStorageBufferLength) {
+                mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Fragment;
+            }
+
+            std::promise<id<MTLRenderPipelineState>> creationPromise;
+            std::future<id<MTLRenderPipelineState>> creationFuture = creationPromise.get_future();
+
+            std::promise<id<MTLRenderPipelineState>>* promisePtr = &creationPromise;
+
+            TRACE_EVENT_ASYNC_BEGIN0(GetDevice()->GetPlatform(), GPUWork,
+                                     "DeviceMTL::NewRenderPipelineState", this);
+            [mtlDevice
+                newRenderPipelineStateWithDescriptor:descriptorMTL
+                                   completionHandler:^(
+                                       id<MTLRenderPipelineState> renderPipelineState,
+                                       NSError* error) {
+                                       [descriptorMTL release];
+
+                                       TRACE_EVENT_ASYNC_END0(GetDevice()->GetPlatform(), GPUWork,
+                                                              "DeviceMTL::NewRenderPipelineState",
+                                                              this);
+
+                                       Ref<ErrorScope> errorScope = std::move(this->mCreationScope);
+
+                                       if (error != nil) {
+                                           NSLog(@" error => %@", error);
+                                           errorScope->HandleError(
+                                               wgpu::ErrorType::DeviceLost,
+                                               "Error creating rendering pipeline state");
+                                           return;
+                                       }
+
+                                       [renderPipelineState retain];
+                                       promisePtr->set_value(renderPipelineState);
+                                   }];
+
+            this->mMtlRenderPipelineState = creationFuture.get();
+        });
     }
 
     RenderPipeline::~RenderPipeline() {
+        WaitForCreation();
+
         [mMtlRenderPipelineState release];
         [mMtlDepthStencilState release];
+    }
+
+    void RenderPipeline::WaitForCreation() const {
+        if (mCreationThread.joinable()) {
+            mCreationThread.join();
+        }
     }
 
     MTLIndexType RenderPipeline::GetMTLIndexType() const {
@@ -409,6 +455,7 @@ namespace dawn_native { namespace metal {
     }
 
     void RenderPipeline::Encode(id<MTLRenderCommandEncoder> encoder) {
+        WaitForCreation();
         [encoder setRenderPipelineState:mMtlRenderPipelineState];
     }
 
@@ -422,6 +469,7 @@ namespace dawn_native { namespace metal {
     }
 
     wgpu::ShaderStage RenderPipeline::GetStagesRequiringStorageBufferLength() const {
+        WaitForCreation();
         return mStagesRequiringStorageBufferLength;
     }
 

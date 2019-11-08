@@ -17,6 +17,8 @@
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
+#include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 
 #include <spirv_msl.hpp>
 
@@ -50,6 +52,7 @@ namespace dawn_native { namespace metal {
     ShaderModule::MetalFunctionData ShaderModule::GetFunction(const char* functionName,
                                                               SingleShaderStage functionStage,
                                                               const PipelineLayout* layout) const {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "SPIRV->MSL");
         spirv_cross::CompilerMSL compiler(mSpirv);
 
         // If these options are changed, the values in DawnSPIRVCrossMSLFastFuzzer.cpp need to be
