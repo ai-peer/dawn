@@ -1,0 +1,261 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71ff4e03_d0afe940",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "Can it be a return value instead? \n\n        auto TransitionForPass \u003d [](CommandRecordingContext* commandContext,\n                                               const PassResourceUsage\u0026 usages) -\u003e bool {",
+      "range": {
+        "startLine": 599,
+        "startChar": 34,
+        "endLine": 599,
+        "endChar": 45
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9715a3d7_b286ca92",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "nit: We could have\n\nbool wasCleared \u003d attachmentInfo.storeOp \u003d\u003d wgpu::StoreOp::Clear;\ntexture-\u003eSetIsSubresourceContentInitialized(wasCleared, view-\u003eGetBaseMipLevel(), 1,\n                                                            view-\u003eGetBaseArrayLayer(), 1);",
+      "range": {
+        "startLine": 962,
+        "startChar": 60,
+        "endLine": 962,
+        "endChar": 65
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca77045d_4d7d6209",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "Maybe do this only if HasDepth to mirror stencil?",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8660530_f42c61d7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20450019_3a76b963",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "ditto\n\nAlso have an ASSERT that either both are cleared or none of them, I think Natasha added temporary validation for that.",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc226a7b_4b23ed98",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "Maybe we should extract these in the correct branch above, otherwise ASAN will complain that we load uninitialized data.",
+      "range": {
+        "startLine": 1053,
+        "startChar": 1,
+        "endLine": 1056,
+        "endChar": 91
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b92cfb33_2c4c2ca2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "nit: comment that we try to use native render passes but emulate the begin and end ops if we don\u0027t have them.",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2f2d1c3_629a9a1f",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "unit: to reduce verbosity we could build the D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS on the stack and then copy it. Same for D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06b3416c_0e297e48",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "nit: we\u0027re asking for this many times, maybe put it in a local variable?",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 50
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2386bb66_0adb95c7",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "Can we have a TODO here to decide what to do with the group (with an investigation), and whether we can resolve integer formats at all?",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5524045_d3afb2c4",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "These could be forward declarations.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11b026ce_8ec57db1",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "Also nit, added comments to explain what this class is used for and to group methods.",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88f11e71_1834e0fc",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T21:13:09Z",
+      "side": 1,
+      "message": "nit: RenderPassParamsBuilder?",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
