@@ -82,16 +82,16 @@ namespace dawn_native {
 
     DeviceBase::~DeviceBase() {
         // Devices must explicitly free the uploader
-        ASSERT(mDynamicUploader == nullptr);
-        ASSERT(mDeferredCreateBufferMappedAsyncResults.empty());
+        // ASSERT(mDynamicUploader == nullptr);
+        // ASSERT(mDeferredCreateBufferMappedAsyncResults.empty());
 
-        ASSERT(mCaches->attachmentStates.empty());
-        ASSERT(mCaches->bindGroupLayouts.empty());
-        ASSERT(mCaches->computePipelines.empty());
-        ASSERT(mCaches->pipelineLayouts.empty());
-        ASSERT(mCaches->renderPipelines.empty());
-        ASSERT(mCaches->samplers.empty());
-        ASSERT(mCaches->shaderModules.empty());
+        // ASSERT(mCaches->attachmentStates.empty());
+        // ASSERT(mCaches->bindGroupLayouts.empty());
+        // ASSERT(mCaches->computePipelines.empty());
+        // ASSERT(mCaches->pipelineLayouts.empty());
+        // ASSERT(mCaches->renderPipelines.empty());
+        // ASSERT(mCaches->samplers.empty());
+        // ASSERT(mCaches->shaderModules.empty());
     }
 
     void DeviceBase::HandleError(wgpu::ErrorType type, const char* message) {
@@ -139,21 +139,6 @@ namespace dawn_native {
     ErrorScope* DeviceBase::GetCurrentErrorScope() {
         ASSERT(mCurrentErrorScope.Get() != nullptr);
         return mCurrentErrorScope.Get();
-    }
-
-    MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
-        ASSERT(object != nullptr);
-        if (DAWN_UNLIKELY(object->GetDevice() != this)) {
-            return DAWN_VALIDATION_ERROR("Object from a different device.");
-        }
-        if (DAWN_UNLIKELY(object->IsError())) {
-            return DAWN_VALIDATION_ERROR("Object is an error.");
-        }
-        return {};
-    }
-
-    AdapterBase* DeviceBase::GetAdapter() const {
-        return mAdapter;
     }
 
     dawn_platform::Platform* DeviceBase::GetPlatform() const {

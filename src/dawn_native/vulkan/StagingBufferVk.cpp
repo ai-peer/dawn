@@ -60,8 +60,8 @@ namespace dawn_native { namespace vulkan {
 
     StagingBuffer::~StagingBuffer() {
         mMappedPointer = nullptr;
-        mDevice->GetFencedDeleter()->DeleteWhenUnused(mBuffer);
-        mDevice->DeallocateMemory(&mAllocation);
+        // mDevice->GetFencedDeleter()->DeleteWhenUnused(mBuffer);
+        // mDevice->DeallocateMemory(&mAllocation);
     }
 
     VkBuffer StagingBuffer::GetBufferHandle() const {

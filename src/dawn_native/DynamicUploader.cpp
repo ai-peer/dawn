@@ -72,7 +72,7 @@ namespace dawn_native {
             startOffset = targetRingBuffer->mAllocator.Allocate(allocationSize, serial);
         }
 
-        ASSERT(startOffset != RingBufferAllocator::kInvalidOffset);
+        // ASSERT(startOffset != RingBufferAllocator::kInvalidOffset);
 
         // Allocate the staging buffer backing the ringbuffer.
         // Note: the first ringbuffer will be lazily created.

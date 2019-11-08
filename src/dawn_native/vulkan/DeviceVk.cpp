@@ -81,6 +81,9 @@ namespace dawn_native { namespace vulkan {
     }
 
     Device::~Device() {
+        // Maggie//
+        /*
+
         // Immediately tag the recording context as unused so we don't try to submit it in Tick.
         mRecordingContext.used = false;
         fn.DestroyCommandPool(mVkDevice, mRecordingContext.commandPool, nullptr);
@@ -148,6 +151,7 @@ namespace dawn_native { namespace vulkan {
             fn.DestroyDevice(mVkDevice, nullptr);
             mVkDevice = VK_NULL_HANDLE;
         }
+        */
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(

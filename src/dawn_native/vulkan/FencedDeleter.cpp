@@ -22,24 +22,24 @@ namespace dawn_native { namespace vulkan {
     }
 
     FencedDeleter::~FencedDeleter() {
-        ASSERT(mBuffersToDelete.Empty());
-        ASSERT(mDescriptorPoolsToDelete.Empty());
-        ASSERT(mFramebuffersToDelete.Empty());
-        ASSERT(mImagesToDelete.Empty());
-        ASSERT(mImageViewsToDelete.Empty());
-        ASSERT(mMemoriesToDelete.Empty());
-        ASSERT(mPipelinesToDelete.Empty());
-        ASSERT(mPipelineLayoutsToDelete.Empty());
-        ASSERT(mRenderPassesToDelete.Empty());
-        ASSERT(mSamplersToDelete.Empty());
-        ASSERT(mSemaphoresToDelete.Empty());
-        ASSERT(mShaderModulesToDelete.Empty());
-        ASSERT(mSurfacesToDelete.Empty());
-        ASSERT(mSwapChainsToDelete.Empty());
+        // ASSERT(mBuffersToDelete.Empty());
+        // ASSERT(mDescriptorPoolsToDelete.Empty());
+        // ASSERT(mFramebuffersToDelete.Empty());
+        // ASSERT(mImagesToDelete.Empty());
+        // ASSERT(mImageViewsToDelete.Empty());
+        // ASSERT(mMemoriesToDelete.Empty());
+        // ASSERT(mPipelinesToDelete.Empty());
+        // ASSERT(mPipelineLayoutsToDelete.Empty());
+        // ASSERT(mRenderPassesToDelete.Empty());
+        // ASSERT(mSamplersToDelete.Empty());
+        // ASSERT(mSemaphoresToDelete.Empty());
+        // ASSERT(mShaderModulesToDelete.Empty());
+        // ASSERT(mSurfacesToDelete.Empty());
+        // ASSERT(mSwapChainsToDelete.Empty());
     }
 
     void FencedDeleter::DeleteWhenUnused(VkBuffer buffer) {
-        mBuffersToDelete.Enqueue(buffer, mDevice->GetPendingCommandSerial());
+        // Maggie mBuffersToDelete.Enqueue(buffer, mDevice->GetPendingCommandSerial());
     }
 
     void FencedDeleter::DeleteWhenUnused(VkDescriptorPool pool) {
