@@ -52,6 +52,24 @@
       "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e468b9d_498e19ac",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-08T19:27:33Z",
+      "side": 1,
+      "message": "+1 to add a check that GetResource is nullptr if allocation gets invalidated.",
+      "parentUuid": "ebb0699e_b35ee72e",
+      "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
