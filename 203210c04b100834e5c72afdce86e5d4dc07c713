@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82740625_ae571ef9",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T19:38:05Z",
+      "side": 1,
+      "message": "nit: indentation",
+      "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85e986f6_198adf97",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T19:38:05Z",
+      "side": 1,
+      "message": "We don\u0027t need to test that the pipeline can be used, only that its craetion isn\u0027t an error. So TestRenderPassBindGroup and TestComputePassBindGroup can just be replaced by ASSERT_DEVICE_ERROR(CreateRenderPipeline(bindGroupLayout)); or CreateRenderPipeline(bindGroupLayout);",
+      "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
