@@ -281,6 +281,24 @@
       "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9be5c1e_3302b596",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-08T18:50:41Z",
+      "side": 1,
+      "message": "Done.\n\nI misunderstood this comment in last patch set. Sorry... Hope that it is correct now. :)",
+      "parentUuid": "51caedb7_9291944d",
+      "revId": "c90027c9af6b303cc15e166d2ff703b1800389f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

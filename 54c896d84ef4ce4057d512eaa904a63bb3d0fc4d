@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "788ade5c_817a2780",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-08T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0b70ef5_995c7215",
+      "range": {
+        "startLine": 307,
+        "startChar": 20,
+        "endLine": 308,
+        "endChar": 79
+      },
+      "revId": "54c896d84ef4ce4057d512eaa904a63bb3d0fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc6dbce5_15cc221c",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 2
@@ -39,6 +63,24 @@
       "revId": "54c896d84ef4ce4057d512eaa904a63bb3d0fc4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1be7046_c6572922",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-08T18:50:41Z",
+      "side": 1,
+      "message": "Done\n\nI wanted to reuse the test code, but... Yeah. new tests are not SetBindGroupValidationTest.",
+      "parentUuid": "dc6dbce5_15cc221c",
+      "revId": "54c896d84ef4ce4057d512eaa904a63bb3d0fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
