@@ -671,7 +671,7 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     }
 }
 
-constexpr uint64_t kBufferSize = 2 * kMinDynamicBufferOffsetAlignment + 8;
+constexpr uint64_t kBufferSize = 3 * kMinDynamicBufferOffsetAlignment + 8;
 constexpr uint32_t kBindingSize = 9;
 
 class SetBindGroupValidationTest : public ValidationTest {
@@ -681,7 +681,9 @@ class SetBindGroupValidationTest : public ValidationTest {
             device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
                       wgpu::BindingType::UniformBuffer, true},
                      {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
-                      wgpu::BindingType::StorageBuffer, true}});
+                      wgpu::BindingType::StorageBuffer, true},
+                     {2, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                      wgpu::BindingType::ReadonlyStorageBuffer, true}});
     }
 
     wgpu::Buffer CreateBuffer(uint64_t bufferSize, wgpu::BufferUsage usage) {
@@ -712,6 +714,9 @@ class SetBindGroupValidationTest : public ValidationTest {
                 layout(std140, set = 0, binding = 1) buffer SBuffer {
                     vec2 value2;
                 } sBuffer;
+                layout(std140, set = 0, binding = 2) readonly buffer RBuffer {
+                    vec2 value3;
+                } rBuffer;
                 layout(location = 0) out vec4 fragColor;
                 void main() {
                 })");
@@ -739,9 +744,11 @@ class SetBindGroupValidationTest : public ValidationTest {
                 layout(std140, set = 0, binding = 1) buffer SBuffer {
                     float value2;
                 } dst;
-
-        void main() {
-        })");
+                layout(std140, set = 0, binding = 2) readonly buffer RBuffer {
+                    readonly float value3;
+                } rdst;
+                void main() {
+                })");
 
         wgpu::PipelineLayout pipelineLayout =
             utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
@@ -799,15 +806,17 @@ TEST_F(SetBindGroupValidationTest, Basic) {
     // Set up the bind group.
     wgpu::Buffer uniformBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
     wgpu::Buffer storageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-        device, mBindGroupLayout,
-        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+    wgpu::Buffer readonlyStorageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
+                                                     {{0, uniformBuffer, 0, kBindingSize},
+                                                      {1, storageBuffer, 0, kBindingSize},
+                                                      {2, readonlyStorageBuffer, 0, kBindingSize}});
 
-    std::array<uint32_t, 2> offsets = {256, 0};
+    std::array<uint32_t, 3> offsets = {512, 256, 0};
 
-    TestRenderPassBindGroup(bindGroup, offsets.data(), 2, true);
+    TestRenderPassBindGroup(bindGroup, offsets.data(), 3, true);
 
-    TestComputePassBindGroup(bindGroup, offsets.data(), 2, true);
+    TestComputePassBindGroup(bindGroup, offsets.data(), 3, true);
 }
 
 // Test cases that test dynamic offsets count mismatch with bind group layout.
@@ -815,16 +824,22 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetsMismatch) {
     // Set up bind group.
     wgpu::Buffer uniformBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
     wgpu::Buffer storageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-        device, mBindGroupLayout,
-        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+    wgpu::Buffer readonlyStorageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
+                                                     {{0, uniformBuffer, 0, kBindingSize},
+                                                      {1, storageBuffer, 0, kBindingSize},
+                                                      {2, readonlyStorageBuffer, 0, kBindingSize}});
 
     // Number of offsets mismatch.
-    std::array<uint32_t, 1> mismatchOffsets = {0};
+    std::array<uint32_t, 4> mismatchOffsets = {768, 512, 256, 0};
 
     TestRenderPassBindGroup(bindGroup, mismatchOffsets.data(), 1, false);
+    TestRenderPassBindGroup(bindGroup, mismatchOffsets.data(), 2, false);
+    TestRenderPassBindGroup(bindGroup, mismatchOffsets.data(), 4, false);
 
     TestComputePassBindGroup(bindGroup, mismatchOffsets.data(), 1, false);
+    TestComputePassBindGroup(bindGroup, mismatchOffsets.data(), 2, false);
+    TestComputePassBindGroup(bindGroup, mismatchOffsets.data(), 4, false);
 }
 
 // Test cases that test dynamic offsets not aligned
@@ -832,16 +847,18 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetsNotAligned) {
     // Set up bind group.
     wgpu::Buffer uniformBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
     wgpu::Buffer storageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-        device, mBindGroupLayout,
-        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+    wgpu::Buffer readonlyStorageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
+                                                     {{0, uniformBuffer, 0, kBindingSize},
+                                                      {1, storageBuffer, 0, kBindingSize},
+                                                      {2, readonlyStorageBuffer, 0, kBindingSize}});
 
     // Dynamic offsets are not aligned.
-    std::array<uint32_t, 2> notAlignedOffsets = {1, 2};
+    std::array<uint32_t, 3> notAlignedOffsets = {512, 128, 0};
 
-    TestRenderPassBindGroup(bindGroup, notAlignedOffsets.data(), 2, false);
+    TestRenderPassBindGroup(bindGroup, notAlignedOffsets.data(), 3, false);
 
-    TestComputePassBindGroup(bindGroup, notAlignedOffsets.data(), 2, false);
+    TestComputePassBindGroup(bindGroup, notAlignedOffsets.data(), 3, false);
 }
 
 // Test cases that test dynamic uniform buffer out of bound situation.
@@ -849,16 +866,18 @@ TEST_F(SetBindGroupValidationTest, OffsetOutOfBoundDynamicUniformBuffer) {
     // Set up bind group.
     wgpu::Buffer uniformBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
     wgpu::Buffer storageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-        device, mBindGroupLayout,
-        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+    wgpu::Buffer readonlyStorageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
+                                                     {{0, uniformBuffer, 0, kBindingSize},
+                                                      {1, storageBuffer, 0, kBindingSize},
+                                                      {2, readonlyStorageBuffer, 0, kBindingSize}});
 
     // Dynamic offset + offset is larger than buffer size.
-    std::array<uint32_t, 2> overFlowOffsets = {1024, 0};
+    std::array<uint32_t, 3> overFlowOffsets = {1024, 256, 0};
 
-    TestRenderPassBindGroup(bindGroup, overFlowOffsets.data(), 2, false);
+    TestRenderPassBindGroup(bindGroup, overFlowOffsets.data(), 3, false);
 
-    TestComputePassBindGroup(bindGroup, overFlowOffsets.data(), 2, false);
+    TestComputePassBindGroup(bindGroup, overFlowOffsets.data(), 3, false);
 }
 
 // Test cases that test dynamic storage buffer out of bound situation.
@@ -866,16 +885,18 @@ TEST_F(SetBindGroupValidationTest, OffsetOutOfBoundDynamicStorageBuffer) {
     // Set up bind group.
     wgpu::Buffer uniformBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
     wgpu::Buffer storageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-        device, mBindGroupLayout,
-        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+    wgpu::Buffer readonlyStorageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
+                                                     {{0, uniformBuffer, 0, kBindingSize},
+                                                      {1, storageBuffer, 0, kBindingSize},
+                                                      {2, readonlyStorageBuffer, 0, kBindingSize}});
 
     // Dynamic offset + offset is larger than buffer size.
-    std::array<uint32_t, 2> overFlowOffsets = {0, 1024};
+    std::array<uint32_t, 3> overFlowOffsets = {0, 256, 1024};
 
-    TestRenderPassBindGroup(bindGroup, overFlowOffsets.data(), 2, false);
+    TestRenderPassBindGroup(bindGroup, overFlowOffsets.data(), 3, false);
 
-    TestComputePassBindGroup(bindGroup, overFlowOffsets.data(), 2, false);
+    TestComputePassBindGroup(bindGroup, overFlowOffsets.data(), 3, false);
 }
 
 // Test cases that test dynamic uniform buffer out of bound situation because of binding size.
@@ -883,33 +904,37 @@ TEST_F(SetBindGroupValidationTest, BindingSizeOutOfBoundDynamicUniformBuffer) {
     // Set up bind group, but binding size is larger than
     wgpu::Buffer uniformBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
     wgpu::Buffer storageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-        device, mBindGroupLayout,
-        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+    wgpu::Buffer readonlyStorageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
+                                                     {{0, uniformBuffer, 0, kBindingSize},
+                                                      {1, storageBuffer, 0, kBindingSize},
+                                                      {2, readonlyStorageBuffer, 0, kBindingSize}});
 
     // Dynamic offset + offset isn't larger than buffer size.
     // But with binding size, it will trigger OOB error.
-    std::array<uint32_t, 2> offsets = {512, 0};
+    std::array<uint32_t, 3> offsets = {768, 256, 0};
 
-    TestRenderPassBindGroup(bindGroup, offsets.data(), 2, false);
+    TestRenderPassBindGroup(bindGroup, offsets.data(), 3, false);
 
-    TestComputePassBindGroup(bindGroup, offsets.data(), 2, false);
+    TestComputePassBindGroup(bindGroup, offsets.data(), 3, false);
 }
 
 // Test cases that test dynamic storage buffer out of bound situation because of binding size.
 TEST_F(SetBindGroupValidationTest, BindingSizeOutOfBoundDynamicStorageBuffer) {
     wgpu::Buffer uniformBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Uniform);
     wgpu::Buffer storageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
-    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-        device, mBindGroupLayout,
-        {{0, uniformBuffer, 0, kBindingSize}, {1, storageBuffer, 0, kBindingSize}});
+    wgpu::Buffer readonlyStorageBuffer = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
+                                                     {{0, uniformBuffer, 0, kBindingSize},
+                                                      {1, storageBuffer, 0, kBindingSize},
+                                                      {2, readonlyStorageBuffer, 0, kBindingSize}});
     // Dynamic offset + offset isn't larger than buffer size.
     // But with binding size, it will trigger OOB error.
-    std::array<uint32_t, 2> offsets = {0, 512};
+    std::array<uint32_t, 3> offsets = {0, 256, 768};
 
-    TestRenderPassBindGroup(bindGroup, offsets.data(), 2, false);
+    TestRenderPassBindGroup(bindGroup, offsets.data(), 3, false);
 
-    TestComputePassBindGroup(bindGroup, offsets.data(), 2, false);
+    TestComputePassBindGroup(bindGroup, offsets.data(), 3, false);
 }
 
 // Test that an error is produced (and no ASSERTs fired) when using an error bindgroup in
@@ -1116,4 +1141,157 @@ TEST_F(SetBindGroupPersistenceValidationTest, NotVulkanInheritance) {
 
     renderPassEncoder.EndPass();
     commandEncoder.Finish();
+}
+
+class BindGroupLayoutCompatibilityTest : public ValidationTest {
+  public:
+    wgpu::Buffer CreateBuffer(uint64_t bufferSize, wgpu::BufferUsage usage) {
+        wgpu::BufferDescriptor bufferDescriptor;
+        bufferDescriptor.size = bufferSize;
+        bufferDescriptor.usage = usage;
+
+        return device.CreateBuffer(&bufferDescriptor);
+    }
+
+    wgpu::RenderPipeline CreateRenderPipeline(wgpu::BindGroupLayout* bindGroupLayout) {
+        wgpu::ShaderModule vsModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+                #version 450
+                void main() {
+                })");
+
+        wgpu::ShaderModule fsModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+                #version 450
+                layout(std140, set = 0, binding = 0) buffer SBuffer {
+                    vec2 value2;
+                } sBuffer;
+                layout(std140, set = 0, binding = 1) readonly buffer RBuffer {
+                    vec2 value3;
+                } rBuffer;
+                layout(location = 0) out vec4 fragColor;
+                void main() {
+                })");
+
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
+        pipelineDescriptor.vertexStage.module = vsModule;
+        pipelineDescriptor.cFragmentStage.module = fsModule;
+        wgpu::PipelineLayout pipelineLayout =
+            utils::MakeBasicPipelineLayout(device, bindGroupLayout);
+        pipelineDescriptor.layout = pipelineLayout;
+        return device.CreateRenderPipeline(&pipelineDescriptor);
+    }
+
+    wgpu::ComputePipeline CreateComputePipeline(wgpu::BindGroupLayout* bindGroupLayout) {
+        wgpu::ShaderModule csModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
+                #version 450
+                const uint kTileSize = 4;
+                const uint kInstances = 11;
+
+                layout(local_size_x = kTileSize, local_size_y = kTileSize, local_size_z = 1) in;
+                layout(std140, set = 0, binding = 0) buffer SBuffer {
+                    float value2;
+                } dst;
+                layout(std140, set = 0, binding = 1) readonly buffer RBuffer {
+                    readonly float value3;
+                } rdst;
+                void main() {
+                })");
+
+        wgpu::PipelineLayout pipelineLayout =
+            utils::MakeBasicPipelineLayout(device, bindGroupLayout);
+
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.layout = pipelineLayout;
+        csDesc.computeStage.module = csModule;
+        csDesc.computeStage.entryPoint = "main";
+
+        return device.CreateComputePipeline(&csDesc);
+    }
+
+    void TestRenderPassBindGroup(wgpu::BindGroup bindGroup,
+                                 wgpu::BindGroupLayout* bindGroupLayout,
+                                 bool expectation) {
+        if (!expectation) {
+            ASSERT_DEVICE_ERROR(CreateRenderPipeline(bindGroupLayout));
+        } else {
+            wgpu::RenderPipeline renderPipeline = CreateRenderPipeline(bindGroupLayout);
+            DummyRenderPass renderPass(device);
+
+            wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+            wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
+            renderPassEncoder.SetPipeline(renderPipeline);
+            std::array<uint32_t, 2> offsets = {256, 0};
+            renderPassEncoder.SetBindGroup(0, bindGroup, 2, offsets.data());
+            renderPassEncoder.Draw(3, 1, 0, 0);
+            renderPassEncoder.EndPass();
+            commandEncoder.Finish();
+        }
+    }
+
+    void TestComputePassBindGroup(wgpu::BindGroup bindGroup,
+                                  wgpu::BindGroupLayout* bindGroupLayout,
+                                  bool expectation) {
+        if (!expectation) {
+            ASSERT_DEVICE_ERROR(CreateComputePipeline(bindGroupLayout));
+        } else {
+            wgpu::ComputePipeline computePipeline = CreateComputePipeline(bindGroupLayout);
+
+            wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+            wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
+            computePassEncoder.SetPipeline(computePipeline);
+            std::array<uint32_t, 2> offsets = {256, 0};
+            computePassEncoder.SetBindGroup(0, bindGroup, 2, offsets.data());
+            computePassEncoder.Dispatch(1, 1, 1);
+            computePassEncoder.EndPass();
+            commandEncoder.Finish();
+        }
+    }
+};
+
+// Test cases that test bind group layout mismatch with shader. The second item in bind group layout
+// is a writable storage buffer, but the second item in shader is a readonly storage buffer. It is
+// valid.
+TEST_F(BindGroupLayoutCompatibilityTest, RWStorageInBGLWithROStorageInShader) {
+    // Set up the bind group layout.
+    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer, true},
+                 {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::StorageBuffer, true}});
+
+    // Set up the bind group.
+    wgpu::Buffer storageBuffer1 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::Buffer storageBuffer2 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        device, bindGroupLayout,
+        {{0, storageBuffer1, 0, kBindingSize}, {1, storageBuffer2, 0, kBindingSize}});
+
+    TestRenderPassBindGroup(bindGroup, &bindGroupLayout, true);
+
+    TestComputePassBindGroup(bindGroup, &bindGroupLayout, true);
+}
+
+// Test cases that test bind group layout mismatch with shader. The first item in bind group layout
+// is a readonly storage buffer, but the first item in shader is a writable storage buffer. It is
+// invalid.
+TEST_F(BindGroupLayoutCompatibilityTest, ROStorageInBGLWithRWStorageInShader) {
+    // Set up the bind group layout.
+    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::ReadonlyStorageBuffer, true},
+                 {1, wgpu::ShaderStage::Compute | wgpu::ShaderStage::Fragment,
+                  wgpu::BindingType::ReadonlyStorageBuffer, true}});
+
+    // Set up the bind group.
+    wgpu::Buffer storageBuffer1 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::Buffer storageBuffer2 = CreateBuffer(kBufferSize, wgpu::BufferUsage::Storage);
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(
+        device, bindGroupLayout,
+        {{0, storageBuffer1, 0, kBindingSize}, {1, storageBuffer2, 0, kBindingSize}});
+
+    TestRenderPassBindGroup(bindGroup, &bindGroupLayout, false);
+
+    TestComputePassBindGroup(bindGroup, &bindGroupLayout, false);
 }
