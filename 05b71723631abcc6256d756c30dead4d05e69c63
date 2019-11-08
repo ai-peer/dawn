@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e00ad59_9ecc2efe",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-08T17:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "940285e0_64be7960",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f40f24af_0cc21e9b",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "a4d6e45a_6dff55ce",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-08T17:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f40f24af_0cc21e9b",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "efbdb990_9bb19579",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0bd2b4b_79df7db9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-08T17:59:19Z",
+      "side": 1,
+      "message": "Done. Also note that things could be a bit more uniform if we did EmulateEndRenderPass in place of ResolveMultisampledRenderPass.",
+      "parentUuid": "efbdb990_9bb19579",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +175,30 @@
       "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41591a21_df75bab0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-08T17:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2684e7c7_be20ddd9",
+      "range": {
+        "startLine": 1156,
+        "startChar": 0,
+        "endLine": 1156,
+        "endChar": 76
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -212,6 +290,48 @@
     },
     {
       "key": {
+        "uuid": "b0c6f6c1_1b4d2f1c",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-08T17:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e5edea6_bec02d0c",
+      "range": {
+        "startLine": 89,
+        "startChar": 7,
+        "endLine": 90,
+        "endChar": 62
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd394ffa_5e2f722f",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-08T17:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83303a75_6700ce7c",
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a6e9302_4cd09d4c",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 1
@@ -232,6 +352,30 @@
       "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "560047dd_9d8b1c5a",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-08T17:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a6e9302_4cd09d4c",
+      "range": {
+        "startLine": 28,
+        "startChar": 7,
+        "endLine": 28,
+        "endChar": 9
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
