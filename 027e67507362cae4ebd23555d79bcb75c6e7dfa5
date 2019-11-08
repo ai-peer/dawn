@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e112fd0e_53fe92d3",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-08T18:46:02Z",
+      "side": 1,
+      "message": "\u003e I suggest either making the output happens only at the very end of the perf tests when Dawn should already be completely stopped\n\nWe only call AcquireTraceEventBuffer between test runs after spinning on a fence for all execution to complete. I think this is sufficient? (Dawn is completely stopped) The mutex in this function probably isn\u0027t even needed.\n\nIn the future, when we have background threads doing work, there can be a dawn_native::DeviceBase::WaitForIdleForTesting().",
+      "parentUuid": "ede45396_e58cad81",
+      "revId": "027e67507362cae4ebd23555d79bcb75c6e7dfa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a052fd77_29c6d3a7",
         "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "027e67507362cae4ebd23555d79bcb75c6e7dfa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84a3de1e_ffdfa555",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-08T18:46:02Z",
+      "side": 1,
+      "message": "There\u0027s no std::to_string overload for std::thread::id, only the stream operator",
+      "parentUuid": "a052fd77_29c6d3a7",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 48
+      },
+      "revId": "027e67507362cae4ebd23555d79bcb75c6e7dfa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
