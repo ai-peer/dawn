@@ -32,7 +32,7 @@ namespace {
     class VulkanImageWrappingTestBase : public DawnTest {
       public:
         void TestSetUp() override {
-            if (UsesWire() || IsIntel()) {
+            if (UsesWire()) {
                 return;
             }
 
