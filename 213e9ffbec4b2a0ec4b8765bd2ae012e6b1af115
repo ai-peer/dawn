@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ce00faa_c68831e5",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T08:01:27Z",
+      "side": 1,
+      "message": "I don\u0027t think the virtuals are needed here because we know the concrete type in ResourceMemoryAllocator. To be 100% we could assert GetD3D12Resource returns null after the invalidate.",
+      "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
