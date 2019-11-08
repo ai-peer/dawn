@@ -34,6 +34,24 @@
       "revId": "59d762fe87c5be212ce7797689acae08de474428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b827ccc_4a49b46d",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T08:17:48Z",
+      "side": 1,
+      "message": "It\u0027s not great to submit code with known memory safety bugs. Can we debug this further?",
+      "parentUuid": "d78e13bd_b299df49",
+      "revId": "59d762fe87c5be212ce7797689acae08de474428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
