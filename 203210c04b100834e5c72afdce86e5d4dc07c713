@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "32ddbd7e_af9da648",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-08T23:33:08Z",
+      "side": 1,
+      "message": "Done\n\nOops. Just copied the code. But the original code didn\u0027t have a good indentation. Fixed the original code in SetBindGroupValidationTest too.",
+      "parentUuid": "82740625_ae571ef9",
+      "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85e986f6_198adf97",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f212e0d_438d8a1c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-08T23:33:08Z",
+      "side": 1,
+      "message": "Agreed. I also noticed this when I wrote the test. But I was considering that testing the pass might be better because we may have some validations during draw/dispatch. It denotes this kind binding mismatch is REALLY compatible and it can pass all validation of the entire pipeline and render pass. \n\nAnyway, if you still think the test code to use the pipeline is not necessary, I can remove it. It\u0027s easy.",
+      "parentUuid": "85e986f6_198adf97",
+      "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
