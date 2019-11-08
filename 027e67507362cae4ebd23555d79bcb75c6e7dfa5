@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ede45396_e58cad81",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T09:31:22Z",
+      "side": 1,
+      "message": "This is unsafe because parts of Dawn might be modifying the buffers while we are clearing it. I suggest either making the output happens only at the very end of the perf tests when Dawn should already be completely stopped, or adding a mutex to go along each vector (little contention so that is ok hopefully), and in this loop doing an std::move so that we hold the mutex as little as possible.",
+      "revId": "027e67507362cae4ebd23555d79bcb75c6e7dfa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a052fd77_29c6d3a7",
+        "filename": "src/tests/perf_tests/DawnPerfTestPlatform.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-08T09:31:22Z",
+      "side": 1,
+      "message": "nit: std::to_string?",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 48
+      },
+      "revId": "027e67507362cae4ebd23555d79bcb75c6e7dfa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
