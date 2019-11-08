@@ -122,6 +122,7 @@ class DawnTestEnvironment : public testing::Environment {
     static void SetEnvironment(DawnTestEnvironment* env);
 
     void SetUp() override;
+    void TearDown() override;
 
     bool UsesWire() const;
     bool IsBackendValidationEnabled() const;
