@@ -34,6 +34,24 @@
       "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebb0699e_b35ee72e",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-08T19:14:14Z",
+      "side": 1,
+      "message": "We can still have the desired behavior and avoid leaks and future misuse without the virtual.\n\nSince we always call it from the Derived class, we can make ResourceMemoryAllocation::Invalidate a protected member function.\n\nIf someone wants to make a common helper that calls Invalidate on the base class, at that point they\u0027ll be forced to refactor things and do the virtual stuff.",
+      "parentUuid": "0c8b0278_d10d1f82",
+      "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
