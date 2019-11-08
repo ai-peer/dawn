@@ -16,6 +16,24 @@
       "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c8b0278_d10d1f82",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-08T17:47:20Z",
+      "side": 1,
+      "message": "I agree that the current code doesn\u0027t strictly need the virtual. \n\nAre you sure common helper which calls Invalidate on a base ResourceMemoryAllocation pointer will never, ever be written in the future? \n\nIf it ever does, then someone will have to track down mysterious memory leaks again. That make me nervous leaving out the virtual keyword.",
+      "parentUuid": "6ce00faa_c68831e5",
+      "revId": "213e9ffbec4b2a0ec4b8765bd2ae012e6b1af115",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
