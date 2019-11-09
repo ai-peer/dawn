@@ -52,6 +52,12 @@ namespace dawn_native { namespace metal {
     ShaderModule::MetalFunctionData ShaderModule::GetFunction(const char* functionName,
                                                               SingleShaderStage functionStage,
                                                               const PipelineLayout* layout) const {
+        auto* cache = &mCachedFunctionData[functionStage];
+        const auto& it = cache->find(layout);
+        if (it != cache->end()) {
+            return it->second;
+        }
+
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "SPIRV->MSL");
         spirv_cross::CompilerMSL compiler(mSpirv);
 
@@ -131,6 +137,7 @@ namespace dawn_native { namespace metal {
 
         result.needsStorageBufferLength = compiler.needs_buffer_size_buffer();
 
+        cache->emplace(layout, result);
         return result;
     }
 

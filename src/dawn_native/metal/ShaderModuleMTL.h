@@ -15,7 +15,10 @@
 #ifndef DAWNNATIVE_METAL_SHADERMODULEMTL_H_
 #define DAWNNATIVE_METAL_SHADERMODULEMTL_H_
 
+#include "dawn_native/PerStage.h"
 #include "dawn_native/ShaderModule.h"
+
+#include <unordered_map>
 
 #import <Metal/Metal.h>
 
@@ -36,6 +39,23 @@ namespace dawn_native { namespace metal {
             id<MTLFunction> function;
             MTLSize localWorkgroupSize;
             bool needsStorageBufferLength;
+
+            MetalFunctionData() = default;
+            MetalFunctionData(const MetalFunctionData& rhs) {
+                function = rhs.function;
+                localWorkgroupSize = rhs.localWorkgroupSize;
+                needsStorageBufferLength = rhs.needsStorageBufferLength;
+                [function retain];
+            }
+
+            MetalFunctionData& operator=(const MetalFunctionData& rhs) {
+                function = rhs.function;
+                localWorkgroupSize = rhs.localWorkgroupSize;
+                needsStorageBufferLength = rhs.needsStorageBufferLength;
+                [function retain];
+                return *this;
+            }
+
             ~MetalFunctionData() {
                 [function release];
             }
@@ -49,6 +69,7 @@ namespace dawn_native { namespace metal {
         // compiles return invalid MSL. We keep the spirv around and recreate the compiler everytime
         // we need to use it.
         std::vector<uint32_t> mSpirv;
+        mutable PerStage<std::unordered_map<const PipelineLayout*, MetalFunctionData>> mCachedFunctionData;
     };
 
 }}  // namespace dawn_native::metal
