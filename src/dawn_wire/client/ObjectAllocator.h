@@ -16,55 +16,81 @@
 #define DAWNWIRE_CLIENT_OBJECTALLOCATOR_H_
 
 #include "common/Assert.h"
+#include "dawn_wire/client/ObjectAllocatorBase.h"
 
 #include <memory>
 #include <vector>
 
 namespace dawn_wire { namespace client {
 
-    class Client;
-    class Device;
-
     template <typename T>
-    class ObjectAllocator {
+    class ObjectAllocator : public ObjectAllocatorBase {
         using ObjectOwner =
             typename std::conditional<std::is_same<T, Device>::value, Client, Device>::type;
+
+      static constexpr uint32_t kNeedsDestroyFlag = 0x8000'0000;
+      static constexpr uint32_t kMaxSerial = 0x7FFF'FFFF;
 
       public:
         struct ObjectAndSerial {
             ObjectAndSerial(std::unique_ptr<T> object, uint32_t serial)
-                : object(std::move(object)), serial(serial) {
+                : object(std::move(object)), serial(serial), needsDestroy(0) {
             }
             std::unique_ptr<T> object;
-            uint32_t serial;
+            unsigned serial : 31;
+            unsigned needsDestroy : 1;
         };
 
-        ObjectAllocator() {
+        ObjectAllocator(ClientBase* client) : ObjectAllocatorBase(client) {
             // ID 0 is nullptr
             mObjects.emplace_back(nullptr, 0);
         }
 
-        ObjectAndSerial* New(ObjectOwner* owner) {
+        ObjectAndSerial* New(ObjectOwner* owner, ObjectHandle* handle) {
             uint32_t id = GetNewId();
             T* result = new T(owner, 1, id);
             auto object = std::unique_ptr<T>(result);
 
             if (id >= mObjects.size()) {
                 ASSERT(id == mObjects.size());
+                *handle = ObjectHandle{id, 0};
                 mObjects.emplace_back(std::move(object), 0);
             } else {
                 ASSERT(mObjects[id].object == nullptr);
                 // TODO(cwallez@chromium.org): investigate if overflows could cause bad things to
                 // happen
-                mObjects[id].serial++;
+
+                // Include the needsDestroy flag in the serial. It will be sent to the server.
+                uint32_t serial = ++mObjects[id].serial;
+                if (mObjects[id].needsDestroy) {
+                    serial |= 0x8000'0000;
+                }
+
+                *handle = ObjectHandle{id, serial};
+                // Now, clear the flag.
+                mObjects[id].needsDestroy = 0;
                 mObjects[id].object = std::move(object);
             }
 
             return &mObjects[id];
         }
         void Free(T* obj) {
-            FreeId(obj->id);
+            if (mObjects[obj->id].serial < kMaxSerial) {
+                FreeId(obj->id);
+            }
+
+            ASSERT(!mObjects[obj->id].needsDestroy);
+            mObjects[obj->id].needsDestroy = 1;
+
+            EnqueueDestroy(GetObjectType(obj), obj->id);
+
             mObjects[obj->id].object = nullptr;
+        }
+
+        bool AcquireNeedsDestroy(uint32_t id) {
+            bool needsDestroy = mObjects[id].needsDestroy != 0;
+            mObjects[id].needsDestroy = 0;
+            return needsDestroy;
         }
 
         T* GetObject(uint32_t id) {
@@ -82,24 +108,9 @@ namespace dawn_wire { namespace client {
         }
 
       private:
-        uint32_t GetNewId() {
-            if (mFreeIds.empty()) {
-                return mCurrentId++;
-            }
-            uint32_t id = mFreeIds.back();
-            mFreeIds.pop_back();
-            return id;
-        }
-        void FreeId(uint32_t id) {
-            mFreeIds.push_back(id);
-        }
-
-        // 0 is an ID reserved to represent nullptr
-        uint32_t mCurrentId = 1;
-        std::vector<uint32_t> mFreeIds;
         std::vector<ObjectAndSerial> mObjects;
-        Device* mDevice;
     };
+
 }}  // namespace dawn_wire::client
 
 #endif  // DAWNWIRE_CLIENT_OBJECTALLOCATOR_H_

@@ -43,13 +43,22 @@ namespace dawn_wire { namespace server {
     }
 
     bool Server::InjectTexture(WGPUTexture texture, uint32_t id, uint32_t generation) {
+
+        constexpr uint32_t kNeedsDestroyFlag = 0x8000'0000;
+        uint32_t serial = generation & ~kNeedsDestroyFlag;
+        if ((generation & kNeedsDestroyFlag) != 0) {
+            if (!DoDestroyObject(ObjectType::Texture, id)) {
+                return false;
+            }
+        }
+
         ObjectData<WGPUTexture>* data = TextureObjects().Allocate(id);
         if (data == nullptr) {
             return false;
         }
 
         data->handle = texture;
-        data->serial = generation;
+        data->serial = serial;
         data->allocated = true;
 
         // The texture is externally owned so it shouldn't be destroyed when we receive a destroy

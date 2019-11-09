@@ -49,11 +49,20 @@ namespace dawn_wire { namespace server {
                     {% set Type = member.handle_type.name.CamelCase() %}
                     {% set name = as_varName(member.name) %}
 
+                    constexpr uint32_t kNeedsDestroyFlag = 0x8000'0000;
+                    uint32_t serial = cmd.{{name}}.serial & ~kNeedsDestroyFlag;
+                    if ((cmd.{{name}}.serial & kNeedsDestroyFlag) != 0) {
+                        if (!DoDestroyObject(ObjectType::{{Type}}, cmd.{{name}}.id)) {
+                            return false;
+                        }
+                    }
+
                     auto* {{name}}Data = {{Type}}Objects().Allocate(cmd.{{name}}.id);
                     if ({{name}}Data == nullptr) {
                         return false;
                     }
-                    {{name}}Data->serial = cmd.{{name}}.serial;
+                    {{name}}Data->serial = serial;
+
                 {% endfor %}
 
                 //* Do command

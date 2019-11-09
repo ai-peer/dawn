@@ -21,9 +21,21 @@
 
 namespace dawn_wire { namespace client {
 
+    {% for type in by_category["object"] %}
+        constexpr ObjectType GetObjectType(const {{type.name.CamelCase()}}*){
+            return ObjectType::{{type.name.CamelCase()}};
+        }
+    {% endfor %}
+
+    constexpr uint32_t kObjectTypeCount = {{ len(by_category["object"]) }};
+
     class ClientBase : public ObjectIdProvider {
       public:
-        ClientBase() {
+        ClientBase() :
+        {% for type in by_category["object"] %}
+           m{{type.name.CamelCase()}}Allocator(this){{ "," if not loop.last }}
+        {% endfor %}
+        {
         }
 
         virtual ~ClientBase() {
@@ -37,6 +49,18 @@ namespace dawn_wire { namespace client {
                 return m{{type.name.CamelCase()}}Allocator;
             }
         {% endfor %}
+
+        bool AcquireNeedsDestroy(ObjectType type, uint32_t id) {
+            switch (type) {
+                {% for type in by_category["object"] %}
+                    case ObjectType::{{type.name.CamelCase()}}:
+                        return {{type.name.CamelCase()}}Allocator().AcquireNeedsDestroy(id);
+                {% endfor %}
+                    default:
+                        UNREACHABLE();
+                        return false;
+            }
+        }
 
       private:
         // Implementation of the ObjectIdProvider interface

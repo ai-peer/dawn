@@ -48,6 +48,7 @@ namespace dawn_wire {
         DawnProcTable GetProcs() const;
         const volatile char* HandleCommands(const volatile char* commands,
                                             size_t size) override final;
+        bool Flush();
 
         ReservedTexture ReserveTexture(WGPUDevice device);
 

@@ -585,7 +585,7 @@ void DawnTestBase::WaitABit() {
 
 void DawnTestBase::FlushWire() {
     if (gTestEnv->UsesWire()) {
-        bool C2SFlushed = mC2sBuf->Flush();
+        bool C2SFlushed = mWireClient->Flush() && mC2sBuf->Flush();
         bool S2CFlushed = mS2cBuf->Flush();
         ASSERT(C2SFlushed);
         ASSERT(S2CFlushed);

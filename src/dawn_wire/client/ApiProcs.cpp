@@ -112,16 +112,15 @@ namespace dawn_wire { namespace client {
         Device* device = reinterpret_cast<Device*>(cDevice);
         Client* wireClient = device->GetClient();
 
-        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device);
+        DeviceCreateBufferCmd cmd;
+        cmd.self = cDevice;
+        cmd.descriptor = descriptor;
+
+        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device, &cmd.result);
         Buffer* buffer = bufferObjectAndSerial->object.get();
         // Store the size of the buffer so that mapping operations can allocate a
         // MemoryTransfer handle of the proper size.
         buffer->size = descriptor->size;
-
-        DeviceCreateBufferCmd cmd;
-        cmd.self = cDevice;
-        cmd.descriptor = descriptor;
-        cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->serial};
 
         size_t requiredSize = cmd.GetRequiredSize();
         char* allocatedBuffer = static_cast<char*>(wireClient->GetCmdSpace(requiredSize));
@@ -136,7 +135,11 @@ namespace dawn_wire { namespace client {
         Device* device = reinterpret_cast<Device*>(cDevice);
         Client* wireClient = device->GetClient();
 
-        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device);
+        DeviceCreateBufferMappedCmd cmd;
+        cmd.device = cDevice;
+        cmd.descriptor = descriptor;
+
+        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device, &cmd.result);
         Buffer* buffer = bufferObjectAndSerial->object.get();
         buffer->size = descriptor->size;
 
@@ -173,10 +176,6 @@ namespace dawn_wire { namespace client {
         // Get the serialization size of the WriteHandle.
         size_t handleCreateInfoLength = buffer->writeHandle->SerializeCreateSize();
 
-        DeviceCreateBufferMappedCmd cmd;
-        cmd.device = cDevice;
-        cmd.descriptor = descriptor;
-        cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->serial};
         cmd.handleCreateInfoLength = handleCreateInfoLength;
         cmd.handleCreateInfo = nullptr;
 
@@ -197,7 +196,11 @@ namespace dawn_wire { namespace client {
         Device* device = reinterpret_cast<Device*>(cDevice);
         Client* wireClient = device->GetClient();
 
-        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device);
+        DeviceCreateBufferMappedAsyncCmd cmd;
+        cmd.device = cDevice;
+        cmd.descriptor = descriptor;
+
+        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device, &cmd.result);
         Buffer* buffer = bufferObjectAndSerial->object.get();
         buffer->size = descriptor->size;
 
@@ -248,11 +251,7 @@ namespace dawn_wire { namespace client {
         // Get the serialization size of the WriteHandle.
         size_t handleCreateInfoLength = writeHandle->SerializeCreateSize();
 
-        DeviceCreateBufferMappedAsyncCmd cmd;
-        cmd.device = cDevice;
-        cmd.descriptor = descriptor;
         cmd.requestSerial = serial;
-        cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->serial};
         cmd.handleCreateInfoLength = handleCreateInfoLength;
         cmd.handleCreateInfo = nullptr;
 
@@ -374,8 +373,7 @@ namespace dawn_wire { namespace client {
 
         QueueCreateFenceCmd cmd;
         cmd.self = cSelf;
-        auto* allocation = device->GetClient()->FenceAllocator().New(device);
-        cmd.result = ObjectHandle{allocation->object->id, allocation->serial};
+        auto* allocation = device->GetClient()->FenceAllocator().New(device, &cmd.result);
         cmd.descriptor = descriptor;
 
         size_t requiredSize = cmd.GetRequiredSize();

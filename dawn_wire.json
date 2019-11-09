@@ -55,6 +55,11 @@
         "destroy object": [
             { "name": "object type", "type": "ObjectType" },
             { "name": "object id", "type": "ObjectId" }
+        ],
+        "destroy objects": [
+            { "name": "object type", "type": "ObjectType" },
+            { "name": "count", "type": "uint32_t" },
+            { "name": "object ids", "type": "ObjectId", "annotation": "const*", "length": "count" }
         ]
     },
     "return commands": {

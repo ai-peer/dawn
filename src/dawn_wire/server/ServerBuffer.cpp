@@ -103,11 +103,19 @@ namespace dawn_wire { namespace server {
             return false;
         }
 
+        constexpr uint32_t kNeedsDestroyFlag = 0x8000'0000;
+        uint32_t serial = bufferResult.serial & ~kNeedsDestroyFlag;
+        if ((bufferResult.serial & kNeedsDestroyFlag) != 0) {
+            if (!DoDestroyObject(ObjectType::Buffer, bufferResult.id)) {
+                return false;
+            }
+        }
+
         auto* resultData = BufferObjects().Allocate(bufferResult.id);
         if (resultData == nullptr) {
             return false;
         }
-        resultData->serial = bufferResult.serial;
+        resultData->serial = serial;
 
         WGPUCreateBufferMappedResult result = mProcs.deviceCreateBufferMapped(device, descriptor);
         ASSERT(result.buffer != nullptr);
@@ -155,7 +163,7 @@ namespace dawn_wire { namespace server {
         ASSERT(bufferData != nullptr);
 
         ReturnBufferMapWriteAsyncCallbackCmd cmd;
-        cmd.buffer = ObjectHandle{bufferResult.id, bufferResult.serial};
+        cmd.buffer = ObjectHandle{bufferResult.id, bufferData->serial};
         cmd.requestSerial = requestSerial;
         cmd.status = bufferData->mapWriteState == BufferMapWriteState::Mapped
                          ? WGPUBufferMapAsyncStatus_Success

@@ -605,6 +605,8 @@ dawn_component("libdawn_wire") {
     "src/dawn_wire/client/Fence.cpp",
     "src/dawn_wire/client/Fence.h",
     "src/dawn_wire/client/ObjectAllocator.h",
+    "src/dawn_wire/client/ObjectAllocatorBase.cpp",
+    "src/dawn_wire/client/ObjectAllocatorBase.h",
     "src/dawn_wire/server/ObjectStorage.h",
     "src/dawn_wire/server/Server.cpp",
     "src/dawn_wire/server/Server.h",

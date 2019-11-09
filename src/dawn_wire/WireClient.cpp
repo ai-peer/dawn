@@ -37,6 +37,10 @@ namespace dawn_wire {
         return mImpl->HandleCommands(commands, size);
     }
 
+    bool WireClient::Flush() {
+        return mImpl->Flush();
+    }
+
     ReservedTexture WireClient::ReserveTexture(WGPUDevice device) {
         return mImpl->ReserveTexture(device);
     }

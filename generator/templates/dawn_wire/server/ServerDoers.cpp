@@ -99,4 +99,13 @@ namespace dawn_wire { namespace server {
         return true;
     }
 
+    bool Server::DoDestroyObjects(ObjectType objectType, uint32_t count, const ObjectId* objectIds) {
+        for (uint32_t i = 0; i < count; ++i) {
+            if (!DoDestroyObject(objectType, objectIds[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }}  // namespace dawn_wire::server

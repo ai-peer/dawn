@@ -45,8 +45,7 @@ namespace dawn_wire { namespace client {
 
                     //* For object creation, store the object ID the client will use for the result.
                     {% if method.return_type.category == "object" %}
-                        auto* allocation = self->device->GetClient()->{{method.return_type.name.CamelCase()}}Allocator().New(self->device);
-                        cmd.result = ObjectHandle{allocation->object->id, allocation->serial};
+                        auto* allocation = self->device->GetClient()->{{method.return_type.name.CamelCase()}}Allocator().New(self->device, &cmd.result);
                     {% endif %}
 
                     {% for arg in method.arguments %}
@@ -74,14 +73,6 @@ namespace dawn_wire { namespace client {
                 if (obj->refcount > 0) {
                     return;
                 }
-
-                DestroyObjectCmd cmd;
-                cmd.objectType = ObjectType::{{type.name.CamelCase()}};
-                cmd.objectId = obj->id;
-
-                size_t requiredSize = cmd.GetRequiredSize();
-                char* allocatedBuffer = static_cast<char*>(obj->device->GetClient()->GetCmdSpace(requiredSize));
-                cmd.Serialize(allocatedBuffer);
 
                 obj->device->GetClient()->{{type.name.CamelCase()}}Allocator().Free(obj);
             }

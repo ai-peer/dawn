@@ -22,9 +22,22 @@
 
 namespace dawn_wire {
 
+    namespace client {
+      class Client;
+    }
+
+    namespace server {
+      class Server;
+    }
+
     class DAWN_WIRE_EXPORT CommandSerializer {
       public:
         virtual ~CommandSerializer() = default;
+
+      private:
+        friend class client::Client;
+        friend class server::Server;
+
         virtual void* GetCmdSpace(size_t size) = 0;
         virtual bool Flush() = 0;
     };

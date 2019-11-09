@@ -23,6 +23,10 @@
 #include "dawn_wire/WireDeserializeAllocator.h"
 #include "dawn_wire/client/ClientBase_autogen.h"
 
+#include <array>
+#include <queue>
+#include <vector>
+
 namespace dawn_wire { namespace client {
 
     class Device;
@@ -40,6 +44,8 @@ namespace dawn_wire { namespace client {
             return mSerializer->GetCmdSpace(size);
         }
 
+        bool Flush();
+
         WGPUDevice GetDevice() const {
             return reinterpret_cast<WGPUDeviceImpl*>(mDevice);
         }
@@ -47,6 +53,8 @@ namespace dawn_wire { namespace client {
         MemoryTransferService* GetMemoryTransferService() const {
             return mMemoryTransferService;
         }
+
+        void EnqueueDestroy(ObjectType objectType, uint32_t id);
 
       private:
 #include "dawn_wire/client/ClientPrototypes_autogen.inc"
@@ -56,6 +64,9 @@ namespace dawn_wire { namespace client {
         WireDeserializeAllocator mAllocator;
         MemoryTransferService* mMemoryTransferService = nullptr;
         std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
+
+        std::array<std::vector<uint32_t>, kObjectTypeCount> mObjectsToDestroy;
+        uint32_t mTotalObjectsToDestroy = 0;
     };
 
     DawnProcTable GetProcs();
