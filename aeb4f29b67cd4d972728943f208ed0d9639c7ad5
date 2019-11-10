@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0544458d_b63602da",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-10T00:30:12Z",
+      "side": 1,
+      "message": "The previous value is not good. If one draw call succeeds and the other fails, we can get the expected result too. This is not what we want. We want to make sure that both draw calls succeed.\n\nHowever, if I set the value to 0.125, it fails on NV (Intel and AMD are OK). Its result is 254, not 255 as we expected. So I change it to 0.126 in order to get rid of the annoying precision issue, just as a few other values we set, for example, 0.501.",
+      "range": {
+        "startLine": 472,
+        "startChar": 34,
+        "endLine": 472,
+        "endChar": 52
+      },
+      "revId": "aeb4f29b67cd4d972728943f208ed0d9639c7ad5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a2f5412_8e2a27e3",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-10T00:30:12Z",
+      "side": 1,
+      "message": "It is intuitively that the result should be 2 * color0 + color1 + 2 * color2 + color3. And this is also what we wanted to test: all unchanged bindGroupLayout should keep the same (the first one: a uniform buffer, and the third one: a storage buffer in this test), not only the first successive one or two. \n\nSo I changed alpha blending factors and make it to be an additive one, just as color blending factors. Well, we can keep the blending factors, but change the color: \ncolor2 \u003d {0, 0, 0.501, 0}, color3 \u003d {0, 0, 0, 1}. But I prefer to change alpha blending factors, because it fits the need of the case I revised above too. And it is easy to understand these test cases if both color and alpha are additive: We don\u0027t need to worry about the differences between color blending and alpha blending.",
+      "range": {
+        "startLine": 711,
+        "startChar": 9,
+        "endLine": 711,
+        "endChar": 50
+      },
+      "revId": "aeb4f29b67cd4d972728943f208ed0d9639c7ad5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
