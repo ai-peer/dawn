@@ -20,7 +20,7 @@
 namespace dawn_native { namespace d3d12 {
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
-        : BindGroupLayoutBase(device, descriptor), mDescriptorCounts{} {
+        : BindGroupLayoutBase(device, descriptor), mDevice(device), mDescriptorCounts{} {
         const auto& groupInfo = GetBindingInfo();
 
         for (uint32_t binding : IterateBitSet(groupInfo.mask)) {
@@ -151,14 +151,6 @@ namespace dawn_native { namespace d3d12 {
         return mDescriptorCounts[Sampler] > 0;
     }
 
-    uint32_t BindGroupLayout::GetCbvUavSrvDescriptorCount() const {
-        return mDescriptorCounts[CBV] + mDescriptorCounts[UAV] + mDescriptorCounts[SRV];
-    }
-
-    uint32_t BindGroupLayout::GetSamplerDescriptorCount() const {
-        return mDescriptorCounts[Sampler];
-    }
-
     const D3D12_DESCRIPTOR_RANGE* BindGroupLayout::GetCbvUavSrvDescriptorRanges() const {
         return mRanges;
     }
@@ -167,4 +159,15 @@ namespace dawn_native { namespace d3d12 {
         return &mRanges[Sampler];
     }
 
+    ResultOrError<DescriptorHeapHandle> BindGroupLayout::AllocateSamplerDescriptors() {
+        return mDevice->GetDescriptorHeapAllocator()->AllocateGPUHeap(
+            D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, mDescriptorCounts[Sampler]);
+    }
+
+    ResultOrError<DescriptorHeapHandle> BindGroupLayout::AllocateCbVUavSrvDescriptors() {
+        const uint32_t descriptorCount =
+            mDescriptorCounts[CBV] + mDescriptorCounts[UAV] + mDescriptorCounts[SRV];
+        return mDevice->GetDescriptorHeapAllocator()->AllocateGPUHeap(
+            D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, descriptorCount);
+    }
 }}  // namespace dawn_native::d3d12
