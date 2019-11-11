@@ -61,6 +61,15 @@ namespace dawn_native {
         return supportedExtensionsSet.GetEnabledExtensionNames();
     }
 
+    WGPUDeviceProperties Adapter::GetAdapterProperties() const {
+        WGPUDeviceProperties adapterProperties = {};
+
+        ExtensionsSet supportedExtensionsSet = mImpl->GetSupportedExtensions();
+        supportedExtensionsSet.InitializeDeviceProperties(&adapterProperties);
+
+        return adapterProperties;
+    }
+
     Adapter::operator bool() const {
         return mImpl != nullptr;
     }

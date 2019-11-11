@@ -60,6 +60,12 @@ namespace dawn_native {
         return enabledExtensionNames;
     }
 
+    void ExtensionsSet::InitializeDeviceProperties(WGPUDeviceProperties* properties) const {
+        ASSERT(properties != nullptr);
+
+        properties->textureCompressionBC = IsEnabled(Extension::TextureCompressionBC);
+    }
+
     const char* ExtensionEnumToName(Extension extension) {
         ASSERT(extension != Extension::InvalidEnum);
 
