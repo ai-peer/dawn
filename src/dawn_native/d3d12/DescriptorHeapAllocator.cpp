@@ -68,6 +68,10 @@ namespace dawn_native { namespace d3d12 {
         uint32_t allocationSize,
         DescriptorHeapInfo* heapInfo,
         D3D12_DESCRIPTOR_HEAP_FLAGS flags) {
+        if (count == 0) {
+            return DescriptorHeapHandle{};  // invalid
+        }
+
         const Serial pendingSerial = mDevice->GetPendingCommandSerial();
         uint64_t startOffset = (heapInfo->heap == nullptr)
                                    ? RingBufferAllocator::kInvalidOffset
@@ -130,5 +134,10 @@ namespace dawn_native { namespace d3d12 {
                 mGpuDescriptorHeapInfos[i].allocator.Deallocate(lastCompletedSerial);
             }
         }
+    }
+
+    ID3D12DescriptorHeap* DescriptorHeapAllocator::GetGPUDescriptorHeap(
+        D3D12_DESCRIPTOR_HEAP_TYPE type) const {
+        return mGpuDescriptorHeapInfos[type].heap.Get();
     }
 }}  // namespace dawn_native::d3d12
