@@ -62,6 +62,10 @@ namespace dawn_native { namespace vulkan {
         // textures before they are destroyed. On failure, returns -1
         DAWN_NATIVE_EXPORT int ExportSignalSemaphoreOpaqueFD(WGPUDevice cDevice,
                                                              WGPUTexture cTexture);
+
+        DAWN_NATIVE_EXPORT int ResetVulkanImageOpaqueFD(WGPUDevice cDevice,
+                                                        WGPUTexture cTexture,
+                                                        std::vector<int>& waitHandles);
 #endif  // __linux__
 }}  // namespace dawn_native::vulkan
 

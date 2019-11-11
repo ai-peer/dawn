@@ -542,6 +542,13 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
+    void Texture::SetFromExternal(VkSemaphore signalSemaphore,
+                                  std::vector<VkSemaphore> waitSemaphores) {
+        mExternalState = ExternalState::PendingAcquire;
+        mSignalSemaphore = signalSemaphore;
+        mWaitRequirements = std::move(waitSemaphores);
+    }
+
     MaybeError Texture::SignalAndDestroy(VkSemaphore* outSignalSemaphore) {
         Device* device = ToBackend(GetDevice());
 
@@ -557,7 +564,7 @@ namespace dawn_native { namespace vulkan {
         ASSERT(mSignalSemaphore != VK_NULL_HANDLE);
 
         // Release the texture
-        mExternalState = ExternalState::PendingRelease;
+        // mExternalState = ExternalState::PendingRelease;
         TransitionUsageNow(device->GetPendingRecordingContext(), wgpu::TextureUsage::None);
 
         // Queue submit to signal we are done with the texture
@@ -569,7 +576,8 @@ namespace dawn_native { namespace vulkan {
         mSignalSemaphore = VK_NULL_HANDLE;
 
         // Destroy the texture so it can't be used again
-        DestroyInternal();
+        // TODO (dawn_renderer): It's now re-used.
+        // DestroyInternal();
         return {};
     }
 

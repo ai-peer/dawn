@@ -636,6 +636,28 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
+    MaybeError Device::ResetTextureWrappingVulkanImage(
+        Texture* texture,
+        std::vector<ExternalSemaphoreHandle>& waitHandles) {
+        VkSemaphore signalSemaphore = VK_NULL_HANDLE;
+        std::vector<VkSemaphore> waitSemaphores;
+        waitSemaphores.reserve(waitHandles.size());
+
+        // Create an external semaphore to signal when the texture is done being used
+        DAWN_TRY_ASSIGN(signalSemaphore, mExternalSemaphoreService->CreateExportableSemaphore());
+
+        // Import semaphores we have to wait on before using the texture
+        for (const ExternalSemaphoreHandle& handle : waitHandles) {
+            VkSemaphore semaphore = VK_NULL_HANDLE;
+            DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
+            waitSemaphores.push_back(semaphore);
+        }
+
+        texture->SetFromExternal(signalSemaphore, waitSemaphores);
+
+        return {};
+    }
+
     TextureBase* Device::CreateTextureWrappingVulkanImage(
         const ExternalImageDescriptor* descriptor,
         ExternalMemoryHandle memoryHandle,

@@ -68,6 +68,7 @@ namespace dawn_native { namespace vulkan {
                                                  uint32_t layerCount);
 
         MaybeError SignalAndDestroy(VkSemaphore* outSignalSemaphore);
+        void SetFromExternal(VkSemaphore signalSemaphore, std::vector<VkSemaphore> waitSemaphores);
 
       private:
         using TextureBase::TextureBase;

@@ -73,6 +73,9 @@ namespace dawn_native { namespace vulkan {
 
         MaybeError SignalAndExportExternalTexture(Texture* texture,
                                                   ExternalSemaphoreHandle* outHandle);
+        MaybeError ResetTextureWrappingVulkanImage(
+            Texture* texture,
+            std::vector<ExternalSemaphoreHandle>& waitHandles);
 
         // Dawn API
         CommandBufferBase* CreateCommandBuffer(CommandEncoderBase* encoder,
