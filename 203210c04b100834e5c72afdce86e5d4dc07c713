@@ -69,6 +69,24 @@
       "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ab91906_18a3915e",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-11T17:22:47Z",
+      "side": 1,
+      "message": "For validation I don\u0027t think we need to test setBindGroup compatibility with the layout, because that\u0027s already covered by BindGroup creation so having simpler code here is worth it.",
+      "parentUuid": "8f212e0d_438d8a1c",
+      "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
