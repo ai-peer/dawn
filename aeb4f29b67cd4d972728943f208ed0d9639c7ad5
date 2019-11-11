@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b5caa38a_85d01de2",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-11T09:29:09Z",
+      "side": 1,
+      "message": "Can you add a comment above it that says the color will be added 8 times, so the value should be 0.125 but because of precision issues we choose 0.126? Actually I think the most correct value would be ((255 + 3) / 4) / 255.0f but no need to change it to that.",
+      "parentUuid": "0544458d_b63602da",
+      "range": {
+        "startLine": 472,
+        "startChar": 34,
+        "endLine": 472,
+        "endChar": 52
+      },
+      "revId": "aeb4f29b67cd4d972728943f208ed0d9639c7ad5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a2f5412_8e2a27e3",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 4
