@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1ffbeed7_38aa091a",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-11T18:44:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5caa38a_85d01de2",
+      "range": {
+        "startLine": 472,
+        "startChar": 34,
+        "endLine": 472,
+        "endChar": 52
+      },
+      "revId": "aeb4f29b67cd4d972728943f208ed0d9639c7ad5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a2f5412_8e2a27e3",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 4
