@@ -52,6 +52,24 @@
       "revId": "59d762fe87c5be212ce7797689acae08de474428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db3b5c98_f1aa6922",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-11-11T01:14:26Z",
+      "side": 1,
+      "message": "Sure. Let me fix this in this patch :)",
+      "parentUuid": "9b827ccc_4a49b46d",
+      "revId": "59d762fe87c5be212ce7797689acae08de474428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
