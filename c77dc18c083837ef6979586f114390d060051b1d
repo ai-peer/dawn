@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2d3914a_7ffdb9bf",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-11T16:42:27Z",
+      "side": 1,
+      "message": "note: we should rename this to WGPUDawnDeviceProperties at some point so people know it is non-standard webgpu.h",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "c77dc18c083837ef6979586f114390d060051b1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f83d3d2b_8584dce4",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-11T16:42:27Z",
+      "side": 1,
+      "message": "nit: Function in this file are supposed to just be proxies to the real implementation. Can this just be a proxy and the code moved in AdapterBase?",
+      "revId": "c77dc18c083837ef6979586f114390d060051b1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55db0856_7970e6a8",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-11T16:42:27Z",
+      "side": 1,
+      "message": "Instead of this where we\u0027ll have to remember to add the line on every addition of an extension, can we have a pointer to a data member of WGPUDawnDeviceProperties stored in ExtensionInfo. See example in cppreference on how to do this: https://en.cppreference.com/w/cpp/language/pointer\n\nIt would be like \n\n// Declare it with\nstruct ExtensionInfo {\n  bool WGPUDawnDeviceProperties::* memberInDeviceProperties;\n}\n\n// Set it with\n\u0026WGPUDawnDeviceProperties::textureCompressionBC\n\n// Use it with\n(*properties)::*memberInDeviceProperties \u003d true;",
+      "revId": "c77dc18c083837ef6979586f114390d060051b1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
