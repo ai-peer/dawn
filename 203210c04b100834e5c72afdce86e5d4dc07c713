@@ -87,6 +87,24 @@
       "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b2b3bf6_4148fbf0",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-11T19:26:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ab91906_18a3915e",
+      "revId": "203210c04b100834e5c72afdce86e5d4dc07c713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
