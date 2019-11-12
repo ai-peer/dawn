@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a628709_69e17819",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-12T16:59:54Z",
+      "side": 1,
+      "message": "nit: whitespace?",
+      "revId": "12449eb2bf4803cd2a4b159befda64cc71222e90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea0de336_2432c74b",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-12T16:59:54Z",
+      "side": 1,
+      "message": "You fixed this!",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 100
+      },
+      "revId": "12449eb2bf4803cd2a4b159befda64cc71222e90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
