@@ -131,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "b1c50153_02635ae8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-12T10:35:56Z",
+      "side": 1,
+      "message": "We don\u0027t have pure stencil formats yet but I\u0027m sure it will happen one day so we might as well write the symmetric logic now.",
+      "parentUuid": "291f4bfc_21652868",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8660530_f42c61d7",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5

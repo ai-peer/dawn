@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d732d663_b386ea9c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-12T10:35:56Z",
+      "side": 1,
+      "message": "I think you mean Clear here. We should have a test that catch this if we don\u0027t already.",
+      "range": {
+        "startLine": 961,
+        "startChar": 74,
+        "endLine": 961,
+        "endChar": 79
+      },
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96189859_ef2d6d7e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-12T10:35:56Z",
+      "side": 1,
+      "message": "This can be phrased as ASSERT(!hasStencil || attachmentInfo.stencilStoreOp \u003d\u003d wgpu::StoreOp::Clear);",
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "273866a3_d01b3f13",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-12T10:35:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
