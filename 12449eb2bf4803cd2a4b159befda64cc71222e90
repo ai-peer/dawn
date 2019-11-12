@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "acf4ed5a_3466ebe9",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-12T18:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a628709_69e17819",
+      "revId": "12449eb2bf4803cd2a4b159befda64cc71222e90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea0de336_2432c74b",
         "filename": "src/dawn_native/ComputePassEncoder.h",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "12449eb2bf4803cd2a4b159befda64cc71222e90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "528a003f_5564aec8",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-12T18:20:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea0de336_2432c74b",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 100
+      },
+      "revId": "12449eb2bf4803cd2a4b159befda64cc71222e90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
