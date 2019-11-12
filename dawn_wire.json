@@ -86,7 +86,10 @@
     },
     "special items": {
         "client_side_structures": [
-            "CreateBufferMappedResult"
+            "CreateBufferMappedResult",
+            "SurfaceDescriptorFromMetalLayer",
+            "SurfaceDescriptorFromWindowsHwnd",
+            "SurfaceDescriptorFromXlib"
         ],
         "client_side_commands": [
             "BufferSetSubData",
