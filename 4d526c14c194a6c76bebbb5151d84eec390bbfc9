@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d0838c0f_d23ec8ed",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-12T17:07:54Z",
+      "side": 1,
+      "message": "I think this is correct. If it\u0027s STORE, then the content will be initialized because we\u0027re writing to it.\n\nIf it\u0027s CLEAR, it\u0027s actually DISCARD, in which case we mark it as uninitialized so that it will get lazy cleared in the future.\n\n\nAlthough thinking about it now, if you have STORE and never write to it in the shader, then it would it still be uninitialized? Do we need a shader transform to initialize output attachments to 0?",
+      "parentUuid": "d732d663_b386ea9c",
+      "range": {
+        "startLine": 961,
+        "startChar": 74,
+        "endLine": 961,
+        "endChar": 79
+      },
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "96189859_ef2d6d7e",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 8
@@ -53,6 +77,52 @@
       "writtenOn": "2019-11-12T10:35:56Z",
       "side": 1,
       "message": "ditto",
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b814cc4c_6fdfca24",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-12T17:07:54Z",
+      "side": 1,
+      "message": "nit: renderPassBuilder",
+      "range": {
+        "startLine": 64,
+        "startChar": 48,
+        "endLine": 64,
+        "endChar": 65
+      },
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7cc75f9_33d4b0e3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-12T17:07:54Z",
+      "side": 1,
+      "message": "nit: renderPassBuilder",
+      "range": {
+        "startLine": 66,
+        "startChar": 61,
+        "endLine": 66,
+        "endChar": 78
+      },
       "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
