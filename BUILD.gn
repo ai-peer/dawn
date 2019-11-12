@@ -239,6 +239,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/ShaderModule.h",
     "src/dawn_native/StagingBuffer.cpp",
     "src/dawn_native/StagingBuffer.h",
+    "src/dawn_native/Surface.cpp",
+    "src/dawn_native/Surface.h",
     "src/dawn_native/SwapChain.cpp",
     "src/dawn_native/SwapChain.h",
     "src/dawn_native/Texture.cpp",

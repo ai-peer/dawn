@@ -1176,6 +1176,42 @@
             {"name": "pass op", "type": "stencil operation", "default": "keep"}
         ]
     },
+    "surface": {
+        "category": "object"
+    },
+    "surface descriptor": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
+    },
+    "surface descriptor from metal layer": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "s type", "type": "s type", "default": "surface descriptor from metal layer"},
+            {"name": "layer", "type": "void", "annotation": "*"}
+        ]
+    },
+    "surface descriptor from windows hwnd": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "s type", "type": "s type", "default": "surface descriptor from windows hwnd"},
+            {"name": "hinstance", "type": "void", "annotation": "*"},
+            {"name": "hwnd", "type": "void", "annotation": "*"}
+        ]
+    },
+    "surface descriptor from xlib": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "s type", "type": "s type", "default": "surface descriptor from xlib"},
+            {"name": "display", "type": "void", "annotation": "*"},
+            {"name": "window", "type": "uint64_t"}
+        ]
+    },
     "swap chain": {
         "category": "object",
         "methods": [
@@ -1198,6 +1234,15 @@
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "implementation", "type": "uint64_t"}
+        ]
+    },
+    "s type": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "invalid"},
+            {"value": 1, "name": "surface descriptor from metal layer"},
+            {"value": 2, "name": "surface descriptor from windows hwnd"},
+            {"value": 3, "name": "surface descriptor from xlib"}
         ]
     },
     "texture": {
