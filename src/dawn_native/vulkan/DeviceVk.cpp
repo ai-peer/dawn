@@ -317,8 +317,6 @@ namespace dawn_native { namespace vulkan {
         CommandPoolAndBuffer submittedCommands = {mRecordingContext.commandPool,
                                                   mRecordingContext.commandBuffer};
         mCommandsInFlight.Enqueue(submittedCommands, mLastSubmittedSerial);
-        mRecordingContext = CommandRecordingContext();
-        DAWN_TRY(PrepareRecordingContext());
 
         for (VkSemaphore semaphore : mRecordingContext.waitSemaphores) {
             mDeleter->DeleteWhenUnused(semaphore);
@@ -327,6 +325,9 @@ namespace dawn_native { namespace vulkan {
         for (VkSemaphore semaphore : mRecordingContext.signalSemaphores) {
             mDeleter->DeleteWhenUnused(semaphore);
         }
+
+        mRecordingContext = CommandRecordingContext();
+        DAWN_TRY(PrepareRecordingContext());
 
         return {};
     }
