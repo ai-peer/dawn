@@ -446,6 +446,30 @@
       "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c82d92fa_72c34146",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1c45ae6_6712bea4",
+      "range": {
+        "startLine": 167,
+        "startChar": 45,
+        "endLine": 167,
+        "endChar": 67
+      },
+      "revId": "05b71723631abcc6256d756c30dead4d05e69c63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "334f7eb6_dca87692",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71ff4e03_d0afe940",
+      "range": {
+        "startLine": 599,
+        "startChar": 34,
+        "endLine": 599,
+        "endChar": 45
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9715a3d7_b286ca92",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d8db6135_a41501ca",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9715a3d7_b286ca92",
+      "range": {
+        "startLine": 962,
+        "startChar": 60,
+        "endLine": 962,
+        "endChar": 65
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca77045d_4d7d6209",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5
@@ -59,6 +107,24 @@
       "writtenOn": "2019-11-08T21:13:09Z",
       "side": 1,
       "message": "Maybe do this only if HasDepth to mirror stencil?",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291f4bfc_21652868",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 980,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "I\u0027m not 100% sure I understand the comment - but: \n\nWe don\u0027t need to check HasDepth because if HasDepthStencilAttachment() was true, then HasDepth must also be true since stencil-only formats aren\u0027t available in WebGPU.",
+      "parentUuid": "ca77045d_4d7d6209",
       "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -122,6 +188,30 @@
     },
     {
       "key": {
+        "uuid": "f2cbd38d_28997ac8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc226a7b_4b23ed98",
+      "range": {
+        "startLine": 1053,
+        "startChar": 1,
+        "endLine": 1056,
+        "endChar": 91
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b92cfb33_2c4c2ca2",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5
@@ -139,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "d5038d5e_fb27ac58",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b92cfb33_2c4c2ca2",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2f2d1c3_629a9a1f",
         "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
         "patchSetId": 5
@@ -153,6 +261,24 @@
       "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7df63cb_430da545",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2f2d1c3_629a9a1f",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -179,6 +305,30 @@
     },
     {
       "key": {
+        "uuid": "c9da76ee_dad4a497",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06b3416c_0e297e48",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 50
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2386bb66_0adb95c7",
         "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
         "patchSetId": 5
@@ -193,6 +343,24 @@
       "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc776386_2d9d8b28",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2386bb66_0adb95c7",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -216,6 +384,30 @@
       "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6363bd5_4305559d",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5524045_d3afb2c4",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -256,6 +448,48 @@
       "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4e69c00_19507dd6",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "I like RenderPassBuilder. Feel free to overrule.",
+      "parentUuid": "88f11e71_1834e0fc",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a435e6c_f389e400",
+        "filename": "src/dawn_native/d3d12/RenderPassTrackerD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T00:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11b026ce_8ec57db1",
+      "revId": "bafcab57c117bf71ab75e6d90941cf6dae1e7529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
