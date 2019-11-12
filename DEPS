@@ -5,6 +5,7 @@ vars = {
   'chromium_git': 'https://chromium.googlesource.com',
   'dawn_git': 'https://dawn.googlesource.com',
   'github_git': 'https://github.com',
+  'swiftshader_git': 'https://swiftshader.googlesource.com',
 
   'dawn_standalone': True,
 }
@@ -112,6 +113,12 @@ deps = {
     'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-ValidationLayers@9fba37afae13a11bd49ae942bf82e5bf1098e381',
     'condition': 'dawn_standalone',
   },
+
+  'third_party/swiftshader': {
+    'url': '{swiftshader_git}/SwiftShader@27a3d31d7a9d65bb49b83da404cc4830eb3ce06e',
+    'condition': 'dawn_standalone',
+  },
+
 }
 
 hooks = [
