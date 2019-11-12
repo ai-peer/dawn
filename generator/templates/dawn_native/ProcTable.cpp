@@ -26,6 +26,15 @@
 
 namespace dawn_native {
 
+    // Type aliases to make all frontend types appear as if they have "Base" at the end when some
+    // of them are actually pure-frontend and don't have the Base.
+    using CommandEncoderBase = CommandEncoder;
+    using ComputePassEncoderBase = ComputePassEncoder;
+    using RenderPassEncoderBase = RenderPassEncoder;
+    using RenderBundleEncoderBase = RenderBundleEncoder;
+
+    using FenceBase = Fence;
+
     namespace {
 
         {% for type in by_category["object"] %}
