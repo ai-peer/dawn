@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "240bff4f_4da61708",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T17:56:23Z",
+      "side": 1,
+      "message": "\u003e\u003e  We should have a test\n\nThere is one btw.\n\n\u003e\u003e if you have STORE and never write to it in the shader, then it would it still be uninitialized?\n\nAren\u0027t output attachments initialized during the load op? So it wouldn\u0027t matter if the shader didn\u0027t write to it.",
+      "parentUuid": "096a336d_c9b0feca",
+      "range": {
+        "startLine": 961,
+        "startChar": 74,
+        "endLine": 961,
+        "endChar": 79
+      },
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "96189859_ef2d6d7e",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 8
@@ -90,6 +114,24 @@
     },
     {
       "key": {
+        "uuid": "c101c533_8948a234",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T17:56:23Z",
+      "side": 1,
+      "message": "Done. Structure has changed here to accommodate the pure stencil case.",
+      "parentUuid": "96189859_ef2d6d7e",
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "273866a3_d01b3f13",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 8
@@ -104,6 +146,24 @@
       "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b003d97_8c85ccff",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T17:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "273866a3_d01b3f13",
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -130,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "f41e3647_274e16ea",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T17:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b814cc4c_6fdfca24",
+      "range": {
+        "startLine": 64,
+        "startChar": 48,
+        "endLine": 64,
+        "endChar": 65
+      },
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7cc75f9_33d4b0e3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
         "patchSetId": 8
@@ -150,6 +234,30 @@
       "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1578407_5dca59e2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-11-12T17:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7cc75f9_33d4b0e3",
+      "range": {
+        "startLine": 66,
+        "startChar": 61,
+        "endLine": 66,
+        "endChar": 78
+      },
+      "revId": "4d526c14c194a6c76bebbb5151d84eec390bbfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
