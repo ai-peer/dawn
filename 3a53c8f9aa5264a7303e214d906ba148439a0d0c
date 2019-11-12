@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2321a9ea_4632c5e2",
+        "filename": "src/dawn_native/SwapChain.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-12T16:40:11Z",
+      "side": 1,
+      "message": "nit: We made AcquireRef for this",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 131,
+        "endChar": 35
+      },
+      "revId": "3a53c8f9aa5264a7303e214d906ba148439a0d0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
