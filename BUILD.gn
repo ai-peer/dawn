@@ -116,6 +116,10 @@ source_set("libdawn_native_headers") {
   ]
 }
 
+# Swiftshader is an optional dependency of Dawn so we only use it if the path
+# to it has been set.
+use_swiftshader = dawn_use_swiftshader && dawn_swiftshader_dir != ""
+
 # The meat of the compilation for libdawn_native so that we can cheaply have
 # shared_library / static_library versions of it. It compiles all the files
 # except those that define exported symbols.

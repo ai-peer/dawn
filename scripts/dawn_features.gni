@@ -52,4 +52,9 @@ declare_args() {
 declare_args() {
   # Uses our built version of Vulkan validation layers
   dawn_enable_vulkan_validation_layers = dawn_enable_vulkan && is_win
+
+  # Enables usage of swiftshader on the Vulkan backend.
+  # Note that this will only work in standalone and in projects that set the
+  # dawn_swiftshader_dir variable in build_overrides/dawn.gni
+  dawn_use_swiftshader = dawn_enable_vulkan && (is_win || is_linux || is_mac)
 }
