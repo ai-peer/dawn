@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba7d4725_dc828c35",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-12T10:22:05Z",
+      "side": 1,
+      "message": "Can you add a comment that we tag semaphores as unused before creating the command recording context so that in case of an error they are still freed correctly?\n\nAlso explain that they will be freed at the correct time because the serial was incremented before DeleteWhenUnused.",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
