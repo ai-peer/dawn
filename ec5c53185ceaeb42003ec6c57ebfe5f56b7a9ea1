@@ -34,6 +34,24 @@
       "revId": "ec5c53185ceaeb42003ec6c57ebfe5f56b7a9ea1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adcd8d09_3bc8fa92",
+        "filename": "src/dawn_native/SwapChain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-12T15:34:42Z",
+      "side": 1,
+      "message": "ah, I see. The release is on the destruction of the external object?",
+      "parentUuid": "7fadd059_21a8ba2c",
+      "revId": "ec5c53185ceaeb42003ec6c57ebfe5f56b7a9ea1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
