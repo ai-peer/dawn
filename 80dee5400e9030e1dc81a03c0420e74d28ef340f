@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a20fa6e_7e88ed6e",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-12T14:30:33Z",
+      "side": 1,
+      "message": "There are several other DAWN_TRYs in this function before semaphore deletion. Should we guard against leaks for those too?",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba7d4725_dc828c35",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
