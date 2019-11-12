@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c1a510b_11246bff",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-12T21:16:08Z",
+      "side": 1,
+      "message": "If |AllocateGPUHeap| results in reallocating the ID3D12DescriptorHeap, we need to copy the descriptors from the old heap to the new heap. Consider the following:\n\n// bind group A\nSetBindGroup(...)\n  -\u003e OnSetBindGroup(...)\n     -\u003e AllocateDescriptors()\n         -\u003e AllocateCbvUavSrvDescriptors()\n            -\u003e AllocateGPUHeap()  // Allocates heap A\n\n// bind group B\nSetBindGroup(...)\n  -\u003e OnSetBindGroup(...)\n     -\u003e AllocateDescriptors()\n         -\u003e AllocateCbvUavSrvDescriptors()\n            -\u003e AllocateGPUHeap()  // Reallocates and makes heap B\n\n\nDraw(...)\n  -\u003e BindGroupTracker::Apply();\n     -\u003e SetID3D12DescriptorHeaps()  // sets heap B\n     -\u003e ApplyBindGroupA() // bind group A\u0027s descriptor heap is not set!\n     -\u003e ApplyBindGroupB() // only this one is set",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
