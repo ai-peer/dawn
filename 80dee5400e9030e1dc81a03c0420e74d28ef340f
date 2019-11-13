@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a451cd2c_fdf4b0ab",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000570
+      },
+      "writtenOn": "2019-11-13T03:19:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure. If any DAWN_TRY fails, mRecodingContext will not be overwritten, so the semaphores are still recorded there. Are we expecting that they will be released elsewhere? I just see an ASSERT() in ~Device().",
+      "parentUuid": "1a20fa6e_7e88ed6e",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba7d4725_dc828c35",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-11-12T10:22:05Z",
       "side": 1,
       "message": "Can you add a comment that we tag semaphores as unused before creating the command recording context so that in case of an error they are still freed correctly?\n\nAlso explain that they will be freed at the correct time because the serial was incremented before DeleteWhenUnused.",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fa0f1c3_abeeb3ac",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000570
+      },
+      "writtenOn": "2019-11-13T03:19:55Z",
+      "side": 1,
+      "message": "Oh, in fact I totally overlooked the potential early exit in DAWN_TRY(). Thanks for mentioning that! My original point is that the semaphores in mRecordingContext should be tagged as unused before mRecodingContext is overwritten by a new value.\n\nAnd I\u0027m not fully clear about how the serial works. If the serial is 100 before entering SubmitPendingCommands(), mLastSubmittedSerial becomes 101 at this line. But I noticed that in DeleteWhenUnused(), mDevice-\u003eGetPendingCommandSerial() would return mLastSubmittedSerial + 1, so does it really matter if mLastSubmittedSerial is 100 or 101 here?",
+      "parentUuid": "ba7d4725_dc828c35",
       "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
