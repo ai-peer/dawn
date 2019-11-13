@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "17215524_9f349dd3",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T16:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a9cb14b_939cf100",
+      "revId": "91467b7550f5ff0270dc2dfddd4710eb5f9970d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffe3022b_0f79233d",
         "filename": "src/dawn_native/ComputePassEncoder.h",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2019-11-13T16:30:33Z",
       "side": 1,
       "message": "I think we could put \u0027final\u0027 here to prevent inheritance, if we want.",
+      "range": {
+        "startLine": 26,
+        "startChar": 28,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "91467b7550f5ff0270dc2dfddd4710eb5f9970d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1d93f26_afb161bc",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T16:41:31Z",
+      "side": 1,
+      "message": "Great idea! Done",
+      "parentUuid": "ffe3022b_0f79233d",
       "range": {
         "startLine": 26,
         "startChar": 28,
