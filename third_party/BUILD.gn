@@ -94,6 +94,7 @@ static_library("spirv_cross") {
 
   if (need_reflection_cross) {
     sources += [
+      "${spirv_cross_dir}/spirv_cross_util.hpp",
       "${spirv_cross_dir}/spirv_reflect.cpp",
       "${spirv_cross_dir}/spirv_reflect.hpp",
     ]
