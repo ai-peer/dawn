@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "68a6f178_e6d67edb",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:59:54Z",
+      "side": 1,
+      "message": "Good point, we should probably replace by explicit deletion, and then I think it would resolve Kai\u0027s concern.",
+      "parentUuid": "a451cd2c_fdf4b0ab",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba7d4725_dc828c35",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Oh, in fact I totally overlooked the potential early exit in DAWN_TRY(). Thanks for mentioning that! My original point is that the semaphores in mRecordingContext should be tagged as unused before mRecodingContext is overwritten by a new value.\n\nAnd I\u0027m not fully clear about how the serial works. If the serial is 100 before entering SubmitPendingCommands(), mLastSubmittedSerial becomes 101 at this line. But I noticed that in DeleteWhenUnused(), mDevice-\u003eGetPendingCommandSerial() would return mLastSubmittedSerial + 1, so does it really matter if mLastSubmittedSerial is 100 or 101 here?",
       "parentUuid": "ba7d4725_dc828c35",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c68bcb_c89bc349",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:59:54Z",
+      "side": 1,
+      "message": "Yes it matters: if mLastSubmittedSerial is 100 when entering this function, then the submit we do here is submit 101. We need to make sure the semaphores are added to the deleter with that serial, so we can delete them as soon as submit 101 is finished.\n\nMy comment was actually wrong because like you said the semaphores are actually associated with serial 102 when it should be 101.\n\nSo the code should be:\n\nSerial currentSerial\u003d mLastSubmttedSerial + 1;\n\n// do the fence and commandsInFlight stuff with currentSerial\n\n// tag semaphores as unused\n\nmLastSubmittedSerial \u003d currentSerial;\n\n// replace the command recording context.\n\nWith comments in places to explain why the order of things is this way.",
+      "parentUuid": "5fa0f1c3_abeeb3ac",
       "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
