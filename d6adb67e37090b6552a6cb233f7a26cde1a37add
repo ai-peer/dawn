@@ -22,6 +22,30 @@
       "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1eb9441_0a103a64",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-13T00:26:03Z",
+      "side": 1,
+      "message": "I couldn\u0027t think of a rational why it\u0027s needed.\n\nThe lowest tier or smallest descriptor heap has a max size of 2048 (sampler descriptors). The other heaps are far larger, 1M+. BindGroup holds at-most 16 x 4 \u003d 64 bindings per frame, allowing 32 frames worth of bindings to be en-queued before spilling (ie. BindGroupA went in HeapA but BindGroupB went in HeapB). In reality, 128 frames worth of bindings would be en-queued since D3D limits max samplers per stage to 16. Normally, I usually see 2-3 frames (tops) in-flight.\n\nBefore, the linear allocator couldn\u0027t reclaim blocks but that\u0027s no longer the case with the ringbuffer - which only spills under pathological situations. If GPU heaps were dynamically resized and much smaller then this would be needed.\n\nthoughts?",
+      "parentUuid": "6c1a510b_11246bff",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
