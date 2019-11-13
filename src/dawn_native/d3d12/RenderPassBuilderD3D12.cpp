@@ -92,8 +92,7 @@ namespace dawn_native { namespace d3d12 {
             subresourceParameters.SrcSubresource = 0;
             subresourceParameters.DstSubresource = resolveDestinationTexture->GetSubresourceIndex(
                 resolveDestination->GetBaseMipLevel(), resolveDestination->GetBaseArrayLayer());
-            subresourceParameters.SrcRect = {0, 0, resolveDestinationTexture->GetSize().width,
-                                             resolveDestinationTexture->GetSize().height};
+            subresourceParameters.SrcRect = {0, 0, 0, 0};
 
             return subresourceParameters;
         }
