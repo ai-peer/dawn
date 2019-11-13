@@ -2,6 +2,91 @@
   "comments": [
     {
       "key": {
+        "uuid": "30c11a1e_01eb770d",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "This looks like a copy-paste of a test for bindgroups in general. I don\u0027t think we need to test it again for read-only storage buffers. It doesn\u0027t provide additional coverage and adds a lot of noise to this test file so can we remove it?",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98880ef1_3035d2b9",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c844071_6debd2ac",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe1d344_4ada1595",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "nit: This can be simplified by having all the readonly usages read the same memory instead of having it in separate chunks. A single uint could work to test memory synchronization. We would set it to zero with setSubData, set it to 42 with the compute pass. In the render pass we draw a single point in a 1x1 render target, forward the uint from the uniform buffer and atribute in the vertex shader to the fragment shader that checks that everything is equal to 42, and produces green or red.",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f71eb2e_7b9e0c6b",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "Can we fill the buffer with zeros so we know only the compute pass writes would write the correct value?",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "70a4873f_b7152203",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -13,6 +98,30 @@
       "writtenOn": "2019-11-13T01:27:05Z",
       "side": 1,
       "message": "I am not sure whether we can read the storage buffer data (which was set in compute pass) via this way: simply set a different bind group layout we want for render pass.",
+      "range": {
+        "startLine": 1156,
+        "startChar": 4,
+        "endLine": 1158,
+        "endChar": 92
+      },
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b54f6e74_1f6d891d",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "That should work. The bind group layout doesn\u0027t decide of how memory is accessed.",
+      "parentUuid": "70a4873f_b7152203",
       "range": {
         "startLine": 1156,
         "startChar": 4,
@@ -41,6 +150,46 @@
         "startChar": 4,
         "endLine": 1164,
         "endChar": 27
+      },
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8247e39_0ba38bcf",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "Can we also have a test that writes to the buffer as storage in a compute pass, and reads from it in the same compute pass?",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0afaa8ff_fa0b9dfc",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-13T13:18:22Z",
+      "side": 1,
+      "message": "Maybe make a new file that\u0027s MemorySynchronizationTests?",
+      "range": {
+        "startLine": 1315,
+        "startChar": 22,
+        "endLine": 1315,
+        "endChar": 54
       },
       "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
