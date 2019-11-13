@@ -46,6 +46,99 @@
       "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "845c6bee_4cf87c75",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-13T05:30:11Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I think there\u0027s still an issue here because a single frame could have thousands of calls to SetBindGroup.\n\nAn application could easily [ SetBindGroupA(), SetBindGroupB(), Draw() ] more than 2048 times.\nIf a reallocation happens between setting A and B, then the problem comes up.",
+      "parentUuid": "d1eb9441_0a103a64",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7f44e2_95e2f11e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-13T05:30:11Z",
+      "side": 1,
+      "message": "This should happen in ApplyBindGroup(). We don\u0027t want to allocate descriptors for bind groups that aren\u0027t actually used.\nOnSetBindGroup is for dirtying state tracking",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 96,
+        "endChar": 63
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe20f275_d79e9fee",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-13T05:30:11Z",
+      "side": 1,
+      "message": "This should no-op if the heaps haven\u0027t changed. Otherwise, we\u0027re redundantly calling commandList-\u003eSetDescriptorHeaps it for every Draw()",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 50
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7d44362_fe0b5a60",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-13T05:30:11Z",
+      "side": 1,
+      "message": "Now, these heaps will never be null, so we\u0027re always on the commandList-\u003eSetDescriptorHeaps(2, descriptorHeaps); path.\nI think this is wrong for a pipeline that is only using the CbvSrvUav heap or only using the sampler heap.",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 158,
+        "endChar": 13
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
