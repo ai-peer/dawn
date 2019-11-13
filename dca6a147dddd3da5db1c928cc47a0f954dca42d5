@@ -22,6 +22,30 @@
       "revId": "dca6a147dddd3da5db1c928cc47a0f954dca42d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "738f1987_15171701",
+        "filename": "src/dawn_native/ComputePassEncoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-13T16:30:33Z",
+      "side": 0,
+      "message": "oops, wrong line",
+      "parentUuid": "817213b7_5eae7288",
+      "range": {
+        "startLine": 27,
+        "startChar": 32,
+        "endLine": 27,
+        "endChar": 33
+      },
+      "revId": "dca6a147dddd3da5db1c928cc47a0f954dca42d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
