@@ -91,13 +91,6 @@ static_library("spirv_cross") {
       "${spirv_cross_dir}/spirv_glsl.hpp",
     ]
   }
-
-  if (need_reflection_cross) {
-    sources += [
-      "${spirv_cross_dir}/spirv_reflect.cpp",
-      "${spirv_cross_dir}/spirv_reflect.hpp",
-    ]
-  }
 }
 
 static_library("spirv_cross_full_for_fuzzers") {
