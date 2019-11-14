@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "57c48d93_eb682ec5",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000570
+      },
+      "writtenOn": "2019-11-14T07:37:05Z",
+      "side": 1,
+      "message": "I\u0027m still a bit uncertain about this. Shall we leave it as a TODO?",
+      "parentUuid": "68a6f178_e6d67edb",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba7d4725_dc828c35",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Yes it matters: if mLastSubmittedSerial is 100 when entering this function, then the submit we do here is submit 101. We need to make sure the semaphores are added to the deleter with that serial, so we can delete them as soon as submit 101 is finished.\n\nMy comment was actually wrong because like you said the semaphores are actually associated with serial 102 when it should be 101.\n\nSo the code should be:\n\nSerial currentSerial\u003d mLastSubmttedSerial + 1;\n\n// do the fence and commandsInFlight stuff with currentSerial\n\n// tag semaphores as unused\n\nmLastSubmittedSerial \u003d currentSerial;\n\n// replace the command recording context.\n\nWith comments in places to explain why the order of things is this way.",
       "parentUuid": "5fa0f1c3_abeeb3ac",
+      "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbbe55da_d31ffdc2",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000570
+      },
+      "writtenOn": "2019-11-14T07:37:05Z",
+      "side": 1,
+      "message": "That makes sense. Please double check the updated patch. Thanks!",
+      "parentUuid": "a2c68bcb_c89bc349",
       "revId": "80dee5400e9030e1dc81a03c0420e74d28ef340f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
