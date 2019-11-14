@@ -84,7 +84,11 @@ namespace dawn_native {
 
     }  // anonymous namespace
 
-    MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descriptor) {
+    MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor) {
+        if (device->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
@@ -116,7 +120,7 @@ namespace dawn_native {
           mUsage(descriptor->usage),
           mState(BufferState::Unmapped) {
         // Add readonly storage usage if the buffer has a storage usage. The validation rules in
-        // PassResourceUsageTracker::ValidateUsages will make sure we don't use both at the same
+        // ResourceUsageTracker::ValidateUsages will make sure we don't use both at the same
         // time.
         if (mUsage & wgpu::BufferUsage::Storage) {
             mUsage |= kReadOnlyStorage;

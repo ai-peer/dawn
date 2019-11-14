@@ -20,7 +20,7 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ObjectBase.h"
-#include "dawn_native/PassResourceUsage.h"
+#include "dawn_native/ResourceUsage.h"
 
 #include "dawn_native/dawn_platform.h"
 
