@@ -70,6 +70,24 @@
       "revId": "59d762fe87c5be212ce7797689acae08de474428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdbb6dc6_11fcdb53",
+        "filename": "src/utils/TerribleCommandBuffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2019-11-14T08:57:09Z",
+      "side": 1,
+      "message": "Corentin@ : It finally turns out to be the reason your point out before, mOffset is larger than what it should be... Now the patch works",
+      "parentUuid": "db3b5c98_f1aa6922",
+      "revId": "59d762fe87c5be212ce7797689acae08de474428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
