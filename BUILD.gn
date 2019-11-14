@@ -20,6 +20,9 @@ import("scripts/dawn_features.gni")
 import("scripts/dawn_overrides_with_defaults.gni")
 
 import("//testing/test.gni")
+import("//ui/gl/features.gni")
+
+assert(use_dawn)
 
 ###############################################################################
 # dawn_platform
