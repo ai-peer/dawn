@@ -21,6 +21,10 @@ namespace dawn_native {
 
     MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
                                                  const ComputePipelineDescriptor* descriptor) {
+        if (device->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
