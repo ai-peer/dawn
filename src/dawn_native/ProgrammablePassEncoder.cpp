@@ -14,6 +14,7 @@
 
 #include "dawn_native/ProgrammablePassEncoder.h"
 
+#include "common/BitSetIterator.h"
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
@@ -24,6 +25,48 @@
 #include <cstring>
 
 namespace dawn_native {
+
+    namespace {
+        void TrackBindGroupResourceUsage(BindGroupBase* group, EncodingContext* encodingContext) {
+            const auto& layoutInfo = group->GetLayout()->GetBindingInfo();
+
+            for (uint32_t i : IterateBitSet(layoutInfo.mask)) {
+                wgpu::BindingType type = layoutInfo.types[i];
+
+                switch (type) {
+                    case wgpu::BindingType::UniformBuffer: {
+                        BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
+                        encodingContext->GetUsageTracker()->BufferUsedAs(
+                            buffer, wgpu::BufferUsage::Uniform);
+                    } break;
+
+                    case wgpu::BindingType::StorageBuffer: {
+                        BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
+                        encodingContext->GetUsageTracker()->BufferUsedAs(
+                            buffer, wgpu::BufferUsage::Storage);
+                    } break;
+
+                    case wgpu::BindingType::SampledTexture: {
+                        TextureBase* texture = group->GetBindingAsTextureView(i)->GetTexture();
+                        encodingContext->GetUsageTracker()->TextureUsedAs(
+                            texture, wgpu::TextureUsage::Sampled);
+                    } break;
+
+                    case wgpu::BindingType::ReadonlyStorageBuffer: {
+                        BufferBase* buffer = group->GetBindingAsBufferBinding(i).buffer;
+                        encodingContext->GetUsageTracker()->BufferUsedAs(buffer, kReadOnlyStorage);
+                    } break;
+
+                    case wgpu::BindingType::Sampler:
+                        break;
+
+                    case wgpu::BindingType::StorageTexture:
+                        UNREACHABLE();
+                        break;
+                }
+            }
+        }
+    }  // namespace
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
                                                      EncodingContext* encodingContext)
@@ -114,6 +157,8 @@ namespace dawn_native {
                 uint32_t* offsets = allocator->AllocateData<uint32_t>(cmd->dynamicOffsetCount);
                 memcpy(offsets, dynamicOffsets, dynamicOffsetCount * sizeof(uint32_t));
             }
+
+            TrackBindGroupResourceUsage(group, mEncodingContext);
 
             return {};
         });

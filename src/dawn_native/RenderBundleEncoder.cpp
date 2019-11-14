@@ -53,6 +53,10 @@ namespace dawn_native {
     MaybeError ValidateRenderBundleEncoderDescriptor(
         const DeviceBase* device,
         const RenderBundleEncoderDescriptor* descriptor) {
+        if (device->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         if (!IsValidSampleCount(descriptor->sampleCount)) {
             return DAWN_VALIDATION_ERROR("Sample count is not supported");
         }
@@ -107,8 +111,13 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
 
+        CommandBufferResourceUsage resourceUsages =
+            mEncodingContext.GetUsageTracker()->AcquireResourceUsages();
+        // The render bundle strictly uses a single "pass"
+        ASSERT(resourceUsages.perPass.size() == 1);
+
         return new RenderBundleBase(this, descriptor, mAttachmentState.Get(),
-                                    std::move(mResourceUsage));
+                                    std::move(resourceUsages.perPass[0]));
     }
 
     MaybeError RenderBundleEncoder::ValidateFinish(const RenderBundleDescriptor* descriptor) {
@@ -117,11 +126,15 @@ namespace dawn_native {
 
         // Even if Finish() validation fails, calling it will mutate the internal state of the
         // encoding context. Subsequent calls to encode commands will generate errors.
+        mEncodingContext.GetUsageTracker()->FlushPassResourceUsages();
         DAWN_TRY(mEncodingContext.Finish());
 
-        CommandIterator* commands = mEncodingContext.GetIterator();
+        if (GetDevice()->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
 
-        DAWN_TRY(ValidateRenderBundle(commands, mAttachmentState.Get(), &mResourceUsage));
+        DAWN_TRY(mEncodingContext.GetUsageTracker()->ValidateResourceUsages());
+        DAWN_TRY(ValidateRenderBundle(mEncodingContext.GetIterator(), mAttachmentState.Get()));
         return {};
     }
 
