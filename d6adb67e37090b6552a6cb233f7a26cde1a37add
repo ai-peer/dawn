@@ -138,6 +138,30 @@
     },
     {
       "key": {
+        "uuid": "43615126_251937fd",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T13:16:18Z",
+      "side": 1,
+      "message": "\u003e Not so. When count\u003d1 occurs, a heap of size\u003d[1M|2048] is created.\n\nCan you point out where this happens? Looking at the current code and the CL I don\u0027t see it.",
+      "parentUuid": "6f8d7d20_599b6397",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64af6a7b_56902cc6",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 6
