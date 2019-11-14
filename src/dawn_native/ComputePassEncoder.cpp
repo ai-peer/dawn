@@ -49,6 +49,7 @@ namespace dawn_native {
 
                 return {};
             })) {
+            mEncodingContext->GetUsageTracker()->FlushPassResourceUsages();
             mEncodingContext->ExitPass(this);
         }
     }
@@ -78,6 +79,9 @@ namespace dawn_native {
                 allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
             dispatch->indirectBuffer = indirectBuffer;
             dispatch->indirectOffset = indirectOffset;
+
+            mEncodingContext->GetUsageTracker()->BufferUsedAs(indirectBuffer,
+                                                              wgpu::BufferUsage::Indirect);
 
             return {};
         });

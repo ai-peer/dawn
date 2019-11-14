@@ -109,6 +109,10 @@ namespace dawn_native {
 
     MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
                                            const BindGroupDescriptor* descriptor) {
+        if (device->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }

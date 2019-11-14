@@ -47,6 +47,7 @@ namespace dawn_native {
                                 ErrorTag errorTag);
 
         EncodingContext* mEncodingContext = nullptr;
+        ResourceUsageTracker mUsageTracker;
     };
 
 }  // namespace dawn_native

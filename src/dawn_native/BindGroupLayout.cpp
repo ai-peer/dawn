@@ -23,8 +23,12 @@
 
 namespace dawn_native {
 
-    MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase*,
+    MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor) {
+        if (device->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }

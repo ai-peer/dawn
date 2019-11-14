@@ -19,7 +19,7 @@
 
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
-#include "dawn_native/PassResourceUsage.h"
+#include "dawn_native/ResourceUsage.h"
 
 namespace dawn_native {
 

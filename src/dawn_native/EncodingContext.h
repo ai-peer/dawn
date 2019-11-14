@@ -18,14 +18,17 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/ResourceUsageTracker.h"
 #include "dawn_native/dawn_platform.h"
 
 #include <string>
 
 namespace dawn_native {
 
-    class ObjectBase;
+    class CommandEncoderBase;
     class DeviceBase;
+    class ObjectBase;
+    class RenderBundleEncoderBase;
 
     // Base class for allocating/iterating commands.
     // It performs error tracking as well as encoding state for render/compute passes.
@@ -75,6 +78,8 @@ namespace dawn_native {
         void ExitPass(const ObjectBase* passEncoder);
         MaybeError Finish();
 
+        ResourceUsageTracker* GetUsageTracker();
+
       private:
         bool IsFinished() const;
 
@@ -89,6 +94,8 @@ namespace dawn_native {
         // The current encoder changes with Enter/ExitPass which should be called by
         // CommandEncoder::Begin/EndPass.
         const ObjectBase* mCurrentEncoder;
+
+        ResourceUsageTracker mUsageTracker;
 
         CommandAllocator mAllocator;
         CommandIterator mIterator;
