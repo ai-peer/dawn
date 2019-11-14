@@ -210,6 +210,24 @@
     },
     {
       "key": {
+        "uuid": "3e673205_ade01fe9",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T11:10:17Z",
+      "side": 1,
+      "message": "You\u0027d add CopySrc to the Storage buffer and copy in a CopyDst | MapRead buffer.\n\nThe EXPECT_BUFFER_U32_EQ macro does that for you.",
+      "parentUuid": "cc2df250_d9ba9dc8",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0afaa8ff_fa0b9dfc",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
