@@ -114,6 +114,30 @@
     },
     {
       "key": {
+        "uuid": "6f8d7d20_599b6397",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-14T03:07:45Z",
+      "side": 1,
+      "message": "\u003e If a reallocation happens between setting A and B, then the problem comes up.\n\nIt would depend on how many samplers (out of 2048) the developer uses. If we reserve enough to cover those in-flight, then I still think the copy isn\u0027t required since the spill is unlikely via ring-buffer. However, if the developer always uses all 2048 (the limit) then one must copy. Anything \u003e2048 will always fail.\n\n\u003e Strong +1, especially since the ID3D12DescriptorHeaps are sized exactly to the allocation request.\n\nNot so. When count\u003d1 occurs, a heap of size\u003d[1M|2048] is created.\n\n\u003e but now we make one allocation request per bindgroup so we are going to cycle through descriptor heaps much more often.\n\nThe number of descriptor heaps or descriptors does not change. Before, the spill couldn\u0027t exist but can so now when allocating group-by-group. \u003d(",
+      "parentUuid": "7f32eb4d_90f32e13",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64af6a7b_56902cc6",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 6
@@ -221,6 +245,30 @@
       "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6b455cb_a35abca6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-14T03:07:45Z",
+      "side": 1,
+      "message": "\u003e Now, these heaps will never be null, \n\nNot so. Heaps are null until a descriptor is created (agree with CW).",
+      "parentUuid": "7437da76_54b6cc6a",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 158,
+        "endChar": 13
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
