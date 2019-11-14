@@ -25,6 +25,7 @@
 #include "dawn_native/vulkan/VulkanFunctions.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
 
+#include "dawn_native/vulkan/external_image/ImageService.h"
 #include "dawn_native/vulkan/external_memory/MemoryService.h"
 #include "dawn_native/vulkan/external_semaphore/SemaphoreService.h"
 
@@ -140,6 +141,7 @@ namespace dawn_native { namespace vulkan {
         std::unique_ptr<ResourceMemoryAllocator> mResourceMemoryAllocator;
         std::unique_ptr<RenderPassCache> mRenderPassCache;
 
+        std::unique_ptr<external_image::Service> mExternalImageService;
         std::unique_ptr<external_memory::Service> mExternalMemoryService;
         std::unique_ptr<external_semaphore::Service> mExternalSemaphoreService;
 

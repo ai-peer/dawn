@@ -19,6 +19,7 @@
 
 #include "common/vulkan_platform.h"
 #include "dawn_native/ResourceMemoryAllocation.h"
+#include "dawn_native/vulkan/external_image/ImageService.h"
 #include "dawn_native/vulkan/ExternalHandle.h"
 
 namespace dawn_native { namespace vulkan {
@@ -45,7 +46,8 @@ namespace dawn_native { namespace vulkan {
         static ResultOrError<Texture*> CreateFromExternal(
             Device* device,
             const ExternalImageDescriptor* descriptor,
-            const TextureDescriptor* textureDescriptor);
+            const TextureDescriptor* textureDescriptor,
+            external_image::Service* externalImageService);
 
         Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage);
         ~Texture();
@@ -74,7 +76,8 @@ namespace dawn_native { namespace vulkan {
         using TextureBase::TextureBase;
         MaybeError InitializeAsInternalTexture();
 
-        MaybeError InitializeFromExternal(const ExternalImageDescriptor* descriptor);
+        MaybeError InitializeFromExternal(const ExternalImageDescriptor* descriptor,
+                                          external_image::Service* externalImageService);
 
         void DestroyImpl() override;
         MaybeError ClearTexture(CommandRecordingContext* recordingContext,

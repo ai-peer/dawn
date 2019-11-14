@@ -469,22 +469,26 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/VulkanFunctions.h",
       "src/dawn_native/vulkan/VulkanInfo.cpp",
       "src/dawn_native/vulkan/VulkanInfo.h",
+      "src/dawn_native/vulkan/external_image/ImageService.h",
       "src/dawn_native/vulkan/external_memory/MemoryService.h",
       "src/dawn_native/vulkan/external_semaphore/SemaphoreService.h",
     ]
 
     if (is_linux) {
       sources += [
+        "src/dawn_native/vulkan/external_image/ImageServiceOpaqueFD.cpp",
         "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
         "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp",
       ]
     } else if (is_fuchsia) {
       sources += [
+        "src/dawn_native/vulkan/external_image/ImageServiceZirconHandle.cpp",
         "src/dawn_native/vulkan/external_memory/MemoryServiceZirconHandle.cpp",
         "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceZirconHandle.cpp",
       ]
     } else {
       sources += [
+        "src/dawn_native/vulkan/external_image/ImageServiceNull.cpp",
         "src/dawn_native/vulkan/external_memory/MemoryServiceNull.cpp",
         "src/dawn_native/vulkan/external_semaphore/SemaphoreServiceNull.cpp",
       ]

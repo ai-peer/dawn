@@ -74,6 +74,7 @@ namespace dawn_native { namespace vulkan {
         mRenderPassCache = std::make_unique<RenderPassCache>(this);
         mResourceMemoryAllocator = std::make_unique<ResourceMemoryAllocator>(this);
 
+        mExternalImageService = std::make_unique<external_image::Service>(this);
         mExternalMemoryService = std::make_unique<external_memory::Service>(this);
         mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(this);
 
@@ -667,8 +668,8 @@ namespace dawn_native { namespace vulkan {
         // Cleanup in case of a failure, the image creation doesn't acquire the external objects
         // if a failure happems.
         Texture* result = nullptr;
-        if (ConsumedError(Texture::CreateFromExternal(this, descriptor,
-                                                      textureDescriptor), &result) ||
+        if (ConsumedError(Texture::CreateFromExternal(this, descriptor, textureDescriptor,
+                                                      mExternalImageService.get()), &result) ||
             ConsumedError(ImportExternalImage(descriptor, memoryHandle, result->GetHandle(),
                                               waitHandles, &signalSemaphore, &allocation,
                                               &waitSemaphores)) ||
