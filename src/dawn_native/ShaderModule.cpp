@@ -43,8 +43,12 @@ namespace dawn_native {
         }
     }  // anonymous namespace
 
-    MaybeError ValidateShaderModuleDescriptor(DeviceBase*,
+    MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
                                               const ShaderModuleDescriptor* descriptor) {
+        if (device->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         if (descriptor->nextInChain != nullptr) {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }

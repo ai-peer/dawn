@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_PASSRESOURCEUSAGE_H
-#define DAWNNATIVE_PASSRESOURCEUSAGE_H
+#ifndef DAWNNATIVE_RESOURCEUSAGE_H
+#define DAWNNATIVE_RESOURCEUSAGE_H
 
 #include "dawn_native/dawn_platform.h"
 
@@ -44,4 +44,4 @@ namespace dawn_native {
 
 }  // namespace dawn_native
 
-#endif  // DAWNNATIVE_PASSRESOURCEUSAGE_H
+#endif  // DAWNNATIVE_RESOURCEUSAGE_H

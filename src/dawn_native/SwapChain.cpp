@@ -41,6 +41,10 @@ namespace dawn_native {
 
     MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
                                            const SwapChainDescriptor* descriptor) {
+        if (device->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         if (descriptor->implementation == 0) {
             return DAWN_VALIDATION_ERROR("Null implementation for the swapchain");
         }
