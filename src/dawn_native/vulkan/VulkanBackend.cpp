@@ -28,17 +28,6 @@
 
 namespace dawn_native { namespace vulkan {
 
-    VkInstance GetInstance(WGPUDevice device) {
-        Device* backendDevice = reinterpret_cast<Device*>(device);
-        return backendDevice->GetVkInstance();
-    }
-
-    DAWN_NATIVE_EXPORT PFN_vkVoidFunction GetInstanceProcAddr(WGPUDevice device,
-                                                              const char* pName) {
-        Device* backendDevice = reinterpret_cast<Device*>(device);
-        return (*backendDevice->fn.GetInstanceProcAddr)(backendDevice->GetVkInstance(), pName);
-    }
-
     // Explicitly export this function because it uses the "native" type for surfaces while the
     // header as seen in this file uses the wrapped type.
     DAWN_NATIVE_EXPORT DawnSwapChainImplementation
@@ -60,6 +49,34 @@ namespace dawn_native { namespace vulkan {
     }
 
 #ifdef DAWN_PLATFORM_LINUX
+    ExternalImageDescriptor::ExternalImageDescriptor(ExternalImageDescriptorType type)
+        : type(type) {
+    }
+
+    ExternalImageDescriptorFD::ExternalImageDescriptorFD(ExternalImageDescriptorType type)
+        : ExternalImageDescriptor(type) {
+    }
+
+    ExternalImageDescriptorOpaqueFD::ExternalImageDescriptorOpaqueFD()
+        : ExternalImageDescriptorFD(ExternalImageDescriptorType::OpaqueFD) {
+    }
+
+    ExternalImageDescriptorDmaBuf::ExternalImageDescriptorDmaBuf()
+        : ExternalImageDescriptorFD(ExternalImageDescriptorType::DmaBuf) {
+    }
+
+    VkInstance GetInstance(WGPUDevice device) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        return backendDevice->GetVkInstance();
+    }
+
+    DAWN_NATIVE_EXPORT PFN_vkVoidFunction GetInstanceProcAddr(WGPUDevice device,
+                                                              const char* pName) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        return (*backendDevice->fn.GetInstanceProcAddr)(backendDevice->GetVkInstance(), pName);
+    }
+
+    // TODO(hob): Remove this once we switch over to WrapVulkanImage in Chromium.
     WGPUTexture WrapVulkanImageOpaqueFD(WGPUDevice cDevice,
                                         const ExternalImageDescriptorOpaqueFD* descriptor) {
         Device* device = reinterpret_cast<Device*>(cDevice);
@@ -84,6 +101,33 @@ namespace dawn_native { namespace vulkan {
         }
 
         return outHandle;
+    }
+
+    WGPUTexture WrapVulkanImageDmaBuf(WGPUDevice cDevice,
+                                      const ExternalImageDescriptorDmaBuf* descriptor) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+
+        TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+            descriptor, descriptor->memoryFD, descriptor->waitFDs);
+
+        return reinterpret_cast<WGPUTexture>(texture);
+    }
+
+    WGPUTexture WrapVulkanImage(WGPUDevice cDevice, const ExternalImageDescriptor* descriptor) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+
+        switch (descriptor->type) {
+            case ExternalImageDescriptorType::OpaqueFD:
+            case ExternalImageDescriptorType::DmaBuf: {
+                const ExternalImageDescriptorFD* fdDescriptor =
+                    static_cast<const ExternalImageDescriptorFD*>(descriptor);
+                TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+                    descriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs);
+                return reinterpret_cast<WGPUTexture>(texture);
+            }
+            default:
+                return nullptr;
+        }
     }
 #endif
 
