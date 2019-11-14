@@ -33,11 +33,11 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
 
     Service::~Service() = default;
 
-    bool Service::Supported(VkFormat format,
-                            VkImageType type,
-                            VkImageTiling tiling,
-                            VkImageUsageFlags usage,
-                            VkImageCreateFlags flags) {
+    bool Service::SupportsImportMemory(VkFormat format,
+                                       VkImageType type,
+                                       VkImageTiling tiling,
+                                       VkImageUsageFlags usage,
+                                       VkImageCreateFlags flags) {
         // Early out before we try using extension functions
         if (!mSupported) {
             return false;
@@ -80,6 +80,10 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
                !(memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR);
     }
 
+    bool Service::SupportsCreateImage(const ExternalImageDescriptor* descriptor, VkFormat format) {
+        return mSupported;
+    }
+
     ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
             const ExternalImageDescriptor* descriptor, VkImage image) {
         MemoryImportParams params = { descriptor->allocationSize, descriptor->memoryTypeIndex };
@@ -110,6 +114,30 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
                                                            nullptr, &allocatedMemory),
                                 "vkAllocateMemory"));
         return allocatedMemory;
+    }
+
+    ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descriptor,
+                                                const VkImageCreateInfo& baseCreateInfo) {
+        VkImageCreateInfo createInfo = baseCreateInfo;
+        createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+        createInfo.pNext = nullptr;
+        createInfo.flags = VK_IMAGE_CREATE_ALIAS_BIT_KHR;
+        createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+        createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+        createInfo.queueFamilyIndexCount = 0;
+        createInfo.pQueueFamilyIndices = nullptr;
+        createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+
+        // We always set VK_IMAGE_USAGE_TRANSFER_DST_BIT unconditionally beause the Vulkan images
+        // that are used in vkCmdClearColorImage() must have been created with this flag, which is
+        // also required for the implementation of robust resource initialization.
+        createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
+
+        VkImage image;
+        DAWN_TRY(CheckVkSuccess(
+            mDevice->fn.CreateImage(mDevice->GetVkDevice(), &createInfo, nullptr, &image),
+            "CreateImage"));
+        return image;
     }
 
 }}}  // namespace dawn_native::vulkan::external_memory
