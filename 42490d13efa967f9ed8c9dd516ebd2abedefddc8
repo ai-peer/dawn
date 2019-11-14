@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "8de7d8a4_75fc22cf",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-14T08:04:59Z",
+      "side": 1,
+      "message": "Done in a separate patch: https://dawn-review.googlesource.com/c/dawn/+/13580",
+      "parentUuid": "ebe1d344_4ada1595",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3f71eb2e_7b9e0c6b",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -174,6 +192,24 @@
     },
     {
       "key": {
+        "uuid": "cc2df250_d9ba9dc8",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-14T08:04:59Z",
+      "side": 1,
+      "message": "How can we verify the data? If we use MapBufferRead, looks like the Dawn will report error if MapRead usage and Storage usage are used upon the same buffer. In addition, we don\u0027t support storage texture either...",
+      "parentUuid": "b8247e39_0ba38bcf",
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0afaa8ff_fa0b9dfc",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 1
@@ -194,6 +230,30 @@
       "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b672b1f_31b14e9a",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-14T08:04:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0afaa8ff_fa0b9dfc",
+      "range": {
+        "startLine": 1315,
+        "startChar": 22,
+        "endLine": 1315,
+        "endChar": 54
+      },
+      "revId": "42490d13efa967f9ed8c9dd516ebd2abedefddc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
