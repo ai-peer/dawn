@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "117fe2f1_5441c57b",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T16:45:34Z",
+      "side": 1,
+      "message": "Can this go along with a comment in a\n\n if (build_with_chromium) {\n }\n\n?",
+      "revId": "9d64db79aa4cc20baa13fbcf2098c0c775278530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
