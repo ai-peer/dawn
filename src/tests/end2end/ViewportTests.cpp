@@ -194,6 +194,15 @@ TEST_P(ViewportTest, Basic) {
     DoTest(info);
 }
 
+// Use the full viewport but with a reverse depth range (a common technique to improve depth buffer
+// precision). With a clearDepth of 0.5, only the top triangle should be drawn because it outputs
+// a depth value >= 0.5 which gets mapped to a depth value <= 0.5f and passes the depth test.
+TEST_P(ViewportTest, ReverseDepthRange) {
+    ViewportParams viewport = {0.0, 0.0, 4.0, 4.0, 1.0, 0.0};
+    TestInfo info = {viewport, TopLeftTriangleColor, BackgroundColor, 0.5};
+    DoTest(info);
+}
+
 // Shift the viewport toward top-left by (2, 2). So the top-left triangle is outside of the back
 // buffer. We can't see it. And point(0, 0) is covered by the bottom-right triangle now. Point(3, 3)
 // is not covered by any triangles.
