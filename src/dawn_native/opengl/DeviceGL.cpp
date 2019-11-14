@@ -42,17 +42,10 @@ namespace dawn_native { namespace opengl {
     }
 
     Device::~Device() {
-        CheckPassedFences();
-        ASSERT(mFencesInFlight.empty());
-
-        // Some operations might have been started since the last submit and waiting
-        // on a serial that doesn't have a corresponding fence enqueued. Force all
-        // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
-
-        mDynamicUploader = nullptr;
-
-        Tick();
+        if (IsDeviceLost()) {
+            return;
+        }
+        DeviceLostImpl();
     }
 
     const GLFormat& Device::GetGLFormat(const Format& format) {
@@ -133,6 +126,7 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Device::TickImpl() {
+        DAWN_TRY(ValidateDeviceIsAlive());
         CheckPassedFences();
         return {};
     }
@@ -168,6 +162,25 @@ namespace dawn_native { namespace opengl {
                                                uint64_t destinationOffset,
                                                uint64_t size) {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+    }
+
+    void Device::DeviceLostImpl() {
+        CheckPassedFences();
+        ASSERT(mFencesInFlight.empty());
+
+        // Some operations might have been started since the last submit and waiting
+        // on a serial that doesn't have a corresponding fence enqueued. Force all
+        // operations to look as if they were completed (because they were).
+        mCompletedSerial = mLastSubmittedSerial + 1;
+
+        mDynamicUploader = nullptr;
+
+        Tick();
+    }
+
+    MaybeError Device::CheckAndHandleDeviceLost() {
+        // TODO(natlee@microsoft.com): implement CheckAndHandleDeviceLost
+        return {};
     }
 
 }}  // namespace dawn_native::opengl

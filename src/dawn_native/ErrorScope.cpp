@@ -30,10 +30,16 @@ namespace dawn_native {
             return;
         }
         mCallback(static_cast<WGPUErrorType>(mErrorType), mErrorMessage.c_str(), mUserdata);
+        mDeviceLostCallback(mErrorMessage.c_str(), mUserdata);
     }
 
     void ErrorScope::SetCallback(wgpu::ErrorCallback callback, void* userdata) {
         mCallback = callback;
+        mUserdata = userdata;
+    }
+
+    void ErrorScope::SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
+        mDeviceLostCallback = callback;
         mUserdata = userdata;
     }
 
@@ -47,6 +53,10 @@ namespace dawn_native {
 
     void ErrorScope::HandleError(wgpu::ErrorType type, const char* message) {
         HandleErrorImpl(this, type, message);
+    }
+
+    void ErrorScope::HandleDeviceLost(const char* message) {
+        HandleDeviceLostImpl(this, message);
     }
 
     // static
@@ -102,6 +112,14 @@ namespace dawn_native {
         if (currentScope->mCallback) {
             currentScope->mCallback(static_cast<WGPUErrorType>(type), message,
                                     currentScope->mUserdata);
+        }
+    }
+
+    // static
+    void ErrorScope::HandleDeviceLostImpl(ErrorScope* scope, const char* message) {
+        ErrorScope* currentScope = scope;
+        if (currentScope->mDeviceLostCallback) {
+            currentScope->mDeviceLostCallback(message, currentScope->mUserdata);
         }
     }
 

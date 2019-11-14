@@ -31,6 +31,7 @@
 namespace dawn_native {
 
     using ErrorCallback = void (*)(const char* errorMessage, void* userData);
+    using DeviceLostCallback = void (*)(const char* errorMessage, void* userData);
 
     class AdapterBase;
     class AttachmentState;
@@ -158,6 +159,7 @@ namespace dawn_native {
         TextureBase* CreateTexture(const TextureDescriptor* descriptor);
         TextureViewBase* CreateTextureView(TextureBase* texture,
                                            const TextureViewDescriptor* descriptor);
+        void SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
 
         void InjectError(wgpu::ErrorType type, const char* message);
 
@@ -166,6 +168,9 @@ namespace dawn_native {
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
         void PushErrorScope(wgpu::ErrorFilter filter);
         bool PopErrorScope(wgpu::ErrorCallback callback, void* userdata);
+
+        MaybeError ValidateDeviceIsAlive();
+
         ErrorScope* GetCurrentErrorScope();
 
         void Reference();
@@ -193,6 +198,9 @@ namespace dawn_native {
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
+        bool IsDeviceLost() const;
+        void SetDeviceLost();
+        void LoseDevice(const char* message);
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -250,6 +258,9 @@ namespace dawn_native {
 
         void ConsumeError(ErrorData* error);
 
+        virtual void DeviceLostImpl() = 0;
+        virtual MaybeError CheckAndHandleDeviceLost() = 0;
+
         AdapterBase* mAdapter = nullptr;
 
         Ref<ErrorScope> mRootErrorScope;
@@ -279,6 +290,7 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+        bool mDeviceLost;
     };
 
 }  // namespace dawn_native

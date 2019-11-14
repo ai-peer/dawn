@@ -53,27 +53,10 @@ namespace dawn_native { namespace metal {
     }
 
     Device::~Device() {
-        // Wait for all commands to be finished so we can free resources SubmitPendingCommandBuffer
-        // may not increment the pendingCommandSerial if there are no pending commands, so we can't
-        // store the pendingSerial before SubmitPendingCommandBuffer then wait for it to be passed.
-        // Instead we submit and wait for the serial before the next pendingCommandSerial.
-        SubmitPendingCommandBuffer();
-        while (GetCompletedCommandSerial() != mLastSubmittedSerial) {
-            usleep(100);
+        if (IsDeviceLost()) {
+            return;
         }
-        Tick();
-
-        [mPendingCommands release];
-        mPendingCommands = nil;
-
-        mMapTracker = nullptr;
-        mDynamicUploader = nullptr;
-
-        [mCommandQueue release];
-        mCommandQueue = nil;
-
-        [mMtlDevice release];
-        mMtlDevice = nil;
+        DeviceLostImpl();
     }
 
     void Device::InitTogglesFromDriver() {
@@ -158,6 +141,8 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Device::TickImpl() {
+        DAWN_TRY(ValidateDeviceIsAlive());
+
         Serial completedSerial = GetCompletedCommandSerial();
 
         mDynamicUploader->Deallocate(completedSerial);
@@ -289,6 +274,35 @@ namespace dawn_native { namespace metal {
     void Device::WaitForCommandsToBeScheduled() {
         SubmitPendingCommandBuffer();
         [mLastSubmittedCommands waitUntilScheduled];
+    }
+
+    void Device::DeviceLostImpl() {
+        // Wait for all commands to be finished so we can free resources SubmitPendingCommandBuffer
+        // may not increment the pendingCommandSerial if there are no pending commands, so we can't
+        // store the pendingSerial before SubmitPendingCommandBuffer then wait for it to be passed.
+        // Instead we submit and wait for the serial before the next pendingCommandSerial.
+        SubmitPendingCommandBuffer();
+        while (GetCompletedCommandSerial() != mLastSubmittedSerial) {
+            usleep(100);
+        }
+        Tick();
+
+        [mPendingCommands release];
+        mPendingCommands = nil;
+
+        mMapTracker = nullptr;
+        mDynamicUploader = nullptr;
+
+        [mCommandQueue release];
+        mCommandQueue = nil;
+
+        [mMtlDevice release];
+        mMtlDevice = nil;
+    }
+
+    MayebeError Device::CheckAndHandleDeviceLost() {
+        // TODO(natlee@microsoft.com): implement CheckAndHandleDeviceLost
+        return {};
     }
 
 }}  // namespace dawn_native::metal

@@ -100,6 +100,7 @@ typedef void (*WGPUBufferMapWriteCallback)(WGPUBufferMapAsyncStatus status,
                                            void* data,
                                            uint64_t dataLength,
                                            void* userdata);
+typedef void (*WGPUDeviceLostCallback)(const char* message, void* userdata);
 typedef void (*WGPUFenceOnCompletionCallback)(WGPUFenceCompletionStatus status, void* userdata);
 typedef void (*WGPUErrorCallback)(WGPUErrorType type, const char* message, void* userdata);
 

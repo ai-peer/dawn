@@ -564,6 +564,13 @@
                 ]
             },
             {
+                "name": "set device lost callback",
+                "args": [
+                    {"name": "callback", "type": "device lost callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
                 "name": "push error scope",
                 "args": [
                     {"name": "filter", "type": "error filter"}
@@ -578,6 +585,9 @@
                 ]
             }
         ]
+    },
+    "device lost callback": {
+        "category": "natively defined"
     },
     "device properties": {
         "category": "structure",

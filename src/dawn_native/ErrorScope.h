@@ -42,20 +42,24 @@ namespace dawn_native {
         ~ErrorScope();
 
         void SetCallback(wgpu::ErrorCallback callback, void* userdata);
+        void SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
         ErrorScope* GetParent();
 
         void HandleError(wgpu::ErrorType type, const char* message);
+        void HandleDeviceLost(const char* message);
 
         void Destroy();
 
       private:
         bool IsRoot() const;
         static void HandleErrorImpl(ErrorScope* scope, wgpu::ErrorType type, const char* message);
+        static void HandleDeviceLostImpl(ErrorScope* scope, const char* message);
 
         wgpu::ErrorFilter mErrorFilter = wgpu::ErrorFilter::None;
         Ref<ErrorScope> mParent = nullptr;
 
         wgpu::ErrorCallback mCallback = nullptr;
+        wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
         void* mUserdata = nullptr;
 
         wgpu::ErrorType mErrorType = wgpu::ErrorType::NoError;
