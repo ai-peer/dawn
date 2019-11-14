@@ -27,3 +27,4 @@ uint64_t GetSwapChainImplementation();
 wgpu::TextureFormat GetPreferredSwapChainTextureFormat();
 wgpu::SwapChain GetSwapChain(const wgpu::Device& device);
 wgpu::TextureView CreateDefaultDepthStencilView(const wgpu::Device& device);
+void PrintDeviceError(WGPUErrorType errorType, const char* message, void*);

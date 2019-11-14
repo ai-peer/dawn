@@ -93,7 +93,11 @@ wgpu::Device CreateCppDawnDevice() {
     }
 
     // Create the test window and discover adapters using it (esp. for OpenGL)
+    if (window != nullptr) {
+        glfwDestroyWindow(window);
+    }
     utils::SetupGLFWWindowHintsForBackend(backendType);
+
     window = glfwCreateWindow(640, 480, "Dawn window", nullptr, nullptr);
     if (!window) {
         return wgpu::Device();

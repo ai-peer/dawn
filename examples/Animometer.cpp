@@ -28,6 +28,7 @@ wgpu::SwapChain swapchain;
 wgpu::RenderPipeline pipeline;
 wgpu::BindGroup bindGroup;
 wgpu::Buffer ubo;
+void init();
 
 float RandomFloat(float min, float max) {
     float zeroOne = rand() / float(RAND_MAX);
@@ -47,8 +48,14 @@ struct alignas(kMinDynamicBufferOffsetAlignment) ShaderData {
 
 static std::vector<ShaderData> shaderData;
 
+void OnDeviceLost(const char* message, void* userdata) {
+    PrintDeviceError(WGPUErrorType::WGPUErrorType_DeviceLost, message, userdata);
+    init();
+}
+
 void init() {
     device = CreateCppDawnDevice();
+    device.SetDeviceLostCallback(OnDeviceLost, nullptr);
 
     queue = device.CreateQueue();
     swapchain = GetSwapChain(device);

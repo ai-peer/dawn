@@ -160,6 +160,7 @@ namespace dawn_native {
     MaybeError BufferBase::MapAtCreation(uint8_t** mappedPointer) {
         ASSERT(!IsError());
         ASSERT(mappedPointer != nullptr);
+        DAWN_TRY(GetDevice()->ValidateDeviceIsAlive());
 
         mState = BufferState::Mapped;
 
@@ -256,6 +257,7 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const void* data) {
+        DAWN_TRY(GetDevice()->ValidateDeviceIsAlive());
         DynamicUploader* uploader = GetDevice()->GetDynamicUploader();
 
         UploadHandle uploadHandle;
@@ -312,6 +314,7 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::CopyFromStagingBuffer() {
+        DAWN_TRY(GetDevice()->ValidateDeviceIsAlive());
         ASSERT(mStagingBuffer);
         DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.get(), 0, this, 0, GetSize()));
 

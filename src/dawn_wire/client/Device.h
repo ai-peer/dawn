@@ -32,7 +32,9 @@ namespace dawn_wire { namespace client {
 
         Client* GetClient();
         void HandleError(WGPUErrorType errorType, const char* message);
+        void HandleDeviceLost(const char* message);
         void SetUncapturedErrorCallback(WGPUErrorCallback errorCallback, void* errorUserdata);
+        void SetDeviceLostCallback(WGPUDeviceLostCallback errorCallback, void* errorUserdata);
 
         void PushErrorScope(WGPUErrorFilter filter);
         bool RequestPopErrorScope(WGPUErrorCallback callback, void* userdata);
@@ -49,6 +51,7 @@ namespace dawn_wire { namespace client {
 
         Client* mClient = nullptr;
         WGPUErrorCallback mErrorCallback = nullptr;
+        WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
         void* mErrorUserdata;
     };
 

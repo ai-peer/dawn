@@ -460,6 +460,7 @@ void DawnTestBase::SetUp() {
     queue = device.CreateQueue();
 
     device.SetUncapturedErrorCallback(OnDeviceError, this);
+    device.SetDeviceLostCallback(OnDeviceLost, this);
 }
 
 void DawnTestBase::TearDown() {
@@ -493,6 +494,13 @@ dawn_native::PCIInfo DawnTestBase::GetPCIInfo() const {
 // static
 void DawnTestBase::OnDeviceError(WGPUErrorType type, const char* message, void* userdata) {
     ASSERT(type != WGPUErrorType_NoError);
+    DawnTestBase* self = static_cast<DawnTestBase*>(userdata);
+
+    ASSERT_TRUE(self->mExpectError) << "Got unexpected device error: " << message;
+    ASSERT_FALSE(self->mError) << "Got two errors in expect block";
+    self->mError = true;
+}
+void DawnTestBase::OnDeviceLost(const char* message, void* userdata) {
     DawnTestBase* self = static_cast<DawnTestBase*>(userdata);
 
     ASSERT_TRUE(self->mExpectError) << "Got unexpected device error: " << message;

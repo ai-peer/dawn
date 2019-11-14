@@ -34,7 +34,13 @@ namespace dawn_native {
 
     void QueueBase::Submit(uint32_t commandCount, CommandBufferBase* const* commands) {
         DeviceBase* device = GetDevice();
+        if (device->ConsumedError(device->ValidateDeviceIsAlive())) {
+            // If device is lost, don't let any commands be submitted
+            return;
+        }
+
         TRACE_EVENT0(device->GetPlatform(), General, "Queue::Submit");
+
         if (device->ConsumedError(ValidateSubmit(commandCount, commands))) {
             return;
         }

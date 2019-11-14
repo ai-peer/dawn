@@ -85,10 +85,10 @@ namespace dawn_native { namespace null {
     }
 
     Device::~Device() {
-        mDynamicUploader = nullptr;
-
-        mPendingOperations.clear();
-        ASSERT(mMemoryUsage == 0);
+        if (IsDeviceLost()) {
+            return;
+        }
+        DeviceLostImpl();
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -154,6 +154,17 @@ namespace dawn_native { namespace null {
         return std::move(stagingBuffer);
     }
 
+    void Device::DeviceLostImpl() {
+        mDynamicUploader = nullptr;
+
+        mPendingOperations.clear();
+        ASSERT(mMemoryUsage == 0);
+    }
+
+    MaybeError Device::CheckAndHandleDeviceLost() {
+        return {};
+    }
+
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,
@@ -198,6 +209,7 @@ namespace dawn_native { namespace null {
     }
 
     MaybeError Device::TickImpl() {
+        DAWN_TRY(ValidateDeviceIsAlive());
         SubmitPendingOperations();
         return {};
     }
