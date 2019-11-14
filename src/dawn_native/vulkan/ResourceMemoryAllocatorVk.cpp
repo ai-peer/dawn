@@ -113,6 +113,11 @@ namespace dawn_native { namespace vulkan {
         int memoryType = FindBestTypeIndex(requirements, mappable);
         ASSERT(memoryType >= 0);
 
+        // Vulkan validation layers check that allocation size must be larger than 0.
+        if (requirements.size == 0) {
+            return DAWN_VALIDATION_ERROR("The allocation size must larger than 0");
+        }
+
         VkDeviceSize size = requirements.size;
 
         // If the resource is too big, allocate memory just for it.
