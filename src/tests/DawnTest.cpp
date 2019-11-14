@@ -129,6 +129,11 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
             continue;
         }
 
+        if (strcmp("--skip-validation", argv[i]) == 0) {
+            mSkipDawnValidation = true;
+            continue;
+        }
+
         constexpr const char kVendorIdFilterArg[] = "--adapter-vendor-id=";
         if (strstr(argv[i], kVendorIdFilterArg) == argv[i]) {
             const char* vendorIdFilter = argv[i] + strlen(kVendorIdFilterArg);
@@ -148,6 +153,7 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
                          " to disabled)\n"
                          "  -c, --begin-capture-on-startup: Begin debug capture on startup "
                          "(defaults to no capture)\n"
+                         "  --skip-validation: Skip Dawn validation\n"
                          "  --adapter-vendor-id: Select adapter by vendor id to run end2end tests"
                          "on multi-GPU systems \n"
                       << std::endl;
@@ -176,6 +182,9 @@ void DawnTestEnvironment::SetUp() {
               << "\n"
                  "EnableBackendValidation: "
               << (mEnableBackendValidation ? "true" : "false")
+              << "\n"
+                 "SkipDawnValidation: "
+              << (mSkipDawnValidation ? "true" : "false")
               << "\n"
                  "BeginCaptureOnStartup: "
               << (mBeginCaptureOnStartup ? "true" : "false")
@@ -212,6 +221,10 @@ bool DawnTestEnvironment::UsesWire() const {
 
 bool DawnTestEnvironment::IsBackendValidationEnabled() const {
     return mEnableBackendValidation;
+}
+
+bool DawnTestEnvironment::IsDawnValidationSkipped() const {
+    return mSkipDawnValidation;
 }
 
 dawn_native::Instance* DawnTestEnvironment::GetInstance() const {
@@ -337,6 +350,10 @@ bool DawnTestBase::UsesWire() const {
 
 bool DawnTestBase::IsBackendValidationEnabled() const {
     return gTestEnv->IsBackendValidationEnabled();
+}
+
+bool DawnTestBase::IsDawnValidationSkipped() const {
+    return gTestEnv->IsDawnValidationSkipped();
 }
 
 bool DawnTestBase::HasVendorIdFilter() const {
