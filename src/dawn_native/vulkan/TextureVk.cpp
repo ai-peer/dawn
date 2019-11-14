@@ -406,12 +406,14 @@ namespace dawn_native { namespace vulkan {
     }
 
     // static
-    ResultOrError<Texture*> Texture::CreateFromExternal(Device* device,
-                                                        const ExternalImageDescriptor* descriptor,
-                                                        const TextureDescriptor* textureDescriptor) {
+    ResultOrError<Texture*> Texture::CreateFromExternal(
+            Device* device,
+            const ExternalImageDescriptor* descriptor,
+            const TextureDescriptor* textureDescriptor,
+            external_memory::Service* externalMemoryService) {
         std::unique_ptr<Texture> texture =
             std::make_unique<Texture>(device, textureDescriptor, TextureState::OwnedInternal);
-        DAWN_TRY(texture->InitializeFromExternal(descriptor));
+        DAWN_TRY(texture->InitializeFromExternal(descriptor, externalMemoryService));
         return texture.release();
     }
 
@@ -480,38 +482,24 @@ namespace dawn_native { namespace vulkan {
     }
 
     // Internally managed, but imported from external handle
-    MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptor* descriptor) {
+    MaybeError Texture::InitializeFromExternal(
+            const ExternalImageDescriptor* descriptor,
+            external_memory::Service* externalMemoryService) {
+        VkFormat format = VulkanImageFormat(GetFormat().format);
+        if (!externalMemoryService->SupportsCreateImage(descriptor, format)) {
+            return DAWN_VALIDATION_ERROR("Creating an image from external memory is not supported");
+        }
+
         mExternalState = ExternalState::PendingAcquire;
-        Device* device = ToBackend(GetDevice());
-
-        VkImageCreateInfo createInfo = {};
-        createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-        createInfo.pNext = nullptr;
-        createInfo.flags = VK_IMAGE_CREATE_ALIAS_BIT_KHR;
-        createInfo.imageType = VulkanImageType(GetDimension());
-        createInfo.format = VulkanImageFormat(GetFormat().format);
-        createInfo.extent = VulkanExtent3D(GetSize());
-        createInfo.mipLevels = GetNumMipLevels();
-        createInfo.arrayLayers = GetArrayLayers();
-        createInfo.samples = VulkanSampleCount(GetSampleCount());
-        createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-        createInfo.usage = VulkanImageUsage(GetUsage(), GetFormat());
-        createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-        createInfo.queueFamilyIndexCount = 0;
-        createInfo.pQueueFamilyIndices = nullptr;
-        createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-
-        ASSERT(IsSampleCountSupported(device, createInfo));
-
-        // We always set VK_IMAGE_USAGE_TRANSFER_DST_BIT unconditionally beause the Vulkan images
-        // that are used in vkCmdClearColorImage() must have been created with this flag, which is
-        // also required for the implementation of robust resource initialization.
-        createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &mHandle),
-            "CreateImage"));
-
+        VkImageCreateInfo baseCreateInfo;
+        baseCreateInfo.imageType = VulkanImageType(GetDimension());
+        baseCreateInfo.format = format;
+        baseCreateInfo.extent = VulkanExtent3D(GetSize());
+        baseCreateInfo.mipLevels = GetNumMipLevels();
+        baseCreateInfo.arrayLayers = GetArrayLayers();
+        baseCreateInfo.samples = VulkanSampleCount(GetSampleCount());
+        baseCreateInfo.usage = VulkanImageUsage(GetUsage(), GetFormat());
+        DAWN_TRY_ASSIGN(mHandle, externalMemoryService->CreateImage(descriptor, baseCreateInfo));
         return {};
     }
 
