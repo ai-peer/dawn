@@ -339,6 +339,16 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
     return gTestEnv->IsBackendValidationEnabled();
 }
 
+bool DawnTestBase::IsDawnValidationSkipped() const {
+    static constexpr char kSkipValidation[] = "skip_validation";
+    for (const char* toggle : dawn_native::GetTogglesUsed(backendDevice)) {
+        if (strncmp(toggle, kSkipValidation, sizeof(kSkipValidation)) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool DawnTestBase::HasVendorIdFilter() const {
     return gTestEnv->HasVendorIdFilter();
 }
@@ -726,6 +736,10 @@ namespace detail {
         for (size_t i = 0; i < numParams; ++i) {
             if (IsBackendAvailable(params[i].backendType)) {
                 backends.push_back(params[i]);
+
+                DawnTestParam p = params[i];
+                p.forceEnabledWorkarounds.push_back("skip_validation");
+                backends.push_back(p);
             }
         }
         return backends;
