@@ -591,6 +591,7 @@ namespace dawn_native { namespace vulkan {
 
     MaybeError Device::ImportExternalImage(const ExternalImageDescriptor* descriptor,
                                            ExternalMemoryHandle memoryHandle,
+                                           VkImage image,
                                            const std::vector<ExternalSemaphoreHandle>& waitHandles,
                                            VkSemaphore* outSignalSemaphore,
                                            VkDeviceMemory* outAllocation,
@@ -616,9 +617,8 @@ namespace dawn_native { namespace vulkan {
                         mExternalSemaphoreService->CreateExportableSemaphore());
 
         // Import the external image's memory
-        DAWN_TRY_ASSIGN(*outAllocation,
-                        mExternalMemoryService->ImportMemory(
-                            memoryHandle, descriptor->allocationSize, descriptor->memoryTypeIndex));
+        DAWN_TRY_ASSIGN(*outAllocation, mExternalMemoryService->ImportMemory(
+                memoryHandle, descriptor->allocationSize, descriptor->memoryTypeIndex, image));
 
         // Import semaphores we have to wait on before using the texture
         for (const ExternalSemaphoreHandle& handle : waitHandles) {
@@ -667,11 +667,13 @@ namespace dawn_native { namespace vulkan {
         // Cleanup in case of a failure, the image creation doesn't acquire the external objects
         // if a failure happems.
         Texture* result = nullptr;
-        if (ConsumedError(ImportExternalImage(descriptor, memoryHandle, waitHandles,
-                                              &signalSemaphore, &allocation, &waitSemaphores)) ||
-            ConsumedError(Texture::CreateFromExternal(this, descriptor, textureDescriptor,
-                                                      signalSemaphore, allocation, waitSemaphores),
-                          &result)) {
+        if (ConsumedError(Texture::CreateFromExternal(this, descriptor,
+                                                      textureDescriptor), &result) ||
+            ConsumedError(ImportExternalImage(descriptor, memoryHandle, result->GetHandle(),
+                                              waitHandles, &signalSemaphore, &allocation,
+                                              &waitSemaphores)) ||
+            ConsumedError(result->BindExternalMemory(descriptor, signalSemaphore,
+                                                     allocation, waitSemaphores))) {
             // Clear the signal semaphore
             fn.DestroySemaphore(GetVkDevice(), signalSemaphore, nullptr);
 

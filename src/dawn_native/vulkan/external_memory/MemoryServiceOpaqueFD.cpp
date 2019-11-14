@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "common/Assert.h"
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/BackendVk.h"
 #include "dawn_native/vulkan/DeviceVk.h"
@@ -79,9 +80,24 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
                !(memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_KHR);
     }
 
+    ResultOrError<VkDeviceSize> Service::GetAllocationSize(
+            const ExternalImageDescriptor* descriptor, VkImage image) {
+        ASSERT(image == VK_NULL_HANDLE);
+        VkDeviceSize allocationSize =  descriptor->allocationSize;
+        return allocationSize;
+    }
+
+    ResultOrError<uint32_t> Service::GetMemoryTypeIndex(
+            const ExternalImageDescriptor* descriptor, VkImage image) {
+        ASSERT(image == VK_NULL_HANDLE);
+        uint32_t memoryTypeIndex = descriptor->memoryTypeIndex;
+        return memoryTypeIndex;
+    }
+
     ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
                                                         VkDeviceSize allocationSize,
-                                                        uint32_t memoryTypeIndex) {
+                                                        uint32_t memoryTypeIndex,
+                                                        VkImage image) {
         if (handle < 0) {
             return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
         }
