@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98b2425b_09ac19b3",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T11:08:56Z",
+      "side": 1,
+      "message": "This could just be rendering a point.",
+      "revId": "83b0ce498e49600f5782c95c2eb233d56fe84fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dafb04e5_857f6678",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T11:08:56Z",
+      "side": 1,
+      "message": "This tests storage to uniform synchronization, so that should appear in the test name.",
+      "revId": "83b0ce498e49600f5782c95c2eb233d56fe84fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e98a8bbe_eddd5b43",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T11:08:56Z",
+      "side": 1,
+      "message": "Having functions that modify state like this is counter intuitive, maybe we could have the function return both the layout and the pipeline? (you can use the std::tie trick)",
+      "revId": "83b0ce498e49600f5782c95c2eb233d56fe84fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fc02f53_1c42c6ba",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T11:08:56Z",
+      "side": 1,
+      "message": "This would be a single EXPECT_PIXEL_RGBA_EQ(RGBA8::kGreen, mRenderPass.color 0, 0); if we rendered a single point in a 1x1 texture.\n\nAlso we should add RGBA8::kGreen and friends like in ANGLE.\n\nSame in other tests.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 66
+      },
+      "revId": "83b0ce498e49600f5782c95c2eb233d56fe84fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ae6980e_a15cd569",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T11:08:56Z",
+      "side": 1,
+      "message": "Note that for Dawn it shouldn\u0027t matter whether we do in same command buffre, multiple command bufers or multiple submits. Maybe we could have one test with that, but others would just test in the same command buffer.\n\nThe WebGPU CTS can do the combinatorial explosion when we implement it.",
+      "revId": "83b0ce498e49600f5782c95c2eb233d56fe84fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
