@@ -28,6 +28,22 @@
 
 namespace dawn_native { namespace vulkan {
 
+    ExternalImageDescriptor::ExternalImageDescriptor(ExternalImageDescriptorType type)
+        : type(type) {
+    }
+
+    ExternalImageDescriptorFD::ExternalImageDescriptorFD(ExternalImageDescriptorType type)
+        : ExternalImageDescriptor(type) {
+    }
+
+    ExternalImageDescriptorOpaqueFD::ExternalImageDescriptorOpaqueFD()
+        : ExternalImageDescriptorFD(ExternalImageDescriptorType::OpaqueFD) {
+    }
+
+    ExternalImageDescriptorDmaBuf::ExternalImageDescriptorDmaBuf()
+        : ExternalImageDescriptorFD(ExternalImageDescriptorType::DmaBuf) {
+    }
+
     VkInstance GetInstance(WGPUDevice device) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
         return backendDevice->GetVkInstance();
@@ -60,6 +76,7 @@ namespace dawn_native { namespace vulkan {
     }
 
 #ifdef DAWN_PLATFORM_LINUX
+    // TODO(hob): Remove this once we switch over to WrapVulkanImage in Chromium.
     WGPUTexture WrapVulkanImageOpaqueFD(WGPUDevice cDevice,
                                         const ExternalImageDescriptorOpaqueFD* descriptor) {
         Device* device = reinterpret_cast<Device*>(cDevice);
@@ -84,6 +101,33 @@ namespace dawn_native { namespace vulkan {
         }
 
         return outHandle;
+    }
+
+    WGPUTexture WrapVulkanImageDmaBuf(WGPUDevice cDevice,
+                                      const ExternalImageDescriptorDmaBuf* descriptor) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+
+        TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+            descriptor, descriptor->memoryFD, descriptor->waitFDs);
+
+        return reinterpret_cast<WGPUTexture>(texture);
+    }
+
+    WGPUTexture WrapVulkanImage(WGPUDevice cDevice, const ExternalImageDescriptor* descriptor) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+
+        switch (descriptor->type) {
+            case ExternalImageDescriptorType::OpaqueFD:
+            case ExternalImageDescriptorType::DmaBuf: {
+                const ExternalImageDescriptorFD* fdDescriptor =
+                    static_cast<const ExternalImageDescriptorFD*>(descriptor);
+                TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+                    descriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs);
+                return reinterpret_cast<WGPUTexture>(texture);
+            }
+            default:
+                return nullptr;
+        }
     }
 #endif
 
