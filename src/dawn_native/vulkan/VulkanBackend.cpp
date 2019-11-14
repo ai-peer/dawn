@@ -85,6 +85,16 @@ namespace dawn_native { namespace vulkan {
 
         return outHandle;
     }
+
+    WGPUTexture WrapVulkanImageDmaBuf(WGPUDevice cDevice,
+                                      const ExternalImageDescriptorDmaBuf* descriptor) {
+        Device* device = reinterpret_cast<Device*>(cDevice);
+
+        TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+            descriptor, descriptor->primeFD, descriptor->waitFDs);
+
+        return reinterpret_cast<WGPUTexture>(texture);
+    }
 #endif
 
 }}  // namespace dawn_native::vulkan

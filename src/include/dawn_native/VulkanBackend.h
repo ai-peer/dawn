@@ -24,8 +24,18 @@
 
 namespace dawn_native { namespace vulkan {
 
+    // The different types of ExternalImageDescriptors
+    enum ExternalImageDescriptorType {
+        General,
+#ifdef __linux__
+        OpaqueFD,
+        DmaBuf,
+#endif  // __linux__
+    };
+
     // Common properties of external images
     struct ExternalImageDescriptor {
+        ExternalImageDescriptorType type; // Must match the subclass
         const WGPUTextureDescriptor* cTextureDescriptor;  // Must match image creation params
         bool isCleared;               // Sets whether the texture will be cleared before use
         VkDeviceSize allocationSize;  // Must match VkMemoryAllocateInfo from image creation
@@ -62,6 +72,22 @@ namespace dawn_native { namespace vulkan {
         // textures before they are destroyed. On failure, returns -1
         DAWN_NATIVE_EXPORT int ExportSignalSemaphoreOpaqueFD(WGPUDevice cDevice,
                                                              WGPUTexture cTexture);
+
+        // Descriptor for dma-buf file descriptor image import
+        struct ExternalImageDescriptorDmaBuf : ExternalImageDescriptor {
+            int primeFD;  // A file descriptor corresponding to the dma-buf to import
+            uint32_t stride; // Stride of the buffer in bytes
+            uint64_t drmModifier; // DRM modifier of the buffer
+            std::vector<int> waitFDs;  // File descriptors of semaphores which will be waited on
+        };
+
+        // Imports an external Vulkan image from a dma-buf file descriptor. This shares the
+        // synchronization behavior of WrapVulkanImageOpaqueFD but uses dma-buf-specific extensions
+        // to create the VkImage and bind memory.
+        // On failure, returns a nullptr
+        DAWN_NATIVE_EXPORT WGPUTexture
+        WrapVulkanImageDmaBuf(WGPUDevice cDevice,
+                              const ExternalImageDescriptorDmaBuf* descriptor);
 #endif  // __linux__
 }}  // namespace dawn_native::vulkan
 
