@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b1bf658_cd1546bf",
+        "filename": "src/dawn_native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-14T09:04:52Z",
+      "side": 1,
+      "message": "Can we have a comment that explains the issue and why we do this? That\u0027s even more important if this behavior isn\u0027t in the d3d docs.",
+      "revId": "f654f43cb6c04a45b93c4cb39f5f92796a47f170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
