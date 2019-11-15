@@ -162,6 +162,30 @@
     },
     {
       "key": {
+        "uuid": "71d6836a_86851de9",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T00:43:08Z",
+      "side": 1,
+      "message": "https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/d3d12/DescriptorHeapAllocator.cpp?q\u003df:dawn+AllocateGPUH\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d114",
+      "parentUuid": "43615126_251937fd",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64af6a7b_56902cc6",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 6
