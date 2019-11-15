@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "5b80d527_fc4f9ccc",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:49:57Z",
+      "side": 1,
+      "message": "The Validate* calls call other nested Validate calls. So they\u0027re nonzero in the nested calls.",
+      "parentUuid": "3614ff48_6755b782",
+      "range": {
+        "startLine": 533,
+        "startChar": 38,
+        "endLine": 533,
+        "endChar": 49
+      },
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec354577_75b5f37e",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -70,6 +94,24 @@
       "writtenOn": "2019-11-15T13:29:40Z",
       "side": 1,
       "message": "Should these just be called Finish and ValidateFinish, then?",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4430b2dc_ddfbde26",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:49:57Z",
+      "side": 1,
+      "message": "We already have Finish and ValidateFinish. But one part of ValidateFinish isn\u0027t const. I could move that into Finish though.",
+      "parentUuid": "9544bbd1_53571708",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -144,6 +186,24 @@
     },
     {
       "key": {
+        "uuid": "912838ca_a497124c",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:49:57Z",
+      "side": 1,
+      "message": "I thought about doing this, but BeginPass would be completely empty accept for perhaps setting a marker which we ASSERT on later. I didn\u0027t think this would be too helpful because that duplicates a bunch of state tracking already in EncodingContext.\n\nWDYT?",
+      "parentUuid": "23c6bca4_cbb265b3",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e48acd40_ff914f69",
         "filename": "src/dawn_native/ResourceUsageTracker.cpp",
         "patchSetId": 5
@@ -179,6 +239,24 @@
     },
     {
       "key": {
+        "uuid": "f8d8aabb_5ee5eb0b",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:49:57Z",
+      "side": 1,
+      "message": "I think I had something else here and then removed it. Will change it back to the original code.",
+      "parentUuid": "113da3f2_dc8d7e77",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "26fa9ad7_3e3bd347",
         "filename": "src/dawn_native/ResourceUsageTracker.cpp",
         "patchSetId": 5
@@ -196,6 +274,24 @@
     },
     {
       "key": {
+        "uuid": "c0789ce7_84dc0649",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:49:57Z",
+      "side": 1,
+      "message": "Probably will dissolve",
+      "parentUuid": "26fa9ad7_3e3bd347",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e9aa965_0db6f022",
         "filename": "src/dawn_native/ResourceUsageTracker.h",
         "patchSetId": 5
@@ -207,6 +303,24 @@
       "writtenOn": "2019-11-15T13:44:02Z",
       "side": 1,
       "message": "optional nit (no pun intended): could be std::optional",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a9a79ba_97407a00",
+        "filename": "src/dawn_native/ResourceUsageTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:49:57Z",
+      "side": 1,
+      "message": "It\u0027s not optional though. It always exists and can only be acquired once.",
+      "parentUuid": "7e9aa965_0db6f022",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -242,6 +356,24 @@
       "side": 1,
       "message": "It probably would make sense to me to do this same thing for other SkipValidation checks too. Could assert SkipValidation is off inside of the Validate* functions.\n\nAgree splitting this into 2 CLs would be helpful. Or maybe 3, if you can separate the one that generalizes PassResourceUsageTracker to ResourceUsageTracker.",
       "parentUuid": "a187b5da_2ac3d103",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f747016d_6f6ac6c1",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:49:57Z",
+      "side": 1,
+      "message": "Good idea to split; Good idea to put it at the CreateInternal level",
+      "parentUuid": "db7fe66e_c59ea6a2",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
