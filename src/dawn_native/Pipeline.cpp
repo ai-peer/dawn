@@ -14,6 +14,7 @@
 
 #include "dawn_native/Pipeline.h"
 
+#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/ShaderModule.h"
@@ -32,7 +33,7 @@ namespace dawn_native {
         if (descriptor->module->GetExecutionModel() != stage) {
             return DAWN_VALIDATION_ERROR("Setting module with wrong stages");
         }
-        if (!descriptor->module->IsCompatibleWithPipelineLayout(layout)) {
+        if (layout != nullptr && !descriptor->module->IsCompatibleWithPipelineLayout(layout)) {
             return DAWN_VALIDATION_ERROR("Stage not compatible with layout");
         }
         return {};
@@ -63,6 +64,29 @@ namespace dawn_native {
     const PipelineLayoutBase* PipelineBase::GetLayout() const {
         ASSERT(!IsError());
         return mLayout.Get();
+    }
+
+    MaybeError PipelineBase::ValidateGetBindGroupLayout(uint32_t group) {
+        DAWN_TRY(GetDevice()->ValidateObject(this));
+        DAWN_TRY(GetDevice()->ValidateObject(mLayout.Get()));
+        if (group >= kMaxBindGroups) {
+            return DAWN_VALIDATION_ERROR("Bind group layout index out of bounds");
+        }
+        return {};
+    }
+
+    BindGroupLayoutBase* PipelineBase::GetBindGroupLayout(uint32_t group) {
+        if (GetDevice()->ConsumedError(ValidateGetBindGroupLayout(group))) {
+            return BindGroupLayoutBase::MakeError(GetDevice());
+        }
+
+        if (!mLayout->GetBindGroupLayoutsMask()[group]) {
+            return nullptr;
+        }
+
+        BindGroupLayoutBase* bgl = mLayout->GetBindGroupLayout(group);
+        bgl->Reference();
+        return bgl;
     }
 
 }  // namespace dawn_native
