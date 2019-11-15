@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03d0eb19_ae9672f6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T10:07:05Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec354577_75b5f37e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T10:07:05Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird that we start usage tracking here. Can we have a check that the usage tracking part of the encoding context is empty along with a comment that explains that the usage tracker starts to track the usage for the render pass now?\n\nAlternatively we keep the usage tracker in the pass itself and walk the RenderPassDescriptor again, that\u0027s not very expensive.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0125672_d93aeb64",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T10:07:05Z",
+      "side": 1,
+      "message": "This looks like the usageTracker tracks the global state of the command buffer. Maybe we can find a way to keep the usage tracker on the passes? Also we might be able to remove the usage tracker for compute passes because we have to submit the correct barriers anyway.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b1b5a05_d91050fd",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T10:07:05Z",
+      "side": 1,
+      "message": "This seems redundant with the EncodingContext usage tracker.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e48acd40_ff914f69",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T10:07:05Z",
+      "side": 1,
+      "message": "Was there any differences here apart from the introduction of lambdas (not sure why this was done though).",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a187b5da_2ac3d103",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T10:07:05Z",
+      "side": 1,
+      "message": "nit: maybe these could be at the Device::CreateTextureInternal level because it groups that validation skipping logic in less places and reads more easily (if (!skipvalidation) {validate}).\n\nOverall I don\u0027t think this toggle needs to skip the validation of every single commands, for example the BeginRenderPass validation isn\u0027t expensive and does some small form of processing that had to be duplicated in this CL [1].\n\nCould you split this CL into the introduction of the toggle and skipping of validation that\u0027s not command recording, and have the command recording as a second step? The latter will be harder to review and removing noise will help.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
