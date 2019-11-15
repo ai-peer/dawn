@@ -127,6 +127,23 @@
     },
     {
       "key": {
+        "uuid": "23c6bca4_cbb265b3",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:44:02Z",
+      "side": 1,
+      "message": "Since there\u0027s no BeginPass, only this EndPass, will this end up absorbing usages from between passes into the next pass?\n\nMaybe this should be a little more stateful with a BeginPass and EndPass. Perhaps even clearer to have BufferUsedAs/TextureUsedAs check the current state (pass index or no pass) and record it into the correct place, instead of the flushing.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e48acd40_ff914f69",
         "filename": "src/dawn_native/ResourceUsageTracker.cpp",
         "patchSetId": 5
@@ -138,6 +155,58 @@
       "writtenOn": "2019-11-15T10:07:05Z",
       "side": 1,
       "message": "Was there any differences here apart from the introduction of lambdas (not sure why this was done though).",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "113da3f2_dc8d7e77",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:44:02Z",
+      "side": 1,
+      "message": "There aren\u0027t any changes in the code inside the lambdas (I did a local diff on the files to review it)",
+      "parentUuid": "e48acd40_ff914f69",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26fa9ad7_3e3bd347",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:44:02Z",
+      "side": 1,
+      "message": "Could these lambdas just be helper functions? I didn\u0027t notice any captures.\n\n(Unless you decide to dissolve them.)",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e9aa965_0db6f022",
+        "filename": "src/dawn_native/ResourceUsageTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:44:02Z",
+      "side": 1,
+      "message": "optional nit (no pun intended): could be std::optional",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
