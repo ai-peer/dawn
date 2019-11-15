@@ -22,6 +22,30 @@
       "revId": "951a4a84bca5d9a7faa3bc83073c263966860828",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adf07728_37cdf899",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-15T03:02:18Z",
+      "side": 1,
+      "message": "Will do it either in this change, or in https://dawn-review.googlesource.com/c/dawn/+/13660.",
+      "parentUuid": "ef6ef92a_5838f618",
+      "range": {
+        "startLine": 136,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 37
+      },
+      "revId": "951a4a84bca5d9a7faa3bc83073c263966860828",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
