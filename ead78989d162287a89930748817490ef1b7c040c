@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "3614ff48_6755b782",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:29:40Z",
+      "side": 1,
+      "message": "Aren\u0027t they always zero here though? I think they don\u0027t become nonzero until inside this function. We should probably tweak this function to always overwrite these outputs in non-failure cases, unless we need this behavior.",
+      "range": {
+        "startLine": 533,
+        "startChar": 38,
+        "endLine": 533,
+        "endChar": 49
+      },
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec354577_75b5f37e",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -30,6 +53,23 @@
       "writtenOn": "2019-11-15T10:07:05Z",
       "side": 1,
       "message": "It\u0027s a bit weird that we start usage tracking here. Can we have a check that the usage tracking part of the encoding context is empty along with a comment that explains that the usage tracker starts to track the usage for the render pass now?\n\nAlternatively we keep the usage tracker in the pass itself and walk the RenderPassDescriptor again, that\u0027s not very expensive.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9544bbd1_53571708",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:29:40Z",
+      "side": 1,
+      "message": "Should these just be called Finish and ValidateFinish, then?",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -70,6 +110,23 @@
     },
     {
       "key": {
+        "uuid": "f8e0dd01_1db2a036",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:29:40Z",
+      "side": 1,
+      "message": "also assert the topLevel things should be empty",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e48acd40_ff914f69",
         "filename": "src/dawn_native/ResourceUsageTracker.cpp",
         "patchSetId": 5
@@ -98,6 +155,24 @@
       "writtenOn": "2019-11-15T10:07:05Z",
       "side": 1,
       "message": "nit: maybe these could be at the Device::CreateTextureInternal level because it groups that validation skipping logic in less places and reads more easily (if (!skipvalidation) {validate}).\n\nOverall I don\u0027t think this toggle needs to skip the validation of every single commands, for example the BeginRenderPass validation isn\u0027t expensive and does some small form of processing that had to be duplicated in this CL [1].\n\nCould you split this CL into the introduction of the toggle and skipping of validation that\u0027s not command recording, and have the command recording as a second step? The latter will be harder to review and removing noise will help.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db7fe66e_c59ea6a2",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T13:29:40Z",
+      "side": 1,
+      "message": "It probably would make sense to me to do this same thing for other SkipValidation checks too. Could assert SkipValidation is off inside of the Validate* functions.\n\nAgree splitting this into 2 CLs would be helpful. Or maybe 3, if you can separate the one that generalizes PassResourceUsageTracker to ResourceUsageTracker.",
+      "parentUuid": "a187b5da_2ac3d103",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
