@@ -24,14 +24,14 @@ class DynamicLib;
 namespace dawn_native { namespace vulkan {
 
     struct VulkanGlobalInfo;
-    struct VulkanDeviceKnobs;
+    struct VulkanDeviceInfo;
 
     // Stores the Vulkan entry points. Also loads them from the dynamic library
     // and the vkGet*ProcAddress entry points.
     struct VulkanFunctions {
         MaybeError LoadGlobalProcs(const DynamicLib& vulkanLib);
         MaybeError LoadInstanceProcs(VkInstance instance, const VulkanGlobalInfo& globalInfo);
-        MaybeError LoadDeviceProcs(VkDevice device, const VulkanDeviceKnobs& usedKnobs);
+        MaybeError LoadDeviceProcs(VkDevice device, const VulkanDeviceInfo& deviceInfo);
 
         // ---------- Global procs
 
@@ -264,6 +264,13 @@ namespace dawn_native { namespace vulkan {
         PFN_vkImportSemaphoreZirconHandleFUCHSIA ImportSemaphoreZirconHandleFUCHSIA = nullptr;
         PFN_vkGetSemaphoreZirconHandleFUCHSIA GetSemaphoreZirconHandleFUCHSIA = nullptr;
 #endif
+
+        // Core Vulkan 1.1 promoted extensions
+
+        // VK_KHR_get_memory_requirements2
+        PFN_vkGetImageMemoryRequirements2KHR GetImageMemoryRequirements2KHR = nullptr;
+        PFN_vkGetBufferMemoryRequirements2KHR GetBufferMemoryRequirements2KHR = nullptr;
+        PFN_vkGetImageSparseMemoryRequirements2KHR GetImageSparseMemoryRequirements2KHR = nullptr;
     };
 
 }}  // namespace dawn_native::vulkan

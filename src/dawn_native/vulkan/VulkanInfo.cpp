@@ -55,10 +55,13 @@ namespace dawn_native { namespace vulkan {
     const char kExtensionNameExtDebugMarker[] = "VK_EXT_debug_marker";
     const char kExtensionNameExtDebugReport[] = "VK_EXT_debug_report";
     const char kExtensionNameMvkMacosSurface[] = "VK_MVK_macos_surface";
+    const char kExtensionNameKhrGetMemoryRequirements2[] = "VK_KHR_get_memory_requirements2";
     const char kExtensionNameKhrExternalMemory[] = "VK_KHR_external_memory";
     const char kExtensionNameKhrExternalMemoryCapabilities[] =
         "VK_KHR_external_memory_capabilities";
     const char kExtensionNameKhrExternalMemoryFD[] = "VK_KHR_external_memory_fd";
+    const char kExtensionNameExtExternalMemoryDmaBuf[] = "VK_EXT_external_memory_dma_buf";
+    const char kExtensionNameExtImageDrmFormatModifier[] = "VK_EXT_image_drm_format_modifier";
     const char kExtensionNameFuchsiaExternalMemory[] = "VK_FUCHSIA_external_memory";
     const char kExtensionNameKhrExternalSemaphore[] = "VK_KHR_external_semaphore";
     const char kExtensionNameKhrExternalSemaphoreCapabilities[] =
@@ -281,11 +284,20 @@ namespace dawn_native { namespace vulkan {
                 if (IsExtensionName(extension, kExtensionNameExtDebugMarker)) {
                     info.debugMarker = true;
                 }
+                if (IsExtensionName(extension, kExtensionNameKhrGetMemoryRequirements2)) {
+                    info.getMemoryRequirements2 = true;
+                }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalMemory)) {
                     info.externalMemory = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalMemoryFD)) {
                     info.externalMemoryFD = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameExtExternalMemoryDmaBuf)) {
+                    info.externalMemoryDmaBuf = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameExtImageDrmFormatModifier)) {
+                    info.imageDrmFormatModifier = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameFuchsiaExternalMemory)) {
                     info.externalMemoryZirconHandle = true;
