@@ -34,6 +34,24 @@
       "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55098e0c_abd5d32d",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T18:14:07Z",
+      "side": 1,
+      "message": "I think just:\n\nstruct RGBA8 {\n  static constexpr RGBA8 kRed \u003d ...\n};",
+      "parentUuid": "ee918447_b930c271",
+      "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
