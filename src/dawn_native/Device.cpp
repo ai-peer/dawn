@@ -658,6 +658,22 @@ namespace dawn_native {
         ComputePipelineBase** result,
         const ComputePipelineDescriptor* descriptor) {
         DAWN_TRY(ValidateComputePipelineDescriptor(this, descriptor));
+
+        ComputePipelineDescriptor descriptorWithDefaultLayout;
+        Ref<PipelineLayoutBase> defaultLayout;
+        if (descriptor->layout == nullptr) {
+            descriptorWithDefaultLayout = *descriptor;
+            DAWN_TRY_ASSIGN(defaultLayout, PipelineLayoutBase::CreateDefault(
+                                               this, &descriptor->computeStage.module, 1));
+            // Release the external refcount from the call to CreateDefault.
+            // Ref will keep the pipeline layout alive until the end of the function where
+            // the pipeline will take another reference.
+            defaultLayout->Release();
+            descriptorWithDefaultLayout.layout = defaultLayout.Get();
+
+            descriptor = &descriptorWithDefaultLayout;
+        }
+
         DAWN_TRY_ASSIGN(*result, GetOrCreateComputePipeline(descriptor));
         return {};
     }
@@ -687,6 +703,30 @@ namespace dawn_native {
         RenderPipelineBase** result,
         const RenderPipelineDescriptor* descriptor) {
         DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
+
+        RenderPipelineDescriptor descriptorWithDefaultLayout;
+        Ref<PipelineLayoutBase> defaultLayout;
+        if (descriptor->layout == nullptr) {
+            descriptorWithDefaultLayout = *descriptor;
+            const ShaderModuleBase* modules[2];
+            modules[0] = descriptor->vertexStage.module;
+            uint32_t count;
+            if (descriptor->fragmentStage == nullptr) {
+                count = 1;
+            } else {
+                modules[1] = descriptor->fragmentStage->module;
+                count = 2;
+            }
+            DAWN_TRY_ASSIGN(defaultLayout, PipelineLayoutBase::CreateDefault(this, modules, count));
+            // Release the external refcount from the call to CreateDefault.
+            // Ref will keep the pipeline layout alive until the end of the function where
+            // the pipeline will take another reference.
+            defaultLayout->Release();
+            descriptorWithDefaultLayout.layout = defaultLayout.Get();
+
+            descriptor = &descriptorWithDefaultLayout;
+        }
+
         DAWN_TRY_ASSIGN(*result, GetOrCreateRenderPipeline(descriptor));
         return {};
     }

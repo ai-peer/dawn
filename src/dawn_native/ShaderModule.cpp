@@ -41,6 +41,31 @@ namespace dawn_native {
                     return Format::Other;
             }
         }
+
+        wgpu::TextureViewDimension SpirvDimToTextureViewDimension(spv::Dim dim, bool arrayed) {
+            switch (dim) {
+                case spv::Dim::Dim1D:
+                    return wgpu::TextureViewDimension::e1D;
+                case spv::Dim::Dim2D:
+                    if (arrayed) {
+                        return wgpu::TextureViewDimension::e2DArray;
+                    } else {
+                        return wgpu::TextureViewDimension::e2D;
+                    }
+                case spv::Dim::Dim3D:
+                    return wgpu::TextureViewDimension::e3D;
+                case spv::Dim::DimCube:
+                    if (arrayed) {
+                        return wgpu::TextureViewDimension::CubeArray;
+                    } else {
+                        return wgpu::TextureViewDimension::Cube;
+                    }
+                default:
+                    UNREACHABLE();
+                    return wgpu::TextureViewDimension::Undefined;
+            }
+        }
+
     }  // anonymous namespace
 
     MaybeError ValidateShaderModuleDescriptor(DeviceBase*,
@@ -150,15 +175,20 @@ namespace dawn_native {
                     continue;
                 }
 
-                auto& info = mBindingInfo[set][binding];
+                auto& info = mBindingInfo[set][binding] = {};
                 info.used = true;
                 info.id = resource.id;
                 info.base_type_id = resource.base_type_id;
                 switch (bindingType) {
                     case wgpu::BindingType::SampledTexture: {
+                        spirv_cross::SPIRType::ImageType imageType =
+                            compiler.get_type(info.base_type_id).image;
                         spirv_cross::SPIRType::BaseType textureComponentType =
-                            compiler.get_type(compiler.get_type(info.base_type_id).image.type)
-                                .basetype;
+                            compiler.get_type(imageType.type).basetype;
+
+                        info.multisampled = imageType.ms;
+                        info.textureDimension =
+                            SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
                         info.textureComponentType =
                             SpirvCrossBaseTypeToFormatType(textureComponentType);
                         info.type = bindingType;
@@ -266,7 +296,7 @@ namespace dawn_native {
         return mExecutionModel;
     }
 
-    bool ShaderModuleBase::IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout) {
+    bool ShaderModuleBase::IsCompatibleWithPipelineLayout(const PipelineLayoutBase* layout) const {
         ASSERT(!IsError());
 
         for (uint32_t group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
@@ -286,8 +316,9 @@ namespace dawn_native {
         return true;
     }
 
-    bool ShaderModuleBase::IsCompatibleWithBindGroupLayout(size_t group,
-                                                           const BindGroupLayoutBase* layout) {
+    bool ShaderModuleBase::IsCompatibleWithBindGroupLayout(
+        size_t group,
+        const BindGroupLayoutBase* layout) const {
         ASSERT(!IsError());
 
         const auto& layoutInfo = layout->GetBindingInfo();

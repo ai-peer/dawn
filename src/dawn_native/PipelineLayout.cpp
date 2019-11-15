@@ -19,6 +19,7 @@
 #include "common/HashUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/ShaderModule.h"
 
 namespace dawn_native {
 
@@ -87,7 +88,116 @@ namespace dawn_native {
         return new PipelineLayoutBase(device, ObjectBase::kError);
     }
 
-    const BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(size_t group) const {
+    // static
+    ResultOrError<PipelineLayoutBase*> PipelineLayoutBase::CreateDefault(
+        DeviceBase* device,
+        const ShaderModuleBase* const* modules,
+        uint32_t count) {
+        ASSERT(count > 0);
+
+        std::array<std::array<BindGroupLayoutBinding, kMaxBindingsPerGroup>, kMaxBindGroups>
+            bindings = {};
+        std::array<std::bitset<kMaxBindingsPerGroup>, kMaxBindGroups> usedBindings = {};
+        std::array<uint32_t, kMaxBindGroups> bindingCounts = {};
+
+        uint32_t bindGroupLayoutCount = 0;
+        for (uint32_t moduleIndex = 0; moduleIndex < count; ++moduleIndex) {
+            const ShaderModuleBase* module = modules[moduleIndex];
+            const ShaderModuleBase::ModuleBindingInfo& info = module->GetBindingInfo();
+
+            for (uint32_t group = 0; group < info.size(); ++group) {
+                for (uint32_t binding = 0; binding < info[group].size(); ++binding) {
+                    const ShaderModuleBase::BindingInfo& bindingInfo = info[group][binding];
+                    if (!bindingInfo.used) {
+                        continue;
+                    }
+
+                    if (bindingInfo.multisampled) {
+                        return DAWN_VALIDATION_ERROR("Multisampled textures not supported (yet)");
+                    }
+
+                    if (usedBindings[group][binding]) {
+                        return DAWN_VALIDATION_ERROR(
+                            "Binding already used in default pipeline layout initialization");
+                    }
+                    usedBindings[group].set(binding);
+
+                    uint32_t bindingCount = bindingCounts[group];
+
+                    bindings[group][bindingCount].binding = binding;
+                    bindings[group][bindingCount].visibility = wgpu::ShaderStage::Vertex |
+                                                               wgpu::ShaderStage::Fragment |
+                                                               wgpu::ShaderStage::Compute;
+                    bindings[group][bindingCount].type = bindingInfo.type;
+                    bindings[group][bindingCount].hasDynamicOffset = false;
+                    bindings[group][bindingCount].multisampled = bindingInfo.multisampled;
+                    bindings[group][bindingCount].textureDimension = bindingInfo.textureDimension;
+                    bindings[group][bindingCount].textureComponentType =
+                        static_cast<wgpu::TextureComponentType>(bindingInfo.textureComponentType);
+
+                    static_assert(wgpu::TextureComponentType::Float ==
+                                      static_cast<wgpu::TextureComponentType>(Format::Type::Float),
+                                  "");
+                    static_assert(wgpu::TextureComponentType::Sint ==
+                                      static_cast<wgpu::TextureComponentType>(Format::Type::Sint),
+                                  "");
+                    static_assert(wgpu::TextureComponentType::Uint ==
+                                      static_cast<wgpu::TextureComponentType>(Format::Type::Uint),
+                                  "");
+
+                    bindingCounts[group]++;
+
+                    bindGroupLayoutCount = std::max(bindGroupLayoutCount, group + 1);
+                }
+            }
+        }
+
+        std::array<BindGroupLayoutBase*, kMaxBindGroups> bindGroupLayouts = {};
+        for (uint32_t group = 0; group < bindGroupLayoutCount; ++group) {
+            if (bindingCounts[group] == 0) {
+                continue;
+            }
+
+            BindGroupLayoutDescriptor desc = {};
+            desc.bindings = bindings[group].data();
+            desc.bindingCount = bindingCounts[group];
+
+            // We should never produce a bad descriptor.
+            ASSERT(!ValidateBindGroupLayoutDescriptor(device, &desc).IsError());
+
+            BindGroupLayoutBase* bgl = nullptr;
+            DAWN_TRY_ASSIGN(bgl, device->GetOrCreateBindGroupLayout(&desc));
+            bindGroupLayouts[group] = bgl;
+        }
+
+        PipelineLayoutDescriptor desc = {};
+        desc.bindGroupLayouts = bindGroupLayouts.data();
+        desc.bindGroupLayoutCount = bindGroupLayoutCount;
+        PipelineLayoutBase* pipelineLayout = device->CreatePipelineLayout(&desc);
+
+        // These bind group layouts are created internally and referenced by the pipeline layout.
+        // Release the external refcount.
+        for (uint32_t group = 0; group < bindGroupLayoutCount; ++group) {
+            if (bindGroupLayouts[group] != nullptr) {
+                bindGroupLayouts[group]->Release();
+            }
+        }
+
+        for (uint32_t moduleIndex = 0; moduleIndex < count; ++moduleIndex) {
+            ASSERT(modules[moduleIndex]->IsCompatibleWithPipelineLayout(pipelineLayout));
+        }
+
+        return pipelineLayout;
+    }
+
+    const BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(uint32_t group) const {
+        ASSERT(!IsError());
+        ASSERT(group < kMaxBindGroups);
+        ASSERT(mMask[group]);
+        return mBindGroupLayouts[group].Get();
+    }
+
+    BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(uint32_t group) {
         ASSERT(!IsError());
         ASSERT(group < kMaxBindGroups);
         ASSERT(mMask[group]);
