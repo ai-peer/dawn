@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ede0cb88_458e6db1",
+        "filename": "src/dawn_native/RefCounted.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T17:41:29Z",
+      "side": 1,
+      "message": "I\u0027m sure it\u0027s the same, but\n\n mRefCount \u003e\u003e kPayloadBits\n\n?",
+      "range": {
+        "startLine": 33,
+        "startChar": 15,
+        "endLine": 33,
+        "endChar": 45
+      },
+      "revId": "dd2e061084d1fb9b0824f40209d123498e27585e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7ccd0c5a_f891e791",
         "filename": "src/dawn_native/RefCounted.cpp",
         "patchSetId": 1
