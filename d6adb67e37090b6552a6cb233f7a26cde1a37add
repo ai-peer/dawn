@@ -186,6 +186,30 @@
     },
     {
       "key": {
+        "uuid": "83ae9c32_9e6f491f",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T09:28:01Z",
+      "side": 1,
+      "message": "Thanks, somehow I was only looking at Allocate.",
+      "parentUuid": "71d6836a_86851de9",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64af6a7b_56902cc6",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 6
@@ -237,6 +261,30 @@
       "writtenOn": "2019-11-13T05:30:11Z",
       "side": 1,
       "message": "This should no-op if the heaps haven\u0027t changed. Otherwise, we\u0027re redundantly calling commandList-\u003eSetDescriptorHeaps it for every Draw()",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 50
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4420c7d_5ff905d4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T09:28:01Z",
+      "side": 1,
+      "message": "Also if the heaps have changed we need to reencode the other \"current\" bindgroups in the new descriptor heaps.",
+      "parentUuid": "fe20f275_d79e9fee",
       "range": {
         "startLine": 107,
         "startChar": 11,
