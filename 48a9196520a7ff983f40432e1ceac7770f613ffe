@@ -1,0 +1,373 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d338933_12659dac",
+        "filename": "examples/Animometer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "Can you explain the changes in this file? Are they to manually test device loss? We could have a \"LoseForTesting\" method on wgpu::Device and have a test for it (might be a whitebox test because we would create the device manually instead of the DawnTest harness doing it for us).\n\nWith a specific test like this, changes to Animometer and SampleUtils might not be needed.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3132b0c_acf01467",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "This could be a default initializer in the member declarations like so, also we\u0027re on the device so we don\u0027t need \"Device\" in the variable name:\n\n  bool mIsLost \u003d false;",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dbf8e0d_9bfc4a9c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "This should still contain `message` to explain why / when it was lost.",
+      "range": {
+        "startLine": 100,
+        "startChar": 23,
+        "endLine": 100,
+        "endChar": 36
+      },
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44866b50_324d9967",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "nit: unrelated change?",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0192abd1_3a1f945e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "nit: ValidateIsAlive",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b66fa67_7f5cc7f6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "DAWN_UNLIKELY because this function will be in the critical path of WebGPU",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cab83c1c_9dafdc3a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "ValidateIsAlive is in the critical path so we shouldn\u0027t do anything expensive at all in it. CheckAndHandleDeviceLost doesn\u0027t need to be done all the time, in fact it might never be needed, and the only time devices are lost is when backends return a DAWN_DEVICE_LOST_ERROR (or Device.LoseForTesting())",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbf5b340_bb9aa6f7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "mIsLost?",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2936c11_5a21a355",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "mIsLost \u003d true",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ef7edc3_c171146a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "Having this outside of the validateXXXXDescriptor method sounds good, because even when we\u0027ll have a Toggle to skip validation, we\u0027ll want to handle the device loss correctly.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5ccb834_385f8897",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "These two are never used and can be removed",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29391bbc_44898e10",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "nit: IsLost",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f76acf0_c163bf54",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "All device losses should bubble all the way to HandleError so only DeviceBase needs to update mIsLost and can do so without an accessor method.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3919050c_2547cee0",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "This can be a private member and LoseForTesting is public and calls LoseDevice(). Probably can be renamed to HandleLoss()",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "284d8caf_92f31537",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "nit: HandleLossImpl.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262354d1_34c705af",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "This might not be needed.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1d6842f_2a3e3086",
+        "filename": "src/dawn_native/ErrorScope.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "Error scopes are completely unrelated to device loss, they only handle OOM and validation errors. The device loss callback should just be on the device itself.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b98df45b_88eb512e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "I don\u0027t think the logic in backends is correct with waiting for the Device to finish but ignoring errors:\n\nThere are three cases we should care about:\n\n - Regular device destruction where we should wait for the GPU to finish, check errors doing so, and destroy stuff (this might cause device loss in places and be reintrant)\n - Regular device loss, where depending on the backend it might be ok to not wait for the GPU to finish, and not check errors doing so.\n - Device loss for testing where we need to wait for the GPU, checking errors and destroy stuff (very similar to the first case).\n\nMy worry is that some objects, for example resources, own data that needs to be destroyed before we can destroy the backend API device. We\u0027ll need to think more about how to deal with this.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "956d7b12_59790266",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "This user data is for the \"uncaptured error callback\", we should use a different userdata for the device loss callback.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12bc6cbc_a7f564fe",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "unit: newline.",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abcc6655_1ad9b934",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T12:59:39Z",
+      "side": 1,
+      "message": "Device losses are never expected in end2end tests so we could just FAIL() \u003c\u003c \"Device was lost during the test.\"",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
