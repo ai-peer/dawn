@@ -52,6 +52,24 @@
       "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3804b537_15fc6a45",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-15T18:33:58Z",
+      "side": 1,
+      "message": "Yeah, I thought so, but... \n\nwe have already had a struct RGBA8 in DawnTest.h. \n\nAnd I tried that way, but I got compile error if I put these const values into that struct: \nincomplete type \u0027const RGBA8\u0027 is not a literal type. \ndefinition of \u0027RGBA8\u0027 is not complete until the closing \u0027}\u0027\n\nIf I put these const values into another struct RGBA8, it will lead to another compile error: redefinition RGBA8 \n\nA possible way is to add a namespace RGBA which include the struct definition and the const values, then we need to replace all RGBA8 with RGBA8::RGBA8 in that way... So I asked the question above... \n\nDid I make any mistakes via these tries?",
+      "parentUuid": "55098e0c_abd5d32d",
+      "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
