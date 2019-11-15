@@ -95,6 +95,7 @@ class NativelyDefined(Type):
 # method arguments or structure members.
 class RecordMember:
     def __init__(self, name, typ, annotation, optional=False,
+                 sparse=False,
                  is_return_value=False, default_value=None,
                  skip_serialize=False):
         self.name = name
@@ -102,6 +103,7 @@ class RecordMember:
         self.annotation = annotation
         self.length = None
         self.optional = optional
+        self.sparse = sparse
         self.is_return_value = is_return_value
         self.handle_type = None
         self.default_value = default_value
@@ -156,6 +158,7 @@ def linked_record_members(json_data, types):
         member = RecordMember(Name(m['name']), types[m['type']],
                               m.get('annotation', 'value'),
                               optional=m.get('optional', False),
+                              sparse=m.get('sparse', False),
                               is_return_value=m.get('is_return_value', False),
                               default_value=m.get('default', None),
                               skip_serialize=m.get('skip_serialize', False))
@@ -173,7 +176,9 @@ def linked_record_members(json_data, types):
                     member.constant_length = 1
                 else:
                     assert(False)
+                assert(not member.sparse)
             elif m['length'] == 'strlen':
+                assert(not member.sparse)
                 member.length = 'strlen'
             else:
                 member.length = members_by_name[m['length']]

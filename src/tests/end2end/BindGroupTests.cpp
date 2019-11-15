@@ -815,4 +815,79 @@ TEST_P(BindGroupTests, BindGroupLayoutVisibilityCanBeNone) {
     queue.Submit(1, &commands);
 }
 
+// Test that bind group layouts in the pipeline layout can be sparse
+TEST_P(BindGroupTests, SparsePipelineLayout) {
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 2, 2);
+
+    wgpu::ShaderModule vsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+        #version 450
+        layout (set = 0, binding = 0) uniform UniformBuffer1 {
+            vec2 pos0;
+        };
+        layout (set = 2, binding = 0) uniform UniformBuffer2 {
+            vec2 pos2;
+        };
+        void main() {
+            gl_Position = vec4(gl_VertexIndex == 0 ? pos0 : pos2, 0.f, 1.f);
+            gl_PointSize = 1.0;
+        })");
+
+    wgpu::ShaderModule fsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        #version 450
+        layout(location = 0) out vec4 fragColor;
+        void main() {
+            fragColor = vec4(0.f, 1.f, 0.f, 1.f);
+        })");
+
+    wgpu::BindGroupLayout layout0 = utils::MakeBindGroupLayout(
+        device, {
+                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
+                });
+
+    wgpu::BindGroupLayout layout2 = utils::MakeBindGroupLayout(
+        device, {
+                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
+                });
+
+    wgpu::PipelineLayout pipelineLayout =
+        MakeBasicPipelineLayout(device, {layout0, nullptr, layout2});
+
+    utils::ComboRenderPipelineDescriptor descriptor(device);
+    descriptor.layout = pipelineLayout;
+    descriptor.vertexStage.module = vsModule;
+    descriptor.cFragmentStage.module = fsModule;
+    descriptor.cColorStates[0].format = renderPass.colorFormat;
+    descriptor.primitiveTopology = wgpu::PrimitiveTopology::PointList;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
+
+    wgpu::BindGroup bindGroup0 = utils::MakeBindGroup(
+        device, layout0,
+        {{0, utils::CreateBufferFromData(device, wgpu::BufferUsage::Uniform, {-0.5f, 0.5f}), 0,
+          2 * sizeof(float)}});
+
+    wgpu::BindGroup bindGroup2 = utils::MakeBindGroup(
+        device, layout2,
+        {{0, utils::CreateBufferFromData(device, wgpu::BufferUsage::Uniform, {0.5f, -0.5f}), 0,
+          2 * sizeof(float)}});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    pass.SetPipeline(pipeline);
+    pass.SetBindGroup(0, bindGroup0);
+    pass.SetBindGroup(2, bindGroup2);
+    pass.Draw(2, 1, 0, 0);
+    pass.EndPass();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 0, 0, 0), renderPass.color, 0, 1);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 0, 0, 0), renderPass.color, 1, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 255, 0, 255), renderPass.color, 1, 1);
+}
+
 DAWN_INSTANTIATE_TEST(BindGroupTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);

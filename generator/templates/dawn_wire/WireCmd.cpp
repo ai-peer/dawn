@@ -53,7 +53,7 @@
 //* Outputs the serialization code to put `in` in `out`
 {% macro serialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
-        {%- set Optional = "Optional" if member.optional else "" -%}
+        {%- set Optional = "Optional" if member.optional or member.sparse else "" -%}
         {{out}} = provider.Get{{Optional}}Id({{in}});
     {% elif member.type.category == "structure"%}
         {%- set Provider = ", provider" if member.type.has_dawn_object else "" -%}
@@ -70,7 +70,7 @@
 //* Outputs the deserialization code to put `in` in `out`
 {% macro deserialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
-        {%- set Optional = "Optional" if member.optional else "" -%}
+        {%- set Optional = "Optional" if member.optional or member.sparse else "" -%}
         DESERIALIZE_TRY(resolver.Get{{Optional}}FromId({{in}}, &{{out}}));
     {%- elif member.type.category == "structure" -%}
         DESERIALIZE_TRY({{as_cType(member.type.name)}}Deserialize(&{{out}}, &{{in}}, buffer, size, allocator
