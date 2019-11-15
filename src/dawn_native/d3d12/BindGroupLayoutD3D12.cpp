@@ -151,14 +151,6 @@ namespace dawn_native { namespace d3d12 {
         return mDescriptorCounts[Sampler] > 0;
     }
 
-    uint32_t BindGroupLayout::GetCbvUavSrvDescriptorCount() const {
-        return mDescriptorCounts[CBV] + mDescriptorCounts[UAV] + mDescriptorCounts[SRV];
-    }
-
-    uint32_t BindGroupLayout::GetSamplerDescriptorCount() const {
-        return mDescriptorCounts[Sampler];
-    }
-
     const D3D12_DESCRIPTOR_RANGE* BindGroupLayout::GetCbvUavSrvDescriptorRanges() const {
         return mRanges;
     }
@@ -167,4 +159,17 @@ namespace dawn_native { namespace d3d12 {
         return &mRanges[Sampler];
     }
 
+    ResultOrError<DescriptorHeapHandle> BindGroupLayout::AllocateSamplerDescriptors() {
+        return ToBackend(GetDevice())
+            ->GetDescriptorHeapAllocator()
+            ->AllocateGPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, mDescriptorCounts[Sampler]);
+    }
+
+    ResultOrError<DescriptorHeapHandle> BindGroupLayout::AllocateCbVUavSrvDescriptors() {
+        const uint32_t descriptorCount =
+            mDescriptorCounts[CBV] + mDescriptorCounts[UAV] + mDescriptorCounts[SRV];
+        return ToBackend(GetDevice())
+            ->GetDescriptorHeapAllocator()
+            ->AllocateGPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, descriptorCount);
+    }
 }}  // namespace dawn_native::d3d12

@@ -45,6 +45,11 @@ namespace dawn_native { namespace d3d12 {
         uint64_t mOffset;
     };
 
+    struct DescriptorHeapInfo {
+        ComPtr<ID3D12DescriptorHeap> heap;
+        RingBufferAllocator allocator;
+    };
+
     class DescriptorHeapAllocator {
       public:
         DescriptorHeapAllocator(Device* device);
@@ -55,12 +60,9 @@ namespace dawn_native { namespace d3d12 {
                                                             uint32_t count);
         void Deallocate(uint64_t lastCompletedSerial);
 
-      private:
-        struct DescriptorHeapInfo {
-            ComPtr<ID3D12DescriptorHeap> heap;
-            RingBufferAllocator allocator;
-        };
+        const DescriptorHeapInfo& GetGPUDescriptorHeapInfo(D3D12_DESCRIPTOR_HEAP_TYPE type) const;
 
+      private:
         ResultOrError<DescriptorHeapHandle> Allocate(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                                      uint32_t count,
                                                      uint32_t allocationSize,
