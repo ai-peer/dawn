@@ -142,6 +142,11 @@ namespace dawn_native { namespace vulkan {
         VkMemoryRequirements requirements;
         device->fn.GetBufferMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
 
+        // Vulkan validation layers check that requirements size must be larger than 0.
+        if (requirements.size == 0) {
+            return DAWN_VALIDATION_ERROR("The allocation size must larger than 0");
+        }
+
         bool requestMappable =
             (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
         DAWN_TRY_ASSIGN(mMemoryAllocation, device->AllocateMemory(requirements, requestMappable));
