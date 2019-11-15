@@ -671,6 +671,30 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     }
 }
 
+// Test that bind group layouts in the pipeline layout can be sparse
+TEST_F(BindGroupLayoutValidationTest, SparsePipelineLayout) {
+    {
+        wgpu::BindGroupLayout bgl[3] = {nullptr, nullptr, nullptr};
+
+        bgl[2] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
+                    });
+
+        TestCreatePipelineLayout(bgl, 3, true);
+    }
+    {
+        wgpu::BindGroupLayout bgl[3] = {nullptr, nullptr, nullptr};
+        bgl[0] = utils::MakeBindGroupLayout(
+            device, {
+                        {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
+                    });
+        bgl[1] = nullptr;
+
+        TestCreatePipelineLayout(bgl, 3, true);
+    }
+}
+
 constexpr uint64_t kBufferSize = 3 * kMinDynamicBufferOffsetAlignment + 8;
 constexpr uint32_t kBindingSize = 9;
 

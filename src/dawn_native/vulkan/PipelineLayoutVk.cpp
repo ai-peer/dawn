@@ -33,14 +33,16 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError PipelineLayout::Initialize() {
-        // Compute the array of VkDescriptorSetLayouts that will be chained in the create info.
-        // TODO(cwallez@chromium.org) Vulkan doesn't allow holes in this array, should we expose
-        // this constraints at the Dawn level?
-        uint32_t numSetLayouts = 0;
         std::array<VkDescriptorSetLayout, kMaxBindGroups> setLayouts;
+
+        uint32_t numSetLayouts = 0;
         for (uint32_t setIndex : IterateBitSet(GetBindGroupLayoutsMask())) {
-            setLayouts[numSetLayouts] = ToBackend(GetBindGroupLayout(setIndex))->GetHandle();
-            numSetLayouts++;
+            for (; numSetLayouts < setIndex; ++numSetLayouts) {
+                setLayouts[numSetLayouts] = ToBackend(GetDevice())->GetEmptyDescriptorSetLayout();
+            }
+
+            setLayouts[setIndex] = ToBackend(GetBindGroupLayout(setIndex))->GetHandle();
+            numSetLayouts = setIndex + 1;
         }
 
         VkPipelineLayoutCreateInfo createInfo;

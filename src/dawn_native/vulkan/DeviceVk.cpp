@@ -79,6 +79,19 @@ namespace dawn_native { namespace vulkan {
 
         DAWN_TRY(PrepareRecordingContext());
 
+        {
+            VkDescriptorSetLayoutCreateInfo createInfo;
+            createInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+            createInfo.pNext = nullptr;
+            createInfo.flags = 0;
+            createInfo.bindingCount = 0;
+            createInfo.pBindings = nullptr;
+
+            DAWN_TRY(CheckVkSuccess(fn.CreateDescriptorSetLayout(mVkDevice, &createInfo, nullptr,
+                                                                 &mEmptyDescriptorSetLayout),
+                                    "CreateDescriptorSetLayout"));
+        }
+
         return {};
     }
 
@@ -134,6 +147,7 @@ namespace dawn_native { namespace vulkan {
         // Free services explicitly so that they can free Vulkan objects before vkDestroyDevice
         mDynamicUploader = nullptr;
         mDescriptorSetService = nullptr;
+        fn.DestroyDescriptorSetLayout(mVkDevice, mEmptyDescriptorSetLayout, nullptr);
 
         // Releasing the uploader enqueues buffers to be released.
         // Call Tick() again to clear them before releasing the deleter.
@@ -700,6 +714,11 @@ namespace dawn_native { namespace vulkan {
 
     ResourceMemoryAllocator* Device::GetResourceMemoryAllocatorForTesting() const {
         return mResourceMemoryAllocator.get();
+    }
+
+    VkDescriptorSetLayout Device::GetEmptyDescriptorSetLayout() const {
+        ASSERT(mEmptyDescriptorSetLayout);
+        return mEmptyDescriptorSetLayout;
     }
 
 }}  // namespace dawn_native::vulkan
