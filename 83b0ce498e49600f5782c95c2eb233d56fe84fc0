@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "7c836d47_889ab388",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-15T18:20:23Z",
+      "side": 1,
+      "message": "I also wondered which one was better and chose to change the fixture name, otherwise the test name might be too loooooong.",
+      "parentUuid": "84c84bc8_efec55e7",
+      "revId": "83b0ce498e49600f5782c95c2eb233d56fe84fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e98a8bbe_eddd5b43",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 1
