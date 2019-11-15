@@ -27,16 +27,13 @@ namespace dawn_native { namespace d3d12 {
         : BindGroupBase(device, descriptor) {
     }
 
-    void BindGroup::AllocateDescriptors(const DescriptorHeapHandle& cbvUavSrvHeapStart,
-                                        uint32_t* cbvUavSrvHeapOffset,
-                                        const DescriptorHeapHandle& samplerHeapStart,
-                                        uint32_t* samplerHeapOffset) {
-        const auto* bgl = ToBackend(GetLayout());
-        const auto& layout = bgl->GetBindingInfo();
+    MaybeError BindGroup::AllocateDescriptors() {
+        BindGroupLayout* bgl = ToBackend(GetLayout());
 
-        // Save the offset to the start of the descriptor table in the heap
-        mCbvUavSrvHeapOffset = *cbvUavSrvHeapOffset;
-        mSamplerHeapOffset = *samplerHeapOffset;
+        DAWN_TRY_ASSIGN(mSamplerHeapAllocation, bgl->AllocateSamplerDescriptors());
+        DAWN_TRY_ASSIGN(mCbvUavSrvHeapAllocation, bgl->AllocateCbVUavSrvDescriptors());
+
+        const auto& layout = bgl->GetBindingInfo();
 
         const auto& bindingOffsets = bgl->GetBindingOffsets();
 
@@ -59,8 +56,7 @@ namespace dawn_native { namespace d3d12 {
                     desc.BufferLocation = ToBackend(binding.buffer)->GetVA() + binding.offset;
 
                     d3d12Device->CreateConstantBufferView(
-                        &desc, cbvUavSrvHeapStart.GetCPUHandle(*cbvUavSrvHeapOffset +
-                                                               bindingOffsets[bindingIndex]));
+                        &desc, mCbvUavSrvHeapAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
                 case wgpu::BindingType::StorageBuffer: {
                     BufferBinding binding = GetBindingAsBufferBinding(bindingIndex);
@@ -83,23 +79,20 @@ namespace dawn_native { namespace d3d12 {
 
                     d3d12Device->CreateUnorderedAccessView(
                         ToBackend(binding.buffer)->GetD3D12Resource().Get(), nullptr, &desc,
-                        cbvUavSrvHeapStart.GetCPUHandle(*cbvUavSrvHeapOffset +
-                                                        bindingOffsets[bindingIndex]));
+                        mCbvUavSrvHeapAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
                 case wgpu::BindingType::SampledTexture: {
                     auto* view = ToBackend(GetBindingAsTextureView(bindingIndex));
                     auto& srv = view->GetSRVDescriptor();
                     d3d12Device->CreateShaderResourceView(
                         ToBackend(view->GetTexture())->GetD3D12Resource(), &srv,
-                        cbvUavSrvHeapStart.GetCPUHandle(*cbvUavSrvHeapOffset +
-                                                        bindingOffsets[bindingIndex]));
+                        mCbvUavSrvHeapAllocation.GetCPUHandle(bindingOffsets[bindingIndex]));
                 } break;
                 case wgpu::BindingType::Sampler: {
                     auto* sampler = ToBackend(GetBindingAsSampler(bindingIndex));
                     auto& samplerDesc = sampler->GetSamplerDescriptor();
-                    d3d12Device->CreateSampler(
-                        &samplerDesc, samplerHeapStart.GetCPUHandle(*samplerHeapOffset +
-                                                                    bindingOffsets[bindingIndex]));
+                    d3d12Device->CreateSampler(&samplerDesc, mSamplerHeapAllocation.GetCPUHandle(
+                                                                 bindingOffsets[bindingIndex]));
                 } break;
 
                 case wgpu::BindingType::StorageTexture:
@@ -111,17 +104,15 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        // Offset by the number of descriptors created
-        *cbvUavSrvHeapOffset += bgl->GetCbvUavSrvDescriptorCount();
-        *samplerHeapOffset += bgl->GetSamplerDescriptorCount();
+        return {};
     }
 
-    uint32_t BindGroup::GetCbvUavSrvHeapOffset() const {
-        return mCbvUavSrvHeapOffset;
+    DescriptorHeapHandle BindGroup::GetCbvUavSrvHeap() const {
+        return mCbvUavSrvHeapAllocation;
     }
 
-    uint32_t BindGroup::GetSamplerHeapOffset() const {
-        return mSamplerHeapOffset;
+    DescriptorHeapHandle BindGroup::GetSamplerHeap() const {
+        return mSamplerHeapAllocation;
     }
 
     bool BindGroup::TestAndSetCounted(uint64_t heapSerial, uint32_t indexInSubmit) {
