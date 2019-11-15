@@ -104,6 +104,7 @@ namespace dawn_native { namespace metal {
             // by default.
             std::string msl = compiler.compile();
             NSString* mslSource = [NSString stringWithFormat:@"%s", msl.c_str()];
+            NSLog(@"%@", mslSource);
 
             auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
             NSError* error = nil;
