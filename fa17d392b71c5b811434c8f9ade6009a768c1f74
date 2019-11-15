@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5214baca_dfcc5320",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-15T09:19:01Z",
+      "side": 1,
+      "message": "nit: Maybe have these namespaced inside the RGBA8 class? Global search replace should allow to do the replacement without too much effort.",
+      "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
