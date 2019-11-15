@@ -354,10 +354,6 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
 }
 
 TEST_P(BindGroupTests, MultipleBindLayouts) {
-    // Test fails on Metal.
-    // https://bugs.chromium.org/p/dawn/issues/detail?id=33
-    DAWN_SKIP_TEST_IF(IsMetal());
-
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::ShaderModule vsModule =
