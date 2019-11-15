@@ -118,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "b91db126_22e25a14",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T17:30:16Z",
+      "side": 1,
+      "message": "If it works to move that into Finish, it would be nicer.",
+      "parentUuid": "4430b2dc_ddfbde26",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0125672_d93aeb64",
         "filename": "src/dawn_native/EncodingContext.cpp",
         "patchSetId": 5
@@ -198,6 +216,24 @@
       "side": 1,
       "message": "I thought about doing this, but BeginPass would be completely empty accept for perhaps setting a marker which we ASSERT on later. I didn\u0027t think this would be too helpful because that duplicates a bunch of state tracking already in EncodingContext.\n\nWDYT?",
       "parentUuid": "23c6bca4_cbb265b3",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bce13cb_918976d5",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T17:30:16Z",
+      "side": 1,
+      "message": "Depends on the implementation. If BufferUsedAs/TextureUseAs record into different places depending on the current state, then BeginPass sets the state.\n\nIf there\u0027s no concern about absorbing non-pass usages into passes (is there?), then it\u0027s fine as is.",
+      "parentUuid": "912838ca_a497124c",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -324,6 +360,24 @@
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe46d257_4902e620",
+        "filename": "src/dawn_native/ResourceUsageTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-11-15T17:30:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1a9a79ba_97407a00",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
