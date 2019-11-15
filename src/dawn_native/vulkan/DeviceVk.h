@@ -97,6 +97,8 @@ namespace dawn_native { namespace vulkan {
 
         ResourceMemoryAllocator* GetResourceMemoryAllocatorForTesting() const;
 
+        ResultOrError<VkDescriptorSetLayout> GetEmptyDescriptorSetLayout();
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
@@ -175,6 +177,8 @@ namespace dawn_native { namespace vulkan {
                                        VkSemaphore* outSignalSemaphore,
                                        VkDeviceMemory* outAllocation,
                                        std::vector<VkSemaphore>* outWaitSemaphores);
+
+        VkDescriptorSetLayout mEmptyDescriptorSetLayout = VK_NULL_HANDLE;
     };
 
 }}  // namespace dawn_native::vulkan

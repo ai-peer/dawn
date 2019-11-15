@@ -35,6 +35,9 @@ namespace dawn_native {
         uint32_t totalDynamicUniformBufferCount = 0;
         uint32_t totalDynamicStorageBufferCount = 0;
         for (uint32_t i = 0; i < descriptor->bindGroupLayoutCount; ++i) {
+            if (descriptor->bindGroupLayouts[i] == nullptr) {
+                continue;
+            }
             DAWN_TRY(device->ValidateObject(descriptor->bindGroupLayouts[i]));
             totalDynamicUniformBufferCount +=
                 descriptor->bindGroupLayouts[i]->GetDynamicUniformBufferCount();
@@ -60,6 +63,9 @@ namespace dawn_native {
         : CachedObject(device) {
         ASSERT(descriptor->bindGroupLayoutCount <= kMaxBindGroups);
         for (uint32_t group = 0; group < descriptor->bindGroupLayoutCount; ++group) {
+            if (descriptor->bindGroupLayouts[group] == nullptr) {
+                continue;
+            }
             mBindGroupLayouts[group] = descriptor->bindGroupLayouts[group];
             mMask.set(group);
         }
@@ -85,7 +91,9 @@ namespace dawn_native {
         ASSERT(!IsError());
         ASSERT(group < kMaxBindGroups);
         ASSERT(mMask[group]);
-        return mBindGroupLayouts[group].Get();
+        const BindGroupLayoutBase* bgl = mBindGroupLayouts[group].Get();
+        ASSERT(bgl != nullptr);
+        return bgl;
     }
 
     const std::bitset<kMaxBindGroups> PipelineLayoutBase::GetBindGroupLayoutsMask() const {

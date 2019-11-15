@@ -755,7 +755,7 @@
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "bind group layout count", "type": "uint32_t"},
-            {"name": "bind group layouts", "type": "bind group layout", "annotation": "const*", "length": "bind group layout count"}
+            {"name": "bind group layouts", "type": "bind group layout", "annotation": "const*", "length": "bind group layout count", "sparse": true}
         ]
     },
     "programmable stage descriptor": {

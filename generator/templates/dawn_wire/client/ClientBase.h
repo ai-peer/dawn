@@ -42,7 +42,8 @@ namespace dawn_wire { namespace client {
         // Implementation of the ObjectIdProvider interface
         {% for type in by_category["object"] %}
             ObjectId GetId({{as_cType(type.name)}} object) const final {
-                return object == nullptr ? 0 : reinterpret_cast<{{as_wireType(type)}}>(object)->id;
+                ASSERT(object != nullptr);
+                return reinterpret_cast<{{as_wireType(type)}}>(object)->id;
             }
             ObjectId GetOptionalId({{as_cType(type.name)}} object) const final {
                 if (object == nullptr) {

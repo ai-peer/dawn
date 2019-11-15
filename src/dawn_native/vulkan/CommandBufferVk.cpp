@@ -105,6 +105,14 @@ namespace dawn_native { namespace vulkan {
                 const uint32_t* dynamicOffset = dynamicOffsetCounts[dirtyIndex] > 0
                                                     ? dynamicOffsets[dirtyIndex].data()
                                                     : nullptr;
+                // Note: There may be sparse set= indices in the shader, but the VkPipelineLayout
+                // cannot have sparse VkDescriptorSetLayouts. We solve this by providing an empty
+                // VkDescriptorSetLayout. However, it is not necessary to bind an empty
+                // VkDescriptorSet for this layout. According to the docs:
+                // https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/vkCmdBindDescriptorSets.html
+                // > if none of the shaders in a pipeline statically use any bindings with a
+                // > particular set number, then no descriptor set need be bound for that set
+                // > number,
                 device->fn.CmdBindDescriptorSets(commands, bindPoint, pipelineLayout, dirtyIndex, 1,
                                                  &set, dynamicOffsetCounts[dirtyIndex],
                                                  dynamicOffset);
