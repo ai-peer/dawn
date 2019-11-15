@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ccd0c5a_f891e791",
+        "filename": "src/dawn_native/RefCounted.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:21:41Z",
+      "side": 1,
+      "message": "This needs to get rid of the payload",
+      "range": {
+        "startLine": 45,
+        "startChar": 15,
+        "endLine": 45,
+        "endChar": 29
+      },
+      "revId": "dd2e061084d1fb9b0824f40209d123498e27585e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2635bea_dbe4b5fb",
+        "filename": "src/dawn_native/RefCounted.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-15T16:21:41Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
+        "endChar": 29
+      },
+      "revId": "dd2e061084d1fb9b0824f40209d123498e27585e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
