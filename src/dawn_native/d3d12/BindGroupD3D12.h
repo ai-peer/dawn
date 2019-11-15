@@ -29,18 +29,16 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroup(Device* device, const BindGroupDescriptor* descriptor);
 
-        void AllocateDescriptors(const DescriptorHeapHandle& cbvSrvUavHeapStart,
-                                 uint32_t* cbvUavSrvHeapOffset,
-                                 const DescriptorHeapHandle& samplerHeapStart,
-                                 uint32_t* samplerHeapOffset);
-        uint32_t GetCbvUavSrvHeapOffset() const;
-        uint32_t GetSamplerHeapOffset() const;
+        MaybeError AllocateDescriptors();
+
+        DescriptorHeapHandle GetCbvUavSrvHeap() const;
+        DescriptorHeapHandle GetSamplerHeap() const;
 
         bool TestAndSetCounted(uint64_t heapSerial, uint32_t indexInSubmit);
 
       private:
-        uint32_t mCbvUavSrvHeapOffset;
-        uint32_t mSamplerHeapOffset;
+        DescriptorHeapHandle mCbvUavSrvHeapAllocation;
+        DescriptorHeapHandle mSamplerHeapAllocation;
 
         uint64_t mHeapSerial = 0;
         uint32_t mIndexInSubmit = 0;
