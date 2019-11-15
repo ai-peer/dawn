@@ -16,6 +16,24 @@
       "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee918447_b930c271",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-15T18:12:30Z",
+      "side": 1,
+      "message": "Does this mean that all RGBA8 needs to be replaced by RGBA8::RGBA8?",
+      "parentUuid": "5214baca_dfcc5320",
+      "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
