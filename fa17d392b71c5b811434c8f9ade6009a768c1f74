@@ -70,6 +70,24 @@
       "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee93a47b_bddf67b3",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-16T00:09:02Z",
+      "side": 1,
+      "message": "Sorry for the delay Yunchao. This won\u0027t work with constexpr, but it will work with const.\n\nHowever, static variables need to be defined outside of the declaration in the cpp file.\n\n// In DawnTest.h\nstruct RGBA8 {\n  static const RGBA8 kRed;\n}; \n\n\n\n// At the top of DawnTest.cpp\nconst RGBA8::kRed \u003d RGBA8(....);\n\n\nHowever, it won\u0027t work with constexpr without redeclaring them in *every* .cpp file.\n\nIf const works everywhere, then prefer to do what I suggested. Otherwise, it\u0027s fine for now if they need to be constexpr and outside of the struct. We can always fix it later.\n\nIf you\u0027re blocked on stylistic changes like this and already have +2, please feel free to land.",
+      "parentUuid": "3804b537_15fc6a45",
+      "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
