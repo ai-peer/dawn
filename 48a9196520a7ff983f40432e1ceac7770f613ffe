@@ -722,6 +722,24 @@
       "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbb68adc_efe9af2d",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:51:17Z",
+      "side": 1,
+      "message": "Hm.. should be an out of memory and not a true device lost. Where is the DeviceLost coming from? Is it the d3d12 DeviceLostReason?",
+      "parentUuid": "9841f3f5_e79e756b",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

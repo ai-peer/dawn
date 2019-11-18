@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2bc02ee_1712f8f4",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:51:17Z",
+      "side": 1,
+      "message": "[1] We should still propogate the DeviceLost to all the error scopes, so I think we don\u0027t need to guard mCurrentErrorScope in the else block.",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 9
+      },
+      "revId": "11e20f8565ff2b767a8a9440c2ef0c0191c21cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d84d63b7_b624e9c1",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:51:17Z",
+      "side": 1,
+      "message": "In addition to [1], this should call DeviceBase::HandleError so all nested error scopes get the DeviceLost as well.",
+      "range": {
+        "startLine": 183,
+        "startChar": 8,
+        "endLine": 183,
+        "endChar": 46
+      },
+      "revId": "11e20f8565ff2b767a8a9440c2ef0c0191c21cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
