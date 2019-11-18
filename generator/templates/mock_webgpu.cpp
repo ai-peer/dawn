@@ -59,6 +59,15 @@ void ProcTableAsClass::DeviceSetUncapturedErrorCallback(WGPUDevice self,
 
     OnDeviceSetUncapturedErrorCallback(self, callback, userdata);
 }
+void ProcTableAsClass::DeviceSetDeviceLostCallback(WGPUDevice self,
+                                                   WGPUDeviceLostCallback callback,
+                                                   void* userdata) {
+    auto object = reinterpret_cast<ProcTableAsClass::Object*>(self);
+    object->deviceLostCallback = callback;
+    object->userdata1 = userdata;
+
+    OnDeviceSetDeviceLostCallback(self, callback, userdata);
+}
 
 bool ProcTableAsClass::DevicePopErrorScope(WGPUDevice self,
                                            WGPUErrorCallback callback,

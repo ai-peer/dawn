@@ -90,6 +90,7 @@ namespace dawn_native { namespace metal {
             const TextureViewDescriptor* descriptor) override;
 
         void InitTogglesFromDriver();
+        void HandleLossImpl() override;
 
         id<MTLDevice> mMtlDevice = nil;
         id<MTLCommandQueue> mCommandQueue = nil;

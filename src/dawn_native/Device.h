@@ -29,10 +29,6 @@
 #include <memory>
 
 namespace dawn_native {
-
-    using ErrorCallback = void (*)(const char* errorMessage, void* userData);
-
-    class AdapterBase;
     class AttachmentState;
     class AttachmentStateBlueprint;
     class ErrorScope;
@@ -158,6 +154,7 @@ namespace dawn_native {
         TextureBase* CreateTexture(const TextureDescriptor* descriptor);
         TextureViewBase* CreateTextureView(TextureBase* texture,
                                            const TextureViewDescriptor* descriptor);
+        void SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
 
         void InjectError(wgpu::ErrorType type, const char* message);
 
@@ -166,6 +163,9 @@ namespace dawn_native {
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
         void PushErrorScope(wgpu::ErrorFilter filter);
         bool PopErrorScope(wgpu::ErrorCallback callback, void* userdata);
+
+        MaybeError ValidateIsAlive();
+
         ErrorScope* GetCurrentErrorScope();
 
         void Reference();
@@ -187,12 +187,14 @@ namespace dawn_native {
         bool IsToggleEnabled(Toggle toggle) const;
         size_t GetLazyClearCountForTesting();
         void IncrementLazyClearCountForTesting();
+        void LoseForTesting();
 
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
+        bool IsLost() const;
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -249,6 +251,11 @@ namespace dawn_native {
         void SetDefaultToggles();
 
         void ConsumeError(ErrorData* error);
+        void HandleLoss(const char* message);
+        virtual void HandleLossImpl() = 0;
+
+        wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
+        void* mDeviceLostUserdata;
 
         AdapterBase* mAdapter = nullptr;
 
@@ -279,6 +286,7 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+        bool mIsLost = false;
     };
 
 }  // namespace dawn_native

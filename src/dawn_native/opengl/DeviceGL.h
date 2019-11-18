@@ -86,6 +86,7 @@ namespace dawn_native { namespace opengl {
             const TextureViewDescriptor* descriptor) override;
 
         void CheckPassedFences();
+        void HandleLossImpl() override;
 
         Serial mCompletedSerial = 0;
         Serial mLastSubmittedSerial = 0;
