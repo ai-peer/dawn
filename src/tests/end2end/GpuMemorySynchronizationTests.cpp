@@ -19,6 +19,177 @@
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
+class GpuMemorySyncTests : public DawnTest {
+  protected:
+    static void MapReadCallback(WGPUBufferMapAsyncStatus status,
+                                const void* data,
+                                uint64_t,
+                                void* userdata) {
+        ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+        ASSERT_NE(nullptr, data);
+
+        static_cast<GpuMemorySyncTests*>(userdata)->mappedData = data;
+    }
+
+    const void* MapReadAsyncAndWait(const wgpu::Buffer& buffer) {
+        buffer.MapReadAsync(MapReadCallback, this);
+
+        while (mappedData == nullptr) {
+            WaitABit();
+        }
+
+        return mappedData;
+    }
+
+    wgpu::Buffer CreateBuffer() {
+        wgpu::BufferDescriptor srcDesc;
+        srcDesc.size = 4;
+        srcDesc.usage =
+            wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Storage;
+        wgpu::Buffer buffer = device.CreateBuffer(&srcDesc);
+
+        int myData = 0;
+        buffer.SetSubData(0, sizeof(myData), &myData);
+        return buffer;
+    }
+
+    wgpu::Buffer CreateReadbackBuffer() {
+        wgpu::BufferDescriptor dstDesc;
+        dstDesc.size = 4;
+        dstDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead;
+        wgpu::Buffer readbackBuffer = device.CreateBuffer(&dstDesc);
+
+        int myData = 0;
+        readbackBuffer.SetSubData(0, sizeof(myData), &myData);
+        return readbackBuffer;
+    }
+
+  private:
+    const void* mappedData = nullptr;
+};
+
+// Clear storage buffer with zero. Read data, add one, and then write the result to storage buffer
+// in compute pass. Iterate this read-add-write steps a few time. The successive iteration reads the
+// result in buffer from last iteration, which makes the iterations a data dependency chain. The
+// test verifies that data in buffer among iterations in compute passes is correctly synchronized.
+TEST_P(GpuMemorySyncTests, ComputePass) {
+    // Create pipeline, bind group, and buffer for compute pass.
+    wgpu::ShaderModule csModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
+        #version 450
+        layout(std140, set = 0, binding = 0) buffer Data {
+            int a;
+        } data;
+        void main() {
+            data.a += 1;
+        })");
+
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {
+                    {0, wgpu::ShaderStage::Compute, wgpu::BindingType::StorageBuffer},
+                });
+    wgpu::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
+
+    wgpu::ComputePipelineDescriptor cpDesc;
+    cpDesc.layout = pipelineLayout;
+    cpDesc.computeStage.module = csModule;
+    cpDesc.computeStage.entryPoint = "main";
+    wgpu::ComputePipeline compute = device.CreateComputePipeline(&cpDesc);
+
+    wgpu::Buffer buffer = CreateBuffer();
+    wgpu::Buffer readbackBuffer = CreateReadbackBuffer();
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, buffer, 0, 4}});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    // Iterate the read-add-write operations in compute a few times.
+    int iteration = 3;
+    for (int i = 0; i < iteration; ++i) {
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(compute);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Dispatch(1, 1, 1);
+        pass.EndPass();
+    }
+
+    // Verify the result.
+    encoder.CopyBufferToBuffer(buffer, 0, readbackBuffer, 0, 4);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    const void* mappedData = MapReadAsyncAndWait(readbackBuffer);
+    ASSERT_EQ(iteration, *reinterpret_cast<const int*>(mappedData));
+
+    readbackBuffer.Unmap();
+}
+
+// Clear storage buffer with zero. Read data, add one, and then write the result to storage buffer
+// in render pass. Iterate this read-add-write steps a few time. The successive iteration reads the
+// result in buffer from last iteration, which makes the iterations a data dependency chain. The
+// test verifies that data in buffer among iterations in render passes is correctly synchronized.
+TEST_P(GpuMemorySyncTests, RenderPass) {
+    // Create pipeline, bind group, and buffer for compute pass.
+    wgpu::ShaderModule vsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+        #version 450
+        void main() {
+            gl_Position = vec4(0.f, 0.f, 0.f, 1.f);
+            gl_PointSize = 1.0;
+        })");
+
+    wgpu::ShaderModule fsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        #version 450
+        layout (set = 0, binding = 0) buffer Data {
+            int i;
+        } data;
+        layout(location = 0) out vec4 fragColor;
+        void main() {
+            data.i += 1;
+            fragColor = vec4(data.i > 0 ? 1.f : 0.f, data.i > 2 ? 1.f : 0.f, data.i > 4 ? 1.f : 0.f, 1.f);
+        })");
+
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {
+                    {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::StorageBuffer},
+                });
+    wgpu::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+
+    utils::ComboRenderPipelineDescriptor rpDesc(device);
+    rpDesc.layout = pipelineLayout;
+    rpDesc.vertexStage.module = vsModule;
+    rpDesc.cFragmentStage.module = fsModule;
+    rpDesc.primitiveTopology = wgpu::PrimitiveTopology::PointList;
+    rpDesc.cColorStates[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline render = device.CreateRenderPipeline(&rpDesc);
+
+    wgpu::Buffer buffer = CreateBuffer();
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, buffer, 0, 4}});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    // Iterate the read-add-write operations in render a few times.
+    int iteration = 3;
+    for (int i = 0; i < iteration; ++i) {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(render);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Draw(1, 1, 0, 0);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    // Verify the result.
+    EXPECT_PIXEL_RGBA8_EQ(kYellow, renderPass.color, 0, 0);
+}
+
 class StorageToUniformSyncTests : public DawnTest {
   protected:
     void CreateBuffer() {
@@ -213,6 +384,8 @@ TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithDifferentQueueSubmits) {
     // Verify the rendering result.
     EXPECT_PIXEL_RGBA8_EQ(kRed, renderPass.color, 0, 0);
 }
+
+DAWN_INSTANTIATE_TEST(GpuMemorySyncTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
 
 DAWN_INSTANTIATE_TEST(StorageToUniformSyncTests,
                       D3D12Backend,
