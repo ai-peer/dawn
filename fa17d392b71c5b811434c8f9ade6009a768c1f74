@@ -88,6 +88,24 @@
       "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0aaf622c_21596ce0",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-18T02:52:34Z",
+      "side": 1,
+      "message": "OK. Land this first, and see what Corentin\u0027s suggestion is. We can do another code refactoring if needed.",
+      "parentUuid": "ee93a47b_bddf67b3",
+      "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
