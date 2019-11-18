@@ -46,6 +46,30 @@
       "revId": "cb94240876bde14870da4c1c2d43535e9e7b7674",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "debe7b50_369de091",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-18T19:20:17Z",
+      "side": 1,
+      "message": "Austin, I am not saying map/unmap without queue submit. \n\nI added the code as I cited (you can compare the difference between patchset 1 and 2), and patchset 1 failed on many bots/backend (if not all). \n\nWhat I did is: \n1) clear the buffer with 0. \n2) verify the data has already been cleared to 0 via map/unmap (as the code snippet I commented). Well, this step is not needed for this test. I just want to verify intermediate values. \n3) iterate compute pass 3 times, in which the data will be changed to 3, and submit the queue\n4) map/unmap again, verify that the data is 3 as we expected\n\nThis is what I did in patch set 1. However, it succeeded at step 2) but failed at step 4) (it is 0). \n\nWhen I removed step 2), then verification at step 4) succeeded! That\u0027s patchset 2.   \n\nI think that map/unmap twice like patchset 1 is not wrong, step 4) at patchset 1 should succeed. However, almost all bots failed. So I asked the question above.",
+      "parentUuid": "7a559cb0_6e1f4a11",
+      "range": {
+        "startLine": 107,
+        "startChar": 3,
+        "endLine": 110,
+        "endChar": 27
+      },
+      "revId": "cb94240876bde14870da4c1c2d43535e9e7b7674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
