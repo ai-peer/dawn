@@ -1199,7 +1199,11 @@ namespace dawn_native {
                     SetRenderPipelineCmd* cmd = mIterator.NextCommand<SetRenderPipelineCmd>();
                     RenderPipelineBase* pipeline = cmd->pipeline.Get();
 
-                    DAWN_TRY(pipeline->ValidateCompatibleWith(renderPass));
+                    if (!pipeline->IsCompatibleWith(renderPass)) {
+                        return DAWN_VALIDATION_ERROR(
+                            "Pipeline is incompatible with this render pass");
+                    }
+
                     persistentState.SetRenderPipeline(pipeline);
                 } break;
 
