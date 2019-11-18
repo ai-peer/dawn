@@ -106,6 +106,24 @@
       "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d9f5198_2a1afe2d",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-18T19:01:18Z",
+      "side": 1,
+      "message": "We can declare the static const variables in .h file, and define its value in .cpp file. Well, we need to define like this: const RGBA8 RGBA8::kRed \u003d RGBA8(...);\n\nAnd just like Austin said, we can only use const, we can\u0027t use constexpr. So I removed a few usage because they have already defined as constexpr, see the CL at https://dawn-review.googlesource.com/c/dawn/+/13760.",
+      "parentUuid": "0aaf622c_21596ce0",
+      "revId": "fa17d392b71c5b811434c8f9ade6009a768c1f74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
