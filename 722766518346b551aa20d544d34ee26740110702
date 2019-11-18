@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95bad959_0975ab82",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:23:35Z",
+      "side": 1,
+      "message": "nit: pass in \u0026mBoundHeapsChanged as a pointer into this function to make it clear that ApplyBindGroup may mutate it. It can probably be a local variable, and not a member.",
+      "range": {
+        "startLine": 89,
+        "startChar": 40,
+        "endLine": 91,
+        "endChar": 45
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85b3e28c_ba93995b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:23:35Z",
+      "side": 1,
+      "message": "If reapplyBindGroups \u003d\u003d true, we still need to add the bind group to the set of allocated bind group -- we just need to do it after the reallocation happens.",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 25
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a5745bd_8456428f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:23:35Z",
+      "side": 1,
+      "message": "I\u0027m concerned that this will reallocate ALL bind groups used in this submit. This is much more than we need. We only need to reallocate the bind groups that were in the old heap, but used in this draw call. Consider:\n\nSetBindGroup(0, A)\nSetBindGroup(1, B)\nDraw()\n\nSetBindGroup(0, C)  // reallocation happens here which reallocates A and B\nSetBindGroup(1, D)\nDraw()              // A and B are never used\n\nCurrent bind groups are already stored in |std::array\u003cBindGroupBase*, kMaxBindGroups\u003e mBindGroups| from the base class. This tracker can keep a std::bitset\u003ckMaxBindGroups\u003e mBindGroupsAllocated bitmask, then iterate (mBindGroupsAllocated \u0026 mBindGroupLayoutsMask) and only reallocate those.",
+      "range": {
+        "startLine": 110,
+        "startChar": 21,
+        "endLine": 110,
+        "endChar": 68
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64301a2d_a5cf172d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:23:35Z",
+      "side": 1,
+      "message": "I\u0027m uneasy with having AllocateDescriptors change the current heaps from underneath the tracker and discovering this when we call SetDescriptorHeaps.\n\nWe should have a separate allocator so we can do allocator-\u003eAllocateBindGroup(...) and internally it allocates the DescriptorHeapHandles, etc. The logic in BindGroup::AllocateDescriptors would probably move into this allocator.\n\nThis would be more organized and enable some additional follow-up optimizations:\n - Using ID3D12Device::CopyDescriptors instead of re-encoding descriptors\n - Having a sort-of LRU so that we don\u0027t re-allocate descriptors that are already in the \"current\" descriptor heap. i.e. consecutive queue.submits that use the same descriptors should be able to just point to them and set the descriptor heap instead of reallocating.",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc814dc6_b1c79cdc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:23:35Z",
+      "side": 1,
+      "message": "ASSERT that if requiresAllocation \u003d\u003d true, mBoundHeapsChanged \u003d\u003d false.\nIt should be impossible to change heaps in the middle of a reallocation.\n\nIf this can indeed happen (I don\u0027t think it can), then we could return an OOM error.",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47ce1669_bc53b499",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T23:23:35Z",
+      "side": 1,
+      "message": "\u0026\u0026 !requiresAllocation ?\nIf it was reallocated, then the D3D12_GPU_DESCRIPTOR_HANDLE will be different.",
+      "range": {
+        "startLine": 254,
+        "startChar": 16,
+        "endLine": 254,
+        "endChar": 40
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
