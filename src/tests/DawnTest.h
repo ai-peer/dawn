@@ -82,6 +82,7 @@ constexpr RGBA8 kBlack(0, 0, 0, 255);
 constexpr RGBA8 kRed(255, 0, 0, 255);
 constexpr RGBA8 kGreen(0, 255, 0, 255);
 constexpr RGBA8 kBlue(0, 0, 255, 255);
+constexpr RGBA8 kYellow(255, 255, 0, 255);
 constexpr RGBA8 kWhite(255, 255, 255, 255);
 
 struct DawnTestParam {
