@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e8eec6d0_3070486b",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-18T21:40:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "328233ee_0e457618",
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c1a510b_11246bff",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 6
@@ -227,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "a7b681a6_67fe1637",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-18T21:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64af6a7b_56902cc6",
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae7f44e2_95e2f11e",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
@@ -247,6 +283,30 @@
       "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd431644_e40dfbc2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-18T21:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae7f44e2_95e2f11e",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 96,
+        "endChar": 63
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -294,6 +354,30 @@
       "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d81b2ca0_e0553a10",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-18T21:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4420c7d_5ff905d4",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 50
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -368,6 +452,30 @@
     },
     {
       "key": {
+        "uuid": "3543ece8_2a46eac3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-18T21:40:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a6b455cb_a35abca6",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 158,
+        "endChar": 13
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61fccdeb_f86d6636",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
         "patchSetId": 6
@@ -379,6 +487,24 @@
       "writtenOn": "2019-11-13T13:51:18Z",
       "side": 1,
       "message": "If this is invalid, should we ASSERT and make sure callers don\u0027t ask for a 0 count?",
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "694702a1_513b79e4",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-18T21:40:03Z",
+      "side": 1,
+      "message": "Not sure. D3D treats unbound heap as nullptr which is returned by 0 count.",
+      "parentUuid": "61fccdeb_f86d6636",
       "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

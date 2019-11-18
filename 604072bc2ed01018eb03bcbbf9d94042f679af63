@@ -16,6 +16,24 @@
       "revId": "604072bc2ed01018eb03bcbbf9d94042f679af63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a9a006f_4b8934d7",
+        "filename": "src/dawn_native/Commands.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-18T21:40:03Z",
+      "side": 0,
+      "message": "Just to confirm, this refers to moving the bugfix into it\u0027s own CL?",
+      "parentUuid": "a582cdaf_0b127858",
+      "revId": "604072bc2ed01018eb03bcbbf9d94042f679af63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
