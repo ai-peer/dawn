@@ -492,43 +492,38 @@ namespace dawn_native {
         return mSampleCount;
     }
 
-    MaybeError RenderPipelineBase::ValidateCompatibleWith(
-        const BeginRenderPassCmd* renderPass) const {
+    bool RenderPipelineBase::IsCompatibleWith(const BeginRenderPassCmd* renderPass) const {
         ASSERT(!IsError());
         // TODO(cwallez@chromium.org): This is called on every SetPipeline command. Optimize it for
         // example by caching some "attachment compatibility" object that would make the
         // compatibility check a single pointer comparison.
 
         if (renderPass->colorAttachmentsSet != mColorAttachmentsSet) {
-            return DAWN_VALIDATION_ERROR(
-                "Pipeline doesn't have same color attachments set as renderPass");
+            return false;
         }
 
         for (uint32_t i : IterateBitSet(mColorAttachmentsSet)) {
             if (renderPass->colorAttachments[i].view->GetFormat().format !=
                 mColorStates[i].format) {
-                return DAWN_VALIDATION_ERROR(
-                    "Pipeline color attachment format doesn't match renderPass");
+                return false;
             }
         }
 
         if (renderPass->hasDepthStencilAttachment != mHasDepthStencilAttachment) {
-            return DAWN_VALIDATION_ERROR(
-                "Pipeline depth stencil attachment doesn't match renderPass");
+            return false;
         }
 
         if (mHasDepthStencilAttachment &&
             (renderPass->depthStencilAttachment.view->GetFormat().format !=
              mDepthStencilState.format)) {
-            return DAWN_VALIDATION_ERROR(
-                "Pipeline depth stencil attachment format doesn't match renderPass");
+            return false;
         }
 
         if (renderPass->sampleCount != mSampleCount) {
-            return DAWN_VALIDATION_ERROR("Pipeline sample count doesn't match renderPass");
+            return false;
         }
 
-        return {};
+        return true;
     }
 
     std::bitset<kMaxVertexAttributes> RenderPipelineBase::GetAttributesUsingInput(
