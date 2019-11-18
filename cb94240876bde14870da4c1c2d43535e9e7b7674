@@ -22,6 +22,30 @@
       "revId": "cb94240876bde14870da4c1c2d43535e9e7b7674",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a559cb0_6e1f4a11",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-18T18:46:13Z",
+      "side": 1,
+      "message": "Do you mean:\n\nbuffer.Map(); *mappedData \u003d 2; buffer.Unmap();\nencoder.CopyBufferToBuffer(buffer, 0, readbackBuffer, 0, 4);\nbuffer.Map(); *mappedData \u003d 3; buffer.Unmap();\n\ncommands \u003d encoder.Finish();\nqueue.Submit(1, \u0026commands);\n\n\nWith no Queue.Submit() between? In ^that example, |readbackBuffer| will have 3 inside because the queue was submitted after.\n\n\nIf you want to upload mapped data twice, it needs to do something like:\n\nbuffer.Map(); *mappedData \u003d 2; buffer.Unmap();\nencoder.CopyBufferToBuffer(buffer, 0, readbackBuffer, 0, 4);\ncommands \u003d encoder.Finish();\nqueue.Submit(1, \u0026commands);\nMapReadAsyncAndWait(readbackBuffer);\n\nbuffer.Map(); *mappedData \u003d 3; buffer.Unmap();\nencoder.CopyBufferToBuffer(buffer, 0, readbackBuffer, 0, 4);\ncommands \u003d encoder.Finish();\nqueue.Submit(1, \u0026commands);\nMapReadAsyncAndWait(readbackBuffer);",
+      "parentUuid": "48b32020_f7a8b757",
+      "range": {
+        "startLine": 107,
+        "startChar": 3,
+        "endLine": 110,
+        "endChar": 27
+      },
+      "revId": "cb94240876bde14870da4c1c2d43535e9e7b7674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
