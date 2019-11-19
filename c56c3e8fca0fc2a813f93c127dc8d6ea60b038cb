@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e74472de_4a7f0405",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T09:56:05Z",
+      "side": 1,
+      "message": "nit: update comment to explain this is a two step initialization, and also the ownership of the memory allocation and semaphores is taken in BindExternalMemory now.",
+      "revId": "c56c3e8fca0fc2a813f93c127dc8d6ea60b038cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b10da58_355387a7",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T09:56:05Z",
+      "side": 1,
+      "message": "Maybe one function could return both the allocation size and the memory type index: in the implementation of the DMA buf MemoryService, vkGetImageRequirements2KHR is called redundantly.",
+      "revId": "c56c3e8fca0fc2a813f93c127dc8d6ea60b038cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
