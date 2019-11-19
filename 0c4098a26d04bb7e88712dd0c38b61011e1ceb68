@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9934a45_ee52b94e",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:57:30Z",
+      "side": 1,
+      "message": "comment is not accurate. this is not \"simplest\"",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "0c4098a26d04bb7e88712dd0c38b61011e1ceb68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9699ecb2_75e06b3c",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:57:30Z",
+      "side": 1,
+      "message": "Link to the bug for this, and describe the issue in a comment",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 48
+      },
+      "revId": "0c4098a26d04bb7e88712dd0c38b61011e1ceb68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "505d0c62_1925c43f",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:57:30Z",
+      "side": 1,
+      "message": "EXPECT_EQ",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 13
+      },
+      "revId": "0c4098a26d04bb7e88712dd0c38b61011e1ceb68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
