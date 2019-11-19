@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "589effe9_d464a7af",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T03:04:32Z",
+      "side": 1,
+      "message": "Will it work if we unconditionally enable validation layers if Vulkan is enabled? We only use Vulkan on Linux and Windows now, but any other platform we add it on (Android or SwiftShader) we will want the validation layers.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 1
+      },
+      "revId": "efac0cd06968a91e202439e9352a24ee44f78818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
