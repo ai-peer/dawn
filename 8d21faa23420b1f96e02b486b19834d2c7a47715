@@ -16,6 +16,75 @@
       "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6820e596_4a37ea87",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T22:41:14Z",
+      "side": 1,
+      "message": "nit: more whitespace",
+      "range": {
+        "startLine": 35,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c8929a1_8c214c90",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T22:41:14Z",
+      "side": 1,
+      "message": "nit: just return props.drmFormatModifierPlaneCount",
+      "range": {
+        "startLine": 47,
+        "startChar": 20,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd45f081_f03712a3",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T22:41:14Z",
+      "side": 1,
+      "message": "nit: ConsumedError has an assignment variant which can be used with ResultOrError\n\nuint32_t planeCount \u003d 0;\nif (mDevice-\u003eConsumedError(GetModiferPlaneCount(...), \u0026planeCount)) {\n  return false;\n}",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 62
+      },
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
