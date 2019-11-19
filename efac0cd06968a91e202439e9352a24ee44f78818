@@ -46,6 +46,30 @@
       "revId": "efac0cd06968a91e202439e9352a24ee44f78818",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c89a67_6eefb9e3",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T05:17:50Z",
+      "side": 1,
+      "message": "Ah that\u0027s right. Looks good then.",
+      "parentUuid": "7d2a9aaa_485c789b",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 1
+      },
+      "revId": "efac0cd06968a91e202439e9352a24ee44f78818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
