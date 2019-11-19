@@ -24,19 +24,18 @@ namespace dawn_native {
 
     class AttachmentState;
     struct BeginRenderPassCmd;
-    struct PassResourceUsage;
+    struct CommandBufferResourceUsage;
+    struct ResourceUsage;
 
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize);
     MaybeError ValidateFinalDebugGroupStackSize(uint64_t debugGroupStackSize);
 
     MaybeError ValidateRenderBundle(CommandIterator* commands,
-                                    const AttachmentState* attachmentState,
-                                    PassResourceUsage* resourceUsage);
-    MaybeError ValidateRenderPass(CommandIterator* commands,
-                                  BeginRenderPassCmd* renderPass,
-                                  std::vector<PassResourceUsage>* perPassResourceUsages);
-    MaybeError ValidateComputePass(CommandIterator* commands,
-                                   std::vector<PassResourceUsage>* perPassResourceUsages);
+                                    const AttachmentState* attachmentState);
+    MaybeError ValidateRenderPass(CommandIterator* commands, const BeginRenderPassCmd* renderPass);
+    MaybeError ValidateComputePass(CommandIterator* commands);
+
+    MaybeError ValidateResourceUsages(const CommandBufferResourceUsage* resourceUsages);
 
 }  // namespace dawn_native
 

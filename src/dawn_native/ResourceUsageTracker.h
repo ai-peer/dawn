@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DAWNNATIVE_PASSRESOURCEUSAGETRACKER_H_
-#define DAWNNATIVE_PASSRESOURCEUSAGETRACKER_H_
+#ifndef DAWNNATIVE_RESOURCEUSAGETRACKER_H_
+#define DAWNNATIVE_RESOURCEUSAGETRACKER_H_
 
 #include "dawn_native/Error.h"
-#include "dawn_native/PassResourceUsage.h"
+#include "dawn_native/ResourceUsage.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -31,25 +31,30 @@ namespace dawn_native {
     // validation of command buffer passes. It is used both to know if there are validation
     // errors, and to get a list of resources used per pass for backends that need the
     // information.
-    class PassResourceUsageTracker {
+    class ResourceUsageTracker {
       public:
+        void FlushPassResourceUsages();
+
+        void AddTopLevelBuffer(BufferBase* buffer);
+        void AddTopLevelTexture(TextureBase* texture);
         void BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage usage);
         void TextureUsedAs(TextureBase* texture, wgpu::TextureUsage usage);
 
-        MaybeError ValidateComputePassUsages() const;
-        MaybeError ValidateRenderPassUsages() const;
+        bool PassUsagesEmpty() const;
+
+        MaybeError ValidateResourceUsages() const;
 
         // Returns the per-pass usage for use by backends for APIs with explicit barriers.
-        PassResourceUsage AcquireResourceUsage();
+        CommandBufferResourceUsage AcquireResourceUsages();
 
       private:
-        // Performs the per-pass usage validation checks
-        MaybeError ValidateUsages() const;
-
         std::map<BufferBase*, wgpu::BufferUsage> mBufferUsages;
         std::map<TextureBase*, wgpu::TextureUsage> mTextureUsages;
+
+        CommandBufferResourceUsage mResourceUsages;
+        bool mWereResourceUsagesAcquired = false;
     };
 
 }  // namespace dawn_native
 
-#endif  // DAWNNATIVE_PASSRESOURCEUSAGETRACKER_H_
+#endif  // DAWNNATIVE_RESOURCEUSAGETRACKER_H_

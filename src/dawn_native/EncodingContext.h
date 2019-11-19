@@ -18,14 +18,15 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/ResourceUsageTracker.h"
 #include "dawn_native/dawn_platform.h"
 
 #include <string>
 
 namespace dawn_native {
 
-    class ObjectBase;
     class DeviceBase;
+    class ObjectBase;
 
     // Base class for allocating/iterating commands.
     // It performs error tracking as well as encoding state for render/compute passes.
@@ -54,7 +55,7 @@ namespace dawn_native {
         }
 
         template <typename EncodeFunction>
-        inline bool TryEncode(const void* encoder, EncodeFunction&& encodeFunction) {
+        inline bool TryEncode(const ObjectBase* encoder, EncodeFunction&& encodeFunction) {
             if (DAWN_UNLIKELY(encoder != mCurrentEncoder)) {
                 if (mCurrentEncoder != mTopLevelEncoder) {
                     // The top level encoder was used when a pass encoder was current.
@@ -75,8 +76,12 @@ namespace dawn_native {
         void ExitPass(const ObjectBase* passEncoder);
         MaybeError Finish();
 
+        ResourceUsageTracker* GetUsageTracker();
+        const ResourceUsageTracker* GetUsageTracker() const;
+
       private:
         bool IsFinished() const;
+        void MoveToIterator();
 
         DeviceBase* mDevice;
 
@@ -89,6 +94,8 @@ namespace dawn_native {
         // The current encoder changes with Enter/ExitPass which should be called by
         // CommandEncoder::Begin/EndPass.
         const ObjectBase* mCurrentEncoder;
+
+        ResourceUsageTracker mUsageTracker;
 
         CommandAllocator mAllocator;
         CommandIterator mIterator;
