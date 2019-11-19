@@ -68,6 +68,29 @@
       "revId": "69f4066188d33b9da3c8fc3c43246bafb3c3e7d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "835ab562_d6b174ef",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T17:31:43Z",
+      "side": 1,
+      "message": "nit: accordingly",
+      "range": {
+        "startLine": 245,
+        "startChar": 74,
+        "endLine": 245,
+        "endChar": 85
+      },
+      "revId": "69f4066188d33b9da3c8fc3c43246bafb3c3e7d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
