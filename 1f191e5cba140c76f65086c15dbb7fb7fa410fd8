@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b30b613f_7a351b6a",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:55:51Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t vkGetImageMemoryRequirements (the Vulkan 1.0 version) work? We don\u0027t use data that\u0027s not in there.",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "860d3584_b9542598",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:55:51Z",
+      "side": 1,
+      "message": "Overall this file and the ImageService could use some more comments and newlines to delimitate code blocks. Also here explain that we need to satisfy both the constraints for the DMA buf and the image type.\n\nAre there any guarantees that we should be getting at least on memory type that makes both constraints satisfied?",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5efb8c_7f67f94c",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:55:51Z",
+      "side": 1,
+      "message": "We could use MemoryAllocator::FindBestTypeIndex https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/vulkan/ResourceMemoryAllocatorVk.h?q\u003dMemoryAllocatorVk\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d41",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eda95fb7_1fc09b44",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:55:51Z",
+      "side": 1,
+      "message": "unit: extra newline",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80e3aa03_b25e0178",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:55:51Z",
+      "side": 1,
+      "message": "nit: make the code breathe a bit",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b622b422_ff6acc8e",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:55:51Z",
+      "side": 1,
+      "message": "nit: declare this just before the AllocateMemory call.",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
