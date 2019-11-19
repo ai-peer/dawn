@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "567ec7ef_e48af44a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-19T22:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a33d7450_3e02a8fc",
+      "revId": "1515ef3ef22956421613f364f4d0304490434393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c9b94b3_ba4e87b5",
         "filename": "src/dawn_native/vulkan/external_image/ImageServiceNull.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "1515ef3ef22956421613f364f4d0304490434393",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f322d5_60f789fc",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceNull.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-19T22:32:30Z",
+      "side": 1,
+      "message": "Done, but I split MemoryService::Supported into MemoryService::SupportsImportMemory and MemoryService::SupportsCreateImage. I think it\u0027s semantically cleaner since at the end of the day, you need to check different things before a call to vkCreateImage v.s. vkAllocateMemory. Also, it helps with the all the params being passed around.",
+      "parentUuid": "0c9b94b3_ba4e87b5",
+      "revId": "1515ef3ef22956421613f364f4d0304490434393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
