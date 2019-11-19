@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f59168d_1f9eac6c",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:45:15Z",
+      "side": 1,
+      "message": "note to self, at some point we\u0027ll want to avoid the O(NM) processing and have a map of pointer to members probably, to be in O(N+M).",
+      "revId": "4739a0652b3abb8eee7285faeafc6248465e3160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
