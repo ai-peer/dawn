@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "47168a8e_e55bc560",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-11-19T13:47:49Z",
+      "side": 1,
+      "message": "How about deferring creating mEmptyDescriptorSetLayout until it is really used?",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b5c39817_3cab9e66",
         "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
         "patchSetId": 2
