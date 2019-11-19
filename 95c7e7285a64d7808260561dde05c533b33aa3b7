@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3da8c52a_14b7cc2e",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:41:22Z",
+      "side": 1,
+      "message": "What is general for?",
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11109a8f_9990a6d3",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:41:22Z",
+      "side": 1,
+      "message": "We do something similar with BackendDiscoveryOptionsBase https://cs.chromium.org/chromium/src/third_party/dawn/src/include/dawn_native/DawnNative.h?q\u003dDawnnative\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d107\n\nMaybe we could do the const type + constructor to set it thing here too.",
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fb6e7e1_b231291b",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:41:22Z",
+      "side": 1,
+      "message": "These could be moved to the ExternalImageDescriptorOpaqueFD because they aren\u0027t used in ExternalImageDescriptorDmaBuf.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca31a333_fda39ab9",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:41:22Z",
+      "side": 1,
+      "message": "This entrypoint could be modified to take ExternalImageDescriptor* and check its type so we don\u0027t need to have a second entrypoint.\n\nAlso comments in this section could be reworded slightly to not be as specific to the OpaqueFD path.",
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17b18038_34f1ec11",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:41:22Z",
+      "side": 1,
+      "message": "nit: memoryFD to match the OpaqueFD naming? Also maybe we could have a base class for Linux stuff that contains the memoryFD and waitFDs, not sure if we expect bigger divergence between the DMA path and OpaqueFD one over time.",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
