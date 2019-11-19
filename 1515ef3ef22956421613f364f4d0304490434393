@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a33d7450_3e02a8fc",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:33:56Z",
+      "side": 1,
+      "message": "Maybe instead of passing all the arguments we could pass a VkImageCreateInfo, and CreateImage copies it and adds whatever it needs.",
+      "revId": "1515ef3ef22956421613f364f4d0304490434393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c9b94b3_ba4e87b5",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceNull.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:33:56Z",
+      "side": 1,
+      "message": "This could be on the MemoryService because this is creating an image specifically for use with VkDeviceMemory coming from the same service.",
+      "revId": "1515ef3ef22956421613f364f4d0304490434393",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
