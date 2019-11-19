@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3632f0e4_1792f402",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d0eb19_ae9672f6",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3614ff48_6755b782",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "5220d3ef_0184356d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5b80d527_fc4f9ccc",
+      "range": {
+        "startLine": 533,
+        "startChar": 38,
+        "endLine": 533,
+        "endChar": 49
+      },
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec354577_75b5f37e",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -80,6 +122,24 @@
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16695771_812581c4",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Added a check.",
+      "parentUuid": "ec354577_75b5f37e",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -136,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "b1845861_6e605db8",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b91db126_22e25a14",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0125672_d93aeb64",
         "filename": "src/dawn_native/EncodingContext.cpp",
         "patchSetId": 5
@@ -147,6 +225,24 @@
       "writtenOn": "2019-11-15T10:07:05Z",
       "side": 1,
       "message": "This looks like the usageTracker tracks the global state of the command buffer. Maybe we can find a way to keep the usage tracker on the passes? Also we might be able to remove the usage tracker for compute passes because we have to submit the correct barriers anyway.",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fd764c6_71ad5ca9",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Before, we did some tracking at validation-time per-pass and then merged it all into a piece of globally mutated state also at validation-time. I don\u0027t think it\u0027s too helpful to keep per-pass state tracking separate when we already have validation that catches that passes are not nested in weird ways. i.e. It\u0027s already impossible to modify PassResourceUsage metadata from two passes. So, I think it makes most sense to just keep one that is \"current\". This also has the nice benefit of letting us recycle the std::map memory used in tracking instead of allocating a new one for every pass (fyi unordered_map didn\u0027t help).\n\n+1 to removing tracking from compute passes. Maybe in another CL",
+      "parentUuid": "b0125672_d93aeb64",
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -170,6 +266,24 @@
     },
     {
       "key": {
+        "uuid": "5572ce04_c2eb5aed",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "8b1b5a05_d91050fd",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8e0dd01_1db2a036",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 5
@@ -184,6 +298,24 @@
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20865a82_793cf043",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8e0dd01_1db2a036",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -240,6 +372,24 @@
     },
     {
       "key": {
+        "uuid": "dd2d9601_765b0056",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Pass usages aren\u0027t absorbed into other usages because there\u0027s only one pass open at a time. When the pass is ended, it\u0027s contents are moved into a new slot in the std::vector of usages.",
+      "parentUuid": "0bce13cb_918976d5",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e48acd40_ff914f69",
         "filename": "src/dawn_native/ResourceUsageTracker.cpp",
         "patchSetId": 5
@@ -290,6 +440,24 @@
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fca428ad_96e5eddf",
+        "filename": "src/dawn_native/ResourceUsageTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8d8aabb_5ee5eb0b",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -431,6 +599,24 @@
       "revId": "ead78989d162287a89930748817490ef1b7c040c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9773a5c6_e5820c1e",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T02:21:43Z",
+      "side": 1,
+      "message": "Split",
+      "parentUuid": "f747016d_6f6ac6c1",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
