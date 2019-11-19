@@ -20,7 +20,7 @@
 #include "dawn_native/EncodingContext.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ObjectBase.h"
-#include "dawn_native/PassResourceUsage.h"
+#include "dawn_native/ResourceUsage.h"
 
 #include <string>
 
@@ -61,12 +61,10 @@ namespace dawn_native {
         CommandBufferBase* Finish(const CommandBufferDescriptor* descriptor);
 
       private:
-        MaybeError ValidateFinish(const CommandBufferDescriptor* descriptor);
+        MaybeError ValidateFinish(const CommandBufferDescriptor* descriptor,
+                                  CommandIterator* commands) const;
 
         EncodingContext mEncodingContext;
-
-        bool mWereResourceUsagesAcquired = false;
-        CommandBufferResourceUsage mResourceUsages;
     };
 
 }  // namespace dawn_native

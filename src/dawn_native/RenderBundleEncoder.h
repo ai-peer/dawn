@@ -46,7 +46,6 @@ namespace dawn_native {
 
         EncodingContext mEncodingContext;
         Ref<AttachmentState> mAttachmentState;
-        PassResourceUsage mResourceUsage;
     };
 }  // namespace dawn_native
 
