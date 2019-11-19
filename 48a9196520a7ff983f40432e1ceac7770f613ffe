@@ -740,6 +740,24 @@
       "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fb9b1ff_5658ea59",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-11-19T00:10:38Z",
+      "side": 1,
+      "message": "I put a breakpoint in HandleError and ran the test, and looks like the error type is \"device lost\" So it\u0027s coming directly from ASSERT_DEVICE_ERROR(device.CreateBuffer(\u0026descriptor));",
+      "parentUuid": "fbb68adc_efe9af2d",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
