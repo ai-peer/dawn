@@ -81,6 +81,9 @@ namespace dawn_native {
             cmd->indirectBuffer = indirectBuffer;
             cmd->indirectOffset = indirectOffset;
 
+            mEncodingContext->GetUsageTracker()->BufferUsedAs(indirectBuffer,
+                                                              wgpu::BufferUsage::Indirect);
+
             return {};
         });
     }
@@ -99,6 +102,9 @@ namespace dawn_native {
                 allocator->Allocate<DrawIndexedIndirectCmd>(Command::DrawIndexedIndirect);
             cmd->indirectBuffer = indirectBuffer;
             cmd->indirectOffset = indirectOffset;
+
+            mEncodingContext->GetUsageTracker()->BufferUsedAs(indirectBuffer,
+                                                              wgpu::BufferUsage::Indirect);
 
             return {};
         });
@@ -125,6 +131,8 @@ namespace dawn_native {
             cmd->buffer = buffer;
             cmd->offset = offset;
 
+            mEncodingContext->GetUsageTracker()->BufferUsedAs(buffer, wgpu::BufferUsage::Index);
+
             return {};
         });
     }
@@ -138,6 +146,8 @@ namespace dawn_native {
             cmd->slot = slot;
             cmd->buffer = buffer;
             cmd->offset = offset;
+
+            mEncodingContext->GetUsageTracker()->BufferUsedAs(buffer, wgpu::BufferUsage::Vertex);
 
             return {};
         });

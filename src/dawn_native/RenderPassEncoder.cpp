@@ -52,6 +52,7 @@ namespace dawn_native {
 
                 return {};
             })) {
+            mEncodingContext->GetUsageTracker()->FlushPassResourceUsages();
             mEncodingContext->ExitPass(this);
         }
     }
@@ -143,6 +144,16 @@ namespace dawn_native {
             Ref<RenderBundleBase>* bundles = allocator->AllocateData<Ref<RenderBundleBase>>(count);
             for (uint32_t i = 0; i < count; ++i) {
                 bundles[i] = renderBundles[i];
+
+                const PassResourceUsage& usages = bundles[i]->GetResourceUsage();
+                for (uint32_t i = 0; i < usages.buffers.size(); ++i) {
+                    mEncodingContext->GetUsageTracker()->BufferUsedAs(usages.buffers[i],
+                                                                      usages.bufferUsages[i]);
+                }
+                for (uint32_t i = 0; i < usages.textures.size(); ++i) {
+                    mEncodingContext->GetUsageTracker()->TextureUsedAs(usages.textures[i],
+                                                                       usages.textureUsages[i]);
+                }
             }
 
             return {};

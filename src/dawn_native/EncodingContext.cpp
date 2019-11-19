@@ -15,9 +15,11 @@
 #include "dawn_native/EncodingContext.h"
 
 #include "common/Assert.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/RenderBundleEncoder.h"
 
 namespace dawn_native {
 
@@ -32,17 +34,22 @@ namespace dawn_native {
     }
 
     CommandIterator EncodingContext::AcquireCommands() {
+        MoveToIterator();
         ASSERT(!mWereCommandsAcquired);
         mWereCommandsAcquired = true;
         return std::move(mIterator);
     }
 
     CommandIterator* EncodingContext::GetIterator() {
+        MoveToIterator();
+        return &mIterator;
+    }
+
+    void EncodingContext::MoveToIterator() {
         if (!mWasMovedToIterator) {
             mIterator = std::move(mAllocator);
             mWasMovedToIterator = true;
         }
-        return &mIterator;
     }
 
     void EncodingContext::HandleError(wgpu::ErrorType type, const char* message) {
@@ -100,6 +107,14 @@ namespace dawn_native {
 
     bool EncodingContext::IsFinished() const {
         return mTopLevelEncoder == nullptr;
+    }
+
+    ResourceUsageTracker* EncodingContext::GetUsageTracker() {
+        return &mUsageTracker;
+    }
+
+    const ResourceUsageTracker* EncodingContext::GetUsageTracker() const {
+        return &mUsageTracker;
     }
 
 }  // namespace dawn_native
