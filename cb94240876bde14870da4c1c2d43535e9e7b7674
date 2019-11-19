@@ -94,6 +94,30 @@
       "revId": "cb94240876bde14870da4c1c2d43535e9e7b7674",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc21d29a_cfb4cc1a",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-19T01:27:25Z",
+      "side": 1,
+      "message": "Yes. Maybe we missed a flush. I added a test to expose the error at https://dawn-review.googlesource.com/c/dawn/+/13801. PTAL. \n\nThat bug is not relevant to this change. I\u0027d like to proceed the GPU memory sync among compute/render pass(es) at first.",
+      "parentUuid": "33a6b711_e6c17e1c",
+      "range": {
+        "startLine": 107,
+        "startChar": 3,
+        "endLine": 110,
+        "endChar": 27
+      },
+      "revId": "cb94240876bde14870da4c1c2d43535e9e7b7674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
