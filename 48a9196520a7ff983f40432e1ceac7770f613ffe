@@ -620,6 +620,24 @@
     },
     {
       "key": {
+        "uuid": "1e6b6ab6_53ea59e2",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T14:15:08Z",
+      "side": 1,
+      "message": "I think what we should have is the following:\n\nbool mIsLost becomes an enum {Alive, BeingLost, AlreadyLost} and ValidateIsAlive checks it is \u003d\u003d Alive.\n\nthen HandleLossImpl does\n\n if (mLossStatus \u003d AlreadyLost) {return;}\n // Same code as before\n mLossStatus \u003d AlreadyLost\n\n\nLoseForTesting does\n\n mLossStatus \u003d BeingLost; // From now on no new commands can be done that talk to backends (important in multithreaded scenarios)\n WaitForIdleForDestructionImpl(); // new virtual method that all devices implement, after that call we know that nothing will ever touch backend state again apart from the next call\n HandleError(DAWN_DEVICE_LOSS_ERROR(\"For testing\"));\n\nIn the various backends Device::~Device become\n\n  WaitForIdleForDestructionImpl();\n  Destroy(); // backend internal function.\n\nDevice::HandleLossImpl() becomes\n\n  Destroy();\n\nOther reviewers, WDYT, does that look correct?",
+      "parentUuid": "b98df45b_88eb512e",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "956d7b12_59790266",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 14
