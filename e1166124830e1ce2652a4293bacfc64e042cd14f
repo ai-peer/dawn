@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "406863df_71f92813",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:47:49Z",
+      "side": 1,
+      "message": "This CL and the MemoryService one (assuming ImageService is merged in MemoryService) can be done in one CL so we don\u0027t have time when the files aren\u0027t compiled. (speaking of which, we don\u0027t have chromeOS trybots on the dawn CQ, maybe we should fix that.)",
+      "revId": "e1166124830e1ce2652a4293bacfc64e042cd14f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
