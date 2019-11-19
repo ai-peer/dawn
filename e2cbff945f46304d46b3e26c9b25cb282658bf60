@@ -1,0 +1,248 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa6f31d3_39a69dc3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "nit: describe what it does, that it isn\u0027t implemented by the wire, and that we compute it from the shader module before creating the pipeline objects (by replacing the layout in the descriptor)",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fe29ae5_dbc6c8e9",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "This is also needed on the compute pipeline. For testing we can assume that the logic is the same but we should have at least one test for compute pipelines.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d538a7e4_24ed19d1",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "I\u0027m not super happy about how this adds more logic to Device, but I don\u0027t see a way around it.\n\nHow about the following:\n\nif (descriptor-\u003elayout \u003d\u003d nullptr) {\n    ComputePipelineDescriptor descriptorWithDefaultLayout \u003d *descriptor;\n    DAWN_TRY_ASSIGN(descriptorWithDefaultLayout.defaultLayout,\n                    PipelineLayoutBase::CreateDefault(this, \u0026descriptor-\u003ecomputeStage.module, 1));\n    // The reference will keep the layout alive only until the end of this function.\n    Ref\u003cPipelineLayout\u003e layoutRef \u003d AcquireRef(descriptorWithDefaultLayout.defaultLayout);\n\n    DAWN_TRY_ASSIGN(*result, GetOrCreateComputePipeline(descriptorWithDefaultLayout));\n} else {\n    DAWN_TRY_ASSIGN(*result, GetOrCreateComputePipeline(descriptor));\n}\nreturn {};",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99cdc55c_54c9016e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbd5cf3a_9ce9d521",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "nit: add a ValidateGetBindGroup function?",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "552a485d_063d6c22",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "Maybe it should return an empty bind group layout in that case. It would help people doing programmatic things using getBindGroupLayout.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dc7e125_04a5f6ac",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "The same binding can be used by both the VS and the FS as long as it has the same type. We probably need a first step where we compute the representation for each binding, and then a compaction step.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "809f3c34_bea5141c",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "Maybe this could be next to https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/Format.cpp?q\u003dFormat.cpp\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d25 and reuse the same static_asserts",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48b9a5a7_8e3704d0",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "Maybe ASSERT pipelineLayout isn\u0027t an error?",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76f4b9df_7eab4858",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "Can this be landed separately along with tests for BGL compatibility with the shadermodule? It can reference dawn:202 even though it deals with dimension instead of formats.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "095aeaf3_9a994a0a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "nit: info should be a pointer and do the initialization as a second step to make the code simpler to read.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6be95bdd_f83ab819",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "Thanks for adding \"const\" in a bunch of places lately.\n\nOne issue is that a const Ref\u003c\u003e returns a const pointer which makes some things complicated. Maybe we should have both Ref and ConstRef so that it acts like pointers in classes: a const method can return a non-const member pointer.",
+      "range": {
+        "startLine": 299,
+        "startChar": 92,
+        "endLine": 299,
+        "endChar": 97
+      },
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "194bf88d_f8e0d2b1",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "This will fail with the wire (I think we have an option for this in the unittests but I\u0027m not sure).\n\nAll the tests here heavily rely on running directly against dawn_native for deduplication. The way we would need to test this in the CTS would be by actually creating bindgroups with the layouts to test.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af19ba48_ec3c7cc5",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:49:28Z",
+      "side": 1,
+      "message": "I actually thing this should be valid. This is one of the reasons why the visibility is kAllStages for the defaulted layouts.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
