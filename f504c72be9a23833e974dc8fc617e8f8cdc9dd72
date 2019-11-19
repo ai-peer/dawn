@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f6df387_c6eafa02",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T09:33:44Z",
+      "side": 1,
+      "message": "This is used only by validation code but it isn\u0027t very clear from just reading the code here. Maybe we don\u0027t need to skip because this isn\u0027t a hot path? ditto below.",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c254891_b0ba881e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T09:33:44Z",
+      "side": 1,
+      "message": "nit: Like for object creation, have this at the caller site.",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cfbc748_a06954f6",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T09:33:44Z",
+      "side": 1,
+      "message": "nit: like for creation, have this at the caller site",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6729ce84_b25a0a9e",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T09:33:44Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a74e78ab_57cb0910",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T09:33:44Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
