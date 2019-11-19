@@ -22,6 +22,30 @@
       "revId": "31f0a4194744e6c8ef972b5510f31f917e67f5d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d99cf40f_3f9b8035",
+        "filename": "src/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-19T01:30:13Z",
+      "side": 1,
+      "message": "True. We can either 1) keep the constexpr here and not use RGBA8 const colors, or 2) replace constexpr via const, or 3) remove constexpr directly. For the latter two, we can use RGBA8 const colors. \n\nWDYT? Corentin. \n\nWe have a few similar cases through out end2end tests.",
+      "parentUuid": "9fffb882_7e43310c",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 17
+      },
+      "revId": "31f0a4194744e6c8ef972b5510f31f917e67f5d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
