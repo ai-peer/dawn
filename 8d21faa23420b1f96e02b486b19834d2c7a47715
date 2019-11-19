@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28c8bc74_82ecb26a",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T12:58:56Z",
+      "side": 1,
+      "message": "Didn\u0027t review this yet.",
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
