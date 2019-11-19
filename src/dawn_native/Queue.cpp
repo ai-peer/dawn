@@ -70,6 +70,10 @@ namespace dawn_native {
 
     MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
                                          CommandBufferBase* const* commands) {
+        if (GetDevice()->IsToggleEnabled(Toggle::SkipValidation)) {
+            return {};
+        }
+
         TRACE_EVENT0(GetDevice()->GetPlatform(), Validation, "Queue::ValidateSubmit");
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
