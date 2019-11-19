@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f979f170_d526058c",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:16:58Z",
+      "side": 1,
+      "message": "nit: maybe ASSERT(mBindGroupLayouts[group].Get() !\u003d nullptr)?",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96e5e174_b462d667",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:16:58Z",
+      "side": 1,
+      "message": "nit: Comment as to why we need this.",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5c39817_3cab9e66",
+        "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:16:58Z",
+      "side": 1,
+      "message": "Maybe just do setLayouts.fill(GetEmptyDescriptorSetLayout()) before that loop?",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f14b503_0327f51b",
+        "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:16:58Z",
+      "side": 1,
+      "message": "Does Vulkan require that an empty descriptor set is bound for the empty descriptor set layout? If it doesn\u0027t please add a comment where we call vkBindDescriptorSet to explain it.",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94298362_e211c685",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:16:58Z",
+      "side": 1,
+      "message": "nit: layout0 and layout2 are the same layout so they could be factored.",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a41e6ae5_1b5df2ee",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-19T13:16:58Z",
+      "side": 1,
+      "message": "nit: no need for this, it is already nullptr.",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
