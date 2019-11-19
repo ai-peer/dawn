@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e920328a_5231cef0",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-19T22:22:08Z",
+      "side": 1,
+      "message": "If CreateFromExternal succeeds, but ImportExternalImage or BindExternalMemory fail, then the Texture is leaked.\n\nTwo possibilities:\n1) If we can move the logic in ImportExternalImage into InitializeFromExternal, then BindExternalMemory could stay inlined in IntitializeFromExternal as well. We\u0027d have to pass in \u0026mExternalMemoryService and \u0026mExternalSemaphoreService into CreateFromExternal\n\n2) if (result !\u003d nullptr) { delete result; }\n\nI slightly prefer (1) because BindExternalMemory and ImportExternalImage should probably never be used except with CreateFromExternal.\n\nWhat do you think?",
+      "range": {
+        "startLine": 675,
+        "startChar": 12,
+        "endLine": 679,
+        "endChar": 81
+      },
+      "revId": "132c74f659f815cc5c6ca0ba4a668406cea4a85f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
