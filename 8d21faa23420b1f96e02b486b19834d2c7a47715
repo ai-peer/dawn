@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e9134da3_fd2da62f",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:04:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "28c8bc74_82ecb26a",
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6820e596_4a37ea87",
         "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "4e541ff0_9919b0d2",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:04:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6820e596_4a37ea87",
+      "range": {
+        "startLine": 35,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c8929a1_8c214c90",
         "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2019-11-19T22:41:14Z",
       "side": 1,
       "message": "nit: just return props.drmFormatModifierPlaneCount",
+      "range": {
+        "startLine": 47,
+        "startChar": 20,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acdfc85a_f31b8986",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:04:05Z",
+      "side": 1,
+      "message": "When I just return the count directly, I get a compile error:\n\nno viable conversion from returned value of type \u0027uint32_t\u0027 (aka \u0027unsigned int\u0027) to function return type \u0027ResultOrError\u003cuint32_t\u003e\n\nI didn\u0027t want to dig too deeply into the implementation, so I just make a copy. Thoughts?",
+      "parentUuid": "2c8929a1_8c214c90",
       "range": {
         "startLine": 47,
         "startChar": 20,
@@ -85,6 +151,30 @@
       "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6d2c769_8c035a0c",
+        "filename": "src/dawn_native/vulkan/external_image/ImageServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:04:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd45f081_f03712a3",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 62
+      },
+      "revId": "8d21faa23420b1f96e02b486b19834d2c7a47715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
