@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ad7612f0_ea4ef7d0",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f979f170_d526058c",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96e5e174_b462d667",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5484a41_eea62325",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96e5e174_b462d667",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2e61e42b_67dbc160",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47168a8e_e55bc560",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5c39817_3cab9e66",
         "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceea341c_ea08029d",
+        "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:48Z",
+      "side": 1,
+      "message": "Took Jiawei\u0027s suggestion to lazily create it, so this fill wouldn\u0027t make sense.",
+      "parentUuid": "b5c39817_3cab9e66",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d1d3ef9e_81449cff",
+        "filename": "src/dawn_native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:48Z",
+      "side": 1,
+      "message": "Vulkan does not. Added a comment.",
+      "parentUuid": "2f14b503_0327f51b",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94298362_e211c685",
         "filename": "src/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 2
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "154f92c0_b45124e4",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94298362_e211c685",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a41e6ae5_1b5df2ee",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 2
@@ -118,6 +226,24 @@
       "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87567324_4dd96e9b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a41e6ae5_1b5df2ee",
+      "revId": "acbbb2d9d6dc77c962ed4db52d05197d51354845",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
