@@ -38,6 +38,10 @@ class BufferMapReadTests : public DawnTest {
           return mappedData;
       }
 
+      void ResetMappedData() {
+          mappedData = nullptr;
+      }
+
     private:
         const void* mappedData = nullptr;
 };
@@ -60,11 +64,6 @@ TEST_P(BufferMapReadTests, SmallReadAtZero) {
 
 // Map, read and unmap twice. Test that both of these two iterations work.
 TEST_P(BufferMapReadTests, MapTwice) {
-    // TODO(http://crbug.com/dawn/278): the second read doesn't get updated data
-    // on D3D12, Metal and Vulkan.
-    // TODO(http://crbug.com/dawn/280): the second read doesn't get updated data
-    // on OpenGL wire.
-    DAWN_SKIP_TEST_IF(IsD3D12() || IsMetal() || IsVulkan() || UsesWire());
     wgpu::BufferDescriptor descriptor;
     descriptor.size = 4;
     descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
@@ -77,6 +76,8 @@ TEST_P(BufferMapReadTests, MapTwice) {
     EXPECT_EQ(myData, *reinterpret_cast<const uint32_t*>(mappedData));
 
     buffer.Unmap();
+
+    ResetMappedData();
 
     myData = 0x05060708;
     buffer.SetSubData(0, sizeof(myData), &myData);
