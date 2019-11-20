@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b79d64f4_19a91da5",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T18:06:18Z",
+      "side": 1,
+      "message": "Ah sorry, I copied over too much stuff...",
+      "parentUuid": "835b16dd_b5b9c971",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 78,
+        "endChar": 0
+      },
+      "revId": "03212cf3c168bfa5463193ecc5b78c3b3042c7da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d474b7d0_f7cf74d9",
         "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "2aa8ff51_f22d683a",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T18:06:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d474b7d0_f7cf74d9",
+      "revId": "03212cf3c168bfa5463193ecc5b78c3b3042c7da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53da4863_b2adb4b0",
         "filename": "src/include/dawn_native/VulkanBackend.h",
         "patchSetId": 3
@@ -56,6 +98,24 @@
       "revId": "03212cf3c168bfa5463193ecc5b78c3b3042c7da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eb0a075_4c12fc98",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T18:06:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53da4863_b2adb4b0",
+      "revId": "03212cf3c168bfa5463193ecc5b78c3b3042c7da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
