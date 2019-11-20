@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a7b42d8_ee68045f",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T03:28:50Z",
+      "side": 1,
+      "message": "Ah sorry, this isn\u0027t necessary. Removed.",
+      "parentUuid": "3da8c52a_14b7cc2e",
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11109a8f_9990a6d3",
         "filename": "src/include/dawn_native/VulkanBackend.h",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76862ada_3d8cbcf0",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T03:28:50Z",
+      "side": 1,
+      "message": "I like this pattern; it seems safer. Thanks!",
+      "parentUuid": "11109a8f_9990a6d3",
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "012f1e24_319a3683",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T03:28:50Z",
+      "side": 1,
+      "message": "Done, but heads up that I needed to move an `ASSERT(requirements.size \u003c\u003d descriptor-\u003eallocationSize)` from TextureVk into MemoryService.",
+      "parentUuid": "3fb6e7e1_b231291b",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca31a333_fda39ab9",
         "filename": "src/include/dawn_native/VulkanBackend.h",
         "patchSetId": 1
@@ -73,6 +133,24 @@
       "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f65eab17_27eaca1f",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T03:28:50Z",
+      "side": 1,
+      "message": "Done. I added a general WrapVulkanImageOpaqueFD function instead of modifying this one since it\u0027s currently being used in Chromium. I don\u0027t think there\u0027s a way to atomically update Chromium and Dawn, so I\u0027ll just remove WrapVulkanImageOpaqueFD when we migrate over in Chromium.",
+      "parentUuid": "ca31a333_fda39ab9",
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -96,6 +174,30 @@
       "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17b2a84d_22c1178e",
+        "filename": "src/include/dawn_native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T03:28:50Z",
+      "side": 1,
+      "message": "Done. Named the base class ExternalImageDescriptorFD instead of *Linux since it seems like it\u0027s currently also used for Fuchsia things.",
+      "parentUuid": "17b18038_34f1ec11",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "95c7e7285a64d7808260561dde05c533b33aa3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
