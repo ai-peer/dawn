@@ -1230,6 +1230,46 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
 
         return device.CreateComputePipeline(&csDesc);
     }
+
+    wgpu::ComputePipeline CreateComputePipeline(wgpu::BindGroupLayout* bindGroupLayout,
+                                                const char* shader) {
+        wgpu::ShaderModule csModule =
+            utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, shader);
+
+        wgpu::PipelineLayout pipelineLayout =
+            utils::MakeBasicPipelineLayout(device, bindGroupLayout);
+
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.layout = pipelineLayout;
+        csDesc.computeStage.module = csModule;
+        csDesc.computeStage.entryPoint = "main";
+
+        return device.CreateComputePipeline(&csDesc);
+    }
+
+    template <typename MemberT, typename F>
+    void DoCompatibilityTest(MemberT* member,
+                             std::vector<MemberT> succeeding,
+                             std::vector<MemberT> failing,
+                             F&& run) {
+        for (MemberT value : succeeding) {
+            *member = value;
+            run();
+        }
+
+        for (MemberT value : failing) {
+            *member = value;
+            ASSERT_DEVICE_ERROR(run());
+        }
+    }
+
+    template <typename MemberT, typename F>
+    void DoCompatibilityTestOnly(MemberT* member, MemberT only, std::vector<MemberT> all, F&& run) {
+        std::vector<MemberT> filtered;
+        std::copy_if(all.begin(), all.end(), std::back_inserter(filtered),
+                     [&](MemberT val) { return val != only; });
+        DoCompatibilityTest(member, {only}, filtered, std::forward<F>(run));
+    }
 };
 
 // Test cases that test bind group layout mismatch with shader. The second item in bind group layout
@@ -1262,4 +1302,158 @@ TEST_F(BindGroupLayoutCompatibilityTest, ROStorageInBGLWithRWStorageInShader) {
     ASSERT_DEVICE_ERROR(CreateRenderPipeline(&bindGroupLayout));
 
     ASSERT_DEVICE_ERROR(CreateComputePipeline(&bindGroupLayout));
+}
+
+// Test that the texture component type between the shader and bind group must match
+TEST_F(BindGroupLayoutCompatibilityTest, TextureComponentType) {
+    wgpu::BindGroupLayoutBinding binding = {
+        0,                                  // binding
+        wgpu::ShaderStage::Compute,         // visibility
+        wgpu::BindingType::SampledTexture,  // type
+        false,                              // hasDynamicOffset
+        false,                              // multisampled
+        wgpu::TextureViewDimension::e2D,    // textureDimension
+        wgpu::TextureComponentType::Float,  // textureComponentType
+    };
+
+    wgpu::BindGroupLayoutDescriptor bglDescriptor;
+    bglDescriptor.bindingCount = 1;
+    bglDescriptor.bindings = &binding;
+
+    std::vector<wgpu::TextureComponentType> allComponents = {
+        wgpu::TextureComponentType::Float,
+        wgpu::TextureComponentType::Uint,
+        wgpu::TextureComponentType::Sint,
+    };
+
+    // Float
+    DoCompatibilityTestOnly(
+        &binding.textureComponentType, wgpu::TextureComponentType::Float, allComponents, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform texture2D tex;
+
+                    void main() {
+                    })");
+        });
+
+    // Uint
+    DoCompatibilityTestOnly(
+        &binding.textureComponentType, wgpu::TextureComponentType::Uint, allComponents, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform utexture2D tex;
+
+                    void main() {
+                    })");
+        });
+
+    // Sint
+    DoCompatibilityTestOnly(
+        &binding.textureComponentType, wgpu::TextureComponentType::Sint, allComponents, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform itexture2D tex;
+
+                    void main() {
+                    })");
+        });
+}
+
+// Test that the texture view dimension between the shader and bind group must match
+TEST_F(BindGroupLayoutCompatibilityTest, TextureViewDimension) {
+    wgpu::BindGroupLayoutBinding binding = {
+        0,                                  // binding
+        wgpu::ShaderStage::Compute,         // visibility
+        wgpu::BindingType::SampledTexture,  // type
+        false,                              // hasDynamicOffset
+        false,                              // multisampled
+        wgpu::TextureViewDimension::e2D,    // textureDimension
+        wgpu::TextureComponentType::Float,  // textureComponentType
+    };
+
+    std::vector<wgpu::TextureViewDimension> allDimensions = {
+        wgpu::TextureViewDimension::e1D,       wgpu::TextureViewDimension::e2D,
+        wgpu::TextureViewDimension::e2DArray,  wgpu::TextureViewDimension::Cube,
+        wgpu::TextureViewDimension::CubeArray, wgpu::TextureViewDimension::e3D,
+    };
+
+    wgpu::BindGroupLayoutDescriptor bglDescriptor;
+    bglDescriptor.bindingCount = 1;
+    bglDescriptor.bindings = &binding;
+
+    // 1D
+    DoCompatibilityTestOnly(
+        &binding.textureDimension, wgpu::TextureViewDimension::e1D, allDimensions, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform texture1D tex;
+
+                    void main() {
+                    })");
+        });
+
+    // 2D
+    DoCompatibilityTestOnly(
+        &binding.textureDimension, wgpu::TextureViewDimension::e2D, allDimensions, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform texture2D tex;
+
+                    void main() {
+                    })");
+        });
+
+    // 3D
+    DoCompatibilityTestOnly(
+        &binding.textureDimension, wgpu::TextureViewDimension::e3D, allDimensions, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform texture3D tex;
+
+                    void main() {
+                    })");
+        });
+
+    // 2DArray
+    DoCompatibilityTestOnly(
+        &binding.textureDimension, wgpu::TextureViewDimension::e2DArray, allDimensions, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform texture2DArray tex;
+
+                    void main() {
+                    })");
+        });
+
+    // Cube
+    DoCompatibilityTestOnly(
+        &binding.textureDimension, wgpu::TextureViewDimension::Cube, allDimensions, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform textureCube tex;
+
+                    void main() {
+                    })");
+        });
+
+    // CubeArray
+    DoCompatibilityTestOnly(
+        &binding.textureDimension, wgpu::TextureViewDimension::CubeArray, allDimensions, [&]() {
+            wgpu::BindGroupLayout bindGroupLayout = device.CreateBindGroupLayout(&bglDescriptor);
+            CreateComputePipeline(&bindGroupLayout, R"(
+                    #version 450
+                    layout(set = 0, binding = 0) uniform textureCubeArray tex;
+
+                    void main() {
+                    })");
+        });
 }
