@@ -16,6 +16,24 @@
       "revId": "4739a0652b3abb8eee7285faeafc6248465e3160",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a6a1df1_82bfe5c3",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T17:56:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4f59168d_1f9eac6c",
+      "revId": "4739a0652b3abb8eee7285faeafc6248465e3160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
