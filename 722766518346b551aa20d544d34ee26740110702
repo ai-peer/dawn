@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "b0379d5e_7e2e3337",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-20T19:20:00Z",
+      "side": 1,
+      "message": "Ah, Thanks for clarifying.",
+      "parentUuid": "3e4ed709_16013e4a",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 25
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3a5745bd_8456428f",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -249,6 +273,54 @@
       "side": 1,
       "message": "I don\u0027t think there\u0027s any extra tracking involved, but I may not fully understand what you mean.\n\nIIUC, requiresAllocation \u003d\u003d true when BindGroup::AllocateDescriptors causes the descriptor heaps to change. When this happens, we iterate through the previously allocated descriptors and re-allocate them in the new heap. During this re-allocation we shouldn\u0027t incur ANOTHER change in descriptor heaps because the new descriptor heap should be big enough for the old descriptors + the new ones.\n\nNote: This tracking complication isn\u0027t an issue if we move BindGroup::AllocateDescriptors into an explicit allocator which explicitly knows which descriptor heap it\u0027s using.",
       "parentUuid": "0fdb7466_b049a221",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bebeb85a_0b6367ee",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-20T19:20:00Z",
+      "side": 1,
+      "message": "\u003e the BindGroupLayout should not itself be an allocator\n\nI wasn\u0027t thinking to have the BGL be an allocator itself but only deal with switching heaps on overflow (but before being re-applied). Or move that into DynamicBindGroup allocator, must it exist [1].\n\n\u003e D3D12 demands a dynamically allocating solution because of this overflow problem.\n\nThis can also be reversed. Dynamically allocating causes overflow. Statically allocating does not. Had we statically staged them (ie. CPU descriptors + CopyDescriptors), then I don\u0027t see how overflow could occur [1]. Note: static descriptors are native to D3D.\n\n\u003e Not needed now, but we should keep it in mind when we design this so we don\u0027t churn too much.\n\nAh, thanks. I was hoping to avoid dealing with overflow for this CL. However, I don\u0027t mind tackling the refactor now but it will certainly require more revs.",
+      "parentUuid": "14ec5f9c_c5e796d5",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2a5d04a_20cea011",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-20T19:20:00Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think there\u0027s any extra tracking involved, but I may not fully understand what you mean.\n\nUnless I\u0027m missing something, we would need to to disambiguate the first group vs a middle group being re-applied. ASSERT(requiresAllocation \u003d\u003d true \u0026\u0026 mBoundHeapsChanged \u003d\u003d false) fails on the first re-applied group. It requires reallocation and changes the bounded heaps.",
+      "parentUuid": "fe75b628_d8d4abb3",
       "range": {
         "startLine": 197,
         "startChar": 12,
