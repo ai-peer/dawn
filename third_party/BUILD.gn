@@ -62,41 +62,25 @@ static_library("spirv_cross") {
     "${spirv_cross_dir}/spirv_cross_error_handling.hpp",
     "${spirv_cross_dir}/spirv_cross_parsed_ir.cpp",
     "${spirv_cross_dir}/spirv_cross_parsed_ir.hpp",
+    "${spirv_cross_dir}/spirv_glsl.cpp",
+    "${spirv_cross_dir}/spirv_glsl.hpp",
     "${spirv_cross_dir}/spirv_parser.cpp",
     "${spirv_cross_dir}/spirv_parser.hpp",
+    "${spirv_cross_dir}/spirv_reflect.cpp",
+    "${spirv_cross_dir}/spirv_reflect.hpp",
   ]
-
-  need_glsl_cross =
-      dawn_enable_opengl || dawn_enable_cross_reflection || dawn_use_spvc
-  need_reflection_cross = dawn_enable_cross_reflection || dawn_use_spvc
 
   if (dawn_enable_d3d12) {
     sources += [
       "${spirv_cross_dir}/spirv_hlsl.cpp",
       "${spirv_cross_dir}/spirv_hlsl.hpp",
     ]
-    need_glsl_cross = true
   }
 
   if (dawn_enable_metal) {
     sources += [
       "${spirv_cross_dir}/spirv_msl.cpp",
       "${spirv_cross_dir}/spirv_msl.hpp",
-    ]
-    need_glsl_cross = true
-  }
-
-  if (need_glsl_cross) {
-    sources += [
-      "${spirv_cross_dir}/spirv_glsl.cpp",
-      "${spirv_cross_dir}/spirv_glsl.hpp",
-    ]
-  }
-
-  if (need_reflection_cross) {
-    sources += [
-      "${spirv_cross_dir}/spirv_reflect.cpp",
-      "${spirv_cross_dir}/spirv_reflect.hpp",
     ]
   }
 }
