@@ -100,6 +100,52 @@
     },
     {
       "key": {
+        "uuid": "133a5113_43c1f13f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-20T03:07:56Z",
+      "side": 1,
+      "message": "Can this method be const?",
+      "range": {
+        "startLine": 164,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 44
+      },
+      "revId": "11e20f8565ff2b767a8a9440c2ef0c0191c21cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59701669_5a3be272",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-20T03:07:56Z",
+      "side": 1,
+      "message": "Calling mDeviceLostCallback might result in Dawn top-level methods getting called. Might be best to set mIsLost before making the callback.",
+      "range": {
+        "startLine": 179,
+        "startChar": 8,
+        "endLine": 179,
+        "endChar": 23
+      },
+      "revId": "11e20f8565ff2b767a8a9440c2ef0c0191c21cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d84d63b7_b624e9c1",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 16
@@ -185,6 +231,29 @@
       "writtenOn": "2019-11-19T14:15:08Z",
       "side": 1,
       "message": "This should be added to dawn.json probably (although it\u0027s a bit scary to give access to that method to the JS / renderer process, a create reason to make the loss very robust).",
+      "revId": "11e20f8565ff2b767a8a9440c2ef0c0191c21cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b951e8ef_3481e3d8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-20T03:07:56Z",
+      "side": 1,
+      "message": "Checking the HRESULT of GetDeviceRemovedReason is good but this is the place where we have to actually handle device removed by releasing all of the objects and setting the correct enum value.",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 176,
+        "endChar": 66
+      },
       "revId": "11e20f8565ff2b767a8a9440c2ef0c0191c21cae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

@@ -638,6 +638,24 @@
     },
     {
       "key": {
+        "uuid": "de59d728_8d781bf0",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-11-20T03:07:56Z",
+      "side": 1,
+      "message": "Corentin, what you have makes sense to me. \n\nNot sure about other APIs but in D3D12, once the device has become removed, there is no need to wait for the GPU to finish for anything. All fences become immediately signaled to UINT64_MAX. \nYou can immediately release all of the objects in any order. Releasing the objects is good because only the GPU side of the object becomes deallocated. The runtime memory allocations remain.",
+      "parentUuid": "1e6b6ab6_53ea59e2",
+      "revId": "48a9196520a7ff983f40432e1ceac7770f613ffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "956d7b12_59790266",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 14
