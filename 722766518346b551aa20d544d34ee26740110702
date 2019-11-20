@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3e4ed709_16013e4a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T01:14:29Z",
+      "side": 1,
+      "message": "The current and remaining will be allocated on the new heap, but we still need to put them in the vector (or bitset as I recommended elsewhere).\n\n1: allocating bind groups: [ A, B, C ] \u003d\u003e just allocate and it\u0027s fine.\n   \u003d\u003e A, B, C are in mBindGroupsAllocated\n2. allocating more: [D, E] \u003d\u003e causes reapply to happen\n   \u003d\u003e A, B, C are re-allocated, D and E never get added to mBindGroupsAllocated\n3. allocate more: [F, G] \u003d\u003e causes ANOTHER reapply to happen\n   \u003d\u003e D and E were never added to the vector. They are never reallocated",
+      "parentUuid": "99ec2703_aed85df4",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 25
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3a5745bd_8456428f",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -179,6 +203,54 @@
       "parentUuid": "64301a2d_a5cf172d",
       "range": {
         "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14ec5f9c_c5e796d5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T01:14:29Z",
+      "side": 1,
+      "message": "\u003e We could move SetDescriptorHeaps to BindGroupLayout::Allocate. So that BindGroup::AllocateDescriptors \u003d\u003e CreateDescriptors using the allocations (similar to Vulkan). Thoughts?\n\u003e Alternatively, revert + OOM. Even before this change, I think MAX_SAMPLER + 1 case still overflows.\n\nI don\u0027t think we should follow the Vulkan backend here. The Vulkan backend does descriptor set allocation statically on creation -- not during recording time (and it\u0027s very bad and needs to be further optimized). In the D3D12 backend, the BindGroupLayout should not itself be an allocator. There should be a separate construct which allocates descriptors for the BindGroupLayout. D3D12 demands a dynamically allocating solution because of this overflow problem.\n\nIn the current patch, d3d12::BindGroup modifies Device-global data and then we respond to it reactively, which is sort of backward. It will be better if an allocator object knows how big the current DescriptorHeapAllocation is and can explicitly allocate inside of that based on how much space there is. If there is insufficient space, it creates a new DescriptorHeap and copies (or re-records if that\u0027s easier for now) used descriptors from the old heap.\n\n\u003e Ideas welcomed. But are these needed for removing the pre-pass? If not, noted to revisit.\n\nNot needed now, but we should keep it in mind when we design this so we don\u0027t churn too much.",
+      "parentUuid": "d83499c6_708a958b",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe75b628_d8d4abb3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T01:14:29Z",
+      "side": 1,
+      "message": "I don\u0027t think there\u0027s any extra tracking involved, but I may not fully understand what you mean.\n\nIIUC, requiresAllocation \u003d\u003d true when BindGroup::AllocateDescriptors causes the descriptor heaps to change. When this happens, we iterate through the previously allocated descriptors and re-allocate them in the new heap. During this re-allocation we shouldn\u0027t incur ANOTHER change in descriptor heaps because the new descriptor heap should be big enough for the old descriptors + the new ones.\n\nNote: This tracking complication isn\u0027t an issue if we move BindGroup::AllocateDescriptors into an explicit allocator which explicitly knows which descriptor heap it\u0027s using.",
+      "parentUuid": "0fdb7466_b049a221",
+      "range": {
+        "startLine": 197,
         "startChar": 12,
         "endLine": 199,
         "endChar": 65
