@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "99ec2703_aed85df4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-20T00:35:36Z",
+      "side": 1,
+      "message": "Which group? The current (and remaining) should already be allocated on the new heap - only the previous ones need to be re-applied - if my understanding is correct.",
+      "parentUuid": "85b3e28c_ba93995b",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 25
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a5745bd_8456428f",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -107,6 +131,54 @@
       "message": "ASSERT that if requiresAllocation \u003d\u003d true, mBoundHeapsChanged \u003d\u003d false.\nIt should be impossible to change heaps in the middle of a reallocation.\n\nIf this can indeed happen (I don\u0027t think it can), then we could return an OOM error.",
       "range": {
         "startLine": 197,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fdb7466_b049a221",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-20T00:35:36Z",
+      "side": 1,
+      "message": "We don\u0027t want to ASSERT on the first re-allocation - a tracking bit would be needed for that check. Still worth doing?",
+      "parentUuid": "fc814dc6_b1c79cdc",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d83499c6_708a958b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-20T00:35:36Z",
+      "side": 1,
+      "message": "\u003e I\u0027m uneasy with having AllocateDescriptors change the current heaps from underneath the tracker and discovering this when we call SetDescriptorHeaps.\n\nWe could move SetDescriptorHeaps to BindGroupLayout::Allocate. So that BindGroup::AllocateDescriptors \u003d\u003e CreateDescriptors using the allocations (similar to Vulkan). Thoughts?\n\nAlternatively, revert + OOM. Even before this change, I think MAX_SAMPLER + 1 case still overflows.\n\n\u003eenable some additional follow-up optimizations\n\nIdeas welcomed. But are these needed for removing the pre-pass? If not, noted to revisit.",
+      "parentUuid": "64301a2d_a5cf172d",
+      "range": {
+        "startLine": 194,
         "startChar": 12,
         "endLine": 199,
         "endChar": 65
