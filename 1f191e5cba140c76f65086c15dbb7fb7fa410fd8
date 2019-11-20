@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d9d8f10b_f481cc21",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b30b613f_7a351b6a",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "860d3584_b9542598",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f68904e4_60858340",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:03:08Z",
+      "side": 1,
+      "message": "I skimmed the spec, and I couldn\u0027t find are any guarantees that there is at least one memory type that satisfies both constraints. For example, we could pass some wacky flags to VkCreateImage to require some specific memory type and then supply some similarly esoteric constraints in VkMemoryFdPropertiesKHR to require some other specific memory type.\n\nThere could very well be some guarantees in our simple use case, but I\u0027m more comfortable with an error check to see if both constraints are satisfied.",
+      "parentUuid": "860d3584_b9542598",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f0cff3b5_50b1b671",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e5efb8c_7f67f94c",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eda95fb7_1fc09b44",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f041542_c6c4e07f",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eda95fb7_1fc09b44",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "2886d2f0_ddb31b5a",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80e3aa03_b25e0178",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b622b422_ff6acc8e",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 1
@@ -101,6 +191,24 @@
       "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "746067f4_d8afa3e0",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b622b422_ff6acc8e",
+      "revId": "1f191e5cba140c76f65086c15dbb7fb7fa410fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
