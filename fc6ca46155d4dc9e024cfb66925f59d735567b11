@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4f357f49_e21f2628",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T18:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b324be6c_cc15609d",
+      "revId": "fc6ca46155d4dc9e024cfb66925f59d735567b11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88daed3f_65694e6e",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceZirconHandle.cpp",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "fc6ca46155d4dc9e024cfb66925f59d735567b11",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d7de777_c121504a",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceZirconHandle.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T18:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88daed3f_65694e6e",
+      "revId": "fc6ca46155d4dc9e024cfb66925f59d735567b11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
