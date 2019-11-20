@@ -22,6 +22,30 @@
       "revId": "132c74f659f815cc5c6ca0ba4a668406cea4a85f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "817c0635_a6b980e9",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T01:18:50Z",
+      "side": 1,
+      "message": "I started implementing (1), but it started to get pretty involved with all of the extra params I\u0027d now have to pass to CreateFromExternal. In addition to the MemoryService and the SemaphoreService, I\u0027ll also need to pass in waitHandles/memoryHandle. Furthermore, if we\u0027re going to do this change to ensure the texture is cleaned up inside CreateFromExternal on failure, we\u0027re going to want to move the current failure code down below (semaphore and memory cleanup) into CreateFromExternal as well for consistency.\n\nI agree that (1) would be nicer, but I\u0027m just going to do (2) for now. This will be a nontrivial refactor, and I don\u0027t want too many merge conflicts with myself in this chain of CLs. I assigned http://crbug.com/1026480 to myself to clean this up once my CLs are all in.",
+      "parentUuid": "e920328a_5231cef0",
+      "range": {
+        "startLine": 675,
+        "startChar": 12,
+        "endLine": 679,
+        "endChar": 81
+      },
+      "revId": "132c74f659f815cc5c6ca0ba4a668406cea4a85f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
