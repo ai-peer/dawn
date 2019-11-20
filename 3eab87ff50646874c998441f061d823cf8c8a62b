@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3321fd5d_aff664be",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T16:59:47Z",
+      "side": 1,
+      "message": "Maybe this could be UnmapBuffer(buffer) { buffer.Unmap(); mappedData \u003d nullptr; }\nso we always do it together.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 7
+      },
+      "revId": "3eab87ff50646874c998441f061d823cf8c8a62b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
