@@ -16,6 +16,24 @@
       "revId": "e1166124830e1ce2652a4293bacfc64e042cd14f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bec94fe_57c1266d",
+        "filename": "BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2019-11-20T23:03:32Z",
+      "side": 1,
+      "message": "Done. I\u0027ve also assigned http://crbug.com/1026880 to track Chrome OS trybots on the CQ.",
+      "parentUuid": "406863df_71f92813",
+      "revId": "e1166124830e1ce2652a4293bacfc64e042cd14f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
