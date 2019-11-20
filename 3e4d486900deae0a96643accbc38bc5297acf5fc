@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7da1af81_6841fd4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-20T16:20:56Z",
+      "side": 1,
+      "message": "can we have a BUG\u003ddawn:N?",
+      "revId": "3e4d486900deae0a96643accbc38bc5297acf5fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
