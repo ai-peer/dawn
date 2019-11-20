@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "36fc5fd4_f6bb67c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "But actually, it is implemented in the wire! The wire supports all functions with an Object return type, even if they\u0027re not DeviceCreate functions\n\nEdit: Now that I have getBindGroupLayout return nullptr for an unused index this is broken in the wire",
+      "parentUuid": "aa6f31d3_39a69dc3",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fe29ae5_dbc6c8e9",
         "filename": "dawn.json",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "326d1cd2_84d78b13",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fe29ae5_dbc6c8e9",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6512fbb4_947ab894",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d538a7e4_24ed19d1",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99cdc55c_54c9016e",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db77584_314f62f4",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99cdc55c_54c9016e",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "e2e3e3f9_1cce7840",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbd5cf3a_9ce9d521",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "552a485d_063d6c22",
         "filename": "src/dawn_native/Pipeline.cpp",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2019-11-19T13:49:28Z",
       "side": 1,
       "message": "Maybe it should return an empty bind group layout in that case. It would help people doing programmatic things using getBindGroupLayout.",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5dcf537_1a82704c",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Hm.. an empty one or nullptr? (undefined in JS)\n\nLooking at it again now though, an empty one would be much easier to implement in the wire. If it\u0027s nullptr, we have to duplicate all of the tracking of bind group layout mask.",
+      "parentUuid": "552a485d_063d6c22",
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "72317081_f113d05a",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Don\u0027t need to do a compaction. We can just have a temporary flatmap from (set, binding) \u003d\u003e BindGroupLayoutBinding. If it\u0027s already used, we validate it\u0027s the same as the existing one.",
+      "parentUuid": "4dc7e125_04a5f6ac",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "809f3c34_bea5141c",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 2
@@ -135,6 +261,24 @@
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfe6ff41_2173ede4",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "809f3c34_bea5141c",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4e0574c6_644c8b81",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48b9a5a7_8e3704d0",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76f4b9df_7eab4858",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "4daa7d66_2cbf17e0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f4b9df_7eab4858",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "095aeaf3_9a994a0a",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -186,6 +366,24 @@
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dd222af_7666a319",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "095aeaf3_9a994a0a",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -212,6 +410,30 @@
     },
     {
       "key": {
+        "uuid": "55fd1429_faac591e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Ack. Or maybe we can get Ref\u003cconst T\u003e to work?",
+      "parentUuid": "6be95bdd_f83ab819",
+      "range": {
+        "startLine": 299,
+        "startChar": 92,
+        "endLine": 299,
+        "endChar": 97
+      },
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "194bf88d_f8e0d2b1",
         "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
         "patchSetId": 2
@@ -229,6 +451,24 @@
     },
     {
       "key": {
+        "uuid": "201ef72a_61b0ae14",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "These tests don\u0027t run with in the wire. The only wire unittests are the explicit Wire* ones.",
+      "parentUuid": "194bf88d_f8e0d2b1",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af19ba48_ec3c7cc5",
         "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
         "patchSetId": 2
@@ -243,6 +483,24 @@
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b3274ee_6bebf59f",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-20T23:33:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af19ba48_ec3c7cc5",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
