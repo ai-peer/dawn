@@ -21,6 +21,15 @@
 
 #include <memory>
 
+{% set methods_with_callbacks = [
+    "BufferMapReadAsync",
+    "BufferMapWriteAsync",
+    "DeviceCreateBufferMappedAsync",
+    "DevicePopErrorScope",
+    "DeviceSetUncapturedErrorCallback",
+    "FenceOnCompletion",
+] %}
+
 // An abstract base class representing a proc table so that API calls can be mocked. Most API calls
 // are directly represented by a delete virtual method but others need minimal state tracking to be
 // useful as mocks.
@@ -40,12 +49,15 @@ class ProcTableAsClass {
 
         {% for type in by_category["object"] %}
             {% for method in type.methods if len(method.arguments) < 10 %}
-                virtual {{as_cType(method.return_type.name)}} {{as_MethodSuffix(type.name, method.name)}}(
-                    {{-as_cType(type.name)}} {{as_varName(type.name)}}
-                    {%- for arg in method.arguments -%}
-                        , {{as_annotated_cType(arg)}}
-                    {%- endfor -%}
-                ) = 0;
+                {% set Suffix = as_MethodSuffix(type.name, method.name) %}
+                {% if not Suffix in methods_with_callbacks %}
+                    virtual {{as_cType(method.return_type.name)}} {{Suffix}}(
+                        {{-as_cType(type.name)}} {{as_varName(type.name)}}
+                        {%- for arg in method.arguments -%}
+                            , {{as_annotated_cType(arg)}}
+                        {%- endfor -%}
+                    ) = 0;
+                {% endif %}
             {% endfor %}
             virtual void {{as_MethodSuffix(type.name, Name("reference"))}}({{as_cType(type.name)}} self) = 0;
             virtual void {{as_MethodSuffix(type.name, Name("release"))}}({{as_cType(type.name)}} self) = 0;
@@ -123,15 +135,18 @@ class MockProcTable : public ProcTableAsClass {
         void IgnoreAllReleaseCalls();
 
         {% for type in by_category["object"] %}
-            {% for method in type.methods if len(method.arguments) < 10 %}
-                MOCK_METHOD{{len(method.arguments) + 1}}(
-                    {{-as_MethodSuffix(type.name, method.name)}},
-                    {{as_cType(method.return_type.name)}}(
-                        {{-as_cType(type.name)}} {{as_varName(type.name)}}
-                        {%- for arg in method.arguments -%}
-                            , {{as_annotated_cType(arg)}}
-                        {%- endfor -%}
-                    ));
+            {% for method in type.methods if len(method.arguments) < 10 and not method.has_callbacks %}
+                {% set Suffix = as_MethodSuffix(type.name, method.name) %}
+                {% if not Suffix in methods_with_callbacks %}
+                    MOCK_METHOD{{len(method.arguments) + 1}}(
+                        {{-as_MethodSuffix(type.name, method.name)}},
+                        {{as_cType(method.return_type.name)}}(
+                            {{-as_cType(type.name)}} {{as_varName(type.name)}}
+                            {%- for arg in method.arguments -%}
+                                , {{as_annotated_cType(arg)}}
+                            {%- endfor -%}
+                        ));
+                {% endif %}
             {% endfor %}
 
             MOCK_METHOD1({{as_MethodSuffix(type.name, Name("reference"))}}, void({{as_cType(type.name)}} self));

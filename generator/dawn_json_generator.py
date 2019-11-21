@@ -83,13 +83,14 @@ class BitmaskType(Type):
         for value in self.values:
             self.full_mask = self.full_mask | value.value
 
+class CallbackType(Type):
+    def __init__(self, name, json_data):
+        Type.__init__(self, name, json_data)
+        self.arguments = []
+
 class NativeType(Type):
     def __init__(self, name, json_data):
         Type.__init__(self, name, json_data, native=True)
-
-class NativelyDefined(Type):
-    def __init__(self, name, json_data):
-        Type.__init__(self, name, json_data)
 
 # Methods and structures are both "records", so record members correspond to
 # method arguments or structure members.
@@ -201,6 +202,9 @@ def link_object(obj, types):
 def link_structure(struct, types):
     struct.members = linked_record_members(struct.json_data['members'], types)
 
+def link_callback(callback, types):
+    callback.arguments = linked_record_members(callback.json_data['args'], types)
+
 # Sort structures so that if struct A has struct B as a member, then B is listed before A
 # This is a form of topological sort where we try to keep the order reasonably similar to the
 # original order (though th sort isn't technically stable).
@@ -242,7 +246,7 @@ def parse_json(json):
         'bitmask': BitmaskType,
         'enum': EnumType,
         'native': NativeType,
-        'natively defined': NativelyDefined,
+        'callback': CallbackType,
         'object': ObjectType,
         'structure': StructureType,
     }
@@ -266,6 +270,9 @@ def parse_json(json):
 
     for struct in by_category['structure']:
         link_structure(struct, types)
+
+    for callback in by_category['callback']:
+        link_callback(callback, types)
 
     for category in by_category.keys():
         by_category[category] = sorted(by_category[category], key=lambda typ: typ.name.canonical_case())
@@ -291,6 +298,8 @@ def compute_wire_params(api_params, wire_json):
 
     commands = []
     return_commands = []
+
+    wire_json['special items']['client_handwritten_commands'] += wire_json['special items']['client_side_commands']
 
     # Generate commands from object methods
     for api_object in wire_params['by_category']['object']:
