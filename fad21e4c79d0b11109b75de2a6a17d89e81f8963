@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67cab312_e345b38c",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:22:08Z",
+      "side": 1,
+      "message": "Note that at some point this will need to make the difference between validating the RenderPass resource usage and the ComputePass resource usage, because it will be valid to use a buffer both as uniform and storage in the same compute pass.",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0db119d_b86c4e22",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:22:08Z",
+      "side": 1,
+      "message": "nit: ASSERT(!mWereCommandsAcquired)",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e528bc4_dff0ec38",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:22:08Z",
+      "side": 1,
+      "message": "not for this CL, but maybe we should have a three-value enum for the encodingContext state where it can be \"encoding\", \"finishing\" and \"finished\", this would help with this logic, WDYT?",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebed286b_bf5ca0a8",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:22:08Z",
+      "side": 1,
+      "message": "nit: Maybe add a comment that the usageTracker is passed in because it is prepopulated with the usage from the BeginRenderPass command. Maybe at some point we could have the RenderPassEncoder be responsible for encoding the BeginRenderPass command so this isn\u0027t necessary anymore.",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
