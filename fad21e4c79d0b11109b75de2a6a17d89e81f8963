@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a7af211_cb791e56",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T21:52:09Z",
+      "side": 1,
+      "message": "Added a comment.",
+      "parentUuid": "67cab312_e345b38c",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e0db119d_b86c4e22",
         "filename": "src/dawn_native/EncodingContext.cpp",
         "patchSetId": 10
@@ -33,6 +51,24 @@
       "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef95f90e_9861d67a",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T21:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0db119d_b86c4e22",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "220918ca_d1319996",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T21:52:09Z",
+      "side": 1,
+      "message": "Either that, or maybe have Finish take a lambda just like TryEncode. The separation is only because we have this non-const part followed by an optional const part.\n\nmEncodingContext.Finish([\u0026]() -\u003e MaybeError {\n  if (ValidationEnabled) { ... }  \n  return {};\n});",
+      "parentUuid": "4e528bc4_dff0ec38",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebed286b_bf5ca0a8",
         "filename": "src/dawn_native/RenderPassEncoder.cpp",
         "patchSetId": 10
@@ -67,6 +121,24 @@
       "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4a6914f_e5501e94",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T21:52:09Z",
+      "side": 1,
+      "message": "Added a comment.",
+      "parentUuid": "ebed286b_bf5ca0a8",
+      "revId": "fad21e4c79d0b11109b75de2a6a17d89e81f8963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
