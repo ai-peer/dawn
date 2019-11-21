@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d5a9f72_17882d0e",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:57:18Z",
+      "side": 1,
+      "message": "We can ask for more than just this usage in the import, should this reflect the import usage?",
+      "revId": "1a856d2ff1e450b1f9f248cc4110deb3e55dbb62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
