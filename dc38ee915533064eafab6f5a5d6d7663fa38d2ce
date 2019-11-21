@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c67088d8_ae3f887c",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-21T19:42:53Z",
+      "side": 1,
+      "message": "As I said in commit log, I will replace one uniform usage/buffer to readonly storage usage/buffer later. So the other intention for these two tests is to verify the upcoming implementation for readonly storage buffer on backend.",
+      "range": {
+        "startLine": 461,
+        "startChar": 38,
+        "endLine": 461,
+        "endChar": 45
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8941e2e_eed15c65",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-21T19:42:53Z",
+      "side": 1,
+      "message": "The data alignment issue in shader is really annoying... It spent me a lot of time to figure out this... :(",
+      "range": {
+        "startLine": 525,
+        "startChar": 12,
+        "endLine": 526,
+        "endChar": 95
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
