@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c4280af_bce972c3",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "We shouldn\u0027t return nullptr, otherwise the wire will happily pass it to methods that dereference it. This could be \"the\" empty BGL.",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c1bf980_8080bc1d",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "Erhm, that\u0027s a bit complicated. How about the following:\n\n Fill a BindGroupLayoutBinding with the correct data\n if (is used) {\n  compare and bail out on a validation error\n } else {\n  currentBindingCount \u003d bindingCount[group];\n  bindingCount[group] ++\n  store the BindGroupLayoutBinding\n }",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24d88ff7_b252179f",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "Comparing with memcmp doesn\u0027t work properly if there\u0027s padding in the structure and it is not initialized to zeroes. An explicit compare function would be better here.",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16bc8f0a_0b753a5c",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "Maybe we could use the empty bind group layout in that case, it would match returning the empty bind group layout for unused set\u003d values instead of nullptr.",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

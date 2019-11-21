@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7ec03039_d115aa86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "Oh right, great! We\u0027ll have to see exactly what the JS semantics are (same object or not).",
+      "parentUuid": "36fc5fd4_f6bb67c4",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fe29ae5_dbc6c8e9",
         "filename": "dawn.json",
         "patchSetId": 2
@@ -206,6 +224,24 @@
       "side": 1,
       "message": "Hm.. an empty one or nullptr? (undefined in JS)\n\nLooking at it again now though, an empty one would be much easier to implement in the wire. If it\u0027s nullptr, we have to duplicate all of the tracking of bind group layout mask.",
       "parentUuid": "552a485d_063d6c22",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8cd7c09_627d9067",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "+1, and even at the WebGPU API level, it makes sense to return a real object, even if it is an empty bind group because it helps a ton for multiprocess browsers.",
+      "parentUuid": "d5dcf537_1a82704c",
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -434,6 +470,30 @@
     },
     {
       "key": {
+        "uuid": "1f9ac827_5d0b1202",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "Oh that\u0027s a good idea, I\u0027m not sure how much template magic it would require (const acts in weird ways sometimes I find.)",
+      "parentUuid": "55fd1429_faac591e",
+      "range": {
+        "startLine": 299,
+        "startChar": 92,
+        "endLine": 299,
+        "endChar": 97
+      },
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "194bf88d_f8e0d2b1",
         "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
         "patchSetId": 2
@@ -463,6 +523,24 @@
       "side": 1,
       "message": "These tests don\u0027t run with in the wire. The only wire unittests are the explicit Wire* ones.",
       "parentUuid": "194bf88d_f8e0d2b1",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc732773_68635d7c",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T10:40:51Z",
+      "side": 1,
+      "message": "I thought we had a command line flag to run them with the wire but was wrong.",
+      "parentUuid": "201ef72a_61b0ae14",
       "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
