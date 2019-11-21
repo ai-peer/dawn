@@ -554,12 +554,22 @@
                 "TODO": "enga@: Make this a Dawn extension"
             },
             {
+                "name": "lose for testing"
+            },
+            {
                 "name": "tick"
             },
             {
                 "name": "set uncaptured error callback",
                 "args": [
                     {"name": "callback", "type": "error callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "set device lost callback",
+                "args": [
+                    {"name": "callback", "type": "device lost callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
                 ]
             },
@@ -578,6 +588,9 @@
                 ]
             }
         ]
+    },
+    "device lost callback": {
+        "category": "natively defined"
     },
     "device properties": {
         "category": "structure",

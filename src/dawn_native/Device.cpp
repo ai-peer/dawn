@@ -95,6 +95,9 @@ namespace dawn_native {
     }
 
     void DeviceBase::HandleError(wgpu::ErrorType type, const char* message) {
+        if (type == wgpu::ErrorType::DeviceLost) {
+            HandleLoss(message);
+        }
         mCurrentErrorScope->HandleError(type, message);
     }
 
@@ -117,6 +120,11 @@ namespace dawn_native {
 
     void DeviceBase::SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
         mRootErrorScope->SetCallback(callback, userdata);
+    }
+
+    void DeviceBase::SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
+        mDeviceLostCallback = callback;
+        mDeviceLostUserdata = userdata;
     }
 
     void DeviceBase::PushErrorScope(wgpu::ErrorFilter filter) {
@@ -150,6 +158,29 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Object is an error.");
         }
         return {};
+    }
+
+    MaybeError DeviceBase::ValidateIsAlive() const {
+        if (DAWN_LIKELY(mLossStatus == LossStatus::Alive)) {
+            return {};
+        }
+        return DAWN_DEVICE_LOST_ERROR("Device is lost");
+    }
+
+    void DeviceBase::HandleLoss(const char* message) {
+        if (mLossStatus == LossStatus::AlreadyLost) {
+            return;
+        }
+        Destroy();
+        if (mDeviceLostCallback) {
+            mDeviceLostCallback(message, mDeviceLostUserdata);
+        }
+    }
+
+    void DeviceBase::LoseForTesting() {
+        mLossStatus = LossStatus::BeingLost;
+        WaitForIdleForDestructionImpl();
+        HandleError(wgpu::ErrorType::DeviceLost, "for testing");
     }
 
     AdapterBase* DeviceBase::GetAdapter() const {
@@ -550,8 +581,12 @@ namespace dawn_native {
     // Other Device API methods
 
     void DeviceBase::Tick() {
-        if (ConsumedError(TickImpl()))
+        if (ConsumedError(ValidateIsAlive())) {
             return;
+        }
+        if (ConsumedError(TickImpl())) {
+            return;
+        }
 
         {
             auto deferredResults = std::move(mDeferredCreateBufferMappedAsyncResults);
@@ -634,6 +669,7 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateBindGroupInternal(BindGroupBase** result,
                                                    const BindGroupDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateBindGroupDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, CreateBindGroupImpl(descriptor));
         return {};
@@ -642,6 +678,7 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateBindGroupLayoutInternal(
         BindGroupLayoutBase** result,
         const BindGroupLayoutDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateBindGroupLayoutDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, GetOrCreateBindGroupLayout(descriptor));
         return {};
@@ -649,6 +686,7 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateBufferInternal(BufferBase** result,
                                                 const BufferDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, CreateBufferImpl(descriptor));
         return {};
@@ -657,6 +695,7 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateComputePipelineInternal(
         ComputePipelineBase** result,
         const ComputePipelineDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateComputePipelineDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, GetOrCreateComputePipeline(descriptor));
         return {};
@@ -665,12 +704,14 @@ namespace dawn_native {
     MaybeError DeviceBase::CreatePipelineLayoutInternal(
         PipelineLayoutBase** result,
         const PipelineLayoutDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidatePipelineLayoutDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, GetOrCreatePipelineLayout(descriptor));
         return {};
     }
 
     MaybeError DeviceBase::CreateQueueInternal(QueueBase** result) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY_ASSIGN(*result, CreateQueueImpl());
         return {};
     }
@@ -678,6 +719,7 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateRenderBundleEncoderInternal(
         RenderBundleEncoder** result,
         const RenderBundleEncoderDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateRenderBundleEncoderDescriptor(this, descriptor));
         *result = new RenderBundleEncoder(this, descriptor);
         return {};
@@ -686,6 +728,7 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateRenderPipelineInternal(
         RenderPipelineBase** result,
         const RenderPipelineDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, GetOrCreateRenderPipeline(descriptor));
         return {};
@@ -693,6 +736,7 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateSamplerInternal(SamplerBase** result,
                                                  const SamplerDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateSamplerDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, GetOrCreateSampler(descriptor));
         return {};
@@ -700,6 +744,7 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateShaderModuleInternal(ShaderModuleBase** result,
                                                       const ShaderModuleDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateShaderModuleDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, GetOrCreateShaderModule(descriptor));
         return {};
@@ -707,6 +752,7 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateSwapChainInternal(SwapChainBase** result,
                                                    const SwapChainDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateSwapChainDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, CreateSwapChainImpl(descriptor));
         return {};
@@ -714,6 +760,7 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateTextureInternal(TextureBase** result,
                                                  const TextureDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateTextureDescriptor(this, descriptor));
         DAWN_TRY_ASSIGN(*result, CreateTextureImpl(descriptor));
         return {};
@@ -722,6 +769,7 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateTextureViewInternal(TextureViewBase** result,
                                                      TextureBase* texture,
                                                      const TextureViewDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY(ValidateObject(texture));
         TextureViewDescriptor desc = GetTextureViewDescriptorWithDefaults(texture, descriptor);
         DAWN_TRY(ValidateTextureViewDescriptor(texture, &desc));
@@ -731,7 +779,8 @@ namespace dawn_native {
 
     // Other implementation details
 
-    DynamicUploader* DeviceBase::GetDynamicUploader() const {
+    ResultOrError<DynamicUploader*> DeviceBase::GetDynamicUploader() const {
+        DAWN_TRY(ValidateIsAlive());
         return mDynamicUploader.get();
     }
 
