@@ -68,6 +68,30 @@
       "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d5faf1d_e9b30eb4",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T18:56:08Z",
+      "side": 1,
+      "message": "Bleh that\u0027s what I wanted to have but never implemented it this way. I don\u0027t know how this doesn\u0027t crash. (maybe the unknown attribute returns None so not None is always true?)",
+      "parentUuid": "483cbde1_85da9866",
+      "range": {
+        "startLine": 138,
+        "startChar": 87,
+        "endLine": 138,
+        "endChar": 100
+      },
+      "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
