@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d42e0c8a_31c3e980",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-21T09:15:49Z",
+      "side": 1,
+      "message": "Mmmmh, it\u0027s weird that we change the name of the base type in OpenGL and it would make more sense to change the name of \"id\" instead. If that works and does the same thing, we could get rid of base_type_id.",
+      "parentUuid": "2d5d9e45_2f692016",
+      "revId": "ef8e0b8de3cf326a37fd5eb562e26fd41820b2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea6bf521_d960903b",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 1
