@@ -477,6 +477,30 @@
     },
     {
       "key": {
+        "uuid": "e1b1e4c7_74d41d1a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T01:23:59Z",
+      "side": 1,
+      "message": "So if I understand correctly, \"revert + OOM\" is the current CL, and you want to first do this CL to unblock work on removing the pre-pass. And then in a follow-up better handle the reallocation case?",
+      "parentUuid": "158bd6dc_0fa1533d",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47ce1669_bc53b499",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
