@@ -249,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "eb7da61d_b50a0e4c",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T02:12:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fd764c6_71ad5ca9",
+      "revId": "ead78989d162287a89930748817490ef1b7c040c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b1b5a05_d91050fd",
         "filename": "src/dawn_native/ProgrammablePassEncoder.h",
         "patchSetId": 5

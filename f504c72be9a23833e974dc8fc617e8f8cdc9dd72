@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c587d9d2_bcf25ee1",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T02:12:59Z",
+      "side": 1,
+      "message": "Tried to make it more clear. Now these are tracked completely separately from pass usages. I think we should avoid touching these sets if we don\u0027t have to. Even if it\u0027s not super hot, it\u0027s unnecessary allocation.",
+      "parentUuid": "1f6df387_c6eafa02",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c254891_b0ba881e",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e7f32a7_2e35c1a7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T02:12:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c254891_b0ba881e",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "745f4c60_20140ee9",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T02:12:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cfbc748_a06954f6",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6729ce84_b25a0a9e",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 8
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "0893f747_49004958",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T02:12:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6729ce84_b25a0a9e",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a74e78ab_57cb0910",
         "filename": "src/dawn_native/RenderBundleEncoder.cpp",
         "patchSetId": 8
@@ -84,6 +156,24 @@
       "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18a6ef94_b5964e19",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T02:12:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a74e78ab_57cb0910",
+      "revId": "f504c72be9a23833e974dc8fc617e8f8cdc9dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
