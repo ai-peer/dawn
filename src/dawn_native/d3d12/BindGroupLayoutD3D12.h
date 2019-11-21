@@ -17,6 +17,7 @@
 
 #include "dawn_native/BindGroupLayout.h"
 
+#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -38,10 +39,11 @@ namespace dawn_native { namespace d3d12 {
         const std::array<uint32_t, kMaxBindingsPerGroup>& GetBindingOffsets() const;
         uint32_t GetCbvUavSrvDescriptorTableSize() const;
         uint32_t GetSamplerDescriptorTableSize() const;
-        uint32_t GetCbvUavSrvDescriptorCount() const;
-        uint32_t GetSamplerDescriptorCount() const;
         const D3D12_DESCRIPTOR_RANGE* GetCbvUavSrvDescriptorRanges() const;
         const D3D12_DESCRIPTOR_RANGE* GetSamplerDescriptorRanges() const;
+
+        ResultOrError<DescriptorHeapHandle> AllocateSamplerDescriptors();
+        ResultOrError<DescriptorHeapHandle> AllocateCbVUavSrvDescriptors();
 
       private:
         std::array<uint32_t, kMaxBindingsPerGroup> mBindingOffsets;
