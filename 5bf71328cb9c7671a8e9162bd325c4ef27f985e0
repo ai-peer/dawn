@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8243a336_2a2400e4",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T00:19:12Z",
+      "side": 1,
+      "message": "to the previous comment thread: I forgot that ResultOrError doesn\u0027t support a constructor which copies by value. We should probably fix that someday, but it\u0027s fine for now.",
+      "range": {
+        "startLine": 53,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 33
+      },
+      "revId": "5bf71328cb9c7671a8e9162bd325c4ef27f985e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ba7125a_674f599c",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T00:19:12Z",
+      "side": 1,
+      "message": "Also ASSERT that planeCount is 1 since we don\u0027t support multi-plane ? An ASSERT is probably fine because we check this in SupportsCreateImage",
+      "range": {
+        "startLine": 228,
+        "startChar": 8,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "5bf71328cb9c7671a8e9162bd325c4ef27f985e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
