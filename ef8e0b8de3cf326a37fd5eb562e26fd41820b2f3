@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09f1dee3_71a35aa8",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000570
+      },
+      "writtenOn": "2019-11-21T02:57:43Z",
+      "side": 1,
+      "message": "I feel slightly there\u0027s some redundancy between \u0027base_type_id\u0027 and the following info (texture dimension / component type / ...) extracted from \u0027base_type_id\u0027. It seems that \u0027base_type_id\u0027 (and maybe \u0027id\u0027) is not super useful out of ExtractSpirvInfo() when there isn\u0027t a spirv_cross::Compiler instance, but I don\u0027t know how things can be organized in a better way. Maybe it\u0027s fine to keep it as is ATM.",
+      "revId": "ef8e0b8de3cf326a37fd5eb562e26fd41820b2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea6bf521_d960903b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000570
+      },
+      "writtenOn": "2019-11-21T02:57:43Z",
+      "side": 1,
+      "message": "Is this duplicated with https://dawn.googlesource.com/dawn.git/+/4d15609d269eb551fc73d27e75a498c1ab8f999d/src/tests/unittests/validation/RenderPipelineValidationTests.cpp#326?",
+      "revId": "ef8e0b8de3cf326a37fd5eb562e26fd41820b2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
