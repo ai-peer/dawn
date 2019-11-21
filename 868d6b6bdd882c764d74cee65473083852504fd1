@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03ebd9a9_1dea907e",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T18:53:44Z",
+      "side": 1,
+      "message": "Could this be a function has_callback(method) instead so we don\u0027t have to manually declare them here? Or use what you\u0027re doing at [1]",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52d21396_171c9324",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T18:53:44Z",
+      "side": 1,
+      "message": "side note: Maybe one day we can generate the mocks with callbacks too. We handle them pretty consistently.",
+      "range": {
+        "startLine": 53,
+        "startChar": 19,
+        "endLine": 53,
+        "endChar": 58
+      },
+      "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "483cbde1_85da9866",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-21T18:53:44Z",
+      "side": 1,
+      "message": "[1] Slightly confused; where is has_callbacks coming from? I couldn\u0027t find it in this CL.",
+      "range": {
+        "startLine": 138,
+        "startChar": 87,
+        "endLine": 138,
+        "endChar": 100
+      },
+      "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
