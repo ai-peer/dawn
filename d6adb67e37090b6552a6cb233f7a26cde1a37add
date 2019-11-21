@@ -228,6 +228,30 @@
     },
     {
       "key": {
+        "uuid": "74414c6b_f6e6bca7",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-21T01:12:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "83ae9c32_9e6f491f",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "d6adb67e37090b6552a6cb233f7a26cde1a37add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64af6a7b_56902cc6",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
         "patchSetId": 6

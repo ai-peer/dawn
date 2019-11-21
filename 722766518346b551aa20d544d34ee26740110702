@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "2bb5a03c_506ccb25",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-21T01:12:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0379d5e_7e2e3337",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 25
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a5745bd_8456428f",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -140,6 +164,30 @@
       "revId": "722766518346b551aa20d544d34ee26740110702",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fbde05b_58ec998d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-21T01:12:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a5745bd_8456428f",
+      "range": {
+        "startLine": 110,
+        "startChar": 21,
+        "endLine": 110,
+        "endChar": 68
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -381,6 +429,54 @@
     },
     {
       "key": {
+        "uuid": "158bd6dc_0fa1533d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-21T01:12:14Z",
+      "side": 1,
+      "message": "Yup. Could be in BGL or elsewhere.\n\nDownsides: 1) duplicates descriptors + copy, 2) requires a free-list allocator, and 3) enumeration of groups. In return, 1) no overflow, 2) better parallelism, 3) unlimited bindgroups.\n\nIf this sounds good, do you think the removal of the pre-pass could stand separately (ie. revert + OOM)?",
+      "parentUuid": "1039ede2_d1e64ecb",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40d484b1_1f574a44",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-21T01:12:14Z",
+      "side": 1,
+      "message": "Ah, makes sense.",
+      "parentUuid": "20fdd92e_dd280d2e",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47ce1669_bc53b499",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -401,6 +497,30 @@
       "revId": "722766518346b551aa20d544d34ee26740110702",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c97e4351_6ced19b9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-21T01:12:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47ce1669_bc53b499",
+      "range": {
+        "startLine": 254,
+        "startChar": 16,
+        "endLine": 254,
+        "endChar": 40
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
