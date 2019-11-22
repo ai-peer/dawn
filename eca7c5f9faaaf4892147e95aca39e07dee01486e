@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3ab6a031_bacb421f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T22:58:34Z",
+      "side": 1,
+      "message": "Yup.\n\nmBindGroupLayoutsMask is the mask of everything that must be bound by the time we call Draw\n\nmDirtyBindGroupsObjectChangedOrIsDynamic are dirty indices set when someone calls SetBindGroup(index, ...)\n\nWe have this separation because if you bind all the bind groups, then Draw(). Then rebind just one bind group, we only need to update descriptors for that one bind group. (Unless of course we reallocate descriptor heaps).",
+      "parentUuid": "9a2cd9ac_6747ad04",
+      "range": {
+        "startLine": 114,
+        "startChar": 52,
+        "endLine": 114,
+        "endChar": 72
+      },
+      "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3ba21f6f_3b7a9ad9",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 13
