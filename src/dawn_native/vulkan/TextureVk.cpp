@@ -28,6 +28,8 @@
 #include "dawn_native/vulkan/StagingBufferVk.h"
 #include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
+#include "dawn_native/vulkan/external_memory/MemoryService.h"
+#include "dawn_native/vulkan/external_semaphore/SemaphoreService.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -410,10 +412,18 @@ namespace dawn_native { namespace vulkan {
         Device* device,
         const ExternalImageDescriptor* descriptor,
         const TextureDescriptor* textureDescriptor,
-        external_memory::Service* externalMemoryService) {
+        ExternalMemoryHandle memoryHandle,
+        const std::vector<ExternalSemaphoreHandle>& waitHandles,
+        external_memory::Service* externalMemoryService,
+        external_semaphore::Service* externalSemaphoreService) {
         std::unique_ptr<Texture> texture =
             std::make_unique<Texture>(device, textureDescriptor, TextureState::OwnedInternal);
-        DAWN_TRY(texture->InitializeFromExternal(descriptor, externalMemoryService));
+        MaybeError result = texture->InitializeFromExternal(
+            descriptor, memoryHandle, waitHandles, externalMemoryService, externalSemaphoreService);
+        if (result.IsError()) {
+            texture.reset(nullptr);
+            return result.AcquireError();
+        }
         return texture.release();
     }
 
@@ -482,8 +492,55 @@ namespace dawn_native { namespace vulkan {
     }
 
     // Internally managed, but imported from external handle
-    MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptor* descriptor,
-                                               external_memory::Service* externalMemoryService) {
+    MaybeError Texture::InitializeFromExternal(
+        const ExternalImageDescriptor* descriptor,
+        ExternalMemoryHandle memoryHandle,
+        const std::vector<ExternalSemaphoreHandle>& waitHandles,
+        external_memory::Service* externalMemoryService,
+        external_semaphore::Service* externalSemaphoreService) {
+        Device* device = ToBackend(GetDevice());
+        VkImage image = VK_NULL_HANDLE;
+        VkSemaphore signalSemaphore = VK_NULL_HANDLE;
+        VkDeviceMemory allocation = VK_NULL_HANDLE;
+        std::vector<VkSemaphore> waitSemaphores;
+        waitSemaphores.reserve(waitHandles.size());
+
+        if (device->ConsumedError(
+                CreateImageFromExternal(descriptor, externalMemoryService, &image)) ||
+            device->ConsumedError(ImportExternalMemory(descriptor, memoryHandle, image, &allocation,
+                                                       externalMemoryService)) ||
+            device->ConsumedError(SetUpAndImportExternalSemaphores(
+                waitHandles, &signalSemaphore, &waitSemaphores, externalSemaphoreService)) ||
+            device->ConsumedError(BindExternalMemory(descriptor, image, allocation))) {
+            // Cleanup in case of a failure.
+            VkDevice vulkanDevice = device->GetVkDevice();
+            if (image != VK_NULL_HANDLE) {
+                device->fn.DestroyImage(vulkanDevice, image, nullptr);
+            }
+            if (allocation != VK_NULL_HANDLE) {
+                device->fn.FreeMemory(vulkanDevice, allocation, nullptr);
+            }
+            if (signalSemaphore != VK_NULL_HANDLE) {
+                device->fn.DestroySemaphore(vulkanDevice, signalSemaphore, nullptr);
+            }
+            for (VkSemaphore semaphore : waitSemaphores) {
+                device->fn.DestroySemaphore(vulkanDevice, semaphore, nullptr);
+            }
+
+            return DAWN_VALIDATION_ERROR("Unable to initialize texture from external memory");
+        }
+
+        // Success, acquire all the external objects.
+        mHandle = image;
+        mExternalAllocation = allocation;
+        mSignalSemaphore = signalSemaphore;
+        mWaitRequirements = std::move(waitSemaphores);
+        return {};
+    }
+
+    MaybeError Texture::CreateImageFromExternal(const ExternalImageDescriptor* descriptor,
+                                                external_memory::Service* externalMemoryService,
+                                                VkImage* outImage) {
         VkFormat format = VulkanImageFormat(GetFormat().format);
         VkImageUsageFlags usage = VulkanImageUsage(GetUsage(), GetFormat());
         if (!externalMemoryService->SupportsCreateImage(descriptor, format, usage)) {
@@ -510,28 +567,74 @@ namespace dawn_native { namespace vulkan {
         // also required for the implementation of robust resource initialization.
         baseCreateInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
-        DAWN_TRY_ASSIGN(mHandle, externalMemoryService->CreateImage(descriptor, baseCreateInfo));
+        DAWN_TRY_ASSIGN(*outImage, externalMemoryService->CreateImage(descriptor, baseCreateInfo));
+        return {};
+    }
+
+    MaybeError Texture::ImportExternalMemory(const ExternalImageDescriptor* descriptor,
+                                             ExternalMemoryHandle memoryHandle,
+                                             VkImage image,
+                                             VkDeviceMemory* outAllocation,
+                                             external_memory::Service* externalMemoryService) {
+        const TextureDescriptor* textureDescriptor =
+            reinterpret_cast<const TextureDescriptor*>(descriptor->cTextureDescriptor);
+
+        Device* device = ToBackend(GetDevice());
+        // Check that the memory supports this combination of handle type / image info
+        if (!externalMemoryService->SupportsImportMemory(
+                VulkanImageFormat(textureDescriptor->format), VK_IMAGE_TYPE_2D,
+                VK_IMAGE_TILING_OPTIMAL,
+                VulkanImageUsage(textureDescriptor->usage,
+                                 device->GetValidInternalFormat(textureDescriptor->format)),
+                VK_IMAGE_CREATE_ALIAS_BIT_KHR)) {
+            return DAWN_VALIDATION_ERROR("External memory usage not supported");
+        }
+
+        // Import the external image's memory
+        external_memory::MemoryImportParams importParams;
+        DAWN_TRY_ASSIGN(importParams,
+                        externalMemoryService->GetMemoryImportParams(descriptor, image));
+        DAWN_TRY_ASSIGN(*outAllocation,
+                        externalMemoryService->ImportMemory(memoryHandle, importParams, image));
+
+        return {};
+    }
+
+    MaybeError Texture::SetUpAndImportExternalSemaphores(
+        const std::vector<ExternalSemaphoreHandle>& waitHandles,
+        VkSemaphore* outSignalSemaphore,
+        std::vector<VkSemaphore>* outWaitSemaphores,
+        external_semaphore::Service* externalSemaphoreService) {
+        if (!externalSemaphoreService->Supported()) {
+            return DAWN_VALIDATION_ERROR("External semaphore usage not supported");
+        }
+
+        // Create an external semaphore to signal when the texture is done being used
+        DAWN_TRY_ASSIGN(*outSignalSemaphore, externalSemaphoreService->CreateExportableSemaphore());
+
+        // Import semaphores we have to wait on before using the texture
+        for (const ExternalSemaphoreHandle& handle : waitHandles) {
+            VkSemaphore semaphore = VK_NULL_HANDLE;
+            DAWN_TRY_ASSIGN(semaphore, externalSemaphoreService->ImportSemaphore(handle));
+            outWaitSemaphores->push_back(semaphore);
+        }
+
         return {};
     }
 
     MaybeError Texture::BindExternalMemory(const ExternalImageDescriptor* descriptor,
-                                           VkSemaphore signalSemaphore,
-                                           VkDeviceMemory externalMemoryAllocation,
-                                           std::vector<VkSemaphore> waitSemaphores) {
+                                           VkImage image,
+                                           VkDeviceMemory allocation) {
         Device* device = ToBackend(GetDevice());
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.BindImageMemory(device->GetVkDevice(), mHandle, externalMemoryAllocation, 0),
-            "BindImageMemory (external)"));
+        DAWN_TRY(
+            CheckVkSuccess(device->fn.BindImageMemory(device->GetVkDevice(), image, allocation, 0),
+                           "BindImageMemory (external)"));
 
         // Don't clear imported texture if already cleared
         if (descriptor->isCleared) {
             SetIsSubresourceContentInitialized(true, 0, 1, 0, 1);
         }
 
-        // Success, acquire all the external objects.
-        mExternalAllocation = externalMemoryAllocation;
-        mSignalSemaphore = signalSemaphore;
-        mWaitRequirements = std::move(waitSemaphores);
         return {};
     }
 

@@ -170,14 +170,6 @@ namespace dawn_native { namespace vulkan {
         std::vector<CommandPoolAndBuffer> mUnusedCommands;
         // There is always a valid recording context stored in mRecordingContext
         CommandRecordingContext mRecordingContext;
-
-        MaybeError ImportExternalImage(const ExternalImageDescriptor* descriptor,
-                                       ExternalMemoryHandle memoryHandle,
-                                       VkImage image,
-                                       const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                       VkSemaphore* outSignalSemaphore,
-                                       VkDeviceMemory* outAllocation,
-                                       std::vector<VkSemaphore>* outWaitSemaphores);
     };
 
 }}  // namespace dawn_native::vulkan
