@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f08fc18d_578841e2",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c4280af_bce972c3",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c1bf980_8080bc1d",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60b03400_8ab2fd67",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c1bf980_8080bc1d",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5264e6f8_e8372725",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24d88ff7_b252179f",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16bc8f0a_0b753a5c",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df2be4e5_7e9c8622",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16bc8f0a_0b753a5c",
+      "revId": "25512ba076d0b0b2b388d431c119fd289f293993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

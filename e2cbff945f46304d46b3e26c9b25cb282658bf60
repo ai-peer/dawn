@@ -248,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "ae993a5c_7271a935",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:04:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8cd7c09_627d9067",
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4dc7e125_04a5f6ac",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 2
@@ -482,6 +500,30 @@
       "side": 1,
       "message": "Oh that\u0027s a good idea, I\u0027m not sure how much template magic it would require (const acts in weird ways sometimes I find.)",
       "parentUuid": "55fd1429_faac591e",
+      "range": {
+        "startLine": 299,
+        "startChar": 92,
+        "endLine": 299,
+        "endChar": 97
+      },
+      "revId": "e2cbff945f46304d46b3e26c9b25cb282658bf60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa404af8_93da584d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:04:54Z",
+      "side": 1,
+      "message": "It might just work if we const_cast inside RefCounted::Release/Reference -- and maybe ASSERT for Ref\u003cconst T\u003e that ~RefCounted is never called. That last part might some annoying template magic.",
+      "parentUuid": "1f9ac827_5d0b1202",
       "range": {
         "startLine": 299,
         "startChar": 92,
