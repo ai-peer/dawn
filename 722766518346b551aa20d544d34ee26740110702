@@ -501,6 +501,30 @@
     },
     {
       "key": {
+        "uuid": "79a426c4_56a7308d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-22T00:56:21Z",
+      "side": 1,
+      "message": "Thinking some more, allocating bindgroups on the CPU doesn\u0027t help the overflow situation. Going back, if we move BindGroup::AllocateDescriptors() \u003d\u003e ::AllocateBindGroup, where would the re-apply (for groups on the old heap) happen?",
+      "parentUuid": "e1b1e4c7_74d41d1a",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47ce1669_bc53b499",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
