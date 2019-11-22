@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "78a436b7_ea18547d",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T12:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03ebd9a9_1dea907e",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 0
+      },
+      "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52d21396_171c9324",
         "filename": "generator/templates/mock_webgpu.h",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-11-21T18:53:44Z",
       "side": 1,
       "message": "side note: Maybe one day we can generate the mocks with callbacks too. We handle them pretty consistently.",
+      "range": {
+        "startLine": 53,
+        "startChar": 19,
+        "endLine": 53,
+        "endChar": 58
+      },
+      "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "328f0be4_270d1f44",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T12:58:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52d21396_171c9324",
       "range": {
         "startLine": 53,
         "startChar": 19,
@@ -92,6 +140,30 @@
       "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19d64973_49b0b69f",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T12:58:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d5faf1d_e9b30eb4",
+      "range": {
+        "startLine": 138,
+        "startChar": 87,
+        "endLine": 138,
+        "endChar": 100
+      },
+      "revId": "868d6b6bdd882c764d74cee65473083852504fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
