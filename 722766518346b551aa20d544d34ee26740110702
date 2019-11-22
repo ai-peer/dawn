@@ -573,6 +573,30 @@
     },
     {
       "key": {
+        "uuid": "fad73607_c91d21c9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-11-22T22:42:19Z",
+      "side": 1,
+      "message": "1) It\u0027s weird to me that this should even exist. Perhaps the front-end could do this?\n2a) +1 rename is very much needed.\n3) Re-apply (of groups on old heap) still needs to occur after CopyDescriptors (using new CPU handles).\n3a) SetDesciptorHeaps must be called at/after (3) but before the re-apply (as before).\n\n\u003e I think the difference here is that we\u0027re not allocating bind-group-by-bind-group.\n\nYup. But I still don\u0027t understand the need of a new allocator - only that the allocation needs to be for all groups for the next draw.",
+      "parentUuid": "62b3b450_fecb62c6",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47ce1669_bc53b499",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
