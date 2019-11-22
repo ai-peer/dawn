@@ -21,6 +21,7 @@
 #include "dawn_native/ResourceMemoryAllocation.h"
 #include "dawn_native/vulkan/ExternalHandle.h"
 #include "dawn_native/vulkan/external_memory/MemoryService.h"
+#include "dawn_native/vulkan/external_semaphore/SemaphoreService.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -43,14 +44,16 @@ namespace dawn_native { namespace vulkan {
         // Used to create a regular texture from a descriptor.
         static ResultOrError<Texture*> Create(Device* device, const TextureDescriptor* descriptor);
 
-        // Creates a texture and initializes it with a VkImage that references an external memory
-        // object. Before the texture can be used, the VkDeviceMemory associated with the external
-        // image must be bound via Texture::BindExternalMemory.
+        // Creates a texture, initializes an externally-backed VkImage, and binds the external
+        // memory to the VkImage.
         static ResultOrError<Texture*> CreateFromExternal(
             Device* device,
             const ExternalImageDescriptor* descriptor,
             const TextureDescriptor* textureDescriptor,
-            external_memory::Service* externalMemoryService);
+            ExternalMemoryHandle memoryHandle,
+            const std::vector<ExternalSemaphoreHandle>& waitHandles,
+            external_memory::Service* externalMemoryService,
+            external_semaphore::Service* externalSemaphoreService);
 
         Texture(Device* device, const TextureDescriptor* descriptor, VkImage nativeImage);
         ~Texture();
@@ -70,19 +73,36 @@ namespace dawn_native { namespace vulkan {
                                                  uint32_t layerCount);
 
         MaybeError SignalAndDestroy(VkSemaphore* outSignalSemaphore);
-        // Binds externally allocated memory to the VkImage and on success, takes ownership of
-        // semaphores.
-        MaybeError BindExternalMemory(const ExternalImageDescriptor* descriptor,
-                                      VkSemaphore signalSemaphore,
-                                      VkDeviceMemory externalMemoryAllocation,
-                                      std::vector<VkSemaphore> waitSemaphores);
 
       private:
         using TextureBase::TextureBase;
         MaybeError InitializeAsInternalTexture();
 
         MaybeError InitializeFromExternal(const ExternalImageDescriptor* descriptor,
-                                          external_memory::Service* externalMemoryService);
+                                          ExternalMemoryHandle memoryHandle,
+                                          const std::vector<ExternalSemaphoreHandle>& waitHandles,
+                                          external_memory::Service* externalMemoryService,
+                                          external_semaphore::Service* externalSemaphoreService);
+
+        MaybeError CreateImageFromExternal(const ExternalImageDescriptor* descriptor,
+                                           external_memory::Service* externalMemoryService,
+                                           VkImage* outImage);
+
+        MaybeError ImportExternalMemory(const ExternalImageDescriptor* descriptor,
+                                        ExternalMemoryHandle memoryHandle,
+                                        VkImage image,
+                                        VkDeviceMemory* outAllocation,
+                                        external_memory::Service* externalMemoryService);
+
+        MaybeError SetUpAndImportExternalSemaphores(
+            const std::vector<ExternalSemaphoreHandle>& waitHandles,
+            VkSemaphore* outSignalSemaphore,
+            std::vector<VkSemaphore>* outWaitSemaphores,
+            external_semaphore::Service* externalSemaphoreService);
+
+        MaybeError BindExternalMemory(const ExternalImageDescriptor* descriptor,
+                                      VkImage image,
+                                      VkDeviceMemory allocation);
 
         void DestroyImpl() override;
         MaybeError ClearTexture(CommandRecordingContext* recordingContext,
