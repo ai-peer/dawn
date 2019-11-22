@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5c9ec7c3_61901a78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-22T18:56:34Z",
+      "side": 1,
+      "message": "Ack\n\nAdded compute to render too. A little bit shorter than it was.",
+      "parentUuid": "742b8cf4_e0b936d3",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5dd4e584_3e85e8e3",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06e6cfe2_b5299b8b",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-22T18:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dd4e584_3e85e8e3",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "e279fda4_904d6919",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-22T18:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1db91611_7b9a2f81",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "deadbbc7_c3bd6b17",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "59043e3c_9182c8f0",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-22T18:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deadbbc7_c3bd6b17",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1c23e73_122c41da",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 2
@@ -84,6 +156,24 @@
       "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c759f17a_77642a89",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-22T18:56:34Z",
+      "side": 1,
+      "message": "Done\n\nYeah. This is storage binding to storage binding. It is not covered in previous compute to render tests (storage to uniform).",
+      "parentUuid": "d1c23e73_122c41da",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
