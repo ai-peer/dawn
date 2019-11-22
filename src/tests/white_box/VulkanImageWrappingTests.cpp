@@ -166,7 +166,7 @@ namespace {
             descriptor.waitFDs = waitFDs;
 
             WGPUTexture texture =
-                dawn_native::vulkan::WrapVulkanImageOpaqueFD(device.Get(), &descriptor);
+                dawn_native::vulkan::WrapVulkanImage(device.Get(), &descriptor);
 
             if (expectValid) {
                 EXPECT_NE(texture, nullptr) << "Failed to wrap image, are external memory / "
