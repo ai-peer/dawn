@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ebdd46a_fc5bc0b6",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T09:52:52Z",
+      "side": 1,
+      "message": "This is going to break when we change that structure but I don\u0027t see a way to prevent it :/",
+      "revId": "de60c32a12442225dabf42b1efca97b7223c3e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc7bf027_c9369aa1",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T09:52:52Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "de60c32a12442225dabf42b1efca97b7223c3e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f20bcc41_c66e595c",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T09:52:52Z",
+      "side": 1,
+      "message": "nit: we don\u0027t need the else {} because all the paths for the if skip over the rest of the loop.\n\nThis allows moving the declaration at [1] here.",
+      "revId": "de60c32a12442225dabf42b1efca97b7223c3e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
