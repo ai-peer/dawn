@@ -525,6 +525,30 @@
     },
     {
       "key": {
+        "uuid": "e95974ef_1dcde06a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T02:04:05Z",
+      "side": 1,
+      "message": "Perhaps it should be AllocateBindGroups (plural) because what we essentially need to do is ensure all descriptors are \"resident\" for the next draw.\n\nSo:\n\n1) Count descriptors needed to Apply(..) there are at most 4 bind groups to apply.\n2) If that fits in the current heap, allocate that space\n   a) Populate the descriptors. BindGroup::Allocate \u003d\u003e PopulateDescriptors? \n3) If it doesn\u0027t fit, reallocate the descriptor heap with enough space for the total descriptor count of bind groups in mBindGroupLayoutsMask\n   a) Copy descriptors from the old heap into the new heap. To do this we just need to iterate through the old bind groups, make an array of their CPU handles, and pass that to CopyDescriptors. Alternatively, do BindGroup::PopulateDescriptors again.\n   b) Starting from the end of the copied range, populate the remaining descriptors\n\nI think the difference here is that we\u0027re not allocating bind-group-by-bind-group. We total the count of all the descriptors we need to allocate and explicitly allocate that much.\n\nThis way, we can do if (NeedsReallocation) before the descriptor heap gets swapped out",
+      "parentUuid": "79a426c4_56a7308d",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47ce1669_bc53b499",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
