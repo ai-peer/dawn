@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "45e67e70_2a8b0992",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "To make this easier to read, we can name this something like kVertexBufferStride and use it at [1] as well.",
+      "range": {
+        "startLine": 424,
+        "startChar": 21,
+        "endLine": 424,
+        "endChar": 38
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "982d4d20_57248bff",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "can be wgpu::kWholeSize",
+      "range": {
+        "startLine": 432,
+        "startChar": 76,
+        "endLine": 432,
+        "endChar": 97
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67088d8_ae3f887c",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 2
@@ -17,6 +63,52 @@
         "startLine": 461,
         "startChar": 38,
         "endLine": 461,
+        "endChar": 45
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c97f42a_d02074c1",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "[1] could be something like kVertexBufferStride",
+      "range": {
+        "startLine": 485,
+        "startChar": 56,
+        "endLine": 485,
+        "endChar": 73
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "974d10d0_ba489060",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "kWholeSize",
+      "range": {
+        "startLine": 494,
+        "startChar": 32,
+        "endLine": 494,
         "endChar": 45
       },
       "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
@@ -41,6 +133,122 @@
         "startChar": 12,
         "endLine": 526,
         "endChar": 95
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a42e8a4_273894af",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "This is only a problem with std140. If you use std430, it should work without the padding.\n\nHowever, std430 can only be used with storage buffers, not uniform buffers (I think)\n\nHowever, it would probably be good to keep this padded version to test if it works with both std140 and std430",
+      "parentUuid": "c8941e2e_eed15c65",
+      "range": {
+        "startLine": 525,
+        "startChar": 12,
+        "endLine": 526,
+        "endChar": 95
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35303271_1d7e0caf",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "nit: will just \"sizeof(Data)\" work?",
+      "range": {
+        "startLine": 568,
+        "startChar": 39,
+        "endLine": 568,
+        "endChar": 58
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f02d6eaa_cb49b3a5",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "offsetof(Data, color0)",
+      "range": {
+        "startLine": 630,
+        "startChar": 35,
+        "endLine": 630,
+        "endChar": 42
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73d2c904_6f91224a",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "offsetof(Data, color1)",
+      "range": {
+        "startLine": 630,
+        "startChar": 72,
+        "endLine": 630,
+        "endChar": 79
+      },
+      "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c722c29d_4b2672d4",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T00:22:26Z",
+      "side": 1,
+      "message": "offsetof(Data, indices)",
+      "range": {
+        "startLine": 636,
+        "startChar": 33,
+        "endLine": 636,
+        "endChar": 36
       },
       "revId": "dc38ee915533064eafab6f5a5d6d7663fa38d2ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
