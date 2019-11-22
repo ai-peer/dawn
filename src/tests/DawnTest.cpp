@@ -410,10 +410,6 @@ void DawnTestBase::SetUp() {
 
         for (const dawn_native::Adapter& adapter : adapters) {
             if (adapter.GetBackendType() == backendType) {
-                if (adapter.GetDeviceType() == dawn_native::DeviceType::CPU) {
-                    continue;
-                }
-
                 // Filter adapter by vendor id
                 if (HasVendorIdFilter()) {
                     if (adapter.GetPCIInfo().vendorId == GetVendorIdFilter()) {

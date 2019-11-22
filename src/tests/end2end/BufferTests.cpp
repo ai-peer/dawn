@@ -737,6 +737,7 @@ TEST_P(CreateBufferMappedTests, LargeBufferFails) {
     // enabled becuase the maximum size of a single allocation cannot be larger than or equal to
     // 4G on some platforms.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia() && IsBackendValidationEnabled());
+    DAWN_SKIP_TEST_IF(IsVulkan());
 
     wgpu::BufferDescriptor descriptor;
     descriptor.size = std::numeric_limits<uint64_t>::max();

@@ -414,11 +414,13 @@ TEST_P(TextureViewSamplingTest, TextureCubeMapOnWholeTexture) {
 
 // Test sampling from a cube map texture view that covers a sub part of a 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapViewOnPartOfTexture) {
+    DAWN_SKIP_TEST_IF(IsVulkan());
     TextureCubeMapTest(10, 2, 6, false);
 }
 
 // Test sampling from a cube map texture view that covers the last layer of a 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapViewCoveringLastLayer) {
+    DAWN_SKIP_TEST_IF(IsVulkan());
     constexpr uint32_t kTotalLayers = 10;
     constexpr uint32_t kBaseLayer = 4;
     TextureCubeMapTest(kTotalLayers, kBaseLayer, kTotalLayers - kBaseLayer, false);
@@ -426,12 +428,14 @@ TEST_P(TextureViewSamplingTest, TextureCubeMapViewCoveringLastLayer) {
 
 // Test sampling from a cube map texture array view that covers a whole 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapArrayOnWholeTexture) {
+    DAWN_SKIP_TEST_IF(IsVulkan());
     constexpr uint32_t kTotalLayers = 12;
     TextureCubeMapTest(kTotalLayers, 0, kTotalLayers, true);
 }
 
 // Test sampling from a cube map texture array view that covers a sub part of a 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapArrayViewOnPartOfTexture) {
+    DAWN_SKIP_TEST_IF(IsVulkan());
     // Test failing on the GPU FYI Mac Pro (AMD), see
     // https://bugs.chromium.org/p/dawn/issues/detail?id=58
     DAWN_SKIP_TEST_IF(IsMacOS() && IsMetal() && IsAMD());
@@ -441,6 +445,7 @@ TEST_P(TextureViewSamplingTest, TextureCubeMapArrayViewOnPartOfTexture) {
 
 // Test sampling from a cube map texture array view that covers the last layer of a 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapArrayViewCoveringLastLayer) {
+    DAWN_SKIP_TEST_IF(IsVulkan());
     // Test failing on the GPU FYI Mac Pro (AMD), see
     // https://bugs.chromium.org/p/dawn/issues/detail?id=58
     DAWN_SKIP_TEST_IF(IsMacOS() && IsMetal() && IsAMD());
@@ -452,6 +457,7 @@ TEST_P(TextureViewSamplingTest, TextureCubeMapArrayViewCoveringLastLayer) {
 
 // Test sampling from a cube map array texture view that only has a single cube map.
 TEST_P(TextureViewSamplingTest, TextureCubeMapArrayViewSingleCubeMap) {
+    DAWN_SKIP_TEST_IF(IsVulkan());
     // Test failing on the GPU FYI Mac Pro (AMD), see
     // https://bugs.chromium.org/p/dawn/issues/detail?id=58
     DAWN_SKIP_TEST_IF(IsMacOS() && IsMetal() && IsAMD());

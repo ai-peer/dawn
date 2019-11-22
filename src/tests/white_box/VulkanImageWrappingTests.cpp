@@ -480,6 +480,7 @@ TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
 // alias the same memory
 TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevicesAliased) {
     DAWN_SKIP_TEST_IF(UsesWire());
+    DAWN_SKIP_TEST_IF(IsVulkan());
     // Import the image on |device
     wgpu::Texture wrappedTextureAlias = WrapVulkanImage(
         device, &defaultDescriptor, defaultFd, defaultAllocationSize, defaultMemoryTypeIndex, {});

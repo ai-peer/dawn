@@ -38,6 +38,7 @@ namespace dawn_native { namespace vulkan {
         EnumerateInstanceVersion = reinterpret_cast<decltype(EnumerateInstanceVersion)>(
             GetInstanceProcAddr(nullptr, "vkEnumerateInstanceVersion"));
 
+        globalProcsLoaded = true;
         return {};
     }
 
@@ -109,6 +110,7 @@ namespace dawn_native { namespace vulkan {
         }
 #endif
 
+        instanceProcsLoaded = true;
         return {};
     }
 
@@ -276,6 +278,7 @@ namespace dawn_native { namespace vulkan {
             GET_DEVICE_PROC(QueuePresentKHR);
         }
 
+        deviceProcsLoaded = true;
         return {};
     }
 

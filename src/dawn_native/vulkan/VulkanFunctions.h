@@ -34,6 +34,7 @@ namespace dawn_native { namespace vulkan {
         MaybeError LoadDeviceProcs(VkDevice device, const VulkanDeviceInfo& deviceInfo);
 
         // ---------- Global procs
+        bool globalProcsLoaded = false;
 
         // Initial proc from which we can get all the others
         PFN_vkGetInstanceProcAddr GetInstanceProcAddr = nullptr;
@@ -49,6 +50,7 @@ namespace dawn_native { namespace vulkan {
         PFN_vkEnumerateInstanceVersion EnumerateInstanceVersion = nullptr;
 
         // ---------- Instance procs
+        bool instanceProcsLoaded = false;
 
         // Core Vulkan 1.0
         PFN_vkCreateDevice CreateDevice = nullptr;
@@ -112,6 +114,7 @@ namespace dawn_native { namespace vulkan {
 #endif
 
         // ---------- Device procs
+        bool deviceProcsLoaded = false;
 
         // Core Vulkan 1.0
         PFN_vkAllocateCommandBuffers AllocateCommandBuffers = nullptr;
