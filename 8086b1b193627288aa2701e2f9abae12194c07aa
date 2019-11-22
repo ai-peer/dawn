@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "742b8cf4_e0b936d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T10:05:01Z",
+      "side": 1,
+      "message": "This first line is really long, maybe \"Add render pass to compute pass memory synchronization test\"",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5dd4e584_3e85e8e3",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T10:05:01Z",
+      "side": 1,
+      "message": "Prefer returning the buffer instead of modifying state.",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db91611_7b9a2f81",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T10:05:01Z",
+      "side": 1,
+      "message": "Prefer passing the buffer as an argument instead of having state in the fixture.",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deadbbc7_c3bd6b17",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T10:05:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1c23e73_122c41da",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-22T10:05:01Z",
+      "side": 1,
+      "message": "Maybe we could have a test that does the reverse too, ComputePassToRenderPass",
+      "revId": "8086b1b193627288aa2701e2f9abae12194c07aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
