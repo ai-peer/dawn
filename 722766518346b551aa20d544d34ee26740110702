@@ -549,6 +549,30 @@
     },
     {
       "key": {
+        "uuid": "62b3b450_fecb62c6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-22T02:10:17Z",
+      "side": 1,
+      "message": "Note: this is different from the prepass which counted ALL the descriptors of bind groups for the ENTIRE pass. Here, we only need to count the bind groups for the next Draw() which is at most 4 bind groups.",
+      "parentUuid": "e95974ef_1dcde06a",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47ce1669_bc53b499",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
