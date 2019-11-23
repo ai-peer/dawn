@@ -78,14 +78,15 @@ namespace dawn_native {
     }
 
     RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device,
-                                             const RenderBundleEncoderDescriptor* descriptor)
+                                             const RenderBundleEncoderDescriptor* descriptor,
+                                             CommandBlockAllocator* blockAllocator)
         : RenderEncoderBase(device, &mEncodingContext),
-          mEncodingContext(device, this),
+          mEncodingContext(device, this, blockAllocator),
           mAttachmentState(device->GetOrCreateAttachmentState(descriptor)) {
     }
 
     RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device, ErrorTag errorTag)
-        : RenderEncoderBase(device, &mEncodingContext, errorTag), mEncodingContext(device, this) {
+        : RenderEncoderBase(device, &mEncodingContext, errorTag), mEncodingContext(device, this, nullptr) {
     }
 
     // static

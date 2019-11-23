@@ -15,6 +15,8 @@
 #ifndef DAWNNATIVE_COMMAND_ALLOCATOR_H_
 #define DAWNNATIVE_COMMAND_ALLOCATOR_H_
 
+#include "dawn_native/CommandBlockAllocator.h"
+
 #include <cstddef>
 #include <cstdint>
 #include <vector>
@@ -48,15 +50,9 @@ namespace dawn_native {
     // and must tell the CommandIterator when the allocated commands have been processed for
     // deletion.
 
-    // These are the lists of blocks, should not be used directly, only through CommandAllocator
-    // and CommandIterator
-    struct BlockDef {
-        size_t size;
-        uint8_t* block;
-    };
-    using CommandBlocks = std::vector<BlockDef>;
-
     class CommandAllocator;
+    class CommandBlock;
+    class CommandBlockAllocator;
 
     // TODO(cwallez@chromium.org): prevent copy for both iterator and allocator
     class CommandIterator {
@@ -95,17 +91,25 @@ namespace dawn_native {
         void* NextCommand(size_t commandSize, size_t commandAlignment);
         void* NextData(size_t dataSize, size_t dataAlignment);
 
-        CommandBlocks mBlocks;
+        CommandBlockAllocator* mBlockAllocator = nullptr;
+        CommandBlock* mFirstBlock = nullptr;
+        CommandBlock* mCurrentBlock = nullptr;
         uint8_t* mCurrentPtr = nullptr;
-        size_t mCurrentBlock = 0;
-        // Used to avoid a special case for empty iterators.
-        uint32_t mEndOfBlock;
+
         bool mDataWasDestroyed = false;
+
+        // Used to avoid a special case for empty iterators.
+        struct EndBlockAllocation {
+            EndBlockAllocation();
+
+            CommandBlock block;
+            uint32_t data;
+        } mEndBlockAllocation = {};
     };
 
     class CommandAllocator {
       public:
-        CommandAllocator();
+        CommandAllocator(CommandBlockAllocator* blockAllocator);
         ~CommandAllocator();
 
         template <typename T, typename E>
@@ -141,14 +145,11 @@ namespace dawn_native {
         static constexpr size_t kMaxSupportedAlignment = 8;
 
         friend CommandIterator;
-        CommandBlocks&& AcquireBlocks();
+        std::pair<CommandBlockAllocator*, CommandBlock*> AcquireBlocks();
 
         uint8_t* Allocate(uint32_t commandId, size_t commandSize, size_t commandAlignment);
         uint8_t* AllocateData(size_t dataSize, size_t dataAlignment);
         bool GetNewBlock(size_t minimumSize);
-
-        CommandBlocks mBlocks;
-        size_t mLastAllocationSize = 2048;
 
         // Pointers to the current range of allocation in the block. Guaranteed to allow for at
         // least one uint32_t if not nullptr, so that the special EndOfBlock command id can always
@@ -160,6 +161,10 @@ namespace dawn_native {
         // there is not enough space and calls GetNewBlock. This avoids having to special case the
         // initialization in Allocate.
         uint32_t mDummyEnum[1] = {0};
+
+        CommandBlockAllocator* mBlockAllocator;
+        CommandBlock* mFirstBlock = nullptr;
+        CommandBlock* mCurrentBlock = nullptr;
     };
 
 }  // namespace dawn_native

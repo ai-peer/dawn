@@ -461,8 +461,10 @@ namespace dawn_native {
 
     }  // namespace
 
-    CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
-        : ObjectBase(device), mEncodingContext(device, this) {
+    CommandEncoder::CommandEncoder(DeviceBase* device,
+                                   const CommandEncoderDescriptor*,
+                                   CommandBlockAllocator* blockAllocator)
+        : ObjectBase(device), mEncodingContext(device, this, blockAllocator) {
     }
 
     CommandBufferResourceUsage CommandEncoder::AcquireResourceUsages() {

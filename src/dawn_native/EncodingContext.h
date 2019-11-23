@@ -32,7 +32,9 @@ namespace dawn_native {
     // It performs error tracking as well as encoding state for render/compute passes.
     class EncodingContext {
       public:
-        EncodingContext(DeviceBase* device, const ObjectBase* initialEncoder);
+        EncodingContext(DeviceBase* device,
+                        const ObjectBase* initialEncoder,
+                        CommandBlockAllocator* blockAllocator);
         ~EncodingContext();
 
         CommandIterator AcquireCommands();
@@ -56,6 +58,9 @@ namespace dawn_native {
 
         template <typename EncodeFunction>
         inline bool TryEncode(const ObjectBase* encoder, EncodeFunction&& encodeFunction) {
+            if (DAWN_UNLIKELY(mGotError)) {
+                return false;
+            }
             if (DAWN_UNLIKELY(encoder != mCurrentEncoder)) {
                 if (mCurrentEncoder != mTopLevelEncoder) {
                     // The top level encoder was used when a pass encoder was current.

@@ -23,8 +23,14 @@
 
 namespace dawn_native {
 
-    EncodingContext::EncodingContext(DeviceBase* device, const ObjectBase* initialEncoder)
-        : mDevice(device), mTopLevelEncoder(initialEncoder), mCurrentEncoder(initialEncoder) {
+    EncodingContext::EncodingContext(DeviceBase* device,
+                                     const ObjectBase* initialEncoder,
+                                     CommandBlockAllocator* blockAllocator)
+        : mDevice(device),
+          mTopLevelEncoder(initialEncoder),
+          mCurrentEncoder(initialEncoder),
+          mAllocator(blockAllocator),
+          mGotError(blockAllocator == nullptr) {
     }
 
     EncodingContext::~EncodingContext() {

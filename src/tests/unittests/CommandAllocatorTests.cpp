@@ -56,19 +56,22 @@ struct CommandSmall {
 
 // Test allocating nothing works
 TEST(CommandAllocator, DoNothingAllocator) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 }
 
 // Test iterating over nothing works
 TEST(CommandAllocator, DoNothingAllocatorWithIterator) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
     CommandIterator iterator(std::move(allocator));
     iterator.DataWasDestroyed();
 }
 
 // Test basic usage of allocator + iterator
 TEST(CommandAllocator, Basic) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     uint64_t myPipeline = 0xDEADBEEFBEEFDEAD;
     uint32_t myAttachmentPoint = 2;
@@ -114,7 +117,8 @@ TEST(CommandAllocator, Basic) {
 
 // Test basic usage of allocator + iterator with data
 TEST(CommandAllocator, BasicWithData) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     uint8_t mySize = 8;
     uint8_t myOffset = 3;
@@ -157,7 +161,8 @@ TEST(CommandAllocator, BasicWithData) {
 
 // Test basic iterating several times
 TEST(CommandAllocator, MultipleIterations) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     uint32_t myFirst = 42;
     uint32_t myCount = 16;
@@ -201,7 +206,8 @@ TEST(CommandAllocator, MultipleIterations) {
 }
 // Test large commands work
 TEST(CommandAllocator, LargeCommands) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     const int kCommandCount = 5;
 
@@ -234,7 +240,8 @@ TEST(CommandAllocator, LargeCommands) {
 
 // Test many small commands work
 TEST(CommandAllocator, ManySmallCommands) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     // Stay under max representable uint16_t
     const int kCommandCount = 50000;
@@ -274,7 +281,8 @@ TEST(CommandAllocator, ManySmallCommands) {
 
 // Test usage of iterator.Reset
 TEST(CommandAllocator, IteratorReset) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     uint64_t myPipeline = 0xDEADBEEFBEEFDEAD;
     uint32_t myAttachmentPoint = 2;
@@ -331,7 +339,8 @@ TEST(CommandAllocator, IteratorReset) {
 // Test iterating empty iterators
 TEST(CommandAllocator, EmptyIterator) {
     {
-        CommandAllocator allocator;
+        CommandBlockAllocator blockAllocator;
+        CommandAllocator allocator(&blockAllocator);
         CommandIterator iterator(std::move(allocator));
 
         CommandType type;
@@ -341,7 +350,8 @@ TEST(CommandAllocator, EmptyIterator) {
         iterator.DataWasDestroyed();
     }
     {
-        CommandAllocator allocator;
+        CommandBlockAllocator blockAllocator;
+        CommandAllocator allocator(&blockAllocator);
         CommandIterator iterator1(std::move(allocator));
         CommandIterator iterator2(std::move(iterator1));
 
@@ -372,7 +382,8 @@ struct alignas(A) AlignedStruct {
 
 // Test for overflows in Allocate's computations, size 1 variant
 TEST(CommandAllocator, AllocationOverflow_1) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
     AlignedStruct<1>* data =
         allocator.AllocateData<AlignedStruct<1>>(std::numeric_limits<size_t>::max() / 1);
     ASSERT_EQ(data, nullptr);
@@ -380,7 +391,8 @@ TEST(CommandAllocator, AllocationOverflow_1) {
 
 // Test for overflows in Allocate's computations, size 2 variant
 TEST(CommandAllocator, AllocationOverflow_2) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
     AlignedStruct<2>* data =
         allocator.AllocateData<AlignedStruct<2>>(std::numeric_limits<size_t>::max() / 2);
     ASSERT_EQ(data, nullptr);
@@ -388,7 +400,8 @@ TEST(CommandAllocator, AllocationOverflow_2) {
 
 // Test for overflows in Allocate's computations, size 4 variant
 TEST(CommandAllocator, AllocationOverflow_4) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
     AlignedStruct<4>* data =
         allocator.AllocateData<AlignedStruct<4>>(std::numeric_limits<size_t>::max() / 4);
     ASSERT_EQ(data, nullptr);
@@ -396,7 +409,8 @@ TEST(CommandAllocator, AllocationOverflow_4) {
 
 // Test for overflows in Allocate's computations, size 8 variant
 TEST(CommandAllocator, AllocationOverflow_8) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
     AlignedStruct<8>* data =
         allocator.AllocateData<AlignedStruct<8>>(std::numeric_limits<size_t>::max() / 8);
     ASSERT_EQ(data, nullptr);
@@ -412,7 +426,8 @@ struct IntWithDefault {
 
 // Test that the allcator correctly defaults initalizes data for Allocate
 TEST(CommandAllocator, AllocateDefaultInitializes) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     IntWithDefault<42>* int42 = allocator.Allocate<IntWithDefault<42>>(CommandType::Draw);
     ASSERT_EQ(int42->value, 42);
@@ -429,7 +444,8 @@ TEST(CommandAllocator, AllocateDefaultInitializes) {
 
 // Test that the allcator correctly defaults initalizes data for AllocateData
 TEST(CommandAllocator, AllocateDataDefaultInitializes) {
-    CommandAllocator allocator;
+    CommandBlockAllocator blockAllocator;
+    CommandAllocator allocator(&blockAllocator);
 
     IntWithDefault<33>* int33 = allocator.AllocateData<IntWithDefault<33>>(1);
     ASSERT_EQ(int33[0].value, 33);

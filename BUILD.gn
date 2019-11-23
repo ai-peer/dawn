@@ -166,6 +166,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/CachedObject.h",
     "src/dawn_native/CommandAllocator.cpp",
     "src/dawn_native/CommandAllocator.h",
+    "src/dawn_native/CommandBlockAllocator.cpp",
+    "src/dawn_native/CommandBlockAllocator.h",
     "src/dawn_native/CommandBuffer.cpp",
     "src/dawn_native/CommandBuffer.h",
     "src/dawn_native/CommandBufferStateTracker.cpp",

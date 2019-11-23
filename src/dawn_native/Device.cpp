@@ -20,6 +20,7 @@
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/CommandBlockAllocator.h"
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/DynamicUploader.h"
@@ -70,6 +71,7 @@ namespace dawn_native {
         mCaches = std::make_unique<DeviceBase::Caches>();
         mErrorScopeTracker = std::make_unique<ErrorScopeTracker>(this);
         mFenceSignalTracker = std::make_unique<FenceSignalTracker>(this);
+        mCommandBlockAllocator = std::make_unique<CommandBlockAllocator>();
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
         SetDefaultToggles();
 
@@ -446,7 +448,7 @@ namespace dawn_native {
         mDeferredCreateBufferMappedAsyncResults.push_back(deferred_info);
     }
     CommandEncoder* DeviceBase::CreateCommandEncoder(const CommandEncoderDescriptor* descriptor) {
-        return new CommandEncoder(this, descriptor);
+        return new CommandEncoder(this, descriptor, mCommandBlockAllocator.get());
     }
     ComputePipelineBase* DeviceBase::CreateComputePipeline(
         const ComputePipelineDescriptor* descriptor) {
@@ -709,7 +711,7 @@ namespace dawn_native {
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateRenderBundleEncoderDescriptor(this, descriptor));
         }
-        *result = new RenderBundleEncoder(this, descriptor);
+        *result = new RenderBundleEncoder(this, descriptor, mCommandBlockAllocator.get());
         return {};
     }
 

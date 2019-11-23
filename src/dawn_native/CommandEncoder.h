@@ -27,10 +27,13 @@
 namespace dawn_native {
 
     struct BeginRenderPassCmd;
+    class CommandBlockAllocator;
 
     class CommandEncoder final : public ObjectBase {
       public:
-        CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor);
+        CommandEncoder(DeviceBase* device,
+                       const CommandEncoderDescriptor* descriptor,
+                       CommandBlockAllocator* blockAllocator);
 
         CommandIterator AcquireCommands();
         CommandBufferResourceUsage AcquireResourceUsages();
