@@ -23,13 +23,17 @@
 
 namespace dawn_native {
 
+    class CommandBlockAllocator;
+
     MaybeError ValidateRenderBundleEncoderDescriptor(
         const DeviceBase* device,
         const RenderBundleEncoderDescriptor* descriptor);
 
     class RenderBundleEncoder final : public RenderEncoderBase {
       public:
-        RenderBundleEncoder(DeviceBase* device, const RenderBundleEncoderDescriptor* descriptor);
+        RenderBundleEncoder(DeviceBase* device,
+                            const RenderBundleEncoderDescriptor* descriptor,
+                            CommandBlockAllocator* blockAllocator);
 
         static RenderBundleEncoder* MakeError(DeviceBase* device);
 

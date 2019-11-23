@@ -15,8 +15,9 @@
 #ifndef DAWNNATIVE_COMMAND_ALLOCATOR_H_
 #define DAWNNATIVE_COMMAND_ALLOCATOR_H_
 
-#include "common/Math.h"
 #include "common/Assert.h"
+#include "common/Math.h"
+#include "dawn_native/CommandBlockAllocator.h"
 
 #include <cstddef>
 #include <cstdint>
@@ -51,15 +52,9 @@ namespace dawn_native {
     // and must tell the CommandIterator when the allocated commands have been processed for
     // deletion.
 
-    // These are the lists of blocks, should not be used directly, only through CommandAllocator
-    // and CommandIterator
-    struct BlockDef {
-        size_t size;
-        uint8_t* block;
-    };
-    using CommandBlocks = std::vector<BlockDef>;
-
     class CommandAllocator;
+    class CommandBlock;
+    class CommandBlockAllocator;
 
     // TODO(cwallez@chromium.org): prevent copy for both iterator and allocator
     class CommandIterator {
@@ -101,18 +96,18 @@ namespace dawn_native {
         bool NextCommandId(uint32_t* commandId) {
             uint8_t* idPtr = AlignPtr(mCurrentPtr, alignof(uint32_t));
             ASSERT(idPtr + sizeof(uint32_t) <=
-                   mBlocks[mCurrentBlock].block + mBlocks[mCurrentBlock].size);
+                   mCurrentBlock->GetPointer() + mCurrentBlock->GetSize());
 
             uint32_t id = *reinterpret_cast<uint32_t*>(idPtr);
 
             if (id == EndOfBlock) {
-                mCurrentBlock++;
-                if (mCurrentBlock >= mBlocks.size()) {
+                mCurrentBlock = mCurrentBlock->GetNext();
+                if (mCurrentBlock == nullptr) {
                     Reset();
                     *commandId = EndOfBlock;
                     return false;
                 }
-                mCurrentPtr = AlignPtr(mBlocks[mCurrentBlock].block, alignof(uint32_t));
+                mCurrentPtr = AlignPtr(mCurrentBlock->GetPointer(), alignof(uint32_t));
                 return NextCommandId(commandId);
             }
 
@@ -124,7 +119,7 @@ namespace dawn_native {
         void* NextCommand(size_t commandSize, size_t commandAlignment) {
             uint8_t* commandPtr = AlignPtr(mCurrentPtr, commandAlignment);
             ASSERT(commandPtr + sizeof(commandSize) <=
-                   mBlocks[mCurrentBlock].block + mBlocks[mCurrentBlock].size);
+                   mCurrentBlock->GetPointer() + mCurrentBlock->GetSize());
 
             mCurrentPtr = commandPtr + commandSize;
             return commandPtr;
@@ -139,17 +134,23 @@ namespace dawn_native {
             return NextCommand(dataSize, dataAlignment);
         }
 
-        CommandBlocks mBlocks;
+        CommandBlockAllocator* mBlockAllocator = nullptr;
+        CommandBlock* mFirstBlock = nullptr;
+        CommandBlock* mCurrentBlock = nullptr;
         uint8_t* mCurrentPtr = nullptr;
-        size_t mCurrentBlock = 0;
-        // Used to avoid a special case for empty iterators.
-        uint32_t mEndOfBlock;
+
         bool mDataWasDestroyed = false;
+
+        // Used to avoid a special case for empty iterators.
+        struct EndBlockAllocation {
+            CommandBlock block = {sizeof(EndOfBlock)};
+            uint32_t data = EndOfBlock;
+        } mEndBlockAllocation = {};
     };
 
     class CommandAllocator {
       public:
-        CommandAllocator();
+        CommandAllocator(CommandBlockAllocator* blockAllocator);
         ~CommandAllocator();
 
         template <typename T, typename E>
@@ -189,7 +190,7 @@ namespace dawn_native {
             UINT_MAX - 1;  // std::numeric_limits<uint32_t>::max() - 1;
 
         friend CommandIterator;
-        CommandBlocks&& AcquireBlocks();
+        std::pair<CommandBlockAllocator*, CommandBlock*> AcquireBlocks();
 
         uint8_t* Allocate(uint32_t commandId, size_t commandSize, size_t commandAlignment) {
             ASSERT(mCurrentPtr != nullptr);
@@ -256,9 +257,6 @@ namespace dawn_native {
 
         bool GetNewBlock(size_t minimumSize);
 
-        CommandBlocks mBlocks;
-        size_t mLastAllocationSize = 2048;
-
         // Pointers to the current range of allocation in the block. Guaranteed to allow for at
         // least one uint32_t if not nullptr, so that the special EndOfBlock command id can always
         // be written. Nullptr iff the blocks were moved out.
@@ -269,6 +267,10 @@ namespace dawn_native {
         // there is not enough space and calls GetNewBlock. This avoids having to special case the
         // initialization in Allocate.
         uint32_t mDummyEnum[1] = {0};
+
+        CommandBlockAllocator* mBlockAllocator;
+        CommandBlock* mFirstBlock = nullptr;
+        CommandBlock* mCurrentBlock = nullptr;
     };
 
 }  // namespace dawn_native

@@ -35,6 +35,7 @@ namespace dawn_native {
     class AdapterBase;
     class AttachmentState;
     class AttachmentStateBlueprint;
+    class CommandBlockAllocator;
     class ErrorScope;
     class ErrorScopeTracker;
     class FenceSignalTracker;
@@ -270,6 +271,7 @@ namespace dawn_native {
 
         std::unique_ptr<ErrorScopeTracker> mErrorScopeTracker;
         std::unique_ptr<FenceSignalTracker> mFenceSignalTracker;
+        std::unique_ptr<CommandBlockAllocator> mCommandBlockAllocator;
         std::vector<DeferredCreateBufferMappedAsync> mDeferredCreateBufferMappedAsyncResults;
 
         uint32_t mRefCount = 1;
