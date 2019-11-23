@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5fa6147_b9cbaf2c",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-23T04:14:54Z",
+      "side": 1,
+      "message": "Is there a reason this couldn\u0027t be DAWN_TRY ? the macro should accomplish the same as this code here",
+      "range": {
+        "startLine": 423,
+        "startChar": 8,
+        "endLine": 426,
+        "endChar": 9
+      },
+      "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6dc2e69_0c1b09c9",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-23T04:14:54Z",
+      "side": 1,
+      "message": "Don\u0027t think we need to touch the device and do ConsumedError here. We already do Device::ConsumedError on the entire result of Texture::InitializeFromExternal\n\nWe\u0027ll still need to do the cleanup though. Perhaps introduce a tiny lambda?\n\nMaybeError result \u003d [\u0026]() -\u003e MaybeError {\n    DAWN_TRY(CreateImageFromExternal(...));\n    // ...\n}();\n\nif (result.IsError()) {\n    // Do cleanup\n    device-\u003efn.DestroyImage(...);\n\n    return result.AcquireError();\n}",
+      "range": {
+        "startLine": 508,
+        "startChar": 12,
+        "endLine": 508,
+        "endChar": 33
+      },
+      "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
