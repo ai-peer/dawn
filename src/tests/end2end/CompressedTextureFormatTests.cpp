@@ -34,13 +34,6 @@ struct CopyConfig {
 
 class CompressedTextureBCFormatTest : public DawnTest {
   protected:
-    void TestSetUp() override {
-        DawnTest::TestSetUp();
-        mBindGroupLayout = utils::MakeBindGroupLayout(
-            device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::Sampler},
-                     {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture}});
-    }
-
     std::vector<const char*> GetRequiredExtensions() override {
         mIsBCFormatSupported = SupportsExtensions({"texture_compression_bc"});
         if (!mIsBCFormatSupported) {
@@ -135,9 +128,6 @@ class CompressedTextureBCFormatTest : public DawnTest {
     wgpu::RenderPipeline CreateRenderPipelineForTest() {
         ASSERT(IsBCFormatSupported());
 
-        wgpu::PipelineLayout pipelineLayout =
-            utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
-
         utils::ComboRenderPipelineDescriptor renderPipelineDescriptor(device);
         wgpu::ShaderModule vsModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
@@ -165,10 +155,12 @@ class CompressedTextureBCFormatTest : public DawnTest {
             })");
         renderPipelineDescriptor.vertexStage.module = vsModule;
         renderPipelineDescriptor.cFragmentStage.module = fsModule;
-        renderPipelineDescriptor.layout = pipelineLayout;
         renderPipelineDescriptor.cColorStates[0].format =
             utils::BasicRenderPass::kDefaultColorFormat;
-        return device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
+        mBindGroupLayout = pipeline.GetBindGroupLayout(0);
+        return pipeline;
     }
 
     // Run the given render pipeline and bind group and verify the pixels in the render target.
@@ -208,10 +200,10 @@ class CompressedTextureBCFormatTest : public DawnTest {
 
         wgpu::Texture bcTexture = CreateTextureWithCompressedData(config);
 
+        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
         wgpu::BindGroup bindGroup =
             CreateBindGroupForTest(bcTexture, config.textureDescriptor.format,
                                    config.viewArrayLayer, config.viewMipmapLevel);
-        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
 
         wgpu::Extent3D virtualSizeAtLevel = GetVirtualSizeAtLevel(config);
 
@@ -639,9 +631,9 @@ TEST_P(CompressedTextureBCFormatTest, CopyWholeTextureSubResourceIntoNonZeroMipm
         wgpu::Texture bcTextureDst = CreateTextureFromTexture(bcTextureSrc, config, config);
 
         // Verify if we can use bcTexture as sampled textures correctly.
+        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
         wgpu::BindGroup bindGroup = CreateBindGroupForTest(
             bcTextureDst, format, config.viewArrayLayer, config.viewMipmapLevel);
-        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
 
         std::vector<RGBA8> expectedData = GetExpectedData(format, kVirtualSize);
         VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kVirtualSize,
@@ -703,9 +695,9 @@ TEST_P(CompressedTextureBCFormatTest, CopyIntoSubresourceWithPhysicalSizeNotEqua
         wgpu::Texture bcTextureDst = CreateTextureFromTexture(bcTextureSrc, srcConfig, dstConfig);
 
         // Verify if we can use bcTexture as sampled textures correctly.
+        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
         wgpu::BindGroup bindGroup = CreateBindGroupForTest(
             bcTextureDst, format, dstConfig.viewArrayLayer, dstConfig.viewMipmapLevel);
-        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
 
         std::vector<RGBA8> expectedData = GetExpectedData(format, kDstVirtualSize);
         VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kDstVirtualSize,
@@ -762,9 +754,9 @@ TEST_P(CompressedTextureBCFormatTest, CopyFromSubresourceWithPhysicalSizeNotEqua
         wgpu::Texture bcTextureDst = CreateTextureFromTexture(bcTextureSrc, srcConfig, dstConfig);
 
         // Verify if we can use bcTexture as sampled textures correctly.
+        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
         wgpu::BindGroup bindGroup = CreateBindGroupForTest(
             bcTextureDst, format, dstConfig.viewArrayLayer, dstConfig.viewMipmapLevel);
-        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest();
 
         std::vector<RGBA8> expectedData = GetExpectedData(format, kDstVirtualSize);
         VerifyCompressedTexturePixelValues(renderPipeline, bindGroup, kDstVirtualSize,
