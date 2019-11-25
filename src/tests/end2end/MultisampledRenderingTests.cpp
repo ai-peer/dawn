@@ -201,14 +201,6 @@ class MultisampledRenderingTest : public DawnTest {
         pipelineDescriptor.cFragmentStage.module =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, fs);
 
-        mBindGroupLayout = utils::MakeBindGroupLayout(
-            device, {
-                        {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
-                    });
-        wgpu::PipelineLayout pipelineLayout =
-            utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
-        pipelineDescriptor.layout = pipelineLayout;
-
         if (hasDepthStencilAttachment) {
             pipelineDescriptor.cDepthStencilState.format = kDepthStencilFormat;
             pipelineDescriptor.cDepthStencilState.depthWriteEnabled = true;
@@ -223,7 +215,9 @@ class MultisampledRenderingTest : public DawnTest {
             pipelineDescriptor.cColorStates[i].format = kColorFormat;
         }
 
-        return device.CreateRenderPipeline(&pipelineDescriptor);
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+        mBindGroupLayout = pipeline.GetBindGroupLayout(0);
+        return pipeline;
     }
 };
 
