@@ -45,6 +45,30 @@
       "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d970620_78172342",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-25T10:04:05Z",
+      "side": 1,
+      "message": "That\u0027d work, although maybe we can defer the deletion of the image until the vulkan::TextureBase is deallocated?",
+      "parentUuid": "e6dc2e69_0c1b09c9",
+      "range": {
+        "startLine": 508,
+        "startChar": 12,
+        "endLine": 508,
+        "endChar": 33
+      },
+      "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
