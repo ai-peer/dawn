@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a56cf858_74416f2a",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-25T19:14:42Z",
+      "side": 1,
+      "message": "Modifying state isn\u0027t great, maybe we could pass the BGL in CreateBindGroupForTest?",
+      "revId": "9d259037ccd89f86a74a0d64a0257d899ee39e74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
