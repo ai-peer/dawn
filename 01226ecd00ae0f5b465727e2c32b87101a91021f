@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8de417ce_b4e782c1",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-25T09:56:31Z",
+      "side": 1,
+      "message": "nit: CreateZeroedBuffer and setSubData them to 0 so we know the memory accesses worked and we\u0027re not reading leftover data that happens to be correct.",
+      "range": {
+        "startLine": 365,
+        "startChar": 17,
+        "endLine": 365,
+        "endChar": 29
+      },
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ffa2411_08145888",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-25T09:56:31Z",
+      "side": 1,
+      "message": "All of the buffers could contain exactly one uint which are only tested as data, and not used to configure the rendering. Verifying that \"the vertex coordinate were written correctly to make a triangle\" is not a minimal test, the minimal test is \"reading the vertex buffer produces what was written in it previously\". So instead of drawing triangles I suggest drawing a single point, that checks the uint in the index buffer with \"gl_VertexID\", the value in the vertex buffer with a \"in uint vertexData\" in the VS (and maybe make that attribute an instance attribute), and the UBO + SSBO as usual, but again just a uint and not a color. The point could be green if everything is correct, and red otherwise.\n\nWe put too much semantic in our testing of things that are just manipulating data. This is a common issue in our Dawn tests and something I\u0027d like to avoid going forward.",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01f8e97_dea67620",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-25T09:56:31Z",
+      "side": 1,
+      "message": "kWholeSize could be the default value here https://cs.chromium.org/chromium/src/third_party/dawn/src/utils/WGPUHelpers.h?q\u003dWGPUHelp\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d112 so we don\u0027t need to specify it all the time (like the JS API)",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46f90579_0026b050",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-25T09:56:31Z",
+      "side": 1,
+      "message": "Same overall comments here.",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
