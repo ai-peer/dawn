@@ -77,11 +77,11 @@ namespace dawn_native {
 
     // Instance
 
-    Instance::Instance() : mImpl(new InstanceBase()) {
+    Instance::Instance() : mImpl(InstanceBase::Create()) {
     }
 
     Instance::~Instance() {
-        delete mImpl;
+        mImpl->Release();
         mImpl = nullptr;
     }
 
@@ -116,6 +116,10 @@ namespace dawn_native {
 
     void Instance::SetPlatform(dawn_platform::Platform* platform) {
         mImpl->SetPlatform(platform);
+    }
+
+    WGPUInstance Instance::Get() const {
+        return reinterpret_cast<WGPUInstance>(mImpl);
     }
 
     size_t GetLazyClearCountForTesting(WGPUDevice device) {
