@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79e250ed_22408a4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-26T15:54:58Z",
+      "side": 1,
+      "message": "nit: BUG\u003ddawn:M?",
+      "revId": "f33bb123478a6010540916d97f32fdd7fbabbeba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
