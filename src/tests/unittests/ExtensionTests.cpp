@@ -20,7 +20,15 @@
 
 class ExtensionTests : public testing::Test {
   public:
-    ExtensionTests() : testing::Test(), mInstanceBase(), mAdapterBase(&mInstanceBase) {
+    ExtensionTests()
+        : testing::Test(),
+          mInstanceBase(dawn_native::InstanceBase::Create()),
+          mAdapterBase(mInstanceBase) {
+    }
+
+    ~ExtensionTests() {
+        mInstanceBase->Release();
+        mInstanceBase = nullptr;
     }
 
     std::vector<const char*> GetAllExtensionNames() {
@@ -35,7 +43,7 @@ class ExtensionTests : public testing::Test {
         static_cast<size_t>(dawn_native::Extension::EnumCount);
 
   protected:
-    dawn_native::InstanceBase mInstanceBase;
+    dawn_native::InstanceBase* mInstanceBase;
     dawn_native::null::Adapter mAdapterBase;
 };
 
