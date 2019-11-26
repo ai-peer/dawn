@@ -47,7 +47,7 @@ declare_args() {
 
   # Enables using spvc for accessing SPIR-V toolchain, instead of
   # directly accessing it in Dawn.
-  dawn_use_spvc = false
+  #  dawn_use_spvc = false
 }
 
 # GN does not allow reading a variable defined in the same declare_args().
