@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "a39fe908_bcfc7d36",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-11-26T17:51:39Z",
+      "side": 1,
+      "message": "if we set dawn_use_swiftshader, then we should be able to use it on Mac, no? I guess we could explicitly set dawn_enable_vulkan\u003dtrue in GN args for that.",
+      "parentUuid": "388ef103_b323ec34",
+      "range": {
+        "startLine": 39,
+        "startChar": 23,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "1219eb450dc7fe2ec67d339eebbfc3754dabd75d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5701fca4_3f8b0aa2",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 4
