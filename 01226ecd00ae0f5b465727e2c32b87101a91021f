@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "6aa745b0_e0d0248a",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-26T15:18:55Z",
+      "side": 1,
+      "message": "I\u0027m almost convinced we should strive for minimal tests and see the GPU as a machine operating on data and not just on triangles. For 90% of tests, that shouldn\u0027t matter.\n\nThat said I\u0027d be ok moving forward with the current approach in this CL (with the two other comments fixed):\n\n - The discussion we need to have about testing style is much bigger than this CL and matters more for the WebGPU CTS than Dawn end2end tests.\n - Adding \"triangle style\" tests in this CL only marginally increase the maintenance cost.\n - Readonly storage buffers are taking a while to land and I don\u0027t want to block them further.",
+      "parentUuid": "337ab438_50b1c79d",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f01f8e97_dea67620",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 5
