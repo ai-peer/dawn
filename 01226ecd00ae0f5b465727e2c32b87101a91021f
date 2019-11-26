@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "337ab438_50b1c79d",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-26T06:58:33Z",
+      "side": 1,
+      "message": "I may argue that drawing a triangle is widely used in real cases for almost every rendering stuff. So drawing a simple triangle is meaningful that we can ensure the most useful cases (triangles) are correct. Moreover, the code itself is also a good examples for users/developers to learn and understand how to use WebGPU/Dawn in order to draw some samples. \n\nBut drawing a point is relative rare in real cases, and it is not very useful for developers. \n\nIn addition, I remember that native dEQP and Vulkan CTS also use a lot of triangles. \n\nWell, I am not saying that extreme simplicity (drawing a point) is wrong, but it may not be the only correct one. And drawing triangle(s) is meaningful too. \n\nIn these two tests, they are the most common way to use vertices and indices via buffer(s). So, writing some tests to cover the most common usage is not bad. However, drawing a point like you suggested may not be an intuitive way to use vertices and indices data.",
+      "parentUuid": "1ffa2411_08145888",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f01f8e97_dea67620",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 5
