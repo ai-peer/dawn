@@ -80,11 +80,11 @@ namespace dawn_native {
 
     // Instance
 
-    Instance::Instance() : mImpl(new InstanceBase()) {
+    Instance::Instance() : mImpl(InstanceBase::Create()) {
     }
 
     Instance::~Instance() {
-        delete mImpl;
+        mImpl->Release();
         mImpl = nullptr;
     }
 
