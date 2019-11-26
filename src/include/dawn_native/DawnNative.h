@@ -129,6 +129,9 @@ namespace dawn_native {
 
         void SetPlatform(dawn_platform::Platform* platform);
 
+        // Returns the underlying WGPUInstance object.
+        WGPUInstance Get() const;
+
       private:
         InstanceBase* mImpl = nullptr;
     };
