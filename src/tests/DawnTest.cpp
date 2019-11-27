@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Constants.h"
+#include "common/Log.h"
 #include "common/Math.h"
 #include "common/Platform.h"
 #include "dawn/dawn_proc.h"
@@ -183,7 +184,7 @@ void DawnTestEnvironment::SetUp() {
     mInstance.get()->DiscoverDefaultAdapters();
     DiscoverOpenGLAdapter();
 
-    std::cout << "Testing configuration\n"
+    InfoLog() << "Testing configuration\n"
                  "---------------------\n"
                  "UseWire: "
               << (mUseWire ? "true" : "false")
@@ -197,12 +198,8 @@ void DawnTestEnvironment::SetUp() {
                  "BeginCaptureOnStartup: "
               << (mBeginCaptureOnStartup ? "true" : "false")
               << "\n"
-                 "\n";
-
-    // Preparing for outputting hex numbers
-    std::cout << std::showbase << std::hex << std::setfill('0') << std::setw(4);
-
-    std::cout << "System adapters: \n";
+                 "\n"
+                << "System adapters: \n";
     for (const dawn_native::Adapter& adapter : mInstance->GetAdapters()) {
         const dawn_native::PCIInfo& pci = adapter.GetPCIInfo();
 
@@ -213,14 +210,16 @@ void DawnTestEnvironment::SetUp() {
         deviceId << std::setfill('0') << std::uppercase << std::internal << std::hex << std::setw(4)
                  << pci.deviceId;
 
-        std::cout << " - \"" << pci.name << "\"\n";
-        std::cout << "   type: " << DeviceTypeName(adapter.GetDeviceType())
-                  << ", backend: " << ParamName(adapter.GetBackendType()) << "\n";
-        std::cout << "   vendorId: 0x" << vendorId.str() << ", deviceId: 0x" << deviceId.str()
-                  << (mHasVendorIdFilter && mVendorIdFilter == pci.vendorId ? " [Selected]" : "")
-                  << "\n";
+        // Preparing for outputting hex numbers
+        InfoLog() << std::showbase << std::hex << std::setfill('0') << std::setw(4)
+
+        << " - \"" << pci.name << "\"\n"
+        << "   type: " << DeviceTypeName(adapter.GetDeviceType())
+        << ", backend: " << ParamName(adapter.GetBackendType()) << "\n"
+        << "   vendorId: 0x" << vendorId.str() << ", deviceId: 0x" << deviceId.str()
+        << (mHasVendorIdFilter && mVendorIdFilter == pci.vendorId ? " [Selected]" : "")
+        << "\n";
     }
-    std::cout << std::endl;
 }
 
 void DawnTestEnvironment::TearDown() {
