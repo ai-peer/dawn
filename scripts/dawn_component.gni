@@ -13,8 +13,8 @@
 # limitations under the License.
 
 import("//build_overrides/build.gni")
-import("dawn_overrides_with_defaults.gni")
 import("dawn_features.gni")
+import("dawn_overrides_with_defaults.gni")
 
 ###############################################################################
 # Template to produce a component for one of Dawn's libraries.
