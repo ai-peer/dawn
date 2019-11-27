@@ -36,29 +36,16 @@ class CompressedTextureBCFormatTest : public DawnTest {
   protected:
     void TestSetUp() override {
         DawnTest::TestSetUp();
+        DAWN_SKIP_TEST_IF(!SupportsExtensions({"texture_compression_bc"}));
+
         mBindGroupLayout = utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::Sampler},
                      {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture}});
     }
 
-    std::vector<const char*> GetRequiredExtensions() override {
-        mIsBCFormatSupported = SupportsExtensions({"texture_compression_bc"});
-        if (!mIsBCFormatSupported) {
-            return {};
-        }
-
-        return {"texture_compression_bc"};
-    }
-
-    bool IsBCFormatSupported() const {
-        return mIsBCFormatSupported;
-    }
-
     // Copy the compressed texture data into the destination texture as is specified in copyConfig.
     void InitializeDataInCompressedTexture(wgpu::Texture bcCompressedTexture,
                                            const CopyConfig& copyConfig) {
-        ASSERT(IsBCFormatSupported());
-
         // Compute the upload buffer size with rowPitchAlignment and the copy region.
         const wgpu::Extent3D textureSize = copyConfig.textureDescriptor.size;
         uint32_t actualWidthAtLevel = textureSize.width >> copyConfig.viewMipmapLevel;
@@ -112,8 +99,6 @@ class CompressedTextureBCFormatTest : public DawnTest {
                                            wgpu::TextureFormat bcFormat,
                                            uint32_t baseArrayLayer = 0,
                                            uint32_t baseMipLevel = 0) {
-        ASSERT(IsBCFormatSupported());
-
         wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
         samplerDesc.minFilter = wgpu::FilterMode::Nearest;
         samplerDesc.magFilter = wgpu::FilterMode::Nearest;
@@ -133,8 +118,6 @@ class CompressedTextureBCFormatTest : public DawnTest {
 
     // Create a render pipeline for sampling from a BC texture and rendering into the render target.
     wgpu::RenderPipeline CreateRenderPipelineForTest() {
-        ASSERT(IsBCFormatSupported());
-
         wgpu::PipelineLayout pipelineLayout =
             utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
 
@@ -178,8 +161,6 @@ class CompressedTextureBCFormatTest : public DawnTest {
                                             const wgpu::Origin3D& expectedOrigin,
                                             const wgpu::Extent3D& expectedExtent,
                                             const std::vector<RGBA8>& expected) {
-        ASSERT(IsBCFormatSupported());
-
         ASSERT(expected.size() == renderTargetSize.width * renderTargetSize.height);
         utils::BasicRenderPass renderPass =
             utils::CreateBasicRenderPass(device, renderTargetSize.width, renderTargetSize.height);
@@ -204,8 +185,6 @@ class CompressedTextureBCFormatTest : public DawnTest {
     // Run the tests that copies pre-prepared BC format data into a BC texture and verifies if we
     // can render correctly with the pixel values sampled from the BC texture.
     void TestCopyRegionIntoBCFormatTextures(const CopyConfig& config) {
-        ASSERT(IsBCFormatSupported());
-
         wgpu::Texture bcTexture = CreateTextureWithCompressedData(config);
 
         wgpu::BindGroup bindGroup =
@@ -450,8 +429,6 @@ class CompressedTextureBCFormatTest : public DawnTest {
         wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopyDst;
 
     wgpu::BindGroupLayout mBindGroupLayout;
-
-    bool mIsBCFormatSupported = false;
 };
 
 // Test copying into the whole BC texture with 2x2 blocks and sampling from it.
@@ -462,8 +439,6 @@ TEST_P(CompressedTextureBCFormatTest, Basic) {
 
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
@@ -481,8 +456,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyIntoSubRegion) {
     // TODO(jiawei.shao@intel.com): find out why this test is flaky on Windows Intel Vulkan
     // bots.
     DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
@@ -507,8 +480,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyWithZeroRowPitch) {
 
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
@@ -536,8 +507,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyIntoNonZeroArrayLayer) {
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
 
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {8, 8, 1};
@@ -561,8 +530,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyBufferIntoNonZeroMipmapLevel) {
 
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
@@ -601,8 +568,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyWholeTextureSubResourceIntoNonZeroMipm
 
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     // TODO(cwallez@chromium.org): This consistently fails on with the 12th pixel being opaque black
     // instead of opaque red on Win10 FYI Release (NVIDIA GeForce GTX 1660). See
@@ -652,8 +617,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyWholeTextureSubResourceIntoNonZeroMipm
 // Test BC format texture-to-texture partial copies where the physical size of the destination
 // subresource is different from its virtual size.
 TEST_P(CompressedTextureBCFormatTest, CopyIntoSubresourceWithPhysicalSizeNotEqualToVirtualSize) {
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     // TODO(jiawei.shao@intel.com): add workaround on the T2T copies where Extent3D fits in one
     // subresource and does not fit in another one on OpenGL.
     DAWN_SKIP_TEST_IF(IsOpenGL());
@@ -716,8 +679,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyIntoSubresourceWithPhysicalSizeNotEqua
 // Test BC format texture-to-texture partial copies where the physical size of the source
 // subresource is different from its virtual size.
 TEST_P(CompressedTextureBCFormatTest, CopyFromSubresourceWithPhysicalSizeNotEqualToVirtualSize) {
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     // TODO(jiawei.shao@intel.com): add workaround on the T2T copies where Extent3D fits in one
     // subresource and does not fit in another one on OpenGL.
     DAWN_SKIP_TEST_IF(IsOpenGL());
@@ -775,8 +736,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyFromSubresourceWithPhysicalSizeNotEqua
 // Test recording two BC format texture-to-texture partial copies where the physical size of the
 // source subresource is different from its virtual size into one command buffer.
 TEST_P(CompressedTextureBCFormatTest, MultipleCopiesWithPhysicalSizeNotEqualToVirtualSize) {
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     // TODO(jiawei.shao@intel.com): add workaround on the T2T copies where Extent3D fits in one
     // subresource and does not fit in another one on OpenGL.
     DAWN_SKIP_TEST_IF(IsOpenGL());
@@ -865,8 +824,6 @@ TEST_P(CompressedTextureBCFormatTest, BufferOffsetAndExtentFitRowPitch) {
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
 
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {8, 8, 1};
@@ -897,8 +854,6 @@ TEST_P(CompressedTextureBCFormatTest, BufferOffsetExceedsSlicePitch) {
 
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
@@ -933,8 +888,6 @@ TEST_P(CompressedTextureBCFormatTest, CopyWithBufferOffsetAndExtentExceedRowPitc
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
 
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {8, 8, 1};
@@ -963,8 +916,6 @@ TEST_P(CompressedTextureBCFormatTest, RowPitchEqualToSlicePitch) {
     // TODO(jiawei.shao@intel.com): find out why this test is flaky on Windows Intel Vulkan
     // bots.
     DAWN_SKIP_TEST_IF(IsIntel() && IsVulkan() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
@@ -998,8 +949,6 @@ TEST_P(CompressedTextureBCFormatTest, LargeImageHeight) {
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
 
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
-
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {8, 8, 1};
@@ -1022,8 +971,6 @@ TEST_P(CompressedTextureBCFormatTest, LargeImageHeightAndClampedCopyExtent) {
 
     // TODO(jiawei.shao@intel.com): find out why this test fails on Windows Intel OpenGL drivers.
     DAWN_SKIP_TEST_IF(IsIntel() && IsOpenGL() && IsWindows());
-
-    DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
