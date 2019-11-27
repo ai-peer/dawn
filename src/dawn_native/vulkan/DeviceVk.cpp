@@ -403,8 +403,9 @@ namespace dawn_native { namespace vulkan {
 
         // Find a universal queue family
         {
+            // Note that GRAPHICS and COMPUTE imply TRANSFER so we don't need to check for it.
             constexpr uint32_t kUniversalFlags =
-                VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT | VK_QUEUE_TRANSFER_BIT;
+                VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT;
             int universalQueueFamily = -1;
             for (unsigned int i = 0; i < mDeviceInfo.queueFamilies.size(); ++i) {
                 if ((mDeviceInfo.queueFamilies[i].queueFlags & kUniversalFlags) ==
