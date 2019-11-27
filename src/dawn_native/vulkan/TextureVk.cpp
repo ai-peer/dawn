@@ -285,7 +285,7 @@ namespace dawn_native { namespace vulkan {
             case wgpu::TextureFormat::Depth24Plus:
                 return VK_FORMAT_D32_SFLOAT;
             case wgpu::TextureFormat::Depth24PlusStencil8:
-                return VK_FORMAT_D32_SFLOAT_S8_UINT;
+                return VK_FORMAT_D24_UNORM_S8_UINT;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
                 return VK_FORMAT_BC1_RGBA_UNORM_BLOCK;
@@ -387,6 +387,7 @@ namespace dawn_native { namespace vulkan {
 
         VkPhysicalDevice physicalDevice = ToBackend(device->GetAdapter())->GetPhysicalDevice();
         VkImageFormatProperties properties;
+
         if (device->fn.GetPhysicalDeviceImageFormatProperties(
                 physicalDevice, imageCreateInfo.format, imageCreateInfo.imageType,
                 imageCreateInfo.tiling, imageCreateInfo.usage, imageCreateInfo.flags,
