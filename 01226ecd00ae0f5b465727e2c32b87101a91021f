@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4ae08153_7f7df5ff",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-28T01:19:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8de417ce_b4e782c1",
+      "range": {
+        "startLine": 365,
+        "startChar": 17,
+        "endLine": 365,
+        "endChar": 29
+      },
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ffa2411_08145888",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 5
@@ -78,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "de2da33f_143a964b",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-28T01:19:14Z",
+      "side": 1,
+      "message": "OK. The tests of GPU memory sync tests for buffer is done after this patch. I will implement readonly storage buffer on backend: D3D12 and Metal at first, then Vulkan and OpenGL.\n\nAnd I can refine this test if needed when those patches are under reivew.",
+      "parentUuid": "6aa745b0_e0d0248a",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f01f8e97_dea67620",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 5
@@ -95,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "4ea2221e_248d8249",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-28T01:19:14Z",
+      "side": 1,
+      "message": "Done.\n\n\u0027offset\u0027 is 0 by default in JS, just like \u0027size\u0027. I also made that change.",
+      "parentUuid": "f01f8e97_dea67620",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46f90579_0026b050",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 5
@@ -109,6 +169,24 @@
       "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "725baedc_6cbbd847",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-28T01:19:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "46f90579_0026b050",
+      "revId": "01226ecd00ae0f5b465727e2c32b87101a91021f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
