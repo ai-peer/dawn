@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a38a9e30_f9f3bc20",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-28T15:10:08Z",
+      "side": 1,
+      "message": "nit: zeros, no caps.",
+      "range": {
+        "startLine": 462,
+        "startChar": 29,
+        "endLine": 462,
+        "endChar": 34
+      },
+      "revId": "826ed310ab4f7672ff5dc228520d42b0baf8b7d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
