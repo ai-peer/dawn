@@ -22,6 +22,30 @@
       "revId": "826ed310ab4f7672ff5dc228520d42b0baf8b7d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7be0d149_db465c86",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-11-28T18:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a38a9e30_f9f3bc20",
+      "range": {
+        "startLine": 462,
+        "startChar": 29,
+        "endLine": 462,
+        "endChar": 34
+      },
+      "revId": "826ed310ab4f7672ff5dc228520d42b0baf8b7d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
