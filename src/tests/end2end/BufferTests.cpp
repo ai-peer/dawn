@@ -157,7 +157,7 @@ TEST_P(BufferMapWriteTests, SmallWriteAtZero) {
     memcpy(mappedData, &myData, sizeof(myData));
     UnmapBuffer(buffer);
 
-    EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
+    EXPECT_BUFFER_U32_EQ(myData, buffer, 42);
 }
 
 // Map, write and unmap twice. Test that both of these two iterations work.
