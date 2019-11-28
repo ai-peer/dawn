@@ -24,6 +24,8 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include "spvc/spvc.hpp"
+
 #include <array>
 #include <bitset>
 #include <vector>
@@ -78,6 +80,18 @@ namespace dawn_native {
         struct EqualityFunc {
             bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
         };
+
+        shaderc_spvc::Context* GetSpvcContext() {
+            return &mSpvcContext;
+        }
+
+        shaderc_spvc::CompilationResult* GetSpvcResult() {
+            return &mSpvcResult;
+        }
+
+      protected:
+        shaderc_spvc::Context mSpvcContext;
+        shaderc_spvc::CompilationResult mSpvcResult;
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
