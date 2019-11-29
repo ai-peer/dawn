@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a1ed72df_fb21209b",
+        "filename": "BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Propegating the include dirs. When left in deps #include for spvc/ are not resolved correctly.",
+      "parentUuid": "84a2b787_f474b157",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90db9c0c_4df2bb24",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b52597b_d30b594d",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90db9c0c_4df2bb24",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "adddda0b_6a1bad28",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a00ddb94_6578ab9b",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cfbc4823_a212e3bf",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 9
@@ -67,6 +121,24 @@
       "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56278732_58121cfb",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "This was an artifact of how the API used to work, the compiler used to be in the Result object instead of the Context... I agree this can go away now.",
+      "parentUuid": "cfbc4823_a212e3bf",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "fd1148ef_8ed3a919",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Currently there is only an compilation result status type in the API, it is actually shared with shaderc. This part of the API definately needs so care. I have filed an issue against the library, https://github.com/google/shaderc/issues/916.",
+      "parentUuid": "2b017444_057f6dac",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa237592_439555d9",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 9
@@ -101,6 +191,24 @@
       "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8f021db_8f84c795",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa237592_439555d9",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "7e594718_f50c9f35",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2edabd71_84809bb9",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b61045eb_ea729892",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 9
@@ -135,6 +261,24 @@
       "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e60fb0dc_1bd4075a",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Thanks. Done",
+      "parentUuid": "b61045eb_ea729892",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "55d97fc3_9a9ca657",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adfc398c_ca8221ed",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ea09591_5ee8b3da",
         "filename": "src/dawn_native/null/DeviceNull.cpp",
         "patchSetId": 9
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "31d53986_1e740753",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea09591_5ee8b3da",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1f41a2d_ba42b0af",
         "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 9
@@ -186,6 +366,24 @@
       "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ed9dad9_97c9e91d",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-11-29T16:49:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1f41a2d_ba42b0af",
+      "revId": "eaa8c58ed3d9dc23c4c2c5cf75fe428b1917f91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
