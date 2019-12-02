@@ -52,6 +52,7 @@ typedef WGPUBufferMapReadCallback DawnBufferMapReadCallback;
 typedef WGPUBufferMapWriteCallback DawnBufferMapWriteCallback;
 typedef WGPUFenceOnCompletionCallback DawnFenceOnCompletionCallback;
 typedef WGPUErrorCallback DawnErrorCallback;
+typedef WGPUDeviceLostCallback DawnDeviceLostCallback;
 
 typedef WGPUProc DawnProc;
 
