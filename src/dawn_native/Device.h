@@ -29,9 +29,6 @@
 #include <memory>
 
 namespace dawn_native {
-
-    using ErrorCallback = void (*)(const char* errorMessage, void* userData);
-
     class AdapterBase;
     class AttachmentState;
     class AttachmentStateBlueprint;
@@ -158,6 +155,7 @@ namespace dawn_native {
         TextureBase* CreateTexture(const TextureDescriptor* descriptor);
         TextureViewBase* CreateTextureView(TextureBase* texture,
                                            const TextureViewDescriptor* descriptor);
+        void SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
 
         void InjectError(wgpu::ErrorType type, const char* message);
 
@@ -166,6 +164,9 @@ namespace dawn_native {
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
         void PushErrorScope(wgpu::ErrorFilter filter);
         bool PopErrorScope(wgpu::ErrorCallback callback, void* userdata);
+
+        MaybeError ValidateIsAlive() const;
+
         ErrorScope* GetCurrentErrorScope();
 
         void Reference();
@@ -179,7 +180,7 @@ namespace dawn_native {
                                                    uint64_t destinationOffset,
                                                    uint64_t size) = 0;
 
-        DynamicUploader* GetDynamicUploader() const;
+        ResultOrError<DynamicUploader*> GetDynamicUploader() const;
 
         std::vector<const char*> GetEnabledExtensions() const;
         std::vector<const char*> GetTogglesUsed() const;
@@ -188,12 +189,15 @@ namespace dawn_native {
         bool IsValidationEnabled() const;
         size_t GetLazyClearCountForTesting();
         void IncrementLazyClearCountForTesting();
+        void LoseForTesting();
 
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
+        enum class LossStatus { Alive, BeingLost, AlreadyLost };
+        LossStatus mLossStatus = LossStatus::Alive;
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -250,6 +254,12 @@ namespace dawn_native {
         void SetDefaultToggles();
 
         void ConsumeError(ErrorData* error);
+        void HandleLoss(const char* message);
+        virtual void Destroy() = 0;
+        virtual void WaitForIdleForDestructionImpl() = 0;
+
+        wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
+        void* mDeviceLostUserdata;
 
         AdapterBase* mAdapter = nullptr;
 

@@ -256,7 +256,8 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::SetSubDataImpl(uint32_t start, uint32_t count, const void* data) {
-        DynamicUploader* uploader = GetDevice()->GetDynamicUploader();
+        DynamicUploader* uploader;
+        DAWN_TRY_ASSIGN(uploader, GetDevice()->GetDynamicUploader());
 
         UploadHandle uploadHandle;
         DAWN_TRY_ASSIGN(uploadHandle,
@@ -315,7 +316,8 @@ namespace dawn_native {
         ASSERT(mStagingBuffer);
         DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.get(), 0, this, 0, GetSize()));
 
-        DynamicUploader* uploader = GetDevice()->GetDynamicUploader();
+        DynamicUploader* uploader;
+        DAWN_TRY_ASSIGN(uploader, GetDevice()->GetDynamicUploader());
         uploader->ReleaseStagingBuffer(std::move(mStagingBuffer));
 
         return {};
