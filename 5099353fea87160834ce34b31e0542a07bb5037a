@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c999c057_f8bf7eb5",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-03T18:09:43Z",
+      "side": 1,
+      "message": "We call InitializeForHlsl in ShaderModule::Initialize as well. Is it necessary to reinitialize the context?\n\nOr is InitializeForHlsl a very light function which only points to the SPIR-V data and sets options?",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 82
+      },
+      "revId": "5099353fea87160834ce34b31e0542a07bb5037a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90620ca1_ca060b3f",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-03T18:09:43Z",
+      "side": 1,
+      "message": "this is the only usage of GetSpvcContext. If there are no other planned usages of GetSpvcContext, we could remove the getter and stack-allocate the SpvcContext here?",
+      "range": {
+        "startLine": 134,
+        "startChar": 49,
+        "endLine": 134,
+        "endChar": 63
+      },
+      "revId": "5099353fea87160834ce34b31e0542a07bb5037a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
