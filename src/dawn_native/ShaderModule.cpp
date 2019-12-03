@@ -317,6 +317,10 @@ namespace dawn_native {
         return true;
     }
 
+    shaderc_spvc::Context* ShaderModuleBase::GetSpvcContext() {
+        return &mSpvcContext;
+    }
+
     bool ShaderModuleBase::IsCompatibleWithBindGroupLayout(
         size_t group,
         const BindGroupLayoutBase* layout) const {
