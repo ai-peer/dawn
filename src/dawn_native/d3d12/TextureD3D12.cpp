@@ -619,7 +619,8 @@ namespace dawn_native { namespace d3d12 {
                 return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
             }
             uint32_t bufferSize = static_cast<uint32_t>(bufferSize64);
-            DynamicUploader* uploader = device->GetDynamicUploader();
+            DynamicUploader* uploader;
+            DAWN_TRY_ASSIGN(uploader, device->GetDynamicUploader());
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
                             uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
