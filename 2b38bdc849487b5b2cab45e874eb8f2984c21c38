@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "845f2aa0_a54477f6",
+        "filename": "src/common/Log.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-03T18:35:19Z",
+      "side": 1,
+      "message": "typo: additionally",
+      "range": {
+        "startLine": 38,
+        "startChar": 3,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "2b38bdc849487b5b2cab45e874eb8f2984c21c38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
