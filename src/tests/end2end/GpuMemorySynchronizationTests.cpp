@@ -252,7 +252,7 @@ class StorageToUniformSyncTests : public DawnTest {
     void CreateBuffer() {
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.size = sizeof(float);
-        bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::Uniform;
+        bufferDesc.usage = wgpu::BufferUsage::Storage;
         mBuffer = device.CreateBuffer(&bufferDesc);
     }
 
@@ -297,7 +297,7 @@ class StorageToUniformSyncTests : public DawnTest {
         wgpu::ShaderModule fsModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform Contents{
+        layout (set = 0, binding = 0) readonly buffer Contents{
             float color;
         };
         layout(location = 0) out vec4 fragColor;
@@ -307,7 +307,7 @@ class StorageToUniformSyncTests : public DawnTest {
 
         wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
             device, {
-                        {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
+                        {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer},
                     });
         wgpu::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
@@ -443,9 +443,6 @@ TEST_P(StorageToUniformSyncTests, ReadAfterWriteWithDifferentQueueSubmits) {
 }
 
 DAWN_INSTANTIATE_TEST(StorageToUniformSyncTests,
-                      D3D12Backend,
-                      MetalBackend,
-                      OpenGLBackend,
                       VulkanBackend);
 
 constexpr int kRTSize = 8;
@@ -523,11 +520,9 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
         sizeof(int) * 4 * 2,
         wgpu::BufferUsage::Index | wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst);
     wgpu::Buffer uniformBuffer0 =
-        CreateZeroedBuffer(sizeof(float), wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage |
-                                              wgpu::BufferUsage::CopyDst);
+        CreateZeroedBuffer(sizeof(float), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst);
     wgpu::Buffer uniformBuffer1 =
-        CreateZeroedBuffer(sizeof(float), wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage |
-                                              wgpu::BufferUsage::CopyDst);
+        CreateZeroedBuffer(sizeof(float), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst);
     wgpu::BindGroup bindGroup0 = utils::MakeBindGroup(
         device, bgl0,
         {{0, vertexBuffer}, {1, indexBuffer}, {2, uniformBuffer0}, {3, uniformBuffer1}});
@@ -552,11 +547,11 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform uniformBuffer0 {
+        layout (set = 0, binding = 0) readonly buffer uniformBuffer0 {
             float color0;
         };
 
-        layout (set = 0, binding = 1) uniform uniformBuffer1 {
+        layout (set = 0, binding = 1) readonly buffer uniformBuffer1 {
             float color1;
         };
 
@@ -567,8 +562,8 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
 
     wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
-                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
+                    {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer},
+                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer},
                 });
     wgpu::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl1);
 
@@ -664,8 +659,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
     };
     wgpu::Buffer buffer = CreateZeroedBuffer(
         sizeof(Data), wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Index |
-                          wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage |
-                          wgpu::BufferUsage::CopyDst);
+                          wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst);
     wgpu::BindGroup bindGroup0 = utils::MakeBindGroup(device, bgl0, {{0, buffer, 0, sizeof(Data)}});
 
     // Write various data (vertices, indices, and uniforms) into the buffer in compute pass.
@@ -688,11 +682,11 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform uniformBuffer0 {
+        layout (set = 0, binding = 0) readonly buffer uniformBuffer0 {
             float color0;
         };
 
-        layout (set = 0, binding = 1) uniform uniformBuffer1 {
+        layout (set = 0, binding = 1) readonly buffer uniformBuffer1 {
             float color1;
         };
 
@@ -703,8 +697,8 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
 
     wgpu::BindGroupLayout bgl1 = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
-                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
+                    {0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer},
+                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer},
                 });
     wgpu::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl1);
 
@@ -749,7 +743,4 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
 }
 
 DAWN_INSTANTIATE_TEST(MultipleWriteThenMultipleReadTests,
-                      D3D12Backend,
-                      MetalBackend,
-                      OpenGLBackend,
                       VulkanBackend);

@@ -79,6 +79,13 @@ protected:
                     } buffer)"
                      << i << ";\n";
                   break;
+              case wgpu::BindingType::ReadonlyStorageBuffer:
+                  fs << "layout (std140, set = " << i
+                     << ", binding = 0) readonly buffer UniformBuffer" << i << R"( {
+                        vec4 color;
+                    } buffer)"
+                     << i << ";\n";
+                  break;
               default:
                   UNREACHABLE();
           }
@@ -126,13 +133,13 @@ protected:
 TEST_P(BindGroupTests, ReusedBindGroupSingleSubmit) {
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Compute, wgpu::BindingType::UniformBuffer},
+                    {0, wgpu::ShaderStage::Compute, wgpu::BindingType::ReadonlyStorageBuffer},
                 });
     wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
 
     const char* shader = R"(
         #version 450
-        layout(std140, set = 0, binding = 0) uniform Contents {
+        layout(std140, set = 0, binding = 0) readonly buffer Contents {
             float f;
         } contents;
         void main() {
@@ -150,7 +157,7 @@ TEST_P(BindGroupTests, ReusedBindGroupSingleSubmit) {
 
     wgpu::BufferDescriptor bufferDesc;
     bufferDesc.size = sizeof(float);
-    bufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+    bufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Storage;
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDesc);
     wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, buffer, 0, sizeof(float)}});
 
@@ -169,7 +176,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform vertexUniformBuffer {
+        layout (std140, set = 0, binding = 0) readonly buffer vertexUniformBuffer {
             mat2 transform;
         };
         void main() {
@@ -180,7 +187,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 1) uniform fragmentUniformBuffer {
+        layout (std140, set = 0, binding = 1) readonly buffer fragmentUniformBuffer {
             vec4 color;
         };
         layout(location = 0) out vec4 fragColor;
@@ -190,8 +197,8 @@ TEST_P(BindGroupTests, ReusedUBO) {
 
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
-                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
+                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::ReadonlyStorageBuffer},
+                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer},
                 });
     wgpu::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, &bgl);
 
@@ -216,7 +223,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
         { 0.f, 1.f, 0.f, 1.f },
     };
     wgpu::Buffer buffer =
-        utils::CreateBufferFromData(device, &data, sizeof(data), wgpu::BufferUsage::Uniform);
+        utils::CreateBufferFromData(device, &data, sizeof(data), wgpu::BufferUsage::Storage);
     wgpu::BindGroup bindGroup = utils::MakeBindGroup(
         device, bgl,
         {{0, buffer, 0, sizeof(Data::transform)}, {1, buffer, 256, sizeof(Data::color)}});
@@ -249,7 +256,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform vertexUniformBuffer {
+        layout (std140, set = 0, binding = 0) readonly buffer vertexUniformBuffer {
             mat2 transform;
         };
         void main() {
@@ -269,7 +276,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
 
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
+                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::ReadonlyStorageBuffer},
                     {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::Sampler},
                     {2, wgpu::ShaderStage::Fragment, wgpu::BindingType::SampledTexture},
                 });
@@ -286,7 +293,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     constexpr float dummy = 0.0f;
     constexpr float transform[] = { 1.f, 0.f, dummy, dummy, 0.f, 1.f, dummy, dummy };
     wgpu::Buffer buffer = utils::CreateBufferFromData(device, &transform, sizeof(transform),
-                                                      wgpu::BufferUsage::Uniform);
+                                                      wgpu::BufferUsage::Storage);
 
     wgpu::SamplerDescriptor samplerDescriptor;
     samplerDescriptor.minFilter = wgpu::FilterMode::Nearest;
@@ -363,10 +370,10 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform vertexUniformBuffer1 {
+        layout (std140, set = 0, binding = 0) readonly buffer vertexUniformBuffer1 {
             mat2 transform1;
         };
-        layout (set = 1, binding = 0) uniform vertexUniformBuffer2 {
+        layout (std140, set = 1, binding = 0) readonly buffer vertexUniformBuffer2 {
             mat2 transform2;
         };
         void main() {
@@ -377,10 +384,10 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 1) uniform fragmentUniformBuffer1 {
+        layout (set = 0, binding = 1) readonly buffer fragmentUniformBuffer1 {
             vec4 color1;
         };
-        layout (set = 1, binding = 1) uniform fragmentUniformBuffer2 {
+        layout (set = 1, binding = 1) readonly buffer fragmentUniformBuffer2 {
             vec4 color2;
         };
         layout(location = 0) out vec4 fragColor;
@@ -390,8 +397,8 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
 
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
         device, {
-                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::UniformBuffer},
-                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer},
+                    {0, wgpu::ShaderStage::Vertex, wgpu::BindingType::ReadonlyStorageBuffer},
+                    {1, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer},
                 });
 
     wgpu::PipelineLayout pipelineLayout = MakeBasicPipelineLayout(device, {layout, layout});
@@ -423,7 +430,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
 
     for (int i = 0; i < 2; i++) {
         wgpu::Buffer buffer =
-            utils::CreateBufferFromData(device, &data[i], sizeof(Data), wgpu::BufferUsage::Uniform);
+            utils::CreateBufferFromData(device, &data[i], sizeof(Data), wgpu::BufferUsage::Storage);
         buffers.push_back(buffer);
         bindGroups.push_back(utils::MakeBindGroup(device, layout,
                                                   {{0, buffers[i], 0, sizeof(Data::transform)},
@@ -456,13 +463,13 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets) {
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer}});
+        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer}});
 
-    wgpu::RenderPipeline pipeline =
-        MakeTestPipeline(renderPass,
-                         {wgpu::BindingType::UniformBuffer, wgpu::BindingType::UniformBuffer,
-                          wgpu::BindingType::UniformBuffer, wgpu::BindingType::UniformBuffer},
-                         {layout, layout, layout, layout});
+    wgpu::RenderPipeline pipeline = MakeTestPipeline(
+        renderPass,
+        {wgpu::BindingType::ReadonlyStorageBuffer, wgpu::BindingType::ReadonlyStorageBuffer,
+         wgpu::BindingType::ReadonlyStorageBuffer, wgpu::BindingType::ReadonlyStorageBuffer},
+        {layout, layout, layout, layout});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -472,10 +479,10 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets) {
     // The color will be added 8 times, so the value should be 0.125. But we choose 0.126
     // because of precision issues on some devices (for example NVIDIA bots).
     std::array<float, 4> color = {0.126, 0, 0, 0.126};
-    wgpu::Buffer uniformBuffer =
-        utils::CreateBufferFromData(device, &color, sizeof(color), wgpu::BufferUsage::Uniform);
+    wgpu::Buffer roStorageBuffer =
+        utils::CreateBufferFromData(device, &color, sizeof(color), wgpu::BufferUsage::Storage);
     wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, layout, {{0, uniformBuffer, 0, sizeof(color)}});
+        utils::MakeBindGroup(device, layout, {{0, roStorageBuffer, 0, sizeof(color)}});
 
     pass.SetBindGroup(0, bindGroup);
     pass.SetBindGroup(1, bindGroup);
@@ -505,11 +512,11 @@ TEST_P(BindGroupTests, SetBindGroupBeforePipeline) {
 
     // Create a bind group layout which uses a single uniform buffer.
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer}});
+        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer}});
 
     // Create a pipeline that uses the uniform bind group layout.
     wgpu::RenderPipeline pipeline =
-        MakeTestPipeline(renderPass, {wgpu::BindingType::UniformBuffer}, {layout});
+        MakeTestPipeline(renderPass, {wgpu::BindingType::ReadonlyStorageBuffer}, {layout});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -517,7 +524,7 @@ TEST_P(BindGroupTests, SetBindGroupBeforePipeline) {
     // Create a bind group with a uniform buffer and fill it with RGBAunorm(1, 0, 0, 1).
     std::array<float, 4> color = {1, 0, 0, 1};
     wgpu::Buffer uniformBuffer =
-        utils::CreateBufferFromData(device, &color, sizeof(color), wgpu::BufferUsage::Uniform);
+        utils::CreateBufferFromData(device, &color, sizeof(color), wgpu::BufferUsage::Storage);
     wgpu::BindGroup bindGroup =
         utils::MakeBindGroup(device, layout, {{0, uniformBuffer, 0, sizeof(color)}});
 
@@ -547,11 +554,12 @@ TEST_P(BindGroupTests, SetDynamicBindGroupBeforePipeline) {
 
     // Create a bind group layout which uses a single dynamic uniform buffer.
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer, true}});
+        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer, true}});
 
     // Create a pipeline that uses the dynamic uniform bind group layout for two bind groups.
     wgpu::RenderPipeline pipeline = MakeTestPipeline(
-        renderPass, {wgpu::BindingType::UniformBuffer, wgpu::BindingType::UniformBuffer},
+        renderPass,
+        {wgpu::BindingType::ReadonlyStorageBuffer, wgpu::BindingType::ReadonlyStorageBuffer},
         {layout, layout});
 
     // Prepare data RGBAunorm(1, 0, 0, 0.5) and RGBAunorm(0, 1, 0, 0.5). They will be added in the
@@ -568,7 +576,7 @@ TEST_P(BindGroupTests, SetDynamicBindGroupBeforePipeline) {
     // Create a bind group and uniform buffer with the color data. It will be bound at the offset
     // to each color.
     wgpu::Buffer uniformBuffer =
-        utils::CreateBufferFromData(device, data.data(), data.size(), wgpu::BufferUsage::Uniform);
+        utils::CreateBufferFromData(device, data.data(), data.size(), wgpu::BufferUsage::Storage);
     wgpu::BindGroup bindGroup =
         utils::MakeBindGroup(device, layout, {{0, uniformBuffer, 0, 4 * sizeof(float)}});
 
@@ -607,8 +615,8 @@ TEST_P(BindGroupTests, BindGroupsPersistAfterPipelineChange) {
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     // Create a bind group layout which uses a single dynamic uniform buffer.
-    wgpu::BindGroupLayout uniformLayout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer, true}});
+    wgpu::BindGroupLayout roStorageLayout = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer, true}});
 
     // Create a bind group layout which uses a single dynamic storage buffer.
     wgpu::BindGroupLayout storageLayout = utils::MakeBindGroupLayout(
@@ -616,13 +624,14 @@ TEST_P(BindGroupTests, BindGroupsPersistAfterPipelineChange) {
 
     // Create a pipeline which uses the uniform buffer and storage buffer bind groups.
     wgpu::RenderPipeline pipeline0 = MakeTestPipeline(
-        renderPass, {wgpu::BindingType::UniformBuffer, wgpu::BindingType::StorageBuffer},
-        {uniformLayout, storageLayout});
+        renderPass, {wgpu::BindingType::ReadonlyStorageBuffer, wgpu::BindingType::StorageBuffer},
+        {roStorageLayout, storageLayout});
 
     // Create a pipeline which uses the uniform buffer bind group twice.
     wgpu::RenderPipeline pipeline1 = MakeTestPipeline(
-        renderPass, {wgpu::BindingType::UniformBuffer, wgpu::BindingType::UniformBuffer},
-        {uniformLayout, uniformLayout});
+        renderPass,
+        {wgpu::BindingType::ReadonlyStorageBuffer, wgpu::BindingType::ReadonlyStorageBuffer},
+        {roStorageLayout, roStorageLayout});
 
     // Prepare data RGBAunorm(1, 0, 0, 0.5) and RGBAunorm(0, 1, 0, 0.5). They will be added in the
     // shader.
@@ -638,9 +647,9 @@ TEST_P(BindGroupTests, BindGroupsPersistAfterPipelineChange) {
     // Create a bind group and uniform buffer with the color data. It will be bound at the offset
     // to each color.
     wgpu::Buffer uniformBuffer =
-        utils::CreateBufferFromData(device, data.data(), data.size(), wgpu::BufferUsage::Uniform);
+        utils::CreateBufferFromData(device, data.data(), data.size(), wgpu::BufferUsage::Storage);
     wgpu::BindGroup bindGroup =
-        utils::MakeBindGroup(device, uniformLayout, {{0, uniformBuffer, 0, 4 * sizeof(float)}});
+        utils::MakeBindGroup(device, roStorageLayout, {{0, uniformBuffer, 0, 4 * sizeof(float)}});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -686,24 +695,24 @@ TEST_P(BindGroupTests, DrawThenChangePipelineAndBindGroup) {
 
     // Create a bind group layout which uses a single dynamic uniform buffer.
     wgpu::BindGroupLayout uniformLayout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::UniformBuffer, true}});
+        device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::ReadonlyStorageBuffer, true}});
 
     // Create a bind group layout which uses a single dynamic storage buffer.
     wgpu::BindGroupLayout storageLayout = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BindingType::StorageBuffer, true}});
 
     // Create a pipeline with pipeline layout (uniform, uniform, storage).
-    wgpu::RenderPipeline pipeline0 =
-        MakeTestPipeline(renderPass,
-                         {wgpu::BindingType::UniformBuffer, wgpu::BindingType::UniformBuffer,
-                          wgpu::BindingType::StorageBuffer},
-                         {uniformLayout, uniformLayout, storageLayout});
+    wgpu::RenderPipeline pipeline0 = MakeTestPipeline(
+        renderPass,
+        {wgpu::BindingType::ReadonlyStorageBuffer, wgpu::BindingType::ReadonlyStorageBuffer,
+         wgpu::BindingType::StorageBuffer},
+        {uniformLayout, uniformLayout, storageLayout});
 
     // Create a pipeline with pipeline layout (uniform, storage, storage).
     wgpu::RenderPipeline pipeline1 =
         MakeTestPipeline(renderPass,
-                         {wgpu::BindingType::UniformBuffer, wgpu::BindingType::StorageBuffer,
-                          wgpu::BindingType::StorageBuffer},
+                         {wgpu::BindingType::ReadonlyStorageBuffer,
+                          wgpu::BindingType::StorageBuffer, wgpu::BindingType::StorageBuffer},
                          {uniformLayout, storageLayout, storageLayout});
 
     // Prepare color data.
@@ -728,7 +737,7 @@ TEST_P(BindGroupTests, DrawThenChangePipelineAndBindGroup) {
 
     // Create a uniform and storage buffer bind groups to bind the color data.
     wgpu::Buffer uniformBuffer =
-        utils::CreateBufferFromData(device, data.data(), data.size(), wgpu::BufferUsage::Uniform);
+        utils::CreateBufferFromData(device, data.data(), data.size(), wgpu::BufferUsage::Storage);
 
     wgpu::Buffer storageBuffer =
         utils::CreateBufferFromData(device, data.data(), data.size(), wgpu::BufferUsage::Storage);
@@ -790,7 +799,7 @@ TEST_P(BindGroupTests, BindGroupLayoutVisibilityCanBeNone) {
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::BindGroupLayoutBinding binding = {0, wgpu::ShaderStage::None,
-                                            wgpu::BindingType::UniformBuffer};
+                                            wgpu::BindingType::ReadonlyStorageBuffer};
     wgpu::BindGroupLayoutDescriptor descriptor;
     descriptor.bindingCount = 1;
     descriptor.bindings = &binding;
@@ -800,7 +809,7 @@ TEST_P(BindGroupTests, BindGroupLayoutVisibilityCanBeNone) {
 
     std::array<float, 4> color = {1, 0, 0, 1};
     wgpu::Buffer uniformBuffer =
-        utils::CreateBufferFromData(device, &color, sizeof(color), wgpu::BufferUsage::Uniform);
+        utils::CreateBufferFromData(device, &color, sizeof(color), wgpu::BufferUsage::Storage);
     wgpu::BindGroup bindGroup =
         utils::MakeBindGroup(device, layout, {{0, uniformBuffer, 0, sizeof(color)}});
 
@@ -815,4 +824,4 @@ TEST_P(BindGroupTests, BindGroupLayoutVisibilityCanBeNone) {
     queue.Submit(1, &commands);
 }
 
-DAWN_INSTANTIATE_TEST(BindGroupTests, D3D12Backend, MetalBackend, OpenGLBackend, VulkanBackend);
+DAWN_INSTANTIATE_TEST(BindGroupTests, VulkanBackend);
