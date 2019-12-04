@@ -1,0 +1,311 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1edb4daf_e9646fc4",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "Comment that we still forward decide loss to the error scope so it can reject all of them.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f40c7793_af780f82",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2589fd66_e776d620",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "Please have comments that explain what these virtual calls mean and what the expect in term of lifetime. Or see [1] for a potential use of it.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c68c96ae_bd5c5d91",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "Here errors of WaitForIdleForDestruction can be ignored (and asserted they are only device loss) because device loss means we can proceed with the destruction.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bf08a6c_ba8b8d96",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "What should happen in these cases? Maybe Wait could return a MaybeError and that\u0027s consumed in LoseForTesting: if an error happens here we actually lost the device for realz and should proceed with Destroy() without trying to do the other calls.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50a15f4b_72109de3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "This tries to submit the pending command list. We should make sure we free the pending command list before this calls.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69cf04f5_6f27249e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "nit: This doesn\u0027t need to be Impl because the base class doesn\u0027t have a method called WaitForIdleForDesctruction.",
+      "range": {
+        "startLine": 131,
+        "startChar": 38,
+        "endLine": 131,
+        "endChar": 42
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "628dedae_d26a249e",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 30
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "nit: Here and in other backends explain that destroy() has already been called so we don\u0027t need to do anything else.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d92e5326_48ddf5e9",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 30
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "Why do we need this?",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da6f56e0_afa67bf8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 30
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "Maybe we could have Destroy ASSERT that LossStatus !\u003d AlreadyLost so we know we only do it once.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "842229e7_19fb43c7",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "nit: Why do we need this?",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "552bb59a_0c2604e6",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebbb5b0a_122071ac",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "All this should be in WaitIdle.",
+      "range": {
+        "startLine": 668,
+        "startChar": 1,
+        "endLine": 694,
+        "endChar": 9
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c9ca31c_93d88ced",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "Regular tests should probably fail when they hit a device loss so OnDeviceLost would call GTEST_FAIL(), print some things and return.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e45276c4_8eda3382",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "This can be removed because it\u0027s a noop.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 5
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9ebc6b1_ebb23db5",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "I don\u0027t think these tests are correct: first we don\u0027t need to check every single entrypoint here, only a couple interesting ones. Second passing nullptr is invalid and there is no guarantee that the pointers aren\u0027t dereferenced before device loss is checked (because that doesn\u0027t matter for JS, the pointers are always valid when they come from JS). Third what we should check for are the following after device.LoseForTesting (in different test cases):\n - check that the DeviceLossCallback, if set, is called. (you can use mocks like in the ErrorScopeValidationTests.cpp)\n - check that device loss cases all error scopes to resolve in a device loss.\n - check that all further error scopes resolve in a device loss\n - check that buffer mapping, createBufferMappedAsync and fence.OnCompletion (basically all callbacks) return status device loss after it.\n\nChecking that some object creation functions result in an error as well as some other entrypoints is good too, but what we should focus most on are the corner-cases and difficult interactions (I\u0027m sure the tests above will show some improvements that are needed.)",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85a2340c_41dfa8c6",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-04T16:32:56Z",
+      "side": 1,
+      "message": "This is too broad and will apply to all tests. Is it ever used? Can we have wire tests for loss?",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
