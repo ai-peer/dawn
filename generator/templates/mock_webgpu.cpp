@@ -60,6 +60,16 @@ void ProcTableAsClass::DeviceSetUncapturedErrorCallback(WGPUDevice self,
     OnDeviceSetUncapturedErrorCallback(self, callback, userdata);
 }
 
+void ProcTableAsClass::DeviceSetDeviceLostCallback(WGPUDevice self,
+                                                   WGPUDeviceLostCallback callback,
+                                                   void* userdata) {
+    auto object = reinterpret_cast<ProcTableAsClass::Object*>(self);
+    object->deviceLostCallback = callback;
+    object->userdata1 = userdata;
+
+    OnDeviceSetDeviceLostCallback(self, callback, userdata);
+}
+
 bool ProcTableAsClass::DevicePopErrorScope(WGPUDevice self,
                                            WGPUErrorCallback callback,
                                            void* userdata) {
@@ -114,6 +124,12 @@ void ProcTableAsClass::CallDeviceErrorCallback(WGPUDevice device,
     auto object = reinterpret_cast<ProcTableAsClass::Object*>(device);
     object->deviceErrorCallback(type, message, object->userdata1);
 }
+
+void ProcTableAsClass::CallDeviceLostCallback(WGPUDevice device, const char* message) {
+    auto object = reinterpret_cast<ProcTableAsClass::Object*>(device);
+    object->deviceLostCallback(message, object->userdata1);
+}
+
 void ProcTableAsClass::CallCreateBufferMappedCallback(WGPUDevice device,
                                                       WGPUBufferMapAsyncStatus status,
                                                       WGPUCreateBufferMappedResult result) {
