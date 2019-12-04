@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56000864_20cf0363",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-12-04T20:43:40Z",
+      "side": 1,
+      "message": "As I said when I wrote these two end2end tests, I would replace one of the uniform buffers by readonly storage buffer. Now it\u0027s the time to do it.",
+      "range": {
+        "startLine": 490,
+        "startChar": 52,
+        "endLine": 490,
+        "endChar": 67
+      },
+      "revId": "5ee6fd25afcf64b942083f76597e687c86c0d97f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

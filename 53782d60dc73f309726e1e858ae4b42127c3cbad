@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38f1386a_030199db",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-12-04T20:43:40Z",
+      "side": 0,
+      "message": "Temporarily remove these backend. Will add them back soon.",
+      "range": {
+        "startLine": 752,
+        "startChar": 22,
+        "endLine": 754,
+        "endChar": 36
+      },
+      "revId": "53782d60dc73f309726e1e858ae4b42127c3cbad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
