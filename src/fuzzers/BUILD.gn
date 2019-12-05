@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import("//build_overrides/build.gni")
+import("../../scripts/dawn_features.gni")
 import("../../scripts/dawn_overrides_with_defaults.gni")
 
 # We only have libfuzzer in Chromium builds but if we build fuzzer targets only
@@ -118,6 +119,42 @@ dawn_fuzzer_test("dawn_spirv_cross_msl_fast_fuzzer") {
   asan_options = [ "allow_user_segv_handler=1" ]
 }
 
+# This action requires libfuzzer which is only present when building with Chromium.
+# Also, only expose it on the Vulkan backend for consistency in generating the corpus.
+if (build_with_chromium && use_libfuzzer && dawn_enable_vulkan) {
+  action("generate_seed_corpus_from_tests") {
+    testonly = true
+    script = "${dawn_root}/scripts/generate_seed_corpus_from_tests.py"
+    deps = [
+      ":dawn_wire_server_and_frontend_fuzzer",
+      "${dawn_root}/:dawn_end2end_tests",
+    ]
+
+    _stamp_file = "${target_gen_dir}/generate_seed_corpus_from_tests.stamp"
+    _test_binary = "${root_out_dir}/dawn_end2end_tests"
+    _fuzzer_binary = "${root_out_dir}/dawn_wire_server_and_frontend_fuzzer"
+    _intermediate_output = "${target_gen_dir}/testcases"
+
+    args = [
+      "--test",
+      rebase_path(_test_binary),
+      "--fuzzer",
+      rebase_path(_fuzzer_binary),
+      "--intermediate_output",
+      rebase_path(_intermediate_output),
+      "--output",
+      rebase_path("testcases"),
+      "--test_args",
+      "--use-wire --gtest_filter=*/Vulkan",
+      "--stamp",
+      rebase_path(_stamp_file),
+    ]
+    outputs = [
+      _stamp_file,
+    ]
+  }
+}
+
 dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
   sources = [
     "DawnWireServerAndFrontendFuzzer.cpp",
@@ -130,6 +167,10 @@ dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
     "${dawn_root}/src/dawn:dawncpp",
     "${dawn_root}/src/dawn:libdawn_proc",
   ]
+
+  if (build_with_chromium) {
+    seed_corpus = "testcases"
+  }
 
   additional_configs = [ "${dawn_root}/src/common:dawn_internal" ]
 }
