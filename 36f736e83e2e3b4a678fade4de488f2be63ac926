@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4759bcb_79beaa9d",
+        "filename": "scripts/generate_seed_corpus_from_tests.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-05T00:56:58Z",
+      "side": 1,
+      "message": "whoops. forgot the remove this",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 107
+      },
+      "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
