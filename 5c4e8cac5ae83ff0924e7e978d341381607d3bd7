@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14cab97a_cdc034ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T17:02:37Z",
+      "side": 1,
+      "message": "Dawn is 4MB? That\u0027s HUGE :/",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89722e55_63bc5b6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T17:02:37Z",
+      "side": 1,
+      "message": "nit: BUG\u003d",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f951fbfd_98756223",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T17:02:37Z",
+      "side": 1,
+      "message": "maybe: everything in this if is rare and could be put in a helper function.",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01472e8a_7aac1b24",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T17:02:37Z",
+      "side": 1,
+      "message": "I suspect that making AlignPtr inlined will improve both perf and binary size.",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5ace04f_651585dd",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T17:02:37Z",
+      "side": 1,
+      "message": "Maybe we should have a DAWN_INLINE tag that we pepper in various places to hint the compiler?",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "273abf84_3b6ad27d",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T17:02:37Z",
+      "side": 1,
+      "message": "note sure: Everything below is rare and could be in a helper function to reduce the amount of header code.",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
