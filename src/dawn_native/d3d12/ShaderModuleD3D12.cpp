@@ -68,7 +68,7 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    const std::string ShaderModule::GetHLSLSource(PipelineLayout* layout) {
+    ResultOrError<const std::string> ShaderModule::GetHLSLSource(PipelineLayout* layout) {
         std::unique_ptr<spirv_cross::CompilerHLSL> compiler_impl;
         spirv_cross::CompilerHLSL* compiler;
         if (!GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
@@ -102,8 +102,13 @@ namespace dawn_native { namespace d3d12 {
                 if (bindingInfo.used) {
                     uint32_t bindingOffset = bindingOffsets[binding];
                     if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
-                        mSpvcContext.SetDecoration(bindingInfo.id, SHADERC_SPVC_DECORATION_BINDING,
-                                                   bindingOffset);
+                        if (mSpvcContext.SetDecoration(
+                                bindingInfo.id, SHADERC_SPVC_DECORATION_BINDING, bindingOffset) !=
+                            shaderc_spvc_status_success) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Unable to set decorating binding before generating HLSL shader w/ "
+                                "spvc");
+                        }
                         // TODO(rharrison): Check status & have some sort of meaningful error path
                     } else {
                         compiler->set_decoration(bindingInfo.id, spv::DecorationBinding,
@@ -114,8 +119,9 @@ namespace dawn_native { namespace d3d12 {
         }
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
             shaderc_spvc::CompilationResult result;
-            mSpvcContext.CompileShader(&result);
-            // TODO(rharrison): Check status & have some sort of meaningful error path
+            if (mSpvcContext.CompileShader(&result) != shaderc_spvc_status_success) {
+                return DAWN_VALIDATION_ERROR("Unable to generate HLSL shader w/ spvc");
+            }
             return result.GetStringOutput();
         } else {
             return compiler->compile();
