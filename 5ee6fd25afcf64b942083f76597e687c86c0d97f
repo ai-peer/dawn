@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "21abc749_d61812e6",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-12-05T06:38:18Z",
+      "side": 1,
+      "message": "(Not related to this CL) The return value of this function is only used in TransitionUsageNow(), should it be optimized?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 62
+      },
+      "revId": "5ee6fd25afcf64b942083f76597e687c86c0d97f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "56000864_20cf0363",
         "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
         "patchSetId": 3
