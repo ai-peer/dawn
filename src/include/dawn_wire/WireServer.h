@@ -33,6 +33,7 @@ namespace dawn_wire {
         const DawnProcTable* procs;
         CommandSerializer* serializer;
         server::MemoryTransferService* memoryTransferService = nullptr;
+        CommandHandler* commandHandlerLayer = nullptr;
     };
 
     class DAWN_WIRE_EXPORT WireServer : public CommandHandler {
@@ -47,6 +48,7 @@ namespace dawn_wire {
 
       private:
         std::unique_ptr<server::Server> mImpl;
+        CommandHandler* mCommandHandlerLayer;
     };
 
     namespace server {
