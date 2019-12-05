@@ -153,6 +153,10 @@ namespace dawn_native {
                     "The size of the texture is incompatible with the texture format");
             }
 
+            if (descriptor->arrayLayerCount > kMaxTexture2DArrayLayers) {
+                return DAWN_VALIDATION_ERROR("Texture 2D array layer count exceeded");
+            }
+
             return {};
         }
 
