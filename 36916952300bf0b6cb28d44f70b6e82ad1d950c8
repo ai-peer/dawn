@@ -22,6 +22,30 @@
       "revId": "36916952300bf0b6cb28d44f70b6e82ad1d950c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6673709e_afa25775",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T10:38:43Z",
+      "side": 1,
+      "message": "Updated all of them.",
+      "parentUuid": "68469f1c_b62d1cd8",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 67
+      },
+      "revId": "36916952300bf0b6cb28d44f70b6e82ad1d950c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
