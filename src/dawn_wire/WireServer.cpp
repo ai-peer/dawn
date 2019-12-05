@@ -21,7 +21,8 @@ namespace dawn_wire {
         : mImpl(new server::Server(descriptor.device,
                                    *descriptor.procs,
                                    descriptor.serializer,
-                                   descriptor.memoryTransferService)) {
+                                   descriptor.memoryTransferService)),
+          mCommandHandlerLayer(descriptor.commandHandlerLayer) {
     }
 
     WireServer::~WireServer() {
@@ -29,6 +30,9 @@ namespace dawn_wire {
     }
 
     const volatile char* WireServer::HandleCommands(const volatile char* commands, size_t size) {
+        if (mCommandHandlerLayer != nullptr) {
+            commands = mCommandHandlerLayer->HandleCommands(commands, size);
+        }
         return mImpl->HandleCommands(commands, size);
     }
 

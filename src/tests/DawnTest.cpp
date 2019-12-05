@@ -28,6 +28,7 @@
 #include "utils/WGPUHelpers.h"
 
 #include <algorithm>
+#include <fstream>
 #include <iomanip>
 #include <sstream>
 #include <unordered_map>
@@ -158,6 +159,23 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
             continue;
         }
 
+        constexpr const char kWireTraceDirArg[] = "--wire-trace-dir=";
+        if (strstr(argv[i], kWireTraceDirArg) == argv[i]) {
+            const char* wireTraceDir = argv[i] + strlen(kWireTraceDirArg);
+            if (wireTraceDir[0] != '\0') {
+#ifdef _WIN32
+                constexpr char kSep = '\\';
+#else
+                constexpr char kSep = '/';
+#endif
+                mWireTraceDir = wireTraceDir;
+                if (mWireTraceDir.back() != kSep) {
+                    mWireTraceDir += kSep;
+                }
+            }
+            continue;
+        }
+
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
             InfoLog() << "\n\nUsage: " << argv[0]
                       << " [GTEST_FLAGS...] [-w] [-d] [-c] [--adapter-vendor-id=x]\n"
@@ -262,6 +280,13 @@ uint32_t DawnTestEnvironment::GetVendorIdFilter() const {
     return mVendorIdFilter;
 }
 
+const char* DawnTestEnvironment::GetWireTraceDir() const {
+    if (mWireTraceDir.length() == 0) {
+        return nullptr;
+    }
+    return mWireTraceDir.c_str();
+}
+
 void DawnTestEnvironment::DiscoverOpenGLAdapter() {
 #ifdef DAWN_ENABLE_BACKEND_OPENGL
     if (!glfwInit()) {
@@ -282,6 +307,21 @@ void DawnTestEnvironment::DiscoverOpenGLAdapter() {
     mInstance->DiscoverAdapters(&adapterOptions);
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
 }
+
+class WireServerTraceLayer : public dawn_wire::CommandHandler {
+  public:
+    WireServerTraceLayer(const char* file) : dawn_wire::CommandHandler() {
+        mFile.open(file, std::ios_base::app | std::ios_base::binary | std::ios_base::trunc);
+    }
+
+    const volatile char* HandleCommands(const volatile char* commands, size_t size) override {
+        mFile.write(const_cast<const char*>(commands), size);
+        return commands;
+    }
+
+  private:
+    std::ofstream mFile;
+};
 
 // Implementation of DawnTest
 
@@ -491,6 +531,20 @@ void DawnTestBase::SetUp() {
         serverDesc.device = backendDevice;
         serverDesc.procs = &backendProcs;
         serverDesc.serializer = mS2cBuf.get();
+
+        if (gTestEnv->GetWireTraceDir() != nullptr) {
+            std::string file =
+                std::string(
+                    ::testing::UnitTest::GetInstance()->current_test_info()->test_suite_name()) +
+                "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
+            // Replace slashes in gtest names with underscores so everything is in one directory.
+            std::replace(file.begin(), file.end(), '/', '_');
+
+            file = gTestEnv->GetWireTraceDir() + file;
+
+            mWireServerTraceLayer.reset(new WireServerTraceLayer(file.c_str()));
+            serverDesc.commandHandlerLayer = mWireServerTraceLayer.get();
+        }
 
         mWireServer.reset(new dawn_wire::WireServer(serverDesc));
         mC2sBuf->SetHandler(mWireServer.get());
