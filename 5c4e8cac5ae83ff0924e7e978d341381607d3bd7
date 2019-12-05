@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ef1dab98_bd0aeb36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-05T23:58:08Z",
+      "side": 1,
+      "message": "I\u0027m also surprised that the size increase from this patch is 8kB. Are there really that many inline sites?",
+      "parentUuid": "14cab97a_cdc034ab",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89722e55_63bc5b6c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
@@ -64,6 +82,24 @@
       "writtenOn": "2019-12-05T17:02:37Z",
       "side": 1,
       "message": "I suspect that making AlignPtr inlined will improve both perf and binary size.",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed77ba42_ee92aba8",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-05T23:58:08Z",
+      "side": 1,
+      "message": "I wouldn\u0027t necessarily expect this to improve perf because the CPU is probably very good at optimizing this function call (since it\u0027s static).",
+      "parentUuid": "01472e8a_7aac1b24",
       "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
