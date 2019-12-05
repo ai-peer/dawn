@@ -22,6 +22,23 @@
       "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4994ce53_6d8c69b9",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-05T08:47:49Z",
+      "side": 1,
+      "message": "The problem with having this in GN files is that in Chromium libfuzzer builds, GN will also discover this action target and run the dawn_end2end_tests *during the build*, on bots that don\u0027t even have a GPU. The script idea to automate the process of updating the corpus is great but it shouldn\u0027t be integrated with the build.",
+      "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
