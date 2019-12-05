@@ -39,6 +39,24 @@
       "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbedbc2f_bdd79660",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-05T18:24:41Z",
+      "side": 1,
+      "message": "heh right...",
+      "parentUuid": "4994ce53_6d8c69b9",
+      "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
