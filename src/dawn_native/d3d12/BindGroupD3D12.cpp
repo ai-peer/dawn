@@ -27,10 +27,10 @@ namespace dawn_native { namespace d3d12 {
         : BindGroupBase(device, descriptor) {
     }
 
-    void BindGroup::AllocateDescriptors(const DescriptorHeapHandle& cbvUavSrvHeapStart,
-                                        uint32_t* cbvUavSrvHeapOffset,
-                                        const DescriptorHeapHandle& samplerHeapStart,
-                                        uint32_t* samplerHeapOffset) {
+    void BindGroup::CreateDescriptors(const DescriptorHeapHandle& cbvUavSrvHeapStart,
+                                      uint32_t* cbvUavSrvHeapOffset,
+                                      const DescriptorHeapHandle& samplerHeapStart,
+                                      uint32_t* samplerHeapOffset) {
         const auto* bgl = ToBackend(GetLayout());
         const auto& layout = bgl->GetBindingInfo();
 
@@ -122,13 +122,6 @@ namespace dawn_native { namespace d3d12 {
 
     uint32_t BindGroup::GetSamplerHeapOffset() const {
         return mSamplerHeapOffset;
-    }
-
-    bool BindGroup::TestAndSetCounted(uint64_t heapSerial, uint32_t indexInSubmit) {
-        bool isCounted = (mHeapSerial == heapSerial && mIndexInSubmit == indexInSubmit);
-        mHeapSerial = heapSerial;
-        mIndexInSubmit = indexInSubmit;
-        return isCounted;
     }
 
 }}  // namespace dawn_native::d3d12
