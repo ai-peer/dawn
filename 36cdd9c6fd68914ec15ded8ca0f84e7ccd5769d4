@@ -36,6 +36,29 @@
     },
     {
       "key": {
+        "uuid": "15bd2447_a0a8d32d",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-06T00:38:18Z",
+      "side": 1,
+      "message": "Please add a comment that describes the three enum states, in particular, the difference between \u0027BeingLost\u0027 and \u0027AlreadyLost\u0027",
+      "range": {
+        "startLine": 199,
+        "startChar": 39,
+        "endLine": 199,
+        "endChar": 49
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2589fd66_e776d620",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 30
@@ -292,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "4813d3d4_e11ba83e",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-06T00:38:18Z",
+      "side": 1,
+      "message": "I think having a test for every entrypoint is the right thing to do, especially since each one requires handling at the callsite.",
+      "parentUuid": "a9ebc6b1_ebb23db5",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85a2340c_41dfa8c6",
         "filename": "src/tests/unittests/wire/WireTest.cpp",
         "patchSetId": 30
@@ -303,6 +344,24 @@
       "writtenOn": "2019-12-04T16:32:56Z",
       "side": 1,
       "message": "This is too broad and will apply to all tests. Is it ever used? Can we have wire tests for loss?",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cf64a29_413a13fc",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-06T00:38:18Z",
+      "side": 1,
+      "message": "For all tests except those specifically testing context lost, don\u0027t we want the lost callback to fire zero times, instead of 1 time?",
+      "parentUuid": "85a2340c_41dfa8c6",
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
