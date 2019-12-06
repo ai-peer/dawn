@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "4466d3ce_a9881e68",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3ab6a031_bacb421f",
+      "range": {
+        "startLine": 114,
+        "startChar": 52,
+        "endLine": 114,
+        "endChar": 72
+      },
+      "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ba21f6f_3b7a9ad9",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 13
@@ -93,6 +117,30 @@
       "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a10f4efb_e2bfc99c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3ba21f6f_3b7a9ad9",
+      "range": {
+        "startLine": 121,
+        "startChar": 16,
+        "endLine": 123,
+        "endChar": 80
+      },
+      "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "42dbb4be_37c4f089",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba0866da_cfea986d",
+      "range": {
+        "startLine": 189,
+        "startChar": 34,
+        "endLine": 193,
+        "endChar": 58
+      },
+      "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "988ff149_2d2751e8",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 13
@@ -142,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "9acfba80_3be124b3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "988ff149_2d2751e8",
+      "range": {
+        "startLine": 195,
+        "startChar": 34,
+        "endLine": 195,
+        "endChar": 57
+      },
+      "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c2643aa_8887e2c7",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 13
@@ -162,6 +258,30 @@
       "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64f86afa_82904e66",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2643aa_8887e2c7",
+      "range": {
+        "startLine": 200,
+        "startChar": 16,
+        "endLine": 200,
+        "endChar": 34
+      },
+      "revId": "eca7c5f9faaaf4892147e95aca39e07dee01486e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

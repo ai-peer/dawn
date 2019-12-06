@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e1a99a6b_1b05a846",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95bad959_0975ab82",
+      "range": {
+        "startLine": 89,
+        "startChar": 40,
+        "endLine": 91,
+        "endChar": 45
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85b3e28c_ba93995b",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
@@ -609,6 +633,54 @@
       "side": 1,
       "message": "Yes, maybe not a new allocator -- just something scoped (not global) to track what we need \"resident\", and checks something like descriptorHeap-\u003eRemainingCount().\n\n1) Would probably happen in Apply(...) what do you mean by \"front-end\"? (we have so many layers that it\u0027s unclear which frontend is in context)\n3) Oh, is calling ID3D12Device::CopyDescriptors then SetDescriptorHeaps not sufficient?\n3a) Does it really matter when we call SetDescriptorHeaps so long as it is with the new heap?",
       "parentUuid": "fad73607_c91d21c9",
+      "range": {
+        "startLine": 194,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9112508_2f9261b0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40d484b1_1f574a44",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 65
+      },
+      "revId": "722766518346b551aa20d544d34ee26740110702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1c4854b_0a42e6c0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-06T00:35:43Z",
+      "side": 1,
+      "message": "1. Was thinking front-end \u003d\u003d command buffer at encode-time (vs record). However, looking at the latest rev, an extra pass seems OK.\n2. RT would be erroneously set to the wrong offset from the old heap (not allowed).\n3a. Likewise, can\u0027t set a root table with an invalid handle (order matters).",
+      "parentUuid": "06863ed1_525cea51",
       "range": {
         "startLine": 194,
         "startChar": 12,
