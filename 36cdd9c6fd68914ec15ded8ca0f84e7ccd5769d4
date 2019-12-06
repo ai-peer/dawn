@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "250f68fa_e2e9e406",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T11:12:56Z",
+      "side": 1,
+      "message": "Then we should validate in ValidateSetSubData before this call is done no?",
+      "parentUuid": "54651c43_a72cdaf2",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15bd2447_a0a8d32d",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 30
@@ -563,6 +581,24 @@
     },
     {
       "key": {
+        "uuid": "f3092c03_4ce3c06f",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T11:12:56Z",
+      "side": 1,
+      "message": "That should produce an OOM instead yes.",
+      "parentUuid": "a8b09963_d3519d5a",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e45276c4_8eda3382",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 30
@@ -639,6 +675,24 @@
       "side": 1,
       "message": "I think having a test for every entrypoint is the right thing to do, especially since each one requires handling at the callsite.",
       "parentUuid": "a9ebc6b1_ebb23db5",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f625ed4_7e445024",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T11:12:56Z",
+      "side": 1,
+      "message": "We agree, my point is that the interactions with other features are super important to test (more than any individual entrypoint by itself), and it isn\u0027t done here.",
+      "parentUuid": "4813d3d4_e11ba83e",
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

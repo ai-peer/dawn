@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d755c2a7_ecc11a0c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T11:12:56Z",
+      "side": 1,
+      "message": "This comment is misplaced.",
+      "revId": "6ac981fe45e4bedc57050f477b87da4175462d16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38423f36_cefe007e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T11:12:56Z",
+      "side": 1,
+      "message": "If there was an error, then we don\u0027t need to HandleError because ConsumedError will have already propagated the device loss.",
+      "revId": "6ac981fe45e4bedc57050f477b87da4175462d16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9015baf3_577d631f",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T11:12:56Z",
+      "side": 1,
+      "message": "I don\u0027t understand that part. Maybe the doc for this could be // this device has already been lost and all resources have already been freed. ?",
+      "range": {
+        "startLine": 202,
+        "startChar": 92,
+        "endLine": 203,
+        "endChar": 62
+      },
+      "revId": "6ac981fe45e4bedc57050f477b87da4175462d16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28f75bb5_38d7eb4c",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T11:12:56Z",
+      "side": 1,
+      "message": "This isn\u0027t clear, how about: \"For a real device loss, this function doesn\u0027t need to be called because the driver will have already closed all resources.\"\n\nAaaand I just realized that we have another corner case we didn\u0027t handle: we need to make the difference between the driver telling us the device is lost, and Dawn producing a device loss in its backends because something unexpected happened. Yay more iterations!",
+      "range": {
+        "startLine": 269,
+        "startChar": 80,
+        "endLine": 270,
+        "endChar": 42
+      },
+      "revId": "6ac981fe45e4bedc57050f477b87da4175462d16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
