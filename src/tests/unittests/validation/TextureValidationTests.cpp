@@ -172,6 +172,34 @@ TEST_F(TextureValidationTest, MipLevelCount) {
 
         device.CreateTexture(&descriptor);
     }
+
+    // Mip level exceeding kMaxTexture2DMipLevels not allowed
+    {
+        wgpu::TextureDescriptor descriptor = defaultDescriptor;
+        descriptor.size.width = 32768;
+        descriptor.size.height = 32768;
+        descriptor.mipLevelCount = 16u;
+
+        ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+    }
+}
+// Test the validation of array layer count
+TEST_F(TextureValidationTest, ArrayLayerCount) {
+    // Array layer count exceeding kMaxTexture2DArrayLayers is not allowed
+    wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
+    descriptor.arrayLayerCount = 257u;
+
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+}
+
+// Test the validation of texture size 
+TEST_F(TextureValidationTest, TextureSize) {
+    // Texture size exceeding kMaxTextureSize is not allowed
+    wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
+    descriptor.size.width = 16384u;
+    descriptor.size.height = 16384u;
+    
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
 }
 
 // Test that it is valid to destroy a texture
