@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bb576b8_16c3e78a",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T01:58:56Z",
+      "side": 0,
+      "message": "These were used so that we don\u0027t have to repopulate descriptors that have already been populated. ex:)\n\nsetBindGroup(0, bg0); \ndraw()  // populates descriptors for bg0\nsetBindGroup(0, bg1); \ndraw()  // populates descriptors for bg1\nsetBindGroup(0, bg0); \ndraw()  // ideally we can just point to the descriptors that have already been populated.\n\nMaybe we can cache the D3D12_GPU_DESCRIPTOR_HANDLEs here along with the ID3D12DescriptorHeap* (or a uint64_t heap serial)?\nThen in PopulateDescriptors(), if the heap is the same, we no-op\n\nThis also means in ApplyBindGroup, we can fetch the D3D12_GPU_DESCRIPTOR_HANDLE directly instead of passing in the DescriptorHeapHandle.",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "ce8bf128ec1327b28d933a15e055bda286f31231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

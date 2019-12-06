@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf1a20f8_d6a56a7e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T01:58:56Z",
+      "side": 1,
+      "message": "Did you run any of the perf benchmarks? Would be interesting to see how this affects things. Apply(..) is pretty hot code. But maybe allocating descriptors in this way is more efficient than the original prepass and still better.",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 80
+      },
+      "revId": "f607b4d54442f6e04b59bfbb4f97f88dae512fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b063f4d_80ad4c32",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T01:58:56Z",
+      "side": 1,
+      "message": "nit: You named the function CreateDescriptors -- I do like Populate though",
+      "range": {
+        "startLine": 235,
+        "startChar": 15,
+        "endLine": 235,
+        "endChar": 34
+      },
+      "revId": "f607b4d54442f6e04b59bfbb4f97f88dae512fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4914a97b_9c1ef8fa",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T01:58:56Z",
+      "side": 1,
+      "message": "A suggestion that would be logically equivalent but be slightly less code and enable some helpful ASSERTs:\n\nRemove this code here, and add a |bool allowReallocation| parameter to AllocateBindGroups.\n|allowReallocation| would be forwarded to AllocateGPUHeap.\n\nThen we can do:\n\nbool reapplyBindGroups \u003d false;\nDAWN_TRY_ASSIGN(reapplyBindGroups,\n                AllocateBindGroups(dirtyBindGroupsSize, ..., false));\nif (reapplyBindGroups) {\n  bool reallocatedAgain \u003d false;\n  DAWN_TRY_ASSIGN(reallocatedAgain,\n                  AllocateBindGroups(bindGroupLayoutsSize, ... true));\n  ASSERT(!reallocatedAgain);\n}",
+      "range": {
+        "startLine": 250,
+        "startChar": 12,
+        "endLine": 257,
+        "endChar": 0
+      },
+      "revId": "f607b4d54442f6e04b59bfbb4f97f88dae512fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
