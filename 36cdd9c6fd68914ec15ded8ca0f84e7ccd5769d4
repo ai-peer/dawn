@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9ecf61ee_1441e57d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1edb4daf_e9646fc4",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f40c7793_af780f82",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 30
@@ -30,6 +48,24 @@
       "writtenOn": "2019-12-04T16:32:56Z",
       "side": 1,
       "message": "Why is this needed?",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54651c43_a72cdaf2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "This is used in Buffer::SetSubDataImpl and it uses the device to get the dynamic uploader. if device is destroyed, and we try to get the dynamic uploader, it will fail. so we need to validate the device is still alive before returning the uploader.",
+      "parentUuid": "f40c7793_af780f82",
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "4c7ef744_5dab4b1a",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15bd2447_a0a8d32d",
+      "range": {
+        "startLine": 199,
+        "startChar": 39,
+        "endLine": 199,
+        "endChar": 49
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2589fd66_e776d620",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 30
@@ -73,6 +133,24 @@
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17a3028d_bfdc523a",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2589fd66_e776d620",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "c8b821f9_bce7363d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c68c96ae_bd5c5d91",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9bf08a6c_ba8b8d96",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 30
@@ -110,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "23294769_b5c65f31",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bf08a6c_ba8b8d96",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50a15f4b_72109de3",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 30
@@ -124,6 +238,24 @@
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acf065b2_e37a5ce9",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50a15f4b_72109de3",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -150,6 +282,30 @@
     },
     {
       "key": {
+        "uuid": "15fd309f_da043478",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69cf04f5_6f27249e",
+      "range": {
+        "startLine": 131,
+        "startChar": 38,
+        "endLine": 131,
+        "endChar": 42
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "628dedae_d26a249e",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 30
@@ -164,6 +320,24 @@
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afc89387_55ad65d9",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 30
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "628dedae_d26a249e",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -184,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "1ac53422_27bac0db",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 30
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "sorry this was moved to device base tick, forgot to remove from here.",
+      "parentUuid": "d92e5326_48ddf5e9",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da6f56e0_afa67bf8",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 30
@@ -198,6 +390,24 @@
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "258b3e2f_9f4f9731",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 30
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da6f56e0_afa67bf8",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -218,6 +428,24 @@
     },
     {
       "key": {
+        "uuid": "ba7f2521_dfd1b374",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "842229e7_19fb43c7",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "552bb59a_0c2604e6",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 30
@@ -232,6 +460,24 @@
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2575f58c_9fe39b10",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "552bb59a_0c2604e6",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -258,6 +504,30 @@
     },
     {
       "key": {
+        "uuid": "7f4f7a5c_fb13dd9a",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Yah, I had these in WaitIdle before and there was a try job failure, even though I didn\u0027t hit the fail locally. So I tried moving everything back to one function. I\u0027ll put it back in WaitIdle since I dont think I\u0027ve fixed all my tryjob failures yet anyways.",
+      "parentUuid": "ebbb5b0a_122071ac",
+      "range": {
+        "startLine": 668,
+        "startChar": 1,
+        "endLine": 694,
+        "endChar": 9
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c9ca31c_93d88ced",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 30
@@ -269,6 +539,24 @@
       "writtenOn": "2019-12-04T16:32:56Z",
       "side": 1,
       "message": "Regular tests should probably fail when they hit a device loss so OnDeviceLost would call GTEST_FAIL(), print some things and return.",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b09963_d3519d5a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "There is a test now (CreateBufferMappedTests.LargeBufferFails) that hits a device loss error, which would then fail the runs, is that a bug, is that unexpected? Theres another thread where we talked a little about this and austin said it should be a out of memory error rather than a device lost.",
+      "parentUuid": "4c9ca31c_93d88ced",
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -295,6 +583,30 @@
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c62de72f_85343686",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e45276c4_8eda3382",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 5
+      },
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -362,6 +674,24 @@
       "side": 1,
       "message": "For all tests except those specifically testing context lost, don\u0027t we want the lost callback to fire zero times, instead of 1 time?",
       "parentUuid": "85a2340c_41dfa8c6",
+      "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f6dd95_e742b1a1",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-06T01:53:42Z",
+      "side": 1,
+      "message": "should we not set the callback in src/dawn_wire/server/Server.cpp?",
+      "parentUuid": "8cf64a29_413a13fc",
       "revId": "36cdd9c6fd68914ec15ded8ca0f84e7ccd5769d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
