@@ -22,6 +22,30 @@
       "revId": "66e64cadfd3e5522db6bf709605c0bedcf0d0d48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20b59f7e_82104766",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T03:08:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be69ce6f_621ec57a",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 0
+      },
+      "revId": "66e64cadfd3e5522db6bf709605c0bedcf0d0d48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
