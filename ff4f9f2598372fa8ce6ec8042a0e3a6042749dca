@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ef35123_1c78fc64",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T10:45:09Z",
+      "side": 1,
+      "message": "note: It won\u0027t be possible to test this code path at the moment because any test for kMaxMipLevelCount will also run into issues where the texture isn\u0027t big enough (so it fails the cross validation of mip level and texture size), or the texture size is big enough but fails the kMaxTextureSize check.",
+      "revId": "ff4f9f2598372fa8ce6ec8042a0e3a6042749dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e0123f8_e726abdc",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T10:45:09Z",
+      "side": 1,
+      "message": "Please use the constants from Constants.h in test so we don\u0027t have to update magic numbers when we change them. Also we should have control cases so we tests on both side of the validation boundary. Also this applies to other tests.",
+      "revId": "ff4f9f2598372fa8ce6ec8042a0e3a6042749dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e502cebf_575726b9",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T10:45:09Z",
+      "side": 1,
+      "message": "nit: whitespace.",
+      "revId": "ff4f9f2598372fa8ce6ec8042a0e3a6042749dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e4727c8_c3bf6fd0",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T10:45:09Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ff4f9f2598372fa8ce6ec8042a0e3a6042749dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
