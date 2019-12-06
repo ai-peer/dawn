@@ -36,6 +36,7 @@ namespace dawn_native { namespace d3d12 {
                     mBindingOffsets[binding] = mDescriptorCounts[CBV]++;
                     break;
                 case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::ReadonlyStorageBuffer:
                     mBindingOffsets[binding] = mDescriptorCounts[UAV]++;
                     break;
                 case wgpu::BindingType::SampledTexture:
@@ -46,7 +47,6 @@ namespace dawn_native { namespace d3d12 {
                     break;
 
                 case wgpu::BindingType::StorageTexture:
-                case wgpu::BindingType::ReadonlyStorageBuffer:
                     UNREACHABLE();
                     break;
             }
@@ -101,12 +101,12 @@ namespace dawn_native { namespace d3d12 {
                 switch (groupInfo.types[binding]) {
                     case wgpu::BindingType::UniformBuffer:
                     case wgpu::BindingType::StorageBuffer:
+                    case wgpu::BindingType::ReadonlyStorageBuffer:
                         mBindingOffsets[binding] = baseRegister++;
                         break;
                     case wgpu::BindingType::SampledTexture:
                     case wgpu::BindingType::Sampler:
                     case wgpu::BindingType::StorageTexture:
-                    case wgpu::BindingType::ReadonlyStorageBuffer:
                         UNREACHABLE();
                         break;
                 }
@@ -118,6 +118,7 @@ namespace dawn_native { namespace d3d12 {
                     mBindingOffsets[binding] += descriptorOffsets[CBV];
                     break;
                 case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::ReadonlyStorageBuffer:
                     mBindingOffsets[binding] += descriptorOffsets[UAV];
                     break;
                 case wgpu::BindingType::SampledTexture:
@@ -128,7 +129,6 @@ namespace dawn_native { namespace d3d12 {
                     break;
 
                 case wgpu::BindingType::StorageTexture:
-                case wgpu::BindingType::ReadonlyStorageBuffer:
                     UNREACHABLE();
                     break;
 
