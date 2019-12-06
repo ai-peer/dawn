@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/ErrorData.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
@@ -53,27 +54,18 @@ namespace dawn_native { namespace metal {
     }
 
     Device::~Device() {
-        // Wait for all commands to be finished so we can free resources SubmitPendingCommandBuffer
-        // may not increment the pendingCommandSerial if there are no pending commands, so we can't
-        // store the pendingSerial before SubmitPendingCommandBuffer then wait for it to be passed.
-        // Instead we submit and wait for the serial before the next pendingCommandSerial.
-        SubmitPendingCommandBuffer();
-        while (GetCompletedCommandSerial() != mLastSubmittedSerial) {
-            usleep(100);
+        // If loss status is not alive, then device and its resources have already been destroyed
+        // and we shouldn't destroy again
+        if (mLossStatus != LossStatus::Alive) {
+            return;
         }
-        Tick();
-
-        [mPendingCommands release];
-        mPendingCommands = nil;
-
-        mMapTracker = nullptr;
-        mDynamicUploader = nullptr;
-
-        [mCommandQueue release];
-        mCommandQueue = nil;
-
-        [mMtlDevice release];
-        mMtlDevice = nil;
+        mLossStatus = LossStatus::BeingLost;
+        MaybeError err = WaitForIdleForDestruction();
+        if (err.IsError()) {
+            // Assert that errors are device lost so that we can continue with destruction
+            ASSERT(err.AcquireError()->GetType() == wgpu::ErrorType::DeviceLost);
+        }
+        Destroy();
     }
 
     void Device::InitTogglesFromDriver() {
@@ -289,6 +281,36 @@ namespace dawn_native { namespace metal {
     void Device::WaitForCommandsToBeScheduled() {
         SubmitPendingCommandBuffer();
         [mLastSubmittedCommands waitUntilScheduled];
+    }
+
+    void Device::Destroy() {
+        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+        [mPendingCommands release];
+        mPendingCommands = nil;
+
+        mMapTracker = nullptr;
+        mDynamicUploader = nullptr;
+
+        [mCommandQueue release];
+        mCommandQueue = nil;
+
+        [mMtlDevice release];
+        mMtlDevice = nil;
+
+        mLossStatus = LossStatus::AlreadyLost;
+    }
+
+    MaybeError Device::WaitForIdleForDestruction() {
+        // Wait for all commands to be finished so we can free resources SubmitPendingCommandBuffer
+        // may not increment the pendingCommandSerial if there are no pending commands, so we can't
+        // store the pendingSerial before SubmitPendingCommandBuffer then wait for it to be passed.
+        // Instead we submit and wait for the serial before the next pendingCommandSerial.
+        SubmitPendingCommandBuffer();
+        while (GetCompletedCommandSerial() != mLastSubmittedSerial) {
+            usleep(100);
+        }
+        Tick();
+        return {};
     }
 
 }}  // namespace dawn_native::metal

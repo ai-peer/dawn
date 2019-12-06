@@ -17,6 +17,7 @@
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/ErrorData.h"
 #include "dawn_native/Instance.h"
 
 #include <spirv_cross.hpp>
@@ -85,10 +86,18 @@ namespace dawn_native { namespace null {
     }
 
     Device::~Device() {
-        mDynamicUploader = nullptr;
-
-        mPendingOperations.clear();
-        ASSERT(mMemoryUsage == 0);
+        // If loss status is not alive, then device and its resources have already been destroyed
+        // and we shouldn't destroy again
+        if (mLossStatus != LossStatus::Alive) {
+            return;
+        }
+        mLossStatus = LossStatus::BeingLost;
+        MaybeError err = WaitForIdleForDestruction();
+        if (err.IsError()) {
+            // Assert that errors are device lost so that we can continue with destruction
+            ASSERT(err.AcquireError()->GetType() == wgpu::ErrorType::DeviceLost);
+        }
+        Destroy();
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -165,6 +174,19 @@ namespace dawn_native { namespace null {
             std::make_unique<StagingBuffer>(size, this);
         DAWN_TRY(stagingBuffer->Initialize());
         return std::move(stagingBuffer);
+    }
+
+    void Device::Destroy() {
+        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+        mDynamicUploader = nullptr;
+
+        mPendingOperations.clear();
+        ASSERT(mMemoryUsage == 0);
+        mLossStatus = LossStatus::AlreadyLost;
+    }
+
+    MaybeError Device::WaitForIdleForDestruction() {
+        return {};
     }
 
     MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,

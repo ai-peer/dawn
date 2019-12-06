@@ -29,9 +29,6 @@
 #include <memory>
 
 namespace dawn_native {
-
-    using ErrorCallback = void (*)(const char* errorMessage, void* userData);
-
     class AdapterBase;
     class AttachmentState;
     class AttachmentStateBlueprint;
@@ -158,6 +155,7 @@ namespace dawn_native {
         TextureBase* CreateTexture(const TextureDescriptor* descriptor);
         TextureViewBase* CreateTextureView(TextureBase* texture,
                                            const TextureViewDescriptor* descriptor);
+        void SetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
 
         void InjectError(wgpu::ErrorType type, const char* message);
 
@@ -166,6 +164,9 @@ namespace dawn_native {
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
         void PushErrorScope(wgpu::ErrorFilter filter);
         bool PopErrorScope(wgpu::ErrorCallback callback, void* userdata);
+
+        MaybeError ValidateIsAlive() const;
+
         ErrorScope* GetCurrentErrorScope();
 
         void Reference();
@@ -179,7 +180,7 @@ namespace dawn_native {
                                                    uint64_t destinationOffset,
                                                    uint64_t size) = 0;
 
-        DynamicUploader* GetDynamicUploader() const;
+        ResultOrError<DynamicUploader*> GetDynamicUploader() const;
 
         std::vector<const char*> GetEnabledExtensions() const;
         std::vector<const char*> GetTogglesUsed() const;
@@ -188,12 +189,20 @@ namespace dawn_native {
         bool IsValidationEnabled() const;
         size_t GetLazyClearCountForTesting();
         void IncrementLazyClearCountForTesting();
+        void LoseForTesting();
 
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
+        // LossStatus::Alive means the device is alive and can be used normally.
+        // LossStatus::BeingLost means the device is in the process of being lost and should not
+        //              accept any new commands.
+        // LossStatus::AlreadyLost means the device has been lost and can no longer be used, all new
+        //              device and resources should be created. This device has been destroyed.
+        enum class LossStatus { Alive, BeingLost, AlreadyLost };
+        LossStatus mLossStatus = LossStatus::Alive;
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -250,6 +259,21 @@ namespace dawn_native {
         void SetDefaultToggles();
 
         void ConsumeError(ErrorData* error);
+        void HandleLoss(const char* message);
+
+        // Destroy is used to clean up and release resources used by device, does not wait for GPU
+        // or check errors. The device LossStatus is set to AlreadyLost once Destroy is complete.
+        virtual void Destroy() = 0;
+
+        // WaitForIdleForDestruction waits for GPU to finish, checks errors and gets ready for
+        // destruction. This is only used when properly destructing the device. Skip waiting for the
+        // GPU in a real device loss error. This is called in Device backend destructors and
+        // LoseForTesting to simulate a device loss to properly destroy the device after waiting on
+        // the GPU.
+        virtual MaybeError WaitForIdleForDestruction() = 0;
+
+        wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
+        void* mDeviceLostUserdata;
 
         AdapterBase* mAdapter = nullptr;
 

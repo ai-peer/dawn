@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/ErrorData.h"
 #include "dawn_native/opengl/BufferGL.h"
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
@@ -42,17 +43,18 @@ namespace dawn_native { namespace opengl {
     }
 
     Device::~Device() {
-        CheckPassedFences();
-        ASSERT(mFencesInFlight.empty());
-
-        // Some operations might have been started since the last submit and waiting
-        // on a serial that doesn't have a corresponding fence enqueued. Force all
-        // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
-
-        mDynamicUploader = nullptr;
-
-        Tick();
+        // If loss status is not alive, then device and its resources have already been destroyed
+        // and we shouldn't destroy again
+        if (mLossStatus != LossStatus::Alive) {
+            return;
+        }
+        mLossStatus = LossStatus::BeingLost;
+        MaybeError err = WaitForIdleForDestruction();
+        if (err.IsError()) {
+            // Assert that errors are device lost so that we can continue with destruction
+            ASSERT(err.AcquireError()->GetType() == wgpu::ErrorType::DeviceLost);
+        }
+        Destroy();
     }
 
     const GLFormat& Device::GetGLFormat(const Format& format) {
@@ -168,6 +170,25 @@ namespace dawn_native { namespace opengl {
                                                uint64_t destinationOffset,
                                                uint64_t size) {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer.");
+    }
+
+    void Device::Destroy() {
+        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+        // Some operations might have been started since the last submit and waiting
+        // on a serial that doesn't have a corresponding fence enqueued. Force all
+        // operations to look as if they were completed (because they were).
+        mCompletedSerial = mLastSubmittedSerial + 1;
+
+        mDynamicUploader = nullptr;
+
+        mLossStatus = LossStatus::AlreadyLost;
+    }
+
+    MaybeError Device::WaitForIdleForDestruction() {
+        CheckPassedFences();
+        ASSERT(mFencesInFlight.empty());
+        Tick();
+        return {};
     }
 
 }}  // namespace dawn_native::opengl
