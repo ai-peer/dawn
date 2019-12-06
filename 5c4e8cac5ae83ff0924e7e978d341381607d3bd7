@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "c0899a00_64c6644a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T22:20:33Z",
+      "side": 1,
+      "message": "Passed it through llvm-strip; now it\u0027s 2,611,728 -\u003e 2,615,824 bytes\nsymbol_level\u003d0 when building in a Chromium checkout also does this",
+      "parentUuid": "13cb7d4e_c8e41a4d",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89722e55_63bc5b6c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
@@ -87,6 +105,24 @@
       "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18d7bbd5_b1c46624",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T22:20:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89722e55_63bc5b6c",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -256,6 +292,24 @@
       "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f7d459d_b8e88d7b",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T22:20:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5ace04f_651585dd",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
