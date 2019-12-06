@@ -57,9 +57,22 @@ namespace dawn_native { namespace metal {
     MaybeError ShaderModule::Initialize(const ShaderModuleDescriptor* descriptor) {
         mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
-            shaderc_spvc::CompileOptions options;
+          // If these options are changed, the values in DawnSPIRVCrossGLSLFastFuzzer.cpp need to
+          // be updated.
+          shaderc_spvc::CompileOptions options;
+
+          // Disable PointSize builtin for https://bugs.chromium.org/p/dawn/issues/detail?id=146
+          // Because Metal will reject PointSize builtin if the shader is compiled into a render
+          // pipeline that uses a non-point topology.
+          // TODO (hao.x.li@intel.com): Remove this once WebGPU requires there is no
+          // gl_PointSize builtin (https://github.com/gpuweb/gpuweb/issues/332).
+          options.SetMSLEnablePointSizeBuiltIn(false);
+
+          // Always use vertex buffer 30 (the last one in the vertex buffer table) to contain
+          // the shader storage buffer lengths.
+          options.SetMSLBufferSizeBufferIndex(kBufferLengthBufferSlot);
             shaderc_spvc_status status =
-                mSpvcContext.InitializeForGlsl(descriptor->code, descriptor->codeSize, options);
+                mSpvcContext.InitializeForMsl(descriptor->code, descriptor->codeSize, options);
             if (status != shaderc_spvc_status_success) {
                 return DAWN_VALIDATION_ERROR("Unable to initialize instance of spvc");
             }
@@ -80,23 +93,6 @@ namespace dawn_native { namespace metal {
         std::unique_ptr<spirv_cross::CompilerMSL> compiler_impl;
         spirv_cross::CompilerMSL* compiler;
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
-            // If these options are changed, the values in DawnSPIRVCrossGLSLFastFuzzer.cpp need to
-            // be updated.
-            shaderc_spvc::CompileOptions options;
-
-            // Disable PointSize builtin for https://bugs.chromium.org/p/dawn/issues/detail?id=146
-            // Because Metal will reject PointSize builtin if the shader is compiled into a render
-            // pipeline that uses a non-point topology.
-            // TODO (hao.x.li@intel.com): Remove this once WebGPU requires there is no
-            // gl_PointSize builtin (https://github.com/gpuweb/gpuweb/issues/332).
-            options.SetMSLEnablePointSizeBuiltIn(false);
-
-            // Always use vertex buffer 30 (the last one in the vertex buffer table) to contain
-            // the shader storage buffer lengths.
-            options.SetMSLBufferSizeBufferIndex(kBufferLengthBufferSlot);
-            mSpvcContext.InitializeForMsl(mSpirv.data(), mSpirv.size(), options);
-            // TODO(rharrison): Handle initialize failing
-
             compiler = reinterpret_cast<spirv_cross::CompilerMSL*>(mSpvcContext.GetCompiler());
         } else {
             // If these options are changed, the values in DawnSPIRVCrossMSLFastFuzzer.cpp need to
