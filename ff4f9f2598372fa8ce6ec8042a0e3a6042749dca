@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "58acdcd5_a7994f0c",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T19:35:44Z",
+      "side": 1,
+      "message": "I think it\u0027s still good to keep in case the limits change",
+      "parentUuid": "0a77952c_e365c2fd",
+      "revId": "ff4f9f2598372fa8ce6ec8042a0e3a6042749dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7e0123f8_e726abdc",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 3
