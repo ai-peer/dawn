@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c7f897d_4679a1c2",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-06T21:51:34Z",
+      "side": 1,
+      "message": "Maybe this can be put in an anonymous namespace \nshaderc_spvc::CompileOptions MakeMSLCompileOptions()\n\nand deduplicated with the one in ShaderModule::GetFunction so they stay in sync",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 73,
+        "endChar": 73
+      },
+      "revId": "90c0d49ce47cc2909f355d2265dbed5c4ca1cbb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
