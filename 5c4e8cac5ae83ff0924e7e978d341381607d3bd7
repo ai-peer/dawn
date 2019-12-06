@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "13cb7d4e_c8e41a4d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T12:31:22Z",
+      "side": 1,
+      "message": "Ah it\u0027s probably because you have debug symbols, you can try with stripping the library. Actually it would be nice to document when / how to inline and measure the perf / binary size increase in docs/",
+      "parentUuid": "6b44559b_0e02a01d",
+      "revId": "5c4e8cac5ae83ff0924e7e978d341381607d3bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89722e55_63bc5b6c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7

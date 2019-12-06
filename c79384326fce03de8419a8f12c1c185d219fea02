@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2bfc945_5bc65c5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T12:31:22Z",
+      "side": 1,
+      "message": "nit: BUG\u003d",
+      "revId": "c79384326fce03de8419a8f12c1c185d219fea02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bb92fca_dca58bf4",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T12:31:22Z",
+      "side": 1,
+      "message": "nit: I read some time ago that likely/unlikely should be used carefully because it can heavily deoptimize the unlikely code. We should use it only when we absolutely don\u0027t care about the performance of the unlikely case. That\u0027s not the case here because we expect to have several blocks per command encoder.",
+      "revId": "c79384326fce03de8419a8f12c1c185d219fea02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8cfacda_460aaa4d",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T12:31:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c79384326fce03de8419a8f12c1c185d219fea02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
