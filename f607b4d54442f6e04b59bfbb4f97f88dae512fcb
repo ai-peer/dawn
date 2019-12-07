@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a00a4afc_06d1c418",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-07T00:26:40Z",
+      "side": 1,
+      "message": "I did. It\u0027s now slower due to the multiple loops: 1) BGL (vs dirty) mask and 2) need to merge populate + apply.",
+      "parentUuid": "cf1a20f8_d6a56a7e",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 80
+      },
+      "revId": "f607b4d54442f6e04b59bfbb4f97f88dae512fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6b063f4d_80ad4c32",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 16

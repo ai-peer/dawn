@@ -22,6 +22,30 @@
       "revId": "ce8bf128ec1327b28d933a15e055bda286f31231",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "508c69bc_a6c0f300",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-07T00:26:40Z",
+      "side": 0,
+      "message": "SGTM to cache the handles + heaps on the BG to no-op PopulateDescriptors(). Although, an empty bindgroup allocation still exists (never populated or applied). I suspect we would need to also track if a BG was \"resident or not\" to avoid that.",
+      "parentUuid": "5bb576b8_16c3e78a",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "ce8bf128ec1327b28d933a15e055bda286f31231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
