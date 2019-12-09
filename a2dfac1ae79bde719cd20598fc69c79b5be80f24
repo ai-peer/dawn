@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a57fba7_85b4fbd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-09T13:38:29Z",
+      "side": 1,
+      "message": "ditto: same as OpenGL backend CL",
+      "revId": "a2dfac1ae79bde719cd20598fc69c79b5be80f24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
