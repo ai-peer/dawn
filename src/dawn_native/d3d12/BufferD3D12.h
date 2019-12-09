@@ -33,7 +33,7 @@ namespace dawn_native { namespace d3d12 {
 
         MaybeError Initialize();
 
-        uint32_t GetD3D12Size() const;
+        uint64_t GetD3D12Size() const;
         ComPtr<ID3D12Resource> GetD3D12Resource() const;
         D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
         void OnMapCommandSerialFinished(uint32_t mapSerial, void* data, bool isWrite);

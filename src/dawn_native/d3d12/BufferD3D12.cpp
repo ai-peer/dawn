@@ -119,9 +119,8 @@ namespace dawn_native { namespace d3d12 {
         DestroyInternal();
     }
 
-    uint32_t Buffer::GetD3D12Size() const {
-        // TODO(enga@google.com): TODO investigate if this needs to be a constraint at the API level
-        return Align(GetSize(), 256);
+    uint64_t Buffer::GetD3D12Size() const {
+        return GetSize();
     }
 
     ComPtr<ID3D12Resource> Buffer::GetD3D12Resource() const {
