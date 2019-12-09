@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49be6253_47b7936b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-09T13:37:59Z",
+      "side": 1,
+      "message": "unit: commit messages first lines should usually have a verb, for example\n\nOpenGL: implement readonly storage buffers\n\nThe current commit message makes sense now but people digging through the commit log in a year won\u0027t be sure what the commit actually does to the readonly storage buffers on the OpenGL backend.",
+      "revId": "21b0be15e98a1aba618a75cc6b8fa34b84c3e76e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
