@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bcc5c13_001132f9",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-09T23:09:42Z",
+      "side": 1,
+      "message": "nit: This early return could be first in the function?",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "f804b46c9fb66e7df8a6e9d75493a050873dd893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ae771ed_37fd40e7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-09T23:09:42Z",
+      "side": 1,
+      "message": "side note: Unfortunate :-/ one day we should specialize the bitset iterator to use smaller integers instead of 64-bits when possible.",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 91
+      },
+      "revId": "f804b46c9fb66e7df8a6e9d75493a050873dd893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    }
+  ]
+}
