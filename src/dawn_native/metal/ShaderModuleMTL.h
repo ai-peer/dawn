@@ -43,9 +43,9 @@ namespace dawn_native { namespace metal {
                 [function release];
             }
         };
-        MetalFunctionData GetFunction(const char* functionName,
-                                      SingleShaderStage functionStage,
-                                      const PipelineLayout* layout) const;
+        ResultOrError<MetalFunctionData*> GetFunction(const char* functionName,
+                                                     SingleShaderStage functionStage,
+                                                     const PipelineLayout* layout) const;
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
