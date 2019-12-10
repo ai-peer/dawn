@@ -79,6 +79,12 @@ static_library("dawn_spirv_cross_fuzzer_common") {
   ]
 }
 
+static_library("dawn_spvc_fuzzer_common") {
+  public_deps = [
+    "${dawn_shaderc_dir}:libshaderc_spvc",
+  ]
+}
+
 # TODO(rharrison): Remove asan_options once signal trap is no longer
 #                  needed.
 # Uses Dawn specific options and varies input data
@@ -116,6 +122,33 @@ dawn_fuzzer_test("dawn_spirv_cross_msl_fast_fuzzer") {
     ":dawn_spirv_cross_fuzzer_common",
   ]
   asan_options = [ "allow_user_segv_handler=1" ]
+}
+
+dawn_fuzzer_test("dawn_spvc_glsl_fast_fuzzer") {
+  sources = [
+    "DawnSPVCglslFastFuzzer.cpp",
+  ]
+  deps = [
+    ":dawn_spvc_fuzzer_common",
+  ]
+}
+
+dawn_fuzzer_test("dawn_spvc_hlsl_fast_fuzzer") {
+  sources = [
+    "DawnSPVChlslFastFuzzer.cpp",
+  ]
+  deps = [
+    ":dawn_spvc_fuzzer_common",
+  ]
+}
+
+dawn_fuzzer_test("dawn_spvc_msl_fast_fuzzer") {
+  sources = [
+    "DawnSPVCmslFastFuzzer.cpp",
+  ]
+  deps = [
+    ":dawn_spvc_fuzzer_common",
+  ]
 }
 
 dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
