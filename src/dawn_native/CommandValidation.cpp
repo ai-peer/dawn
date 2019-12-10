@@ -23,6 +23,8 @@
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPipeline.h"
 
+#include <cmath>
+
 namespace dawn_native {
 
     namespace {
@@ -107,6 +109,44 @@ namespace dawn_native {
             return {};
         }
 
+        MaybeError ValidateRenderPassColorAttachmentInfo(
+            const dawn_native::RenderPassColorAttachmentInfo& colorAttachment) {
+            if (colorAttachment.loadOp == wgpu::LoadOp::Clear) {
+                if (std::isnan(colorAttachment.clearColor.r) ||
+                    std::isnan(colorAttachment.clearColor.g) ||
+                    std::isnan(colorAttachment.clearColor.b) ||
+                    std::isnan(colorAttachment.clearColor.a)) {
+                    return DAWN_VALIDATION_ERROR("Color clear value cannot contain NaN");
+                }
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateRenderPassDepthStencilAttachmentInfo(
+            const dawn_native::RenderPassDepthStencilAttachmentInfo& depthStencilAttachment) {
+            if (depthStencilAttachment.depthLoadOp == wgpu::LoadOp::Clear &&
+                std::isnan(depthStencilAttachment.clearDepth)) {
+                return DAWN_VALIDATION_ERROR("Depth clear value cannot be NaN");
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateBeginRenderPass(const BeginRenderPassCmd* renderPass) {
+            for (uint32_t i :
+                 IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+                DAWN_TRY(ValidateRenderPassColorAttachmentInfo(renderPass->colorAttachments[i]));
+            }
+
+            if (renderPass->attachmentState->HasDepthStencilAttachment()) {
+                DAWN_TRY(ValidateRenderPassDepthStencilAttachmentInfo(
+                    renderPass->depthStencilAttachment));
+            }
+
+            return {};
+        }
+
     }  // namespace
 
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize) {
@@ -140,6 +180,8 @@ namespace dawn_native {
     }
 
     MaybeError ValidateRenderPass(CommandIterator* commands, const BeginRenderPassCmd* renderPass) {
+        DAWN_TRY(ValidateBeginRenderPass(renderPass));
+
         CommandBufferStateTracker commandBufferState;
         uint64_t debugGroupStackSize = 0;
 
