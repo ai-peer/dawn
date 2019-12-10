@@ -92,17 +92,20 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
-    ShaderModule::MetalFunctionData ShaderModule::GetFunction(const char* functionName,
-                                                              SingleShaderStage functionStage,
-                                                              const PipelineLayout* layout) const {
+    ResultOrError<ShaderModule::MetalFunctionData> ShaderModule::GetFunction(
+        const char* functionName,
+        SingleShaderStage functionStage,
+        const PipelineLayout* layout) const {
         std::unique_ptr<spirv_cross::CompilerMSL> compiler_impl;
         spirv_cross::CompilerMSL* compiler;
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
             // Initializing the compiler is needed every call, because this method uses reflection
             // to mutate the compiler's IR.
-            mSpvcContext.InitializeForMsl(mSpirv.data(), mSpirv.size(), GetMSLCompileOptions());
-            // TODO(rharrison): Handle initialize failing
-
+            if (mSpvcContext.InitializeForMsl(mSpirv.data(), mSpirv.size(),
+                                              GetMSLCompileOptions()) !=
+                shaderc_spvc_status_success) {
+                return DAWN_VALIDATION_ERROR("Unable to initialize instance of spvc");
+            }
             compiler = reinterpret_cast<spirv_cross::CompilerMSL*>(mSpvcContext.GetCompiler());
         } else {
             // If these options are changed, the values in DawnSPIRVCrossMSLFastFuzzer.cpp need to
@@ -167,9 +170,10 @@ namespace dawn_native { namespace metal {
                                                              options:nil
                                                                error:&error];
             if (error != nil) {
-                // TODO(cwallez@chromium.org): forward errors to caller
                 NSLog(@"MTLDevice newLibraryWithSource => %@", error);
+                DAWN_VALIDATION_ERROR("Unable to create library object");
             }
+
             // TODO(kainino@chromium.org): make this somehow more robust; it needs to behave like
             // clean_func_name:
             // https://github.com/KhronosGroup/SPIRV-Cross/blob/4e915e8c483e319d0dd7a1fa22318bef28f8cca3/spirv_msl.cpp#L1213
@@ -184,7 +188,7 @@ namespace dawn_native { namespace metal {
 
         result.needsStorageBufferLength = compiler->needs_buffer_size_buffer();
 
-        return result;
+        return std::move(result);
     }
 
 }}  // namespace dawn_native::metal
