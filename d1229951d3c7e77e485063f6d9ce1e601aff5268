@@ -2,6 +2,114 @@
   "comments": [
     {
       "key": {
+        "uuid": "92b8dc69_a2d0cf4a",
+        "filename": "scripts/generate_seed_corpus_from_tests.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:40:43Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure why we need this script, it seems we could do everything in the .sh file no?",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "372d3934_ced53bc9",
+        "filename": "scripts/generate_seed_corpus_from_tests.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:40:43Z",
+      "side": 1,
+      "message": "That\u0027s unfortunate that it is hardcoded, I usually use out/fuzz for fuzzer tests myself.",
+      "range": {
+        "startLine": 39,
+        "startChar": 45,
+        "endLine": 39,
+        "endChar": 52
+      },
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9b4abff_673f2288",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:40:43Z",
+      "side": 1,
+      "message": "Maybe adds this to docs/fuzzer.md or docs/testing.md in the fuzzer section",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "186c39a8_8041135f",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:40:43Z",
+      "side": 1,
+      "message": "nit: put this at the top",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8230b3f1_8af223f9",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:40:43Z",
+      "side": 1,
+      "message": "doesn\u0027t set -e do the same thing?",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2981ca27_07e9c4ad",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:40:43Z",
+      "side": 1,
+      "message": "Maybe show the command line that\u0027s needed to test the corpus with the fuzzer.",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8179fe5b_802b72d7",
         "filename": "scripts/update_fuzzer_seed_corpus.sh",
         "patchSetId": 3
