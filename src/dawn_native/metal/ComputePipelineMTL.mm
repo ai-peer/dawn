@@ -19,14 +19,25 @@
 
 namespace dawn_native { namespace metal {
 
-    ComputePipeline::ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor)
-        : ComputePipelineBase(device, descriptor) {
+    // static
+    ResultOrError<ComputePipeline*> ComputePipeline::Create(
+        Device* device,
+        const ComputePipelineDescriptor* descriptor) {
+        std::unique_ptr<ComputePipeline> pipeline =
+            std::make_unique<ComputePipeline>(device, descriptor);
+        DAWN_TRY(pipeline->Initialize(descriptor));
+        return pipeline.release();
+    }
+
+    MaybeError ComputePipeline::Initialize(const ComputePipelineDescriptor* descriptor) {
         auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
 
         const ShaderModule* computeModule = ToBackend(descriptor->computeStage.module);
         const char* computeEntryPoint = descriptor->computeStage.entryPoint;
-        ShaderModule::MetalFunctionData computeData = computeModule->GetFunction(
-            computeEntryPoint, SingleShaderStage::Compute, ToBackend(GetLayout()));
+        ShaderModule::MetalFunctionData computeData;
+        DAWN_TRY_ASSIGN(computeData,
+                        computeModule->GetFunction(computeEntryPoint, SingleShaderStage::Compute,
+                                                   ToBackend(GetLayout())));
 
         NSError* error = nil;
         mMtlComputePipelineState =
@@ -34,12 +45,13 @@ namespace dawn_native { namespace metal {
         if (error != nil) {
             NSLog(@" error => %@", error);
             GetDevice()->HandleError(wgpu::ErrorType::DeviceLost, "Error creating pipeline state");
-            return;
+            return DAWN_VALIDATION_ERROR("Error creating pipeline state");
         }
 
         // Copy over the local workgroup size as it is passed to dispatch explicitly in Metal
         mLocalWorkgroupSize = computeData.localWorkgroupSize;
         mRequiresStorageBufferLength = computeData.needsStorageBufferLength;
+        return {};
     }
 
     ComputePipeline::~ComputePipeline() {
