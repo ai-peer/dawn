@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "020f8e41_94c672a9",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T17:04:45Z",
+      "side": 1,
+      "message": "nit: this order was flipped\ntestSuite is something like DrawCallPerf\ntestName is something like Run/Vulkan__e_skip_validation",
+      "range": {
+        "startLine": 388,
+        "startChar": 62,
+        "endLine": 388,
+        "endChar": 83
+      },
+      "revId": "3056c0969fb2285917dbaef7fbb01e5345b81041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
