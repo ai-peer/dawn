@@ -18,6 +18,8 @@
 
 #include "utils/WGPUHelpers.h"
 
+#include <cmath>
+
 namespace {
 
 class RenderPassDescriptorValidationTest : public ValidationTest {
@@ -658,6 +660,43 @@ TEST_F(MultisampledRenderPassDescriptorValidationTest, DepthStencilAttachmentSam
     {
         utils::ComboRenderPassDescriptor renderPass({}, multisampledDepthStencilTextureView);
         AssertBeginRenderPassSuccess(&renderPass);
+    }
+}
+
+// Tests that NaN cannot be accepted as a valid color or depth clear value.
+TEST_F(RenderPassDescriptorValidationTest, UseNaNAsColorOrDepthClearValue) {
+    wgpu::TextureView color = Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
+
+    {
+        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        renderPass.cColorAttachments[0].clearColor.r = NAN;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    {
+        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        renderPass.cColorAttachments[0].clearColor.g = NAN;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    {
+        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        renderPass.cColorAttachments[0].clearColor.b = NAN;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    {
+        utils::ComboRenderPassDescriptor renderPass({color}, nullptr);
+        renderPass.cColorAttachments[0].clearColor.a = NAN;
+        AssertBeginRenderPassError(&renderPass);
+    }
+
+    {
+        wgpu::TextureView depth =
+            Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24Plus);
+        utils::ComboRenderPassDescriptor renderPass({color}, depth);
+        renderPass.cDepthStencilAttachmentInfo.clearDepth = NAN;
+        AssertBeginRenderPassError(&renderPass);
     }
 }
 
