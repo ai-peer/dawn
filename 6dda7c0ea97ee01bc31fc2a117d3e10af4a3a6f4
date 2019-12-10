@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70c24ce4_f38c1997",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T00:33:28Z",
+      "side": 1,
+      "message": "This isn\u0027t used anywhere else, so we can remove it completely",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 124,
+        "endChar": 5
+      },
+      "revId": "6dda7c0ea97ee01bc31fc2a117d3e10af4a3a6f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
