@@ -261,6 +261,14 @@ namespace dawn_native { namespace d3d12 {
         heapProperties.CreationNodeMask = 0;
         heapProperties.VisibleNodeMask = 0;
 
+        // If d3d tells us the resource is "zero-sized", the size is invalid and may cause a device
+        // lost (too large for driver). Instead, treat the error as a OOM.
+        D3D12_RESOURCE_ALLOCATION_INFO resourceInfo =
+            mDevice->GetD3D12Device()->GetResourceAllocationInfo(0, 1, &resourceDescriptor);
+        if (resourceInfo.SizeInBytes == 0) {
+            return DAWN_OUT_OF_MEMORY_ERROR("Resource allocation size was invalid.");
+        }
+
         // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
         // provided to CreateCommittedResource.
         ComPtr<ID3D12Resource> committedResource;
