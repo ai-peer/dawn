@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fba48d29_6a2d9f97",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T17:27:45Z",
+      "side": 1,
+      "message": "This could fail if we have two heaps that we reuse, A and B, and that we roll-over twice so we use heaps in this order: A B A. If the bindgroup was populated on A, then not used until the third step, this check will succeed even if we should re-record the bindgroup.\n\nI suggest using a Serial that\u0027s incremented on a heap switch, and storing that serial in the bindgroup. (not sure if we want one combined serial for both the sampler and cbvSrvUav heap or two serials).\n\nActually I\u0027m worried that the 2048 limit for sampler heaps will mean we\u0027ll need to cycle the sampler heap way more often than the other :/",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c67f196c_3c463845",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T17:27:45Z",
+      "side": 1,
+      "message": "That\u0027s probably something to optimize in our BitSetIterator. Can you open a bug about the BitSetIterator and block dawn:304 on it?",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e47584c3_3dc4e06c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T17:27:45Z",
+      "side": 1,
+      "message": "Mmmh here we allocated potentially more data than we need if the bindgroups can be reused. There should be an elegant way to phrase it as a recursive algorithm for the case where we need to cycle the heaps.\n\nSomething like\n\n MaybeError Apply -\u003e call ApplyInternal with isNewDescriptorHeapAllocation to false.\n\n MaybeError ApplyInternal(CommandRecordingContext* commandContext, bool isNewDescriptorHeapAllocation) {\n   for (bindgroup in dirtyBindGroups) {\n     bool outOfSpace;\n     DAWN_TRY_ASSIGN(outOfSpace, TryAllocateBindGroupIfNeeded(bindGroup));\n     if (outOfSpace) {\n       if (isNewDescriptorHeapAllocation) {\n         ASSERT(false); // We should never fail to allocate on a new heap allocation. Maybe we could find a different way to do this so we don\u0027t have to pipe the boolean argument.\n       }\n       dirtyBindGroups \u003d allBindGroups;\n       cycle descriptor heaps\n       return ApplyInternal(commandContext, true);\n     }\n   }\n }",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc130daa_23db67ae",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T17:27:45Z",
+      "side": 1,
+      "message": "This could probably be simplified by assuming we always have the two heaps.",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
