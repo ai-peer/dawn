@@ -115,8 +115,15 @@ namespace dawn_native {
             if (descriptor->nextInChain != nullptr) {
                 return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
             }
+
             DAWN_TRY(ValidateFrontFace(descriptor->frontFace));
             DAWN_TRY(ValidateCullMode(descriptor->cullMode));
+
+            if (!std::isfinite(descriptor->depthBiasSlopeScale) ||
+                !std::isfinite(descriptor->depthBiasClamp)) {
+                return DAWN_VALIDATION_ERROR("Depth bias parameters must be finite.");
+            }
+
             return {};
         }
 

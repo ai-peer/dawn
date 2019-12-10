@@ -18,6 +18,7 @@
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
+#include <cmath>
 #include <sstream>
 
 class RenderPipelineValidationTest : public ValidationTest {
@@ -68,6 +69,51 @@ TEST_F(RenderPipelineValidationTest, CreationSuccess) {
         descriptor.cFragmentStage.module = fsModule;
         descriptor.rasterizationState = nullptr;
         device.CreateRenderPipeline(&descriptor);
+    }
+}
+
+// Tests that depth bias parameters must be finite.
+TEST_F(RenderPipelineValidationTest, DepthBiasParameterMustBeFinite) {
+    // Control case, depth bias parameters in ComboRenderPipeline default to 0 which is finite
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        device.CreateRenderPipeline(&descriptor);
+    }
+
+    // Infinite depth bias clamp is invalid
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        descriptor.cRasterizationState.depthBiasClamp = INFINITY;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+    // NAN depth bias clamp is invalid
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        descriptor.cRasterizationState.depthBiasClamp = NAN;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    // Infinite depth bias slope is invalid
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        descriptor.cRasterizationState.depthBiasSlopeScale = INFINITY;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+    // NAN depth bias slope is invalid
+    {
+        utils::ComboRenderPipelineDescriptor descriptor(device);
+        descriptor.vertexStage.module = vsModule;
+        descriptor.cFragmentStage.module = fsModule;
+        descriptor.cRasterizationState.depthBiasSlopeScale = NAN;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 }
 

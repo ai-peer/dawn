@@ -28,11 +28,11 @@ namespace dawn_native {
         }
 
         if (!std::isfinite(descriptor->lodMinClamp) || !std::isfinite(descriptor->lodMaxClamp)) {
-            return DAWN_VALIDATION_ERROR("LOD must be finite");
+            return DAWN_VALIDATION_ERROR("LOD clamp bounds must be finite");
         }
 
         if (descriptor->lodMinClamp < 0 || descriptor->lodMaxClamp < 0) {
-            return DAWN_VALIDATION_ERROR("LOD must be positive");
+            return DAWN_VALIDATION_ERROR("LOD clamp bounds must be positive");
         }
 
         if (descriptor->lodMinClamp > descriptor->lodMaxClamp) {
