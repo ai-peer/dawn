@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5887c8c3_8a85ed73",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:33:45Z",
+      "side": 1,
+      "message": "This could use https://cs.chromium.org/chromium/src/third_party/dawn/src/common/SystemUtils.h?sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d22",
+      "revId": "977e906c68e20b8fd3384e263c45171cdc349b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cbd4fcc_1b1c7025",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:33:45Z",
+      "side": 1,
+      "message": "nit: std::string fullPath \u003d ... + filename?",
+      "revId": "977e906c68e20b8fd3384e263c45171cdc349b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "920db350_e985a4fe",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T09:33:45Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to add this interface to the wire server. Instead the WireServerTraceLayer could be a proxy that dumps the commands and forwards to the next command handler. So things would look like the following:\n\n  mWireServerTraceLayer.reset(new WireServerTraceLayer(file.c_str(), mWireServer.get()));\n  mC2sBuf-\u003eSetHnadler(mWireServerTraceLayer.get())",
+      "revId": "977e906c68e20b8fd3384e263c45171cdc349b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
