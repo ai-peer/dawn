@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b9aeb24_36b80a58",
+        "filename": "docs/testing.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T08:47:03Z",
+      "side": 1,
+      "message": "Can we also have guidelines on what GN args to use for benchmarking (is_official) and why (for the best level of optimization and LTO)?",
+      "revId": "96f7f2bb0b000b079730e5823ca514848d89138d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
