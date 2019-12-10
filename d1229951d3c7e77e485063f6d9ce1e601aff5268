@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e9678472_3818cf41",
+        "filename": "scripts/generate_seed_corpus_from_tests.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "Good point. I originally had more argument parsing which was easier there, but no longer",
+      "parentUuid": "92b8dc69_a2d0cf4a",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "372d3934_ced53bc9",
         "filename": "scripts/generate_seed_corpus_from_tests.py",
         "patchSetId": 3
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "48c8c1d3_e2232c0e",
+        "filename": "scripts/generate_seed_corpus_from_tests.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "Made it an argument instead",
+      "parentUuid": "372d3934_ced53bc9",
+      "range": {
+        "startLine": 39,
+        "startChar": 45,
+        "endLine": 39,
+        "endChar": 52
+      },
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9b4abff_673f2288",
         "filename": "scripts/update_fuzzer_seed_corpus.sh",
         "patchSetId": 3
@@ -56,6 +98,24 @@
       "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f64b6684_631b1db6",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9b4abff_673f2288",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "5a2d3e55_ad168201",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "186c39a8_8041135f",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8230b3f1_8af223f9",
         "filename": "scripts/update_fuzzer_seed_corpus.sh",
         "patchSetId": 3
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "580526d6_4de2d69d",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "It didn\u0027t work -- maybe because python doesn\u0027t surface it the same way. Regardless, obselete now.",
+      "parentUuid": "8230b3f1_8af223f9",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2981ca27_07e9c4ad",
         "filename": "scripts/update_fuzzer_seed_corpus.sh",
         "patchSetId": 3
@@ -107,6 +203,24 @@
       "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f47088e_d4fb2f6e",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2981ca27_07e9c4ad",
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -130,6 +244,30 @@
       "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66c411d4_b3435369",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8179fe5b_802b72d7",
+      "range": {
+        "startLine": 94,
+        "startChar": 31,
+        "endLine": 94,
+        "endChar": 37
+      },
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

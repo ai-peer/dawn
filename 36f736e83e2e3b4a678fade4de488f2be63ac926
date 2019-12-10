@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "780b751e_ada73920",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T22:31:31Z",
+      "side": 1,
+      "message": "I looked into it, and this is essentially \"features\" which is an interesting thing the fuzzer discovers.",
+      "parentUuid": "96386e15_ad89f4f2",
+      "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d4759bcb_79beaa9d",
         "filename": "scripts/generate_seed_corpus_from_tests.py",
         "patchSetId": 1
