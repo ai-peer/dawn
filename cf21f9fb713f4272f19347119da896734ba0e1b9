@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d56fe617_38387d1e",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T21:12:42Z",
+      "side": 1,
+      "message": "nit: return DAWN_DEVICE_LOST_ERROR",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 48,
+        "endChar": 74
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16ea5dbb_2f433fbb",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T21:12:42Z",
+      "side": 1,
+      "message": "HandleError will eventually be called when the MaybeError is consumed in RenderPipeline::Create\n\nWe can just |return DAWN_DEVICE_LOST_ERROR(...)| here",
+      "range": {
+        "startLine": 388,
+        "startChar": 16,
+        "endLine": 390,
+        "endChar": 87
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab2c9ad4_58d5b1ba",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T21:12:42Z",
+      "side": 1,
+      "message": "Also, add an ASSERT(!IsError());",
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae4a4f11_2dfed823",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T21:12:42Z",
+      "side": 1,
+      "message": "This should probably be DAWN_DEVICE_LOST_ERROR. I don\u0027t think this should ever fail since the error should be caught in ShaderModule::Initialize",
+      "range": {
+        "startLine": 107,
+        "startChar": 23,
+        "endLine": 107,
+        "endChar": 44
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b488b0ee_19f1ff54",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T21:12:42Z",
+      "side": 1,
+      "message": "This should probably be DAWN_DEVICE_LOST_ERROR. If there\u0027s an error from Metal, then there\u0027s a fatal problem in Dawn or something missing earlier in validation.",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 174,
+        "endChar": 73
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
