@@ -11,6 +11,8 @@ use_dawn = true           # Required to build Dawn
 use_cfi_icall=false       # Required because Dawn dynamically loads function pointers, and we don't sanitize them yet.
 ```
 
+If the full set of optimization flags isn't desired for testing, building the `dawn_perf_tests` target from a Dawn checkout will also work. Simply using GN arg `is_debug=false` should be sufficient for most performance tests. For more information on building, please see [building.md](./building.md).
+
 ### Terminology
 
  - Iteration: The unit of work being measured. It could be a frame, a draw call, a data upload, a computation, etc. `dawn_perf_tests` metrics are reported as time per iteration.
