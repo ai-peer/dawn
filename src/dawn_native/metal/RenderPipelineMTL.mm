@@ -311,31 +311,48 @@ namespace dawn_native { namespace metal {
 
     }  // anonymous namespace
 
-    RenderPipeline::RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor)
-        : RenderPipelineBase(device, descriptor),
-          mMtlIndexType(MTLIndexFormat(GetVertexStateDescriptor()->indexFormat)),
-          mMtlPrimitiveTopology(MTLPrimitiveTopology(GetPrimitiveTopology())),
-          mMtlFrontFace(MTLFrontFace(GetFrontFace())),
-          mMtlCullMode(ToMTLCullMode(GetCullMode())) {
-        auto mtlDevice = device->GetMTLDevice();
+    // static
+    ResultOrError<RenderPipeline*> RenderPipeline::Create(
+        Device* device,
+        const RenderPipelineDescriptor* descriptor) {
+        std::unique_ptr<RenderPipeline> pipeline =
+            std::make_unique<RenderPipeline>(device, descriptor);
+        DAWN_TRY(pipeline->Initialize(descriptor));
+        return pipeline.release();
+    }
+
+    MaybeError RenderPipeline::Initialize(const RenderPipelineDescriptor* descriptor) {
+        mMtlIndexType = MTLIndexFormat(GetVertexStateDescriptor()->indexFormat);
+        mMtlPrimitiveTopology = MTLPrimitiveTopology(GetPrimitiveTopology());
+        mMtlFrontFace = MTLFrontFace(GetFrontFace());
+        mMtlCullMode = ToMTLCullMode(GetCullMode());
+        auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
 
         MTLRenderPipelineDescriptor* descriptorMTL = [MTLRenderPipelineDescriptor new];
 
         const ShaderModule* vertexModule = ToBackend(descriptor->vertexStage.module);
         const char* vertexEntryPoint = descriptor->vertexStage.entryPoint;
-        ShaderModule::MetalFunctionData vertexData = vertexModule->GetFunction(
-            vertexEntryPoint, SingleShaderStage::Vertex, ToBackend(GetLayout()));
-        descriptorMTL.vertexFunction = vertexData.function;
-        if (vertexData.needsStorageBufferLength) {
+        ShaderModule::MetalFunctionData* vertexDataImpl;
+        DAWN_TRY_ASSIGN(vertexDataImpl,
+                        vertexModule->GetFunction(vertexEntryPoint, SingleShaderStage::Vertex,
+                                                  ToBackend(GetLayout())));
+        std::unique_ptr<ShaderModule::MetalFunctionData> vertexData(vertexDataImpl);
+
+        descriptorMTL.vertexFunction = vertexData->function;
+        if (vertexData->needsStorageBufferLength) {
             mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Vertex;
         }
 
         const ShaderModule* fragmentModule = ToBackend(descriptor->fragmentStage->module);
         const char* fragmentEntryPoint = descriptor->fragmentStage->entryPoint;
-        ShaderModule::MetalFunctionData fragmentData = fragmentModule->GetFunction(
-            fragmentEntryPoint, SingleShaderStage::Fragment, ToBackend(GetLayout()));
-        descriptorMTL.fragmentFunction = fragmentData.function;
-        if (fragmentData.needsStorageBufferLength) {
+        ShaderModule::MetalFunctionData* fragmentDataImpl;
+        DAWN_TRY_ASSIGN(fragmentDataImpl,
+                        fragmentModule->GetFunction(fragmentEntryPoint, SingleShaderStage::Fragment,
+                                                    ToBackend(GetLayout())));
+        std::unique_ptr<ShaderModule::MetalFunctionData> fragmentData(fragmentDataImpl);
+
+        descriptorMTL.fragmentFunction = fragmentData->function;
+        if (fragmentData->needsStorageBufferLength) {
             mStagesRequiringStorageBufferLength |= wgpu::ShaderStage::Fragment;
         }
 
@@ -372,9 +389,9 @@ namespace dawn_native { namespace metal {
             [descriptorMTL release];
             if (error != nil) {
                 NSLog(@" error => %@", error);
-                device->HandleError(wgpu::ErrorType::DeviceLost,
-                                    "Error creating rendering pipeline state");
-                return;
+                GetDevice()->HandleError(wgpu::ErrorType::DeviceLost,
+                                         "Error creating rendering pipeline state");
+                return DAWN_VALIDATION_ERROR("Error creating rendering pipeline state");
             }
         }
 
@@ -385,6 +402,8 @@ namespace dawn_native { namespace metal {
             MakeDepthStencilDesc(GetDepthStencilStateDescriptor());
         mMtlDepthStencilState = [mtlDevice newDepthStencilStateWithDescriptor:depthStencilDesc];
         [depthStencilDesc release];
+
+        return {};
     }
 
     RenderPipeline::~RenderPipeline() {

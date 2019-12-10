@@ -25,7 +25,9 @@ namespace dawn_native { namespace metal {
 
     class ComputePipeline : public ComputePipelineBase {
       public:
-        ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor);
+        static ResultOrError<ComputePipeline*> Create(Device* device,
+                                                      const ComputePipelineDescriptor* descriptor);
+        ComputePipeline() = delete;
         ~ComputePipeline();
 
         void Encode(id<MTLComputeCommandEncoder> encoder);
@@ -33,6 +35,9 @@ namespace dawn_native { namespace metal {
         bool RequiresStorageBufferLength() const;
 
       private:
+        using ComputePipelineBase::ComputePipelineBase;
+        MaybeError Initialize(const ComputePipelineDescriptor* descriptor);
+
         id<MTLComputePipelineState> mMtlComputePipelineState = nil;
         MTLSize mLocalWorkgroupSize;
         bool mRequiresStorageBufferLength;
