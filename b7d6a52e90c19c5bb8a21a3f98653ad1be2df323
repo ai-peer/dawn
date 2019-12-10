@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d32d9d0c_85bc4cd4",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-10T08:24:13Z",
+      "side": 1,
+      "message": "Logic for BeginRenderPass validation already exists here: https://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/CommandEncoder.cpp?q\u003dValidateRenderPass\u0026sq\u003dpackage:chromium\u0026g\u003d0\u0026l\u003d430\n\nThis CL should add to the existing logic so it\u0027s all in the same place.",
+      "revId": "b7d6a52e90c19c5bb8a21a3f98653ad1be2df323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
