@@ -26,6 +26,11 @@ namespace {
     TEST_F(SamplerValidationTest, InvalidLOD) {
         {
             wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
+            samplerDesc.lodMinClamp = 0;
+            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+        }
+        {
+            wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
             samplerDesc.lodMinClamp = NAN;
             ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
         }
@@ -37,12 +42,12 @@ namespace {
         {
             wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
             samplerDesc.lodMinClamp = INFINITY;
-            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+            device.CreateSampler(&samplerDesc);
         }
         {
             wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
             samplerDesc.lodMaxClamp = INFINITY;
-            ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+            device.CreateSampler(&samplerDesc);
         }
     }
 
