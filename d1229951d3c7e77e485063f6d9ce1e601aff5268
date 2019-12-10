@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8179fe5b_802b72d7",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T02:31:21Z",
+      "side": 1,
+      "message": "typo: \"to delete\"",
+      "range": {
+        "startLine": 94,
+        "startChar": 31,
+        "endLine": 94,
+        "endChar": 37
+      },
+      "revId": "d1229951d3c7e77e485063f6d9ce1e601aff5268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "e59c63c3_7f159cdc",
+        "filename": "scripts/generate_seed_corpus_from_tests.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T02:31:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4759bcb_79beaa9d",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 107
+      },
+      "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4994ce53_6d8c69b9",
         "filename": "src/fuzzers/BUILD.gn",
         "patchSetId": 1
@@ -74,6 +98,24 @@
       "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b92e9a3e_8620546b",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-10T02:31:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbedbc2f_bdd79660",
+      "revId": "36f736e83e2e3b4a678fade4de488f2be63ac926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
