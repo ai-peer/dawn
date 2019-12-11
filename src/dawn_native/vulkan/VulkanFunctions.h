@@ -266,6 +266,32 @@ namespace dawn_native { namespace vulkan {
 #endif
     };
 
+    // Create a wrapper around VkResult in the dawn_native::vulkan namespace.
+    // Declaring VkResult inside the dawn_native::vulkan namespace ensures that assigning or
+    // creating it from a raw ::VkResult uses WrapUnsafe. This makes it clear that users of
+    // VkResult must be intentional about handling error cases.
+    class VkResult {
+        struct UnsafeTag {};
+        static constexpr UnsafeTag kUnsafe = {};
+
+      public:
+        VkResult(::VkResult value) = delete;
+
+        constexpr static VkResult WrapUnsafe(::VkResult value) {
+            return VkResult(value, kUnsafe);
+        }
+
+        constexpr operator ::VkResult() const {
+            return mValue;
+        }
+
+      private:
+        constexpr VkResult(::VkResult value, UnsafeTag) : mValue(value) {
+        }
+
+        ::VkResult mValue;
+    };
+
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKAN_VULKANFUNCTIONS_H_
