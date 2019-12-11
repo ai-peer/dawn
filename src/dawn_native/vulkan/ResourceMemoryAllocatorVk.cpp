@@ -69,8 +69,10 @@ namespace dawn_native { namespace vulkan {
             allocateInfo.memoryTypeIndex = mMemoryTypeIndex;
 
             VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
-            VkResult allocationResult = mDevice->fn.AllocateMemory(
-                mDevice->GetVkDevice(), &allocateInfo, nullptr, &allocatedMemory);
+            VkResult allocationResult = INJECT_VK_ERROR_OR_RUN(
+                mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo, nullptr,
+                                           &allocatedMemory),
+                VK_ERROR_OUT_OF_DEVICE_MEMORY);
 
             // Handle vkAllocateMemory error but differentiate OOM that we want to surface to
             // the application.
@@ -126,11 +128,11 @@ namespace dawn_native { namespace vulkan {
 
             void* mappedPointer = nullptr;
             if (mappable) {
-                DAWN_TRY(
-                    CheckVkSuccess(mDevice->fn.MapMemory(mDevice->GetVkDevice(),
-                                                         ToBackend(resourceHeap.get())->GetMemory(),
-                                                         0, size, 0, &mappedPointer),
-                                   "vkMapMemory"));
+                DAWN_TRY(CheckVkSuccess(
+                    INJECT_VK_ERROR_OR_RUN(mDevice->fn.MapMemory(
+                        mDevice->GetVkDevice(), ToBackend(resourceHeap.get())->GetMemory(), 0, size,
+                        0, &mappedPointer)),
+                    "vkMapMemory"));
             }
 
             AllocationInfo info;

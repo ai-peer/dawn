@@ -17,6 +17,13 @@
 
 #include "common/vulkan_platform.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/ErrorInjector.h"
+
+constexpr VkResult VK_FAKE_ERROR_FOR_TESTING = VK_RESULT_MAX_ENUM;
+
+#define INJECT_VK_ERROR_OR_RUN(stmt, ...)        \
+    ::dawn_native::vulkan::VkResult::WrapUnsafe( \
+        INJECT_ERROR_OR_RUN_IMPL(stmt, ##__VA_ARGS__, VK_FAKE_ERROR_FOR_TESTING))
 
 namespace dawn_native { namespace vulkan {
 

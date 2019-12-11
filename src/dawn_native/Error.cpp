@@ -14,6 +14,7 @@
 
 #include "dawn_native/Error.h"
 
+#include "common/HashUtils.h"
 #include "dawn_native/ErrorData.h"
 
 namespace dawn_native {
