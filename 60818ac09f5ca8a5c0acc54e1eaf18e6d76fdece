@@ -16,6 +16,24 @@
       "revId": "60818ac09f5ca8a5c0acc54e1eaf18e6d76fdece",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1772ffb9_694bbcb7",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T18:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18db227e_ee7f2c4a",
+      "revId": "60818ac09f5ca8a5c0acc54e1eaf18e6d76fdece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
