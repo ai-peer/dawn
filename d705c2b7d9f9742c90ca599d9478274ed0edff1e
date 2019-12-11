@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d776635d_db039273",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-11T16:48:14Z",
+      "side": 1,
+      "message": "here too, I believe infinity should be equal to infinity",
+      "range": {
+        "startLine": 104,
+        "startChar": 20,
+        "endLine": 104,
+        "endChar": 28
+      },
+      "revId": "d705c2b7d9f9742c90ca599d9478274ed0edff1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
