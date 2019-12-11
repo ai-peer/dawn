@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ab3f15c_70cf38fe",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:16:18Z",
+      "side": 1,
+      "message": "nit: This could just be a dawn_wire::CommandHandler*",
+      "revId": "cbc206e84f083eff8fb6d016798ab1df4b5f192e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
