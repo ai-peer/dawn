@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "28ba30ec_41aededf",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:31:34Z",
+      "side": 1,
+      "message": "unit: is this deleted default constructor needed when we have [1]?",
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6923c390_bbdae3ca",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:31:34Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33e8ed57_0cb61d50",
         "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
         "patchSetId": 4
@@ -67,6 +101,87 @@
         "endLine": 41,
         "endChar": 86
       },
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bcb36e4_58786ead",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:31:34Z",
+      "side": 1,
+      "message": "Ah I have the same suggestion to return a value but missed that release. Maybe we could adapt Chromium\u0027s ScopeNSObject RAII wrapper and use that in MetalFunctionData so that move semantics work correctly.",
+      "parentUuid": "1dcb88b2_0fa7b62f",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 86
+      },
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "352ec455_9d15221b",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:31:34Z",
+      "side": 1,
+      "message": "Previously we generated a device loss, so maybe this should replace the HANDLE_ERROR with return DAWN_DEVICE_LOST_ERROR? Ditto in ShaderModule and ComputePipeline.",
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9631d4e7_df5eeb1e",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:31:34Z",
+      "side": 1,
+      "message": "ResultOrError of a MetalFunctionData value (instead of pointer) should work and would be a bit simpler on the lifetime management side.",
+      "range": {
+        "startLine": 95,
+        "startChar": 49,
+        "endLine": 95,
+        "endChar": 50
+      },
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d79ebcd_814d9171",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:31:34Z",
+      "side": 1,
+      "message": "Can add you add a TODO to switch that NSLog to use dawn::InfoLog or even be folded in the DAWN_VALIDATION_ERROR?",
       "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
