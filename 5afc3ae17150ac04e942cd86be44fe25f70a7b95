@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33e8ed57_0cb61d50",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-11T01:25:06Z",
+      "side": 1,
+      "message": "Maybe instead we can do:\n\nShaderModule::MetalFunctionData computeData;\nDAWN_TRY(computeModule-\u003eGetFunction(..., \u0026computeData));\n\nMetalFunctionData is super tiny and can just be stack-allocated. The destructor will do nothing if there\u0027s an error and MetalFunctionData.function is initialized to nil.",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 86
+      },
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
