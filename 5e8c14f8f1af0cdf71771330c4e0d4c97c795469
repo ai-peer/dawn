@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f3f9f5d8_58409cd8",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T15:41:57Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "241c9ce0_11feeda2",
+      "revId": "5e8c14f8f1af0cdf71771330c4e0d4c97c795469",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "80d7f646_b9c9c6ef",
         "filename": "src/fuzzers/DawnSPVCglslFastFuzzer.cpp",
         "patchSetId": 2
