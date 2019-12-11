@@ -46,6 +46,30 @@
       "revId": "8174f9e1ce7bc15454b9e33e5abf9a89901d7761",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44f90fd2_6ba71fb0",
+        "filename": "docs/testing.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-11T00:59:43Z",
+      "side": 1,
+      "message": "If I understand correctly, I would say \"A Chromium checkout is required for some of these optimization flags. It is possible to run perf tests without them by building the `dawn_perf_tests` target from a standalone Dawn checkout.\" (i.e. focus on explaining rather than instructing)",
+      "parentUuid": "2ec91c7a_eaa09bb9",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 62
+      },
+      "revId": "8174f9e1ce7bc15454b9e33e5abf9a89901d7761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
