@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "60feeca5_2d155bad",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d56fe617_38387d1e",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 48,
+        "endChar": 74
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16ea5dbb_2f433fbb",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b299530f_7d73165a",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16ea5dbb_2f433fbb",
+      "range": {
+        "startLine": 388,
+        "startChar": 16,
+        "endLine": 390,
+        "endChar": 87
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab2c9ad4_58d5b1ba",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 2
@@ -62,6 +110,24 @@
       "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81e875ab_fab7ef8b",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab2c9ad4_58d5b1ba",
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "e6ae3dab_8ed3319d",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae4a4f11_2dfed823",
+      "range": {
+        "startLine": 107,
+        "startChar": 23,
+        "endLine": 107,
+        "endChar": 44
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b488b0ee_19f1ff54",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 2
@@ -108,6 +198,30 @@
       "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40de0549_ae973a27",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b488b0ee_19f1ff54",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 174,
+        "endChar": 73
+      },
+      "revId": "cf21f9fb713f4272f19347119da896734ba0e1b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }

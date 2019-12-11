@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ef7cb182_ff034008",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ba30ec_41aededf",
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6923c390_bbdae3ca",
         "filename": "src/dawn_native/metal/ComputePipelineMTL.h",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09586fec_3066a0f6",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6923c390_bbdae3ca",
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -131,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "406c2de9_a0850a94",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "I have reimplemented this using an out param.",
+      "parentUuid": "9bcb36e4_58786ead",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 86
+      },
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "352ec455_9d15221b",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 4
@@ -145,6 +205,24 @@
       "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "800de7e4_c70a33b8",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "352ec455_9d15221b",
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -171,6 +249,30 @@
     },
     {
       "key": {
+        "uuid": "43dbc284_b6bc2426",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "This is discussed in another comment, just marking it resolved so gerrit doesn\u0027t keep buggin me about it.",
+      "parentUuid": "9631d4e7_df5eeb1e",
+      "range": {
+        "startLine": 95,
+        "startChar": 49,
+        "endLine": 95,
+        "endChar": 50
+      },
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d79ebcd_814d9171",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 4
@@ -185,6 +287,24 @@
       "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7edd63b2_75849694",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2019-12-11T16:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d79ebcd_814d9171",
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
