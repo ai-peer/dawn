@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c33d025_44ee9d0c",
+        "filename": "src/dawn_native/RefCounted.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-11T16:54:45Z",
+      "side": 1,
+      "message": "typo: instruction",
+      "range": {
+        "startLine": 73,
+        "startChar": 83,
+        "endLine": 73,
+        "endChar": 94
+      },
+      "revId": "a69f62810964f367b27d78ca2272b33693ccbc6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
