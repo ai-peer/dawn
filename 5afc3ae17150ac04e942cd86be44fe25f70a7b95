@@ -22,6 +22,30 @@
       "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "499f7c9e_153f7e0b",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-11T02:12:53Z",
+      "side": 1,
+      "message": "Is it even necessary to have an out pointer? Can we just do ResultOrError\u003cMetalFunctionData\u003e instead of ResultOrError\u003cMetalFunctionData*\u003e?",
+      "parentUuid": "33e8ed57_0cb61d50",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 86
+      },
+      "revId": "5afc3ae17150ac04e942cd86be44fe25f70a7b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
