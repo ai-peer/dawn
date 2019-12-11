@@ -78,18 +78,18 @@ class alignas(kNativeVkHandleAlignment) VkNonDispatchableHandle {
     VkNonDispatchableHandle& operator=(const VkNonDispatchableHandle<Tag, HandleType>&) = default;
 
     // Comparisons between handles
-    bool operator==(VkNonDispatchableHandle<Tag, HandleType> other) {
+    bool operator==(VkNonDispatchableHandle<Tag, HandleType> other) const {
         return mHandle == other.mHandle;
     }
-    bool operator!=(VkNonDispatchableHandle<Tag, HandleType> other) {
+    bool operator!=(VkNonDispatchableHandle<Tag, HandleType> other) const {
         return mHandle != other.mHandle;
     }
 
     // Comparisons between handles and VK_NULL_HANDLE
-    bool operator==(std::nullptr_t) {
+    bool operator==(std::nullptr_t) const {
         return mHandle == 0;
     }
-    bool operator!=(std::nullptr_t) {
+    bool operator!=(std::nullptr_t) const {
         return mHandle != 0;
     }
 
@@ -165,5 +165,34 @@ class alignas(kNativeVkHandleAlignment) VkNonDispatchableHandle {
 #if defined(DAWN_PLATFORM_FUCHSIA)
 #    include <vulkan/vulkan_fuchsia_extras.h>
 #endif
+
+namespace dawn_native { namespace vulkan {
+
+    // Create a wrapper around VkResult for use in the dawn_native::vulkan namespace.
+    // This guards VkResults and ensures usage of them is done through WrapUnsafe. Which is used
+    // at callsites which support random error generation when fuzzing.
+    class VkResult {
+        struct UnsafeTag {};
+        static constexpr UnsafeTag kUnsafe = {};
+
+      public:
+        VkResult(::VkResult value) = delete;
+
+        constexpr static VkResult WrapUnsafe(::VkResult value) {
+            return VkResult(value, kUnsafe);
+        }
+
+        constexpr operator ::VkResult() const {
+            return mValue;
+        }
+
+      private:
+        constexpr VkResult(::VkResult value, UnsafeTag) : mValue(value) {
+        }
+
+        ::VkResult mValue;
+    };
+
+}}  // namespace dawn_native::vulkan
 
 #endif  // COMMON_VULKANPLATFORM_H_

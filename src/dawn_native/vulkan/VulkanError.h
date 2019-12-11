@@ -17,17 +17,33 @@
 
 #include "common/vulkan_platform.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/ErrorInjector.h"
+
+constexpr VkResult VK_FAKE_ERROR_FOR_TESTING = VK_RESULT_MAX_ENUM;
+constexpr VkResult VK_FAKE_DEVICE_OOM_FOR_TESTING = static_cast<VkResult>(VK_RESULT_MAX_ENUM - 1);
 
 namespace dawn_native { namespace vulkan {
 
     // Returns a string version of the result.
     const char* VkResultAsString(VkResult result);
 
-    // Returns a success only if result if VK_SUCCESS, an error with the context and stringified
-    // result value instead. Can be used like this:
-    //
-    //   DAWN_TRY(CheckVkSuccess(vkDoSomething, "doing something"));
-    MaybeError CheckVkSuccess(VkResult result, const char* context);
+    MaybeError CheckVkSuccessImpl(VkResult result, const char* context);
+    MaybeError CheckVkOOMThenSuccessImpl(VkResult result, const char* context);
+
+#define INJECT_VK_ERROR_OR_RUN(stmt, ...) \
+    ::dawn_native::vulkan::VkResult::WrapUnsafe(INJECT_ERROR_OR_RUN(stmt, ##__VA_ARGS__))
+
+// Returns a success only if result if VK_SUCCESS, an error with the context and stringified
+// result value instead. Can be used like this:
+//
+//   DAWN_TRY(CheckVkSuccess(vkDoSomething, "doing something"));
+#define CheckVkSuccess(resultIn, contextIn) \
+    CheckVkSuccessImpl(INJECT_VK_ERROR_OR_RUN(resultIn, VK_FAKE_ERROR_FOR_TESTING), contextIn)
+
+#define CheckVkOOMThenSuccess(resultIn, contextIn)                                             \
+    CheckVkOOMThenSuccessImpl(INJECT_VK_ERROR_OR_RUN(resultIn, VK_FAKE_DEVICE_OOM_FOR_TESTING, \
+                                                     VK_FAKE_ERROR_FOR_TESTING),               \
+                              contextIn)
 
 }}  // namespace dawn_native::vulkan
 
