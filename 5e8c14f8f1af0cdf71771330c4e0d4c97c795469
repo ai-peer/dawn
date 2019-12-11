@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "241c9ce0_11feeda2",
+        "filename": "src/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:34:22Z",
+      "side": 1,
+      "message": "nit: this adds a single deps, so maybe instead this static_library could be inlined in the dawn_spvc fuzzers. It would amount replaceding their deps \u003d [ \":dawn_spvc_fuzzer_common\" ] to deps \u003d [ \"${dawn_shader_dir}:libshaderc_spvc\" ]",
+      "revId": "5e8c14f8f1af0cdf71771330c4e0d4c97c795469",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80d7f646_b9c9c6ef",
+        "filename": "src/fuzzers/DawnSPVCglslFastFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T09:34:22Z",
+      "side": 1,
+      "message": "nit: completion, same in other files.",
+      "range": {
+        "startLine": 32,
+        "startChar": 54,
+        "endLine": 32,
+        "endChar": 65
+      },
+      "revId": "5e8c14f8f1af0cdf71771330c4e0d4c97c795469",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
