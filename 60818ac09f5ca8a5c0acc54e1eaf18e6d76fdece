@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18db227e_ee7f2c4a",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T16:54:48Z",
+      "side": 1,
+      "message": "nit: device loss here too?",
+      "revId": "60818ac09f5ca8a5c0acc54e1eaf18e6d76fdece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
