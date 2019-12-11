@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "027ac1cb_6875c4d2",
+        "filename": "src/dawn_native/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T15:58:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e009089_91055641",
+      "revId": "67876fa9489f2dea4f135b5dc788f5bff8c3cced",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f627c406_ab04e949",
         "filename": "src/dawn_native/RefCounted.cpp",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-12-11T14:46:48Z",
       "side": 1,
       "message": "My understanding is that an atomic thread fence works here, but that a simple mRefCount.load(std::memory_order_acquire) would be more efficient on certain architectures like ARM64 (which has dedicated load-acquire (ldar) / store-release (stlr) instructions, but requires full memory barrier instructions (dmb) to implement thread fences.\n\nShouldn\u0027t make a difference on Intel and 32-bit ARM though. See https://godbolt.org/z/izPnSc for more details (hint, the \"dmb\" instruction is the one you want to avoid if possible).",
+      "revId": "67876fa9489f2dea4f135b5dc788f5bff8c3cced",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52a763bd_cde34542",
+        "filename": "src/dawn_native/RefCounted.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-11T15:58:08Z",
+      "side": 1,
+      "message": "Discussed this offline, and knowing which is faster would require a micro benchmark. Added a comment describing what a potential optimization would be.",
+      "parentUuid": "f627c406_ab04e949",
       "revId": "67876fa9489f2dea4f135b5dc788f5bff8c3cced",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
