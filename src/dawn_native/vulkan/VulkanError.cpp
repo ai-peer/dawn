@@ -56,6 +56,8 @@ namespace dawn_native { namespace vulkan {
                 return "VK_ERROR_FORMAT_NOT_SUPPORTED";
             case VK_ERROR_FRAGMENTED_POOL:
                 return "VK_ERROR_FRAGMENTED_POOL";
+            case VK_FAKE_ERROR_FOR_TESTING:
+                return "VK_FAKE_ERROR_FOR_TESTING";
             default:
                 return "<Unknown VkResult>";
         }
@@ -65,7 +67,6 @@ namespace dawn_native { namespace vulkan {
         if (DAWN_LIKELY(result == VK_SUCCESS)) {
             return {};
         }
-
         std::string message = std::string(context) + " failed with " + VkResultAsString(result);
         return DAWN_DEVICE_LOST_ERROR(message);
     }
