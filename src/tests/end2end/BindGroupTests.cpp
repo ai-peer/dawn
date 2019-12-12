@@ -163,7 +163,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform vertexUniformBuffer {
+        layout (std140, set = 0, binding = 0) readonly buffer vertexUniformBuffer {
             mat2 transform;
         };
         void main() {
@@ -174,7 +174,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 1) uniform fragmentUniformBuffer {
+        layout (std140, set = 0, binding = 1) readonly buffer fragmentUniformBuffer {
             vec4 color;
         };
         layout(location = 0) out vec4 fragColor;
@@ -202,7 +202,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
         { 0.f, 1.f, 0.f, 1.f },
     };
     wgpu::Buffer buffer =
-        utils::CreateBufferFromData(device, &data, sizeof(data), wgpu::BufferUsage::Uniform);
+        utils::CreateBufferFromData(device, &data, sizeof(data), wgpu::BufferUsage::Storage);
     wgpu::BindGroup bindGroup = utils::MakeBindGroup(
         device, pipeline.GetBindGroupLayout(0),
         {{0, buffer, 0, sizeof(Data::transform)}, {1, buffer, 256, sizeof(Data::color)}});
@@ -235,7 +235,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform vertexUniformBuffer {
+        layout (std140, set = 0, binding = 0) readonly buffer vertexUniformBuffer {
             mat2 transform;
         };
         void main() {
@@ -263,7 +263,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
     constexpr float dummy = 0.0f;
     constexpr float transform[] = { 1.f, 0.f, dummy, dummy, 0.f, 1.f, dummy, dummy };
     wgpu::Buffer buffer = utils::CreateBufferFromData(device, &transform, sizeof(transform),
-                                                      wgpu::BufferUsage::Uniform);
+                                                      wgpu::BufferUsage::Storage);
 
     wgpu::SamplerDescriptor samplerDescriptor;
     samplerDescriptor.minFilter = wgpu::FilterMode::Nearest;
@@ -341,10 +341,10 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     wgpu::ShaderModule vsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
-        layout (set = 0, binding = 0) uniform vertexUniformBuffer1 {
+        layout (std140, set = 0, binding = 0) readonly buffer vertexUniformBuffer1 {
             mat2 transform1;
         };
-        layout (set = 1, binding = 0) uniform vertexUniformBuffer2 {
+        layout (std140, set = 1, binding = 0) readonly buffer vertexUniformBuffer2 {
             mat2 transform2;
         };
         void main() {
@@ -355,10 +355,10 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     wgpu::ShaderModule fsModule =
         utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 1) uniform fragmentUniformBuffer1 {
+        layout (std140, set = 0, binding = 1) buffer fragmentUniformBuffer1 {
             vec4 color1;
         };
-        layout (set = 1, binding = 1) uniform fragmentUniformBuffer2 {
+        layout (std140, set = 1, binding = 1) buffer fragmentUniformBuffer2 {
             vec4 color2;
         };
         layout(location = 0) out vec4 fragColor;
@@ -392,7 +392,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
 
     for (int i = 0; i < 2; i++) {
         wgpu::Buffer buffer =
-            utils::CreateBufferFromData(device, &data[i], sizeof(Data), wgpu::BufferUsage::Uniform);
+            utils::CreateBufferFromData(device, &data[i], sizeof(Data), wgpu::BufferUsage::Storage);
         buffers.push_back(buffer);
         bindGroups.push_back(utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
                                                   {{0, buffers[i], 0, sizeof(Data::transform)},
