@@ -478,6 +478,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/UtilsVulkan.h",
       "src/dawn_native/vulkan/VulkanError.cpp",
       "src/dawn_native/vulkan/VulkanError.h",
+      "src/dawn_native/vulkan/VulkanErrorInjector.cpp",
+      "src/dawn_native/vulkan/VulkanErrorInjector.h",
       "src/dawn_native/vulkan/VulkanFunctions.cpp",
       "src/dawn_native/vulkan/VulkanFunctions.h",
       "src/dawn_native/vulkan/VulkanInfo.cpp",
@@ -946,6 +948,7 @@ source_set("dawn_white_box_tests_sources") {
     deps += [ "third_party:vulkan_headers" ]
 
     if (is_linux) {
+      sources += [ "src/tests/white_box/VulkanErrorInjectorTests.cpp" ]
       sources += [ "src/tests/white_box/VulkanImageWrappingTests.cpp" ]
     }
   }

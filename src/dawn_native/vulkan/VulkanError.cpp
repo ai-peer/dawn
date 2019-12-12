@@ -56,18 +56,23 @@ namespace dawn_native { namespace vulkan {
                 return "VK_ERROR_FORMAT_NOT_SUPPORTED";
             case VK_ERROR_FRAGMENTED_POOL:
                 return "VK_ERROR_FRAGMENTED_POOL";
+            case VK_FAKE_ERROR_FOR_TESTING:
+                return "VK_FAKE_ERROR_FOR_TESTING";
             default:
                 return "<Unknown VkResult>";
         }
     }
 
-    MaybeError CheckVkSuccess(VkResult result, const char* context) {
+    MaybeError CheckVkSuccessImpl(VkResult result,
+                                  const char* context,
+                                  const char* file,
+                                  const char* func,
+                                  int line) {
         if (DAWN_LIKELY(result == VK_SUCCESS)) {
             return {};
         }
-
         std::string message = std::string(context) + " failed with " + VkResultAsString(result);
-        return DAWN_DEVICE_LOST_ERROR(message);
+        return MakeError(InternalErrorType::DeviceLost, message, file, func, line);
     }
 
 }}  // namespace dawn_native::vulkan
