@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97452c16_7f4420c9",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-12T22:12:36Z",
+      "side": 1,
+      "message": "optional: could just check\n\n [ $# -eq 3 ]",
+      "revId": "f2cd588e9b79d2094552df6d28829dc62e45beeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d58531e9_b4fb5879",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-12T22:12:36Z",
+      "side": 1,
+      "message": "nit: technically should put quotes around these variables, \"$testcase_dir\", to avoid issues with spaces",
+      "revId": "f2cd588e9b79d2094552df6d28829dc62e45beeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
