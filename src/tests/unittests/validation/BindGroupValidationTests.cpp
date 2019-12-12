@@ -493,6 +493,14 @@ class BindGroupLayoutValidationTest : public ValidationTest {
     }
 };
 
+TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutStorageBindingsInVertexShader) {
+    ASSERT_DEVICE_ERROR(utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Vertex, wgpu::BindingType::StorageBuffer}}));
+
+    utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Vertex, wgpu::BindingType::ReadonlyStorageBuffer}});
+}
+
 // Tests setting OOB checks for kMaxBindingsPerGroup in bind group layouts.
 TEST_F(BindGroupLayoutValidationTest, BindGroupLayoutBindingOOB) {
     // Checks that kMaxBindingsPerGroup - 1 is valid.
