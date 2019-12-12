@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "3f62abc7_e7bb9ff6",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T19:18:27Z",
+      "side": 1,
+      "message": "Whoops. I looked again and was wrong. I was under the impression that the DescriptorHeapAllocator could reuse old heaps, but now see that we just create a new one every time. So I think this part should be okay.\n\nDo you ever forsee us recycling heaps? Perhaps the D3D12 driver already does this internally or creating/destroying them is relatively cheap.",
+      "parentUuid": "ba602527_44dca4e0",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
