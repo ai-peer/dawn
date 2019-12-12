@@ -26,28 +26,11 @@ namespace dawn_platform {
     class Platform;
 }  // namespace dawn_platform
 
+namespace wgpu {
+    struct AdapterProperties;
+}
+
 namespace dawn_native {
-
-    struct PCIInfo {
-        uint32_t deviceId = 0;
-        uint32_t vendorId = 0;
-        std::string name;
-    };
-
-    enum class BackendType {
-        D3D12,
-        Metal,
-        Null,
-        OpenGL,
-        Vulkan,
-    };
-
-    enum class DeviceType {
-        DiscreteGPU,
-        IntegratedGPU,
-        CPU,
-        Unknown,
-    };
 
     class InstanceBase;
     class AdapterBase;
@@ -86,9 +69,9 @@ namespace dawn_native {
         Adapter(AdapterBase* impl);
         ~Adapter();
 
-        BackendType GetBackendType() const;
-        DeviceType GetDeviceType() const;
-        const PCIInfo& GetPCIInfo() const;
+        // webgpu.h API
+        void GetProperties(wgpu::AdapterProperties* properties) const;
+
         std::vector<const char*> GetSupportedExtensions() const;
         WGPUDeviceProperties GetAdapterProperties() const;
 
@@ -106,10 +89,10 @@ namespace dawn_native {
     // Base class for options passed to Instance::DiscoverAdapters.
     struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptionsBase {
       public:
-        const BackendType backendType;
+        const WGPUBackendType backendType;
 
       protected:
-        AdapterDiscoveryOptionsBase(BackendType type);
+        AdapterDiscoveryOptionsBase(WGPUBackendType type);
     };
 
     // Represents a connection to dawn_native and is used for dependency injection, discovering

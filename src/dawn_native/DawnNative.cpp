@@ -44,17 +44,14 @@ namespace dawn_native {
         mImpl = nullptr;
     }
 
-    BackendType Adapter::GetBackendType() const {
-        return mImpl->GetBackendType();
+    void Adapter::GetProperties(wgpu::AdapterProperties* properties) const {
+        properties->backendType = mImpl->GetBackendType();
+        properties->adapterType = mImpl->GetAdapterType();
+        properties->deviceID = mImpl->GetPCIInfo().deviceId;
+        properties->vendorID = mImpl->GetPCIInfo().vendorId;
+        properties->name = mImpl->GetPCIInfo().name.c_str();
     }
 
-    DeviceType Adapter::GetDeviceType() const {
-        return mImpl->GetDeviceType();
-    }
-
-    const PCIInfo& Adapter::GetPCIInfo() const {
-        return mImpl->GetPCIInfo();
-    }
 
     std::vector<const char*> Adapter::GetSupportedExtensions() const {
         ExtensionsSet supportedExtensionsSet = mImpl->GetSupportedExtensions();
@@ -75,7 +72,7 @@ namespace dawn_native {
 
     // AdapterDiscoverOptionsBase
 
-    AdapterDiscoveryOptionsBase::AdapterDiscoveryOptionsBase(BackendType type) : backendType(type) {
+    AdapterDiscoveryOptionsBase::AdapterDiscoveryOptionsBase(WGPUBackendType type) : backendType(type) {
     }
 
     // Instance
