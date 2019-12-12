@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "40c77c17_ecc8c3b7",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T22:13:45Z",
+      "side": 1,
+      "message": "This doesn\u0027t work where INJECT_ERROR_OR_RUN does run vkAllocateMemory, but then CheckVkSuccess, creates a fake error. Then we ran vkAllocateMemory when we shouldn\u0027t have.",
+      "parentUuid": "5e3e43ec_28d3cf81",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef77fab7_761837c4",
         "filename": "src/dawn_native/vulkan/VulkanError.h",
         "patchSetId": 1
