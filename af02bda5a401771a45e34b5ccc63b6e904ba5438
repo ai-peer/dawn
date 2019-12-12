@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "64c894ca_da5c269e",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-12T22:22:43Z",
+      "side": 1,
+      "message": "I\u0027m imagining reverting CheckVkSuccess so that it no longer creates fake errors, and moving the fake error creation out.\n\nMaybe that\u0027s too intrusive/hard to maintain since I guess it would affect a ton of callsites in the vk backend.",
+      "parentUuid": "40c77c17_ecc8c3b7",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef77fab7_761837c4",
         "filename": "src/dawn_native/vulkan/VulkanError.h",
         "patchSetId": 1
