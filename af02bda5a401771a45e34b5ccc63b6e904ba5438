@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "8dd94fd7_de87179c",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-12T22:42:48Z",
+      "side": 1,
+      "message": "I guess we would need two INJECT_ macros, similar to this patch, one for generic and one for generic+OOM.",
+      "parentUuid": "d88a9e97_909ec400",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef77fab7_761837c4",
         "filename": "src/dawn_native/vulkan/VulkanError.h",
         "patchSetId": 1
