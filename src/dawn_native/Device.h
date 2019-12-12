@@ -251,6 +251,16 @@ namespace dawn_native {
 
         void ConsumeError(ErrorData* error);
 
+        // Destroy is used to clean up and release resources used by device, does not wait for GPU
+        // or check errors. The device LossStatus is set to AlreadyLost once Destroy is complete.
+        virtual void Destroy() = 0;
+
+        // WaitForIdleForDestruction waits for GPU to finish, checks errors and gets ready for
+        // destruction. This is only used when properly destructing the device. For a real
+        // device loss, this function doesn't need to be called since the driver already closed all
+        // resources.
+        virtual MaybeError WaitForIdleForDestruction() = 0;
+
         AdapterBase* mAdapter = nullptr;
 
         Ref<ErrorScope> mRootErrorScope;
