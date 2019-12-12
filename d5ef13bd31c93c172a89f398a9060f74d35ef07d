@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c88c62fd_ed54654f",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-12-12T00:49:00Z",
+      "side": 1,
+      "message": "The other tests in the file called MakeTestPipeline(). And some of the tests deliberately set pipeline layout so that the layout is different from the default one that we can get from shader.",
+      "range": {
+        "startLine": 427,
+        "startChar": 4,
+        "endLine": 434,
+        "endChar": 59
+      },
+      "revId": "d5ef13bd31c93c172a89f398a9060f74d35ef07d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
