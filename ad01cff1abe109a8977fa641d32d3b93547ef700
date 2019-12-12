@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f86e383e_0c8e8c15",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T17:59:21Z",
+      "side": 1,
+      "message": "BindGroup 1 --\u003e on heap A\n...\nBindGroup 2 --\u003e allocating causes heap switch --\u003e on heap B\n...\nBindGroup 3 --\u003e allocating causes heap switch --\u003e on heap A (in the same memory as BindGroup 1)\n\nNow, BindGroup 1 and 3 alias the same memory and are both on the current active heap A.\n\n\nRe: samplers\nMaybe we can track and cycle the two heaps separately. Or somehow detect when we should use static samplers? Rather not make this CL more complex though.",
+      "parentUuid": "958c1169_2bc8fb63",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
@@ -83,6 +101,47 @@
       "writtenOn": "2019-12-10T17:27:45Z",
       "side": 1,
       "message": "Mmmh here we allocated potentially more data than we need if the bindgroups can be reused. There should be an elegant way to phrase it as a recursive algorithm for the case where we need to cycle the heaps.\n\nSomething like\n\n MaybeError Apply -\u003e call ApplyInternal with isNewDescriptorHeapAllocation to false.\n\n MaybeError ApplyInternal(CommandRecordingContext* commandContext, bool isNewDescriptorHeapAllocation) {\n   for (bindgroup in dirtyBindGroups) {\n     bool outOfSpace;\n     DAWN_TRY_ASSIGN(outOfSpace, TryAllocateBindGroupIfNeeded(bindGroup));\n     if (outOfSpace) {\n       if (isNewDescriptorHeapAllocation) {\n         ASSERT(false); // We should never fail to allocate on a new heap allocation. Maybe we could find a different way to do this so we don\u0027t have to pipe the boolean argument.\n       }\n       dirtyBindGroups \u003d allBindGroups;\n       cycle descriptor heaps\n       return ApplyInternal(commandContext, true);\n     }\n   }\n }",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db4ee81c_139943dc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T17:59:21Z",
+      "side": 1,
+      "message": "This is mostly what happens at [1]. The difference is that your suggestion is one-by-one allocation and the code at [1] allocates all of them at once -- and sometimes overcounts.\n\nI don\u0027t think counting correctly would be slow since there\u0027s only 4 bind groups and would only check the heapSerial. I think this makes it much more clear that cycling the heaps can happen strictly once.",
+      "parentUuid": "e47584c3_3dc4e06c",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25048eaf_e52e8509",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T17:59:21Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 127,
+        "endChar": 17
+      },
       "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
