@@ -22,6 +22,30 @@
       "revId": "d705c2b7d9f9742c90ca599d9478274ed0edff1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e05b0c36_d72e5d77",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-12T10:32:04Z",
+      "side": 1,
+      "message": "Done, and added the same checks to RenderPipeline.",
+      "parentUuid": "d776635d_db039273",
+      "range": {
+        "startLine": 104,
+        "startChar": 20,
+        "endLine": 104,
+        "endChar": 28
+      },
+      "revId": "d705c2b7d9f9742c90ca599d9478274ed0edff1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
