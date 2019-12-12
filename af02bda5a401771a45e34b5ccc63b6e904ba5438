@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "d88a9e97_909ec400",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T22:33:30Z",
+      "side": 1,
+      "message": "Hm.. how does INJECT_ERROR_OR_RUN know what kind of errors to produce?\n\nI tried some other idea once which replaced all the VulkanFunctions on mDevice-\u003efn with wrappers that might return an error VkResult. But because there are so many possible VkResults, it was hard to do this correctly.",
+      "parentUuid": "64c894ca_da5c269e",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ef77fab7_761837c4",
         "filename": "src/dawn_native/vulkan/VulkanError.h",
         "patchSetId": 1
