@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "958c1169_2bc8fb63",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-12T01:11:58Z",
+      "side": 1,
+      "message": "\u003e This could fail if we have two heaps that we reuse, A and B, and that we roll-over twice\n\nUnless I\u0027m missing something obvious, I don\u0027t think that\u0027s possible. The bindgroup allocation (originally encoded in heap A) should be be re-encoded on heap B (according to the BGL). The heap serial is not needed because we only care if it\u0027s resident in the currently bound heap or not - heap A is no longer used once switched.\n\n\u003e Actually I\u0027m worried that the 2048 limit for sampler heaps will mean we\u0027ll need to cycle the sampler heap way more often than the other :/\n\nThere does exist static samplers that do not count toward the limit. However, these are unchanging which is a departure from the current model.",
+      "parentUuid": "fba48d29_6a2d9f97",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
@@ -33,6 +51,24 @@
       "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4041660_4f6c0c1d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-12T01:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c67f196c_3c463845",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -67,6 +103,24 @@
       "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3cc74b3_7c59830e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-12T01:11:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc130daa_23db67ae",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
