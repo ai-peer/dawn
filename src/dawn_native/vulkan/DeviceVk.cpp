@@ -397,6 +397,7 @@ namespace dawn_native { namespace vulkan {
         // Always require imageCubeArray because it is a core Dawn feature
         usedKnobs.features.imageCubeArray = VK_TRUE;
         // Always require fragmentStoresAndAtomics because it is required by end2end tests.
+        usedKnobs.features.vertexPipelineStoresAndAtomics = VK_TRUE;
         usedKnobs.features.fragmentStoresAndAtomics = VK_TRUE;
 
         if (IsExtensionEnabled(Extension::TextureCompressionBC)) {

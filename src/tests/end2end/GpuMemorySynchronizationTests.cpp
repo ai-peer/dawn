@@ -23,7 +23,7 @@ class GpuMemorySyncTests : public DawnTest {
   protected:
     wgpu::Buffer CreateBuffer() {
         wgpu::BufferDescriptor srcDesc;
-        srcDesc.size = 4;
+        srcDesc.size = 256 + 4;
         srcDesc.usage =
             wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Storage;
         wgpu::Buffer buffer = device.CreateBuffer(&srcDesc);
@@ -38,10 +38,14 @@ class GpuMemorySyncTests : public DawnTest {
         wgpu::ShaderModule csModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Compute, R"(
         #version 450
-        layout(std140, set = 0, binding = 0) buffer Data {
+        layout(std140, set = 0, binding = 0) buffer VData {
+            int a;
+        } vdata;
+        layout(std140, set = 0, binding = 1) buffer Data {
             int a;
         } data;
         void main() {
+            vdata.a += 1;
             data.a += 1;
         })");
 
@@ -50,8 +54,8 @@ class GpuMemorySyncTests : public DawnTest {
         cpDesc.computeStage.entryPoint = "main";
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&cpDesc);
 
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {{0, buffer, 0, 4}, {1, buffer, 256, 4}});
         return std::make_tuple(pipeline, bindGroup);
     }
 
@@ -61,7 +65,11 @@ class GpuMemorySyncTests : public DawnTest {
         wgpu::ShaderModule vsModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
         #version 450
+        layout (std140, set = 0, binding = 0) buffer VData {
+            int a;
+        } vdata;
         void main() {
+            vdata.a += 1;
             gl_Position = vec4(0.f, 0.f, 0.f, 1.f);
             gl_PointSize = 1.0;
         })");
@@ -69,13 +77,13 @@ class GpuMemorySyncTests : public DawnTest {
         wgpu::ShaderModule fsModule =
             utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
         #version 450
-        layout (set = 0, binding = 0) buffer Data {
-            int i;
+        layout (std140, set = 0, binding = 1) buffer Data {
+            int b;
         } data;
         layout(location = 0) out vec4 fragColor;
         void main() {
-            data.i += 1;
-            fragColor = vec4(data.i / 255.f, 0.f, 0.f, 1.f);
+            data.b += 1;
+            fragColor = vec4(data.b / 255.f, 0.f, 0.f, 1.f);
         })");
 
         utils::ComboRenderPipelineDescriptor rpDesc(device);
@@ -86,8 +94,8 @@ class GpuMemorySyncTests : public DawnTest {
 
         wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
 
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {{0, buffer, 0, 4}, {1, buffer, 256, 4}});
         return std::make_tuple(pipeline, bindGroup);
     }
 };
