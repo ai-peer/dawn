@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "34f83737_661fb678",
+        "filename": "src/dawn_native/vulkan/VulkanError.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T17:34:41Z",
+      "side": 1,
+      "message": "I have something like this locally. I\u0027m thinking it defaults to (use_fuzzing_engine || is_debug) ? So it works when fuzzing, and in Debug builds (for coverage)",
+      "parentUuid": "ef77fab7_761837c4",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b905bae_503ed97b",
         "filename": "src/dawn_native/vulkan/VulkanError.h",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "5e046b54_63897014",
+        "filename": "src/dawn_native/vulkan/VulkanError.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T17:34:41Z",
+      "side": 1,
+      "message": "1. __func__ becomes something empty inside this lambda :(\n2. It\u0027s a lambda because I couldn\u0027t figure out how to only use |resultIn| once so that something like CheckVkSuccess(vkCreateBuffer(...)) doesn\u0027t run twice -- without creating a new function scope.",
+      "parentUuid": "2b905bae_503ed97b",
+      "range": {
+        "startLine": 73,
+        "startChar": 19,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "264c5fe9_6addfb71",
         "filename": "src/dawn_native/vulkan/VulkanErrorInjector.cpp",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2019-12-12T14:53:46Z",
       "side": 1,
       "message": "Can\u0027t we just check the numbers of call to CheckVkSuccess overall instead of per-line? Execution should be 100% reproducible no?",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8560ca6f_c043fdc2",
+        "filename": "src/dawn_native/vulkan/VulkanErrorInjector.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-12T17:34:41Z",
+      "side": 1,
+      "message": "Maybe..? I could see Tick() happening a variable number of times while waiting for a buffer mapping to complete. For situations like that, I think the callsite id helps fuzzing cases be more reproducible.\n\nMaybe not though. When timing is involved, fuzzing might be pretty flaky regardless because it\u0027ll call Tick() multiple times in a row instead of once every few microseconds.",
+      "parentUuid": "264c5fe9_6addfb71",
       "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
