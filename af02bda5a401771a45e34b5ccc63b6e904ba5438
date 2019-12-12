@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef77fab7_761837c4",
+        "filename": "src/dawn_native/vulkan/VulkanError.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-12T14:53:46Z",
+      "side": 1,
+      "message": "Not super happy about how this adds hidden code behind CheckVkSuccess in all configurations. How about having a flag like DAWN_ENABLE_VK_ERROR_INJECTION that uses the code below, and otherwise just proxies CheckVkSuccess to CheckVkSuccessImpl?",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b905bae_503ed97b",
+        "filename": "src/dawn_native/vulkan/VulkanError.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-12T14:53:46Z",
+      "side": 1,
+      "message": "nit: Why can\u0027t this be DAWN_OUT_OF_MEMORY_ERROR? __FILE__ __func__ and __LINE__ should be correct. Ditto everywhere else.",
+      "range": {
+        "startLine": 73,
+        "startChar": 19,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "264c5fe9_6addfb71",
+        "filename": "src/dawn_native/vulkan/VulkanErrorInjector.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-12T14:53:46Z",
+      "side": 1,
+      "message": "Can\u0027t we just check the numbers of call to CheckVkSuccess overall instead of per-line? Execution should be 100% reproducible no?",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4963ed1f_540d1ab3",
+        "filename": "src/dawn_native/vulkan/VulkanErrorInjector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-12T14:53:46Z",
+      "side": 1,
+      "message": "We probably don\u0027t need the file and line for injecting errors. See [1]",
+      "range": {
+        "startLine": 32,
+        "startChar": 56,
+        "endLine": 34,
+        "endChar": 65
+      },
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
