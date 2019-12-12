@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ba602527_44dca4e0",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-12T19:12:38Z",
+      "side": 1,
+      "message": "\u003e Now, BindGroup 1 and 3 alias the same memory and are both on the current active heap A.\n\nI\u0027m still confused \u003d( How could heap A remain currently bound after BindGroup 2 causes a heap  switch from heap A to heap B? I would expect BindGroup 1 to be allocated on heap A then again on heap B upon the switch. If so, BindGroup 3 could only be allocated from heap B and so on.\n\nCould you please point to the error in this reasoning?",
+      "parentUuid": "f86e383e_0c8e8c15",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
