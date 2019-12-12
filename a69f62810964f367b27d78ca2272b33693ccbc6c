@@ -22,6 +22,30 @@
       "revId": "a69f62810964f367b27d78ca2272b33693ccbc6c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de01eca1_2d3403ec",
+        "filename": "src/dawn_native/RefCounted.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-12T10:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c33d025_44ee9d0c",
+      "range": {
+        "startLine": 73,
+        "startChar": 83,
+        "endLine": 73,
+        "endChar": 94
+      },
+      "revId": "a69f62810964f367b27d78ca2272b33693ccbc6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
