@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "49c5a59f_ac74b87f",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "418b1b0c_cca8f1e7",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef77fab7_761837c4",
         "filename": "src/dawn_native/vulkan/VulkanError.h",
         "patchSetId": 1
@@ -141,6 +159,24 @@
       "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e0c12a6_d696590d",
+        "filename": "src/dawn_native/vulkan/VulkanError.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f83737_661fb678",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -215,6 +251,30 @@
     },
     {
       "key": {
+        "uuid": "68b673ca_7b5b54be",
+        "filename": "src/dawn_native/vulkan/VulkanError.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba0c40fe_8d8962cf",
+      "range": {
+        "startLine": 73,
+        "startChar": 19,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10626ea8_b02bb6a4",
         "filename": "src/dawn_native/vulkan/VulkanError.h",
         "patchSetId": 1
@@ -235,6 +295,30 @@
       "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0e85e98_a77bb92c",
+        "filename": "src/dawn_native/vulkan/VulkanError.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10626ea8_b02bb6a4",
+      "range": {
+        "startLine": 76,
+        "startChar": 86,
+        "endLine": 76,
+        "endChar": 94
+      },
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -273,6 +357,24 @@
     },
     {
       "key": {
+        "uuid": "019acc6e_7b4796c8",
+        "filename": "src/dawn_native/vulkan/VulkanErrorInjector.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:09:35Z",
+      "side": 1,
+      "message": "Nevermind, I\u0027ve decided the overall count is better and we don\u0027t need this hashing.",
+      "parentUuid": "8560ca6f_c043fdc2",
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4963ed1f_540d1ab3",
         "filename": "src/dawn_native/vulkan/VulkanErrorInjector.h",
         "patchSetId": 1
@@ -293,6 +395,30 @@
       "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f96efeb_e1cc670e",
+        "filename": "src/dawn_native/vulkan/VulkanErrorInjector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4963ed1f_540d1ab3",
+      "range": {
+        "startLine": 32,
+        "startChar": 56,
+        "endLine": 34,
+        "endChar": 65
+      },
+      "revId": "af02bda5a401771a45e34b5ccc63b6e904ba5438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
