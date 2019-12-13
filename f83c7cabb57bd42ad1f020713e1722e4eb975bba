@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a05288b1_352117e3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:51:42Z",
+      "side": 1,
+      "message": "nit: loss",
+      "range": {
+        "startLine": 110,
+        "startChar": 45,
+        "endLine": 110,
+        "endChar": 49
+      },
+      "revId": "f83c7cabb57bd42ad1f020713e1722e4eb975bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e1e609ca_983a153b",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 2
@@ -19,6 +42,40 @@
         "endLine": 62,
         "endChar": 18
       },
+      "revId": "f83c7cabb57bd42ad1f020713e1722e4eb975bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93b9acdc_d3293a79",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:51:42Z",
+      "side": 1,
+      "message": "Actually we should just release these commands an not send them because we\u0027re waiting for destruction anyway so we don\u0027t care about the result of these pending commands.\n\n        [mPendingCommands release];\n        mPendingCommands \u003d nil;",
+      "revId": "f83c7cabb57bd42ad1f020713e1722e4eb975bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b1b02e5_15454a66",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:51:42Z",
+      "side": 1,
+      "message": "CheckPassedFences doesn\u0027t actually wait for them to be finished. We should use glFinish() at the start of this function, which is GL for WaitForIdle.",
       "revId": "f83c7cabb57bd42ad1f020713e1722e4eb975bba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
