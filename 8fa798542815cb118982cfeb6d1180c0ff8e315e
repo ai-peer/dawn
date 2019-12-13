@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cdc60df_701c5cb0",
+        "filename": "src/dawn_native/Error.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:45:34Z",
+      "side": 1,
+      "message": "Why do we need this header?",
+      "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b945d756_25e56e79",
+        "filename": "src/dawn_native/ErrorInjector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:45:34Z",
+      "side": 1,
+      "message": "This isn\u0027t used?",
+      "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fac395f8_0b9171aa",
+        "filename": "src/dawn_native/ErrorInjector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:45:34Z",
+      "side": 1,
+      "message": "All of these could be standalone methods acting on a static struct, so less code is added to all the Vulkan backend by the preprocessor. What we want to avoid are static initializers, but static structures by themselves are ok.",
+      "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f06752b1_2e9f22f1",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:45:34Z",
+      "side": 1,
+      "message": "Not a fan of peppering this through the code, because it needs to be done for every CheckVkSuccess and every CheckVkSuccessWithOOM anyway. Can\u0027t we just make these functions macros that either go directly to their *Impl counterparts, or check the error injector first? Also CheckVkSuccessWithOOM could call ShouldInjectError twice, if the first one returns true, then return the fake error, if the second one returns true, return OOM.\n\nIt would remove a lot of the complexity with wrapping VkResult, the VA_ARGS, etc.",
+      "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
