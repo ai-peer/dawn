@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "0e3eb2ce_c80a1262",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-13T19:30:10Z",
+      "side": 1,
+      "message": "\u003e Even if we don\u0027t recycle heaps we need a serial. For example:\n\nIn that example, BG1 (the very last step) would be re-encoded in A2 at offset 0 and BG2 would be encoded in A2 at offset 1. Even if the pointer happens to point to the old heap, it still re-encodes ALL BGs from the start again upon switching heaps - ensuring no conflicts.\n\n\u003e Do you ever forsee us recycling heaps? Perhaps the D3D12 driver already does this internally or creating/destroying them is relatively cheap.\n\nNo plans. I wouldn\u0027t expect the D3D12/driver to do such management. Ideally, the same GPU heaps remain bound (due to the cost of switching).",
+      "parentUuid": "c626b89a_8a674b2e",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19

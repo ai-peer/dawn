@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c777614e_5354d005",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-13T19:30:10Z",
+      "side": 1,
+      "message": "Here is PS#20 vs HEAD:\n\n| Test | d3d12_base | d3d12_test |\n| ---- | ---------- | ---------- |\n| DrawCallPerf.Run/D3D12 | 58 (+/- 5%) | 60 (+/- 8%) |\n| DrawCallPerf.Run/D3D12_DynamicBindGroup | 169 (+/- 2%) | 170 (+/- 3.8%) |\n| DrawCallPerf.Run/D3D12_MultipleBindGroups | 478 (+/- 2%) | 436 (+/- 0.66%) |\n| DrawCallPerf.Run/D3D12_DynamicPipeline_MultipleBindGroups | 1013 (+/- 3%) | 1049 (+/- 1.7%) | \n| DrawCallPerf.Run/D3D12_DynamicPipeline_DynamicBindGroup | 728 (1.4%) | 964 (+/- 2%) |\n\nNot a big win - the last test is slower. \u003d/ The pre-pass is likely too small vs the high frequency of changing BGs.",
+      "parentUuid": "a00a4afc_06d1c418",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 80
+      },
+      "revId": "f607b4d54442f6e04b59bfbb4f97f88dae512fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b063f4d_80ad4c32",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 16
