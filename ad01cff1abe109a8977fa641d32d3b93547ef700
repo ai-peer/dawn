@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "c626b89a_8a674b2e",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-13T15:18:45Z",
+      "side": 1,
+      "message": "Even if we don\u0027t recycle heaps we need a serial. For example:\n\nbindgroup1 -\u003e heap A1 at offset 0\n// stuff that causes rollover and to use heap B\n// heap A is no longer in use and given back to the driver\n\n// Rollover, driver gives us a new heap that happens to have the same pointer as heap A1\nbindgroup2 -\u003e heap A2 at offset 0\nbindgroup1 -\u003e Hey that\u0027s the same pointer so I don\u0027t need to populate, I\u0027m at heap A2 offset 0 too.",
+      "parentUuid": "3f62abc7_e7bb9ff6",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
