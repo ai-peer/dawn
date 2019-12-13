@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "67dcaf47_453d56df",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T22:29:54Z",
+      "side": 1,
+      "message": "Seems okay for now; not a huge regression",
+      "parentUuid": "c777614e_5354d005",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 80
+      },
+      "revId": "f607b4d54442f6e04b59bfbb4f97f88dae512fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b063f4d_80ad4c32",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 16

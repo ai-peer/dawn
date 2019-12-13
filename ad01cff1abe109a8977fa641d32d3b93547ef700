@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "5366f94f_a9dd0d43",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T22:29:54Z",
+      "side": 1,
+      "message": "BG2 --\u003e new heap A2 --\u003e encoded for the first time at offset 0\nBG1 --\u003e happened to already be recorded at A2 offset 0 in the past. It is not re-encoded",
+      "parentUuid": "0e3eb2ce_c80a1262",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
