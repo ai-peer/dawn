@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e06610ec_103e2ecf",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:19:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97452c16_7f4420c9",
+      "revId": "f2cd588e9b79d2094552df6d28829dc62e45beeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d58531e9_b4fb5879",
         "filename": "scripts/update_fuzzer_seed_corpus.sh",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "f2cd588e9b79d2094552df6d28829dc62e45beeb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fc58769_eee44942",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-13T01:19:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d58531e9_b4fb5879",
+      "revId": "f2cd588e9b79d2094552df6d28829dc62e45beeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
