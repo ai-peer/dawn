@@ -419,6 +419,80 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
     EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, max, max);
 }
 
+// This test verifies that storage buffer and readonly storage buffer works in vertex shader on
+// D3D12, Metal and Vulkan backend.
+TEST_P(BindGroupTests, StorageAndReadonlyStorageBindingsInVertexShader) {
+    // Storage buffer and readonly storage buffer may not be supported in vertex shader in OpenGL.
+    // This is not a bug. In OpenGL Spec 4.6, the minimum value of MAX_VERTEX_SHADER_STORAGE_BLOCKS
+    // is 0
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
+
+    wgpu::ShaderModule vsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, R"(
+        #version 450
+        layout (set = 0, binding = 0) buffer storageBuffer {
+            mat2 transform1;
+        };
+        layout (set = 0, binding = 1) readonly buffer readonlyStorageBuffer {
+            mat2 transform2;
+        };
+        void main() {
+            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
+            gl_Position = vec4((transform1 + transform2) * pos[gl_VertexIndex], 0.f, 1.f);
+        })");
+
+    wgpu::ShaderModule fsModule =
+        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
+        #version 450
+        layout (set = 0, binding = 2) uniform colorBuffer {
+            vec4 color;
+        };
+        layout(location = 0) out vec4 fragColor;
+        void main() {
+            fragColor = color;
+        })");
+
+    utils::ComboRenderPipelineDescriptor textureDescriptor(device);
+    textureDescriptor.vertexStage.module = vsModule;
+    textureDescriptor.cFragmentStage.module = fsModule;
+    textureDescriptor.cColorStates[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&textureDescriptor);
+
+    constexpr float transform1[] = {1.0f, 0.0f, 0.0f, 0.0f};
+    wgpu::Buffer storageBuffer = utils::CreateBufferFromData(
+        device, &transform1, sizeof(transform1), wgpu::BufferUsage::Storage);
+    constexpr float transform2[] = {0.0f, 0.0f, 0.0f, 1.0f};
+    wgpu::Buffer readonlyStorageBuffer = utils::CreateBufferFromData(
+        device, &transform2, sizeof(transform2), wgpu::BufferUsage::Storage);
+    constexpr float color[] = {1.0f, 0.0f, 0.0f, 1.0f};
+    wgpu::Buffer colorBuffer =
+        utils::CreateBufferFromData(device, &color, sizeof(color), wgpu::BufferUsage::Uniform);
+
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                             {{0, storageBuffer}, {1, readonlyStorageBuffer}, {2, colorBuffer}});
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    pass.SetPipeline(pipeline);
+    pass.SetBindGroup(0, bindGroup);
+    pass.Draw(3, 1, 0, 0);
+    pass.EndPass();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    RGBA8 filled(255, 0, 0, 255);
+    RGBA8 notFilled(0, 0, 0, 0);
+    int min = 1, max = kRTSize - 3;
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, min, min);
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, max, min);
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, min, max);
+    EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, max, max);
+}
+
 // This test reproduces an out-of-bound bug on D3D12 backends when calling draw command twice with
 // one pipeline that has 4 bind group sets in one render pass.
 TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets) {
