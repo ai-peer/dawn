@@ -85,6 +85,24 @@
       "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f1c3a07_fcae60f9",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-13T20:06:47Z",
+      "side": 1,
+      "message": "Seems good, I guess peppering this everywhere does suck.\n\nDo whatever you think is best, it\u0027s much easier for you to figure out since you\u0027re implementing it.",
+      "parentUuid": "79e7ff98_1150d975",
+      "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
