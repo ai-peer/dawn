@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "7a951c10_1ee08ce4",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-13T23:46:21Z",
+      "side": 1,
+      "message": "\u003e happened to already be recorded at A2 offset 0 in the past\n\nHow? This part confuses me.\n\nBG1 and BG2 can\u0027t share the same offset in A2 - it\u0027s not allowed by the allocator. Either BG1 was from A1 then re-encoded to A2 offset \u003d 1 OR BG1 was already from A2 offset \u003d 0 then BG2 will be offset \u003d 1.\n\nCan\u0027t tell if the logic is flawed or if this is an extra precaution.",
+      "parentUuid": "5366f94f_a9dd0d43",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
