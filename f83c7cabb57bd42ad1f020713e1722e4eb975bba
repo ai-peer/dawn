@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1e609ca_983a153b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-13T00:52:46Z",
+      "side": 1,
+      "message": "I see this code copied in every backend. I know we can\u0027t put the code in the base class destructor directly. However, we should put the code in a protected helper function in the base class and have every derived class destructor call it. We can name it BaseDestructor or something similar.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 18
+      },
+      "revId": "f83c7cabb57bd42ad1f020713e1722e4eb975bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
