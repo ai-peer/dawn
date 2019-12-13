@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4901a0c0_957fa489",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-12-13T21:18:26Z",
+      "side": 1,
+      "message": "We have already added support for storage buffer in fragment shader. I think it makes sense to add support for storage buffer in vertex shader too. Otherwise, we MUST decorate storage buffer via \"readonly\" or \"NonWritable\". I don\u0027t think it is necessary to limit this and add this limitation in WebGPU spec, considering that the (most majority of, if not all) native graphics can actually support it. \n\nWDYT?",
+      "range": {
+        "startLine": 399,
+        "startChar": 8,
+        "endLine": 402,
+        "endChar": 62
+      },
+      "revId": "7c8afd32cb79436cc8a51f60c501090e360d59d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
