@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b752b463_d06f2f86",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-15T22:44:58Z",
+      "side": 1,
+      "message": "Ah finally understood what this does: if you declare a VkResult it will actually use this class which enforces you use WrapUnsafe. Maybe add a comment explaining this name resolution hack, and put it in VulkanFunction.h instead because common/ shouldn\u0027t have dawn_native stuff in it.",
+      "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9cdc60df_701c5cb0",
         "filename": "src/dawn_native/Error.cpp",
         "patchSetId": 4
@@ -101,6 +118,24 @@
       "side": 1,
       "message": "Done. Is this what you mean?",
       "parentUuid": "fac395f8_0b9171aa",
+      "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62faf006_3e88ecf4",
+        "filename": "src/dawn_native/ErrorInjector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-15T22:44:58Z",
+      "side": 1,
+      "message": "Sorry, what I meant is more \"C-style\" where the header only declares a bunch of functions and the static data is hidden in the .cpp file.",
+      "parentUuid": "5afbc2f7_7ff134bf",
       "revId": "8fa798542815cb118982cfeb6d1180c0ff8e315e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
