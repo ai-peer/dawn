@@ -42,6 +42,23 @@
     },
     {
       "key": {
+        "uuid": "6ac5a0d0_832240c5",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-15T22:58:16Z",
+      "side": 1,
+      "message": "No need to change anything but FYI ObjectiveC \"methods\" are noops when called on null objects.",
+      "revId": "b765496e6308dd89a9a75a553378a753481fb67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa287054_7306c16d",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 3
@@ -53,6 +70,30 @@
       "writtenOn": "2019-12-13T20:27:08Z",
       "side": 1,
       "message": "The other backends seem to do the Tick et al in WaitForIdleForDestruction. Why not here?",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 15
+      },
+      "revId": "b765496e6308dd89a9a75a553378a753481fb67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de73a71c_fbbdb5cc",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-15T22:58:16Z",
+      "side": 1,
+      "message": "Yeah the logic should probably be the same in each backend.\n\nWaitForDestruction should\n - Wait for idle, and that\u0027s it\n\nDestroy should\n - Release pending commands (in case we are in the code path for real)\n - Set the serial to max serial.\n - Call tick (the max serial means everything is considered unused)\n - Destroy stuff\n\nThat said I don\u0027t want to block this CL on doing this because it requires a detailed understanding of all the backends. I can take it as a follow up.",
+      "parentUuid": "aa287054_7306c16d",
       "range": {
         "startLine": 729,
         "startChar": 0,
