@@ -163,6 +163,24 @@
     },
     {
       "key": {
+        "uuid": "189d8633_cde5abed",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-15T22:25:18Z",
+      "side": 1,
+      "message": "Our point is that the logic to know if we can skip the encoding is flawed and BG1 will think we are still using A1 because the pointer is the same as A2, so it will happily not reencode and start using A2 offset 0",
+      "parentUuid": "7a951c10_1ee08ce4",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
