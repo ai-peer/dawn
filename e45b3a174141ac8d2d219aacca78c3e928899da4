@@ -22,6 +22,30 @@
       "revId": "e45b3a174141ac8d2d219aacca78c3e928899da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "751da95d_651c7558",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-16T23:16:14Z",
+      "side": 1,
+      "message": "I have no opinion between the two. I\u0027d like to let Corentin do the followup he suggested.",
+      "parentUuid": "3d038a58_88d4d696",
+      "range": {
+        "startLine": 394,
+        "startChar": 4,
+        "endLine": 404,
+        "endChar": 0
+      },
+      "revId": "e45b3a174141ac8d2d219aacca78c3e928899da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
