@@ -199,6 +199,24 @@
     },
     {
       "key": {
+        "uuid": "660e3ae1_971dd65d",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-16T22:09:36Z",
+      "side": 1,
+      "message": "Ok I think the issue here is that serial is an overloaded term:\n - there is THE serial in Dawn that\u0027s the progression of queue submission\n - there is the technique of using u64 serial that increment by 1 so you can easily uniquely identify things.\n\nIn all this discuss I was referring to the latter: using a u64 that\u0027s incremented for every heap  creation so we can differentiate two heaps that have the same pointer thanks to this unique number.",
+      "parentUuid": "aa72d3b2_26b822b2",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
@@ -281,6 +299,24 @@
       "side": 1,
       "message": "+1 AE. The bigger downside of the new approach is computing the counts for the infrequent case of spilling/overflow (vs no counts and allocating bindgroup-by-bindgroup). I prefer not to thrash until we have more data where the pre-pass is removed.",
       "parentUuid": "db4ee81c_139943dc",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ad2ab65_f322e7fd",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-16T22:09:36Z",
+      "side": 1,
+      "message": "Ok I\u0027ll need to re-review this in detail.",
+      "parentUuid": "859f5b35_f8186101",
       "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
