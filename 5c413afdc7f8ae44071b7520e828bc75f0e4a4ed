@@ -22,6 +22,30 @@
       "revId": "5c413afdc7f8ae44071b7520e828bc75f0e4a4ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99b74d21_49a190b8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-16T19:49:31Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "9f7be7a8_e5e6120c",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 90
+      },
+      "revId": "5c413afdc7f8ae44071b7520e828bc75f0e4a4ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
