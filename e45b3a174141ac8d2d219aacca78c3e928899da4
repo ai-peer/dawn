@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d038a58_88d4d696",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-16T23:14:29Z",
+      "side": 1,
+      "message": "nit: Should this first forget pending commands? That seems to be what the Metal backend does. The Vulkan backend also doesn\u0027t wait for the pending commands.\n\nNote: I see that Kai commented the opposite here. We should probably leave a comment in the code so that it\u0027s clear why we need to forget commands in WaitForIdleForDestruction. Since we\u0027re waiting for destruction, it seems fine to forget everything currently flight.",
+      "range": {
+        "startLine": 394,
+        "startChar": 4,
+        "endLine": 404,
+        "endChar": 0
+      },
+      "revId": "e45b3a174141ac8d2d219aacca78c3e928899da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
