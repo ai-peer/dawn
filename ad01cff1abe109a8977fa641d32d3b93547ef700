@@ -181,6 +181,24 @@
     },
     {
       "key": {
+        "uuid": "aa72d3b2_26b822b2",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-16T19:20:53Z",
+      "side": 1,
+      "message": "Okay. I think I\u0027ve come up with a more concrete example:\n\n1. BG1 was allocated in A2 offset \u003d 0, serial N.\n2. Tick(N+1). // BG1\u0027s allocation gets de-allocated.\n3. BG2 is allocated in A2 offset \u003d 0 (same as BG1), serial N+1.\n\nBG1 now has a dangling pointer since nether heap gets invalidated after step (2). If this is correct, then I agree the serial check is needed.",
+      "parentUuid": "189d8633_cde5abed",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c67f196c_3c463845",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 19
@@ -245,6 +263,24 @@
       "side": 1,
       "message": "This is mostly what happens at [1]. The difference is that your suggestion is one-by-one allocation and the code at [1] allocates all of them at once -- and sometimes overcounts.\n\nI don\u0027t think counting correctly would be slow since there\u0027s only 4 bind groups and would only check the heapSerial. I think this makes it much more clear that cycling the heaps can happen strictly once.",
       "parentUuid": "e47584c3_3dc4e06c",
+      "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "859f5b35_f8186101",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-16T19:20:53Z",
+      "side": 1,
+      "message": "+1 AE. The bigger downside of the new approach is computing the counts for the infrequent case of spilling/overflow (vs no counts and allocating bindgroup-by-bindgroup). I prefer not to thrash until we have more data where the pre-pass is removed.",
+      "parentUuid": "db4ee81c_139943dc",
       "revId": "ad01cff1abe109a8977fa641d32d3b93547ef700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
