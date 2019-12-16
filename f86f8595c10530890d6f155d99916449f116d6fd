@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45366fbf_ae3fc380",
+        "filename": "src/dawn_native/ErrorInjector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-16T23:58:01Z",
+      "side": 1,
+      "message": "is this needed? I thought it would be deduced.",
+      "range": {
+        "startLine": 58,
+        "startChar": 14,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "f86f8595c10530890d6f155d99916449f116d6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72fe1cf1_68e3160a",
+        "filename": "src/dawn_native/vulkan/VulkanFunctions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-16T23:58:01Z",
+      "side": 1,
+      "message": "I\u0027d explicitly call out \"This shadows the default VkResult (::VkResult).\"",
+      "revId": "f86f8595c10530890d6f155d99916449f116d6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3121189_1b4a94ba",
+        "filename": "src/dawn_native/vulkan/VulkanFunctions.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-16T23:58:01Z",
+      "side": 1,
+      "message": "Would it work to take out UnsafeTag/kUnsafe and make VkResult::VkResult private instead of deleted?\n\nI\u0027d put a comment next to that constructor saying \"Use VkResult::WrapUnsafe instead.\"",
+      "revId": "f86f8595c10530890d6f155d99916449f116d6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
