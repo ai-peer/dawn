@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e923a48f_d6b8fa0a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-16T23:28:10Z",
+      "side": 1,
+      "message": "This should only increment if the bind group\u0027s heap serial doesn\u0027t match.",
+      "range": {
+        "startLine": 93,
+        "startChar": 20,
+        "endLine": 94,
+        "endChar": 92
+      },
+      "revId": "2cacb015e991b2ea73b5400b60b3b85d7b105bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72f441b3_61a61245",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-16T23:28:10Z",
+      "side": 1,
+      "message": "nit: This should be a serial produced by the DescriptorHeapAllocator -- then we also wouldn\u0027t need to store the ID3D12DescriptorHeap* in the BindGroup, only the serial.\n\nFor now, a unified serial is okay, but we can look into separate serials for different heaps later.",
+      "range": {
+        "startLine": 149,
+        "startChar": 24,
+        "endLine": 149,
+        "endChar": 58
+      },
+      "revId": "2cacb015e991b2ea73b5400b60b3b85d7b105bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
