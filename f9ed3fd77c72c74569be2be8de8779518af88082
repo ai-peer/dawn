@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "32eab993_51f028c4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-17T20:03:11Z",
+      "side": 1,
+      "message": "mDirtyBindGroups |\u003d mBindGroupLayoutsMask\n\nWe need to include all bind groups, including the dynamic ones because they need to be repopulated as well.",
+      "parentUuid": "7232c5ed_cce1c07c",
+      "range": {
+        "startLine": 145,
+        "startChar": 20,
+        "endLine": 145,
+        "endChar": 86
+      },
+      "revId": "f9ed3fd77c72c74569be2be8de8779518af88082",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e4ff941b_85704429",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 26
