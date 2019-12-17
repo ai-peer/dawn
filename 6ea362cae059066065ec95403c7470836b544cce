@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c443200_909a087c",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-17T16:09:09Z",
+      "side": 0,
+      "message": "This should be updated to be FromFragmentShader, and the test for StorageBuffer kept, but with a special case that the BindGroupLayout is created with only the fragment and compute stages.",
+      "range": {
+        "startLine": 192,
+        "startChar": 40,
+        "endLine": 192,
+        "endChar": 70
+      },
+      "revId": "6ea362cae059066065ec95403c7470836b544cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

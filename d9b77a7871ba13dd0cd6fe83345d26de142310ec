@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c53507d4_394c178f",
+        "filename": "src/tests/end2end/OpArrayLengthTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-17T16:09:09Z",
+      "side": 1,
+      "message": "This test can be updated to use readonly storage buffers so it is valid to use the buffers in the vertex stage.",
+      "revId": "d9b77a7871ba13dd0cd6fe83345d26de142310ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
