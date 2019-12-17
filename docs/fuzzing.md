@@ -8,7 +8,11 @@ The `dawn_wire_server_and_frontend_fuzzer` sets up Dawn using the Null backend, 
 
 Using a seed corpus significantly improves the efficiency of fuzzing. Dawn's fuzzers use interesting testcases discovered in previous fuzzing runs to seed future runs. Fuzzing can be further improved by using Dawn tests as a example of API usage which allows the fuzzer to quickly discover and use new API entrypoints and usage patterns.
 
-The script [update_fuzzer_seed_corpus.sh](../scripts/update_fuzzer_seed_corpus.sh) can be used to capture a trace while running Dawn tests, and upload it to the existing fuzzzer seed corpus.
+The script [update_fuzzer_seed_corpus.sh](../scripts/update_fuzzer_seed_corpus.sh) can be used to capture a trace while running Dawn tests, and upload it to the existing fuzzer seed corpus. It does the following steps:
+1. Builds the provided test and fuzzer targets.
+2. Runs the provided test target with `--wire-trace-dir=tmp_dir1 ...` to dump traces of the tests.
+3. Injects errors into the traces by running the fuzzer target with `--injected-error-testcase-dir=tmp_dir2 ...`.
+4. Minimizes all testcases by running the fuzzer target with `-merge=1 tmp_dir3 ...`.
 
 To run the script:
 1. Make sure gcloud is installed: https://g3doc.corp.google.com/cloud/sdk/g3doc/index.md?cl=head

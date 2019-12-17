@@ -161,6 +161,13 @@ namespace dawn_native {
 
     // Backdoor to get the order of the ProcMap for testing
     DAWN_NATIVE_EXPORT std::vector<const char*> GetProcMapNamesForTesting();
+
+    // ErrorInjector functions. Defined in dawn_native/ErrorInjector.cpp
+    DAWN_NATIVE_EXPORT void EnableErrorInjector();
+    DAWN_NATIVE_EXPORT void DisableErrorInjector();
+    DAWN_NATIVE_EXPORT void ClearErrorInjector();
+    DAWN_NATIVE_EXPORT uint64_t AcquireErrorInjectorCallCount();
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_DAWNNATIVE_H_

@@ -15,6 +15,8 @@
 #ifndef DAWNNATIVE_ERRORINJECTOR_H_
 #define DAWNNATIVE_ERRORINJECTOR_H_
 
+#include "dawn_native/DawnNative.h"
+
 #include <stdint.h>
 #include <type_traits>
 
@@ -26,12 +28,7 @@ namespace dawn_native {
         bool injected;
     };
 
-    void EnableErrorInjector();
-    void DisableErrorInjector();
-    void ClearErrorInjector();
-
     bool ErrorInjectorEnabled();
-    uint64_t AcquireErrorInjectorCallCount();
 
     bool ShouldInjectError();
 
