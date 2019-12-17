@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d836202_9cdad2dd",
+        "filename": "src/fuzzers/DawnWireServerAndFrontendFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-17T17:21:35Z",
+      "side": 1,
+      "message": "note: We don\u0027t have adapter discovery with AdapterOptions implemented right now, but we should definitely do so in the future. When fuzzing with the Null backend, NOT instantiating the Vulkan backend connection makes things dramatically faster (locally at least. The fuzzing bots may not have Vulkan). Or, we could build with dawn_enable_vulkan\u003dfalse.",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "4eb09472cd6889291437ef158e827564d263393c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
