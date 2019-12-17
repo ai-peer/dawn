@@ -17,8 +17,14 @@
 #include "common/Assert.h"
 #include "dawn_native/DawnNative.h"
 
+extern "C" int LLVMFuzzerInitialize(int* argc, char*** argv) {
+    return DawnWireServerFuzzer::Initialize(argc, argv);
+}
+
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
-    return DawnWireServerFuzzer::Run(data, size, [](dawn_native::Instance* instance) {
+    return DawnWireServerFuzzer::Run(
+        data, size,
+        [](dawn_native::Instance* instance) {
         instance->DiscoverDefaultAdapters();
 
         std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
@@ -30,9 +36,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
                 device = wgpu::Device::Acquire(adapter.CreateDevice());
                 break;
             }
-        }
 
-        ASSERT(device.Get() != nullptr);
-        return device;
-    });
+            return device;
+        }
+        true /* supportsErrorInjection */);
 }
