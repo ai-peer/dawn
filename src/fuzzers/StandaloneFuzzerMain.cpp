@@ -17,11 +17,19 @@
 #include <iostream>
 #include <vector>
 
+extern "C" __attribute__((weak)) int LLVMFuzzerInitialize(int* argc, char*** argv);
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size);
 
 int main(int argc, char** argv) {
+    if (LLVMFuzzerInitialize) {
+        int status = LLVMFuzzerInitialize(&argc, &argv);
+        if (status != 0) {
+            return status;
+        }
+    }
+
     if (argc != 2) {
-        std::cout << "Usage: <standalone reproducer> FILE" << std::endl;
+        std::cout << "Usage: <standalone reproducer> [options] FILE" << std::endl;
         return 1;
     }
 
