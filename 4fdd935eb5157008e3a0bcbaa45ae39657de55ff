@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d675bb8e_6926d085",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-17T19:46:27Z",
+      "side": 1,
+      "message": "Okay, sounds good to look at optimizing later and only fix the asserts.",
+      "parentUuid": "c3e32ca1_e17fe3df",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "4fdd935eb5157008e3a0bcbaa45ae39657de55ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aae657b1_d134fb01",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 25
