@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7232c5ed_cce1c07c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-17T20:01:54Z",
+      "side": 1,
+      "message": "\u003e\u003e Should we also mDirtyBindGroups |\u003d mDirtyBindGroups here?\n\nTypo? a |\u003d a is illegal or maybe no-op.",
+      "parentUuid": "f082a59d_ad27d959",
+      "range": {
+        "startLine": 145,
+        "startChar": 20,
+        "endLine": 145,
+        "endChar": 86
+      },
+      "revId": "f9ed3fd77c72c74569be2be8de8779518af88082",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e4ff941b_85704429",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 26
