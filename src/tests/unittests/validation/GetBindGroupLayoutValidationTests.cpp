@@ -188,18 +188,6 @@ TEST_F(GetBindGroupLayoutTests, BindingType) {
     }
 
     {
-        binding.type = wgpu::BindingType::StorageBuffer;
-        wgpu::RenderPipeline pipeline = RenderPipelineFromVertexShader(R"(
-        #version 450
-        layout(set = 0, binding = 0) buffer Storage {
-            vec4 pos;
-        };
-
-        void main() {})");
-        EXPECT_EQ(device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get());
-    }
-
-    {
         binding.type = wgpu::BindingType::ReadonlyStorageBuffer;
         wgpu::RenderPipeline pipeline = RenderPipelineFromVertexShader(R"(
         #version 450
