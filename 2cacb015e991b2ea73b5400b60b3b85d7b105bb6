@@ -93,6 +93,30 @@
       "revId": "2cacb015e991b2ea73b5400b60b3b85d7b105bb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f41d55f4_a8a1fdfd",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-17T02:00:42Z",
+      "side": 1,
+      "message": "That could work, but today, we don\u0027t store the DescriptorHeapHandles in the allocator.",
+      "parentUuid": "6f3adc1a_6c701cc4",
+      "range": {
+        "startLine": 149,
+        "startChar": 24,
+        "endLine": 149,
+        "endChar": 58
+      },
+      "revId": "2cacb015e991b2ea73b5400b60b3b85d7b105bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
