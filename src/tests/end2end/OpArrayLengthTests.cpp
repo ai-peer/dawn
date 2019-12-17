@@ -36,12 +36,11 @@ class OpArrayLengthTest : public DawnTest {
         mStorageBuffer512 = device.CreateBuffer(&bufferDesc);
 
         // Put them all in a bind group for tests to bind them easily.
-        wgpu::ShaderStage kAllStages =
-            wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Compute;
+        wgpu::ShaderStage kStages = wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute;
         mBindGroupLayout =
-            utils::MakeBindGroupLayout(device, {{0, kAllStages, wgpu::BindingType::StorageBuffer},
-                                                {1, kAllStages, wgpu::BindingType::StorageBuffer},
-                                                {2, kAllStages, wgpu::BindingType::StorageBuffer}});
+            utils::MakeBindGroupLayout(device, {{0, kStages, wgpu::BindingType::StorageBuffer},
+                                                {1, kStages, wgpu::BindingType::StorageBuffer},
+                                                {2, kStages, wgpu::BindingType::StorageBuffer}});
 
         mBindGroup = utils::MakeBindGroup(device, mBindGroupLayout,
                                           {
@@ -175,67 +174,6 @@ TEST_P(OpArrayLengthTest, Fragment) {
             fragColor.a = 0.0f;
         })")
                                       .c_str());
-
-    utils::ComboRenderPipelineDescriptor descriptor(device);
-    descriptor.vertexStage.module = vsModule;
-    descriptor.cFragmentStage.module = fsModule;
-    descriptor.primitiveTopology = wgpu::PrimitiveTopology::PointList;
-    descriptor.cColorStates[0].format = renderPass.colorFormat;
-    descriptor.layout = utils::MakeBasicPipelineLayout(device, &mBindGroupLayout);
-    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
-
-    // "Draw" the lengths to the texture.
-    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    {
-        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-        pass.SetPipeline(pipeline);
-        pass.SetBindGroup(0, mBindGroup);
-        pass.Draw(1, 1, 0, 0);
-        pass.EndPass();
-    }
-
-    wgpu::CommandBuffer commands = encoder.Finish();
-    queue.Submit(1, &commands);
-
-    RGBA8 expectedColor = RGBA8(mExpectedLengths[0], mExpectedLengths[1], mExpectedLengths[2], 0);
-    EXPECT_PIXEL_RGBA8_EQ(expectedColor, renderPass.color, 0, 0);
-}
-
-// Test OpArrayLength in the vertex stage
-TEST_P(OpArrayLengthTest, Vertex) {
-    // TODO(cwallez@chromium.org): The computations for length() of unsized buffer is broken on
-    // Nvidia OpenGL. See https://bugs.chromium.org/p/dawn/issues/detail?id=197
-    DAWN_SKIP_TEST_IF(IsNvidia() && IsOpenGL());
-
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
-
-    // Create the pipeline that computes the length of the buffers and writes it to the only render
-    // pass pixel.
-    wgpu::ShaderModule vsModule =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex,
-                                  (R"(
-        #version 450
-        )" + mShaderInterface + R"(
-        layout(location = 0) out vec4 pointColor;
-        void main() {
-            pointColor.r = buffer1.data.length() / 255.0f;
-            pointColor.g = buffer2.data.length() / 255.0f;
-            pointColor.b = buffer3.data.length() / 255.0f;
-            pointColor.a = 0.0f;
-
-            gl_Position = vec4(0.0f, 0.0f, 0.0f, 1.0f);
-            gl_PointSize = 1.0;
-        })")
-                                      .c_str());
-
-    wgpu::ShaderModule fsModule =
-        utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, R"(
-        #version 450
-        layout(location = 0) out vec4 fragColor;
-        layout(location = 0) in vec4 pointColor;
-        void main() {
-            fragColor = pointColor;
-        })");
 
     utils::ComboRenderPipelineDescriptor descriptor(device);
     descriptor.vertexStage.module = vsModule;
