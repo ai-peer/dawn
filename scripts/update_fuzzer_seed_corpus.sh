@@ -38,10 +38,15 @@ fuzzer_name=$2
 test_name=$3
 
 testcase_dir="/tmp/testcases/${fuzzer_name}/"
+injected_error_testcase_dir="/tmp/testcases/${fuzzer_name}/"
 minimized_testcase_dir="/tmp/testcases/${fuzzer_name}_minimized/"
 
 # Make a directory for temporarily storing testcases
 mkdir -p "$testcase_dir"
+
+# Make an empty directory for temporarily storing testcases with injected errors
+rm -rf "$injected_error_testcase_dir"
+mkdir -p "$injected_error_testcase_dir"
 
 # Make an empty directory for temporarily storing minimized testcases
 rm -rf "$minimized_testcase_dir"
@@ -56,8 +61,11 @@ test_binary="${out_dir}/${test_name}"
 # Run the test binary
 $test_binary --use-wire --wire-trace-dir="$testcase_dir"
 
-# Run the fuzzer to minimize the corpus
-$fuzzer_binary -merge=1 "$minimized_testcase_dir" "$testcase_dir"
+# Run the fuzzer over the testcases to inject errors
+$fuzzer_binary --injected-error-testcase-dir="$injected_error_testcase_dir" -runs=0 "$testcase_dir"
+
+# Run the fuzzer to minimize the testcases + injected errors
+$fuzzer_binary -merge=1 "$minimized_testcase_dir" "$injected_error_testcase_dir" "$testcase_dir"
 
 if [ -z "$(ls -A $minimized_testcase_dir)" ]; then
 cat << EOF
