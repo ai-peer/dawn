@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e280744_a5de0d8c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-17T01:50:34Z",
+      "side": 1,
+      "message": "for reviewers: std::ios_base::app doesn\u0027t mean it\u0027s also output -- which was a bug. We could jave (ios_base::app | ios_base::out | ...), but I don\u0027t think it\u0027s necessary to have ios_base::app since ofstream::write already increments the output pointer.",
+      "range": {
+        "startLine": 314,
+        "startChar": 25,
+        "endLine": 314,
+        "endChar": 43
+      },
+      "revId": "64b54a8899c730c02383b1a98b75ecfcf17aefb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
