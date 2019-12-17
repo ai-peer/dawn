@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c3e32ca1_e17fe3df",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-17T19:25:46Z",
+      "side": 1,
+      "message": "I think only these asserts need to be removed - the current scheme should still work since it acts on the whole bindgroup. The optimization to split things was left as a TODO.",
+      "parentUuid": "06db46b9_6f546d90",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "4fdd935eb5157008e3a0bcbaa45ae39657de55ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aae657b1_d134fb01",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 25
@@ -137,6 +161,30 @@
       "revId": "4fdd935eb5157008e3a0bcbaa45ae39657de55ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e42d14e_333ddf19",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-17T19:25:46Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "f73fd4e8_d0f2d676",
+      "range": {
+        "startLine": 117,
+        "startChar": 64,
+        "endLine": 117,
+        "endChar": 77
+      },
+      "revId": "4fdd935eb5157008e3a0bcbaa45ae39657de55ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
