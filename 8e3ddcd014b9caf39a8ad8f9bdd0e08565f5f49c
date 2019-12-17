@@ -22,6 +22,30 @@
       "revId": "8e3ddcd014b9caf39a8ad8f9bdd0e08565f5f49c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45913a92_577098d3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-17T18:36:23Z",
+      "side": 1,
+      "message": "Good catch. Now does separate heap tracking on heap change.",
+      "parentUuid": "6cda498c_7c0f0616",
+      "range": {
+        "startLine": 84,
+        "startChar": 34,
+        "endLine": 84,
+        "endChar": 69
+      },
+      "revId": "8e3ddcd014b9caf39a8ad8f9bdd0e08565f5f49c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
