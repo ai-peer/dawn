@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cba82ab7_6cbfc8e9",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-17T00:57:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e923a48f_d6b8fa0a",
+      "range": {
+        "startLine": 93,
+        "startChar": 20,
+        "endLine": 94,
+        "endChar": 92
+      },
+      "revId": "2cacb015e991b2ea73b5400b60b3b85d7b105bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72f441b3_61a61245",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 23
@@ -36,6 +60,30 @@
       "writtenOn": "2019-12-16T23:28:10Z",
       "side": 1,
       "message": "nit: This should be a serial produced by the DescriptorHeapAllocator -- then we also wouldn\u0027t need to store the ID3D12DescriptorHeap* in the BindGroup, only the serial.\n\nFor now, a unified serial is okay, but we can look into separate serials for different heaps later.",
+      "range": {
+        "startLine": 149,
+        "startChar": 24,
+        "endLine": 149,
+        "endChar": 58
+      },
+      "revId": "2cacb015e991b2ea73b5400b60b3b85d7b105bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f3adc1a_6c701cc4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-17T00:57:04Z",
+      "side": 1,
+      "message": "Another way (maybe more clear) is to have DescriptorHeapHandle::Invalidate() get called upon DescriptorHeap::Deallocate(), similar to resource heaps. Then check if they\u0027re invalidated or not. This removes the ambiguity in serial.",
+      "parentUuid": "72f441b3_61a61245",
       "range": {
         "startLine": 149,
         "startChar": 24,
