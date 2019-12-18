@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb939c32_638d001a",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-18T01:59:05Z",
+      "side": 1,
+      "message": "this looks unused - is it?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 33
+      },
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
