@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ef4d3fac_8ca5ab87",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T21:34:07Z",
+      "side": 1,
+      "message": "Understood. Please add a comment to the member variable that explains this.",
+      "parentUuid": "dca7e0cd_9ba11584",
+      "range": {
+        "startLine": 123,
+        "startChar": 20,
+        "endLine": 123,
+        "endChar": 65
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "715f2a11_e51a7d53",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 27
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "83d8de7e_fd2a2f7b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T21:34:07Z",
+      "side": 1,
+      "message": "Understood.  Please add a comment that clarifies this.",
+      "parentUuid": "6059abae_fdea3bed",
+      "range": {
+        "startLine": 129,
+        "startChar": 20,
+        "endLine": 130,
+        "endChar": 81
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57b53c6e_06a498a3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 27
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "Both are used right before PopulatedDescriptor() returns. These offsets keep track of where the last populated bindgroup ends or the next bindgroup begins which cannot be local to the function.",
       "parentUuid": "57b53c6e_06a498a3",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 48
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eb7db76_27f1d3f7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T21:34:07Z",
+      "side": 1,
+      "message": "Understood. I now realize the index is accumulated across multiple calls to PopulateDescriptors.  Please add a comment which clarifies this.",
+      "parentUuid": "2ff45eb3_f59bc549",
       "range": {
         "startLine": 160,
         "startChar": 12,
