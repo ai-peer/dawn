@@ -16,6 +16,24 @@
       "revId": "2fdc7ab692a2cb2e477771e66c2003c6abc12f7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "274a02f3_ebb5c47a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-18T18:03:52Z",
+      "side": 0,
+      "message": "fyi: We can get the vendor and device ids with GetAdapter()-\u003eGetPCIInfo()",
+      "parentUuid": "6c4cec43_b9a9866b",
+      "revId": "2fdc7ab692a2cb2e477771e66c2003c6abc12f7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
