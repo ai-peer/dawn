@@ -70,6 +70,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "311239c4_f33591b0",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-12-18T22:34:38Z",
+      "side": 1,
+      "message": "I think I see. This involves creating a new function for each vendor in DawnNative.cpp:\n\nbool Adapter::IsIntel() const {\n    mImpl-\u003eIsIntel();\n}\nI\u0027ll take care of this in a secondary CL.",
+      "parentUuid": "bf7d6a7e_9079b048",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
