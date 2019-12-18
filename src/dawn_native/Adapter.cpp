@@ -14,6 +14,7 @@
 
 #include "dawn_native/Adapter.h"
 
+#include "common/Constants.h"
 #include "dawn_native/Instance.h"
 
 namespace dawn_native {
@@ -85,6 +86,10 @@ namespace dawn_native {
         // descriptor is valid and is a subset what's allowed on this adapter.
         DAWN_TRY_ASSIGN(*result, CreateDeviceImpl(descriptor));
         return {};
+    }
+
+    bool AdapterBase::IsIntel() const {
+        return mPCIInfo.vendorId == kVendorID_Intel;
     }
 
 }  // namespace dawn_native

@@ -41,6 +41,8 @@ namespace dawn_native {
             const std::vector<const char*>& requestedExtensions) const;
         WGPUDeviceProperties GetAdapterProperties() const;
 
+        bool IsIntel() const;
+
       protected:
         PCIInfo mPCIInfo = {};
         DeviceType mDeviceType = DeviceType::Unknown;
