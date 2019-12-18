@@ -118,6 +118,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f64b68ce_13669237",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-12-18T23:54:04Z",
+      "side": 1,
+      "message": "You mean removing what I have in AdapterBase, right?\n\nWe could do as you say and create |bool Is\u003cVendor\u003e(const PCIInfo\u0026)| inside a new file, perhaps in /common/. Not sure what I\u0027d call it - GPUInfo.cpp? GPUInfoUtils.cpp?",
+      "parentUuid": "c6abc6f8_c0bd1856",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
