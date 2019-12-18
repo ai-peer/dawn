@@ -94,6 +94,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6abc6f8_c0bd1856",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-18T22:42:12Z",
+      "side": 1,
+      "message": "Sorry I was mistaken. I thought we had an AdapterBase* and not a dawn_native::Adapter.\n\nPerhaps the better thing is to have a free function which is | bool IsIntel(const PCIInfo\u0026) | as a helper",
+      "parentUuid": "311239c4_f33591b0",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
