@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16996b87_cec27cbe",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-18T17:40:01Z",
+      "side": 1,
+      "message": "\u003ebindgrouplayout in the pipeline layout are supposed to be the same by the time we get here.\n\nThey don\u0027t have to be the same. For example, if SetPipeline(newPipelineLayout) then SetBindGroup(index, ...) was called, |index| could specify a new BGL. If the same BGL was used (but at a different index), it is still considered a pipeline layout change because the order matters.",
+      "parentUuid": "c784cad9_83f3119e",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9aafc1e7_fad27de8",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 27
@@ -36,6 +60,30 @@
       "writtenOn": "2019-12-18T02:28:33Z",
       "side": 1,
       "message": "I see that mBindGroupLayoutsSize is set in this method and read in this method.  Is there a reason it needs to be a member variable?",
+      "range": {
+        "startLine": 123,
+        "startChar": 20,
+        "endLine": 123,
+        "endChar": 65
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dca7e0cd_9ba11584",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-18T17:40:01Z",
+      "side": 1,
+      "message": "The BGL size does not update per Draw/Dispatch but on SetPipeline. If the former does not occur, the size does not need to be re-computed.",
+      "parentUuid": "9aafc1e7_fad27de8",
       "range": {
         "startLine": 123,
         "startChar": 20,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "6059abae_fdea3bed",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-18T17:40:01Z",
+      "side": 1,
+      "message": "Should the descriptor heap become full and spill, we cannot only allocate only the dirtied bindgroups (dirtyBindGroupSize). Instead, all bindgroups required by the BGL (mBindGroupLayoutSize) are re-encoded in the new heap.",
+      "parentUuid": "715f2a11_e51a7d53",
+      "range": {
+        "startLine": 129,
+        "startChar": 20,
+        "endLine": 130,
+        "endChar": 81
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57b53c6e_06a498a3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 27
@@ -82,6 +154,30 @@
       "writtenOn": "2019-12-18T02:28:33Z",
       "side": 1,
       "message": "cbvSrvUavDescriptorIndex and samplerDescriptorIndex are filled in by PopulateDescriptors but never used in the method. Can we get rid of these locals and simplify PopulateDescriptors?",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 48
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ff45eb3_f59bc549",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-18T17:40:01Z",
+      "side": 1,
+      "message": "Both are used right before PopulatedDescriptor() returns. These offsets keep track of where the last populated bindgroup ends or the next bindgroup begins which cannot be local to the function.",
+      "parentUuid": "57b53c6e_06a498a3",
       "range": {
         "startLine": 160,
         "startChar": 12,
