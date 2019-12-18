@@ -22,6 +22,81 @@
       "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cb671c2_8920c915",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-18T11:31:29Z",
+      "side": 1,
+      "message": "It is used in [1] which is used in [2]",
+      "parentUuid": "fb939c32_638d001a",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 33
+      },
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1645c46a_00d4783d",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-18T11:31:29Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d68c437_a2d93b8a",
+        "filename": "generator/templates/mock_webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-18T11:31:29Z",
+      "side": 1,
+      "message": "nit: userdata2 went unused at some point. Can you remove it and rename userdata1 to userdata?",
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab87b470_0cf5c7a2",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-18T11:31:29Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
