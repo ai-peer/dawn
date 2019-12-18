@@ -22,6 +22,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f71c510_0bf32e00",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-12-18T22:14:51Z",
+      "side": 1,
+      "message": "Moved the helper to AdapterBase.\n\nWouldn\u0027t these functions need to be exposed as entry points to be used by DawnTest? That seems undesirable.",
+      "parentUuid": "7a0e0d64_3ac5d162",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
