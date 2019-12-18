@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c4cec43_b9a9866b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2019-12-18T17:55:43Z",
+      "side": 0,
+      "message": "This is quite broad - could this be more specific? I would of expected a workaround for IsIntel() + \u003eD3D12_RENDER_PASS_TIER_0 (aka non-SW) to UseD3D12RenderPass\u003dFalse.",
+      "revId": "2fdc7ab692a2cb2e477771e66c2003c6abc12f7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
