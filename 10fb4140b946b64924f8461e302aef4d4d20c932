@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee551cca_f31afd63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-18T00:21:54Z",
+      "side": 1,
+      "message": "Just to be sure, it minimizes them in place? So any bloat we upload with this script will get automatically cleaned up?",
+      "revId": "10fb4140b946b64924f8461e302aef4d4d20c932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
