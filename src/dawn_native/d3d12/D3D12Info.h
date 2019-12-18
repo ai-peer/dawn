@@ -28,6 +28,7 @@ namespace dawn_native { namespace d3d12 {
         bool supportsRenderPass;
     };
 
+    bool IsIntel(uint32_t vendorId);
     ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter);
 }}  // namespace dawn_native::d3d12
 
