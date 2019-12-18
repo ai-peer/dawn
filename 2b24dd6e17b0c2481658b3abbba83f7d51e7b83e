@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "26642ed2_c9dad232",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-18T17:52:18Z",
+      "side": 1,
+      "message": "... it took me like 5 minutes of looking at this to figure out why (reinterpret_cast). sigh :P",
+      "parentUuid": "4cb671c2_8920c915",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 33
+      },
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1645c46a_00d4783d",
         "filename": "generator/templates/mock_webgpu.cpp",
         "patchSetId": 1
@@ -63,6 +87,24 @@
       "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa06e68a_d7b0f5e5",
+        "filename": "generator/templates/mock_webgpu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-18T17:52:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1645c46a_00d4783d",
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -97,6 +139,24 @@
       "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff9073cb_6939c2b6",
+        "filename": "src/tests/unittests/wire/WireErrorCallbackTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-18T17:52:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ab87b470_0cf5c7a2",
+      "revId": "2b24dd6e17b0c2481658b3abbba83f7d51e7b83e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
