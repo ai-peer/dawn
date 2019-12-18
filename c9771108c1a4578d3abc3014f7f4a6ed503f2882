@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c784cad9_83f3119e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T02:28:33Z",
+      "side": 1,
+      "message": "[Apologies for the remedial question] I thought that the bindgrouplayout of the bindgroup and the bindgrouplayout in the pipeline layout are supposed to be the same by the time we get here. If so, why do we need to consult the one in the pipeline layout for anything?",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aafc1e7_fad27de8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T02:28:33Z",
+      "side": 1,
+      "message": "I see that mBindGroupLayoutsSize is set in this method and read in this method.  Is there a reason it needs to be a member variable?",
+      "range": {
+        "startLine": 123,
+        "startChar": 20,
+        "endLine": 123,
+        "endChar": 65
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "715f2a11_e51a7d53",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T02:28:33Z",
+      "side": 1,
+      "message": "Why do we call AllocateBindGroups with dirtyBindGroupsSize in the first call but use mBindGroupLayoutSize when we call it a second time?",
+      "range": {
+        "startLine": 129,
+        "startChar": 20,
+        "endLine": 130,
+        "endChar": 81
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57b53c6e_06a498a3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T02:28:33Z",
+      "side": 1,
+      "message": "cbvSrvUavDescriptorIndex and samplerDescriptorIndex are filled in by PopulateDescriptors but never used in the method. Can we get rid of these locals and simplify PopulateDescriptors?",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 48
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43dd11ca_9a638757",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-18T02:28:33Z",
+      "side": 1,
+      "message": "Nit: Please split these into separate ASSERTs so that we\u0027ll know which expression cause a test failure.",
+      "range": {
+        "startLine": 238,
+        "startChar": 12,
+        "endLine": 238,
+        "endChar": 71
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
