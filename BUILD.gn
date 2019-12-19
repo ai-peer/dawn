@@ -887,6 +887,7 @@ source_set("dawn_end2end_tests_sources") {
     "src/tests/end2end/DebugMarkerTests.cpp",
     "src/tests/end2end/DepthStencilStateTests.cpp",
     "src/tests/end2end/DestroyTests.cpp",
+    "src/tests/end2end/DeviceLostTests.cpp",
     "src/tests/end2end/DrawIndexedIndirectTests.cpp",
     "src/tests/end2end/DrawIndexedTests.cpp",
     "src/tests/end2end/DrawIndirectTests.cpp",
