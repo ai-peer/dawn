@@ -16,6 +16,47 @@
       "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a332f2af_eb009666",
+        "filename": "docs/fuzzing.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T04:20:10Z",
+      "side": 1,
+      "message": "Actually, I was thinking maybe we don\u0027t seed the fuzzer with all the injected error cases, because it\u0027s quite a lot and most of them are probably going to be redundant.\n\nThere\u0027s 47k testcases if you inject all possible errors into the dawn_end2end_tests. Maybe that\u0027s not that bad?",
+      "parentUuid": "24e5ef10_551c84e9",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31a84dd7_9edc0718",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T04:20:10Z",
+      "side": 1,
+      "message": "nit: missing a suffix",
+      "range": {
+        "startLine": 41,
+        "startChar": 44,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
