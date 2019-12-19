@@ -49,31 +49,40 @@ namespace dawn_native { namespace d3d12 {
       public:
         DescriptorHeapAllocator(Device* device);
 
+        MaybeError Initialize();
+
         ResultOrError<DescriptorHeapHandle> AllocateGPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                                             uint32_t count);
         ResultOrError<DescriptorHeapHandle> AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                                             uint32_t count);
         void Deallocate(uint64_t lastCompletedSerial);
 
+        ID3D12DescriptorHeap* GetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE type) const;
+
+        Serial GetGPUDescriptorHeapSerial(D3D12_DESCRIPTOR_HEAP_TYPE type) const;
+        MaybeError EnsureSpaceForFullPipelineLayout();
+
       private:
         struct DescriptorHeapInfo {
             ComPtr<ID3D12DescriptorHeap> heap;
             RingBufferAllocator allocator;
+            Serial heapSerial;
         };
 
         ResultOrError<DescriptorHeapHandle> Allocate(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                                      uint32_t count,
                                                      uint32_t allocationSize,
-                                                     DescriptorHeapInfo* heapInfo,
-                                                     D3D12_DESCRIPTOR_HEAP_FLAGS flags);
+                                                     D3D12_DESCRIPTOR_HEAP_FLAGS flags,
+                                                     bool forceAllocation);
+
+        MaybeError ReallocateHeap(D3D12_DESCRIPTOR_HEAP_TYPE type,
+                                  uint32_t allocationSize,
+                                  D3D12_DESCRIPTOR_HEAP_FLAGS flags);
 
         Device* mDevice;
 
         std::array<uint32_t, D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES> mSizeIncrements;
-        std::array<DescriptorHeapInfo, D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES>
-            mCpuDescriptorHeapInfos;
-        std::array<DescriptorHeapInfo, D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES>
-            mGpuDescriptorHeapInfos;
+        std::array<DescriptorHeapInfo, D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES> mHeapInfos;
     };
 
 }}  // namespace dawn_native::d3d12
