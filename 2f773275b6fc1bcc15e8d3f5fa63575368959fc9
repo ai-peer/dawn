@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86c05376_c3883699",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-19T03:02:19Z",
+      "side": 1,
+      "message": "hm, come to think of it, does this mean that if you have an out dir with fuzzing enabled, and you build actual chrome browser in it, then dawn will abort on assert in chrome?\n\nProbably fine, but seems a little unexpected.",
+      "revId": "2f773275b6fc1bcc15e8d3f5fa63575368959fc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
