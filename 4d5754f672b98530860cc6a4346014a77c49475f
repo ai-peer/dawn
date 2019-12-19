@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "3ff3f598_f7f957d2",
+        "filename": "docs/fuzzing.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1085bb93_db930151",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31a84dd7_9edc0718",
         "filename": "scripts/update_fuzzer_seed_corpus.sh",
         "patchSetId": 4
@@ -78,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "cdba49c1_c2817e12",
+        "filename": "scripts/update_fuzzer_seed_corpus.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31a84dd7_9edc0718",
+      "range": {
+        "startLine": 41,
+        "startChar": 44,
+        "endLine": 41,
+        "endChar": 58
+      },
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f6c7d75_4e8dba76",
         "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
         "patchSetId": 4
@@ -92,6 +134,24 @@
       "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b4cdced_fc6b8367",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6c7d75_4e8dba76",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -112,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "075ed1ac_21879579",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "571d86cc_5d5db677",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de6ed578_1e1ccd87",
         "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
         "patchSetId": 4
@@ -123,6 +201,30 @@
       "writtenOn": "2019-12-19T09:51:02Z",
       "side": 1,
       "message": "Why do we require the testcase dir for using error injection? It seems like we\u0027d want to use it as soon as the backend supports it.",
+      "range": {
+        "startLine": 93,
+        "startChar": 31,
+        "endLine": 93,
+        "endChar": 70
+      },
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d49a2ad_ddfbebf3",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Hm, we don\u0027t. We require it for outputting testcases with injected errors. Added comments elsewhere to clarify.",
+      "parentUuid": "de6ed578_1e1ccd87",
       "range": {
         "startLine": 93,
         "startChar": 31,
@@ -152,6 +254,24 @@
     },
     {
       "key": {
+        "uuid": "1b6c817a_8e35fe3d",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Done. (In Initialize)",
+      "parentUuid": "2db53b74_1567af93",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdd3b1b8_235b84ef",
         "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
         "patchSetId": 4
@@ -166,6 +286,24 @@
       "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faa1d5dc_850a93c8",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdd3b1b8_235b84ef",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "25319b8d_b9d106a5",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daf8046a_090786cf",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33208a9b_24d8e43c",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 4
@@ -200,6 +356,24 @@
       "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3d0ef29_287ab8ad",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T18:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33208a9b_24d8e43c",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
