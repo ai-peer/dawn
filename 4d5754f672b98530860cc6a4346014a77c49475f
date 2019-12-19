@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24e5ef10_551c84e9",
+        "filename": "docs/fuzzing.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-19T02:57:17Z",
+      "side": 1,
+      "message": "Call out \"Generates one variant of each trace for every possible error index, by running ...\"",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
