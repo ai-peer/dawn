@@ -159,6 +159,33 @@ dawn_fuzzer_test("dawn_spvc_msl_fast_fuzzer") {
   ]
 }
 
+dawn_fuzzer_test("dawn_spvc_glsl_no_validation_fast_fuzzer") {
+  sources = [
+    "DawnSPVCglslNoValidationFastFuzzer.cpp",
+  ]
+  deps = [
+    "${dawn_shaderc_dir}:libshaderc_spvc",
+  ]
+}
+
+dawn_fuzzer_test("dawn_spvc_hlsl_no_validation_fast_fuzzer") {
+  sources = [
+    "DawnSPVChlslNoValidationFastFuzzer.cpp",
+  ]
+  deps = [
+    "${dawn_shaderc_dir}:libshaderc_spvc",
+  ]
+}
+
+dawn_fuzzer_test("dawn_spvc_msl_no_validation_fast_fuzzer") {
+  sources = [
+    "DawnSPVCmslNoValidationFastFuzzer.cpp",
+  ]
+  deps = [
+    "${dawn_shaderc_dir}:libshaderc_spvc",
+  ]
+}
+
 dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
   sources = [
     "DawnWireServerAndFrontendFuzzer.cpp",
