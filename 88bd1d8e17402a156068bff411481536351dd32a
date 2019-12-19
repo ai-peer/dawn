@@ -16,6 +16,24 @@
       "revId": "88bd1d8e17402a156068bff411481536351dd32a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eafe643_8bb1e535",
+        "filename": "src/common/Assert.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T15:45:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efcbc3b7_be5b58b7",
+      "revId": "88bd1d8e17402a156068bff411481536351dd32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
