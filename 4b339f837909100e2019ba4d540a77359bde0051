@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6062913e_c802a630",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 37
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-19T21:14:02Z",
+      "side": 1,
+      "message": "I had a change previously for Animometer, I could add that back, but I\u0027m only able to test that it works on D3D12 locally. (I also still  haven\u0027t figured out checks similar to GetDeviceRemovedReason() for other backends)",
+      "parentUuid": "e6803125_51ddb2f4",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97debb12_642c15eb",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 37
@@ -188,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "dfd6ca7c_c8ca2e15",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 37
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-19T21:14:02Z",
+      "side": 1,
+      "message": "Or do we want to follow the Destroy, DestroyInternal, DestroyImpl pattern we did in the texture class?",
+      "parentUuid": "072f5550_98a19be3",
+      "range": {
+        "startLine": 304,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 46
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f75b93af_7213d8f0",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 37
@@ -264,6 +312,24 @@
       "side": 1,
       "message": "What if we add a call to ValidateIsAlive in the body of ValidateObject?  \n\nIf we plan to add additional entry point validation in the future, perhaps now is the time to create a ValidateEntrypoint method to DeviceBase which, for now, only calls ValidateIsAlive. Then, you only need to pay the cost of finding entrypoints once as part of this change.",
       "parentUuid": "9cb609de_62c3afc2",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "404a6f3c_8ba7b545",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2019-12-19T21:14:02Z",
+      "side": 1,
+      "message": "sorry I forgot to make a note here that the tests are still WIP (it was in patch description but it got overwritten when I updated the commit message).\n\nI thought about putting ValidateIsAlive in ValidateObject but wasn\u0027t sure if that would be confusing to what ValidateObject was validating (the object vs the device).",
+      "parentUuid": "0c78c7bf_6900ace8",
       "revId": "4b339f837909100e2019ba4d540a77359bde0051",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
