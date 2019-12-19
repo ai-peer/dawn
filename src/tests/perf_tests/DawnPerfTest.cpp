@@ -209,7 +209,7 @@ void DawnPerfTestBase::RunTest() {
 
         // Calibration allows the perf test runner script to save some time.
         if (gTestEnv->IsCalibrating()) {
-            PrintResult("steps", mStepsToRun, "count", false);
+            PrintResult("steps", std::to_string(mStepsToRun), "count", false);
             return;
         }
     } else {
@@ -369,42 +369,28 @@ void DawnPerfTestBase::PrintPerIterationResultFromSeconds(const std::string& tra
 
     // Give the result a different name to ensure separate graphs if we transition.
     if (secondsPerIteration > 1) {
-        PrintResult(trace, secondsPerIteration * 1e3, "ms", important);
+        PrintResult(trace, std::to_string(secondsPerIteration * 1e3), "ms", important);
     } else if (secondsPerIteration > 1e-3) {
-        PrintResult(trace, secondsPerIteration * 1e6, "us", important);
+        PrintResult(trace, std::to_string(secondsPerIteration * 1e6), "us", important);
     } else {
-        PrintResult(trace, secondsPerIteration * 1e9, "ns", important);
+        PrintResult(trace, std::to_string(secondsPerIteration * 1e9), "ns", important);
     }
 }
 
 void DawnPerfTestBase::PrintResult(const std::string& trace,
-                                   double value,
+                                   const std::string& value,
                                    const std::string& units,
                                    bool important) const {
     const ::testing::TestInfo* const testInfo =
         ::testing::UnitTest::GetInstance()->current_test_info();
 
-    const char* testName = testInfo->name();
-    const char* testSuite = testInfo->test_suite_name();
+    std::string metric = std::string(testInfo->test_suite_name()) + "." + trace;
+
+    std::string story = testInfo->name();
+    std::replace(story.begin(), story.end(), '/', '_');
 
     // The results are printed according to the format specified at
-    // [chromium]//build/scripts/slave/performance_log_processor.py
-    dawn::InfoLog() << (important ? "*" : "") << "RESULT " << testSuite << testName << ": " << trace
-                    << "= " << value << " " << units;
-}
-
-void DawnPerfTestBase::PrintResult(const std::string& trace,
-                                   unsigned int value,
-                                   const std::string& units,
-                                   bool important) const {
-    const ::testing::TestInfo* const testInfo =
-        ::testing::UnitTest::GetInstance()->current_test_info();
-
-    const char* testName = testInfo->name();
-    const char* testSuite = testInfo->test_suite_name();
-
-    // The results are printed according to the format specified at
-    // [chromium]//build/scripts/slave/performance_log_processor.py
-    dawn::InfoLog() << (important ? "*" : "") << "RESULT " << testSuite << testName << ": " << trace
-                    << "= " << value << " " << units;
+    // [chromium]//tools/perf/generate_legacy_perf_dashboard_json.py
+    dawn::InfoLog() << (important ? "*" : "") << "RESULT " << metric << ": " << story << "= "
+                    << value << " " << units;
 }

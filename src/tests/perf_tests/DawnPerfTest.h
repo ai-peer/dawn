@@ -79,11 +79,7 @@ class DawnPerfTestBase {
                                             double valueInSeconds,
                                             bool important) const;
     void PrintResult(const std::string& trace,
-                     double value,
-                     const std::string& units,
-                     bool important) const;
-    void PrintResult(const std::string& trace,
-                     unsigned int value,
+                     const std::string& value,
                      const std::string& units,
                      bool important) const;
 
