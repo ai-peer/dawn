@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6e357191_baaaa519",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 37
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-19T21:29:55Z",
+      "side": 1,
+      "message": "Being able to test locally is better than not being able to test at all. Having a C++ sample we can test with real device removed will help us get to the bottom of bugs in isolation with full blown Chromium. \n\nI\u0027m fine with doing the samples CL as a followon change.",
+      "parentUuid": "6062913e_c802a630",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97debb12_642c15eb",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 37
@@ -224,6 +248,30 @@
       "side": 1,
       "message": "Or do we want to follow the Destroy, DestroyInternal, DestroyImpl pattern we did in the texture class?",
       "parentUuid": "072f5550_98a19be3",
+      "range": {
+        "startLine": 304,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 46
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61b7a329_910f2233",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 37
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-19T21:29:55Z",
+      "side": 1,
+      "message": "I think using the Destroy-DestroyInternal-DestroyImpl pattern is a bit overkill for what we\u0027re trying to solve but I don\u0027t feel strongly about that.  \n\nMy high order bit is that maintenance of the variable is not spread out in multiple classes.",
+      "parentUuid": "dfd6ca7c_c8ca2e15",
       "range": {
         "startLine": 304,
         "startChar": 8,
