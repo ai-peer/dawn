@@ -384,13 +384,15 @@ void DawnPerfTestBase::PrintResult(const std::string& trace,
     const ::testing::TestInfo* const testInfo =
         ::testing::UnitTest::GetInstance()->current_test_info();
 
-    const char* testName = testInfo->name();
-    const char* testSuite = testInfo->test_suite_name();
+    std::string metric = std::string(testInfo->test_suite_name()) + "." + trace;
+
+    std::string story = testInfo->name();
+    std::replace(story.begin(), story.end(), '/', '_');
 
     // The results are printed according to the format specified at
-    // [chromium]//build/scripts/slave/performance_log_processor.py
-    dawn::InfoLog() << (important ? "*" : "") << "RESULT " << testSuite << testName << ": " << trace
-                    << "= " << value << " " << units;
+    // [chromium]//tools/perf/generate_legacy_perf_dashboard_json.py
+    dawn::InfoLog() << (important ? "*" : "") << "RESULT " << metric << ": " << story << "= "
+                    << value << " " << units;
 }
 
 void DawnPerfTestBase::PrintResult(const std::string& trace,
@@ -400,11 +402,13 @@ void DawnPerfTestBase::PrintResult(const std::string& trace,
     const ::testing::TestInfo* const testInfo =
         ::testing::UnitTest::GetInstance()->current_test_info();
 
-    const char* testName = testInfo->name();
-    const char* testSuite = testInfo->test_suite_name();
+    std::string metric = std::string(testInfo->test_suite_name()) + "." + trace;
+
+    std::string story = testInfo->name();
+    std::replace(story.begin(), story.end(), '/', '_');
 
     // The results are printed according to the format specified at
-    // [chromium]//build/scripts/slave/performance_log_processor.py
-    dawn::InfoLog() << (important ? "*" : "") << "RESULT " << testSuite << testName << ": " << trace
-                    << "= " << value << " " << units;
+    // [chromium]//tools/perf/generate_legacy_perf_dashboard_json.py
+    dawn::InfoLog() << (important ? "*" : "") << "RESULT " << metric << ": " << story << "= "
+                    << value << " " << units;
 }
