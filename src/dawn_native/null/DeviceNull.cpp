@@ -166,10 +166,14 @@ namespace dawn_native { namespace null {
     }
 
     void Device::Destroy() {
+        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+
         mDynamicUploader = nullptr;
 
         mPendingOperations.clear();
         ASSERT(mMemoryUsage == 0);
+
+        mLossStatus = LossStatus::AlreadyLost;
     }
 
     MaybeError Device::WaitForIdleForDestruction() {

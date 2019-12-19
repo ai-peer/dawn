@@ -350,6 +350,7 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::ValidateSetSubData(uint32_t start, uint32_t count) const {
+        DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         switch (mState) {
@@ -388,6 +389,7 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::ValidateMap(wgpu::BufferUsage requiredUsage) const {
+        DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         switch (mState) {
@@ -407,6 +409,7 @@ namespace dawn_native {
     }
 
     MaybeError BufferBase::ValidateUnmap() const {
+        DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         switch (mState) {

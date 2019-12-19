@@ -17,6 +17,7 @@
 
 #include "common/Serial.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/ErrorData.h"
 #include "dawn_native/Extensions.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
@@ -29,9 +30,6 @@
 #include <memory>
 
 namespace dawn_native {
-
-    using ErrorCallback = void (*)(const char* errorMessage, void* userData);
-
     class AdapterBase;
     class AttachmentState;
     class AttachmentStateBlueprint;
@@ -54,6 +52,13 @@ namespace dawn_native {
                 return true;
             }
             return false;
+        }
+
+        void AssertDeviceLossError(MaybeError maybeError) {
+            // Assert that errors are device loss so that we can continue with destruction
+            if (maybeError.IsError()) {
+                ASSERT(maybeError.AcquireError()->GetType() == wgpu::ErrorType::DeviceLost);
+            }
         }
 
         template <typename T>
@@ -167,6 +172,9 @@ namespace dawn_native {
         void SetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
         void PushErrorScope(wgpu::ErrorFilter filter);
         bool PopErrorScope(wgpu::ErrorCallback callback, void* userdata);
+
+        MaybeError ValidateIsAlive() const;
+
         ErrorScope* GetCurrentErrorScope();
 
         void Reference();
@@ -189,6 +197,7 @@ namespace dawn_native {
         bool IsValidationEnabled() const;
         size_t GetLazyClearCountForTesting();
         void IncrementLazyClearCountForTesting();
+        void LoseForTesting();
 
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
@@ -196,6 +205,13 @@ namespace dawn_native {
         void BaseDestructor();
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
+        // LossStatus::Alive means the device is alive and can be used normally.
+        // LossStatus::BeingLost means the device is in the process of being lost and should not
+        //              accept any new commands.
+        // LossStatus::AlreadyLost means the device has been lost and can no longer be used,
+        //             all resources have been freed.
+        enum class LossStatus { Alive, BeingLost, AlreadyLost };
+        LossStatus mLossStatus = LossStatus::Alive;
 
       private:
         virtual ResultOrError<BindGroupBase*> CreateBindGroupImpl(
@@ -263,6 +279,7 @@ namespace dawn_native {
         // resources.
         virtual MaybeError WaitForIdleForDestruction() = 0;
 
+        void HandleLoss(const char* message);
         wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
         void* mDeviceLostUserdata;
 

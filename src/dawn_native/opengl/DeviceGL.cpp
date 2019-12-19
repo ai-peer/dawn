@@ -162,12 +162,16 @@ namespace dawn_native { namespace opengl {
     }
 
     void Device::Destroy() {
+        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+
         // Some operations might have been started since the last submit and waiting
         // on a serial that doesn't have a corresponding fence enqueued. Force all
         // operations to look as if they were completed (because they were).
         mCompletedSerial = mLastSubmittedSerial + 1;
 
         mDynamicUploader = nullptr;
+
+        mLossStatus = LossStatus::AlreadyLost;
     }
 
     MaybeError Device::WaitForIdleForDestruction() {

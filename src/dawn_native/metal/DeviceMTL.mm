@@ -285,6 +285,8 @@ namespace dawn_native { namespace metal {
     }
 
     void Device::Destroy() {
+        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+
         if (mPendingCommands != nil) {
             [mPendingCommands release];
             mPendingCommands = nil;
@@ -298,6 +300,8 @@ namespace dawn_native { namespace metal {
 
         [mMtlDevice release];
         mMtlDevice = nil;
+
+        mLossStatus = LossStatus::AlreadyLost;
     }
 
 }}  // namespace dawn_native::metal
