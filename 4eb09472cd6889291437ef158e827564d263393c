@@ -63,6 +63,24 @@
       "revId": "4eb09472cd6889291437ef158e827564d263393c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "664e20a0_2a2bfc8f",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-19T03:18:17Z",
+      "side": 1,
+      "message": "Yea, it\u0027s fine because this is data the WireClient would be reading -- and we have no WireClient here.",
+      "parentUuid": "91a77ad9_70920ec0",
+      "revId": "4eb09472cd6889291437ef158e827564d263393c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
