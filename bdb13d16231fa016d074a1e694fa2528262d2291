@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a830a4e2_dee95b70",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-19T00:25:22Z",
+      "side": 1,
+      "message": "Nit: Since you\u0027re already setting info.supportsRenderPass to false on line 48, no need to explicitly set it to false here.  These set of if statements should only lead to supportsRenderPass being set to true.",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 48
+      },
+      "revId": "bdb13d16231fa016d074a1e694fa2528262d2291",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
