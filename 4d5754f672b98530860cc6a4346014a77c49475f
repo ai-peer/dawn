@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1085bb93_db930151",
+        "filename": "docs/fuzzing.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "Imho that\u0027s pretty ok. Especially since we do it offline.",
+      "parentUuid": "a332f2af_eb009666",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31a84dd7_9edc0718",
         "filename": "scripts/update_fuzzer_seed_corpus.sh",
         "patchSetId": 4
@@ -54,6 +72,131 @@
         "endLine": 41,
         "endChar": 58
       },
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f6c7d75_4e8dba76",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "This is a bit complicated: I don\u0027t think we need to have a new reference of argv because we are reading past the part we are modifying. For argc we could just have a local int value, and write *argc at the end of the function. This would also remove the need for argcIn.",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "571d86cc_5d5db677",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "Should this make a copy of the string instead of referencing the one from argv? We could have sInjectedErrorTestcaseDir be an std::string",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de6ed578_1e1ccd87",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "Why do we require the testcase dir for using error injection? It seems like we\u0027d want to use it as soon as the backend supports it.",
+      "range": {
+        "startLine": 93,
+        "startChar": 31,
+        "endLine": 93,
+        "endChar": 70
+      },
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2db53b74_1567af93",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "maybe dawn::InfoLog() \u003c\u003c \"Running with error injection, output dir is: \\\"\" \u003c\u003c sInjectedErrorTestcaseDir \u003c\u003c \"\\\"\"; so that we know the fuzzer found the argument. (we don\u0027t have validation that the name of the arg is correctly spelled.)",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdd3b1b8_235b84ef",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "The way other fuzzers usually work is that they reserve space for a header at the start of the fuzzed file to contain options like this. This way we\u0027ll be able to get some bits for enabling extensions, togggles and more. (We could do the same with a footer, but I\u0027ve always seen it with a header instead).",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daf8046a_090786cf",
+        "filename": "src/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "nit: comment?",
+      "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33208a9b_24d8e43c",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-19T09:51:02Z",
+      "side": 1,
+      "message": "nit: \"used for testing only\" so that it is clear even if there is no \"ForTesting\" in the name.",
       "revId": "4d5754f672b98530860cc6a4346014a77c49475f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
