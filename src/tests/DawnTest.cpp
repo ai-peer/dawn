@@ -22,6 +22,7 @@
 #include "common/SystemUtils.h"
 #include "dawn/dawn_proc.h"
 #include "dawn_native/DawnNative.h"
+#include "dawn_native/GPUInfo.h"
 #include "dawn_wire/WireClient.h"
 #include "dawn_wire/WireServer.h"
 #include "utils/SystemUtils.h"
@@ -362,27 +363,27 @@ bool DawnTestBase::IsVulkan() const {
 }
 
 bool DawnTestBase::IsAMD() const {
-    return mPCIInfo.vendorId == kVendorID_AMD;
+    return dawn_native::IsAMD(mPCIInfo);
 }
 
 bool DawnTestBase::IsARM() const {
-    return mPCIInfo.vendorId == kVendorID_ARM;
+    return dawn_native::IsARM(mPCIInfo);
 }
 
 bool DawnTestBase::IsImgTec() const {
-    return mPCIInfo.vendorId == kVendorID_ImgTec;
+    return dawn_native::IsImgTec(mPCIInfo);
 }
 
 bool DawnTestBase::IsIntel() const {
-    return mPCIInfo.vendorId == kVendorID_Intel;
+    return dawn_native::IsIntel(mPCIInfo);
 }
 
 bool DawnTestBase::IsNvidia() const {
-    return mPCIInfo.vendorId == kVendorID_Nvidia;
+    return dawn_native::IsNvidia(mPCIInfo);
 }
 
 bool DawnTestBase::IsQualcomm() const {
-    return mPCIInfo.vendorId == kVendorID_Qualcomm;
+    return dawn_native::IsQualcomm(mPCIInfo);
 }
 
 bool DawnTestBase::IsWindows() const {

@@ -223,6 +223,8 @@ source_set("libdawn_native_sources") {
     "src/dawn_native/Format.cpp",
     "src/dawn_native/Format.h",
     "src/dawn_native/Forward.h",
+    "src/dawn_native/GPUInfo.cpp",
+    "src/dawn_native/GPUInfo.h",
     "src/dawn_native/Instance.cpp",
     "src/dawn_native/Instance.h",
     "src/dawn_native/ObjectBase.cpp",
