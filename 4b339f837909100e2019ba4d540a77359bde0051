@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "e6803125_51ddb2f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 37
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-19T18:47:46Z",
+      "side": 1,
+      "message": "I would like to see one or more of the samples be modified to handle device removed gracefully. LoseForTesting is great but nothing beats testing with real device removed on an application that has a frameloop.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97debb12_642c15eb",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 37
@@ -142,6 +165,29 @@
     },
     {
       "key": {
+        "uuid": "072f5550_98a19be3",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 37
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-19T18:47:46Z",
+      "side": 1,
+      "message": "Since mLossStatus is defined in the base class, I think it is best to have it own setting the variable in the right places like we do for \u0027LoseForTesting\u0027. \n\nHence, we we should add a Destroy in the base class and have these callsites call it as the last thing they do. DeviceBase::Destroy should set mLossStatus to AlreadyLost.",
+      "range": {
+        "startLine": 304,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 46
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f75b93af_7213d8f0",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 37
@@ -200,6 +246,24 @@
       "writtenOn": "2019-12-19T10:10:11Z",
       "side": 1,
       "message": "Again, this is testing few of the important interactions:\n\n\u003e Third what we should check for are the following after device.LoseForTesting (in different test cases):\n\u003e - check that the DeviceLossCallback, if set, is called. (you can use mocks like in the ErrorScopeValidationTests.cpp)\n\u003e - check that device loss cases all error scopes to resolve in a device loss.\n\u003e - check that all further error scopes resolve in a device loss\n\u003e - check that buffer mapping, createBufferMappedAsync and fence.OnCompletion (basically all callbacks) return status device loss after it.\n\nAlso we are missing device loss checks in many entrypoints, please go through all methods in dawn.json to make sure they handle device loss. What we could do is instead of validating by hand everywhere in sub-objects, we could change ValidateObject\u0027s device check to check against a copy of \"this\" stored in \"this\" but on device loss, change it to nullptr so the check fail (and when it fails then deduce the correct error). Then the only additional loss checks we need to do are for device methods.\n\nAlso we\u0027ll likely need device loss handling in backend-specific functions like WrapImage etc.",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c78c7bf_6900ace8",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-19T18:47:46Z",
+      "side": 1,
+      "message": "What if we add a call to ValidateIsAlive in the body of ValidateObject?  \n\nIf we plan to add additional entry point validation in the future, perhaps now is the time to create a ValidateEntrypoint method to DeviceBase which, for now, only calls ValidateIsAlive. Then, you only need to pay the cost of finding entrypoints once as part of this change.",
+      "parentUuid": "9cb609de_62c3afc2",
       "revId": "4b339f837909100e2019ba4d540a77359bde0051",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
