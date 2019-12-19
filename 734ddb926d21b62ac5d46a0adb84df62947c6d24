@@ -166,6 +166,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9016db4f_94041553",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-12-19T20:57:14Z",
+      "side": 1,
+      "message": "I don\u0027t think we want to put it in /dawn_native/ if we want to use it from the tests. I can (as you can see in patch 6) but I have to put the /dawn_native/ dependency for the tests into the build.gn to compile.\n\n/common/GPUInfo.h seems more appropriate. Do you agree?",
+      "parentUuid": "64813f01_572d270a",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
