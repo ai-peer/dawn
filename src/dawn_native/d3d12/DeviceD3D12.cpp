@@ -71,7 +71,10 @@ namespace dawn_native { namespace d3d12 {
 
         // Initialize backend services
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
+
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
+        DAWN_TRY(mDescriptorHeapAllocator->Initialize());
+
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
