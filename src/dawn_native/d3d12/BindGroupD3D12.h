@@ -29,23 +29,24 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroup(Device* device, const BindGroupDescriptor* descriptor);
 
-        void AllocateDescriptors(const DescriptorHeapHandle& cbvSrvUavHeapStart,
+        void PopulateDescriptors(Serial cbvSrvUavHeapSerial,
+                                 Serial samplerHeapSerial,
+                                 const DescriptorHeapHandle& cbvSrvUavHeapStart,
                                  uint32_t* cbvUavSrvHeapOffset,
                                  const DescriptorHeapHandle& samplerHeapStart,
                                  uint32_t* samplerHeapOffset);
-        uint32_t GetCbvUavSrvHeapOffset() const;
-        uint32_t GetSamplerHeapOffset() const;
+        D3D12_GPU_DESCRIPTOR_HANDLE GetCbvUavSrvBaseDescriptor() const;
+        D3D12_GPU_DESCRIPTOR_HANDLE GetSamplerHeapBaseDescriptor() const;
 
-        bool TestAndSetCounted(uint64_t heapSerial, uint32_t indexInSubmit);
+        bool IsPopulated(Serial cbvSrvUavHeapSerial, Serial samplerHeapSerial) const;
 
       private:
-        uint32_t mCbvUavSrvHeapOffset;
-        uint32_t mSamplerHeapOffset;
+        D3D12_GPU_DESCRIPTOR_HANDLE mCbvUavSrvBaseDescriptor;
+        D3D12_GPU_DESCRIPTOR_HANDLE mSamplerBaseDescriptor;
 
-        uint64_t mHeapSerial = 0;
-        uint32_t mIndexInSubmit = 0;
+        Serial mCbvSrvUavHeapSerial = 0;
+        Serial mSamplerHeapSerial = 0;
     };
-
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_BINDGROUPD3D12_H_
