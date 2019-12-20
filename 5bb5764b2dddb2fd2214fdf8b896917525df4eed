@@ -45,6 +45,30 @@
       "revId": "5bb5764b2dddb2fd2214fdf8b896917525df4eed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e1b249d_4b496693",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-20T20:10:01Z",
+      "side": 1,
+      "message": "Just convenience I think\n- mPCIInfo is private\n- DAWN_SKIP_TEST_IF(IsIntel()) is a little nicer to use in tests, than DAWN_SKIP_TEST_IF(gpu_info::IsIntel(GetPCIInfo().vendorId)))",
+      "parentUuid": "2c2115dc_90c47490",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 388,
+        "endChar": 0
+      },
+      "revId": "5bb5764b2dddb2fd2214fdf8b896917525df4eed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
