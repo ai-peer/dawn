@@ -238,6 +238,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "688826f0_5f1bf65c",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-12-20T19:35:06Z",
+      "side": 1,
+      "message": "I\u0027ve moved the checks and constants into /common/GPUInfo.h. Only a few constants so it didn\u0027t seem to justify their own file.\n\nWas uncertain about making the gpu_info namespace, but I needed to differentiate from DawnTestBase::IsIntel() somehow.",
+      "parentUuid": "ea434952_e2820d32",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
