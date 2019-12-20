@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a610dcb_48158f8d",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-12-20T18:46:33Z",
+      "side": 1,
+      "message": "[chromium]//src/tools",
+      "range": {
+        "startLine": 407,
+        "startChar": 17,
+        "endLine": 407,
+        "endChar": 19
+      },
+      "revId": "1ff2b110b664274f9a374bf7c5c89f26f6352eb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
