@@ -34,6 +34,24 @@
       "revId": "50c081fc7e53a800b8ede7066a2e19ec2454f721",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f22b7a6f_aa16a606",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:33:50Z",
+      "side": 1,
+      "message": "Thanks for the explanation, I had forgotten about that.",
+      "parentUuid": "3e3ad020_c14b18e8",
+      "revId": "50c081fc7e53a800b8ede7066a2e19ec2454f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
