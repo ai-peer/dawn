@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db1608d5_c2a5e60a",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-20T20:06:42Z",
+      "side": 1,
+      "message": "Nit: The expression can be simplified to \n\n featureOptions5.RenderPassesTier \u003c D3D12_RENDER_PASS_TIER_1 || !gpu_info::IsIntel(adapter.GetPCIInfo().vendorId)",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 57,
+        "endChar": 80
+      },
+      "revId": "5bb5764b2dddb2fd2214fdf8b896917525df4eed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c2115dc_90c47490",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-20T20:06:42Z",
+      "side": 1,
+      "message": "Is there a benefit to having these DawnTestBase::Is\u003cHardwareVendor\u003e functions when the caller can just call gpu_info::Is\u003cHardwareVendor\u003e instead?",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 388,
+        "endChar": 0
+      },
+      "revId": "5bb5764b2dddb2fd2214fdf8b896917525df4eed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
