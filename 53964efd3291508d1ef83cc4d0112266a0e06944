@@ -22,6 +22,30 @@
       "revId": "53964efd3291508d1ef83cc4d0112266a0e06944",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8212ce6_53a0c27b",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-20T01:22:18Z",
+      "side": 1,
+      "message": "Good idea",
+      "parentUuid": "8953bfa7_9929ec2b",
+      "range": {
+        "startLine": 380,
+        "startChar": 23,
+        "endLine": 380,
+        "endChar": 34
+      },
+      "revId": "53964efd3291508d1ef83cc4d0112266a0e06944",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
