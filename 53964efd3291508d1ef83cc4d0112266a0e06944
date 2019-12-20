@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8953bfa7_9929ec2b",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2019-12-20T01:07:00Z",
+      "side": 1,
+      "message": "Not directly related to this CL, but wouldn\u0027t it be better to have these double/uint versions just convert |value| into a string then pass it to an implementation so that you don\u0027t end up with two identical implementations?",
+      "range": {
+        "startLine": 380,
+        "startChar": 23,
+        "endLine": 380,
+        "endChar": 34
+      },
+      "revId": "53964efd3291508d1ef83cc4d0112266a0e06944",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
