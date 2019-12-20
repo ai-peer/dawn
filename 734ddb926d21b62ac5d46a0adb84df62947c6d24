@@ -214,6 +214,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea434952_e2820d32",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T09:16:57Z",
+      "side": 1,
+      "message": "PCIInfo is on the way out because it is part of AdapterProperties in webgpu.h. We could just have a header that\u0027s PCIIDs.h or something like that that contains the constants, using PCIDeviceID \u003d uint32_t; and helper function to check the GPU vendor is Intel, NVIDIA, AMD, etc.",
+      "parentUuid": "a323bd52_39771bc1",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
