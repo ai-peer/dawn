@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6209d91_2461d45f",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T09:19:48Z",
+      "side": 1,
+      "message": "I\u0027m not 100% sur what the format is, but isn\u0027t this going to build an invalida JSON file that looks like this?\n\n   , { stuff }, { more stuff }\n\nAre all the JSON objects supposed to be enclosed in a list?",
+      "revId": "50c081fc7e53a800b8ede7066a2e19ec2454f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
