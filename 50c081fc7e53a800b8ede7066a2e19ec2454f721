@@ -16,6 +16,24 @@
       "revId": "50c081fc7e53a800b8ede7066a2e19ec2454f721",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e3ad020_c14b18e8",
+        "filename": "src/tests/perf_tests/DawnPerfTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2019-12-20T15:29:41Z",
+      "side": 1,
+      "message": "we process results between tests, and incrementally dump them as well otherwise we\u0027ll have an enormous vector of trace events. there\u0027s a prefix, suffix that\u0027s printed out too in SetUp and TearDown",
+      "parentUuid": "a6209d91_2461d45f",
+      "revId": "50c081fc7e53a800b8ede7066a2e19ec2454f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
