@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "f1dd0381_bc88d016",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 37
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:41:04Z",
+      "side": 1,
+      "message": "At least Vulkan you don\u0027t need to query for device loss explicitly, you get it via a VkResult returned by an entrypoint as soon as the device realizes. Not sure about OpenGL (without explicitly checking glGetError()) and Metal.",
+      "parentUuid": "6e357191_baaaa519",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97debb12_642c15eb",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 37
@@ -284,6 +308,30 @@
     },
     {
       "key": {
+        "uuid": "6e43aa7f_d3884ecd",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 37
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:41:04Z",
+      "side": 1,
+      "message": "We could do these asserts and state changes around calls to Destroy in DeviceBase instead.",
+      "parentUuid": "61b7a329_910f2233",
+      "range": {
+        "startLine": 304,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 46
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f75b93af_7213d8f0",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 37
@@ -378,6 +426,24 @@
       "side": 1,
       "message": "sorry I forgot to make a note here that the tests are still WIP (it was in patch description but it got overwritten when I updated the commit message).\n\nI thought about putting ValidateIsAlive in ValidateObject but wasn\u0027t sure if that would be confusing to what ValidateObject was validating (the object vs the device).",
       "parentUuid": "0c78c7bf_6900ace8",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f7f560c_835c6da6",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:41:04Z",
+      "side": 1,
+      "message": "ValidateObject is super hot code so we should be careful when adding things in there.\n\nFor now peppering ValidateIsAlive in a bunch of places is ok, we can figure out how to optimize it out later.",
+      "parentUuid": "404a6f3c_8ba7b545",
       "revId": "4b339f837909100e2019ba4d540a77359bde0051",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
