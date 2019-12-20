@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e570f052_c7ea731b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2019-12-20T20:19:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "16996b87_cec27cbe",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "c9771108c1a4578d3abc3014f7f4a6ed503f2882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9aafc1e7_fad27de8",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 27
