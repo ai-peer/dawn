@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e517c6c_f68cac15",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:31:37Z",
+      "side": 1,
+      "message": "Note: both parts of the serials aren\u0027t used independently so the UAV SRV CBV heap is likely to churn more than it needs to. No need to address this now.",
+      "revId": "fe8a02a2f298851ca5542d011b8f992f3fa810a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0311ab6_1d2ad6cb",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:31:37Z",
+      "side": 1,
+      "message": "nit: this can be hoisted outside of the loop.",
+      "revId": "fe8a02a2f298851ca5542d011b8f992f3fa810a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9075dda_df9f138c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:31:37Z",
+      "side": 1,
+      "message": "I thought there\u0027s no reason why this should be this complicated so I made an alternative version at https://dawn-review.googlesource.com/c/dawn/+/14760\n\nI think the complication in this CL comes from the fact that we try to 1) minimize the number of calls to allocating descriptors, and 2) minimize changes to the architecture in particular to the DescriptorHeapAllocator.\n\nThere\u0027s no real good reason that the descriptor heap allocator takes care of both CPU and GPU heaps for all types of descriptors as each type of descriptor is used very differently:\n - CPU RTV or DSV is very low-frequency and small amounts of data and doesn\u0027t have issues with a single heap being usable at any given time.\n - GPU CBV_UAV_SRV and Sampler heaps are super-high frequency and only one of each can be bound at a time.\n - CPU CBV_UAV_SRV and Sampler heaps, when we will use them, will be super-high frequency and likely binned per BindGroupLayout.\n\nAll of the above means that the current DescriptorHeap is a bad abstraction and forces us to write messy code. Instead we should have something like a ShaderVisibleDescriptorAllocator that knows about the need to only have one of each heap type bound at a time, and can talk to BindGroups directly.\n\nIt would likely contain the SetDescriptorHeap method of the WIP CL above, TryAllocateDescriptor, as well as a subset of what DescriptorHeapAllocator currently does. Knowledge about descriptor heap serial would be only between bindgroups and that object so the rest of the code only needs to know there are faillable allocations and the guarantee that EnsureCanAllocateFullPipelineLayout gives.",
+      "revId": "fe8a02a2f298851ca5542d011b8f992f3fa810a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07eaa92c_b36ae593",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:31:37Z",
+      "side": 1,
+      "message": "That\u0027s a performance bug of IterateBitSet.",
+      "revId": "fe8a02a2f298851ca5542d011b8f992f3fa810a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3e16005_a2f1dac2",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocator.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-20T15:31:37Z",
+      "side": 1,
+      "message": "nit: this is misleading, it doesn\u0027t force an allocation all the time. Instead it could be \"returnInvalidHandleWhenFull\" although that\u0027s a mouthful and there must be a better name for this.",
+      "range": {
+        "startLine": 88,
+        "startChar": 13,
+        "endLine": 88,
+        "endChar": 28
+      },
+      "revId": "fe8a02a2f298851ca5542d011b8f992f3fa810a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
