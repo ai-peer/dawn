@@ -286,6 +286,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f947c5cc_6fcc4b34",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2019-12-20T21:55:22Z",
+      "side": 1,
+      "message": "Calling from the tests works as you describe, but without a namespace, calling the new helper from DawnTestBase::IsIntel() will try to resolve to itself since they\u0027re the same name.\n\nWe could have a different naming scheme for one of the function sets, but I preferred the namespace.",
+      "parentUuid": "340a659b_05a7a7ba",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
