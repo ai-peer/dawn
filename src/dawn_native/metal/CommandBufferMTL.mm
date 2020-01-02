@@ -47,8 +47,30 @@ namespace dawn_native { namespace metal {
             for (uint32_t i :
                  IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                 auto& attachmentInfo = renderPass->colorAttachments[i];
+                TextureView* view = ToBackend(attachmentInfo.view.Get());
+                bool hasResolveTarget = attachmentInfo.resolveTarget.Get() != nullptr;
 
-                if (attachmentInfo.loadOp == wgpu::LoadOp::Clear) {
+                wgpu::LoadOp loadOp = attachmentInfo.loadOp;
+                ASSERT(view->GetLayerCount() == 1);
+                ASSERT(view->GetLevelCount() == 1);
+                if (loadOp == wgpu::LoadOp::Load &&
+                    !view->GetTexture()->IsSubresourceContentInitialized(
+                        view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1)) {
+                    loadOp = wgpu::LoadOp::Clear;
+                }
+
+                if (hasResolveTarget) {
+                    // We need to set the resolve target to initialized so that it does not get
+                    // cleared later in the pipeline. The texture will be resolved from the
+                    // source color attachment, which will be correctly initialized.
+                    TextureView* resolveView = ToBackend(attachmentInfo.resolveTarget.Get());
+                    ToBackend(resolveView->GetTexture())
+                        ->SetIsSubresourceContentInitialized(
+                            true, resolveView->GetBaseMipLevel(), resolveView->GetLevelCount(),
+                            resolveView->GetBaseArrayLayer(), resolveView->GetLayerCount());
+                }
+
+                if (loadOp == wgpu::LoadOp::Clear) {
                     descriptor.colorAttachments[i].loadAction = MTLLoadActionClear;
                     descriptor.colorAttachments[i].clearColor =
                         MTLClearColorMake(attachmentInfo.clearColor.r, attachmentInfo.clearColor.g,
@@ -58,33 +80,77 @@ namespace dawn_native { namespace metal {
                 }
 
                 descriptor.colorAttachments[i].texture =
-                    ToBackend(attachmentInfo.view->GetTexture())->GetMTLTexture();
-                descriptor.colorAttachments[i].level = attachmentInfo.view->GetBaseMipLevel();
-                descriptor.colorAttachments[i].slice = attachmentInfo.view->GetBaseArrayLayer();
+                    ToBackend(view->GetTexture())->GetMTLTexture();
+                descriptor.colorAttachments[i].level = view->GetBaseMipLevel();
+                descriptor.colorAttachments[i].slice = view->GetBaseArrayLayer();
 
-                if (attachmentInfo.storeOp == wgpu::StoreOp::Store) {
-                    if (attachmentInfo.resolveTarget.Get() != nullptr) {
-                        descriptor.colorAttachments[i].resolveTexture =
-                            ToBackend(attachmentInfo.resolveTarget->GetTexture())->GetMTLTexture();
-                        descriptor.colorAttachments[i].resolveLevel =
-                            attachmentInfo.resolveTarget->GetBaseMipLevel();
-                        descriptor.colorAttachments[i].resolveSlice =
-                            attachmentInfo.resolveTarget->GetBaseArrayLayer();
-                        descriptor.colorAttachments[i].storeAction =
-                            kMTLStoreActionStoreAndMultisampleResolve;
-                    } else {
-                        descriptor.colorAttachments[i].storeAction = MTLStoreActionStore;
-                    }
+                switch (attachmentInfo.storeOp) {
+                    case wgpu::StoreOp::Store: {
+                        view->GetTexture()->SetIsSubresourceContentInitialized(
+                            true, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
+
+                        if (attachmentInfo.resolveTarget.Get() != nullptr) {
+                            descriptor.colorAttachments[i].resolveTexture =
+                                ToBackend(attachmentInfo.resolveTarget->GetTexture())
+                                    ->GetMTLTexture();
+                            descriptor.colorAttachments[i].resolveLevel =
+                                attachmentInfo.resolveTarget->GetBaseMipLevel();
+                            descriptor.colorAttachments[i].resolveSlice =
+                                attachmentInfo.resolveTarget->GetBaseArrayLayer();
+                            descriptor.colorAttachments[i].storeAction =
+                                kMTLStoreActionStoreAndMultisampleResolve;
+                        } else {
+                            descriptor.colorAttachments[i].storeAction = MTLStoreActionStore;
+                        }
+                    } break;
+
+                    case wgpu::StoreOp::Clear: {
+                        view->GetTexture()->SetIsSubresourceContentInitialized(
+                            false, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
+
+                        descriptor.colorAttachments[i].storeAction = MTLStoreActionDontCare;
+                    } break;
+
+                    default: { UNREACHABLE(); } break;
                 }
             }
 
             if (renderPass->attachmentState->HasDepthStencilAttachment()) {
                 auto& attachmentInfo = renderPass->depthStencilAttachment;
+                TextureView* view = ToBackend(attachmentInfo.view.Get());
+
+                // If the depth stencil texture has not been initialized, we want to use loadop
+                // clear to init the contents to 0's
+                if (!view->GetTexture()->IsSubresourceContentInitialized(
+                        view->GetBaseMipLevel(), view->GetLevelCount(), view->GetBaseArrayLayer(),
+                        view->GetLayerCount())) {
+                    if (view->GetTexture()->GetFormat().HasDepth() &&
+                        attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
+                        attachmentInfo.clearDepth = 0.0f;
+                        attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+                    }
+                    if (view->GetTexture()->GetFormat().HasStencil() &&
+                        attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
+                        attachmentInfo.clearStencil = 0u;
+                        attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+                    }
+                }
+
+                if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Store &&
+                    attachmentInfo.stencilStoreOp == wgpu::StoreOp::Store) {
+                    view->GetTexture()->SetIsSubresourceContentInitialized(
+                        true, view->GetBaseMipLevel(), view->GetLevelCount(),
+                        view->GetBaseArrayLayer(), view->GetLayerCount());
+                } else if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Clear &&
+                           attachmentInfo.stencilStoreOp == wgpu::StoreOp::Clear) {
+                    view->GetTexture()->SetIsSubresourceContentInitialized(
+                        false, view->GetBaseMipLevel(), view->GetLevelCount(),
+                        view->GetBaseArrayLayer(), view->GetLayerCount());
+                }
 
                 // TODO(jiawei.shao@intel.com): support rendering into a layer of a texture.
-                id<MTLTexture> texture =
-                    ToBackend(attachmentInfo.view->GetTexture())->GetMTLTexture();
-                const Format& format = attachmentInfo.view->GetTexture()->GetFormat();
+                id<MTLTexture> texture = ToBackend(view->GetTexture())->GetMTLTexture();
+                const Format& format = view->GetTexture()->GetFormat();
 
                 if (format.HasDepth()) {
                     descriptor.depthAttachment.texture = texture;
@@ -589,21 +655,44 @@ namespace dawn_native { namespace metal {
     }
 
     void CommandBuffer::FillCommands(CommandRecordingContext* commandContext) {
+        const std::vector<PassResourceUsage>& passResourceUsages = GetResourceUsages().perPass;
+        size_t nextPassNumber = 0;
+
+        auto LazyClearForPass = [](const PassResourceUsage& usages) {
+            for (size_t i = 0; i < usages.textures.size(); ++i) {
+                Texture* texture = ToBackend(usages.textures[i]);
+                // Clear textures that are not output attachments. Output attachments will be
+                // cleared in CreateMTLRenderPassDescriptor by setting the loadop to clear when the
+                // texture subresource has not been initialized before the render pass.
+                if (!(usages.textureUsages[i] & wgpu::TextureUsage::OutputAttachment)) {
+                    texture->EnsureSubresourceContentInitialized(0, texture->GetNumMipLevels(), 0,
+                                                                 texture->GetArrayLayers());
+                }
+            }
+        };
+
         Command type;
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::BeginComputePass: {
                     mCommands.NextCommand<BeginComputePassCmd>();
 
+                    LazyClearForPass(passResourceUsages[nextPassNumber]);
                     commandContext->EndBlit();
                     EncodeComputePass(commandContext);
+
+                    nextPassNumber++;
                 } break;
 
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
-                    commandContext->EndBlit();
                     MTLRenderPassDescriptor* descriptor = CreateMTLRenderPassDescriptor(cmd);
+
+                    LazyClearForPass(passResourceUsages[nextPassNumber]);
+                    commandContext->EndBlit();
                     EncodeRenderPass(commandContext, descriptor, cmd->width, cmd->height);
+
+                    nextPassNumber++;
                 } break;
 
                 case Command::CopyBufferToBuffer: {
@@ -624,6 +713,15 @@ namespace dawn_native { namespace metal {
                     auto& copySize = copy->copySize;
                     Buffer* buffer = ToBackend(src.buffer.Get());
                     Texture* texture = ToBackend(dst.texture.Get());
+
+                    if (IsCompleteSubresourceCopiedTo(texture, copy->copySize,
+                                                      copy->destination.mipLevel)) {
+                        texture->SetIsSubresourceContentInitialized(
+                            true, copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
+                    } else {
+                        texture->EnsureSubresourceContentInitialized(
+                            copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
+                    }
 
                     Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(dst.mipLevel);
                     TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
@@ -652,6 +750,9 @@ namespace dawn_native { namespace metal {
                     Texture* texture = ToBackend(src.texture.Get());
                     Buffer* buffer = ToBackend(dst.buffer.Get());
 
+                    texture->EnsureSubresourceContentInitialized(copy->source.mipLevel, 1,
+                                                                 copy->source.arrayLayer, 1);
+
                     Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(src.mipLevel);
                     TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
                         src.origin, copySize, texture->GetFormat(), virtualSizeAtLevel,
@@ -676,6 +777,17 @@ namespace dawn_native { namespace metal {
                         mCommands.NextCommand<CopyTextureToTextureCmd>();
                     Texture* srcTexture = ToBackend(copy->source.texture.Get());
                     Texture* dstTexture = ToBackend(copy->destination.texture.Get());
+
+                    srcTexture->EnsureSubresourceContentInitialized(copy->source.mipLevel, 1,
+                                                                    copy->source.arrayLayer, 1);
+                    if (IsCompleteSubresourceCopiedTo(dstTexture, copy->copySize,
+                                                      copy->destination.mipLevel)) {
+                        dstTexture->SetIsSubresourceContentInitialized(
+                            true, copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
+                    } else {
+                        dstTexture->EnsureSubresourceContentInitialized(
+                            copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
+                    }
 
                     [commandContext->EnsureBlit()
                           copyFromTexture:srcTexture->GetMTLTexture()
