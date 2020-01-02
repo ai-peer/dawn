@@ -19,6 +19,7 @@
 #include "common/Assert.h"
 #include "common/Constants.h"
 #include "common/Math.h"
+#include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
@@ -327,6 +328,87 @@ namespace dawn_native {
 
             default:
                 return false;
+        }
+    }
+
+    void LazyClearAttachmentInfo(dawn_native::RenderPassColorAttachmentInfo* info) {
+        TextureViewBase* view = info->view.Get();
+        bool hasResolveTarget = info->resolveTarget.Get() != nullptr;
+
+        ASSERT(view->GetLayerCount() == 1);
+        ASSERT(view->GetLevelCount() == 1);
+
+        // If the loadIp is Load, but the subresource is not initialized, use Clear instead.
+        if (info->loadOp == wgpu::LoadOp::Load &&
+            !view->GetTexture()->IsSubresourceContentInitialized(view->GetBaseMipLevel(), 1,
+                                                                 view->GetBaseArrayLayer(), 1)) {
+            info->loadOp = wgpu::LoadOp::Clear;
+            info->clearColor = {0.f, 0.f, 0.f, 0.f};
+        }
+
+        if (hasResolveTarget) {
+            // We need to set the resolve target to initialized so that it does not get
+            // cleared later in the pipeline. The texture will be resolved from the
+            // source color attachment, which will be correctly initialized.
+            TextureViewBase* resolveView = info->resolveTarget.Get();
+            resolveView->GetTexture()->SetIsSubresourceContentInitialized(
+                true, resolveView->GetBaseMipLevel(), resolveView->GetLevelCount(),
+                resolveView->GetBaseArrayLayer(), resolveView->GetLayerCount());
+        }
+
+        switch (info->storeOp) {
+            case wgpu::StoreOp::Store: {
+                view->GetTexture()->SetIsSubresourceContentInitialized(
+                    true, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
+            } break;
+
+            case wgpu::StoreOp::Clear: {
+                view->GetTexture()->SetIsSubresourceContentInitialized(
+                    false, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
+            } break;
+
+            default: { UNREACHABLE(); } break;
+        }
+    }
+
+    void LazyClearAttachmentInfo(dawn_native::RenderPassDepthStencilAttachmentInfo* info) {
+        TextureViewBase* view = info->view.Get();
+
+        // If the depth stencil texture has not been initialized, we want to use loadop
+        // clear to init the contents to 0's
+        if (!view->GetTexture()->IsSubresourceContentInitialized(
+                view->GetBaseMipLevel(), view->GetLevelCount(), view->GetBaseArrayLayer(),
+                view->GetLayerCount())) {
+            if (view->GetTexture()->GetFormat().HasDepth() &&
+                info->depthLoadOp == wgpu::LoadOp::Load) {
+                info->clearDepth = 0.0f;
+                info->depthLoadOp = wgpu::LoadOp::Clear;
+            }
+            if (view->GetTexture()->GetFormat().HasStencil() &&
+                info->stencilLoadOp == wgpu::LoadOp::Load) {
+                info->clearStencil = 0u;
+                info->stencilLoadOp = wgpu::LoadOp::Clear;
+            }
+        }
+
+        // If these have different store ops, make them both Store because we can't track
+        // initialized state separately yet. TODO(crbug.com/dawn/145)
+        if (info->depthStoreOp != info->stencilStoreOp) {
+            info->depthStoreOp = wgpu::StoreOp::Store;
+            info->stencilStoreOp = wgpu::StoreOp::Store;
+        }
+
+        if (info->depthStoreOp == wgpu::StoreOp::Store &&
+            info->stencilStoreOp == wgpu::StoreOp::Store) {
+            view->GetTexture()->SetIsSubresourceContentInitialized(
+                true, view->GetBaseMipLevel(), view->GetLevelCount(), view->GetBaseArrayLayer(),
+                view->GetLayerCount());
+        } else {
+            ASSERT(info->depthStoreOp == wgpu::StoreOp::Clear &&
+                   info->stencilStoreOp == wgpu::StoreOp::Clear);
+            view->GetTexture()->SetIsSubresourceContentInitialized(
+                false, view->GetBaseMipLevel(), view->GetLevelCount(), view->GetBaseArrayLayer(),
+                view->GetLayerCount());
         }
     }
 

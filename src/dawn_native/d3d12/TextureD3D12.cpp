@@ -623,9 +623,7 @@ namespace dawn_native { namespace d3d12 {
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
                             uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
-            std::fill(reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer),
-                      reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize),
-                      clearColor);
+            memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
 
             TransitionUsageNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST);
 
