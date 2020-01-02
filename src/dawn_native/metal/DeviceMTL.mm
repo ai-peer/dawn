@@ -144,7 +144,7 @@ namespace dawn_native { namespace metal {
         mDynamicUploader->Deallocate(completedSerial);
         mMapTracker->Tick(completedSerial);
 
-        if (mPendingCommands != nil) {
+        if (mCommandContext.GetCommands() != nil) {
             SubmitPendingCommandBuffer();
         } else if (completedSerial == mLastSubmittedSerial) {
             // If there's no GPU work in flight we still need to artificially increment the serial
@@ -164,17 +164,16 @@ namespace dawn_native { namespace metal {
         return mCommandQueue;
     }
 
-    id<MTLCommandBuffer> Device::GetPendingCommandBuffer() {
-        TRACE_EVENT0(GetPlatform(), General, "DeviceMTL::GetPendingCommandBuffer");
-        if (mPendingCommands == nil) {
-            mPendingCommands = [mCommandQueue commandBuffer];
-            [mPendingCommands retain];
+    CommandRecordingContext* Device::GetPendingCommandContext() {
+        if (mCommandContext.GetCommands() == nil) {
+            TRACE_EVENT0(GetPlatform(), General, "[MTLCommandQueue commandBuffer]");
+            mCommandContext = CommandRecordingContext([mCommandQueue commandBuffer]);
         }
-        return mPendingCommands;
+        return &mCommandContext;
     }
 
     void Device::SubmitPendingCommandBuffer() {
-        if (mPendingCommands == nil) {
+        if (mCommandContext.GetCommands() == nil) {
             return;
         }
 
@@ -185,7 +184,7 @@ namespace dawn_native { namespace metal {
         {
             std::lock_guard<std::mutex> lock(mLastSubmittedCommandsMutex);
             [mLastSubmittedCommands release];
-            mLastSubmittedCommands = mPendingCommands;
+            mLastSubmittedCommands = mCommandContext.GetCommands();
         }
 
         // Ok, ObjC blocks are weird. My understanding is that local variables are captured by
@@ -196,9 +195,9 @@ namespace dawn_native { namespace metal {
         // Free mLastSubmittedCommands as soon as it is scheduled so that it doesn't hold
         // references to its resources. Make a local copy of pendingCommands first so it is
         // captured "by-value" by the block.
-        id<MTLCommandBuffer> pendingCommands = mPendingCommands;
+        id<MTLCommandBuffer> pendingCommands = mCommandContext.AcquireCommands();
 
-        [mPendingCommands addScheduledHandler:^(id<MTLCommandBuffer>) {
+        [pendingCommands addScheduledHandler:^(id<MTLCommandBuffer>) {
             // This is DRF because we hold the mutex for mLastSubmittedCommands and pendingCommands
             // is a local value (and not the member itself).
             std::lock_guard<std::mutex> lock(mLastSubmittedCommandsMutex);
@@ -211,7 +210,7 @@ namespace dawn_native { namespace metal {
         // Update the completed serial once the completed handler is fired. Make a local copy of
         // mLastSubmittedSerial so it is captured by value.
         Serial pendingSerial = mLastSubmittedSerial;
-        [mPendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
+        [pendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
             TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                                    pendingSerial);
             ASSERT(pendingSerial > mCompletedSerial.load());
@@ -220,8 +219,7 @@ namespace dawn_native { namespace metal {
 
         TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                                  pendingSerial);
-        [mPendingCommands commit];
-        mPendingCommands = nil;
+        [pendingCommands commit];
     }
 
     MapRequestTracker* Device::GetMapTracker() const {
@@ -242,14 +240,13 @@ namespace dawn_native { namespace metal {
                                                uint64_t size) {
         id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
         id<MTLBuffer> buffer = ToBackend(destination)->GetMTLBuffer();
-        id<MTLCommandBuffer> commandBuffer = GetPendingCommandBuffer();
-        id<MTLBlitCommandEncoder> encoder = [commandBuffer blitCommandEncoder];
+        id<MTLBlitCommandEncoder> encoder = GetPendingCommandContext()->EnsureBlit();
         [encoder copyFromBuffer:uploadBuffer
                    sourceOffset:sourceOffset
                        toBuffer:buffer
               destinationOffset:destinationOffset
                            size:size];
-        [encoder endEncoding];
+        GetPendingCommandContext()->EndBlit();
 
         return {};
     }
@@ -273,8 +270,7 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
-        [mPendingCommands release];
-        mPendingCommands = nil;
+        mCommandContext = CommandRecordingContext();
 
         // Wait for all commands to be finished so we can free resources
         while (GetCompletedCommandSerial() != mLastSubmittedSerial) {
@@ -285,10 +281,7 @@ namespace dawn_native { namespace metal {
     }
 
     void Device::Destroy() {
-        if (mPendingCommands != nil) {
-            [mPendingCommands release];
-            mPendingCommands = nil;
-        }
+        mCommandContext = CommandRecordingContext();
 
         mMapTracker = nullptr;
         mDynamicUploader = nullptr;
