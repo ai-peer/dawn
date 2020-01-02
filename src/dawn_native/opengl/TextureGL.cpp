@@ -265,8 +265,7 @@ namespace dawn_native { namespace opengl {
             // Fill the buffer with clear color
             uint8_t* clearBuffer = nullptr;
             DAWN_TRY(srcBuffer->MapAtCreation(&clearBuffer));
-            std::fill(reinterpret_cast<uint32_t*>(clearBuffer),
-                      reinterpret_cast<uint32_t*>(clearBuffer + descriptor.size), clearColor);
+            memset(clearBuffer, clearColor, descriptor.size);
             srcBuffer->Unmap();
 
             // Bind buffer and texture, and make the buffer to texture copy

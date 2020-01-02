@@ -41,6 +41,12 @@ namespace dawn_native {
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Storage |
         wgpu::TextureUsage::OutputAttachment;
 
+    struct RenderPassColorAttachmentInfo;
+    struct RenderPassDepthStencilAttachmentInfo;
+
+    void LazyClearAttachmentInfo(dawn_native::RenderPassColorAttachmentInfo* info);
+    void LazyClearAttachmentInfo(dawn_native::RenderPassDepthStencilAttachmentInfo* info);
+
     class TextureBase : public ObjectBase {
       public:
         enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
