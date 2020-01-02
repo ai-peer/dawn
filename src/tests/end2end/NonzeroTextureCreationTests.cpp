@@ -44,6 +44,43 @@ TEST_P(NonzeroTextureCreationTests, TextureCreationClearsOneBits) {
     EXPECT_PIXEL_RGBA8_EQ(filledWithOnes, texture, 0, 0);
 }
 
+// Test that a depth stencil texture clears to 1's because toggle is enabled.
+TEST_P(NonzeroTextureCreationTests, TextureCreationDepthAndStencilClearsOneBits) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = kSize;
+    descriptor.size.height = kSize;
+    descriptor.size.depth = 1;
+    descriptor.arrayLayerCount = 1;
+    descriptor.sampleCount = 1;
+    descriptor.mipLevelCount = 1;
+    descriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
+
+    {
+        descriptor.format = wgpu::TextureFormat::Depth24Plus;
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        RGBA8 filledWithOnes(255, 255, 255, 255);
+        EXPECT_PIXEL_RGBA8_EQ(filledWithOnes, texture, 0, 0);
+    }
+    {
+        descriptor.format = wgpu::TextureFormat::Depth32Float;
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        RGBA8 filledWithOnes(255, 255, 255, 255);
+        EXPECT_PIXEL_RGBA8_EQ(filledWithOnes, texture, 0, 0);
+    }
+    {
+        DAWN_SKIP_TEST_IF(IsMetal());  // crbug.com/dawn/316
+
+        descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        RGBA8 filledWithOnes(255, 255, 255, 255);
+        EXPECT_PIXEL_RGBA8_EQ(filledWithOnes, texture, 0, 0);
+    }
+}
+
 // Test that non-zero mip level clears to 1's because toggle is enabled.
 TEST_P(NonzeroTextureCreationTests, MipMapClears) {
     constexpr uint32_t mipLevels = 4;
@@ -123,7 +160,7 @@ TEST_P(NonzeroTextureCreationTests, NonrenderableTextureFormat) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint32_t> expected(bufferSize, 1);
+    std::vector<uint32_t> expected(bufferSize, 0xFFFFFFFF);
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), bufferDst, 0, 8);
 }
 
@@ -161,12 +198,15 @@ TEST_P(NonzeroTextureCreationTests, NonRenderableTextureClearWithMultiArrayLayer
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint32_t> expectedWithZeros(bufferSize, 1);
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferDst, 0, 8);
+    std::vector<uint32_t> expected(bufferSize, 0xFFFFFFFF);
+    EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), bufferDst, 0, 8);
 }
 
 DAWN_INSTANTIATE_TEST(NonzeroTextureCreationTests,
                       ForceToggles(D3D12Backend,
+                                   {"nonzero_clear_resources_on_creation_for_testing"},
+                                   {"lazy_clear_resource_on_first_use"}),
+                      ForceToggles(MetalBackend,
                                    {"nonzero_clear_resources_on_creation_for_testing"},
                                    {"lazy_clear_resource_on_first_use"}),
                       ForceToggles(OpenGLBackend,

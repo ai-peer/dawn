@@ -193,12 +193,15 @@ namespace dawn_native { namespace opengl {
 
         Device* device = ToBackend(GetDevice());
         const OpenGLFunctions& gl = device->gl;
-        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
+
+        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 0xFF;
+        float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
+
         if (GetFormat().isRenderable) {
             if (GetFormat().HasDepthOrStencil()) {
                 bool doDepthClear = GetFormat().HasDepth();
                 bool doStencilClear = GetFormat().HasStencil();
-                GLfloat depth = clearColor;
+                GLfloat depth = fClearColor;
                 GLint stencil = clearColor;
                 if (doDepthClear) {
                     gl.DepthMask(GL_TRUE);
@@ -224,8 +227,7 @@ namespace dawn_native { namespace opengl {
             } else {
                 static constexpr uint32_t MAX_TEXEL_SIZE = 16;
                 ASSERT(GetFormat().blockByteSize <= MAX_TEXEL_SIZE);
-                std::array<GLbyte, MAX_TEXEL_SIZE> clearColorData;
-                clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 255;
+                std::array<GLbyte, MAX_TEXEL_SIZE> clearColorData(clearColor);
                 clearColorData.fill(clearColor);
 
                 const GLFormat& glFormat = GetGLFormat();
@@ -265,8 +267,7 @@ namespace dawn_native { namespace opengl {
             // Fill the buffer with clear color
             uint8_t* clearBuffer = nullptr;
             DAWN_TRY(srcBuffer->MapAtCreation(&clearBuffer));
-            std::fill(reinterpret_cast<uint32_t*>(clearBuffer),
-                      reinterpret_cast<uint32_t*>(clearBuffer + descriptor.size), clearColor);
+            memset(clearBuffer, clearColor, descriptor.size);
             srcBuffer->Unmap();
 
             // Bind buffer and texture, and make the buffer to texture copy

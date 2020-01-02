@@ -41,6 +41,9 @@ namespace dawn_native {
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Storage |
         wgpu::TextureUsage::OutputAttachment;
 
+    struct BeginRenderPassCmd;
+    void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass);
+
     class TextureBase : public ObjectBase {
       public:
         enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
