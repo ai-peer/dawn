@@ -14,8 +14,13 @@
 
 #include "dawn_native/metal/TextureMTL.h"
 
+#include "common/Constants.h"
+#include "common/Math.h"
 #include "common/Platform.h"
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/metal/DeviceMTL.h"
+#include "dawn_native/metal/StagingBufferMTL.h"
+#include "dawn_native/metal/UtilsMetal.h"
 
 namespace dawn_native { namespace metal {
 
@@ -318,6 +323,11 @@ namespace dawn_native { namespace metal {
         MTLTextureDescriptor* mtlDesc = CreateMetalTextureDescriptor(descriptor);
         mMtlTexture = [device->GetMTLDevice() newTextureWithDescriptor:mtlDesc];
         [mtlDesc release];
+
+        if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+            device->ConsumedError(ClearTexture(0, GetNumMipLevels(), 0, GetArrayLayers(),
+                                               TextureBase::ClearValue::NonZero));
+        }
     }
 
     Texture::Texture(Device* device, const TextureDescriptor* descriptor, id<MTLTexture> mtlTexture)
@@ -336,6 +346,9 @@ namespace dawn_native { namespace metal {
                                                              iosurface:ioSurface
                                                                  plane:plane];
         [mtlDesc release];
+
+        // TODO(enga): Set as uninitialized if IOSurface isn't initialized.
+        SetIsSubresourceContentInitialized(true, 0, 1, 0, 1);
     }
 
     Texture::~Texture() {
@@ -351,6 +364,167 @@ namespace dawn_native { namespace metal {
 
     id<MTLTexture> Texture::GetMTLTexture() {
         return mMtlTexture;
+    }
+
+    MaybeError Texture::ClearTexture(uint32_t baseMipLevel,
+                                     uint32_t levelCount,
+                                     uint32_t baseArrayLayer,
+                                     uint32_t layerCount,
+                                     TextureBase::ClearValue clearValue) {
+        Device* device = ToBackend(GetDevice());
+        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
+
+        CommandRecordingContext* commandContext = device->GetPendingCommandContext();
+
+        if (GetFormat().isRenderable) {
+            const double dClearColor = static_cast<double>(clearColor);
+
+            if (GetFormat().HasDepthOrStencil()) {
+                // End the blit encoder if it is open.
+                commandContext->EndBlit();
+
+                // Create a render pass to clear each subresource.
+                for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                    for (uint32_t arrayLayer = baseArrayLayer;
+                         arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
+
+                        MTLRenderPassDescriptor* descriptor =
+                            [MTLRenderPassDescriptor renderPassDescriptor];
+
+                        if (GetFormat().HasDepth()) {
+                            descriptor.depthAttachment.texture = GetMTLTexture();
+                            descriptor.depthAttachment.loadAction = MTLLoadActionClear;
+                            descriptor.depthAttachment.clearDepth = dClearColor;
+                        }
+                        if (GetFormat().HasStencil()) {
+                            descriptor.stencilAttachment.texture = GetMTLTexture();
+                            descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
+                            descriptor.stencilAttachment.clearStencil = dClearColor;
+                        }
+
+                        commandContext->BeginRender(descriptor);
+                        commandContext->EndRender();
+                    }
+                }
+            } else {
+                ASSERT(GetFormat().IsColor());
+                MTLRenderPassDescriptor* descriptor =
+                    [MTLRenderPassDescriptor renderPassDescriptor];
+
+                // Create a single render pass with each subresource as a color attachment to clear
+                // them all.
+                uint32_t i = 0;
+                for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                    for (uint32_t arrayLayer = baseArrayLayer;
+                         arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
+
+                        descriptor.colorAttachments[i].texture = GetMTLTexture();
+                        descriptor.colorAttachments[i].loadAction = MTLLoadActionClear;
+                        descriptor.colorAttachments[i].clearColor =
+                            MTLClearColorMake(dClearColor, dClearColor, dClearColor, dClearColor);
+                        descriptor.colorAttachments[i].level = level;
+                        descriptor.colorAttachments[i].slice = arrayLayer;
+                        i++;
+                    }
+                }
+
+                // End the blit encoder if it is open.
+                commandContext->EndBlit();
+
+                commandContext->BeginRender(descriptor);
+                commandContext->EndRender();
+            }
+        } else {
+            // Compute the buffer size big enough to fill the largest mip.
+            Extent3D largestMipSize = GetMipLevelVirtualSize(baseMipLevel);
+            uint32_t largestMipRowPitch =
+                (largestMipSize.width / GetFormat().blockWidth) * GetFormat().blockByteSize;
+            uint64_t bufferSize = largestMipRowPitch *
+                                  (largestMipSize.height / GetFormat().blockHeight) *
+                                  largestMipSize.depth;
+
+            if (bufferSize > std::numeric_limits<NSUInteger>::max()) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
+            }
+
+            DynamicUploader* uploader = device->GetDynamicUploader();
+            UploadHandle uploadHandle;
+            DAWN_TRY_ASSIGN(uploadHandle,
+                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
+
+            std::fill(reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer),
+                      reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize),
+                      clearColor);
+
+            id<MTLBlitCommandEncoder> encoder = commandContext->EnsureBlit();
+            id<MTLBuffer> uploadBuffer = ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle();
+
+            // Encode a buffer to texture copy to clear each subresource.
+            for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                Extent3D virtualSize = GetMipLevelVirtualSize(level);
+                uint32_t rowPitch =
+                    (virtualSize.width / GetFormat().blockWidth) * GetFormat().blockByteSize;
+                if (rowPitch < 64) {
+                    // Metal validation layers say sourceBytesPerRow must be at least 64.
+                    rowPitch = Align(64, GetFormat().blockByteSize);
+                }
+                uint32_t rowPitchCountPerImage = virtualSize.height / GetFormat().blockHeight;
+                NSUInteger bytesPerImage =
+                    static_cast<NSUInteger>(rowPitch) * rowPitchCountPerImage;
+
+                for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+                     ++arrayLayer) {
+                    if (clearValue == TextureBase::ClearValue::Zero &&
+                        IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                        // Skip lazy clears if already initialized.
+                        continue;
+                    }
+
+                    [encoder copyFromBuffer:uploadBuffer
+                               sourceOffset:uploadHandle.startOffset
+                          sourceBytesPerRow:rowPitch
+                        sourceBytesPerImage:bytesPerImage
+                                 sourceSize:MTLSizeMake(virtualSize.width, virtualSize.height,
+                                                        virtualSize.depth)
+                                  toTexture:GetMTLTexture()
+                           destinationSlice:arrayLayer
+                           destinationLevel:level
+                          destinationOrigin:MTLOriginMake(0, 0, 0)];
+                }
+            }
+        }
+        if (clearValue == TextureBase::ClearValue::Zero) {
+            SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
+                                               layerCount);
+            device->IncrementLazyClearCountForTesting();
+        }
+        return {};
+    }
+
+    void Texture::EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
+                                                      uint32_t levelCount,
+                                                      uint32_t baseArrayLayer,
+                                                      uint32_t layerCount) {
+        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+            return;
+        }
+        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
+                                             layerCount)) {
+            // If subresource has not been initialized, clear it to black as it could
+            // contain dirty bits from recycled memory
+            GetDevice()->ConsumedError(ClearTexture(baseMipLevel, levelCount, baseArrayLayer,
+                                                    layerCount, TextureBase::ClearValue::Zero));
+        }
     }
 
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)

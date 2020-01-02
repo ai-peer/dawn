@@ -760,6 +760,154 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencilStoreOpClear) {
     }
 }
 
+TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
+    // TODO(crbug.com/dawn/145): Fix this on other backends
+    DAWN_SKIP_TEST_IF(!IsMetal());
+
+    wgpu::TextureDescriptor sampleTextureDescriptor = CreateTextureDescriptor(
+        2, 1,
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled,
+        kColorFormat);
+    wgpu::Texture sampleTexture = device.CreateTexture(&sampleTextureDescriptor);
+
+    wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
+    wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
+
+    wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor(
+        1, 1, wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
+    wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
+
+    // Fill the sample texture's second mip with data
+    uint32_t mipSize = kSize >> 1;
+    std::vector<uint8_t> data(kFormatBlockByteSize * mipSize * mipSize, 2);
+    wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(
+        device, data.data(), static_cast<uint32_t>(data.size()), wgpu::BufferUsage::CopySrc);
+    wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(stagingBuffer, 0, 0, 0);
+    wgpu::TextureCopyView textureCopyView =
+        utils::CreateTextureCopyView(sampleTexture, 1, 0, {0, 0, 0});
+    wgpu::Extent3D copySize = {mipSize, mipSize, 1};
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    // Expect 0 lazy clears because the texture will be completely copied to
+    EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commands));
+
+    // Create render pipeline
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor(device);
+    renderPipelineDescriptor.vertexStage.module = CreateBasicVertexShaderForTest();
+    renderPipelineDescriptor.cFragmentStage.module = CreateSampledTextureFragmentShaderForTest();
+    renderPipelineDescriptor.cColorStates[0].format = kColorFormat;
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+    // Create bindgroup
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                             {{0, sampler}, {1, sampleTexture.CreateView()}});
+
+    // Encode pass and submit
+    encoder = device.CreateCommandEncoder();
+    utils::ComboRenderPassDescriptor renderPassDesc({renderTexture.CreateView()});
+    renderPassDesc.cColorAttachments[0].clearColor = {0.0, 0.0, 0.0, 0.0};
+    renderPassDesc.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
+    renderPassDesc.cColorAttachments[0].storeOp = wgpu::StoreOp::Clear;
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
+    pass.SetPipeline(renderPipeline);
+    pass.SetBindGroup(0, bindGroup);
+    pass.Draw(6, 1, 0, 0);
+    pass.EndPass();
+    commands = encoder.Finish();
+    // Expect 1 lazy clears, because not all mips of the sample texture are initialized by
+    // copyBufferToTexture.
+    EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commands));
+
+    // Expect the rendered texture to be cleared since we copied from the uninitialized first
+    // mip.
+    std::vector<RGBA8> expectedWithZeros(kSize * kSize, {0, 0, 0, 0});
+    EXPECT_LAZY_CLEAR(1u, EXPECT_TEXTURE_RGBA8_EQ(expectedWithZeros.data(), renderTexture, 0, 0,
+                                                  kSize, kSize, 0, 0));
+
+    // Expect the second mip to still be filled with 2.
+    std::vector<RGBA8> expectedWithTwos(mipSize * mipSize, {2, 2, 2, 2});
+    EXPECT_LAZY_CLEAR(0u, EXPECT_TEXTURE_RGBA8_EQ(expectedWithTwos.data(), sampleTexture, 0, 0,
+                                                  mipSize, mipSize, 1, 0));
+}
+
+TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
+    // TODO(crbug.com/dawn/145): Fix this on other backends
+    DAWN_SKIP_TEST_IF(!IsMetal());
+
+    wgpu::TextureDescriptor sampleTextureDescriptor = CreateTextureDescriptor(
+        1, 2,
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled,
+        kColorFormat);
+    wgpu::Texture sampleTexture = device.CreateTexture(&sampleTextureDescriptor);
+
+    wgpu::SamplerDescriptor samplerDesc = utils::GetDefaultSamplerDescriptor();
+    wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
+
+    wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor(
+        1, 1, wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::OutputAttachment, kColorFormat);
+    wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
+
+    // Fill the sample texture's second array layer with data
+    std::vector<uint8_t> data(kFormatBlockByteSize * kSize * kSize, 2);
+    wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(
+        device, data.data(), static_cast<uint32_t>(data.size()), wgpu::BufferUsage::CopySrc);
+    wgpu::BufferCopyView bufferCopyView = utils::CreateBufferCopyView(stagingBuffer, 0, 0, 0);
+    wgpu::TextureCopyView textureCopyView =
+        utils::CreateTextureCopyView(sampleTexture, 0, 1, {0, 0, 0});
+    wgpu::Extent3D copySize = {kSize, kSize, 1};
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.CopyBufferToTexture(&bufferCopyView, &textureCopyView, &copySize);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    // Expect 0 lazy clears because the texture will be completely copied to
+    EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commands));
+
+    // Create render pipeline
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor(device);
+    renderPipelineDescriptor.vertexStage.module = CreateBasicVertexShaderForTest();
+    renderPipelineDescriptor.cFragmentStage.module = CreateSampledTextureFragmentShaderForTest();
+    renderPipelineDescriptor.cColorStates[0].format = kColorFormat;
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+    // Only sample from the uninitialized first layer.
+    wgpu::TextureViewDescriptor textureViewDescriptor;
+    textureViewDescriptor.dimension = wgpu::TextureViewDimension::e2D;
+    textureViewDescriptor.arrayLayerCount = 1;
+
+    // Create bindgroup
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                             {{0, sampler}, {1, sampleTexture.CreateView(&textureViewDescriptor)}});
+
+    // Encode pass and submit
+    encoder = device.CreateCommandEncoder();
+    utils::ComboRenderPassDescriptor renderPassDesc({renderTexture.CreateView()});
+    renderPassDesc.cColorAttachments[0].clearColor = {0.0, 0.0, 0.0, 0.0};
+    renderPassDesc.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
+    renderPassDesc.cColorAttachments[0].storeOp = wgpu::StoreOp::Clear;
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
+    pass.SetPipeline(renderPipeline);
+    pass.SetBindGroup(0, bindGroup);
+    pass.Draw(6, 1, 0, 0);
+    pass.EndPass();
+    commands = encoder.Finish();
+    // Expect 1 lazy clears, because not all array layers of the sample texture are initialized by
+    // copyBufferToTexture.
+    EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commands));
+
+    // Expect the rendered texture to be cleared since we copied from the uninitialized first
+    // array layer.
+    std::vector<RGBA8> expectedWithZeros(kSize * kSize, {0, 0, 0, 0});
+    EXPECT_LAZY_CLEAR(1u, EXPECT_TEXTURE_RGBA8_EQ(expectedWithZeros.data(), renderTexture, 0, 0,
+                                                  kSize, kSize, 0, 0));
+
+    // Expect the second array layer to still be filled with 2.
+    std::vector<RGBA8> expectedWithTwos(kSize * kSize, {2, 2, 2, 2});
+    EXPECT_LAZY_CLEAR(0u, EXPECT_TEXTURE_RGBA8_EQ(expectedWithTwos.data(), sampleTexture, 0, 0,
+                                                  kSize, kSize, 0, 1));
+}
+
 DAWN_INSTANTIATE_TEST(
     TextureZeroInitTest,
     ForceToggles(D3D12Backend, {"nonzero_clear_resources_on_creation_for_testing"}),
@@ -767,4 +915,5 @@ DAWN_INSTANTIATE_TEST(
                  {"nonzero_clear_resources_on_creation_for_testing"},
                  {"use_d3d12_render_pass"}),
     ForceToggles(OpenGLBackend, {"nonzero_clear_resources_on_creation_for_testing"}),
+    ForceToggles(MetalBackend, {"nonzero_clear_resources_on_creation_for_testing"}),
     ForceToggles(VulkanBackend, {"nonzero_clear_resources_on_creation_for_testing"}));
