@@ -26,8 +26,8 @@ class NonzeroTextureCreationTests : public DawnTest {
     constexpr static uint32_t kSize = 128;
 };
 
-// Test that texture clears to 1's because toggle is enabled.
-TEST_P(NonzeroTextureCreationTests, TextureCreationClearsOneBits) {
+// Test that texture clears 0xFF because toggle is enabled.
+TEST_P(NonzeroTextureCreationTests, TextureCreationClears) {
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;
     descriptor.size.width = kSize;
@@ -40,11 +40,34 @@ TEST_P(NonzeroTextureCreationTests, TextureCreationClearsOneBits) {
     descriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
     wgpu::Texture texture = device.CreateTexture(&descriptor);
 
-    RGBA8 filledWithOnes(255, 255, 255, 255);
-    EXPECT_PIXEL_RGBA8_EQ(filledWithOnes, texture, 0, 0);
+    RGBA8 filled(255, 255, 255, 255);
+    EXPECT_PIXEL_RGBA8_EQ(filled, texture, 0, 0);
 }
 
-// Test that non-zero mip level clears to 1's because toggle is enabled.
+// Test that a depth texture clears 0xFF because toggle is enabled.
+TEST_P(NonzeroTextureCreationTests, Depth32TextureCreationDepthClears) {
+    // Copies from depth textures not supported on the OpenGL backend right now.
+    DAWN_SKIP_TEST_IF(IsOpenGL());
+
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = kSize;
+    descriptor.size.height = kSize;
+    descriptor.size.depth = 1;
+    descriptor.arrayLayerCount = 1;
+    descriptor.sampleCount = 1;
+    descriptor.mipLevelCount = 1;
+    descriptor.usage = wgpu::TextureUsage::OutputAttachment | wgpu::TextureUsage::CopySrc;
+    descriptor.format = wgpu::TextureFormat::Depth32Float;
+
+    // We can only really test Depth32Float here because Depth24Plus(Stencil8)? may be in an unknown
+    // format.
+    // TODO(crbug.com/dawn/145): Test other formats via sampling.
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+    EXPECT_PIXEL_FLOAT_EQ(1.f, texture, 0, 0);
+}
+
+// Test that non-zero mip level clears 0xFF because toggle is enabled.
 TEST_P(NonzeroTextureCreationTests, MipMapClears) {
     constexpr uint32_t mipLevels = 4;
 
@@ -61,15 +84,15 @@ TEST_P(NonzeroTextureCreationTests, MipMapClears) {
     wgpu::Texture texture = device.CreateTexture(&descriptor);
 
     std::vector<RGBA8> expected;
-    RGBA8 filledWithOnes(255, 255, 255, 255);
+    RGBA8 filled(255, 255, 255, 255);
     for (uint32_t i = 0; i < kSize * kSize; ++i) {
-        expected.push_back(filledWithOnes);
+        expected.push_back(filled);
     }
     uint32_t mipSize = kSize >> 2;
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), texture, 0, 0, mipSize, mipSize, 2, 0);
 }
 
-// Test that non-zero array layers clears to 1's because toggle is enabled.
+// Test that non-zero array layers clears 0xFF because toggle is enabled.
 TEST_P(NonzeroTextureCreationTests, ArrayLayerClears) {
     constexpr uint32_t arrayLayers = 4;
 
@@ -86,15 +109,15 @@ TEST_P(NonzeroTextureCreationTests, ArrayLayerClears) {
     wgpu::Texture texture = device.CreateTexture(&descriptor);
 
     std::vector<RGBA8> expected;
-    RGBA8 filledWithOnes(255, 255, 255, 255);
+    RGBA8 filled(255, 255, 255, 255);
     for (uint32_t i = 0; i < kSize * kSize; ++i) {
-        expected.push_back(filledWithOnes);
+        expected.push_back(filled);
     }
 
     EXPECT_TEXTURE_RGBA8_EQ(expected.data(), texture, 0, 0, kSize, kSize, 0, 2);
 }
 
-// Test that nonrenderable texture formats clear to 1's because toggle is enabled
+// Test that nonrenderable texture formats clear 0x01 because toggle is enabled
 TEST_P(NonzeroTextureCreationTests, NonrenderableTextureFormat) {
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;
@@ -123,11 +146,11 @@ TEST_P(NonzeroTextureCreationTests, NonrenderableTextureFormat) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint32_t> expected(bufferSize, 1);
+    std::vector<uint32_t> expected(bufferSize, 0x01010101);
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), bufferDst, 0, 8);
 }
 
-// Test that textures with more than 1 array layers and nonrenderable texture formats clear to 1's
+// Test that textures with more than 1 array layers and nonrenderable texture formats clear to 0x01
 // because toggle is enabled
 TEST_P(NonzeroTextureCreationTests, NonRenderableTextureClearWithMultiArrayLayers) {
     // TODO(natlee@microsoft.com): skip for now on opengl because TextureClear nonrenderable
@@ -161,12 +184,15 @@ TEST_P(NonzeroTextureCreationTests, NonRenderableTextureClearWithMultiArrayLayer
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint32_t> expectedWithZeros(bufferSize, 1);
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferDst, 0, 8);
+    std::vector<uint32_t> expected(bufferSize, 0x01010101);
+    EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), bufferDst, 0, 8);
 }
 
 DAWN_INSTANTIATE_TEST(NonzeroTextureCreationTests,
                       ForceToggles(D3D12Backend,
+                                   {"nonzero_clear_resources_on_creation_for_testing"},
+                                   {"lazy_clear_resource_on_first_use"}),
+                      ForceToggles(MetalBackend,
                                    {"nonzero_clear_resources_on_creation_for_testing"},
                                    {"lazy_clear_resource_on_first_use"}),
                       ForceToggles(OpenGLBackend,
