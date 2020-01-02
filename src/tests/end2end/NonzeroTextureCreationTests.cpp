@@ -123,7 +123,7 @@ TEST_P(NonzeroTextureCreationTests, NonrenderableTextureFormat) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint32_t> expected(bufferSize, 1);
+    std::vector<uint32_t> expected(bufferSize, 0xFFFFFFFF);
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), bufferDst, 0, 8);
 }
 
@@ -161,12 +161,15 @@ TEST_P(NonzeroTextureCreationTests, NonRenderableTextureClearWithMultiArrayLayer
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint32_t> expectedWithZeros(bufferSize, 1);
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedWithZeros.data(), bufferDst, 0, 8);
+    std::vector<uint32_t> expected(bufferSize, 0xFFFFFFFF);
+    EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), bufferDst, 0, 8);
 }
 
 DAWN_INSTANTIATE_TEST(NonzeroTextureCreationTests,
                       ForceToggles(D3D12Backend,
+                                   {"nonzero_clear_resources_on_creation_for_testing"},
+                                   {"lazy_clear_resource_on_first_use"}),
+                      ForceToggles(MetalBackend,
                                    {"nonzero_clear_resources_on_creation_for_testing"},
                                    {"lazy_clear_resource_on_first_use"}),
                       ForceToggles(OpenGLBackend,
