@@ -177,6 +177,9 @@ namespace dawn_native { namespace metal {
             return;
         }
 
+        // Ensure the blit encoder is ended. It may have been opened to perform a lazy clear.
+        mCommandContext.EndBlit();
+
         mLastSubmittedSerial++;
 
         // Acquire and retain the pending commands. We must keep them alive until scheduled.
