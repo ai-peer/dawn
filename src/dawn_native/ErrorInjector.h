@@ -18,6 +18,8 @@
 #include <stdint.h>
 #include <type_traits>
 
+#include "dawn_native/DawnNative.h"
+
 namespace dawn_native {
 
     template <typename ErrorType>
@@ -26,12 +28,7 @@ namespace dawn_native {
         bool injected;
     };
 
-    void EnableErrorInjector();
-    void DisableErrorInjector();
-    void ClearErrorInjector();
-
     bool ErrorInjectorEnabled();
-    uint64_t AcquireErrorInjectorCallCount();
 
     bool ShouldInjectError();
 
@@ -47,8 +44,6 @@ namespace dawn_native {
         }
         return MaybeInjectError(errorTypes...);
     }
-
-    void InjectErrorAt(uint64_t index);
 
 }  // namespace dawn_native
 
