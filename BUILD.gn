@@ -941,8 +941,8 @@ source_set("dawn_white_box_tests_sources") {
 
   deps = [
     ":dawn_utils",
-    ":libdawn_native",
     ":libdawn_native_sources",
+    ":libdawn_native_static",
     ":libdawn_wire",
     "${dawn_root}/src/common",
     "${dawn_root}/src/dawn:dawncpp",
