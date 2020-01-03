@@ -182,3 +182,22 @@ dawn_fuzzer_test("dawn_wire_server_and_vulkan_backend_fuzzer") {
 
   additional_configs = [ "${dawn_root}/src/common:dawn_internal" ]
 }
+
+import("../../scripts/dawn_features.gni")
+if (dawn_use_swiftshader && dawn_swiftshader_dir != "") {
+  import("${dawn_swiftshader_dir}/src/Vulkan/vulkan.gni")
+
+  dawn_fuzzer_test("dawn_vulkan_swiftshader_fuzzer_test") {
+    sources = [
+      "DawnVulkanSwiftshaderFuzzerTest.cpp",
+    ]
+    deps = [
+      "../../third_party:vulkan_headers",
+    ]
+    data_deps = [
+      "${dawn_swiftshader_dir}/src/Vulkan:icd_file",
+    ]
+    defines =
+        [ "DAWN_SWIFTSHADER_VK_ICD_JSON=\"${swiftshader_icd_file_name}\"" ]
+  }
+}
