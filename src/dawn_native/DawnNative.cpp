@@ -14,6 +14,7 @@
 
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/ErrorInjector.h"
 #include "dawn_native/Instance.h"
 #include "dawn_platform/DawnPlatform.h"
 
@@ -130,6 +131,26 @@ namespace dawn_native {
 
     std::vector<const char*> GetProcMapNamesForTesting() {
         return GetProcMapNamesForTestingInternal();
+    }
+
+    void EnableErrorInjector() {
+        EnableErrorInjectorImpl();
+    }
+
+    void DisableErrorInjector() {
+        DisableErrorInjectorImpl();
+    }
+
+    void ClearErrorInjector() {
+        ClearErrorInjectorImpl();
+    }
+
+    uint64_t AcquireErrorInjectorCallCount() {
+        return AcquireErrorInjectorCallCountImpl();
+    }
+
+    void InjectErrorAt(uint64_t index) {
+        InjectErrorAtImpl(index);
     }
 
 }  // namespace dawn_native
