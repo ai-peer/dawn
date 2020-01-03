@@ -34,6 +34,24 @@
       "revId": "ee95154a35c5d423734cc48fe400a9b806ad61ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "382bf4b5_c64a1129",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-03T23:04:30Z",
+      "side": 1,
+      "message": "Ah damn. Maybe we could force the unittests to use the static library version and that would solve the problem?",
+      "parentUuid": "c74f5b15_007b016f",
+      "revId": "ee95154a35c5d423734cc48fe400a9b806ad61ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
