@@ -27,15 +27,15 @@ namespace dawn_native {
 
     }  // anonymous namespace
 
-    void EnableErrorInjector() {
+    void EnableErrorInjectorImpl() {
         sIsEnabled = true;
     }
 
-    void DisableErrorInjector() {
+    void DisableErrorInjectorImpl() {
         sIsEnabled = false;
     }
 
-    void ClearErrorInjector() {
+    void ClearErrorInjectorImpl() {
         sNextIndex = 0;
         sHasPendingInjectedError = false;
     }
@@ -44,9 +44,9 @@ namespace dawn_native {
         return sIsEnabled;
     }
 
-    uint64_t AcquireErrorInjectorCallCount() {
+    uint64_t AcquireErrorInjectorCallCountImpl() {
         uint64_t count = sNextIndex;
-        ClearErrorInjector();
+        ClearErrorInjectorImpl();
         return count;
     }
 
@@ -59,7 +59,7 @@ namespace dawn_native {
         return false;
     }
 
-    void InjectErrorAt(uint64_t index) {
+    void InjectErrorAtImpl(uint64_t index) {
         // Only one error can be injected at a time.
         ASSERT(!sHasPendingInjectedError);
         sInjectedFailureIndex = index;
