@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8189912_baf21e0a",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-03T22:55:05Z",
+      "side": 1,
+      "message": "Why do we need the proxy functions with MSVC?",
+      "revId": "ee95154a35c5d423734cc48fe400a9b806ad61ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
