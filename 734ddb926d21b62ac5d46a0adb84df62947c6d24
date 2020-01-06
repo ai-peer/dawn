@@ -334,6 +334,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e6baddc_9d994e99",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-06T17:42:32Z",
+      "side": 1,
+      "message": "I\u0027m seeing it default to the DawnTestBase:: namespace. Just removing all of the gpu_info namespace will give me a \"too many args\" error.\n\nI found I can remove the gpu_info namespace if I write \"return ::IsIntel(vendorId);\" to use the global namespace. Is that preferred?",
+      "parentUuid": "9a666696_e942efd1",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
