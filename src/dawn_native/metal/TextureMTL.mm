@@ -376,78 +376,145 @@ namespace dawn_native { namespace metal {
 
         CommandRecordingContext* commandContext = device->GetPendingCommandContext();
 
-        // TODO(enga): Consider using render passes to clear the texture if it is an
-        // output attachment.
+        if ((GetUsage() & wgpu::TextureUsage::OutputAttachment) != 0) {
+            ASSERT(GetFormat().isRenderable);
+            const double dClearColor = static_cast<double>(clearColor);
 
-        // Compute the buffer size big enough to fill the largest mip.
-        Extent3D largestMipSize = GetMipLevelVirtualSize(baseMipLevel);
+            // End the blit encoder if it is open.
+            commandContext->EndBlit();
 
-        // Metal validation layers: sourceBytesPerRow must be at least 64.
-        uint32_t largestMipBytesPerRow = std::max(
-            (largestMipSize.width / GetFormat().blockWidth) * GetFormat().blockByteSize, 64u);
+            if (GetFormat().HasDepthOrStencil()) {
+                // Create a render pass to clear each subresource.
+                for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                    for (uint32_t arrayLayer = baseArrayLayer;
+                         arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
 
-        // Metal validation layers: sourceBytesPerImage must be at least 512.
-        uint64_t largestMipBytesPerImage =
-            std::max(static_cast<uint64_t>(largestMipBytesPerRow) *
-                         (largestMipSize.height / GetFormat().blockHeight),
-                     512llu);
+                        MTLRenderPassDescriptor* descriptor =
+                            [MTLRenderPassDescriptor renderPassDescriptor];
 
-        // TODO(enga): Multiply by largestMipSize.depth and do a larger 3D copy to clear a whole
-        // range of subresources when tracking that is improved.
-        uint64_t bufferSize = largestMipBytesPerImage * 1;
+                        if (GetFormat().HasDepth()) {
+                            descriptor.depthAttachment.texture = GetMTLTexture();
+                            descriptor.depthAttachment.loadAction = MTLLoadActionClear;
+                            descriptor.depthAttachment.clearDepth = dClearColor;
+                        }
+                        if (GetFormat().HasStencil()) {
+                            descriptor.stencilAttachment.texture = GetMTLTexture();
+                            descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
+                            descriptor.stencilAttachment.clearStencil = dClearColor;
+                        }
 
-        if (bufferSize > std::numeric_limits<NSUInteger>::max()) {
-            return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
-        }
+                        commandContext->BeginRender(descriptor);
+                        commandContext->EndRender();
+                    }
+                }
+            } else {
+                ASSERT(GetFormat().IsColor());
+                MTLRenderPassDescriptor* descriptor =
+                    [MTLRenderPassDescriptor renderPassDescriptor];
 
-        DynamicUploader* uploader = device->GetDynamicUploader();
-        UploadHandle uploadHandle;
-        DAWN_TRY_ASSIGN(uploadHandle,
-                        uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
+                // Create a single render pass with each subresource as a color attachment to clear
+                // them all.
+                uint32_t i = 0;
+                for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                    for (uint32_t arrayLayer = baseArrayLayer;
+                         arrayLayer < baseArrayLayer + layerCount; arrayLayer++) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
 
-        std::fill(reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer),
-                  reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize), clearColor);
-
-        id<MTLBlitCommandEncoder> encoder = commandContext->EnsureBlit();
-        id<MTLBuffer> uploadBuffer = ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle();
-
-        // Encode a buffer to texture copy to clear each subresource.
-        for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
-            Extent3D virtualSize = GetMipLevelVirtualSize(level);
-
-            for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
-                 ++arrayLayer) {
-                if (clearValue == TextureBase::ClearValue::Zero &&
-                    IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
-                    // Skip lazy clears if already initialized.
-                    continue;
+                        descriptor.colorAttachments[i].texture = GetMTLTexture();
+                        descriptor.colorAttachments[i].loadAction = MTLLoadActionClear;
+                        descriptor.colorAttachments[i].clearColor =
+                            MTLClearColorMake(dClearColor, dClearColor, dClearColor, dClearColor);
+                        descriptor.colorAttachments[i].level = level;
+                        descriptor.colorAttachments[i].slice = arrayLayer;
+                        i++;
+                    }
                 }
 
-                // If the texture’s pixel format is a combined depth/stencil format, then options
-                // must be set to either blit the depth attachment portion or blit the stencil
-                // attachment portion.
-                std::array<MTLBlitOption, 3> blitOptions = {MTLBlitOptionNone,
-                                                            MTLBlitOptionDepthFromDepthStencil,
-                                                            MTLBlitOptionStencilFromDepthStencil};
+                commandContext->BeginRender(descriptor);
+                commandContext->EndRender();
+            }
+        } else {
+            // Compute the buffer size big enough to fill the largest mip.
+            Extent3D largestMipSize = GetMipLevelVirtualSize(baseMipLevel);
 
-                auto blitOptionStart = blitOptions.begin();
-                auto blitOptionEnd = blitOptionStart + 1;
-                if (GetFormat().format == wgpu::TextureFormat::Depth24PlusStencil8) {
-                    blitOptionStart = blitOptions.begin() + 1;
-                    blitOptionEnd = blitOptionStart + 2;
-                }
+            // Metal validation layers: sourceBytesPerRow must be at least 64.
+            uint32_t largestMipBytesPerRow = std::max(
+                (largestMipSize.width / GetFormat().blockWidth) * GetFormat().blockByteSize, 64u);
 
-                for (auto it = blitOptionStart; it != blitOptionEnd; ++it) {
-                    [encoder copyFromBuffer:uploadBuffer
-                               sourceOffset:uploadHandle.startOffset
-                          sourceBytesPerRow:largestMipBytesPerRow
-                        sourceBytesPerImage:largestMipBytesPerImage
-                                 sourceSize:MTLSizeMake(virtualSize.width, virtualSize.height, 1)
-                                  toTexture:GetMTLTexture()
-                           destinationSlice:arrayLayer
-                           destinationLevel:level
-                          destinationOrigin:MTLOriginMake(0, 0, 0)
-                                    options:(*it)];
+            // Metal validation layers: sourceBytesPerImage must be at least 512.
+            uint64_t largestMipBytesPerImage =
+                std::max(static_cast<uint64_t>(largestMipBytesPerRow) *
+                             (largestMipSize.height / GetFormat().blockHeight),
+                         512llu);
+
+            // TODO(enga): Multiply by largestMipSize.depth and do a larger 3D copy to clear a whole
+            // range of subresources when tracking that is improved.
+            uint64_t bufferSize = largestMipBytesPerImage * 1;
+
+            if (bufferSize > std::numeric_limits<NSUInteger>::max()) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
+            }
+
+            DynamicUploader* uploader = device->GetDynamicUploader();
+            UploadHandle uploadHandle;
+            DAWN_TRY_ASSIGN(uploadHandle,
+                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
+
+            std::fill(reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer),
+                      reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize),
+                      clearColor);
+
+            id<MTLBlitCommandEncoder> encoder = commandContext->EnsureBlit();
+            id<MTLBuffer> uploadBuffer = ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle();
+
+            // Encode a buffer to texture copy to clear each subresource.
+            for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                Extent3D virtualSize = GetMipLevelVirtualSize(level);
+
+                for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+                     ++arrayLayer) {
+                    if (clearValue == TextureBase::ClearValue::Zero &&
+                        IsSubresourceContentInitialized(level, 1, arrayLayer, 1)) {
+                        // Skip lazy clears if already initialized.
+                        continue;
+                    }
+
+                    // If the texture’s pixel format is a combined depth/stencil format, then
+                    // options must be set to either blit the depth attachment portion or blit the
+                    // stencil attachment portion.
+                    std::array<MTLBlitOption, 3> blitOptions = {
+                        MTLBlitOptionNone, MTLBlitOptionDepthFromDepthStencil,
+                        MTLBlitOptionStencilFromDepthStencil};
+
+                    auto blitOptionStart = blitOptions.begin();
+                    auto blitOptionEnd = blitOptionStart + 1;
+                    if (GetFormat().format == wgpu::TextureFormat::Depth24PlusStencil8) {
+                        blitOptionStart = blitOptions.begin() + 1;
+                        blitOptionEnd = blitOptionStart + 2;
+                    }
+
+                    for (auto it = blitOptionStart; it != blitOptionEnd; ++it) {
+                        [encoder copyFromBuffer:uploadBuffer
+                                   sourceOffset:uploadHandle.startOffset
+                              sourceBytesPerRow:largestMipBytesPerRow
+                            sourceBytesPerImage:largestMipBytesPerImage
+                                     sourceSize:MTLSizeMake(virtualSize.width, virtualSize.height,
+                                                            1)
+                                      toTexture:GetMTLTexture()
+                               destinationSlice:arrayLayer
+                               destinationLevel:level
+                              destinationOrigin:MTLOriginMake(0, 0, 0)
+                                        options:(*it)];
+                    }
                 }
             }
         }
