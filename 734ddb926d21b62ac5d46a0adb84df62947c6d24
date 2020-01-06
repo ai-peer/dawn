@@ -310,6 +310,30 @@
       "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a666696_e942efd1",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-06T13:52:18Z",
+      "side": 1,
+      "message": "I\u0027m surprised that IsIntel() resolves to itself, overload resolution should give us the one in GPUInfo.",
+      "parentUuid": "f947c5cc_6fcc4b34",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "734ddb926d21b62ac5d46a0adb84df62947c6d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
