@@ -70,6 +70,24 @@
       "revId": "ee95154a35c5d423734cc48fe400a9b806ad61ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eb65d65_b1e7348e",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-06T13:41:08Z",
+      "side": 1,
+      "message": "Can we go with it? I think it would be a simpler solution.",
+      "parentUuid": "7c1925ab_70fab380",
+      "revId": "ee95154a35c5d423734cc48fe400a9b806ad61ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
