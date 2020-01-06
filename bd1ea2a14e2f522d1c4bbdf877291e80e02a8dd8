@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "550789a9_54d4ef47",
+        "filename": "BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-06T17:26:15Z",
+      "side": 1,
+      "message": "nit: maybe add a small comment to explain why static?",
+      "revId": "bd1ea2a14e2f522d1c4bbdf877291e80e02a8dd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
