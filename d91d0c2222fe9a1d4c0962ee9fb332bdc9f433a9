@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b397ebd1_89397efa",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-07T19:46:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0764a634_3c800d59",
+      "revId": "d91d0c2222fe9a1d4c0962ee9fb332bdc9f433a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6825bec1_44b266b3",
         "filename": "src/dawn_native/metal/CommandRecordingContext.h",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6c74801f_b8d2cfac",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-07T19:46:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6825bec1_44b266b3",
+      "revId": "d91d0c2222fe9a1d4c0962ee9fb332bdc9f433a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46b23eb3_05bca6d3",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2020-01-07T09:37:34Z",
       "side": 1,
       "message": "Maybe it\u0027s worth ending encoders lazily? We could make mInEncoder be an enum instead and switch on it. WDYT? In any case it isn\u0027t needed in this CL.",
+      "revId": "d91d0c2222fe9a1d4c0962ee9fb332bdc9f433a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9d7428d_7b078d13",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-07T19:46:22Z",
+      "side": 1,
+      "message": "Yea, that\u0027s a good idea. Though maybe only lazily end the blit? and maybeeeee compute (but there\u0027s no need for it now)?",
+      "parentUuid": "46b23eb3_05bca6d3",
       "revId": "d91d0c2222fe9a1d4c0962ee9fb332bdc9f433a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
