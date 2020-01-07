@@ -15,6 +15,7 @@
 #include "dawn_native/Error.h"
 
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/dawn_platform.h"
 
 namespace dawn_native {
 
@@ -30,6 +31,14 @@ namespace dawn_native {
 
     void AppendBacktrace(ErrorData* error, const char* file, const char* function, int line) {
         error->AppendBacktrace(file, function, line);
+    }
+
+    void AssertAndIgnoreDeviceLossError(MaybeError maybeError) {
+        if (maybeError.IsError()) {
+            ErrorData* errorData = maybeError.AcquireError();
+            ASSERT(errorData->GetType() == wgpu::ErrorType::DeviceLost);
+            delete errorData;
+        }
     }
 
 }  // namespace dawn_native
