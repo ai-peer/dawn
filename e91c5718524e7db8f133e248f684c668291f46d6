@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "554da21a_b74a9b1f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T12:43:50Z",
+      "side": 1,
+      "message": "We also need to set the clear color to 0 otherwise we\u0027ll clear with whatever is in attachmentInfo.clearColor. We should have a test for this as other backends might have the same bug.",
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "40c9023c_a73eb708",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 7
@@ -19,6 +36,57 @@
         "endLine": 23,
         "endChar": 41
       },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fb63457_68001ba3",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T12:43:50Z",
+      "side": 1,
+      "message": "Just to make sure, this isn\u0027t an issue for T2B or B2T copies because of the rowPitch alignment constraint?",
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "617d19aa_ef09f493",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T12:43:50Z",
+      "side": 1,
+      "message": "That\u0027s new, I think we might need additional validation for this.",
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6414e9a_30d1a4d1",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T12:43:50Z",
+      "side": 1,
+      "message": "Why not memset? Here for R8Unorm formats all pixels might not be set to 1",
       "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -48,6 +116,30 @@
     },
     {
       "key": {
+        "uuid": "5d14dc5b_2f9fee06",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T12:43:50Z",
+      "side": 1,
+      "message": "agreed. Also this might tie in with subresource tracking where there is a special state that\u0027s uninitialized.",
+      "parentUuid": "af1902ad_980021d5",
+      "range": {
+        "startLine": 420,
+        "startChar": 16,
+        "endLine": 424,
+        "endChar": 17
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "915db5ab_f6674f66",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 7
@@ -59,6 +151,30 @@
       "writtenOn": "2020-01-07T00:34:09Z",
       "side": 1,
       "message": "fyi: Crashes with the Metal validation layers without doing this (interestingly because it tries to divide by zero). We need to fix this for the other copyXToTexture calls as well.\n\nhttps://developer.apple.com/documentation/metal/mtlblitcommandencoder/1400771-copyfrombuffer?language\u003dobjc",
+      "range": {
+        "startLine": 426,
+        "startChar": 16,
+        "endLine": 428,
+        "endChar": 38
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66266a2d_09e07e9d",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T12:43:50Z",
+      "side": 1,
+      "message": "Sounds good. We\u0027ll hit the same issue with subresource tracking where for depth-stencil textures we might want to track both depth and stencil separately.",
+      "parentUuid": "915db5ab_f6674f66",
       "range": {
         "startLine": 426,
         "startChar": 16,
