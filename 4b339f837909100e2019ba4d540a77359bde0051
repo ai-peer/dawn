@@ -587,6 +587,24 @@
     },
     {
       "key": {
+        "uuid": "4598acae_5ba6a263",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-07T19:15:50Z",
+      "side": 1,
+      "message": "setting the callback helps in this test file so that we don\u0027t use the default callback in DawnTest.cpp that tells us the tests fail due to device lost. Unless we want to change that callback in DawnTest.cpp to not be failing.",
+      "parentUuid": "a92ab7c7_05c1c258",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42adada9_757af000",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 37
