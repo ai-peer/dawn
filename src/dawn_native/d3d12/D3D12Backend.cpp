@@ -46,6 +46,12 @@ namespace dawn_native { namespace d3d12 {
         return static_cast<WGPUTextureFormat>(impl->GetPreferredFormat());
     }
 
+    uint64_t SetExternalMemoryReservation(WGPUDevice device, uint64_t requestedReservationSize) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+
+        return backendDevice->SetExternalMemoryReservation(requestedReservationSize);
+    }
+
     WGPUTexture WrapSharedHandle(WGPUDevice device,
                                  const WGPUTextureDescriptor* descriptor,
                                  HANDLE sharedHandle,
