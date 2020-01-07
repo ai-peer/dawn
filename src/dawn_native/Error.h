@@ -94,6 +94,9 @@ namespace dawn_native {
                          const char* function,
                          int line);
 
+    // Assert that errors are device loss so that we can continue with destruction
+    void AssertAndIgnoreDeviceLossError(MaybeError maybeError);
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_ERROR_H_
