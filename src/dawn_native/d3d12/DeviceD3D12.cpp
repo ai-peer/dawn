@@ -75,6 +75,7 @@ namespace dawn_native { namespace d3d12 {
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
+        UpdateVideoMemoryInfo();
         DAWN_TRY(NextSerial());
 
         // Initialize indirect commands
@@ -169,6 +170,35 @@ namespace dawn_native { namespace d3d12 {
         return mLastSubmittedSerial + 1;
     }
 
+    const VideoMemoryInfo* Device::GetVideoMemoryInfo() const {
+        return &mVideoMemoryInfo;
+    }
+
+    // Allows application components external to Dawn to cap Dawn's residency budget to prevent
+    // competition for device local memory. Returns the amount of memory reserved, which may be less
+    // that the requested reservation when under pressure.
+    uint64_t Device::SetExternalMemoryReservation(uint64_t requestedReservationSize) {
+        mVideoMemoryInfo.externalRequest = requestedReservationSize;
+        UpdateVideoMemoryInfo();
+        return mVideoMemoryInfo.externalReservation;
+    }
+
+    void Device::UpdateVideoMemoryInfo() {
+        DXGI_QUERY_VIDEO_MEMORY_INFO queryVideoMemoryInfo;
+        ToBackend(GetAdapter())
+            ->GetHardwareAdapter()
+            ->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &queryVideoMemoryInfo);
+
+        if (mVideoMemoryInfo.externalRequest >= queryVideoMemoryInfo.Budget / 2) {
+            mVideoMemoryInfo.externalReservation = queryVideoMemoryInfo.Budget / 2;
+        }
+
+        mVideoMemoryInfo.dawnBudget =
+            queryVideoMemoryInfo.Budget - mVideoMemoryInfo.externalReservation;
+        mVideoMemoryInfo.dawnUsage =
+            queryVideoMemoryInfo.CurrentUsage - mVideoMemoryInfo.externalReservation;
+    }
+
     MaybeError Device::TickImpl() {
         // Perform cleanup operations to free unused objects
         mCompletedSerial = mFence->GetCompletedValue();
@@ -177,6 +207,7 @@ namespace dawn_native { namespace d3d12 {
         // as it enqueued resources to be released.
         mDynamicUploader->Deallocate(mCompletedSerial);
 
+        UpdateVideoMemoryInfo();
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
         mDescriptorHeapAllocator->Deallocate(mCompletedSerial);

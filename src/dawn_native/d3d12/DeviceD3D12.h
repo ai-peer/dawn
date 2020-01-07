@@ -28,11 +28,19 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    struct VideoMemoryInfo {
+        uint64_t dawnBudget;
+        uint64_t dawnUsage;
+        uint64_t externalReservation;
+        uint64_t externalRequest;
+    };
+
     class CommandAllocatorManager;
     class DescriptorHeapAllocator;
     class MapRequestTracker;
     class PlatformFunctions;
     class ResourceAllocatorManager;
+    class ResidencyManager;
 
 #define ASSERT_SUCCESS(hr)            \
     {                                 \
@@ -73,6 +81,10 @@ namespace dawn_native { namespace d3d12 {
         Serial GetPendingCommandSerial() const override;
 
         const D3D12DeviceInfo& GetDeviceInfo() const;
+
+        const VideoMemoryInfo* GetVideoMemoryInfo() const;
+        uint64_t SetExternalMemoryReservation(uint64_t requestedReservationSize);
+        void UpdateVideoMemoryInfo();
 
         MaybeError NextSerial();
         MaybeError WaitForSerial(Serial serial);
@@ -156,6 +168,7 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
 
         dawn_native::PCIInfo mPCIInfo;
+        VideoMemoryInfo mVideoMemoryInfo = {0, 0, 0, 0};
     };
 
 }}  // namespace dawn_native::d3d12
