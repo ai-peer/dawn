@@ -238,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "e7f829b3_66f4b50c",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T13:35:33Z",
+      "side": 1,
+      "message": "Even if it is used in DeviceVk it can be a function instead of a method. It could be AssertAndIgnoreDeviceLossError() in Error.h",
+      "parentUuid": "30a99e5a_78ef258c",
+      "range": {
+        "startLine": 57,
+        "startChar": 13,
+        "endLine": 57,
+        "endChar": 34
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ab3101b_24140193",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 37
@@ -451,6 +475,30 @@
     },
     {
       "key": {
+        "uuid": "bf523025_dbff113b",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T13:35:33Z",
+      "side": 1,
+      "message": "Looking at the Vulkan spec again (section 4.2.3, device loss), you still want to destroy the objects. So I don\u0027t think we need to separate the different types of device loss.",
+      "parentUuid": "ff2f9f15_5f69ecd2",
+      "range": {
+        "startLine": 748,
+        "startChar": 8,
+        "endLine": 748,
+        "endChar": 42
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9cb609de_62c3afc2",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 37
@@ -516,6 +564,23 @@
       "side": 1,
       "message": "ValidateObject is super hot code so we should be careful when adding things in there.\n\nFor now peppering ValidateIsAlive in a bunch of places is ok, we can figure out how to optimize it out later.",
       "parentUuid": "404a6f3c_8ba7b545",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a92ab7c7_05c1c258",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T13:35:33Z",
+      "side": 1,
+      "message": "Only DeviceLostCallbackIsCalled needs to test the callback. The rest can just call LostForTesting() without setting a callback and expect it to work correctly.",
       "revId": "4b339f837909100e2019ba4d540a77359bde0051",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -598,6 +663,24 @@
       "side": 1,
       "message": "It seems that in Buffer.cpp the callbacks are called with WGPUBufferMapAsyncStatus_Error for map after the error is consumed, does not check for the error type and then callback with the matching buffer map async status.",
       "parentUuid": "4e7513a8_b26b0390",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2d9305d_4e40f777",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-07T13:35:33Z",
+      "side": 1,
+      "message": "What Austin meant is that also we should check that losing the device between MapAsync and the callback makes the callback return with device lost.",
+      "parentUuid": "f76e157d_a4637c4f",
       "revId": "4b339f837909100e2019ba4d540a77359bde0051",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
