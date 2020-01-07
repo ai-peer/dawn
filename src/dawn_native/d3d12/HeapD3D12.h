@@ -19,16 +19,20 @@
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
+    class LRUEntry;
 
     class Heap : public ResourceHeapBase {
       public:
         Heap(ComPtr<ID3D12Heap> heap);
-        ~Heap() = default;
+        ~Heap();
 
         ComPtr<ID3D12Heap> GetD3D12Heap() const;
+        LRUEntry* GetResidencyLRUEntry() const;
+        void SetResidencyLRUEntry(LRUEntry* entry);
 
       private:
         ComPtr<ID3D12Heap> mHeap;
+        LRUEntry* mLRUEntry = nullptr;
     };
 }}  // namespace dawn_native::d3d12
 

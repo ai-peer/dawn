@@ -50,6 +50,8 @@ namespace dawn_native {
 
         uint64_t GetMemoryBlockSize() const;
 
+        ResourceHeapBase* GetMemoryBlock(const ResourceMemoryAllocation& allocation) const;
+
         // For testing purposes.
         uint64_t ComputeTotalNumOfHeapsForTesting() const;
 
