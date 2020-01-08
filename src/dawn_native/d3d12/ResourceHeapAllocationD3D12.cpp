@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
 
 #include <utility>
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
     ResourceHeapAllocation::ResourceHeapAllocation(const AllocationInfo& info,
@@ -35,4 +36,13 @@ namespace dawn_native { namespace d3d12 {
     D3D12_GPU_VIRTUAL_ADDRESS ResourceHeapAllocation::GetGPUPointer() const {
         return mResource->GetGPUVirtualAddress();
     }
+
+    LRUEntry* ResourceHeapAllocation::GetResidencyLRUEntry() const {
+        return mLRUEntry;
+    }
+
+    void ResourceHeapAllocation::SetResidencyLRUEntry(LRUEntry* entry) {
+        mLRUEntry = entry;
+    }
+
 }}  // namespace dawn_native::d3d12

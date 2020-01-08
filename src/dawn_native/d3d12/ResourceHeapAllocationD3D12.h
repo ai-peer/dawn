@@ -20,6 +20,8 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    class LRUEntry;
+
     class ResourceHeapAllocation : public ResourceMemoryAllocation {
       public:
         ResourceHeapAllocation() = default;
@@ -32,9 +34,12 @@ namespace dawn_native { namespace d3d12 {
 
         ComPtr<ID3D12Resource> GetD3D12Resource() const;
         D3D12_GPU_VIRTUAL_ADDRESS GetGPUPointer() const;
+        LRUEntry* GetResidencyLRUEntry() const;
+        void SetResidencyLRUEntry(LRUEntry* entry);
 
       private:
         ComPtr<ID3D12Resource> mResource;
+        LRUEntry* mLRUEntry = nullptr;
     };
 
 }}  // namespace dawn_native::d3d12
