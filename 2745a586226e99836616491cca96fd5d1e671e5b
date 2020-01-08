@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5238dd8f_f3c89505",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T04:20:16Z",
+      "side": 1,
+      "message": "The braces make it look like it skips only this case, but it returns, so it skips the rest of the function. Maybe just split this test.",
+      "revId": "2745a586226e99836616491cca96fd5d1e671e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

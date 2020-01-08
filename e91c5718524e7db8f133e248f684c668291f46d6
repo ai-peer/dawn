@@ -154,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "ab8230e0_6a74b02b",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T04:20:16Z",
+      "side": 1,
+      "message": "OK. TODO?",
+      "parentUuid": "a3a97b34_ef03019f",
+      "range": {
+        "startLine": 720,
+        "startChar": 95,
+        "endLine": 720,
+        "endChar": 96
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f6777802_3aefb962",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -177,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "5891392b_abac31b9",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T04:20:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f6777802_3aefb962",
+      "range": {
+        "startLine": 723,
+        "startChar": 89,
+        "endLine": 723,
+        "endChar": 90
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "708b4258_0214bcf8",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -197,6 +245,30 @@
       "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c4ac7ba_8c0e02d5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T04:20:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "708b4258_0214bcf8",
+      "range": {
+        "startLine": 754,
+        "startChar": 90,
+        "endLine": 754,
+        "endChar": 91
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -247,6 +319,30 @@
     },
     {
       "key": {
+        "uuid": "b7781123_cc39c2a4",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T04:20:16Z",
+      "side": 1,
+      "message": "Sorry, meant this one is duplicated between T2B and T2T",
+      "parentUuid": "6caac178_7beeb56a",
+      "range": {
+        "startLine": 781,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 96
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "66fce4a0_8de1ffb2",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -258,6 +354,30 @@
       "writtenOn": "2020-01-08T00:01:08Z",
       "side": 1,
       "message": "seems duplicated, maybe factor out",
+      "range": {
+        "startLine": 783,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 21
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9d80165_3ee23d9a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T04:20:16Z",
+      "side": 1,
+      "message": "And this one is duplicated between B2T and T2T",
+      "parentUuid": "66fce4a0_8de1ffb2",
       "range": {
         "startLine": 783,
         "startChar": 0,
