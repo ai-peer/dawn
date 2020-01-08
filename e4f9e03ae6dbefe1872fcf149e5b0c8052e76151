@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7399a1e7_8c8ee20d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T00:01:08Z",
+      "side": 1,
+      "message": "nit: texture subresource",
+      "range": {
+        "startLine": 806,
+        "startChar": 40,
+        "endLine": 806,
+        "endChar": 47
+      },
+      "revId": "e4f9e03ae6dbefe1872fcf149e5b0c8052e76151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a699757_adf12d01",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T00:01:08Z",
+      "side": 1,
+      "message": "nit: also check that sampleTexture level 0 is correct",
+      "revId": "e4f9e03ae6dbefe1872fcf149e5b0c8052e76151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a211b3d7_9d7db9d9",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T00:01:08Z",
+      "side": 1,
+      "message": "nit: same",
+      "revId": "e4f9e03ae6dbefe1872fcf149e5b0c8052e76151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
