@@ -104,6 +104,24 @@
       "revId": "d91d0c2222fe9a1d4c0962ee9fb332bdc9f433a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b92ebdcd_ea63a9f3",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T07:49:24Z",
+      "side": 1,
+      "message": "Yeah that would work, and we can have ASSERTs that make sure we don\u0027t forget to add compute when we need to. This could be in a follow-up to avoid blocking lazy clears.",
+      "parentUuid": "a9d7428d_7b078d13",
+      "revId": "d91d0c2222fe9a1d4c0962ee9fb332bdc9f433a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
