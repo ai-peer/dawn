@@ -309,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "58c84b81_4d9d479c",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-08T03:32:29Z",
+      "side": 1,
+      "message": "For fun, I looked into solving this in a generic way in Result.h. The tricky part turned out to be the \"catch all\" version Result which assumed the error was moveable and NOT necessarily a pointer. So here, we can\u0027t simply return std::unique_ptr\u003cE\u003e like we can for the other specializations. \n\nSince all usages of Result in Dawn allocate the error on the heap, should we add the assumption to the catch all Result class? Then, we can have AcquireError return std::unique_ptr for the generic case and all specializations.\n\nThe other alternative is to store ErrorData instead of ErrorData* in the specializations and std::move it everywhere. No heap allocations needed and more elegant but more members to copy as Results get passed around on the stack.\n\nThoughts?",
+      "parentUuid": "84157278_74df96c1",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 48
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "072f5550_98a19be3",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 37
