@@ -167,6 +167,47 @@
     },
     {
       "key": {
+        "uuid": "fca54ebf_886b664d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "This isn\u0027t addressed yet.",
+      "parentUuid": "e735ad3e_7927c820",
+      "range": {
+        "startLine": 194,
+        "startChar": 50,
+        "endLine": 194,
+        "endChar": 61
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b560796_50adbfe9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "nit: stray whitespace change.",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bec82bca_3d0e89b7",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 37
@@ -629,6 +670,24 @@
     },
     {
       "key": {
+        "uuid": "fa4214c2_929c1a9c",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4598acae_5ba6a263",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42adada9_757af000",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 37
@@ -723,6 +782,24 @@
       "side": 1,
       "message": "What Austin meant is that also we should check that losing the device between MapAsync and the callback makes the callback return with device lost.",
       "parentUuid": "f76e157d_a4637c4f",
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd5f01d3_9461afcd",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "Actually mapping-related changes are very incomplete here so we should just remove all of them and do them in a follow-up CL as described in the email.",
+      "parentUuid": "b2d9305d_4e40f777",
       "revId": "4b339f837909100e2019ba4d540a77359bde0051",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6b4f617_fcf89b6c",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "Why do we skip calling DestroyImpl if the device is lost? We still need to free driver objects otherwise we\u0027ll be leaking a ton of CPU memory.",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1cf2cd4_375e2dd6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "This is duplicated with ValidateIsAlive. In the relevant comment thread I think the conclusion was that we\u0027d see about changing the ValidateObject validation later, if at all.",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8073976_9e56e144",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "That\u0027s incorrect, the callback should always be called and it should be called with DeviceLoss status. Let\u0027s handle mapping in a different CL.",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2d93b0a_63ea32e1",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T09:53:01Z",
+      "side": 1,
+      "message": "Standard library includes should be done after all other includes in another block:\n\n#include \u003cgmock/gmock.h\u003e\n#include \"utils/ComboRenderPipelineDescriptor.h\"\n#include \"utils/WGPUHelpers.h\"\n\n#include \u003ccstring\u003e",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
