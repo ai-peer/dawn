@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4551873e_e079c2e6",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-08T20:15:35Z",
+      "side": 1,
+      "message": "because it\u0027s an access violation when it goes and gets the device\u0027s resources (like fenced deleter) which have been freed. i was running into this error while testing.",
+      "parentUuid": "e6b4f617_fcf89b6c",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1cf2cd4_375e2dd6",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 40
@@ -33,6 +51,24 @@
       "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9821b36_6a0b7795",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-08T20:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1cf2cd4_375e2dd6",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8ec939ca_97df38d6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-08T20:15:35Z",
+      "side": 1,
+      "message": "ok i will remove all buffer tests for now.",
+      "parentUuid": "f8073976_9e56e144",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2d93b0a_63ea32e1",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 40
@@ -67,6 +121,24 @@
       "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09e38bae_f1ac5bbf",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-08T20:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2d93b0a_63ea32e1",
+      "revId": "c867e48055cab78f371a2cca60721fb8d9a3bbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
