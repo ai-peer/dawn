@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e1e6703d_c70b1693",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Not anymore. I\u0027ve factored all that stuff out to LazyClearRenderPassAttachments. Plan to do the same in the other backends as well in a follow-up. I don\u0027t think iterating the RenderPassDescriptor twice is so bad.",
+      "parentUuid": "edf9729f_aa90708a",
+      "range": {
+        "startLine": 44,
+        "startChar": 33,
+        "endLine": 44,
+        "endChar": 62
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "554da21a_b74a9b1f",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -39,6 +63,24 @@
       "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec26a424_4d3175ab",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "554da21a_b74a9b1f",
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +118,30 @@
       "writtenOn": "2020-01-08T00:01:08Z",
       "side": 1,
       "message": "doesn\u0027t this need to be the actual layer count? and below",
+      "range": {
+        "startLine": 720,
+        "startChar": 95,
+        "endLine": 720,
+        "endChar": 96
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3a97b34_ef03019f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "How about we address this in a follow-up? It\u0027s wrong in the other backends as well, and I think the overloaded arrayLayer and copySize.z is confusing here and would like to fix all the backends together as well as add the tests.",
+      "parentUuid": "80f2de45_35eae402",
       "range": {
         "startLine": 720,
         "startChar": 95,
@@ -157,6 +223,30 @@
     },
     {
       "key": {
+        "uuid": "6caac178_7beeb56a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Not sure what you mean? One is srcTexture, one is dstTexture",
+      "parentUuid": "5e7eaa67_bc2950ad",
+      "range": {
+        "startLine": 781,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 96
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "66fce4a0_8de1ffb2",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 7
@@ -203,6 +293,30 @@
     },
     {
       "key": {
+        "uuid": "bbea8127_d683cb2a",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40c9023c_a73eb708",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 41
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6fb63457_68001ba3",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 7
@@ -217,6 +331,24 @@
       "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1ca0aad_357a70ad",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Yep.",
+      "parentUuid": "6fb63457_68001ba3",
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -237,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "191c8b29_227261ee",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Filed a Dawn bug about fixing this for Metal, and filed a WebGPU spec issue.",
+      "parentUuid": "617d19aa_ef09f493",
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6414e9a_30d1a4d1",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 7
@@ -248,6 +398,24 @@
       "writtenOn": "2020-01-07T12:43:50Z",
       "side": 1,
       "message": "Why not memset? Here for R8Unorm formats all pixels might not be set to 1",
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d601ad70_04d630ab",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Hm, the NonzeroTextureInit tests were written this way. I changed them though to check that all bytes are set instead: 0xFF. I also added tests for DepthStencil init. This would have been inconsistent between backends depending on how the clearing happens because 1.f -\u003e unorm integer wouldn\u0027t have been 1u.",
+      "parentUuid": "c6414e9a_30d1a4d1",
       "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -301,6 +469,30 @@
     },
     {
       "key": {
+        "uuid": "effcd2af_7e5164df",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d14dc5b_2f9fee06",
+      "range": {
+        "startLine": 420,
+        "startChar": 16,
+        "endLine": 424,
+        "endChar": 17
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "915db5ab_f6674f66",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 7
@@ -348,6 +540,30 @@
     },
     {
       "key": {
+        "uuid": "9ee63710_2b924273",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "66266a2d_09e07e9d",
+      "range": {
+        "startLine": 426,
+        "startChar": 16,
+        "endLine": 428,
+        "endChar": 38
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0d685ec_c9f38bfc",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 7
@@ -368,6 +584,30 @@
       "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0576357_f8df521b",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-08T01:38:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b0d685ec_c9f38bfc",
+      "range": {
+        "startLine": 457,
+        "startChar": 12,
+        "endLine": 457,
+        "endChar": 56
+      },
+      "revId": "e91c5718524e7db8f133e248f684c668291f46d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
