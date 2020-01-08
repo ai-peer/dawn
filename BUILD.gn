@@ -320,6 +320,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/d3d12/RenderPassBuilderD3D12.h",
       "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
       "src/dawn_native/d3d12/RenderPipelineD3D12.h",
+      "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+      "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
       "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
       "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.h",
       "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
@@ -844,7 +846,10 @@ test("dawn_unittests") {
   ]
 
   if (dawn_enable_d3d12) {
-    sources += [ "src/tests/unittests/d3d12/CopySplitTests.cpp" ]
+    sources += [
+      "src/tests/unittests/d3d12/CopySplitTests.cpp",
+      "src/tests/unittests/d3d12/LRUTests.cpp",
+    ]
   }
 
   # When building inside Chromium, use their gtest main function because it is

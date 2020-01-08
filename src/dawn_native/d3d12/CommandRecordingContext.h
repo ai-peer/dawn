@@ -15,10 +15,12 @@
 #define DAWNNATIVE_D3D12_COMMANDRECORDINGCONTEXT_H_
 
 #include "dawn_native/Error.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 #include <set>
+#include <vector>
 
 namespace dawn_native { namespace d3d12 {
     class CommandAllocatorManager;
@@ -26,9 +28,9 @@ namespace dawn_native { namespace d3d12 {
 
     class CommandRecordingContext {
       public:
+        CommandRecordingContext(Device* device);
         void AddToSharedTextureList(Texture* texture);
-        MaybeError Open(ID3D12Device* d3d12Device,
-                        CommandAllocatorManager* commandAllocationManager);
+        MaybeError Open(CommandAllocatorManager* commandAllocationManager);
 
         ID3D12GraphicsCommandList* GetCommandList() const;
         ID3D12GraphicsCommandList4* GetCommandList4() const;
@@ -37,11 +39,15 @@ namespace dawn_native { namespace d3d12 {
 
         MaybeError ExecuteCommandList(ID3D12CommandQueue* d3d12CommandQueue);
 
+        void TrackResourceHeapUsage(ResourceHeapAllocation* heapAllocation);
+
       private:
         ComPtr<ID3D12GraphicsCommandList> mD3d12CommandList;
         ComPtr<ID3D12GraphicsCommandList4> mD3d12CommandList4;
         bool mIsOpen = false;
         std::set<Texture*> mSharedTextures;
+        std::vector<ResourceHeapAllocation*> mResourceHeapAllocationsPendingUsage;
+        Device* mDevice;
     };
 }}  // namespace dawn_native::d3d12
 

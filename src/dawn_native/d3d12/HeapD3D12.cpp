@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/d3d12/HeapD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -21,5 +22,13 @@ namespace dawn_native { namespace d3d12 {
 
     ComPtr<ID3D12Heap> Heap::GetD3D12Heap() const {
         return mHeap;
+    }
+
+    LRUEntry* Heap::GetResidencyLRUEntry() const {
+        return mLRUEntry;
+    }
+
+    void Heap::SetResidencyLRUEntry(LRUEntry* entry) {
+        mLRUEntry = entry;
     }
 }}  // namespace dawn_native::d3d12

@@ -22,6 +22,7 @@
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/ResourceAllocatorManagerD3D12.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
@@ -393,6 +394,10 @@ namespace dawn_native { namespace d3d12 {
 
     ID3D12Resource* Texture::GetD3D12Resource() const {
         return mResourceAllocation.GetD3D12Resource().Get();
+    }
+
+    ResourceHeapAllocation* Texture::GetResourceHeapAllocation() {
+        return &mResourceAllocation;
     }
 
     UINT16 Texture::GetDepthOrArraySize() {
