@@ -18,12 +18,12 @@
 
 namespace dawn_native {
 
-    ErrorData* MakeError(InternalErrorType type,
-                         std::string message,
-                         const char* file,
-                         const char* function,
-                         int line) {
-        ErrorData* error = new ErrorData(type, message);
+    std::unique_ptr<ErrorData> MakeError(InternalErrorType type,
+                                         std::string message,
+                                         const char* file,
+                                         const char* function,
+                                         int line) {
+        std::unique_ptr<ErrorData> error = std::make_unique<ErrorData>(type, message);
         error->AppendBacktrace(file, function, line);
         return error;
     }
