@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a68cdf0_ca838c6b",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T00:29:39Z",
+      "side": 1,
+      "message": "no longer relevant because there\u0027s no obj-c allocation call here",
+      "revId": "c4c97b5622c0280342b10922f4f0b28fc9410788",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "696d59cf_1a3f0d01",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T00:29:39Z",
+      "side": 1,
+      "message": "nit: Can do\n\n ASSERT(!mInEncoder)\n\nhere, instead of what\u0027s on line 55",
+      "revId": "c4c97b5622c0280342b10922f4f0b28fc9410788",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d04b3497_4b09ba26",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-08T00:29:39Z",
+      "side": 1,
+      "message": "Why EndBlit immediately? Won\u0027t it happen automatically now?",
+      "revId": "c4c97b5622c0280342b10922f4f0b28fc9410788",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
