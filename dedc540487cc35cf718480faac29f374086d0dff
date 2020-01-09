@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aaaf8cca_decff344",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-09T15:26:11Z",
+      "side": 1,
+      "message": "If InstanceBase::Create ever fails, this will dereference a nullptr. Need to check that mImpl is not nullptr because it\u0027s a raw ptr here.\n\nBut in ExtensionTests and GetProcAddressTests, I think we can use Ref\u003cInstanceBase\u003e and default the destructor.",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 13
+      },
+      "revId": "dedc540487cc35cf718480faac29f374086d0dff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
