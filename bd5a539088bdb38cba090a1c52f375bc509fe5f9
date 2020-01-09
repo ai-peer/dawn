@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ee16202_ef8ddf33",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "Can this be a const member function and return a const pointer to a ResourceHeapAllocation?",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 60
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13b44da2_fcf3cebb",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "There is already another location in this function that does \u0027ToBackend(source)\u0027 so it might be good to pull this out into its own local variable.",
+      "range": {
+        "startLine": 296,
+        "startChar": 12,
+        "endLine": 296,
+        "endChar": 29
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f146684f_5433b506",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "Please include a comment that explains why you chose to divide the budget in half.  I think I know the answer but I want to make sure.",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 0
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f6247cf_9b897b1a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "Can these calculations underflow? If so what is the plan to handle that?",
+      "range": {
+        "startLine": 334,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 0
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26bdd6c0_b1c5a668",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "UpdateVideoMemoryInfo appears to only be called from inside of the Device class.  If so, please make it be private to the class.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "234aa768_c3e547a9",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "What is the rationale for making this be allocated on the heap instead of with the other class members like it was previously? Allocating it with the rest of the members makes for better locality of reference.  \n\n(I wish the other unique_ptrs here were also all normal member variables)",
+      "range": {
+        "startLine": 166,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 74
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6962702_12ec7918",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "I would have expected EnsureCanMakeResident to fail in cases where there is not enough memory to evict ... say, all of the buffers are still in outstanding command lists. Do we want to give it a shot anyways? \n\nAt a minimum, we should probably fail this call if the Evict returns a failure. I see that EnsureCanMakeResident ignores its return value.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 68
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cae5554a_3bf069e5",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "To avoid this cast, you should be able to create a std::unique_ptr\u003cHeap\u003e and return it to the caller.",
+      "range": {
+        "startLine": 54,
+        "startChar": 56,
+        "endLine": 54,
+        "endChar": 90
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d9b7103_a24ee708",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T20:00:20Z",
+      "side": 1,
+      "message": "Since we use the Heap* in both these calls, please pull it out into a local variable for better readability.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
