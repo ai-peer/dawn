@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "802e6ef9_09097f64",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-09T01:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ddfe38a_24b1f2fc",
+      "revId": "2745a586226e99836616491cca96fd5d1e671e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59dc0d08_9f18752a",
         "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
         "patchSetId": 13
@@ -33,6 +51,24 @@
       "revId": "2745a586226e99836616491cca96fd5d1e671e5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d33a2a1_a58cfb4e",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-09T01:33:15Z",
+      "side": 1,
+      "message": "Now it uses a float and only tests Depth32 for now.",
+      "parentUuid": "59dc0d08_9f18752a",
+      "revId": "2745a586226e99836616491cca96fd5d1e671e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "360121c4_26746302",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-09T01:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5238dd8f_f3c89505",
+      "revId": "2745a586226e99836616491cca96fd5d1e671e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec6bcee7_8e0140cd",
         "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
         "patchSetId": 13
@@ -67,6 +121,24 @@
       "revId": "2745a586226e99836616491cca96fd5d1e671e5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c7907f2_5fc8c377",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-09T01:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec6bcee7_8e0140cd",
+      "revId": "2745a586226e99836616491cca96fd5d1e671e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
