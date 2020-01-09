@@ -45,6 +45,12 @@ namespace dawn_native { namespace metal {
       private:
         void DestroyImpl() override;
 
+        MaybeError ClearTexture(uint32_t baseMipLevel,
+                                uint32_t levelCount,
+                                uint32_t baseArrayLayer,
+                                uint32_t layerCount,
+                                TextureBase::ClearValue clearValue) override;
+
         id<MTLTexture> mMtlTexture = nil;
     };
 
