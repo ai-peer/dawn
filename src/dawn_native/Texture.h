@@ -67,6 +67,10 @@ namespace dawn_native {
                                                 uint32_t levelCount,
                                                 uint32_t baseArrayLayer,
                                                 uint32_t layerCount);
+        void EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
+                                                 uint32_t levelCount,
+                                                 uint32_t baseArrayLayer,
+                                                 uint32_t layerCount);
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
@@ -90,6 +94,12 @@ namespace dawn_native {
       private:
         TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag);
         virtual void DestroyImpl();
+
+        virtual MaybeError ClearTexture(uint32_t baseMipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t baseArrayLayer,
+                                        uint32_t layerCount,
+                                        ClearValue clearValue);
 
         MaybeError ValidateDestroy() const;
         wgpu::TextureDimension mDimension;
