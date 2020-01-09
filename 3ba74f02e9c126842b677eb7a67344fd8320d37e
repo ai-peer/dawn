@@ -16,6 +16,24 @@
       "revId": "3ba74f02e9c126842b677eb7a67344fd8320d37e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80cd09d2_2d1d9f40",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T18:38:11Z",
+      "side": 1,
+      "message": "@Corentin, are you suggesting that we put everything in ErrorData.h/.cpp into Error.cpp/h?\n\nI like the current separation of having one class per file but if you feel strongly, I can merge the two.",
+      "parentUuid": "89961eab_85e19ff7",
+      "revId": "3ba74f02e9c126842b677eb7a67344fd8320d37e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
