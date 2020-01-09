@@ -440,6 +440,30 @@
     },
     {
       "key": {
+        "uuid": "7812973c_48b7ec52",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-09T00:08:31Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/14960",
+      "parentUuid": "58c84b81_4d9d479c",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 48
+      },
+      "revId": "4b339f837909100e2019ba4d540a77359bde0051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "072f5550_98a19be3",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 37
