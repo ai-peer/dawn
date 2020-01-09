@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "95b48267_e73aaaa9",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "Allocations shouldn\u0027t fail with residency off.  Rather still made resident but less optimally, right?",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3829eb1_85888d73",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "nit: no need for extra indirection, handles are immutable with return type \"const \u0026\".",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ee16202_ef8ddf33",
         "filename": "src/dawn_native/d3d12/BufferD3D12.h",
         "patchSetId": 3
@@ -134,6 +168,23 @@
     },
     {
       "key": {
+        "uuid": "8adc2922_e80aa8de",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "nit: consider moving this into ResourceAllocatorManager as it\u0027s coupled closely with it.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c6962702_12ec7918",
         "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
         "patchSetId": 3
@@ -197,6 +248,176 @@
         "endLine": 61,
         "endChar": 0
       },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33c12707_cd62d53a",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "nit: move hard coded constants into static constexpr",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "569bf1c9_bf3d90c4",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "This code seems to evict the oldest without checking if they\u0027re still being used by the GPU. This isn\u0027t allowed by Evict(). I think we also need to also track the heap\u0027s serial and only evict those where pendingSerial \u003e heapSerial.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68409727_6398e50b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "Suggest to invalidate the heap\u0027s entry after removal. That way, should Evict(...) get called twice, it doesn\u0027t stomp over memory.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35c234dd_a0301664",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "unit: rename to committedSize?",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77ba0383_1ea99196",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "nit: consider adding a comment about further optimization (ie. calling a blocking function on the render thread \u003d\u003d not good).",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6c6f1bf_6ceff643",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "Odd to see these overloads - the issue is the memory allocator directly stores Heaps instead of ResourceAllocations. The latter can represent both resources types. Perhaps enough of a case to go back and consider simplifying.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88c5bf62_898f5f4c",
+        "filename": "src/dawn_native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "No need to re-calculate. Simply pass `resourceInfo.SizeInBytes`.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6db15a61_a7c5d4c5",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "Not a fan of exposing LRU stuff to `ResourceHeapAllocation`, these should never be used outside the ResidencyManager.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46facc95_fb37bba6",
+        "filename": "src/tests/unittests/d3d12/LRUTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "Still need to review.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59bda0c0_383bda71",
+        "filename": "src/tests/unittests/d3d12/LRUTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-09T20:17:50Z",
+      "side": 1,
+      "message": "Suggest to keep the generic LRU not tied to D3D12. Only missing a DummyEntry which could be passed to LRUCache. Then LRUCache can be in seperate CL.",
       "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
