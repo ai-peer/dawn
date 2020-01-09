@@ -58,11 +58,6 @@ namespace dawn_native { namespace d3d12 {
                                                        uint32_t baseArrayLayer,
                                                        uint32_t layerCount) const;
         D3D12_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor(uint32_t baseMipLevel) const;
-        void EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
-                                                 uint32_t baseMipLevel,
-                                                 uint32_t levelCount,
-                                                 uint32_t baseArrayLayer,
-                                                 uint32_t layerCount);
 
       private:
         using TextureBase::TextureBase;
@@ -74,12 +69,11 @@ namespace dawn_native { namespace d3d12 {
 
         // Dawn API
         void DestroyImpl() override;
-        MaybeError ClearTexture(CommandRecordingContext* commandContext,
-                                uint32_t baseMipLevel,
+        MaybeError ClearTexture(uint32_t baseMipLevel,
                                 uint32_t levelCount,
                                 uint32_t baseArrayLayer,
                                 uint32_t layerCount,
-                                TextureBase::ClearValue clearValue);
+                                TextureBase::ClearValue clearValue) override;
 
         UINT16 GetDepthOrArraySize();
 
