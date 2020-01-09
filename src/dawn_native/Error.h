@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_ERROR_H_
 #define DAWNNATIVE_ERROR_H_
 
+#include "dawn_native/ErrorData.h"
 #include "common/Result.h"
 
 #include <string>
@@ -23,16 +24,14 @@ namespace dawn_native {
 
     // This is the content of an error value for MaybeError or ResultOrError, split off to its own
     // file to avoid having all files including headers like <string> and <vector>
-    class ErrorData;
-
     enum class InternalErrorType : uint32_t { Validation, DeviceLost, Unimplemented, OutOfMemory };
 
     // MaybeError and ResultOrError are meant to be used as return value for function that are not
     // expected to, but might fail. The handling of error is potentially much slower than successes.
-    using MaybeError = Result<void, ErrorData*>;
+    using MaybeError = Result<void, std::unique_ptr<ErrorData>>;
 
     template <typename T>
-    using ResultOrError = Result<T, ErrorData*>;
+    using ResultOrError = Result<T, std::unique_ptr<ErrorData>>;
 
     // Returning a success is done like so:
     //   return {}; // for Error
@@ -61,8 +60,8 @@ namespace dawn_native {
     {                                                                            \
         auto DAWN_LOCAL_VAR = EXPR;                                              \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                           \
-            ::dawn_native::ErrorData* error = DAWN_LOCAL_VAR.AcquireError();     \
-            ::dawn_native::AppendBacktrace(error, __FILE__, __func__, __LINE__); \
+            std::unique_ptr<::dawn_native::ErrorData> error = DAWN_LOCAL_VAR.AcquireError();     \
+            ::dawn_native::AppendBacktrace(error.get(), __FILE__, __func__, __LINE__); \
             return {std::move(error)};                                           \
         }                                                                        \
     }                                                                            \
@@ -75,8 +74,8 @@ namespace dawn_native {
     {                                                                            \
         auto DAWN_LOCAL_VAR = EXPR;                                              \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                           \
-            ErrorData* error = DAWN_LOCAL_VAR.AcquireError();                    \
-            ::dawn_native::AppendBacktrace(error, __FILE__, __func__, __LINE__); \
+            std::unique_ptr<ErrorData> error = DAWN_LOCAL_VAR.AcquireError();                    \
+            ::dawn_native::AppendBacktrace(error.get(), __FILE__, __func__, __LINE__); \
             return {std::move(error)};                                           \
         }                                                                        \
         VAR = DAWN_LOCAL_VAR.AcquireSuccess();                                   \
@@ -88,12 +87,11 @@ namespace dawn_native {
     void AppendBacktrace(ErrorData* error, const char* file, const char* function, int line);
 
     // Implementation detail of DAWN_MAKE_ERROR
-    ErrorData* MakeError(InternalErrorType type,
-                         std::string message,
-                         const char* file,
-                         const char* function,
-                         int line);
-
+    std::unique_ptr<ErrorData> MakeError(InternalErrorType type,
+                                        std::string message,
+                                        const char* file,
+                                        const char* function,
+                                        int line);
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_ERROR_H_

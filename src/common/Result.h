@@ -57,13 +57,13 @@ class Result;
 // Specialization of Result for returning errors only via pointers. It is basically a pointer
 // where nullptr is both Success and Empty.
 template <typename E>
-class DAWN_NO_DISCARD Result<void, E*> {
+class DAWN_NO_DISCARD Result<void, E> {
   public:
     Result();
-    Result(E* error);
+    Result(E error);
 
-    Result(Result<void, E*>&& other);
-    Result<void, E*>& operator=(Result<void, E>&& other);
+    Result(Result<void, E>&& other);
+    Result<void, E>& operator=(Result<void, E>&& other);
 
     ~Result();
 
@@ -71,10 +71,10 @@ class DAWN_NO_DISCARD Result<void, E*> {
     bool IsSuccess() const;
 
     void AcquireSuccess();
-    E* AcquireError();
+    E AcquireError();
 
   private:
-    E* mError = nullptr;
+    E mError;
 };
 
 // Uses SFINAE to try to get alignof(T) but fallback to Default if T isn't defined.
@@ -102,13 +102,13 @@ namespace detail {
     template <typename T>
     static T* GetSuccessFromPayload(intptr_t payload);
     template <typename E>
-    static E* GetErrorFromPayload(intptr_t payload);
+    static typename E::element_type* GetErrorFromPayload(intptr_t payload);
 
     constexpr static intptr_t kEmptyPayload = Empty;
 }  // namespace detail
 
 template <typename T, typename E>
-class DAWN_NO_DISCARD Result<T*, E*> {
+class DAWN_NO_DISCARD Result<T*, E> {
   public:
     static_assert(alignof_if_defined_else_default<T, 4> >= 4,
                   "Result<T*, E*> reserves two bits for tagging pointers");
@@ -116,13 +116,13 @@ class DAWN_NO_DISCARD Result<T*, E*> {
                   "Result<T*, E*> reserves two bits for tagging pointers");
 
     Result(T* success);
-    Result(E* error);
+    Result(E error);
 
     // Support returning a Result<T*, E*> from a Result<TChild*, E*>
     template <typename TChild>
-    Result(Result<TChild*, E*>&& other);
+    Result(Result<TChild*, E>&& other);
     template <typename TChild>
-    Result<T*, E*>& operator=(Result<TChild*, E>&& other);
+    Result<T*, E>& operator=(Result<TChild*, E>&& other);
 
     ~Result();
 
@@ -130,7 +130,7 @@ class DAWN_NO_DISCARD Result<T*, E*> {
     bool IsSuccess() const;
 
     T* AcquireSuccess();
-    E* AcquireError();
+    E AcquireError();
 
   private:
     template <typename T2, typename E2>
@@ -140,7 +140,7 @@ class DAWN_NO_DISCARD Result<T*, E*> {
 };
 
 template <typename T, typename E>
-class DAWN_NO_DISCARD Result<const T*, E*> {
+class DAWN_NO_DISCARD Result<const T*, E> {
   public:
     static_assert(alignof_if_defined_else_default<T, 4> >= 4,
                   "Result<T*, E*> reserves two bits for tagging pointers");
@@ -148,10 +148,10 @@ class DAWN_NO_DISCARD Result<const T*, E*> {
                   "Result<T*, E*> reserves two bits for tagging pointers");
 
     Result(const T* success);
-    Result(E* error);
+    Result(E error);
 
-    Result(Result<const T*, E*>&& other);
-    Result<const T*, E*>& operator=(Result<const T*, E>&& other);
+    Result(Result<const T*, E>&& other);
+    Result<const T*, E>& operator=(Result<const T*, E>&& other);
 
     ~Result();
 
@@ -159,7 +159,7 @@ class DAWN_NO_DISCARD Result<const T*, E*> {
     bool IsSuccess() const;
 
     const T* AcquireSuccess();
-    E* AcquireError();
+    E AcquireError();
 
   private:
     intptr_t mPayload = detail::kEmptyPayload;
@@ -199,50 +199,46 @@ class DAWN_NO_DISCARD Result {
 
 // Implementation of Result<void, E*>
 template <typename E>
-Result<void, E*>::Result() {
+Result<void, E>::Result() {
 }
 
 template <typename E>
-Result<void, E*>::Result(E* error) : mError(error) {
+Result<void, E>::Result(E error) : mError(std::move(error)) {
 }
 
 template <typename E>
-Result<void, E*>::Result(Result<void, E*>&& other) : mError(other.mError) {
-    other.mError = nullptr;
+Result<void, E>::Result(Result<void, E>&& other) : mError(std::move(other.mError)) {
 }
 
 template <typename E>
-Result<void, E*>& Result<void, E*>::operator=(Result<void, E>&& other) {
+Result<void, E>& Result<void, E>::operator=(Result<void, E>&& other) {
     ASSERT(mError == nullptr);
-    mError = other.mError;
-    other.mError = nullptr;
+    mError = std::move(other.mError);
     return *this;
 }
 
 template <typename E>
-Result<void, E*>::~Result() {
+Result<void, E>::~Result() {
     ASSERT(mError == nullptr);
 }
 
 template <typename E>
-bool Result<void, E*>::IsError() const {
+bool Result<void, E>::IsError() const {
     return mError != nullptr;
 }
 
 template <typename E>
-bool Result<void, E*>::IsSuccess() const {
+bool Result<void, E>::IsSuccess() const {
     return mError == nullptr;
 }
 
 template <typename E>
-void Result<void, E*>::AcquireSuccess() {
+void Result<void, E>::AcquireSuccess() {
 }
 
 template <typename E>
-E* Result<void, E*>::AcquireError() {
-    E* error = mError;
-    mError = nullptr;
-    return error;
+E Result<void, E>::AcquireError() {
+    return std::move(mError);
 }
 
 // Implementation details of the tagged pointer Results
@@ -255,32 +251,32 @@ namespace detail {
     }
 
     template <typename E>
-    E* GetErrorFromPayload(intptr_t payload) {
+    typename E::element_type* GetErrorFromPayload(intptr_t payload) {
         ASSERT(GetPayloadType(payload) == Error);
-        return reinterpret_cast<E*>(payload ^ 1);
+        return reinterpret_cast<typename E::element_type*>(payload ^ 1);
     }
 
 }  // namespace detail
 
 // Implementation of Result<T*, E*>
 template <typename T, typename E>
-Result<T*, E*>::Result(T* success) : mPayload(detail::MakePayload(success, detail::Success)) {
+Result<T*, E>::Result(T* success) : mPayload(detail::MakePayload(success, detail::Success)) {
 }
 
 template <typename T, typename E>
-Result<T*, E*>::Result(E* error) : mPayload(detail::MakePayload(error, detail::Error)) {
+Result<T*, E>::Result(E error) : mPayload(detail::MakePayload(error.release(), detail::Error)) {
 }
 
 template <typename T, typename E>
 template <typename TChild>
-Result<T*, E*>::Result(Result<TChild*, E*>&& other) : mPayload(other.mPayload) {
+Result<T*, E>::Result(Result<TChild*, E>&& other) : mPayload(other.mPayload) {
     other.mPayload = detail::kEmptyPayload;
     static_assert(std::is_same<T, TChild>::value || std::is_base_of<T, TChild>::value, "");
 }
 
 template <typename T, typename E>
 template <typename TChild>
-Result<T*, E*>& Result<T*, E*>::operator=(Result<TChild*, E>&& other) {
+Result<T*, E>& Result<T*, E>::operator=(Result<TChild*, E>&& other) {
     ASSERT(mPayload == detail::kEmptyPayload);
     static_assert(std::is_same<T, TChild>::value || std::is_base_of<T, TChild>::value, "");
     mPayload = other.mPayload;
@@ -289,51 +285,51 @@ Result<T*, E*>& Result<T*, E*>::operator=(Result<TChild*, E>&& other) {
 }
 
 template <typename T, typename E>
-Result<T*, E*>::~Result() {
+Result<T*, E>::~Result() {
     ASSERT(mPayload == detail::kEmptyPayload);
 }
 
 template <typename T, typename E>
-bool Result<T*, E*>::IsError() const {
+bool Result<T*, E>::IsError() const {
     return detail::GetPayloadType(mPayload) == detail::Error;
 }
 
 template <typename T, typename E>
-bool Result<T*, E*>::IsSuccess() const {
+bool Result<T*, E>::IsSuccess() const {
     return detail::GetPayloadType(mPayload) == detail::Success;
 }
 
 template <typename T, typename E>
-T* Result<T*, E*>::AcquireSuccess() {
+T* Result<T*, E>::AcquireSuccess() {
     T* success = detail::GetSuccessFromPayload<T>(mPayload);
     mPayload = detail::kEmptyPayload;
     return success;
 }
 
 template <typename T, typename E>
-E* Result<T*, E*>::AcquireError() {
-    E* error = detail::GetErrorFromPayload<E>(mPayload);
+E Result<T*, E>::AcquireError() {
+    typename E::element_type* error = detail::GetErrorFromPayload<E>(mPayload);
     mPayload = detail::kEmptyPayload;
-    return error;
+    return E(error);
 }
 
 // Implementation of Result<const T*, E*>
 template <typename T, typename E>
-Result<const T*, E*>::Result(const T* success)
+Result<const T*, E>::Result(const T* success)
     : mPayload(detail::MakePayload(success, detail::Success)) {
 }
 
 template <typename T, typename E>
-Result<const T*, E*>::Result(E* error) : mPayload(detail::MakePayload(error, detail::Error)) {
+Result<const T*, E>::Result(E error) : mPayload(detail::MakePayload(error.release(), detail::Error)) {
 }
 
 template <typename T, typename E>
-Result<const T*, E*>::Result(Result<const T*, E*>&& other) : mPayload(other.mPayload) {
+Result<const T*, E>::Result(Result<const T*, E>&& other) : mPayload(other.mPayload) {
     other.mPayload = detail::kEmptyPayload;
 }
 
 template <typename T, typename E>
-Result<const T*, E*>& Result<const T*, E*>::operator=(Result<const T*, E>&& other) {
+Result<const T*, E>& Result<const T*, E>::operator=(Result<const T*, E>&& other) {
     ASSERT(mPayload == detail::kEmptyPayload);
     mPayload = other.mPayload;
     other.mPayload = detail::kEmptyPayload;
@@ -341,32 +337,32 @@ Result<const T*, E*>& Result<const T*, E*>::operator=(Result<const T*, E>&& othe
 }
 
 template <typename T, typename E>
-Result<const T*, E*>::~Result() {
+Result<const T*, E>::~Result() {
     ASSERT(mPayload == detail::kEmptyPayload);
 }
 
 template <typename T, typename E>
-bool Result<const T*, E*>::IsError() const {
+bool Result<const T*, E>::IsError() const {
     return detail::GetPayloadType(mPayload) == detail::Error;
 }
 
 template <typename T, typename E>
-bool Result<const T*, E*>::IsSuccess() const {
+bool Result<const T*, E>::IsSuccess() const {
     return detail::GetPayloadType(mPayload) == detail::Success;
 }
 
 template <typename T, typename E>
-const T* Result<const T*, E*>::AcquireSuccess() {
+const T* Result<const T*, E>::AcquireSuccess() {
     T* success = detail::GetSuccessFromPayload<T>(mPayload);
     mPayload = detail::kEmptyPayload;
     return success;
 }
 
 template <typename T, typename E>
-E* Result<const T*, E*>::AcquireError() {
-    E* error = detail::GetErrorFromPayload<E>(mPayload);
+E Result<const T*, E>::AcquireError() {
+    typename E::element_type* error = detail::GetErrorFromPayload<E>(mPayload);
     mPayload = detail::kEmptyPayload;
-    return error;
+    return E(error);
 }
 
 // Implementation of Result<T, E>
