@@ -675,6 +675,8 @@ namespace dawn_native { namespace d3d12 {
                     const bool passHasUAV =
                         TransitionForPass(commandContext, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(false);
+
+                    LazyClearRenderPassAttachments(BeginRenderPassCmd);
                     RecordRenderPass(commandContext, &bindingTracker, &renderPassTracker,
                                      beginRenderPassCmd, passHasUAV);
 
@@ -699,15 +701,9 @@ namespace dawn_native { namespace d3d12 {
                     Buffer* buffer = ToBackend(copy->source.buffer.Get());
                     Texture* texture = ToBackend(copy->destination.texture.Get());
 
-                    if (IsCompleteSubresourceCopiedTo(texture, copy->copySize,
-                                                      copy->destination.mipLevel)) {
-                        texture->SetIsSubresourceContentInitialized(
-                            true, copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
-                    } else {
-                        texture->EnsureSubresourceContentInitialized(
-                            commandContext, copy->destination.mipLevel, 1,
-                            copy->destination.arrayLayer, 1);
-                    }
+                    EnsureInitializedAsCopyDst(texture, copy->copySize, copy->destination.mipLevel,
+                                               copy->destination.arrayLayer,
+                                               copy->destination.origin);
 
                     buffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopySrc);
                     texture->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopyDst);
@@ -741,8 +737,8 @@ namespace dawn_native { namespace d3d12 {
                     Texture* texture = ToBackend(copy->source.texture.Get());
                     Buffer* buffer = ToBackend(copy->destination.buffer.Get());
 
-                    texture->EnsureSubresourceContentInitialized(
-                        commandContext, copy->source.mipLevel, 1, copy->source.arrayLayer, 1);
+                    EnsureInitializedAsCopySrc(texture, copy->copySize, copy->source.mipLevel,
+                                               copy->source.arrayLayer, copy->source.origin);
 
                     texture->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopySrc);
                     buffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopyDst);
@@ -780,17 +776,12 @@ namespace dawn_native { namespace d3d12 {
                     Texture* source = ToBackend(copy->source.texture.Get());
                     Texture* destination = ToBackend(copy->destination.texture.Get());
 
-                    source->EnsureSubresourceContentInitialized(
-                        commandContext, copy->source.mipLevel, 1, copy->source.arrayLayer, 1);
-                    if (IsCompleteSubresourceCopiedTo(destination, copy->copySize,
-                                                      copy->destination.mipLevel)) {
-                        destination->SetIsSubresourceContentInitialized(
-                            true, copy->destination.mipLevel, 1, copy->destination.arrayLayer, 1);
-                    } else {
-                        destination->EnsureSubresourceContentInitialized(
-                            commandContext, copy->destination.mipLevel, 1,
-                            copy->destination.arrayLayer, 1);
-                    }
+                    EnsureInitializedAsCopySrc(source, copy->copySize, copy->source.mipLevel,
+                                               copy->source.arrayLayer, copy->source.origin);
+                    EnsureInitializedAsCopyDst(
+                        destination, copy->copySize, copy->destination.mipLevel,
+                        copy->destination.arrayLayer, copy->destination.origin);
+
                     source->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopySrc);
                     destination->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopyDst);
 
@@ -932,14 +923,6 @@ namespace dawn_native { namespace d3d12 {
             TextureView* view = ToBackend(attachmentInfo.view.Get());
             Texture* texture = ToBackend(view->GetTexture());
 
-            // Load operation is changed to clear when the texture is uninitialized.
-            if (!texture->IsSubresourceContentInitialized(view->GetBaseMipLevel(), 1,
-                                                          view->GetBaseArrayLayer(), 1) &&
-                attachmentInfo.loadOp == wgpu::LoadOp::Load) {
-                attachmentInfo.loadOp = wgpu::LoadOp::Clear;
-                attachmentInfo.clearColor = {0.0f, 0.0f, 0.0f, 0.0f};
-            }
-
             // Set color load operation.
             renderPassBuilder->SetRenderTargetBeginningAccess(
                 i, attachmentInfo.loadOp, attachmentInfo.clearColor, view->GetD3D12Format());
@@ -953,21 +936,11 @@ namespace dawn_native { namespace d3d12 {
                 resolveDestinationTexture->TransitionUsageNow(commandContext,
                                                               D3D12_RESOURCE_STATE_RESOLVE_DEST);
 
-                // Mark resolve target as initialized to prevent clearing later.
-                resolveDestinationTexture->SetIsSubresourceContentInitialized(
-                    true, resolveDestinationView->GetBaseMipLevel(), 1,
-                    resolveDestinationView->GetBaseArrayLayer(), 1);
-
                 renderPassBuilder->SetRenderTargetEndingAccessResolve(i, attachmentInfo.storeOp,
                                                                       view, resolveDestinationView);
             } else {
                 renderPassBuilder->SetRenderTargetEndingAccess(i, attachmentInfo.storeOp);
             }
-
-            // Set whether or not the texture requires initialization after the pass.
-            bool isInitialized = attachmentInfo.storeOp == wgpu::StoreOp::Store;
-            texture->SetIsSubresourceContentInitialized(isInitialized, view->GetBaseMipLevel(), 1,
-                                                        view->GetBaseArrayLayer(), 1);
         }
 
         if (renderPass->attachmentState->HasDepthStencilAttachment()) {
@@ -978,20 +951,6 @@ namespace dawn_native { namespace d3d12 {
 
             const bool hasDepth = view->GetTexture()->GetFormat().HasDepth();
             const bool hasStencil = view->GetTexture()->GetFormat().HasStencil();
-
-            // Load operations are changed to clear when the texture is uninitialized.
-            if (!view->GetTexture()->IsSubresourceContentInitialized(
-                    view->GetBaseMipLevel(), view->GetLevelCount(), view->GetBaseArrayLayer(),
-                    view->GetLayerCount())) {
-                if (hasDepth && attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
-                    attachmentInfo.clearDepth = 0.0f;
-                    attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
-                }
-                if (hasStencil && attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
-                    attachmentInfo.clearStencil = 0u;
-                    attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
-                }
-            }
 
             // Set depth/stencil load operations.
             if (hasDepth) {
@@ -1010,12 +969,6 @@ namespace dawn_native { namespace d3d12 {
                 renderPassBuilder->SetStencilNoAccess();
             }
 
-            // Set whether or not the texture requires initialization.
-            ASSERT(!hasDepth || !hasStencil ||
-                   attachmentInfo.depthStoreOp == attachmentInfo.stencilStoreOp);
-            bool isInitialized = attachmentInfo.depthStoreOp == wgpu::StoreOp::Store;
-            texture->SetIsSubresourceContentInitialized(isInitialized, view->GetBaseMipLevel(), 1,
-                                                        view->GetBaseArrayLayer(), 1);
         } else {
             renderPassBuilder->SetDepthStencilNoAccess();
         }
