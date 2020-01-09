@@ -63,11 +63,6 @@ namespace dawn_native { namespace vulkan {
         // TODO(cwallez@chromium.org): coalesce barriers and do them early when possible.
         void TransitionUsageNow(CommandRecordingContext* recordingContext,
                                 wgpu::TextureUsage usage);
-        void EnsureSubresourceContentInitialized(CommandRecordingContext* recordingContext,
-                                                 uint32_t baseMipLevel,
-                                                 uint32_t levelCount,
-                                                 uint32_t baseArrayLayer,
-                                                 uint32_t layerCount);
 
         MaybeError SignalAndDestroy(VkSemaphore* outSignalSemaphore);
         // Binds externally allocated memory to the VkImage and on success, takes ownership of
@@ -85,12 +80,11 @@ namespace dawn_native { namespace vulkan {
                                           external_memory::Service* externalMemoryService);
 
         void DestroyImpl() override;
-        MaybeError ClearTexture(CommandRecordingContext* recordingContext,
-                                uint32_t baseMipLevel,
+        MaybeError ClearTexture(uint32_t baseMipLevel,
                                 uint32_t levelCount,
                                 uint32_t baseArrayLayer,
                                 uint32_t layerCount,
-                                TextureBase::ClearValue);
+                                TextureBase::ClearValue) override;
 
         VkImage mHandle = VK_NULL_HANDLE;
         ResourceMemoryAllocation mMemoryAllocation;

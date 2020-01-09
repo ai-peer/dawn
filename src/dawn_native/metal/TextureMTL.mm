@@ -527,22 +527,6 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
-    void Texture::EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
-                                                      uint32_t levelCount,
-                                                      uint32_t baseArrayLayer,
-                                                      uint32_t layerCount) {
-        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            return;
-        }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
-            // If subresource has not been initialized, clear it to black as it could
-            // contain dirty bits from recycled memory
-            GetDevice()->ConsumedError(ClearTexture(baseMipLevel, levelCount, baseArrayLayer,
-                                                    layerCount, TextureBase::ClearValue::Zero));
-        }
-    }
-
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
         : TextureViewBase(texture, descriptor) {
         id<MTLTexture> mtlTexture = ToBackend(texture)->GetMTLTexture();
