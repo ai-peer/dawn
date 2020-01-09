@@ -42,11 +42,6 @@ namespace dawn_native { namespace metal {
 
         id<MTLTexture> GetMTLTexture();
 
-        void EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
-                                                 uint32_t levelCount,
-                                                 uint32_t baseArrayLayer,
-                                                 uint32_t layerCount);
-
       private:
         void DestroyImpl() override;
 
@@ -54,7 +49,7 @@ namespace dawn_native { namespace metal {
                                 uint32_t levelCount,
                                 uint32_t baseArrayLayer,
                                 uint32_t layerCount,
-                                TextureBase::ClearValue clearValue);
+                                TextureBase::ClearValue clearValue) override;
 
         id<MTLTexture> mMtlTexture = nil;
     };

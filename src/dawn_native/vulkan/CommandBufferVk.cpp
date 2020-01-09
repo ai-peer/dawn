@@ -372,8 +372,7 @@ namespace dawn_native { namespace vulkan {
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the
                 // texture subresource has not been initialized before the render pass.
                 if (!(usages.textureUsages[i] & wgpu::TextureUsage::OutputAttachment)) {
-                    texture->EnsureSubresourceContentInitialized(recordingContext, 0,
-                                                                 texture->GetNumMipLevels(), 0,
+                    texture->EnsureSubresourceContentInitialized(0, texture->GetNumMipLevels(), 0,
                                                                  texture->GetArrayLayers());
                 }
                 texture->TransitionUsageNow(recordingContext, usages.textureUsages[i]);
@@ -408,21 +407,12 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    EnsureInitializedAsCopyDst(dst.texture.Get(), copy->copySize, dst.mipLevel,
+                                               dst.arrayLayer, dst.origin);
+
                     VkBufferImageCopy region =
                         ComputeBufferImageCopyRegion(src, dst, copy->copySize);
-                    VkImageSubresourceLayers subresource = region.imageSubresource;
 
-                    if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
-                                                      subresource.mipLevel)) {
-                        // Since texture has been overwritten, it has been "initialized"
-                        dst.texture->SetIsSubresourceContentInitialized(
-                            true, subresource.mipLevel, 1, subresource.baseArrayLayer, 1);
-                    } else {
-                        ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(recordingContext,
-                                                                  subresource.mipLevel, 1,
-                                                                  subresource.baseArrayLayer, 1);
-                    }
                     ToBackend(src.buffer)
                         ->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopySrc);
                     ToBackend(dst.texture)
@@ -442,14 +432,11 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    EnsureInitializedAsCopySrc(src.texture.Get(), copy->copySize, src.mipLevel,
+                                               src.arrayLayer, src.origin);
+
                     VkBufferImageCopy region =
                         ComputeBufferImageCopyRegion(dst, src, copy->copySize);
-                    VkImageSubresourceLayers subresource = region.imageSubresource;
-
-                    ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(recordingContext,
-                                                              subresource.mipLevel, 1,
-                                                              subresource.baseArrayLayer, 1);
 
                     ToBackend(src.texture)
                         ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc);
@@ -469,19 +456,10 @@ namespace dawn_native { namespace vulkan {
                     TextureCopy& src = copy->source;
                     TextureCopy& dst = copy->destination;
 
-                    ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(recordingContext, src.mipLevel, 1,
-                                                              src.arrayLayer, 1);
-                    if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
-                                                      dst.mipLevel)) {
-                        // Since destination texture has been overwritten, it has been "initialized"
-                        dst.texture->SetIsSubresourceContentInitialized(true, dst.mipLevel, 1,
-                                                                        dst.arrayLayer, 1);
-                    } else {
-                        ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(recordingContext, dst.mipLevel, 1,
-                                                                  dst.arrayLayer, 1);
-                    }
+                    EnsureInitializedAsCopySrc(src.texture.Get(), copy->copySize, src.mipLevel,
+                                               src.arrayLayer, src.origin);
+                    EnsureInitializedAsCopyDst(dst.texture.Get(), copy->copySize, dst.mipLevel,
+                                               dst.arrayLayer, dst.origin);
 
                     ToBackend(src.texture)
                         ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc);

@@ -43,6 +43,17 @@ namespace dawn_native {
 
     void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass);
 
+    void EnsureInitializedAsCopySrc(TextureBase* texture,
+                                    const Extent3D& size,
+                                    uint32_t mipLevel,
+                                    uint32_t arrayLayer,
+                                    const Origin3D& origin);
+    void EnsureInitializedAsCopyDst(TextureBase* texture,
+                                    const Extent3D& size,
+                                    uint32_t mipLevel,
+                                    uint32_t arrayLayer,
+                                    const Origin3D& origin);
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_COMMANDBUFFER_H_
