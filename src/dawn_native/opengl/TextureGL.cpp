@@ -181,9 +181,9 @@ namespace dawn_native { namespace opengl {
         return ToBackend(GetDevice())->GetGLFormat(GetFormat());
     }
 
-    MaybeError Texture::ClearTexture(GLint baseMipLevel,
-                                     GLint levelCount,
-                                     GLint baseArrayLayer,
+    MaybeError Texture::ClearTexture(uint32_t baseMipLevel,
+                                     uint32_t levelCount,
+                                     uint32_t baseArrayLayer,
                                      uint32_t layerCount,
                                      TextureBase::ClearValue clearValue) {
         // TODO(jiawei.shao@intel.com): initialize the textures with compressed formats.
@@ -193,12 +193,15 @@ namespace dawn_native { namespace opengl {
 
         Device* device = ToBackend(GetDevice());
         const OpenGLFunctions& gl = device->gl;
-        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
+
+        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 0xFF;
+        float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
+
         if (GetFormat().isRenderable) {
             if (GetFormat().HasDepthOrStencil()) {
                 bool doDepthClear = GetFormat().HasDepth();
                 bool doStencilClear = GetFormat().HasStencil();
-                GLfloat depth = clearColor;
+                GLfloat depth = fClearColor;
                 GLint stencil = clearColor;
                 if (doDepthClear) {
                     gl.DepthMask(GL_TRUE);
@@ -225,15 +228,23 @@ namespace dawn_native { namespace opengl {
                 static constexpr uint32_t MAX_TEXEL_SIZE = 16;
                 ASSERT(GetFormat().blockByteSize <= MAX_TEXEL_SIZE);
                 std::array<GLbyte, MAX_TEXEL_SIZE> clearColorData;
-                clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 255;
                 clearColorData.fill(clearColor);
 
                 const GLFormat& glFormat = GetGLFormat();
-                for (GLint level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+                for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
                     Extent3D mipSize = GetMipLevelPhysicalSize(level);
-                    gl.ClearTexSubImage(mHandle, level, 0, 0, baseArrayLayer, mipSize.width,
-                                        mipSize.height, layerCount, glFormat.format, glFormat.type,
-                                        clearColorData.data());
+
+                    ASSERT(level <= std::numeric_limits<GLint>::max());
+                    ASSERT(baseArrayLayer <= std::numeric_limits<GLint>::max());
+                    ASSERT(mipSize.width <= std::numeric_limits<GLsizei>::max());
+                    ASSERT(mipSize.height <= std::numeric_limits<GLsizei>::max());
+                    ASSERT(layerCount <= std::numeric_limits<GLsizei>::max());
+
+                    gl.ClearTexSubImage(
+                        mHandle, static_cast<GLint>(level), 0, 0,
+                        static_cast<GLint>(baseArrayLayer), static_cast<GLsizei>(mipSize.width),
+                        static_cast<GLsizei>(mipSize.height), static_cast<GLsizei>(layerCount),
+                        glFormat.format, glFormat.type, clearColorData.data());
                 }
             }
         } else {
@@ -265,15 +276,14 @@ namespace dawn_native { namespace opengl {
             // Fill the buffer with clear color
             uint8_t* clearBuffer = nullptr;
             DAWN_TRY(srcBuffer->MapAtCreation(&clearBuffer));
-            std::fill(reinterpret_cast<uint32_t*>(clearBuffer),
-                      reinterpret_cast<uint32_t*>(clearBuffer + descriptor.size), clearColor);
+            std::fill(clearBuffer, clearBuffer + descriptor.size, clearColor);
             srcBuffer->Unmap();
 
             // Bind buffer and texture, and make the buffer to texture copy
             gl.PixelStorei(GL_UNPACK_ROW_LENGTH,
                            (rowPitch / GetFormat().blockByteSize) * GetFormat().blockWidth);
             gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, 0);
-            for (GLint level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
+            for (uint32_t level = baseMipLevel; level < baseMipLevel + levelCount; ++level) {
                 gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, srcBuffer->GetHandle());
                 gl.ActiveTexture(GL_TEXTURE0);
                 gl.BindTexture(GetGLTarget(), GetHandle());
@@ -284,8 +294,13 @@ namespace dawn_native { namespace opengl {
                         // TODO(natlee@microsoft.com): This will break when layerCount is greater
                         // than 1, because the buffer is only sized for one layer.
                         ASSERT(layerCount == 1);
-                        gl.TexSubImage2D(GetGLTarget(), level, 0, 0, size.width, size.height,
-                                         GetGLFormat().format, GetGLFormat().type, 0);
+                        ASSERT(level <= std::numeric_limits<GLint>::max());
+                        ASSERT(size.width <= std::numeric_limits<GLsizei>::max());
+                        ASSERT(size.height <= std::numeric_limits<GLsizei>::max());
+                        gl.TexSubImage2D(GetGLTarget(), static_cast<GLint>(level), 0, 0,
+                                         static_cast<GLsizei>(size.width),
+                                         static_cast<GLsizei>(size.height), GetGLFormat().format,
+                                         GetGLFormat().type, 0);
                         break;
 
                     default:
@@ -297,27 +312,12 @@ namespace dawn_native { namespace opengl {
                 gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
             }
         }
-        return {};
-    }
-
-    void Texture::EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
-                                                      uint32_t levelCount,
-                                                      uint32_t baseArrayLayer,
-                                                      uint32_t layerCount,
-                                                      bool isLazyClear) {
-        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            return;
-        }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
-            GetDevice()->ConsumedError(ClearTexture(baseMipLevel, levelCount, baseArrayLayer,
-                                                    layerCount, TextureBase::ClearValue::Zero));
-            if (isLazyClear) {
-                GetDevice()->IncrementLazyClearCountForTesting();
-            }
+        if (clearValue == TextureBase::ClearValue::Zero) {
             SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
                                                layerCount);
+            device->IncrementLazyClearCountForTesting();
         }
+        return {};
     }
 
     // TextureView
