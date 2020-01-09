@@ -675,6 +675,8 @@ namespace dawn_native { namespace d3d12 {
                     const bool passHasUAV =
                         TransitionForPass(commandContext, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(false);
+
+                    LazyClearRenderPassAttachments(beginRenderPassCmd);
                     RecordRenderPass(commandContext, &bindingTracker, &renderPassTracker,
                                      beginRenderPassCmd, passHasUAV);
 
@@ -932,14 +934,6 @@ namespace dawn_native { namespace d3d12 {
             TextureView* view = ToBackend(attachmentInfo.view.Get());
             Texture* texture = ToBackend(view->GetTexture());
 
-            // Load operation is changed to clear when the texture is uninitialized.
-            if (!texture->IsSubresourceContentInitialized(view->GetBaseMipLevel(), 1,
-                                                          view->GetBaseArrayLayer(), 1) &&
-                attachmentInfo.loadOp == wgpu::LoadOp::Load) {
-                attachmentInfo.loadOp = wgpu::LoadOp::Clear;
-                attachmentInfo.clearColor = {0.0f, 0.0f, 0.0f, 0.0f};
-            }
-
             // Set color load operation.
             renderPassBuilder->SetRenderTargetBeginningAccess(
                 i, attachmentInfo.loadOp, attachmentInfo.clearColor, view->GetD3D12Format());
@@ -953,21 +947,11 @@ namespace dawn_native { namespace d3d12 {
                 resolveDestinationTexture->TransitionUsageNow(commandContext,
                                                               D3D12_RESOURCE_STATE_RESOLVE_DEST);
 
-                // Mark resolve target as initialized to prevent clearing later.
-                resolveDestinationTexture->SetIsSubresourceContentInitialized(
-                    true, resolveDestinationView->GetBaseMipLevel(), 1,
-                    resolveDestinationView->GetBaseArrayLayer(), 1);
-
                 renderPassBuilder->SetRenderTargetEndingAccessResolve(i, attachmentInfo.storeOp,
                                                                       view, resolveDestinationView);
             } else {
                 renderPassBuilder->SetRenderTargetEndingAccess(i, attachmentInfo.storeOp);
             }
-
-            // Set whether or not the texture requires initialization after the pass.
-            bool isInitialized = attachmentInfo.storeOp == wgpu::StoreOp::Store;
-            texture->SetIsSubresourceContentInitialized(isInitialized, view->GetBaseMipLevel(), 1,
-                                                        view->GetBaseArrayLayer(), 1);
         }
 
         if (renderPass->attachmentState->HasDepthStencilAttachment()) {
@@ -978,20 +962,6 @@ namespace dawn_native { namespace d3d12 {
 
             const bool hasDepth = view->GetTexture()->GetFormat().HasDepth();
             const bool hasStencil = view->GetTexture()->GetFormat().HasStencil();
-
-            // Load operations are changed to clear when the texture is uninitialized.
-            if (!view->GetTexture()->IsSubresourceContentInitialized(
-                    view->GetBaseMipLevel(), view->GetLevelCount(), view->GetBaseArrayLayer(),
-                    view->GetLayerCount())) {
-                if (hasDepth && attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
-                    attachmentInfo.clearDepth = 0.0f;
-                    attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
-                }
-                if (hasStencil && attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
-                    attachmentInfo.clearStencil = 0u;
-                    attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
-                }
-            }
 
             // Set depth/stencil load operations.
             if (hasDepth) {
@@ -1010,12 +980,6 @@ namespace dawn_native { namespace d3d12 {
                 renderPassBuilder->SetStencilNoAccess();
             }
 
-            // Set whether or not the texture requires initialization.
-            ASSERT(!hasDepth || !hasStencil ||
-                   attachmentInfo.depthStoreOp == attachmentInfo.stencilStoreOp);
-            bool isInitialized = attachmentInfo.depthStoreOp == wgpu::StoreOp::Store;
-            texture->SetIsSubresourceContentInitialized(isInitialized, view->GetBaseMipLevel(), 1,
-                                                        view->GetBaseArrayLayer(), 1);
         } else {
             renderPassBuilder->SetDepthStencilNoAccess();
         }
