@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89961eab_85e19ff7",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-09T13:17:28Z",
+      "side": 1,
+      "message": "The separation between ErrorData.h and ErrorData was so that code doesn\u0027t need to know the details of ErrorData. This is no longer useful if we include ErrorData in Error.h so both could be merged in Error.cpp/.h",
+      "revId": "3ba74f02e9c126842b677eb7a67344fd8320d37e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
