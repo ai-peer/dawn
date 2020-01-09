@@ -351,10 +351,7 @@ namespace dawn_native { namespace d3d12 {
         Device* device = ToBackend(GetDevice());
 
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            CommandRecordingContext* commandContext;
-            DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
-
-            DAWN_TRY(ClearTexture(commandContext, 0, GetNumMipLevels(), 0, GetArrayLayers(),
+            DAWN_TRY(ClearTexture(GetNumMipLevels(), 0, GetArrayLayers(),
                                   TextureBase::ClearValue::NonZero));
         }
 
@@ -550,8 +547,7 @@ namespace dawn_native { namespace d3d12 {
         return dsvDesc;
     }
 
-    MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
-                                     uint32_t baseMipLevel,
+    MaybeError Texture::ClearTexture(uint32_t baseMipLevel,
                                      uint32_t levelCount,
                                      uint32_t baseArrayLayer,
                                      uint32_t layerCount,
@@ -566,8 +562,15 @@ namespace dawn_native { namespace d3d12 {
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
         Device* device = ToBackend(GetDevice());
+
+        CommandRecordingContext* commandContext;
+        DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
+
         DescriptorHeapAllocator* descriptorHeapAllocator = device->GetDescriptorHeapAllocator();
-        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
+
+        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 0xFF;
+        float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
+
         if (GetFormat().isRenderable) {
             if (GetFormat().HasDepthOrStencil()) {
                 TransitionUsageNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE);
@@ -587,15 +590,14 @@ namespace dawn_native { namespace d3d12 {
                     clearFlags |= D3D12_CLEAR_FLAG_STENCIL;
                 }
 
-                commandList->ClearDepthStencilView(dsvHandle, clearFlags, clearColor, clearColor, 0,
-                                                   nullptr);
+                commandList->ClearDepthStencilView(dsvHandle, clearFlags, fClearColor, clearColor,
+                                                   0, nullptr);
             } else {
                 TransitionUsageNow(commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET);
                 DescriptorHeapHandle rtvHeap;
                 DAWN_TRY_ASSIGN(rtvHeap, descriptorHeapAllocator->AllocateCPUHeap(
                                              D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 1));
                 D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap.GetCPUHandle(0);
-                const float fClearColor = static_cast<float>(clearColor);
                 const float clearColorRGBA[4] = {fClearColor, fClearColor, fClearColor,
                                                  fClearColor};
 
@@ -623,9 +625,7 @@ namespace dawn_native { namespace d3d12 {
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
                             uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
-            std::fill(reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer),
-                      reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize),
-                      clearColor);
+            memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
 
             TransitionUsageNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST);
 
@@ -663,24 +663,6 @@ namespace dawn_native { namespace d3d12 {
             GetDevice()->IncrementLazyClearCountForTesting();
         }
         return {};
-    }
-
-    void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
-                                                      uint32_t baseMipLevel,
-                                                      uint32_t levelCount,
-                                                      uint32_t baseArrayLayer,
-                                                      uint32_t layerCount) {
-        if (!ToBackend(GetDevice())->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            return;
-        }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
-            // If subresource has not been initialized, clear it to black as it could contain
-            // dirty bits from recycled memory
-            GetDevice()->ConsumedError(ClearTexture(commandContext, baseMipLevel, levelCount,
-                                                    baseArrayLayer, layerCount,
-                                                    TextureBase::ClearValue::Zero));
-        }
     }
 
     TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* descriptor)
