@@ -34,6 +34,24 @@
       "revId": "3ba74f02e9c126842b677eb7a67344fd8320d37e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0f5b251_74969926",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-09T20:56:23Z",
+      "side": 1,
+      "message": "Yes that was my suggestion, I don\u0027t feel strongly, but if we keep both separated then it could make sense to fold MakeError and AppendBackTrace as proper methods (MakeError could be a static ErrorData::Create) inside ErrorData.h.\n\nError.cpp could probably be removed entirely.",
+      "parentUuid": "80cd09d2_2d1d9f40",
+      "revId": "3ba74f02e9c126842b677eb7a67344fd8320d37e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
