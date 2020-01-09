@@ -29,7 +29,7 @@ namespace dawn_wire {
         return mImpl->GetDevice();
     }
 
-    DawnProcTable WireClient::GetProcs() const {
+    DawnProcTable WireClient::GetProcs() {
         return client::GetProcs();
     }
 
