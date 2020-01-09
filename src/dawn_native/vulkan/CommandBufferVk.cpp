@@ -179,82 +179,20 @@ namespace dawn_native { namespace vulkan {
 
                 for (uint32_t i :
                      IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
-                    auto& attachmentInfo = renderPass->colorAttachments[i];
-                    TextureView* view = ToBackend(attachmentInfo.view.Get());
+                    const auto& attachmentInfo = renderPass->colorAttachments[i];
+
                     bool hasResolveTarget = attachmentInfo.resolveTarget.Get() != nullptr;
-
                     wgpu::LoadOp loadOp = attachmentInfo.loadOp;
-                    ASSERT(view->GetLayerCount() == 1);
-                    ASSERT(view->GetLevelCount() == 1);
-                    if (loadOp == wgpu::LoadOp::Load &&
-                        !view->GetTexture()->IsSubresourceContentInitialized(
-                            view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1)) {
-                        loadOp = wgpu::LoadOp::Clear;
-                    }
-
-                    if (hasResolveTarget) {
-                        // We need to set the resolve target to initialized so that it does not get
-                        // cleared later in the pipeline. The texture will be resolved from the
-                        // source color attachment, which will be correctly initialized.
-                        TextureView* resolveView = ToBackend(attachmentInfo.resolveTarget.Get());
-                        ToBackend(resolveView->GetTexture())
-                            ->SetIsSubresourceContentInitialized(
-                                true, resolveView->GetBaseMipLevel(), resolveView->GetLevelCount(),
-                                resolveView->GetBaseArrayLayer(), resolveView->GetLayerCount());
-                    }
-
-                    switch (attachmentInfo.storeOp) {
-                        case wgpu::StoreOp::Store: {
-                            view->GetTexture()->SetIsSubresourceContentInitialized(
-                                true, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
-                        } break;
-
-                        case wgpu::StoreOp::Clear: {
-                            view->GetTexture()->SetIsSubresourceContentInitialized(
-                                false, view->GetBaseMipLevel(), 1, view->GetBaseArrayLayer(), 1);
-                        } break;
-
-                        default: { UNREACHABLE(); } break;
-                    }
 
                     query.SetColor(i, attachmentInfo.view->GetFormat().format, loadOp,
                                    hasResolveTarget);
                 }
 
                 if (renderPass->attachmentState->HasDepthStencilAttachment()) {
-                    auto& attachmentInfo = renderPass->depthStencilAttachment;
-                    TextureView* view = ToBackend(attachmentInfo.view.Get());
+                    const auto& attachmentInfo = renderPass->depthStencilAttachment;
 
-                    // If the depth stencil texture has not been initialized, we want to use loadop
-                    // clear to init the contents to 0's
-                    if (!view->GetTexture()->IsSubresourceContentInitialized(
-                            view->GetBaseMipLevel(), view->GetLevelCount(),
-                            view->GetBaseArrayLayer(), view->GetLayerCount())) {
-                        if (view->GetTexture()->GetFormat().HasDepth() &&
-                            attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
-                            attachmentInfo.clearDepth = 0.0f;
-                            attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
-                        }
-                        if (view->GetTexture()->GetFormat().HasStencil() &&
-                            attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
-                            attachmentInfo.clearStencil = 0u;
-                            attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
-                        }
-                    }
-                    query.SetDepthStencil(view->GetTexture()->GetFormat().format,
+                    query.SetDepthStencil(attachmentInfo.view->GetTexture()->GetFormat().format,
                                           attachmentInfo.depthLoadOp, attachmentInfo.stencilLoadOp);
-
-                    if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Store &&
-                        attachmentInfo.stencilStoreOp == wgpu::StoreOp::Store) {
-                        view->GetTexture()->SetIsSubresourceContentInitialized(
-                            true, view->GetBaseMipLevel(), view->GetLevelCount(),
-                            view->GetBaseArrayLayer(), view->GetLayerCount());
-                    } else if (attachmentInfo.depthStoreOp == wgpu::StoreOp::Clear &&
-                               attachmentInfo.stencilStoreOp == wgpu::StoreOp::Clear) {
-                        view->GetTexture()->SetIsSubresourceContentInitialized(
-                            false, view->GetBaseMipLevel(), view->GetLevelCount(),
-                            view->GetBaseArrayLayer(), view->GetLayerCount());
-                    }
                 }
 
                 query.SetSampleCount(renderPass->attachmentState->GetSampleCount());
@@ -434,8 +372,7 @@ namespace dawn_native { namespace vulkan {
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the
                 // texture subresource has not been initialized before the render pass.
                 if (!(usages.textureUsages[i] & wgpu::TextureUsage::OutputAttachment)) {
-                    texture->EnsureSubresourceContentInitialized(recordingContext, 0,
-                                                                 texture->GetNumMipLevels(), 0,
+                    texture->EnsureSubresourceContentInitialized(0, texture->GetNumMipLevels(), 0,
                                                                  texture->GetArrayLayers());
                 }
                 texture->TransitionUsageNow(recordingContext, usages.textureUsages[i]);
@@ -470,21 +407,12 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    EnsureInitializedAsCopyDst(dst.texture.Get(), copy->copySize, dst.mipLevel,
+                                               dst.arrayLayer, dst.origin);
+
                     VkBufferImageCopy region =
                         ComputeBufferImageCopyRegion(src, dst, copy->copySize);
-                    VkImageSubresourceLayers subresource = region.imageSubresource;
 
-                    if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
-                                                      subresource.mipLevel)) {
-                        // Since texture has been overwritten, it has been "initialized"
-                        dst.texture->SetIsSubresourceContentInitialized(
-                            true, subresource.mipLevel, 1, subresource.baseArrayLayer, 1);
-                    } else {
-                        ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(recordingContext,
-                                                                  subresource.mipLevel, 1,
-                                                                  subresource.baseArrayLayer, 1);
-                    }
                     ToBackend(src.buffer)
                         ->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopySrc);
                     ToBackend(dst.texture)
@@ -504,14 +432,11 @@ namespace dawn_native { namespace vulkan {
                     auto& src = copy->source;
                     auto& dst = copy->destination;
 
+                    EnsureInitializedAsCopySrc(src.texture.Get(), copy->copySize, src.mipLevel,
+                                               src.arrayLayer, src.origin);
+
                     VkBufferImageCopy region =
                         ComputeBufferImageCopyRegion(dst, src, copy->copySize);
-                    VkImageSubresourceLayers subresource = region.imageSubresource;
-
-                    ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(recordingContext,
-                                                              subresource.mipLevel, 1,
-                                                              subresource.baseArrayLayer, 1);
 
                     ToBackend(src.texture)
                         ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc);
@@ -531,19 +456,10 @@ namespace dawn_native { namespace vulkan {
                     TextureCopy& src = copy->source;
                     TextureCopy& dst = copy->destination;
 
-                    ToBackend(src.texture)
-                        ->EnsureSubresourceContentInitialized(recordingContext, src.mipLevel, 1,
-                                                              src.arrayLayer, 1);
-                    if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
-                                                      dst.mipLevel)) {
-                        // Since destination texture has been overwritten, it has been "initialized"
-                        dst.texture->SetIsSubresourceContentInitialized(true, dst.mipLevel, 1,
-                                                                        dst.arrayLayer, 1);
-                    } else {
-                        ToBackend(dst.texture)
-                            ->EnsureSubresourceContentInitialized(recordingContext, dst.mipLevel, 1,
-                                                                  dst.arrayLayer, 1);
-                    }
+                    EnsureInitializedAsCopySrc(src.texture.Get(), copy->copySize, src.mipLevel,
+                                               src.arrayLayer, src.origin);
+                    EnsureInitializedAsCopyDst(dst.texture.Get(), copy->copySize, dst.mipLevel,
+                                               dst.arrayLayer, dst.origin);
 
                     ToBackend(src.texture)
                         ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc);
@@ -588,6 +504,8 @@ namespace dawn_native { namespace vulkan {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
                     TransitionForPass(recordingContext, passResourceUsages[nextPassNumber]);
+
+                    LazyClearRenderPassAttachments(cmd);
                     DAWN_TRY(RecordRenderPass(recordingContext, cmd));
 
                     nextPassNumber++;

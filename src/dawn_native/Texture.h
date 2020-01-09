@@ -44,7 +44,7 @@ namespace dawn_native {
     class TextureBase : public ObjectBase {
       public:
         enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
-        enum class ClearValue { Zero, NonZero };
+        enum class ClearValue { Zero, OutputAttachmentZero, NonZero };
         TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state);
 
         static TextureBase* MakeError(DeviceBase* device);
@@ -67,6 +67,11 @@ namespace dawn_native {
                                                 uint32_t levelCount,
                                                 uint32_t baseArrayLayer,
                                                 uint32_t layerCount);
+        void EnsureSubresourceContentInitialized(uint32_t baseMipLevel,
+                                                 uint32_t levelCount,
+                                                 uint32_t baseArrayLayer,
+                                                 uint32_t layerCount,
+                                                 ClearValue clearValue = ClearValue::Zero);
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
@@ -90,6 +95,12 @@ namespace dawn_native {
       private:
         TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag);
         virtual void DestroyImpl();
+
+        virtual MaybeError ClearTexture(uint32_t baseMipLevel,
+                                        uint32_t levelCount,
+                                        uint32_t baseArrayLayer,
+                                        uint32_t layerCount,
+                                        ClearValue clearValue);
 
         MaybeError ValidateDestroy() const;
         wgpu::TextureDimension mDimension;
