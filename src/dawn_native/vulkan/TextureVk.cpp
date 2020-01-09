@@ -476,8 +476,7 @@ namespace dawn_native { namespace vulkan {
             "BindImageMemory"));
 
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(), 0,
-                                  GetNumMipLevels(), 0, GetArrayLayers(),
+            DAWN_TRY(ClearTexture(0, GetNumMipLevels(), 0, GetArrayLayers(),
                                   TextureBase::ClearValue::NonZero));
         }
 
@@ -670,32 +669,39 @@ namespace dawn_native { namespace vulkan {
         mLastExternalState = mExternalState;
     }
 
-    MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
-                                     uint32_t baseMipLevel,
+    MaybeError Texture::ClearTexture(uint32_t baseMipLevel,
                                      uint32_t levelCount,
                                      uint32_t baseArrayLayer,
                                      uint32_t layerCount,
                                      TextureBase::ClearValue clearValue) {
+        // TODO(jiawei.shao@intel.com): initialize textures in BC formats with Buffer-to-Texture
+        // copies.
+        if (GetFormat().isCompressed) {
+            return {};
+        }
+
         Device* device = ToBackend(GetDevice());
+        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+
         VkImageSubresourceRange range = {};
         range.aspectMask = GetVkAspectMask();
         range.baseMipLevel = baseMipLevel;
         range.levelCount = levelCount;
         range.baseArrayLayer = baseArrayLayer;
         range.layerCount = layerCount;
-        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
+        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 0xFF;
+        float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
 
         TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst);
         if (GetFormat().isRenderable) {
             if (GetFormat().HasDepthOrStencil()) {
                 VkClearDepthStencilValue clearDepthStencilValue[1];
-                clearDepthStencilValue[0].depth = clearColor;
+                clearDepthStencilValue[0].depth = fClearColor;
                 clearDepthStencilValue[0].stencil = clearColor;
                 device->fn.CmdClearDepthStencilImage(recordingContext->commandBuffer, GetHandle(),
                                                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                                                      clearDepthStencilValue, 1, &range);
             } else {
-                float fClearColor = static_cast<float>(clearColor);
                 VkClearColorValue clearColorValue = {
                     {fClearColor, fClearColor, fClearColor, fClearColor}};
                 device->fn.CmdClearColorImage(recordingContext->commandBuffer, GetHandle(),
@@ -717,9 +723,7 @@ namespace dawn_native { namespace vulkan {
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
                             uploader->Allocate(bufferSize, device->GetPendingCommandSerial()));
-            std::fill(reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer),
-                      reinterpret_cast<uint32_t*>(uploadHandle.mappedBuffer + bufferSize),
-                      clearColor);
+            memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
 
             // compute the buffer image copy to set the clear region of entire texture
             dawn_native::BufferCopy bufferCopy;
@@ -755,30 +759,6 @@ namespace dawn_native { namespace vulkan {
             device->IncrementLazyClearCountForTesting();
         }
         return {};
-    }
-
-    void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* recordingContext,
-                                                      uint32_t baseMipLevel,
-                                                      uint32_t levelCount,
-                                                      uint32_t baseArrayLayer,
-                                                      uint32_t layerCount) {
-        if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            return;
-        }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
-            // TODO(jiawei.shao@intel.com): initialize textures in BC formats with Buffer-to-Texture
-            // copies.
-            if (GetFormat().isCompressed) {
-                return;
-            }
-
-            // If subresource has not been initialized, clear it to black as it could contain dirty
-            // bits from recycled memory
-            GetDevice()->ConsumedError(ClearTexture(recordingContext, baseMipLevel, levelCount,
-                                                    baseArrayLayer, layerCount,
-                                                    TextureBase::ClearValue::Zero));
-        }
     }
 
     // static
