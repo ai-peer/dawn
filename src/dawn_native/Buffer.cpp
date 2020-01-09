@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
+#include "dawn_native/ErrorData.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <cstdio>
@@ -236,8 +237,16 @@ namespace dawn_native {
     }
 
     void BufferBase::MapReadAsync(WGPUBufferMapReadCallback callback, void* userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapRead))) {
-            callback(WGPUBufferMapAsyncStatus_Error, nullptr, 0, userdata);
+        MaybeError validateMapError = ValidateMap(wgpu::BufferUsage::MapRead);
+        if (validateMapError.IsError()) {
+            WGPUBufferMapAsyncStatus status;
+            if (validateMapError.AcquireError()->GetType() == wgpu::ErrorType::DeviceLost) {
+                status = WGPUBufferMapAsyncStatus_DeviceLost;
+            } else {
+                status = WGPUBufferMapAsyncStatus_Error;
+            }
+            callback(status, nullptr, 0, userdata);
+            GetDevice()->ConsumedError(std::move(validateMapError));
             return;
         }
         ASSERT(!IsError());
@@ -272,8 +281,16 @@ namespace dawn_native {
     }
 
     void BufferBase::MapWriteAsync(WGPUBufferMapWriteCallback callback, void* userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapWrite))) {
-            callback(WGPUBufferMapAsyncStatus_Error, nullptr, 0, userdata);
+        MaybeError validateMapError = ValidateMap(wgpu::BufferUsage::MapWrite);
+        if (validateMapError.IsError()) {
+            WGPUBufferMapAsyncStatus status;
+            if (validateMapError.AcquireError()->GetType() == wgpu::ErrorType::DeviceLost) {
+                status = WGPUBufferMapAsyncStatus_DeviceLost;
+            } else {
+                status = WGPUBufferMapAsyncStatus_Error;
+            }
+            callback(status, nullptr, 0, userdata);
+            GetDevice()->ConsumedError(std::move(validateMapError));
             return;
         }
         ASSERT(!IsError());
