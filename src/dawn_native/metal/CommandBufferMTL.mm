@@ -442,25 +442,6 @@ namespace dawn_native { namespace metal {
             return copy;
         }
 
-        void EnsureSourceTextureInitialized(Texture* texture,
-                                            const Extent3D& size,
-                                            const TextureCopy& src) {
-            // TODO(crbug.com/dawn/145): Specify multiple layers based on |size|
-            texture->EnsureSubresourceContentInitialized(src.mipLevel, 1, src.arrayLayer, 1);
-        }
-
-        void EnsureDestinationTextureInitialized(Texture* texture,
-                                                 const Extent3D& size,
-                                                 const TextureCopy& dst) {
-            // TODO(crbug.com/dawn/145): Specify multiple layers based on |size|
-            if (IsCompleteSubresourceCopiedTo(texture, size, dst.mipLevel)) {
-                texture->SetIsSubresourceContentInitialized(true, dst.mipLevel, 1, dst.arrayLayer,
-                                                            1);
-            } else {
-                texture->EnsureSubresourceContentInitialized(dst.mipLevel, 1, dst.arrayLayer, 1);
-            }
-        }
-
         // Keeps track of the dirty bind groups so they can be lazily applied when we know the
         // pipeline state.
         // Bind groups may be inherited because bind groups are packed in the buffer /
@@ -733,7 +714,9 @@ namespace dawn_native { namespace metal {
                     Buffer* buffer = ToBackend(src.buffer.Get());
                     Texture* texture = ToBackend(dst.texture.Get());
 
-                    EnsureDestinationTextureInitialized(texture, copy->copySize, copy->destination);
+                    EnsureInitializedAsCopyDst(texture, copy->copySize, copy->destination.mipLevel,
+                                               copy->destination.arrayLayer,
+                                               copy->destination.origin);
 
                     Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(dst.mipLevel);
                     TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
@@ -762,7 +745,8 @@ namespace dawn_native { namespace metal {
                     Texture* texture = ToBackend(src.texture.Get());
                     Buffer* buffer = ToBackend(dst.buffer.Get());
 
-                    EnsureSourceTextureInitialized(texture, copy->copySize, copy->source);
+                    EnsureInitializedAsCopySrc(texture, copy->copySize, copy->source.mipLevel,
+                                               copy->source.arrayLayer, copy->source.origin);
 
                     Extent3D virtualSizeAtLevel = texture->GetMipLevelVirtualSize(src.mipLevel);
                     TextureBufferCopySplit splittedCopies = ComputeTextureBufferCopySplit(
@@ -789,9 +773,11 @@ namespace dawn_native { namespace metal {
                     Texture* srcTexture = ToBackend(copy->source.texture.Get());
                     Texture* dstTexture = ToBackend(copy->destination.texture.Get());
 
-                    EnsureSourceTextureInitialized(srcTexture, copy->copySize, copy->source);
-                    EnsureDestinationTextureInitialized(dstTexture, copy->copySize,
-                                                        copy->destination);
+                    EnsureInitializedAsCopySrc(srcTexture, copy->copySize, copy->source.mipLevel,
+                                               copy->source.arrayLayer, copy->source.origin);
+                    EnsureInitializedAsCopyDst(
+                        dstTexture, copy->copySize, copy->destination.mipLevel,
+                        copy->destination.arrayLayer, copy->destination.origin);
 
                     [commandContext->EnsureBlit()
                           copyFromTexture:srcTexture->GetMTLTexture()
