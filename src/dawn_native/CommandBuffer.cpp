@@ -138,4 +138,28 @@ namespace dawn_native {
         }
     }
 
+    void EnsureInitializedAsCopySrc(TextureBase* texture,
+                                    const Extent3D& size,
+                                    uint32_t mipLevel,
+                                    uint32_t arrayLayer,
+                                    const Origin3D& origin) {
+        // TODO(crbug.com/dawn/145): Specify multiple layers based on |size|
+        ASSERT(origin.z == 0 && size.depth == 1);
+        texture->EnsureSubresourceContentInitialized(mipLevel, 1, arrayLayer, 1);
+    }
+
+    void EnsureInitializedAsCopyDst(TextureBase* texture,
+                                    const Extent3D& size,
+                                    uint32_t mipLevel,
+                                    uint32_t arrayLayer,
+                                    const Origin3D& origin) {
+        // TODO(crbug.com/dawn/145): Specify multiple layers based on |size|
+        ASSERT(origin.z == 0 && size.depth == 1);
+        if (IsCompleteSubresourceCopiedTo(texture, size, mipLevel)) {
+            texture->SetIsSubresourceContentInitialized(true, mipLevel, 1, arrayLayer, 1);
+        } else {
+            texture->EnsureSubresourceContentInitialized(mipLevel, 1, arrayLayer, 1);
+        }
+    }
+
 }  // namespace dawn_native
