@@ -21,20 +21,6 @@
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
-#if defined(DAWN_PLATFORM_LINUX)
-#    if defined(DAWN_PLATFORM_ANDROID)
-const char kVulkanLibName[] = "libvulkan.so";
-#    else
-const char kVulkanLibName[] = "libvulkan.so.1";
-#    endif
-#elif defined(DAWN_PLATFORM_WINDOWS)
-const char kVulkanLibName[] = "vulkan-1.dll";
-#elif defined(DAWN_PLATFORM_FUCHSIA)
-const char kVulkanLibName[] = "libvulkan.so";
-#else
-#    error "Unimplemented Vulkan backend platform"
-#endif
-
 namespace dawn_native { namespace vulkan {
 
     Backend::Backend(InstanceBase* instance) : BackendConnection(instance, BackendType::Vulkan) {
@@ -81,12 +67,6 @@ namespace dawn_native { namespace vulkan {
             return DAWN_DEVICE_LOST_ERROR("Couldn't set VK_ICD_FILENAMES");
         }
 #endif
-
-        if (!mVulkanLib.Open(kVulkanLibName)) {
-            return DAWN_DEVICE_LOST_ERROR(std::string("Couldn't open ") + kVulkanLibName);
-        }
-
-        DAWN_TRY(mFunctions.LoadGlobalProcs(mVulkanLib));
 
         DAWN_TRY_ASSIGN(mGlobalInfo, GatherGlobalInfo(*this));
 
@@ -225,8 +205,8 @@ namespace dawn_native { namespace vulkan {
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionsToRequest.size());
         createInfo.ppEnabledExtensionNames = extensionsToRequest.data();
 
-        DAWN_TRY(CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
-                                "vkCreateInstance"));
+        DAWN_TRY(
+            CheckVkSuccess(vkCreateInstance(&createInfo, nullptr, &mInstance), "vkCreateInstance"));
 
         return usedKnobs;
     }

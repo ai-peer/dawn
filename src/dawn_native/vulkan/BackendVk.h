@@ -50,7 +50,6 @@ namespace dawn_native { namespace vulkan {
                               const char* pMessage,
                               void* pUserdata);
 
-        DynamicLib mVulkanLib;
         VulkanGlobalInfo mGlobalInfo = {};
         VkInstance mInstance = VK_NULL_HANDLE;
         VulkanFunctions mFunctions;

@@ -36,13 +36,13 @@ namespace dawn_native { namespace vulkan {
                                          std::vector<VkExtensionProperties>* extensions) {
             uint32_t count = 0;
             VkResult result = VkResult::WrapUnsafe(
-                vkFunctions.EnumerateInstanceExtensionProperties(layerName, &count, nullptr));
+                vkEnumerateInstanceExtensionProperties(layerName, &count, nullptr));
             if (result != VK_SUCCESS && result != VK_INCOMPLETE) {
                 return false;
             }
             extensions->resize(count);
-            result = VkResult::WrapUnsafe(vkFunctions.EnumerateInstanceExtensionProperties(
-                layerName, &count, extensions->data()));
+            result = VkResult::WrapUnsafe(
+                vkEnumerateInstanceExtensionProperties(layerName, &count, extensions->data()));
             return (result == VK_SUCCESS);
         }
 
@@ -87,7 +87,7 @@ namespace dawn_native { namespace vulkan {
         {
             uint32_t count = 0;
             VkResult result =
-                VkResult::WrapUnsafe(vkFunctions.EnumerateInstanceLayerProperties(&count, nullptr));
+                VkResult::WrapUnsafe(vkEnumerateInstanceLayerProperties(&count, nullptr));
             // From the Vulkan spec result should be success if there are 0 layers,
             // incomplete otherwise. This means that both values represent a success.
             // This is the same for all Enumarte functions
@@ -96,9 +96,8 @@ namespace dawn_native { namespace vulkan {
             }
 
             info.layers.resize(count);
-            DAWN_TRY(CheckVkSuccess(
-                vkFunctions.EnumerateInstanceLayerProperties(&count, info.layers.data()),
-                "vkEnumerateInstanceLayerProperties"));
+            DAWN_TRY(CheckVkSuccess(vkEnumerateInstanceLayerProperties(&count, info.layers.data()),
+                                    "vkEnumerateInstanceLayerProperties"));
 
             for (const auto& layer : info.layers) {
                 if (IsLayerName(layer, kLayerNameLunargStandardValidation)) {
@@ -183,9 +182,7 @@ namespace dawn_native { namespace vulkan {
         // Gather info on available API version
         {
             uint32_t supportedAPIVersion = VK_MAKE_VERSION(1, 0, 0);
-            if (vkFunctions.EnumerateInstanceVersion) {
-                vkFunctions.EnumerateInstanceVersion(&supportedAPIVersion);
-            }
+            vkEnumerateInstanceVersion(&supportedAPIVersion);
 
             // Use Vulkan 1.1 if it's available.
             info.apiVersion = (supportedAPIVersion >= VK_MAKE_VERSION(1, 1, 0))

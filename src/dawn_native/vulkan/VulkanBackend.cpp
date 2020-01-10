@@ -36,7 +36,7 @@ namespace dawn_native { namespace vulkan {
     DAWN_NATIVE_EXPORT PFN_vkVoidFunction GetInstanceProcAddr(WGPUDevice device,
                                                               const char* pName) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
-        return (*backendDevice->fn.GetInstanceProcAddr)(backendDevice->GetVkInstance(), pName);
+        return (*vkGetInstanceProcAddr)(backendDevice->GetVkInstance(), pName);
     }
 
     // Explicitly export this function because it uses the "native" type for surfaces while the

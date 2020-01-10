@@ -440,6 +440,10 @@ source_set("libdawn_native_sources") {
 
   if (dawn_enable_vulkan) {
     public_deps += [ "third_party:vulkan_headers" ]
+    if (!is_android && !is_fuchsia) {
+      deps += [ "third_party/vulkan-loader/src:libvulkan" ]
+    }
+
     sources += [
       "src/dawn_native/vulkan/AdapterVk.cpp",
       "src/dawn_native/vulkan/AdapterVk.h",
