@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f4987f8_c5eb29f0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-10T21:47:17Z",
+      "side": 1,
+      "message": "nit: Prefer to match naming and casing to other conversion functions: \n(although the ones in this file are not a good example).\n\nex.) D3D12_RESOURCE_FLAGS D3D12ResourceFlags(wgpu::BufferUsage usage);\n\nperhaps)\n     wgpu::TextureViewDimension WGPUTextureViewDimension(shaderc_spvc_texture_view_dimension dim);",
+      "range": {
+        "startLine": 69,
+        "startChar": 35,
+        "endLine": 69,
+        "endChar": 70
+      },
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19104b62_3567ac33",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-10T21:47:17Z",
+      "side": 1,
+      "message": "Is this not an error condition where we can do GetDevice()-\u003eHandleError(...) ?\n(for now. This function will probably return MaybeError in the future)",
+      "range": {
+        "startLine": 254,
+        "startChar": 12,
+        "endLine": 254,
+        "endChar": 71
+      },
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
