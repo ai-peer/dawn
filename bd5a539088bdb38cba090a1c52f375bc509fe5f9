@@ -59,6 +59,75 @@
     },
     {
       "key": {
+        "uuid": "cbd0e454_b2e34f66",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "I do not think this #include is necessary in the header file. You should just be able to forward declare the ResourceHeapAllocation class.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3daa7e00_70cb604e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "If the user has multiple Windows open with WebGPU content, there will be multiple Dawn devices created, all of which share the same GPU.\n\nMight make sense for the residency manager to be more global in nature, such as per adapter?, instead of per-Dawn device.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 69
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24435f34_fa56cb4f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "As part of a future change, we should hook ourselves up to IDXGIAdapter3::RegisterVideoMemoryBudgetChangeNotificationEvent and proactively evict things, even if there is no WebGPU activity happening. \n\nPolling on TickImpl is a fine stopgap.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13b44da2_fcf3cebb",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 3
@@ -271,6 +340,47 @@
     },
     {
       "key": {
+        "uuid": "19f21f19_ad02337f",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "+1. In the declaration for the constant, please in include a comment describing the rationale for choosing the number.",
+      "parentUuid": "33c12707_cd62d53a",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00e36ec8_5da2b91e",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "I am expecting EnsureCanMakeResident to be a hot path. Can we factor the multiplication by 0.8 into videoMemoryInfo-\u003edawnBudget ahead of time so we can avoid doing the multiplication on every call to EnsureCanMakeResident?",
+      "range": {
+        "startLine": 107,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 72
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "569bf1c9_bf3d90c4",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 3
@@ -288,6 +398,29 @@
     },
     {
       "key": {
+        "uuid": "407ef35c_3cd1878b",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "We should bubble up the error returned by Evict to the caller.",
+      "range": {
+        "startLine": 123,
+        "startChar": 16,
+        "endLine": 123,
+        "endChar": 83
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68409727_6398e50b",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
         "patchSetId": 3
@@ -299,6 +432,75 @@
       "writtenOn": "2020-01-09T20:17:50Z",
       "side": 1,
       "message": "Suggest to invalidate the heap\u0027s entry after removal. That way, should Evict(...) get called twice, it doesn\u0027t stomp over memory.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e45b35c0_93374df0",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "In the suballocated case, how do we avoid evicting the heap multiple times for each suballocation?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 0
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4279b19d_13ae77a0",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "Please reserve the m prefix for member variables instead of parameters.",
+      "range": {
+        "startLine": 203,
+        "startChar": 1,
+        "endLine": 203,
+        "endChar": 68
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "450062e8_4be51ce2",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "Not every item in the vector is a heap. Some are sub-allocations inside of a heap. Please rename to makeResidentList or something similar.",
+      "range": {
+        "startLine": 203,
+        "startChar": 52,
+        "endLine": 203,
+        "endChar": 65
+      },
       "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -339,6 +541,98 @@
     },
     {
       "key": {
+        "uuid": "e581b437_2857edb6",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "Please make this member variable be private with a public function that does the right operations on the list entry.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 30
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8edca11b_a3a02793",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "Instead of storing a mIsResident flag, can we determine the same information by seeing either the list entry has front or back pointers?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82b576d7_b0eefbd9",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "Please place LRUEntry and LRUCache into a separate header/cpp file.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 0
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df7e756b_d7eb5852",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "This class is complicated enough that it deserves a summary comment describing its purpose and how it is expected to be called.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 28
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b6c6f1bf_6ceff643",
         "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
         "patchSetId": 3
@@ -350,6 +644,52 @@
       "writtenOn": "2020-01-09T20:17:50Z",
       "side": 1,
       "message": "Odd to see these overloads - the issue is the memory allocator directly stores Heaps instead of ResourceAllocations. The latter can represent both resources types. Perhaps enough of a case to go back and consider simplifying.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9069d42d_9ad81305",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "To make it more clear what is being tracked, please rename these to TrackResidentAllocation.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c29578e2_d588c721",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "This mPendingHeaps member variable seems unused.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 59
+      },
       "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -384,6 +724,24 @@
       "writtenOn": "2020-01-09T20:17:50Z",
       "side": 1,
       "message": "Not a fan of exposing LRU stuff to `ResourceHeapAllocation`, these should never be used outside the ResidencyManager.",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6841cb4_235799e2",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-10T20:59:06Z",
+      "side": 1,
+      "message": "One way to avoid O(N) deletions and lookups in the list is to have the list entries themselves be in ResourceHeapAllocation directly. That means going a step further and having LRUEntry be a straight up member of ResourceHeapAllocation. You can use CONTAINING_RECORD to get back to ResourceHeapAllocation and access mResource from there. No need to store a duplicate pointer in LRUEntry.  \n\nTo delete yourself from the list, you simply de-link yourself from it in your destructor. No O(N) lookups required. To find out whether a ResourceHeapAllocation is in the list, check whether the forward and backward pointers are non-nullptr. No O(N) lookups required.",
+      "parentUuid": "6db15a61_a7c5d4c5",
       "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
