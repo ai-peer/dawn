@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c035b884_e77a62d3",
+        "filename": "examples/SampleUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-10T12:42:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "631e3c20_14565821",
+      "revId": "6c7be2282cee9a52497bd83b4b811b538b065848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9d736da_3b179797",
         "filename": "src/include/dawn_native/DawnNative.h",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "6c7be2282cee9a52497bd83b4b811b538b065848",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9125bc13_ba7cbc3b",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-10T12:42:09Z",
+      "side": 1,
+      "message": "Yeah that would produce errors :/",
+      "parentUuid": "a9d736da_3b179797",
+      "revId": "6c7be2282cee9a52497bd83b4b811b538b065848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
