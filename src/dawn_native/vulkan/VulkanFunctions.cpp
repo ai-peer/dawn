@@ -19,32 +19,10 @@
 
 namespace dawn_native { namespace vulkan {
 
-#define GET_GLOBAL_PROC(name)                                                          \
-    name = reinterpret_cast<decltype(name)>(GetInstanceProcAddr(nullptr, "vk" #name)); \
-    if (name == nullptr) {                                                             \
-        return DAWN_DEVICE_LOST_ERROR(std::string("Couldn't get proc vk") + #name);    \
-    }
-
-    MaybeError VulkanFunctions::LoadGlobalProcs(const DynamicLib& vulkanLib) {
-        if (!vulkanLib.GetProc(&GetInstanceProcAddr, "vkGetInstanceProcAddr")) {
-            return DAWN_DEVICE_LOST_ERROR("Couldn't get vkGetInstanceProcAddr");
-        }
-
-        GET_GLOBAL_PROC(CreateInstance);
-        GET_GLOBAL_PROC(EnumerateInstanceExtensionProperties);
-        GET_GLOBAL_PROC(EnumerateInstanceLayerProperties);
-
-        // Is not available in Vulkan 1.0, so allow nullptr
-        EnumerateInstanceVersion = reinterpret_cast<decltype(EnumerateInstanceVersion)>(
-            GetInstanceProcAddr(nullptr, "vkEnumerateInstanceVersion"));
-
-        return {};
-    }
-
-#define GET_INSTANCE_PROC(name)                                                         \
-    name = reinterpret_cast<decltype(name)>(GetInstanceProcAddr(instance, "vk" #name)); \
-    if (name == nullptr) {                                                              \
-        return DAWN_DEVICE_LOST_ERROR(std::string("Couldn't get proc vk") + #name);     \
+#define GET_INSTANCE_PROC(name)                                                           \
+    name = reinterpret_cast<decltype(name)>(vkGetInstanceProcAddr(instance, "vk" #name)); \
+    if (name == nullptr) {                                                                \
+        return DAWN_DEVICE_LOST_ERROR(std::string("Couldn't get proc vk") + #name);       \
     }
 
     MaybeError VulkanFunctions::LoadInstanceProcs(VkInstance instance,

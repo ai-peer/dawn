@@ -29,26 +29,11 @@ namespace dawn_native { namespace vulkan {
     // Stores the Vulkan entry points. Also loads them from the dynamic library
     // and the vkGet*ProcAddress entry points.
     struct VulkanFunctions {
-        MaybeError LoadGlobalProcs(const DynamicLib& vulkanLib);
         MaybeError LoadInstanceProcs(VkInstance instance, const VulkanGlobalInfo& globalInfo);
         MaybeError LoadDeviceProcs(VkDevice device, const VulkanDeviceInfo& deviceInfo);
 
-        // ---------- Global procs
-
-        // Initial proc from which we can get all the others
-        PFN_vkGetInstanceProcAddr GetInstanceProcAddr = nullptr;
-
-        PFN_vkCreateInstance CreateInstance = nullptr;
-        PFN_vkEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties = nullptr;
-        PFN_vkEnumerateInstanceLayerProperties EnumerateInstanceLayerProperties = nullptr;
-        // DestroyInstance isn't technically a global proc but we want to be able to use it
-        // before querying the instance procs in case we need to error out during initialization.
-        PFN_vkDestroyInstance DestroyInstance = nullptr;
-
-        // Core Vulkan 1.1
-        PFN_vkEnumerateInstanceVersion EnumerateInstanceVersion = nullptr;
-
         // ---------- Instance procs
+        PFN_vkDestroyInstance DestroyInstance = nullptr;
 
         // Core Vulkan 1.0
         PFN_vkCreateDevice CreateDevice = nullptr;
