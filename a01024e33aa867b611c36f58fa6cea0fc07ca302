@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d41920a_43dbdee7",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-10T04:57:26Z",
+      "side": 1,
+      "message": "this is uint32_t, should initialize it with an integer",
+      "range": {
+        "startLine": 408,
+        "startChar": 57,
+        "endLine": 408,
+        "endChar": 69
+      },
+      "revId": "a01024e33aa867b611c36f58fa6cea0fc07ca302",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83fa9a7d_73419062",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-10T04:57:26Z",
+      "side": 1,
+      "message": "In the Metal feature set tables, \"Maximum number of color render targets per render pass descriptor\" is only 8 (4 on MTLGPUFamilyApple1).",
+      "revId": "a01024e33aa867b611c36f58fa6cea0fc07ca302",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
