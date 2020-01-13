@@ -51,6 +51,29 @@
       "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cb112b3_8efdb95f",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-13T23:30:53Z",
+      "side": 1,
+      "message": "nit: Unspported -\u003e Unsupported",
+      "range": {
+        "startLine": 376,
+        "startChar": 25,
+        "endLine": 376,
+        "endChar": 35
+      },
+      "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
