@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "703dea24_e1f3503c",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T11:07:39Z",
+      "side": 1,
+      "message": "Also values here need to match what\u0027s in the WebIDL. This CL doesn\u0027t match what\u0027s in the readonly-storage-texture PR.",
+      "parentUuid": "67e8cdde_ac784c31",
+      "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5989fdcc_54912250",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 2
