@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0b4f6242_1a42beff",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-13T19:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67c291d4_42735bf9",
+      "range": {
+        "startLine": 69,
+        "startChar": 35,
+        "endLine": 69,
+        "endChar": 70
+      },
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ffcd860_336135fd",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -63,6 +87,24 @@
       "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efa4a224_cd131a96",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-13T19:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ffcd860_336135fd",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -83,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "3ffcea2b_8838f64a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-13T19:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00804a3c_d627191c",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a821d86_9a93a794",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -100,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "e994f93f_804979ea",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-13T19:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a821d86_9a93a794",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b7928ed_8d70b3c5",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -114,6 +192,24 @@
       "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1fadd6a_1fcdb128",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-13T19:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b7928ed_8d70b3c5",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -161,6 +257,30 @@
       "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69ee9cf7_8e45a0e0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-13T19:59:10Z",
+      "side": 1,
+      "message": "I have changed all the various do something smarts to call HandleError and then return, or some equivalent.\n\nI have an outstanding bug to refactor this entire call path to return errors, https://bugs.chromium.org/p/dawn/issues/detail?id\u003d274, that I will do in a follow CL",
+      "parentUuid": "503e1a89_16f0f62d",
+      "range": {
+        "startLine": 254,
+        "startChar": 12,
+        "endLine": 254,
+        "endChar": 71
+      },
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
