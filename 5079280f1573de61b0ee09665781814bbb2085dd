@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67e8cdde_ac784c31",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T11:01:49Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need an external facing readonly usage. It would just be implied by storage itself. See how readonly storage buffer is handled.",
+      "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5989fdcc_54912250",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T11:01:49Z",
+      "side": 1,
+      "message": "nit: supports instead of support",
+      "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
