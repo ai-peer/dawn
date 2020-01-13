@@ -25,6 +25,98 @@
     },
     {
       "key": {
+        "uuid": "67c291d4_42735bf9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T13:00:54Z",
+      "side": 1,
+      "message": "WGPUTextureViewDimension will conflict with the C header type. Maybe ToWGPUTextureViewDimension?",
+      "parentUuid": "6f4987f8_c5eb29f0",
+      "range": {
+        "startLine": 69,
+        "startChar": 35,
+        "endLine": 69,
+        "endChar": 70
+      },
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ffcd860_336135fd",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T13:00:54Z",
+      "side": 1,
+      "message": "[1] nit: the extra indentation is pretty large and makes for a big diff. How about having:\n\n  if (device-\u003eIsToggleEnable(Toggle::UseSpvc)) {\n    ExtractSpirvInfoWithSPVC(compiler);\n  } else {\n    ExtractSpirvInfoWithSpirvCross(compiler);\n  }\n\nthen the definition of ExtractSpirvInfoWithSpirvCross and then ExtractSpirvInfoWithSPVC.\n\nIt would help the diff engines figure out that ExtractSpirvInfoWithSpirvCross is the old code and tag only new SPVC code as new.",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00804a3c_d627191c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T13:00:54Z",
+      "side": 1,
+      "message": "u-nit: we could have a CheckSPVSStatus function similar to CheckVkResult.",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a821d86_9a93a794",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T13:00:54Z",
+      "side": 1,
+      "message": "u-nit: we could have a helper function for this too.",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b7928ed_8d70b3c5",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T13:00:54Z",
+      "side": 1,
+      "message": "nit: TODO that this should be checked by spirv-val instead. Push constants are forbidden by the execution environment.",
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "19104b62_3567ac33",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -36,6 +128,30 @@
       "writtenOn": "2020-01-10T21:47:17Z",
       "side": 1,
       "message": "Is this not an error condition where we can do GetDevice()-\u003eHandleError(...) ?\n(for now. This function will probably return MaybeError in the future)",
+      "range": {
+        "startLine": 254,
+        "startChar": 12,
+        "endLine": 254,
+        "endChar": 71
+      },
+      "revId": "7073c701884e7680db44526d19fcf2d3763617ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "503e1a89_16f0f62d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-13T13:00:54Z",
+      "side": 1,
+      "message": "With the split between functions suggested in [1] the HandleError can be done in ExtractSpirvInfo and ExtractSpirvInfoSPVC could return a MaybeError. +1 about fixing ExtractSpirvInfo to return MaybeError eventually.",
+      "parentUuid": "19104b62_3567ac33",
       "range": {
         "startLine": 254,
         "startChar": 12,
