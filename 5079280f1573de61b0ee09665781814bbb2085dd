@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c34aa898_4200dcb1",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-01-14T02:46:52Z",
+      "side": 1,
+      "message": "Done\nI have removed \"readonly storage\" in this CL. We can add it back in the future when necessary.",
+      "parentUuid": "703dea24_e1f3503c",
+      "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5989fdcc_54912250",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 2
@@ -51,6 +69,24 @@
       "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "245affbe_52683ffe",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-01-14T02:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5989fdcc_54912250",
+      "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -74,6 +110,30 @@
       "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4698ddca_ef1935c7",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-01-14T02:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cb112b3_8efdb95f",
+      "range": {
+        "startLine": 376,
+        "startChar": 25,
+        "endLine": 376,
+        "endChar": 35
+      },
+      "revId": "5079280f1573de61b0ee09665781814bbb2085dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
