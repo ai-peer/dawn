@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c9e550b_076421b5",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T22:18:29Z",
+      "side": 1,
+      "message": "Do we test this (i.e. with a resource with more than 8 subresources)?",
+      "revId": "2f1c8f111111824930f48b492e2c0303ef7c8815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
