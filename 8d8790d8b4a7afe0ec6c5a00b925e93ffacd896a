@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c16166f7_1808cbf3",
+        "filename": "generator/templates/dawn_native/wgpu_structs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T20:59:46Z",
+      "side": 1,
+      "message": "nit: wrap to 100 columns",
+      "revId": "8d8790d8b4a7afe0ec6c5a00b925e93ffacd896a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "482d2123_da17672c",
+        "filename": "generator/templates/dawn_native/wgpu_structs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T20:59:46Z",
+      "side": 1,
+      "message": "nit: \u003d nullptr?",
+      "revId": "8d8790d8b4a7afe0ec6c5a00b925e93ffacd896a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d26effc_4bb0019a",
+        "filename": "generator/templates/webgpu_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T20:59:46Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8d8790d8b4a7afe0ec6c5a00b925e93ffacd896a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
