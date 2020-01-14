@@ -748,6 +748,24 @@
     },
     {
       "key": {
+        "uuid": "ecfea1fa_0b861c9b",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-14T18:09:45Z",
+      "side": 1,
+      "message": "+1 or maybe `EvictableResourceHeapAllocation : ResourceHeapAllocation`.",
+      "parentUuid": "a6841cb4_235799e2",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46facc95_fb37bba6",
         "filename": "src/tests/unittests/d3d12/LRUTests.cpp",
         "patchSetId": 3
