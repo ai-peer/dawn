@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efcbc4ed_87e7f7a0",
+        "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T21:53:19Z",
+      "side": 1,
+      "message": "nit: defined()",
+      "revId": "1fac08e50bb41843092b0c7fe3ea2daeab6b1e5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a181928e_d534352d",
+        "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T21:53:19Z",
+      "side": 1,
+      "message": "\"works\"",
+      "range": {
+        "startLine": 79,
+        "startChar": 39,
+        "endLine": 79,
+        "endChar": 40
+      },
+      "revId": "1fac08e50bb41843092b0c7fe3ea2daeab6b1e5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
