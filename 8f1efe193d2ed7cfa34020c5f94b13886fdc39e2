@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15721a20_fc84077f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T22:13:50Z",
+      "side": 1,
+      "message": "// Acquire the pending command buffer, which is retained. It must be released later.",
+      "revId": "8f1efe193d2ed7cfa34020c5f94b13886fdc39e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
