@@ -34,6 +34,24 @@
       "revId": "2f1c8f111111824930f48b492e2c0303ef7c8815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e89a731_39d1cf4f",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-14T23:08:17Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have it now if we can skip it on the other backends, but either way is ok.",
+      "parentUuid": "f3ea99a0_c16818b7",
+      "revId": "2f1c8f111111824930f48b492e2c0303ef7c8815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
