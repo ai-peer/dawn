@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "717f2168_7aecc18e",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-14T18:31:49Z",
+      "side": 1,
+      "message": "Yea, I don\u0027t really care a ton.",
+      "parentUuid": "5f155736_9bc6c352",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "e42bb5f1ea475965ff01082a8288502bf4c68884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ecdb47a2_77d34613",
         "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
         "patchSetId": 11
