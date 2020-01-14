@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9327ebf_80d70172",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-14T18:08:55Z",
+      "side": 1,
+      "message": "What\u0027s the reason for the change in casing? Is it because we use the MTL suffix for Metal implementations of the base class, whereas this defines something that\u0027s #if\u0027ed into Surface.cpp ?\n(ok with me, just want to know so we can be consistent going forward)",
+      "range": {
+        "startLine": 354,
+        "startChar": 23,
+        "endLine": 354,
+        "endChar": 36
+      },
+      "revId": "f675259665fed80bbfc16e00e6d5418e667d0acd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f255a25_0afffefb",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-14T18:08:55Z",
+      "side": 1,
+      "message": "nit: we could probably have anonymous unions\n{ mMetalLayer, mHInstance, mXDisplay };\n{ mHWND, mXWindow };",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "e42bb5f1ea475965ff01082a8288502bf4c68884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecdb47a2_77d34613",
+        "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-14T18:08:55Z",
+      "side": 1,
+      "message": "it\u0027s 2020!",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "e42bb5f1ea475965ff01082a8288502bf4c68884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35174ecd_1dd5d744",
+        "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-14T18:08:55Z",
+      "side": 1,
+      "message": "nit: Comment that these tests don\u0027t actually use the backend API so this is sufficient and we don\u0027t need to call SetupGLFWWindowHintsForBackend",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 53
+      },
+      "revId": "e42bb5f1ea475965ff01082a8288502bf4c68884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
