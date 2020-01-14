@@ -22,6 +22,30 @@
       "revId": "f675259665fed80bbfc16e00e6d5418e667d0acd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f7478f1_18420339",
+        "filename": "BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-14T18:27:58Z",
+      "side": 1,
+      "message": "Yes that\u0027s the intent, and also borrowing the same convention from ANGLE. I don\u0027t have a super strong preference though.",
+      "parentUuid": "e9327ebf_80d70172",
+      "range": {
+        "startLine": 354,
+        "startChar": 23,
+        "endLine": 354,
+        "endChar": 36
+      },
+      "revId": "f675259665fed80bbfc16e00e6d5418e667d0acd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
