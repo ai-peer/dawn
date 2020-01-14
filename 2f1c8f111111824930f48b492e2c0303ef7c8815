@@ -16,6 +16,24 @@
       "revId": "2f1c8f111111824930f48b492e2c0303ef7c8815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ea99a0_c16818b7",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 19
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-14T22:21:28Z",
+      "side": 1,
+      "message": "Not right now; none of the other backends have support to clear multiple array layers or mips. Was going to add that when we have it.",
+      "parentUuid": "2c9e550b_076421b5",
+      "revId": "2f1c8f111111824930f48b492e2c0303ef7c8815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
