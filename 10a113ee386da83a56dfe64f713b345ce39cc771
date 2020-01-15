@@ -16,6 +16,24 @@
       "revId": "10a113ee386da83a56dfe64f713b345ce39cc771",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e56cc26_855ca1c4",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-15T16:24:51Z",
+      "side": 1,
+      "message": "I think MTLGPUFamilyApple1 is iPhone 5S, iPad Air, iPad Mini 2, and iPad Mini 3. When I was writing this I was only thinking about WebGPU and forgot that maybe there might be some native app that uses Dawn for an iOS app. I\u0027ll change this to be kMaxColorAttachments.",
+      "parentUuid": "6d8646d5_dbc12b1d",
+      "revId": "10a113ee386da83a56dfe64f713b345ce39cc771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
