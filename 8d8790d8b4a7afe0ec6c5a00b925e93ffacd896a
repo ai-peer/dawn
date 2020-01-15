@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c964afec_3694dc24",
+        "filename": "generator/templates/dawn_native/wgpu_structs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T09:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c16166f7_1808cbf3",
+      "revId": "8d8790d8b4a7afe0ec6c5a00b925e93ffacd896a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "482d2123_da17672c",
         "filename": "generator/templates/dawn_native/wgpu_structs.h",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c125c926_a5f9538c",
+        "filename": "generator/templates/dawn_native/wgpu_structs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T09:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "482d2123_da17672c",
+      "revId": "8d8790d8b4a7afe0ec6c5a00b925e93ffacd896a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d26effc_4bb0019a",
         "filename": "generator/templates/webgpu_cpp.cpp",
         "patchSetId": 5
@@ -50,6 +86,24 @@
       "revId": "8d8790d8b4a7afe0ec6c5a00b925e93ffacd896a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3d866a0_bfa2734c",
+        "filename": "generator/templates/webgpu_cpp.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T09:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d26effc_4bb0019a",
+      "revId": "8d8790d8b4a7afe0ec6c5a00b925e93ffacd896a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
