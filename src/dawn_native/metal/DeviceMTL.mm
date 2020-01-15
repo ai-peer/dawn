@@ -277,8 +277,10 @@ namespace dawn_native { namespace metal {
     }
 
     void Device::Destroy() {
+        ASSERT(mLossStatus != LossStatus::AlreadyLost);
+        
         [mCommandContext.AcquireCommands() release];
-
+     
         mMapTracker = nullptr;
         mDynamicUploader = nullptr;
 
