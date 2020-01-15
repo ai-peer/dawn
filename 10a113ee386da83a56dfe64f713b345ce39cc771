@@ -34,6 +34,24 @@
       "revId": "10a113ee386da83a56dfe64f713b345ce39cc771",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97c433f7_89785636",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-15T18:38:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e56cc26_855ca1c4",
+      "revId": "10a113ee386da83a56dfe64f713b345ce39cc771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
