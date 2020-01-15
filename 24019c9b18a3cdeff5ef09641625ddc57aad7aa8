@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "78f1aa18_3c74f1af",
+        "filename": "BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T16:32:00Z",
+      "side": 1,
+      "message": "I guess it is more clear with this hack because we use the filenames directly. When we fix the hack we can also remove the dep.",
+      "parentUuid": "753b9577_49464d4f",
+      "revId": "24019c9b18a3cdeff5ef09641625ddc57aad7aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "463fa410_bcb90684",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 3
