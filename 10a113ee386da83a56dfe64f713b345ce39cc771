@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d8646d5_dbc12b1d",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T08:55:38Z",
+      "side": 1,
+      "message": "We should maybe limit ourselves to the number of attachment we know is safe (so kMaxColorAttachments?) Or at least a constant with a comment that explains what it is. (also if Apple1 has only 4, why use 8?)",
+      "revId": "10a113ee386da83a56dfe64f713b345ce39cc771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
