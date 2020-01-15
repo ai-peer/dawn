@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe5e0f0b_321929a3",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 22
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-15T22:31:52Z",
+      "side": 1,
+      "message": "Does Metal allow different color attachments to have different sizes? (which they will if they\u0027re different miplevels of the same texture)",
+      "revId": "bb453981bf08fe9e5d7ce186d0af5edae3f4dc2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39d042da_e66b162f",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-15T22:31:52Z",
+      "side": 1,
+      "message": "We should probably go farther above the limit, especially since this is 4+1 and we only test on machines that support 8 color attachments.",
+      "revId": "bb453981bf08fe9e5d7ce186d0af5edae3f4dc2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
