@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "55362023_2cbe123b",
+        "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T12:53:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efcbc4ed_87e7f7a0",
+      "revId": "1fac08e50bb41843092b0c7fe3ea2daeab6b1e5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a181928e_d534352d",
         "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
         "patchSetId": 12
@@ -39,6 +57,30 @@
       "revId": "1fac08e50bb41843092b0c7fe3ea2daeab6b1e5e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4a4d1fe_438edc7c",
+        "filename": "src/tests/end2end/WindowSurfaceTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T12:53:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a181928e_d534352d",
+      "range": {
+        "startLine": 79,
+        "startChar": 39,
+        "endLine": 79,
+        "endChar": 40
+      },
+      "revId": "1fac08e50bb41843092b0c7fe3ea2daeab6b1e5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
