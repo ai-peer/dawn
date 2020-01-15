@@ -583,7 +583,7 @@ namespace dawn_native {
     }
 
     MaybeError ShaderModuleBase::CheckSpvcSuccess(shaderc_spvc_status status,
-                                                  const char* error_msg) {
+                                                  const char* error_msg) const {
         if (status != shaderc_spvc_status_success) {
             DAWN_VALIDATION_ERROR(error_msg);
         }
