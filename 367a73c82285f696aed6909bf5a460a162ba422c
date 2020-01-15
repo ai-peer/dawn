@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b896c425_6d8ed14d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T15:37:21Z",
+      "side": 1,
+      "message": "nit: this could be a static method or even a standalone function now.",
+      "revId": "367a73c82285f696aed6909bf5a460a162ba422c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
