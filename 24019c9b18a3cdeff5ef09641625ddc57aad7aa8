@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e5712c7_1e9a5e25",
+        "filename": "BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T09:09:35Z",
+      "side": 1,
+      "message": "Why is this new data_deps needed? icd_file already has swiftshader_libvulkan as a deps.",
+      "revId": "24019c9b18a3cdeff5ef09641625ddc57aad7aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "463fa410_bcb90684",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-15T09:09:35Z",
+      "side": 1,
+      "message": "Can we add a TODO to remove this once we link against the loader?",
+      "revId": "24019c9b18a3cdeff5ef09641625ddc57aad7aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
