@@ -465,9 +465,11 @@ void DawnTestBase::SetUp() {
 
         for (const dawn_native::Adapter& adapter : adapters) {
             if (adapter.GetBackendType() == backendType) {
+#if !defined(DAWN_ENABLE_SWIFTSHADER)
                 if (adapter.GetDeviceType() == dawn_native::DeviceType::CPU) {
                     continue;
                 }
+#endif
 
                 // Filter adapter by vendor id
                 if (HasVendorIdFilter()) {
@@ -478,9 +480,17 @@ void DawnTestBase::SetUp() {
                     continue;
                 }
 
-                // Prefer discrete GPU on multi-GPU systems, otherwise get integrated GPU.
                 mBackendAdapter = adapter;
-                if (mBackendAdapter.GetDeviceType() == dawn_native::DeviceType::DiscreteGPU) {
+
+#if defined(DAWN_ENABLE_SWIFTSHADER)
+                constexpr dawn_native::DeviceType kPreferredDeviceType =
+                    dawn_native::DeviceType::CPU;
+#else
+                // Prefer discrete GPU on multi-GPU systems, otherwise get integrated GPU.
+                constexpr dawn_native::DeviceType kPreferredDeviceType =
+                    dawn_native::DeviceType::DiscreteGPU;
+#endif
+                if (mBackendAdapter.GetDeviceType() == kPreferredDeviceType) {
                     break;
                 }
             }
