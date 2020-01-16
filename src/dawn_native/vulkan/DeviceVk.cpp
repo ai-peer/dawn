@@ -88,6 +88,13 @@ namespace dawn_native { namespace vulkan {
 
     Device::~Device() {
         BaseDestructor();
+        mDeleter->Tick(mCompletedSerial);
+        mDeleter = nullptr;
+        // VkQueues are destroyed when the VkDevice is destroyed
+        if (mVkDevice != VK_NULL_HANDLE) {
+            fn.DestroyDevice(mVkDevice, nullptr);
+            mVkDevice = VK_NULL_HANDLE;
+        }
     }
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
@@ -742,7 +749,7 @@ namespace dawn_native { namespace vulkan {
         // Some operations might have been started since the last submit and waiting
         // on a serial that doesn't have a corresponding fence enqueued. Force all
         // operations to look as if they were completed (because they were).
-        mCompletedSerial = mLastSubmittedSerial + 1;
+        mCompletedSerial = std::numeric_limits<Serial>::max();
 
         // Assert that errors are device loss so that we can continue with destruction
         AssertAndIgnoreDeviceLossError(TickImpl());
@@ -772,18 +779,11 @@ namespace dawn_native { namespace vulkan {
         // Call Tick() again to clear them before releasing the deleter.
         mDeleter->Tick(mCompletedSerial);
 
-        mDeleter = nullptr;
         mMapRequestTracker = nullptr;
 
         // The VkRenderPasses in the cache can be destroyed immediately since all commands referring
         // to them are guaranteed to be finished executing.
         mRenderPassCache = nullptr;
-
-        // VkQueues are destroyed when the VkDevice is destroyed
-        if (mVkDevice != VK_NULL_HANDLE) {
-            fn.DestroyDevice(mVkDevice, nullptr);
-            mVkDevice = VK_NULL_HANDLE;
-        }
     }
 
 }}  // namespace dawn_native::vulkan
