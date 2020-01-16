@@ -753,7 +753,6 @@ namespace dawn_native {
     }
 
     MaybeError DeviceBase::CreateQueueInternal(QueueBase** result) {
-        DAWN_TRY(ValidateIsAlive());
         DAWN_TRY_ASSIGN(*result, CreateQueueImpl());
         return {};
     }
