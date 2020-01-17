@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfe44bad_7bcbdfb3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-17T01:27:21Z",
+      "side": 1,
+      "message": "This should still be correct (it\u0027s legal to Tick with the same Serial value more than once).\nBut was there a reason this had to change? (OK with me to use ::max())",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
