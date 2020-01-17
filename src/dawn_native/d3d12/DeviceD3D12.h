@@ -17,10 +17,13 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include "common/Constants.h"
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Info.h"
+#include "dawn_native/d3d12/DescriptorHeapAllocationD3D12.h"
+#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/Forward.h"
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
 
@@ -30,6 +33,7 @@ namespace dawn_native { namespace d3d12 {
 
     class CommandAllocatorManager;
     class DescriptorHeapAllocator;
+    class DescriptorAllocatorManager;
     class MapRequestTracker;
     class PlatformFunctions;
     class ResourceAllocatorManager;
@@ -95,6 +99,18 @@ namespace dawn_native { namespace d3d12 {
 
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
+        ResultOrError<DescriptorHeapAllocation> AllocateMemory(uint32_t descriptorCount,
+                                                               D3D12_DESCRIPTOR_HEAP_TYPE heapType);
+
+        bool IsBindGroupInvalidated(const DescriptorHeapAllocation& bindGroupAllocation) const;
+        std::array<ID3D12DescriptorHeap*, 2> GetShaderVisibleHeaps() const;
+
+        ResultOrError<bool> AllocateBindGroups(
+            const std::bitset<kMaxBindGroups>& bindGroupsToAllocate,
+            const std::bitset<kMaxBindGroups>& bindGroupsLayout,
+            const std::array<BindGroupBase*, kMaxBindGroups>& bindGroups,
+            ID3D12GraphicsCommandList* commandList);
+
         TextureBase* WrapSharedHandle(const TextureDescriptor* descriptor,
                                       HANDLE sharedHandle,
                                       uint64_t acquireMutexKey);
@@ -154,6 +170,7 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<DescriptorHeapAllocator> mDescriptorHeapAllocator;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
+        std::unique_ptr<DescriptorAllocatorManager> mDescriptorAllocatorManager;
     };
 
 }}  // namespace dawn_native::d3d12
