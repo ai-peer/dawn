@@ -27,6 +27,7 @@
 #include "dawn_native/d3d12/CommandBufferD3D12.h"
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
+#include "dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
@@ -72,6 +73,10 @@ namespace dawn_native { namespace d3d12 {
         // Initialize backend services
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
+
+        mDescriptorAllocatorManager = std::make_unique<DescriptorAllocatorManager>(this);
+        DAWN_TRY(mDescriptorAllocatorManager->Initialize());
+
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
@@ -179,7 +184,7 @@ namespace dawn_native { namespace d3d12 {
 
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
-        mDescriptorHeapAllocator->Deallocate(mCompletedSerial);
+        mDescriptorAllocatorManager->Tick(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
         DAWN_TRY(ExecutePendingCommandContext());
@@ -427,4 +432,26 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(!mPendingCommands.IsOpen());
     }
 
+    ResultOrError<DescriptorHeapAllocation> Device::AllocateMemory(
+        uint32_t descriptorCount,
+        D3D12_DESCRIPTOR_HEAP_TYPE heapType) {
+        return mDescriptorAllocatorManager->AllocateMemory(descriptorCount, heapType);
+    }
+
+    bool Device::IsBindGroupValid(const DescriptorHeapAllocation& bindGroupAllocation) const {
+        return mDescriptorAllocatorManager->IsBindGroupValid(bindGroupAllocation);
+    }
+
+    std::array<ID3D12DescriptorHeap*, 2> Device::GetShaderVisibleHeaps() const {
+        return mDescriptorAllocatorManager->GetShaderVisibleHeaps();
+    }
+
+    ResultOrError<bool> Device::AllocateBindGroups(
+        const std::bitset<kMaxBindGroups>& bindGroupsToAllocate,
+        const std::bitset<kMaxBindGroups>& bindGroupsLayout,
+        const std::array<BindGroupBase*, kMaxBindGroups>& bindGroups,
+        ID3D12GraphicsCommandList* commandList) {
+        return mDescriptorAllocatorManager->AllocateBindGroups(
+            bindGroupsToAllocate, bindGroupsLayout, bindGroups, commandList);
+    }
 }}  // namespace dawn_native::d3d12
