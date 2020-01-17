@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "741519c2_ee25bc47",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-17T20:36:41Z",
+      "side": 1,
+      "message": "Is this unreachable since an error queue would fail validation? If yes, let\u0027s put UNREACHABLE here.",
+      "revId": "d1dbdf06fa526e4f92c473205f2cdd15b13ccfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
