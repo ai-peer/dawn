@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "b662f5e4_6b08e7e1",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-17T14:14:46Z",
+      "side": 1,
+      "message": "Please comment that we still need to properly handle Vulkan object deletion if the device has been lost so the deleter is only deleted here.",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc8e1570_3cd84d58",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-17T14:14:46Z",
+      "side": 1,
+      "message": "Please add a note that we destroy the device here and not in Destroy because it must be destroyed after all child objects.",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bfe44bad_7bcbdfb3",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -13,6 +47,41 @@
       "writtenOn": "2020-01-17T01:27:21Z",
       "side": 1,
       "message": "This should still be correct (it\u0027s legal to Tick with the same Serial value more than once).\nBut was there a reason this had to change? (OK with me to use ::max())",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5546a143_b000a6ae",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-17T14:14:46Z",
+      "side": 1,
+      "message": "I\u0027d rather use a two different BIG serials for Destroy and ~Device. This one could keep mLastSubmittedSerial and ~Device the ::max();",
+      "parentUuid": "bfe44bad_7bcbdfb3",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8208f90_2d6ab89f",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-17T14:14:46Z",
+      "side": 1,
+      "message": "Destruction of the descriptor set service will also need to be delayed until the destruction.",
       "revId": "ba445febc74dae9551d781812253fa642183b861",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
