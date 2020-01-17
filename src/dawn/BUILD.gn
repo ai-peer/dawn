@@ -34,6 +34,7 @@ dawn_json_generator("dawn_headers_gen") {
   outputs = [
     "src/include/dawn/dawn_proc_table.h",
     "src/include/dawn/webgpu.h",
+    "src/dawn/webgpu_struct_info.json.h",
   ]
 }
 
