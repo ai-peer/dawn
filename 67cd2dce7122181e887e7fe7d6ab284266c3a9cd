@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db174963_e33306ed",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-17T09:36:54Z",
+      "side": 1,
+      "message": "nit: \"surface descriptor from HTML canvas ID\"?",
+      "revId": "67cd2dce7122181e887e7fe7d6ab284266c3a9cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f01cc7f5_2fc6b8ff",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-17T09:36:54Z",
+      "side": 1,
+      "message": "This will need to be a separate target otherwise we are going to include it in some GN target\u0027s \"src\" and it will complain that it doesn\u0027t know how to compile JSON.",
+      "revId": "67cd2dce7122181e887e7fe7d6ab284266c3a9cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
