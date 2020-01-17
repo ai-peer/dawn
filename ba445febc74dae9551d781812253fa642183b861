@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2145c739_ee489860",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-17T21:05:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b662f5e4_6b08e7e1",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc8e1570_3cd84d58",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "ba445febc74dae9551d781812253fa642183b861",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47490c7b_bd89e4d3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-17T21:05:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc8e1570_3cd84d58",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "775abb3d_f5620217",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-17T21:05:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5546a143_b000a6ae",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8208f90_2d6ab89f",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -85,6 +139,24 @@
       "revId": "ba445febc74dae9551d781812253fa642183b861",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f941c1dd_61767cfd",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-17T21:05:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8208f90_2d6ab89f",
+      "revId": "ba445febc74dae9551d781812253fa642183b861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
