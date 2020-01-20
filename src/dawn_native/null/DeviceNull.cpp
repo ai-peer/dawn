@@ -149,6 +149,11 @@ namespace dawn_native { namespace null {
         const SwapChainDescriptor* descriptor) {
         return new SwapChain(this, descriptor);
     }
+    ResultOrError<SwapChainBase*> Device::CreateSwapChainImpl(
+        Surface* surface,
+        const SwapChainDescriptor* descriptor) {
+        return DAWN_VALIDATION_ERROR("New swapchains not implemented.");
+    }
     ResultOrError<TextureBase*> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
         return new Texture(this, descriptor, TextureBase::TextureState::OwnedInternal);
     }
@@ -350,7 +355,7 @@ namespace dawn_native { namespace null {
     // SwapChain
 
     SwapChain::SwapChain(Device* device, const SwapChainDescriptor* descriptor)
-        : SwapChainBase(device, descriptor) {
+        : OldSwapChainBase(device, descriptor) {
         const auto& im = GetImplementation();
         im.Init(im.userData, nullptr);
     }

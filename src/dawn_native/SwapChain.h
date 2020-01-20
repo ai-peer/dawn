@@ -25,12 +25,32 @@
 namespace dawn_native {
 
     MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
+                                           const Surface* surface,
                                            const SwapChainDescriptor* descriptor);
 
     class SwapChainBase : public ObjectBase {
       public:
-        SwapChainBase(DeviceBase* device, const SwapChainDescriptor* descriptor);
-        ~SwapChainBase();
+        SwapChainBase(DeviceBase* device);
+        virtual ~SwapChainBase();
+
+        static SwapChainBase* MakeError(DeviceBase* device);
+
+        // Dawn API
+        virtual void Configure(wgpu::TextureFormat format,
+                               wgpu::TextureUsage allowedUsage,
+                               uint32_t width,
+                               uint32_t height) = 0;
+        virtual TextureViewBase* GetCurrentTextureView() = 0;
+        virtual void Present() = 0;
+
+      protected:
+        SwapChainBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+    };
+
+    class OldSwapChainBase : public SwapChainBase {
+      public:
+        OldSwapChainBase(DeviceBase* device, const SwapChainDescriptor* descriptor);
+        ~OldSwapChainBase();
 
         static SwapChainBase* MakeError(DeviceBase* device);
 
@@ -38,13 +58,11 @@ namespace dawn_native {
         void Configure(wgpu::TextureFormat format,
                        wgpu::TextureUsage allowedUsage,
                        uint32_t width,
-                       uint32_t height);
-        TextureViewBase* GetCurrentTextureView();
-        void Present();
+                       uint32_t height) override;
+        TextureViewBase* GetCurrentTextureView() override;
+        void Present() override;
 
       protected:
-        SwapChainBase(DeviceBase* device, ObjectBase::ErrorTag tag);
-
         const DawnSwapChainImplementation& GetImplementation();
         virtual TextureBase* GetNextTextureImpl(const TextureDescriptor*) = 0;
         virtual MaybeError OnBeforePresent(TextureBase* texture) = 0;

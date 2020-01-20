@@ -14,6 +14,7 @@
 
 #include "dawn_native/SwapChain.h"
 
+#include "common/Constants.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Texture.h"
 #include "dawn_native/ValidationUtils_autogen.h"
@@ -28,11 +29,16 @@ namespace dawn_native {
             }
 
           private:
-            TextureBase* GetNextTextureImpl(const TextureDescriptor*) override {
+            void Configure(wgpu::TextureFormat format,
+                           wgpu::TextureUsage allowedUsage,
+                           uint32_t width,
+                           uint32_t height) override {
                 UNREACHABLE();
             }
-
-            MaybeError OnBeforePresent(TextureBase* texture) override {
+            TextureViewBase* GetCurrentTextureView() override {
+                UNREACHABLE();
+            }
+            void Present() override {
                 UNREACHABLE();
             }
         };
@@ -40,28 +46,52 @@ namespace dawn_native {
     }  // anonymous namespace
 
     MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
+                                           const Surface* surface,
                                            const SwapChainDescriptor* descriptor) {
-        if (descriptor->implementation == 0) {
-            return DAWN_VALIDATION_ERROR("Null implementation for the swapchain");
-        }
+        if (descriptor->implementation != 0) {
+            if (surface != nullptr) {
+                return DAWN_VALIDATION_ERROR(
+                    "Exactly one of surface or implementation must be set");
+            }
 
-        DawnSwapChainImplementation* impl =
-            reinterpret_cast<DawnSwapChainImplementation*>(descriptor->implementation);
+            DawnSwapChainImplementation* impl =
+                reinterpret_cast<DawnSwapChainImplementation*>(descriptor->implementation);
 
-        if (!impl->Init || !impl->Destroy || !impl->Configure || !impl->GetNextTexture ||
-            !impl->Present) {
-            return DAWN_VALIDATION_ERROR("Implementation is incomplete");
+            if (!impl->Init || !impl->Destroy || !impl->Configure || !impl->GetNextTexture ||
+                !impl->Present) {
+                return DAWN_VALIDATION_ERROR("Implementation is incomplete");
+            }
+
+        } else if (surface != nullptr) {
+            if (descriptor->implementation != 0) {
+                return DAWN_VALIDATION_ERROR(
+                    "Exactly one of surface or implementation must be set");
+            }
+
+            DAWN_TRY(ValidatePresentMode(descriptor->presentMode));
+
+            if (descriptor->format != wgpu::TextureFormat::BGRA8Unorm) {
+                return DAWN_VALIDATION_ERROR("Format must (currently) be BGRA8Unorm");
+            }
+
+            if (descriptor->usage != wgpu::TextureUsage::OutputAttachment) {
+                return DAWN_VALIDATION_ERROR("Usage must (currently) be OutputAttachment");
+            }
+
+            if (descriptor->width > kMaxTextureSize || descriptor->height > kMaxTextureSize) {
+                return DAWN_VALIDATION_ERROR("Swapchain size too big");
+            }
+
+        } else {
+            return DAWN_VALIDATION_ERROR("At least one of surface or implementation must be set");
         }
 
         return {};
     }
 
-    // SwapChain
+    // SwapChainBase
 
-    SwapChainBase::SwapChainBase(DeviceBase* device, const SwapChainDescriptor* descriptor)
-        : ObjectBase(device),
-          mImplementation(
-              *reinterpret_cast<DawnSwapChainImplementation*>(descriptor->implementation)) {
+    SwapChainBase::SwapChainBase(DeviceBase* device) : ObjectBase(device) {
     }
 
     SwapChainBase::SwapChainBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -69,10 +99,6 @@ namespace dawn_native {
     }
 
     SwapChainBase::~SwapChainBase() {
-        if (!IsError()) {
-            const auto& im = GetImplementation();
-            im.Destroy(im.userData);
-        }
     }
 
     // static
@@ -80,10 +106,25 @@ namespace dawn_native {
         return new ErrorSwapChain(device);
     }
 
-    void SwapChainBase::Configure(wgpu::TextureFormat format,
-                                  wgpu::TextureUsage allowedUsage,
-                                  uint32_t width,
-                                  uint32_t height) {
+    // OldSwapChainBase
+
+    OldSwapChainBase::OldSwapChainBase(DeviceBase* device, const SwapChainDescriptor* descriptor)
+        : SwapChainBase(device),
+          mImplementation(
+              *reinterpret_cast<DawnSwapChainImplementation*>(descriptor->implementation)) {
+    }
+
+    OldSwapChainBase::~OldSwapChainBase() {
+        if (!IsError()) {
+            const auto& im = GetImplementation();
+            im.Destroy(im.userData);
+        }
+    }
+
+    void OldSwapChainBase::Configure(wgpu::TextureFormat format,
+                                     wgpu::TextureUsage allowedUsage,
+                                     uint32_t width,
+                                     uint32_t height) {
         if (GetDevice()->ConsumedError(ValidateConfigure(format, allowedUsage, width, height))) {
             return;
         }
@@ -99,7 +140,7 @@ namespace dawn_native {
                                   static_cast<WGPUTextureUsage>(allowedUsage), width, height);
     }
 
-    TextureViewBase* SwapChainBase::GetCurrentTextureView() {
+    TextureViewBase* OldSwapChainBase::GetCurrentTextureView() {
         if (GetDevice()->ConsumedError(ValidateGetCurrentTextureView())) {
             return TextureViewBase::MakeError(GetDevice());
         }
@@ -133,7 +174,7 @@ namespace dawn_native {
         return mCurrentTextureView.Get();
     }
 
-    void SwapChainBase::Present() {
+    void OldSwapChainBase::Present() {
         if (GetDevice()->ConsumedError(ValidatePresent())) {
             return;
         }
@@ -149,15 +190,15 @@ namespace dawn_native {
         mCurrentTextureView = nullptr;
     }
 
-    const DawnSwapChainImplementation& SwapChainBase::GetImplementation() {
+    const DawnSwapChainImplementation& OldSwapChainBase::GetImplementation() {
         ASSERT(!IsError());
         return mImplementation;
     }
 
-    MaybeError SwapChainBase::ValidateConfigure(wgpu::TextureFormat format,
-                                                wgpu::TextureUsage allowedUsage,
-                                                uint32_t width,
-                                                uint32_t height) const {
+    MaybeError OldSwapChainBase::ValidateConfigure(wgpu::TextureFormat format,
+                                                   wgpu::TextureUsage allowedUsage,
+                                                   uint32_t width,
+                                                   uint32_t height) const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         DAWN_TRY(ValidateTextureUsage(allowedUsage));
@@ -170,7 +211,7 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError SwapChainBase::ValidateGetCurrentTextureView() const {
+    MaybeError OldSwapChainBase::ValidateGetCurrentTextureView() const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         if (mWidth == 0) {
@@ -181,7 +222,7 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError SwapChainBase::ValidatePresent() const {
+    MaybeError OldSwapChainBase::ValidatePresent() const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         if (mCurrentTextureView.Get() == nullptr) {
