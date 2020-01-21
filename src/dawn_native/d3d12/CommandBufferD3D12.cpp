@@ -31,6 +31,7 @@
 #include "dawn_native/d3d12/RenderPassBuilderD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
+#include "dawn_native/d3d12/ShaderVisibleDescriptorAllocator.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 #include "dawn_native/d3d12/UtilsD3D12.h"
@@ -71,69 +72,41 @@ namespace dawn_native { namespace d3d12 {
     class BindGroupStateTracker : public BindGroupAndStorageBarrierTrackerBase<false, uint64_t> {
       public:
         BindGroupStateTracker(Device* device)
-            : BindGroupAndStorageBarrierTrackerBase(), mDevice(device) {
+            : BindGroupAndStorageBarrierTrackerBase(),
+              mAllocator(device->GetShaderVisibleDescriptorAllocator()) {
         }
 
         void SetInComputePass(bool inCompute_) {
             mInCompute = inCompute_;
         }
 
-        MaybeError AllocateDescriptorHeaps(Device* device) {
-            // This function should only be called once.
-            ASSERT(mCbvSrvUavGPUDescriptorHeap.Get() == nullptr &&
-                   mSamplerGPUDescriptorHeap.Get() == nullptr);
+        MaybeError Apply(CommandRecordingContext* commandContext) {
+            ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
-            DescriptorHeapAllocator* descriptorHeapAllocator = device->GetDescriptorHeapAllocator();
-
-            if (mCbvSrvUavDescriptorHeapSize > 0) {
-                DAWN_TRY_ASSIGN(
-                    mCbvSrvUavGPUDescriptorHeap,
-                    descriptorHeapAllocator->AllocateGPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV,
-                                                             mCbvSrvUavDescriptorHeapSize));
-            }
-
-            if (mSamplerDescriptorHeapSize > 0) {
-                DAWN_TRY_ASSIGN(mSamplerGPUDescriptorHeap, descriptorHeapAllocator->AllocateGPUHeap(
-                                                               D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER,
-                                                               mSamplerDescriptorHeapSize));
-            }
-
-            uint32_t cbvSrvUavDescriptorIndex = 0;
-            uint32_t samplerDescriptorIndex = 0;
-            for (BindGroup* group : mBindGroupsToAllocate) {
-                ASSERT(group);
-                ASSERT(cbvSrvUavDescriptorIndex +
-                           ToBackend(group->GetLayout())->GetCbvUavSrvDescriptorCount() <=
-                       mCbvSrvUavDescriptorHeapSize);
-                ASSERT(samplerDescriptorIndex +
-                           ToBackend(group->GetLayout())->GetSamplerDescriptorCount() <=
-                       mSamplerDescriptorHeapSize);
-                group->AllocateDescriptors(mCbvSrvUavGPUDescriptorHeap, &cbvSrvUavDescriptorIndex,
-                                           mSamplerGPUDescriptorHeap, &samplerDescriptorIndex);
-            }
-
-            ASSERT(cbvSrvUavDescriptorIndex == mCbvSrvUavDescriptorHeapSize);
-            ASSERT(samplerDescriptorIndex == mSamplerDescriptorHeapSize);
-
-            return {};
-        }
-
-        // This function must only be called before calling AllocateDescriptorHeaps().
-        void TrackSetBindGroup(BindGroup* group, uint32_t index, uint32_t indexInSubmit) {
-            if (mBindGroups[index] != group) {
-                mBindGroups[index] = group;
-                if (!group->TestAndSetCounted(mDevice->GetPendingCommandSerial(), indexInSubmit)) {
-                    const BindGroupLayout* layout = ToBackend(group->GetLayout());
-
-                    mCbvSrvUavDescriptorHeapSize += layout->GetCbvUavSrvDescriptorCount();
-                    mSamplerDescriptorHeapSize += layout->GetSamplerDescriptorCount();
-                    mBindGroupsToAllocate.push_back(group);
+            bool allocatedBindGroups = true;
+            for (uint32_t index : IterateBitSet(mDirtyBindGroups)) {
+                allocatedBindGroups =
+                    ToBackend(mBindGroups[index])->TryAllocateIfNeeded(mAllocator);
+                if (!allocatedBindGroups) {
+                    break;
                 }
             }
-        }
 
-        void Apply(CommandRecordingContext* commandContext) {
-            ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
+            if (!allocatedBindGroups) {
+                // Switch heaps
+                DAWN_TRY(mAllocator->EnsureSpaceForFullPipelineLayout());
+                SetDescriptorHeaps(commandList);
+
+                // Dirty all bindgroups so they may be re-populated + bound to the new heap
+                // offsets.
+                mDirtyBindGroupsObjectChangedOrIsDynamic |= mBindGroupLayoutsMask;
+                mDirtyBindGroups |= mBindGroupLayoutsMask;
+
+                for (uint32_t index : IterateBitSet(mDirtyBindGroups)) {
+                    bool allocated = ToBackend(mBindGroups[index])->TryAllocateIfNeeded(mAllocator);
+                    ASSERT(allocated);
+                }
+            }
 
             for (uint32_t index : IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
                 ApplyBindGroup(commandList, ToBackend(mPipelineLayout), index,
@@ -168,35 +141,27 @@ namespace dawn_native { namespace d3d12 {
                     }
                 }
             }
+
             DidApply();
+            return {};
         }
 
-        void Reset() {
-            for (uint32_t i = 0; i < kMaxBindGroups; ++i) {
-                mBindGroups[i] = nullptr;
-            }
-        }
+        void SetDescriptorHeaps(ID3D12GraphicsCommandList* commandList) {
+            ShaderVisibleDescriptorAllocator::Heaps heaps = mAllocator->GetCurrentHeaps();
+            ASSERT(heaps.cbvUavSrvHeap != nullptr && heaps.samplerHeap != nullptr);
 
-        void SetID3D12DescriptorHeaps(ComPtr<ID3D12GraphicsCommandList> commandList) {
+            ID3D12DescriptorHeap* heapsArg[2] = {heaps.cbvUavSrvHeap, heaps.samplerHeap};
             ASSERT(commandList != nullptr);
-            ID3D12DescriptorHeap* descriptorHeaps[2] = {mCbvSrvUavGPUDescriptorHeap.Get(),
-                                                        mSamplerGPUDescriptorHeap.Get()};
-            if (descriptorHeaps[0] && descriptorHeaps[1]) {
-                commandList->SetDescriptorHeaps(2, descriptorHeaps);
-            } else if (descriptorHeaps[0]) {
-                commandList->SetDescriptorHeaps(1, descriptorHeaps);
-            } else if (descriptorHeaps[1]) {
-                commandList->SetDescriptorHeaps(1, &descriptorHeaps[1]);
-            }
+            commandList->SetDescriptorHeaps(2, heapsArg);
         }
 
       private:
         void ApplyBindGroup(ID3D12GraphicsCommandList* commandList,
-                            PipelineLayout* pipelineLayout,
+                            const PipelineLayout* pipelineLayout,
                             uint32_t index,
                             BindGroup* group,
                             uint32_t dynamicOffsetCount,
-                            uint64_t* dynamicOffsets) {
+                            const uint64_t* dynamicOffsets) {
             // Usually, the application won't set the same offsets many times,
             // so always try to apply dynamic offsets even if the offsets stay the same
             if (dynamicOffsetCount) {
@@ -269,13 +234,11 @@ namespace dawn_native { namespace d3d12 {
                 uint32_t parameterIndex = pipelineLayout->GetCbvUavSrvRootParameterIndex(index);
 
                 if (mInCompute) {
-                    commandList->SetComputeRootDescriptorTable(
-                        parameterIndex,
-                        mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(group->GetCbvUavSrvHeapOffset()));
+                    commandList->SetComputeRootDescriptorTable(parameterIndex,
+                                                               group->GetCbvUavSrvBaseDescriptor());
                 } else {
                     commandList->SetGraphicsRootDescriptorTable(
-                        parameterIndex,
-                        mCbvSrvUavGPUDescriptorHeap.GetGPUHandle(group->GetCbvUavSrvHeapOffset()));
+                        parameterIndex, group->GetCbvUavSrvBaseDescriptor());
                 }
             }
 
@@ -284,25 +247,16 @@ namespace dawn_native { namespace d3d12 {
 
                 if (mInCompute) {
                     commandList->SetComputeRootDescriptorTable(
-                        parameterIndex,
-                        mSamplerGPUDescriptorHeap.GetGPUHandle(group->GetSamplerHeapOffset()));
+                        parameterIndex, group->GetSamplerHeapBaseDescriptor());
                 } else {
                     commandList->SetGraphicsRootDescriptorTable(
-                        parameterIndex,
-                        mSamplerGPUDescriptorHeap.GetGPUHandle(group->GetSamplerHeapOffset()));
+                        parameterIndex, group->GetSamplerHeapBaseDescriptor());
                 }
             }
         }
 
-        uint32_t mCbvSrvUavDescriptorHeapSize = 0;
-        uint32_t mSamplerDescriptorHeapSize = 0;
-        std::deque<BindGroup*> mBindGroupsToAllocate = {};
         bool mInCompute = false;
-
-        DescriptorHeapHandle mCbvSrvUavGPUDescriptorHeap = {};
-        DescriptorHeapHandle mSamplerGPUDescriptorHeap = {};
-
-        Device* mDevice;
+        ShaderVisibleDescriptorAllocator* mAllocator;
     };
 
     class RenderPassDescriptorHeapTracker {
@@ -486,21 +440,12 @@ namespace dawn_native { namespace d3d12 {
         MaybeError AllocateAndSetDescriptorHeaps(Device* device,
                                                  BindGroupStateTracker* bindingTracker,
                                                  RenderPassDescriptorHeapTracker* renderPassTracker,
-                                                 CommandIterator* commands,
-                                                 uint32_t indexInSubmit) {
+                                                 CommandIterator* commands) {
             {
                 Command type;
 
                 auto HandleCommand = [&](CommandIterator* commands, Command type) {
                     switch (type) {
-                        case Command::SetBindGroup: {
-                            SetBindGroupCmd* cmd = commands->NextCommand<SetBindGroupCmd>();
-                            BindGroup* group = ToBackend(cmd->group.Get());
-                            if (cmd->dynamicOffsetCount) {
-                                commands->NextData<uint32_t>(cmd->dynamicOffsetCount);
-                            }
-                            bindingTracker->TrackSetBindGroup(group, cmd->index, indexInSubmit);
-                        } break;
                         case Command::BeginRenderPass: {
                             BeginRenderPassCmd* cmd = commands->NextCommand<BeginRenderPassCmd>();
                             renderPassTracker->TrackRenderPass(cmd);
@@ -534,7 +479,6 @@ namespace dawn_native { namespace d3d12 {
             }
 
             DAWN_TRY(renderPassTracker->AllocateRTVAndDSVHeaps());
-            DAWN_TRY(bindingTracker->AllocateDescriptorHeaps(device));
             return {};
         }
 
@@ -582,8 +526,7 @@ namespace dawn_native { namespace d3d12 {
         FreeCommands(&mCommands);
     }
 
-    MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext,
-                                             uint32_t indexInSubmit) {
+    MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext) {
         Device* device = ToBackend(GetDevice());
         BindGroupStateTracker bindingTracker(device);
         RenderPassDescriptorHeapTracker renderPassTracker(device);
@@ -596,10 +539,11 @@ namespace dawn_native { namespace d3d12 {
         // heaps set using a small CommandList inserted just before the main CommandList.
         {
             DAWN_TRY(AllocateAndSetDescriptorHeaps(device, &bindingTracker, &renderPassTracker,
-                                                   &mCommands, indexInSubmit));
-            bindingTracker.Reset();
-            bindingTracker.SetID3D12DescriptorHeaps(commandList);
+                                                   &mCommands));
         }
+        // Make sure we use the correct descriptors for this command list. Could be done once per
+        // actual command list but here is ok because there should be few command buffers.
+        bindingTracker.SetDescriptorHeaps(commandList);
 
         // Records the necessary barriers for the resource usage pre-computed by the frontend
         auto TransitionForPass = [](CommandRecordingContext* commandContext,
@@ -663,7 +607,7 @@ namespace dawn_native { namespace d3d12 {
 
                     TransitionForPass(commandContext, passResourceUsages[nextPassNumber]);
                     bindingTracker.SetInComputePass(true);
-                    RecordComputePass(commandContext, &bindingTracker);
+                    DAWN_TRY(RecordComputePass(commandContext, &bindingTracker));
 
                     nextPassNumber++;
                 } break;
@@ -677,8 +621,8 @@ namespace dawn_native { namespace d3d12 {
                     bindingTracker.SetInComputePass(false);
 
                     LazyClearRenderPassAttachments(beginRenderPassCmd);
-                    RecordRenderPass(commandContext, &bindingTracker, &renderPassTracker,
-                                     beginRenderPassCmd, passHasUAV);
+                    DAWN_TRY(RecordRenderPass(commandContext, &bindingTracker, &renderPassTracker,
+                                              beginRenderPassCmd, passHasUAV));
 
                     nextPassNumber++;
                 } break;
@@ -819,7 +763,9 @@ namespace dawn_native { namespace d3d12 {
                     }
                 } break;
 
-                default: { UNREACHABLE(); } break;
+                default: {
+                    UNREACHABLE();
+                } break;
             }
         }
 
@@ -827,8 +773,8 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    void CommandBuffer::RecordComputePass(CommandRecordingContext* commandContext,
-                                          BindGroupStateTracker* bindingTracker) {
+    MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* commandContext,
+                                                BindGroupStateTracker* bindingTracker) {
         PipelineLayout* lastLayout = nullptr;
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
@@ -838,14 +784,14 @@ namespace dawn_native { namespace d3d12 {
                 case Command::Dispatch: {
                     DispatchCmd* dispatch = mCommands.NextCommand<DispatchCmd>();
 
-                    bindingTracker->Apply(commandContext);
+                    DAWN_TRY(bindingTracker->Apply(commandContext));
                     commandList->Dispatch(dispatch->x, dispatch->y, dispatch->z);
                 } break;
 
                 case Command::DispatchIndirect: {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
 
-                    bindingTracker->Apply(commandContext);
+                    DAWN_TRY(bindingTracker->Apply(commandContext));
                     Buffer* buffer = ToBackend(dispatch->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDispatchIndirectSignature();
@@ -856,7 +802,7 @@ namespace dawn_native { namespace d3d12 {
 
                 case Command::EndComputePass: {
                     mCommands.NextCommand<EndComputePassCmd>();
-                    return;
+                    return {};
                 } break;
 
                 case Command::SetComputePipeline: {
@@ -921,9 +867,13 @@ namespace dawn_native { namespace d3d12 {
                     }
                 } break;
 
-                default: { UNREACHABLE(); } break;
+                default: {
+                    UNREACHABLE();
+                } break;
             }
         }
+
+        return {};
     }
 
     void CommandBuffer::SetupRenderPass(CommandRecordingContext* commandContext,
@@ -1040,7 +990,7 @@ namespace dawn_native { namespace d3d12 {
                 : nullptr);
     }
 
-    void CommandBuffer::RecordRenderPass(
+    MaybeError CommandBuffer::RecordRenderPass(
         CommandRecordingContext* commandContext,
         BindGroupStateTracker* bindingTracker,
         RenderPassDescriptorHeapTracker* renderPassDescriptorHeapTracker,
@@ -1093,12 +1043,12 @@ namespace dawn_native { namespace d3d12 {
         VertexBufferTracker vertexBufferTracker = {};
         IndexBufferTracker indexBufferTracker = {};
 
-        auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
+        auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) -> MaybeError {
             switch (type) {
                 case Command::Draw: {
                     DrawCmd* draw = iter->NextCommand<DrawCmd>();
 
-                    bindingTracker->Apply(commandContext);
+                    DAWN_TRY(bindingTracker->Apply(commandContext));
                     vertexBufferTracker.Apply(commandList, lastPipeline);
                     commandList->DrawInstanced(draw->vertexCount, draw->instanceCount,
                                                draw->firstVertex, draw->firstInstance);
@@ -1107,7 +1057,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexed: {
                     DrawIndexedCmd* draw = iter->NextCommand<DrawIndexedCmd>();
 
-                    bindingTracker->Apply(commandContext);
+                    DAWN_TRY(bindingTracker->Apply(commandContext));
                     indexBufferTracker.Apply(commandList);
                     vertexBufferTracker.Apply(commandList, lastPipeline);
                     commandList->DrawIndexedInstanced(draw->indexCount, draw->instanceCount,
@@ -1118,7 +1068,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndirect: {
                     DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
 
-                    bindingTracker->Apply(commandContext);
+                    DAWN_TRY(bindingTracker->Apply(commandContext));
                     vertexBufferTracker.Apply(commandList, lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
@@ -1131,7 +1081,7 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
-                    bindingTracker->Apply(commandContext);
+                    DAWN_TRY(bindingTracker->Apply(commandContext));
                     indexBufferTracker.Apply(commandList);
                     vertexBufferTracker.Apply(commandList, lastPipeline);
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
@@ -1224,6 +1174,7 @@ namespace dawn_native { namespace d3d12 {
                     UNREACHABLE();
                     break;
             }
+            return {};
         };
 
         Command type;
@@ -1236,7 +1187,7 @@ namespace dawn_native { namespace d3d12 {
                     } else if (renderPass->attachmentState->GetSampleCount() > 1) {
                         ResolveMultisampledRenderPass(commandContext, renderPass);
                     }
-                    return;
+                    return {};
                 } break;
 
                 case Command::SetStencilReference: {
@@ -1282,14 +1233,17 @@ namespace dawn_native { namespace d3d12 {
                         CommandIterator* iter = bundles[i]->GetCommands();
                         iter->Reset();
                         while (iter->NextCommandId(&type)) {
-                            EncodeRenderBundleCommand(iter, type);
+                            DAWN_TRY(EncodeRenderBundleCommand(iter, type));
                         }
                     }
                 } break;
 
-                default: { EncodeRenderBundleCommand(&mCommands, type); } break;
+                default: {
+                    DAWN_TRY(EncodeRenderBundleCommand(&mCommands, type));
+                } break;
             }
         }
+        return {};
     }
 
 }}  // namespace dawn_native::d3d12

@@ -37,7 +37,6 @@ namespace dawn_native { namespace d3d12 {
 
         ID3D12DescriptorHeap* Get() const;
         D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(uint32_t index) const;
-        D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t index) const;
 
       private:
         ComPtr<ID3D12DescriptorHeap> mDescriptorHeap;
@@ -49,8 +48,6 @@ namespace dawn_native { namespace d3d12 {
       public:
         DescriptorHeapAllocator(Device* device);
 
-        ResultOrError<DescriptorHeapHandle> AllocateGPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE type,
-                                                            uint32_t count);
         ResultOrError<DescriptorHeapHandle> AllocateCPUHeap(D3D12_DESCRIPTOR_HEAP_TYPE type,
                                                             uint32_t count);
         void Deallocate(uint64_t lastCompletedSerial);

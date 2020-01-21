@@ -330,6 +330,8 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/d3d12/SamplerD3D12.h",
       "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
       "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+      "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocator.cpp",
+      "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocator.h",
       "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
       "src/dawn_native/d3d12/StagingBufferD3D12.h",
       "src/dawn_native/d3d12/SwapChainD3D12.cpp",

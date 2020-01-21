@@ -41,13 +41,6 @@ namespace dawn_native { namespace d3d12 {
         return handle;
     }
 
-    D3D12_GPU_DESCRIPTOR_HANDLE DescriptorHeapHandle::GetGPUHandle(uint32_t index) const {
-        ASSERT(mDescriptorHeap);
-        auto handle = mDescriptorHeap->GetGPUDescriptorHandleForHeapStart();
-        handle.ptr += mSizeIncrement * (index + mOffset);
-        return handle;
-    }
-
     DescriptorHeapAllocator::DescriptorHeapAllocator(Device* device)
         : mDevice(device),
           mSizeIncrements{
@@ -66,8 +59,7 @@ namespace dawn_native { namespace d3d12 {
         D3D12_DESCRIPTOR_HEAP_TYPE type,
         uint32_t count,
         uint32_t allocationSize,
-        DescriptorHeapInfo* heapInfo,
-        D3D12_DESCRIPTOR_HEAP_FLAGS flags) {
+        DescriptorHeapInfo* heapInfo) {
         const Serial pendingSerial = mDevice->GetPendingCommandSerial();
         uint64_t startOffset = (heapInfo->heap == nullptr)
                                    ? RingBufferAllocator::kInvalidOffset
@@ -81,7 +73,7 @@ namespace dawn_native { namespace d3d12 {
         D3D12_DESCRIPTOR_HEAP_DESC heapDescriptor;
         heapDescriptor.Type = type;
         heapDescriptor.NumDescriptors = allocationSize;
-        heapDescriptor.Flags = flags;
+        heapDescriptor.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
         heapDescriptor.NodeMask = 0;
         ComPtr<ID3D12DescriptorHeap> heap;
         DAWN_TRY(CheckHRESULT(
@@ -102,32 +94,13 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<DescriptorHeapHandle> DescriptorHeapAllocator::AllocateCPUHeap(
         D3D12_DESCRIPTOR_HEAP_TYPE type,
         uint32_t count) {
-        return Allocate(type, count, count, &mCpuDescriptorHeapInfos[type],
-                        D3D12_DESCRIPTOR_HEAP_FLAG_NONE);
-    }
-
-    ResultOrError<DescriptorHeapHandle> DescriptorHeapAllocator::AllocateGPUHeap(
-        D3D12_DESCRIPTOR_HEAP_TYPE type,
-        uint32_t count) {
-        ASSERT(type == D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV ||
-               type == D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER);
-        unsigned int heapSize = (type == D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV
-                                     ? D3D12_MAX_SHADER_VISIBLE_DESCRIPTOR_HEAP_SIZE_TIER_1
-                                     : D3D12_MAX_SHADER_VISIBLE_SAMPLER_HEAP_SIZE);
-        return Allocate(type, count, heapSize, &mGpuDescriptorHeapInfos[type],
-                        D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE);
+        return Allocate(type, count, count, &mCpuDescriptorHeapInfos[type]);
     }
 
     void DescriptorHeapAllocator::Deallocate(uint64_t lastCompletedSerial) {
         for (uint32_t i = 0; i < mCpuDescriptorHeapInfos.size(); i++) {
             if (mCpuDescriptorHeapInfos[i].heap != nullptr) {
                 mCpuDescriptorHeapInfos[i].allocator.Deallocate(lastCompletedSerial);
-            }
-        }
-
-        for (uint32_t i = 0; i < mGpuDescriptorHeapInfos.size(); i++) {
-            if (mGpuDescriptorHeapInfos[i].heap != nullptr) {
-                mGpuDescriptorHeapInfos[i].allocator.Deallocate(lastCompletedSerial);
             }
         }
     }

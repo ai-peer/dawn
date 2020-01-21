@@ -35,6 +35,7 @@
 #include "dawn_native/d3d12/ResourceAllocatorManagerD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
+#include "dawn_native/d3d12/ShaderVisibleDescriptorAllocator.h"
 #include "dawn_native/d3d12/StagingBufferD3D12.h"
 #include "dawn_native/d3d12/SwapChainD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
@@ -71,7 +72,13 @@ namespace dawn_native { namespace d3d12 {
 
         // Initialize backend services
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
+
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
+
+        mShaderVisibleDescriptorAllocator =
+            std::make_unique<ShaderVisibleDescriptorAllocator>(this);
+        DAWN_TRY(mShaderVisibleDescriptorAllocator->Initialize());
+
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
@@ -148,6 +155,10 @@ namespace dawn_native { namespace d3d12 {
         return mCommandAllocatorManager.get();
     }
 
+    ShaderVisibleDescriptorAllocator* Device::GetShaderVisibleDescriptorAllocator() const {
+        return mShaderVisibleDescriptorAllocator.get();
+    }
+
     ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext() {
         // Callers of GetPendingCommandList do so to record commands. Only reserve a command
         // allocator when it is needed so we don't submit empty command lists
@@ -180,6 +191,7 @@ namespace dawn_native { namespace d3d12 {
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
         mDescriptorHeapAllocator->Deallocate(mCompletedSerial);
+        mShaderVisibleDescriptorAllocator->Tick(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
         DAWN_TRY(ExecutePendingCommandContext());
@@ -193,7 +205,7 @@ namespace dawn_native { namespace d3d12 {
                             "D3D12 command queue signal fence");
     }
 
-    MaybeError Device::WaitForSerial(uint64_t serial) {
+    MaybeError Device::WaitForSerial(Serial serial) {
         mCompletedSerial = mFence->GetCompletedValue();
         if (mCompletedSerial < serial) {
             DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(serial, mFenceEvent),
