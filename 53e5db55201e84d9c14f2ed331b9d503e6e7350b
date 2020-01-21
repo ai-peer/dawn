@@ -1,0 +1,301 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30c12fd6_a7099f44",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "Create doesn\u0027t really describe what this method does. \"ReallocateIfNeeded\" / \"Populate\" / ... ?",
+      "range": {
+        "startLine": 30,
+        "startChar": 35,
+        "endLine": 30,
+        "endChar": 41
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb9bbe72_eaa5ef5e",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "nit: \"Memory\" sounds like this is regular resource memory. Rename to AllocateDescriptors maybe?",
+      "range": {
+        "startLine": 43,
+        "startChar": 32,
+        "endLine": 43,
+        "endChar": 46
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2811a95_b6708e93",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "nit: comment as to what true / false returns values mean.",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d029b62_cb122037",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "This only needs to happen if didReallocation or if we\u0027re at the start of the command list. Can it be done there to avoid several branches in the common case where we don\u0027t reallocate?",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8182d33_44930048",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "In Create the bindgroup will call device-\u003eAllocateMemory which will modify this object\u0027s state. This reentrant control flow is a bit unclear because it goes like this: commandbuffer -\u003e manager -\u003e bindgroup -\u003e manager ...\n\nPrefer either having the manager pass itself to the bindgroup (which results in commandbuffer - \u003e manager -\u003e bindgroup -\u003e manager but more explicitly), or inverting the dataflow so it goes commandbuffer -\u003e bindgroup -\u003e manager.",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b98f7c20_caf34d38",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "nit: return {...};",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 104,
+        "endChar": 92
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0321e21_2c1ca28c",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "To simplify things we could only have cbvUavSrv and sampler in ShaderVisibleDescriptorAllocator and not deal with other descriptor. See previous comment:\n\n\u003e There\u0027s no real good reason that the descriptor heap allocator takes care of both CPU and GPU heaps for all types of descriptors as each type of descriptor is used very differently:\n\u003e  - CPU RTV or DSV is very low-frequency and small amounts of data and doesn\u0027t have issues with a single heap being usable at any given time.\n\u003e  - GPU CBV_UAV_SRV and Sampler heaps are super-high frequency and only one of each can be bound at a time.\n\u003e  - CPU CBV_UAV_SRV and Sampler heaps, when we will use them, will be super-high frequency and likely binned per BindGroupLayout.",
+      "range": {
+        "startLine": 105,
+        "startChar": 20,
+        "endLine": 116,
+        "endChar": 75
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06420359_595842a6",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "Any reason these two are separate objects instead of being inlined in this class (and the whole thing in ShaderVisibleDescriptorAllocator.cpp/.h)?\n\nThere\u0027s a lot of extra indirection like device::IsBindGroupValid -\u003e DescriptorAllocatorManager::IsBindGroupValid -\u003e ShaderVisibleDescriptorAllocator::IsBindGroupValid. When we could just have ShaderVisibleDescriptorAllocator::IsBindGroupValid.",
+      "range": {
+        "startLine": 54,
+        "startChar": 1,
+        "endLine": 56,
+        "endChar": 0
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ea5e4fa_adb9f084",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "nit: spell out simple types.",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82de57ba_2774e56c",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 12
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91b2daa2_42aa1b1f",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocatorD3D12.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "The allocator does nothing special, maybe the two methods could be inlined in ShaderVisibleDescriptorAllocatorD3D12 for more clarity / less indirections?",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98f5c62f_d33f17bf",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "What\u0027s the need for this proxy function given they just forward the call to the manager? We could fold them by getting a pointer to the manager and then calling methods.",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33b438a3_879fc1b7",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "Maybe this enum should be in the DescriptorHeapAllocation itself so that we avoid switches in very hot code like IsBindGroupValid.",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18fddc0e_d9443db9",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be ResultOrError. Also maybe call it TryAllocate to show clearly it is meant to fail when it runs out of space?",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be9ff0e2_b59ad1a6",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-21T09:49:59Z",
+      "side": 1,
+      "message": "If the allocation size is 0, instead of going in the ringbuffer, getting kInvalidOffset and then giving back a DescriptorHeapAllocation it could be more clear to special case allocationSize \u003d\u003d 0 and return a fake DescriptorHeapAllocation, and otherwise ask the RingBuffer to allocate.",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
