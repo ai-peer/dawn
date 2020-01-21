@@ -296,6 +296,23 @@
       "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9912b845_82c18cb8",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-21T18:58:45Z",
+      "side": 1,
+      "message": "Adding a note of a bug discussed in today\u0027s call.\n\nIf the ringbuffer rotates, using the same bounded heap, a previously reclaimed allocation is wrongly considered \"still valid\" because the heap serial did not change and the allocation wouldn\u0027t get re-created. Ringbuffer assumes the client does not need to know if the allocation is freed - which is not the case for bindgroups would could be dirtied frequently.\n\nThe issue is not the use of FIFO queue but the ringbuffer\u0027s inability to invalidate blocks but not handles via Tick().",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
