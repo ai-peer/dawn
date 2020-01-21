@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a8b693f4_3ebf03da",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-21T15:08:47Z",
+      "side": 1,
+      "message": "nit: Whole thing could be\nn \u003c\u003d 1 ? 1 : 1ull \u003c\u003c (64 - Log2(n - 1));\n?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "9b5e28d5a3fba3ed5724a952068eb00ce4ecbc9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
