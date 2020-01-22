@@ -283,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "787a1b36_98e591d4",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:17:56Z",
+      "side": 1,
+      "message": "Apologies, I meant EXPECT_EQ.\n\nThe difference between EXPECT_X and ASSERT_X is that ASSERT_X will completely halt the test if the condition is false.  Use ASSERT_X for instances where the test cannot continue if the condition is false: resource allocation, test environment setup, etc. \n\nWith EXPECT_X, on the other hand, the test continues to run but registers a failure at the end. EXPECT_X is good for verifying state that doesn\u0027t impact the runability of the test. \n\nShould your test get into a flaky state where errors only happen in the lab, having EXPECT_X is ideal because it you\u0027ll receive much more information in the logs about what is wrong. With ASSERT_X, you\u0027ll only get told about the first failure and that\u0027s it.",
+      "parentUuid": "c0535b4d_4a9e16a3",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "859f7649_7b1418b7",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
@@ -327,6 +351,30 @@
       "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ffcf514_19fb77f3",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:17:56Z",
+      "side": 1,
+      "message": "Good point. I missed that.",
+      "parentUuid": "7eedd8da_8c476c7e",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 0
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {

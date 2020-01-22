@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "deed7022_82aa8895",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:17:56Z",
+      "side": 1,
+      "message": "Since this code is shared with CallMapWriteCallback, consider putting it into a helper function.",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 11
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6d35ba7_b60ef6e3",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:17:56Z",
+      "side": 1,
+      "message": "Don\u0027t you need to pass `validateMapError` into ConsumedError instead of `errorData`?",
+      "range": {
+        "startLine": 443,
+        "startChar": 39,
+        "endLine": 443,
+        "endChar": 59
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19177536_31a39cea",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:17:56Z",
+      "side": 1,
+      "message": "I would have expected us to return WGPUBufferMapAsyncStatus_Success in the non-error case.",
+      "range": {
+        "startLine": 446,
+        "startChar": 15,
+        "endLine": 446,
+        "endChar": 47
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1976c7e_79028acd",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:17:56Z",
+      "side": 1,
+      "message": "Why is this code not at the end of Destroy?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 0
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e39ad9d2_cf1fe269",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:17:56Z",
+      "side": 1,
+      "message": "Please give BufferMapReadAsyncBeforeLossFails the same std::array treatment.",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 38
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
