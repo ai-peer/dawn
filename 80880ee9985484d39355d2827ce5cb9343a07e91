@@ -16,6 +16,24 @@
       "revId": "80880ee9985484d39355d2827ce5cb9343a07e91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb33a1e_c8e5ee30",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 0,
+      "message": "I think it\u0027s because buffers could still be in scope after a device loss, so memory usage would not be 0 until we have destroyed the buffers when they go out of scope.",
+      "parentUuid": "afda0512_bc9b2185",
+      "revId": "80880ee9985484d39355d2827ce5cb9343a07e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

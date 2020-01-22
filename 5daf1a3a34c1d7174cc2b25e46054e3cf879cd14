@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "58a0fa4c_81455a2d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b09c133_f10966c2",
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46ab9c38_92e88eb7",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "add57354_d7df8910",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46ab9c38_92e88eb7",
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f40b032_015dd60e",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31d16958_3a6f5a7d",
+      "range": {
+        "startLine": 414,
+        "startChar": 4,
+        "endLine": 415,
+        "endChar": 86
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "29990e87_0066fd06",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eff9e419_fa632ca3",
+      "range": {
+        "startLine": 484,
+        "startChar": 25,
+        "endLine": 484,
+        "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ced30c93_c40f468f",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
@@ -151,6 +235,54 @@
     },
     {
       "key": {
+        "uuid": "c3c21820_d41d7526",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "That may require more callbacks since different tests will expect different data (some are null, and some have data). But I can assert userdata is nullptr.",
+      "parentUuid": "89ba5e63_8ee59bb1",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0535b4d_4a9e16a3",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "I dont see dawn use verify_eq? is it called something else maybe?",
+      "parentUuid": "ced30c93_c40f468f",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "859f7649_7b1418b7",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
@@ -162,6 +294,30 @@
       "writtenOn": "2020-01-22T19:16:22Z",
       "side": 1,
       "message": "Since the map read and write callbacks have the same function signature, we should be able to get away with having one callback.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 0
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eedd8da_8c476c7e",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "theyre not exactly the same, read has const data while write does not.",
+      "parentUuid": "859f7649_7b1418b7",
       "range": {
         "startLine": 63,
         "startChar": 0,
@@ -194,6 +350,30 @@
       "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71c0931e_11cce575",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62f81d6a_05137c4e",
+      "range": {
+        "startLine": 287,
+        "startChar": 31,
+        "endLine": 287,
+        "endChar": 60
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -240,6 +420,54 @@
       "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15d2ac14_01d46f34",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "oops, thanks for the catch.",
+      "parentUuid": "48ecc5bc_27bafefd",
+      "range": {
+        "startLine": 311,
+        "startChar": 16,
+        "endLine": 311,
+        "endChar": 24
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3126b7b_c7b3b01c",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T20:26:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de9f1ed6_4cfd203b",
+      "range": {
+        "startLine": 311,
+        "startChar": 4,
+        "endLine": 311,
+        "endChar": 38
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
