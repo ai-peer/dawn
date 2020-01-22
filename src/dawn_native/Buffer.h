@@ -97,6 +97,8 @@ namespace dawn_native {
         MaybeError ValidateMap(wgpu::BufferUsage requiredUsage) const;
         MaybeError ValidateUnmap() const;
         MaybeError ValidateDestroy() const;
+        bool IsMapReadOrMapWriteAsyncError(wgpu::BufferUsage usage,
+                                           WGPUBufferMapAsyncStatus* status);
 
         uint64_t mSize = 0;
         wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
