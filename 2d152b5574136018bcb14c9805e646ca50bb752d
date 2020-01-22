@@ -141,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "9314c286_c943c058",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T22:49:29Z",
+      "side": 1,
+      "message": "Suballocations are not really tracked from a residency perspective. In D3D12, we can\u0027t change the residency of a suballocation, but we can change the residency of the heap it\u0027s contained in. \n\nSo if a suballocation needs to be resident, its entire heap must made resident. That heap\u0027s position in the LRU cache is dependent on how recently any underlying suballocation was referenced.",
+      "parentUuid": "4cf2ff07_9fb2b6a0",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ecc4b59b_13f07b9f",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
         "patchSetId": 5
