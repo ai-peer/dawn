@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b6d0ed46_49446bec",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T18:25:32Z",
+      "side": 1,
+      "message": "Resolving per in-person conversation. Description is correct.",
+      "parentUuid": "95b48267_e73aaaa9",
+      "revId": "bd5a539088bdb38cba090a1c52f375bc509fe5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3829eb1_85888d73",
         "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
         "patchSetId": 3

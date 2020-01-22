@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3baac4b2_7b1c059b",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T18:25:32Z",
+      "side": 1,
+      "message": "Heavy usage of CONTAINING_RECORD here. I understand its perfectly acceptable to use CONTAINING_RECORD - however in the context of Dawn it strikes me as a \"use only if absolutely necessary\" sort of a thing.",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eef5c85_c7bf519a",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T18:25:32Z",
+      "side": 1,
+      "message": "Had to add this enum to know which type to go back to through CONTAINING_RECORD. AllocationMethod already exists and is basically the same, however I needed to have the kHeap type.",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbad1d9c_13d65960",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T18:25:32Z",
+      "side": 1,
+      "message": "I chose to keep allocation size cached on the entry. This could be eliminated and looked up at Evict/MakeResident time.",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80c4d731_ee16d076",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T18:25:32Z",
+      "side": 1,
+      "message": "Added AllocationType parameter in constructor. I must have this to initialize and then differentiate an LRUEntry. This type is almost, but not quite a duplication of AllocationInfo.mMethod.",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ebb7273_070edf64",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T18:25:32Z",
+      "side": 1,
+      "message": "LRUEntry at a minimum must store pointers to the next and previous links, as well as the AllocationType enum. By making this a member, it means those bytes are always being allocated, whether it\u0027s used in the LRUCache or not (an entry is only needed for AllocationMethod::kDirect). Previously, we just had a pointer to the entry, which meant we only had to allocate the entry if we needed one, otherwise it was just an unused pointer. Since kSubAllocation types should always be the most abundant of the types, it seems like the net effect could actually be more bytes used.",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecc4b59b_13f07b9f",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-22T18:25:32Z",
+      "side": 1,
+      "message": "Had to make LRUEntry a friend in order to use CONTAINING_RECORD.\n\n(Comment applies to the Heap type as well)",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
