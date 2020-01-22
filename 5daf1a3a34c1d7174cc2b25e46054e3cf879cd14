@@ -427,6 +427,30 @@
     },
     {
       "key": {
+        "uuid": "54439dc9_260224a7",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-22T23:43:51Z",
+      "side": 1,
+      "message": "I think there should be an invariant that if the status is Success, then you get non-null and need to unmap, and if it\u0027s not, then you get null and don\u0027t need to unmap. We should bucket the different possible failure modes into as few possible buckets, so there are fewer situations for the API user to handle.",
+      "parentUuid": "8c30a3d2_29e71dca",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "859f7649_7b1418b7",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
