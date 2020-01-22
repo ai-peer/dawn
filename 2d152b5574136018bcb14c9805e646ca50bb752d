@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "283c35bb_7d0cb58b",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-22T22:56:47Z",
+      "side": 1,
+      "message": "For me, the use of CONTAINING_RECORD isn\u0027t of concern but the fact there is D3D12 stuff being woven into a generic container class.\n\nHow about instead of having an allocation contain a LRUEntry, flip it? Store the Heap in the LRUEntry. If we cache both the size and pagable, there is no need to know the allocation type anymore.",
+      "parentUuid": "919fa071_04c88fbd",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0eef5c85_c7bf519a",
         "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
         "patchSetId": 5
