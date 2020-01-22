@@ -480,6 +480,11 @@ namespace dawn_native {
         if (result.data == nullptr || result.dataLength != descriptor->size) {
             status = WGPUBufferMapAsyncStatus_Error;
         }
+        MaybeError err = ValidateIsAlive();
+        if (err.IsError()) {
+            err.AcquireError();
+            status = WGPUBufferMapAsyncStatus_DeviceLost;
+        }
 
         DeferredCreateBufferMappedAsync deferred_info;
         deferred_info.callback = callback;
@@ -592,6 +597,14 @@ namespace dawn_native {
     // Other Device API methods
 
     void DeviceBase::Tick() {
+        // We need to do the deferred callback even if Device is lost since Buffer Map Async will
+        // send callback with device lost status when device is lost.
+        {
+            auto deferredResults = std::move(mDeferredCreateBufferMappedAsyncResults);
+            for (const auto& deferred : deferredResults) {
+                deferred.callback(deferred.status, deferred.result, deferred.userdata);
+            }
+        }
         if (ConsumedError(ValidateIsAlive())) {
             return;
         }
@@ -599,12 +612,6 @@ namespace dawn_native {
             return;
         }
 
-        {
-            auto deferredResults = std::move(mDeferredCreateBufferMappedAsyncResults);
-            for (const auto& deferred : deferredResults) {
-                deferred.callback(deferred.status, deferred.result, deferred.userdata);
-            }
-        }
         mErrorScopeTracker->Tick(GetCompletedCommandSerial());
         mFenceSignalTracker->Tick(GetCompletedCommandSerial());
     }
