@@ -189,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "bffc59e9_db03363e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-22T21:34:32Z",
+      "side": 1,
+      "message": "The callback should be called exactly once per Map call.\n\nOne way to think of it: You should be able to malloc() before a Map call and free() inside of it, with no fear of leaks.",
+      "parentUuid": "31c08d9c_22b84597",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 0
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ced30c93_c40f468f",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
