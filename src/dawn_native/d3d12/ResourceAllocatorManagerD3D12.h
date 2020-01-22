@@ -25,6 +25,7 @@
 namespace dawn_native { namespace d3d12 {
 
     class Device;
+    class Heap;
 
     // Resource heap types + flags combinations are named after the D3D constants.
     // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_heap_flags
@@ -66,6 +67,7 @@ namespace dawn_native { namespace d3d12 {
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
         void Tick(Serial lastCompletedSerial);
+        Heap* GetResourceHeap(const ResourceHeapAllocation& allocation) const;
 
       private:
         void FreeMemory(ResourceHeapAllocation& allocation);
