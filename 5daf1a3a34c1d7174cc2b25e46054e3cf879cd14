@@ -403,6 +403,30 @@
     },
     {
       "key": {
+        "uuid": "8c30a3d2_29e71dca",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T22:52:48Z",
+      "side": 1,
+      "message": "but not if device loss happens after the mapping already.",
+      "parentUuid": "500ee635_b291acca",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "859f7649_7b1418b7",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
