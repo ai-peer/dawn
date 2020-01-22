@@ -379,6 +379,30 @@
     },
     {
       "key": {
+        "uuid": "500ee635_b291acca",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-22T22:24:08Z",
+      "side": 1,
+      "message": "These always expect DeviceLost. If there\u0027s an error mapping, data should be nullptr and size should be 0.",
+      "parentUuid": "c3c21820_d41d7526",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "859f7649_7b1418b7",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
@@ -447,6 +471,30 @@
       "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15825a5f_efdf9113",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-22T22:24:08Z",
+      "side": 1,
+      "message": "I think\n\n template\u003ctypename DataT\u003e\n static void MapFailCallback(..., T* data, ...) {\n   static_assert(std::is_same\u003cconst T, const void\u003e(), \"...\");\n }\n\nshould work in both slots. (It should be able to infer `T \u003d void` or `T \u003d const void`.)\n\nhttps://godbolt.org/z/XJCLFF",
+      "parentUuid": "9ffcf514_19fb77f3",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 0
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     },
     {
       "key": {

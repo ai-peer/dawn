@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6c62fb0_f5cbe554",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-22T22:24:08Z",
+      "side": 1,
+      "message": "nit: capitalize\n\n Is",
+      "range": {
+        "startLine": 445,
+        "startChar": 21,
+        "endLine": 445,
+        "endChar": 23
+      },
+      "revId": "9a9395655bc1df78e308799edcbc4adb28eb0e5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
