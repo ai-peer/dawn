@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b09c133_f10966c2",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-22T06:11:25Z",
+      "side": 1,
+      "message": "I think here, we should check that the Device is still alive.\n\nCan we test when you map a buffer, then lose the device immediately after, the callback returns with DeviceLost? Right now, we only test when you first lose the device, then map the buffer.",
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46ab9c38_92e88eb7",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-22T06:11:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eff9e419_fa632ca3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-22T06:11:25Z",
+      "side": 1,
+      "message": "nit: could just do ValidateIsAlive() instead of buffer-\u003eGetDevice()-\u003e...",
+      "range": {
+        "startLine": 484,
+        "startChar": 25,
+        "endLine": 484,
+        "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
