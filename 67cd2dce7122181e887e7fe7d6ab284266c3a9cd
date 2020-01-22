@@ -33,6 +33,24 @@
       "revId": "67cd2dce7122181e887e7fe7d6ab284266c3a9cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb4c7e7f_ced81277",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-22T21:40:06Z",
+      "side": 1,
+      "message": "Done, I think",
+      "parentUuid": "f01cc7f5_2fc6b8ff",
+      "revId": "67cd2dce7122181e887e7fe7d6ab284266c3a9cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
