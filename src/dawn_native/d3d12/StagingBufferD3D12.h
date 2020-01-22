@@ -29,6 +29,7 @@ namespace dawn_native { namespace d3d12 {
         ~StagingBuffer();
 
         ID3D12Resource* GetResource() const;
+        ResourceHeapAllocation* GetResourceHeapAllocation();
 
         MaybeError Initialize() override;
 

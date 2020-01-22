@@ -112,4 +112,10 @@ namespace dawn_native {
         return count;
     }
 
+    ResourceHeapBase* BuddyMemoryAllocator::GetMemoryBlock(
+        const ResourceMemoryAllocation& allocation) const {
+        const uint64_t memoryIndex = GetMemoryIndex(allocation.GetInfo().mBlockOffset);
+        return mTrackedSubAllocations[memoryIndex].mMemoryAllocation.get();
+    }
+
 }  // namespace dawn_native

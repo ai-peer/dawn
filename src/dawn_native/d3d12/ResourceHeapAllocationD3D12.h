@@ -16,25 +16,30 @@
 #define DAWNNATIVE_D3D12_RESOURCEHEAPALLOCATIOND3D12_H_
 
 #include "dawn_native/ResourceMemoryAllocation.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
-
     class ResourceHeapAllocation : public ResourceMemoryAllocation {
       public:
         ResourceHeapAllocation() = default;
         ResourceHeapAllocation(const AllocationInfo& info,
                                uint64_t offset,
-                               ComPtr<ID3D12Resource> resource);
-        ~ResourceHeapAllocation() override = default;
+                               ComPtr<ID3D12Resource> resource, 
+                               AllocationType allocationType);
+        ~ResourceHeapAllocation() override;
 
         void Invalidate() override;
 
         ComPtr<ID3D12Resource> GetD3D12Resource() const;
         D3D12_GPU_VIRTUAL_ADDRESS GetGPUPointer() const;
+        LRUEntry* GetLRUEntry();
 
       private:
+        LRUEntry mLRUEntry;
         ComPtr<ID3D12Resource> mResource;
+
+        friend LRUEntry;
     };
 
 }}  // namespace dawn_native::d3d12
