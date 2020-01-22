@@ -37,6 +37,13 @@ dawn_json_generator("dawn_headers_gen") {
   ]
 }
 
+dawn_json_generator("webgpu_struct_info_gen") {
+  target = "webgpu_struct_info"
+  outputs = [
+    "src/dawn/webgpu_struct_info.json",
+  ]
+}
+
 source_set("dawn_headers") {
   all_dependent_configs = [ "${dawn_root}/src/common:dawn_public_include_dirs" ]
   public_deps = [
