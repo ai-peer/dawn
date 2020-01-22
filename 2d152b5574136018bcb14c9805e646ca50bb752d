@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "32cc2f2a_18ce487d",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T22:06:03Z",
+      "side": 1,
+      "message": "Another option to storing data in the node class directly is to have the Node class contain virtual methods. In the derived node classes, the implementations of the virtual methods can do the correct CONTAINING_RECORD business to answer questions about the resource.",
+      "parentUuid": "919fa071_04c88fbd",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0eef5c85_c7bf519a",
         "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
         "patchSetId": 5
