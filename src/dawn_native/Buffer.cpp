@@ -199,6 +199,13 @@ namespace dawn_native {
                                          WGPUBufferMapAsyncStatus status,
                                          const void* pointer,
                                          uint32_t dataLength) {
+        MaybeError deviceLost = GetDevice()->ValidateIsAlive();
+        if (deviceLost.IsError()) {
+            std::unique_ptr<ErrorData> errorData = deviceLost.AcquireError();
+            if (errorData->GetType() == wgpu::ErrorType::DeviceLost) {
+                status = WGPUBufferMapAsyncStatus_DeviceLost;
+            }
+        }
         ASSERT(!IsError());
         if (mMapReadCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapWriteCallback == nullptr);
@@ -214,6 +221,13 @@ namespace dawn_native {
                                           WGPUBufferMapAsyncStatus status,
                                           void* pointer,
                                           uint32_t dataLength) {
+        MaybeError deviceLost = GetDevice()->ValidateIsAlive();
+        if (deviceLost.IsError()) {
+            std::unique_ptr<ErrorData> errorData = deviceLost.AcquireError();
+            if (errorData->GetType() == wgpu::ErrorType::DeviceLost) {
+                status = WGPUBufferMapAsyncStatus_DeviceLost;
+            }
+        }
         ASSERT(!IsError());
         if (mMapWriteCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapReadCallback == nullptr);
@@ -237,8 +251,10 @@ namespace dawn_native {
     }
 
     void BufferBase::MapReadAsync(WGPUBufferMapReadCallback callback, void* userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapRead))) {
-            callback(WGPUBufferMapAsyncStatus_Error, nullptr, 0, userdata);
+        WGPUBufferMapAsyncStatus status = IsMapReadOrMapWriteAsyncError(wgpu::BufferUsage::MapRead);
+        if (status == WGPUBufferMapAsyncStatus_DeviceLost ||
+            status == WGPUBufferMapAsyncStatus_Error) {
+            callback(status, nullptr, 0, userdata);
             return;
         }
         ASSERT(!IsError());
@@ -273,8 +289,11 @@ namespace dawn_native {
     }
 
     void BufferBase::MapWriteAsync(WGPUBufferMapWriteCallback callback, void* userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapWrite))) {
-            callback(WGPUBufferMapAsyncStatus_Error, nullptr, 0, userdata);
+        WGPUBufferMapAsyncStatus status =
+            IsMapReadOrMapWriteAsyncError(wgpu::BufferUsage::MapWrite);
+        if (status == WGPUBufferMapAsyncStatus_DeviceLost ||
+            status == WGPUBufferMapAsyncStatus_Error) {
+            callback(status, nullptr, 0, userdata);
             return;
         }
         ASSERT(!IsError());
@@ -407,6 +426,24 @@ namespace dawn_native {
         }
 
         return {};
+    }
+
+    WGPUBufferMapAsyncStatus BufferBase::IsMapReadOrMapWriteAsyncError(wgpu::BufferUsage usage) {
+        MaybeError validateMapError = ValidateMap(usage);
+        if (validateMapError.IsError()) {
+            std::unique_ptr<ErrorData> errorData = validateMapError.AcquireError();
+
+            WGPUBufferMapAsyncStatus status;
+            if (errorData->GetType() == wgpu::ErrorType::DeviceLost) {
+                status = WGPUBufferMapAsyncStatus_DeviceLost;
+            } else {
+                status = WGPUBufferMapAsyncStatus_Error;
+            }
+
+            GetDevice()->ConsumedError(std::move(errorData));
+            return status;
+        }
+        return WGPUBufferMapAsyncStatus_Unknown;
     }
 
     MaybeError BufferBase::ValidateUnmap() const {
