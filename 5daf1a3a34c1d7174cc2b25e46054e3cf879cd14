@@ -36,6 +36,29 @@
     },
     {
       "key": {
+        "uuid": "31d16958_3a6f5a7d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "Since WGPUBufferMapAsyncStatus is already an error code, consider using it as the return value and have callers check whether the function returns WGPUBufferMapAsyncStatus_Error.",
+      "range": {
+        "startLine": 414,
+        "startChar": 4,
+        "endLine": 415,
+        "endChar": 86
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eff9e419_fa632ca3",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 3
@@ -52,6 +75,167 @@
         "startChar": 25,
         "endLine": 484,
         "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31c08d9c_22b84597",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "Since you already set status to WGPUBufferMapAsyncStatus_Error, you\u0027re wasting CPU cycles checking for additional errors and stomping on the status variable. \n\n@Kai, do we need to send a separate callback for each error encountered or is sending only one callback for the first error good enough?",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 0
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ced30c93_c40f468f",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "I think VERIFY_EQ is a better macro to use here, especially if we\u0027re going to verify more than one parameter of the callback.",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89ba5e63_8ee59bb1",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "Good that we\u0027re verifying the status is what we expect.  \n\nWe should verify the other parameters are also what we expect.",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "859f7649_7b1418b7",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "Since the map read and write callbacks have the same function signature, we should be able to get away with having one callback.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 0
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62f81d6a_05137c4e",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "Since userdata is typed to be void*, you should be able to use the weaker static_cast\u003c\u003e instead of reinterpret_cast\u003c\u003e.",
+      "range": {
+        "startLine": 287,
+        "startChar": 31,
+        "endLine": 287,
+        "endChar": 60
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de9f1ed6_4cfd203b",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "If you\u0027re just going to have an array with one element, prefer std::array to avoid the memory allocation.",
+      "range": {
+        "startLine": 311,
+        "startChar": 4,
+        "endLine": 311,
+        "endChar": 38
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48ecc5bc_27bafefd",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T19:16:22Z",
+      "side": 1,
+      "message": "The rest of the code assumes the array is of floats but here you are declaring it to be of uint32_t. I know that sizeof(float) \u003d\u003d sizeof(uint32_t) and the contents don\u0027t matter for the purposes of the test but we should keep things consistent so it doesn\u0027t look like there is a bug.",
+      "range": {
+        "startLine": 311,
+        "startChar": 16,
+        "endLine": 311,
+        "endChar": 24
       },
       "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
