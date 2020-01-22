@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a7c760c_cf590678",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T00:30:51Z",
+      "side": 1,
+      "message": "Can you please expand a little bit more on why this needed to move here? The second to last line of code in DeviceBase::BaseDestructor is a call to Destroy.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "7b7b21fad310827c27845b7b05f35098b9fce191",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
