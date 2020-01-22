@@ -46,6 +46,30 @@
       "revId": "9b5e28d5a3fba3ed5724a952068eb00ce4ecbc9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "935d27b2_cf3c1d92",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-22T12:18:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0509922d_66d5a705",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "9b5e28d5a3fba3ed5724a952068eb00ce4ecbc9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
