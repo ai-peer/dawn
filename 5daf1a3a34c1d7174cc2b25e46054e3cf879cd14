@@ -355,6 +355,30 @@
     },
     {
       "key": {
+        "uuid": "13babe7b_66444359",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-22T21:50:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "787a1b36_98e591d4",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "5daf1a3a34c1d7174cc2b25e46054e3cf879cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "859f7649_7b1418b7",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 3
