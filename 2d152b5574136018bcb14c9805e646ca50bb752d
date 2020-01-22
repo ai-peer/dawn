@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "919fa071_04c88fbd",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:48:23Z",
+      "side": 1,
+      "message": "I looked at other Chromium code to see if there is precedence for what we\u0027re doing and I found a very similar container class in base/containers/linked_list.h.  \n\nNote how:\n* The linked list class itself does no memory allocation. Rather, it accepts already allocated nodes from elsewhere. \n* The node class of LinkedList contains no domain-specific information, just forward and backward pointers. Domain-specific information is kept in classes derived from the node class. \n* The linked list class also has no domain-specific information, it just does linked list things. \n* Policy for where in the list things get added (front vs back) are done outside of the linked list class.\n* All insertions and deletions are O(1)\n\nYou\u0027ve written a similar class but used containment for node storage instead of derivation. Derivation has the disadvantage that list items can only belong to one list at a time but that might be fine for our purposes. \n\nIf you want to re-use the class in linked_list, I would not be opposed. However, if we keep what you have, we should break apart the domain management such that the node and list classes do not contain any D3D12 things in them. \n\nIf we do not want to have all of these allocation types, perhaps we can store a pointer to the D3D12 object in the node derived class and put the node derived class in ResourceHeapAllocation and Heap.",
+      "parentUuid": "3baac4b2_7b1c059b",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0eef5c85_c7bf519a",
         "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
         "patchSetId": 5
@@ -81,6 +99,24 @@
       "writtenOn": "2020-01-22T18:25:32Z",
       "side": 1,
       "message": "LRUEntry at a minimum must store pointers to the next and previous links, as well as the AllocationType enum. By making this a member, it means those bytes are always being allocated, whether it\u0027s used in the LRUCache or not (an entry is only needed for AllocationMethod::kDirect). Previously, we just had a pointer to the entry, which meant we only had to allocate the entry if we needed one, otherwise it was just an unused pointer. Since kSubAllocation types should always be the most abundant of the types, it seems like the net effect could actually be more bytes used.",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cf2ff07_9fb2b6a0",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-22T21:48:23Z",
+      "side": 1,
+      "message": "How is the current code tracking sub allocations and evicting the containing heap?",
+      "parentUuid": "0ebb7273_070edf64",
       "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
