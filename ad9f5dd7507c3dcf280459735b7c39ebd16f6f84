@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d727995d_3b9083bb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-23T23:29:58Z",
+      "side": 1,
+      "message": "The lost buffer change also had code in special places that need to workaround the fact Destroy is not called in the destructor on device removed. This seems a bit fragile.  \n\nInstead of having Destroy get skipped if on device lost, we should consider letting it run more than once and be resilient to having some objects of the class already be destroyed in a previous go-around.  \n\nThoughts?",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
