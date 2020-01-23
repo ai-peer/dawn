@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "beb08451_e6a3feab",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T19:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffd37c21_09203407",
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9a9cac6_58724a89",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2020-01-23T18:11:30Z",
       "side": 1,
       "message": "Maybe this could be a ValidateMap(usage, *callbackStatusOut). It could make the logic a bit simpler. ditto for read.",
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3f79ac4_84b4fb62",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T19:21:34Z",
+      "side": 1,
+      "message": "I had it here https://dawn-review.googlesource.com/c/dawn/+/15340/3/src/dawn_native/Buffer.cpp, do you mean to combine that with ValidateMap that already exists?",
+      "parentUuid": "b9a9cac6_58724a89",
       "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6edcbd2f_7b37ec39",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T19:21:34Z",
+      "side": 1,
+      "message": "I\u0027ll use IsLost() here instead, I just need to know device is lost to send that status.",
+      "parentUuid": "57a80502_3b6665c2",
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "701ab6b3_b93308a0",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 7
@@ -73,6 +127,30 @@
       "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e57fd318_ae1eb703",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T19:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "701ab6b3_b93308a0",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 36
+      },
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "9514ba42_63c38791",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T19:21:34Z",
+      "side": 1,
+      "message": "I think we make the error buffer, in ErrorBuffer::MakeMapped(), we still use the correct size and a fake mapped data pointer, so these aren\u0027t 0 and nullptr when returned.\nhttps://cs.chromium.org/chromium/src/third_party/dawn/src/dawn_native/Buffer.cpp?l\u003d36-47\u0026rcl\u003da5a6e4f5bbdaf939e63fdd59979bd8cd288eb01e",
+      "parentUuid": "cc92238b_048d5049",
+      "range": {
+        "startLine": 303,
+        "startChar": 1,
+        "endLine": 304,
+        "endChar": 62
+      },
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b93b174f_b1b40ea2",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 7
@@ -133,6 +235,30 @@
       "writtenOn": "2020-01-23T18:11:30Z",
       "side": 1,
       "message": "Why is this needed? ditto in the other test below.",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 0
+      },
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5c809ae_04a31c5b",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T19:21:34Z",
+      "side": 1,
+      "message": "Just to set the buffer up for reading with something in it even though we know it will fail, thought it would make it look more like real use, I can remove it :).",
+      "parentUuid": "b93b174f_b1b40ea2",
       "range": {
         "startLine": 323,
         "startChar": 0,
@@ -159,6 +285,24 @@
       "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b740f7c_d0197057",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T19:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8431f45_36129a9f",
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
