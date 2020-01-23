@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d437f15e_7f65710d",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-23T21:30:22Z",
+      "side": 1,
+      "message": "do we want to send WGPUFenceCompletionStatus_DeviceLost status here?",
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
