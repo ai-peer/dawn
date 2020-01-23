@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "74ac6c29_91a2d395",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-23T23:16:45Z",
+      "side": 1,
+      "message": "I understand we may need this for Vulkan. Why do we need it for D3D12?",
+      "parentUuid": "8d2027a5_19d06362",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 0
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e39ad9d2_cf1fe269",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 5
