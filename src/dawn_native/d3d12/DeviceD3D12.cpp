@@ -18,6 +18,7 @@
 #include "dawn_native/BackendConnection.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/FenceSignalTracker.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
@@ -106,6 +107,7 @@ namespace dawn_native { namespace d3d12 {
 
     Device::~Device() {
         BaseDestructor();
+        // GetFenceSignalTracker()->Tick(mCompletedSerial);
     }
 
     ComPtr<ID3D12Device> Device::GetD3D12Device() const {
