@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cfc459e_7470f495",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-23T09:40:01Z",
+      "side": 1,
+      "message": "nit: \"\"\"\nAdd a generator for Emscripten\u0027s struct_info.json\n\n\u003csome explanation of what it\u0027s used for\u003e\n\nAlso adds PresentMode that needed for XXX \u003cwhy is it needed now?\u003e\n\"\"",
+      "revId": "bbd997834c7d5de1685f44ea3b04bdb287fbc645",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7271d274_07a6ba04",
+        "filename": "generator/templates/api_struct_info.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-23T09:40:01Z",
+      "side": 1,
+      "message": "nit: add a //* comment explaining why this file will be used for (including a brief explanation of what struct_info.json is)",
+      "revId": "bbd997834c7d5de1685f44ea3b04bdb287fbc645",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
