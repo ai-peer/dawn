@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9d2e1f37_290e44a1",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-23T00:19:57Z",
+      "side": 1,
+      "message": "actually, I suppose this wouldn\u0027t make any difference except for preventing the generated_struct_info.json from changing afterward.",
+      "parentUuid": "5cf88916_9b69b941",
+      "revId": "8c9ab0e3ebbc694eb35eccc93dcc7866c2edbf1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c61da37e_32bdc023",
         "filename": "src/dawn_native/SwapChain.cpp",
         "patchSetId": 3
