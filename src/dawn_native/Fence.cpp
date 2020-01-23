@@ -112,6 +112,7 @@ namespace dawn_native {
     }
 
     MaybeError Fence::ValidateOnCompletion(uint64_t value) const {
+        DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
         if (value > mSignalValue) {
             return DAWN_VALIDATION_ERROR("Value greater than fence signaled value");
