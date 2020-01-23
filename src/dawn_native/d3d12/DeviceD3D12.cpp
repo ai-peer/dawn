@@ -106,6 +106,10 @@ namespace dawn_native { namespace d3d12 {
 
     Device::~Device() {
         BaseDestructor();
+
+        // We need to handle deallocating memory that is destructed after device has been lost
+        mDescriptorHeapAllocator->Deallocate(mCompletedSerial);
+        mMapRequestTracker->Tick(mCompletedSerial);
     }
 
     ComPtr<ID3D12Device> Device::GetD3D12Device() const {

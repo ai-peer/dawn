@@ -52,6 +52,22 @@ class DeviceLostTest : public DawnTest {
         EXPECT_CALL(*mockDeviceLostCallback, Call(_, this)).Times(1);
         device.LoseForTesting();
     }
+
+    static void CheckMapWriteFail(WGPUBufferMapAsyncStatus status,
+                                  void* data,
+                                  uint64_t,
+                                  void* userdata) {
+        EXPECT_EQ(WGPUBufferMapAsyncStatus_DeviceLost, status);
+        EXPECT_EQ(nullptr, userdata);
+    }
+
+    static void CheckMapReadFail(WGPUBufferMapAsyncStatus status,
+                                 const void* data,
+                                 uint64_t,
+                                 void* userdata) {
+        EXPECT_EQ(WGPUBufferMapAsyncStatus_DeviceLost, status);
+        EXPECT_EQ(nullptr, userdata);
+    }
 };
 
 // Test that DeviceLostCallback is invoked when LostForTestimg is called
@@ -210,6 +226,128 @@ TEST_P(DeviceLostTest, CreateTextureFails) {
 TEST_P(DeviceLostTest, TickFails) {
     SetCallbackAndLoseForTesting();
     ASSERT_DEVICE_ERROR(device.Tick());
+}
+
+// Test that CreateBuffer fails when device is lost
+TEST_P(DeviceLostTest, CreateBufferFails) {
+    SetCallbackAndLoseForTesting();
+
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::CopySrc;
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&bufferDescriptor));
+}
+
+// Test that buffer.MapWriteAsync fails after device is lost
+TEST_P(DeviceLostTest, BufferMapWriteAsyncFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    SetCallbackAndLoseForTesting();
+    ASSERT_DEVICE_ERROR(buffer.MapWriteAsync(CheckMapWriteFail, nullptr));
+}
+
+// Test that buffer.MapWriteAsync calls back with device loss status
+TEST_P(DeviceLostTest, BufferMapWriteAsyncBeforeLossFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    buffer.MapWriteAsync(CheckMapWriteFail, nullptr);
+    SetCallbackAndLoseForTesting();
+}
+
+// Test that buffer.Unmap fails after device is lost
+TEST_P(DeviceLostTest, BufferUnmapFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+    wgpu::CreateBufferMappedResult result = device.CreateBufferMapped(&bufferDescriptor);
+
+    SetCallbackAndLoseForTesting();
+    ASSERT_DEVICE_ERROR(result.buffer.Unmap());
+}
+
+// Test that CreateBufferMapped fails after device is lost
+TEST_P(DeviceLostTest, CreateBufferMappedFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
+
+    SetCallbackAndLoseForTesting();
+    ASSERT_DEVICE_ERROR(device.CreateBufferMapped(&bufferDescriptor));
+}
+
+// Test that CreateBufferMappedAsync fails after device is lost
+TEST_P(DeviceLostTest, CreateBufferMappedAsyncFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
+
+    SetCallbackAndLoseForTesting();
+    struct ResultInfo {
+        wgpu::CreateBufferMappedResult result;
+        bool done = false;
+    } resultInfo;
+
+    ASSERT_DEVICE_ERROR(device.CreateBufferMappedAsync(
+        &bufferDescriptor,
+        [](WGPUBufferMapAsyncStatus status, WGPUCreateBufferMappedResult result, void* userdata) {
+            auto* resultInfo = static_cast<ResultInfo*>(userdata);
+            EXPECT_EQ(WGPUBufferMapAsyncStatus_DeviceLost, status);
+            resultInfo->result.buffer = wgpu::Buffer::Acquire(result.buffer);
+            resultInfo->result.data = result.data;
+            resultInfo->result.dataLength = result.dataLength;
+            resultInfo->done = true;
+        },
+        &resultInfo));
+
+    while (!resultInfo.done) {
+        ASSERT_DEVICE_ERROR(WaitABit());
+    }
+
+    ASSERT_DEVICE_ERROR(resultInfo.result.buffer.Unmap());
+}
+
+// Test that BufferMapReadAsync fails after device is lost
+TEST_P(DeviceLostTest, BufferMapReadAsyncFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    SetCallbackAndLoseForTesting();
+    ASSERT_DEVICE_ERROR(buffer.MapReadAsync(CheckMapReadFail, nullptr));
+}
+
+// Test that BufferMapReadAsync calls back with device lost status when device lost after map read
+TEST_P(DeviceLostTest, BufferMapReadAsyncBeforeLossFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    buffer.MapReadAsync(CheckMapReadFail, nullptr);
+    SetCallbackAndLoseForTesting();
+}
+
+// Test that SetSubData fails after device is lose
+TEST_P(DeviceLostTest, SetSubDataFails) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    SetCallbackAndLoseForTesting();
+    std::array<float, 1> data = {12};
+    ASSERT_DEVICE_ERROR(buffer.SetSubData(0, sizeof(float), data.data()));
 }
 
 DAWN_INSTANTIATE_TEST(DeviceLostTest, D3D12Backend, VulkanBackend);
