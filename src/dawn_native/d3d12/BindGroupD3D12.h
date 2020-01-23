@@ -17,9 +17,7 @@
 
 #include "dawn_native/BindGroup.h"
 
-#include "dawn_native/d3d12/d3d12_platform.h"
-
-#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
+#include "dawn_native/d3d12/DescriptorHeapAllocationD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -29,23 +27,17 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroup(Device* device, const BindGroupDescriptor* descriptor);
 
-        void AllocateDescriptors(const DescriptorHeapHandle& cbvSrvUavHeapStart,
-                                 uint32_t* cbvUavSrvHeapOffset,
-                                 const DescriptorHeapHandle& samplerHeapStart,
-                                 uint32_t* samplerHeapOffset);
-        uint32_t GetCbvUavSrvHeapOffset() const;
-        uint32_t GetSamplerHeapOffset() const;
+        ResultOrError<bool> Create();  // Returns true if the BindGroup was successfully created.
 
-        bool TestAndSetCounted(uint64_t heapSerial, uint32_t indexInSubmit);
+        void Invalidate();
+
+        DescriptorHeapAllocation GetCbvUavSrvHeapAllocation() const;
+        DescriptorHeapAllocation GetSamplerHeapAllocation() const;
 
       private:
-        uint32_t mCbvUavSrvHeapOffset;
-        uint32_t mSamplerHeapOffset;
-
-        uint64_t mHeapSerial = 0;
-        uint32_t mIndexInSubmit = 0;
+        DescriptorHeapAllocation mCbvSrvUavHeapAllocation;
+        DescriptorHeapAllocation mSamplerHeapAllocation;
     };
-
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_BINDGROUPD3D12_H_
