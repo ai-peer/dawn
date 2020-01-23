@@ -150,8 +150,9 @@ namespace dawn_native { namespace null {
         const SwapChainDescriptor* descriptor) {
         return new OldSwapChain(this, descriptor);
     }
-    ResultOrError<SwapChainBase*> Device::CreateSwapChainImpl(
+    ResultOrError<NewSwapChainBase*> Device::CreateSwapChainImpl(
         Surface* surface,
+        NewSwapChainBase* previousSwapChain,
         const SwapChainDescriptor* descriptor) {
         return new SwapChain(this, surface, descriptor);
     }
@@ -360,6 +361,23 @@ namespace dawn_native { namespace null {
     }
 
     SwapChain::~SwapChain() {
+        if (mTexture.Get() != nullptr) {
+            mTexture->Destroy();
+        }
+    }
+
+    // TODO detach
+
+    MaybeError SwapChain::PresentImpl() {
+        mTexture->Destroy();
+        mTexture = nullptr;
+        return {};
+    }
+
+    ResultOrError<TextureViewBase*> SwapChain::GetCurrentTextureViewImpl() {
+        TextureDescriptor textureDesc = GetSwapChainBaseTextureDescriptor(this);
+        mTexture = AcquireRef(new Texture(GetDevice(), &textureDesc, TextureBase::TextureState::OwnedInternal));
+        return mTexture->CreateView(nullptr);
     }
 
     // OldSwapChain

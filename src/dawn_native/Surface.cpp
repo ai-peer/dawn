@@ -16,6 +16,7 @@
 
 #include "common/Platform.h"
 #include "dawn_native/Instance.h"
+#include "dawn_native/SwapChain.h"
 
 #if defined(DAWN_PLATFORM_WINDOWS)
 #    include "common/windows_with_undefs.h"
@@ -137,7 +138,22 @@ namespace dawn_native {
         }
     }
 
-    Surface::~Surface() = default;
+    Surface::~Surface() {
+        AttachSwapChain(nullptr);
+    }
+
+    NewSwapChainBase* Surface::GetAttachedSwapChain() const {
+        return mSwapChain;
+    }
+
+    void Surface::AttachSwapChain(NewSwapChainBase* swapChain) {
+        // THIS IS BAD
+        if (mSwapChain != nullptr) {
+            mSwapChain->DetachFromSurface();
+        }
+
+        mSwapChain = swapChain;
+    }
 
     InstanceBase* Surface::GetInstance() {
         return mInstance.Get();

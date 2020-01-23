@@ -34,6 +34,10 @@ namespace dawn_native {
         Surface(InstanceBase* instance, const SurfaceDescriptor* descriptor);
         ~Surface();
 
+        // Attaching the nullptr is equivalent to detaching the current swapchain.
+        void AttachSwapChain(NewSwapChainBase* swapChain);
+        NewSwapChainBase* GetAttachedSwapChain() const;
+
         // These are valid to call on all Surfaces.
         enum class Type { MetalLayer, WindowsHWND, Xlib };
         Type GetType() const;
@@ -53,6 +57,9 @@ namespace dawn_native {
       private:
         Ref<InstanceBase> mInstance;
         Type mType;
+
+        // The swapchain has a Ref to the surface and removes itself on destruction.
+        NewSwapChainBase* mSwapChain = nullptr;
 
         // MetalLayer
         void* mMetalLayer = nullptr;

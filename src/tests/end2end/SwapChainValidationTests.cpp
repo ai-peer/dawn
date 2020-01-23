@@ -69,11 +69,26 @@ class SwapChainValidationTests : public ValidationTest {
         pass.EndPass();
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
+
+    // Checks that an OutputAttachment view is an error by trying to create a render pass on it.
+    void CheckTextureViewIsDestroyed(wgpu::TextureView view) {
+        utils::ComboRenderPassDescriptor renderPassDesc({view});
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDesc);
+        pass.EndPass();
+        wgpu::CommandBuffer commands = encoder.Finish();
+
+        wgpu::Queue queue = device.CreateQueue();
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    }
 };
 
-// Control case for a successful swapchain creation.
+// Control case for a successful swapchain creation and presenting.
 TEST_F(SwapChainValidationTests, CreationSuccess) {
-    device.CreateSwapChain(surface, &goodDescriptor);
+    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);
+    wgpu::TextureView view = swapchain.GetCurrentTextureView();
+    swapchain.Present();
 }
 
 // Checks that the creation size must be a valid 2D texture size.
@@ -144,3 +159,40 @@ TEST_F(SwapChainValidationTests, OperationsOnErrorSwapChain) {
 
     ASSERT_DEVICE_ERROR(swapchain.Present());
 }
+
+// Check it is invalid to call present without getting a current view.
+TEST_F(SwapChainValidationTests, PresentWithoutCurrentView) {
+    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);
+
+    // Check it is invalid if we never called GetCurrentTextureView
+    ASSERT_DEVICE_ERROR(swapchain.Present());
+
+    // Check it is invalid if we never called since the last present.
+    swapchain.GetCurrentTextureView();
+    swapchain.Present();
+    ASSERT_DEVICE_ERROR(swapchain.Present());
+}
+
+// Check that the current view is in the destroyed state after the swapchain is destroyed.
+TEST_F(SwapChainValidationTests, ViewDestroyedAfterSwapChainDestruction) {
+    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);
+    wgpu::TextureView view = swapchain.GetCurrentTextureView();
+    swapchain = nullptr;
+
+    CheckTextureViewIsDestroyed(view);
+}
+
+// Check that the current view is the destroyed state after present.
+TEST_F(SwapChainValidationTests, ViewDestroyedAfterPresent) {
+    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);
+    wgpu::TextureView view = swapchain.GetCurrentTextureView();
+    swapchain.Present();
+
+    CheckTextureViewIsDestroyed(view);
+}
+
+//  check the returned texture view format, usage, size, dimension
+//  check error swapchain doesn't replace the previous one.
+//  check detach causes error on present and GetNextTexture
+//  check destorying surface is the same.
+//  check detach makes previous view error.

@@ -28,6 +28,8 @@ namespace dawn_native {
                                            const Surface* surface,
                                            const SwapChainDescriptor* descriptor);
 
+    TextureDescriptor GetSwapChainBaseTextureDescriptor(NewSwapChainBase* swapChain);
+
     class SwapChainBase : public ObjectBase {
       public:
         SwapChainBase(DeviceBase* device);
@@ -91,7 +93,11 @@ namespace dawn_native {
         NewSwapChainBase(DeviceBase* device,
                          Surface* surface,
                          const SwapChainDescriptor* descriptor);
+        ~NewSwapChainBase();
 
+        void DetachFromSurface();
+
+        // Dawn API
         void Configure(wgpu::TextureFormat format,
                        wgpu::TextureUsage allowedUsage,
                        uint32_t width,
@@ -106,12 +112,21 @@ namespace dawn_native {
         Surface* GetSurface();
 
       private:
+        bool mAttached;
         uint32_t mWidth;
         uint32_t mHeight;
         wgpu::TextureFormat mFormat;
         wgpu::TextureUsage mUsage;
 
         Ref<Surface> mSurface;
+        Ref<TextureViewBase> mCurrentTextureView;
+
+        MaybeError ValidatePresent() const;
+        MaybeError ValidateGetCurrentTextureView() const;
+
+        virtual MaybeError PresentImpl() = 0;
+        virtual ResultOrError<TextureViewBase*> GetCurrentTextureViewImpl() = 0;
+        virtual DetachFromSurfaceImpl() = 0;
     };
 
 }  // namespace dawn_native
