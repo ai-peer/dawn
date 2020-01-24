@@ -16,6 +16,58 @@
       "revId": "054540ef05a7e287ff25a413ef9a731ce91906ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e016535_55e0d633",
+        "filename": "dawn.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T08:32:25Z",
+      "side": 1,
+      "message": "So if the string needs to be different it will be \"jsrepr\": \"\\\"someother-string\\\"\"? It seems a bit heavy compared with just \"someother-string\". That said we can modify that when we have a better idea of what jsrepr is needed for in the future.",
+      "parentUuid": "a3833b54_d7244d5c",
+      "revId": "054540ef05a7e287ff25a413ef9a731ce91906ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9c5527c_cf9d7177",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T08:32:25Z",
+      "side": 1,
+      "message": "I\u0027m amazed that such a simple rules covers all the texture format correctly.",
+      "revId": "054540ef05a7e287ff25a413ef9a731ce91906ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7d39790_6fcf1284",
+        "filename": "generator/templates/library_webgpu_enum_tables.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T08:32:25Z",
+      "side": 1,
+      "message": "This strongly assumes that enum values are in order and compact, which is never checked anywhere. Maybe it could be building the array one element at a time and taking advantage of sparse arrays when the enum range isn\u0027t compact (which will happen with extensions).",
+      "revId": "054540ef05a7e287ff25a413ef9a731ce91906ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
