@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3833b54_d7244d5c",
+        "filename": "dawn.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 1448,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-24T01:26:32Z",
+      "side": 1,
+      "message": "note: reason I have \"jsrepr\" instead of just using \"if not valid, output \u0027undefined\u0027\" in the generator is that we may need it for the BC formats (or other things where the js_enum_case rules don\u0027t end up matching the names we pick in webgpu).",
+      "revId": "054540ef05a7e287ff25a413ef9a731ce91906ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
