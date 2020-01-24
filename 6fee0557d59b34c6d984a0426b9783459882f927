@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "7ba4f4b7_4dc9cbc7",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-24T00:14:27Z",
+      "side": 1,
+      "message": "Result has a constructor that takes an ErrorData.",
+      "parentUuid": "2e85f09b_9d49f502",
+      "range": {
+        "startLine": 443,
+        "startChar": 39,
+        "endLine": 443,
+        "endChar": 59
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19177536_31a39cea",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 5
@@ -211,6 +235,30 @@
       "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2158ee26_242afd57",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-24T00:14:27Z",
+      "side": 1,
+      "message": "I think this was needed before for me because I wrote my test wrong. It\u0027s no longer failing without this so I removed it.",
+      "parentUuid": "74ac6c29_91a2d395",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 0
+      },
+      "revId": "6fee0557d59b34c6d984a0426b9783459882f927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
