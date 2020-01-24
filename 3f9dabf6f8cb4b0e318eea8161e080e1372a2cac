@@ -224,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "e54dcb2e_d4b8b842",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-24T02:39:33Z",
+      "side": 1,
+      "message": "Ok, I\u0027m not sure why we do that. Possibly we shouldn\u0027t. Austin, do you know?\n\n(Perhaps we can find the answer by checking the comments on the CL that added it.)",
+      "parentUuid": "9514ba42_63c38791",
+      "range": {
+        "startLine": 303,
+        "startChar": 1,
+        "endLine": 304,
+        "endChar": 62
+      },
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b93b174f_b1b40ea2",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 7
