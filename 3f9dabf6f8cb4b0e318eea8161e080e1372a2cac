@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "c7378a42_339a2b65",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-24T20:11:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec0d0722_868d0ca4",
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57a80502_3b6665c2",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 7
