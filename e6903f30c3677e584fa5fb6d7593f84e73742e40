@@ -22,6 +22,29 @@
       "revId": "e6903f30c3677e584fa5fb6d7593f84e73742e40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3158cf6f_26951831",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T08:35:37Z",
+      "side": 1,
+      "message": "nit: extra semicolon.",
+      "range": {
+        "startLine": 48,
+        "startChar": 43,
+        "endLine": 48,
+        "endChar": 44
+      },
+      "revId": "e6903f30c3677e584fa5fb6d7593f84e73742e40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
