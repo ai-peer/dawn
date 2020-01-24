@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83d8e1d8_6eb9f1c7",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-24T02:37:14Z",
+      "side": 1,
+      "message": "nit: is an explicit cast necessary (here and below)? I would think a cast from T** to void** can happen automatically (or maybe needs a static_cast)",
+      "range": {
+        "startLine": 60,
+        "startChar": 63,
+        "endLine": 60,
+        "endChar": 79
+      },
+      "revId": "e6903f30c3677e584fa5fb6d7593f84e73742e40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
