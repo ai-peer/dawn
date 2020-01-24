@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "3c4e4b59_8c71c382",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T17:06:28Z",
+      "side": 1,
+      "message": "Whoops, that\u0027s a leftover comment from a previous approach.",
+      "parentUuid": "9b09016e_05cccbe9",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 82
+      },
+      "revId": "158ec43f0a007797c118273e0c37fb561a2621c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b08b15c8_f9c854f2",
         "filename": "src/dawn_native/SwapChain.cpp",
         "patchSetId": 3
