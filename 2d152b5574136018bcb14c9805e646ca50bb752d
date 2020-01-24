@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "7c763611_7af5b90c",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-24T17:03:26Z",
+      "side": 1,
+      "message": "The latter but for O(1), the node would be a Heap itself containing links. It\u0027s also possible to have this singly-linked - copy the next heap\u0027s value to the current then remove the next, effectively swapping pointers.\n\nAlso OK with O(N) or unordered_map + follow-up.",
+      "parentUuid": "0b718251_0ae11f90",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0eef5c85_c7bf519a",
         "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
         "patchSetId": 5
