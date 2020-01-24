@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "204dfdd0_51441395",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-24T02:45:43Z",
+      "side": 1,
+      "message": "Is lack of sub-allocation for these non-shader visible heaps a regression with your change? If so, we\u0027ll need to fix that before landing.",
+      "range": {
+        "startLine": 152,
+        "startChar": 16,
+        "endLine": 152,
+        "endChar": 52
+      },
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84627b84_26f123b2",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-24T02:45:43Z",
+      "side": 1,
+      "message": "Nit: Please use std::move to avoid an AddRef.",
+      "range": {
+        "startLine": 195,
+        "startChar": 42,
+        "endLine": 195,
+        "endChar": 78
+      },
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88cf899f_88fb3f2b",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-24T02:45:43Z",
+      "side": 1,
+      "message": "Nit: ComPtr already initializes its member variable to nullptr so there isn\u0027t a need to also do it in the constructor.",
+      "range": {
+        "startLine": 23,
+        "startChar": 10,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50806fbd_bf22d14a",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-24T02:45:43Z",
+      "side": 1,
+      "message": "Nit: Use std::move to avoid unnecessary AddRef.",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
