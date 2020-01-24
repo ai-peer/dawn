@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "b5fdaac3_a8e5f4c8",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "The allocations store a lot more data than the bindgroup needs. All the bindgroup needs after allocation is the D3D12_GPU_DESCRIPTOR_HANDLE and serial for both heaps.",
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bb6662d_66ac1097",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "When the handling of RTV / DSV heap is removed, this function can return a DescriptorHeapAllocation without ResultOrError.",
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "204dfdd0_51441395",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 34
@@ -19,6 +53,47 @@
         "endLine": 152,
         "endChar": 52
       },
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98afb85b_6b8328d8",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "That\u0027s the case already, and see [1]: we don\u0027t need to handle RTV / DSV in this CL.",
+      "parentUuid": "204dfdd0_51441395",
+      "range": {
+        "startLine": 152,
+        "startChar": 16,
+        "endLine": 152,
+        "endChar": 52
+      },
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bbfef49_4c797e3b",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "[2]: we could have a Serial value of 0 mean that the bindgroup is not allocated and have the heap serials in the allocators start at 1.",
       "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -88,6 +163,57 @@
         "endLine": 30,
         "endChar": 40
       },
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad6bd079_f9d26953",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "The call to GetCPUDescriptorHandleForHeapStart and computation of mSizeIncrement * mOffset is done repeatedly. Instead we could store the D3D12_CPU_DESCRIPTOR_HANDLE or D3D12_GPU_DESCRIPTOR_HANDLE that are the start of the allocation and offset into them.\n\nThe allocation could then just have the following members:\n\n        D3D12_CPU_DESCRIPTOR_HANDLE baseCPUHandle;\n        D3D12_GPU_DESCRIPTOR_HANDLE baseGPUHandle;\n        uint32_t sizeIncrement;\n        Serial serial;\n\n        bool IsValid() const;\n        D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t index) const;\n        D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(uint32_t index) const;",
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f675b6c2_222a52ea",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "With [2] this is unused.",
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3b5559f_55c96e92",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "nit: unused.",
       "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true

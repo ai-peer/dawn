@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6b78fecd_23c79323",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "::Create usually means creating an object inside a new allocation. Here it means re-allocating the object if needed which is a very different semantic.",
+      "parentUuid": "8d36ff7b_b6f45af7",
+      "range": {
+        "startLine": 30,
+        "startChar": 35,
+        "endLine": 30,
+        "endChar": 41
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6ea566e1_b834634a",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 33
@@ -318,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "f846e0ff_3d7a5395",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "[1] The suggestion is to have specialized allocators for each of the three types of descriptors described above because they have very different usage characteristics. Basically in the future in Dawn there is likely to be a ShaderVisibleDescriptorAllocator, a ShaderVisibleStagingAllocator, and an RenderTargetDescriptorAllocator for RTV/DSV. They would share almost no code because they are used very differently:\n\n - ShaderVisibleDescriptorAllocator is what should be done in this CL and has linear allocators into GPU visible descriptors heaps with heap serials to handle the fact that a single descriptor heap of each type can be in use at a time.\n - ShaderVisibleStagingAllocator is a block allocator likely per BindGroupLayout of CBVSRVUAV / Sampler with D3D12_DESCRIPTOR_HEAP_FLAG_NONE that used to precompute descriptors so that ShaderVisibleDescriptorAllocator allocation is just copying descriptors.\n - RenderTargetDescriptorAllocator is probably just a growing ringbuffer.\n\nThere are many different concepts behind the D3D12 generic names of descriptors and descriptor heaps, and for simplicity and performance we should have different handling for different underlying concepts.",
+      "parentUuid": "c7813f57_6a0f4acf",
+      "range": {
+        "startLine": 105,
+        "startChar": 20,
+        "endLine": 116,
+        "endChar": 75
+      },
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06420359_595842a6",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
         "patchSetId": 33
@@ -546,6 +594,24 @@
       "side": 1,
       "message": "To keep it consistent with the other allocators that also go \"through the device\" vs indirectly through a Get(). OK with either.",
       "parentUuid": "98f5c62f_d33f17bf",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edb1fcc0_6da13e88",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:49:15Z",
+      "side": 1,
+      "message": "I have a slight preference for going in the object directly. I\u0027ll fix this in the Vulkan backend as well.",
+      "parentUuid": "8519d0fd_d4053c11",
       "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
