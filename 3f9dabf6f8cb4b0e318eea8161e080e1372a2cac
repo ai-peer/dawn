@@ -248,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "bdf2950a_653bd61f",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-24T02:52:57Z",
+      "side": 1,
+      "message": "This is because when we CreateBufferMapped(), we wanted code that writes to the mapping to still work even though it\u0027s an ErrorBuffer.\n\nDawn\u0027s (and WebGPU) public API doesn\u0027t have a way to check if an object is an error.\nhttps://dawn-review.googlesource.com/c/dawn/+/4780/10/src/dawn_native/Device.cpp#161\n\nMaybe for CreateBufferMappedAsync, we don\u0027t need the fake data because the user can check the status?",
+      "parentUuid": "e54dcb2e_d4b8b842",
+      "range": {
+        "startLine": 303,
+        "startChar": 1,
+        "endLine": 304,
+        "endChar": 62
+      },
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b93b174f_b1b40ea2",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 7
