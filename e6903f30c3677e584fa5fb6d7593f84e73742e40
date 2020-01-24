@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "03b95a13_44555986",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-24T15:59:45Z",
+      "side": 1,
+      "message": "I thought that static cast would work too, but I get an error that I cannot convert from Compiler** to void**. I am assuming this is because I am converting from object-pointer-pointer to a primitive-pointer-pointer and there is no conversions defined for that.",
+      "parentUuid": "83d8e1d8_6eb9f1c7",
+      "range": {
+        "startLine": 60,
+        "startChar": 63,
+        "endLine": 60,
+        "endChar": 79
+      },
+      "revId": "e6903f30c3677e584fa5fb6d7593f84e73742e40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3158cf6f_26951831",
         "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "e6903f30c3677e584fa5fb6d7593f84e73742e40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fc6fbc5_5efca40f",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-24T15:59:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3158cf6f_26951831",
+      "range": {
+        "startLine": 48,
+        "startChar": 43,
+        "endLine": 48,
+        "endChar": 44
+      },
+      "revId": "e6903f30c3677e584fa5fb6d7593f84e73742e40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
