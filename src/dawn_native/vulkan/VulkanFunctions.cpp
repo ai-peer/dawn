@@ -15,6 +15,7 @@
 #include "dawn_native/vulkan/VulkanFunctions.h"
 
 #include "common/DynamicLib.h"
+#include "dawn_native/ErrorInjector.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
 
 namespace dawn_native { namespace vulkan {
@@ -120,6 +121,10 @@ namespace dawn_native { namespace vulkan {
 
     MaybeError VulkanFunctions::LoadDeviceProcs(VkDevice device,
                                                 const VulkanDeviceInfo& deviceInfo) {
+        if (ErrorInjectorEnabled() && ShouldInjectError()) {
+            return DAWN_DEVICE_LOST_ERROR("Fake LoadDeviceProcs error");
+        }
+
         GET_DEVICE_PROC(AllocateCommandBuffers);
         GET_DEVICE_PROC(AllocateDescriptorSets);
         GET_DEVICE_PROC(AllocateMemory);
