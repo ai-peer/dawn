@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "accfacb6_939cf436",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-24T00:46:11Z",
+      "side": 1,
+      "message": "What about having Derived::Destroy handle destroying mErrorScopeTracker and mFenceSignalTracker , and ASSERT that happened in DeviceBase::~DeviceBase ?\n\nThis is what we do for the DynamicUploader.\n\nThen, in ~ErrorScopeTracker and ~FenceSignalTracker (and other relevant trackers as well), they can check if the Device is alive, and call (or mark) all callbacks / objects with the DeviceLost status?",
+      "parentUuid": "d727995d_3b9083bb",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
@@ -36,6 +60,47 @@
       "writtenOn": "2020-01-23T21:30:22Z",
       "side": 1,
       "message": "do we want to send WGPUFenceCompletionStatus_DeviceLost status here?",
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdd9de0b_e6da00f6",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-24T00:46:11Z",
+      "side": 1,
+      "message": "If the Device is lost, then yes.",
+      "parentUuid": "d437f15e_7f65710d",
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d7ed1e5_8bd04061",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-24T00:46:11Z",
+      "side": 1,
+      "message": "Similar to with Buffers, can we test that\n\nfence.onCompletion(value, callback, userdata)\nSetCallbackAndLoseForTesting();\n\nwill call |callback| with DeviceLost ?",
+      "range": {
+        "startLine": 109,
+        "startChar": 20,
+        "endLine": 109,
+        "endChar": 38
+      },
       "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
