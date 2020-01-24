@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "3264152a_b2658281",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:11:02Z",
+      "side": 1,
+      "message": "Either way would work imho. Being resilient to destroy being called twice could have the slight advantage that things are less likely to break when we add more service. If the cost is slightly more overhead at destruction that\u0027s fine, but hopefully it doesn\u0027t impact the code of service to add overhead during regular operations.",
+      "parentUuid": "1c3d6153_ffc25ac2",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
@@ -125,6 +149,23 @@
         "endLine": 109,
         "endChar": 38
       },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8201e9e8_e37ef1bb",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T10:11:02Z",
+      "side": 1,
+      "message": "This isn\u0027t used.",
       "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
