@@ -202,6 +202,14 @@ namespace dawn_native {
         ASSERT(!IsError());
         if (mMapReadCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapWriteCallback == nullptr);
+
+            // Handle callback if device is lost
+            if (GetDevice()->IsLost()) {
+                WGPUBufferMapReadCallback callback = mMapReadCallback;
+                mMapReadCallback = nullptr;
+                callback(WGPUBufferMapAsyncStatus_DeviceLost, nullptr, 0, mMapUserdata);
+                return;
+            }
             // Tag the callback as fired before firing it, otherwise it could fire a second time if
             // for example buffer.Unmap() is called inside the application-provided callback.
             WGPUBufferMapReadCallback callback = mMapReadCallback;
@@ -214,9 +222,17 @@ namespace dawn_native {
                                           WGPUBufferMapAsyncStatus status,
                                           void* pointer,
                                           uint32_t dataLength) {
+        // Handle callback if device is lost
+        if (GetDevice()->IsLost()) {
+            WGPUBufferMapWriteCallback callback = mMapWriteCallback;
+            mMapWriteCallback = nullptr;
+            callback(WGPUBufferMapAsyncStatus_DeviceLost, nullptr, 0, mMapUserdata);
+            return;
+        }
         ASSERT(!IsError());
         if (mMapWriteCallback != nullptr && serial == mMapSerial) {
             ASSERT(mMapReadCallback == nullptr);
+
             // Tag the callback as fired before firing it, otherwise it could fire a second time if
             // for example buffer.Unmap() is called inside the application-provided callback.
             WGPUBufferMapWriteCallback callback = mMapWriteCallback;
@@ -237,8 +253,9 @@ namespace dawn_native {
     }
 
     void BufferBase::MapReadAsync(WGPUBufferMapReadCallback callback, void* userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapRead))) {
-            callback(WGPUBufferMapAsyncStatus_Error, nullptr, 0, userdata);
+        WGPUBufferMapAsyncStatus status;
+        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapRead, &status))) {
+            callback(status, nullptr, 0, userdata);
             return;
         }
         ASSERT(!IsError());
@@ -273,8 +290,9 @@ namespace dawn_native {
     }
 
     void BufferBase::MapWriteAsync(WGPUBufferMapWriteCallback callback, void* userdata) {
-        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapWrite))) {
-            callback(WGPUBufferMapAsyncStatus_Error, nullptr, 0, userdata);
+        WGPUBufferMapAsyncStatus status;
+        if (GetDevice()->ConsumedError(ValidateMap(wgpu::BufferUsage::MapWrite, &status))) {
+            callback(status, nullptr, 0, userdata);
             return;
         }
         ASSERT(!IsError());
@@ -389,23 +407,39 @@ namespace dawn_native {
         return {};
     }
 
-    MaybeError BufferBase::ValidateMap(wgpu::BufferUsage requiredUsage) const {
-        DAWN_TRY(GetDevice()->ValidateIsAlive());
-        DAWN_TRY(GetDevice()->ValidateObject(this));
+    MaybeError BufferBase::ValidateMap(wgpu::BufferUsage requiredUsage,
+                                       WGPUBufferMapAsyncStatus* status) const {
+        MaybeError validateIsAlive = GetDevice()->ValidateIsAlive();
+        if (validateIsAlive.IsError()) {
+            *status = WGPUBufferMapAsyncStatus_DeviceLost;
+            validateIsAlive.AcquireError();
+            return DAWN_DEVICE_LOST_ERROR("Device is lost");
+        }
+
+        MaybeError validateObjectError = GetDevice()->ValidateObject(this);
+        if (validateObjectError.IsError()) {
+            *status = WGPUBufferMapAsyncStatus_Error;
+            validateObjectError.AcquireError();
+            return DAWN_VALIDATION_ERROR("Object is an error");
+        }
 
         switch (mState) {
             case BufferState::Mapped:
+                *status = WGPUBufferMapAsyncStatus_Error;
                 return DAWN_VALIDATION_ERROR("Buffer already mapped");
             case BufferState::Destroyed:
+                *status = WGPUBufferMapAsyncStatus_Error;
                 return DAWN_VALIDATION_ERROR("Buffer is destroyed");
             case BufferState::Unmapped:
                 break;
         }
 
         if (!(mUsage & requiredUsage)) {
+            *status = WGPUBufferMapAsyncStatus_Error;
             return DAWN_VALIDATION_ERROR("Buffer needs the correct map usage bit");
         }
 
+        *status = WGPUBufferMapAsyncStatus_Success;
         return {};
     }
 
