@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1c3d6153_ffc25ac2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-24T00:50:51Z",
+      "side": 1,
+      "message": "Sorry, last step is probably unnecessary so long as all of the things that happen on Tick() check if the Device is lost and set the status appropriately.",
+      "parentUuid": "accfacb6_939cf436",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
