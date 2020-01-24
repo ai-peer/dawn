@@ -69,6 +69,7 @@ namespace dawn_native { namespace vulkan {
         *static_cast<VulkanDeviceKnobs*>(&mDeviceInfo) = usedDeviceKnobs;
 
         DAWN_TRY(functions->LoadDeviceProcs(mVkDevice, mDeviceInfo));
+        mDeviceProcsLoaded = true;
 
         GatherQueueFromDevice();
         mDescriptorSetService = std::make_unique<DescriptorSetService>(this);
@@ -738,6 +739,10 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
+        if (!mDeviceProcsLoaded) {
+            return {};
+        }
+
         VkResult waitIdleResult = VkResult::WrapUnsafe(fn.QueueWaitIdle(mQueue));
         // Ignore the result of QueueWaitIdle: it can return OOM which we can't really do anything
         // about, Device lost, which means workloads running on the GPU are no longer accessible
@@ -771,6 +776,9 @@ namespace dawn_native { namespace vulkan {
 
     void Device::Destroy() {
         ASSERT(mLossStatus != LossStatus::AlreadyLost);
+        if (!mDeviceProcsLoaded) {
+            return;
+        }
 
         // Immediately tag the recording context as unused so we don't try to submit it in Tick.
         mRecordingContext.used = false;

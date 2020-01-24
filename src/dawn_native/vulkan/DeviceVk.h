@@ -144,6 +144,7 @@ namespace dawn_native { namespace vulkan {
         VkDevice mVkDevice = VK_NULL_HANDLE;
         uint32_t mQueueFamily = 0;
         VkQueue mQueue = VK_NULL_HANDLE;
+        bool mDeviceProcsLoaded = false;
 
         std::unique_ptr<DescriptorSetService> mDescriptorSetService;
         std::unique_ptr<FencedDeleter> mDeleter;
