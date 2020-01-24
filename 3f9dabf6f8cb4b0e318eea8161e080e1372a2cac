@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ec0d0722_868d0ca4",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-24T09:51:49Z",
+      "side": 1,
+      "message": "Yes my suggestion is to make the code simpler by having ValidateMap return the error code that should be used, instead of handling the error locally in IsMapReadOrMapWriteAsyncError. The error handling would be very apparent in this function call, and the control flow would be simplified.",
+      "parentUuid": "b3f79ac4_84b4fb62",
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57a80502_3b6665c2",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 7
