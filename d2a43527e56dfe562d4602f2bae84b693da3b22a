@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1449a8e1_1aacb7ff",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-25T02:20:45Z",
+      "side": 1,
+      "message": "nit: ... in CreateDevice.",
+      "range": {
+        "startLine": 54,
+        "startChar": 60,
+        "endLine": 54,
+        "endChar": 61
+      },
+      "revId": "d2a43527e56dfe562d4602f2bae84b693da3b22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "221d5c73_f52c03a5",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-25T02:20:45Z",
+      "side": 1,
+      "message": "nit: probably could just be the initial value in the header",
+      "revId": "d2a43527e56dfe562d4602f2bae84b693da3b22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6ce4e31_18c7badc",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-25T02:20:45Z",
+      "side": 1,
+      "message": "nit: need to handle",
+      "range": {
+        "startLine": 104,
+        "startChar": 14,
+        "endLine": 104,
+        "endChar": 25
+      },
+      "revId": "d2a43527e56dfe562d4602f2bae84b693da3b22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
