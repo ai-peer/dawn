@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b732d8a_8b0f86b4",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-25T09:05:44Z",
+      "side": 1,
+      "message": "The whole code could be \n\n        if (mMapReadCallback !\u003d nullptr \u0026\u0026 serial \u003d\u003d mMapSerial) {\n            ASSERT(mMapWriteCallback \u003d\u003d nullptr);\n\n            // Tag the callback as fired before firing it, otherwise it could fire a second time if\n            // for example buffer.Unmap() is called inside the application-provided callback.\n            WGPUBufferMapReadCallback callback \u003d mMapReadCallback;\n            mMapReadCallback \u003d nullptr;\n\n            if (GetDevice()-\u003eIsLost()) {\n                callback(WGPUBufferMapAsyncStatus_DeviceLost, nullptr, 0, mMapUserdata);\n            } else {\n                callback(status, pointer, dataLength, mMapUserdata);\n            }\n        }",
+      "revId": "452227853ea5a8e365ba8a0db9d0b33b38c67eaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6be478d5_909216ba",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-25T09:05:44Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "452227853ea5a8e365ba8a0db9d0b33b38c67eaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c23c8d7a_41f581fc",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-25T09:05:44Z",
+      "side": 1,
+      "message": "This could be simpler with\n\n        *status \u003d WGPUBufferMapAsyncStatus_DeviceLost;\n        MaybeError validateIsAlive \u003d GetDevice()-\u003eValidateIsAlive();\n\n        *status \u003d WGPUBufferMapAsyncStatus_Error;\n        MaybeError validateObjectError \u003d GetDevice()-\u003eValidateObject(this);\n\n        switch (mState) {\n            case BufferState::Mapped:\n                return DAWN_VALIDATION_ERROR(\"Buffer already mapped\");\n            case BufferState::Destroyed:\n                return DAWN_VALIDATION_ERROR(\"Buffer is destroyed\");\n            case BufferState::Unmapped:\n                break;\n        }\n\n        if (!(mUsage \u0026 requiredUsage)) {\n            return DAWN_VALIDATION_ERROR(\"Buffer needs the correct map usage bit\");\n        }\n\n        return {};",
+      "revId": "452227853ea5a8e365ba8a0db9d0b33b38c67eaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0438aad_d0cebaf1",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-25T09:05:44Z",
+      "side": 1,
+      "message": "u-nit: instead of setting this pointer we could take the address of the variable.\n\nstatic const int fakeUserData \u003d 0;\n\nEXPECT_EQ(\u0026fakeUserData, userdata);",
+      "revId": "452227853ea5a8e365ba8a0db9d0b33b38c67eaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e2d364_1dd12864",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-25T09:05:44Z",
+      "side": 1,
+      "message": "This is a bit confusing, the casing difference is hard to see.",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 38
+      },
+      "revId": "452227853ea5a8e365ba8a0db9d0b33b38c67eaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

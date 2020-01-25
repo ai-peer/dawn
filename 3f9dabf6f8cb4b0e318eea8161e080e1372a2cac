@@ -332,6 +332,30 @@
     },
     {
       "key": {
+        "uuid": "bf94c36e_657dd663",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-25T09:05:44Z",
+      "side": 1,
+      "message": "Ah yes that makes sense. Checking non-nullptr sounds good.",
+      "parentUuid": "3b76ee72_935cd07d",
+      "range": {
+        "startLine": 303,
+        "startChar": 1,
+        "endLine": 304,
+        "endChar": 62
+      },
+      "revId": "3f9dabf6f8cb4b0e318eea8161e080e1372a2cac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b93b174f_b1b40ea2",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 7
