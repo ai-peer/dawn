@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "880fb9f5_2a0d7507",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-25T01:37:26Z",
+      "side": 1,
+      "message": "typo: from?",
+      "range": {
+        "startLine": 227,
+        "startChar": 62,
+        "endLine": 227,
+        "endChar": 65
+      },
+      "revId": "158ec43f0a007797c118273e0c37fb561a2621c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b09016e_05cccbe9",
         "filename": "src/dawn_native/Surface.h",
         "patchSetId": 3
@@ -112,6 +135,69 @@
         "endLine": 137,
         "endChar": 30
       },
+      "revId": "158ec43f0a007797c118273e0c37fb561a2621c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b70a7dc_ebdcb037",
+        "filename": "src/dawn_native/SwapChain.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-25T01:37:26Z",
+      "side": 1,
+      "message": "unclear: what after what?",
+      "range": {
+        "startLine": 144,
+        "startChar": 35,
+        "endLine": 144,
+        "endChar": 59
+      },
+      "revId": "158ec43f0a007797c118273e0c37fb561a2621c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2388b5f1_74e2336f",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-25T01:37:26Z",
+      "side": 1,
+      "message": "nit: failing to create a new swapchain",
+      "range": {
+        "startLine": 251,
+        "startChar": 14,
+        "endLine": 251,
+        "endChar": 38
+      },
+      "revId": "158ec43f0a007797c118273e0c37fb561a2621c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aff19984_4da7ce74",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-25T01:37:26Z",
+      "side": 1,
+      "message": "nit: check this before trying to Present?",
       "revId": "158ec43f0a007797c118273e0c37fb561a2621c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
