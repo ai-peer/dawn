@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8be51013_450ad33f",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-01-27T21:33:20Z",
+      "side": 1,
+      "message": "Nit: This cast shouldn\u0027t be necessary because all pointers should be automatically converted to void*.\n\n(Same goes for the other usages of fakeUserData)",
+      "range": {
+        "startLine": 255,
+        "startChar": 64,
+        "endLine": 255,
+        "endChar": 71
+      },
+      "revId": "f1bffcd4d7bdcc9dfbcebb76f26bf95971550f6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
