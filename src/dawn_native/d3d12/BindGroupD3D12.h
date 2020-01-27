@@ -15,11 +15,9 @@
 #ifndef DAWNNATIVE_D3D12_BINDGROUPD3D12_H_
 #define DAWNNATIVE_D3D12_BINDGROUPD3D12_H_
 
+#include "common/Serial.h"
 #include "dawn_native/BindGroup.h"
-
 #include "dawn_native/d3d12/d3d12_platform.h"
-
-#include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -29,23 +27,20 @@ namespace dawn_native { namespace d3d12 {
       public:
         BindGroup(Device* device, const BindGroupDescriptor* descriptor);
 
-        void AllocateDescriptors(const DescriptorHeapHandle& cbvSrvUavHeapStart,
-                                 uint32_t* cbvUavSrvHeapOffset,
-                                 const DescriptorHeapHandle& samplerHeapStart,
-                                 uint32_t* samplerHeapOffset);
-        uint32_t GetCbvUavSrvHeapOffset() const;
-        uint32_t GetSamplerHeapOffset() const;
+        // Returns true if the BindGroup was successfully populated.
+        ResultOrError<bool> Populate();
 
-        bool TestAndSetCounted(uint64_t heapSerial, uint32_t indexInSubmit);
+        void Invalidate();
+
+        D3D12_GPU_DESCRIPTOR_HANDLE GetBaseCbvUavSrvDescriptor() const;
+        D3D12_GPU_DESCRIPTOR_HANDLE GetBaseSamplerDescriptor() const;
 
       private:
-        uint32_t mCbvUavSrvHeapOffset;
-        uint32_t mSamplerHeapOffset;
+        Serial mAllocationSerial;
 
-        uint64_t mHeapSerial = 0;
-        uint32_t mIndexInSubmit = 0;
+        D3D12_GPU_DESCRIPTOR_HANDLE mBaseCbvSrvUavDescriptor;
+        D3D12_GPU_DESCRIPTOR_HANDLE mBaseSamplerDescriptor;
     };
-
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_BINDGROUPD3D12_H_
