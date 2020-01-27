@@ -94,9 +94,12 @@ namespace dawn_native {
         MaybeError CopyFromStagingBuffer();
 
         MaybeError ValidateSetSubData(uint32_t start, uint32_t count) const;
-        MaybeError ValidateMap(wgpu::BufferUsage requiredUsage) const;
+        MaybeError ValidateMap(wgpu::BufferUsage requiredUsage,
+                               WGPUBufferMapAsyncStatus* status) const;
         MaybeError ValidateUnmap() const;
         MaybeError ValidateDestroy() const;
+
+        bool IsDeviceLost() const;
 
         uint64_t mSize = 0;
         wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
