@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "4efb862c_43f552f5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-27T19:49:01Z",
+      "side": 1,
+      "message": "i think this will require tick to be run after device is lost. (I moved copied those from tick, since device was lost, tick gets skipped)",
+      "parentUuid": "3264152a_b2658281",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
@@ -169,6 +193,24 @@
       "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64db6779_6eb0d29a",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-27T19:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8201e9e8_e37ef1bb",
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
