@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "780181aa_cd73df4e",
+        "filename": "generator/templates/library_webgpu_enum_tables.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-28T23:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d04ac0e_a5aabb7d",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "c160a646c25a0800f837ed75ea28e91bb3920a43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f30099f_c86ff445",
         "filename": "generator/templates/webgpu_struct_info.json",
         "patchSetId": 12
@@ -45,6 +69,30 @@
       "revId": "c160a646c25a0800f837ed75ea28e91bb3920a43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db688db5_040cebc6",
+        "filename": "generator/templates/webgpu_struct_info.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-28T23:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f30099f_c86ff445",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "c160a646c25a0800f837ed75ea28e91bb3920a43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
