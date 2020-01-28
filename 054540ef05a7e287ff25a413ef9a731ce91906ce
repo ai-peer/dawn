@@ -122,6 +122,24 @@
       "revId": "054540ef05a7e287ff25a413ef9a731ce91906ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "994ea32d_17ccec43",
+        "filename": "generator/templates/library_webgpu_enum_tables.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-28T23:23:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "734f8568_064ca5b5",
+      "revId": "054540ef05a7e287ff25a413ef9a731ce91906ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
