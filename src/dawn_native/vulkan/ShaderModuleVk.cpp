@@ -58,8 +58,18 @@ namespace dawn_native { namespace vulkan {
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.pNext = nullptr;
         createInfo.flags = 0;
-        createInfo.codeSize = descriptor->codeSize * sizeof(uint32_t);
-        createInfo.pCode = descriptor->code;
+        if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
+            shaderc_spvc::CompilationResult result;
+            DAWN_TRY(CheckSpvcSuccess(mSpvcContext.CompileShader(&result),
+                                      "Unable to generate Vulkan shader"));
+            DAWN_TRY(CheckSpvcSuccess(result.GetBinaryOutput(&mVulkanSource),
+                                      "Unable to get binary output of Vulkan shader"));
+            createInfo.codeSize = mVulkanSource.size();
+            createInfo.pCode = mVulkanSource.data();
+        } else {
+            createInfo.codeSize = descriptor->codeSize * sizeof(uint32_t);
+            createInfo.pCode = descriptor->code;
+        }
 
         Device* device = ToBackend(GetDevice());
         return CheckVkSuccess(

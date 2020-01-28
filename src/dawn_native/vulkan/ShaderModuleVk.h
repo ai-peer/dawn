@@ -37,6 +37,7 @@ namespace dawn_native { namespace vulkan {
         MaybeError Initialize(const ShaderModuleDescriptor* descriptor);
 
         VkShaderModule mHandle = VK_NULL_HANDLE;
+        std::vector<uint32_t> mVulkanSource;
     };
 
 }}  // namespace dawn_native::vulkan
