@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "488d8cd8_576acb3e",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-28T12:43:20Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t exist.",
+      "revId": "5fc9c6defc7066792c7edf944d9f3451a280d786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8f68045_ab789d58",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 13
@@ -25,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "bb8c0159_c308f0bd",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-28T12:43:20Z",
+      "side": 1,
+      "message": "BeingLost vs. Lost only matters when we are in the process of losing the device so I don\u0027t think it matters too much.",
+      "parentUuid": "f8f68045_ab789d58",
+      "range": {
+        "startLine": 201,
+        "startChar": 21,
+        "endLine": 201,
+        "endChar": 27
+      },
+      "revId": "5fc9c6defc7066792c7edf944d9f3451a280d786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67cd9968_bf8734a6",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 13
@@ -36,6 +77,30 @@
       "writtenOn": "2020-01-28T00:33:01Z",
       "side": 1,
       "message": "return mLossStatus !\u003d LossStatus::Alive",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 20
+      },
+      "revId": "5fc9c6defc7066792c7edf944d9f3451a280d786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e09ee9d_8ef3b42d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-28T12:43:20Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "67cd9968_bf8734a6",
       "range": {
         "startLine": 202,
         "startChar": 0,
