@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "676ee692_80b6420c",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-28T20:29:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0eef5c85_c7bf519a",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dbad1d9c_13d65960",
         "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
         "patchSetId": 5
@@ -143,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "38aba0b1_c5076dbf",
+        "filename": "src/dawn_native/d3d12/LRUCacheD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-28T20:29:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dbad1d9c_13d65960",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80c4d731_ee16d076",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
         "patchSetId": 5
@@ -157,6 +193,24 @@
       "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97fec863_5312974c",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-28T20:29:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "80c4d731_ee16d076",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -231,6 +285,24 @@
     },
     {
       "key": {
+        "uuid": "0bd5e8b3_65b54b9e",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-28T20:29:03Z",
+      "side": 1,
+      "message": "If a resource on a heap is referenced in a command list, that means the heap would have been bumped to the \"most recently used\" end of the list for that frame - making it unlikely for the heap to be evicted. Still, if for some reason it is evicted while in use, it\u0027s not really due to a fault in the LRU scheme, it\u0027s because the sum of heaps needed to be resident exceeds the amount of available memory.",
+      "parentUuid": "7d97f3b2_4b59e3e9",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ecc4b59b_13f07b9f",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
         "patchSetId": 5
@@ -245,6 +317,24 @@
       "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4244a8ab_8ac75ca2",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-01-28T20:29:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ecc4b59b_13f07b9f",
+      "revId": "2d152b5574136018bcb14c9805e646ca50bb752d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
