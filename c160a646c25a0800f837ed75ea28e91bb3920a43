@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d04ac0e_a5aabb7d",
+        "filename": "generator/templates/library_webgpu_enum_tables.js",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-28T23:34:44Z",
+      "side": 1,
+      "message": "unit: Maybe be able to combine into a single for-in-if if Jinja allows",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "c160a646c25a0800f837ed75ea28e91bb3920a43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f30099f_c86ff445",
+        "filename": "generator/templates/webgpu_struct_info.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-28T23:34:44Z",
+      "side": 1,
+      "message": "unit: I think you could merge these in a single line (unless perhaps Jinja doesn\u0027t support that)",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "c160a646c25a0800f837ed75ea28e91bb3920a43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
