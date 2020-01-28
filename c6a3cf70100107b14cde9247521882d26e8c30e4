@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f22bcc8_e14f726a",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-28T18:24:51Z",
+      "side": 1,
+      "message": "mVulkanSource isn\u0027t used afterwards so does it need to be stored?",
+      "revId": "c6a3cf70100107b14cde9247521882d26e8c30e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
