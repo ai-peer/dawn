@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "2594051e_43672f55",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-29T19:50:49Z",
+      "side": 1,
+      "message": "I think the different backends call tick in different places (in vulkan its in destroy, and in d3d12 mtl and gl its in waitforidle). Also in vulkan and d3d12, it calls tickimpl and in the others it calls tick. Maybe we need to uniform these first and then we can make Destroy more resilient?",
+      "parentUuid": "7c4df0da_f88bbccb",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
@@ -177,6 +201,24 @@
       "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5859507d_e4c3425b",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-29T19:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdd9de0b_e6da00f6",
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -285,6 +327,30 @@
     },
     {
       "key": {
+        "uuid": "50b8f980_5fbde1ea",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-29T19:50:49Z",
+      "side": 1,
+      "message": "For DeviceLostCallback the first argument is a message, not the status since all device lost is device lost status. void(const char* message, void* userdata)",
+      "parentUuid": "ed699b82_e4404446",
+      "range": {
+        "startLine": 70,
+        "startChar": 50,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c97cdfa8_d9284dce",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 2
@@ -305,6 +371,30 @@
       "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b249ecf_4f016a62",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-29T19:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c97cdfa8_d9284dce",
+      "range": {
+        "startLine": 272,
+        "startChar": 53,
+        "endLine": 272,
+        "endChar": 84
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
