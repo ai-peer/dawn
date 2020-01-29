@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f0650f9_e4184b9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T22:22:16Z",
+      "side": 1,
+      "message": "unit: trailing slash here?",
+      "range": {
+        "startLine": 7,
+        "startChar": 80,
+        "endLine": 7,
+        "endChar": 81
+      },
+      "revId": "f075cc2f4df5156130cbe997e74e5760c9c07131",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
