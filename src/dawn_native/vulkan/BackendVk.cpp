@@ -21,6 +21,8 @@
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
+#include <X11/Xlib.h>
+
 // TODO(crbug.com/dawn/283): Link against the Vulkan Loader and remove this.
 #if defined(DAWN_ENABLE_SWIFTSHADER)
 #    if defined(DAWN_PLATFORM_LINUX) || defined(DAWN_PLATFORM_FUSCHIA)
@@ -54,6 +56,7 @@ namespace dawn_native { namespace vulkan {
 
     Backend::Backend(InstanceBase* instance)
         : BackendConnection(instance, wgpu::BackendType::Vulkan) {
+        fprintf(stderr, "BackendVk constructor!");
     }
 
     Backend::~Backend() {
