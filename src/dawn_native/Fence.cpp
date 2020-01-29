@@ -67,7 +67,11 @@ namespace dawn_native {
                              wgpu::FenceOnCompletionCallback callback,
                              void* userdata) {
         if (GetDevice()->ConsumedError(ValidateOnCompletion(value))) {
-            callback(WGPUFenceCompletionStatus_Error, userdata);
+            if (GetDevice()->IsLost()) {
+                callback(WGPUFenceCompletionStatus_DeviceLost, userdata);
+            } else {
+                callback(WGPUFenceCompletionStatus_Error, userdata);
+            }
             return;
         }
         ASSERT(!IsError());
@@ -103,15 +107,22 @@ namespace dawn_native {
         ASSERT(!IsError());
         ASSERT(completedValue <= mSignalValue);
         ASSERT(completedValue > mCompletedValue);
+        bool isDeviceLost = GetDevice()->IsLost();
+
         mCompletedValue = completedValue;
 
-        for (auto& request : mRequests.IterateUpTo(mCompletedValue)) {
-            request.completionCallback(WGPUFenceCompletionStatus_Success, request.userdata);
+        for (auto& request : mRequests.IterateUpTo(completedValue)) {
+            if (isDeviceLost) {
+                request.completionCallback(WGPUFenceCompletionStatus_DeviceLost, request.userdata);
+            } else {
+                request.completionCallback(WGPUFenceCompletionStatus_Success, request.userdata);
+            }
         }
-        mRequests.ClearUpTo(mCompletedValue);
+        mRequests.ClearUpTo(completedValue);
     }
 
     MaybeError Fence::ValidateOnCompletion(uint64_t value) const {
+        DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
         if (value > mSignalValue) {
             return DAWN_VALIDATION_ERROR("Value greater than fence signaled value");
