@@ -41,32 +41,9 @@
 #    error "Unsupported platform"
 #endif
 
-// Define a dummy Vulkan handle for use before we include vulkan.h
-DAWN_DEFINE_NATIVE_NON_DISPATCHABLE_HANDLE(VkSomeHandle)
-
-// Find out the alignment of native handles. Logically we would use alignof(VkSomeHandleNative) so
-// why bother with the wrapper struct? It turns out that on Linux Intel x86 alignof(uint64_t) is 8
-// but alignof(struct{uint64_t a;}) is 4. This is because this Intel ABI doesn't say anything about
-// double-word alignment so for historical reasons compilers violated the standard and use an
-// alignment of 4 for uint64_t (and double) inside structures.
-// See https://stackoverflow.com/questions/44877185
-// One way to get the alignment inside structures of a type is to look at the alignment of it
-// wrapped in a structure. Hence VkSameHandleNativeWrappe
-
-template <typename T>
-struct WrapperStruct {
-    T member;
-};
-
-template <typename T>
-static constexpr size_t AlignOfInStruct = alignof(WrapperStruct<T>);
-
-static constexpr size_t kNativeVkHandleAlignment = AlignOfInStruct<VkSomeHandleNative>;
-static constexpr size_t kUint64Alignment = AlignOfInStruct<VkSomeHandleNative>;
-
 // Simple handle types that supports "nullptr_t" as a 0 value.
 template <typename Tag, typename HandleType>
-class alignas(kNativeVkHandleAlignment) VkNonDispatchableHandle {
+class VkNonDispatchableHandle {
   public:
     // Default constructor and assigning of VK_NULL_HANDLE
     VkNonDispatchableHandle() = default;
@@ -141,9 +118,7 @@ class alignas(kNativeVkHandleAlignment) VkNonDispatchableHandle {
     DAWN_DEFINE_NATIVE_NON_DISPATCHABLE_HANDLE(object)                     \
     using object = VkNonDispatchableHandle<VkTag##object, object##Native>; \
     static_assert(sizeof(object) == sizeof(uint64_t), "");                 \
-    static_assert(alignof(object) == kUint64Alignment, "");                \
-    static_assert(sizeof(object) == sizeof(object##Native), "");           \
-    static_assert(alignof(object) == kNativeVkHandleAlignment, "");
+    static_assert(sizeof(object) == sizeof(object##Native), "");
 
 #    include <vulkan/vulkan.h>
 
