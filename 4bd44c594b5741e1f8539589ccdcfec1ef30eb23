@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "f27a52a7_31f90158",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-29T17:17:56Z",
+      "side": 1,
+      "message": "How would the heap serial get incremented when the ringbuffer rotates? This is not clear to me in order to use a single heap serial for both events.\n\n\u003e However, we can\u0027t use the device-level serial for ringbuffer rotations because there can be multiple heaps per pending serial.\n\nIf we check two serials upon Populate(), then that condition will be correctly detected via the heap serial that is only incremented on heap change.",
+      "parentUuid": "158560a2_c8264f43",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 71
+      },
+      "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee669ff1_997e4ec3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 36
