@@ -54,6 +54,7 @@ namespace dawn_native { namespace vulkan {
 
     Backend::Backend(InstanceBase* instance)
         : BackendConnection(instance, wgpu::BackendType::Vulkan) {
+        fprintf(stderr, "BackendVk constructor!");
     }
 
     Backend::~Backend() {
