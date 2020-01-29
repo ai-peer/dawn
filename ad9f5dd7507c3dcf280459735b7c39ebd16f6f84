@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "7c4df0da_f88bbccb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T00:52:29Z",
+      "side": 1,
+      "message": "I would be fine with making Destroy() more resilient. Destroy calls Tick so there may be a few changes needed.\n\nAlternatively, ErrorScopeTracker already has some logic in its destructor which marks scopes as status UNKNOWN if they\u0027re still in flight. We could have a check there which marks them as DEVICE_LOST if the device is lost, and do the same for the FenceSignalTracker. I think it may be necessary to do this because the fence and error scope callbacks should return with DeviceLost status if they\u0027re still in flight when the device is lost.",
+      "parentUuid": "4efb862c_43f552f5",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
@@ -211,6 +235,52 @@
       "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed699b82_e4404446",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T00:52:29Z",
+      "side": 1,
+      "message": "Here and in our other DeviceLost tests, shouldn\u0027t we be matching explicitly against the DEVICE_LOST status?",
+      "range": {
+        "startLine": 70,
+        "startChar": 50,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c97cdfa8_d9284dce",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T00:52:29Z",
+      "side": 1,
+      "message": "Should this be DeviceLost ?",
+      "range": {
+        "startLine": 272,
+        "startChar": 53,
+        "endLine": 272,
+        "endChar": 84
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
