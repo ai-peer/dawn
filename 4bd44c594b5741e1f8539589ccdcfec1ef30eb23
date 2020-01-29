@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "158560a2_c8264f43",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T05:25:54Z",
+      "side": 1,
+      "message": "Hm, I think we\u0027re getting terminology mixed up.\n\nWe still use the device pending/completed serial at [2] for tracking/deallocating ring buffer allocations. On Tick, we will mark descriptor space that is no longer in-flight on the GPU as free. But we use the heap serial for checking when a BindGroup needs to be repopulated.\n\nHowever, we can\u0027t use the device-level serial for ringbuffer rotations because there can be multiple heaps per pending serial. Thus, the serial that tracks rotations needs to be heap-level. My suggestion is to fold rotations and reallocations into the same serial.",
+      "parentUuid": "cb9251e2_b03b8af2",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 71
+      },
+      "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee669ff1_997e4ec3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 36
@@ -65,6 +89,29 @@
         "startChar": 16,
         "endLine": 113,
         "endChar": 17
+      },
+      "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "703993fa_c413b461",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T05:25:54Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 5
       },
       "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
