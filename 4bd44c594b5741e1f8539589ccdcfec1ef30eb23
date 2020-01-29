@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a36ea2c7_fdeb7a2f",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T00:25:26Z",
+      "side": 1,
+      "message": "A few concerns with using the device command serial:\n\nAt [1], we only Invalidate and re-Populate bind groups in mBindGroupLayoutMask. This is not sufficient because there could be other bind groups not in the mask that have an old serial. There can be multiple heaps bound per-submission so we either need to track and Invalidate ALL bind groups, or use a heap-level serial.\n\nFor example:\n - SetPiplineLayout that has LayoutA\n - SetBindGroup (0, A) -\u003e serial 1\n\n - SetPipeineLayout that has LayoutB and LayoutC\n - SetBindGroup (1, B), (2, C) -\u003e Reallocate -\u003e serial 1\n   BindGroup A is NOT invalidated, because it wasn\u0027t at index (1 or 2)\n\n - SetPiplineLayout that has LayoutA\n - SetBindGroup (0, A) -\u003e serial 1 -\u003e Skips Populate because the device-level serial is\n   is the same.\n\nIf I understand correctly, we went back to using a device-level serial instead of a heap-level serial because of:\n\n\u003e If the ringbuffer rotates, using the same bounded heap, a previously reclaimed allocation is wrongly considered \"still valid\" because the heap serial did not change and the allocation wouldn\u0027t get re-created. Ringbuffer assumes the client does not need to know if the allocation is freed - which is not the case for bindgroups would could be dirtied frequently.\n\nHowever, going back to a device-level serial prevents us from reusing populated descriptor allocations between multiple consecutive queue submissions.\n\nSuggestion: have a heap-level serial and increment it BOTH when the ringbuffer rotates, and when we reallocate.\n\nWhat do you think?",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 71
+      },
+      "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee669ff1_997e4ec3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-29T00:25:26Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 106,
+        "startChar": 16,
+        "endLine": 113,
+        "endChar": 17
+      },
+      "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
