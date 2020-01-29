@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cb9251e2_b03b8af2",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-29T02:20:14Z",
+      "side": 1,
+      "message": "I wouldn\u0027t want to use the heap serial for tracking ringbuffer allocations. It would be unable to GC until the heap changes, which is efficiently reverting back to the linear allocator. Also, missing a means to notify the client when the ringbuffer rotates.\n\nCouldn\u0027t we detect both events by using separate serials? A device-level serial for the ringbuffer rotations and a heap serial for heap changes. The latter is incremented by the device and former upon `didReallocation \u003d true`. So long as both are checked, the situation as described cannot happen while re-use of the heaps still occurs across submissions.\n\nWDYT?",
+      "parentUuid": "a36ea2c7_fdeb7a2f",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 71
+      },
+      "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee669ff1_997e4ec3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 36
