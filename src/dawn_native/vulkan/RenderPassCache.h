@@ -16,9 +16,9 @@
 #define DAWNNATIVE_VULKAN_RENDERPASSCACHE_H_
 
 #include "common/Constants.h"
-#include "common/vulkan_platform.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/dawn_platform.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 
 #include <array>
 #include <bitset>

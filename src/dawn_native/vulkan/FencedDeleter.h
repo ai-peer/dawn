@@ -16,7 +16,7 @@
 #define DAWNNATIVE_VULKAN_FENCEDDELETER_H_
 
 #include "common/SerialQueue.h"
-#include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 
 namespace dawn_native { namespace vulkan {
 

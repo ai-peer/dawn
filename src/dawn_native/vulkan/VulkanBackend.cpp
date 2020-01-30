@@ -15,20 +15,17 @@
 // VulkanBackend.cpp: contains the definition of symbols exported by VulkanBackend.h so that they
 // can be compiled twice: once export (shared library), once not exported (static library)
 
-// Include vulkan_platform.h before VulkanBackend.h includes vulkan.h so that we use our version
-// of the non-dispatchable handles.
-#include "common/vulkan_platform.h"
-
 #include "dawn_native/VulkanBackend.h"
 
 #include "common/SwapChainUtils.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/NativeSwapChainImplVk.h"
 #include "dawn_native/vulkan/TextureVk.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 
 namespace dawn_native { namespace vulkan {
 
-    VkInstance GetInstance(WGPUDevice device) {
+    ::VkInstance GetInstance(WGPUDevice device) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
         return backendDevice->GetVkInstance();
     }
@@ -42,7 +39,7 @@ namespace dawn_native { namespace vulkan {
     // Explicitly export this function because it uses the "native" type for surfaces while the
     // header as seen in this file uses the wrapped type.
     DAWN_NATIVE_EXPORT DawnSwapChainImplementation
-    CreateNativeSwapChainImpl(WGPUDevice device, VkSurfaceKHRNative surfaceNative) {
+    CreateNativeSwapChainImpl(WGPUDevice device, ::VkSurfaceKHR surfaceNative) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
         VkSurfaceKHR surface = VkSurfaceKHR::CreateFromHandle(surfaceNative);
 

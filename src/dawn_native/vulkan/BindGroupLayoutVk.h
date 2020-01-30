@@ -17,7 +17,7 @@
 
 #include "dawn_native/BindGroupLayout.h"
 
-#include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 
 #include <vector>
 
