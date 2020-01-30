@@ -52,6 +52,24 @@
       "revId": "c6a3cf70100107b14cde9247521882d26e8c30e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9eeea351_29ba0f2a",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-30T18:30:44Z",
+      "side": 1,
+      "message": "Realized after looking at this again that my issue was that I had scoped the vector inside the if spvc block, and that is why I was getting the buffer disappearing. Getting the scoping correct removes the need for the member variable.",
+      "parentUuid": "b9fb3dda_ea725dd6",
+      "revId": "c6a3cf70100107b14cde9247521882d26e8c30e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
