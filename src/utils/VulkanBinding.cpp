@@ -31,7 +31,7 @@ namespace utils {
 
         uint64_t GetSwapChainImplementation() override {
             if (mSwapchainImpl.userData == nullptr) {
-                VkSurfaceKHR surface = VK_NULL_HANDLE;
+                ::VkSurfaceKHR surface = VK_NULL_HANDLE;
                 if (glfwCreateWindowSurface(dawn_native::vulkan::GetInstance(mDevice), mWindow,
                                             nullptr, &surface) != VK_SUCCESS) {
                     ASSERT(false);
