@@ -17,9 +17,9 @@
 
 #include "dawn_native/Texture.h"
 
-#include "common/vulkan_platform.h"
 #include "dawn_native/ResourceMemoryAllocation.h"
 #include "dawn_native/vulkan/ExternalHandle.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 #include "dawn_native/vulkan/external_memory/MemoryService.h"
 
 namespace dawn_native { namespace vulkan {

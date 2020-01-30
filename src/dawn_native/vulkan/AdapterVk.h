@@ -17,7 +17,7 @@
 
 #include "dawn_native/Adapter.h"
 
-#include "common/vulkan_platform.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 #include "dawn_native/vulkan/VulkanInfo.h"
 
 namespace dawn_native { namespace vulkan {
