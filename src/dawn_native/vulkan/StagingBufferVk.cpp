@@ -44,11 +44,13 @@ namespace dawn_native { namespace vulkan {
 
         DAWN_TRY_ASSIGN(mAllocation, mDevice->AllocateMemory(requirements, true));
 
-        DAWN_TRY(CheckVkSuccess(
-            mDevice->fn.BindBufferMemory(mDevice->GetVkDevice(), mBuffer,
-                                         ToBackend(mAllocation.GetResourceHeap())->GetMemory(),
-                                         mAllocation.GetOffset()),
-            "vkBindBufferMemory"));
+        if (mAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
+            DAWN_TRY(CheckVkSuccess(
+                mDevice->fn.BindBufferMemory(mDevice->GetVkDevice(), mBuffer,
+                                             ToBackend(mAllocation.GetResourceHeap())->GetMemory(),
+                                             mAllocation.GetOffset()),
+                "vkBindBufferMemory"));
+        }
 
         mMappedPointer = mAllocation.GetMappedPointer();
         if (mMappedPointer == nullptr) {
