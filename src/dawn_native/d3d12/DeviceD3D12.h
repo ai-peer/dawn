@@ -30,6 +30,7 @@ namespace dawn_native { namespace d3d12 {
 
     class CommandAllocatorManager;
     class DescriptorHeapAllocator;
+    class DescriptorAllocatorManager;
     class MapRequestTracker;
     class PlatformFunctions;
     class ResourceAllocatorManager;
@@ -95,6 +96,8 @@ namespace dawn_native { namespace d3d12 {
 
         void DeallocateMemory(ResourceHeapAllocation& allocation);
 
+        DescriptorAllocatorManager* GetDescriptorAllocatorManager() const;
+
         TextureBase* WrapSharedHandle(const TextureDescriptor* descriptor,
                                       HANDLE sharedHandle,
                                       uint64_t acquireMutexKey);
@@ -154,6 +157,7 @@ namespace dawn_native { namespace d3d12 {
         std::unique_ptr<DescriptorHeapAllocator> mDescriptorHeapAllocator;
         std::unique_ptr<MapRequestTracker> mMapRequestTracker;
         std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
+        std::unique_ptr<DescriptorAllocatorManager> mDescriptorAllocatorManager;
     };
 
 }}  // namespace dawn_native::d3d12
