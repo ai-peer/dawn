@@ -86,9 +86,9 @@ namespace dawn_native { namespace vulkan {
         createInfo.unnormalizedCoordinates = VK_FALSE;
 
         Device* device = ToBackend(GetDevice());
-        return CheckVkSuccess(
-            device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr, &mHandle),
-            "CreateSampler");
+        return CheckVkSuccess(device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr,
+                                                       &mHandle.Handle()),
+                              "CreateSampler");
     }
 
     Sampler::~Sampler() {

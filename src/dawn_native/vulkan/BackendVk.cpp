@@ -257,8 +257,9 @@ namespace dawn_native { namespace vulkan {
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionsToRequest.size());
         createInfo.ppEnabledExtensionNames = extensionsToRequest.data();
 
-        DAWN_TRY(CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
-                                "vkCreateInstance"));
+        DAWN_TRY(
+            CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance.Handle()),
+                           "vkCreateInstance"));
 
         return usedKnobs;
     }
@@ -272,7 +273,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.pUserData = this;
 
         return CheckVkSuccess(mFunctions.CreateDebugReportCallbackEXT(
-                                  mInstance, &createInfo, nullptr, &mDebugReportCallback),
+                                  mInstance, &createInfo, nullptr, &mDebugReportCallback.Handle()),
                               "vkCreateDebugReportcallback");
     }
 

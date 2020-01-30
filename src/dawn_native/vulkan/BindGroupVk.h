@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroup.h"
 
 #include "dawn_native/vulkan/BindGroupLayoutVk.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 
 namespace dawn_native { namespace vulkan {
 

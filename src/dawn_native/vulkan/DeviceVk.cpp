@@ -272,13 +272,13 @@ namespace dawn_native { namespace vulkan {
         submitInfo.pNext = nullptr;
         submitInfo.waitSemaphoreCount =
             static_cast<uint32_t>(mRecordingContext.waitSemaphores.size());
-        submitInfo.pWaitSemaphores = mRecordingContext.waitSemaphores.data();
+        submitInfo.pWaitSemaphores = AsVkArray(mRecordingContext.waitSemaphores.data());
         submitInfo.pWaitDstStageMask = dstStageMasks.data();
         submitInfo.commandBufferCount = 1;
-        submitInfo.pCommandBuffers = &mRecordingContext.commandBuffer;
+        submitInfo.pCommandBuffers = &mRecordingContext.commandBuffer.Handle();
         submitInfo.signalSemaphoreCount =
             static_cast<uint32_t>(mRecordingContext.signalSemaphores.size());
-        submitInfo.pSignalSemaphores = mRecordingContext.signalSemaphores.data();
+        submitInfo.pSignalSemaphores = AsVkArray(mRecordingContext.signalSemaphores.data());
 
         VkFence fence = VK_NULL_HANDLE;
         DAWN_TRY_ASSIGN(fence, GetUnusedFence());
@@ -415,8 +415,9 @@ namespace dawn_native { namespace vulkan {
         createInfo.ppEnabledExtensionNames = extensionsToRequest.data();
         createInfo.pEnabledFeatures = &usedKnobs.features;
 
-        DAWN_TRY(CheckVkSuccess(fn.CreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice),
-                                "vkCreateDevice"));
+        DAWN_TRY(CheckVkSuccess(
+            fn.CreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice.Handle()),
+            "vkCreateDevice"));
 
         // Device created. Mark it as alive.
         mLossStatus = LossStatus::Alive;
@@ -424,7 +425,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Device::GatherQueueFromDevice() {
-        fn.GetDeviceQueue(mVkDevice, mQueueFamily, 0, &mQueue);
+        fn.GetDeviceQueue(mVkDevice, mQueueFamily, 0, &mQueue.Handle());
     }
 
     void Device::InitTogglesFromDriver() {
@@ -474,7 +475,8 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<VkFence> Device::GetUnusedFence() {
         if (!mUnusedFences.empty()) {
             VkFence fence = mUnusedFences.back();
-            DAWN_TRY(CheckVkSuccess(fn.ResetFences(mVkDevice, 1, &fence), "vkResetFences"));
+            DAWN_TRY(
+                CheckVkSuccess(fn.ResetFences(mVkDevice, 1, &fence.Handle()), "vkResetFences"));
 
             mUnusedFences.pop_back();
             return fence;
@@ -486,7 +488,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.flags = 0;
 
         VkFence fence = VK_NULL_HANDLE;
-        DAWN_TRY(CheckVkSuccess(fn.CreateFence(mVkDevice, &createInfo, nullptr, &fence),
+        DAWN_TRY(CheckVkSuccess(fn.CreateFence(mVkDevice, &createInfo, nullptr, &fence.Handle()),
                                 "vkCreateFence"));
 
         return fence;
@@ -539,7 +541,7 @@ namespace dawn_native { namespace vulkan {
             createInfo.queueFamilyIndex = mQueueFamily;
 
             DAWN_TRY(CheckVkSuccess(fn.CreateCommandPool(mVkDevice, &createInfo, nullptr,
-                                                         &mRecordingContext.commandPool),
+                                                         &mRecordingContext.commandPool.Handle()),
                                     "vkCreateCommandPool"));
 
             VkCommandBufferAllocateInfo allocateInfo;
@@ -549,9 +551,10 @@ namespace dawn_native { namespace vulkan {
             allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
             allocateInfo.commandBufferCount = 1;
 
-            DAWN_TRY(CheckVkSuccess(fn.AllocateCommandBuffers(mVkDevice, &allocateInfo,
-                                                              &mRecordingContext.commandBuffer),
-                                    "vkAllocateCommandBuffers"));
+            DAWN_TRY(
+                CheckVkSuccess(fn.AllocateCommandBuffers(mVkDevice, &allocateInfo,
+                                                         &mRecordingContext.commandBuffer.Handle()),
+                               "vkAllocateCommandBuffers"));
         }
 
         // Start the recording of commands in the command buffer.
@@ -755,9 +758,9 @@ namespace dawn_native { namespace vulkan {
 
             VkResult result = VkResult::WrapUnsafe(VK_TIMEOUT);
             do {
-                result = VkResult::WrapUnsafe(
-                    INJECT_ERROR_OR_RUN(fn.WaitForFences(mVkDevice, 1, &fence, true, UINT64_MAX),
-                                        VK_ERROR_DEVICE_LOST));
+                result = VkResult::WrapUnsafe(INJECT_ERROR_OR_RUN(
+                    fn.WaitForFences(mVkDevice, 1, &fence.Handle(), true, UINT64_MAX),
+                    VK_ERROR_DEVICE_LOST));
             } while (result == VK_TIMEOUT);
 
             // TODO: Handle errors

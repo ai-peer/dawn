@@ -16,9 +16,9 @@
 #define DAWNNATIVE_VULKAN_RESOURCEMEMORYALLOCATORVK_H_
 
 #include "common/SerialQueue.h"
-#include "common/vulkan_platform.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ResourceMemoryAllocation.h"
+#include "dawn_native/vulkan/VulkanHandles.h"
 
 #include <memory>
 #include <vector>

@@ -62,9 +62,9 @@ namespace dawn_native { namespace vulkan {
         createInfo.pCode = descriptor->code;
 
         Device* device = ToBackend(GetDevice());
-        return CheckVkSuccess(
-            device->fn.CreateShaderModule(device->GetVkDevice(), &createInfo, nullptr, &mHandle),
-            "CreateShaderModule");
+        return CheckVkSuccess(device->fn.CreateShaderModule(device->GetVkDevice(), &createInfo,
+                                                            nullptr, &mHandle.Handle()),
+                              "CreateShaderModule");
     }
 
     ShaderModule::~ShaderModule() {
