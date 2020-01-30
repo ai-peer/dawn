@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68b63712_c9f09f4a",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-30T04:45:20Z",
+      "side": 1,
+      "message": "Is operator* too obtuse? See patchset 1 for what it looks like with .Handle() instead.",
+      "range": {
+        "startLine": 260,
+        "startChar": 80,
+        "endLine": 260,
+        "endChar": 91
+      },
+      "revId": "66ed91915f036fd7b151c55ad684d5061a15036e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
