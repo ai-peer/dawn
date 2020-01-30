@@ -210,9 +210,9 @@ namespace dawn_native { namespace vulkan {
         }
 
         std::vector<VkPhysicalDevice> physicalDevices(count);
-        DAWN_TRY(CheckVkSuccess(
-            vkFunctions.EnumeratePhysicalDevices(instance, &count, physicalDevices.data()),
-            "vkEnumeratePhysicalDevices"));
+        DAWN_TRY(CheckVkSuccess(vkFunctions.EnumeratePhysicalDevices(
+                                    instance, &count, AsVkArray(physicalDevices.data())),
+                                "vkEnumeratePhysicalDevices"));
 
         return physicalDevices;
     }
