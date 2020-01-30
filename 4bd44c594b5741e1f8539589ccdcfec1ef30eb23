@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "be293c91_9ec5ee3f",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-01-30T00:30:20Z",
+      "side": 1,
+      "message": "Thanks for clarifying.",
+      "parentUuid": "44a3fd9f_f0d40985",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 71
+      },
+      "revId": "4bd44c594b5741e1f8539589ccdcfec1ef30eb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee669ff1_997e4ec3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 36
