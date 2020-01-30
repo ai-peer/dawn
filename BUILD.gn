@@ -498,6 +498,7 @@ source_set("libdawn_native_sources") {
       "src/dawn_native/vulkan/VulkanError.h",
       "src/dawn_native/vulkan/VulkanFunctions.cpp",
       "src/dawn_native/vulkan/VulkanFunctions.h",
+      "src/dawn_native/vulkan/VulkanHandles.h",
       "src/dawn_native/vulkan/VulkanInfo.cpp",
       "src/dawn_native/vulkan/VulkanInfo.h",
       "src/dawn_native/vulkan/external_memory/MemoryService.h",
