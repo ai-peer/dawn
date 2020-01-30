@@ -16,6 +16,24 @@
       "revId": "c6a3cf70100107b14cde9247521882d26e8c30e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "548c24b0_91fa21c1",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-01-30T16:07:30Z",
+      "side": 1,
+      "message": "Yes, because CreateShaderModule doesn\u0027t take ownership of the buffer. If it is scope locally the tests start failing with a device lost error, which I assume is from Vulkan seeing the buffer disappear.",
+      "parentUuid": "4f22bcc8_e14f726a",
+      "revId": "c6a3cf70100107b14cde9247521882d26e8c30e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
