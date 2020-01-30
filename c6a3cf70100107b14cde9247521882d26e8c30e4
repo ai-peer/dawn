@@ -34,6 +34,24 @@
       "revId": "c6a3cf70100107b14cde9247521882d26e8c30e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9fb3dda_ea725dd6",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-30T17:51:28Z",
+      "side": 1,
+      "message": "Whoa that\u0027s not at all what I expected. SGTM then.",
+      "parentUuid": "548c24b0_91fa21c1",
+      "revId": "c6a3cf70100107b14cde9247521882d26e8c30e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
