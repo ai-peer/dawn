@@ -157,11 +157,13 @@ namespace dawn_native { namespace vulkan {
             (GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite)) != 0;
         DAWN_TRY_ASSIGN(mMemoryAllocation, device->AllocateMemory(requirements, requestMappable));
 
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
+        if (mMemoryAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
+            DAWN_TRY(CheckVkSuccess(device->fn.BindBufferMemory(
+                                        device->GetVkDevice(), mHandle,
                                         ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
                                         mMemoryAllocation.GetOffset()),
-            "vkBindBufferMemory"));
+                                    "vkBindBufferMemory"));
+        }
 
         return {};
     }
