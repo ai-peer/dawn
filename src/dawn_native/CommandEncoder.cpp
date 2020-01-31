@@ -776,6 +776,7 @@ namespace dawn_native {
     MaybeError CommandEncoder::ValidateFinish(CommandIterator* commands,
                                               const PerPassUsages& perPassUsages) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), Validation, "CommandEncoder::ValidateFinish");
+        DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
         for (const PassResourceUsage& passUsage : perPassUsages) {
