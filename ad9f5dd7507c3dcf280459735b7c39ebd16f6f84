@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "04fb97c1_a9ab7963",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-31T08:15:19Z",
+      "side": 1,
+      "message": "If possible, I do think it would be nice to make these more uniform. I share Rafael\u0027s concern that we\u0027re special-casing a lot of things in the destroy sequence, but I\u0027m okay with how this code is now, and we can look at making things more uniform and Destroy more resilient next.\n\nKai, what do you think?",
+      "parentUuid": "2594051e_43672f55",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d437f15e_7f65710d",
         "filename": "src/dawn_native/Fence.cpp",
         "patchSetId": 2
@@ -269,6 +293,30 @@
     },
     {
       "key": {
+        "uuid": "f5a47f04_8b628496",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-31T08:15:19Z",
+      "side": 1,
+      "message": "We should call the callback with DeviceLost. What the completed value should be -- I\u0027m not sure. That may be something we need to decide in the WebGPU working group. For now, I think it\u0027s fine to continue to set it.",
+      "parentUuid": "ca5d38c2_e91d0eb8",
+      "range": {
+        "startLine": 109,
+        "startChar": 20,
+        "endLine": 109,
+        "endChar": 38
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8201e9e8_e37ef1bb",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 2
@@ -348,6 +396,30 @@
       "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f7ac1ca_5621b46a",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-01-31T08:15:19Z",
+      "side": 1,
+      "message": "Ah, you\u0027re right. My mistake.",
+      "parentUuid": "50b8f980_5fbde1ea",
+      "range": {
+        "startLine": 70,
+        "startChar": 50,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
