@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43693d77_ac198bfb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-31T22:40:22Z",
+      "side": 1,
+      "message": "nit: error scopes",
+      "range": {
+        "startLine": 100,
+        "startChar": 71,
+        "endLine": 100,
+        "endChar": 77
+      },
+      "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c05809f4_6f4f24ce",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-01-31T22:40:22Z",
+      "side": 1,
+      "message": "nit: comment is the same as the test above this; should briefly clarify the difference. (doesn\u0027t have to go too in depth - the code is easy to read)",
+      "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
