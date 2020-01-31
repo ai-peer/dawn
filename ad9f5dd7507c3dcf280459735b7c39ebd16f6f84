@@ -317,6 +317,30 @@
     },
     {
       "key": {
+        "uuid": "5a170e6a_d97c1567",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-01-31T18:35:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f5a47f04_8b628496",
+      "range": {
+        "startLine": 109,
+        "startChar": 20,
+        "endLine": 109,
+        "endChar": 38
+      },
+      "revId": "ad9f5dd7507c3dcf280459735b7c39ebd16f6f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8201e9e8_e37ef1bb",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 2
