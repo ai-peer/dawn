@@ -170,6 +170,24 @@
       "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2e42180_6fbeb09e",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-02-01T02:06:00Z",
+      "side": 1,
+      "message": "I think because Tick happens before OnComplete, during SetCompletedValue there\u0027s no requests yet so theres no callbacks called. Maybe I didn\u0027t understand what order you wanted in the previous comments? Let me upload what I have so far. Thanks!",
+      "parentUuid": "83536c5b_f8a46073",
+      "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
