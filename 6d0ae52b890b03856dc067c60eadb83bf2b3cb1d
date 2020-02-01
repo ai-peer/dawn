@@ -152,6 +152,24 @@
       "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83536c5b_f8a46073",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-02-01T01:27:21Z",
+      "side": 1,
+      "message": "That\u0027s a good question. I think it should have device lost status, because (1) OnCompletion is called after device loss, so it\u0027s invalid, so it should call its callback immediately with DeviceLost and (2) the callback is called after the device lost, so it should see DeviceLost.\n\nIMO once the app receives the first signal that the device is lost, everything that happens after that should consistently say the device has been lost.",
+      "parentUuid": "b72f1bda_f391d0d0",
+      "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
