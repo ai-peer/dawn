@@ -739,6 +739,14 @@ TEST_P(CreateBufferMappedTests, LargeBufferFails) {
     ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
 }
 
+// Test that creating a zero sized buffer fails gracefully.
+TEST_P(CreateBufferMappedTests, ZeroSizeBufferFails) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 0;
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+}
+
 DAWN_INSTANTIATE_TEST(CreateBufferMappedTests,
                       D3D12Backend,
                       ForceToggles(D3D12Backend, {}, {"use_d3d12_resource_heap_tier2"}),
