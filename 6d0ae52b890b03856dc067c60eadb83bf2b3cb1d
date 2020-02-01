@@ -134,6 +134,24 @@
       "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b72f1bda_f391d0d0",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-02-01T00:43:16Z",
+      "side": 1,
+      "message": "does that also mean the callback would be successful then ? or is it still device lost status?",
+      "parentUuid": "ea21b020_53dee5d7",
+      "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
