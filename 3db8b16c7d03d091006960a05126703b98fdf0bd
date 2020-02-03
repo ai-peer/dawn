@@ -33,6 +33,24 @@
       "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46adad1f_50d8fed5",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-02-03T16:29:01Z",
+      "side": 1,
+      "message": "Kai asked for something like this here https://dawn-review.googlesource.com/c/dawn/+/15420/5/src/tests/end2end/DeviceLostTests.cpp#427\n\nI\u0027m still unsure if the sequence and callback status is correct.",
+      "parentUuid": "95763be2_9ffdef2b",
+      "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
