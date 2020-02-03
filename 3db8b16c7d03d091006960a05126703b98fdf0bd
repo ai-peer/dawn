@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40673719_6d5e4f63",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-03T08:34:58Z",
+      "side": 1,
+      "message": "For consistency with buffers, we could return the WGPUFencCompletionStatus from ValidateOnCompletion.",
+      "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95763be2_9ffdef2b",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-03T08:34:58Z",
+      "side": 1,
+      "message": "Mmmh what\u0027s the use of this test? I\u0027m not sure I understand.",
+      "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
