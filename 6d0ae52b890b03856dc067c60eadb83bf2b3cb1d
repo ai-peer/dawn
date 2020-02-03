@@ -188,6 +188,24 @@
       "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50099d02_734344ff",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-02-03T19:00:07Z",
+      "side": 1,
+      "message": "Ah, good point. It would require another Tick() for the callback to fire. (Even if you didn\u0027t do this, the callback should still eventually get fired when the device is destroyed.)",
+      "parentUuid": "c2e42180_6fbeb09e",
+      "revId": "6d0ae52b890b03856dc067c60eadb83bf2b3cb1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }

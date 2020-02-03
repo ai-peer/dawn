@@ -51,6 +51,24 @@
       "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdbbac37_6bf0c446",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-02-03T19:00:07Z",
+      "side": 1,
+      "message": "It\u0027s just another permutation to test.\nI think it\u0027s useful because it verifies what OnCompletion returns if (1) the device is lost and (2) the value it\u0027s waiting for has already passed and reached the client.\n\nI\u0027d be inclined to say it should return WGPUFenceCompletionStatus_DeviceLost, so that handling code doesn\u0027t expect that it should keep going. But I don\u0027t think it\u0027s extremely important.",
+      "parentUuid": "46adad1f_50d8fed5",
+      "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
