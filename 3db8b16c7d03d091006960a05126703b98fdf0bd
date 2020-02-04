@@ -69,6 +69,24 @@
       "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aac180e2_d77259b8",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-04T00:33:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cdbbac37_6bf0c446",
+      "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
