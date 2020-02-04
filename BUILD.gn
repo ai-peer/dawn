@@ -730,6 +730,8 @@ static_library("dawn_utils") {
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
 
   sources = [
+    "src/utils/BackendBinding.cpp",
+    "src/utils/BackendBinding.h",
     "src/utils/ComboRenderBundleEncoderDescriptor.cpp",
     "src/utils/ComboRenderBundleEncoderDescriptor.h",
     "src/utils/ComboRenderPipelineDescriptor.cpp",
@@ -774,6 +776,35 @@ static_library("dawn_utils") {
       sources += [ "src/utils/GLFWUtils_metal.mm" ]
       libs += [ "Metal.framework" ]
     }
+  }
+
+  if (dawn_enable_d3d12) {
+    sources += [ "src/utils/D3D12Binding.cpp" ]
+  }
+
+  if (dawn_enable_metal) {
+    sources += [ "src/utils/MetalBinding.mm" ]
+    libs += [
+      "Metal.framework",
+      "QuartzCore.framework",
+    ]
+
+    # Suppress warnings that Metal isn't in the deployment target of Chrome
+    if (is_mac) {
+      cflags_objcc = [ "-Wno-unguarded-availability" ]
+    }
+  }
+
+  if (dawn_enable_null) {
+    sources += [ "src/utils/NullBinding.cpp" ]
+  }
+
+  if (dawn_enable_opengl) {
+    sources += [ "src/utils/OpenGLBinding.cpp" ]
+  }
+
+  if (dawn_enable_vulkan) {
+    sources += [ "src/utils/VulkanBinding.cpp" ]
   }
 
   public_deps = [
@@ -1033,6 +1064,7 @@ test("dawn_end2end_tests") {
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
 
   deps = [
+    ":dawn_bindings",
     ":dawn_end2end_tests_sources",
     ":dawn_utils",
     ":dawn_white_box_tests_sources",
