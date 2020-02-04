@@ -18,15 +18,23 @@
 #include "dawn_native/ResourceMemoryAllocation.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
+#include <memory>
+
 namespace dawn_native { namespace d3d12 {
+
+    class Heap;
 
     class ResourceHeapAllocation : public ResourceMemoryAllocation {
       public:
         ResourceHeapAllocation() = default;
         ResourceHeapAllocation(const AllocationInfo& info,
                                uint64_t offset,
-                               ComPtr<ID3D12Resource> resource);
-        ~ResourceHeapAllocation() override = default;
+                               ComPtr<ID3D12Resource> resource,
+                               std::shared_ptr<Heap> heap);
+        ResourceHeapAllocation(const AllocationInfo& info,
+                               uint64_t offset,
+                               ComPtr<ID3D12Resource> resource,
+                               Heap* heap);
 
         void Invalidate() override;
 
@@ -35,6 +43,7 @@ namespace dawn_native { namespace d3d12 {
 
       private:
         ComPtr<ID3D12Resource> mResource;
+        std::shared_ptr<Heap> mImplicitHeap;
     };
 
 }}  // namespace dawn_native::d3d12

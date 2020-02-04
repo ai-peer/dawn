@@ -127,6 +127,10 @@ namespace dawn_native { namespace d3d12 {
         return mResourceAllocation.GetD3D12Resource();
     }
 
+    ResourceHeapAllocation* Buffer::GetResourceHeapAllocation() {
+        return &mResourceAllocation;
+    }
+
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
     // ResourceBarrier call. Failing to do so will cause the tracked state to become invalid and can
     // cause subsequent errors.

@@ -26,10 +26,12 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/HeapD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/RenderPassBuilderD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/SamplerD3D12.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
@@ -611,13 +613,16 @@ namespace dawn_native { namespace d3d12 {
             wgpu::BufferUsage bufferUsages = wgpu::BufferUsage::None;
 
             for (size_t i = 0; i < usages.buffers.size(); ++i) {
+                Buffer* buffer = ToBackend(usages.buffers[i]);
                 D3D12_RESOURCE_BARRIER barrier;
-                if (ToBackend(usages.buffers[i])
-                        ->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                               usages.bufferUsages[i])) {
+                if (buffer->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
+                                                                 usages.bufferUsages[i])) {
                     barriers.push_back(barrier);
                 }
                 bufferUsages |= usages.bufferUsages[i];
+
+                commandContext->TrackResourceHeapUsage(
+                    ToBackend(buffer->GetResourceHeapAllocation()->GetResourceHeap()));
             }
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
@@ -635,13 +640,15 @@ namespace dawn_native { namespace d3d12 {
             wgpu::TextureUsage textureUsages = wgpu::TextureUsage::None;
 
             for (size_t i = 0; i < usages.textures.size(); ++i) {
+                Texture* texture = ToBackend(usages.textures[i]);
                 D3D12_RESOURCE_BARRIER barrier;
-                if (ToBackend(usages.textures[i])
-                        ->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
-                                                               usages.textureUsages[i])) {
+                if (texture->TransitionUsageAndGetResourceBarrier(commandContext, &barrier,
+                                                                  usages.textureUsages[i])) {
                     barriers.push_back(barrier);
                 }
                 textureUsages |= usages.textureUsages[i];
+                commandContext->TrackResourceHeapUsage(
+                    ToBackend(texture->GetResourceHeapAllocation()->GetResourceHeap()));
             }
 
             if (barriers.size()) {
@@ -689,6 +696,11 @@ namespace dawn_native { namespace d3d12 {
                     srcBuffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopySrc);
                     dstBuffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopyDst);
 
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(srcBuffer->GetResourceHeapAllocation()->GetResourceHeap()));
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(dstBuffer->GetResourceHeapAllocation()->GetResourceHeap()));
+
                     commandList->CopyBufferRegion(
                         dstBuffer->GetD3D12Resource().Get(), copy->destinationOffset,
                         srcBuffer->GetD3D12Resource().Get(), copy->sourceOffset, copy->size);
@@ -711,6 +723,10 @@ namespace dawn_native { namespace d3d12 {
 
                     buffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopySrc);
                     texture->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopyDst);
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(buffer->GetResourceHeapAllocation()->GetResourceHeap()));
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(texture->GetResourceHeapAllocation()->GetResourceHeap()));
 
                     auto copySplit = ComputeTextureCopySplit(
                         copy->destination.origin, copy->copySize, texture->GetFormat(),
@@ -746,6 +762,11 @@ namespace dawn_native { namespace d3d12 {
 
                     texture->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopySrc);
                     buffer->TransitionUsageNow(commandContext, wgpu::BufferUsage::CopyDst);
+
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(buffer->GetResourceHeapAllocation()->GetResourceHeap()));
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(texture->GetResourceHeapAllocation()->GetResourceHeap()));
 
                     TextureCopySplit copySplit = ComputeTextureCopySplit(
                         copy->source.origin, copy->copySize, texture->GetFormat(),
@@ -793,6 +814,11 @@ namespace dawn_native { namespace d3d12 {
                     }
                     source->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopySrc);
                     destination->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopyDst);
+
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(source->GetResourceHeapAllocation()->GetResourceHeap()));
+                    commandContext->TrackResourceHeapUsage(
+                        ToBackend(destination->GetResourceHeapAllocation()->GetResourceHeap()));
 
                     if (CanUseCopyResource(source->GetNumMipLevels(), source->GetSize(),
                                            destination->GetSize(), copy->copySize)) {

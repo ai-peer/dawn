@@ -36,15 +36,15 @@ namespace dawn_native { namespace d3d12 {
 
     Adapter::Adapter(Backend* backend, ComPtr<IDXGIAdapter1> hardwareAdapter)
         : AdapterBase(backend->GetInstance(), BackendType::D3D12),
-          mHardwareAdapter(hardwareAdapter),
           mBackend(backend) {
+        ASSERT_SUCCESS(hardwareAdapter.As(&mHardwareAdapter));
     }
 
     const D3D12DeviceInfo& Adapter::GetDeviceInfo() const {
         return mDeviceInfo;
     }
 
-    IDXGIAdapter1* Adapter::GetHardwareAdapter() const {
+    IDXGIAdapter3* Adapter::GetHardwareAdapter() const {
         return mHardwareAdapter.Get();
     }
 
