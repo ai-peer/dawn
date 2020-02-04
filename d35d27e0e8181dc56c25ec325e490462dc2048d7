@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "04c4e37f_99ea6063",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-04T22:06:17Z",
+      "side": 1,
+      "message": "This is a particularly unsafe function - because someone could try to use it when the (dawn)Heap represents a directly allocated function, and try to use a ID3D12Resource as if it\u0027s a ID3D12Heap. I considered adding AllocationMethod to the constructor, but the member would only be used to ASSERT here. WDYT?",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e709e56_a00f5c67",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
         "patchSetId": 7
