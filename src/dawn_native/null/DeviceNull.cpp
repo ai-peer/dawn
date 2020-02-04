@@ -15,15 +15,68 @@
 #include "dawn_native/null/DeviceNull.h"
 
 #include "dawn_native/BackendConnection.h"
+#include "dawn_native/BindGroup.h"
+#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Commands.h"
+#include "dawn_native/ComputePipeline.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/Instance.h"
+#include "dawn_native/PipelineLayout.h"
+#include "dawn_native/RenderPipeline.h"
+#include "dawn_native/Sampler.h"
+#include "dawn_native/ShaderModule.h"
 #include "dawn_native/Surface.h"
+#include "dawn_native/Texture.h"
 
 #include <spirv_cross.hpp>
 
 namespace dawn_native { namespace null {
+
+    class BindGroup : public BindGroupBase {
+      public:
+        using BindGroupBase::BindGroupBase;
+    };
+
+    class BindGroupLayout : public BindGroupLayoutBase {
+      public:
+        using BindGroupLayoutBase::BindGroupLayoutBase;
+    };
+
+    class ComputePipeline : public ComputePipelineBase {
+      public:
+        using ComputePipelineBase::ComputePipelineBase;
+    };
+
+    class PipelineLayout : public PipelineLayoutBase {
+      public:
+        using PipelineLayoutBase::PipelineLayoutBase;
+    };
+
+    class RenderPipeline : public RenderPipelineBase {
+      public:
+        using RenderPipelineBase::RenderPipelineBase;
+    };
+
+    class Sampler : public SamplerBase {
+      public:
+        using SamplerBase::SamplerBase;
+    };
+
+    class ShaderModule : public ShaderModuleBase {
+      public:
+        using ShaderModuleBase::ShaderModuleBase;
+    };
+
+    class Texture : public TextureBase {
+      public:
+        using TextureBase::TextureBase;
+    };
+
+    class TextureView : public TextureViewBase {
+      public:
+        using TextureViewBase::TextureViewBase;
+    };
 
     // Implementation of pre-Device objects: the null adapter, null backend connection and Connect()
 

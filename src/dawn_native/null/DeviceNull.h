@@ -16,42 +16,34 @@
 #define DAWNNATIVE_NULL_DEVICENULL_H_
 
 #include "dawn_native/Adapter.h"
-#include "dawn_native/BindGroup.h"
-#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/CommandEncoder.h"
-#include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
-#include "dawn_native/PipelineLayout.h"
 #include "dawn_native/Queue.h"
-#include "dawn_native/RenderPipeline.h"
 #include "dawn_native/RingBufferAllocator.h"
-#include "dawn_native/Sampler.h"
-#include "dawn_native/ShaderModule.h"
 #include "dawn_native/StagingBuffer.h"
 #include "dawn_native/SwapChain.h"
-#include "dawn_native/Texture.h"
 #include "dawn_native/ToBackend.h"
 #include "dawn_native/dawn_platform.h"
 
 namespace dawn_native { namespace null {
 
     class Adapter;
-    using BindGroup = BindGroupBase;
-    using BindGroupLayout = BindGroupLayoutBase;
+    class BindGroup;
+    class BindGroupLayout;
     class Buffer;
     class CommandBuffer;
-    using ComputePipeline = ComputePipelineBase;
+    class ComputePipeline;
     class Device;
-    using PipelineLayout = PipelineLayoutBase;
+    class PipelineLayout;
     class Queue;
-    using RenderPipeline = RenderPipelineBase;
-    using Sampler = SamplerBase;
-    using ShaderModule = ShaderModuleBase;
+    class RenderPipeline;
+    class Sampler;
+    class ShaderModule;
     class SwapChain;
-    using Texture = TextureBase;
-    using TextureView = TextureViewBase;
+    class Texture;
+    class TextureView;
 
     struct NullBackendTraits {
         using AdapterType = Adapter;

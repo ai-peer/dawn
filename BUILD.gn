@@ -144,6 +144,7 @@ source_set("libdawn_native_sources") {
     ":libdawn_native_headers",
     ":libdawn_native_utils_gen",
     "${dawn_root}/src/common",
+    "${dawn_shaderc_dir}:libshaderc_spvc_sources",
     "${dawn_shaderc_dir}:spirv_cross",
     "${dawn_spirv_tools_dir}:spvtools_val",
   ]
@@ -158,7 +159,6 @@ source_set("libdawn_native_sources") {
   # libdawn_native target
   public_deps = [
     ":dawn_platform",
-    "${dawn_shaderc_dir}:libshaderc_spvc_sources",
   ]
 
   sources = get_target_outputs(":libdawn_native_utils_gen")
