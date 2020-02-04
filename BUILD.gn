@@ -743,6 +743,7 @@ static_library("dawn_utils") {
     "src/utils/WGPUHelpers.h",
   ]
   deps = [
+    ":dawn_bindings",
     ":libdawn_native",
     ":libdawn_wire",
     "${dawn_root}/src/common",
@@ -1033,6 +1034,7 @@ test("dawn_end2end_tests") {
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
 
   deps = [
+    ":dawn_bindings",
     ":dawn_end2end_tests_sources",
     ":dawn_utils",
     ":dawn_white_box_tests_sources",
@@ -1198,7 +1200,6 @@ if (dawn_standalone) {
 
     # Export all of these as public deps so that `gn check` allows includes
     public_deps = [
-      ":dawn_bindings",
       ":dawn_glfw",
       ":dawn_utils",
       ":libdawn_native",
