@@ -16,6 +16,7 @@
 
 #include "common/Constants.h"
 #include "common/Log.h"
+#include "utils/BackendBinding.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/GLFWUtils.h"
 #include "utils/WGPUHelpers.h"
@@ -289,4 +290,83 @@ TEST_F(SwapChainValidationTests, SwapChainIsInvalidAfterSurfaceDestruction_After
 
     CheckTextureViewIsDestroyed(view);
     ASSERT_DEVICE_ERROR(replacedSwapChain.Present());
+}
+
+// Test that after Device is Lost, all swap chain operations fail
+static void ToMockDeviceLostCallback(const char* message, void* userdata) {
+    ValidationTest* self = static_cast<ValidationTest*>(userdata);
+    self->StartExpectDeviceError();
+}
+
+// Test that new swap chain present fails after device is lost
+TEST_F(SwapChainValidationTests, NewSwapChainPresentFailsAfterDeviceLost) {
+    device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
+    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);
+    wgpu::TextureView view = swapchain.GetCurrentTextureView();
+
+    device.LoseForTesting();
+    ASSERT_DEVICE_ERROR(swapchain.Present());
+}
+
+// Test that old swap chain present fails after device is lost
+TEST_F(SwapChainValidationTests, OldSwapChainPresentFailsAfterDeviceLost) {
+    device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
+
+    wgpu::AdapterProperties properties;
+    adapter.GetProperties(&properties);
+    utils::BackendBinding* binding =
+        utils::CreateBinding(properties.backendType, window, device.Get());
+    wgpu::SwapChainDescriptor desc = goodDescriptor;
+    desc.implementation = binding->GetSwapChainImplementation();
+
+    wgpu::SwapChain swapchain = device.CreateSwapChain(nullptr, &desc);
+    swapchain.Configure(desc.format, desc.usage, desc.width, desc.height);
+    wgpu::TextureView view = swapchain.GetCurrentTextureView();
+
+    device.LoseForTesting();
+    ASSERT_DEVICE_ERROR(swapchain.Present());
+}
+
+// Test that new swap chain get current texture view fails after device is lost
+TEST_F(SwapChainValidationTests, NewSwapChainGetCurrentTextureViewFailsAfterDevLost) {
+    device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
+    wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);
+
+    device.LoseForTesting();
+    ASSERT_DEVICE_ERROR(swapchain.GetCurrentTextureView());
+}
+
+// Test that old swap chain get current texture view fails after device is lost
+TEST_F(SwapChainValidationTests, OldSwapChainGetCurrentTextureViewFailsAfterDevLost) {
+    device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
+
+    wgpu::AdapterProperties properties;
+    adapter.GetProperties(&properties);
+    utils::BackendBinding* binding =
+        utils::CreateBinding(properties.backendType, window, device.Get());
+    wgpu::SwapChainDescriptor desc = goodDescriptor;
+    desc.implementation = binding->GetSwapChainImplementation();
+
+    wgpu::SwapChain swapchain = device.CreateSwapChain(nullptr, &desc);
+    swapchain.Configure(desc.format, desc.usage, desc.width, desc.height);
+
+    device.LoseForTesting();
+    ASSERT_DEVICE_ERROR(swapchain.GetCurrentTextureView());
+}
+
+// Test that old swap chain configure fails after device is lost
+TEST_F(SwapChainValidationTests, OldSwapChainConfigureFailsAfterDevLost) {
+    device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
+
+    wgpu::AdapterProperties properties;
+    adapter.GetProperties(&properties);
+    utils::BackendBinding* binding =
+        utils::CreateBinding(properties.backendType, window, device.Get());
+    wgpu::SwapChainDescriptor desc = goodDescriptor;
+    desc.implementation = binding->GetSwapChainImplementation();
+
+    wgpu::SwapChain swapchain = device.CreateSwapChain(nullptr, &desc);
+
+    device.LoseForTesting();
+    ASSERT_DEVICE_ERROR(swapchain.Configure(desc.format, desc.usage, desc.width, desc.height));
 }

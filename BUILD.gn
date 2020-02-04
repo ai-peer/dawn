@@ -743,6 +743,7 @@ static_library("dawn_utils") {
     "src/utils/WGPUHelpers.h",
   ]
   deps = [
+    ":dawn_bindings",
     ":libdawn_native",
     ":libdawn_wire",
     "${dawn_root}/src/common",
