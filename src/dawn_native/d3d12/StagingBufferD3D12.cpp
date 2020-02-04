@@ -60,4 +60,8 @@ namespace dawn_native { namespace d3d12 {
         return mUploadHeap.GetD3D12Resource().Get();
     }
 
+    ResourceHeapAllocation* StagingBuffer::GetResourceHeapAllocation() {
+        return &mUploadHeap;
+    }
+
 }}  // namespace dawn_native::d3d12
