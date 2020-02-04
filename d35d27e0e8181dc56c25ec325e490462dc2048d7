@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d57ecfd_75f126e1",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-04T21:58:13Z",
+      "side": 1,
+      "message": "This is a near direct copy/paste of chromium/src/base/containers/linked_list.h",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e709e56_a00f5c67",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-04T21:58:13Z",
+      "side": 1,
+      "message": "Only part of this design I\u0027m not a fan of is this member. I had to find some way to keep a directly-allocated dawn_native::d3d12::Heap alive, and this was the simplest option at the cost of unused bits in the suballocated case.",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
