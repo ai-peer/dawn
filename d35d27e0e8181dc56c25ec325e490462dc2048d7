@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2076208c_39264e04",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-04T22:50:52Z",
+      "side": 1,
+      "message": "How about additionally passing the d3d heap in the ctor then using GetD3D12Pageable() directly?\n\nOptionally, ASSERT(heap \u003d\u003d nullptr \u0026\u0026 pagable !\u003d nullptr) OR ASSERT(heap-\u003eGetPageable() \u003d\u003d mPageable) for direct allocation or sub-allocation, respectively.",
+      "parentUuid": "04c4e37f_99ea6063",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e709e56_a00f5c67",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
         "patchSetId": 7
