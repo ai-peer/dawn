@@ -1033,6 +1033,7 @@ test("dawn_end2end_tests") {
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
 
   deps = [
+    ":dawn_bindings",
     ":dawn_end2end_tests_sources",
     ":dawn_utils",
     ":dawn_white_box_tests_sources",
