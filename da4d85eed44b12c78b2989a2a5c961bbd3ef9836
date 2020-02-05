@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f762541_3d1dc10e",
+        "filename": "generator/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000663
+      },
+      "writtenOn": "2020-02-05T14:08:00Z",
+      "side": 1,
+      "message": "Maybe move this outside the endif() so it always prints? Can be useful to see in the logs on bots where things came from",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "579c61f5_6b6f1e6c",
+        "filename": "generator/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000663
+      },
+      "writtenOn": "2020-02-05T14:08:00Z",
+      "side": 1,
+      "message": "nit: s/nodified/modified\nnit: s/generates/generated",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97b36bc1_80d519c1",
+        "filename": "generator/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000663
+      },
+      "writtenOn": "2020-02-05T14:08:00Z",
+      "side": 1,
+      "message": "Isn\u0027t this an error if it doesn\u0027t exist? Why make it conditional?",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "700bf58e_ab725279",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000663
+      },
+      "writtenOn": "2020-02-05T14:08:00Z",
+      "side": 1,
+      "message": "Should this be if (NOT TARGET shaderc_spvc) ?",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
