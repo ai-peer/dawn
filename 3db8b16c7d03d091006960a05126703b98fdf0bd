@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0307b77b_c86a2cc3",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-02-05T20:02:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40673719_6d5e4f63",
+      "revId": "3db8b16c7d03d091006960a05126703b98fdf0bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95763be2_9ffdef2b",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 6
