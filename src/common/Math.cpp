@@ -60,6 +60,7 @@ uint32_t Log2(uint64_t value) {
 }
 
 uint64_t NextPowerOfTwo(uint64_t n) {
+    ASSERT(n < UINT64_MAX);
 #if defined(DAWN_COMPILER_MSVC)
     if (n <= 1) {
         return 1;
