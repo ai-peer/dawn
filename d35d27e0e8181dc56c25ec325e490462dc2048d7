@@ -139,6 +139,24 @@
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afd35272_aafd1468",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-05T22:32:16Z",
+      "side": 1,
+      "message": "The issue becomes lifetime tracking for direct allocations is currently via the d3d resource; however, the LRU likes heaps. Maybe using the RHA could resolve that without adding another means of controlling ownership. \n\nOtherwise, what happens if buffer.Destory() is called? The resource is .Reset() without the LRU knowing any better, two-way communication is now required.",
+      "parentUuid": "26d39e84_a221d1dc",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
