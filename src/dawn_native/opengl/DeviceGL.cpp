@@ -182,7 +182,7 @@ namespace dawn_native { namespace opengl {
         gl.Finish();
         CheckPassedFences();
         ASSERT(mFencesInFlight.empty());
-        Tick();
+        DAWN_TRY(TickImpl());
         return {};
     }
 
