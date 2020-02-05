@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "c6469a4a_f479f2cf",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-05T18:52:00Z",
+      "side": 1,
+      "message": "Don\u0027t know, but I\u0027d bet we crash. Anytime we try to access a heap there needs to be a call to EnsureHeapIsResident. I\u0027ve only covered the cases possible in the allocators and within a CommandEncoder. I\u0027ll need to read through the API to try and find anything outside of those (i.e. MapAsync).",
+      "parentUuid": "86ff5a8d_456e3c58",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e709e56_a00f5c67",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
         "patchSetId": 7
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "ResourceMemoryAllocation already stores a Heap. For direct allocation, it would be the empty Heap object (no d3d12 heap). Unlike sub-allocated heaps, the committed resource must own its committed memory and cannot be shared.",
       "parentUuid": "5e709e56_a00f5c67",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26d39e84_a221d1dc",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-05T18:52:00Z",
+      "side": 1,
+      "message": "It does, but it\u0027s just stored as a simple pointer type. You can see I do still pass the heap through the constructor and it\u0027s stored as on the ResourceMemoryAllocation. \n\nThe reason I added the mImplicitHeap shared_ptr was to keep a (dawn)Heap alive for the duration of a directly-allocated resourceHeapAllocation. \n\nI understand that the current allocation scheme creates no (dawn)Heap nor a (d3d12)Heap in the case of direct allocation, however I have changed this in this current patch set so there is a (dawn)Heap to represent a directly allocated resource. I think the residency code has been much simplified if an LRUEntry can just represent a (dawn)Heap instead of both a Heap and RMA.\n\nI know Dawn\u0027s allocation scheme is designed to mimic D3D12\u0027s, but if you look at CreateCommittedResource [1], note the description: \"Creates both a resource and an implicit heap, such that the heap is big enough to contain the entire resource, and the resource is mapped to the heap.\" Dawn currently doesn\u0027t acknowledge this \"implicit heap\" - and I\u0027m just trying to integrate it somehow - because the residency code is much simpler when I do.\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-createcommittedresource",
+      "parentUuid": "08bc187e_18b8efd1",
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
