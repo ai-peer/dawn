@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f382bf44_256cf569",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-05T16:31:31Z",
+      "side": 1,
+      "message": "in GN, I think we only enable this on Linux. Was this intentional? Seems right to me to enable it on Windows though just wanted to check.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 21
+      },
+      "revId": "559b6baa39615dbfaea5106e9865e4cedc0dc4b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ebdbfe9_89094914",
+        "filename": "examples/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-05T16:31:31Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 24,
+        "startChar": 15,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "559b6baa39615dbfaea5106e9865e4cedc0dc4b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
