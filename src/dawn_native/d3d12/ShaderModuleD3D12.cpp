@@ -42,6 +42,7 @@ namespace dawn_native { namespace d3d12 {
         mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
             shaderc_spvc::CompileOptions options;
+            options.SetValidate(GetDevice()->IsValidationEnabled());
 
             options.SetHLSLShaderModel(51);
             // PointCoord and PointSize are not supported in HLSL

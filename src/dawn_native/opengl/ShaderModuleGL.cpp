@@ -77,6 +77,7 @@ namespace dawn_native { namespace opengl {
             // If these options are changed, the values in DawnSPIRVCrossGLSLFastFuzzer.cpp need to
             // be updated.
             shaderc_spvc::CompileOptions options;
+            options.SetValidate(GetDevice()->IsValidationEnabled());
 
             // The range of Z-coordinate in the clipping volume of OpenGL is [-w, w], while it is
             // [0, w] in D3D12, Metal and Vulkan, so we should normalize it in shaders in all

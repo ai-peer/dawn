@@ -90,9 +90,11 @@ namespace dawn_native { namespace metal {
     MaybeError ShaderModule::Initialize(const ShaderModuleDescriptor* descriptor) {
         mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
+            auto options = GetMSLCompileOptions();
+            options.SetValidate(GetDevice()->IsValidationEnabled());
+
             DAWN_TRY(CheckSpvcSuccess(
-                mSpvcContext.InitializeForMsl(descriptor->code, descriptor->codeSize,
-                                              GetMSLCompileOptions()),
+                mSpvcContext.InitializeForMsl(descriptor->code, descriptor->codeSize, options),
                 "Unable to initialize instance of spvc"));
 
             spirv_cross::CompilerMSL* compiler;

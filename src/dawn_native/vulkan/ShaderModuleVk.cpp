@@ -41,6 +41,7 @@ namespace dawn_native { namespace vulkan {
         // have a translation step eventually anyway.
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
             shaderc_spvc::CompileOptions options;
+            options.SetValidate(GetDevice()->IsValidationEnabled());
             DAWN_TRY(CheckSpvcSuccess(
                 mSpvcContext.InitializeForVulkan(descriptor->code, descriptor->codeSize, options),
                 "Unable to initialize instance of spvc"));
