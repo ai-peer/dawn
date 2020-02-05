@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "728d7555_497dc741",
+        "filename": "generator/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-05T14:20:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, in the if() clause we have a similar print to say we use the system Jinja2.\n\nSo either \"Dawn: Using system jinja2\" or \"Dawn: Using jinja2 at /foo/bar\" will be printed.",
+      "parentUuid": "4f762541_3d1dc10e",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "579c61f5_6b6f1e6c",
         "filename": "generator/CMakeLists.txt",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee34f52f_7ff98b9c",
+        "filename": "generator/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-05T14:20:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "579c61f5_6b6f1e6c",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "bfb21c1b_5654443d",
+        "filename": "generator/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-05T14:20:17Z",
+      "side": 1,
+      "message": "It can happen when the user doesn\u0027t want to use a git checkout of Jinja2 but the system one they installed. This is for external projects using Dawn that might prefer adding system packages to extra dependencies.",
+      "parentUuid": "97b36bc1_80d519c1",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "700bf58e_ab725279",
         "filename": "third_party/CMakeLists.txt",
         "patchSetId": 5
@@ -67,6 +121,24 @@
       "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7cce178_80627f62",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-05T14:20:17Z",
+      "side": 1,
+      "message": "Massaged the conditions to be a bit simpler to read.",
+      "parentUuid": "700bf58e_ab725279",
+      "revId": "da4d85eed44b12c78b2989a2a5c961bbd3ef9836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
