@@ -54,6 +54,23 @@
     },
     {
       "key": {
+        "uuid": "86ff5a8d_456e3c58",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-05T18:21:24Z",
+      "side": 1,
+      "message": "What happens if a buffer tries to map an evicted resource\u0027s heap?",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5e709e56_a00f5c67",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
         "patchSetId": 7
@@ -65,6 +82,24 @@
       "writtenOn": "2020-02-04T21:58:13Z",
       "side": 1,
       "message": "Only part of this design I\u0027m not a fan of is this member. I had to find some way to keep a directly-allocated dawn_native::d3d12::Heap alive, and this was the simplest option at the cost of unused bits in the suballocated case.",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08bc187e_18b8efd1",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-05T18:21:24Z",
+      "side": 1,
+      "message": "ResourceMemoryAllocation already stores a Heap. For direct allocation, it would be the empty Heap object (no d3d12 heap). Unlike sub-allocated heaps, the committed resource must own its committed memory and cannot be shared.",
+      "parentUuid": "5e709e56_a00f5c67",
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
