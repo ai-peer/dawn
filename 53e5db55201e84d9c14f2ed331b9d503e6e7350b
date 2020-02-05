@@ -314,6 +314,24 @@
     },
     {
       "key": {
+        "uuid": "fe223a60_50243b0a",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-05T19:51:14Z",
+      "side": 1,
+      "message": "It goes part of the way there.\n\nThere is still the problem where the BindGroups re-queries the manager from the device. When the code says Populate() it\u0027s not clear that it will modify the internal state of the manager.",
+      "parentUuid": "384a6510_7bbe9255",
+      "revId": "53e5db55201e84d9c14f2ed331b9d503e6e7350b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b98f7c20_caf34d38",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 33
