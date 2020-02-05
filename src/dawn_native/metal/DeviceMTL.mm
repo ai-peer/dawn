@@ -278,7 +278,7 @@ namespace dawn_native { namespace metal {
         while (GetCompletedCommandSerial() != mLastSubmittedSerial) {
             usleep(100);
         }
-        Tick();
+        TickImpl();
         return {};
     }
 
