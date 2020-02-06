@@ -193,6 +193,24 @@
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d33e2963_be0c1a0a",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-06T22:12:23Z",
+      "side": 1,
+      "message": "Okay. In that case - we could just add this to RHA::Invalidate():\n\nif(GetInfo().mMethod \u003d\u003d kDirect) {\n    mImplicitHeap.reset();\n}\n\nThis would invoke the Heap destructor and remove it from the LRU.",
+      "parentUuid": "9fedad25_e39216e0",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
