@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ce2d754_05ec064e",
+        "filename": "src/dawn_native/SwapChain.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-06T00:28:35Z",
+      "side": 1,
+      "message": "For which case do we need this? It should always be the responsibility of the derived class to destroy the texture.",
+      "revId": "25c46d2f349b2f2325322b4302c526ad269328a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a999d2f_45b36710",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-06T00:28:35Z",
+      "side": 1,
+      "message": "Can we also have a test that creation of a new swapchain fails?",
+      "revId": "25c46d2f349b2f2325322b4302c526ad269328a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
