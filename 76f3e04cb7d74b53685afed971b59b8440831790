@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5db543a0_5a6e0abb",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-06T00:25:55Z",
+      "side": 1,
+      "message": "unit: spell out simple types.",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 16
+      },
+      "revId": "76f3e04cb7d74b53685afed971b59b8440831790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34f9f3a5_28cf0353",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-06T00:25:55Z",
+      "side": 1,
+      "message": "nit: Maybe we could have something on the ShaderModule that sets \"common\" options, such as validation.",
+      "revId": "76f3e04cb7d74b53685afed971b59b8440831790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
