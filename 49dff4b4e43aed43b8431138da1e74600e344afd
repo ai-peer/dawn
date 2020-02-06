@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "278f02e2_a242f658",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-06T23:38:21Z",
+      "side": 1,
+      "message": "implies? If we want to require it, we should check |mUseSpvc| instead of overriding it.",
+      "range": {
+        "startLine": 153,
+        "startChar": 55,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "49dff4b4e43aed43b8431138da1e74600e344afd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
