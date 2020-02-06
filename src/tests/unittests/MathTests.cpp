@@ -68,6 +68,9 @@ TEST(Math, NextPowerOfTwo) {
     ASSERT_EQ(NextPowerOfTwo(33), 64ull);
 
     ASSERT_EQ(NextPowerOfTwo(32), 32ull);
+
+    ASSERT_EQ(NextPowerOfTwo(static_cast<uint64_t>(0xFFFFFFFFFFFFFFFF)),
+              static_cast<uint64_t>(0xFFFFFFFFFFFFFFFF));
 }
 
 // Tests for AlignPtr
@@ -82,7 +85,7 @@ TEST(Math, AlignPtr) {
 
         ASSERT_GE(aligned - unaligned, 0);
         ASSERT_LT(static_cast<size_t>(aligned - unaligned), kTestAlignment);
-        ASSERT_EQ(reinterpret_cast<uintptr_t>(aligned) & (kTestAlignment -1), 0u);
+        ASSERT_EQ(reinterpret_cast<uintptr_t>(aligned) & (kTestAlignment - 1), 0u);
     }
 }
 
