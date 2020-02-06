@@ -157,6 +157,24 @@
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5be0d437_1ca8ab20",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-06T21:17:15Z",
+      "side": 1,
+      "message": "\u003e\u003e what happens if buffer.Destory() is called?\n\nBut isn\u0027t the RHA destroyed when this occurs? When the RHA is destroyed, then the shared_ptr keeping the accompanying (dawn)Heap alive is destroyed -\u003e this invokes the (dawn)Heap\u0027s destructor that will remove its entry from the LRU.",
+      "parentUuid": "afd35272_aafd1468",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
