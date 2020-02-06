@@ -75,6 +75,10 @@ uint64_t NextPowerOfTwo(uint64_t n) {
         return 1;
     }
 
+    if (n == UINT64_MAX) {
+        return UINT64_MAX;
+    }
+
     return 1ull << (Log2(n - 1) + 1);
 }
 

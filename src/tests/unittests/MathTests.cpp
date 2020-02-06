@@ -68,6 +68,7 @@ TEST(Math, NextPowerOfTwo) {
     ASSERT_EQ(NextPowerOfTwo(33), 64ull);
 
     ASSERT_EQ(NextPowerOfTwo(32), 32ull);
+    ASSERT_EQ(NextPowerOfTwo(0xFFFFFFFFFFFFFFFF), 0xFFFFFFFFFFFFFFFF);
 }
 
 // Tests for AlignPtr
