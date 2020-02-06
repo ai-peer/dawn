@@ -56,7 +56,7 @@ namespace dawn_native { namespace metal {
         shaderc_spvc::CompileOptions GetMSLCompileOptions() {
             // If these options are changed, the values in DawnSPIRVCrossGLSLFastFuzzer.cpp need to
             // be updated.
-            shaderc_spvc::CompileOptions options;
+            shaderc_spvc::CompileOptions options = GetCompileOptions();
 
             // Disable PointSize builtin for https://bugs.chromium.org/p/dawn/issues/detail?id=146
             // Because Metal will reject PointSize builtin if the shader is compiled into a render
@@ -90,9 +90,10 @@ namespace dawn_native { namespace metal {
     MaybeError ShaderModule::Initialize(const ShaderModuleDescriptor* descriptor) {
         mSpirv.assign(descriptor->code, descriptor->code + descriptor->codeSize);
         if (GetDevice()->IsToggleEnabled(Toggle::UseSpvc)) {
+            shaderc_spvc::CompileOptions options = GetMSLCompileOptions();
+
             DAWN_TRY(CheckSpvcSuccess(
-                mSpvcContext.InitializeForMsl(descriptor->code, descriptor->codeSize,
-                                              GetMSLCompileOptions()),
+                mSpvcContext.InitializeForMsl(descriptor->code, descriptor->codeSize, options),
                 "Unable to initialize instance of spvc"));
 
             spirv_cross::CompilerMSL* compiler;
