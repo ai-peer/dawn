@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/Math.h"
 
+#include <algorithm>
 #include <cstdlib>
 #include <limits>
 #include <new>
@@ -56,14 +57,12 @@ SlabAllocatorImpl::Index SlabAllocatorImpl::kInvalidIndex =
     std::numeric_limits<SlabAllocatorImpl::Index>::max();
 
 SlabAllocatorImpl::SlabAllocatorImpl(Index blocksPerSlab,
-                                     uint32_t allocationAlignment,
-                                     uint32_t slabBlocksOffset,
-                                     uint32_t blockStride,
-                                     uint32_t indexLinkNodeOffset)
-    : mAllocationAlignment(allocationAlignment),
-      mSlabBlocksOffset(slabBlocksOffset),
-      mBlockStride(blockStride),
-      mIndexLinkNodeOffset(indexLinkNodeOffset),
+                                     uint32_t objectSize,
+                                     uint32_t objectAlignment)
+    : mAllocationAlignment(std::max(static_cast<uint32_t>(alignof(Slab)), objectAlignment)),
+      mSlabBlocksOffset(Align(sizeof(Slab), objectAlignment)),
+      mIndexLinkNodeOffset(Align(objectSize, alignof(IndexLinkNode))),
+      mBlockStride(Align(mIndexLinkNodeOffset + sizeof(IndexLinkNode), objectAlignment)),
       mBlocksPerSlab(blocksPerSlab),
       mTotalAllocationSize(
           // required allocation size
