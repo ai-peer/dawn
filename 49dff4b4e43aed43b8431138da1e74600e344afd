@@ -22,6 +22,30 @@
       "revId": "49dff4b4e43aed43b8431138da1e74600e344afd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1483d74a_af6bb2b3",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-02-07T08:04:50Z",
+      "side": 1,
+      "message": "\"requires\" made sense to me (it requires spvc be enabled, not that --use-spvc be passed), but to clarify this you could say: \"it\u0027s impossible to use the spvc parser without using spvc, so turn on mUseSpvc implicitly.\"",
+      "parentUuid": "278f02e2_a242f658",
+      "range": {
+        "startLine": 153,
+        "startChar": 55,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "49dff4b4e43aed43b8431138da1e74600e344afd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
