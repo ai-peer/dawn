@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fddeead_851cc165",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-07T02:28:01Z",
+      "side": 1,
+      "message": "The semantic of NextPowerOfTwo is that it returns a power of two, so it is breaking the contract by returning a non-power of two. How about adding an ASSERT and special handling in the callers? Also this check is wrong because the issue will happen as soon as n \u003e (1ull \u003c\u003c 63ull)",
+      "revId": "623d7148d5de062a17314695974073afa73a07ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
