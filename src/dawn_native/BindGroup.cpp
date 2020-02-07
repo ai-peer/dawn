@@ -175,15 +175,58 @@ namespace dawn_native {
         return {};
     }
 
+    // OwnBindingDataHolder
+
+    OwnBindingDataHolder::OwnBindingDataHolder(size_t size) : mBindingData(malloc(size)) {
+    }
+
+    OwnBindingDataHolder::~OwnBindingDataHolder() {
+        free(mBindingData);
+    }
+
+    // BindGroupBaseOwnBindingData
+
+    BindGroupBaseOwnBindingData::BindGroupBaseOwnBindingData(DeviceBase* device,
+                                                             const BindGroupDescriptor* descriptor)
+        : OwnBindingDataHolder(GetBindingDataSize(descriptor->layout)),
+          BindGroupBase(device, descriptor, mBindingData) {
+    }
+
     // BindGroup
 
-    BindGroupBase::BindGroupBase(DeviceBase* device, const BindGroupDescriptor* descriptor)
-        : ObjectBase(device), mLayout(descriptor->layout) {
+    // static
+    size_t BindGroupBase::GetBindingDataSize(const BindGroupLayoutBase* layout) {
+        // TODO(enga): Optimize storage once we pack bindings in the layout.
+        // The binding count includes holes, and we don't need size and offset space for
+        // non-buffer bindings.
+        uint32_t bindingCount = layout->GetBindingCount();
+        return sizeof(Ref<ObjectBase>) * bindingCount + sizeof(uint32_t) * bindingCount +
+               sizeof(uint32_t) * bindingCount;
+    }
+
+    BindGroupBase::BindGroupBase(DeviceBase* device,
+                                 const BindGroupDescriptor* descriptor,
+                                 void* bindingDataStart)
+        : ObjectBase(device),
+          mLayout(descriptor->layout),
+          mBindings(reinterpret_cast<Ref<ObjectBase>*>(bindingDataStart)),
+          mOffsets(
+              reinterpret_cast<uint32_t*>(reinterpret_cast<uint8_t*>(mBindings) +
+                                          mLayout->GetBindingCount() * sizeof(Ref<ObjectBase>))),
+          mSizes(mOffsets + mLayout->GetBindingCount()) {
+        ASSERT(IsPtrAligned(mBindings, alignof(Ref<ObjectBase>)));
+        ASSERT(IsPtrAligned(mOffsets, alignof(uint32_t)));
+        ASSERT(IsPtrAligned(mSizes, alignof(uint32_t)));
+
+        // TODO(enga): Shouldn't be needed when bindings are tightly packed.
+        // This is to fill Ref<ObjectBase> holes with nullptrs.
+        memset(bindingDataStart, 0, GetBindingDataSize(descriptor->layout));
+
         for (uint32_t i = 0; i < descriptor->bindingCount; ++i) {
             const BindGroupBinding& binding = descriptor->bindings[i];
 
             uint32_t bindingIndex = binding.binding;
-            ASSERT(bindingIndex < kMaxBindingsPerGroup);
+            ASSERT(bindingIndex < mLayout->GetBindingCount());
 
             // Only a single binding type should be set, so once we found it we can skip to the
             // next loop iteration.
@@ -212,8 +255,18 @@ namespace dawn_native {
         }
     }
 
+    BindGroupBase::~BindGroupBase() {
+        if (mLayout) {
+            for (uint32_t i = 0; i < mLayout->GetBindingCount(); ++i) {
+                if (mBindings[i]) {
+                    mBindings[i]->Release();
+                }
+            }
+        }
+    }
+
     BindGroupBase::BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag) {
+        : ObjectBase(device, tag), mBindings(nullptr), mOffsets(nullptr), mSizes(nullptr) {
     }
 
     // static
