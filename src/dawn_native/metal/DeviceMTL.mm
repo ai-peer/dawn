@@ -15,10 +15,10 @@
 #include "dawn_native/metal/DeviceMTL.h"
 
 #include "dawn_native/BackendConnection.h"
-#include "dawn_native/BindGroup.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/metal/BindGroupMTL.h"
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
@@ -43,7 +43,8 @@ namespace dawn_native { namespace metal {
         : DeviceBase(adapter, descriptor),
           mMtlDevice([mtlDevice retain]),
           mMapTracker(new MapRequestTracker(this)),
-          mCompletedSerial(0) {
+          mCompletedSerial(0),
+          mBindGroupAllocator(4096 / sizeof(BindGroup)) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
         InitTogglesFromDriver();
@@ -76,7 +77,7 @@ namespace dawn_native { namespace metal {
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) {
-        return new BindGroup(this, descriptor);
+        return mBindGroupAllocator.Allocate(this, descriptor);
     }
     ResultOrError<BindGroupLayoutBase*> Device::CreateBindGroupLayoutImpl(
         const BindGroupLayoutDescriptor* descriptor) {
@@ -228,6 +229,10 @@ namespace dawn_native { namespace metal {
 
     MapRequestTracker* Device::GetMapTracker() const {
         return mMapTracker.get();
+    }
+
+    Device::BindGroupAllocator* Device::GetBindGroupAllocator() {
+        return &mBindGroupAllocator;
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {

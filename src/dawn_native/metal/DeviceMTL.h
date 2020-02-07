@@ -18,6 +18,7 @@
 #include "dawn_native/dawn_platform.h"
 
 #include "common/Serial.h"
+#include "common/SlabAllocator.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/metal/CommandRecordingContext.h"
 #include "dawn_native/metal/Forward.h"
@@ -36,6 +37,8 @@ namespace dawn_native { namespace metal {
 
     class Device : public DeviceBase {
       public:
+        using BindGroupAllocator = SlabAllocator<BindGroup, 64>;
+
         Device(AdapterBase* adapter, id<MTLDevice> mtlDevice, const DeviceDescriptor* descriptor);
         ~Device();
 
@@ -54,6 +57,7 @@ namespace dawn_native { namespace metal {
         void SubmitPendingCommandBuffer();
 
         MapRequestTracker* GetMapTracker() const;
+        BindGroupAllocator* GetBindGroupAllocator();
 
         TextureBase* CreateTextureWrappingIOSurface(const TextureDescriptor* descriptor,
                                                     IOSurfaceRef ioSurface,
@@ -113,6 +117,8 @@ namespace dawn_native { namespace metal {
         // a different thread so we guard access to it with a mutex.
         std::mutex mLastSubmittedCommandsMutex;
         id<MTLCommandBuffer> mLastSubmittedCommands = nil;
+
+        BindGroupAllocator mBindGroupAllocator;
     };
 
 }}  // namespace dawn_native::metal
