@@ -46,7 +46,6 @@ namespace dawn_native { namespace metal {
           mCompletedSerial(0) {
         [mMtlDevice retain];
         mCommandQueue = [mMtlDevice newCommandQueue];
-
         InitTogglesFromDriver();
         if (descriptor != nil) {
             ApplyToggleOverrides(descriptor);
