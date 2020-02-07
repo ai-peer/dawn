@@ -144,6 +144,12 @@ namespace dawn_native {
             mBindingInfo.types[index] = binding.type;
             mBindingInfo.textureComponentTypes[index] = binding.textureComponentType;
 
+            // TODO(enga): This is a greedy computation because there may be holes in bindings.
+            // Fix this when we pack bindings.
+            if (index + 1 > mBindingCount) {
+                mBindingCount = index + 1;
+            }
+
             if (binding.textureDimension == wgpu::TextureViewDimension::Undefined) {
                 mBindingInfo.textureDimensions[index] = wgpu::TextureViewDimension::e2D;
             } else {
@@ -202,6 +208,10 @@ namespace dawn_native {
     bool BindGroupLayoutBase::EqualityFunc::operator()(const BindGroupLayoutBase* a,
                                                        const BindGroupLayoutBase* b) const {
         return a->mBindingInfo == b->mBindingInfo;
+    }
+
+    uint32_t BindGroupLayoutBase::GetBindingCount() const {
+        return mBindingCount;
     }
 
     uint32_t BindGroupLayoutBase::GetDynamicBufferCount() const {

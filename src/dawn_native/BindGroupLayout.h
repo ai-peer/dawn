@@ -56,6 +56,7 @@ namespace dawn_native {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
         };
 
+        uint32_t GetBindingCount() const;
         uint32_t GetDynamicBufferCount() const;
         uint32_t GetDynamicUniformBufferCount() const;
         uint32_t GetDynamicStorageBufferCount() const;
@@ -64,6 +65,7 @@ namespace dawn_native {
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         LayoutBindingInfo mBindingInfo;
+        uint32_t mBindingCount = 0;
         uint32_t mDynamicUniformBufferCount = 0;
         uint32_t mDynamicStorageBufferCount = 0;
     };
