@@ -56,14 +56,33 @@ namespace dawn_native {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
         };
 
+        uint32_t GetBindingCount() const;
         uint32_t GetDynamicBufferCount() const;
         uint32_t GetDynamicUniformBufferCount() const;
         uint32_t GetDynamicStorageBufferCount() const;
+
+        struct BindingDataPointers {
+            uint64_t* const offsets = nullptr;
+            uint64_t* const sizes = nullptr;
+            Ref<ObjectBase>* const bindings = nullptr;
+        };
+
+        // Compute the amount of space / alignment required to store bindings for a bind group of
+        // this layout.
+        size_t GetBindingDataSize() const;
+        static constexpr size_t GetBindingDataAlignment() {
+            static_assert(alignof(Ref<ObjectBase>) <= alignof(uint64_t), "");
+            return alignof(uint64_t);
+        }
+
+        BindingDataPointers ComputeBindingDataPointers(void* dataStart) const;
 
       private:
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         LayoutBindingInfo mBindingInfo;
+        uint32_t mBindingCount = 0;
+        uint32_t mBufferCount = 0;
         uint32_t mDynamicUniformBufferCount = 0;
         uint32_t mDynamicStorageBufferCount = 0;
     };

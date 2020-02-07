@@ -40,7 +40,7 @@ namespace dawn_native {
 
     class BindGroupBase : public ObjectBase {
       public:
-        BindGroupBase(DeviceBase* device, const BindGroupDescriptor* descriptor);
+        ~BindGroupBase() override;
 
         static BindGroupBase* MakeError(DeviceBase* device);
 
@@ -49,13 +49,38 @@ namespace dawn_native {
         SamplerBase* GetBindingAsSampler(size_t binding);
         TextureViewBase* GetBindingAsTextureView(size_t binding);
 
+      protected:
+        // To save memory, the size of a bind group is dynamically determined and the bind group is
+        // placement-allocated into memory big enough to hold the bind group with its
+        // dynamically-sized bindings after it. The pointer of the memory of the beginning of the
+        // binding data should be passed as |bindingDataStart|.
+        BindGroupBase(DeviceBase* device,
+                      const BindGroupDescriptor* descriptor,
+                      void* bindingDataStart);
+
       private:
         BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         Ref<BindGroupLayoutBase> mLayout;
-        std::array<Ref<ObjectBase>, kMaxBindingsPerGroup> mBindings;
-        std::array<uint32_t, kMaxBindingsPerGroup> mOffsets;
-        std::array<uint32_t, kMaxBindingsPerGroup> mSizes;
+        BindGroupLayoutBase::BindingDataPointers mBindingData;
+    };
+
+    // Helper class so |BindGroupBaseOwnBindingData| can allocate memory for its binding data,
+    // before calling the BindGroupBase base class constructor.
+    class OwnBindingDataHolder {
+      protected:
+        explicit OwnBindingDataHolder(size_t size);
+        ~OwnBindingDataHolder();
+
+        void* mBindingDataAllocation;
+    };
+
+    // We don't have the complexity of placement-allocation of bind group data in
+    // the Null backend. This class, keeps the binding data in a separate allocation for simplicity.
+    class BindGroupBaseOwnBindingData : private OwnBindingDataHolder, public BindGroupBase {
+      public:
+        BindGroupBaseOwnBindingData(DeviceBase* device, const BindGroupDescriptor* descriptor);
+        ~BindGroupBaseOwnBindingData() override = default;
     };
 
 }  // namespace dawn_native

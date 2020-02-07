@@ -144,6 +144,19 @@ namespace dawn_native {
             mBindingInfo.types[index] = binding.type;
             mBindingInfo.textureComponentTypes[index] = binding.textureComponentType;
 
+            // TODO(enga): This is a greedy computation because there may be holes in bindings.
+            // Fix this when we pack bindings.
+            mBindingCount = std::max(mBindingCount, index + 1);
+            switch (binding.type) {
+                case wgpu::BindingType::UniformBuffer:
+                case wgpu::BindingType::StorageBuffer:
+                case wgpu::BindingType::ReadonlyStorageBuffer:
+                    mBufferCount = std::max(mBufferCount, index + 1);
+                    break;
+                default:
+                    break;
+            }
+
             if (binding.textureDimension == wgpu::TextureViewDimension::Undefined) {
                 mBindingInfo.textureDimensions[index] = wgpu::TextureViewDimension::e2D;
             } else {
@@ -204,6 +217,10 @@ namespace dawn_native {
         return a->mBindingInfo == b->mBindingInfo;
     }
 
+    uint32_t BindGroupLayoutBase::GetBindingCount() const {
+        return mBindingCount;
+    }
+
     uint32_t BindGroupLayoutBase::GetDynamicBufferCount() const {
         return mDynamicStorageBufferCount + mDynamicUniformBufferCount;
     }
@@ -214,6 +231,26 @@ namespace dawn_native {
 
     uint32_t BindGroupLayoutBase::GetDynamicStorageBufferCount() const {
         return mDynamicStorageBufferCount;
+    }
+
+    size_t BindGroupLayoutBase::GetBindingDataSize() const {
+        static_assert(sizeof(Ref<ObjectBase>) <= sizeof(uint64_t), "");
+        // | ------ buffer-specific ----------| ------------ object pointers -------------|
+        // | --- offsets ---- | --- sizes ----| --------------- Ref<ObjectBase> ----------|
+        return 2 * mBufferCount * sizeof(uint64_t) + mBindingCount * sizeof(Ref<ObjectBase>);
+    }
+
+    BindGroupLayoutBase::BindingDataPointers BindGroupLayoutBase::ComputeBindingDataPointers(
+        void* dataStart) const {
+        uint64_t* offsets = reinterpret_cast<uint64_t*>(dataStart);
+        uint64_t* sizes = offsets + mBufferCount;
+        auto bindings = reinterpret_cast<Ref<ObjectBase>*>(sizes + mBufferCount);
+
+        ASSERT(IsPtrAligned(offsets, alignof(uint64_t)));
+        ASSERT(IsPtrAligned(sizes, alignof(uint64_t)));
+        ASSERT(IsPtrAligned(bindings, alignof(Ref<ObjectBase>)));
+
+        return {offsets, sizes, bindings};
     }
 
 }  // namespace dawn_native
