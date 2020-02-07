@@ -829,6 +829,8 @@ test("dawn_unittests") {
     "src/tests/unittests/MathTests.cpp",
     "src/tests/unittests/ObjectBaseTests.cpp",
     "src/tests/unittests/PerStageTests.cpp",
+    "src/tests/unittests/PlacementAllocatedTests.cpp",
+    "src/tests/unittests/PoolAllocatorTests.cpp",
     "src/tests/unittests/RefCountedTests.cpp",
     "src/tests/unittests/ResultTests.cpp",
     "src/tests/unittests/RingBufferAllocatorTests.cpp",
