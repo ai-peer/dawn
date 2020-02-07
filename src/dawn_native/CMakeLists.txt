@@ -224,6 +224,8 @@ if (DAWN_ENABLE_METAL)
         "Surface_metal.mm"
         "metal/BackendMTL.h"
         "metal/BackendMTL.mm"
+        "metal/BindGroupMTL.h"
+        "metal/BindGroupMTL.mm"
         "metal/BufferMTL.h"
         "metal/BufferMTL.mm"
         "metal/CommandBufferMTL.h"

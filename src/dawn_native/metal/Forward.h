@@ -25,7 +25,7 @@ namespace {
 namespace dawn_native { namespace metal {
 
     class Adapter;
-    using BindGroup = BindGroupBase;
+    class BindGroup;
     using BindGroupLayout = BindGroupLayoutBase;
     class Buffer;
     class CommandBuffer;
