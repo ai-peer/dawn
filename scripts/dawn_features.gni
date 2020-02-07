@@ -38,7 +38,7 @@ declare_args() {
   dawn_complete_static_libs = false
 
   # Enables the compilation of Dawn's D3D12 backend
-  dawn_enable_d3d12 = is_win
+  dawn_enable_d3d12 = is_win && !(target_cpu == "arm64")
 
   # Enables the compilation of Dawn's Metal backend
   dawn_enable_metal = is_mac
