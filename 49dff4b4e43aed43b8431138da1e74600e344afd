@@ -46,6 +46,30 @@
       "revId": "49dff4b4e43aed43b8431138da1e74600e344afd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c8dd6a6_3cbd7415",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2020-02-07T15:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1483d74a_af6bb2b3",
+      "range": {
+        "startLine": 153,
+        "startChar": 55,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "49dff4b4e43aed43b8431138da1e74600e344afd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
