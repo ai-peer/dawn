@@ -52,6 +52,7 @@ namespace dawn_native { namespace vulkan {
     extern const char kExtensionNameKhrXlibSurface[];
     extern const char kExtensionNameFuchsiaImagePipeSurface[];
     extern const char kExtensionNameKhrMaintenance1[];
+    extern const char kExtensionNameExtSubgroupSizeControl[];
 
     // Global information - gathered before the instance is created
     struct VulkanGlobalKnobs {
@@ -84,7 +85,19 @@ namespace dawn_native { namespace vulkan {
 
     // Device information - gathered before the device is created.
     struct VulkanDeviceKnobs {
-        VkPhysicalDeviceFeatures features;
+        VkPhysicalDeviceFeatures2 features2;
+
+        // The physical device features that are only accessible with an extension struct
+        // in the |features2.pNext| chain. This is only used when global knob
+        // getPhysicalDeviceProperties2 is true.
+        struct {
+            VkPhysicalDeviceSubgroupSizeControlFeaturesEXT subgroupSizeControl;
+        } featuresExtensions;
+
+        VkPhysicalDeviceProperties2 properties2;
+        struct {
+            VkPhysicalDeviceSubgroupSizeControlPropertiesEXT subgroupSizeControl;
+        } propertiesExtensions;
 
         // Extensions
         bool debugMarker = false;
@@ -98,10 +111,10 @@ namespace dawn_native { namespace vulkan {
         bool externalSemaphoreZirconHandle = false;
         bool swapchain = false;
         bool maintenance1 = false;
+        bool subgroupSizeControl = false;
     };
 
     struct VulkanDeviceInfo : VulkanDeviceKnobs {
-        VkPhysicalDeviceProperties properties;
         std::vector<VkQueueFamilyProperties> queueFamilies;
 
         std::vector<VkMemoryType> memoryTypes;

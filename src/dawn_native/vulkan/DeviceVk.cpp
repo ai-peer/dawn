@@ -40,6 +40,7 @@
 #include "dawn_native/vulkan/StagingBufferVk.h"
 #include "dawn_native/vulkan/SwapChainVk.h"
 #include "dawn_native/vulkan/TextureVk.h"
+#include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
 namespace dawn_native { namespace vulkan {
@@ -272,6 +273,11 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalDevice) {
         VulkanDeviceKnobs usedKnobs = {};
 
+        // Prepare usedKnobs.features2 for appending extension structs to
+        // its pNext chain if needed.
+        usedKnobs.features2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+        PNextChainBuilder featuresChain(&usedKnobs.features2);
+
         float zero = 0.0f;
         std::vector<const char*> layersToRequest;
         std::vector<const char*> extensionsToRequest;
@@ -321,18 +327,37 @@ namespace dawn_native { namespace vulkan {
             extensionsToRequest.push_back(kExtensionNameKhrMaintenance1);
             usedKnobs.maintenance1 = true;
         }
+        if (mDeviceInfo.subgroupSizeControl) {
+            // Always require subgroup size control if available.
+            extensionsToRequest.push_back(kExtensionNameExtSubgroupSizeControl);
+            usedKnobs.subgroupSizeControl = true;
+
+            const VkPhysicalDeviceSubgroupSizeControlFeaturesEXT& src =
+                mDeviceInfo.featuresExtensions.subgroupSizeControl;
+
+            VkPhysicalDeviceSubgroupSizeControlFeaturesEXT& dst =
+                usedKnobs.featuresExtensions.subgroupSizeControl;
+
+            dst = (VkPhysicalDeviceSubgroupSizeControlFeaturesEXT){
+                .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT,
+                .subgroupSizeControl = src.subgroupSizeControl,
+                .computeFullSubgroups = src.computeFullSubgroups,
+            };
+            featuresChain.Add(&dst);
+        }
 
         // Always require independentBlend because it is a core Dawn feature
-        usedKnobs.features.independentBlend = VK_TRUE;
+        usedKnobs.features2.features.independentBlend = VK_TRUE;
         // Always require imageCubeArray because it is a core Dawn feature
-        usedKnobs.features.imageCubeArray = VK_TRUE;
+        usedKnobs.features2.features.imageCubeArray = VK_TRUE;
         // Always require fragmentStoresAndAtomics because it is required by end2end tests.
-        usedKnobs.features.fragmentStoresAndAtomics = VK_TRUE;
+        usedKnobs.features2.features.fragmentStoresAndAtomics = VK_TRUE;
 
         if (IsExtensionEnabled(Extension::TextureCompressionBC)) {
-            ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.textureCompressionBC ==
-                   VK_TRUE);
-            usedKnobs.features.textureCompressionBC = VK_TRUE;
+            ASSERT(
+                ToBackend(GetAdapter())->GetDeviceInfo().features2.features.textureCompressionBC ==
+                VK_TRUE);
+            usedKnobs.features2.features.textureCompressionBC = VK_TRUE;
         }
 
         // Find a universal queue family
@@ -367,9 +392,11 @@ namespace dawn_native { namespace vulkan {
             queuesToRequest.push_back(queueCreateInfo);
         }
 
+        bool use_features2 = usedKnobs.features2.pNext != nullptr;
+
         VkDeviceCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-        createInfo.pNext = nullptr;
+        createInfo.pNext = use_features2 ? &usedKnobs.features2 : nullptr;
         createInfo.flags = 0;
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queuesToRequest.size());
         createInfo.pQueueCreateInfos = queuesToRequest.data();
@@ -377,7 +404,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.ppEnabledLayerNames = layersToRequest.data();
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionsToRequest.size());
         createInfo.ppEnabledExtensionNames = extensionsToRequest.data();
-        createInfo.pEnabledFeatures = &usedKnobs.features;
+        createInfo.pEnabledFeatures = use_features2 ? nullptr : &usedKnobs.features2.features;
 
         DAWN_TRY(CheckVkSuccess(fn.CreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice),
                                 "vkCreateDevice"));

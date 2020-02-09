@@ -39,8 +39,8 @@ namespace dawn_native { namespace vulkan {
 
     MaybeError Adapter::Initialize() {
         DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
-        if (!mDeviceInfo.maintenance1 &&
-            mDeviceInfo.properties.apiVersion < VK_MAKE_VERSION(1, 1, 0)) {
+        const VkPhysicalDeviceProperties& deviceProperties = mDeviceInfo.properties2.properties;
+        if (!mDeviceInfo.maintenance1 && deviceProperties.apiVersion < VK_MAKE_VERSION(1, 1, 0)) {
             return DAWN_DEVICE_LOST_ERROR(
                 "Dawn requires Vulkan 1.1 or Vulkan 1.0 with KHR_Maintenance1 in order to support "
                 "viewport flipY");
@@ -48,11 +48,11 @@ namespace dawn_native { namespace vulkan {
 
         InitializeSupportedExtensions();
 
-        mPCIInfo.deviceId = mDeviceInfo.properties.deviceID;
-        mPCIInfo.vendorId = mDeviceInfo.properties.vendorID;
-        mPCIInfo.name = mDeviceInfo.properties.deviceName;
+        mPCIInfo.deviceId = deviceProperties.deviceID;
+        mPCIInfo.vendorId = deviceProperties.vendorID;
+        mPCIInfo.name = deviceProperties.deviceName;
 
-        switch (mDeviceInfo.properties.deviceType) {
+        switch (deviceProperties.deviceType) {
             case VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU:
                 mAdapterType = wgpu::AdapterType::IntegratedGPU;
                 break;
@@ -71,7 +71,7 @@ namespace dawn_native { namespace vulkan {
     }
 
     void Adapter::InitializeSupportedExtensions() {
-        if (mDeviceInfo.features.textureCompressionBC == VK_TRUE) {
+        if (mDeviceInfo.features2.features.textureCompressionBC == VK_TRUE) {
             mSupportedExtensions.EnableExtension(Extension::TextureCompressionBC);
         }
     }
