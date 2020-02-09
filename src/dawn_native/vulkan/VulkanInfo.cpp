@@ -16,6 +16,7 @@
 
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/BackendVk.h"
+#include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
 #include <cstring>
@@ -78,6 +79,7 @@ namespace dawn_native { namespace vulkan {
     const char kExtensionNameKhrXlibSurface[] = "VK_KHR_xlib_surface";
     const char kExtensionNameFuchsiaImagePipeSurface[] = "VK_FUCHSIA_imagepipe_surface";
     const char kExtensionNameKhrMaintenance1[] = "VK_KHR_maintenance1";
+    const char kExtensionNameExtSubgroupSizeControl[] = "VK_EXT_subgroup_size_control";
 
     ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Backend& backend) {
         VulkanGlobalInfo info = {};
@@ -223,8 +225,40 @@ namespace dawn_native { namespace vulkan {
         const VulkanFunctions& vkFunctions = adapter.GetBackend()->GetFunctions();
 
         // Gather general info about the device
-        vkFunctions.GetPhysicalDeviceProperties(physicalDevice, &info.properties);
-        vkFunctions.GetPhysicalDeviceFeatures(physicalDevice, &info.features);
+
+        // Use VkGetPhysicalDeviceFeatures2() when available, otherwise fallback
+        // to VkGetPhysicalDeviceFeatures().
+        if (adapter.GetBackend()->GetGlobalInfo().getPhysicalDeviceProperties2) {
+            VkPhysicalDeviceFeatures2 features2 = {
+                .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2,
+            };
+
+            VkPhysicalDeviceProperties2 properties2 = {
+                .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2,
+            };
+
+            PNextChainBuilder propsChain(&properties2);
+            PNextChainBuilder featuresChain(&features2);
+
+            // Add all known properties extension structs to the chain.
+            propsChain.Add(&info.propertiesExtensions.subgroupSizeControl,
+                           VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT);
+
+            vkFunctions.GetPhysicalDeviceProperties2KHR(physicalDevice, &properties2);
+
+            // Add all known features extension structs to the chain.
+            featuresChain.Add(&info.featuresExtensions.subgroupSizeControl,
+                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT);
+
+            vkFunctions.GetPhysicalDeviceFeatures2KHR(physicalDevice, &features2);
+
+            info.features = features2.features;
+            info.properties = properties2.properties;
+        } else {
+            // There is no way to query extensions, do read |properties| and |features| directly.
+            vkFunctions.GetPhysicalDeviceProperties(physicalDevice, &info.properties);
+            vkFunctions.GetPhysicalDeviceFeatures(physicalDevice, &info.features);
+        }
 
         // Gather info about device memory.
         {
@@ -309,6 +343,9 @@ namespace dawn_native { namespace vulkan {
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrMaintenance1)) {
                     info.maintenance1 = true;
+                }
+                if (IsExtensionName(extension, kExtensionNameExtSubgroupSizeControl)) {
+                    info.subgroupSizeControl = true;
                 }
             }
         }

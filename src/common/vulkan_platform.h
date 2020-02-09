@@ -166,4 +166,30 @@ class alignas(kNativeVkHandleAlignment) VkNonDispatchableHandle {
 #    include <vulkan/vulkan_fuchsia_extras.h>
 #endif
 
+#ifndef VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT
+
+#    define VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT \
+        ((VkStructureType)1000225002)
+
+struct VkPhysicalDeviceSubgroupSizeControlFeaturesEXT {
+    VkStructureType sType;
+    void* pNext;
+    VkBool32 subgroupSizeControl;
+    VkBool32 computeFullSubgroups;
+};
+
+#    define VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT \
+        ((VkStructureType)1000225000)
+
+struct VkPhysicalDeviceSubgroupSizeControlPropertiesEXT {
+    VkStructureType sType;
+    void* pNext;
+    uint32_t minSubgroupSize;
+    uint32_t maxSubgroupSize;
+    uint32_t maxComputeWorkgroupSubgroups;
+    VkShaderStageFlags requiredSubgroupSizeStages;
+};
+
+#endif  // !VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_CONTROL_SIZE_FEATURES_EXT
+
 #endif  // COMMON_VULKANPLATFORM_H_
