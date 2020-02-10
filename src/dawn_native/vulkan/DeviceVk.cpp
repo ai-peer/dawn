@@ -745,7 +745,7 @@ namespace dawn_native { namespace vulkan {
         // (so they are as good as waited on) or success.
         DAWN_UNUSED(waitIdleResult);
 
-        CheckPassedFences();
+        DAWN_TRY(TickImpl());
 
         // Make sure all fences are complete by explicitly waiting on them all
         while (!mFencesInFlight.empty()) {
