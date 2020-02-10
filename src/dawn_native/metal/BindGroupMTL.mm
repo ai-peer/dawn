@@ -18,8 +18,16 @@
 
 namespace dawn_native { namespace metal {
 
+    // static
+    ResultOrError<BindGroup*> BindGroup::Create(Device* device,
+                                                const BindGroupDescriptor* descriptor) {
+        return new BindGroup(device, device->GetBindGroupAllocator()->Allocate(descriptor));
+    }
+
     BindGroup::~BindGroup() {
-        ToBackend(GetDevice())->GetBindGroupAllocator()->Deallocate(this);
+        BindGroupStorage* storage = static_cast<BindGroupStorage*>(mStorage.release());
+        storage->~BindGroupStorage();
+        ToBackend(GetDevice())->GetBindGroupAllocator()->Deallocate(storage);
     }
 
 }}  // namespace dawn_native::metal

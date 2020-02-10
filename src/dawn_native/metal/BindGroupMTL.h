@@ -20,11 +20,21 @@
 
 namespace dawn_native { namespace metal {
 
-    class alignas(64) BindGroup : public BindGroupBase, public PlacementAllocated {
-      public:
-        using BindGroupBase::BindGroupBase;
+    class Device;
 
+    class alignas(64) BindGroupStorage : public BindGroupBase::Storage, public PlacementAllocated {
+      public:
+        using BindGroupBase::Storage::Storage;
+    };
+
+    class BindGroup : public BindGroupBase {
+      public:
+        static ResultOrError<BindGroup*> Create(Device* device,
+                                                const BindGroupDescriptor* descriptor);
         ~BindGroup() override;
+
+      private:
+        using BindGroupBase::BindGroupBase;
     };
 
 }}  // namespace dawn_native::metal

@@ -78,7 +78,7 @@ namespace dawn_native { namespace metal {
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) {
-        return mBindGroupAllocator.Allocate(this, descriptor);
+        return BindGroup::Create(this, descriptor);
     }
     ResultOrError<BindGroupLayoutBase*> Device::CreateBindGroupLayoutImpl(
         const BindGroupLayoutDescriptor* descriptor) {
@@ -232,7 +232,7 @@ namespace dawn_native { namespace metal {
         return mMapTracker.get();
     }
 
-    PoolAllocator<BindGroup>* Device::GetBindGroupAllocator() {
+    PoolAllocator<BindGroupStorage>* Device::GetBindGroupAllocator() {
         return &mBindGroupAllocator;
     }
 

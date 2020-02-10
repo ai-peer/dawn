@@ -33,6 +33,7 @@
 
 namespace dawn_native { namespace metal {
 
+    class BindGroupStorage;
     class MapRequestTracker;
 
     class Device : public DeviceBase {
@@ -55,7 +56,7 @@ namespace dawn_native { namespace metal {
         void SubmitPendingCommandBuffer();
 
         MapRequestTracker* GetMapTracker() const;
-        PoolAllocator<BindGroup>* GetBindGroupAllocator();
+        PoolAllocator<BindGroupStorage>* GetBindGroupAllocator();
 
         TextureBase* CreateTextureWrappingIOSurface(const TextureDescriptor* descriptor,
                                                     IOSurfaceRef ioSurface,
@@ -116,7 +117,7 @@ namespace dawn_native { namespace metal {
         std::mutex mLastSubmittedCommandsMutex;
         id<MTLCommandBuffer> mLastSubmittedCommands = nil;
 
-        PoolAllocator<BindGroup> mBindGroupAllocator;
+        PoolAllocator<BindGroupStorage> mBindGroupAllocator;
     };
 
 }}  // namespace dawn_native::metal

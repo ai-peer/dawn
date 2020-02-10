@@ -49,13 +49,26 @@ namespace dawn_native {
         SamplerBase* GetBindingAsSampler(size_t binding);
         TextureViewBase* GetBindingAsTextureView(size_t binding);
 
+        class Storage {
+          public:
+            Storage(const BindGroupDescriptor* descriptor);
+
+          private:
+            friend class BindGroupBase;
+
+            Ref<BindGroupLayoutBase> mLayout;
+            std::array<Ref<ObjectBase>, kMaxBindingsPerGroup> mBindings;
+            std::array<uint32_t, kMaxBindingsPerGroup> mOffsets;
+            std::array<uint32_t, kMaxBindingsPerGroup> mSizes;
+        };
+
+      protected:
+        BindGroupBase(DeviceBase* device, Storage* storage);
+
+        std::unique_ptr<Storage> mStorage;
+
       private:
         BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);
-
-        Ref<BindGroupLayoutBase> mLayout;
-        std::array<Ref<ObjectBase>, kMaxBindingsPerGroup> mBindings;
-        std::array<uint32_t, kMaxBindingsPerGroup> mOffsets;
-        std::array<uint32_t, kMaxBindingsPerGroup> mSizes;
     };
 
 }  // namespace dawn_native
