@@ -211,6 +211,24 @@
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5df5fd7_c82bdd23",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-10T20:42:52Z",
+      "side": 1,
+      "message": "Yup. That would resolve the bug. But I wonder if we could do away with mImplicitHeap and do the suggested with RHA\u0027s resourceHeap directly. I don\u0027t think the LRU needs to control the lifetime of the RHA so long as it\u0027s notified when it\u0027s invalidated.",
+      "parentUuid": "d33e2963_be0c1a0a",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
