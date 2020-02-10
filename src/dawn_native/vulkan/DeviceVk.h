@@ -101,6 +101,10 @@ namespace dawn_native { namespace vulkan {
 
         ResourceMemoryAllocator* GetResourceMemoryAllocatorForTesting() const;
 
+        // Return the fixed subgroup size to use for compute shaders on this device,
+        // or 0 if none needs to be set.
+        uint32_t GetComputeSubgroupSize() const;
+
       private:
         ResultOrError<BindGroupBase*> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) override;
