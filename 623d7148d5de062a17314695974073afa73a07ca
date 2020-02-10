@@ -52,6 +52,24 @@
       "revId": "623d7148d5de062a17314695974073afa73a07ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e298d470_4aefaabb",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-10T21:32:50Z",
+      "side": 1,
+      "message": "\u003e If that\u0027s the case why does we need this CL that fixes the case where N is UINT64_MAX?\n\nIt\u0027s because D3D12 treats buffer.size \u003d 0 as UINT64_MAX to denote failure (invalid). Either it must be handled in the backend (eg. return OOM?) or NextPowerOfTwo. I couldn\u0027t get an answer to the latter so I went with the former.\n\n\u003e That seems like a different issue discussions in the gpuweb issue you opened \n\nThey\u0027re related. If we permit zero-sized buffers (via creating a dummy non-zero buffer) then this bug is no more.",
+      "parentUuid": "8fcc11fd_2d83120c",
+      "revId": "623d7148d5de062a17314695974073afa73a07ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
