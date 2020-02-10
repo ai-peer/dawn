@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "06291839_4e401eae",
+        "filename": "src/dawn_native/SwapChain.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-02-10T19:17:16Z",
+      "side": 1,
+      "message": "Don\u0027t think we need this either. Sorry, probably added it when a test was failing but it doesn\u0027t fail without it anymore and I don\u0027t really remember which test it was failing..Just going to remove it.",
+      "parentUuid": "6ce2d754_05ec064e",
+      "revId": "25c46d2f349b2f2325322b4302c526ad269328a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a999d2f_45b36710",
         "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
         "patchSetId": 8
@@ -33,6 +51,24 @@
       "revId": "25c46d2f349b2f2325322b4302c526ad269328a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f0740d_45359ca5",
+        "filename": "src/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000308
+      },
+      "writtenOn": "2020-02-10T19:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a999d2f_45b36710",
+      "revId": "25c46d2f349b2f2325322b4302c526ad269328a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
