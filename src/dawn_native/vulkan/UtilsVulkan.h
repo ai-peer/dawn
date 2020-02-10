@@ -48,13 +48,15 @@ namespace dawn_native { namespace vulkan {
     struct PNextChainBuilder {
         // Constructor takes the address of a Vulkan structure instance, and
         // walks its pNext chain to record the current location of its tail.
+        //
+        // NOTE: Some VK_STRUCT_TYPE define their pNext field as a const void*
+        // which is why the VkBaseOutStructure* casts below are necessary.
         template <typename VK_STRUCT_TYPE>
         explicit PNextChainBuilder(VK_STRUCT_TYPE* head)
-            : mTailPtr(reinterpret_cast<void**>(&head->pNext)) {
+            : mTailPtr(&reinterpret_cast<VkBaseOutStructure*>(head)->pNext) {
             // Find the end of the current chain.
             while (*mTailPtr) {
-                mTailPtr = reinterpret_cast<void**>(
-                    &(reinterpret_cast<VkBaseOutStructure*>(*mTailPtr)->pNext));
+                mTailPtr = &(*mTailPtr)->pNext;
             }
         }
 
@@ -68,8 +70,9 @@ namespace dawn_native { namespace vulkan {
                     offsetof(VK_STRUCT_TYPE, pNext) == offsetof(VkBaseOutStructure, pNext),
                 "Argument type is not a proper Vulkan structure type");
             vkStruct->pNext = nullptr;
-            *mTailPtr = vkStruct;
-            mTailPtr = &vkStruct->pNext;
+            *mTailPtr = reinterpret_cast<VkBaseOutStructure*>(vkStruct);
+            ;
+            mTailPtr = &(*mTailPtr)->pNext;
         }
 
         // A variant of Add() above that also initializes the |sType| field in |vk_struct|.
@@ -80,7 +83,7 @@ namespace dawn_native { namespace vulkan {
         }
 
       private:
-        void** mTailPtr;
+        VkBaseOutStructure** mTailPtr;
     };
 
     VkCompareOp ToVulkanCompareOp(wgpu::CompareFunction op);

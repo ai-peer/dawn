@@ -190,6 +190,15 @@ struct VkPhysicalDeviceSubgroupSizeControlPropertiesEXT {
     VkShaderStageFlags requiredSubgroupSizeStages;
 };
 
+#    define VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT \
+        ((VkStructureType)1000225001)
+
+struct VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT {
+    VkStructureType sType;
+    void* pNext;
+    uint32_t requiredSubgroupSize;
+};
+
 #endif  // !VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_CONTROL_SIZE_FEATURES_EXT
 
 #endif  // COMMON_VULKANPLATFORM_H_
