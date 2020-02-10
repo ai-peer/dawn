@@ -1,0 +1,265 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d36d2059_97d02842",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "nit: put this header along others in the second block. DawnTest goes first because it\u0027s kind of the \"main\" header for this file.",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43650b96_14d4b647",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "We should probably have a DAWN_SKIP_TEST here so that gtest knows to skip the test and not just run the body of the test with part of the initialization skipped.",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed7586cc_39b3b6f4",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "Can we have a small explanation of what these render nodes are and why 128 and 16?",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1a00c63_aba09afc",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be done in VulkanImageWrappingTestBase::TearDown?",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb8b8248_0ee8d315",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "If the implementation is able to test width/height and format, we should have a test for that too.",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc173ccf_3e3c689e",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "unit: to be super explicit this could also set the loadOp to wgpu::LoadOp::Clear",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5444b6b1_a7f1b6af",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "Calling this in VulkanImageWrappingTestBase::SetUp should be enough to make it happen across all tests.",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9186296a_c01bc77d",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "This FD and defaultFD are never closed. Do they need to or is the semantic that the backend takes ownership of the FD? Also why do we need a new FD instead of using defaultFD?",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cc470df_4de05bdc",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "Wow that\u0027s a good test, although I\u0027m not sure how much we want to officially support this usecase, it seems like it could be pretty hard to specify at the Dawn API what happens.",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9cf0ab8_05e7cb8f",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "nit: missing |",
+      "range": {
+        "startLine": 400,
+        "startChar": 32,
+        "endLine": 400,
+        "endChar": 38
+      },
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e508d9b_79d7092f",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "import ... and clear it.",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a258bf48_0549eb48",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "nit: here and below in this comment, copy -\u003e clear.",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96905e7f_f47fc472",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "nit: and clear it",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e218aa27_3bb2b53e",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21061b15_cec2f162",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:55:16Z",
+      "side": 1,
+      "message": "nit: and clear it",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
