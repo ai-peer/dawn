@@ -34,6 +34,24 @@
       "revId": "623d7148d5de062a17314695974073afa73a07ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fcc11fd_2d83120c",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T18:25:39Z",
+      "side": 1,
+      "message": "\u003e A large N is not so much the issue as it will OOM before calling NextPowerOfTwo (but I agree, it\u0027s semantically wrong).\n\nI\u0027m not sure I understand. If that\u0027s the case why does we need this CL that fixes the case where N is UINT64_MAX?\n\n\u003e The issue is when buffer.size \u003d 0, what does the special handing do? It is not well-defined.\n\nThat seems like a different issue discussions in the gpuweb issue you opened seem to lean towards saying it is ok to have 0-size buffers (and just emulate them in the backend).",
+      "parentUuid": "cc0e8308_4a113e9d",
+      "revId": "623d7148d5de062a17314695974073afa73a07ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
