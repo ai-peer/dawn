@@ -16,6 +16,24 @@
       "revId": "623d7148d5de062a17314695974073afa73a07ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc0e8308_4a113e9d",
+        "filename": "src/common/Math.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-10T17:57:40Z",
+      "side": 1,
+      "message": "A large N is not so much the issue as it will OOM before calling NextPowerOfTwo (but I agree, it\u0027s semantically wrong). \n\nThe issue is when buffer.size \u003d 0, what does the special handing do? It is not well-defined.\n\nCan you please provide clarification on such input?",
+      "parentUuid": "1fddeead_851cc165",
+      "revId": "623d7148d5de062a17314695974073afa73a07ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
