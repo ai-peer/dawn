@@ -50,6 +50,17 @@ namespace dawn_native { namespace vulkan {
         createInfo.stage.pSpecializationInfo = nullptr;
 
         Device* device = ToBackend(GetDevice());
+
+        VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT subgroupSizeInfo;
+        uint32_t computeSubgroupSize = device->GetComputeSubgroupSize();
+        if (computeSubgroupSize != 0u) {
+            subgroupSizeInfo.sType =
+                VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT;
+            subgroupSizeInfo.pNext = const_cast<void*>(createInfo.pNext);
+            subgroupSizeInfo.requiredSubgroupSize = computeSubgroupSize;
+            createInfo.pNext = &subgroupSizeInfo;
+        }
+
         return CheckVkSuccess(
             device->fn.CreateComputePipelines(device->GetVkDevice(), VK_NULL_HANDLE, 1, &createInfo,
                                               nullptr, &mHandle),
