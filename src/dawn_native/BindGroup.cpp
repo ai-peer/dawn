@@ -175,8 +175,8 @@ namespace dawn_native {
         return {};
     }
 
-    // BindGroupBase::Storage
-    BindGroupBase::Storage::Storage(const BindGroupDescriptor* descriptor)
+    // BindGroupStorageBase
+    BindGroupStorageBase::BindGroupStorageBase(const BindGroupDescriptor* descriptor)
         : mLayout(descriptor->layout) {
         for (uint32_t i = 0; i < descriptor->bindingCount; ++i) {
             const BindGroupBinding& binding = descriptor->bindings[i];
@@ -213,57 +213,51 @@ namespace dawn_native {
 
     // BindGroup
 
-    BindGroupBase::BindGroupBase(DeviceBase* device, const BindGroupDescriptor* descriptor)
-        : ObjectBase(device), mStorage(new Storage(descriptor)) {
-    }
-
-    BindGroupBase::BindGroupBase(DeviceBase* device, Storage* storage)
-        : ObjectBase(device), mStorage(storage) {
-    }
-
     BindGroupBase::BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag), mStorage(nullptr) {
+        : ObjectHandle(device, tag) {
     }
 
     // static
     BindGroupBase* BindGroupBase::MakeError(DeviceBase* device) {
-        return new BindGroupBase(device, ObjectBase::kError);
+        void* ptr = ObjectHandle::Allocate(device);
+        return new (ptr) BindGroupBase(device, ObjectBase::kError);
     }
 
     BindGroupLayoutBase* BindGroupBase::GetLayout() {
         ASSERT(!IsError());
-        return mStorage->mLayout.Get();
+        return GetStorage()->mLayout.Get();
     }
 
     BufferBinding BindGroupBase::GetBindingAsBufferBinding(size_t binding) {
         ASSERT(!IsError());
         ASSERT(binding < kMaxBindingsPerGroup);
-        ASSERT(mStorage->mLayout->GetBindingInfo().mask[binding]);
-        ASSERT(mStorage->mLayout->GetBindingInfo().types[binding] ==
+        ASSERT(GetStorage()->mLayout->GetBindingInfo().mask[binding]);
+        ASSERT(GetStorage()->mLayout->GetBindingInfo().types[binding] ==
                    wgpu::BindingType::UniformBuffer ||
-               mStorage->mLayout->GetBindingInfo().types[binding] ==
+               GetStorage()->mLayout->GetBindingInfo().types[binding] ==
                    wgpu::BindingType::StorageBuffer ||
-               mStorage->mLayout->GetBindingInfo().types[binding] ==
+               GetStorage()->mLayout->GetBindingInfo().types[binding] ==
                    wgpu::BindingType::ReadonlyStorageBuffer);
-        BufferBase* buffer = static_cast<BufferBase*>(mStorage->mBindings[binding].Get());
-        return {buffer, mStorage->mOffsets[binding], mStorage->mSizes[binding]};
+        BufferBase* buffer = static_cast<BufferBase*>(GetStorage()->mBindings[binding].Get());
+        return {buffer, GetStorage()->mOffsets[binding], GetStorage()->mSizes[binding]};
     }
 
     SamplerBase* BindGroupBase::GetBindingAsSampler(size_t binding) {
         ASSERT(!IsError());
         ASSERT(binding < kMaxBindingsPerGroup);
-        ASSERT(mStorage->mLayout->GetBindingInfo().mask[binding]);
-        ASSERT(mStorage->mLayout->GetBindingInfo().types[binding] == wgpu::BindingType::Sampler);
-        return static_cast<SamplerBase*>(mStorage->mBindings[binding].Get());
+        ASSERT(GetStorage()->mLayout->GetBindingInfo().mask[binding]);
+        ASSERT(GetStorage()->mLayout->GetBindingInfo().types[binding] ==
+               wgpu::BindingType::Sampler);
+        return static_cast<SamplerBase*>(GetStorage()->mBindings[binding].Get());
     }
 
     TextureViewBase* BindGroupBase::GetBindingAsTextureView(size_t binding) {
         ASSERT(!IsError());
         ASSERT(binding < kMaxBindingsPerGroup);
-        ASSERT(mStorage->mLayout->GetBindingInfo().mask[binding]);
-        ASSERT(mStorage->mLayout->GetBindingInfo().types[binding] ==
+        ASSERT(GetStorage()->mLayout->GetBindingInfo().mask[binding]);
+        ASSERT(GetStorage()->mLayout->GetBindingInfo().types[binding] ==
                wgpu::BindingType::SampledTexture);
-        return static_cast<TextureViewBase*>(mStorage->mBindings[binding].Get());
+        return static_cast<TextureViewBase*>(GetStorage()->mBindings[binding].Get());
     }
 
 }  // namespace dawn_native

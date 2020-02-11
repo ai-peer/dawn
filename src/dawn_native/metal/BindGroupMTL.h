@@ -24,7 +24,7 @@ namespace dawn_native { namespace metal {
 
     class alignas(64) BindGroupStorage : public BindGroupBase::Storage, public PlacementAllocated {
       public:
-        using BindGroupBase::Storage::Storage;
+        using BindGroupStorageBase::BindGroupStorageBase;
     };
 
     class BindGroup : public BindGroupBase {
@@ -34,7 +34,7 @@ namespace dawn_native { namespace metal {
         ~BindGroup() override;
 
       private:
-        using BindGroupBase::BindGroupBase;
+        BindGroup(Device* device, BindGroupStorage* storage);
     };
 
 }}  // namespace dawn_native::metal
