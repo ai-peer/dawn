@@ -247,6 +247,24 @@
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97d31cfb_95c66fa9",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T21:53:16Z",
+      "side": 1,
+      "message": "My earlier thought refers to (3) - I\u0027m not sure about \"moving the call\". Direct allocation already requires manual memory management, so having it extend to the RMA heap is not surprising.",
+      "parentUuid": "0319ee61_4c3fab9c",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
