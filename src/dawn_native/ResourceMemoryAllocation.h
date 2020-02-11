@@ -65,9 +65,11 @@ namespace dawn_native {
 
       private:
         AllocationInfo mInfo;
-        uint64_t mOffset;
-        ResourceHeapBase* mResourceHeap;
         uint8_t* mMappedPointer;
+        uint64_t mOffset;
+
+      protected:
+        ResourceHeapBase* mResourceHeap;
     };
 }  // namespace dawn_native
 

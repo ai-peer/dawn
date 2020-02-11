@@ -14,18 +14,34 @@
 
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
 
+#include "dawn_native/d3d12/HeapD3D12.h"
+
 #include <utility>
 
 namespace dawn_native { namespace d3d12 {
     ResourceHeapAllocation::ResourceHeapAllocation(const AllocationInfo& info,
                                                    uint64_t offset,
-                                                   ComPtr<ID3D12Resource> resource)
-        : ResourceMemoryAllocation(info, offset, nullptr), mResource(std::move(resource)) {
+                                                   ComPtr<ID3D12Resource> resource,
+                                                   std::shared_ptr<Heap> implicitHeap)
+        : ResourceMemoryAllocation(info, offset, implicitHeap.get()),
+          mResource(std::move(resource)),
+          mImplicitHeap(std::move(implicitHeap)) {
+        ASSERT(GetInfo().mMethod == AllocationMethod::kDirect);
+    }
+
+    ResourceHeapAllocation::ResourceHeapAllocation(const AllocationInfo& info,
+                                                   uint64_t offset,
+                                                   ComPtr<ID3D12Resource> resource,
+                                                   Heap* suballocatedHeap)
+        : ResourceMemoryAllocation(info, offset, suballocatedHeap), mResource(std::move(resource)) {
     }
 
     void ResourceHeapAllocation::Invalidate() {
         ResourceMemoryAllocation::Invalidate();
         mResource.Reset();
+        if (GetInfo().mMethod == AllocationMethod::kDirect) {
+            mImplicitHeap.reset();
+        }
     }
 
     ComPtr<ID3D12Resource> ResourceHeapAllocation::GetD3D12Resource() const {
