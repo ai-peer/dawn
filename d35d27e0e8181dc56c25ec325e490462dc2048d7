@@ -229,6 +229,24 @@
       "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0319ee61_4c3fab9c",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-11T18:24:56Z",
+      "side": 1,
+      "message": "Yesterday we talked about moving the call to TrackResidentAllocation earlier when doing direct allocations - however this also doesn\u0027t solve the problem. My LRU doesn\u0027t store a smart pointer, and even if it did - the LRUEntry could eventually be evicted, and nothing would be referencing it - then the (dawn)Heap would be destroyed.\n\nThe options I see are:\n1) Keep it as is, keeping mImplicitHeap.\n2) Create the (dawn)Heap like now, but instead of storing on the RHA, I could just add a vector onto ResourceAllocatorManager that stores the smart pointers, and then destroy it when the RHA is invalidated. RHA would not have to have an added member this way.\n3) Don\u0027t make a smart pointer during (dawn)Heap creation - and manage the (dawn)Heap manually.  I could simply store the pointer at RMA::mResourceHeap, then cast back to a (dawn)Heap and delete when the RHA is invalidated. I expect push back on this because there\u0027s manual memory management involved.",
+      "parentUuid": "b5df5fd7_c82bdd23",
+      "revId": "d35d27e0e8181dc56c25ec325e490462dc2048d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
