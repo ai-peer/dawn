@@ -21,13 +21,23 @@ namespace dawn_native { namespace metal {
     // static
     ResultOrError<BindGroup*> BindGroup::Create(Device* device,
                                                 const BindGroupDescriptor* descriptor) {
-        return new BindGroup(device, device->GetBindGroupAllocator()->Allocate(descriptor));
+        BindGroupStorage* storage = device->GetBindGroupAllocator()->Allocate(descriptor);
+        void* ptr = ObjectHandleBase::Allocate(device);
+        return new (ptr) BindGroup(device, storage);
+    }
+
+    BindGroup::BindGroup(Device* device, BindGroupStorage* storage)
+        : BindGroupBase(device, storage) {
     }
 
     BindGroup::~BindGroup() {
-        BindGroupStorage* storage = static_cast<BindGroupStorage*>(mStorage.release());
-        storage->~BindGroupStorage();
-        ToBackend(GetDevice())->GetBindGroupAllocator()->Deallocate(storage);
+        if (mStorage != nullptr) {
+            static_cast<BindGroupStorage*>(mStorage)->~BindGroupStorage();
+            ToBackend(GetDevice())
+                ->GetBindGroupAllocator()
+                ->Deallocate(static_cast<BindGroupStorage*>(mStorage));
+            mStorage = nullptr;
+        }
     }
 
 }}  // namespace dawn_native::metal

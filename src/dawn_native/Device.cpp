@@ -222,6 +222,10 @@ namespace dawn_native {
         return mFenceSignalTracker.get();
     }
 
+    ObjectHandlePool* DeviceBase::GetObjectHandlePool() {
+        return &mObjectHandlePool;
+    }
+
     ResultOrError<const Format*> DeviceBase::GetInternalFormat(wgpu::TextureFormat format) const {
         size_t index = ComputeFormatIndex(format);
         if (index >= mFormatTable.size()) {

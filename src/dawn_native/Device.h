@@ -21,6 +21,7 @@
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectHandlePool.h"
 #include "dawn_native/Toggles.h"
 
 #include "dawn_native/DawnNative.h"
@@ -70,6 +71,7 @@ namespace dawn_native {
 
         ErrorScopeTracker* GetErrorScopeTracker() const;
         FenceSignalTracker* GetFenceSignalTracker() const;
+        ObjectHandlePool* GetObjectHandlePool();
 
         // Returns the Format corresponding to the wgpu::TextureFormat or an error if the format
         // isn't a valid wgpu::TextureFormat or isn't supported by this device.
@@ -311,6 +313,8 @@ namespace dawn_native {
         size_t mLazyClearCountForTesting = 0;
 
         ExtensionsSet mEnabledExtensions;
+
+        ObjectHandlePool mObjectHandlePool;
     };
 
 }  // namespace dawn_native

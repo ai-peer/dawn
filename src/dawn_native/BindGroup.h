@@ -19,7 +19,7 @@
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
-#include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectHandle.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -38,10 +38,21 @@ namespace dawn_native {
         uint64_t size;
     };
 
-    class BindGroupBase : public ObjectBase {
+    class BindGroupStorageBase {
       public:
-        BindGroupBase(DeviceBase* device, const BindGroupDescriptor* descriptor);
+        BindGroupStorageBase(const BindGroupDescriptor* descriptor);
 
+      private:
+        friend class BindGroupBase;
+
+        Ref<BindGroupLayoutBase> mLayout;
+        std::array<Ref<ObjectBase>, kMaxBindingsPerGroup> mBindings;
+        std::array<uint32_t, kMaxBindingsPerGroup> mOffsets;
+        std::array<uint32_t, kMaxBindingsPerGroup> mSizes;
+    };
+
+    class BindGroupBase : public ObjectHandle<BindGroupStorageBase> {
+      public:
         static BindGroupBase* MakeError(DeviceBase* device);
 
         BindGroupLayoutBase* GetLayout();
@@ -49,23 +60,8 @@ namespace dawn_native {
         SamplerBase* GetBindingAsSampler(size_t binding);
         TextureViewBase* GetBindingAsTextureView(size_t binding);
 
-        class Storage {
-          public:
-            Storage(const BindGroupDescriptor* descriptor);
-
-          private:
-            friend class BindGroupBase;
-
-            Ref<BindGroupLayoutBase> mLayout;
-            std::array<Ref<ObjectBase>, kMaxBindingsPerGroup> mBindings;
-            std::array<uint32_t, kMaxBindingsPerGroup> mOffsets;
-            std::array<uint32_t, kMaxBindingsPerGroup> mSizes;
-        };
-
       protected:
-        BindGroupBase(DeviceBase* device, Storage* storage);
-
-        std::unique_ptr<Storage> mStorage;
+        using ObjectHandle::ObjectHandle;
 
       private:
         BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);

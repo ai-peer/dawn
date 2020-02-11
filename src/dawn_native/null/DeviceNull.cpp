@@ -95,7 +95,8 @@ namespace dawn_native { namespace null {
 
     ResultOrError<BindGroupBase*> Device::CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) {
-        return new BindGroup(this, descriptor);
+        void* ptr = ObjectHandleBase::Allocate(this);
+        return new (ptr) BindGroup(this, new BindGroupStorageBase(descriptor));
     }
     ResultOrError<BindGroupLayoutBase*> Device::CreateBindGroupLayoutImpl(
         const BindGroupLayoutDescriptor* descriptor) {
