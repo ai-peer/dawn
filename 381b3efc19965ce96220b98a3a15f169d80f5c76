@@ -372,6 +372,24 @@
     },
     {
       "key": {
+        "uuid": "6eb47e93_7b2fc648",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2fd3f64a_e92b1390",
+      "revId": "381b3efc19965ce96220b98a3a15f169d80f5c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f675b6c2_222a52ea",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
         "patchSetId": 34

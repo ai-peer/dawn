@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "04d10017_3b268db0",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Should be checking both serials, fixed.",
+      "parentUuid": "d16e5163_f2e34ae1",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cdb6b9c_1e11e0de",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 37
@@ -39,6 +57,30 @@
       "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb34636c_7669191d",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cdb6b9c_1e11e0de",
+      "range": {
+        "startLine": 47,
+        "startChar": 14,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "fae4b081_a553521b",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54dd5ee7_a1e21da6",
+      "range": {
+        "startLine": 70,
+        "startChar": 69,
+        "endLine": 70,
+        "endChar": 70
+      },
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d797eae_d270b816",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 37
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "4edb7079_14b0f369",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "9d797eae_d270b816",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "247c690d_b902cbfc",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 37
@@ -96,6 +180,24 @@
       "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a93fa04_bcd2b7c5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "247c690d_b902cbfc",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "d18cb83d_c1df85c0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73602533_2a04b16d",
+      "range": {
+        "startLine": 104,
+        "startChar": 67,
+        "endLine": 104,
+        "endChar": 93
+      },
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f0ce806_e89a2d08",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 37
@@ -136,6 +262,24 @@
       "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77983e9e_dbd19992",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f0ce806_e89a2d08",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +300,24 @@
     },
     {
       "key": {
+        "uuid": "2087ce6f_3491d777",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "d2d351f1_b7510891",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "257b7a28_9ca9de0a",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 37
@@ -170,6 +332,24 @@
       "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fff037de_9b98a679",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "257b7a28_9ca9de0a",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -190,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "a88f03ea_67bb1c77",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0009c5ef_55f98b91",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bcadb0e_cb864766",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 37
@@ -201,6 +399,24 @@
       "writtenOn": "2020-02-05T19:51:14Z",
       "side": 1,
       "message": "Like we discussed in the last call I was there, using a RingBuffer will cause correctness issues where a bindgroup will think it is still valid in frame N+1 when it has already been overwritten. I think you meant to fix this by returning false in [4] instead of true.\n\nIf you\u0027re worried about re-allocating descriptor heaps, this can be fixed by recycling whole descriptor heaps via a serial queue, which is a more general solution (and definitely should not be done in this CL, it is complex enough as is).",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30bcf06e_acf7711e",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "\u003e Like we discussed in the last call I was there, using a RingBuffer will cause correctness issues where a bindgroup will think it is still valid in frame N+1 when it has already been overwritten\n\nThe condition [1] is prevented by additionally checking a device serial. Unless the allocation is in-flight, it cannot be reused in a future frame.\n\n\u003e If you\u0027re worried about re-allocating descriptor heaps, this can be fixed by recycling whole descriptor heaps via a serial queue, which is a more general solution (and definitely should not be done in this CL, it is complex enough as is).\n\nSwitching in more heaps will cause flushes and result in poor perf + other side-effects, I wouldn\u0027t recommend.",
+      "parentUuid": "4bcadb0e_cb864766",
       "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -224,6 +440,24 @@
     },
     {
       "key": {
+        "uuid": "ecfb18ef_7363144a",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "339aeac2_62cb5aeb",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cc1c77b_48a78c4d",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
         "patchSetId": 37
@@ -241,6 +475,24 @@
     },
     {
       "key": {
+        "uuid": "385c5e7a_0d0fd9a8",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cc1c77b_48a78c4d",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e80f110c_88140007",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
         "patchSetId": 37
@@ -255,6 +507,24 @@
       "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "980f35e9_70844ab8",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-11T18:22:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e80f110c_88140007",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
