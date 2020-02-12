@@ -52,11 +52,12 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        bool CanUseCopyResource(const uint32_t sourceNumMipLevels,
+        bool CanUseCopyResource(const uint32_t srcNumMipLevels,
+                                const uint32_t dstNumMipLevels,
                                 const Extent3D& srcSize,
                                 const Extent3D& dstSize,
                                 const Extent3D& copySize) {
-            if (sourceNumMipLevels == 1 && srcSize.width == dstSize.width &&
+            if (srcNumMipLevels == dstNumMipLevels && srcSize.width == dstSize.width &&
                 srcSize.height == dstSize.height && srcSize.depth == dstSize.depth &&
                 srcSize.width == copySize.width && srcSize.height == copySize.height &&
                 srcSize.depth == copySize.depth) {
@@ -796,7 +797,9 @@ namespace dawn_native { namespace d3d12 {
                     source->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopySrc);
                     destination->TransitionUsageNow(commandContext, wgpu::TextureUsage::CopyDst);
 
-                    if (CanUseCopyResource(source->GetNumMipLevels(), source->GetSize(),
+                    if (CanUseCopyResource(source->GetNumMipLevels(),
+                                           destination->GetNumMipLevels(),
+                                           source->GetSize(),
                                            destination->GetSize(), copy->copySize)) {
                         commandList->CopyResource(destination->GetD3D12Resource(),
                                                   source->GetD3D12Resource());
