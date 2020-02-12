@@ -131,6 +131,15 @@ namespace dawn_native {
         return mImpl->DiscoverAdapters(options);
     }
 
+    Adapter Instance::GetAdapter(BackendType backendType) const {
+        // Adapters are owned by mImpl so it is safe to return non RAII pointers to them
+        for (const Adapter& adapter : GetAdapters()) {
+            if (adapter.GetBackendType() == backendType)
+                return adapter;
+        }
+        return {mImpl->GetAdapters()[0].get()};
+    }
+
     std::vector<Adapter> Instance::GetAdapters() const {
         // Adapters are owned by mImpl so it is safe to return non RAII pointers to them
         std::vector<Adapter> adapters;

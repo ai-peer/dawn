@@ -286,15 +286,20 @@ namespace dawn_native {
         // TODO(cwallez@chromium.org): implement per-subresource tracking
         for (size_t i = 0; i < pass.textures.size(); ++i) {
             const TextureBase* texture = pass.textures[i];
-            wgpu::TextureUsage usage = pass.textureUsages[i];
+            wgpu::TextureUsage passUsage = pass.textureUsages[i];
+            wgpu::TextureUsage textureUsage = texture->GetUsage();
 
-            if (usage & ~texture->GetUsage()) {
+            static_assert ( ( 0b0011     &  ~0b0001 ),  "true" );
+            //                  0011     &     0010
+            static_assert (!( 0b0011     &  ~0b0011 ),  "false" );
+            //                  0011     &     0000   false
+            if (passUsage & ~textureUsage) {
                 return DAWN_VALIDATION_ERROR("Texture missing usage for the pass");
             }
 
             // For textures the only read-only usage in a pass is Sampled, so checking the
             // usage constraint simplifies to checking a single usage bit is set.
-            if (!wgpu::HasZeroOrOneBits(usage)) {
+            if (!wgpu::HasZeroOrOneBits(passUsage)) {
                 return DAWN_VALIDATION_ERROR("Texture used with more than one usage in pass");
             }
         }

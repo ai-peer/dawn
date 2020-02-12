@@ -146,6 +146,9 @@ namespace dawn_native {
         // The backend is chosen based on the type of the options used. Returns true on success.
         bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
 
+        // Returns the first adapter that the instance knows about.
+        Adapter GetAdapter(BackendType backendType) const;
+
         // Returns all the adapters that the instance knows about.
         std::vector<Adapter> GetAdapters() const;
 
