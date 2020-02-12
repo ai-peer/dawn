@@ -411,6 +411,13 @@ namespace dawn_native {
         return GetNumMipLevels() * arraySlice + mipLevel;
     }
 
+    bool TextureBase::IsSubresourceContentInitialized(uint32_t mipLevel,
+                                                      uint32_t arrayLayer) const {
+        uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer);
+        ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
+        return mIsSubresourceContentInitializedAtIndex[subresourceIndex];
+    }
+
     bool TextureBase::IsSubresourceContentInitialized(uint32_t baseMipLevel,
                                                       uint32_t levelCount,
                                                       uint32_t baseArrayLayer,

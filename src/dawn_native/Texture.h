@@ -58,6 +58,7 @@ namespace dawn_native {
         wgpu::TextureUsage GetUsage() const;
         TextureState GetTextureState() const;
         uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice) const;
+        bool IsSubresourceContentInitialized(uint32_t mipLevel, uint32_t arrayLayer) const;
         bool IsSubresourceContentInitialized(uint32_t baseMipLevel,
                                              uint32_t levelCount,
                                              uint32_t baseArrayLayer,
