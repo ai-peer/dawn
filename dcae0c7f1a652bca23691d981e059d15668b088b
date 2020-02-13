@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b392ec8_cfc90cb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-13T02:32:13Z",
+      "side": 1,
+      "message": "This commit message should contain a line \"Bug: dawn:145\"\nWe like to link commits to the bug they\u0027re for. This is the bug tracking the lazy zero initialization work.",
+      "revId": "dcae0c7f1a652bca23691d981e059d15668b088b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a8be180_72bd7144",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-13T02:32:13Z",
+      "side": 1,
+      "message": "nit: probably better to reverse the order of these loops, that way we\u0027ll have contiguous blocks of array layers cleared. In the future, we may issue a 3D copy to clear multiple at once.",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 683,
+        "endChar": 88
+      },
+      "revId": "dcae0c7f1a652bca23691d981e059d15668b088b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc9bc368_d8f6cd86",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-13T02:32:13Z",
+      "side": 1,
+      "message": "This loop you\u0027re doing here is ultimately the better way to fix the code. But right now, ClearTexture increments a lazy clear count which we check is correct in the tests (IncrementLazyClearCountForTesting()). With this patch, ClearTexture will get called multiple times and the count will be different.\n\nA couple options, of which I\u0027m fine with any:\n  1. Do the fix similar to the way we do it in the Metal backend, inside the implementation of metal::Texture::ClearTexture, and just `continue` if that subresource is already initialized.\n\n  2. In a separate patch, change IncrementLazyClearCountForTesting() to be a count of the total number of subresources cleared, not the number of times ClearTexture was called.\n     Then have this current patch be a follow-up which does what you\u0027re doing here.\n\n(1) is less effort, (2) is ultimately the better solution that we\u0027ll want to have in the end.",
+      "range": {
+        "startLine": 681,
+        "startChar": 8,
+        "endLine": 684,
+        "endChar": 30
+      },
+      "revId": "dcae0c7f1a652bca23691d981e059d15668b088b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
