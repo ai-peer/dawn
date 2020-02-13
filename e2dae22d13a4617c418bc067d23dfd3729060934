@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2cf483e0_9678cf20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-13T02:41:29Z",
+      "side": 1,
+      "message": "In general, if you find a bug, please file it on crbug.com/dawn so we have a way to track it and not forget. Then, link it here by adding a line:\n\n\"Bug: dawn:NUMBER\"",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "e2dae22d13a4617c418bc067d23dfd3729060934",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
