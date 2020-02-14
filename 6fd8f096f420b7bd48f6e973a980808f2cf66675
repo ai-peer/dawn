@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "402736ca_83b4c5a7",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-14T19:06:22Z",
+      "side": 1,
+      "message": "Thanks for the pointers, given the format \u003c-\u003e DRM format combination will be checked by the Vulkan driver it makes sense to not validate it. Same thing given it seems there\u0027s no way to get the size of a DMA buf. The test in this file should be enough to at least test that the valid combinations we care about work.",
+      "parentUuid": "fdeb4ec0_c19b3b60",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cc173ccf_3e3c689e",
         "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
         "patchSetId": 1
@@ -311,6 +329,24 @@
       "side": 1,
       "message": "Most of these tests are just copied from the idanr@\u0027s VulkanImageWrappingTests that I branched in this CL. Looking more closely at this one, I could go either way. Is your main concern that the writes are visible on wrappedTextureAlias without waiting on signalFd?",
       "parentUuid": "3cc470df_4de05bdc",
+      "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5368a897_785fcf3c",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-14T19:06:22Z",
+      "side": 1,
+      "message": "Yes, that prevents DMA-buf importing to be doing a new allocation + a copy for each import. That\u0027s probably ok though. Let\u0027s keep the test and see if it breaks at some point or not.",
+      "parentUuid": "549e8b86_8d47c61b",
       "revId": "6fd8f096f420b7bd48f6e973a980808f2cf66675",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
