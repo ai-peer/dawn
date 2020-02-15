@@ -50,6 +50,19 @@ namespace dawn_native { namespace metal {
         }
     }
 
+    // static
+    ResultOrError<Sampler*> Sampler::Create(Device* device, const SamplerDescriptor* descriptor) {
+#if defined(DAWN_PLATFORM_IOS)
+        if (descriptor->compare != wgpu::CompareFunction::Never &&
+            ![device->GetMTLDevice() supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily3_v1]) {
+            // Unsupported before A9.
+            return DAWN_VALIDATION_ERROR(
+                "Sampler compare function requires at least iOS GPU family 3, version 1");
+        }
+#endif
+        return new Sampler(device, descriptor);
+    }
+
     Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
         : SamplerBase(device, descriptor) {
         MTLSamplerDescriptor* mtlDesc = [MTLSamplerDescriptor new];
@@ -64,7 +77,12 @@ namespace dawn_native { namespace metal {
 
         mtlDesc.lodMinClamp = descriptor->lodMinClamp;
         mtlDesc.lodMaxClamp = descriptor->lodMaxClamp;
-        mtlDesc.compareFunction = ToMetalCompareFunction(descriptor->compare);
+
+        if (descriptor->compare != wgpu::CompareFunction::Never) {
+            // Anything other than Never is unsupported before A9, which we validate in
+            // Sampler::Create.
+            mtlDesc.compareFunction = ToMetalCompareFunction(descriptor->compare);
+        }
 
         mMtlSamplerState = [device->GetMTLDevice() newSamplerStateWithDescriptor:mtlDesc];
 
