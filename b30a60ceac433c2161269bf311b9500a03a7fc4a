@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44c6a7be_236367ca",
+        "filename": "src/dawn_native/metal/SamplerMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-15T23:02:22Z",
+      "side": 1,
+      "message": "We probably should have a Toggle so people can test without running on the A8 directly. Maybe a EnableMetalA8Restrictions? Also add a TODO to investigate emulation (though potentially expensive)",
+      "revId": "b30a60ceac433c2161269bf311b9500a03a7fc4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
