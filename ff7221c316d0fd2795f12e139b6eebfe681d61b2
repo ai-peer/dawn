@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdc46f45_25a95701",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-15T02:11:03Z",
+      "side": 1,
+      "message": "Why does mResourceHeap need to be protected?",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01facc76_3acd571a",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-15T02:11:03Z",
+      "side": 1,
+      "message": "Nit: Per the Google C++ coding standards, the protected section must come before the private section.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f536fe98_ff9da5d9",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-15T02:11:03Z",
+      "side": 1,
+      "message": "Nit: Turning off the component will not necessary cause allocation failures.  But it may cause inefficient GPU usage if the video memory manager incorrectly picks which existing allocations to evict.",
+      "range": {
+        "startLine": 90,
+        "startChar": 56,
+        "endLine": 91,
+        "endChar": 90
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e22d533a_79eec0e6",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-15T02:11:03Z",
+      "side": 1,
+      "message": "Since the ID3D12Heap C++ class inherits from ID3D12Pageable, we should be able to store a pointer to ID3D12Pageable and QI for ID3D12Heap when we need it.",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a40de3e_a4bec4fa",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-15T02:11:03Z",
+      "side": 1,
+      "message": "I would prefer that we reference count Heap or use unique_ptr (if possible) instead of using shared_ptr. Shared_ptr is really two pointers under the covers and may not be as efficient. Last time I checked Chromium forbid the use of shared_ptr in the mainline code. Only third_party code except blink is allowed to use it.",
+      "range": {
+        "startLine": 25,
+        "startChar": 51,
+        "endLine": 25,
+        "endChar": 66
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
