@@ -302,7 +302,6 @@ namespace dawn_native { namespace opengl {
         if (clearValue == TextureBase::ClearValue::Zero) {
             SetIsSubresourceContentInitialized(true, baseMipLevel, levelCount, baseArrayLayer,
                                                layerCount);
-            device->IncrementLazyClearCountForTesting();
         }
         return {};
     }
@@ -314,10 +313,41 @@ namespace dawn_native { namespace opengl {
         if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
             return;
         }
-        if (!IsSubresourceContentInitialized(baseMipLevel, levelCount, baseArrayLayer,
-                                             layerCount)) {
-            GetDevice()->ConsumedError(ClearTexture(baseMipLevel, levelCount, baseArrayLayer,
-                                                    layerCount, TextureBase::ClearValue::Zero));
+
+        bool didLazyClear = false;
+        bool previousUninitialized = false;
+        uint32_t firstUninitializedLevel = UINT32_MAX;
+        uint32_t firstUninitializedLayer = UINT32_MAX;
+
+        for (uint32_t arrayLayer = baseArrayLayer; arrayLayer < baseArrayLayer + layerCount;
+             ++arrayLayer) {
+            for (uint32_t mipLevel = baseMipLevel; mipLevel < baseMipLevel + levelCount;
+                 ++mipLevel) {
+                bool isLastSubresource = mipLevel == baseMipLevel + levelCount - 1 &&
+                                         arrayLayer == baseArrayLayer + layerCount - 1;
+                bool isInitialized = IsSubresourceContentInitialized(mipLevel, arrayLayer);
+
+                if (!isInitialized && !previousUninitialized) {
+                    previousUninitialized = true;
+                    firstUninitializedLevel = mipLevel;
+                    firstUninitializedLayer = arrayLayer;
+                } else if ((isInitialized || isLastSubresource) && previousUninitialized) {
+                    // If a range of the subresource has not been initialized, clear it to black as
+                    // it could contain dirty bits from recycled memory
+                    uint32_t lastUninitializedLevel = mipLevel;
+                    uint32_t lastUninitializedLayer =
+                        isLastSubresource ? arrayLayer : arrayLayer - 1;
+                    GetDevice()->ConsumedError(ClearTexture(
+                        firstUninitializedLevel, lastUninitializedLevel, firstUninitializedLayer,
+                        lastUninitializedLayer, TextureBase::ClearValue::Zero));
+                    previousUninitialized = false;
+                    didLazyClear = true;
+                }
+            }
+        }
+
+        if (didLazyClear) {
+            GetDevice()->IncrementLazyClearCountForTesting();
         }
     }
 

@@ -787,9 +787,6 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencilStoreOpClear) {
 // Test that if one mip of a texture is initialized and another is uninitialized, lazy clearing the
 // uninitialized mip does not clear the initialized mip.
 TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
-    // TODO(crbug.com/dawn/145): Fix this on other backends
-    DAWN_SKIP_TEST_IF(!IsMetal());
-
     wgpu::TextureDescriptor sampleTextureDescriptor = CreateTextureDescriptor(
         2, 1,
         wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled,
@@ -865,9 +862,6 @@ TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
 // Test that if one layer of a texture is initialized and another is uninitialized, lazy clearing
 // the uninitialized layer does not clear the initialized layer.
 TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
-    // TODO(crbug.com/dawn/145): Fix this on other backends
-    DAWN_SKIP_TEST_IF(!IsMetal());
-
     wgpu::TextureDescriptor sampleTextureDescriptor = CreateTextureDescriptor(
         1, 2,
         wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled,
