@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c981485_b9ea15e9",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2020-02-18T17:30:13Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to defined memoryFd up here (and I\u0027m not sure why it was defined by the original author of this test in the first place).\n\nWe can probably remove this line and update the redefinition of memoryFd below.",
+      "range": {
+        "startLine": 500,
+        "startChar": 8,
+        "endLine": 500,
+        "endChar": 64
+      },
+      "revId": "fa153b94688cc6868634162dcc886f4885e2a19c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
