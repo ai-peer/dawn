@@ -486,6 +486,12 @@ namespace dawn_native { namespace vulkan {
     // alias the same memory
     TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevicesAliased) {
         DAWN_SKIP_TEST_IF(UsesWire());
+
+        // WrapVulkanImage consumes the file descriptor so we can't import defaultFd twice.
+        // Duplicate the file descriptor so we can import it twice.
+        int defaultFdCopy = dup(defaultFd);
+        ASSERT(defaultFdCopy != -1);
+
         // Import the image on |device
         wgpu::Texture wrappedTextureAlias =
             WrapVulkanImage(device, &defaultDescriptor, defaultFd, defaultAllocationSize,
@@ -495,7 +501,7 @@ namespace dawn_native { namespace vulkan {
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
-            WrapVulkanImage(secondDevice, &defaultDescriptor, defaultFd, defaultAllocationSize,
+            WrapVulkanImage(secondDevice, &defaultDescriptor, defaultFdCopy, defaultAllocationSize,
                             defaultMemoryTypeIndex, {});
 
         // Clear |wrappedTexture| on |secondDevice|

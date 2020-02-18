@@ -54,7 +54,9 @@ namespace dawn_native { namespace vulkan {
 
 // Can't use DAWN_PLATFORM_LINUX since header included in both dawn and chrome
 #ifdef __linux__
-        // Common properties of external images represented by FDs
+        // Common properties of external images represented by FDs on success the file descriptors
+        // ownership is transferred to the Dawn implementation and they shouldn't be used outside
+        // of Dawn again.
         struct DAWN_NATIVE_EXPORT ExternalImageDescriptorFD : ExternalImageDescriptor {
           public:
             int memoryFD;  // A file descriptor from an export of the memory of the image
