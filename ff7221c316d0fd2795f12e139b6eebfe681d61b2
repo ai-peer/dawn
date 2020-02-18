@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ae78eaae_bebdaf97",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-18T17:06:59Z",
+      "side": 1,
+      "message": "I\u0027m accessing it from ResourceHeapAllocation.",
+      "parentUuid": "bdc46f45_25a95701",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01facc76_3acd571a",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 8
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "060074d1_9aa8b9d5",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-18T17:06:59Z",
+      "side": 1,
+      "message": "This isn\u0027t what I\u0027m seeing. Currently in Dawn, the moment I try to allocate any more than physical device memory I get an OOM error.",
+      "parentUuid": "f536fe98_ff9da5d9",
+      "range": {
+        "startLine": 90,
+        "startChar": 56,
+        "endLine": 91,
+        "endChar": 90
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e22d533a_79eec0e6",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 8
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "225962f7_350ae533",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-18T17:06:59Z",
+      "side": 1,
+      "message": "I agree, but keeping both was for safety when using GetD3D12Heap(). Since my change makes it possible to use the Heap object to represent a \"implicit heap\" (which is actually a ID3D12Resource), we can\u0027t allow GetD3D12Heap() to return the ID3D12Resource. An ASSERT for (mAllocationMethod \u003d\u003d AllocationMethod::kDirect) would be more appropriate - but then I\u0027d have to add the mAllocationMethod variable, which is otherwise unused.",
+      "parentUuid": "e22d533a_79eec0e6",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1a40de3e_a4bec4fa",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
         "patchSetId": 8
@@ -105,6 +177,30 @@
       "writtenOn": "2020-02-15T02:11:03Z",
       "side": 1,
       "message": "I would prefer that we reference count Heap or use unique_ptr (if possible) instead of using shared_ptr. Shared_ptr is really two pointers under the covers and may not be as efficient. Last time I checked Chromium forbid the use of shared_ptr in the mainline code. Only third_party code except blink is allowed to use it.",
+      "range": {
+        "startLine": 25,
+        "startChar": 51,
+        "endLine": 25,
+        "endChar": 66
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b6cba43_4978205a",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2020-02-18T17:06:59Z",
+      "side": 1,
+      "message": "In a separate thread w/ Bryan - I\u0027m planning to eliminate the mImplicitHeap variable and instead store in ResourceMemoryAllocation::mResourceHeap with manual memory management.",
+      "parentUuid": "1a40de3e_a4bec4fa",
       "range": {
         "startLine": 25,
         "startChar": 51,
