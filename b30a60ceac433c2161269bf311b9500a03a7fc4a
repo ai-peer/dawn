@@ -16,6 +16,24 @@
       "revId": "b30a60ceac433c2161269bf311b9500a03a7fc4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e97d369_0ff5a4d3",
+        "filename": "src/dawn_native/metal/SamplerMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-18T17:04:44Z",
+      "side": 1,
+      "message": "Added a TODO. I\u0027ll land this now to fix the crash, and toggl-ify in a follow-up.",
+      "parentUuid": "44c6a7be_236367ca",
+      "revId": "b30a60ceac433c2161269bf311b9500a03a7fc4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
     }
   ]
 }
