@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71105255_53e6056a",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "nit: can be removed.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 55
+      },
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34655919_bd24114b",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "This branch of the switch will always be taken so the switch can be replaced with an ASSERT",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 56
+      },
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54a45647_d490a3c9",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "Like we discussed, the allocation for RTV and DSV, or even for staging CBVUAVSRV and Sampler heaps would use different allocators so they won\u0027t be handled in this class. Hence we don\u0027t need this TODO.",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87077dcd_578709b5",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "Did you mean to include \"dawn_native/Error.h\"?",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3431461_53526a38",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "If we use arrays statically sized to 2, we need to static_assert somewhere in the .cpp file that both heap types we care about are 0 and 1 respectively.",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9936cd03_77febf10",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "nit: ASSERT(!IsNull()) so that we know invalid allocations are never used?",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdd37cb1_e8309a07",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "nit: this branch isn\u0027t needed.",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eff5a768_145f1489",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "ditto both comments.",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b39dddc_963c9b7e",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "nit: Null is a bit weird, what does it mean for an allocation to be null, does it contain nullptrs?",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

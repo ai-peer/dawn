@@ -423,6 +423,24 @@
     },
     {
       "key": {
+        "uuid": "f795c230_c5ef85c2",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-18T13:43:47Z",
+      "side": 1,
+      "message": "\u003e \u003e Like we discussed in the last call I was there, using a RingBuffer will cause correctness issues where a bindgroup will think it is still valid in frame N+1 when it has already been overwritten\n\u003e \n\u003e The condition [1] is prevented by additionally checking a device serial. Unless the allocation is in-flight, it cannot be reused in a future frame.\n\u003e \n\nThe condition is quite far from the code that requires it. If we were to use a ringbuffer, it\u0027d be likely better to have BindGroup call allocator-\u003eIsAllocationStillValid(pendingSerial, heapSerial).\n\n\u003e \u003e If you\u0027re worried about re-allocating descriptor heaps, this can be fixed by recycling whole descriptor heaps via a serial queue, which is a more general solution (and definitely should not be done in this CL, it is complex enough as is).\n\u003e \n\u003e Switching in more heaps will cause flushes and result in poor perf + other side-effects, I wouldn\u0027t recommend.\n\nDo you have documentation for this? From what I understand the very worst thing that a SetDescriptorHeaps could cause is a GPU synchronization point and that\u0027s not very expensive. The tradeoffs between ringbuffer and a bimp allocator in the descriptor heap are very unclear so for now we should choose the simplest solution, which is the bump allocator.",
+      "parentUuid": "30bcf06e_acf7711e",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "339aeac2_62cb5aeb",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
         "patchSetId": 37
