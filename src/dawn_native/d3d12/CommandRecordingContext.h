@@ -22,13 +22,14 @@
 
 namespace dawn_native { namespace d3d12 {
     class CommandAllocatorManager;
+    class ResourceHeapAllocation;
     class Texture;
 
     class CommandRecordingContext {
       public:
+        CommandRecordingContext(Device* device);
         void AddToSharedTextureList(Texture* texture);
-        MaybeError Open(ID3D12Device* d3d12Device,
-                        CommandAllocatorManager* commandAllocationManager);
+        MaybeError Open(CommandAllocatorManager* commandAllocationManager);
 
         ID3D12GraphicsCommandList* GetCommandList() const;
         ID3D12GraphicsCommandList4* GetCommandList4() const;
@@ -37,11 +38,15 @@ namespace dawn_native { namespace d3d12 {
 
         MaybeError ExecuteCommandList(ID3D12CommandQueue* d3d12CommandQueue);
 
+        void TrackResourceHeapUsage(Heap* heapAllocation);
+
       private:
         ComPtr<ID3D12GraphicsCommandList> mD3d12CommandList;
         ComPtr<ID3D12GraphicsCommandList4> mD3d12CommandList4;
         bool mIsOpen = false;
         std::set<Texture*> mSharedTextures;
+        std::set<Heap*> mHeapsPendingUsage;
+        Device* mDevice;
     };
 }}  // namespace dawn_native::d3d12
 

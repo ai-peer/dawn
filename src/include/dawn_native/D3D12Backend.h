@@ -30,6 +30,9 @@ namespace dawn_native { namespace d3d12 {
     DAWN_NATIVE_EXPORT WGPUTextureFormat
     GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
 
+    DAWN_NATIVE_EXPORT uint64_t SetExternalMemoryReservation(WGPUDevice device,
+                                                             uint64_t requestedReservationSize);
+
     // Note: SharedHandle must be a handle to a texture object.
     DAWN_NATIVE_EXPORT WGPUTexture WrapSharedHandle(WGPUDevice device,
                                                     const WGPUTextureDescriptor* descriptor,
