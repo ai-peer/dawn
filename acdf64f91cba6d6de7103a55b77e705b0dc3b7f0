@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0323f715_e151725d",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T23:17:34Z",
+      "side": 1,
+      "message": "Agreed, I\u0027ll wait for your DEPS roll to rebase my CLs on top of it.",
+      "parentUuid": "185f5534_6c8de347",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7359d687_a060f477",
         "filename": "src/dawn_native/vulkan/ComputePipelineVk.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4ec57f1_2de9ae11",
+        "filename": "src/dawn_native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T23:17:34Z",
+      "side": 1,
+      "message": "Done. The previous helper implementation didn\u0027t compile because VkComputePipelineCreateInfo defines its pNext field as a \"const void*\" for some mysterious reason. I fixed it to be able to use it here.",
+      "parentUuid": "7359d687_a060f477",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5d5f2df1_09bdd0fe",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T23:17:34Z",
+      "side": 1,
+      "message": "Good idea, done.",
+      "parentUuid": "246ddcd6_992144d0",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "455f29ba_4705c394",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffc120e6_70493dd6",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T23:17:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "455f29ba_4705c394",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
