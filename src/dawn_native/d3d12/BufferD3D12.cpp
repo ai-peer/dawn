@@ -20,6 +20,7 @@
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -125,6 +126,10 @@ namespace dawn_native { namespace d3d12 {
 
     ComPtr<ID3D12Resource> Buffer::GetD3D12Resource() const {
         return mResourceAllocation.GetD3D12Resource();
+    }
+
+    ResourceHeapAllocation* Buffer::GetResourceHeapAllocation() {
+        return &mResourceAllocation;
     }
 
     // When true is returned, a D3D12_RESOURCE_BARRIER has been created and must be used in a
@@ -237,6 +242,10 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapReadAsyncImpl(uint32_t serial) {
+        DAWN_TRY(ToBackend(GetDevice())
+                     ->GetResidencyManager()
+                     ->EnsureHeapIsResident(ToBackend(mResourceAllocation.GetResourceHeap())));
+
         mWrittenMappedRange = {};
         D3D12_RANGE readRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
@@ -251,6 +260,10 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::MapWriteAsyncImpl(uint32_t serial) {
+        DAWN_TRY(ToBackend(GetDevice())
+                     ->GetResidencyManager()
+                     ->EnsureHeapIsResident(ToBackend(mResourceAllocation.GetResourceHeap())));
+
         mWrittenMappedRange = {0, static_cast<size_t>(GetSize())};
         char* data = nullptr;
         DAWN_TRY(CheckHRESULT(

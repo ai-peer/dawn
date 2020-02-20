@@ -16,19 +16,25 @@
 #define DAWNNATIVE_D3D12_HEAPD3D12_H_
 
 #include "dawn_native/ResourceHeap.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
 
     class Heap : public ResourceHeapBase {
       public:
-        Heap(ComPtr<ID3D12Heap> heap);
-        ~Heap() = default;
+        Heap(ComPtr<ID3D12Pageable> d3d12Pageable, uint64_t size);
+        ~Heap();
 
         ComPtr<ID3D12Heap> GetD3D12Heap() const;
+        ComPtr<ID3D12Pageable> GetD3D12Pageable() const;
+        LRUEntry* GetLRUEntry();
 
       private:
-        ComPtr<ID3D12Heap> mHeap;
+        ComPtr<ID3D12Pageable> mD3d12Pageable;
+        LRUEntry mLRUEntry;
+
+        friend ResidencyManager;
     };
 }}  // namespace dawn_native::d3d12
 
