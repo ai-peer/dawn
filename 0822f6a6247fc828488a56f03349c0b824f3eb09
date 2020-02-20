@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a86bc161_28d8b18c",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Yes, it would be perfect if you could roll it :)",
+      "parentUuid": "4fd73218_74e90dff",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8d3302d_22e8e687",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d56ef2b7_88d1f0a3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8d3302d_22e8e687",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "d31d9559_d9888fe8",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66df7823_55b12e7d",
+      "range": {
+        "startLine": 338,
+        "startChar": 12,
+        "endLine": 338,
+        "endChar": 59
+      },
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3afa2923_ae286054",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
@@ -73,6 +133,24 @@
       "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac8e8020_24f9bb82",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3afa2923_ae286054",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "2215e00a_5890f6bc",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25ce87a3_ac371bfa",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2ee32c4_de36a03f",
         "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
         "patchSetId": 1
@@ -107,6 +203,24 @@
       "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7319b2a7_c4566e9e",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2ee32c4_de36a03f",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "b6ff5408_aa85f10e",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8acc778_d674c2ac",
+      "range": {
+        "startLine": 58,
+        "startChar": 61,
+        "endLine": 58,
+        "endChar": 70
+      },
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b825cbf_3eeb2bb3",
         "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
         "patchSetId": 1
@@ -156,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "9b847008_a4dc037e",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b825cbf_3eeb2bb3",
+      "range": {
+        "startLine": 64,
+        "startChar": 33,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0cfa8c7d_7691601b",
         "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
         "patchSetId": 1
@@ -167,6 +329,24 @@
       "writtenOn": "2020-02-20T13:42:11Z",
       "side": 1,
       "message": "[2]",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a84abad7_01582b9e",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Note sure what this note is about, but the code has been changed to only use a VkPhysicalDevice{Features2,Properties2} structs inside this scope to make it cleaner (and reverted info.properties2 to info.properties as well).",
+      "parentUuid": "0cfa8c7d_7691601b",
       "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -190,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "64f414e5_f690219f",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Actually, I checked the spec and cannot find an exact mention of this. It seems that the most cautious thing would be to add these to the chain only if VK_EXT_subgroup_size_control is listed in the device extensions. Doing so would require move this whole section further down.\n\nI can do it if you tell me it\u0027s a good idea.",
+      "parentUuid": "b4151cfc_25646c1d",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41d8108d_31d7c970",
         "filename": "src/dawn_native/vulkan/VulkanInfo.h",
         "patchSetId": 1
@@ -201,6 +399,24 @@
       "writtenOn": "2020-02-20T13:42:11Z",
       "side": 1,
       "message": "As discussed offline, we could keep this a VkPhysicalDeviceFeatures to avoid the extre .features in [1] and instead use a temporary VkPhysicalDeviceFeatures2 then do a copy in [2]",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce0faadb_4dc3bbfb",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Agreed, and done.",
+      "parentUuid": "41d8108d_31d7c970",
       "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
@@ -221,6 +437,24 @@
       "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64bf16ee_0406782b",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000683
+      },
+      "writtenOn": "2020-02-20T22:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ee25f8b_ed5ef298",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
