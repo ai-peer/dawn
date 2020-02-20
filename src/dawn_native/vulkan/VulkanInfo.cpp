@@ -14,6 +14,7 @@
 
 #include "dawn_native/vulkan/VulkanInfo.h"
 
+#include "common/Log.h"
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/BackendVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
@@ -193,6 +194,13 @@ namespace dawn_native { namespace vulkan {
                                   : VK_MAKE_VERSION(1, 0, 0);
         }
 
+        // Mark the extensions promoted to Vulkan 1.1 as available.
+        if (info.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            info.getPhysicalDeviceProperties2 = true;
+            info.externalMemoryCapabilities = true;
+            info.externalSemaphoreCapabilities = true;
+        }
+
         // TODO(cwallez@chromium:org): Each layer can expose additional extensions, query them?
 
         return info;
@@ -311,6 +319,11 @@ namespace dawn_native { namespace vulkan {
                     info.maintenance1 = true;
                 }
             }
+        }
+
+        // Mark the extensions promoted to Vulkan 1.1 as available.
+        if (info.properties.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            info.maintenance1 = true;
         }
 
         // TODO(cwallez@chromium.org): gather info about formats
