@@ -190,28 +190,16 @@ namespace dawn_native { namespace vulkan {
             }
         }
 
+        // Always request all extensions used to create VkSurfaceKHR objects so that they are
+        // always available for embedders looking to create VkSurfaceKHR on our VkInstance.
         if (mGlobalInfo.fuchsiaImagePipeSwapchain) {
             layersToRequest.push_back(kLayerNameFuchsiaImagePipeSwapchain);
             usedKnobs.fuchsiaImagePipeSwapchain = true;
         }
 
-        // Always request all extensions used to create VkSurfaceKHR objects so that they are
-        // always available for embedders looking to create VkSurfaceKHR on our VkInstance.
         if (mGlobalInfo.macosSurface) {
             extensionsToRequest.push_back(kExtensionNameMvkMacosSurface);
             usedKnobs.macosSurface = true;
-        }
-        if (mGlobalInfo.externalMemoryCapabilities) {
-            extensionsToRequest.push_back(kExtensionNameKhrExternalMemoryCapabilities);
-            usedKnobs.externalMemoryCapabilities = true;
-        }
-        if (mGlobalInfo.externalSemaphoreCapabilities) {
-            extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreCapabilities);
-            usedKnobs.externalSemaphoreCapabilities = true;
-        }
-        if (mGlobalInfo.getPhysicalDeviceProperties2) {
-            extensionsToRequest.push_back(kExtensionNameKhrGetPhysicalDeviceProperties2);
-            usedKnobs.getPhysicalDeviceProperties2 = true;
         }
         if (mGlobalInfo.surface) {
             extensionsToRequest.push_back(kExtensionNameKhrSurface);
@@ -236,6 +224,27 @@ namespace dawn_native { namespace vulkan {
         if (mGlobalInfo.fuchsiaImagePipeSurface) {
             extensionsToRequest.push_back(kExtensionNameFuchsiaImagePipeSurface);
             usedKnobs.fuchsiaImagePipeSurface = true;
+        }
+
+        // For promoted extension only request the extension if we don't have the API version in
+        // which they were promoted.
+        if (mGlobalInfo.externalMemoryCapabilities) {
+            usedKnobs.externalMemoryCapabilities = true;
+            if (mGlobalInfo.externalMemoryCapabilitiesInExtensionOnly) {
+                extensionsToRequest.push_back(kExtensionNameKhrExternalMemoryCapabilities);
+            }
+        }
+        if (mGlobalInfo.externalSemaphoreCapabilities) {
+            usedKnobs.externalSemaphoreCapabilities = true;
+            if (mGlobalInfo.externalSemaphoreCapabilitiesInExtensionOnly) {
+                extensionsToRequest.push_back(kExtensionNameKhrExternalSemaphoreCapabilities);
+            }
+        }
+        if (mGlobalInfo.getPhysicalDeviceProperties2) {
+            usedKnobs.getPhysicalDeviceProperties2 = true;
+            if (mGlobalInfo.getPhysicalDeviceProperties2InExtensionOnly) {
+                extensionsToRequest.push_back(kExtensionNameKhrGetPhysicalDeviceProperties2);
+            }
         }
 
         VkApplicationInfo appInfo;

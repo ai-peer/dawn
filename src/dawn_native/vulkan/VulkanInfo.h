@@ -63,9 +63,6 @@ namespace dawn_native { namespace vulkan {
 
         // Extensions
         bool debugReport = false;
-        bool externalMemoryCapabilities = false;
-        bool externalSemaphoreCapabilities = false;
-        bool getPhysicalDeviceProperties2 = false;
         bool macosSurface = false;
         bool surface = false;
         bool waylandSurface = false;
@@ -73,6 +70,16 @@ namespace dawn_native { namespace vulkan {
         bool xcbSurface = false;
         bool xlibSurface = false;
         bool fuchsiaImagePipeSurface = false;
+
+        // Promoted extensions are set to true if their core version is supported. Each extension
+        // has an "ExtensionOnly" that if true means that the extension is present and the only way
+        // to get the functionality (that is, the core version it was promoted in isn't present).
+        bool externalMemoryCapabilities = false;
+        bool externalMemoryCapabilitiesInExtensionOnly = false;
+        bool externalSemaphoreCapabilities = false;
+        bool externalSemaphoreCapabilitiesInExtensionOnly = false;
+        bool getPhysicalDeviceProperties2 = false;
+        bool getPhysicalDeviceProperties2InExtensionOnly = false;
     };
 
     struct VulkanGlobalInfo : VulkanGlobalKnobs {
@@ -86,7 +93,7 @@ namespace dawn_native { namespace vulkan {
     struct VulkanDeviceKnobs {
         VkPhysicalDeviceFeatures features;
 
-        // Extensions
+        // Extensions, promoted extensions are set to true if their core version is supported.
         bool debugMarker = false;
         bool externalMemory = false;
         bool externalMemoryFD = false;

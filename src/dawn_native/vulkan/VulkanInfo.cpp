@@ -14,6 +14,7 @@
 
 #include "dawn_native/vulkan/VulkanInfo.h"
 
+#include "common/Log.h"
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/BackendVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
@@ -79,6 +80,11 @@ namespace dawn_native { namespace vulkan {
     const char kExtensionNameFuchsiaImagePipeSurface[] = "VK_FUCHSIA_imagepipe_surface";
     const char kExtensionNameKhrMaintenance1[] = "VK_KHR_maintenance1";
 
+    // TODO(cwallez@chromium.org): Extension and layer discovery complexity is in O(NM) where
+    // N is the number of extensions the driver supports and M the number of extensions Dawn cares
+    // about. It can be made O(N+M) by using some sort of hashmap of extension names to logic for
+    // handling that extension.
+
     ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Backend& backend) {
         VulkanGlobalInfo info = {};
         const VulkanFunctions& vkFunctions = backend.GetFunctions();
@@ -134,12 +140,15 @@ namespace dawn_native { namespace vulkan {
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalMemoryCapabilities)) {
                     info.externalMemoryCapabilities = true;
+                    info.externalMemoryCapabilitiesInExtensionOnly = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrExternalSemaphoreCapabilities)) {
                     info.externalSemaphoreCapabilities = true;
+                    info.externalSemaphoreCapabilitiesInExtensionOnly = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrGetPhysicalDeviceProperties2)) {
                     info.getPhysicalDeviceProperties2 = true;
+                    info.getPhysicalDeviceProperties2InExtensionOnly = true;
                 }
                 if (IsExtensionName(extension, kExtensionNameKhrSurface)) {
                     info.surface = true;
@@ -191,6 +200,18 @@ namespace dawn_native { namespace vulkan {
             info.apiVersion = (supportedAPIVersion >= VK_MAKE_VERSION(1, 1, 0))
                                   ? VK_MAKE_VERSION(1, 1, 0)
                                   : VK_MAKE_VERSION(1, 0, 0);
+        }
+
+        // Mark the extensions promoted to Vulkan 1.1 as available.
+        if (info.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            info.externalMemoryCapabilities = true;
+            info.externalMemoryCapabilitiesInExtensionOnly = false;
+
+            info.externalSemaphoreCapabilities = true;
+            info.externalSemaphoreCapabilitiesInExtensionOnly = false;
+
+            info.getPhysicalDeviceProperties2 = true;
+            info.getPhysicalDeviceProperties2InExtensionOnly = false;
         }
 
         // TODO(cwallez@chromium:org): Each layer can expose additional extensions, query them?
@@ -311,6 +332,11 @@ namespace dawn_native { namespace vulkan {
                     info.maintenance1 = true;
                 }
             }
+        }
+
+        // Mark the extensions promoted to Vulkan 1.1 as available.
+        if (info.properties.apiVersion >= VK_MAKE_VERSION(1, 1, 0)) {
+            info.maintenance1 = true;
         }
 
         // TODO(cwallez@chromium.org): gather info about formats
