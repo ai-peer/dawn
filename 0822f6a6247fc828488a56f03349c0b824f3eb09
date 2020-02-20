@@ -1,0 +1,226 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fd73218_74e90dff",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "Rolling the Vulkan headers forward should pick up this extensions, can we do that instead as a pre-CL? It should be quick (and I can do it for you if you want)",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8d3302d_22e8e687",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "nit: add a comment explaining that Vulkan 1.1 is required so GetPhysicalDeviceProperties2KHR is always usable if this extension is present (and add an assert?)",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66df7823_55b12e7d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "nit: use pointer instead of mutable references. Also all the code below could become:\n\n\n            VkPhysicalDeviceSubgroupSizeControlFeaturesEXT* dst \u003d\n                \u0026usedKnobs.featuresExtensions.subgroupSizeControl;\n\n            // Request subgroupSizeControl and computeFullSubgroups if the features are available.\n            *dst \u003d mDeviceInfo.featuresExtensions.subgroupSizeControl;\n            featuresChain.Add(\u0026dst);",
+      "range": {
+        "startLine": 338,
+        "startChar": 12,
+        "endLine": 338,
+        "endChar": 59
+      },
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3afa2923_ae286054",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25ce87a3_ac371bfa",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "nit: prefer using this-\u003eGetAdapter())-\u003eGetBackend()-\u003eGetGlobalInfo().getPhysicalDeviceProperties2. I\u0027ll make a CL so that it is also set to true on Vulkan 1.1 since it was merged directly. We could also add a getter on DeviceVk that does the pointer chasing to get the GlobalInfo\n\nAlso nit: instead of two opposite ternary statements we could have\n\nif (getPhysicalDeviceProperties2) {\n    pNext \u003d ...\n    pEnabledFeatures \u003d ...\n} else {\n    pNext \u003d ...\n    pEnabledFeatures \u003d ...\n}",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ee32c4_de36a03f",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "unit: always bracket control flow.",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8acc778_d674c2ac",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "unit: mTailPtr",
+      "range": {
+        "startLine": 58,
+        "startChar": 61,
+        "endLine": 58,
+        "endChar": 70
+      },
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b825cbf_3eeb2bb3",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "unit: vkStruct",
+      "range": {
+        "startLine": 64,
+        "startChar": 33,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cfa8c7d_7691601b",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4151cfc_25646c1d",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "nit: comment that the spec for GetPhysicalDeviceProperties2 requires that unknown members are ignored so it is safe to add chained structs even for extensions that aren\u0027t present.",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41d8108d_31d7c970",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "As discussed offline, we could keep this a VkPhysicalDeviceFeatures to avoid the extre .features in [1] and instead use a temporary VkPhysicalDeviceFeatures2 then do a copy in [2]",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ee25f8b_ed5ef298",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T13:42:11Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
