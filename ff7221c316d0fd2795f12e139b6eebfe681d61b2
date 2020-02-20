@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4b0108fa_a1286115",
+        "filename": "src/dawn_native/ResourceMemoryAllocation.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Where are you using it in ResourceHeapAllocation?",
+      "parentUuid": "ae78eaae_bebdaf97",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01facc76_3acd571a",
         "filename": "src/dawn_native/ResourceMemoryAllocation.h",
         "patchSetId": 8
@@ -119,6 +143,122 @@
     },
     {
       "key": {
+        "uuid": "84125c58_f8a970b0",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Very well. I\u0027m presuming this is a policy decision on the part of D3D12.  The video memory manager is free to evict things behind your back to make room for foreground applications.",
+      "parentUuid": "060074d1_9aa8b9d5",
+      "range": {
+        "startLine": 90,
+        "startChar": 56,
+        "endLine": 91,
+        "endChar": 90
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5daf3f94_3ee2910d",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Nit: Placeholder issue to make sure you change this \u0027true\u0027 back to \u0027enableBackendValidation\u0027",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 35,
+        "endChar": 25
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44aa258b_ad8c9663",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Instead of adding new heaps to the back of the vector unconditionally, consider using std::set or similar data structure. If you find that performance is an issue, then we can have a separate \u0027pending resident\u0027 list we add things to. Checking would become O(1).",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 0
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "215217d7_38e9e87d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Why is mCommandRecordingContext a std::unique_ptr instead of a member variable?",
+      "range": {
+        "startLine": 171,
+        "startChar": 7,
+        "endLine": 171,
+        "endChar": 74
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0919050_9e7dba72",
+        "filename": "src/dawn_native/d3d12/HeapAllocatorD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Instead of having to static_cast Heap here, have heapBase point to a unique_ptr of Heap instead of ResourceHeapBase.  Then, you should be able to turn that into a unique_ptr of the base class to return to the caller.",
+      "range": {
+        "startLine": 55,
+        "startChar": 64,
+        "endLine": 55,
+        "endChar": 82
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e22d533a_79eec0e6",
         "filename": "src/dawn_native/d3d12/HeapD3D12.h",
         "patchSetId": 8
@@ -159,6 +299,76 @@
         "startChar": 1,
         "endLine": 35,
         "endChar": 38
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02a568d5_1e9142e7",
+        "filename": "src/dawn_native/d3d12/HeapD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Storing one pointer and using QueryInterface to get to the other is safe. QueryInterface will fail if the you cannot go from one interface to the other. \n\nFor the case where one interface derives from the other one, you can simply assign one pointer to the other one -- no casting necessary.",
+      "parentUuid": "225962f7_350ae533",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9deb8650_10e0173c",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Consider renaming Evict to EvictSingleEntry to make its job more clear. Evict by itself implies that we\u0027re evicting all of the resources.",
+      "range": {
+        "startLine": 49,
+        "startChar": 14,
+        "endLine": 49,
+        "endChar": 39
+      },
+      "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27be07e3_ea6b4f35",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-02-20T02:17:34Z",
+      "side": 1,
+      "message": "Can Evict be private be a private method to the class?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 26
       },
       "revId": "ff7221c316d0fd2795f12e139b6eebfe681d61b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
