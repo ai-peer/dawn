@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c18e8e3_d2f77c9a",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000463
+      },
+      "writtenOn": "2020-02-20T15:10:17Z",
+      "side": 1,
+      "message": "Note that Backend::CreateInstance() will still use these flags to add the KHR-labeled extension names (e.g. \"VK_KHR_get_physical_device_properties2\") when creating the Vulkan instance. Not sure if this is needed for 1.1 and above, but otherwise everything LGTM here :)",
+      "revId": "3126c9bfa7bc70db8814cf48550833cca33407ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
