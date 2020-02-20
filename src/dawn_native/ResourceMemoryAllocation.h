@@ -63,11 +63,13 @@ namespace dawn_native {
 
         virtual void Invalidate();
 
+      protected:
+        ResourceHeapBase* mResourceHeap;
+
       private:
         AllocationInfo mInfo;
-        uint64_t mOffset;
-        ResourceHeapBase* mResourceHeap;
         uint8_t* mMappedPointer;
+        uint64_t mOffset;
     };
 }  // namespace dawn_native
 

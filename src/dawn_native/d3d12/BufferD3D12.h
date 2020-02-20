@@ -40,6 +40,7 @@ namespace dawn_native { namespace d3d12 {
                                                   D3D12_RESOURCE_BARRIER* barrier,
                                                   wgpu::BufferUsage newUsage);
         void TransitionUsageNow(CommandRecordingContext* commandContext, wgpu::BufferUsage usage);
+        ResourceHeapAllocation* GetResourceHeapAllocation();
 
       private:
         // Dawn API

@@ -14,16 +14,19 @@
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/CommandAllocatorManager.h"
 #include "dawn_native/d3d12/D3D12Error.h"
+#include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
+    CommandRecordingContext::CommandRecordingContext(Device* device) : mDevice(device) {
+    }
 
     void CommandRecordingContext::AddToSharedTextureList(Texture* texture) {
         ASSERT(IsOpen());
         mSharedTextures.insert(texture);
     }
 
-    MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
-                                             CommandAllocatorManager* commandAllocationManager) {
+    MaybeError CommandRecordingContext::Open(CommandAllocatorManager* commandAllocationManager) {
         ASSERT(!IsOpen());
         ID3D12CommandAllocator* commandAllocator;
         DAWN_TRY_ASSIGN(commandAllocator, commandAllocationManager->ReserveCommandAllocator());
@@ -36,10 +39,10 @@ namespace dawn_native { namespace d3d12 {
             }
         } else {
             ComPtr<ID3D12GraphicsCommandList> d3d12GraphicsCommandList;
-            DAWN_TRY(CheckHRESULT(
-                d3d12Device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator,
-                                               nullptr, IID_PPV_ARGS(&d3d12GraphicsCommandList)),
-                "D3D12 creating direct command list"));
+            DAWN_TRY(CheckHRESULT(mDevice->GetD3D12Device()->CreateCommandList(
+                                      0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator, nullptr,
+                                      IID_PPV_ARGS(&d3d12GraphicsCommandList)),
+                                  "D3D12 creating direct command list"));
             mD3d12CommandList = std::move(d3d12GraphicsCommandList);
             // Store a cast to ID3D12GraphicsCommandList4. This is required to use the D3D12 render
             // pass APIs introduced in Windows build 1809.
@@ -68,13 +71,22 @@ namespace dawn_native { namespace d3d12 {
                 DAWN_TRY(std::move(error));
             }
 
+            DAWN_TRY(mDevice->GetResidencyManager()->ProcessResidency(mHeapsPendingUsage));
+
             ID3D12CommandList* d3d12CommandList = GetCommandList();
             d3d12CommandQueue->ExecuteCommandLists(1, &d3d12CommandList);
 
             mIsOpen = false;
             mSharedTextures.clear();
+            mHeapsPendingUsage.clear();
         }
         return {};
+    }
+
+    void CommandRecordingContext::TrackResourceHeapUsage(Heap* heap) {
+        if (heap != nullptr) {
+            mHeapsPendingUsage.insert(heap);
+        }
     }
 
     ID3D12GraphicsCommandList* CommandRecordingContext::GetCommandList() const {
@@ -96,6 +108,8 @@ namespace dawn_native { namespace d3d12 {
         mD3d12CommandList4.Reset();
         mIsOpen = false;
         mSharedTextures.clear();
+        mHeapsPendingUsage.clear();
+        mHeapsPendingUsage.clear();
     }
 
     bool CommandRecordingContext::IsOpen() const {

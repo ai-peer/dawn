@@ -18,14 +18,14 @@
 namespace dawn_native {
 
     ResourceMemoryAllocation::ResourceMemoryAllocation()
-        : mOffset(0), mResourceHeap(nullptr), mMappedPointer(nullptr) {
+        : mResourceHeap(nullptr), mMappedPointer(nullptr), mOffset(0) {
     }
 
     ResourceMemoryAllocation::ResourceMemoryAllocation(const AllocationInfo& info,
                                                        uint64_t offset,
                                                        ResourceHeapBase* resourceHeap,
                                                        uint8_t* mappedPointer)
-        : mInfo(info), mOffset(offset), mResourceHeap(resourceHeap), mMappedPointer(mappedPointer) {
+        : mResourceHeap(resourceHeap), mInfo(info), mMappedPointer(mappedPointer), mOffset(offset) {
     }
 
     ResourceHeapBase* ResourceMemoryAllocation::GetResourceHeap() const {

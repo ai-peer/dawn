@@ -64,6 +64,8 @@ namespace dawn_native { namespace d3d12 {
                                                  uint32_t baseArrayLayer,
                                                  uint32_t layerCount);
 
+        ResourceHeapAllocation* GetResourceHeapAllocation();
+
       private:
         using TextureBase::TextureBase;
 
