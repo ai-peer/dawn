@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "185f5534_6c8de347",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T14:15:30Z",
+      "side": 1,
+      "message": "Same as in the other CL, we can roll the Vulkan headers instead.",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7359d687_a060f477",
+        "filename": "src/dawn_native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T14:15:30Z",
+      "side": 1,
+      "message": "This could use the PNextHelper.",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "246ddcd6_992144d0",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T14:15:30Z",
+      "side": 1,
+      "message": "nit: we could compute this once at device creation and cache it in a member variable of DeviceVk instead of doing it on every compute pipeline compilation.",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "455f29ba_4705c394",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-20T14:15:30Z",
+      "side": 1,
+      "message": "unit: braces around control-flow. Same below.",
+      "revId": "acdf64f91cba6d6de7103a55b77e705b0dc3b7f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
