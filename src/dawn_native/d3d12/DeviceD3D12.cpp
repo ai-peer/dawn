@@ -27,6 +27,7 @@
 #include "dawn_native/d3d12/CommandBufferD3D12.h"
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
+#include "dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h"
 #include "dawn_native/d3d12/DescriptorHeapAllocator.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
@@ -72,6 +73,10 @@ namespace dawn_native { namespace d3d12 {
         // Initialize backend services
         mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
         mDescriptorHeapAllocator = std::make_unique<DescriptorHeapAllocator>(this);
+
+        mDescriptorAllocatorManager = std::make_unique<DescriptorAllocatorManager>(this);
+        DAWN_TRY(mDescriptorAllocatorManager->Initialize());
+
         mMapRequestTracker = std::make_unique<MapRequestTracker>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
@@ -179,7 +184,6 @@ namespace dawn_native { namespace d3d12 {
 
         mResourceAllocatorManager->Tick(mCompletedSerial);
         DAWN_TRY(mCommandAllocatorManager->Tick(mCompletedSerial));
-        mDescriptorHeapAllocator->Deallocate(mCompletedSerial);
         mMapRequestTracker->Tick(mCompletedSerial);
         mUsedComObjectRefs.ClearUpTo(mCompletedSerial);
         DAWN_TRY(ExecutePendingCommandContext());
@@ -427,4 +431,7 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(!mPendingCommands.IsOpen());
     }
 
+    DescriptorAllocatorManager* Device::GetDescriptorAllocatorManager() const {
+        return mDescriptorAllocatorManager.get();
+    }
 }}  // namespace dawn_native::d3d12
