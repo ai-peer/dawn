@@ -441,6 +441,24 @@
     },
     {
       "key": {
+        "uuid": "0e7534ce_9eb689a3",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "SetDescriptorHeaps stalls the pipeline [1][2], which is why ringbuffer comes specifically recommended for heap management [3][4][5].\n\n[1] MSDN: \"this can be an expensive operation, requiring a GPU stall to flush all work\". \n[2] Intel: \"Changing descriptor heaps severely stalls the graphics pipeline\". \n[3] Nvidia: \"Make sure to use just one CBV/SRV/UAV/descriptor heap as a ring-buffer ...\". \n[4] AMD: \"Keep a single Descriptor Heap\"  and \"Use as Ringbuffer\". \n[5] D3D: D3D11on12 translation layer uses ring-buffers.\n\n[1] https://docs.microsoft.com/en-us/windows/win32/direct3d12/descriptor-heaps-overview#switching-heaps \n[2] https://software.intel.com/sites/default/files/managed/42/19/Intel%C2%AE-Processor-Graphics-Gen11-API-Developer-and-Optimization-Guide.pdf \n[3] https://developer.nvidia.com/dx12-dos-and-donts \n[4] http://gpuopen.com/wp-content/uploads/2016/03/GDC_2016_D3D12_Right_On_Queue_final.pdf \n[5] https://github.com/microsoft/D3D12TranslationLayer/blob/1c358f0cea8eb1db2485fa52963ca25e2eda8f61/src/ImmediateContext.cpp",
+      "parentUuid": "f795c230_c5ef85c2",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "339aeac2_62cb5aeb",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
         "patchSetId": 37

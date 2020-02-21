@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f88ffee6_b58c3970",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71105255_53e6056a",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 38
@@ -22,6 +39,30 @@
       "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93840c08_0fd8a071",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71105255_53e6056a",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 55
+      },
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -48,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "8e6ee4b2_37e3de35",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34655919_bd24114b",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 56
+      },
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54a45647_d490a3c9",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
         "patchSetId": 38
@@ -62,6 +127,41 @@
       "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7065a37_63975189",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Ack.\n\nWould you prefer I rename to ShaderVisibleHeapAllocator or leave it as-is?\n\nI ask because CreateDescriptorHeap() is common and I\u0027m unsure if it\u0027s better to have a manager that manages both or pass DescriptorHeapAllocator around.",
+      "parentUuid": "54a45647_d490a3c9",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "648e95df_9ffcc19f",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "c17daaa8_4a0086c6",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Need D3D12Error due to CheckHRESULT [2].",
+      "parentUuid": "87077dcd_578709b5",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3431461_53526a38",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
         "patchSetId": 38
@@ -96,6 +214,24 @@
       "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c043b0a5_4775f369",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3431461_53526a38",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -116,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "f8ec6151_776c7fb7",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9936cd03_77febf10",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdd37cb1_e8309a07",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
         "patchSetId": 38
@@ -130,6 +284,24 @@
       "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13b7adb5_df52d03b",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Used by [1] to avoid unnecessarily re-computing when offset\u003d0.",
+      "parentUuid": "cdd37cb1_e8309a07",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     },
     {
       "key": {
@@ -150,6 +322,24 @@
     },
     {
       "key": {
+        "uuid": "ef6e474c_ec22b0e5",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eff5a768_145f1489",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b39dddc_963c9b7e",
         "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
         "patchSetId": 38
@@ -164,6 +354,24 @@
       "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2de8d262_5780155c",
+        "filename": "src/dawn_native/d3d12/DescriptorHeapAllocationD3D12.h",
+        "patchSetId": 38
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2020-02-21T18:37:36Z",
+      "side": 1,
+      "message": "Yup, it contains nullptrs (hande.ptr \u003d 0) which represents an invalid allocation (default state).",
+      "parentUuid": "9b39dddc_963c9b7e",
+      "revId": "b59e489e4d7b8ce48ad023b98930f3f7b5fbf0ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
     }
   ]
 }
