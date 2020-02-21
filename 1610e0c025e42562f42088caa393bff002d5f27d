@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2df8c28a_dc96c9f5",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-21T19:07:45Z",
+      "side": 1,
+      "message": "nit: Got confused while reading this because the setting to nullptr isn\u0027t done in this if-scope. Would be more clear if:\n1) pEnabledFeatures is initialized to \u0026usedKnobs.features and set to nullptr in this if block, to match the comment.\nor 2) Update the comment to something like \"leave pEnabledFeatures as null\"",
+      "range": {
+        "startLine": 415,
+        "startChar": 12,
+        "endLine": 417,
+        "endChar": 99
+      },
+      "revId": "1610e0c025e42562f42088caa393bff002d5f27d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eea565b8_22956b61",
+        "filename": "src/dawn_native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-02-21T19:07:45Z",
+      "side": 1,
+      "message": "nit: Maybe add a comment that \".features is populated by vkGetPhysicalDeviceFeatures2KHR\"\nso that it\u0027s clear where features2.features and properties2.properties are coming from",
+      "range": {
+        "startLine": 232,
+        "startChar": 12,
+        "endLine": 238,
+        "endChar": 14
+      },
+      "revId": "1610e0c025e42562f42088caa393bff002d5f27d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}
