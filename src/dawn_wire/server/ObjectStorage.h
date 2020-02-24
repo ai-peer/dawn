@@ -97,6 +97,10 @@ namespace dawn_wire { namespace server {
         // Returns nullptr if the ID is already allocated, or too far ahead.
         // Invalidates all the Data*
         Data* Allocate(uint32_t id) {
+            // If id is 0, should return nullptr
+            if (id == 0) {
+                return nullptr;
+            }
             if (id > mKnown.size()) {
                 return nullptr;
             }
