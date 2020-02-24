@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "450ccd2c_9fe88057",
+        "filename": "src/common/vulkan_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T12:52:04Z",
+      "side": 1,
+      "message": "Done, thanks Austin!",
+      "parentUuid": "a86bc161_28d8b18c",
+      "revId": "0822f6a6247fc828488a56f03349c0b824f3eb09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8d3302d_22e8e687",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 1
