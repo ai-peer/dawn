@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "519514a0_cf12ca6e",
+        "filename": "BUILD.gn",
+        "patchSetId": 39
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T17:06:06Z",
+      "side": 1,
+      "message": "nit: also add files (without trailing commas) to src/dawn_native/CMakeLists.txt",
+      "revId": "f7413caee3fd378d0257ba9078c7a74b5fc76e43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c63263b_a11edda8",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T17:06:06Z",
+      "side": 1,
+      "message": "\u003e The condition is quite far from the code that requires it. If we were to use a ringbuffer, it\u0027d be likely better to have BindGroup call allocator-\u003eIsAllocationStillValid(pendingSerial, heapSerial).\n\nThe current version of the code still has the logic split in two places. Can we have it on the allocator instead?\n\nThe combination of heapSerial + pendingSerial (maybe could be renamed to lastUsageSerial?) should essentially be opaque to BindGroup and be tracking data used only by ShaderVisibleDescriptorAllocator.",
+      "revId": "f7413caee3fd378d0257ba9078c7a74b5fc76e43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "643f072d_6119a275",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T17:06:06Z",
+      "side": 1,
+      "message": "This seems slightly incorrect here we are checking if the bindgroup has been recorded for the current GPU submission, not whether the ringbuffer memory has been reclaimed.\n\nAlso I learnt british english so I\u0027m not sure, but shouldn\u0027t \"bounded\" be \"bound\"?",
+      "range": {
+        "startLine": 184,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 34
+      },
+      "revId": "f7413caee3fd378d0257ba9078c7a74b5fc76e43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "566fc840_31dfca1d",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T17:06:06Z",
+      "side": 1,
+      "message": "nit: have an assert that the heapSerial was incremented so we know the test worked.",
+      "revId": "f7413caee3fd378d0257ba9078c7a74b5fc76e43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    }
+  ]
+}

@@ -459,6 +459,24 @@
     },
     {
       "key": {
+        "uuid": "2d001c0c_462dc6ff",
+        "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.cpp",
+        "patchSetId": 37
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-24T17:06:06Z",
+      "side": 1,
+      "message": "Thanks for all the links. So it seems that a pipeline stalls happens on SetDescriptorHeaps. Using a ring buffer is one of the first heuristics we can do to minimizes calls to SetDescriptorHeaps but I worry it will lead to a lot of redundant descriptor re-recording between submits.\n\nAnother heuristic would be to use bump allocators but eagerly switch them when both we can coalesce the pipeline stall with the stall D3D12 requires at the end of a ExecuteCommands, and for example, when the descriptor heaps are half-full.\n\nAt this point I don\u0027t care what we do for the first version of the code as long as it is well documented and the logic is keep as simple as possible for now.",
+      "parentUuid": "0e7534ce_9eb689a3",
+      "revId": "4f370627348bf9d1c39ac1a477082040165d5b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "339aeac2_62cb5aeb",
         "filename": "src/dawn_native/d3d12/DescriptorAllocatorManagerD3D12.h",
         "patchSetId": 37
